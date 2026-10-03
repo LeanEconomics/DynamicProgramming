@@ -10,7 +10,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        project: [FiniteStates/JobSearch, FiniteStates/OperatorsFixedPoints, FiniteStates/MarkovDynamics]
+        project: [FiniteStates/JobSearch, FiniteStates/OperatorsFixedPoints, FiniteStates/MarkovDynamics, FiniteStates/OptimalStopping]
     defaults:
       run:
         working-directory: ${{ matrix.project }}
