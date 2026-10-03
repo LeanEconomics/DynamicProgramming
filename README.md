@@ -10,6 +10,7 @@ proof checks. Volume 1 projects live under `FiniteStates/`, Volume 2 under
 | Project | Chapter | Checked results | Start here |
 | --- | --- | --- | --- |
 | [FiniteStates/JobSearch](FiniteStates/JobSearch/README.md) | I.1 Introduction | 201 theorems: Banach's theorem by the book's route, the Neumann series lemma from the spectral radius with Gelfand's formula, the Solow–Swan map globally stable without being a contraction, finite-horizon reservation wages at every horizon, the Bellman operator as a `β`-contraction with value function iteration, the continuation-value map, quantiles on a finite set | [Chapter overview](FiniteStates/JobSearch/README.md) |
+| [FiniteStates/OperatorsFixedPoints](FiniteStates/OperatorsFixedPoints/README.md) | I.2 Operators and Fixed Points | 235 theorems: the Perron–Frobenius theorem for nonnegative matrices proved from scratch through the resolvent, with its row-sum and column-sum bounds, the local spectral radius and stationary distributions of Markov matrices; conjugacy and local stability, convergence rates and the Newton map; partial orders, the pointwise lattice on `ℝ^X`, Blackwell's condition, stochastic dominance with the counter-CDF converse by Abel summation, parametric monotonicity for Solow–Swan and job search; the lake model; linear, positive and Markov operators | [Chapter overview](FiniteStates/OperatorsFixedPoints/README.md) |
 
 ## Scope
 
