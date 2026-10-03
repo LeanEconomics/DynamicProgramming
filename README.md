@@ -9,7 +9,7 @@ proof checks. Volume 1 projects live under `FiniteStates/`, Volume 2 under
 
 | Project | Chapter | Checked results | Start here |
 | --- | --- | --- | --- |
-| [FiniteStates/JobSearch](FiniteStates/JobSearch/README.md) | I.1 Introduction | in progress | [Chapter overview](FiniteStates/JobSearch/README.md) |
+| [FiniteStates/JobSearch](FiniteStates/JobSearch/README.md) | I.1 Introduction | 201 theorems: Banach's theorem by the book's route, the Neumann series lemma from the spectral radius with Gelfand's formula, the Solow–Swan map globally stable without being a contraction, finite-horizon reservation wages at every horizon, the Bellman operator as a `β`-contraction with value function iteration, the continuation-value map, quantiles on a finite set | [Chapter overview](FiniteStates/JobSearch/README.md) |
 
 ## Scope
 
