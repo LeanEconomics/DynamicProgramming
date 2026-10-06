@@ -1,0 +1,3394 @@
+{
+  "checked_at_utc": "2026-10-06T23:51:36.846348+00:00",
+  "theorems": 241,
+  "module_theorems": {
+    "AbstractDynamicProgramming/Basics.lean": 18,
+    "AbstractDynamicProgramming/SpectralRadius.lean": 29,
+    "AbstractDynamicProgramming/Resolvent.lean": 11,
+    "AbstractDynamicProgramming/PerronFrobenius.lean": 20,
+    "AbstractDynamicProgramming/Irreducible.lean": 10,
+    "AbstractDynamicProgramming/LinearValuation.lean": 25,
+    "AbstractDynamicProgramming/OrderFixedPoints.lean": 15,
+    "AbstractDynamicProgramming/RDP.lean": 29,
+    "AbstractDynamicProgramming/OrderStability.lean": 5,
+    "AbstractDynamicProgramming/ADP.lean": 22,
+    "AbstractDynamicProgramming/Examples.lean": 16,
+    "AbstractDynamicProgramming/RDPOptimality.lean": 14,
+    "AbstractDynamicProgramming/MixedStrategies.lean": 14,
+    "AbstractDynamicProgramming/MinOptimality.lean": 13
+  },
+  "audited_declarations": 346,
+  "declarations": [
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.IsMarkov",
+      "kind": "structure",
+      "module": "AbstractDynamicProgramming/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.IsMarkov.mk",
+      "kind": "constructor",
+      "module": "AbstractDynamicProgramming/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.IsMarkov.nonneg",
+      "kind": "projection",
+      "module": "AbstractDynamicProgramming/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.IsMarkov.rowsum",
+      "kind": "projection",
+      "module": "AbstractDynamicProgramming/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.IsDistribution",
+      "kind": "structure",
+      "module": "AbstractDynamicProgramming/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.IsDistribution.mk",
+      "kind": "constructor",
+      "module": "AbstractDynamicProgramming/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.IsDistribution.nonneg",
+      "kind": "projection",
+      "module": "AbstractDynamicProgramming/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.IsDistribution.sum_eq_one",
+      "kind": "projection",
+      "module": "AbstractDynamicProgramming/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.mulVec_apply_eq",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.IsMarkov.mul",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.IsMarkov.pow",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.IsMarkov.mulVec_le_mulVec",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.IsMarkov.mulVec_const",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.IsMarkov.abs_mulVec_le",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.IsMarkov.norm_mulVec_le",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.IsMarkov.abs_mulVec_sub_le",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.GloballyStable",
+      "kind": "def",
+      "module": "AbstractDynamicProgramming/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.IsContractionOn",
+      "kind": "structure",
+      "module": "AbstractDynamicProgramming/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.IsContractionOn.mk",
+      "kind": "constructor",
+      "module": "AbstractDynamicProgramming/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.IsContractionOn.mapsTo",
+      "kind": "projection",
+      "module": "AbstractDynamicProgramming/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.IsContractionOn.nonneg",
+      "kind": "projection",
+      "module": "AbstractDynamicProgramming/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.IsContractionOn.lt_one",
+      "kind": "projection",
+      "module": "AbstractDynamicProgramming/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.IsContractionOn.norm_sub_le",
+      "kind": "projection",
+      "module": "AbstractDynamicProgramming/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.IsContractionOn.fixedPt_unique",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.IsContractionOn.iterate_mem",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.IsContractionOn.norm_iterate_sub_fixedPt_le",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.IsContractionOn.tendsto_iterate_fixedPt",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.IsContractionOn.exists_fixedPt",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.IsContractionOn.globallyStable_univ",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.fixedPt_le_of_le",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.le_fixedPt_of_le_apply",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.isContractionOn_of_blackwell",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.abs_sup'_sub_sup'_le",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.pow_nonneg_entries",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.pow_le_pow_entries",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.complexify",
+      "kind": "def",
+      "module": "AbstractDynamicProgramming/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.complexify_apply",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.complexify_pow",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.complexify_transpose",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.nnnorm_complexify",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.norm_complexify",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.specRad",
+      "kind": "def",
+      "module": "AbstractDynamicProgramming/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.spectralRadius_complexify_ne_top",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.specRad_nonneg",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.mem_spectrum_iff_eigenpair",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.tendsto_norm_pow_rpow",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.eventually_norm_pow_le",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.tendsto_norm_pow_zero",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.summable_pow",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.one_sub_mul_tsum",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.tsum_mul_one_sub",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.neumann_series",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.specRad_transpose",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.norm_le_norm_of_abs_le",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.specRad_le_of_le",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.rowsum_abs_le_norm",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.norm_le_of_rowsum_abs_le",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.abs_entry_le_norm",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.norm_eq_of_rowsum_eq",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.specRad_le_norm",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.norm_le_specRad_of_mem_spectrum",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.specRad_eq_of_rowsum_eq",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.specRad_eq_of_colsum_eq",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.eventually_abs_entry_pow_le",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.resPartial",
+      "kind": "def",
+      "module": "AbstractDynamicProgramming/Resolvent.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.res",
+      "kind": "def",
+      "module": "AbstractDynamicProgramming/Resolvent.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.res_apply",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/Resolvent.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.smul_one_sub_mul_resPartial",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/Resolvent.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.resPartial_mul_smul_one_sub",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/Resolvent.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.resPartial_apply",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/Resolvent.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.summable_res_entry",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/Resolvent.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.tendsto_resPartial_apply",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/Resolvent.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.tendsto_inv_pow_mul_apply",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/Resolvent.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.smul_one_sub_mul_res",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/Resolvent.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.res_mul_smul_one_sub",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/Resolvent.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.res_nonneg",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/Resolvent.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.inv_le_res_diag",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/Resolvent.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.exists_mem_spectrum_norm_eq",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/PerronFrobenius.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.eventually_norm_entry_pow_complexify_le",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/PerronFrobenius.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.smul_one_sub_mul_res_real",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/PerronFrobenius.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.norm_res_complexify_le",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/PerronFrobenius.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.norm_le_card_mul_of_entry_norm_le",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/PerronFrobenius.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.notMem_spectrum_of_res_bounded",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/PerronFrobenius.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.exists_res_entry_gt",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/PerronFrobenius.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.isCompact_simplex",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/PerronFrobenius.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.perron_frobenius",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/PerronFrobenius.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.perron_frobenius_left",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/PerronFrobenius.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.le_specRad_of_colsum_ge",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/PerronFrobenius.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.specRad_le_of_colsum_le",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/PerronFrobenius.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.le_specRad_of_rowsum_ge",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/PerronFrobenius.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.specRad_le_of_rowsum_le",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/PerronFrobenius.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.tendsto_rpow_one_div_natCast",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/PerronFrobenius.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.norm_pow_mul_le_norm_mulVec",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/PerronFrobenius.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.tendsto_norm_pow_mulVec_rpow",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/PerronFrobenius.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.IsMarkov.specRad_eq_one",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/PerronFrobenius.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.IsMarkov.exists_stationary",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/PerronFrobenius.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.IsMarkov.not_mulVec_ge_add",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/PerronFrobenius.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.Irreducible",
+      "kind": "def",
+      "module": "AbstractDynamicProgramming/Irreducible.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.irreducible_of_pos",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/Irreducible.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.Irreducible.transpose",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/Irreducible.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.pow_mulVec_eq_of_mulVec_eq",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/Irreducible.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.Irreducible.pos_of_mulVec_eq_smul",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/Irreducible.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.Irreducible.specRad_pos",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/Irreducible.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.Irreducible.exists_pos_eigenvector",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/Irreducible.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.Irreducible.exists_pos_left_eigenvector",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/Irreducible.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.Irreducible.eq_specRad_of_mulVec_eq_smul",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/Irreducible.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.Irreducible.exists_eq_smul_of_mulVec_eq_smul",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/Irreducible.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.IsMarkov.exists_unique_stationary_of_irreducible",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/Irreducible.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.discountOp",
+      "kind": "def",
+      "module": "AbstractDynamicProgramming/LinearValuation.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.discountOp_apply",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/LinearValuation.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.discountOp_nonneg",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/LinearValuation.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.discountOp_const",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/LinearValuation.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.specRad_smul_isMarkov",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/LinearValuation.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.summable_pow_apply",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/LinearValuation.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.summable_pow_mulVec",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/LinearValuation.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.mulVec_tsum_pow_mulVec",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/LinearValuation.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.tsum_pow_mulVec_eq",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/LinearValuation.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.eq_of_eq_add_mulVec",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/LinearValuation.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.inv_mulVec_eq_add",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/LinearValuation.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.inv_mulVec_eq_tsum",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/LinearValuation.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.eq_add_mulVec_iff",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/LinearValuation.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.specRad_lt_one_iff_existsUnique_pos",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/LinearValuation.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.globallyStable_of_iterate_contraction",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/LinearValuation.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.globallyStable_of_iterate_contraction_univ",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/LinearValuation.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.affineOp",
+      "kind": "def",
+      "module": "AbstractDynamicProgramming/LinearValuation.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.affineOp_iterate_sub",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/LinearValuation.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.exists_isContractionOn_iterate_affineOp",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/LinearValuation.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.globallyStable_affineOp",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/LinearValuation.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.isFixedPt_affineOp_inv",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/LinearValuation.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.mulVec_le_mulVec_of_nonneg",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/LinearValuation.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.norm_abs_fun",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/LinearValuation.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.norm_le_norm_of_abs_le_fun",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/LinearValuation.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.abs_iterate_sub_le_pow_mulVec",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/LinearValuation.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.exists_isContractionOn_iterate_of_abs_sub_le",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/LinearValuation.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.globallyStable_of_abs_sub_le",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/LinearValuation.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.GloballyStableOn",
+      "kind": "def",
+      "module": "AbstractDynamicProgramming/OrderFixedPoints.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.globallyStableOn_univ_iff",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/OrderFixedPoints.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.GloballyStableOn.existsUnique",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/OrderFixedPoints.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.GloballyStableOn.of_conj",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/OrderFixedPoints.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.globallyStableOn_iff_of_conj",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/OrderFixedPoints.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.iterate_le_iterate_of_monotoneOn",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/OrderFixedPoints.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.knaster_tarski",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/OrderFixedPoints.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.exists_continuum_fixedPts",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/OrderFixedPoints.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.du_concave",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/OrderFixedPoints.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.exists_delta_of_lt",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/OrderFixedPoints.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.du_concave_of_lt",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/OrderFixedPoints.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.neg_mem_Icc_iff",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/OrderFixedPoints.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.globallyStableOn_of_reflect",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/OrderFixedPoints.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.du_convex",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/OrderFixedPoints.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.du_convex_of_lt",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/OrderFixedPoints.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.concaveOn_comp",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/OrderFixedPoints.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP",
+      "kind": "structure",
+      "module": "AbstractDynamicProgramming/RDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.mk",
+      "kind": "constructor",
+      "module": "AbstractDynamicProgramming/RDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.\u0393",
+      "kind": "projection",
+      "module": "AbstractDynamicProgramming/RDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.\u0393_nonempty",
+      "kind": "projection",
+      "module": "AbstractDynamicProgramming/RDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.V",
+      "kind": "projection",
+      "module": "AbstractDynamicProgramming/RDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.B",
+      "kind": "projection",
+      "module": "AbstractDynamicProgramming/RDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.mono",
+      "kind": "projection",
+      "module": "AbstractDynamicProgramming/RDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.consistent",
+      "kind": "projection",
+      "module": "AbstractDynamicProgramming/RDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.IsFeasible",
+      "kind": "abbrev",
+      "module": "AbstractDynamicProgramming/RDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.Policy",
+      "kind": "abbrev",
+      "module": "AbstractDynamicProgramming/RDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.defaultPolicy",
+      "kind": "def",
+      "module": "AbstractDynamicProgramming/RDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.policy_nonempty",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/RDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.T\u03c3",
+      "kind": "def",
+      "module": "AbstractDynamicProgramming/RDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.T\u03c3_apply",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/RDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.T\u03c3_mapsTo",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/RDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.T\u03c3_monotoneOn",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/RDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.WellPosed",
+      "kind": "def",
+      "module": "AbstractDynamicProgramming/RDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.IsGloballyStable",
+      "kind": "def",
+      "module": "AbstractDynamicProgramming/RDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.IsGloballyStable.wellPosed",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/RDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.IsContinuous",
+      "kind": "def",
+      "module": "AbstractDynamicProgramming/RDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.v\u03c3",
+      "kind": "def",
+      "module": "AbstractDynamicProgramming/RDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.v\u03c3_spec",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/RDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.v\u03c3_mem",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/RDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.isFixedPt_v\u03c3",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/RDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.eq_v\u03c3_of_isFixedPt",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/RDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.tendsto_iterate_T\u03c3",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/RDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.T",
+      "kind": "def",
+      "module": "AbstractDynamicProgramming/RDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.B_le_T",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/RDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.T\u03c3_le_T",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/RDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.IsGreedy",
+      "kind": "def",
+      "module": "AbstractDynamicProgramming/RDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.greedy",
+      "kind": "def",
+      "module": "AbstractDynamicProgramming/RDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.greedy_mem",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/RDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.isGreedy_greedy",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/RDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.greedyPolicy",
+      "kind": "def",
+      "module": "AbstractDynamicProgramming/RDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.isGreedy_iff_T\u03c3_eq_T",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/RDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.T\u03c3_eq_T_of_isGreedy",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/RDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.T_mapsTo",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/RDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.T_monotoneOn",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/RDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.T_apply_eq_sup'",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/RDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.isGreatest_T\u03c3",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/RDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.antiGreedy",
+      "kind": "def",
+      "module": "AbstractDynamicProgramming/RDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.isLeast_T\u03c3",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/RDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.iterate_T_succ",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/RDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.iterate_T\u03c3_succ",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/RDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.iterate_T_mono",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/RDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.iterate_T\u03c3_mono",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/RDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.vstar",
+      "kind": "def",
+      "module": "AbstractDynamicProgramming/RDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.v\u03c3_le_vstar",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/RDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.IsOptimal",
+      "kind": "def",
+      "module": "AbstractDynamicProgramming/RDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.PrincipleOfOptimality",
+      "kind": "def",
+      "module": "AbstractDynamicProgramming/RDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.howard",
+      "kind": "def",
+      "module": "AbstractDynamicProgramming/RDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.opiW",
+      "kind": "def",
+      "module": "AbstractDynamicProgramming/RDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.hpiPolicy",
+      "kind": "def",
+      "module": "AbstractDynamicProgramming/RDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.hpiValue",
+      "kind": "def",
+      "module": "AbstractDynamicProgramming/RDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.hpiValue_succ",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/RDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.opiValue",
+      "kind": "def",
+      "module": "AbstractDynamicProgramming/RDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.opiValue_one",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/RDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.nonstationary_le",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/RDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.OrderStable",
+      "kind": "def",
+      "module": "AbstractDynamicProgramming/OrderStability.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.orderStable_of_up_down",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/OrderStability.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.orderStable_of_globallyStable",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/OrderStability.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.orderStable_restrict",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/OrderStability.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.orderStable_affineOp",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/OrderStability.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.orderStable_dual_iff",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/OrderStability.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.ADP",
+      "kind": "structure",
+      "module": "AbstractDynamicProgramming/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.ADP.mk",
+      "kind": "constructor",
+      "module": "AbstractDynamicProgramming/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.ADP.T",
+      "kind": "projection",
+      "module": "AbstractDynamicProgramming/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.ADP.exists_greedy",
+      "kind": "projection",
+      "module": "AbstractDynamicProgramming/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.ADP.exists_minGreedy",
+      "kind": "projection",
+      "module": "AbstractDynamicProgramming/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.ADP.IsGreedy",
+      "kind": "def",
+      "module": "AbstractDynamicProgramming/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.ADP.greedy",
+      "kind": "def",
+      "module": "AbstractDynamicProgramming/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.ADP.isGreedy_greedy",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.ADP.bellman",
+      "kind": "def",
+      "module": "AbstractDynamicProgramming/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.ADP.T_le_bellman",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.ADP.isGreatest_bellman",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.ADP.isGreedy_iff",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.ADP.monotone_bellman",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.ADP.WellPosed",
+      "kind": "def",
+      "module": "AbstractDynamicProgramming/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.ADP.v\u03c3",
+      "kind": "def",
+      "module": "AbstractDynamicProgramming/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.ADP.isFixedPt_v\u03c3",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.ADP.eq_v\u03c3_of_isFixedPt",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.ADP.Vu",
+      "kind": "def",
+      "module": "AbstractDynamicProgramming/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.ADP.v\u03c3_mem_Vu",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.ADP.howard",
+      "kind": "def",
+      "module": "AbstractDynamicProgramming/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.ADP.hpiPolicy",
+      "kind": "def",
+      "module": "AbstractDynamicProgramming/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.ADP.hpiValue",
+      "kind": "def",
+      "module": "AbstractDynamicProgramming/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.ADP.hpiValue_succ",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.ADP.IsOrderStable",
+      "kind": "def",
+      "module": "AbstractDynamicProgramming/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.ADP.IsMaxStable",
+      "kind": "def",
+      "module": "AbstractDynamicProgramming/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.ADP.IsOrderStable.wellPosed",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.ADP.IsOrderStable.le_v\u03c3",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.ADP.IsOrderStable.v\u03c3_le",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.ADP.IsOptimal",
+      "kind": "def",
+      "module": "AbstractDynamicProgramming/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.ADP.IsOrderStable.le_howard",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.ADP.IsOrderStable.isOptimal_of_isFixedPt",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.ADP.IsOrderStable.isFixedPt_of_howard",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.ADP.IsOrderStable.howard_fixed",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.ADP.IsOrderStable.hpiValue_le_succ",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.ADP.IsOrderStable.exists_hpiValue_succ_eq",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.ADP.IsOrderStable.hpi_terminates",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.ADP.IsOrderStable.isMaxStable",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.ADP.IsMaxStable.optimality",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.ADP.IsOrderStable.maxOptimality",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.toADP",
+      "kind": "def",
+      "module": "AbstractDynamicProgramming/Examples.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.toADP_T",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/Examples.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.toADP_wellPosed",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/Examples.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.toADP_v\u03c3",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/Examples.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.toADP_bellman",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/Examples.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.toADP_isOrderStable",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/Examples.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.toADP_isMaxStable",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/Examples.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.toADP_wellPosed_iff",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/Examples.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.MDP",
+      "kind": "structure",
+      "module": "AbstractDynamicProgramming/Examples.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.MDP.mk",
+      "kind": "constructor",
+      "module": "AbstractDynamicProgramming/Examples.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.MDP.\u0393",
+      "kind": "projection",
+      "module": "AbstractDynamicProgramming/Examples.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.MDP.\u0393_nonempty",
+      "kind": "projection",
+      "module": "AbstractDynamicProgramming/Examples.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.MDP.\u03b2",
+      "kind": "projection",
+      "module": "AbstractDynamicProgramming/Examples.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.MDP.\u03b2_pos",
+      "kind": "projection",
+      "module": "AbstractDynamicProgramming/Examples.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.MDP.\u03b2_lt_one",
+      "kind": "projection",
+      "module": "AbstractDynamicProgramming/Examples.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.MDP.r",
+      "kind": "projection",
+      "module": "AbstractDynamicProgramming/Examples.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.MDP.P",
+      "kind": "projection",
+      "module": "AbstractDynamicProgramming/Examples.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.MDP.P_nonneg",
+      "kind": "projection",
+      "module": "AbstractDynamicProgramming/Examples.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.MDP.P_rowsum",
+      "kind": "projection",
+      "module": "AbstractDynamicProgramming/Examples.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.MDP.P\u03c3",
+      "kind": "def",
+      "module": "AbstractDynamicProgramming/Examples.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.MDP.isMarkov_P\u03c3",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/Examples.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.MDP.r\u03c3",
+      "kind": "def",
+      "module": "AbstractDynamicProgramming/Examples.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.MDP.toRDP",
+      "kind": "def",
+      "module": "AbstractDynamicProgramming/Examples.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.MDP.toRDP_T\u03c3",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/Examples.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.MDP.toADP",
+      "kind": "def",
+      "module": "AbstractDynamicProgramming/Examples.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.MDP.toRDP_isGloballyStable",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/Examples.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.MDP.toADP_v\u03c3",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/Examples.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.entropic_mono",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/Examples.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.MDP.qOp",
+      "kind": "def",
+      "module": "AbstractDynamicProgramming/Examples.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.MDP.qGreedy",
+      "kind": "def",
+      "module": "AbstractDynamicProgramming/Examples.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.MDP.qMinGreedy",
+      "kind": "def",
+      "module": "AbstractDynamicProgramming/Examples.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.MDP.qOp_mono",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/Examples.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.MDP.qADP",
+      "kind": "def",
+      "module": "AbstractDynamicProgramming/Examples.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.MDP.qOp_isContractionOn",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/Examples.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.MDP.qADP_isMaxStable",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/Examples.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.MDP.rsqOp",
+      "kind": "def",
+      "module": "AbstractDynamicProgramming/Examples.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.MDP.rsqOp_mono",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/Examples.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.MDP.rsqADP",
+      "kind": "def",
+      "module": "AbstractDynamicProgramming/Examples.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.le_v\u03c3_of_le_T\u03c3",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/RDPOptimality.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.v\u03c3_le_of_T\u03c3_le",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/RDPOptimality.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.optimality_of_orderStable",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/RDPOptimality.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.tendsto_iterate_T_v\u03c3",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/RDPOptimality.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.iterate_T\u03c3_le_iterate_T",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/RDPOptimality.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.opiW_spec",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/RDPOptimality.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.iterate_T_le_opi",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/RDPOptimality.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.opi_stop",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/RDPOptimality.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.eventually_optimal",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/RDPOptimality.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.optimality_of_globallyStable",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/RDPOptimality.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.IsBoundedBy",
+      "kind": "def",
+      "module": "AbstractDynamicProgramming/RDPOptimality.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.T\u03c3_mapsTo_Icc",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/RDPOptimality.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.restrictIcc",
+      "kind": "def",
+      "module": "AbstractDynamicProgramming/RDPOptimality.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.v\u03c3_mem_Icc",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/RDPOptimality.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.restrictIcc_wellPosed",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/RDPOptimality.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.optimality_of_bounded",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/RDPOptimality.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.globallyStableOn_of_isContractionOn",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/MixedStrategies.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.IsContracting",
+      "kind": "def",
+      "module": "AbstractDynamicProgramming/MixedStrategies.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.IsContracting.isContractionOn_T\u03c3",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/MixedStrategies.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.IsContracting.isContractionOn_T",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/MixedStrategies.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.IsContracting.isGloballyStable",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/MixedStrategies.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.IsMixed",
+      "kind": "def",
+      "module": "AbstractDynamicProgramming/MixedStrategies.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.Mixed",
+      "kind": "abbrev",
+      "module": "AbstractDynamicProgramming/MixedStrategies.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.Tmix",
+      "kind": "def",
+      "module": "AbstractDynamicProgramming/MixedStrategies.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.dirac",
+      "kind": "def",
+      "module": "AbstractDynamicProgramming/MixedStrategies.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.isMixed_dirac",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/MixedStrategies.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.Tmix_dirac",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/MixedStrategies.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.Tmix_le_T",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/MixedStrategies.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.Tmin_le_Tmix",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/MixedStrategies.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.Tmix_le_Tmix_of_supported",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/MixedStrategies.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.isGreatest_Tmix",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/MixedStrategies.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.Tmix_monotoneOn",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/MixedStrategies.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.mixedADP",
+      "kind": "def",
+      "module": "AbstractDynamicProgramming/MixedStrategies.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.mixedADP_bellman",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/MixedStrategies.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.IsContracting.isContractionOn_Tmix",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/MixedStrategies.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.mixed_value_eq_vstar",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/MixedStrategies.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.ADP.dual",
+      "kind": "def",
+      "module": "AbstractDynamicProgramming/MinOptimality.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.ADP.dual_dual",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/MinOptimality.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.ADP.IsMinGreedy",
+      "kind": "def",
+      "module": "AbstractDynamicProgramming/MinOptimality.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.ADP.minBellman",
+      "kind": "def",
+      "module": "AbstractDynamicProgramming/MinOptimality.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.ADP.IsMinOptimal",
+      "kind": "def",
+      "module": "AbstractDynamicProgramming/MinOptimality.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.ADP.IsMinStable",
+      "kind": "def",
+      "module": "AbstractDynamicProgramming/MinOptimality.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.ADP.isMinGreedy_iff",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/MinOptimality.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.ADP.isLeast_minBellman",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/MinOptimality.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.ADP.isMinGreedy_iff_eq",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/MinOptimality.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.ADP.isOrderStable_dual_iff",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/MinOptimality.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.ADP.WellPosed.dual",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/MinOptimality.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.ADP.dual_v\u03c3",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/MinOptimality.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.ADP.isMinStable_iff",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/MinOptimality.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.ADP.isMinOptimal_iff",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/MinOptimality.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.ADP.minOptimality",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/MinOptimality.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.ADP.minHpi_terminates",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/MinOptimality.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.ADP.minHpi_isMinGreedy",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/MinOptimality.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDynamicProgramming.RDP.toADP_isMinStable",
+      "kind": "theorem",
+      "module": "AbstractDynamicProgramming/MinOptimality.lean"
+    }
+  ],
+  "full_build": "passed",
+  "fresh_source_compilation": "passed",
+  "fresh_source_lint_options": [
+    "-Dlinter.mathlibStandardSet=true",
+    "-Dlinter.style.header=false"
+  ],
+  "axioms": {
+    "SargentStachurski.AbstractDynamicProgramming.IsMarkov": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.IsMarkov.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.IsMarkov.nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.IsMarkov.rowsum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.IsDistribution": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.IsDistribution.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.IsDistribution.nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.IsDistribution.sum_eq_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.mulVec_apply_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.IsMarkov.mul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.IsMarkov.pow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.IsMarkov.mulVec_le_mulVec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.IsMarkov.mulVec_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.IsMarkov.abs_mulVec_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.IsMarkov.norm_mulVec_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.IsMarkov.abs_mulVec_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.GloballyStable": [
+      "propext",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.IsContractionOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.IsContractionOn.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.IsContractionOn.mapsTo": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.IsContractionOn.nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.IsContractionOn.lt_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.IsContractionOn.norm_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.IsContractionOn.fixedPt_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.IsContractionOn.iterate_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.IsContractionOn.norm_iterate_sub_fixedPt_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.IsContractionOn.tendsto_iterate_fixedPt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.IsContractionOn.exists_fixedPt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.IsContractionOn.globallyStable_univ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.fixedPt_le_of_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.le_fixedPt_of_le_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.isContractionOn_of_blackwell": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.abs_sup'_sub_sup'_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.pow_nonneg_entries": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.pow_le_pow_entries": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.complexify": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.complexify_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.complexify_pow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.complexify_transpose": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.nnnorm_complexify": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.norm_complexify": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.specRad": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.spectralRadius_complexify_ne_top": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.specRad_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.mem_spectrum_iff_eigenpair": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.tendsto_norm_pow_rpow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.eventually_norm_pow_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.tendsto_norm_pow_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.summable_pow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.one_sub_mul_tsum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.tsum_mul_one_sub": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.neumann_series": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.specRad_transpose": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.norm_le_norm_of_abs_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.specRad_le_of_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.rowsum_abs_le_norm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.norm_le_of_rowsum_abs_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.abs_entry_le_norm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.norm_eq_of_rowsum_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.specRad_le_norm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.norm_le_specRad_of_mem_spectrum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.specRad_eq_of_rowsum_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.specRad_eq_of_colsum_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.eventually_abs_entry_pow_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.resPartial": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.res": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.res_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.smul_one_sub_mul_resPartial": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.resPartial_mul_smul_one_sub": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.resPartial_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.summable_res_entry": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.tendsto_resPartial_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.tendsto_inv_pow_mul_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.smul_one_sub_mul_res": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.res_mul_smul_one_sub": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.res_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.inv_le_res_diag": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.exists_mem_spectrum_norm_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.eventually_norm_entry_pow_complexify_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.smul_one_sub_mul_res_real": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.norm_res_complexify_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.norm_le_card_mul_of_entry_norm_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.notMem_spectrum_of_res_bounded": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.exists_res_entry_gt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.isCompact_simplex": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.perron_frobenius": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.perron_frobenius_left": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.le_specRad_of_colsum_ge": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.specRad_le_of_colsum_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.le_specRad_of_rowsum_ge": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.specRad_le_of_rowsum_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.tendsto_rpow_one_div_natCast": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.norm_pow_mul_le_norm_mulVec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.tendsto_norm_pow_mulVec_rpow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.IsMarkov.specRad_eq_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.IsMarkov.exists_stationary": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.IsMarkov.not_mulVec_ge_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.Irreducible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.irreducible_of_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.Irreducible.transpose": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.pow_mulVec_eq_of_mulVec_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.Irreducible.pos_of_mulVec_eq_smul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.Irreducible.specRad_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.Irreducible.exists_pos_eigenvector": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.Irreducible.exists_pos_left_eigenvector": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.Irreducible.eq_specRad_of_mulVec_eq_smul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.Irreducible.exists_eq_smul_of_mulVec_eq_smul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.IsMarkov.exists_unique_stationary_of_irreducible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.discountOp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.discountOp_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.discountOp_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.discountOp_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.specRad_smul_isMarkov": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.summable_pow_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.summable_pow_mulVec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.mulVec_tsum_pow_mulVec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.tsum_pow_mulVec_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.eq_of_eq_add_mulVec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.inv_mulVec_eq_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.inv_mulVec_eq_tsum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.eq_add_mulVec_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.specRad_lt_one_iff_existsUnique_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.globallyStable_of_iterate_contraction": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.globallyStable_of_iterate_contraction_univ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.affineOp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.affineOp_iterate_sub": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.exists_isContractionOn_iterate_affineOp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.globallyStable_affineOp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.isFixedPt_affineOp_inv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.mulVec_le_mulVec_of_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.norm_abs_fun": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.norm_le_norm_of_abs_le_fun": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.abs_iterate_sub_le_pow_mulVec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.exists_isContractionOn_iterate_of_abs_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.globallyStable_of_abs_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.GloballyStableOn": [
+      "propext",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.globallyStableOn_univ_iff": [
+      "propext",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.GloballyStableOn.existsUnique": [
+      "propext",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.GloballyStableOn.of_conj": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.globallyStableOn_iff_of_conj": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.iterate_le_iterate_of_monotoneOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.knaster_tarski": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.exists_continuum_fixedPts": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.du_concave": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.exists_delta_of_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.du_concave_of_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.neg_mem_Icc_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.globallyStableOn_of_reflect": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.du_convex": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.du_convex_of_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.concaveOn_comp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.\u0393": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.\u0393_nonempty": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.V": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.B": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.consistent": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.IsFeasible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.Policy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.defaultPolicy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.policy_nonempty": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.T\u03c3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.T\u03c3_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.T\u03c3_mapsTo": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.T\u03c3_monotoneOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.WellPosed": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.IsGloballyStable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.IsGloballyStable.wellPosed": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.IsContinuous": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.v\u03c3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.v\u03c3_spec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.v\u03c3_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.isFixedPt_v\u03c3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.eq_v\u03c3_of_isFixedPt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.tendsto_iterate_T\u03c3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.T": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.B_le_T": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.T\u03c3_le_T": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.IsGreedy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.greedy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.greedy_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.isGreedy_greedy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.greedyPolicy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.isGreedy_iff_T\u03c3_eq_T": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.T\u03c3_eq_T_of_isGreedy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.T_mapsTo": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.T_monotoneOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.T_apply_eq_sup'": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.isGreatest_T\u03c3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.antiGreedy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.isLeast_T\u03c3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.iterate_T_succ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.iterate_T\u03c3_succ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.iterate_T_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.iterate_T\u03c3_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.vstar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.v\u03c3_le_vstar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.IsOptimal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.PrincipleOfOptimality": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.howard": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.opiW": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.hpiPolicy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.hpiValue": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.hpiValue_succ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.opiValue": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.opiValue_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.nonstationary_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.OrderStable": [],
+    "SargentStachurski.AbstractDynamicProgramming.orderStable_of_up_down": [],
+    "SargentStachurski.AbstractDynamicProgramming.orderStable_of_globallyStable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.orderStable_restrict": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.orderStable_affineOp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.orderStable_dual_iff": [
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.ADP": [],
+    "SargentStachurski.AbstractDynamicProgramming.ADP.mk": [],
+    "SargentStachurski.AbstractDynamicProgramming.ADP.T": [],
+    "SargentStachurski.AbstractDynamicProgramming.ADP.exists_greedy": [],
+    "SargentStachurski.AbstractDynamicProgramming.ADP.exists_minGreedy": [],
+    "SargentStachurski.AbstractDynamicProgramming.ADP.IsGreedy": [],
+    "SargentStachurski.AbstractDynamicProgramming.ADP.greedy": [
+      "Classical.choice"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.ADP.isGreedy_greedy": [
+      "Classical.choice"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.ADP.bellman": [
+      "Classical.choice"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.ADP.T_le_bellman": [
+      "Classical.choice"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.ADP.isGreatest_bellman": [
+      "Classical.choice"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.ADP.isGreedy_iff": [
+      "Classical.choice"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.ADP.monotone_bellman": [
+      "Classical.choice"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.ADP.WellPosed": [],
+    "SargentStachurski.AbstractDynamicProgramming.ADP.v\u03c3": [
+      "Classical.choice"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.ADP.isFixedPt_v\u03c3": [
+      "Classical.choice"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.ADP.eq_v\u03c3_of_isFixedPt": [
+      "Classical.choice"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.ADP.Vu": [
+      "Classical.choice"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.ADP.v\u03c3_mem_Vu": [
+      "Classical.choice"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.ADP.howard": [
+      "Classical.choice"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.ADP.hpiPolicy": [
+      "Classical.choice"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.ADP.hpiValue": [
+      "Classical.choice"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.ADP.hpiValue_succ": [
+      "Classical.choice"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.ADP.IsOrderStable": [],
+    "SargentStachurski.AbstractDynamicProgramming.ADP.IsMaxStable": [
+      "Classical.choice"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.ADP.IsOrderStable.wellPosed": [],
+    "SargentStachurski.AbstractDynamicProgramming.ADP.IsOrderStable.le_v\u03c3": [
+      "Classical.choice"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.ADP.IsOrderStable.v\u03c3_le": [
+      "Classical.choice"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.ADP.IsOptimal": [
+      "Classical.choice"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.ADP.IsOrderStable.le_howard": [
+      "Classical.choice"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.ADP.IsOrderStable.isOptimal_of_isFixedPt": [
+      "Classical.choice"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.ADP.IsOrderStable.isFixedPt_of_howard": [
+      "Classical.choice"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.ADP.IsOrderStable.howard_fixed": [
+      "Classical.choice"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.ADP.IsOrderStable.hpiValue_le_succ": [
+      "Classical.choice"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.ADP.IsOrderStable.exists_hpiValue_succ_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.ADP.IsOrderStable.hpi_terminates": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.ADP.IsOrderStable.isMaxStable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.ADP.IsMaxStable.optimality": [
+      "propext",
+      "Classical.choice"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.ADP.IsOrderStable.maxOptimality": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.toADP": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.toADP_T": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.toADP_wellPosed": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.toADP_v\u03c3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.toADP_bellman": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.toADP_isOrderStable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.toADP_isMaxStable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.toADP_wellPosed_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.MDP": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.MDP.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.MDP.\u0393": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.MDP.\u0393_nonempty": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.MDP.\u03b2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.MDP.\u03b2_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.MDP.\u03b2_lt_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.MDP.r": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.MDP.P": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.MDP.P_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.MDP.P_rowsum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.MDP.P\u03c3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.MDP.isMarkov_P\u03c3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.MDP.r\u03c3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.MDP.toRDP": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.MDP.toRDP_T\u03c3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.MDP.toADP": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.MDP.toRDP_isGloballyStable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.MDP.toADP_v\u03c3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.entropic_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.MDP.qOp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.MDP.qGreedy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.MDP.qMinGreedy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.MDP.qOp_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.MDP.qADP": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.MDP.qOp_isContractionOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.MDP.qADP_isMaxStable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.MDP.rsqOp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.MDP.rsqOp_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.MDP.rsqADP": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.le_v\u03c3_of_le_T\u03c3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.v\u03c3_le_of_T\u03c3_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.optimality_of_orderStable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.tendsto_iterate_T_v\u03c3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.iterate_T\u03c3_le_iterate_T": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.opiW_spec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.iterate_T_le_opi": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.opi_stop": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.eventually_optimal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.optimality_of_globallyStable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.IsBoundedBy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.T\u03c3_mapsTo_Icc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.restrictIcc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.v\u03c3_mem_Icc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.restrictIcc_wellPosed": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.optimality_of_bounded": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.globallyStableOn_of_isContractionOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.IsContracting": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.IsContracting.isContractionOn_T\u03c3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.IsContracting.isContractionOn_T": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.IsContracting.isGloballyStable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.IsMixed": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.Mixed": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.Tmix": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.dirac": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.isMixed_dirac": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.Tmix_dirac": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.Tmix_le_T": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.Tmin_le_Tmix": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.Tmix_le_Tmix_of_supported": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.isGreatest_Tmix": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.Tmix_monotoneOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.mixedADP": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.mixedADP_bellman": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.IsContracting.isContractionOn_Tmix": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.mixed_value_eq_vstar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.ADP.dual": [
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.ADP.dual_dual": [
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.ADP.IsMinGreedy": [],
+    "SargentStachurski.AbstractDynamicProgramming.ADP.minBellman": [
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.ADP.IsMinOptimal": [
+      "Classical.choice"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.ADP.IsMinStable": [
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.ADP.isMinGreedy_iff": [
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.ADP.isLeast_minBellman": [
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.ADP.isMinGreedy_iff_eq": [
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.ADP.isOrderStable_dual_iff": [
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.ADP.WellPosed.dual": [
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.ADP.dual_v\u03c3": [
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.ADP.isMinStable_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.ADP.isMinOptimal_iff": [
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.ADP.minOptimality": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.ADP.minHpi_terminates": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.ADP.minHpi_isMinGreedy": [
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDynamicProgramming.RDP.toADP_isMinStable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  "source_sha256": {
+    "AbstractDynamicProgramming/Basics.lean": "7294ec5de0010c34aac928d64c4626f0a162b19b765c5da95f690aeee2634746",
+    "AbstractDynamicProgramming/SpectralRadius.lean": "dfee7839e76d380d7fa94e7fe44d2c407904ae1db4b04c82bbafdc29a210db0c",
+    "AbstractDynamicProgramming/Resolvent.lean": "82b45dad225d44d91ee73927ee40803bbfa382d3d448156e74a2dcf1b42a14fc",
+    "AbstractDynamicProgramming/PerronFrobenius.lean": "7d305d6df70082b2d993476a1522f415bcf660a37194cfeb9570e2a9a0b33122",
+    "AbstractDynamicProgramming/Irreducible.lean": "ffeadc24f51cbd42272b56cde770db5c7ffebfde004b112b9adf5943d9c3e2a6",
+    "AbstractDynamicProgramming/LinearValuation.lean": "f1f809b3da0c311aee337071b89ab5ab9e620c44833105ebe50e23fc2940e30a",
+    "AbstractDynamicProgramming/OrderFixedPoints.lean": "2b442e045ab68181dbb131268844f3bd0f2ff19828008b0b4306c459e1fb0c0d",
+    "AbstractDynamicProgramming/RDP.lean": "2f84ab483c523a3273b8c80bcfcc101c9e2dc65c53587a040fa3506f0bd3c04b",
+    "AbstractDynamicProgramming/OrderStability.lean": "913971af95e25346ebb7c5b76e54b9dcb0352af3dcdf5e6fa9805ed7a7b7c02a",
+    "AbstractDynamicProgramming/ADP.lean": "c3c37bae6e30497231938e421137a2f2e31803c2d3acf785358bcb0c9b74e286",
+    "AbstractDynamicProgramming/Examples.lean": "60a761c66a1b39aae51d124cc2ae46a1d9d4960cb65f52c21e08172cf8712ef8",
+    "AbstractDynamicProgramming/RDPOptimality.lean": "5d3c74fa738623a50b63ca2a1b95561687dab8e0b0af620caf9dee4ab9061ec1",
+    "AbstractDynamicProgramming/MixedStrategies.lean": "69b73ecc02277bc240bf83d22559b651cda05ee9d4f6a16bd5bdeea4cd402f99",
+    "AbstractDynamicProgramming/MinOptimality.lean": "ab8704eb99cc6cf9bb433ae45bcd99f25d1bae766a054e6830986b99314b659e",
+    "AbstractDynamicProgramming.lean": "048e5626712d3340d231c738e6b6223ea63ff617092c6d89775aee4624b59fc2",
+    "lean-toolchain": "8733782dc070a99b312039cda424f601b80f3be6f6f512627da5ba25adc27632",
+    "lakefile.toml": "2dc26df7f975b5e33e3966093537a12004221a4ce2ded76ea64478e98d85e9b8",
+    "lake-manifest.json": "2b18d1bd7c7ce261624784817a6508e56ceaf62c0159760f831f47db534b266c",
+    "proof-manifest.json": "fcd7a89d69be11724fee63e7e45fa9a4321f7b0451f3192df3da9e7bc4c511b5",
+    "scripts/verify.py": "a70b1fa704dd590f937f8b37682afa88a9d85a9150065acb935c7d2c9589da3b",
+    "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  },
+  "fresh_audit_sha256": "7807cfcaa4f2991a064f168715b8e0e4392c755ca761a20639a8f38f39f46cb5",
+  "lean_toolchain": "leanprover/lean4:v4.34.0",
+  "scope": "Sargent and Stachurski, Dynamic Programming, Volume 1 (Finite States), Chapter 9: Abstract Dynamic Programming. Order stability (upward, downward) of self-maps of partially ordered sets, its relation to global stability and order duality; abstract dynamic programs (V, {T_sigma}) with greedy policies, the Bellman operator, the Howard operator and HPI; finite, order stable and max-stable ADPs with Lemma B.4.1, Propositions 9.2.1 and 9.2.5 and Theorem 9.2.4 (max-optimality); ADPs generated by RDPs, MDPs, Q-factors and risk-sensitive Q-factors; Proposition 9.2.3 (well-posed iff order stable on order intervals); the proofs of Theorems 8.1.1 and 8.1.2 through ADPs with the OPI Lemmas 9.2.6-9.2.10; mixed strategies; min-optimality by order duality (Theorem 9.2.11); with the provable exercises.",
+  "source": "Thomas J. Sargent and John Stachurski, Dynamic Programming, Volume 1: Finite States, Chapter 9, pp. 292-307, and Appendix B.4, pp. 349-351."
+}
