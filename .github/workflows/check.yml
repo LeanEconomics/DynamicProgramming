@@ -10,7 +10,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        project: [FiniteStates/JobSearch, FiniteStates/OperatorsFixedPoints, FiniteStates/MarkovDynamics, FiniteStates/OptimalStopping, FiniteStates/MarkovDecisionProcesses, FiniteStates/StochasticDiscounting, FiniteStates/NonlinearValuation]
+        project: [FiniteStates/JobSearch, FiniteStates/OperatorsFixedPoints, FiniteStates/MarkovDynamics, FiniteStates/OptimalStopping, FiniteStates/MarkovDecisionProcesses, FiniteStates/StochasticDiscounting, FiniteStates/NonlinearValuation, FiniteStates/RecursiveDecisionProcesses]
     defaults:
       run:
         working-directory: ${{ matrix.project }}
