@@ -50,6 +50,11 @@ from the projects named; their source maps give the book correspondence.
 | (9.14), Thm 9.1.8, p. 306 | Robbins–Monro convergence (Hilbert-space contractions) | `robbins_siegmund`, `robbins_monro` |
 | §9.1.3.4, Ex 9.1.1, p. 307 | Asset pricing: `T` is a `β`-contraction, order preserving, `v* = (I − K)⁻¹Kd` | `AssetPricing`, `AssetPricing.T`, `AssetPricing.T_mono`, `AssetPricing.abs_sum_le`, `AssetPricing.exercise_9_1_1`, `AssetPricing.K`, `AssetPricing.T_eq_mulVec`, `AssetPricing.fixedPoint` |
 | (9.15), footnote 1, p. 308 | `T̂` is unbiased; (9.15) is (9.14); the noise bounds | `AssetPricing.That`, `AssetPricing.That_unbiased`, `AssetPricing.update_eq`, `AssetPricing.abs_noise_le`, `AssetPricing.sum_sq_noise_le` |
+| Thm 9.1.8, Remark 9.1.3, p. 306 | Asynchronous stochastic approximation for max-norm pseudo-contractions (Tsitsiklis, 1994): boundedness and almost sure convergence | `navg`, `navg_restart`, `tendsto_prod_one_sub`, `prod_one_sub_mem`, `stronglyMeasurable_partialSum`, `robbins_siegmund_rand`, `noiseAverage_tendsto_zero`, `noiseAverage_mul_tendsto_zero`, `det_converge`, `runMax`, `scale`, `le_scale`, `det_bounded`, `tsitsiklis` |
+| Thm 9.1.8, p. 306 | Robbins–Monro convergence for supremum-norm contractions | `theorem_9_1_8` |
+| (9.15)–(9.18), Remark 9.1.3 | Asynchronous updates towards sampled targets | `sampled_tsitsiklis` |
+| §9.1.3.4, p. 308 | The batch update (9.15) converges to `v*` almost surely | `AssetPricing.norm_T_sub_le`, `AssetPricing.measurable_T`, `AssetPricing.abs_sample_le`, `AssetPricing.batch_converges` |
+| (9.16), §9.1.3.5, p. 309 | The sequential update converges to `v*` almost surely | `AssetPricing.sequential_converges` |
 
 ## §9.2 Simulation and learning (pp. 309–321)
 
@@ -58,6 +63,7 @@ from the projects named; their source maps give the book correspondence.
 | (9.17), §9.2.1.1, p. 310 | `S`, its fixed point `q*`, and Proposition 5.3.1 | `FiniteMDP.qmax`, `FiniteMDP.le_qmax`, `FiniteMDP.abs_qmax_sub_le`, `FiniteMDP.S`, `FiniteMDP.bellman_qadp`, `FiniteMDP.section_9_2_1` |
 | §9.2.1.3, p. 311 | `S` is a contraction of modulus `β` | `FiniteMDP.S_contraction` |
 | (9.18), p. 310 | The Q-learning update; the sample is unbiased | `FiniteMDP.Shat`, `FiniteMDP.Shat_unbiased`, `FiniteMDP.noise_mean_zero`, `FiniteMDP.qUpdate`, `FiniteMDP.qUpdate_apply` |
+| Thm 9.2.1, p. 313 | Q-learning converges to `q*` almost surely | `FiniteMDP.qmax_zero`, `FiniteMDP.abs_qmax_le`, `FiniteMDP.norm_S_sub_le`, `FiniteMDP.measurable_qmax`, `FiniteMDP.theorem_9_2_1` |
 | (9.20)–(9.21), Ex 9.2.1, p. 314 | The order-reversing FDP | `FiniteMDP.QPos`, `FiniteMDP.expSum`, `FiniteMDP.Fexp`, `FiniteMDP.Glog`, `FiniteMDP.qmin`, `FiniteMDP.rsfdp`, `FiniteMDP.exercise_9_2_1`, `FiniteMDP.monotonic` |
 | §9.2.2.3, (9.19), p. 314 | Primary policy operators and Bellman equation | `FiniteMDP.Gsup_eq`, `FiniteMDP.primary_T`, `FiniteMDP.primary_bellman_eq`, `FiniteMDP.primary_contraction` |
 | (9.22), p. 314 | The subordinate Bellman min-equation | `FiniteMDP.sub_bellman_eq` |
@@ -71,8 +77,6 @@ from the projects named; their source maps give the book correspondence.
 | Where | Content | Reason |
 | --- | --- | --- |
 | Remark 9.1.1 | Neural networks are not nonexpansive in general | Informal. |
-| Thm 9.1.8 for supremum-norm contractions, Remark 9.1.3, §9.1.3.5 | Synchronous and asynchronous stochastic approximation for max-norm contractions (Tsitsiklis, 1994) | Cited from the literature; the Hilbert-space case is proved (`robbins_monro`). |
-| Thm 9.2.1 | Almost sure convergence of tabular Q-learning | Cited (Watkins and Dayan, 1992; Tsitsiklis, 1994); rests on the asynchronous result. |
 | Remark 9.2.1 | Convergence of risk-sensitive Q-learning | An open question (the book says so). |
 | §9.2.1.4, §9.2.2.4, Figures 9.1–9.10 | Inventory examples and numerical illustrations | Numerical. |
 | §9.2.3.1–9.2.3.2 | Policy gradient ascent and the Monte Carlo estimate (9.26) | Algorithms with no mathematical claim beyond differentiability. |

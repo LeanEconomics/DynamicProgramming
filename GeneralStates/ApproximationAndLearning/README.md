@@ -7,7 +7,7 @@ repository root. [Return to the library index](../../README.md).
 
 A checked formalisation of Sargent and Stachurski, *Dynamic Programming*,
 Volume 2: *General States*, Chapter 9, "Approximation and Learning" (pp. 295–321). Every
-exercise is included (Exercises 9.1.1, 9.2.1 and 9.2.2). The library contains **421 theorems**
+exercise is included (Exercises 9.1.1, 9.2.1 and 9.2.2). The library contains **451 theorems**
 and audits every declaration, including structure constructors and projections.
 
 * **Approximation methods** (§9.1.1): kernel averagers (9.2)–(9.3), nonexpansive and order
@@ -22,8 +22,15 @@ and audits every declaration, including structure constructors and projections.
   example (**Exercise 9.1.1**, `v* = (I − K)⁻¹Kd`, unbiased sampling, the noise bounds of
   footnote 1); the Robbins–Siegmund lemma and the **Robbins–Monro theorem** (Theorem 9.1.8)
   for contractions of a real Hilbert space, proved with the martingale convergence theorem.
+* **Max-norm stochastic approximation** (Tsitsiklis, 1994): asynchronous iterates
+  `x_i ← x_i + α_i(F_i(x) − x_i + w_i)` with per-component step sizes converge almost surely for
+  any supremum-norm pseudo-contraction `F`. Boundedness comes from a rescaling argument and
+  convergence from shrinking boxes. This gives **Theorem 9.1.8 in the supremum norm**,
+  **Remark 9.1.3**, almost sure convergence of the batch (9.15) and sequential (9.16) asset
+  pricing updates, and **Theorem 9.2.1**.
 * **Q-learning** (§9.2.1): the Q-factor Bellman operator (9.17), a contraction with fixed point
-  `q*`; unbiased single-sample estimates and the update (9.18).
+  `q*`; unbiased single-sample estimates and the update (9.18); almost sure convergence of the
+  iterates when every pair is updated under the Robbins–Monro conditions (**Theorem 9.2.1**).
 * **Risk-sensitive Q-learning** (§9.2.2): the order-reversing FDP (9.20)–(9.21)
   (**Exercise 9.2.1**), the primary Bellman equation (9.19) and the subordinate equation (9.22),
   optimality of the argmin policy by Theorem 5.2.18, and the contraction of `T̂_σ` for the
@@ -34,7 +41,9 @@ and audits every declaration, including structure constructors and projections.
 The main entry points are `ADP.assumption_9_1_1`, `ADP.lemma_9_1_2`, `ADP.theorem_9_1_3`,
 `ADP.theorem_9_1_4`, `ADP.proposition_9_1_5`, `KernelAverager.lemma_9_1_1`,
 `KernelAverager.lemma_9_1_6`, `example_9_1_2_unique`, `least_squares`, `lemma_9_1_7`,
-`AssetPricing.exercise_9_1_1`, `robbins_siegmund`, `robbins_monro`, `FiniteMDP.section_9_2_1`,
+`AssetPricing.exercise_9_1_1`, `robbins_siegmund`, `robbins_monro`, `tsitsiklis`,
+`theorem_9_1_8`, `sampled_tsitsiklis`, `AssetPricing.batch_converges`,
+`AssetPricing.sequential_converges`, `FiniteMDP.section_9_2_1`, `FiniteMDP.theorem_9_2_1`,
 `FiniteMDP.exercise_9_2_1`, `FiniteMDP.section_9_2_2_3`, `FiniteMDP.exercise_9_2_2` and
 `FiniteMDP.theorem_9_2_2`, all in the namespace `SargentStachurski.ApproximationAndLearning`.
 
@@ -46,9 +55,9 @@ result by result. [Corrections](docs/corrections.md) records:
 
 * Lemma 9.1.7 needs `Θ` convex for the damped map to be a self-map of `Θ`;
 * Theorem 9.1.8 does not say for which norm `T` is a contraction, and the noise can carry the
-  iterates out of a proper subset `Θ`; it is proved here for contractions of a Hilbert space,
-  where order preservation is not needed; the applications in the book (asset pricing,
-  Q-learning) use supremum-norm contractions and rest on Tsitsiklis (1994), which is cited;
+  iterates out of a proper subset `Θ`. It is proved here twice, for contractions of a Hilbert
+  space and for supremum-norm contractions of `ℝⁿ` (Tsitsiklis, 1994), which is what the
+  applications (asset pricing, Q-learning) need. Neither proof uses order preservation;
 * Proposition 9.1.5 does not need `L` nonexpansive;
 * Theorem 9.2.2 needs irreducibility (counterexample) and `β > 0`.
 
@@ -81,6 +90,8 @@ result by result. [Corrections](docs/corrections.md) records:
 | [PolicyGradient](ApproximationAndLearning/PolicyGradient.lean) | 4 | §9.2.3.3, Theorem 9.2.2 |
 | [RiskSensitiveQ](ApproximationAndLearning/RiskSensitiveQ.lean) | 21 | §9.2.2, Exs 9.2.1–9.2.2 |
 | [RobbinsMonro](ApproximationAndLearning/RobbinsMonro.lean) | 2 | §9.1.3.2–9.1.3.3, Robbins–Siegmund, Theorem 9.1.8 |
+| [Tsitsiklis](ApproximationAndLearning/Tsitsiklis.lean) | 20 | Max-norm asynchronous stochastic approximation, Theorem 9.1.8, Remark 9.1.3 |
+| [TsitsiklisApplications](ApproximationAndLearning/TsitsiklisApplications.lean) | 10 | §9.1.3.4–9.1.3.5 convergence, Theorem 9.2.1 |
 
 ## Build and verify
 

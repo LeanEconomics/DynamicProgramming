@@ -20,8 +20,7 @@ For a finite MDP, the Q-factor Bellman operator is
   step `q + α(Ŝq − q)` with the single-sample estimate `(Ŝq)(x, a) = r(x, a) + β max_{a'}
   q(X', a')`, whose mean under `X' ∼ P(x, a, ·)` is `(Sq)(x, a)`: the noise has mean zero.
 
-Theorem 9.2.1 (almost sure convergence of Q-learning, Watkins–Dayan and Tsitsiklis) is cited in
-the book and not formalised.
+Theorem 9.2.1 (almost sure convergence of Q-learning) is proved in `TsitsiklisApplications`.
 -/
 
 open Set Function Filter Topology

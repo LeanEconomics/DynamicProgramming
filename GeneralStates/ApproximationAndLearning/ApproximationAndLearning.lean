@@ -28,3 +28,5 @@ import ApproximationAndLearning.QLearning
 import ApproximationAndLearning.PolicyGradient
 import ApproximationAndLearning.RiskSensitiveQ
 import ApproximationAndLearning.RobbinsMonro
+import ApproximationAndLearning.Tsitsiklis
+import ApproximationAndLearning.TsitsiklisApplications

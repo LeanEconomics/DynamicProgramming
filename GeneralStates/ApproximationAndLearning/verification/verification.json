@@ -1,6 +1,6 @@
 {
-  "checked_at_utc": "2026-10-07T20:14:08.806644+00:00",
-  "theorems": 421,
+  "checked_at_utc": "2026-10-07T20:57:41.715647+00:00",
+  "theorems": 451,
   "module_theorems": {
     "ApproximationAndLearning/Basics.lean": 18,
     "ApproximationAndLearning/SupContraction.lean": 15,
@@ -26,9 +26,11 @@
     "ApproximationAndLearning/QLearning.lean": 8,
     "ApproximationAndLearning/PolicyGradient.lean": 4,
     "ApproximationAndLearning/RiskSensitiveQ.lean": 21,
-    "ApproximationAndLearning/RobbinsMonro.lean": 2
+    "ApproximationAndLearning/RobbinsMonro.lean": 2,
+    "ApproximationAndLearning/Tsitsiklis.lean": 20,
+    "ApproximationAndLearning/TsitsiklisApplications.lean": 10
   },
-  "audited_declarations": 645,
+  "audited_declarations": 678,
   "declarations": [
     {
       "name": "SargentStachurski.ApproximationAndLearning.IsMarkov",
@@ -3254,6 +3256,171 @@
       "name": "SargentStachurski.ApproximationAndLearning.robbins_monro",
       "kind": "theorem",
       "module": "ApproximationAndLearning/RobbinsMonro.lean"
+    },
+    {
+      "name": "SargentStachurski.ApproximationAndLearning.navg",
+      "kind": "def",
+      "module": "ApproximationAndLearning/Tsitsiklis.lean"
+    },
+    {
+      "name": "SargentStachurski.ApproximationAndLearning.navg_zero",
+      "kind": "theorem",
+      "module": "ApproximationAndLearning/Tsitsiklis.lean"
+    },
+    {
+      "name": "SargentStachurski.ApproximationAndLearning.navg_succ",
+      "kind": "theorem",
+      "module": "ApproximationAndLearning/Tsitsiklis.lean"
+    },
+    {
+      "name": "SargentStachurski.ApproximationAndLearning.tendsto_prod_one_sub",
+      "kind": "theorem",
+      "module": "ApproximationAndLearning/Tsitsiklis.lean"
+    },
+    {
+      "name": "SargentStachurski.ApproximationAndLearning.prod_one_sub_mem",
+      "kind": "theorem",
+      "module": "ApproximationAndLearning/Tsitsiklis.lean"
+    },
+    {
+      "name": "SargentStachurski.ApproximationAndLearning.stronglyMeasurable_partialSum",
+      "kind": "theorem",
+      "module": "ApproximationAndLearning/Tsitsiklis.lean"
+    },
+    {
+      "name": "SargentStachurski.ApproximationAndLearning.robbins_siegmund_rand",
+      "kind": "theorem",
+      "module": "ApproximationAndLearning/Tsitsiklis.lean"
+    },
+    {
+      "name": "SargentStachurski.ApproximationAndLearning.noiseAverage_tendsto_zero",
+      "kind": "theorem",
+      "module": "ApproximationAndLearning/Tsitsiklis.lean"
+    },
+    {
+      "name": "SargentStachurski.ApproximationAndLearning.navg_restart",
+      "kind": "theorem",
+      "module": "ApproximationAndLearning/Tsitsiklis.lean"
+    },
+    {
+      "name": "SargentStachurski.ApproximationAndLearning.det_converge",
+      "kind": "theorem",
+      "module": "ApproximationAndLearning/Tsitsiklis.lean"
+    },
+    {
+      "name": "SargentStachurski.ApproximationAndLearning.runMax",
+      "kind": "def",
+      "module": "ApproximationAndLearning/Tsitsiklis.lean"
+    },
+    {
+      "name": "SargentStachurski.ApproximationAndLearning.scale",
+      "kind": "def",
+      "module": "ApproximationAndLearning/Tsitsiklis.lean"
+    },
+    {
+      "name": "SargentStachurski.ApproximationAndLearning.norm_le_runMax",
+      "kind": "theorem",
+      "module": "ApproximationAndLearning/Tsitsiklis.lean"
+    },
+    {
+      "name": "SargentStachurski.ApproximationAndLearning.runMax_le_succ",
+      "kind": "theorem",
+      "module": "ApproximationAndLearning/Tsitsiklis.lean"
+    },
+    {
+      "name": "SargentStachurski.ApproximationAndLearning.runMax_nonneg",
+      "kind": "theorem",
+      "module": "ApproximationAndLearning/Tsitsiklis.lean"
+    },
+    {
+      "name": "SargentStachurski.ApproximationAndLearning.runMax_le",
+      "kind": "theorem",
+      "module": "ApproximationAndLearning/Tsitsiklis.lean"
+    },
+    {
+      "name": "SargentStachurski.ApproximationAndLearning.scale_succ",
+      "kind": "theorem",
+      "module": "ApproximationAndLearning/Tsitsiklis.lean"
+    },
+    {
+      "name": "SargentStachurski.ApproximationAndLearning.le_scale",
+      "kind": "theorem",
+      "module": "ApproximationAndLearning/Tsitsiklis.lean"
+    },
+    {
+      "name": "SargentStachurski.ApproximationAndLearning.det_bounded",
+      "kind": "theorem",
+      "module": "ApproximationAndLearning/Tsitsiklis.lean"
+    },
+    {
+      "name": "SargentStachurski.ApproximationAndLearning.noiseAverage_mul_tendsto_zero",
+      "kind": "theorem",
+      "module": "ApproximationAndLearning/Tsitsiklis.lean"
+    },
+    {
+      "name": "SargentStachurski.ApproximationAndLearning.tsitsiklis",
+      "kind": "theorem",
+      "module": "ApproximationAndLearning/Tsitsiklis.lean"
+    },
+    {
+      "name": "SargentStachurski.ApproximationAndLearning.theorem_9_1_8",
+      "kind": "theorem",
+      "module": "ApproximationAndLearning/Tsitsiklis.lean"
+    },
+    {
+      "name": "SargentStachurski.ApproximationAndLearning.sampled_tsitsiklis",
+      "kind": "theorem",
+      "module": "ApproximationAndLearning/Tsitsiklis.lean"
+    },
+    {
+      "name": "SargentStachurski.ApproximationAndLearning.AssetPricing.norm_T_sub_le",
+      "kind": "theorem",
+      "module": "ApproximationAndLearning/TsitsiklisApplications.lean"
+    },
+    {
+      "name": "SargentStachurski.ApproximationAndLearning.AssetPricing.measurable_T",
+      "kind": "theorem",
+      "module": "ApproximationAndLearning/TsitsiklisApplications.lean"
+    },
+    {
+      "name": "SargentStachurski.ApproximationAndLearning.AssetPricing.abs_sample_le",
+      "kind": "theorem",
+      "module": "ApproximationAndLearning/TsitsiklisApplications.lean"
+    },
+    {
+      "name": "SargentStachurski.ApproximationAndLearning.AssetPricing.batch_converges",
+      "kind": "theorem",
+      "module": "ApproximationAndLearning/TsitsiklisApplications.lean"
+    },
+    {
+      "name": "SargentStachurski.ApproximationAndLearning.AssetPricing.sequential_converges",
+      "kind": "theorem",
+      "module": "ApproximationAndLearning/TsitsiklisApplications.lean"
+    },
+    {
+      "name": "SargentStachurski.ApproximationAndLearning.FiniteMDP.qmax_zero",
+      "kind": "theorem",
+      "module": "ApproximationAndLearning/TsitsiklisApplications.lean"
+    },
+    {
+      "name": "SargentStachurski.ApproximationAndLearning.FiniteMDP.abs_qmax_le",
+      "kind": "theorem",
+      "module": "ApproximationAndLearning/TsitsiklisApplications.lean"
+    },
+    {
+      "name": "SargentStachurski.ApproximationAndLearning.FiniteMDP.norm_S_sub_le",
+      "kind": "theorem",
+      "module": "ApproximationAndLearning/TsitsiklisApplications.lean"
+    },
+    {
+      "name": "SargentStachurski.ApproximationAndLearning.FiniteMDP.measurable_qmax",
+      "kind": "theorem",
+      "module": "ApproximationAndLearning/TsitsiklisApplications.lean"
+    },
+    {
+      "name": "SargentStachurski.ApproximationAndLearning.FiniteMDP.theorem_9_2_1",
+      "kind": "theorem",
+      "module": "ApproximationAndLearning/TsitsiklisApplications.lean"
     }
   ],
   "full_build": "passed",
@@ -6069,6 +6236,171 @@
       "propext",
       "Classical.choice",
       "Quot.sound"
+    ],
+    "SargentStachurski.ApproximationAndLearning.navg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ApproximationAndLearning.navg_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ApproximationAndLearning.navg_succ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ApproximationAndLearning.tendsto_prod_one_sub": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ApproximationAndLearning.prod_one_sub_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ApproximationAndLearning.stronglyMeasurable_partialSum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ApproximationAndLearning.robbins_siegmund_rand": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ApproximationAndLearning.noiseAverage_tendsto_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ApproximationAndLearning.navg_restart": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ApproximationAndLearning.det_converge": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ApproximationAndLearning.runMax": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ApproximationAndLearning.scale": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ApproximationAndLearning.norm_le_runMax": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ApproximationAndLearning.runMax_le_succ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ApproximationAndLearning.runMax_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ApproximationAndLearning.runMax_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ApproximationAndLearning.scale_succ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ApproximationAndLearning.le_scale": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ApproximationAndLearning.det_bounded": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ApproximationAndLearning.noiseAverage_mul_tendsto_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ApproximationAndLearning.tsitsiklis": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ApproximationAndLearning.theorem_9_1_8": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ApproximationAndLearning.sampled_tsitsiklis": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ApproximationAndLearning.AssetPricing.norm_T_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ApproximationAndLearning.AssetPricing.measurable_T": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ApproximationAndLearning.AssetPricing.abs_sample_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ApproximationAndLearning.AssetPricing.batch_converges": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ApproximationAndLearning.AssetPricing.sequential_converges": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ApproximationAndLearning.FiniteMDP.qmax_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ApproximationAndLearning.FiniteMDP.abs_qmax_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ApproximationAndLearning.FiniteMDP.norm_S_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ApproximationAndLearning.FiniteMDP.measurable_qmax": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ApproximationAndLearning.FiniteMDP.theorem_9_2_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
     ]
   },
   "source_sha256": {
@@ -6093,20 +6425,22 @@
     "ApproximationAndLearning/FittedVI.lean": "cb76d21ac101275757525997b67b4f9563f66177206f941310af2379cae17277",
     "ApproximationAndLearning/KernelAverager.lean": "2886b9967b2055990dcabe457ca3e17d4b30fa629c79ae763c635c67bc4ddbfc",
     "ApproximationAndLearning/DampedIteration.lean": "963a072c3a0f64b639b9316b6cc83fee4cafc771f075db99edbce17e203a3e4a",
-    "ApproximationAndLearning/QLearning.lean": "de7db9eb9518d0030e6d8fe4ebfcb818328a96d5e60ab3a09e8ecd2d7a03a3fb",
+    "ApproximationAndLearning/QLearning.lean": "1cfa9dbd6d2ea28ec2bb1b699e461e0c6b061b3a34776238ccc34cf52f6ed08b",
     "ApproximationAndLearning/PolicyGradient.lean": "ca69ce3f87f978b32b4b8ae897ab0ba2b90e5050c518e10af08f14181dfb8d51",
     "ApproximationAndLearning/RiskSensitiveQ.lean": "eb362af68f3e23b3b85637ec43e14e8cabaad8893808c77693c429ab6e706eb1",
-    "ApproximationAndLearning/RobbinsMonro.lean": "1d3341d3448d892de337ca39a37eef829f6931c7f3116c306f4206e71bba264a",
-    "ApproximationAndLearning.lean": "f546fec565af27de7973bbacece17fb176ac01c857bfb1699fbe891ea91c9a1b",
+    "ApproximationAndLearning/RobbinsMonro.lean": "d49ab9b286f8ef3c433213228a3ea6590ba1131899b533ba7f5f4cc542e84b95",
+    "ApproximationAndLearning/Tsitsiklis.lean": "4f2a24da325772f3e895dd759bda51bb8440473e6eda87e0df12f713c6a17ea7",
+    "ApproximationAndLearning/TsitsiklisApplications.lean": "55519aa8d5f8894d4b0c8bc22ce566f9df0511d76d43ff9226fc5ba0e8e2fc73",
+    "ApproximationAndLearning.lean": "8e5f703afc6ee849508971e4694986cbfd203bdb409632b1d3ab17c060702f78",
     "lean-toolchain": "8733782dc070a99b312039cda424f601b80f3be6f6f512627da5ba25adc27632",
     "lakefile.toml": "de94cf7fbeba92a1e90c1f0d4e1cf37ca46f8830fa218e1626417942fea8aab3",
     "lake-manifest.json": "835e4b29853519db7885cb39465d7aed5109c4bf00cd0c33567712861ff8858d",
-    "proof-manifest.json": "34e1ad889066904485843bed6c5448edbaacd958a8a53d093781b30e350dd7d2",
+    "proof-manifest.json": "4ceb6d7c8ae8fe7c311a5482a048460d481ac8a020cca2d6b0a8fdfd2a4ce19d",
     "scripts/verify.py": "a70b1fa704dd590f937f8b37682afa88a9d85a9150065acb935c7d2c9589da3b",
     "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
   },
-  "fresh_audit_sha256": "380659434fab784471770b670a57a8b17c7735294225014599c9802bcb71a7ce",
+  "fresh_audit_sha256": "4e9da1105e2bf9468a7cd0290743c733afa40741f715b72b98c814f0920e9130",
   "lean_toolchain": "leanprover/lean4:v4.34.0",
-  "scope": "Sargent and Stachurski, Dynamic Programming, Volume 2 (General States), Chapter 9: Approximation and Learning. Kernel averagers (9.2)-(9.3), nonexpansive and order preserving on bX (Lemmas 9.1.1, 9.1.6, Remark 9.1.2), Gaussian kernels and piecewise linear interpolation (Examples 9.1.1-9.1.2, with interpolation and uniqueness), least squares global approximation; fitted value iteration under Assumption 9.1.1 (Lemma 9.1.2, Theorems 9.1.3-9.1.4, Proposition 9.1.5, termination of Algorithm 9.1); damped iteration (Lemma 9.1.7, with convexity needed) and the asset pricing example (Exercise 9.1.1, unbiased sampling, the noise bounds); the Robbins-Siegmund lemma and the Robbins-Monro theorem (Theorem 9.1.8 for contractions of a real Hilbert space); Q-learning (the Q-factor operator, its fixed point, unbiased samples and the update (9.18)); risk-sensitive Q-learning as an order-reversing FDP (Exercises 9.2.1-9.2.2, (9.19), (9.22), Theorem 5.2.18); local-to-global optimality (Theorem 9.2.2, with irreducibility needed); with the earlier chapters' ADP, finite MDP, Q-factor and FDP theory restated.",
+  "scope": "Sargent and Stachurski, Dynamic Programming, Volume 2 (General States), Chapter 9: Approximation and Learning. Kernel averagers (9.2)-(9.3), nonexpansive and order preserving on bX (Lemmas 9.1.1, 9.1.6, Remark 9.1.2), Gaussian kernels and piecewise linear interpolation (Examples 9.1.1-9.1.2, with interpolation and uniqueness), least squares global approximation; fitted value iteration under Assumption 9.1.1 (Lemma 9.1.2, Theorems 9.1.3-9.1.4, Proposition 9.1.5, termination of Algorithm 9.1); damped iteration (Lemma 9.1.7, with convexity needed) and the asset pricing example (Exercise 9.1.1, unbiased sampling, the noise bounds); the Robbins-Siegmund lemma and the Robbins-Monro theorem (Theorem 9.1.8 for contractions of a real Hilbert space); asynchronous stochastic approximation for max-norm pseudo-contractions (Tsitsiklis, 1994), giving Theorem 9.1.8 in the supremum norm, Remark 9.1.3, almost sure convergence of the batch (9.15) and sequential (9.16) asset pricing updates, and Theorem 9.2.1 (convergence of Q-learning); Q-learning (the Q-factor operator, its fixed point, unbiased samples and the update (9.18)); risk-sensitive Q-learning as an order-reversing FDP (Exercises 9.2.1-9.2.2, (9.19), (9.22), Theorem 5.2.18); local-to-global optimality (Theorem 9.2.2, with irreducibility needed); with the earlier chapters' ADP, finite MDP, Q-factor and FDP theory restated.",
   "source": "Thomas J. Sargent and John Stachurski, Dynamic Programming, Volume 2: General States, Chapter 9, pp. 295-321."
 }
