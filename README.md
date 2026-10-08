@@ -37,6 +37,7 @@ project under `Extensions/` with a source map to the literature.
 | Project | Topic | Checked results | Start here |
 | --- | --- | --- | --- |
 | [Extensions/AdaptiveLearning](Extensions/AdaptiveLearning/README.md) | Adaptive learning and E-stability | 19 theorems: stochastic approximation with a quadratic Lyapunov function; the cobweb model learnable by least squares iff `β < 1`, even where naive expectations explode, and always learnable from demand and supply primitives; E-stability of linear models, the eigenvalue obstruction, existence and uniqueness of the REE, and almost sure convergence of steady-state learning | [Project overview](Extensions/AdaptiveLearning/README.md) |
+| [Extensions/MonotonePolicies](Extensions/MonotonePolicies/README.md) | Monotone policies | 48 theorems: Topkis's theorem (ascending argmax, greatest and least maximizers increasing, the strict version); finite dynamic programs with optimality from scratch, monotone optimal policies and increasing value functions under monotone primitives; on an asset grid with i.i.d. income and any concave utility, saving rises with assets and income and the household's state follows a monotone Markov chain | [Project overview](Extensions/MonotonePolicies/README.md) |
 
 ## Scope
 

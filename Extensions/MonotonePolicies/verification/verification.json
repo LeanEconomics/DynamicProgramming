@@ -1,0 +1,966 @@
+{
+  "checked_at_utc": "2026-10-08T04:06:50.986951+00:00",
+  "theorems": 48,
+  "module_theorems": {
+    "MonotonePolicies/Topkis.lean": 14,
+    "MonotonePolicies/MonotoneDP.lean": 27,
+    "MonotonePolicies/Savings.lean": 7
+  },
+  "audited_declarations": 93,
+  "declarations": [
+    {
+      "name": "DPExtensions.MonotonePolicies.IncreasingDifferences",
+      "kind": "def",
+      "module": "MonotonePolicies/Topkis.lean"
+    },
+    {
+      "name": "DPExtensions.MonotonePolicies.StrictIncreasingDifferences",
+      "kind": "def",
+      "module": "MonotonePolicies/Topkis.lean"
+    },
+    {
+      "name": "DPExtensions.MonotonePolicies.Ascending",
+      "kind": "def",
+      "module": "MonotonePolicies/Topkis.lean"
+    },
+    {
+      "name": "DPExtensions.MonotonePolicies.IncreasingDifferences.add",
+      "kind": "theorem",
+      "module": "MonotonePolicies/Topkis.lean"
+    },
+    {
+      "name": "DPExtensions.MonotonePolicies.IncreasingDifferences.const_mul",
+      "kind": "theorem",
+      "module": "MonotonePolicies/Topkis.lean"
+    },
+    {
+      "name": "DPExtensions.MonotonePolicies.increasingDifferences_of_sep",
+      "kind": "theorem",
+      "module": "MonotonePolicies/Topkis.lean"
+    },
+    {
+      "name": "DPExtensions.MonotonePolicies.increasingDifferences_mul",
+      "kind": "theorem",
+      "module": "MonotonePolicies/Topkis.lean"
+    },
+    {
+      "name": "DPExtensions.MonotonePolicies.concave_increment",
+      "kind": "theorem",
+      "module": "MonotonePolicies/Topkis.lean"
+    },
+    {
+      "name": "DPExtensions.MonotonePolicies.increasingDifferences_concave",
+      "kind": "theorem",
+      "module": "MonotonePolicies/Topkis.lean"
+    },
+    {
+      "name": "DPExtensions.MonotonePolicies.argmaxSet",
+      "kind": "def",
+      "module": "MonotonePolicies/Topkis.lean"
+    },
+    {
+      "name": "DPExtensions.MonotonePolicies.mem_argmaxSet",
+      "kind": "theorem",
+      "module": "MonotonePolicies/Topkis.lean"
+    },
+    {
+      "name": "DPExtensions.MonotonePolicies.argmaxSet_nonempty",
+      "kind": "theorem",
+      "module": "MonotonePolicies/Topkis.lean"
+    },
+    {
+      "name": "DPExtensions.MonotonePolicies.argmax_strongSetOrder",
+      "kind": "theorem",
+      "module": "MonotonePolicies/Topkis.lean"
+    },
+    {
+      "name": "DPExtensions.MonotonePolicies.gmax",
+      "kind": "def",
+      "module": "MonotonePolicies/Topkis.lean"
+    },
+    {
+      "name": "DPExtensions.MonotonePolicies.lmax",
+      "kind": "def",
+      "module": "MonotonePolicies/Topkis.lean"
+    },
+    {
+      "name": "DPExtensions.MonotonePolicies.gmax_mem",
+      "kind": "theorem",
+      "module": "MonotonePolicies/Topkis.lean"
+    },
+    {
+      "name": "DPExtensions.MonotonePolicies.lmax_mem",
+      "kind": "theorem",
+      "module": "MonotonePolicies/Topkis.lean"
+    },
+    {
+      "name": "DPExtensions.MonotonePolicies.topkis_gmax",
+      "kind": "theorem",
+      "module": "MonotonePolicies/Topkis.lean"
+    },
+    {
+      "name": "DPExtensions.MonotonePolicies.topkis_lmax",
+      "kind": "theorem",
+      "module": "MonotonePolicies/Topkis.lean"
+    },
+    {
+      "name": "DPExtensions.MonotonePolicies.topkis_strict",
+      "kind": "theorem",
+      "module": "MonotonePolicies/Topkis.lean"
+    },
+    {
+      "name": "DPExtensions.MonotonePolicies.FDP",
+      "kind": "structure",
+      "module": "MonotonePolicies/MonotoneDP.lean"
+    },
+    {
+      "name": "DPExtensions.MonotonePolicies.FDP.mk",
+      "kind": "constructor",
+      "module": "MonotonePolicies/MonotoneDP.lean"
+    },
+    {
+      "name": "DPExtensions.MonotonePolicies.FDP.\u0393",
+      "kind": "projection",
+      "module": "MonotonePolicies/MonotoneDP.lean"
+    },
+    {
+      "name": "DPExtensions.MonotonePolicies.FDP.\u0393_nonempty",
+      "kind": "projection",
+      "module": "MonotonePolicies/MonotoneDP.lean"
+    },
+    {
+      "name": "DPExtensions.MonotonePolicies.FDP.r",
+      "kind": "projection",
+      "module": "MonotonePolicies/MonotoneDP.lean"
+    },
+    {
+      "name": "DPExtensions.MonotonePolicies.FDP.\u03b2",
+      "kind": "projection",
+      "module": "MonotonePolicies/MonotoneDP.lean"
+    },
+    {
+      "name": "DPExtensions.MonotonePolicies.FDP.\u03b2_nonneg",
+      "kind": "projection",
+      "module": "MonotonePolicies/MonotoneDP.lean"
+    },
+    {
+      "name": "DPExtensions.MonotonePolicies.FDP.\u03b2_lt_one",
+      "kind": "projection",
+      "module": "MonotonePolicies/MonotoneDP.lean"
+    },
+    {
+      "name": "DPExtensions.MonotonePolicies.FDP.P",
+      "kind": "projection",
+      "module": "MonotonePolicies/MonotoneDP.lean"
+    },
+    {
+      "name": "DPExtensions.MonotonePolicies.FDP.P_nonneg",
+      "kind": "projection",
+      "module": "MonotonePolicies/MonotoneDP.lean"
+    },
+    {
+      "name": "DPExtensions.MonotonePolicies.FDP.P_sum",
+      "kind": "projection",
+      "module": "MonotonePolicies/MonotoneDP.lean"
+    },
+    {
+      "name": "DPExtensions.MonotonePolicies.MonotoneKernel",
+      "kind": "def",
+      "module": "MonotonePolicies/MonotoneDP.lean"
+    },
+    {
+      "name": "DPExtensions.MonotonePolicies.FDP.Q",
+      "kind": "def",
+      "module": "MonotonePolicies/MonotoneDP.lean"
+    },
+    {
+      "name": "DPExtensions.MonotonePolicies.FDP.T",
+      "kind": "def",
+      "module": "MonotonePolicies/MonotoneDP.lean"
+    },
+    {
+      "name": "DPExtensions.MonotonePolicies.FDP.T\u03c3",
+      "kind": "def",
+      "module": "MonotonePolicies/MonotoneDP.lean"
+    },
+    {
+      "name": "DPExtensions.MonotonePolicies.FDP.IsPolicy",
+      "kind": "def",
+      "module": "MonotonePolicies/MonotoneDP.lean"
+    },
+    {
+      "name": "DPExtensions.MonotonePolicies.FDP.abs_sum_sub_le",
+      "kind": "theorem",
+      "module": "MonotonePolicies/MonotoneDP.lean"
+    },
+    {
+      "name": "DPExtensions.MonotonePolicies.FDP.abs_Q_sub_le",
+      "kind": "theorem",
+      "module": "MonotonePolicies/MonotoneDP.lean"
+    },
+    {
+      "name": "DPExtensions.MonotonePolicies.FDP.norm_T_sub_le",
+      "kind": "theorem",
+      "module": "MonotonePolicies/MonotoneDP.lean"
+    },
+    {
+      "name": "DPExtensions.MonotonePolicies.FDP.norm_T\u03c3_sub_le",
+      "kind": "theorem",
+      "module": "MonotonePolicies/MonotoneDP.lean"
+    },
+    {
+      "name": "DPExtensions.MonotonePolicies.FDP.contracting_T",
+      "kind": "theorem",
+      "module": "MonotonePolicies/MonotoneDP.lean"
+    },
+    {
+      "name": "DPExtensions.MonotonePolicies.FDP.contracting_T\u03c3",
+      "kind": "theorem",
+      "module": "MonotonePolicies/MonotoneDP.lean"
+    },
+    {
+      "name": "DPExtensions.MonotonePolicies.FDP.vstar",
+      "kind": "def",
+      "module": "MonotonePolicies/MonotoneDP.lean"
+    },
+    {
+      "name": "DPExtensions.MonotonePolicies.FDP.v\u03c3",
+      "kind": "def",
+      "module": "MonotonePolicies/MonotoneDP.lean"
+    },
+    {
+      "name": "DPExtensions.MonotonePolicies.FDP.T_vstar",
+      "kind": "theorem",
+      "module": "MonotonePolicies/MonotoneDP.lean"
+    },
+    {
+      "name": "DPExtensions.MonotonePolicies.FDP.T\u03c3_v\u03c3",
+      "kind": "theorem",
+      "module": "MonotonePolicies/MonotoneDP.lean"
+    },
+    {
+      "name": "DPExtensions.MonotonePolicies.FDP.Q_mono",
+      "kind": "theorem",
+      "module": "MonotonePolicies/MonotoneDP.lean"
+    },
+    {
+      "name": "DPExtensions.MonotonePolicies.FDP.T_mono",
+      "kind": "theorem",
+      "module": "MonotonePolicies/MonotoneDP.lean"
+    },
+    {
+      "name": "DPExtensions.MonotonePolicies.FDP.T\u03c3_le_T",
+      "kind": "theorem",
+      "module": "MonotonePolicies/MonotoneDP.lean"
+    },
+    {
+      "name": "DPExtensions.MonotonePolicies.FDP.le_vstar_of_le_T",
+      "kind": "theorem",
+      "module": "MonotonePolicies/MonotoneDP.lean"
+    },
+    {
+      "name": "DPExtensions.MonotonePolicies.FDP.v\u03c3_le_vstar",
+      "kind": "theorem",
+      "module": "MonotonePolicies/MonotoneDP.lean"
+    },
+    {
+      "name": "DPExtensions.MonotonePolicies.FDP.IsGreedy",
+      "kind": "def",
+      "module": "MonotonePolicies/MonotoneDP.lean"
+    },
+    {
+      "name": "DPExtensions.MonotonePolicies.FDP.IsGreedy.isPolicy",
+      "kind": "theorem",
+      "module": "MonotonePolicies/MonotoneDP.lean"
+    },
+    {
+      "name": "DPExtensions.MonotonePolicies.FDP.T\u03c3_eq_T_of_greedy",
+      "kind": "theorem",
+      "module": "MonotonePolicies/MonotoneDP.lean"
+    },
+    {
+      "name": "DPExtensions.MonotonePolicies.FDP.v\u03c3_eq_vstar_of_greedy",
+      "kind": "theorem",
+      "module": "MonotonePolicies/MonotoneDP.lean"
+    },
+    {
+      "name": "DPExtensions.MonotonePolicies.FDP.IsOptimal",
+      "kind": "def",
+      "module": "MonotonePolicies/MonotoneDP.lean"
+    },
+    {
+      "name": "DPExtensions.MonotonePolicies.FDP.greedy_optimal",
+      "kind": "theorem",
+      "module": "MonotonePolicies/MonotoneDP.lean"
+    },
+    {
+      "name": "DPExtensions.MonotonePolicies.FDP.exists_greedy",
+      "kind": "theorem",
+      "module": "MonotonePolicies/MonotoneDP.lean"
+    },
+    {
+      "name": "DPExtensions.MonotonePolicies.FDP.optimal_greedy",
+      "kind": "theorem",
+      "module": "MonotonePolicies/MonotoneDP.lean"
+    },
+    {
+      "name": "DPExtensions.MonotonePolicies.FDP.optimal_monotone",
+      "kind": "theorem",
+      "module": "MonotonePolicies/MonotoneDP.lean"
+    },
+    {
+      "name": "DPExtensions.MonotonePolicies.FDP.optimal_monotone_least",
+      "kind": "theorem",
+      "module": "MonotonePolicies/MonotoneDP.lean"
+    },
+    {
+      "name": "DPExtensions.MonotonePolicies.FDP.optimal_le_of_strict",
+      "kind": "theorem",
+      "module": "MonotonePolicies/MonotoneDP.lean"
+    },
+    {
+      "name": "DPExtensions.MonotonePolicies.FDP.id_Q_of_actionKernel",
+      "kind": "theorem",
+      "module": "MonotonePolicies/MonotoneDP.lean"
+    },
+    {
+      "name": "DPExtensions.MonotonePolicies.FDP.id_Q_of_continuation",
+      "kind": "theorem",
+      "module": "MonotonePolicies/MonotoneDP.lean"
+    },
+    {
+      "name": "DPExtensions.MonotonePolicies.FDP.vstar_monotone",
+      "kind": "theorem",
+      "module": "MonotonePolicies/MonotoneDP.lean"
+    },
+    {
+      "name": "DPExtensions.MonotonePolicies.FDP.optimal_monotone_of_primitives",
+      "kind": "theorem",
+      "module": "MonotonePolicies/MonotoneDP.lean"
+    },
+    {
+      "name": "DPExtensions.MonotonePolicies.monotoneKernel_comp",
+      "kind": "theorem",
+      "module": "MonotonePolicies/MonotoneDP.lean"
+    },
+    {
+      "name": "DPExtensions.MonotonePolicies.SavingsModel",
+      "kind": "structure",
+      "module": "MonotonePolicies/Savings.lean"
+    },
+    {
+      "name": "DPExtensions.MonotonePolicies.SavingsModel.mk",
+      "kind": "constructor",
+      "module": "MonotonePolicies/Savings.lean"
+    },
+    {
+      "name": "DPExtensions.MonotonePolicies.SavingsModel.level",
+      "kind": "projection",
+      "module": "MonotonePolicies/Savings.lean"
+    },
+    {
+      "name": "DPExtensions.MonotonePolicies.SavingsModel.R",
+      "kind": "projection",
+      "module": "MonotonePolicies/Savings.lean"
+    },
+    {
+      "name": "DPExtensions.MonotonePolicies.SavingsModel.R_nonneg",
+      "kind": "projection",
+      "module": "MonotonePolicies/Savings.lean"
+    },
+    {
+      "name": "DPExtensions.MonotonePolicies.SavingsModel.y",
+      "kind": "projection",
+      "module": "MonotonePolicies/Savings.lean"
+    },
+    {
+      "name": "DPExtensions.MonotonePolicies.SavingsModel.u",
+      "kind": "projection",
+      "module": "MonotonePolicies/Savings.lean"
+    },
+    {
+      "name": "DPExtensions.MonotonePolicies.SavingsModel.u_concave",
+      "kind": "projection",
+      "module": "MonotonePolicies/Savings.lean"
+    },
+    {
+      "name": "DPExtensions.MonotonePolicies.SavingsModel.\u03b2",
+      "kind": "projection",
+      "module": "MonotonePolicies/Savings.lean"
+    },
+    {
+      "name": "DPExtensions.MonotonePolicies.SavingsModel.\u03b2_nonneg",
+      "kind": "projection",
+      "module": "MonotonePolicies/Savings.lean"
+    },
+    {
+      "name": "DPExtensions.MonotonePolicies.SavingsModel.\u03b2_lt_one",
+      "kind": "projection",
+      "module": "MonotonePolicies/Savings.lean"
+    },
+    {
+      "name": "DPExtensions.MonotonePolicies.SavingsModel.\u03c0",
+      "kind": "projection",
+      "module": "MonotonePolicies/Savings.lean"
+    },
+    {
+      "name": "DPExtensions.MonotonePolicies.SavingsModel.\u03c0_nonneg",
+      "kind": "projection",
+      "module": "MonotonePolicies/Savings.lean"
+    },
+    {
+      "name": "DPExtensions.MonotonePolicies.SavingsModel.\u03c0_sum",
+      "kind": "projection",
+      "module": "MonotonePolicies/Savings.lean"
+    },
+    {
+      "name": "DPExtensions.MonotonePolicies.SavingsModel.a\u2080",
+      "kind": "projection",
+      "module": "MonotonePolicies/Savings.lean"
+    },
+    {
+      "name": "DPExtensions.MonotonePolicies.SavingsModel.a\u2080_feasible",
+      "kind": "projection",
+      "module": "MonotonePolicies/Savings.lean"
+    },
+    {
+      "name": "DPExtensions.MonotonePolicies.SavingsModel.cash",
+      "kind": "def",
+      "module": "MonotonePolicies/Savings.lean"
+    },
+    {
+      "name": "DPExtensions.MonotonePolicies.SavingsModel.K",
+      "kind": "def",
+      "module": "MonotonePolicies/Savings.lean"
+    },
+    {
+      "name": "DPExtensions.MonotonePolicies.SavingsModel.K_sum",
+      "kind": "theorem",
+      "module": "MonotonePolicies/Savings.lean"
+    },
+    {
+      "name": "DPExtensions.MonotonePolicies.SavingsModel.toFDP",
+      "kind": "def",
+      "module": "MonotonePolicies/Savings.lean"
+    },
+    {
+      "name": "DPExtensions.MonotonePolicies.SavingsModel.sum_mul_K",
+      "kind": "theorem",
+      "module": "MonotonePolicies/Savings.lean"
+    },
+    {
+      "name": "DPExtensions.MonotonePolicies.SavingsModel.cash_monotone",
+      "kind": "theorem",
+      "module": "MonotonePolicies/Savings.lean"
+    },
+    {
+      "name": "DPExtensions.MonotonePolicies.SavingsModel.ascending",
+      "kind": "theorem",
+      "module": "MonotonePolicies/Savings.lean"
+    },
+    {
+      "name": "DPExtensions.MonotonePolicies.SavingsModel.savings_monotone",
+      "kind": "theorem",
+      "module": "MonotonePolicies/Savings.lean"
+    },
+    {
+      "name": "DPExtensions.MonotonePolicies.SavingsModel.K_monotone",
+      "kind": "theorem",
+      "module": "MonotonePolicies/Savings.lean"
+    },
+    {
+      "name": "DPExtensions.MonotonePolicies.SavingsModel.chain_monotone",
+      "kind": "theorem",
+      "module": "MonotonePolicies/Savings.lean"
+    }
+  ],
+  "full_build": "passed",
+  "fresh_source_compilation": "passed",
+  "fresh_source_lint_options": [
+    "-Dlinter.mathlibStandardSet=true",
+    "-Dlinter.style.header=false"
+  ],
+  "axioms": {
+    "DPExtensions.MonotonePolicies.IncreasingDifferences": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.MonotonePolicies.StrictIncreasingDifferences": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.MonotonePolicies.Ascending": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.MonotonePolicies.IncreasingDifferences.add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.MonotonePolicies.IncreasingDifferences.const_mul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.MonotonePolicies.increasingDifferences_of_sep": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.MonotonePolicies.increasingDifferences_mul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.MonotonePolicies.concave_increment": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.MonotonePolicies.increasingDifferences_concave": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.MonotonePolicies.argmaxSet": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.MonotonePolicies.mem_argmaxSet": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.MonotonePolicies.argmaxSet_nonempty": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.MonotonePolicies.argmax_strongSetOrder": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.MonotonePolicies.gmax": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.MonotonePolicies.lmax": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.MonotonePolicies.gmax_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.MonotonePolicies.lmax_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.MonotonePolicies.topkis_gmax": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.MonotonePolicies.topkis_lmax": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.MonotonePolicies.topkis_strict": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.MonotonePolicies.FDP": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.MonotonePolicies.FDP.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.MonotonePolicies.FDP.\u0393": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.MonotonePolicies.FDP.\u0393_nonempty": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.MonotonePolicies.FDP.r": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.MonotonePolicies.FDP.\u03b2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.MonotonePolicies.FDP.\u03b2_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.MonotonePolicies.FDP.\u03b2_lt_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.MonotonePolicies.FDP.P": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.MonotonePolicies.FDP.P_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.MonotonePolicies.FDP.P_sum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.MonotonePolicies.MonotoneKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.MonotonePolicies.FDP.Q": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.MonotonePolicies.FDP.T": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.MonotonePolicies.FDP.T\u03c3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.MonotonePolicies.FDP.IsPolicy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.MonotonePolicies.FDP.abs_sum_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.MonotonePolicies.FDP.abs_Q_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.MonotonePolicies.FDP.norm_T_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.MonotonePolicies.FDP.norm_T\u03c3_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.MonotonePolicies.FDP.contracting_T": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.MonotonePolicies.FDP.contracting_T\u03c3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.MonotonePolicies.FDP.vstar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.MonotonePolicies.FDP.v\u03c3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.MonotonePolicies.FDP.T_vstar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.MonotonePolicies.FDP.T\u03c3_v\u03c3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.MonotonePolicies.FDP.Q_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.MonotonePolicies.FDP.T_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.MonotonePolicies.FDP.T\u03c3_le_T": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.MonotonePolicies.FDP.le_vstar_of_le_T": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.MonotonePolicies.FDP.v\u03c3_le_vstar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.MonotonePolicies.FDP.IsGreedy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.MonotonePolicies.FDP.IsGreedy.isPolicy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.MonotonePolicies.FDP.T\u03c3_eq_T_of_greedy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.MonotonePolicies.FDP.v\u03c3_eq_vstar_of_greedy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.MonotonePolicies.FDP.IsOptimal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.MonotonePolicies.FDP.greedy_optimal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.MonotonePolicies.FDP.exists_greedy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.MonotonePolicies.FDP.optimal_greedy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.MonotonePolicies.FDP.optimal_monotone": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.MonotonePolicies.FDP.optimal_monotone_least": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.MonotonePolicies.FDP.optimal_le_of_strict": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.MonotonePolicies.FDP.id_Q_of_actionKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.MonotonePolicies.FDP.id_Q_of_continuation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.MonotonePolicies.FDP.vstar_monotone": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.MonotonePolicies.FDP.optimal_monotone_of_primitives": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.MonotonePolicies.monotoneKernel_comp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.MonotonePolicies.SavingsModel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.MonotonePolicies.SavingsModel.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.MonotonePolicies.SavingsModel.level": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.MonotonePolicies.SavingsModel.R": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.MonotonePolicies.SavingsModel.R_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.MonotonePolicies.SavingsModel.y": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.MonotonePolicies.SavingsModel.u": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.MonotonePolicies.SavingsModel.u_concave": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.MonotonePolicies.SavingsModel.\u03b2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.MonotonePolicies.SavingsModel.\u03b2_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.MonotonePolicies.SavingsModel.\u03b2_lt_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.MonotonePolicies.SavingsModel.\u03c0": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.MonotonePolicies.SavingsModel.\u03c0_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.MonotonePolicies.SavingsModel.\u03c0_sum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.MonotonePolicies.SavingsModel.a\u2080": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.MonotonePolicies.SavingsModel.a\u2080_feasible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.MonotonePolicies.SavingsModel.cash": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.MonotonePolicies.SavingsModel.K": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.MonotonePolicies.SavingsModel.K_sum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.MonotonePolicies.SavingsModel.toFDP": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.MonotonePolicies.SavingsModel.sum_mul_K": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.MonotonePolicies.SavingsModel.cash_monotone": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.MonotonePolicies.SavingsModel.ascending": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.MonotonePolicies.SavingsModel.savings_monotone": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.MonotonePolicies.SavingsModel.K_monotone": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.MonotonePolicies.SavingsModel.chain_monotone": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  "source_sha256": {
+    "MonotonePolicies/Topkis.lean": "a6c7211adb1228349932e2da656ac6785cbdabbde0a9a2c4a0489e9bdb8ff0f9",
+    "MonotonePolicies/MonotoneDP.lean": "5a62d8796d0448704567eb0ee5124ce93f10fc623db5f8e9e5bd61d820f28168",
+    "MonotonePolicies/Savings.lean": "32e6d787fe98e64589ebc8222bb2954ff16b00c4a3afe57335bbd90671522552",
+    "MonotonePolicies.lean": "9d08e3e2c078a697a5e9f401f17d3bbdc7794c1ea43c76257b0336904fc802a0",
+    "lean-toolchain": "8733782dc070a99b312039cda424f601b80f3be6f6f512627da5ba25adc27632",
+    "lakefile.toml": "182d85f595767f0a987424b20ceb6bcc0ef9044a1ee58e7ec1f71cacd9701d8d",
+    "lake-manifest.json": "f10833ad496bc16deed393f26a092edd10e4bace4c66978e7e34dc4c46e58c79",
+    "proof-manifest.json": "c5ad02737f3d9bbda0143a98e2a8b9437434d2f2d42ede8eb0a1b4710fe040ac",
+    "scripts/verify.py": "a70b1fa704dd590f937f8b37682afa88a9d85a9150065acb935c7d2c9589da3b",
+    "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  },
+  "fresh_audit_sha256": "85209948a301a611eedd69951f5073d3083d39a675266371bdc36a7d0c06a27e",
+  "lean_toolchain": "leanprover/lean4:v4.34.0",
+  "scope": "Monotone comparative statics and monotone policies: increasing differences and the strong set order; Topkis's theorem (greatest and least maximizers increasing, strict version); finite dynamic programs with optimality proved from scratch; monotone optimal policies and value functions under monotone primitives; monotone kernels induced by monotone policies; the savings problem on an asset grid with i.i.d. income: saving increasing in assets and income for any concave utility, and the household state a monotone Markov chain.",
+  "source": "Topkis (1978, 1998); Milgrom and Shannon (1994); Stokey and Lucas (1989); Hopenhayn and Prescott (1992); Huggett (1993); Aiyagari (1994)."
+}
