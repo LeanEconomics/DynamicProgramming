@@ -6541,9 +6541,6 @@ The proof is the classical one:
   `c_k = (1 − β)α_kY_k`, so `Y_k → Y_∞` and `∑ α_kY_k < ∞`, which forces `Y_∞ = 0`.
 
 The supremum-norm case, which the book's applications need, is `theorem_9_1_8` in `Tsitsiklis`.
-
-The asynchronous version (Remark 9.1.3) and contractions for the supremum norm (as in the
-asset pricing and Q-learning applications) are not covered.
 -/
 
 open Set Function Filter Topology MeasureTheory ProbabilityTheory
