@@ -1,0 +1,15 @@
+{
+  "library": "PolicyIterationNewton",
+  "modules": [
+    "PolicyIterationNewton/PolicyModel.lean",
+    "PolicyIterationNewton/Rates.lean",
+    "PolicyIterationNewton/FiniteActions.lean"
+  ],
+  "theorem_counts": {
+    "PolicyIterationNewton/PolicyModel.lean": 16,
+    "PolicyIterationNewton/Rates.lean": 12,
+    "PolicyIterationNewton/FiniteActions.lean": 9
+  },
+  "scope": "Policy iteration as Newton's method and its convergence rates, for finite state spaces and arbitrary (possibly infinite) policy sets with a greedy selector: the Bellman and policy operators as sup-norm contractions, the Newton identity, monotone improvement; the linear rate ||v* - v_{k+1}|| <= beta ||v* - v_k||, the Puterman-Brumelle bound (1 - beta)||v* - v_{greedy v}|| <= beta delta ||v* - v||, quadratic convergence under Lipschitz greedy transitions, superlinear convergence under continuity, finite termination when greedy policies near v* are optimal; for finite MDPs, the optimality gap, optimality of greedy policies within g/(2 beta + 1) of v*, and termination of policy iteration with an explicit iteration bound.",
+  "source": "Howard (1960); Puterman and Brumelle (1979); Santos and Rust (2004)."
+}
