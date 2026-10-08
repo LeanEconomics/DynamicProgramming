@@ -4,6 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Robert Kirkby
 -/
 import RelativeValueIteration.AsymptoticEndogenous
+import Mathlib.Analysis.InnerProductSpace.SingularValues
 
 /-!
 # When is endogenous value iteration strictly faster?
@@ -21,9 +22,11 @@ transition matrix within exogenous state `x` (`FyMat`) and `Ω` for the demeanin
   the `N`-operator norm of `ΩF_y(σ, x)` for every `x`, then `ρ(ΛP_σ) ≤ c`. Hence if
   `σ(F_x) > c`, endogenous iteration is strictly faster (`endoRadius_lt_subradius_of_vecNorm`,
   `endo_strictly_faster`, `endo_eval_strictly_faster`).
-* **Bray, Cor 2**: `c` may be the largest absolute row sum of `ΩF_y(σ, x)`
-  (`endoRadius_le_rowSum`, the `ℓ∞` norm) or the Hajnal (Dobrushin) coefficient of `F_y(σ, x)`
-  (`endoRadius_le_hajnal`).
+* **Bray, Cor 2**: `c` may be (a) the Frobenius norm of `ΩF_y(σ, x)` (`endoRadius_le_frobenius`),
+  (b) its largest singular value (`endoRadius_le_singularValue`; `norm_apply_le_singularValues_zero`
+  shows the largest singular value is the `ℓ²` operator norm), (c) its largest absolute row sum
+  (`endoRadius_le_rowSum`), (d) its largest absolute column sum (`endoRadius_le_colSum`), or
+  (e) the Hajnal (Dobrushin) coefficient of `F_y(σ, x)` (`endoRadius_le_hajnal`).
 * `endoRadius_lt_of_nonergodic_scrambling` (**Bray, Cor 3**): if `F_x` is not ergodic (it has a
   non-constant fixed vector or an eigenvalue `μ ≠ 1` with `|μ| = 1`) and every `F_y(σ, x)` is
   scrambling, endogenous iteration is strictly faster.
@@ -144,6 +147,89 @@ theorem sup_norm [Fintype Y] : IsVecNorm fun u : Y → ℂ => ‖u‖ :=
   ⟨norm_add_le, fun a u => norm_smul a u, fun _ h => norm_eq_zero.1 h⟩
 
 end IsVecNorm
+
+/-! ### `ℓ¹` and `ℓ²` norms and the largest singular value -/
+
+/-- The `ℓ¹` norm. -/
+theorem IsVecNorm.l1_norm {Y : Type*} [Fintype Y] : IsVecNorm fun u : Y → ℂ => ∑ y, ‖u y‖ :=
+  ⟨fun u v => (sum_le_sum fun y _ => norm_add_le (u y) (v y)).trans_eq sum_add_distrib,
+    fun a u => by simp only [Pi.smul_apply, smul_eq_mul, norm_mul, mul_sum],
+    fun u h => funext fun y => norm_eq_zero.1
+      ((sum_eq_zero_iff_of_nonneg fun _ _ => norm_nonneg _).1 h y (mem_univ y))⟩
+
+/-- The `ℓ²` (Euclidean) norm. -/
+theorem IsVecNorm.l2_norm {Y : Type*} [Fintype Y] :
+    IsVecNorm fun u : Y → ℂ => ‖(WithLp.toLp 2 u : EuclideanSpace ℂ Y)‖ :=
+  ⟨fun u v => by
+      dsimp only
+      rw [WithLp.toLp_add]
+      exact norm_add_le _ _,
+    fun a u => by
+      dsimp only
+      rw [WithLp.toLp_smul]
+      exact norm_smul a _,
+    fun u h => WithLp.toLp_injective 2 (by rw [norm_eq_zero.1 h, WithLp.toLp_zero])⟩
+
+/-- **The largest singular value is the `ℓ²` operator norm**: `‖Tv‖ ≤ σ₀(T)‖v‖`, from the
+spectral decomposition of `TᵀT`. -/
+theorem norm_apply_le_singularValues_zero {E : Type*} [NormedAddCommGroup E]
+    [InnerProductSpace ℝ E] [FiniteDimensional ℝ E] (T : E →ₗ[ℝ] E) (v : E) :
+    ‖T v‖ ≤ T.singularValues 0 * ‖v‖ := by
+  have hA := T.isSymmetric_adjoint_comp_self
+  have hσ0 := T.singularValues_nonneg 0
+  rcases Nat.eq_zero_or_pos (Module.finrank ℝ E) with h0 | hpos
+  · have : Subsingleton E := Module.finrank_zero_iff.1 h0
+    rw [Subsingleton.elim v 0]
+    simp
+  have hn : Module.finrank ℝ E = Module.finrank ℝ E := rfl
+  have hsq : T.singularValues 0 ^ 2 = hA.eigenvalues hn ⟨0, hpos⟩ :=
+    T.sq_singularValues_of_lt hn hpos
+  have h1 : ‖T v‖ ^ 2 = inner ℝ ((LinearMap.adjoint T ∘ₗ T) v) v := by
+    rw [LinearMap.comp_apply, LinearMap.adjoint_inner_left, real_inner_self_eq_norm_sq]
+  have h2 : inner ℝ ((LinearMap.adjoint T ∘ₗ T) v) v =
+      ∑ i, hA.eigenvalues hn i * (hA.eigenvectorBasis hn).repr v i ^ 2 := by
+    rw [← (hA.eigenvectorBasis hn).repr.inner_map_map, PiLp.inner_apply]
+    refine sum_congr rfl fun i _ => ?_
+    rw [hA.eigenvectorBasis_apply_self_apply hn v i]
+    simp only [RCLike.inner_apply, conj_trivial, RCLike.ofReal_real_eq_id, id_eq]
+    ring
+  have h3 : ‖v‖ ^ 2 = ∑ i, (hA.eigenvectorBasis hn).repr v i ^ 2 := by
+    rw [← (hA.eigenvectorBasis hn).repr.norm_map v, EuclideanSpace.norm_eq,
+      Real.sq_sqrt (sum_nonneg fun _ _ => sq_nonneg _)]
+    simp only [Real.norm_eq_abs, sq_abs]
+  have key : ‖T v‖ ^ 2 ≤ (T.singularValues 0 * ‖v‖) ^ 2 := by
+    rw [h1, h2, mul_pow, hsq, h3, mul_sum]
+    exact sum_le_sum fun i _ => mul_le_mul_of_nonneg_right
+      (hA.eigenvalues_antitone hn (Fin.le_def.2 (Nat.zero_le _))) (sq_nonneg _)
+  nlinarith [norm_nonneg (T v), mul_nonneg hσ0 (norm_nonneg v)]
+
+/-- `∑(Mu)² ≤ σ₀(M)²∑u²` for a real square matrix `M`. -/
+theorem sum_sq_mulVec_le_singularValues {Y : Type*} [Fintype Y] [DecidableEq Y]
+    (M : Matrix Y Y ℝ) (u : Y → ℝ) :
+    ∑ y, (M *ᵥ u) y ^ 2 ≤ (Matrix.toEuclideanLin M).singularValues 0 ^ 2 * ∑ y, u y ^ 2 := by
+  have h := norm_apply_le_singularValues_zero (Matrix.toEuclideanLin M) (WithLp.toLp 2 u)
+  have e1 : ‖Matrix.toEuclideanLin M (WithLp.toLp 2 u)‖ ^ 2 = ∑ y, (M *ᵥ u) y ^ 2 := by
+    rw [EuclideanSpace.norm_eq, Real.sq_sqrt (sum_nonneg fun _ _ => sq_nonneg _)]
+    simp [Real.norm_eq_abs, sq_abs]
+  have e2 : ‖(WithLp.toLp 2 u : EuclideanSpace ℝ Y)‖ ^ 2 = ∑ y, u y ^ 2 := by
+    rw [EuclideanSpace.norm_eq, Real.sq_sqrt (sum_nonneg fun _ _ => sq_nonneg _)]
+    simp [Real.norm_eq_abs, sq_abs]
+  rw [← e1, ← e2, ← mul_pow]
+  exact pow_le_pow_left₀ (norm_nonneg _) h 2
+
+/-- A real `ℓ²` bound on `M` extends to complex vectors, real and imaginary parts separately. -/
+theorem sum_sq_norm_cmulVec_le {Y : Type*} [Fintype Y] (M : Matrix Y Y ℝ) {c : ℝ}
+    (h : ∀ u : Y → ℝ, ∑ y, (M *ᵥ u) y ^ 2 ≤ c ^ 2 * ∑ y, u y ^ 2) (u : Y → ℂ) :
+    ∑ y, ‖(complexify M *ᵥ u) y‖ ^ 2 ≤ c ^ 2 * ∑ y, ‖u y‖ ^ 2 := by
+  have hre : ∀ y, ((complexify M *ᵥ u) y).re = (M *ᵥ fun t => (u t).re) y := fun y => by
+    simp [mulVec, dotProduct, complexify_apply, Complex.re_sum]
+  have him : ∀ y, ((complexify M *ᵥ u) y).im = (M *ᵥ fun t => (u t).im) y := fun y => by
+    simp [mulVec, dotProduct, complexify_apply, Complex.im_sum]
+  have hn : ∀ z : ℂ, ‖z‖ ^ 2 = z.re ^ 2 + z.im ^ 2 := fun z => by
+    rw [Complex.sq_norm, Complex.normSq_apply]
+    ring
+  simp only [hn, sum_add_distrib, hre, him, mul_add]
+  exact add_le_add (h _) (h _)
 
 namespace ExoMDP
 
@@ -330,6 +416,68 @@ theorem endoRadius_le_rowSum [Nonempty X] [Nonempty Y] (σ : X × Y → A) {c : 
     _ ≤ c * ‖u‖ := by
         rw [← sum_mul]
         exact mul_le_mul_of_nonneg_right (hc x y) (norm_nonneg u)
+
+/-- **Bray, Prop 5 under the `ℓ²` norm**: a bound `∑((ΩF_y(σ, x))u)² ≤ c²∑u²` on real vectors
+bounds `ρ(ΛP_σ)`. -/
+theorem endoRadius_le_l2 [Nonempty X] [Nonempty Y] (σ : X × Y → A) {c : ℝ} (hc0 : 0 ≤ c)
+    (hc : ∀ x (u : Y → ℝ),
+      ∑ y, ((omegaMat * E.FyMat σ x : Matrix Y Y ℝ) *ᵥ u) y ^ 2 ≤ c ^ 2 * ∑ y, u y ^ 2) :
+    endoRadius (E.toMDP.Pmat σ) ≤ c := by
+  refine E.endoRadius_le_of_vecNorm σ IsVecNorm.l2_norm hc0 fun x u => ?_
+  have h := sum_sq_norm_cmulVec_le _ (hc x) u
+  have hN : ∀ w : Y → ℂ, ‖(WithLp.toLp 2 w : EuclideanSpace ℂ Y)‖ = √(∑ y, ‖w y‖ ^ 2) :=
+    fun w => by
+      rw [EuclideanSpace.norm_eq]
+  simp only [hN]
+  rw [← Real.sqrt_sq hc0, ← Real.sqrt_mul (sq_nonneg c)]
+  exact Real.sqrt_le_sqrt h
+
+/-- **Bray, Cor 2(a)**: the Frobenius norm (the Euclidean norm of `vec(ΩF_y(σ, x))`) bounds
+`ρ(ΛP_σ)`. -/
+theorem endoRadius_le_frobenius [Nonempty X] [Nonempty Y] (σ : X × Y → A) {c : ℝ}
+    (hc : ∀ x, √(∑ y, ∑ y', (omegaMat * E.FyMat σ x : Matrix Y Y ℝ) y y' ^ 2) ≤ c) :
+    endoRadius (E.toMDP.Pmat σ) ≤ c := by
+  have hc0 : 0 ≤ c := (Real.sqrt_nonneg _).trans (hc (Classical.arbitrary X))
+  refine E.endoRadius_le_l2 σ hc0 fun x u => ?_
+  have hF : ∑ y, ∑ y', (omegaMat * E.FyMat σ x : Matrix Y Y ℝ) y y' ^ 2 ≤ c ^ 2 := by
+    have := pow_le_pow_left₀ (Real.sqrt_nonneg _) (hc x) 2
+    rwa [Real.sq_sqrt (by positivity)] at this
+  calc ∑ y, ((omegaMat * E.FyMat σ x : Matrix Y Y ℝ) *ᵥ u) y ^ 2
+      ≤ ∑ y, (∑ y', (omegaMat * E.FyMat σ x : Matrix Y Y ℝ) y y' ^ 2) * ∑ y', u y' ^ 2 :=
+        sum_le_sum fun y _ => sum_mul_sq_le_sq_mul_sq _ _ _
+    _ = (∑ y, ∑ y', (omegaMat * E.FyMat σ x : Matrix Y Y ℝ) y y' ^ 2) * ∑ y', u y' ^ 2 :=
+        (sum_mul _ _ _).symm
+    _ ≤ c ^ 2 * ∑ y, u y ^ 2 := mul_le_mul_of_nonneg_right hF (sum_nonneg fun _ _ => sq_nonneg _)
+
+/-- **Bray, Cor 2(b)**: the largest singular value of `ΩF_y(σ, x)` bounds `ρ(ΛP_σ)`. -/
+theorem endoRadius_le_singularValue [Nonempty X] [Nonempty Y] (σ : X × Y → A) {c : ℝ}
+    (hc : ∀ x, (Matrix.toEuclideanLin (omegaMat * E.FyMat σ x : Matrix Y Y ℝ)).singularValues 0 ≤
+      c) :
+    endoRadius (E.toMDP.Pmat σ) ≤ c := by
+  have hc0 : 0 ≤ c := (LinearMap.singularValues_nonneg _ 0).trans (hc (Classical.arbitrary X))
+  refine E.endoRadius_le_l2 σ hc0 fun x u => (sum_sq_mulVec_le_singularValues _ u).trans ?_
+  exact mul_le_mul_of_nonneg_right (pow_le_pow_left₀ (LinearMap.singularValues_nonneg _ 0) (hc x) 2)
+    (sum_nonneg fun _ _ => sq_nonneg _)
+
+/-- **Bray, Cor 2(d)**: the largest absolute column sum of `ΩF_y(σ, x)` (the `ℓ¹` operator norm)
+bounds `ρ(ΛP_σ)`. -/
+theorem endoRadius_le_colSum [Nonempty X] [Nonempty Y] (σ : X × Y → A) {c : ℝ}
+    (hc : ∀ x y', ∑ y, |(omegaMat * E.FyMat σ x : Matrix Y Y ℝ) y y'| ≤ c) :
+    endoRadius (E.toMDP.Pmat σ) ≤ c := by
+  have hc0 : 0 ≤ c := (sum_nonneg fun _ _ => abs_nonneg _).trans
+    (hc (Classical.arbitrary X) (Classical.arbitrary Y))
+  refine E.endoRadius_le_of_vecNorm σ IsVecNorm.l1_norm hc0 fun x u => ?_
+  simp only [mulVec, dotProduct, complexify_apply]
+  calc ∑ y, ‖∑ y', ((omegaMat * E.FyMat σ x : Matrix Y Y ℝ) y y' : ℂ) * u y'‖
+      ≤ ∑ y, ∑ y', |(omegaMat * E.FyMat σ x : Matrix Y Y ℝ) y y'| * ‖u y'‖ :=
+        sum_le_sum fun y _ => (norm_sum_le _ _).trans_eq (sum_congr rfl fun y' _ => by
+          rw [norm_mul, Complex.norm_real, Real.norm_eq_abs])
+    _ = ∑ y', (∑ y, |(omegaMat * E.FyMat σ x : Matrix Y Y ℝ) y y'|) * ‖u y'‖ := by
+        rw [sum_comm]
+        simp only [sum_mul]
+    _ ≤ ∑ y', c * ‖u y'‖ :=
+        sum_le_sum fun y' _ => mul_le_mul_of_nonneg_right (hc x y') (norm_nonneg _)
+    _ = c * ∑ y', ‖u y'‖ := (mul_sum _ _ _).symm
 
 omit [DecidableEq X] [DecidableEq Y] in
 /-- One step of `P_σ` contracts the within-`x` span by the Hajnal coefficient of `F_y(σ, ·)`. -/
