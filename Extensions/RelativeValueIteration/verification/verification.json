@@ -1,6 +1,6 @@
 {
-  "checked_at_utc": "2026-10-08T20:51:46.778496+00:00",
-  "theorems": 184,
+  "checked_at_utc": "2026-10-08T20:56:38.775597+00:00",
+  "theorems": 191,
   "module_theorems": {
     "RelativeValueIteration/Span.lean": 9,
     "RelativeValueIteration/MDP.lean": 14,
@@ -13,9 +13,9 @@
     "RelativeValueIteration/Subradius.lean": 15,
     "RelativeValueIteration/AsymptoticRates.lean": 12,
     "RelativeValueIteration/AsymptoticEndogenous.lean": 16,
-    "RelativeValueIteration/EndogenousSpeedup.lean": 41
+    "RelativeValueIteration/EndogenousSpeedup.lean": 48
   },
-  "audited_declarations": 239,
+  "audited_declarations": 246,
   "declarations": [
     {
       "name": "DPExtensions.RelativeValueIteration.sp",
@@ -1079,6 +1079,41 @@
     },
     {
       "name": "DPExtensions.RelativeValueIteration.ExoMDP.comega_mulVec",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.omega_mulVec",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.omega_mulVec_const",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.omega_mulVec_add_const",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.norm_omega_mulVec_le",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.sp_omega_mulVec",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.omegaF_pow_mulVec_omega",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.specRad_omega_eq_subradius",
       "kind": "theorem",
       "module": "RelativeValueIteration/EndogenousSpeedup.lean"
     },
@@ -2285,6 +2320,41 @@
       "Classical.choice",
       "Quot.sound"
     ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.omega_mulVec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.omega_mulVec_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.omega_mulVec_add_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.norm_omega_mulVec_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.sp_omega_mulVec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.omegaF_pow_mulVec_omega": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.specRad_omega_eq_subradius": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
     "DPExtensions.RelativeValueIteration.ExoMDP.clamMat_mulVec": [
       "propext",
       "Classical.choice",
@@ -2428,17 +2498,17 @@
     "RelativeValueIteration/Subradius.lean": "12511bb06344dc8b546372f93090c0cf7f7009b308e626c0a344f6b093882ed8",
     "RelativeValueIteration/AsymptoticRates.lean": "8d1f96a29d3ecf9031cf956d0c03a800f3cba1c57307a7f750d25caa1b2a45c3",
     "RelativeValueIteration/AsymptoticEndogenous.lean": "3b2ab761ae94cce2dd4037d75fc4148fb91a11dba9c5a5a123132505f024bcea",
-    "RelativeValueIteration/EndogenousSpeedup.lean": "f8af7fd153b88f88b6c17bc0a89e6539aa8f7543f31e7517f74a1f6b8a579e3a",
+    "RelativeValueIteration/EndogenousSpeedup.lean": "9138d0f56a3f9d237b59259013b2fea147e40b2819a39e882e3909fb2a74522a",
     "RelativeValueIteration.lean": "e0d09141f6bef8bd47190128d0fc339cd3f07dd84eb3cd0a13abe75ffc048ded",
     "lean-toolchain": "8733782dc070a99b312039cda424f601b80f3be6f6f512627da5ba25adc27632",
     "lakefile.toml": "5d07e4f1da1aeb0d356957e5a10d337c00aab208ded65204fa99a338473977b6",
     "lake-manifest.json": "b4496a1d723d3dcaad1d8ae35cd1892d23d27c65253cbdea38636107c5b1d15e",
-    "proof-manifest.json": "e64ae2aa9562fc7eef970cf0d5714fbbc76057011fba46c97a1d37bcdeaca176",
+    "proof-manifest.json": "815a25a7539076f037e9760f15097e694d3f620430e791c3935777473004176d",
     "scripts/verify.py": "a70b1fa704dd590f937f8b37682afa88a9d85a9150065acb935c7d2c9589da3b",
     "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
   },
-  "fresh_audit_sha256": "c3c4665cdd744edb3efd95feb0eed547d3cbcf9fc4346ad0de1a4307be7e0039",
+  "fresh_audit_sha256": "a96f54d0eb6c964ba879a20f544ef5e70895ff879d508db457ed9db71a00cb62",
   "lean_toolchain": "leanprover/lean4:v4.34.0",
-  "scope": "Relative and endogenous value function iteration for finite MDPs: the span seminorm and the Dobrushin bound; constant-shift invariance of the Bellman operator and of greedy policies (White), relative value iteration as value iteration up to a constant, the span contraction sp(Tv - Tw) <= beta alpha sp(v - w); strong convergence of relative values at rate beta alpha, the MacQueen-Porteus policy error bound, Bray's stopping rule and its finite termination; White's average-reward theorem (beta = 1, alpha < 1): convergence to a solution of the average-reward optimality equation, optimality and uniqueness of the gain; endogenous value iteration for exogenous/endogenous state splits (Bray): invariance to exogenous shifts, the endogenizing operator, the within-x span contraction at rate beta alpha_y with alpha_y bounded by the full Dobrushin bound, recovery of v* and optimal policies from the endogenous value, the policy error bound, and an example where relative VFI gives no speed-up but endogenous VFI is exact; asymptotic eigenvalue rates: spectral radius of real matrices and Gelfand's formula, the subradius rho(Delta Q) as the second-largest eigenvalue modulus (no Jordan block at 1) bounded by the Dobrushin coefficient, freezing of the greedy policy at a unique optimal decision rule, the Morton-Wecker rate beta lambda(P*) for relative values and Morton's rate for policy evaluation, levels no faster than beta, and the endogenous rates beta rho(Lambda P) with rho(Lambda F) <= lambda(F) (Bray); when endogenous VFI is strictly faster (Bray): every eigenvalue of Delta_X F_x is one of Delta P so sigma(F_x) <= sigma(P), rho(Lambda P) bounded by any vector-norm operator bound on Omega F_y(x), the Frobenius, largest-singular-value, row-sum, column-sum and Hajnal instances (with the largest singular value as the l2 operator norm), non-ergodic F_x with scrambling F_y, and x-independent F_y with sigma(F_x) > sigma(F_y).",
+  "scope": "Relative and endogenous value function iteration for finite MDPs: the span seminorm and the Dobrushin bound; constant-shift invariance of the Bellman operator and of greedy policies (White), relative value iteration as value iteration up to a constant, the span contraction sp(Tv - Tw) <= beta alpha sp(v - w); strong convergence of relative values at rate beta alpha, the MacQueen-Porteus policy error bound, Bray's stopping rule and its finite termination; White's average-reward theorem (beta = 1, alpha < 1): convergence to a solution of the average-reward optimality equation, optimality and uniqueness of the gain; endogenous value iteration for exogenous/endogenous state splits (Bray): invariance to exogenous shifts, the endogenizing operator, the within-x span contraction at rate beta alpha_y with alpha_y bounded by the full Dobrushin bound, recovery of v* and optimal policies from the endogenous value, the policy error bound, and an example where relative VFI gives no speed-up but endogenous VFI is exact; asymptotic eigenvalue rates: spectral radius of real matrices and Gelfand's formula, the subradius rho(Delta Q) as the second-largest eigenvalue modulus (no Jordan block at 1) bounded by the Dobrushin coefficient, freezing of the greedy policy at a unique optimal decision rule, the Morton-Wecker rate beta lambda(P*) for relative values and Morton's rate for policy evaluation, levels no faster than beta, and the endogenous rates beta rho(Lambda P) with rho(Lambda F) <= lambda(F) (Bray); when endogenous VFI is strictly faster (Bray): every eigenvalue of Delta_X F_x is one of Delta P so sigma(F_x) <= sigma(P), rho(Lambda P) bounded by any vector-norm operator bound on Omega F_y(x), the Frobenius, largest-singular-value, row-sum, column-sum and Hajnal instances (with the largest singular value as the l2 operator norm), non-ergodic F_x with scrambling F_y, and x-independent F_y with sigma(F_x) > sigma(F_y); and rho(Omega F) = sigma(F) for every stochastic F (Bray, Lemma 7).",
   "source": "White (1963); Morton (1971); Morton and Wecker (1977); MacQueen (1966); Porteus (1971); Seneta (1981); Puterman (2005); Bray (2019, Quantitative Economics); Bray (2019, Management Science); Hajnal (1958); Horn and Johnson (2013)."
 }

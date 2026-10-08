@@ -9,7 +9,7 @@ import Mathlib.Analysis.InnerProductSpace.SingularValues
 /-!
 # When is endogenous value iteration strictly faster?
 
-Bray (2019b, *Management Science*), Proposition 5, Lemma 4 and Corollaries 2–4.
+Bray (2019b, *Management Science*), Proposition 5, Lemmas 4 and 7 and Corollaries 2–4.
 
 Write `F_x` for the exogenous transition matrix (`FxMat`), `F_y(σ, x)` for the endogenous
 transition matrix within exogenous state `x` (`FyMat`) and `Ω` for the demeaning matrix on `Y`
@@ -30,6 +30,7 @@ transition matrix within exogenous state `x` (`FyMat`) and `Ω` for the demeanin
 * `endoRadius_lt_of_nonergodic_scrambling` (**Bray, Cor 3**): if `F_x` is not ergodic (it has a
   non-constant fixed vector or an eigenvalue `μ ≠ 1` with `|μ| = 1`) and every `F_y(σ, x)` is
   scrambling, endogenous iteration is strictly faster.
+* `specRad_omega_eq_subradius` (**Bray, Lemma 7**): `ρ(ΩF) = σ(F)` for every stochastic `F`.
 * `endoRadius_le_subradius_Fy` (**Bray, Cor 4**): if `F_y(σ, x) = G` for every `x`, then
   `ρ(ΛP_σ) ≤ σ(G)`, so endogenous iteration is strictly faster when `σ(F_x) > σ(G)`
   (`endoRadius_lt_of_Fy_const`).
@@ -244,6 +245,117 @@ theorem comega_mulVec (u : Y → ℂ) :
   funext y
   simp [complexify, omegaMat, mulVec, dotProduct, sub_mul, sum_sub_distrib, ite_mul,
     apply_ite Complex.ofReal, ← mul_sum, div_eq_inv_mul]
+
+theorem omega_mulVec (v : Y → ℝ) :
+    (omegaMat : Matrix Y Y ℝ) *ᵥ v = fun y => v y - (∑ y', v y') / Fintype.card Y := by
+  funext y
+  simp [omegaMat, mulVec, dotProduct, sub_mul, sum_sub_distrib, ite_mul, ← mul_sum,
+    div_eq_inv_mul]
+
+theorem omega_mulVec_const [Nonempty Y] (c : ℝ) :
+    (omegaMat : Matrix Y Y ℝ) *ᵥ (fun _ => c) = 0 := by
+  have hY : (Fintype.card Y : ℝ) ≠ 0 := Nat.cast_ne_zero.2 Fintype.card_ne_zero
+  rw [omega_mulVec]
+  funext y
+  simp only [sum_const, card_univ, nsmul_eq_mul, Pi.zero_apply]
+  rw [mul_div_cancel_left₀ c hY, sub_self]
+
+theorem omega_mulVec_add_const [Nonempty Y] (v : Y → ℝ) (c : ℝ) :
+    (omegaMat : Matrix Y Y ℝ) *ᵥ (v + fun _ => c) = omegaMat *ᵥ v := by
+  rw [mulVec_add, omega_mulVec_const, add_zero]
+
+/-- Demeaning moves no entry by more than the span. -/
+theorem norm_omega_mulVec_le [Nonempty Y] (v : Y → ℝ) :
+    ‖(omegaMat : Matrix Y Y ℝ) *ᵥ v‖ ≤ sp v :=
+  (pi_norm_le_iff_of_nonneg (sp_nonneg v)).2 fun y => by
+    have hY : (0 : ℝ) < Fintype.card Y := Nat.cast_pos.2 Fintype.card_pos
+    have e : v y - (∑ y', v y') / Fintype.card Y = (∑ y', (v y - v y')) / Fintype.card Y := by
+      simp only [sum_sub_distrib, sum_const, card_univ, nsmul_eq_mul]
+      field_simp
+    rw [omega_mulVec, Real.norm_eq_abs]
+    dsimp only
+    rw [e, abs_div, abs_of_pos hY, div_le_iff₀ hY]
+    refine (abs_sum_le_sum_abs _ _).trans ?_
+    calc ∑ y', |v y - v y'| ≤ ∑ _y' : Y, sp v := sum_le_sum fun y' _ => abs_sub_le_sp v y y'
+      _ = sp v * Fintype.card Y := by rw [sum_const, card_univ, nsmul_eq_mul, mul_comm]
+
+/-- Demeaning does not change the span. -/
+theorem sp_omega_mulVec [Nonempty Y] (v : Y → ℝ) : sp ((omegaMat : Matrix Y Y ℝ) *ᵥ v) = sp v := by
+  rw [omega_mulVec]
+  have := sp_add_const v (-((∑ y', v y') / Fintype.card Y))
+  simpa [sub_eq_add_neg] using this
+
+/-- `(ΩF)ᵏΩ = ΩFᵏ`: `Ω` kills constants and `F` preserves them. -/
+theorem omegaF_pow_mulVec_omega [Nonempty Y] {F : Matrix Y Y ℝ} (hF : IsStochastic F) (k : ℕ)
+    (v : Y → ℝ) : (omegaMat * F) ^ k *ᵥ (omegaMat *ᵥ v) = omegaMat *ᵥ (F ^ k *ᵥ v) := by
+  have hkill : ∀ (j : ℕ) (u : Y → ℝ),
+      (omegaMat : Matrix Y Y ℝ) *ᵥ (F ^ j *ᵥ (omegaMat *ᵥ u)) = omegaMat *ᵥ (F ^ j *ᵥ u) := by
+    intro j u
+    have e : (omegaMat : Matrix Y Y ℝ) *ᵥ u = u + fun _ => -((∑ y', u y') / Fintype.card Y) := by
+      rw [omega_mulVec]
+      funext y
+      simp [sub_eq_add_neg]
+    rw [e, mulVec_add, mulVec_const (hF.pow j), omega_mulVec_add_const]
+  induction k generalizing v with
+  | zero => simp
+  | succ k ih =>
+    rw [pow_succ, ← mulVec_mulVec, ← mulVec_mulVec, ih, mulVec_mulVec _ (F ^ k) F, ← pow_succ,
+      hkill]
+
+/-- **Bray, Lemma 7**: `σ(F) = ρ(ΩF)` for every stochastic `F`: demeaning and differencing
+against a reference state give the same spectral radius. -/
+theorem specRad_omega_eq_subradius [Nonempty Y] {F : Matrix Y Y ℝ} (hF : IsStochastic F)
+    (y₀ : Y) : specRad (omegaMat * F) = subradius F y₀ := by
+  have hpow : ∀ (k : ℕ) (w : Y → ℝ),
+      (omegaMat * F) ^ (k + 1) *ᵥ w = omegaMat *ᵥ (F ^ (k + 1) *ᵥ w) := fun k w => by
+    rw [pow_succ, ← mulVec_mulVec, ← mulVec_mulVec, omegaF_pow_mulVec_omega hF,
+      mulVec_mulVec w (F ^ k) F, ← pow_succ]
+  have hpowΔ : ∀ (k : ℕ) (w : Y → ℝ),
+      (deltaMat y₀ * F) ^ (k + 1) *ᵥ w = deltaMat y₀ *ᵥ (F ^ (k + 1) *ᵥ w) := fun k w => by
+    rw [pow_succ, ← mulVec_mulVec, ← mulVec_mulVec, deltaQ_pow_mulVec hF,
+      mulVec_mulVec w (F ^ k) F, ← pow_succ]
+  refine le_antisymm (le_of_forall_gt_imp_ge_of_dense fun γ hγ => ?_)
+    (le_of_forall_gt_imp_ge_of_dense fun γ hγ => ?_)
+  · obtain ⟨C, hC0, hC⟩ := sp_pow_mulVec_le hF y₀ hγ
+    have hγ0 : 0 ≤ γ := (specRad_nonneg _).trans hγ.le
+    refine specRad_le_of_norm_pow_le _ (K := 1 + 2 * C) (by positivity) hγ0 fun k => ?_
+    rw [Matrix.linfty_opNorm_eq_opNorm]
+    refine ContinuousLinearMap.opNorm_le_bound _ (by positivity) fun w => ?_
+    change ‖(omegaMat * F) ^ k *ᵥ w‖ ≤ (1 + 2 * C) * γ ^ k * ‖w‖
+    rcases k with _ | k
+    · simp only [pow_zero, one_mulVec, mul_one]
+      nlinarith [norm_nonneg w]
+    rw [hpow]
+    calc ‖(omegaMat : Matrix Y Y ℝ) *ᵥ (F ^ (k + 1) *ᵥ w)‖ ≤ sp (F ^ (k + 1) *ᵥ w) :=
+          norm_omega_mulVec_le _
+      _ ≤ C * γ ^ (k + 1) * sp w := hC _ _
+      _ ≤ C * γ ^ (k + 1) * (2 * ‖w‖) :=
+          mul_le_mul_of_nonneg_left (sp_le_two_norm w) (by positivity)
+      _ ≤ (1 + 2 * C) * γ ^ (k + 1) * ‖w‖ := by
+          nlinarith [mul_nonneg (pow_nonneg hγ0 (k + 1)) (norm_nonneg w)]
+  · obtain ⟨C, hC0, hC⟩ := exists_norm_pow_le (omegaMat * F) hγ
+    have hγ0 : 0 ≤ γ := (specRad_nonneg _).trans hγ.le
+    unfold subradius
+    refine specRad_le_of_norm_pow_le _ (K := 1 + 2 * C) (by positivity) hγ0 fun k => ?_
+    rw [Matrix.linfty_opNorm_eq_opNorm]
+    refine ContinuousLinearMap.opNorm_le_bound _ (by positivity) fun w => ?_
+    change ‖(deltaMat y₀ * F) ^ k *ᵥ w‖ ≤ (1 + 2 * C) * γ ^ k * ‖w‖
+    rcases k with _ | k
+    · simp only [pow_zero, one_mulVec, mul_one]
+      nlinarith [norm_nonneg w]
+    rw [hpowΔ]
+    calc ‖deltaMat y₀ *ᵥ (F ^ (k + 1) *ᵥ w)‖ ≤ sp (F ^ (k + 1) *ᵥ w) :=
+          norm_deltaMat_mulVec_le _ _
+      _ = sp ((omegaMat : Matrix Y Y ℝ) *ᵥ (F ^ (k + 1) *ᵥ w)) := (sp_omega_mulVec _).symm
+      _ ≤ 2 * ‖(omegaMat : Matrix Y Y ℝ) *ᵥ (F ^ (k + 1) *ᵥ w)‖ := sp_le_two_norm _
+      _ = 2 * ‖(omegaMat * F) ^ (k + 1) *ᵥ w‖ := by rw [hpow]
+      _ ≤ 2 * (‖(omegaMat * F) ^ (k + 1)‖ * ‖w‖) :=
+          mul_le_mul_of_nonneg_left (Matrix.linfty_opNorm_mulVec _ _) zero_le_two
+      _ ≤ 2 * (C * γ ^ (k + 1) * ‖w‖) :=
+          mul_le_mul_of_nonneg_left (mul_le_mul_of_nonneg_right (hC _) (norm_nonneg w))
+            zero_le_two
+      _ ≤ (1 + 2 * C) * γ ^ (k + 1) * ‖w‖ := by
+          nlinarith [mul_nonneg (pow_nonneg hγ0 (k + 1)) (norm_nonneg w)]
 
 theorem clamMat_mulVec (w : X × Y → ℂ) :
     complexify (lamMat : Matrix (X × Y) (X × Y) ℝ) *ᵥ w =

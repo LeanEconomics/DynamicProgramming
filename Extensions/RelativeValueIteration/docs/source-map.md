@@ -66,6 +66,8 @@ see [departures from the sources](corrections.md).
 | Horn and Johnson (2013), §5.1 | Vector norms on `ℂ^Y`: sup, `ℓ¹` and `ℓ²` | `IsVecNorm`, `IsVecNorm.zero`, `IsVecNorm.nonneg`, `IsVecNorm.pos`, `IsVecNorm.sum_le`, `IsVecNorm.smul_real`, `IsVecNorm.sup_norm`, `IsVecNorm.l1_norm`, `IsVecNorm.l2_norm` |
 | Horn and Johnson (2013), §5.6 | The largest singular value is the `ℓ²` operator norm; real `ℓ²` bounds extend to complex vectors | `norm_apply_le_singularValues_zero`, `sum_sq_mulVec_le_singularValues`, `sum_sq_norm_cmulVec_le` |
 | Bray (2019b), §3 | The exogenous and endogenous transition matrices `F_x`, `F_y(σ, x)`, the demeaning matrix `Ω`, and `P_σ` in terms of them | `ExoMDP.omegaMat`, `ExoMDP.comega_mulVec`, `ExoMDP.clamMat_mulVec`, `ExoMDP.FxMat`, `ExoMDP.FxMat_isStochastic`, `ExoMDP.FyMat`, `ExoMDP.FyMat_isStochastic`, `ExoMDP.Pmat_apply`, `ExoMDP.cPmat_mulVec_lift`, `ExoMDP.clamP_mulVec` |
+| Bray (2019b), Lemma 6 | `σ(F) = ρ(Δ_i F)` | The definition `subradius`, characterized by `spectralRadius_deltaQ` |
+| Bray (2019b), Lemma 7 | `σ(F) = ρ(ΩF)` for every stochastic `F` | `ExoMDP.omega_mulVec`, `ExoMDP.omega_mulVec_const`, `ExoMDP.omega_mulVec_add_const`, `ExoMDP.norm_omega_mulVec_le`, `ExoMDP.sp_omega_mulVec`, `ExoMDP.omegaF_pow_mulVec_omega`, `ExoMDP.specRad_omega_eq_subradius` |
 | Bray (2019b), Lemma 4 | Every eigenvalue of `Δ_X F_x` is an eigenvalue of `ΔF(p)`, so `σ(F_x) ≤ σ(F(p))` | `ExoMDP.spectrum_exo_subset`, `ExoMDP.subradius_FxMat_le` |
 | Bray (2019b), Prop 5 | `ρ(ΛF(p)) ≤ max_x ‖ΩF_y(p, x)‖`; endogenous iteration is strictly faster when `σ(F_x)` exceeds this bound | `ExoMDP.endoRadius_le_of_vecNorm`, `ExoMDP.endoRadius_lt_subradius_of_vecNorm`, `ExoMDP.endo_strictly_faster`, `ExoMDP.endo_eval_strictly_faster` |
 | Bray (2019b), Cor 2(a), (b) | The bound under the Frobenius norm and the largest singular value | `ExoMDP.endoRadius_le_l2`, `ExoMDP.endoRadius_le_frobenius`, `ExoMDP.endoRadius_le_singularValue` |
@@ -79,7 +81,6 @@ see [departures from the sources](corrections.md).
 
 | Source | Content | Reason |
 | --- | --- | --- |
-| Bray (2019b), Lemma 7 | `σ(F) = ρ(ΩF)` | Not needed: Cor 4 is proved directly from the subradius. |
 | Bray (2019a), Props 6–9 | Bias and variance of simulation-based policy evaluation | Out of scope. |
 | Bray (2019a), §4; Bray (2019b) | Relative and endogenous policy iteration; simulation-based evaluation | Out of scope. |
 | — | The vanishing-discount limit `(1 − β)v*_β → g` | Not needed for White's theorem. |
