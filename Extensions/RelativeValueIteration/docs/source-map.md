@@ -44,6 +44,16 @@ see [departures from the sources](corrections.md).
 | Bray (2019b), Prop 3 | Endogenous value iteration yields `ε`-optimal policies | `ExoMDP.endo_policy_error` |
 | Bray (2019b), Cor 3 | A non-ergodic exogenous variable voids relative value iteration's speed-up but not endogenous value iteration's | `swapModel`, `swap_T`, `swap_dobrushin_ge`, `sp_bool_unit`, `swap_sp_iterate`, `swap_sp_vstar`, `swap_endo_exact`, `relative_slow_endogenous_exact` |
 
+## Relative and endogenous policy iteration
+
+| Source | Claim | Lean |
+| --- | --- | --- |
+| Howard (1960); Puterman (2005), §6.4 | Policy improvement; policy iteration terminates at an optimal policy | `MDP.pi_improve`, `MDP.eq_vstar_of_T_eq`, `MDP.vσ_eq_vstar_of_stall`, `MDP.pi_mono`, `MDP.pi_terminates` |
+| Bray (2019a), §4.1 | Relative policy iteration produces the same policies as policy iteration | `MDP.isGreedy_rel_iff`, `MDP.relPI_terminates` |
+| Bray (2019a), Prop 4 | Relative policy iteration returns an `ε`-optimal policy after finitely many iterations | `MDP.pi_residual_le`, `MDP.relPI_stopping`, `MDP.relPI_bray` |
+| — | A policy greedy for `w` is within `β/(1 − β)·sp(Λ(Tw − w))` of optimal | `ExoMDP.exoMDP`, `ExoMDP.exists_exo_solution`, `ExoMDP.policy_error_endo` |
+| Bray (2019b), §5 and Prop 3 | Endogenous policy iteration produces the same policies as policy iteration and returns an `ε`-optimal policy after finitely many iterations | `ExoMDP.endoPI_terminates`, `ExoMDP.endo_T_endo_sub`, `ExoMDP.endoPI_stopping`, `ExoMDP.endoPI_bray` |
+
 ## Asymptotic eigenvalue rates
 
 | Source | Claim | Lean |
@@ -82,5 +92,5 @@ see [departures from the sources](corrections.md).
 | Source | Content | Reason |
 | --- | --- | --- |
 | Bray (2019a), Props 6–9 | Bias and variance of simulation-based policy evaluation | Out of scope. |
-| Bray (2019a), §4; Bray (2019b) | Relative and endogenous policy iteration; simulation-based evaluation | Out of scope. |
+| Bray (2019a), §4.3–4.4 | Policy evaluation by forward simulation and by solving linear systems | Out of scope; iterative evaluation is covered by `sp_policy_eval_le` and `endo_policy_eval_le`. |
 | — | The vanishing-discount limit `(1 − β)v*_β → g` | Not needed for White's theorem. |

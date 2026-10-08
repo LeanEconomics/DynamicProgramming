@@ -11,7 +11,7 @@ rate `β` — slowly. Since policies depend only on value *differences*, iterati
 enough, and differences converge at rate `β` times the rate at which the state forgets its past.
 This is relative value iteration (White, 1963; Morton and Wecker, 1977; Bray, 2019a). When some
 state variables are exogenous, it is enough to iterate on differences *within* each exogenous
-state: endogenous value iteration (Bray, 2019b). The library contains **191 theorems**.
+state: endogenous value iteration (Bray, 2019b). The library contains **207 theorems**.
 
 * **Relative value iteration**: `T(v + c) = Tv + βc` and greedy policies ignore constants
   (`isGreedy_add_const_iff`); relative value iteration is value iteration up to a constant
@@ -57,6 +57,14 @@ state: endogenous value iteration (Bray, 2019b). The library contains **191 theo
   not depend on `x`, whenever `σ(F_x) > σ(F_y)` (`endoRadius_le_subradius_Fy`,
   `endoRadius_lt_of_Fy_const`). Demeaning and differencing give the same rate:
   `ρ(ΩF) = σ(F)` for every stochastic `F` (`specRad_omega_eq_subradius`; Bray, Lemma 7).
+* **Relative and endogenous policy iteration** (Bray, 2019a, Prop 4; 2019b, Prop 3): greedy
+  policies for `Δv_σ`, `Λv_σ` and `v_σ` coincide, so all three algorithms produce the same
+  policies; policy iteration improves monotonically and terminates (`pi_improve`, `pi_mono`,
+  `pi_terminates`, `relPI_terminates`, `endoPI_terminates`). Bray's stopping rules are met after
+  finitely many iterations and return `ε`-optimal policies (`relPI_stopping`, `relPI_bray`,
+  `endoPI_stopping`, `endoPI_bray`). Along the way: a policy greedy for `w` is within
+  `β/(1 − β)·sp(Λ(Tw − w))` of optimal, so only the endogenous part of the Bellman residual
+  matters (`policy_error_endo`).
 * **An example** (`relative_slow_endogenous_exact`): with a seasonal exogenous cycle, relative value
   iteration converges no faster than `βⁿ`, while endogenous value iteration is exact at once.
 
@@ -77,6 +85,7 @@ policy has been found.
 | [AverageReward](RelativeValueIteration/AverageReward.lean) | 9 | White's theorem, optimal gain, uniqueness |
 | [Endogenous](RelativeValueIteration/Endogenous.lean) | 24 | Endogenous value iteration |
 | [Example](RelativeValueIteration/Example.lean) | 7 | Relative VFI slow, endogenous VFI exact |
+| [PolicyIteration](RelativeValueIteration/PolicyIteration.lean) | 16 | Relative and endogenous policy iteration: termination and Bray's stopping rules |
 | [SpectralRadius](RelativeValueIteration/SpectralRadius.lean) | 12 | Spectral radius of a real matrix; Gelfand's formula and its consequences |
 | [Subradius](RelativeValueIteration/Subradius.lean) | 15 | The subradius: eigenvalue characterization, span bound, Dobrushin bound |
 | [AsymptoticRates](RelativeValueIteration/AsymptoticRates.lean) | 12 | Policy freezing; Morton–Wecker asymptotic rate of relative VFI; levels no faster than `β` |

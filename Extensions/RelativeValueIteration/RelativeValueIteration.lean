@@ -10,6 +10,7 @@ import RelativeValueIteration.RelativeVI
 import RelativeValueIteration.AverageReward
 import RelativeValueIteration.Endogenous
 import RelativeValueIteration.Example
+import RelativeValueIteration.PolicyIteration
 import RelativeValueIteration.SpectralRadius
 import RelativeValueIteration.Subradius
 import RelativeValueIteration.AsymptoticRates

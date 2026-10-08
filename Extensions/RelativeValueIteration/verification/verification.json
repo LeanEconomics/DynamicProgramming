@@ -1,6 +1,6 @@
 {
-  "checked_at_utc": "2026-10-08T20:56:38.775597+00:00",
-  "theorems": 191,
+  "checked_at_utc": "2026-10-08T21:02:01.758101+00:00",
+  "theorems": 207,
   "module_theorems": {
     "RelativeValueIteration/Span.lean": 9,
     "RelativeValueIteration/MDP.lean": 14,
@@ -9,13 +9,14 @@
     "RelativeValueIteration/AverageReward.lean": 9,
     "RelativeValueIteration/Endogenous.lean": 24,
     "RelativeValueIteration/Example.lean": 7,
+    "RelativeValueIteration/PolicyIteration.lean": 16,
     "RelativeValueIteration/SpectralRadius.lean": 12,
     "RelativeValueIteration/Subradius.lean": 15,
     "RelativeValueIteration/AsymptoticRates.lean": 12,
     "RelativeValueIteration/AsymptoticEndogenous.lean": 16,
     "RelativeValueIteration/EndogenousSpeedup.lean": 48
   },
-  "audited_declarations": 246,
+  "audited_declarations": 263,
   "declarations": [
     {
       "name": "DPExtensions.RelativeValueIteration.sp",
@@ -666,6 +667,91 @@
       "name": "DPExtensions.RelativeValueIteration.relative_slow_endogenous_exact",
       "kind": "theorem",
       "module": "RelativeValueIteration/Example.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.pi_improve",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/PolicyIteration.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.eq_vstar_of_T_eq",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/PolicyIteration.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.v\u03c3_eq_vstar_of_stall",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/PolicyIteration.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.pi_mono",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/PolicyIteration.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.pi_terminates",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/PolicyIteration.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.isGreedy_rel_iff",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/PolicyIteration.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.relPI_terminates",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/PolicyIteration.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.pi_residual_le",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/PolicyIteration.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.relPI_stopping",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/PolicyIteration.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.relPI_bray",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/PolicyIteration.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.exoMDP",
+      "kind": "abbrev",
+      "module": "RelativeValueIteration/PolicyIteration.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.exists_exo_solution",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/PolicyIteration.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.policy_error_endo",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/PolicyIteration.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.endoPI_terminates",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/PolicyIteration.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.endo_T_endo_sub",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/PolicyIteration.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.endoPI_stopping",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/PolicyIteration.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.endoPI_bray",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/PolicyIteration.lean"
     },
     {
       "name": "DPExtensions.RelativeValueIteration.complexify",
@@ -1905,6 +1991,91 @@
       "Classical.choice",
       "Quot.sound"
     ],
+    "DPExtensions.RelativeValueIteration.MDP.pi_improve": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.eq_vstar_of_T_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.v\u03c3_eq_vstar_of_stall": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.pi_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.pi_terminates": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.isGreedy_rel_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.relPI_terminates": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.pi_residual_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.relPI_stopping": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.relPI_bray": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.exoMDP": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.exists_exo_solution": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.policy_error_endo": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.endoPI_terminates": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.endo_T_endo_sub": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.endoPI_stopping": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.endoPI_bray": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
     "DPExtensions.RelativeValueIteration.complexify": [
       "propext",
       "Classical.choice",
@@ -2494,21 +2665,22 @@
     "RelativeValueIteration/AverageReward.lean": "44c2e055a3e3d0d67f13a95a15f64cf4f934159c44fce399845e08ef31187617",
     "RelativeValueIteration/Endogenous.lean": "9ea281b53e672dcf7b7a7508778fd5e3a7dc3aeee0a62b5fe50034c9dfb5c136",
     "RelativeValueIteration/Example.lean": "129679262d449a00a409dd92d312c9bd4058192778aac0cd7199d705da63016f",
+    "RelativeValueIteration/PolicyIteration.lean": "78f6cf20d931bfc261dae18568e87fff8c79e2dd9d1e247a1e5731c69a345595",
     "RelativeValueIteration/SpectralRadius.lean": "76771ef33506cffeb3bb2102b09d9dc7792f63a46a4b8671a7dc7c65becda191",
     "RelativeValueIteration/Subradius.lean": "12511bb06344dc8b546372f93090c0cf7f7009b308e626c0a344f6b093882ed8",
     "RelativeValueIteration/AsymptoticRates.lean": "8d1f96a29d3ecf9031cf956d0c03a800f3cba1c57307a7f750d25caa1b2a45c3",
     "RelativeValueIteration/AsymptoticEndogenous.lean": "3b2ab761ae94cce2dd4037d75fc4148fb91a11dba9c5a5a123132505f024bcea",
     "RelativeValueIteration/EndogenousSpeedup.lean": "9138d0f56a3f9d237b59259013b2fea147e40b2819a39e882e3909fb2a74522a",
-    "RelativeValueIteration.lean": "e0d09141f6bef8bd47190128d0fc339cd3f07dd84eb3cd0a13abe75ffc048ded",
+    "RelativeValueIteration.lean": "2ad2bd428b36d8606dc1a6ced89b28c32b746c85496e35aeb7a27305b2439d3d",
     "lean-toolchain": "8733782dc070a99b312039cda424f601b80f3be6f6f512627da5ba25adc27632",
     "lakefile.toml": "5d07e4f1da1aeb0d356957e5a10d337c00aab208ded65204fa99a338473977b6",
     "lake-manifest.json": "b4496a1d723d3dcaad1d8ae35cd1892d23d27c65253cbdea38636107c5b1d15e",
-    "proof-manifest.json": "815a25a7539076f037e9760f15097e694d3f620430e791c3935777473004176d",
+    "proof-manifest.json": "09424673cde2583ea3ff1574f0d89f1566117d29b1caa1395c43a9ec1c5b082b",
     "scripts/verify.py": "a70b1fa704dd590f937f8b37682afa88a9d85a9150065acb935c7d2c9589da3b",
     "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
   },
-  "fresh_audit_sha256": "a96f54d0eb6c964ba879a20f544ef5e70895ff879d508db457ed9db71a00cb62",
+  "fresh_audit_sha256": "2d0bef26433dde7a22c61e8f8c7a677d4eb604afd6706bc08da1375b9b6a3960",
   "lean_toolchain": "leanprover/lean4:v4.34.0",
-  "scope": "Relative and endogenous value function iteration for finite MDPs: the span seminorm and the Dobrushin bound; constant-shift invariance of the Bellman operator and of greedy policies (White), relative value iteration as value iteration up to a constant, the span contraction sp(Tv - Tw) <= beta alpha sp(v - w); strong convergence of relative values at rate beta alpha, the MacQueen-Porteus policy error bound, Bray's stopping rule and its finite termination; White's average-reward theorem (beta = 1, alpha < 1): convergence to a solution of the average-reward optimality equation, optimality and uniqueness of the gain; endogenous value iteration for exogenous/endogenous state splits (Bray): invariance to exogenous shifts, the endogenizing operator, the within-x span contraction at rate beta alpha_y with alpha_y bounded by the full Dobrushin bound, recovery of v* and optimal policies from the endogenous value, the policy error bound, and an example where relative VFI gives no speed-up but endogenous VFI is exact; asymptotic eigenvalue rates: spectral radius of real matrices and Gelfand's formula, the subradius rho(Delta Q) as the second-largest eigenvalue modulus (no Jordan block at 1) bounded by the Dobrushin coefficient, freezing of the greedy policy at a unique optimal decision rule, the Morton-Wecker rate beta lambda(P*) for relative values and Morton's rate for policy evaluation, levels no faster than beta, and the endogenous rates beta rho(Lambda P) with rho(Lambda F) <= lambda(F) (Bray); when endogenous VFI is strictly faster (Bray): every eigenvalue of Delta_X F_x is one of Delta P so sigma(F_x) <= sigma(P), rho(Lambda P) bounded by any vector-norm operator bound on Omega F_y(x), the Frobenius, largest-singular-value, row-sum, column-sum and Hajnal instances (with the largest singular value as the l2 operator norm), non-ergodic F_x with scrambling F_y, and x-independent F_y with sigma(F_x) > sigma(F_y); and rho(Omega F) = sigma(F) for every stochastic F (Bray, Lemma 7).",
-  "source": "White (1963); Morton (1971); Morton and Wecker (1977); MacQueen (1966); Porteus (1971); Seneta (1981); Puterman (2005); Bray (2019, Quantitative Economics); Bray (2019, Management Science); Hajnal (1958); Horn and Johnson (2013)."
+  "scope": "Relative and endogenous value function iteration for finite MDPs: the span seminorm and the Dobrushin bound; constant-shift invariance of the Bellman operator and of greedy policies (White), relative value iteration as value iteration up to a constant, the span contraction sp(Tv - Tw) <= beta alpha sp(v - w); strong convergence of relative values at rate beta alpha, the MacQueen-Porteus policy error bound, Bray's stopping rule and its finite termination; White's average-reward theorem (beta = 1, alpha < 1): convergence to a solution of the average-reward optimality equation, optimality and uniqueness of the gain; endogenous value iteration for exogenous/endogenous state splits (Bray): invariance to exogenous shifts, the endogenizing operator, the within-x span contraction at rate beta alpha_y with alpha_y bounded by the full Dobrushin bound, recovery of v* and optimal policies from the endogenous value, the policy error bound, and an example where relative VFI gives no speed-up but endogenous VFI is exact; asymptotic eigenvalue rates: spectral radius of real matrices and Gelfand's formula, the subradius rho(Delta Q) as the second-largest eigenvalue modulus (no Jordan block at 1) bounded by the Dobrushin coefficient, freezing of the greedy policy at a unique optimal decision rule, the Morton-Wecker rate beta lambda(P*) for relative values and Morton's rate for policy evaluation, levels no faster than beta, and the endogenous rates beta rho(Lambda P) with rho(Lambda F) <= lambda(F) (Bray); when endogenous VFI is strictly faster (Bray): every eigenvalue of Delta_X F_x is one of Delta P so sigma(F_x) <= sigma(P), rho(Lambda P) bounded by any vector-norm operator bound on Omega F_y(x), the Frobenius, largest-singular-value, row-sum, column-sum and Hajnal instances (with the largest singular value as the l2 operator norm), non-ergodic F_x with scrambling F_y, and x-independent F_y with sigma(F_x) > sigma(F_y); and rho(Omega F) = sigma(F) for every stochastic F (Bray, Lemma 7); relative and endogenous policy iteration (Bray): the same policies as policy iteration, policy improvement and finite termination, the endogenous policy error bound beta/(1 - beta) sp(Lambda(Tw - w)), and Bray's stopping rules returning epsilon-optimal policies after finitely many iterations.",
+  "source": "White (1963); Morton (1971); Morton and Wecker (1977); MacQueen (1966); Porteus (1971); Seneta (1981); Puterman (2005); Bray (2019, Quantitative Economics); Bray (2019, Management Science); Hajnal (1958); Horn and Johnson (2013); Howard (1960)."
 }
