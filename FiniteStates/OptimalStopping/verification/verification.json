@@ -1,0 +1,2225 @@
+{
+  "checked_at_utc": "2026-10-03T10:28:25.259360+00:00",
+  "theorems": 143,
+  "module_theorems": {
+    "OptimalStopping/Basics.lean": 15,
+    "OptimalStopping/Problem.lean": 22,
+    "OptimalStopping/SpectralRadius.lean": 7,
+    "OptimalStopping/Bellman.lean": 18,
+    "OptimalStopping/ContinuationValue.lean": 13,
+    "OptimalStopping/Monotonicity.lean": 10,
+    "OptimalStopping/Reduction.lean": 16,
+    "OptimalStopping/FirmExit.lean": 13,
+    "OptimalStopping/AmericanOption.lean": 18,
+    "OptimalStopping/ResearchDevelopment.lean": 11
+  },
+  "audited_declarations": 218,
+  "declarations": [
+    {
+      "name": "SargentStachurski.OptimalStopping.IsMarkov",
+      "kind": "structure",
+      "module": "OptimalStopping/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.IsMarkov.mk",
+      "kind": "constructor",
+      "module": "OptimalStopping/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.IsMarkov.nonneg",
+      "kind": "projection",
+      "module": "OptimalStopping/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.IsMarkov.rowsum",
+      "kind": "projection",
+      "module": "OptimalStopping/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.IsDistribution",
+      "kind": "structure",
+      "module": "OptimalStopping/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.IsDistribution.mk",
+      "kind": "constructor",
+      "module": "OptimalStopping/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.IsDistribution.nonneg",
+      "kind": "projection",
+      "module": "OptimalStopping/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.IsDistribution.sum_eq_one",
+      "kind": "projection",
+      "module": "OptimalStopping/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.mulVec_apply_eq",
+      "kind": "theorem",
+      "module": "OptimalStopping/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.IsMarkov.mulVec_le_mulVec",
+      "kind": "theorem",
+      "module": "OptimalStopping/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.IsMarkov.mulVec_const",
+      "kind": "theorem",
+      "module": "OptimalStopping/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.IsMarkov.abs_mulVec_le",
+      "kind": "theorem",
+      "module": "OptimalStopping/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.IsMarkov.norm_mulVec_le",
+      "kind": "theorem",
+      "module": "OptimalStopping/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.IsMarkov.abs_mulVec_sub_le",
+      "kind": "theorem",
+      "module": "OptimalStopping/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.GloballyStable",
+      "kind": "def",
+      "module": "OptimalStopping/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.IsContractionOn",
+      "kind": "structure",
+      "module": "OptimalStopping/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.IsContractionOn.mk",
+      "kind": "constructor",
+      "module": "OptimalStopping/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.IsContractionOn.mapsTo",
+      "kind": "projection",
+      "module": "OptimalStopping/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.IsContractionOn.nonneg",
+      "kind": "projection",
+      "module": "OptimalStopping/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.IsContractionOn.lt_one",
+      "kind": "projection",
+      "module": "OptimalStopping/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.IsContractionOn.norm_sub_le",
+      "kind": "projection",
+      "module": "OptimalStopping/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.IsContractionOn.fixedPt_unique",
+      "kind": "theorem",
+      "module": "OptimalStopping/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.IsContractionOn.iterate_mem",
+      "kind": "theorem",
+      "module": "OptimalStopping/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.IsContractionOn.norm_iterate_sub_fixedPt_le",
+      "kind": "theorem",
+      "module": "OptimalStopping/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.IsContractionOn.tendsto_iterate_fixedPt",
+      "kind": "theorem",
+      "module": "OptimalStopping/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.IsContractionOn.exists_fixedPt",
+      "kind": "theorem",
+      "module": "OptimalStopping/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.IsContractionOn.globallyStable_univ",
+      "kind": "theorem",
+      "module": "OptimalStopping/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.fixedPt_le_of_le",
+      "kind": "theorem",
+      "module": "OptimalStopping/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.isClosed_monotone",
+      "kind": "theorem",
+      "module": "OptimalStopping/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.FOSD",
+      "kind": "def",
+      "module": "OptimalStopping/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.MonotoneIncreasing",
+      "kind": "def",
+      "module": "OptimalStopping/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.monotoneIncreasing_iff",
+      "kind": "theorem",
+      "module": "OptimalStopping/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.StoppingProblem",
+      "kind": "structure",
+      "module": "OptimalStopping/Problem.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.StoppingProblem.mk",
+      "kind": "constructor",
+      "module": "OptimalStopping/Problem.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.StoppingProblem.\u03b2",
+      "kind": "projection",
+      "module": "OptimalStopping/Problem.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.StoppingProblem.\u03b2_pos",
+      "kind": "projection",
+      "module": "OptimalStopping/Problem.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.StoppingProblem.\u03b2_lt_one",
+      "kind": "projection",
+      "module": "OptimalStopping/Problem.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.StoppingProblem.P",
+      "kind": "projection",
+      "module": "OptimalStopping/Problem.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.StoppingProblem.P_markov",
+      "kind": "projection",
+      "module": "OptimalStopping/Problem.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.StoppingProblem.c",
+      "kind": "projection",
+      "module": "OptimalStopping/Problem.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.StoppingProblem.e",
+      "kind": "projection",
+      "module": "OptimalStopping/Problem.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.Policy",
+      "kind": "abbrev",
+      "module": "OptimalStopping/Problem.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.StoppingProblem.cont",
+      "kind": "def",
+      "module": "OptimalStopping/Problem.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.StoppingProblem.cont_apply",
+      "kind": "theorem",
+      "module": "OptimalStopping/Problem.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.StoppingProblem.r",
+      "kind": "def",
+      "module": "OptimalStopping/Problem.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.StoppingProblem.L",
+      "kind": "def",
+      "module": "OptimalStopping/Problem.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.StoppingProblem.L_apply",
+      "kind": "theorem",
+      "module": "OptimalStopping/Problem.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.StoppingProblem.T\u03c3",
+      "kind": "def",
+      "module": "OptimalStopping/Problem.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.StoppingProblem.T\u03c3_eq",
+      "kind": "theorem",
+      "module": "OptimalStopping/Problem.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.StoppingProblem.T\u03c3_monotone",
+      "kind": "theorem",
+      "module": "OptimalStopping/Problem.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.StoppingProblem.abs_T\u03c3_sub_le",
+      "kind": "theorem",
+      "module": "OptimalStopping/Problem.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.StoppingProblem.isContractionOn_T\u03c3",
+      "kind": "theorem",
+      "module": "OptimalStopping/Problem.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.StoppingProblem.v\u03c3",
+      "kind": "def",
+      "module": "OptimalStopping/Problem.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.StoppingProblem.isFixedPt_v\u03c3",
+      "kind": "theorem",
+      "module": "OptimalStopping/Problem.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.StoppingProblem.eq_v\u03c3_of_isFixedPt",
+      "kind": "theorem",
+      "module": "OptimalStopping/Problem.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.StoppingProblem.tendsto_iterate_T\u03c3",
+      "kind": "theorem",
+      "module": "OptimalStopping/Problem.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.StoppingProblem.v\u03c3_eq",
+      "kind": "theorem",
+      "module": "OptimalStopping/Problem.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.StoppingProblem.v\u03c3_of_stop",
+      "kind": "theorem",
+      "module": "OptimalStopping/Problem.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.StoppingProblem.v\u03c3_of_continue",
+      "kind": "theorem",
+      "module": "OptimalStopping/Problem.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.StoppingProblem.v\u03c3_eq_r_add",
+      "kind": "theorem",
+      "module": "OptimalStopping/Problem.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.StoppingProblem.L_nonneg",
+      "kind": "theorem",
+      "module": "OptimalStopping/Problem.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.StoppingProblem.L_rowsum_le",
+      "kind": "theorem",
+      "module": "OptimalStopping/Problem.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.StoppingProblem.abs_L_mulVec_le",
+      "kind": "theorem",
+      "module": "OptimalStopping/Problem.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.StoppingProblem.norm_L_mulVec_le",
+      "kind": "theorem",
+      "module": "OptimalStopping/Problem.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.StoppingProblem.norm_L_pow_mulVec_le",
+      "kind": "theorem",
+      "module": "OptimalStopping/Problem.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.StoppingProblem.isUnit_one_sub_L",
+      "kind": "theorem",
+      "module": "OptimalStopping/Problem.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.StoppingProblem.v\u03c3_eq_inv",
+      "kind": "theorem",
+      "module": "OptimalStopping/Problem.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.StoppingProblem.summable_L_pow_mulVec",
+      "kind": "theorem",
+      "module": "OptimalStopping/Problem.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.StoppingProblem.v\u03c3_eq_tsum",
+      "kind": "theorem",
+      "module": "OptimalStopping/Problem.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.StoppingProblem.iidJobSearch",
+      "kind": "def",
+      "module": "OptimalStopping/Problem.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.StoppingProblem.perpetualOption",
+      "kind": "def",
+      "module": "OptimalStopping/Problem.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.complexify",
+      "kind": "def",
+      "module": "OptimalStopping/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.complexify_apply",
+      "kind": "theorem",
+      "module": "OptimalStopping/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.nnnorm_complexify",
+      "kind": "theorem",
+      "module": "OptimalStopping/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.norm_complexify",
+      "kind": "theorem",
+      "module": "OptimalStopping/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.specRad",
+      "kind": "def",
+      "module": "OptimalStopping/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.norm_le_of_rowsum_abs_le",
+      "kind": "theorem",
+      "module": "OptimalStopping/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.specRad_le_norm",
+      "kind": "theorem",
+      "module": "OptimalStopping/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.StoppingProblem.norm_L_le",
+      "kind": "theorem",
+      "module": "OptimalStopping/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.StoppingProblem.specRad_L_lt_one",
+      "kind": "theorem",
+      "module": "OptimalStopping/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.StoppingProblem.T",
+      "kind": "def",
+      "module": "OptimalStopping/Bellman.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.StoppingProblem.T_apply",
+      "kind": "theorem",
+      "module": "OptimalStopping/Bellman.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.StoppingProblem.T_monotone",
+      "kind": "theorem",
+      "module": "OptimalStopping/Bellman.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.StoppingProblem.abs_T_sub_le",
+      "kind": "theorem",
+      "module": "OptimalStopping/Bellman.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.StoppingProblem.isContractionOn_T",
+      "kind": "theorem",
+      "module": "OptimalStopping/Bellman.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.StoppingProblem.T\u03c3_le_T",
+      "kind": "theorem",
+      "module": "OptimalStopping/Bellman.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.StoppingProblem.IsGreedy",
+      "kind": "def",
+      "module": "OptimalStopping/Bellman.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.StoppingProblem.greedy",
+      "kind": "def",
+      "module": "OptimalStopping/Bellman.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.StoppingProblem.isGreedy_greedy",
+      "kind": "theorem",
+      "module": "OptimalStopping/Bellman.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.StoppingProblem.T\u03c3_eq_T_of_isGreedy",
+      "kind": "theorem",
+      "module": "OptimalStopping/Bellman.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.StoppingProblem.vstar",
+      "kind": "def",
+      "module": "OptimalStopping/Bellman.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.StoppingProblem.v\u03c3_le_vstar",
+      "kind": "theorem",
+      "module": "OptimalStopping/Bellman.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.StoppingProblem.exists_v\u03c3_eq_vstar",
+      "kind": "theorem",
+      "module": "OptimalStopping/Bellman.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.StoppingProblem.isFixedPt_T_vstar",
+      "kind": "theorem",
+      "module": "OptimalStopping/Bellman.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.StoppingProblem.eq_vstar_of_isFixedPt",
+      "kind": "theorem",
+      "module": "OptimalStopping/Bellman.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.StoppingProblem.bellman_equation",
+      "kind": "theorem",
+      "module": "OptimalStopping/Bellman.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.StoppingProblem.tendsto_iterate_T",
+      "kind": "theorem",
+      "module": "OptimalStopping/Bellman.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.StoppingProblem.norm_iterate_T_sub_vstar_le",
+      "kind": "theorem",
+      "module": "OptimalStopping/Bellman.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.StoppingProblem.globallyStable_T",
+      "kind": "theorem",
+      "module": "OptimalStopping/Bellman.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.StoppingProblem.IsOptimal",
+      "kind": "def",
+      "module": "OptimalStopping/Bellman.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.StoppingProblem.isOptimal_iff_v\u03c3_eq",
+      "kind": "theorem",
+      "module": "OptimalStopping/Bellman.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.StoppingProblem.isOptimal_iff_isGreedy",
+      "kind": "theorem",
+      "module": "OptimalStopping/Bellman.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.StoppingProblem.isOptimal_greedy_vstar",
+      "kind": "theorem",
+      "module": "OptimalStopping/Bellman.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.StoppingProblem.hstar",
+      "kind": "def",
+      "module": "OptimalStopping/ContinuationValue.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.StoppingProblem.hstar_apply",
+      "kind": "theorem",
+      "module": "OptimalStopping/ContinuationValue.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.StoppingProblem.vstar_eq_max_hstar",
+      "kind": "theorem",
+      "module": "OptimalStopping/ContinuationValue.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.StoppingProblem.C",
+      "kind": "def",
+      "module": "OptimalStopping/ContinuationValue.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.StoppingProblem.C_apply",
+      "kind": "theorem",
+      "module": "OptimalStopping/ContinuationValue.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.StoppingProblem.isFixedPt_C_hstar",
+      "kind": "theorem",
+      "module": "OptimalStopping/ContinuationValue.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.StoppingProblem.C_monotone",
+      "kind": "theorem",
+      "module": "OptimalStopping/ContinuationValue.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.StoppingProblem.abs_C_sub_le",
+      "kind": "theorem",
+      "module": "OptimalStopping/ContinuationValue.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.StoppingProblem.isContractionOn_C",
+      "kind": "theorem",
+      "module": "OptimalStopping/ContinuationValue.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.StoppingProblem.eq_hstar_of_isFixedPt",
+      "kind": "theorem",
+      "module": "OptimalStopping/ContinuationValue.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.StoppingProblem.tendsto_iterate_C",
+      "kind": "theorem",
+      "module": "OptimalStopping/ContinuationValue.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.StoppingProblem.sigmaStar",
+      "kind": "def",
+      "module": "OptimalStopping/ContinuationValue.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.StoppingProblem.sigmaStar_eq_greedy",
+      "kind": "theorem",
+      "module": "OptimalStopping/ContinuationValue.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.StoppingProblem.isGreedy_sigmaStar",
+      "kind": "theorem",
+      "module": "OptimalStopping/ContinuationValue.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.StoppingProblem.isOptimal_sigmaStar",
+      "kind": "theorem",
+      "module": "OptimalStopping/ContinuationValue.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.StoppingProblem.sigmaStar_eq_true_iff",
+      "kind": "theorem",
+      "module": "OptimalStopping/ContinuationValue.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.StoppingProblem.monotone_T_of_monotone",
+      "kind": "theorem",
+      "module": "OptimalStopping/Monotonicity.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.StoppingProblem.monotone_vstar",
+      "kind": "theorem",
+      "module": "OptimalStopping/Monotonicity.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.StoppingProblem.monotone_hstar",
+      "kind": "theorem",
+      "module": "OptimalStopping/Monotonicity.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.StoppingProblem.antitone_sigmaStar",
+      "kind": "theorem",
+      "module": "OptimalStopping/Monotonicity.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.StoppingProblem.antitone_sigmaStar_of_const",
+      "kind": "theorem",
+      "module": "OptimalStopping/Monotonicity.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.StoppingProblem.monotone_sigmaStar",
+      "kind": "theorem",
+      "module": "OptimalStopping/Monotonicity.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.StoppingProblem.hstar_const_of_iid",
+      "kind": "theorem",
+      "module": "OptimalStopping/Monotonicity.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.StoppingProblem.monotone_sigmaStar_of_iid",
+      "kind": "theorem",
+      "module": "OptimalStopping/Monotonicity.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.exists_threshold_of_monotone",
+      "kind": "theorem",
+      "module": "OptimalStopping/Monotonicity.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.exists_threshold_of_antitone",
+      "kind": "theorem",
+      "module": "OptimalStopping/Monotonicity.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.productKernel",
+      "kind": "def",
+      "module": "OptimalStopping/Reduction.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.productKernel_apply",
+      "kind": "theorem",
+      "module": "OptimalStopping/Reduction.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.isMarkov_productKernel",
+      "kind": "theorem",
+      "module": "OptimalStopping/Reduction.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.productKernel_mulVec",
+      "kind": "theorem",
+      "module": "OptimalStopping/Reduction.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.productProblem",
+      "kind": "def",
+      "module": "OptimalStopping/Reduction.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.productProblem.T_apply",
+      "kind": "theorem",
+      "module": "OptimalStopping/Reduction.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.productProblem.reducedC",
+      "kind": "def",
+      "module": "OptimalStopping/Reduction.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.productProblem.reducedC_monotone",
+      "kind": "theorem",
+      "module": "OptimalStopping/Reduction.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.productProblem.isContractionOn_reducedC",
+      "kind": "theorem",
+      "module": "OptimalStopping/Reduction.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.productProblem.reducedH",
+      "kind": "def",
+      "module": "OptimalStopping/Reduction.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.productProblem.isFixedPt_reducedH",
+      "kind": "theorem",
+      "module": "OptimalStopping/Reduction.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.productProblem.eq_reducedH_of_isFixedPt",
+      "kind": "theorem",
+      "module": "OptimalStopping/Reduction.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.productProblem.tendsto_iterate_reducedC",
+      "kind": "theorem",
+      "module": "OptimalStopping/Reduction.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.productProblem.hstar_indep",
+      "kind": "theorem",
+      "module": "OptimalStopping/Reduction.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.productProblem.hstar_eq_reducedH",
+      "kind": "theorem",
+      "module": "OptimalStopping/Reduction.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.productProblem.sigmaStar_eq_true_iff",
+      "kind": "theorem",
+      "module": "OptimalStopping/Reduction.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.reducedC_unit",
+      "kind": "theorem",
+      "module": "OptimalStopping/Reduction.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.scrapFirm",
+      "kind": "def",
+      "module": "OptimalStopping/Reduction.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.scrapFirm_reducedC",
+      "kind": "theorem",
+      "module": "OptimalStopping/Reduction.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.scrapFirm_reducedC_le",
+      "kind": "theorem",
+      "module": "OptimalStopping/Reduction.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.scrapFirm_sigmaStar_ge",
+      "kind": "theorem",
+      "module": "OptimalStopping/Reduction.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.firmExit",
+      "kind": "def",
+      "module": "OptimalStopping/FirmExit.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.firmExit.T\u03c3_apply",
+      "kind": "theorem",
+      "module": "OptimalStopping/FirmExit.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.firmExit.T_apply",
+      "kind": "theorem",
+      "module": "OptimalStopping/FirmExit.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.firmExit.bellman_equation",
+      "kind": "theorem",
+      "module": "OptimalStopping/FirmExit.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.firmExit.vstar_eq_max",
+      "kind": "theorem",
+      "module": "OptimalStopping/FirmExit.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.firmExit.sigmaStar_eq_true_iff",
+      "kind": "theorem",
+      "module": "OptimalStopping/FirmExit.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.firmExit.noExitValue",
+      "kind": "def",
+      "module": "OptimalStopping/FirmExit.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.firmExit.noExitValue_eq",
+      "kind": "theorem",
+      "module": "OptimalStopping/FirmExit.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.firmExit.noExitValue_eq_inv",
+      "kind": "theorem",
+      "module": "OptimalStopping/FirmExit.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.firmExit.noExitValue_le_vstar",
+      "kind": "theorem",
+      "module": "OptimalStopping/FirmExit.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.firmExit.noExitValue_lt_vstar",
+      "kind": "theorem",
+      "module": "OptimalStopping/FirmExit.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.firmExit.monotone_vstar_hstar",
+      "kind": "theorem",
+      "module": "OptimalStopping/FirmExit.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.firmExit.antitone_sigmaStar",
+      "kind": "theorem",
+      "module": "OptimalStopping/FirmExit.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.isGreatest_profit",
+      "kind": "theorem",
+      "module": "OptimalStopping/FirmExit.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.priceFirm",
+      "kind": "def",
+      "module": "OptimalStopping/FirmExit.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.priceFirm_bellman",
+      "kind": "theorem",
+      "module": "OptimalStopping/FirmExit.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.AmericanOption",
+      "kind": "structure",
+      "module": "OptimalStopping/AmericanOption.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.AmericanOption.mk",
+      "kind": "constructor",
+      "module": "OptimalStopping/AmericanOption.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.AmericanOption.T",
+      "kind": "projection",
+      "module": "OptimalStopping/AmericanOption.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.AmericanOption.\u03c6",
+      "kind": "projection",
+      "module": "OptimalStopping/AmericanOption.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.AmericanOption.\u03c6_dist",
+      "kind": "projection",
+      "module": "OptimalStopping/AmericanOption.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.AmericanOption.wval",
+      "kind": "projection",
+      "module": "OptimalStopping/AmericanOption.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.AmericanOption.Q",
+      "kind": "projection",
+      "module": "OptimalStopping/AmericanOption.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.AmericanOption.Q_markov",
+      "kind": "projection",
+      "module": "OptimalStopping/AmericanOption.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.AmericanOption.zval",
+      "kind": "projection",
+      "module": "OptimalStopping/AmericanOption.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.AmericanOption.K",
+      "kind": "projection",
+      "module": "OptimalStopping/AmericanOption.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.AmericanOption.r",
+      "kind": "projection",
+      "module": "OptimalStopping/AmericanOption.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.AmericanOption.r_pos",
+      "kind": "projection",
+      "module": "OptimalStopping/AmericanOption.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.AmericanOption.Time",
+      "kind": "abbrev",
+      "module": "OptimalStopping/AmericanOption.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.AmericanOption.next",
+      "kind": "def",
+      "module": "OptimalStopping/AmericanOption.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.AmericanOption.alive",
+      "kind": "abbrev",
+      "module": "OptimalStopping/AmericanOption.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.AmericanOption.next_of_alive",
+      "kind": "theorem",
+      "module": "OptimalStopping/AmericanOption.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.AmericanOption.next_of_not_alive",
+      "kind": "theorem",
+      "module": "OptimalStopping/AmericanOption.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.AmericanOption.next_next_of_last",
+      "kind": "theorem",
+      "module": "OptimalStopping/AmericanOption.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.AmericanOption.\u03b2_pos",
+      "kind": "theorem",
+      "module": "OptimalStopping/AmericanOption.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.AmericanOption.\u03b2_lt_one",
+      "kind": "theorem",
+      "module": "OptimalStopping/AmericanOption.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.AmericanOption.timeKernel",
+      "kind": "def",
+      "module": "OptimalStopping/AmericanOption.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.AmericanOption.isMarkov_timeKernel",
+      "kind": "theorem",
+      "module": "OptimalStopping/AmericanOption.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.AmericanOption.timeKernel_mulVec",
+      "kind": "theorem",
+      "module": "OptimalStopping/AmericanOption.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.AmericanOption.e",
+      "kind": "def",
+      "module": "OptimalStopping/AmericanOption.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.AmericanOption.problem",
+      "kind": "def",
+      "module": "OptimalStopping/AmericanOption.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.AmericanOption.problem_P",
+      "kind": "theorem",
+      "module": "OptimalStopping/AmericanOption.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.AmericanOption.problem_mulVec",
+      "kind": "theorem",
+      "module": "OptimalStopping/AmericanOption.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.AmericanOption.bellman_equation",
+      "kind": "theorem",
+      "module": "OptimalStopping/AmericanOption.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.AmericanOption.reducedC_apply",
+      "kind": "theorem",
+      "module": "OptimalStopping/AmericanOption.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.AmericanOption.hstar",
+      "kind": "def",
+      "module": "OptimalStopping/AmericanOption.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.AmericanOption.hstar_eq",
+      "kind": "theorem",
+      "module": "OptimalStopping/AmericanOption.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.AmericanOption.tendsto_iterate_reducedC",
+      "kind": "theorem",
+      "module": "OptimalStopping/AmericanOption.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.AmericanOption.sigmaStar_eq_true_iff",
+      "kind": "theorem",
+      "module": "OptimalStopping/AmericanOption.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.AmericanOption.isOptimal_sigmaStar",
+      "kind": "theorem",
+      "module": "OptimalStopping/AmericanOption.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.AmericanOption.vstar_nonneg_antitone",
+      "kind": "theorem",
+      "module": "OptimalStopping/AmericanOption.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.AmericanOption.hstar_antitone",
+      "kind": "theorem",
+      "module": "OptimalStopping/AmericanOption.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.AmericanOption.exercise_region_expands",
+      "kind": "theorem",
+      "module": "OptimalStopping/AmericanOption.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.rdConstant",
+      "kind": "def",
+      "module": "OptimalStopping/ResearchDevelopment.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.rdConstant.bellman_equation",
+      "kind": "theorem",
+      "module": "OptimalStopping/ResearchDevelopment.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.rdConstant.C_apply",
+      "kind": "theorem",
+      "module": "OptimalStopping/ResearchDevelopment.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.rdConstant.monotone_hstar",
+      "kind": "theorem",
+      "module": "OptimalStopping/ResearchDevelopment.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.rdConstant.monotone_sigmaStar",
+      "kind": "theorem",
+      "module": "OptimalStopping/ResearchDevelopment.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.rdIID",
+      "kind": "def",
+      "module": "OptimalStopping/ResearchDevelopment.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.rdIID.bellman_equation",
+      "kind": "theorem",
+      "module": "OptimalStopping/ResearchDevelopment.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.rdIID.g",
+      "kind": "def",
+      "module": "OptimalStopping/ResearchDevelopment.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.rdIID.vstar_eq",
+      "kind": "theorem",
+      "module": "OptimalStopping/ResearchDevelopment.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.rdIID.R",
+      "kind": "def",
+      "module": "OptimalStopping/ResearchDevelopment.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.rdIID.isFixedPt_R_g",
+      "kind": "theorem",
+      "module": "OptimalStopping/ResearchDevelopment.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.rdIID.isContractionOn_R",
+      "kind": "theorem",
+      "module": "OptimalStopping/ResearchDevelopment.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.rdIID.eq_g_of_isFixedPt",
+      "kind": "theorem",
+      "module": "OptimalStopping/ResearchDevelopment.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.rdIID.tendsto_iterate_R",
+      "kind": "theorem",
+      "module": "OptimalStopping/ResearchDevelopment.lean"
+    },
+    {
+      "name": "SargentStachurski.OptimalStopping.rdIID.sigmaStar_eq_true_iff",
+      "kind": "theorem",
+      "module": "OptimalStopping/ResearchDevelopment.lean"
+    }
+  ],
+  "full_build": "passed",
+  "fresh_source_compilation": "passed",
+  "fresh_source_lint_options": [
+    "-Dlinter.mathlibStandardSet=true",
+    "-Dlinter.style.header=false"
+  ],
+  "axioms": {
+    "SargentStachurski.OptimalStopping.IsMarkov": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.IsMarkov.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.IsMarkov.nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.IsMarkov.rowsum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.IsDistribution": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.IsDistribution.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.IsDistribution.nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.IsDistribution.sum_eq_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.mulVec_apply_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.IsMarkov.mulVec_le_mulVec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.IsMarkov.mulVec_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.IsMarkov.abs_mulVec_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.IsMarkov.norm_mulVec_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.IsMarkov.abs_mulVec_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.GloballyStable": [
+      "propext",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.IsContractionOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.IsContractionOn.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.IsContractionOn.mapsTo": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.IsContractionOn.nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.IsContractionOn.lt_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.IsContractionOn.norm_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.IsContractionOn.fixedPt_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.IsContractionOn.iterate_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.IsContractionOn.norm_iterate_sub_fixedPt_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.IsContractionOn.tendsto_iterate_fixedPt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.IsContractionOn.exists_fixedPt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.IsContractionOn.globallyStable_univ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.fixedPt_le_of_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.isClosed_monotone": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.FOSD": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.MonotoneIncreasing": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.monotoneIncreasing_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.StoppingProblem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.StoppingProblem.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.StoppingProblem.\u03b2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.StoppingProblem.\u03b2_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.StoppingProblem.\u03b2_lt_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.StoppingProblem.P": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.StoppingProblem.P_markov": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.StoppingProblem.c": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.StoppingProblem.e": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.Policy": [],
+    "SargentStachurski.OptimalStopping.StoppingProblem.cont": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.StoppingProblem.cont_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.StoppingProblem.r": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.StoppingProblem.L": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.StoppingProblem.L_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.StoppingProblem.T\u03c3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.StoppingProblem.T\u03c3_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.StoppingProblem.T\u03c3_monotone": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.StoppingProblem.abs_T\u03c3_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.StoppingProblem.isContractionOn_T\u03c3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.StoppingProblem.v\u03c3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.StoppingProblem.isFixedPt_v\u03c3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.StoppingProblem.eq_v\u03c3_of_isFixedPt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.StoppingProblem.tendsto_iterate_T\u03c3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.StoppingProblem.v\u03c3_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.StoppingProblem.v\u03c3_of_stop": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.StoppingProblem.v\u03c3_of_continue": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.StoppingProblem.v\u03c3_eq_r_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.StoppingProblem.L_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.StoppingProblem.L_rowsum_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.StoppingProblem.abs_L_mulVec_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.StoppingProblem.norm_L_mulVec_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.StoppingProblem.norm_L_pow_mulVec_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.StoppingProblem.isUnit_one_sub_L": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.StoppingProblem.v\u03c3_eq_inv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.StoppingProblem.summable_L_pow_mulVec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.StoppingProblem.v\u03c3_eq_tsum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.StoppingProblem.iidJobSearch": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.StoppingProblem.perpetualOption": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.complexify": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.complexify_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.nnnorm_complexify": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.norm_complexify": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.specRad": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.norm_le_of_rowsum_abs_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.specRad_le_norm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.StoppingProblem.norm_L_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.StoppingProblem.specRad_L_lt_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.StoppingProblem.T": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.StoppingProblem.T_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.StoppingProblem.T_monotone": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.StoppingProblem.abs_T_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.StoppingProblem.isContractionOn_T": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.StoppingProblem.T\u03c3_le_T": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.StoppingProblem.IsGreedy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.StoppingProblem.greedy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.StoppingProblem.isGreedy_greedy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.StoppingProblem.T\u03c3_eq_T_of_isGreedy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.StoppingProblem.vstar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.StoppingProblem.v\u03c3_le_vstar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.StoppingProblem.exists_v\u03c3_eq_vstar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.StoppingProblem.isFixedPt_T_vstar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.StoppingProblem.eq_vstar_of_isFixedPt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.StoppingProblem.bellman_equation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.StoppingProblem.tendsto_iterate_T": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.StoppingProblem.norm_iterate_T_sub_vstar_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.StoppingProblem.globallyStable_T": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.StoppingProblem.IsOptimal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.StoppingProblem.isOptimal_iff_v\u03c3_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.StoppingProblem.isOptimal_iff_isGreedy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.StoppingProblem.isOptimal_greedy_vstar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.StoppingProblem.hstar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.StoppingProblem.hstar_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.StoppingProblem.vstar_eq_max_hstar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.StoppingProblem.C": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.StoppingProblem.C_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.StoppingProblem.isFixedPt_C_hstar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.StoppingProblem.C_monotone": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.StoppingProblem.abs_C_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.StoppingProblem.isContractionOn_C": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.StoppingProblem.eq_hstar_of_isFixedPt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.StoppingProblem.tendsto_iterate_C": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.StoppingProblem.sigmaStar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.StoppingProblem.sigmaStar_eq_greedy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.StoppingProblem.isGreedy_sigmaStar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.StoppingProblem.isOptimal_sigmaStar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.StoppingProblem.sigmaStar_eq_true_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.StoppingProblem.monotone_T_of_monotone": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.StoppingProblem.monotone_vstar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.StoppingProblem.monotone_hstar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.StoppingProblem.antitone_sigmaStar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.StoppingProblem.antitone_sigmaStar_of_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.StoppingProblem.monotone_sigmaStar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.StoppingProblem.hstar_const_of_iid": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.StoppingProblem.monotone_sigmaStar_of_iid": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.exists_threshold_of_monotone": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.exists_threshold_of_antitone": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.productKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.productKernel_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.isMarkov_productKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.productKernel_mulVec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.productProblem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.productProblem.T_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.productProblem.reducedC": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.productProblem.reducedC_monotone": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.productProblem.isContractionOn_reducedC": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.productProblem.reducedH": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.productProblem.isFixedPt_reducedH": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.productProblem.eq_reducedH_of_isFixedPt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.productProblem.tendsto_iterate_reducedC": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.productProblem.hstar_indep": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.productProblem.hstar_eq_reducedH": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.productProblem.sigmaStar_eq_true_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.reducedC_unit": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.scrapFirm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.scrapFirm_reducedC": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.scrapFirm_reducedC_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.scrapFirm_sigmaStar_ge": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.firmExit": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.firmExit.T\u03c3_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.firmExit.T_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.firmExit.bellman_equation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.firmExit.vstar_eq_max": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.firmExit.sigmaStar_eq_true_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.firmExit.noExitValue": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.firmExit.noExitValue_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.firmExit.noExitValue_eq_inv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.firmExit.noExitValue_le_vstar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.firmExit.noExitValue_lt_vstar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.firmExit.monotone_vstar_hstar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.firmExit.antitone_sigmaStar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.isGreatest_profit": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.priceFirm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.priceFirm_bellman": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.AmericanOption": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.AmericanOption.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.AmericanOption.T": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.AmericanOption.\u03c6": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.AmericanOption.\u03c6_dist": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.AmericanOption.wval": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.AmericanOption.Q": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.AmericanOption.Q_markov": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.AmericanOption.zval": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.AmericanOption.K": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.AmericanOption.r": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.AmericanOption.r_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.AmericanOption.Time": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.AmericanOption.next": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.AmericanOption.alive": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.AmericanOption.next_of_alive": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.AmericanOption.next_of_not_alive": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.AmericanOption.next_next_of_last": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.AmericanOption.\u03b2_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.AmericanOption.\u03b2_lt_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.AmericanOption.timeKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.AmericanOption.isMarkov_timeKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.AmericanOption.timeKernel_mulVec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.AmericanOption.e": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.AmericanOption.problem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.AmericanOption.problem_P": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.AmericanOption.problem_mulVec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.AmericanOption.bellman_equation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.AmericanOption.reducedC_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.AmericanOption.hstar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.AmericanOption.hstar_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.AmericanOption.tendsto_iterate_reducedC": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.AmericanOption.sigmaStar_eq_true_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.AmericanOption.isOptimal_sigmaStar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.AmericanOption.vstar_nonneg_antitone": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.AmericanOption.hstar_antitone": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.AmericanOption.exercise_region_expands": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.rdConstant": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.rdConstant.bellman_equation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.rdConstant.C_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.rdConstant.monotone_hstar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.rdConstant.monotone_sigmaStar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.rdIID": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.rdIID.bellman_equation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.rdIID.g": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.rdIID.vstar_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.rdIID.R": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.rdIID.isFixedPt_R_g": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.rdIID.isContractionOn_R": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.rdIID.eq_g_of_isFixedPt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.rdIID.tendsto_iterate_R": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OptimalStopping.rdIID.sigmaStar_eq_true_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  "source_sha256": {
+    "OptimalStopping/Basics.lean": "6c03a8e712cd955941ee0f157f5deb51cdf572c75c8a02ed19b0765cd7009bde",
+    "OptimalStopping/Problem.lean": "860514e8c3200660501614a64b885eae63b76182f7f84c8fe10bccb7ebb61baf",
+    "OptimalStopping/SpectralRadius.lean": "7003341ae411a494e796cf69232880cb661576a419646ed20613b190668777b3",
+    "OptimalStopping/Bellman.lean": "0adc54aa145e53478caa6e9ce611790c5131dd69e1e65fb2c14a65df48a39a79",
+    "OptimalStopping/ContinuationValue.lean": "cf5bb3a1af5cfee1b37b9d075c9e1c8861154b252a3eb651f94f0834bd6c78de",
+    "OptimalStopping/Monotonicity.lean": "d4c52f228a9b50a03e0807489166eadb82ed19fceb6097707c82645d07ccc8ac",
+    "OptimalStopping/Reduction.lean": "b41360c601e7e3250100cb2dc109019e64c0846b05d80bed084ff78b226ed3e6",
+    "OptimalStopping/FirmExit.lean": "2b99a356dd67ec9dc43fdada5cecaf91bc94d45e98bcdda6825c20a7c45808ca",
+    "OptimalStopping/AmericanOption.lean": "f033d695051ef9f65f52252d562d4c21f307f4ed5d85ee4b4403ff7d28b5308f",
+    "OptimalStopping/ResearchDevelopment.lean": "5820d2bd822c888f58429dad25d7955994c3c2da1caec2f9ae844e11ed4fc9f5",
+    "OptimalStopping.lean": "c02e17bdd6f8d7039b5ca5be4f3c0c4e7eaa8fa6957d26a0002b2ab88727cb0b",
+    "lean-toolchain": "8733782dc070a99b312039cda424f601b80f3be6f6f512627da5ba25adc27632",
+    "lakefile.toml": "a2e665aa64de01308c804e2a690f3db0be81150b96525f5c2091902337900162",
+    "lake-manifest.json": "66ee6495dcf1c52a924c2f1fc071adeccdd8f86461113fe310e16fe71d0fed2f",
+    "proof-manifest.json": "1655a7ca2029128341e999cbbc7b9f3577549d8f9678766d49538ef270d93bfd",
+    "scripts/verify.py": "a70b1fa704dd590f937f8b37682afa88a9d85a9150065acb935c7d2c9589da3b",
+    "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  },
+  "fresh_audit_sha256": "3e8a58d43668efa534fc2f86e9391dc78b7c51a04190704d33a38c12552262f8",
+  "lean_toolchain": "leanprover/lean4:v4.34.0",
+  "scope": "Sargent and Stachurski, Dynamic Programming, Volume 1 (Finite States), Chapter 4: Optimal Stopping. Stopping problems (beta, P, c, e), policies and their lifetime values as fixed points of the policy operators, the spectral radius bound rho(L_sigma) < 1, the Bellman operator as a beta-contraction whose unique fixed point is the value function, Bellman's principle of optimality for stopping problems, value function iteration, continuation values and the continuation value operator, monotone values and threshold policies, dimensionality reduction for IID components, firm valuation with exit, finite-horizon American options embedded in infinite-horizon stopping with the exercise region expanding over time, and research and development with constant and IID costs, with the provable exercises.",
+  "source": "Thomas J. Sargent and John Stachurski, Dynamic Programming, Volume 1: Finite States, Chapter 4, pp. 105-127."
+}

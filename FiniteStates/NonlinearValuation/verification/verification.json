@@ -1,0 +1,3172 @@
+{
+  "checked_at_utc": "2026-10-06T22:35:03.526916+00:00",
+  "theorems": 251,
+  "module_theorems": {
+    "NonlinearValuation/Basics.lean": 18,
+    "NonlinearValuation/SpectralRadius.lean": 29,
+    "NonlinearValuation/Resolvent.lean": 11,
+    "NonlinearValuation/PerronFrobenius.lean": 20,
+    "NonlinearValuation/Irreducible.lean": 10,
+    "NonlinearValuation/LinearValuation.lean": 25,
+    "NonlinearValuation/OrderFixedPoints.lean": 15,
+    "NonlinearValuation/OneDimensional.lean": 7,
+    "NonlinearValuation/PowerAffine.lean": 27,
+    "NonlinearValuation/CertaintyEquivalents.lean": 33,
+    "NonlinearValuation/Koopmans.lean": 29,
+    "NonlinearValuation/RiskSensitive.lean": 14,
+    "NonlinearValuation/EpsteinZin.lean": 13
+  },
+  "audited_declarations": 312,
+  "declarations": [
+    {
+      "name": "SargentStachurski.NonlinearValuation.IsMarkov",
+      "kind": "structure",
+      "module": "NonlinearValuation/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.IsMarkov.mk",
+      "kind": "constructor",
+      "module": "NonlinearValuation/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.IsMarkov.nonneg",
+      "kind": "projection",
+      "module": "NonlinearValuation/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.IsMarkov.rowsum",
+      "kind": "projection",
+      "module": "NonlinearValuation/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.IsDistribution",
+      "kind": "structure",
+      "module": "NonlinearValuation/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.IsDistribution.mk",
+      "kind": "constructor",
+      "module": "NonlinearValuation/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.IsDistribution.nonneg",
+      "kind": "projection",
+      "module": "NonlinearValuation/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.IsDistribution.sum_eq_one",
+      "kind": "projection",
+      "module": "NonlinearValuation/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.mulVec_apply_eq",
+      "kind": "theorem",
+      "module": "NonlinearValuation/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.IsMarkov.mul",
+      "kind": "theorem",
+      "module": "NonlinearValuation/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.IsMarkov.pow",
+      "kind": "theorem",
+      "module": "NonlinearValuation/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.IsMarkov.mulVec_le_mulVec",
+      "kind": "theorem",
+      "module": "NonlinearValuation/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.IsMarkov.mulVec_const",
+      "kind": "theorem",
+      "module": "NonlinearValuation/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.IsMarkov.abs_mulVec_le",
+      "kind": "theorem",
+      "module": "NonlinearValuation/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.IsMarkov.norm_mulVec_le",
+      "kind": "theorem",
+      "module": "NonlinearValuation/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.IsMarkov.abs_mulVec_sub_le",
+      "kind": "theorem",
+      "module": "NonlinearValuation/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.GloballyStable",
+      "kind": "def",
+      "module": "NonlinearValuation/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.IsContractionOn",
+      "kind": "structure",
+      "module": "NonlinearValuation/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.IsContractionOn.mk",
+      "kind": "constructor",
+      "module": "NonlinearValuation/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.IsContractionOn.mapsTo",
+      "kind": "projection",
+      "module": "NonlinearValuation/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.IsContractionOn.nonneg",
+      "kind": "projection",
+      "module": "NonlinearValuation/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.IsContractionOn.lt_one",
+      "kind": "projection",
+      "module": "NonlinearValuation/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.IsContractionOn.norm_sub_le",
+      "kind": "projection",
+      "module": "NonlinearValuation/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.IsContractionOn.fixedPt_unique",
+      "kind": "theorem",
+      "module": "NonlinearValuation/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.IsContractionOn.iterate_mem",
+      "kind": "theorem",
+      "module": "NonlinearValuation/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.IsContractionOn.norm_iterate_sub_fixedPt_le",
+      "kind": "theorem",
+      "module": "NonlinearValuation/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.IsContractionOn.tendsto_iterate_fixedPt",
+      "kind": "theorem",
+      "module": "NonlinearValuation/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.IsContractionOn.exists_fixedPt",
+      "kind": "theorem",
+      "module": "NonlinearValuation/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.IsContractionOn.globallyStable_univ",
+      "kind": "theorem",
+      "module": "NonlinearValuation/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.fixedPt_le_of_le",
+      "kind": "theorem",
+      "module": "NonlinearValuation/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.le_fixedPt_of_le_apply",
+      "kind": "theorem",
+      "module": "NonlinearValuation/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.isContractionOn_of_blackwell",
+      "kind": "theorem",
+      "module": "NonlinearValuation/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.abs_sup'_sub_sup'_le",
+      "kind": "theorem",
+      "module": "NonlinearValuation/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.pow_nonneg_entries",
+      "kind": "theorem",
+      "module": "NonlinearValuation/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.pow_le_pow_entries",
+      "kind": "theorem",
+      "module": "NonlinearValuation/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.complexify",
+      "kind": "def",
+      "module": "NonlinearValuation/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.complexify_apply",
+      "kind": "theorem",
+      "module": "NonlinearValuation/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.complexify_pow",
+      "kind": "theorem",
+      "module": "NonlinearValuation/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.complexify_transpose",
+      "kind": "theorem",
+      "module": "NonlinearValuation/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.nnnorm_complexify",
+      "kind": "theorem",
+      "module": "NonlinearValuation/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.norm_complexify",
+      "kind": "theorem",
+      "module": "NonlinearValuation/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.specRad",
+      "kind": "def",
+      "module": "NonlinearValuation/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.spectralRadius_complexify_ne_top",
+      "kind": "theorem",
+      "module": "NonlinearValuation/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.specRad_nonneg",
+      "kind": "theorem",
+      "module": "NonlinearValuation/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.mem_spectrum_iff_eigenpair",
+      "kind": "theorem",
+      "module": "NonlinearValuation/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.tendsto_norm_pow_rpow",
+      "kind": "theorem",
+      "module": "NonlinearValuation/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.eventually_norm_pow_le",
+      "kind": "theorem",
+      "module": "NonlinearValuation/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.tendsto_norm_pow_zero",
+      "kind": "theorem",
+      "module": "NonlinearValuation/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.summable_pow",
+      "kind": "theorem",
+      "module": "NonlinearValuation/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.one_sub_mul_tsum",
+      "kind": "theorem",
+      "module": "NonlinearValuation/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.tsum_mul_one_sub",
+      "kind": "theorem",
+      "module": "NonlinearValuation/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.neumann_series",
+      "kind": "theorem",
+      "module": "NonlinearValuation/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.specRad_transpose",
+      "kind": "theorem",
+      "module": "NonlinearValuation/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.norm_le_norm_of_abs_le",
+      "kind": "theorem",
+      "module": "NonlinearValuation/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.specRad_le_of_le",
+      "kind": "theorem",
+      "module": "NonlinearValuation/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.rowsum_abs_le_norm",
+      "kind": "theorem",
+      "module": "NonlinearValuation/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.norm_le_of_rowsum_abs_le",
+      "kind": "theorem",
+      "module": "NonlinearValuation/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.abs_entry_le_norm",
+      "kind": "theorem",
+      "module": "NonlinearValuation/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.norm_eq_of_rowsum_eq",
+      "kind": "theorem",
+      "module": "NonlinearValuation/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.specRad_le_norm",
+      "kind": "theorem",
+      "module": "NonlinearValuation/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.norm_le_specRad_of_mem_spectrum",
+      "kind": "theorem",
+      "module": "NonlinearValuation/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.specRad_eq_of_rowsum_eq",
+      "kind": "theorem",
+      "module": "NonlinearValuation/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.specRad_eq_of_colsum_eq",
+      "kind": "theorem",
+      "module": "NonlinearValuation/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.eventually_abs_entry_pow_le",
+      "kind": "theorem",
+      "module": "NonlinearValuation/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.resPartial",
+      "kind": "def",
+      "module": "NonlinearValuation/Resolvent.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.res",
+      "kind": "def",
+      "module": "NonlinearValuation/Resolvent.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.res_apply",
+      "kind": "theorem",
+      "module": "NonlinearValuation/Resolvent.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.smul_one_sub_mul_resPartial",
+      "kind": "theorem",
+      "module": "NonlinearValuation/Resolvent.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.resPartial_mul_smul_one_sub",
+      "kind": "theorem",
+      "module": "NonlinearValuation/Resolvent.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.resPartial_apply",
+      "kind": "theorem",
+      "module": "NonlinearValuation/Resolvent.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.summable_res_entry",
+      "kind": "theorem",
+      "module": "NonlinearValuation/Resolvent.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.tendsto_resPartial_apply",
+      "kind": "theorem",
+      "module": "NonlinearValuation/Resolvent.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.tendsto_inv_pow_mul_apply",
+      "kind": "theorem",
+      "module": "NonlinearValuation/Resolvent.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.smul_one_sub_mul_res",
+      "kind": "theorem",
+      "module": "NonlinearValuation/Resolvent.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.res_mul_smul_one_sub",
+      "kind": "theorem",
+      "module": "NonlinearValuation/Resolvent.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.res_nonneg",
+      "kind": "theorem",
+      "module": "NonlinearValuation/Resolvent.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.inv_le_res_diag",
+      "kind": "theorem",
+      "module": "NonlinearValuation/Resolvent.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.exists_mem_spectrum_norm_eq",
+      "kind": "theorem",
+      "module": "NonlinearValuation/PerronFrobenius.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.eventually_norm_entry_pow_complexify_le",
+      "kind": "theorem",
+      "module": "NonlinearValuation/PerronFrobenius.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.smul_one_sub_mul_res_real",
+      "kind": "theorem",
+      "module": "NonlinearValuation/PerronFrobenius.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.norm_res_complexify_le",
+      "kind": "theorem",
+      "module": "NonlinearValuation/PerronFrobenius.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.norm_le_card_mul_of_entry_norm_le",
+      "kind": "theorem",
+      "module": "NonlinearValuation/PerronFrobenius.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.notMem_spectrum_of_res_bounded",
+      "kind": "theorem",
+      "module": "NonlinearValuation/PerronFrobenius.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.exists_res_entry_gt",
+      "kind": "theorem",
+      "module": "NonlinearValuation/PerronFrobenius.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.isCompact_simplex",
+      "kind": "theorem",
+      "module": "NonlinearValuation/PerronFrobenius.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.perron_frobenius",
+      "kind": "theorem",
+      "module": "NonlinearValuation/PerronFrobenius.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.perron_frobenius_left",
+      "kind": "theorem",
+      "module": "NonlinearValuation/PerronFrobenius.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.le_specRad_of_colsum_ge",
+      "kind": "theorem",
+      "module": "NonlinearValuation/PerronFrobenius.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.specRad_le_of_colsum_le",
+      "kind": "theorem",
+      "module": "NonlinearValuation/PerronFrobenius.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.le_specRad_of_rowsum_ge",
+      "kind": "theorem",
+      "module": "NonlinearValuation/PerronFrobenius.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.specRad_le_of_rowsum_le",
+      "kind": "theorem",
+      "module": "NonlinearValuation/PerronFrobenius.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.tendsto_rpow_one_div_natCast",
+      "kind": "theorem",
+      "module": "NonlinearValuation/PerronFrobenius.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.norm_pow_mul_le_norm_mulVec",
+      "kind": "theorem",
+      "module": "NonlinearValuation/PerronFrobenius.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.tendsto_norm_pow_mulVec_rpow",
+      "kind": "theorem",
+      "module": "NonlinearValuation/PerronFrobenius.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.IsMarkov.specRad_eq_one",
+      "kind": "theorem",
+      "module": "NonlinearValuation/PerronFrobenius.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.IsMarkov.exists_stationary",
+      "kind": "theorem",
+      "module": "NonlinearValuation/PerronFrobenius.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.IsMarkov.not_mulVec_ge_add",
+      "kind": "theorem",
+      "module": "NonlinearValuation/PerronFrobenius.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.Irreducible",
+      "kind": "def",
+      "module": "NonlinearValuation/Irreducible.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.irreducible_of_pos",
+      "kind": "theorem",
+      "module": "NonlinearValuation/Irreducible.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.Irreducible.transpose",
+      "kind": "theorem",
+      "module": "NonlinearValuation/Irreducible.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.pow_mulVec_eq_of_mulVec_eq",
+      "kind": "theorem",
+      "module": "NonlinearValuation/Irreducible.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.Irreducible.pos_of_mulVec_eq_smul",
+      "kind": "theorem",
+      "module": "NonlinearValuation/Irreducible.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.Irreducible.specRad_pos",
+      "kind": "theorem",
+      "module": "NonlinearValuation/Irreducible.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.Irreducible.exists_pos_eigenvector",
+      "kind": "theorem",
+      "module": "NonlinearValuation/Irreducible.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.Irreducible.exists_pos_left_eigenvector",
+      "kind": "theorem",
+      "module": "NonlinearValuation/Irreducible.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.Irreducible.eq_specRad_of_mulVec_eq_smul",
+      "kind": "theorem",
+      "module": "NonlinearValuation/Irreducible.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.Irreducible.exists_eq_smul_of_mulVec_eq_smul",
+      "kind": "theorem",
+      "module": "NonlinearValuation/Irreducible.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.IsMarkov.exists_unique_stationary_of_irreducible",
+      "kind": "theorem",
+      "module": "NonlinearValuation/Irreducible.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.discountOp",
+      "kind": "def",
+      "module": "NonlinearValuation/LinearValuation.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.discountOp_apply",
+      "kind": "theorem",
+      "module": "NonlinearValuation/LinearValuation.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.discountOp_nonneg",
+      "kind": "theorem",
+      "module": "NonlinearValuation/LinearValuation.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.discountOp_const",
+      "kind": "theorem",
+      "module": "NonlinearValuation/LinearValuation.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.specRad_smul_isMarkov",
+      "kind": "theorem",
+      "module": "NonlinearValuation/LinearValuation.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.summable_pow_apply",
+      "kind": "theorem",
+      "module": "NonlinearValuation/LinearValuation.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.summable_pow_mulVec",
+      "kind": "theorem",
+      "module": "NonlinearValuation/LinearValuation.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.mulVec_tsum_pow_mulVec",
+      "kind": "theorem",
+      "module": "NonlinearValuation/LinearValuation.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.tsum_pow_mulVec_eq",
+      "kind": "theorem",
+      "module": "NonlinearValuation/LinearValuation.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.eq_of_eq_add_mulVec",
+      "kind": "theorem",
+      "module": "NonlinearValuation/LinearValuation.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.inv_mulVec_eq_add",
+      "kind": "theorem",
+      "module": "NonlinearValuation/LinearValuation.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.inv_mulVec_eq_tsum",
+      "kind": "theorem",
+      "module": "NonlinearValuation/LinearValuation.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.eq_add_mulVec_iff",
+      "kind": "theorem",
+      "module": "NonlinearValuation/LinearValuation.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.specRad_lt_one_iff_existsUnique_pos",
+      "kind": "theorem",
+      "module": "NonlinearValuation/LinearValuation.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.globallyStable_of_iterate_contraction",
+      "kind": "theorem",
+      "module": "NonlinearValuation/LinearValuation.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.globallyStable_of_iterate_contraction_univ",
+      "kind": "theorem",
+      "module": "NonlinearValuation/LinearValuation.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.affineOp",
+      "kind": "def",
+      "module": "NonlinearValuation/LinearValuation.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.affineOp_iterate_sub",
+      "kind": "theorem",
+      "module": "NonlinearValuation/LinearValuation.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.exists_isContractionOn_iterate_affineOp",
+      "kind": "theorem",
+      "module": "NonlinearValuation/LinearValuation.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.globallyStable_affineOp",
+      "kind": "theorem",
+      "module": "NonlinearValuation/LinearValuation.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.isFixedPt_affineOp_inv",
+      "kind": "theorem",
+      "module": "NonlinearValuation/LinearValuation.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.mulVec_le_mulVec_of_nonneg",
+      "kind": "theorem",
+      "module": "NonlinearValuation/LinearValuation.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.norm_abs_fun",
+      "kind": "theorem",
+      "module": "NonlinearValuation/LinearValuation.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.norm_le_norm_of_abs_le_fun",
+      "kind": "theorem",
+      "module": "NonlinearValuation/LinearValuation.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.abs_iterate_sub_le_pow_mulVec",
+      "kind": "theorem",
+      "module": "NonlinearValuation/LinearValuation.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.exists_isContractionOn_iterate_of_abs_sub_le",
+      "kind": "theorem",
+      "module": "NonlinearValuation/LinearValuation.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.globallyStable_of_abs_sub_le",
+      "kind": "theorem",
+      "module": "NonlinearValuation/LinearValuation.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.GloballyStableOn",
+      "kind": "def",
+      "module": "NonlinearValuation/OrderFixedPoints.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.globallyStableOn_univ_iff",
+      "kind": "theorem",
+      "module": "NonlinearValuation/OrderFixedPoints.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.GloballyStableOn.existsUnique",
+      "kind": "theorem",
+      "module": "NonlinearValuation/OrderFixedPoints.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.GloballyStableOn.of_conj",
+      "kind": "theorem",
+      "module": "NonlinearValuation/OrderFixedPoints.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.globallyStableOn_iff_of_conj",
+      "kind": "theorem",
+      "module": "NonlinearValuation/OrderFixedPoints.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.iterate_le_iterate_of_monotoneOn",
+      "kind": "theorem",
+      "module": "NonlinearValuation/OrderFixedPoints.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.knaster_tarski",
+      "kind": "theorem",
+      "module": "NonlinearValuation/OrderFixedPoints.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.exists_continuum_fixedPts",
+      "kind": "theorem",
+      "module": "NonlinearValuation/OrderFixedPoints.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.du_concave",
+      "kind": "theorem",
+      "module": "NonlinearValuation/OrderFixedPoints.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.exists_delta_of_lt",
+      "kind": "theorem",
+      "module": "NonlinearValuation/OrderFixedPoints.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.du_concave_of_lt",
+      "kind": "theorem",
+      "module": "NonlinearValuation/OrderFixedPoints.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.neg_mem_Icc_iff",
+      "kind": "theorem",
+      "module": "NonlinearValuation/OrderFixedPoints.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.globallyStableOn_of_reflect",
+      "kind": "theorem",
+      "module": "NonlinearValuation/OrderFixedPoints.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.du_convex",
+      "kind": "theorem",
+      "module": "NonlinearValuation/OrderFixedPoints.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.du_convex_of_lt",
+      "kind": "theorem",
+      "module": "NonlinearValuation/OrderFixedPoints.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.concaveOn_comp",
+      "kind": "theorem",
+      "module": "NonlinearValuation/OrderFixedPoints.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.exists_fixedPt_tendsto_of_concave",
+      "kind": "theorem",
+      "module": "NonlinearValuation/OneDimensional.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.globallyStableOn_of_concave",
+      "kind": "theorem",
+      "module": "NonlinearValuation/OneDimensional.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.solowSwan",
+      "kind": "def",
+      "module": "NonlinearValuation/OneDimensional.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.globallyStableOn_solowSwan",
+      "kind": "theorem",
+      "module": "NonlinearValuation/OneDimensional.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.not_globallyStableOn_id",
+      "kind": "theorem",
+      "module": "NonlinearValuation/OneDimensional.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.globallyStableOn_solow_inada",
+      "kind": "theorem",
+      "module": "NonlinearValuation/OneDimensional.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.fajgelbaum",
+      "kind": "def",
+      "module": "NonlinearValuation/OneDimensional.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.concaveOn_inv_inv_add",
+      "kind": "theorem",
+      "module": "NonlinearValuation/OneDimensional.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.globallyStableOn_fajgelbaum",
+      "kind": "theorem",
+      "module": "NonlinearValuation/OneDimensional.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.posCone",
+      "kind": "def",
+      "module": "NonlinearValuation/PowerAffine.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.convex_posCone",
+      "kind": "theorem",
+      "module": "NonlinearValuation/PowerAffine.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.Irreducible.exists_pos_row",
+      "kind": "theorem",
+      "module": "NonlinearValuation/PowerAffine.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.mulVec_pos_of_row",
+      "kind": "theorem",
+      "module": "NonlinearValuation/PowerAffine.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.Irreducible.of_pos_mul",
+      "kind": "theorem",
+      "module": "NonlinearValuation/PowerAffine.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.powF",
+      "kind": "def",
+      "module": "NonlinearValuation/PowerAffine.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.powF_pos",
+      "kind": "theorem",
+      "module": "NonlinearValuation/PowerAffine.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.powF_monotoneOn",
+      "kind": "theorem",
+      "module": "NonlinearValuation/PowerAffine.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.hasDerivAt_powF",
+      "kind": "theorem",
+      "module": "NonlinearValuation/PowerAffine.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.continuousOn_powF",
+      "kind": "theorem",
+      "module": "NonlinearValuation/PowerAffine.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.differentiableOn_powF",
+      "kind": "theorem",
+      "module": "NonlinearValuation/PowerAffine.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.convexOn_powF",
+      "kind": "theorem",
+      "module": "NonlinearValuation/PowerAffine.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.concaveOn_powF",
+      "kind": "theorem",
+      "module": "NonlinearValuation/PowerAffine.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.powG",
+      "kind": "def",
+      "module": "NonlinearValuation/PowerAffine.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.powG_apply",
+      "kind": "theorem",
+      "module": "NonlinearValuation/PowerAffine.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.powG_mapsTo",
+      "kind": "theorem",
+      "module": "NonlinearValuation/PowerAffine.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.powG_monotoneOn",
+      "kind": "theorem",
+      "module": "NonlinearValuation/PowerAffine.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.convexOn_powG",
+      "kind": "theorem",
+      "module": "NonlinearValuation/PowerAffine.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.concaveOn_powG",
+      "kind": "theorem",
+      "module": "NonlinearValuation/PowerAffine.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.specRad_rpow_lt_one_of_isFixedPt",
+      "kind": "theorem",
+      "module": "NonlinearValuation/PowerAffine.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.not_isFixedPt_powG",
+      "kind": "theorem",
+      "module": "NonlinearValuation/PowerAffine.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.scalar_bounds",
+      "kind": "theorem",
+      "module": "NonlinearValuation/PowerAffine.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.powG_smul_eigen",
+      "kind": "theorem",
+      "module": "NonlinearValuation/PowerAffine.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.exists_thresholds",
+      "kind": "theorem",
+      "module": "NonlinearValuation/PowerAffine.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.globallyStableOn_powG_Icc",
+      "kind": "theorem",
+      "module": "NonlinearValuation/PowerAffine.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.exists_interval",
+      "kind": "theorem",
+      "module": "NonlinearValuation/PowerAffine.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.globallyStableOn_powG",
+      "kind": "theorem",
+      "module": "NonlinearValuation/PowerAffine.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.globallyStableOn_powG_iff",
+      "kind": "theorem",
+      "module": "NonlinearValuation/PowerAffine.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.kleinmanA",
+      "kind": "def",
+      "module": "NonlinearValuation/PowerAffine.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.IsKleinmanSol",
+      "kind": "def",
+      "module": "NonlinearValuation/PowerAffine.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.isKleinmanSol_iff",
+      "kind": "theorem",
+      "module": "NonlinearValuation/PowerAffine.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.existsUnique_kleinmanSol_iff",
+      "kind": "theorem",
+      "module": "NonlinearValuation/PowerAffine.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.IsCertEquiv",
+      "kind": "structure",
+      "module": "NonlinearValuation/CertaintyEquivalents.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.IsCertEquiv.mk",
+      "kind": "constructor",
+      "module": "NonlinearValuation/CertaintyEquivalents.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.IsCertEquiv.mapsTo",
+      "kind": "projection",
+      "module": "NonlinearValuation/CertaintyEquivalents.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.IsCertEquiv.mono",
+      "kind": "projection",
+      "module": "NonlinearValuation/CertaintyEquivalents.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.IsCertEquiv.const",
+      "kind": "projection",
+      "module": "NonlinearValuation/CertaintyEquivalents.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.IsMarkov.isCertEquiv",
+      "kind": "theorem",
+      "module": "NonlinearValuation/CertaintyEquivalents.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.isCertEquiv_mulVec_iff",
+      "kind": "theorem",
+      "module": "NonlinearValuation/CertaintyEquivalents.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.IsMarkov.mulVec_pos",
+      "kind": "theorem",
+      "module": "NonlinearValuation/CertaintyEquivalents.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.IsCertEquiv.zero_and_nonneg",
+      "kind": "theorem",
+      "module": "NonlinearValuation/CertaintyEquivalents.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.IsCertEquiv.convex_comb",
+      "kind": "theorem",
+      "module": "NonlinearValuation/CertaintyEquivalents.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.PosHomogeneous",
+      "kind": "def",
+      "module": "NonlinearValuation/CertaintyEquivalents.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.Superadditive",
+      "kind": "def",
+      "module": "NonlinearValuation/CertaintyEquivalents.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.Subadditive",
+      "kind": "def",
+      "module": "NonlinearValuation/CertaintyEquivalents.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.ConstSubadditive",
+      "kind": "def",
+      "module": "NonlinearValuation/CertaintyEquivalents.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.mulVec_properties",
+      "kind": "theorem",
+      "module": "NonlinearValuation/CertaintyEquivalents.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.nonexpansive_of_constSubadditive",
+      "kind": "theorem",
+      "module": "NonlinearValuation/CertaintyEquivalents.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.convexOn_of_subadditive",
+      "kind": "theorem",
+      "module": "NonlinearValuation/CertaintyEquivalents.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.concaveOn_of_superadditive",
+      "kind": "theorem",
+      "module": "NonlinearValuation/CertaintyEquivalents.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.entR",
+      "kind": "def",
+      "module": "NonlinearValuation/CertaintyEquivalents.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.entR_add_const",
+      "kind": "theorem",
+      "module": "NonlinearValuation/CertaintyEquivalents.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.isCertEquiv_entR",
+      "kind": "theorem",
+      "module": "NonlinearValuation/CertaintyEquivalents.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.constSubadditive_entR",
+      "kind": "theorem",
+      "module": "NonlinearValuation/CertaintyEquivalents.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.log_sum_exp_le",
+      "kind": "theorem",
+      "module": "NonlinearValuation/CertaintyEquivalents.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.concaveOn_entR",
+      "kind": "theorem",
+      "module": "NonlinearValuation/CertaintyEquivalents.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.kpR",
+      "kind": "def",
+      "module": "NonlinearValuation/CertaintyEquivalents.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.kpR_pos",
+      "kind": "theorem",
+      "module": "NonlinearValuation/CertaintyEquivalents.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.isCertEquiv_kpR",
+      "kind": "theorem",
+      "module": "NonlinearValuation/CertaintyEquivalents.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.posHomogeneous_kpR",
+      "kind": "theorem",
+      "module": "NonlinearValuation/CertaintyEquivalents.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.sum_rpow_normalize",
+      "kind": "theorem",
+      "module": "NonlinearValuation/CertaintyEquivalents.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.sum_rpow_add_le",
+      "kind": "theorem",
+      "module": "NonlinearValuation/CertaintyEquivalents.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.le_sum_rpow_add",
+      "kind": "theorem",
+      "module": "NonlinearValuation/CertaintyEquivalents.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.convexOn_rpow_of_neg",
+      "kind": "theorem",
+      "module": "NonlinearValuation/CertaintyEquivalents.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.subadditive_kpR",
+      "kind": "theorem",
+      "module": "NonlinearValuation/CertaintyEquivalents.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.superadditive_kpR",
+      "kind": "theorem",
+      "module": "NonlinearValuation/CertaintyEquivalents.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.smul_mem_posCone",
+      "kind": "theorem",
+      "module": "NonlinearValuation/CertaintyEquivalents.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.convexOn_kpR",
+      "kind": "theorem",
+      "module": "NonlinearValuation/CertaintyEquivalents.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.concaveOn_kpR",
+      "kind": "theorem",
+      "module": "NonlinearValuation/CertaintyEquivalents.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.condCdf",
+      "kind": "def",
+      "module": "NonlinearValuation/CertaintyEquivalents.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.quantR",
+      "kind": "def",
+      "module": "NonlinearValuation/CertaintyEquivalents.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.isLeast_quantR",
+      "kind": "theorem",
+      "module": "NonlinearValuation/CertaintyEquivalents.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.isCertEquiv_quantR",
+      "kind": "theorem",
+      "module": "NonlinearValuation/CertaintyEquivalents.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.quantR_add_const",
+      "kind": "theorem",
+      "module": "NonlinearValuation/CertaintyEquivalents.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.constSubadditive_quantR",
+      "kind": "theorem",
+      "module": "NonlinearValuation/CertaintyEquivalents.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.MonotoneKernel",
+      "kind": "def",
+      "module": "NonlinearValuation/CertaintyEquivalents.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.MonotoneKernel.antitone",
+      "kind": "theorem",
+      "module": "NonlinearValuation/CertaintyEquivalents.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.monotone_entR",
+      "kind": "theorem",
+      "module": "NonlinearValuation/CertaintyEquivalents.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.monotone_kpR",
+      "kind": "theorem",
+      "module": "NonlinearValuation/CertaintyEquivalents.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.IsAggregator",
+      "kind": "structure",
+      "module": "NonlinearValuation/Koopmans.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.IsAggregator.mk",
+      "kind": "constructor",
+      "module": "NonlinearValuation/Koopmans.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.IsAggregator.values",
+      "kind": "projection",
+      "module": "NonlinearValuation/Koopmans.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.IsAggregator.mapsTo",
+      "kind": "projection",
+      "module": "NonlinearValuation/Koopmans.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.IsAggregator.mono",
+      "kind": "projection",
+      "module": "NonlinearValuation/Koopmans.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.leontief",
+      "kind": "def",
+      "module": "NonlinearValuation/Koopmans.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.uzawa",
+      "kind": "def",
+      "module": "NonlinearValuation/Koopmans.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.cesAgg",
+      "kind": "def",
+      "module": "NonlinearValuation/Koopmans.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.additive",
+      "kind": "def",
+      "module": "NonlinearValuation/Koopmans.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.cesUzawa",
+      "kind": "def",
+      "module": "NonlinearValuation/Koopmans.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.additive_eq_uzawa",
+      "kind": "theorem",
+      "module": "NonlinearValuation/Koopmans.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.additive_eq_cesAgg",
+      "kind": "theorem",
+      "module": "NonlinearValuation/Koopmans.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.isAggregator_leontief",
+      "kind": "theorem",
+      "module": "NonlinearValuation/Koopmans.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.isAggregator_uzawa",
+      "kind": "theorem",
+      "module": "NonlinearValuation/Koopmans.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.isAggregator_additive",
+      "kind": "theorem",
+      "module": "NonlinearValuation/Koopmans.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.isAggregator_cesUzawa",
+      "kind": "theorem",
+      "module": "NonlinearValuation/Koopmans.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.isAggregator_cesAgg",
+      "kind": "theorem",
+      "module": "NonlinearValuation/Koopmans.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.koopmans",
+      "kind": "def",
+      "module": "NonlinearValuation/Koopmans.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.koopmans_mapsTo_monotoneOn",
+      "kind": "theorem",
+      "module": "NonlinearValuation/Koopmans.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.koopmans_additive_entR",
+      "kind": "theorem",
+      "module": "NonlinearValuation/Koopmans.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.koopmans_cesAgg_kpR",
+      "kind": "theorem",
+      "module": "NonlinearValuation/Koopmans.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.koopmans_additive_mulVec",
+      "kind": "theorem",
+      "module": "NonlinearValuation/Koopmans.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.ces_eis",
+      "kind": "theorem",
+      "module": "NonlinearValuation/Koopmans.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.iterate_additive_eq",
+      "kind": "theorem",
+      "module": "NonlinearValuation/Koopmans.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.additive_lifetimeValue",
+      "kind": "theorem",
+      "module": "NonlinearValuation/Koopmans.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.monotone_of_globallyStableOn",
+      "kind": "theorem",
+      "module": "NonlinearValuation/Koopmans.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.monotone_koopmans_fixedPt",
+      "kind": "theorem",
+      "module": "NonlinearValuation/Koopmans.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.IsBlackwellAgg",
+      "kind": "def",
+      "module": "NonlinearValuation/Koopmans.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.isBlackwellAgg_additive",
+      "kind": "theorem",
+      "module": "NonlinearValuation/Koopmans.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.isBlackwellAgg_leontief",
+      "kind": "theorem",
+      "module": "NonlinearValuation/Koopmans.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.isContractionOn_koopmans",
+      "kind": "theorem",
+      "module": "NonlinearValuation/Koopmans.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.globallyStable_koopmans",
+      "kind": "theorem",
+      "module": "NonlinearValuation/Koopmans.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.globallyStable_riskSensitive",
+      "kind": "theorem",
+      "module": "NonlinearValuation/Koopmans.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.globallyStable_leontief",
+      "kind": "theorem",
+      "module": "NonlinearValuation/Koopmans.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.globallyStable_quantile",
+      "kind": "theorem",
+      "module": "NonlinearValuation/Koopmans.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.globallyStable_leontief_quantile",
+      "kind": "theorem",
+      "module": "NonlinearValuation/Koopmans.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.koopmans_uzawa_mulVec",
+      "kind": "theorem",
+      "module": "NonlinearValuation/Koopmans.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.uzawa_lifetimeValue",
+      "kind": "theorem",
+      "module": "NonlinearValuation/Koopmans.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.irreducible_uzawa",
+      "kind": "theorem",
+      "module": "NonlinearValuation/Koopmans.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.uzawa_no_pos_fixedPt",
+      "kind": "theorem",
+      "module": "NonlinearValuation/Koopmans.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.nonnegCone",
+      "kind": "def",
+      "module": "NonlinearValuation/Koopmans.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.globallyStableOn_uzawa_concave",
+      "kind": "theorem",
+      "module": "NonlinearValuation/Koopmans.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.timeAdditive_solution",
+      "kind": "theorem",
+      "module": "NonlinearValuation/RiskSensitive.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.entExp",
+      "kind": "def",
+      "module": "NonlinearValuation/RiskSensitive.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.entR_eq_entExp",
+      "kind": "theorem",
+      "module": "NonlinearValuation/RiskSensitive.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.entExp_add_const",
+      "kind": "theorem",
+      "module": "NonlinearValuation/RiskSensitive.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.entExp_gaussian",
+      "kind": "theorem",
+      "module": "NonlinearValuation/RiskSensitive.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.exp_mean_le",
+      "kind": "theorem",
+      "module": "NonlinearValuation/RiskSensitive.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.mul_mean_le_log",
+      "kind": "theorem",
+      "module": "NonlinearValuation/RiskSensitive.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.entExp_le_mean",
+      "kind": "theorem",
+      "module": "NonlinearValuation/RiskSensitive.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.mean_le_entExp",
+      "kind": "theorem",
+      "module": "NonlinearValuation/RiskSensitive.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.entExp_ne_mean",
+      "kind": "theorem",
+      "module": "NonlinearValuation/RiskSensitive.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.entExp_eq_mean",
+      "kind": "theorem",
+      "module": "NonlinearValuation/RiskSensitive.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.integral_exp_add_mul_gaussian",
+      "kind": "theorem",
+      "module": "NonlinearValuation/RiskSensitive.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.riskSensitive_gaussian",
+      "kind": "theorem",
+      "module": "NonlinearValuation/RiskSensitive.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.riskSensitive_iid",
+      "kind": "theorem",
+      "module": "NonlinearValuation/RiskSensitive.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.riskSensitive_iid_unique",
+      "kind": "theorem",
+      "module": "NonlinearValuation/RiskSensitive.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.ezK",
+      "kind": "def",
+      "module": "NonlinearValuation/EpsteinZin.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.ezK_eq_koopmans",
+      "kind": "theorem",
+      "module": "NonlinearValuation/EpsteinZin.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.ezK_apply_ez",
+      "kind": "theorem",
+      "module": "NonlinearValuation/EpsteinZin.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.ezK_mapsTo",
+      "kind": "theorem",
+      "module": "NonlinearValuation/EpsteinZin.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.powMap",
+      "kind": "def",
+      "module": "NonlinearValuation/EpsteinZin.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.powMap_mapsTo",
+      "kind": "theorem",
+      "module": "NonlinearValuation/EpsteinZin.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.powMap_inv",
+      "kind": "theorem",
+      "module": "NonlinearValuation/EpsteinZin.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.powMap_inv'",
+      "kind": "theorem",
+      "module": "NonlinearValuation/EpsteinZin.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.continuousOn_powMap",
+      "kind": "theorem",
+      "module": "NonlinearValuation/EpsteinZin.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.ezB",
+      "kind": "def",
+      "module": "NonlinearValuation/EpsteinZin.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.powMap_ezK",
+      "kind": "theorem",
+      "module": "NonlinearValuation/EpsteinZin.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.irreducible_ezB",
+      "kind": "theorem",
+      "module": "NonlinearValuation/EpsteinZin.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.globallyStableOn_ezK_iff",
+      "kind": "theorem",
+      "module": "NonlinearValuation/EpsteinZin.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.globallyStableOn_ez",
+      "kind": "theorem",
+      "module": "NonlinearValuation/EpsteinZin.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.ez_deriv_tendsto_atTop",
+      "kind": "theorem",
+      "module": "NonlinearValuation/EpsteinZin.lean"
+    },
+    {
+      "name": "SargentStachurski.NonlinearValuation.monotone_ez_lifetimeValue",
+      "kind": "theorem",
+      "module": "NonlinearValuation/EpsteinZin.lean"
+    }
+  ],
+  "full_build": "passed",
+  "fresh_source_compilation": "passed",
+  "fresh_source_lint_options": [
+    "-Dlinter.mathlibStandardSet=true",
+    "-Dlinter.style.header=false"
+  ],
+  "axioms": {
+    "SargentStachurski.NonlinearValuation.IsMarkov": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.IsMarkov.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.IsMarkov.nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.IsMarkov.rowsum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.IsDistribution": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.IsDistribution.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.IsDistribution.nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.IsDistribution.sum_eq_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.mulVec_apply_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.IsMarkov.mul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.IsMarkov.pow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.IsMarkov.mulVec_le_mulVec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.IsMarkov.mulVec_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.IsMarkov.abs_mulVec_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.IsMarkov.norm_mulVec_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.IsMarkov.abs_mulVec_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.GloballyStable": [
+      "propext",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.IsContractionOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.IsContractionOn.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.IsContractionOn.mapsTo": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.IsContractionOn.nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.IsContractionOn.lt_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.IsContractionOn.norm_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.IsContractionOn.fixedPt_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.IsContractionOn.iterate_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.IsContractionOn.norm_iterate_sub_fixedPt_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.IsContractionOn.tendsto_iterate_fixedPt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.IsContractionOn.exists_fixedPt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.IsContractionOn.globallyStable_univ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.fixedPt_le_of_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.le_fixedPt_of_le_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.isContractionOn_of_blackwell": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.abs_sup'_sub_sup'_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.pow_nonneg_entries": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.pow_le_pow_entries": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.complexify": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.complexify_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.complexify_pow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.complexify_transpose": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.nnnorm_complexify": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.norm_complexify": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.specRad": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.spectralRadius_complexify_ne_top": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.specRad_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.mem_spectrum_iff_eigenpair": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.tendsto_norm_pow_rpow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.eventually_norm_pow_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.tendsto_norm_pow_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.summable_pow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.one_sub_mul_tsum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.tsum_mul_one_sub": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.neumann_series": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.specRad_transpose": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.norm_le_norm_of_abs_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.specRad_le_of_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.rowsum_abs_le_norm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.norm_le_of_rowsum_abs_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.abs_entry_le_norm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.norm_eq_of_rowsum_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.specRad_le_norm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.norm_le_specRad_of_mem_spectrum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.specRad_eq_of_rowsum_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.specRad_eq_of_colsum_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.eventually_abs_entry_pow_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.resPartial": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.res": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.res_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.smul_one_sub_mul_resPartial": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.resPartial_mul_smul_one_sub": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.resPartial_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.summable_res_entry": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.tendsto_resPartial_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.tendsto_inv_pow_mul_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.smul_one_sub_mul_res": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.res_mul_smul_one_sub": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.res_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.inv_le_res_diag": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.exists_mem_spectrum_norm_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.eventually_norm_entry_pow_complexify_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.smul_one_sub_mul_res_real": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.norm_res_complexify_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.norm_le_card_mul_of_entry_norm_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.notMem_spectrum_of_res_bounded": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.exists_res_entry_gt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.isCompact_simplex": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.perron_frobenius": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.perron_frobenius_left": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.le_specRad_of_colsum_ge": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.specRad_le_of_colsum_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.le_specRad_of_rowsum_ge": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.specRad_le_of_rowsum_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.tendsto_rpow_one_div_natCast": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.norm_pow_mul_le_norm_mulVec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.tendsto_norm_pow_mulVec_rpow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.IsMarkov.specRad_eq_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.IsMarkov.exists_stationary": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.IsMarkov.not_mulVec_ge_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.Irreducible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.irreducible_of_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.Irreducible.transpose": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.pow_mulVec_eq_of_mulVec_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.Irreducible.pos_of_mulVec_eq_smul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.Irreducible.specRad_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.Irreducible.exists_pos_eigenvector": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.Irreducible.exists_pos_left_eigenvector": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.Irreducible.eq_specRad_of_mulVec_eq_smul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.Irreducible.exists_eq_smul_of_mulVec_eq_smul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.IsMarkov.exists_unique_stationary_of_irreducible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.discountOp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.discountOp_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.discountOp_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.discountOp_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.specRad_smul_isMarkov": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.summable_pow_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.summable_pow_mulVec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.mulVec_tsum_pow_mulVec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.tsum_pow_mulVec_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.eq_of_eq_add_mulVec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.inv_mulVec_eq_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.inv_mulVec_eq_tsum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.eq_add_mulVec_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.specRad_lt_one_iff_existsUnique_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.globallyStable_of_iterate_contraction": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.globallyStable_of_iterate_contraction_univ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.affineOp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.affineOp_iterate_sub": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.exists_isContractionOn_iterate_affineOp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.globallyStable_affineOp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.isFixedPt_affineOp_inv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.mulVec_le_mulVec_of_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.norm_abs_fun": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.norm_le_norm_of_abs_le_fun": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.abs_iterate_sub_le_pow_mulVec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.exists_isContractionOn_iterate_of_abs_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.globallyStable_of_abs_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.GloballyStableOn": [
+      "propext",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.globallyStableOn_univ_iff": [
+      "propext",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.GloballyStableOn.existsUnique": [
+      "propext",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.GloballyStableOn.of_conj": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.globallyStableOn_iff_of_conj": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.iterate_le_iterate_of_monotoneOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.knaster_tarski": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.exists_continuum_fixedPts": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.du_concave": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.exists_delta_of_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.du_concave_of_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.neg_mem_Icc_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.globallyStableOn_of_reflect": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.du_convex": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.du_convex_of_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.concaveOn_comp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.exists_fixedPt_tendsto_of_concave": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.globallyStableOn_of_concave": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.solowSwan": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.globallyStableOn_solowSwan": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.not_globallyStableOn_id": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.globallyStableOn_solow_inada": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.fajgelbaum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.concaveOn_inv_inv_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.globallyStableOn_fajgelbaum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.posCone": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.convex_posCone": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.Irreducible.exists_pos_row": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.mulVec_pos_of_row": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.Irreducible.of_pos_mul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.powF": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.powF_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.powF_monotoneOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.hasDerivAt_powF": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.continuousOn_powF": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.differentiableOn_powF": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.convexOn_powF": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.concaveOn_powF": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.powG": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.powG_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.powG_mapsTo": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.powG_monotoneOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.convexOn_powG": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.concaveOn_powG": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.specRad_rpow_lt_one_of_isFixedPt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.not_isFixedPt_powG": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.scalar_bounds": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.powG_smul_eigen": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.exists_thresholds": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.globallyStableOn_powG_Icc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.exists_interval": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.globallyStableOn_powG": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.globallyStableOn_powG_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.kleinmanA": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.IsKleinmanSol": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.isKleinmanSol_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.existsUnique_kleinmanSol_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.IsCertEquiv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.IsCertEquiv.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.IsCertEquiv.mapsTo": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.IsCertEquiv.mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.IsCertEquiv.const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.IsMarkov.isCertEquiv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.isCertEquiv_mulVec_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.IsMarkov.mulVec_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.IsCertEquiv.zero_and_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.IsCertEquiv.convex_comb": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.PosHomogeneous": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.Superadditive": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.Subadditive": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.ConstSubadditive": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.mulVec_properties": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.nonexpansive_of_constSubadditive": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.convexOn_of_subadditive": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.concaveOn_of_superadditive": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.entR": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.entR_add_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.isCertEquiv_entR": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.constSubadditive_entR": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.log_sum_exp_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.concaveOn_entR": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.kpR": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.kpR_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.isCertEquiv_kpR": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.posHomogeneous_kpR": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.sum_rpow_normalize": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.sum_rpow_add_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.le_sum_rpow_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.convexOn_rpow_of_neg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.subadditive_kpR": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.superadditive_kpR": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.smul_mem_posCone": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.convexOn_kpR": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.concaveOn_kpR": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.condCdf": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.quantR": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.isLeast_quantR": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.isCertEquiv_quantR": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.quantR_add_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.constSubadditive_quantR": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.MonotoneKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.MonotoneKernel.antitone": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.monotone_entR": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.monotone_kpR": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.IsAggregator": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.IsAggregator.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.IsAggregator.values": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.IsAggregator.mapsTo": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.IsAggregator.mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.leontief": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.uzawa": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.cesAgg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.additive": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.cesUzawa": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.additive_eq_uzawa": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.additive_eq_cesAgg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.isAggregator_leontief": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.isAggregator_uzawa": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.isAggregator_additive": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.isAggregator_cesUzawa": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.isAggregator_cesAgg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.koopmans": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.koopmans_mapsTo_monotoneOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.koopmans_additive_entR": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.koopmans_cesAgg_kpR": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.koopmans_additive_mulVec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.ces_eis": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.iterate_additive_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.additive_lifetimeValue": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.monotone_of_globallyStableOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.monotone_koopmans_fixedPt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.IsBlackwellAgg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.isBlackwellAgg_additive": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.isBlackwellAgg_leontief": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.isContractionOn_koopmans": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.globallyStable_koopmans": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.globallyStable_riskSensitive": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.globallyStable_leontief": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.globallyStable_quantile": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.globallyStable_leontief_quantile": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.koopmans_uzawa_mulVec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.uzawa_lifetimeValue": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.irreducible_uzawa": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.uzawa_no_pos_fixedPt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.nonnegCone": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.globallyStableOn_uzawa_concave": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.timeAdditive_solution": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.entExp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.entR_eq_entExp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.entExp_add_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.entExp_gaussian": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.exp_mean_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.mul_mean_le_log": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.entExp_le_mean": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.mean_le_entExp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.entExp_ne_mean": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.entExp_eq_mean": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.integral_exp_add_mul_gaussian": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.riskSensitive_gaussian": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.riskSensitive_iid": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.riskSensitive_iid_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.ezK": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.ezK_eq_koopmans": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.ezK_apply_ez": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.ezK_mapsTo": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.powMap": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.powMap_mapsTo": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.powMap_inv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.powMap_inv'": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.continuousOn_powMap": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.ezB": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.powMap_ezK": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.irreducible_ezB": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.globallyStableOn_ezK_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.globallyStableOn_ez": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.ez_deriv_tendsto_atTop": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.NonlinearValuation.monotone_ez_lifetimeValue": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  "source_sha256": {
+    "NonlinearValuation/Basics.lean": "d998a2fa047ddc9aa3d417cd2c10409701f952963babeca30e23da7244ba8b4f",
+    "NonlinearValuation/SpectralRadius.lean": "986e965814ca2b3853ff9c9513394544f3bfd76f2c619679d2d8761e018391c1",
+    "NonlinearValuation/Resolvent.lean": "76f7d81b4c8c688191c1922edbeeb39ea1e26df624ad8fdf97f2f0038d8aaa16",
+    "NonlinearValuation/PerronFrobenius.lean": "6142e5fc1cb33e9210c2b5551f16ba6b2f37863827903c96852f8f32a6b6256d",
+    "NonlinearValuation/Irreducible.lean": "85d2ee4d0b570e496bf1e14dfd2ea4ba64323df88368ca661080f640c70dda5f",
+    "NonlinearValuation/LinearValuation.lean": "a361be533ea59181af8ea2adb8556b3baf0386db383b0275f4c8e95dbf4e4dfd",
+    "NonlinearValuation/OrderFixedPoints.lean": "4be63763a9c0852cdb8072fabc6c538c9314ee95574f9c438972f3107de4cae1",
+    "NonlinearValuation/OneDimensional.lean": "acb46434d0420cd5be7613b42f808751787576cffb98b94acea4d8805a118bb8",
+    "NonlinearValuation/PowerAffine.lean": "19ef23722a5bb42fd749f59752642e3c10448a2d71fbfc7baa94977838d7a484",
+    "NonlinearValuation/CertaintyEquivalents.lean": "17d51ee2e12b9602b086e9f1b5caae8d6b85ebfcee3cdbb14a15b2f57d32f086",
+    "NonlinearValuation/Koopmans.lean": "1139b31fe3b7f992b6c8451ed5994fe31424e48da43b0a27593d8e2c5aa1d89d",
+    "NonlinearValuation/RiskSensitive.lean": "b80cc3e2c2eadd0b04cffe4a6e4c8f1337446f20dd2faff21d2dffc13745a311",
+    "NonlinearValuation/EpsteinZin.lean": "94b20b92f60688226e391bc9a7920bd4d633e99af02c84a4a8a132d680f87c82",
+    "NonlinearValuation.lean": "3f7c998f4023515d7452e4d12ac2b01448647fc6c6c6126574493b97e2a9fb59",
+    "lean-toolchain": "8733782dc070a99b312039cda424f601b80f3be6f6f512627da5ba25adc27632",
+    "lakefile.toml": "aab6fd586731f883badfc3cd3c928409fe94b7abfed9c0bc1e546f373e259fcc",
+    "lake-manifest.json": "f403dc44bdbb5794b5a5037ca72d7246e74b9c1be4d14d0a699cdcb9231272ca",
+    "proof-manifest.json": "a98bbb840e0e8dffece83e149e5bbce774bd2e73e768a08e7eca5a87816b26d6",
+    "scripts/verify.py": "a70b1fa704dd590f937f8b37682afa88a9d85a9150065acb935c7d2c9589da3b",
+    "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  },
+  "fresh_audit_sha256": "797a1daccb0bee38c9c42f48215225b43f1cbb43f16f0a06da347ac62f31de78",
+  "lean_toolchain": "leanprover/lean4:v4.34.0",
+  "scope": "Sargent and Stachurski, Dynamic Programming, Volume 1 (Finite States), Chapter 7: Nonlinear Valuation. Fixed points of order-preserving maps: Knaster-Tarski on order intervals of R^X, Du's theorem under all four conditions, the one-dimensional concave stability result with the Solow-Swan, Inada and Fajgelbaum et al. applications; the power-transformed affine equation v = [h + (Av)^(1/theta)]^theta with the shape of its scalar map and Theorem 7.1.4 (global stability iff rho(A)^(1/theta) < 1); the Kleinman et al. consumption-rate equation; time additive, risk-sensitive and Epstein-Zin lifetime utility, the entropic risk-adjusted expectation and its Gaussian and Jensen properties; certainty equivalent operators (linear, entropic, Kreps-Porteus, quantile) and their additivity, convexity and monotonicity; aggregators and Koopmans operators, the elasticity of intertemporal substitution, finite-horizon values, monotone lifetime values, the Blackwell-type condition, quantile and Uzawa preferences, and Epstein-Zin preferences with state-dependent discounting via topological conjugacy; with the provable exercises.",
+  "source": "Thomas J. Sargent and John Stachurski, Dynamic Programming, Volume 1: Finite States, Chapter 7, pp. 213-245."
+}

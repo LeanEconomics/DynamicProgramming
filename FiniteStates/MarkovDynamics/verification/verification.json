@@ -1,0 +1,2387 @@
+{
+  "checked_at_utc": "2026-10-03T04:33:46.891510+00:00",
+  "theorems": 145,
+  "module_theorems": {
+    "MarkovDynamics/Basics.lean": 12,
+    "MarkovDynamics/MarkovChains.lean": 11,
+    "MarkovDynamics/Inventory.lean": 20,
+    "MarkovDynamics/PositiveChains.lean": 11,
+    "MarkovDynamics/ConditionalExpectations.lean": 8,
+    "MarkovDynamics/DayLaborer.lean": 12,
+    "MarkovDynamics/Tauchen.lean": 17,
+    "MarkovDynamics/GeometricSums.lean": 15,
+    "MarkovDynamics/JobSearch.lean": 39
+  },
+  "audited_declarations": 234,
+  "declarations": [
+    {
+      "name": "SargentStachurski.MarkovDynamics.IsMarkov",
+      "kind": "structure",
+      "module": "MarkovDynamics/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.IsMarkov.mk",
+      "kind": "constructor",
+      "module": "MarkovDynamics/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.IsMarkov.nonneg",
+      "kind": "projection",
+      "module": "MarkovDynamics/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.IsMarkov.rowsum",
+      "kind": "projection",
+      "module": "MarkovDynamics/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.IsDistribution",
+      "kind": "structure",
+      "module": "MarkovDynamics/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.IsDistribution.mk",
+      "kind": "constructor",
+      "module": "MarkovDynamics/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.IsDistribution.nonneg",
+      "kind": "projection",
+      "module": "MarkovDynamics/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.IsDistribution.sum_eq_one",
+      "kind": "projection",
+      "module": "MarkovDynamics/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.IsMarkov.mul",
+      "kind": "theorem",
+      "module": "MarkovDynamics/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.IsMarkov.pow",
+      "kind": "theorem",
+      "module": "MarkovDynamics/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.IsMarkov.mulVec_le_mulVec",
+      "kind": "theorem",
+      "module": "MarkovDynamics/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.IsMarkov.mulVec_const",
+      "kind": "theorem",
+      "module": "MarkovDynamics/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.IsMarkov.abs_mulVec_le",
+      "kind": "theorem",
+      "module": "MarkovDynamics/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.IsMarkov.norm_mulVec_sub_le",
+      "kind": "theorem",
+      "module": "MarkovDynamics/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.GloballyStable",
+      "kind": "def",
+      "module": "MarkovDynamics/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.globallyStable_of_tendsto",
+      "kind": "theorem",
+      "module": "MarkovDynamics/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.IsContractionOn",
+      "kind": "structure",
+      "module": "MarkovDynamics/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.IsContractionOn.mk",
+      "kind": "constructor",
+      "module": "MarkovDynamics/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.IsContractionOn.mapsTo",
+      "kind": "projection",
+      "module": "MarkovDynamics/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.IsContractionOn.nonneg",
+      "kind": "projection",
+      "module": "MarkovDynamics/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.IsContractionOn.lt_one",
+      "kind": "projection",
+      "module": "MarkovDynamics/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.IsContractionOn.norm_sub_le",
+      "kind": "projection",
+      "module": "MarkovDynamics/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.IsContractionOn.fixedPt_unique",
+      "kind": "theorem",
+      "module": "MarkovDynamics/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.IsContractionOn.iterate_mem",
+      "kind": "theorem",
+      "module": "MarkovDynamics/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.IsContractionOn.norm_iterate_sub_fixedPt_le",
+      "kind": "theorem",
+      "module": "MarkovDynamics/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.IsContractionOn.tendsto_iterate_fixedPt",
+      "kind": "theorem",
+      "module": "MarkovDynamics/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.IsContractionOn.exists_fixedPt",
+      "kind": "theorem",
+      "module": "MarkovDynamics/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.pathProb",
+      "kind": "def",
+      "module": "MarkovDynamics/MarkovChains.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.paths",
+      "kind": "def",
+      "module": "MarkovDynamics/MarkovChains.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.pathProb_snoc",
+      "kind": "theorem",
+      "module": "MarkovDynamics/MarkovChains.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.pow_apply_eq_sum_paths",
+      "kind": "theorem",
+      "module": "MarkovDynamics/MarkovChains.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.pow_succ_apply",
+      "kind": "theorem",
+      "module": "MarkovDynamics/MarkovChains.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.vecMul_apply",
+      "kind": "theorem",
+      "module": "MarkovDynamics/MarkovChains.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.IsMarkov.isDistribution_vecMul",
+      "kind": "theorem",
+      "module": "MarkovDynamics/MarkovChains.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.IsMarkov.isDistribution_vecMul_pow",
+      "kind": "theorem",
+      "module": "MarkovDynamics/MarkovChains.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.iterate_vecMul",
+      "kind": "theorem",
+      "module": "MarkovDynamics/MarkovChains.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.expectation_eq_dotProduct",
+      "kind": "theorem",
+      "module": "MarkovDynamics/MarkovChains.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.IsStationary",
+      "kind": "def",
+      "module": "MarkovDynamics/MarkovChains.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.IsStationary.vecMul_pow",
+      "kind": "theorem",
+      "module": "MarkovDynamics/MarkovChains.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.Irreducible",
+      "kind": "def",
+      "module": "MarkovDynamics/MarkovChains.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.IsMarkov.pow_add_apply_ge",
+      "kind": "theorem",
+      "module": "MarkovDynamics/MarkovChains.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.IsMarkov.irreducible_iff",
+      "kind": "theorem",
+      "module": "MarkovDynamics/MarkovChains.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.Inventory",
+      "kind": "structure",
+      "module": "MarkovDynamics/Inventory.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.Inventory.mk",
+      "kind": "constructor",
+      "module": "MarkovDynamics/Inventory.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.Inventory.S",
+      "kind": "projection",
+      "module": "MarkovDynamics/Inventory.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.Inventory.s",
+      "kind": "projection",
+      "module": "MarkovDynamics/Inventory.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.Inventory.p",
+      "kind": "projection",
+      "module": "MarkovDynamics/Inventory.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.Inventory.s_lt_S",
+      "kind": "projection",
+      "module": "MarkovDynamics/Inventory.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.Inventory.p_pos",
+      "kind": "projection",
+      "module": "MarkovDynamics/Inventory.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.Inventory.p_lt_one",
+      "kind": "projection",
+      "module": "MarkovDynamics/Inventory.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.Inventory.State",
+      "kind": "abbrev",
+      "module": "MarkovDynamics/Inventory.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.Inventory.h",
+      "kind": "def",
+      "module": "MarkovDynamics/Inventory.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.Inventory.h_le",
+      "kind": "theorem",
+      "module": "MarkovDynamics/Inventory.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.Inventory.next",
+      "kind": "def",
+      "module": "MarkovDynamics/Inventory.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.Inventory.\u03c6",
+      "kind": "def",
+      "module": "MarkovDynamics/Inventory.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.Inventory.\u03c6_pos",
+      "kind": "theorem",
+      "module": "MarkovDynamics/Inventory.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.Inventory.one_sub_p_nonneg",
+      "kind": "theorem",
+      "module": "MarkovDynamics/Inventory.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.Inventory.one_sub_p_lt_one",
+      "kind": "theorem",
+      "module": "MarkovDynamics/Inventory.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.Inventory.summable_\u03c6",
+      "kind": "theorem",
+      "module": "MarkovDynamics/Inventory.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.Inventory.tsum_\u03c6",
+      "kind": "theorem",
+      "module": "MarkovDynamics/Inventory.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.Inventory.P",
+      "kind": "def",
+      "module": "MarkovDynamics/Inventory.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.Inventory.P_apply",
+      "kind": "theorem",
+      "module": "MarkovDynamics/Inventory.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.Inventory.summable_term",
+      "kind": "theorem",
+      "module": "MarkovDynamics/Inventory.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.Inventory.isMarkov_P",
+      "kind": "theorem",
+      "module": "MarkovDynamics/Inventory.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.Inventory.\u03c6_le_P",
+      "kind": "theorem",
+      "module": "MarkovDynamics/Inventory.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.Inventory.P_pos",
+      "kind": "theorem",
+      "module": "MarkovDynamics/Inventory.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.Inventory.next_val",
+      "kind": "theorem",
+      "module": "MarkovDynamics/Inventory.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.Inventory.sState",
+      "kind": "def",
+      "module": "MarkovDynamics/Inventory.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.Inventory.sState_val",
+      "kind": "theorem",
+      "module": "MarkovDynamics/Inventory.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.Inventory.fullState",
+      "kind": "def",
+      "module": "MarkovDynamics/Inventory.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.Inventory.fullState_val",
+      "kind": "theorem",
+      "module": "MarkovDynamics/Inventory.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.Inventory.SState",
+      "kind": "def",
+      "module": "MarkovDynamics/Inventory.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.Inventory.SState_val",
+      "kind": "theorem",
+      "module": "MarkovDynamics/Inventory.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.Inventory.next_eq_sState",
+      "kind": "theorem",
+      "module": "MarkovDynamics/Inventory.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.Inventory.next_sState_zero",
+      "kind": "theorem",
+      "module": "MarkovDynamics/Inventory.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.Inventory.next_fullState",
+      "kind": "theorem",
+      "module": "MarkovDynamics/Inventory.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.Inventory.next_eq_SState",
+      "kind": "theorem",
+      "module": "MarkovDynamics/Inventory.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.Inventory.irreducible_P",
+      "kind": "theorem",
+      "module": "MarkovDynamics/Inventory.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.l1",
+      "kind": "def",
+      "module": "MarkovDynamics/PositiveChains.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.l1_nonneg",
+      "kind": "theorem",
+      "module": "MarkovDynamics/PositiveChains.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.norm_le_l1",
+      "kind": "theorem",
+      "module": "MarkovDynamics/PositiveChains.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.l1_eq_zero_iff",
+      "kind": "theorem",
+      "module": "MarkovDynamics/PositiveChains.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.sum_vecMul",
+      "kind": "theorem",
+      "module": "MarkovDynamics/PositiveChains.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.l1_vecMul_le",
+      "kind": "theorem",
+      "module": "MarkovDynamics/PositiveChains.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.sum_vecMul_pow",
+      "kind": "theorem",
+      "module": "MarkovDynamics/PositiveChains.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.l1_vecMul_pow_le",
+      "kind": "theorem",
+      "module": "MarkovDynamics/PositiveChains.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.tendsto_vecMul",
+      "kind": "theorem",
+      "module": "MarkovDynamics/PositiveChains.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.globallyStable_of_pos",
+      "kind": "theorem",
+      "module": "MarkovDynamics/PositiveChains.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.distMap",
+      "kind": "def",
+      "module": "MarkovDynamics/PositiveChains.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.distMap_iterate",
+      "kind": "theorem",
+      "module": "MarkovDynamics/PositiveChains.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.globallyStable_distMap",
+      "kind": "theorem",
+      "module": "MarkovDynamics/PositiveChains.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.mulVec_apply_eq",
+      "kind": "theorem",
+      "module": "MarkovDynamics/ConditionalExpectations.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.pow_mulVec_apply_eq",
+      "kind": "theorem",
+      "module": "MarkovDynamics/ConditionalExpectations.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.IsMarkov.isFixedPt_const",
+      "kind": "theorem",
+      "module": "MarkovDynamics/ConditionalExpectations.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.IsMarkov.sup'_abs_mulVec_le",
+      "kind": "theorem",
+      "module": "MarkovDynamics/ConditionalExpectations.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.IsMarkov.norm_mulVec_le",
+      "kind": "theorem",
+      "module": "MarkovDynamics/ConditionalExpectations.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.iterated_expectations",
+      "kind": "theorem",
+      "module": "MarkovDynamics/ConditionalExpectations.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.FOSD",
+      "kind": "def",
+      "module": "MarkovDynamics/ConditionalExpectations.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.MonotoneIncreasing",
+      "kind": "def",
+      "module": "MarkovDynamics/ConditionalExpectations.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.monotoneIncreasing_iff",
+      "kind": "theorem",
+      "module": "MarkovDynamics/ConditionalExpectations.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.MonotoneIncreasing.pow",
+      "kind": "theorem",
+      "module": "MarkovDynamics/ConditionalExpectations.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.DayLaborer",
+      "kind": "structure",
+      "module": "MarkovDynamics/DayLaborer.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.DayLaborer.mk",
+      "kind": "constructor",
+      "module": "MarkovDynamics/DayLaborer.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.DayLaborer.\u03b1",
+      "kind": "projection",
+      "module": "MarkovDynamics/DayLaborer.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.DayLaborer.\u03b2",
+      "kind": "projection",
+      "module": "MarkovDynamics/DayLaborer.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.DayLaborer.\u03b1_pos",
+      "kind": "projection",
+      "module": "MarkovDynamics/DayLaborer.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.DayLaborer.\u03b1_lt_one",
+      "kind": "projection",
+      "module": "MarkovDynamics/DayLaborer.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.DayLaborer.\u03b2_pos",
+      "kind": "projection",
+      "module": "MarkovDynamics/DayLaborer.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.DayLaborer.\u03b2_lt_one",
+      "kind": "projection",
+      "module": "MarkovDynamics/DayLaborer.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.DayLaborer.P",
+      "kind": "def",
+      "module": "MarkovDynamics/DayLaborer.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.DayLaborer.isMarkov_P",
+      "kind": "theorem",
+      "module": "MarkovDynamics/DayLaborer.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.DayLaborer.\u03b1_add_\u03b2_pos",
+      "kind": "theorem",
+      "module": "MarkovDynamics/DayLaborer.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.DayLaborer.\u03c8star",
+      "kind": "def",
+      "module": "MarkovDynamics/DayLaborer.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.DayLaborer.isDistribution_\u03c8star",
+      "kind": "theorem",
+      "module": "MarkovDynamics/DayLaborer.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.DayLaborer.isStationary_\u03c8star",
+      "kind": "theorem",
+      "module": "MarkovDynamics/DayLaborer.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.DayLaborer.eq_\u03c8star_of_isStationary",
+      "kind": "theorem",
+      "module": "MarkovDynamics/DayLaborer.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.DayLaborer.vecMul_zero_sub",
+      "kind": "theorem",
+      "module": "MarkovDynamics/DayLaborer.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.DayLaborer.vecMul_pow_zero_sub",
+      "kind": "theorem",
+      "module": "MarkovDynamics/DayLaborer.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.DayLaborer.abs_one_sub_lt_one",
+      "kind": "theorem",
+      "module": "MarkovDynamics/DayLaborer.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.DayLaborer.tendsto_vecMul_pow",
+      "kind": "theorem",
+      "module": "MarkovDynamics/DayLaborer.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.DayLaborer.P_pos",
+      "kind": "theorem",
+      "module": "MarkovDynamics/DayLaborer.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.DayLaborer.globallyStable_distMap",
+      "kind": "theorem",
+      "module": "MarkovDynamics/DayLaborer.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.monotoneIncreasing_two_state_iff",
+      "kind": "theorem",
+      "module": "MarkovDynamics/DayLaborer.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.Tauchen",
+      "kind": "structure",
+      "module": "MarkovDynamics/Tauchen.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.Tauchen.mk",
+      "kind": "constructor",
+      "module": "MarkovDynamics/Tauchen.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.Tauchen.n",
+      "kind": "projection",
+      "module": "MarkovDynamics/Tauchen.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.Tauchen.two_le_n",
+      "kind": "projection",
+      "module": "MarkovDynamics/Tauchen.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.Tauchen.\u03c1",
+      "kind": "projection",
+      "module": "MarkovDynamics/Tauchen.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.Tauchen.x\u2081",
+      "kind": "projection",
+      "module": "MarkovDynamics/Tauchen.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.Tauchen.s",
+      "kind": "projection",
+      "module": "MarkovDynamics/Tauchen.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.Tauchen.s_pos",
+      "kind": "projection",
+      "module": "MarkovDynamics/Tauchen.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.Tauchen.F",
+      "kind": "projection",
+      "module": "MarkovDynamics/Tauchen.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.Tauchen.F_mono",
+      "kind": "projection",
+      "module": "MarkovDynamics/Tauchen.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.Tauchen.F_nonneg",
+      "kind": "projection",
+      "module": "MarkovDynamics/Tauchen.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.Tauchen.F_le_one",
+      "kind": "projection",
+      "module": "MarkovDynamics/Tauchen.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.Tauchen.x",
+      "kind": "def",
+      "module": "MarkovDynamics/Tauchen.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.Tauchen.x_mono",
+      "kind": "theorem",
+      "module": "MarkovDynamics/Tauchen.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.Tauchen.G",
+      "kind": "def",
+      "module": "MarkovDynamics/Tauchen.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.Tauchen.Pnat",
+      "kind": "def",
+      "module": "MarkovDynamics/Tauchen.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.Tauchen.P",
+      "kind": "def",
+      "module": "MarkovDynamics/Tauchen.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.Tauchen.P_apply",
+      "kind": "theorem",
+      "module": "MarkovDynamics/Tauchen.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.Tauchen.Pnat_zero",
+      "kind": "theorem",
+      "module": "MarkovDynamics/Tauchen.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.Tauchen.Pnat_last",
+      "kind": "theorem",
+      "module": "MarkovDynamics/Tauchen.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.Tauchen.Pnat_mid",
+      "kind": "theorem",
+      "module": "MarkovDynamics/Tauchen.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.Tauchen.G_zero",
+      "kind": "theorem",
+      "module": "MarkovDynamics/Tauchen.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.Tauchen.G_n",
+      "kind": "theorem",
+      "module": "MarkovDynamics/Tauchen.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.Tauchen.Pnat_eq_G_sub",
+      "kind": "theorem",
+      "module": "MarkovDynamics/Tauchen.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.Tauchen.G_antitone",
+      "kind": "theorem",
+      "module": "MarkovDynamics/Tauchen.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.Tauchen.Pnat_nonneg",
+      "kind": "theorem",
+      "module": "MarkovDynamics/Tauchen.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.Tauchen.sum_Ico_Pnat",
+      "kind": "theorem",
+      "module": "MarkovDynamics/Tauchen.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.Tauchen.sum_Pnat",
+      "kind": "theorem",
+      "module": "MarkovDynamics/Tauchen.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.Tauchen.isMarkov_P",
+      "kind": "theorem",
+      "module": "MarkovDynamics/Tauchen.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.Tauchen.sum_filter_P",
+      "kind": "theorem",
+      "module": "MarkovDynamics/Tauchen.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.Tauchen.sum_mul_nonneg_of_tails_nonneg",
+      "kind": "theorem",
+      "module": "MarkovDynamics/Tauchen.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.Tauchen.fosd_of_tails_le",
+      "kind": "theorem",
+      "module": "MarkovDynamics/Tauchen.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.Tauchen.monotoneIncreasing_P",
+      "kind": "theorem",
+      "module": "MarkovDynamics/Tauchen.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.IsMarkov.norm_smul_pow_mulVec_le",
+      "kind": "theorem",
+      "module": "MarkovDynamics/GeometricSums.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.IsMarkov.summable_smul_pow_mulVec",
+      "kind": "theorem",
+      "module": "MarkovDynamics/GeometricSums.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.lifetimeValue",
+      "kind": "def",
+      "module": "MarkovDynamics/GeometricSums.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.lifetimeValue_eq_tsum_smul",
+      "kind": "theorem",
+      "module": "MarkovDynamics/GeometricSums.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.IsMarkov.one_sub_smul_mulVec_lifetimeValue",
+      "kind": "theorem",
+      "module": "MarkovDynamics/GeometricSums.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.IsMarkov.isUnit_one_sub_smul",
+      "kind": "theorem",
+      "module": "MarkovDynamics/GeometricSums.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.IsMarkov.lifetimeValue_eq_inv",
+      "kind": "theorem",
+      "module": "MarkovDynamics/GeometricSums.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.IsMarkov.lifetimeValue_eq_add",
+      "kind": "theorem",
+      "module": "MarkovDynamics/GeometricSums.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.firm_discount_mem",
+      "kind": "theorem",
+      "module": "MarkovDynamics/GeometricSums.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.IsMarkov.firm_value",
+      "kind": "theorem",
+      "module": "MarkovDynamics/GeometricSums.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.isClosed_monotone",
+      "kind": "theorem",
+      "module": "MarkovDynamics/GeometricSums.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.monotone_sum",
+      "kind": "theorem",
+      "module": "MarkovDynamics/GeometricSums.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.IsMarkov.monotone_lifetimeValue",
+      "kind": "theorem",
+      "module": "MarkovDynamics/GeometricSums.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.crra",
+      "kind": "def",
+      "module": "MarkovDynamics/GeometricSums.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.IsMarkov.consumption_value",
+      "kind": "theorem",
+      "module": "MarkovDynamics/GeometricSums.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.monotone_crra_exp",
+      "kind": "theorem",
+      "module": "MarkovDynamics/GeometricSums.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.Tauchen.monotone_crra_value",
+      "kind": "theorem",
+      "module": "MarkovDynamics/GeometricSums.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.MarkovJobSearch",
+      "kind": "structure",
+      "module": "MarkovDynamics/JobSearch.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.MarkovJobSearch.mk",
+      "kind": "constructor",
+      "module": "MarkovDynamics/JobSearch.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.MarkovJobSearch.wage",
+      "kind": "projection",
+      "module": "MarkovDynamics/JobSearch.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.MarkovJobSearch.wage_nonneg",
+      "kind": "projection",
+      "module": "MarkovDynamics/JobSearch.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.MarkovJobSearch.P",
+      "kind": "projection",
+      "module": "MarkovDynamics/JobSearch.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.MarkovJobSearch.P_markov",
+      "kind": "projection",
+      "module": "MarkovDynamics/JobSearch.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.MarkovJobSearch.c",
+      "kind": "projection",
+      "module": "MarkovDynamics/JobSearch.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.MarkovJobSearch.c_pos",
+      "kind": "projection",
+      "module": "MarkovDynamics/JobSearch.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.MarkovJobSearch.\u03b2",
+      "kind": "projection",
+      "module": "MarkovDynamics/JobSearch.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.MarkovJobSearch.\u03b2_pos",
+      "kind": "projection",
+      "module": "MarkovDynamics/JobSearch.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.MarkovJobSearch.\u03b2_lt_one",
+      "kind": "projection",
+      "module": "MarkovDynamics/JobSearch.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.MarkovJobSearch.V",
+      "kind": "def",
+      "module": "MarkovDynamics/JobSearch.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.MarkovJobSearch.isClosed_V",
+      "kind": "theorem",
+      "module": "MarkovDynamics/JobSearch.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.MarkovJobSearch.zero_mem_V",
+      "kind": "theorem",
+      "module": "MarkovDynamics/JobSearch.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.MarkovJobSearch.one_sub_\u03b2_pos",
+      "kind": "theorem",
+      "module": "MarkovDynamics/JobSearch.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.MarkovJobSearch.e",
+      "kind": "def",
+      "module": "MarkovDynamics/JobSearch.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.MarkovJobSearch.e_nonneg",
+      "kind": "theorem",
+      "module": "MarkovDynamics/JobSearch.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.MarkovJobSearch.mulVec_nonneg",
+      "kind": "theorem",
+      "module": "MarkovDynamics/JobSearch.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.MarkovJobSearch.T",
+      "kind": "def",
+      "module": "MarkovDynamics/JobSearch.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.MarkovJobSearch.T_mapsTo",
+      "kind": "theorem",
+      "module": "MarkovDynamics/JobSearch.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.MarkovJobSearch.T_monotone",
+      "kind": "theorem",
+      "module": "MarkovDynamics/JobSearch.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.MarkovJobSearch.abs_T_sub_le",
+      "kind": "theorem",
+      "module": "MarkovDynamics/JobSearch.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.MarkovJobSearch.isContractionOn_T",
+      "kind": "theorem",
+      "module": "MarkovDynamics/JobSearch.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.MarkovJobSearch.vstar",
+      "kind": "def",
+      "module": "MarkovDynamics/JobSearch.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.MarkovJobSearch.vstar_mem",
+      "kind": "theorem",
+      "module": "MarkovDynamics/JobSearch.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.MarkovJobSearch.isFixedPt_vstar",
+      "kind": "theorem",
+      "module": "MarkovDynamics/JobSearch.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.MarkovJobSearch.bellman_equation",
+      "kind": "theorem",
+      "module": "MarkovDynamics/JobSearch.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.MarkovJobSearch.eq_vstar_of_isFixedPt",
+      "kind": "theorem",
+      "module": "MarkovDynamics/JobSearch.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.MarkovJobSearch.tendsto_iterate_T",
+      "kind": "theorem",
+      "module": "MarkovDynamics/JobSearch.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.MarkovJobSearch.norm_iterate_T_sub_vstar_le",
+      "kind": "theorem",
+      "module": "MarkovDynamics/JobSearch.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.MarkovJobSearch.IsGreedy",
+      "kind": "def",
+      "module": "MarkovDynamics/JobSearch.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.MarkovJobSearch.monotone_vstar",
+      "kind": "theorem",
+      "module": "MarkovDynamics/JobSearch.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.MarkovJobSearch.hstar",
+      "kind": "def",
+      "module": "MarkovDynamics/JobSearch.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.MarkovJobSearch.hstar_mem",
+      "kind": "theorem",
+      "module": "MarkovDynamics/JobSearch.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.MarkovJobSearch.vstar_eq_max",
+      "kind": "theorem",
+      "module": "MarkovDynamics/JobSearch.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.MarkovJobSearch.isGreedy_vstar",
+      "kind": "theorem",
+      "module": "MarkovDynamics/JobSearch.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.MarkovJobSearch.Q",
+      "kind": "def",
+      "module": "MarkovDynamics/JobSearch.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.MarkovJobSearch.isFixedPt_hstar",
+      "kind": "theorem",
+      "module": "MarkovDynamics/JobSearch.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.MarkovJobSearch.Q_mapsTo",
+      "kind": "theorem",
+      "module": "MarkovDynamics/JobSearch.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.MarkovJobSearch.Q_monotone",
+      "kind": "theorem",
+      "module": "MarkovDynamics/JobSearch.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.MarkovJobSearch.isContractionOn_Q",
+      "kind": "theorem",
+      "module": "MarkovDynamics/JobSearch.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.MarkovJobSearch.eq_hstar_of_isFixedPt",
+      "kind": "theorem",
+      "module": "MarkovDynamics/JobSearch.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.MarkovJobSearch.tendsto_iterate_Q",
+      "kind": "theorem",
+      "module": "MarkovDynamics/JobSearch.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.MarkovJobSearch.denom_pos",
+      "kind": "theorem",
+      "module": "MarkovDynamics/JobSearch.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.MarkovJobSearch.sep_modulus_lt_one",
+      "kind": "theorem",
+      "module": "MarkovDynamics/JobSearch.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.MarkovJobSearch.sep_modulus_nonneg",
+      "kind": "theorem",
+      "module": "MarkovDynamics/JobSearch.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.MarkovJobSearch.employedValue",
+      "kind": "def",
+      "module": "MarkovDynamics/JobSearch.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.MarkovJobSearch.S",
+      "kind": "def",
+      "module": "MarkovDynamics/JobSearch.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.MarkovJobSearch.employed_recursion_iff",
+      "kind": "theorem",
+      "module": "MarkovDynamics/JobSearch.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.MarkovJobSearch.system_iff",
+      "kind": "theorem",
+      "module": "MarkovDynamics/JobSearch.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.MarkovJobSearch.S_mapsTo",
+      "kind": "theorem",
+      "module": "MarkovDynamics/JobSearch.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.MarkovJobSearch.isContractionOn_S",
+      "kind": "theorem",
+      "module": "MarkovDynamics/JobSearch.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.MarkovJobSearch.vuStar",
+      "kind": "def",
+      "module": "MarkovDynamics/JobSearch.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.MarkovJobSearch.vuStar_mem",
+      "kind": "theorem",
+      "module": "MarkovDynamics/JobSearch.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.MarkovJobSearch.isFixedPt_vuStar",
+      "kind": "theorem",
+      "module": "MarkovDynamics/JobSearch.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.MarkovJobSearch.eq_vuStar_of_isFixedPt",
+      "kind": "theorem",
+      "module": "MarkovDynamics/JobSearch.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.MarkovJobSearch.tendsto_iterate_S",
+      "kind": "theorem",
+      "module": "MarkovDynamics/JobSearch.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.MarkovJobSearch.veStar",
+      "kind": "def",
+      "module": "MarkovDynamics/JobSearch.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.MarkovJobSearch.system_unique",
+      "kind": "theorem",
+      "module": "MarkovDynamics/JobSearch.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.MarkovJobSearch.veStar_mem",
+      "kind": "theorem",
+      "module": "MarkovDynamics/JobSearch.lean"
+    },
+    {
+      "name": "SargentStachurski.MarkovDynamics.MarkovJobSearch.vuStar_eq_max",
+      "kind": "theorem",
+      "module": "MarkovDynamics/JobSearch.lean"
+    }
+  ],
+  "full_build": "passed",
+  "fresh_source_compilation": "passed",
+  "fresh_source_lint_options": [
+    "-Dlinter.mathlibStandardSet=true",
+    "-Dlinter.style.header=false"
+  ],
+  "axioms": {
+    "SargentStachurski.MarkovDynamics.IsMarkov": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.IsMarkov.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.IsMarkov.nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.IsMarkov.rowsum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.IsDistribution": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.IsDistribution.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.IsDistribution.nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.IsDistribution.sum_eq_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.IsMarkov.mul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.IsMarkov.pow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.IsMarkov.mulVec_le_mulVec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.IsMarkov.mulVec_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.IsMarkov.abs_mulVec_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.IsMarkov.norm_mulVec_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.GloballyStable": [
+      "propext",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.globallyStable_of_tendsto": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.IsContractionOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.IsContractionOn.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.IsContractionOn.mapsTo": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.IsContractionOn.nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.IsContractionOn.lt_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.IsContractionOn.norm_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.IsContractionOn.fixedPt_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.IsContractionOn.iterate_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.IsContractionOn.norm_iterate_sub_fixedPt_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.IsContractionOn.tendsto_iterate_fixedPt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.IsContractionOn.exists_fixedPt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.pathProb": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.paths": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.pathProb_snoc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.pow_apply_eq_sum_paths": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.pow_succ_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.vecMul_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.IsMarkov.isDistribution_vecMul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.IsMarkov.isDistribution_vecMul_pow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.iterate_vecMul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.expectation_eq_dotProduct": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.IsStationary": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.IsStationary.vecMul_pow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.Irreducible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.IsMarkov.pow_add_apply_ge": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.IsMarkov.irreducible_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.Inventory": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.Inventory.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.Inventory.S": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.Inventory.s": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.Inventory.p": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.Inventory.s_lt_S": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.Inventory.p_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.Inventory.p_lt_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.Inventory.State": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.Inventory.h": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.Inventory.h_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.Inventory.next": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.Inventory.\u03c6": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.Inventory.\u03c6_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.Inventory.one_sub_p_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.Inventory.one_sub_p_lt_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.Inventory.summable_\u03c6": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.Inventory.tsum_\u03c6": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.Inventory.P": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.Inventory.P_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.Inventory.summable_term": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.Inventory.isMarkov_P": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.Inventory.\u03c6_le_P": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.Inventory.P_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.Inventory.next_val": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.Inventory.sState": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.Inventory.sState_val": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.Inventory.fullState": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.Inventory.fullState_val": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.Inventory.SState": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.Inventory.SState_val": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.Inventory.next_eq_sState": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.Inventory.next_sState_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.Inventory.next_fullState": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.Inventory.next_eq_SState": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.Inventory.irreducible_P": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.l1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.l1_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.norm_le_l1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.l1_eq_zero_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.sum_vecMul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.l1_vecMul_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.sum_vecMul_pow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.l1_vecMul_pow_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.tendsto_vecMul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.globallyStable_of_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.distMap": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.distMap_iterate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.globallyStable_distMap": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.mulVec_apply_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.pow_mulVec_apply_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.IsMarkov.isFixedPt_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.IsMarkov.sup'_abs_mulVec_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.IsMarkov.norm_mulVec_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.iterated_expectations": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.FOSD": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.MonotoneIncreasing": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.monotoneIncreasing_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.MonotoneIncreasing.pow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.DayLaborer": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.DayLaborer.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.DayLaborer.\u03b1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.DayLaborer.\u03b2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.DayLaborer.\u03b1_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.DayLaborer.\u03b1_lt_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.DayLaborer.\u03b2_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.DayLaborer.\u03b2_lt_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.DayLaborer.P": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.DayLaborer.isMarkov_P": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.DayLaborer.\u03b1_add_\u03b2_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.DayLaborer.\u03c8star": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.DayLaborer.isDistribution_\u03c8star": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.DayLaborer.isStationary_\u03c8star": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.DayLaborer.eq_\u03c8star_of_isStationary": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.DayLaborer.vecMul_zero_sub": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.DayLaborer.vecMul_pow_zero_sub": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.DayLaborer.abs_one_sub_lt_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.DayLaborer.tendsto_vecMul_pow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.DayLaborer.P_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.DayLaborer.globallyStable_distMap": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.monotoneIncreasing_two_state_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.Tauchen": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.Tauchen.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.Tauchen.n": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.Tauchen.two_le_n": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.Tauchen.\u03c1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.Tauchen.x\u2081": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.Tauchen.s": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.Tauchen.s_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.Tauchen.F": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.Tauchen.F_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.Tauchen.F_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.Tauchen.F_le_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.Tauchen.x": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.Tauchen.x_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.Tauchen.G": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.Tauchen.Pnat": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.Tauchen.P": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.Tauchen.P_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.Tauchen.Pnat_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.Tauchen.Pnat_last": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.Tauchen.Pnat_mid": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.Tauchen.G_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.Tauchen.G_n": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.Tauchen.Pnat_eq_G_sub": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.Tauchen.G_antitone": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.Tauchen.Pnat_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.Tauchen.sum_Ico_Pnat": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.Tauchen.sum_Pnat": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.Tauchen.isMarkov_P": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.Tauchen.sum_filter_P": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.Tauchen.sum_mul_nonneg_of_tails_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.Tauchen.fosd_of_tails_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.Tauchen.monotoneIncreasing_P": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.IsMarkov.norm_smul_pow_mulVec_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.IsMarkov.summable_smul_pow_mulVec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.lifetimeValue": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.lifetimeValue_eq_tsum_smul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.IsMarkov.one_sub_smul_mulVec_lifetimeValue": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.IsMarkov.isUnit_one_sub_smul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.IsMarkov.lifetimeValue_eq_inv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.IsMarkov.lifetimeValue_eq_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.firm_discount_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.IsMarkov.firm_value": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.isClosed_monotone": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.monotone_sum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.IsMarkov.monotone_lifetimeValue": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.crra": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.IsMarkov.consumption_value": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.monotone_crra_exp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.Tauchen.monotone_crra_value": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.MarkovJobSearch": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.MarkovJobSearch.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.MarkovJobSearch.wage": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.MarkovJobSearch.wage_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.MarkovJobSearch.P": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.MarkovJobSearch.P_markov": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.MarkovJobSearch.c": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.MarkovJobSearch.c_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.MarkovJobSearch.\u03b2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.MarkovJobSearch.\u03b2_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.MarkovJobSearch.\u03b2_lt_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.MarkovJobSearch.V": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.MarkovJobSearch.isClosed_V": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.MarkovJobSearch.zero_mem_V": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.MarkovJobSearch.one_sub_\u03b2_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.MarkovJobSearch.e": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.MarkovJobSearch.e_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.MarkovJobSearch.mulVec_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.MarkovJobSearch.T": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.MarkovJobSearch.T_mapsTo": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.MarkovJobSearch.T_monotone": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.MarkovJobSearch.abs_T_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.MarkovJobSearch.isContractionOn_T": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.MarkovJobSearch.vstar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.MarkovJobSearch.vstar_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.MarkovJobSearch.isFixedPt_vstar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.MarkovJobSearch.bellman_equation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.MarkovJobSearch.eq_vstar_of_isFixedPt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.MarkovJobSearch.tendsto_iterate_T": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.MarkovJobSearch.norm_iterate_T_sub_vstar_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.MarkovJobSearch.IsGreedy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.MarkovJobSearch.monotone_vstar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.MarkovJobSearch.hstar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.MarkovJobSearch.hstar_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.MarkovJobSearch.vstar_eq_max": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.MarkovJobSearch.isGreedy_vstar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.MarkovJobSearch.Q": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.MarkovJobSearch.isFixedPt_hstar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.MarkovJobSearch.Q_mapsTo": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.MarkovJobSearch.Q_monotone": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.MarkovJobSearch.isContractionOn_Q": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.MarkovJobSearch.eq_hstar_of_isFixedPt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.MarkovJobSearch.tendsto_iterate_Q": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.MarkovJobSearch.denom_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.MarkovJobSearch.sep_modulus_lt_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.MarkovJobSearch.sep_modulus_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.MarkovJobSearch.employedValue": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.MarkovJobSearch.S": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.MarkovJobSearch.employed_recursion_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.MarkovJobSearch.system_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.MarkovJobSearch.S_mapsTo": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.MarkovJobSearch.isContractionOn_S": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.MarkovJobSearch.vuStar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.MarkovJobSearch.vuStar_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.MarkovJobSearch.isFixedPt_vuStar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.MarkovJobSearch.eq_vuStar_of_isFixedPt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.MarkovJobSearch.tendsto_iterate_S": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.MarkovJobSearch.veStar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.MarkovJobSearch.system_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.MarkovJobSearch.veStar_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.MarkovDynamics.MarkovJobSearch.vuStar_eq_max": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  "source_sha256": {
+    "MarkovDynamics/Basics.lean": "c39ce211f9876e18becf170ee1807acaa5159b5c7789ef258dee8f11196e173b",
+    "MarkovDynamics/MarkovChains.lean": "c0e7e5109c77a9b132530162e10a337b1556e1a084c439817b3231b2c48af7fa",
+    "MarkovDynamics/Inventory.lean": "d6739f06dcaae79782d18f49e5d92d9873785a8deeda0291d8d701b369192ec2",
+    "MarkovDynamics/PositiveChains.lean": "3ecd1bccff86b16b048c95e70aa8dbca19d3c5549de31d3cc21889d573b98a98",
+    "MarkovDynamics/ConditionalExpectations.lean": "5ded0068c2ed91134bd3bb190b89212e41ca92ae1c51ad698a5513961909a9fd",
+    "MarkovDynamics/DayLaborer.lean": "e7a4bbc1ab1513fafbac6393e05dbec8f3be494a05827d2d6c74346dce9d5130",
+    "MarkovDynamics/Tauchen.lean": "8656161282860eac085a2025151015c12b49172048ab2cec696ca447f84a177a",
+    "MarkovDynamics/GeometricSums.lean": "13dbef19316ae89f01b4f9b9656c749a05f7c027a17549e6eee7578b1fd2c3a5",
+    "MarkovDynamics/JobSearch.lean": "a04a4b478320e6e69f6a81549963b52b7cb9802c61dbdf9ec8f7330f9f60cc26",
+    "MarkovDynamics.lean": "20157586d50d3f84d3a9d164028e3d414e05bb761f90e9a1ad3f603dd07d0236",
+    "lean-toolchain": "8733782dc070a99b312039cda424f601b80f3be6f6f512627da5ba25adc27632",
+    "lakefile.toml": "d916e08137ad9e7f76c6e05eecf54b5d6a258fc15b11d0a14a9823a3f76731e2",
+    "lake-manifest.json": "b8bc4e13d8c7d9bef2c067c73a0d7da5783803ae564eb584ed660b6c75780e17",
+    "proof-manifest.json": "60a27594ea88eef415cc7be260a9021529235618b94c17c273fb529e0a85b046",
+    "scripts/verify.py": "a70b1fa704dd590f937f8b37682afa88a9d85a9150065acb935c7d2c9589da3b",
+    "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  },
+  "fresh_audit_sha256": "eb8ed70e2de0a5b2f22dd0e9b4692d18bde6d6e517a0bb97037cd3ffbcbfb0be",
+  "lean_toolchain": "leanprover/lean4:v4.34.0",
+  "scope": "Sargent and Stachurski, Dynamic Programming, Volume 1 (Finite States), Chapter 3: Markov Dynamics. Markov matrices and k-step transition probabilities as path sums, marginal distributions and stationary distributions, irreducibility, the S-s inventory chain and the day labourer, global stability of psi -> psi P for everywhere-positive P by Dobrushin's contraction, Tauchen's discretisation with its row sums and monotonicity, conditional expectations and the law of iterated expectations, monotone Markov operators, geometric sums and the lifetime value (I - beta P)^{-1} h with the firm and consumption-stream valuations, and job search with Markov wages and with separation, with the provable exercises.",
+  "source": "Thomas J. Sargent and John Stachurski, Dynamic Programming, Volume 1: Finite States, Chapter 3, pp. 81-104."
+}

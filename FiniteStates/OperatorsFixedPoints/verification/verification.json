@@ -1,0 +1,2996 @@
+{
+  "checked_at_utc": "2026-10-03T04:29:04.112630+00:00",
+  "theorems": 235,
+  "module_theorems": {
+    "OperatorsFixedPoints/Basics.lean": 12,
+    "OperatorsFixedPoints/Conjugacy.lean": 26,
+    "OperatorsFixedPoints/ConvergenceRates.lean": 7,
+    "OperatorsFixedPoints/PartialOrders.lean": 29,
+    "OperatorsFixedPoints/PointwiseOrder.lean": 29,
+    "OperatorsFixedPoints/OrderPreserving.lean": 19,
+    "OperatorsFixedPoints/StochasticDominance.lean": 17,
+    "OperatorsFixedPoints/ParametricMonotonicity.lean": 11,
+    "OperatorsFixedPoints/SpectralRadius.lean": 27,
+    "OperatorsFixedPoints/LinearOperators.lean": 13,
+    "OperatorsFixedPoints/Resolvent.lean": 11,
+    "OperatorsFixedPoints/PerronFrobenius.lean": 10,
+    "OperatorsFixedPoints/NonnegativeMatrices.lean": 12,
+    "OperatorsFixedPoints/LakeModel.lean": 12
+  },
+  "audited_declarations": 301,
+  "declarations": [
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.GloballyStable",
+      "kind": "def",
+      "module": "OperatorsFixedPoints/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.globallyStable_of_tendsto",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.GloballyStable.tendsto_iterate",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.GloballyStable.exists_fixedPt",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.GloballyStable.fixedPt_unique",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.IsContractionOn",
+      "kind": "structure",
+      "module": "OperatorsFixedPoints/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.IsContractionOn.mk",
+      "kind": "constructor",
+      "module": "OperatorsFixedPoints/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.IsContractionOn.mapsTo",
+      "kind": "projection",
+      "module": "OperatorsFixedPoints/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.IsContractionOn.nonneg",
+      "kind": "projection",
+      "module": "OperatorsFixedPoints/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.IsContractionOn.lt_one",
+      "kind": "projection",
+      "module": "OperatorsFixedPoints/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.IsContractionOn.norm_sub_le",
+      "kind": "projection",
+      "module": "OperatorsFixedPoints/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.IsContractionOn.fixedPt_unique",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.IsContractionOn.iterate_mem",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.IsContractionOn.norm_iterate_sub_fixedPt_le",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.IsContractionOn.tendsto_iterate_fixedPt",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.IsContractionOn.exists_fixedPt",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.IsContractionOn.globallyStable",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.IsContractionOn.globallyStable_univ",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.LocallyStable",
+      "kind": "def",
+      "module": "OperatorsFixedPoints/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.GloballyStable.locallyStable",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.IsConjugate",
+      "kind": "def",
+      "module": "OperatorsFixedPoints/Conjugacy.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.IsConjugate.comm",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/Conjugacy.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.IsConjugate.of_comm",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/Conjugacy.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.IsConjugate.symm",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/Conjugacy.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.IsConjugate.trans",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/Conjugacy.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.IsConjugate.refl",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/Conjugacy.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.IsConjugate.iterate_comm",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/Conjugacy.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.IsConjugate.isFixedPt_iff",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/Conjugacy.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.IsConjugate.isFixedPt_symm_iff",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/Conjugacy.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.IsConjugate.fixedPointsEquiv",
+      "kind": "def",
+      "module": "OperatorsFixedPoints/Conjugacy.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.IsConjugate.cardinal_fixedPoints_eq",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/Conjugacy.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.IsConjugate.existsUnique_fixedPt_iff",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/Conjugacy.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.isConjugate_similar",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/Conjugacy.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.IsTopConjugate",
+      "kind": "def",
+      "module": "OperatorsFixedPoints/Conjugacy.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.IsTopConjugate.refl",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/Conjugacy.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.IsTopConjugate.symm",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/Conjugacy.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.IsTopConjugate.trans",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/Conjugacy.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.IsTopConjugate.tendsto_iterate_iff",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/Conjugacy.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.IsTopConjugate.globallyStable_iff",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/Conjugacy.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.IsTopConjugate.fixedPt_map",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/Conjugacy.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.IsTopConjugate.locallyStable_iff",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/Conjugacy.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.logHomeomorph",
+      "kind": "def",
+      "module": "OperatorsFixedPoints/Conjugacy.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.logHomeomorph_apply",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/Conjugacy.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.logHomeomorph_symm_apply",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/Conjugacy.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.matrixHomeomorph",
+      "kind": "def",
+      "module": "OperatorsFixedPoints/Conjugacy.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.det_ne_zero_of_mulVec_injective",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/Conjugacy.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.isTopConjugate_power",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/Conjugacy.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.iterate_sq",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/Conjugacy.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.locallyStable_sq_zero",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/Conjugacy.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.not_locallyStable_sq_one",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/Conjugacy.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.locallyStable_of_abs_deriv_lt_one",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/Conjugacy.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.ConvergesAtRateAtLeast",
+      "kind": "def",
+      "module": "OperatorsFixedPoints/ConvergenceRates.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.ConvergesLinearly",
+      "kind": "def",
+      "module": "OperatorsFixedPoints/ConvergenceRates.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.ConvergesQuadratically",
+      "kind": "def",
+      "module": "OperatorsFixedPoints/ConvergenceRates.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.IsContractionOn.convergesAtRateAtLeast",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/ConvergenceRates.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.IsContractionOn.convergesLinearly",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/ConvergenceRates.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.error_ratio_near",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/ConvergenceRates.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.tendsto_error_ratio",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/ConvergenceRates.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.convergesLinearly_of_abs_deriv_lt_one",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/ConvergenceRates.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.newtonMap",
+      "kind": "def",
+      "module": "OperatorsFixedPoints/ConvergenceRates.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.newtonMap_fixedPt_linearisation",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/ConvergenceRates.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.isFixedPt_newtonMap_iff",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/ConvergenceRates.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.real_le_isPartialOrder",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/PartialOrders.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.real_le_antisymm",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/PartialOrders.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.eq_isPartialOrder",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/PartialOrders.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.subset_isPartialOrder",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/PartialOrders.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.pointwise_isPartialOrder",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/PartialOrders.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.pointwise_le_def",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/PartialOrders.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.StrictLt",
+      "kind": "def",
+      "module": "OperatorsFixedPoints/PartialOrders.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.not_strictLt_refl",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/PartialOrders.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.strictLt_not_isPartialOrder",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/PartialOrders.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.le_of_tendsto_pi",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/PartialOrders.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.matrix_le_iff_uncurry",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/PartialOrders.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.mulVec_le_mulVec",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/PartialOrders.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.abs_mulVec_le",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/PartialOrders.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.le_pow_mulVec_of_le",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/PartialOrders.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.strictLt_mulVec",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/PartialOrders.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.real_le_total",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/PartialOrders.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.nat_le_total",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/PartialOrders.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.pointwise_not_total",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/PartialOrders.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.subset_not_total",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/PartialOrders.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.isGreatest_unique",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/PartialOrders.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.isLeast_unique",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/PartialOrders.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.isGreatest_iUnion_iff",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/PartialOrders.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.not_exists_isGreatest_bounded",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/PartialOrders.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.isLUB_unique",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/PartialOrders.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.isGreatest_of_isLUB_mem",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/PartialOrders.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.IsGreatest.isLUB'",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/PartialOrders.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.IsLeast.isGLB'",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/PartialOrders.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.isLUB_iUnion",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/PartialOrders.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.isGLB_iInter",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/PartialOrders.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.not_exists_isLUB_Ioo",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/PartialOrders.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.isGLB_pair_pointwise",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/PointwiseOrder.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.isLUB_pair_pointwise",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/PointwiseOrder.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.IsSublattice",
+      "kind": "def",
+      "module": "OperatorsFixedPoints/PointwiseOrder.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.isSublattice_nonneg",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/PointwiseOrder.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.isSublattice_pos",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/PointwiseOrder.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.isSublattice_abs_le_one",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/PointwiseOrder.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.sup'_apply_pointwise",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/PointwiseOrder.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.inf'_apply_pointwise",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/PointwiseOrder.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.isLUB_sup'_image",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/PointwiseOrder.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.isGLB_inf'_image",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/PointwiseOrder.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.IsSublattice.sup'_mem",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/PointwiseOrder.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.IsSublattice.inf'_mem",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/PointwiseOrder.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.isGreatest_of_sup'_mem",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/PointwiseOrder.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.not_exists_isGreatest_of_sup'_notMem",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/PointwiseOrder.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.Icc_inter_Icc_sublattice",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/PointwiseOrder.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.abs_add_le_pointwise",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/PointwiseOrder.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.inf_add_pointwise",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/PointwiseOrder.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.sup_add_pointwise",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/PointwiseOrder.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.sup_inf_pointwise",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/PointwiseOrder.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.inf_sup_pointwise",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/PointwiseOrder.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.abs_min_sub_min_le_abs'",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/PointwiseOrder.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.abs_inf_sub_inf_le_pointwise",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/PointwiseOrder.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.abs_sup_sub_sup_le_pointwise",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/PointwiseOrder.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.min_add_le_min_add_min",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/PointwiseOrder.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.inf_add_le_pointwise",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/PointwiseOrder.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.abs_min_sub_min_le_min",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/PointwiseOrder.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.abs_sup'_sub_sup'_le",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/PointwiseOrder.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.abs_inf'_sub_inf'_le",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/PointwiseOrder.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.upperEnvelope",
+      "kind": "def",
+      "module": "OperatorsFixedPoints/PointwiseOrder.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.upperEnvelope_mapsTo",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/PointwiseOrder.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.isContractionOn_upperEnvelope",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/PointwiseOrder.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.monotone_affine_of_nonneg",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/OrderPreserving.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.integral_mono_of_le",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/OrderPreserving.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.isLUB_image_of_isGreatest",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/OrderPreserving.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.isGLB_image_of_isLeast",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/OrderPreserving.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.monotone_iterate",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/OrderPreserving.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.monotone_mulVec_of_nonneg",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/OrderPreserving.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.mul_le_mul_of_nonneg",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/OrderPreserving.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.pow_nonneg_entries",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/OrderPreserving.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.pow_le_pow_entries",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/OrderPreserving.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.increasingFns",
+      "kind": "def",
+      "module": "OperatorsFixedPoints/OrderPreserving.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.monotone_two_mul",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/OrderPreserving.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.monotone_indicator_ge",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/OrderPreserving.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.not_monotone_neg",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/OrderPreserving.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.not_monotone_indicator_le",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/OrderPreserving.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.monotone_smul_add",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/OrderPreserving.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.monotone_sup_inf",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/OrderPreserving.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.isClosed_increasingFns",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/OrderPreserving.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.monotone_expectation",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/OrderPreserving.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.exists_indicator_decomposition",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/OrderPreserving.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.isContractionOn_of_blackwell",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/OrderPreserving.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.IsDistribution",
+      "kind": "structure",
+      "module": "OperatorsFixedPoints/StochasticDominance.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.IsDistribution.mk",
+      "kind": "constructor",
+      "module": "OperatorsFixedPoints/StochasticDominance.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.IsDistribution.nonneg",
+      "kind": "projection",
+      "module": "OperatorsFixedPoints/StochasticDominance.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.IsDistribution.sum_eq_one",
+      "kind": "projection",
+      "module": "OperatorsFixedPoints/StochasticDominance.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.law",
+      "kind": "def",
+      "module": "OperatorsFixedPoints/StochasticDominance.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.law_isDistribution",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/StochasticDominance.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.sum_mul_law",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/StochasticDominance.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.FOSD",
+      "kind": "def",
+      "module": "OperatorsFixedPoints/StochasticDominance.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.fosd_law_of_le",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/StochasticDominance.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.ccdf",
+      "kind": "def",
+      "module": "OperatorsFixedPoints/StochasticDominance.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.monotone_upper_indicator",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/StochasticDominance.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.sum_upper_indicator_mul",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/StochasticDominance.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.ccdf_le_of_fosd",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/StochasticDominance.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.fosd_refl",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/StochasticDominance.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.fosd_trans",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/StochasticDominance.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.eq_of_ccdf_eq",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/StochasticDominance.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.fosd_antisymm",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/StochasticDominance.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.sum_mul_nonneg_of_tails_nonneg",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/StochasticDominance.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.ccdf_sub",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/StochasticDominance.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.ccdf_reindex",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/StochasticDominance.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.fosd_of_ccdf_le",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/StochasticDominance.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.cdf",
+      "kind": "def",
+      "module": "OperatorsFixedPoints/StochasticDominance.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.cdf_le_of_fosd",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/StochasticDominance.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.quantileSet",
+      "kind": "def",
+      "module": "OperatorsFixedPoints/StochasticDominance.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.quantile",
+      "kind": "def",
+      "module": "OperatorsFixedPoints/StochasticDominance.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.quantile_le_of_fosd",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/StochasticDominance.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.fosd_fin_two_iff",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/StochasticDominance.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.affine_dominates",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/ParametricMonotonicity.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.iterate_le_iterate",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/ParametricMonotonicity.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.dominance_isPartialOrder",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/ParametricMonotonicity.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.fixedPt_le_of_dominates",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/ParametricMonotonicity.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.solowMap",
+      "kind": "def",
+      "module": "OperatorsFixedPoints/ParametricMonotonicity.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.solowMap_monotone",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/ParametricMonotonicity.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.solowMap_le",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/ParametricMonotonicity.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.solow_fixedPt_le",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/ParametricMonotonicity.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.contMap",
+      "kind": "def",
+      "module": "OperatorsFixedPoints/ParametricMonotonicity.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.contMap_monotone",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/ParametricMonotonicity.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.contMap_isContractionOn",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/ParametricMonotonicity.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.contMap_le",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/ParametricMonotonicity.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.contMap_fixedPt_le",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/ParametricMonotonicity.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.complexify",
+      "kind": "def",
+      "module": "OperatorsFixedPoints/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.complexify_apply",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.complexify_pow",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.complexify_transpose",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.nnnorm_complexify",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.norm_complexify",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.specRad",
+      "kind": "def",
+      "module": "OperatorsFixedPoints/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.spectralRadius_complexify_ne_top",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.specRad_nonneg",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.mem_spectrum_iff_eigenpair",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.tendsto_norm_pow_rpow",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.eventually_norm_pow_le",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.tendsto_norm_pow_zero",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.summable_pow",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.one_sub_mul_tsum",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.tsum_mul_one_sub",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.neumann_series",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.specRad_transpose",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.norm_le_norm_of_abs_le",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.specRad_le_of_le",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.rowsum_abs_le_norm",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.norm_le_of_rowsum_abs_le",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.abs_entry_le_norm",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.norm_eq_of_rowsum_eq",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.specRad_le_norm",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.norm_le_specRad_of_mem_spectrum",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.specRad_eq_of_rowsum_eq",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.specRad_eq_of_colsum_eq",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.eventually_abs_entry_pow_le",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.mulVec_linear",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/LinearOperators.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.exists_matrix_of_linear",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/LinearOperators.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.matrixLinearEquiv",
+      "kind": "def",
+      "module": "OperatorsFixedPoints/LinearOperators.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.matrixLinearEquiv_apply",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/LinearOperators.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.matrixFunEquiv",
+      "kind": "def",
+      "module": "OperatorsFixedPoints/LinearOperators.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.kernelOp",
+      "kind": "def",
+      "module": "OperatorsFixedPoints/LinearOperators.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.kernelOp_eq_mulVec",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/LinearOperators.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.kernelOp_linear",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/LinearOperators.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.productOp",
+      "kind": "def",
+      "module": "OperatorsFixedPoints/LinearOperators.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.productOp_linear",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/LinearOperators.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.IsPositiveOp",
+      "kind": "def",
+      "module": "OperatorsFixedPoints/LinearOperators.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.isPositiveOp_productOp",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/LinearOperators.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.isPositiveOp_mulVec_iff",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/LinearOperators.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.isPositiveOp_iff_monotone",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/LinearOperators.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.IsMarkovOp",
+      "kind": "def",
+      "module": "OperatorsFixedPoints/LinearOperators.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.isMarkovOp_mulVec_iff",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/LinearOperators.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.mulVec_pos_of_markov",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/LinearOperators.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.vecMulOp",
+      "kind": "def",
+      "module": "OperatorsFixedPoints/LinearOperators.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.vecMulOp_eq_vecMul",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/LinearOperators.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.isMarkovOp_iff_vecMulOp_distribution",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/LinearOperators.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.resPartial",
+      "kind": "def",
+      "module": "OperatorsFixedPoints/Resolvent.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.res",
+      "kind": "def",
+      "module": "OperatorsFixedPoints/Resolvent.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.res_apply",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/Resolvent.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.smul_one_sub_mul_resPartial",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/Resolvent.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.resPartial_mul_smul_one_sub",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/Resolvent.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.resPartial_apply",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/Resolvent.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.summable_res_entry",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/Resolvent.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.tendsto_resPartial_apply",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/Resolvent.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.tendsto_inv_pow_mul_apply",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/Resolvent.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.smul_one_sub_mul_res",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/Resolvent.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.res_mul_smul_one_sub",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/Resolvent.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.res_nonneg",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/Resolvent.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.inv_le_res_diag",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/Resolvent.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.exists_mem_spectrum_norm_eq",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/PerronFrobenius.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.eventually_norm_entry_pow_complexify_le",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/PerronFrobenius.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.smul_one_sub_mul_res_real",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/PerronFrobenius.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.norm_res_complexify_le",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/PerronFrobenius.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.norm_le_card_mul_of_entry_norm_le",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/PerronFrobenius.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.notMem_spectrum_of_res_bounded",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/PerronFrobenius.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.exists_res_entry_gt",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/PerronFrobenius.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.isCompact_simplex",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/PerronFrobenius.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.perron_frobenius",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/PerronFrobenius.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.perron_frobenius_left",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/PerronFrobenius.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.le_specRad_of_colsum_ge",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/NonnegativeMatrices.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.specRad_le_of_colsum_le",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/NonnegativeMatrices.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.le_specRad_of_rowsum_ge",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/NonnegativeMatrices.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.specRad_le_of_rowsum_le",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/NonnegativeMatrices.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.tendsto_rpow_one_div_natCast",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/NonnegativeMatrices.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.norm_pow_mul_le_norm_mulVec",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/NonnegativeMatrices.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.tendsto_norm_pow_mulVec_rpow",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/NonnegativeMatrices.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.IsMarkov",
+      "kind": "structure",
+      "module": "OperatorsFixedPoints/NonnegativeMatrices.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.IsMarkov.mk",
+      "kind": "constructor",
+      "module": "OperatorsFixedPoints/NonnegativeMatrices.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.IsMarkov.nonneg",
+      "kind": "projection",
+      "module": "OperatorsFixedPoints/NonnegativeMatrices.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.IsMarkov.rowsum",
+      "kind": "projection",
+      "module": "OperatorsFixedPoints/NonnegativeMatrices.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.IsMarkov.mul",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/NonnegativeMatrices.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.IsMarkov.pow",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/NonnegativeMatrices.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.IsMarkov.specRad_eq_one",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/NonnegativeMatrices.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.IsMarkov.exists_stationary",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/NonnegativeMatrices.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.IsMarkov.not_mulVec_ge_add",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/NonnegativeMatrices.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.LakeModel",
+      "kind": "structure",
+      "module": "OperatorsFixedPoints/LakeModel.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.LakeModel.mk",
+      "kind": "constructor",
+      "module": "OperatorsFixedPoints/LakeModel.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.LakeModel.d",
+      "kind": "projection",
+      "module": "OperatorsFixedPoints/LakeModel.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.LakeModel.b",
+      "kind": "projection",
+      "module": "OperatorsFixedPoints/LakeModel.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.LakeModel.\u03b1",
+      "kind": "projection",
+      "module": "OperatorsFixedPoints/LakeModel.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.LakeModel.lam",
+      "kind": "projection",
+      "module": "OperatorsFixedPoints/LakeModel.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.LakeModel.d_pos",
+      "kind": "projection",
+      "module": "OperatorsFixedPoints/LakeModel.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.LakeModel.d_lt_one",
+      "kind": "projection",
+      "module": "OperatorsFixedPoints/LakeModel.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.LakeModel.b_pos",
+      "kind": "projection",
+      "module": "OperatorsFixedPoints/LakeModel.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.LakeModel.b_lt_one",
+      "kind": "projection",
+      "module": "OperatorsFixedPoints/LakeModel.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.LakeModel.\u03b1_pos",
+      "kind": "projection",
+      "module": "OperatorsFixedPoints/LakeModel.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.LakeModel.\u03b1_lt_one",
+      "kind": "projection",
+      "module": "OperatorsFixedPoints/LakeModel.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.LakeModel.lam_pos",
+      "kind": "projection",
+      "module": "OperatorsFixedPoints/LakeModel.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.LakeModel.lam_lt_one",
+      "kind": "projection",
+      "module": "OperatorsFixedPoints/LakeModel.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.LakeModel.A",
+      "kind": "def",
+      "module": "OperatorsFixedPoints/LakeModel.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.LakeModel.g",
+      "kind": "def",
+      "module": "OperatorsFixedPoints/LakeModel.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.LakeModel.one_sub_d_pos",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/LakeModel.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.LakeModel.one_add_g_pos",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/LakeModel.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.LakeModel.A_nonneg",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/LakeModel.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.LakeModel.sum_mulVec",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/LakeModel.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.LakeModel.colsum",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/LakeModel.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.LakeModel.specRad_A",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/LakeModel.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.LakeModel.one_vecMul",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/LakeModel.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.LakeModel.ubar",
+      "kind": "def",
+      "module": "OperatorsFixedPoints/LakeModel.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.LakeModel.xbar",
+      "kind": "def",
+      "module": "OperatorsFixedPoints/LakeModel.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.LakeModel.numer_eq",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/LakeModel.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.LakeModel.denom_pos",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/LakeModel.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.LakeModel.xbar_sum",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/LakeModel.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.LakeModel.A_mulVec_xbar",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/LakeModel.lean"
+    },
+    {
+      "name": "SargentStachurski.OperatorsFixedPoints.LakeModel.eq_xbar_of_eigen",
+      "kind": "theorem",
+      "module": "OperatorsFixedPoints/LakeModel.lean"
+    }
+  ],
+  "full_build": "passed",
+  "fresh_source_compilation": "passed",
+  "fresh_source_lint_options": [
+    "-Dlinter.mathlibStandardSet=true",
+    "-Dlinter.style.header=false"
+  ],
+  "axioms": {
+    "SargentStachurski.OperatorsFixedPoints.GloballyStable": [
+      "propext",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.globallyStable_of_tendsto": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.GloballyStable.tendsto_iterate": [
+      "propext",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.GloballyStable.exists_fixedPt": [
+      "propext",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.GloballyStable.fixedPt_unique": [
+      "propext",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.IsContractionOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.IsContractionOn.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.IsContractionOn.mapsTo": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.IsContractionOn.nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.IsContractionOn.lt_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.IsContractionOn.norm_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.IsContractionOn.fixedPt_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.IsContractionOn.iterate_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.IsContractionOn.norm_iterate_sub_fixedPt_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.IsContractionOn.tendsto_iterate_fixedPt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.IsContractionOn.exists_fixedPt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.IsContractionOn.globallyStable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.IsContractionOn.globallyStable_univ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.LocallyStable": [
+      "propext",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.GloballyStable.locallyStable": [
+      "propext",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.IsConjugate": [
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.IsConjugate.comm": [
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.IsConjugate.of_comm": [
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.IsConjugate.symm": [
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.IsConjugate.trans": [
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.IsConjugate.refl": [
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.IsConjugate.iterate_comm": [
+      "propext",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.IsConjugate.isFixedPt_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.IsConjugate.isFixedPt_symm_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.IsConjugate.fixedPointsEquiv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.IsConjugate.cardinal_fixedPoints_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.IsConjugate.existsUnique_fixedPt_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.isConjugate_similar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.IsTopConjugate": [
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.IsTopConjugate.refl": [
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.IsTopConjugate.symm": [
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.IsTopConjugate.trans": [
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.IsTopConjugate.tendsto_iterate_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.IsTopConjugate.globallyStable_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.IsTopConjugate.fixedPt_map": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.IsTopConjugate.locallyStable_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.logHomeomorph": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.logHomeomorph_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.logHomeomorph_symm_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.matrixHomeomorph": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.det_ne_zero_of_mulVec_injective": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.isTopConjugate_power": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.iterate_sq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.locallyStable_sq_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.not_locallyStable_sq_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.locallyStable_of_abs_deriv_lt_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.ConvergesAtRateAtLeast": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.ConvergesLinearly": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.ConvergesQuadratically": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.IsContractionOn.convergesAtRateAtLeast": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.IsContractionOn.convergesLinearly": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.error_ratio_near": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.tendsto_error_ratio": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.convergesLinearly_of_abs_deriv_lt_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.newtonMap": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.newtonMap_fixedPt_linearisation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.isFixedPt_newtonMap_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.real_le_isPartialOrder": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.real_le_antisymm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.eq_isPartialOrder": [],
+    "SargentStachurski.OperatorsFixedPoints.subset_isPartialOrder": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.pointwise_isPartialOrder": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.pointwise_le_def": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.StrictLt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.not_strictLt_refl": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.strictLt_not_isPartialOrder": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.le_of_tendsto_pi": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.matrix_le_iff_uncurry": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.mulVec_le_mulVec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.abs_mulVec_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.le_pow_mulVec_of_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.strictLt_mulVec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.real_le_total": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.nat_le_total": [],
+    "SargentStachurski.OperatorsFixedPoints.pointwise_not_total": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.subset_not_total": [
+      "propext",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.isGreatest_unique": [],
+    "SargentStachurski.OperatorsFixedPoints.isLeast_unique": [],
+    "SargentStachurski.OperatorsFixedPoints.isGreatest_iUnion_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.not_exists_isGreatest_bounded": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.isLUB_unique": [],
+    "SargentStachurski.OperatorsFixedPoints.isGreatest_of_isLUB_mem": [],
+    "SargentStachurski.OperatorsFixedPoints.IsGreatest.isLUB'": [],
+    "SargentStachurski.OperatorsFixedPoints.IsLeast.isGLB'": [],
+    "SargentStachurski.OperatorsFixedPoints.isLUB_iUnion": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.isGLB_iInter": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.not_exists_isLUB_Ioo": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.isGLB_pair_pointwise": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.isLUB_pair_pointwise": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.IsSublattice": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.isSublattice_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.isSublattice_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.isSublattice_abs_le_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.sup'_apply_pointwise": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.inf'_apply_pointwise": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.isLUB_sup'_image": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.isGLB_inf'_image": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.IsSublattice.sup'_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.IsSublattice.inf'_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.isGreatest_of_sup'_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.not_exists_isGreatest_of_sup'_notMem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.Icc_inter_Icc_sublattice": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.abs_add_le_pointwise": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.inf_add_pointwise": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.sup_add_pointwise": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.sup_inf_pointwise": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.inf_sup_pointwise": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.abs_min_sub_min_le_abs'": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.abs_inf_sub_inf_le_pointwise": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.abs_sup_sub_sup_le_pointwise": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.min_add_le_min_add_min": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.inf_add_le_pointwise": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.abs_min_sub_min_le_min": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.abs_sup'_sub_sup'_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.abs_inf'_sub_inf'_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.upperEnvelope": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.upperEnvelope_mapsTo": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.isContractionOn_upperEnvelope": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.monotone_affine_of_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.integral_mono_of_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.isLUB_image_of_isGreatest": [
+      "propext",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.isGLB_image_of_isLeast": [
+      "propext",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.monotone_iterate": [],
+    "SargentStachurski.OperatorsFixedPoints.monotone_mulVec_of_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.mul_le_mul_of_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.pow_nonneg_entries": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.pow_le_pow_entries": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.increasingFns": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.monotone_two_mul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.monotone_indicator_ge": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.not_monotone_neg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.not_monotone_indicator_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.monotone_smul_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.monotone_sup_inf": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.isClosed_increasingFns": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.monotone_expectation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.exists_indicator_decomposition": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.isContractionOn_of_blackwell": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.IsDistribution": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.IsDistribution.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.IsDistribution.nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.IsDistribution.sum_eq_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.law": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.law_isDistribution": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.sum_mul_law": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.FOSD": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.fosd_law_of_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.ccdf": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.monotone_upper_indicator": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.sum_upper_indicator_mul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.ccdf_le_of_fosd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.fosd_refl": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.fosd_trans": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.eq_of_ccdf_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.fosd_antisymm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.sum_mul_nonneg_of_tails_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.ccdf_sub": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.ccdf_reindex": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.fosd_of_ccdf_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.cdf": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.cdf_le_of_fosd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.quantileSet": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.quantile": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.quantile_le_of_fosd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.fosd_fin_two_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.affine_dominates": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.iterate_le_iterate": [],
+    "SargentStachurski.OperatorsFixedPoints.dominance_isPartialOrder": [
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.fixedPt_le_of_dominates": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.solowMap": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.solowMap_monotone": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.solowMap_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.solow_fixedPt_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.contMap": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.contMap_monotone": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.contMap_isContractionOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.contMap_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.contMap_fixedPt_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.complexify": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.complexify_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.complexify_pow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.complexify_transpose": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.nnnorm_complexify": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.norm_complexify": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.specRad": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.spectralRadius_complexify_ne_top": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.specRad_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.mem_spectrum_iff_eigenpair": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.tendsto_norm_pow_rpow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.eventually_norm_pow_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.tendsto_norm_pow_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.summable_pow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.one_sub_mul_tsum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.tsum_mul_one_sub": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.neumann_series": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.specRad_transpose": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.norm_le_norm_of_abs_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.specRad_le_of_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.rowsum_abs_le_norm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.norm_le_of_rowsum_abs_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.abs_entry_le_norm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.norm_eq_of_rowsum_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.specRad_le_norm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.norm_le_specRad_of_mem_spectrum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.specRad_eq_of_rowsum_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.specRad_eq_of_colsum_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.eventually_abs_entry_pow_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.mulVec_linear": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.exists_matrix_of_linear": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.matrixLinearEquiv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.matrixLinearEquiv_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.matrixFunEquiv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.kernelOp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.kernelOp_eq_mulVec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.kernelOp_linear": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.productOp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.productOp_linear": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.IsPositiveOp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.isPositiveOp_productOp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.isPositiveOp_mulVec_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.isPositiveOp_iff_monotone": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.IsMarkovOp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.isMarkovOp_mulVec_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.mulVec_pos_of_markov": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.vecMulOp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.vecMulOp_eq_vecMul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.isMarkovOp_iff_vecMulOp_distribution": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.resPartial": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.res": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.res_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.smul_one_sub_mul_resPartial": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.resPartial_mul_smul_one_sub": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.resPartial_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.summable_res_entry": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.tendsto_resPartial_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.tendsto_inv_pow_mul_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.smul_one_sub_mul_res": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.res_mul_smul_one_sub": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.res_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.inv_le_res_diag": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.exists_mem_spectrum_norm_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.eventually_norm_entry_pow_complexify_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.smul_one_sub_mul_res_real": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.norm_res_complexify_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.norm_le_card_mul_of_entry_norm_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.notMem_spectrum_of_res_bounded": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.exists_res_entry_gt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.isCompact_simplex": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.perron_frobenius": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.perron_frobenius_left": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.le_specRad_of_colsum_ge": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.specRad_le_of_colsum_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.le_specRad_of_rowsum_ge": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.specRad_le_of_rowsum_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.tendsto_rpow_one_div_natCast": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.norm_pow_mul_le_norm_mulVec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.tendsto_norm_pow_mulVec_rpow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.IsMarkov": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.IsMarkov.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.IsMarkov.nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.IsMarkov.rowsum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.IsMarkov.mul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.IsMarkov.pow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.IsMarkov.specRad_eq_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.IsMarkov.exists_stationary": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.IsMarkov.not_mulVec_ge_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.LakeModel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.LakeModel.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.LakeModel.d": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.LakeModel.b": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.LakeModel.\u03b1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.LakeModel.lam": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.LakeModel.d_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.LakeModel.d_lt_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.LakeModel.b_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.LakeModel.b_lt_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.LakeModel.\u03b1_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.LakeModel.\u03b1_lt_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.LakeModel.lam_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.LakeModel.lam_lt_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.LakeModel.A": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.LakeModel.g": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.LakeModel.one_sub_d_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.LakeModel.one_add_g_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.LakeModel.A_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.LakeModel.sum_mulVec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.LakeModel.colsum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.LakeModel.specRad_A": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.LakeModel.one_vecMul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.LakeModel.ubar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.LakeModel.xbar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.LakeModel.numer_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.LakeModel.denom_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.LakeModel.xbar_sum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.LakeModel.A_mulVec_xbar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.OperatorsFixedPoints.LakeModel.eq_xbar_of_eigen": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  "source_sha256": {
+    "OperatorsFixedPoints/Basics.lean": "d276370656f10d266c0e7834a1cf0e977ec5554e44293404078f96d43a0ee077",
+    "OperatorsFixedPoints/Conjugacy.lean": "85c8079d712ac26e41541f816f3c214a3dda5b2b40069c4baf39d46f50d73ee7",
+    "OperatorsFixedPoints/ConvergenceRates.lean": "49dca4fec72fe8bdc264fc116a802ae41c4d35c70b0f36bc408a105b27ff9672",
+    "OperatorsFixedPoints/PartialOrders.lean": "eaadb28d53955e70d0704fddae3f039bfb109128d96bca46e68b0f109d45068b",
+    "OperatorsFixedPoints/PointwiseOrder.lean": "bec18cb2b2da84d44a06ed15cf213629bba16bdf4a2586f7151b8ad3e767b8c3",
+    "OperatorsFixedPoints/OrderPreserving.lean": "dffc4b324642bdb20b55ad72af238985681884a102411f7e84fc4a48c171453a",
+    "OperatorsFixedPoints/StochasticDominance.lean": "6ec1a76d16feafb394627052d300b0a7a743bfeb232ac80c338ebc99ed6ada59",
+    "OperatorsFixedPoints/ParametricMonotonicity.lean": "2f51e509018d764cd4dedd1dc47b2fb265b8260b8e43eeb2572cfc51754e6686",
+    "OperatorsFixedPoints/SpectralRadius.lean": "abd0833d8b88590febbd0a890659be22f7ce13a6c1067059624d96db7d38feba",
+    "OperatorsFixedPoints/LinearOperators.lean": "8d2a20a8dae38c227b903ee315ae9fa2164a0917408d04db7ef10a5a4b8b487c",
+    "OperatorsFixedPoints/Resolvent.lean": "787b8cb8d5b0953c759b707e30f6e3eff122343552de5cb020e2609dcb75e320",
+    "OperatorsFixedPoints/PerronFrobenius.lean": "bf4210d925c5f60eeb35605989a7cf35b366074c1e40e61a61a03e67869091aa",
+    "OperatorsFixedPoints/NonnegativeMatrices.lean": "d0a7363ee7bc720d26c716c0634a295dbd4c05bc82bf202cd721fbf12e5b4188",
+    "OperatorsFixedPoints/LakeModel.lean": "27cc7ea9baa8cf1de861faa4e513a095276d5aeca2eb93cb3fde07d78bee2e37",
+    "OperatorsFixedPoints.lean": "01034016e29d79e76e7d28e0b173d21a552dbf5684b2d705cc6aa3711a3bfa4c",
+    "lean-toolchain": "8733782dc070a99b312039cda424f601b80f3be6f6f512627da5ba25adc27632",
+    "lakefile.toml": "d4d8607fd647d73993b74f7dd82dbf95e7f2fe5d3a3ab59eddd458b9755218e0",
+    "lake-manifest.json": "99701c55aaeee10a05aad1a3675c0bba456a27c79cf5a206f38f818c5fb62adf",
+    "proof-manifest.json": "546505a0cac4c1a05ab0fddf15da610a611363aff5d176d7184db6bb63d31333",
+    "scripts/verify.py": "a70b1fa704dd590f937f8b37682afa88a9d85a9150065acb935c7d2c9589da3b",
+    "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  },
+  "fresh_audit_sha256": "bd3c237c2d005af330e184d54f36c1175d3449f40ad60c7423d53501995d1473",
+  "lean_toolchain": "leanprover/lean4:v4.34.0",
+  "scope": "Sargent and Stachurski, Dynamic Programming, Volume 1 (Finite States), Chapter 2: Operators and Fixed Points. Conjugate dynamical systems and local stability, convergence rates and Newton's fixed-point iteration, partial orders and the pointwise order on R^X with its lattice inequalities, order-preserving maps and Blackwell's condition, first-order stochastic dominance, parametric monotonicity with the Solow-Swan and job-search applications, the spectral radius with Gelfand's formula and the Neumann series, a self-contained proof of the Perron-Frobenius theorem for nonnegative matrices through the resolvent, its consequences for row and column sums, the local spectral radius and Markov matrices, the lake model, and linear, positive and Markov operators, with the provable exercises.",
+  "source": "Thomas J. Sargent and John Stachurski, Dynamic Programming, Volume 1: Finite States, Chapter 2, pp. 42-80."
+}

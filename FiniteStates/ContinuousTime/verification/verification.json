@@ -1,0 +1,3473 @@
+{
+  "checked_at_utc": "2026-10-07T00:41:21.623065+00:00",
+  "theorems": 269,
+  "module_theorems": {
+    "ContinuousTime/Basics.lean": 18,
+    "ContinuousTime/SpectralRadius.lean": 29,
+    "ContinuousTime/Resolvent.lean": 11,
+    "ContinuousTime/PerronFrobenius.lean": 20,
+    "ContinuousTime/Irreducible.lean": 10,
+    "ContinuousTime/LinearValuation.lean": 25,
+    "ContinuousTime/OrderFixedPoints.lean": 15,
+    "ContinuousTime/OrderStability.lean": 5,
+    "ContinuousTime/ADP.lean": 22,
+    "ContinuousTime/Exponential.lean": 22,
+    "ContinuousTime/Flows.lean": 11,
+    "ContinuousTime/SpectralBound.lean": 15,
+    "ContinuousTime/Semigroups.lean": 10,
+    "ContinuousTime/MarkovSemigroups.lean": 16,
+    "ContinuousTime/JumpChains.lean": 7,
+    "ContinuousTime/Valuation.lean": 12,
+    "ContinuousTime/CTMDP.lean": 21
+  },
+  "audited_declarations": 351,
+  "declarations": [
+    {
+      "name": "SargentStachurski.ContinuousTime.IsMarkov",
+      "kind": "structure",
+      "module": "ContinuousTime/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.IsMarkov.mk",
+      "kind": "constructor",
+      "module": "ContinuousTime/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.IsMarkov.nonneg",
+      "kind": "projection",
+      "module": "ContinuousTime/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.IsMarkov.rowsum",
+      "kind": "projection",
+      "module": "ContinuousTime/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.IsDistribution",
+      "kind": "structure",
+      "module": "ContinuousTime/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.IsDistribution.mk",
+      "kind": "constructor",
+      "module": "ContinuousTime/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.IsDistribution.nonneg",
+      "kind": "projection",
+      "module": "ContinuousTime/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.IsDistribution.sum_eq_one",
+      "kind": "projection",
+      "module": "ContinuousTime/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.mulVec_apply_eq",
+      "kind": "theorem",
+      "module": "ContinuousTime/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.IsMarkov.mul",
+      "kind": "theorem",
+      "module": "ContinuousTime/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.IsMarkov.pow",
+      "kind": "theorem",
+      "module": "ContinuousTime/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.IsMarkov.mulVec_le_mulVec",
+      "kind": "theorem",
+      "module": "ContinuousTime/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.IsMarkov.mulVec_const",
+      "kind": "theorem",
+      "module": "ContinuousTime/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.IsMarkov.abs_mulVec_le",
+      "kind": "theorem",
+      "module": "ContinuousTime/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.IsMarkov.norm_mulVec_le",
+      "kind": "theorem",
+      "module": "ContinuousTime/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.IsMarkov.abs_mulVec_sub_le",
+      "kind": "theorem",
+      "module": "ContinuousTime/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.GloballyStable",
+      "kind": "def",
+      "module": "ContinuousTime/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.IsContractionOn",
+      "kind": "structure",
+      "module": "ContinuousTime/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.IsContractionOn.mk",
+      "kind": "constructor",
+      "module": "ContinuousTime/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.IsContractionOn.mapsTo",
+      "kind": "projection",
+      "module": "ContinuousTime/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.IsContractionOn.nonneg",
+      "kind": "projection",
+      "module": "ContinuousTime/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.IsContractionOn.lt_one",
+      "kind": "projection",
+      "module": "ContinuousTime/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.IsContractionOn.norm_sub_le",
+      "kind": "projection",
+      "module": "ContinuousTime/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.IsContractionOn.fixedPt_unique",
+      "kind": "theorem",
+      "module": "ContinuousTime/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.IsContractionOn.iterate_mem",
+      "kind": "theorem",
+      "module": "ContinuousTime/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.IsContractionOn.norm_iterate_sub_fixedPt_le",
+      "kind": "theorem",
+      "module": "ContinuousTime/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.IsContractionOn.tendsto_iterate_fixedPt",
+      "kind": "theorem",
+      "module": "ContinuousTime/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.IsContractionOn.exists_fixedPt",
+      "kind": "theorem",
+      "module": "ContinuousTime/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.IsContractionOn.globallyStable_univ",
+      "kind": "theorem",
+      "module": "ContinuousTime/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.fixedPt_le_of_le",
+      "kind": "theorem",
+      "module": "ContinuousTime/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.le_fixedPt_of_le_apply",
+      "kind": "theorem",
+      "module": "ContinuousTime/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.isContractionOn_of_blackwell",
+      "kind": "theorem",
+      "module": "ContinuousTime/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.abs_sup'_sub_sup'_le",
+      "kind": "theorem",
+      "module": "ContinuousTime/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.pow_nonneg_entries",
+      "kind": "theorem",
+      "module": "ContinuousTime/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.pow_le_pow_entries",
+      "kind": "theorem",
+      "module": "ContinuousTime/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.complexify",
+      "kind": "def",
+      "module": "ContinuousTime/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.complexify_apply",
+      "kind": "theorem",
+      "module": "ContinuousTime/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.complexify_pow",
+      "kind": "theorem",
+      "module": "ContinuousTime/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.complexify_transpose",
+      "kind": "theorem",
+      "module": "ContinuousTime/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.nnnorm_complexify",
+      "kind": "theorem",
+      "module": "ContinuousTime/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.norm_complexify",
+      "kind": "theorem",
+      "module": "ContinuousTime/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.specRad",
+      "kind": "def",
+      "module": "ContinuousTime/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.spectralRadius_complexify_ne_top",
+      "kind": "theorem",
+      "module": "ContinuousTime/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.specRad_nonneg",
+      "kind": "theorem",
+      "module": "ContinuousTime/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.mem_spectrum_iff_eigenpair",
+      "kind": "theorem",
+      "module": "ContinuousTime/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.tendsto_norm_pow_rpow",
+      "kind": "theorem",
+      "module": "ContinuousTime/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.eventually_norm_pow_le",
+      "kind": "theorem",
+      "module": "ContinuousTime/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.tendsto_norm_pow_zero",
+      "kind": "theorem",
+      "module": "ContinuousTime/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.summable_pow",
+      "kind": "theorem",
+      "module": "ContinuousTime/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.one_sub_mul_tsum",
+      "kind": "theorem",
+      "module": "ContinuousTime/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.tsum_mul_one_sub",
+      "kind": "theorem",
+      "module": "ContinuousTime/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.neumann_series",
+      "kind": "theorem",
+      "module": "ContinuousTime/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.specRad_transpose",
+      "kind": "theorem",
+      "module": "ContinuousTime/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.norm_le_norm_of_abs_le",
+      "kind": "theorem",
+      "module": "ContinuousTime/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.specRad_le_of_le",
+      "kind": "theorem",
+      "module": "ContinuousTime/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.rowsum_abs_le_norm",
+      "kind": "theorem",
+      "module": "ContinuousTime/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.norm_le_of_rowsum_abs_le",
+      "kind": "theorem",
+      "module": "ContinuousTime/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.abs_entry_le_norm",
+      "kind": "theorem",
+      "module": "ContinuousTime/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.norm_eq_of_rowsum_eq",
+      "kind": "theorem",
+      "module": "ContinuousTime/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.specRad_le_norm",
+      "kind": "theorem",
+      "module": "ContinuousTime/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.norm_le_specRad_of_mem_spectrum",
+      "kind": "theorem",
+      "module": "ContinuousTime/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.specRad_eq_of_rowsum_eq",
+      "kind": "theorem",
+      "module": "ContinuousTime/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.specRad_eq_of_colsum_eq",
+      "kind": "theorem",
+      "module": "ContinuousTime/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.eventually_abs_entry_pow_le",
+      "kind": "theorem",
+      "module": "ContinuousTime/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.resPartial",
+      "kind": "def",
+      "module": "ContinuousTime/Resolvent.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.res",
+      "kind": "def",
+      "module": "ContinuousTime/Resolvent.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.res_apply",
+      "kind": "theorem",
+      "module": "ContinuousTime/Resolvent.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.smul_one_sub_mul_resPartial",
+      "kind": "theorem",
+      "module": "ContinuousTime/Resolvent.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.resPartial_mul_smul_one_sub",
+      "kind": "theorem",
+      "module": "ContinuousTime/Resolvent.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.resPartial_apply",
+      "kind": "theorem",
+      "module": "ContinuousTime/Resolvent.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.summable_res_entry",
+      "kind": "theorem",
+      "module": "ContinuousTime/Resolvent.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.tendsto_resPartial_apply",
+      "kind": "theorem",
+      "module": "ContinuousTime/Resolvent.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.tendsto_inv_pow_mul_apply",
+      "kind": "theorem",
+      "module": "ContinuousTime/Resolvent.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.smul_one_sub_mul_res",
+      "kind": "theorem",
+      "module": "ContinuousTime/Resolvent.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.res_mul_smul_one_sub",
+      "kind": "theorem",
+      "module": "ContinuousTime/Resolvent.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.res_nonneg",
+      "kind": "theorem",
+      "module": "ContinuousTime/Resolvent.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.inv_le_res_diag",
+      "kind": "theorem",
+      "module": "ContinuousTime/Resolvent.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.exists_mem_spectrum_norm_eq",
+      "kind": "theorem",
+      "module": "ContinuousTime/PerronFrobenius.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.eventually_norm_entry_pow_complexify_le",
+      "kind": "theorem",
+      "module": "ContinuousTime/PerronFrobenius.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.smul_one_sub_mul_res_real",
+      "kind": "theorem",
+      "module": "ContinuousTime/PerronFrobenius.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.norm_res_complexify_le",
+      "kind": "theorem",
+      "module": "ContinuousTime/PerronFrobenius.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.norm_le_card_mul_of_entry_norm_le",
+      "kind": "theorem",
+      "module": "ContinuousTime/PerronFrobenius.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.notMem_spectrum_of_res_bounded",
+      "kind": "theorem",
+      "module": "ContinuousTime/PerronFrobenius.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.exists_res_entry_gt",
+      "kind": "theorem",
+      "module": "ContinuousTime/PerronFrobenius.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.isCompact_simplex",
+      "kind": "theorem",
+      "module": "ContinuousTime/PerronFrobenius.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.perron_frobenius",
+      "kind": "theorem",
+      "module": "ContinuousTime/PerronFrobenius.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.perron_frobenius_left",
+      "kind": "theorem",
+      "module": "ContinuousTime/PerronFrobenius.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.le_specRad_of_colsum_ge",
+      "kind": "theorem",
+      "module": "ContinuousTime/PerronFrobenius.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.specRad_le_of_colsum_le",
+      "kind": "theorem",
+      "module": "ContinuousTime/PerronFrobenius.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.le_specRad_of_rowsum_ge",
+      "kind": "theorem",
+      "module": "ContinuousTime/PerronFrobenius.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.specRad_le_of_rowsum_le",
+      "kind": "theorem",
+      "module": "ContinuousTime/PerronFrobenius.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.tendsto_rpow_one_div_natCast",
+      "kind": "theorem",
+      "module": "ContinuousTime/PerronFrobenius.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.norm_pow_mul_le_norm_mulVec",
+      "kind": "theorem",
+      "module": "ContinuousTime/PerronFrobenius.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.tendsto_norm_pow_mulVec_rpow",
+      "kind": "theorem",
+      "module": "ContinuousTime/PerronFrobenius.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.IsMarkov.specRad_eq_one",
+      "kind": "theorem",
+      "module": "ContinuousTime/PerronFrobenius.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.IsMarkov.exists_stationary",
+      "kind": "theorem",
+      "module": "ContinuousTime/PerronFrobenius.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.IsMarkov.not_mulVec_ge_add",
+      "kind": "theorem",
+      "module": "ContinuousTime/PerronFrobenius.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.Irreducible",
+      "kind": "def",
+      "module": "ContinuousTime/Irreducible.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.irreducible_of_pos",
+      "kind": "theorem",
+      "module": "ContinuousTime/Irreducible.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.Irreducible.transpose",
+      "kind": "theorem",
+      "module": "ContinuousTime/Irreducible.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.pow_mulVec_eq_of_mulVec_eq",
+      "kind": "theorem",
+      "module": "ContinuousTime/Irreducible.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.Irreducible.pos_of_mulVec_eq_smul",
+      "kind": "theorem",
+      "module": "ContinuousTime/Irreducible.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.Irreducible.specRad_pos",
+      "kind": "theorem",
+      "module": "ContinuousTime/Irreducible.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.Irreducible.exists_pos_eigenvector",
+      "kind": "theorem",
+      "module": "ContinuousTime/Irreducible.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.Irreducible.exists_pos_left_eigenvector",
+      "kind": "theorem",
+      "module": "ContinuousTime/Irreducible.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.Irreducible.eq_specRad_of_mulVec_eq_smul",
+      "kind": "theorem",
+      "module": "ContinuousTime/Irreducible.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.Irreducible.exists_eq_smul_of_mulVec_eq_smul",
+      "kind": "theorem",
+      "module": "ContinuousTime/Irreducible.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.IsMarkov.exists_unique_stationary_of_irreducible",
+      "kind": "theorem",
+      "module": "ContinuousTime/Irreducible.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.discountOp",
+      "kind": "def",
+      "module": "ContinuousTime/LinearValuation.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.discountOp_apply",
+      "kind": "theorem",
+      "module": "ContinuousTime/LinearValuation.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.discountOp_nonneg",
+      "kind": "theorem",
+      "module": "ContinuousTime/LinearValuation.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.discountOp_const",
+      "kind": "theorem",
+      "module": "ContinuousTime/LinearValuation.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.specRad_smul_isMarkov",
+      "kind": "theorem",
+      "module": "ContinuousTime/LinearValuation.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.summable_pow_apply",
+      "kind": "theorem",
+      "module": "ContinuousTime/LinearValuation.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.summable_pow_mulVec",
+      "kind": "theorem",
+      "module": "ContinuousTime/LinearValuation.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.mulVec_tsum_pow_mulVec",
+      "kind": "theorem",
+      "module": "ContinuousTime/LinearValuation.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.tsum_pow_mulVec_eq",
+      "kind": "theorem",
+      "module": "ContinuousTime/LinearValuation.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.eq_of_eq_add_mulVec",
+      "kind": "theorem",
+      "module": "ContinuousTime/LinearValuation.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.inv_mulVec_eq_add",
+      "kind": "theorem",
+      "module": "ContinuousTime/LinearValuation.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.inv_mulVec_eq_tsum",
+      "kind": "theorem",
+      "module": "ContinuousTime/LinearValuation.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.eq_add_mulVec_iff",
+      "kind": "theorem",
+      "module": "ContinuousTime/LinearValuation.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.specRad_lt_one_iff_existsUnique_pos",
+      "kind": "theorem",
+      "module": "ContinuousTime/LinearValuation.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.globallyStable_of_iterate_contraction",
+      "kind": "theorem",
+      "module": "ContinuousTime/LinearValuation.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.globallyStable_of_iterate_contraction_univ",
+      "kind": "theorem",
+      "module": "ContinuousTime/LinearValuation.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.affineOp",
+      "kind": "def",
+      "module": "ContinuousTime/LinearValuation.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.affineOp_iterate_sub",
+      "kind": "theorem",
+      "module": "ContinuousTime/LinearValuation.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.exists_isContractionOn_iterate_affineOp",
+      "kind": "theorem",
+      "module": "ContinuousTime/LinearValuation.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.globallyStable_affineOp",
+      "kind": "theorem",
+      "module": "ContinuousTime/LinearValuation.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.isFixedPt_affineOp_inv",
+      "kind": "theorem",
+      "module": "ContinuousTime/LinearValuation.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.mulVec_le_mulVec_of_nonneg",
+      "kind": "theorem",
+      "module": "ContinuousTime/LinearValuation.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.norm_abs_fun",
+      "kind": "theorem",
+      "module": "ContinuousTime/LinearValuation.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.norm_le_norm_of_abs_le_fun",
+      "kind": "theorem",
+      "module": "ContinuousTime/LinearValuation.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.abs_iterate_sub_le_pow_mulVec",
+      "kind": "theorem",
+      "module": "ContinuousTime/LinearValuation.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.exists_isContractionOn_iterate_of_abs_sub_le",
+      "kind": "theorem",
+      "module": "ContinuousTime/LinearValuation.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.globallyStable_of_abs_sub_le",
+      "kind": "theorem",
+      "module": "ContinuousTime/LinearValuation.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.GloballyStableOn",
+      "kind": "def",
+      "module": "ContinuousTime/OrderFixedPoints.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.globallyStableOn_univ_iff",
+      "kind": "theorem",
+      "module": "ContinuousTime/OrderFixedPoints.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.GloballyStableOn.existsUnique",
+      "kind": "theorem",
+      "module": "ContinuousTime/OrderFixedPoints.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.GloballyStableOn.of_conj",
+      "kind": "theorem",
+      "module": "ContinuousTime/OrderFixedPoints.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.globallyStableOn_iff_of_conj",
+      "kind": "theorem",
+      "module": "ContinuousTime/OrderFixedPoints.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.iterate_le_iterate_of_monotoneOn",
+      "kind": "theorem",
+      "module": "ContinuousTime/OrderFixedPoints.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.knaster_tarski",
+      "kind": "theorem",
+      "module": "ContinuousTime/OrderFixedPoints.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.exists_continuum_fixedPts",
+      "kind": "theorem",
+      "module": "ContinuousTime/OrderFixedPoints.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.du_concave",
+      "kind": "theorem",
+      "module": "ContinuousTime/OrderFixedPoints.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.exists_delta_of_lt",
+      "kind": "theorem",
+      "module": "ContinuousTime/OrderFixedPoints.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.du_concave_of_lt",
+      "kind": "theorem",
+      "module": "ContinuousTime/OrderFixedPoints.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.neg_mem_Icc_iff",
+      "kind": "theorem",
+      "module": "ContinuousTime/OrderFixedPoints.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.globallyStableOn_of_reflect",
+      "kind": "theorem",
+      "module": "ContinuousTime/OrderFixedPoints.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.du_convex",
+      "kind": "theorem",
+      "module": "ContinuousTime/OrderFixedPoints.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.du_convex_of_lt",
+      "kind": "theorem",
+      "module": "ContinuousTime/OrderFixedPoints.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.concaveOn_comp",
+      "kind": "theorem",
+      "module": "ContinuousTime/OrderFixedPoints.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.OrderStable",
+      "kind": "def",
+      "module": "ContinuousTime/OrderStability.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.orderStable_of_up_down",
+      "kind": "theorem",
+      "module": "ContinuousTime/OrderStability.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.orderStable_of_globallyStable",
+      "kind": "theorem",
+      "module": "ContinuousTime/OrderStability.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.orderStable_restrict",
+      "kind": "theorem",
+      "module": "ContinuousTime/OrderStability.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.orderStable_affineOp",
+      "kind": "theorem",
+      "module": "ContinuousTime/OrderStability.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.orderStable_dual_iff",
+      "kind": "theorem",
+      "module": "ContinuousTime/OrderStability.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.ADP",
+      "kind": "structure",
+      "module": "ContinuousTime/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.ADP.mk",
+      "kind": "constructor",
+      "module": "ContinuousTime/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.ADP.T",
+      "kind": "projection",
+      "module": "ContinuousTime/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.ADP.exists_greedy",
+      "kind": "projection",
+      "module": "ContinuousTime/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.ADP.exists_minGreedy",
+      "kind": "projection",
+      "module": "ContinuousTime/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.ADP.IsGreedy",
+      "kind": "def",
+      "module": "ContinuousTime/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.ADP.greedy",
+      "kind": "def",
+      "module": "ContinuousTime/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.ADP.isGreedy_greedy",
+      "kind": "theorem",
+      "module": "ContinuousTime/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.ADP.bellman",
+      "kind": "def",
+      "module": "ContinuousTime/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.ADP.T_le_bellman",
+      "kind": "theorem",
+      "module": "ContinuousTime/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.ADP.isGreatest_bellman",
+      "kind": "theorem",
+      "module": "ContinuousTime/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.ADP.isGreedy_iff",
+      "kind": "theorem",
+      "module": "ContinuousTime/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.ADP.monotone_bellman",
+      "kind": "theorem",
+      "module": "ContinuousTime/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.ADP.WellPosed",
+      "kind": "def",
+      "module": "ContinuousTime/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.ADP.v\u03c3",
+      "kind": "def",
+      "module": "ContinuousTime/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.ADP.isFixedPt_v\u03c3",
+      "kind": "theorem",
+      "module": "ContinuousTime/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.ADP.eq_v\u03c3_of_isFixedPt",
+      "kind": "theorem",
+      "module": "ContinuousTime/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.ADP.Vu",
+      "kind": "def",
+      "module": "ContinuousTime/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.ADP.v\u03c3_mem_Vu",
+      "kind": "theorem",
+      "module": "ContinuousTime/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.ADP.howard",
+      "kind": "def",
+      "module": "ContinuousTime/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.ADP.hpiPolicy",
+      "kind": "def",
+      "module": "ContinuousTime/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.ADP.hpiValue",
+      "kind": "def",
+      "module": "ContinuousTime/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.ADP.hpiValue_succ",
+      "kind": "theorem",
+      "module": "ContinuousTime/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.ADP.IsOrderStable",
+      "kind": "def",
+      "module": "ContinuousTime/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.ADP.IsMaxStable",
+      "kind": "def",
+      "module": "ContinuousTime/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.ADP.IsOrderStable.wellPosed",
+      "kind": "theorem",
+      "module": "ContinuousTime/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.ADP.IsOrderStable.le_v\u03c3",
+      "kind": "theorem",
+      "module": "ContinuousTime/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.ADP.IsOrderStable.v\u03c3_le",
+      "kind": "theorem",
+      "module": "ContinuousTime/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.ADP.IsOptimal",
+      "kind": "def",
+      "module": "ContinuousTime/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.ADP.IsOrderStable.le_howard",
+      "kind": "theorem",
+      "module": "ContinuousTime/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.ADP.IsOrderStable.isOptimal_of_isFixedPt",
+      "kind": "theorem",
+      "module": "ContinuousTime/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.ADP.IsOrderStable.isFixedPt_of_howard",
+      "kind": "theorem",
+      "module": "ContinuousTime/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.ADP.IsOrderStable.howard_fixed",
+      "kind": "theorem",
+      "module": "ContinuousTime/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.ADP.IsOrderStable.hpiValue_le_succ",
+      "kind": "theorem",
+      "module": "ContinuousTime/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.ADP.IsOrderStable.exists_hpiValue_succ_eq",
+      "kind": "theorem",
+      "module": "ContinuousTime/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.ADP.IsOrderStable.hpi_terminates",
+      "kind": "theorem",
+      "module": "ContinuousTime/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.ADP.IsOrderStable.isMaxStable",
+      "kind": "theorem",
+      "module": "ContinuousTime/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.ADP.IsMaxStable.optimality",
+      "kind": "theorem",
+      "module": "ContinuousTime/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.ADP.IsOrderStable.maxOptimality",
+      "kind": "theorem",
+      "module": "ContinuousTime/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.hasDerivAt_exp_mul",
+      "kind": "theorem",
+      "module": "ContinuousTime/Exponential.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.eq_exp_of_hasDerivAt",
+      "kind": "theorem",
+      "module": "ContinuousTime/Exponential.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.exp_memoryless",
+      "kind": "theorem",
+      "module": "ContinuousTime/Exponential.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.add_nsmul_of_additive",
+      "kind": "theorem",
+      "module": "ContinuousTime/Exponential.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.eq_exp_of_memoryless",
+      "kind": "theorem",
+      "module": "ContinuousTime/Exponential.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.exp_counter_properties",
+      "kind": "theorem",
+      "module": "ContinuousTime/Exponential.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.norm_one_le",
+      "kind": "theorem",
+      "module": "ContinuousTime/Exponential.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.norm_pow_le_pow",
+      "kind": "theorem",
+      "module": "ContinuousTime/Exponential.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.norm_partialSum_exp_le",
+      "kind": "theorem",
+      "module": "ContinuousTime/Exponential.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.exp_conj_eq",
+      "kind": "theorem",
+      "module": "ContinuousTime/Exponential.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.exp_add_eq",
+      "kind": "theorem",
+      "module": "ContinuousTime/Exponential.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.exp_natCast_smul",
+      "kind": "theorem",
+      "module": "ContinuousTime/Exponential.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.hasDerivAt_exp_smul",
+      "kind": "theorem",
+      "module": "ContinuousTime/Exponential.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.hasDerivAt_exp_smul'",
+      "kind": "theorem",
+      "module": "ContinuousTime/Exponential.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.exp_smul_mul_comm",
+      "kind": "theorem",
+      "module": "ContinuousTime/Exponential.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.exp_transpose_eq",
+      "kind": "theorem",
+      "module": "ContinuousTime/Exponential.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.continuous_exp_smul",
+      "kind": "theorem",
+      "module": "ContinuousTime/Exponential.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.exp_smul_sub_eq_integral",
+      "kind": "theorem",
+      "module": "ContinuousTime/Exponential.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.exp_mul_exp_neg",
+      "kind": "theorem",
+      "module": "ContinuousTime/Exponential.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.exp_mulVec_of_eigen",
+      "kind": "theorem",
+      "module": "ContinuousTime/Exponential.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.exp_mulVec_of_eigen_real",
+      "kind": "theorem",
+      "module": "ContinuousTime/Exponential.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.exp_eigenvalue_converse_false",
+      "kind": "theorem",
+      "module": "ContinuousTime/Exponential.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.exp_smul_semigroup",
+      "kind": "theorem",
+      "module": "ContinuousTime/Flows.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.exp_smul_mul_exp_neg_smul",
+      "kind": "theorem",
+      "module": "ContinuousTime/Flows.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.mulVecCLM",
+      "kind": "def",
+      "module": "ContinuousTime/Flows.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.entryCLM",
+      "kind": "def",
+      "module": "ContinuousTime/Flows.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.hasDerivAt_exp_smul_entry",
+      "kind": "theorem",
+      "module": "ContinuousTime/Flows.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.hasDerivAt_exp_neg_smul_entry",
+      "kind": "theorem",
+      "module": "ContinuousTime/Flows.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.hasDerivAt_mulVec_of_entry",
+      "kind": "theorem",
+      "module": "ContinuousTime/Flows.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.hasDerivAt_exp_smul_mulVec",
+      "kind": "theorem",
+      "module": "ContinuousTime/Flows.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.ivp_unique",
+      "kind": "theorem",
+      "module": "ContinuousTime/Flows.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.ivp_unique_row",
+      "kind": "theorem",
+      "module": "ContinuousTime/Flows.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.exp_smul_diagonal",
+      "kind": "theorem",
+      "module": "ContinuousTime/Flows.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.tendsto_exp_mul_zero_iff",
+      "kind": "theorem",
+      "module": "ContinuousTime/Flows.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.norm_exp_le",
+      "kind": "theorem",
+      "module": "ContinuousTime/Flows.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.complexify_exp",
+      "kind": "theorem",
+      "module": "ContinuousTime/SpectralBound.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.complexify_smul",
+      "kind": "theorem",
+      "module": "ContinuousTime/SpectralBound.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.spectrum_complexify_exp",
+      "kind": "theorem",
+      "module": "ContinuousTime/SpectralBound.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.spectralBound",
+      "kind": "def",
+      "module": "ContinuousTime/SpectralBound.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.exp_eigenvalue_converse_false_real",
+      "kind": "theorem",
+      "module": "ContinuousTime/SpectralBound.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.spectrum_nonempty",
+      "kind": "theorem",
+      "module": "ContinuousTime/SpectralBound.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.re_spectrum_finite",
+      "kind": "theorem",
+      "module": "ContinuousTime/SpectralBound.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.re_le_spectralBound",
+      "kind": "theorem",
+      "module": "ContinuousTime/SpectralBound.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.exists_re_eq_spectralBound",
+      "kind": "theorem",
+      "module": "ContinuousTime/SpectralBound.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.specRad_exp",
+      "kind": "theorem",
+      "module": "ContinuousTime/SpectralBound.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.spectralBound_smul",
+      "kind": "theorem",
+      "module": "ContinuousTime/SpectralBound.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.norm_exp_pos",
+      "kind": "theorem",
+      "module": "ContinuousTime/SpectralBound.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.tendsto_log_norm_exp",
+      "kind": "theorem",
+      "module": "ContinuousTime/SpectralBound.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.exp_smul_add",
+      "kind": "theorem",
+      "module": "ContinuousTime/SpectralBound.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.exists_exp_bound",
+      "kind": "theorem",
+      "module": "ContinuousTime/SpectralBound.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.stability_tfae",
+      "kind": "theorem",
+      "module": "ContinuousTime/SpectralBound.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.IsC0Semigroup",
+      "kind": "structure",
+      "module": "ContinuousTime/Semigroups.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.IsC0Semigroup.mk",
+      "kind": "constructor",
+      "module": "ContinuousTime/Semigroups.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.IsC0Semigroup.zero",
+      "kind": "projection",
+      "module": "ContinuousTime/Semigroups.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.IsC0Semigroup.add",
+      "kind": "projection",
+      "module": "ContinuousTime/Semigroups.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.IsC0Semigroup.cont",
+      "kind": "projection",
+      "module": "ContinuousTime/Semigroups.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.isC0Semigroup_exp",
+      "kind": "theorem",
+      "module": "ContinuousTime/Semigroups.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.hasDerivAt_mul_entry",
+      "kind": "theorem",
+      "module": "ContinuousTime/Semigroups.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.IsC0Semigroup.continuousOn_entry",
+      "kind": "theorem",
+      "module": "ContinuousTime/Semigroups.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.IsC0Semigroup.intervalIntegrable_entry",
+      "kind": "theorem",
+      "module": "ContinuousTime/Semigroups.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.IsC0Semigroup.V",
+      "kind": "def",
+      "module": "ContinuousTime/Semigroups.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.IsC0Semigroup.hasDerivAt_V",
+      "kind": "theorem",
+      "module": "ContinuousTime/Semigroups.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.IsC0Semigroup.tendsto_V_div",
+      "kind": "theorem",
+      "module": "ContinuousTime/Semigroups.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.IsC0Semigroup.exists_V_isUnit",
+      "kind": "theorem",
+      "module": "ContinuousTime/Semigroups.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.IsC0Semigroup.mul_V",
+      "kind": "theorem",
+      "module": "ContinuousTime/Semigroups.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.IsC0Semigroup.hasDerivAt_entry",
+      "kind": "theorem",
+      "module": "ContinuousTime/Semigroups.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.IsC0Semigroup.exists_eq_exp",
+      "kind": "theorem",
+      "module": "ContinuousTime/Semigroups.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.IsIntensity",
+      "kind": "def",
+      "module": "ContinuousTime/MarkovSemigroups.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.isIntensity_example",
+      "kind": "theorem",
+      "module": "ContinuousTime/MarkovSemigroups.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.exp_nonneg_of_nonneg",
+      "kind": "theorem",
+      "module": "ContinuousTime/MarkovSemigroups.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.exp_smul_one",
+      "kind": "theorem",
+      "module": "ContinuousTime/MarkovSemigroups.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.exp_smul_mulVec_one",
+      "kind": "theorem",
+      "module": "ContinuousTime/MarkovSemigroups.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.intensityBound",
+      "kind": "def",
+      "module": "ContinuousTime/MarkovSemigroups.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.intensityJump",
+      "kind": "def",
+      "module": "ContinuousTime/MarkovSemigroups.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.intensityJump_spec",
+      "kind": "theorem",
+      "module": "ContinuousTime/MarkovSemigroups.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.exp_smul_nonneg",
+      "kind": "theorem",
+      "module": "ContinuousTime/MarkovSemigroups.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.intensity_tfae",
+      "kind": "theorem",
+      "module": "ContinuousTime/MarkovSemigroups.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.isIntensity_of_isMarkov",
+      "kind": "theorem",
+      "module": "ContinuousTime/MarkovSemigroups.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.exp_smul_entry_isLittleO",
+      "kind": "theorem",
+      "module": "ContinuousTime/MarkovSemigroups.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.chapman_kolmogorov",
+      "kind": "theorem",
+      "module": "ContinuousTime/MarkovSemigroups.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.kolmogorov_backward",
+      "kind": "theorem",
+      "module": "ContinuousTime/MarkovSemigroups.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.kolmogorov_forward",
+      "kind": "theorem",
+      "module": "ContinuousTime/MarkovSemigroups.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.hasDerivWithinAt_mul_entry",
+      "kind": "theorem",
+      "module": "ContinuousTime/MarkovSemigroups.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.eq_one_of_deriv_zero",
+      "kind": "theorem",
+      "module": "ContinuousTime/MarkovSemigroups.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.eq_exp_of_backward",
+      "kind": "theorem",
+      "module": "ContinuousTime/MarkovSemigroups.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.eq_exp_of_forward",
+      "kind": "theorem",
+      "module": "ContinuousTime/MarkovSemigroups.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.jumpIntensity",
+      "kind": "def",
+      "module": "ContinuousTime/JumpChains.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.isIntensity_jumpIntensity",
+      "kind": "theorem",
+      "module": "ContinuousTime/JumpChains.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.intensityJumpChain",
+      "kind": "def",
+      "module": "ContinuousTime/JumpChains.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.intensityJumpChain_spec",
+      "kind": "theorem",
+      "module": "ContinuousTime/JumpChains.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.integral_backward_eq",
+      "kind": "theorem",
+      "module": "ContinuousTime/JumpChains.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.hasDerivWithinAt_integral_Ici",
+      "kind": "theorem",
+      "module": "ContinuousTime/JumpChains.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.backward_of_integrated",
+      "kind": "theorem",
+      "module": "ContinuousTime/JumpChains.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.eq_exp_of_integrated",
+      "kind": "theorem",
+      "module": "ContinuousTime/JumpChains.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.inventoryJump",
+      "kind": "def",
+      "module": "ContinuousTime/JumpChains.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.isMarkov_inventoryJump",
+      "kind": "theorem",
+      "module": "ContinuousTime/JumpChains.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.continuous_exp_smul_mulVec",
+      "kind": "theorem",
+      "module": "ContinuousTime/Valuation.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.mulVecLinCLM",
+      "kind": "def",
+      "module": "ContinuousTime/Valuation.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.projCLM",
+      "kind": "def",
+      "module": "ContinuousTime/Valuation.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.lifetimeValue",
+      "kind": "def",
+      "module": "ContinuousTime/Valuation.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.integrableOn_exp_mulVec",
+      "kind": "theorem",
+      "module": "ContinuousTime/Valuation.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.isUnit_of_spectralBound_neg",
+      "kind": "theorem",
+      "module": "ContinuousTime/Valuation.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.mulVec_lifetimeValue",
+      "kind": "theorem",
+      "module": "ContinuousTime/Valuation.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.lifetimeValue_eq",
+      "kind": "theorem",
+      "module": "ContinuousTime/Valuation.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.lifetimeValue_eq_integral_add",
+      "kind": "theorem",
+      "module": "ContinuousTime/Valuation.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.inv_nonpos",
+      "kind": "theorem",
+      "module": "ContinuousTime/Valuation.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.neg_inv_mulVec_nonneg",
+      "kind": "theorem",
+      "module": "ContinuousTime/Valuation.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.orderStable_valuation",
+      "kind": "theorem",
+      "module": "ContinuousTime/Valuation.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.pathDiscount_properties",
+      "kind": "theorem",
+      "module": "ContinuousTime/Valuation.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.exp_smul_sub_smul_one",
+      "kind": "theorem",
+      "module": "ContinuousTime/Valuation.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.constant_discounting",
+      "kind": "theorem",
+      "module": "ContinuousTime/Valuation.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.CTMDP",
+      "kind": "structure",
+      "module": "ContinuousTime/CTMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.CTMDP.mk",
+      "kind": "constructor",
+      "module": "ContinuousTime/CTMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.CTMDP.\u0393",
+      "kind": "projection",
+      "module": "ContinuousTime/CTMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.CTMDP.\u0393_nonempty",
+      "kind": "projection",
+      "module": "ContinuousTime/CTMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.CTMDP.\u03b4",
+      "kind": "projection",
+      "module": "ContinuousTime/CTMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.CTMDP.\u03b4_pos",
+      "kind": "projection",
+      "module": "ContinuousTime/CTMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.CTMDP.r",
+      "kind": "projection",
+      "module": "ContinuousTime/CTMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.CTMDP.Q",
+      "kind": "projection",
+      "module": "ContinuousTime/CTMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.CTMDP.Q_nonneg",
+      "kind": "projection",
+      "module": "ContinuousTime/CTMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.CTMDP.Q_sum",
+      "kind": "projection",
+      "module": "ContinuousTime/CTMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.CTMDP.Policy",
+      "kind": "def",
+      "module": "ContinuousTime/CTMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.CTMDP.nonempty_policy",
+      "kind": "theorem",
+      "module": "ContinuousTime/CTMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.CTMDP.Q\u03c3",
+      "kind": "def",
+      "module": "ContinuousTime/CTMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.CTMDP.r\u03c3",
+      "kind": "def",
+      "module": "ContinuousTime/CTMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.CTMDP.isIntensity_Q\u03c3",
+      "kind": "theorem",
+      "module": "ContinuousTime/CTMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.CTMDP.flow",
+      "kind": "def",
+      "module": "ContinuousTime/CTMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.CTMDP.IsGreedy",
+      "kind": "def",
+      "module": "ContinuousTime/CTMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.CTMDP.exists_greedy",
+      "kind": "theorem",
+      "module": "ContinuousTime/CTMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.CTMDP.exists_minGreedy",
+      "kind": "theorem",
+      "module": "ContinuousTime/CTMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.CTMDP.v\u03c3",
+      "kind": "def",
+      "module": "ContinuousTime/CTMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.CTMDP.v\u03c3_eq_integral",
+      "kind": "theorem",
+      "module": "ContinuousTime/CTMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.CTMDP.v\u03c3_eq",
+      "kind": "theorem",
+      "module": "ContinuousTime/CTMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.CTMDP.T\u03c3",
+      "kind": "def",
+      "module": "ContinuousTime/CTMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.CTMDP.T\u03c3_apply",
+      "kind": "theorem",
+      "module": "ContinuousTime/CTMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.CTMDP.orderStable_T\u03c3",
+      "kind": "theorem",
+      "module": "ContinuousTime/CTMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.CTMDP.toADP",
+      "kind": "def",
+      "module": "ContinuousTime/CTMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.CTMDP.isOrderStable_toADP",
+      "kind": "theorem",
+      "module": "ContinuousTime/CTMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.CTMDP.toADP_v\u03c3",
+      "kind": "theorem",
+      "module": "ContinuousTime/CTMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.CTMDP.isGreedy_iff",
+      "kind": "theorem",
+      "module": "ContinuousTime/CTMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.CTMDP.isGreedy_greedy",
+      "kind": "theorem",
+      "module": "ContinuousTime/CTMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.CTMDP.bellman_apply",
+      "kind": "theorem",
+      "module": "ContinuousTime/CTMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.CTMDP.IsHJB",
+      "kind": "def",
+      "module": "ContinuousTime/CTMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.CTMDP.isFixedPt_bellman_iff",
+      "kind": "theorem",
+      "module": "ContinuousTime/CTMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.CTMDP.hpiPolicy",
+      "kind": "def",
+      "module": "ContinuousTime/CTMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.CTMDP.hpiPolicy_eq",
+      "kind": "theorem",
+      "module": "ContinuousTime/CTMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.CTMDP.optimality",
+      "kind": "theorem",
+      "module": "ContinuousTime/CTMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.jsJump",
+      "kind": "def",
+      "module": "ContinuousTime/CTMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.jsJump_stochastic",
+      "kind": "theorem",
+      "module": "ContinuousTime/CTMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.jsRate",
+      "kind": "def",
+      "module": "ContinuousTime/CTMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.jsRate_nonneg",
+      "kind": "theorem",
+      "module": "ContinuousTime/CTMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.jsJump_isMarkov",
+      "kind": "theorem",
+      "module": "ContinuousTime/CTMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.jobSearch",
+      "kind": "def",
+      "module": "ContinuousTime/CTMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.jobSearch_Q\u03c3",
+      "kind": "theorem",
+      "module": "ContinuousTime/CTMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.ContinuousTime.jobSearch_optimality",
+      "kind": "theorem",
+      "module": "ContinuousTime/CTMDP.lean"
+    }
+  ],
+  "full_build": "passed",
+  "fresh_source_compilation": "passed",
+  "fresh_source_lint_options": [
+    "-Dlinter.mathlibStandardSet=true",
+    "-Dlinter.style.header=false"
+  ],
+  "axioms": {
+    "SargentStachurski.ContinuousTime.IsMarkov": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.IsMarkov.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.IsMarkov.nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.IsMarkov.rowsum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.IsDistribution": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.IsDistribution.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.IsDistribution.nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.IsDistribution.sum_eq_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.mulVec_apply_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.IsMarkov.mul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.IsMarkov.pow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.IsMarkov.mulVec_le_mulVec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.IsMarkov.mulVec_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.IsMarkov.abs_mulVec_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.IsMarkov.norm_mulVec_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.IsMarkov.abs_mulVec_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.GloballyStable": [
+      "propext",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.IsContractionOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.IsContractionOn.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.IsContractionOn.mapsTo": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.IsContractionOn.nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.IsContractionOn.lt_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.IsContractionOn.norm_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.IsContractionOn.fixedPt_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.IsContractionOn.iterate_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.IsContractionOn.norm_iterate_sub_fixedPt_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.IsContractionOn.tendsto_iterate_fixedPt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.IsContractionOn.exists_fixedPt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.IsContractionOn.globallyStable_univ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.fixedPt_le_of_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.le_fixedPt_of_le_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.isContractionOn_of_blackwell": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.abs_sup'_sub_sup'_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.pow_nonneg_entries": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.pow_le_pow_entries": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.complexify": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.complexify_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.complexify_pow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.complexify_transpose": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.nnnorm_complexify": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.norm_complexify": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.specRad": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.spectralRadius_complexify_ne_top": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.specRad_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.mem_spectrum_iff_eigenpair": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.tendsto_norm_pow_rpow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.eventually_norm_pow_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.tendsto_norm_pow_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.summable_pow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.one_sub_mul_tsum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.tsum_mul_one_sub": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.neumann_series": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.specRad_transpose": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.norm_le_norm_of_abs_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.specRad_le_of_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.rowsum_abs_le_norm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.norm_le_of_rowsum_abs_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.abs_entry_le_norm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.norm_eq_of_rowsum_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.specRad_le_norm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.norm_le_specRad_of_mem_spectrum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.specRad_eq_of_rowsum_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.specRad_eq_of_colsum_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.eventually_abs_entry_pow_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.resPartial": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.res": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.res_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.smul_one_sub_mul_resPartial": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.resPartial_mul_smul_one_sub": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.resPartial_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.summable_res_entry": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.tendsto_resPartial_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.tendsto_inv_pow_mul_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.smul_one_sub_mul_res": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.res_mul_smul_one_sub": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.res_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.inv_le_res_diag": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.exists_mem_spectrum_norm_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.eventually_norm_entry_pow_complexify_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.smul_one_sub_mul_res_real": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.norm_res_complexify_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.norm_le_card_mul_of_entry_norm_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.notMem_spectrum_of_res_bounded": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.exists_res_entry_gt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.isCompact_simplex": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.perron_frobenius": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.perron_frobenius_left": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.le_specRad_of_colsum_ge": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.specRad_le_of_colsum_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.le_specRad_of_rowsum_ge": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.specRad_le_of_rowsum_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.tendsto_rpow_one_div_natCast": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.norm_pow_mul_le_norm_mulVec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.tendsto_norm_pow_mulVec_rpow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.IsMarkov.specRad_eq_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.IsMarkov.exists_stationary": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.IsMarkov.not_mulVec_ge_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.Irreducible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.irreducible_of_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.Irreducible.transpose": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.pow_mulVec_eq_of_mulVec_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.Irreducible.pos_of_mulVec_eq_smul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.Irreducible.specRad_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.Irreducible.exists_pos_eigenvector": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.Irreducible.exists_pos_left_eigenvector": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.Irreducible.eq_specRad_of_mulVec_eq_smul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.Irreducible.exists_eq_smul_of_mulVec_eq_smul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.IsMarkov.exists_unique_stationary_of_irreducible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.discountOp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.discountOp_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.discountOp_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.discountOp_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.specRad_smul_isMarkov": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.summable_pow_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.summable_pow_mulVec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.mulVec_tsum_pow_mulVec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.tsum_pow_mulVec_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.eq_of_eq_add_mulVec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.inv_mulVec_eq_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.inv_mulVec_eq_tsum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.eq_add_mulVec_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.specRad_lt_one_iff_existsUnique_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.globallyStable_of_iterate_contraction": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.globallyStable_of_iterate_contraction_univ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.affineOp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.affineOp_iterate_sub": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.exists_isContractionOn_iterate_affineOp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.globallyStable_affineOp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.isFixedPt_affineOp_inv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.mulVec_le_mulVec_of_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.norm_abs_fun": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.norm_le_norm_of_abs_le_fun": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.abs_iterate_sub_le_pow_mulVec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.exists_isContractionOn_iterate_of_abs_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.globallyStable_of_abs_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.GloballyStableOn": [
+      "propext",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.globallyStableOn_univ_iff": [
+      "propext",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.GloballyStableOn.existsUnique": [
+      "propext",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.GloballyStableOn.of_conj": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.globallyStableOn_iff_of_conj": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.iterate_le_iterate_of_monotoneOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.knaster_tarski": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.exists_continuum_fixedPts": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.du_concave": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.exists_delta_of_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.du_concave_of_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.neg_mem_Icc_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.globallyStableOn_of_reflect": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.du_convex": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.du_convex_of_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.concaveOn_comp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.OrderStable": [],
+    "SargentStachurski.ContinuousTime.orderStable_of_up_down": [],
+    "SargentStachurski.ContinuousTime.orderStable_of_globallyStable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.orderStable_restrict": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.orderStable_affineOp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.orderStable_dual_iff": [
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.ADP": [],
+    "SargentStachurski.ContinuousTime.ADP.mk": [],
+    "SargentStachurski.ContinuousTime.ADP.T": [],
+    "SargentStachurski.ContinuousTime.ADP.exists_greedy": [],
+    "SargentStachurski.ContinuousTime.ADP.exists_minGreedy": [],
+    "SargentStachurski.ContinuousTime.ADP.IsGreedy": [],
+    "SargentStachurski.ContinuousTime.ADP.greedy": [
+      "Classical.choice"
+    ],
+    "SargentStachurski.ContinuousTime.ADP.isGreedy_greedy": [
+      "Classical.choice"
+    ],
+    "SargentStachurski.ContinuousTime.ADP.bellman": [
+      "Classical.choice"
+    ],
+    "SargentStachurski.ContinuousTime.ADP.T_le_bellman": [
+      "Classical.choice"
+    ],
+    "SargentStachurski.ContinuousTime.ADP.isGreatest_bellman": [
+      "Classical.choice"
+    ],
+    "SargentStachurski.ContinuousTime.ADP.isGreedy_iff": [
+      "Classical.choice"
+    ],
+    "SargentStachurski.ContinuousTime.ADP.monotone_bellman": [
+      "Classical.choice"
+    ],
+    "SargentStachurski.ContinuousTime.ADP.WellPosed": [],
+    "SargentStachurski.ContinuousTime.ADP.v\u03c3": [
+      "Classical.choice"
+    ],
+    "SargentStachurski.ContinuousTime.ADP.isFixedPt_v\u03c3": [
+      "Classical.choice"
+    ],
+    "SargentStachurski.ContinuousTime.ADP.eq_v\u03c3_of_isFixedPt": [
+      "Classical.choice"
+    ],
+    "SargentStachurski.ContinuousTime.ADP.Vu": [
+      "Classical.choice"
+    ],
+    "SargentStachurski.ContinuousTime.ADP.v\u03c3_mem_Vu": [
+      "Classical.choice"
+    ],
+    "SargentStachurski.ContinuousTime.ADP.howard": [
+      "Classical.choice"
+    ],
+    "SargentStachurski.ContinuousTime.ADP.hpiPolicy": [
+      "Classical.choice"
+    ],
+    "SargentStachurski.ContinuousTime.ADP.hpiValue": [
+      "Classical.choice"
+    ],
+    "SargentStachurski.ContinuousTime.ADP.hpiValue_succ": [
+      "Classical.choice"
+    ],
+    "SargentStachurski.ContinuousTime.ADP.IsOrderStable": [],
+    "SargentStachurski.ContinuousTime.ADP.IsMaxStable": [
+      "Classical.choice"
+    ],
+    "SargentStachurski.ContinuousTime.ADP.IsOrderStable.wellPosed": [],
+    "SargentStachurski.ContinuousTime.ADP.IsOrderStable.le_v\u03c3": [
+      "Classical.choice"
+    ],
+    "SargentStachurski.ContinuousTime.ADP.IsOrderStable.v\u03c3_le": [
+      "Classical.choice"
+    ],
+    "SargentStachurski.ContinuousTime.ADP.IsOptimal": [
+      "Classical.choice"
+    ],
+    "SargentStachurski.ContinuousTime.ADP.IsOrderStable.le_howard": [
+      "Classical.choice"
+    ],
+    "SargentStachurski.ContinuousTime.ADP.IsOrderStable.isOptimal_of_isFixedPt": [
+      "Classical.choice"
+    ],
+    "SargentStachurski.ContinuousTime.ADP.IsOrderStable.isFixedPt_of_howard": [
+      "Classical.choice"
+    ],
+    "SargentStachurski.ContinuousTime.ADP.IsOrderStable.howard_fixed": [
+      "Classical.choice"
+    ],
+    "SargentStachurski.ContinuousTime.ADP.IsOrderStable.hpiValue_le_succ": [
+      "Classical.choice"
+    ],
+    "SargentStachurski.ContinuousTime.ADP.IsOrderStable.exists_hpiValue_succ_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.ADP.IsOrderStable.hpi_terminates": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.ADP.IsOrderStable.isMaxStable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.ADP.IsMaxStable.optimality": [
+      "propext",
+      "Classical.choice"
+    ],
+    "SargentStachurski.ContinuousTime.ADP.IsOrderStable.maxOptimality": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.hasDerivAt_exp_mul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.eq_exp_of_hasDerivAt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.exp_memoryless": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.add_nsmul_of_additive": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.eq_exp_of_memoryless": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.exp_counter_properties": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.norm_one_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.norm_pow_le_pow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.norm_partialSum_exp_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.exp_conj_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.exp_add_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.exp_natCast_smul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.hasDerivAt_exp_smul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.hasDerivAt_exp_smul'": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.exp_smul_mul_comm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.exp_transpose_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.continuous_exp_smul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.exp_smul_sub_eq_integral": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.exp_mul_exp_neg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.exp_mulVec_of_eigen": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.exp_mulVec_of_eigen_real": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.exp_eigenvalue_converse_false": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.exp_smul_semigroup": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.exp_smul_mul_exp_neg_smul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.mulVecCLM": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.entryCLM": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.hasDerivAt_exp_smul_entry": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.hasDerivAt_exp_neg_smul_entry": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.hasDerivAt_mulVec_of_entry": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.hasDerivAt_exp_smul_mulVec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.ivp_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.ivp_unique_row": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.exp_smul_diagonal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.tendsto_exp_mul_zero_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.norm_exp_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.complexify_exp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.complexify_smul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.spectrum_complexify_exp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.spectralBound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.exp_eigenvalue_converse_false_real": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.spectrum_nonempty": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.re_spectrum_finite": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.re_le_spectralBound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.exists_re_eq_spectralBound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.specRad_exp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.spectralBound_smul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.norm_exp_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.tendsto_log_norm_exp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.exp_smul_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.exists_exp_bound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.stability_tfae": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.IsC0Semigroup": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.IsC0Semigroup.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.IsC0Semigroup.zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.IsC0Semigroup.add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.IsC0Semigroup.cont": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.isC0Semigroup_exp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.hasDerivAt_mul_entry": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.IsC0Semigroup.continuousOn_entry": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.IsC0Semigroup.intervalIntegrable_entry": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.IsC0Semigroup.V": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.IsC0Semigroup.hasDerivAt_V": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.IsC0Semigroup.tendsto_V_div": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.IsC0Semigroup.exists_V_isUnit": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.IsC0Semigroup.mul_V": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.IsC0Semigroup.hasDerivAt_entry": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.IsC0Semigroup.exists_eq_exp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.IsIntensity": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.isIntensity_example": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.exp_nonneg_of_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.exp_smul_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.exp_smul_mulVec_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.intensityBound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.intensityJump": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.intensityJump_spec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.exp_smul_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.intensity_tfae": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.isIntensity_of_isMarkov": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.exp_smul_entry_isLittleO": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.chapman_kolmogorov": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.kolmogorov_backward": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.kolmogorov_forward": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.hasDerivWithinAt_mul_entry": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.eq_one_of_deriv_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.eq_exp_of_backward": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.eq_exp_of_forward": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.jumpIntensity": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.isIntensity_jumpIntensity": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.intensityJumpChain": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.intensityJumpChain_spec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.integral_backward_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.hasDerivWithinAt_integral_Ici": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.backward_of_integrated": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.eq_exp_of_integrated": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.inventoryJump": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.isMarkov_inventoryJump": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.continuous_exp_smul_mulVec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.mulVecLinCLM": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.projCLM": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.lifetimeValue": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.integrableOn_exp_mulVec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.isUnit_of_spectralBound_neg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.mulVec_lifetimeValue": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.lifetimeValue_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.lifetimeValue_eq_integral_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.inv_nonpos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.neg_inv_mulVec_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.orderStable_valuation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.pathDiscount_properties": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.exp_smul_sub_smul_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.constant_discounting": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.CTMDP": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.CTMDP.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.CTMDP.\u0393": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.CTMDP.\u0393_nonempty": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.CTMDP.\u03b4": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.CTMDP.\u03b4_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.CTMDP.r": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.CTMDP.Q": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.CTMDP.Q_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.CTMDP.Q_sum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.CTMDP.Policy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.CTMDP.nonempty_policy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.CTMDP.Q\u03c3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.CTMDP.r\u03c3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.CTMDP.isIntensity_Q\u03c3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.CTMDP.flow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.CTMDP.IsGreedy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.CTMDP.exists_greedy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.CTMDP.exists_minGreedy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.CTMDP.v\u03c3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.CTMDP.v\u03c3_eq_integral": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.CTMDP.v\u03c3_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.CTMDP.T\u03c3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.CTMDP.T\u03c3_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.CTMDP.orderStable_T\u03c3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.CTMDP.toADP": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.CTMDP.isOrderStable_toADP": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.CTMDP.toADP_v\u03c3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.CTMDP.isGreedy_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.CTMDP.isGreedy_greedy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.CTMDP.bellman_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.CTMDP.IsHJB": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.CTMDP.isFixedPt_bellman_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.CTMDP.hpiPolicy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.CTMDP.hpiPolicy_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.CTMDP.optimality": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.jsJump": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.jsJump_stochastic": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.jsRate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.jsRate_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.jsJump_isMarkov": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.jobSearch": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.jobSearch_Q\u03c3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.ContinuousTime.jobSearch_optimality": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  "source_sha256": {
+    "ContinuousTime/Basics.lean": "77baeb1c61802c01fe645b1a2ffe97ea90df81b3773d8a48f4e9fe8e1f8b28a5",
+    "ContinuousTime/SpectralRadius.lean": "6cd9e2b5d30910605136b490a35b7900a16db56f3dfd3a99b4ce9d34e553d39b",
+    "ContinuousTime/Resolvent.lean": "95bd98e7414c41468f4bfbd11c67f044c13847bfd683ba05e34adf7b73207c53",
+    "ContinuousTime/PerronFrobenius.lean": "c66da2a160b9b5fa4ad3f86424e58a8ec82eed9d4bd03a3bf6c8d86b585e292f",
+    "ContinuousTime/Irreducible.lean": "665e028ee6ff2a8ed2d37bb7de244862cec992ce670d999b62ddced5c53c7ee1",
+    "ContinuousTime/LinearValuation.lean": "9db5c08c9ef0fc55e7ad16facc7dc568d08c4a12b7f5378916188eef9f2bf564",
+    "ContinuousTime/OrderFixedPoints.lean": "725946b8bde929c78499c9392bc9fbd2bff04170a5a2daeeac290bb890df993f",
+    "ContinuousTime/OrderStability.lean": "e2ed17dccb3efb0feeab9b5efbc2c77e98fb402920b4bbf65452921062a7493f",
+    "ContinuousTime/ADP.lean": "c56c56c727b027111199d152c822e6ed60ed5373defb3920e39351a1acb05219",
+    "ContinuousTime/Exponential.lean": "10974b6837164f6a3d82023a50d64efb5d4605943b3a43f97c68b8406db51b91",
+    "ContinuousTime/Flows.lean": "8f713f0da1b7d666dbd420480f0987712c698def4570531d2599fab34e7956c3",
+    "ContinuousTime/SpectralBound.lean": "7b64357c3d7caede44512e4985f1de5e659e94f423a036047d1bf801c08f005a",
+    "ContinuousTime/Semigroups.lean": "31407c563999c0b9ef5a4073304e75adc5aa9e8cdea375af64da980e5bdcfa82",
+    "ContinuousTime/MarkovSemigroups.lean": "fc8b2fb199ac001732f775c7b7fe2ae639ae5ddad3094dd54b04b5cf48949a89",
+    "ContinuousTime/JumpChains.lean": "12f4c97ca866cabad00d1a47c28830f1fe5f2ec7b6d828ca7b0ff2194c5e26a4",
+    "ContinuousTime/Valuation.lean": "a49349d252fa05cda03b6413eb6e9ffdad141c58b6f29127a66866d228661b30",
+    "ContinuousTime/CTMDP.lean": "e3da8c4be9af97c9d680b918db83e1106faa913ab14e6186a463865739da829b",
+    "ContinuousTime.lean": "cf8c727eda5093692f8d5893157d9d3cc472d7ab196192499bdb1d76895f1a1e",
+    "lean-toolchain": "8733782dc070a99b312039cda424f601b80f3be6f6f512627da5ba25adc27632",
+    "lakefile.toml": "af4034e3fbe8d93678a7d950f434d9197b466870f3b734b8bdbca189fa6e8256",
+    "lake-manifest.json": "0aefeeea6c71255411beda32cb67efa03d33edbb0cfd8aedb3e81af16a5013d6",
+    "proof-manifest.json": "43641c248bee4ef52524b774081f30bcac53207b66e44d09c1bf21ca3914553d",
+    "scripts/verify.py": "a70b1fa704dd590f937f8b37682afa88a9d85a9150065acb935c7d2c9589da3b",
+    "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  },
+  "fresh_audit_sha256": "d24bd00d718a82ba9a7e89dd0ab0bd1e11c6c60ab61eb27133af2471f84fab8c",
+  "lean_toolchain": "leanprover/lean4:v4.34.0",
+  "scope": "Sargent and Stachurski, Dynamic Programming, Volume 1 (Finite States), Chapter 10: Continuous Time. Scalar and matrix exponentials, the memoryless property, linear flows and uniqueness for x' = Ax, the spectral bound, the spectral mapping theorem for the exponential and the stability characterisation (Theorem 10.1.5), C0-semigroups and their generators, intensity matrices and Markov semigroups, Kolmogorov backward and forward equations, jump chains, lifetime valuation in continuous time (Propositions 10.2.1 and 10.2.3), continuous-time Markov decision processes via abstract dynamic programs (Theorem 10.2.4), and continuous-time job search; with the Chapter 9 ADP and order-stability layer and the earlier finite-state results it depends on restated.",
+  "source": "Thomas J. Sargent and John Stachurski, Dynamic Programming, Volume 1: Finite States, Chapter 10, pp. 308-341."
+}

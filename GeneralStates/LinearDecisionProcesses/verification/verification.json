@@ -1,0 +1,4757 @@
+{
+  "checked_at_utc": "2026-10-07T09:06:37.595780+00:00",
+  "theorems": 309,
+  "module_theorems": {
+    "LinearDecisionProcesses/Basics.lean": 18,
+    "LinearDecisionProcesses/SupContraction.lean": 15,
+    "LinearDecisionProcesses/MarkovOperator.lean": 11,
+    "LinearDecisionProcesses/OrderTheory.lean": 17,
+    "LinearDecisionProcesses/ADP.lean": 25,
+    "LinearDecisionProcesses/Algorithms.lean": 26,
+    "LinearDecisionProcesses/Pospace.lean": 13,
+    "LinearDecisionProcesses/MetricADP.lean": 7,
+    "LinearDecisionProcesses/BoundedMeasurable.lean": 31,
+    "LinearDecisionProcesses/BanachLattice.lean": 14,
+    "LinearDecisionProcesses/OrderContraction.lean": 19,
+    "LinearDecisionProcesses/BMOperators.lean": 10,
+    "LinearDecisionProcesses/Correspondences.lean": 13,
+    "LinearDecisionProcesses/LDP.lean": 16,
+    "LinearDecisionProcesses/LDPOptimality.lean": 13,
+    "LinearDecisionProcesses/Feller.lean": 8,
+    "LinearDecisionProcesses/ExogenousDiscount.lean": 9,
+    "LinearDecisionProcesses/ExogenousLDP.lean": 10,
+    "LinearDecisionProcesses/GeneralMDP.lean": 6,
+    "LinearDecisionProcesses/NaturalResource.lean": 7,
+    "LinearDecisionProcesses/StochasticReturns.lean": 17,
+    "LinearDecisionProcesses/SavingsFeller.lean": 4
+  },
+  "audited_declarations": 487,
+  "declarations": [
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.IsMarkov",
+      "kind": "structure",
+      "module": "LinearDecisionProcesses/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.IsMarkov.mk",
+      "kind": "constructor",
+      "module": "LinearDecisionProcesses/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.IsMarkov.nonneg",
+      "kind": "projection",
+      "module": "LinearDecisionProcesses/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.IsMarkov.rowsum",
+      "kind": "projection",
+      "module": "LinearDecisionProcesses/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.IsDistribution",
+      "kind": "structure",
+      "module": "LinearDecisionProcesses/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.IsDistribution.mk",
+      "kind": "constructor",
+      "module": "LinearDecisionProcesses/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.IsDistribution.nonneg",
+      "kind": "projection",
+      "module": "LinearDecisionProcesses/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.IsDistribution.sum_eq_one",
+      "kind": "projection",
+      "module": "LinearDecisionProcesses/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.mulVec_apply_eq",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.IsMarkov.mul",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.IsMarkov.pow",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.IsMarkov.mulVec_le_mulVec",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.IsMarkov.mulVec_const",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.IsMarkov.abs_mulVec_le",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.IsMarkov.norm_mulVec_le",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.IsMarkov.abs_mulVec_sub_le",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.GloballyStable",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.IsContractionOn",
+      "kind": "structure",
+      "module": "LinearDecisionProcesses/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.IsContractionOn.mk",
+      "kind": "constructor",
+      "module": "LinearDecisionProcesses/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.IsContractionOn.mapsTo",
+      "kind": "projection",
+      "module": "LinearDecisionProcesses/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.IsContractionOn.nonneg",
+      "kind": "projection",
+      "module": "LinearDecisionProcesses/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.IsContractionOn.lt_one",
+      "kind": "projection",
+      "module": "LinearDecisionProcesses/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.IsContractionOn.norm_sub_le",
+      "kind": "projection",
+      "module": "LinearDecisionProcesses/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.IsContractionOn.fixedPt_unique",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.IsContractionOn.iterate_mem",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.IsContractionOn.norm_iterate_sub_fixedPt_le",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.IsContractionOn.tendsto_iterate_fixedPt",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.IsContractionOn.exists_fixedPt",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.IsContractionOn.globallyStable_univ",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.fixedPt_le_of_le",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.le_fixedPt_of_le_apply",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.isContractionOn_of_blackwell",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.abs_sup'_sub_sup'_le",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.IsBdd",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/SupContraction.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.IsSupContraction",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/SupContraction.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.IsUniformlyClosed",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/SupContraction.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.isBdd_const",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/SupContraction.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.IsBdd.sub",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/SupContraction.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.IsBdd.add",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/SupContraction.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.IsBdd.nonneg_bound",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/SupContraction.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.IsBdd.exists_dist",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/SupContraction.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.IsSupContraction.iterate",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/SupContraction.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.IsSupContraction.eq_of_isFixedPt",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/SupContraction.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.IsSupContraction.exists_limit",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/SupContraction.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.IsSupContraction.globallyStable",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/SupContraction.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.le_of_le_map_of_tendsto",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/SupContraction.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.le_of_map_le_of_tendsto",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/SupContraction.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.bX",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/SupContraction.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.isUniformlyClosed_bX",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/SupContraction.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.const_mem_bX",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/SupContraction.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.abs_max_sub_max_le",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/SupContraction.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.abs_ciSup_sub_ciSup_le",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/SupContraction.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.markovOp",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/MarkovOperator.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.integrable_of_mem_bX",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/MarkovOperator.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.measurable_markovOp",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/MarkovOperator.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.abs_markovOp_le",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/MarkovOperator.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.markovOp_mem_bX",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/MarkovOperator.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.markovOp_mono",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/MarkovOperator.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.markovOp_const",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/MarkovOperator.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.markovOp_add",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/MarkovOperator.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.markovOp_sub",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/MarkovOperator.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.markovOp_smul",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/MarkovOperator.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.markovOp_sub_const",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/MarkovOperator.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.abs_markovOp_sub_le",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/MarkovOperator.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.OrderStable",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/OrderTheory.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.IncreasesTo",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/OrderTheory.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.DecreasesTo",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/OrderTheory.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.StronglyOrderStable",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/OrderTheory.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.orderStable_of_up_down",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/OrderTheory.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.StronglyOrderStable.orderStable",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/OrderTheory.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.dualMap",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/OrderTheory.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.orderStable_dual_iff",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/OrderTheory.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.dualMap_iterate",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/OrderTheory.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.stronglyOrderStable_dual_iff",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/OrderTheory.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ChainComplete",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/OrderTheory.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ChainComplete.exists_least",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/OrderTheory.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ChainComplete.exists_fixedPt_ge",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/OrderTheory.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ChainComplete.exists_fixedPt_le",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/OrderTheory.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ChainComplete.exists_fixedPt",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/OrderTheory.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ChainComplete.orderStable",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/OrderTheory.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.chainComplete_Icc",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/OrderTheory.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.CountablyDedekindComplete",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/OrderTheory.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.countablyDedekindComplete_of_conditionallyCompleteLattice",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/OrderTheory.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.CountablyDedekindComplete.dual",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/OrderTheory.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.OrderContinuous",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/OrderTheory.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.OrderContinuous.monotone",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/OrderTheory.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.isLUB_range_succ_iff",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/OrderTheory.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.tarski_kantorovich",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/OrderTheory.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.stronglyOrderStable_of_globallyStable",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/OrderTheory.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP",
+      "kind": "structure",
+      "module": "LinearDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.mk",
+      "kind": "constructor",
+      "module": "LinearDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.T",
+      "kind": "projection",
+      "module": "LinearDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.mono",
+      "kind": "projection",
+      "module": "LinearDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.nonempty",
+      "kind": "projection",
+      "module": "LinearDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.IsGreedy",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.VG",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.WellPosed",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.IsFinite",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.Regular",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.IsOrderStable",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.IsStronglyOrderStable",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.IsBellmanValue",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.SolvesBellman",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.IsStronglyOrderStable.isOrderStable",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.IsOrderStable.wellPosed",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.regular_iff",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.greedy",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.isGreedy_greedy",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.bellman",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.T_le_bellman",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.isBellmanValue_bellman",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.isGreedy_iff",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.isGreedy_of_isBellmanValue",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.solvesBellman_iff",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.bellman_mono",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.VU",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.VSig",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.VSig_inter_VG_subset",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.v\u03c3",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.T_v\u03c3",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.eq_v\u03c3",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.VSig_eq_range",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.IsOptimal",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.IsValueFunction",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.BellmanPrinciple",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.FundamentalOptimality",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.IsOptimal.isValueFunction",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.isOptimal_of_isValueFunction",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.isOptimal_iff",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.bellmanPrinciple_of_solves",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.exists_solves_iff",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.fundamentalOptimality_iff",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.isOptimal_iff_solvesBellman",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.fundamentalOptimality_iff_exists_fixed",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.IsOrderStable.fundamentalOptimality",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.WellPosed.isOrderStable",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.fundamentalOptimality_of_chainComplete",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.IsSelector",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/Algorithms.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.Regular.isSelector_greedy",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/Algorithms.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.howard",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/Algorithms.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.opt",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/Algorithms.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.IsSelector.T_eq",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/Algorithms.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.mem_VU_iff",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/Algorithms.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.bellman_eq_of_howard_eq",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/Algorithms.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.iterate_mono_of_le",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/Algorithms.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.bellman_le_opt",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/Algorithms.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.chain_2_9",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/Algorithms.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.mapsTo_VU",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/Algorithms.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.bellman_le_of_le",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/Algorithms.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.iterates_of_mem_VU",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/Algorithms.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.VFIConverges",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/Algorithms.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.OPIConverges",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/Algorithms.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.HPIConverges",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/Algorithms.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.opt_one",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/Algorithms.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.OPIConverges.vfi",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/Algorithms.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.le_vstar_of_mem_VU",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/Algorithms.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.IsOrderStable.le_v\u03c3",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/Algorithms.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.IsOrderStable.v\u03c3_le",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/Algorithms.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.iterates_le_vstar",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/Algorithms.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.increasesTo_of_squeeze",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/Algorithms.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.VFIConverges.opi_hpi",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/Algorithms.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.VU_nonempty",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/Algorithms.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.IsFinite.VSig_finite",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/Algorithms.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.exists_succ_eq_of_finite",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/Algorithms.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.fundamentalOptimality_of_finite",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/Algorithms.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.FundamentalOptimality.exists_vstar",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/Algorithms.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.convergence_of_chainComplete",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/Algorithms.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.OrderBounded",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/Algorithms.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.IsOrderContinuous",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/Algorithms.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.le_of_orderBounded",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/Algorithms.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.convergence_of_dedekind",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/Algorithms.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.isLUB_of_tendsto_of_le",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/Pospace.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.isGLB_of_tendsto_of_le",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/Pospace.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.monotone_iterate_of_le",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/Pospace.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.Regular.bellman_monotone",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/Pospace.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.Regular.iterate_T_le_bellman",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/Pospace.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.bellman_iterate_le_of_bound",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/Pospace.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.IsGloballyStable",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/Pospace.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.IsGloballyStable.wellPosed",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/Pospace.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.IsGloballyStable.tendsto_v\u03c3",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/Pospace.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.IsGloballyStable.isStronglyOrderStable",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/Pospace.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.IsGloballyStable.isOrderStable",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/Pospace.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.theorem_3_1_2",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/Pospace.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.corollary_3_1_3",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/Pospace.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.theorem_3_1_4",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/Pospace.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.IsSupNonexpansive",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/MetricADP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.IsInfNonexpansive",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/MetricADP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.isInfNonexpansive_iff",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/MetricADP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.isSupNonexpansive_real",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/MetricADP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.isSupNonexpansive_pi",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/MetricADP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.lemma_A_5_21",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/MetricADP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.IsSemiRegular",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/MetricADP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.VFIGeometric",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/MetricADP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.isGloballyStable_of_contraction",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/MetricADP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.theorem_3_1_5",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/MetricADP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ADP.theorem_3_1_5_needs_nonempty",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/MetricADP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BM",
+      "kind": "structure",
+      "module": "LinearDecisionProcesses/BoundedMeasurable.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BM.mk",
+      "kind": "constructor",
+      "module": "LinearDecisionProcesses/BoundedMeasurable.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BM.toFun",
+      "kind": "projection",
+      "module": "LinearDecisionProcesses/BoundedMeasurable.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BM.measurable'",
+      "kind": "projection",
+      "module": "LinearDecisionProcesses/BoundedMeasurable.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BM.bdd'",
+      "kind": "projection",
+      "module": "LinearDecisionProcesses/BoundedMeasurable.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BM.ext",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/BoundedMeasurable.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BM.bddAbove",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/BoundedMeasurable.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BM.const",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/BoundedMeasurable.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BM.toFun_injective",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/BoundedMeasurable.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BM.zero",
+      "kind": "abbrev",
+      "module": "LinearDecisionProcesses/BoundedMeasurable.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BM.add",
+      "kind": "abbrev",
+      "module": "LinearDecisionProcesses/BoundedMeasurable.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BM.neg",
+      "kind": "abbrev",
+      "module": "LinearDecisionProcesses/BoundedMeasurable.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BM.sub",
+      "kind": "abbrev",
+      "module": "LinearDecisionProcesses/BoundedMeasurable.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BM.smulReal",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/BoundedMeasurable.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BM.nsmul",
+      "kind": "abbrev",
+      "module": "LinearDecisionProcesses/BoundedMeasurable.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BM.zsmul",
+      "kind": "abbrev",
+      "module": "LinearDecisionProcesses/BoundedMeasurable.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BM.addCommGroup",
+      "kind": "abbrev",
+      "module": "LinearDecisionProcesses/BoundedMeasurable.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BM.supNorm",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/BoundedMeasurable.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BM.abs_le_supNorm",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/BoundedMeasurable.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BM.supNorm_le",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/BoundedMeasurable.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BM.supNorm_nonneg",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/BoundedMeasurable.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BM.normedAddCommGroup",
+      "kind": "abbrev",
+      "module": "LinearDecisionProcesses/BoundedMeasurable.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BM.add_apply",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/BoundedMeasurable.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BM.sub_apply",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/BoundedMeasurable.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BM.neg_apply",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/BoundedMeasurable.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BM.zero_apply",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/BoundedMeasurable.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BM.const_apply",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/BoundedMeasurable.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BM.norm_def",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/BoundedMeasurable.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BM.abs_le_norm",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/BoundedMeasurable.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BM.norm_le",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/BoundedMeasurable.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BM.abs_sub_le_dist",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/BoundedMeasurable.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BM.dist_le",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/BoundedMeasurable.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BM.module",
+      "kind": "abbrev",
+      "module": "LinearDecisionProcesses/BoundedMeasurable.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BM.smul_apply",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/BoundedMeasurable.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BM.normedSpace",
+      "kind": "abbrev",
+      "module": "LinearDecisionProcesses/BoundedMeasurable.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BM.lattice",
+      "kind": "abbrev",
+      "module": "LinearDecisionProcesses/BoundedMeasurable.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BM.le_def",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/BoundedMeasurable.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BM.sup_apply",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/BoundedMeasurable.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BM.inf_apply",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/BoundedMeasurable.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BM.abs_apply",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/BoundedMeasurable.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BM.isOrderedAddMonoid",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/BoundedMeasurable.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BM.hasSolidNorm",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/BoundedMeasurable.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BM.completeSpace",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/BoundedMeasurable.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BM.countablyDedekindComplete",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/BoundedMeasurable.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BM.isSupNonexpansive",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/BoundedMeasurable.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BM.isInfNonexpansive",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/BoundedMeasurable.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BM.mem_bX",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/BoundedMeasurable.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BM.tendsto_of_tendstoUniformly",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/BoundedMeasurable.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BM.tendstoUniformly_of_tendsto",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/BoundedMeasurable.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BM.globallyStable_of_bX",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/BoundedMeasurable.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.pow_div_le_geometric",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/BanachLattice.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.theorem_4_1_1",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/BanachLattice.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BanachLattice.IsNormalizedOrderUnit",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/BanachLattice.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BanachLattice.IsNormalizedOrderUnit.smul_mono",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/BanachLattice.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BanachLattice.IsNormalizedOrderUnit.le_add",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/BanachLattice.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BanachLattice.IsNormalizedOrderUnit.norm_sub_le",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/BanachLattice.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BanachLattice.isSupNonexpansive",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/BanachLattice.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BanachLattice.isInfNonexpansive",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/BanachLattice.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BanachLattice.isSupNonexpansive_subtype",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/BanachLattice.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BanachLattice.lemma_4_1_2",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/BanachLattice.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BanachLattice.lemma_4_1_2_subtype",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/BanachLattice.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BanachLattice.theorem_4_1_3",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/BanachLattice.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BanachLattice.theorem_4_1_3_univ",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/BanachLattice.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BanachLattice.IsCertaintyEquivalent",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/BanachLattice.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BanachLattice.exercise_4_1_2",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/BanachLattice.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BanachLattice.exercise_4_1_2_subtype",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/BanachLattice.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BanachLattice.IsDiscountOperator",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/OrderContraction.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BanachLattice.IsDiscountOperator.exercise_4_1_3",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/OrderContraction.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BanachLattice.IsDiscountOperator.iterate_nonneg",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/OrderContraction.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BanachLattice.IsDiscountOperator.iterate_mono",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/OrderContraction.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BanachLattice.specRad",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/OrderContraction.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BanachLattice.exercise_A_4_2",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/OrderContraction.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BanachLattice.specRad_le_norm",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/OrderContraction.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BanachLattice.IsPositiveOp",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/OrderContraction.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BanachLattice.IsPositiveOp.mono",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/OrderContraction.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BanachLattice.IsPositiveOp.abs_le",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/OrderContraction.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BanachLattice.IsPositiveOp.iterate",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/OrderContraction.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BanachLattice.example_4_1_1",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/OrderContraction.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BanachLattice.IsIsoOrderEmbedding",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/OrderContraction.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BanachLattice.IsOrderContraction",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/OrderContraction.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BanachLattice.IsOrderContraction.iterate",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/OrderContraction.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BanachLattice.theorem_4_1_4",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/OrderContraction.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BanachLattice.example_4_1_2",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/OrderContraction.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BanachLattice.exercise_4_1_4",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/OrderContraction.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BanachLattice.theorem_4_1_5",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/OrderContraction.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BanachLattice.bellman_orderContraction",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/OrderContraction.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BanachLattice.theorem_4_1_6",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/OrderContraction.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BanachLattice.IsAdditive",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/OrderContraction.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BanachLattice.IsAdditive.abs_sub",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/OrderContraction.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BanachLattice.theorem_4_1_7",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/OrderContraction.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BanachLattice.theorem_4_1_8",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/OrderContraction.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BM.posSMulMono",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/BMOperators.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BM.one_apply",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/BMOperators.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BM.isNormalizedOrderUnit_one",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/BMOperators.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BM.markovLin",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/BMOperators.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BM.markovCLM",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/BMOperators.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BM.markovCLM_apply",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/BMOperators.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BM.markovCLM_isPositive",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/BMOperators.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BM.markovCLM_const",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/BMOperators.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BM.mulLin",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/BMOperators.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BM.mulCLM",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/BMOperators.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BM.mulCLM_apply",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/BMOperators.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BM.mulCLM_isPositive",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/BMOperators.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.sup'_add_const",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/BMOperators.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.harrisonKreps",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/BMOperators.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.exercise_4_1_1",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/BMOperators.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.IsLHC",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/Correspondences.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.IsUHC",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/Correspondences.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.IsContinuousCorr",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/Correspondences.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.clamp_mem",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/Correspondences.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.clamp_eq",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/Correspondences.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.exists_subseq_Icc",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/Correspondences.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.exercise_A_3_1",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/Correspondences.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.HasMaxSelections",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/Correspondences.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.IccMax.argmax",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/Correspondences.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.IccMax.sel",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/Correspondences.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.IccMax.continuousOn_section",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/Correspondences.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.IccMax.argmax_nonempty",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/Correspondences.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.IccMax.isClosed_argmax",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/Correspondences.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.IccMax.sel_mem",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/Correspondences.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.IccMax.isClosed_le_sel",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/Correspondences.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.IccMax.exists_param",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/Correspondences.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.IccMax.continuous_max",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/Correspondences.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.IccMax.measurable_sel",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/Correspondences.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.hasMaxSelections_Icc",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/Correspondences.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.LDP",
+      "kind": "structure",
+      "module": "LinearDecisionProcesses/LDP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.LDP.mk",
+      "kind": "constructor",
+      "module": "LinearDecisionProcesses/LDP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.LDP.\u0393",
+      "kind": "projection",
+      "module": "LinearDecisionProcesses/LDP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.LDP.r",
+      "kind": "projection",
+      "module": "LinearDecisionProcesses/LDP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.LDP.\u03b2",
+      "kind": "projection",
+      "module": "LinearDecisionProcesses/LDP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.LDP.\u03b2_nonneg",
+      "kind": "projection",
+      "module": "LinearDecisionProcesses/LDP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.LDP.P",
+      "kind": "projection",
+      "module": "LinearDecisionProcesses/LDP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.LDP.exists_policy",
+      "kind": "projection",
+      "module": "LinearDecisionProcesses/LDP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.LDP.Policy",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/LDP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.LDP.nonempty_policy",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/LDP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.LDP.measurable_graph",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/LDP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.LDP.along",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/LDP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.LDP.r\u03c3",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/LDP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.LDP.\u03b2\u03c3",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/LDP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.LDP.P\u03c3",
+      "kind": "abbrev",
+      "module": "LinearDecisionProcesses/LDP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.LDP.K",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/LDP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.LDP.K_apply",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/LDP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.LDP.K_isPositive",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/LDP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.LDP.norm_K_le",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/LDP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.LDP.adp",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/LDP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.LDP.T_apply",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/LDP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.LDP.isAdditive",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/LDP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.LDP.obj",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/LDP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.LDP.T_apply_obj",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/LDP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.LDP.isGreedy_iff",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/LDP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.LDP.isGreedy_of_argmax",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/LDP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.LDP.argmax_of_isGreedy",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/LDP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.LDP.iterate_T_zero",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/LDP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.LDP.globallyStable_T",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/LDP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.LDP.lifetime_value",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/LDP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.LDP.firm",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/LDP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.LDP.firm_T_apply",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/LDP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.example_6_1_6",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/LDP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.argmaxSet",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/LDPOptimality.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.argmaxSet_nonempty",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/LDPOptimality.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.argmaxSel",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/LDPOptimality.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.argmaxSel_max",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/LDPOptimality.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.measurable_argmaxSel",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/LDPOptimality.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.LDP.regular_of_isFinite",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/LDPOptimality.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.LDP.proposition_6_1_2",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/LDPOptimality.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.LDP.G",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/LDPOptimality.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.LDP.IsWeakFeller",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/LDPOptimality.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.LDP.IsStrongFeller",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/LDPOptimality.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.LDP.IsStrongFeller.isWeakFeller",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/LDPOptimality.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.LDP.bc",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/LDPOptimality.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.LDP.isClosed_bc",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/LDPOptimality.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.LDP.zero_mem_bc",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/LDPOptimality.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.LDP.continuousOn_obj",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/LDPOptimality.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.LDP.greedy_of_continuousOn",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/LDPOptimality.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.LDP.proposition_6_1_3",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/LDPOptimality.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.LDP.implications",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/LDPOptimality.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.LDP.implications_bc",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/LDPOptimality.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.measurable_section",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/Feller.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.shockKernel",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/Feller.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.shockKernel_apply",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/Feller.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.shockKernel_isMarkov",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/Feller.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.integral_shockKernel",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/Feller.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.example_6_1_1",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/Feller.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.scheffe",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/Feller.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.lemma_6_1_1",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/Feller.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.example_6_1_2",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/Feller.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.hasSolidNorm_pi",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/ExogenousDiscount.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BanachLattice.lemma_6_1_5",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/ExogenousDiscount.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BanachLattice.iterate_affine_zero",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/ExogenousDiscount.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.BanachLattice.exercise_6_1_1",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/ExogenousDiscount.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.Exo.KLin",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/ExogenousDiscount.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.Exo.K",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/ExogenousDiscount.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.Exo.K_apply",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/ExogenousDiscount.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.Exo.K_isPositive",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/ExogenousDiscount.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.Exo.pathExp",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/ExogenousDiscount.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.Exo.pathExp_succ",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/ExogenousDiscount.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.Exo.lemma_6_1_4",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/ExogenousDiscount.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.Exo.exercise_6_1_1",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/ExogenousDiscount.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.continuousOn_of_slices",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/ExogenousLDP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.LDP.supY",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/ExogenousLDP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.LDP.bddAbove_slice",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/ExogenousLDP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.LDP.le_supY",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/ExogenousLDP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.LDP.abs_supY_le",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/ExogenousLDP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.LDP.abs_supY_sub_le",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/ExogenousLDP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.LDP.Dexo",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/ExogenousLDP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.LDP.supY_lift",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/ExogenousLDP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.LDP.Dexo_iterate",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/ExogenousLDP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.LDP.Dexo_isDiscountOperator",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/ExogenousLDP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.LDP.K_le_Dexo",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/ExogenousLDP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.LDP.proposition_6_1_6",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/ExogenousLDP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ofMDP",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/GeneralMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ofMDP_T_apply",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/GeneralMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.example_6_1_3",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/GeneralMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.Dsup",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/GeneralMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.abs_iSup_sub_le",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/GeneralMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.Dsup_isDiscountOperator",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/GeneralMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.K_le_Dsup",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/GeneralMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.proposition_6_1_7",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/GeneralMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.rowPMF",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/NaturalResource.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.finiteKernel",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/NaturalResource.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.finiteKernel_isMarkov",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/NaturalResource.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.integral_finiteKernel",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/NaturalResource.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ResourceModel",
+      "kind": "structure",
+      "module": "LinearDecisionProcesses/NaturalResource.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ResourceModel.mk",
+      "kind": "constructor",
+      "module": "LinearDecisionProcesses/NaturalResource.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ResourceModel.\u03c0",
+      "kind": "projection",
+      "module": "LinearDecisionProcesses/NaturalResource.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ResourceModel.\u03c0_cont",
+      "kind": "projection",
+      "module": "LinearDecisionProcesses/NaturalResource.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ResourceModel.\u03c0_bdd",
+      "kind": "projection",
+      "module": "LinearDecisionProcesses/NaturalResource.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ResourceModel.f",
+      "kind": "projection",
+      "module": "LinearDecisionProcesses/NaturalResource.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ResourceModel.f_cont",
+      "kind": "projection",
+      "module": "LinearDecisionProcesses/NaturalResource.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ResourceModel.\u03c6",
+      "kind": "projection",
+      "module": "LinearDecisionProcesses/NaturalResource.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ResourceModel.\u03b2z",
+      "kind": "projection",
+      "module": "LinearDecisionProcesses/NaturalResource.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ResourceModel.\u03b2z_nonneg",
+      "kind": "projection",
+      "module": "LinearDecisionProcesses/NaturalResource.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ResourceModel.Q",
+      "kind": "projection",
+      "module": "LinearDecisionProcesses/NaturalResource.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ResourceModel.Q_nonneg",
+      "kind": "projection",
+      "module": "LinearDecisionProcesses/NaturalResource.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ResourceModel.Q_sum",
+      "kind": "projection",
+      "module": "LinearDecisionProcesses/NaturalResource.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ResourceModel.measurable_next",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/NaturalResource.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ResourceModel.R",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/NaturalResource.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ResourceModel.Qk",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/NaturalResource.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ResourceModel.R_isMarkov",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/NaturalResource.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ResourceModel.Qk_isMarkov",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/NaturalResource.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ResourceModel.ldp",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/NaturalResource.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ResourceModel.integral_P",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/NaturalResource.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ResourceModel.proposition_6_2_1",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/NaturalResource.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.mixKernel",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/StochasticReturns.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.mixKernel_isMarkov",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/StochasticReturns.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.integral_mixKernel",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/StochasticReturns.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ReturnsModel",
+      "kind": "structure",
+      "module": "LinearDecisionProcesses/StochasticReturns.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ReturnsModel.mk",
+      "kind": "constructor",
+      "module": "LinearDecisionProcesses/StochasticReturns.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ReturnsModel.u",
+      "kind": "projection",
+      "module": "LinearDecisionProcesses/StochasticReturns.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ReturnsModel.u_cont",
+      "kind": "projection",
+      "module": "LinearDecisionProcesses/StochasticReturns.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ReturnsModel.u_bdd",
+      "kind": "projection",
+      "module": "LinearDecisionProcesses/StochasticReturns.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ReturnsModel.\u03b2",
+      "kind": "projection",
+      "module": "LinearDecisionProcesses/StochasticReturns.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ReturnsModel.\u03b2_nonneg",
+      "kind": "projection",
+      "module": "LinearDecisionProcesses/StochasticReturns.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ReturnsModel.\u03b2_lt_one",
+      "kind": "projection",
+      "module": "LinearDecisionProcesses/StochasticReturns.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ReturnsModel.Q",
+      "kind": "projection",
+      "module": "LinearDecisionProcesses/StochasticReturns.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ReturnsModel.Q_nonneg",
+      "kind": "projection",
+      "module": "LinearDecisionProcesses/StochasticReturns.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ReturnsModel.Q_sum",
+      "kind": "projection",
+      "module": "LinearDecisionProcesses/StochasticReturns.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ReturnsModel.Rz",
+      "kind": "projection",
+      "module": "LinearDecisionProcesses/StochasticReturns.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ReturnsModel.yf",
+      "kind": "projection",
+      "module": "LinearDecisionProcesses/StochasticReturns.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ReturnsModel.yf_meas",
+      "kind": "projection",
+      "module": "LinearDecisionProcesses/StochasticReturns.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ReturnsModel.\u03c6",
+      "kind": "projection",
+      "module": "LinearDecisionProcesses/StochasticReturns.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ReturnsModel.measurable_zproj",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/StochasticReturns.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ReturnsModel.measurable_zprojT",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/StochasticReturns.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ReturnsModel.reward",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/StochasticReturns.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ReturnsModel.measurable_income",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/StochasticReturns.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ReturnsModel.next",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/StochasticReturns.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ReturnsModel.measurable_next",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/StochasticReturns.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ReturnsModel.finiteKernel_comap_isMarkov",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/StochasticReturns.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ReturnsModel.P",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/StochasticReturns.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ReturnsModel.P_isMarkov",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/StochasticReturns.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ReturnsModel.integral_P",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/StochasticReturns.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ReturnsModel.ldp",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/StochasticReturns.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ReturnsModel.obj_apply",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/StochasticReturns.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ReturnsModel.weakFeller",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/StochasticReturns.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ReturnsModel.section_6_2_2",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/StochasticReturns.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ReturnsModel.nextT",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/StochasticReturns.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ReturnsModel.measurable_nextT",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/StochasticReturns.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ReturnsModel.finiteKernel_comapT_isMarkov",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/StochasticReturns.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ReturnsModel.PT",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/StochasticReturns.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ReturnsModel.PT_isMarkov",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/StochasticReturns.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ReturnsModel.integral_PT",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/StochasticReturns.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ReturnsModel.ldpT",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/StochasticReturns.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.ReturnsModel.exercise_6_2_1",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/StochasticReturns.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.Savings.measurable_next",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/SavingsFeller.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.Savings.P",
+      "kind": "abbrev",
+      "module": "LinearDecisionProcesses/SavingsFeller.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.Savings.reward",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/SavingsFeller.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.Savings.ldp",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/SavingsFeller.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.Savings.example_6_1_5",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/SavingsFeller.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.Savings.densityMeasure",
+      "kind": "def",
+      "module": "LinearDecisionProcesses/SavingsFeller.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.Savings.densityMeasure_isProbability",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/SavingsFeller.lean"
+    },
+    {
+      "name": "SargentStachurski.LinearDecisionProcesses.Savings.example_6_1_8",
+      "kind": "theorem",
+      "module": "LinearDecisionProcesses/SavingsFeller.lean"
+    }
+  ],
+  "full_build": "passed",
+  "fresh_source_compilation": "passed",
+  "fresh_source_lint_options": [
+    "-Dlinter.mathlibStandardSet=true",
+    "-Dlinter.style.header=false"
+  ],
+  "axioms": {
+    "SargentStachurski.LinearDecisionProcesses.IsMarkov": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.IsMarkov.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.IsMarkov.nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.IsMarkov.rowsum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.IsDistribution": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.IsDistribution.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.IsDistribution.nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.IsDistribution.sum_eq_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.mulVec_apply_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.IsMarkov.mul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.IsMarkov.pow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.IsMarkov.mulVec_le_mulVec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.IsMarkov.mulVec_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.IsMarkov.abs_mulVec_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.IsMarkov.norm_mulVec_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.IsMarkov.abs_mulVec_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.GloballyStable": [
+      "propext",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.IsContractionOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.IsContractionOn.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.IsContractionOn.mapsTo": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.IsContractionOn.nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.IsContractionOn.lt_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.IsContractionOn.norm_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.IsContractionOn.fixedPt_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.IsContractionOn.iterate_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.IsContractionOn.norm_iterate_sub_fixedPt_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.IsContractionOn.tendsto_iterate_fixedPt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.IsContractionOn.exists_fixedPt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.IsContractionOn.globallyStable_univ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.fixedPt_le_of_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.le_fixedPt_of_le_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.isContractionOn_of_blackwell": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.abs_sup'_sub_sup'_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.IsBdd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.IsSupContraction": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.IsUniformlyClosed": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.isBdd_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.IsBdd.sub": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.IsBdd.add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.IsBdd.nonneg_bound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.IsBdd.exists_dist": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.IsSupContraction.iterate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.IsSupContraction.eq_of_isFixedPt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.IsSupContraction.exists_limit": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.IsSupContraction.globallyStable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.le_of_le_map_of_tendsto": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.le_of_map_le_of_tendsto": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.bX": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.isUniformlyClosed_bX": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.const_mem_bX": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.abs_max_sub_max_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.abs_ciSup_sub_ciSup_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.markovOp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.integrable_of_mem_bX": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.measurable_markovOp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.abs_markovOp_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.markovOp_mem_bX": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.markovOp_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.markovOp_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.markovOp_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.markovOp_sub": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.markovOp_smul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.markovOp_sub_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.abs_markovOp_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.OrderStable": [],
+    "SargentStachurski.LinearDecisionProcesses.IncreasesTo": [],
+    "SargentStachurski.LinearDecisionProcesses.DecreasesTo": [],
+    "SargentStachurski.LinearDecisionProcesses.StronglyOrderStable": [],
+    "SargentStachurski.LinearDecisionProcesses.orderStable_of_up_down": [],
+    "SargentStachurski.LinearDecisionProcesses.StronglyOrderStable.orderStable": [],
+    "SargentStachurski.LinearDecisionProcesses.dualMap": [
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.orderStable_dual_iff": [
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.dualMap_iterate": [
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.stronglyOrderStable_dual_iff": [
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ChainComplete": [],
+    "SargentStachurski.LinearDecisionProcesses.ChainComplete.exists_least": [],
+    "SargentStachurski.LinearDecisionProcesses.ChainComplete.exists_fixedPt_ge": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ChainComplete.exists_fixedPt_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ChainComplete.exists_fixedPt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ChainComplete.orderStable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.chainComplete_Icc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.CountablyDedekindComplete": [],
+    "SargentStachurski.LinearDecisionProcesses.countablyDedekindComplete_of_conditionallyCompleteLattice": [],
+    "SargentStachurski.LinearDecisionProcesses.CountablyDedekindComplete.dual": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.OrderContinuous": [],
+    "SargentStachurski.LinearDecisionProcesses.OrderContinuous.monotone": [
+      "propext"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.isLUB_range_succ_iff": [
+      "propext",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.tarski_kantorovich": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.stronglyOrderStable_of_globallyStable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ADP": [],
+    "SargentStachurski.LinearDecisionProcesses.ADP.mk": [],
+    "SargentStachurski.LinearDecisionProcesses.ADP.T": [],
+    "SargentStachurski.LinearDecisionProcesses.ADP.mono": [],
+    "SargentStachurski.LinearDecisionProcesses.ADP.nonempty": [],
+    "SargentStachurski.LinearDecisionProcesses.ADP.IsGreedy": [],
+    "SargentStachurski.LinearDecisionProcesses.ADP.VG": [],
+    "SargentStachurski.LinearDecisionProcesses.ADP.WellPosed": [],
+    "SargentStachurski.LinearDecisionProcesses.ADP.IsFinite": [],
+    "SargentStachurski.LinearDecisionProcesses.ADP.Regular": [],
+    "SargentStachurski.LinearDecisionProcesses.ADP.IsOrderStable": [],
+    "SargentStachurski.LinearDecisionProcesses.ADP.IsStronglyOrderStable": [],
+    "SargentStachurski.LinearDecisionProcesses.ADP.IsBellmanValue": [],
+    "SargentStachurski.LinearDecisionProcesses.ADP.SolvesBellman": [],
+    "SargentStachurski.LinearDecisionProcesses.ADP.IsStronglyOrderStable.isOrderStable": [],
+    "SargentStachurski.LinearDecisionProcesses.ADP.IsOrderStable.wellPosed": [],
+    "SargentStachurski.LinearDecisionProcesses.ADP.regular_iff": [
+      "propext",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ADP.greedy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ADP.isGreedy_greedy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ADP.bellman": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ADP.T_le_bellman": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ADP.isBellmanValue_bellman": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ADP.isGreedy_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ADP.isGreedy_of_isBellmanValue": [],
+    "SargentStachurski.LinearDecisionProcesses.ADP.solvesBellman_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ADP.bellman_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ADP.VU": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ADP.VSig": [],
+    "SargentStachurski.LinearDecisionProcesses.ADP.VSig_inter_VG_subset": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ADP.v\u03c3": [
+      "Classical.choice"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ADP.T_v\u03c3": [
+      "Classical.choice"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ADP.eq_v\u03c3": [
+      "Classical.choice"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ADP.VSig_eq_range": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ADP.IsOptimal": [
+      "Classical.choice"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ADP.IsValueFunction": [],
+    "SargentStachurski.LinearDecisionProcesses.ADP.BellmanPrinciple": [
+      "Classical.choice"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ADP.FundamentalOptimality": [
+      "Classical.choice"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ADP.IsOptimal.isValueFunction": [
+      "Classical.choice"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ADP.isOptimal_of_isValueFunction": [
+      "Classical.choice"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ADP.isOptimal_iff": [
+      "Classical.choice"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ADP.bellmanPrinciple_of_solves": [
+      "Classical.choice"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ADP.exists_solves_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ADP.fundamentalOptimality_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ADP.isOptimal_iff_solvesBellman": [
+      "propext",
+      "Classical.choice"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ADP.fundamentalOptimality_iff_exists_fixed": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ADP.IsOrderStable.fundamentalOptimality": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ADP.WellPosed.isOrderStable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ADP.fundamentalOptimality_of_chainComplete": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ADP.IsSelector": [],
+    "SargentStachurski.LinearDecisionProcesses.ADP.Regular.isSelector_greedy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ADP.howard": [
+      "Classical.choice"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ADP.opt": [],
+    "SargentStachurski.LinearDecisionProcesses.ADP.IsSelector.T_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ADP.mem_VU_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ADP.bellman_eq_of_howard_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ADP.iterate_mono_of_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ADP.bellman_le_opt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ADP.chain_2_9": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ADP.mapsTo_VU": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ADP.bellman_le_of_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ADP.iterates_of_mem_VU": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ADP.VFIConverges": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ADP.OPIConverges": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ADP.HPIConverges": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ADP.opt_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ADP.OPIConverges.vfi": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ADP.le_vstar_of_mem_VU": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ADP.IsOrderStable.le_v\u03c3": [
+      "Classical.choice"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ADP.IsOrderStable.v\u03c3_le": [
+      "Classical.choice"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ADP.iterates_le_vstar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ADP.increasesTo_of_squeeze": [],
+    "SargentStachurski.LinearDecisionProcesses.ADP.VFIConverges.opi_hpi": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ADP.VU_nonempty": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ADP.IsFinite.VSig_finite": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ADP.exists_succ_eq_of_finite": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ADP.fundamentalOptimality_of_finite": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ADP.FundamentalOptimality.exists_vstar": [
+      "Classical.choice"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ADP.convergence_of_chainComplete": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ADP.OrderBounded": [],
+    "SargentStachurski.LinearDecisionProcesses.ADP.IsOrderContinuous": [],
+    "SargentStachurski.LinearDecisionProcesses.ADP.le_of_orderBounded": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ADP.convergence_of_dedekind": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.isLUB_of_tendsto_of_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.isGLB_of_tendsto_of_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ADP.monotone_iterate_of_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ADP.Regular.bellman_monotone": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ADP.Regular.iterate_T_le_bellman": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ADP.bellman_iterate_le_of_bound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ADP.IsGloballyStable": [
+      "propext",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ADP.IsGloballyStable.wellPosed": [
+      "propext",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ADP.IsGloballyStable.tendsto_v\u03c3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ADP.IsGloballyStable.isStronglyOrderStable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ADP.IsGloballyStable.isOrderStable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ADP.theorem_3_1_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ADP.corollary_3_1_3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ADP.theorem_3_1_4": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.IsSupNonexpansive": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.IsInfNonexpansive": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.isInfNonexpansive_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.isSupNonexpansive_real": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.isSupNonexpansive_pi": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ADP.lemma_A_5_21": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ADP.IsSemiRegular": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ADP.VFIGeometric": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ADP.isGloballyStable_of_contraction": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ADP.theorem_3_1_5": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ADP.theorem_3_1_5_needs_nonempty": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BM": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BM.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BM.toFun": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BM.measurable'": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BM.bdd'": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BM.ext": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BM.bddAbove": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BM.const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BM.toFun_injective": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BM.zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BM.add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BM.neg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BM.sub": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BM.smulReal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BM.nsmul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BM.zsmul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BM.addCommGroup": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BM.supNorm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BM.abs_le_supNorm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BM.supNorm_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BM.supNorm_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BM.normedAddCommGroup": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BM.add_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BM.sub_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BM.neg_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BM.zero_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BM.const_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BM.norm_def": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BM.abs_le_norm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BM.norm_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BM.abs_sub_le_dist": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BM.dist_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BM.module": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BM.smul_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BM.normedSpace": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BM.lattice": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BM.le_def": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BM.sup_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BM.inf_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BM.abs_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BM.isOrderedAddMonoid": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BM.hasSolidNorm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BM.completeSpace": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BM.countablyDedekindComplete": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BM.isSupNonexpansive": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BM.isInfNonexpansive": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BM.mem_bX": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BM.tendsto_of_tendstoUniformly": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BM.tendstoUniformly_of_tendsto": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BM.globallyStable_of_bX": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.pow_div_le_geometric": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.theorem_4_1_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BanachLattice.IsNormalizedOrderUnit": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BanachLattice.IsNormalizedOrderUnit.smul_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BanachLattice.IsNormalizedOrderUnit.le_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BanachLattice.IsNormalizedOrderUnit.norm_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BanachLattice.isSupNonexpansive": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BanachLattice.isInfNonexpansive": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BanachLattice.isSupNonexpansive_subtype": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BanachLattice.lemma_4_1_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BanachLattice.lemma_4_1_2_subtype": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BanachLattice.theorem_4_1_3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BanachLattice.theorem_4_1_3_univ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BanachLattice.IsCertaintyEquivalent": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BanachLattice.exercise_4_1_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BanachLattice.exercise_4_1_2_subtype": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BanachLattice.IsDiscountOperator": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BanachLattice.IsDiscountOperator.exercise_4_1_3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BanachLattice.IsDiscountOperator.iterate_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BanachLattice.IsDiscountOperator.iterate_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BanachLattice.specRad": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BanachLattice.exercise_A_4_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BanachLattice.specRad_le_norm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BanachLattice.IsPositiveOp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BanachLattice.IsPositiveOp.mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BanachLattice.IsPositiveOp.abs_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BanachLattice.IsPositiveOp.iterate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BanachLattice.example_4_1_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BanachLattice.IsIsoOrderEmbedding": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BanachLattice.IsOrderContraction": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BanachLattice.IsOrderContraction.iterate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BanachLattice.theorem_4_1_4": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BanachLattice.example_4_1_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BanachLattice.exercise_4_1_4": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BanachLattice.theorem_4_1_5": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BanachLattice.bellman_orderContraction": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BanachLattice.theorem_4_1_6": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BanachLattice.IsAdditive": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BanachLattice.IsAdditive.abs_sub": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BanachLattice.theorem_4_1_7": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BanachLattice.theorem_4_1_8": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BM.posSMulMono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BM.one_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BM.isNormalizedOrderUnit_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BM.markovLin": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BM.markovCLM": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BM.markovCLM_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BM.markovCLM_isPositive": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BM.markovCLM_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BM.mulLin": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BM.mulCLM": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BM.mulCLM_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BM.mulCLM_isPositive": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.sup'_add_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.harrisonKreps": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.exercise_4_1_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.IsLHC": [
+      "propext",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.IsUHC": [
+      "propext",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.IsContinuousCorr": [
+      "propext",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.clamp_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.clamp_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.exists_subseq_Icc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.exercise_A_3_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.HasMaxSelections": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.IccMax.argmax": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.IccMax.sel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.IccMax.continuousOn_section": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.IccMax.argmax_nonempty": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.IccMax.isClosed_argmax": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.IccMax.sel_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.IccMax.isClosed_le_sel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.IccMax.exists_param": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.IccMax.continuous_max": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.IccMax.measurable_sel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.hasMaxSelections_Icc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.LDP": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.LDP.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.LDP.\u0393": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.LDP.r": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.LDP.\u03b2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.LDP.\u03b2_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.LDP.P": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.LDP.exists_policy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.LDP.Policy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.LDP.nonempty_policy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.LDP.measurable_graph": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.LDP.along": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.LDP.r\u03c3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.LDP.\u03b2\u03c3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.LDP.P\u03c3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.LDP.K": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.LDP.K_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.LDP.K_isPositive": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.LDP.norm_K_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.LDP.adp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.LDP.T_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.LDP.isAdditive": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.LDP.obj": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.LDP.T_apply_obj": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.LDP.isGreedy_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.LDP.isGreedy_of_argmax": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.LDP.argmax_of_isGreedy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.LDP.iterate_T_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.LDP.globallyStable_T": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.LDP.lifetime_value": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.LDP.firm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.LDP.firm_T_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.example_6_1_6": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.argmaxSet": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.argmaxSet_nonempty": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.argmaxSel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.argmaxSel_max": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.measurable_argmaxSel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.LDP.regular_of_isFinite": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.LDP.proposition_6_1_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.LDP.G": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.LDP.IsWeakFeller": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.LDP.IsStrongFeller": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.LDP.IsStrongFeller.isWeakFeller": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.LDP.bc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.LDP.isClosed_bc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.LDP.zero_mem_bc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.LDP.continuousOn_obj": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.LDP.greedy_of_continuousOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.LDP.proposition_6_1_3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.LDP.implications": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.LDP.implications_bc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.measurable_section": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.shockKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.shockKernel_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.shockKernel_isMarkov": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.integral_shockKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.example_6_1_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.scheffe": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.lemma_6_1_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.example_6_1_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.hasSolidNorm_pi": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BanachLattice.lemma_6_1_5": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BanachLattice.iterate_affine_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.BanachLattice.exercise_6_1_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.Exo.KLin": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.Exo.K": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.Exo.K_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.Exo.K_isPositive": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.Exo.pathExp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.Exo.pathExp_succ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.Exo.lemma_6_1_4": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.Exo.exercise_6_1_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.continuousOn_of_slices": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.LDP.supY": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.LDP.bddAbove_slice": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.LDP.le_supY": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.LDP.abs_supY_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.LDP.abs_supY_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.LDP.Dexo": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.LDP.supY_lift": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.LDP.Dexo_iterate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.LDP.Dexo_isDiscountOperator": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.LDP.K_le_Dexo": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.LDP.proposition_6_1_6": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ofMDP": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ofMDP_T_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.example_6_1_3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.Dsup": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.abs_iSup_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.Dsup_isDiscountOperator": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.K_le_Dsup": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.proposition_6_1_7": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.rowPMF": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.finiteKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.finiteKernel_isMarkov": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.integral_finiteKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ResourceModel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ResourceModel.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ResourceModel.\u03c0": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ResourceModel.\u03c0_cont": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ResourceModel.\u03c0_bdd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ResourceModel.f": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ResourceModel.f_cont": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ResourceModel.\u03c6": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ResourceModel.\u03b2z": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ResourceModel.\u03b2z_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ResourceModel.Q": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ResourceModel.Q_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ResourceModel.Q_sum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ResourceModel.measurable_next": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ResourceModel.R": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ResourceModel.Qk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ResourceModel.R_isMarkov": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ResourceModel.Qk_isMarkov": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ResourceModel.ldp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ResourceModel.integral_P": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ResourceModel.proposition_6_2_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.mixKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.mixKernel_isMarkov": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.integral_mixKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ReturnsModel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ReturnsModel.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ReturnsModel.u": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ReturnsModel.u_cont": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ReturnsModel.u_bdd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ReturnsModel.\u03b2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ReturnsModel.\u03b2_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ReturnsModel.\u03b2_lt_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ReturnsModel.Q": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ReturnsModel.Q_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ReturnsModel.Q_sum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ReturnsModel.Rz": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ReturnsModel.yf": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ReturnsModel.yf_meas": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ReturnsModel.\u03c6": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ReturnsModel.measurable_zproj": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ReturnsModel.measurable_zprojT": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ReturnsModel.reward": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ReturnsModel.measurable_income": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ReturnsModel.next": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ReturnsModel.measurable_next": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ReturnsModel.finiteKernel_comap_isMarkov": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ReturnsModel.P": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ReturnsModel.P_isMarkov": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ReturnsModel.integral_P": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ReturnsModel.ldp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ReturnsModel.obj_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ReturnsModel.weakFeller": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ReturnsModel.section_6_2_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ReturnsModel.nextT": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ReturnsModel.measurable_nextT": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ReturnsModel.finiteKernel_comapT_isMarkov": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ReturnsModel.PT": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ReturnsModel.PT_isMarkov": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ReturnsModel.integral_PT": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ReturnsModel.ldpT": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.ReturnsModel.exercise_6_2_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.Savings.measurable_next": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.Savings.P": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.Savings.reward": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.Savings.ldp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.Savings.example_6_1_5": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.Savings.densityMeasure": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.Savings.densityMeasure_isProbability": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.LinearDecisionProcesses.Savings.example_6_1_8": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  "source_sha256": {
+    "LinearDecisionProcesses/Basics.lean": "c5129825b9ed3b45038749380bb6779b421965dedc22bf68c2ef6bc78f1b1511",
+    "LinearDecisionProcesses/SupContraction.lean": "8a75eba32ff91be6103eb25efb8ee447c04dc7ee564f9db717751a5aeea2fc1f",
+    "LinearDecisionProcesses/MarkovOperator.lean": "7e49450723a7dbf922a56f7e0077740ef56b5dc3f467231f96e84c68958fffbb",
+    "LinearDecisionProcesses/OrderTheory.lean": "33c9cf1296cfc069875ab7cc9383d4c04299bfac26964832a1f461cbef42340e",
+    "LinearDecisionProcesses/ADP.lean": "e2415f1e969b9a386676fcc8cecd8cd1e4351c41b0fd1e769a99e6c781b886c0",
+    "LinearDecisionProcesses/Algorithms.lean": "3ed27fa3d323767a72d4af64f590a73b9daa9a06deb30c62b8fb7909b0e0f631",
+    "LinearDecisionProcesses/Pospace.lean": "29a287514b1e2426c3b8c3c9a92eaef0542ee3c9c1684f22e1a19d5c5fe1ee9a",
+    "LinearDecisionProcesses/MetricADP.lean": "66ef5e28fe35c658088b79e90733dd61e4e01987453e867689afefd27bf2d8de",
+    "LinearDecisionProcesses/BoundedMeasurable.lean": "e1616aa49dd854e798e0ece50ae35b86150c4d4ced23550ef032b9baee039b9a",
+    "LinearDecisionProcesses/BanachLattice.lean": "46095663d95069a4a5dec535178fff2164f52c5f2c3b3c7894867d7928386338",
+    "LinearDecisionProcesses/OrderContraction.lean": "2e1bc73e8e5a8e36e48dcc89dee735ab8a36972aa168250f4147289c8c5cbe12",
+    "LinearDecisionProcesses/BMOperators.lean": "3dc3181564cba05eb3e59fd335fd6e1f2b1ef74e98286ebc06689f67cced07cf",
+    "LinearDecisionProcesses/Correspondences.lean": "f7468a81e2e3ccb1ec3e540ce9d783f6214be6d340e9a59feeba78a1aff71d65",
+    "LinearDecisionProcesses/LDP.lean": "7b06e11fc13394055444d3cfe826c7c7fdab0662867fa02b0d58b6a7e0588959",
+    "LinearDecisionProcesses/LDPOptimality.lean": "164aa9a88e4c5dc3d20ff31b1f57695ba1a6b7229d3c167d9f6cea48298e484c",
+    "LinearDecisionProcesses/Feller.lean": "da36947f05510ceec76cc67975233b068c27f4662c6cd3d159622c37714a2673",
+    "LinearDecisionProcesses/ExogenousDiscount.lean": "2db178cf82acee29bb8ac4c8c2508df55e5030698d5009254e1b8903d67c6dc1",
+    "LinearDecisionProcesses/ExogenousLDP.lean": "d6b561fc930b6d1b4ac1ffec8226fa74b692580cca8ae45fc7b4ee150f3ee035",
+    "LinearDecisionProcesses/GeneralMDP.lean": "963c63a18b90c37659c50c88d30aea7ff4e13b43bf4a46574666488880abb6cc",
+    "LinearDecisionProcesses/NaturalResource.lean": "9a8f668a2ce2c2d91062bd8143526d2bf93fa2a18988951d8aa0196e46d3a417",
+    "LinearDecisionProcesses/StochasticReturns.lean": "415a89e9badf48246b5f7f406236cb596443d63c5b64482e39c411a81f2c3ad2",
+    "LinearDecisionProcesses/SavingsFeller.lean": "0f2ea10d7d0db19846c58dd03b3c6daa34ba58db70559843e51a5a4c02179826",
+    "LinearDecisionProcesses.lean": "1328636a3248236a2e90b17ad689a03f66f997f13844168cc80f5bd058c09529",
+    "lean-toolchain": "8733782dc070a99b312039cda424f601b80f3be6f6f512627da5ba25adc27632",
+    "lakefile.toml": "897abd2117336f427405777fe8b0192e97996451978a57b007619b2a9fb848f9",
+    "lake-manifest.json": "835e4b29853519db7885cb39465d7aed5109c4bf00cd0c33567712861ff8858d",
+    "proof-manifest.json": "2aa11b5e190b6d1ae8925ebb784bef2c2843ae51fbb6277ea4696315984f2c83",
+    "scripts/verify.py": "a70b1fa704dd590f937f8b37682afa88a9d85a9150065acb935c7d2c9589da3b",
+    "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  },
+  "fresh_audit_sha256": "af8b1358bac5e234fedcb024eed14d5ba7d3f7fd9064d1342a60bd72fbf43a1d",
+  "lean_toolchain": "leanprover/lean4:v4.34.0",
+  "scope": "Sargent and Stachurski, Dynamic Programming, Volume 2 (General States), Chapter 6: Linear Decision Processes. Weak and strong Feller kernels (Example 6.1.1, Lemma 6.1.1 with Scheffe's lemma, Example 6.1.2); linear decision processes as additive ADPs on bX, lifetime values (6.6), Examples 6.1.3-6.1.6; optimality for finite LDPs (Proposition 6.1.2, with regularity by pasting policies) and Feller LDPs (Proposition 6.1.3, greedy policies (6.8) and the Bellman operator (6.9)); exogenous discount processes (Lemma 6.1.4 as a path expectation, Lemma 6.1.5, Exercise 6.1.1, Proposition 6.1.6 with a measurable discount operator); Markov decision processes on general state spaces (Proposition 6.1.7, Example 6.1.8); natural resource management (Proposition 6.2.1), stochastic rates of return (Section 6.2.2) and mortality (Exercise 6.2.1); the maximum theorem with a Borel selection for interval correspondences (Exercise A.3.1, Theorem A.3.3); with the earlier chapters' ADP theory and the Banach lattice bX restated.",
+  "source": "Thomas J. Sargent and John Stachurski, Dynamic Programming, Volume 2: General States, Chapter 6, pp. 184-206, with the Appendix A results used there."
+}

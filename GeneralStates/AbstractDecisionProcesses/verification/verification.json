@@ -1,0 +1,5427 @@
+{
+  "checked_at_utc": "2026-10-07T04:21:31.567943+00:00",
+  "theorems": 351,
+  "module_theorems": {
+    "AbstractDecisionProcesses/Basics.lean": 18,
+    "AbstractDecisionProcesses/SpectralRadius.lean": 29,
+    "AbstractDecisionProcesses/SupContraction.lean": 15,
+    "AbstractDecisionProcesses/ContractingDP.lean": 31,
+    "AbstractDecisionProcesses/MarkovOperator.lean": 11,
+    "AbstractDecisionProcesses/NeumannSeries.lean": 11,
+    "AbstractDecisionProcesses/FirmProblem.lean": 20,
+    "AbstractDecisionProcesses/FiniteMDP.lean": 19,
+    "AbstractDecisionProcesses/OptimalSavings.lean": 13,
+    "AbstractDecisionProcesses/OrderTheory.lean": 17,
+    "AbstractDecisionProcesses/ADP.lean": 25,
+    "AbstractDecisionProcesses/Algorithms.lean": 26,
+    "AbstractDecisionProcesses/Minimization.lean": 17,
+    "AbstractDecisionProcesses/BXOrder.lean": 4,
+    "AbstractDecisionProcesses/FirmADP.lean": 9,
+    "AbstractDecisionProcesses/SavingsADP.lean": 9,
+    "AbstractDecisionProcesses/MDPADP.lean": 18,
+    "AbstractDecisionProcesses/LQAlgebra.lean": 19,
+    "AbstractDecisionProcesses/LQControl.lean": 24,
+    "AbstractDecisionProcesses/DistributionalDP.lean": 16
+  },
+  "audited_declarations": 560,
+  "declarations": [
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.IsMarkov",
+      "kind": "structure",
+      "module": "AbstractDecisionProcesses/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.IsMarkov.mk",
+      "kind": "constructor",
+      "module": "AbstractDecisionProcesses/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.IsMarkov.nonneg",
+      "kind": "projection",
+      "module": "AbstractDecisionProcesses/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.IsMarkov.rowsum",
+      "kind": "projection",
+      "module": "AbstractDecisionProcesses/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.IsDistribution",
+      "kind": "structure",
+      "module": "AbstractDecisionProcesses/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.IsDistribution.mk",
+      "kind": "constructor",
+      "module": "AbstractDecisionProcesses/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.IsDistribution.nonneg",
+      "kind": "projection",
+      "module": "AbstractDecisionProcesses/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.IsDistribution.sum_eq_one",
+      "kind": "projection",
+      "module": "AbstractDecisionProcesses/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.mulVec_apply_eq",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.IsMarkov.mul",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.IsMarkov.pow",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.IsMarkov.mulVec_le_mulVec",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.IsMarkov.mulVec_const",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.IsMarkov.abs_mulVec_le",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.IsMarkov.norm_mulVec_le",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.IsMarkov.abs_mulVec_sub_le",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.GloballyStable",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.IsContractionOn",
+      "kind": "structure",
+      "module": "AbstractDecisionProcesses/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.IsContractionOn.mk",
+      "kind": "constructor",
+      "module": "AbstractDecisionProcesses/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.IsContractionOn.mapsTo",
+      "kind": "projection",
+      "module": "AbstractDecisionProcesses/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.IsContractionOn.nonneg",
+      "kind": "projection",
+      "module": "AbstractDecisionProcesses/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.IsContractionOn.lt_one",
+      "kind": "projection",
+      "module": "AbstractDecisionProcesses/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.IsContractionOn.norm_sub_le",
+      "kind": "projection",
+      "module": "AbstractDecisionProcesses/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.IsContractionOn.fixedPt_unique",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.IsContractionOn.iterate_mem",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.IsContractionOn.norm_iterate_sub_fixedPt_le",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.IsContractionOn.tendsto_iterate_fixedPt",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.IsContractionOn.exists_fixedPt",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.IsContractionOn.globallyStable_univ",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.fixedPt_le_of_le",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.le_fixedPt_of_le_apply",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.isContractionOn_of_blackwell",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.abs_sup'_sub_sup'_le",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.pow_nonneg_entries",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.pow_le_pow_entries",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.complexify",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.complexify_apply",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.complexify_pow",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.complexify_transpose",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.nnnorm_complexify",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.norm_complexify",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.specRad",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.spectralRadius_complexify_ne_top",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.specRad_nonneg",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.mem_spectrum_iff_eigenpair",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.tendsto_norm_pow_rpow",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.eventually_norm_pow_le",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.tendsto_norm_pow_zero",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.summable_pow",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.one_sub_mul_tsum",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.tsum_mul_one_sub",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.neumann_series",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.specRad_transpose",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.norm_le_norm_of_abs_le",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.specRad_le_of_le",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.rowsum_abs_le_norm",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.norm_le_of_rowsum_abs_le",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.abs_entry_le_norm",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.norm_eq_of_rowsum_eq",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.specRad_le_norm",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.norm_le_specRad_of_mem_spectrum",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.specRad_eq_of_rowsum_eq",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.specRad_eq_of_colsum_eq",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.eventually_abs_entry_pow_le",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.IsBdd",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/SupContraction.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.IsSupContraction",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/SupContraction.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.IsUniformlyClosed",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/SupContraction.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.isBdd_const",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/SupContraction.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.IsBdd.sub",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/SupContraction.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.IsBdd.add",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/SupContraction.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.IsBdd.nonneg_bound",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/SupContraction.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.IsBdd.exists_dist",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/SupContraction.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.IsSupContraction.iterate",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/SupContraction.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.IsSupContraction.eq_of_isFixedPt",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/SupContraction.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.IsSupContraction.exists_limit",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/SupContraction.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.IsSupContraction.globallyStable",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/SupContraction.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.le_of_le_map_of_tendsto",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/SupContraction.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.le_of_map_le_of_tendsto",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/SupContraction.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.bX",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/SupContraction.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.isUniformlyClosed_bX",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/SupContraction.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.const_mem_bX",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/SupContraction.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.abs_max_sub_max_le",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/SupContraction.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.abs_ciSup_sub_ciSup_le",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/SupContraction.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ContractingDP",
+      "kind": "structure",
+      "module": "AbstractDecisionProcesses/ContractingDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ContractingDP.mk",
+      "kind": "constructor",
+      "module": "AbstractDecisionProcesses/ContractingDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ContractingDP.V",
+      "kind": "projection",
+      "module": "AbstractDecisionProcesses/ContractingDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ContractingDP.T",
+      "kind": "projection",
+      "module": "AbstractDecisionProcesses/ContractingDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ContractingDP.\u03b2",
+      "kind": "projection",
+      "module": "AbstractDecisionProcesses/ContractingDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ContractingDP.\u03b2_nonneg",
+      "kind": "projection",
+      "module": "AbstractDecisionProcesses/ContractingDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ContractingDP.\u03b2_lt_one",
+      "kind": "projection",
+      "module": "AbstractDecisionProcesses/ContractingDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ContractingDP.nonempty",
+      "kind": "projection",
+      "module": "AbstractDecisionProcesses/ContractingDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ContractingDP.bdd",
+      "kind": "projection",
+      "module": "AbstractDecisionProcesses/ContractingDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ContractingDP.closed",
+      "kind": "projection",
+      "module": "AbstractDecisionProcesses/ContractingDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ContractingDP.mapsTo",
+      "kind": "projection",
+      "module": "AbstractDecisionProcesses/ContractingDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ContractingDP.mono",
+      "kind": "projection",
+      "module": "AbstractDecisionProcesses/ContractingDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ContractingDP.contraction",
+      "kind": "projection",
+      "module": "AbstractDecisionProcesses/ContractingDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ContractingDP.exists_greedy",
+      "kind": "projection",
+      "module": "AbstractDecisionProcesses/ContractingDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ContractingDP.globallyStable",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/ContractingDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ContractingDP.v\u03c3",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/ContractingDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ContractingDP.v\u03c3_mem",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/ContractingDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ContractingDP.T_v\u03c3",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/ContractingDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ContractingDP.eq_v\u03c3",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/ContractingDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ContractingDP.tendsto_v\u03c3",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/ContractingDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ContractingDP.le_v\u03c3",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/ContractingDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ContractingDP.v\u03c3_le",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/ContractingDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ContractingDP.IsGreedy",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/ContractingDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ContractingDP.nonempty_policy",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/ContractingDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ContractingDP.greedy",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/ContractingDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ContractingDP.isGreedy_greedy",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/ContractingDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ContractingDP.bellman",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/ContractingDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ContractingDP.bellman_mapsTo",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/ContractingDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ContractingDP.T_le_bellman",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/ContractingDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ContractingDP.isGreedy_iff",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/ContractingDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ContractingDP.bellman_eq_iSup",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/ContractingDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ContractingDP.bellman_mono",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/ContractingDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ContractingDP.bellman_contraction",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/ContractingDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ContractingDP.bellman_globallyStable",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/ContractingDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ContractingDP.vstar",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/ContractingDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ContractingDP.vstar_mem",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/ContractingDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ContractingDP.bellman_vstar",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/ContractingDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ContractingDP.eq_vstar",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/ContractingDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ContractingDP.tendsto_bellman_iterate",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/ContractingDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ContractingDP.v\u03c3_le_vstar",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/ContractingDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ContractingDP.v\u03c3_eq_vstar_iff",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/ContractingDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ContractingDP.IsOptimal",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/ContractingDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ContractingDP.isOptimal_iff",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/ContractingDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ContractingDP.optimality",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/ContractingDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ContractingDP.vstar_le_of_bellman_le",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/ContractingDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ContractingDP.le_vstar_of_le_bellman",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/ContractingDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ContractingDP.hpiPolicy",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/ContractingDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ContractingDP.v\u03c3_hpi_le_succ",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/ContractingDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ContractingDP.v\u03c3_hpi_eq_vstar",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/ContractingDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ContractingDP.hpi_terminates",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/ContractingDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ContractingDP.opi",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/ContractingDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ContractingDP.opi_step",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/ContractingDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ContractingDP.tendsto_opi",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/ContractingDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.markovOp",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/MarkovOperator.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.integrable_of_mem_bX",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/MarkovOperator.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.measurable_markovOp",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/MarkovOperator.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.abs_markovOp_le",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/MarkovOperator.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.markovOp_mem_bX",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/MarkovOperator.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.markovOp_mono",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/MarkovOperator.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.markovOp_const",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/MarkovOperator.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.markovOp_add",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/MarkovOperator.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.markovOp_sub",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/MarkovOperator.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.markovOp_smul",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/MarkovOperator.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.markovOp_sub_const",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/MarkovOperator.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.abs_markovOp_sub_le",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/MarkovOperator.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.IsMarkovLike",
+      "kind": "structure",
+      "module": "AbstractDecisionProcesses/NeumannSeries.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.IsMarkovLike.mk",
+      "kind": "constructor",
+      "module": "AbstractDecisionProcesses/NeumannSeries.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.IsMarkovLike.mapsTo",
+      "kind": "projection",
+      "module": "AbstractDecisionProcesses/NeumannSeries.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.IsMarkovLike.add",
+      "kind": "projection",
+      "module": "AbstractDecisionProcesses/NeumannSeries.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.IsMarkovLike.smul",
+      "kind": "projection",
+      "module": "AbstractDecisionProcesses/NeumannSeries.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.IsMarkovLike.mono",
+      "kind": "projection",
+      "module": "AbstractDecisionProcesses/NeumannSeries.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.IsMarkovLike.abs_le",
+      "kind": "projection",
+      "module": "AbstractDecisionProcesses/NeumannSeries.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.isMarkovLike_markovOp",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/NeumannSeries.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.IsMarkovLike.sub",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/NeumannSeries.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.IsMarkovLike.abs_sub_le",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/NeumannSeries.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.IsMarkovLike.iterate_mem",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/NeumannSeries.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.IsMarkovLike.abs_iterate_le",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/NeumannSeries.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.affineOp",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/NeumannSeries.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.affineOp_mapsTo",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/NeumannSeries.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.affineOp_mono",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/NeumannSeries.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.affineOp_contraction",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/NeumannSeries.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.affineOp_globallyStable",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/NeumannSeries.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.affineOp_iterate_zero",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/NeumannSeries.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.affineOp_hasSum",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/NeumannSeries.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FirmProblem",
+      "kind": "structure",
+      "module": "AbstractDecisionProcesses/FirmProblem.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FirmProblem.mk",
+      "kind": "constructor",
+      "module": "AbstractDecisionProcesses/FirmProblem.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FirmProblem.P",
+      "kind": "projection",
+      "module": "AbstractDecisionProcesses/FirmProblem.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FirmProblem.isMarkov",
+      "kind": "projection",
+      "module": "AbstractDecisionProcesses/FirmProblem.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FirmProblem.profit",
+      "kind": "projection",
+      "module": "AbstractDecisionProcesses/FirmProblem.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FirmProblem.profit_mem",
+      "kind": "projection",
+      "module": "AbstractDecisionProcesses/FirmProblem.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FirmProblem.\u03b2",
+      "kind": "projection",
+      "module": "AbstractDecisionProcesses/FirmProblem.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FirmProblem.\u03b2_nonneg",
+      "kind": "projection",
+      "module": "AbstractDecisionProcesses/FirmProblem.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FirmProblem.\u03b2_lt_one",
+      "kind": "projection",
+      "module": "AbstractDecisionProcesses/FirmProblem.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FirmProblem.s",
+      "kind": "projection",
+      "module": "AbstractDecisionProcesses/FirmProblem.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FirmPolicy",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/FirmProblem.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FirmProblem.isMarkovLike_P",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/FirmProblem.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FirmProblem.valOp",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/FirmProblem.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FirmProblem.valOp_mapsTo",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/FirmProblem.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FirmProblem.valOp_contraction",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/FirmProblem.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FirmProblem.valuation_globallyStable",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/FirmProblem.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FirmProblem.value",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/FirmProblem.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FirmProblem.value_mem",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/FirmProblem.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FirmProblem.value_eq",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/FirmProblem.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FirmProblem.value_hasSum",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/FirmProblem.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FirmProblem.T\u03c3",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/FirmProblem.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FirmProblem.T\u03c3_eq",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/FirmProblem.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FirmProblem.T\u03c3_mapsTo",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/FirmProblem.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FirmProblem.T\u03c3_mono",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/FirmProblem.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FirmProblem.T\u03c3_contraction",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/FirmProblem.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FirmProblem.measurable_sellPolicy",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/FirmProblem.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FirmProblem.T\u03c3_le_max",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/FirmProblem.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FirmProblem.T\u03c3_sellPolicy",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/FirmProblem.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FirmProblem.toDP",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/FirmProblem.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FirmProblem.bellman_eq",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/FirmProblem.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FirmProblem.IsGreedy",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/FirmProblem.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FirmProblem.isGreedy_iff",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/FirmProblem.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FirmProblem.isGreedy_iff_bellman",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/FirmProblem.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FirmProblem.abs_v\u03c3_le",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/FirmProblem.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FirmProblem.theorem_1_1_1",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/FirmProblem.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FirmProblem.sellPolicy_optimal",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/FirmProblem.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FiniteMDP",
+      "kind": "structure",
+      "module": "AbstractDecisionProcesses/FiniteMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.mk",
+      "kind": "constructor",
+      "module": "AbstractDecisionProcesses/FiniteMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.\u0393",
+      "kind": "projection",
+      "module": "AbstractDecisionProcesses/FiniteMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.\u0393_nonempty",
+      "kind": "projection",
+      "module": "AbstractDecisionProcesses/FiniteMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.r",
+      "kind": "projection",
+      "module": "AbstractDecisionProcesses/FiniteMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.\u03b2",
+      "kind": "projection",
+      "module": "AbstractDecisionProcesses/FiniteMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.\u03b2_nonneg",
+      "kind": "projection",
+      "module": "AbstractDecisionProcesses/FiniteMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.\u03b2_lt_one",
+      "kind": "projection",
+      "module": "AbstractDecisionProcesses/FiniteMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.P",
+      "kind": "projection",
+      "module": "AbstractDecisionProcesses/FiniteMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.P_nonneg",
+      "kind": "projection",
+      "module": "AbstractDecisionProcesses/FiniteMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.P_sum",
+      "kind": "projection",
+      "module": "AbstractDecisionProcesses/FiniteMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.Policy",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/FiniteMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.Q",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/FiniteMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.T\u03c3",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/FiniteMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.isBdd_of_finite",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/FiniteMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.abs_sum_sub_le",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/FiniteMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.Q_mono",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/FiniteMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.abs_Q_sub_le",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/FiniteMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.Q_sub_const",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/FiniteMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.exists_greedy",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/FiniteMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.toDP",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/FiniteMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.IsGreedy",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/FiniteMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.isGreedy_iff",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/FiniteMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.bellman_eq",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/FiniteMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.bellman_contraction",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/FiniteMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.P\u03c3",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/FiniteMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.r\u03c3",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/FiniteMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.T\u03c3_eq_mulVec",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/FiniteMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.abs_P\u03c3_mulVec_le",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/FiniteMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.v\u03c3_eq_inv",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/FiniteMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.v\u03c3_hasSum",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/FiniteMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.abs_v\u03c3_le",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/FiniteMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.finite_policy",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/FiniteMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.theorem_1_2_1",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/FiniteMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.theorem_1_2_2",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/FiniteMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.vstar_le",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/FiniteMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.IsLPFeasible",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/FiniteMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.lp_solution",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/FiniteMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.OptimalSavings",
+      "kind": "structure",
+      "module": "AbstractDecisionProcesses/OptimalSavings.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.OptimalSavings.mk",
+      "kind": "constructor",
+      "module": "AbstractDecisionProcesses/OptimalSavings.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.OptimalSavings.u",
+      "kind": "projection",
+      "module": "AbstractDecisionProcesses/OptimalSavings.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.OptimalSavings.u_cont",
+      "kind": "projection",
+      "module": "AbstractDecisionProcesses/OptimalSavings.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.OptimalSavings.u_bdd",
+      "kind": "projection",
+      "module": "AbstractDecisionProcesses/OptimalSavings.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.OptimalSavings.\u03c6",
+      "kind": "projection",
+      "module": "AbstractDecisionProcesses/OptimalSavings.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.OptimalSavings.\u03c6_prob",
+      "kind": "projection",
+      "module": "AbstractDecisionProcesses/OptimalSavings.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.OptimalSavings.\u03b2",
+      "kind": "projection",
+      "module": "AbstractDecisionProcesses/OptimalSavings.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.OptimalSavings.\u03b2_nonneg",
+      "kind": "projection",
+      "module": "AbstractDecisionProcesses/OptimalSavings.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.OptimalSavings.\u03b2_lt_one",
+      "kind": "projection",
+      "module": "AbstractDecisionProcesses/OptimalSavings.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.OptimalSavings.R",
+      "kind": "projection",
+      "module": "AbstractDecisionProcesses/OptimalSavings.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.SavingsPolicy",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/OptimalSavings.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.OptimalSavings.cont",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/OptimalSavings.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.OptimalSavings.P\u03c3",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/OptimalSavings.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.OptimalSavings.r\u03c3",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/OptimalSavings.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.OptimalSavings.T\u03c3",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/OptimalSavings.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.OptimalSavings.integrable_comp",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/OptimalSavings.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.OptimalSavings.abs_cont_le",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/OptimalSavings.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.OptimalSavings.isMarkovLike_P\u03c3",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/OptimalSavings.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.OptimalSavings.r\u03c3_mem",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/OptimalSavings.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.OptimalSavings.T\u03c3_mapsTo",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/OptimalSavings.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.OptimalSavings.T\u03c3_globallyStable",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/OptimalSavings.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.OptimalSavings.v\u03c3_hasSum",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/OptimalSavings.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.OptimalSavings.abs_fixedPoint_le",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/OptimalSavings.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.OptimalSavings.objective",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/OptimalSavings.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.OptimalSavings.bellmanOp",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/OptimalSavings.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.OptimalSavings.bddAbove_objective",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/OptimalSavings.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.OptimalSavings.bellmanOp_contraction",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/OptimalSavings.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.OptimalSavings.IsGreedy",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/OptimalSavings.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.OptimalSavings.toDP",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/OptimalSavings.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.OptimalSavings.isGreedy_iff",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/OptimalSavings.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.OptimalSavings.bellman_eq",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/OptimalSavings.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.OptimalSavings.dp_results",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/OptimalSavings.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.OrderStable",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/OrderTheory.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.IncreasesTo",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/OrderTheory.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.DecreasesTo",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/OrderTheory.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.StronglyOrderStable",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/OrderTheory.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.orderStable_of_up_down",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/OrderTheory.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.StronglyOrderStable.orderStable",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/OrderTheory.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.dualMap",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/OrderTheory.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.orderStable_dual_iff",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/OrderTheory.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.dualMap_iterate",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/OrderTheory.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.stronglyOrderStable_dual_iff",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/OrderTheory.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ChainComplete",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/OrderTheory.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ChainComplete.exists_least",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/OrderTheory.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ChainComplete.exists_fixedPt_ge",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/OrderTheory.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ChainComplete.exists_fixedPt_le",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/OrderTheory.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ChainComplete.exists_fixedPt",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/OrderTheory.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ChainComplete.orderStable",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/OrderTheory.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.chainComplete_Icc",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/OrderTheory.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.CountablyDedekindComplete",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/OrderTheory.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.countablyDedekindComplete_of_conditionallyCompleteLattice",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/OrderTheory.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.CountablyDedekindComplete.dual",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/OrderTheory.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.OrderContinuous",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/OrderTheory.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.OrderContinuous.monotone",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/OrderTheory.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.isLUB_range_succ_iff",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/OrderTheory.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.tarski_kantorovich",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/OrderTheory.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.stronglyOrderStable_of_globallyStable",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/OrderTheory.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP",
+      "kind": "structure",
+      "module": "AbstractDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.mk",
+      "kind": "constructor",
+      "module": "AbstractDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.T",
+      "kind": "projection",
+      "module": "AbstractDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.mono",
+      "kind": "projection",
+      "module": "AbstractDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.nonempty",
+      "kind": "projection",
+      "module": "AbstractDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.IsGreedy",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.VG",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.WellPosed",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.IsFinite",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.Regular",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.IsOrderStable",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.IsStronglyOrderStable",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.IsBellmanValue",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.SolvesBellman",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.IsStronglyOrderStable.isOrderStable",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.IsOrderStable.wellPosed",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.regular_iff",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.greedy",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.isGreedy_greedy",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.bellman",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.T_le_bellman",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.isBellmanValue_bellman",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.isGreedy_iff",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.isGreedy_of_isBellmanValue",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.solvesBellman_iff",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.bellman_mono",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.VU",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.VSig",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.VSig_inter_VG_subset",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.v\u03c3",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.T_v\u03c3",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.eq_v\u03c3",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.VSig_eq_range",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.IsOptimal",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.IsValueFunction",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.BellmanPrinciple",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.FundamentalOptimality",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.IsOptimal.isValueFunction",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.isOptimal_of_isValueFunction",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.isOptimal_iff",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.bellmanPrinciple_of_solves",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.exists_solves_iff",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.fundamentalOptimality_iff",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.isOptimal_iff_solvesBellman",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.fundamentalOptimality_iff_exists_fixed",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.IsOrderStable.fundamentalOptimality",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.WellPosed.isOrderStable",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.fundamentalOptimality_of_chainComplete",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/ADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.IsSelector",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/Algorithms.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.Regular.isSelector_greedy",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/Algorithms.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.howard",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/Algorithms.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.opt",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/Algorithms.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.IsSelector.T_eq",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/Algorithms.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.mem_VU_iff",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/Algorithms.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.bellman_eq_of_howard_eq",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/Algorithms.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.iterate_mono_of_le",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/Algorithms.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.bellman_le_opt",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/Algorithms.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.chain_2_9",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/Algorithms.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.mapsTo_VU",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/Algorithms.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.bellman_le_of_le",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/Algorithms.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.iterates_of_mem_VU",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/Algorithms.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.VFIConverges",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/Algorithms.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.OPIConverges",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/Algorithms.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.HPIConverges",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/Algorithms.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.opt_one",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/Algorithms.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.OPIConverges.vfi",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/Algorithms.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.le_vstar_of_mem_VU",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/Algorithms.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.IsOrderStable.le_v\u03c3",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/Algorithms.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.IsOrderStable.v\u03c3_le",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/Algorithms.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.iterates_le_vstar",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/Algorithms.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.increasesTo_of_squeeze",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/Algorithms.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.VFIConverges.opi_hpi",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/Algorithms.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.VU_nonempty",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/Algorithms.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.IsFinite.VSig_finite",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/Algorithms.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.exists_succ_eq_of_finite",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/Algorithms.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.fundamentalOptimality_of_finite",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/Algorithms.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.FundamentalOptimality.exists_vstar",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/Algorithms.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.convergence_of_chainComplete",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/Algorithms.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.OrderBounded",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/Algorithms.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.IsOrderContinuous",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/Algorithms.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.le_of_orderBounded",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/Algorithms.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.convergence_of_dedekind",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/Algorithms.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.dual",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/Minimization.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.dual_dual",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/Minimization.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.IsMinGreedy",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/Minimization.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.VGmin",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/Minimization.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.MinRegular",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/Minimization.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.MinOrderBounded",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/Minimization.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.IsMinBellmanValue",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/Minimization.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.SolvesMinBellman",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/Minimization.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.IsMinValueFunction",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/Minimization.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.IsMinOptimal",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/Minimization.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.MinBellmanPrinciple",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/Minimization.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.MinFundamentalOptimality",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/Minimization.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.isMinGreedy_iff",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/Minimization.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.minRegular_iff",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/Minimization.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.minOrderBounded_iff",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/Minimization.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.isMinBellmanValue_iff",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/Minimization.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.VGmin_eq",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/Minimization.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.dual_VSig",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/Minimization.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.WellPosed.dual",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/Minimization.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.dual_v\u03c3",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/Minimization.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.isMinValueFunction_iff",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/Minimization.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.isMinOptimal_iff",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/Minimization.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.dual_opt_howard",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/Minimization.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.minBellmanPrinciple_iff",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/Minimization.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.minFundamentalOptimality_iff",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/Minimization.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.VD",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/Minimization.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.MinVFIConverges",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/Minimization.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.minVFIConverges_iff",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/Minimization.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.minFundamentalOptimality_iff_exists_fixed",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/Minimization.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.ADP.IsOrderStable.minFundamentalOptimality",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/Minimization.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.isLUB_of_tendsto_bX",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/BXOrder.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.tendsto_of_isLUB_bX",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/BXOrder.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.countablyDedekindComplete_bX",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/BXOrder.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.tendsto_markovOp",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/BXOrder.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FirmProblem.adp",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/FirmADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FirmProblem.exercise_2_3_1",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/FirmADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FirmProblem.adp_wellPosed",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/FirmADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FirmProblem.adp_isOrderStable",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/FirmADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FirmProblem.adp_isGreedy_iff",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/FirmADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FirmProblem.adp_regular",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/FirmADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FirmProblem.adp_bellman_apply",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/FirmADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FirmProblem.adp_isOrderContinuous",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/FirmADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FirmProblem.adp_orderBounded",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/FirmADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FirmProblem.adp_optimality",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/FirmADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.consumeAll",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/SavingsADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.OptimalSavings.adp",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/SavingsADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.OptimalSavings.adp_wellPosed",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/SavingsADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.OptimalSavings.adp_isOrderStable",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/SavingsADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.OptimalSavings.adp_isGreedy_iff",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/SavingsADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.OptimalSavings.adp_regular_iff",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/SavingsADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.OptimalSavings.adp_bellman_apply",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/SavingsADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.OptimalSavings.exercise_2_3_4",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/SavingsADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.OptimalSavings.adp_orderBounded",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/SavingsADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.OptimalSavings.adp_isOrderContinuous",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/SavingsADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.OptimalSavings.adp_optimality",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/SavingsADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.isLUB_of_tendsto_subtype",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/MDPADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.isGLB_of_tendsto_subtype",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/MDPADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.nonempty_policy",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/MDPADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.adp",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/MDPADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.adp_wellPosed",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/MDPADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.adp_isOrderStable",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/MDPADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.adp_isOrderContinuous",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/MDPADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.rbar",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/MDPADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.abs_r_le_rbar",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/MDPADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.adp_orderBounded",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/MDPADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.exercise_2_3_7",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/MDPADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.adp_regular",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/MDPADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.adp_bellman_apply",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/MDPADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.proposition_2_3_1",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/MDPADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.Vhat",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/MDPADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.mem_Vhat_iff",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/MDPADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.T\u03c3_mapsTo_Vhat",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/MDPADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.adpHat",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/MDPADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.v\u03c3_mem_Vhat",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/MDPADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.adpHat_isStronglyOrderStable",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/MDPADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.adpHat_regular",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/MDPADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.exercise_2_3_10",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/MDPADP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.LQProblem",
+      "kind": "structure",
+      "module": "AbstractDecisionProcesses/LQAlgebra.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.LQProblem.mk",
+      "kind": "constructor",
+      "module": "AbstractDecisionProcesses/LQAlgebra.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.LQProblem.A",
+      "kind": "projection",
+      "module": "AbstractDecisionProcesses/LQAlgebra.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.LQProblem.B",
+      "kind": "projection",
+      "module": "AbstractDecisionProcesses/LQAlgebra.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.LQProblem.Q",
+      "kind": "projection",
+      "module": "AbstractDecisionProcesses/LQAlgebra.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.LQProblem.R",
+      "kind": "projection",
+      "module": "AbstractDecisionProcesses/LQAlgebra.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.LQProblem.Q_psd",
+      "kind": "projection",
+      "module": "AbstractDecisionProcesses/LQAlgebra.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.LQProblem.R_pd",
+      "kind": "projection",
+      "module": "AbstractDecisionProcesses/LQAlgebra.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.LQProblem.gainDen",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/LQAlgebra.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.LQProblem.TF",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/LQAlgebra.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.LQProblem.cost",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/LQAlgebra.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.LQProblem.posSemidef_iff_real",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/LQAlgebra.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.LQProblem.posDef_iff_real",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/LQAlgebra.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.LQProblem.posSemidef_transpose_mul_mul",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/LQAlgebra.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.LQProblem.gainDen_posDef",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/LQAlgebra.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.LQProblem.dotProduct_mulVec_comm_of_symm",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/LQAlgebra.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.LQProblem.mulVec_dotProduct",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/LQAlgebra.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.LQProblem.dotProduct_transpose_mul_mul",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/LQAlgebra.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.LQProblem.quad_add",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/LQAlgebra.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.LQProblem.dotProduct_TF",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/LQAlgebra.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.LQProblem.TF_posSemidef",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/LQAlgebra.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.LQProblem.TF_transpose",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/LQAlgebra.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.LQProblem.TF_mono",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/LQAlgebra.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.LQProblem.TF_expand",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/LQAlgebra.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.LQProblem.riccati",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/LQAlgebra.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.LQProblem.gain",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/LQAlgebra.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.LQProblem.gainDen_mul_gain",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/LQAlgebra.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.LQProblem.riccati_eq_TF",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/LQAlgebra.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.LQProblem.riccati_posSemidef",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/LQAlgebra.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.LQProblem.cost_gain_add",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/LQAlgebra.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.LQProblem.gain_isMinimizer",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/LQAlgebra.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.LQProblem.gain_iff_TF_le",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/LQAlgebra.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.psdCone",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/LQControl.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.LQProblem.closedLoop",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/LQControl.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.LQProblem.IsStable",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/LQControl.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.LQProblem.costMat",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/LQControl.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.LQProblem.discCost",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/LQControl.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.LQProblem.TF_eq",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/LQControl.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.LQProblem.IsStable.entry_decay",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/LQControl.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.LQProblem.IsStable.tendsto_entry",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/LQControl.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.LQProblem.IsStable.tendsto_state",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/LQControl.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.LQProblem.transpose_mul_mul_apply",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/LQControl.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.LQProblem.tendsto_transpose_mul_mul_zero",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/LQControl.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.LQProblem.TF_iterate",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/LQControl.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.LQProblem.PF",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/LQControl.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.LQProblem.IsStable.hasSum_PF",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/LQControl.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.LQProblem.IsStable.tendsto_TF_iterate",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/LQControl.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.LQProblem.tendsto_TF",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/LQControl.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.LQProblem.IsStable.TF_PF",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/LQControl.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.LQProblem.IsStable.eq_PF",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/LQControl.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.LQProblem.IsStable.PF_posSemidef",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/LQControl.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.LQProblem.TFpsd",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/LQControl.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.LQProblem.TFpsd_iterate",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/LQControl.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.LQProblem.IsStable.globallyStable",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/LQControl.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.LQProblem.IsStable.hasSum_cost",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/LQControl.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.LQProblem.StablePolicy",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/LQControl.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.LQProblem.adp",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/LQControl.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.LQProblem.adp_isStronglyOrderStable",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/LQControl.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.LQProblem.eq_of_dotProduct_mulVec_eq",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/LQControl.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.LQProblem.PS",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/LQControl.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.LQProblem.gain_isMinGreedy",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/LQControl.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.LQProblem.isMinBellmanValue_riccati",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/LQControl.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.LQProblem.riccati_tfae",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/LQControl.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.LQProblem.optimality",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/LQControl.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.LQProblem.scalar_lifetimeCost",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/LQControl.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.LQProblem.scalar_compare",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/LQControl.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FOSD",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/DistributionalDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FOSD.refl",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/DistributionalDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FOSD.trans",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/DistributionalDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.FOSD.antisymm",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/DistributionalDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.DistValue",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/DistributionalDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.distOrder",
+      "kind": "abbrev",
+      "module": "AbstractDecisionProcesses/DistributionalDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.DDP",
+      "kind": "structure",
+      "module": "AbstractDecisionProcesses/DistributionalDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.DDP.mk",
+      "kind": "constructor",
+      "module": "AbstractDecisionProcesses/DistributionalDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.DDP.P",
+      "kind": "projection",
+      "module": "AbstractDecisionProcesses/DistributionalDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.DDP.isMarkov",
+      "kind": "projection",
+      "module": "AbstractDecisionProcesses/DistributionalDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.DDP.r",
+      "kind": "projection",
+      "module": "AbstractDecisionProcesses/DistributionalDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.DDP.r_meas",
+      "kind": "projection",
+      "module": "AbstractDecisionProcesses/DistributionalDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.DDP.r_bdd",
+      "kind": "projection",
+      "module": "AbstractDecisionProcesses/DistributionalDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.DDP.\u03b2",
+      "kind": "projection",
+      "module": "AbstractDecisionProcesses/DistributionalDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.DDP.\u03b2_nonneg",
+      "kind": "projection",
+      "module": "AbstractDecisionProcesses/DistributionalDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.DDP.\u03b2_lt_one",
+      "kind": "projection",
+      "module": "AbstractDecisionProcesses/DistributionalDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.DDPPolicy",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/DistributionalDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.DDP.P\u03c3",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/DistributionalDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.DDP.isMarkov_P\u03c3",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/DistributionalDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.DDP.r\u03c3",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/DistributionalDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.DDP.measurable_r\u03c3",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/DistributionalDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.DDP.D\u03c3",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/DistributionalDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.DDP.measurable_affine",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/DistributionalDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.DDP.D\u03c3_apply",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/DistributionalDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.DDP.measurable_affine_x",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/DistributionalDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.DDP.integral_D\u03c3",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/DistributionalDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.DDP.integral_D\u03c3'",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/DistributionalDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.DDP.comp_moment",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/DistributionalDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.DDP.D\u03c3\u210b",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/DistributionalDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.DDP.D\u03c3\u210b_coe",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/DistributionalDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.DDP.D\u03c3\u210b_mono",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/DistributionalDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.DDP.ddpADP",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/DistributionalDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.DDP.integrable_of_lipschitz",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/DistributionalDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.DDP.lipschitz_contraction",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/DistributionalDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.DDP.W1",
+      "kind": "def",
+      "module": "AbstractDecisionProcesses/DistributionalDP.lean"
+    },
+    {
+      "name": "SargentStachurski.AbstractDecisionProcesses.DDP.W1_contraction",
+      "kind": "theorem",
+      "module": "AbstractDecisionProcesses/DistributionalDP.lean"
+    }
+  ],
+  "full_build": "passed",
+  "fresh_source_compilation": "passed",
+  "fresh_source_lint_options": [
+    "-Dlinter.mathlibStandardSet=true",
+    "-Dlinter.style.header=false"
+  ],
+  "axioms": {
+    "SargentStachurski.AbstractDecisionProcesses.IsMarkov": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.IsMarkov.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.IsMarkov.nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.IsMarkov.rowsum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.IsDistribution": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.IsDistribution.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.IsDistribution.nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.IsDistribution.sum_eq_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.mulVec_apply_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.IsMarkov.mul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.IsMarkov.pow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.IsMarkov.mulVec_le_mulVec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.IsMarkov.mulVec_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.IsMarkov.abs_mulVec_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.IsMarkov.norm_mulVec_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.IsMarkov.abs_mulVec_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.GloballyStable": [
+      "propext",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.IsContractionOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.IsContractionOn.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.IsContractionOn.mapsTo": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.IsContractionOn.nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.IsContractionOn.lt_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.IsContractionOn.norm_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.IsContractionOn.fixedPt_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.IsContractionOn.iterate_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.IsContractionOn.norm_iterate_sub_fixedPt_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.IsContractionOn.tendsto_iterate_fixedPt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.IsContractionOn.exists_fixedPt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.IsContractionOn.globallyStable_univ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.fixedPt_le_of_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.le_fixedPt_of_le_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.isContractionOn_of_blackwell": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.abs_sup'_sub_sup'_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.pow_nonneg_entries": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.pow_le_pow_entries": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.complexify": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.complexify_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.complexify_pow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.complexify_transpose": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.nnnorm_complexify": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.norm_complexify": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.specRad": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.spectralRadius_complexify_ne_top": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.specRad_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.mem_spectrum_iff_eigenpair": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.tendsto_norm_pow_rpow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.eventually_norm_pow_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.tendsto_norm_pow_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.summable_pow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.one_sub_mul_tsum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.tsum_mul_one_sub": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.neumann_series": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.specRad_transpose": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.norm_le_norm_of_abs_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.specRad_le_of_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.rowsum_abs_le_norm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.norm_le_of_rowsum_abs_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.abs_entry_le_norm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.norm_eq_of_rowsum_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.specRad_le_norm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.norm_le_specRad_of_mem_spectrum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.specRad_eq_of_rowsum_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.specRad_eq_of_colsum_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.eventually_abs_entry_pow_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.IsBdd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.IsSupContraction": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.IsUniformlyClosed": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.isBdd_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.IsBdd.sub": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.IsBdd.add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.IsBdd.nonneg_bound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.IsBdd.exists_dist": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.IsSupContraction.iterate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.IsSupContraction.eq_of_isFixedPt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.IsSupContraction.exists_limit": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.IsSupContraction.globallyStable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.le_of_le_map_of_tendsto": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.le_of_map_le_of_tendsto": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.bX": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.isUniformlyClosed_bX": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.const_mem_bX": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.abs_max_sub_max_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.abs_ciSup_sub_ciSup_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ContractingDP": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ContractingDP.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ContractingDP.V": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ContractingDP.T": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ContractingDP.\u03b2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ContractingDP.\u03b2_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ContractingDP.\u03b2_lt_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ContractingDP.nonempty": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ContractingDP.bdd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ContractingDP.closed": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ContractingDP.mapsTo": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ContractingDP.mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ContractingDP.contraction": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ContractingDP.exists_greedy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ContractingDP.globallyStable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ContractingDP.v\u03c3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ContractingDP.v\u03c3_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ContractingDP.T_v\u03c3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ContractingDP.eq_v\u03c3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ContractingDP.tendsto_v\u03c3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ContractingDP.le_v\u03c3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ContractingDP.v\u03c3_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ContractingDP.IsGreedy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ContractingDP.nonempty_policy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ContractingDP.greedy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ContractingDP.isGreedy_greedy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ContractingDP.bellman": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ContractingDP.bellman_mapsTo": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ContractingDP.T_le_bellman": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ContractingDP.isGreedy_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ContractingDP.bellman_eq_iSup": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ContractingDP.bellman_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ContractingDP.bellman_contraction": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ContractingDP.bellman_globallyStable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ContractingDP.vstar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ContractingDP.vstar_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ContractingDP.bellman_vstar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ContractingDP.eq_vstar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ContractingDP.tendsto_bellman_iterate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ContractingDP.v\u03c3_le_vstar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ContractingDP.v\u03c3_eq_vstar_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ContractingDP.IsOptimal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ContractingDP.isOptimal_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ContractingDP.optimality": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ContractingDP.vstar_le_of_bellman_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ContractingDP.le_vstar_of_le_bellman": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ContractingDP.hpiPolicy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ContractingDP.v\u03c3_hpi_le_succ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ContractingDP.v\u03c3_hpi_eq_vstar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ContractingDP.hpi_terminates": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ContractingDP.opi": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ContractingDP.opi_step": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ContractingDP.tendsto_opi": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.markovOp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.integrable_of_mem_bX": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.measurable_markovOp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.abs_markovOp_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.markovOp_mem_bX": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.markovOp_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.markovOp_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.markovOp_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.markovOp_sub": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.markovOp_smul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.markovOp_sub_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.abs_markovOp_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.IsMarkovLike": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.IsMarkovLike.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.IsMarkovLike.mapsTo": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.IsMarkovLike.add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.IsMarkovLike.smul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.IsMarkovLike.mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.IsMarkovLike.abs_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.isMarkovLike_markovOp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.IsMarkovLike.sub": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.IsMarkovLike.abs_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.IsMarkovLike.iterate_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.IsMarkovLike.abs_iterate_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.affineOp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.affineOp_mapsTo": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.affineOp_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.affineOp_contraction": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.affineOp_globallyStable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.affineOp_iterate_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.affineOp_hasSum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FirmProblem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FirmProblem.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FirmProblem.P": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FirmProblem.isMarkov": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FirmProblem.profit": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FirmProblem.profit_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FirmProblem.\u03b2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FirmProblem.\u03b2_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FirmProblem.\u03b2_lt_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FirmProblem.s": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FirmPolicy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FirmProblem.isMarkovLike_P": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FirmProblem.valOp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FirmProblem.valOp_mapsTo": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FirmProblem.valOp_contraction": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FirmProblem.valuation_globallyStable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FirmProblem.value": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FirmProblem.value_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FirmProblem.value_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FirmProblem.value_hasSum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FirmProblem.T\u03c3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FirmProblem.T\u03c3_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FirmProblem.T\u03c3_mapsTo": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FirmProblem.T\u03c3_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FirmProblem.T\u03c3_contraction": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FirmProblem.measurable_sellPolicy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FirmProblem.T\u03c3_le_max": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FirmProblem.T\u03c3_sellPolicy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FirmProblem.toDP": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FirmProblem.bellman_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FirmProblem.IsGreedy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FirmProblem.isGreedy_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FirmProblem.isGreedy_iff_bellman": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FirmProblem.abs_v\u03c3_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FirmProblem.theorem_1_1_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FirmProblem.sellPolicy_optimal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FiniteMDP": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.\u0393": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.\u0393_nonempty": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.r": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.\u03b2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.\u03b2_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.\u03b2_lt_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.P": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.P_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.P_sum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.Policy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.Q": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.T\u03c3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.isBdd_of_finite": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.abs_sum_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.Q_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.abs_Q_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.Q_sub_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.exists_greedy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.toDP": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.IsGreedy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.isGreedy_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.bellman_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.bellman_contraction": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.P\u03c3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.r\u03c3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.T\u03c3_eq_mulVec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.abs_P\u03c3_mulVec_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.v\u03c3_eq_inv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.v\u03c3_hasSum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.abs_v\u03c3_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.finite_policy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.theorem_1_2_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.theorem_1_2_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.vstar_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.IsLPFeasible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.lp_solution": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.OptimalSavings": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.OptimalSavings.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.OptimalSavings.u": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.OptimalSavings.u_cont": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.OptimalSavings.u_bdd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.OptimalSavings.\u03c6": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.OptimalSavings.\u03c6_prob": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.OptimalSavings.\u03b2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.OptimalSavings.\u03b2_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.OptimalSavings.\u03b2_lt_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.OptimalSavings.R": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.SavingsPolicy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.OptimalSavings.cont": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.OptimalSavings.P\u03c3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.OptimalSavings.r\u03c3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.OptimalSavings.T\u03c3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.OptimalSavings.integrable_comp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.OptimalSavings.abs_cont_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.OptimalSavings.isMarkovLike_P\u03c3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.OptimalSavings.r\u03c3_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.OptimalSavings.T\u03c3_mapsTo": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.OptimalSavings.T\u03c3_globallyStable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.OptimalSavings.v\u03c3_hasSum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.OptimalSavings.abs_fixedPoint_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.OptimalSavings.objective": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.OptimalSavings.bellmanOp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.OptimalSavings.bddAbove_objective": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.OptimalSavings.bellmanOp_contraction": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.OptimalSavings.IsGreedy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.OptimalSavings.toDP": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.OptimalSavings.isGreedy_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.OptimalSavings.bellman_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.OptimalSavings.dp_results": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.OrderStable": [],
+    "SargentStachurski.AbstractDecisionProcesses.IncreasesTo": [],
+    "SargentStachurski.AbstractDecisionProcesses.DecreasesTo": [],
+    "SargentStachurski.AbstractDecisionProcesses.StronglyOrderStable": [],
+    "SargentStachurski.AbstractDecisionProcesses.orderStable_of_up_down": [],
+    "SargentStachurski.AbstractDecisionProcesses.StronglyOrderStable.orderStable": [],
+    "SargentStachurski.AbstractDecisionProcesses.dualMap": [
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.orderStable_dual_iff": [
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.dualMap_iterate": [
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.stronglyOrderStable_dual_iff": [
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ChainComplete": [],
+    "SargentStachurski.AbstractDecisionProcesses.ChainComplete.exists_least": [],
+    "SargentStachurski.AbstractDecisionProcesses.ChainComplete.exists_fixedPt_ge": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ChainComplete.exists_fixedPt_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ChainComplete.exists_fixedPt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ChainComplete.orderStable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.chainComplete_Icc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.CountablyDedekindComplete": [],
+    "SargentStachurski.AbstractDecisionProcesses.countablyDedekindComplete_of_conditionallyCompleteLattice": [],
+    "SargentStachurski.AbstractDecisionProcesses.CountablyDedekindComplete.dual": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.OrderContinuous": [],
+    "SargentStachurski.AbstractDecisionProcesses.OrderContinuous.monotone": [
+      "propext"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.isLUB_range_succ_iff": [
+      "propext",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.tarski_kantorovich": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.stronglyOrderStable_of_globallyStable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ADP": [],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.mk": [],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.T": [],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.mono": [],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.nonempty": [],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.IsGreedy": [],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.VG": [],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.WellPosed": [],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.IsFinite": [],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.Regular": [],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.IsOrderStable": [],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.IsStronglyOrderStable": [],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.IsBellmanValue": [],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.SolvesBellman": [],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.IsStronglyOrderStable.isOrderStable": [],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.IsOrderStable.wellPosed": [],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.regular_iff": [
+      "propext",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.greedy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.isGreedy_greedy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.bellman": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.T_le_bellman": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.isBellmanValue_bellman": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.isGreedy_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.isGreedy_of_isBellmanValue": [],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.solvesBellman_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.bellman_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.VU": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.VSig": [],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.VSig_inter_VG_subset": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.v\u03c3": [
+      "Classical.choice"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.T_v\u03c3": [
+      "Classical.choice"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.eq_v\u03c3": [
+      "Classical.choice"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.VSig_eq_range": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.IsOptimal": [
+      "Classical.choice"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.IsValueFunction": [],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.BellmanPrinciple": [
+      "Classical.choice"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.FundamentalOptimality": [
+      "Classical.choice"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.IsOptimal.isValueFunction": [
+      "Classical.choice"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.isOptimal_of_isValueFunction": [
+      "Classical.choice"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.isOptimal_iff": [
+      "Classical.choice"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.bellmanPrinciple_of_solves": [
+      "Classical.choice"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.exists_solves_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.fundamentalOptimality_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.isOptimal_iff_solvesBellman": [
+      "propext",
+      "Classical.choice"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.fundamentalOptimality_iff_exists_fixed": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.IsOrderStable.fundamentalOptimality": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.WellPosed.isOrderStable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.fundamentalOptimality_of_chainComplete": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.IsSelector": [],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.Regular.isSelector_greedy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.howard": [
+      "Classical.choice"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.opt": [],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.IsSelector.T_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.mem_VU_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.bellman_eq_of_howard_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.iterate_mono_of_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.bellman_le_opt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.chain_2_9": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.mapsTo_VU": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.bellman_le_of_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.iterates_of_mem_VU": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.VFIConverges": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.OPIConverges": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.HPIConverges": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.opt_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.OPIConverges.vfi": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.le_vstar_of_mem_VU": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.IsOrderStable.le_v\u03c3": [
+      "Classical.choice"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.IsOrderStable.v\u03c3_le": [
+      "Classical.choice"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.iterates_le_vstar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.increasesTo_of_squeeze": [],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.VFIConverges.opi_hpi": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.VU_nonempty": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.IsFinite.VSig_finite": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.exists_succ_eq_of_finite": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.fundamentalOptimality_of_finite": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.FundamentalOptimality.exists_vstar": [
+      "Classical.choice"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.convergence_of_chainComplete": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.OrderBounded": [],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.IsOrderContinuous": [],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.le_of_orderBounded": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.convergence_of_dedekind": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.dual": [
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.dual_dual": [
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.IsMinGreedy": [],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.VGmin": [],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.MinRegular": [],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.MinOrderBounded": [],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.IsMinBellmanValue": [],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.SolvesMinBellman": [],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.IsMinValueFunction": [],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.IsMinOptimal": [
+      "Classical.choice"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.MinBellmanPrinciple": [
+      "Classical.choice"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.MinFundamentalOptimality": [
+      "Classical.choice"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.isMinGreedy_iff": [
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.minRegular_iff": [
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.minOrderBounded_iff": [
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.isMinBellmanValue_iff": [
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.VGmin_eq": [
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.dual_VSig": [
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.WellPosed.dual": [
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.dual_v\u03c3": [
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.isMinValueFunction_iff": [
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.isMinOptimal_iff": [
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.dual_opt_howard": [
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.minBellmanPrinciple_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.minFundamentalOptimality_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.VD": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.MinVFIConverges": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.minVFIConverges_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.minFundamentalOptimality_iff_exists_fixed": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.ADP.IsOrderStable.minFundamentalOptimality": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.isLUB_of_tendsto_bX": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.tendsto_of_isLUB_bX": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.countablyDedekindComplete_bX": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.tendsto_markovOp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FirmProblem.adp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FirmProblem.exercise_2_3_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FirmProblem.adp_wellPosed": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FirmProblem.adp_isOrderStable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FirmProblem.adp_isGreedy_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FirmProblem.adp_regular": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FirmProblem.adp_bellman_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FirmProblem.adp_isOrderContinuous": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FirmProblem.adp_orderBounded": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FirmProblem.adp_optimality": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.consumeAll": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.OptimalSavings.adp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.OptimalSavings.adp_wellPosed": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.OptimalSavings.adp_isOrderStable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.OptimalSavings.adp_isGreedy_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.OptimalSavings.adp_regular_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.OptimalSavings.adp_bellman_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.OptimalSavings.exercise_2_3_4": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.OptimalSavings.adp_orderBounded": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.OptimalSavings.adp_isOrderContinuous": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.OptimalSavings.adp_optimality": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.isLUB_of_tendsto_subtype": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.isGLB_of_tendsto_subtype": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.nonempty_policy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.adp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.adp_wellPosed": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.adp_isOrderStable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.adp_isOrderContinuous": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.rbar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.abs_r_le_rbar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.adp_orderBounded": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.exercise_2_3_7": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.adp_regular": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.adp_bellman_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.proposition_2_3_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.Vhat": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.mem_Vhat_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.T\u03c3_mapsTo_Vhat": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.adpHat": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.v\u03c3_mem_Vhat": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.adpHat_isStronglyOrderStable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.adpHat_regular": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FiniteMDP.exercise_2_3_10": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.LQProblem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.LQProblem.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.LQProblem.A": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.LQProblem.B": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.LQProblem.Q": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.LQProblem.R": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.LQProblem.Q_psd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.LQProblem.R_pd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.LQProblem.gainDen": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.LQProblem.TF": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.LQProblem.cost": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.LQProblem.posSemidef_iff_real": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.LQProblem.posDef_iff_real": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.LQProblem.posSemidef_transpose_mul_mul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.LQProblem.gainDen_posDef": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.LQProblem.dotProduct_mulVec_comm_of_symm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.LQProblem.mulVec_dotProduct": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.LQProblem.dotProduct_transpose_mul_mul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.LQProblem.quad_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.LQProblem.dotProduct_TF": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.LQProblem.TF_posSemidef": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.LQProblem.TF_transpose": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.LQProblem.TF_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.LQProblem.TF_expand": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.LQProblem.riccati": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.LQProblem.gain": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.LQProblem.gainDen_mul_gain": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.LQProblem.riccati_eq_TF": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.LQProblem.riccati_posSemidef": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.LQProblem.cost_gain_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.LQProblem.gain_isMinimizer": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.LQProblem.gain_iff_TF_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.psdCone": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.LQProblem.closedLoop": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.LQProblem.IsStable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.LQProblem.costMat": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.LQProblem.discCost": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.LQProblem.TF_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.LQProblem.IsStable.entry_decay": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.LQProblem.IsStable.tendsto_entry": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.LQProblem.IsStable.tendsto_state": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.LQProblem.transpose_mul_mul_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.LQProblem.tendsto_transpose_mul_mul_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.LQProblem.TF_iterate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.LQProblem.PF": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.LQProblem.IsStable.hasSum_PF": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.LQProblem.IsStable.tendsto_TF_iterate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.LQProblem.tendsto_TF": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.LQProblem.IsStable.TF_PF": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.LQProblem.IsStable.eq_PF": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.LQProblem.IsStable.PF_posSemidef": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.LQProblem.TFpsd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.LQProblem.TFpsd_iterate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.LQProblem.IsStable.globallyStable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.LQProblem.IsStable.hasSum_cost": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.LQProblem.StablePolicy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.LQProblem.adp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.LQProblem.adp_isStronglyOrderStable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.LQProblem.eq_of_dotProduct_mulVec_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.LQProblem.PS": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.LQProblem.gain_isMinGreedy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.LQProblem.isMinBellmanValue_riccati": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.LQProblem.riccati_tfae": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.LQProblem.optimality": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.LQProblem.scalar_lifetimeCost": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.LQProblem.scalar_compare": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FOSD": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FOSD.refl": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FOSD.trans": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.FOSD.antisymm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.DistValue": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.distOrder": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.DDP": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.DDP.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.DDP.P": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.DDP.isMarkov": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.DDP.r": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.DDP.r_meas": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.DDP.r_bdd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.DDP.\u03b2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.DDP.\u03b2_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.DDP.\u03b2_lt_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.DDPPolicy": [],
+    "SargentStachurski.AbstractDecisionProcesses.DDP.P\u03c3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.DDP.isMarkov_P\u03c3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.DDP.r\u03c3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.DDP.measurable_r\u03c3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.DDP.D\u03c3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.DDP.measurable_affine": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.DDP.D\u03c3_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.DDP.measurable_affine_x": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.DDP.integral_D\u03c3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.DDP.integral_D\u03c3'": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.DDP.comp_moment": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.DDP.D\u03c3\u210b": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.DDP.D\u03c3\u210b_coe": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.DDP.D\u03c3\u210b_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.DDP.ddpADP": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.DDP.integrable_of_lipschitz": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.DDP.lipschitz_contraction": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.DDP.W1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.AbstractDecisionProcesses.DDP.W1_contraction": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  "source_sha256": {
+    "AbstractDecisionProcesses/Basics.lean": "60c281dd87264b736de05920b6d49c833eae052ca14144c889c32d10af6537bd",
+    "AbstractDecisionProcesses/SpectralRadius.lean": "329c83669d2ccea7fd7b68922279aa6729ef8f6bd966adee420c15e406139db7",
+    "AbstractDecisionProcesses/SupContraction.lean": "75bf3b7d1bf1cdbaeb714f5a611e8a66fa25bed49e14322c428b7b7a41885f0b",
+    "AbstractDecisionProcesses/ContractingDP.lean": "cb9beab77a99b15f23a07e1e0de02814d85392737e23c9a815617c9bf8605ab2",
+    "AbstractDecisionProcesses/MarkovOperator.lean": "fe026417c42278c52ee095935f2605d339b5dc79b4e1e720b37a5adb0a06cd9f",
+    "AbstractDecisionProcesses/NeumannSeries.lean": "3029537e915ffbda83d80572f62b85b73ace59e31c1a488fd850b6cfaf474554",
+    "AbstractDecisionProcesses/FirmProblem.lean": "6c531db3e9c5f57ccb088b369359d837d308b1b9a35a0c800b13e67fdeb599ad",
+    "AbstractDecisionProcesses/FiniteMDP.lean": "9087c760abfd677cece5a0c3dd1539b7dfa199029ff4b3d1b4a6c274bdb18fcf",
+    "AbstractDecisionProcesses/OptimalSavings.lean": "0ee6d32207bd9173e85f1db53d3f74155ddc8afd945ee60999a660f616e8efab",
+    "AbstractDecisionProcesses/OrderTheory.lean": "1c753b5a6b6e3f208f947db88d13dfea34738fe9c3a686c8c9a061c86791fc09",
+    "AbstractDecisionProcesses/ADP.lean": "bfc2ea3a99eb1725d4de08e57725be0ad23195aa8ec53ed9618f417427a27849",
+    "AbstractDecisionProcesses/Algorithms.lean": "eed4bfead584a2f39486baf9b6c7855f5ade1c95271424f45e34d003cd1b68f1",
+    "AbstractDecisionProcesses/Minimization.lean": "1b38e13d495983cd0ed6d41d1d1b5bc948bd8067b91b961fec5814fa621aecb5",
+    "AbstractDecisionProcesses/BXOrder.lean": "e871ee8993785faaa543af50ad54c396491ce2dec611b842c961654d2ce5eae9",
+    "AbstractDecisionProcesses/FirmADP.lean": "4daa9b34b3b80ffff9029b50fde0ff48020570aa0a8bbc1493edc8d981a3c289",
+    "AbstractDecisionProcesses/SavingsADP.lean": "a16c27b383f05d4ce24c0523a8102657ba9d955cad27dc6be188188c84a6f007",
+    "AbstractDecisionProcesses/MDPADP.lean": "2a1f9cc284de2b065ec09692a7c277073c3e2168000f1659325376a1124e52f1",
+    "AbstractDecisionProcesses/LQAlgebra.lean": "f9064a3bb29f92da956075727efcf835eebe753b08085a57f2f69af3871a970b",
+    "AbstractDecisionProcesses/LQControl.lean": "c0e47450cb6df49d8c2d1a1e29ee7b8a16c671c77abd3c4a992bafd1f8da85ab",
+    "AbstractDecisionProcesses/DistributionalDP.lean": "3d689996f6f660deb7332a1f2452c2dbbcfee50b3a7e7effce301e63c8e889be",
+    "AbstractDecisionProcesses.lean": "229429fc4e144d33c538673ba8c89e02d0dc1d8c7228294cd901c65ab1d50753",
+    "lean-toolchain": "8733782dc070a99b312039cda424f601b80f3be6f6f512627da5ba25adc27632",
+    "lakefile.toml": "9c7af0a27e82db2de613ddcbda91cfde925c8e36a72fa6745979e8ad29e71b61",
+    "lake-manifest.json": "30a265708d2cdd8fbebc1c80ee8ca2cf2de9803e3ab2e205ab911801472b979f",
+    "proof-manifest.json": "d021ab43a7043129b4f3179358a6e46a7bb3a9a5dfbee89e128deddf42779454",
+    "scripts/verify.py": "a70b1fa704dd590f937f8b37682afa88a9d85a9150065acb935c7d2c9589da3b",
+    "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  },
+  "fresh_audit_sha256": "9fb780f984e067efa6f8287e0f648d533d48a47372623de90e8ee8ebc45721ce",
+  "lean_toolchain": "leanprover/lean4:v4.34.0",
+  "scope": "Sargent and Stachurski, Dynamic Programming, Volume 2 (General States), Chapter 2: Abstract Decision Processes. Order stability and its duality, chain and countable Dedekind completeness, Knaster-Tarski by Zorn's lemma, order continuity and Tarski-Kantorovich; abstract dynamic programs on posets with greedy policies, the Bellman operator, V_G, V_U and V_Sigma, the fundamental optimality properties (Lemmas 2.1.1-2.1.3, Proposition 2.1.4, Theorems 2.1.5 and 2.1.7, Corollary 2.1.6); VFI, OPI and HPI for every greedy selector (Lemmas 2.2.1-2.2.4, Corollary 2.2.5, Theorems 2.2.6-2.2.8); minimization by the dual ADP (Theorem 2.2.9, Corollary 2.2.10); applications: firm valuation, optimal savings and finite MDPs as ADPs (Proposition 2.3.1), LQ control (Lemmas 2.3.3, 2.3.5-2.3.9, the Riccati equation) and distributional dynamic programming (Proposition 2.3.2, the Wasserstein contraction); with the provable exercises, and the Chapter 1 models and Volume 1 spectral-radius facts restated.",
+  "source": "Thomas J. Sargent and John Stachurski, Dynamic Programming, Volume 2: General States, Chapter 2, pp. 58-97, with the Appendix A results used there."
+}

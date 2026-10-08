@@ -1,0 +1,3532 @@
+{
+  "checked_at_utc": "2026-10-03T23:20:37.062499+00:00",
+  "theorems": 263,
+  "module_theorems": {
+    "StochasticDiscounting/Basics.lean": 18,
+    "StochasticDiscounting/SpectralRadius.lean": 29,
+    "StochasticDiscounting/Resolvent.lean": 11,
+    "StochasticDiscounting/PerronFrobenius.lean": 20,
+    "StochasticDiscounting/Irreducible.lean": 10,
+    "StochasticDiscounting/PositiveMatrices.lean": 19,
+    "StochasticDiscounting/Valuation.lean": 32,
+    "StochasticDiscounting/EventualContraction.lean": 16,
+    "StochasticDiscounting/SDMDP.lean": 22,
+    "StochasticDiscounting/Optimality.lean": 27,
+    "StochasticDiscounting/ExogenousDiscounting.lean": 18,
+    "StochasticDiscounting/Inventory.lean": 14,
+    "StochasticDiscounting/AssetPricing.lean": 17,
+    "StochasticDiscounting/HarrisonKreps.lean": 10
+  },
+  "audited_declarations": 348,
+  "declarations": [
+    {
+      "name": "SargentStachurski.StochasticDiscounting.IsMarkov",
+      "kind": "structure",
+      "module": "StochasticDiscounting/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.IsMarkov.mk",
+      "kind": "constructor",
+      "module": "StochasticDiscounting/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.IsMarkov.nonneg",
+      "kind": "projection",
+      "module": "StochasticDiscounting/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.IsMarkov.rowsum",
+      "kind": "projection",
+      "module": "StochasticDiscounting/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.IsDistribution",
+      "kind": "structure",
+      "module": "StochasticDiscounting/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.IsDistribution.mk",
+      "kind": "constructor",
+      "module": "StochasticDiscounting/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.IsDistribution.nonneg",
+      "kind": "projection",
+      "module": "StochasticDiscounting/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.IsDistribution.sum_eq_one",
+      "kind": "projection",
+      "module": "StochasticDiscounting/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.mulVec_apply_eq",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.IsMarkov.mul",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.IsMarkov.pow",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.IsMarkov.mulVec_le_mulVec",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.IsMarkov.mulVec_const",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.IsMarkov.abs_mulVec_le",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.IsMarkov.norm_mulVec_le",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.IsMarkov.abs_mulVec_sub_le",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.GloballyStable",
+      "kind": "def",
+      "module": "StochasticDiscounting/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.IsContractionOn",
+      "kind": "structure",
+      "module": "StochasticDiscounting/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.IsContractionOn.mk",
+      "kind": "constructor",
+      "module": "StochasticDiscounting/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.IsContractionOn.mapsTo",
+      "kind": "projection",
+      "module": "StochasticDiscounting/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.IsContractionOn.nonneg",
+      "kind": "projection",
+      "module": "StochasticDiscounting/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.IsContractionOn.lt_one",
+      "kind": "projection",
+      "module": "StochasticDiscounting/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.IsContractionOn.norm_sub_le",
+      "kind": "projection",
+      "module": "StochasticDiscounting/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.IsContractionOn.fixedPt_unique",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.IsContractionOn.iterate_mem",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.IsContractionOn.norm_iterate_sub_fixedPt_le",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.IsContractionOn.tendsto_iterate_fixedPt",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.IsContractionOn.exists_fixedPt",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.IsContractionOn.globallyStable_univ",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.fixedPt_le_of_le",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.le_fixedPt_of_le_apply",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.isContractionOn_of_blackwell",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.abs_sup'_sub_sup'_le",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Basics.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.pow_nonneg_entries",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.pow_le_pow_entries",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.complexify",
+      "kind": "def",
+      "module": "StochasticDiscounting/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.complexify_apply",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.complexify_pow",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.complexify_transpose",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.nnnorm_complexify",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.norm_complexify",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.specRad",
+      "kind": "def",
+      "module": "StochasticDiscounting/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.spectralRadius_complexify_ne_top",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.specRad_nonneg",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.mem_spectrum_iff_eigenpair",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.tendsto_norm_pow_rpow",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.eventually_norm_pow_le",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.tendsto_norm_pow_zero",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.summable_pow",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.one_sub_mul_tsum",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.tsum_mul_one_sub",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.neumann_series",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.specRad_transpose",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.norm_le_norm_of_abs_le",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.specRad_le_of_le",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.rowsum_abs_le_norm",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.norm_le_of_rowsum_abs_le",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.abs_entry_le_norm",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.norm_eq_of_rowsum_eq",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.specRad_le_norm",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.norm_le_specRad_of_mem_spectrum",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.specRad_eq_of_rowsum_eq",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.specRad_eq_of_colsum_eq",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.eventually_abs_entry_pow_le",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/SpectralRadius.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.resPartial",
+      "kind": "def",
+      "module": "StochasticDiscounting/Resolvent.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.res",
+      "kind": "def",
+      "module": "StochasticDiscounting/Resolvent.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.res_apply",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Resolvent.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.smul_one_sub_mul_resPartial",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Resolvent.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.resPartial_mul_smul_one_sub",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Resolvent.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.resPartial_apply",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Resolvent.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.summable_res_entry",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Resolvent.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.tendsto_resPartial_apply",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Resolvent.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.tendsto_inv_pow_mul_apply",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Resolvent.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.smul_one_sub_mul_res",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Resolvent.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.res_mul_smul_one_sub",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Resolvent.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.res_nonneg",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Resolvent.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.inv_le_res_diag",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Resolvent.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.exists_mem_spectrum_norm_eq",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/PerronFrobenius.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.eventually_norm_entry_pow_complexify_le",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/PerronFrobenius.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.smul_one_sub_mul_res_real",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/PerronFrobenius.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.norm_res_complexify_le",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/PerronFrobenius.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.norm_le_card_mul_of_entry_norm_le",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/PerronFrobenius.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.notMem_spectrum_of_res_bounded",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/PerronFrobenius.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.exists_res_entry_gt",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/PerronFrobenius.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.isCompact_simplex",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/PerronFrobenius.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.perron_frobenius",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/PerronFrobenius.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.perron_frobenius_left",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/PerronFrobenius.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.le_specRad_of_colsum_ge",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/PerronFrobenius.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.specRad_le_of_colsum_le",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/PerronFrobenius.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.le_specRad_of_rowsum_ge",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/PerronFrobenius.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.specRad_le_of_rowsum_le",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/PerronFrobenius.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.tendsto_rpow_one_div_natCast",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/PerronFrobenius.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.norm_pow_mul_le_norm_mulVec",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/PerronFrobenius.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.tendsto_norm_pow_mulVec_rpow",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/PerronFrobenius.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.IsMarkov.specRad_eq_one",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/PerronFrobenius.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.IsMarkov.exists_stationary",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/PerronFrobenius.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.IsMarkov.not_mulVec_ge_add",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/PerronFrobenius.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.Irreducible",
+      "kind": "def",
+      "module": "StochasticDiscounting/Irreducible.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.irreducible_of_pos",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Irreducible.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.Irreducible.transpose",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Irreducible.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.pow_mulVec_eq_of_mulVec_eq",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Irreducible.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.Irreducible.pos_of_mulVec_eq_smul",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Irreducible.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.Irreducible.specRad_pos",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Irreducible.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.Irreducible.exists_pos_eigenvector",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Irreducible.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.Irreducible.exists_pos_left_eigenvector",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Irreducible.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.Irreducible.eq_specRad_of_mulVec_eq_smul",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Irreducible.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.Irreducible.exists_eq_smul_of_mulVec_eq_smul",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Irreducible.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.IsMarkov.exists_unique_stationary_of_irreducible",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Irreducible.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.vecMul_apply_eq",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/PositiveMatrices.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.IsMarkov.isDistribution_vecMul",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/PositiveMatrices.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.IsMarkov.sum_vecMul",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/PositiveMatrices.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.l1",
+      "kind": "def",
+      "module": "StochasticDiscounting/PositiveMatrices.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.l1_nonneg",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/PositiveMatrices.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.norm_le_l1",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/PositiveMatrices.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.l1_vecMul_le",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/PositiveMatrices.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.IsMarkov.sum_vecMul_pow",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/PositiveMatrices.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.IsMarkov.isDistribution_vecMul_pow",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/PositiveMatrices.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.l1_vecMul_pow_le",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/PositiveMatrices.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.tendsto_vecMul",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/PositiveMatrices.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.vecMul_pow_of_vecMul_eq",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/PositiveMatrices.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.IsMarkov.tendsto_vecMul_pow_of_pos",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/PositiveMatrices.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.isDistribution_single",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/PositiveMatrices.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.single_vecMul_eq_row",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/PositiveMatrices.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.IsMarkov.tendsto_pow_apply_of_pos",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/PositiveMatrices.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.conjMarkov",
+      "kind": "def",
+      "module": "StochasticDiscounting/PositiveMatrices.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.conjMarkov_apply",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/PositiveMatrices.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.isMarkov_conjMarkov",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/PositiveMatrices.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.conjMarkov_pow_apply",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/PositiveMatrices.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.tendsto_pow_of_pos",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/PositiveMatrices.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.discountOp",
+      "kind": "def",
+      "module": "StochasticDiscounting/Valuation.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.discountOp_apply",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Valuation.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.discountOp_nonneg",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Valuation.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.pow_succ_mulVec",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Valuation.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.discountOp_const",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Valuation.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.specRad_smul_isMarkov",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Valuation.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.summable_pow_apply",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Valuation.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.summable_pow_mulVec",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Valuation.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.mulVec_tsum_pow_mulVec",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Valuation.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.tsum_pow_mulVec_eq",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Valuation.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.eq_of_eq_add_mulVec",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Valuation.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.inv_mulVec_eq_add",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Valuation.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.inv_mulVec_eq_tsum",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Valuation.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.eq_add_mulVec_iff",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Valuation.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.discountOp_value",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Valuation.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.specRad_discountOp_const_lt_one",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Valuation.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.firmDiscountOp",
+      "kind": "def",
+      "module": "StochasticDiscounting/Valuation.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.firmValue_eq",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Valuation.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.firmDiscountOp_mulVec",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Valuation.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.MonotoneKernel",
+      "kind": "def",
+      "module": "StochasticDiscounting/Valuation.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.monotone_firmValue",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Valuation.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.pow_mulVec_one_nonneg",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Valuation.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.sup'_pow_mulVec_one_eq_norm",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Valuation.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.tendsto_sup'_pow_mulVec_one_rpow",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Valuation.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.norm_pow_eq_norm_pow_mulVec_one",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Valuation.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.specRad_le_norm_pow_rpow",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Valuation.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.specRad_lt_one_iff_exists_norm_pow_mulVec_one_lt",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Valuation.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.tendsto_norm_pow_mulVec_rpow'",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Valuation.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.tendsto_dotProduct_pow_mulVec_one_rpow",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Valuation.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.productDiscountOp",
+      "kind": "def",
+      "module": "StochasticDiscounting/Valuation.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.productDiscountOp_mulVec_comp_snd",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Valuation.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.productDiscountOp_pow_mulVec_one",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Valuation.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.norm_comp_snd",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Valuation.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.specRad_productDiscountOp",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Valuation.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.specRad_productDiscountOp_isMarkov",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Valuation.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.specRad_lt_one_iff_existsUnique_pos",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Valuation.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.globallyStable_of_iterate_contraction",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/EventualContraction.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.globallyStable_of_iterate_contraction_univ",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/EventualContraction.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.exists_iterate_contraction_of_norm_equiv",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/EventualContraction.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.affineOp",
+      "kind": "def",
+      "module": "StochasticDiscounting/EventualContraction.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.affineOp_iterate_sub",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/EventualContraction.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.exists_isContractionOn_iterate_affineOp",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/EventualContraction.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.globallyStable_affineOp",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/EventualContraction.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.isFixedPt_affineOp_inv",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/EventualContraction.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.mulVec_le_mulVec_of_nonneg",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/EventualContraction.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.norm_abs_fun",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/EventualContraction.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.norm_le_norm_of_abs_le_fun",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/EventualContraction.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.abs_iterate_sub_le_pow_mulVec",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/EventualContraction.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.exists_isContractionOn_iterate_of_abs_sub_le",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/EventualContraction.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.globallyStable_of_abs_sub_le",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/EventualContraction.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.abs_sub_le_of_blackwell",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/EventualContraction.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.exists_isContractionOn_iterate_of_blackwell",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/EventualContraction.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.globallyStable_of_blackwell",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/EventualContraction.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.SDMDP",
+      "kind": "structure",
+      "module": "StochasticDiscounting/SDMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.SDMDP.mk",
+      "kind": "constructor",
+      "module": "StochasticDiscounting/SDMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.SDMDP.\u0393",
+      "kind": "projection",
+      "module": "StochasticDiscounting/SDMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.SDMDP.\u0393_nonempty",
+      "kind": "projection",
+      "module": "StochasticDiscounting/SDMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.SDMDP.r",
+      "kind": "projection",
+      "module": "StochasticDiscounting/SDMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.SDMDP.\u03b2",
+      "kind": "projection",
+      "module": "StochasticDiscounting/SDMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.SDMDP.\u03b2_nonneg",
+      "kind": "projection",
+      "module": "StochasticDiscounting/SDMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.SDMDP.P",
+      "kind": "projection",
+      "module": "StochasticDiscounting/SDMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.SDMDP.P_nonneg",
+      "kind": "projection",
+      "module": "StochasticDiscounting/SDMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.SDMDP.P_rowsum",
+      "kind": "projection",
+      "module": "StochasticDiscounting/SDMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.SDMDP.Feasible",
+      "kind": "def",
+      "module": "StochasticDiscounting/SDMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.SDMDP.IsFeasible",
+      "kind": "abbrev",
+      "module": "StochasticDiscounting/SDMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.SDMDP.Policy",
+      "kind": "abbrev",
+      "module": "StochasticDiscounting/SDMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.SDMDP.defaultPolicy",
+      "kind": "def",
+      "module": "StochasticDiscounting/SDMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.SDMDP.policy_nonempty",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/SDMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.SDMDP.P\u03c3",
+      "kind": "def",
+      "module": "StochasticDiscounting/SDMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.SDMDP.P\u03c3_apply",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/SDMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.SDMDP.isMarkov_P\u03c3",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/SDMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.SDMDP.L\u03c3",
+      "kind": "def",
+      "module": "StochasticDiscounting/SDMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.SDMDP.L\u03c3_apply",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/SDMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.SDMDP.L\u03c3_nonneg",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/SDMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.SDMDP.L\u03c3_eq_discountOp",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/SDMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.SDMDP.r\u03c3",
+      "kind": "def",
+      "module": "StochasticDiscounting/SDMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.SDMDP.B",
+      "kind": "def",
+      "module": "StochasticDiscounting/SDMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.SDMDP.T\u03c3",
+      "kind": "def",
+      "module": "StochasticDiscounting/SDMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.SDMDP.T\u03c3_apply",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/SDMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.SDMDP.T\u03c3_eq",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/SDMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.SDMDP.B_mono",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/SDMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.SDMDP.T\u03c3_monotone",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/SDMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.SDMDP.SpectralCondition",
+      "kind": "def",
+      "module": "StochasticDiscounting/SDMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.SDMDP.spectralCondition_of_dominated",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/SDMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.SDMDP.spectralCondition_of_le",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/SDMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.SDMDP.v\u03c3",
+      "kind": "def",
+      "module": "StochasticDiscounting/SDMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.SDMDP.v\u03c3_eq_inv",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/SDMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.SDMDP.iterate_T\u03c3_eq",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/SDMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.SDMDP.isUnit_one_sub_L\u03c3",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/SDMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.SDMDP.isFixedPt_v\u03c3",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/SDMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.SDMDP.eq_v\u03c3_of_isFixedPt",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/SDMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.SDMDP.existsUnique_fixedPt_T\u03c3",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/SDMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.SDMDP.v\u03c3_eq_tsum",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/SDMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.SDMDP.T\u03c3_eq_affineOp",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/SDMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.SDMDP.globallyStable_T\u03c3",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/SDMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.SDMDP.tendsto_iterate_T\u03c3",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/SDMDP.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.fixedPt_le_of_apply_le",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Optimality.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.SDMDP.T",
+      "kind": "def",
+      "module": "StochasticDiscounting/Optimality.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.SDMDP.T_apply",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Optimality.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.SDMDP.B_le_T",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Optimality.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.SDMDP.T\u03c3_le_T",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Optimality.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.SDMDP.T_monotone",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Optimality.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.SDMDP.IsGreedy",
+      "kind": "def",
+      "module": "StochasticDiscounting/Optimality.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.SDMDP.greedy",
+      "kind": "def",
+      "module": "StochasticDiscounting/Optimality.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.SDMDP.greedy_mem",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Optimality.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.SDMDP.isGreedy_greedy",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Optimality.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.SDMDP.greedyPolicy",
+      "kind": "def",
+      "module": "StochasticDiscounting/Optimality.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.SDMDP.isGreedy_iff_T\u03c3_eq_T",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Optimality.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.SDMDP.T\u03c3_eq_T_of_isGreedy",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Optimality.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.SDMDP.vstar",
+      "kind": "def",
+      "module": "StochasticDiscounting/Optimality.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.SDMDP.v\u03c3_le_vstar",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Optimality.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.SDMDP.IsOptimal",
+      "kind": "def",
+      "module": "StochasticDiscounting/Optimality.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.SDMDP.vstar_le_T_vstar",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Optimality.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.SDMDP.v\u03c3_eq_vstar_of_isGreedy",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Optimality.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.SDMDP.isFixedPt_T_vstar",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Optimality.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.SDMDP.eq_vstar_of_isFixedPt",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Optimality.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.SDMDP.bellman_equation",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Optimality.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.SDMDP.isOptimal_iff",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Optimality.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.SDMDP.isOptimal_iff_isGreedy",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Optimality.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.SDMDP.isOptimal_greedy_vstar",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Optimality.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.SDMDP.exists_isOptimal",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Optimality.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.SDMDP.hpi_update_eq_v\u03c3",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Optimality.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.SDMDP.v\u03c3_le_v\u03c3_of_isGreedy",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Optimality.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.SDMDP.isOptimal_of_hpi_fixed",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Optimality.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.SDMDP.opi_one_step_eq_vfi",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Optimality.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.SDMDP.tendsto_opi_inner",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Optimality.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.SDMDP.abs_T_sub_le_of_dominated",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Optimality.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.SDMDP.globallyStable_T_of_dominated",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Optimality.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.SDMDP.tendsto_iterate_T_of_dominated",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Optimality.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.Exogenous",
+      "kind": "structure",
+      "module": "StochasticDiscounting/ExogenousDiscounting.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.Exogenous.mk",
+      "kind": "constructor",
+      "module": "StochasticDiscounting/ExogenousDiscounting.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.Exogenous.\u0393",
+      "kind": "projection",
+      "module": "StochasticDiscounting/ExogenousDiscounting.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.Exogenous.\u0393_nonempty",
+      "kind": "projection",
+      "module": "StochasticDiscounting/ExogenousDiscounting.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.Exogenous.\u03b2",
+      "kind": "projection",
+      "module": "StochasticDiscounting/ExogenousDiscounting.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.Exogenous.\u03b2_nonneg",
+      "kind": "projection",
+      "module": "StochasticDiscounting/ExogenousDiscounting.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.Exogenous.r",
+      "kind": "projection",
+      "module": "StochasticDiscounting/ExogenousDiscounting.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.Exogenous.Q",
+      "kind": "projection",
+      "module": "StochasticDiscounting/ExogenousDiscounting.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.Exogenous.Q_markov",
+      "kind": "projection",
+      "module": "StochasticDiscounting/ExogenousDiscounting.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.Exogenous.R",
+      "kind": "projection",
+      "module": "StochasticDiscounting/ExogenousDiscounting.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.Exogenous.R_nonneg",
+      "kind": "projection",
+      "module": "StochasticDiscounting/ExogenousDiscounting.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.Exogenous.R_rowsum",
+      "kind": "projection",
+      "module": "StochasticDiscounting/ExogenousDiscounting.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.Exogenous.toSDMDP",
+      "kind": "def",
+      "module": "StochasticDiscounting/ExogenousDiscounting.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.Exogenous.LZ",
+      "kind": "def",
+      "module": "StochasticDiscounting/ExogenousDiscounting.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.Exogenous.LZ_apply",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/ExogenousDiscounting.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.Exogenous.LZ_nonneg",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/ExogenousDiscounting.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.Exogenous.L\u03c3_eq",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/ExogenousDiscounting.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.Exogenous.specRad_L\u03c3",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/ExogenousDiscounting.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.Exogenous.spectralCondition",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/ExogenousDiscounting.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.Exogenous.bellman_equation",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/ExogenousDiscounting.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.Exogenous.eq_vstar_of_isFixedPt",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/ExogenousDiscounting.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.Exogenous.isOptimal_iff_isGreedy",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/ExogenousDiscounting.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.Exogenous.exists_isOptimal",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/ExogenousDiscounting.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.Exogenous.colMax",
+      "kind": "def",
+      "module": "StochasticDiscounting/ExogenousDiscounting.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.Exogenous.abs_le_colMax",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/ExogenousDiscounting.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.Exogenous.colMax_nonneg",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/ExogenousDiscounting.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.Exogenous.norm_eq_norm_colMax",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/ExogenousDiscounting.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.Exogenous.abs_T_sub_le",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/ExogenousDiscounting.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.Exogenous.colMax_iterate_sub_le",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/ExogenousDiscounting.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.Exogenous.norm_iterate_T_sub_le",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/ExogenousDiscounting.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.Exogenous.exists_isContractionOn_iterate_T",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/ExogenousDiscounting.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.Exogenous.globallyStable_T",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/ExogenousDiscounting.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.Exogenous.tendsto_iterate_T",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/ExogenousDiscounting.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.inventoryNext",
+      "kind": "def",
+      "module": "StochasticDiscounting/Inventory.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.inventoryNext_lt",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Inventory.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.geomPmf",
+      "kind": "def",
+      "module": "StochasticDiscounting/Inventory.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.geomPmf_pos",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Inventory.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.summable_geomPmf",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Inventory.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.tsum_geomPmf",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Inventory.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.inventoryKernel",
+      "kind": "def",
+      "module": "StochasticDiscounting/Inventory.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.summable_inventoryTerm",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Inventory.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.inventoryKernel_nonneg",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Inventory.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.sum_mul_inventoryKernel",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Inventory.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.inventoryKernel_rowsum",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Inventory.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.expectedRevenue",
+      "kind": "def",
+      "module": "StochasticDiscounting/Inventory.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.inventoryReward",
+      "kind": "def",
+      "module": "StochasticDiscounting/Inventory.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.inventorySDD",
+      "kind": "def",
+      "module": "StochasticDiscounting/Inventory.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.inventorySDD_mem_\u0393",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Inventory.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.inventorySDD_B_apply",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Inventory.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.inventorySDD_B_apply'",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Inventory.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.inventorySDD_LZ",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Inventory.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.inventorySDD_optimality",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Inventory.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.inventorySDD_bellman",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/Inventory.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.markovPrice",
+      "kind": "def",
+      "module": "StochasticDiscounting/AssetPricing.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.adOp",
+      "kind": "def",
+      "module": "StochasticDiscounting/AssetPricing.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.adOp_apply",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/AssetPricing.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.markovPrice_const",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/AssetPricing.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.markovPrice_eq_adOp_mulVec",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/AssetPricing.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.IsExDivPrice",
+      "kind": "def",
+      "module": "StochasticDiscounting/AssetPricing.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.exDivPrice",
+      "kind": "def",
+      "module": "StochasticDiscounting/AssetPricing.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.isExDivPrice_exDivPrice",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/AssetPricing.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.eq_exDivPrice_of_isExDivPrice",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/AssetPricing.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.exDivPrice_eq_tsum",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/AssetPricing.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.adOp_mulVec_pos",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/AssetPricing.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.specRad_lt_one_iff_existsUnique_pos_exDivPrice",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/AssetPricing.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.specRad_adOp_const",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/AssetPricing.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.IsCumDivPrice",
+      "kind": "def",
+      "module": "StochasticDiscounting/AssetPricing.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.cumDivPrice",
+      "kind": "def",
+      "module": "StochasticDiscounting/AssetPricing.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.isCumDivPrice_iff",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/AssetPricing.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.cumDivPrice_eq_tsum",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/AssetPricing.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.cumDivPrice_eq_add_exDivPrice",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/AssetPricing.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.price_dividend_ratio",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/AssetPricing.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.pdOp",
+      "kind": "def",
+      "module": "StochasticDiscounting/AssetPricing.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.IsPDRatio",
+      "kind": "def",
+      "module": "StochasticDiscounting/AssetPricing.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.isPDRatio_iff",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/AssetPricing.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.pdRatio_eq_tsum",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/AssetPricing.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.integral_exp_add_mul_gaussian",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/AssetPricing.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.lucas_growth_factor",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/AssetPricing.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.hkOp",
+      "kind": "def",
+      "module": "StochasticDiscounting/HarrisonKreps.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.hkOp_apply",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/HarrisonKreps.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.isFixedPt_hkOp_iff",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/HarrisonKreps.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.nonnegFns",
+      "kind": "def",
+      "module": "StochasticDiscounting/HarrisonKreps.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.isClosed_nonnegFns",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/HarrisonKreps.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.hkOp_mapsTo",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/HarrisonKreps.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.abs_hkOp_sub_le",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/HarrisonKreps.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.isContractionOn_hkOp",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/HarrisonKreps.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.existsUnique_hk_price",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/HarrisonKreps.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.hkOp_monotone",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/HarrisonKreps.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.hkOp_add_const",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/HarrisonKreps.lean"
+    },
+    {
+      "name": "SargentStachurski.StochasticDiscounting.isContractionOn_hkOp_univ",
+      "kind": "theorem",
+      "module": "StochasticDiscounting/HarrisonKreps.lean"
+    }
+  ],
+  "full_build": "passed",
+  "fresh_source_compilation": "passed",
+  "fresh_source_lint_options": [
+    "-Dlinter.mathlibStandardSet=true",
+    "-Dlinter.style.header=false"
+  ],
+  "axioms": {
+    "SargentStachurski.StochasticDiscounting.IsMarkov": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.IsMarkov.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.IsMarkov.nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.IsMarkov.rowsum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.IsDistribution": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.IsDistribution.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.IsDistribution.nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.IsDistribution.sum_eq_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.mulVec_apply_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.IsMarkov.mul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.IsMarkov.pow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.IsMarkov.mulVec_le_mulVec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.IsMarkov.mulVec_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.IsMarkov.abs_mulVec_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.IsMarkov.norm_mulVec_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.IsMarkov.abs_mulVec_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.GloballyStable": [
+      "propext",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.IsContractionOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.IsContractionOn.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.IsContractionOn.mapsTo": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.IsContractionOn.nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.IsContractionOn.lt_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.IsContractionOn.norm_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.IsContractionOn.fixedPt_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.IsContractionOn.iterate_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.IsContractionOn.norm_iterate_sub_fixedPt_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.IsContractionOn.tendsto_iterate_fixedPt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.IsContractionOn.exists_fixedPt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.IsContractionOn.globallyStable_univ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.fixedPt_le_of_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.le_fixedPt_of_le_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.isContractionOn_of_blackwell": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.abs_sup'_sub_sup'_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.pow_nonneg_entries": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.pow_le_pow_entries": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.complexify": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.complexify_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.complexify_pow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.complexify_transpose": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.nnnorm_complexify": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.norm_complexify": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.specRad": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.spectralRadius_complexify_ne_top": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.specRad_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.mem_spectrum_iff_eigenpair": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.tendsto_norm_pow_rpow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.eventually_norm_pow_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.tendsto_norm_pow_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.summable_pow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.one_sub_mul_tsum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.tsum_mul_one_sub": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.neumann_series": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.specRad_transpose": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.norm_le_norm_of_abs_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.specRad_le_of_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.rowsum_abs_le_norm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.norm_le_of_rowsum_abs_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.abs_entry_le_norm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.norm_eq_of_rowsum_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.specRad_le_norm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.norm_le_specRad_of_mem_spectrum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.specRad_eq_of_rowsum_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.specRad_eq_of_colsum_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.eventually_abs_entry_pow_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.resPartial": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.res": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.res_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.smul_one_sub_mul_resPartial": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.resPartial_mul_smul_one_sub": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.resPartial_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.summable_res_entry": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.tendsto_resPartial_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.tendsto_inv_pow_mul_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.smul_one_sub_mul_res": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.res_mul_smul_one_sub": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.res_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.inv_le_res_diag": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.exists_mem_spectrum_norm_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.eventually_norm_entry_pow_complexify_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.smul_one_sub_mul_res_real": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.norm_res_complexify_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.norm_le_card_mul_of_entry_norm_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.notMem_spectrum_of_res_bounded": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.exists_res_entry_gt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.isCompact_simplex": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.perron_frobenius": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.perron_frobenius_left": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.le_specRad_of_colsum_ge": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.specRad_le_of_colsum_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.le_specRad_of_rowsum_ge": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.specRad_le_of_rowsum_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.tendsto_rpow_one_div_natCast": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.norm_pow_mul_le_norm_mulVec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.tendsto_norm_pow_mulVec_rpow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.IsMarkov.specRad_eq_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.IsMarkov.exists_stationary": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.IsMarkov.not_mulVec_ge_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.Irreducible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.irreducible_of_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.Irreducible.transpose": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.pow_mulVec_eq_of_mulVec_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.Irreducible.pos_of_mulVec_eq_smul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.Irreducible.specRad_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.Irreducible.exists_pos_eigenvector": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.Irreducible.exists_pos_left_eigenvector": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.Irreducible.eq_specRad_of_mulVec_eq_smul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.Irreducible.exists_eq_smul_of_mulVec_eq_smul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.IsMarkov.exists_unique_stationary_of_irreducible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.vecMul_apply_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.IsMarkov.isDistribution_vecMul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.IsMarkov.sum_vecMul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.l1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.l1_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.norm_le_l1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.l1_vecMul_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.IsMarkov.sum_vecMul_pow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.IsMarkov.isDistribution_vecMul_pow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.l1_vecMul_pow_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.tendsto_vecMul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.vecMul_pow_of_vecMul_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.IsMarkov.tendsto_vecMul_pow_of_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.isDistribution_single": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.single_vecMul_eq_row": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.IsMarkov.tendsto_pow_apply_of_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.conjMarkov": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.conjMarkov_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.isMarkov_conjMarkov": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.conjMarkov_pow_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.tendsto_pow_of_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.discountOp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.discountOp_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.discountOp_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.pow_succ_mulVec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.discountOp_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.specRad_smul_isMarkov": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.summable_pow_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.summable_pow_mulVec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.mulVec_tsum_pow_mulVec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.tsum_pow_mulVec_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.eq_of_eq_add_mulVec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.inv_mulVec_eq_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.inv_mulVec_eq_tsum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.eq_add_mulVec_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.discountOp_value": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.specRad_discountOp_const_lt_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.firmDiscountOp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.firmValue_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.firmDiscountOp_mulVec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.MonotoneKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.monotone_firmValue": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.pow_mulVec_one_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.sup'_pow_mulVec_one_eq_norm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.tendsto_sup'_pow_mulVec_one_rpow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.norm_pow_eq_norm_pow_mulVec_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.specRad_le_norm_pow_rpow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.specRad_lt_one_iff_exists_norm_pow_mulVec_one_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.tendsto_norm_pow_mulVec_rpow'": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.tendsto_dotProduct_pow_mulVec_one_rpow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.productDiscountOp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.productDiscountOp_mulVec_comp_snd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.productDiscountOp_pow_mulVec_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.norm_comp_snd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.specRad_productDiscountOp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.specRad_productDiscountOp_isMarkov": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.specRad_lt_one_iff_existsUnique_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.globallyStable_of_iterate_contraction": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.globallyStable_of_iterate_contraction_univ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.exists_iterate_contraction_of_norm_equiv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.affineOp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.affineOp_iterate_sub": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.exists_isContractionOn_iterate_affineOp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.globallyStable_affineOp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.isFixedPt_affineOp_inv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.mulVec_le_mulVec_of_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.norm_abs_fun": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.norm_le_norm_of_abs_le_fun": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.abs_iterate_sub_le_pow_mulVec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.exists_isContractionOn_iterate_of_abs_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.globallyStable_of_abs_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.abs_sub_le_of_blackwell": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.exists_isContractionOn_iterate_of_blackwell": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.globallyStable_of_blackwell": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.SDMDP": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.SDMDP.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.SDMDP.\u0393": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.SDMDP.\u0393_nonempty": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.SDMDP.r": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.SDMDP.\u03b2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.SDMDP.\u03b2_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.SDMDP.P": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.SDMDP.P_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.SDMDP.P_rowsum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.SDMDP.Feasible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.SDMDP.IsFeasible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.SDMDP.Policy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.SDMDP.defaultPolicy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.SDMDP.policy_nonempty": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.SDMDP.P\u03c3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.SDMDP.P\u03c3_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.SDMDP.isMarkov_P\u03c3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.SDMDP.L\u03c3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.SDMDP.L\u03c3_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.SDMDP.L\u03c3_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.SDMDP.L\u03c3_eq_discountOp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.SDMDP.r\u03c3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.SDMDP.B": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.SDMDP.T\u03c3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.SDMDP.T\u03c3_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.SDMDP.T\u03c3_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.SDMDP.B_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.SDMDP.T\u03c3_monotone": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.SDMDP.SpectralCondition": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.SDMDP.spectralCondition_of_dominated": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.SDMDP.spectralCondition_of_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.SDMDP.v\u03c3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.SDMDP.v\u03c3_eq_inv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.SDMDP.iterate_T\u03c3_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.SDMDP.isUnit_one_sub_L\u03c3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.SDMDP.isFixedPt_v\u03c3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.SDMDP.eq_v\u03c3_of_isFixedPt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.SDMDP.existsUnique_fixedPt_T\u03c3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.SDMDP.v\u03c3_eq_tsum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.SDMDP.T\u03c3_eq_affineOp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.SDMDP.globallyStable_T\u03c3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.SDMDP.tendsto_iterate_T\u03c3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.fixedPt_le_of_apply_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.SDMDP.T": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.SDMDP.T_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.SDMDP.B_le_T": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.SDMDP.T\u03c3_le_T": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.SDMDP.T_monotone": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.SDMDP.IsGreedy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.SDMDP.greedy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.SDMDP.greedy_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.SDMDP.isGreedy_greedy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.SDMDP.greedyPolicy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.SDMDP.isGreedy_iff_T\u03c3_eq_T": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.SDMDP.T\u03c3_eq_T_of_isGreedy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.SDMDP.vstar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.SDMDP.v\u03c3_le_vstar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.SDMDP.IsOptimal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.SDMDP.vstar_le_T_vstar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.SDMDP.v\u03c3_eq_vstar_of_isGreedy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.SDMDP.isFixedPt_T_vstar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.SDMDP.eq_vstar_of_isFixedPt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.SDMDP.bellman_equation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.SDMDP.isOptimal_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.SDMDP.isOptimal_iff_isGreedy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.SDMDP.isOptimal_greedy_vstar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.SDMDP.exists_isOptimal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.SDMDP.hpi_update_eq_v\u03c3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.SDMDP.v\u03c3_le_v\u03c3_of_isGreedy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.SDMDP.isOptimal_of_hpi_fixed": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.SDMDP.opi_one_step_eq_vfi": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.SDMDP.tendsto_opi_inner": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.SDMDP.abs_T_sub_le_of_dominated": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.SDMDP.globallyStable_T_of_dominated": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.SDMDP.tendsto_iterate_T_of_dominated": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.Exogenous": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.Exogenous.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.Exogenous.\u0393": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.Exogenous.\u0393_nonempty": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.Exogenous.\u03b2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.Exogenous.\u03b2_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.Exogenous.r": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.Exogenous.Q": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.Exogenous.Q_markov": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.Exogenous.R": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.Exogenous.R_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.Exogenous.R_rowsum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.Exogenous.toSDMDP": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.Exogenous.LZ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.Exogenous.LZ_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.Exogenous.LZ_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.Exogenous.L\u03c3_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.Exogenous.specRad_L\u03c3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.Exogenous.spectralCondition": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.Exogenous.bellman_equation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.Exogenous.eq_vstar_of_isFixedPt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.Exogenous.isOptimal_iff_isGreedy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.Exogenous.exists_isOptimal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.Exogenous.colMax": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.Exogenous.abs_le_colMax": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.Exogenous.colMax_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.Exogenous.norm_eq_norm_colMax": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.Exogenous.abs_T_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.Exogenous.colMax_iterate_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.Exogenous.norm_iterate_T_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.Exogenous.exists_isContractionOn_iterate_T": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.Exogenous.globallyStable_T": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.Exogenous.tendsto_iterate_T": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.inventoryNext": [],
+    "SargentStachurski.StochasticDiscounting.inventoryNext_lt": [
+      "propext",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.geomPmf": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.geomPmf_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.summable_geomPmf": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.tsum_geomPmf": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.inventoryKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.summable_inventoryTerm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.inventoryKernel_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.sum_mul_inventoryKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.inventoryKernel_rowsum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.expectedRevenue": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.inventoryReward": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.inventorySDD": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.inventorySDD_mem_\u0393": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.inventorySDD_B_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.inventorySDD_B_apply'": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.inventorySDD_LZ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.inventorySDD_optimality": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.inventorySDD_bellman": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.markovPrice": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.adOp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.adOp_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.markovPrice_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.markovPrice_eq_adOp_mulVec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.IsExDivPrice": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.exDivPrice": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.isExDivPrice_exDivPrice": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.eq_exDivPrice_of_isExDivPrice": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.exDivPrice_eq_tsum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.adOp_mulVec_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.specRad_lt_one_iff_existsUnique_pos_exDivPrice": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.specRad_adOp_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.IsCumDivPrice": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.cumDivPrice": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.isCumDivPrice_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.cumDivPrice_eq_tsum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.cumDivPrice_eq_add_exDivPrice": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.price_dividend_ratio": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.pdOp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.IsPDRatio": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.isPDRatio_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.pdRatio_eq_tsum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.integral_exp_add_mul_gaussian": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.lucas_growth_factor": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.hkOp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.hkOp_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.isFixedPt_hkOp_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.nonnegFns": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.isClosed_nonnegFns": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.hkOp_mapsTo": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.abs_hkOp_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.isContractionOn_hkOp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.existsUnique_hk_price": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.hkOp_monotone": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.hkOp_add_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "SargentStachurski.StochasticDiscounting.isContractionOn_hkOp_univ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  "source_sha256": {
+    "StochasticDiscounting/Basics.lean": "35cf932c011f6decc76beef81a80c5b7b54093e9c69e4b831f5244eabbb4a0ea",
+    "StochasticDiscounting/SpectralRadius.lean": "19d384acd816e89c565f5178ec2fbb294e993ce2a8a4dfa5eee2684ba01ccb8b",
+    "StochasticDiscounting/Resolvent.lean": "7c239ebf3109c0cf76273fb0d4f747221a231368769920de0c63302ac964828f",
+    "StochasticDiscounting/PerronFrobenius.lean": "71acdd84dced906bf70990902f80e02b635cefcf353cc372cfaffe5cdde884fc",
+    "StochasticDiscounting/Irreducible.lean": "eaf77390e6d2674ce4982fba856f87554a2de820d5656066ecee461c93484a6f",
+    "StochasticDiscounting/PositiveMatrices.lean": "491d053fd29d6ee2bac4300cdc3367858e0ee7968d64a0291456bbdfb3f89da2",
+    "StochasticDiscounting/Valuation.lean": "698632d97c28f8f248a82928801827105e84cb21ef1a6bee0721c510cf322db2",
+    "StochasticDiscounting/EventualContraction.lean": "d9720fb178043ca27888d5cc8b87a5791fe2638e95ad0b35063b146a04fee290",
+    "StochasticDiscounting/SDMDP.lean": "f5e1b4761243809fb77df2f81d420eaa420169cf49f128ca468bbfcdf521cc27",
+    "StochasticDiscounting/Optimality.lean": "be14f6d9351f387e7f8dfb8dfe2ca34bc67d99c0b84d4dbf9df48816c68046b7",
+    "StochasticDiscounting/ExogenousDiscounting.lean": "49e699da1bf6eb04b6f9390ec33828d5d492eace31224663f1b452c246fede6e",
+    "StochasticDiscounting/Inventory.lean": "759a7b22eb55a391b319864deafd75e5f60a9c74fd379a7328ec3004e3808e74",
+    "StochasticDiscounting/AssetPricing.lean": "3e45e5faff1ea6a1e1ffb809e35edc717e29c99d9e3069df67e43b6db7b29f48",
+    "StochasticDiscounting/HarrisonKreps.lean": "a59ca79f8e2d9c507966f2d19c38fa1f44d4c288f072ef57f4fddcbe530f8d4a",
+    "StochasticDiscounting.lean": "62f3d62ef047773206b4f49c89a4688af818a0fccaada8f70236193b876c3eb2",
+    "lean-toolchain": "8733782dc070a99b312039cda424f601b80f3be6f6f512627da5ba25adc27632",
+    "lakefile.toml": "24869afd307c6535bdded6ac7de5edd1c7956b028623c54977ed748ff0660e7a",
+    "lake-manifest.json": "84e960af0b4dc955cb7d68186a0be0b7b1f5aa354a95347dc930c374eeb7d7fa",
+    "proof-manifest.json": "a00034cc54ced3c19061a603c2a17192db43d60684701276fe4cbad607bfcbcc",
+    "scripts/verify.py": "a70b1fa704dd590f937f8b37682afa88a9d85a9150065acb935c7d2c9589da3b",
+    "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  },
+  "fresh_audit_sha256": "b0ace9072044df0eaa8ec7e42cfbb4a77944232810f8a0454acddfc8692acd3b",
+  "lean_toolchain": "leanprover/lean4:v4.34.0",
+  "scope": "Sargent and Stachurski, Dynamic Programming, Volume 1 (Finite States), Chapter 6: Stochastic Discounting. The spectral radius, Neumann series and Perron-Frobenius theorem on a general finite state space, including the irreducible case (positive and unique eigenvectors, the unique positive stationary distribution of an irreducible Markov matrix) and the everywhere-positive case with the convergence rho(A)^(-t) A^t -> e eps^T deferred from Chapter 2; lifetime valuation with time-varying discount factors (Theorem 6.1.1), the spectral radius via expected discount factors (Lemma 6.1.2), discounting that depends on a component of the state (Lemma 6.1.3), necessity of the spectral radius condition (Lemma 6.1.4); eventual contractions (Theorem 6.1.5, Propositions 6.1.6-6.1.7); MDPs with state-dependent discounting, Lemma 6.2.1 and Proposition 6.2.2 on optimality, the HPI and OPI steps, convergence of value function iteration under a dominating discount operator; exogenous discounting (Proposition 6.2.3) with convergent VFI; the inventory model with time-varying interest rates; Markov asset pricing of stationary and growing dividend streams with the Lucas SDF and Gaussian shocks; the Harrison-Kreps pricing operator; and the provable exercises.",
+  "source": "Thomas J. Sargent and John Stachurski, Dynamic Programming, Volume 1: Finite States, Chapter 6, pp. 182-212; Theorem 2.3.1, p. 69."
+}
