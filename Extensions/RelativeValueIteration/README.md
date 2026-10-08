@@ -11,7 +11,7 @@ rate `β` — slowly. Since policies depend only on value *differences*, iterati
 enough, and differences converge at rate `β` times the rate at which the state forgets its past.
 This is relative value iteration (White, 1963; Morton and Wecker, 1977; Bray, 2019a). When some
 state variables are exogenous, it is enough to iterate on differences *within* each exogenous
-state: endogenous value iteration (Bray, 2019b). The library contains **143 theorems**.
+state: endogenous value iteration (Bray, 2019b). The library contains **175 theorems**.
 
 * **Relative value iteration**: `T(v + c) = Tv + βc` and greedy policies ignore constants
   (`isGreedy_add_const_iff`); relative value iteration is value iteration up to a constant
@@ -43,6 +43,17 @@ state: endogenous value iteration (Bray, 2019b). The library contains **143 theo
   `βρ(ΛP_{σ*})` (`endo_asymptotic_rate`), endogenous policy evaluation at rate `βρ(ΛP_σ)`
   (`endo_policy_eval_le`), and `ρ(ΛF) ≤ λ(F)` (`endoRadius_le_subradius`; Bray, 2019b, Prop 4).
   These are Bray's `O⁺` rates exactly: `O⁺(λⁿ)` means `O((λ + ε)ⁿ)` for every `ε > 0`.
+* **When endogenous iteration is strictly faster** (Bray, 2019b, Prop 5 and Cors 2–4): the whole
+  chain mixes no faster than its exogenous part, `σ(F_x) ≤ σ(P_σ)` (`subradius_FxMat_le`, via
+  `spectrum_exo_subset`); for any vector norm, `ρ(ΛP_σ)` is at most the largest operator norm of
+  the demeaned endogenous transitions `ΩF_y(σ, x)` (`endoRadius_le_of_vecNorm`), so endogenous
+  iteration is strictly faster whenever `σ(F_x)` exceeds that bound
+  (`endoRadius_lt_subradius_of_vecNorm`, `endo_strictly_faster`, `endo_eval_strictly_faster`).
+  The bound may be the largest absolute row sum (`endoRadius_le_rowSum`) or the Hajnal coefficient
+  (`endoRadius_le_hajnal`). Endogenous iteration is strictly faster when `F_x` is not ergodic and
+  every `F_y(σ, x)` is scrambling (`endoRadius_lt_of_nonergodic_scrambling`), and, when `F_y` does
+  not depend on `x`, whenever `σ(F_x) > σ(F_y)` (`endoRadius_le_subradius_Fy`,
+  `endoRadius_lt_of_Fy_const`).
 * **An example** (`relative_slow_endogenous_exact`): with a seasonal exogenous cycle, relative value
   iteration converges no faster than `βⁿ`, while endogenous value iteration is exact at once.
 
@@ -67,6 +78,7 @@ policy has been found.
 | [Subradius](RelativeValueIteration/Subradius.lean) | 15 | The subradius: eigenvalue characterization, span bound, Dobrushin bound |
 | [AsymptoticRates](RelativeValueIteration/AsymptoticRates.lean) | 12 | Policy freezing; Morton–Wecker asymptotic rate of relative VFI; levels no faster than `β` |
 | [AsymptoticEndogenous](RelativeValueIteration/AsymptoticEndogenous.lean) | 16 | Asymptotic rate of endogenous VFI; `ρ(ΛF) ≤ λ(F)` |
+| [EndogenousSpeedup](RelativeValueIteration/EndogenousSpeedup.lean) | 32 | When endogenous VFI is strictly faster: Bray's Prop 5 and Cors 2–4 |
 
 ## Build and verify
 

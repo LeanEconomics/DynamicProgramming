@@ -57,11 +57,27 @@ see [departures from the sources](corrections.md).
 | — (complement to Bray (2019a), Prop 3) | Value levels converge no faster than `β` | `MDP.level_rate_lower` |
 | Bray (2019b), Prop 4 | Endogenous values converge at rate `βρ(ΛP_{σ*})`, endogenous policy evaluation at rate `βρ(ΛP_σ)`, and `ρ(ΛF) ≤ λ(F)` | `ExoMDP.endo_idem`, `ExoMDP.endo_lift`, `ExoMDP.PreservesLift`, `ExoMDP.endo_mulVec_endo`, `ExoMDP.spy_le_two_norm_endo`, `ExoMDP.norm_endo_le`, `ExoMDP.spy_mul_le`, `ExoMDP.lamMat`, `ExoMDP.lamMat_mulVec`, `ExoMDP.endoRadius`, `ExoMDP.PreservesLift.pow`, `ExoMDP.lamF_pow_endo`, `ExoMDP.spy_pow_mulVec_le`, `ExoMDP.endoRadius_le_subradius`, `ExoMDP.Pmat_preservesLift`, `ExoMDP.endo_policy_eval_le`, `ExoMDP.endo_asymptotic_rate`, `ExoMDP.endo_values_asymptotic_rate`, `ExoMDP.endoRadius_policy_le` |
 
+## When endogenous value iteration is strictly faster
+
+| Source | Claim | Lean |
+| --- | --- | --- |
+| — (standard) | Spectral radii from eigenvalue bounds; spectra and spectral radii; powers of stochastic matrices are stochastic | `specRad_le_of_eigen`, `norm_le_specRad`, `specRad_mono_of_spectrum`, `IsStochastic.pow` |
+| Puterman (2005), App. A | A chain that is not ergodic (a non-constant fixed vector, or an eigenvalue `μ ≠ 1` with `|μ| = 1`) has subradius at least one | `one_le_subradius_of_nonergodic` |
+| Horn and Johnson (2013), §5.1 | Vector norms on `ℂ^Y` | `IsVecNorm`, `IsVecNorm.zero`, `IsVecNorm.nonneg`, `IsVecNorm.pos`, `IsVecNorm.sum_le`, `IsVecNorm.smul_real`, `IsVecNorm.sup_norm` |
+| Bray (2019b), §3 | The exogenous and endogenous transition matrices `F_x`, `F_y(σ, x)`, the demeaning matrix `Ω`, and `P_σ` in terms of them | `ExoMDP.omegaMat`, `ExoMDP.comega_mulVec`, `ExoMDP.clamMat_mulVec`, `ExoMDP.FxMat`, `ExoMDP.FxMat_isStochastic`, `ExoMDP.FyMat`, `ExoMDP.FyMat_isStochastic`, `ExoMDP.Pmat_apply`, `ExoMDP.cPmat_mulVec_lift`, `ExoMDP.clamP_mulVec` |
+| Bray (2019b), Lemma 4 | Every eigenvalue of `Δ_X F_x` is an eigenvalue of `ΔF(p)`, so `σ(F_x) ≤ σ(F(p))` | `ExoMDP.spectrum_exo_subset`, `ExoMDP.subradius_FxMat_le` |
+| Bray (2019b), Prop 5 | `ρ(ΛF(p)) ≤ max_x ‖ΩF_y(p, x)‖`; endogenous iteration is strictly faster when `σ(F_x)` exceeds this bound | `ExoMDP.endoRadius_le_of_vecNorm`, `ExoMDP.endoRadius_lt_subradius_of_vecNorm`, `ExoMDP.endo_strictly_faster`, `ExoMDP.endo_eval_strictly_faster` |
+| Bray (2019b), Cor 2(c) | The bound under the maximum absolute row sum norm | `ExoMDP.endoRadius_le_rowSum` |
+| Bray (2019b), Cor 2(e); Hajnal (1958) | The bound under the Hajnal seminorm | `ExoMDP.spy_Pmat_mulVec_le`, `ExoMDP.endoRadius_le_hajnal` |
+| Bray (2019b), Cor 3; Hajnal (1958) | Non-ergodic `F_x` and scrambling `F_y(p, x)`: endogenous iteration is strictly faster | `ExoMDP.exists_hajnal_lt_one`, `ExoMDP.endoRadius_lt_of_nonergodic_scrambling` |
+| Bray (2019b), Cor 4 | If `F_y(p, x) = F_y(p)` for all `x`, endogenous iteration is strictly faster when `σ(F_x) > σ(F_y(p))` | `ExoMDP.Pmat_pow_mulVec_of_Fy_const`, `ExoMDP.endoRadius_le_subradius_Fy`, `ExoMDP.endoRadius_lt_of_Fy_const` |
+
 ## Not formalised
 
 | Source | Content | Reason |
 | --- | --- | --- |
-| Bray (2019b), Prop 5 | Sufficient conditions, in terms of `σ(F_x)` and matrix norms of `F_y`, for endogenous VFI to be strictly faster | Out of scope; `relative_slow_endogenous_exact` is a worked instance. |
+| Bray (2019b), Cor 2(a), (b), (d) | The Frobenius, spectral and maximum-column-sum instances of Prop 5 | Covered by `endoRadius_le_of_vecNorm` with the corresponding vector norms, which are not constructed here. |
+| Bray (2019b), Lemma 7 | `σ(F) = ρ(ΩF)` | Not needed: Cor 4 is proved directly from the subradius. |
 | Bray (2019a), Props 6–9 | Bias and variance of simulation-based policy evaluation | Out of scope. |
 | Bray (2019a), §4; Bray (2019b) | Relative and endogenous policy iteration; simulation-based evaluation | Out of scope. |
 | — | The vanishing-discount limit `(1 − β)v*_β → g` | Not needed for White's theorem. |

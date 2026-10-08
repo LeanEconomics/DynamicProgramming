@@ -14,3 +14,4 @@ import RelativeValueIteration.SpectralRadius
 import RelativeValueIteration.Subradius
 import RelativeValueIteration.AsymptoticRates
 import RelativeValueIteration.AsymptoticEndogenous
+import RelativeValueIteration.EndogenousSpeedup

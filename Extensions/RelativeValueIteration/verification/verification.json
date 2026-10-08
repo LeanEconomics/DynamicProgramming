@@ -1,6 +1,6 @@
 {
-  "checked_at_utc": "2026-10-08T20:13:16.848222+00:00",
-  "theorems": 143,
+  "checked_at_utc": "2026-10-08T20:39:23.217408+00:00",
+  "theorems": 175,
   "module_theorems": {
     "RelativeValueIteration/Span.lean": 9,
     "RelativeValueIteration/MDP.lean": 14,
@@ -12,9 +12,10 @@
     "RelativeValueIteration/SpectralRadius.lean": 12,
     "RelativeValueIteration/Subradius.lean": 15,
     "RelativeValueIteration/AsymptoticRates.lean": 12,
-    "RelativeValueIteration/AsymptoticEndogenous.lean": 16
+    "RelativeValueIteration/AsymptoticEndogenous.lean": 16,
+    "RelativeValueIteration/EndogenousSpeedup.lean": 32
   },
-  "audited_declarations": 194,
+  "audited_declarations": 230,
   "declarations": [
     {
       "name": "DPExtensions.RelativeValueIteration.sp",
@@ -985,6 +986,186 @@
       "name": "DPExtensions.RelativeValueIteration.ExoMDP.endoRadius_policy_le",
       "kind": "theorem",
       "module": "RelativeValueIteration/AsymptoticEndogenous.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.specRad_le_of_eigen",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.norm_le_specRad",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.specRad_mono_of_spectrum",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.IsStochastic.pow",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.one_le_subradius_of_nonergodic",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.IsVecNorm",
+      "kind": "def",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.IsVecNorm.zero",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.IsVecNorm.nonneg",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.IsVecNorm.pos",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.IsVecNorm.sum_le",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.IsVecNorm.smul_real",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.IsVecNorm.sup_norm",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.omegaMat",
+      "kind": "def",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.comega_mulVec",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.clamMat_mulVec",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.FxMat",
+      "kind": "def",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.FxMat_isStochastic",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.FyMat",
+      "kind": "def",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.FyMat_isStochastic",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.Pmat_apply",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.cPmat_mulVec_lift",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.spectrum_exo_subset",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.subradius_FxMat_le",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.clamP_mulVec",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.endoRadius_le_of_vecNorm",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.endoRadius_lt_subradius_of_vecNorm",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.endo_strictly_faster",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.endo_eval_strictly_faster",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.endoRadius_le_rowSum",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.spy_Pmat_mulVec_le",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.endoRadius_le_hajnal",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.exists_hajnal_lt_one",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.endoRadius_lt_of_nonergodic_scrambling",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.Pmat_pow_mulVec_of_Fy_const",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.endoRadius_le_subradius_Fy",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.endoRadius_lt_of_Fy_const",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
     }
   ],
   "full_build": "passed",
@@ -1963,6 +2144,186 @@
       "propext",
       "Classical.choice",
       "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.specRad_le_of_eigen": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.norm_le_specRad": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.specRad_mono_of_spectrum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.IsStochastic.pow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.one_le_subradius_of_nonergodic": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.IsVecNorm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.IsVecNorm.zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.IsVecNorm.nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.IsVecNorm.pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.IsVecNorm.sum_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.IsVecNorm.smul_real": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.IsVecNorm.sup_norm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.omegaMat": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.comega_mulVec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.clamMat_mulVec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.FxMat": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.FxMat_isStochastic": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.FyMat": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.FyMat_isStochastic": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.Pmat_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.cPmat_mulVec_lift": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.spectrum_exo_subset": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.subradius_FxMat_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.clamP_mulVec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.endoRadius_le_of_vecNorm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.endoRadius_lt_subradius_of_vecNorm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.endo_strictly_faster": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.endo_eval_strictly_faster": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.endoRadius_le_rowSum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.spy_Pmat_mulVec_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.endoRadius_le_hajnal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.exists_hajnal_lt_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.endoRadius_lt_of_nonergodic_scrambling": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.Pmat_pow_mulVec_of_Fy_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.endoRadius_le_subradius_Fy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.endoRadius_lt_of_Fy_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
     ]
   },
   "source_sha256": {
@@ -1977,16 +2338,17 @@
     "RelativeValueIteration/Subradius.lean": "12511bb06344dc8b546372f93090c0cf7f7009b308e626c0a344f6b093882ed8",
     "RelativeValueIteration/AsymptoticRates.lean": "8d1f96a29d3ecf9031cf956d0c03a800f3cba1c57307a7f750d25caa1b2a45c3",
     "RelativeValueIteration/AsymptoticEndogenous.lean": "3b2ab761ae94cce2dd4037d75fc4148fb91a11dba9c5a5a123132505f024bcea",
-    "RelativeValueIteration.lean": "65287e1f1e5465ea67b2081e0e4d6768e3a3dc1c40324a88b1339202cbb3ca49",
+    "RelativeValueIteration/EndogenousSpeedup.lean": "ede33b7b1c1a233f57cfce360768509cb8f043fac9748e3e9aea8d42c63440b8",
+    "RelativeValueIteration.lean": "e0d09141f6bef8bd47190128d0fc339cd3f07dd84eb3cd0a13abe75ffc048ded",
     "lean-toolchain": "8733782dc070a99b312039cda424f601b80f3be6f6f512627da5ba25adc27632",
     "lakefile.toml": "5d07e4f1da1aeb0d356957e5a10d337c00aab208ded65204fa99a338473977b6",
     "lake-manifest.json": "b4496a1d723d3dcaad1d8ae35cd1892d23d27c65253cbdea38636107c5b1d15e",
-    "proof-manifest.json": "bf1a70486d6ebbcca97324518fcc6ceec3fb3de59a16a0c48ecfc15a079a4dff",
+    "proof-manifest.json": "2118c33820b6b7bcca6436242d9ae66405c004a36b143b7369f4ab37b912d155",
     "scripts/verify.py": "a70b1fa704dd590f937f8b37682afa88a9d85a9150065acb935c7d2c9589da3b",
     "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
   },
-  "fresh_audit_sha256": "04263ce4d1bd8e61106e61b54d5935c1e6d37fb8ccb950438583e6e40b8b068f",
+  "fresh_audit_sha256": "f7d171dd57bae2e0916318a0fb1a9104838a5a7cb19886f85decda50b611e31d",
   "lean_toolchain": "leanprover/lean4:v4.34.0",
-  "scope": "Relative and endogenous value function iteration for finite MDPs: the span seminorm and the Dobrushin bound; constant-shift invariance of the Bellman operator and of greedy policies (White), relative value iteration as value iteration up to a constant, the span contraction sp(Tv - Tw) <= beta alpha sp(v - w); strong convergence of relative values at rate beta alpha, the MacQueen-Porteus policy error bound, Bray's stopping rule and its finite termination; White's average-reward theorem (beta = 1, alpha < 1): convergence to a solution of the average-reward optimality equation, optimality and uniqueness of the gain; endogenous value iteration for exogenous/endogenous state splits (Bray): invariance to exogenous shifts, the endogenizing operator, the within-x span contraction at rate beta alpha_y with alpha_y bounded by the full Dobrushin bound, recovery of v* and optimal policies from the endogenous value, the policy error bound, and an example where relative VFI gives no speed-up but endogenous VFI is exact; asymptotic eigenvalue rates: spectral radius of real matrices and Gelfand's formula, the subradius rho(Delta Q) as the second-largest eigenvalue modulus (no Jordan block at 1) bounded by the Dobrushin coefficient, freezing of the greedy policy at a unique optimal decision rule, the Morton-Wecker rate beta lambda(P*) for relative values and Morton's rate for policy evaluation, levels no faster than beta, and the endogenous rates beta rho(Lambda P) with rho(Lambda F) <= lambda(F) (Bray).",
-  "source": "White (1963); Morton (1971); Morton and Wecker (1977); MacQueen (1966); Porteus (1971); Seneta (1981); Puterman (2005); Bray (2019, Quantitative Economics); Bray (2019, Management Science)."
+  "scope": "Relative and endogenous value function iteration for finite MDPs: the span seminorm and the Dobrushin bound; constant-shift invariance of the Bellman operator and of greedy policies (White), relative value iteration as value iteration up to a constant, the span contraction sp(Tv - Tw) <= beta alpha sp(v - w); strong convergence of relative values at rate beta alpha, the MacQueen-Porteus policy error bound, Bray's stopping rule and its finite termination; White's average-reward theorem (beta = 1, alpha < 1): convergence to a solution of the average-reward optimality equation, optimality and uniqueness of the gain; endogenous value iteration for exogenous/endogenous state splits (Bray): invariance to exogenous shifts, the endogenizing operator, the within-x span contraction at rate beta alpha_y with alpha_y bounded by the full Dobrushin bound, recovery of v* and optimal policies from the endogenous value, the policy error bound, and an example where relative VFI gives no speed-up but endogenous VFI is exact; asymptotic eigenvalue rates: spectral radius of real matrices and Gelfand's formula, the subradius rho(Delta Q) as the second-largest eigenvalue modulus (no Jordan block at 1) bounded by the Dobrushin coefficient, freezing of the greedy policy at a unique optimal decision rule, the Morton-Wecker rate beta lambda(P*) for relative values and Morton's rate for policy evaluation, levels no faster than beta, and the endogenous rates beta rho(Lambda P) with rho(Lambda F) <= lambda(F) (Bray); when endogenous VFI is strictly faster (Bray): every eigenvalue of Delta_X F_x is one of Delta P so sigma(F_x) <= sigma(P), rho(Lambda P) bounded by any vector-norm operator bound on Omega F_y(x), the row-sum and Hajnal instances, non-ergodic F_x with scrambling F_y, and x-independent F_y with sigma(F_x) > sigma(F_y).",
+  "source": "White (1963); Morton (1971); Morton and Wecker (1977); MacQueen (1966); Porteus (1971); Seneta (1981); Puterman (2005); Bray (2019, Quantitative Economics); Bray (2019, Management Science); Hajnal (1958); Horn and Johnson (2013)."
 }
