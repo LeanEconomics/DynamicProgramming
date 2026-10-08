@@ -1,6 +1,6 @@
 {
-  "checked_at_utc": "2026-10-08T08:49:39.670228+00:00",
-  "theorems": 88,
+  "checked_at_utc": "2026-10-08T20:13:16.848222+00:00",
+  "theorems": 143,
   "module_theorems": {
     "RelativeValueIteration/Span.lean": 9,
     "RelativeValueIteration/MDP.lean": 14,
@@ -8,9 +8,13 @@
     "RelativeValueIteration/RelativeVI.lean": 12,
     "RelativeValueIteration/AverageReward.lean": 9,
     "RelativeValueIteration/Endogenous.lean": 24,
-    "RelativeValueIteration/Example.lean": 7
+    "RelativeValueIteration/Example.lean": 7,
+    "RelativeValueIteration/SpectralRadius.lean": 12,
+    "RelativeValueIteration/Subradius.lean": 15,
+    "RelativeValueIteration/AsymptoticRates.lean": 12,
+    "RelativeValueIteration/AsymptoticEndogenous.lean": 16
   },
-  "audited_declarations": 130,
+  "audited_declarations": 194,
   "declarations": [
     {
       "name": "DPExtensions.RelativeValueIteration.sp",
@@ -661,6 +665,326 @@
       "name": "DPExtensions.RelativeValueIteration.relative_slow_endogenous_exact",
       "kind": "theorem",
       "module": "RelativeValueIteration/Example.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.complexify",
+      "kind": "def",
+      "module": "RelativeValueIteration/SpectralRadius.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.complexify_apply",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/SpectralRadius.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.complexify_pow",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/SpectralRadius.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.complexify_mul",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/SpectralRadius.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.nnnorm_complexify",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/SpectralRadius.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.norm_complexify",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/SpectralRadius.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.specRad",
+      "kind": "def",
+      "module": "RelativeValueIteration/SpectralRadius.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.spectralRadius_complexify_ne_top",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/SpectralRadius.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.specRad_nonneg",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/SpectralRadius.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.mem_spectrum_iff_eigenpair",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/SpectralRadius.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.tendsto_norm_pow_rpow",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/SpectralRadius.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.eventually_norm_pow_le",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/SpectralRadius.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.exists_norm_pow_le",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/SpectralRadius.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.specRad_le_of_norm_pow_le",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/SpectralRadius.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.deltaMat",
+      "kind": "def",
+      "module": "RelativeValueIteration/Subradius.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.IsStochastic",
+      "kind": "def",
+      "module": "RelativeValueIteration/Subradius.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.subradius",
+      "kind": "def",
+      "module": "RelativeValueIteration/Subradius.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.deltaMat_mulVec",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/Subradius.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.cdelta_mulVec",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/Subradius.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.mulVec_const",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/Subradius.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.cmulVec_const",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/Subradius.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.norm_cmulVec_le",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/Subradius.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.no_jordan_one",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/Subradius.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.complexify_deltaQ_mulVec",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/Subradius.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.mem_spectrum_deltaQ_iff",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/Subradius.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.spectralRadius_deltaQ",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/Subradius.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.sp_deltaMat_mulVec",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/Subradius.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.norm_deltaMat_mulVec_le",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/Subradius.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.sp_le_two_norm",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/Subradius.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.deltaQ_pow_mulVec",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/Subradius.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.sp_pow_mulVec_le",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/Subradius.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.subradius_le_dobrushin",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/Subradius.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.sp_mul_le",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/AsymptoticRates.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.Pmat",
+      "kind": "def",
+      "module": "RelativeValueIteration/AsymptoticRates.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.Pmat_isStochastic",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/AsymptoticRates.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.T\u03c3_sub",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/AsymptoticRates.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.T\u03c3_iterate_sub",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/AsymptoticRates.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.sp_policy_eval_le",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/AsymptoticRates.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.eventually_T_eq_T\u03c3",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/AsymptoticRates.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.norm_iterate_sub_vstar_le",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/AsymptoticRates.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.eventually_linear",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/AsymptoticRates.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.relative_asymptotic_rate",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/AsymptoticRates.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.rel_asymptotic_rate",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/AsymptoticRates.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.level_rate_lower",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/AsymptoticRates.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.subradius_policy_le",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/AsymptoticRates.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.endo_idem",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/AsymptoticEndogenous.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.endo_lift",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/AsymptoticEndogenous.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.PreservesLift",
+      "kind": "def",
+      "module": "RelativeValueIteration/AsymptoticEndogenous.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.endo_mulVec_endo",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/AsymptoticEndogenous.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.spy_le_two_norm_endo",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/AsymptoticEndogenous.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.norm_endo_le",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/AsymptoticEndogenous.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.spy_mul_le",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/AsymptoticEndogenous.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.lamMat",
+      "kind": "def",
+      "module": "RelativeValueIteration/AsymptoticEndogenous.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.lamMat_mulVec",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/AsymptoticEndogenous.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.endoRadius",
+      "kind": "def",
+      "module": "RelativeValueIteration/AsymptoticEndogenous.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.PreservesLift.pow",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/AsymptoticEndogenous.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.lamF_pow_endo",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/AsymptoticEndogenous.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.spy_pow_mulVec_le",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/AsymptoticEndogenous.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.endoRadius_le_subradius",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/AsymptoticEndogenous.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.Pmat_preservesLift",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/AsymptoticEndogenous.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.endo_policy_eval_le",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/AsymptoticEndogenous.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.endo_asymptotic_rate",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/AsymptoticEndogenous.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.endo_values_asymptotic_rate",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/AsymptoticEndogenous.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.endoRadius_policy_le",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/AsymptoticEndogenous.lean"
     }
   ],
   "full_build": "passed",
@@ -1319,6 +1643,326 @@
       "propext",
       "Classical.choice",
       "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.complexify": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.complexify_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.complexify_pow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.complexify_mul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.nnnorm_complexify": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.norm_complexify": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.specRad": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.spectralRadius_complexify_ne_top": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.specRad_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.mem_spectrum_iff_eigenpair": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.tendsto_norm_pow_rpow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.eventually_norm_pow_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.exists_norm_pow_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.specRad_le_of_norm_pow_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.deltaMat": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.IsStochastic": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.subradius": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.deltaMat_mulVec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.cdelta_mulVec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.mulVec_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.cmulVec_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.norm_cmulVec_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.no_jordan_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.complexify_deltaQ_mulVec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.mem_spectrum_deltaQ_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.spectralRadius_deltaQ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.sp_deltaMat_mulVec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.norm_deltaMat_mulVec_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.sp_le_two_norm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.deltaQ_pow_mulVec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.sp_pow_mulVec_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.subradius_le_dobrushin": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.sp_mul_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.Pmat": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.Pmat_isStochastic": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.T\u03c3_sub": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.T\u03c3_iterate_sub": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.sp_policy_eval_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.eventually_T_eq_T\u03c3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.norm_iterate_sub_vstar_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.eventually_linear": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.relative_asymptotic_rate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.rel_asymptotic_rate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.level_rate_lower": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.subradius_policy_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.endo_idem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.endo_lift": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.PreservesLift": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.endo_mulVec_endo": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.spy_le_two_norm_endo": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.norm_endo_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.spy_mul_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.lamMat": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.lamMat_mulVec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.endoRadius": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.PreservesLift.pow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.lamF_pow_endo": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.spy_pow_mulVec_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.endoRadius_le_subradius": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.Pmat_preservesLift": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.endo_policy_eval_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.endo_asymptotic_rate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.endo_values_asymptotic_rate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.endoRadius_policy_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
     ]
   },
   "source_sha256": {
@@ -1329,16 +1973,20 @@
     "RelativeValueIteration/AverageReward.lean": "44c2e055a3e3d0d67f13a95a15f64cf4f934159c44fce399845e08ef31187617",
     "RelativeValueIteration/Endogenous.lean": "9ea281b53e672dcf7b7a7508778fd5e3a7dc3aeee0a62b5fe50034c9dfb5c136",
     "RelativeValueIteration/Example.lean": "129679262d449a00a409dd92d312c9bd4058192778aac0cd7199d705da63016f",
-    "RelativeValueIteration.lean": "93afbee01abc724565d5a27942960db145d90db5f2422ecbd5da234f62743e69",
+    "RelativeValueIteration/SpectralRadius.lean": "76771ef33506cffeb3bb2102b09d9dc7792f63a46a4b8671a7dc7c65becda191",
+    "RelativeValueIteration/Subradius.lean": "12511bb06344dc8b546372f93090c0cf7f7009b308e626c0a344f6b093882ed8",
+    "RelativeValueIteration/AsymptoticRates.lean": "8d1f96a29d3ecf9031cf956d0c03a800f3cba1c57307a7f750d25caa1b2a45c3",
+    "RelativeValueIteration/AsymptoticEndogenous.lean": "3b2ab761ae94cce2dd4037d75fc4148fb91a11dba9c5a5a123132505f024bcea",
+    "RelativeValueIteration.lean": "65287e1f1e5465ea67b2081e0e4d6768e3a3dc1c40324a88b1339202cbb3ca49",
     "lean-toolchain": "8733782dc070a99b312039cda424f601b80f3be6f6f512627da5ba25adc27632",
     "lakefile.toml": "5d07e4f1da1aeb0d356957e5a10d337c00aab208ded65204fa99a338473977b6",
     "lake-manifest.json": "b4496a1d723d3dcaad1d8ae35cd1892d23d27c65253cbdea38636107c5b1d15e",
-    "proof-manifest.json": "d7acacc70455de00bc795ac17b43b2b4ac0e2f3c2c3dd104cfd1d00d1696fa2c",
+    "proof-manifest.json": "bf1a70486d6ebbcca97324518fcc6ceec3fb3de59a16a0c48ecfc15a079a4dff",
     "scripts/verify.py": "a70b1fa704dd590f937f8b37682afa88a9d85a9150065acb935c7d2c9589da3b",
     "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
   },
-  "fresh_audit_sha256": "6e228cda81b383940a871b64962cd404c8b479e0ad5ba7150485fb39388db645",
+  "fresh_audit_sha256": "04263ce4d1bd8e61106e61b54d5935c1e6d37fb8ccb950438583e6e40b8b068f",
   "lean_toolchain": "leanprover/lean4:v4.34.0",
-  "scope": "Relative and endogenous value function iteration for finite MDPs: the span seminorm and the Dobrushin bound; constant-shift invariance of the Bellman operator and of greedy policies (White), relative value iteration as value iteration up to a constant, the span contraction sp(Tv - Tw) <= beta alpha sp(v - w); strong convergence of relative values at rate beta alpha, the MacQueen-Porteus policy error bound, Bray's stopping rule and its finite termination; White's average-reward theorem (beta = 1, alpha < 1): convergence to a solution of the average-reward optimality equation, optimality and uniqueness of the gain; endogenous value iteration for exogenous/endogenous state splits (Bray): invariance to exogenous shifts, the endogenizing operator, the within-x span contraction at rate beta alpha_y with alpha_y bounded by the full Dobrushin bound, recovery of v* and optimal policies from the endogenous value, the policy error bound, and an example where relative VFI gives no speed-up but endogenous VFI is exact.",
-  "source": "White (1963); Morton and Wecker (1977); MacQueen (1966); Porteus (1971); Puterman (2005); Bray (2019, Quantitative Economics); Bray (2019, Management Science)."
+  "scope": "Relative and endogenous value function iteration for finite MDPs: the span seminorm and the Dobrushin bound; constant-shift invariance of the Bellman operator and of greedy policies (White), relative value iteration as value iteration up to a constant, the span contraction sp(Tv - Tw) <= beta alpha sp(v - w); strong convergence of relative values at rate beta alpha, the MacQueen-Porteus policy error bound, Bray's stopping rule and its finite termination; White's average-reward theorem (beta = 1, alpha < 1): convergence to a solution of the average-reward optimality equation, optimality and uniqueness of the gain; endogenous value iteration for exogenous/endogenous state splits (Bray): invariance to exogenous shifts, the endogenizing operator, the within-x span contraction at rate beta alpha_y with alpha_y bounded by the full Dobrushin bound, recovery of v* and optimal policies from the endogenous value, the policy error bound, and an example where relative VFI gives no speed-up but endogenous VFI is exact; asymptotic eigenvalue rates: spectral radius of real matrices and Gelfand's formula, the subradius rho(Delta Q) as the second-largest eigenvalue modulus (no Jordan block at 1) bounded by the Dobrushin coefficient, freezing of the greedy policy at a unique optimal decision rule, the Morton-Wecker rate beta lambda(P*) for relative values and Morton's rate for policy evaluation, levels no faster than beta, and the endogenous rates beta rho(Lambda P) with rho(Lambda F) <= lambda(F) (Bray).",
+  "source": "White (1963); Morton (1971); Morton and Wecker (1977); MacQueen (1966); Porteus (1971); Seneta (1981); Puterman (2005); Bray (2019, Quantitative Economics); Bray (2019, Management Science)."
 }

@@ -44,10 +44,24 @@ see [departures from the sources](corrections.md).
 | Bray (2019b), Prop 3 | Endogenous value iteration yields `ε`-optimal policies | `ExoMDP.endo_policy_error` |
 | Bray (2019b), Cor 3 | A non-ergodic exogenous variable voids relative value iteration's speed-up but not endogenous value iteration's | `swapModel`, `swap_T`, `swap_dobrushin_ge`, `sp_bool_unit`, `swap_sp_iterate`, `swap_sp_vstar`, `swap_endo_exact`, `relative_slow_endogenous_exact` |
 
+## Asymptotic eigenvalue rates
+
+| Source | Claim | Lean |
+| --- | --- | --- |
+| Gelfand (1941) | Spectral radius of a real matrix (of its complexification); `‖Aᵏ‖^{1/k} → ρ(A)`; `‖Aᵏ‖ ≤ Cγᵏ` for `γ > ρ(A)`; conversely such bounds bound `ρ(A)` | `complexify`, `complexify_apply`, `complexify_pow`, `complexify_mul`, `nnnorm_complexify`, `norm_complexify`, `specRad`, `spectralRadius_complexify_ne_top`, `specRad_nonneg`, `mem_spectrum_iff_eigenpair`, `tendsto_norm_pow_rpow`, `eventually_norm_pow_le`, `exists_norm_pow_le`, `specRad_le_of_norm_pow_le` |
+| Morton and Wecker (1977); Bray (2019a) | The subradius `λ(Q)` is the largest modulus of an eigenvalue other than `1`; a stochastic matrix has no Jordan block at `1` | `deltaMat`, `IsStochastic`, `subradius`, `deltaMat_mulVec`, `cdelta_mulVec`, `mulVec_const`, `cmulVec_const`, `norm_cmulVec_le`, `no_jordan_one`, `complexify_deltaQ_mulVec`, `mem_spectrum_deltaQ_iff`, `spectralRadius_deltaQ` |
+| Morton and Wecker (1977) | The subradius governs the span: `sp(Qᵏd) ≤ Cγᵏ sp(d)` for `γ > λ(Q)` | `sp_deltaMat_mulVec`, `norm_deltaMat_mulVec_le`, `sp_le_two_norm`, `deltaQ_pow_mulVec`, `sp_pow_mulVec_le` |
+| Seneta (1981) | The subradius is at most the Dobrushin coefficient | `subradius_le_dobrushin`, `MDP.subradius_policy_le` |
+| Morton (1971); Bray (2019a), Prop 5 | Relative policy evaluation converges at rate `βλ(P_σ)` | `sp_mul_le`, `MDP.Pmat`, `MDP.Pmat_isStochastic`, `MDP.Tσ_sub`, `MDP.Tσ_iterate_sub`, `MDP.sp_policy_eval_le` |
+| Morton and Wecker (1977); Bray (2019a), Prop 3 | With a unique optimal policy, value iteration eventually uses it, and relative values converge at rate `βλ(P_{σ*})` | `MDP.eventually_T_eq_Tσ`, `MDP.norm_iterate_sub_vstar_le`, `MDP.eventually_linear`, `MDP.relative_asymptotic_rate`, `MDP.rel_asymptotic_rate` |
+| — (complement to Bray (2019a), Prop 3) | Value levels converge no faster than `β` | `MDP.level_rate_lower` |
+| Bray (2019b), Prop 4 | Endogenous values converge at rate `βρ(ΛP_{σ*})`, endogenous policy evaluation at rate `βρ(ΛP_σ)`, and `ρ(ΛF) ≤ λ(F)` | `ExoMDP.endo_idem`, `ExoMDP.endo_lift`, `ExoMDP.PreservesLift`, `ExoMDP.endo_mulVec_endo`, `ExoMDP.spy_le_two_norm_endo`, `ExoMDP.norm_endo_le`, `ExoMDP.spy_mul_le`, `ExoMDP.lamMat`, `ExoMDP.lamMat_mulVec`, `ExoMDP.endoRadius`, `ExoMDP.PreservesLift.pow`, `ExoMDP.lamF_pow_endo`, `ExoMDP.spy_pow_mulVec_le`, `ExoMDP.endoRadius_le_subradius`, `ExoMDP.Pmat_preservesLift`, `ExoMDP.endo_policy_eval_le`, `ExoMDP.endo_asymptotic_rate`, `ExoMDP.endo_values_asymptotic_rate`, `ExoMDP.endoRadius_policy_le` |
+
 ## Not formalised
 
 | Source | Content | Reason |
 | --- | --- | --- |
-| Morton and Wecker (1977); Bray (2019a), Prop 3; Bray (2019b), Props 4–5 | Asymptotic rates `O⁺(βⁿσ(F(p*))ⁿ)` in terms of spectral subradii | Needs the Jordan form and an envelope-theorem argument; the Dobrushin rates proved here are non-asymptotic upper bounds. |
+| Bray (2019b), Prop 5 | Sufficient conditions, in terms of `σ(F_x)` and matrix norms of `F_y`, for endogenous VFI to be strictly faster | Out of scope; `relative_slow_endogenous_exact` is a worked instance. |
+| Bray (2019a), Props 6–9 | Bias and variance of simulation-based policy evaluation | Out of scope. |
 | Bray (2019a), §4; Bray (2019b) | Relative and endogenous policy iteration; simulation-based evaluation | Out of scope. |
 | — | The vanishing-discount limit `(1 − β)v*_β → g` | Not needed for White's theorem. |

@@ -9,6 +9,12 @@ import Mathlib.Analysis.Normed.Group.Real
 import Mathlib.Analysis.Normed.Group.Constructions
 import Mathlib.Topology.Algebra.Order.Field
 import Mathlib.Analysis.SpecificLimits.Basic
+import Mathlib.Analysis.Complex.Norm
+import Mathlib.Analysis.Matrix.Normed
+import Mathlib.Analysis.Normed.Algebra.GelfandFormula
+import Mathlib.Analysis.Normed.Module.FiniteDimension
+import Mathlib.Analysis.SpecialFunctions.Pow.Real
+import Mathlib.Analysis.SpecificLimits.Normed
 set_option autoImplicit false
 
 /-
@@ -1335,6 +1341,988 @@ theorem relative_slow_endogenous_exact (hβ : β < 1) :
 
 end DPExtensions.RelativeValueIteration
 
+/-
+Copyright (c) 2026 Robert Kirkby. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Robert Kirkby
+-/
+
+/-!
+# The spectral radius of a real matrix
+
+The spectral radius `ρ(A)` of a real square matrix is the largest modulus of a complex eigenvalue
+(`specRad`, `mem_spectrum_iff_eigenpair`). Gelfand's formula `‖Aᵏ‖^{1/k} → ρ(A)` for the ℓ∞
+operator norm (`tendsto_norm_pow_rpow`) gives, for every `γ > ρ(A)`, a constant `C` with
+`‖Aᵏ‖ ≤ Cγᵏ` for all `k` (`exists_norm_pow_le`); conversely `‖Aᵏ‖ ≤ Kαᵏ` for all `k` forces
+`ρ(A) ≤ α` (`specRad_le_of_norm_pow_le`). Adapted from the `FiniteStates/ContinuousTime` project.
+-/
+
+open Filter Topology Matrix Finset
+
+namespace DPExtensions.RelativeValueIteration
+
+attribute [local instance] Matrix.linftyOpNormedRing Matrix.linftyOpNormedAlgebra
+
+variable {X : Type*} [Fintype X] [DecidableEq X]
+
+/-- The complexification of a real matrix. -/
+def complexify (A : Matrix X X ℝ) : Matrix X X ℂ := A.map Complex.ofReal
+
+omit [Fintype X] [DecidableEq X] in
+theorem complexify_apply (A : Matrix X X ℝ) (i j : X) : complexify A i j = (A i j : ℂ) := rfl
+
+theorem complexify_pow (A : Matrix X X ℝ) (k : ℕ) : complexify (A ^ k) = complexify A ^ k :=
+  map_pow (Complex.ofRealHom.mapMatrix (m := X)) A k
+
+omit [DecidableEq X] in
+theorem complexify_mul (A B : Matrix X X ℝ) : complexify (A * B) = complexify A * complexify B := by
+  classical
+  exact map_mul (Complex.ofRealHom.mapMatrix (m := X)) A B
+
+theorem nnnorm_complexify (A : Matrix X X ℝ) : ‖complexify A‖₊ = ‖A‖₊ := by
+  simp only [Matrix.linfty_opNNNorm_def, complexify_apply, Complex.nnnorm_real]
+
+theorem norm_complexify (A : Matrix X X ℝ) : ‖complexify A‖ = ‖A‖ :=
+  congrArg NNReal.toReal (nnnorm_complexify A)
+
+/-- The spectral radius: the largest modulus of a complex eigenvalue. -/
+noncomputable def specRad (A : Matrix X X ℝ) : ℝ := (spectralRadius ℂ (complexify A)).toReal
+
+omit [DecidableEq X] in
+theorem spectralRadius_complexify_ne_top [Nonempty X] (A : Matrix X X ℝ) :
+    spectralRadius ℂ (complexify A) ≠ ⊤ := by
+  classical
+  exact ne_top_of_le_ne_top ENNReal.coe_ne_top (spectralRadius_le_nnnorm (complexify A))
+
+omit [Fintype X] [DecidableEq X] in
+theorem specRad_nonneg [Fintype X] (A : Matrix X X ℝ) : 0 ≤ specRad A := ENNReal.toReal_nonneg
+
+/-- The spectrum of the complexification is the set of eigenvalues. -/
+theorem mem_spectrum_iff_eigenpair (A : Matrix X X ℂ) (μ : ℂ) :
+    μ ∈ spectrum ℂ A ↔ ∃ e : X → ℂ, e ≠ 0 ∧ A *ᵥ e = μ • e := by
+  rw [spectrum.mem_iff, Matrix.isUnit_iff_isUnit_det, isUnit_iff_ne_zero, not_not,
+    ← Matrix.exists_mulVec_eq_zero_iff, Algebra.algebraMap_eq_smul_one]
+  constructor
+  · rintro ⟨v, hv, h⟩
+    refine ⟨v, hv, ?_⟩
+    rw [sub_mulVec, smul_mulVec, one_mulVec, sub_eq_zero] at h
+    exact h.symm
+  · rintro ⟨e, he, h⟩
+    refine ⟨e, he, ?_⟩
+    rw [sub_mulVec, smul_mulVec, one_mulVec, sub_eq_zero]
+    exact h.symm
+
+/-- **Gelfand's formula** for real matrices: `‖Aᵏ‖^{1/k} → ρ(A)`. -/
+theorem tendsto_norm_pow_rpow [Nonempty X] (A : Matrix X X ℝ) :
+    Tendsto (fun k : ℕ => ‖A ^ k‖ ^ (1 / (k : ℝ))) atTop (𝓝 (specRad A)) := by
+  have : CompleteSpace (Matrix X X ℂ) := FiniteDimensional.complete ℂ _
+  have h := spectrum.pow_norm_pow_one_div_tendsto_nhds_spectralRadius (complexify A)
+  have h2 := (ENNReal.tendsto_toReal (spectralRadius_complexify_ne_top A)).comp h
+  refine h2.congr fun k => ?_
+  simp only [Function.comp, ← complexify_pow, norm_complexify]
+  exact ENNReal.toReal_ofReal (Real.rpow_nonneg (norm_nonneg _) _)
+
+/-- If `ρ(A) < r` then `‖Aᵏ‖ ≤ rᵏ` for all large `k`. -/
+theorem eventually_norm_pow_le [Nonempty X] (A : Matrix X X ℝ) {r : ℝ}
+    (hr : specRad A < r) : ∀ᶠ k : ℕ in atTop, ‖A ^ k‖ ≤ r ^ k := by
+  have hev : ∀ᶠ k : ℕ in atTop, ‖A ^ k‖ ^ (1 / (k : ℝ)) < r :=
+    (tendsto_norm_pow_rpow A).eventually (gt_mem_nhds hr)
+  filter_upwards [hev, eventually_gt_atTop 0] with k hk hk0
+  have hnn : 0 ≤ ‖A ^ k‖ := norm_nonneg _
+  have hkr : (k : ℝ) ≠ 0 := by exact_mod_cast hk0.ne'
+  have := Real.rpow_le_rpow (Real.rpow_nonneg hnn _) hk.le (Nat.cast_nonneg k)
+  rwa [← Real.rpow_mul hnn, one_div_mul_cancel hkr, Real.rpow_one, Real.rpow_natCast] at this
+
+/-- For every `γ > ρ(A)` there is `C` with `‖Aᵏ‖ ≤ Cγᵏ` for all `k`. -/
+theorem exists_norm_pow_le [Nonempty X] (A : Matrix X X ℝ) {γ : ℝ} (hγ : specRad A < γ) :
+    ∃ C, 0 ≤ C ∧ ∀ k : ℕ, ‖A ^ k‖ ≤ C * γ ^ k := by
+  have hγ0 : 0 < γ := (specRad_nonneg A).trans_lt hγ
+  obtain ⟨N, hN⟩ := eventually_atTop.1 (eventually_norm_pow_le A hγ)
+  refine ⟨1 + ∑ k ∈ range N, ‖A ^ k‖ / γ ^ k, by positivity, fun k => ?_⟩
+  rcases lt_or_ge k N with hk | hk
+  · have h1 : ‖A ^ k‖ / γ ^ k ≤ ∑ j ∈ range N, ‖A ^ j‖ / γ ^ j :=
+      single_le_sum (f := fun j => ‖A ^ j‖ / γ ^ j) (fun j _ => by positivity) (mem_range.2 hk)
+    have h2 : ‖A ^ k‖ = ‖A ^ k‖ / γ ^ k * γ ^ k := by field_simp
+    rw [h2]
+    exact mul_le_mul_of_nonneg_right (by linarith) (by positivity)
+  · have h3 := hN k hk
+    have h4 : 0 ≤ ∑ j ∈ range N, ‖A ^ j‖ / γ ^ j := sum_nonneg fun j _ => by positivity
+    nlinarith [pow_pos hγ0 k]
+
+/-- If `‖Aᵏ‖ ≤ Kαᵏ` for all `k`, then `ρ(A) ≤ α`. -/
+theorem specRad_le_of_norm_pow_le [Nonempty X] (A : Matrix X X ℝ) {K α : ℝ} (hK : 0 < K)
+    (hα : 0 ≤ α) (h : ∀ k : ℕ, ‖A ^ k‖ ≤ K * α ^ k) : specRad A ≤ α := by
+  have hK1 : Tendsto (fun k : ℕ => K ^ (1 / (k : ℝ))) atTop (𝓝 1) := by
+    have h0 : Tendsto (fun k : ℕ => 1 / (k : ℝ)) atTop (𝓝 0) :=
+      tendsto_one_div_atTop_nhds_zero_nat
+    have := (tendsto_const_nhds (x := K)).rpow h0 (Or.inl hK.ne')
+    rwa [Real.rpow_zero] at this
+  have hup : Tendsto (fun k : ℕ => K ^ (1 / (k : ℝ)) * α) atTop (𝓝 α) := by
+    simpa using hK1.mul_const α
+  refine le_of_tendsto_of_tendsto (tendsto_norm_pow_rpow A) hup ?_
+  filter_upwards [eventually_gt_atTop 0] with k hk
+  have hk' : (0 : ℝ) < k := Nat.cast_pos.2 hk
+  calc ‖A ^ k‖ ^ (1 / (k : ℝ)) ≤ (K * α ^ k) ^ (1 / (k : ℝ)) :=
+        Real.rpow_le_rpow (norm_nonneg _) (h k) (by positivity)
+    _ = K ^ (1 / (k : ℝ)) * α := by
+        rw [Real.mul_rpow hK.le (pow_nonneg hα k), ← Real.rpow_natCast,
+          ← Real.rpow_mul hα, mul_one_div_cancel hk'.ne', Real.rpow_one]
+
+end DPExtensions.RelativeValueIteration
+
+/-
+Copyright (c) 2026 Robert Kirkby. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Robert Kirkby
+-/
+
+/-!
+# The spectral subradius of a stochastic matrix
+
+Morton and Wecker (1977); Bray (2019a), the quantity `λ(Q)` ("second-largest eigenvalue
+modulus") that governs the asymptotic speed of relative value iteration.
+
+Let `Δ` subtract the value at a reference state, `(Δv)(s) = v(s) − v(s₀)` (`deltaMat`), and let
+`Q` be a stochastic matrix. The **subradius** is `λ(Q) = ρ(ΔQ)` (`subradius`).
+
+* `mem_spectrum_deltaQ_iff`: the nonzero eigenvalues of `ΔQ` are exactly the eigenvalues of `Q`
+  other than `1`, together with `1` itself iff `Q` has a non-constant fixed vector. A stochastic
+  matrix has no Jordan block at `1`, which the proof uses.
+* `spectralRadius_deltaQ`: hence, when the only fixed vectors of `Q` are the constants (one
+  closed class), `λ(Q) = max{|μ| : μ an eigenvalue of Q, μ ≠ 1}` — Bray's second-largest
+  eigenvalue modulus.
+* `sp_pow_mulVec_le`: for every `γ > λ(Q)` there is `C` with `sp(Qᵏd) ≤ Cγᵏ sp(d)`.
+* `subradius_le_dobrushin`: `λ(Q)` is at most any bound on the Dobrushin coefficient.
+-/
+
+open Filter Topology Matrix Finset
+
+namespace DPExtensions.RelativeValueIteration
+
+attribute [local instance] Matrix.linftyOpNormedRing Matrix.linftyOpNormedAlgebra
+
+variable {S : Type*} [Fintype S] [DecidableEq S]
+
+/-- The differencing matrix `Δ`: `(Δv)(s) = v(s) − v(s₀)`. -/
+def deltaMat (s₀ : S) : Matrix S S ℝ :=
+  fun i j => (if i = j then 1 else 0) - (if j = s₀ then 1 else 0)
+
+/-- A stochastic matrix. -/
+def IsStochastic (Q : Matrix S S ℝ) : Prop := (∀ i j, 0 ≤ Q i j) ∧ ∀ i, ∑ j, Q i j = 1
+
+/-- The spectral subradius `λ(Q) = ρ(ΔQ)`. -/
+noncomputable def subradius (Q : Matrix S S ℝ) (s₀ : S) : ℝ := specRad (deltaMat s₀ * Q)
+
+theorem deltaMat_mulVec (s₀ : S) (v : S → ℝ) : deltaMat s₀ *ᵥ v = fun s => v s - v s₀ := by
+  funext s
+  simp [deltaMat, mulVec, dotProduct, sub_mul, sum_sub_distrib, ite_mul]
+
+theorem cdelta_mulVec (s₀ : S) (w : S → ℂ) :
+    complexify (deltaMat s₀) *ᵥ w = fun s => w s - w s₀ := by
+  funext s
+  simp [complexify, deltaMat, mulVec, dotProduct, sub_mul, sum_sub_distrib, ite_mul,
+    apply_ite (Complex.ofReal)]
+
+omit [DecidableEq S] in
+theorem mulVec_const {Q : Matrix S S ℝ} (hQ : IsStochastic Q) (c : ℝ) :
+    Q *ᵥ (fun _ => c) = fun _ => c := by
+  funext s
+  simp only [mulVec, dotProduct, ← sum_mul, hQ.2 s, one_mul]
+
+omit [DecidableEq S] in
+theorem cmulVec_const {Q : Matrix S S ℝ} (hQ : IsStochastic Q) (c : ℂ) :
+    complexify Q *ᵥ (fun _ => c) = fun _ => c := by
+  funext s
+  have h : ∑ j, (Q s j : ℂ) = 1 := by exact_mod_cast hQ.2 s
+  simp only [mulVec, dotProduct, complexify_apply, ← sum_mul, h, one_mul]
+
+omit [DecidableEq S] in
+theorem norm_cmulVec_le {Q : Matrix S S ℝ} (hQ : IsStochastic Q) (w : S → ℂ) :
+    ‖complexify Q *ᵥ w‖ ≤ ‖w‖ := by
+  refine (pi_norm_le_iff_of_nonneg (norm_nonneg w)).2 fun s => ?_
+  simp only [mulVec, dotProduct, complexify_apply]
+  refine (norm_sum_le _ _).trans ?_
+  calc ∑ j, ‖(Q s j : ℂ) * w j‖ ≤ ∑ j, Q s j * ‖w‖ := sum_le_sum fun j _ => by
+        rw [norm_mul, Complex.norm_real, Real.norm_eq_abs, abs_of_nonneg (hQ.1 s j)]
+        exact mul_le_mul_of_nonneg_left (norm_le_pi_norm w j) (hQ.1 s j)
+    _ = ‖w‖ := by rw [← sum_mul, hQ.2 s, one_mul]
+
+omit [DecidableEq S] in
+/-- A stochastic matrix has no Jordan block at `1`: `Qv = v + c` with `v(s₀) = 0` forces
+`c = 0`. -/
+theorem no_jordan_one {Q : Matrix S S ℝ} (hQ : IsStochastic Q) {v : S → ℂ} {c : ℂ} (s₀ : S)
+    (hv0 : v s₀ = 0) (hv : complexify Q *ᵥ v = fun s => v s + c) : c = 0 := by
+  classical
+  have hconst : ∀ k : ℕ, (complexify Q ^ k) *ᵥ (fun _ => c) = fun _ => c := by
+    intro k
+    induction k with
+    | zero => simp
+    | succ k ih => rw [pow_succ, ← mulVec_mulVec, cmulVec_const hQ, ih]
+  have hpow : ∀ k : ℕ, (complexify Q ^ k) *ᵥ v = fun s => v s + k * c := by
+    intro k
+    induction k with
+    | zero => funext s; simp
+    | succ k ih =>
+      rw [pow_succ, ← mulVec_mulVec, hv,
+        show (fun s => v s + c) = v + fun _ => c from rfl, mulVec_add, ih, hconst]
+      funext s
+      simp only [Pi.add_apply]
+      push_cast
+      ring
+  have hb : ∀ k : ℕ, ‖(k : ℂ) * c‖ ≤ ‖v‖ := by
+    intro k
+    have h1 : ‖(complexify Q ^ k) *ᵥ v‖ ≤ ‖v‖ := by
+      induction k with
+      | zero => simp
+      | succ k ih =>
+        rw [pow_succ', ← mulVec_mulVec]
+        exact (norm_cmulVec_le hQ _).trans ih
+    have h2 := (norm_le_pi_norm ((complexify Q ^ k) *ᵥ v) s₀).trans h1
+    simp only [hpow, hv0, zero_add] at h2
+    exact h2
+  by_contra hc
+  obtain ⟨k, hk⟩ := exists_nat_gt (‖v‖ / ‖c‖)
+  have hc' : 0 < ‖c‖ := norm_pos_iff.2 hc
+  have := hb k
+  rw [norm_mul, Complex.norm_natCast] at this
+  rw [div_lt_iff₀ hc'] at hk
+  linarith
+
+theorem complexify_deltaQ_mulVec (Q : Matrix S S ℝ) (s₀ : S) (w : S → ℂ) :
+    complexify (deltaMat s₀ * Q) *ᵥ w =
+      fun s => (complexify Q *ᵥ w) s - (complexify Q *ᵥ w) s₀ := by
+  rw [complexify_mul, ← mulVec_mulVec, cdelta_mulVec]
+
+/-- **The eigenvalues of `ΔQ`**: for `μ ≠ 0`, `μ` is an eigenvalue of `ΔQ` iff it is an
+eigenvalue of `Q` other than `1`, or `μ = 1` and `Q` has a non-constant fixed vector. -/
+theorem mem_spectrum_deltaQ_iff {Q : Matrix S S ℝ} (hQ : IsStochastic Q) (s₀ : S) {μ : ℂ}
+    (hμ : μ ≠ 0) :
+    μ ∈ spectrum ℂ (complexify (deltaMat s₀ * Q)) ↔
+      (μ ∈ spectrum ℂ (complexify Q) ∧ μ ≠ 1) ∨
+        (μ = 1 ∧ ∃ v : S → ℂ, complexify Q *ᵥ v = v ∧ ∃ i j, v i ≠ v j) := by
+  rw [mem_spectrum_iff_eigenpair, mem_spectrum_iff_eigenpair]
+  constructor
+  · rintro ⟨e, he, h⟩
+    rw [complexify_deltaQ_mulVec] at h
+    set w := complexify Q *ᵥ e with hw
+    have hs : ∀ s, w s - w s₀ = μ * e s := fun s => by
+      have := congrFun h s
+      simpa using this
+    have he0 : e s₀ = 0 := by
+      have := hs s₀
+      rw [sub_self] at this
+      exact (mul_eq_zero.1 this.symm).resolve_left hμ
+    set c := w s₀
+    have hwe : w = fun s => μ * e s + c := funext fun s => by linear_combination hs s
+    by_cases h1 : μ = 1
+    · subst h1
+      have hc : c = 0 := no_jordan_one hQ s₀ he0 (by rw [← hw, hwe]; funext s; simp)
+      refine Or.inr ⟨rfl, e, ?_, ?_⟩
+      · rw [← hw, hwe, hc]
+        funext s
+        simp
+      · obtain ⟨s, hs'⟩ : ∃ s, e s ≠ 0 := by
+          by_contra hall
+          push Not at hall
+          exact he (funext hall)
+        exact ⟨s, s₀, by rw [he0]; exact hs'⟩
+    · refine Or.inl ⟨⟨fun s => e s + c / (μ - 1), ?_, ?_⟩, h1⟩
+      · intro hu
+        have hμ1 : μ - 1 ≠ 0 := sub_ne_zero.2 h1
+        have h2 := congrFun hu s₀
+        simp only [he0, zero_add, Pi.zero_apply, div_eq_zero_iff, hμ1, or_false] at h2
+        apply he
+        funext s
+        have h3 := congrFun hu s
+        simp only [h2, zero_div, add_zero, Pi.zero_apply] at h3
+        exact h3
+      · have e1 : (fun s => e s + c / (μ - 1)) = e + fun _ => c / (μ - 1) := rfl
+        rw [e1, mulVec_add, cmulVec_const hQ, ← hw, hwe]
+        funext s
+        have hμ1 : μ - 1 ≠ 0 := sub_ne_zero.2 h1
+        simp only [Pi.add_apply, Pi.smul_apply, smul_eq_mul]
+        field_simp
+        ring
+  · rintro (⟨⟨u, hu, h⟩, h1⟩ | ⟨rfl, v, hv, i, j, hij⟩)
+    · refine ⟨fun s => u s - u s₀, fun hz => hu ?_, ?_⟩
+      · -- `u` would be constant, hence a fixed vector, forcing `μ = 1`
+        have hc : u = fun _ => u s₀ := funext fun s => by
+          have := congrFun hz s
+          simpa [sub_eq_zero] using this
+        have hfix := cmulVec_const hQ (u s₀)
+        rw [← hc, h] at hfix
+        by_contra hne
+        have hu0 : u s₀ ≠ 0 := by
+          intro h0
+          apply hne
+          rw [hc, h0]
+          rfl
+        have := congrFun hfix s₀
+        simp only [Pi.smul_apply, smul_eq_mul] at this
+        exact h1 (mul_right_cancel₀ hu0 (this.trans (one_mul _).symm))
+      · rw [complexify_deltaQ_mulVec]
+        have e1 : (fun s => u s - u s₀) = u + fun _ => -u s₀ := by
+          funext s
+          simp [sub_eq_add_neg]
+        rw [e1, mulVec_add, cmulVec_const hQ, h]
+        funext s
+        simp only [Pi.add_apply, Pi.smul_apply, smul_eq_mul]
+        ring
+    · refine ⟨fun s => v s - v s₀, fun hz => hij ?_, ?_⟩
+      · have hi := congrFun hz i
+        have hj := congrFun hz j
+        simp only [Pi.zero_apply, sub_eq_zero] at hi hj
+        rw [hi, hj]
+      · rw [complexify_deltaQ_mulVec]
+        have e1 : (fun s => v s - v s₀) = v + fun _ => -v s₀ := by
+          funext s
+          simp [sub_eq_add_neg]
+        rw [e1, mulVec_add, cmulVec_const hQ, hv]
+        funext s
+        simp only [Pi.add_apply, one_smul]
+        ring
+
+/-- **The subradius is the second-largest eigenvalue modulus**: when the only fixed vectors of
+`Q` are the constants, `ρ(ΔQ) = sup{|μ| : μ an eigenvalue of Q, μ ≠ 1}`. -/
+theorem spectralRadius_deltaQ {Q : Matrix S S ℝ} (hQ : IsStochastic Q) (s₀ : S)
+    (hfix : ∀ v : S → ℂ, complexify Q *ᵥ v = v → ∀ i j, v i = v j) :
+    spectralRadius ℂ (complexify (deltaMat s₀ * Q)) =
+      ⨆ μ ∈ spectrum ℂ (complexify Q), ⨆ (_ : μ ≠ 1), (‖μ‖₊ : ENNReal) := by
+  rw [spectralRadius_eq_of_unital]
+  refine le_antisymm (iSup₂_le fun μ hμ => ?_) (iSup₂_le fun μ hμ => iSup_le fun h1 => ?_)
+  · rcases eq_or_ne μ 0 with h0 | h0
+    · simp [h0]
+    · rcases (mem_spectrum_deltaQ_iff hQ s₀ h0).1 hμ with ⟨hs, h1⟩ | ⟨rfl, v, hv, i, j, hij⟩
+      · exact le_iSup₂_of_le μ hs (le_iSup_of_le h1 le_rfl)
+      · exact absurd (hfix v hv i j) hij
+  · rcases eq_or_ne μ 0 with h0 | h0
+    · simp [h0]
+    · exact le_iSup₂_of_le μ ((mem_spectrum_deltaQ_iff hQ s₀ h0).2 (Or.inl ⟨hμ, h1⟩)) le_rfl
+
+theorem sp_deltaMat_mulVec [Nonempty S] (s₀ : S) (v : S → ℝ) :
+    sp (deltaMat s₀ *ᵥ v) = sp v := by
+  rw [deltaMat_mulVec]
+  have := sp_add_const v (-v s₀)
+  simpa [sub_eq_add_neg] using this
+
+theorem norm_deltaMat_mulVec_le [Nonempty S] (s₀ : S) (v : S → ℝ) :
+    ‖deltaMat s₀ *ᵥ v‖ ≤ sp v :=
+  (pi_norm_le_iff_of_nonneg (sp_nonneg v)).2 fun s => by
+    rw [deltaMat_mulVec, Real.norm_eq_abs]
+    exact abs_sub_le_sp v s s₀
+
+omit [DecidableEq S] in
+theorem sp_le_two_norm [Nonempty S] (v : S → ℝ) : sp v ≤ 2 * ‖v‖ :=
+  sp_le fun x y => by
+    have h1 := abs_le.1 ((Real.norm_eq_abs _).symm ▸ norm_le_pi_norm v x)
+    have h2 := abs_le.1 ((Real.norm_eq_abs _).symm ▸ norm_le_pi_norm v y)
+    linarith [h1.2, h2.1]
+
+theorem deltaQ_pow_mulVec {Q : Matrix S S ℝ} (hQ : IsStochastic Q) (s₀ : S) (v : S → ℝ)
+    (k : ℕ) : (deltaMat s₀ * Q) ^ k *ᵥ (deltaMat s₀ *ᵥ v) = deltaMat s₀ *ᵥ (Q ^ k *ᵥ v) := by
+  induction k generalizing v with
+  | zero => simp
+  | succ k ih =>
+    rw [pow_succ, ← mulVec_mulVec, ← mulVec_mulVec]
+    have e : Q *ᵥ (deltaMat s₀ *ᵥ v) = Q *ᵥ v + fun _ => -v s₀ := by
+      rw [deltaMat_mulVec, show (fun s => v s - v s₀) = v + fun _ => -v s₀ by
+        funext s; simp [sub_eq_add_neg], mulVec_add, mulVec_const hQ]
+    rw [e, mulVec_add, deltaMat_mulVec (s₀ := s₀) (fun _ => -v s₀)]
+    have e2 : deltaMat s₀ *ᵥ (Q *ᵥ v) + (fun s => (fun _ : S => -v s₀) s - -v s₀) =
+        deltaMat s₀ *ᵥ (Q *ᵥ v) := by
+      funext s
+      simp
+    rw [e2, ih, pow_succ, ← mulVec_mulVec]
+
+/-- **The subradius governs the span**: for every `γ > λ(Q)` there is `C` with
+`sp(Qᵏd) ≤ Cγᵏ sp(d)` for all `k`. -/
+theorem sp_pow_mulVec_le [Nonempty S] {Q : Matrix S S ℝ} (hQ : IsStochastic Q) (s₀ : S)
+    {γ : ℝ} (hγ : subradius Q s₀ < γ) :
+    ∃ C, 0 ≤ C ∧ ∀ (k : ℕ) (d : S → ℝ), sp (Q ^ k *ᵥ d) ≤ C * γ ^ k * sp d := by
+  obtain ⟨C, hC0, hC⟩ := exists_norm_pow_le (deltaMat s₀ * Q) hγ
+  have hγ0 : 0 < γ := (specRad_nonneg _).trans_lt hγ
+  refine ⟨2 * C, by positivity, fun k d => ?_⟩
+  calc sp (Q ^ k *ᵥ d) = sp (deltaMat s₀ *ᵥ (Q ^ k *ᵥ d)) := (sp_deltaMat_mulVec s₀ _).symm
+    _ ≤ 2 * ‖deltaMat s₀ *ᵥ (Q ^ k *ᵥ d)‖ := sp_le_two_norm _
+    _ = 2 * ‖(deltaMat s₀ * Q) ^ k *ᵥ (deltaMat s₀ *ᵥ d)‖ := by rw [deltaQ_pow_mulVec hQ]
+    _ ≤ 2 * (‖(deltaMat s₀ * Q) ^ k‖ * ‖deltaMat s₀ *ᵥ d‖) :=
+        mul_le_mul_of_nonneg_left (Matrix.linfty_opNorm_mulVec _ _) zero_le_two
+    _ ≤ 2 * (C * γ ^ k * sp d) := by
+        refine mul_le_mul_of_nonneg_left ?_ zero_le_two
+        exact mul_le_mul (hC k) (norm_deltaMat_mulVec_le s₀ d) (norm_nonneg _) (by positivity)
+    _ = 2 * C * γ ^ k * sp d := by ring
+
+/-- **The subradius is at most the Dobrushin coefficient.** -/
+theorem subradius_le_dobrushin [Nonempty S] {Q : Matrix S S ℝ} (hQ : IsStochastic Q) (s₀ : S)
+    {α : ℝ} (hα : ∀ i j, 1 - ∑ t, min (Q i t) (Q j t) ≤ α) : subradius Q s₀ ≤ α := by
+  have hα0 : 0 ≤ α := by
+    have h := hα s₀ s₀
+    simp only [min_self, hQ.2 s₀, sub_self] at h
+    exact h
+  have hstep : ∀ d : S → ℝ, sp (Q *ᵥ d) ≤ α * sp d := fun d =>
+    sp_le fun i j => by
+      have h := dobrushin (hQ.2 i) (hQ.2 j) d
+      have hs := mul_le_mul_of_nonneg_right (hα i j) (sp_nonneg d)
+      simp only [mulVec, dotProduct]
+      linarith
+  have hpow : ∀ (k : ℕ) (d : S → ℝ), sp (Q ^ k *ᵥ d) ≤ α ^ k * sp d := by
+    intro k
+    induction k with
+    | zero => intro d; simp
+    | succ k ih =>
+      intro d
+      rw [pow_succ', ← mulVec_mulVec, pow_succ']
+      calc sp (Q *ᵥ (Q ^ k *ᵥ d)) ≤ α * sp (Q ^ k *ᵥ d) := hstep _
+        _ ≤ α * (α ^ k * sp d) := mul_le_mul_of_nonneg_left (ih d) hα0
+        _ = α * α ^ k * sp d := by ring
+  refine specRad_le_of_norm_pow_le _ zero_lt_two hα0 fun k => ?_
+  rw [Matrix.linfty_opNorm_eq_opNorm]
+  refine ContinuousLinearMap.opNorm_le_bound _ (by positivity) fun w => ?_
+  change ‖(deltaMat s₀ * Q) ^ k *ᵥ w‖ ≤ 2 * α ^ k * ‖w‖
+  rcases k with _ | k
+  · simp only [pow_zero, one_mulVec, mul_one]
+    linarith [norm_nonneg w]
+  -- `(ΔQ)ᵏ⁺¹ w = (ΔQ)ᵏ⁺¹ Δw`, since `ΔQ` kills constants
+  have hconst : (deltaMat s₀ * Q) *ᵥ (fun _ => w s₀) = 0 := by
+    rw [← mulVec_mulVec, mulVec_const hQ, deltaMat_mulVec]
+    funext s
+    simp
+  have e : (deltaMat s₀ * Q) ^ (k + 1) *ᵥ w =
+      (deltaMat s₀ * Q) ^ (k + 1) *ᵥ (deltaMat s₀ *ᵥ w) := by
+    have hw : w = deltaMat s₀ *ᵥ w + fun _ => w s₀ := by
+      rw [deltaMat_mulVec]
+      funext s
+      simp
+    have h2 : (deltaMat s₀ * Q) ^ (k + 1) *ᵥ (fun _ => w s₀) = 0 := by
+      rw [pow_succ, ← mulVec_mulVec, hconst, mulVec_zero]
+    conv_lhs => rw [hw]
+    rw [mulVec_add, h2, add_zero]
+  rw [e, deltaQ_pow_mulVec hQ]
+  calc ‖deltaMat s₀ *ᵥ (Q ^ (k + 1) *ᵥ w)‖ ≤ sp (Q ^ (k + 1) *ᵥ w) :=
+        norm_deltaMat_mulVec_le s₀ _
+    _ ≤ α ^ (k + 1) * sp w := hpow _ w
+    _ ≤ α ^ (k + 1) * (2 * ‖w‖) := mul_le_mul_of_nonneg_left (sp_le_two_norm w) (by positivity)
+    _ = 2 * α ^ (k + 1) * ‖w‖ := by ring
+
+end DPExtensions.RelativeValueIteration
+
+/-
+Copyright (c) 2026 Robert Kirkby. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Robert Kirkby
+-/
+
+/-!
+# Asymptotic rates: relative value iteration converges at rate `βλ(Q*)`
+
+Morton (1971); Morton and Wecker (1977); Bray (2019a), Propositions 3 and 5.
+
+Let `P_σ` be the transition matrix of a decision rule and `λ(P_σ)` its subradius (the
+second-largest eigenvalue modulus, `spectralRadius_deltaQ`).
+
+* `sp_policy_eval_le` (**Morton; Bray, Prop 5**): policy evaluation `T_σⁿv → v_σ` converges in
+  span at rate `βγ` for every `γ > λ(P_σ)`: `sp(T_σⁿv − v_σ) ≤ C(βγ)ⁿ sp(v − v_σ)`.
+* `eventually_T_eq_Tσ`: if the optimal decision rule `σ*` is unique and strict, the greedy policy
+  freezes: after finitely many steps value iteration is `T_{σ*}`-iteration.
+* `relative_asymptotic_rate` (**Morton–Wecker; Bray, Prop 3**): then for every `γ > λ(P_{σ*})`
+  there are `C` and `N` with `sp(T^{N+k}v − v*) ≤ C(βγ)ᵏ`, so the relative values converge at
+  rate `βλ(P_{σ*})` (`rel_asymptotic_rate`).
+* `level_rate_lower` (**standard value iteration is no faster than `β`**): if `ψ` is a stationary
+  distribution of `P_{σ*}`, `‖T^{N+k}v − v*‖ ≥ βᵏ|ψ·(T^Nv − v*)|`.
+* `subradius_policy_le`: `λ(P_σ)` is at most any Dobrushin bound `α`, so the asymptotic rate is
+  never worse than the non-asymptotic rate `βα` of `sp_iterate_sub_vstar`.
+-/
+
+open Filter Topology Matrix Finset
+
+namespace DPExtensions.RelativeValueIteration
+
+theorem sp_mul_le {S : Type*} [Fintype S] [Nonempty S] {c : ℝ} (hc : 0 ≤ c) (w : S → ℝ) :
+    sp (fun s => c * w s) ≤ c * sp w :=
+  sp_le fun x y => by
+    have := mul_le_mul_of_nonneg_left (sub_le_sp w x y) hc
+    linarith [mul_sub c (w x) (w y)]
+
+namespace MDP
+
+variable {S A : Type*} [Fintype S] [DecidableEq S] (M : MDP S A)
+
+/-- The transition matrix of the decision rule `σ`. -/
+def Pmat (σ : S → A) : Matrix S S ℝ := fun s t => M.P s (σ s) t
+
+omit [DecidableEq S] in
+theorem Pmat_isStochastic (σ : S → A) : IsStochastic (M.Pmat σ) :=
+  ⟨fun s t => M.P_nonneg s (σ s) t, fun s => M.P_sum s (σ s)⟩
+
+omit [DecidableEq S] in
+theorem Tσ_sub (σ : S → A) (v w : S → ℝ) :
+    (fun s => M.Tσ σ v s - M.Tσ σ w s) = fun s => M.β * (M.Pmat σ *ᵥ (v - w)) s := by
+  funext s
+  simp only [Tσ, M.Q_sub_Q, Pmat, mulVec, dotProduct, Pi.sub_apply]
+
+theorem Tσ_iterate_sub (σ : S → A) (v w : S → ℝ) (n : ℕ) :
+    (fun s => (M.Tσ σ)^[n] v s - (M.Tσ σ)^[n] w s) =
+      fun s => M.β ^ n * (M.Pmat σ ^ n *ᵥ (v - w)) s := by
+  induction n with
+  | zero => funext s; simp
+  | succ n ih =>
+    funext s
+    rw [Function.iterate_succ_apply', Function.iterate_succ_apply']
+    have h := congrFun (M.Tσ_sub σ ((M.Tσ σ)^[n] v) ((M.Tσ σ)^[n] w)) s
+    rw [h]
+    have e : (M.Tσ σ)^[n] v - (M.Tσ σ)^[n] w = M.β ^ n • (M.Pmat σ ^ n *ᵥ (v - w)) := by
+      funext t
+      exact congrFun ih t
+    rw [e, mulVec_smul, mulVec_mulVec, ← pow_succ']
+    simp only [Pi.smul_apply, smul_eq_mul]
+    ring
+
+/-- **Policy evaluation converges at rate `βλ(P_σ)`** (Morton, 1971; Bray, Prop 5). -/
+theorem sp_policy_eval_le [Nonempty S] (hβ : M.β < 1) (σ : S → A) (s₀ : S) {γ : ℝ}
+    (hγ : subradius (M.Pmat σ) s₀ < γ) :
+    ∃ C, 0 ≤ C ∧ ∀ (n : ℕ) (v : S → ℝ),
+      sp (fun s => (M.Tσ σ)^[n] v s - M.vσ hβ σ s) ≤
+        C * (M.β * γ) ^ n * sp (fun s => v s - M.vσ hβ σ s) := by
+  obtain ⟨C, hC0, hC⟩ := sp_pow_mulVec_le (M.Pmat_isStochastic σ) s₀ hγ
+  refine ⟨C, hC0, fun n v => ?_⟩
+  have hfix : (M.Tσ σ)^[n] (M.vσ hβ σ) = M.vσ hβ σ := Function.iterate_fixed (M.Tσ_vσ hβ σ) n
+  have e := M.Tσ_iterate_sub σ v (M.vσ hβ σ) n
+  rw [hfix] at e
+  rw [e]
+  calc sp (fun s => M.β ^ n * (M.Pmat σ ^ n *ᵥ (v - M.vσ hβ σ)) s)
+      ≤ M.β ^ n * sp (M.Pmat σ ^ n *ᵥ (v - M.vσ hβ σ)) :=
+        sp_mul_le (pow_nonneg M.β_nonneg n) _
+    _ ≤ M.β ^ n * (C * γ ^ n * sp (v - M.vσ hβ σ)) :=
+        mul_le_mul_of_nonneg_left (hC n _) (pow_nonneg M.β_nonneg n)
+    _ = C * (M.β * γ) ^ n * sp (fun s => v s - M.vσ hβ σ s) := by
+        rw [mul_pow]
+        change _ = C * (M.β ^ n * γ ^ n) * sp (v - M.vσ hβ σ)
+        ring
+
+omit [DecidableEq S] in
+/-- **The greedy policy freezes** at a unique, strict optimal decision rule `σ*`: near `v*`,
+`T = T_{σ*}`. -/
+theorem eventually_T_eq_Tσ (hβ : M.β < 1) {σs : S → A}
+    (hstrict : ∀ s, σs s ∈ M.Γ s ∧ ∀ a ∈ M.Γ s, a ≠ σs s →
+      M.Q (M.vstar hβ) s a < M.Q (M.vstar hβ) s (σs s)) :
+    ∃ ρ > 0, ∀ w : S → ℝ, ‖w - M.vstar hβ‖ < ρ → M.T w = M.Tσ σs w := by
+  classical
+  set vs := M.vstar hβ
+  set G : Finset (S × A) := univ.biUnion fun s => ((M.Γ s).filter fun a => a ≠ σs s).image
+    fun a => (s, a)
+  have hG : ∀ s, ∀ a ∈ M.Γ s, a ≠ σs s → (s, a) ∈ G := fun s a ha hne => by
+    simp only [G, mem_biUnion, mem_univ, true_and, mem_image, mem_filter]
+    exact ⟨s, a, ⟨ha, hne⟩, rfl⟩
+  have hGgap : ∀ p ∈ G, 0 < M.Q vs p.1 (σs p.1) - M.Q vs p.1 p.2 := fun p hp => by
+    simp only [G, mem_biUnion, mem_univ, true_and, mem_image, mem_filter] at hp
+    obtain ⟨s, a, ⟨ha, hne⟩, rfl⟩ := hp
+    exact sub_pos.2 ((hstrict s).2 a ha hne)
+  obtain ⟨g, hg, hgap⟩ : ∃ g > 0, ∀ p ∈ G, g ≤ M.Q vs p.1 (σs p.1) - M.Q vs p.1 p.2 := by
+    rcases G.eq_empty_or_nonempty with hE | hne
+    · exact ⟨1, one_pos, fun p hp => by rw [hE] at hp; exact absurd hp (notMem_empty p)⟩
+    · obtain ⟨p0, hp0, hmin⟩ := exists_min_image G
+        (fun p => M.Q vs p.1 (σs p.1) - M.Q vs p.1 p.2) hne
+      exact ⟨_, hGgap p0 hp0, hmin⟩
+  have hβ0 := M.β_nonneg
+  refine ⟨g / (2 * M.β + 1), div_pos hg (by linarith), fun w hw => ?_⟩
+  have h2β : 2 * M.β * ‖w - vs‖ < g := by
+    rw [lt_div_iff₀ (by linarith)] at hw
+    nlinarith [norm_nonneg (w - vs)]
+  funext s
+  refine le_antisymm (sup'_le _ _ fun a ha => ?_) (M.Q_le_T w (hstrict s).1)
+  by_cases hne : a = σs s
+  · rw [hne]
+    rfl
+  · have h1 := abs_le.1 (M.abs_Q_sub_le w vs s a)
+    have h2 := abs_le.1 (M.abs_Q_sub_le w vs s (σs s))
+    have h3 := hgap (s, a) (hG s a ha hne)
+    simp only at h3
+    change M.Q w s a ≤ M.Q w s (σs s)
+    linarith
+
+omit [DecidableEq S] in
+theorem norm_iterate_sub_vstar_le (hβ : M.β < 1) (v : S → ℝ) (n : ℕ) :
+    ‖M.T^[n] v - M.vstar hβ‖ ≤ M.β ^ n * ‖v - M.vstar hβ‖ := by
+  induction n with
+  | zero => simp
+  | succ n ih =>
+    rw [Function.iterate_succ_apply']
+    conv_lhs => rw [← M.T_vstar hβ]
+    refine (M.norm_T_sub_le _ _).trans ?_
+    rw [pow_succ']
+    nlinarith [M.β_nonneg]
+
+/-- After the greedy policy has frozen at `σ*`, the value-iteration error evolves linearly:
+`T^{N+k}v − v* = βᵏP_{σ*}ᵏ(T^Nv − v*)`. -/
+theorem eventually_linear (hβ : M.β < 1) {σs : S → A}
+    (hstrict : ∀ s, σs s ∈ M.Γ s ∧ ∀ a ∈ M.Γ s, a ≠ σs s →
+      M.Q (M.vstar hβ) s a < M.Q (M.vstar hβ) s (σs s)) (v : S → ℝ) :
+    ∃ N, ∀ k, M.T^[N + k] v - M.vstar hβ =
+      M.β ^ k • (M.Pmat σs ^ k *ᵥ (M.T^[N] v - M.vstar hβ)) := by
+  obtain ⟨ρ, hρ, hfreeze⟩ := M.eventually_T_eq_Tσ hβ hstrict
+  have hlim : Tendsto (fun n : ℕ => M.β ^ n * ‖v - M.vstar hβ‖) atTop (𝓝 0) := by
+    simpa using (tendsto_pow_atTop_nhds_zero_of_lt_one M.β_nonneg hβ).mul_const
+      ‖v - M.vstar hβ‖
+  obtain ⟨N, hN⟩ := eventually_atTop.1 (hlim.eventually (gt_mem_nhds hρ))
+  have hnear : ∀ n, N ≤ n → ‖M.T^[n] v - M.vstar hβ‖ < ρ := fun n hn =>
+    (M.norm_iterate_sub_vstar_le hβ v n).trans_lt (hN n hn)
+  have hstar : M.T (M.vstar hβ) = M.Tσ σs (M.vstar hβ) :=
+    hfreeze _ (by rw [sub_self, norm_zero]; exact hρ)
+  refine ⟨N, fun k => ?_⟩
+  induction k with
+  | zero => simp
+  | succ k ih =>
+    rw [← add_assoc, Function.iterate_succ_apply', hfreeze _ (hnear _ (by omega))]
+    conv_lhs => rw [← M.T_vstar hβ, hstar]
+    have e := M.Tσ_sub σs (M.T^[N + k] v) (M.vstar hβ)
+    funext s
+    have := congrFun e s
+    simp only [Pi.sub_apply]
+    rw [this, ih, mulVec_smul, mulVec_mulVec, ← pow_succ']
+    simp only [Pi.smul_apply, smul_eq_mul, pow_succ]
+    ring
+
+/-- **Relative value iteration converges at rate `βλ(P_{σ*})`** (Morton and Wecker, 1977;
+Bray, Prop 3): with a unique, strict optimal decision rule `σ*`, for every `γ > λ(P_{σ*})`
+there are `C` and `N` with `sp(T^{N+k}v − v*) ≤ C(βγ)ᵏ`. -/
+theorem relative_asymptotic_rate [Nonempty S] (hβ : M.β < 1) {σs : S → A}
+    (hstrict : ∀ s, σs s ∈ M.Γ s ∧ ∀ a ∈ M.Γ s, a ≠ σs s →
+      M.Q (M.vstar hβ) s a < M.Q (M.vstar hβ) s (σs s))
+    (s₀ : S) {γ : ℝ} (hγ : subradius (M.Pmat σs) s₀ < γ) (v : S → ℝ) :
+    ∃ C N, ∀ k, sp (fun s => M.T^[N + k] v s - M.vstar hβ s) ≤ C * (M.β * γ) ^ k := by
+  obtain ⟨N, hN⟩ := M.eventually_linear hβ hstrict v
+  obtain ⟨C, hC0, hC⟩ := sp_pow_mulVec_le (M.Pmat_isStochastic σs) s₀ hγ
+  refine ⟨C * sp (M.T^[N] v - M.vstar hβ), N, fun k => ?_⟩
+  have e : (fun s => M.T^[N + k] v s - M.vstar hβ s) =
+      fun s => M.β ^ k * (M.Pmat σs ^ k *ᵥ (M.T^[N] v - M.vstar hβ)) s := by
+    funext s
+    have := congrFun (hN k) s
+    simpa using this
+  rw [e]
+  calc sp (fun s => M.β ^ k * (M.Pmat σs ^ k *ᵥ (M.T^[N] v - M.vstar hβ)) s)
+      ≤ M.β ^ k * sp (M.Pmat σs ^ k *ᵥ (M.T^[N] v - M.vstar hβ)) :=
+        sp_mul_le (pow_nonneg M.β_nonneg k) _
+    _ ≤ M.β ^ k * (C * γ ^ k * sp (M.T^[N] v - M.vstar hβ)) :=
+        mul_le_mul_of_nonneg_left (hC k _) (pow_nonneg M.β_nonneg k)
+    _ = C * sp (M.T^[N] v - M.vstar hβ) * (M.β * γ) ^ k := by rw [mul_pow]; ring
+
+/-- The relative values converge at rate `βλ(P_{σ*})`. -/
+theorem rel_asymptotic_rate [Nonempty S] (hβ : M.β < 1) {σs : S → A}
+    (hstrict : ∀ s, σs s ∈ M.Γ s ∧ ∀ a ∈ M.Γ s, a ≠ σs s →
+      M.Q (M.vstar hβ) s a < M.Q (M.vstar hβ) s (σs s))
+    (s₀ : S) {γ : ℝ} (hγ : subradius (M.Pmat σs) s₀ < γ) (v : S → ℝ) :
+    ∃ C N, ∀ k s, |rel s₀ (M.T^[N + k] v) s - rel s₀ (M.vstar hβ) s| ≤ C * (M.β * γ) ^ k := by
+  obtain ⟨C, N, h⟩ := M.relative_asymptotic_rate hβ hstrict s₀ hγ v
+  refine ⟨C, N, fun k s => le_trans ?_ (h k)⟩
+  have := abs_sub_le_sp (fun s => M.T^[N + k] v s - M.vstar hβ s) s s₀
+  simp only [rel]
+  convert this using 2
+  ring
+
+omit [DecidableEq S] in
+/-- **Standard value iteration converges no faster than `β`**: for a stationary distribution `ψ`
+of `P_{σ*}`, `‖T^{N+k}v − v*‖ ≥ βᵏ|ψ·(T^Nv − v*)|`. -/
+theorem level_rate_lower (hβ : M.β < 1) {σs : S → A}
+    (hstrict : ∀ s, σs s ∈ M.Γ s ∧ ∀ a ∈ M.Γ s, a ≠ σs s →
+      M.Q (M.vstar hβ) s a < M.Q (M.vstar hβ) s (σs s))
+    {ψ : S → ℝ} (hψ0 : ∀ s, 0 ≤ ψ s) (hψ1 : ∑ s, ψ s = 1)
+    (hψs : ∀ t, ∑ s, ψ s * M.Pmat σs s t = ψ t) (v : S → ℝ) :
+    ∃ N, ∀ k, M.β ^ k * |∑ s, ψ s * (M.T^[N] v - M.vstar hβ) s| ≤
+      ‖M.T^[N + k] v - M.vstar hβ‖ := by
+  classical
+  obtain ⟨N, hN⟩ := M.eventually_linear hβ hstrict v
+  refine ⟨N, fun k => ?_⟩
+  set d := M.T^[N] v - M.vstar hβ
+  have hstat : ∀ (j : ℕ) (w : S → ℝ), ∑ s, ψ s * (M.Pmat σs ^ j *ᵥ w) s = ∑ s, ψ s * w s := by
+    intro j
+    induction j with
+    | zero => intro w; simp
+    | succ j ih =>
+      intro w
+      rw [pow_succ', ← mulVec_mulVec]
+      have : ∀ u : S → ℝ, ∑ s, ψ s * (M.Pmat σs *ᵥ u) s = ∑ t, ψ t * u t := fun u => by
+        calc ∑ s, ψ s * (M.Pmat σs *ᵥ u) s = ∑ s, ∑ t, ψ s * M.Pmat σs s t * u t := by
+              simp only [mulVec, dotProduct, mul_sum]
+              exact sum_congr rfl fun s _ => sum_congr rfl fun t _ => by ring
+          _ = ∑ t, (∑ s, ψ s * M.Pmat σs s t) * u t := by
+              rw [sum_comm]
+              exact sum_congr rfl fun t _ => by rw [sum_mul]
+          _ = ∑ t, ψ t * u t := by simp only [hψs]
+      rw [this, ih]
+  have e : ∑ s, ψ s * (M.T^[N + k] v - M.vstar hβ) s = M.β ^ k * ∑ s, ψ s * d s := by
+    rw [hN k]
+    simp only [Pi.smul_apply, smul_eq_mul]
+    rw [show ∑ s, ψ s * (M.β ^ k * (M.Pmat σs ^ k *ᵥ d) s) =
+      M.β ^ k * ∑ s, ψ s * (M.Pmat σs ^ k *ᵥ d) s by
+        rw [mul_sum]; exact sum_congr rfl fun s _ => by ring, hstat]
+  have hbound : |∑ s, ψ s * (M.T^[N + k] v - M.vstar hβ) s| ≤ ‖M.T^[N + k] v - M.vstar hβ‖ := by
+    refine (abs_sum_le_sum_abs _ _).trans ?_
+    calc ∑ s, |ψ s * (M.T^[N + k] v - M.vstar hβ) s|
+        ≤ ∑ s, ψ s * ‖M.T^[N + k] v - M.vstar hβ‖ := sum_le_sum fun s _ => by
+          rw [abs_mul, abs_of_nonneg (hψ0 s)]
+          refine mul_le_mul_of_nonneg_left ?_ (hψ0 s)
+          have := norm_le_pi_norm (M.T^[N + k] v - M.vstar hβ) s
+          rwa [Real.norm_eq_abs] at this
+      _ = ‖M.T^[N + k] v - M.vstar hβ‖ := by rw [← sum_mul, hψ1, one_mul]
+  rw [e, abs_mul, abs_of_nonneg (pow_nonneg M.β_nonneg k)] at hbound
+  exact hbound
+
+/-- **The asymptotic rate is never worse than the Dobrushin rate**: `λ(P_σ) ≤ α`. -/
+theorem subradius_policy_le [Nonempty S] {σ : S → A} (hσ : M.IsPolicy σ) (s₀ : S) {α : ℝ}
+    (hα : ∀ s a s' a', a ∈ M.Γ s → a' ∈ M.Γ s' → 1 - ∑ t, min (M.P s a t) (M.P s' a' t) ≤ α) :
+    subradius (M.Pmat σ) s₀ ≤ α :=
+  subradius_le_dobrushin (M.Pmat_isStochastic σ) s₀ fun i j => hα i (σ i) j (σ j) (hσ i) (hσ j)
+
+end MDP
+
+end DPExtensions.RelativeValueIteration
+
+/-
+Copyright (c) 2026 Robert Kirkby. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Robert Kirkby
+-/
+
+/-!
+# Asymptotic rates: endogenous value iteration converges at rate `βρ(ΛP*)`
+
+Bray (2019b, *Management Science*), Proposition 4.
+
+`Λ` (`lamMat`) subtracts from `v(x, y)` its mean over `y` given `x`. When the transition matrix
+`F` maps functions of the exogenous state `x` to functions of `x` (`PreservesLift`, true of every
+policy matrix of an `ExoMDP`), `ΛFΛ = ΛF`, so `(ΛF)ᵏΛ = ΛFᵏ` (`lamF_pow_endo`) and the spectral
+radius `ρ(ΛF)` (`endoRadius`) governs the within-`x` span (`spy_pow_mulVec_le`).
+
+* `endo_asymptotic_rate`: with a unique, strict optimal decision rule `σ*`, for every
+  `γ > ρ(ΛP_{σ*})` there are `C` and `N` with `spy(T^{N+k}v − v*) ≤ C(βγ)ᵏ`; the endogenous
+  values `Λ(Tⁿv)` converge at rate `βρ(ΛP_{σ*})` (`endo_values_asymptotic_rate`) (Bray, Prop 4.1).
+* `endo_policy_eval_le` (Bray, Prop 4.2): endogenous policy evaluation converges at rate
+  `βρ(ΛP_σ)`.
+* `endoRadius_le_subradius` (**Bray, Prop 4**): `ρ(ΛF) ≤ λ(F)`, so endogenous value iteration is
+  asymptotically never slower than relative value iteration.
+-/
+
+open Filter Topology Matrix Finset
+
+attribute [local instance] Matrix.linftyOpNormedRing Matrix.linftyOpNormedAlgebra
+
+namespace DPExtensions.RelativeValueIteration
+
+namespace ExoMDP
+
+variable {X Y : Type*} [Fintype X] [Fintype Y]
+
+omit [Fintype X] in
+theorem endo_idem [Nonempty Y] (v : X × Y → ℝ) : endo (endo v) = endo v := by
+  have e : endo v = fun t => v t + lift (fun x => -mean v x) t := by
+    funext t
+    simp only [endo, lift]
+    ring
+  conv_lhs => rw [e]
+  rw [endo_add_lift]
+
+omit [Fintype X] in
+theorem endo_lift [Nonempty Y] (c : X → ℝ) : endo (lift c : X × Y → ℝ) = 0 := by
+  rw [show (lift c : X × Y → ℝ) = fun t => (fun _ => (0 : ℝ)) t + lift c t by
+    funext t; simp, endo_add_lift]
+  funext s
+  simp [endo, mean]
+
+/-- `F` maps functions of the exogenous state to functions of the exogenous state. -/
+def PreservesLift (F : Matrix (X × Y) (X × Y) ℝ) : Prop :=
+  ∀ c : X → ℝ, ∃ c' : X → ℝ, F *ᵥ lift c = lift c'
+
+theorem endo_mulVec_endo [Nonempty Y] {G : Matrix (X × Y) (X × Y) ℝ} (hG : PreservesLift G)
+    (d : X × Y → ℝ) : endo (G *ᵥ endo d) = endo (G *ᵥ d) := by
+  obtain ⟨c', hc'⟩ := hG fun x => -mean d x
+  have e : endo d = d + lift fun x => -mean d x := by
+    funext t
+    simp only [endo, lift, Pi.add_apply]
+    ring
+  rw [e, mulVec_add, hc']
+  exact endo_add_lift (G *ᵥ d) c'
+
+theorem spy_le_two_norm_endo [Nonempty X] [Nonempty Y] (w : X × Y → ℝ) : spy w ≤ 2 * ‖endo w‖ :=
+  sup'_le _ _ fun x _ => sp_le fun y y' => by
+    have e : w (x, y) - w (x, y') = endo w (x, y) - endo w (x, y') := by
+      simp only [endo]
+      ring
+    have h1 := abs_le.1 ((Real.norm_eq_abs _).symm ▸ norm_le_pi_norm (endo w) (x, y))
+    have h2 := abs_le.1 ((Real.norm_eq_abs _).symm ▸ norm_le_pi_norm (endo w) (x, y'))
+    linarith [h1.2, h2.1]
+
+theorem norm_endo_le [Nonempty X] [Nonempty Y] (d : X × Y → ℝ) : ‖endo d‖ ≤ spy d :=
+  (pi_norm_le_iff_of_nonneg (spy_nonneg d)).2 fun s => by
+    rw [Real.norm_eq_abs]
+    exact abs_endo_le d s
+
+theorem spy_mul_le [Nonempty X] [Nonempty Y] {c : ℝ} (hc : 0 ≤ c) (w : X × Y → ℝ) :
+    spy (fun s => c * w s) ≤ c * spy w :=
+  sup'_le _ _ fun x _ =>
+    (sp_mul_le hc fun y => w (x, y)).trans (mul_le_mul_of_nonneg_left (sp_le_spy w x) hc)
+
+variable [DecidableEq X] [DecidableEq Y]
+
+/-- The matrix of the endogenizing operator `Λ`. -/
+noncomputable def lamMat : Matrix (X × Y) (X × Y) ℝ := fun s t =>
+  (if s = t then 1 else 0) - (if s.1 = t.1 then (Fintype.card Y : ℝ)⁻¹ else 0)
+
+theorem lamMat_mulVec (v : X × Y → ℝ) : lamMat *ᵥ v = endo v := by
+  funext s
+  simp only [mulVec, dotProduct, lamMat, sub_mul, sum_sub_distrib, ite_mul, one_mul, zero_mul,
+    sum_ite_eq, mem_univ, ite_true, endo, mean]
+  congr 1
+  rw [Fintype.sum_prod_type, sum_eq_single s.1
+    (fun x _ hx => sum_eq_zero fun y _ => by simp [Ne.symm hx]) (by simp)]
+  simp only [ite_true, ← mul_sum]
+  rw [div_eq_inv_mul]
+
+/-- The spectral radius of `ΛF`, which governs endogenous value iteration. -/
+noncomputable def endoRadius (F : Matrix (X × Y) (X × Y) ℝ) : ℝ := specRad (lamMat * F)
+
+theorem PreservesLift.pow {F : Matrix (X × Y) (X × Y) ℝ} (hF : PreservesLift F) (k : ℕ) :
+    PreservesLift (F ^ k) := by
+  induction k with
+  | zero => exact fun c => ⟨c, one_mulVec _⟩
+  | succ k ih =>
+    intro c
+    obtain ⟨c', hc'⟩ := hF c
+    obtain ⟨c'', hc''⟩ := ih c'
+    exact ⟨c'', by rw [pow_succ, ← mulVec_mulVec, hc', hc'']⟩
+
+/-- `(ΛF)ᵏΛ = ΛFᵏ`. -/
+theorem lamF_pow_endo [Nonempty Y] {F : Matrix (X × Y) (X × Y) ℝ} (hF : PreservesLift F)
+    (k : ℕ) (d : X × Y → ℝ) : (lamMat * F) ^ k *ᵥ endo d = endo (F ^ k *ᵥ d) := by
+  induction k generalizing d with
+  | zero => simp
+  | succ k ih =>
+    rw [pow_succ, ← mulVec_mulVec, ← mulVec_mulVec, lamMat_mulVec, endo_mulVec_endo hF, ih,
+      mulVec_mulVec, ← pow_succ]
+
+/-- **`ρ(ΛF)` governs the within-`x` span**: for every `γ > ρ(ΛF)` there is `C` with
+`spy(Fᵏd) ≤ Cγᵏ spy(d)` for all `k`. -/
+theorem spy_pow_mulVec_le [Nonempty X] [Nonempty Y] {F : Matrix (X × Y) (X × Y) ℝ}
+    (hF : PreservesLift F) {γ : ℝ} (hγ : endoRadius F < γ) :
+    ∃ C, 0 ≤ C ∧ ∀ (k : ℕ) (d : X × Y → ℝ), spy (F ^ k *ᵥ d) ≤ C * γ ^ k * spy d := by
+  obtain ⟨C, hC0, hC⟩ := exists_norm_pow_le (lamMat * F) hγ
+  have hγ0 : 0 < γ := (specRad_nonneg _).trans_lt hγ
+  refine ⟨2 * C, by positivity, fun k d => ?_⟩
+  calc spy (F ^ k *ᵥ d) ≤ 2 * ‖endo (F ^ k *ᵥ d)‖ := spy_le_two_norm_endo _
+    _ = 2 * ‖(lamMat * F) ^ k *ᵥ endo d‖ := by rw [lamF_pow_endo hF]
+    _ ≤ 2 * (‖(lamMat * F) ^ k‖ * ‖endo d‖) :=
+        mul_le_mul_of_nonneg_left (Matrix.linfty_opNorm_mulVec _ _) zero_le_two
+    _ ≤ 2 * (C * γ ^ k * spy d) := by
+        refine mul_le_mul_of_nonneg_left ?_ zero_le_two
+        exact mul_le_mul (hC k) (norm_endo_le d) (norm_nonneg _) (by positivity)
+    _ = 2 * C * γ ^ k * spy d := by ring
+
+/-- **Endogenous value iteration is asymptotically no slower than relative value iteration**
+(Bray, Prop 4): `ρ(ΛF) ≤ λ(F)`. -/
+theorem endoRadius_le_subradius [Nonempty X] [Nonempty Y] {F : Matrix (X × Y) (X × Y) ℝ}
+    (hQ : IsStochastic F) (hF : PreservesLift F) (s₀ : X × Y) :
+    endoRadius F ≤ subradius F s₀ := by
+  refine le_of_forall_gt_imp_ge_of_dense fun γ hγ => ?_
+  obtain ⟨C, hC0, hC⟩ := sp_pow_mulVec_le hQ s₀ hγ
+  have hγ0 : 0 ≤ γ := (specRad_nonneg _).trans hγ.le
+  refine specRad_le_of_norm_pow_le _ (K := 1 + 2 * C) (by positivity) hγ0 fun k => ?_
+  rw [Matrix.linfty_opNorm_eq_opNorm]
+  refine ContinuousLinearMap.opNorm_le_bound _ (by positivity) fun w => ?_
+  change ‖(lamMat * F) ^ k *ᵥ w‖ ≤ (1 + 2 * C) * γ ^ k * ‖w‖
+  rcases k with _ | k
+  · simp only [pow_zero, one_mulVec, mul_one]
+    nlinarith [norm_nonneg w]
+  have e : (lamMat * F) ^ (k + 1) *ᵥ w = endo (F ^ (k + 1) *ᵥ w) := by
+    rw [pow_succ, ← mulVec_mulVec, ← mulVec_mulVec, lamMat_mulVec, lamF_pow_endo hF,
+      mulVec_mulVec, ← pow_succ]
+  rw [e]
+  calc ‖endo (F ^ (k + 1) *ᵥ w)‖ ≤ spy (F ^ (k + 1) *ᵥ w) := norm_endo_le _
+    _ ≤ sp (F ^ (k + 1) *ᵥ w) := spy_le_sp _
+    _ ≤ C * γ ^ (k + 1) * sp w := hC _ _
+    _ ≤ C * γ ^ (k + 1) * (2 * ‖w‖) :=
+        mul_le_mul_of_nonneg_left (sp_le_two_norm w) (by positivity)
+    _ ≤ (1 + 2 * C) * γ ^ (k + 1) * ‖w‖ := by nlinarith [norm_nonneg w, pow_nonneg hγ0 (k + 1)]
+
+variable {A : Type*} (E : ExoMDP X Y A)
+
+omit [DecidableEq X] [DecidableEq Y] in
+/-- Every policy matrix of an `ExoMDP` preserves functions of the exogenous state. -/
+theorem Pmat_preservesLift (σ : X × Y → A) : PreservesLift (E.toMDP.Pmat σ) := fun c =>
+  ⟨E.Fxc c, by
+    funext s
+    change ∑ t, E.toMDP.P s (σ s) t * lift c t = lift (E.Fxc c) s
+    simp only [E.sum_P_mul, lift, ← sum_mul, E.Fy_sum, one_mul, Fxc]⟩
+
+/-- **Endogenous policy evaluation converges at rate `βρ(ΛP_σ)`** (Bray, 2019b, Prop 4.2). -/
+theorem endo_policy_eval_le [Nonempty X] [Nonempty Y] (hβ : E.β < 1) (σ : X × Y → A) {γ : ℝ}
+    (hγ : endoRadius (E.toMDP.Pmat σ) < γ) :
+    ∃ C, 0 ≤ C ∧ ∀ (n : ℕ) (v : X × Y → ℝ),
+      spy (fun s => (E.toMDP.Tσ σ)^[n] v s - E.toMDP.vσ hβ σ s) ≤
+        C * (E.β * γ) ^ n * spy (fun s => v s - E.toMDP.vσ hβ σ s) := by
+  obtain ⟨C, hC0, hC⟩ := spy_pow_mulVec_le (E.Pmat_preservesLift σ) hγ
+  refine ⟨C, hC0, fun n v => ?_⟩
+  have hfix : (E.toMDP.Tσ σ)^[n] (E.toMDP.vσ hβ σ) = E.toMDP.vσ hβ σ :=
+    Function.iterate_fixed (E.toMDP.Tσ_vσ hβ σ) n
+  have e := E.toMDP.Tσ_iterate_sub σ v (E.toMDP.vσ hβ σ) n
+  rw [hfix] at e
+  rw [e]
+  calc spy (fun s => E.β ^ n * (E.toMDP.Pmat σ ^ n *ᵥ (v - E.toMDP.vσ hβ σ)) s)
+      ≤ E.β ^ n * spy (E.toMDP.Pmat σ ^ n *ᵥ (v - E.toMDP.vσ hβ σ)) :=
+        spy_mul_le (pow_nonneg E.β_nonneg n) _
+    _ ≤ E.β ^ n * (C * γ ^ n * spy (v - E.toMDP.vσ hβ σ)) :=
+        mul_le_mul_of_nonneg_left (hC n _) (pow_nonneg E.β_nonneg n)
+    _ = C * (E.β * γ) ^ n * spy (fun s => v s - E.toMDP.vσ hβ σ s) := by
+        rw [mul_pow]
+        change _ = C * (E.β ^ n * γ ^ n) * spy (v - E.toMDP.vσ hβ σ)
+        ring
+
+/-- **Endogenous value iteration converges at rate `βρ(ΛP_{σ*})`**: with a unique, strict optimal
+decision rule `σ*`, for every `γ > ρ(ΛP_{σ*})` there are `C` and `N` with
+`spy(T^{N+k}v − v*) ≤ C(βγ)ᵏ`. -/
+theorem endo_asymptotic_rate [Nonempty X] [Nonempty Y] (hβ : E.β < 1) {σs : X × Y → A}
+    (hstrict : ∀ s, σs s ∈ E.Γ s ∧ ∀ a ∈ E.Γ s, a ≠ σs s →
+      E.toMDP.Q (E.toMDP.vstar hβ) s a < E.toMDP.Q (E.toMDP.vstar hβ) s (σs s))
+    {γ : ℝ} (hγ : endoRadius (E.toMDP.Pmat σs) < γ) (v : X × Y → ℝ) :
+    ∃ C N, ∀ k, spy (fun s => E.toMDP.T^[N + k] v s - E.toMDP.vstar hβ s) ≤
+      C * (E.β * γ) ^ k := by
+  obtain ⟨N, hN⟩ := E.toMDP.eventually_linear hβ hstrict v
+  obtain ⟨C, hC0, hC⟩ := spy_pow_mulVec_le (E.Pmat_preservesLift σs) hγ
+  refine ⟨C * spy (E.toMDP.T^[N] v - E.toMDP.vstar hβ), N, fun k => ?_⟩
+  have e : (fun s => E.toMDP.T^[N + k] v s - E.toMDP.vstar hβ s) =
+      fun s => E.β ^ k *
+        (E.toMDP.Pmat σs ^ k *ᵥ (E.toMDP.T^[N] v - E.toMDP.vstar hβ)) s := by
+    funext s
+    have := congrFun (hN k) s
+    simpa using this
+  rw [e]
+  calc spy (fun s => E.β ^ k *
+        (E.toMDP.Pmat σs ^ k *ᵥ (E.toMDP.T^[N] v - E.toMDP.vstar hβ)) s)
+      ≤ E.β ^ k * spy (E.toMDP.Pmat σs ^ k *ᵥ (E.toMDP.T^[N] v - E.toMDP.vstar hβ)) :=
+        spy_mul_le (pow_nonneg E.β_nonneg k) _
+    _ ≤ E.β ^ k * (C * γ ^ k * spy (E.toMDP.T^[N] v - E.toMDP.vstar hβ)) :=
+        mul_le_mul_of_nonneg_left (hC k _) (pow_nonneg E.β_nonneg k)
+    _ = C * spy (E.toMDP.T^[N] v - E.toMDP.vstar hβ) * (E.β * γ) ^ k := by rw [mul_pow]; ring
+
+/-- The endogenous values `Λ(Tⁿv)` converge to `Λv*` at rate `βρ(ΛP_{σ*})`. -/
+theorem endo_values_asymptotic_rate [Nonempty X] [Nonempty Y] (hβ : E.β < 1) {σs : X × Y → A}
+    (hstrict : ∀ s, σs s ∈ E.Γ s ∧ ∀ a ∈ E.Γ s, a ≠ σs s →
+      E.toMDP.Q (E.toMDP.vstar hβ) s a < E.toMDP.Q (E.toMDP.vstar hβ) s (σs s))
+    {γ : ℝ} (hγ : endoRadius (E.toMDP.Pmat σs) < γ) (v : X × Y → ℝ) :
+    ∃ C N, ∀ k s, |endo (E.toMDP.T^[N + k] v) s - endo (E.toMDP.vstar hβ) s| ≤
+      C * (E.β * γ) ^ k := by
+  obtain ⟨C, N, h⟩ := E.endo_asymptotic_rate hβ hstrict hγ v
+  refine ⟨C, N, fun k s => le_trans ?_ (h k)⟩
+  rw [← congrFun (endo_sub _ _) s]
+  exact abs_endo_le _ s
+
+/-- For every decision rule, the endogenous asymptotic rate is at most the relative one. -/
+theorem endoRadius_policy_le [Nonempty X] [Nonempty Y] (σ : X × Y → A) (s₀ : X × Y) :
+    endoRadius (E.toMDP.Pmat σ) ≤ subradius (E.toMDP.Pmat σ) s₀ :=
+  endoRadius_le_subradius (E.toMDP.Pmat_isStochastic σ) (E.Pmat_preservesLift σ) s₀
+
+end ExoMDP
+
+end DPExtensions.RelativeValueIteration
+
 set_option linter.style.longLine false
 #print axioms DPExtensions.RelativeValueIteration.sp
 #print axioms DPExtensions.RelativeValueIteration.sub_le_sp
@@ -1466,3 +2454,67 @@ set_option linter.style.longLine false
 #print axioms DPExtensions.RelativeValueIteration.swap_sp_vstar
 #print axioms DPExtensions.RelativeValueIteration.swap_endo_exact
 #print axioms DPExtensions.RelativeValueIteration.relative_slow_endogenous_exact
+#print axioms DPExtensions.RelativeValueIteration.complexify
+#print axioms DPExtensions.RelativeValueIteration.complexify_apply
+#print axioms DPExtensions.RelativeValueIteration.complexify_pow
+#print axioms DPExtensions.RelativeValueIteration.complexify_mul
+#print axioms DPExtensions.RelativeValueIteration.nnnorm_complexify
+#print axioms DPExtensions.RelativeValueIteration.norm_complexify
+#print axioms DPExtensions.RelativeValueIteration.specRad
+#print axioms DPExtensions.RelativeValueIteration.spectralRadius_complexify_ne_top
+#print axioms DPExtensions.RelativeValueIteration.specRad_nonneg
+#print axioms DPExtensions.RelativeValueIteration.mem_spectrum_iff_eigenpair
+#print axioms DPExtensions.RelativeValueIteration.tendsto_norm_pow_rpow
+#print axioms DPExtensions.RelativeValueIteration.eventually_norm_pow_le
+#print axioms DPExtensions.RelativeValueIteration.exists_norm_pow_le
+#print axioms DPExtensions.RelativeValueIteration.specRad_le_of_norm_pow_le
+#print axioms DPExtensions.RelativeValueIteration.deltaMat
+#print axioms DPExtensions.RelativeValueIteration.IsStochastic
+#print axioms DPExtensions.RelativeValueIteration.subradius
+#print axioms DPExtensions.RelativeValueIteration.deltaMat_mulVec
+#print axioms DPExtensions.RelativeValueIteration.cdelta_mulVec
+#print axioms DPExtensions.RelativeValueIteration.mulVec_const
+#print axioms DPExtensions.RelativeValueIteration.cmulVec_const
+#print axioms DPExtensions.RelativeValueIteration.norm_cmulVec_le
+#print axioms DPExtensions.RelativeValueIteration.no_jordan_one
+#print axioms DPExtensions.RelativeValueIteration.complexify_deltaQ_mulVec
+#print axioms DPExtensions.RelativeValueIteration.mem_spectrum_deltaQ_iff
+#print axioms DPExtensions.RelativeValueIteration.spectralRadius_deltaQ
+#print axioms DPExtensions.RelativeValueIteration.sp_deltaMat_mulVec
+#print axioms DPExtensions.RelativeValueIteration.norm_deltaMat_mulVec_le
+#print axioms DPExtensions.RelativeValueIteration.sp_le_two_norm
+#print axioms DPExtensions.RelativeValueIteration.deltaQ_pow_mulVec
+#print axioms DPExtensions.RelativeValueIteration.sp_pow_mulVec_le
+#print axioms DPExtensions.RelativeValueIteration.subradius_le_dobrushin
+#print axioms DPExtensions.RelativeValueIteration.sp_mul_le
+#print axioms DPExtensions.RelativeValueIteration.MDP.Pmat
+#print axioms DPExtensions.RelativeValueIteration.MDP.Pmat_isStochastic
+#print axioms DPExtensions.RelativeValueIteration.MDP.Tσ_sub
+#print axioms DPExtensions.RelativeValueIteration.MDP.Tσ_iterate_sub
+#print axioms DPExtensions.RelativeValueIteration.MDP.sp_policy_eval_le
+#print axioms DPExtensions.RelativeValueIteration.MDP.eventually_T_eq_Tσ
+#print axioms DPExtensions.RelativeValueIteration.MDP.norm_iterate_sub_vstar_le
+#print axioms DPExtensions.RelativeValueIteration.MDP.eventually_linear
+#print axioms DPExtensions.RelativeValueIteration.MDP.relative_asymptotic_rate
+#print axioms DPExtensions.RelativeValueIteration.MDP.rel_asymptotic_rate
+#print axioms DPExtensions.RelativeValueIteration.MDP.level_rate_lower
+#print axioms DPExtensions.RelativeValueIteration.MDP.subradius_policy_le
+#print axioms DPExtensions.RelativeValueIteration.ExoMDP.endo_idem
+#print axioms DPExtensions.RelativeValueIteration.ExoMDP.endo_lift
+#print axioms DPExtensions.RelativeValueIteration.ExoMDP.PreservesLift
+#print axioms DPExtensions.RelativeValueIteration.ExoMDP.endo_mulVec_endo
+#print axioms DPExtensions.RelativeValueIteration.ExoMDP.spy_le_two_norm_endo
+#print axioms DPExtensions.RelativeValueIteration.ExoMDP.norm_endo_le
+#print axioms DPExtensions.RelativeValueIteration.ExoMDP.spy_mul_le
+#print axioms DPExtensions.RelativeValueIteration.ExoMDP.lamMat
+#print axioms DPExtensions.RelativeValueIteration.ExoMDP.lamMat_mulVec
+#print axioms DPExtensions.RelativeValueIteration.ExoMDP.endoRadius
+#print axioms DPExtensions.RelativeValueIteration.ExoMDP.PreservesLift.pow
+#print axioms DPExtensions.RelativeValueIteration.ExoMDP.lamF_pow_endo
+#print axioms DPExtensions.RelativeValueIteration.ExoMDP.spy_pow_mulVec_le
+#print axioms DPExtensions.RelativeValueIteration.ExoMDP.endoRadius_le_subradius
+#print axioms DPExtensions.RelativeValueIteration.ExoMDP.Pmat_preservesLift
+#print axioms DPExtensions.RelativeValueIteration.ExoMDP.endo_policy_eval_le
+#print axioms DPExtensions.RelativeValueIteration.ExoMDP.endo_asymptotic_rate
+#print axioms DPExtensions.RelativeValueIteration.ExoMDP.endo_values_asymptotic_rate
+#print axioms DPExtensions.RelativeValueIteration.ExoMDP.endoRadius_policy_le
