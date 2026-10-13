@@ -1,11 +1,13 @@
 # Dynamic Programming in Lean
 
 Checked dynamic programming, following Sargent and Stachurski, *Dynamic
-Programming*, Volume 1: *Finite States* and Volume 2: *General States*. Each
+Programming*, Volume 1: *Finite States* and Volume 2: *General States*, and
+Stokey and Lucas with Prescott, *Recursive Methods in Economic Dynamics*. Each
 folder is an independent Lean/Mathlib project for one chapter, with precise
 statements, a source map to the book's results and pages, and reproducible
 proof checks. Volume 1 projects live under `FiniteStates/`, Volume 2 under
-`GeneralStates/`. Results beyond the book that build on it live under `Extensions/`.
+`GeneralStates/`, Stokey–Lucas–Prescott under `RecursiveMethods/`. Results beyond
+the books that build on them live under `Extensions/`.
 
 | Project | Chapter | Checked results | Start here |
 | --- | --- | --- | --- |
@@ -28,6 +30,16 @@ proof checks. Volume 1 projects live under `FiniteStates/`, Volume 2 under
 | [GeneralStates/RecursiveDecisionProcesses](GeneralStates/RecursiveDecisionProcesses/README.md) | II.7 Recursive Decision Processes | 392 theorems: recursive decision processes and their generated ADPs, with greedy policies for finite and continuous actions (Lemmas 7.1.1–7.1.2) and the chapter's examples (Exercises 7.1.1–7.1.5), bounded and weighted contractions (Propositions 7.2.1–7.2.5, with `bℓX` transported from `bX`), monotone and concave value functions and a unique continuous optimal policy (Propositions 7.2.6–7.2.8), risk measures and certainty equivalents (Exercises 7.2.5–7.2.6, coherence of the mean and the essential infimum, the entropic certainty equivalent), MDPs with continuous certainty equivalents (Proposition 7.2.10), savings with utility unbounded above, irreversible investment under risk and ambiguity, and the isomorphism between multiplicative Kreps–Porteus and risk-sensitive RDPs (Exercises 7.2.2–7.2.4, 7.3.1–7.3.4, Propositions 7.3.1–7.3.2) | [Chapter overview](GeneralStates/RecursiveDecisionProcesses/README.md) |
 | [GeneralStates/AdditionalApplications](GeneralStates/AdditionalApplications/README.md) | II.8 Additional Applications | 771 theorems: job search with Markov offers on `L¹(φ)` (Propositions 8.1.1–8.1.2), bounded offers, continuation values and the reservation wage via factorization, parametric monotonicity (in `c` and `β`, first passage times, stochastic dominance, mean-preserving spreads), persistent and transient wage shocks, nonlinear discounting and Kreps–Porteus expectations via Du's theorem, learning (Proposition 8.2.1, monotone likelihood ratios imply stochastic dominance), separation (Proposition 8.2.2), negative discounting and the Coase production chain (Theorem 8.3.6, Propositions 8.3.1–8.3.2, for every chain), optimal harvests by factorization, and the stochastic growth model (Proposition 8.3.7, Lemma 8.3.8, the envelope condition by the Clausen–Strub sandwich, the Euler equation and the Coleman–Reffett operator), with counterexamples to Exercises 8.1.4 and 8.3.6 and to the interiority claim of Proposition 8.3.9 | [Chapter overview](GeneralStates/AdditionalApplications/README.md) |
 | [GeneralStates/ApproximationAndLearning](GeneralStates/ApproximationAndLearning/README.md) | II.9 Approximation and Learning | 451 theorems: kernel averagers, nonexpansive and order preserving (Lemmas 9.1.1, 9.1.6), Gaussian kernels and piecewise linear interpolation, least squares, fitted value iteration error bounds (Theorems 9.1.3–9.1.4, Proposition 9.1.5), damped iteration (Lemma 9.1.7), the asset pricing example, the Robbins–Siegmund lemma and the Robbins–Monro theorem (Theorem 9.1.8) for Hilbert-space contractions and, via Tsitsiklis's asynchronous theorem, for supremum-norm contractions (Remark 9.1.3), almost sure convergence of the asset pricing updates, Q-learning and its almost sure convergence (Theorem 9.2.1), risk-sensitive Q-learning as an order-reversing FDP (Exercises 9.2.1–9.2.2), and optimality at one state under irreducibility (Theorem 9.2.2) | [Chapter overview](GeneralStates/ApproximationAndLearning/README.md) |
+
+## Stokey, Lucas and Prescott
+
+Stokey and Lucas with Prescott, *Recursive Methods in Economic Dynamics* (1989), one project per
+chapter under `RecursiveMethods/`, built in book order. The plan is in
+[PROPOSAL-StokeyLucasPrescott.md](PROPOSAL-StokeyLucasPrescott.md).
+
+| Project | Chapter | Checked results | Start here |
+| --- | --- | --- | --- |
+| [RecursiveMethods/Overview](RecursiveMethods/Overview/README.md) | 2 An Overview | 102 theorems: Euler and boundary conditions sufficient and the optimum unique for the finite-horizon concave planner; the log/Cobb–Douglas economy solved with a finite horizon (the backward saving rates, converging to αβ) and an infinite horizon (v = A + B ln k solves the functional equation with αβk^α its unique maximizer); the neoclassical technology (with strict quasi-concavity corrected to the open quadrant, Cobb–Douglas as a model); the constant-savings-rate economy's unique steady state and monotone convergence (needing s(1 − δ) < 1); the event-tree planner's plan space and stochastic Euler equations; the stochastic functional equation and expected lifetime utility under i.i.d. shocks; Gaussian log capital with explicit means, variances and limits; competitive equilibrium with both welfare theorems, firm-owned capital and sequential markets with bonds | [Chapter overview](RecursiveMethods/Overview/README.md) |
 
 ## Extensions
 

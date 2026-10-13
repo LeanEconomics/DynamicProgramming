@@ -1,0 +1,1758 @@
+{
+  "checked_at_utc": "2026-10-13T20:49:12.466624+00:00",
+  "theorems": 102,
+  "module_theorems": {
+    "Overview/Basics.lean": 5,
+    "Overview/FiniteHorizon.lean": 15,
+    "Overview/BellmanLog.lean": 8,
+    "Overview/Technology.lean": 12,
+    "Overview/SavingsRate.lean": 19,
+    "Overview/StochasticLog.lean": 17,
+    "Overview/LogNormal.lean": 10,
+    "Overview/Equilibrium.lean": 11,
+    "Overview/EventTree.lean": 5
+  },
+  "audited_declarations": 171,
+  "declarations": [
+    {
+      "name": "StokeyLucasPrescott.Overview.concave_le_tangent",
+      "kind": "theorem",
+      "module": "Overview/Basics.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.strictConcave_lt_tangent",
+      "kind": "theorem",
+      "module": "Overview/Basics.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.sum_telescope",
+      "kind": "theorem",
+      "module": "Overview/Basics.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.planValue",
+      "kind": "def",
+      "module": "Overview/Basics.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.Feasible",
+      "kind": "def",
+      "module": "Overview/Basics.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.euler_optimal",
+      "kind": "theorem",
+      "module": "Overview/Basics.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.euler_unique",
+      "kind": "theorem",
+      "module": "Overview/Basics.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.euler_iff_z",
+      "kind": "theorem",
+      "module": "Overview/FiniteHorizon.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.savingRate",
+      "kind": "def",
+      "module": "Overview/FiniteHorizon.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.savingRate_zero",
+      "kind": "theorem",
+      "module": "Overview/FiniteHorizon.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.savingRate_succ",
+      "kind": "theorem",
+      "module": "Overview/FiniteHorizon.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.savingRate_pos",
+      "kind": "theorem",
+      "module": "Overview/FiniteHorizon.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.savingRate_nonneg",
+      "kind": "theorem",
+      "module": "Overview/FiniteHorizon.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.savingRate_lt_one",
+      "kind": "theorem",
+      "module": "Overview/FiniteHorizon.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.z_unique",
+      "kind": "theorem",
+      "module": "Overview/FiniteHorizon.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.path",
+      "kind": "def",
+      "module": "Overview/FiniteHorizon.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.path_pos",
+      "kind": "theorem",
+      "module": "Overview/FiniteHorizon.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.path_terminal",
+      "kind": "theorem",
+      "module": "Overview/FiniteHorizon.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.path_consumption",
+      "kind": "theorem",
+      "module": "Overview/FiniteHorizon.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.path_feasible",
+      "kind": "theorem",
+      "module": "Overview/FiniteHorizon.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.path_euler",
+      "kind": "theorem",
+      "module": "Overview/FiniteHorizon.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.path_optimal",
+      "kind": "theorem",
+      "module": "Overview/FiniteHorizon.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.path_unique",
+      "kind": "theorem",
+      "module": "Overview/FiniteHorizon.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.savingRate_tendsto",
+      "kind": "theorem",
+      "module": "Overview/FiniteHorizon.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.coefB",
+      "kind": "def",
+      "module": "Overview/BellmanLog.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.coefA",
+      "kind": "def",
+      "module": "Overview/BellmanLog.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.logValue",
+      "kind": "def",
+      "module": "Overview/BellmanLog.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.cdPath",
+      "kind": "def",
+      "module": "Overview/BellmanLog.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.cdPath_pos",
+      "kind": "theorem",
+      "module": "Overview/BellmanLog.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.logCapital",
+      "kind": "theorem",
+      "module": "Overview/BellmanLog.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.cdPath_consumption",
+      "kind": "theorem",
+      "module": "Overview/BellmanLog.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.hasSum_value",
+      "kind": "theorem",
+      "module": "Overview/BellmanLog.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.bellmanRHS",
+      "kind": "def",
+      "module": "Overview/BellmanLog.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.bellman_le",
+      "kind": "theorem",
+      "module": "Overview/BellmanLog.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.bellman_attained",
+      "kind": "theorem",
+      "module": "Overview/BellmanLog.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.bellman_isGreatest",
+      "kind": "theorem",
+      "module": "Overview/BellmanLog.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.bellman_argmax_unique",
+      "kind": "theorem",
+      "module": "Overview/BellmanLog.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.Neoclassical",
+      "kind": "structure",
+      "module": "Overview/Technology.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.Neoclassical.mk",
+      "kind": "constructor",
+      "module": "Overview/Technology.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.Neoclassical.hom",
+      "kind": "projection",
+      "module": "Overview/Technology.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.Neoclassical.zero_left",
+      "kind": "projection",
+      "module": "Overview/Technology.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.Neoclassical.deriv_k",
+      "kind": "projection",
+      "module": "Overview/Technology.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.Neoclassical.cont_Fk",
+      "kind": "projection",
+      "module": "Overview/Technology.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.Neoclassical.cont_F",
+      "kind": "projection",
+      "module": "Overview/Technology.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.Neoclassical.Fk_pos",
+      "kind": "projection",
+      "module": "Overview/Technology.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.Neoclassical.mono_n",
+      "kind": "projection",
+      "module": "Overview/Technology.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.Neoclassical.quasi",
+      "kind": "projection",
+      "module": "Overview/Technology.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.Neoclassical.inada_zero",
+      "kind": "projection",
+      "module": "Overview/Technology.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.Neoclassical.inada_top",
+      "kind": "projection",
+      "module": "Overview/Technology.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.goods",
+      "kind": "def",
+      "module": "Overview/Technology.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.Neoclassical.strictMonoOn_F",
+      "kind": "theorem",
+      "module": "Overview/Technology.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.Neoclassical.F_pos",
+      "kind": "theorem",
+      "module": "Overview/Technology.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.Neoclassical.strictConcaveOn_F",
+      "kind": "theorem",
+      "module": "Overview/Technology.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.Neoclassical.f_zero",
+      "kind": "theorem",
+      "module": "Overview/Technology.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.Neoclassical.hasDerivAt_f",
+      "kind": "theorem",
+      "module": "Overview/Technology.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.Neoclassical.continuousOn_f'",
+      "kind": "theorem",
+      "module": "Overview/Technology.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.Neoclassical.f'_pos",
+      "kind": "theorem",
+      "module": "Overview/Technology.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.Neoclassical.strictMonoOn_f",
+      "kind": "theorem",
+      "module": "Overview/Technology.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.Neoclassical.strictConcaveOn_f",
+      "kind": "theorem",
+      "module": "Overview/Technology.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.Neoclassical.f'_tendsto_zero",
+      "kind": "theorem",
+      "module": "Overview/Technology.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.Neoclassical.f'_tendsto_atTop",
+      "kind": "theorem",
+      "module": "Overview/Technology.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.cobbDouglas",
+      "kind": "def",
+      "module": "Overview/Technology.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.cobbDouglas_neoclassical",
+      "kind": "theorem",
+      "module": "Overview/Technology.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.SavingsMap",
+      "kind": "structure",
+      "module": "Overview/SavingsRate.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.SavingsMap.mk",
+      "kind": "constructor",
+      "module": "Overview/SavingsRate.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.SavingsMap.zero",
+      "kind": "projection",
+      "module": "Overview/SavingsRate.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.SavingsMap.cont",
+      "kind": "projection",
+      "module": "Overview/SavingsRate.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.SavingsMap.mono",
+      "kind": "projection",
+      "module": "Overview/SavingsRate.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.SavingsMap.conc",
+      "kind": "projection",
+      "module": "Overview/SavingsRate.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.SavingsMap.above",
+      "kind": "projection",
+      "module": "Overview/SavingsRate.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.SavingsMap.below",
+      "kind": "projection",
+      "module": "Overview/SavingsRate.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.SavingsMap.pos_of_lt",
+      "kind": "theorem",
+      "module": "Overview/SavingsRate.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.SavingsMap.exists_unique_fixedPoint",
+      "kind": "theorem",
+      "module": "Overview/SavingsRate.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.SavingsMap.kstar",
+      "kind": "def",
+      "module": "Overview/SavingsRate.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.SavingsMap.kstar_pos",
+      "kind": "theorem",
+      "module": "Overview/SavingsRate.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.SavingsMap.g_kstar",
+      "kind": "theorem",
+      "module": "Overview/SavingsRate.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.SavingsMap.eq_kstar",
+      "kind": "theorem",
+      "module": "Overview/SavingsRate.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.SavingsMap.lt_of_lt_fixed",
+      "kind": "theorem",
+      "module": "Overview/SavingsRate.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.SavingsMap.gt_of_gt_fixed",
+      "kind": "theorem",
+      "module": "Overview/SavingsRate.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.SavingsMap.g_pos",
+      "kind": "theorem",
+      "module": "Overview/SavingsRate.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.SavingsMap.iterate_mem_below",
+      "kind": "theorem",
+      "module": "Overview/SavingsRate.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.SavingsMap.iterate_mem_above",
+      "kind": "theorem",
+      "module": "Overview/SavingsRate.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.SavingsMap.monotone_of_le",
+      "kind": "theorem",
+      "module": "Overview/SavingsRate.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.SavingsMap.antitone_of_ge",
+      "kind": "theorem",
+      "module": "Overview/SavingsRate.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.SavingsMap.limit_eq_kstar",
+      "kind": "theorem",
+      "module": "Overview/SavingsRate.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.SavingsMap.tendsto_fixedPoint",
+      "kind": "theorem",
+      "module": "Overview/SavingsRate.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.SavingsMap.iterate_eq_fixed_iff",
+      "kind": "theorem",
+      "module": "Overview/SavingsRate.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.Neoclassical.savings_above",
+      "kind": "theorem",
+      "module": "Overview/SavingsRate.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.Neoclassical.savings_below",
+      "kind": "theorem",
+      "module": "Overview/SavingsRate.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.Neoclassical.savings_crossings",
+      "kind": "theorem",
+      "module": "Overview/SavingsRate.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.Neoclassical.savings_unique_steady_state",
+      "kind": "theorem",
+      "module": "Overview/SavingsRate.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.log_tradeoff",
+      "kind": "theorem",
+      "module": "Overview/StochasticLog.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.log_tradeoff_unique",
+      "kind": "theorem",
+      "module": "Overview/StochasticLog.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.coefC",
+      "kind": "def",
+      "module": "Overview/StochasticLog.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.coefAs",
+      "kind": "def",
+      "module": "Overview/StochasticLog.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.stochValue",
+      "kind": "def",
+      "module": "Overview/StochasticLog.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.integral_stochValue",
+      "kind": "theorem",
+      "module": "Overview/StochasticLog.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.stochRHS",
+      "kind": "def",
+      "module": "Overview/StochasticLog.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.stochRHS_attained",
+      "kind": "theorem",
+      "module": "Overview/StochasticLog.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.stochRHS_eq",
+      "kind": "theorem",
+      "module": "Overview/StochasticLog.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.stoch_bellman_isGreatest",
+      "kind": "theorem",
+      "module": "Overview/StochasticLog.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.stoch_argmax_unique",
+      "kind": "theorem",
+      "module": "Overview/StochasticLog.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.shock",
+      "kind": "def",
+      "module": "Overview/StochasticLog.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.stochPath",
+      "kind": "def",
+      "module": "Overview/StochasticLog.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.stochCons",
+      "kind": "def",
+      "module": "Overview/StochasticLog.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.shockMeasure",
+      "kind": "abbrev",
+      "module": "Overview/StochasticLog.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.ae_shock_pos",
+      "kind": "theorem",
+      "module": "Overview/StochasticLog.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.integrable_log_coord",
+      "kind": "theorem",
+      "module": "Overview/StochasticLog.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.integral_log_coord",
+      "kind": "theorem",
+      "module": "Overview/StochasticLog.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.meanShock",
+      "kind": "def",
+      "module": "Overview/StochasticLog.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.integrable_log_shock",
+      "kind": "theorem",
+      "module": "Overview/StochasticLog.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.integral_log_shock",
+      "kind": "theorem",
+      "module": "Overview/StochasticLog.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.ae_log_path",
+      "kind": "theorem",
+      "module": "Overview/StochasticLog.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.meanLogK",
+      "kind": "def",
+      "module": "Overview/StochasticLog.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.integral_log_path",
+      "kind": "theorem",
+      "module": "Overview/StochasticLog.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.integral_log_cons",
+      "kind": "theorem",
+      "module": "Overview/StochasticLog.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.meanLogK_succ",
+      "kind": "theorem",
+      "module": "Overview/StochasticLog.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.hasSum_expected_utility",
+      "kind": "theorem",
+      "module": "Overview/StochasticLog.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.capPath",
+      "kind": "def",
+      "module": "Overview/LogNormal.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.logPath",
+      "kind": "def",
+      "module": "Overview/LogNormal.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.log_capPath",
+      "kind": "theorem",
+      "module": "Overview/LogNormal.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.constPath",
+      "kind": "def",
+      "module": "Overview/LogNormal.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.logPath_eq",
+      "kind": "theorem",
+      "module": "Overview/LogNormal.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.measurable_logPath",
+      "kind": "theorem",
+      "module": "Overview/LogNormal.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.indepFun_logPath",
+      "kind": "theorem",
+      "module": "Overview/LogNormal.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.meanN",
+      "kind": "def",
+      "module": "Overview/LogNormal.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.sqNN",
+      "kind": "def",
+      "module": "Overview/LogNormal.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.coe_sqNN",
+      "kind": "theorem",
+      "module": "Overview/LogNormal.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.varN",
+      "kind": "def",
+      "module": "Overview/LogNormal.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.hasLaw_logPath",
+      "kind": "theorem",
+      "module": "Overview/LogNormal.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.meanN_eq",
+      "kind": "theorem",
+      "module": "Overview/LogNormal.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.varN_eq",
+      "kind": "theorem",
+      "module": "Overview/LogNormal.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.meanN_tendsto",
+      "kind": "theorem",
+      "module": "Overview/LogNormal.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.varN_tendsto",
+      "kind": "theorem",
+      "module": "Overview/LogNormal.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.firm_profit_le",
+      "kind": "theorem",
+      "module": "Overview/Equilibrium.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.firm_profit_zero",
+      "kind": "theorem",
+      "module": "Overview/Equilibrium.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.utility",
+      "kind": "def",
+      "module": "Overview/Equilibrium.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.HHFeasible",
+      "kind": "def",
+      "module": "Overview/Equilibrium.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.HHBudget",
+      "kind": "def",
+      "module": "Overview/Equilibrium.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.IsEquilibrium",
+      "kind": "structure",
+      "module": "Overview/Equilibrium.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.IsEquilibrium.mk",
+      "kind": "constructor",
+      "module": "Overview/Equilibrium.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.IsEquilibrium.firm",
+      "kind": "projection",
+      "module": "Overview/Equilibrium.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.IsEquilibrium.feasible",
+      "kind": "projection",
+      "module": "Overview/Equilibrium.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.IsEquilibrium.budget",
+      "kind": "projection",
+      "module": "Overview/Equilibrium.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.IsEquilibrium.household",
+      "kind": "projection",
+      "module": "Overview/Equilibrium.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.IsEquilibrium.clear",
+      "kind": "projection",
+      "module": "Overview/Equilibrium.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.first_welfare",
+      "kind": "theorem",
+      "module": "Overview/Equilibrium.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.priceP",
+      "kind": "def",
+      "module": "Overview/Equilibrium.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.priceP_pos",
+      "kind": "theorem",
+      "module": "Overview/Equilibrium.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.household_optimal",
+      "kind": "theorem",
+      "module": "Overview/Equilibrium.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.second_welfare",
+      "kind": "theorem",
+      "module": "Overview/Equilibrium.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.firmValue",
+      "kind": "def",
+      "module": "Overview/Equilibrium.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.firmOwned_firm_optimal",
+      "kind": "theorem",
+      "module": "Overview/Equilibrium.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.firmOwned_household_optimal",
+      "kind": "theorem",
+      "module": "Overview/Equilibrium.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.pvPrice",
+      "kind": "def",
+      "module": "Overview/Equilibrium.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.SeqBudget",
+      "kind": "def",
+      "module": "Overview/Equilibrium.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.sequential_budget",
+      "kind": "theorem",
+      "module": "Overview/Equilibrium.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.sequential_household_optimal",
+      "kind": "theorem",
+      "module": "Overview/Equilibrium.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.sequential_planner_feasible",
+      "kind": "theorem",
+      "module": "Overview/Equilibrium.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.finrank_plan",
+      "kind": "theorem",
+      "module": "Overview/EventTree.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.sum_snoc",
+      "kind": "theorem",
+      "module": "Overview/EventTree.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.histProb",
+      "kind": "def",
+      "module": "Overview/EventTree.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.histProb_snoc",
+      "kind": "theorem",
+      "module": "Overview/EventTree.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.zOf",
+      "kind": "def",
+      "module": "Overview/EventTree.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.kIn",
+      "kind": "def",
+      "module": "Overview/EventTree.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.treeCons",
+      "kind": "def",
+      "module": "Overview/EventTree.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.fdIn",
+      "kind": "def",
+      "module": "Overview/EventTree.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.treeValue",
+      "kind": "def",
+      "module": "Overview/EventTree.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.TreeFeasible",
+      "kind": "def",
+      "module": "Overview/EventTree.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.sum_shift_telescope",
+      "kind": "theorem",
+      "module": "Overview/EventTree.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.Overview.tree_euler_optimal",
+      "kind": "theorem",
+      "module": "Overview/EventTree.lean"
+    }
+  ],
+  "full_build": "passed",
+  "fresh_source_compilation": "passed",
+  "fresh_source_lint_options": [
+    "-Dlinter.mathlibStandardSet=true",
+    "-Dlinter.style.header=false"
+  ],
+  "axioms": {
+    "StokeyLucasPrescott.Overview.concave_le_tangent": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.strictConcave_lt_tangent": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.sum_telescope": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.planValue": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.Feasible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.euler_optimal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.euler_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.euler_iff_z": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.savingRate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.savingRate_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.savingRate_succ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.savingRate_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.savingRate_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.savingRate_lt_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.z_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.path": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.path_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.path_terminal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.path_consumption": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.path_feasible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.path_euler": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.path_optimal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.path_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.savingRate_tendsto": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.coefB": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.coefA": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.logValue": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.cdPath": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.cdPath_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.logCapital": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.cdPath_consumption": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.hasSum_value": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.bellmanRHS": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.bellman_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.bellman_attained": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.bellman_isGreatest": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.bellman_argmax_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.Neoclassical": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.Neoclassical.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.Neoclassical.hom": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.Neoclassical.zero_left": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.Neoclassical.deriv_k": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.Neoclassical.cont_Fk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.Neoclassical.cont_F": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.Neoclassical.Fk_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.Neoclassical.mono_n": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.Neoclassical.quasi": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.Neoclassical.inada_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.Neoclassical.inada_top": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.goods": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.Neoclassical.strictMonoOn_F": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.Neoclassical.F_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.Neoclassical.strictConcaveOn_F": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.Neoclassical.f_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.Neoclassical.hasDerivAt_f": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.Neoclassical.continuousOn_f'": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.Neoclassical.f'_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.Neoclassical.strictMonoOn_f": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.Neoclassical.strictConcaveOn_f": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.Neoclassical.f'_tendsto_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.Neoclassical.f'_tendsto_atTop": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.cobbDouglas": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.cobbDouglas_neoclassical": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.SavingsMap": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.SavingsMap.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.SavingsMap.zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.SavingsMap.cont": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.SavingsMap.mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.SavingsMap.conc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.SavingsMap.above": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.SavingsMap.below": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.SavingsMap.pos_of_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.SavingsMap.exists_unique_fixedPoint": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.SavingsMap.kstar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.SavingsMap.kstar_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.SavingsMap.g_kstar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.SavingsMap.eq_kstar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.SavingsMap.lt_of_lt_fixed": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.SavingsMap.gt_of_gt_fixed": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.SavingsMap.g_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.SavingsMap.iterate_mem_below": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.SavingsMap.iterate_mem_above": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.SavingsMap.monotone_of_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.SavingsMap.antitone_of_ge": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.SavingsMap.limit_eq_kstar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.SavingsMap.tendsto_fixedPoint": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.SavingsMap.iterate_eq_fixed_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.Neoclassical.savings_above": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.Neoclassical.savings_below": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.Neoclassical.savings_crossings": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.Neoclassical.savings_unique_steady_state": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.log_tradeoff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.log_tradeoff_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.coefC": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.coefAs": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.stochValue": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.integral_stochValue": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.stochRHS": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.stochRHS_attained": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.stochRHS_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.stoch_bellman_isGreatest": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.stoch_argmax_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.shock": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.stochPath": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.stochCons": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.shockMeasure": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.ae_shock_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.integrable_log_coord": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.integral_log_coord": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.meanShock": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.integrable_log_shock": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.integral_log_shock": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.ae_log_path": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.meanLogK": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.integral_log_path": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.integral_log_cons": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.meanLogK_succ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.hasSum_expected_utility": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.capPath": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.logPath": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.log_capPath": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.constPath": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.logPath_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.measurable_logPath": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.indepFun_logPath": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.meanN": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.sqNN": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.coe_sqNN": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.varN": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.hasLaw_logPath": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.meanN_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.varN_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.meanN_tendsto": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.varN_tendsto": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.firm_profit_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.firm_profit_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.utility": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.HHFeasible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.HHBudget": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.IsEquilibrium": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.IsEquilibrium.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.IsEquilibrium.firm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.IsEquilibrium.feasible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.IsEquilibrium.budget": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.IsEquilibrium.household": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.IsEquilibrium.clear": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.first_welfare": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.priceP": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.priceP_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.household_optimal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.second_welfare": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.firmValue": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.firmOwned_firm_optimal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.firmOwned_household_optimal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.pvPrice": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.SeqBudget": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.sequential_budget": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.sequential_household_optimal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.sequential_planner_feasible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.finrank_plan": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.sum_snoc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.histProb": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.histProb_snoc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.zOf": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.kIn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.treeCons": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.fdIn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.treeValue": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.TreeFeasible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.sum_shift_telescope": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.Overview.tree_euler_optimal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  "source_sha256": {
+    "Overview/Basics.lean": "075617423afcd92bf7afc23f20fb2b1670e42981fd9c17308a115d383ca9e9af",
+    "Overview/FiniteHorizon.lean": "c630de9c3b66cf732c6c82beac954583adf868d3b8f524eada050c2605c9bbea",
+    "Overview/BellmanLog.lean": "e8ef127895920c602f362ab15f19d0867b45a8a0083d9f3ed38e9b812f1e2e1b",
+    "Overview/Technology.lean": "1d08d74ee27b53c1babbece2bfbe358d814c774d3776290a53296fb673734961",
+    "Overview/SavingsRate.lean": "b77d8f6b4acd6f0a0c66616b10bc1eda6bbbf6d54a0d7e9ff269b5ef5547a9ab",
+    "Overview/StochasticLog.lean": "2a5c1429bc694f70de7fef3ea563d677f0233b54f865e60faefc7d06ad5d38ed",
+    "Overview/LogNormal.lean": "e9842e886783d57749c3c1410381ecfe631a1c1a0e4e05c137eccf5d4463ac96",
+    "Overview/Equilibrium.lean": "7d2fa5b5a97c5f531169c5348e5f94eeb19bbf808004f959827d6c9bafe513de",
+    "Overview/EventTree.lean": "34a6dc372191cb58e0590de28ec821bac67675f5e1db21f3b7ea9a092e8a93b6",
+    "Overview.lean": "cc7b3fbd863e42422ef8b53c350a59b639a956ca015c47395aac89a24b2f23ad",
+    "lean-toolchain": "8733782dc070a99b312039cda424f601b80f3be6f6f512627da5ba25adc27632",
+    "lakefile.toml": "09772c60ec5b25dcc562f2d1fb3cb119a61c2fe2972deff004f8cf7774a7d1f1",
+    "lake-manifest.json": "c81ebe9a019da0d5391bd236899f3008afa36faffcb1f5f06029ec7813ae932d",
+    "proof-manifest.json": "7103872c2aa60f476e9d2bb8d7f7fda9d555a6a522543bac5d7e995497bb0adc",
+    "scripts/verify.py": "a70b1fa704dd590f937f8b37682afa88a9d85a9150065acb935c7d2c9589da3b",
+    "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  },
+  "fresh_audit_sha256": "ab1453a1d20bd2cdef1f13657f2ef99268ccfd02cb0915233df5a14883cb5c32",
+  "lean_toolchain": "leanprover/lean4:v4.34.0",
+  "scope": "SLP Chapter 2 (An Overview): sufficiency and uniqueness of the Euler and boundary conditions for the finite-horizon concave planning problem; the log/Cobb-Douglas finite-horizon solution (Ex 2.2) and infinite-horizon value function and Bellman equation (Ex 2.3); the neoclassical technology and the properties of f (Ex 2.1) with Cobb-Douglas as a model of the assumptions; the constant-savings-rate dynamics (Ex 2.4); the event-tree planner's dimension count and the sufficiency of the stochastic Euler equations (Ex 2.5); the stochastic Bellman equation and expected lifetime utility under i.i.d. shocks (Ex 2.6); Gaussian log capital with its means, variances and limits (Ex 2.7); competitive equilibrium, the first and second welfare theorems, firm-owned capital and sequential markets (Ex 2.8-2.10).",
+  "source": "Stokey, Lucas and Prescott (1989), Recursive Methods in Economic Dynamics, Chapter 2."
+}
