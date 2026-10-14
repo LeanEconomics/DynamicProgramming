@@ -9360,6 +9360,1753 @@ theorem ex_5_12a_necessary (h : ConsHyp W p R β M) (hA : AggHyp W β M) (hR1 : 
 
 end StokeyLucasPrescott.DeterministicApplications
 
+/-
+Copyright (c) 2026 Robert Kirkby. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Robert Kirkby
+-/
+
+/-!
+# A Pareto problem with recursive preferences
+
+SLP §5.13, pp. 117–118: two agents share one unit of a single good each period; agent `i` has
+aggregator `W_i` with (W1)–(W3) and utility `u_i` (Exercise 5.11d). One good means `l = 1`;
+`cst c` is the bundle `c`. With `I_i = [u_i(0), u_i(1)] = [0, b_i]`,
+`(Tf)(x) = max {W₁[c, f(y)] : c ∈ [0, 1], y ∈ I₂, W₂(1 − c, y) ≥ x}`.
+
+Assume both aggregators are nondecreasing (W4) and `W₂` is strictly increasing in each argument.
+
+* `isLHC_of_approx`: a correspondence is l.h.c. at `x` when every point of `Γ(x)` is a limit of
+  points that stay feasible near `x` (a Slater condition). `pareto_lhc`, `pareto_uhc`: the
+  constraint set is continuous.
+* **Exercise 5.13a** (`ex_5_13a`): `T` maps the continuous functions `I₂ → I₁` into themselves
+  and is a contraction of modulus `β₁`; so it has a unique fixed point `v`.
+* **Exercise 5.13b** (`ex_5_13b`): `v = v*`: for `x ∈ I₂`,
+  `v(x) = sup{u₁(c) : 0 ≤ c_t ≤ 1, u₂(1 − c) ≥ x}`, and the supremum is attained by the plan
+  that follows the maximizers of `T`. `v` is the Pareto frontier.
+-/
+
+open Set Filter Topology BoundedContinuousFunction
+
+namespace StokeyLucasPrescott.DeterministicApplications
+
+/-- A correspondence is l.h.c. at `x` if every `w ∈ Γ(x)` is approximated by points that remain
+feasible for all `x'` near `x`. -/
+theorem isLHC_of_approx {X Y : Type*} [MetricSpace X] [MetricSpace Y] {Γ : X → Set Y} {x : X}
+    (hne : (Γ x).Nonempty)
+    (h : ∀ w ∈ Γ x, ∀ ε > 0, ∃ w', dist w' w < ε ∧ ∀ᶠ x' in 𝓝 x, w' ∈ Γ x') :
+    IsLHC Γ x := by
+  refine ⟨hne, fun w hw xs hxs => ?_⟩
+  choose w' hw'd hw'ev using fun k : ℕ => h w hw (1 / ((k : ℝ) + 1)) (by positivity)
+  have hN : ∀ k, ∃ N, ∀ n ≥ N, w' k ∈ Γ (xs n) := fun k =>
+    eventually_atTop.1 (hxs.eventually (hw'ev k))
+  choose N hN using hN
+  classical
+  set K : ℕ → ℕ := fun n => Nat.findGreatest (fun k => N k ≤ n) n
+  refine ⟨N 0, fun n => w' (K n), fun n hn => hN (K n) n
+    (Nat.findGreatest_spec (P := fun k => N k ≤ n) (m := 0) (Nat.zero_le n) hn), ?_⟩
+  have hK : Tendsto K atTop atTop := tendsto_atTop_atTop.2 fun k =>
+    ⟨max k (N k), fun n hn => Nat.le_findGreatest (le_of_max_le_left hn)
+      (le_of_max_le_right hn)⟩
+  rw [tendsto_iff_dist_tendsto_zero]
+  exact squeeze_zero (fun _ => dist_nonneg) (fun n => (hw'd (K n)).le)
+    (tendsto_one_div_add_atTop_nhds_zero_nat.comp hK)
+
+/-- The bundle with `c` units of the single good. -/
+def cst (c : ℝ) : Fin 1 → ℝ := fun _ => c
+
+theorem cst_nonneg {c : ℝ} (hc : 0 ≤ c) : 0 ≤ cst c := fun _ => hc
+
+theorem cst_le {c c' : ℝ} (h : c ≤ c') : cst c ≤ cst c' := fun _ => h
+
+variable {W₁ W₂ : (Fin 1 → ℝ) → ℝ → ℝ} {β₁ β₂ M₁ M₂ : ℝ}
+
+/-- The hypotheses of SLP §5.13 used here. -/
+structure ParetoHyp (W₁ W₂ : (Fin 1 → ℝ) → ℝ → ℝ) (β₁ β₂ M₁ M₂ : ℝ) : Prop where
+  h1 : AggHyp W₁ β₁ M₁
+  h2 : AggHyp W₂ β₂ M₂
+  mono1 : ∀ x x' z z', 0 ≤ x → x ≤ x' → z ≤ z' → W₁ x z ≤ W₁ x' z'
+  mono2 : ∀ x x' z z', 0 ≤ x → x ≤ x' → z ≤ z' → W₂ x z ≤ W₂ x' z'
+  strict2c : ∀ c c' z, 0 ≤ c → c < c' → W₂ (cst c) z < W₂ (cst c') z
+  strict2z : ∀ c z z', 0 ≤ c → z < z' → W₂ (cst c) z < W₂ (cst c) z'
+
+/-- The constant sequence `1`. -/
+def oneSeq : Seq 1 := ⟨BoundedContinuousFunction.const ℕ (cst 1), fun _ _ => zero_le_one⟩
+
+theorem shiftSeq_one : shiftSeq oneSeq = oneSeq := Subtype.ext (by ext t i; rfl)
+
+/-- The fixed-point equations `u(0) = 0` and `u(1) = W(1, u(1))`, and monotonicity: `0 ≤ u(1)`. -/
+theorem utility_one {W : (Fin 1 → ℝ) → ℝ → ℝ} {β M : ℝ} (h : AggHyp W β M)
+    (hmono : ∀ x x' z z', 0 ≤ x → x ≤ x' → z ≤ z' → W x z ≤ W x' z') {u : Seq 1 →ᵇ ℝ}
+    (hu : opTW h u = u) : u oneSeq = W (cst 1) (u oneSeq) ∧ 0 ≤ u oneSeq ∧
+      ∀ c, u zeroSeq ≤ u c := by
+  obtain ⟨u', hu', huniq, hz, -⟩ := ex_5_11d h
+  have hu'' := huniq u hu
+  subst hu''
+  have hfe := (DFunLike.congr_fun hu oneSeq).symm
+  rw [opTW_apply, shiftSeq_one] at hfe
+  refine ⟨hfe, ?_, fun c => ex_5_11d_mono h hmono hu fun t => c.2 t⟩
+  rw [← hz]
+  exact ex_5_11d_mono h hmono hu fun t => oneSeq.2 t
+
+/-! ### The operator -/
+
+variable {u₁ u₂ : Seq 1 →ᵇ ℝ}
+
+/-- `I₂ = [0, b₂]`, `b₂ = u₂(1)`. -/
+abbrev I2 (u₂ : Seq 1 →ᵇ ℝ) := ↥(Icc (0 : ℝ) (u₂ oneSeq))
+
+/-- The constraint set `{(c, y) : 0 ≤ c ≤ 1, W₂(1 − c, y) ≥ x}`. -/
+def paretoΦ (W₂ : (Fin 1 → ℝ) → ℝ → ℝ) (u₂ : Seq 1 →ᵇ ℝ) (x : I2 u₂) : Set (ℝ × I2 u₂) :=
+  {w | w.1 ∈ Icc (0 : ℝ) 1 ∧ x.1 ≤ W₂ (cst (1 - w.1)) w.2.1}
+
+/-- The objective `W₁(c, f(y))`. -/
+def paretoObj (W₁ : (Fin 1 → ℝ) → ℝ → ℝ) (f : I2 u₂ → ℝ) (q : I2 u₂ × (ℝ × I2 u₂)) : ℝ :=
+  W₁ (cst q.2.1) (f q.2.2)
+
+theorem continuous_cst : Continuous cst := continuous_pi fun _ => continuous_id
+
+theorem pareto_top_mem (h : ParetoHyp W₁ W₂ β₁ β₂ M₁ M₂) (hu₂ : opTW h.h2 u₂ = u₂) (x : I2 u₂) :
+    ((0 : ℝ), (⟨u₂ oneSeq, (utility_one h.h2 h.mono2 hu₂).2.1, le_rfl⟩ : I2 u₂)) ∈
+      paretoΦ W₂ u₂ x := by
+  refine ⟨⟨le_rfl, zero_le_one⟩, ?_⟩
+  simp only [sub_zero]
+  rw [← (utility_one h.h2 h.mono2 hu₂).1]
+  exact x.2.2
+
+theorem pareto_compact (h : ParetoHyp W₁ W₂ β₁ β₂ M₁ M₂) (x : I2 u₂) :
+    IsCompact (paretoΦ W₂ u₂ x) := by
+  have : CompactSpace (I2 u₂) := isCompact_iff_compactSpace.1 isCompact_Icc
+  have hc : Continuous fun w : ℝ × I2 u₂ => W₂ (cst (1 - w.1)) w.2.1 :=
+    h.h2.cont.comp ((continuous_cst.comp (continuous_const.sub continuous_fst)).prodMk
+      (continuous_subtype_val.comp continuous_snd))
+  refine (isCompact_Icc.prod (isCompact_univ (X := I2 u₂))).of_isClosed_subset ?_
+    fun w hw => ⟨hw.1, mem_univ _⟩
+  exact ((isClosed_Icc.preimage continuous_fst)).inter (isClosed_le continuous_const hc)
+
+theorem pareto_uhc (h : ParetoHyp W₁ W₂ β₁ β₂ M₁ M₂) (hu₂ : opTW h.h2 u₂ = u₂) (x : I2 u₂) :
+    IsUHC (paretoΦ W₂ u₂) x := by
+  have : CompactSpace (I2 u₂) := isCompact_iff_compactSpace.1 isCompact_Icc
+  refine ⟨⟨_, pareto_top_mem h hu₂ x⟩, fun xs hxs ws hws => ?_⟩
+  obtain ⟨w, hw, φ, hφ, hlim⟩ := (isCompact_Icc.prod (isCompact_univ (X := I2 u₂))).tendsto_subseq
+    (x := ws) fun n => ⟨(hws n).1, mem_univ _⟩
+  have hc : Continuous fun w : ℝ × I2 u₂ => W₂ (cst (1 - w.1)) w.2.1 :=
+    h.h2.cont.comp ((continuous_cst.comp (continuous_const.sub continuous_fst)).prodMk
+      (continuous_subtype_val.comp continuous_snd))
+  refine ⟨w, ⟨hw.1, ?_⟩, φ, hφ, hlim⟩
+  exact le_of_tendsto_of_tendsto (((continuous_subtype_val.tendsto x).comp hxs).comp
+    hφ.tendsto_atTop) ((hc.tendsto w).comp hlim) (Eventually.of_forall fun n => (hws (φ n)).2)
+
+theorem pareto_lhc (h : ParetoHyp W₁ W₂ β₁ β₂ M₁ M₂) (hu₂ : opTW h.h2 u₂ = u₂) (x : I2 u₂) :
+    IsLHC (paretoΦ W₂ u₂) x := by
+  refine isLHC_of_approx ⟨_, pareto_top_mem h hu₂ x⟩ fun w hw ε hε => ?_
+  have hc : Continuous fun w : ℝ × I2 u₂ => W₂ (cst (1 - w.1)) w.2.1 :=
+    h.h2.cont.comp ((continuous_cst.comp (continuous_const.sub continuous_fst)).prodMk
+      (continuous_subtype_val.comp continuous_snd))
+  -- a strictly feasible point stays feasible near `x`
+  have hstrict : ∀ w' : ℝ × I2 u₂, w'.1 ∈ Icc (0 : ℝ) 1 → x.1 < W₂ (cst (1 - w'.1)) w'.2.1 →
+      ∀ᶠ x' in 𝓝 x, w' ∈ paretoΦ W₂ u₂ x' := fun w' hw'1 hw' => by
+    have := ((continuous_subtype_val.tendsto x).eventually (gt_mem_nhds hw'))
+    filter_upwards [this] with x' hx'
+    exact ⟨hw'1, hx'.le⟩
+  rcases lt_or_eq_of_le hw.2 with hlt | heq
+  · exact ⟨w, by simpa using hε, hstrict w hw.1 hlt⟩
+  rcases eq_or_lt_of_le hw.1.1 with hc0 | hcpos
+  · -- `c = 0`: raise `y` unless it is already at the top
+    have hb : (0 : ℝ) ≤ u₂ oneSeq := (utility_one h.h2 h.mono2 hu₂).2.1
+    rcases eq_or_lt_of_le w.2.2.2 with htop | hylt
+    · refine ⟨w, by simpa using hε, Eventually.of_forall fun x' => ⟨hw.1, ?_⟩⟩
+      rw [← hc0, sub_zero, htop, ← (utility_one h.h2 h.mono2 hu₂).1]
+      exact x'.2.2
+    · set δ := min (ε / 2) (u₂ oneSeq - w.2.1)
+      have hδ : 0 < δ := lt_min (by linarith) (by linarith)
+      set y' : I2 u₂ := ⟨w.2.1 + δ, by linarith [w.2.2.1], by
+        linarith [min_le_right (ε / 2) (u₂ oneSeq - w.2.1)]⟩
+      refine ⟨(w.1, y'), ?_, hstrict (w.1, y') hw.1 ?_⟩
+      · rw [Prod.dist_eq, dist_self, Subtype.dist_eq, Real.dist_eq]
+        simp only [y', add_sub_cancel_left, abs_of_pos hδ]
+        exact max_lt hε (lt_of_le_of_lt (min_le_left _ _) (by linarith))
+      · rw [heq]
+        exact h.strict2z _ _ _ (by linarith [hw.1.2]) (by simp [y', hδ])
+  · -- `c > 0`: give agent 2 a little more
+    set δ := min (ε / 2) w.1
+    have hδ : 0 < δ := lt_min (by linarith) hcpos
+    refine ⟨(w.1 - δ, w.2), ?_, hstrict (w.1 - δ, w.2) ⟨by linarith [min_le_right (ε / 2) w.1],
+      by linarith [hw.1.2]⟩ ?_⟩
+    · rw [Prod.dist_eq, dist_self, Real.dist_eq]
+      simp only [sub_sub_cancel_left, abs_neg, abs_of_pos hδ]
+      exact max_lt (lt_of_le_of_lt (min_le_left _ _) (by linarith)) hε
+    · rw [heq]
+      exact h.strict2c _ _ _ (by linarith [hw.1.2]) (by linarith)
+
+theorem continuous_paretoObj (h : ParetoHyp W₁ W₂ β₁ β₂ M₁ M₂) {f : I2 u₂ → ℝ}
+    (hf : Continuous f) : Continuous (paretoObj (u₂ := u₂) W₁ f) :=
+  h.h1.cont.comp ((continuous_cst.comp (continuous_fst.comp continuous_snd)).prodMk
+    (hf.comp (continuous_snd.comp continuous_snd)))
+
+theorem abs_paretoObj_le (h : ParetoHyp W₁ W₂ β₁ β₂ M₁ M₂) (f : I2 u₂ →ᵇ ℝ)
+    {q : I2 u₂ × (ℝ × I2 u₂)} (hq : q.2.1 ∈ Icc (0 : ℝ) 1) :
+    |paretoObj W₁ f q| ≤ M₁ + β₁ * ‖f‖ := by
+  have h1 := h.h1.lip _ (cst_nonneg hq.1) (f q.2.2) 0
+  have h2 := h.h1.bdd _ (cst_nonneg hq.1)
+  have h3 : |f q.2.2| ≤ ‖f‖ := by simpa [Real.norm_eq_abs] using f.norm_coe_le_norm q.2.2
+  rw [sub_zero] at h1
+  have := abs_sub_abs_le_abs_sub (W₁ (cst q.2.1) (f q.2.2)) (W₁ (cst q.2.1) 0)
+  simp only [paretoObj]
+  nlinarith [h.h1.β_pos]
+
+/-- `(Tf)(x) = max {W₁[c, f(y)] : (c, y) ∈ Φ(x)}`. -/
+noncomputable def paretoT (h : ParetoHyp W₁ W₂ β₁ β₂ M₁ M₂) (hu₂ : opTW h.h2 u₂ = u₂)
+    (f : I2 u₂ →ᵇ ℝ) : I2 u₂ →ᵇ ℝ :=
+  BoundedContinuousFunction.ofNormedAddCommGroup
+    (fun x => maxValue (paretoObj W₁ f) (paretoΦ W₂ u₂) x)
+    (theorem_3_6 (continuous_paretoObj h f.continuous).continuousOn (pareto_compact h)
+      (pareto_lhc h hu₂) (pareto_uhc h hu₂)).1 (M₁ + β₁ * ‖f‖) fun x => by
+        obtain ⟨w, hw, hval, -⟩ := exists_argmax (continuous_paretoObj h f.continuous).continuousOn
+          (pareto_compact h x) ⟨_, pareto_top_mem h hu₂ x⟩
+        rw [← hval, Real.norm_eq_abs]
+        exact abs_paretoObj_le h f hw.1
+
+theorem exists_paretoT_argmax (h : ParetoHyp W₁ W₂ β₁ β₂ M₁ M₂) (hu₂ : opTW h.h2 u₂ = u₂)
+    (f : I2 u₂ →ᵇ ℝ) (x : I2 u₂) :
+    ∃ w ∈ paretoΦ W₂ u₂ x, paretoT h hu₂ f x = W₁ (cst w.1) (f w.2) ∧
+      ∀ w' ∈ paretoΦ W₂ u₂ x, W₁ (cst w'.1) (f w'.2) ≤ paretoT h hu₂ f x := by
+  obtain ⟨w, hw, hval, hmax⟩ := exists_argmax (continuous_paretoObj h f.continuous).continuousOn
+    (pareto_compact h x) ⟨_, pareto_top_mem h hu₂ x⟩
+  exact ⟨w, hw, hval.symm, fun w' hw' => (hmax w' hw').trans_eq hval⟩
+
+theorem paretoT_contraction (h : ParetoHyp W₁ W₂ β₁ β₂ M₁ M₂) (hu₂ : opTW h.h2 u₂ = u₂) :
+    IsContraction (paretoT h hu₂) β₁ := by
+  refine ⟨h.h1.β_pos, h.h1.β_lt, fun f g => (dist_le (mul_nonneg h.h1.β_pos.le
+    dist_nonneg)).2 fun x => ?_⟩
+  obtain ⟨w, hw, hval, hmax⟩ := exists_paretoT_argmax h hu₂ f x
+  obtain ⟨w', hw', hval', hmax'⟩ := exists_paretoT_argmax h hu₂ g x
+  have e1 := hmax w' hw'
+  have e2 := hmax' w hw
+  have l1 := h.h1.lip _ (cst_nonneg hw.1.1) (f w.2) (g w.2)
+  have l2 := h.h1.lip _ (cst_nonneg hw'.1.1) (f w'.2) (g w'.2)
+  have d1 := mul_le_mul_of_nonneg_left (show |f w.2 - g w.2| ≤ dist f g by
+    simpa [Real.dist_eq] using dist_coe_le_dist (f := f) (g := g) w.2) h.h1.β_pos.le
+  have d2 := mul_le_mul_of_nonneg_left (show |f w'.2 - g w'.2| ≤ dist f g by
+    simpa [Real.dist_eq] using dist_coe_le_dist (f := f) (g := g) w'.2) h.h1.β_pos.le
+  rw [Real.dist_eq, abs_le]
+  rw [abs_le] at l1 l2
+  constructor <;> linarith [l1.1, l1.2, l2.1, l2.2]
+
+/-- **Exercise 5.13a.** `T` maps the continuous functions `I₂ → I₁ = [0, b₁]` into themselves and
+is a contraction; it has a unique fixed point there. -/
+theorem ex_5_13a (h : ParetoHyp W₁ W₂ β₁ β₂ M₁ M₂) (hu₁ : opTW h.h1 u₁ = u₁)
+    (hu₂ : opTW h.h2 u₂ = u₂) :
+    IsContraction (paretoT h hu₂) β₁ ∧
+      (∀ f : I2 u₂ →ᵇ ℝ, (∀ y, f y ∈ Icc 0 (u₁ oneSeq)) →
+        ∀ x, paretoT h hu₂ f x ∈ Icc 0 (u₁ oneSeq)) ∧
+      ∃ v : I2 u₂ →ᵇ ℝ, paretoT h hu₂ v = v ∧ (∀ y, v y ∈ Icc 0 (u₁ oneSeq)) ∧
+        ∀ w, paretoT h hu₂ w = w → w = v := by
+  have hmaps : ∀ f : I2 u₂ →ᵇ ℝ, (∀ y, f y ∈ Icc 0 (u₁ oneSeq)) →
+      ∀ x, paretoT h hu₂ f x ∈ Icc 0 (u₁ oneSeq) := fun f hf x => by
+    obtain ⟨w, hw, hval, -⟩ := exists_paretoT_argmax h hu₂ f x
+    rw [hval]
+    have h0 : W₁ 0 0 = 0 := h.h1.zero
+    refine ⟨?_, ?_⟩
+    · have := h.mono1 0 (cst w.1) 0 (f w.2) le_rfl (cst_nonneg hw.1.1) (hf _).1
+      rw [h0] at this
+      exact this
+    · rw [(utility_one h.h1 h.mono1 hu₁).1]
+      exact h.mono1 _ _ _ _ (cst_nonneg hw.1.1) (cst_le hw.1.2) (hf _).2
+  have : Nonempty (I2 u₂ →ᵇ ℝ) := ⟨0⟩
+  obtain ⟨v, hv, huniq, -⟩ := theorem_3_2 (paretoT_contraction h hu₂)
+  set S : Set (I2 u₂ →ᵇ ℝ) := {f | ∀ y, f y ∈ Icc 0 (u₁ oneSeq)}
+  have hclosed : IsClosed S := by
+    have : S = ⋂ y, {f : I2 u₂ →ᵇ ℝ | f y ∈ Icc 0 (u₁ oneSeq)} := by ext f; simp [S]
+    rw [this]
+    exact isClosed_iInter fun y => isClosed_Icc.preimage (continuous_eval_const y)
+  have hb : 0 ≤ u₁ oneSeq := (utility_one h.h1 h.mono1 hu₁).2.1
+  have hvS : v ∈ S := (corollary_1 (S' := S) (S'' := S) (paretoT_contraction h hu₂) hv
+    ⟨0, fun _ => ⟨le_rfl, hb⟩⟩ hclosed (fun f hf => hmaps f hf) (fun f hf => hmaps f hf)).1
+  exact ⟨paretoT_contraction h hu₂, hmaps, v, hv, hvS, huniq⟩
+
+/-! ### Exercise 5.13b: the fixed point is the Pareto frontier -/
+
+/-- `1 − c` for a sequence with `c_t ≤ 1`. -/
+def oneMinus (c : Seq 1) (hc : ∀ t, c.1 t ≤ cst 1) : Seq 1 :=
+  ⟨BoundedContinuousFunction.const ℕ (cst 1) - c.1, fun t => sub_nonneg.2 (hc t)⟩
+
+theorem shiftSeq_oneMinus (c : Seq 1) (hc : ∀ t, c.1 t ≤ cst 1) :
+    shiftSeq (oneMinus c hc) = oneMinus (shiftSeq c) fun t => hc (t + 1) :=
+  Subtype.ext (by ext t i; rfl)
+
+theorem head_oneMinus (c : Seq 1) (hc : ∀ t, c.1 t ≤ cst 1) :
+    (oneMinus c hc).1 0 = cst (1 - c.1 0 0) := by
+  ext i
+  have : i = 0 := Subsingleton.elim i 0
+  subst this
+  rfl
+
+theorem head_eq_cst (c : Seq 1) (t : ℕ) : c.1 t = cst (c.1 t 0) := by
+  ext i
+  have : i = 0 := Subsingleton.elim i 0
+  subst this
+  rfl
+
+theorem utility_zero {W : (Fin 1 → ℝ) → ℝ → ℝ} {β M : ℝ} (h : AggHyp W β M) {u : Seq 1 →ᵇ ℝ}
+    (hu : opTW h u = u) : u zeroSeq = 0 := by
+  obtain ⟨u', -, huniq, hz, -⟩ := ex_5_11d h
+  rw [huniq u hu]; exact hz
+
+/-- Utilities of allocations with `c_t ≤ 1` lie in `I = [0, u(1)]`. -/
+theorem utility_range {W : (Fin 1 → ℝ) → ℝ → ℝ} {β M : ℝ} (h : AggHyp W β M)
+    (hmono : ∀ x x' z z', 0 ≤ x → x ≤ x' → z ≤ z' → W x z ≤ W x' z') {u : Seq 1 →ᵇ ℝ}
+    (hu : opTW h u = u) (c : Seq 1) (hc : ∀ t, c.1 t ≤ cst 1) : u c ∈ Icc 0 (u oneSeq) :=
+  ⟨(utility_zero h hu) ▸ (utility_one h hmono hu).2.2 c, ex_5_11d_mono h hmono hu hc⟩
+
+theorem oneMinus_le (c : Seq 1) (hc : ∀ t, c.1 t ≤ cst 1) (t : ℕ) :
+    (oneMinus c hc).1 t ≤ cst 1 := fun i => by
+  have := c.2 t i
+  simp only [Pi.zero_apply] at this
+  change (1 : ℝ) - c.1 t i ≤ 1
+  linarith
+
+/-- **Exercise 5.13b (upper half).** Every allocation with `c_t ≤ 1` that gives agent 2 at least
+`x` gives agent 1 at most `v(x)`. -/
+theorem pareto_le_value (h : ParetoHyp W₁ W₂ β₁ β₂ M₁ M₂) (hu₁ : opTW h.h1 u₁ = u₁)
+    (hu₂ : opTW h.h2 u₂ = u₂) {v : I2 u₂ →ᵇ ℝ} (hv : paretoT h hu₂ v = v) (x : I2 u₂)
+    (c : Seq 1) (hc : ∀ t, c.1 t ≤ cst 1) (hx : x.1 ≤ u₂ (oneMinus c hc)) : u₁ c ≤ v x := by
+  set K := ‖u₁‖ + ‖v‖
+  have hfe₁ : ∀ c, u₁ c = W₁ (c.1 0) (u₁ (shiftSeq c)) := fun c =>
+    (DFunLike.congr_fun hu₁ c).symm
+  have hfe₂ : ∀ c, u₂ c = W₂ (c.1 0) (u₂ (shiftSeq c)) := fun c =>
+    (DFunLike.congr_fun hu₂ c).symm
+  have hstep : ∀ n : ℕ, ∀ (x : I2 u₂) (c : Seq 1) (hc : ∀ t, c.1 t ≤ cst 1),
+      x.1 ≤ u₂ (oneMinus c hc) → u₁ c - v x ≤ β₁ ^ n * K := by
+    intro n
+    induction n with
+    | zero =>
+      intro x c hc _
+      have h1 := abs_apply_le_norm u₁ c
+      have h2 : |v x| ≤ ‖v‖ := by simpa [Real.norm_eq_abs] using v.norm_coe_le_norm x
+      have h3 := le_abs_self (u₁ c)
+      have h4 := neg_abs_le (v x)
+      rw [pow_zero, one_mul]
+      simp only [K]
+      linarith
+    | succ n ih =>
+      intro x c hc hx
+      have hsc : ∀ t, (shiftSeq c).1 t ≤ cst 1 := fun t => hc (t + 1)
+      set y : I2 u₂ := ⟨u₂ (oneMinus (shiftSeq c) hsc), utility_range h.h2 h.mono2 hu₂ _
+        (oneMinus_le _ hsc)⟩
+      have hc0 : c.1 0 0 ∈ Icc (0 : ℝ) 1 := ⟨c.2 0 0, hc 0 0⟩
+      have hmem : (c.1 0 0, y) ∈ paretoΦ W₂ u₂ x := by
+        refine ⟨hc0, ?_⟩
+        have e := hfe₂ (oneMinus c hc)
+        rw [head_oneMinus, shiftSeq_oneMinus] at e
+        rw [e] at hx
+        exact hx
+      have hvx : W₁ (cst (c.1 0 0)) (v y) ≤ v x := by
+        obtain ⟨-, -, -, hmax⟩ := exists_paretoT_argmax h hu₂ v x
+        rw [hv] at hmax
+        exact hmax _ hmem
+      have hIH := ih y (shiftSeq c) hsc le_rfl
+      rw [hfe₁ c, head_eq_cst c 0]
+      rcases le_total (u₁ (shiftSeq c)) (v y) with hle | hlt
+      · have := h.mono1 _ _ _ _ (cst_nonneg hc0.1) le_rfl hle
+        have : 0 ≤ β₁ ^ (n + 1) * K :=
+          mul_nonneg (pow_nonneg h.h1.β_pos.le _) (add_nonneg (norm_nonneg _) (norm_nonneg _))
+        linarith
+      · have hl := h.h1.lip _ (cst_nonneg hc0.1) (u₁ (shiftSeq c)) (v y)
+        rw [abs_of_nonneg (sub_nonneg.2 hlt)] at hl
+        have := le_abs_self (W₁ (cst (c.1 0 0)) (u₁ (shiftSeq c)) - W₁ (cst (c.1 0 0)) (v y))
+        have hb := mul_le_mul_of_nonneg_left hIH h.h1.β_pos.le
+        rw [pow_succ]
+        nlinarith
+  have hlim : Tendsto (fun n => β₁ ^ n * K) atTop (𝓝 0) := by
+    simpa using (tendsto_pow_atTop_nhds_zero_of_lt_one h.h1.β_pos.le h.h1.β_lt).mul_const K
+  have := ge_of_tendsto' hlim fun n => hstep n x c hc hx
+  linarith
+
+/-- The maximizers of `T` at the fixed point. -/
+noncomputable def paretoPol (h : ParetoHyp W₁ W₂ β₁ β₂ M₁ M₂) (hu₂ : opTW h.h2 u₂ = u₂)
+    (v : I2 u₂ →ᵇ ℝ) (x : I2 u₂) : ℝ × I2 u₂ :=
+  (exists_paretoT_argmax h hu₂ v x).choose
+
+/-- The allocation that follows the maximizers: `c_t` is the first component of the maximizer at
+`x_t`, and `x_{t+1}` the second. -/
+noncomputable def paretoPlan (h : ParetoHyp W₁ W₂ β₁ β₂ M₁ M₂) (hu₂ : opTW h.h2 u₂ = u₂)
+    (v : I2 u₂ →ᵇ ℝ) (x : I2 u₂) : Seq 1 :=
+  ⟨BoundedContinuousFunction.mkOfDiscrete
+      (fun t => cst (paretoPol h hu₂ v ((fun y => (paretoPol h hu₂ v y).2)^[t] x)).1) 2
+      fun s t => by
+        have hb : ∀ u : ℕ, ‖cst (paretoPol h hu₂ v ((fun y => (paretoPol h hu₂ v y).2)^[u] x)).1‖
+            ≤ 1 := fun u => by
+          have hm : (paretoPol h hu₂ v ((fun y => (paretoPol h hu₂ v y).2)^[u] x)).1 ∈
+              Icc (0 : ℝ) 1 := (exists_paretoT_argmax h hu₂ v
+            ((fun y => (paretoPol h hu₂ v y).2)^[u] x)).choose_spec.1.1
+          refine (pi_norm_le_iff_of_nonneg zero_le_one).2 fun i => ?_
+          rw [Real.norm_eq_abs, abs_le]
+          simp only [cst]
+          exact ⟨by linarith [hm.1], hm.2⟩
+        exact (dist_le_norm_add_norm _ _).trans (by linarith [hb s, hb t]),
+    fun t => cst_nonneg ((exists_paretoT_argmax h hu₂ v
+      ((fun y => (paretoPol h hu₂ v y).2)^[t] x)).choose_spec.1.1.1)⟩
+
+theorem paretoPlan_le (h : ParetoHyp W₁ W₂ β₁ β₂ M₁ M₂) (hu₂ : opTW h.h2 u₂ = u₂)
+    (v : I2 u₂ →ᵇ ℝ) (x : I2 u₂) (t : ℕ) : (paretoPlan h hu₂ v x).1 t ≤ cst 1 :=
+  cst_le ((exists_paretoT_argmax h hu₂ v
+    ((fun y => (paretoPol h hu₂ v y).2)^[t] x)).choose_spec.1.1.2)
+
+theorem shiftSeq_paretoPlan (h : ParetoHyp W₁ W₂ β₁ β₂ M₁ M₂) (hu₂ : opTW h.h2 u₂ = u₂)
+    (v : I2 u₂ →ᵇ ℝ) (x : I2 u₂) :
+    shiftSeq (paretoPlan h hu₂ v x) = paretoPlan h hu₂ v (paretoPol h hu₂ v x).2 :=
+  Subtype.ext (by
+    ext t i
+    simp only [shiftSeq_apply, paretoPlan, BoundedContinuousFunction.mkOfDiscrete_apply,
+      Function.iterate_succ_apply])
+
+theorem head_paretoPlan (h : ParetoHyp W₁ W₂ β₁ β₂ M₁ M₂) (hu₂ : opTW h.h2 u₂ = u₂)
+    (v : I2 u₂ →ᵇ ℝ) (x : I2 u₂) :
+    (paretoPlan h hu₂ v x).1 0 = cst (paretoPol h hu₂ v x).1 := rfl
+
+/-- **Exercise 5.13b.** The fixed point of `T` is the Pareto frontier:
+`v(x) = max{u₁(c) : 0 ≤ c_t ≤ 1, u₂(1 − c) ≥ x}`, attained by the allocation that follows the
+maximizers of `T`. -/
+theorem ex_5_13b (h : ParetoHyp W₁ W₂ β₁ β₂ M₁ M₂) (hu₁ : opTW h.h1 u₁ = u₁)
+    (hu₂ : opTW h.h2 u₂ = u₂) {v : I2 u₂ →ᵇ ℝ} (hv : paretoT h hu₂ v = v) (x : I2 u₂) :
+    IsGreatest {r | ∃ c : Seq 1, ∃ hc : ∀ t, c.1 t ≤ cst 1,
+      x.1 ≤ u₂ (oneMinus c hc) ∧ r = u₁ c} (v x) ∧
+    v x = sSup {r | ∃ c : Seq 1, ∃ hc : ∀ t, c.1 t ≤ cst 1,
+      x.1 ≤ u₂ (oneMinus c hc) ∧ r = u₁ c} := by
+  have hfe₁ : ∀ c, u₁ c = W₁ (c.1 0) (u₁ (shiftSeq c)) := fun c =>
+    (DFunLike.congr_fun hu₁ c).symm
+  have hfe₂ : ∀ c, u₂ c = W₂ (c.1 0) (u₂ (shiftSeq c)) := fun c =>
+    (DFunLike.congr_fun hu₂ c).symm
+  have hspec : ∀ y : I2 u₂, paretoPol h hu₂ v y ∈ paretoΦ W₂ u₂ y ∧
+      v y = W₁ (cst (paretoPol h hu₂ v y).1) (v (paretoPol h hu₂ v y).2) := fun y => by
+    have := (exists_paretoT_argmax h hu₂ v y).choose_spec
+    exact ⟨this.1, (DFunLike.congr_fun hv y).symm.trans this.2.1⟩
+  -- the plan attains `v`
+  have hval : ∀ n : ℕ, ∀ y : I2 u₂,
+      |u₁ (paretoPlan h hu₂ v y) - v y| ≤ β₁ ^ n * (‖u₁‖ + ‖v‖) := by
+    intro n
+    induction n with
+    | zero =>
+      intro y
+      have h1 := abs_apply_le_norm u₁ (paretoPlan h hu₂ v y)
+      have h2 : |v y| ≤ ‖v‖ := by simpa [Real.norm_eq_abs] using v.norm_coe_le_norm y
+      rw [pow_zero, one_mul]
+      exact (abs_sub _ _).trans (add_le_add h1 h2)
+    | succ n ih =>
+      intro y
+      rw [hfe₁, head_paretoPlan, shiftSeq_paretoPlan, (hspec y).2]
+      refine (h.h1.lip _ (cst_nonneg (hspec y).1.1.1) _ _).trans ?_
+      rw [pow_succ', mul_assoc]
+      exact mul_le_mul_of_nonneg_left (ih _) h.h1.β_pos.le
+  -- and it gives agent 2 at least `x`
+  have hfeas : ∀ n : ℕ, ∀ y : I2 u₂, y.1 - u₂ (oneMinus (paretoPlan h hu₂ v y)
+      (paretoPlan_le h hu₂ v y)) ≤ β₂ ^ n * (2 * ‖u₂‖) := by
+    intro n
+    induction n with
+    | zero =>
+      intro y
+      have h1 := abs_apply_le_norm u₂ (oneMinus (paretoPlan h hu₂ v y) (paretoPlan_le h hu₂ v y))
+      have h2 : y.1 ≤ ‖u₂‖ := y.2.2.trans ((le_abs_self _).trans (abs_apply_le_norm u₂ oneSeq))
+      rw [pow_zero, one_mul]
+      linarith [neg_abs_le (u₂ (oneMinus (paretoPlan h hu₂ v y) (paretoPlan_le h hu₂ v y)))]
+    | succ n ih =>
+      intro y
+      set y' := (paretoPol h hu₂ v y).2
+      have hcons := (hspec y).1.2
+      have hc0 := (hspec y).1.1
+      have hshift : shiftSeq (oneMinus (paretoPlan h hu₂ v y) (paretoPlan_le h hu₂ v y)) =
+          oneMinus (paretoPlan h hu₂ v y') (paretoPlan_le h hu₂ v y') :=
+        Subtype.ext (by ext t i; rfl)
+      have e := hfe₂ (oneMinus (paretoPlan h hu₂ v y) (paretoPlan_le h hu₂ v y))
+      rw [head_oneMinus, hshift] at e
+      rw [e]
+      have hIH := ih y'
+      set z := u₂ (oneMinus (paretoPlan h hu₂ v y') (paretoPlan_le h hu₂ v y'))
+      have hhead : (paretoPlan h hu₂ v y).1 0 0 = (paretoPol h hu₂ v y).1 := rfl
+      rw [hhead]
+      have hc1 : 0 ≤ cst (1 - (paretoPol h hu₂ v y).1) := cst_nonneg (by linarith [hc0.2])
+      rcases le_total y'.1 z with hle | hlt
+      · have := h.mono2 _ _ _ _ hc1 le_rfl hle
+        have : 0 ≤ β₂ ^ (n + 1) * (2 * ‖u₂‖) :=
+          mul_nonneg (pow_nonneg h.h2.β_pos.le _) (by positivity)
+        linarith
+      · have hl := h.h2.lip _ hc1 y'.1 z
+        rw [abs_of_nonneg (sub_nonneg.2 hlt)] at hl
+        have := le_abs_self (W₂ (cst (1 - (paretoPol h hu₂ v y).1)) y'.1 -
+          W₂ (cst (1 - (paretoPol h hu₂ v y).1)) z)
+        have hb := mul_le_mul_of_nonneg_left hIH h.h2.β_pos.le
+        rw [pow_succ]
+        nlinarith
+  have hlim : ∀ K : ℝ, ∀ {b : ℝ}, 0 < b → b < 1 → Tendsto (fun n => b ^ n * K) atTop (𝓝 0) :=
+    fun K b hb0 hb1 => by
+      simpa using (tendsto_pow_atTop_nhds_zero_of_lt_one hb0.le hb1).mul_const K
+  have hattain : u₁ (paretoPlan h hu₂ v x) = v x := by
+    have := ge_of_tendsto' (hlim _ h.h1.β_pos h.h1.β_lt) fun n => hval n x
+    exact sub_eq_zero.1 (abs_nonpos_iff.1 this)
+  have hfx : x.1 ≤ u₂ (oneMinus (paretoPlan h hu₂ v x) (paretoPlan_le h hu₂ v x)) := by
+    have := ge_of_tendsto' (hlim _ h.h2.β_pos h.h2.β_lt) fun n => hfeas n x
+    linarith
+  have hG : IsGreatest {r | ∃ c : Seq 1, ∃ hc : ∀ t, c.1 t ≤ cst 1,
+      x.1 ≤ u₂ (oneMinus c hc) ∧ r = u₁ c} (v x) :=
+    ⟨⟨_, paretoPlan_le h hu₂ v x, hfx, hattain.symm⟩, by
+      rintro _ ⟨c, hc, hcx, rfl⟩
+      exact pareto_le_value h hu₁ hu₂ hv x c hc hcx⟩
+  exact ⟨hG, hG.csSup_eq.symm⟩
+
+end StokeyLucasPrescott.DeterministicApplications
+
+/-
+Copyright (c) 2026 Robert Kirkby. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Robert Kirkby
+-/
+
+/-!
+# An (s, S) inventory problem
+
+SLP §5.14, pp. 118–122: a manager sells up to one unit per period at price `p`, can order `y`
+units for delivery next period at cost `c₀ + c₁y`, and discounts at `β = 1/(1 + r)`; `βp > c₁ > 0`,
+`c₀ > 0`. With stock `x`, sales are `min{x, 1}` and the stock left is `z(x) = max{x − 1, 0}`, so
+(1) reads `v(x) = p·min{x, 1} + max{βv(z), sup_{y > 0} [−c₀ − c₁y + βv(z + y)]}`.
+
+* **Exercise 5.14a** (`ex_5_14a`): the operator `T` of (1) maps `C(ℝ₊)` into itself (the supremum
+  over `y > 0` equals a maximum over a compact interval, `ordSup_eq`), satisfies Blackwell's
+  conditions, and has a unique fixed point `v`, with `0 ≤ v ≤ p/(1 − β)`; and an optimal ordering
+  policy exists (`ex_5_14a_policy`): at every `x` either not ordering is optimal or some `y > 0`
+  attains the supremum.
+* **Exercise 5.14b**: `r_n = −c₀ − c₁n + β(1 − βⁿ)p/(1 − β)` and
+  `Y_n = r_n/(1 − βⁿ) = −(c₀ + c₁n)/(1 − βⁿ) + βp/(1 − β)` (`Yn_eq`); `Y_n → −∞`
+  (`tendsto_Yn`), so some finite `N ≥ 1` maximizes `Y_n` (`ex_5_14b`). The maximizers do not
+  depend on `p` (`argmax_Yn_indep_p`), and `N` rises with the fixed cost `c₀`
+  (`argmax_Yn_mono_c0`, increasing differences).
+* **Exercise 5.14c** (`ex_5_14c`): if `Y_N > 0`, then `A = (1 − β)Y_N/(βp − c₁)` lies in `(0, 1)`;
+  in fact `A < 1` for every `N ≥ 1`.
+-/
+
+open Set Filter Topology BoundedContinuousFunction
+
+namespace StokeyLucasPrescott.DeterministicApplications
+
+/-- Inventories `x ≥ 0`. -/
+abbrev Stock := ↥(Ici (0 : ℝ))
+
+/-- `f` on stocks extended to `ℝ` by `f(max{x, 0})`. -/
+def sext (f : Stock → ℝ) (x : ℝ) : ℝ := f ⟨max x 0, mem_Ici.2 (le_max_right _ _)⟩
+
+theorem sext_of_nonneg (f : Stock → ℝ) {x : ℝ} (hx : 0 ≤ x) : sext f x = f ⟨x, hx⟩ := by
+  simp only [sext, max_eq_left hx]
+
+theorem continuous_sext {f : Stock → ℝ} (hf : Continuous f) : Continuous (sext f) :=
+  hf.comp ((continuous_id.max continuous_const).subtype_mk _)
+
+theorem abs_sext_le (f : Stock →ᵇ ℝ) (x : ℝ) : |sext f x| ≤ ‖f‖ := by
+  unfold sext
+  simpa [Real.norm_eq_abs] using f.norm_coe_le_norm _
+
+/-- The stock left after sales, `z(x) = max{x − 1, 0}`. -/
+def leftover (x : ℝ) : ℝ := max (x - 1) 0
+
+variable {p c₀ c₁ β : ℝ}
+
+/-- The value of ordering `y`: `−c₀ − c₁y + βf(z + y)`. -/
+def orderVal (c₀ c₁ β : ℝ) (f : Stock → ℝ) (z y : ℝ) : ℝ := -c₀ - c₁ * y + β * sext f (z + y)
+
+/-- `sup_{y > 0} [−c₀ − c₁y + βf(z + y)]`. -/
+noncomputable def ordSup (c₀ c₁ β : ℝ) (f : Stock → ℝ) (z : ℝ) : ℝ :=
+  sSup (orderVal c₀ c₁ β f z '' Ioi 0)
+
+/-- The hypotheses of SLP §5.14. -/
+structure InvHyp (p c₀ c₁ β : ℝ) : Prop where
+  β_pos : 0 < β
+  β_lt : β < 1
+  c₀_pos : 0 < c₀
+  c₁_pos : 0 < c₁
+  margin : c₁ < β * p
+
+theorem InvHyp.p_pos (h : InvHyp p c₀ c₁ β) : 0 < p := by
+  by_contra hp; push Not at hp; nlinarith [h.β_pos, h.c₁_pos, h.margin]
+
+theorem orderVal_le (h : InvHyp p c₀ c₁ β) (f : Stock →ᵇ ℝ) {z y : ℝ} (hy : 0 ≤ y) :
+    orderVal c₀ c₁ β f z y ≤ -c₀ + β * ‖f‖ := by
+  have := abs_sext_le f (z + y)
+  have := mul_le_mul_of_nonneg_left ((le_abs_self _).trans this) h.β_pos.le
+  simp only [orderVal]
+  nlinarith [h.c₁_pos]
+
+theorem bddAbove_ordSup (h : InvHyp p c₀ c₁ β) (f : Stock →ᵇ ℝ) (z : ℝ) :
+    BddAbove (orderVal c₀ c₁ β f z '' Ioi 0) :=
+  ⟨-c₀ + β * ‖f‖, by rintro _ ⟨y, hy, rfl⟩; exact orderVal_le h f (le_of_lt hy)⟩
+
+/-- The order horizon `Y = 2β‖f‖/c₁ + 1`: larger orders never beat not ordering. -/
+noncomputable def horizon (c₁ β : ℝ) (f : Stock →ᵇ ℝ) : ℝ := 2 * β * ‖f‖ / c₁ + 1
+
+theorem horizon_pos (h : InvHyp p c₀ c₁ β) (f : Stock →ᵇ ℝ) : 0 < horizon c₁ β f := by
+  unfold horizon
+  have : 0 ≤ 2 * β * ‖f‖ / c₁ := div_nonneg (by nlinarith [h.β_pos, norm_nonneg f]) h.c₁_pos.le
+  linarith
+
+theorem orderVal_beyond (h : InvHyp p c₀ c₁ β) (f : Stock →ᵇ ℝ) (z : ℝ) {y : ℝ}
+    (hy : horizon c₁ β f < y) : orderVal c₀ c₁ β f z y < β * sext f z := by
+  have h1 := abs_sext_le f (z + y)
+  have h2 := abs_sext_le f z
+  have hY : 2 * β * ‖f‖ < c₁ * y := by
+    have h3 : 2 * β * ‖f‖ / c₁ < y := by unfold horizon at hy; linarith
+    rw [div_lt_iff₀ h.c₁_pos] at h3
+    linarith
+  simp only [orderVal]
+  nlinarith [h.β_pos, le_abs_self (sext f (z + y)), neg_abs_le (sext f z), h.c₀_pos]
+
+/-- The supremum over `y > 0` together with not ordering equals a maximum over the compact
+`[0, Y]` together with not ordering. -/
+theorem ordSup_eq (h : InvHyp p c₀ c₁ β) (f : Stock →ᵇ ℝ) (z : ℝ) :
+    max (β * sext f z) (ordSup c₀ c₁ β f z) =
+      max (β * sext f z) (sSup (orderVal c₀ c₁ β f z '' Icc 0 (horizon c₁ β f))) := by
+  have hY := horizon_pos h f
+  have hc : ContinuousOn (orderVal c₀ c₁ β f z) (Icc 0 (horizon c₁ β f)) :=
+    ((continuous_const.sub (continuous_const.mul continuous_id)).add (continuous_const.mul
+      ((continuous_sext f.continuous).comp (continuous_const.add continuous_id)))).continuousOn
+  have hbdd : BddAbove (orderVal c₀ c₁ β f z '' Icc 0 (horizon c₁ β f)) :=
+    (isCompact_Icc.image_of_continuousOn hc).bddAbove
+  have h0 : orderVal c₀ c₁ β f z 0 < β * sext f z := by
+    simp only [orderVal, add_zero, mul_zero, sub_zero]; linarith [h.c₀_pos]
+  refine le_antisymm (max_le (le_max_left _ _) ?_) (max_le (le_max_left _ _) ?_)
+  · -- `sup_{y > 0} ≤ max{no order, max over [0, Y]}`
+    refine csSup_le ⟨_, 1, by norm_num, rfl⟩ ?_
+    rintro _ ⟨y, hy, rfl⟩
+    rcases le_or_gt y (horizon c₁ β f) with hyY | hyY
+    · exact (le_csSup hbdd ⟨y, ⟨le_of_lt hy, hyY⟩, rfl⟩).trans (le_max_right _ _)
+    · exact (orderVal_beyond h f z hyY).le.trans (le_max_left _ _)
+  · -- the maximum over `[0, Y]` is attained; at `0` it is beaten by not ordering
+    obtain ⟨y, hy, hmax⟩ := isCompact_Icc.exists_isMaxOn (nonempty_Icc.2 hY.le) hc
+    have heq : sSup (orderVal c₀ c₁ β f z '' Icc 0 (horizon c₁ β f)) = orderVal c₀ c₁ β f z y :=
+      (IsGreatest.csSup_eq ⟨⟨y, hy, rfl⟩, by rintro _ ⟨u, hu, rfl⟩; exact hmax hu⟩)
+    rw [heq]
+    rcases eq_or_lt_of_le hy.1 with hy0 | hypos
+    · rw [← hy0]; exact h0.le.trans (le_max_left _ _)
+    · exact (le_csSup (bddAbove_ordSup h f z) ⟨y, hypos, rfl⟩).trans (le_max_right _ _)
+
+/-- The right side of (1) as a function on stocks. -/
+noncomputable def invRHS (p c₀ c₁ β : ℝ) (f : Stock → ℝ) (x : Stock) : ℝ :=
+  p * min x.1 1 + max (β * sext f (leftover x.1)) (ordSup c₀ c₁ β f (leftover x.1))
+
+theorem continuous_invRHS (h : InvHyp p c₀ c₁ β) (f : Stock →ᵇ ℝ) :
+    Continuous (invRHS p c₀ c₁ β f) := by
+  -- the maximum over the compact `[0, Y]` is continuous in `z` (Theorem 3.6)
+  set Y := horizon c₁ β f
+  have hY := horizon_pos h f
+  set G : ℝ × ℝ → ℝ := fun q => orderVal c₀ c₁ β f q.1 q.2
+  have hG : Continuous G :=
+    (continuous_const.sub (continuous_const.mul continuous_snd)).add (continuous_const.mul
+      ((continuous_sext f.continuous).comp (continuous_fst.add continuous_snd)))
+  have hM : Continuous fun z : ℝ => maxValue G (fun _ => Icc 0 Y) z :=
+    (theorem_3_6 hG.continuousOn (fun _ => isCompact_Icc)
+      (fun z => ⟨⟨0, le_rfl, hY.le⟩, fun y hy xs _ => ⟨0, fun _ => y, fun _ _ => hy,
+        tendsto_const_nhds⟩⟩)
+      (fun z => ⟨⟨0, le_rfl, hY.le⟩, fun xs _ ys hys => by
+        obtain ⟨y, hy, φ, hφ, hlim⟩ := isCompact_Icc.tendsto_subseq hys
+        exact ⟨y, hy, φ, hφ, hlim⟩⟩)).1
+  have heq : invRHS p c₀ c₁ β f = fun x : Stock => p * min x.1 1 +
+      max (β * sext f (leftover x.1)) (maxValue G (fun _ => Icc 0 Y) (leftover x.1)) := by
+    funext x
+    simp only [invRHS]
+    rw [ordSup_eq h f]
+    rfl
+  rw [heq]
+  have hl : Continuous fun x : Stock => leftover x.1 :=
+    (continuous_subtype_val.sub continuous_const).max continuous_const
+  exact (continuous_const.mul (continuous_subtype_val.min continuous_const)).add
+    ((continuous_const.mul ((continuous_sext f.continuous).comp hl)).max (hM.comp hl))
+
+theorem abs_invRHS_le (h : InvHyp p c₀ c₁ β) (f : Stock →ᵇ ℝ) (x : Stock) :
+    |invRHS p c₀ c₁ β f x| ≤ p + β * ‖f‖ := by
+  have hp := h.p_pos
+  have h1 : 0 ≤ p * min x.1 1 := mul_nonneg hp.le (le_min x.2.out zero_le_one)
+  have h2 : p * min x.1 1 ≤ p := mul_le_of_le_one_right hp.le (min_le_right _ _)
+  have h3 := abs_sext_le f (leftover x.1)
+  have hs : ordSup c₀ c₁ β f (leftover x.1) ≤ -c₀ + β * ‖f‖ :=
+    csSup_le ⟨_, 1, by norm_num, rfl⟩
+      (by rintro _ ⟨y, hy, rfl⟩; exact orderVal_le h f (le_of_lt hy))
+  have hb := mul_le_mul_of_nonneg_left ((le_abs_self _).trans h3) h.β_pos.le
+  have hlow : -‖f‖ ≤ sext f (leftover x.1) := by
+    have := neg_abs_le (sext f (leftover x.1)); linarith
+  have hb' := mul_le_mul_of_nonneg_left hlow h.β_pos.le
+  have hnf : 0 ≤ β * ‖f‖ := mul_nonneg h.β_pos.le (norm_nonneg f)
+  simp only [invRHS]
+  rw [abs_le]
+  constructor
+  · have := le_max_left (β * sext f (leftover x.1)) (ordSup c₀ c₁ β f (leftover x.1))
+    linarith
+  · have := max_le hb (hs.trans (by linarith [h.c₀_pos]))
+    linarith
+
+/-- The operator `T` of (1) on `C(ℝ₊)`. -/
+noncomputable def invT (h : InvHyp p c₀ c₁ β) (f : Stock →ᵇ ℝ) : Stock →ᵇ ℝ :=
+  BoundedContinuousFunction.ofNormedAddCommGroup (invRHS p c₀ c₁ β f) (continuous_invRHS h f)
+    (p + β * ‖f‖) fun x => by rw [Real.norm_eq_abs]; exact abs_invRHS_le h f x
+
+theorem invT_apply (h : InvHyp p c₀ c₁ β) (f : Stock →ᵇ ℝ) (x : Stock) :
+    invT h f x = invRHS p c₀ c₁ β f x := rfl
+
+theorem ordSup_mono (h : InvHyp p c₀ c₁ β) {f g : Stock →ᵇ ℝ} (hfg : f ≤ g) (z : ℝ) :
+    ordSup c₀ c₁ β f z ≤ ordSup c₀ c₁ β g z := by
+  refine csSup_le ⟨_, 1, by norm_num, rfl⟩ ?_
+  rintro _ ⟨y, hy, rfl⟩
+  refine le_trans ?_ (le_csSup (bddAbove_ordSup h g z) ⟨y, hy, rfl⟩)
+  have hle : f ⟨max (z + y) 0, mem_Ici.2 (le_max_right _ _)⟩ ≤
+      g ⟨max (z + y) 0, mem_Ici.2 (le_max_right _ _)⟩ := hfg _
+  have := mul_le_mul_of_nonneg_left hle h.β_pos.le
+  change -c₀ - c₁ * y + β * f ⟨max (z + y) 0, _⟩ ≤ -c₀ - c₁ * y + β * g ⟨max (z + y) 0, _⟩
+  linarith
+
+theorem ordSup_add_const (h : InvHyp p c₀ c₁ β) (f : Stock →ᵇ ℝ) (a : ℝ) (z : ℝ) :
+    ordSup c₀ c₁ β ⇑(f + const Stock a) z = ordSup c₀ c₁ β f z + β * a := by
+  have hval : ∀ y, orderVal c₀ c₁ β ⇑(f + const Stock a) z y =
+      orderVal c₀ c₁ β f z y + β * a := fun y => by
+    simp only [orderVal, sext, BoundedContinuousFunction.add_apply,
+      BoundedContinuousFunction.const_apply]
+    ring
+  have hbdd := bddAbove_ordSup h f z
+  have hne : (orderVal c₀ c₁ β f z '' Ioi 0).Nonempty := ⟨_, 1, by norm_num, rfl⟩
+  unfold ordSup
+  refine le_antisymm (csSup_le ⟨_, 1, by norm_num, rfl⟩ ?_) ?_
+  · rintro _ ⟨y, hy, rfl⟩
+    rw [hval]
+    linarith [le_csSup hbdd ⟨y, hy, rfl⟩]
+  · have hbdd' := bddAbove_ordSup h (f + const Stock a) z
+    have : sSup (orderVal c₀ c₁ β f z '' Ioi 0) ≤
+        sSup (orderVal c₀ c₁ β ⇑(f + const Stock a) z '' Ioi 0) - β * a := by
+      refine csSup_le hne ?_
+      rintro _ ⟨y, hy, rfl⟩
+      have := le_csSup hbdd' ⟨y, hy, rfl⟩
+      rw [hval] at this
+      linarith
+    linarith
+
+/-- `T` is a contraction of modulus `β` (Blackwell). -/
+theorem invT_contraction (h : InvHyp p c₀ c₁ β) : IsContraction (invT h) β := by
+  refine ⟨h.β_pos, h.β_lt, blackwell h.β_pos.le (fun f g hfg x => ?_) (fun f a ha x => ?_)⟩
+  · change invRHS p c₀ c₁ β f x ≤ invRHS p c₀ c₁ β g x
+    simp only [invRHS]
+    have h1 : β * sext f (leftover x.1) ≤ β * sext g (leftover x.1) :=
+      mul_le_mul_of_nonneg_left (hfg _) h.β_pos.le
+    have h2 := ordSup_mono h hfg (leftover x.1)
+    have := max_le_max h1 h2
+    linarith
+  · change invRHS p c₀ c₁ β ⇑(f + const Stock a) x ≤ invRHS p c₀ c₁ β f x + β * a
+    have e : sext ⇑(f + const Stock a) (leftover x.1) = sext f (leftover x.1) + a := by
+      simp [sext]
+    unfold invRHS
+    rw [ordSup_add_const h f a, e, mul_add, max_add_add_right]
+    linarith
+
+/-- **Exercise 5.14a.** (1) has a unique solution `v ∈ C(ℝ₊)`, and `0 ≤ v ≤ p/(1 − β)`. -/
+theorem ex_5_14a (h : InvHyp p c₀ c₁ β) :
+    ∃ v : Stock →ᵇ ℝ, (∀ x, v x = invRHS p c₀ c₁ β v x) ∧
+      (∀ w : Stock →ᵇ ℝ, (∀ x, w x = invRHS p c₀ c₁ β w x) → w = v) ∧
+      ∀ x, 0 ≤ v x ∧ v x ≤ p / (1 - β) := by
+  have : Nonempty (Stock →ᵇ ℝ) := ⟨0⟩
+  obtain ⟨v, hv, huniq, -⟩ := theorem_3_2 (invT_contraction h)
+  have h1β : 0 < 1 - β := by linarith [h.β_lt]
+  set S : Set (Stock →ᵇ ℝ) := {f | ∀ x, 0 ≤ f x ∧ f x ≤ p / (1 - β)}
+  have hclosed : IsClosed S := by
+    have : S = ⋂ x, {f : Stock →ᵇ ℝ | f x ∈ Icc 0 (p / (1 - β))} := by ext f; simp [S]
+    rw [this]
+    exact isClosed_iInter fun x => isClosed_Icc.preimage (continuous_eval_const x)
+  have hmaps : MapsTo (invT h) S S := fun f hf x => by
+    rw [invT_apply]
+    simp only [invRHS]
+    have hp := h.p_pos
+    have hz := hf ⟨max (leftover x.1) 0, mem_Ici.2 (le_max_right _ _)⟩
+    have h0 : 0 ≤ p * min x.1 1 := mul_nonneg hp.le (le_min x.2.out zero_le_one)
+    have h1 : p * min x.1 1 ≤ p := mul_le_of_le_one_right hp.le (min_le_right _ _)
+    have hs : ordSup c₀ c₁ β f (leftover x.1) ≤ -c₀ + β * (p / (1 - β)) := by
+      refine csSup_le ⟨_, 1, by norm_num, rfl⟩ ?_
+      rintro _ ⟨y, hy, rfl⟩
+      have h3 := mul_le_mul_of_nonneg_left
+        (hf ⟨max (leftover x.1 + y) 0, mem_Ici.2 (le_max_right _ _)⟩).2 h.β_pos.le
+      have h4 := mul_pos h.c₁_pos (mem_Ioi.1 hy)
+      change -c₀ - c₁ * y + β * f ⟨max (leftover x.1 + y) 0, _⟩ ≤ _
+      linarith
+    have hm1 := le_max_left (β * sext f (leftover x.1)) (ordSup c₀ c₁ β f (leftover x.1))
+    have hz0 : 0 ≤ sext f (leftover x.1) := hz.1
+    have hz1 : sext f (leftover x.1) ≤ p / (1 - β) := hz.2
+    have hb : β * sext f (leftover x.1) ≤ β * (p / (1 - β)) :=
+      mul_le_mul_of_nonneg_left hz1 h.β_pos.le
+    have hm2 := max_le hb (hs.trans (by linarith [h.c₀_pos]))
+    have hbp : p + β * (p / (1 - β)) = p / (1 - β) := by field_simp; ring
+    have hβz := mul_nonneg h.β_pos.le hz0
+    exact ⟨by linarith, by linarith⟩
+  have hvS : v ∈ S := (corollary_1 (S' := S) (S'' := S) (invT_contraction h) hv
+    ⟨0, fun _ => ⟨le_rfl, div_nonneg h.p_pos.le h1β.le⟩⟩ hclosed hmaps hmaps).1
+  refine ⟨v, fun x => (DFunLike.congr_fun hv x).symm, fun w hw => ?_, hvS⟩
+  exact huniq w (by ext x; exact (hw x).symm)
+
+/-- **Exercise 5.14a.** An optimal ordering policy exists: at every stock either not ordering is
+optimal, or some order `y > 0` attains the supremum (and beats not ordering). -/
+theorem ex_5_14a_policy (h : InvHyp p c₀ c₁ β) (f : Stock →ᵇ ℝ) (z : ℝ) :
+    ordSup c₀ c₁ β f z ≤ β * sext f z ∨
+      ∃ y > 0, orderVal c₀ c₁ β f z y = ordSup c₀ c₁ β f z := by
+  rcases le_or_gt (ordSup c₀ c₁ β f z) (β * sext f z) with hle | hlt
+  · exact Or.inl hle
+  right
+  have hY := horizon_pos h f
+  have hc : ContinuousOn (orderVal c₀ c₁ β f z) (Icc 0 (horizon c₁ β f)) :=
+    ((continuous_const.sub (continuous_const.mul continuous_id)).add (continuous_const.mul
+      ((continuous_sext f.continuous).comp (continuous_const.add continuous_id)))).continuousOn
+  obtain ⟨y, hy, hmax⟩ := isCompact_Icc.exists_isMaxOn (nonempty_Icc.2 hY.le) hc
+  have heq : sSup (orderVal c₀ c₁ β f z '' Icc 0 (horizon c₁ β f)) = orderVal c₀ c₁ β f z y :=
+    (IsGreatest.csSup_eq ⟨⟨y, hy, rfl⟩, by rintro _ ⟨u, hu, rfl⟩; exact hmax hu⟩)
+  have hE := ordSup_eq h f z
+  rw [max_eq_right hlt.le, heq] at hE
+  have hpos : 0 < y := by
+    rcases eq_or_lt_of_le hy.1 with hy0 | hp
+    · exfalso
+      have h0 : orderVal c₀ c₁ β f z 0 < β * sext f z := by
+        simp only [orderVal, add_zero, mul_zero, sub_zero]; linarith [h.c₀_pos]
+      rw [← hy0] at hE
+      have := le_max_right (β * sext f z) (orderVal c₀ c₁ β f z 0)
+      rw [max_eq_left h0.le] at hE
+      linarith
+    · exact hp
+  refine ⟨y, hpos, le_antisymm (le_csSup (bddAbove_ordSup h f z) ⟨y, hpos, rfl⟩) ?_⟩
+  have := le_max_right (β * sext f z) (orderVal c₀ c₁ β f z y)
+  rw [← hE] at this
+  rcases le_total (β * sext f z) (orderVal c₀ c₁ β f z y) with h1 | h1
+  · rw [max_eq_right h1] at hE; linarith
+  · rw [max_eq_left h1] at hE; linarith
+
+/-! ### Exercise 5.14b–c: the cycle values -/
+
+/-- `r_n = −c₀ − c₁n + β(1 − βⁿ)p/(1 − β)`. -/
+noncomputable def rn (p c₀ c₁ β : ℝ) (n : ℕ) : ℝ :=
+  -c₀ - c₁ * n + β * (1 - β ^ n) / (1 - β) * p
+
+/-- `Y_n = r_n/(1 − βⁿ)`. -/
+noncomputable def Yn (p c₀ c₁ β : ℝ) (n : ℕ) : ℝ := rn p c₀ c₁ β n / (1 - β ^ n)
+
+theorem one_sub_pow_pos (h : InvHyp p c₀ c₁ β) {n : ℕ} (hn : 1 ≤ n) : 0 < 1 - β ^ n := by
+  have := pow_lt_one₀ h.β_pos.le h.β_lt (by omega : n ≠ 0)
+  linarith
+
+/-- **Exercise 5.14b.** `Y_n = −(c₀ + c₁n)/(1 − βⁿ) + βp/(1 − β)`. -/
+theorem Yn_eq (h : InvHyp p c₀ c₁ β) {n : ℕ} (hn : 1 ≤ n) :
+    Yn p c₀ c₁ β n = -(c₀ + c₁ * n) / (1 - β ^ n) + β * p / (1 - β) := by
+  have h1 := one_sub_pow_pos h hn
+  have h2 : 0 < 1 - β := by linarith [h.β_lt]
+  simp only [Yn, rn]
+  field_simp
+  ring
+
+/-- **Exercise 5.14b.** `Y_n → −∞`. -/
+theorem tendsto_Yn (h : InvHyp p c₀ c₁ β) : Tendsto (Yn p c₀ c₁ β) atTop atBot := by
+  have h2 : 0 < 1 - β := by linarith [h.β_lt]
+  -- `Y_n ≤ −c₁n + βp/(1 − β)` since `0 < 1 − βⁿ ≤ 1`
+  have hle : ∀ n : ℕ, 1 ≤ n → Yn p c₀ c₁ β n ≤ -(c₁ * n) + β * p / (1 - β) := fun n hn => by
+    rw [Yn_eq h hn]
+    have h1 := one_sub_pow_pos h hn
+    have hb : 1 - β ^ n ≤ 1 := by linarith [pow_nonneg h.β_pos.le n]
+    have hnum : 0 ≤ c₀ + c₁ * n :=
+      add_nonneg h.c₀_pos.le (mul_nonneg h.c₁_pos.le (Nat.cast_nonneg n))
+    have : c₀ + c₁ * n ≤ (c₀ + c₁ * n) / (1 - β ^ n) := by
+      rw [le_div_iff₀ h1]; nlinarith
+    have : c₁ * n ≤ (c₀ + c₁ * n) / (1 - β ^ n) := by linarith [h.c₀_pos]
+    rw [neg_div]
+    linarith
+  have hlin : Tendsto (fun n : ℕ => -(c₁ * n) + β * p / (1 - β)) atTop atBot := by
+    have := (tendsto_natCast_atTop_atTop (R := ℝ)).const_mul_atTop h.c₁_pos
+    exact tendsto_atBot_add_const_right _ _ (tendsto_neg_atTop_atBot.comp this)
+  exact tendsto_atBot_mono' atTop (eventually_atTop.2 ⟨1, hle⟩) hlin
+
+/-- **Exercise 5.14b.** There is a finite `N ≥ 1` with `Y_N ≥ Y_n` for all `n ≥ 1`. -/
+theorem ex_5_14b (h : InvHyp p c₀ c₁ β) :
+    ∃ N, 1 ≤ N ∧ ∀ n, 1 ≤ n → Yn p c₀ c₁ β n ≤ Yn p c₀ c₁ β N := by
+  obtain ⟨K, hK⟩ := eventually_atTop.1 ((tendsto_Yn h).eventually_lt_atBot (Yn p c₀ c₁ β 1))
+  -- maximize over the finite set `{1, …, max K 1}`
+  obtain ⟨N, hN, hmax⟩ := (Finset.Icc 1 (max K 1)).exists_max_image (Yn p c₀ c₁ β)
+    ⟨1, Finset.mem_Icc.2 ⟨le_rfl, le_max_right _ _⟩⟩
+  refine ⟨N, (Finset.mem_Icc.1 hN).1, fun n hn => ?_⟩
+  rcases le_or_gt n (max K 1) with hnK | hnK
+  · exact hmax n (Finset.mem_Icc.2 ⟨hn, hnK⟩)
+  · exact (hK n (le_of_max_le_left hnK.le)).le.trans
+      (hmax 1 (Finset.mem_Icc.2 ⟨le_rfl, le_max_right _ _⟩))
+
+/-- **Exercise 5.14b.** The optimal cycle does not depend on the price `p`. -/
+theorem argmax_Yn_indep_p {p' : ℝ} (h : InvHyp p c₀ c₁ β) (h' : InvHyp p' c₀ c₁ β) {N : ℕ}
+    (hN : 1 ≤ N) (hmax : ∀ n, 1 ≤ n → Yn p c₀ c₁ β n ≤ Yn p c₀ c₁ β N) :
+    ∀ n, 1 ≤ n → Yn p' c₀ c₁ β n ≤ Yn p' c₀ c₁ β N := fun n hn => by
+  have := hmax n hn
+  rw [Yn_eq h hn, Yn_eq h hN] at this
+  rw [Yn_eq h' hn, Yn_eq h' hN]
+  linarith
+
+/-- **Exercise 5.14b.** A larger fixed cost calls for a longer cycle: if `N` is optimal for `c₀`
+and `N'` for `c₀' > c₀`, then `N ≤ N'` unless both are optimal for both (increasing differences:
+`1/(1 − βⁿ)` falls with `n`). -/
+theorem argmax_Yn_mono_c0 {c₀' : ℝ} (h : InvHyp p c₀ c₁ β) (h' : InvHyp p c₀' c₁ β) (hc : c₀ < c₀')
+    {N N' : ℕ} (hN : 1 ≤ N) (hN' : 1 ≤ N')
+    (hmax : ∀ n, 1 ≤ n → Yn p c₀ c₁ β n ≤ Yn p c₀ c₁ β N)
+    (hmax' : ∀ n, 1 ≤ n → Yn p c₀' c₁ β n ≤ Yn p c₀' c₁ β N') : N ≤ N' := by
+  by_contra hlt
+  push Not at hlt
+  have e1 := hmax N' hN'
+  have e2 := hmax' N hN
+  rw [Yn_eq h hN', Yn_eq h hN] at e1
+  rw [Yn_eq h' hN, Yn_eq h' hN'] at e2
+  -- adding the two optimality conditions leaves `(c₀' − c₀)(1/(1 − β^{N'}) − 1/(1 − β^N)) ≤ 0`
+  have hA := one_sub_pow_pos h hN
+  have hB := one_sub_pow_pos h hN'
+  have hpow : β ^ N < β ^ N' := pow_lt_pow_right_of_lt_one₀ h.β_pos h.β_lt hlt
+  have hlt' : 1 / (1 - β ^ N) < 1 / (1 - β ^ N') := one_div_lt_one_div_of_lt hB (by linarith)
+  have key : (c₀' - c₀) * (1 / (1 - β ^ N')) ≤ (c₀' - c₀) * (1 / (1 - β ^ N)) := by
+    have e : ∀ a b : ℝ, -(a + b) / (1 - β ^ N) = -(a + b) * (1 / (1 - β ^ N)) := fun a b => by
+      ring
+    have e' : ∀ a b : ℝ, -(a + b) / (1 - β ^ N') = -(a + b) * (1 / (1 - β ^ N')) := fun a b => by
+      ring
+    rw [e, e'] at e1 e2
+    nlinarith
+  have := mul_lt_mul_of_pos_left hlt' (by linarith : 0 < c₀' - c₀)
+  linarith
+
+/-- **Exercise 5.14c.** With `Y_N > 0`, `A = (1 − β)Y_N/(βp − c₁) ∈ (0, 1)`; `A < 1` holds for
+every `N ≥ 1`, because `1 − β^N ≤ N(1 − β)` and `c₀ > 0`. -/
+theorem ex_5_14c (h : InvHyp p c₀ c₁ β) {N : ℕ} (hN : 1 ≤ N) (hY : 0 < Yn p c₀ c₁ β N) :
+    0 < (1 - β) * Yn p c₀ c₁ β N / (β * p - c₁) ∧
+      (1 - β) * Yn p c₀ c₁ β N / (β * p - c₁) < 1 := by
+  have h2 : 0 < 1 - β := by linarith [h.β_lt]
+  have hm : 0 < β * p - c₁ := by linarith [h.margin]
+  refine ⟨div_pos (mul_pos h2 hY) hm, ?_⟩
+  rw [div_lt_one hm, Yn_eq h hN]
+  have h1 := one_sub_pow_pos h hN
+  -- `1 − β^N ≤ N(1 − β)` (Bernoulli)
+  have hbern : 1 - β ^ N ≤ N * (1 - β) := by
+    have := one_add_mul_le_pow (show -2 ≤ -(1 - β) by linarith [h.β_pos]) N
+    rw [show (1 : ℝ) + -(1 - β) = β by ring] at this
+    linarith
+  have hkey : c₁ * (1 - β ^ N) < (1 - β) * (c₀ + c₁ * N) := by nlinarith [h.c₀_pos, h.c₁_pos]
+  have e : (1 - β) * (-(c₀ + c₁ * N) / (1 - β ^ N) + β * p / (1 - β)) =
+      (1 - β) * -(c₀ + c₁ * N) / (1 - β ^ N) + β * p := by
+    field_simp
+  rw [e]
+  have : (1 - β) * -(c₀ + c₁ * N) / (1 - β ^ N) < -c₁ := by
+    rw [div_lt_iff₀ h1]; nlinarith
+  linarith
+
+end StokeyLucasPrescott.DeterministicApplications
+
+/-
+Copyright (c) 2026 Robert Kirkby. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Robert Kirkby
+-/
+
+/-!
+# The (s, S) policy: the value function
+
+SLP Exercise 5.14d–h, pp. 120–122. Let `N ≥ 1` maximize `Y_n`, with `Y = Y_N > 0`, and
+`A = (1 − β)Y/(βp − c₁) ∈ (0, 1)`.
+
+* `cellW`: on the cell `[ν, ν + 1]` (`ν ≥ 1`), with `α = u − ν`,
+  `w(u) = p(1 − β^ν)/(1 − β) + β^{ν−1} max{c₁α + Y, β(pα + Y)}` (`wSS_cell`); the maximum picks
+  `c₁α + Y` exactly when `α ≤ A` (`cross_iff`). This is the book's (6) (`wSS_six`), and holds on
+  the closed cell because `A < 1`.
+* **Exercise 5.14d**: `wSS` solves the difference equations (2), (3) and (5)
+  (`wSS_two`, `wSS_three_left`, `wSS_three_right`, `wSS_five`); it is continuous on `ℝ₊`
+  (`continuousOn_wSS`), bounded (`wSS_bounds`) and piecewise linear.
+-/
+
+open Set Filter Topology BoundedContinuousFunction
+
+namespace StokeyLucasPrescott.DeterministicApplications
+
+variable {p c₀ c₁ β : ℝ} {N : ℕ}
+
+/-- The hypotheses of Exercise 5.14d–h: `N` maximizes `Y_n` and `Y_N > 0`. -/
+structure SSHyp (p c₀ c₁ β : ℝ) (N : ℕ) : Prop where
+  inv : InvHyp p c₀ c₁ β
+  N_pos : 1 ≤ N
+  N_max : ∀ n, 1 ≤ n → Yn p c₀ c₁ β n ≤ Yn p c₀ c₁ β N
+  Y_pos : 0 < Yn p c₀ c₁ β N
+
+/-- The indifference point `A = (1 − β)Y_N/(βp − c₁)`. -/
+noncomputable def Aind (p c₀ c₁ β : ℝ) (N : ℕ) : ℝ := (1 - β) * Yn p c₀ c₁ β N / (β * p - c₁)
+
+/-- `w` on the cell `[ν, ν + 1]`. -/
+noncomputable def cellW (p c₀ c₁ β : ℝ) (N ν : ℕ) (u : ℝ) : ℝ :=
+  p * (1 - β ^ ν) / (1 - β) +
+    β ^ (ν - 1) * max (c₁ * (u - ν) + Yn p c₀ c₁ β N) (β * (p * (u - ν) + Yn p c₀ c₁ β N))
+
+/-- The conjectured value function (2), (3), (5), in the closed form (6). -/
+noncomputable def wSS (p c₀ c₁ β : ℝ) (N : ℕ) (x : ℝ) : ℝ :=
+  if x ≤ 1 then p * x + Yn p c₀ c₁ β N else cellW p c₀ c₁ β N ⌊x⌋₊ x
+
+theorem SSHyp.A_pos (h : SSHyp p c₀ c₁ β N) : 0 < Aind p c₀ c₁ β N :=
+  (ex_5_14c h.inv h.N_pos h.Y_pos).1
+
+theorem SSHyp.A_lt (h : SSHyp p c₀ c₁ β N) : Aind p c₀ c₁ β N < 1 :=
+  (ex_5_14c h.inv h.N_pos h.Y_pos).2
+
+/-- `c₁a + Y ≤ β(pa + Y)` iff `A ≤ a`: the two branches cross at `A`. -/
+theorem cross_iff (h : SSHyp p c₀ c₁ β N) (a : ℝ) :
+    c₁ * a + Yn p c₀ c₁ β N ≤ β * (p * a + Yn p c₀ c₁ β N) ↔ Aind p c₀ c₁ β N ≤ a := by
+  have hm : 0 < β * p - c₁ := by linarith [h.inv.margin]
+  unfold Aind
+  rw [div_le_iff₀ hm]
+  constructor <;> intro hh <;> nlinarith
+
+theorem cross_one (h : SSHyp p c₀ c₁ β N) :
+    max (c₁ * 1 + Yn p c₀ c₁ β N) (β * (p * 1 + Yn p c₀ c₁ β N)) =
+      β * (p * 1 + Yn p c₀ c₁ β N) :=
+  max_eq_right ((cross_iff h 1).2 h.A_lt.le)
+
+theorem cross_zero (h : SSHyp p c₀ c₁ β N) :
+    max (c₁ * 0 + Yn p c₀ c₁ β N) (β * (p * 0 + Yn p c₀ c₁ β N)) = Yn p c₀ c₁ β N := by
+  simp only [mul_zero, zero_add]
+  exact max_eq_left (mul_le_of_le_one_left h.Y_pos.le h.inv.β_lt.le)
+
+/-- On the closed cell `[ν, ν + 1]`, `ν ≥ 1`, `w = cellW ν`. -/
+theorem wSS_cell (h : SSHyp p c₀ c₁ β N) {ν : ℕ} (hν : 1 ≤ ν) {u : ℝ}
+    (hu : u ∈ Icc (ν : ℝ) (ν + 1)) : wSS p c₀ c₁ β N u = cellW p c₀ c₁ β N ν u := by
+  have h1β : (1 - β) ≠ 0 := by linarith [h.inv.β_lt]
+  obtain ⟨m, rfl⟩ : ∃ m, ν = m + 1 := ⟨ν - 1, by omega⟩
+  push_cast at hu
+  rcases eq_or_lt_of_le hu.2 with htop | hlt
+  · -- the right end `u = m + 2`
+    have hfl : ⌊u⌋₊ = m + 2 := by
+      rw [htop]; exact_mod_cast Nat.floor_natCast (m + 2) |>.trans rfl
+    have hu1 : ¬ u ≤ 1 := by rw [htop]; push Not; linarith [(Nat.cast_nonneg m : (0 : ℝ) ≤ m)]
+    simp only [wSS, hu1, ↓reduceIte, hfl, cellW]
+    have e1 : u - ((m + 2 : ℕ) : ℝ) = 0 := by rw [htop]; push_cast; ring
+    have e2 : u - ((m + 1 : ℕ) : ℝ) = 1 := by rw [htop]; push_cast; ring
+    rw [e1, e2, cross_zero h, cross_one h]
+    simp only [Nat.add_sub_cancel, show m + 2 - 1 = m + 1 by omega, pow_succ]
+    field_simp
+    ring
+  · rcases eq_or_lt_of_le hu.1 with hbot | hgt
+    · rcases Nat.eq_zero_or_pos m with hm0 | hmpos
+      · -- `u = 1`
+        subst hm0
+        have hu1 : u = 1 := by rw [← hbot]; norm_num
+        subst hu1
+        simp only [wSS, le_refl, ↓reduceIte, cellW]
+        rw [show (1 : ℝ) - ((0 + 1 : ℕ) : ℝ) = 0 by norm_num, cross_zero h]
+        simp only [pow_one, zero_add, Nat.sub_self, pow_zero, one_mul, mul_one]
+        field_simp
+      · have hu1 : ¬ u ≤ 1 := by
+          push Not
+          have : (1 : ℝ) ≤ m := by exact_mod_cast hmpos
+          linarith
+        have hfl : ⌊u⌋₊ = m + 1 := (Nat.floor_eq_iff (by linarith)).2 ⟨by push_cast; linarith,
+          by push_cast; linarith⟩
+        simp only [wSS, hu1, ↓reduceIte, hfl]
+    · have hu1 : ¬ u ≤ 1 := by
+        push Not
+        have : (0 : ℝ) ≤ m := Nat.cast_nonneg m
+        linarith
+      have hfl : ⌊u⌋₊ = m + 1 :=
+        (Nat.floor_eq_iff (by linarith [(Nat.cast_nonneg m : (0:ℝ) ≤ m)])).2
+          ⟨by push_cast; linarith, by push_cast; linarith⟩
+      simp only [wSS, hu1, ↓reduceIte, hfl]
+
+theorem wSS_low {x : ℝ} (hx : x ≤ 1) : wSS p c₀ c₁ β N x = p * x + Yn p c₀ c₁ β N := by
+  simp only [wSS, hx, ↓reduceIte]
+
+/-- **Exercise 5.14d, (2).** `w(x) = px + Y` on `[0, 1]`. -/
+theorem wSS_two (x : ℝ) (hx : x ∈ Icc (0 : ℝ) 1) : wSS p c₀ c₁ β N x = p * x + Yn p c₀ c₁ β N :=
+  wSS_low hx.2
+
+/-- On `[1, 2]`, `w(x) = p + max{c₁(x − 1) + Y, βw(x − 1)}`. -/
+theorem wSS_one_two (h : SSHyp p c₀ c₁ β N) {x : ℝ} (hx : x ∈ Icc (1 : ℝ) 2) :
+    wSS p c₀ c₁ β N x = p + max (c₁ * (x - 1) + Yn p c₀ c₁ β N)
+      (β * wSS p c₀ c₁ β N (x - 1)) := by
+  have h1β : (1 - β) ≠ 0 := by linarith [h.inv.β_lt]
+  rw [wSS_cell h le_rfl (by push_cast; exact ⟨hx.1, by linarith [hx.2]⟩),
+    wSS_low (by linarith [hx.2] : x - 1 ≤ 1)]
+  simp only [cellW, Nat.cast_one, pow_one, Nat.sub_self, pow_zero, one_mul]
+  congr 1
+  field_simp
+
+/-- **Exercise 5.14d, (3).** On `(1, 1 + A)`, `w(x) = p + c₁(x − 1) + Y`. -/
+theorem wSS_three_left (h : SSHyp p c₀ c₁ β N) {x : ℝ}
+    (hx : x ∈ Ioo (1 : ℝ) (1 + Aind p c₀ c₁ β N)) :
+    wSS p c₀ c₁ β N x = p + c₁ * (x - 1) + Yn p c₀ c₁ β N := by
+  rw [wSS_one_two h ⟨hx.1.le, by linarith [hx.2, h.A_lt]⟩,
+    wSS_low (show x - 1 ≤ 1 by linarith [hx.2, h.A_lt])]
+  rw [max_eq_left]
+  · ring
+  · have := (cross_iff h (x - 1)).not.2 (by push Not; linarith [hx.2])
+    push Not at this
+    exact this.le
+
+/-- **Exercise 5.14d, (3).** On `[1 + A, 2]`, `w(x) = p + βw(x − 1)`. -/
+theorem wSS_three_right (h : SSHyp p c₀ c₁ β N) {x : ℝ}
+    (hx : x ∈ Icc (1 + Aind p c₀ c₁ β N) 2) :
+    wSS p c₀ c₁ β N x = p + β * wSS p c₀ c₁ β N (x - 1) := by
+  rw [wSS_one_two h ⟨by linarith [hx.1, h.A_pos], hx.2⟩]
+  rw [wSS_low (by linarith [hx.2] : x - 1 ≤ 1)]
+  rw [max_eq_right ((cross_iff h (x - 1)).2 (by linarith [hx.1]))]
+
+/-- **Exercise 5.14d, (5).** For `x ≥ 2`, `w(x) = p + βw(x − 1)`. -/
+theorem wSS_five (h : SSHyp p c₀ c₁ β N) {x : ℝ} (hx : 2 ≤ x) :
+    wSS p c₀ c₁ β N x = p + β * wSS p c₀ c₁ β N (x - 1) := by
+  have h1β : (1 - β) ≠ 0 := by linarith [h.inv.β_lt]
+  set ν := ⌊x⌋₊
+  have hν2 : 2 ≤ ν := Nat.le_floor (by exact_mod_cast hx)
+  have hνx : (ν : ℝ) ≤ x := Nat.floor_le (by linarith)
+  have hxν : x < ν + 1 := Nat.lt_floor_add_one x
+  obtain ⟨m, hm⟩ : ∃ m, ν = m + 2 := ⟨ν - 2, by omega⟩
+  rw [wSS_cell h (ν := ν) (by omega) ⟨hνx, hxν.le⟩,
+    wSS_cell h (ν := m + 1) (by omega) ⟨by rw [hm] at hνx; push_cast at hνx ⊢; linarith,
+      by rw [hm] at hxν; push_cast at hxν ⊢; linarith⟩]
+  simp only [cellW, hm]
+  push_cast
+  have e : x - (↑m + 1) - 1 = x - (↑m + 2) := by ring
+  rw [show x - 1 - (↑m + 1) = x - (↑m + 2) by ring]
+  simp only [pow_succ]
+  field_simp
+  ring
+
+/-- **Exercise 5.14d, (6).** For `x > 1` with `ν = ⌊x⌋`, `α = x − ν`: below the indifference
+point `w(x) = p(1 − β^ν)/(1 − β) + β^{ν−1}(c₁α + Y)`, above it
+`w(x) = p(1 − β^ν)/(1 − β) + β^ν(pα + Y)`. -/
+theorem wSS_six (h : SSHyp p c₀ c₁ β N) {x : ℝ} (hx : 1 < x) :
+    (x - ⌊x⌋₊ < Aind p c₀ c₁ β N → wSS p c₀ c₁ β N x =
+      p * (1 - β ^ ⌊x⌋₊) / (1 - β) + β ^ (⌊x⌋₊ - 1) * (c₁ * (x - ⌊x⌋₊) + Yn p c₀ c₁ β N)) ∧
+    (Aind p c₀ c₁ β N ≤ x - ⌊x⌋₊ → wSS p c₀ c₁ β N x =
+      p * (1 - β ^ ⌊x⌋₊) / (1 - β) + β ^ ⌊x⌋₊ * (p * (x - ⌊x⌋₊) + Yn p c₀ c₁ β N)) := by
+  have hν : 1 ≤ ⌊x⌋₊ := Nat.le_floor (by exact_mod_cast hx.le)
+  have hcell := wSS_cell h hν ⟨Nat.floor_le (by linarith), (Nat.lt_floor_add_one x).le⟩
+  refine ⟨fun hα => ?_, fun hα => ?_⟩
+  · rw [hcell, cellW, max_eq_left]
+    have := (cross_iff h (x - ⌊x⌋₊)).not.2 (by push Not; exact hα)
+    push Not at this
+    exact this.le
+  · rw [hcell, cellW, max_eq_right ((cross_iff h _).2 hα)]
+    obtain ⟨m, hm⟩ : ∃ m, ⌊x⌋₊ = m + 1 := ⟨⌊x⌋₊ - 1, by omega⟩
+    rw [hm, Nat.add_sub_cancel, pow_succ]
+    ring
+
+/-! ### Continuity and bounds -/
+
+theorem continuous_cellW (ν : ℕ) : Continuous (cellW p c₀ c₁ β N ν) := by
+  unfold cellW
+  fun_prop
+
+/-- `w` is continuous on each cell `[n, n + 1]`. -/
+theorem continuousOn_wSS_cell (h : SSHyp p c₀ c₁ β N) (n : ℕ) :
+    ContinuousOn (wSS p c₀ c₁ β N) (Icc (n : ℝ) (n + 1)) := by
+  rcases Nat.eq_zero_or_pos n with rfl | hn
+  · refine (show Continuous (fun x : ℝ => p * x + Yn p c₀ c₁ β N) by
+      fun_prop).continuousOn.congr fun x hx => ?_
+    simp only [Nat.cast_zero, zero_add] at hx
+    exact wSS_low hx.2
+  · exact (continuous_cellW n).continuousOn.congr fun x hx => wSS_cell h hn hx
+
+/-- **Exercise 5.14d.** `w` is continuous on `ℝ₊`. -/
+theorem continuousOn_wSS (h : SSHyp p c₀ c₁ β N) : ContinuousOn (wSS p c₀ c₁ β N) (Ici 0) := by
+  -- two adjacent cells cover a neighbourhood
+  have hpair : ∀ n : ℕ, ContinuousOn (wSS p c₀ c₁ β N) (Icc (n : ℝ) (n + 2)) := fun n => by
+    have := (continuousOn_wSS_cell h n).union_of_isClosed (continuousOn_wSS_cell h (n + 1))
+      isClosed_Icc isClosed_Icc
+    rwa [show ((n + 1 : ℕ) : ℝ) = n + 1 by push_cast; ring,
+      show (n : ℝ) + 1 + 1 = n + 2 by ring, Icc_union_Icc_eq_Icc (by linarith)
+        (by linarith)] at this
+  intro x hx
+  have hx0 : (0 : ℝ) ≤ x := hx
+  set m := ⌊x⌋₊
+  have hmx : (m : ℝ) ≤ x := Nat.floor_le hx0
+  have hxm : x < m + 1 := Nat.lt_floor_add_one x
+  rcases Nat.eq_zero_or_pos m with hm0 | hmpos
+  · have hc := hpair 0
+    simp only [Nat.cast_zero, zero_add] at hc
+    refine (hc x ⟨hx0, by rw [hm0] at hxm; push_cast at hxm; linarith⟩).mono_of_mem_nhdsWithin ?_
+    rw [← Ici_inter_Iic]
+    exact inter_mem_nhdsWithin _ (Iic_mem_nhds (by rw [hm0] at hxm; push_cast at hxm; linarith))
+  · obtain ⟨k, hk⟩ : ∃ k, m = k + 1 := ⟨m - 1, by omega⟩
+    have hc := hpair k
+    have hk' : (m : ℝ) = k + 1 := by rw [hk]; push_cast; ring
+    refine (hc x ⟨by linarith, by linarith⟩).mono_of_mem_nhdsWithin
+      (nhdsWithin_le_nhds (Icc_mem_nhds (by linarith) (by linarith)))
+
+/-- **Exercise 5.14d.** `w` is bounded: `0 ≤ w ≤ p/(1 − β) + p + Y` on `ℝ₊`. -/
+theorem wSS_bounds (h : SSHyp p c₀ c₁ β N) {x : ℝ} (hx : 0 ≤ x) :
+    0 ≤ wSS p c₀ c₁ β N x ∧
+      wSS p c₀ c₁ β N x ≤ p / (1 - β) + p + Yn p c₀ c₁ β N := by
+  have hp := h.inv.p_pos
+  have hY := h.Y_pos
+  have h1β : 0 < 1 - β := by linarith [h.inv.β_lt]
+  rcases le_or_gt x 1 with hx1 | hx1
+  · rw [wSS_low hx1]
+    have : 0 ≤ p / (1 - β) := div_nonneg hp.le h1β.le
+    constructor <;> nlinarith
+  · set ν := ⌊x⌋₊
+    have hν : 1 ≤ ν := Nat.le_floor (by exact_mod_cast hx1.le)
+    have hνx : (ν : ℝ) ≤ x := Nat.floor_le hx
+    have hxν : x < ν + 1 := Nat.lt_floor_add_one x
+    rw [wSS_cell h hν ⟨hνx, hxν.le⟩, cellW]
+    have hpow : 0 ≤ β ^ ν := pow_nonneg h.inv.β_pos.le ν
+    have hpow1 : β ^ ν ≤ 1 := pow_le_one₀ h.inv.β_pos.le h.inv.β_lt.le
+    have hq0 : 0 ≤ β ^ (ν - 1) := pow_nonneg h.inv.β_pos.le _
+    have hq1 : β ^ (ν - 1) ≤ 1 := pow_le_one₀ h.inv.β_pos.le h.inv.β_lt.le
+    have hα0 : 0 ≤ x - ν := by linarith
+    have hα1 : x - ν ≤ 1 := by linarith
+    have hM0 : 0 ≤ max (c₁ * (x - ν) + Yn p c₀ c₁ β N) (β * (p * (x - ν) + Yn p c₀ c₁ β N)) :=
+      le_max_of_le_left (by nlinarith [h.inv.c₁_pos])
+    have hM1 : max (c₁ * (x - ν) + Yn p c₀ c₁ β N) (β * (p * (x - ν) + Yn p c₀ c₁ β N)) ≤
+        p + Yn p c₀ c₁ β N := by
+      have hpα : p * (x - ν) ≤ p := mul_le_of_le_one_right hp.le hα1
+      have hpα0 : 0 ≤ p * (x - ν) := mul_nonneg hp.le hα0
+      have hc₁p : c₁ ≤ p := by nlinarith [h.inv.margin, h.inv.β_lt, h.inv.β_pos]
+      refine max_le ?_ ?_
+      · nlinarith [h.inv.c₁_pos]
+      · have := mul_le_of_le_one_left (by linarith : 0 ≤ p * (x - ν) + Yn p c₀ c₁ β N)
+          h.inv.β_lt.le
+        linarith
+    have hA : 0 ≤ p * (1 - β ^ ν) / (1 - β) := div_nonneg (by nlinarith) h1β.le
+    have hB : p * (1 - β ^ ν) / (1 - β) ≤ p / (1 - β) :=
+      div_le_div_of_nonneg_right (by nlinarith) h1β.le
+    constructor <;> nlinarith
+
+end StokeyLucasPrescott.DeterministicApplications
+
+/-
+Copyright (c) 2026 Robert Kirkby. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Robert Kirkby
+-/
+
+/-!
+# The (s, S) policy: verification
+
+SLP Exercise 5.14d–h, continued. Throughout, `N` maximizes `Y_n`, `Y = Y_N > 0` and
+`φ(u) = −c₁u + βw(u)`, so that ordering up to `u` from `z` is worth `−c₀ + c₁z + φ(u)`.
+
+* **Exercise 5.14d (derivatives)**: `w' = p` on `(0, 1)`, `w' = β^{ν−1}c₁` on `(ν, ν + A)` and
+  `w' = β^νp` on `(ν + A, ν + 1)` (`wSS_deriv_low`, `wSS_deriv_left`, `wSS_deriv_right`); `w` is not
+  differentiable at `1`, at each integer `ν ≥ 2`, or at `ν + A` (`wSS_kink_one`,
+  `wSS_kink_int`, `wSS_kink_A`).
+* **Exercise 5.14e**: `phi_cell_convex`: `φ` is convex on each cell, so
+  (`ex_5_14e`) any order is beaten either by the limit `y ↓ 0` (not attained) or by an order
+  that brings the stock to an integer.
+* **Exercise 5.14f** (`ex_5_14f`): ordering up to the integer `n` from `z` is worth
+  `c₁z + r_n + βⁿY`.
+* **Exercise 5.14g** (`ex_5_14g`): `max_{n ≥ 1} (r_n + βⁿY_N) = Y_N`.
+* **Exercise 5.14h** (`ex_5_14h`): `w` satisfies (1); so `w = v` (`ex_5_14_value`). The key
+  step for `x ≥ 2` is `key_ineq`: `βw(z) > c₁z + r_n + βⁿY` for integers `n > z ≥ 1`.
+* `ex_5_14_policy`: the (s, S) policy, `s = 1 + A`, `S = N`: below `1 + A` order up to `N`,
+  above it do not order; at `1 + A` both are optimal, so the optimal policy is not unique
+  (Exercise 5.14a).
+-/
+
+open Set Filter Topology BoundedContinuousFunction
+
+namespace StokeyLucasPrescott.DeterministicApplications
+
+variable {p c₀ c₁ β : ℝ} {N : ℕ}
+
+/-- The branches differ by `(βp − c₁)(α − A)`. -/
+theorem cross_eq (h : SSHyp p c₀ c₁ β N) (a : ℝ) :
+    β * (p * a + Yn p c₀ c₁ β N) - (c₁ * a + Yn p c₀ c₁ β N) =
+      (β * p - c₁) * (a - Aind p c₀ c₁ β N) := by
+  have hm : β * p - c₁ ≠ 0 := by linarith [h.inv.margin]
+  unfold Aind
+  field_simp
+  ring
+
+/-- On `[ν, ν + A]`, `w(u) = p(1 − β^ν)/(1 − β) + β^{ν−1}(c₁(u − ν) + Y)`. -/
+theorem wSS_left_piece (h : SSHyp p c₀ c₁ β N) {ν : ℕ} (hν : 1 ≤ ν) {u : ℝ}
+    (hu : u ∈ Icc (ν : ℝ) (ν + Aind p c₀ c₁ β N)) :
+    wSS p c₀ c₁ β N u = p * (1 - β ^ ν) / (1 - β) +
+      β ^ (ν - 1) * (c₁ * (u - ν) + Yn p c₀ c₁ β N) := by
+  rw [wSS_cell h hν ⟨hu.1, by linarith [hu.2, h.A_lt]⟩, cellW, max_eq_left]
+  have := cross_eq h (u - ν)
+  nlinarith [h.inv.margin, hu.2]
+
+/-- On `[ν + A, ν + 1]`, `w(u) = p(1 − β^ν)/(1 − β) + β^ν(p(u − ν) + Y)`. -/
+theorem wSS_right_piece (h : SSHyp p c₀ c₁ β N) {ν : ℕ} (hν : 1 ≤ ν) {u : ℝ}
+    (hu : u ∈ Icc ((ν : ℝ) + Aind p c₀ c₁ β N) (ν + 1)) :
+    wSS p c₀ c₁ β N u = p * (1 - β ^ ν) / (1 - β) +
+      β ^ ν * (p * (u - ν) + Yn p c₀ c₁ β N) := by
+  rw [wSS_cell h hν ⟨by linarith [hu.1, h.A_pos], hu.2⟩, cellW,
+    max_eq_right ((cross_iff h _).2 (by linarith [hu.1]))]
+  obtain ⟨m, rfl⟩ : ∃ m, ν = m + 1 := ⟨ν - 1, by omega⟩
+  rw [Nat.add_sub_cancel, pow_succ]
+  ring
+
+/-! ### Exercise 5.14d: derivatives -/
+
+theorem wSS_deriv_low {x : ℝ} (hx : x ∈ Ioo (0 : ℝ) 1) : HasDerivAt (wSS p c₀ c₁ β N) p x := by
+  have h1 : HasDerivAt (fun u => p * u + Yn p c₀ c₁ β N) p x := by
+    simpa using ((hasDerivAt_id' x).const_mul p).add_const (Yn p c₀ c₁ β N)
+  refine h1.congr_of_eventuallyEq ?_
+  filter_upwards [Iio_mem_nhds hx.2] with u hu
+  exact wSS_low (le_of_lt hu)
+
+theorem wSS_deriv_left (h : SSHyp p c₀ c₁ β N) {ν : ℕ} (hν : 1 ≤ ν) {x : ℝ}
+    (hx : x ∈ Ioo (ν : ℝ) (ν + Aind p c₀ c₁ β N)) :
+    HasDerivAt (wSS p c₀ c₁ β N) (β ^ (ν - 1) * c₁) x := by
+  have h1 : HasDerivAt (fun u => p * (1 - β ^ ν) / (1 - β) +
+      β ^ (ν - 1) * (c₁ * (u - ν) + Yn p c₀ c₁ β N)) (β ^ (ν - 1) * c₁) x := by
+    have := (((hasDerivAt_id' x).sub_const (ν : ℝ)).const_mul c₁).add_const (Yn p c₀ c₁ β N)
+      |>.const_mul (β ^ (ν - 1)) |>.const_add (p * (1 - β ^ ν) / (1 - β))
+    simpa using this
+  refine h1.congr_of_eventuallyEq ?_
+  filter_upwards [Ioo_mem_nhds hx.1 hx.2] with u hu
+  exact wSS_left_piece h hν ⟨hu.1.le, hu.2.le⟩
+
+theorem wSS_deriv_right (h : SSHyp p c₀ c₁ β N) {ν : ℕ} (hν : 1 ≤ ν) {x : ℝ}
+    (hx : x ∈ Ioo ((ν : ℝ) + Aind p c₀ c₁ β N) (ν + 1)) :
+    HasDerivAt (wSS p c₀ c₁ β N) (β ^ ν * p) x := by
+  have h1 : HasDerivAt (fun u => p * (1 - β ^ ν) / (1 - β) +
+      β ^ ν * (p * (u - ν) + Yn p c₀ c₁ β N)) (β ^ ν * p) x := by
+    have := (((hasDerivAt_id' x).sub_const (ν : ℝ)).const_mul p).add_const (Yn p c₀ c₁ β N)
+      |>.const_mul (β ^ ν) |>.const_add (p * (1 - β ^ ν) / (1 - β))
+    simpa using this
+  refine h1.congr_of_eventuallyEq ?_
+  filter_upwards [Ioo_mem_nhds hx.1 hx.2] with u hu
+  exact wSS_right_piece h hν ⟨hu.1.le, hu.2.le⟩
+
+/-- A function that is affine with slope `a` just left of `x₀` and slope `b ≠ a` just right of it is
+not differentiable at `x₀`. -/
+theorem not_differentiableAt_of_kink {f : ℝ → ℝ} {x₀ a b : ℝ}
+    (hL : ∀ᶠ u in 𝓝[≤] x₀, f u = f x₀ + a * (u - x₀))
+    (hR : ∀ᶠ u in 𝓝[≥] x₀, f u = f x₀ + b * (u - x₀)) (hab : a ≠ b) :
+    ¬ DifferentiableAt ℝ f x₀ := by
+  intro hd
+  have hlin : ∀ c : ℝ, HasDerivAt (fun u => f x₀ + c * (u - x₀)) c x₀ := fun c => by
+    simpa using (((hasDerivAt_id' x₀).sub_const x₀).const_mul c).const_add (f x₀)
+  have h1 : HasDerivWithinAt f a (Iic x₀) x₀ :=
+    (hlin a).hasDerivWithinAt.congr_of_eventuallyEq hL (by simp)
+  have h2 : HasDerivWithinAt f b (Ici x₀) x₀ :=
+    (hlin b).hasDerivWithinAt.congr_of_eventuallyEq hR (by simp)
+  have e1 := (uniqueDiffWithinAt_Iic x₀).eq_deriv _ hd.hasDerivAt.hasDerivWithinAt h1
+  have e2 := (uniqueDiffWithinAt_Ici x₀).eq_deriv _ hd.hasDerivAt.hasDerivWithinAt h2
+  exact hab (e1.symm.trans e2)
+
+/-- **Exercise 5.14d.** `w` has a kink at `1`: slopes `p` and `c₁`. -/
+theorem wSS_kink_one (h : SSHyp p c₀ c₁ β N) : ¬ DifferentiableAt ℝ (wSS p c₀ c₁ β N) 1 := by
+  have hw1 : wSS p c₀ c₁ β N 1 = p + Yn p c₀ c₁ β N := by rw [wSS_low le_rfl]; ring
+  refine not_differentiableAt_of_kink (a := p) (b := c₁) ?_ ?_ ?_
+  · filter_upwards [self_mem_nhdsWithin] with u (hu : u ≤ 1)
+    rw [wSS_low hu, hw1]; ring
+  · filter_upwards [self_mem_nhdsWithin, nhdsWithin_le_nhds (Iio_mem_nhds
+      (show (1 : ℝ) < 1 + Aind p c₀ c₁ β N by linarith [h.A_pos]))] with u (hu : 1 ≤ u) hu'
+    rw [wSS_left_piece h (ν := 1) le_rfl ⟨by simpa using hu, by simpa using hu'.le⟩, hw1]
+    simp only [Nat.cast_one, pow_one, Nat.sub_self, pow_zero, one_mul]
+    have h1β : (1 - β) ≠ 0 := by linarith [h.inv.β_lt]
+    field_simp
+    ring
+  · have : c₁ < p := by nlinarith [h.inv.margin, h.inv.β_lt, h.inv.β_pos, h.inv.c₁_pos]
+    exact this.ne'
+
+/-- **Exercise 5.14d.** `w` has a kink at each integer `ν ≥ 2`: slopes `β^{ν−1}p` and
+`β^{ν−1}c₁`. -/
+theorem wSS_kink_int (h : SSHyp p c₀ c₁ β N) {ν : ℕ} (hν : 2 ≤ ν) :
+    ¬ DifferentiableAt ℝ (wSS p c₀ c₁ β N) ν := by
+  obtain ⟨m, rfl⟩ : ∃ m, ν = m + 2 := ⟨ν - 2, by omega⟩
+  have hb := pow_pos h.inv.β_pos (m + 1)
+  have hw : wSS p c₀ c₁ β N ((m + 2 : ℕ) : ℝ) = p * (1 - β ^ (m + 2)) / (1 - β) +
+      β ^ (m + 1) * Yn p c₀ c₁ β N := by
+    rw [wSS_left_piece h (ν := m + 2) (by omega) ⟨le_rfl, by linarith [h.A_pos]⟩]
+    simp
+  refine not_differentiableAt_of_kink (a := β ^ (m + 1) * p) (b := β ^ (m + 1) * c₁) ?_ ?_ ?_
+  · filter_upwards [self_mem_nhdsWithin, nhdsWithin_le_nhds (Ioi_mem_nhds
+      (show ((m + 1 : ℕ) : ℝ) + Aind p c₀ c₁ β N < ((m + 2 : ℕ) : ℝ) by
+        push_cast; linarith [h.A_lt]))] with u (hu : u ≤ _) hu'
+    rw [wSS_right_piece h (ν := m + 1) (by omega) ⟨hu'.le, by push_cast at hu ⊢; linarith⟩, hw]
+    have h1β : (1 - β) ≠ 0 := by linarith [h.inv.β_lt]
+    push_cast
+    field_simp
+    ring
+  · filter_upwards [self_mem_nhdsWithin, nhdsWithin_le_nhds (Iio_mem_nhds
+      (show ((m + 2 : ℕ) : ℝ) < (m + 2 : ℕ) + Aind p c₀ c₁ β N by linarith [h.A_pos]))] with
+      u (hu : _ ≤ u) hu'
+    rw [wSS_left_piece h (ν := m + 2) (by omega) ⟨hu, hu'.le⟩, hw]
+    simp only [show m + 2 - 1 = m + 1 by omega]
+    ring
+  · intro he
+    have : p = c₁ := mul_left_cancel₀ hb.ne' he
+    nlinarith [h.inv.margin, h.inv.β_lt, h.inv.β_pos, h.inv.c₁_pos]
+
+/-- **Exercise 5.14d.** `w` has a kink at `ν + A` (`ν ≥ 1`): slopes `β^{ν−1}c₁` and `β^νp`. -/
+theorem wSS_kink_A (h : SSHyp p c₀ c₁ β N) {ν : ℕ} (hν : 1 ≤ ν) :
+    ¬ DifferentiableAt ℝ (wSS p c₀ c₁ β N) (ν + Aind p c₀ c₁ β N) := by
+  obtain ⟨m, rfl⟩ : ∃ m, ν = m + 1 := ⟨ν - 1, by omega⟩
+  have hb := pow_pos h.inv.β_pos m
+  set A := Aind p c₀ c₁ β N
+  have hw := wSS_left_piece h (ν := m + 1) hν (u := ((m + 1 : ℕ) : ℝ) + A)
+    ⟨by linarith [h.A_pos], le_rfl⟩
+  refine not_differentiableAt_of_kink (a := β ^ m * c₁) (b := β ^ (m + 1) * p) ?_ ?_ ?_
+  · filter_upwards [self_mem_nhdsWithin, nhdsWithin_le_nhds (Ioi_mem_nhds
+      (show ((m + 1 : ℕ) : ℝ) < (m + 1 : ℕ) + A by linarith [h.A_pos]))] with u (hu : u ≤ _) hu'
+    rw [wSS_left_piece h hν ⟨hu'.le, hu⟩, hw]
+    try simp only [Nat.add_sub_cancel]
+    ring
+  · filter_upwards [self_mem_nhdsWithin, nhdsWithin_le_nhds (Iio_mem_nhds
+      (show ((m + 1 : ℕ) : ℝ) + A < (m + 1 : ℕ) + 1 by linarith [h.A_lt]))] with
+      u (hu : _ ≤ u) hu'
+    rw [wSS_right_piece h hν ⟨hu, hu'.le⟩, hw]
+    try simp only [Nat.add_sub_cancel]
+    have hc := cross_eq h (Aind p c₀ c₁ β N)
+    rw [sub_self, mul_zero] at hc
+    rw [pow_succ]
+    nlinarith [hc]
+  · intro he
+    rw [pow_succ, mul_assoc] at he
+    have := mul_left_cancel₀ hb.ne' he
+    linarith [h.inv.margin]
+
+/-! ### Exercise 5.14e–g -/
+
+/-- `φ(u) = −c₁u + βw(u)`. -/
+noncomputable def phiSS (p c₀ c₁ β : ℝ) (N : ℕ) (u : ℝ) : ℝ := -(c₁ * u) + β * wSS p c₀ c₁ β N u
+
+/-- `φ` is convex on each cell `[ν, ν + 1]`, `ν ≥ 1`: an affine function plus a nonnegative
+multiple of the maximum of two affine functions. -/
+theorem phi_cell_convex (h : SSHyp p c₀ c₁ β N) {ν : ℕ} (hν : 1 ≤ ν) :
+    ConvexOn ℝ (Icc (ν : ℝ) (ν + 1)) (phiSS p c₀ c₁ β N) := by
+  refine ⟨convex_Icc _ _, fun x hx y hy a b ha hb hab => ?_⟩
+  have hmem : a • x + b • y ∈ Icc (ν : ℝ) (ν + 1) := convex_Icc _ _ hx hy ha hb hab
+  simp only [phiSS]
+  rw [wSS_cell h hν hmem, wSS_cell h hν hx, wSS_cell h hν hy]
+  simp only [smul_eq_mul, cellW]
+  set Y := Yn p c₀ c₁ β N
+  set q := β ^ (ν - 1)
+  have hq : 0 ≤ q := pow_nonneg h.inv.β_pos.le _
+  have hb' : b = 1 - a := by linarith
+  subst hb'
+  -- the maximum of affine functions is convex
+  have hmax : max (c₁ * (a * x + (1 - a) * y - ν) + Y) (β * (p * (a * x + (1 - a) * y - ν) + Y))
+      ≤ a * max (c₁ * (x - ν) + Y) (β * (p * (x - ν) + Y)) +
+        (1 - a) * max (c₁ * (y - ν) + Y) (β * (p * (y - ν) + Y)) := by
+    refine max_le ?_ ?_
+    · have := mul_le_mul_of_nonneg_left (le_max_left (c₁ * (x - ν) + Y)
+        (β * (p * (x - ν) + Y))) ha
+      have := mul_le_mul_of_nonneg_left (le_max_left (c₁ * (y - ν) + Y)
+        (β * (p * (y - ν) + Y))) hb
+      nlinarith
+    · have := mul_le_mul_of_nonneg_left (le_max_right (c₁ * (x - ν) + Y)
+        (β * (p * (x - ν) + Y))) ha
+      have := mul_le_mul_of_nonneg_left (le_max_right (c₁ * (y - ν) + Y)
+        (β * (p * (y - ν) + Y))) hb
+      nlinarith
+  have := mul_le_mul_of_nonneg_left hmax (mul_nonneg h.inv.β_pos.le hq)
+  nlinarith
+
+/-- **Exercise 5.14e.** For `u > z ≥ 0`, either `φ(u) ≤ φ(z)` or `φ(u) ≤ φ(n)` for an integer
+`n > z`: an order is beaten by not ordering (the supremum approached as `y ↓ 0`) or by an order
+that brings the stock to an integer. -/
+theorem ex_5_14e (h : SSHyp p c₀ c₁ β N) {z u : ℝ} (hz : 0 ≤ z) (hzu : z < u) :
+    phiSS p c₀ c₁ β N u ≤ phiSS p c₀ c₁ β N z ∨
+      ∃ n : ℕ, z < n ∧ phiSS p c₀ c₁ β N u ≤ phiSS p c₀ c₁ β N n := by
+  set m := ⌊u⌋₊
+  have hu0 : 0 ≤ u := by linarith
+  have hmu : (m : ℝ) ≤ u := Nat.floor_le hu0
+  have hum : u < m + 1 := Nat.lt_floor_add_one u
+  rcases Nat.eq_zero_or_pos m with hm0 | hmpos
+  · -- on `[0, 1]`, `φ` increases (slope `βp − c₁ > 0`)
+    rw [hm0, Nat.cast_zero, zero_add] at hum
+    right
+    refine ⟨1, by push_cast; linarith, ?_⟩
+    simp only [phiSS, Nat.cast_one]
+    rw [wSS_low hum.le, wSS_low le_rfl]
+    nlinarith [h.inv.margin]
+  · have hconv := phi_cell_convex h (ν := m) hmpos
+    have hm1 : ((m + 1 : ℕ) : ℝ) = m + 1 := by push_cast; ring
+    have hmm : (m : ℝ) ∈ Icc (m : ℝ) (m + 1) := ⟨le_rfl, by linarith⟩
+    have hm1m : (m : ℝ) + 1 ∈ Icc (m : ℝ) (m + 1) := ⟨by linarith, le_rfl⟩
+    rcases le_total z m with hzm | hmz
+    · -- `u ∈ [m, m + 1]`: the larger end value bounds `φ(u)`
+      have hle := hconv.le_max_of_mem_Icc (x := (m : ℝ)) (y := (m : ℝ) + 1) (z := u)
+        hmm hm1m ⟨hmu, hum.le⟩
+      rcases le_total (phiSS p c₀ c₁ β N m) (phiSS p c₀ c₁ β N (m + 1)) with h1 | h1
+      · right
+        refine ⟨m + 1, by rw [hm1]; linarith, ?_⟩
+        rw [hm1]
+        exact hle.trans (max_le h1 le_rfl)
+      · rcases eq_or_lt_of_le hzm with hzm' | hzm'
+        · left
+          rw [hzm']
+          exact hle.trans (max_le le_rfl h1)
+        · right
+          exact ⟨m, hzm', hle.trans (max_le le_rfl h1)⟩
+    · have hzI : z ∈ Icc (m : ℝ) (m + 1) := ⟨hmz, by linarith⟩
+      have hle := hconv.le_max_of_mem_Icc (x := z) (y := (m : ℝ) + 1) (z := u)
+        hzI hm1m ⟨hzu.le, hum.le⟩
+      rcases le_total (phiSS p c₀ c₁ β N z) (phiSS p c₀ c₁ β N (m + 1)) with h1 | h1
+      · right
+        refine ⟨m + 1, by rw [hm1]; linarith, ?_⟩
+        rw [hm1]
+        exact hle.trans (max_le h1 le_rfl)
+      · left
+        exact hle.trans (max_le le_rfl h1)
+
+/-- `w(n) = p(1 − βⁿ)/(1 − β) + β^{n−1}Y` at integers `n ≥ 1`. -/
+theorem wSS_int (h : SSHyp p c₀ c₁ β N) {n : ℕ} (hn : 1 ≤ n) :
+    wSS p c₀ c₁ β N n = p * (1 - β ^ n) / (1 - β) + β ^ (n - 1) * Yn p c₀ c₁ β N := by
+  rw [wSS_left_piece h hn ⟨le_rfl, by linarith [h.A_pos]⟩]
+  simp
+
+/-- **Exercise 5.14f.** Ordering up to the integer `n ≥ 1` from `z` is worth
+`−c₀ − c₁(n − z) + βw(n) = c₁z + r_n + βⁿY`. -/
+theorem ex_5_14f (h : SSHyp p c₀ c₁ β N) (z : ℝ) {n : ℕ} (hn : 1 ≤ n) :
+    -c₀ - c₁ * (n - z) + β * wSS p c₀ c₁ β N n =
+      c₁ * z + rn p c₀ c₁ β n + β ^ n * Yn p c₀ c₁ β N := by
+  rw [wSS_int h hn]
+  obtain ⟨m, rfl⟩ : ∃ m, n = m + 1 := ⟨n - 1, by omega⟩
+  simp only [rn, Nat.add_sub_cancel, pow_succ]
+  have h1β : (1 - β) ≠ 0 := by linarith [h.inv.β_lt]
+  field_simp
+  ring
+
+/-- **Exercise 5.14g.** `r_n + βⁿY_N ≤ Y_N` for every `n ≥ 1`, with equality at `n = N`. -/
+theorem ex_5_14g (h : SSHyp p c₀ c₁ β N) :
+    (∀ n, 1 ≤ n → rn p c₀ c₁ β n + β ^ n * Yn p c₀ c₁ β N ≤ Yn p c₀ c₁ β N) ∧
+      rn p c₀ c₁ β N + β ^ N * Yn p c₀ c₁ β N = Yn p c₀ c₁ β N := by
+  have hr : ∀ n, 1 ≤ n → rn p c₀ c₁ β n = (1 - β ^ n) * Yn p c₀ c₁ β n := fun n hn => by
+    have := one_sub_pow_pos h.inv hn
+    simp only [Yn]; field_simp
+  refine ⟨fun n hn => ?_, ?_⟩
+  · rw [hr n hn]
+    have := mul_le_mul_of_nonneg_left (h.N_max n hn) (one_sub_pow_pos h.inv hn).le
+    linarith
+  · rw [hr N h.N_pos]; ring
+
+/-- **The key step of Exercise 5.14h.** For `z ≥ 1` and an integer `n > z`,
+`βw(z) > c₁z + r_n + βⁿY`: with `z = ν + α` and `n = ν + k` the difference is at least
+`β^ν(1 − β^k)(Y_N − Y_k) + (1 − β^ν)(c₀ + c₁(k − α)) > 0`. -/
+theorem key_ineq (h : SSHyp p c₀ c₁ β N) {z : ℝ} (hz : 1 ≤ z) {n : ℕ} (hn : z < n) :
+    c₁ * z + rn p c₀ c₁ β n + β ^ n * Yn p c₀ c₁ β N < β * wSS p c₀ c₁ β N z := by
+  obtain ⟨ν, hνdef⟩ : ∃ ν, ν = ⌊z⌋₊ := ⟨_, rfl⟩
+  have hν : 1 ≤ ν := hνdef ▸ Nat.le_floor (by exact_mod_cast hz)
+  have hνz : (ν : ℝ) ≤ z := hνdef ▸ Nat.floor_le (by linarith)
+  have hzν : z < ν + 1 := hνdef ▸ Nat.lt_floor_add_one z
+  have hk : ν + 1 ≤ n := by
+    have : (ν : ℝ) < n := lt_of_le_of_lt hνz hn
+    exact_mod_cast this
+  obtain ⟨k, hk', rfl⟩ : ∃ k, 1 ≤ k ∧ n = ν + k := ⟨n - ν, by omega, by omega⟩
+  have hcell := wSS_cell h hν ⟨hνz, hzν.le⟩
+  clear hνdef
+  obtain ⟨m, rfl⟩ : ∃ m, ν = m + 1 := ⟨ν - 1, by omega⟩
+  set Y := Yn p c₀ c₁ β N
+  have hw : p * (1 - β ^ (m + 1)) / (1 - β) + β ^ m * (c₁ * (z - ((m + 1 : ℕ) : ℝ)) + Y) ≤
+      wSS p c₀ c₁ β N z := by
+    rw [hcell, cellW, Nat.add_sub_cancel]
+    have := le_max_left (c₁ * (z - ((m + 1 : ℕ) : ℝ)) + Y) (β * (p * (z - ((m + 1 : ℕ) : ℝ)) + Y))
+    nlinarith [pow_nonneg h.inv.β_pos.le m]
+  have hYk : rn p c₀ c₁ β k ≤ (1 - β ^ k) * Y := by
+    have := mul_le_mul_of_nonneg_left (h.N_max k hk') (one_sub_pow_pos h.inv hk').le
+    have e : rn p c₀ c₁ β k = (1 - β ^ k) * Yn p c₀ c₁ β k := by
+      have := one_sub_pow_pos h.inv hk'
+      simp only [Yn]; field_simp
+    rw [e]; exact this
+  have hα : z - ((m + 1 : ℕ) : ℝ) < k := by
+    have : (1 : ℝ) ≤ k := by exact_mod_cast hk'
+    push_cast at hzν ⊢; linarith
+  have hbpos := pow_pos h.inv.β_pos (m + 1)
+  have h1β : (1 - β) ≠ 0 := by linarith [h.inv.β_lt]
+  have hexp : β * (p * (1 - β ^ (m + 1)) / (1 - β) + β ^ m * (c₁ * (z - ((m + 1 : ℕ) : ℝ)) + Y)) -
+      (c₁ * z + rn p c₀ c₁ β (m + 1 + k) + β ^ (m + 1 + k) * Y) =
+      β ^ (m + 1) * ((1 - β ^ k) * Y - rn p c₀ c₁ β k) +
+        (1 - β ^ (m + 1)) * (c₀ + c₁ * (k - (z - ((m + 1 : ℕ) : ℝ)))) := by
+    simp only [rn, pow_add, pow_succ]
+    push_cast
+    field_simp
+    ring
+  have hfirst : 0 ≤ β ^ (m + 1) * ((1 - β ^ k) * Y - rn p c₀ c₁ β k) :=
+    mul_nonneg hbpos.le (by linarith)
+  have hlt1 : β ^ (m + 1) < 1 := pow_lt_one₀ h.inv.β_pos.le h.inv.β_lt (by omega)
+  have hsecond : 0 < (1 - β ^ (m + 1)) * (c₀ + c₁ * (k - (z - ((m + 1 : ℕ) : ℝ)))) :=
+    mul_pos (by linarith) (by nlinarith [h.inv.c₀_pos, h.inv.c₁_pos])
+  have := mul_le_mul_of_nonneg_left hw h.inv.β_pos.le
+  linarith
+
+/-! ### Exercise 5.14h: the conjecture solves (1) -/
+
+/-- `w` as a bounded continuous function on `ℝ₊`. -/
+noncomputable def wBCF (h : SSHyp p c₀ c₁ β N) : Stock →ᵇ ℝ :=
+  BoundedContinuousFunction.ofNormedAddCommGroup (fun x => wSS p c₀ c₁ β N x.1)
+    ((continuousOn_wSS h).comp_continuous continuous_subtype_val fun x => x.2)
+    (p / (1 - β) + p + Yn p c₀ c₁ β N) fun x => by
+      rw [Real.norm_eq_abs, abs_of_nonneg (wSS_bounds h x.2.out).1]
+      exact (wSS_bounds h x.2.out).2
+
+theorem sext_wBCF (h : SSHyp p c₀ c₁ β N) {x : ℝ} (hx : 0 ≤ x) :
+    sext (wBCF h) x = wSS p c₀ c₁ β N x := by
+  rw [sext_of_nonneg _ hx]; rfl
+
+/-- The value of an order `y > 0` from `z`, in terms of `φ`. -/
+theorem orderVal_wBCF (h : SSHyp p c₀ c₁ β N) {z y : ℝ} (hz : 0 ≤ z) (hy : 0 < y) :
+    orderVal c₀ c₁ β (wBCF h) z y = -c₀ + c₁ * z + phiSS p c₀ c₁ β N (z + y) := by
+  simp only [orderVal, phiSS, sext_wBCF h (by linarith : 0 ≤ z + y)]
+  ring
+
+/-- Every order from `z ≥ 0` is worth at most not ordering minus `c₀`, or some integer
+order. -/
+theorem order_le (h : SSHyp p c₀ c₁ β N) {z y : ℝ} (hz : 0 ≤ z) (hy : 0 < y) :
+    orderVal c₀ c₁ β (wBCF h) z y ≤ -c₀ + β * wSS p c₀ c₁ β N z ∨
+      ∃ n : ℕ, z < n ∧ orderVal c₀ c₁ β (wBCF h) z y ≤
+        c₁ * z + rn p c₀ c₁ β n + β ^ n * Yn p c₀ c₁ β N := by
+  rw [orderVal_wBCF h hz hy]
+  rcases ex_5_14e h hz (by linarith : z < z + y) with h1 | ⟨n, hn, h1⟩
+  · left; simp only [phiSS] at h1 ⊢; linarith
+  · right
+    have hn1 : 1 ≤ n := by
+      have : (0 : ℝ) < n := lt_of_le_of_lt hz hn
+      exact_mod_cast this
+    refine ⟨n, hn, ?_⟩
+    rw [← ex_5_14f h z hn1]
+    simp only [phiSS] at h1 ⊢
+    linarith
+
+/-- An integer order is available whenever `n > z`. -/
+theorem order_int (h : SSHyp p c₀ c₁ β N) {z : ℝ} (hz : 0 ≤ z) {n : ℕ} (hn : z < n) :
+    c₁ * z + rn p c₀ c₁ β n + β ^ n * Yn p c₀ c₁ β N ≤ ordSup c₀ c₁ β (wBCF h) z := by
+  have hn1 : 1 ≤ n := by
+    have : (0 : ℝ) < n := lt_of_le_of_lt hz hn
+    exact_mod_cast this
+  refine le_trans (le_of_eq ?_) (le_csSup (bddAbove_ordSup h.inv (wBCF h) z)
+    ⟨n - z, by simp only [Set.mem_Ioi]; linarith, rfl⟩)
+  rw [orderVal, sext_wBCF h (by linarith), show z + (n - z) = n by ring, ← ex_5_14f h z hn1]
+
+/-- **Exercise 5.14h.** `w` satisfies the functional equation (1) at every `x ≥ 0`. -/
+theorem ex_5_14h (h : SSHyp p c₀ c₁ β N) (x : Stock) :
+    invRHS p c₀ c₁ β (wBCF h) x = wBCF h x := by
+  have hx := x.2.out
+  have hY := h.Y_pos
+  obtain ⟨hg, hgN⟩ := ex_5_14g h
+  change p * min x.1 1 + max (β * sext (wBCF h) (leftover x.1))
+    (ordSup c₀ c₁ β (wBCF h) (leftover x.1)) = wSS p c₀ c₁ β N x.1
+  have hz0 : 0 ≤ leftover x.1 := le_max_right _ _
+  rw [sext_wBCF h hz0]
+  rcases le_or_gt x.1 1 with hx1 | hx1
+  · -- `x ≤ 1`: order `N`, worth `Y`
+    have hz : leftover x.1 = 0 := max_eq_right (by linarith)
+    rw [hz, wSS_low (by norm_num : (0 : ℝ) ≤ 1), wSS_low hx1, min_eq_left hx1]
+    have hlow := order_int h (le_refl 0) (n := N) (by exact_mod_cast h.N_pos)
+    have hlow' : Yn p c₀ c₁ β N ≤ ordSup c₀ c₁ β (wBCF h) 0 := by linarith [hgN]
+    have hup : ordSup c₀ c₁ β (wBCF h) 0 ≤ Yn p c₀ c₁ β N := by
+      refine csSup_le ⟨_, 1, by norm_num, rfl⟩ ?_
+      rintro _ ⟨y, hy, rfl⟩
+      rcases order_le h (z := 0) le_rfl hy with h1 | ⟨n, hn, h1⟩
+      · rw [wSS_low (by norm_num : (0 : ℝ) ≤ 1)] at h1
+        nlinarith [h.inv.c₀_pos, h.inv.β_lt]
+      · have hn1 : 1 ≤ n := by exact_mod_cast hn
+        linarith [hg n hn1]
+    rw [le_antisymm hup hlow', max_eq_right]
+    nlinarith [h.inv.β_lt]
+  rcases lt_or_ge x.1 2 with hx2 | hx2
+  · -- `1 < x < 2`: compare not ordering with ordering up to `N`
+    have hz : leftover x.1 = x.1 - 1 := max_eq_left (by linarith)
+    rw [hz, min_eq_right hx1.le, mul_one, wSS_one_two h ⟨hx1.le, hx2.le⟩]
+    have hlow := order_int h (by linarith : (0 : ℝ) ≤ x.1 - 1) (n := N)
+      (by have : (1 : ℝ) ≤ N := by exact_mod_cast h.N_pos
+          linarith)
+    have hlow' : c₁ * (x.1 - 1) + Yn p c₀ c₁ β N ≤ ordSup c₀ c₁ β (wBCF h) (x.1 - 1) := by
+      linarith [hgN]
+    have hup : ordSup c₀ c₁ β (wBCF h) (x.1 - 1) ≤
+        max (β * wSS p c₀ c₁ β N (x.1 - 1)) (c₁ * (x.1 - 1) + Yn p c₀ c₁ β N) := by
+      refine csSup_le ⟨_, 1, by norm_num, rfl⟩ ?_
+      rintro _ ⟨y, hy, rfl⟩
+      rcases order_le h (z := x.1 - 1) (by linarith) hy with h1 | ⟨n, hn, h1⟩
+      · exact (h1.trans (by linarith [h.inv.c₀_pos])).trans (le_max_left _ _)
+      · have hn1 : 1 ≤ n := by
+          have : (0 : ℝ) < n := lt_of_le_of_lt (by linarith) hn
+          exact_mod_cast this
+        exact (h1.trans (by linarith [hg n hn1])).trans (le_max_right _ _)
+    rw [max_comm (c₁ * (x.1 - 1) + _)]
+    congr 1
+    refine le_antisymm (max_le (le_max_left _ _) hup) (max_le (le_max_left _ _) ?_)
+    exact hlow'.trans (le_max_right _ _)
+  · -- `x ≥ 2`: not ordering is optimal (`key_ineq`)
+    have hz : leftover x.1 = x.1 - 1 := max_eq_left (by linarith)
+    rw [hz, min_eq_right (by linarith), mul_one, wSS_five h hx2]
+    have hup : ordSup c₀ c₁ β (wBCF h) (x.1 - 1) ≤ β * wSS p c₀ c₁ β N (x.1 - 1) := by
+      refine csSup_le ⟨_, 1, by norm_num, rfl⟩ ?_
+      rintro _ ⟨y, hy, rfl⟩
+      rcases order_le h (z := x.1 - 1) (by linarith) hy with h1 | ⟨n, hn, h1⟩
+      · linarith [h.inv.c₀_pos]
+      · exact h1.trans (key_ineq h (by linarith) hn).le
+    rw [max_eq_left hup]
+
+/-- **Exercise 5.14h.** The solution of (1) is `w`: the (s, S) conjecture is correct. -/
+theorem ex_5_14_value (h : SSHyp p c₀ c₁ β N) {v : Stock →ᵇ ℝ}
+    (hv : ∀ x, v x = invRHS p c₀ c₁ β v x) : v = wBCF h := by
+  obtain ⟨v₀, -, huniq, -⟩ := ex_5_14a h.inv
+  rw [huniq v hv, huniq (wBCF h) fun x => (ex_5_14h h x).symm]
+
+/-- **The (s, S) policy.** With `s = 1 + A` and `S = N`: below `s` it is strictly optimal to order
+up to `N` (from stock `z` left after sales, order `N − z`); above `s` not ordering is optimal;
+at `x = s` ordering up to `N` and not ordering are both optimal, so the optimal policy is not
+unique. -/
+theorem ex_5_14_policy (h : SSHyp p c₀ c₁ β N) :
+    (∀ x : Stock, x.1 < 1 + Aind p c₀ c₁ β N →
+      β * sext (wBCF h) (leftover x.1) < orderVal c₀ c₁ β (wBCF h) (leftover x.1)
+        (N - leftover x.1) ∧
+      orderVal c₀ c₁ β (wBCF h) (leftover x.1) (N - leftover x.1) =
+        ordSup c₀ c₁ β (wBCF h) (leftover x.1)) ∧
+    (∀ x : Stock, 1 + Aind p c₀ c₁ β N ≤ x.1 →
+      ordSup c₀ c₁ β (wBCF h) (leftover x.1) ≤ β * sext (wBCF h) (leftover x.1)) ∧
+    (∀ x : Stock, x.1 = 1 + Aind p c₀ c₁ β N →
+      orderVal c₀ c₁ β (wBCF h) (leftover x.1) (N - leftover x.1) =
+        β * sext (wBCF h) (leftover x.1)) := by
+  have hA0 := h.A_pos
+  have hA1 := h.A_lt
+  have hY := h.Y_pos
+  obtain ⟨hg, hgN⟩ := ex_5_14g h
+  have hN1 : (1 : ℝ) ≤ N := by exact_mod_cast h.N_pos
+  -- the order up to `N` from `z < 1` is worth `c₁z + Y`
+  have hvalN : ∀ z : ℝ, 0 ≤ z → z < 1 →
+      orderVal c₀ c₁ β (wBCF h) z (N - z) = c₁ * z + Yn p c₀ c₁ β N := fun z hz hz1 => by
+    rw [orderVal, sext_wBCF h (by linarith), show z + (N - z) = (N : ℝ) by ring,
+      ex_5_14f h z h.N_pos]
+    linarith [hgN]
+  -- for `z < 1` the supremum is `max{βw(z) − c₀, c₁z + Y}` at most, and `c₁z + Y` at least
+  have hsup : ∀ z : ℝ, 0 ≤ z → z < 1 → ordSup c₀ c₁ β (wBCF h) z ≤
+      max (-c₀ + β * wSS p c₀ c₁ β N z) (c₁ * z + Yn p c₀ c₁ β N) := fun z hz hz1 => by
+    refine csSup_le ⟨_, 1, by norm_num, rfl⟩ ?_
+    rintro _ ⟨y, hy, rfl⟩
+    rcases order_le h hz hy with h1 | ⟨n, hn, h1⟩
+    · exact h1.trans (le_max_left _ _)
+    · have hn1 : 1 ≤ n := by
+        have : (0 : ℝ) < n := lt_of_le_of_lt hz hn
+        exact_mod_cast this
+      exact (h1.trans (by linarith [hg n hn1])).trans (le_max_right _ _)
+  refine ⟨fun x hx => ?_, fun x hx => ?_, fun x hx => ?_⟩
+  · have hz0 : 0 ≤ leftover x.1 := le_max_right _ _
+    have hz1 : leftover x.1 < Aind p c₀ c₁ β N := by
+      unfold leftover; exact max_lt (by linarith) hA0
+    rw [sext_wBCF h hz0, hvalN _ hz0 (by linarith),
+      wSS_low (by linarith : leftover x.1 ≤ 1)]
+    have hc := cross_eq h (leftover x.1)
+    have hlt : β * (p * leftover x.1 + Yn p c₀ c₁ β N) < c₁ * leftover x.1 + Yn p c₀ c₁ β N := by
+      nlinarith [h.inv.margin]
+    refine ⟨hlt, le_antisymm ?_ ?_⟩
+    · have := order_int h hz0 (n := N) (by linarith)
+      linarith [hgN]
+    · refine (hsup _ hz0 (by linarith)).trans (max_le ?_ le_rfl)
+      rw [wSS_low (by linarith : leftover x.1 ≤ 1)]
+      linarith [h.inv.c₀_pos]
+  · have hz : leftover x.1 = x.1 - 1 := max_eq_left (by linarith)
+    rw [hz, sext_wBCF h (by linarith)]
+    rcases lt_or_ge x.1 2 with hx2 | hx2
+    · refine (hsup _ (by linarith) (by linarith)).trans (max_le (by linarith [h.inv.c₀_pos]) ?_)
+      rw [wSS_low (by linarith : x.1 - 1 ≤ 1)]
+      exact (cross_iff h _).2 (by linarith)
+    · refine csSup_le ⟨_, 1, by norm_num, rfl⟩ ?_
+      rintro _ ⟨y, hy, rfl⟩
+      rcases order_le h (z := x.1 - 1) (by linarith) hy with h1 | ⟨n, hn, h1⟩
+      · linarith [h.inv.c₀_pos]
+      · exact h1.trans (key_ineq h (by linarith) hn).le
+  · have hz : leftover x.1 = Aind p c₀ c₁ β N := by
+      unfold leftover; rw [hx]; simp [hA0.le]
+    rw [hz, hvalN _ hA0.le hA1, sext_wBCF h hA0.le, wSS_low hA1.le]
+    have := cross_eq h (Aind p c₀ c₁ β N)
+    simp only [sub_self, mul_zero] at this
+    linarith
+
+end StokeyLucasPrescott.DeterministicApplications
+
 set_option linter.style.longLine false
 #print axioms StokeyLucasPrescott.DeterministicApplications.addIso
 #print axioms StokeyLucasPrescott.DeterministicApplications.addIso_apply
@@ -10035,3 +11782,138 @@ set_option linter.style.longLine false
 #print axioms StokeyLucasPrescott.DeterministicApplications.wealthPath
 #print axioms StokeyLucasPrescott.DeterministicApplications.ex_5_12a_optimal
 #print axioms StokeyLucasPrescott.DeterministicApplications.ex_5_12a_necessary
+#print axioms StokeyLucasPrescott.DeterministicApplications.isLHC_of_approx
+#print axioms StokeyLucasPrescott.DeterministicApplications.cst
+#print axioms StokeyLucasPrescott.DeterministicApplications.cst_nonneg
+#print axioms StokeyLucasPrescott.DeterministicApplications.cst_le
+#print axioms StokeyLucasPrescott.DeterministicApplications.ParetoHyp
+#print axioms StokeyLucasPrescott.DeterministicApplications.ParetoHyp.mk
+#print axioms StokeyLucasPrescott.DeterministicApplications.ParetoHyp.h1
+#print axioms StokeyLucasPrescott.DeterministicApplications.ParetoHyp.h2
+#print axioms StokeyLucasPrescott.DeterministicApplications.ParetoHyp.mono1
+#print axioms StokeyLucasPrescott.DeterministicApplications.ParetoHyp.mono2
+#print axioms StokeyLucasPrescott.DeterministicApplications.ParetoHyp.strict2c
+#print axioms StokeyLucasPrescott.DeterministicApplications.ParetoHyp.strict2z
+#print axioms StokeyLucasPrescott.DeterministicApplications.oneSeq
+#print axioms StokeyLucasPrescott.DeterministicApplications.shiftSeq_one
+#print axioms StokeyLucasPrescott.DeterministicApplications.utility_one
+#print axioms StokeyLucasPrescott.DeterministicApplications.I2
+#print axioms StokeyLucasPrescott.DeterministicApplications.paretoΦ
+#print axioms StokeyLucasPrescott.DeterministicApplications.paretoObj
+#print axioms StokeyLucasPrescott.DeterministicApplications.continuous_cst
+#print axioms StokeyLucasPrescott.DeterministicApplications.pareto_top_mem
+#print axioms StokeyLucasPrescott.DeterministicApplications.pareto_compact
+#print axioms StokeyLucasPrescott.DeterministicApplications.pareto_uhc
+#print axioms StokeyLucasPrescott.DeterministicApplications.pareto_lhc
+#print axioms StokeyLucasPrescott.DeterministicApplications.continuous_paretoObj
+#print axioms StokeyLucasPrescott.DeterministicApplications.abs_paretoObj_le
+#print axioms StokeyLucasPrescott.DeterministicApplications.paretoT
+#print axioms StokeyLucasPrescott.DeterministicApplications.exists_paretoT_argmax
+#print axioms StokeyLucasPrescott.DeterministicApplications.paretoT_contraction
+#print axioms StokeyLucasPrescott.DeterministicApplications.ex_5_13a
+#print axioms StokeyLucasPrescott.DeterministicApplications.oneMinus
+#print axioms StokeyLucasPrescott.DeterministicApplications.shiftSeq_oneMinus
+#print axioms StokeyLucasPrescott.DeterministicApplications.head_oneMinus
+#print axioms StokeyLucasPrescott.DeterministicApplications.head_eq_cst
+#print axioms StokeyLucasPrescott.DeterministicApplications.utility_zero
+#print axioms StokeyLucasPrescott.DeterministicApplications.utility_range
+#print axioms StokeyLucasPrescott.DeterministicApplications.oneMinus_le
+#print axioms StokeyLucasPrescott.DeterministicApplications.pareto_le_value
+#print axioms StokeyLucasPrescott.DeterministicApplications.paretoPol
+#print axioms StokeyLucasPrescott.DeterministicApplications.paretoPlan
+#print axioms StokeyLucasPrescott.DeterministicApplications.paretoPlan_le
+#print axioms StokeyLucasPrescott.DeterministicApplications.shiftSeq_paretoPlan
+#print axioms StokeyLucasPrescott.DeterministicApplications.head_paretoPlan
+#print axioms StokeyLucasPrescott.DeterministicApplications.ex_5_13b
+#print axioms StokeyLucasPrescott.DeterministicApplications.Stock
+#print axioms StokeyLucasPrescott.DeterministicApplications.sext
+#print axioms StokeyLucasPrescott.DeterministicApplications.sext_of_nonneg
+#print axioms StokeyLucasPrescott.DeterministicApplications.continuous_sext
+#print axioms StokeyLucasPrescott.DeterministicApplications.abs_sext_le
+#print axioms StokeyLucasPrescott.DeterministicApplications.leftover
+#print axioms StokeyLucasPrescott.DeterministicApplications.orderVal
+#print axioms StokeyLucasPrescott.DeterministicApplications.ordSup
+#print axioms StokeyLucasPrescott.DeterministicApplications.InvHyp
+#print axioms StokeyLucasPrescott.DeterministicApplications.InvHyp.mk
+#print axioms StokeyLucasPrescott.DeterministicApplications.InvHyp.β_pos
+#print axioms StokeyLucasPrescott.DeterministicApplications.InvHyp.β_lt
+#print axioms StokeyLucasPrescott.DeterministicApplications.InvHyp.c₀_pos
+#print axioms StokeyLucasPrescott.DeterministicApplications.InvHyp.c₁_pos
+#print axioms StokeyLucasPrescott.DeterministicApplications.InvHyp.margin
+#print axioms StokeyLucasPrescott.DeterministicApplications.InvHyp.p_pos
+#print axioms StokeyLucasPrescott.DeterministicApplications.orderVal_le
+#print axioms StokeyLucasPrescott.DeterministicApplications.bddAbove_ordSup
+#print axioms StokeyLucasPrescott.DeterministicApplications.horizon
+#print axioms StokeyLucasPrescott.DeterministicApplications.horizon_pos
+#print axioms StokeyLucasPrescott.DeterministicApplications.orderVal_beyond
+#print axioms StokeyLucasPrescott.DeterministicApplications.ordSup_eq
+#print axioms StokeyLucasPrescott.DeterministicApplications.invRHS
+#print axioms StokeyLucasPrescott.DeterministicApplications.continuous_invRHS
+#print axioms StokeyLucasPrescott.DeterministicApplications.abs_invRHS_le
+#print axioms StokeyLucasPrescott.DeterministicApplications.invT
+#print axioms StokeyLucasPrescott.DeterministicApplications.invT_apply
+#print axioms StokeyLucasPrescott.DeterministicApplications.ordSup_mono
+#print axioms StokeyLucasPrescott.DeterministicApplications.ordSup_add_const
+#print axioms StokeyLucasPrescott.DeterministicApplications.invT_contraction
+#print axioms StokeyLucasPrescott.DeterministicApplications.ex_5_14a
+#print axioms StokeyLucasPrescott.DeterministicApplications.ex_5_14a_policy
+#print axioms StokeyLucasPrescott.DeterministicApplications.rn
+#print axioms StokeyLucasPrescott.DeterministicApplications.Yn
+#print axioms StokeyLucasPrescott.DeterministicApplications.one_sub_pow_pos
+#print axioms StokeyLucasPrescott.DeterministicApplications.Yn_eq
+#print axioms StokeyLucasPrescott.DeterministicApplications.tendsto_Yn
+#print axioms StokeyLucasPrescott.DeterministicApplications.ex_5_14b
+#print axioms StokeyLucasPrescott.DeterministicApplications.argmax_Yn_indep_p
+#print axioms StokeyLucasPrescott.DeterministicApplications.argmax_Yn_mono_c0
+#print axioms StokeyLucasPrescott.DeterministicApplications.ex_5_14c
+#print axioms StokeyLucasPrescott.DeterministicApplications.SSHyp
+#print axioms StokeyLucasPrescott.DeterministicApplications.SSHyp.mk
+#print axioms StokeyLucasPrescott.DeterministicApplications.SSHyp.inv
+#print axioms StokeyLucasPrescott.DeterministicApplications.SSHyp.N_pos
+#print axioms StokeyLucasPrescott.DeterministicApplications.SSHyp.N_max
+#print axioms StokeyLucasPrescott.DeterministicApplications.SSHyp.Y_pos
+#print axioms StokeyLucasPrescott.DeterministicApplications.Aind
+#print axioms StokeyLucasPrescott.DeterministicApplications.cellW
+#print axioms StokeyLucasPrescott.DeterministicApplications.wSS
+#print axioms StokeyLucasPrescott.DeterministicApplications.SSHyp.A_pos
+#print axioms StokeyLucasPrescott.DeterministicApplications.SSHyp.A_lt
+#print axioms StokeyLucasPrescott.DeterministicApplications.cross_iff
+#print axioms StokeyLucasPrescott.DeterministicApplications.cross_one
+#print axioms StokeyLucasPrescott.DeterministicApplications.cross_zero
+#print axioms StokeyLucasPrescott.DeterministicApplications.wSS_cell
+#print axioms StokeyLucasPrescott.DeterministicApplications.wSS_low
+#print axioms StokeyLucasPrescott.DeterministicApplications.wSS_two
+#print axioms StokeyLucasPrescott.DeterministicApplications.wSS_one_two
+#print axioms StokeyLucasPrescott.DeterministicApplications.wSS_three_left
+#print axioms StokeyLucasPrescott.DeterministicApplications.wSS_three_right
+#print axioms StokeyLucasPrescott.DeterministicApplications.wSS_five
+#print axioms StokeyLucasPrescott.DeterministicApplications.wSS_six
+#print axioms StokeyLucasPrescott.DeterministicApplications.continuous_cellW
+#print axioms StokeyLucasPrescott.DeterministicApplications.continuousOn_wSS_cell
+#print axioms StokeyLucasPrescott.DeterministicApplications.continuousOn_wSS
+#print axioms StokeyLucasPrescott.DeterministicApplications.wSS_bounds
+#print axioms StokeyLucasPrescott.DeterministicApplications.cross_eq
+#print axioms StokeyLucasPrescott.DeterministicApplications.wSS_left_piece
+#print axioms StokeyLucasPrescott.DeterministicApplications.wSS_right_piece
+#print axioms StokeyLucasPrescott.DeterministicApplications.wSS_deriv_low
+#print axioms StokeyLucasPrescott.DeterministicApplications.wSS_deriv_left
+#print axioms StokeyLucasPrescott.DeterministicApplications.wSS_deriv_right
+#print axioms StokeyLucasPrescott.DeterministicApplications.not_differentiableAt_of_kink
+#print axioms StokeyLucasPrescott.DeterministicApplications.wSS_kink_one
+#print axioms StokeyLucasPrescott.DeterministicApplications.wSS_kink_int
+#print axioms StokeyLucasPrescott.DeterministicApplications.wSS_kink_A
+#print axioms StokeyLucasPrescott.DeterministicApplications.phiSS
+#print axioms StokeyLucasPrescott.DeterministicApplications.phi_cell_convex
+#print axioms StokeyLucasPrescott.DeterministicApplications.ex_5_14e
+#print axioms StokeyLucasPrescott.DeterministicApplications.wSS_int
+#print axioms StokeyLucasPrescott.DeterministicApplications.ex_5_14f
+#print axioms StokeyLucasPrescott.DeterministicApplications.ex_5_14g
+#print axioms StokeyLucasPrescott.DeterministicApplications.key_ineq
+#print axioms StokeyLucasPrescott.DeterministicApplications.wBCF
+#print axioms StokeyLucasPrescott.DeterministicApplications.sext_wBCF
+#print axioms StokeyLucasPrescott.DeterministicApplications.orderVal_wBCF
+#print axioms StokeyLucasPrescott.DeterministicApplications.order_le
+#print axioms StokeyLucasPrescott.DeterministicApplications.order_int
+#print axioms StokeyLucasPrescott.DeterministicApplications.ex_5_14h
+#print axioms StokeyLucasPrescott.DeterministicApplications.ex_5_14_value
+#print axioms StokeyLucasPrescott.DeterministicApplications.ex_5_14_policy

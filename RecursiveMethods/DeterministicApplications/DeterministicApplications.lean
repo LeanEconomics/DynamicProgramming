@@ -33,3 +33,7 @@ import DeterministicApplications.CRSInvestment
 import DeterministicApplications.RecursivePreferences
 import DeterministicApplications.ConsumerRecursive
 import DeterministicApplications.ConsumerPrinciple
+import DeterministicApplications.Pareto
+import DeterministicApplications.Inventory
+import DeterministicApplications.InventorySolution
+import DeterministicApplications.InventoryVerify
