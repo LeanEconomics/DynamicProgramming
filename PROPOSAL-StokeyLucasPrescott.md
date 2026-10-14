@@ -13,7 +13,7 @@ independent Lean/Mathlib project per chapter, built one chapter at a time, each 
 README library map, `docs/source-map.md`, `docs/corrections.md`, `proof-manifest.json` and
 the `scripts/verify.py` audit; a CI matrix entry; a row in the root README.
 
-Status: started 2026-10-14 with Chapter 2; Chapters 3–6 done 2026-10-14.
+Status: started 2026-10-14 with Chapter 2; Chapters 3–6 done 2026-10-14; Chapter 7 done 2026-10-15.
 
 ---
 
@@ -51,7 +51,7 @@ DynamicProgramming/
 | 4 | `DeterministicDP` | The principle of optimality (Thms 4.2–4.5), bounded returns (Thms 4.6–4.11), constant returns to scale, unbounded returns (Thm 4.14), Euler equations and transversality (Thm 4.15) | Sequence spaces of feasible plans |
 | 5 | `DeterministicApplications` | The 17 applications of Chapter 5 | Copies of Ch 3–4 machinery |
 | 6 | `DeterministicDynamics` | One-dimensional dynamics, Liapounov functions, linear systems and the stable manifold, linear approximation, Euler-equation dynamics | The stable manifold theorem (Thm 6.9) is a candidate for a stated hypothesis |
-| 7 | `MeasureTheory` | Chapter 7's definitions and theorems, each proved or matched to Mathlib (Carathéodory, monotone convergence, Fatou, dominated convergence, Fubini, the monotone class lemma, Radon–Nikodym, conditional expectation) | Mostly Mathlib bridging; the book's statements proved from Mathlib's |
+| 7 | `MeasureIntegration` | Chapter 7's definitions and theorems, each proved or matched to Mathlib (Carathéodory, monotone convergence, Fatou, dominated convergence, Fubini, the monotone class lemma, Radon–Nikodym, conditional expectation) | Mostly Mathlib bridging; the book's statements proved from Mathlib's |
 | 8 | `MarkovProcesses` | Transition functions, the operators `T` and `T*`, measures on sequence spaces (Ionescu Tulcea), iterated integrals, stochastic difference equations | Mathlib's `Kernel`, `Kernel.trajMeasure` |
 | 9 | `StochasticDP` | The stochastic principle of optimality, bounded returns, constant returns, unbounded returns, stochastic Euler equations, policy and transition functions | Measurable selection for policy functions |
 | 10 | `StochasticApplications` | The 11 applications of Chapter 10 | |
