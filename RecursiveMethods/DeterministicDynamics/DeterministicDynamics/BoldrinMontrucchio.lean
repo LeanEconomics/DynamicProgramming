@@ -16,7 +16,7 @@ function.
 The book does not prove the theorem. The proof here uses the telescoping return
 `F(x, y) = U(x) − βU(y) − (y − g(x))²/2` with `U(x) = −Kx²/2` and `β = 1/(2K)` (`bmF`):
 `F(x, y) + βU(y) = U(x) − (y − g(x))²/2`. So `v = U` solves (FE) and the maximum is attained
-exactly at `y = g(x)` (`bellman_bm`, `argmax_bm`). For `K` large, `F` is strictly concave
+exactly at `y = g(x)` (`bellman_bm`). For `K` large, `F` is strictly concave
 (`bm_assumption47`). Its concavity gap is
 `θ(1 − θ)[KΔx²/2 − Δy²/4 + (Δy − Δg)²/2] + He − e²/2`, where `e` is the error of `g` against its
 chord. That error is at most `(M₂/2)θ(1 − θ)Δx²`, because `g ± M₂x²/2` is convex

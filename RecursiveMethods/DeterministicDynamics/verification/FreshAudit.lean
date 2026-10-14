@@ -5824,7 +5824,7 @@ function.
 The book does not prove the theorem. The proof here uses the telescoping return
 `F(x, y) = U(x) − βU(y) − (y − g(x))²/2` with `U(x) = −Kx²/2` and `β = 1/(2K)` (`bmF`):
 `F(x, y) + βU(y) = U(x) − (y − g(x))²/2`. So `v = U` solves (FE) and the maximum is attained
-exactly at `y = g(x)` (`bellman_bm`, `argmax_bm`). For `K` large, `F` is strictly concave
+exactly at `y = g(x)` (`bellman_bm`). For `K` large, `F` is strictly concave
 (`bm_assumption47`). Its concavity gap is
 `θ(1 − θ)[KΔx²/2 − Δy²/4 + (Δy − Δg)²/2] + He − e²/2`, where `e` is the error of `g` against its
 chord. That error is at most `(M₂/2)θ(1 − θ)Δx²`, because `g ± M₂x²/2` is convex
@@ -9110,7 +9110,7 @@ of `A` acting on `ℂ²ˡ` (`LinearSystems`):
   `2βᵗq(d_t, d_{t+1}) = βᵗg_t − βᵗ⁺¹g_{t+1}`; the sum telescopes to `0`, and `q < 0` off zero.
   This is the book's argument that `B₂₁` is nonsingular (two convergent Euler paths from the
   same `x₀` would both be optimal), without passing through optimality.
-* `stable_inr_injective`: so the projection `(z₁, z₀) ↦ z₀` is injective on the stable subspace
+* `stable_inr_zero`: so the projection `(z₁, z₀) ↦ z₀` is injective on the stable subspace
   (the real and imaginary parts of a complex stable vector are real stable vectors). With
   `l` roots inside the unit circle the dimensions match, so it is onto: from every `z₀` there is
   a `z₁` with `(z₁, z₀)` stable (`exists_stable_start`).
@@ -9255,7 +9255,7 @@ theorem euler_of_rec (hQ : Q.det ≠ 0) (hβ : β ≠ 0) {z₀ z₁ z₂ : Fin l
 
 /-- **Two convergent Euler paths from the same point coincide**: a solution of the homogeneous
 Euler equations with `d₀ = 0` and `d_t → 0` is zero. -/
-theorem hom_euler_eq_zero (hconc : StrictConcaveOn ℝ univ (lqF P Q R a b c₀)) (hβ0 : 0 < β)
+theorem hom_euler_eq_zero (hneg : ∀ u v : Fin l → ℝ, (u, v) ≠ 0 → lqQ P Q R u v < 0) (hβ0 : 0 < β)
     (hβ1 : β < 1) {d : ℕ → Fin l → ℝ} (hd0 : d 0 = 0) (hdt : Tendsto d atTop (𝓝 0))
     (he : ∀ t, Qᵀ *ᵥ d t + R *ᵥ d (t + 1) + β • (P *ᵥ d (t + 1) + Q *ᵥ d (t + 2)) = 0) :
     ∀ t, d t = 0 := by
@@ -9293,7 +9293,11 @@ theorem hom_euler_eq_zero (hconc : StrictConcaveOn ℝ univ (lqF P Q R a b c₀)
     simp only [mul_zero, neg_zero, zero_div] at h
     refine h.congr fun N => ?_
     linarith [hS N]
-  have hq : ∀ t, q t ≤ 0 := fun t => lqQ_nonpos hconc _ _
+  have hq : ∀ t, q t ≤ 0 := fun t => by
+    by_cases h0 : (d t, d (t + 1)) = 0
+    · obtain ⟨h1, h2⟩ := Prod.mk_eq_zero.1 h0
+      simp only [q, h1, h2]; exact lqQ_zero_left.le
+    · exact (hneg _ _ h0).le
   have hanti : Antitone S := antitone_nat_of_succ_le fun N => by
     simp only [S, Finset.sum_range_succ]
     nlinarith [hq N, pow_pos hβ0 N]
@@ -9311,14 +9315,14 @@ theorem hom_euler_eq_zero (hconc : StrictConcaveOn ℝ univ (lqF P Q R a b c₀)
     exact (mul_eq_zero.1 h).resolve_left (pow_ne_zero t hβ0.ne')
   have hpair : ∀ t, (d t, d (t + 1)) = 0 := fun t => by
     by_contra hne
-    exact (lqQ_neg hconc hne).ne (hq0 t)
+    exact (hneg _ _ hne).ne (hq0 t)
   intro t
   rcases t with _ | t
   · exact hd0
   · exact (Prod.mk_eq_zero.1 (hpair t)).2
 
 /-- **A real stable vector with zero second block is zero.** -/
-theorem stable_real_inr_zero (hconc : StrictConcaveOn ℝ univ (lqF P Q R a b c₀))
+theorem stable_real_inr_zero (hneg : ∀ u v : Fin l → ℝ, (u, v) ≠ 0 → lqQ P Q R u v < 0)
     (hβ0 : 0 < β) (hβ1 : β < 1) (hQ : Q.det ≠ 0) {Z : Fin l ⊕ Fin l → ℝ}
     (hZ : ∀ i, Z (Sum.inr i) = 0)
     (ht : Tendsto (fun t => (eulerA P Q R β ^ t) *ᵥ Z) atTop (𝓝 0)) : Z = 0 := by
@@ -9327,7 +9331,7 @@ theorem stable_real_inr_zero (hconc : StrictConcaveOn ℝ univ (lqF P Q R a b c�
   have hdt : Tendsto d atTop (𝓝 0) := by
     rw [tendsto_pi_nhds] at ht ⊢
     exact fun i => ht (Sum.inr i)
-  have hzero := hom_euler_eq_zero (P := P) (Q := Q) (R := R) hconc hβ0 hβ1 hd0 hdt
+  have hzero := hom_euler_eq_zero (P := P) (Q := Q) (R := R) hneg hβ0 hβ1 hd0 hdt
     fun t => euler_of_rec hQ hβ0.ne' (orbit_rec Z t)
   have h1 : ∀ i, Z (Sum.inl i) = 0 := fun i => by
     have := congrFun (hzero 1) i
@@ -9339,20 +9343,20 @@ theorem stable_real_inr_zero (hconc : StrictConcaveOn ℝ univ (lqF P Q R a b c�
   · exact hZ i
 
 /-- **A complex stable vector with zero second block is zero.** -/
-theorem stable_inr_zero (hconc : StrictConcaveOn ℝ univ (lqF P Q R a b c₀))
+theorem stable_inr_zero (hneg : ∀ u v : Fin l → ℝ, (u, v) ≠ 0 → lqQ P Q R u v < 0)
     (hβ0 : 0 < β) (hβ1 : β < 1) (hQ : Q.det ≠ 0) {W : Fin l ⊕ Fin l → ℂ}
     (hW : W ∈ stableSubspace (cplxEnd (eulerA P Q R β))) (h0 : ∀ i, W (Sum.inr i) = 0) :
     W = 0 := by
-  have hre := stable_real_inr_zero hconc hβ0 hβ1 hQ (Z := fun j => (W j).re)
+  have hre := stable_real_inr_zero hneg hβ0 hβ1 hQ (Z := fun j => (W j).re)
     (fun i => by simp [h0 i]) (tendsto_re_of_stable _ hW)
-  have him := stable_real_inr_zero hconc hβ0 hβ1 hQ (Z := fun j => (W j).im)
+  have him := stable_real_inr_zero hneg hβ0 hβ1 hQ (Z := fun j => (W j).im)
     (fun i => by simp [h0 i]) (tendsto_im_of_stable _ hW)
   funext j
   exact Complex.ext (congrFun hre j) (congrFun him j)
 
 /-- **From every `z₀` there is a `z₁` with `(z₁, z₀)` in the stable subspace**, when `A` has `l`
 characteristic roots inside the unit circle. This is the book's `B₂₁` nonsingular. -/
-theorem exists_stable_start (hconc : StrictConcaveOn ℝ univ (lqF P Q R a b c₀))
+theorem exists_stable_start (hneg : ∀ u v : Fin l → ℝ, (u, v) ≠ 0 → lqQ P Q R u v < 0)
     (hβ0 : 0 < β) (hβ1 : β < 1) (hQ : Q.det ≠ 0)
     (hroots : (((eulerA P Q R β).charpoly.map Complex.ofRealHom).roots.filter
       fun μ => ‖μ‖ < 1).card = l) (z₀ : Fin l → ℝ) :
@@ -9368,7 +9372,7 @@ theorem exists_stable_start (hconc : StrictConcaveOn ℝ univ (lqF P Q R a b c�
     rw [Module.finrank_fin_fun, finrank_stableSubspace, hcp, hroots]
   have hinj : Function.Injective proj := by
     refine (injective_iff_map_eq_zero proj).2 fun w hw => Subtype.ext ?_
-    exact stable_inr_zero hconc hβ0 hβ1 hQ w.2 fun i => congrFun hw i
+    exact stable_inr_zero hneg hβ0 hβ1 hQ w.2 fun i => congrFun hw i
   obtain ⟨w, hw⟩ := (LinearMap.injective_iff_surjective_of_finrank_eq_finrank hdim).1 hinj
     (cplx z₀)
   refine ⟨fun i => ((w : Fin l ⊕ Fin l → ℂ) (Sum.inl i)).re, ?_⟩
@@ -9419,7 +9423,8 @@ theorem theorem_6_8 (hP : Pᵀ = P) (hR : Rᵀ = R)
         total (fun x y => lqF P Q R a b c₀ (x, y)) β y =
           vstar (fun _ => univ) (fun x y => lqF P Q R a b c₀ (x, y)) β x₀ → y = xs := by
   set xbar := lqBar P Q R a b β
-  obtain ⟨z₁, hz⟩ := exists_stable_start hconc hβ0 hβ1 hQ hroots (x₀ - xbar)
+  obtain ⟨z₁, hz⟩ := exists_stable_start (fun u v huv => lqQ_neg hconc huv) hβ0 hβ1 hQ hroots
+    (x₀ - xbar)
   set Z := Sum.elim z₁ (x₀ - xbar)
   set z : ℕ → Fin l → ℝ := fun t i => ((eulerA P Q R β ^ t) *ᵥ Z) (Sum.inr i)
   set xs : ℕ → Fin l → ℝ := fun t => xbar + z t
@@ -10615,6 +10620,3235 @@ theorem ex_6_10d (h : ConsHyp W one1 R β M)
 
 end StokeyLucasPrescott.DeterministicDynamics
 
+/-
+Copyright (c) 2026 Robert Kirkby. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Robert Kirkby
+-/
+
+/-!
+# The real stable and unstable subspaces of a real matrix
+
+SLP §6.3, pp. 146–148. For a real matrix `A`, the complex stable and unstable subspaces of `A`
+acting on `ℂⁿ` (`LinearSystems`) are closed under complex conjugation, because conjugation maps
+the generalized eigenspace of `μ` onto that of `μ̄` (`conjV_mem_maxGenEigenspace`). Hence the
+real vectors split.
+
+* `stableR A`: the real vectors with `Aᵗz → 0`; `unstableR A`: the real vectors lying in the
+  complex unstable subspace. Both are `A`-invariant (`stableR_invariant`,
+  `unstableR_invariant`).
+* `isCompl_stableR_unstableR`: `ℝⁿ = E_s ⊕ E_u`. A real `z` splits in `ℂⁿ` as `s + u`; taking
+  conjugates and using uniqueness of the splitting, `s` and `u` are real.
+* `finrank_stableR`: `dim E_s` is the number of characteristic roots (with multiplicity) inside
+  the unit circle. A real basis of `E_s` stays independent over `ℂ` (`linearIndependent_cplx`),
+  so `dim_ℝ E_s ≤ dim_ℂ S` and `dim_ℝ E_u ≤ dim_ℂ U`, and both sides add up to `n`.
+* `unstableR_ker`: `A` is injective on `E_u` (an eigenvalue `0` would be stable).
+-/
+
+open Set Filter Topology Module
+open scoped Matrix ComplexConjugate
+
+namespace StokeyLucasPrescott.DeterministicDynamics
+
+variable {ι : Type*}
+
+/-- Componentwise complex conjugation. -/
+def conjV (w : ι → ℂ) : ι → ℂ := fun i => conj (w i)
+
+theorem conjV_conjV (w : ι → ℂ) : conjV (conjV w) = w := by
+  funext i; simp [conjV]
+
+theorem conjV_add (w w' : ι → ℂ) : conjV (w + w') = conjV w + conjV w' := by
+  funext i; simp [conjV]
+
+theorem conjV_sub (w w' : ι → ℂ) : conjV (w - w') = conjV w - conjV w' := by
+  funext i; simp [conjV]
+
+theorem conjV_smul (c : ℂ) (w : ι → ℂ) : conjV (c • w) = conj c • conjV w := by
+  funext i; simp [conjV]
+
+theorem conjV_zero : conjV (0 : ι → ℂ) = 0 := by funext i; simp [conjV]
+
+theorem conjV_cplx (z : ι → ℝ) : conjV (cplx z) = cplx z := by
+  funext i; simp [conjV, cplx]
+
+/-- A conjugation-fixed complex vector is real. -/
+theorem eq_cplx_re {w : ι → ℂ} (hw : conjV w = w) : w = cplx fun i => (w i).re := by
+  funext i
+  have := congrFun hw i
+  simp only [conjV] at this
+  exact (Complex.conj_eq_iff_re.1 this).symm
+
+variable [Fintype ι] [DecidableEq ι]
+
+theorem cplxEnd_conjV (A : Matrix ι ι ℝ) (w : ι → ℂ) :
+    cplxEnd A (conjV w) = conjV (cplxEnd A w) := by
+  funext i
+  simp [cplxEnd, Matrix.toLin'_apply, Matrix.mulVec, dotProduct, conjV, map_sum]
+
+theorem pow_sub_conjV (A : Matrix ι ι ℝ) (μ : ℂ) (k : ℕ) (w : ι → ℂ) :
+    ((cplxEnd A - conj μ • (1 : Module.End ℂ (ι → ℂ))) ^ k) (conjV w) =
+      conjV (((cplxEnd A - μ • (1 : Module.End ℂ (ι → ℂ))) ^ k) w) := by
+  induction k with
+  | zero => simp
+  | succ k ih =>
+    rw [pow_succ', Module.End.mul_apply, ih, pow_succ', Module.End.mul_apply]
+    simp only [LinearMap.sub_apply, LinearMap.smul_apply, Module.End.one_apply, cplxEnd_conjV,
+      conjV_sub, conjV_smul]
+
+/-- Conjugation maps the generalized eigenspace of `μ` into that of `μ̄`. -/
+theorem conjV_mem_maxGenEigenspace (A : Matrix ι ι ℝ) {μ : ℂ} {w : ι → ℂ}
+    (hw : w ∈ (cplxEnd A).maxGenEigenspace μ) :
+    conjV w ∈ (cplxEnd A).maxGenEigenspace (conj μ) := by
+  obtain ⟨k, hk⟩ := (Module.End.mem_maxGenEigenspace _ _ _).1 hw
+  exact (Module.End.mem_maxGenEigenspace _ _ _).2 ⟨k, by rw [pow_sub_conjV, hk, conjV_zero]⟩
+
+/-- A union of generalized eigenspaces over a conjugation-closed set of eigenvalues is closed
+under conjugation. -/
+theorem conjV_mem_biSup (A : Matrix ι ι ℝ) {s : Set ℂ} (hs : ∀ μ ∈ s, conj μ ∈ s) {w : ι → ℂ}
+    (hw : w ∈ ⨆ μ ∈ s, (cplxEnd A).maxGenEigenspace μ) :
+    conjV w ∈ ⨆ μ ∈ s, (cplxEnd A).maxGenEigenspace μ := by
+  refine Submodule.iSup_induction _ (motive := fun x => conjV x ∈ _) hw (fun μ x hx => ?_)
+    (by rw [conjV_zero]; exact Submodule.zero_mem _)
+    (fun x y hx hy => by rw [conjV_add]; exact Submodule.add_mem _ hx hy)
+  refine Submodule.iSup_induction _ (motive := fun x => conjV x ∈ _) hx (fun hμ y hy => ?_)
+    (by rw [conjV_zero]; exact Submodule.zero_mem _)
+    (fun x y hx hy => by rw [conjV_add]; exact Submodule.add_mem _ hx hy)
+  exact (le_biSup (fun μ => (cplxEnd A).maxGenEigenspace μ) (hs μ hμ))
+    (conjV_mem_maxGenEigenspace A hy)
+
+theorem conjV_mem_stable (A : Matrix ι ι ℝ) {w : ι → ℂ}
+    (hw : w ∈ stableSubspace (cplxEnd A)) : conjV w ∈ stableSubspace (cplxEnd A) :=
+  conjV_mem_biSup A (fun μ hμ => by simpa using hμ) hw
+
+theorem conjV_mem_unstable (A : Matrix ι ι ℝ) {w : ι → ℂ}
+    (hw : w ∈ unstableSubspace (cplxEnd A)) : conjV w ∈ unstableSubspace (cplxEnd A) :=
+  conjV_mem_biSup A (fun μ hμ => by simpa using hμ) hw
+
+/-! ### The real subspaces -/
+
+/-- `ℝⁿ → ℂⁿ` as a real-linear map. -/
+def cplxL : (ι → ℝ) →ₗ[ℝ] (ι → ℂ) where
+  toFun := cplx
+  map_add' := cplx_add
+  map_smul' c z := by funext i; simp [cplx, Complex.real_smul]
+
+/-- The real stable subspace `E_s = {z : Aᵗz → 0}`. -/
+noncomputable def stableR (A : Matrix ι ι ℝ) : Submodule ℝ (ι → ℝ) :=
+  ((stableSubspace (cplxEnd A)).restrictScalars ℝ).comap cplxL
+
+/-- The real unstable subspace `E_u`. -/
+noncomputable def unstableR (A : Matrix ι ι ℝ) : Submodule ℝ (ι → ℝ) :=
+  ((unstableSubspace (cplxEnd A)).restrictScalars ℝ).comap cplxL
+
+theorem mem_stableR {A : Matrix ι ι ℝ} {z : ι → ℝ} :
+    z ∈ stableR A ↔ cplx z ∈ stableSubspace (cplxEnd A) := Iff.rfl
+
+theorem mem_unstableR {A : Matrix ι ι ℝ} {z : ι → ℝ} :
+    z ∈ unstableR A ↔ cplx z ∈ unstableSubspace (cplxEnd A) := Iff.rfl
+
+/-- `z ∈ E_s` iff `Aᵗz → 0`. -/
+theorem mem_stableR_iff (A : Matrix ι ι ℝ) (z : ι → ℝ) :
+    z ∈ stableR A ↔ Tendsto (fun t => (A ^ t) *ᵥ z) atTop (𝓝 0) := by
+  rw [mem_stableR, ← tendsto_iff_mem_stable, ← tendsto_cplx_iff]
+  simp only [cplxEnd_pow_cplx]
+
+theorem cplx_mulVec (A : Matrix ι ι ℝ) (z : ι → ℝ) : cplx (A *ᵥ z) = cplxEnd A (cplx z) := by
+  have := cplxEnd_pow_cplx A 1 z
+  simpa using this.symm
+
+theorem stableR_invariant (A : Matrix ι ι ℝ) {z : ι → ℝ} (hz : z ∈ stableR A) :
+    A *ᵥ z ∈ stableR A := by
+  rw [mem_stableR_iff] at hz ⊢
+  have := hz.comp (tendsto_add_atTop_nat 1)
+  simpa [Function.comp_def, pow_succ, Matrix.mulVec_mulVec] using this
+
+theorem unstableR_invariant (A : Matrix ι ι ℝ) {z : ι → ℝ} (hz : z ∈ unstableR A) :
+    A *ᵥ z ∈ unstableR A := by
+  rw [mem_unstableR, cplx_mulVec]
+  exact unstable_invariant _ hz
+
+/-- **`ℝⁿ = E_s ⊕ E_u`.** -/
+theorem isCompl_stableR_unstableR (A : Matrix ι ι ℝ) : IsCompl (stableR A) (unstableR A) := by
+  set f := cplxEnd A
+  refine ⟨Submodule.disjoint_def.2 fun z hs hu => ?_, codisjoint_iff.2 ?_⟩
+  · have h0 := (Submodule.disjoint_def.1 (disjoint_stable_unstable f)) _ hs hu
+    funext i
+    have := congrFun h0 i
+    simpa [cplxL, cplx] using this
+  · refine eq_top_iff.2 fun z _ => ?_
+    have hz : cplx z ∈ stableSubspace f ⊔ unstableSubspace f := by
+      rw [stable_sup_unstable]; exact Submodule.mem_top
+    obtain ⟨s, hs, u, hu, hsu⟩ := Submodule.mem_sup.1 hz
+    -- conjugating the splitting gives another splitting, so `s` and `u` are real
+    have hcs := conjV_mem_stable A hs
+    have hcu := conjV_mem_unstable A hu
+    have hsplit : conjV s + conjV u = s + u := by rw [← conjV_add, hsu, conjV_cplx]
+    have hd : s - conjV s = conjV u - u := by
+      rw [sub_eq_sub_iff_add_eq_add, ← hsplit, add_comm]
+    have hmem : s - conjV s ∈ stableSubspace f ⊓ unstableSubspace f :=
+      ⟨Submodule.sub_mem _ hs hcs, hd ▸ Submodule.sub_mem _ hcu hu⟩
+    rw [(disjoint_stable_unstable f).eq_bot, Submodule.mem_bot, sub_eq_zero] at hmem
+    have hs' := eq_cplx_re hmem.symm
+    have hu' : conjV u = u := by
+      have := hsplit; rw [← hmem] at this; exact add_left_cancel this
+    have hu'' := eq_cplx_re hu'
+    refine Submodule.mem_sup.2 ⟨fun i => (s i).re, ?_, fun i => (u i).re, ?_, ?_⟩
+    · rw [mem_stableR, ← hs']; exact hs
+    · rw [mem_unstableR, ← hu'']; exact hu
+    · funext i
+      have := congrFun hsu i
+      simp only [Pi.add_apply, cplx] at this
+      have := congrArg Complex.re this
+      simpa using this
+
+omit [Fintype ι] [DecidableEq ι] in
+/-- Real vectors independent over `ℝ` are independent over `ℂ`. -/
+theorem linearIndependent_cplx {κ : Type*} [Finite κ] {v : κ → ι → ℝ}
+    (hv : LinearIndependent ℝ v) : LinearIndependent ℂ fun k => cplx (v k) := by
+  have : Fintype κ := Fintype.ofFinite κ
+  rw [Fintype.linearIndependent_iff] at hv ⊢
+  intro c hc k
+  have hre : ∀ i, ∑ k, (c k).re * v k i = 0 := fun i => by
+    have := congrArg Complex.re (congrFun hc i)
+    simpa [cplx, Finset.sum_apply, Complex.re_sum, Complex.mul_re] using this
+  have him : ∀ i, ∑ k, (c k).im * v k i = 0 := fun i => by
+    have := congrArg Complex.im (congrFun hc i)
+    simpa [cplx, Finset.sum_apply, Complex.im_sum, Complex.mul_im] using this
+  have h1 := hv (fun k => (c k).re) (by funext i; simpa [Finset.sum_apply] using hre i) k
+  have h2 := hv (fun k => (c k).im) (by funext i; simpa [Finset.sum_apply] using him i) k
+  exact Complex.ext h1 h2
+
+omit [Fintype ι] [DecidableEq ι] in
+/-- `dim_ℝ` of a real subspace is at most `dim_ℂ` of a complex subspace containing its
+complexification. -/
+theorem finrank_le_of_cplx [Finite ι] {E : Submodule ℝ (ι → ℝ)} {S : Submodule ℂ (ι → ℂ)}
+    (h : ∀ z ∈ E, cplx z ∈ S) : finrank ℝ E ≤ finrank ℂ S := by
+  set b := Module.finBasis ℝ E
+  have hli : LinearIndependent ℂ fun k => (⟨cplx (b k), h _ (b k).2⟩ : S) := by
+    refine LinearIndependent.of_comp S.subtype ?_
+    exact linearIndependent_cplx (v := fun k => ((b k : E) : ι → ℝ))
+      (b.linearIndependent.map' E.subtype (Submodule.ker_subtype E))
+  simpa using hli.fintype_card_le_finrank
+
+/-- **`dim E_s` is the number of characteristic roots inside the unit circle.** -/
+theorem finrank_stableR (A : Matrix ι ι ℝ) :
+    finrank ℝ (stableR A) =
+      ((A.charpoly.map Complex.ofRealHom).roots.filter fun μ => ‖μ‖ < 1).card := by
+  set f := cplxEnd A
+  have hcp : LinearMap.charpoly f = A.charpoly.map Complex.ofRealHom := by
+    simp only [f, cplxEnd]
+    rw [Matrix.charpoly_toLin', Matrix.charpoly_map]
+  have h1 := finrank_le_of_cplx (E := stableR A) (S := stableSubspace f) fun z hz => hz
+  have h2 := finrank_le_of_cplx (E := unstableR A) (S := unstableSubspace f) fun z hz => hz
+  have hR := Submodule.finrank_add_eq_of_isCompl (isCompl_stableR_unstableR A)
+  have hC : finrank ℂ (stableSubspace f) + finrank ℂ (unstableSubspace f) = Fintype.card ι := by
+    rw [Submodule.finrank_add_eq_of_isCompl
+      ⟨disjoint_stable_unstable f, codisjoint_iff.2 (stable_sup_unstable f)⟩]
+    simp
+  simp only [Module.finrank_fintype_fun_eq_card] at hR
+  rw [← hcp, ← finrank_stableSubspace]
+  omega
+
+/-- `A` is injective on `E_u`: an eigenvector of `0` lies in the stable subspace. -/
+theorem unstableR_ker (A : Matrix ι ι ℝ) {z : ι → ℝ} (hz : z ∈ unstableR A)
+    (h0 : A *ᵥ z = 0) : z = 0 := by
+  set f := cplxEnd A
+  have hf : f (cplx z) = 0 := by rw [← cplx_mulVec, h0]; funext i; simp [cplx]
+  have hs : cplx z ∈ stableSubspace f := by
+    refine le_biSup (fun μ => f.maxGenEigenspace μ) (show (0 : ℂ) ∈ {μ : ℂ | ‖μ‖ < 1} by simp) ?_
+    exact (Module.End.mem_maxGenEigenspace _ _ _).2 ⟨1, by simpa using hf⟩
+  exact (Submodule.disjoint_def.1 (isCompl_stableR_unstableR A).disjoint) z hs hz
+
+end StokeyLucasPrescott.DeterministicDynamics
+
+/-
+Copyright (c) 2026 Robert Kirkby. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Robert Kirkby
+-/
+
+/-!
+# Exponential dichotomy of a real matrix
+
+SLP §6.3, pp. 146–148, the estimates behind Theorem 6.6. With `ℝⁿ = E_s ⊕ E_u`
+(`RealSplitting`) and the projections `P_s`, `Q_u` (`projS`, `projU`), which commute with `A`:
+
+* `stable_bound`: there is `a < 1` with `‖AᵏP_s z‖ ≤ K aᵏ‖z‖`. Take `a` between the largest
+  characteristic root inside the unit circle and `1`; the generalized eigenspaces of `A` and of
+  `a⁻¹A` agree (`mem_maxGen_smul`), so `a⁻ᵏAᵏP_s z → 0`, and a bound on a basis is uniform
+  (`uniform_bound_of_basis`).
+* `M = A + P_s` is invertible (`isUnit_shift`): `A + I` is invertible on `E_s`, `A` on `E_u`.
+  On `E_u`, `B = M⁻¹` inverts `A` (`inv_left`, `inv_right`, `inv_mem`).
+* `unstable_bound`: for every `c > 1`, `‖BᵏQ_u z‖ ≤ K cᵏ‖z‖`. On the complex unstable subspace
+  `M` acts as `A`, so the generalized eigenspace of `A` at `μ`, `|μ| ≥ 1`, lies in that of
+  `M⁻¹` at `μ⁻¹`, and `c⁻ᵏM⁻ᵏ → 0` there.
+-/
+
+open Set Filter Topology Module
+open scoped Matrix ComplexConjugate
+
+namespace StokeyLucasPrescott.DeterministicDynamics
+
+variable {ι : Type*} [Fintype ι] [DecidableEq ι]
+
+/-- Bounds on a basis are uniform bounds. -/
+theorem uniform_bound_of_basis (T : ℕ → (ι → ℝ) →ₗ[ℝ] (ι → ℝ))
+    (h : ∀ i, ∃ C, ∀ k, ‖T k (Pi.single i 1)‖ ≤ C) :
+    ∃ K, 0 ≤ K ∧ ∀ k z, ‖T k z‖ ≤ K * ‖z‖ := by
+  choose C hC using h
+  refine ⟨∑ i, max (C i) 0, Finset.sum_nonneg fun i _ => le_max_right _ _, fun k z => ?_⟩
+  have hz : z = ∑ i, z i • (Pi.single i 1 : ι → ℝ) := by
+    funext j; simp [Finset.sum_apply, Pi.single_apply]
+  calc ‖T k z‖ = ‖∑ i, z i • T k (Pi.single i 1)‖ := by
+        conv_lhs => rw [hz]
+        rw [map_sum]; simp only [map_smul]
+    _ ≤ ∑ i, ‖z i • T k (Pi.single i 1)‖ := norm_sum_le _ _
+    _ ≤ ∑ i, ‖z‖ * max (C i) 0 := Finset.sum_le_sum fun i _ => by
+        rw [norm_smul]
+        exact mul_le_mul (norm_le_pi_norm z i) ((hC i k).trans (le_max_left _ _))
+          (norm_nonneg _) (norm_nonneg _)
+    _ = (∑ i, max (C i) 0) * ‖z‖ := by rw [← Finset.mul_sum, mul_comm]
+
+omit [DecidableEq ι] in
+/-- A convergent sequence of vectors is bounded. -/
+theorem exists_bound_of_tendsto {u : ℕ → ι → ℝ} {L : ι → ℝ} (h : Tendsto u atTop (𝓝 L)) :
+    ∃ C, ∀ k, ‖u k‖ ≤ C := by
+  obtain ⟨C, hC⟩ := h.norm.bddAbove_range
+  exact ⟨C, fun k => hC ⟨k, rfl⟩⟩
+
+/-- Scaling an operator scales its generalized eigenvalues. -/
+theorem mem_maxGen_smul {V : Type*} [AddCommGroup V] [Module ℂ V] (g : Module.End ℂ V)
+    {c ν : ℂ} {w : V} (hw : w ∈ g.maxGenEigenspace ν) :
+    w ∈ (c • g).maxGenEigenspace (c * ν) := by
+  obtain ⟨k, hk⟩ := (Module.End.mem_maxGenEigenspace _ _ _).1 hw
+  refine (Module.End.mem_maxGenEigenspace _ _ _).2 ⟨k, ?_⟩
+  have e : c • g - (c * ν) • (1 : Module.End ℂ V) = c • (g - ν • 1) := by
+    rw [smul_sub, smul_smul]
+  rw [e, smul_pow, LinearMap.smul_apply, hk, smul_zero]
+
+/-! ### The projections -/
+
+/-- The projection onto `E_s` along `E_u`. -/
+noncomputable def projS (A : Matrix ι ι ℝ) : (ι → ℝ) →ₗ[ℝ] (ι → ℝ) :=
+  (stableR A).projection (unstableR A) (isCompl_stableR_unstableR A)
+
+/-- The projection onto `E_u` along `E_s`. -/
+noncomputable def projU (A : Matrix ι ι ℝ) : (ι → ℝ) →ₗ[ℝ] (ι → ℝ) :=
+  (unstableR A).projection (stableR A) (isCompl_stableR_unstableR A).symm
+
+theorem projS_add_projU (A : Matrix ι ι ℝ) (z : ι → ℝ) : projS A z + projU A z = z :=
+  Submodule.projection_add_projection_eq_self _ z
+
+theorem projS_mem (A : Matrix ι ι ℝ) (z : ι → ℝ) : projS A z ∈ stableR A :=
+  Submodule.projection_apply_mem _ z
+
+theorem projU_mem (A : Matrix ι ι ℝ) (z : ι → ℝ) : projU A z ∈ unstableR A :=
+  Submodule.projection_apply_mem _ z
+
+theorem projS_of_mem (A : Matrix ι ι ℝ) {z : ι → ℝ} (hz : z ∈ stableR A) : projS A z = z :=
+  Submodule.projection_apply_left _ ⟨z, hz⟩
+
+theorem projS_of_mem_unstable (A : Matrix ι ι ℝ) {z : ι → ℝ} (hz : z ∈ unstableR A) :
+    projS A z = 0 :=
+  Submodule.projection_apply_right _ ⟨z, hz⟩
+
+theorem projU_of_mem (A : Matrix ι ι ℝ) {z : ι → ℝ} (hz : z ∈ unstableR A) : projU A z = z :=
+  Submodule.projection_apply_left _ ⟨z, hz⟩
+
+theorem projU_of_mem_stable (A : Matrix ι ι ℝ) {z : ι → ℝ} (hz : z ∈ stableR A) :
+    projU A z = 0 :=
+  Submodule.projection_apply_right _ ⟨z, hz⟩
+
+theorem projS_mulVec (A : Matrix ι ι ℝ) (z : ι → ℝ) : projS A (A *ᵥ z) = A *ᵥ projS A z := by
+  conv_lhs => rw [← projS_add_projU A z, Matrix.mulVec_add, map_add]
+  rw [projS_of_mem A (stableR_invariant A (projS_mem A z)),
+    projS_of_mem_unstable A (unstableR_invariant A (projU_mem A z)), add_zero]
+
+theorem projU_mulVec (A : Matrix ι ι ℝ) (z : ι → ℝ) : projU A (A *ᵥ z) = A *ᵥ projU A z := by
+  conv_lhs => rw [← projS_add_projU A z, Matrix.mulVec_add, map_add]
+  rw [projU_of_mem_stable A (stableR_invariant A (projS_mem A z)),
+    projU_of_mem A (unstableR_invariant A (projU_mem A z)), zero_add]
+
+theorem pow_mulVec_mem_stableR (A : Matrix ι ι ℝ) (k : ℕ) {z : ι → ℝ} (hz : z ∈ stableR A) :
+    (A ^ k) *ᵥ z ∈ stableR A := by
+  induction k with
+  | zero => simpa using hz
+  | succ k ih => rw [pow_succ', ← Matrix.mulVec_mulVec]; exact stableR_invariant A ih
+
+/-! ### The stable estimate -/
+
+/-- A complex vector in `S` whose `a⁻¹`-scaled orbit decays, when `a` exceeds every root inside
+the unit circle. -/
+theorem tendsto_scaled_of_stable (A : Matrix ι ι ℝ) {a : ℝ} (ha : 0 < a)
+    (hroot : ∀ μ ∈ (A.charpoly.map Complex.ofRealHom).roots, ‖μ‖ < 1 → ‖μ‖ < a)
+    {w : ι → ℂ} (hw : w ∈ stableSubspace (cplxEnd A)) :
+    Tendsto (fun t => ((((a⁻¹ : ℝ) : ℂ) • cplxEnd A) ^ t) w) atTop (𝓝 0) := by
+  set f := cplxEnd A
+  have hcp : LinearMap.charpoly f = A.charpoly.map Complex.ofRealHom := by
+    simp only [f, cplxEnd]
+    rw [Matrix.charpoly_toLin', Matrix.charpoly_map]
+  suffices hle : stableSubspace f ≤ convSubspace ((((a⁻¹ : ℝ) : ℂ)) • f) from hle hw
+  refine iSup₂_le fun μ hμ => ?_
+  by_cases hr : μ ∈ (LinearMap.charpoly f).roots
+  · intro v hv
+    have hμa : ‖((a⁻¹ : ℝ) : ℂ) * μ‖ < 1 := by
+      rw [norm_mul, Complex.norm_real, Real.norm_eq_abs, abs_of_pos (inv_pos.2 ha),
+        inv_mul_lt_iff₀ ha, mul_one]
+      exact hroot μ (hcp ▸ hr) hμ
+    exact tendsto_of_mem_maxGenEigenspace hμa (mem_maxGen_smul f hv)
+  · have : f.maxGenEigenspace μ = ⊥ := by
+      rw [← Submodule.finrank_eq_zero, LinearMap.finrank_maxGenEigenspace_eq]
+      exact Polynomial.rootMultiplicity_eq_zero fun h =>
+        hr ((Polynomial.mem_roots f.charpoly_monic.ne_zero).2 h)
+    rw [this]; exact bot_le
+
+theorem scaled_pow_cplx (A : Matrix ι ι ℝ) (s : ℝ) (t : ℕ) (z : ι → ℝ) :
+    ((((s : ℂ)) • cplxEnd A) ^ t) (cplx z) = cplx (s ^ t • (A ^ t) *ᵥ z) := by
+  rw [smul_pow, LinearMap.smul_apply, cplxEnd_pow_cplx]
+  funext i; simp [cplx, Matrix.mulVec, dotProduct]
+
+/-- **The stable estimate.** -/
+theorem stable_bound (A : Matrix ι ι ℝ) :
+    ∃ a, 0 < a ∧ a < 1 ∧ ∃ K, 0 ≤ K ∧ ∀ k z, ‖(A ^ k) *ᵥ projS A z‖ ≤ K * a ^ k * ‖z‖ := by
+  set T := ((A.charpoly.map Complex.ofRealHom).roots.filter fun μ => ‖μ‖ < 1).toFinset
+  set ρ : ℝ := ((T.sup fun μ => ‖μ‖₊ : NNReal) : ℝ)
+  have hρ0 : 0 ≤ ρ := NNReal.coe_nonneg _
+  have hρ1 : ρ < 1 := by
+    have : (T.sup fun μ => ‖μ‖₊) < 1 := by
+      rw [Finset.sup_lt_iff (by norm_num)]
+      intro μ hμ
+      have := (Multiset.mem_filter.1 (Multiset.mem_toFinset.1 hμ)).2
+      exact_mod_cast this
+    exact_mod_cast this
+  set a := (ρ + 1) / 2
+  have ha0 : 0 < a := by simp only [a]; linarith
+  have ha1 : a < 1 := by simp only [a]; linarith
+  have hroot : ∀ μ ∈ (A.charpoly.map Complex.ofRealHom).roots, ‖μ‖ < 1 → ‖μ‖ < a :=
+    fun μ hμ h1 => by
+      have hT : μ ∈ T := Multiset.mem_toFinset.2 (Multiset.mem_filter.2 ⟨hμ, h1⟩)
+      have : ‖μ‖₊ ≤ T.sup fun μ => ‖μ‖₊ := Finset.le_sup (f := fun μ => ‖μ‖₊) hT
+      have : ‖μ‖ ≤ ρ := by exact_mod_cast this
+      simp only [a]; linarith
+  set L : ℕ → (ι → ℝ) →ₗ[ℝ] (ι → ℝ) := fun k =>
+    (a⁻¹) ^ k • (Matrix.toLin' (A ^ k) ∘ₗ projS A)
+  have hL : ∀ k z, L k z = (a⁻¹) ^ k • (A ^ k) *ᵥ projS A z := fun k z => by
+    simp only [L, LinearMap.smul_apply, LinearMap.comp_apply, Matrix.toLin'_apply]
+  obtain ⟨K, hK0, hK⟩ := uniform_bound_of_basis L fun i => by
+    have hs : cplx (projS A (Pi.single i 1)) ∈ stableSubspace (cplxEnd A) := projS_mem A _
+    have h := tendsto_scaled_of_stable A ha0 hroot hs
+    simp only [scaled_pow_cplx] at h
+    obtain ⟨C, hC⟩ := exists_bound_of_tendsto (tendsto_cplx_iff.1 h)
+    exact ⟨C, fun k => by rw [hL]; exact hC k⟩
+  refine ⟨a, ha0, ha1, K, hK0, fun k z => ?_⟩
+  have h1 := hK k z
+  rw [hL, norm_smul, Real.norm_eq_abs, abs_of_pos (pow_pos (inv_pos.2 ha0) k), inv_pow,
+    inv_mul_le_iff₀ (pow_pos ha0 k)] at h1
+  linarith
+
+/-! ### The unstable estimate -/
+
+theorem cplxEnd_mul (M N : Matrix ι ι ℝ) : cplxEnd (M * N) = cplxEnd M * cplxEnd N := by
+  rw [cplxEnd, cplxEnd, cplxEnd, Matrix.map_mul, Matrix.toLin'_mul, Module.End.mul_eq_comp]
+
+theorem cplxEnd_one : cplxEnd (1 : Matrix ι ι ℝ) = 1 := by
+  rw [cplxEnd, Matrix.map_one _ (map_zero _) (map_one _), Matrix.toLin'_one]; rfl
+
+theorem cplxEnd_add (M N : Matrix ι ι ℝ) : cplxEnd (M + N) = cplxEnd M + cplxEnd N := by
+  rw [cplxEnd, cplxEnd, cplxEnd, Matrix.map_add _ (map_add _), map_add]
+
+/-- The matrix of `P_s`. -/
+noncomputable def projSm (A : Matrix ι ι ℝ) : Matrix ι ι ℝ := LinearMap.toMatrix' (projS A)
+
+theorem projSm_mulVec (A : Matrix ι ι ℝ) (z : ι → ℝ) : projSm A *ᵥ z = projS A z :=
+  LinearMap.toMatrix'_mulVec _ z
+
+/-- The shift `M = A + P_s`. -/
+noncomputable def shiftM (A : Matrix ι ι ℝ) : Matrix ι ι ℝ := A + projSm A
+
+theorem shiftM_mulVec (A : Matrix ι ι ℝ) (z : ι → ℝ) :
+    shiftM A *ᵥ z = A *ᵥ z + projS A z := by
+  rw [shiftM, Matrix.add_mulVec, projSm_mulVec]
+
+/-- A stable vector with `As = −s` is zero. -/
+theorem stable_neg_eigen (A : Matrix ι ι ℝ) {s : ι → ℝ} (hs : s ∈ stableR A)
+    (hA : A *ᵥ s = -s) : s = 0 := by
+  have hpow : ∀ t, (A ^ t) *ᵥ s = (-1 : ℝ) ^ t • s := fun t => by
+    induction t with
+    | zero => simp
+    | succ t ih =>
+      rw [pow_succ', ← Matrix.mulVec_mulVec, ih, Matrix.mulVec_smul, hA, pow_succ']
+      rw [mul_smul]; simp
+  have h := (mem_stableR_iff A s).1 hs
+  simp only [hpow] at h
+  have hn := h.norm
+  simp only [norm_smul, norm_pow, norm_neg, norm_one, one_pow, one_mul, norm_zero] at hn
+  exact norm_eq_zero.1 (tendsto_nhds_unique tendsto_const_nhds hn)
+
+/-- **`M = A + P_s` is invertible.** -/
+theorem isUnit_shift (A : Matrix ι ι ℝ) : IsUnit (shiftM A) := by
+  refine Matrix.mulVec_injective_iff_isUnit.1 fun z z' hzz' => ?_
+  rw [← sub_eq_zero]
+  set y := z - z'
+  have hy : shiftM A *ᵥ y = 0 := by
+    simp only [y, Matrix.mulVec_sub, hzz', sub_self]
+  rw [shiftM_mulVec] at hy
+  -- the stable and unstable parts of `Ay + P_s y = 0`
+  have hu : A *ᵥ projU A y = 0 := by
+    have := congrArg (projU A) hy
+    rw [map_add, projU_mulVec, projU_of_mem_stable A (projS_mem A y), add_zero, map_zero] at this
+    exact this
+  have hs : A *ᵥ projS A y = -projS A y := by
+    have := congrArg (projS A) hy
+    rw [map_add, projS_mulVec, projS_of_mem A (projS_mem A y), map_zero] at this
+    exact eq_neg_of_add_eq_zero_left this
+  have h1 := unstableR_ker A (projU_mem A y) hu
+  have h2 := stable_neg_eigen A (projS_mem A y) hs
+  rw [← projS_add_projU A y, h1, h2, add_zero]
+
+/-- `B = M⁻¹`. -/
+noncomputable def invB (A : Matrix ι ι ℝ) : Matrix ι ι ℝ := (shiftM A)⁻¹
+
+theorem shiftM_invB (A : Matrix ι ι ℝ) : shiftM A * invB A = 1 :=
+  Matrix.mul_nonsing_inv _ ((Matrix.isUnit_iff_isUnit_det _).1 (isUnit_shift A))
+
+theorem invB_shiftM (A : Matrix ι ι ℝ) : invB A * shiftM A = 1 :=
+  Matrix.nonsing_inv_mul _ ((Matrix.isUnit_iff_isUnit_det _).1 (isUnit_shift A))
+
+theorem shiftM_of_unstable (A : Matrix ι ι ℝ) {v : ι → ℝ} (hv : v ∈ unstableR A) :
+    shiftM A *ᵥ v = A *ᵥ v := by
+  rw [shiftM_mulVec, projS_of_mem_unstable A hv, add_zero]
+
+/-- `B` maps `E_u` into itself. -/
+theorem inv_mem (A : Matrix ι ι ℝ) {v : ι → ℝ} (hv : v ∈ unstableR A) :
+    invB A *ᵥ v ∈ unstableR A := by
+  set y := invB A *ᵥ v
+  have hy : shiftM A *ᵥ y = v := by
+    simp only [y, Matrix.mulVec_mulVec, shiftM_invB, Matrix.one_mulVec]
+  rw [shiftM_mulVec] at hy
+  have hs : A *ᵥ projS A y = -projS A y := by
+    have := congrArg (projS A) hy
+    rw [map_add, projS_mulVec, projS_of_mem A (projS_mem A y), projS_of_mem_unstable A hv]
+      at this
+    exact eq_neg_of_add_eq_zero_left this
+  have h2 := stable_neg_eigen A (projS_mem A y) hs
+  rw [← projS_add_projU A y, h2, zero_add]
+  exact projU_mem A y
+
+/-- On `E_u`, `A(Bv) = v`. -/
+theorem inv_right (A : Matrix ι ι ℝ) {v : ι → ℝ} (hv : v ∈ unstableR A) :
+    A *ᵥ (invB A *ᵥ v) = v := by
+  rw [← shiftM_of_unstable A (inv_mem A hv), Matrix.mulVec_mulVec, shiftM_invB,
+    Matrix.one_mulVec]
+
+/-- On `E_u`, `B(Av) = v`. -/
+theorem inv_left (A : Matrix ι ι ℝ) {v : ι → ℝ} (hv : v ∈ unstableR A) :
+    invB A *ᵥ (A *ᵥ v) = v := by
+  rw [← shiftM_of_unstable A hv, Matrix.mulVec_mulVec, invB_shiftM, Matrix.one_mulVec]
+
+/-- The complexified `P_s` vanishes on the complex unstable subspace. -/
+theorem cplx_projS_unstable (A : Matrix ι ι ℝ) {w : ι → ℂ}
+    (hw : w ∈ unstableSubspace (cplxEnd A)) : cplxEnd (projSm A) w = 0 := by
+  set U := unstableSubspace (cplxEnd A)
+  have hre : (fun i => (w i).re) ∈ unstableR A := by
+    rw [mem_unstableR]
+    have : cplx (fun i => (w i).re) = (1 / 2 : ℂ) • (w + conjV w) := by
+      funext i; simp only [cplx, Pi.smul_apply, Pi.add_apply, conjV, smul_eq_mul]
+      rw [Complex.add_conj]; push_cast; ring
+    rw [this]
+    exact U.smul_mem _ (U.add_mem hw (conjV_mem_unstable A hw))
+  have him : (fun i => (w i).im) ∈ unstableR A := by
+    rw [mem_unstableR]
+    have : cplx (fun i => (w i).im) = (-Complex.I / 2) • (w - conjV w) := by
+      funext i; simp only [cplx, Pi.smul_apply, Pi.sub_apply, conjV, smul_eq_mul]
+      rw [Complex.sub_conj]
+      have : Complex.I * Complex.I = -1 := Complex.I_mul_I
+      push_cast
+      linear_combination ((w i).im : ℂ) * this
+    rw [this]
+    exact U.smul_mem _ (U.sub_mem hw (conjV_mem_unstable A hw))
+  have hsplit : w = cplx (fun i => (w i).re) + Complex.I • cplx (fun i => (w i).im) := by
+    funext i
+    simp only [cplx, Pi.add_apply, Pi.smul_apply, smul_eq_mul]
+    rw [mul_comm]; exact (Complex.re_add_im _).symm
+  have h0 : ∀ x ∈ unstableR A, cplxEnd (projSm A) (cplx x) = 0 := fun x hx => by
+    rw [← cplx_mulVec, projSm_mulVec, projS_of_mem_unstable A hx]
+    funext i; simp [cplx]
+  rw [hsplit, map_add, map_smul, h0 _ hre, h0 _ him, smul_zero, add_zero]
+
+/-- On the complex unstable subspace, the generalized eigenvectors of `A` at `μ` are generalized
+eigenvectors of `M⁻¹` at `μ⁻¹`. -/
+theorem mem_maxGen_invB (A : Matrix ι ι ℝ) {μ : ℂ} (hμ : 1 ≤ ‖μ‖) {v : ι → ℂ}
+    (hv : v ∈ (cplxEnd A).maxGenEigenspace μ) :
+    v ∈ (cplxEnd (invB A)).maxGenEigenspace μ⁻¹ := by
+  set f := cplxEnd A
+  set h := cplxEnd (shiftM A)
+  set g := cplxEnd (invB A)
+  have hμ0 : μ ≠ 0 := by intro h0; rw [h0, norm_zero] at hμ; linarith
+  have hU : f.maxGenEigenspace μ ≤ unstableSubspace f :=
+    le_biSup (fun μ => f.maxGenEigenspace μ) (show μ ∈ {μ : ℂ | 1 ≤ ‖μ‖} from hμ)
+  have hhf : ∀ u ∈ unstableSubspace f, h u = f u := fun u hu => by
+    simp only [h, shiftM, cplxEnd_add, LinearMap.add_apply, cplx_projS_unstable A hu, add_zero]
+    rfl
+  -- `(h − μ)ᵏ = (f − μ)ᵏ` on `U`
+  have hpow : ∀ k, ∀ u ∈ unstableSubspace f,
+      ((h - μ • (1 : Module.End ℂ (ι → ℂ))) ^ k) u = ((f - μ • 1) ^ k) u := fun k => by
+    induction k with
+    | zero => intro u _; rfl
+    | succ k ih =>
+      intro u hu
+      rw [pow_succ, Module.End.mul_apply, pow_succ, Module.End.mul_apply]
+      have e : (h - μ • (1 : Module.End ℂ (ι → ℂ))) u = (f - μ • 1) u := by
+        simp only [LinearMap.sub_apply, hhf u hu]
+      rw [e]
+      exact ih _ ((unstableSubspace f).sub_mem (unstable_invariant f hu)
+        ((unstableSubspace f).smul_mem μ hu))
+  obtain ⟨k, hk⟩ := (Module.End.mem_maxGenEigenspace _ _ _).1 hv
+  have hk' : ((h - μ • (1 : Module.End ℂ (ι → ℂ))) ^ k) v = 0 := by rw [hpow k v (hU hv), hk]
+  -- `g − μ⁻¹ = (−μ⁻¹ g)(h − μ)` and the factors commute
+  have hgh : g * h = 1 := by simp only [g, h, ← cplxEnd_mul, invB_shiftM, cplxEnd_one]
+  have hhg : h * g = 1 := by simp only [g, h, ← cplxEnd_mul, shiftM_invB, cplxEnd_one]
+  have hfac : g - μ⁻¹ • (1 : Module.End ℂ (ι → ℂ)) =
+      ((-μ⁻¹) • g) * (h - μ • 1) := by
+    simp only [_root_.mul_sub, _root_.smul_mul_assoc, _root_.mul_smul_comm, _root_.mul_one, hgh,
+      _root_.smul_smul]
+    simp only [_root_.mul_neg, mul_inv_cancel₀ hμ0, _root_.neg_smul, _root_.one_smul,
+      _root_.sub_neg_eq_add]
+    module
+  have hcomm : Commute ((-μ⁻¹) • g) (h - μ • (1 : Module.End ℂ (ι → ℂ))) := by
+    refine Commute.smul_left ?_ _
+    refine (Commute.sub_right ?_ (Commute.smul_right (Commute.one_right g) μ))
+    exact (hgh.trans hhg.symm)
+  refine (Module.End.mem_maxGenEigenspace _ _ _).2 ⟨k, ?_⟩
+  rw [hfac, hcomm.mul_pow, Module.End.mul_apply, hk', map_zero]
+
+/-- **The unstable estimate**: for every `c > 1`, `‖BᵏQ_u z‖ ≤ K cᵏ‖z‖`. -/
+theorem unstable_bound (A : Matrix ι ι ℝ) {c : ℝ} (hc : 1 < c) :
+    ∃ K, 0 ≤ K ∧ ∀ k z, ‖(invB A ^ k) *ᵥ projU A z‖ ≤ K * c ^ k * ‖z‖ := by
+  have hc0 : 0 < c := by linarith
+  set g := cplxEnd (invB A)
+  have hconv : unstableSubspace (cplxEnd A) ≤ convSubspace ((((c⁻¹ : ℝ) : ℂ)) • g) := by
+    refine iSup₂_le fun μ hμ v hv => ?_
+    have hμ' : 1 ≤ ‖μ‖ := hμ
+    have h1 := mem_maxGen_smul g (c := ((c⁻¹ : ℝ) : ℂ)) (mem_maxGen_invB A hμ' hv)
+    refine tendsto_of_mem_maxGenEigenspace ?_ h1
+    rw [norm_mul, norm_inv, Complex.norm_real, Real.norm_eq_abs, abs_of_pos (inv_pos.2 hc0)]
+    have hμ0 : 0 < ‖μ‖ := by linarith
+    rw [← mul_inv, inv_lt_one₀ (mul_pos hc0 hμ0)]
+    nlinarith
+  set L : ℕ → (ι → ℝ) →ₗ[ℝ] (ι → ℝ) := fun k =>
+    (c⁻¹) ^ k • (Matrix.toLin' (invB A ^ k) ∘ₗ projU A)
+  have hL : ∀ k z, L k z = (c⁻¹) ^ k • (invB A ^ k) *ᵥ projU A z := fun k z => by
+    simp only [L, LinearMap.smul_apply, LinearMap.comp_apply, Matrix.toLin'_apply]
+  obtain ⟨K, hK0, hK⟩ := uniform_bound_of_basis L fun i => by
+    have hs : cplx (projU A (Pi.single i 1)) ∈ unstableSubspace (cplxEnd A) := projU_mem A _
+    have h := hconv hs
+    rw [mem_convSubspace] at h
+    simp only [g, scaled_pow_cplx] at h
+    obtain ⟨C, hC⟩ := exists_bound_of_tendsto (tendsto_cplx_iff.1 h)
+    exact ⟨C, fun k => by rw [hL]; exact hC k⟩
+  refine ⟨K, hK0, fun k z => ?_⟩
+  have h1 := hK k z
+  rw [hL, norm_smul, Real.norm_eq_abs, abs_of_pos (pow_pos (inv_pos.2 hc0) k), inv_pow,
+    inv_mul_le_iff₀ (pow_pos hc0 k)] at h1
+  linarith
+
+end StokeyLucasPrescott.DeterministicDynamics
+
+/-
+Copyright (c) 2026 Robert Kirkby. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Robert Kirkby
+-/
+
+/-!
+# The Lyapunov–Perron construction
+
+The analytic core of Theorem 6.6 (SLP §6.3, p. 147). Let `ℝⁿ` carry projections `P + Q = I`, and
+let `B` invert `A` on the range of `Q`, with `‖AᵏPz‖ ≤ Kaᵏ‖z‖`, `‖BᵏQz‖ ≤ Kcᵏ‖z‖`, `a < γ`,
+`cγ < 1` (`LPData`). For a perturbation `r` with `r(0) = 0` and Lipschitz constant `ε` small
+(`K ε (1/(γ − a) + c/(1 − cγ)) ≤ ½`), every `ξ` gives a solution of
+`z_{t+1} = Az_t + r(z_t)` with `Pz₀ = Pξ` and `‖z_t‖ ≤ 2K‖ξ‖γᵗ` (`lyapunov_perron`):
+
+`z_t = AᵗPξ + Σ_{j<t} A^{t−1−j}P r(z_j) − Σ_{i≥0} B^{i+1}Q r(z_{t+i})`.
+
+The right side is a contraction on sequences with `sup γ⁻ᵗ‖z_t‖ < ∞` (bounded sequences
+`w_t = γ⁻ᵗz_t`), with constant `½`.
+-/
+
+open Set Filter Topology BoundedContinuousFunction
+open scoped Matrix NNReal
+
+namespace StokeyLucasPrescott.DeterministicDynamics
+
+variable {ι : Type*} [Fintype ι] [DecidableEq ι]
+
+/-- The dichotomy data. -/
+structure LPData (A B : Matrix ι ι ℝ) (P Q : (ι → ℝ) →ₗ[ℝ] (ι → ℝ)) (K a c γ : ℝ) : Prop where
+  PQ : ∀ z, P z + Q z = z
+  PP : ∀ z, P (P z) = P z
+  PB : ∀ k z, P ((B ^ (k + 1)) *ᵥ Q z) = 0
+  AB : ∀ k z, A *ᵥ ((B ^ (k + 1)) *ᵥ Q z) = (B ^ k) *ᵥ Q z
+  K_nn : 0 ≤ K
+  a_nn : 0 ≤ a
+  aγ : a < γ
+  c_pos : 0 < c
+  cγ : c * γ < 1
+  bA : ∀ k z, ‖(A ^ k) *ᵥ P z‖ ≤ K * a ^ k * ‖z‖
+  bB : ∀ k z, ‖(B ^ k) *ᵥ Q z‖ ≤ K * c ^ k * ‖z‖
+
+/-- `Σ_{j<t} a^{t−1−j}γʲ ≤ γᵗ/(γ − a)`. -/
+theorem geom_head {a γ : ℝ} (ha : 0 ≤ a) (haγ : a < γ) (t : ℕ) :
+    ∑ j ∈ Finset.range t, a ^ (t - 1 - j) * γ ^ j ≤ γ ^ t / (γ - a) := by
+  have hγ : 0 < γ := ha.trans_lt haγ
+  induction t with
+  | zero => simpa using haγ.le
+  | succ t ih =>
+    have e : ∑ j ∈ Finset.range (t + 1), a ^ (t + 1 - 1 - j) * γ ^ j =
+        a * ∑ j ∈ Finset.range t, a ^ (t - 1 - j) * γ ^ j + γ ^ t := by
+      rw [Finset.sum_range_succ, Finset.mul_sum]
+      congr 1
+      · refine Finset.sum_congr rfl fun j hj => ?_
+        have hj' := Finset.mem_range.1 hj
+        rw [show t + 1 - 1 - j = (t - 1 - j) + 1 by omega, pow_succ]; ring
+      · simp
+    rw [e]
+    have := mul_le_mul_of_nonneg_left ih ha
+    have key : a * (γ ^ t / (γ - a)) + γ ^ t = γ ^ (t + 1) / (γ - a) := by
+      have : γ - a ≠ 0 := by linarith
+      field_simp; ring
+    linarith
+
+variable {A B : Matrix ι ι ℝ} {P Q : (ι → ℝ) →ₗ[ℝ] (ι → ℝ)} {K a c γ : ℝ}
+
+/-- The head sum `Σ_{j<t} A^{t−1−j}P u_j`. -/
+noncomputable def lpHead (A : Matrix ι ι ℝ) (P : (ι → ℝ) →ₗ[ℝ] (ι → ℝ)) (u : ℕ → ι → ℝ)
+    (t : ℕ) : ι → ℝ :=
+  ∑ j ∈ Finset.range t, (A ^ (t - 1 - j)) *ᵥ P (u j)
+
+/-- The tail sum `Σ_{i≥0} B^{i+1}Q u_{t+i}`. -/
+noncomputable def lpTail (B : Matrix ι ι ℝ) (Q : (ι → ℝ) →ₗ[ℝ] (ι → ℝ)) (u : ℕ → ι → ℝ)
+    (t : ℕ) : ι → ℝ :=
+  ∑' i, (B ^ (i + 1)) *ᵥ Q (u (t + i))
+
+theorem lpHead_succ (u : ℕ → ι → ℝ) (t : ℕ) :
+    lpHead A P u (t + 1) = A *ᵥ lpHead A P u t + P (u t) := by
+  simp only [lpHead, Finset.sum_range_succ, Matrix.mulVec_sum]
+  rw [show t + 1 - 1 - t = 0 by omega, pow_zero, Matrix.one_mulVec]
+  congr 1
+  refine Finset.sum_congr rfl fun j hj => ?_
+  have hj' := Finset.mem_range.1 hj
+  rw [Matrix.mulVec_mulVec, ← pow_succ', show t + 1 - 1 - j = t - 1 - j + 1 by omega]
+
+theorem summable_lpTail (hD : LPData A B P Q K a c γ) {u : ℕ → ι → ℝ} {M : ℝ}
+    (hu : ∀ j, ‖u j‖ ≤ M * γ ^ j) (t : ℕ) :
+    Summable fun i => (B ^ (i + 1)) *ᵥ Q (u (t + i)) := by
+  have hγ : 0 < γ := hD.a_nn.trans_lt hD.aγ
+  refine Summable.of_norm_bounded
+    ((summable_geometric_of_lt_one (mul_nonneg hD.c_pos.le hγ.le) hD.cγ).mul_left
+      (K * c * M * γ ^ t)) fun i => ?_
+  refine (hD.bB (i + 1) _).trans ?_
+  have := hu (t + i)
+  have hK := hD.K_nn
+  have hc := hD.c_pos
+  calc K * c ^ (i + 1) * ‖u (t + i)‖ ≤ K * c ^ (i + 1) * (M * γ ^ (t + i)) :=
+        mul_le_mul_of_nonneg_left this (by positivity)
+    _ = K * c * M * γ ^ t * (c * γ) ^ i := by rw [pow_add, pow_succ, mul_pow]; ring
+
+theorem norm_lpTail_le (hD : LPData A B P Q K a c γ) {u : ℕ → ι → ℝ} {M : ℝ}
+    (hu : ∀ j, ‖u j‖ ≤ M * γ ^ j) (t : ℕ) :
+    ‖lpTail B Q u t‖ ≤ K * c * M * γ ^ t / (1 - c * γ) := by
+  have hγ : 0 < γ := hD.a_nn.trans_lt hD.aγ
+  have hcγ := hD.cγ
+  have hs := summable_lpTail hD hu t
+  have hg := (summable_geometric_of_lt_one (mul_nonneg hD.c_pos.le hγ.le) hcγ).mul_left
+    (K * c * M * γ ^ t)
+  refine (norm_tsum_le_tsum_norm hs.norm).trans ?_
+  refine (hs.norm.tsum_le_tsum (fun i => ?_) hg).trans ?_
+  · refine (hD.bB (i + 1) _).trans ?_
+    have := hu (t + i)
+    have hK := hD.K_nn
+    have hc := hD.c_pos
+    calc K * c ^ (i + 1) * ‖u (t + i)‖ ≤ K * c ^ (i + 1) * (M * γ ^ (t + i)) :=
+          mul_le_mul_of_nonneg_left this (by positivity)
+      _ = K * c * M * γ ^ t * (c * γ) ^ i := by rw [pow_add, pow_succ, mul_pow]; ring
+  · rw [tsum_mul_left, tsum_geometric_of_lt_one (mul_nonneg hD.c_pos.le hγ.le) hcγ]
+    rw [div_eq_mul_inv]
+
+theorem norm_lpHead_le (hD : LPData A B P Q K a c γ) {u : ℕ → ι → ℝ} {M : ℝ} (hM : 0 ≤ M)
+    (hu : ∀ j, ‖u j‖ ≤ M * γ ^ j) (t : ℕ) :
+    ‖lpHead A P u t‖ ≤ K * M * γ ^ t / (γ - a) := by
+  have hK := hD.K_nn
+  refine (norm_sum_le _ _).trans ?_
+  calc ∑ j ∈ Finset.range t, ‖(A ^ (t - 1 - j)) *ᵥ P (u j)‖
+      ≤ ∑ j ∈ Finset.range t, K * M * (a ^ (t - 1 - j) * γ ^ j) :=
+        Finset.sum_le_sum fun j _ => (hD.bA _ _).trans (by
+          have h1 := mul_le_mul_of_nonneg_left (hu j)
+            (mul_nonneg hK (pow_nonneg hD.a_nn (t - 1 - j)))
+          linarith [show K * a ^ (t - 1 - j) * (M * γ ^ j) =
+            K * M * (a ^ (t - 1 - j) * γ ^ j) by ring])
+    _ = K * M * ∑ j ∈ Finset.range t, a ^ (t - 1 - j) * γ ^ j := by rw [Finset.mul_sum]
+    _ ≤ K * M * (γ ^ t / (γ - a)) :=
+        mul_le_mul_of_nonneg_left (geom_head hD.a_nn hD.aγ t) (mul_nonneg hK hM)
+    _ = K * M * γ ^ t / (γ - a) := by ring
+
+theorem lpHead_sub (u u' : ℕ → ι → ℝ) (t : ℕ) :
+    lpHead A P u t - lpHead A P u' t = lpHead A P (u - u') t := by
+  simp only [lpHead, ← Finset.sum_sub_distrib, Pi.sub_apply, map_sub, Matrix.mulVec_sub]
+
+theorem lpTail_sub (hD : LPData A B P Q K a c γ) {u u' : ℕ → ι → ℝ} {M M' : ℝ}
+    (hu : ∀ j, ‖u j‖ ≤ M * γ ^ j) (hu' : ∀ j, ‖u' j‖ ≤ M' * γ ^ j) (t : ℕ) :
+    lpTail B Q u t - lpTail B Q u' t = lpTail B Q (u - u') t := by
+  simp only [lpTail]
+  rw [← (summable_lpTail hD hu t).tsum_sub (summable_lpTail hD hu' t)]
+  simp only [Pi.sub_apply, map_sub, Matrix.mulVec_sub]
+
+omit [DecidableEq ι] in
+theorem mulVec_tsum (M : Matrix ι ι ℝ) {f : ℕ → ι → ℝ} (hf : Summable f) :
+    M *ᵥ (∑' i, f i) = ∑' i, M *ᵥ f i := by
+  classical
+  have := (LinearMap.toContinuousLinearMap (Matrix.toLin' M)).map_tsum hf
+  simpa [Matrix.toLin'_apply] using this
+
+omit [Fintype ι] [DecidableEq ι] in
+theorem linearMap_tsum [Finite ι] (L : (ι → ℝ) →ₗ[ℝ] (ι → ℝ)) {f : ℕ → ι → ℝ} (hf : Summable f) :
+    L (∑' i, f i) = ∑' i, L (f i) :=
+  (LinearMap.toContinuousLinearMap L).map_tsum hf
+
+theorem lpTail_succ (hD : LPData A B P Q K a c γ) {u : ℕ → ι → ℝ} {M : ℝ}
+    (hu : ∀ j, ‖u j‖ ≤ M * γ ^ j) (t : ℕ) :
+    A *ᵥ lpTail B Q u t = Q (u t) + lpTail B Q u (t + 1) := by
+  have hs := summable_lpTail hD hu t
+  rw [lpTail, mulVec_tsum A hs]
+  simp only [hD.AB]
+  have hs' : Summable fun i => (B ^ i) *ᵥ Q (u (t + i)) := by
+    rw [← summable_nat_add_iff 1]
+    refine (summable_lpTail hD hu (t + 1)).congr fun i => ?_
+    rw [show t + (i + 1) = t + 1 + i by ring]
+  rw [hs'.tsum_eq_zero_add]
+  simp only [pow_zero, Matrix.one_mulVec, add_zero, lpTail]
+  congr 1
+  refine tsum_congr fun i => ?_
+  rw [show t + (i + 1) = t + 1 + i by ring]
+
+/-! ### The fixed point -/
+
+/-- `u_j = r(γʲw_j)`. -/
+noncomputable def lpU (γ : ℝ) (r : (ι → ℝ) → ι → ℝ) (w : ℕ → ι → ℝ) (j : ℕ) : ι → ℝ :=
+  r (γ ^ j • w j)
+
+/-- The right side of the integral equation. -/
+noncomputable def lpZ (A B : Matrix ι ι ℝ) (P Q : (ι → ℝ) →ₗ[ℝ] (ι → ℝ)) (γ : ℝ)
+    (r : (ι → ℝ) → ι → ℝ) (ξ : ι → ℝ) (w : ℕ → ι → ℝ) (t : ℕ) : ι → ℝ :=
+  (A ^ t) *ᵥ P ξ + lpHead A P (lpU γ r w) t - lpTail B Q (lpU γ r w) t
+
+/-- **The Lyapunov–Perron theorem.** -/
+theorem lyapunov_perron (hD : LPData A B P Q K a c γ) {r : (ι → ℝ) → ι → ℝ} {ε : ℝ}
+    (hε : 0 ≤ ε) (hr0 : r 0 = 0) (hr : ∀ x y, ‖r x - r y‖ ≤ ε * ‖x - y‖)
+    (hsmall : K * ε * (1 / (γ - a) + c / (1 - c * γ)) ≤ 1 / 2) (ξ : ι → ℝ) :
+    ∃ z : ℕ → ι → ℝ, (∀ t, z (t + 1) = A *ᵥ z t + r (z t)) ∧ P (z 0) = P ξ ∧
+      (∀ t, ‖z t‖ ≤ 2 * K * ‖ξ‖ * γ ^ t) ∧
+      (∀ M, (∀ j, ‖r (z j)‖ ≤ M * γ ^ j) → ‖Q (z 0)‖ ≤ K * c * M / (1 - c * γ)) ∧
+      ∀ t, z t = (A ^ t) *ᵥ P ξ + lpHead A P (fun j => r (z j)) t -
+        lpTail B Q (fun j => r (z j)) t := by
+  have hγ : 0 < γ := hD.a_nn.trans_lt hD.aγ
+  have hγa : 0 < γ - a := by linarith [hD.aγ]
+  have hcγ : 0 < 1 - c * γ := by linarith [hD.cγ]
+  have hK := hD.K_nn
+  have hc := hD.c_pos
+  set Λ := 1 / (γ - a) + c / (1 - c * γ)
+  have hΛ : 0 ≤ Λ := by positivity
+  -- bounds on the nonlinear terms
+  have hu : ∀ (w : ℕ →ᵇ (ι → ℝ)) j, ‖lpU γ r w j‖ ≤ ε * ‖w‖ * γ ^ j := fun w j => by
+    have := hr (γ ^ j • w j) 0
+    rw [hr0, sub_zero, sub_zero, norm_smul, Real.norm_of_nonneg (pow_nonneg hγ.le j)] at this
+    refine this.trans ?_
+    have h1 := mul_le_mul_of_nonneg_left (w.norm_coe_le_norm j) (pow_nonneg hγ.le j)
+    have h2 := mul_le_mul_of_nonneg_left h1 hε
+    linarith [show ε * (γ ^ j * ‖w‖) = ε * ‖w‖ * γ ^ j by ring]
+  have hud : ∀ (w w' : ℕ →ᵇ (ι → ℝ)) j,
+      ‖(lpU γ r w - lpU γ r w') j‖ ≤ ε * dist w w' * γ ^ j := fun w w' j => by
+    have := hr (γ ^ j • w j) (γ ^ j • w' j)
+    rw [← smul_sub, norm_smul, Real.norm_of_nonneg (pow_nonneg hγ.le j)] at this
+    refine this.trans ?_
+    have h1 : ‖w j - w' j‖ ≤ dist w w' := by
+      rw [← dist_eq_norm]; exact w.dist_coe_le_dist j
+    have h2 := mul_le_mul_of_nonneg_left (mul_le_mul_of_nonneg_left h1 (pow_nonneg hγ.le j)) hε
+    linarith [show ε * (γ ^ j * dist w w') = ε * dist w w' * γ ^ j by ring]
+  -- the head and tail terms are `O(γᵗ)`
+  have hzbound : ∀ (u : ℕ → ι → ℝ) (M : ℝ), 0 ≤ M → (∀ j, ‖u j‖ ≤ M * γ ^ j) → ∀ t,
+      ‖lpHead A P u t - lpTail B Q u t‖ ≤ K * M * Λ * γ ^ t := fun u M hM hu t => by
+    have h1 := norm_lpHead_le hD hM hu t
+    have h2 := norm_lpTail_le hD hu t
+    refine (norm_sub_le _ _).trans ?_
+    have e : K * M * Λ * γ ^ t = K * M * γ ^ t / (γ - a) + K * c * M * γ ^ t / (1 - c * γ) := by
+      simp only [Λ]; field_simp
+    linarith
+  -- the operator on weighted sequences
+  have hΦb : ∀ (w : ℕ →ᵇ (ι → ℝ)) t,
+      ‖(γ ^ t)⁻¹ • lpZ A B P Q γ r ξ w t‖ ≤ K * ‖ξ‖ + K * (ε * ‖w‖) * Λ := fun w t => by
+    have hγt := pow_pos hγ t
+    rw [norm_smul, Real.norm_of_nonneg (inv_nonneg.2 hγt.le), inv_mul_le_iff₀ hγt]
+    have h1 : ‖(A ^ t) *ᵥ P ξ‖ ≤ K * ‖ξ‖ * γ ^ t := by
+      refine (hD.bA t ξ).trans ?_
+      have := mul_le_mul_of_nonneg_left (pow_le_pow_left₀ hD.a_nn hD.aγ.le t)
+        (mul_nonneg hK (norm_nonneg ξ))
+      linarith [show K * ‖ξ‖ * a ^ t = K * a ^ t * ‖ξ‖ by ring]
+    have h2 := hzbound (lpU γ r w) (ε * ‖w‖) (mul_nonneg hε (norm_nonneg _)) (hu w) t
+    simp only [lpZ, add_sub_assoc]
+    refine (norm_add_le _ _).trans ?_
+    nlinarith
+  set Φ : (ℕ →ᵇ (ι → ℝ)) → (ℕ →ᵇ (ι → ℝ)) := fun w =>
+    BoundedContinuousFunction.ofNormedAddCommGroupDiscrete
+      (fun t => (γ ^ t)⁻¹ • lpZ A B P Q γ r ξ w t) _ (hΦb w)
+  have hΦapply : ∀ w t, Φ w t = (γ ^ t)⁻¹ • lpZ A B P Q γ r ξ w t := fun _ _ => rfl
+  have hlip : ∀ w w', dist (Φ w) (Φ w') ≤ (1 / 2) * dist w w' := fun w w' => by
+    refine (BoundedContinuousFunction.dist_le (by positivity)).2 fun t => ?_
+    rw [hΦapply, hΦapply, dist_eq_norm, ← smul_sub]
+    have hγt := pow_pos hγ t
+    rw [norm_smul, Real.norm_of_nonneg (inv_nonneg.2 hγt.le), inv_mul_le_iff₀ hγt]
+    have e : lpZ A B P Q γ r ξ w t - lpZ A B P Q γ r ξ w' t =
+        lpHead A P (lpU γ r w - lpU γ r w') t - lpTail B Q (lpU γ r w - lpU γ r w') t := by
+      simp only [lpZ]
+      rw [← lpHead_sub, ← lpTail_sub hD (hu w) (hu w')]
+      abel
+    rw [e]
+    have h := hzbound _ (ε * dist w w') (mul_nonneg hε dist_nonneg) (hud w w') t
+    have : K * (ε * dist w w') * Λ ≤ 1 / 2 * dist w w' := by
+      have := mul_le_mul_of_nonneg_right hsmall (dist_nonneg (x := w) (y := w'))
+      nlinarith
+    nlinarith [pow_pos hγ t]
+  have hcontr : ContractingWith (1 / 2 : ℝ≥0) Φ :=
+    ⟨by norm_num,
+      LipschitzWith.of_dist_le_mul fun w w' => by
+        simpa using hlip w w'⟩
+  set w := ContractingWith.fixedPoint Φ hcontr
+  have hw : Φ w = w := ContractingWith.fixedPoint_isFixedPt hcontr
+  set z : ℕ → ι → ℝ := lpZ A B P Q γ r ξ w
+  have hzw : ∀ t, z t = γ ^ t • w t := fun t => by
+    have := DFunLike.congr_fun hw t
+    rw [hΦapply] at this
+    rw [← this, smul_smul, mul_inv_cancel₀ (pow_pos hγ t).ne', one_smul]
+  have hU : lpU γ r w = fun j => r (z j) := by funext j; rw [lpU, hzw]
+  have huw := hu w
+  rw [hU] at huw
+  -- the norm of the fixed point
+  have hwn : ‖w‖ ≤ 2 * K * ‖ξ‖ := by
+    have h1 := ContractingWith.dist_fixedPoint_le hcontr 0
+    rw [dist_comm, dist_zero_right, dist_zero_left] at h1
+    have h2 : ‖Φ 0‖ ≤ K * ‖ξ‖ := by
+      refine (BoundedContinuousFunction.norm_le (by positivity)).2 fun t => ?_
+      have := hΦb 0 t
+      rw [hΦapply]
+      simpa using this
+    have : (1 : ℝ) - ((1 / 2 : ℝ≥0) : ℝ) = 1 / 2 := by norm_num
+    rw [this] at h1
+    linarith
+  obtain ⟨u, hu_def⟩ : ∃ u : ℕ → ι → ℝ, u = fun j => r (z j) := ⟨_, rfl⟩
+  have hz_def : ∀ t, z t = (A ^ t) *ᵥ P ξ + lpHead A P u t - lpTail B Q u t := fun t => by
+    rw [hu_def, ← hU]; rfl
+  rw [← hu_def] at huw
+  have hPtail : ∀ t, P (lpTail B Q u t) = 0 := fun t => by
+    rw [lpTail, linearMap_tsum P (summable_lpTail hD huw t)]
+    simp only [hD.PB, tsum_zero]
+  have hQP : Q (P ξ) = 0 := by
+    have := hD.PQ (P ξ); rw [hD.PP] at this; exact add_eq_left.1 this
+  have hz0 : z 0 = P ξ - lpTail B Q u 0 := by
+    rw [hz_def]; simp [lpHead]
+  refine ⟨z, fun t => ?_, ?_, fun t => ?_, fun M hM => ?_, fun t => by rw [hz_def, hu_def]⟩
+  · -- the recursion
+    have hut : r (z t) = u t := by rw [hu_def]
+    rw [hut]
+    conv_rhs => rw [← hD.PQ (u t)]
+    rw [hz_def (t + 1), hz_def t, lpHead_succ, Matrix.mulVec_sub, Matrix.mulVec_add,
+      lpTail_succ hD huw t, pow_succ', ← Matrix.mulVec_mulVec]
+    abel
+  · -- `Pz₀ = Pξ`
+    rw [hz0, map_sub, hD.PP, hPtail, sub_zero]
+  · -- decay
+    rw [hzw, norm_smul, Real.norm_of_nonneg (pow_nonneg hγ.le t)]
+    have h1 := mul_le_mul_of_nonneg_left ((w.norm_coe_le_norm t).trans hwn)
+      (pow_nonneg hγ.le t)
+    linarith [show γ ^ t * (2 * K * ‖ξ‖) = 2 * K * ‖ξ‖ * γ ^ t by ring]
+  · -- the unstable part of `z₀`
+    have hM' : ∀ j, ‖u j‖ ≤ M * γ ^ j := fun j => by rw [hu_def]; exact hM j
+    have hQt : Q (lpTail B Q u 0) = lpTail B Q u 0 := by
+      have := hD.PQ (lpTail B Q u 0); rw [hPtail, zero_add] at this; exact this
+    rw [hz0, map_sub, hQP, hQt, zero_sub, norm_neg]
+    have := norm_lpTail_le hD hM' 0
+    simpa using this
+
+theorem norm_head_sub_tail_le (hD : LPData A B P Q K a c γ) {u : ℕ → ι → ℝ} {M : ℝ}
+    (hM : 0 ≤ M) (hu : ∀ j, ‖u j‖ ≤ M * γ ^ j) (t : ℕ) :
+    ‖lpHead A P u t - lpTail B Q u t‖ ≤
+      K * M * (1 / (γ - a) + c / (1 - c * γ)) * γ ^ t := by
+  have hγa : 0 < γ - a := by linarith [hD.aγ]
+  have hcγ : 0 < 1 - c * γ := by linarith [hD.cγ]
+  have h1 := norm_lpHead_le hD hM hu t
+  have h2 := norm_lpTail_le hD hu t
+  refine (norm_sub_le _ _).trans ?_
+  have e : K * M * (1 / (γ - a) + c / (1 - c * γ)) * γ ^ t =
+      K * M * γ ^ t / (γ - a) + K * c * M * γ ^ t / (1 - c * γ) := by field_simp
+  linarith
+
+theorem proj_lpTail (hD : LPData A B P Q K a c γ) {u : ℕ → ι → ℝ} {M : ℝ}
+    (hu : ∀ j, ‖u j‖ ≤ M * γ ^ j) (t : ℕ) :
+    P (lpTail B Q u t) = 0 ∧ Q (lpTail B Q u t) = lpTail B Q u t := by
+  have hP : P (lpTail B Q u t) = 0 := by
+    rw [lpTail, linearMap_tsum P (summable_lpTail hD hu t)]
+    simp only [hD.PB, tsum_zero]
+  refine ⟨hP, ?_⟩
+  have := hD.PQ (lpTail B Q u t); rw [hP, zero_add] at this; exact this
+
+/-- **Lipschitz dependence on `ξ`.** Two solutions of the integral equation, through `ξ` and `ξ'`,
+satisfy `‖z_t − z'_t‖ ≤ 2K‖ξ − ξ'‖γᵗ`; and the unstable parts of `z₀`, `z'₀` differ by at most
+`KcM/(1 − cγ)` when `‖r(z_j) − r(z'_j)‖ ≤ Mγʲ`. -/
+theorem lp_lipschitz (hD : LPData A B P Q K a c γ) {r : (ι → ℝ) → ι → ℝ} {ε : ℝ}
+    (hε : 0 ≤ ε) (hr0 : r 0 = 0) (hr : ∀ x y, ‖r x - r y‖ ≤ ε * ‖x - y‖)
+    (hsmall : K * ε * (1 / (γ - a) + c / (1 - c * γ)) ≤ 1 / 2) {ξ ξ' : ι → ℝ}
+    {z z' : ℕ → ι → ℝ} {C : ℝ} (hzb : ∀ t, ‖z t‖ ≤ C * γ ^ t) (hzb' : ∀ t, ‖z' t‖ ≤ C * γ ^ t)
+    (hz : ∀ t, z t = (A ^ t) *ᵥ P ξ + lpHead A P (fun j => r (z j)) t -
+      lpTail B Q (fun j => r (z j)) t)
+    (hz' : ∀ t, z' t = (A ^ t) *ᵥ P ξ' + lpHead A P (fun j => r (z' j)) t -
+      lpTail B Q (fun j => r (z' j)) t) :
+    (∀ t, ‖z t - z' t‖ ≤ 2 * K * ‖ξ - ξ'‖ * γ ^ t) ∧
+      ∀ M, (∀ j, ‖r (z j) - r (z' j)‖ ≤ M * γ ^ j) →
+        ‖Q (z 0) - Q (z' 0)‖ ≤ K * c * M / (1 - c * γ) := by
+  have hγ : 0 < γ := hD.a_nn.trans_lt hD.aγ
+  have hK := hD.K_nn
+  set Λ := 1 / (γ - a) + c / (1 - c * γ)
+  have hΛ : 0 ≤ Λ := by
+    have : 0 < γ - a := by linarith [hD.aγ]
+    have : 0 < 1 - c * γ := by linarith [hD.cγ]
+    have := hD.c_pos
+    positivity
+  set u : ℕ → ι → ℝ := fun j => r (z j)
+  set u' : ℕ → ι → ℝ := fun j => r (z' j)
+  have hub : ∀ j, ‖u j‖ ≤ (ε * C) * γ ^ j := fun j => by
+    have h1 := hr (z j) 0
+    rw [sub_zero, hr0, sub_zero] at h1
+    have := mul_le_mul_of_nonneg_left (hzb j) hε
+    simp only [u]; linarith [show ε * (C * γ ^ j) = ε * C * γ ^ j by ring]
+  have hub' : ∀ j, ‖u' j‖ ≤ (ε * C) * γ ^ j := fun j => by
+    have h1 := hr (z' j) 0
+    rw [sub_zero, hr0, sub_zero] at h1
+    have := mul_le_mul_of_nonneg_left (hzb' j) hε
+    simp only [u']; linarith [show ε * (C * γ ^ j) = ε * C * γ ^ j by ring]
+  have hdiff : ∀ t, z t - z' t = (A ^ t) *ᵥ P (ξ - ξ') +
+      (lpHead A P (u - u') t - lpTail B Q (u - u') t) := fun t => by
+    rw [hz t, hz' t, ← lpHead_sub, ← lpTail_sub hD hub hub', map_sub, Matrix.mulVec_sub]
+    abel
+  -- the weighted sup of the difference
+  set d : ℕ → ℝ := fun t => (γ ^ t)⁻¹ * ‖z t - z' t‖
+  have hdb : ∀ t, d t ≤ 2 * C := fun t => by
+    simp only [d]
+    rw [inv_mul_le_iff₀ (pow_pos hγ t)]
+    have := norm_sub_le (z t) (z' t)
+    linarith [hzb t, hzb' t]
+  have hbdd : BddAbove (Set.range d) := ⟨2 * C, by rintro _ ⟨t, rfl⟩; exact hdb t⟩
+  set D := ⨆ t, d t
+  have hdD : ∀ t, d t ≤ D := fun t => le_ciSup hbdd t
+  have hD0 : 0 ≤ D := (by positivity : 0 ≤ d 0).trans (hdD 0)
+  have hzz : ∀ t, ‖z t - z' t‖ ≤ D * γ ^ t := fun t => by
+    have := hdD t
+    simp only [d] at this
+    rwa [inv_mul_le_iff₀ (pow_pos hγ t), mul_comm] at this
+  have hud : ∀ j, ‖(u - u') j‖ ≤ (ε * D) * γ ^ j := fun j => by
+    have := hr (z j) (z' j)
+    have := mul_le_mul_of_nonneg_left (hzz j) hε
+    simp only [Pi.sub_apply, u, u']
+    linarith [show ε * (D * γ ^ j) = ε * D * γ ^ j by ring]
+  have hstep : ∀ t, d t ≤ K * ‖ξ - ξ'‖ + D / 2 := fun t => by
+    simp only [d]
+    rw [inv_mul_le_iff₀ (pow_pos hγ t), hdiff t]
+    refine (norm_add_le _ _).trans ?_
+    have h1 : ‖(A ^ t) *ᵥ P (ξ - ξ')‖ ≤ K * ‖ξ - ξ'‖ * γ ^ t := by
+      refine (hD.bA t _).trans ?_
+      have := mul_le_mul_of_nonneg_left (pow_le_pow_left₀ hD.a_nn hD.aγ.le t)
+        (mul_nonneg hK (norm_nonneg (ξ - ξ')))
+      linarith [show K * ‖ξ - ξ'‖ * a ^ t = K * a ^ t * ‖ξ - ξ'‖ by ring]
+    have h2 := norm_head_sub_tail_le hD (mul_nonneg hε hD0) hud t
+    have h3 : K * (ε * D) * Λ ≤ D / 2 := by
+      have := mul_le_mul_of_nonneg_right hsmall hD0
+      nlinarith
+    have h4 := mul_le_mul_of_nonneg_right h3 (pow_nonneg hγ.le t)
+    nlinarith
+  have hDle : D ≤ 2 * K * ‖ξ - ξ'‖ := by
+    have : D ≤ K * ‖ξ - ξ'‖ + D / 2 := ciSup_le hstep
+    linarith
+  refine ⟨fun t => (hzz t).trans ?_, fun M hM => ?_⟩
+  · exact mul_le_mul_of_nonneg_right hDle (pow_nonneg hγ.le t)
+  · have hM' : ∀ j, ‖(u - u') j‖ ≤ M * γ ^ j := fun j => by
+      simp only [Pi.sub_apply, u, u']; exact hM j
+    have hQP : Q (P (ξ - ξ')) = 0 := by
+      have := hD.PQ (P (ξ - ξ')); rw [hD.PP] at this; exact add_eq_left.1 this
+    have e : Q (z 0) - Q (z' 0) = -lpTail B Q (u - u') 0 := by
+      rw [← map_sub, hdiff 0]
+      simp only [lpHead, Finset.range_zero, Finset.sum_empty, zero_sub, pow_zero,
+        Matrix.one_mulVec, map_add, map_neg, hQP, (proj_lpTail hD hM' 0).2, zero_add]
+    rw [e, norm_neg]
+    have := norm_lpTail_le hD hM' 0
+    simpa using this
+
+end StokeyLucasPrescott.DeterministicDynamics
+
+/-
+Copyright (c) 2026 Robert Kirkby. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Robert Kirkby
+-/
+
+/-!
+# The stable manifold (Theorem 6.6)
+
+SLP §6.3, p. 147. Let `h(x̄) = x̄`, with `h` strictly differentiable at `x̄` with Jacobian `A`
+(this holds if `h` is continuously differentiable near `x̄`), and let `m` of the characteristic
+roots of `A` lie inside the unit circle. Then there are a neighborhood `U` of `x̄` and a map `φ`,
+differentiable at `x̄` with derivative the projection `Q_u` onto `E_u` along `E_s` (rank
+`n − m`), such that every solution of `x_{t+1} = h(x_t)` with `x₀ ∈ U` and `φ(x₀) = 0` converges
+to `x̄` (`theorem_6_6`). The book also asks for `φ` to be continuously differentiable; the
+construction gives differentiability at `x̄`, which is what the rank condition is about.
+
+The proof follows the dichotomy of `Dichotomy` and the Lyapunov–Perron construction of
+`LyapunovPerron`. Write `h(x̄ + z) = x̄ + Az + r(z)`.
+
+* `exists_lip_remainder`: strict differentiability makes `r` `ε`-Lipschitz near `0`, for every
+  `ε > 0`; the Lipschitz extension to `ℝⁿ` (`LipschitzOnWith.extend_pi`) keeps the constant.
+* With `ψ(ξ) = Q_u z₀(ξ)` the unstable part of the solution through `P_sξ`, set
+  `φ(x) = Q_u(x − x̄) − ψ(P_s(x − x̄))`. If `φ(x₀) = 0` then `x₀ − x̄ = z₀(ξ)`, so the orbit of
+  `x₀` is `x̄ + z_t → x̄`. And `‖ψ(ξ)‖ ≤ 2K²cε'‖ξ‖/(1 − cγ)` with `ε'` the Lipschitz constant of `r`
+  near `0`, which tends to `0`: `ψ(ξ) = o(ξ)`, so `Dφ(x̄) = Q_u`.
+-/
+
+open Set Filter Topology Module Asymptotics
+open scoped Matrix NNReal
+
+namespace StokeyLucasPrescott.DeterministicDynamics
+
+variable {ι : Type*} [Fintype ι] [DecidableEq ι]
+
+/-- `A` as a continuous linear map. -/
+noncomputable def clmOf (A : Matrix ι ι ℝ) : (ι → ℝ) →L[ℝ] (ι → ℝ) :=
+  LinearMap.toContinuousLinearMap (Matrix.toLin' A)
+
+theorem clmOf_apply (A : Matrix ι ι ℝ) (z : ι → ℝ) : clmOf A z = A *ᵥ z := rfl
+
+theorem invB_pow_mem (A : Matrix ι ι ℝ) (k : ℕ) {v : ι → ℝ}
+    (hv : v ∈ unstableR A) : (invB A ^ k) *ᵥ v ∈ unstableR A := by
+  induction k with
+  | zero => simpa using hv
+  | succ k ih => rw [pow_succ', ← Matrix.mulVec_mulVec]; exact inv_mem A ih
+
+/-- The dichotomy of `A` is `LPData`. -/
+theorem lpData_of (A : Matrix ι ι ℝ) {K a c γ : ℝ} (hK : 0 ≤ K) (ha : 0 ≤ a)
+    (haγ : a < γ) (hc : 0 < c) (hcγ : c * γ < 1)
+    (hA : ∀ k z, ‖(A ^ k) *ᵥ projS A z‖ ≤ K * a ^ k * ‖z‖)
+    (hB : ∀ k z, ‖(invB A ^ k) *ᵥ projU A z‖ ≤ K * c ^ k * ‖z‖) :
+    LPData A (invB A) (projS A) (projU A) K a c γ where
+  PQ := projS_add_projU A
+  PP z := projS_of_mem A (projS_mem A z)
+  PB k z := projS_of_mem_unstable A (invB_pow_mem A _ (projU_mem A z))
+  AB k z := by
+    rw [pow_succ', ← Matrix.mulVec_mulVec]
+    exact inv_right A (invB_pow_mem A k (projU_mem A z))
+  K_nn := hK
+  a_nn := ha
+  aγ := haγ
+  c_pos := hc
+  cγ := hcγ
+  bA := hA
+  bB := hB
+
+/-- The remainder `r(z) = h(x̄ + z) − x̄ − Az` is `ε`-Lipschitz near `0`. -/
+theorem exists_lip_remainder {h : (ι → ℝ) → (ι → ℝ)} {xbar : ι → ℝ}
+    {A : Matrix ι ι ℝ} (hA : HasStrictFDerivAt h (clmOf A) xbar) {ε : ℝ}
+    (hε : 0 < ε) : ∃ ρ > 0, ∀ z ∈ Metric.closedBall (0 : ι → ℝ) ρ,
+      ∀ z' ∈ Metric.closedBall (0 : ι → ℝ) ρ,
+        ‖(h (xbar + z) - xbar - A *ᵥ z) - (h (xbar + z') - xbar - A *ᵥ z')‖ ≤ ε * ‖z - z'‖ := by
+  obtain ⟨s, hs, happ⟩ := hA.approximates_deriv_on_nhds (c := ⟨ε, hε.le⟩) (Or.inr hε)
+  obtain ⟨ρ, hρ, hball⟩ := Metric.mem_nhds_iff.1 hs
+  refine ⟨ρ / 2, by linarith, fun z hz z' hz' => ?_⟩
+  have hmem : ∀ v ∈ Metric.closedBall (0 : ι → ℝ) (ρ / 2), xbar + v ∈ s := fun v hv =>
+    hball (by
+      rw [Metric.mem_ball, dist_eq_norm, add_sub_cancel_left]
+      rw [Metric.mem_closedBall, dist_zero_right] at hv
+      linarith)
+  have := happ _ (hmem z hz) _ (hmem z' hz')
+  have e : (h (xbar + z) - xbar - A *ᵥ z) - (h (xbar + z') - xbar - A *ᵥ z') =
+      h (xbar + z) - h (xbar + z') - clmOf A (xbar + z - (xbar + z')) := by
+    simp only [clmOf, LinearMap.coe_toContinuousLinearMap', Matrix.toLin'_apply,
+      add_sub_add_left_eq_sub, Matrix.mulVec_sub]
+    abel
+  rw [e]
+  simp only [add_sub_add_left_eq_sub, map_sub] at this ⊢
+  exact this
+
+/-- **Theorem 6.6 (stable manifold).** -/
+theorem theorem_6_6 {n : ℕ} {h : (Fin n → ℝ) → (Fin n → ℝ)} {xbar : Fin n → ℝ}
+    {A : Matrix (Fin n) (Fin n) ℝ} (hfix : h xbar = xbar)
+    (hA : HasStrictFDerivAt h (matCLM A) xbar) :
+    ∃ U ∈ 𝓝 xbar, ∃ φ : (Fin n → ℝ) → (Fin n → ℝ), φ xbar = 0 ∧
+      HasFDerivAt φ (LinearMap.toContinuousLinearMap (projU A)) xbar ∧
+      finrank ℝ (LinearMap.range (projU A)) =
+        n - ((A.charpoly.map Complex.ofRealHom).roots.filter fun μ => ‖μ‖ < 1).card ∧
+      ∀ x₀ ∈ U, φ x₀ = 0 → Tendsto (fun t => h^[t] x₀) atTop (𝓝 xbar) := by
+  -- the dichotomy constants
+  obtain ⟨a, ha0, ha1, Ks, hKs0, hKs⟩ := stable_bound A
+  set γ := (a + 1) / 2
+  have hγ0 : 0 < γ := by simp only [γ]; linarith
+  have haγ : a < γ := by simp only [γ]; linarith
+  have hγ1 : γ < 1 := by simp only [γ]; linarith
+  set c := (1 + γ⁻¹) / 2
+  have hγi : 1 < γ⁻¹ := (one_lt_inv₀ hγ0).2 hγ1
+  have hc1 : 1 < c := by simp only [c]; linarith
+  have hcγ : c * γ < 1 := by
+    simp only [c]; rw [div_mul_eq_mul_div, add_mul, inv_mul_cancel₀ hγ0.ne']; linarith
+  obtain ⟨Ku, hKu0, hKu⟩ := unstable_bound A hc1
+  set K := max Ks Ku
+  have hK0 : 0 ≤ K := le_max_of_le_left hKs0
+  have hD : LPData A (invB A) (projS A) (projU A) K a c γ :=
+    lpData_of A hK0 ha0.le haγ (by linarith) hcγ
+      (fun k z => (hKs k z).trans (by
+        have := mul_nonneg (pow_nonneg ha0.le k) (norm_nonneg z)
+        nlinarith [le_max_left Ks Ku]))
+      (fun k z => (hKu k z).trans (by
+        have := mul_nonneg (pow_nonneg (by linarith : (0 : ℝ) ≤ c) k) (norm_nonneg z)
+        nlinarith [le_max_right Ks Ku]))
+  have hP : ∀ v, ‖projS A v‖ ≤ K * ‖v‖ := fun v => by simpa using hD.bA 0 v
+  set Λ := 1 / (γ - a) + c / (1 - c * γ)
+  have hΛ : 0 < Λ := by
+    have : 0 < γ - a := by linarith
+    have : 0 < 1 - c * γ := by linarith
+    positivity
+  set ε := 1 / (2 * (K * Λ + 1))
+  have hε : 0 < ε := by positivity
+  have hsmall : K * ε * Λ ≤ 1 / 2 := by
+    have e : K * ε * Λ = K * Λ / (2 * (K * Λ + 1)) := by simp only [ε]; field_simp
+    rw [e, div_le_iff₀ (by positivity)]
+    nlinarith [mul_nonneg hK0 hΛ.le]
+  -- the remainder and its Lipschitz extension
+  set r : (Fin n → ℝ) → (Fin n → ℝ) := fun z => h (xbar + z) - xbar - A *ᵥ z
+  have hr0 : r 0 = 0 := by simp [r, hfix]
+  obtain ⟨ρ, hρ, hlip⟩ := exists_lip_remainder (A := A) hA hε
+  have hlipOn : LipschitzOnWith (Real.toNNReal ε) r (Metric.closedBall 0 ρ) :=
+    LipschitzOnWith.of_dist_le_mul fun z hz z' hz' => by
+      rw [dist_eq_norm, dist_eq_norm, Real.coe_toNNReal _ hε.le]
+      exact hlip z hz z' hz'
+  obtain ⟨rt, hrt, hrteq⟩ := hlipOn.extend_pi
+  have hrt0 : rt 0 = 0 := by rw [← hrteq (Metric.mem_closedBall_self hρ.le), hr0]
+  have hrtl : ∀ x y, ‖rt x - rt y‖ ≤ ε * ‖x - y‖ := fun x y => by
+    have := hrt.dist_le_mul x y
+    rwa [dist_eq_norm, dist_eq_norm, Real.coe_toNNReal _ hε.le] at this
+  -- the Lyapunov–Perron solutions
+  have hLP := fun ξ => lyapunov_perron hD hε.le hrt0 hrtl hsmall ξ
+  choose Z hZrec hZP hZb hZQ hZrep using hLP
+  set ψ : (Fin n → ℝ) → (Fin n → ℝ) := fun ξ => projU A (Z ξ 0)
+  set φ : (Fin n → ℝ) → (Fin n → ℝ) := fun x => projU A (x - xbar) - ψ (projS A (x - xbar))
+  have hZ0 : Z 0 0 = 0 := by
+    have := hZb 0 0
+    simp only [norm_zero, mul_zero, zero_mul] at this
+    exact norm_le_zero_iff.1 this
+  have hφ0 : φ xbar = 0 := by simp [φ, ψ, hZ0]
+  -- the solution through a point of the manifold is the orbit
+  have horbit : ∀ x₀, φ x₀ = 0 → 2 * K * ‖projS A (x₀ - xbar)‖ ≤ ρ → ∀ t,
+      h^[t] x₀ = xbar + Z (projS A (x₀ - xbar)) t := by
+    intro x₀ hφx hsm t
+    set ξ := projS A (x₀ - xbar)
+    have hZ0' : Z ξ 0 = x₀ - xbar := by
+      have h1 : projS A (Z ξ 0) = projS A (x₀ - xbar) := by
+        rw [hZP ξ, hD.PP]
+      have h2 : projU A (Z ξ 0) = projU A (x₀ - xbar) := by
+        simp only [φ, ψ, sub_eq_zero] at hφx; exact hφx.symm
+      rw [← projS_add_projU A (Z ξ 0), h1, h2, projS_add_projU]
+    have hin : ∀ t, Z ξ t ∈ Metric.closedBall 0 ρ := fun t => by
+      rw [Metric.mem_closedBall, dist_zero_right]
+      refine (hZb ξ t).trans ?_
+      have := pow_le_one₀ hγ0.le hγ1.le (n := t)
+      have := mul_nonneg hK0 (norm_nonneg ξ)
+      nlinarith
+    induction t with
+    | zero => simp [hZ0']
+    | succ t ih =>
+      rw [Function.iterate_succ_apply', ih, hZrec, ← hrteq (hin t)]
+      simp only [r]; abel
+  refine ⟨Metric.ball xbar (ρ / (2 * K ^ 2 + 1)), Metric.ball_mem_nhds _ (by positivity), φ,
+    hφ0, ?_, ?_, fun x₀ hx₀ hφx => ?_⟩
+  · -- `Dφ(x̄) = Q_u`: `ψ(ξ) = o(ξ)`
+    rw [hasFDerivAt_iff_isLittleO_nhds_zero]
+    refine isLittleO_iff.2 fun η hη => ?_
+    set ε' := η * (1 - c * γ) / (2 * K ^ 3 * c + 1)
+    have hε' : 0 < ε' := by
+      have : 0 < 1 - c * γ := by linarith
+      have : 0 < c := by linarith
+      positivity
+    obtain ⟨ρ', hρ', hlip'⟩ := exists_lip_remainder (A := A) hA hε'
+    set δ := min ρ ρ' / (2 * K ^ 2 + 1)
+    have hδ : 0 < δ := by positivity
+    filter_upwards [Metric.ball_mem_nhds (0 : Fin n → ℝ) hδ] with v hv
+    rw [Metric.mem_ball, dist_zero_right] at hv
+    set ξ := projS A v
+    have hξ : ‖ξ‖ ≤ K * ‖v‖ := hP v
+    have hKξ : 2 * K * ‖ξ‖ ≤ min ρ ρ' := by
+      have h1 : 2 * K * ‖ξ‖ ≤ 2 * K ^ 2 * ‖v‖ := by nlinarith
+      have h2 : 2 * K ^ 2 * ‖v‖ ≤ min ρ ρ' := by
+        have := (lt_div_iff₀ (by positivity : (0 : ℝ) < 2 * K ^ 2 + 1)).1 hv
+        nlinarith [norm_nonneg v, min_le_left ρ ρ']
+      linarith
+    have hin : ∀ j, Z ξ j ∈ Metric.closedBall 0 ρ ∩ Metric.closedBall 0 ρ' := fun j => by
+      have := (hZb ξ j).trans (by
+        have := pow_le_one₀ hγ0.le hγ1.le (n := j)
+        have := mul_nonneg hK0 (norm_nonneg ξ)
+        nlinarith : 2 * K * ‖ξ‖ * γ ^ j ≤ min ρ ρ')
+      exact ⟨by rw [Metric.mem_closedBall, dist_zero_right]; linarith [min_le_left ρ ρ'],
+        by rw [Metric.mem_closedBall, dist_zero_right]; linarith [min_le_right ρ ρ']⟩
+    have hrb : ∀ j, ‖rt (Z ξ j)‖ ≤ (ε' * (2 * K * ‖ξ‖)) * γ ^ j := fun j => by
+      rw [← hrteq (hin j).1]
+      have := hlip' _ (hin j).2 0 (Metric.mem_closedBall_self hρ'.le)
+      simp only [add_zero, hfix, sub_self, Matrix.mulVec_zero, sub_zero] at this
+      refine this.trans ?_
+      have := mul_le_mul_of_nonneg_left (hZb ξ j) hε'.le
+      linarith [show ε' * (2 * K * ‖ξ‖ * γ ^ j) = ε' * (2 * K * ‖ξ‖) * γ ^ j by ring]
+    have hψ := hZQ ξ _ hrb
+    have e : φ (xbar + v) - φ xbar - (LinearMap.toContinuousLinearMap (projU A)) v = -ψ ξ := by
+      rw [show φ (xbar + v) = projU A v - ψ ξ by simp only [φ, ξ, add_sub_cancel_left], hφ0]
+      simp only [LinearMap.coe_toContinuousLinearMap', sub_zero]
+      abel
+    rw [e, norm_neg]
+    refine hψ.trans ?_
+    have hcγ' : 0 < 1 - c * γ := by linarith
+    rw [div_le_iff₀ hcγ']
+    have : K * c * (ε' * (2 * K * ‖ξ‖)) ≤ K * c * (ε' * (2 * K * (K * ‖v‖))) := by
+      have : 0 ≤ K * c * ε' * (2 * K) := by have := hε'.le; positivity
+      nlinarith
+    have hε'def : ε' * (2 * K ^ 3 * c + 1) = η * (1 - c * γ) := by
+      simp only [ε']; field_simp
+    nlinarith [norm_nonneg v, mul_nonneg hε'.le (norm_nonneg v)]
+  · -- the rank
+    rw [projU, Submodule.range_projection]
+    have h1 := Submodule.finrank_add_eq_of_isCompl (isCompl_stableR_unstableR A)
+    rw [finrank_stableR, Module.finrank_fin_fun] at h1
+    omega
+  · -- convergence on the manifold
+    rw [Metric.mem_ball, dist_eq_norm] at hx₀
+    have hsm : 2 * K * ‖projS A (x₀ - xbar)‖ ≤ ρ := by
+      have h1 := hP (x₀ - xbar)
+      have := (lt_div_iff₀ (by positivity : (0 : ℝ) < 2 * K ^ 2 + 1)).1 hx₀
+      nlinarith [norm_nonneg (x₀ - xbar)]
+    have hob := horbit x₀ hφx hsm
+    simp only [hob]
+    have hz : Tendsto (fun t => Z (projS A (x₀ - xbar)) t) atTop (𝓝 0) := by
+      refine squeeze_zero_norm (fun t => hZb _ t) ?_
+      simpa using (tendsto_pow_atTop_nhds_zero_of_lt_one hγ0.le hγ1).const_mul
+        (2 * K * ‖projS A (x₀ - xbar)‖)
+    simpa using hz.const_add xbar
+
+/-- **The local stable family.** The solutions `z(ξ)` through `P_sξ` decay geometrically, are
+orbits of `h` for small `ξ`, and their unstable parts at `t = 0` depend on `ξ` with Lipschitz
+constant as small as we like near `0`. -/
+theorem local_stable_family {h : (ι → ℝ) → (ι → ℝ)} {xbar : ι → ℝ} {A : Matrix ι ι ℝ}
+    (hfix : h xbar = xbar) (hA : HasStrictFDerivAt h (clmOf A) xbar) :
+    ∃ γ, 0 < γ ∧ γ < 1 ∧ ∃ C, 0 ≤ C ∧ ∃ δ > 0, ∃ Z : (ι → ℝ) → ℕ → ι → ℝ,
+      (∀ ξ, projS A (Z ξ 0) = projS A ξ) ∧ (∀ ξ t, ‖Z ξ t‖ ≤ C * ‖ξ‖ * γ ^ t) ∧
+      (∀ ξ, ‖ξ‖ ≤ δ → ∀ t, h^[t] (xbar + Z ξ 0) = xbar + Z ξ t) ∧
+      ∀ η > 0, ∃ δ' > 0, ∀ ξ ξ', ‖ξ‖ ≤ δ' → ‖ξ'‖ ≤ δ' →
+        ‖projU A (Z ξ 0) - projU A (Z ξ' 0)‖ ≤ η * ‖ξ - ξ'‖ := by
+  obtain ⟨a, ha0, ha1, Ks, hKs0, hKs⟩ := stable_bound A
+  set γ := (a + 1) / 2
+  have hγ0 : 0 < γ := by simp only [γ]; linarith
+  have haγ : a < γ := by simp only [γ]; linarith
+  have hγ1 : γ < 1 := by simp only [γ]; linarith
+  set c := (1 + γ⁻¹) / 2
+  have hγi : 1 < γ⁻¹ := (one_lt_inv₀ hγ0).2 hγ1
+  have hc1 : 1 < c := by simp only [c]; linarith
+  have hcγ : c * γ < 1 := by
+    simp only [c]; rw [div_mul_eq_mul_div, add_mul, inv_mul_cancel₀ hγ0.ne']; linarith
+  obtain ⟨Ku, hKu0, hKu⟩ := unstable_bound A hc1
+  set K := max Ks Ku
+  have hK0 : 0 ≤ K := le_max_of_le_left hKs0
+  have hD : LPData A (invB A) (projS A) (projU A) K a c γ :=
+    lpData_of A hK0 ha0.le haγ (by linarith) hcγ
+      (fun k z => (hKs k z).trans (by
+        have := mul_nonneg (pow_nonneg ha0.le k) (norm_nonneg z)
+        nlinarith [le_max_left Ks Ku]))
+      (fun k z => (hKu k z).trans (by
+        have := mul_nonneg (pow_nonneg (by linarith : (0 : ℝ) ≤ c) k) (norm_nonneg z)
+        nlinarith [le_max_right Ks Ku]))
+  set Λ := 1 / (γ - a) + c / (1 - c * γ)
+  have hΛ : 0 < Λ := by
+    have : 0 < γ - a := by linarith
+    have : 0 < 1 - c * γ := by linarith
+    positivity
+  set ε := 1 / (2 * (K * Λ + 1))
+  have hε : 0 < ε := by positivity
+  have hsmall : K * ε * Λ ≤ 1 / 2 := by
+    have e : K * ε * Λ = K * Λ / (2 * (K * Λ + 1)) := by simp only [ε]; field_simp
+    rw [e, div_le_iff₀ (by positivity)]
+    nlinarith [mul_nonneg hK0 hΛ.le]
+  set r : (ι → ℝ) → (ι → ℝ) := fun z => h (xbar + z) - xbar - A *ᵥ z
+  have hr0 : r 0 = 0 := by simp [r, hfix]
+  obtain ⟨ρ, hρ, hlip⟩ := exists_lip_remainder (A := A) hA hε
+  have hlipOn : LipschitzOnWith (Real.toNNReal ε) r (Metric.closedBall 0 ρ) :=
+    LipschitzOnWith.of_dist_le_mul fun z hz z' hz' => by
+      rw [dist_eq_norm, dist_eq_norm, Real.coe_toNNReal _ hε.le]
+      exact hlip z hz z' hz'
+  obtain ⟨rt, hrt, hrteq⟩ := hlipOn.extend_pi
+  have hrt0 : rt 0 = 0 := by rw [← hrteq (Metric.mem_closedBall_self hρ.le), hr0]
+  have hrtl : ∀ x y, ‖rt x - rt y‖ ≤ ε * ‖x - y‖ := fun x y => by
+    have := hrt.dist_le_mul x y
+    rwa [dist_eq_norm, dist_eq_norm, Real.coe_toNNReal _ hε.le] at this
+  have hLP := fun ξ => lyapunov_perron hD hε.le hrt0 hrtl hsmall ξ
+  choose Z hZrec hZP hZb hZQ hZrep using hLP
+  have hball : ∀ ξ t {R : ℝ}, 2 * K * ‖ξ‖ ≤ R → Z ξ t ∈ Metric.closedBall 0 R := fun ξ t R hR => by
+    rw [Metric.mem_closedBall, dist_zero_right]
+    refine (hZb ξ t).trans ?_
+    have := pow_le_one₀ hγ0.le hγ1.le (n := t)
+    have := mul_nonneg hK0 (norm_nonneg ξ)
+    nlinarith
+  refine ⟨γ, hγ0, hγ1, 2 * K, by positivity, ρ / (2 * K + 1), by positivity, Z,
+    hZP, hZb, fun ξ hξ t => ?_, fun η hη => ?_⟩
+  · -- orbits
+    have hsm : 2 * K * ‖ξ‖ ≤ ρ := by
+      rw [le_div_iff₀ (by positivity)] at hξ
+      nlinarith [norm_nonneg ξ]
+    induction t with
+    | zero => simp
+    | succ t ih =>
+      rw [Function.iterate_succ_apply', ih, hZrec, ← hrteq (hball ξ t hsm)]
+      simp only [r]; abel
+  · -- small Lipschitz constant
+    have hcγ' : 0 < 1 - c * γ := by linarith
+    set ε' := η * (1 - c * γ) / (2 * K ^ 2 * c + 1)
+    have hε' : 0 < ε' := by
+      have : 0 < c := by linarith
+      positivity
+    obtain ⟨ρ', hρ', hlip'⟩ := exists_lip_remainder (A := A) hA hε'
+    refine ⟨min ρ ρ' / (2 * K + 1), by positivity, fun ξ ξ' hξ hξ' => ?_⟩
+    have hsm : ∀ ζ : ι → ℝ, ‖ζ‖ ≤ min ρ ρ' / (2 * K + 1) → 2 * K * ‖ζ‖ ≤ min ρ ρ' :=
+      fun ζ hζ => by
+        rw [le_div_iff₀ (by positivity)] at hζ
+        nlinarith [norm_nonneg ζ]
+    have hin : ∀ ζ : ι → ℝ, ‖ζ‖ ≤ min ρ ρ' / (2 * K + 1) → ∀ j,
+        Z ζ j ∈ Metric.closedBall 0 ρ ∧ Z ζ j ∈ Metric.closedBall 0 ρ' := fun ζ hζ j =>
+      ⟨hball ζ j ((hsm ζ hζ).trans (min_le_left _ _)),
+        hball ζ j ((hsm ζ hζ).trans (min_le_right _ _))⟩
+    set Cm := 2 * K * max ‖ξ‖ ‖ξ'‖
+    have hb1 : ∀ t, ‖Z ξ t‖ ≤ Cm * γ ^ t := fun t => (hZb ξ t).trans (by
+      have := pow_nonneg hγ0.le t
+      have := le_max_left ‖ξ‖ ‖ξ'‖
+      have := mul_le_mul_of_nonneg_left this (by positivity : (0 : ℝ) ≤ 2 * K)
+      nlinarith)
+    have hb2 : ∀ t, ‖Z ξ' t‖ ≤ Cm * γ ^ t := fun t => (hZb ξ' t).trans (by
+      have := pow_nonneg hγ0.le t
+      have := le_max_right ‖ξ‖ ‖ξ'‖
+      have := mul_le_mul_of_nonneg_left this (by positivity : (0 : ℝ) ≤ 2 * K)
+      nlinarith)
+    obtain ⟨hL1, hL2⟩ := lp_lipschitz hD hε.le hrt0 hrtl hsmall hb1 hb2 (hZrep ξ) (hZrep ξ')
+    have hM : ∀ j, ‖rt (Z ξ j) - rt (Z ξ' j)‖ ≤ (ε' * (2 * K * ‖ξ - ξ'‖)) * γ ^ j := fun j => by
+      rw [← hrteq (hin ξ hξ j).1, ← hrteq (hin ξ' hξ' j).1]
+      refine (hlip' _ (hin ξ hξ j).2 _ (hin ξ' hξ' j).2).trans ?_
+      have := mul_le_mul_of_nonneg_left (hL1 j) hε'.le
+      linarith [show ε' * (2 * K * ‖ξ - ξ'‖ * γ ^ j) = ε' * (2 * K * ‖ξ - ξ'‖) * γ ^ j by ring]
+    refine (hL2 _ hM).trans ?_
+    rw [div_le_iff₀ hcγ']
+    have hε'def : ε' * (2 * K ^ 2 * c + 1) = η * (1 - c * γ) := by
+      simp only [ε']; field_simp
+    have : 0 ≤ ε' * ‖ξ - ξ'‖ := mul_nonneg hε'.le (norm_nonneg _)
+    nlinarith
+
+end StokeyLucasPrescott.DeterministicDynamics
+
+/-
+Copyright (c) 2026 Robert Kirkby. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Robert Kirkby
+-/
+
+/-!
+# The Euler equation as a difference equation
+
+SLP §6.4, p. 153, proof of Theorem 6.9. With `F_xy` nonsingular, the Euler equation
+`G(x, y, z) = F_y(x, y) + βF_x(y, z) = 0` defines `z = ζ(x, y)` near the stationary point
+(`exists_eulerZeta`). The map `Ψ(x, y, z) = (x, y, G(x, y, z))` has invertible derivative
+`Ψ'` (`psiCLE`), and `ζ` is the last component of its local inverse at `(x, y, 0)`. Its
+derivative is `(u, v) ↦ Ku + Jv`, with `J` and `K` the blocks of the matrix `A` of (4).
+-/
+
+open Set Filter Topology Module
+open scoped Matrix
+
+namespace StokeyLucasPrescott.DeterministicDynamics
+
+variable {l : ℕ}
+
+/-- `(u, v) ↦ Mu + Nv`. -/
+noncomputable def blockCLM (M N : Matrix (Fin l) (Fin l) ℝ) :
+    (Fin l → ℝ) × (Fin l → ℝ) →L[ℝ] (Fin l → ℝ) :=
+  (clmOf M).comp (ContinuousLinearMap.fst ℝ _ _) + (clmOf N).comp (ContinuousLinearMap.snd ℝ _ _)
+
+theorem blockCLM_apply (M N : Matrix (Fin l) (Fin l) ℝ) (p : (Fin l → ℝ) × (Fin l → ℝ)) :
+    blockCLM M N p = M *ᵥ p.1 + N *ᵥ p.2 := rfl
+
+/-- The Euler residual `G(x, y, z) = F_y(x, y) + βF_x(y, z)`. -/
+def eulerG (Fx Fy : (Fin l → ℝ) → (Fin l → ℝ) → (Fin l → ℝ)) (β : ℝ)
+    (q : (Fin l → ℝ) × (Fin l → ℝ) × (Fin l → ℝ)) : Fin l → ℝ :=
+  Fy q.1 q.2.1 + β • Fx q.2.1 q.2.2
+
+/-- `Ψ(x, y, z) = (x, y, G(x, y, z))`. -/
+def eulerPsi (Fx Fy : (Fin l → ℝ) → (Fin l → ℝ) → (Fin l → ℝ)) (β : ℝ)
+    (q : (Fin l → ℝ) × (Fin l → ℝ) × (Fin l → ℝ)) :
+    (Fin l → ℝ) × (Fin l → ℝ) × (Fin l → ℝ) :=
+  (q.1, q.2.1, eulerG Fx Fy β q)
+
+/-- `Ψ'(u, v, w) = (u, v, F'_xy u + F_yy v + β(F_xx v + F_xy w))`. -/
+noncomputable def psiLin (Fxx Fxy Fyy : Matrix (Fin l) (Fin l) ℝ) (β : ℝ) :
+    ((Fin l → ℝ) × (Fin l → ℝ) × (Fin l → ℝ)) →ₗ[ℝ]
+      ((Fin l → ℝ) × (Fin l → ℝ) × (Fin l → ℝ)) where
+  toFun q := (q.1, q.2.1, Fxyᵀ *ᵥ q.1 + Fyy *ᵥ q.2.1 + β • (Fxx *ᵥ q.2.1 + Fxy *ᵥ q.2.2))
+  map_add' q q' := by
+    simp only [Prod.fst_add, Prod.snd_add, Matrix.mulVec_add, smul_add, Prod.mk_add_mk]
+    congr 2; abel
+  map_smul' c q := by
+    simp only [Prod.smul_fst, Prod.smul_snd, Matrix.mulVec_smul, RingHom.id_apply,
+      Prod.smul_mk, smul_add, smul_comm β c]
+
+/-- The inverse of `Ψ'`. -/
+noncomputable def psiInvLin (Fxx Fxy Fyy : Matrix (Fin l) (Fin l) ℝ) (β : ℝ) :
+    ((Fin l → ℝ) × (Fin l → ℝ) × (Fin l → ℝ)) →ₗ[ℝ]
+      ((Fin l → ℝ) × (Fin l → ℝ) × (Fin l → ℝ)) where
+  toFun q := (q.1, q.2.1,
+    Fxy⁻¹ *ᵥ (β⁻¹ • (q.2.2 - Fxyᵀ *ᵥ q.1 - Fyy *ᵥ q.2.1) - Fxx *ᵥ q.2.1))
+  map_add' q q' := by
+    simp only [Prod.fst_add, Prod.snd_add, Matrix.mulVec_add, smul_add, Prod.mk_add_mk,
+      Matrix.mulVec_sub, smul_sub]
+    congr 2; abel
+  map_smul' c q := by
+    simp only [Prod.smul_fst, Prod.smul_snd, Matrix.mulVec_smul, RingHom.id_apply,
+      Prod.smul_mk, smul_sub, Matrix.mulVec_sub, smul_comm β⁻¹ c]
+
+theorem psi_inv_left {Fxx Fxy Fyy : Matrix (Fin l) (Fin l) ℝ} {β : ℝ} (hQ : Fxy.det ≠ 0)
+    (hβ : β ≠ 0) (q : (Fin l → ℝ) × (Fin l → ℝ) × (Fin l → ℝ)) :
+    psiInvLin Fxx Fxy Fyy β (psiLin Fxx Fxy Fyy β q) = q := by
+  obtain ⟨u, v, w⟩ := q
+  simp only [psiInvLin, psiLin, LinearMap.coe_mk, AddHom.coe_mk]
+  refine Prod.ext rfl (Prod.ext rfl ?_)
+  simp only
+  have e : β⁻¹ • (Fxyᵀ *ᵥ u + Fyy *ᵥ v + β • (Fxx *ᵥ v + Fxy *ᵥ w) - Fxyᵀ *ᵥ u - Fyy *ᵥ v) -
+      Fxx *ᵥ v = Fxy *ᵥ w := by
+    rw [show Fxyᵀ *ᵥ u + Fyy *ᵥ v + β • (Fxx *ᵥ v + Fxy *ᵥ w) - Fxyᵀ *ᵥ u - Fyy *ᵥ v =
+      β • (Fxx *ᵥ v + Fxy *ᵥ w) by abel, smul_smul, inv_mul_cancel₀ hβ, one_smul]
+    abel
+  rw [e, Matrix.mulVec_mulVec, Matrix.nonsing_inv_mul _ (isUnit_iff_ne_zero.2 hQ),
+    Matrix.one_mulVec]
+
+theorem psi_inv_right {Fxx Fxy Fyy : Matrix (Fin l) (Fin l) ℝ} {β : ℝ} (hQ : Fxy.det ≠ 0)
+    (hβ : β ≠ 0) (q : (Fin l → ℝ) × (Fin l → ℝ) × (Fin l → ℝ)) :
+    psiLin Fxx Fxy Fyy β (psiInvLin Fxx Fxy Fyy β q) = q := by
+  obtain ⟨u, v, s⟩ := q
+  simp only [psiInvLin, psiLin, LinearMap.coe_mk, AddHom.coe_mk]
+  refine Prod.ext rfl (Prod.ext rfl ?_)
+  simp only
+  rw [Matrix.mulVec_mulVec, Matrix.mul_nonsing_inv _ (isUnit_iff_ne_zero.2 hQ),
+    Matrix.one_mulVec]
+  simp only [smul_add, smul_sub, smul_smul, mul_inv_cancel₀ hβ, one_smul]
+  abel
+
+/-- `Ψ'` as a continuous linear equivalence. -/
+noncomputable def psiCLE (Fxx Fxy Fyy : Matrix (Fin l) (Fin l) ℝ) (β : ℝ) (hQ : Fxy.det ≠ 0)
+    (hβ : β ≠ 0) :
+    ((Fin l → ℝ) × (Fin l → ℝ) × (Fin l → ℝ)) ≃L[ℝ]
+      ((Fin l → ℝ) × (Fin l → ℝ) × (Fin l → ℝ)) :=
+  LinearEquiv.toContinuousLinearEquiv
+    { psiLin Fxx Fxy Fyy β with
+      invFun := psiInvLin Fxx Fxy Fyy β
+      left_inv := psi_inv_left hQ hβ
+      right_inv := psi_inv_right hQ hβ }
+
+theorem psiCLE_apply {Fxx Fxy Fyy : Matrix (Fin l) (Fin l) ℝ} {β : ℝ} (hQ : Fxy.det ≠ 0)
+    (hβ : β ≠ 0) (q : (Fin l → ℝ) × (Fin l → ℝ) × (Fin l → ℝ)) :
+    psiCLE Fxx Fxy Fyy β hQ hβ q = psiLin Fxx Fxy Fyy β q := rfl
+
+theorem psiCLE_symm_apply {Fxx Fxy Fyy : Matrix (Fin l) (Fin l) ℝ} {β : ℝ} (hQ : Fxy.det ≠ 0)
+    (hβ : β ≠ 0) (q : (Fin l → ℝ) × (Fin l → ℝ) × (Fin l → ℝ)) :
+    (psiCLE Fxx Fxy Fyy β hQ hβ).symm q = psiInvLin Fxx Fxy Fyy β q := rfl
+
+variable {Fx Fy : (Fin l → ℝ) → (Fin l → ℝ) → (Fin l → ℝ)} {Fxx Fxy Fyy : Matrix (Fin l) (Fin l) ℝ}
+  {β : ℝ} {xbar : Fin l → ℝ}
+
+/-- `Ψ` is strictly differentiable at `(x̄, x̄, x̄)` with derivative `Ψ'`. -/
+theorem hasStrictFDerivAt_psi (hQ : Fxy.det ≠ 0) (hβ : β ≠ 0)
+    (hFx : HasStrictFDerivAt (fun p : (Fin l → ℝ) × (Fin l → ℝ) => Fx p.1 p.2)
+      (blockCLM Fxx Fxy) (xbar, xbar))
+    (hFy : HasStrictFDerivAt (fun p : (Fin l → ℝ) × (Fin l → ℝ) => Fy p.1 p.2)
+      (blockCLM Fxyᵀ Fyy) (xbar, xbar)) :
+    HasStrictFDerivAt (eulerPsi Fx Fy β)
+      ((psiCLE Fxx Fxy Fyy β hQ hβ : _ ≃L[ℝ] _) : _ →L[ℝ] _) (xbar, xbar, xbar) := by
+  set L1 : (Fin l → ℝ) × (Fin l → ℝ) × (Fin l → ℝ) →L[ℝ] (Fin l → ℝ) × (Fin l → ℝ) :=
+    (ContinuousLinearMap.fst ℝ _ _).prod
+      ((ContinuousLinearMap.fst ℝ _ _).comp (ContinuousLinearMap.snd ℝ _ _))
+  set L2 : (Fin l → ℝ) × (Fin l → ℝ) × (Fin l → ℝ) →L[ℝ] (Fin l → ℝ) × (Fin l → ℝ) :=
+    ContinuousLinearMap.snd ℝ _ _
+  have hG1 := hFy.comp (xbar, xbar, xbar) L1.hasStrictFDerivAt
+  have hG2 := hFx.comp (xbar, xbar, xbar) L2.hasStrictFDerivAt
+  have hG := hG1.add (hG2.const_smul β)
+  have hΨ := (hasStrictFDerivAt_fst (p := (xbar, xbar, xbar))).prodMk
+    ((hasStrictFDerivAt_fst.comp (xbar, xbar, xbar) hasStrictFDerivAt_snd).prodMk hG)
+  have hΨ' : HasStrictFDerivAt (eulerPsi Fx Fy β) _ (xbar, xbar, xbar) := hΨ
+  refine hΨ'.congr_fderiv (ContinuousLinearMap.ext fun q => ?_)
+  change _ = psiLin Fxx Fxy Fyy β q
+  simp only [psiLin, LinearMap.coe_mk, AddHom.coe_mk, ContinuousLinearMap.prod_apply,
+    ContinuousLinearMap.coe_fst', ContinuousLinearMap.coe_comp, Function.comp_apply,
+    ContinuousLinearMap.coe_snd', _root_.add_apply, FunLike.coe_smul,
+    Pi.smul_apply, blockCLM_apply, L1, L2, smul_add]
+
+/-- **The Euler map.** Near the stationary point, `G(x, y, z) = 0` is solved by `z = ζ(x, y)`,
+with `ζ(x̄, x̄) = x̄` and derivative `(u, v) ↦ Ku + Jv`. -/
+theorem exists_eulerZeta (hQ : Fxy.det ≠ 0) (hβ : β ≠ 0)
+    (hstat : eulerG Fx Fy β (xbar, xbar, xbar) = 0)
+    (hFx : HasStrictFDerivAt (fun p : (Fin l → ℝ) × (Fin l → ℝ) => Fx p.1 p.2)
+      (blockCLM Fxx Fxy) (xbar, xbar))
+    (hFy : HasStrictFDerivAt (fun p : (Fin l → ℝ) × (Fin l → ℝ) => Fy p.1 p.2)
+      (blockCLM Fxyᵀ Fyy) (xbar, xbar)) :
+    ∃ ζ : (Fin l → ℝ) × (Fin l → ℝ) → (Fin l → ℝ), ζ (xbar, xbar) = xbar ∧
+      (∀ᶠ p in 𝓝 (xbar, xbar), eulerG Fx Fy β (p.1, p.2, ζ p) = 0) ∧
+      HasStrictFDerivAt ζ (blockCLM (eulerK Fxy β) (eulerJ Fxx Fxy Fyy β)) (xbar, xbar) := by
+  have hΨ := hasStrictFDerivAt_psi (Fxx := Fxx) hQ hβ hFx hFy
+  set inv := hΨ.localInverse (eulerPsi Fx Fy β) _ (xbar, xbar, xbar)
+  set emb : (Fin l → ℝ) × (Fin l → ℝ) →L[ℝ] (Fin l → ℝ) × (Fin l → ℝ) × (Fin l → ℝ) :=
+    (ContinuousLinearMap.fst ℝ _ _).prod ((ContinuousLinearMap.snd ℝ _ _).prod 0)
+  have hemb : emb (xbar, xbar) = eulerPsi Fx Fy β (xbar, xbar, xbar) := by
+    simp [emb, eulerPsi, hstat]
+  set π3 : (Fin l → ℝ) × (Fin l → ℝ) × (Fin l → ℝ) →L[ℝ] (Fin l → ℝ) :=
+    (ContinuousLinearMap.snd ℝ _ _).comp (ContinuousLinearMap.snd ℝ _ _)
+  refine ⟨fun p => π3 (inv (emb p)), ?_, ?_, ?_⟩
+  · change π3 (inv (emb (xbar, xbar))) = xbar
+    rw [hemb]
+    simp only [inv, hΨ.localInverse_apply_image]
+    rfl
+  · have ht : Tendsto emb (𝓝 (xbar, xbar)) (𝓝 (eulerPsi Fx Fy β (xbar, xbar, xbar))) := by
+      rw [← hemb]; exact emb.continuous.tendsto _
+    filter_upwards [ht.eventually hΨ.eventually_right_inverse] with p hp
+    have h1 := congrArg Prod.fst hp
+    have h2 := congrArg (fun q => q.2.1) hp
+    have h3 := congrArg (fun q => q.2.2) hp
+    simp only [eulerPsi, emb, ContinuousLinearMap.prod_apply, ContinuousLinearMap.coe_fst',
+      ContinuousLinearMap.coe_snd', _root_.zero_apply] at h1 h2 h3
+    have e : inv (emb p) = (p.1, p.2, π3 (inv (emb p))) := by
+      refine Prod.ext ?_ (Prod.ext ?_ rfl)
+      · exact h1
+      · exact h2
+    rw [← e]
+    exact h3
+  · have hinv := hΨ.to_localInverse
+    rw [← hemb] at hinv
+    have := (π3.hasStrictFDerivAt.comp _ hinv).comp (xbar, xbar) emb.hasStrictFDerivAt
+    refine this.congr_fderiv (ContinuousLinearMap.ext fun p => ?_)
+    change π3 (psiInvLin Fxx Fxy Fyy β (emb p)) = _
+    obtain ⟨u, v⟩ := p
+    simp only [π3, emb, psiInvLin, LinearMap.coe_mk, AddHom.coe_mk,
+      ContinuousLinearMap.prod_apply, ContinuousLinearMap.coe_fst',
+      ContinuousLinearMap.coe_snd', _root_.zero_apply, ContinuousLinearMap.coe_comp,
+      Function.comp_apply, blockCLM_apply, eulerK, eulerJ]
+    simp only [Matrix.neg_mulVec, Matrix.smul_mulVec, ← Matrix.mulVec_mulVec, Matrix.add_mulVec,
+      Matrix.mulVec_sub, Matrix.mulVec_smul, Matrix.mulVec_add, smul_add, smul_smul,
+      inv_mul_cancel₀ hβ, one_smul, smul_sub, zero_sub, Matrix.mulVec_neg, smul_neg]
+    abel
+
+/-- The stacked map `H(x_{t+1}, x_t) = (ζ(x_t, x_{t+1}), x_{t+1})` on `ℝˡ ⊕ ℝˡ`. -/
+def stackH (ζ : (Fin l → ℝ) × (Fin l → ℝ) → (Fin l → ℝ)) (Y : Fin l ⊕ Fin l → ℝ) :
+    Fin l ⊕ Fin l → ℝ :=
+  Sum.elim (ζ (Y ∘ Sum.inr, Y ∘ Sum.inl)) (Y ∘ Sum.inl)
+
+/-- **`H` has Jacobian `A` at the stationary point.** -/
+theorem hasStrictFDerivAt_stackH {ζ : (Fin l → ℝ) × (Fin l → ℝ) → (Fin l → ℝ)}
+    (hζ : HasStrictFDerivAt ζ (blockCLM (eulerK Fxy β) (eulerJ Fxx Fxy Fyy β)) (xbar, xbar)) :
+    HasStrictFDerivAt (stackH ζ) (clmOf (eulerA Fxx Fxy Fyy β)) (Sum.elim xbar xbar) := by
+  set πr : (Fin l ⊕ Fin l → ℝ) →L[ℝ] (Fin l → ℝ) :=
+    LinearMap.toContinuousLinearMap (LinearMap.funLeft ℝ ℝ Sum.inr)
+  set πl : (Fin l ⊕ Fin l → ℝ) →L[ℝ] (Fin l → ℝ) :=
+    LinearMap.toContinuousLinearMap (LinearMap.funLeft ℝ ℝ Sum.inl)
+  set S : ((Fin l → ℝ) × (Fin l → ℝ)) →L[ℝ] (Fin l ⊕ Fin l → ℝ) :=
+    LinearMap.toContinuousLinearMap
+      (LinearEquiv.sumArrowLequivProdArrow (Fin l) (Fin l) ℝ ℝ).symm.toLinearMap
+  have h1 := hζ.comp (Sum.elim xbar xbar) (πr.prod πl).hasStrictFDerivAt
+  have h := S.hasStrictFDerivAt.comp (Sum.elim xbar xbar) (h1.prodMk πl.hasStrictFDerivAt)
+  have hf : (fun Y => S (ζ ((πr.prod πl) Y), πl Y)) = stackH ζ := by
+    funext Y s
+    rcases s with i | i <;> rfl
+  rw [hf] at h
+  refine h.congr_fderiv (ContinuousLinearMap.ext fun Y => funext fun s => ?_)
+  rcases s with i | i
+  · change (blockCLM (eulerK Fxy β) (eulerJ Fxx Fxy Fyy β) (Y ∘ Sum.inr, Y ∘ Sum.inl)) i =
+      (eulerA Fxx Fxy Fyy β *ᵥ Y) (Sum.inl i)
+    rw [eulerA_mulVec_inl, blockCLM_apply, add_comm]
+  · change Y (Sum.inl i) = (eulerA Fxx Fxy Fyy β *ᵥ Y) (Sum.inr i)
+    rw [eulerA_mulVec_inr]
+
+end StokeyLucasPrescott.DeterministicDynamics
+
+/-
+Copyright (c) 2026 Robert Kirkby. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Robert Kirkby
+-/
+
+/-!
+# Convergent Euler paths near a stationary point
+
+SLP §6.4, pp. 152–154, proof of Theorem 6.9. Apply the stable manifold construction
+(`local_stable_family`) to the stacked Euler map `H` (`EulerMap`), whose Jacobian is `A`. The
+stable manifold of `H` is (near `(x̄, x̄)`) a graph over the stable subspace `E_s`, which has
+dimension `l`. The book then claims that the first `l × l` block of the derivative of `φ` has
+full rank because `φ(x₁, x̄) = 0` only at `x₁ = x̄`; an isolated zero does not give a nonsingular
+derivative. The step goes through when the second-order form of `F` at the steady state is
+negative definite: then `(z₁, z₀) ↦ z₀` is injective on `E_s` (the linear–quadratic argument
+`stable_real_inr_zero`), hence bijective, and we can solve for the point of the manifold with
+prescribed `x₀` by a contraction (`exists_convergent_euler_path`).
+-/
+
+open Set Filter Topology Module
+open scoped Matrix NNReal
+
+namespace StokeyLucasPrescott.DeterministicDynamics
+
+variable {l : ℕ} {Fx Fy : (Fin l → ℝ) → (Fin l → ℝ) → (Fin l → ℝ)}
+  {Fxx Fxy Fyy : Matrix (Fin l) (Fin l) ℝ} {β : ℝ} {xbar : Fin l → ℝ}
+
+/-- `‖Y ∘ inr‖ ≤ ‖Y‖`. -/
+theorem norm_comp_inr_le (Y : Fin l ⊕ Fin l → ℝ) : ‖Y ∘ Sum.inr‖ ≤ ‖Y‖ :=
+  (pi_norm_le_iff_of_nonneg (norm_nonneg _)).2 fun i => norm_le_pi_norm Y (Sum.inr i)
+
+theorem norm_comp_inl_le (Y : Fin l ⊕ Fin l → ℝ) : ‖Y ∘ Sum.inl‖ ≤ ‖Y‖ :=
+  (pi_norm_le_iff_of_nonneg (norm_nonneg _)).2 fun i => norm_le_pi_norm Y (Sum.inl i)
+
+/-- **Convergent Euler paths.** With `F_xy` nonsingular, the second-order form negative
+definite, and `l` characteristic roots of `A` inside the unit circle: for every neighborhood `W`
+of `(x̄, x̄)` there is a neighborhood `U` of `x̄` such that from every `x₀ ∈ U` some path
+satisfies the Euler equations, stays in `W` and converges to `x̄`. -/
+theorem exists_convergent_euler_path (hQ : Fxy.det ≠ 0) (hβ0 : 0 < β) (hβ1 : β < 1)
+    (hneg : ∀ u v : Fin l → ℝ, (u, v) ≠ 0 → lqQ Fxx Fxy Fyy u v < 0)
+    (hroots : (((eulerA Fxx Fxy Fyy β).charpoly.map Complex.ofRealHom).roots.filter
+      fun μ => ‖μ‖ < 1).card = l)
+    (hstat : eulerG Fx Fy β (xbar, xbar, xbar) = 0)
+    (hFx : HasStrictFDerivAt (fun p : (Fin l → ℝ) × (Fin l → ℝ) => Fx p.1 p.2)
+      (blockCLM Fxx Fxy) (xbar, xbar))
+    (hFy : HasStrictFDerivAt (fun p : (Fin l → ℝ) × (Fin l → ℝ) => Fy p.1 p.2)
+      (blockCLM Fxyᵀ Fyy) (xbar, xbar))
+    {W : Set ((Fin l → ℝ) × (Fin l → ℝ))} (hW : W ∈ 𝓝 (xbar, xbar)) :
+    ∃ U ∈ 𝓝 xbar, ∀ x₀ ∈ U, ∃ x : ℕ → Fin l → ℝ, x 0 = x₀ ∧
+      (∀ t, eulerG Fx Fy β (x t, x (t + 1), x (t + 2)) = 0) ∧
+      (∀ t, (x t, x (t + 1)) ∈ W) ∧ Tendsto x atTop (𝓝 xbar) := by
+  set A := eulerA Fxx Fxy Fyy β
+  obtain ⟨ζ, hζ0, hζG, hζ⟩ := exists_eulerZeta hQ hβ0.ne' hstat hFx hFy
+  have hH := hasStrictFDerivAt_stackH hζ
+  set Ybar : Fin l ⊕ Fin l → ℝ := Sum.elim xbar xbar
+  have hfix : stackH ζ Ybar = Ybar := by
+    funext s; rcases s with i | i
+    · change ζ (xbar, xbar) i = xbar i; rw [hζ0]
+    · rfl
+  obtain ⟨γ, hγ0, hγ1, C, hC0, δ, hδ, Z, hZP, hZb, horbit, hlipQ⟩ := local_stable_family hfix hH
+  -- the projection `(z₁, z₀) ↦ z₀` on `E_s` is a bijection onto `ℝˡ`
+  set L : stableR A →ₗ[ℝ] (Fin l → ℝ) :=
+    (LinearMap.funLeft ℝ ℝ Sum.inr).comp (stableR A).subtype
+  have hLinj : Function.Injective L := by
+    refine (injective_iff_map_eq_zero L).2 fun ξ hξ => Subtype.ext ?_
+    exact stable_real_inr_zero hneg hβ0 hβ1 hQ (fun i => congrFun hξ i)
+      ((mem_stableR_iff A ξ).1 ξ.2)
+  have hdim : finrank ℝ (stableR A) = finrank ℝ (Fin l → ℝ) := by
+    rw [finrank_stableR, hroots, Module.finrank_fin_fun]
+  have hLsurj := (LinearMap.injective_iff_surjective_of_finrank_eq_finrank hdim).1 hLinj
+  set Le := LinearEquiv.ofBijective L ⟨hLinj, hLsurj⟩
+  set Linv : (Fin l → ℝ) →L[ℝ] (Fin l ⊕ Fin l → ℝ) :=
+    LinearMap.toContinuousLinearMap ((stableR A).subtype ∘ₗ Le.symm.toLinearMap)
+  set CL := ‖Linv‖
+  have hLinv_mem : ∀ d, Linv d ∈ stableR A := fun d => (Le.symm d).2
+  have hLinv_inr : ∀ d, Linv d ∘ Sum.inr = d := fun d => by
+    have := Le.apply_symm_apply d
+    exact this
+  have hZ00 : Z 0 0 = 0 := by
+    have := hZb 0 0
+    simp only [norm_zero, mul_zero, zero_mul] at this
+    exact norm_le_zero_iff.1 this
+  set η := 1 / (2 * (CL + 1))
+  have hCL : 0 ≤ CL := norm_nonneg _
+  have hη : 0 < η := by positivity
+  obtain ⟨δ', hδ', hlip⟩ := hlipQ η hη
+  -- neighborhoods
+  obtain ⟨ρ, hρ, hρN⟩ := Metric.mem_nhds_iff.1 (inter_mem hW hζG)
+  set R := min (min δ δ') (ρ / (2 * (C + 1)))
+  have hR : 0 < R := lt_min (lt_min hδ hδ') (by positivity)
+  have hRδ : R ≤ δ := (min_le_left _ _).trans (min_le_left _ _)
+  have hRδ' : R ≤ δ' := (min_le_left _ _).trans (min_le_right _ _)
+  have hRρ : C * R < ρ := by
+    have h1 : R ≤ ρ / (2 * (C + 1)) := min_le_right _ _
+    rw [le_div_iff₀ (by positivity)] at h1
+    nlinarith
+  refine ⟨Metric.ball xbar (R / (2 * (CL + 1))), Metric.ball_mem_nhds _ (by positivity),
+    fun x₀ hx₀ => ?_⟩
+  set d := x₀ - xbar
+  have hd : ‖d‖ ≤ R / (2 * (CL + 1)) := by
+    rw [Metric.mem_ball, dist_eq_norm] at hx₀; exact hx₀.le
+  have hCLd : CL * ‖d‖ ≤ R / 2 := by
+    rw [le_div_iff₀ (by positivity)] at hd
+    have : CL * ‖d‖ * (2 * (CL + 1)) ≤ R * CL := by nlinarith [norm_nonneg d]
+    nlinarith [norm_nonneg d]
+  have hCLη : CL * η ≤ 1 / 2 := by
+    simp only [η]; rw [mul_one_div, div_le_div_iff₀ (by positivity) (by norm_num)]; linarith
+  -- the contraction `T ξ = L⁻¹(d − (Q z₀(ξ))₀)`
+  set T : (Fin l ⊕ Fin l → ℝ) → (Fin l ⊕ Fin l → ℝ) :=
+    fun ξ => Linv (d - projU A (Z ξ 0) ∘ Sum.inr)
+  set s := Metric.closedBall (0 : Fin l ⊕ Fin l → ℝ) R
+  have hQ0 : ∀ ξ ∈ s, ‖projU A (Z ξ 0)‖ ≤ η * ‖ξ‖ := fun ξ hξ => by
+    rw [Metric.mem_closedBall, dist_zero_right] at hξ
+    have := hlip ξ 0 (hξ.trans hRδ') (by rw [norm_zero]; exact hδ'.le)
+    rwa [hZ00, map_zero, sub_zero, sub_zero] at this
+  have hsf : MapsTo T s s := fun ξ hξ => by
+    have hξ' := hξ
+    rw [Metric.mem_closedBall, dist_zero_right] at hξ ⊢
+    refine (Linv.le_opNorm _).trans ?_
+    have h1 : ‖d - projU A (Z ξ 0) ∘ Sum.inr‖ ≤ ‖d‖ + η * ‖ξ‖ :=
+      (norm_sub_le _ _).trans (add_le_add le_rfl ((norm_comp_inr_le _).trans (hQ0 ξ hξ')))
+    have h2 := mul_le_mul_of_nonneg_left h1 hCL
+    have h3 : CL * (η * ‖ξ‖) ≤ R / 2 := by
+      have := mul_le_mul_of_nonneg_right hCLη (norm_nonneg ξ)
+      nlinarith
+    linarith
+  have hTlip : ∀ ξ ∈ s, ∀ ξ' ∈ s, ‖T ξ - T ξ'‖ ≤ (1 / 2) * ‖ξ - ξ'‖ := fun ξ hξ ξ' hξ' => by
+    have hξn : ‖ξ‖ ≤ δ' := by
+      rw [Metric.mem_closedBall, dist_zero_right] at hξ; exact hξ.trans hRδ'
+    have hξn' : ‖ξ'‖ ≤ δ' := by
+      rw [Metric.mem_closedBall, dist_zero_right] at hξ'; exact hξ'.trans hRδ'
+    have e : T ξ - T ξ' = Linv ((projU A (Z ξ' 0) - projU A (Z ξ 0)) ∘ Sum.inr) := by
+      simp only [T, ← map_sub]; congr 1; funext i; simp
+    rw [e]
+    refine (Linv.le_opNorm _).trans ?_
+    have h1 := (norm_comp_inr_le _).trans (hlip ξ' ξ hξn' hξn)
+    rw [norm_sub_rev ξ' ξ] at h1
+    have := mul_le_mul_of_nonneg_left h1 hCL
+    have := mul_le_mul_of_nonneg_right hCLη (norm_nonneg (ξ - ξ'))
+    nlinarith
+  have hcontr : ContractingWith (1 / 2 : ℝ≥0) (hsf.restrict T s s) :=
+    ⟨by norm_num, LipschitzWith.of_dist_le_mul fun a b => by
+      simp only [Subtype.dist_eq, MapsTo.val_restrict_apply, dist_eq_norm]
+      simpa using hTlip a a.2 b b.2⟩
+  obtain ⟨ξ, hξs, hξfix, -⟩ := ContractingWith.exists_fixedPoint'
+    Metric.isClosed_closedBall.isComplete hsf hcontr (Metric.mem_closedBall_self hR.le)
+    (edist_ne_top _ _)
+  have hξfix' : T ξ = ξ := hξfix
+  have hξR : ‖ξ‖ ≤ R := by rw [Metric.mem_closedBall, dist_zero_right] at hξs; exact hξs
+  -- `ξ` is stable, and `z₀(ξ)` has second block `d`
+  have hξst : ξ ∈ stableR A := by rw [← hξfix']; exact hLinv_mem _
+  have hz0 : Z ξ 0 ∘ Sum.inr = d := by
+    have h1 : Z ξ 0 = ξ + projU A (Z ξ 0) := by
+      conv_lhs => rw [← projS_add_projU A (Z ξ 0)]
+      rw [hZP, projS_of_mem A hξst]
+    have h2 : ξ ∘ Sum.inr = d - projU A (Z ξ 0) ∘ Sum.inr := by
+      conv_lhs => rw [← hξfix']
+      exact hLinv_inr _
+    funext i
+    have := congrFun h2 i
+    simp only [Function.comp_apply, Pi.sub_apply] at this
+    rw [Function.comp_apply, h1, Pi.add_apply, this]
+    ring
+  -- the orbit of `H` and the path
+  set Yt : ℕ → Fin l ⊕ Fin l → ℝ := fun t => Ybar + Z ξ t
+  have hYt : ∀ t, Yt (t + 1) = stackH ζ (Yt t) := fun t => by
+    simp only [Yt]
+    rw [← horbit ξ (hξR.trans hRδ) (t + 1), ← horbit ξ (hξR.trans hRδ) t,
+      Function.iterate_succ_apply']
+  set x : ℕ → Fin l → ℝ := fun t => Yt t ∘ Sum.inr
+  have hx1 : ∀ t, x (t + 1) = Yt t ∘ Sum.inl := fun t => by
+    simp only [x]; rw [hYt]; rfl
+  have hx2 : ∀ t, x (t + 2) = ζ (x t, x (t + 1)) := fun t => by
+    rw [hx1 (t + 1), hYt, hx1 t]; rfl
+  have hZt : ∀ t, ‖Z ξ t‖ ≤ C * R := fun t => (hZb ξ t).trans (by
+    have := pow_le_one₀ hγ0.le hγ1.le (n := t)
+    have := mul_le_mul_of_nonneg_left hξR hC0
+    nlinarith [norm_nonneg ξ, mul_nonneg hC0 (norm_nonneg ξ)])
+  have hpair : ∀ t, (x t, x (t + 1)) ∈ W ∩ {p | eulerG Fx Fy β (p.1, p.2, ζ p) = 0} :=
+    fun t => hρN (by
+      rw [Metric.mem_ball, Prod.dist_eq, hx1]
+      refine max_lt ?_ ?_
+      · rw [dist_eq_norm]
+        have : x t - xbar = Z ξ t ∘ Sum.inr := by funext i; simp [x, Yt, Ybar]
+        rw [this]; exact ((norm_comp_inr_le _).trans (hZt t)).trans_lt hRρ
+      · rw [dist_eq_norm]
+        have : Yt t ∘ Sum.inl - xbar = Z ξ t ∘ Sum.inl := by funext i; simp [Yt, Ybar]
+        rw [this]; exact ((norm_comp_inl_le _).trans (hZt t)).trans_lt hRρ)
+  refine ⟨x, ?_, fun t => ?_, fun t => (hpair t).1, ?_⟩
+  · funext i
+    have := congrFun hz0 i
+    simp only [Function.comp_apply] at this
+    simp [x, Yt, Ybar, this, d]
+  · rw [hx2]; exact (hpair t).2
+  · rw [tendsto_iff_norm_sub_tendsto_zero]
+    have hlim := (tendsto_pow_atTop_nhds_zero_of_lt_one hγ0.le hγ1).const_mul (C * ‖ξ‖)
+    rw [mul_zero] at hlim
+    refine squeeze_zero (fun t => norm_nonneg _) (fun t => ?_) hlim
+    have : x t - xbar = Z ξ t ∘ Sum.inr := by funext i; simp [x, Yt, Ybar]
+    rw [this]
+    exact (norm_comp_inr_le _).trans (hZb ξ t)
+
+end StokeyLucasPrescott.DeterministicDynamics
+
+/-
+Copyright (c) 2026 Robert Kirkby. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Robert Kirkby
+-/
+
+/-!
+# Local stability of optimal paths (Theorem 6.9)
+
+SLP §6.4, p. 153. `F` is strictly concave on the convex graph of `Γ`, bounded there, and the
+states are bounded; `x̄` is an interior stationary point at which `F` has gradient `(F_x, F_y)`
+near `(x̄, x̄)`, strictly differentiable there with second derivatives `F_xx`, `F_xy`, `F_yy`;
+`F_xy` is nonsingular and `A` has `l` characteristic roots inside the unit circle. Then for
+every `x₀` close to `x̄` the optimal plan exists, is unique, and converges to `x̄`
+(`theorem_6_9`).
+
+The proof: `exists_convergent_euler_path` gives a feasible path satisfying the Euler equations
+and converging to `x̄`. It is optimal by `euler_sufficient` (concavity, bounded states), and
+optimal plans are unique by strict concavity (`optimal_unique`).
+
+**Correction.** The book's proof needs the second-order form
+`½u'F_xx u + u'F_xy v + ½v'F_yy v` to be negative definite (not just `F` strictly concave): see
+`NonlinearEuler`.
+-/
+
+open Set Filter Topology Module
+open scoped Matrix NNReal
+
+namespace StokeyLucasPrescott.DeterministicDynamics
+
+variable {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]
+
+omit [NormedAddCommGroup E] [NormedSpace ℝ E] in
+/-- Bounded returns make the value of a feasible plan the sum of a convergent series. -/
+theorem total_eq_tsum_of_bdd {Γ : E → Set E} {F : E × E → ℝ} {β M : ℝ} (hβ0 : 0 ≤ β)
+    (hβ1 : β < 1) (hM : ∀ p : E × E, p.2 ∈ Γ p.1 → |F p| ≤ M) {x₀ : E} {x : ℕ → E}
+    (hx : x ∈ Feasible Γ x₀) :
+    Summable (fun t => β ^ t * F (x t, x (t + 1))) ∧
+      total (fun a b => F (a, b)) β x = ((∑' t, β ^ t * F (x t, x (t + 1)) : ℝ) : EReal) := by
+  have hs : Summable fun t => β ^ t * F (x t, x (t + 1)) := by
+    refine Summable.of_norm_bounded ((summable_geometric_of_lt_one hβ0 hβ1).mul_right M)
+      fun t => ?_
+    rw [norm_mul, norm_pow, Real.norm_of_nonneg hβ0, Real.norm_eq_abs]
+    exact mul_le_mul_of_nonneg_left (hM _ (hx.2 t)) (pow_nonneg hβ0 t)
+  refine ⟨hs, ?_⟩
+  have hlim : Tendsto (fun n => (partialSum (fun a b => F (a, b)) β x n : EReal)) atTop
+      (𝓝 ((∑' t, β ^ t * F (x t, x (t + 1)) : ℝ) : EReal)) :=
+    EReal.tendsto_coe.2 (hs.hasSum.tendsto_sum_nat.comp (tendsto_add_atTop_nat 1))
+  exact tendsto_nhds_unique (tendsto_nhds_limUnder ⟨_, hlim⟩) hlim
+
+/-- **Uniqueness of the optimal plan** under strict concavity on a convex graph. -/
+theorem optimal_unique {Γ : E → Set E} {F : E × E → ℝ} {β M : ℝ} (hβ0 : 0 < β) (hβ1 : β < 1)
+    (hconv : Convex ℝ {p : E × E | p.2 ∈ Γ p.1})
+    (hconc : StrictConcaveOn ℝ {p : E × E | p.2 ∈ Γ p.1} F)
+    (hM : ∀ p : E × E, p.2 ∈ Γ p.1 → |F p| ≤ M) {x₀ : E} {x y : ℕ → E}
+    (hx : x ∈ Feasible Γ x₀) (hy : y ∈ Feasible Γ x₀)
+    (hxo : total (fun a b => F (a, b)) β x = vstar Γ (fun a b => F (a, b)) β x₀)
+    (hyo : total (fun a b => F (a, b)) β y = vstar Γ (fun a b => F (a, b)) β x₀) : y = x := by
+  obtain ⟨hsx, htx⟩ := total_eq_tsum_of_bdd hβ0.le hβ1 hM hx
+  obtain ⟨hsy, hty⟩ := total_eq_tsum_of_bdd hβ0.le hβ1 hM hy
+  by_contra hne
+  obtain ⟨s, hs⟩ : ∃ s, y s ≠ x s := by
+    by_contra h; push Not at h; exact hne (funext h)
+  obtain ⟨t₀, rfl⟩ : ∃ t₀, s = t₀ + 1 := by
+    rcases s with _ | t₀
+    · exact absurd (hy.1.trans hx.1.symm) hs
+    · exact ⟨t₀, rfl⟩
+  -- the midpoint plan
+  set z : ℕ → E := fun t => (1 / 2 : ℝ) • x t + (1 / 2 : ℝ) • y t
+  have hmem : ∀ t, (z t, z (t + 1)) = (1 / 2 : ℝ) • (x t, x (t + 1)) +
+      (1 / 2 : ℝ) • (y t, y (t + 1)) := fun t => by simp [z]
+  have hxG : ∀ t, (x t, x (t + 1)) ∈ {p : E × E | p.2 ∈ Γ p.1} := hx.2
+  have hyG : ∀ t, (y t, y (t + 1)) ∈ {p : E × E | p.2 ∈ Γ p.1} := hy.2
+  have hz : z ∈ Feasible Γ x₀ := ⟨by
+      simp only [z, hx.1, hy.1]; rw [← add_smul]; norm_num, fun t => by
+    have := hconv (hxG t) (hyG t) (by norm_num : (0 : ℝ) ≤ 1 / 2)
+      (by norm_num : (0 : ℝ) ≤ 1 / 2) (by norm_num)
+    rw [← hmem] at this; exact this⟩
+  have hgain : ∀ t, (F (x t, x (t + 1)) + F (y t, y (t + 1))) / 2 ≤ F (z t, z (t + 1)) :=
+    fun t => by
+      have := hconc.concaveOn.2 (hxG t) (hyG t) (by norm_num : (0 : ℝ) ≤ 1 / 2)
+        (by norm_num : (0 : ℝ) ≤ 1 / 2) (by norm_num)
+      rw [← hmem] at this; simp only [smul_eq_mul] at this; linarith
+  have hpair : (x t₀, x (t₀ + 1)) ≠ (y t₀, y (t₀ + 1)) := fun h =>
+    hs (congrArg Prod.snd h).symm
+  have hstrict : (F (x t₀, x (t₀ + 1)) + F (y t₀, y (t₀ + 1))) / 2 < F (z t₀, z (t₀ + 1)) := by
+    have := hconc.2 (hxG t₀) (hyG t₀) hpair (by norm_num : (0 : ℝ) < 1 / 2)
+      (by norm_num : (0 : ℝ) < 1 / 2) (by norm_num)
+    rw [← hmem] at this; simp only [smul_eq_mul] at this; linarith
+  obtain ⟨hsz, htz⟩ := total_eq_tsum_of_bdd hβ0.le hβ1 hM hz
+  set ℓ := ∑' t, β ^ t * F (x t, x (t + 1))
+  have hyℓ : ∑' t, β ^ t * F (y t, y (t + 1)) = ℓ := by
+    have := hty.symm.trans (hyo.trans (hxo.symm.trans htx))
+    exact EReal.coe_injective this
+  have hzle : ∑' t, β ^ t * F (z t, z (t + 1)) ≤ ℓ := by
+    have h1 : total (fun a b => F (a, b)) β z ≤ vstar Γ (fun a b => F (a, b)) β x₀ :=
+      le_biSup (fun p => total (fun a b => F (a, b)) β p) hz
+    rw [htz, ← hxo, htx] at h1
+    have := h1
+    exact EReal.coe_le_coe_iff.1 this
+  -- termwise `β^t F(z) ≥ ½(β^t F(x) + β^t F(y))`, strictly at `t₀`
+  have hlt : ∑' t, (β ^ t * F (x t, x (t + 1)) + β ^ t * F (y t, y (t + 1))) / 2 <
+      ∑' t, β ^ t * F (z t, z (t + 1)) := by
+    refine Summable.tsum_lt_tsum (i := t₀) (fun t => ?_) ?_ ((hsx.add hsy).div_const 2) hsz
+    · have := mul_le_mul_of_nonneg_left (hgain t) (pow_nonneg hβ0.le t)
+      linarith
+    · have := mul_lt_mul_of_pos_left hstrict (pow_pos hβ0 t₀)
+      linarith
+  have e : ∑' t, (β ^ t * F (x t, x (t + 1)) + β ^ t * F (y t, y (t + 1))) / 2 = ℓ := by
+    rw [tsum_div_const, hsx.tsum_add hsy, hyℓ]; ring
+  linarith
+
+variable {l : ℕ} {Fx Fy : (Fin l → ℝ) → (Fin l → ℝ) → (Fin l → ℝ)}
+  {Fxx Fxy Fyy : Matrix (Fin l) (Fin l) ℝ} {β : ℝ} {xbar : Fin l → ℝ}
+
+/-- **Theorem 6.9.** -/
+theorem theorem_6_9 {Γ : (Fin l → ℝ) → Set (Fin l → ℝ)} {F : (Fin l → ℝ) × (Fin l → ℝ) → ℝ}
+    (hβ0 : 0 < β) (hβ1 : β < 1)
+    (hconv : Convex ℝ {p : (Fin l → ℝ) × (Fin l → ℝ) | p.2 ∈ Γ p.1})
+    (hconc : StrictConcaveOn ℝ {p : (Fin l → ℝ) × (Fin l → ℝ) | p.2 ∈ Γ p.1} F)
+    {M : ℝ} (hM : ∀ p : (Fin l → ℝ) × (Fin l → ℝ), p.2 ∈ Γ p.1 → |F p| ≤ M)
+    {B : ℝ} (hB : ∀ x, ∀ y ∈ Γ x, ‖y‖ ≤ B)
+    (hint : {p : (Fin l → ℝ) × (Fin l → ℝ) | p.2 ∈ Γ p.1} ∈ 𝓝 (xbar, xbar))
+    (hdiff : ∀ᶠ p in 𝓝 (xbar, xbar), HasFDerivAt F (lqD (Fx p.1 p.2) (Fy p.1 p.2)) p)
+    (hFx : HasStrictFDerivAt (fun p : (Fin l → ℝ) × (Fin l → ℝ) => Fx p.1 p.2)
+      (blockCLM Fxx Fxy) (xbar, xbar))
+    (hFy : HasStrictFDerivAt (fun p : (Fin l → ℝ) × (Fin l → ℝ) => Fy p.1 p.2)
+      (blockCLM Fxyᵀ Fyy) (xbar, xbar))
+    (hstat : Fy xbar xbar + β • Fx xbar xbar = 0) (hQ : Fxy.det ≠ 0)
+    (hneg : ∀ u v : Fin l → ℝ, (u, v) ≠ 0 → lqQ Fxx Fxy Fyy u v < 0)
+    (hroots : (((eulerA Fxx Fxy Fyy β).charpoly.map Complex.ofRealHom).roots.filter
+      fun μ => ‖μ‖ < 1).card = l) :
+    ∃ U ∈ 𝓝 xbar, ∀ x₀ ∈ U, ∃ xs : ℕ → Fin l → ℝ, xs ∈ Feasible Γ x₀ ∧
+      total (fun a b => F (a, b)) β xs = vstar Γ (fun a b => F (a, b)) β x₀ ∧
+      (∀ y ∈ Feasible Γ x₀,
+        total (fun a b => F (a, b)) β y = vstar Γ (fun a b => F (a, b)) β x₀ → y = xs) ∧
+      Tendsto xs atTop (𝓝 xbar) := by
+  set G := {p : (Fin l → ℝ) × (Fin l → ℝ) | p.2 ∈ Γ p.1}
+  have hW : G ∩ {p | HasFDerivAt F (lqD (Fx p.1 p.2) (Fy p.1 p.2)) p} ∈ 𝓝 (xbar, xbar) :=
+    inter_mem hint hdiff
+  obtain ⟨U, hU, hpath⟩ := exists_convergent_euler_path hQ hβ0 hβ1 hneg hroots hstat hFx hFy hW
+  refine ⟨U, hU, fun x₀ hx₀ => ?_⟩
+  obtain ⟨xs, hx0, heul, hWt, hconvx⟩ := hpath x₀ hx₀
+  have hfeas : xs ∈ Feasible Γ x₀ := ⟨hx0, fun t => (hWt t).1⟩
+  -- Assumption 4.2 from bounded returns
+  have h42 : Assumption42 Γ (fun a b => F (a, b)) β :=
+    assumption42_of_summable_pos fun x₀ x hx =>
+      summable_max_of_le_geometric hβ0.le hβ1 (le_max_right M 0) fun t => by
+        rw [mul_comm (max M 0)]
+        exact mul_le_mul_of_nonneg_left ((le_abs_self _).trans ((hM _ (hx.2 t)).trans
+          (le_max_left _ _))) (pow_nonneg hβ0.le t)
+  -- the gradient of `F` along the path is bounded
+  have hFxc : ContinuousAt (fun p : (Fin l → ℝ) × (Fin l → ℝ) => Fx p.1 p.2) (xbar, xbar) :=
+    hFx.continuousAt
+  have hpt : Tendsto (fun t => (xs t, xs (t + 1))) atTop (𝓝 (xbar, xbar)) :=
+    hconvx.prodMk_nhds (hconvx.comp (tendsto_add_atTop_nat 1))
+  have hg : Tendsto (fun t => ∑ i, |Fx (xs t) (xs (t + 1)) i|) atTop
+      (𝓝 (∑ i, |Fx xbar xbar i|)) := by
+    have h := hFxc.tendsto.comp hpt
+    simp only [Function.comp_def] at h
+    exact tendsto_finsetSum _ fun i _ => (tendsto_pi_nhds.1 h i).abs
+  obtain ⟨Gb, hGb⟩ := hg.bddAbove_range
+  obtain ⟨Bx, hBx⟩ := hconvx.norm.bddAbove_range
+  -- optimality
+  set D : ℕ → (Fin l → ℝ) × (Fin l → ℝ) →L[ℝ] ℝ := fun t =>
+    lqD (Fx (xs t) (xs (t + 1))) (Fy (xs t) (xs (t + 1)))
+  have hopt : total (fun a b => F (a, b)) β xs = vstar Γ (fun a b => F (a, b)) β x₀ := by
+    refine euler_sufficient h42 hfeas D (fun t x y hy => ?_) (fun t v => ?_) hβ0.le
+      (fun y _ _ => ?_)
+    · have := concave_le_fderiv hconc.concaveOn (hWt t).1 (show (x, y) ∈ G from hy) (hWt t).2
+      exact this
+    · have h := congrArg (· ⬝ᵥ v) (heul t)
+      simp only [eulerG, add_dotProduct, smul_dotProduct, smul_eq_mul, zero_dotProduct] at h
+      simp only [DeterministicDynamics.Fy, DeterministicDynamics.Fx, D, lqD_apply,
+        dotProduct_zero, zero_add, add_zero]
+      exact h
+    · set G' := max Gb 0
+      refine ⟨fun T => G' * (Bx + B) * β ^ (T + 1), ?_, fun T => ?_⟩
+      · have := ((tendsto_pow_atTop_nhds_zero_of_lt_one hβ0.le hβ1).comp
+          (tendsto_add_atTop_nat 1)).const_mul (G' * (Bx + B))
+        simpa [Function.comp_def] using this
+      · simp only [DeterministicDynamics.Fx, D, lqD_apply, dotProduct_zero, add_zero]
+        have hd := (le_abs_self _).trans (abs_dot_le (Fx (xs (T + 1)) (xs (T + 1 + 1)))
+          (xs (T + 1) - y (T + 1)))
+        have hGT : ∑ i, |Fx (xs (T + 1)) (xs (T + 1 + 1)) i| ≤ G' :=
+          (hGb ⟨T + 1, rfl⟩).trans (le_max_left _ _)
+        have hn : ‖xs (T + 1) - y (T + 1)‖ ≤ Bx + B :=
+          (norm_sub_le _ _).trans (add_le_add (hBx ⟨T + 1, rfl⟩) (hB _ _ (by
+            rename_i hy _; exact hy.2 T)))
+        have hG0 : 0 ≤ G' := le_max_right _ _
+        have hβT := pow_nonneg hβ0.le (T + 1)
+        have h3 := mul_le_mul hGT hn (norm_nonneg _) hG0
+        nlinarith
+  exact ⟨xs, hfeas, hopt, fun y hy hyo =>
+    optimal_unique hβ0 hβ1 hconv hconc hM hfeas hy hopt hyo, hconvx⟩
+
+end StokeyLucasPrescott.DeterministicDynamics
+
+/-
+Copyright (c) 2026 Robert Kirkby. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Robert Kirkby
+-/
+
+/-!
+# A constant-returns-to-scale industry (Exercise 6.9)
+
+SLP §6.5, pp. 159–160. Output is `q = xφ(y/x)` (`crsQ`), the return is
+`F(x, y) = S(xφ(y/x)) − θ[y − (1 − δ)x]` (`crsF`) and `Γ(x) = [0, αx]`, with `φ` strictly
+decreasing and strictly concave on `[0, α]`, `φ(0) > 0 = φ(α)`, `φ'(u) → −∞` as `u → α`, and
+`S` bounded, strictly increasing and strictly concave (`CRSHyp`).
+
+This file works with any `V` concave on `[0, K]` that solves the functional equation there, with
+`Γ(x) = [0, min{αx, K}]` (`CRSValue`).
+
+* `V` is strictly increasing (`strictMonoOn`), since `F` is (`crsF_lt`): by concavity
+  `x'φ(y/x') ≥ xφ(y/x) + (x' − x)φ(0)`.
+* **Interior choices** (`argmax_lt`): at `x > 0` the maximizer is below `αx`, because
+  `F_y → −∞` there while `V` has bounded slopes.
+* **Unique maximizer** (`argmax_unique`): `y ↦ S(xφ(y/x))` is strictly concave.
+* **Exercise 6.9a** (`hasDerivAt_V`):
+  `v'(x) = S'[xφ(u)][φ(u) − uφ'(u)] + θ(1 − δ)`, `u = g(x)/x`.
+* **Exercise 6.9b** (`argmax_mono`): `g` is nondecreasing. `z ↦ F(z, y) − F(z, y')` is strictly
+  increasing for `y' < y`, because `S'` falls in output while `φ(u) − uφ'(u)` rises in `u`.
+* **Exercise 6.9c** (`stationary_eq`, `stationary_unique`, `no_stationary`): an interior
+  stationary point satisfies `S'(x̄φ(1))[βφ(1) + (1 − β)φ'(1)] = θ(1 − β(1 − δ))`. So there is at
+  most one, and **none** when `βφ(1) + (1 − β)φ'(1) ≤ 0`.
+-/
+
+open Set Filter Topology
+
+namespace StokeyLucasPrescott.DeterministicDynamics
+
+/-- Output `q = xφ(y/x)`. -/
+noncomputable def crsQ (φ : ℝ → ℝ) (x y : ℝ) : ℝ := x * φ (y / x)
+
+/-- The return `F(x, y) = S(xφ(y/x)) − θ[y − (1 − δ)x]`. -/
+noncomputable def crsF (S φ : ℝ → ℝ) (θ δ x y : ℝ) : ℝ := S (crsQ φ x y) - θ * (y - (1 - δ) * x)
+
+/-- The hypotheses of Exercise 6.9. -/
+structure CRSHyp (S φ S' φ' : ℝ → ℝ) (α θ δ β : ℝ) : Prop where
+  α_gt : 1 < α
+  θ_pos : 0 < θ
+  δ_pos : 0 < δ
+  δ_lt : δ < 1
+  β_pos : 0 < β
+  β_lt : β < 1
+  φ_anti : StrictAntiOn φ (Icc 0 α)
+  φ_conc : StrictConcaveOn ℝ (Icc 0 α) φ
+  φ_zero : 0 < φ 0
+  φ_α : φ α = 0
+  φ_deriv : ∀ u ∈ Ico 0 α, HasDerivAt φ (φ' u) u
+  φ'_lim : Tendsto φ' (𝓝[<] α) atBot
+  S_mono : StrictMonoOn S (Ici 0)
+  S_conc : StrictConcaveOn ℝ (Ici 0) S
+  S_deriv : ∀ q, 0 ≤ q → HasDerivAt S (S' q) q
+
+namespace CRSHyp
+
+variable {S φ S' φ' : ℝ → ℝ} {α θ δ β : ℝ} (h : CRSHyp S φ S' φ' α θ δ β)
+include h
+
+theorem α_pos : 0 < α := by linarith [h.α_gt]
+
+theorem φ_nonneg {u : ℝ} (hu : u ∈ Icc 0 α) : 0 ≤ φ u := by
+  rcases eq_or_lt_of_le hu.2 with he | hlt
+  · rw [he, h.φ_α]
+  · rw [← h.φ_α]; exact (h.φ_anti hu ⟨h.α_pos.le, le_rfl⟩ hlt).le
+
+theorem φ_le {u : ℝ} (hu : u ∈ Icc 0 α) : φ u ≤ φ 0 := by
+  rcases eq_or_lt_of_le hu.1 with he | hlt
+  · rw [← he]
+  · exact (h.φ_anti ⟨le_rfl, h.α_pos.le⟩ hu hlt).le
+
+theorem φ_pos {u : ℝ} (hu : u ∈ Ico 0 α) : 0 < φ u := by
+  rw [← h.φ_α]; exact h.φ_anti ⟨hu.1, hu.2.le⟩ ⟨h.α_pos.le, le_rfl⟩ hu.2
+
+/-- `S' > 0`. -/
+theorem S'_pos {q : ℝ} (hq : 0 ≤ q) : 0 < S' q := by
+  have h1 := tangent_le h.S_conc.concaveOn (a := q) (b := q + 1) (mem_Ici.2 hq)
+    (mem_Ici.2 (by linarith)) (h.S_deriv q hq)
+  have h2 := h.S_mono (mem_Ici.2 hq) (mem_Ici.2 (by linarith : 0 ≤ q + 1)) (by linarith)
+  linarith
+
+/-- `S'` falls strictly. -/
+theorem S'_lt {q q' : ℝ} (hq : 0 ≤ q) (hqq' : q < q') : S' q' < S' q :=
+  deriv_lt_of_strictConcave h.S_conc (mem_Ici.2 hq) (mem_Ici.2 (by linarith)) hqq'
+    (h.S_deriv q hq) (h.S_deriv q' (by linarith))
+
+omit h in
+/-- `u ∈ [0, α]` for `0 ≤ y ≤ αx`, `x > 0`. -/
+theorem ratio_mem {x y : ℝ} (hx : 0 < x) (hy : 0 ≤ y) (hyx : y ≤ α * x) : y / x ∈ Icc 0 α :=
+  ⟨div_nonneg hy hx.le, (div_le_iff₀ hx).2 (by linarith)⟩
+
+theorem crsQ_nonneg {x y : ℝ} (hx : 0 ≤ x) (hy : 0 ≤ y) (hyx : y ≤ α * x) :
+    0 ≤ crsQ φ x y := by
+  rcases eq_or_lt_of_le hx with h0 | hpos
+  · simp [crsQ, ← h0]
+  · exact mul_nonneg hx (h.φ_nonneg (ratio_mem hpos hy hyx))
+
+/-- `x'φ(y/x') ≥ xφ(y/x) + (x' − x)φ(0)` for `x ≤ x'`. -/
+theorem crsQ_mono {x x' y : ℝ} (hx : 0 ≤ x) (hxx' : x ≤ x') (hy : 0 ≤ y) (hyx : y ≤ α * x) :
+    crsQ φ x y + (x' - x) * φ 0 ≤ crsQ φ x' y := by
+  rcases eq_or_lt_of_le hx with h0 | hpos
+  · subst h0
+    have : y = 0 := by linarith
+    subst this
+    simp [crsQ]
+  have hx'pos : 0 < x' := by linarith
+  have hu := ratio_mem hpos hy hyx
+  -- `y/x' = (x/x')(y/x) + (1 − x/x')·0`
+  have hc := h.φ_conc.concaveOn.2 hu (show (0 : ℝ) ∈ Icc 0 α from ⟨le_rfl, h.α_pos.le⟩)
+    (div_nonneg hx hx'pos.le) (sub_nonneg.2 ((div_le_one hx'pos).2 hxx'))
+    (by ring)
+  simp only [smul_eq_mul, mul_zero, add_zero] at hc
+  rw [show x / x' * (y / x) = y / x' by field_simp] at hc
+  simp only [crsQ]
+  have := mul_le_mul_of_nonneg_left hc hx'pos.le
+  have e : x' * (x / x' * φ (y / x) + (1 - x / x') * φ 0) = x * φ (y / x) + (x' - x) * φ 0 := by
+    field_simp
+  linarith
+
+/-- **`F` is strictly increasing in `x`.** -/
+theorem crsF_lt {x x' y : ℝ} (hx : 0 ≤ x) (hxx' : x < x') (hy : 0 ≤ y) (hyx : y ≤ α * x) :
+    crsF S φ θ δ x y < crsF S φ θ δ x' y := by
+  have h1 := h.crsQ_mono hx hxx'.le hy hyx
+  have h2 := h.crsQ_nonneg hx hy hyx
+  have h3 : crsQ φ x y ≤ crsQ φ x' y := by nlinarith [h.φ_zero]
+  have h4 : S (crsQ φ x y) ≤ S (crsQ φ x' y) :=
+    h.S_mono.monotoneOn (mem_Ici.2 h2) (mem_Ici.2 (h2.trans h3)) h3
+  have h5 : 0 < θ * ((1 - δ) * (x' - x)) := by
+    have := h.θ_pos
+    have : 0 < 1 - δ := by linarith [h.δ_lt]
+    have : 0 < x' - x := by linarith
+    positivity
+  simp only [crsF]
+  nlinarith
+
+/-- **The perspective is concave**: `a·q(x, y) + b·q(x', y') ≤ q(ax + bx', ay + by')`. -/
+theorem crsQ_concave {x x' y y' a b : ℝ} (hx : 0 ≤ x) (hx' : 0 ≤ x') (hy : 0 ≤ y)
+    (hyx : y ≤ α * x) (hy' : 0 ≤ y') (hyx' : y' ≤ α * x') (ha : 0 ≤ a) (hb : 0 ≤ b)
+    (hab : a + b = 1) :
+    a * crsQ φ x y + b * crsQ φ x' y' ≤ crsQ φ (a * x + b * x') (a * y + b * y') := by
+  rcases eq_or_lt_of_le hx with h0 | hxp
+  · subst h0
+    have : y = 0 := by linarith
+    subst this
+    simp only [crsQ, zero_mul, mul_zero, zero_add, zero_div]
+    rcases eq_or_lt_of_le hb with hb0 | hbp
+    · subst hb0; simp
+    · rw [show b * y' / (b * x') = y' / x' by
+        rcases eq_or_lt_of_le hx' with hx0 | hx'p
+        · subst hx0; simp
+        · field_simp]
+      ring_nf; exact le_rfl
+  rcases eq_or_lt_of_le hx' with h0 | hx'p
+  · subst h0
+    have : y' = 0 := by linarith
+    subst this
+    simp only [crsQ, zero_mul, mul_zero, add_zero, zero_div]
+    rcases eq_or_lt_of_le ha with ha0 | hap
+    · subst ha0; simp
+    · rw [show a * y / (a * x) = y / x by field_simp]
+      ring_nf; exact le_rfl
+  rcases eq_or_lt_of_le ha with ha0 | hap
+  · subst ha0; have : b = 1 := by linarith [hab]
+    subst this; simp
+  rcases eq_or_lt_of_le hb with hb0 | hbp
+  · subst hb0; have : a = 1 := by linarith
+    subst this; simp
+  set z := a * x + b * x'
+  have hz : 0 < z := by positivity
+  have hu := ratio_mem hxp hy hyx
+  have hu' := ratio_mem hx'p hy' hyx'
+  have hc := h.φ_conc.concaveOn.2 hu hu' (div_nonneg (mul_nonneg ha hx) hz.le)
+    (div_nonneg (mul_nonneg hb hx') hz.le) (by simp only [z]; field_simp)
+  simp only [smul_eq_mul] at hc
+  rw [show a * x / z * (y / x) + b * x' / z * (y' / x') = (a * y + b * y') / z by
+    field_simp] at hc
+  simp only [crsQ]
+  have := mul_le_mul_of_nonneg_left hc hz.le
+  have e : z * (a * x / z * φ (y / x) + b * x' / z * φ (y' / x')) =
+      a * (x * φ (y / x)) + b * (x' * φ (y' / x')) := by field_simp
+  linarith
+
+/-- **Strictly so across rays**: if `x, x' > 0` and `y/x ≠ y'/x'`. -/
+theorem crsQ_strict {x x' y y' a b : ℝ} (hx : 0 < x) (hx' : 0 < x') (hy : 0 ≤ y)
+    (hyx : y ≤ α * x) (hy' : 0 ≤ y') (hyx' : y' ≤ α * x') (ha : 0 < a) (hb : 0 < b)
+    (_hab : a + b = 1) (hne : y / x ≠ y' / x') :
+    a * crsQ φ x y + b * crsQ φ x' y' < crsQ φ (a * x + b * x') (a * y + b * y') := by
+  set z := a * x + b * x'
+  have hz : 0 < z := by positivity
+  have hu := ratio_mem hx hy hyx
+  have hu' := ratio_mem hx' hy' hyx'
+  have hc := h.φ_conc.2 hu hu' hne (div_pos (mul_pos ha hx) hz) (div_pos (mul_pos hb hx') hz)
+    (by simp only [z]; field_simp)
+  simp only [smul_eq_mul] at hc
+  rw [show a * x / z * (y / x) + b * x' / z * (y' / x') = (a * y + b * y') / z by
+    field_simp] at hc
+  simp only [crsQ]
+  have := mul_lt_mul_of_pos_left hc hz
+  have e : z * (a * x / z * φ (y / x) + b * x' / z * φ (y' / x')) =
+      a * (x * φ (y / x)) + b * (x' * φ (y' / x')) := by field_simp
+  linarith
+
+end CRSHyp
+
+/-! ### Concave solutions of the functional equation -/
+
+/-- `V` is concave on `[0, K]` and solves the functional equation there, with
+`Γ(x) = [0, min{αx, K}]`. -/
+structure CRSValue (S φ S' φ' : ℝ → ℝ) (α θ δ β K : ℝ) (V : ℝ → ℝ) : Prop where
+  hyp : CRSHyp S φ S' φ' α θ δ β
+  K_pos : 0 < K
+  le : ∀ x ∈ Icc (0 : ℝ) K, ∀ y ∈ Icc (0 : ℝ) (min (α * x) K),
+    crsF S φ θ δ x y + β * V y ≤ V x
+  arg : ∀ x ∈ Icc (0 : ℝ) K, ∃ y ∈ Icc (0 : ℝ) (min (α * x) K),
+    crsF S φ θ δ x y + β * V y = V x
+  conc : ConcaveOn ℝ (Icc 0 K) V
+
+namespace CRSValue
+
+variable {S φ S' φ' : ℝ → ℝ} {α θ δ β K : ℝ} {V : ℝ → ℝ}
+  (h : CRSValue S φ S' φ' α θ δ β K V)
+include h
+
+theorem mem_Γ_mono {x x' y : ℝ} (hxx' : x ≤ x') (hy : y ∈ Icc (0 : ℝ) (min (α * x) K)) :
+    y ∈ Icc (0 : ℝ) (min (α * x') K) :=
+  ⟨hy.1, hy.2.trans (min_le_min (mul_le_mul_of_nonneg_left hxx' h.hyp.α_pos.le) le_rfl)⟩
+
+/-- **`V` is strictly increasing.** -/
+theorem strictMonoOn : StrictMonoOn V (Icc 0 K) := by
+  intro x hx x' hx' hxx'
+  obtain ⟨y, hy, hyv⟩ := h.arg x hx
+  have := h.hyp.crsF_lt hx.1 hxx' hy.1 (hy.2.trans (min_le_left _ _))
+  have := h.le x' hx' y (h.mem_Γ_mono hxx'.le hy)
+  linarith
+
+/-- Concavity: `V(y) − V(y − s) ≤ (s/y)(V(y) − V(0))`. -/
+theorem slope_le {y s : ℝ} (hy : 0 < y) (hyK : y ≤ K) (hs : 0 ≤ s) (hsy : s ≤ y) :
+    V y - V (y - s) ≤ s / y * (V y - V 0) := by
+  have := h.conc.2 (show (0 : ℝ) ∈ Icc 0 K from ⟨le_rfl, h.K_pos.le⟩)
+    (show y ∈ Icc 0 K from ⟨hy.le, hyK⟩) (div_nonneg hs hy.le)
+    (sub_nonneg.2 ((div_le_one hy).2 hsy)) (by ring)
+  simp only [smul_eq_mul, mul_zero, zero_add] at this
+  rw [show (1 - s / y) * y = y - s by field_simp] at this
+  nlinarith
+
+/-- **Interior choices**: at `x > 0` the maximizer is below `αx`. -/
+theorem argmax_lt {x y : ℝ} (hx : x ∈ Icc (0 : ℝ) K) (hx0 : 0 < x)
+    (hy : y ∈ Icc (0 : ℝ) (min (α * x) K)) (hyv : crsF S φ θ δ x y + β * V y = V x) :
+    y < α * x := by
+  have H := h.hyp
+  have hα := H.α_pos
+  by_contra hge
+  push Not at hge
+  have hyeq : y = α * x := le_antisymm (hy.2.trans (min_le_left _ _)) hge
+  have hyK : y ≤ K := hy.2.trans (min_le_right _ _)
+  have hy0 : 0 < y := by rw [hyeq]; positivity
+  set D := V y - V 0
+  set c := S' (x * φ 0)
+  have hc : 0 < c := H.S'_pos (by have := H.φ_zero; positivity)
+  -- a slope of `φ` steep enough
+  obtain ⟨u, hu1, hu2⟩ := ((H.φ'_lim.eventually (eventually_lt_atBot
+    (-(β * |D| / (α * c * x) + 1)))).and (Ioo_mem_nhdsLT (show max 0 (α - 1) < α by
+      simp [hα]))).exists
+  have hu0 : 0 < u := (le_max_left _ _).trans_lt hu2.1
+  set s := α - u
+  have hs0 : 0 < s := by simp only [s]; linarith [hu2.2]
+  have hs1 : s < 1 := by simp only [s]; linarith [(le_max_right 0 (α - 1)).trans_lt hu2.1]
+  -- the alternative `y_s = x(α − s) = xu`
+  have hys : x * u ∈ Icc (0 : ℝ) (min (α * x) K) :=
+    ⟨by positivity, le_min (by nlinarith [hu2.2]) (by nlinarith [hu2.2])⟩
+  have hle := h.le x hx (x * u) hys
+  have hslope := h.slope_le hy0 hyK (s := x * s) (by positivity) (by rw [hyeq]; nlinarith)
+  rw [show y - x * s = x * u by simp only [s]; rw [hyeq]; ring] at hslope
+  -- `S(xφ(u)) − S(0) ≥ c·x·φ(u) ≥ c·x·s·(−φ'(u))`
+  have huI : u ∈ Icc 0 α := ⟨hu0.le, hu2.2.le⟩
+  have hφu := H.φ_nonneg huI
+  have hq : 0 ≤ x * φ u := by positivity
+  have htan := tangent_le H.S_conc.concaveOn (a := x * φ u) (b := 0) (mem_Ici.2 hq)
+    (mem_Ici.2 le_rfl) (H.S_deriv _ hq)
+  have hS'm : c ≤ S' (x * φ u) := by
+    rcases eq_or_lt_of_le (mul_le_mul_of_nonneg_left (H.φ_le huI) hx0.le) with he | hlt
+    · rw [he]
+    · exact (H.S'_lt hq hlt).le
+  have htanφ := tangent_le H.φ_conc.concaveOn (a := u) (b := α) huI ⟨hα.le, le_rfl⟩
+    (H.φ_deriv u ⟨hu0.le, hu2.2⟩)
+  rw [H.φ_α] at htanφ
+  -- the comparison
+  have hF : crsF S φ θ δ x (x * u) - crsF S φ θ δ x y =
+      S (x * φ u) - S 0 + θ * (x * s) := by
+    simp only [crsF, crsQ, hyeq]
+    rw [show α * x / x = α by field_simp, H.φ_α, mul_zero,
+      show x * u / x = u by field_simp]
+    simp only [s]; ring
+  have hA : crsF S φ θ δ x (x * u) - crsF S φ θ δ x y ≤ β * (V y - V (x * u)) := by
+    linarith
+  have hC : β * (V y - V (x * u)) ≤ β * (s / α) * |D| := by
+    have h1 : x * s / y = s / α := by rw [hyeq]; field_simp
+    rw [h1] at hslope
+    have h2 : s / α * (V y - V 0) ≤ s / α * |D| :=
+      mul_le_mul_of_nonneg_left (le_abs_self _) (by positivity)
+    have := mul_le_mul_of_nonneg_left (hslope.trans h2) H.β_pos.le
+    linarith [show β * (s / α * |D|) = β * (s / α) * |D| by ring]
+  have hD : c * (x * φ u) ≤ S (x * φ u) - S 0 := by
+    have := mul_le_mul_of_nonneg_right hS'm hq
+    linarith
+  have hE : s * -φ' u ≤ φ u := by simp only [s]; linarith
+  have hE' : c * x * (s * -φ' u) ≤ c * (x * φ u) := by
+    have := mul_le_mul_of_nonneg_left hE (mul_pos hc hx0).le
+    linarith [show c * x * φ u = c * (x * φ u) by ring]
+  have hθ : 0 ≤ θ * (x * s) := by have := H.θ_pos; positivity
+  have hmain : c * x * (s * -φ' u) ≤ β * (s / α) * |D| := by linarith
+  have hφ' : β * |D| / (α * c * x) + 1 < -φ' u := by linarith
+  have hpos : 0 < c * x * s := by positivity
+  have h1 := mul_lt_mul_of_pos_left hφ' hpos
+  have e : c * x * s * (β * |D| / (α * c * x) + 1) = β * (s / α) * |D| + c * x * s := by
+    field_simp
+  rw [e] at h1
+  nlinarith
+
+/-- **The maximizer is unique**: `y ↦ S(xφ(y/x))` is strictly concave. -/
+theorem argmax_unique {x y₁ y₂ : ℝ} (hx : x ∈ Icc (0 : ℝ) K)
+    (hy₁ : y₁ ∈ Icc (0 : ℝ) (min (α * x) K)) (hy₂ : y₂ ∈ Icc (0 : ℝ) (min (α * x) K))
+    (h₁ : crsF S φ θ δ x y₁ + β * V y₁ = V x) (h₂ : crsF S φ θ δ x y₂ + β * V y₂ = V x) :
+    y₁ = y₂ := by
+  have H := h.hyp
+  rcases eq_or_lt_of_le hx.1 with hx0 | hx0
+  · subst hx0
+    have e1 : y₁ = 0 := le_antisymm (by simpa using hy₁.2.trans (min_le_left _ _)) hy₁.1
+    have e2 : y₂ = 0 := le_antisymm (by simpa using hy₂.2.trans (min_le_left _ _)) hy₂.1
+    rw [e1, e2]
+  by_contra hne
+  set m := (y₁ + y₂) / 2
+  have hmΓ : m ∈ Icc (0 : ℝ) (min (α * x) K) :=
+    ⟨by simp only [m]; linarith [hy₁.1, hy₂.1], by simp only [m]; linarith [hy₁.2, hy₂.2]⟩
+  have hu₁ := CRSHyp.ratio_mem hx0 hy₁.1 (hy₁.2.trans (min_le_left _ _))
+  have hu₂ := CRSHyp.ratio_mem hx0 hy₂.1 (hy₂.2.trans (min_le_left _ _))
+  have hune : y₁ / x ≠ y₂ / x := fun he => hne (by field_simp at he; linarith)
+  have hφ := H.φ_conc.2 hu₁ hu₂ hune (by norm_num : (0 : ℝ) < 1 / 2)
+    (by norm_num : (0 : ℝ) < 1 / 2) (by norm_num)
+  simp only [smul_eq_mul] at hφ
+  rw [show 1 / 2 * (y₁ / x) + 1 / 2 * (y₂ / x) = m / x by simp only [m]; ring] at hφ
+  -- output at the midpoint exceeds the average output
+  have hq : (crsQ φ x y₁ + crsQ φ x y₂) / 2 < crsQ φ x m := by
+    simp only [crsQ]; nlinarith
+  have hq₁ := H.crsQ_nonneg hx.1 hy₁.1 (hy₁.2.trans (min_le_left _ _))
+  have hq₂ := H.crsQ_nonneg hx.1 hy₂.1 (hy₂.2.trans (min_le_left _ _))
+  have hS1 : S ((crsQ φ x y₁ + crsQ φ x y₂) / 2) < S (crsQ φ x m) :=
+    H.S_mono (mem_Ici.2 (by linarith)) (mem_Ici.2 (by linarith)) hq
+  have hS2 := H.S_conc.concaveOn.2 (mem_Ici.2 hq₁) (mem_Ici.2 hq₂)
+    (by norm_num : (0 : ℝ) ≤ 1 / 2) (by norm_num : (0 : ℝ) ≤ 1 / 2) (by norm_num)
+  simp only [smul_eq_mul] at hS2
+  rw [show 1 / 2 * crsQ φ x y₁ + 1 / 2 * crsQ φ x y₂ = (crsQ φ x y₁ + crsQ φ x y₂) / 2 by ring]
+    at hS2
+  have hV := h.conc.2 (show y₁ ∈ Icc 0 K from ⟨hy₁.1, hy₁.2.trans (min_le_right _ _)⟩)
+    (show y₂ ∈ Icc 0 K from ⟨hy₂.1, hy₂.2.trans (min_le_right _ _)⟩)
+    (by norm_num : (0 : ℝ) ≤ 1 / 2) (by norm_num : (0 : ℝ) ≤ 1 / 2) (by norm_num)
+  simp only [smul_eq_mul] at hV
+  rw [show 1 / 2 * y₁ + 1 / 2 * y₂ = m by simp only [m]; ring] at hV
+  have := h.le x hx m hmΓ
+  simp only [crsF] at this h₁ h₂
+  have hβV := mul_le_mul_of_nonneg_left hV H.β_pos.le
+  have hθ : θ * (m - (1 - δ) * x) =
+      (θ * (y₁ - (1 - δ) * x) + θ * (y₂ - (1 - δ) * x)) / 2 := by simp only [m]; ring
+  linarith
+
+/-- The derivative of `F` in `x`: `S'[xφ(u)][φ(u) − uφ'(u)] + θ(1 − δ)`, `u = y/x`. -/
+theorem hasDerivAt_crsF_x {x y : ℝ} (hx : 0 < x) (hy : 0 ≤ y) (hyx : y < α * x) :
+    HasDerivAt (fun x' => crsF S φ θ δ x' y)
+      (S' (crsQ φ x y) * (φ (y / x) - y / x * φ' (y / x)) + θ * (1 - δ)) x := by
+  have H := h.hyp
+  have hu : y / x ∈ Ico 0 α := ⟨div_nonneg hy hx.le, (div_lt_iff₀ hx).2 (by linarith)⟩
+  have hdiv : HasDerivAt (fun x' : ℝ => y / x') (-(y / x ^ 2)) x := by
+    have := (hasDerivAt_inv hx.ne').const_mul y
+    convert this using 1
+    · funext x'; rw [div_eq_mul_inv]
+    · rw [div_eq_mul_inv]; ring
+  have hφc : HasDerivAt (fun x' : ℝ => φ (y / x')) (φ' (y / x) * -(y / x ^ 2)) x :=
+    (H.φ_deriv _ hu).comp x hdiv
+  have hq : HasDerivAt (fun x' : ℝ => x' * φ (y / x'))
+      (1 * φ (y / x) + x * (φ' (y / x) * -(y / x ^ 2))) x := (hasDerivAt_id' x).mul hφc
+  have hq0 : 0 ≤ crsQ φ x y := H.crsQ_nonneg hx.le hy hyx.le
+  have hS := (H.S_deriv _ hq0).comp x hq
+  have hlin : HasDerivAt (fun x' : ℝ => θ * (y - (1 - δ) * x')) (θ * (0 - (1 - δ) * 1)) x :=
+    ((hasDerivAt_const x y).sub ((hasDerivAt_id' x).const_mul (1 - δ))).const_mul θ
+  have := hS.sub hlin
+  have hx' : x ≠ 0 := hx.ne'
+  convert this using 1
+  · funext x'; rfl
+  · field_simp; ring
+
+/-- **Exercise 6.9a: the envelope condition.** On `(0, K)`, `V` is differentiable with
+`V'(x) = S'[xφ(u)][φ(u) − uφ'(u)] + θ(1 − δ)`, `u = g(x)/x`. -/
+theorem hasDerivAt_V {x y : ℝ} (hx : x ∈ Ioo 0 K) (hy : y ∈ Icc (0 : ℝ) (min (α * x) K))
+    (hyv : crsF S φ θ δ x y + β * V y = V x) :
+    HasDerivAt V (S' (crsQ φ x y) * (φ (y / x) - y / x * φ' (y / x)) + θ * (1 - δ)) x := by
+  have H := h.hyp
+  have hxI : x ∈ Icc (0 : ℝ) K := ⟨hx.1.le, hx.2.le⟩
+  have hlt := h.argmax_lt hxI hx.1 hy hyv
+  set W : ℝ → ℝ := fun x' => crsF S φ θ δ x' y + β * V y
+  have hW : HasDerivAt W _ x := (h.hasDerivAt_crsF_x hx.1 hy.1 hlt).add_const (β * V y)
+  have hX : Icc (0 : ℝ) K ∈ 𝓝 x := Icc_mem_nhds hx.1 hx.2
+  have hle : ∀ᶠ x' in 𝓝 x, W x' ≤ V x' := by
+    have hball : Ioi (y / α) ∈ 𝓝 x := Ioi_mem_nhds ((div_lt_iff₀ H.α_pos).2 (by linarith))
+    filter_upwards [hX, hball] with x' hx' hx'α
+    refine h.le x' hx' y ⟨hy.1, le_min ?_ (hy.2.trans (min_le_right _ _))⟩
+    rw [mem_Ioi, div_lt_iff₀ H.α_pos] at hx'α; linarith
+  have := (theorem_4_10 h.conc hX hW.hasFDerivAt hyv hle).hasDerivAt
+  simpa using this
+
+/-- **The first-order condition** at an interior maximizer: `S'[xφ(u)]φ'(u) − θ + βV'(y) = 0`. -/
+theorem foc {x y d : ℝ} (hx : x ∈ Icc (0 : ℝ) K) (hx0 : 0 < x) (hy0 : 0 < y)
+    (hyK : y < K) (hy : y ∈ Icc (0 : ℝ) (min (α * x) K))
+    (hyv : crsF S φ θ δ x y + β * V y = V x) (hd : HasDerivAt V d y) :
+    S' (crsQ φ x y) * φ' (y / x) - θ + β * d = 0 := by
+  have H := h.hyp
+  have hlt := h.argmax_lt hx hx0 hy hyv
+  have hu : y / x ∈ Ico 0 α := ⟨div_nonneg hy0.le hx0.le, (div_lt_iff₀ hx0).2 (by linarith)⟩
+  have hdiv : HasDerivAt (fun z : ℝ => z / x) (1 / x) y := by
+    simpa using (hasDerivAt_id' y).div_const x
+  have hq : HasDerivAt (fun z : ℝ => x * φ (z / x)) (x * (φ' (y / x) * (1 / x))) y :=
+    ((H.φ_deriv _ hu).comp y hdiv).const_mul x
+  have hS := (H.S_deriv _ (H.crsQ_nonneg hx0.le hy0.le hlt.le)).comp y hq
+  have hΦ : HasDerivAt (fun z => crsF S φ θ δ x z + β * V z)
+      (S' (crsQ φ x y) * (x * (φ' (y / x) * (1 / x))) - θ * (1 - 0) + β * d) y := by
+    have hlin : HasDerivAt (fun z : ℝ => θ * (z - (1 - δ) * x)) (θ * (1 - 0)) y :=
+      ((hasDerivAt_id' y).sub (hasDerivAt_const y _)).const_mul θ
+    exact (hS.sub hlin).add (hd.const_mul β)
+  have hloc : IsLocalMax (fun z => crsF S φ θ δ x z + β * V z) y := by
+    have hlt' : y < min (α * x) K := lt_min hlt hyK
+    filter_upwards [Ioo_mem_nhds hy0 hlt'] with z hz
+    rw [hyv]
+    exact h.le x hx z ⟨hz.1.le, hz.2.le⟩
+  have := hloc.hasDerivAt_eq_zero hΦ
+  rw [← this]
+  field_simp
+  ring
+
+/-- `ψ(w) = φ(w) − wφ'(w)` is at least `φ(0)` and nondecreasing on `[0, α)`. -/
+theorem psi_props {u u' : ℝ} (hu' : u' ∈ Ico 0 α) (hu : u ∈ Ico 0 α) (huu' : u' ≤ u) :
+    φ 0 ≤ φ u' - u' * φ' u' ∧ φ u' - u' * φ' u' ≤ φ u - u * φ' u := by
+  have H := h.hyp
+  have hI' : u' ∈ Icc 0 α := ⟨hu'.1, hu'.2.le⟩
+  have hI : u ∈ Icc 0 α := ⟨hu.1, hu.2.le⟩
+  have h0 := tangent_le H.φ_conc.concaveOn (a := u') (b := 0) hI' ⟨le_rfl, H.α_pos.le⟩
+    (H.φ_deriv u' hu')
+  have h1 := tangent_le H.φ_conc.concaveOn (a := u) (b := u') hI hI' (H.φ_deriv u hu)
+  have h2 := deriv_le_of_concave H.φ_conc.concaveOn hI' hI huu' (H.φ_deriv u' hu')
+    (H.φ_deriv u hu)
+  refine ⟨by linarith, ?_⟩
+  nlinarith [hu'.1]
+
+/-- **Exercise 6.9b: the policy is nondecreasing.** -/
+theorem argmax_mono {x x' y y' : ℝ} (hx : x ∈ Icc (0 : ℝ) K) (hx' : x' ∈ Icc (0 : ℝ) K)
+    (hxx' : x ≤ x') (hy : y ∈ Icc (0 : ℝ) (min (α * x) K))
+    (hyv : crsF S φ θ δ x y + β * V y = V x) (hy' : y' ∈ Icc (0 : ℝ) (min (α * x') K))
+    (hyv' : crsF S φ θ δ x' y' + β * V y' = V x') : y ≤ y' := by
+  have H := h.hyp
+  by_contra hlt
+  push Not at hlt
+  have hx0 : 0 < x := by
+    rcases eq_or_lt_of_le hx.1 with he | hpos
+    · subst he; have := hy.2.trans (min_le_left _ _); simp at this; linarith [hy'.1]
+    · exact hpos
+  have hxlt : x < x' := by
+    rcases eq_or_lt_of_le hxx' with he | hlt'
+    · subst he; exact absurd (h.argmax_unique hx hy hy' hyv hyv') hlt.ne'
+    · exact hlt'
+  have hyα := h.argmax_lt hx hx0 hy hyv
+  -- the two optimality conditions
+  have hA := h.le x hx y' ⟨hy'.1, hlt.le.trans hy.2⟩
+  have hB := h.le x' hx' y (h.mem_Γ_mono hxx' hy)
+  -- `D(z) = F(z, y) − F(z, y')` is strictly increasing on `[x, x']`
+  set D : ℝ → ℝ := fun z => crsF S φ θ δ z y - crsF S φ θ δ z y'
+  have hDd : ∀ z ∈ Icc x x', HasDerivAt D
+      ((S' (crsQ φ z y) * (φ (y / z) - y / z * φ' (y / z)) + θ * (1 - δ)) -
+        (S' (crsQ φ z y') * (φ (y' / z) - y' / z * φ' (y' / z)) + θ * (1 - δ))) z :=
+    fun z hz => by
+      have hz0 : 0 < z := hx0.trans_le hz.1
+      have hyz : y < α * z := hyα.trans_le (mul_le_mul_of_nonneg_left hz.1 H.α_pos.le)
+      exact (h.hasDerivAt_crsF_x hz0 hy.1 hyz).sub
+        (h.hasDerivAt_crsF_x hz0 hy'.1 (hlt.trans hyz))
+  have hpos : ∀ z ∈ Icc x x',
+      0 < (S' (crsQ φ z y) * (φ (y / z) - y / z * φ' (y / z)) + θ * (1 - δ)) -
+        (S' (crsQ φ z y') * (φ (y' / z) - y' / z * φ' (y' / z)) + θ * (1 - δ)) := fun z hz => by
+    have hz0 : 0 < z := hx0.trans_le hz.1
+    have hyz : y < α * z := hyα.trans_le (mul_le_mul_of_nonneg_left hz.1 H.α_pos.le)
+    have hu : y / z ∈ Ico 0 α := ⟨div_nonneg hy.1 hz0.le, (div_lt_iff₀ hz0).2 (by linarith)⟩
+    have hu' : y' / z ∈ Ico 0 α :=
+      ⟨div_nonneg hy'.1 hz0.le, (div_lt_iff₀ hz0).2 (by linarith)⟩
+    have huu' : y' / z < y / z := div_lt_div_of_pos_right hlt hz0
+    obtain ⟨hψ0, hψ⟩ := h.psi_props hu' hu huu'.le
+    have hq : crsQ φ z y < crsQ φ z y' := by
+      simp only [crsQ]
+      exact mul_lt_mul_of_pos_left (H.φ_anti ⟨hu'.1, hu'.2.le⟩ ⟨hu.1, hu.2.le⟩ huu') hz0
+    have hq0 := H.crsQ_nonneg hz0.le hy.1 hyz.le
+    have hS := H.S'_lt hq0 hq
+    have hSp := H.S'_pos hq0
+    have hφ0 := H.φ_zero
+    nlinarith [mul_le_mul_of_nonneg_left hψ hSp.le]
+  have hmono : StrictMonoOn D (Icc x x') := by
+    refine strictMonoOn_of_deriv_pos (convex_Icc x x')
+      (fun z hz => (hDd z hz).continuousAt.continuousWithinAt) fun z hz => ?_
+    rw [interior_Icc] at hz
+    rw [(hDd z ⟨hz.1.le, hz.2.le⟩).deriv]
+    exact hpos z ⟨hz.1.le, hz.2.le⟩
+  have := hmono ⟨le_rfl, hxx'⟩ ⟨hxx', le_rfl⟩ hxlt
+  simp only [D] at this
+  linarith
+
+/-- **Exercise 6.9c: the stationary equation.** An interior stationary point satisfies
+`S'(x̄φ(1))[βφ(1) + (1 − β)φ'(1)] = θ(1 − β(1 − δ))`. -/
+theorem stationary_eq {x : ℝ} (hx : x ∈ Ioo 0 K) (hfix : crsF S φ θ δ x x + β * V x = V x) :
+    S' (x * φ 1) * (β * φ 1 + (1 - β) * φ' 1) = θ * (1 - β * (1 - δ)) := by
+  have H := h.hyp
+  have hxI : x ∈ Icc (0 : ℝ) K := ⟨hx.1.le, hx.2.le⟩
+  have hy : x ∈ Icc (0 : ℝ) (min (α * x) K) :=
+    ⟨hx.1.le, le_min (by nlinarith [H.α_gt, hx.1]) hx.2.le⟩
+  have hd := h.hasDerivAt_V hx hy hfix
+  have hfoc := h.foc hxI hx.1 hx.1 hx.2 hy hfix hd
+  have e : x / x = 1 := div_self hx.1.ne'
+  simp only [crsQ, e] at hfoc
+  nlinarith
+
+/-- **Exercise 6.9c: at most one stationary point.** -/
+theorem stationary_unique {x₁ x₂ : ℝ} (hx₁ : x₁ ∈ Ioo 0 K) (hx₂ : x₂ ∈ Ioo 0 K)
+    (h₁ : crsF S φ θ δ x₁ x₁ + β * V x₁ = V x₁) (h₂ : crsF S φ θ δ x₂ x₂ + β * V x₂ = V x₂) :
+    x₁ = x₂ := by
+  have H := h.hyp
+  have e₁ := h.stationary_eq hx₁ h₁
+  have e₂ := h.stationary_eq hx₂ h₂
+  have hφ1 : 0 < φ 1 := H.φ_pos ⟨zero_le_one, H.α_gt⟩
+  have hκ : 0 < θ * (1 - β * (1 - δ)) := by
+    have := H.θ_pos; have : 0 < 1 - β * (1 - δ) := by nlinarith [H.β_lt, H.δ_pos, H.β_pos]
+    positivity
+  by_contra hne
+  rcases lt_or_gt_of_ne hne with hlt | hlt
+  · have := H.S'_lt (mul_nonneg hx₁.1.le hφ1.le) (mul_lt_mul_of_pos_right hlt hφ1)
+    have hb : 0 < β * φ 1 + (1 - β) * φ' 1 := by
+      by_contra hb; push Not at hb
+      nlinarith [H.S'_pos (mul_nonneg hx₁.1.le hφ1.le)]
+    nlinarith
+  · have := H.S'_lt (mul_nonneg hx₂.1.le hφ1.le) (mul_lt_mul_of_pos_right hlt hφ1)
+    have hb : 0 < β * φ 1 + (1 - β) * φ' 1 := by
+      by_contra hb; push Not at hb
+      nlinarith [H.S'_pos (mul_nonneg hx₂.1.le hφ1.le)]
+    nlinarith
+
+/-- **Exercise 6.9c (correction): no stationary point** when `βφ(1) + (1 − β)φ'(1) ≤ 0`. -/
+theorem no_stationary (hb : β * φ 1 + (1 - β) * φ' 1 ≤ 0) {x : ℝ} (hx : x ∈ Ioo 0 K) :
+    crsF S φ θ δ x x + β * V x ≠ V x := by
+  have H := h.hyp
+  intro hfix
+  have e := h.stationary_eq hx hfix
+  have hφ1 : 0 < φ 1 := H.φ_pos ⟨zero_le_one, H.α_gt⟩
+  have hS := H.S'_pos (mul_nonneg hx.1.le hφ1.le)
+  have hκ : 0 < θ * (1 - β * (1 - δ)) := by
+    have := H.θ_pos; have : 0 < 1 - β * (1 - δ) := by nlinarith [H.β_lt, H.δ_pos, H.β_pos]
+    positivity
+  nlinarith
+
+/-- **Exercise 6.9e** (from (b)–(d)). Let `g` be the policy, continuous, with an interior
+stationary point `x̄` that is locally stable (orbits from a neighborhood converge to it, which is
+what (d) and Theorem 6.9 provide). Then from every `x₀ ∈ (0, K)` capital converges
+monotonically to `x̄`. -/
+theorem ex_6_9e {g : ℝ → ℝ}
+    (hg : ∀ x ∈ Icc (0 : ℝ) K, g x ∈ Icc (0 : ℝ) (min (α * x) K) ∧
+      crsF S φ θ δ x (g x) + β * V (g x) = V x)
+    (hgc : ContinuousOn g (Icc 0 K)) {xbar : ℝ} (hxbar : xbar ∈ Ioo 0 K) (hfix : g xbar = xbar)
+    (hloc : ∃ ε > 0, ∀ x₀ ∈ Ioo (xbar - ε) (xbar + ε),
+      Tendsto (fun t => g^[t] x₀) atTop (𝓝 xbar)) :
+    ∀ x₀ ∈ Ioo 0 K, (Monotone (fun t => g^[t] x₀) ∨ Antitone (fun t => g^[t] x₀)) ∧
+      Tendsto (fun t => g^[t] x₀) atTop (𝓝 xbar) := by
+  obtain ⟨ε, hε, hloc⟩ := hloc
+  have hmaps : MapsTo g (Icc 0 K) (Icc 0 K) := fun x hx =>
+    ⟨(hg x hx).1.1, (hg x hx).1.2.trans (min_le_right _ _)⟩
+  have hmono : MonotoneOn g (Icc 0 K) := fun x hx x' hx' hxx' =>
+    h.argmax_mono hx hx' hxx' (hg x hx).1 (hg x hx).2 (hg x' hx').1 (hg x' hx').2
+  -- the only interior fixed point is `x̄`
+  have honly : ∀ z ∈ Ioo 0 K, g z = z → z = xbar := fun z hz hgz => by
+    have h1 := (hg z ⟨hz.1.le, hz.2.le⟩).2
+    rw [hgz] at h1
+    have h2 := (hg xbar ⟨hxbar.1.le, hxbar.2.le⟩).2
+    rw [hfix] at h2
+    exact h.stationary_unique hz hxbar h1 h2
+  have hφc : ContinuousOn (fun k => g k - k) (Icc 0 K) := hgc.sub continuousOn_id
+  -- orbits stay in `[0, K]`
+  have horb : ∀ x₀ ∈ Icc (0 : ℝ) K, ∀ t, g^[t] x₀ ∈ Icc (0 : ℝ) K := fun x₀ hx₀ t => by
+    induction t with
+    | zero => exact hx₀
+    | succ t ih => rw [Function.iterate_succ_apply']; exact hmaps ih
+  -- below `x̄`, `g(k) > k`
+  have hbelow : ∀ k ∈ Ioo 0 xbar, k < g k := by
+    by_contra hcon
+    push Not at hcon
+    obtain ⟨k₁, hk₁, hk₁le⟩ := hcon
+    have hk₁K : k₁ ∈ Ioo 0 K := ⟨hk₁.1, hk₁.2.trans hxbar.2⟩
+    have hlt₁ : g k₁ < k₁ := lt_of_le_of_ne hk₁le fun he => absurd (honly k₁ hk₁K he) hk₁.2.ne
+    -- then `g(k) < k` on all of `(0, x̄)`
+    have hall : ∀ k ∈ Ioo 0 xbar, g k < k := fun k hk => by
+      by_contra hge
+      push Not at hge
+      have hkK : k ∈ Ioo 0 K := ⟨hk.1, hk.2.trans hxbar.2⟩
+      have hne : g k ≠ k := fun he => absurd (honly k hkK he) hk.2.ne
+      have hgt : k < g k := lt_of_le_of_ne hge (Ne.symm hne)
+      obtain ⟨z, hz, hz0⟩ : ∃ z ∈ Icc (min k k₁) (max k k₁), g z - z = 0 := by
+        have hsub : Icc (min k k₁) (max k k₁) ⊆ Icc 0 K := Icc_subset_Icc
+          (le_min hk.1.le hk₁.1.le) (max_le hkK.2.le hk₁K.2.le)
+        rcases le_total k k₁ with hkk | hkk
+        · rw [min_eq_left hkk, max_eq_right hkk] at hsub ⊢
+          exact intermediate_value_Icc' hkk (hφc.mono hsub) ⟨by linarith, by linarith⟩
+        · rw [min_eq_right hkk, max_eq_left hkk] at hsub ⊢
+          exact intermediate_value_Icc hkk (hφc.mono hsub) ⟨by linarith, by linarith⟩
+      have hz0' : 0 < z := lt_of_lt_of_le (lt_min hk.1 hk₁.1) hz.1
+      have hzx : z < xbar := lt_of_le_of_lt hz.2 (max_lt hk.2 hk₁.2)
+      exact absurd (honly z ⟨hz0', hzx.trans hxbar.2⟩ (by linarith)) hzx.ne
+    -- an orbit starting just below `x̄` never comes back up
+    set x₀ := max (xbar - ε / 2) (xbar / 2)
+    have hx₀ : x₀ ∈ Ioo 0 xbar := ⟨lt_max_of_lt_right (by linarith [hxbar.1]),
+      max_lt (by linarith) (by linarith [hxbar.1])⟩
+    have hx₀ε : x₀ ∈ Ioo (xbar - ε) (xbar + ε) :=
+      ⟨lt_max_of_lt_left (by linarith), by linarith [hx₀.2]⟩
+    have hx₀I : x₀ ∈ Icc (0 : ℝ) K := ⟨hx₀.1.le, (hx₀.2.trans hxbar.2).le⟩
+    have hle : ∀ t, g^[t] x₀ ≤ x₀ := fun t => by
+      induction t with
+      | zero => exact le_rfl
+      | succ t ih =>
+        rw [Function.iterate_succ_apply']
+        exact (hmono (horb x₀ hx₀I t) hx₀I ih).trans (hall x₀ hx₀).le
+    have := le_of_tendsto' (hloc x₀ hx₀ε) hle
+    linarith [hx₀.2]
+  -- above `x̄`, `g(k) < k`
+  have habove : ∀ k ∈ Ioo xbar K, g k < k := by
+    by_contra hcon
+    push Not at hcon
+    obtain ⟨k₁, hk₁, hk₁le⟩ := hcon
+    have hk₁K : k₁ ∈ Ioo 0 K := ⟨hxbar.1.trans hk₁.1, hk₁.2⟩
+    have hlt₁ : k₁ < g k₁ := lt_of_le_of_ne hk₁le fun he =>
+      absurd (honly k₁ hk₁K he.symm) hk₁.1.ne'
+    have hall : ∀ k ∈ Ioo xbar K, k < g k := fun k hk => by
+      by_contra hge
+      push Not at hge
+      have hkK : k ∈ Ioo 0 K := ⟨hxbar.1.trans hk.1, hk.2⟩
+      have hne : g k ≠ k := fun he => absurd (honly k hkK he) hk.1.ne'
+      have hlt : g k < k := lt_of_le_of_ne hge hne
+      obtain ⟨z, hz, hz0⟩ : ∃ z ∈ Icc (min k k₁) (max k k₁), g z - z = 0 := by
+        have hsub : Icc (min k k₁) (max k k₁) ⊆ Icc 0 K := Icc_subset_Icc
+          (le_min hkK.1.le hk₁K.1.le) (max_le hkK.2.le hk₁K.2.le)
+        rcases le_total k k₁ with hkk | hkk
+        · rw [min_eq_left hkk, max_eq_right hkk] at hsub ⊢
+          exact intermediate_value_Icc hkk (hφc.mono hsub) ⟨by linarith, by linarith⟩
+        · rw [min_eq_right hkk, max_eq_left hkk] at hsub ⊢
+          exact intermediate_value_Icc' hkk (hφc.mono hsub) ⟨by linarith, by linarith⟩
+      have hzx : xbar < z := lt_of_lt_of_le (lt_min hk.1 hk₁.1) hz.1
+      have hzK : z < K := lt_of_le_of_lt hz.2 (max_lt hk.2 hk₁.2)
+      exact absurd (honly z ⟨hxbar.1.trans hzx, hzK⟩ (by linarith)) hzx.ne'
+    set x₀ := min (xbar + ε / 2) ((xbar + K) / 2)
+    have hx₀ : x₀ ∈ Ioo xbar K := ⟨lt_min (by linarith) (by linarith [hxbar.2]),
+      min_lt_of_right_lt (by linarith [hxbar.2])⟩
+    have hx₀ε : x₀ ∈ Ioo (xbar - ε) (xbar + ε) :=
+      ⟨by linarith [hx₀.1], min_lt_of_left_lt (by linarith)⟩
+    have hx₀I : x₀ ∈ Icc (0 : ℝ) K := ⟨(hxbar.1.trans hx₀.1).le, hx₀.2.le⟩
+    have hge : ∀ t, x₀ ≤ g^[t] x₀ := fun t => by
+      induction t with
+      | zero => exact le_rfl
+      | succ t ih =>
+        rw [Function.iterate_succ_apply']
+        exact (hall x₀ hx₀).le.trans (hmono hx₀I (horb x₀ hx₀I t) ih)
+    have := ge_of_tendsto' (hloc x₀ hx₀ε) hge
+    linarith [hx₀.1]
+  -- monotone convergence on `[x₀, x̄]` or `[x̄, x₀]`
+  intro x₀ hx₀
+  rcases le_total x₀ xbar with hle | hle
+  · refine orbit_tendsto_of_crossing (lo := x₀) (hi := xbar)
+      (hgc.mono (Icc_subset_Icc hx₀.1.le hxbar.2.le))
+      (hmono.mono (Icc_subset_Icc hx₀.1.le hxbar.2.le)) (fun k hk => ⟨?_, ?_⟩)
+      ⟨hle, le_rfl⟩ hfix (fun k hk hkx => hbelow k ⟨hx₀.1.trans_le hk.1, hkx⟩)
+      (fun k hk hkx => absurd hk.2 (not_le.2 hkx)) ⟨le_rfl, hle⟩
+    · rcases eq_or_lt_of_le hk.2 with he | hlt
+      · rw [he, hfix]; exact hle
+      · exact hk.1.trans (hbelow k ⟨hx₀.1.trans_le hk.1, hlt⟩).le
+    · rw [← hfix]
+      exact hmono ⟨hx₀.1.le.trans hk.1, hk.2.trans hxbar.2.le⟩
+        ⟨hxbar.1.le, hxbar.2.le⟩ hk.2
+  · refine orbit_tendsto_of_crossing (lo := xbar) (hi := x₀)
+      (hgc.mono (Icc_subset_Icc hxbar.1.le hx₀.2.le))
+      (hmono.mono (Icc_subset_Icc hxbar.1.le hx₀.2.le)) (fun k hk => ⟨?_, ?_⟩)
+      ⟨le_rfl, hle⟩ hfix (fun k hk hkx => absurd hk.1 (not_le.2 hkx))
+      (fun k hk hkx => habove k ⟨hkx, hk.2.trans_lt hx₀.2⟩) ⟨hle, le_rfl⟩
+    · rw [← hfix]
+      exact hmono ⟨hxbar.1.le, hxbar.2.le⟩ ⟨hxbar.1.le.trans hk.1, hk.2.trans hx₀.2.le⟩ hk.1
+    · rcases eq_or_lt_of_le hk.1 with he | hlt
+      · rw [← he, hfix]; exact hle
+      · exact (habove k ⟨hlt, hk.2.trans_lt hx₀.2⟩).le.trans hk.2
+
+/-- **Exercise 6.9a: `V` is strictly concave**, although Assumption 4.7 fails on the ray
+`y = αx` (where `F` is linear): optimal choices stay off that ray. -/
+theorem strictConcaveOn : StrictConcaveOn ℝ (Icc 0 K) V := by
+  have H := h.hyp
+  refine ⟨convex_Icc 0 K, fun x hx x' hx' hne a b ha hb hab => ?_⟩
+  obtain ⟨y, hy, hyv⟩ := h.arg x hx
+  obtain ⟨y', hy', hyv'⟩ := h.arg x' hx'
+  have hyx : y ≤ α * x := hy.2.trans (min_le_left _ _)
+  have hyx' : y' ≤ α * x' := hy'.2.trans (min_le_left _ _)
+  set z := a * x + b * x'
+  set w := a * y + b * y'
+  have hzI : z ∈ Icc (0 : ℝ) K := (convex_Icc 0 K) hx hx' ha.le hb.le hab
+  have hw0 : 0 ≤ w := add_nonneg (mul_nonneg ha.le hy.1) (mul_nonneg hb.le hy'.1)
+  have hwΓ : w ∈ Icc (0 : ℝ) (min (α * z) K) := by
+    refine ⟨hw0, le_min ?_ ?_⟩
+    · have h1 := mul_le_mul_of_nonneg_left hyx ha.le
+      have h2 := mul_le_mul_of_nonneg_left hyx' hb.le
+      simp only [w, z]; linarith [show α * (a * x + b * x') = a * (α * x) + b * (α * x') by ring]
+    · have h1 := mul_le_mul_of_nonneg_left (hy.2.trans (min_le_right _ _)) ha.le
+      have h2 := mul_le_mul_of_nonneg_left (hy'.2.trans (min_le_right _ _)) hb.le
+      have : a * K + b * K = K := by rw [← add_mul, hab, one_mul]
+      simp only [w]; linarith
+  have hwI : w ∈ Icc (0 : ℝ) K := ⟨hwΓ.1, hwΓ.2.trans (min_le_right _ _)⟩
+  -- output at the mixture beats the mixture of outputs, strictly after `S`
+  have hq₁ := H.crsQ_nonneg hx.1 hy.1 hyx
+  have hq₂ := H.crsQ_nonneg hx'.1 hy'.1 hyx'
+  have hqc := H.crsQ_concave hx.1 hx'.1 hy.1 hyx hy'.1 hyx' ha.le hb.le hab
+  have hmix : 0 ≤ a * crsQ φ x y + b * crsQ φ x' y' :=
+    add_nonneg (mul_nonneg ha.le hq₁) (mul_nonneg hb.le hq₂)
+  have hS : a * S (crsQ φ x y) + b * S (crsQ φ x' y') < S (crsQ φ z w) := by
+    by_cases hqq : crsQ φ x y = crsQ φ x' y'
+    · -- then both `x, x' > 0`, on different rays, and the mixture is strictly better
+      have hpos : ∀ {x y : ℝ}, x ∈ Icc (0 : ℝ) K → y ∈ Icc (0 : ℝ) (min (α * x) K) →
+          crsF S φ θ δ x y + β * V y = V x → 0 < x → 0 < crsQ φ x y := fun hx hy hyv hx0 =>
+        mul_pos hx0 (H.φ_pos ⟨div_nonneg hy.1 hx0.le,
+          (div_lt_iff₀ hx0).2 (by linarith [h.argmax_lt hx hx0 hy hyv])⟩)
+      have hx0 : 0 < x := by
+        rcases eq_or_lt_of_le hx.1 with he | hp
+        · have hx'0 : 0 < x' := lt_of_le_of_ne hx'.1 (fun he' => hne (by rw [← he, ← he']))
+          have := hpos hx' hy' hyv' hx'0
+          have : crsQ φ x y = 0 := by simp only [crsQ, ← he, zero_mul]
+          linarith
+        · exact hp
+      have hx'0 : 0 < x' := by
+        rcases eq_or_lt_of_le hx'.1 with he | hp
+        · have := hpos hx hy hyv hx0
+          have : crsQ φ x' y' = 0 := by simp only [crsQ, ← he, zero_mul]
+          linarith
+        · exact hp
+      have hrays : y / x ≠ y' / x' := fun hr => by
+        have hφ : 0 < φ (y / x) := H.φ_pos ⟨div_nonneg hy.1 hx0.le,
+          (div_lt_iff₀ hx0).2 (by linarith [h.argmax_lt hx hx0 hy hyv])⟩
+        have : x * φ (y / x) = x' * φ (y / x) := by
+          have h2 := hqq
+          simp only [crsQ] at h2
+          rw [← hr] at h2
+          exact h2
+        exact hne (mul_right_cancel₀ hφ.ne' this)
+      have hst := H.crsQ_strict hx0 hx'0 hy.1 hyx hy'.1 hyx' ha hb hab hrays
+      have hmono := H.S_mono (mem_Ici.2 hmix) (mem_Ici.2 (by linarith : 0 ≤ crsQ φ z w)) hst
+      have e : a * crsQ φ x y + b * crsQ φ x' y' = crsQ φ x y := by
+        rw [← hqq, ← add_mul, hab, one_mul]
+      rw [e] at hmono
+      rw [← hqq]
+      linarith [show a * S (crsQ φ x y) + b * S (crsQ φ x y) = S (crsQ φ x y) by
+        rw [← add_mul, hab, one_mul]]
+    · have h1 := H.S_conc.2 (mem_Ici.2 hq₁) (mem_Ici.2 hq₂) hqq ha hb hab
+      simp only [smul_eq_mul] at h1
+      have h2 := H.S_mono.monotoneOn (mem_Ici.2 hmix)
+        (mem_Ici.2 (by linarith : 0 ≤ crsQ φ z w)) hqc
+      linarith
+  have hV := h.conc.2 (show y ∈ Icc 0 K from ⟨hy.1, hy.2.trans (min_le_right _ _)⟩)
+    (show y' ∈ Icc 0 K from ⟨hy'.1, hy'.2.trans (min_le_right _ _)⟩) ha.le hb.le hab
+  simp only [smul_eq_mul] at hV ⊢
+  have hle := h.le z hzI w hwΓ
+  have hβV := mul_le_mul_of_nonneg_left hV H.β_pos.le
+  simp only [crsF] at hle hyv hyv'
+  have hlin : θ * (w - (1 - δ) * z) =
+      a * (θ * (y - (1 - δ) * x)) + b * (θ * (y' - (1 - δ) * x')) := by
+    simp only [w, z]; ring
+  have e1 : a * V x = a * (S (crsQ φ x y) - θ * (y - (1 - δ) * x) + β * V y) := by rw [hyv]
+  have e2 : b * V x' = b * (S (crsQ φ x' y') - θ * (y' - (1 - δ) * x') + β * V y') := by
+    rw [hyv']
+  nlinarith
+
+end CRSValue
+
+/-- **Exercise 6.9d.** At the stationary point, with `q = xφ(y/x)`: `q_x = φ(1) − φ'(1)`,
+`q_y = φ'(1)`, `q_xx = q_yy = −q_xy = φ''(1)/x̄`, and `F_xx = S''q_x² + S'q_xx`,
+`F_xy = S''q_xq_y + S'q_xy`, `F_yy = S''q_y² + S'q_yy`. If `S' > 0 > S''`, `φ(1) > 0 > φ'(1)`,
+`φ''(1) ≤ 0` and `βφ(1) + (1 − β)φ'(1) > 0` (which (c) requires of a stationary point), then
+`βF_xx + (1 + β)F_xy + F_yy = S''[βq_x + q_y][q_x + q_y] < 0` and `F_xy > 0`: the roots of the
+linearized Euler equation are real, one in `(0, 1)` and one above `1`. -/
+theorem ex_6_9d {S₁ S₂ φ₀ φ₁ φ₂ x β : ℝ} (hS₁ : 0 < S₁) (hS₂ : S₂ < 0) (hφ₀ : 0 < φ₀)
+    (hφ₁ : φ₁ < 0) (hφ₂ : φ₂ ≤ 0) (hx : 0 < x) (hβ0 : 0 < β)
+    (hb : 0 < β * φ₀ + (1 - β) * φ₁) :
+    let Fxx := S₂ * (φ₀ - φ₁) ^ 2 + S₁ * (φ₂ / x)
+    let Fxy := S₂ * ((φ₀ - φ₁) * φ₁) + S₁ * (-(φ₂ / x))
+    let Fyy := S₂ * φ₁ ^ 2 + S₁ * (φ₂ / x)
+    ∃ μ₁ μ₂ : ℝ, 0 < μ₁ ∧ μ₁ < 1 ∧ 1 < μ₂ ∧
+      quadRoot (-(Fyy + β * Fxx) / (β * Fxy)) (1 / β) μ₁ ∧
+      quadRoot (-(Fyy + β * Fxx) / (β * Fxy)) (1 / β) μ₂ ∧
+      ∀ μ, quadRoot (-(Fyy + β * Fxx) / (β * Fxy)) (1 / β) μ → μ = μ₁ ∨ μ = μ₂ := by
+  intro Fxx Fxy Fyy
+  have hxy : 0 < Fxy := by
+    have h1 : 0 < S₂ * ((φ₀ - φ₁) * φ₁) := by
+      have : (φ₀ - φ₁) * φ₁ < 0 := mul_neg_of_pos_of_neg (by linarith) hφ₁
+      nlinarith
+    have h2 : 0 ≤ S₁ * (-(φ₂ / x)) :=
+      mul_nonneg hS₁.le (neg_nonneg.2 (div_nonpos_of_nonpos_of_nonneg hφ₂ hx.le))
+    simp only [Fxy]; linarith
+  refine roots_split (by positivity) ?_
+  have hsum : β * Fxx + (1 + β) * Fxy + Fyy = S₂ * (β * φ₀ + (1 - β) * φ₁) * φ₀ := by
+    simp only [Fxx, Fxy, Fyy]; ring
+  have hneg : S₂ * (β * φ₀ + (1 - β) * φ₁) * φ₀ < 0 := by
+    have := mul_pos hb hφ₀
+    nlinarith
+  have e : 1 - -(Fyy + β * Fxx) / (β * Fxy) + 1 / β =
+      (β * Fxx + (1 + β) * Fxy + Fyy) / (β * Fxy) := by
+    field_simp; ring
+  rw [e, hsum]
+  exact div_neg_of_neg_of_pos hneg (by positivity)
+
+end StokeyLucasPrescott.DeterministicDynamics
+
+/-
+Copyright (c) 2026 Robert Kirkby. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Robert Kirkby
+-/
+
+/-!
+# A constant-returns-to-scale industry: the dynamic program
+
+SLP Exercise 6.9a, p. 160. The book asks for the unique bounded continuous solution on `ℝ₊`.
+**Correction**: on `ℝ₊` every solution is unbounded, since choosing `y = 0` gives
+`v(x) ≥ S(xφ(0)) + θ(1 − δ)x + βv(0)` (`crs_unbounded`). On a compact state space `[0, K]` with
+`Γ(x) = [0, min{αx, K}]` (`crsΓ`) the problem is well posed:
+
+* `crs_assumption43`, `crs_assumption44`: Assumptions 4.3–4.4 (`F` is continuous on the graph,
+  including at `(0, 0)` where `|xφ(y/x)| ≤ φ(0)x`).
+* `crsValue_of_fixed`: the bounded continuous fixed point, lifted to `ℝ`, is a concave solution
+  (`F` is concave on the graph because the perspective `xφ(y/x)` is), so `CRSValue` applies.
+* **Exercise 6.9a** (`ex_6_9a`): there is a unique bounded continuous solution; it is strictly
+  increasing and strictly concave; the maximizer is unique and the policy is continuous.
+-/
+
+open Set Filter Topology BoundedContinuousFunction
+
+namespace StokeyLucasPrescott.DeterministicDynamics
+
+variable {S φ S' φ' : ℝ → ℝ} {α θ δ β K : ℝ}
+
+/-- **On `ℝ₊` the value function is unbounded.** -/
+theorem crs_unbounded (h : CRSHyp S φ S' φ' α θ δ β) {V : ℝ → ℝ} {MS : ℝ}
+    (hS : ∀ q, 0 ≤ q → MS ≤ S q)
+    (hV : ∀ x, 0 ≤ x → crsF S φ θ δ x 0 + β * V 0 ≤ V x) : ¬ BddAbove (V '' Ici 0) := by
+  rintro ⟨B, hB⟩
+  have hc : 0 < θ * (1 - δ) := mul_pos h.θ_pos (by linarith [h.δ_lt])
+  set x := (|B| + |MS| + |β * V 0| + 1) / (θ * (1 - δ))
+  have hx : 0 ≤ x := by positivity
+  have h1 := hV x hx
+  have h2 := hB ⟨x, hx, rfl⟩
+  have h3 := hS (crsQ φ x 0) (h.crsQ_nonneg hx le_rfl (by nlinarith [h.α_pos]))
+  have hxe : θ * (1 - δ) * x = |B| + |MS| + |β * V 0| + 1 := by
+    simp only [x]; rw [mul_div_cancel₀ _ hc.ne']
+  simp only [crsF] at h1
+  nlinarith [le_abs_self B, neg_abs_le MS, neg_abs_le (β * V 0)]
+
+/-- `Γ(x) = [0, min{αx, K}]` on `[0, K]`. -/
+def crsΓ (α K : ℝ) : Icc (0 : ℝ) K → Set (Icc (0 : ℝ) K) :=
+  intervalΓ K (fun _ => 0) (fun x => min (α * x) K)
+
+/-- `F` on `[0, K]²`. -/
+noncomputable def crsFs (S φ : ℝ → ℝ) (θ δ K : ℝ) (p : Icc (0 : ℝ) K × Icc (0 : ℝ) K) : ℝ :=
+  crsF S φ θ δ p.1.1 p.2.1
+
+theorem crs_assumption43 (h : CRSHyp S φ S' φ' α θ δ β) (hK : 0 < K) :
+    Assumption43 (crsΓ α K) :=
+  intervalΓ_assumption43 continuousOn_const
+    ((continuous_const.mul continuous_id).min continuous_const).continuousOn
+    (fun _ _ => le_rfl) (fun _ hx => le_min (mul_nonneg h.α_pos.le hx.1) hK.le)
+    (fun _ _ => min_le_right _ _)
+
+/-- The cone `{(x, y) : 0 ≤ y ≤ αx}`. -/
+def crsCone (α : ℝ) : Set (ℝ × ℝ) := {p | 0 ≤ p.1 ∧ 0 ≤ p.2 ∧ p.2 ≤ α * p.1}
+
+theorem ratio_mem_cone (h : CRSHyp S φ S' φ' α θ δ β) {p : ℝ × ℝ} (hp : p ∈ crsCone α) :
+    p.2 / p.1 ∈ Icc 0 α := by
+  rcases eq_or_lt_of_le hp.1 with h0 | hpos
+  · rw [← h0, div_zero]; exact ⟨le_rfl, h.α_pos.le⟩
+  · exact CRSHyp.ratio_mem hpos hp.2.1 hp.2.2
+
+/-- Output is continuous on the cone, including at the vertex, where `|xφ(y/x)| ≤ φ(0)x`. -/
+theorem continuousOn_crsQ (h : CRSHyp S φ S' φ' α θ δ β) (hφc : ContinuousOn φ (Icc 0 α)) :
+    ContinuousOn (fun p : ℝ × ℝ => crsQ φ p.1 p.2) (crsCone α) := by
+  intro p hp
+  rcases eq_or_lt_of_le hp.1 with h0 | hpos
+  · -- at the vertex
+    have hp2 : p.2 = 0 := le_antisymm (by have := hp.2.2; rw [← h0, mul_zero] at this; exact this)
+      hp.2.1
+    have hval : crsQ φ p.1 p.2 = 0 := by simp [crsQ, ← h0]
+    rw [ContinuousWithinAt, hval]
+    have hlim : Tendsto (fun q : ℝ × ℝ => φ 0 * q.1) (𝓝[crsCone α] p) (𝓝 0) := by
+      have hc : Tendsto (fun q : ℝ × ℝ => φ 0 * q.1) (𝓝 p) (𝓝 (φ 0 * p.1)) :=
+        Continuous.tendsto (f := fun q : ℝ × ℝ => φ 0 * q.1) (by fun_prop) p
+      rw [← h0, mul_zero] at hc
+      exact hc.mono_left nhdsWithin_le_nhds
+    refine squeeze_zero_norm' ?_ hlim
+    filter_upwards [self_mem_nhdsWithin] with q hq
+    rw [Real.norm_eq_abs, abs_of_nonneg (by
+      rcases eq_or_lt_of_le hq.1 with hq0 | hqp
+      · simp [crsQ, ← hq0]
+      · exact h.crsQ_nonneg hq.1 hq.2.1 hq.2.2)]
+    simp only [crsQ]
+    rw [mul_comm]
+    exact mul_le_mul_of_nonneg_right (h.φ_le (ratio_mem_cone h hq)) hq.1
+  · -- away from the vertex
+    have hr : ContinuousWithinAt (fun q : ℝ × ℝ => q.2 / q.1) (crsCone α) p :=
+      (continuous_snd.continuousAt.div continuous_fst.continuousAt hpos.ne').continuousWithinAt
+    have hφ' : ContinuousWithinAt (fun q : ℝ × ℝ => φ (q.2 / q.1)) (crsCone α) p :=
+      ContinuousWithinAt.comp (g := φ) (f := fun q : ℝ × ℝ => q.2 / q.1)
+        (hφc _ (ratio_mem_cone h hp)) hr fun q hq => ratio_mem_cone h hq
+    exact continuous_fst.continuousWithinAt.mul hφ'
+
+/-- `F` is continuous on the cone. -/
+theorem continuousOn_crsF (h : CRSHyp S φ S' φ' α θ δ β) (hφc : ContinuousOn φ (Icc 0 α)) :
+    ContinuousOn (fun p : ℝ × ℝ => crsF S φ θ δ p.1 p.2) (crsCone α) := by
+  have hS : ContinuousOn S (Ici 0) := fun q hq =>
+    (h.S_deriv q hq).continuousAt.continuousWithinAt
+  have hSq := hS.comp (continuousOn_crsQ h hφc) fun p hp => mem_Ici.2
+    (h.crsQ_nonneg hp.1 hp.2.1 hp.2.2)
+  exact hSq.sub (continuous_const.mul (continuous_snd.sub
+    (continuous_const.mul continuous_fst))).continuousOn
+
+theorem graph_mem_cone {p : Icc (0 : ℝ) K × Icc (0 : ℝ) K}
+    (hp : p.2 ∈ crsΓ α K p.1) : (p.1.1, p.2.1) ∈ crsCone α :=
+  ⟨p.1.2.1, p.2.2.1, hp.2.trans (min_le_left _ _)⟩
+
+/-- **Assumption 4.4.** -/
+theorem crs_assumption44 (h : CRSHyp S φ S' φ' α θ δ β) (hφc : ContinuousOn φ (Icc 0 α)) :
+    Assumption44 (crsΓ α K) (crsFs S φ θ δ K) β := by
+  have hcont : ContinuousOn (crsFs S φ θ δ K) {p | p.2 ∈ crsΓ α K p.1} :=
+    (continuousOn_crsF h hφc).comp ((continuous_subtype_val.comp continuous_fst).prodMk
+      (continuous_subtype_val.comp continuous_snd)).continuousOn fun p hp => graph_mem_cone hp
+  -- `S` is bounded on the compact range of outputs
+  have hS : ContinuousOn S (Icc 0 (K * φ 0)) := fun q hq =>
+    (h.S_deriv q hq.1).continuousAt.continuousWithinAt
+  obtain ⟨MS, hMS⟩ := isCompact_Icc.exists_bound_of_continuousOn hS
+  refine ⟨hcont, ⟨MS + θ * (|K| + |K|), fun p hp => ?_⟩, h.β_pos, h.β_lt⟩
+  have hc := graph_mem_cone hp
+  have hq0 := h.crsQ_nonneg hc.1 hc.2.1 hc.2.2
+  have hqK : crsQ φ p.1.1 p.2.1 ≤ K * φ 0 := by
+    simp only [crsQ]
+    exact mul_le_mul p.1.2.2 (h.φ_le (ratio_mem_cone h hc)) (h.φ_nonneg (ratio_mem_cone h hc))
+      (le_trans p.1.2.1 p.1.2.2)
+  have h1 := hMS _ ⟨hq0, hqK⟩
+  rw [Real.norm_eq_abs] at h1
+  have h2 : |θ * (p.2.1 - (1 - δ) * p.1.1)| ≤ θ * (|K| + |K|) := by
+    rw [abs_mul, abs_of_pos h.θ_pos]
+    refine mul_le_mul_of_nonneg_left ?_ h.θ_pos.le
+    have hx1 := p.1.2.1
+    have hx2 := p.1.2.2
+    have hy1 := p.2.2.1
+    have hy2 := p.2.2.2
+    have hK := le_abs_self K
+    have h1δ : 0 ≤ (1 - δ) * p.1.1 := mul_nonneg (by linarith [h.δ_lt]) hx1
+    have h2δ : (1 - δ) * p.1.1 ≤ p.1.1 := by nlinarith [h.δ_pos]
+    rw [abs_le]
+    constructor <;> linarith
+  simp only [crsFs, crsF]
+  exact (abs_sub _ _).trans (add_le_add h1 h2)
+
+theorem mem_crsΓ {x y : Icc (0 : ℝ) K} : y ∈ crsΓ α K x ↔ y.1 ≤ min (α * x.1) K :=
+  ⟨fun h => h.2, fun h => ⟨y.2.1, h⟩⟩
+
+/-- The bounded continuous fixed point, lifted to `ℝ`, is a concave solution. -/
+theorem crsValue_of_fixed [Nonempty (Icc (0 : ℝ) K)] (h : CRSHyp S φ S' φ' α θ δ β) (hK : 0 < K)
+    (hφc : ContinuousOn φ (Icc 0 α)) {v : Icc (0 : ℝ) K →ᵇ ℝ}
+    (hv : bellman (crs_assumption43 h hK) (crs_assumption44 (K := K) h hφc) v = v) :
+    CRSValue S φ S' φ' α θ δ β K (liftR K v) := by
+  have h43 := crs_assumption43 h hK
+  have h44 := crs_assumption44 (K := K) h hφc
+  -- `F` is concave on the graph, and the graph is convex
+  have hF : ∀ x y x' y' : Icc (0 : ℝ) K, y ∈ crsΓ α K x → y' ∈ crsΓ α K x' →
+      ∀ (θ' : ℝ) (h0 : 0 ≤ θ') (h1 : θ' ≤ 1),
+        θ' * crsFs S φ θ δ K (x, y) + (1 - θ') * crsFs S φ θ δ K (x', y') ≤
+          crsFs S φ θ δ K (cmb (convex_Icc 0 K) h0 h1 x x', cmb (convex_Icc 0 K) h0 h1 y y') :=
+    fun x y x' y' hy hy' θ' h0 h1 => by
+      have hc := graph_mem_cone (p := (x, y)) hy
+      have hc' := graph_mem_cone (p := (x', y')) hy'
+      have hq := h.crsQ_concave hc.1 hc'.1 hc.2.1 hc.2.2 hc'.2.1 hc'.2.2 h0
+        (show (0 : ℝ) ≤ 1 - θ' by linarith) (by ring)
+      have hq0 := h.crsQ_nonneg hc.1 hc.2.1 hc.2.2
+      have hq0' := h.crsQ_nonneg hc'.1 hc'.2.1 hc'.2.2
+      have hmix : 0 ≤ θ' * crsQ φ x.1 y.1 + (1 - θ') * crsQ φ x'.1 y'.1 :=
+        add_nonneg (mul_nonneg h0 hq0) (mul_nonneg (by linarith) hq0')
+      have hS1 := h.S_conc.concaveOn.2 (mem_Ici.2 hq0) (mem_Ici.2 hq0') h0
+        (show (0 : ℝ) ≤ 1 - θ' by linarith) (by ring)
+      have hS2 := h.S_mono.monotoneOn (mem_Ici.2 hmix) (mem_Ici.2 (hmix.trans hq)) hq
+      simp only [smul_eq_mul] at hS1
+      simp only [crsFs, crsF, cmb, smul_eq_mul]
+      nlinarith
+  have h48 : Assumption48 (convex_Icc 0 K) (crsΓ α K) :=
+    fun x y x' y' hy hy' θ' h0 h1 => by
+      rw [mem_crsΓ] at hy hy' ⊢
+      simp only [cmb, smul_eq_mul]
+      refine le_min ?_ ?_
+      · have := mul_le_mul_of_nonneg_left (hy.trans (min_le_left _ _)) h0
+        have := mul_le_mul_of_nonneg_left (hy'.trans (min_le_left _ _)) (by linarith : 0 ≤ 1 - θ')
+        nlinarith
+      · have := mul_le_mul_of_nonneg_left (hy.trans (min_le_right _ _)) h0
+        have := mul_le_mul_of_nonneg_left (hy'.trans (min_le_right _ _)) (by linarith : 0 ≤ 1 - θ')
+        nlinarith
+  have hvc := fixed_concave_of_concaveF h43 h44 hF h48 hv
+  refine ⟨h, hK, fun x hx y hy => ?_, fun x hx => ?_, concaveOn_liftR_of_concave hvc⟩
+  · obtain ⟨-, -, -, hmax⟩ := exists_bellman_argmax h43 h44 v ⟨x, hx⟩
+    rw [hv] at hmax
+    have hyK : y ∈ Icc (0 : ℝ) K := ⟨hy.1, hy.2.trans (min_le_right _ _)⟩
+    have := hmax ⟨y, hyK⟩ (mem_crsΓ.2 hy.2)
+    rw [liftR_of_mem v hx, liftR_of_mem v hyK]
+    exact this
+  · obtain ⟨y, hy, hval, -⟩ := exists_bellman_argmax h43 h44 v ⟨x, hx⟩
+    rw [hv] at hval
+    refine ⟨y.1, ⟨y.2.1, mem_crsΓ.1 hy⟩, ?_⟩
+    rw [liftR_of_mem v hx, liftR_of_mem v y.2, hval]
+    rfl
+
+/-- Maximizers are characterized by `F(x, y) + βv(y) = v(x)`. -/
+theorem crs_mem_argmax_iff (h : CRSHyp S φ S' φ' α θ δ β) (hK : 0 < K)
+    (hφc : ContinuousOn φ (Icc 0 α)) {v : Icc (0 : ℝ) K →ᵇ ℝ}
+    (hv : bellman (crs_assumption43 h hK) (crs_assumption44 (K := K) h hφc) v = v)
+    (x y : Icc (0 : ℝ) K) : y ∈ argmax (obj (crsFs S φ θ δ K) β v) (crsΓ α K) x ↔
+      y.1 ≤ min (α * x.1) K ∧
+        crsF S φ θ δ x.1 y.1 + β * liftR K v y.1 = liftR K v x.1 := by
+  rw [liftR_of_mem v y.2, liftR_of_mem v x.2]
+  have e := bellman_apply (crs_assumption43 h hK) (crs_assumption44 (K := K) h hφc) v x
+  rw [hv] at e
+  simp only [argmax, mem_ofPred_eq, Subtype.coe_eta, obj, crsFs, ← e, mem_crsΓ]
+
+/-- **Exercise 6.9a.** On `[0, K]` there is a unique bounded continuous solution `v`; it is
+strictly increasing and strictly concave; the maximizer is unique and the policy continuous. -/
+theorem ex_6_9a [Nonempty (Icc (0 : ℝ) K)] (h : CRSHyp S φ S' φ' α θ δ β) (hK : 0 < K)
+    (hφc : ContinuousOn φ (Icc 0 α)) :
+    ∃ v : Icc (0 : ℝ) K →ᵇ ℝ,
+      bellman (crs_assumption43 h hK) (crs_assumption44 (K := K) h hφc) v = v ∧
+      (∀ w, bellman (crs_assumption43 h hK) (crs_assumption44 (K := K) h hφc) w = w → w = v) ∧
+      StrictMonoOn (liftR K v) (Icc 0 K) ∧ StrictConcaveOn ℝ (Icc 0 K) (liftR K v) ∧
+      UniqueArgmax (crsΓ α K) (obj (crsFs S φ θ δ K) β v) ∧
+      Continuous (argmaxFn (crsΓ α K) (obj (crsFs S φ θ δ K) β v)) := by
+  have h43 := crs_assumption43 h hK
+  have h44 := crs_assumption44 (K := K) h hφc
+  obtain ⟨v, hv, huniq, -, -⟩ := theorem_4_6 h43 h44
+  have hV := crsValue_of_fixed h hK hφc hv
+  have hUA : UniqueArgmax (crsΓ α K) (obj (crsFs S φ θ δ K) β v) :=
+    ⟨h43.nonempty, h43.compact, h43.lhc, h43.uhc, continuousOn_obj h44 v.continuous,
+      fun x y₁ hy₁ y₂ hy₂ => by
+        obtain ⟨h1, e1⟩ := (crs_mem_argmax_iff h hK hφc hv x y₁).1 hy₁
+        obtain ⟨h2, e2⟩ := (crs_mem_argmax_iff h hK hφc hv x y₂).1 hy₂
+        exact Subtype.ext (hV.argmax_unique x.2 ⟨y₁.2.1, h1⟩ ⟨y₂.2.1, h2⟩ e1 e2)⟩
+  exact ⟨v, hv, huniq, hV.strictMonoOn, hV.strictConcaveOn, hUA, hUA.continuous_argmaxFn⟩
+
+/-! ### No stationary point: a counterexample to Exercise 6.9c -/
+
+/-- `φ(u) = √(2 − u)` on `[0, 2]`. -/
+noncomputable def sqrtPhi (u : ℝ) : ℝ := Real.sqrt (2 - u)
+
+/-- `φ'(u) = −1/(2√(2 − u))`. -/
+noncomputable def sqrtPhi' (u : ℝ) : ℝ := -1 / (2 * Real.sqrt (2 - u))
+
+/-- `S(q) = 1 − e^{−q}`. -/
+noncomputable def expS (q : ℝ) : ℝ := 1 - Real.exp (-q)
+
+/-- `S'(q) = e^{−q}`. -/
+noncomputable def expS' (q : ℝ) : ℝ := Real.exp (-q)
+
+theorem sqrtPhi_hyp {θ δ : ℝ} (hθ : 0 < θ) (hδ0 : 0 < δ) (hδ1 : δ < 1) :
+    CRSHyp expS sqrtPhi expS' sqrtPhi' 2 θ δ (1 / 4) where
+  α_gt := by norm_num
+  θ_pos := hθ
+  δ_pos := hδ0
+  δ_lt := hδ1
+  β_pos := by norm_num
+  β_lt := by norm_num
+  φ_anti u hu v hv huv := Real.sqrt_lt_sqrt (by linarith [hv.2]) (by linarith)
+  φ_conc := by
+    refine ⟨convex_Icc 0 2, fun u hu v hv huv a b ha hb hab => ?_⟩
+    have := Real.strictConcaveOn_sqrt.2 (mem_Ici.2 (by linarith [hu.2] : (0 : ℝ) ≤ 2 - u))
+      (mem_Ici.2 (by linarith [hv.2] : (0 : ℝ) ≤ 2 - v)) (fun he => huv (by linarith)) ha hb hab
+    simp only [smul_eq_mul] at this ⊢
+    simp only [sqrtPhi]
+    rw [show 2 - (a * u + b * v) = a * (2 - u) + b * (2 - v) by
+      linear_combination (-2 : ℝ) * hab]
+    exact this
+  φ_zero := Real.sqrt_pos.2 (by norm_num)
+  φ_α := by simp [sqrtPhi]
+  φ_deriv u hu := by
+    have h1 : HasDerivAt (fun u : ℝ => 2 - u) (-1) u := by
+      simpa using (hasDerivAt_id u).const_sub 2
+    have := h1.sqrt (by linarith [hu.2] : (2 : ℝ) - u ≠ 0)
+    have e : sqrtPhi = fun y => Real.sqrt (2 - y) := rfl
+    rw [e]
+    simpa [sqrtPhi'] using this
+  φ'_lim := by
+    have h1 : Tendsto (fun u : ℝ => 2 - u) (𝓝[<] 2) (𝓝[>] 0) := by
+      refine tendsto_nhdsWithin_iff.2 ⟨?_, ?_⟩
+      · have := (Continuous.tendsto (f := fun u : ℝ => 2 - u) (by fun_prop) 2).mono_left
+          (nhdsWithin_le_nhds (s := Iio (2 : ℝ)))
+        simpa using this
+      · filter_upwards [self_mem_nhdsWithin] with u hu
+        simp only [mem_Ioi]; linarith [mem_Iio.1 hu]
+    have h2 : Tendsto (fun t : ℝ => 2 * Real.sqrt t) (𝓝[>] 0) (𝓝[>] 0) := by
+      refine tendsto_nhdsWithin_iff.2 ⟨?_, ?_⟩
+      · have := (Continuous.tendsto (f := fun t : ℝ => 2 * Real.sqrt t)
+          (continuous_const.mul Real.continuous_sqrt) 0).mono_left
+          (nhdsWithin_le_nhds (s := Ioi (0 : ℝ)))
+        simpa using this
+      · filter_upwards [self_mem_nhdsWithin] with t ht
+        exact mem_Ioi.2 (mul_pos two_pos (Real.sqrt_pos.2 ht))
+    have h3 := tendsto_neg_atTop_atBot.comp (tendsto_inv_nhdsGT_zero.comp (h2.comp h1))
+    refine h3.congr fun u => ?_
+    simp [sqrtPhi', div_eq_mul_inv]
+  S_mono q _ q' _ hqq' := by
+    simp only [expS]; linarith [Real.exp_lt_exp.2 (neg_lt_neg hqq')]
+  S_conc := by
+    refine ⟨convex_Ici 0, fun q _ q' _ hne a b ha hb hab => ?_⟩
+    have := strictConvexOn_exp.2 (mem_univ (-q)) (mem_univ (-q')) (fun he => hne (by linarith))
+      ha hb hab
+    simp only [smul_eq_mul] at this ⊢
+    simp only [expS]
+    rw [show -(a * q + b * q') = a * -q + b * -q' by ring]
+    nlinarith
+  S_deriv q _ := by
+    have := ((hasDerivAt_neg q).exp).const_sub 1
+    have e : expS = fun x => 1 - Real.exp (-x) := rfl
+    rw [e]
+    convert this using 1
+    simp [expS']
+
+theorem continuousOn_sqrtPhi : ContinuousOn sqrtPhi (Icc 0 2) :=
+  (Real.continuous_sqrt.comp (continuous_const.sub continuous_id)).continuousOn
+
+/-- **Exercise 6.9c is false as stated.** With `φ(u) = √(2 − u)`, `S(q) = 1 − e^{−q}`, `α = 2` and
+`β = 1/4`, all the hypotheses hold, but `βφ(1) + (1 − β)φ'(1) = 1/4 − 3/8 < 0`, so the value
+function has **no** positive stationary point on any `[0, K]`. -/
+theorem ex_6_9c_counterexample [Nonempty (Icc (0 : ℝ) K)] {θ δ : ℝ} (hθ : 0 < θ) (hδ0 : 0 < δ)
+    (hδ1 : δ < 1) (hK : 0 < K) :
+    ∃ v : Icc (0 : ℝ) K →ᵇ ℝ,
+      bellman (crs_assumption43 (sqrtPhi_hyp hθ hδ0 hδ1) hK)
+        (crs_assumption44 (K := K) (sqrtPhi_hyp hθ hδ0 hδ1) continuousOn_sqrtPhi) v = v ∧
+      ∀ x ∈ Ioo 0 K,
+        crsF expS sqrtPhi θ δ x x + 1 / 4 * liftR K v x ≠ liftR K v x := by
+  have H := sqrtPhi_hyp hθ hδ0 hδ1
+  obtain ⟨v, hv, -⟩ := ex_6_9a H hK continuousOn_sqrtPhi
+  refine ⟨v, hv, fun x hx => (crsValue_of_fixed H hK continuousOn_sqrtPhi hv).no_stationary
+    ?_ hx⟩
+  have h1 : sqrtPhi 1 = 1 := by norm_num [sqrtPhi]
+  have h2 : sqrtPhi' 1 = -1 / 2 := by norm_num [sqrtPhi']
+  rw [h1, h2]; norm_num
+
+end StokeyLucasPrescott.DeterministicDynamics
+
 set_option linter.style.longLine false
 #print axioms StokeyLucasPrescott.DeterministicDynamics.addIso
 #print axioms StokeyLucasPrescott.DeterministicDynamics.addIso_apply
@@ -11299,3 +14533,202 @@ set_option linter.style.longLine false
 #print axioms StokeyLucasPrescott.DeterministicDynamics.ex_6_10c_eq
 #print axioms StokeyLucasPrescott.DeterministicDynamics.ex_6_10c_ne
 #print axioms StokeyLucasPrescott.DeterministicDynamics.ex_6_10d
+#print axioms StokeyLucasPrescott.DeterministicDynamics.conjV
+#print axioms StokeyLucasPrescott.DeterministicDynamics.conjV_conjV
+#print axioms StokeyLucasPrescott.DeterministicDynamics.conjV_add
+#print axioms StokeyLucasPrescott.DeterministicDynamics.conjV_sub
+#print axioms StokeyLucasPrescott.DeterministicDynamics.conjV_smul
+#print axioms StokeyLucasPrescott.DeterministicDynamics.conjV_zero
+#print axioms StokeyLucasPrescott.DeterministicDynamics.conjV_cplx
+#print axioms StokeyLucasPrescott.DeterministicDynamics.eq_cplx_re
+#print axioms StokeyLucasPrescott.DeterministicDynamics.cplxEnd_conjV
+#print axioms StokeyLucasPrescott.DeterministicDynamics.pow_sub_conjV
+#print axioms StokeyLucasPrescott.DeterministicDynamics.conjV_mem_maxGenEigenspace
+#print axioms StokeyLucasPrescott.DeterministicDynamics.conjV_mem_biSup
+#print axioms StokeyLucasPrescott.DeterministicDynamics.conjV_mem_stable
+#print axioms StokeyLucasPrescott.DeterministicDynamics.conjV_mem_unstable
+#print axioms StokeyLucasPrescott.DeterministicDynamics.cplxL
+#print axioms StokeyLucasPrescott.DeterministicDynamics.stableR
+#print axioms StokeyLucasPrescott.DeterministicDynamics.unstableR
+#print axioms StokeyLucasPrescott.DeterministicDynamics.mem_stableR
+#print axioms StokeyLucasPrescott.DeterministicDynamics.mem_unstableR
+#print axioms StokeyLucasPrescott.DeterministicDynamics.mem_stableR_iff
+#print axioms StokeyLucasPrescott.DeterministicDynamics.cplx_mulVec
+#print axioms StokeyLucasPrescott.DeterministicDynamics.stableR_invariant
+#print axioms StokeyLucasPrescott.DeterministicDynamics.unstableR_invariant
+#print axioms StokeyLucasPrescott.DeterministicDynamics.isCompl_stableR_unstableR
+#print axioms StokeyLucasPrescott.DeterministicDynamics.linearIndependent_cplx
+#print axioms StokeyLucasPrescott.DeterministicDynamics.finrank_le_of_cplx
+#print axioms StokeyLucasPrescott.DeterministicDynamics.finrank_stableR
+#print axioms StokeyLucasPrescott.DeterministicDynamics.unstableR_ker
+#print axioms StokeyLucasPrescott.DeterministicDynamics.uniform_bound_of_basis
+#print axioms StokeyLucasPrescott.DeterministicDynamics.exists_bound_of_tendsto
+#print axioms StokeyLucasPrescott.DeterministicDynamics.mem_maxGen_smul
+#print axioms StokeyLucasPrescott.DeterministicDynamics.projS
+#print axioms StokeyLucasPrescott.DeterministicDynamics.projU
+#print axioms StokeyLucasPrescott.DeterministicDynamics.projS_add_projU
+#print axioms StokeyLucasPrescott.DeterministicDynamics.projS_mem
+#print axioms StokeyLucasPrescott.DeterministicDynamics.projU_mem
+#print axioms StokeyLucasPrescott.DeterministicDynamics.projS_of_mem
+#print axioms StokeyLucasPrescott.DeterministicDynamics.projS_of_mem_unstable
+#print axioms StokeyLucasPrescott.DeterministicDynamics.projU_of_mem
+#print axioms StokeyLucasPrescott.DeterministicDynamics.projU_of_mem_stable
+#print axioms StokeyLucasPrescott.DeterministicDynamics.projS_mulVec
+#print axioms StokeyLucasPrescott.DeterministicDynamics.projU_mulVec
+#print axioms StokeyLucasPrescott.DeterministicDynamics.pow_mulVec_mem_stableR
+#print axioms StokeyLucasPrescott.DeterministicDynamics.tendsto_scaled_of_stable
+#print axioms StokeyLucasPrescott.DeterministicDynamics.scaled_pow_cplx
+#print axioms StokeyLucasPrescott.DeterministicDynamics.stable_bound
+#print axioms StokeyLucasPrescott.DeterministicDynamics.cplxEnd_mul
+#print axioms StokeyLucasPrescott.DeterministicDynamics.cplxEnd_one
+#print axioms StokeyLucasPrescott.DeterministicDynamics.cplxEnd_add
+#print axioms StokeyLucasPrescott.DeterministicDynamics.projSm
+#print axioms StokeyLucasPrescott.DeterministicDynamics.projSm_mulVec
+#print axioms StokeyLucasPrescott.DeterministicDynamics.shiftM
+#print axioms StokeyLucasPrescott.DeterministicDynamics.shiftM_mulVec
+#print axioms StokeyLucasPrescott.DeterministicDynamics.stable_neg_eigen
+#print axioms StokeyLucasPrescott.DeterministicDynamics.isUnit_shift
+#print axioms StokeyLucasPrescott.DeterministicDynamics.invB
+#print axioms StokeyLucasPrescott.DeterministicDynamics.shiftM_invB
+#print axioms StokeyLucasPrescott.DeterministicDynamics.invB_shiftM
+#print axioms StokeyLucasPrescott.DeterministicDynamics.shiftM_of_unstable
+#print axioms StokeyLucasPrescott.DeterministicDynamics.inv_mem
+#print axioms StokeyLucasPrescott.DeterministicDynamics.inv_right
+#print axioms StokeyLucasPrescott.DeterministicDynamics.inv_left
+#print axioms StokeyLucasPrescott.DeterministicDynamics.cplx_projS_unstable
+#print axioms StokeyLucasPrescott.DeterministicDynamics.mem_maxGen_invB
+#print axioms StokeyLucasPrescott.DeterministicDynamics.unstable_bound
+#print axioms StokeyLucasPrescott.DeterministicDynamics.LPData
+#print axioms StokeyLucasPrescott.DeterministicDynamics.LPData.mk
+#print axioms StokeyLucasPrescott.DeterministicDynamics.LPData.PQ
+#print axioms StokeyLucasPrescott.DeterministicDynamics.LPData.PP
+#print axioms StokeyLucasPrescott.DeterministicDynamics.LPData.PB
+#print axioms StokeyLucasPrescott.DeterministicDynamics.LPData.AB
+#print axioms StokeyLucasPrescott.DeterministicDynamics.LPData.K_nn
+#print axioms StokeyLucasPrescott.DeterministicDynamics.LPData.a_nn
+#print axioms StokeyLucasPrescott.DeterministicDynamics.LPData.aγ
+#print axioms StokeyLucasPrescott.DeterministicDynamics.LPData.c_pos
+#print axioms StokeyLucasPrescott.DeterministicDynamics.LPData.cγ
+#print axioms StokeyLucasPrescott.DeterministicDynamics.LPData.bA
+#print axioms StokeyLucasPrescott.DeterministicDynamics.LPData.bB
+#print axioms StokeyLucasPrescott.DeterministicDynamics.geom_head
+#print axioms StokeyLucasPrescott.DeterministicDynamics.lpHead
+#print axioms StokeyLucasPrescott.DeterministicDynamics.lpTail
+#print axioms StokeyLucasPrescott.DeterministicDynamics.lpHead_succ
+#print axioms StokeyLucasPrescott.DeterministicDynamics.summable_lpTail
+#print axioms StokeyLucasPrescott.DeterministicDynamics.norm_lpTail_le
+#print axioms StokeyLucasPrescott.DeterministicDynamics.norm_lpHead_le
+#print axioms StokeyLucasPrescott.DeterministicDynamics.lpHead_sub
+#print axioms StokeyLucasPrescott.DeterministicDynamics.lpTail_sub
+#print axioms StokeyLucasPrescott.DeterministicDynamics.mulVec_tsum
+#print axioms StokeyLucasPrescott.DeterministicDynamics.linearMap_tsum
+#print axioms StokeyLucasPrescott.DeterministicDynamics.lpTail_succ
+#print axioms StokeyLucasPrescott.DeterministicDynamics.lpU
+#print axioms StokeyLucasPrescott.DeterministicDynamics.lpZ
+#print axioms StokeyLucasPrescott.DeterministicDynamics.lyapunov_perron
+#print axioms StokeyLucasPrescott.DeterministicDynamics.norm_head_sub_tail_le
+#print axioms StokeyLucasPrescott.DeterministicDynamics.proj_lpTail
+#print axioms StokeyLucasPrescott.DeterministicDynamics.lp_lipschitz
+#print axioms StokeyLucasPrescott.DeterministicDynamics.clmOf
+#print axioms StokeyLucasPrescott.DeterministicDynamics.clmOf_apply
+#print axioms StokeyLucasPrescott.DeterministicDynamics.invB_pow_mem
+#print axioms StokeyLucasPrescott.DeterministicDynamics.lpData_of
+#print axioms StokeyLucasPrescott.DeterministicDynamics.exists_lip_remainder
+#print axioms StokeyLucasPrescott.DeterministicDynamics.theorem_6_6
+#print axioms StokeyLucasPrescott.DeterministicDynamics.local_stable_family
+#print axioms StokeyLucasPrescott.DeterministicDynamics.blockCLM
+#print axioms StokeyLucasPrescott.DeterministicDynamics.blockCLM_apply
+#print axioms StokeyLucasPrescott.DeterministicDynamics.eulerG
+#print axioms StokeyLucasPrescott.DeterministicDynamics.eulerPsi
+#print axioms StokeyLucasPrescott.DeterministicDynamics.psiLin
+#print axioms StokeyLucasPrescott.DeterministicDynamics.psiInvLin
+#print axioms StokeyLucasPrescott.DeterministicDynamics.psi_inv_left
+#print axioms StokeyLucasPrescott.DeterministicDynamics.psi_inv_right
+#print axioms StokeyLucasPrescott.DeterministicDynamics.psiCLE
+#print axioms StokeyLucasPrescott.DeterministicDynamics.psiCLE_apply
+#print axioms StokeyLucasPrescott.DeterministicDynamics.psiCLE_symm_apply
+#print axioms StokeyLucasPrescott.DeterministicDynamics.hasStrictFDerivAt_psi
+#print axioms StokeyLucasPrescott.DeterministicDynamics.exists_eulerZeta
+#print axioms StokeyLucasPrescott.DeterministicDynamics.stackH
+#print axioms StokeyLucasPrescott.DeterministicDynamics.hasStrictFDerivAt_stackH
+#print axioms StokeyLucasPrescott.DeterministicDynamics.norm_comp_inr_le
+#print axioms StokeyLucasPrescott.DeterministicDynamics.norm_comp_inl_le
+#print axioms StokeyLucasPrescott.DeterministicDynamics.exists_convergent_euler_path
+#print axioms StokeyLucasPrescott.DeterministicDynamics.total_eq_tsum_of_bdd
+#print axioms StokeyLucasPrescott.DeterministicDynamics.optimal_unique
+#print axioms StokeyLucasPrescott.DeterministicDynamics.theorem_6_9
+#print axioms StokeyLucasPrescott.DeterministicDynamics.crsQ
+#print axioms StokeyLucasPrescott.DeterministicDynamics.crsF
+#print axioms StokeyLucasPrescott.DeterministicDynamics.CRSHyp
+#print axioms StokeyLucasPrescott.DeterministicDynamics.CRSHyp.mk
+#print axioms StokeyLucasPrescott.DeterministicDynamics.CRSHyp.α_gt
+#print axioms StokeyLucasPrescott.DeterministicDynamics.CRSHyp.θ_pos
+#print axioms StokeyLucasPrescott.DeterministicDynamics.CRSHyp.δ_pos
+#print axioms StokeyLucasPrescott.DeterministicDynamics.CRSHyp.δ_lt
+#print axioms StokeyLucasPrescott.DeterministicDynamics.CRSHyp.β_pos
+#print axioms StokeyLucasPrescott.DeterministicDynamics.CRSHyp.β_lt
+#print axioms StokeyLucasPrescott.DeterministicDynamics.CRSHyp.φ_anti
+#print axioms StokeyLucasPrescott.DeterministicDynamics.CRSHyp.φ_conc
+#print axioms StokeyLucasPrescott.DeterministicDynamics.CRSHyp.φ_zero
+#print axioms StokeyLucasPrescott.DeterministicDynamics.CRSHyp.φ_α
+#print axioms StokeyLucasPrescott.DeterministicDynamics.CRSHyp.φ_deriv
+#print axioms StokeyLucasPrescott.DeterministicDynamics.CRSHyp.φ'_lim
+#print axioms StokeyLucasPrescott.DeterministicDynamics.CRSHyp.S_mono
+#print axioms StokeyLucasPrescott.DeterministicDynamics.CRSHyp.S_conc
+#print axioms StokeyLucasPrescott.DeterministicDynamics.CRSHyp.S_deriv
+#print axioms StokeyLucasPrescott.DeterministicDynamics.CRSHyp.α_pos
+#print axioms StokeyLucasPrescott.DeterministicDynamics.CRSHyp.φ_nonneg
+#print axioms StokeyLucasPrescott.DeterministicDynamics.CRSHyp.φ_le
+#print axioms StokeyLucasPrescott.DeterministicDynamics.CRSHyp.φ_pos
+#print axioms StokeyLucasPrescott.DeterministicDynamics.CRSHyp.S'_pos
+#print axioms StokeyLucasPrescott.DeterministicDynamics.CRSHyp.S'_lt
+#print axioms StokeyLucasPrescott.DeterministicDynamics.CRSHyp.ratio_mem
+#print axioms StokeyLucasPrescott.DeterministicDynamics.CRSHyp.crsQ_nonneg
+#print axioms StokeyLucasPrescott.DeterministicDynamics.CRSHyp.crsQ_mono
+#print axioms StokeyLucasPrescott.DeterministicDynamics.CRSHyp.crsF_lt
+#print axioms StokeyLucasPrescott.DeterministicDynamics.CRSHyp.crsQ_concave
+#print axioms StokeyLucasPrescott.DeterministicDynamics.CRSHyp.crsQ_strict
+#print axioms StokeyLucasPrescott.DeterministicDynamics.CRSValue
+#print axioms StokeyLucasPrescott.DeterministicDynamics.CRSValue.mk
+#print axioms StokeyLucasPrescott.DeterministicDynamics.CRSValue.hyp
+#print axioms StokeyLucasPrescott.DeterministicDynamics.CRSValue.K_pos
+#print axioms StokeyLucasPrescott.DeterministicDynamics.CRSValue.le
+#print axioms StokeyLucasPrescott.DeterministicDynamics.CRSValue.arg
+#print axioms StokeyLucasPrescott.DeterministicDynamics.CRSValue.conc
+#print axioms StokeyLucasPrescott.DeterministicDynamics.CRSValue.mem_Γ_mono
+#print axioms StokeyLucasPrescott.DeterministicDynamics.CRSValue.strictMonoOn
+#print axioms StokeyLucasPrescott.DeterministicDynamics.CRSValue.slope_le
+#print axioms StokeyLucasPrescott.DeterministicDynamics.CRSValue.argmax_lt
+#print axioms StokeyLucasPrescott.DeterministicDynamics.CRSValue.argmax_unique
+#print axioms StokeyLucasPrescott.DeterministicDynamics.CRSValue.hasDerivAt_crsF_x
+#print axioms StokeyLucasPrescott.DeterministicDynamics.CRSValue.hasDerivAt_V
+#print axioms StokeyLucasPrescott.DeterministicDynamics.CRSValue.foc
+#print axioms StokeyLucasPrescott.DeterministicDynamics.CRSValue.psi_props
+#print axioms StokeyLucasPrescott.DeterministicDynamics.CRSValue.argmax_mono
+#print axioms StokeyLucasPrescott.DeterministicDynamics.CRSValue.stationary_eq
+#print axioms StokeyLucasPrescott.DeterministicDynamics.CRSValue.stationary_unique
+#print axioms StokeyLucasPrescott.DeterministicDynamics.CRSValue.no_stationary
+#print axioms StokeyLucasPrescott.DeterministicDynamics.CRSValue.ex_6_9e
+#print axioms StokeyLucasPrescott.DeterministicDynamics.CRSValue.strictConcaveOn
+#print axioms StokeyLucasPrescott.DeterministicDynamics.ex_6_9d
+#print axioms StokeyLucasPrescott.DeterministicDynamics.crs_unbounded
+#print axioms StokeyLucasPrescott.DeterministicDynamics.crsΓ
+#print axioms StokeyLucasPrescott.DeterministicDynamics.crsFs
+#print axioms StokeyLucasPrescott.DeterministicDynamics.crs_assumption43
+#print axioms StokeyLucasPrescott.DeterministicDynamics.crsCone
+#print axioms StokeyLucasPrescott.DeterministicDynamics.ratio_mem_cone
+#print axioms StokeyLucasPrescott.DeterministicDynamics.continuousOn_crsQ
+#print axioms StokeyLucasPrescott.DeterministicDynamics.continuousOn_crsF
+#print axioms StokeyLucasPrescott.DeterministicDynamics.graph_mem_cone
+#print axioms StokeyLucasPrescott.DeterministicDynamics.crs_assumption44
+#print axioms StokeyLucasPrescott.DeterministicDynamics.mem_crsΓ
+#print axioms StokeyLucasPrescott.DeterministicDynamics.crsValue_of_fixed
+#print axioms StokeyLucasPrescott.DeterministicDynamics.crs_mem_argmax_iff
+#print axioms StokeyLucasPrescott.DeterministicDynamics.ex_6_9a
+#print axioms StokeyLucasPrescott.DeterministicDynamics.sqrtPhi
+#print axioms StokeyLucasPrescott.DeterministicDynamics.sqrtPhi'
+#print axioms StokeyLucasPrescott.DeterministicDynamics.expS
+#print axioms StokeyLucasPrescott.DeterministicDynamics.expS'
+#print axioms StokeyLucasPrescott.DeterministicDynamics.sqrtPhi_hyp
+#print axioms StokeyLucasPrescott.DeterministicDynamics.continuousOn_sqrtPhi
+#print axioms StokeyLucasPrescott.DeterministicDynamics.ex_6_9c_counterexample

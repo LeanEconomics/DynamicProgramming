@@ -21,7 +21,7 @@ of `A` acting on `ℂ²ˡ` (`LinearSystems`):
   `2βᵗq(d_t, d_{t+1}) = βᵗg_t − βᵗ⁺¹g_{t+1}`; the sum telescopes to `0`, and `q < 0` off zero.
   This is the book's argument that `B₂₁` is nonsingular (two convergent Euler paths from the
   same `x₀` would both be optimal), without passing through optimality.
-* `stable_inr_injective`: so the projection `(z₁, z₀) ↦ z₀` is injective on the stable subspace
+* `stable_inr_zero`: so the projection `(z₁, z₀) ↦ z₀` is injective on the stable subspace
   (the real and imaginary parts of a complex stable vector are real stable vectors). With
   `l` roots inside the unit circle the dimensions match, so it is onto: from every `z₀` there is
   a `z₁` with `(z₁, z₀)` stable (`exists_stable_start`).
@@ -166,7 +166,7 @@ theorem euler_of_rec (hQ : Q.det ≠ 0) (hβ : β ≠ 0) {z₀ z₁ z₂ : Fin l
 
 /-- **Two convergent Euler paths from the same point coincide**: a solution of the homogeneous
 Euler equations with `d₀ = 0` and `d_t → 0` is zero. -/
-theorem hom_euler_eq_zero (hconc : StrictConcaveOn ℝ univ (lqF P Q R a b c₀)) (hβ0 : 0 < β)
+theorem hom_euler_eq_zero (hneg : ∀ u v : Fin l → ℝ, (u, v) ≠ 0 → lqQ P Q R u v < 0) (hβ0 : 0 < β)
     (hβ1 : β < 1) {d : ℕ → Fin l → ℝ} (hd0 : d 0 = 0) (hdt : Tendsto d atTop (𝓝 0))
     (he : ∀ t, Qᵀ *ᵥ d t + R *ᵥ d (t + 1) + β • (P *ᵥ d (t + 1) + Q *ᵥ d (t + 2)) = 0) :
     ∀ t, d t = 0 := by
@@ -204,7 +204,11 @@ theorem hom_euler_eq_zero (hconc : StrictConcaveOn ℝ univ (lqF P Q R a b c₀)
     simp only [mul_zero, neg_zero, zero_div] at h
     refine h.congr fun N => ?_
     linarith [hS N]
-  have hq : ∀ t, q t ≤ 0 := fun t => lqQ_nonpos hconc _ _
+  have hq : ∀ t, q t ≤ 0 := fun t => by
+    by_cases h0 : (d t, d (t + 1)) = 0
+    · obtain ⟨h1, h2⟩ := Prod.mk_eq_zero.1 h0
+      simp only [q, h1, h2]; exact lqQ_zero_left.le
+    · exact (hneg _ _ h0).le
   have hanti : Antitone S := antitone_nat_of_succ_le fun N => by
     simp only [S, Finset.sum_range_succ]
     nlinarith [hq N, pow_pos hβ0 N]
@@ -222,14 +226,14 @@ theorem hom_euler_eq_zero (hconc : StrictConcaveOn ℝ univ (lqF P Q R a b c₀)
     exact (mul_eq_zero.1 h).resolve_left (pow_ne_zero t hβ0.ne')
   have hpair : ∀ t, (d t, d (t + 1)) = 0 := fun t => by
     by_contra hne
-    exact (lqQ_neg hconc hne).ne (hq0 t)
+    exact (hneg _ _ hne).ne (hq0 t)
   intro t
   rcases t with _ | t
   · exact hd0
   · exact (Prod.mk_eq_zero.1 (hpair t)).2
 
 /-- **A real stable vector with zero second block is zero.** -/
-theorem stable_real_inr_zero (hconc : StrictConcaveOn ℝ univ (lqF P Q R a b c₀))
+theorem stable_real_inr_zero (hneg : ∀ u v : Fin l → ℝ, (u, v) ≠ 0 → lqQ P Q R u v < 0)
     (hβ0 : 0 < β) (hβ1 : β < 1) (hQ : Q.det ≠ 0) {Z : Fin l ⊕ Fin l → ℝ}
     (hZ : ∀ i, Z (Sum.inr i) = 0)
     (ht : Tendsto (fun t => (eulerA P Q R β ^ t) *ᵥ Z) atTop (𝓝 0)) : Z = 0 := by
@@ -238,7 +242,7 @@ theorem stable_real_inr_zero (hconc : StrictConcaveOn ℝ univ (lqF P Q R a b c�
   have hdt : Tendsto d atTop (𝓝 0) := by
     rw [tendsto_pi_nhds] at ht ⊢
     exact fun i => ht (Sum.inr i)
-  have hzero := hom_euler_eq_zero (P := P) (Q := Q) (R := R) hconc hβ0 hβ1 hd0 hdt
+  have hzero := hom_euler_eq_zero (P := P) (Q := Q) (R := R) hneg hβ0 hβ1 hd0 hdt
     fun t => euler_of_rec hQ hβ0.ne' (orbit_rec Z t)
   have h1 : ∀ i, Z (Sum.inl i) = 0 := fun i => by
     have := congrFun (hzero 1) i
@@ -250,20 +254,20 @@ theorem stable_real_inr_zero (hconc : StrictConcaveOn ℝ univ (lqF P Q R a b c�
   · exact hZ i
 
 /-- **A complex stable vector with zero second block is zero.** -/
-theorem stable_inr_zero (hconc : StrictConcaveOn ℝ univ (lqF P Q R a b c₀))
+theorem stable_inr_zero (hneg : ∀ u v : Fin l → ℝ, (u, v) ≠ 0 → lqQ P Q R u v < 0)
     (hβ0 : 0 < β) (hβ1 : β < 1) (hQ : Q.det ≠ 0) {W : Fin l ⊕ Fin l → ℂ}
     (hW : W ∈ stableSubspace (cplxEnd (eulerA P Q R β))) (h0 : ∀ i, W (Sum.inr i) = 0) :
     W = 0 := by
-  have hre := stable_real_inr_zero hconc hβ0 hβ1 hQ (Z := fun j => (W j).re)
+  have hre := stable_real_inr_zero hneg hβ0 hβ1 hQ (Z := fun j => (W j).re)
     (fun i => by simp [h0 i]) (tendsto_re_of_stable _ hW)
-  have him := stable_real_inr_zero hconc hβ0 hβ1 hQ (Z := fun j => (W j).im)
+  have him := stable_real_inr_zero hneg hβ0 hβ1 hQ (Z := fun j => (W j).im)
     (fun i => by simp [h0 i]) (tendsto_im_of_stable _ hW)
   funext j
   exact Complex.ext (congrFun hre j) (congrFun him j)
 
 /-- **From every `z₀` there is a `z₁` with `(z₁, z₀)` in the stable subspace**, when `A` has `l`
 characteristic roots inside the unit circle. This is the book's `B₂₁` nonsingular. -/
-theorem exists_stable_start (hconc : StrictConcaveOn ℝ univ (lqF P Q R a b c₀))
+theorem exists_stable_start (hneg : ∀ u v : Fin l → ℝ, (u, v) ≠ 0 → lqQ P Q R u v < 0)
     (hβ0 : 0 < β) (hβ1 : β < 1) (hQ : Q.det ≠ 0)
     (hroots : (((eulerA P Q R β).charpoly.map Complex.ofRealHom).roots.filter
       fun μ => ‖μ‖ < 1).card = l) (z₀ : Fin l → ℝ) :
@@ -279,7 +283,7 @@ theorem exists_stable_start (hconc : StrictConcaveOn ℝ univ (lqF P Q R a b c�
     rw [Module.finrank_fin_fun, finrank_stableSubspace, hcp, hroots]
   have hinj : Function.Injective proj := by
     refine (injective_iff_map_eq_zero proj).2 fun w hw => Subtype.ext ?_
-    exact stable_inr_zero hconc hβ0 hβ1 hQ w.2 fun i => congrFun hw i
+    exact stable_inr_zero hneg hβ0 hβ1 hQ w.2 fun i => congrFun hw i
   obtain ⟨w, hw⟩ := (LinearMap.injective_iff_surjective_of_finrank_eq_finrank hdim).1 hinj
     (cplx z₀)
   refine ⟨fun i => ((w : Fin l ⊕ Fin l → ℂ) (Sum.inl i)).re, ?_⟩
@@ -330,7 +334,8 @@ theorem theorem_6_8 (hP : Pᵀ = P) (hR : Rᵀ = R)
         total (fun x y => lqF P Q R a b c₀ (x, y)) β y =
           vstar (fun _ => univ) (fun x y => lqF P Q R a b c₀ (x, y)) β x₀ → y = xs := by
   set xbar := lqBar P Q R a b β
-  obtain ⟨z₁, hz⟩ := exists_stable_start hconc hβ0 hβ1 hQ hroots (x₀ - xbar)
+  obtain ⟨z₁, hz⟩ := exists_stable_start (fun u v huv => lqQ_neg hconc huv) hβ0 hβ1 hQ hroots
+    (x₀ - xbar)
   set Z := Sum.elim z₁ (x₀ - xbar)
   set z : ℕ → Fin l → ℝ := fun t i => ((eulerA P Q R β ^ t) *ᵥ Z) (Sum.inr i)
   set xs : ℕ → Fin l → ℝ := fun t => xbar + z t

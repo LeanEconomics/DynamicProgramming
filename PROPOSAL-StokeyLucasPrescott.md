@@ -13,7 +13,7 @@ independent Lean/Mathlib project per chapter, built one chapter at a time, each 
 README library map, `docs/source-map.md`, `docs/corrections.md`, `proof-manifest.json` and
 the `scripts/verify.py` audit; a CI matrix entry; a row in the root README.
 
-Status: started 2026-10-14 with Chapter 2; Chapters 3–5 done 2026-10-14.
+Status: started 2026-10-14 with Chapter 2; Chapters 3–6 done 2026-10-14.
 
 ---
 

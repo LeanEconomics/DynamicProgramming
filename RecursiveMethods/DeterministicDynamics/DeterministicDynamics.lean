@@ -35,3 +35,12 @@ import DeterministicDynamics.LQStability
 import DeterministicDynamics.FirmDynamics
 import DeterministicDynamics.CobbDouglasDP
 import DeterministicDynamics.ConsumerDynamics
+import DeterministicDynamics.RealSplitting
+import DeterministicDynamics.Dichotomy
+import DeterministicDynamics.LyapunovPerron
+import DeterministicDynamics.StableManifold
+import DeterministicDynamics.EulerMap
+import DeterministicDynamics.NonlinearEuler
+import DeterministicDynamics.Theorem69
+import DeterministicDynamics.CRSIndustry
+import DeterministicDynamics.CRSIndustryDP
