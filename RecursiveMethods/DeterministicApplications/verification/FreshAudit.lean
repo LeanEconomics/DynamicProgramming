@@ -9879,7 +9879,8 @@ units for delivery next period at cost `c₀ + c₁y`, and discounts at `β = 1/
   `Y_n = r_n/(1 − βⁿ) = −(c₀ + c₁n)/(1 − βⁿ) + βp/(1 − β)` (`Yn_eq`); `Y_n → −∞`
   (`tendsto_Yn`), so some finite `N ≥ 1` maximizes `Y_n` (`ex_5_14b`). The maximizers do not
   depend on `p` (`argmax_Yn_indep_p`), and `N` rises with the fixed cost `c₀`
-  (`argmax_Yn_mono_c0`, increasing differences).
+  (`argmax_Yn_mono_c0`, increasing differences) and with the discount factor `β`
+  (`argmax_Yn_mono_beta`).
 * **Exercise 5.14c** (`ex_5_14c`): if `Y_N > 0`, then `A = (1 − β)Y_N/(βp − c₁)` lies in `(0, 1)`;
   in fact `A < 1` for every `N ≥ 1`.
 -/
@@ -10267,6 +10268,66 @@ theorem argmax_Yn_mono_c0 {c₀' : ℝ} (h : InvHyp p c₀ c₁ β) (h' : InvHyp
     nlinarith
   have := mul_lt_mul_of_pos_left hlt' (by linarith : 0 < c₀' - c₀)
   linarith
+
+/-- For `m > n ≥ 1`, `(1 − β^m)/(1 − β^n)` rises strictly with `β ∈ (0, 1)`: with `s = β^n`, it
+is the slope of the chord of the strictly convex `s ↦ s^{m/n}` from `s` to `1`. -/
+theorem pow_ratio_strictMono {β β' : ℝ} (h0 : 0 < β) (hββ' : β < β') (h1 : β' < 1) {n m : ℕ}
+    (hn : 1 ≤ n) (hnm : n < m) :
+    (1 - β ^ m) * (1 - β' ^ n) < (1 - β' ^ m) * (1 - β ^ n) := by
+  have hn0 : (n : ℝ) ≠ 0 := by positivity
+  set q : ℝ := (m : ℝ) / n
+  have hq : 1 < q := by
+    rw [one_lt_div (by positivity)]
+    exact_mod_cast hnm
+  have hpow : ∀ x : ℝ, 0 ≤ x → (x ^ n) ^ q = x ^ m := fun x hx => by
+    rw [← Real.rpow_natCast x n, ← Real.rpow_mul hx, show (n : ℝ) * q = m by
+      simp only [q]; field_simp, Real.rpow_natCast]
+  have hs : β ^ n < β' ^ n := pow_lt_pow_left₀ hββ' h0.le (by omega)
+  have hs1 : β' ^ n < 1 := pow_lt_one₀ (h0.le.trans hββ'.le) h1 (by omega)
+  have hs0 : 0 < β ^ n := pow_pos h0 n
+  have key := (strictConvexOn_rpow hq).secant_strict_mono (a := 1) (x := β ^ n) (y := β' ^ n)
+    (mem_Ici.2 zero_le_one) (mem_Ici.2 hs0.le) (mem_Ici.2 (hs0.trans hs).le) (by linarith)
+    (by linarith) hs
+  rw [hpow β h0.le, hpow β' (h0.trans hββ').le, Real.one_rpow] at key
+  have d1 : 0 < 1 - β ^ n := by linarith
+  have d2 : 0 < 1 - β' ^ n := by linarith
+  rw [← neg_div_neg_eq, ← neg_div_neg_eq (β' ^ m - 1), neg_sub, neg_sub, neg_sub, neg_sub,
+    div_lt_div_iff₀ d1 d2] at key
+  linarith
+
+/-- **Exercise 5.14b.** A higher discount factor (a lower interest rate) calls for a longer cycle:
+if `N` is optimal for `β` and `N'` for `β' > β`, then `N ≤ N'` (increasing differences:
+`(1 − β^m)/(1 − β^n)` rises with `β` for `m > n`, `pow_ratio_strictMono`). -/
+theorem argmax_Yn_mono_beta {β' : ℝ} (h : InvHyp p c₀ c₁ β) (h' : InvHyp p c₀ c₁ β')
+    (hβ : β < β') {N N' : ℕ} (hN : 1 ≤ N) (hN' : 1 ≤ N')
+    (hmax : ∀ n, 1 ≤ n → Yn p c₀ c₁ β n ≤ Yn p c₀ c₁ β N)
+    (hmax' : ∀ n, 1 ≤ n → Yn p c₀ c₁ β' n ≤ Yn p c₀ c₁ β' N') : N ≤ N' := by
+  by_contra hlt
+  push Not at hlt
+  have e1 := hmax N' hN'
+  have e2 := hmax' N hN
+  rw [Yn_eq h hN', Yn_eq h hN] at e1
+  rw [Yn_eq h' hN, Yn_eq h' hN'] at e2
+  have x0 := one_sub_pow_pos h hN
+  have y0 := one_sub_pow_pos h hN'
+  have x0' := one_sub_pow_pos h' hN
+  have y0' := one_sub_pow_pos h' hN'
+  have hA : 0 < c₀ + c₁ * N := by have := h.c₀_pos; have := h.c₁_pos; positivity
+  have hB : 0 < c₀ + c₁ * N' := by have := h.c₀_pos; have := h.c₁_pos; positivity
+  -- clear denominators: `A(1 − β^{N'}) ≤ B(1 − β^N)` and `B(1 − β'^N) ≤ A(1 − β'^{N'})`
+  have f1 : (c₀ + c₁ * N) * (1 - β ^ N') ≤ (c₀ + c₁ * N') * (1 - β ^ N) := by
+    have : -(c₀ + c₁ * N') / (1 - β ^ N') ≤ -(c₀ + c₁ * N) / (1 - β ^ N) := by linarith
+    rw [div_le_div_iff₀ y0 x0] at this
+    linarith
+  have f2 : (c₀ + c₁ * N') * (1 - β' ^ N) ≤ (c₀ + c₁ * N) * (1 - β' ^ N') := by
+    have : -(c₀ + c₁ * N) / (1 - β' ^ N) ≤ -(c₀ + c₁ * N') / (1 - β' ^ N') := by linarith
+    rw [div_le_div_iff₀ x0' y0'] at this
+    linarith
+  have hr := pow_ratio_strictMono h.β_pos hβ h'.β_lt hN' hlt
+  have g1 := mul_le_mul_of_nonneg_right f1 x0'.le
+  have g2 := mul_le_mul_of_nonneg_right f2 x0.le
+  have g3 := mul_lt_mul_of_pos_left hr hA
+  nlinarith
 
 /-- **Exercise 5.14c.** With `Y_N > 0`, `A = (1 − β)Y_N/(βp − c₁) ∈ (0, 1)`; `A < 1` holds for
 every `N ≥ 1`, because `1 − β^N ≤ N(1 − β)` and `c₀ > 0`. -/
@@ -12012,6 +12073,1600 @@ theorem ex_5_16c (hβ0 : 0 < β) (hβ1 : β < 1) {v : DPt →ᵇ ℝ} (hv : sell
 
 end StokeyLucasPrescott.DeterministicApplications
 
+/-
+Copyright (c) 2026 Robert Kirkby. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Robert Kirkby
+-/
+
+/-!
+# A consumption–savings problem: the optimal plan
+
+SLP §5.17, pp. 126–128. Preferences `Σ βᵗU(c_t)`, income `I > 0` each period, wealth `x_t ≥ 0`
+(no borrowing), interest factor `R` with `0 < R < 1/β`:
+`c_t + x_{t+1}/R = I + x_t`, so `Γ(x) = [0, (I + x)R]` and `F(x, y) = U(I + x − y/R)`.
+
+`U` is continuous, strictly increasing and strictly concave on `ℝ₊`, with a continuous derivative
+`U'` on `(0, ∞)` (the book asks for `C¹` on `ℝ₊`; nothing here uses a derivative at `0`), and
+`U'(c) → 0` as `c → ∞`. That last condition is not in the book, which needs some such condition:
+see `ConsumptionSavingsCounterexample` for a counterexample.
+
+Rather than building `v` interval by interval as the book does, we write down every optimal plan
+at once. For a multiplier `μ > 0`, let `cI(p) = max{I, (U')⁻¹(p)}` (`cI`) and consume
+`c_t = cI(μ/(Rβ)ᵗ)`. Consumption falls (`Rβ < 1`) until it reaches `I`, after which wealth is
+zero. The wealth that this plan exhausts is `Ξ(μ) = Σ_t R⁻ᵗ(c_t − I)` (`wealth`, a finite sum),
+and the plan's wealth path is `x_t = Ξ(μ/(Rβ)ᵗ)` (`planμ`). `Ξ` is continuous and decreasing,
+from `+∞` down to `Ξ(U'(I)) = 0`, so every `x₀ ≥ 0` is `Ξ(μ)` for some `μ ∈ (0, U'(I)]`
+(`exists_wealth_eq`).
+
+The plan is optimal, and uniquely so, by a summation-by-parts argument (`abel_bound`). With
+`p_t = βᵗU'(c_t)` we have `Rp_{t+1} ≤ p_t`, with equality unless `x_{t+1} = 0`. This bounds
+`Σ p_t(c'_t − c_t)` for any feasible `c'` by `p₀(x'₀ − x₀)`, and concavity of `U` does the rest
+(`value_bound`). This gives at once:
+
+* optimality and uniqueness (`plan_total`, `total_lt`), and `v*(x₀) = V(μ)` (`vstar_eq`);
+* the supergradient inequality `v*(z) ≤ v*(x₀) + U'(c₀)(z − x₀)` (`vstar_le_tangent`), which
+  `ConsumptionSavingsPolicy` turns into differentiability and strict concavity of `v`.
+
+**Exercise 5.17a** (`ex_5_17a`): `v*` is real-valued and satisfies (FE), and an optimal plan
+satisfies `v*(x_t) = U(I + x_t − x_{t+1}/R) + βv*(x_{t+1})`.
+-/
+
+open Set Filter Topology
+
+namespace StokeyLucasPrescott.DeterministicApplications
+
+/-- The hypotheses of §5.17. -/
+structure CSHyp (U U' : ℝ → ℝ) (β R I : ℝ) : Prop where
+  hβ0 : 0 < β
+  hβ1 : β < 1
+  hR : 0 < R
+  hRβ : R * β < 1
+  hI : 0 < I
+  hUc : ContinuousOn U (Ici 0)
+  hUd : ∀ c, 0 < c → HasDerivAt U (U' c) c
+  hU'c : ContinuousOn U' (Ioi 0)
+  hUm : StrictMonoOn U (Ici 0)
+  hUcc : StrictConcaveOn ℝ (Ici 0) U
+  hlim : Tendsto U' atTop (𝓝 0)
+
+variable {U U' : ℝ → ℝ} {β R I : ℝ}
+
+theorem CSHyp.rho_pos (h : CSHyp U U' β R I) : 0 < R * β := mul_pos h.hR h.hβ0
+
+/-- `U` lies below its tangent lines. -/
+theorem CSHyp.super_le (h : CSHyp U U' β R I) {c c' : ℝ} (hc : 0 < c) (hc' : 0 ≤ c') :
+    U c' ≤ U c + U' c * (c' - c) := by
+  have := concave_le_fderiv h.hUcc.concaveOn (mem_Ici.2 hc.le) (mem_Ici.2 hc')
+    (h.hUd c hc).hasFDerivAt
+  simp only [ContinuousLinearMap.toSpanSingleton_apply, smul_eq_mul] at this
+  linarith
+
+/-- `U` lies strictly below its tangent lines away from the point of tangency. -/
+theorem CSHyp.super_lt (h : CSHyp U U' β R I) {c c' : ℝ} (hc : 0 < c) (hc' : 0 ≤ c')
+    (hne : c' ≠ c) : U c' < U c + U' c * (c' - c) := by
+  have hm := h.super_le hc (c' := (c + c') / 2) (by positivity)
+  have hs := h.hUcc.2 (mem_Ici.2 hc.le) (mem_Ici.2 hc') (Ne.symm hne)
+    (by norm_num : (0 : ℝ) < 1 / 2) (by norm_num : (0 : ℝ) < 1 / 2) (by norm_num)
+  simp only [smul_eq_mul] at hs
+  have e : (1 / 2 : ℝ) * c + 1 / 2 * c' = (c + c') / 2 := by ring
+  rw [e] at hs
+  linarith
+
+theorem CSHyp.U'_pos (h : CSHyp U U' β R I) {c : ℝ} (hc : 0 < c) : 0 < U' c := by
+  have h1 := h.super_lt hc (c' := c + 1) (by linarith) (by linarith)
+  have h2 := h.hUm (mem_Ici.2 hc.le) (mem_Ici.2 (by linarith : (0 : ℝ) ≤ c + 1))
+    (by linarith : c < c + 1)
+  nlinarith
+
+theorem CSHyp.U'_lt (h : CSHyp U U' β R I) {a b : ℝ} (ha : 0 < a) (hab : a < b) :
+    U' b < U' a := by
+  have h1 := h.super_lt ha (c' := b) (by linarith) hab.ne'
+  have h2 := h.super_lt (ha.trans hab) (c' := a) ha.le hab.ne
+  nlinarith
+
+theorem CSHyp.U'_le (h : CSHyp U U' β R I) {a b : ℝ} (ha : 0 < a) (hab : a ≤ b) :
+    U' b ≤ U' a := by
+  rcases eq_or_lt_of_le hab with rfl | hlt
+  · exact le_rfl
+  · exact (h.U'_lt ha hlt).le
+
+/-! ### Consumption at a given marginal utility -/
+
+/-- `cI(p)`: the least `c ≥ I` with `U'(c) ≤ p`, i.e. `max{I, (U')⁻¹(p)}`. -/
+noncomputable def cI (U' : ℝ → ℝ) (I p : ℝ) : ℝ := sInf {c | I ≤ c ∧ U' c ≤ p}
+
+theorem CSHyp.cI_nonempty (h : CSHyp U U' β R I) {p : ℝ} (hp : 0 < p) :
+    {c | I ≤ c ∧ U' c ≤ p}.Nonempty := by
+  obtain ⟨N, hN⟩ := eventually_atTop.1 (h.hlim.eventually (gt_mem_nhds hp))
+  exact ⟨max N I, le_max_right _ _, (hN _ (le_max_left _ _)).le⟩
+
+theorem CSHyp.cI_mem (h : CSHyp U U' β R I) {p : ℝ} (hp : 0 < p) :
+    I ≤ cI U' I p ∧ U' (cI U' I p) ≤ p := by
+  have hcl : IsClosed {c | I ≤ c ∧ U' c ≤ p} :=
+    (h.hU'c.mono fun c (hc : c ∈ Ici I) => lt_of_lt_of_le h.hI hc).preimage_isClosed_of_isClosed
+      isClosed_Ici isClosed_Iic
+  exact hcl.csInf_mem (h.cI_nonempty hp) ⟨I, fun _ hc => hc.1⟩
+
+theorem cI_le {p c : ℝ} (hc : I ≤ c) (hpc : U' c ≤ p) : cI U' I p ≤ c :=
+  csInf_le ⟨I, fun _ hc => hc.1⟩ ⟨hc, hpc⟩
+
+theorem CSHyp.cI_pos (h : CSHyp U U' β R I) {p : ℝ} (hp : 0 < p) : 0 < cI U' I p :=
+  h.hI.trans_le (h.cI_mem hp).1
+
+theorem CSHyp.cI_of_le (h : CSHyp U U' β R I) {p : ℝ} (hp : U' I ≤ p) : cI U' I p = I :=
+  le_antisymm (cI_le le_rfl hp) (h.cI_mem ((h.U'_pos h.hI).trans_le hp)).1
+
+/-- Above `I`, `cI` inverts `U'`. -/
+theorem CSHyp.cI_eq (h : CSHyp U U' β R I) {p : ℝ} (hp : 0 < p) (hgt : I < cI U' I p) :
+    U' (cI U' I p) = p := by
+  set c := cI U' I p
+  refine le_antisymm (h.cI_mem hp).2 (not_lt.1 fun hlt => ?_)
+  have hcont : ContinuousAt U' c := h.hU'c.continuousAt (Ioi_mem_nhds (h.hI.trans hgt))
+  obtain ⟨ε, hε, hball⟩ := Metric.eventually_nhds_iff.1 (hcont.eventually (gt_mem_nhds hlt))
+  set d := max (c - ε / 2) ((I + c) / 2)
+  have hd1 : d < c := max_lt (by linarith) (by linarith)
+  have hd2 : I ≤ d := le_max_of_le_right (by linarith)
+  have hd3 : dist d c < ε := by
+    rw [Real.dist_eq, abs_sub_lt_iff]
+    constructor
+    · linarith
+    · linarith [le_max_left (c - ε / 2) ((I + c) / 2)]
+  exact absurd (cI_le hd2 (hball hd3).le) (not_le.2 hd1)
+
+theorem CSHyp.cI_U' (h : CSHyp U U' β R I) {c : ℝ} (hc : I ≤ c) : cI U' I (U' c) = c := by
+  have hp := h.U'_pos (h.hI.trans_le hc)
+  refine le_antisymm (cI_le hc le_rfl) (not_lt.1 fun hlt => ?_)
+  exact absurd (h.cI_mem hp).2 (not_le.2 (h.U'_lt (h.cI_pos hp) hlt))
+
+theorem CSHyp.cI_anti (h : CSHyp U U' β R I) {p q : ℝ} (hp : 0 < p) (hpq : p ≤ q) :
+    cI U' I q ≤ cI U' I p :=
+  cI_le (h.cI_mem hp).1 ((h.cI_mem hp).2.trans hpq)
+
+theorem CSHyp.cI_gt (h : CSHyp U U' β R I) {p : ℝ} (hp : 0 < p) (hpI : p < U' I) :
+    I < cI U' I p := by
+  refine lt_of_le_of_ne (h.cI_mem hp).1 fun he => ?_
+  have := (h.cI_mem hp).2
+  rw [← he] at this
+  linarith
+
+theorem CSHyp.cI_strictAnti (h : CSHyp U U' β R I) {p q : ℝ} (hp : 0 < p) (hpq : p < q)
+    (hpI : p < U' I) : cI U' I q < cI U' I p := by
+  have hgt := h.cI_gt hp hpI
+  have hU := h.cI_eq hp hgt
+  rcases eq_or_lt_of_le (h.cI_mem (hp.trans hpq)).1 with he | hlt
+  · rw [← he]; exact hgt
+  · have hUq := h.cI_eq (hp.trans hpq) hlt
+    refine not_le.1 fun hle => ?_
+    have := h.U'_le (h.hI.trans hgt) hle
+    linarith
+
+/-- `cI(p) ≥ c` once `p < U'(c)`. -/
+theorem CSHyp.le_cI (h : CSHyp U U' β R I) {p c : ℝ} (hp : 0 < p)
+    (hpc : p < U' c) : c ≤ cI U' I p := by
+  refine not_lt.1 fun hlt => ?_
+  have := h.U'_le (h.cI_pos hp) hlt.le
+  linarith [(h.cI_mem hp).2]
+
+theorem CSHyp.continuousAt_cI (h : CSHyp U U' β R I) {p₀ : ℝ} (hp₀ : 0 < p₀) :
+    ContinuousAt (cI U' I) p₀ := by
+  have hpos : ∀ᶠ p in 𝓝 p₀, 0 < p := lt_mem_nhds hp₀
+  refine tendsto_order.2 ⟨fun a ha => ?_, fun b hb => ?_⟩
+  · rcases lt_or_ge a I with haI | haI
+    · filter_upwards [hpos] with p hp
+      exact haI.trans_le (h.cI_mem hp).1
+    · have hgt : I < cI U' I p₀ := lt_of_le_of_lt haI ha
+      have hUa : p₀ < U' a := by
+        have := h.U'_lt (h.hI.trans_le haI) ha
+        rwa [h.cI_eq hp₀ hgt] at this
+      filter_upwards [hpos, gt_mem_nhds hUa] with p hp hpa
+      refine not_le.1 fun hle => ?_
+      have := h.U'_le (h.cI_pos hp) hle
+      linarith [(h.cI_mem hp).2]
+  · set b' := (cI U' I p₀ + b) / 2
+    have hb'1 : cI U' I p₀ < b' := by simp only [b']; linarith
+    have hb'2 : b' < b := by simp only [b']; linarith
+    have hUb : U' b' < p₀ := (h.U'_lt (h.cI_pos hp₀) hb'1).trans_le (h.cI_mem hp₀).2
+    filter_upwards [lt_mem_nhds hUb] with p hp
+    exact (cI_le ((h.cI_mem hp₀).1.trans hb'1.le) hp.le).trans_lt hb'2
+
+/-! ### The wealth a multiplier exhausts -/
+
+/-- `Ξ(μ) = Σ_t R⁻ᵗ(cI(μ/(Rβ)ᵗ) − I)`. -/
+noncomputable def wealth (U' : ℝ → ℝ) (β R I μ : ℝ) : ℝ :=
+  ∑' t : ℕ, (R ^ t)⁻¹ * (cI U' I (μ / (R * β) ^ t) - I)
+
+/-- From some date on, `μ/(Rβ)ᵗ ≥ U'(I)` (uniformly in `μ ≥ μ₁`). -/
+theorem CSHyp.exists_K (h : CSHyp U U' β R I) {μ₁ : ℝ} (hμ₁ : 0 < μ₁) :
+    ∃ K : ℕ, ∀ t, K ≤ t → ∀ μ, μ₁ ≤ μ → U' I ≤ μ / (R * β) ^ t := by
+  have hU := h.U'_pos h.hI
+  obtain ⟨K, hK⟩ := exists_pow_lt_of_lt_one (div_pos hμ₁ hU) h.hRβ
+  refine ⟨K, fun t ht μ hμ => ?_⟩
+  have hρt : (R * β) ^ t ≤ (R * β) ^ K := pow_le_pow_of_le_one h.rho_pos.le h.hRβ.le ht
+  rw [le_div_iff₀ (pow_pos h.rho_pos t)]
+  have := (lt_div_iff₀ hU).1 (hρt.trans_lt hK)
+  linarith
+
+theorem CSHyp.wealth_term_eq_zero (h : CSHyp U U' β R I) {μ : ℝ} {t : ℕ}
+    (ht : U' I ≤ μ / (R * β) ^ t) : (R ^ t)⁻¹ * (cI U' I (μ / (R * β) ^ t) - I) = 0 := by
+  rw [h.cI_of_le ht, sub_self, mul_zero]
+
+theorem CSHyp.wealth_eq_sum (h : CSHyp U U' β R I) {μ₁ : ℝ} (hμ₁ : 0 < μ₁) :
+    ∃ K : ℕ, ∀ μ, μ₁ ≤ μ → wealth U' β R I μ =
+      ∑ t ∈ Finset.range K, (R ^ t)⁻¹ * (cI U' I (μ / (R * β) ^ t) - I) := by
+  obtain ⟨K, hK⟩ := h.exists_K hμ₁
+  exact ⟨K, fun μ hμ => tsum_eq_sum fun t ht =>
+    h.wealth_term_eq_zero (hK t (by simpa using ht) μ hμ)⟩
+
+theorem CSHyp.summable_wealth (h : CSHyp U U' β R I) {μ : ℝ} (hμ : 0 < μ) :
+    Summable fun t : ℕ => (R ^ t)⁻¹ * (cI U' I (μ / (R * β) ^ t) - I) := by
+  obtain ⟨K, hK⟩ := h.exists_K hμ
+  exact summable_of_ne_finset_zero (s := Finset.range K) fun t ht =>
+    h.wealth_term_eq_zero (hK t (by simpa using ht) μ le_rfl)
+
+theorem CSHyp.wealth_nonneg (h : CSHyp U U' β R I) {μ : ℝ} (hμ : 0 < μ) :
+    0 ≤ wealth U' β R I μ :=
+  tsum_nonneg fun t => mul_nonneg (inv_nonneg.2 (pow_pos h.hR t).le)
+    (sub_nonneg.2 (h.cI_mem (div_pos hμ (pow_pos h.rho_pos t))).1)
+
+/-- `Ξ(μ) = (cI(μ) − I) + R⁻¹Ξ(μ/(Rβ))`. -/
+theorem CSHyp.wealth_shift (h : CSHyp U U' β R I) {μ : ℝ} (hμ : 0 < μ) :
+    wealth U' β R I μ = (cI U' I μ - I) + R⁻¹ * wealth U' β R I (μ / (R * β)) := by
+  rw [wealth, (h.summable_wealth hμ).tsum_eq_zero_add, wealth, ← tsum_mul_left]
+  congr 1
+  · simp
+  · refine tsum_congr fun t => ?_
+    rw [show μ / (R * β) ^ (t + 1) = μ / (R * β) / (R * β) ^ t by
+      rw [pow_succ', div_mul_eq_div_div], pow_succ', mul_inv]
+    ring
+
+theorem CSHyp.wealth_of_ge (h : CSHyp U U' β R I) {μ : ℝ} (hμ : U' I ≤ μ) :
+    wealth U' β R I μ = 0 := by
+  refine (tsum_congr fun t => h.wealth_term_eq_zero ?_).trans tsum_zero
+  exact hμ.trans (le_div_self ((h.U'_pos h.hI).le.trans hμ) (pow_pos h.rho_pos t)
+    (pow_le_one₀ h.rho_pos.le h.hRβ.le))
+
+theorem CSHyp.wealth_ge (h : CSHyp U U' β R I) {μ : ℝ} (hμ : 0 < μ) :
+    cI U' I μ - I ≤ wealth U' β R I μ := by
+  rw [h.wealth_shift hμ]
+  exact le_add_of_nonneg_right
+    (mul_nonneg (inv_nonneg.2 h.hR.le) (h.wealth_nonneg (div_pos hμ h.rho_pos)))
+
+theorem CSHyp.wealth_anti (h : CSHyp U U' β R I) {μ μ' : ℝ} (hμ : 0 < μ) (hμμ' : μ ≤ μ') :
+    wealth U' β R I μ' ≤ wealth U' β R I μ := by
+  refine Summable.tsum_le_tsum (fun t => ?_) (h.summable_wealth (hμ.trans_le hμμ'))
+    (h.summable_wealth hμ)
+  have hρt := pow_pos h.rho_pos t
+  exact mul_le_mul_of_nonneg_left (sub_le_sub_right (h.cI_anti (div_pos hμ hρt)
+    (div_le_div_of_nonneg_right hμμ' hρt.le)) I) (inv_nonneg.2 (pow_pos h.hR t).le)
+
+theorem CSHyp.wealth_strictAnti (h : CSHyp U U' β R I) {μ μ' : ℝ} (hμ : 0 < μ) (hμμ' : μ < μ')
+    (hμI : μ < U' I) : wealth U' β R I μ' < wealth U' β R I μ := by
+  rw [h.wealth_shift hμ, h.wealth_shift (hμ.trans hμμ')]
+  have h1 := h.cI_strictAnti hμ hμμ' hμI
+  have h2 := mul_le_mul_of_nonneg_left (h.wealth_anti (div_pos hμ h.rho_pos)
+    (div_le_div_of_nonneg_right hμμ'.le h.rho_pos.le)) (inv_nonneg.2 h.hR.le)
+  linarith
+
+theorem CSHyp.wealth_pos (h : CSHyp U U' β R I) {μ : ℝ} (hμ : 0 < μ) (hμI : μ < U' I) :
+    0 < wealth U' β R I μ := by
+  rw [← h.wealth_of_ge (le_refl (U' I))]
+  exact h.wealth_strictAnti hμ hμI hμI
+
+/-- `Ξ(μ) > 0` only below `U'(I)`. -/
+theorem CSHyp.lt_of_wealth_pos (h : CSHyp U U' β R I) {μ : ℝ} (hw : 0 < wealth U' β R I μ) :
+    μ < U' I :=
+  not_le.1 fun hle => by rw [h.wealth_of_ge hle] at hw; exact lt_irrefl _ hw
+
+theorem CSHyp.continuousAt_wealth (h : CSHyp U U' β R I) {μ₀ : ℝ} (hμ₀ : 0 < μ₀) :
+    ContinuousAt (wealth U' β R I) μ₀ := by
+  obtain ⟨K, hK⟩ := h.wealth_eq_sum (half_pos hμ₀)
+  have hev : (fun μ => ∑ t ∈ Finset.range K, (R ^ t)⁻¹ * (cI U' I (μ / (R * β) ^ t) - I))
+      =ᶠ[𝓝 μ₀] wealth U' β R I := by
+    filter_upwards [lt_mem_nhds (half_lt_self hμ₀)] with μ hμ
+    exact (hK μ hμ.le).symm
+  refine ContinuousAt.congr ?_ hev
+  refine tendsto_finsetSum _ fun t _ => ?_
+  have hc : ContinuousAt (fun μ => cI U' I (μ / (R * β) ^ t)) μ₀ :=
+    (h.continuousAt_cI (div_pos hμ₀ (pow_pos h.rho_pos t))).comp
+      (f := fun μ => μ / (R * β) ^ t) (continuous_id.div_const _).continuousAt
+  exact continuousAt_const.mul (hc.sub continuousAt_const)
+
+/-- Every `x₀ ≥ 0` is `Ξ(μ)` for some `μ ∈ (0, U'(I)]`. -/
+theorem CSHyp.exists_wealth_eq (h : CSHyp U U' β R I) {x : ℝ} (hx : 0 ≤ x) :
+    ∃ μ, 0 < μ ∧ μ ≤ U' I ∧ wealth U' β R I μ = x := by
+  have hμ₁ : 0 < U' (I + x) := h.U'_pos (by linarith [h.hI])
+  have hμ₁I : U' (I + x) ≤ U' I := h.U'_le h.hI (by linarith)
+  have hcont : ContinuousOn (wealth U' β R I) (Icc (U' (I + x)) (U' I)) := fun μ hμ =>
+    (h.continuousAt_wealth (hμ₁.trans_le hμ.1)).continuousWithinAt
+  have hx1 : x ≤ wealth U' β R I (U' (I + x)) := by
+    have := h.wealth_ge hμ₁
+    rwa [h.cI_U' (by linarith : I ≤ I + x), add_sub_cancel_left] at this
+  obtain ⟨μ, hμ, hμx⟩ := intermediate_value_Icc' hμ₁I hcont
+    ⟨by rw [h.wealth_of_ge le_rfl]; exact hx, hx1⟩
+  exact ⟨μ, hμ₁.trans_le hμ.1, hμ.2, hμx⟩
+
+/-! ### The plan of a multiplier -/
+
+/-- Wealth along the plan of `μ`: `x_t = Ξ(μ/(Rβ)ᵗ)`. -/
+noncomputable def planμ (U' : ℝ → ℝ) (β R I μ : ℝ) (t : ℕ) : ℝ :=
+  wealth U' β R I (μ / (R * β) ^ t)
+
+/-- Consumption along the plan of `μ`: `c_t = cI(μ/(Rβ)ᵗ)`. -/
+noncomputable def consμ (U' : ℝ → ℝ) (β R I μ : ℝ) (t : ℕ) : ℝ := cI U' I (μ / (R * β) ^ t)
+
+theorem planμ_zero (μ : ℝ) : planμ U' β R I μ 0 = wealth U' β R I μ := by simp [planμ]
+
+theorem consμ_zero (μ : ℝ) : consμ U' β R I μ 0 = cI U' I μ := by simp [consμ]
+
+theorem div_pow_succ (μ ρ : ℝ) (t : ℕ) : μ / ρ ^ (t + 1) = μ / ρ ^ t / ρ := by
+  rw [pow_succ, div_div]
+
+/-- The budget constraint: `x_{t+1} = R(I + x_t − c_t)`. -/
+theorem CSHyp.planμ_succ (h : CSHyp U U' β R I) {μ : ℝ} (hμ : 0 < μ) (t : ℕ) :
+    planμ U' β R I μ (t + 1) = R * (I + planμ U' β R I μ t - consμ U' β R I μ t) := by
+  have e := h.wealth_shift (div_pos hμ (pow_pos h.rho_pos t))
+  rw [← div_pow_succ] at e
+  simp only [planμ, consμ]
+  set W := wealth U' β R I (μ / (R * β) ^ (t + 1))
+  have hRR : R * R⁻¹ = 1 := mul_inv_cancel₀ h.hR.ne'
+  rw [e]
+  linear_combination (-W) * hRR
+
+theorem CSHyp.consμ_eq (h : CSHyp U U' β R I) {μ : ℝ} (hμ : 0 < μ) (t : ℕ) :
+    consμ U' β R I μ t = I + planμ U' β R I μ t - planμ U' β R I μ (t + 1) / R := by
+  rw [h.planμ_succ hμ, mul_div_cancel_left₀ _ h.hR.ne']
+  ring
+
+theorem CSHyp.planμ_nonneg (h : CSHyp U U' β R I) {μ : ℝ} (hμ : 0 < μ) (t : ℕ) :
+    0 ≤ planμ U' β R I μ t :=
+  h.wealth_nonneg (div_pos hμ (pow_pos h.rho_pos t))
+
+theorem CSHyp.consμ_ge (h : CSHyp U U' β R I) {μ : ℝ} (hμ : 0 < μ) (t : ℕ) :
+    I ≤ consμ U' β R I μ t :=
+  (h.cI_mem (div_pos hμ (pow_pos h.rho_pos t))).1
+
+/-- The tail of a plan is a plan: `x_{t+s}` is the plan of `μ/(Rβ)ᵗ`. -/
+theorem planμ_tail (μ : ℝ) (t s : ℕ) :
+    planμ U' β R I (μ / (R * β) ^ t) s = planμ U' β R I μ (s + t) := by
+  simp only [planμ, div_div, ← pow_add, add_comm t s]
+
+theorem consμ_tail (μ : ℝ) (t s : ℕ) :
+    consμ U' β R I (μ / (R * β) ^ t) s = consμ U' β R I μ (s + t) := by
+  simp only [consμ, div_div, ← pow_add, add_comm t s]
+
+/-- From some date on, the plan consumes `I` and holds no wealth. -/
+theorem CSHyp.exists_plan_zero (h : CSHyp U U' β R I) {μ : ℝ} (hμ : 0 < μ) :
+    ∃ K : ℕ, ∀ t, K ≤ t → planμ U' β R I μ t = 0 ∧ consμ U' β R I μ t = I := by
+  obtain ⟨K, hK⟩ := h.exists_K hμ
+  exact ⟨K, fun t ht => ⟨h.wealth_of_ge (hK t ht μ le_rfl), h.cI_of_le (hK t ht μ le_rfl)⟩⟩
+
+/-- The Euler conditions along a plan: `RβU'(c_{t+1}) ≤ U'(c_t)`, with equality unless
+`x_{t+1} = 0`. -/
+theorem CSHyp.euler_step (h : CSHyp U U' β R I) {μ : ℝ} (hμ : 0 < μ) (t : ℕ) :
+    R * β * U' (consμ U' β R I μ (t + 1)) ≤ U' (consμ U' β R I μ t) ∧
+      (U' (consμ U' β R I μ t) - R * β * U' (consμ U' β R I μ (t + 1))) *
+        planμ U' β R I μ (t + 1) = 0 := by
+  have hρ := h.rho_pos
+  set m := μ / (R * β) ^ t
+  have hm : 0 < m := div_pos hμ (pow_pos hρ t)
+  have hm' : m / (R * β) = μ / (R * β) ^ (t + 1) := (div_pow_succ μ (R * β) t).symm
+  have hρm : R * β * (m / (R * β)) = m := mul_div_cancel₀ m hρ.ne'
+  have hmm' : m ≤ m / (R * β) := le_div_self hm.le hρ h.hRβ.le
+  simp only [consμ, planμ]
+  rw [← hm']
+  rcases eq_or_lt_of_le (h.cI_mem (hm.trans_le hmm')).1 with he | hgt
+  · -- `c_{t+1} = I`: then `x_{t+1} = 0`
+    have hUI : U' I ≤ m / (R * β) := by have := (h.cI_mem (hm.trans_le hmm')).2; rwa [← he] at this
+    rw [h.wealth_of_ge hUI, mul_zero, ← he]
+    refine ⟨?_, rfl⟩
+    rcases eq_or_lt_of_le (h.cI_mem hm).1 with he' | hgt'
+    · rw [← he']
+      have := h.U'_pos h.hI
+      nlinarith [h.hRβ]
+    · rw [h.cI_eq hm hgt']
+      have := mul_le_mul_of_nonneg_left hUI hρ.le
+      rwa [hρm] at this
+  · -- `c_{t+1} > I`: then `c_t > I` too and the Euler equation holds with equality
+    have hgt' : I < cI U' I m := hgt.trans_le (h.cI_anti hm hmm')
+    rw [h.cI_eq (hm.trans_le hmm') hgt, h.cI_eq hm hgt', hρm, sub_self, zero_mul]
+    exact ⟨le_rfl, rfl⟩
+
+/-! ### Summation by parts -/
+
+/-- **Summation by parts.** If `Rp_{t+1} ≤ p_t`, with equality unless `x_{t+1} = 0`, and
+`x' ≥ 0`, then `Σ_{t ≤ n} p_t(c'_t − c_t) ≤ p₀(x'₀ − x₀) + p_n(x_{n+1} − x'_{n+1})/R`, where
+`c_t = x_t − x_{t+1}/R` (up to the common income `I`). -/
+theorem abel_bound {R : ℝ} (hR : 0 < R) {p x x' : ℕ → ℝ}
+    (hp : ∀ t, R * p (t + 1) ≤ p t) (hpx : ∀ t, (p t - R * p (t + 1)) * x (t + 1) = 0)
+    (hx' : ∀ t, 0 ≤ x' t) (n : ℕ) :
+    ∑ t ∈ Finset.range (n + 1), p t * ((x' t - x' (t + 1) / R) - (x t - x (t + 1) / R)) ≤
+      p 0 * (x' 0 - x 0) + p n * (x (n + 1) - x' (n + 1)) / R := by
+  induction n with
+  | zero =>
+    rw [Finset.sum_range_one]
+    apply le_of_eq
+    ring
+  | succ n ih =>
+    rw [Finset.sum_range_succ]
+    have key : p n * (x (n + 1) - x' (n + 1)) / R + p (n + 1) * (x' (n + 1) - x (n + 1)) =
+        -(x' (n + 1) * (p n - R * p (n + 1))) / R := by
+      field_simp
+      linear_combination hpx n
+    have hk : 0 ≤ x' (n + 1) * (p n - R * p (n + 1)) / R :=
+      div_nonneg (mul_nonneg (hx' (n + 1)) (by linarith [hp n])) hR.le
+    have e : p (n + 1) * ((x' (n + 1) - x' (n + 1 + 1) / R) - (x (n + 1) - x (n + 1 + 1) / R)) =
+        p (n + 1) * (x' (n + 1) - x (n + 1)) +
+          p (n + 1) * (x (n + 1 + 1) - x' (n + 1 + 1)) / R := by
+      ring
+    rw [e]
+    have : -(x' (n + 1) * (p n - R * p (n + 1))) / R =
+        -(x' (n + 1) * (p n - R * p (n + 1)) / R) := neg_div _ _
+    linarith
+
+/-! ### The dynamic program -/
+
+/-- Wealth levels `x ≥ 0`. -/
+abbrev CSWealth := ↥(Ici (0 : ℝ))
+
+/-- `Γ(x) = [0, (I + x)R]`. -/
+def csΓ (R I : ℝ) (x : CSWealth) : Set CSWealth := {y | y.1 ≤ (I + x.1) * R}
+
+/-- `F(x, y) = U(I + x − y/R)`, clamped at zero consumption off the graph of `Γ` (where it is
+never evaluated). -/
+noncomputable def csF (U : ℝ → ℝ) (R I : ℝ) (x y : CSWealth) : ℝ := U (max (I + x.1 - y.1 / R) 0)
+
+/-- Consumption `c_t = I + x_t − x_{t+1}/R` along a plan. -/
+noncomputable def consOf (R I : ℝ) (x : ℕ → CSWealth) (t : ℕ) : ℝ := I + (x t).1 - (x (t + 1)).1 / R
+
+theorem CSHyp.consOf_nonneg (h : CSHyp U U' β R I) {z : CSWealth} {x : ℕ → CSWealth}
+    (hx : x ∈ Feasible (csΓ R I) z) (t : ℕ) : 0 ≤ consOf R I x t := by
+  have : (x (t + 1)).1 / R ≤ I + (x t).1 := (div_le_iff₀ h.hR).2 (hx.2 t)
+  simp only [consOf]
+  linarith
+
+theorem CSHyp.csF_eq (h : CSHyp U U' β R I) {z : CSWealth} {x : ℕ → CSWealth}
+    (hx : x ∈ Feasible (csΓ R I) z) (t : ℕ) : csF U R I (x t) (x (t + 1)) = U (consOf R I x t) := by
+  change U (max (consOf R I x t) 0) = _
+  rw [max_eq_left (h.consOf_nonneg hx t)]
+
+theorem CSHyp.assumption41 (h : CSHyp U U' β R I) : Assumption41 (csΓ R I) := fun x =>
+  ⟨⟨0, mem_Ici.2 le_rfl⟩, mul_nonneg (add_nonneg h.hI.le x.2) h.hR.le⟩
+
+/-- `F ≥ U(0)`, so Assumption 4.2 holds. -/
+theorem CSHyp.assumption42 (h : CSHyp U U' β R I) : Assumption42 (csΓ R I) (csF U R I) β :=
+  assumption42_of_bddBelow (M := U 0) (fun _ _ => h.hUm.monotoneOn (mem_Ici.2 le_rfl)
+    (mem_Ici.2 (le_max_right _ _)) (le_max_right _ _)) h.hβ0.le h.hβ1
+
+/-- The plan of `μ` as a sequence of wealth levels. -/
+noncomputable def planN (h : CSHyp U U' β R I) {μ : ℝ} (hμ : 0 < μ) (t : ℕ) : CSWealth :=
+  ⟨planμ U' β R I μ t, h.planμ_nonneg hμ t⟩
+
+/-- The initial wealth `Ξ(μ)` of the plan of `μ`. -/
+noncomputable def wealthN (h : CSHyp U U' β R I) {μ : ℝ} (hμ : 0 < μ) : CSWealth :=
+  ⟨wealth U' β R I μ, h.wealth_nonneg hμ⟩
+
+theorem CSHyp.planN_feasible (h : CSHyp U U' β R I) {μ : ℝ} (hμ : 0 < μ) :
+    planN h hμ ∈ Feasible (csΓ R I) (wealthN h hμ) := by
+  refine ⟨Subtype.ext (planμ_zero μ), fun t => ?_⟩
+  change planμ U' β R I μ (t + 1) ≤ (I + planμ U' β R I μ t) * R
+  rw [h.planμ_succ hμ]
+  have := h.consμ_ge hμ t
+  nlinarith [h.hR, h.hI]
+
+theorem CSHyp.consOf_planN (h : CSHyp U U' β R I) {μ : ℝ} (hμ : 0 < μ) (t : ℕ) :
+    consOf R I (planN h hμ) t = consμ U' β R I μ t :=
+  (h.consμ_eq hμ t).symm
+
+/-- `V(μ) = Σ_t βᵗU(c_t)`, the value of the plan of `μ`. -/
+noncomputable def valμ (U U' : ℝ → ℝ) (β R I μ : ℝ) : ℝ :=
+  ∑' t : ℕ, β ^ t * U (consμ U' β R I μ t)
+
+theorem CSHyp.summable_val (h : CSHyp U U' β R I) {μ : ℝ} (hμ : 0 < μ) :
+    Summable fun t : ℕ => β ^ t * U (consμ U' β R I μ t) := by
+  obtain ⟨K, hK⟩ := h.exists_plan_zero hμ
+  have hg : Summable fun t : ℕ => β ^ t * U I :=
+    (summable_geometric_of_lt_one h.hβ0.le h.hβ1).mul_right _
+  have hd : Summable fun t : ℕ => β ^ t * U (consμ U' β R I μ t) - β ^ t * U I :=
+    summable_of_ne_finset_zero (s := Finset.range K) fun t ht => by
+      rw [(hK t (by simpa using ht)).2, sub_self]
+  exact (hd.add hg).congr fun t => by ring
+
+theorem CSHyp.partialSum_planN (h : CSHyp U U' β R I) {μ : ℝ} (hμ : 0 < μ) (n : ℕ) :
+    partialSum (csF U R I) β (planN h hμ) n =
+      ∑ t ∈ Finset.range (n + 1), β ^ t * U (consμ U' β R I μ t) := by
+  simp only [partialSum]
+  refine Finset.sum_congr rfl fun t _ => ?_
+  rw [h.csF_eq (h.planN_feasible hμ) t, h.consOf_planN hμ t]
+
+theorem CSHyp.tendsto_plan (h : CSHyp U U' β R I) {μ : ℝ} (hμ : 0 < μ) :
+    Tendsto (fun n => partialSum (csF U R I) β (planN h hμ) n) atTop
+      (𝓝 (valμ U U' β R I μ)) := by
+  simp only [h.partialSum_planN hμ]
+  exact (h.summable_val hμ).hasSum.tendsto_sum_nat.comp (tendsto_add_atTop_nat 1)
+
+theorem CSHyp.plan_total (h : CSHyp U U' β R I) {μ : ℝ} (hμ : 0 < μ) :
+    total (csF U R I) β (planN h hμ) = (valμ U U' β R I μ : EReal) :=
+  tendsto_nhds_unique (tendsto_total h.assumption42 (h.planN_feasible hμ))
+    (EReal.tendsto_coe.2 (h.tendsto_plan hμ))
+
+/-- The concavity gap `δ_t = U(c_t) + U'(c_t)(c'_t − c_t) − U(c'_t) ≥ 0`. -/
+noncomputable def gapAt (U U' : ℝ → ℝ) (c c' : ℝ) : ℝ := U c + U' c * (c' - c) - U c'
+
+theorem CSHyp.gapAt_nonneg (h : CSHyp U U' β R I) {c c' : ℝ} (hc : 0 < c) (hc' : 0 ≤ c') :
+    0 ≤ gapAt U U' c c' := by
+  have := h.super_le hc hc'
+  simp only [gapAt]
+  linarith
+
+/-- **The key bound.** Along any plan `x'` feasible from `z`, from some date on,
+`Σ_{t ≤ n} βᵗU(c'_t) + Σ_{t ≤ n} βᵗδ_t ≤ Σ_{t ≤ n} βᵗU(c_t) + U'(c₀)(z − x₀)`. -/
+theorem CSHyp.value_bound (h : CSHyp U U' β R I) {μ : ℝ} (hμ : 0 < μ) {z : CSWealth}
+    {x' : ℕ → CSWealth} (hx' : x' ∈ Feasible (csΓ R I) z) :
+    ∃ K : ℕ, ∀ n, K ≤ n →
+      partialSum (csF U R I) β x' n + ∑ t ∈ Finset.range (n + 1),
+        β ^ t * gapAt U U' (consμ U' β R I μ t) (consOf R I x' t) ≤
+      partialSum (csF U R I) β (planN h hμ) n +
+        U' (cI U' I μ) * (z.1 - wealth U' β R I μ) := by
+  obtain ⟨K, hK⟩ := h.exists_plan_zero hμ
+  refine ⟨K, fun n hn => ?_⟩
+  have hc : ∀ t, consμ U' β R I μ t =
+      I + planμ U' β R I μ t - planμ U' β R I μ (t + 1) / R := h.consμ_eq hμ
+  have hp : ∀ t, R * (β ^ (t + 1) * U' (consμ U' β R I μ (t + 1))) ≤
+      β ^ t * U' (consμ U' β R I μ t) := fun t => by
+    have := mul_le_mul_of_nonneg_left (h.euler_step hμ t).1 (pow_nonneg h.hβ0.le t)
+    calc R * (β ^ (t + 1) * U' (consμ U' β R I μ (t + 1)))
+        = β ^ t * (R * β * U' (consμ U' β R I μ (t + 1))) := by ring
+      _ ≤ _ := this
+  have hpx : ∀ t, (β ^ t * U' (consμ U' β R I μ t) -
+      R * (β ^ (t + 1) * U' (consμ U' β R I μ (t + 1)))) * planμ U' β R I μ (t + 1) = 0 :=
+    fun t => by
+      calc _ = β ^ t * ((U' (consμ U' β R I μ t) - R * β * U' (consμ U' β R I μ (t + 1))) *
+            planμ U' β R I μ (t + 1)) := by ring
+        _ = 0 := by rw [(h.euler_step hμ t).2, mul_zero]
+  have hab := abel_bound h.hR hp hpx (x' := fun t => (x' t).1) (fun t => (x' t).2) n
+  have hsum : partialSum (csF U R I) β x' n + ∑ t ∈ Finset.range (n + 1),
+      β ^ t * gapAt U U' (consμ U' β R I μ t) (consOf R I x' t) =
+      partialSum (csF U R I) β (planN h hμ) n + ∑ t ∈ Finset.range (n + 1),
+        β ^ t * U' (consμ U' β R I μ t) * (((x' t).1 - (x' (t + 1)).1 / R) -
+          (planμ U' β R I μ t - planμ U' β R I μ (t + 1) / R)) := by
+    rw [h.partialSum_planN hμ]
+    simp only [partialSum, ← Finset.sum_add_distrib]
+    refine Finset.sum_congr rfl fun t _ => ?_
+    rw [h.csF_eq hx' t]
+    simp only [gapAt, consOf]
+    rw [hc t]
+    ring
+  have hxn : planμ U' β R I μ (n + 1) = 0 := (hK (n + 1) (by omega)).1
+  have hpn : 0 ≤ β ^ n * U' (consμ U' β R I μ n) :=
+    mul_nonneg (pow_nonneg h.hβ0.le n) (h.U'_pos (h.hI.trans_le (h.consμ_ge hμ n))).le
+  have hlast : 0 ≤ β ^ n * U' (consμ U' β R I μ n) * (x' (n + 1)).1 / R :=
+    div_nonneg (mul_nonneg hpn (x' (n + 1)).2) h.hR.le
+  have hx0 : (x' 0).1 = z.1 := by rw [hx'.1]
+  simp only [pow_zero, one_mul, consμ_zero, planμ_zero, hx0, hxn] at hab
+  rw [hsum]
+  have e : β ^ n * U' (consμ U' β R I μ n) * (0 - (x' (n + 1)).1) / R =
+      -(β ^ n * U' (consμ U' β R I μ n) * (x' (n + 1)).1 / R) := by ring
+  rw [e] at hab
+  linarith
+
+/-- Along any plan feasible from `z`: `u(x') ≤ V(μ) + U'(c₀)(z − x₀) − βᵗδ_t`. -/
+theorem CSHyp.total_le (h : CSHyp U U' β R I) {μ : ℝ} (hμ : 0 < μ) {z : CSWealth}
+    {x' : ℕ → CSWealth} (hx' : x' ∈ Feasible (csΓ R I) z) (t₀ : ℕ) :
+    total (csF U R I) β x' ≤ ((valμ U U' β R I μ + U' (cI U' I μ) * (z.1 - wealth U' β R I μ) -
+      β ^ t₀ * gapAt U U' (consμ U' β R I μ t₀) (consOf R I x' t₀) : ℝ) : EReal) := by
+  obtain ⟨K, hK⟩ := h.value_bound hμ hx'
+  have hgap : ∀ t, 0 ≤ β ^ t * gapAt U U' (consμ U' β R I μ t) (consOf R I x' t) := fun t =>
+    mul_nonneg (pow_nonneg h.hβ0.le t) (h.gapAt_nonneg (h.hI.trans_le (h.consμ_ge hμ t))
+      (h.consOf_nonneg hx' t))
+  refine le_of_tendsto_of_tendsto (tendsto_total h.assumption42 hx')
+    (EReal.tendsto_coe.2 (((h.tendsto_plan hμ).add_const
+      (U' (cI U' I μ) * (z.1 - wealth U' β R I μ))).sub_const
+        (β ^ t₀ * gapAt U U' (consμ U' β R I μ t₀) (consOf R I x' t₀)))) ?_
+  filter_upwards [eventually_ge_atTop (max K t₀)] with n hn
+  refine EReal.coe_le_coe_iff.2 ?_
+  have hb := hK n (le_of_max_le_left hn)
+  have hs := Finset.single_le_sum (f := fun t => β ^ t * gapAt U U' (consμ U' β R I μ t)
+    (consOf R I x' t)) (fun t _ => hgap t)
+    (Finset.mem_range.2 (by omega : t₀ < n + 1))
+  linarith
+
+/-- The supergradient bound `u(x') ≤ V(μ) + U'(c₀)(z − x₀)`. -/
+theorem CSHyp.total_le_tangent (h : CSHyp U U' β R I) {μ : ℝ} (hμ : 0 < μ) {z : CSWealth}
+    {x' : ℕ → CSWealth} (hx' : x' ∈ Feasible (csΓ R I) z) :
+    total (csF U R I) β x' ≤
+      ((valμ U U' β R I μ + U' (cI U' I μ) * (z.1 - wealth U' β R I μ) : ℝ) : EReal) := by
+  refine (h.total_le hμ hx' 0).trans (EReal.coe_le_coe_iff.2 ?_)
+  have := h.gapAt_nonneg (h.hI.trans_le (h.consμ_ge hμ 0)) (h.consOf_nonneg hx' 0)
+  simp only [pow_zero, one_mul]
+  linarith
+
+/-- A feasible plan with the consumption of the plan of `μ`, from the same wealth, is that plan. -/
+theorem CSHyp.eq_planN_of_cons (h : CSHyp U U' β R I) {μ : ℝ} (hμ : 0 < μ)
+    {x' : ℕ → CSWealth} (h0 : (x' 0).1 = wealth U' β R I μ)
+    (hc : ∀ t, consOf R I x' t = consμ U' β R I μ t) : x' = planN h hμ := by
+  have key : ∀ t, (x' t).1 = planμ U' β R I μ t := by
+    intro t
+    induction t with
+    | zero => rw [h0, planμ_zero]
+    | succ t ih =>
+      have e := hc t
+      rw [h.consμ_eq hμ t] at e
+      simp only [consOf] at e
+      rw [ih] at e
+      have hR := h.hR.ne'
+      field_simp at e
+      linarith
+  funext t
+  exact Subtype.ext (key t)
+
+/-- **Uniqueness.** Every other plan feasible from `Ξ(μ)` does strictly worse. -/
+theorem CSHyp.total_lt (h : CSHyp U U' β R I) {μ : ℝ} (hμ : 0 < μ) {x' : ℕ → CSWealth}
+    (hx' : x' ∈ Feasible (csΓ R I) (wealthN h hμ)) (hne : x' ≠ planN h hμ) :
+    total (csF U R I) β x' < (valμ U U' β R I μ : EReal) := by
+  have hc : ∃ t, consOf R I x' t ≠ consμ U' β R I μ t := by
+    by_contra hall
+    push Not at hall
+    exact hne (h.eq_planN_of_cons hμ (by rw [hx'.1]; rfl) hall)
+  obtain ⟨t₀, ht₀⟩ := hc
+  have hgap : 0 < gapAt U U' (consμ U' β R I μ t₀) (consOf R I x' t₀) := by
+    have := h.super_lt (h.hI.trans_le (h.consμ_ge hμ t₀)) (h.consOf_nonneg hx' t₀) ht₀
+    simp only [gapAt]
+    linarith
+  refine (h.total_le hμ hx' t₀).trans_lt (EReal.coe_lt_coe_iff.2 ?_)
+  have := mul_pos (pow_pos h.hβ0 t₀) hgap
+  simp only [wealthN, sub_self, mul_zero, add_zero]
+  linarith
+
+/-- `v*(Ξ(μ)) = V(μ)`. -/
+theorem CSHyp.vstar_eq (h : CSHyp U U' β R I) {μ : ℝ} (hμ : 0 < μ) :
+    vstar (csΓ R I) (csF U R I) β (wealthN h hμ) = (valμ U U' β R I μ : EReal) := by
+  refine le_antisymm (iSup₂_le fun x' hx' => (h.total_le_tangent hμ hx').trans ?_) ?_
+  · simp [wealthN]
+  · rw [← h.plan_total hμ]
+    exact le_biSup (total (csF U R I) β) (h.planN_feasible hμ)
+
+/-- The supergradient inequality `v*(z) ≤ v*(Ξ(μ)) + U'(c₀)(z − Ξ(μ))`. -/
+theorem CSHyp.vstar_le_tangent (h : CSHyp U U' β R I) {μ : ℝ} (hμ : 0 < μ) (z : CSWealth) :
+    vstar (csΓ R I) (csF U R I) β z ≤
+      ((valμ U U' β R I μ + U' (cI U' I μ) * (z.1 - wealth U' β R I μ) : ℝ) : EReal) :=
+  iSup₂_le fun _ hx' => h.total_le_tangent hμ hx'
+
+/-- The plan of `μ` is the unique optimal plan from `Ξ(μ)`. -/
+theorem CSHyp.optimal_iff (h : CSHyp U U' β R I) {μ : ℝ} (hμ : 0 < μ) {x' : ℕ → CSWealth}
+    (hx' : x' ∈ Feasible (csΓ R I) (wealthN h hμ)) :
+    total (csF U R I) β x' = vstar (csΓ R I) (csF U R I) β (wealthN h hμ) ↔
+      x' = planN h hμ := by
+  rw [h.vstar_eq hμ]
+  refine ⟨fun heq => by_contra fun hne => ?_, fun he => he ▸ h.plan_total hμ⟩
+  exact lt_irrefl _ (heq ▸ h.total_lt hμ hx' hne)
+
+/-- `v*` is real-valued: `v*(x) = V(μ)` for any `μ > 0` with `Ξ(μ) = x`. -/
+theorem CSHyp.vstar_real (h : CSHyp U U' β R I) (x : CSWealth) :
+    ∃ v : ℝ, vstar (csΓ R I) (csF U R I) β x = v := by
+  obtain ⟨μ, hμ, -, hw⟩ := h.exists_wealth_eq x.2
+  have : x = wealthN h hμ := Subtype.ext hw.symm
+  exact ⟨_, this ▸ h.vstar_eq hμ⟩
+
+/-- **Exercise 5.17a.** `v*` is real-valued and satisfies (FE), and an optimal plan satisfies
+`v*(x_t) = U(I + x_t − x_{t+1}/R) + βv*(x_{t+1})`. -/
+theorem ex_5_17a (h : CSHyp U U' β R I) :
+    (∀ x : CSWealth, ∃ v : ℝ, vstar (csΓ R I) (csF U R I) β x = v) ∧
+      SatisfiesFE (csΓ R I) (csF U R I) β (vstar (csΓ R I) (csF U R I) β) ∧
+      ∀ (x₀ : CSWealth) (xs : ℕ → CSWealth), xs ∈ Feasible (csΓ R I) x₀ →
+        total (csF U R I) β xs = vstar (csΓ R I) (csF U R I) β x₀ → ∀ t,
+          vstar (csΓ R I) (csF U R I) β (xs t) = (U (consOf R I xs t) : EReal) +
+            (β : EReal) * vstar (csΓ R I) (csF U R I) β (xs (t + 1)) :=
+  ⟨h.vstar_real, theorem_4_2 h.hβ0.le h.assumption41 h.assumption42,
+    fun _ _ hxs hopt t => by
+      rw [theorem_4_4 h.hβ0 h.assumption42 hxs hopt t, h.csF_eq hxs t]⟩
+
+end StokeyLucasPrescott.DeterministicApplications
+
+/-
+Copyright (c) 2026 Robert Kirkby. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Robert Kirkby
+-/
+
+/-!
+# A consumption–savings problem: value, policy and the induction
+
+SLP §5.17, Exercise 5.17b–h. From `ConsumptionSavings`, the optimal plan from `x ≥ 0` is the plan
+of any multiplier `μ` with `Ξ(μ) = x` (`muOf`; all such plans coincide, `planN_eq`). On `ℝ₊`
+define the value `v` (`vR`), the policy `g` (`gR`) and initial consumption `c₀ = I + x − g(x)/R`
+(`cR`).
+
+* `c₀` is continuous and strictly increasing from `c₀(0) = I` onto `[I, ∞)`.
+* `v(z) ≤ v(x) + U'(c₀(x))(z − x)` (`vR_le_tangent`, from the summation-by-parts bound), and
+  `U'(c₀)` is continuous, so `v` is differentiable on `ℝ₊` with `v'(x) = U'(I + x − g(x)/R)`
+  (`hasDerivWithinAt_vR`). Since `v' > 0` and `v'` falls strictly, `v` is strictly increasing
+  and strictly concave.
+
+The book's induction runs over intervals `(m_{n−1}, m_n]`. Its objects are global here:
+* `m₁` solves `U'(I + m₁) = RβU'(I)` (`m1`);
+* `h(y) = Ξ(RβU'(c₀(y)))` (`hfun`) solves (2) for every `y > 0`;
+* `m_{n+1} = h(m_n)`, with `m_n = Ξ((Rβ)ⁿU'(I)) → ∞` (`mSeq`).
+
+Exercises 5.17b–h follow (`ex_5_17b` … `ex_5_17h`).
+
+**Correction to 5.17h.** The book claims `g(x') − g(x) < x' − x`. That holds when `R ≤ 1`, but not
+in general when `R > 1`. What does hold is `g(x') − g(x) < R(x' − x)`, i.e. consumption rises
+strictly with wealth (`ex_5_17h_slope`). See `ConsumptionSavingsCounterexample`.
+-/
+
+open Set Filter Topology
+
+namespace StokeyLucasPrescott.DeterministicApplications
+
+variable {U U' : ℝ → ℝ} {β R I : ℝ}
+
+/-! ### Plans from the same wealth coincide -/
+
+theorem CSHyp.planN_eq (h : CSHyp U U' β R I) {μ ν : ℝ} (hμ : 0 < μ) (hν : 0 < ν)
+    (hw : wealth U' β R I μ = wealth U' β R I ν) : planN h hν = planN h hμ := by
+  have hW : wealthN h hν = wealthN h hμ := Subtype.ext hw.symm
+  have hfeas : planN h hν ∈ Feasible (csΓ R I) (wealthN h hμ) := by
+    rw [← hW]; exact h.planN_feasible hν
+  refine (h.optimal_iff hμ hfeas).1 ?_
+  rw [h.plan_total hν, ← h.vstar_eq hν, hW]
+
+theorem CSHyp.planμ_eq_of_wealth (h : CSHyp U U' β R I) {μ ν : ℝ} (hμ : 0 < μ) (hν : 0 < ν)
+    (hw : wealth U' β R I μ = wealth U' β R I ν) (t : ℕ) :
+    planμ U' β R I ν t = planμ U' β R I μ t :=
+  congrArg Subtype.val (congrFun (h.planN_eq hμ hν hw) t)
+
+theorem CSHyp.consμ_eq_of_wealth (h : CSHyp U U' β R I) {μ ν : ℝ} (hμ : 0 < μ) (hν : 0 < ν)
+    (hw : wealth U' β R I μ = wealth U' β R I ν) (t : ℕ) :
+    consμ U' β R I ν t = consμ U' β R I μ t := by
+  rw [← h.consOf_planN hν, ← h.consOf_planN hμ, h.planN_eq hμ hν hw]
+
+theorem CSHyp.valμ_eq_of_wealth (h : CSHyp U U' β R I) {μ ν : ℝ} (hμ : 0 < μ) (hν : 0 < ν)
+    (hw : wealth U' β R I μ = wealth U' β R I ν) : valμ U U' β R I ν = valμ U U' β R I μ :=
+  tsum_congr fun t => by rw [h.consμ_eq_of_wealth hμ hν hw t]
+
+/-- `U'(cI(p)) = p` for `0 < p ≤ U'(I)`. -/
+theorem CSHyp.U'_cI (h : CSHyp U U' β R I) {p : ℝ} (hp : 0 < p) (hpI : p ≤ U' I) :
+    U' (cI U' I p) = p := by
+  rcases eq_or_lt_of_le (h.cI_mem hp).1 with he | hgt
+  · have := (h.cI_mem hp).2
+    rw [← he] at this ⊢
+    exact le_antisymm this hpI
+  · exact h.cI_eq hp hgt
+
+/-! ### Value, policy and consumption on `ℝ₊` -/
+
+/-- A multiplier of wealth `x ≥ 0`: some `μ ∈ (0, U'(I)]` with `Ξ(μ) = x`. -/
+noncomputable def muOf (h : CSHyp U U' β R I) (x : ℝ) : ℝ := by
+  classical exact if hx : 0 ≤ x then Classical.choose (h.exists_wealth_eq hx) else U' I
+
+theorem CSHyp.muOf_spec (h : CSHyp U U' β R I) {x : ℝ} (hx : 0 ≤ x) :
+    0 < muOf h x ∧ muOf h x ≤ U' I ∧ wealth U' β R I (muOf h x) = x := by
+  simp only [muOf, hx, ↓reduceDIte]
+  exact Classical.choose_spec (h.exists_wealth_eq hx)
+
+/-- The value function `v`. -/
+noncomputable def vR (h : CSHyp U U' β R I) (x : ℝ) : ℝ := valμ U U' β R I (muOf h x)
+
+/-- The policy function `g`. -/
+noncomputable def gR (h : CSHyp U U' β R I) (x : ℝ) : ℝ := planμ U' β R I (muOf h x) 1
+
+/-- Initial consumption `c₀(x) = I + x − g(x)/R`. -/
+noncomputable def cR (h : CSHyp U U' β R I) (x : ℝ) : ℝ := cI U' I (muOf h x)
+
+theorem CSHyp.vR_wealth (h : CSHyp U U' β R I) {ν : ℝ} (hν : 0 < ν) :
+    vR h (wealth U' β R I ν) = valμ U U' β R I ν := by
+  obtain ⟨hμ, -, hw⟩ := h.muOf_spec (h.wealth_nonneg hν)
+  exact h.valμ_eq_of_wealth hν hμ hw.symm
+
+theorem CSHyp.gR_wealth (h : CSHyp U U' β R I) {ν : ℝ} (hν : 0 < ν) :
+    gR h (wealth U' β R I ν) = wealth U' β R I (ν / (R * β)) := by
+  obtain ⟨hμ, -, hw⟩ := h.muOf_spec (h.wealth_nonneg hν)
+  rw [gR, h.planμ_eq_of_wealth hν hμ hw.symm, planμ, pow_one]
+
+theorem CSHyp.cR_wealth (h : CSHyp U U' β R I) {ν : ℝ} (hν : 0 < ν) :
+    cR h (wealth U' β R I ν) = cI U' I ν := by
+  obtain ⟨hμ, -, hw⟩ := h.muOf_spec (h.wealth_nonneg hν)
+  have := h.consμ_eq_of_wealth hν hμ hw.symm 0
+  rwa [consμ_zero, consμ_zero] at this
+
+/-- **`v = v*`** on `ℝ₊`. -/
+theorem CSHyp.vstar_wealth (h : CSHyp U U' β R I) {x : ℝ} (hx : 0 ≤ x) :
+    vstar (csΓ R I) (csF U R I) β ⟨x, hx⟩ = (vR h x : EReal) := by
+  obtain ⟨hμ, -, hw⟩ := h.muOf_spec hx
+  have : (⟨x, hx⟩ : CSWealth) = wealthN h hμ := Subtype.ext hw.symm
+  rw [this, h.vstar_eq hμ]
+  rfl
+
+theorem CSHyp.cR_ge (h : CSHyp U U' β R I) {x : ℝ} (hx : 0 ≤ x) : I ≤ cR h x :=
+  (h.cI_mem (h.muOf_spec hx).1).1
+
+theorem CSHyp.cR_pos (h : CSHyp U U' β R I) {x : ℝ} (hx : 0 ≤ x) : 0 < cR h x :=
+  h.hI.trans_le (h.cR_ge hx)
+
+theorem CSHyp.gR_nonneg (h : CSHyp U U' β R I) {x : ℝ} (hx : 0 ≤ x) : 0 ≤ gR h x :=
+  h.planμ_nonneg (h.muOf_spec hx).1 1
+
+/-- `g(x) = R(I + x − c₀(x))`. -/
+theorem CSHyp.gR_eq (h : CSHyp U U' β R I) {x : ℝ} (hx : 0 ≤ x) :
+    gR h x = R * (I + x - cR h x) := by
+  obtain ⟨hμ, -, hw⟩ := h.muOf_spec hx
+  rw [gR, h.planμ_succ hμ 0, planμ_zero, hw, consμ_zero]
+  rfl
+
+theorem CSHyp.cR_eq (h : CSHyp U U' β R I) {x : ℝ} (hx : 0 ≤ x) :
+    cR h x = I + x - gR h x / R := by
+  rw [h.gR_eq hx, mul_div_cancel_left₀ _ h.hR.ne']
+  ring
+
+theorem CSHyp.cR_zero (h : CSHyp U U' β R I) : cR h 0 = I := by
+  have hU := h.U'_pos h.hI
+  have := h.cR_wealth hU
+  rwa [h.wealth_of_ge le_rfl, h.cI_of_le le_rfl] at this
+
+/-- Larger wealth has a smaller multiplier, below `U'(I)`. -/
+theorem CSHyp.muOf_lt (h : CSHyp U U' β R I) {x x' : ℝ} (hx : 0 ≤ x) (hxx' : x < x') :
+    muOf h x' < muOf h x ∧ muOf h x' < U' I := by
+  obtain ⟨hμ, -, hw⟩ := h.muOf_spec hx
+  obtain ⟨hμ', -, hw'⟩ := h.muOf_spec (hx.trans hxx'.le)
+  refine ⟨not_le.1 fun hle => ?_, h.lt_of_wealth_pos (by rw [hw']; linarith)⟩
+  have := h.wealth_anti hμ hle
+  rw [hw, hw'] at this
+  linarith
+
+theorem CSHyp.cR_strictMono (h : CSHyp U U' β R I) : StrictMonoOn (cR h) (Ici 0) := by
+  intro x hx x' _ hxx'
+  obtain ⟨hlt, hltI⟩ := h.muOf_lt hx hxx'
+  exact h.cI_strictAnti (h.muOf_spec (le_trans hx hxx'.le)).1 hlt hltI
+
+/-- `c₀` maps `ℝ₊` onto `[I, ∞)`. -/
+theorem CSHyp.cR_surj (h : CSHyp U U' β R I) {c : ℝ} (hc : I ≤ c) :
+    ∃ x, 0 ≤ x ∧ cR h x = c := by
+  have hp := h.U'_pos (h.hI.trans_le hc)
+  exact ⟨_, h.wealth_nonneg hp, by rw [h.cR_wealth hp, h.cI_U' hc]⟩
+
+theorem CSHyp.continuousWithinAt_cR (h : CSHyp U U' β R I) {x₀ : ℝ} (hx₀ : 0 ≤ x₀) :
+    ContinuousWithinAt (cR h) (Ici 0) x₀ := by
+  have hmono := h.cR_strictMono
+  refine tendsto_order.2 ⟨fun a ha => ?_, fun b hb => ?_⟩
+  · rcases lt_or_ge a I with haI | haI
+    · filter_upwards [self_mem_nhdsWithin] with x hx
+      exact haI.trans_le (h.cR_ge hx)
+    · obtain ⟨x₁, hx₁, hc₁⟩ := h.cR_surj (c := (a + cR h x₀) / 2) (by linarith)
+      have hx₁x₀ : x₁ < x₀ := (hmono.lt_iff_lt hx₁ hx₀).1 (by rw [hc₁]; linarith)
+      filter_upwards [self_mem_nhdsWithin, nhdsWithin_le_nhds (lt_mem_nhds hx₁x₀)]
+        with x hx hxx
+      have := hmono hx₁ hx hxx
+      linarith
+  · obtain ⟨x₂, hx₂, hc₂⟩ := h.cR_surj (c := (cR h x₀ + b) / 2) (by linarith [h.cR_ge hx₀])
+    have hx₀x₂ : x₀ < x₂ := (hmono.lt_iff_lt hx₀ hx₂).1 (by rw [hc₂]; linarith)
+    filter_upwards [self_mem_nhdsWithin, nhdsWithin_le_nhds (gt_mem_nhds hx₀x₂)] with x hx hxx
+    have := hmono hx hx₂ hxx
+    linarith
+
+theorem CSHyp.continuousOn_cR (h : CSHyp U U' β R I) : ContinuousOn (cR h) (Ici 0) :=
+  fun _ hx => h.continuousWithinAt_cR hx
+
+theorem CSHyp.continuousOn_gR (h : CSHyp U U' β R I) : ContinuousOn (gR h) (Ici 0) := by
+  refine ContinuousOn.congr (f := fun x => R * (I + x - cR h x)) ?_ fun x hx => h.gR_eq hx
+  exact continuousOn_const.mul ((continuousOn_const.add continuousOn_id).sub h.continuousOn_cR)
+
+/-- The marginal value `U'(c₀(x))` is continuous on `ℝ₊`. -/
+theorem CSHyp.continuousOn_marg (h : CSHyp U U' β R I) :
+    ContinuousOn (fun x => U' (cR h x)) (Ici 0) := fun _ hx =>
+  (h.hU'c.continuousAt (Ioi_mem_nhds (h.cR_pos hx))).comp_continuousWithinAt
+    (h.continuousWithinAt_cR hx)
+
+/-! ### Differentiability, monotonicity and concavity of `v` -/
+
+/-- **The supergradient inequality** `v(z) ≤ v(x) + U'(c₀(x))(z − x)`. -/
+theorem CSHyp.vR_le_tangent (h : CSHyp U U' β R I) {x z : ℝ} (hx : 0 ≤ x) (hz : 0 ≤ z) :
+    vR h z ≤ vR h x + U' (cR h x) * (z - x) := by
+  obtain ⟨hμ, -, hw⟩ := h.muOf_spec hx
+  have := h.vstar_le_tangent hμ ⟨z, hz⟩
+  rw [h.vstar_wealth hz, hw] at this
+  exact EReal.coe_le_coe_iff.1 this
+
+/-- `v` is differentiable on `ℝ₊` (one-sided at `0`) with `v'(x) = U'(c₀(x))`. -/
+theorem CSHyp.hasDerivWithinAt_vR (h : CSHyp U U' β R I) {x : ℝ} (hx : 0 ≤ x) :
+    HasDerivWithinAt (vR h) (U' (cR h x)) (Ici 0) x := by
+  rw [hasDerivWithinAt_iff_tendsto_slope]
+  have hs : Tendsto (fun z => U' (cR h z)) (𝓝[Ici 0 \ {x}] x) (𝓝 (U' (cR h x))) :=
+    (h.continuousOn_marg x hx).tendsto.mono_left (nhdsWithin_mono _ sdiff_subset)
+  have hlo : Tendsto (fun z => min (U' (cR h z)) (U' (cR h x))) (𝓝[Ici 0 \ {x}] x)
+      (𝓝 (U' (cR h x))) := by
+    have := hs.min (tendsto_const_nhds (x := U' (cR h x)))
+    rwa [min_self] at this
+  have hhi : Tendsto (fun z => max (U' (cR h z)) (U' (cR h x))) (𝓝[Ici 0 \ {x}] x)
+      (𝓝 (U' (cR h x))) := by
+    have := hs.max (tendsto_const_nhds (x := U' (cR h x)))
+    rwa [max_self] at this
+  have hbd : ∀ z ∈ Ici (0 : ℝ) \ {x}, min (U' (cR h z)) (U' (cR h x)) ≤ slope (vR h) x z ∧
+      slope (vR h) x z ≤ max (U' (cR h z)) (U' (cR h x)) := by
+    rintro z ⟨hz, hzx⟩
+    have hz1 := h.vR_le_tangent hx hz
+    have hz2 := h.vR_le_tangent hz hx
+    rw [slope_def_field]
+    rcases lt_or_gt_of_ne hzx with hlt | hgt
+    · have hneg : z - x < 0 := sub_neg.2 hlt
+      exact ⟨(min_le_right _ _).trans ((le_div_iff_of_neg hneg).2 (by linarith)),
+        ((div_le_iff_of_neg hneg).2 (by linarith)).trans (le_max_left _ _)⟩
+    · have hpos : 0 < z - x := sub_pos.2 hgt
+      exact ⟨(min_le_left _ _).trans ((le_div_iff₀ hpos).2 (by linarith)),
+        ((div_le_iff₀ hpos).2 (by linarith)).trans (le_max_right _ _)⟩
+  exact tendsto_of_tendsto_of_tendsto_of_le_of_le' hlo hhi
+    (eventually_nhdsWithin_of_forall fun z hz => (hbd z hz).1)
+    (eventually_nhdsWithin_of_forall fun z hz => (hbd z hz).2)
+
+theorem CSHyp.hasDerivAt_vR (h : CSHyp U U' β R I) {x : ℝ} (hx : 0 < x) :
+    HasDerivAt (vR h) (U' (cR h x)) x :=
+  (h.hasDerivWithinAt_vR hx.le).hasDerivAt (Ici_mem_nhds hx)
+
+theorem CSHyp.deriv_vR (h : CSHyp U U' β R I) {x : ℝ} (hx : 0 < x) :
+    deriv (vR h) x = U' (I + x - gR h x / R) := by
+  rw [(h.hasDerivAt_vR hx).deriv, h.cR_eq hx.le]
+
+theorem CSHyp.continuousOn_vR (h : CSHyp U U' β R I) : ContinuousOn (vR h) (Ici 0) :=
+  fun _ hx => (h.hasDerivWithinAt_vR hx).continuousWithinAt
+
+theorem CSHyp.vR_strictMono (h : CSHyp U U' β R I) : StrictMonoOn (vR h) (Ici 0) :=
+  strictMonoOn_of_deriv_pos (convex_Ici 0) h.continuousOn_vR fun x hx => by
+    rw [interior_Ici] at hx
+    rw [(h.hasDerivAt_vR hx).deriv]
+    exact h.U'_pos (h.cR_pos hx.le)
+
+theorem CSHyp.vR_strictConcave (h : CSHyp U U' β R I) : StrictConcaveOn ℝ (Ici 0) (vR h) := by
+  refine StrictAntiOn.strictConcaveOn_of_deriv (convex_Ici 0) h.continuousOn_vR ?_
+  rw [interior_Ici]
+  intro a ha b hb hab
+  rw [(h.hasDerivAt_vR ha).deriv, (h.hasDerivAt_vR hb).deriv]
+  exact h.U'_lt (h.cR_pos (le_of_lt ha)) (h.cR_strictMono (mem_Ici.2 (le_of_lt ha))
+    (mem_Ici.2 (le_of_lt hb)) hab)
+
+/-! ### Exercise 5.17b: the interval `[0, m₁]` -/
+
+/-- `m₁`, defined by `U'(I + m₁) = RβU'(I)`. -/
+noncomputable def m1 (U' : ℝ → ℝ) (β R I : ℝ) : ℝ := cI U' I (R * β * U' I) - I
+
+theorem CSHyp.rhoU_pos (h : CSHyp U U' β R I) : 0 < R * β * U' I :=
+  mul_pos h.rho_pos (h.U'_pos h.hI)
+
+theorem CSHyp.rhoU_lt (h : CSHyp U U' β R I) : R * β * U' I < U' I := by
+  have := h.U'_pos h.hI
+  nlinarith [h.hRβ]
+
+/-- **Exercise 5.17b.** `m₁ > 0` is well defined: it is the unique `m ≥ 0` with
+`U'(I + m) = RβU'(I)`. -/
+theorem ex_5_17b_m1 (h : CSHyp U U' β R I) :
+    0 < m1 U' β R I ∧ U' (I + m1 U' β R I) = R * β * U' I ∧
+      ∀ m, 0 ≤ m → U' (I + m) = R * β * U' I → m = m1 U' β R I := by
+  have hgt := h.cI_gt h.rhoU_pos h.rhoU_lt
+  have hU : U' (I + m1 U' β R I) = R * β * U' I := by
+    rw [m1, add_sub_cancel]; exact h.cI_eq h.rhoU_pos hgt
+  refine ⟨by simp only [m1]; linarith, hU, fun m hm hm' => ?_⟩
+  have hpos : 0 < I + m := by linarith [h.hI]
+  have hpos1 : 0 < I + m1 U' β R I := by simp only [m1]; linarith [h.hI]
+  rcases lt_trichotomy m (m1 U' β R I) with hlt | heq | hgt'
+  · have := h.U'_lt hpos (by linarith : I + m < I + m1 U' β R I); linarith
+  · exact heq
+  · have := h.U'_lt hpos1 (by linarith : I + m1 U' β R I < I + m); linarith
+
+theorem CSHyp.m1_pos (h : CSHyp U U' β R I) : 0 < m1 U' β R I := (ex_5_17b_m1 h).1
+
+theorem CSHyp.wealth_rhoU (h : CSHyp U U' β R I) :
+    wealth U' β R I (R * β * U' I) = m1 U' β R I := by
+  rw [h.wealth_shift h.rhoU_pos, mul_div_cancel_left₀ _ h.rho_pos.ne',
+    h.wealth_of_ge le_rfl, mul_zero, add_zero]
+  rfl
+
+theorem CSHyp.muOf_ge (h : CSHyp U U' β R I) {x : ℝ} (hx : 0 ≤ x) (hxm : x ≤ m1 U' β R I) :
+    R * β * U' I ≤ muOf h x := by
+  obtain ⟨hμ, -, hw⟩ := h.muOf_spec hx
+  refine not_lt.1 fun hlt => ?_
+  have := h.wealth_strictAnti hμ hlt (hlt.trans h.rhoU_lt)
+  rw [hw, h.wealth_rhoU] at this
+  linarith
+
+theorem CSHyp.gR_eq_zero (h : CSHyp U U' β R I) {x : ℝ} (hx : 0 ≤ x)
+    (hxm : x ≤ m1 U' β R I) : gR h x = 0 := by
+  have := h.muOf_ge hx hxm
+  rw [gR, planμ, pow_one]
+  exact h.wealth_of_ge ((le_div_iff₀ h.rho_pos).2 (by linarith))
+
+theorem CSHyp.gR_pos (h : CSHyp U U' β R I) {x : ℝ} (hxm : m1 U' β R I < x) : 0 < gR h x := by
+  have hx : 0 ≤ x := h.m1_pos.le.trans hxm.le
+  obtain ⟨hμ, -, -⟩ := h.muOf_spec hx
+  have hlt : muOf h x / (R * β) < U' I := by
+    refine not_le.1 fun hle => ?_
+    have h1 : R * β * U' I ≤ muOf h x := by
+      have := (le_div_iff₀ h.rho_pos).1 hle; linarith
+    have h2 := h.cI_anti h.rhoU_pos h1
+    have h3 := h.cR_eq hx
+    rw [show gR h x = 0 by rw [gR, planμ, pow_one]; exact h.wealth_of_ge hle, zero_div,
+      sub_zero] at h3
+    have : cR h x ≤ I + m1 U' β R I := by simp only [m1, cR]; linarith
+    linarith
+  rw [gR, planμ, pow_one]
+  exact h.wealth_pos (div_pos hμ h.rho_pos) hlt
+
+/-- On `[0, m₁]`, `v(x) = U(I + x) + βU(I)/(1 − β)`. -/
+theorem CSHyp.vR_eq_low (h : CSHyp U U' β R I) {x : ℝ} (hx : 0 ≤ x) (hxm : x ≤ m1 U' β R I) :
+    vR h x = U (I + x) + β * U I / (1 - β) := by
+  obtain ⟨hμ, -, -⟩ := h.muOf_spec hx
+  have hge := h.muOf_ge hx hxm
+  have hc0 : consμ U' β R I (muOf h x) 0 = I + x := by
+    rw [consμ_zero, ← cR, h.cR_eq hx, h.gR_eq_zero hx hxm, zero_div, sub_zero]
+  have hct : ∀ t : ℕ, consμ U' β R I (muOf h x) (t + 1) = I := fun t => by
+    refine h.cI_of_le ?_
+    have h1 : U' I ≤ muOf h x / (R * β) := (le_div_iff₀ h.rho_pos).2 (by linarith)
+    refine h1.trans ?_
+    rw [div_pow_succ]
+    exact le_div_self (div_pos hμ h.rho_pos).le (pow_pos h.rho_pos t)
+      (pow_le_one₀ h.rho_pos.le h.hRβ.le) |>.trans (le_of_eq (by
+        rw [div_div, div_div, mul_comm]))
+  rw [vR, valμ, (h.summable_val hμ).tsum_eq_zero_add, pow_zero, one_mul, hc0]
+  have e : ∀ t : ℕ, β ^ (t + 1) * U (consμ U' β R I (muOf h x) (t + 1)) = β * U I * β ^ t :=
+    fun t => by rw [hct t, pow_succ]; ring
+  rw [tsum_congr e, tsum_mul_left, tsum_geometric_of_lt_one h.hβ0.le h.hβ1]
+  ring
+
+/-- **Exercise 5.17b.** On `[0, m₁]`: `g = 0`, `v(x) = U(I + x) + βU(I)/(1 − β)`, `v` is
+continuous, strictly increasing and strictly concave, and `v'(x) = U'(I + x)` (one-sided at
+`0`). -/
+theorem ex_5_17b (h : CSHyp U U' β R I) :
+    (∀ x ∈ Icc 0 (m1 U' β R I), gR h x = 0 ∧ vR h x = U (I + x) + β * U I / (1 - β) ∧
+      HasDerivWithinAt (vR h) (U' (I + x)) (Ici 0) x) ∧
+    ContinuousOn (vR h) (Icc 0 (m1 U' β R I)) ∧ StrictMonoOn (vR h) (Icc 0 (m1 U' β R I)) ∧
+      StrictConcaveOn ℝ (Icc 0 (m1 U' β R I)) (vR h) := by
+  have hsub : Icc 0 (m1 U' β R I) ⊆ Ici 0 := Icc_subset_Ici_self
+  refine ⟨fun x hx => ⟨h.gR_eq_zero hx.1 hx.2, h.vR_eq_low hx.1 hx.2, ?_⟩,
+    h.continuousOn_vR.mono hsub, h.vR_strictMono.mono hsub,
+    h.vR_strictConcave.subset hsub (convex_Icc _ _)⟩
+  have := h.hasDerivWithinAt_vR hx.1
+  rwa [h.cR_eq hx.1, h.gR_eq_zero hx.1 hx.2, zero_div, sub_zero] at this
+
+/-! ### Exercise 5.17c: the function `h` -/
+
+/-- `h(y) = Ξ(RβU'(c₀(y)))`: the wealth from which the consumer saves `y/R`. -/
+noncomputable def hfun (h : CSHyp U U' β R I) (y : ℝ) : ℝ := wealth U' β R I (R * β * U' (cR h y))
+
+/-- The marginal value `U'(c₀(y))` is the multiplier of `y`. -/
+theorem CSHyp.U'_cR (h : CSHyp U U' β R I) {y : ℝ} (hy : 0 ≤ y) : U' (cR h y) = muOf h y :=
+  h.U'_cI (h.muOf_spec hy).1 (h.muOf_spec hy).2.1
+
+theorem CSHyp.gR_def (h : CSHyp U U' β R I) (x : ℝ) :
+    gR h x = wealth U' β R I (muOf h x / (R * β)) := by
+  rw [gR, planμ, pow_one]
+
+theorem CSHyp.hfun_zero (h : CSHyp U U' β R I) : hfun h 0 = m1 U' β R I := by
+  rw [hfun, h.cR_zero, h.wealth_rhoU]
+
+theorem CSHyp.hfun_nonneg (h : CSHyp U U' β R I) {y : ℝ} (hy : 0 ≤ y) : 0 ≤ hfun h y :=
+  h.wealth_nonneg (mul_pos h.rho_pos (h.U'_pos (h.cR_pos hy)))
+
+/-- `g(h(y)) = y`. -/
+theorem CSHyp.gR_hfun (h : CSHyp U U' β R I) {y : ℝ} (hy : 0 ≤ y) : gR h (hfun h y) = y := by
+  obtain ⟨hμ, -, hw⟩ := h.muOf_spec hy
+  rw [hfun, h.U'_cR hy, h.gR_wealth (mul_pos h.rho_pos hμ),
+    mul_div_cancel_left₀ _ h.rho_pos.ne', hw]
+
+/-- (2): `U'(I + h(y) − y/R) = RβU'(c₀(y))`. -/
+theorem CSHyp.euler_hfun (h : CSHyp U U' β R I) {y : ℝ} (hy : 0 ≤ y) :
+    U' (I + hfun h y - y / R) = R * β * U' (cR h y) := by
+  obtain ⟨hμ, hμI, -⟩ := h.muOf_spec hy
+  have hρμ : 0 < R * β * muOf h y := mul_pos h.rho_pos hμ
+  have hc := h.cR_eq (h.hfun_nonneg hy)
+  rw [h.gR_hfun hy] at hc
+  rw [← hc, hfun, h.U'_cR hy, h.cR_wealth hρμ, h.U'_cI hρμ]
+  have := h.rhoU_lt
+  have : R * β * muOf h y ≤ R * β * U' I := mul_le_mul_of_nonneg_left hμI h.rho_pos.le
+  linarith
+
+theorem CSHyp.hfun_strictMono (h : CSHyp U U' β R I) : StrictMonoOn (hfun h) (Ici 0) := by
+  intro y hy y' hy' hyy'
+  obtain ⟨hlt, hltI⟩ := h.muOf_lt hy hyy'
+  have hμ' := (h.muOf_spec hy').1
+  rw [hfun, hfun, h.U'_cR hy, h.U'_cR hy']
+  refine h.wealth_strictAnti (mul_pos h.rho_pos hμ')
+    (mul_lt_mul_of_pos_left hlt h.rho_pos) ?_
+  have := h.rhoU_lt
+  have : R * β * muOf h y' < R * β * U' I := mul_lt_mul_of_pos_left hltI h.rho_pos
+  linarith
+
+theorem CSHyp.continuousOn_hfun (h : CSHyp U U' β R I) : ContinuousOn (hfun h) (Ici 0) :=
+  fun y hy => by
+    have hc : ContinuousWithinAt (fun x => R * β * U' (cR h x)) (Ici 0) y :=
+      continuousWithinAt_const.mul (h.continuousOn_marg y hy)
+    change ContinuousWithinAt (wealth U' β R I ∘ fun x => R * β * U' (cR h x)) (Ici 0) y
+    exact ContinuousAt.comp_continuousWithinAt (g := wealth U' β R I)
+      (h.continuousAt_wealth (mul_pos h.rho_pos (h.U'_pos (h.cR_pos hy)))) hc
+
+/-- **Exercise 5.17c.** `h` is continuous and strictly increasing, `h(y) → m₁` as `y ↓ 0`, and
+for `y > 0`, `h(y)` solves (2), `U'(I + h(y) − y/R) = Rβv'(y)`, and is the wealth from which the
+consumer saves `y/R`. -/
+theorem ex_5_17c (h : CSHyp U U' β R I) :
+    ContinuousOn (hfun h) (Ici 0) ∧ StrictMonoOn (hfun h) (Ici 0) ∧
+      Tendsto (hfun h) (𝓝[>] 0) (𝓝 (m1 U' β R I)) ∧
+      ∀ y, 0 < y → U' (I + hfun h y - y / R) = R * β * deriv (vR h) y ∧ gR h (hfun h y) = y := by
+  refine ⟨h.continuousOn_hfun, h.hfun_strictMono, ?_, fun y hy => ⟨?_, h.gR_hfun hy.le⟩⟩
+  · have := (h.continuousOn_hfun 0 (mem_Ici.2 le_rfl)).tendsto.mono_left
+      (nhdsWithin_mono _ Ioi_subset_Ici_self)
+    rwa [h.hfun_zero] at this
+  · rw [h.euler_hfun hy.le, (h.hasDerivAt_vR hy).deriv]
+
+/-! ### Exercises 5.17d–e: the interval `(m₁, m₂]` -/
+
+/-- `g` is nondecreasing on `ℝ₊`. -/
+theorem CSHyp.gR_mono (h : CSHyp U U' β R I) {x x' : ℝ} (hx : 0 ≤ x) (hxx' : x ≤ x') :
+    gR h x ≤ gR h x' := by
+  rcases eq_or_lt_of_le hxx' with rfl | hlt
+  · exact le_rfl
+  · rw [h.gR_def, h.gR_def]
+    exact h.wealth_anti (div_pos (h.muOf_spec (hx.trans hxx')).1 h.rho_pos)
+      (div_le_div_of_nonneg_right (h.muOf_lt hx hlt).1.le h.rho_pos.le)
+
+/-- `g` is strictly increasing on `[m₁, ∞)`. -/
+theorem CSHyp.gR_strictMono (h : CSHyp U U' β R I) :
+    StrictMonoOn (gR h) (Ici (m1 U' β R I)) := by
+  intro x hx x' _ hxx'
+  have hx0 : 0 ≤ x := h.m1_pos.le.trans hx
+  have hpos := h.gR_pos (lt_of_le_of_lt hx hxx')
+  rw [h.gR_def] at hpos
+  rw [h.gR_def, h.gR_def]
+  exact h.wealth_strictAnti (div_pos (h.muOf_spec (hx0.trans hxx'.le)).1 h.rho_pos)
+    (div_lt_div_of_pos_right (h.muOf_lt hx0 hxx').1 h.rho_pos) (h.lt_of_wealth_pos hpos)
+
+/-- `m₂ = h(m₁)`. -/
+noncomputable def m2 (h : CSHyp U U' β R I) : ℝ := hfun h (m1 U' β R I)
+
+/-- `v'(x) = U'(I + x − g(x)/R)` is continuous on `ℝ₊`. -/
+theorem CSHyp.continuousOn_vR' (h : CSHyp U U' β R I) :
+    ContinuousOn (fun x => U' (I + x - gR h x / R)) (Ici 0) :=
+  h.continuousOn_marg.congr fun x hx => by simp only [h.cR_eq hx]
+
+/-- **Exercise 5.17d.** `m₂ > m₁`; on `[m₁, m₂]`, `g` is continuous (in particular at `m₁`)
+and strictly increasing, and `v` is continuous, strictly increasing and strictly concave; on
+`(m₁, m₂)`, `v` is continuously differentiable with `v'(x) = U'(I + x − g(x)/R)` (5). -/
+theorem ex_5_17d (h : CSHyp U U' β R I) :
+    m1 U' β R I < m2 h ∧ ContinuousOn (gR h) (Icc (m1 U' β R I) (m2 h)) ∧
+      StrictMonoOn (gR h) (Icc (m1 U' β R I) (m2 h)) ∧
+      ContinuousOn (vR h) (Icc (m1 U' β R I) (m2 h)) ∧
+      StrictMonoOn (vR h) (Icc (m1 U' β R I) (m2 h)) ∧
+      StrictConcaveOn ℝ (Icc (m1 U' β R I) (m2 h)) (vR h) ∧
+      (∀ x ∈ Ioo (m1 U' β R I) (m2 h), HasDerivAt (vR h) (U' (I + x - gR h x / R)) x) ∧
+      ContinuousOn (fun x => U' (I + x - gR h x / R)) (Ioo (m1 U' β R I) (m2 h)) := by
+  have hm1 := h.m1_pos
+  have hsub : Icc (m1 U' β R I) (m2 h) ⊆ Ici 0 := fun x hx => mem_Ici.2 (hm1.le.trans hx.1)
+  refine ⟨?_, h.continuousOn_gR.mono hsub, h.gR_strictMono.mono fun x hx => hx.1,
+    h.continuousOn_vR.mono hsub, h.vR_strictMono.mono hsub,
+    h.vR_strictConcave.subset hsub (convex_Icc _ _), fun x hx => ?_,
+    h.continuousOn_vR'.mono fun x hx => mem_Ici.2 (hm1.le.trans hx.1.le)⟩
+  · have := h.hfun_strictMono (mem_Ici.2 le_rfl) (mem_Ici.2 hm1.le) hm1
+    rwa [h.hfun_zero] at this
+  · have := h.hasDerivAt_vR (hm1.trans hx.1)
+    rwa [h.cR_eq (hm1.le.trans hx.1.le)] at this
+
+/-- **Exercise 5.17e.** `v` and `v'` are continuous at `m₁`. -/
+theorem ex_5_17e (h : CSHyp U U' β R I) :
+    ContinuousAt (vR h) (m1 U' β R I) ∧ ContinuousAt (deriv (vR h)) (m1 U' β R I) := by
+  have hm1 := h.m1_pos
+  refine ⟨(h.hasDerivAt_vR hm1).continuousAt, ?_⟩
+  have hev : (fun x => U' (cR h x)) =ᶠ[𝓝 (m1 U' β R I)] deriv (vR h) := by
+    filter_upwards [lt_mem_nhds hm1] with x hx
+    exact ((h.hasDerivAt_vR hx).deriv).symm
+  exact ((h.continuousOn_marg _ (mem_Ici.2 hm1.le)).continuousAt (Ici_mem_nhds hm1)).congr hev
+
+/-! ### Exercise 5.17f: the induction covers `ℝ₊` -/
+
+/-- `m_n = Ξ((Rβ)ⁿU'(I))`: `m₀ = 0`, `m₁`, and `m_{n+1} = h(m_n)`. -/
+noncomputable def mSeq (U' : ℝ → ℝ) (β R I : ℝ) (n : ℕ) : ℝ :=
+  wealth U' β R I ((R * β) ^ n * U' I)
+
+theorem CSHyp.mSeq_succ (h : CSHyp U U' β R I) (n : ℕ) :
+    mSeq U' β R I (n + 1) = hfun h (mSeq U' β R I n) := by
+  have hU := h.U'_pos h.hI
+  have hp : 0 < (R * β) ^ n * U' I := mul_pos (pow_pos h.rho_pos n) hU
+  have hpI : (R * β) ^ n * U' I ≤ U' I :=
+    mul_le_of_le_one_left hU.le (pow_le_one₀ h.rho_pos.le h.hRβ.le)
+  rw [mSeq, mSeq, hfun, h.cR_wealth hp, h.U'_cI hp hpI, pow_succ']
+  ring_nf
+
+theorem CSHyp.mSeq_strictMono (h : CSHyp U U' β R I) : StrictMono (mSeq U' β R I) := by
+  refine strictMono_nat_of_lt_succ fun n => ?_
+  have hU := h.U'_pos h.hI
+  have hρn := pow_pos h.rho_pos n
+  have hlt : (R * β) ^ (n + 1) * U' I < (R * β) ^ n * U' I := by
+    rw [pow_succ]
+    have : (R * β) ^ n * (R * β) < (R * β) ^ n := mul_lt_of_lt_one_right hρn h.hRβ
+    exact mul_lt_mul_of_pos_right this hU
+  refine h.wealth_strictAnti (mul_pos (pow_pos h.rho_pos _) hU) hlt ?_
+  refine lt_of_lt_of_le hlt (mul_le_of_le_one_left hU.le (pow_le_one₀ h.rho_pos.le h.hRβ.le))
+
+theorem CSHyp.tendsto_mSeq (h : CSHyp U U' β R I) :
+    Tendsto (mSeq U' β R I) atTop atTop := by
+  refine tendsto_atTop_atTop.2 fun B => ?_
+  have hU := h.U'_pos h.hI
+  have hc : 0 < I + max B 0 := by linarith [h.hI, le_max_right B 0]
+  have hUc := h.U'_pos hc
+  obtain ⟨n, hn⟩ := exists_pow_lt_of_lt_one (div_pos hUc hU) h.hRβ
+  refine ⟨n, fun m hm => ?_⟩
+  have hp : 0 < (R * β) ^ n * U' I := mul_pos (pow_pos h.rho_pos n) hU
+  have h1 : I + max B 0 ≤ cI U' I ((R * β) ^ n * U' I) :=
+    h.le_cI hp (by rwa [lt_div_iff₀ hU] at hn)
+  have h2 := h.wealth_ge hp
+  have h3 := h.mSeq_strictMono.monotone hm
+  simp only [mSeq] at h3 ⊢
+  linarith [le_max_left B 0]
+
+/-- **Exercise 5.17f.** The intervals `(m_n, m_{n+1}]` cover `ℝ₊` (`m₀ = 0`, `m_n ↑ ∞`), and on
+all of `ℝ₊`: `g` is continuous, zero on `[0, m₁]` and strictly increasing on `[m₁, ∞)`; `h` is
+continuous and strictly increasing; `v` is continuous, strictly increasing and strictly concave,
+and continuously differentiable with `v'(x) = U'(I + x − g(x)/R)` (one-sided at `0`). -/
+theorem ex_5_17f (h : CSHyp U U' β R I) :
+    (mSeq U' β R I 0 = 0 ∧ mSeq U' β R I 1 = m1 U' β R I ∧
+      (∀ n, mSeq U' β R I (n + 1) = hfun h (mSeq U' β R I n)) ∧ StrictMono (mSeq U' β R I) ∧
+      Tendsto (mSeq U' β R I) atTop atTop) ∧
+    (ContinuousOn (gR h) (Ici 0) ∧ (∀ x ∈ Icc 0 (m1 U' β R I), gR h x = 0) ∧
+      StrictMonoOn (gR h) (Ici (m1 U' β R I))) ∧
+    (ContinuousOn (hfun h) (Ici 0) ∧ StrictMonoOn (hfun h) (Ici 0)) ∧
+    (ContinuousOn (vR h) (Ici 0) ∧ StrictMonoOn (vR h) (Ici 0) ∧
+      StrictConcaveOn ℝ (Ici 0) (vR h) ∧
+      (∀ x, 0 ≤ x → HasDerivWithinAt (vR h) (U' (I + x - gR h x / R)) (Ici 0) x) ∧
+      ContinuousOn (fun x => U' (I + x - gR h x / R)) (Ici 0)) := by
+  refine ⟨⟨?_, ?_, h.mSeq_succ, h.mSeq_strictMono, h.tendsto_mSeq⟩,
+    ⟨h.continuousOn_gR, fun x hx => h.gR_eq_zero hx.1 hx.2, h.gR_strictMono⟩,
+    ⟨h.continuousOn_hfun, h.hfun_strictMono⟩,
+    ⟨h.continuousOn_vR, h.vR_strictMono, h.vR_strictConcave, fun x hx => ?_,
+      h.continuousOn_vR'⟩⟩
+  · rw [mSeq, pow_zero, one_mul, h.wealth_of_ge le_rfl]
+  · rw [mSeq, pow_one, h.wealth_rhoU]
+  · have := h.hasDerivWithinAt_vR hx
+    rwa [h.cR_eq hx] at this
+
+/-! ### Exercise 5.17g: `v` solves (1) and `v = v*` -/
+
+/-- `v(x) = U(c₀(x)) + βv(g(x))`. -/
+theorem CSHyp.vR_attained (h : CSHyp U U' β R I) {x : ℝ} (hx : 0 ≤ x) :
+    vR h x = U (I + x - gR h x / R) + β * vR h (gR h x) := by
+  obtain ⟨hμ, -, -⟩ := h.muOf_spec hx
+  have hμρ : 0 < muOf h x / (R * β) := div_pos hμ h.rho_pos
+  rw [← h.cR_eq hx, h.gR_def, h.vR_wealth hμρ, vR, valμ, valμ,
+    (h.summable_val hμ).tsum_eq_zero_add, pow_zero, one_mul, consμ_zero, ← tsum_mul_left]
+  congr 1
+  refine tsum_congr fun t => ?_
+  have := consμ_tail (U' := U') (β := β) (R := R) (I := I) (muOf h x) 1 t
+  rw [pow_one] at this
+  rw [this, pow_succ]
+  ring
+
+/-- **Exercise 5.17g.** `v = v*`, and `v` satisfies (1): `v(x) ≥ U(I + x − y/R) + βv(y)` for
+every `y ∈ [0, (I + x)R]`, with equality at `y = g(x) ∈ [0, (I + x)R]`. -/
+theorem ex_5_17g (h : CSHyp U U' β R I) :
+    (∀ x (hx : 0 ≤ x), vstar (csΓ R I) (csF U R I) β ⟨x, hx⟩ = (vR h x : EReal)) ∧
+      ∀ x, 0 ≤ x →
+        (∀ y, 0 ≤ y → y ≤ (I + x) * R → U (I + x - y / R) + β * vR h y ≤ vR h x) ∧
+        0 ≤ gR h x ∧ gR h x ≤ (I + x) * R ∧
+        vR h x = U (I + x - gR h x / R) + β * vR h (gR h x) := by
+  refine ⟨fun x hx => h.vstar_wealth hx, fun x hx => ⟨fun y hy hyx => ?_, h.gR_nonneg hx, ?_,
+    h.vR_attained hx⟩⟩
+  · have hFE := theorem_4_2 h.hβ0.le h.assumption41 h.assumption42 ⟨x, hx⟩
+    have hle := le_biSup (fun y' : CSWealth => ((csF U R I ⟨x, hx⟩ y' : ℝ) : EReal) +
+      (β : EReal) * vstar (csΓ R I) (csF U R I) β y') (show (⟨y, hy⟩ : CSWealth) ∈ csΓ R I ⟨x, hx⟩
+        from hyx)
+    rw [← hFE, h.vstar_wealth hx, h.vstar_wealth hy] at hle
+    have hc : 0 ≤ I + x - y / R := by
+      have := (div_le_iff₀ h.hR).2 hyx
+      linarith
+    have hF : csF U R I ⟨x, hx⟩ ⟨y, hy⟩ = U (I + x - y / R) := by
+      simp only [csF]
+      rw [max_eq_left hc]
+    rw [hF, ← EReal.coe_mul, ← EReal.coe_add] at hle
+    exact EReal.coe_le_coe_iff.1 hle
+  · rw [h.gR_eq hx]
+    have := h.cR_pos hx
+    nlinarith [h.hR]
+
+/-! ### Exercise 5.17h: the optimal plan -/
+
+theorem CSHyp.gR_planμ (h : CSHyp U U' β R I) {μ : ℝ} (hμ : 0 < μ) (t : ℕ) :
+    gR h (planμ U' β R I μ t) = planμ U' β R I μ (t + 1) := by
+  rw [planμ, h.gR_wealth (div_pos hμ (pow_pos h.rho_pos t)), planμ, div_pow_succ]
+
+/-- **Exercise 5.17h.** From any `x₀ ≥ 0`, a feasible plan is optimal if and only if it follows
+`x_{t+1} = g(x_t)`; so that plan is the unique optimal plan. -/
+theorem ex_5_17h_plan (h : CSHyp U U' β R I) (x₀ : CSWealth) {xs : ℕ → CSWealth}
+    (hxs : xs ∈ Feasible (csΓ R I) x₀) :
+    total (csF U R I) β xs = vstar (csΓ R I) (csF U R I) β x₀ ↔
+      ∀ t, (xs (t + 1)).1 = gR h (xs t).1 := by
+  obtain ⟨hμ, -, hw⟩ := h.muOf_spec x₀.2
+  have hx₀ : x₀ = wealthN h hμ := Subtype.ext hw.symm
+  have hxs' : xs ∈ Feasible (csΓ R I) (wealthN h hμ) := hx₀ ▸ hxs
+  rw [show vstar (csΓ R I) (csF U R I) β x₀ = vstar (csΓ R I) (csF U R I) β (wealthN h hμ) from
+    congrArg _ hx₀, h.optimal_iff hμ hxs']
+  constructor
+  · rintro rfl t
+    exact (h.gR_planμ hμ t).symm
+  · intro hg
+    funext t
+    refine Subtype.ext ?_
+    induction t with
+    | zero => rw [hxs.1]; exact hw.symm.trans (planμ_zero _).symm
+    | succ t ih => rw [hg t, ih]; exact h.gR_planμ hμ t
+
+/-- **Exercise 5.17h (corrected).** For `0 ≤ x < x'`: `0 ≤ g(x') − g(x) < R(x' − x)`, with
+equality on the left only if `g(x) = g(x') = 0`. The book's sharper `g(x') − g(x) < x' − x` holds
+when `R ≤ 1` (`ex_5_17h_slope_le_one`), but can fail when `R > 1`. -/
+theorem ex_5_17h_slope (h : CSHyp U U' β R I) {x x' : ℝ} (hx : 0 ≤ x) (hxx' : x < x') :
+    0 ≤ gR h x' - gR h x ∧ gR h x' - gR h x < R * (x' - x) ∧
+      (gR h x' = gR h x → gR h x = 0 ∧ gR h x' = 0) := by
+  have hx' : 0 ≤ x' := hx.trans hxx'.le
+  refine ⟨sub_nonneg.2 (h.gR_mono hx hxx'.le), ?_, fun heq => ?_⟩
+  · rw [h.gR_eq hx, h.gR_eq hx']
+    have := h.cR_strictMono (mem_Ici.2 hx) (mem_Ici.2 hx') hxx'
+    nlinarith [h.hR]
+  · have h0 : gR h x' = 0 := by
+      refine le_antisymm (not_lt.1 fun hpos => ?_) (h.gR_nonneg hx')
+      rw [h.gR_def] at hpos
+      have := h.wealth_strictAnti (div_pos (h.muOf_spec hx').1 h.rho_pos)
+        (div_lt_div_of_pos_right (h.muOf_lt hx hxx').1 h.rho_pos) (h.lt_of_wealth_pos hpos)
+      rw [← h.gR_def, ← h.gR_def] at this
+      linarith
+    exact ⟨heq ▸ h0, h0⟩
+
+theorem ex_5_17h_slope_le_one (h : CSHyp U U' β R I) (hR1 : R ≤ 1) {x x' : ℝ} (hx : 0 ≤ x)
+    (hxx' : x < x') : gR h x' - gR h x < x' - x := by
+  have := (ex_5_17h_slope h hx hxx').2.1
+  nlinarith
+
+end StokeyLucasPrescott.DeterministicApplications
+
+/-
+Copyright (c) 2026 Robert Kirkby. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Robert Kirkby
+-/
+
+/-!
+# A consumption–savings problem: three corrections
+
+SLP §5.17.
+
+* **`m₁` need not exist** (`ex_5_17b_m1_fails`). Take `U(c) = c − e^{−c}`, which is `C¹`,
+  strictly increasing and strictly concave, with `β = 1/2`, `R = 1`, `I = 1`. Then
+  `U'(c) = 1 + e^{−c} > 1 > RβU'(I)`, so `U'(I + m₁) = RβU'(I)` has no solution. (Here consuming
+  all wealth at once is optimal from every `x`.) Some condition such as `U'(c) → 0`, which
+  `CSHyp` assumes, is needed.
+* **The hint to 5.17g fails when `R < 1`** (`ex_5_17g_hint_fails`). With `W = RI/(R − 1) < 0`,
+  `x_n ≤ Rⁿ(x₀ + W)` is false already at `n = 1`; at `R = 1`, `W` is undefined. The proof of
+  `v = v*` in `ConsumptionSavings` does not use the hint.
+* **`g(x') − g(x) < x' − x` fails when `R > 1`** (`ex_5_17h_counterexample`). Take `R = 2`,
+  `β = 9/20`, `I = 1`. Let `U'` be almost flat on `[0, 2]`, at `1 − (c − 1)/100`, then falling
+  steeply as `0.099/(c − 1.9)`. A consumer who will consume `c₁ ∈ (1, 2)` next period chooses
+  `c₀` with `U'(c₀) = RβU'(c₁)`, which barely moves with `c₁`. So nearly all of an extra unit of
+  wealth is saved, and saving grows at rate about `R = 2`. Concretely, at
+  `x = 1 + 55/499 < x' = 11/10 + 55/498`, `g(x) = 1/5` and `g(x') = 2/5`. The correct bound is
+  `g(x') − g(x) < R(x' − x)` (`ex_5_17h_slope`), and the book's bound holds for `R ≤ 1`
+  (`ex_5_17h_slope_le_one`).
+-/
+
+open Set Filter Topology
+
+namespace StokeyLucasPrescott.DeterministicApplications
+
+/-! ### `m₁` need not exist -/
+
+theorem hasDerivAt_cexp (c : ℝ) :
+    HasDerivAt (fun c : ℝ => c - Real.exp (-c)) (1 + Real.exp (-c)) c := by
+  convert (hasDerivAt_id' c).sub ((hasDerivAt_neg c).exp) using 1
+  ring
+
+/-- **Exercise 5.17b (correction).** `U(c) = c − e^{−c}` is `C¹`, strictly increasing and
+strictly concave on `ℝ₊`, but with `β = 1/2`, `R = 1`, `I = 1` no `m ≥ 0` solves
+`U'(I + m) = RβU'(I)`. -/
+theorem ex_5_17b_m1_fails :
+    (∀ c, HasDerivAt (fun c : ℝ => c - Real.exp (-c)) (1 + Real.exp (-c)) c) ∧
+      Continuous (fun c : ℝ => 1 + Real.exp (-c)) ∧
+      StrictMonoOn (fun c : ℝ => c - Real.exp (-c)) (Ici 0) ∧
+      StrictConcaveOn ℝ (Ici 0) (fun c : ℝ => c - Real.exp (-c)) ∧
+      ¬ ∃ m : ℝ, 0 ≤ m ∧
+        1 + Real.exp (-(1 + m)) = 1 * (1 / 2) * (1 + Real.exp (-1)) := by
+  have hcont : Continuous (fun c : ℝ => c - Real.exp (-c)) :=
+    continuous_iff_continuousAt.2 fun c => (hasDerivAt_cexp c).continuousAt
+  have hderiv : ∀ c, deriv (fun c : ℝ => c - Real.exp (-c)) c = 1 + Real.exp (-c) :=
+    fun c => (hasDerivAt_cexp c).deriv
+  refine ⟨hasDerivAt_cexp, by fun_prop, strictMonoOn_of_deriv_pos (convex_Ici 0)
+    hcont.continuousOn fun c _ => by rw [hderiv]; positivity, ?_, ?_⟩
+  · refine StrictAntiOn.strictConcaveOn_of_deriv (convex_Ici 0) hcont.continuousOn ?_
+    intro a _ b _ hab
+    rw [hderiv, hderiv]
+    have := Real.exp_lt_exp.2 (neg_lt_neg hab)
+    linarith
+  · rintro ⟨m, -, hm⟩
+    have h1 : Real.exp (-1) < 1 := by
+      have := Real.exp_lt_exp.2 (by norm_num : (-1 : ℝ) < 0)
+      rwa [Real.exp_zero] at this
+    have h2 := Real.exp_pos (-(1 + m))
+    linarith
+
+/-! ### The hint to 5.17g -/
+
+/-- **Exercise 5.17g (correction to the hint).** With `R = 1/2`, `I = 1` and `x₀ = 0`, saving
+all income, `x₁ = RI = 1/2`, is feasible, but `R(x₀ + W) = −1/2` with `W = RI/(R − 1)`. -/
+theorem ex_5_17g_hint_fails :
+    (1 / 2 : ℝ) ≤ (1 + 0) * (1 / 2) ∧
+      (1 / 2 : ℝ) ^ 1 * (0 + 1 / 2 * 1 / (1 / 2 - 1)) < 1 / 2 := by
+  norm_num
+
+/-! ### `g(x') − g(x) < x' − x` fails for `R > 1` -/
+
+/-- Utility of the counterexample: `c − (c − 1)²/200` on `(−∞, 2]`, then
+`399/200 + 0.099 ln(10(c − 1.9))`. -/
+noncomputable def ceU (c : ℝ) : ℝ :=
+  if c ≤ 2 then c - (c - 1) ^ 2 / 200 else 399 / 200 + 99 / 1000 * Real.log ((c - 19 / 10) * 10)
+
+/-- Its marginal utility: `1 − (c − 1)/100` on `(−∞, 2]`, then `0.099/(c − 1.9)`. -/
+noncomputable def ceU' (c : ℝ) : ℝ := if c ≤ 2 then 1 - (c - 1) / 100 else 99 / 1000 / (c - 19 / 10)
+
+theorem hasDerivAt_ce1 (c : ℝ) :
+    HasDerivAt (fun c : ℝ => c - (c - 1) ^ 2 / 200) (1 - (c - 1) / 100) c := by
+  convert (hasDerivAt_id' c).sub ((((hasDerivAt_id' c).sub_const 1).pow 2).div_const 200)
+    using 1
+  norm_num
+  ring
+
+theorem hasDerivAt_ce2 {c : ℝ} (hc : 19 / 10 < c) :
+    HasDerivAt (fun c : ℝ => 399 / 200 + 99 / 1000 * Real.log ((c - 19 / 10) * 10))
+      (99 / 1000 / (c - 19 / 10)) c := by
+  have hne : (c - 19 / 10) * 10 ≠ 0 := by
+    have : 0 < c - 19 / 10 := by linarith
+    positivity
+  have hlog := (((hasDerivAt_id' c).sub_const (19 / 10)).mul_const 10).log hne
+  convert (hlog.const_mul (99 / 1000)).const_add (399 / 200) using 1
+  have : c - 19 / 10 ≠ 0 := by linarith
+  field_simp
+
+theorem ceU'_low {c : ℝ} (hc : c ≤ 2) : ceU' c = 1 - (c - 1) / 100 := by
+  simp only [ceU', hc, ↓reduceIte]
+
+theorem ceU'_high {c : ℝ} (hc : 2 < c) : ceU' c = 99 / 1000 / (c - 19 / 10) := by
+  simp only [ceU', not_le.2 hc, ↓reduceIte]
+
+theorem hasDerivAt_ceU (c : ℝ) : HasDerivAt ceU (ceU' c) c := by
+  rcases lt_trichotomy c 2 with hlt | rfl | hgt
+  · rw [ceU'_low hlt.le]
+    refine (hasDerivAt_ce1 c).congr_of_eventuallyEq ?_
+    filter_upwards [Iio_mem_nhds hlt] with y hy
+    simp only [ceU, (mem_Iio.1 hy).le, ↓reduceIte]
+  · have hl : HasDerivWithinAt ceU (ceU' 2) (Iic 2) 2 := by
+      rw [ceU'_low le_rfl]
+      exact (hasDerivAt_ce1 2).hasDerivWithinAt.congr
+        (fun y hy => by simp only [ceU, mem_Iic.1 hy, ↓reduceIte])
+        (by simp only [ceU, le_refl, ↓reduceIte])
+    have hr : HasDerivWithinAt ceU (ceU' 2) (Ici 2) 2 := by
+      have h2 : ceU' 2 = 99 / 1000 / ((2 : ℝ) - 19 / 10) := by rw [ceU'_low le_rfl]; norm_num
+      rw [h2]
+      refine (hasDerivAt_ce2 (by norm_num)).hasDerivWithinAt.congr (fun y hy => ?_) ?_
+      · rcases eq_or_lt_of_le (mem_Ici.1 hy) with rfl | hlt
+        · simp only [ceU, le_refl, ↓reduceIte]; norm_num
+        · simp only [ceU, not_le.2 hlt, ↓reduceIte]
+      · simp only [ceU, le_refl, ↓reduceIte]; norm_num
+    have := hl.union hr
+    rwa [Iic_union_Ici, hasDerivWithinAt_univ] at this
+  · rw [ceU'_high hgt]
+    refine (hasDerivAt_ce2 (by linarith)).congr_of_eventuallyEq ?_
+    filter_upwards [Ioi_mem_nhds hgt] with y hy
+    simp only [ceU, not_le.2 (mem_Ioi.1 hy), ↓reduceIte]
+
+theorem ceU'_strictAnti : StrictAnti ceU' := by
+  intro a b hab
+  rcases le_or_gt b 2 with hb | hb
+  · rw [ceU'_low hb, ceU'_low (hab.le.trans hb)]
+    linarith
+  · rw [ceU'_high hb]
+    have hb' : 0 < b - 19 / 10 := by linarith
+    rcases le_or_gt a 2 with ha | ha
+    · rw [ceU'_low ha, div_lt_iff₀ hb']
+      nlinarith
+    · rw [ceU'_high ha]
+      exact div_lt_div_of_pos_left (by norm_num) (by linarith) (by linarith)
+
+theorem ceU'_pos (c : ℝ) : 0 < ceU' c := by
+  rcases le_or_gt c 2 with h2 | h2
+  · rw [ceU'_low h2]; linarith
+  · rw [ceU'_high h2]; exact div_pos (by norm_num) (by linarith)
+
+theorem continuousAt_ceU' (c : ℝ) : ContinuousAt ceU' c := by
+  have hlin : Continuous fun c : ℝ => 1 - (c - 1) / 100 := by fun_prop
+  rcases lt_trichotomy c 2 with hlt | rfl | hgt
+  · refine hlin.continuousAt.congr ?_
+    filter_upwards [Iio_mem_nhds hlt] with y hy
+    exact (ceU'_low hy.le).symm
+  · refine continuousAt_iff_continuous_left_right.2 ⟨?_, ?_⟩
+    · exact hlin.continuousAt.continuousWithinAt.congr (fun y hy => ceU'_low hy) (ceU'_low le_rfl)
+    · have ht : ContinuousAt (fun c : ℝ => 99 / 1000 / (c - 19 / 10)) 2 :=
+        continuousAt_const.div (continuousAt_id.sub continuousAt_const) (by norm_num)
+      refine ht.continuousWithinAt.congr (fun y hy => ?_) ?_
+      · rcases eq_or_lt_of_le (mem_Ici.1 hy) with rfl | hlt
+        · rw [ceU'_low le_rfl]; norm_num
+        · exact ceU'_high hlt
+      · rw [ceU'_low le_rfl]; norm_num
+  · have ht : ContinuousAt (fun c : ℝ => 99 / 1000 / (c - 19 / 10)) c :=
+      continuousAt_const.div (continuousAt_id.sub continuousAt_const) (by
+        have : (19 : ℝ) / 10 < c := by linarith
+        exact sub_ne_zero.2 this.ne')
+    refine ht.congr ?_
+    filter_upwards [Ioi_mem_nhds hgt] with y hy
+    exact (ceU'_high hy).symm
+
+/-- The counterexample satisfies the hypotheses of §5.17, with `R = 2 > 1`. -/
+theorem ceHyp : CSHyp ceU ceU' (9 / 20) 2 1 := by
+  have hcont : Continuous ceU :=
+    continuous_iff_continuousAt.2 fun c => (hasDerivAt_ceU c).continuousAt
+  have hderiv : ∀ c, deriv ceU c = ceU' c := fun c => (hasDerivAt_ceU c).deriv
+  refine ⟨by norm_num, by norm_num, by norm_num, by norm_num, by norm_num, hcont.continuousOn,
+    fun c _ => hasDerivAt_ceU c, fun c _ => (continuousAt_ceU' c).continuousWithinAt,
+    strictMonoOn_of_deriv_pos (convex_Ici 0) hcont.continuousOn fun c hc => ?_,
+    StrictAntiOn.strictConcaveOn_of_deriv (convex_Ici 0) hcont.continuousOn ?_, ?_⟩
+  · rw [interior_Ici] at hc
+    rw [hderiv]
+    exact ceU'_pos c
+  · intro a _ b _ hab
+    rw [hderiv, hderiv]
+    exact ceU'_strictAnti hab
+  · have ht : Tendsto (fun c : ℝ => 99 / 1000 / (c - 19 / 10)) atTop (𝓝 0) :=
+      tendsto_const_nhds.div_atTop
+        ((tendsto_atTop_add_const_right atTop (-(19 / 10)) tendsto_id).congr fun c => by
+          simp [sub_eq_add_neg])
+    refine ht.congr' ?_
+    filter_upwards [eventually_gt_atTop 2] with c hc
+    exact (ceU'_high hc).symm
+
+/-- **Exercise 5.17h (correction).** In the counterexample (`R = 2`),
+`x = 1 + 55/499 < x' = 11/10 + 55/498` but
+`g(x') − g(x) = 1/5 > x' − x = 1/10 + 55/(498 · 499)`. -/
+theorem ex_5_17h_counterexample :
+    (1 : ℝ) < 2 ∧ ∃ x x' : ℝ, 0 ≤ x ∧ x < x' ∧ x' - x < gR ceHyp x' - gR ceHyp x := by
+  have h := ceHyp
+  have hU1 : ceU' 1 = 1 := by rw [ceU'_low (by norm_num)]; norm_num
+  -- `g(Ξ(RβU'(1 + y))) = y` and `Ξ(RβU'(1 + y)) = cI(RβU'(1 + y)) − 1 + y/2`, for `y = 1/5, 2/5`
+  have key : ∀ y c : ℝ, 0 < y → y ≤ 1 → 2 < c → ceU' c = 2 * (9 / 20) * ceU' (1 + y) →
+      gR ceHyp (wealth ceU' (9 / 20) 2 1 (2 * (9 / 20) * ceU' (1 + y))) = y ∧
+        wealth ceU' (9 / 20) 2 1 (2 * (9 / 20) * ceU' (1 + y)) = c - 1 + y / 2 := by
+    intro y c hy hy1 hc hcU
+    have hp : 0 < ceU' (1 + y) := ceU'_pos _
+    have hρp : 0 < 2 * (9 / 20) * ceU' (1 + y) := by positivity
+    have hpy : ceU' (1 + y) = 1 - y / 100 := by rw [ceU'_low (by linarith)]; ring
+    have hw : wealth ceU' (9 / 20) 2 1 (ceU' (1 + y)) = y := by
+      rw [h.wealth_shift hp, h.cI_U' (by linarith), h.wealth_of_ge (by
+        rw [hU1, hpy, le_div_iff₀ (by norm_num)]; linarith)]
+      ring
+    refine ⟨?_, ?_⟩
+    · rw [h.gR_wealth hρp, mul_div_cancel_left₀ _ (by norm_num), hw]
+    · rw [h.wealth_shift hρp, mul_div_cancel_left₀ _ (by norm_num), hw, ← hcU,
+        h.cI_U' (by linarith)]
+      ring
+  have hc1 : (2 : ℝ) < 19 / 10 + 55 / 499 := by norm_num
+  have hc2 : (2 : ℝ) < 19 / 10 + 55 / 498 := by norm_num
+  obtain ⟨hg1, hx1⟩ := key (1 / 5) (19 / 10 + 55 / 499) (by norm_num) (by norm_num) hc1 (by
+    rw [ceU'_high hc1, ceU'_low (by norm_num)]; norm_num)
+  obtain ⟨hg2, hx2⟩ := key (2 / 5) (19 / 10 + 55 / 498) (by norm_num) (by norm_num) hc2 (by
+    rw [ceU'_high hc2, ceU'_low (by norm_num)]; norm_num)
+  refine ⟨by norm_num, wealth ceU' (9 / 20) 2 1 (2 * (9 / 20) * ceU' (1 + 1 / 5)),
+    wealth ceU' (9 / 20) 2 1 (2 * (9 / 20) * ceU' (1 + 2 / 5)), ?_, ?_, ?_⟩
+  · rw [hx1]; norm_num
+  · rw [hx1, hx2]; norm_num
+  · rw [hg1, hg2, hx1, hx2]; norm_num
+
+/-- **Exercise 5.17h (correction).** The book's bound `g(x') − g(x) < x' − x` does not hold for
+every model satisfying its hypotheses. -/
+theorem ex_5_17h_book_bound_fails :
+    ¬ ∀ x x' : ℝ, 0 ≤ x → x < x' → gR ceHyp x' - gR ceHyp x < x' - x := by
+  intro hall
+  obtain ⟨-, x, x', hx, hxx', hlt⟩ := ex_5_17h_counterexample
+  exact lt_asymm (hall x x' hx hxx') hlt
+
+end StokeyLucasPrescott.DeterministicApplications
+
 set_option linter.style.longLine false
 #print axioms StokeyLucasPrescott.DeterministicApplications.addIso
 #print axioms StokeyLucasPrescott.DeterministicApplications.addIso_apply
@@ -12770,6 +14425,8 @@ set_option linter.style.longLine false
 #print axioms StokeyLucasPrescott.DeterministicApplications.ex_5_14b
 #print axioms StokeyLucasPrescott.DeterministicApplications.argmax_Yn_indep_p
 #print axioms StokeyLucasPrescott.DeterministicApplications.argmax_Yn_mono_c0
+#print axioms StokeyLucasPrescott.DeterministicApplications.pow_ratio_strictMono
+#print axioms StokeyLucasPrescott.DeterministicApplications.argmax_Yn_mono_beta
 #print axioms StokeyLucasPrescott.DeterministicApplications.ex_5_14c
 #print axioms StokeyLucasPrescott.DeterministicApplications.SSHyp
 #print axioms StokeyLucasPrescott.DeterministicApplications.SSHyp.mk
@@ -12887,3 +14544,181 @@ set_option linter.style.longLine false
 #print axioms StokeyLucasPrescott.DeterministicApplications.v_mono
 #print axioms StokeyLucasPrescott.DeterministicApplications.ex_5_16b_strictMono
 #print axioms StokeyLucasPrescott.DeterministicApplications.ex_5_16c
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.mk
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.hβ0
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.hβ1
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.hR
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.hRβ
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.hI
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.hUc
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.hUd
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.hU'c
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.hUm
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.hUcc
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.hlim
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.rho_pos
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.super_le
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.super_lt
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.U'_pos
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.U'_lt
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.U'_le
+#print axioms StokeyLucasPrescott.DeterministicApplications.cI
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.cI_nonempty
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.cI_mem
+#print axioms StokeyLucasPrescott.DeterministicApplications.cI_le
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.cI_pos
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.cI_of_le
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.cI_eq
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.cI_U'
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.cI_anti
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.cI_gt
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.cI_strictAnti
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.le_cI
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.continuousAt_cI
+#print axioms StokeyLucasPrescott.DeterministicApplications.wealth
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.exists_K
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.wealth_term_eq_zero
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.wealth_eq_sum
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.summable_wealth
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.wealth_nonneg
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.wealth_shift
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.wealth_of_ge
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.wealth_ge
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.wealth_anti
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.wealth_strictAnti
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.wealth_pos
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.lt_of_wealth_pos
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.continuousAt_wealth
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.exists_wealth_eq
+#print axioms StokeyLucasPrescott.DeterministicApplications.planμ
+#print axioms StokeyLucasPrescott.DeterministicApplications.consμ
+#print axioms StokeyLucasPrescott.DeterministicApplications.planμ_zero
+#print axioms StokeyLucasPrescott.DeterministicApplications.consμ_zero
+#print axioms StokeyLucasPrescott.DeterministicApplications.div_pow_succ
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.planμ_succ
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.consμ_eq
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.planμ_nonneg
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.consμ_ge
+#print axioms StokeyLucasPrescott.DeterministicApplications.planμ_tail
+#print axioms StokeyLucasPrescott.DeterministicApplications.consμ_tail
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.exists_plan_zero
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.euler_step
+#print axioms StokeyLucasPrescott.DeterministicApplications.abel_bound
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSWealth
+#print axioms StokeyLucasPrescott.DeterministicApplications.csΓ
+#print axioms StokeyLucasPrescott.DeterministicApplications.csF
+#print axioms StokeyLucasPrescott.DeterministicApplications.consOf
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.consOf_nonneg
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.csF_eq
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.assumption41
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.assumption42
+#print axioms StokeyLucasPrescott.DeterministicApplications.planN
+#print axioms StokeyLucasPrescott.DeterministicApplications.wealthN
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.planN_feasible
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.consOf_planN
+#print axioms StokeyLucasPrescott.DeterministicApplications.valμ
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.summable_val
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.partialSum_planN
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.tendsto_plan
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.plan_total
+#print axioms StokeyLucasPrescott.DeterministicApplications.gapAt
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.gapAt_nonneg
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.value_bound
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.total_le
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.total_le_tangent
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.eq_planN_of_cons
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.total_lt
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.vstar_eq
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.vstar_le_tangent
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.optimal_iff
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.vstar_real
+#print axioms StokeyLucasPrescott.DeterministicApplications.ex_5_17a
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.planN_eq
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.planμ_eq_of_wealth
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.consμ_eq_of_wealth
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.valμ_eq_of_wealth
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.U'_cI
+#print axioms StokeyLucasPrescott.DeterministicApplications.muOf
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.muOf_spec
+#print axioms StokeyLucasPrescott.DeterministicApplications.vR
+#print axioms StokeyLucasPrescott.DeterministicApplications.gR
+#print axioms StokeyLucasPrescott.DeterministicApplications.cR
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.vR_wealth
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.gR_wealth
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.cR_wealth
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.vstar_wealth
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.cR_ge
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.cR_pos
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.gR_nonneg
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.gR_eq
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.cR_eq
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.cR_zero
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.muOf_lt
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.cR_strictMono
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.cR_surj
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.continuousWithinAt_cR
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.continuousOn_cR
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.continuousOn_gR
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.continuousOn_marg
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.vR_le_tangent
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.hasDerivWithinAt_vR
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.hasDerivAt_vR
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.deriv_vR
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.continuousOn_vR
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.vR_strictMono
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.vR_strictConcave
+#print axioms StokeyLucasPrescott.DeterministicApplications.m1
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.rhoU_pos
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.rhoU_lt
+#print axioms StokeyLucasPrescott.DeterministicApplications.ex_5_17b_m1
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.m1_pos
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.wealth_rhoU
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.muOf_ge
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.gR_eq_zero
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.gR_pos
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.vR_eq_low
+#print axioms StokeyLucasPrescott.DeterministicApplications.ex_5_17b
+#print axioms StokeyLucasPrescott.DeterministicApplications.hfun
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.U'_cR
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.gR_def
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.hfun_zero
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.hfun_nonneg
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.gR_hfun
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.euler_hfun
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.hfun_strictMono
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.continuousOn_hfun
+#print axioms StokeyLucasPrescott.DeterministicApplications.ex_5_17c
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.gR_mono
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.gR_strictMono
+#print axioms StokeyLucasPrescott.DeterministicApplications.m2
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.continuousOn_vR'
+#print axioms StokeyLucasPrescott.DeterministicApplications.ex_5_17d
+#print axioms StokeyLucasPrescott.DeterministicApplications.ex_5_17e
+#print axioms StokeyLucasPrescott.DeterministicApplications.mSeq
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.mSeq_succ
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.mSeq_strictMono
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.tendsto_mSeq
+#print axioms StokeyLucasPrescott.DeterministicApplications.ex_5_17f
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.vR_attained
+#print axioms StokeyLucasPrescott.DeterministicApplications.ex_5_17g
+#print axioms StokeyLucasPrescott.DeterministicApplications.CSHyp.gR_planμ
+#print axioms StokeyLucasPrescott.DeterministicApplications.ex_5_17h_plan
+#print axioms StokeyLucasPrescott.DeterministicApplications.ex_5_17h_slope
+#print axioms StokeyLucasPrescott.DeterministicApplications.ex_5_17h_slope_le_one
+#print axioms StokeyLucasPrescott.DeterministicApplications.hasDerivAt_cexp
+#print axioms StokeyLucasPrescott.DeterministicApplications.ex_5_17b_m1_fails
+#print axioms StokeyLucasPrescott.DeterministicApplications.ex_5_17g_hint_fails
+#print axioms StokeyLucasPrescott.DeterministicApplications.ceU
+#print axioms StokeyLucasPrescott.DeterministicApplications.ceU'
+#print axioms StokeyLucasPrescott.DeterministicApplications.hasDerivAt_ce1
+#print axioms StokeyLucasPrescott.DeterministicApplications.hasDerivAt_ce2
+#print axioms StokeyLucasPrescott.DeterministicApplications.ceU'_low
+#print axioms StokeyLucasPrescott.DeterministicApplications.ceU'_high
+#print axioms StokeyLucasPrescott.DeterministicApplications.hasDerivAt_ceU
+#print axioms StokeyLucasPrescott.DeterministicApplications.ceU'_strictAnti
+#print axioms StokeyLucasPrescott.DeterministicApplications.ceU'_pos
+#print axioms StokeyLucasPrescott.DeterministicApplications.continuousAt_ceU'
+#print axioms StokeyLucasPrescott.DeterministicApplications.ceHyp
+#print axioms StokeyLucasPrescott.DeterministicApplications.ex_5_17h_counterexample
+#print axioms StokeyLucasPrescott.DeterministicApplications.ex_5_17h_book_bound_fails

@@ -1,6 +1,6 @@
 {
-  "checked_at_utc": "2026-10-14T02:03:21.934860+00:00",
-  "theorems": 534,
+  "checked_at_utc": "2026-10-14T02:55:34.594580+00:00",
+  "theorems": 679,
   "module_theorems": {
     "DeterministicApplications/ExtendedReals.lean": 9,
     "DeterministicApplications/Principle.lean": 20,
@@ -38,13 +38,16 @@
     "DeterministicApplications/ConsumerRecursive.lean": 29,
     "DeterministicApplications/ConsumerPrinciple.lean": 14,
     "DeterministicApplications/Pareto.lean": 26,
-    "DeterministicApplications/Inventory.lean": 24,
+    "DeterministicApplications/Inventory.lean": 26,
     "DeterministicApplications/InventorySolution.lean": 17,
     "DeterministicApplications/InventoryVerify.lean": 23,
     "DeterministicApplications/ContinuousInventory.lean": 18,
-    "DeterministicApplications/UnknownDemand.lean": 21
+    "DeterministicApplications/UnknownDemand.lean": 21,
+    "DeterministicApplications/ConsumptionSavings.lean": 65,
+    "DeterministicApplications/ConsumptionSavingsPolicy.lean": 64,
+    "DeterministicApplications/ConsumptionSavingsCounterexample.lean": 14
   },
-  "audited_declarations": 874,
+  "audited_declarations": 1054,
   "declarations": [
     {
       "name": "StokeyLucasPrescott.DeterministicApplications.addIso",
@@ -3832,6 +3835,16 @@
       "module": "DeterministicApplications/Inventory.lean"
     },
     {
+      "name": "StokeyLucasPrescott.DeterministicApplications.pow_ratio_strictMono",
+      "kind": "theorem",
+      "module": "DeterministicApplications/Inventory.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.argmax_Yn_mono_beta",
+      "kind": "theorem",
+      "module": "DeterministicApplications/Inventory.lean"
+    },
+    {
       "name": "StokeyLucasPrescott.DeterministicApplications.ex_5_14c",
       "kind": "theorem",
       "module": "DeterministicApplications/Inventory.lean"
@@ -4415,6 +4428,896 @@
       "name": "StokeyLucasPrescott.DeterministicApplications.ex_5_16c",
       "kind": "theorem",
       "module": "DeterministicApplications/UnknownDemand.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp",
+      "kind": "structure",
+      "module": "DeterministicApplications/ConsumptionSavings.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.mk",
+      "kind": "constructor",
+      "module": "DeterministicApplications/ConsumptionSavings.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.h\u03b20",
+      "kind": "projection",
+      "module": "DeterministicApplications/ConsumptionSavings.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.h\u03b21",
+      "kind": "projection",
+      "module": "DeterministicApplications/ConsumptionSavings.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.hR",
+      "kind": "projection",
+      "module": "DeterministicApplications/ConsumptionSavings.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.hR\u03b2",
+      "kind": "projection",
+      "module": "DeterministicApplications/ConsumptionSavings.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.hI",
+      "kind": "projection",
+      "module": "DeterministicApplications/ConsumptionSavings.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.hUc",
+      "kind": "projection",
+      "module": "DeterministicApplications/ConsumptionSavings.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.hUd",
+      "kind": "projection",
+      "module": "DeterministicApplications/ConsumptionSavings.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.hU'c",
+      "kind": "projection",
+      "module": "DeterministicApplications/ConsumptionSavings.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.hUm",
+      "kind": "projection",
+      "module": "DeterministicApplications/ConsumptionSavings.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.hUcc",
+      "kind": "projection",
+      "module": "DeterministicApplications/ConsumptionSavings.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.hlim",
+      "kind": "projection",
+      "module": "DeterministicApplications/ConsumptionSavings.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.rho_pos",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavings.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.super_le",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavings.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.super_lt",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavings.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.U'_pos",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavings.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.U'_lt",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavings.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.U'_le",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavings.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.cI",
+      "kind": "def",
+      "module": "DeterministicApplications/ConsumptionSavings.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.cI_nonempty",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavings.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.cI_mem",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavings.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.cI_le",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavings.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.cI_pos",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavings.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.cI_of_le",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavings.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.cI_eq",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavings.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.cI_U'",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavings.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.cI_anti",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavings.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.cI_gt",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavings.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.cI_strictAnti",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavings.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.le_cI",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavings.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.continuousAt_cI",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavings.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.wealth",
+      "kind": "def",
+      "module": "DeterministicApplications/ConsumptionSavings.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.exists_K",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavings.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.wealth_term_eq_zero",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavings.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.wealth_eq_sum",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavings.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.summable_wealth",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavings.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.wealth_nonneg",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavings.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.wealth_shift",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavings.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.wealth_of_ge",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavings.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.wealth_ge",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavings.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.wealth_anti",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavings.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.wealth_strictAnti",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavings.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.wealth_pos",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavings.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.lt_of_wealth_pos",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavings.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.continuousAt_wealth",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavings.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.exists_wealth_eq",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavings.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.plan\u03bc",
+      "kind": "def",
+      "module": "DeterministicApplications/ConsumptionSavings.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.cons\u03bc",
+      "kind": "def",
+      "module": "DeterministicApplications/ConsumptionSavings.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.plan\u03bc_zero",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavings.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.cons\u03bc_zero",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavings.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.div_pow_succ",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavings.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.plan\u03bc_succ",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavings.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.cons\u03bc_eq",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavings.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.plan\u03bc_nonneg",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavings.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.cons\u03bc_ge",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavings.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.plan\u03bc_tail",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavings.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.cons\u03bc_tail",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavings.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.exists_plan_zero",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavings.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.euler_step",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavings.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.abel_bound",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavings.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSWealth",
+      "kind": "abbrev",
+      "module": "DeterministicApplications/ConsumptionSavings.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.cs\u0393",
+      "kind": "def",
+      "module": "DeterministicApplications/ConsumptionSavings.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.csF",
+      "kind": "def",
+      "module": "DeterministicApplications/ConsumptionSavings.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.consOf",
+      "kind": "def",
+      "module": "DeterministicApplications/ConsumptionSavings.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.consOf_nonneg",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavings.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.csF_eq",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavings.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.assumption41",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavings.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.assumption42",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavings.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.planN",
+      "kind": "def",
+      "module": "DeterministicApplications/ConsumptionSavings.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.wealthN",
+      "kind": "def",
+      "module": "DeterministicApplications/ConsumptionSavings.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.planN_feasible",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavings.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.consOf_planN",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavings.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.val\u03bc",
+      "kind": "def",
+      "module": "DeterministicApplications/ConsumptionSavings.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.summable_val",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavings.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.partialSum_planN",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavings.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.tendsto_plan",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavings.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.plan_total",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavings.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.gapAt",
+      "kind": "def",
+      "module": "DeterministicApplications/ConsumptionSavings.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.gapAt_nonneg",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavings.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.value_bound",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavings.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.total_le",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavings.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.total_le_tangent",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavings.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.eq_planN_of_cons",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavings.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.total_lt",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavings.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.vstar_eq",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavings.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.vstar_le_tangent",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavings.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.optimal_iff",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavings.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.vstar_real",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavings.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.ex_5_17a",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavings.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.planN_eq",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavingsPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.plan\u03bc_eq_of_wealth",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavingsPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.cons\u03bc_eq_of_wealth",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavingsPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.val\u03bc_eq_of_wealth",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavingsPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.U'_cI",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavingsPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.muOf",
+      "kind": "def",
+      "module": "DeterministicApplications/ConsumptionSavingsPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.muOf_spec",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavingsPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.vR",
+      "kind": "def",
+      "module": "DeterministicApplications/ConsumptionSavingsPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.gR",
+      "kind": "def",
+      "module": "DeterministicApplications/ConsumptionSavingsPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.cR",
+      "kind": "def",
+      "module": "DeterministicApplications/ConsumptionSavingsPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.vR_wealth",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavingsPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.gR_wealth",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavingsPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.cR_wealth",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavingsPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.vstar_wealth",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavingsPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.cR_ge",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavingsPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.cR_pos",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavingsPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.gR_nonneg",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavingsPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.gR_eq",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavingsPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.cR_eq",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavingsPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.cR_zero",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavingsPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.muOf_lt",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavingsPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.cR_strictMono",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavingsPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.cR_surj",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavingsPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.continuousWithinAt_cR",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavingsPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.continuousOn_cR",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavingsPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.continuousOn_gR",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavingsPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.continuousOn_marg",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavingsPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.vR_le_tangent",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavingsPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.hasDerivWithinAt_vR",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavingsPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.hasDerivAt_vR",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavingsPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.deriv_vR",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavingsPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.continuousOn_vR",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavingsPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.vR_strictMono",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavingsPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.vR_strictConcave",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavingsPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.m1",
+      "kind": "def",
+      "module": "DeterministicApplications/ConsumptionSavingsPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.rhoU_pos",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavingsPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.rhoU_lt",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavingsPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.ex_5_17b_m1",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavingsPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.m1_pos",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavingsPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.wealth_rhoU",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavingsPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.muOf_ge",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavingsPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.gR_eq_zero",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavingsPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.gR_pos",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavingsPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.vR_eq_low",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavingsPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.ex_5_17b",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavingsPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.hfun",
+      "kind": "def",
+      "module": "DeterministicApplications/ConsumptionSavingsPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.U'_cR",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavingsPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.gR_def",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavingsPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.hfun_zero",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavingsPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.hfun_nonneg",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavingsPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.gR_hfun",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavingsPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.euler_hfun",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavingsPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.hfun_strictMono",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavingsPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.continuousOn_hfun",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavingsPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.ex_5_17c",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavingsPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.gR_mono",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavingsPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.gR_strictMono",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavingsPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.m2",
+      "kind": "def",
+      "module": "DeterministicApplications/ConsumptionSavingsPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.continuousOn_vR'",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavingsPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.ex_5_17d",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavingsPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.ex_5_17e",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavingsPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.mSeq",
+      "kind": "def",
+      "module": "DeterministicApplications/ConsumptionSavingsPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.mSeq_succ",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavingsPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.mSeq_strictMono",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavingsPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.tendsto_mSeq",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavingsPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.ex_5_17f",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavingsPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.vR_attained",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavingsPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.ex_5_17g",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavingsPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.CSHyp.gR_plan\u03bc",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavingsPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.ex_5_17h_plan",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavingsPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.ex_5_17h_slope",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavingsPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.ex_5_17h_slope_le_one",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavingsPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.hasDerivAt_cexp",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavingsCounterexample.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.ex_5_17b_m1_fails",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavingsCounterexample.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.ex_5_17g_hint_fails",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavingsCounterexample.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.ceU",
+      "kind": "def",
+      "module": "DeterministicApplications/ConsumptionSavingsCounterexample.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.ceU'",
+      "kind": "def",
+      "module": "DeterministicApplications/ConsumptionSavingsCounterexample.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.hasDerivAt_ce1",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavingsCounterexample.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.hasDerivAt_ce2",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavingsCounterexample.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.ceU'_low",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavingsCounterexample.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.ceU'_high",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavingsCounterexample.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.hasDerivAt_ceU",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavingsCounterexample.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.ceU'_strictAnti",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavingsCounterexample.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.ceU'_pos",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavingsCounterexample.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.continuousAt_ceU'",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavingsCounterexample.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.ceHyp",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavingsCounterexample.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.ex_5_17h_counterexample",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavingsCounterexample.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicApplications.ex_5_17h_book_bound_fails",
+      "kind": "theorem",
+      "module": "DeterministicApplications/ConsumptionSavingsCounterexample.lean"
     }
   ],
   "full_build": "passed",
@@ -8176,6 +9079,16 @@
       "Classical.choice",
       "Quot.sound"
     ],
+    "StokeyLucasPrescott.DeterministicApplications.pow_ratio_strictMono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.argmax_Yn_mono_beta": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
     "StokeyLucasPrescott.DeterministicApplications.ex_5_14c": [
       "propext",
       "Classical.choice",
@@ -8760,6 +9673,896 @@
       "propext",
       "Classical.choice",
       "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.h\u03b20": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.h\u03b21": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.hR": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.hR\u03b2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.hI": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.hUc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.hUd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.hU'c": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.hUm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.hUcc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.hlim": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.rho_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.super_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.super_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.U'_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.U'_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.U'_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.cI": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.cI_nonempty": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.cI_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.cI_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.cI_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.cI_of_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.cI_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.cI_U'": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.cI_anti": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.cI_gt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.cI_strictAnti": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.le_cI": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.continuousAt_cI": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.wealth": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.exists_K": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.wealth_term_eq_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.wealth_eq_sum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.summable_wealth": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.wealth_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.wealth_shift": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.wealth_of_ge": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.wealth_ge": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.wealth_anti": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.wealth_strictAnti": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.wealth_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.lt_of_wealth_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.continuousAt_wealth": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.exists_wealth_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.plan\u03bc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.cons\u03bc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.plan\u03bc_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.cons\u03bc_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.div_pow_succ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.plan\u03bc_succ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.cons\u03bc_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.plan\u03bc_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.cons\u03bc_ge": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.plan\u03bc_tail": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.cons\u03bc_tail": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.exists_plan_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.euler_step": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.abel_bound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSWealth": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.cs\u0393": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.csF": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.consOf": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.consOf_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.csF_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.assumption41": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.assumption42": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.planN": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.wealthN": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.planN_feasible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.consOf_planN": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.val\u03bc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.summable_val": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.partialSum_planN": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.tendsto_plan": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.plan_total": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.gapAt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.gapAt_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.value_bound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.total_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.total_le_tangent": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.eq_planN_of_cons": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.total_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.vstar_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.vstar_le_tangent": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.optimal_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.vstar_real": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.ex_5_17a": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.planN_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.plan\u03bc_eq_of_wealth": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.cons\u03bc_eq_of_wealth": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.val\u03bc_eq_of_wealth": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.U'_cI": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.muOf": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.muOf_spec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.vR": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.gR": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.cR": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.vR_wealth": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.gR_wealth": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.cR_wealth": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.vstar_wealth": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.cR_ge": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.cR_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.gR_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.gR_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.cR_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.cR_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.muOf_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.cR_strictMono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.cR_surj": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.continuousWithinAt_cR": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.continuousOn_cR": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.continuousOn_gR": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.continuousOn_marg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.vR_le_tangent": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.hasDerivWithinAt_vR": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.hasDerivAt_vR": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.deriv_vR": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.continuousOn_vR": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.vR_strictMono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.vR_strictConcave": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.m1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.rhoU_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.rhoU_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.ex_5_17b_m1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.m1_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.wealth_rhoU": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.muOf_ge": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.gR_eq_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.gR_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.vR_eq_low": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.ex_5_17b": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.hfun": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.U'_cR": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.gR_def": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.hfun_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.hfun_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.gR_hfun": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.euler_hfun": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.hfun_strictMono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.continuousOn_hfun": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.ex_5_17c": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.gR_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.gR_strictMono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.m2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.continuousOn_vR'": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.ex_5_17d": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.ex_5_17e": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.mSeq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.mSeq_succ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.mSeq_strictMono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.tendsto_mSeq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.ex_5_17f": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.vR_attained": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.ex_5_17g": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.CSHyp.gR_plan\u03bc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.ex_5_17h_plan": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.ex_5_17h_slope": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.ex_5_17h_slope_le_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.hasDerivAt_cexp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.ex_5_17b_m1_fails": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.ex_5_17g_hint_fails": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.ceU": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.ceU'": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.hasDerivAt_ce1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.hasDerivAt_ce2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.ceU'_low": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.ceU'_high": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.hasDerivAt_ceU": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.ceU'_strictAnti": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.ceU'_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.continuousAt_ceU'": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.ceHyp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.ex_5_17h_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicApplications.ex_5_17h_book_bound_fails": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
     ]
   },
   "source_sha256": {
@@ -8799,20 +10602,23 @@
     "DeterministicApplications/ConsumerRecursive.lean": "4b654a79bb4360576a2a3f48254423ad88ad86b0c699622b32fa6d2903b885ae",
     "DeterministicApplications/ConsumerPrinciple.lean": "bc87b382d7ae88fc2b86fe8ebf11688703d1a85aa0a8ecab97fc9c0175b39942",
     "DeterministicApplications/Pareto.lean": "9ad1c1ab748fe593f70578a5a39052e53091d1f49f79dad751885833d24da848",
-    "DeterministicApplications/Inventory.lean": "f274c8cecf2d9807dc93b6b4fa294cbc19b4e5bba6611dd95a93db8d962650ea",
+    "DeterministicApplications/Inventory.lean": "1fc19da9a87f82ec8baf6b894dcd61ec8e54d8a8b3e9fcae089938c0e119f6d1",
     "DeterministicApplications/InventorySolution.lean": "7f2886317307dc20af8a5a286cba6b9c8aea9c79ae9b89b64317314caa0cd8c2",
     "DeterministicApplications/InventoryVerify.lean": "72862e527b4426ce1f0eca0597f5fcbe3d789e7801be2f6948e1034e3a6f3cba",
     "DeterministicApplications/ContinuousInventory.lean": "0ff6bf8c8040c5bccddc8fbf30344251a39141f01c2a2d26e1ef206427555985",
     "DeterministicApplications/UnknownDemand.lean": "c019d1a7881d15c8af1e1559ff8921d0da0bb90358dd428b390d59849076f85e",
-    "DeterministicApplications.lean": "1bf5248a7a3228e7b846d6c503a7ddd8f528a4f8039a8e3293ac3115ee366bd8",
+    "DeterministicApplications/ConsumptionSavings.lean": "a13acc235facd6c2000a279b1b4a41d4fd680437276914f8e3d30d2355d16d2d",
+    "DeterministicApplications/ConsumptionSavingsPolicy.lean": "ec03b87355f083d3e86c53f2d2cb8a6fcb7972d9f4b380c4e48c3fbdf717f772",
+    "DeterministicApplications/ConsumptionSavingsCounterexample.lean": "046de2bc4d26cbbaa0e656cc05c28898d895b4353dcf6cb6b66d0d3de037ddc4",
+    "DeterministicApplications.lean": "61b28126ee54a6be2ee64f4c146ad82eacdb5efdbd0ce68573bbe5ec4463e684",
     "lean-toolchain": "8733782dc070a99b312039cda424f601b80f3be6f6f512627da5ba25adc27632",
     "lakefile.toml": "dc1e52c4fdeca10445f8edce0d1fa0c757f9ab869e1c8c51f26cd98314f3080b",
     "lake-manifest.json": "f079a31552865e66c0de5a885c99841640f6b2eef5db596e06bf20fc15ba207b",
-    "proof-manifest.json": "345fe6044593ec0aa2698302931e9bf9719109928ad463acdd7af03f423a9913",
+    "proof-manifest.json": "fb9a8c47e680343d41e27ee2293940a72baf4b819b2581fdcee615f1d11c58ad",
     "scripts/verify.py": "a70b1fa704dd590f937f8b37682afa88a9d85a9150065acb935c7d2c9589da3b",
     "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
   },
-  "fresh_audit_sha256": "952181f45d966d7ca89deded94c232d39ddb70c9ac48d12dceb0a051aeffc868",
+  "fresh_audit_sha256": "9d499736a0d5d0728cb482c1172660be7c32b0810ba8f8c704bc0abbd7f13c31",
   "lean_toolchain": "leanprover/lean4:v4.34.0",
   "scope": "SLP Chapter 5 (Applications of Dynamic Programming under Certainty): all exercises 5.1-5.17, with the Chapter 4 library carried over.",
   "source": "Stokey, Lucas and Prescott (1989), Recursive Methods in Economic Dynamics, Chapter 5"

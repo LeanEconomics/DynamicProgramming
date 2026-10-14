@@ -22,7 +22,8 @@ units for delivery next period at cost `c₀ + c₁y`, and discounts at `β = 1/
   `Y_n = r_n/(1 − βⁿ) = −(c₀ + c₁n)/(1 − βⁿ) + βp/(1 − β)` (`Yn_eq`); `Y_n → −∞`
   (`tendsto_Yn`), so some finite `N ≥ 1` maximizes `Y_n` (`ex_5_14b`). The maximizers do not
   depend on `p` (`argmax_Yn_indep_p`), and `N` rises with the fixed cost `c₀`
-  (`argmax_Yn_mono_c0`, increasing differences).
+  (`argmax_Yn_mono_c0`, increasing differences) and with the discount factor `β`
+  (`argmax_Yn_mono_beta`).
 * **Exercise 5.14c** (`ex_5_14c`): if `Y_N > 0`, then `A = (1 − β)Y_N/(βp − c₁)` lies in `(0, 1)`;
   in fact `A < 1` for every `N ≥ 1`.
 -/
@@ -410,6 +411,66 @@ theorem argmax_Yn_mono_c0 {c₀' : ℝ} (h : InvHyp p c₀ c₁ β) (h' : InvHyp
     nlinarith
   have := mul_lt_mul_of_pos_left hlt' (by linarith : 0 < c₀' - c₀)
   linarith
+
+/-- For `m > n ≥ 1`, `(1 − β^m)/(1 − β^n)` rises strictly with `β ∈ (0, 1)`: with `s = β^n`, it
+is the slope of the chord of the strictly convex `s ↦ s^{m/n}` from `s` to `1`. -/
+theorem pow_ratio_strictMono {β β' : ℝ} (h0 : 0 < β) (hββ' : β < β') (h1 : β' < 1) {n m : ℕ}
+    (hn : 1 ≤ n) (hnm : n < m) :
+    (1 - β ^ m) * (1 - β' ^ n) < (1 - β' ^ m) * (1 - β ^ n) := by
+  have hn0 : (n : ℝ) ≠ 0 := by positivity
+  set q : ℝ := (m : ℝ) / n
+  have hq : 1 < q := by
+    rw [one_lt_div (by positivity)]
+    exact_mod_cast hnm
+  have hpow : ∀ x : ℝ, 0 ≤ x → (x ^ n) ^ q = x ^ m := fun x hx => by
+    rw [← Real.rpow_natCast x n, ← Real.rpow_mul hx, show (n : ℝ) * q = m by
+      simp only [q]; field_simp, Real.rpow_natCast]
+  have hs : β ^ n < β' ^ n := pow_lt_pow_left₀ hββ' h0.le (by omega)
+  have hs1 : β' ^ n < 1 := pow_lt_one₀ (h0.le.trans hββ'.le) h1 (by omega)
+  have hs0 : 0 < β ^ n := pow_pos h0 n
+  have key := (strictConvexOn_rpow hq).secant_strict_mono (a := 1) (x := β ^ n) (y := β' ^ n)
+    (mem_Ici.2 zero_le_one) (mem_Ici.2 hs0.le) (mem_Ici.2 (hs0.trans hs).le) (by linarith)
+    (by linarith) hs
+  rw [hpow β h0.le, hpow β' (h0.trans hββ').le, Real.one_rpow] at key
+  have d1 : 0 < 1 - β ^ n := by linarith
+  have d2 : 0 < 1 - β' ^ n := by linarith
+  rw [← neg_div_neg_eq, ← neg_div_neg_eq (β' ^ m - 1), neg_sub, neg_sub, neg_sub, neg_sub,
+    div_lt_div_iff₀ d1 d2] at key
+  linarith
+
+/-- **Exercise 5.14b.** A higher discount factor (a lower interest rate) calls for a longer cycle:
+if `N` is optimal for `β` and `N'` for `β' > β`, then `N ≤ N'` (increasing differences:
+`(1 − β^m)/(1 − β^n)` rises with `β` for `m > n`, `pow_ratio_strictMono`). -/
+theorem argmax_Yn_mono_beta {β' : ℝ} (h : InvHyp p c₀ c₁ β) (h' : InvHyp p c₀ c₁ β')
+    (hβ : β < β') {N N' : ℕ} (hN : 1 ≤ N) (hN' : 1 ≤ N')
+    (hmax : ∀ n, 1 ≤ n → Yn p c₀ c₁ β n ≤ Yn p c₀ c₁ β N)
+    (hmax' : ∀ n, 1 ≤ n → Yn p c₀ c₁ β' n ≤ Yn p c₀ c₁ β' N') : N ≤ N' := by
+  by_contra hlt
+  push Not at hlt
+  have e1 := hmax N' hN'
+  have e2 := hmax' N hN
+  rw [Yn_eq h hN', Yn_eq h hN] at e1
+  rw [Yn_eq h' hN, Yn_eq h' hN'] at e2
+  have x0 := one_sub_pow_pos h hN
+  have y0 := one_sub_pow_pos h hN'
+  have x0' := one_sub_pow_pos h' hN
+  have y0' := one_sub_pow_pos h' hN'
+  have hA : 0 < c₀ + c₁ * N := by have := h.c₀_pos; have := h.c₁_pos; positivity
+  have hB : 0 < c₀ + c₁ * N' := by have := h.c₀_pos; have := h.c₁_pos; positivity
+  -- clear denominators: `A(1 − β^{N'}) ≤ B(1 − β^N)` and `B(1 − β'^N) ≤ A(1 − β'^{N'})`
+  have f1 : (c₀ + c₁ * N) * (1 - β ^ N') ≤ (c₀ + c₁ * N') * (1 - β ^ N) := by
+    have : -(c₀ + c₁ * N') / (1 - β ^ N') ≤ -(c₀ + c₁ * N) / (1 - β ^ N) := by linarith
+    rw [div_le_div_iff₀ y0 x0] at this
+    linarith
+  have f2 : (c₀ + c₁ * N') * (1 - β' ^ N) ≤ (c₀ + c₁ * N) * (1 - β' ^ N') := by
+    have : -(c₀ + c₁ * N) / (1 - β' ^ N) ≤ -(c₀ + c₁ * N') / (1 - β' ^ N') := by linarith
+    rw [div_le_div_iff₀ x0' y0'] at this
+    linarith
+  have hr := pow_ratio_strictMono h.β_pos hβ h'.β_lt hN' hlt
+  have g1 := mul_le_mul_of_nonneg_right f1 x0'.le
+  have g2 := mul_le_mul_of_nonneg_right f2 x0.le
+  have g3 := mul_lt_mul_of_pos_left hr hA
+  nlinarith
 
 /-- **Exercise 5.14c.** With `Y_N > 0`, `A = (1 − β)Y_N/(βp − c₁) ∈ (0, 1)`; `A < 1` holds for
 every `N ≥ 1`, because `1 − β^N ≤ N(1 − β)` and `c₀ > 0`. -/
