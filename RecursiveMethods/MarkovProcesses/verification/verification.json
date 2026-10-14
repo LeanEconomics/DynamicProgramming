@@ -1,0 +1,976 @@
+{
+  "checked_at_utc": "2026-10-14T23:22:06.383349+00:00",
+  "theorems": 71,
+  "module_theorems": {
+    "MarkovProcesses/TransitionFunctions.lean": 19,
+    "MarkovProcesses/StochasticKernels.lean": 11,
+    "MarkovProcesses/Histories.lean": 18,
+    "MarkovProcesses/MarkovChains.lean": 18,
+    "MarkovProcesses/DifferenceEquations.lean": 5
+  },
+  "audited_declarations": 95,
+  "declarations": [
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.IsTransitionFunction",
+      "kind": "def",
+      "module": "MarkovProcesses/TransitionFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.isTransitionFunction_iff",
+      "kind": "theorem",
+      "module": "MarkovProcesses/TransitionFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.markovOp",
+      "kind": "def",
+      "module": "MarkovProcesses/TransitionFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.markovOpR",
+      "kind": "def",
+      "module": "MarkovProcesses/TransitionFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.adjointOp",
+      "kind": "def",
+      "module": "MarkovProcesses/TransitionFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.markovOp_indicator",
+      "kind": "theorem",
+      "module": "MarkovProcesses/TransitionFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.theorem_8_1",
+      "kind": "theorem",
+      "module": "MarkovProcesses/TransitionFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.integrable_of_bounded",
+      "kind": "theorem",
+      "module": "MarkovProcesses/TransitionFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.theorem_8_1_cor",
+      "kind": "theorem",
+      "module": "MarkovProcesses/TransitionFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.ex_8_1",
+      "kind": "theorem",
+      "module": "MarkovProcesses/TransitionFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.adjointOp_apply",
+      "kind": "theorem",
+      "module": "MarkovProcesses/TransitionFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.theorem_8_2",
+      "kind": "theorem",
+      "module": "MarkovProcesses/TransitionFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.ex_8_2",
+      "kind": "theorem",
+      "module": "MarkovProcesses/TransitionFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.theorem_8_3",
+      "kind": "theorem",
+      "module": "MarkovProcesses/TransitionFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.theorem_8_3_cor",
+      "kind": "theorem",
+      "module": "MarkovProcesses/TransitionFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.pairing",
+      "kind": "def",
+      "module": "MarkovProcesses/TransitionFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.ex_8_3",
+      "kind": "theorem",
+      "module": "MarkovProcesses/TransitionFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.kpow",
+      "kind": "def",
+      "module": "MarkovProcesses/TransitionFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.kpow_one",
+      "kind": "theorem",
+      "module": "MarkovProcesses/TransitionFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.ex_8_4a",
+      "kind": "theorem",
+      "module": "MarkovProcesses/TransitionFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.kpow_add",
+      "kind": "theorem",
+      "module": "MarkovProcesses/TransitionFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.markovOp_comp",
+      "kind": "theorem",
+      "module": "MarkovProcesses/TransitionFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.adjointOp_comp",
+      "kind": "theorem",
+      "module": "MarkovProcesses/TransitionFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.ex_8_4b",
+      "kind": "theorem",
+      "module": "MarkovProcesses/TransitionFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.adjointOp_iterate",
+      "kind": "theorem",
+      "module": "MarkovProcesses/TransitionFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.IsFeller",
+      "kind": "def",
+      "module": "MarkovProcesses/TransitionFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.IsMonotoneTF",
+      "kind": "def",
+      "module": "MarkovProcesses/TransitionFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.IsStochasticKernel",
+      "kind": "def",
+      "module": "MarkovProcesses/StochasticKernels.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.isStochasticKernel_iff",
+      "kind": "theorem",
+      "module": "MarkovProcesses/StochasticKernels.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.theorem_8_4",
+      "kind": "theorem",
+      "module": "MarkovProcesses/StochasticKernels.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.theorem_8_4_cor",
+      "kind": "theorem",
+      "module": "MarkovProcesses/StochasticKernels.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.directProd",
+      "kind": "def",
+      "module": "MarkovProcesses/StochasticKernels.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.isMarkovKernel_directProd",
+      "kind": "theorem",
+      "module": "MarkovProcesses/StochasticKernels.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.theorem_8_5",
+      "kind": "theorem",
+      "module": "MarkovProcesses/StochasticKernels.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.theorem_8_5_unique",
+      "kind": "theorem",
+      "module": "MarkovProcesses/StochasticKernels.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.theorem_8_6",
+      "kind": "theorem",
+      "module": "MarkovProcesses/StochasticKernels.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.theorem_8_7",
+      "kind": "theorem",
+      "module": "MarkovProcesses/StochasticKernels.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.theorem_8_6_cor",
+      "kind": "theorem",
+      "module": "MarkovProcesses/StochasticKernels.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.ex_8_9a",
+      "kind": "theorem",
+      "module": "MarkovProcesses/StochasticKernels.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.ex_8_9b",
+      "kind": "theorem",
+      "module": "MarkovProcesses/StochasticKernels.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.measurable_cons",
+      "kind": "theorem",
+      "module": "MarkovProcesses/Histories.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.measurable_snoc",
+      "kind": "theorem",
+      "module": "MarkovProcesses/Histories.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.lastState",
+      "kind": "def",
+      "module": "MarkovProcesses/Histories.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.measurable_lastState",
+      "kind": "theorem",
+      "module": "MarkovProcesses/Histories.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.lastState_cons",
+      "kind": "theorem",
+      "module": "MarkovProcesses/Histories.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.lastState_snoc",
+      "kind": "theorem",
+      "module": "MarkovProcesses/Histories.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.hist",
+      "kind": "def",
+      "module": "MarkovProcesses/Histories.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.ex_8_8a",
+      "kind": "theorem",
+      "module": "MarkovProcesses/Histories.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.hist_zero_lintegral",
+      "kind": "theorem",
+      "module": "MarkovProcesses/Histories.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.hist_succ_lintegral",
+      "kind": "theorem",
+      "module": "MarkovProcesses/Histories.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.iterLInt",
+      "kind": "def",
+      "module": "MarkovProcesses/Histories.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.theorem_8_8",
+      "kind": "theorem",
+      "module": "MarkovProcesses/Histories.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.ex_8_5",
+      "kind": "theorem",
+      "module": "MarkovProcesses/Histories.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.nextKernel",
+      "kind": "def",
+      "module": "MarkovProcesses/Histories.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.isMarkovKernel_nextKernel",
+      "kind": "theorem",
+      "module": "MarkovProcesses/Histories.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.nextKernel_apply",
+      "kind": "theorem",
+      "module": "MarkovProcesses/Histories.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.hist_succ_lintegral_last",
+      "kind": "theorem",
+      "module": "MarkovProcesses/Histories.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.ex_8_8b",
+      "kind": "theorem",
+      "module": "MarkovProcesses/Histories.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.hist_succ_eq_cons",
+      "kind": "theorem",
+      "module": "MarkovProcesses/Histories.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.ex_8_8c_last",
+      "kind": "theorem",
+      "module": "MarkovProcesses/Histories.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.ex_8_8c_first",
+      "kind": "theorem",
+      "module": "MarkovProcesses/Histories.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.iterInt",
+      "kind": "def",
+      "module": "MarkovProcesses/Histories.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.theorem_8_8_integrable",
+      "kind": "theorem",
+      "module": "MarkovProcesses/Histories.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.trajKernel",
+      "kind": "def",
+      "module": "MarkovProcesses/MarkovChains.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.isMarkovKernel_trajKernel",
+      "kind": "theorem",
+      "module": "MarkovProcesses/MarkovChains.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.pathMeasure",
+      "kind": "def",
+      "module": "MarkovProcesses/MarkovChains.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.isProbabilityMeasure_pathMeasure",
+      "kind": "theorem",
+      "module": "MarkovProcesses/MarkovChains.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.prefixHist",
+      "kind": "def",
+      "module": "MarkovProcesses/MarkovChains.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.measurable_prefixHist",
+      "kind": "theorem",
+      "module": "MarkovProcesses/MarkovChains.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.pathMeasure_map_zero",
+      "kind": "theorem",
+      "module": "MarkovProcesses/MarkovChains.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.pathMeasure_marginal",
+      "kind": "theorem",
+      "module": "MarkovProcesses/MarkovChains.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.muInf",
+      "kind": "def",
+      "module": "MarkovProcesses/MarkovChains.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.muInf_marginal",
+      "kind": "theorem",
+      "module": "MarkovProcesses/MarkovChains.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.pathMeasure_unique",
+      "kind": "theorem",
+      "module": "MarkovProcesses/MarkovChains.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.IsStochasticProcess",
+      "kind": "def",
+      "module": "MarkovProcesses/MarkovChains.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.prefixSigma",
+      "kind": "abbrev",
+      "module": "MarkovProcesses/MarkovChains.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.prefixSigma_mono",
+      "kind": "theorem",
+      "module": "MarkovProcesses/MarkovChains.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.prefixSigma_le",
+      "kind": "theorem",
+      "module": "MarkovProcesses/MarkovChains.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.canonical_isStochasticProcess",
+      "kind": "theorem",
+      "module": "MarkovProcesses/MarkovChains.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.ex_8_6ab",
+      "kind": "theorem",
+      "module": "MarkovProcesses/MarkovChains.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.ex_8_6ab_condDistrib",
+      "kind": "theorem",
+      "module": "MarkovProcesses/MarkovChains.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.hist_const",
+      "kind": "theorem",
+      "module": "MarkovProcesses/MarkovChains.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.window",
+      "kind": "def",
+      "module": "MarkovProcesses/MarkovChains.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.measurable_window",
+      "kind": "theorem",
+      "module": "MarkovProcesses/MarkovChains.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.ex_8_6c",
+      "kind": "theorem",
+      "module": "MarkovProcesses/MarkovChains.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.ex_8_7a",
+      "kind": "theorem",
+      "module": "MarkovProcesses/MarkovChains.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.headsAt",
+      "kind": "def",
+      "module": "MarkovProcesses/MarkovChains.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.ex_8_7b",
+      "kind": "theorem",
+      "module": "MarkovProcesses/MarkovChains.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.ex_8_7c",
+      "kind": "theorem",
+      "module": "MarkovProcesses/MarkovChains.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.theorem_8_9",
+      "kind": "theorem",
+      "module": "MarkovProcesses/DifferenceEquations.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.sdeKernel",
+      "kind": "def",
+      "module": "MarkovProcesses/DifferenceEquations.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.sdeKernel_apply",
+      "kind": "theorem",
+      "module": "MarkovProcesses/DifferenceEquations.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.isMarkovKernel_sdeKernel",
+      "kind": "theorem",
+      "module": "MarkovProcesses/DifferenceEquations.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.ex_8_10",
+      "kind": "theorem",
+      "module": "MarkovProcesses/DifferenceEquations.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MarkovProcesses.ex_8_11",
+      "kind": "theorem",
+      "module": "MarkovProcesses/DifferenceEquations.lean"
+    }
+  ],
+  "full_build": "passed",
+  "fresh_source_compilation": "passed",
+  "fresh_source_lint_options": [
+    "-Dlinter.mathlibStandardSet=true",
+    "-Dlinter.style.header=false"
+  ],
+  "axioms": {
+    "StokeyLucasPrescott.MarkovProcesses.IsTransitionFunction": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MarkovProcesses.isTransitionFunction_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MarkovProcesses.markovOp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MarkovProcesses.markovOpR": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MarkovProcesses.adjointOp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MarkovProcesses.markovOp_indicator": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MarkovProcesses.theorem_8_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MarkovProcesses.integrable_of_bounded": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MarkovProcesses.theorem_8_1_cor": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MarkovProcesses.ex_8_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MarkovProcesses.adjointOp_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MarkovProcesses.theorem_8_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MarkovProcesses.ex_8_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MarkovProcesses.theorem_8_3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MarkovProcesses.theorem_8_3_cor": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MarkovProcesses.pairing": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MarkovProcesses.ex_8_3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MarkovProcesses.kpow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MarkovProcesses.kpow_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MarkovProcesses.ex_8_4a": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MarkovProcesses.kpow_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MarkovProcesses.markovOp_comp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MarkovProcesses.adjointOp_comp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MarkovProcesses.ex_8_4b": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MarkovProcesses.adjointOp_iterate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MarkovProcesses.IsFeller": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MarkovProcesses.IsMonotoneTF": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MarkovProcesses.IsStochasticKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MarkovProcesses.isStochasticKernel_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MarkovProcesses.theorem_8_4": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MarkovProcesses.theorem_8_4_cor": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MarkovProcesses.directProd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MarkovProcesses.isMarkovKernel_directProd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MarkovProcesses.theorem_8_5": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MarkovProcesses.theorem_8_5_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MarkovProcesses.theorem_8_6": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MarkovProcesses.theorem_8_7": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MarkovProcesses.theorem_8_6_cor": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MarkovProcesses.ex_8_9a": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MarkovProcesses.ex_8_9b": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MarkovProcesses.measurable_cons": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MarkovProcesses.measurable_snoc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MarkovProcesses.lastState": [],
+    "StokeyLucasPrescott.MarkovProcesses.measurable_lastState": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MarkovProcesses.lastState_cons": [
+      "propext"
+    ],
+    "StokeyLucasPrescott.MarkovProcesses.lastState_snoc": [
+      "propext"
+    ],
+    "StokeyLucasPrescott.MarkovProcesses.hist": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MarkovProcesses.ex_8_8a": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MarkovProcesses.hist_zero_lintegral": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MarkovProcesses.hist_succ_lintegral": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MarkovProcesses.iterLInt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MarkovProcesses.theorem_8_8": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MarkovProcesses.ex_8_5": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MarkovProcesses.nextKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MarkovProcesses.isMarkovKernel_nextKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MarkovProcesses.nextKernel_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MarkovProcesses.hist_succ_lintegral_last": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MarkovProcesses.ex_8_8b": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MarkovProcesses.hist_succ_eq_cons": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MarkovProcesses.ex_8_8c_last": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MarkovProcesses.ex_8_8c_first": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MarkovProcesses.iterInt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MarkovProcesses.theorem_8_8_integrable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MarkovProcesses.trajKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MarkovProcesses.isMarkovKernel_trajKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MarkovProcesses.pathMeasure": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MarkovProcesses.isProbabilityMeasure_pathMeasure": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MarkovProcesses.prefixHist": [],
+    "StokeyLucasPrescott.MarkovProcesses.measurable_prefixHist": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MarkovProcesses.pathMeasure_map_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MarkovProcesses.pathMeasure_marginal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MarkovProcesses.muInf": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MarkovProcesses.muInf_marginal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MarkovProcesses.pathMeasure_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MarkovProcesses.IsStochasticProcess": [
+      "propext",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MarkovProcesses.prefixSigma": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MarkovProcesses.prefixSigma_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MarkovProcesses.prefixSigma_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MarkovProcesses.canonical_isStochasticProcess": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MarkovProcesses.ex_8_6ab": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MarkovProcesses.ex_8_6ab_condDistrib": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MarkovProcesses.hist_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MarkovProcesses.window": [
+      "propext",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MarkovProcesses.measurable_window": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MarkovProcesses.ex_8_6c": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MarkovProcesses.ex_8_7a": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MarkovProcesses.headsAt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MarkovProcesses.ex_8_7b": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MarkovProcesses.ex_8_7c": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MarkovProcesses.theorem_8_9": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MarkovProcesses.sdeKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MarkovProcesses.sdeKernel_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MarkovProcesses.isMarkovKernel_sdeKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MarkovProcesses.ex_8_10": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MarkovProcesses.ex_8_11": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  "source_sha256": {
+    "MarkovProcesses/TransitionFunctions.lean": "11e2e33348a19815f765e80646303e0afffd7931d6b2d749c04c429d91064153",
+    "MarkovProcesses/StochasticKernels.lean": "1b3b86c81a791490cc4eaf047a6540d55eca61a30c0c7e72eaebfb8ff2a8c9d3",
+    "MarkovProcesses/Histories.lean": "56ad63bd1364a49ed478bb1c21729fa5605ac8c575a7da9bdb1af7f2057518d8",
+    "MarkovProcesses/MarkovChains.lean": "ed35b20ceb05f6706b6fa1b98bc311b34c4fdc75d11a90350ec69b824b5eeb92",
+    "MarkovProcesses/DifferenceEquations.lean": "d5035b3b6656da05fac63ddaf9f57b4a55016c50fd2a4cab940566d01832e00c",
+    "MarkovProcesses.lean": "4df6140087cd7f5cc446bd90bab3b1c6e26dd33b18fa9667b53b4be20353cbaa",
+    "lean-toolchain": "8733782dc070a99b312039cda424f601b80f3be6f6f512627da5ba25adc27632",
+    "lakefile.toml": "534301756423ca30f5d6bedc2b44d7a294eea6491efb43dfc33647ab21f3c045",
+    "lake-manifest.json": "d8a89b0e3d0af5c9f9251882ad67be6b486b1eeb452eee66d7798e5457453139",
+    "proof-manifest.json": "7706700f0d60a12b5d2a0b15d83b1f6024471885c31fbb62dbc2890adb7b182c",
+    "scripts/verify.py": "a70b1fa704dd590f937f8b37682afa88a9d85a9150065acb935c7d2c9589da3b",
+    "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  },
+  "fresh_audit_sha256": "b5bcc9459b8d7fe4545b1aafe0d8eafe902ecf0586f07dd47492e7de3b3f4556",
+  "lean_toolchain": "leanprover/lean4:v4.34.0",
+  "scope": "SLP Chapter 8 (Markov Processes): every numbered result and every exercise 8.1-8.11.",
+  "source": "Stokey, Lucas and Prescott (1989), Recursive Methods in Economic Dynamics, Chapter 8"
+}
