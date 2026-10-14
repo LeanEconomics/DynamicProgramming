@@ -6261,6 +6261,3105 @@ theorem ex_5_7b_single_peaked {g k : ℕ → ℝ} (hg : Antitone g) (hk : ∀ t,
 
 end StokeyLucasPrescott.DeterministicApplications
 
+/-
+Copyright (c) 2026 Robert Kirkby. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Robert Kirkby
+-/
+
+/-!
+# The functional equation with a weighted bound
+
+Several problems of Chapter 5 (Exercise 5.8) have returns that grow with the state, so `T` is
+not a self-map of the bounded functions. With a positive continuous weight `w` such that
+`|F(x, y)| ≤ Bw(x)` and `βw(y) ≤ ρw(x)` for `y ∈ Γ(x)` and some `ρ < 1`, the functional equation
+has exactly one continuous solution with `|v| ≤ Cw`: apply the contraction mapping theorem to
+`u = v/w` in `C(X)`, where `T` becomes
+`(T̃u)(x) = max_{y ∈ Γ(x)} [F(x, y) + βw(y)u(y)]/w(x)`, a contraction of modulus `ρ` (Blackwell's
+conditions).
+
+* `WeightedHyp`: the hypotheses; `wbellman`: the operator `T̃`; `wbellman_contraction`.
+* `SolvesFE`: `v` satisfies `v(x) = max_{y ∈ Γ(x)} [F(x, y) + βv(y)]`, with the maximum
+  attained.
+* `weighted_exists_unique`: exactly one continuous `v` with `|v| ≤ Cw` solves the functional
+  equation.
+-/
+
+open Set Filter Topology BoundedContinuousFunction
+
+namespace StokeyLucasPrescott.DeterministicApplications
+
+variable {X : Type*} [MetricSpace X] {Γ : X → Set X} {F : X × X → ℝ} {w : X → ℝ} {β ρ : ℝ}
+
+/-- The hypotheses for the weighted functional equation. -/
+structure WeightedHyp (Γ : X → Set X) (F : X × X → ℝ) (w : X → ℝ) (β ρ : ℝ) : Prop where
+  h43 : Assumption43 Γ
+  cont : ContinuousOn F (graph Γ)
+  w_cont : Continuous w
+  w_pos : ∀ x, 0 < w x
+  bdd : ∃ B, ∀ p ∈ graph Γ, |F p| ≤ B * w p.1
+  β_pos : 0 < β
+  ρ_lt : ρ < 1
+  growth : ∀ x, ∀ y ∈ Γ x, β * w y ≤ ρ * w x
+
+/-- `v` solves the functional equation, with the maximum attained. -/
+def SolvesFE (Γ : X → Set X) (F : X × X → ℝ) (β : ℝ) (v : X → ℝ) : Prop :=
+  ∀ x, (∃ y ∈ Γ x, v x = F (x, y) + β * v y) ∧ ∀ y ∈ Γ x, F (x, y) + β * v y ≤ v x
+
+/-- The scaled objective `[F(x, y) + βw(y)u(y)]/w(x)`. -/
+noncomputable def wobj (F : X × X → ℝ) (w : X → ℝ) (β : ℝ) (u : X → ℝ) (p : X × X) : ℝ :=
+  (F p + β * (w p.2 * u p.2)) / w p.1
+
+theorem WeightedHyp.ρ_pos (hW : WeightedHyp Γ F w β ρ) [Nonempty X] : 0 < ρ := by
+  obtain ⟨x⟩ := ‹Nonempty X›
+  obtain ⟨y, hy⟩ := hW.h43.nonempty x
+  have := hW.growth x y hy
+  have h1 := mul_pos hW.β_pos (hW.w_pos y)
+  by_contra hρ
+  push Not at hρ
+  nlinarith [hW.w_pos x]
+
+theorem continuousOn_wobj (hW : WeightedHyp Γ F w β ρ) {u : X → ℝ} (hu : Continuous u) :
+    ContinuousOn (wobj F w β u) (graph Γ) :=
+  (hW.cont.add (continuous_const.mul ((hW.w_cont.comp continuous_snd).mul
+    (hu.comp continuous_snd))).continuousOn).div
+    (hW.w_cont.comp continuous_fst).continuousOn fun p _ => (hW.w_pos p.1).ne'
+
+/-- The bound `|[F(x, y) + βw(y)u(y)]/w(x)| ≤ B + ρ‖u‖` on the graph. -/
+theorem abs_wobj_le (hW : WeightedHyp Γ F w β ρ) (u : X →ᵇ ℝ) {p : X × X} (hp : p ∈ graph Γ) :
+    |wobj F w β u p| ≤ hW.bdd.choose + ρ * ‖u‖ := by
+  have hw := hW.w_pos p.1
+  have hwy := hW.w_pos p.2
+  rw [wobj, abs_div, abs_of_pos hw, div_le_iff₀ hw]
+  have h1 := hW.bdd.choose_spec p hp
+  have hu := u.norm_coe_le_norm p.2
+  rw [Real.norm_eq_abs] at hu
+  have h2 : |β * (w p.2 * u p.2)| ≤ ρ * w p.1 * ‖u‖ := by
+    rw [abs_mul, abs_mul, abs_of_pos hW.β_pos, abs_of_pos hwy]
+    calc β * (w p.2 * |u p.2|) = β * w p.2 * |u p.2| := by ring
+      _ ≤ ρ * w p.1 * ‖u‖ := mul_le_mul (hW.growth p.1 p.2 hp) hu (abs_nonneg _)
+          (by nlinarith [hW.growth p.1 p.2 hp, mul_pos hW.β_pos hwy])
+  calc |F p + β * (w p.2 * u p.2)| ≤ |F p| + |β * (w p.2 * u p.2)| := abs_add_le _ _
+    _ ≤ hW.bdd.choose * w p.1 + ρ * w p.1 * ‖u‖ := add_le_add h1 h2
+    _ = (hW.bdd.choose + ρ * ‖u‖) * w p.1 := by ring
+
+theorem bound_wmaxValue (hW : WeightedHyp Γ F w β ρ) (u : X →ᵇ ℝ) (x : X) :
+    ‖maxValue (wobj F w β u) Γ x‖ ≤ hW.bdd.choose + ρ * ‖u‖ := by
+  obtain ⟨y, hy, hval, -⟩ := exists_argmax (continuousOn_wobj hW u.continuous)
+    (hW.h43.compact x) (hW.h43.nonempty x)
+  rw [← hval, Real.norm_eq_abs]
+  exact abs_wobj_le hW u hy
+
+/-- The operator `(T̃u)(x) = max_{y ∈ Γ(x)} [F(x, y) + βw(y)u(y)]/w(x)` on `C(X)`. -/
+noncomputable def wbellman (hW : WeightedHyp Γ F w β ρ) (u : X →ᵇ ℝ) : X →ᵇ ℝ :=
+  BoundedContinuousFunction.ofNormedAddCommGroup (fun x => maxValue (wobj F w β u) Γ x)
+    (theorem_3_6 (continuousOn_wobj hW u.continuous) hW.h43.compact hW.h43.lhc hW.h43.uhc).1
+    (hW.bdd.choose + ρ * ‖u‖) (bound_wmaxValue hW u)
+
+theorem exists_wbellman_argmax (hW : WeightedHyp Γ F w β ρ) (u : X →ᵇ ℝ) (x : X) :
+    ∃ y ∈ Γ x, wbellman hW u x = wobj F w β u (x, y) ∧
+      ∀ z ∈ Γ x, wobj F w β u (x, z) ≤ wbellman hW u x := by
+  obtain ⟨y, hy, hval, hmax⟩ := exists_argmax (continuousOn_wobj hW u.continuous)
+    (hW.h43.compact x) (hW.h43.nonempty x)
+  exact ⟨y, hy, hval.symm, fun z hz => (hmax z hz).trans_eq hval⟩
+
+/-- `T̃` is a contraction of modulus `ρ`. -/
+theorem wbellman_contraction [Nonempty X] (hW : WeightedHyp Γ F w β ρ) :
+    IsContraction (wbellman hW) ρ := by
+  refine ⟨hW.ρ_pos, hW.ρ_lt, blackwell hW.ρ_pos.le (fun f g hfg x => ?_) (fun f a ha x => ?_)⟩
+  · obtain ⟨y, hy, hval, -⟩ := exists_wbellman_argmax hW f x
+    obtain ⟨-, -, -, hmax⟩ := exists_wbellman_argmax hW g x
+    change wbellman hW f x ≤ wbellman hW g x
+    rw [hval]
+    refine le_trans ?_ (hmax y hy)
+    simp only [wobj]
+    refine div_le_div_of_nonneg_right ?_ (hW.w_pos x).le
+    have := mul_le_mul_of_nonneg_left (show f y ≤ g y from hfg y) (hW.w_pos y).le
+    nlinarith [hW.β_pos]
+  · obtain ⟨y, hy, hval, -⟩ := exists_wbellman_argmax hW (f + const X a) x
+    obtain ⟨-, -, -, hmax⟩ := exists_wbellman_argmax hW f x
+    change wbellman hW (f + const X a) x ≤ (wbellman hW f + const X (ρ * a)) x
+    rw [hval, BoundedContinuousFunction.add_apply, const_apply]
+    have h1 := hmax y hy
+    have hgr := hW.growth x y hy
+    have hw := hW.w_pos x
+    simp only [wobj, BoundedContinuousFunction.add_apply, const_apply] at h1 ⊢
+    have e : (F (x, y) + β * (w y * (f y + a))) / w x =
+        (F (x, y) + β * (w y * f y)) / w x + β * w y * a / w x := by
+      field_simp; ring
+    rw [e]
+    have h2 : β * w y * a / w x ≤ ρ * a := by
+      rw [div_le_iff₀ hw]; nlinarith
+    linarith
+
+/-- `u` is a fixed point of `T̃` iff `wu` solves the functional equation. -/
+theorem solvesFE_iff (hW : WeightedHyp Γ F w β ρ) (u : X →ᵇ ℝ) :
+    wbellman hW u = u ↔ SolvesFE Γ F β fun x => w x * u x := by
+  constructor
+  · intro hu x
+    obtain ⟨y, hy, hval, hmax⟩ := exists_wbellman_argmax hW u x
+    rw [hu] at hval hmax
+    have hw := hW.w_pos x
+    refine ⟨⟨y, hy, ?_⟩, fun z hz => ?_⟩
+    · change w x * u x = F (x, y) + β * (w y * u y)
+      rw [hval, wobj]; field_simp
+    · have := hmax z hz
+      rw [wobj, div_le_iff₀ hw] at this
+      change F (x, z) + β * (w z * u z) ≤ w x * u x
+      linarith
+  · intro hv
+    ext x
+    have hw := hW.w_pos x
+    obtain ⟨⟨y, hy, hval⟩, hmax⟩ := hv x
+    beta_reduce at hval hmax
+    refine le_antisymm ?_ ?_
+    · obtain ⟨z, hz, hzval, -⟩ := exists_wbellman_argmax hW u x
+      rw [hzval, wobj, div_le_iff₀ hw]
+      have := hmax z hz
+      linarith
+    · obtain ⟨-, -, -, hle⟩ := exists_wbellman_argmax hW u x
+      refine le_trans ?_ (hle y hy)
+      rw [wobj, le_div_iff₀ hw]
+      linarith
+
+/-- **The weighted functional equation.** Exactly one continuous `v` with `|v| ≤ Cw` for some
+`C` solves the functional equation. -/
+theorem weighted_exists_unique [Nonempty X] (hW : WeightedHyp Γ F w β ρ) :
+    ∃ v : X → ℝ, SolvesFE Γ F β v ∧ Continuous v ∧ (∃ C, ∀ x, |v x| ≤ C * w x) ∧
+      ∀ v' : X → ℝ, SolvesFE Γ F β v' → Continuous v' → (∃ C, ∀ x, |v' x| ≤ C * w x) →
+        v' = v := by
+  obtain ⟨u, hu, huniq, -⟩ := theorem_3_2 (wbellman_contraction hW)
+  refine ⟨fun x => w x * u x, (solvesFE_iff hW u).1 hu, hW.w_cont.mul u.continuous,
+    ⟨‖u‖, fun x => ?_⟩, fun v' hv' hc' ⟨C, hC⟩ => ?_⟩
+  · rw [abs_mul, abs_of_pos (hW.w_pos x), mul_comm]
+    exact mul_le_mul_of_nonneg_right (by simpa [Real.norm_eq_abs] using u.norm_coe_le_norm x)
+      (hW.w_pos x).le
+  · -- `u' = v'/w` is a bounded continuous fixed point of `T̃`
+    set u' : X →ᵇ ℝ := BoundedContinuousFunction.ofNormedAddCommGroup (fun x => v' x / w x)
+      (hc'.div hW.w_cont fun x => (hW.w_pos x).ne') C fun x => by
+        rw [Real.norm_eq_abs, abs_div, abs_of_pos (hW.w_pos x), div_le_iff₀ (hW.w_pos x)]
+        exact hC x
+    have hv'eq : (fun x => w x * u' x) = v' := by
+      funext x
+      change w x * (v' x / w x) = v' x
+      field_simp [(hW.w_pos x).ne']
+    have hfix : wbellman hW u' = u' := (solvesFE_iff hW u').2 (hv'eq ▸ hv')
+    rw [← hv'eq, huniq u' hfix]
+
+end StokeyLucasPrescott.DeterministicApplications
+
+/-
+Copyright (c) 2026 Robert Kirkby. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Robert Kirkby
+-/
+
+/-!
+# Growth with human capital
+
+SLP §5.8, pp. 111–112: `max Σ βᵗU(f[k_tφ(k_{t+1}/k_t)])` subject to
+`(1 − δ)k_t ≤ k_{t+1} ≤ (1 + λ)k_t`, with functional equation
+`v(k) = max_{y ∈ Γ(k)} {U(f[kφ(y/k)]) + βv(y)}` on `k > 0`.
+
+Returns grow with `k`, so `v` is not bounded; the book's "unique continuous function" is
+unique among continuous functions with `|v(k)| ≤ C(1 + k)` (any `v` of the form `Ak^{ασ}` with
+`ασ < 1` qualifies).
+
+* `human_assumption43`: `Γ(k) = [(1 − δ)k, (1 + λ)k]` is nonempty, compact-valued and continuous.
+* **Exercise 5.8a** (`ex_5_8a`): if `β(1 + λ) < 1`, exactly one continuous `v` with
+  `|v(k)| ≤ C(1 + k)` solves the functional equation (the weighted contraction of
+  `WeightedBellman`, weight `1 + k`, modulus `β(1 + λ)`). `U` and `f` need only be continuous
+  and nondecreasing with `U(f(L)) ≤ A + BL`, which holds when `U ∘ f` is concave
+  (`concave_linear_bound`).
+* **Exercise 5.8b** (`ex_5_8b`): for `f(L) = L^α` and `U(c) = c^σ/σ`, `0 < α, σ < 1`,
+  `v(k) = Ak^{ασ}` with `A > 0` (the sign of `σ`), and the policy `g(k) = θk` is optimal: human
+  capital grows at a constant rate. `A` is the fixed point of
+  `A ↦ max_x [φ(x)^{ασ}/σ + βAx^{ασ}]`, a contraction of modulus `β(1 + λ)^{ασ}`. For `σ < 0`,
+  `U(0) = −∞` and the returns are unbounded below, so part (a) does not apply; that case is not
+  covered.
+-/
+
+open Set Filter Topology
+
+namespace StokeyLucasPrescott.DeterministicApplications
+
+variable {U f φ : ℝ → ℝ} {δ lam β : ℝ}
+
+/-- `Γ(k) = [(1 − δ)k, (1 + λ)k]` satisfies Assumption 4.3 on `(0, ∞)`. -/
+theorem human_assumption43 (hδ0 : 0 < δ) (hδ1 : δ < 1) (hlam : 0 < lam) :
+    Assumption43 (humanΓ δ lam) := by
+  have hI : (1 - δ) ≤ 1 + lam := by linarith
+  have hself : ∀ k : PosR, k ∈ humanΓ δ lam k := fun k =>
+    ⟨by nlinarith [k.2], by nlinarith [k.2]⟩
+  -- the ratio `y/k` of a feasible pair lies in `I`
+  have hratio : ∀ k y : PosR, y ∈ humanΓ δ lam k → y.1 / k.1 ∈ Icc (1 - δ) (1 + lam) :=
+    fun k y hy => ⟨(le_div_iff₀ k.2).2 hy.1, (div_le_iff₀ k.2).2 hy.2⟩
+  have hmk : ∀ (k : PosR) (x : ℝ), x ∈ Icc (1 - δ) (1 + lam) → 0 < x * k.1 := fun k x hx =>
+    mul_pos (by linarith [hx.1]) k.2
+  refine ⟨fun k => ⟨k, hself k⟩, fun k => ?_, fun k => ⟨⟨k, hself k⟩, fun y hy ks hks => ?_⟩,
+    fun k => ⟨⟨k, hself k⟩, fun ks hks ys hys => ?_⟩⟩
+  · -- compact: the image in `ℝ` is `[(1 − δ)k, (1 + λ)k]`
+    rw [Subtype.isCompact_iff]
+    have : Subtype.val '' humanΓ δ lam k = Icc ((1 - δ) * k.1) ((1 + lam) * k.1) := by
+      ext z
+      refine ⟨fun ⟨y, hy, hz⟩ => hz ▸ hy, fun hz => ⟨⟨z, ?_⟩, hz, rfl⟩⟩
+      exact lt_of_lt_of_le (mul_pos (by linarith) k.2) hz.1
+    rw [this]
+    exact isCompact_Icc
+  · -- l.h.c.: `yₙ = (y/k)kₙ`
+    have hx := hratio k y hy
+    refine ⟨0, fun n => ⟨y.1 / k.1 * (ks n).1, hmk (ks n) _ hx⟩, fun n _ =>
+      ⟨by simp only; nlinarith [(ks n).2, hx.1], by simp only; nlinarith [(ks n).2, hx.2]⟩, ?_⟩
+    have := ((continuous_subtype_val.tendsto k).comp hks).const_mul (y.1 / k.1)
+    rw [div_mul_cancel₀ _ k.2.ne'] at this
+    exact tendsto_subtype_rng.2 this
+  · -- u.h.c.: the ratios `yₙ/kₙ` have a convergent subsequence in `I`
+    obtain ⟨x, hx, ψ, hψ, hlim⟩ := isCompact_Icc.tendsto_subseq
+      (x := fun n => (ys n).1 / (ks n).1) fun n => hratio _ _ (hys n)
+    refine ⟨⟨x * k.1, hmk k x hx⟩, ⟨by simp only; nlinarith [k.2, hx.1],
+      by simp only; nlinarith [k.2, hx.2]⟩, ψ, hψ, ?_⟩
+    have hk := ((continuous_subtype_val.tendsto k).comp hks).comp hψ.tendsto_atTop
+    have := hlim.mul hk
+    refine tendsto_subtype_rng.2 (this.congr fun n => ?_)
+    simp only [Function.comp_apply]
+    field_simp [(ks (ψ n)).2.ne']
+
+/-- The hypotheses of SLP §5.8 used here. -/
+structure HCGrowthHyp (U f φ : ℝ → ℝ) (δ lam β : ℝ) : Prop where
+  δ_pos : 0 < δ
+  δ_lt : δ < 1
+  lam_pos : 0 < lam
+  β_pos : 0 < β
+  discount : β * (1 + lam) < 1
+  φ_cont : ContinuousOn φ (Icc (1 - δ) (1 + lam))
+  φ_nonneg : ∀ x ∈ Icc (1 - δ) (1 + lam), 0 ≤ φ x
+  φ_le_one : ∀ x ∈ Icc (1 - δ) (1 + lam), φ x ≤ 1
+  f_cont : ContinuousOn f (Ici 0)
+  f_nonneg : ∀ L, 0 ≤ L → 0 ≤ f L
+  f_mono : MonotoneOn f (Ici 0)
+  U_cont : ContinuousOn U (Ici 0)
+  U_mono : MonotoneOn U (Ici 0)
+  lin : ∃ A B, ∀ L, 0 ≤ L → U (f L) ≤ A + B * L
+
+/-- `F(k, y) = U(f[kφ(y/k)])`. -/
+noncomputable def hcF (U f φ : ℝ → ℝ) (p : PosR × PosR) : ℝ := U (f (p.1.1 * φ (p.2.1 / p.1.1)))
+
+/-- The weight `1 + k`. -/
+def hcW (k : PosR) : ℝ := 1 + k.1
+
+/-- A concave nondecreasing function on `[0, ∞)` lies below a line. -/
+theorem concave_linear_bound {g : ℝ → ℝ} (hg : ConcaveOn ℝ (Ici 0) g)
+    (hm : MonotoneOn g (Ici 0)) : ∃ A B, ∀ L, 0 ≤ L → g L ≤ A + B * L := by
+  set s := (g 1 - g (1 / 2)) / (1 / 2)
+  have hs : 0 ≤ s := div_nonneg (sub_nonneg.2 (hm (mem_Ici.2 (by norm_num))
+    (mem_Ici.2 (by norm_num)) (by norm_num))) (by norm_num)
+  refine ⟨g 1, s, fun L hL => ?_⟩
+  rcases le_or_gt L 1 with hL1 | hL1
+  · have := hm (mem_Ici.2 hL) (mem_Ici.2 zero_le_one) hL1
+    nlinarith
+  · have hadj := hg.slope_anti_adjacent (x := 1 / 2) (y := 1) (z := L) (mem_Ici.2 (by norm_num))
+      (mem_Ici.2 hL) (by norm_num) hL1
+    rw [div_le_iff₀ (by linarith)] at hadj
+    nlinarith
+
+/-- Under `HCGrowthHyp` the weighted framework applies with weight `1 + k` and modulus
+`β(1 + λ)`. -/
+theorem hc_weighted (h : HCGrowthHyp U f φ δ lam β) :
+    WeightedHyp (humanΓ δ lam) (hcF U f φ) hcW β (β * (1 + lam)) := by
+  have hratio : ∀ p ∈ graph (humanΓ δ lam), p.2.1 / p.1.1 ∈ Icc (1 - δ) (1 + lam) :=
+    fun p hp => ⟨(le_div_iff₀ p.1.2).2 hp.1, (div_le_iff₀ p.1.2).2 hp.2⟩
+  have hL : ∀ p ∈ graph (humanΓ δ lam), p.1.1 * φ (p.2.1 / p.1.1) ∈ Icc 0 p.1.1 := fun p hp =>
+    ⟨mul_nonneg p.1.2.le (h.φ_nonneg _ (hratio p hp)),
+      mul_le_of_le_one_right p.1.2.le (h.φ_le_one _ (hratio p hp))⟩
+  have hxc : ContinuousOn (fun p : PosR × PosR => p.2.1 / p.1.1) (graph (humanΓ δ lam)) :=
+    ((continuous_subtype_val.comp continuous_snd).div (continuous_subtype_val.comp continuous_fst)
+      fun p => p.1.2.ne').continuousOn
+  have hLc : ContinuousOn (fun p : PosR × PosR => p.1.1 * φ (p.2.1 / p.1.1))
+      (graph (humanΓ δ lam)) :=
+    (continuous_subtype_val.comp continuous_fst).continuousOn.mul (h.φ_cont.comp hxc hratio)
+  have hfc := h.f_cont.comp hLc fun p hp => mem_Ici.2 (hL p hp).1
+  obtain ⟨A, B, hAB⟩ := h.lin
+  refine ⟨human_assumption43 h.δ_pos h.δ_lt h.lam_pos,
+    h.U_cont.comp hfc fun p hp => mem_Ici.2 (h.f_nonneg _ (hL p hp).1),
+    continuous_const.add continuous_subtype_val, fun k => by simp only [hcW]; linarith [k.2],
+    ⟨|U (f 0)| + |A| + |B|, fun p hp => ?_⟩, h.β_pos, h.discount, fun k y hy => ?_⟩
+  · -- `U(f(0)) ≤ F ≤ U(f(k)) ≤ A + Bk`
+    have hLp := hL p hp
+    have hf0 := h.f_nonneg 0 le_rfl
+    have hlo : U (f 0) ≤ hcF U f φ p :=
+      h.U_mono (mem_Ici.2 hf0) (mem_Ici.2 (h.f_nonneg _ hLp.1))
+        (h.f_mono (mem_Ici.2 le_rfl) (mem_Ici.2 hLp.1) hLp.1)
+    have hhi : hcF U f φ p ≤ A + B * p.1.1 :=
+      (h.U_mono (mem_Ici.2 (h.f_nonneg _ hLp.1)) (mem_Ici.2 (h.f_nonneg _ p.1.2.le))
+        (h.f_mono (mem_Ici.2 hLp.1) (mem_Ici.2 p.1.2.le) hLp.2)).trans (hAB _ p.1.2.le)
+    have hk := p.1.2
+    have hB : B * p.1.1 ≤ |B| * p.1.1 := mul_le_mul_of_nonneg_right (le_abs_self B) hk.le
+    have h1 := mul_nonneg (abs_nonneg (U (f 0))) hk.le
+    have h2 := mul_nonneg (abs_nonneg A) hk.le
+    have h3 := mul_nonneg (abs_nonneg B) hk.le
+    have h4 := neg_abs_le (U (f 0))
+    have h5 := le_abs_self A
+    simp only [hcW]
+    rw [abs_le]
+    constructor
+    · nlinarith [abs_nonneg A, abs_nonneg B]
+    · nlinarith [abs_nonneg (U (f 0)), abs_nonneg B]
+  · -- `β(1 + y) ≤ β(1 + λ)(1 + k)`
+    have hy2 : y.1 ≤ (1 + lam) * k.1 := hy.2
+    simp only [hcW]
+    nlinarith [h.β_pos, h.lam_pos, k.2]
+
+/-- **Exercise 5.8a.** If `β(1 + λ) < 1`, exactly one continuous `v` with `|v(k)| ≤ C(1 + k)`
+solves the functional equation. -/
+theorem ex_5_8a (h : HCGrowthHyp U f φ δ lam β) :
+    ∃ v : PosR → ℝ, SolvesFE (humanΓ δ lam) (hcF U f φ) β v ∧ Continuous v ∧
+      (∃ C, ∀ k, |v k| ≤ C * hcW k) ∧
+      ∀ v' : PosR → ℝ, SolvesFE (humanΓ δ lam) (hcF U f φ) β v' → Continuous v' →
+        (∃ C, ∀ k, |v' k| ≤ C * hcW k) → v' = v := by
+  have : Nonempty PosR := ⟨⟨1, one_pos⟩⟩
+  exact weighted_exists_unique (hc_weighted h)
+
+/-! ### Exercise 5.8b: the power case -/
+
+variable {α σ : ℝ}
+
+/-- `k^p ≤ 1 + k` for `0 ≤ p ≤ 1` and `k ≥ 0`. -/
+theorem rpow_le_one_add {k p : ℝ} (hk : 0 ≤ k) (hp0 : 0 ≤ p) (hp1 : p ≤ 1) : k ^ p ≤ 1 + k := by
+  rcases le_or_gt k 1 with hk1 | hk1
+  · linarith [Real.rpow_le_one hk hk1 hp0]
+  · have := Real.rpow_le_rpow_of_exponent_le hk1.le hp1
+    rw [Real.rpow_one] at this
+    linarith
+
+/-- The per-unit objective `φ(x)^{ασ}/σ + βAx^{ασ}`. -/
+noncomputable def hcObj (φ : ℝ → ℝ) (α σ β A x : ℝ) : ℝ :=
+  φ x ^ (α * σ) / σ + β * A * x ^ (α * σ)
+
+/-- `Φ(A) = max_{x ∈ I} [φ(x)^{ασ}/σ + βAx^{ασ}]`. -/
+noncomputable def hcPhi (φ : ℝ → ℝ) (δ lam α σ β A : ℝ) : ℝ :=
+  sSup (hcObj φ α σ β A '' Icc (1 - δ) (1 + lam))
+
+/-- **Exercise 5.8b.** With `f(L) = L^α`, `U(c) = c^σ/σ`, `0 < α, σ < 1`, `β(1 + λ) < 1` and
+`φ(1 − δ) = 1`: there are `A > 0` and `θ ∈ [1 − δ, 1 + λ]` such that `v(k) = Ak^{ασ}` solves the
+functional equation, it is the unique solution of part (a), and `y = θk` attains the maximum, so
+human capital grows at the constant rate `θ`. -/
+theorem ex_5_8b (h : HCGrowthHyp (fun c => c ^ σ / σ) (fun L => L ^ α) φ δ lam β)
+    (hφ1 : φ (1 - δ) = 1) (hα0 : 0 < α) (hα1 : α < 1) (hσ0 : 0 < σ) (hσ1 : σ < 1) :
+    ∃ A > 0, ∃ θ ∈ Icc (1 - δ) (1 + lam),
+      SolvesFE (humanΓ δ lam) (hcF (fun c => c ^ σ / σ) (fun L => L ^ α) φ) β
+        (fun k => A * k.1 ^ (α * σ)) ∧
+      (∀ v' : PosR → ℝ,
+        SolvesFE (humanΓ δ lam) (hcF (fun c => c ^ σ / σ) (fun L => L ^ α) φ) β v' →
+        Continuous v' → (∃ C, ∀ k, |v' k| ≤ C * hcW k) → v' = fun k => A * k.1 ^ (α * σ)) ∧
+      ∀ (k : PosR) (hy : 0 < θ * k.1),
+        hcF (fun c => c ^ σ / σ) (fun L => L ^ α) φ (k, ⟨θ * k.1, hy⟩) +
+          β * (A * (θ * k.1) ^ (α * σ)) = A * k.1 ^ (α * σ) := by
+  set p := α * σ
+  set I := Icc (1 - δ) (1 + lam)
+  have hp0 : 0 < p := mul_pos hα0 hσ0
+  have hp1 : p < 1 := by
+    have : α * σ < 1 * 1 := mul_lt_mul'' hα1 hσ1 hα0.le hσ0.le
+    simpa using this
+  have hδ0 := h.δ_pos
+  have hδ1 := h.δ_lt
+  have hlam := h.lam_pos
+  have hβ1 : β < 1 := by nlinarith [h.discount, h.β_pos]
+  have hIne : I.Nonempty := nonempty_Icc.2 (by linarith)
+  have hIpos : ∀ x ∈ I, 0 < x := fun x hx => by linarith [hx.1]
+  -- the per-unit objective and `Φ`
+  have hcont : ∀ A, ContinuousOn (hcObj φ α σ β A) I := fun A =>
+    ((h.φ_cont.rpow_const fun x hx => Or.inr hp0.le).div_const σ).add
+      (continuousOn_const.mul (continuousOn_id.rpow_const fun x _ => Or.inr hp0.le))
+  have hbdd : ∀ A, BddAbove (hcObj φ α σ β A '' I) := fun A =>
+    (isCompact_Icc.image_of_continuousOn (hcont A)).bddAbove
+  have hle : ∀ A, ∀ x ∈ I, hcObj φ α σ β A x ≤ hcPhi φ δ lam α σ β A := fun A x hx =>
+    le_csSup (hbdd A) ⟨x, hx, rfl⟩
+  have hxp : ∀ x ∈ I, 0 ≤ x ^ p ∧ x ^ p ≤ (1 + lam) ^ p := fun x hx =>
+    ⟨Real.rpow_nonneg (hIpos x hx).le _, Real.rpow_le_rpow (hIpos x hx).le hx.2 hp0.le⟩
+  have hlip : ∀ A A', hcPhi φ δ lam α σ β A ≤
+      hcPhi φ δ lam α σ β A' + β * (1 + lam) ^ p * |A - A'| := fun A A' => by
+    refine csSup_le (hIne.image _) ?_
+    rintro _ ⟨x, hx, rfl⟩
+    have h1 := hle A' x hx
+    obtain ⟨hx0, hx1⟩ := hxp x hx
+    have h2 : β * (A - A') * x ^ p ≤ β * (1 + lam) ^ p * |A - A'| := by
+      have := mul_le_mul (le_abs_self (A - A')) hx1 hx0 (abs_nonneg _)
+      nlinarith [h.β_pos]
+    simp only [hcObj] at h1 ⊢
+    nlinarith
+  -- `Φ` is a contraction of modulus `β(1 + λ)^{ασ}`
+  have hρ1 : β * (1 + lam) ^ p < 1 := by
+    have : (1 + lam) ^ p ≤ (1 + lam) ^ (1 : ℝ) :=
+      Real.rpow_le_rpow_of_exponent_le (by linarith) hp1.le
+    rw [Real.rpow_one] at this
+    nlinarith [h.β_pos, h.discount]
+  have hcontr : IsContraction (hcPhi φ δ lam α σ β) (β * (1 + lam) ^ p) := by
+    refine ⟨mul_pos h.β_pos (Real.rpow_pos_of_pos (by linarith) _), hρ1, fun A A' => ?_⟩
+    rw [Real.dist_eq, Real.dist_eq, abs_le]
+    have h1 := hlip A A'
+    have h2 := hlip A' A
+    rw [abs_sub_comm A' A] at h2
+    constructor <;> linarith
+  obtain ⟨A, hA, -, -⟩ := theorem_3_2 hcontr
+  obtain ⟨θ, hθ, hθmax⟩ := isCompact_Icc.exists_isMaxOn hIne (hcont A)
+  have hΦθ : hcPhi φ δ lam α σ β A = hcObj φ α σ β A θ :=
+    le_antisymm (csSup_le (hIne.image _) (by rintro _ ⟨x, hx, rfl⟩; exact hθmax hx))
+      (hle A θ hθ)
+  -- `A > 0`
+  have hApos : 0 < A := by
+    have h1 := hle A (1 - δ) ⟨le_rfl, by linarith⟩
+    rw [hA] at h1
+    simp only [hcObj, hφ1, Real.one_rpow] at h1
+    set t := (1 - δ) ^ (α * σ)
+    have h2 : t ≤ 1 := Real.rpow_le_one (by linarith) (by linarith) hp0.le
+    have h3 : 0 < 1 / σ := by positivity
+    by_contra hneg
+    push Not at hneg
+    have h4 : A ≤ A * t := by nlinarith
+    have h5 : β * A ≤ β * A * t := by nlinarith [h.β_pos]
+    nlinarith [h.β_pos]
+  -- the key identity: `F(k, y) + βAy^{ασ} = k^{ασ}[φ(x)^{ασ}/σ + βAx^{ασ}]`, `x = y/k`
+  have hkey : ∀ (k y : PosR), y.1 / k.1 ∈ I →
+      hcF (fun c => c ^ σ / σ) (fun L => L ^ α) φ (k, y) + β * (A * y.1 ^ p) =
+        k.1 ^ p * hcObj φ α σ β A (y.1 / k.1) := fun k y hx => by
+    have hφ0 := h.φ_nonneg _ hx
+    have hk := k.2
+    set x := y.1 / k.1
+    have hyp : y.1 ^ p = x ^ p * k.1 ^ p := by
+      rw [← Real.mul_rpow (hIpos _ hx).le hk.le, div_mul_cancel₀ _ hk.ne']
+    simp only [hcF, hcObj]
+    rw [← Real.rpow_mul (mul_nonneg hk.le hφ0), Real.mul_rpow hk.le hφ0, hyp]
+    ring
+  have hratio : ∀ k y : PosR, y ∈ humanΓ δ lam k → y.1 / k.1 ∈ I :=
+    fun k y hy => ⟨(le_div_iff₀ k.2).2 hy.1, (div_le_iff₀ k.2).2 hy.2⟩
+  have hsolve : SolvesFE (humanΓ δ lam) (hcF (fun c => c ^ σ / σ) (fun L => L ^ α) φ) β
+      (fun k => A * k.1 ^ p) := by
+    intro k
+    have hkp : 0 ≤ k.1 ^ p := Real.rpow_nonneg k.2.le _
+    set y : PosR := ⟨θ * k.1, mul_pos (hIpos θ hθ) k.2⟩
+    have hyk : y.1 / k.1 = θ := mul_div_cancel_right₀ θ k.2.ne'
+    refine ⟨⟨y, ⟨by simp only [y]; nlinarith [hθ.1, k.2], by simp only [y]; nlinarith [hθ.2, k.2]⟩,
+      ?_⟩, fun z hz => ?_⟩
+    · change A * k.1 ^ p = _ + β * (A * y.1 ^ p)
+      rw [hkey k y (hyk ▸ hθ), hyk, ← hΦθ, hA, mul_comm]
+    · change _ + β * (A * z.1 ^ p) ≤ A * k.1 ^ p
+      rw [hkey k z (hratio k z hz), mul_comm A]
+      refine mul_le_mul_of_nonneg_left ?_ hkp
+      exact (hle A _ (hratio k z hz)).trans hA.le
+  -- uniqueness from part (a)
+  obtain ⟨v₀, -, -, -, huniq⟩ := ex_5_8a h
+  have hcv : Continuous fun k : PosR => A * k.1 ^ p :=
+    continuous_const.mul (continuous_subtype_val.rpow_const fun k => Or.inl k.2.ne')
+  have hbv : ∃ C, ∀ k : PosR, |A * k.1 ^ p| ≤ C * hcW k := ⟨A, fun k => by
+    rw [abs_of_nonneg (mul_nonneg hApos.le (Real.rpow_nonneg k.2.le _))]
+    exact mul_le_mul_of_nonneg_left (rpow_le_one_add k.2.le hp0.le hp1.le) hApos.le⟩
+  have hv₀ := huniq _ hsolve hcv hbv
+  refine ⟨A, hApos, θ, hθ, hsolve, fun v' hv' hc' hb' => (huniq v' hv' hc' hb').trans hv₀.symm,
+    fun k hy => ?_⟩
+  have hyk : θ * k.1 / k.1 = θ := mul_div_cancel_right₀ θ k.2.ne'
+  rw [hkey k ⟨θ * k.1, hy⟩ (by simp only; rw [hyk]; exact hθ)]
+  simp only
+  rw [hyk, ← hΦθ, hA, mul_comm]
+
+end StokeyLucasPrescott.DeterministicApplications
+
+/-
+Copyright (c) 2026 Robert Kirkby. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Robert Kirkby
+-/
+
+/-!
+# Investment with linear costs
+
+SLP §5.9, pp. 112–113: a firm with technology `f` buys capital at price `q`, sells output at
+price `p`, and solves `v(k) = max_{y ≥ 0} {pf(k) − q[y − (1 − δ)k] + βv(y)}`.
+
+**Exercise 5.9a.** Write `G(k) = pf(k) + q(1 − δ)k`, so the return is `G(k) − qy`, and
+`h(y) = βG(y) − qy`.
+
+* `invest_fe`: if `y*` maximizes `h` on `[0, ∞)`, then `v(k) = G(k) + h(y*)/(1 − β)` solves the
+  functional equation, and `y = y*` attains the maximum at every `k`: the firm jumps to `y*` at
+  once, whatever its capital. No differentiability is needed.
+* `invest_partialSum_le`, `invest_plan_tendsto`: on the sequence problem, every plan's partial
+  sums are at most `v(k₀)`, and the plan `k_t = y*` (`t ≥ 1`) attains `v(k₀)` in the limit; so `v`
+  is the supremum function (although `f` is unbounded, the problem telescopes).
+* `exists_max_sublinear`: if `f(y)/y → 0`, a maximizer `y*` exists; `invest_euler`: at an interior
+  `y*`, `q = β[pf'(y*) + (1 − δ)q]`.
+* Investment is reversible: nothing requires `y ≥ (1 − δ)k`, so the firm can sell capital.
+* **Bounds on investment** (`(1 − δ)k ≤ y ≤ (1 − δ)k + a`): `clamp_maximizes`: with `v` concave,
+  the objective `−qy + βv(y)` does not depend on `k`, so the policy is its unconstrained
+  maximizer `ŷ` pushed into `[(1 − δ)k, (1 − δ)k + a]`:
+  `g(k) = (1 − δ)k + a` below `(ŷ − a)/(1 − δ)`, `ŷ` in between, and `(1 − δ)k` above
+  `ŷ/(1 − δ)` (`bounded_policy`).
+* Tools used again later: `intervalΓ_assumption43` (an interval correspondence on `[0, K]`
+  satisfies Assumption 4.3) and `fixed_concave_of_concaveF` (with `F` concave on the graph, not
+  necessarily strictly, the fixed point is concave).
+-/
+
+open Set Filter Topology BoundedContinuousFunction
+
+namespace StokeyLucasPrescott.DeterministicApplications
+
+variable {f : ℝ → ℝ} {p q δ β : ℝ}
+
+/-- `G(k) = pf(k) + q(1 − δ)k`. -/
+def investG (f : ℝ → ℝ) (p q δ k : ℝ) : ℝ := p * f k + q * (1 - δ) * k
+
+/-- `h(y) = βG(y) − qy`. -/
+def investH (f : ℝ → ℝ) (p q δ β y : ℝ) : ℝ := β * investG f p q δ y - q * y
+
+/-- **Exercise 5.9a.** `v(k) = G(k) + h(y*)/(1 − β)` solves the functional equation and `y*`
+attains the maximum at every `k`. -/
+theorem invest_fe (hβ1 : β < 1) {ystar : ℝ}
+    (hmax : ∀ y, 0 ≤ y → investH f p q δ β y ≤ investH f p q δ β ystar) (k : ℝ) :
+    (∀ y, 0 ≤ y → investG f p q δ k - q * y +
+        β * (investG f p q δ y + investH f p q δ β ystar / (1 - β)) ≤
+      investG f p q δ k + investH f p q δ β ystar / (1 - β)) ∧
+    investG f p q δ k - q * ystar +
+        β * (investG f p q δ ystar + investH f p q δ β ystar / (1 - β)) =
+      investG f p q δ k + investH f p q δ β ystar / (1 - β) := by
+  have h1β : (1 - β) ≠ 0 := by linarith
+  have e : ∀ y, investG f p q δ k - q * y +
+      β * (investG f p q δ y + investH f p q δ β ystar / (1 - β)) =
+      investG f p q δ k + investH f p q δ β y + β * (investH f p q δ β ystar / (1 - β)) :=
+    fun y => by simp only [investH]; ring
+  have e2 : investH f p q δ β ystar + β * (investH f p q δ β ystar / (1 - β)) =
+      investH f p q δ β ystar / (1 - β) := by field_simp; ring
+  refine ⟨fun y hy => ?_, ?_⟩
+  · rw [e y]; linarith [hmax y hy]
+  · rw [e ystar]; linarith
+
+/-- The telescoping identity: `Σ_{t ≤ N} βᵗ[G(k_t) − qk_{t+1}] =
+G(k₀) + Σ_{t < N} βᵗh(k_{t+1}) − βᴺqk_{N+1}`. -/
+theorem invest_telescope (k : ℕ → ℝ) (N : ℕ) :
+    ∑ t ∈ Finset.range (N + 1), β ^ t * (investG f p q δ (k t) - q * k (t + 1)) =
+      investG f p q δ (k 0) + ∑ t ∈ Finset.range N, β ^ t * investH f p q δ β (k (t + 1)) -
+        β ^ N * (q * k (N + 1)) := by
+  induction N with
+  | zero => simp
+  | succ N ih =>
+    rw [Finset.sum_range_succ, ih, Finset.sum_range_succ]
+    simp only [investH, pow_succ]
+    ring
+
+/-- **Exercise 5.9a.** Every plan with `k_t ≥ 0` has partial sums at most `v(k₀)`. -/
+theorem invest_partialSum_le (hβ0 : 0 < β) (hβ1 : β < 1) (hq : 0 ≤ q) (hf0 : f 0 = 0)
+    {ystar : ℝ} (hmax : ∀ y, 0 ≤ y → investH f p q δ β y ≤ investH f p q δ β ystar)
+    {k : ℕ → ℝ} (hk : ∀ t, 0 ≤ k t) (N : ℕ) :
+    ∑ t ∈ Finset.range (N + 1), β ^ t * (investG f p q δ (k t) - q * k (t + 1)) ≤
+      investG f p q δ (k 0) + investH f p q δ β ystar / (1 - β) := by
+  rw [invest_telescope]
+  set M := investH f p q δ β ystar
+  have hM0 : 0 ≤ M := by
+    have := hmax 0 le_rfl
+    simp only [investH, investG, hf0] at this
+    simpa using this
+  have hsum : ∑ t ∈ Finset.range N, β ^ t * investH f p q δ β (k (t + 1)) ≤
+      ∑ t ∈ Finset.range N, β ^ t * M :=
+    Finset.sum_le_sum fun t _ => mul_le_mul_of_nonneg_left (hmax _ (hk _)) (pow_nonneg hβ0.le t)
+  have hgeom : ∑ t ∈ Finset.range N, β ^ t * M ≤ M / (1 - β) := by
+    have h1 : 0 < 1 - β := by linarith
+    have hs : ∑ t ∈ Finset.range N, β ^ t ≤ 1 / (1 - β) := by
+      rw [le_div_iff₀ h1, geom_sum_mul_neg]
+      linarith [pow_nonneg hβ0.le N]
+    rw [← Finset.sum_mul]
+    calc (∑ t ∈ Finset.range N, β ^ t) * M ≤ 1 / (1 - β) * M := mul_le_mul_of_nonneg_right hs hM0
+      _ = M / (1 - β) := by ring
+  have htail : 0 ≤ β ^ N * (q * k (N + 1)) :=
+    mul_nonneg (pow_nonneg hβ0.le N) (mul_nonneg hq (hk _))
+  linarith
+
+/-- **Exercise 5.9a.** The plan `k₀, y*, y*, …` attains `v(k₀)` in the limit. -/
+theorem invest_plan_tendsto (hβ0 : 0 < β) (hβ1 : β < 1) (ystar k₀ : ℝ) :
+    Tendsto (fun N => ∑ t ∈ Finset.range (N + 1), β ^ t *
+        (investG f p q δ (if t = 0 then k₀ else ystar) - q * ystar)) atTop
+      (𝓝 (investG f p q δ k₀ + investH f p q δ β ystar / (1 - β))) := by
+  have e : ∀ N, ∑ t ∈ Finset.range (N + 1), β ^ t *
+      (investG f p q δ (if t = 0 then k₀ else ystar) - q * ystar) =
+      investG f p q δ k₀ + ∑ t ∈ Finset.range N, β ^ t * investH f p q δ β ystar -
+        β ^ N * (q * ystar) := fun N => by
+    have := invest_telescope (f := f) (p := p) (q := q) (δ := δ) (β := β)
+      (fun t => if t = 0 then k₀ else ystar) N
+    simpa using this
+  simp_rw [e]
+  have h1 := (hasSum_geometric_of_lt_one hβ0.le hβ1).mul_right (investH f p q δ β ystar)
+  have h2 := h1.tendsto_sum_nat
+  have h3 := (tendsto_pow_atTop_nhds_zero_of_lt_one hβ0.le hβ1).mul_const (q * ystar)
+  have := (h2.const_add (investG f p q δ k₀)).sub h3
+  simp only [zero_mul, sub_zero] at this
+  convert this using 2
+  rw [div_eq_mul_inv, mul_comm]
+
+/-- If `g(y)/y → 0` and `κ > 0`, then `g(y) − κy` attains its maximum on `[0, ∞)`. -/
+theorem exists_max_sublinear {g : ℝ → ℝ} (hg : ContinuousOn g (Ici 0))
+    (hsub : Tendsto (fun y => g y / y) atTop (𝓝 0)) {κ : ℝ} (hκ : 0 < κ) :
+    ∃ ystar, 0 ≤ ystar ∧ ∀ y, 0 ≤ y → g y - κ * y ≤ g ystar - κ * ystar := by
+  -- beyond some `R ≥ 1`, `g(y) − κy < g(0)`
+  have hev : ∀ᶠ y in atTop, g y / y < κ / 2 := hsub.eventually (gt_mem_nhds (by linarith))
+  obtain ⟨R₀, hR₀⟩ := eventually_atTop.1 hev
+  set R := max (max R₀ 1) (2 * |g 0| / κ + 1)
+  have hR1 : 1 ≤ R := (le_max_left _ _).trans' (le_max_right _ _)
+  have hout : ∀ y, R < y → g y - κ * y < g 0 - κ * 0 := fun y hy => by
+    have hy0 : 0 < y := by linarith
+    have h1 := hR₀ y ((le_max_left _ _).trans ((le_max_left _ _).trans hy.le))
+    rw [div_lt_iff₀ hy0] at h1
+    have h2 : 2 * |g 0| / κ + 1 < y := (le_max_right _ _).trans_lt hy
+    rw [div_add_one hκ.ne', div_lt_iff₀ hκ] at h2
+    nlinarith [le_abs_self (g 0), neg_abs_le (g 0)]
+  obtain ⟨y₀, hy₀, hmax⟩ := isCompact_Icc.exists_isMaxOn (nonempty_Icc.2 (by linarith : (0:ℝ) ≤ R))
+    ((hg.mono Icc_subset_Ici_self).sub (continuousOn_const.mul continuousOn_id))
+  refine ⟨y₀, hy₀.1, fun y hy => ?_⟩
+  rcases le_or_gt y R with hyR | hyR
+  · exact hmax ⟨hy, hyR⟩
+  · exact (hout y hyR).le.trans (hmax ⟨le_rfl, by linarith⟩)
+
+/-- **Exercise 5.9a.** At an interior maximizer the Euler equation `q = β[pf'(y*) + (1 − δ)q]`
+holds. -/
+theorem invest_euler {ystar f' : ℝ} (hpos : 0 < ystar)
+    (hmax : ∀ y, 0 ≤ y → investH f p q δ β y ≤ investH f p q δ β ystar)
+    (hf : HasDerivAt f f' ystar) : q = β * (p * f' + (1 - δ) * q) := by
+  have hd : HasDerivAt (investH f p q δ β) (β * (p * f' + q * (1 - δ) * 1) - q * 1) ystar :=
+    (((hf.const_mul p).add ((hasDerivAt_id' ystar).const_mul (q * (1 - δ)))).const_mul β).sub
+      ((hasDerivAt_id' ystar).const_mul q)
+  have hloc : IsLocalMax (investH f p q δ β) ystar := by
+    filter_upwards [Ici_mem_nhds hpos] with y hy
+    exact hmax y hy
+  have := hloc.hasDerivAt_eq_zero hd
+  linarith
+
+/-! ### Bounds on investment -/
+
+/-- A concave function is maximized over an interval `[l, u]` of its domain `s` at its maximizer
+`ŷ` over `s` pushed into `[l, u]`. -/
+theorem clamp_maximizes {s : Set ℝ} {ψ : ℝ → ℝ} (hψ : ConcaveOn ℝ s ψ) {yhat : ℝ}
+    (hy0 : yhat ∈ s) (hmax : ∀ y ∈ s, ψ y ≤ ψ yhat) {l u : ℝ} (hlu : l ≤ u)
+    (hsub : Icc l u ⊆ s) {y : ℝ} (hy : y ∈ Icc l u) : ψ y ≤ ψ (max l (min yhat u)) := by
+  set c := max l (min yhat u)
+  -- on either side of `ŷ`, concavity makes `ψ` monotone towards `ŷ`
+  have key : ∀ a b, a ∈ s → a ≤ b → b ≤ yhat → ψ a ≤ ψ b := fun a b ha hab hb => by
+    rcases eq_or_lt_of_le (hab.trans hb) with he | hlt
+    · have : a = b := le_antisymm hab (he ▸ hb); rw [this]
+    have hθ0 : 0 ≤ (yhat - b) / (yhat - a) := div_nonneg (by linarith) (by linarith)
+    have hθ1 : (yhat - b) / (yhat - a) ≤ 1 := (div_le_one (by linarith)).2 (by linarith)
+    have := hψ.2 ha hy0 hθ0 (sub_nonneg.2 hθ1) (by ring)
+    simp only [smul_eq_mul] at this
+    have e : (yhat - b) / (yhat - a) * a + (1 - (yhat - b) / (yhat - a)) * yhat = b := by
+      field_simp; ring
+    rw [e] at this
+    have := hmax a ha
+    nlinarith
+  have key' : ∀ a b, a ∈ s → yhat ≤ b → b ≤ a → ψ a ≤ ψ b := fun a b ha hb hba => by
+    rcases eq_or_lt_of_le (hb.trans hba) with he | hlt
+    · have : a = b := le_antisymm (he ▸ hb) hba; rw [this]
+    have hθ0 : 0 ≤ (b - yhat) / (a - yhat) := div_nonneg (by linarith) (by linarith)
+    have hθ1 : (b - yhat) / (a - yhat) ≤ 1 := (div_le_one (by linarith)).2 (by linarith)
+    have := hψ.2 ha hy0 hθ0 (sub_nonneg.2 hθ1) (by ring)
+    simp only [smul_eq_mul] at this
+    have e : (b - yhat) / (a - yhat) * a + (1 - (b - yhat) / (a - yhat)) * yhat = b := by
+      field_simp; ring
+    rw [e] at this
+    have := hmax a ha
+    nlinarith
+  have hys := hsub hy
+  rcases le_total yhat l with hyl | hyl
+  · -- `ŷ ≤ l`: `c = l`, and `ψ` falls on `[l, u]`
+    have hcl : c = l := max_eq_left ((min_le_left _ _).trans hyl)
+    rw [hcl]
+    exact key' y l hys hyl hy.1
+  · rcases le_total yhat u with hyu | hyu
+    · have hcy : c = yhat := by simp only [c, min_eq_left hyu, max_eq_right hyl]
+      rw [hcy]; exact hmax y hys
+    · -- `u ≤ ŷ`: `c = u`, and `ψ` rises on `[l, u]`
+      have hcu : c = u := by simp only [c, min_eq_right hyu, max_eq_right hlu]
+      rw [hcu]
+      exact key y u hys hy.2 hyu
+
+/-- **Exercise 5.9a with bounds on investment.** If `ψ(y) = −qy + βv(y)` is concave with
+maximizer `ŷ`, the optimal choice under `(1 − δ)k ≤ y ≤ (1 − δ)k + a` is
+`g(k) = max{(1 − δ)k, min{ŷ, (1 − δ)k + a}}`: maximal investment for
+`k ≤ (ŷ − a)/(1 − δ)`, the target `ŷ` in between, and no gross investment for `k ≥ ŷ/(1 − δ)`. -/
+theorem bounded_policy {v : ℝ → ℝ} (hψ : ConcaveOn ℝ (Ici 0) fun y => -(q * y) + β * v y)
+    {yhat : ℝ} (hy0 : 0 ≤ yhat) (hmax : ∀ y, 0 ≤ y → -(q * y) + β * v y ≤ -(q * yhat) + β * v yhat)
+    (hδ : δ < 1) {a k : ℝ} (ha : 0 ≤ a) (hk : 0 ≤ k) :
+    (∀ y ∈ Icc ((1 - δ) * k) ((1 - δ) * k + a),
+      investG f p q δ k - q * y + β * v y ≤
+        investG f p q δ k - q * max ((1 - δ) * k) (min yhat ((1 - δ) * k + a)) +
+          β * v (max ((1 - δ) * k) (min yhat ((1 - δ) * k + a)))) ∧
+    (k ≤ (yhat - a) / (1 - δ) → max ((1 - δ) * k) (min yhat ((1 - δ) * k + a)) =
+      (1 - δ) * k + a) ∧
+    ((yhat - a) / (1 - δ) ≤ k → k ≤ yhat / (1 - δ) →
+      max ((1 - δ) * k) (min yhat ((1 - δ) * k + a)) = yhat) ∧
+    (yhat / (1 - δ) ≤ k → max ((1 - δ) * k) (min yhat ((1 - δ) * k + a)) = (1 - δ) * k) := by
+  have h1δ : 0 < 1 - δ := by linarith
+  have hl : 0 ≤ (1 - δ) * k := mul_nonneg h1δ.le hk
+  refine ⟨fun y hy => ?_, fun h => ?_, fun h1 h2 => ?_, fun h => ?_⟩
+  · have := clamp_maximizes hψ (mem_Ici.2 hy0) (fun y hy => hmax y hy) (by linarith)
+      (fun z hz => mem_Ici.2 (hl.trans hz.1)) hy
+    linarith
+  · rw [le_div_iff₀ h1δ] at h
+    rw [min_eq_right (by linarith), max_eq_right (by linarith)]
+  · rw [div_le_iff₀ h1δ] at h1
+    rw [le_div_iff₀ h1δ] at h2
+    rw [min_eq_left (by linarith), max_eq_right (by linarith)]
+  · rw [div_le_iff₀ h1δ] at h
+    rw [max_eq_left ((min_le_left _ _).trans (by linarith))]
+
+/-! ### Tools: interval correspondences and concave fixed points -/
+
+/-- The interval correspondence `Γ(x) = [l(x), u(x)]` on `[0, K]`. -/
+def intervalΓ (K : ℝ) (l u : ℝ → ℝ) (x : Icc (0 : ℝ) K) : Set (Icc (0 : ℝ) K) :=
+  {y | l x.1 ≤ y.1 ∧ y.1 ≤ u x.1}
+
+/-- An interval correspondence with continuous bounds `0 ≤ l ≤ u ≤ K` satisfies
+Assumption 4.3. -/
+theorem intervalΓ_assumption43 {K : ℝ} {l u : ℝ → ℝ} (hl : ContinuousOn l (Icc 0 K))
+    (hu : ContinuousOn u (Icc 0 K)) (hl0 : ∀ x ∈ Icc 0 K, 0 ≤ l x)
+    (hlu : ∀ x ∈ Icc 0 K, l x ≤ u x) (huK : ∀ x ∈ Icc 0 K, u x ≤ K) :
+    Assumption43 (intervalΓ K l u) := by
+  have hlc : Continuous fun x : Icc (0 : ℝ) K => l x.1 :=
+    hl.comp_continuous continuous_subtype_val fun x => x.2
+  have huc : Continuous fun x : Icc (0 : ℝ) K => u x.1 :=
+    hu.comp_continuous continuous_subtype_val fun x => x.2
+  have : CompactSpace (Icc (0 : ℝ) K) := isCompact_iff_compactSpace.1 isCompact_Icc
+  set pt : Icc (0 : ℝ) K → Icc (0 : ℝ) K := fun x =>
+    ⟨l x.1, hl0 x.1 x.2, (hlu x.1 x.2).trans (huK x.1 x.2)⟩
+  have hpt : ∀ x, pt x ∈ intervalΓ K l u x := fun x => ⟨le_rfl, hlu x.1 x.2⟩
+  refine ⟨fun x => ⟨pt x, hpt x⟩, fun x => ?_, fun x => ⟨⟨pt x, hpt x⟩, fun y hy xs hxs => ?_⟩,
+    fun x => ⟨⟨pt x, hpt x⟩, fun xs hxs ys hys => ?_⟩⟩
+  · exact ((isClosed_le continuous_const continuous_subtype_val).inter
+      (isClosed_le continuous_subtype_val continuous_const)).isCompact
+  · -- l.h.c.: `yₙ = max{l(xₙ), min{y, u(xₙ)}}`
+    refine ⟨0, fun n => ⟨max (l (xs n).1) (min y.1 (u (xs n).1)),
+      le_max_of_le_left (hl0 _ (xs n).2),
+      max_le ((hlu _ (xs n).2).trans (huK _ (xs n).2)) ((min_le_right _ _).trans
+        (huK _ (xs n).2))⟩,
+      fun n _ => ⟨le_max_left _ _, max_le (hlu _ (xs n).2) (min_le_right _ _)⟩, ?_⟩
+    have hlim := ((hlc.tendsto x).comp hxs).max
+      ((tendsto_const_nhds (x := y.1)).min ((huc.tendsto x).comp hxs))
+    rw [min_eq_left hy.2, max_eq_right hy.1] at hlim
+    exact tendsto_subtype_rng.2 hlim
+  · -- u.h.c.: `X` is compact and the graph is closed
+    obtain ⟨y, -, φ, hφ, hlim⟩ := isCompact_univ.tendsto_subseq (x := ys) fun _ => mem_univ _
+    have hxφ := hxs.comp hφ.tendsto_atTop
+    have hyl := (continuous_subtype_val.tendsto y).comp hlim
+    refine ⟨y, ⟨?_, ?_⟩, φ, hφ, hlim⟩
+    · exact le_of_tendsto_of_tendsto ((hlc.tendsto x).comp hxφ) hyl
+        (Eventually.of_forall fun n => (hys (φ n)).1)
+    · exact le_of_tendsto_of_tendsto hyl ((huc.tendsto x).comp hxφ)
+        (Eventually.of_forall fun n => (hys (φ n)).2)
+
+variable {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E] {S : Set E}
+
+/-- With `F` concave on the graph (the weak half of Assumption 4.7) and Assumption 4.8, `T`
+preserves concavity. -/
+theorem bellman_concave_of_concaveF {hS : Convex ℝ S} {Γ : S → Set S} {F : S × S → ℝ}
+    (h43 : Assumption43 Γ) (h44 : Assumption44 Γ F β)
+    (hF : ∀ x y x' y', y ∈ Γ x → y' ∈ Γ x' → ∀ (θ : ℝ) (h0 : 0 ≤ θ) (h1 : θ ≤ 1),
+      θ * F (x, y) + (1 - θ) * F (x', y') ≤ F (cmb hS h0 h1 x x', cmb hS h0 h1 y y'))
+    (h48 : Assumption48 hS Γ) {g : S →ᵇ ℝ} (hg : IsConcaveS hS g) :
+    IsConcaveS hS (bellman h43 h44 g) := by
+  intro x x' θ h0 h1
+  obtain ⟨y, hy, hyv, -⟩ := exists_bellman_argmax h43 h44 g x
+  obtain ⟨y', hy', hyv', -⟩ := exists_bellman_argmax h43 h44 g x'
+  obtain ⟨-, -, -, hmax⟩ := exists_bellman_argmax h43 h44 g (cmb hS h0 h1 x x')
+  have hm := hmax _ (h48 x y x' y' hy hy' θ h0 h1)
+  have hFc := hF x y x' y' hy hy' θ h0 h1
+  have hgc := mul_le_mul_of_nonneg_left (hg y y' θ h0 h1) h44.β_pos.le
+  rw [hyv, hyv']
+  nlinarith
+
+/-- With `F` concave on the graph and Assumption 4.8, the fixed point is concave. -/
+theorem fixed_concave_of_concaveF [Nonempty S] {hS : Convex ℝ S} {Γ : S → Set S}
+    {F : S × S → ℝ} (h43 : Assumption43 Γ) (h44 : Assumption44 Γ F β)
+    (hF : ∀ x y x' y', y ∈ Γ x → y' ∈ Γ x' → ∀ (θ : ℝ) (h0 : 0 ≤ θ) (h1 : θ ≤ 1),
+      θ * F (x, y) + (1 - θ) * F (x', y') ≤ F (cmb hS h0 h1 x x', cmb hS h0 h1 y y'))
+    (h48 : Assumption48 hS Γ) {v : S →ᵇ ℝ} (hv : bellman h43 h44 v = v) : IsConcaveS hS v :=
+  (corollary_1 (S' := {g | IsConcaveS hS g}) (S'' := {g | IsConcaveS hS g})
+    (bellman_contraction h43 h44) hv ⟨0, fun x x' θ _ _ => by simp⟩ (isClosed_concave hS)
+    (fun _ hg => bellman_concave_of_concaveF h43 h44 hF h48 hg)
+    (fun _ hg => bellman_concave_of_concaveF h43 h44 hF h48 hg)).1
+
+end StokeyLucasPrescott.DeterministicApplications
+
+/-
+Copyright (c) 2026 Robert Kirkby. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Robert Kirkby
+-/
+
+/-!
+# Investment with bounds, with convex adjustment costs, and short-run profits
+
+SLP §5.9, pp. 112–113, continued. All three problems live on a compact state space `[0, K]`.
+
+* **Exercise 5.9a with bounds** (`ex_5_9a_bounds`): with
+  `(1 − δ)k ≤ y ≤ (1 − δ)k + a` and `K ≥ a/δ` (so `[0, K]` is invariant), there is a unique
+  bounded continuous `v`; it is concave, and the policy is the target `ŷ = argmax [−qy + βv(y)]`
+  pushed into the feasible interval.
+* **Exercise 5.9b** (`ex_5_9b`): with a strictly convex cost `c` of gross investment and `f`
+  strictly concave, Assumption 4.7 holds, so `v` is strictly concave and the policy `g` is a
+  continuous function. `g` is nondecreasing (`ex_5_9b_mono`) and
+  `g(k') − g(k) ≤ (1 − δ)(k' − k)` (`ex_5_9b_slope`): investment falls as capital rises, so
+  capital adjusts gradually. Both are lattice arguments: no derivatives are used.
+  `ex_5_9b_envelope`, `ex_5_9b_foc`, `ex_5_9b_euler`: `v'(k) = pf'(k) + (1 − δ)c'(i)`,
+  `c'(i) = βv'(g(k))`, and the Euler equation
+  `c'(g(k) − (1 − δ)k) = β[pf'(g(k)) + (1 − δ)c'(g(g(k)) − (1 − δ)g(k))]`, which at a steady
+  state reads `c'(δk*)(1 − β(1 − δ)) = βpf'(k*)` (`ex_5_9b_steady`). With a linear cost the
+  marginal cost of investing is constant and the firm jumps to its target (part a).
+* **Exercise 5.9c**: short-run profit `Π(k) = max_{l ≥ 0} [pF(k, l) − wl]`.
+  `labor_demand_exists`: labour demand exists if `F(k, ·)` is continuous and `F(k, l)/l → 0`;
+  `labor_demand_unique`: it is unique if `F(k, ·)` is strictly concave. Then `Π(0) = 0` if
+  `F(0, ·) = 0` (`profitPi_zero`), `Π` is nondecreasing if `F` is (`profitPi_mono`), concave if
+  `F` is jointly concave (`profitPi_concave`), strictly concave if `F` is jointly strictly
+  concave (`profitPi_strictConcave`), and `Π'(k) = pF_k(k, φ(k))` (`profitPi_deriv`).
+-/
+
+open Set Filter Topology BoundedContinuousFunction
+
+namespace StokeyLucasPrescott.DeterministicApplications
+
+variable {f c : ℝ → ℝ} {p q δ β a K : ℝ}
+
+/-- A concave function on `[0, K]` extends to a concave function on the real interval. -/
+theorem concaveOn_liftR_of_concave {v : Icc (0 : ℝ) K → ℝ} (hv : IsConcaveS (convex_Icc 0 K) v) :
+    ConcaveOn ℝ (Icc 0 K) (liftR K v) := by
+  refine ⟨convex_Icc 0 K, fun x hx y hy s t hs ht hst => ?_⟩
+  have ht' : t = 1 - s := by linarith
+  subst ht'
+  have hmem : s • x + (1 - s) • y ∈ Icc (0 : ℝ) K := convex_Icc 0 K hx hy hs ht hst
+  rw [liftR_of_mem v hx, liftR_of_mem v hy, liftR_of_mem v hmem, smul_eq_mul, smul_eq_mul]
+  exact hv ⟨x, hx⟩ ⟨y, hy⟩ s hs (by linarith)
+
+/-- A continuous function on the compact `[0, K] × [0, K]` is bounded. -/
+theorem exists_bound_Icc_prod {F : Icc (0 : ℝ) K × Icc (0 : ℝ) K → ℝ} (hF : Continuous F) :
+    ∃ B, ∀ p, |F p| ≤ B := by
+  have : CompactSpace (Icc (0 : ℝ) K) := isCompact_iff_compactSpace.1 isCompact_Icc
+  obtain ⟨B, hB⟩ := isCompact_univ.exists_bound_of_continuousOn hF.continuousOn
+  exact ⟨B, fun p => by simpa [Real.norm_eq_abs] using hB p (mem_univ p)⟩
+
+/-! ### Exercise 5.9a with bounds on investment -/
+
+/-- The return `pf(k) − q[y − (1 − δ)k] = G(k) − qy` on `[0, K]`. -/
+def investF (f : ℝ → ℝ) (p q δ K : ℝ) (pr : Icc (0 : ℝ) K × Icc (0 : ℝ) K) : ℝ :=
+  investG f p q δ pr.1.1 - q * pr.2.1
+
+/-- `Γ(k) = [(1 − δ)k, (1 − δ)k + a]`. -/
+def boundedΓ (δ a K : ℝ) : Icc (0 : ℝ) K → Set (Icc (0 : ℝ) K) :=
+  intervalΓ K (fun k => (1 - δ) * k) (fun k => (1 - δ) * k + a)
+
+theorem bounded_assumption43 (hδ0 : 0 < δ) (hδ1 : δ < 1) (ha : 0 ≤ a) (hK : a ≤ δ * K) :
+    Assumption43 (boundedΓ δ a K) :=
+  intervalΓ_assumption43 (continuousOn_const.mul continuousOn_id)
+    ((continuousOn_const.mul continuousOn_id).add continuousOn_const)
+    (fun x hx => mul_nonneg (by linarith) hx.1) (fun x _ => by linarith)
+    (fun x hx => by nlinarith [hx.2])
+
+theorem bounded_assumption44 (hβ0 : 0 < β) (hβ1 : β < 1) (hf : ContinuousOn f (Icc 0 K)) :
+    Assumption44 (boundedΓ δ a K) (investF f p q δ K) β := by
+  have hc : Continuous (investF f p q δ K) :=
+    ((continuous_const.mul (hf.comp_continuous (continuous_subtype_val.comp continuous_fst)
+      fun pr => pr.1.2)).add (continuous_const.mul (continuous_subtype_val.comp
+        continuous_fst))).sub (continuous_const.mul (continuous_subtype_val.comp continuous_snd))
+  obtain ⟨B, hB⟩ := exists_bound_Icc_prod hc
+  exact ⟨hc.continuousOn, ⟨B, fun pr _ => hB pr⟩, hβ0, hβ1⟩
+
+/-- **Exercise 5.9a with bounds.** There is a unique bounded continuous `v`; it is concave; and
+with `ŷ` maximizing `−qy + βv(y)` on `[0, K]`, the choice
+`max{(1 − δ)k, min{ŷ, (1 − δ)k + a}}` is optimal at every `k`. -/
+theorem ex_5_9a_bounds (hδ0 : 0 < δ) (hδ1 : δ < 1) (ha : 0 ≤ a) (hK : a ≤ δ * K)
+    (hβ0 : 0 < β) (hβ1 : β < 1) (hp : 0 ≤ p) (hfc : ContinuousOn f (Icc 0 K))
+    (hfcc : ConcaveOn ℝ (Icc 0 K) f) :
+    ∃ v : Icc (0 : ℝ) K →ᵇ ℝ,
+      bellman (bounded_assumption43 hδ0 hδ1 ha hK) (bounded_assumption44 (a := a) (p := p)
+        (q := q) (δ := δ) hβ0 hβ1 hfc) v = v ∧
+      (∀ w, bellman (bounded_assumption43 hδ0 hδ1 ha hK) (bounded_assumption44 (a := a) (p := p)
+        (q := q) (δ := δ) hβ0 hβ1 hfc) w = w → w = v) ∧
+      IsConcaveS (convex_Icc 0 K) v ∧
+      ∃ yhat : Icc (0 : ℝ) K, ∀ k : Icc (0 : ℝ) K,
+        ∀ hc : max ((1 - δ) * k.1) (min yhat.1 ((1 - δ) * k.1 + a)) ∈ Icc (0 : ℝ) K,
+          (⟨_, hc⟩ : Icc (0 : ℝ) K) ∈
+            argmax (obj (investF f p q δ K) β v) (boundedΓ δ a K) k := by
+  have hK0 : 0 ≤ K := by nlinarith
+  have : Nonempty (Icc (0 : ℝ) K) := ⟨⟨0, le_rfl, hK0⟩⟩
+  have : CompactSpace (Icc (0 : ℝ) K) := isCompact_iff_compactSpace.1 isCompact_Icc
+  set h43 := bounded_assumption43 hδ0 hδ1 ha hK
+  set h44 := bounded_assumption44 (a := a) (p := p) (q := q) (δ := δ) hβ0 hβ1 hfc
+  obtain ⟨v, hv, huniq, -⟩ := theorem_4_6 h43 h44
+  -- `F` is concave on the graph and `Γ` has a convex graph
+  have hF : ∀ x y x' y', y ∈ boundedΓ δ a K x → y' ∈ boundedΓ δ a K x' →
+      ∀ (θ : ℝ) (h0 : 0 ≤ θ) (h1 : θ ≤ 1),
+      θ * investF f p q δ K (x, y) + (1 - θ) * investF f p q δ K (x', y') ≤
+        investF f p q δ K (cmb (convex_Icc 0 K) h0 h1 x x', cmb (convex_Icc 0 K) h0 h1 y y') := by
+    intro x y x' y' _ _ θ h0 h1
+    have hfw := hfcc.2 x.2 x'.2 h0 (sub_nonneg.2 h1) (by ring)
+    simp only [smul_eq_mul] at hfw
+    simp only [investF, investG, cmb, smul_eq_mul]
+    nlinarith
+  have h48 : Assumption48 (convex_Icc 0 K) (boundedΓ δ a K) := by
+    intro x y x' y' hy hy' θ h0 h1
+    have h1' : 0 ≤ 1 - θ := by linarith
+    simp only [boundedΓ, intervalΓ, cmb, smul_eq_mul, mem_ofPred_eq] at hy hy' ⊢
+    constructor <;> nlinarith [hy.1, hy.2, hy'.1, hy'.2]
+  have hvc := fixed_concave_of_concaveF h43 h44 hF h48 hv
+  -- the target `ŷ`
+  set ψ : ℝ → ℝ := fun y => -(q * y) + β * liftR K v y
+  have hψc : ConcaveOn ℝ (Icc 0 K) ψ :=
+    ((LinearMap.mulLeft ℝ (-q)).concaveOn (convex_Icc 0 K)).add
+      ((concaveOn_liftR_of_concave hvc).smul hβ0.le) |>.congr fun y _ => by
+        simp [ψ, smul_eq_mul]
+  have hψcont : ContinuousOn ψ (Icc 0 K) := by
+    refine (continuousOn_const.mul continuousOn_id).neg.add (continuousOn_const.mul ?_)
+    refine (v.continuous.comp (continuous_projIcc (h := hK0))).continuousOn.congr fun y hy => ?_
+    rw [liftR_of_mem v hy, Function.comp_apply, projIcc_of_mem hK0 hy]
+  obtain ⟨yh, hyh, hyhmax⟩ := isCompact_Icc.exists_isMaxOn (nonempty_Icc.2 hK0) hψcont
+  refine ⟨v, hv, huniq, hvc, ⟨yh, hyh⟩, fun k hc => ?_⟩
+  have hl0 : 0 ≤ (1 - δ) * k.1 := mul_nonneg (by linarith) k.2.1
+  have hlu : (1 - δ) * k.1 ≤ (1 - δ) * k.1 + a := by linarith
+  have hsub : Icc ((1 - δ) * k.1) ((1 - δ) * k.1 + a) ⊆ Icc 0 K := fun z hz =>
+    ⟨hl0.trans hz.1, hz.2.trans (by nlinarith [k.2.2])⟩
+  have hmemΓ : (⟨_, hc⟩ : Icc (0 : ℝ) K) ∈ boundedΓ δ a K k :=
+    ⟨le_max_left _ _, max_le hlu ((min_le_right _ _))⟩
+  have hge : ∀ z ∈ boundedΓ δ a K k, obj (investF f p q δ K) β v (k, z) ≤
+      obj (investF f p q δ K) β v (k, ⟨_, hc⟩) := fun z hz => by
+    have := clamp_maximizes hψc hyh (fun y hy => hyhmax hy) hlu hsub (y := z.1) hz
+    simp only [ψ, liftR_of_mem v z.2, liftR_of_mem v hc] at this
+    simp only [obj, investF]
+    linarith
+  refine ⟨hmemΓ, le_antisymm (le_maxValue (continuousOn_obj h44 v.continuous) (h43.compact k)
+    hmemΓ) ?_⟩
+  obtain ⟨y, hy, hyv, -⟩ := exists_argmax (continuousOn_obj h44 v.continuous) (h43.compact k)
+    (h43.nonempty k)
+  rw [← hyv]
+  exact hge y hy
+
+/-! ### Exercise 5.9b: convex adjustment costs -/
+
+/-- The return `pf(k) − c(y − (1 − δ)k)` on `[0, K]`. -/
+def adjF (f c : ℝ → ℝ) (p δ K : ℝ) (pr : Icc (0 : ℝ) K × Icc (0 : ℝ) K) : ℝ :=
+  p * f pr.1.1 - c (pr.2.1 - (1 - δ) * pr.1.1)
+
+/-- `Γ(k) = [0, K]`. -/
+def fullΓ (K : ℝ) : Icc (0 : ℝ) K → Set (Icc (0 : ℝ) K) := intervalΓ K (fun _ => 0) (fun _ => K)
+
+theorem full_assumption43 (hK : 0 ≤ K) : Assumption43 (fullΓ K) :=
+  intervalΓ_assumption43 continuousOn_const continuousOn_const (fun _ _ => le_rfl)
+    (fun _ _ => hK) (fun _ _ => le_rfl)
+
+theorem mem_fullΓ (k y : Icc (0 : ℝ) K) : y ∈ fullΓ K k := ⟨y.2.1, y.2.2⟩
+
+theorem adj_assumption44 (hβ0 : 0 < β) (hβ1 : β < 1) (hf : ContinuousOn f (Icc 0 K))
+    (hc : Continuous c) : Assumption44 (fullΓ K) (adjF f c p δ K) β := by
+  have hcont : Continuous (adjF f c p δ K) :=
+    (continuous_const.mul (hf.comp_continuous (continuous_subtype_val.comp continuous_fst)
+      fun pr => pr.1.2)).sub (hc.comp ((continuous_subtype_val.comp continuous_snd).sub
+        (continuous_const.mul (continuous_subtype_val.comp continuous_fst))))
+  obtain ⟨B, hB⟩ := exists_bound_Icc_prod hcont
+  exact ⟨hcont.continuousOn, ⟨B, fun pr _ => hB pr⟩, hβ0, hβ1⟩
+
+/-- Assumption 4.7: `f` strictly concave and `c` convex. -/
+theorem adj_a47 (hp : 0 < p) (hf : StrictConcaveOn ℝ (Icc 0 K) f) (hc : ConvexOn ℝ univ c) :
+    Assumption47 (convex_Icc 0 K) (fullΓ K) (adjF f c p δ K) := by
+  intro x y x' y' _ _ θ h0 h1
+  have h1' : 0 ≤ 1 - θ := by linarith
+  have hcw := hc.2 (mem_univ (y.1 - (1 - δ) * x.1)) (mem_univ (y'.1 - (1 - δ) * x'.1)) h0.le h1'
+    (by ring)
+  simp only [smul_eq_mul] at hcw
+  have hfw := hf.concaveOn.2 x.2 x'.2 h0.le h1' (by ring)
+  simp only [smul_eq_mul] at hfw
+  have e : θ * y.1 + (1 - θ) * y'.1 - (1 - δ) * (θ * x.1 + (1 - θ) * x'.1) =
+      θ * (y.1 - (1 - δ) * x.1) + (1 - θ) * (y'.1 - (1 - δ) * x'.1) := by ring
+  simp only [adjF, cmb, smul_eq_mul, e]
+  refine ⟨by nlinarith, fun hne => ?_⟩
+  have hne' : x.1 ≠ x'.1 := fun he => hne (Subtype.ext he)
+  have hfs := hf.2 x.2 x'.2 hne' h0 (by linarith : (0 : ℝ) < 1 - θ) (by ring)
+  simp only [smul_eq_mul] at hfs
+  nlinarith
+
+theorem full_a48 : Assumption48 (convex_Icc 0 K) (fullΓ K) := fun _ y _ y' _ _ _ h0 h1 =>
+  mem_fullΓ _ (cmb (convex_Icc 0 K) h0 h1 y y')
+
+/-- The hypotheses of Exercise 5.9b. -/
+structure AdjHyp (f c : ℝ → ℝ) (p δ β K : ℝ) : Prop where
+  p_pos : 0 < p
+  δ_pos : 0 < δ
+  δ_lt : δ < 1
+  β_pos : 0 < β
+  β_lt : β < 1
+  K_pos : 0 < K
+  f_cont : ContinuousOn f (Icc 0 K)
+  f_concave : StrictConcaveOn ℝ (Icc 0 K) f
+  c_cont : Continuous c
+  c_convex : ConvexOn ℝ univ c
+
+theorem AdjHyp.h43 (h : AdjHyp f c p δ β K) : Assumption43 (fullΓ K) :=
+  full_assumption43 h.K_pos.le
+
+theorem AdjHyp.h44 (h : AdjHyp f c p δ β K) : Assumption44 (fullΓ K) (adjF f c p δ K) β :=
+  adj_assumption44 h.β_pos h.β_lt h.f_cont h.c_cont
+
+/-- **Exercise 5.9b.** `v` is strictly concave and the policy is a continuous function. -/
+theorem ex_5_9b [Nonempty (Icc (0 : ℝ) K)] (h : AdjHyp f c p δ β K)
+    {v : Icc (0 : ℝ) K →ᵇ ℝ}
+    (hv : bellman h.h43 h.h44 v = v) :
+    IsStrictConcaveS (convex_Icc 0 K) v ∧ UniqueArgmax (fullΓ K) (obj (adjF f c p δ K) β v) ∧
+      Continuous (argmaxFn (fullΓ K) (obj (adjF f c p δ K) β v)) := by
+  obtain ⟨h1, h2, -, h4⟩ := theorem_4_8 h.h43 h.h44 (adj_a47 h.p_pos h.f_concave h.c_convex)
+    full_a48 hv
+  exact ⟨h1, h2, h4⟩
+
+/-- **Exercise 5.9b.** The policy is nondecreasing. -/
+theorem ex_5_9b_mono [Nonempty (Icc (0 : ℝ) K)] (h : AdjHyp f c p δ β K)
+    {v : Icc (0 : ℝ) K →ᵇ ℝ}
+    (hv : bellman h.h43 h.h44 v = v) :
+    Monotone (argmaxFn (fullΓ K) (obj (adjF f c p δ K) β v)) := by
+  obtain ⟨-, hUA, -⟩ := ex_5_9b h hv
+  intro k k' hkk'
+  set g := argmaxFn (fullΓ K) (obj (adjF f c p δ K) β v)
+  by_contra hlt
+  push Not at hlt
+  have hk : k.1 ≤ k'.1 := hkk'
+  have hlt' : (g k').1 < (g k).1 := hlt
+  -- swapping the two choices helps by convexity of `c`, contradicting uniqueness
+  have e1 := hUA.lt_of_ne (mem_fullΓ k (g k')) hlt.ne
+  have e2 := hUA.lt_of_ne (mem_fullΓ k' (g k)) hlt.ne'
+  have hex := concave_exchange (φ := fun z => -c z) (s := univ) h.c_convex.neg
+    (p := (g k').1 - (1 - δ) * k'.1) (q := (g k').1 - (1 - δ) * k.1)
+    (δ := (g k).1 - (g k').1) (mem_univ _) (mem_univ _)
+    (by nlinarith [h.δ_lt]) (by linarith)
+  simp only [obj, adjF] at e1 e2 hex
+  rw [show (g k').1 - (1 - δ) * k.1 + ((g k).1 - (g k').1) = (g k).1 - (1 - δ) * k.1 by ring,
+    show (g k').1 - (1 - δ) * k'.1 + ((g k).1 - (g k').1) = (g k).1 - (1 - δ) * k'.1 by ring]
+    at hex
+  linarith
+
+/-- **Exercise 5.9b.** `g(k') − g(k) ≤ (1 − δ)(k' − k)`: gross investment `g(k) − (1 − δ)k`
+falls as capital rises. -/
+theorem ex_5_9b_slope [Nonempty (Icc (0 : ℝ) K)] (h : AdjHyp f c p δ β K)
+    {v : Icc (0 : ℝ) K →ᵇ ℝ}
+    (hv : bellman h.h43 h.h44 v = v) {k k' : Icc (0 : ℝ) K} (hkk' : k ≤ k') :
+    (argmaxFn (fullΓ K) (obj (adjF f c p δ K) β v) k').1 -
+        (argmaxFn (fullΓ K) (obj (adjF f c p δ K) β v) k).1 ≤ (1 - δ) * (k'.1 - k.1) := by
+  obtain ⟨hvs, hUA, -⟩ := ex_5_9b h hv
+  have hvc := concaveOn_liftR hvs
+  set g := argmaxFn (fullΓ K) (obj (adjF f c p δ K) β v)
+  have hk : k.1 ≤ k'.1 := hkk'
+  have hgm := ex_5_9b_mono h hv hkk'
+  have hgm' : (g k).1 ≤ (g k').1 := hgm
+  by_contra hgt
+  push Not at hgt
+  set i := (g k).1 - (1 - δ) * k.1 with hi_def
+  set i' := (g k').1 - (1 - δ) * k'.1 with hi'_def
+  have hii : i < i' := by simp only [i, i']; linarith
+  -- the exchanged choices `y₁ = i' + (1 − δ)k` at `k` and `y₂ = i + (1 − δ)k'` at `k'`
+  have hy₁ : i' + (1 - δ) * k.1 ∈ Icc (0 : ℝ) K :=
+    ⟨by simp only [i']; nlinarith [(g k).2.1, h.δ_lt], by simp only [i']; nlinarith [(g k').2.2,
+      h.δ_lt]⟩
+  have hy₂ : i + (1 - δ) * k'.1 ∈ Icc (0 : ℝ) K :=
+    ⟨by simp only [i]; nlinarith [(g k).2.1, h.δ_lt], by simp only [i]; nlinarith [(g k').2.2,
+      h.δ_lt]⟩
+  have hne₁ : (⟨_, hy₁⟩ : Icc (0 : ℝ) K) ≠ g k := fun he => by
+    have := congrArg Subtype.val he; simp only at this; linarith
+  have hne₂ : (⟨_, hy₂⟩ : Icc (0 : ℝ) K) ≠ g k' := fun he => by
+    have := congrArg Subtype.val he; simp only at this; linarith
+  have e1 := hUA.lt_of_ne (mem_fullΓ k _) hne₁
+  have e2 := hUA.lt_of_ne (mem_fullΓ k' _) hne₂
+  -- concavity of `v`: `v(gₖ) + v(gₖ') ≤ v(y₁) + v(y₂)`
+  have hex := concave_exchange hvc (p := (g k).1) (q := i' + (1 - δ) * k.1)
+    (δ := (1 - δ) * (k'.1 - k.1)) (g k).2 (by
+      rw [show i' + (1 - δ) * k.1 + (1 - δ) * (k'.1 - k.1) = (g k').1 by simp only [i']; ring]
+      exact (g k').2) (by simp only [i, i'] at hii ⊢; linarith) (by nlinarith [h.δ_lt])
+  rw [show i' + (1 - δ) * k.1 + (1 - δ) * (k'.1 - k.1) = (g k').1 by simp only [i']; ring,
+    show (g k).1 + (1 - δ) * (k'.1 - k.1) = i + (1 - δ) * k'.1 by simp only [i]; ring,
+    liftR_of_mem v (g k).2, liftR_of_mem v (g k').2, liftR_of_mem v hy₁,
+    liftR_of_mem v hy₂] at hex
+  simp only [Subtype.coe_eta] at hex
+  simp only [obj, adjF] at e1 e2
+  have r1 : i' + (1 - δ) * k.1 - (1 - δ) * k.1 = i' := by ring
+  have r2 : i + (1 - δ) * k'.1 - (1 - δ) * k'.1 = i := by ring
+  rw [r1] at e1
+  rw [r2] at e2
+  have hβ := h.β_pos
+  nlinarith
+
+/-- **Exercise 5.9b (envelope condition).** At an interior `k₀`,
+`v'(k₀) = pf'(k₀) + (1 − δ)c'(g(k₀) − (1 − δ)k₀)`. -/
+theorem ex_5_9b_envelope [Nonempty (Icc (0 : ℝ) K)] (h : AdjHyp f c p δ β K)
+    {v : Icc (0 : ℝ) K →ᵇ ℝ}
+    (hv : bellman h.h43 h.h44 v = v) {k₀ : Icc (0 : ℝ) K} (hk₀ : k₀.1 ∈ Ioo 0 K) {f' c' : ℝ}
+    (hf' : HasDerivAt f f' k₀.1)
+    (hc' : HasDerivAt c c' ((argmaxFn (fullΓ K) (obj (adjF f c p δ K) β v) k₀).1 -
+      (1 - δ) * k₀.1)) :
+    HasDerivAt (liftR K v) (p * f' + (1 - δ) * c') k₀.1 := by
+  obtain ⟨hvs, hUA, -⟩ := ex_5_9b h hv
+  set g₀ := argmaxFn (fullΓ K) (obj (adjF f c p δ K) β v) k₀
+  have hX : Icc (0 : ℝ) K ∈ 𝓝 k₀.1 := Icc_mem_nhds hk₀.1 hk₀.2
+  set W : ℝ → ℝ := fun x => p * f x - c (g₀.1 - (1 - δ) * x) + β * v g₀
+  have hW : HasDerivAt W (p * f' + (1 - δ) * c') k₀.1 := by
+    have h2 : HasDerivAt (fun x => p * f x - c (g₀.1 - (1 - δ) * x) + β * v g₀)
+        (p * f' - c' * (0 - (1 - δ) * 1)) k₀.1 :=
+      ((hf'.const_mul p).sub (hc'.comp k₀.1 ((hasDerivAt_const k₀.1 g₀.1).sub
+        ((hasDerivAt_id' k₀.1).const_mul (1 - δ))))).add_const (β * v g₀)
+    convert h2 using 1
+    ring
+  have hvx : ∀ x, v x = maxValue (obj (adjF f c p δ K) β v) (fullΓ K) x := fun x => by
+    rw [← bellman_apply h.h43 h.h44, hv]
+  have heq : W k₀.1 = liftR K v k₀.1 := by
+    rw [liftR_of_mem v k₀.2, Subtype.coe_eta, hvx k₀]
+    exact (hUA.argmaxFn_mem k₀).2
+  have hle : ∀ᶠ x in 𝓝 k₀.1, W x ≤ liftR K v x := by
+    filter_upwards [hX] with x hx
+    rw [liftR_of_mem v hx, hvx]
+    exact le_maxValue (x := ⟨x, hx⟩) (z := g₀) (continuousOn_obj h.h44 v.continuous)
+      (h.h43.compact _) (mem_fullΓ _ g₀)
+  have := (theorem_4_10 (concaveOn_liftR hvs) hX hW.hasFDerivAt heq hle).hasDerivAt
+  simpa using this
+
+/-- **Exercise 5.9b (first-order condition).** At an interior `g(k)`,
+`c'(g(k) − (1 − δ)k) = βv'(g(k))`. -/
+theorem ex_5_9b_foc [Nonempty (Icc (0 : ℝ) K)] (h : AdjHyp f c p δ β K)
+    {v : Icc (0 : ℝ) K →ᵇ ℝ}
+    (hv : bellman h.h43 h.h44 v = v) {k : Icc (0 : ℝ) K}
+    (hg : (argmaxFn (fullΓ K) (obj (adjF f c p δ K) β v) k).1 ∈ Ioo 0 K) {c' v' : ℝ}
+    (hc' : HasDerivAt c c' ((argmaxFn (fullΓ K) (obj (adjF f c p δ K) β v) k).1 -
+      (1 - δ) * k.1))
+    (hv' : HasDerivAt (liftR K v) v' (argmaxFn (fullΓ K) (obj (adjF f c p δ K) β v) k).1) :
+    c' = β * v' := by
+  obtain ⟨-, hUA, -⟩ := ex_5_9b h hv
+  set g₀ := argmaxFn (fullΓ K) (obj (adjF f c p δ K) β v) k
+  set Φ : ℝ → ℝ := fun y => -c (y - (1 - δ) * k.1) + β * liftR K v y
+  have hΦ : HasDerivAt Φ (-(c' * 1) + β * v') g₀.1 :=
+    (hc'.comp g₀.1 ((hasDerivAt_id' g₀.1).sub_const ((1 - δ) * k.1))).neg.add
+      (hv'.const_mul β)
+  have hloc : IsLocalMax Φ g₀.1 := by
+    filter_upwards [Icc_mem_nhds hg.1 hg.2] with y hy
+    have hmem := (hUA.argmaxFn_mem k)
+    have hle := le_maxValue (continuousOn_obj h.h44 v.continuous) (h.h43.compact k)
+      (mem_fullΓ k ⟨y, hy⟩)
+    rw [← hmem.2] at hle
+    simp only [obj, adjF, Φ, liftR_of_mem v hy, liftR_of_mem v g₀.2, Subtype.coe_eta] at hle ⊢
+    linarith
+  have := hloc.hasDerivAt_eq_zero hΦ
+  linarith
+
+/-- **Exercise 5.9b (Euler equation).** With `g(k)` interior and the derivatives below,
+`c'(g(k) − (1 − δ)k) = β[pf'(g(k)) + (1 − δ)c'(g(g(k)) − (1 − δ)g(k))]`. -/
+theorem ex_5_9b_euler [Nonempty (Icc (0 : ℝ) K)] (h : AdjHyp f c p δ β K)
+    {v : Icc (0 : ℝ) K →ᵇ ℝ}
+    (hv : bellman h.h43 h.h44 v = v) {k : Icc (0 : ℝ) K}
+    (hg : (argmaxFn (fullΓ K) (obj (adjF f c p δ K) β v) k).1 ∈ Ioo 0 K) {f' c₀ c₁ : ℝ}
+    (hf' : HasDerivAt f f' (argmaxFn (fullΓ K) (obj (adjF f c p δ K) β v) k).1)
+    (hc₀ : HasDerivAt c c₀ ((argmaxFn (fullΓ K) (obj (adjF f c p δ K) β v) k).1 -
+      (1 - δ) * k.1))
+    (hc₁ : HasDerivAt c c₁ ((argmaxFn (fullΓ K) (obj (adjF f c p δ K) β v)
+      (argmaxFn (fullΓ K) (obj (adjF f c p δ K) β v) k)).1 -
+      (1 - δ) * (argmaxFn (fullΓ K) (obj (adjF f c p δ K) β v) k).1)) :
+    c₀ = β * (p * f' + (1 - δ) * c₁) :=
+  ex_5_9b_foc h hv hg hc₀ (ex_5_9b_envelope h hv hg hf' hc₁)
+
+/-- **Exercise 5.9b (steady state).** At an interior steady state `g(k*) = k*`,
+`c'(δk*)(1 − β(1 − δ)) = βpf'(k*)`. -/
+theorem ex_5_9b_steady [Nonempty (Icc (0 : ℝ) K)] (h : AdjHyp f c p δ β K)
+    {v : Icc (0 : ℝ) K →ᵇ ℝ}
+    (hv : bellman h.h43 h.h44 v = v) {k : Icc (0 : ℝ) K}
+    (hss : argmaxFn (fullΓ K) (obj (adjF f c p δ K) β v) k = k) (hk : k.1 ∈ Ioo 0 K)
+    {f' c' : ℝ} (hf' : HasDerivAt f f' k.1) (hc' : HasDerivAt c c' (δ * k.1)) :
+    c' * (1 - β * (1 - δ)) = β * p * f' := by
+  have e : (argmaxFn (fullΓ K) (obj (adjF f c p δ K) β v) k).1 - (1 - δ) * k.1 = δ * k.1 := by
+    rw [hss]; ring
+  have hc'' : HasDerivAt c c' ((argmaxFn (fullΓ K) (obj (adjF f c p δ K) β v) k).1 -
+      (1 - δ) * k.1) := e ▸ hc'
+  have e2 : k.1 - (1 - δ) * k.1 = δ * k.1 := by ring
+  have := ex_5_9b_euler h hv (k := k) (by rw [hss]; exact hk) (by rw [hss]; exact hf') hc''
+    (by rw [hss, hss, e2]; exact hc')
+  linarith
+
+/-! ### Exercise 5.9c: short-run profits -/
+
+/-- `Π(k) = sup_{l ≥ 0} [pF(k, l) − wl]`. -/
+noncomputable def profitPi (F : ℝ → ℝ → ℝ) (p w k : ℝ) : ℝ :=
+  sSup ((fun l => p * F k l - w * l) '' Ici 0)
+
+variable {F : ℝ → ℝ → ℝ} {w : ℝ}
+
+/-- `Π(k)` equals the profit at a profit-maximizing labour input. -/
+theorem profitPi_eq {k l : ℝ} (hl : 0 ≤ l)
+    (hmax : ∀ l', 0 ≤ l' → p * F k l' - w * l' ≤ p * F k l - w * l) :
+    profitPi F p w k = p * F k l - w * l :=
+  le_antisymm (csSup_le ⟨_, 0, mem_Ici.2 le_rfl, rfl⟩
+    (by rintro _ ⟨l', hl', rfl⟩; exact hmax l' hl'))
+    (le_csSup ⟨_, by rintro _ ⟨l', hl', rfl⟩; exact hmax l' hl'⟩ ⟨l, hl, rfl⟩)
+
+/-- **Exercise 5.9c.** Labour demand exists if `F(k, ·)` is continuous with `F(k, l)/l → 0`. -/
+theorem labor_demand_exists {k : ℝ} (hw : 0 < w) (hc : ContinuousOn (F k) (Ici 0))
+    (hsub : Tendsto (fun l => F k l / l) atTop (𝓝 0)) :
+    ∃ l, 0 ≤ l ∧ ∀ l', 0 ≤ l' → p * F k l' - w * l' ≤ p * F k l - w * l := by
+  have := exists_max_sublinear (g := fun l => p * F k l) (continuousOn_const.mul hc)
+    (by simpa [mul_div_assoc] using hsub.const_mul p) hw
+  simpa using this
+
+/-- **Exercise 5.9c.** Labour demand is unique if `F(k, ·)` is strictly concave. -/
+theorem labor_demand_unique {k l₁ l₂ : ℝ} (hp : 0 < p) (hF : StrictConcaveOn ℝ (Ici 0) (F k))
+    (h₁ : 0 ≤ l₁) (h₂ : 0 ≤ l₂)
+    (hm₁ : ∀ l', 0 ≤ l' → p * F k l' - w * l' ≤ p * F k l₁ - w * l₁)
+    (hm₂ : ∀ l', 0 ≤ l' → p * F k l' - w * l' ≤ p * F k l₂ - w * l₂) : l₁ = l₂ := by
+  by_contra hne
+  have hs := hF.2 (mem_Ici.2 h₁) (mem_Ici.2 h₂) hne (by norm_num : (0 : ℝ) < 1 / 2)
+    (by norm_num : (0 : ℝ) < 1 / 2) (by norm_num)
+  simp only [smul_eq_mul] at hs
+  have e1 := hm₁ (1 / 2 * l₁ + 1 / 2 * l₂) (by positivity)
+  have e2 := hm₂ l₁ h₁
+  have e3 := hm₁ l₂ h₂
+  nlinarith
+
+/-- **Exercise 5.9c.** `Π(0) = 0` if `F(0, l) = 0` for all `l` and `w ≥ 0`. -/
+theorem profitPi_zero (hw : 0 ≤ w) (hF0 : ∀ l, F 0 l = 0) : profitPi F p w 0 = 0 := by
+  have := profitPi_eq (F := F) (p := p) (w := w) (k := 0) (l := 0) le_rfl fun l' hl' => by
+    simp only [hF0, mul_zero, zero_sub, sub_zero]; nlinarith
+  simpa [hF0] using this
+
+/-- **Exercise 5.9c.** `Π` is nondecreasing if `F` is nondecreasing in `k` and `p ≥ 0`. -/
+theorem profitPi_mono (hp : 0 ≤ p) (hF : ∀ l, 0 ≤ l → Monotone fun k => F k l)
+    (hmax : ∀ k, 0 ≤ k → ∃ l, 0 ≤ l ∧ ∀ l', 0 ≤ l' → p * F k l' - w * l' ≤ p * F k l - w * l)
+    {k k' : ℝ} (hk : 0 ≤ k) (hkk' : k ≤ k') : profitPi F p w k ≤ profitPi F p w k' := by
+  obtain ⟨l, hl, hlmax⟩ := hmax k hk
+  obtain ⟨l', hl', hl'max⟩ := hmax k' (hk.trans hkk')
+  rw [profitPi_eq hl hlmax, profitPi_eq hl' hl'max]
+  have := hl'max l hl
+  have := mul_le_mul_of_nonneg_left (hF l hl hkk') hp
+  linarith
+
+/-- **Exercise 5.9c.** `Π` is concave if `F` is jointly concave and `p ≥ 0`. -/
+theorem profitPi_concave (hp : 0 ≤ p) (hF : ConcaveOn ℝ (Set.Ici 0 ×ˢ Set.Ici 0) fun z => F z.1 z.2)
+    (hmax : ∀ k, 0 ≤ k → ∃ l, 0 ≤ l ∧ ∀ l', 0 ≤ l' → p * F k l' - w * l' ≤ p * F k l - w * l) :
+    ConcaveOn ℝ (Ici 0) (profitPi F p w) := by
+  refine ⟨convex_Ici 0, fun k hk k' hk' s t hs ht hst => ?_⟩
+  obtain ⟨l, hl, hlmax⟩ := hmax k hk
+  obtain ⟨l', hl', hl'max⟩ := hmax k' hk'
+  obtain ⟨lθ, hlθ, hlθmax⟩ := hmax (s • k + t • k') ((convex_Ici 0) hk hk' hs ht hst)
+  rw [profitPi_eq hl hlmax, profitPi_eq hl' hl'max, profitPi_eq hlθ hlθmax]
+  have hFc := hF.2 (show (k, l) ∈ Ici (0 : ℝ) ×ˢ Set.Ici 0 from ⟨hk, hl⟩)
+    (show (k', l') ∈ Ici (0 : ℝ) ×ˢ Set.Ici 0 from ⟨hk', hl'⟩) hs ht hst
+  simp only [Prod.smul_mk, Prod.mk_add_mk, smul_eq_mul] at hFc ⊢
+  have hle := hlθmax (s * l + t * l') (by positivity)
+  simp only [smul_eq_mul] at hle
+  have := mul_le_mul_of_nonneg_left hFc hp
+  nlinarith
+
+/-- **Exercise 5.9c.** `Π` is strictly concave if `F` is jointly strictly concave and `p > 0`. -/
+theorem profitPi_strictConcave (hp : 0 < p)
+    (hF : StrictConcaveOn ℝ (Set.Ici 0 ×ˢ Set.Ici 0) fun z => F z.1 z.2)
+    (hmax : ∀ k, 0 ≤ k → ∃ l, 0 ≤ l ∧ ∀ l', 0 ≤ l' → p * F k l' - w * l' ≤ p * F k l - w * l) :
+    StrictConcaveOn ℝ (Ici 0) (profitPi F p w) := by
+  refine ⟨convex_Ici 0, fun k hk k' hk' hne s t hs ht hst => ?_⟩
+  obtain ⟨l, hl, hlmax⟩ := hmax k hk
+  obtain ⟨l', hl', hl'max⟩ := hmax k' hk'
+  obtain ⟨lθ, hlθ, hlθmax⟩ := hmax (s • k + t • k') ((convex_Ici 0) hk hk' hs.le ht.le hst)
+  rw [profitPi_eq hl hlmax, profitPi_eq hl' hl'max, profitPi_eq hlθ hlθmax]
+  have hne' : (k, l) ≠ (k', l') := fun he => hne (congrArg Prod.fst he)
+  have hFc := hF.2 (show (k, l) ∈ Ici (0 : ℝ) ×ˢ Set.Ici 0 from ⟨hk, hl⟩)
+    (show (k', l') ∈ Ici (0 : ℝ) ×ˢ Set.Ici 0 from ⟨hk', hl'⟩) hne' hs ht hst
+  simp only [Prod.smul_mk, Prod.mk_add_mk, smul_eq_mul] at hFc ⊢
+  have hle := hlθmax (s * l + t * l') (by positivity)
+  simp only [smul_eq_mul] at hle
+  have := mul_lt_mul_of_pos_left hFc hp
+  nlinarith
+
+/-- **Exercise 5.9c (envelope).** If `Π` is concave and `F(·, l₀)` is differentiable at an
+interior `k₀`, where `l₀` is the labour demand, then `Π'(k₀) = pF_k(k₀, l₀)`. -/
+theorem profitPi_deriv {k₀ l₀ Fk : ℝ} (hk₀ : 0 < k₀) (hl₀ : 0 ≤ l₀)
+    (hconc : ConcaveOn ℝ (Ici 0) (profitPi F p w))
+    (hmax : ∀ k, 0 ≤ k → ∃ l, 0 ≤ l ∧ ∀ l', 0 ≤ l' → p * F k l' - w * l' ≤ p * F k l - w * l)
+    (hl₀max : ∀ l', 0 ≤ l' → p * F k₀ l' - w * l' ≤ p * F k₀ l₀ - w * l₀)
+    (hFk : HasDerivAt (fun k => F k l₀) Fk k₀) :
+    HasDerivAt (profitPi F p w) (p * Fk) k₀ := by
+  set W : ℝ → ℝ := fun k => p * F k l₀ - w * l₀
+  have hW : HasDerivAt W (p * Fk) k₀ := (hFk.const_mul p).sub_const _
+  have heq : W k₀ = profitPi F p w k₀ := (profitPi_eq hl₀ hl₀max).symm
+  have hle : ∀ᶠ k in 𝓝 k₀, W k ≤ profitPi F p w k := by
+    filter_upwards [Ici_mem_nhds hk₀] with k hk
+    obtain ⟨l, hl, hlmax⟩ := hmax k hk
+    rw [profitPi_eq hl hlmax]
+    exact hlmax l₀ hl₀
+  have := (theorem_4_10 hconc (Ici_mem_nhds hk₀) hW.hasFDerivAt heq hle).hasDerivAt
+  simpa using this
+
+end StokeyLucasPrescott.DeterministicApplications
+
+/-
+Copyright (c) 2026 Robert Kirkby. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Robert Kirkby
+-/
+
+/-!
+# Investment with constant returns
+
+SLP §5.10, pp. 113–114: output `F(k, y)` depends on current and end-of-period capital, `F` has
+constant returns, and `(1 − δ)k ≤ y ≤ (1 + α)k`. The firm solves
+`v(k) = max_{y ∈ Γ(k)} {pF(k, y) − q[y − (1 − δ)k] + βv(y)}` on `k ≥ 0`.
+
+With `β(1 + α) < 1`, Assumptions 4.10–4.11 hold (`crs_assumption410`, `crs_assumption411`); this
+is what must be assumed about `α` and `β`.
+
+* **Exercise 5.10a** (`ex_5_10a`): `v*` is homogeneous of degree one.
+* **Exercise 5.10b**: `solvesFE_rescale`: if `v` solves the functional equation, so does
+  `k ↦ v(ak)/a` for every `a > 0`. `ex_5_10b`: every solution with `|v(k)| ≤ Ck` is `v*`, hence
+  homogeneous of degree one. (Some growth bound is needed: Theorem 4.3 is what rules out other
+  solutions.)
+* **Exercise 5.10c** (`ex_5_10c`): the solution is `v(k) = Ak` with
+  `A = max_{θ ∈ [1 − δ, 1 + α]} [pF(1, θ) − q(θ − (1 − δ)) + βAθ]`; the policy is `g(k) = θk` with
+  `θ` the maximizer, unique when `F(1, ·)` is strictly concave (which homogeneity and strict
+  quasi-concavity give, Exercise 4.8b); `v = v*`; and the plan `k_t = θᵗk₀` is optimal.
+-/
+
+open Set Filter Topology
+
+namespace StokeyLucasPrescott.DeterministicApplications
+
+/-- The state space `[0, ∞)` of capital. -/
+abbrev CapStock := ↥(Ici (0 : ℝ))
+
+theorem isCone_Ici : IsCone (Ici (0 : ℝ)) := fun x hx a ha => by
+  simp only [smul_eq_mul, Set.mem_Ici] at hx ⊢; exact mul_nonneg ha hx
+
+variable {Fk : ℝ → ℝ → ℝ} {p q δ α β : ℝ}
+
+/-- `Γ(k) = [(1 − δ)k, (1 + α)k]`. -/
+def crsΓ (δ α : ℝ) (k : CapStock) : Set CapStock := {y | (1 - δ) * k.1 ≤ y.1 ∧ y.1 ≤ (1 + α) * k.1}
+
+/-- The return `pF(k, y) − q[y − (1 − δ)k]`. -/
+def crsH (Fk : ℝ → ℝ → ℝ) (p q δ : ℝ) (pr : CapStock × CapStock) : ℝ :=
+  p * Fk pr.1.1 pr.2.1 - q * (pr.2.1 - (1 - δ) * pr.1.1)
+
+/-- The hypotheses of SLP §5.10 used here. -/
+structure CRSInvHyp (Fk : ℝ → ℝ → ℝ) (p q δ α β : ℝ) : Prop where
+  δ_pos : 0 < δ
+  δ_lt : δ < 1
+  α_pos : 0 < α
+  β_pos : 0 < β
+  discount : β * (1 + α) < 1
+  p_nonneg : 0 ≤ p
+  q_nonneg : 0 ≤ q
+  F_cont : ContinuousOn (fun z : ℝ × ℝ => Fk z.1 z.2) (Set.Ici 0 ×ˢ Set.Ici 0)
+  F_hom : ∀ a k y, 0 ≤ a → 0 ≤ k → 0 ≤ y → Fk (a * k) (a * y) = a * Fk k y
+
+theorem CRSInvHyp.β_lt (h : CRSInvHyp Fk p q δ α β) : β < 1 := by
+  nlinarith [h.discount, h.β_pos, h.α_pos]
+
+/-- Assumption 4.10 holds with growth factor `1 + α`. -/
+theorem crs_assumption410 (h : CRSInvHyp Fk p q δ α β) :
+    Assumption410 isCone_Ici (crsΓ δ α) β (1 + α) := by
+  have hemb := (isClosed_Ici (a := (0 : ℝ))).isClosedEmbedding_subtypeVal
+  have hδ := h.δ_lt
+  have hδ0 := h.δ_pos
+  have hα := h.α_pos
+  have hself : ∀ k : CapStock, k ∈ crsΓ δ α k := fun k =>
+    ⟨by nlinarith [k.2.out, h.δ_pos], by nlinarith [k.2.out]⟩
+  refine ⟨convex_Ici 0, fun k => ⟨k, hself k⟩, fun k => hemb.isCompact_preimage isCompact_Icc,
+    fun k => ⟨⟨k, hself k⟩, fun y hy ks hks => ?_⟩,
+    fun k => ⟨⟨k, hself k⟩, fun ks hks ys hys => ?_⟩,
+    fun k y hy a ha => ?_, by linarith, by linarith [h.discount], fun k y hy => ?_⟩
+  · -- l.h.c.: `yₙ = max{(1 − δ)kₙ, min{y, (1 + α)kₙ}}`
+    have hval := (continuous_subtype_val.tendsto k).comp hks
+    refine ⟨0, fun n => ⟨max ((1 - δ) * (ks n).1) (min y.1 ((1 + α) * (ks n).1)),
+      le_max_of_le_left (mul_nonneg (by linarith) (ks n).2.out)⟩,
+      fun n _ => ⟨le_max_left _ _, max_le (mul_le_mul_of_nonneg_right (by linarith)
+        (ks n).2.out) (min_le_right _ _)⟩, ?_⟩
+    have hlim := (hval.const_mul (1 - δ)).max ((tendsto_const_nhds (x := y.1)).min
+      (hval.const_mul (1 + α)))
+    rw [min_eq_left hy.2, max_eq_right hy.1] at hlim
+    exact tendsto_subtype_rng.2 hlim
+  · -- u.h.c.: the `yₙ` stay in a compact set
+    have hval := (continuous_subtype_val.tendsto k).comp hks
+    obtain ⟨B, hB⟩ := hval.bddAbove_range
+    have hK : ∀ n, ys n ∈ Subtype.val ⁻¹' Icc (0 : ℝ) ((1 + α) * B) := fun n =>
+      ⟨(ys n).2, (hys n).2.trans (mul_le_mul_of_nonneg_left
+        (show (ks n).1 ≤ B from hB ⟨n, rfl⟩) (by linarith))⟩
+    obtain ⟨y, -, φ, hφ, hlim⟩ := (hemb.isCompact_preimage isCompact_Icc).tendsto_subseq hK
+    have hyl := (continuous_subtype_val.tendsto y).comp hlim
+    have hkl := hval.comp hφ.tendsto_atTop
+    refine ⟨y, ⟨?_, ?_⟩, φ, hφ, hlim⟩
+    · exact le_of_tendsto_of_tendsto (hkl.const_mul (1 - δ)) hyl
+        (Eventually.of_forall fun n => (hys (φ n)).1)
+    · exact le_of_tendsto_of_tendsto hyl (hkl.const_mul (1 + α))
+        (Eventually.of_forall fun n => (hys (φ n)).2)
+  · -- the graph is a cone
+    have h1 := hy.1
+    have h2 := hy.2
+    simp only [csmul, smul_eq_mul]
+    exact ⟨by nlinarith, by nlinarith⟩
+  · rw [Real.norm_eq_abs, Real.norm_eq_abs, abs_of_nonneg y.2.out, abs_of_nonneg k.2.out]
+    exact hy.2
+
+/-- On the graph, `|F(k, y)| ≤ Ck`. -/
+theorem crs_F_bound (h : CRSInvHyp Fk p q δ α β) :
+    ∃ C, 0 ≤ C ∧ ∀ k : CapStock, ∀ y ∈ crsΓ δ α k, |Fk k.1 y.1| ≤ C * k.1 := by
+  have hδ := h.δ_lt
+  have hδ0 := h.δ_pos
+  have hα := h.α_pos
+  have hc : ContinuousOn (Fk 1) (Icc (1 - δ) (1 + α)) :=
+    h.F_cont.comp (continuous_const.prodMk continuous_id).continuousOn fun θ hθ =>
+      ⟨mem_Ici.2 zero_le_one, mem_Ici.2 (show (0 : ℝ) ≤ θ by linarith [hθ.1])⟩
+  obtain ⟨C, hC⟩ := isCompact_Icc.exists_bound_of_continuousOn hc
+  have hC0 : 0 ≤ C := (norm_nonneg _).trans (hC 1 ⟨by linarith, by linarith⟩)
+  refine ⟨C, hC0, fun k y hy => ?_⟩
+  rcases eq_or_lt_of_le k.2.out with hk0 | hkpos
+  · -- `k = 0` forces `y = 0`, and `F(0, 0) = 0`
+    have hy0 : y.1 = 0 := le_antisymm (by have := hy.2; rw [← hk0] at this; linarith) y.2.out
+    have hF00 : Fk 0 0 = 0 := by
+      have := h.F_hom 0 0 0 le_rfl le_rfl le_rfl
+      simpa using this
+    rw [← hk0, hy0, hF00]
+    simp
+  · have hθ : y.1 / k.1 ∈ Icc (1 - δ) (1 + α) :=
+      ⟨(le_div_iff₀ hkpos).2 hy.1, (div_le_iff₀ hkpos).2 hy.2⟩
+    have e : Fk k.1 y.1 = k.1 * Fk 1 (y.1 / k.1) := by
+      have := h.F_hom k.1 1 (y.1 / k.1) hkpos.le zero_le_one (by linarith [hθ.1])
+      rwa [mul_one, mul_div_cancel₀ _ hkpos.ne'] at this
+    rw [e, abs_mul, abs_of_pos hkpos, mul_comm]
+    exact mul_le_mul_of_nonneg_right (by simpa [Real.norm_eq_abs] using hC _ hθ) hkpos.le
+
+/-- Assumption 4.11 holds. -/
+theorem crs_assumption411 (h : CRSInvHyp Fk p q δ α β) :
+    ∃ B, Assumption411 isCone_Ici (crsΓ δ α) (crsH Fk p q δ) β B := by
+  obtain ⟨C, hC0, hC⟩ := crs_F_bound h
+  have hδ := h.δ_lt
+  refine ⟨p * C + q + 1, h.β_pos, h.β_lt, ?_, fun k y hy a ha => ?_,
+    by nlinarith [h.p_nonneg, h.q_nonneg], fun k y hy => ?_⟩
+  · have hmaps : MapsTo (fun pr : CapStock × CapStock => (pr.1.1, pr.2.1))
+        (graph (crsΓ δ α)) (Set.Ici 0 ×ˢ Set.Ici 0) := fun pr _ => ⟨pr.1.2, pr.2.2⟩
+    exact (continuousOn_const.mul (h.F_cont.comp ((continuous_subtype_val.comp
+      continuous_fst).prodMk (continuous_subtype_val.comp continuous_snd)).continuousOn
+        hmaps)).sub (continuous_const.mul ((continuous_subtype_val.comp continuous_snd).sub
+          (continuous_const.mul (continuous_subtype_val.comp continuous_fst)))).continuousOn
+  · simp only [crsH, csmul, smul_eq_mul]
+    rw [h.F_hom a k.1 y.1 ha k.2.out y.2.out]
+    ring
+  · have h1 := hC k y hy
+    have hk := k.2.out
+    have hy0 := y.2.out
+    rw [Real.norm_eq_abs, Real.norm_eq_abs, abs_of_nonneg hk, abs_of_nonneg hy0]
+    simp only [crsH]
+    have h2 : |q * (y.1 - (1 - δ) * k.1)| ≤ q * (y.1 + k.1) := by
+      rw [abs_mul, abs_of_nonneg h.q_nonneg]
+      refine mul_le_mul_of_nonneg_left ?_ h.q_nonneg
+      have := mul_nonneg h.δ_pos.le hk
+      rw [abs_le]; constructor <;> nlinarith
+    have h3 : |p * Fk k.1 y.1| ≤ p * C * k.1 := by
+      rw [abs_mul, abs_of_nonneg h.p_nonneg, mul_assoc]
+      exact mul_le_mul_of_nonneg_left h1 h.p_nonneg
+    calc |p * Fk k.1 y.1 - q * (y.1 - (1 - δ) * k.1)|
+        ≤ |p * Fk k.1 y.1| + |q * (y.1 - (1 - δ) * k.1)| := abs_sub _ _
+      _ ≤ p * C * k.1 + q * (y.1 + k.1) := add_le_add h3 h2
+      _ ≤ (p * C + q + 1) * (k.1 + y.1) := by
+          nlinarith [mul_nonneg (mul_nonneg h.p_nonneg hC0) hy0, h.q_nonneg]
+
+/-- **Exercise 5.10a.** `v*` is homogeneous of degree one: `v*(ak) = av*(k)` for `a ≥ 0`. -/
+theorem ex_5_10a (h : CRSInvHyp Fk p q δ α β) (k : CapStock) {a : ℝ} (ha : 0 ≤ a) :
+    vstar (crsΓ δ α) (curryF (crsH Fk p q δ)) β (csmul isCone_Ici ha k) =
+      (a : EReal) * vstar (crsΓ δ α) (curryF (crsH Fk p q δ)) β k := by
+  obtain ⟨B, h411⟩ := crs_assumption411 h
+  obtain ⟨v, hvH, hv⟩ := ex_4_6c_hom (crs_assumption410 h) h411
+  rw [hv]
+  beta_reduce
+  rw [hvH.2.1 k a ha, EReal.coe_mul]
+
+/-- A real solution of the functional equation in max form solves it in `R̄`. -/
+theorem satisfiesFE_of_solvesFE {X : Type*} {Γ : X → Set X} {F : X × X → ℝ} {v : X → ℝ}
+    (hv : SolvesFE Γ F β v) : SatisfiesFE Γ (curryF F) β fun x => (v x : EReal) := by
+  intro x
+  obtain ⟨⟨y, hy, hval⟩, hmax⟩ := hv x
+  change (v x : EReal) = ⨆ y ∈ Γ x, ((curryF F x y : ℝ) : EReal) + (β : EReal) * (v y : EReal)
+  refine le_antisymm ?_ (iSup₂_le fun z hz => ?_)
+  · refine le_trans ?_ (le_biSup (fun z => ((curryF F x z : ℝ) : EReal) +
+      (β : EReal) * (v z : EReal)) hy)
+    rw [hval, curryF, ← EReal.coe_mul, ← EReal.coe_add]
+  · rw [curryF, ← EReal.coe_mul, ← EReal.coe_add]
+    exact EReal.coe_le_coe_iff.2 (hmax z hz)
+
+/-- **Exercise 5.10b.** The functional equation is invariant under rescaling: if `v` solves it,
+so does `k ↦ v(ak)/a` for `a > 0`. -/
+theorem solvesFE_rescale (h : CRSInvHyp Fk p q δ α β) {v : CapStock → ℝ}
+    (hv : SolvesFE (crsΓ δ α) (crsH Fk p q δ) β v) {a : ℝ} (ha : 0 < a) :
+    SolvesFE (crsΓ δ α) (crsH Fk p q δ) β fun k => v (csmul isCone_Ici ha.le k) / a := by
+  have hhom : ∀ (k y : CapStock) (b : ℝ) (hb : 0 ≤ b),
+      crsH Fk p q δ (csmul isCone_Ici hb k, csmul isCone_Ici hb y) = b * crsH Fk p q δ (k, y) :=
+    fun k y b hb => by
+      simp only [crsH, csmul, smul_eq_mul]
+      rw [h.F_hom b k.1 y.1 hb k.2.out y.2.out]; ring
+  have hcone : ∀ (k y : CapStock) (b : ℝ) (hb : 0 ≤ b), y ∈ crsΓ δ α k →
+      csmul isCone_Ici hb y ∈ crsΓ δ α (csmul isCone_Ici hb k) := fun k y b hb hy => by
+    simp only [crsΓ, csmul, smul_eq_mul, mem_ofPred_eq] at hy ⊢
+    exact ⟨by nlinarith [hy.1], by nlinarith [hy.2]⟩
+  have hinv : ∀ y : CapStock, csmul isCone_Ici ha.le (csmul isCone_Ici (inv_pos.2 ha).le y) = y :=
+    fun y => Subtype.ext (by simp only [csmul, smul_eq_mul]; field_simp)
+  intro k
+  obtain ⟨⟨y', hy', hval⟩, hmax⟩ := hv (csmul isCone_Ici ha.le k)
+  set y := csmul isCone_Ici (inv_pos.2 ha).le y'
+  have hy : y ∈ crsΓ δ α k := by
+    have := hcone _ y' a⁻¹ (inv_pos.2 ha).le hy'
+    have hk : csmul isCone_Ici (inv_pos.2 ha).le (csmul isCone_Ici ha.le k) = k :=
+      Subtype.ext (by simp only [csmul, smul_eq_mul]; field_simp)
+    rwa [hk] at this
+  refine ⟨⟨y, hy, ?_⟩, fun z hz => ?_⟩
+  · beta_reduce
+    rw [hval, ← hinv y', hhom k y a ha.le, hinv y']
+    field_simp
+  · beta_reduce
+    have := hmax _ (hcone k z a ha.le hz)
+    rw [hhom k z a ha.le] at this
+    rw [le_div_iff₀ ha]
+    have e : (crsH Fk p q δ (k, z) + β * (v (csmul isCone_Ici ha.le z) / a)) * a =
+        a * crsH Fk p q δ (k, z) + β * v (csmul isCone_Ici ha.le z) := by field_simp
+    rw [e]
+    exact this
+
+/-- **Exercise 5.10b.** Every solution of the functional equation with `|v(k)| ≤ Ck` equals
+`v*`, and so is homogeneous of degree one. -/
+theorem ex_5_10b (h : CRSInvHyp Fk p q δ α β) {v : CapStock → ℝ}
+    (hv : SolvesFE (crsΓ δ α) (crsH Fk p q δ) β v) {C : ℝ} (hC : ∀ k : CapStock, |v k| ≤ C * k.1) :
+    (fun k => (v k : EReal)) = vstar (crsΓ δ α) (curryF (crsH Fk p q δ)) β ∧
+      ∀ (k : CapStock) (a : ℝ) (ha : 0 ≤ a), v (csmul isCone_Ici ha k) = a * v k := by
+  obtain ⟨B, h411⟩ := crs_assumption411 h
+  have h410 := crs_assumption410 h
+  obtain ⟨h41, h42⟩ := ex_4_6b h410 h411
+  have hαβ : 0 ≤ (1 + α) * β := mul_nonneg (by linarith [h.α_pos]) h.β_pos.le
+  have hαβ1 : (1 + α) * β < 1 := by linarith [h.discount]
+  have heq : (fun k => (v k : EReal)) = vstar (crsΓ δ α) (curryF (crsH Fk p q δ)) β := by
+    refine theorem_4_3 h.β_pos.le h41 h42 (satisfiesFE_of_solvesFE hv) fun x₀ x hx => ?_
+    have hb : Tendsto (fun n => β ^ n * v (x n)) atTop (𝓝 0) := by
+      refine squeeze_zero_norm (a := fun n => |C| * ‖x₀.1‖ * ((1 + α) * β) ^ n)
+        (fun n => ?_) ?_
+      · have hxn := ex_4_6a h410 hx n
+        rw [Real.norm_eq_abs, abs_mul, abs_of_nonneg (pow_nonneg h.β_pos.le n)]
+        have hvx : |v (x n)| ≤ |C| * ‖(x n).1‖ := by
+          rw [Real.norm_eq_abs, abs_of_nonneg (x n).2.out]
+          exact (hC _).trans (mul_le_mul_of_nonneg_right (le_abs_self C) (x n).2.out)
+        calc β ^ n * |v (x n)| ≤ β ^ n * (|C| * ((1 + α) ^ n * ‖x₀.1‖)) :=
+              mul_le_mul_of_nonneg_left (hvx.trans (mul_le_mul_of_nonneg_left hxn
+                (abs_nonneg C))) (pow_nonneg h.β_pos.le n)
+          _ = |C| * ‖x₀.1‖ * ((1 + α) * β) ^ n := by rw [mul_pow]; ring
+      · simpa using (tendsto_pow_atTop_nhds_zero_of_lt_one hαβ hαβ1).const_mul (|C| * ‖x₀.1‖)
+    simpa only [EReal.coe_mul, EReal.coe_zero] using EReal.tendsto_coe.2 hb
+  refine ⟨heq, fun k a ha => ?_⟩
+  have h1 := congrFun heq (csmul isCone_Ici ha k)
+  have h2 := congrFun heq k
+  rw [ex_5_10a h k ha, ← h2, ← EReal.coe_mul] at h1
+  exact EReal.coe_injective h1
+
+/-- **Exercise 5.10c.** Let `v` be the fixed point of Theorem 4.13 and `A = v(1)`. Then
+`v(k) = Ak`; `A = max_θ [pF(1, θ) − q(θ − (1 − δ)) + βAθ]`, attained at some
+`θ ∈ [1 − δ, 1 + α]`; `y = θk` is optimal at every `k`; `v = v*`; and when `p > 0` and
+`F(1, ·)` is strictly concave on `[1 − δ, 1 + α]`, `θ` is the only optimal growth factor. -/
+theorem ex_5_10c (h : CRSInvHyp Fk p q δ α β) :
+    ∃ v : CapStock → ℝ, ∃ A θ : ℝ, θ ∈ Icc (1 - δ) (1 + α) ∧
+      (∀ k : CapStock, v k = A * k.1) ∧
+      (fun k => (v k : EReal)) = vstar (crsΓ δ α) (curryF (crsH Fk p q δ)) β ∧
+      A = p * Fk 1 θ - q * (θ - (1 - δ)) + β * A * θ ∧
+      (∀ θ' ∈ Icc (1 - δ) (1 + α), p * Fk 1 θ' - q * (θ' - (1 - δ)) + β * A * θ' ≤ A) ∧
+      (0 < p → StrictConcaveOn ℝ (Icc (1 - δ) (1 + α)) (Fk 1) →
+        ∀ θ' ∈ Icc (1 - δ) (1 + α), p * Fk 1 θ' - q * (θ' - (1 - δ)) + β * A * θ' = A →
+          θ' = θ) := by
+  obtain ⟨B, h411⟩ := crs_assumption411 h
+  have h410 := crs_assumption410 h
+  obtain ⟨v, hvH, hv, -, -, hG, -⟩ := theorem_4_13 h410 h411
+  have hδ := h.δ_lt
+  have hα := h.α_pos
+  set one : CapStock := ⟨1, mem_Ici.2 zero_le_one⟩
+  set A := v one
+  have hlin : ∀ k : CapStock, v k = A * k.1 := fun k => by
+    have := hvH.2.1 one k.1 k.2.out
+    have hk : csmul isCone_Ici k.2.out one = k := Subtype.ext (by simp [csmul, one])
+    rw [hk] at this
+    rw [this, mul_comm]
+  -- the maximizer at `k = 1`
+  obtain ⟨y, hy⟩ := (hG one).1
+  have hθ : y.1 ∈ Icc (1 - δ) (1 + α) := by
+    have := hy.1; simp only [crsΓ, one, mul_one, mem_ofPred_eq] at this; exact this
+  have hvx : ∀ x, v x = maxValue (obj (crsH Fk p q δ) β v) (crsΓ δ α) x := fun x =>
+    (congrFun hv x).symm
+  have hFE : ∀ z ∈ crsΓ δ α one, obj (crsH Fk p q δ) β v (one, z) ≤ v one := fun z hz => by
+    rw [hvx one]
+    exact le_maxValue (continuousOn_obj' h411 hvH.1) (h410.compact one) hz
+  have hval : v one = obj (crsH Fk p q δ) β v (one, y) := by rw [hvx one]; exact hy.2.symm
+  have hobj : ∀ z : CapStock, obj (crsH Fk p q δ) β v (one, z) =
+      p * Fk 1 z.1 - q * (z.1 - (1 - δ)) + β * A * z.1 := fun z => by
+    simp only [obj, crsH, one, hlin z, mul_one]; ring
+  refine ⟨v, A, y.1, hθ, hlin, crs_fixed_eq_vstar h410 h411 hvH hv, ?_, fun θ' hθ' => ?_,
+    fun hp hFs θ' hθ' heq => ?_⟩
+  · rw [← hobj]; exact hval
+  · have := hFE ⟨θ', mem_Ici.2 (by linarith [hθ'.1])⟩
+      (by simp only [crsΓ, one, mul_one, mem_ofPred_eq]; exact hθ')
+    rwa [hobj] at this
+  · -- strict concavity of the objective in `θ` makes the maximizer unique
+    by_contra hne
+    have hs := hFs.2 hθ hθ' (Ne.symm hne) (by norm_num : (0 : ℝ) < 1 / 2)
+      (by norm_num : (0 : ℝ) < 1 / 2) (by norm_num)
+    simp only [smul_eq_mul] at hs
+    have hmid : (1 / 2 : ℝ) • y.1 + (1 / 2 : ℝ) • θ' ∈ Icc (1 - δ) (1 + α) :=
+      (convex_Icc _ _) hθ hθ' (by norm_num) (by norm_num) (by norm_num)
+    simp only [smul_eq_mul] at hmid
+    have h1 := hFE ⟨1 / 2 * y.1 + 1 / 2 * θ', mem_Ici.2 (by linarith [hmid.1])⟩
+      (by simp only [crsΓ, one, mul_one, mem_ofPred_eq]; exact hmid)
+    rw [hobj] at h1
+    have h2 : p * Fk 1 y.1 - q * (y.1 - (1 - δ)) + β * A * y.1 = A := by
+      rw [← hobj]; exact hval.symm
+    simp only at h1
+    nlinarith [mul_lt_mul_of_pos_left hs hp]
+
+end StokeyLucasPrescott.DeterministicApplications
+
+/-
+Copyright (c) 2026 Robert Kirkby. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Robert Kirkby
+-/
+
+/-!
+# Recursive preferences
+
+SLP §5.11, pp. 114–116. `L` is the space of bounded sequences `c = (c₀, c₁, …)` in `ℝˡ₊` with the
+sup norm (`Seq l`; on `ℝˡ` Lean's norm is the max norm, equivalent to the book's Euclidean
+norm), and `S = C(L)` is the space of bounded continuous `u : L → ℝ`. `₁c = (c₁, c₂, …)` is the
+shift (`shiftSeq`) and `cⁿ = (c₀, …, cₙ, 0, 0, …)` the truncation (`trunc`).
+
+* **Exercise 5.11a, c** (`ex_5_11a`, `ex_5_11c`): `(Tu)(c) = U(c₀) + βu(₁c)` is a contraction on
+  `S`, and its fixed point is `û(c) = Σ βᵗU(c_t)`; so `û` is bounded (by `M/(1 − β)`) and
+  continuous.
+* **Exercise 5.11b**: `S` is complete (`ex_5_11b_complete`); but `u(cⁿ) → u(c)` fails for some
+  `u ∈ S` (`ex_5_11b_counterexample`: `u(c) = min{1, dist(c, sequences that are eventually 0)}`
+  has `u(1) = 1` and `u(1ⁿ) = 0`). The manual's example `inf_t c_t` is not bounded, so it is not
+  in `S`.
+* **Exercise 5.11d** (`ex_5_11d`): for an aggregator `W` with (W1)–(W3), `T_W u(c) = W[c₀, u(₁c)]`
+  has a unique fixed point `u_W`, with `|u_W(c) − u_W(cⁿ)| ≤ βⁿ⁺¹‖u_W‖ ≤ βⁿ‖u_W‖`; (W4) makes `u_W`
+  increasing (`ex_5_11d_mono`); (W5) makes it concave (`ex_5_11d_concave`). For (W5) monotonicity
+  of `W` is not needed: a nonnegative concave function on `[0, ∞)` is nondecreasing
+  (`monotoneOn_of_concave_nonneg`).
+* **Exercise 5.11e** (`ex_5_11e`): raising `c_{it}` by `h ≥ 0` changes utility at the rate
+  `[∏_{s < t} W_z(c_s, u_W(ₛ₊₁c))] · W_{x_i}(c_t, u_W(ₜ₊₁c))`. The marginal rate of substitution
+  between `c_{it}` and `c_{j,t+k}` is the ratio of two such rates, with the product
+  `∏_{s=t}^{t+k−1} W_z(c_s, u_W(ₛ₊₁c))`; the manual's formula keeps a single `W_z` factor.
+-/
+
+open Set Filter Topology BoundedContinuousFunction
+
+namespace StokeyLucasPrescott.DeterministicApplications
+
+variable {l : ℕ}
+
+/-- The set of bounded sequences in `ℝˡ₊`. -/
+def seqSet (l : ℕ) : Set (ℕ →ᵇ (Fin l → ℝ)) := {c | ∀ t, 0 ≤ c t}
+
+/-- `L`: bounded sequences in `ℝˡ₊`. -/
+abbrev Seq (l : ℕ) := ↥(seqSet l)
+
+theorem convex_seqSet : Convex ℝ (seqSet l) := fun c hc c' hc' a b ha hb _ t => by
+  simp only [BoundedContinuousFunction.add_apply, BoundedContinuousFunction.coe_smul]
+  exact add_nonneg (smul_nonneg ha (hc t)) (smul_nonneg hb (hc' t))
+
+/-- The shift `₁c = (c₁, c₂, …)`. -/
+def shiftSeq (c : Seq l) : Seq l :=
+  ⟨c.1.compContinuous ⟨fun t => t + 1, continuous_of_discreteTopology⟩, fun t => c.2 (t + 1)⟩
+
+@[simp] theorem shiftSeq_apply (c : Seq l) (t : ℕ) : (shiftSeq c).1 t = c.1 (t + 1) := rfl
+
+theorem continuous_shiftSeq : Continuous (shiftSeq (l := l)) := by
+  refine (LipschitzWith.of_dist_le' (K := 1) fun c c' => ?_).continuous
+  rw [one_mul]
+  change dist (shiftSeq c).1 (shiftSeq c').1 ≤ dist c.1 c'.1
+  exact (dist_le dist_nonneg).2 fun t => dist_coe_le_dist (t + 1)
+
+theorem continuous_head : Continuous fun c : Seq l => c.1 0 :=
+  (continuous_eval_const 0).comp continuous_subtype_val
+
+theorem abs_apply_le_norm (u : Seq l →ᵇ ℝ) (c : Seq l) : |u c| ≤ ‖u‖ := by
+  simpa [Real.norm_eq_abs] using u.norm_coe_le_norm c
+
+/-- The zero sequence. -/
+def zeroSeq : Seq l := ⟨0, fun _ => le_rfl⟩
+
+theorem shiftSeq_zero : shiftSeq (zeroSeq (l := l)) = zeroSeq := Subtype.ext (by ext; rfl)
+
+/-- The truncation `cⁿ = (c₀, …, cₙ, 0, 0, …)`. -/
+noncomputable def trunc (n : ℕ) (c : Seq l) : Seq l :=
+  ⟨BoundedContinuousFunction.mkOfDiscrete (fun t => if t ≤ n then c.1 t else 0) (2 * ‖c.1‖)
+    fun s t => by
+      have h0 : ∀ u, ‖(if u ≤ n then c.1 u else 0)‖ ≤ ‖c.1‖ := fun u => by
+        split_ifs
+        · exact c.1.norm_coe_le_norm u
+        · simp
+      exact (dist_le_norm_add_norm _ _).trans (by linarith [h0 s, h0 t]),
+    fun t => by
+      change 0 ≤ (if t ≤ n then c.1 t else 0)
+      split_ifs
+      · exact c.2 t
+      · exact le_rfl⟩
+
+theorem trunc_apply (n : ℕ) (c : Seq l) (t : ℕ) :
+    (trunc n c).1 t = if t ≤ n then c.1 t else 0 := rfl
+
+theorem head_trunc (n : ℕ) (c : Seq l) : (trunc n c).1 0 = c.1 0 := by
+  simp [trunc_apply]
+
+theorem shiftSeq_trunc_zero (c : Seq l) : shiftSeq (trunc 0 c) = zeroSeq :=
+  Subtype.ext (by ext t i; simp [trunc_apply, zeroSeq])
+
+theorem shiftSeq_trunc_succ (n : ℕ) (c : Seq l) :
+    shiftSeq (trunc (n + 1) c) = trunc n (shiftSeq c) :=
+  Subtype.ext (by ext t i; simp [trunc_apply])
+
+/-! ### Exercise 5.11a–c: additive preferences -/
+
+variable {U : (Fin l → ℝ) → ℝ} {β M : ℝ}
+
+/-- `(Tu)(c) = U(c₀) + βu(₁c)`. -/
+noncomputable def opTU (U : (Fin l → ℝ) → ℝ) (hU : Continuous U) (hM : ∀ x, 0 ≤ x → |U x| ≤ M)
+    (hβ : 0 ≤ β) (u : Seq l →ᵇ ℝ) : Seq l →ᵇ ℝ :=
+  BoundedContinuousFunction.ofNormedAddCommGroup (fun c => U (c.1 0) + β * u (shiftSeq c))
+    ((hU.comp continuous_head).add (continuous_const.mul (u.continuous.comp continuous_shiftSeq)))
+    (M + β * ‖u‖) fun c => by
+      rw [Real.norm_eq_abs]
+      refine (abs_add_le _ _).trans (add_le_add (hM _ (c.2 0)) ?_)
+      rw [abs_mul, abs_of_nonneg hβ]
+      exact mul_le_mul_of_nonneg_left (abs_apply_le_norm u (shiftSeq c)) hβ
+
+theorem opTU_contraction (hU : Continuous U) (hM : ∀ x, 0 ≤ x → |U x| ≤ M) (hβ0 : 0 < β)
+    (hβ1 : β < 1) : IsContraction (opTU (l := l) U hU hM hβ0.le) β := by
+  refine ⟨hβ0, hβ1, fun u u' => (dist_le (mul_nonneg hβ0.le dist_nonneg)).2 fun c => ?_⟩
+  change dist (U (c.1 0) + β * u (shiftSeq c)) (U (c.1 0) + β * u' (shiftSeq c)) ≤ _
+  rw [Real.dist_eq, add_sub_add_left_eq_sub, ← mul_sub, abs_mul, abs_of_pos hβ0]
+  exact mul_le_mul_of_nonneg_left (by
+    simpa [Real.dist_eq] using dist_coe_le_dist (f := u) (g := u') (shiftSeq c)) hβ0.le
+
+/-- **Exercises 5.11a and 5.11c.** `T` has a unique fixed point `û ∈ S`, and
+`û(c) = Σ βᵗU(c_t)`: so `u(c) = Σ βᵗU(c_t)` is bounded and continuous on `L`. -/
+theorem ex_5_11c (hU : Continuous U) (hM : ∀ x, 0 ≤ x → |U x| ≤ M) (hβ0 : 0 < β) (hβ1 : β < 1) :
+    ∃ uhat : Seq l →ᵇ ℝ, opTU U hU hM hβ0.le uhat = uhat ∧
+      (∀ w, opTU U hU hM hβ0.le w = w → w = uhat) ∧
+      ∀ c, HasSum (fun t => β ^ t * U (c.1 t)) (uhat c) := by
+  obtain ⟨u, hu, huniq, -⟩ := theorem_3_2 (opTU_contraction (l := l) hU hM hβ0 hβ1)
+  refine ⟨u, hu, huniq, fun c => ?_⟩
+  -- unroll the fixed point: `û(c) = Σ_{t<n} βᵗU(c_t) + βⁿû(ₙc)`
+  have hfe : ∀ c, u c = U (c.1 0) + β * u (shiftSeq c) := fun c =>
+    (DFunLike.congr_fun hu c).symm
+  have hunroll : ∀ (n : ℕ) (c : Seq l), u c = ∑ t ∈ Finset.range n, β ^ t * U (c.1 t) +
+      β ^ n * u ((shiftSeq)^[n] c) := by
+    intro n
+    induction n with
+    | zero => intro c; simp
+    | succ n ih =>
+      intro c
+      rw [hfe c, ih (shiftSeq c), Finset.sum_range_succ', Function.iterate_succ_apply]
+      simp only [shiftSeq_apply]
+      have e : β * ∑ t ∈ Finset.range n, β ^ t * U (c.1 (t + 1)) =
+          ∑ t ∈ Finset.range n, β ^ (t + 1) * U (c.1 (t + 1)) := by
+        rw [Finset.mul_sum]
+        exact Finset.sum_congr rfl fun t _ => by ring
+      rw [pow_zero, one_mul, pow_succ, ← e]
+      ring
+  have hsum : Summable fun t => β ^ t * U (c.1 t) :=
+    Summable.of_norm_bounded ((summable_geometric_of_lt_one hβ0.le hβ1).mul_right M)
+      fun t => by
+        rw [Real.norm_eq_abs, abs_mul, abs_of_nonneg (pow_nonneg hβ0.le t)]
+        exact mul_le_mul_of_nonneg_left (hM _ (c.2 t)) (pow_nonneg hβ0.le t)
+  have hrest : Tendsto (fun n => β ^ n * u ((shiftSeq)^[n] c)) atTop (𝓝 0) := by
+    refine squeeze_zero_norm (a := fun n => ‖u‖ * β ^ n) (fun n => ?_) ?_
+    · rw [Real.norm_eq_abs, abs_mul, abs_of_nonneg (pow_nonneg hβ0.le n), mul_comm]
+      exact mul_le_mul_of_nonneg_right (abs_apply_le_norm u _) (pow_nonneg hβ0.le n)
+    · simpa using (tendsto_pow_atTop_nhds_zero_of_lt_one hβ0.le hβ1).const_mul ‖u‖
+  have hlim : Tendsto (fun n => ∑ t ∈ Finset.range n, β ^ t * U (c.1 t)) atTop (𝓝 (u c)) := by
+    have := (tendsto_const_nhds (x := u c)).sub hrest
+    rw [sub_zero] at this
+    exact this.congr fun n => by rw [hunroll n c]; ring
+  rw [← tendsto_nhds_unique hsum.hasSum.tendsto_sum_nat hlim]
+  exact hsum.hasSum
+
+/-- **Exercise 5.11a.** `|u(c)| ≤ M/(1 − β)`. -/
+theorem ex_5_11a (hβ0 : 0 < β) (hβ1 : β < 1) (hM : ∀ x, 0 ≤ x → |U x| ≤ M) {c : Seq l}
+    {s : ℝ} (hs : HasSum (fun t => β ^ t * U (c.1 t)) s) : |s| ≤ M / (1 - β) := by
+  have hg := (hasSum_geometric_of_lt_one hβ0.le hβ1).mul_left M
+  have := hasSum_le (fun t => (show β ^ t * U (c.1 t) ≤ M * β ^ t by
+    rw [mul_comm M]
+    exact mul_le_mul_of_nonneg_left (le_abs_self _ |>.trans (hM _ (c.2 t)))
+      (pow_nonneg hβ0.le t))) hs hg
+  have := hasSum_le (fun t => (show -(M * β ^ t) ≤ β ^ t * U (c.1 t) by
+    have := neg_abs_le (U (c.1 t)) |>.trans' (neg_le_neg (hM _ (c.2 t)))
+    nlinarith [pow_nonneg hβ0.le t])) hg.neg hs
+  rw [abs_le, ← div_eq_mul_inv] at *
+  constructor <;> linarith
+
+/-- **Exercise 5.11b.** `S` is complete. -/
+theorem ex_5_11b_complete : CompleteSpace (Seq l →ᵇ ℝ) := inferInstance
+
+/-- The sequences that are eventually zero. -/
+def eventuallyZero (l : ℕ) : Set (Seq l) := {e | ∃ N, ∀ t, N < t → e.1 t = 0}
+
+/-- **Exercise 5.11b.** `u(cⁿ) → u(c)` can fail: `u(c) = min{1, dist(c, eventually zero)}` is in
+`S`, and the constant sequence `1` has `|u(1) − u(1ⁿ)| = 1` for every `n`. -/
+theorem ex_5_11b_counterexample (hl : 0 < l) :
+    ∃ u : Seq l →ᵇ ℝ, ∃ c : Seq l, ∀ n, |u c - u (trunc n c)| = 1 := by
+  have : Nonempty (Fin l) := ⟨⟨0, hl⟩⟩
+  set u : Seq l →ᵇ ℝ := BoundedContinuousFunction.ofNormedAddCommGroup
+    (fun c => min (Metric.infDist c (eventuallyZero l)) 1)
+    ((Metric.continuous_infDist_pt _).min continuous_const) 1 fun c => by
+      rw [Real.norm_eq_abs, abs_of_nonneg (le_min Metric.infDist_nonneg zero_le_one)]
+      exact min_le_right _ _
+  set c : Seq l := ⟨BoundedContinuousFunction.const ℕ 1, fun _ => zero_le_one⟩
+  have hne : (eventuallyZero l).Nonempty := ⟨zeroSeq, 0, fun _ _ => rfl⟩
+  have hc : u c = 1 := by
+    change min (Metric.infDist c (eventuallyZero l)) 1 = 1
+    refine min_eq_right ((Metric.le_infDist hne).2 fun e ⟨N, hN⟩ => ?_)
+    have h1 := dist_coe_le_dist (f := c.1) (g := e.1) (N + 1)
+    rw [hN (N + 1) (Nat.lt_succ_self N)] at h1
+    have h2 : dist (c.1 (N + 1)) 0 = 1 := by
+      rw [dist_zero_right]
+      change ‖fun _ : Fin l => (1 : ℝ)‖ = 1
+      rw [pi_norm_const, norm_one]
+    rw [h2] at h1
+    exact h1
+  have htr : ∀ n, u (trunc n c) = 0 := fun n => by
+    change min (Metric.infDist (trunc n c) (eventuallyZero l)) 1 = 0
+    rw [Metric.infDist_zero_of_mem (show trunc n c ∈ eventuallyZero l from
+      ⟨n, fun t ht => by simp [trunc_apply, not_le.2 ht]⟩)]
+    simp
+  exact ⟨u, c, fun n => by rw [hc, htr]; simp⟩
+
+/-! ### Exercise 5.11d: aggregator functions -/
+
+variable {W : (Fin l → ℝ) → ℝ → ℝ}
+
+/-- (W1)–(W3), with `W(x, ·)` given on all of `ℝ` (for `z ≥ 0` this is the book's `W`). -/
+structure AggHyp (W : (Fin l → ℝ) → ℝ → ℝ) (β M : ℝ) : Prop where
+  β_pos : 0 < β
+  β_lt : β < 1
+  cont : Continuous fun p : (Fin l → ℝ) × ℝ => W p.1 p.2
+  zero : W 0 0 = 0
+  bdd : ∀ x, 0 ≤ x → |W x 0| ≤ M
+  lip : ∀ x, 0 ≤ x → ∀ z z', |W x z - W x z'| ≤ β * |z - z'|
+
+/-- `(T_W u)(c) = W[c₀, u(₁c)]`. -/
+noncomputable def opTW (h : AggHyp W β M) (u : Seq l →ᵇ ℝ) : Seq l →ᵇ ℝ :=
+  BoundedContinuousFunction.ofNormedAddCommGroup (fun c => W (c.1 0) (u (shiftSeq c)))
+    (h.cont.comp (continuous_head.prodMk (u.continuous.comp continuous_shiftSeq)))
+    (M + β * ‖u‖) fun c => by
+      rw [Real.norm_eq_abs]
+      have h1 := h.lip _ (c.2 0) (u (shiftSeq c)) 0
+      have h2 := h.bdd _ (c.2 0)
+      have h3 : |u (shiftSeq c)| ≤ ‖u‖ := by
+        simpa [Real.norm_eq_abs] using u.norm_coe_le_norm (shiftSeq c)
+      rw [sub_zero] at h1
+      have := abs_sub_abs_le_abs_sub (W (c.1 0) (u (shiftSeq c))) (W (c.1 0) 0)
+      nlinarith [h.β_pos]
+
+theorem opTW_apply (h : AggHyp W β M) (u : Seq l →ᵇ ℝ) (c : Seq l) :
+    opTW h u c = W (c.1 0) (u (shiftSeq c)) := rfl
+
+theorem opTW_contraction (h : AggHyp W β M) : IsContraction (opTW (l := l) h) β := by
+  refine ⟨h.β_pos, h.β_lt, fun u u' => (dist_le (mul_nonneg h.β_pos.le dist_nonneg)).2 fun c => ?_⟩
+  rw [opTW_apply, opTW_apply, Real.dist_eq]
+  exact (h.lip _ (c.2 0) _ _).trans (mul_le_mul_of_nonneg_left (by
+    simpa [Real.dist_eq] using dist_coe_le_dist (f := u) (g := u') (shiftSeq c)) h.β_pos.le)
+
+/-- **Exercise 5.11d.** `T_W` has a unique fixed point `u_W ∈ S`, `u_W(0) = 0`, and
+`|u_W(c) − u_W(cⁿ)| ≤ βⁿ⁺¹‖u_W‖ ≤ βⁿ‖u_W‖`. -/
+theorem ex_5_11d (h : AggHyp W β M) :
+    ∃ uW : Seq l →ᵇ ℝ, opTW h uW = uW ∧ (∀ w, opTW h w = w → w = uW) ∧ uW zeroSeq = 0 ∧
+      ∀ n c, |uW c - uW (trunc n c)| ≤ β ^ (n + 1) * ‖uW‖ ∧
+        β ^ (n + 1) * ‖uW‖ ≤ β ^ n * ‖uW‖ := by
+  obtain ⟨u, hu, huniq, -⟩ := theorem_3_2 (opTW_contraction (l := l) h)
+  have hfe : ∀ c, u c = W (c.1 0) (u (shiftSeq c)) := fun c =>
+    (DFunLike.congr_fun hu c).symm
+  -- `u(0) = W(0, u(0))` forces `u(0) = 0`
+  have hz : u zeroSeq = 0 := by
+    have h1 : u zeroSeq = W 0 (u zeroSeq) := by
+      have := hfe zeroSeq
+      rwa [shiftSeq_zero] at this
+    have h2 := h.lip 0 le_rfl (u zeroSeq) 0
+    rw [h.zero, sub_zero, sub_zero, ← h1] at h2
+    have hb : 0 < 1 - β := by linarith [h.β_lt]
+    have h3 : |u zeroSeq| * (1 - β) ≤ 0 := by nlinarith
+    have h4 := abs_nonneg (u zeroSeq)
+    exact abs_eq_zero.1 (le_antisymm (by nlinarith) h4)
+  have hnorm : ∀ c, |u c| ≤ ‖u‖ := abs_apply_le_norm u
+  have hbound : ∀ n c, |u c - u (trunc n c)| ≤ β ^ (n + 1) * ‖u‖ := by
+    intro n
+    induction n with
+    | zero =>
+      intro c
+      rw [hfe c, hfe (trunc 0 c), head_trunc, shiftSeq_trunc_zero, hz, zero_add, pow_one]
+      refine (h.lip _ (c.2 0) _ _).trans ?_
+      rw [sub_zero]
+      exact mul_le_mul_of_nonneg_left (hnorm _) h.β_pos.le
+    | succ n ih =>
+      intro c
+      rw [hfe c, hfe (trunc (n + 1) c), head_trunc, shiftSeq_trunc_succ, pow_succ']
+      refine (h.lip _ (c.2 0) _ _).trans ?_
+      rw [mul_assoc]
+      exact mul_le_mul_of_nonneg_left (ih _) h.β_pos.le
+  refine ⟨u, hu, huniq, hz, fun n c => ⟨hbound n c, ?_⟩⟩
+  rw [pow_succ]
+  exact mul_le_mul_of_nonneg_right (mul_le_of_le_one_right (pow_nonneg h.β_pos.le n)
+    h.β_lt.le) (norm_nonneg _)
+
+/-- **Exercise 5.11d.** Under (W4), `W` increasing, `u_W` is increasing: `c ≤ c'` termwise
+implies `u_W(c) ≤ u_W(c')`. -/
+theorem ex_5_11d_mono (h : AggHyp W β M)
+    (hW4 : ∀ x x' z z', 0 ≤ x → x ≤ x' → z ≤ z' → W x z ≤ W x' z') {uW : Seq l →ᵇ ℝ}
+    (hu : opTW h uW = uW) {c c' : Seq l} (hcc' : ∀ t, c.1 t ≤ c'.1 t) : uW c ≤ uW c' := by
+  have : Nonempty (Seq l →ᵇ ℝ) := ⟨0⟩
+  set C' : Set (Seq l →ᵇ ℝ) := {u | ∀ c c' : Seq l, (∀ t, c.1 t ≤ c'.1 t) → u c ≤ u c'}
+  have hclosed : IsClosed C' := by
+    have : C' = ⋂ c, ⋂ c', ⋂ (_ : ∀ t, c.1 t ≤ c'.1 t), {u : Seq l →ᵇ ℝ | u c ≤ u c'} := by
+      ext u; simp [C']
+    rw [this]
+    exact isClosed_iInter fun c => isClosed_iInter fun c' => isClosed_iInter fun _ =>
+      isClosed_le (continuous_eval_const c) (continuous_eval_const c')
+  have hmaps : MapsTo (opTW h) C' C' := fun u hu c c' hcc => by
+    rw [opTW_apply, opTW_apply]
+    exact hW4 _ _ _ _ (c.2 0) (hcc 0) (hu _ _ fun t => hcc (t + 1))
+  exact (corollary_1 (S' := C') (S'' := C') (opTW_contraction h) hu
+    ⟨0, fun _ _ _ => le_rfl⟩ hclosed hmaps hmaps).1 c c' hcc'
+
+/-- A nonnegative concave function on `[0, ∞)` is nondecreasing. -/
+theorem monotoneOn_of_concave_nonneg {φ : ℝ → ℝ} (hφ : ConcaveOn ℝ (Ici 0) φ)
+    (h0 : ∀ z, 0 ≤ z → 0 ≤ φ z) : MonotoneOn φ (Ici 0) := by
+  intro a ha b hb hab
+  rcases eq_or_lt_of_le hab with rfl | hlt
+  · exact le_rfl
+  by_contra hgt
+  push Not at hgt
+  -- the chord slope `s < 0` from `a` to `b` bounds `φ` beyond `b`
+  set s := (φ b - φ a) / (b - a)
+  have hs : s < 0 := div_neg_of_neg_of_pos (by linarith) (by linarith)
+  set z := b + (φ b + 1) / (-s)
+  have hz : b < z := lt_add_of_pos_right _ (div_pos (by linarith [h0 b hb]) (by linarith))
+  have hadj := hφ.slope_anti_adjacent ha (mem_Ici.2 (by linarith [hb.out] : (0 : ℝ) ≤ z))
+    hlt hz
+  rw [div_le_iff₀ (by linarith)] at hadj
+  have hs0 : s ≠ 0 := hs.ne
+  have : (φ b + 1) / -s * s = -(φ b + 1) := by field_simp
+  have hzb : z - b = (φ b + 1) / -s := by simp only [z]; ring
+  rw [hzb] at hadj
+  have := h0 z (by linarith [hb.out])
+  nlinarith
+
+/-- **Exercise 5.11d.** Under (W5), `W` concave on `ℝˡ₊ × ℝ₊`, with `W ≥ 0` there, `u_W` is
+nonnegative and concave. -/
+theorem ex_5_11d_concave (h : AggHyp W β M)
+    (hW5 : ConcaveOn ℝ ({x : Fin l → ℝ | 0 ≤ x} ×ˢ Set.Ici 0) fun p => W p.1 p.2)
+    (hnn : ∀ x z, 0 ≤ x → 0 ≤ z → 0 ≤ W x z) {uW : Seq l →ᵇ ℝ} (hu : opTW h uW = uW) :
+    (∀ c, 0 ≤ uW c) ∧ IsConcaveS convex_seqSet uW := by
+  have : Nonempty (Seq l →ᵇ ℝ) := ⟨0⟩
+  -- `W(x, ·)` is nondecreasing on `[0, ∞)`
+  have hWz : ∀ x, 0 ≤ x → MonotoneOn (W x) (Ici 0) := fun x hx => by
+    refine monotoneOn_of_concave_nonneg ⟨convex_Ici 0, fun z hz z' hz' a b ha hb hab => ?_⟩
+      fun z hz => hnn x z hx hz
+    have := hW5.2 (show (x, z) ∈ {x : Fin l → ℝ | 0 ≤ x} ×ˢ Set.Ici 0 from ⟨hx, hz⟩)
+      (show (x, z') ∈ {x : Fin l → ℝ | 0 ≤ x} ×ˢ Set.Ici 0 from ⟨hx, hz'⟩) ha hb hab
+    simp only [Prod.smul_mk, Prod.mk_add_mk, ← add_smul, hab, one_smul] at this
+    exact this
+  set C : Set (Seq l →ᵇ ℝ) := {u | (∀ c, 0 ≤ u c) ∧ IsConcaveS convex_seqSet u}
+  have hclosed : IsClosed C := by
+    have : C = (⋂ c, {u : Seq l →ᵇ ℝ | 0 ≤ u c}) ∩ {u | IsConcaveS convex_seqSet u} := by
+      ext u; simp [C]
+    rw [this]
+    exact (isClosed_iInter fun c => isClosed_le continuous_const (continuous_eval_const c)).inter
+      (isClosed_concave convex_seqSet)
+  have hshift : ∀ (c c' : Seq l) (θ : ℝ) (h0 : 0 ≤ θ) (h1 : θ ≤ 1),
+      shiftSeq (cmb convex_seqSet h0 h1 c c') =
+        cmb convex_seqSet h0 h1 (shiftSeq c) (shiftSeq c') := fun c c' θ h0 h1 =>
+    Subtype.ext (by ext t i; rfl)
+  have hmaps : MapsTo (opTW h) C C := fun u ⟨hu0, huc⟩ => by
+    refine ⟨fun c => hnn _ _ (c.2 0) (hu0 _), fun c c' θ h0 h1 => ?_⟩
+    rw [opTW_apply, opTW_apply, opTW_apply, hshift]
+    have hc := huc (shiftSeq c) (shiftSeq c') θ h0 h1
+    have hmid : 0 ≤ θ * u (shiftSeq c) + (1 - θ) * u (shiftSeq c') :=
+      add_nonneg (mul_nonneg h0 (hu0 _)) (mul_nonneg (by linarith) (hu0 _))
+    have hWc := hW5.2 (show (c.1 0, u (shiftSeq c)) ∈ {x : Fin l → ℝ | 0 ≤ x} ×ˢ Set.Ici 0 from
+      ⟨c.2 0, hu0 _⟩) (show (c'.1 0, u (shiftSeq c')) ∈ {x : Fin l → ℝ | 0 ≤ x} ×ˢ Set.Ici 0 from
+      ⟨c'.2 0, hu0 _⟩) h0 (by linarith : (0 : ℝ) ≤ 1 - θ) (by ring)
+    simp only [Prod.smul_mk, Prod.mk_add_mk, smul_eq_mul] at hWc
+    have hhead : (cmb convex_seqSet h0 h1 c c').1 0 = θ • c.1 0 + (1 - θ) • c'.1 0 := rfl
+    rw [hhead]
+    refine hWc.trans (hWz _ ?_ (mem_Ici.2 hmid) (mem_Ici.2 (hu0 _)) hc)
+    exact (convex_seqSet c.2 c'.2 h0 (by linarith) (by ring) : _) 0
+  exact (corollary_1 (S' := C) (S'' := C) (opTW_contraction h) hu
+    ⟨0, fun _ => le_rfl, fun _ _ _ _ _ => by simp⟩ hclosed hmaps hmaps).1
+
+/-! ### Exercise 5.11e: marginal rates of substitution -/
+
+/-- `c` with `h⁺ = max{h, 0}` added to good `i` in period `t`. -/
+noncomputable def bump (c : Seq l) (t : ℕ) (i : Fin l) (h : ℝ) : Seq l :=
+  ⟨c.1 + BoundedContinuousFunction.mkOfDiscrete
+      (fun s => if s = t then Pi.single i (max h 0) else (0 : Fin l → ℝ))
+      (2 * ‖(Pi.single i (max h 0) : Fin l → ℝ)‖) fun s s' => by
+        refine (dist_le_norm_add_norm _ _).trans ?_
+        have : ∀ u, ‖(if u = t then Pi.single i (max h 0) else (0 : Fin l → ℝ))‖ ≤
+            ‖(Pi.single i (max h 0) : Fin l → ℝ)‖ := fun u => by
+          split_ifs <;> simp
+        linarith [this s, this s'],
+    fun s => by
+      change 0 ≤ c.1 s + (if s = t then Pi.single i (max h 0) else (0 : Fin l → ℝ))
+      refine add_nonneg (c.2 s) ?_
+      split_ifs
+      · intro j
+        by_cases hj : j = i
+        · subst hj; simp
+        · simp [hj]
+      · exact le_rfl⟩
+
+theorem shiftSeq_bump_zero (c : Seq l) (i : Fin l) (h : ℝ) :
+    shiftSeq (bump c 0 i h) = shiftSeq c :=
+  Subtype.ext (by ext s j; simp [bump])
+
+theorem shiftSeq_bump_succ (c : Seq l) (t : ℕ) (i : Fin l) (h : ℝ) :
+    shiftSeq (bump c (t + 1) i h) = bump (shiftSeq c) t i h :=
+  Subtype.ext (by ext s j; simp [bump])
+
+theorem head_bump_zero (c : Seq l) (i : Fin l) (h : ℝ) :
+    (bump c 0 i h).1 0 = c.1 0 + Pi.single i (max h 0) := by
+  simp [bump]
+
+theorem head_bump_succ (c : Seq l) (t : ℕ) (i : Fin l) (h : ℝ) :
+    (bump c (t + 1) i h).1 0 = c.1 0 := by
+  simp [bump]
+
+/-- **Exercise 5.11e.** Raising good `i` in period `t` by `h ≥ 0` changes `u_W` at the rate
+`[∏_{s<t} W_z(c_s, u_W(ₛ₊₁c))] · W_{x_i}(c_t, u_W(ₜ₊₁c))`. The marginal rate of substitution
+between `c_{it}` and `c_{j,t+k}` is the ratio of two such rates. -/
+theorem ex_5_11e (h : AggHyp W β M) {uW : Seq l →ᵇ ℝ} (hu : opTW h uW = uW) (t : ℕ)
+    (i : Fin l) (c : Seq l) {Wz : ℕ → ℝ} {Wx : ℝ}
+    (hz : ∀ s < t, HasDerivAt (W (c.1 s)) (Wz s) (uW ((shiftSeq)^[s + 1] c)))
+    (hx : HasDerivAt (fun h => W (c.1 t + Pi.single i h) (uW ((shiftSeq)^[t + 1] c))) Wx 0) :
+    HasDerivWithinAt (fun h => uW (bump c t i h)) ((∏ s ∈ Finset.range t, Wz s) * Wx)
+      (Ici 0) 0 := by
+  have hfe : ∀ c, uW c = W (c.1 0) (uW (shiftSeq c)) := fun c =>
+    (DFunLike.congr_fun hu c).symm
+  induction t generalizing c Wz with
+  | zero =>
+    simp only [Finset.range_zero, Finset.prod_empty, one_mul]
+    refine hx.hasDerivWithinAt.congr (fun h (hh : 0 ≤ h) => ?_) ?_
+    · rw [hfe, head_bump_zero, shiftSeq_bump_zero, max_eq_left hh]; rfl
+    · rw [hfe, head_bump_zero, shiftSeq_bump_zero, max_self]; rfl
+  | succ t ih =>
+    -- one level of the recursion: `u_W(c + h e_{i,t+1}) = W(c₀, u_W(₁c + h e_{i,t}))`
+    have hshift : ∀ s, (shiftSeq c).1 s = c.1 (s + 1) := fun s => rfl
+    have hit : ∀ s, (shiftSeq)^[s + 1] (shiftSeq c) = (shiftSeq)^[s + 2] c := fun s => by
+      rw [← Function.iterate_succ_apply]
+    have hinner := ih (shiftSeq c) (Wz := fun s => Wz (s + 1))
+      (fun s hs => by rw [hshift, hit]; exact hz (s + 1) (by omega))
+      (by rw [hshift, hit]; exact hx)
+    have houter : HasDerivAt (W (c.1 0)) (Wz 0) (uW (bump (shiftSeq c) t i 0)) := by
+      have e : bump (shiftSeq c) t i 0 = (shiftSeq)^[0 + 1] c := Subtype.ext (by
+        ext s j; simp [bump])
+      rw [e]; exact hz 0 (by omega)
+    have := houter.comp_hasDerivWithinAt (0 : ℝ) hinner
+    rw [Finset.prod_range_succ']
+    refine (this.congr (fun h _ => ?_) ?_).congr_deriv (by ring)
+    · simp only [Function.comp_apply]; rw [hfe, head_bump_succ, shiftSeq_bump_succ]
+    · simp only [Function.comp_apply]; rw [hfe, head_bump_succ, shiftSeq_bump_succ]
+
+end StokeyLucasPrescott.DeterministicApplications
+
+/-
+Copyright (c) 2026 Robert Kirkby. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Robert Kirkby
+-/
+
+/-!
+# The consumer with recursive preferences
+
+SLP §5.12, pp. 116–117: with prices `p ∈ ℝˡ₊₊`, `R = 1/(1 + r)` and wealth `A ≥ 0`, the
+functional equation is `v(A) = max_{C ∈ Γ(A)} W(C, v[R⁻¹(A − p·C)])`,
+`Γ(A) = {C ∈ ℝˡ₊ : p·C ≤ A}`.
+
+* `budget_compact`, `budget_lhc`, `budget_uhc`: `Γ` is compact-valued and continuous.
+* **Exercise 5.12b**: `ex_5_12b`: there is a unique bounded continuous solution `v`. With `W`
+  concave and nonnegative and strictly concave in `C`, `v` is concave and demand
+  `C = φ(p, A)` is a single-valued continuous function (`ex_5_12b_demand`); demand is
+  homogeneous of degree zero in `(p, A)` (`ex_5_12b_homogeneous`).
+* **Exercise 5.12c**: `ex_5_12c_envelope`: at an interior optimum (`C_i > 0`), `v` is
+  differentiable with `v'(A) = W_{C_i}/p_i`, the marginal utility of a dollar spent on good `i`;
+  so `W_{C_i}/p_i = W_{C_j}/p_j` for goods consumed (`ex_5_12c_intratemporal`), and
+  `ex_5_12c_euler`: a dollar spent today on good `i` is worth what it buys tomorrow,
+  `W_{C_i}/p_i = R⁻¹W_z·v'(A')`.
+* **Exercise 5.12d**: `ex_5_12d`: with `h` strictly increasing, `W̃(C, a) = h(W[C, h⁻¹(a)])` gives
+  the value `h ∘ v` and the same demand. `ex_5_12d_not_aggregator`: `W̃` need not be an aggregator:
+  `W(C, z) = z/2` and `h(x) = x/(1 + x)` give `W̃(a) = a/(2 − a)`, which violates (W3).
+-/
+
+open Set Filter Topology BoundedContinuousFunction
+
+namespace StokeyLucasPrescott.DeterministicApplications
+
+variable {l : ℕ}
+
+/-- Wealth `A ≥ 0`. -/
+abbrev Wealth := ↥(Ici (0 : ℝ))
+
+/-- `p·C`. -/
+def spend (p C : Fin l → ℝ) : ℝ := ∑ i, p i * C i
+
+/-- `Γ(A) = {C ≥ 0 : p·C ≤ A}`. -/
+def budgetΓ (p : Fin l → ℝ) (A : Wealth) : Set (Fin l → ℝ) := {C | 0 ≤ C ∧ spend p C ≤ A.1}
+
+/-- Next period's wealth `R⁻¹(A − p·C)`. -/
+noncomputable def nextWealth (p : Fin l → ℝ) (R : ℝ) (A : ℝ) (C : Fin l → ℝ) : ℝ :=
+  (A - spend p C) / R
+
+/-- `v` on wealth extended to `ℝ` by `v(max{x, 0})`. -/
+def vext (v : Wealth → ℝ) (x : ℝ) : ℝ := v ⟨max x 0, mem_Ici.2 (le_max_right _ _)⟩
+
+theorem vext_of_nonneg (v : Wealth → ℝ) {x : ℝ} (hx : 0 ≤ x) : vext v x = v ⟨x, hx⟩ := by
+  simp only [vext, max_eq_left hx]
+
+theorem continuous_vext {v : Wealth → ℝ} (hv : Continuous v) : Continuous (vext v) :=
+  hv.comp ((continuous_id.max continuous_const).subtype_mk _)
+
+theorem abs_vext_le (v : Wealth →ᵇ ℝ) (x : ℝ) : |vext v x| ≤ ‖v‖ := by
+  unfold vext
+  simpa [Real.norm_eq_abs] using v.norm_coe_le_norm _
+
+theorem continuous_spend (p : Fin l → ℝ) : Continuous (spend p) :=
+  continuous_finsetSum _ fun i _ => continuous_const.mul (continuous_apply i)
+
+theorem spend_nonneg {p C : Fin l → ℝ} (hp : ∀ i, 0 < p i) (hC : 0 ≤ C) : 0 ≤ spend p C :=
+  Finset.sum_nonneg fun i _ => mul_nonneg (hp i).le (hC i)
+
+theorem le_div_of_spend {p C : Fin l → ℝ} (hp : ∀ i, 0 < p i) (hC : 0 ≤ C) {A : ℝ}
+    (hs : spend p C ≤ A) (i : Fin l) : C i ≤ A / p i := by
+  rw [le_div_iff₀ (hp i), mul_comm]
+  exact (Finset.single_le_sum (f := fun j => p j * C j)
+    (fun j _ => mul_nonneg (hp j).le (hC j)) (Finset.mem_univ i)).trans hs
+
+theorem norm_le_of_budget {p C : Fin l → ℝ} (hp : ∀ i, 0 < p i) (hC : 0 ≤ C) {A : ℝ}
+    (hA : 0 ≤ A) (hs : spend p C ≤ A) : ‖C‖ ≤ ∑ j, A / p j := by
+  refine (pi_norm_le_iff_of_nonneg (Finset.sum_nonneg fun j _ => div_nonneg hA (hp j).le)).2
+    fun i => ?_
+  rw [Real.norm_eq_abs, abs_of_nonneg (hC i)]
+  exact (le_div_of_spend hp hC hs i).trans (Finset.single_le_sum
+    (f := fun j => A / p j) (fun j _ => div_nonneg hA (hp j).le) (Finset.mem_univ i))
+
+theorem budget_compact {p : Fin l → ℝ} (hp : ∀ i, 0 < p i) (A : Wealth) :
+    IsCompact (budgetΓ p A) := by
+  refine Metric.isCompact_of_isClosed_isBounded ((isClosed_le continuous_const continuous_id).inter
+    (isClosed_le (continuous_spend p) continuous_const)) ?_
+  refine (Metric.isBounded_closedBall (x := (0 : Fin l → ℝ)) (r := ∑ j, A.1 / p j)).subset
+    fun C hC => ?_
+  rw [Metric.mem_closedBall, dist_zero_right]
+  exact norm_le_of_budget hp hC.1 A.2 hC.2
+
+theorem zero_mem_budget (p : Fin l → ℝ) (A : Wealth) : (0 : Fin l → ℝ) ∈ budgetΓ p A :=
+  ⟨le_rfl, by simp [spend, A.2.out]⟩
+
+theorem budget_lhc {p : Fin l → ℝ} (hp : ∀ i, 0 < p i) (A : Wealth) : IsLHC (budgetΓ p) A := by
+  refine ⟨⟨0, zero_mem_budget p A⟩, fun C hC As hAs => ?_⟩
+  have hval := (continuous_subtype_val.tendsto A).comp hAs
+  rcases eq_or_lt_of_le A.2.out with hA0 | hApos
+  · -- `A = 0` forces `C = 0`
+    have hC0 : C = 0 := by
+      funext i
+      have := le_div_of_spend hp hC.1 hC.2 i
+      rw [← hA0, zero_div] at this
+      exact le_antisymm this (hC.1 i)
+    refine ⟨0, fun _ => 0, fun n _ => zero_mem_budget p _, ?_⟩
+    rw [hC0]; exact tendsto_const_nhds
+  · -- `Cₙ = min{1, Aₙ/A}·C`
+    refine ⟨0, fun n => min 1 ((As n).1 / A.1) • C, fun n _ => ⟨?_, ?_⟩, ?_⟩
+    · exact smul_nonneg (le_min zero_le_one (div_nonneg (As n).2.out A.2.out)) hC.1
+    · have hlam0 : 0 ≤ min 1 ((As n).1 / A.1) := le_min zero_le_one (div_nonneg (As n).2.out
+        A.2.out)
+      have e : spend p (min 1 ((As n).1 / A.1) • C) = min 1 ((As n).1 / A.1) * spend p C := by
+        simp only [spend, Pi.smul_apply, smul_eq_mul, Finset.mul_sum]
+        exact Finset.sum_congr rfl fun i _ => by ring
+      rw [e]
+      calc min 1 ((As n).1 / A.1) * spend p C ≤ min 1 ((As n).1 / A.1) * A.1 :=
+            mul_le_mul_of_nonneg_left hC.2 hlam0
+        _ ≤ (As n).1 / A.1 * A.1 := mul_le_mul_of_nonneg_right (min_le_right _ _) A.2.out
+        _ = (As n).1 := div_mul_cancel₀ _ hApos.ne'
+    · have h1 : Tendsto (fun n => min 1 ((As n).1 / A.1)) atTop (𝓝 1) := by
+        have := (tendsto_const_nhds (x := (1 : ℝ))).min (hval.div_const A.1)
+        rwa [div_self hApos.ne', min_self] at this
+      simpa using h1.smul_const C
+
+theorem budget_uhc {p : Fin l → ℝ} (hp : ∀ i, 0 < p i) (A : Wealth) : IsUHC (budgetΓ p) A := by
+  refine ⟨⟨0, zero_mem_budget p A⟩, fun As hAs Cs hCs => ?_⟩
+  have hval := (continuous_subtype_val.tendsto A).comp hAs
+  obtain ⟨B, hB⟩ := hval.bddAbove_range
+  have hB0 : 0 ≤ B := (As 0).2.out.trans (hB ⟨0, rfl⟩)
+  have hmem : ∀ n, Cs n ∈ Metric.closedBall (0 : Fin l → ℝ) (∑ j, B / p j) := fun n => by
+    rw [Metric.mem_closedBall, dist_zero_right]
+    exact (norm_le_of_budget hp (hCs n).1 (As n).2.out (hCs n).2).trans
+      (Finset.sum_le_sum fun j _ => div_le_div_of_nonneg_right (hB ⟨n, rfl⟩) (hp j).le)
+  obtain ⟨C, -, φ, hφ, hlim⟩ := tendsto_subseq_of_bounded Metric.isBounded_closedBall hmem
+  refine ⟨C, ⟨?_, ?_⟩, φ, hφ, hlim⟩
+  · exact isClosed_le continuous_const continuous_id |>.mem_of_tendsto hlim
+      (Eventually.of_forall fun n => (hCs (φ n)).1)
+  · exact le_of_tendsto_of_tendsto (((continuous_spend p).tendsto C).comp hlim)
+      (hval.comp hφ.tendsto_atTop) (Eventually.of_forall fun n => (hCs (φ n)).2)
+
+/-! ### The operator -/
+
+/-- The hypotheses for the consumer: prices, interest and an aggregator with (W1)–(W3). -/
+structure ConsHyp (W : (Fin l → ℝ) → ℝ → ℝ) (p : Fin l → ℝ) (R β M : ℝ) : Prop where
+  p_pos : ∀ i, 0 < p i
+  R_pos : 0 < R
+  β_pos : 0 < β
+  β_lt : β < 1
+  cont : Continuous fun q : (Fin l → ℝ) × ℝ => W q.1 q.2
+  bdd : ∀ C, 0 ≤ C → |W C 0| ≤ M
+  lip : ∀ C, 0 ≤ C → ∀ z z', |W C z - W C z'| ≤ β * |z - z'|
+
+variable {W : (Fin l → ℝ) → ℝ → ℝ} {p : Fin l → ℝ} {R β M : ℝ}
+
+/-- The objective `W(C, v[R⁻¹(A − p·C)])`. -/
+noncomputable def consObj (W : (Fin l → ℝ) → ℝ → ℝ) (p : Fin l → ℝ) (R : ℝ) (v : Wealth → ℝ)
+    (q : Wealth × (Fin l → ℝ)) : ℝ :=
+  W q.2 (vext v (nextWealth p R q.1.1 q.2))
+
+theorem continuous_consObj (h : ConsHyp W p R β M) {v : Wealth → ℝ} (hv : Continuous v) :
+    Continuous (consObj W p R v) :=
+  h.cont.comp (continuous_snd.prodMk ((continuous_vext hv).comp
+    (((continuous_subtype_val.comp continuous_fst).sub ((continuous_spend p).comp
+      continuous_snd)).div_const R)))
+
+theorem abs_consObj_le (h : ConsHyp W p R β M) (v : Wealth →ᵇ ℝ) {A : Wealth}
+    {C : Fin l → ℝ} (hC : C ∈ budgetΓ p A) : |consObj W p R v (A, C)| ≤ M + β * ‖v‖ := by
+  have h1 := h.lip C hC.1 (vext v (nextWealth p R A.1 C)) 0
+  have h2 := h.bdd C hC.1
+  have h3 : |vext v (nextWealth p R A.1 C)| ≤ ‖v‖ := abs_vext_le v _
+  rw [sub_zero] at h1
+  have := abs_sub_abs_le_abs_sub (W C (vext v (nextWealth p R A.1 C))) (W C 0)
+  simp only [consObj]
+  nlinarith [h.β_pos]
+
+theorem consMax_le (h : ConsHyp W p R β M) (v : Wealth →ᵇ ℝ) (A : Wealth) :
+    ‖maxValue (consObj W p R v) (budgetΓ p) A‖ ≤ M + β * ‖v‖ := by
+  obtain ⟨C, hC, hval, -⟩ := exists_argmax (continuous_consObj h v.continuous).continuousOn
+    (budget_compact h.p_pos A) ⟨0, zero_mem_budget p A⟩
+  rw [← hval, Real.norm_eq_abs]
+  exact abs_consObj_le h v hC
+
+/-- `(Tv)(A) = max_{C ∈ Γ(A)} W(C, v[R⁻¹(A − p·C)])`. -/
+noncomputable def consT (h : ConsHyp W p R β M) (v : Wealth →ᵇ ℝ) : Wealth →ᵇ ℝ :=
+  BoundedContinuousFunction.ofNormedAddCommGroup (fun A => maxValue (consObj W p R v) (budgetΓ p) A)
+    (theorem_3_6 (continuous_consObj h v.continuous).continuousOn (budget_compact h.p_pos)
+      (budget_lhc h.p_pos) (budget_uhc h.p_pos)).1 (M + β * ‖v‖) (consMax_le h v)
+
+theorem exists_consT_argmax (h : ConsHyp W p R β M) (v : Wealth →ᵇ ℝ) (A : Wealth) :
+    ∃ C ∈ budgetΓ p A, consT h v A = consObj W p R v (A, C) ∧
+      ∀ C' ∈ budgetΓ p A, consObj W p R v (A, C') ≤ consT h v A := by
+  obtain ⟨C, hC, hval, hmax⟩ := exists_argmax (continuous_consObj h v.continuous).continuousOn
+    (budget_compact h.p_pos A) ⟨0, zero_mem_budget p A⟩
+  exact ⟨C, hC, hval.symm, fun C' hC' => (hmax C' hC').trans_eq hval⟩
+
+theorem consT_contraction (h : ConsHyp W p R β M) : IsContraction (consT h) β := by
+  refine ⟨h.β_pos, h.β_lt, fun v v' => (dist_le (mul_nonneg h.β_pos.le dist_nonneg)).2 fun A => ?_⟩
+  obtain ⟨C, hC, hval, -⟩ := exists_consT_argmax h v A
+  obtain ⟨C', hC', hval', -⟩ := exists_consT_argmax h v' A
+  obtain ⟨-, -, -, hmax⟩ := exists_consT_argmax h v A
+  obtain ⟨-, -, -, hmax'⟩ := exists_consT_argmax h v' A
+  have hd : ∀ x, |vext v x - vext v' x| ≤ dist v v' := fun x => by
+    simpa [Real.dist_eq, vext] using
+      dist_coe_le_dist (f := v) (g := v') ⟨max x 0, mem_Ici.2 (le_max_right _ _)⟩
+  have e1 := hmax C' hC'
+  have e2 := hmax' C hC
+  have l1 := h.lip C hC.1 (vext v (nextWealth p R A.1 C)) (vext v' (nextWealth p R A.1 C))
+  have l2 := h.lip C' hC'.1 (vext v (nextWealth p R A.1 C')) (vext v' (nextWealth p R A.1 C'))
+  have d1 := mul_le_mul_of_nonneg_left (hd (nextWealth p R A.1 C)) h.β_pos.le
+  have d2 := mul_le_mul_of_nonneg_left (hd (nextWealth p R A.1 C')) h.β_pos.le
+  rw [Real.dist_eq, abs_le]
+  simp only [consObj] at hval hval' e1 e2
+  constructor
+  · rw [abs_le] at l2; linarith [l2.1, l2.2]
+  · rw [abs_le] at l1; linarith [l1.1, l1.2]
+
+/-- **Exercise 5.12b.** There is a unique bounded continuous solution `v` of (2). -/
+theorem ex_5_12b (h : ConsHyp W p R β M) :
+    ∃ v : Wealth →ᵇ ℝ, consT h v = v ∧ ∀ w, consT h w = w → w = v := by
+  have : Nonempty (Wealth →ᵇ ℝ) := ⟨0⟩
+  obtain ⟨v, hv, huniq, -⟩ := theorem_3_2 (consT_contraction h)
+  exact ⟨v, hv, huniq⟩
+
+/-! ### Concavity and demand -/
+
+/-- With `W` concave and nonnegative on `ℝˡ₊ × ℝ₊`, `T` preserves nonnegative concave functions,
+and the fixed point is nonnegative and concave. -/
+theorem ex_5_12b_concave (h : ConsHyp W p R β M)
+    (hconc : ConcaveOn ℝ ({C : Fin l → ℝ | 0 ≤ C} ×ˢ Set.Ici 0) fun q => W q.1 q.2)
+    (hnn : ∀ C z, 0 ≤ C → 0 ≤ z → 0 ≤ W C z) {v : Wealth →ᵇ ℝ} (hv : consT h v = v) :
+    (∀ A, 0 ≤ v A) ∧ IsConcaveS (convex_Ici 0) v := by
+  have : Nonempty (Wealth →ᵇ ℝ) := ⟨0⟩
+  have hWz : ∀ C, 0 ≤ C → MonotoneOn (W C) (Ici 0) := fun C hC => by
+    refine monotoneOn_of_concave_nonneg ⟨convex_Ici 0, fun z hz z' hz' a b ha hb hab => ?_⟩
+      fun z hz => hnn C z hC hz
+    have := hconc.2 (show (C, z) ∈ {C : Fin l → ℝ | 0 ≤ C} ×ˢ Set.Ici 0 from ⟨hC, hz⟩)
+      (show (C, z') ∈ {C : Fin l → ℝ | 0 ≤ C} ×ˢ Set.Ici 0 from ⟨hC, hz'⟩) ha hb hab
+    simp only [Prod.smul_mk, Prod.mk_add_mk, ← add_smul, hab, one_smul] at this
+    exact this
+  set S : Set (Wealth →ᵇ ℝ) := {u | (∀ A, 0 ≤ u A) ∧ IsConcaveS (convex_Ici 0) u}
+  have hclosed : IsClosed S := by
+    have : S = (⋂ A, {u : Wealth →ᵇ ℝ | 0 ≤ u A}) ∩ {u | IsConcaveS (convex_Ici 0) u} := by
+      ext u; simp [S]
+    rw [this]
+    exact (isClosed_iInter fun A => isClosed_le continuous_const (continuous_eval_const A)).inter
+      (isClosed_concave (convex_Ici 0))
+  have hmaps : MapsTo (consT h) S S := fun u ⟨hu0, huc⟩ => by
+    refine ⟨fun A => ?_, fun A A' θ h0 h1 => ?_⟩
+    · obtain ⟨C, hC, hval, -⟩ := exists_consT_argmax h u A
+      rw [hval]
+      exact hnn _ _ hC.1 (hu0 ⟨max (nextWealth p R A.1 C) 0, mem_Ici.2 (le_max_right _ _)⟩)
+    · obtain ⟨C, hC, hval, -⟩ := exists_consT_argmax h u A
+      obtain ⟨C', hC', hval', -⟩ := exists_consT_argmax h u A'
+      obtain ⟨-, -, -, hmax⟩ := exists_consT_argmax h u (cmb (convex_Ici 0) h0 h1 A A')
+      set Cθ := θ • C + (1 - θ) • C'
+      have h1' : (0 : ℝ) ≤ 1 - θ := by linarith
+      have hCθ : Cθ ∈ budgetΓ p (cmb (convex_Ici 0) h0 h1 A A') := by
+        refine ⟨add_nonneg (smul_nonneg h0 hC.1) (smul_nonneg h1' hC'.1), ?_⟩
+        have e : spend p Cθ = θ * spend p C + (1 - θ) * spend p C' := by
+          simp only [spend, Cθ, Pi.add_apply, Pi.smul_apply, smul_eq_mul, Finset.mul_sum,
+            ← Finset.sum_add_distrib]
+          exact Finset.sum_congr rfl fun i _ => by ring
+        rw [e]
+        change _ ≤ θ • A.1 + (1 - θ) • A'.1
+        simp only [smul_eq_mul]
+        nlinarith [hC.2, hC'.2]
+      have hm := hmax Cθ hCθ
+      rw [hval, hval']
+      refine le_trans ?_ hm
+      -- next wealth is the mixture, and `v` is concave there
+      have hn : 0 ≤ nextWealth p R A.1 C := div_nonneg (by linarith [hC.2]) h.R_pos.le
+      have hn' : 0 ≤ nextWealth p R A'.1 C' := div_nonneg (by linarith [hC'.2]) h.R_pos.le
+      have hmix : nextWealth p R (cmb (convex_Ici 0) h0 h1 A A').1 Cθ =
+          θ * nextWealth p R A.1 C + (1 - θ) * nextWealth p R A'.1 C' := by
+        have e : spend p Cθ = θ * spend p C + (1 - θ) * spend p C' := by
+          simp only [spend, Cθ, Pi.add_apply, Pi.smul_apply, smul_eq_mul, Finset.mul_sum,
+            ← Finset.sum_add_distrib]
+          exact Finset.sum_congr rfl fun i _ => by ring
+        simp only [nextWealth, cmb, smul_eq_mul, e]
+        field_simp
+        ring
+      have hvc := huc ⟨_, hn⟩ ⟨_, hn'⟩ θ h0 h1
+      have hmixnn : 0 ≤ θ * nextWealth p R A.1 C + (1 - θ) * nextWealth p R A'.1 C' :=
+        add_nonneg (mul_nonneg h0 hn) (mul_nonneg h1' hn')
+      simp only [consObj, hmix, vext_of_nonneg u hn, vext_of_nonneg u hn',
+        vext_of_nonneg u hmixnn]
+      have hcm : cmb (convex_Ici 0) h0 h1 (⟨_, hn⟩ : Wealth) ⟨_, hn'⟩ =
+          ⟨_, hmixnn⟩ := Subtype.ext (by simp [cmb])
+      rw [hcm] at hvc
+      have hWc := hconc.2 (show (C, u ⟨_, hn⟩) ∈ {C : Fin l → ℝ | 0 ≤ C} ×ˢ Set.Ici 0 from
+        ⟨hC.1, hu0 _⟩) (show (C', u ⟨_, hn'⟩) ∈ {C : Fin l → ℝ | 0 ≤ C} ×ˢ Set.Ici 0 from
+        ⟨hC'.1, hu0 _⟩) h0 h1' (by ring)
+      simp only [Prod.smul_mk, Prod.mk_add_mk, smul_eq_mul] at hWc
+      exact hWc.trans (hWz _ hCθ.1 (mem_Ici.2 (add_nonneg (mul_nonneg h0 (hu0 _))
+        (mul_nonneg h1' (hu0 _)))) (mem_Ici.2 (hu0 _)) hvc)
+  exact (corollary_1 (S' := S) (S'' := S) (consT_contraction h) hv
+    ⟨0, fun _ => le_rfl, fun _ _ _ _ _ => by simp⟩ hclosed hmaps hmaps).1
+
+/-- **Exercise 5.12b.** If moreover `W` is strictly concave in `C` (strictly when `C ≠ C'`), demand
+is single-valued and continuous in `A`. -/
+theorem ex_5_12b_demand [Nonempty (Fin l → ℝ)] (h : ConsHyp W p R β M)
+    (hconc : ConcaveOn ℝ ({C : Fin l → ℝ | 0 ≤ C} ×ˢ Set.Ici 0) fun q => W q.1 q.2)
+    (hstrict : ∀ C C' : Fin l → ℝ, 0 ≤ C → 0 ≤ C' → C ≠ C' → ∀ z z', 0 ≤ z → 0 ≤ z' →
+      W ((1 / 2 : ℝ) • C + (1 / 2 : ℝ) • C') ((1 / 2) * z + (1 / 2) * z') >
+        (1 / 2) * W C z + (1 / 2) * W C' z')
+    (hnn : ∀ C z, 0 ≤ C → 0 ≤ z → 0 ≤ W C z) {v : Wealth →ᵇ ℝ} (hv : consT h v = v) :
+    UniqueArgmax (budgetΓ p) (consObj W p R v) ∧
+      Continuous (argmaxFn (budgetΓ p) (consObj W p R v)) := by
+  obtain ⟨hv0, hvc⟩ := ex_5_12b_concave h hconc hnn hv
+  have hWz : ∀ C, 0 ≤ C → MonotoneOn (W C) (Ici 0) := fun C hC => by
+    refine monotoneOn_of_concave_nonneg ⟨convex_Ici 0, fun z hz z' hz' a b ha hb hab => ?_⟩
+      fun z hz => hnn C z hC hz
+    have := hconc.2 (show (C, z) ∈ {C : Fin l → ℝ | 0 ≤ C} ×ˢ Set.Ici 0 from ⟨hC, hz⟩)
+      (show (C, z') ∈ {C : Fin l → ℝ | 0 ≤ C} ×ˢ Set.Ici 0 from ⟨hC, hz'⟩) ha hb hab
+    simp only [Prod.smul_mk, Prod.mk_add_mk, ← add_smul, hab, one_smul] at this
+    exact this
+  have huniq : ∀ A, ∀ C₁ ∈ argmax (consObj W p R v) (budgetΓ p) A,
+      ∀ C₂ ∈ argmax (consObj W p R v) (budgetΓ p) A, C₁ = C₂ := by
+    intro A C₁ hC₁ C₂ hC₂
+    by_contra hne
+    set Cm := (1 / 2 : ℝ) • C₁ + (1 / 2 : ℝ) • C₂
+    have hs : spend p Cm = 1 / 2 * spend p C₁ + 1 / 2 * spend p C₂ := by
+      simp only [spend, Cm, Pi.add_apply, Pi.smul_apply, smul_eq_mul, Finset.mul_sum,
+        ← Finset.sum_add_distrib]
+      exact Finset.sum_congr rfl fun i _ => by ring
+    have hCm : Cm ∈ budgetΓ p A := ⟨add_nonneg (smul_nonneg (by norm_num) hC₁.1.1)
+      (smul_nonneg (by norm_num) hC₂.1.1), by rw [hs]; linarith [hC₁.1.2, hC₂.1.2]⟩
+    have hn₁ : 0 ≤ nextWealth p R A.1 C₁ := div_nonneg (by linarith [hC₁.1.2]) h.R_pos.le
+    have hn₂ : 0 ≤ nextWealth p R A.1 C₂ := div_nonneg (by linarith [hC₂.1.2]) h.R_pos.le
+    have hmix : nextWealth p R A.1 Cm =
+        1 / 2 * nextWealth p R A.1 C₁ + 1 / 2 * nextWealth p R A.1 C₂ := by
+      simp only [nextWealth, hs]; field_simp; ring
+    have hmn : 0 ≤ 1 / 2 * nextWealth p R A.1 C₁ + 1 / 2 * nextWealth p R A.1 C₂ := by positivity
+    have hvm := hvc ⟨_, hn₁⟩ ⟨_, hn₂⟩ (1 / 2) (by norm_num) (by norm_num)
+    have hcm : cmb (convex_Ici 0) (by norm_num : (0 : ℝ) ≤ 1 / 2) (by norm_num)
+        (⟨_, hn₁⟩ : Wealth) ⟨_, hn₂⟩ = ⟨_, hmn⟩ :=
+      Subtype.ext (by simp only [cmb, smul_eq_mul]; ring)
+    rw [hcm] at hvm
+    have hle := le_maxValue (continuous_consObj h v.continuous).continuousOn
+      (budget_compact h.p_pos A) hCm
+    have e1 := hC₁.2
+    have e2 := hC₂.2
+    simp only [consObj, hmix, vext_of_nonneg v hn₁, vext_of_nonneg v hn₂,
+      vext_of_nonneg v hmn] at hle e1 e2
+    have hst := hstrict C₁ C₂ hC₁.1.1 hC₂.1.1 hne _ _ (hv0 ⟨_, hn₁⟩) (hv0 ⟨_, hn₂⟩)
+    have hz0 : 0 ≤ 1 / 2 * v ⟨_, hn₁⟩ + 1 / 2 * v ⟨_, hn₂⟩ :=
+      add_nonneg (mul_nonneg (by norm_num) (hv0 _)) (mul_nonneg (by norm_num) (hv0 _))
+    have hvm' : 1 / 2 * v ⟨_, hn₁⟩ + 1 / 2 * v ⟨_, hn₂⟩ ≤ v ⟨_, hmn⟩ := by
+      have : (1 : ℝ) - 1 / 2 = 1 / 2 := by norm_num
+      rw [this] at hvm
+      exact hvm
+    have hmono := hWz Cm hCm.1 (mem_Ici.2 hz0) (mem_Ici.2 (hv0 _)) hvm'
+    linarith
+  have hUA : UniqueArgmax (budgetΓ p) (consObj W p R v) :=
+    ⟨fun A => ⟨0, zero_mem_budget p A⟩, budget_compact h.p_pos, budget_lhc h.p_pos,
+      budget_uhc h.p_pos, (continuous_consObj h v.continuous).continuousOn, huniq⟩
+  exact ⟨hUA, hUA.continuous_argmaxFn⟩
+
+
+/-! ### Homogeneity of degree zero -/
+
+theorem ConsHyp.smul (h : ConsHyp W p R β M) {lam : ℝ} (hlam : 0 < lam) :
+    ConsHyp W (lam • p) R β M :=
+  ⟨fun i => by simpa using mul_pos hlam (h.p_pos i), h.R_pos, h.β_pos, h.β_lt, h.cont, h.bdd,
+    h.lip⟩
+
+theorem spend_smul (lam : ℝ) (p C : Fin l → ℝ) : spend (lam • p) C = lam * spend p C := by
+  simp only [spend, Pi.smul_apply, smul_eq_mul, Finset.mul_sum]
+  exact Finset.sum_congr rfl fun i _ => by ring
+
+/-- `A ↦ A/λ` on wealth. -/
+noncomputable def scaleW (lam : ℝ) (hlam : 0 < lam) (A : Wealth) : Wealth :=
+  ⟨A.1 / lam, mem_Ici.2 (div_nonneg A.2.out hlam.le)⟩
+
+/-- **Exercise 5.12b.** Demand is homogeneous of degree zero in `(p, A)`: scaling prices and
+wealth by `λ > 0` scales nothing. The value for `λp` is `A ↦ v(A/λ)`, the budget sets agree and
+the objectives agree, so the demand correspondences coincide. -/
+theorem ex_5_12b_homogeneous (h : ConsHyp W p R β M) {lam : ℝ} (hlam : 0 < lam)
+    {v v' : Wealth →ᵇ ℝ} (hv : consT h v = v) (hv' : consT (h.smul hlam) v' = v')
+    (A : Wealth) :
+    v' A = v (scaleW lam hlam A) ∧ budgetΓ (lam • p) A = budgetΓ p (scaleW lam hlam A) ∧
+      ∀ C, consObj W (lam • p) R v' (A, C) = consObj W p R v (scaleW lam hlam A, C) := by
+  -- `w(A) = v(A/λ)` is a fixed point of the operator for `λp`
+  set w : Wealth →ᵇ ℝ := v.compContinuous ⟨scaleW lam hlam,
+    ((continuous_subtype_val.div_const lam).subtype_mk _)⟩
+  have hw : ∀ A, w A = v (scaleW lam hlam A) := fun A => by
+    simp only [w, BoundedContinuousFunction.compContinuous_apply]
+    rfl
+  have hΓ : ∀ A, budgetΓ (lam • p) A = budgetΓ p (scaleW lam hlam A) := fun A => by
+    ext C
+    simp only [budgetΓ, mem_ofPred_eq, spend_smul, scaleW]
+    rw [le_div_iff₀ hlam, mul_comm]
+  have hobj : ∀ (u : Wealth → ℝ) A C, consObj W (lam • p) R (fun B => u (scaleW lam hlam B))
+      (A, C) = consObj W p R u (scaleW lam hlam A, C) := fun u A C => by
+    simp only [consObj, vext, nextWealth, spend_smul, scaleW]
+    congr 2
+    refine Subtype.ext ?_
+    simp only
+    rw [← max_div_div_right hlam.le, zero_div]
+    congr 1
+    field_simp
+  have hfix : consT (h.smul hlam) w = w := by
+    ext A
+    change maxValue (consObj W (lam • p) R w) (budgetΓ (lam • p)) A = w A
+    rw [hw, ← hv]
+    change _ = maxValue (consObj W p R v) (budgetΓ p) (scaleW lam hlam A)
+    unfold maxValue
+    rw [hΓ A]
+    exact congrArg sSup (Set.image_congr fun C _ => hobj v A C)
+  have hvw : v' = w := by
+    have : Nonempty (Wealth →ᵇ ℝ) := ⟨0⟩
+    obtain ⟨u, -, huniq, -⟩ := theorem_3_2 (consT_contraction (h.smul hlam))
+    rw [huniq v' hv', huniq w hfix]
+  refine ⟨by rw [hvw]; exact hw A, hΓ A, fun C => ?_⟩
+  rw [hvw]
+  exact hobj v A C
+
+/-! ### Exercise 5.12c: differentiability and first-order conditions -/
+
+theorem spend_add_smul_single (p C : Fin l → ℝ) (i : Fin l) (x : ℝ) :
+    spend p (C + x • Pi.single i 1) = spend p C + p i * x := by
+  simp only [spend, Pi.add_apply, Pi.smul_apply, smul_eq_mul, mul_add, Finset.sum_add_distrib]
+  congr 1
+  rw [Finset.sum_eq_single i (fun j _ hj => by simp [hj]) (by simp)]
+  simp
+
+/-- `vext v` is concave on `[0, ∞)` when `v` is. -/
+theorem concaveOn_vext {v : Wealth → ℝ} (hv : IsConcaveS (convex_Ici 0) v) :
+    ConcaveOn ℝ (Ici 0) (vext v) := by
+  refine ⟨convex_Ici 0, fun x hx y hy a b ha hb hab => ?_⟩
+  have hb' : b = 1 - a := by linarith
+  subst hb'
+  have hmem : a • x + (1 - a) • y ∈ Ici (0 : ℝ) := convex_Ici 0 hx hy ha hb hab
+  rw [vext_of_nonneg v hx, vext_of_nonneg v hy, vext_of_nonneg v hmem, smul_eq_mul, smul_eq_mul]
+  exact hv ⟨x, hx⟩ ⟨y, hy⟩ a ha (by linarith)
+
+/-- **Exercise 5.12c (envelope).** At `A₀ > 0`, if `C*` is optimal with `C*_i > 0` and `W` has
+partial derivative `W_{C_i}` in good `i` at `(C*, v(A₁))`, then `v'(A₀) = W_{C_i}/p_i`. -/
+theorem ex_5_12c_envelope (h : ConsHyp W p R β M)
+    (hconc : ConcaveOn ℝ ({C : Fin l → ℝ | 0 ≤ C} ×ˢ Set.Ici 0) fun q => W q.1 q.2)
+    (hnn : ∀ C z, 0 ≤ C → 0 ≤ z → 0 ≤ W C z) {v : Wealth →ᵇ ℝ} (hv : consT h v = v)
+    {A₀ : Wealth} (hA₀ : 0 < A₀.1) {C : Fin l → ℝ}
+    (hC : C ∈ argmax (consObj W p R v) (budgetΓ p) A₀) {i : Fin l} (hCi : 0 < C i) {Wi : ℝ}
+    (hW : HasDerivAt (fun x : ℝ => W (C + x • Pi.single i 1) (vext v (nextWealth p R A₀.1 C)))
+      Wi (0 : ℝ)) :
+    HasDerivAt (vext v) (Wi / p i) A₀.1 := by
+  obtain ⟨-, hvc⟩ := ex_5_12b_concave h hconc hnn hv
+  have hpi := h.p_pos i
+  set z₁ := vext v (nextWealth p R A₀.1 C)
+  set Wbar : ℝ → ℝ := fun A => W (C + ((A - A₀.1) / p i) • Pi.single i 1) z₁
+  have hWbar : HasDerivAt Wbar (Wi * (1 / p i)) A₀.1 := by
+    have hin : HasDerivAt (fun A : ℝ => (A - A₀.1) / p i) (1 / p i) A₀.1 := by
+      simpa using ((hasDerivAt_id' A₀.1).sub_const A₀.1).div_const (p i)
+    exact hW.comp_of_eq A₀.1 hin (by simp)
+  have hvx : ∀ A : Wealth, v A = maxValue (consObj W p R v) (budgetΓ p) A := fun A =>
+    (DFunLike.congr_fun hv A).symm
+  have heq : Wbar A₀.1 = vext v A₀.1 := by
+    simp only [Wbar, sub_self, zero_div, zero_smul, add_zero]
+    rw [vext_of_nonneg v A₀.2, Subtype.coe_eta, hvx]
+    exact hC.2
+  have hle : ∀ᶠ A in 𝓝 A₀.1, Wbar A ≤ vext v A := by
+    filter_upwards [Ioi_mem_nhds (show A₀.1 - p i * C i < A₀.1 by nlinarith)] with A hA
+    have hA' : A₀.1 - p i * C i < A := hA
+    have hAnn : 0 ≤ A := by
+      have := spend_nonneg h.p_pos hC.1.1
+      have : p i * C i ≤ spend p C := Finset.single_le_sum (f := fun j => p j * C j)
+        (fun j _ => mul_nonneg (h.p_pos j).le (hC.1.1 j)) (Finset.mem_univ i)
+      linarith [hC.1.2]
+    set Cn := C + ((A - A₀.1) / p i) • Pi.single i 1
+    have hCn : Cn ∈ budgetΓ p ⟨A, hAnn⟩ := by
+      refine ⟨fun j => ?_, ?_⟩
+      · by_cases hj : j = i
+        · subst hj
+          simp only [Cn, Pi.add_apply, Pi.smul_apply, Pi.single_eq_same, smul_eq_mul, mul_one,
+            Pi.zero_apply]
+          rw [← sub_nonneg]
+          have : 0 < A - (A₀.1 - p j * C j) := by linarith
+          have h2 : C j + (A - A₀.1) / p j = (A - (A₀.1 - p j * C j)) / p j := by
+            field_simp; ring
+          rw [sub_zero, h2]
+          positivity
+        · have hji : (Pi.single i (1 : ℝ) : Fin l → ℝ) j = 0 := Pi.single_eq_of_ne hj 1
+          simp only [Cn, Pi.add_apply, Pi.smul_apply, hji, smul_zero, add_zero, Pi.zero_apply]
+          exact hC.1.1 j
+      · simp only [Cn, spend_add_smul_single]
+        rw [mul_div_cancel₀ _ hpi.ne']
+        linarith [hC.1.2]
+    have hnext : nextWealth p R A Cn = nextWealth p R A₀.1 C := by
+      simp only [nextWealth, Cn, spend_add_smul_single, mul_div_cancel₀ _ hpi.ne']
+      ring
+    rw [vext_of_nonneg v hAnn, hvx]
+    have := le_maxValue (continuous_consObj h v.continuous).continuousOn
+      (budget_compact h.p_pos _) hCn
+    simp only [consObj, hnext] at this
+    exact this
+  have := (theorem_4_10 (concaveOn_vext hvc) (Ici_mem_nhds hA₀) hWbar.hasFDerivAt heq
+    hle).hasDerivAt
+  simpa [div_eq_mul_inv] using this
+
+/-- **Exercise 5.12c (across goods).** Goods consumed in positive amounts have equal marginal
+utility per dollar: `W_{C_i}/p_i = W_{C_j}/p_j`. -/
+theorem ex_5_12c_intratemporal (h : ConsHyp W p R β M)
+    (hconc : ConcaveOn ℝ ({C : Fin l → ℝ | 0 ≤ C} ×ˢ Set.Ici 0) fun q => W q.1 q.2)
+    (hnn : ∀ C z, 0 ≤ C → 0 ≤ z → 0 ≤ W C z) {v : Wealth →ᵇ ℝ} (hv : consT h v = v)
+    {A₀ : Wealth} (hA₀ : 0 < A₀.1) {C : Fin l → ℝ}
+    (hC : C ∈ argmax (consObj W p R v) (budgetΓ p) A₀) {i j : Fin l} (hCi : 0 < C i)
+    (hCj : 0 < C j) {Wi Wj : ℝ}
+    (hWi : HasDerivAt (fun x : ℝ => W (C + x • Pi.single i 1)
+      (vext v (nextWealth p R A₀.1 C))) Wi (0 : ℝ))
+    (hWj : HasDerivAt (fun x : ℝ => W (C + x • Pi.single j 1)
+      (vext v (nextWealth p R A₀.1 C))) Wj (0 : ℝ)) :
+    Wi / p i = Wj / p j :=
+  (ex_5_12c_envelope h hconc hnn hv hA₀ hC hCi hWi).unique
+    (ex_5_12c_envelope h hconc hnn hv hA₀ hC hCj hWj)
+
+/-- **Exercise 5.12c (over time).** If saving is positive (`A₁ = R⁻¹(A₀ − p·C*) > 0`), `v` has
+derivative `v₁'` at `A₁` and `W` is differentiable at `(C*, v(A₁))`, then moving a dollar from
+good `i` today to wealth tomorrow does not pay: `W_{C_i}/p_i = R⁻¹ W_z v₁'`. -/
+theorem ex_5_12c_euler (h : ConsHyp W p R β M) {v : Wealth →ᵇ ℝ} (hv : consT h v = v)
+    {A₀ : Wealth} {C : Fin l → ℝ} (hC : C ∈ argmax (consObj W p R v) (budgetΓ p) A₀) {i : Fin l}
+    (hCi : 0 < C i) (hA₁ : 0 < nextWealth p R A₀.1 C) {v₁' : ℝ}
+    (hv₁ : HasDerivAt (vext v) v₁' (nextWealth p R A₀.1 C))
+    {DW : (Fin l → ℝ) × ℝ →L[ℝ] ℝ}
+    (hW : HasFDerivAt (fun q : (Fin l → ℝ) × ℝ => W q.1 q.2) DW
+      (C, vext v (nextWealth p R A₀.1 C))) :
+    DW (Pi.single i 1, 0) / p i = DW (0, 1) * v₁' / R := by
+  have hpi := h.p_pos i
+  set A₁ := nextWealth p R A₀.1 C
+  set c := -1 / p i
+  set path : ℝ → (Fin l → ℝ) × ℝ := fun ε => (C + (c * ε) • Pi.single i 1, vext v (A₁ + ε / R))
+  have hpath : HasDerivAt path ((c * 1) • Pi.single i 1, v₁' * (1 / R)) 0 := by
+    refine HasDerivAt.prodMk ?_ ?_
+    · exact (((hasDerivAt_id' (0 : ℝ)).const_mul c).smul_const
+        (Pi.single i 1 : Fin l → ℝ)).const_add C
+    · have hin : HasDerivAt (fun ε : ℝ => A₁ + ε / R) (1 / R) 0 := by
+        simpa using ((hasDerivAt_id' (0 : ℝ)).div_const R).const_add A₁
+      exact hv₁.comp_of_eq (0 : ℝ) hin (by simp)
+  have hcomp := hW.comp_hasDerivAt_of_eq (0 : ℝ) hpath (by simp [path, A₁])
+  have hvx : ∀ A : Wealth, v A = maxValue (consObj W p R v) (budgetΓ p) A := fun A =>
+    (DFunLike.congr_fun hv A).symm
+  have hRA : R * A₁ = A₀.1 - spend p C := by
+    have hR0 := h.R_pos.ne'
+    simp only [A₁, nextWealth]
+    field_simp
+  have hpc : ∀ ε, p i * (c * ε) = -ε := fun ε => by simp only [c]; field_simp
+  -- the path is feasible near `0`, so its value has a local maximum at `0`
+  have hloc : IsLocalMax ((fun q : (Fin l → ℝ) × ℝ => W q.1 q.2) ∘ path) 0 := by
+    have h1 : (0 : ℝ) < p i * C i := mul_pos hpi hCi
+    have h2 : (0 : ℝ) < R * A₁ := mul_pos h.R_pos hA₁
+    filter_upwards [Ioo_mem_nhds (show -(R * A₁) < 0 by linarith) h1] with ε hε
+    set Cε := C + (c * ε) • Pi.single i 1
+    have hCε : Cε ∈ budgetΓ p A₀ := by
+      refine ⟨fun j => ?_, ?_⟩
+      · by_cases hj : j = i
+        · subst hj
+          simp only [Cε, Pi.add_apply, Pi.smul_apply, Pi.single_eq_same, smul_eq_mul, mul_one,
+            Pi.zero_apply]
+          have : p j * (C j + c * ε) = p j * C j - ε := by rw [mul_add, hpc]; ring
+          have h3 : 0 ≤ p j * (C j + c * ε) := by rw [this]; linarith [hε.2]
+          exact (mul_nonneg_iff_of_pos_left hpi).1 h3
+        · have hji : (Pi.single i (1 : ℝ) : Fin l → ℝ) j = 0 := Pi.single_eq_of_ne hj 1
+          simp only [Cε, Pi.add_apply, Pi.smul_apply, hji, smul_zero, add_zero, Pi.zero_apply]
+          exact hC.1.1 j
+      · simp only [Cε, spend_add_smul_single, hpc]
+        linarith [hε.1]
+    have hnext : nextWealth p R A₀.1 Cε = A₁ + ε / R := by
+      simp only [nextWealth, Cε, spend_add_smul_single, hpc]
+      have hR0 := h.R_pos.ne'
+      field_simp
+      linarith [hRA]
+    have hle := le_maxValue (continuous_consObj h v.continuous).continuousOn
+      (budget_compact h.p_pos A₀) hCε
+    have hL : ((fun q : (Fin l → ℝ) × ℝ => W q.1 q.2) ∘ path) ε = consObj W p R v (A₀, Cε) := by
+      simp only [Function.comp_apply, path, consObj, hnext, Cε]
+    have hR0 : ((fun q : (Fin l → ℝ) × ℝ => W q.1 q.2) ∘ path) 0 =
+        consObj W p R v (A₀, C) := by
+      simp [path, consObj, A₁]
+    rw [hL, hR0, hC.2]
+    exact hle
+  have h0 := hloc.hasDerivAt_eq_zero hcomp
+  have hlin : DW ((c * 1) • Pi.single i 1, v₁' * (1 / R)) =
+      c * DW (Pi.single i 1, 0) + v₁' * (1 / R) * DW (0, 1) := by
+    rw [show ((c * 1) • Pi.single i 1, v₁' * (1 / R)) =
+        c • ((Pi.single i 1 : Fin l → ℝ), (0 : ℝ)) +
+          (v₁' * (1 / R)) • ((0 : Fin l → ℝ), (1 : ℝ)) by
+      ext <;> simp]
+    rw [map_add, map_smul, map_smul, smul_eq_mul, smul_eq_mul]
+  rw [hlin] at h0
+  simp only [c] at h0
+  have hR := h.R_pos.ne'
+  field_simp at h0 ⊢
+  linarith
+
+/-! ### Exercise 5.12d: monotone transformations of the aggregator -/
+
+/-- **Exercise 5.12d.** With `h` strictly increasing and `h⁻¹ ∘ h = id`, the aggregator
+`W̃(C, a) = h(W[C, h⁻¹(a)])` gives the value `h ∘ v` at every `A`, with the same optimal
+choices: the demand functions coincide. -/
+theorem ex_5_12d (h : ConsHyp W p R β M) {v : Wealth →ᵇ ℝ} (hv : consT h v = v)
+    {hf hinv : ℝ → ℝ} (hmono : StrictMono hf) (hleft : ∀ x, hinv (hf x) = x) (A : Wealth) :
+    maxValue (fun q => hf (W q.2 (hinv (vext (hf ∘ v) (nextWealth p R q.1.1 q.2)))))
+        (budgetΓ p) A = hf (v A) ∧
+      argmax (fun q => hf (W q.2 (hinv (vext (hf ∘ v) (nextWealth p R q.1.1 q.2)))))
+        (budgetΓ p) A = argmax (consObj W p R v) (budgetΓ p) A := by
+  have hfun : (fun q : Wealth × (Fin l → ℝ) =>
+      hf (W q.2 (hinv (vext (hf ∘ v) (nextWealth p R q.1.1 q.2))))) =
+      fun q => hf (consObj W p R v q) := by
+    funext q
+    simp only [consObj, vext, Function.comp_apply, hleft]
+  rw [hfun]
+  obtain ⟨C, hC, hval, hmax⟩ := exists_argmax (continuous_consObj h v.continuous).continuousOn
+    (budget_compact h.p_pos A) ⟨0, zero_mem_budget p A⟩
+  have hvA : v A = maxValue (consObj W p R v) (budgetΓ p) A := (DFunLike.congr_fun hv A).symm
+  have hM : maxValue (fun q => hf (consObj W p R v q)) (budgetΓ p) A = hf (v A) := by
+    rw [hvA, ← hval]
+    refine (IsGreatest.csSup_eq ⟨⟨C, hC, rfl⟩, ?_⟩)
+    rintro _ ⟨C', hC', rfl⟩
+    exact hmono.monotone (hmax C' hC')
+  refine ⟨hM, ?_⟩
+  ext C'
+  simp only [argmax, mem_ofPred_eq, hM, hvA]
+  exact and_congr_right fun _ => hmono.injective.eq_iff
+
+/-- **Exercise 5.12d.** `W̃` need not be an aggregator. `W(C, z) = z/2` satisfies (W1)–(W3) with
+`β = 1/2`; with `h(x) = x/(1 + x)` (bounded, smooth, strictly increasing, `h(0) = 0`),
+`W̃(C, a) = h(h⁻¹(a)/2) = a/(2 − a)` on `[0, 1)`, and between `a = 4/5` and `a = 9/10` it moves by
+more than `a` does, so (W3) fails for every modulus below one. (`W̃` is not even defined for
+`a ≥ 1`.) -/
+theorem ex_5_12d_not_aggregator :
+    let hf : ℝ → ℝ := fun x => x / (1 + x)
+    let hinv : ℝ → ℝ := fun a => a / (1 - a)
+    let Wt : ℝ → ℝ := fun a => hf (hinv a / 2)
+    (∀ x, 0 ≤ x → hinv (hf x) = x) ∧ StrictMonoOn hf (Ici 0) ∧
+      ∀ β' < 1, ¬ ∀ a ∈ Icc (0 : ℝ) (9 / 10), ∀ a' ∈ Icc (0 : ℝ) (9 / 10),
+        |Wt a - Wt a'| ≤ β' * |a - a'| := by
+  intro hf hinv Wt
+  refine ⟨fun x hx => ?_, fun x hx y hy hxy => ?_, fun β' hβ' hall => ?_⟩
+  · simp only [hf, hinv]
+    have : (1 + x) ≠ 0 := by linarith
+    field_simp
+    ring
+  · simp only [hf]
+    rw [div_lt_div_iff₀ (by linarith [mem_Ici.1 hx]) (by linarith [mem_Ici.1 hy])]
+    nlinarith
+  · have := hall (9 / 10) ⟨by norm_num, by norm_num⟩ (4 / 5) ⟨by norm_num, by norm_num⟩
+    simp only [Wt, hf, hinv] at this
+    norm_num [abs_of_pos] at this
+    nlinarith
+
+end StokeyLucasPrescott.DeterministicApplications
+
+/-
+Copyright (c) 2026 Robert Kirkby. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Robert Kirkby
+-/
+
+/-!
+# The principle of optimality with recursive preferences
+
+SLP Exercise 5.12a, p. 117: relate the sequence problem
+`max u_W(c)` subject to `Σ Rᵗ(p·c_t) ≤ A` (1) to the functional equation (2), as Theorems
+4.2–4.5 do for additive preferences. Here `u_W` is the utility of Exercise 5.11d, plans are
+bounded sequences in `ℝˡ₊`, and `R < 1`.
+
+* `planCost_cons`, `feasible_head`, `feasible_shift`: a plan is feasible from `A` iff its first
+  choice is in `Γ(A)` and the rest is feasible from `R⁻¹(A − p·c₀)` (the budget recursion).
+* `utility_le_value` (Theorems 4.2–4.3, upper half): with `W` nondecreasing in `z` (W4), every
+  feasible plan has `u_W(c) ≤ v(A)`.
+* `exists_plan_near` (lower half): following the policy for `n + 1` periods and consuming nothing
+  afterwards is feasible and comes within `βⁿ⁺¹(‖u_W‖ + ‖v‖)` of `v(A)`.
+* `ex_5_12a`: so `v(A) = sup{u_W(c) : c feasible from A}`, the supremum function.
+* `ex_5_12a_optimal` (Theorem 4.5): a plan whose wealth path satisfies
+  `v(A_t) = W(c_t, v(A_{t+1}))` at every date attains `v(A)`; `ex_5_12a_necessary`
+  (Theorem 4.4): with `W` strictly increasing in `z`, an optimal plan satisfies (2) at the first
+  date and its continuation is optimal.
+
+Optimal plans need not exist: when the policy's consumption path is unbounded it is not in `L`,
+and the supremum is approached by the truncated plans only.
+-/
+
+open Set Filter Topology BoundedContinuousFunction
+
+namespace StokeyLucasPrescott.DeterministicApplications
+
+variable {l : ℕ} {W : (Fin l → ℝ) → ℝ → ℝ} {p : Fin l → ℝ} {R β M : ℝ}
+
+/-- The present value `Σ Rᵗ(p·c_t)` of a plan. -/
+noncomputable def planCost (p : Fin l → ℝ) (R : ℝ) (c : Seq l) : ℝ :=
+  ∑' t, R ^ t * spend p (c.1 t)
+
+theorem spend_le_bound {p : Fin l → ℝ} (hp : ∀ i, 0 < p i) (c : Seq l) (t : ℕ) :
+    spend p (c.1 t) ≤ (∑ i, p i) * ‖c.1‖ := by
+  simp only [spend, Finset.sum_mul]
+  refine Finset.sum_le_sum fun i _ => mul_le_mul_of_nonneg_left ?_ (hp i).le
+  calc c.1 t i ≤ ‖c.1 t i‖ := Real.le_norm_self _
+    _ ≤ ‖c.1 t‖ := norm_le_pi_norm _ i
+    _ ≤ ‖c.1‖ := c.1.norm_coe_le_norm t
+
+theorem summable_planCost {p : Fin l → ℝ} (hp : ∀ i, 0 < p i) (hR0 : 0 < R) (hR1 : R < 1)
+    (c : Seq l) : Summable fun t => R ^ t * spend p (c.1 t) :=
+  Summable.of_nonneg_of_le (fun t => mul_nonneg (pow_nonneg hR0.le t) (spend_nonneg hp (c.2 t)))
+    (fun t => mul_le_mul_of_nonneg_left (spend_le_bound hp c t) (pow_nonneg hR0.le t))
+    ((summable_geometric_of_lt_one hR0.le hR1).mul_right _)
+
+theorem planCost_nonneg {p : Fin l → ℝ} (hp : ∀ i, 0 < p i) (hR0 : 0 < R) (c : Seq l) :
+    0 ≤ planCost p R c :=
+  tsum_nonneg fun t => mul_nonneg (pow_nonneg hR0.le t) (spend_nonneg hp (c.2 t))
+
+/-- The budget recursion: `Σ Rᵗp·c_t = p·c₀ + R Σ Rᵗp·c_{t+1}`. -/
+theorem planCost_eq {p : Fin l → ℝ} (hp : ∀ i, 0 < p i) (hR0 : 0 < R) (hR1 : R < 1)
+    (c : Seq l) : planCost p R c = spend p (c.1 0) + R * planCost p R (shiftSeq c) := by
+  rw [planCost, (summable_planCost hp hR0 hR1 c).tsum_eq_zero_add, planCost, ← tsum_mul_left]
+  simp only [pow_zero, one_mul, shiftSeq_apply, pow_succ]
+  congr 1
+  exact tsum_congr fun t => by ring
+
+/-- `c` is feasible from `A`. -/
+def Feasible5 (p : Fin l → ℝ) (R : ℝ) (A : ℝ) (c : Seq l) : Prop := planCost p R c ≤ A
+
+theorem feasible_head {p : Fin l → ℝ} (hp : ∀ i, 0 < p i) (hR0 : 0 < R) (hR1 : R < 1)
+    {A : Wealth} {c : Seq l} (hc : Feasible5 p R A.1 c) : c.1 0 ∈ budgetΓ p A := by
+  refine ⟨c.2 0, ?_⟩
+  have := planCost_eq hp hR0 hR1 c
+  have := mul_nonneg hR0.le (planCost_nonneg hp hR0 (shiftSeq c))
+  unfold Feasible5 at hc
+  linarith
+
+theorem feasible_shift {p : Fin l → ℝ} (hp : ∀ i, 0 < p i) (hR0 : 0 < R) (hR1 : R < 1)
+    {A : ℝ} {c : Seq l} (hc : Feasible5 p R A c) :
+    Feasible5 p R (nextWealth p R A (c.1 0)) (shiftSeq c) := by
+  have := planCost_eq hp hR0 hR1 c
+  unfold Feasible5 at hc ⊢
+  rw [nextWealth, le_div_iff₀ hR0]
+  linarith
+
+/-! ### The value bounds every feasible plan -/
+
+/-- **Exercise 5.12a (Theorems 4.2–4.3, upper half).** With `W` nondecreasing in `z`, every
+feasible plan has `u_W(c) ≤ v(A)`. -/
+theorem utility_le_value (h : ConsHyp W p R β M) (hA : AggHyp W β M) (hR1 : R < 1)
+    (hW4 : ∀ C, 0 ≤ C → Monotone (W C)) {v : Wealth →ᵇ ℝ} (hv : consT h v = v)
+    {uW : Seq l →ᵇ ℝ} (hu : opTW hA uW = uW) (A : Wealth) (c : Seq l)
+    (hc : Feasible5 p R A.1 c) : uW c ≤ v A := by
+  set K := ‖uW‖ + ‖v‖
+  have hvx : ∀ A : Wealth, v A = maxValue (consObj W p R v) (budgetΓ p) A := fun A =>
+    (DFunLike.congr_fun hv A).symm
+  have hfe : ∀ c, uW c = W (c.1 0) (uW (shiftSeq c)) := fun c => (DFunLike.congr_fun hu c).symm
+  have hstep : ∀ n : ℕ, ∀ (A : Wealth) (c : Seq l), Feasible5 p R A.1 c →
+      uW c - v A ≤ β ^ n * K := by
+    intro n
+    induction n with
+    | zero =>
+      intro A c _
+      have h1 := abs_apply_le_norm uW c
+      have h2 : |v A| ≤ ‖v‖ := by simpa [Real.norm_eq_abs] using v.norm_coe_le_norm A
+      have h3 := le_abs_self (uW c)
+      have h4 := neg_abs_le (v A)
+      rw [pow_zero, one_mul]
+      simp only [K]
+      linarith
+    | succ n ih =>
+      intro A c hc
+      have hc0 := feasible_head h.p_pos h.R_pos hR1 hc
+      set A₁ : Wealth := ⟨nextWealth p R A.1 (c.1 0), mem_Ici.2 (div_nonneg
+        (by linarith [hc0.2]) h.R_pos.le)⟩
+      have hsc := feasible_shift h.p_pos h.R_pos hR1 hc
+      have hIH := ih A₁ (shiftSeq c) hsc
+      have hvA : W (c.1 0) (v A₁) ≤ v A := by
+        rw [hvx A]
+        have := le_maxValue (continuous_consObj h v.continuous).continuousOn
+          (budget_compact h.p_pos A) hc0
+        have e : vext v (nextWealth p R A.1 (c.1 0)) = v A₁ := vext_of_nonneg v A₁.2
+        simp only [consObj] at this
+        rw [e] at this
+        exact this
+      rw [hfe c]
+      rcases le_total (uW (shiftSeq c)) (v A₁) with hle | hlt
+      · have := hW4 _ (c.2 0) hle
+        have : 0 ≤ β ^ (n + 1) * K :=
+          mul_nonneg (pow_nonneg h.β_pos.le _) (add_nonneg (norm_nonneg _) (norm_nonneg _))
+        linarith
+      · have hl := h.lip _ (c.2 0) (uW (shiftSeq c)) (v A₁)
+        rw [abs_of_nonneg (sub_nonneg.2 hlt)] at hl
+        have := le_abs_self (W (c.1 0) (uW (shiftSeq c)) - W (c.1 0) (v A₁))
+        have hb := mul_le_mul_of_nonneg_left hIH h.β_pos.le
+        rw [pow_succ]
+        nlinarith
+  have hlim : Tendsto (fun n => β ^ n * K) atTop (𝓝 0) := by
+    simpa using (tendsto_pow_atTop_nhds_zero_of_lt_one h.β_pos.le h.β_lt).mul_const K
+  have := ge_of_tendsto' hlim fun n => hstep n A c hc
+  linarith
+
+/-! ### Plans that follow the policy -/
+
+/-- `(C, c₀, c₁, …)`. -/
+noncomputable def consSeq (C : Fin l → ℝ) (hC : 0 ≤ C) (c : Seq l) : Seq l :=
+  ⟨BoundedContinuousFunction.mkOfDiscrete (fun t => Nat.casesOn t C fun s => c.1 s)
+      (2 * (‖C‖ + ‖c.1‖)) fun s t => by
+        have hb : ∀ u : ℕ, ‖(Nat.casesOn u C fun s => c.1 s : Fin l → ℝ)‖ ≤ ‖C‖ + ‖c.1‖ :=
+          fun u => by
+            cases u with
+            | zero =>
+              change ‖C‖ ≤ ‖C‖ + ‖c.1‖
+              linarith [norm_nonneg c.1]
+            | succ s =>
+              change ‖c.1 s‖ ≤ ‖C‖ + ‖c.1‖
+              linarith [c.1.norm_coe_le_norm s, norm_nonneg C]
+        exact (dist_le_norm_add_norm _ _).trans (by linarith [hb s, hb t]),
+    fun t => by
+      cases t with
+      | zero => exact hC
+      | succ s => exact c.2 s⟩
+
+theorem consSeq_head (C : Fin l → ℝ) (hC : 0 ≤ C) (c : Seq l) : (consSeq C hC c).1 0 = C := rfl
+
+theorem shiftSeq_consSeq (C : Fin l → ℝ) (hC : 0 ≤ C) (c : Seq l) :
+    shiftSeq (consSeq C hC c) = c := Subtype.ext (by ext t i; rfl)
+
+/-- The policy: a maximizer at each wealth level. -/
+noncomputable def consPolicy (h : ConsHyp W p R β M) (v : Wealth →ᵇ ℝ) (A : Wealth) :
+    Fin l → ℝ :=
+  (exists_consT_argmax h v A).choose
+
+theorem consPolicy_spec (h : ConsHyp W p R β M) (v : Wealth →ᵇ ℝ) (A : Wealth) :
+    consPolicy h v A ∈ budgetΓ p A ∧
+      consT h v A = consObj W p R v (A, consPolicy h v A) :=
+  ⟨(exists_consT_argmax h v A).choose_spec.1, (exists_consT_argmax h v A).choose_spec.2.1⟩
+
+/-- Next period's wealth under the policy. -/
+noncomputable def policyNext (h : ConsHyp W p R β M) (v : Wealth →ᵇ ℝ) (A : Wealth) : Wealth :=
+  ⟨nextWealth p R A.1 (consPolicy h v A), mem_Ici.2 (by
+    unfold nextWealth
+    exact div_nonneg (by linarith [(consPolicy_spec h v A).1.2]) h.R_pos.le)⟩
+
+/-- Follow the policy for `n + 1` periods, then consume nothing. -/
+noncomputable def policyPlan (h : ConsHyp W p R β M) (v : Wealth →ᵇ ℝ) :
+    ℕ → Wealth → Seq l
+  | 0, A => consSeq (consPolicy h v A) (consPolicy_spec h v A).1.1 zeroSeq
+  | n + 1, A => consSeq (consPolicy h v A) (consPolicy_spec h v A).1.1
+      (policyPlan h v n (policyNext h v A))
+
+/-- **Exercise 5.12a (lower half).** The truncated policy plans are feasible and come within
+`βⁿ⁺¹(‖u_W‖ + ‖v‖)` of `v(A)`. -/
+theorem exists_plan_near (h : ConsHyp W p R β M) (hA : AggHyp W β M) (hR1 : R < 1)
+    {v : Wealth →ᵇ ℝ} (hv : consT h v = v) {uW : Seq l →ᵇ ℝ} (hu : opTW hA uW = uW)
+    (huz : uW zeroSeq = 0) (n : ℕ) (A : Wealth) :
+    Feasible5 p R A.1 (policyPlan h v n A) ∧
+      |uW (policyPlan h v n A) - v A| ≤ β ^ (n + 1) * (‖uW‖ + ‖v‖) := by
+  have hfe : ∀ c, uW c = W (c.1 0) (uW (shiftSeq c)) := fun c => (DFunLike.congr_fun hu c).symm
+  have hvA : ∀ A : Wealth, v A = W (consPolicy h v A) (v (policyNext h v A)) := fun A => by
+    have := (consPolicy_spec h v A).2
+    rw [hv] at this
+    rw [this]
+    simp only [consObj]
+    have e : vext v (nextWealth p R A.1 (consPolicy h v A)) = v (policyNext h v A) :=
+      vext_of_nonneg v (policyNext h v A).2
+    rw [e]
+  have hcost : ∀ (C : Fin l → ℝ) (hC : 0 ≤ C) (c : Seq l),
+      planCost p R (consSeq C hC c) = spend p C + R * planCost p R c := fun C hC c => by
+    rw [planCost_eq h.p_pos h.R_pos hR1, consSeq_head, shiftSeq_consSeq]
+  have hzero : planCost p R (zeroSeq : Seq l) = 0 := by
+    simp [planCost, zeroSeq, spend]
+  have hKn : 0 ≤ ‖uW‖ + ‖v‖ := add_nonneg (norm_nonneg _) (norm_nonneg _)
+  induction n generalizing A with
+  | zero =>
+    have hs := (consPolicy_spec h v A).1
+    refine ⟨?_, ?_⟩
+    · unfold Feasible5
+      simp only [policyPlan]
+      rw [hcost, hzero, mul_zero, add_zero]
+      exact hs.2
+    · simp only [policyPlan]
+      rw [hfe, consSeq_head, shiftSeq_consSeq, huz, hvA A]
+      refine (h.lip _ hs.1 0 _).trans ?_
+      rw [zero_sub, abs_neg, zero_add, pow_one]
+      have : |v (policyNext h v A)| ≤ ‖v‖ := by
+        simpa [Real.norm_eq_abs] using v.norm_coe_le_norm _
+      nlinarith [h.β_pos, norm_nonneg uW]
+  | succ n ih =>
+    have hs := (consPolicy_spec h v A).1
+    obtain ⟨hf, hb⟩ := ih (policyNext h v A)
+    refine ⟨?_, ?_⟩
+    · unfold Feasible5 at hf ⊢
+      simp only [policyPlan]
+      rw [hcost]
+      have hn : (policyNext h v A).1 = nextWealth p R A.1 (consPolicy h v A) := rfl
+      rw [hn, nextWealth] at hf
+      have := mul_le_mul_of_nonneg_left hf h.R_pos.le
+      rw [mul_div_cancel₀ _ h.R_pos.ne'] at this
+      linarith
+    · simp only [policyPlan]
+      rw [hfe, consSeq_head, shiftSeq_consSeq, hvA A]
+      refine (h.lip _ hs.1 _ _).trans ?_
+      rw [pow_succ', mul_assoc]
+      exact mul_le_mul_of_nonneg_left hb h.β_pos.le
+
+/-- **Exercise 5.12a.** The solution of (2) is the supremum function of (1):
+`v(A) = sup{u_W(c) : Σ Rᵗp·c_t ≤ A}`. -/
+theorem ex_5_12a (h : ConsHyp W p R β M) (hA : AggHyp W β M) (hR1 : R < 1)
+    (hW4 : ∀ C, 0 ≤ C → Monotone (W C)) {v : Wealth →ᵇ ℝ} (hv : consT h v = v)
+    {uW : Seq l →ᵇ ℝ} (hu : opTW hA uW = uW) (huz : uW zeroSeq = 0) (A : Wealth) :
+    v A = sSup (uW '' {c | Feasible5 p R A.1 c}) := by
+  have hne : (uW '' {c | Feasible5 p R A.1 c}).Nonempty :=
+    ⟨_, zeroSeq, show planCost p R zeroSeq ≤ A.1 by simp [planCost, zeroSeq, spend, A.2.out], rfl⟩
+  have hbdd : BddAbove (uW '' {c | Feasible5 p R A.1 c}) := by
+    refine ⟨v A, ?_⟩
+    rintro _ ⟨c, hc, rfl⟩
+    exact utility_le_value h hA hR1 hW4 hv hu A c hc
+  have hub : ∀ y ∈ uW '' {c | Feasible5 p R A.1 c}, y ≤ v A := by
+    rintro _ ⟨c, hc, rfl⟩
+    exact utility_le_value h hA hR1 hW4 hv hu A c hc
+  refine le_antisymm ?_ (csSup_le hne hub)
+  have hlim : Tendsto (fun n : ℕ => v A - β ^ (n + 1) * (‖uW‖ + ‖v‖)) atTop (𝓝 (v A)) := by
+    have := ((tendsto_pow_atTop_nhds_zero_of_lt_one h.β_pos.le h.β_lt).comp
+      (tendsto_add_atTop_nat 1)).mul_const (‖uW‖ + ‖v‖)
+    simpa using (tendsto_const_nhds (x := v A)).sub this
+  refine le_of_tendsto' hlim fun n => ?_
+  obtain ⟨hf, hb⟩ := exists_plan_near h hA hR1 hv hu huz n A
+  have := le_csSup hbdd ⟨_, hf, rfl⟩
+  linarith [neg_abs_le (uW (policyPlan h v n A) - v A)]
+
+/-- The wealth path `A₀ = A`, `A_{t+1} = R⁻¹(A_t − p·c_t)`. -/
+noncomputable def wealthPath (p : Fin l → ℝ) (R : ℝ) (A : ℝ) (c : Seq l) : ℕ → ℝ
+  | 0 => A
+  | t + 1 => nextWealth p R (wealthPath p R A c t) (c.1 t)
+
+/-- **Exercise 5.12a (Theorem 4.5).** If `v(A_t) = W(c_t, v(A_{t+1}))` along the wealth path at
+every date, then `u_W(c) = v(A)`: the plan is optimal. -/
+theorem ex_5_12a_optimal (hA : AggHyp W β M) {v : Wealth →ᵇ ℝ} {uW : Seq l →ᵇ ℝ}
+    (hu : opTW hA uW = uW) (A : ℝ) (c : Seq l)
+    (hpath : ∀ t, vext v (wealthPath p R A c t) =
+      W (c.1 t) (vext v (wealthPath p R A c (t + 1)))) : uW c = vext v A := by
+  have hfe : ∀ c, uW c = W (c.1 0) (uW (shiftSeq c)) := fun c => (DFunLike.congr_fun hu c).symm
+  set K := ‖uW‖ + ‖v‖
+  -- along the shifted plans, `|u_W(ₜc) − v(A_t)| ≤ βⁿK`
+  have hpathshift : ∀ (n : ℕ) (A : ℝ) (c : Seq l), (∀ t, vext v (wealthPath p R A c t) =
+      W (c.1 t) (vext v (wealthPath p R A c (t + 1)))) →
+      |uW c - vext v A| ≤ β ^ n * K := by
+    intro n
+    induction n with
+    | zero =>
+      intro A c _
+      have h1 := abs_apply_le_norm uW c
+      have h2 := abs_vext_le v A
+      simp only [pow_zero, one_mul, K]
+      exact (abs_sub _ _).trans (add_le_add h1 h2)
+    | succ n ih =>
+      intro A c hp
+      have hp' : ∀ t, vext v (wealthPath p R (nextWealth p R A (c.1 0)) (shiftSeq c) t) =
+          W ((shiftSeq c).1 t) (vext v (wealthPath p R (nextWealth p R A (c.1 0))
+            (shiftSeq c) (t + 1))) := by
+        have hw : ∀ t, wealthPath p R (nextWealth p R A (c.1 0)) (shiftSeq c) t =
+            wealthPath p R A c (t + 1) := by
+          intro t
+          induction t with
+          | zero => rfl
+          | succ t iht => simp only [wealthPath] at iht ⊢; rw [iht]; rfl
+        intro t
+        rw [hw, hw]
+        exact hp (t + 1)
+      have hIH := ih _ _ hp'
+      rw [hfe c, show vext v A = W (c.1 0) (vext v (wealthPath p R A c 1)) from hp 0]
+      refine (hA.lip _ (c.2 0) _ _).trans ?_
+      rw [pow_succ', mul_assoc]
+      exact mul_le_mul_of_nonneg_left hIH hA.β_pos.le
+  have hlim : Tendsto (fun n => β ^ n * K) atTop (𝓝 0) := by
+    simpa using (tendsto_pow_atTop_nhds_zero_of_lt_one hA.β_pos.le hA.β_lt).mul_const K
+  have := ge_of_tendsto' hlim fun n => hpathshift n A c hpath
+  exact sub_eq_zero.1 (abs_nonpos_iff.1 this)
+
+/-- **Exercise 5.12a (Theorem 4.4).** With `W` strictly increasing in `z`, an optimal feasible plan
+satisfies (2) at the first date, and its continuation is optimal from next period's wealth. -/
+theorem ex_5_12a_necessary (h : ConsHyp W p R β M) (hA : AggHyp W β M) (hR1 : R < 1)
+    (hW4 : ∀ C, 0 ≤ C → StrictMono (W C)) {v : Wealth →ᵇ ℝ} (hv : consT h v = v)
+    {uW : Seq l →ᵇ ℝ} (hu : opTW hA uW = uW) {A : Wealth} {c : Seq l}
+    (hc : Feasible5 p R A.1 c) (hopt : uW c = v A) :
+    v A = W (c.1 0) (vext v (nextWealth p R A.1 (c.1 0))) ∧
+      uW (shiftSeq c) = vext v (nextWealth p R A.1 (c.1 0)) := by
+  have hc0 := feasible_head h.p_pos h.R_pos hR1 hc
+  have hA₁ : 0 ≤ nextWealth p R A.1 (c.1 0) := div_nonneg (by linarith [hc0.2]) h.R_pos.le
+  set A₁ : Wealth := ⟨_, hA₁⟩
+  have hfe : ∀ c, uW c = W (c.1 0) (uW (shiftSeq c)) := fun c => (DFunLike.congr_fun hu c).symm
+  have hle := utility_le_value h hA hR1 (fun C hC => (hW4 C hC).monotone) hv hu A₁ (shiftSeq c)
+    (feasible_shift h.p_pos h.R_pos hR1 hc)
+  have hvA : W (c.1 0) (v A₁) ≤ v A := by
+    rw [← DFunLike.congr_fun hv A]
+    have := le_maxValue (continuous_consObj h v.continuous).continuousOn
+      (budget_compact h.p_pos A) hc0
+    simp only [consObj, vext_of_nonneg v hA₁] at this
+    exact this
+  have h1 := (hW4 _ (c.2 0)).monotone hle
+  rw [← hfe c, hopt] at h1
+  have heq : W (c.1 0) (uW (shiftSeq c)) = W (c.1 0) (v A₁) := by
+    rw [← hfe c]; linarith
+  rw [vext_of_nonneg v hA₁]
+  exact ⟨by linarith, (hW4 _ (c.2 0)).injective heq⟩
+
+end StokeyLucasPrescott.DeterministicApplications
+
 set_option linter.style.longLine false
 #print axioms StokeyLucasPrescott.DeterministicApplications.addIso
 #print axioms StokeyLucasPrescott.DeterministicApplications.addIso_apply
@@ -6697,3 +9796,242 @@ set_option linter.style.longLine false
 #print axioms StokeyLucasPrescott.DeterministicApplications.ex_5_7b_profile
 #print axioms StokeyLucasPrescott.DeterministicApplications.ex_5_7b_corners
 #print axioms StokeyLucasPrescott.DeterministicApplications.ex_5_7b_single_peaked
+#print axioms StokeyLucasPrescott.DeterministicApplications.WeightedHyp
+#print axioms StokeyLucasPrescott.DeterministicApplications.WeightedHyp.mk
+#print axioms StokeyLucasPrescott.DeterministicApplications.WeightedHyp.h43
+#print axioms StokeyLucasPrescott.DeterministicApplications.WeightedHyp.cont
+#print axioms StokeyLucasPrescott.DeterministicApplications.WeightedHyp.w_cont
+#print axioms StokeyLucasPrescott.DeterministicApplications.WeightedHyp.w_pos
+#print axioms StokeyLucasPrescott.DeterministicApplications.WeightedHyp.bdd
+#print axioms StokeyLucasPrescott.DeterministicApplications.WeightedHyp.β_pos
+#print axioms StokeyLucasPrescott.DeterministicApplications.WeightedHyp.ρ_lt
+#print axioms StokeyLucasPrescott.DeterministicApplications.WeightedHyp.growth
+#print axioms StokeyLucasPrescott.DeterministicApplications.SolvesFE
+#print axioms StokeyLucasPrescott.DeterministicApplications.wobj
+#print axioms StokeyLucasPrescott.DeterministicApplications.WeightedHyp.ρ_pos
+#print axioms StokeyLucasPrescott.DeterministicApplications.continuousOn_wobj
+#print axioms StokeyLucasPrescott.DeterministicApplications.abs_wobj_le
+#print axioms StokeyLucasPrescott.DeterministicApplications.bound_wmaxValue
+#print axioms StokeyLucasPrescott.DeterministicApplications.wbellman
+#print axioms StokeyLucasPrescott.DeterministicApplications.exists_wbellman_argmax
+#print axioms StokeyLucasPrescott.DeterministicApplications.wbellman_contraction
+#print axioms StokeyLucasPrescott.DeterministicApplications.solvesFE_iff
+#print axioms StokeyLucasPrescott.DeterministicApplications.weighted_exists_unique
+#print axioms StokeyLucasPrescott.DeterministicApplications.human_assumption43
+#print axioms StokeyLucasPrescott.DeterministicApplications.HCGrowthHyp
+#print axioms StokeyLucasPrescott.DeterministicApplications.HCGrowthHyp.mk
+#print axioms StokeyLucasPrescott.DeterministicApplications.HCGrowthHyp.δ_pos
+#print axioms StokeyLucasPrescott.DeterministicApplications.HCGrowthHyp.δ_lt
+#print axioms StokeyLucasPrescott.DeterministicApplications.HCGrowthHyp.lam_pos
+#print axioms StokeyLucasPrescott.DeterministicApplications.HCGrowthHyp.β_pos
+#print axioms StokeyLucasPrescott.DeterministicApplications.HCGrowthHyp.discount
+#print axioms StokeyLucasPrescott.DeterministicApplications.HCGrowthHyp.φ_cont
+#print axioms StokeyLucasPrescott.DeterministicApplications.HCGrowthHyp.φ_nonneg
+#print axioms StokeyLucasPrescott.DeterministicApplications.HCGrowthHyp.φ_le_one
+#print axioms StokeyLucasPrescott.DeterministicApplications.HCGrowthHyp.f_cont
+#print axioms StokeyLucasPrescott.DeterministicApplications.HCGrowthHyp.f_nonneg
+#print axioms StokeyLucasPrescott.DeterministicApplications.HCGrowthHyp.f_mono
+#print axioms StokeyLucasPrescott.DeterministicApplications.HCGrowthHyp.U_cont
+#print axioms StokeyLucasPrescott.DeterministicApplications.HCGrowthHyp.U_mono
+#print axioms StokeyLucasPrescott.DeterministicApplications.HCGrowthHyp.lin
+#print axioms StokeyLucasPrescott.DeterministicApplications.hcF
+#print axioms StokeyLucasPrescott.DeterministicApplications.hcW
+#print axioms StokeyLucasPrescott.DeterministicApplications.concave_linear_bound
+#print axioms StokeyLucasPrescott.DeterministicApplications.hc_weighted
+#print axioms StokeyLucasPrescott.DeterministicApplications.ex_5_8a
+#print axioms StokeyLucasPrescott.DeterministicApplications.rpow_le_one_add
+#print axioms StokeyLucasPrescott.DeterministicApplications.hcObj
+#print axioms StokeyLucasPrescott.DeterministicApplications.hcPhi
+#print axioms StokeyLucasPrescott.DeterministicApplications.ex_5_8b
+#print axioms StokeyLucasPrescott.DeterministicApplications.investG
+#print axioms StokeyLucasPrescott.DeterministicApplications.investH
+#print axioms StokeyLucasPrescott.DeterministicApplications.invest_fe
+#print axioms StokeyLucasPrescott.DeterministicApplications.invest_telescope
+#print axioms StokeyLucasPrescott.DeterministicApplications.invest_partialSum_le
+#print axioms StokeyLucasPrescott.DeterministicApplications.invest_plan_tendsto
+#print axioms StokeyLucasPrescott.DeterministicApplications.exists_max_sublinear
+#print axioms StokeyLucasPrescott.DeterministicApplications.invest_euler
+#print axioms StokeyLucasPrescott.DeterministicApplications.clamp_maximizes
+#print axioms StokeyLucasPrescott.DeterministicApplications.bounded_policy
+#print axioms StokeyLucasPrescott.DeterministicApplications.intervalΓ
+#print axioms StokeyLucasPrescott.DeterministicApplications.intervalΓ_assumption43
+#print axioms StokeyLucasPrescott.DeterministicApplications.bellman_concave_of_concaveF
+#print axioms StokeyLucasPrescott.DeterministicApplications.fixed_concave_of_concaveF
+#print axioms StokeyLucasPrescott.DeterministicApplications.concaveOn_liftR_of_concave
+#print axioms StokeyLucasPrescott.DeterministicApplications.exists_bound_Icc_prod
+#print axioms StokeyLucasPrescott.DeterministicApplications.investF
+#print axioms StokeyLucasPrescott.DeterministicApplications.boundedΓ
+#print axioms StokeyLucasPrescott.DeterministicApplications.bounded_assumption43
+#print axioms StokeyLucasPrescott.DeterministicApplications.bounded_assumption44
+#print axioms StokeyLucasPrescott.DeterministicApplications.ex_5_9a_bounds
+#print axioms StokeyLucasPrescott.DeterministicApplications.adjF
+#print axioms StokeyLucasPrescott.DeterministicApplications.fullΓ
+#print axioms StokeyLucasPrescott.DeterministicApplications.full_assumption43
+#print axioms StokeyLucasPrescott.DeterministicApplications.mem_fullΓ
+#print axioms StokeyLucasPrescott.DeterministicApplications.adj_assumption44
+#print axioms StokeyLucasPrescott.DeterministicApplications.adj_a47
+#print axioms StokeyLucasPrescott.DeterministicApplications.full_a48
+#print axioms StokeyLucasPrescott.DeterministicApplications.AdjHyp
+#print axioms StokeyLucasPrescott.DeterministicApplications.AdjHyp.mk
+#print axioms StokeyLucasPrescott.DeterministicApplications.AdjHyp.p_pos
+#print axioms StokeyLucasPrescott.DeterministicApplications.AdjHyp.δ_pos
+#print axioms StokeyLucasPrescott.DeterministicApplications.AdjHyp.δ_lt
+#print axioms StokeyLucasPrescott.DeterministicApplications.AdjHyp.β_pos
+#print axioms StokeyLucasPrescott.DeterministicApplications.AdjHyp.β_lt
+#print axioms StokeyLucasPrescott.DeterministicApplications.AdjHyp.K_pos
+#print axioms StokeyLucasPrescott.DeterministicApplications.AdjHyp.f_cont
+#print axioms StokeyLucasPrescott.DeterministicApplications.AdjHyp.f_concave
+#print axioms StokeyLucasPrescott.DeterministicApplications.AdjHyp.c_cont
+#print axioms StokeyLucasPrescott.DeterministicApplications.AdjHyp.c_convex
+#print axioms StokeyLucasPrescott.DeterministicApplications.AdjHyp.h43
+#print axioms StokeyLucasPrescott.DeterministicApplications.AdjHyp.h44
+#print axioms StokeyLucasPrescott.DeterministicApplications.ex_5_9b
+#print axioms StokeyLucasPrescott.DeterministicApplications.ex_5_9b_mono
+#print axioms StokeyLucasPrescott.DeterministicApplications.ex_5_9b_slope
+#print axioms StokeyLucasPrescott.DeterministicApplications.ex_5_9b_envelope
+#print axioms StokeyLucasPrescott.DeterministicApplications.ex_5_9b_foc
+#print axioms StokeyLucasPrescott.DeterministicApplications.ex_5_9b_euler
+#print axioms StokeyLucasPrescott.DeterministicApplications.ex_5_9b_steady
+#print axioms StokeyLucasPrescott.DeterministicApplications.profitPi
+#print axioms StokeyLucasPrescott.DeterministicApplications.profitPi_eq
+#print axioms StokeyLucasPrescott.DeterministicApplications.labor_demand_exists
+#print axioms StokeyLucasPrescott.DeterministicApplications.labor_demand_unique
+#print axioms StokeyLucasPrescott.DeterministicApplications.profitPi_zero
+#print axioms StokeyLucasPrescott.DeterministicApplications.profitPi_mono
+#print axioms StokeyLucasPrescott.DeterministicApplications.profitPi_concave
+#print axioms StokeyLucasPrescott.DeterministicApplications.profitPi_strictConcave
+#print axioms StokeyLucasPrescott.DeterministicApplications.profitPi_deriv
+#print axioms StokeyLucasPrescott.DeterministicApplications.CapStock
+#print axioms StokeyLucasPrescott.DeterministicApplications.isCone_Ici
+#print axioms StokeyLucasPrescott.DeterministicApplications.crsΓ
+#print axioms StokeyLucasPrescott.DeterministicApplications.crsH
+#print axioms StokeyLucasPrescott.DeterministicApplications.CRSInvHyp
+#print axioms StokeyLucasPrescott.DeterministicApplications.CRSInvHyp.mk
+#print axioms StokeyLucasPrescott.DeterministicApplications.CRSInvHyp.δ_pos
+#print axioms StokeyLucasPrescott.DeterministicApplications.CRSInvHyp.δ_lt
+#print axioms StokeyLucasPrescott.DeterministicApplications.CRSInvHyp.α_pos
+#print axioms StokeyLucasPrescott.DeterministicApplications.CRSInvHyp.β_pos
+#print axioms StokeyLucasPrescott.DeterministicApplications.CRSInvHyp.discount
+#print axioms StokeyLucasPrescott.DeterministicApplications.CRSInvHyp.p_nonneg
+#print axioms StokeyLucasPrescott.DeterministicApplications.CRSInvHyp.q_nonneg
+#print axioms StokeyLucasPrescott.DeterministicApplications.CRSInvHyp.F_cont
+#print axioms StokeyLucasPrescott.DeterministicApplications.CRSInvHyp.F_hom
+#print axioms StokeyLucasPrescott.DeterministicApplications.CRSInvHyp.β_lt
+#print axioms StokeyLucasPrescott.DeterministicApplications.crs_assumption410
+#print axioms StokeyLucasPrescott.DeterministicApplications.crs_F_bound
+#print axioms StokeyLucasPrescott.DeterministicApplications.crs_assumption411
+#print axioms StokeyLucasPrescott.DeterministicApplications.ex_5_10a
+#print axioms StokeyLucasPrescott.DeterministicApplications.satisfiesFE_of_solvesFE
+#print axioms StokeyLucasPrescott.DeterministicApplications.solvesFE_rescale
+#print axioms StokeyLucasPrescott.DeterministicApplications.ex_5_10b
+#print axioms StokeyLucasPrescott.DeterministicApplications.ex_5_10c
+#print axioms StokeyLucasPrescott.DeterministicApplications.seqSet
+#print axioms StokeyLucasPrescott.DeterministicApplications.Seq
+#print axioms StokeyLucasPrescott.DeterministicApplications.convex_seqSet
+#print axioms StokeyLucasPrescott.DeterministicApplications.shiftSeq
+#print axioms StokeyLucasPrescott.DeterministicApplications.shiftSeq_apply
+#print axioms StokeyLucasPrescott.DeterministicApplications.continuous_shiftSeq
+#print axioms StokeyLucasPrescott.DeterministicApplications.continuous_head
+#print axioms StokeyLucasPrescott.DeterministicApplications.abs_apply_le_norm
+#print axioms StokeyLucasPrescott.DeterministicApplications.zeroSeq
+#print axioms StokeyLucasPrescott.DeterministicApplications.shiftSeq_zero
+#print axioms StokeyLucasPrescott.DeterministicApplications.trunc
+#print axioms StokeyLucasPrescott.DeterministicApplications.trunc_apply
+#print axioms StokeyLucasPrescott.DeterministicApplications.head_trunc
+#print axioms StokeyLucasPrescott.DeterministicApplications.shiftSeq_trunc_zero
+#print axioms StokeyLucasPrescott.DeterministicApplications.shiftSeq_trunc_succ
+#print axioms StokeyLucasPrescott.DeterministicApplications.opTU
+#print axioms StokeyLucasPrescott.DeterministicApplications.opTU_contraction
+#print axioms StokeyLucasPrescott.DeterministicApplications.ex_5_11c
+#print axioms StokeyLucasPrescott.DeterministicApplications.ex_5_11a
+#print axioms StokeyLucasPrescott.DeterministicApplications.ex_5_11b_complete
+#print axioms StokeyLucasPrescott.DeterministicApplications.eventuallyZero
+#print axioms StokeyLucasPrescott.DeterministicApplications.ex_5_11b_counterexample
+#print axioms StokeyLucasPrescott.DeterministicApplications.AggHyp
+#print axioms StokeyLucasPrescott.DeterministicApplications.AggHyp.mk
+#print axioms StokeyLucasPrescott.DeterministicApplications.AggHyp.β_pos
+#print axioms StokeyLucasPrescott.DeterministicApplications.AggHyp.β_lt
+#print axioms StokeyLucasPrescott.DeterministicApplications.AggHyp.cont
+#print axioms StokeyLucasPrescott.DeterministicApplications.AggHyp.zero
+#print axioms StokeyLucasPrescott.DeterministicApplications.AggHyp.bdd
+#print axioms StokeyLucasPrescott.DeterministicApplications.AggHyp.lip
+#print axioms StokeyLucasPrescott.DeterministicApplications.opTW
+#print axioms StokeyLucasPrescott.DeterministicApplications.opTW_apply
+#print axioms StokeyLucasPrescott.DeterministicApplications.opTW_contraction
+#print axioms StokeyLucasPrescott.DeterministicApplications.ex_5_11d
+#print axioms StokeyLucasPrescott.DeterministicApplications.ex_5_11d_mono
+#print axioms StokeyLucasPrescott.DeterministicApplications.monotoneOn_of_concave_nonneg
+#print axioms StokeyLucasPrescott.DeterministicApplications.ex_5_11d_concave
+#print axioms StokeyLucasPrescott.DeterministicApplications.bump
+#print axioms StokeyLucasPrescott.DeterministicApplications.shiftSeq_bump_zero
+#print axioms StokeyLucasPrescott.DeterministicApplications.shiftSeq_bump_succ
+#print axioms StokeyLucasPrescott.DeterministicApplications.head_bump_zero
+#print axioms StokeyLucasPrescott.DeterministicApplications.head_bump_succ
+#print axioms StokeyLucasPrescott.DeterministicApplications.ex_5_11e
+#print axioms StokeyLucasPrescott.DeterministicApplications.Wealth
+#print axioms StokeyLucasPrescott.DeterministicApplications.spend
+#print axioms StokeyLucasPrescott.DeterministicApplications.budgetΓ
+#print axioms StokeyLucasPrescott.DeterministicApplications.nextWealth
+#print axioms StokeyLucasPrescott.DeterministicApplications.vext
+#print axioms StokeyLucasPrescott.DeterministicApplications.vext_of_nonneg
+#print axioms StokeyLucasPrescott.DeterministicApplications.continuous_vext
+#print axioms StokeyLucasPrescott.DeterministicApplications.abs_vext_le
+#print axioms StokeyLucasPrescott.DeterministicApplications.continuous_spend
+#print axioms StokeyLucasPrescott.DeterministicApplications.spend_nonneg
+#print axioms StokeyLucasPrescott.DeterministicApplications.le_div_of_spend
+#print axioms StokeyLucasPrescott.DeterministicApplications.norm_le_of_budget
+#print axioms StokeyLucasPrescott.DeterministicApplications.budget_compact
+#print axioms StokeyLucasPrescott.DeterministicApplications.zero_mem_budget
+#print axioms StokeyLucasPrescott.DeterministicApplications.budget_lhc
+#print axioms StokeyLucasPrescott.DeterministicApplications.budget_uhc
+#print axioms StokeyLucasPrescott.DeterministicApplications.ConsHyp
+#print axioms StokeyLucasPrescott.DeterministicApplications.ConsHyp.mk
+#print axioms StokeyLucasPrescott.DeterministicApplications.ConsHyp.p_pos
+#print axioms StokeyLucasPrescott.DeterministicApplications.ConsHyp.R_pos
+#print axioms StokeyLucasPrescott.DeterministicApplications.ConsHyp.β_pos
+#print axioms StokeyLucasPrescott.DeterministicApplications.ConsHyp.β_lt
+#print axioms StokeyLucasPrescott.DeterministicApplications.ConsHyp.cont
+#print axioms StokeyLucasPrescott.DeterministicApplications.ConsHyp.bdd
+#print axioms StokeyLucasPrescott.DeterministicApplications.ConsHyp.lip
+#print axioms StokeyLucasPrescott.DeterministicApplications.consObj
+#print axioms StokeyLucasPrescott.DeterministicApplications.continuous_consObj
+#print axioms StokeyLucasPrescott.DeterministicApplications.abs_consObj_le
+#print axioms StokeyLucasPrescott.DeterministicApplications.consMax_le
+#print axioms StokeyLucasPrescott.DeterministicApplications.consT
+#print axioms StokeyLucasPrescott.DeterministicApplications.exists_consT_argmax
+#print axioms StokeyLucasPrescott.DeterministicApplications.consT_contraction
+#print axioms StokeyLucasPrescott.DeterministicApplications.ex_5_12b
+#print axioms StokeyLucasPrescott.DeterministicApplications.ex_5_12b_concave
+#print axioms StokeyLucasPrescott.DeterministicApplications.ex_5_12b_demand
+#print axioms StokeyLucasPrescott.DeterministicApplications.ConsHyp.smul
+#print axioms StokeyLucasPrescott.DeterministicApplications.spend_smul
+#print axioms StokeyLucasPrescott.DeterministicApplications.scaleW
+#print axioms StokeyLucasPrescott.DeterministicApplications.ex_5_12b_homogeneous
+#print axioms StokeyLucasPrescott.DeterministicApplications.spend_add_smul_single
+#print axioms StokeyLucasPrescott.DeterministicApplications.concaveOn_vext
+#print axioms StokeyLucasPrescott.DeterministicApplications.ex_5_12c_envelope
+#print axioms StokeyLucasPrescott.DeterministicApplications.ex_5_12c_intratemporal
+#print axioms StokeyLucasPrescott.DeterministicApplications.ex_5_12c_euler
+#print axioms StokeyLucasPrescott.DeterministicApplications.ex_5_12d
+#print axioms StokeyLucasPrescott.DeterministicApplications.ex_5_12d_not_aggregator
+#print axioms StokeyLucasPrescott.DeterministicApplications.planCost
+#print axioms StokeyLucasPrescott.DeterministicApplications.spend_le_bound
+#print axioms StokeyLucasPrescott.DeterministicApplications.summable_planCost
+#print axioms StokeyLucasPrescott.DeterministicApplications.planCost_nonneg
+#print axioms StokeyLucasPrescott.DeterministicApplications.planCost_eq
+#print axioms StokeyLucasPrescott.DeterministicApplications.Feasible5
+#print axioms StokeyLucasPrescott.DeterministicApplications.feasible_head
+#print axioms StokeyLucasPrescott.DeterministicApplications.feasible_shift
+#print axioms StokeyLucasPrescott.DeterministicApplications.utility_le_value
+#print axioms StokeyLucasPrescott.DeterministicApplications.consSeq
+#print axioms StokeyLucasPrescott.DeterministicApplications.consSeq_head
+#print axioms StokeyLucasPrescott.DeterministicApplications.shiftSeq_consSeq
+#print axioms StokeyLucasPrescott.DeterministicApplications.consPolicy
+#print axioms StokeyLucasPrescott.DeterministicApplications.consPolicy_spec
+#print axioms StokeyLucasPrescott.DeterministicApplications.policyNext
+#print axioms StokeyLucasPrescott.DeterministicApplications.policyPlan
+#print axioms StokeyLucasPrescott.DeterministicApplications.exists_plan_near
+#print axioms StokeyLucasPrescott.DeterministicApplications.ex_5_12a
+#print axioms StokeyLucasPrescott.DeterministicApplications.wealthPath
+#print axioms StokeyLucasPrescott.DeterministicApplications.ex_5_12a_optimal
+#print axioms StokeyLucasPrescott.DeterministicApplications.ex_5_12a_necessary
