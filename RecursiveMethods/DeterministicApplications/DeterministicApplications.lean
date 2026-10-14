@@ -37,3 +37,5 @@ import DeterministicApplications.Pareto
 import DeterministicApplications.Inventory
 import DeterministicApplications.InventorySolution
 import DeterministicApplications.InventoryVerify
+import DeterministicApplications.ContinuousInventory
+import DeterministicApplications.UnknownDemand
