@@ -1,0 +1,4691 @@
+{
+  "checked_at_utc": "2026-10-15T01:26:02.634719+00:00",
+  "theorems": 316,
+  "module_theorems": {
+    "StochasticDP/Correspondences.lean": 2,
+    "StochasticDP/Contraction.lean": 8,
+    "StochasticDP/Maximum.lean": 14,
+    "StochasticDP/Envelope.lean": 2,
+    "StochasticDP/Selection.lean": 8,
+    "StochasticDP/TransitionFunctions.lean": 19,
+    "StochasticDP/StochasticKernels.lean": 11,
+    "StochasticDP/Histories.lean": 18,
+    "StochasticDP/Plans.lean": 17,
+    "StochasticDP/Theorem92.lean": 13,
+    "StochasticDP/Lemma93.lean": 17,
+    "StochasticDP/Theorem94.lean": 9,
+    "StochasticDP/Exercise92.lean": 9,
+    "StochasticDP/Blackwell.lean": 4,
+    "StochasticDP/Lemma95.lean": 11,
+    "StochasticDP/BoundedReturns.lean": 18,
+    "StochasticDP/BoundedOptimal.lean": 9,
+    "StochasticDP/BoundedMonotone.lean": 8,
+    "StochasticDP/InteriorPoints.lean": 3,
+    "StochasticDP/BoundedConcave.lean": 10,
+    "StochasticDP/BoundedPolicy.lean": 10,
+    "StochasticDP/CRSSpace.lean": 15,
+    "StochasticDP/ConstantReturns.lean": 14,
+    "StochasticDP/CRSConcavity.lean": 14,
+    "StochasticDP/Theorem912.lean": 1,
+    "StochasticDP/HistMarginals.lean": 5,
+    "StochasticDP/Quadratic.lean": 13,
+    "StochasticDP/LogModel.lean": 1,
+    "StochasticDP/PolicyKernels.lean": 9,
+    "StochasticDP/MarkovPolicy.lean": 24
+  },
+  "audited_declarations": 463,
+  "declarations": [
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.IsLHC",
+      "kind": "def",
+      "module": "StochasticDP/Correspondences.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.IsUHC",
+      "kind": "def",
+      "module": "StochasticDP/Correspondences.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.graph",
+      "kind": "def",
+      "module": "StochasticDP/Correspondences.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.continuousAt_of_isUHC_singleton",
+      "kind": "theorem",
+      "module": "StochasticDP/Correspondences.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.isCompact_graph",
+      "kind": "theorem",
+      "module": "StochasticDP/Correspondences.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.IsContraction",
+      "kind": "def",
+      "module": "StochasticDP/Contraction.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.IsContraction.uniformContinuous",
+      "kind": "theorem",
+      "module": "StochasticDP/Contraction.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.dist_iterate_succ_le",
+      "kind": "theorem",
+      "module": "StochasticDP/Contraction.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.dist_iterate_le",
+      "kind": "theorem",
+      "module": "StochasticDP/Contraction.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.cauchySeq_iterate",
+      "kind": "theorem",
+      "module": "StochasticDP/Contraction.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.theorem_3_2",
+      "kind": "theorem",
+      "module": "StochasticDP/Contraction.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.dist_fixedPoint_le",
+      "kind": "theorem",
+      "module": "StochasticDP/Contraction.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.corollary_1",
+      "kind": "theorem",
+      "module": "StochasticDP/Contraction.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.corollary_2",
+      "kind": "theorem",
+      "module": "StochasticDP/Contraction.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.maxValue",
+      "kind": "def",
+      "module": "StochasticDP/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.argmax",
+      "kind": "def",
+      "module": "StochasticDP/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.continuousOn_section",
+      "kind": "theorem",
+      "module": "StochasticDP/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.exists_argmax",
+      "kind": "theorem",
+      "module": "StochasticDP/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.le_maxValue",
+      "kind": "theorem",
+      "module": "StochasticDP/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.tendsto_f_graph",
+      "kind": "theorem",
+      "module": "StochasticDP/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.theorem_3_6",
+      "kind": "theorem",
+      "module": "StochasticDP/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.UniqueArgmax",
+      "kind": "structure",
+      "module": "StochasticDP/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.UniqueArgmax.mk",
+      "kind": "constructor",
+      "module": "StochasticDP/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.UniqueArgmax.nonempty",
+      "kind": "projection",
+      "module": "StochasticDP/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.UniqueArgmax.compact",
+      "kind": "projection",
+      "module": "StochasticDP/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.UniqueArgmax.lhc",
+      "kind": "projection",
+      "module": "StochasticDP/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.UniqueArgmax.uhc",
+      "kind": "projection",
+      "module": "StochasticDP/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.UniqueArgmax.cont",
+      "kind": "projection",
+      "module": "StochasticDP/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.UniqueArgmax.unique",
+      "kind": "projection",
+      "module": "StochasticDP/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.argmaxFn",
+      "kind": "def",
+      "module": "StochasticDP/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.UniqueArgmax.argmaxFn_mem",
+      "kind": "theorem",
+      "module": "StochasticDP/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.UniqueArgmax.argmax_eq",
+      "kind": "theorem",
+      "module": "StochasticDP/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.UniqueArgmax.lt_of_ne",
+      "kind": "theorem",
+      "module": "StochasticDP/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.UniqueArgmax.continuous_argmaxFn",
+      "kind": "theorem",
+      "module": "StochasticDP/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.UniqueArgmax.lemma_3_7",
+      "kind": "theorem",
+      "module": "StochasticDP/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.UniqueArgmax.lemma_3_7_uniform",
+      "kind": "theorem",
+      "module": "StochasticDP/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.shortfall_lt",
+      "kind": "theorem",
+      "module": "StochasticDP/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.theorem_3_8",
+      "kind": "theorem",
+      "module": "StochasticDP/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.theorem_3_8_uniform",
+      "kind": "theorem",
+      "module": "StochasticDP/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.theorem_4_10",
+      "kind": "theorem",
+      "module": "StochasticDP/Envelope.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.ex_4_5",
+      "kind": "theorem",
+      "module": "StochasticDP/Envelope.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.IsMeasurableSelection",
+      "kind": "def",
+      "module": "StochasticDP/Selection.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.IsMeasCorr",
+      "kind": "def",
+      "module": "StochasticDP/Selection.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.minCoord",
+      "kind": "def",
+      "module": "StochasticDP/Selection.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.minCoord_mem",
+      "kind": "theorem",
+      "module": "StochasticDP/Selection.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.minCoord_le",
+      "kind": "theorem",
+      "module": "StochasticDP/Selection.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.measurable_minCoord",
+      "kind": "theorem",
+      "module": "StochasticDP/Selection.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.refineCorr",
+      "kind": "def",
+      "module": "StochasticDP/Selection.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.IsMeasCorr.refine",
+      "kind": "theorem",
+      "module": "StochasticDP/Selection.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.lexCorr",
+      "kind": "def",
+      "module": "StochasticDP/Selection.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.lexCorr_spec",
+      "kind": "theorem",
+      "module": "StochasticDP/Selection.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.isMeasCorr_of_uhc",
+      "kind": "theorem",
+      "module": "StochasticDP/Selection.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.theorem_7_6",
+      "kind": "theorem",
+      "module": "StochasticDP/Selection.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.theorem_7_6_subtype",
+      "kind": "theorem",
+      "module": "StochasticDP/Selection.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.IsTransitionFunction",
+      "kind": "def",
+      "module": "StochasticDP/TransitionFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.isTransitionFunction_iff",
+      "kind": "theorem",
+      "module": "StochasticDP/TransitionFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.markovOp",
+      "kind": "def",
+      "module": "StochasticDP/TransitionFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.markovOpR",
+      "kind": "def",
+      "module": "StochasticDP/TransitionFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.adjointOp",
+      "kind": "def",
+      "module": "StochasticDP/TransitionFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.markovOp_indicator",
+      "kind": "theorem",
+      "module": "StochasticDP/TransitionFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.theorem_8_1",
+      "kind": "theorem",
+      "module": "StochasticDP/TransitionFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.integrable_of_bounded",
+      "kind": "theorem",
+      "module": "StochasticDP/TransitionFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.theorem_8_1_cor",
+      "kind": "theorem",
+      "module": "StochasticDP/TransitionFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.ex_8_1",
+      "kind": "theorem",
+      "module": "StochasticDP/TransitionFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.adjointOp_apply",
+      "kind": "theorem",
+      "module": "StochasticDP/TransitionFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.theorem_8_2",
+      "kind": "theorem",
+      "module": "StochasticDP/TransitionFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.ex_8_2",
+      "kind": "theorem",
+      "module": "StochasticDP/TransitionFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.theorem_8_3",
+      "kind": "theorem",
+      "module": "StochasticDP/TransitionFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.theorem_8_3_cor",
+      "kind": "theorem",
+      "module": "StochasticDP/TransitionFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.pairing",
+      "kind": "def",
+      "module": "StochasticDP/TransitionFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.ex_8_3",
+      "kind": "theorem",
+      "module": "StochasticDP/TransitionFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.kpow",
+      "kind": "def",
+      "module": "StochasticDP/TransitionFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.kpow_one",
+      "kind": "theorem",
+      "module": "StochasticDP/TransitionFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.ex_8_4a",
+      "kind": "theorem",
+      "module": "StochasticDP/TransitionFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.kpow_add",
+      "kind": "theorem",
+      "module": "StochasticDP/TransitionFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.markovOp_comp",
+      "kind": "theorem",
+      "module": "StochasticDP/TransitionFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.adjointOp_comp",
+      "kind": "theorem",
+      "module": "StochasticDP/TransitionFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.ex_8_4b",
+      "kind": "theorem",
+      "module": "StochasticDP/TransitionFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.adjointOp_iterate",
+      "kind": "theorem",
+      "module": "StochasticDP/TransitionFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.IsFeller",
+      "kind": "def",
+      "module": "StochasticDP/TransitionFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.IsMonotoneTF",
+      "kind": "def",
+      "module": "StochasticDP/TransitionFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.IsStochasticKernel",
+      "kind": "def",
+      "module": "StochasticDP/StochasticKernels.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.isStochasticKernel_iff",
+      "kind": "theorem",
+      "module": "StochasticDP/StochasticKernels.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.theorem_8_4",
+      "kind": "theorem",
+      "module": "StochasticDP/StochasticKernels.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.theorem_8_4_cor",
+      "kind": "theorem",
+      "module": "StochasticDP/StochasticKernels.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.directProd",
+      "kind": "def",
+      "module": "StochasticDP/StochasticKernels.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.isMarkovKernel_directProd",
+      "kind": "theorem",
+      "module": "StochasticDP/StochasticKernels.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.theorem_8_5",
+      "kind": "theorem",
+      "module": "StochasticDP/StochasticKernels.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.theorem_8_5_unique",
+      "kind": "theorem",
+      "module": "StochasticDP/StochasticKernels.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.theorem_8_6",
+      "kind": "theorem",
+      "module": "StochasticDP/StochasticKernels.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.theorem_8_7",
+      "kind": "theorem",
+      "module": "StochasticDP/StochasticKernels.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.theorem_8_6_cor",
+      "kind": "theorem",
+      "module": "StochasticDP/StochasticKernels.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.ex_8_9a",
+      "kind": "theorem",
+      "module": "StochasticDP/StochasticKernels.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.ex_8_9b",
+      "kind": "theorem",
+      "module": "StochasticDP/StochasticKernels.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.measurable_cons",
+      "kind": "theorem",
+      "module": "StochasticDP/Histories.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.measurable_snoc",
+      "kind": "theorem",
+      "module": "StochasticDP/Histories.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.lastState",
+      "kind": "def",
+      "module": "StochasticDP/Histories.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.measurable_lastState",
+      "kind": "theorem",
+      "module": "StochasticDP/Histories.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.lastState_cons",
+      "kind": "theorem",
+      "module": "StochasticDP/Histories.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.lastState_snoc",
+      "kind": "theorem",
+      "module": "StochasticDP/Histories.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.hist",
+      "kind": "def",
+      "module": "StochasticDP/Histories.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.ex_8_8a",
+      "kind": "theorem",
+      "module": "StochasticDP/Histories.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.hist_zero_lintegral",
+      "kind": "theorem",
+      "module": "StochasticDP/Histories.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.hist_succ_lintegral",
+      "kind": "theorem",
+      "module": "StochasticDP/Histories.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.iterLInt",
+      "kind": "def",
+      "module": "StochasticDP/Histories.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.theorem_8_8",
+      "kind": "theorem",
+      "module": "StochasticDP/Histories.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.ex_8_5",
+      "kind": "theorem",
+      "module": "StochasticDP/Histories.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.nextKernel",
+      "kind": "def",
+      "module": "StochasticDP/Histories.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.isMarkovKernel_nextKernel",
+      "kind": "theorem",
+      "module": "StochasticDP/Histories.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.nextKernel_apply",
+      "kind": "theorem",
+      "module": "StochasticDP/Histories.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.hist_succ_lintegral_last",
+      "kind": "theorem",
+      "module": "StochasticDP/Histories.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.ex_8_8b",
+      "kind": "theorem",
+      "module": "StochasticDP/Histories.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.hist_succ_eq_cons",
+      "kind": "theorem",
+      "module": "StochasticDP/Histories.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.ex_8_8c_last",
+      "kind": "theorem",
+      "module": "StochasticDP/Histories.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.ex_8_8c_first",
+      "kind": "theorem",
+      "module": "StochasticDP/Histories.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.iterInt",
+      "kind": "def",
+      "module": "StochasticDP/Histories.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.theorem_8_8_integrable",
+      "kind": "theorem",
+      "module": "StochasticDP/Histories.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.Model",
+      "kind": "structure",
+      "module": "StochasticDP/Plans.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.Model.mk",
+      "kind": "constructor",
+      "module": "StochasticDP/Plans.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.Model.Q",
+      "kind": "projection",
+      "module": "StochasticDP/Plans.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.Model.\u0393",
+      "kind": "projection",
+      "module": "StochasticDP/Plans.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.Model.\u03c6",
+      "kind": "projection",
+      "module": "StochasticDP/Plans.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.Model.F",
+      "kind": "projection",
+      "module": "StochasticDP/Plans.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.Model.\u03b2",
+      "kind": "projection",
+      "module": "StochasticDP/Plans.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.Model.first",
+      "kind": "abbrev",
+      "module": "StochasticDP/Plans.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.Plan",
+      "kind": "abbrev",
+      "module": "StochasticDP/Plans.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.xState",
+      "kind": "def",
+      "module": "StochasticDP/Plans.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.state",
+      "kind": "def",
+      "module": "StochasticDP/Plans.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.state_zero",
+      "kind": "theorem",
+      "module": "StochasticDP/Plans.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.IsFeasible",
+      "kind": "def",
+      "module": "StochasticDP/Plans.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.ret",
+      "kind": "def",
+      "module": "StochasticDP/Plans.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.uN",
+      "kind": "def",
+      "module": "StochasticDP/Plans.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.planValue",
+      "kind": "def",
+      "module": "StochasticDP/Plans.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.vStar",
+      "kind": "def",
+      "module": "StochasticDP/Plans.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.planValue_eq",
+      "kind": "theorem",
+      "module": "StochasticDP/Plans.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.measurable_init",
+      "kind": "theorem",
+      "module": "StochasticDP/Plans.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.measurable_xState",
+      "kind": "theorem",
+      "module": "StochasticDP/Plans.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.measurable_state",
+      "kind": "theorem",
+      "module": "StochasticDP/Plans.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.measurable_ret",
+      "kind": "theorem",
+      "module": "StochasticDP/Plans.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.state_snoc",
+      "kind": "theorem",
+      "module": "StochasticDP/Plans.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.cont",
+      "kind": "def",
+      "module": "StochasticDP/Plans.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.start\u2081",
+      "kind": "def",
+      "module": "StochasticDP/Plans.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.init_cons",
+      "kind": "theorem",
+      "module": "StochasticDP/Plans.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.xState_cons",
+      "kind": "theorem",
+      "module": "StochasticDP/Plans.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.state_cons",
+      "kind": "theorem",
+      "module": "StochasticDP/Plans.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.ret_cons",
+      "kind": "theorem",
+      "module": "StochasticDP/Plans.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.IsFeasible.cont",
+      "kind": "theorem",
+      "module": "StochasticDP/Plans.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.genX",
+      "kind": "def",
+      "module": "StochasticDP/Plans.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.genPlan",
+      "kind": "def",
+      "module": "StochasticDP/Plans.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.xState_genPlan",
+      "kind": "theorem",
+      "module": "StochasticDP/Plans.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.state_genPlan",
+      "kind": "theorem",
+      "module": "StochasticDP/Plans.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.genPlan_apply",
+      "kind": "theorem",
+      "module": "StochasticDP/Plans.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.genPlan_feasible",
+      "kind": "theorem",
+      "module": "StochasticDP/Plans.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.lemma_9_1",
+      "kind": "theorem",
+      "module": "StochasticDP/Plans.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.expV",
+      "kind": "def",
+      "module": "StochasticDP/Theorem92.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.rhs",
+      "kind": "def",
+      "module": "StochasticDP/Theorem92.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.SolvesFE",
+      "kind": "def",
+      "module": "StochasticDP/Theorem92.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.policy",
+      "kind": "def",
+      "module": "StochasticDP/Theorem92.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.integrable_next",
+      "kind": "theorem",
+      "module": "StochasticDP/Theorem92.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.integrable_first",
+      "kind": "theorem",
+      "module": "StochasticDP/Theorem92.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.integral_hist_zero",
+      "kind": "theorem",
+      "module": "StochasticDP/Theorem92.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.integral_v_succ",
+      "kind": "theorem",
+      "module": "StochasticDP/Theorem92.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.integrable_expV",
+      "kind": "theorem",
+      "module": "StochasticDP/Theorem92.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.integral_v_step",
+      "kind": "theorem",
+      "module": "StochasticDP/Theorem92.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.v_ge_uN",
+      "kind": "theorem",
+      "module": "StochasticDP/Theorem92.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.v_eq_uN",
+      "kind": "theorem",
+      "module": "StochasticDP/Theorem92.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.SolvesFE.le",
+      "kind": "theorem",
+      "module": "StochasticDP/Theorem92.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.planValue_le_of_limit",
+      "kind": "theorem",
+      "module": "StochasticDP/Theorem92.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.planValue_genPlan_of_limit",
+      "kind": "theorem",
+      "module": "StochasticDP/Theorem92.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.ex_9_4",
+      "kind": "theorem",
+      "module": "StochasticDP/Theorem92.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.theorem_9_2",
+      "kind": "theorem",
+      "module": "StochasticDP/Theorem92.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.integral_ret_succ",
+      "kind": "theorem",
+      "module": "StochasticDP/Lemma93.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.integrable_ret_cont",
+      "kind": "theorem",
+      "module": "StochasticDP/Lemma93.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.uN_succ",
+      "kind": "theorem",
+      "module": "StochasticDP/Lemma93.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.measurable_ret_cont",
+      "kind": "theorem",
+      "module": "StochasticDP/Lemma93.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.ex_9_1",
+      "kind": "theorem",
+      "module": "StochasticDP/Lemma93.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.uR",
+      "kind": "def",
+      "module": "StochasticDP/Lemma93.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.bound_nonneg",
+      "kind": "theorem",
+      "module": "StochasticDP/Lemma93.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.integrable_ret_of_bound",
+      "kind": "theorem",
+      "module": "StochasticDP/Lemma93.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.abs_term_le",
+      "kind": "theorem",
+      "module": "StochasticDP/Lemma93.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.summable_terms",
+      "kind": "theorem",
+      "module": "StochasticDP/Lemma93.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.tendsto_uN",
+      "kind": "theorem",
+      "module": "StochasticDP/Lemma93.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.planValue_eq_uR",
+      "kind": "theorem",
+      "module": "StochasticDP/Lemma93.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.abs_uN_le",
+      "kind": "theorem",
+      "module": "StochasticDP/Lemma93.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.abs_uR_le",
+      "kind": "theorem",
+      "module": "StochasticDP/Lemma93.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.bounds_cont",
+      "kind": "theorem",
+      "module": "StochasticDP/Lemma93.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.measurable_uR_cont",
+      "kind": "theorem",
+      "module": "StochasticDP/Lemma93.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.lemma_9_3",
+      "kind": "theorem",
+      "module": "StochasticDP/Lemma93.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.planValuePos",
+      "kind": "def",
+      "module": "StochasticDP/Lemma93.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.lemma_9_3_nonneg",
+      "kind": "theorem",
+      "module": "StochasticDP/Lemma93.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.measurable_expV",
+      "kind": "theorem",
+      "module": "StochasticDP/Theorem94.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.measurableSet_policy",
+      "kind": "theorem",
+      "module": "StochasticDP/Theorem94.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.theorem_9_4_step",
+      "kind": "theorem",
+      "module": "StochasticDP/Theorem94.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.theorem_9_4_ae",
+      "kind": "theorem",
+      "module": "StochasticDP/Theorem94.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.theorem_9_4",
+      "kind": "theorem",
+      "module": "StochasticDP/Theorem94.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.hist_singleton_ne_zero",
+      "kind": "theorem",
+      "module": "StochasticDP/Theorem94.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.coin",
+      "kind": "def",
+      "module": "StochasticDP/Theorem94.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.isProbabilityMeasure_coin",
+      "kind": "theorem",
+      "module": "StochasticDP/Theorem94.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.coin_singleton_ne_zero",
+      "kind": "theorem",
+      "module": "StochasticDP/Theorem94.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.coinModel",
+      "kind": "def",
+      "module": "StochasticDP/Theorem94.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.coinPlan",
+      "kind": "def",
+      "module": "StochasticDP/Theorem94.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.theorem_9_4_counterexample",
+      "kind": "theorem",
+      "module": "StochasticDP/Theorem94.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.exists_tendsto_ereal_of_monotone",
+      "kind": "theorem",
+      "module": "StochasticDP/Exercise92.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.exists_tendsto_ereal_of_antitone",
+      "kind": "theorem",
+      "module": "StochasticDP/Exercise92.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.ex_9_2a",
+      "kind": "theorem",
+      "module": "StochasticDP/Exercise92.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.ex_9_2b_theorem_9_2",
+      "kind": "theorem",
+      "module": "StochasticDP/Exercise92.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.Model.negF",
+      "kind": "abbrev",
+      "module": "StochasticDP/Exercise92.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.xState_negF",
+      "kind": "theorem",
+      "module": "StochasticDP/Exercise92.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.ret_negF",
+      "kind": "theorem",
+      "module": "StochasticDP/Exercise92.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.planValuePos_ne_top",
+      "kind": "theorem",
+      "module": "StochasticDP/Exercise92.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.ex_9_2b_lemma_9_3",
+      "kind": "theorem",
+      "module": "StochasticDP/Exercise92.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.ex_9_2b_theorem_9_4",
+      "kind": "theorem",
+      "module": "StochasticDP/Exercise92.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.blackwellModel",
+      "kind": "def",
+      "module": "StochasticDP/Blackwell.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.hist_id",
+      "kind": "theorem",
+      "module": "StochasticDP/Blackwell.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.lastState_const",
+      "kind": "theorem",
+      "module": "StochasticDP/Blackwell.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.uN_blackwell",
+      "kind": "theorem",
+      "module": "StochasticDP/Blackwell.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.blackwell_example",
+      "kind": "theorem",
+      "module": "StochasticDP/Blackwell.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.mop",
+      "kind": "def",
+      "module": "StochasticDP/Lemma95.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.PreservesBC",
+      "kind": "def",
+      "module": "StochasticDP/Lemma95.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.integrable_of_abs_le",
+      "kind": "theorem",
+      "module": "StochasticDP/Lemma95.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.integral_lt_integral_of_lt",
+      "kind": "theorem",
+      "module": "StochasticDP/Lemma95.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.abs_mop_le",
+      "kind": "theorem",
+      "module": "StochasticDP/Lemma95.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.integrable_section",
+      "kind": "theorem",
+      "module": "StochasticDP/Lemma95.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.lemma_9_5_discrete",
+      "kind": "theorem",
+      "module": "StochasticDP/Lemma95.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.lemma_9_5_compact",
+      "kind": "theorem",
+      "module": "StochasticDP/Lemma95.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.lemma_9_5_comb",
+      "kind": "theorem",
+      "module": "StochasticDP/Lemma95.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.lemma_9_5_comb_strict",
+      "kind": "theorem",
+      "module": "StochasticDP/Lemma95.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.lemma_9_5_mono",
+      "kind": "theorem",
+      "module": "StochasticDP/Lemma95.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.lemma_9_5_strictMono",
+      "kind": "theorem",
+      "module": "StochasticDP/Lemma95.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.lemma_9_5'",
+      "kind": "theorem",
+      "module": "StochasticDP/Lemma95.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.domD",
+      "kind": "def",
+      "module": "StochasticDP/BoundedReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.graphA",
+      "kind": "def",
+      "module": "StochasticDP/BoundedReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.ContExp",
+      "kind": "def",
+      "module": "StochasticDP/BoundedReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.BoundedDP",
+      "kind": "structure",
+      "module": "StochasticDP/BoundedReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.BoundedDP.mk",
+      "kind": "constructor",
+      "module": "StochasticDP/BoundedReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.BoundedDP.nonempty",
+      "kind": "projection",
+      "module": "StochasticDP/BoundedReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.BoundedDP.compact",
+      "kind": "projection",
+      "module": "StochasticDP/BoundedReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.BoundedDP.lhc",
+      "kind": "projection",
+      "module": "StochasticDP/BoundedReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.BoundedDP.uhc",
+      "kind": "projection",
+      "module": "StochasticDP/BoundedReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.BoundedDP.contF",
+      "kind": "projection",
+      "module": "StochasticDP/BoundedReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.BoundedDP.bddF",
+      "kind": "projection",
+      "module": "StochasticDP/BoundedReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.BoundedDP.\u03b2_pos",
+      "kind": "projection",
+      "module": "StochasticDP/BoundedReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.BoundedDP.\u03b2_lt",
+      "kind": "projection",
+      "module": "StochasticDP/BoundedReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.BoundedDP.cont\u03c6",
+      "kind": "projection",
+      "module": "StochasticDP/BoundedReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.BoundedDP.contExp",
+      "kind": "projection",
+      "module": "StochasticDP/BoundedReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.mem_domD",
+      "kind": "theorem",
+      "module": "StochasticDP/BoundedReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.contExp_of_preservesBC",
+      "kind": "theorem",
+      "module": "StochasticDP/BoundedReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.contExp_first",
+      "kind": "theorem",
+      "module": "StochasticDP/BoundedReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.objG",
+      "kind": "def",
+      "module": "StochasticDP/BoundedReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.continuousOn_objG",
+      "kind": "theorem",
+      "module": "StochasticDP/BoundedReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.continuous_integrand",
+      "kind": "theorem",
+      "module": "StochasticDP/BoundedReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.integrable_integrand",
+      "kind": "theorem",
+      "module": "StochasticDP/BoundedReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.abs_expV_le",
+      "kind": "theorem",
+      "module": "StochasticDP/BoundedReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.bound_maxValueG",
+      "kind": "theorem",
+      "module": "StochasticDP/BoundedReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.bellman",
+      "kind": "def",
+      "module": "StochasticDP/BoundedReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.bellman_apply",
+      "kind": "theorem",
+      "module": "StochasticDP/BoundedReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.exists_bellman_argmax",
+      "kind": "theorem",
+      "module": "StochasticDP/BoundedReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.bellman_mono",
+      "kind": "theorem",
+      "module": "StochasticDP/BoundedReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.expV_add_const",
+      "kind": "theorem",
+      "module": "StochasticDP/BoundedReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.bellman_add_const",
+      "kind": "theorem",
+      "module": "StochasticDP/BoundedReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.blackwell",
+      "kind": "theorem",
+      "module": "StochasticDP/BoundedReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.bellman_contraction",
+      "kind": "theorem",
+      "module": "StochasticDP/BoundedReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.policy_eq_argmax",
+      "kind": "theorem",
+      "module": "StochasticDP/BoundedReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.ex_9_7b",
+      "kind": "theorem",
+      "module": "StochasticDP/BoundedReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.theorem_9_6",
+      "kind": "theorem",
+      "module": "StochasticDP/BoundedReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.isClosed_graph_of_uhc",
+      "kind": "theorem",
+      "module": "StochasticDP/BoundedOptimal.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.isUHC_image_val",
+      "kind": "theorem",
+      "module": "StochasticDP/BoundedOptimal.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.exists_measurableSelection",
+      "kind": "theorem",
+      "module": "StochasticDP/BoundedOptimal.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.isClosed_graphA",
+      "kind": "theorem",
+      "module": "StochasticDP/BoundedOptimal.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.ret_mem_graphA",
+      "kind": "theorem",
+      "module": "StochasticDP/BoundedOptimal.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.ex_9_7a",
+      "kind": "theorem",
+      "module": "StochasticDP/BoundedOptimal.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.solvesFE_of_fixed",
+      "kind": "theorem",
+      "module": "StochasticDP/BoundedOptimal.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.bounded_vStar",
+      "kind": "theorem",
+      "module": "StochasticDP/BoundedOptimal.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.bounded_theorem_9_4",
+      "kind": "theorem",
+      "module": "StochasticDP/BoundedOptimal.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.isClosed_pointwise_le",
+      "kind": "theorem",
+      "module": "StochasticDP/BoundedMonotone.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.bellman_strictMono_x",
+      "kind": "theorem",
+      "module": "StochasticDP/BoundedMonotone.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.ex_9_7c",
+      "kind": "theorem",
+      "module": "StochasticDP/BoundedMonotone.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.theorem_9_7",
+      "kind": "theorem",
+      "module": "StochasticDP/BoundedMonotone.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.expV_mono_z",
+      "kind": "theorem",
+      "module": "StochasticDP/BoundedMonotone.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.bellman_strictMono_z",
+      "kind": "theorem",
+      "module": "StochasticDP/BoundedMonotone.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.theorem_9_11",
+      "kind": "theorem",
+      "module": "StochasticDP/BoundedMonotone.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.ex_9_7g",
+      "kind": "theorem",
+      "module": "StochasticDP/BoundedMonotone.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.dual_apply_eq_sum",
+      "kind": "theorem",
+      "module": "StochasticDP/InteriorPoints.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.vertex",
+      "kind": "def",
+      "module": "StochasticDP/InteriorPoints.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.no_separation",
+      "kind": "theorem",
+      "module": "StochasticDP/InteriorPoints.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.eventually_mem_of_mem_interior",
+      "kind": "theorem",
+      "module": "StochasticDP/InteriorPoints.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.cmb",
+      "kind": "def",
+      "module": "StochasticDP/BoundedConcave.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.cmb_self",
+      "kind": "theorem",
+      "module": "StochasticDP/BoundedConcave.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.IsConcaveS",
+      "kind": "def",
+      "module": "StochasticDP/BoundedConcave.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.IsStrictConcaveS",
+      "kind": "def",
+      "module": "StochasticDP/BoundedConcave.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.IsStrictConcaveS.isConcaveS",
+      "kind": "theorem",
+      "module": "StochasticDP/BoundedConcave.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.Assumption910",
+      "kind": "def",
+      "module": "StochasticDP/BoundedConcave.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.Assumption911",
+      "kind": "def",
+      "module": "StochasticDP/BoundedConcave.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.IsAffine\u03c6",
+      "kind": "def",
+      "module": "StochasticDP/BoundedConcave.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.isClosed_concaveX",
+      "kind": "theorem",
+      "module": "StochasticDP/BoundedConcave.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.expV_comb",
+      "kind": "theorem",
+      "module": "StochasticDP/BoundedConcave.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.expV_comb_strict",
+      "kind": "theorem",
+      "module": "StochasticDP/BoundedConcave.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.bellman_maps_concave",
+      "kind": "theorem",
+      "module": "StochasticDP/BoundedConcave.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.ex_9_7d",
+      "kind": "theorem",
+      "module": "StochasticDP/BoundedConcave.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.argmax_unique_of_strictConcave",
+      "kind": "theorem",
+      "module": "StochasticDP/BoundedConcave.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.ex_9_7d_policy",
+      "kind": "theorem",
+      "module": "StochasticDP/BoundedConcave.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.theorem_9_8",
+      "kind": "theorem",
+      "module": "StochasticDP/BoundedConcave.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.ex_9_7d_concave",
+      "kind": "theorem",
+      "module": "StochasticDP/BoundedPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.abs_expV_sub_le",
+      "kind": "theorem",
+      "module": "StochasticDP/BoundedPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.ex_9_7e",
+      "kind": "theorem",
+      "module": "StochasticDP/BoundedPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.theorem_9_9",
+      "kind": "theorem",
+      "module": "StochasticDP/BoundedPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.convex_image_\u0393",
+      "kind": "theorem",
+      "module": "StochasticDP/BoundedPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.eventually_mem_\u0393",
+      "kind": "theorem",
+      "module": "StochasticDP/BoundedPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.liftS",
+      "kind": "def",
+      "module": "StochasticDP/BoundedPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.liftS_of_mem",
+      "kind": "theorem",
+      "module": "StochasticDP/BoundedPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.concaveOn_liftS",
+      "kind": "theorem",
+      "module": "StochasticDP/BoundedPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.ex_9_7f",
+      "kind": "theorem",
+      "module": "StochasticDP/BoundedPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.theorem_9_10",
+      "kind": "theorem",
+      "module": "StochasticDP/BoundedPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.IsCone",
+      "kind": "def",
+      "module": "StochasticDP/CRSSpace.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.csmul",
+      "kind": "def",
+      "module": "StochasticDP/CRSSpace.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.InHS",
+      "kind": "def",
+      "module": "StochasticDP/CRSSpace.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.hnormS",
+      "kind": "def",
+      "module": "StochasticDP/CRSSpace.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.hnormS_nonneg",
+      "kind": "theorem",
+      "module": "StochasticDP/CRSSpace.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.bddAbove_sphereS",
+      "kind": "theorem",
+      "module": "StochasticDP/CRSSpace.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.abs_le_hnormS",
+      "kind": "theorem",
+      "module": "StochasticDP/CRSSpace.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.abs_le_hnormS'",
+      "kind": "theorem",
+      "module": "StochasticDP/CRSSpace.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.hnormS_le",
+      "kind": "theorem",
+      "module": "StochasticDP/CRSSpace.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.inHS_sub",
+      "kind": "theorem",
+      "module": "StochasticDP/CRSSpace.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.inHS_add",
+      "kind": "theorem",
+      "module": "StochasticDP/CRSSpace.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.inHS_smul",
+      "kind": "theorem",
+      "module": "StochasticDP/CRSSpace.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.inHS_zero",
+      "kind": "theorem",
+      "module": "StochasticDP/CRSSpace.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.inHS_norm",
+      "kind": "theorem",
+      "module": "StochasticDP/CRSSpace.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.hnormS_norm",
+      "kind": "theorem",
+      "module": "StochasticDP/CRSSpace.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.hnormS_symm",
+      "kind": "theorem",
+      "module": "StochasticDP/CRSSpace.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.hnormS_sub_le",
+      "kind": "theorem",
+      "module": "StochasticDP/CRSSpace.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.hnormS_complete",
+      "kind": "theorem",
+      "module": "StochasticDP/CRSSpace.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.contraction_HS",
+      "kind": "theorem",
+      "module": "StochasticDP/CRSSpace.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.ex_9_9",
+      "kind": "theorem",
+      "module": "StochasticDP/ConstantReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.Assume919",
+      "kind": "structure",
+      "module": "StochasticDP/ConstantReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.Assume919.mk",
+      "kind": "constructor",
+      "module": "StochasticDP/ConstantReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.Assume919.convex",
+      "kind": "projection",
+      "module": "StochasticDP/ConstantReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.Assume919.nonempty",
+      "kind": "projection",
+      "module": "StochasticDP/ConstantReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.Assume919.compact",
+      "kind": "projection",
+      "module": "StochasticDP/ConstantReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.Assume919.lhc",
+      "kind": "projection",
+      "module": "StochasticDP/ConstantReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.Assume919.uhc",
+      "kind": "projection",
+      "module": "StochasticDP/ConstantReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.Assume919.cone",
+      "kind": "projection",
+      "module": "StochasticDP/ConstantReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.Assume919.\u03b1_pos",
+      "kind": "projection",
+      "module": "StochasticDP/ConstantReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.Assume919.\u03b1\u03b2_lt",
+      "kind": "projection",
+      "module": "StochasticDP/ConstantReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.Assume919.growth",
+      "kind": "projection",
+      "module": "StochasticDP/ConstantReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.Assume920",
+      "kind": "structure",
+      "module": "StochasticDP/ConstantReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.Assume920.mk",
+      "kind": "constructor",
+      "module": "StochasticDP/ConstantReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.Assume920.\u03b2_pos",
+      "kind": "projection",
+      "module": "StochasticDP/ConstantReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.Assume920.\u03b2_lt",
+      "kind": "projection",
+      "module": "StochasticDP/ConstantReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.Assume920.cont",
+      "kind": "projection",
+      "module": "StochasticDP/ConstantReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.Assume920.hom",
+      "kind": "projection",
+      "module": "StochasticDP/ConstantReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.Assume920.B_pos",
+      "kind": "projection",
+      "module": "StochasticDP/ConstantReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.Assume920.bdd",
+      "kind": "projection",
+      "module": "StochasticDP/ConstantReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.ex_9_8_growth",
+      "kind": "theorem",
+      "module": "StochasticDP/ConstantReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.ex_9_8",
+      "kind": "theorem",
+      "module": "StochasticDP/ConstantReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.crsT",
+      "kind": "def",
+      "module": "StochasticDP/ConstantReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.objG_first",
+      "kind": "theorem",
+      "module": "StochasticDP/ConstantReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.continuousOn_objG_crs",
+      "kind": "theorem",
+      "module": "StochasticDP/ConstantReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.exists_crsT_argmax",
+      "kind": "theorem",
+      "module": "StochasticDP/ConstantReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.abs_mop_le_hnormS",
+      "kind": "theorem",
+      "module": "StochasticDP/ConstantReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.integrable_section_HS",
+      "kind": "theorem",
+      "module": "StochasticDP/ConstantReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.crsT_mapsTo",
+      "kind": "theorem",
+      "module": "StochasticDP/ConstantReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.crsT_mono",
+      "kind": "theorem",
+      "module": "StochasticDP/ConstantReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.crsT_disc",
+      "kind": "theorem",
+      "module": "StochasticDP/ConstantReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.crsT_contraction",
+      "kind": "theorem",
+      "module": "StochasticDP/ConstantReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.ex_9_10a",
+      "kind": "theorem",
+      "module": "StochasticDP/ConstantReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.crs_vStar",
+      "kind": "theorem",
+      "module": "StochasticDP/ConstantReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.ex_9_9_concave",
+      "kind": "theorem",
+      "module": "StochasticDP/CRSConcavity.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.IsQuasiConcaveS",
+      "kind": "def",
+      "module": "StochasticDP/CRSConcavity.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.qcPhi",
+      "kind": "def",
+      "module": "StochasticDP/CRSConcavity.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.qcSign",
+      "kind": "def",
+      "module": "StochasticDP/CRSConcavity.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.qcF",
+      "kind": "def",
+      "module": "StochasticDP/CRSConcavity.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.twoPoint",
+      "kind": "def",
+      "module": "StochasticDP/CRSConcavity.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.isProbabilityMeasure_twoPoint",
+      "kind": "theorem",
+      "module": "StochasticDP/CRSConcavity.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.isCone_univ",
+      "kind": "theorem",
+      "module": "StochasticDP/CRSConcavity.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.integral_twoPoint",
+      "kind": "theorem",
+      "module": "StochasticDP/CRSConcavity.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.qcPhi_mono",
+      "kind": "theorem",
+      "module": "StochasticDP/CRSConcavity.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.abs_qcPhi_le",
+      "kind": "theorem",
+      "module": "StochasticDP/CRSConcavity.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.abs_qcSign_le",
+      "kind": "theorem",
+      "module": "StochasticDP/CRSConcavity.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.ex_9_9_quasiconcave_false",
+      "kind": "theorem",
+      "module": "StochasticDP/CRSConcavity.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.NonProp",
+      "kind": "def",
+      "module": "StochasticDP/CRSConcavity.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.ConcaveCRS",
+      "kind": "def",
+      "module": "StochasticDP/CRSConcavity.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.cmb_one",
+      "kind": "theorem",
+      "module": "StochasticDP/CRSConcavity.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.cmb_zero",
+      "kind": "theorem",
+      "module": "StochasticDP/CRSConcavity.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.crsT_concave",
+      "kind": "theorem",
+      "module": "StochasticDP/CRSConcavity.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.ex_9_10b",
+      "kind": "theorem",
+      "module": "StochasticDP/CRSConcavity.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.ex_9_10c_mono",
+      "kind": "theorem",
+      "module": "StochasticDP/CRSConcavity.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.ex_9_10c_diff",
+      "kind": "theorem",
+      "module": "StochasticDP/CRSConcavity.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.IsHatFeasible",
+      "kind": "def",
+      "module": "StochasticDP/Theorem912.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.vHat",
+      "kind": "def",
+      "module": "StochasticDP/Theorem912.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.theorem_9_12",
+      "kind": "theorem",
+      "module": "StochasticDP/Theorem912.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.map_init_hist",
+      "kind": "theorem",
+      "module": "StochasticDP/HistMarginals.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.lintegral_init",
+      "kind": "theorem",
+      "module": "StochasticDP/HistMarginals.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.integral_init",
+      "kind": "theorem",
+      "module": "StochasticDP/HistMarginals.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.integrable_init",
+      "kind": "theorem",
+      "module": "StochasticDP/HistMarginals.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.map_last_hist_const",
+      "kind": "theorem",
+      "module": "StochasticDP/HistMarginals.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.arKernel",
+      "kind": "def",
+      "module": "StochasticDP/Quadratic.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.measurable_ar",
+      "kind": "theorem",
+      "module": "StochasticDP/Quadratic.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.arKernel_apply",
+      "kind": "theorem",
+      "module": "StochasticDP/Quadratic.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.isMarkovKernel_arKernel",
+      "kind": "theorem",
+      "module": "StochasticDP/Quadratic.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.sq_ar_le",
+      "kind": "theorem",
+      "module": "StochasticDP/Quadratic.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.ar_lintegral_sq_le",
+      "kind": "theorem",
+      "module": "StochasticDP/Quadratic.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.ex_9_12",
+      "kind": "theorem",
+      "module": "StochasticDP/Quadratic.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.quadModel",
+      "kind": "def",
+      "module": "StochasticDP/Quadratic.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.quadV",
+      "kind": "def",
+      "module": "StochasticDP/Quadratic.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.integral_quad_ar",
+      "kind": "theorem",
+      "module": "StochasticDP/Quadratic.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.quad_rhs_eq",
+      "kind": "theorem",
+      "module": "StochasticDP/Quadratic.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.quad_coeffs",
+      "kind": "theorem",
+      "module": "StochasticDP/Quadratic.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.ex_9_13",
+      "kind": "theorem",
+      "module": "StochasticDP/Quadratic.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.ex_9_13_book_form",
+      "kind": "theorem",
+      "module": "StochasticDP/Quadratic.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.abs_quadV_le",
+      "kind": "theorem",
+      "module": "StochasticDP/Quadratic.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.linPolicy",
+      "kind": "def",
+      "module": "StochasticDP/Quadratic.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.ex_9_14",
+      "kind": "theorem",
+      "module": "StochasticDP/Quadratic.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.PosR",
+      "kind": "abbrev",
+      "module": "StochasticDP/LogModel.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.logModel",
+      "kind": "def",
+      "module": "StochasticDP/LogModel.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.logPolicy",
+      "kind": "def",
+      "module": "StochasticDP/LogModel.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.logV",
+      "kind": "def",
+      "module": "StochasticDP/LogModel.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.ex_9_11",
+      "kind": "theorem",
+      "module": "StochasticDP/LogModel.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.policyKernel",
+      "kind": "def",
+      "module": "StochasticDP/PolicyKernels.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.policyKernel_apply",
+      "kind": "theorem",
+      "module": "StochasticDP/PolicyKernels.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.theorem_9_13",
+      "kind": "theorem",
+      "module": "StochasticDP/PolicyKernels.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.ex_9_15a",
+      "kind": "theorem",
+      "module": "StochasticDP/PolicyKernels.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.ex_9_15b",
+      "kind": "theorem",
+      "module": "StochasticDP/PolicyKernels.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.theorem_9_14",
+      "kind": "theorem",
+      "module": "StochasticDP/PolicyKernels.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.policyKernel'",
+      "kind": "def",
+      "module": "StochasticDP/PolicyKernels.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.measurable_policy'",
+      "kind": "theorem",
+      "module": "StochasticDP/PolicyKernels.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.policyKernel'_apply",
+      "kind": "theorem",
+      "module": "StochasticDP/PolicyKernels.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.ex_9_17a",
+      "kind": "theorem",
+      "module": "StochasticDP/PolicyKernels.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.ex_9_17b",
+      "kind": "theorem",
+      "module": "StochasticDP/PolicyKernels.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.flipMeasure",
+      "kind": "def",
+      "module": "StochasticDP/MarkovPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.flipKernel",
+      "kind": "def",
+      "module": "StochasticDP/MarkovPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.flipKernel_apply",
+      "kind": "theorem",
+      "module": "StochasticDP/MarkovPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.isMarkovKernel_flipKernel",
+      "kind": "theorem",
+      "module": "StochasticDP/MarkovPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.flipKernel_singleton",
+      "kind": "theorem",
+      "module": "StochasticDP/MarkovPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.bv",
+      "kind": "def",
+      "module": "StochasticDP/MarkovPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.measurable_bv",
+      "kind": "theorem",
+      "module": "StochasticDP/MarkovPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.xP",
+      "kind": "def",
+      "module": "StochasticDP/MarkovPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.measurable_xP",
+      "kind": "theorem",
+      "module": "StochasticDP/MarkovPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.xNext",
+      "kind": "def",
+      "module": "StochasticDP/MarkovPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.xPair",
+      "kind": "def",
+      "module": "StochasticDP/MarkovPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.xTriple",
+      "kind": "def",
+      "module": "StochasticDP/MarkovPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.IsMarkovAt",
+      "kind": "def",
+      "module": "StochasticDP/MarkovPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.decodeZ",
+      "kind": "def",
+      "module": "StochasticDP/MarkovPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.measurable_decodeZ",
+      "kind": "theorem",
+      "module": "StochasticDP/MarkovPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.xKernel",
+      "kind": "def",
+      "module": "StochasticDP/MarkovPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.measurable_xKernel_fun",
+      "kind": "theorem",
+      "module": "StochasticDP/MarkovPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.xKernel_apply",
+      "kind": "theorem",
+      "module": "StochasticDP/MarkovPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.isMarkovKernel_xKernel",
+      "kind": "theorem",
+      "module": "StochasticDP/MarkovPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.xP_mem_Icc",
+      "kind": "theorem",
+      "module": "StochasticDP/MarkovPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.decodeZ_xNext",
+      "kind": "theorem",
+      "module": "StochasticDP/MarkovPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.ex_9_16_markov",
+      "kind": "theorem",
+      "module": "StochasticDP/MarkovPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.\u03b8g",
+      "kind": "def",
+      "module": "StochasticDP/MarkovPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.\u03b8g_sq",
+      "kind": "theorem",
+      "module": "StochasticDP/MarkovPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.\u03b8g_bounds",
+      "kind": "theorem",
+      "module": "StochasticDP/MarkovPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.xP3_eq",
+      "kind": "theorem",
+      "module": "StochasticDP/MarkovPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.xNext3_eq",
+      "kind": "theorem",
+      "module": "StochasticDP/MarkovPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.bv_false",
+      "kind": "theorem",
+      "module": "StochasticDP/MarkovPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.bv_true",
+      "kind": "theorem",
+      "module": "StochasticDP/MarkovPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.decode_A",
+      "kind": "theorem",
+      "module": "StochasticDP/MarkovPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.decode_B",
+      "kind": "theorem",
+      "module": "StochasticDP/MarkovPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.mem_A",
+      "kind": "theorem",
+      "module": "StochasticDP/MarkovPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.mem_B",
+      "kind": "theorem",
+      "module": "StochasticDP/MarkovPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.triple_rect",
+      "kind": "theorem",
+      "module": "StochasticDP/MarkovPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.ex_9_16",
+      "kind": "theorem",
+      "module": "StochasticDP/MarkovPolicy.lean"
+    }
+  ],
+  "full_build": "passed",
+  "fresh_source_compilation": "passed",
+  "fresh_source_lint_options": [
+    "-Dlinter.mathlibStandardSet=true",
+    "-Dlinter.style.header=false"
+  ],
+  "axioms": {
+    "StokeyLucasPrescott.StochasticDP.IsLHC": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.IsUHC": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.graph": [],
+    "StokeyLucasPrescott.StochasticDP.continuousAt_of_isUHC_singleton": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.isCompact_graph": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.IsContraction": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.IsContraction.uniformContinuous": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.dist_iterate_succ_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.dist_iterate_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.cauchySeq_iterate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.theorem_3_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.dist_fixedPoint_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.corollary_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.corollary_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.maxValue": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.argmax": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.continuousOn_section": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.exists_argmax": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.le_maxValue": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.tendsto_f_graph": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.theorem_3_6": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.UniqueArgmax": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.UniqueArgmax.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.UniqueArgmax.nonempty": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.UniqueArgmax.compact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.UniqueArgmax.lhc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.UniqueArgmax.uhc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.UniqueArgmax.cont": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.UniqueArgmax.unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.argmaxFn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.UniqueArgmax.argmaxFn_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.UniqueArgmax.argmax_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.UniqueArgmax.lt_of_ne": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.UniqueArgmax.continuous_argmaxFn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.UniqueArgmax.lemma_3_7": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.UniqueArgmax.lemma_3_7_uniform": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.shortfall_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.theorem_3_8": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.theorem_3_8_uniform": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.theorem_4_10": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.ex_4_5": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.IsMeasurableSelection": [],
+    "StokeyLucasPrescott.StochasticDP.IsMeasCorr": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.minCoord": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.minCoord_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.minCoord_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.measurable_minCoord": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.refineCorr": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.IsMeasCorr.refine": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.lexCorr": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.lexCorr_spec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.isMeasCorr_of_uhc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.theorem_7_6": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.theorem_7_6_subtype": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.IsTransitionFunction": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.isTransitionFunction_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.markovOp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.markovOpR": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.adjointOp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.markovOp_indicator": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.theorem_8_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.integrable_of_bounded": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.theorem_8_1_cor": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.ex_8_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.adjointOp_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.theorem_8_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.ex_8_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.theorem_8_3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.theorem_8_3_cor": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.pairing": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.ex_8_3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.kpow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.kpow_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.ex_8_4a": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.kpow_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.markovOp_comp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.adjointOp_comp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.ex_8_4b": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.adjointOp_iterate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.IsFeller": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.IsMonotoneTF": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.IsStochasticKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.isStochasticKernel_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.theorem_8_4": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.theorem_8_4_cor": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.directProd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.isMarkovKernel_directProd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.theorem_8_5": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.theorem_8_5_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.theorem_8_6": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.theorem_8_7": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.theorem_8_6_cor": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.ex_8_9a": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.ex_8_9b": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.measurable_cons": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.measurable_snoc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.lastState": [],
+    "StokeyLucasPrescott.StochasticDP.measurable_lastState": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.lastState_cons": [
+      "propext"
+    ],
+    "StokeyLucasPrescott.StochasticDP.lastState_snoc": [
+      "propext"
+    ],
+    "StokeyLucasPrescott.StochasticDP.hist": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.ex_8_8a": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.hist_zero_lintegral": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.hist_succ_lintegral": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.iterLInt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.theorem_8_8": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.ex_8_5": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.nextKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.isMarkovKernel_nextKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.nextKernel_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.hist_succ_lintegral_last": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.ex_8_8b": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.hist_succ_eq_cons": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.ex_8_8c_last": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.ex_8_8c_first": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.iterInt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.theorem_8_8_integrable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.Model": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.Model.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.Model.Q": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.Model.\u0393": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.Model.\u03c6": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.Model.F": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.Model.\u03b2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.Model.first": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.Plan": [],
+    "StokeyLucasPrescott.StochasticDP.xState": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.state": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.state_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.IsFeasible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.ret": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.uN": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.planValue": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.vStar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.planValue_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.measurable_init": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.measurable_xState": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.measurable_state": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.measurable_ret": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.state_snoc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.cont": [
+      "propext"
+    ],
+    "StokeyLucasPrescott.StochasticDP.start\u2081": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.init_cons": [
+      "propext",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.xState_cons": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.state_cons": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.ret_cons": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.IsFeasible.cont": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.genX": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.genPlan": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.xState_genPlan": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.state_genPlan": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.genPlan_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.genPlan_feasible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.lemma_9_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.expV": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.rhs": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.SolvesFE": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.policy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.integrable_next": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.integrable_first": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.integral_hist_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.integral_v_succ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.integrable_expV": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.integral_v_step": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.v_ge_uN": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.v_eq_uN": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.SolvesFE.le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.planValue_le_of_limit": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.planValue_genPlan_of_limit": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.ex_9_4": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.theorem_9_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.integral_ret_succ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.integrable_ret_cont": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.uN_succ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.measurable_ret_cont": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.ex_9_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.uR": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.bound_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.integrable_ret_of_bound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.abs_term_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.summable_terms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.tendsto_uN": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.planValue_eq_uR": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.abs_uN_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.abs_uR_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.bounds_cont": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.measurable_uR_cont": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.lemma_9_3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.planValuePos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.lemma_9_3_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.measurable_expV": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.measurableSet_policy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.theorem_9_4_step": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.theorem_9_4_ae": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.theorem_9_4": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.hist_singleton_ne_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.coin": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.isProbabilityMeasure_coin": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.coin_singleton_ne_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.coinModel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.coinPlan": [
+      "propext"
+    ],
+    "StokeyLucasPrescott.StochasticDP.theorem_9_4_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.exists_tendsto_ereal_of_monotone": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.exists_tendsto_ereal_of_antitone": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.ex_9_2a": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.ex_9_2b_theorem_9_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.Model.negF": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.xState_negF": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.ret_negF": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.planValuePos_ne_top": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.ex_9_2b_lemma_9_3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.ex_9_2b_theorem_9_4": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.blackwellModel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.hist_id": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.lastState_const": [],
+    "StokeyLucasPrescott.StochasticDP.uN_blackwell": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.blackwell_example": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.mop": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.PreservesBC": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.integrable_of_abs_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.integral_lt_integral_of_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.abs_mop_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.integrable_section": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.lemma_9_5_discrete": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.lemma_9_5_compact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.lemma_9_5_comb": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.lemma_9_5_comb_strict": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.lemma_9_5_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.lemma_9_5_strictMono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.lemma_9_5'": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.domD": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.graphA": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.ContExp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.BoundedDP": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.BoundedDP.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.BoundedDP.nonempty": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.BoundedDP.compact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.BoundedDP.lhc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.BoundedDP.uhc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.BoundedDP.contF": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.BoundedDP.bddF": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.BoundedDP.\u03b2_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.BoundedDP.\u03b2_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.BoundedDP.cont\u03c6": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.BoundedDP.contExp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.mem_domD": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.contExp_of_preservesBC": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.contExp_first": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.objG": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.continuousOn_objG": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.continuous_integrand": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.integrable_integrand": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.abs_expV_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.bound_maxValueG": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.bellman": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.bellman_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.exists_bellman_argmax": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.bellman_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.expV_add_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.bellman_add_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.blackwell": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.bellman_contraction": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.policy_eq_argmax": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.ex_9_7b": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.theorem_9_6": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.isClosed_graph_of_uhc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.isUHC_image_val": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.exists_measurableSelection": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.isClosed_graphA": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.ret_mem_graphA": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.ex_9_7a": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.solvesFE_of_fixed": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.bounded_vStar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.bounded_theorem_9_4": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.isClosed_pointwise_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.bellman_strictMono_x": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.ex_9_7c": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.theorem_9_7": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.expV_mono_z": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.bellman_strictMono_z": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.theorem_9_11": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.ex_9_7g": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.dual_apply_eq_sum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.vertex": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.no_separation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.eventually_mem_of_mem_interior": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.cmb": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.cmb_self": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.IsConcaveS": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.IsStrictConcaveS": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.IsStrictConcaveS.isConcaveS": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.Assumption910": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.Assumption911": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.IsAffine\u03c6": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.isClosed_concaveX": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.expV_comb": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.expV_comb_strict": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.bellman_maps_concave": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.ex_9_7d": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.argmax_unique_of_strictConcave": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.ex_9_7d_policy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.theorem_9_8": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.ex_9_7d_concave": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.abs_expV_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.ex_9_7e": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.theorem_9_9": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.convex_image_\u0393": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.eventually_mem_\u0393": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.liftS": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.liftS_of_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.concaveOn_liftS": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.ex_9_7f": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.theorem_9_10": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.IsCone": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.csmul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.InHS": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.hnormS": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.hnormS_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.bddAbove_sphereS": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.abs_le_hnormS": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.abs_le_hnormS'": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.hnormS_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.inHS_sub": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.inHS_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.inHS_smul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.inHS_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.inHS_norm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.hnormS_norm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.hnormS_symm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.hnormS_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.hnormS_complete": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.contraction_HS": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.ex_9_9": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.Assume919": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.Assume919.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.Assume919.convex": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.Assume919.nonempty": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.Assume919.compact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.Assume919.lhc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.Assume919.uhc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.Assume919.cone": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.Assume919.\u03b1_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.Assume919.\u03b1\u03b2_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.Assume919.growth": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.Assume920": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.Assume920.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.Assume920.\u03b2_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.Assume920.\u03b2_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.Assume920.cont": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.Assume920.hom": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.Assume920.B_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.Assume920.bdd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.ex_9_8_growth": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.ex_9_8": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.crsT": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.objG_first": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.continuousOn_objG_crs": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.exists_crsT_argmax": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.abs_mop_le_hnormS": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.integrable_section_HS": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.crsT_mapsTo": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.crsT_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.crsT_disc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.crsT_contraction": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.ex_9_10a": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.crs_vStar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.ex_9_9_concave": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.IsQuasiConcaveS": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.qcPhi": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.qcSign": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.qcF": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.twoPoint": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.isProbabilityMeasure_twoPoint": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.isCone_univ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.integral_twoPoint": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.qcPhi_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.abs_qcPhi_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.abs_qcSign_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.ex_9_9_quasiconcave_false": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.NonProp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.ConcaveCRS": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.cmb_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.cmb_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.crsT_concave": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.ex_9_10b": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.ex_9_10c_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.ex_9_10c_diff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.IsHatFeasible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.vHat": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.theorem_9_12": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.map_init_hist": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.lintegral_init": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.integral_init": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.integrable_init": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.map_last_hist_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.arKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.measurable_ar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.arKernel_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.isMarkovKernel_arKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.sq_ar_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.ar_lintegral_sq_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.ex_9_12": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.quadModel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.quadV": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.integral_quad_ar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.quad_rhs_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.quad_coeffs": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.ex_9_13": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.ex_9_13_book_form": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.abs_quadV_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.linPolicy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.ex_9_14": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.PosR": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.logModel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.logPolicy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.logV": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.ex_9_11": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.policyKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.policyKernel_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.theorem_9_13": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.ex_9_15a": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.ex_9_15b": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.theorem_9_14": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.policyKernel'": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.measurable_policy'": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.policyKernel'_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.ex_9_17a": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.ex_9_17b": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.flipMeasure": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.flipKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.flipKernel_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.isMarkovKernel_flipKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.flipKernel_singleton": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.bv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.measurable_bv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.xP": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.measurable_xP": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.xNext": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.xPair": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.xTriple": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.IsMarkovAt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.decodeZ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.measurable_decodeZ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.xKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.measurable_xKernel_fun": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.xKernel_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.isMarkovKernel_xKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.xP_mem_Icc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.decodeZ_xNext": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.ex_9_16_markov": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.\u03b8g": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.\u03b8g_sq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.\u03b8g_bounds": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.xP3_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.xNext3_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.bv_false": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.bv_true": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.decode_A": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.decode_B": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.mem_A": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.mem_B": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.triple_rect": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.ex_9_16": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  "source_sha256": {
+    "StochasticDP/Correspondences.lean": "00ba57cb37c0f8eccea2b7621e2276c599fadd4193705898ef7284e82e8dd9e7",
+    "StochasticDP/Contraction.lean": "921135d3a43484c5fbdc0bb0b1455d951d02b355f904beab61dc02d835138115",
+    "StochasticDP/Maximum.lean": "c37d80f64b1e428f01cfc6a7b70f2debcb8c70d1b06603a10ec5fd94a74f1812",
+    "StochasticDP/Envelope.lean": "724309201006f517ac4815e6aeb8898867a186d2f3a9729a58440a7a3eef754e",
+    "StochasticDP/Selection.lean": "1233efc456f67560a544f0fddc21d29b5a4304510227e4281b541ed25717f1bf",
+    "StochasticDP/TransitionFunctions.lean": "7d8e00647885df9f38f5bca47aa9f2b7bb31735c83ff299d0551951c9ba779c6",
+    "StochasticDP/StochasticKernels.lean": "17f9a3d0f14a8ab7999691e344e6b0de5aca0b84ff4f9476b1a064e7cb8dfe06",
+    "StochasticDP/Histories.lean": "04927523df86edf40cad0c67babab0117fe3a940cc91e06b6aecc449bfaf0743",
+    "StochasticDP/Plans.lean": "149486d2358ef5426839fca9f444b4f2df4dd7e78260efa2bb0e12502ae7c2fd",
+    "StochasticDP/Theorem92.lean": "4ad5c27dc4adea66b7eb3a5b0fb85e3c3659b07dc3eb9264110e298422d588e4",
+    "StochasticDP/Lemma93.lean": "7a09aa04957e7e81f87ba7006275f9e014b7cb8562039cbda1c4fe48032b2515",
+    "StochasticDP/Theorem94.lean": "ca4c6a6c0edf1687078c66231689bc952e20a467bdf2c1430845dfd419fefc17",
+    "StochasticDP/Exercise92.lean": "8acb497892fc42032ed06a35c7ca848bc6436b4c045d3c30a22781ca42a90228",
+    "StochasticDP/Blackwell.lean": "625ad9e0fdd00a38c9c21b54ff2de6b3f515fc55ce9c9bc2986c3f0d013a75b7",
+    "StochasticDP/Lemma95.lean": "9d1e2c4e33818a441e676925c1e306af3de485274ceb808c552c8b3c045dfdec",
+    "StochasticDP/BoundedReturns.lean": "af0ad2f3d176cacb3a29e8c0b9980133b61a08443e58207776f93d048a1c87ef",
+    "StochasticDP/BoundedOptimal.lean": "19c82ab892f366cdc9a4e6e200861954c38584cca7b7cffa893634ee5b3aceba",
+    "StochasticDP/BoundedMonotone.lean": "773b3b9b6039609e6ef5fd643534e03cd8fecd2978e9b94b83a4681de562a0c5",
+    "StochasticDP/InteriorPoints.lean": "7d61f7ffeeac37d675164e52a29ee1a60c0a0345a6898a008ba4ff10dff181cf",
+    "StochasticDP/BoundedConcave.lean": "ca64d0164d9886956816c4f5ee440e4204b40ef5ed00fa63ec6dea48707b4793",
+    "StochasticDP/BoundedPolicy.lean": "a60cac036a27b6d067e91a6a7434f653d525db61c4c74a4ce48787414ff783e4",
+    "StochasticDP/CRSSpace.lean": "8848340fa3687ca1baf41f1969e4ac2eb404330cb47c44bec4f740403013b9f8",
+    "StochasticDP/ConstantReturns.lean": "aece118955b233301accb86aa51b9cc3534d2b5c18f5304323567bc02a493758",
+    "StochasticDP/CRSConcavity.lean": "ee6927beafe98498a53db8e82d9fe57b5153ad60f91d8008f21d7b7d5b061a8e",
+    "StochasticDP/Theorem912.lean": "3bfae65fdbc7ab331f1979853ca24f52a4fdab8818c00db950c15577b83729c9",
+    "StochasticDP/HistMarginals.lean": "841363bb7d0ee709354bc19323c462fa50b13e6f87f7645b6d6e20b58828c8d6",
+    "StochasticDP/Quadratic.lean": "abaca39886e878031d2a06267d254fea31ca47efd9435a75bc925d78135b0202",
+    "StochasticDP/LogModel.lean": "7278bd3d8d2e7f73fcddfe9c89ca606941e5734e4553e76594d06a3d5b6e6611",
+    "StochasticDP/PolicyKernels.lean": "dbec3d4aa3e3fbaa4d71ec4f90990ed83b26440bba27f549bfae8ebe9ed6323b",
+    "StochasticDP/MarkovPolicy.lean": "8b1cd3688b97db227098e42305a78c66e6a6b4d6372cbc2e613d3648583b97a5",
+    "StochasticDP.lean": "46c0679a8c3c19269275b96fd833ffa1d13cad184925ffe5b1fad95ffd5145a6",
+    "lean-toolchain": "8733782dc070a99b312039cda424f601b80f3be6f6f512627da5ba25adc27632",
+    "lakefile.toml": "440cf9740ea5e9c6f5abd6470da30d15021c05267d45aaccdc7bdb68c36dc308",
+    "lake-manifest.json": "527e5e0bbfeb5a5bf10f6301d0ed224d13737659e11ac5b017c4589f12bc1f91",
+    "proof-manifest.json": "83b5f5f6a2826c9edb5178428473a57482e71d78d7cdeabbc5c40ab3034a34b7",
+    "scripts/verify.py": "a70b1fa704dd590f937f8b37682afa88a9d85a9150065acb935c7d2c9589da3b",
+    "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  },
+  "fresh_audit_sha256": "3e026acc4440341991d0bcbe81b9349246030048a0b41037f374e6cbeb99ad4c",
+  "lean_toolchain": "leanprover/lean4:v4.34.0",
+  "scope": "SLP Chapter 9 (Stochastic Dynamic Programming): every numbered result and every exercise 9.1-9.17, with corrections.",
+  "source": "Stokey, Lucas and Prescott (1989), Recursive Methods in Economic Dynamics, Chapter 9"
+}
