@@ -1,6 +1,6 @@
 {
-  "checked_at_utc": "2026-10-15T01:26:02.634719+00:00",
-  "theorems": 316,
+  "checked_at_utc": "2026-10-15T01:40:40.178065+00:00",
+  "theorems": 336,
   "module_theorems": {
     "StochasticDP/Correspondences.lean": 2,
     "StochasticDP/Contraction.lean": 8,
@@ -12,9 +12,9 @@
     "StochasticDP/Histories.lean": 18,
     "StochasticDP/Plans.lean": 17,
     "StochasticDP/Theorem92.lean": 13,
-    "StochasticDP/Lemma93.lean": 17,
-    "StochasticDP/Theorem94.lean": 9,
-    "StochasticDP/Exercise92.lean": 9,
+    "StochasticDP/Lemma93.lean": 33,
+    "StochasticDP/Theorem94.lean": 10,
+    "StochasticDP/Exercise92.lean": 12,
     "StochasticDP/Blackwell.lean": 4,
     "StochasticDP/Lemma95.lean": 11,
     "StochasticDP/BoundedReturns.lean": 18,
@@ -33,7 +33,7 @@
     "StochasticDP/PolicyKernels.lean": 9,
     "StochasticDP/MarkovPolicy.lean": 24
   },
-  "audited_declarations": 463,
+  "audited_declarations": 485,
   "declarations": [
     {
       "name": "StokeyLucasPrescott.StochasticDP.IsLHC",
@@ -986,6 +986,96 @@
       "module": "StochasticDP/Lemma93.lean"
     },
     {
+      "name": "StokeyLucasPrescott.StochasticDP.Model.absF",
+      "kind": "abbrev",
+      "module": "StochasticDP/Lemma93.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.xState_absF",
+      "kind": "theorem",
+      "module": "StochasticDP/Lemma93.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.ret_absF",
+      "kind": "theorem",
+      "module": "StochasticDP/Lemma93.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.planAbs",
+      "kind": "def",
+      "module": "StochasticDP/Lemma93.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.planAbs_eq",
+      "kind": "theorem",
+      "module": "StochasticDP/Lemma93.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.measurable_cont_plan",
+      "kind": "theorem",
+      "module": "StochasticDP/Lemma93.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.planAbs_rec",
+      "kind": "theorem",
+      "module": "StochasticDP/Lemma93.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.measurable_planAbs_cont",
+      "kind": "theorem",
+      "module": "StochasticDP/Lemma93.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.term_le_planAbs",
+      "kind": "theorem",
+      "module": "StochasticDP/Lemma93.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.integrable_ret_of_planAbs",
+      "kind": "theorem",
+      "module": "StochasticDP/Lemma93.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.abs_term_le_planAbs",
+      "kind": "theorem",
+      "module": "StochasticDP/Lemma93.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.summable_of_planAbs",
+      "kind": "theorem",
+      "module": "StochasticDP/Lemma93.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.tendsto_uN_abs",
+      "kind": "theorem",
+      "module": "StochasticDP/Lemma93.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.planValue_eq_uR_abs",
+      "kind": "theorem",
+      "module": "StochasticDP/Lemma93.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.abs_uN_le_planAbs",
+      "kind": "theorem",
+      "module": "StochasticDP/Lemma93.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.ae_planAbs_cont",
+      "kind": "theorem",
+      "module": "StochasticDP/Lemma93.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.lemma_9_3_abs",
+      "kind": "theorem",
+      "module": "StochasticDP/Lemma93.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.planAbs_ne_top_of_bound",
+      "kind": "theorem",
+      "module": "StochasticDP/Lemma93.lean"
+    },
+    {
       "name": "StokeyLucasPrescott.StochasticDP.measurable_expV",
       "kind": "theorem",
       "module": "StochasticDP/Theorem94.lean"
@@ -1002,6 +1092,11 @@
     },
     {
       "name": "StokeyLucasPrescott.StochasticDP.theorem_9_4_ae",
+      "kind": "theorem",
+      "module": "StochasticDP/Theorem94.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.theorem_9_4_abs",
       "kind": "theorem",
       "module": "StochasticDP/Theorem94.lean"
     },
@@ -1092,6 +1187,21 @@
     },
     {
       "name": "StokeyLucasPrescott.StochasticDP.ex_9_2b_theorem_9_4",
+      "kind": "theorem",
+      "module": "StochasticDP/Exercise92.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.ofReal_abs_eq",
+      "kind": "theorem",
+      "module": "StochasticDP/Exercise92.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.planAbs_eq_add",
+      "kind": "theorem",
+      "module": "StochasticDP/Exercise92.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticDP.ex_9_2b_theorem_9_4'",
       "kind": "theorem",
       "module": "StochasticDP/Exercise92.lean"
     },
@@ -3285,6 +3395,96 @@
       "Classical.choice",
       "Quot.sound"
     ],
+    "StokeyLucasPrescott.StochasticDP.Model.absF": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.xState_absF": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.ret_absF": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.planAbs": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.planAbs_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.measurable_cont_plan": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.planAbs_rec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.measurable_planAbs_cont": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.term_le_planAbs": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.integrable_ret_of_planAbs": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.abs_term_le_planAbs": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.summable_of_planAbs": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.tendsto_uN_abs": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.planValue_eq_uR_abs": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.abs_uN_le_planAbs": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.ae_planAbs_cont": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.lemma_9_3_abs": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.planAbs_ne_top_of_bound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
     "StokeyLucasPrescott.StochasticDP.measurable_expV": [
       "propext",
       "Classical.choice",
@@ -3301,6 +3501,11 @@
       "Quot.sound"
     ],
     "StokeyLucasPrescott.StochasticDP.theorem_9_4_ae": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.theorem_9_4_abs": [
       "propext",
       "Classical.choice",
       "Quot.sound"
@@ -3389,6 +3594,21 @@
       "Quot.sound"
     ],
     "StokeyLucasPrescott.StochasticDP.ex_9_2b_theorem_9_4": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.ofReal_abs_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.planAbs_eq_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticDP.ex_9_2b_theorem_9_4'": [
       "propext",
       "Classical.choice",
       "Quot.sound"
@@ -4656,9 +4876,9 @@
     "StochasticDP/Histories.lean": "04927523df86edf40cad0c67babab0117fe3a940cc91e06b6aecc449bfaf0743",
     "StochasticDP/Plans.lean": "149486d2358ef5426839fca9f444b4f2df4dd7e78260efa2bb0e12502ae7c2fd",
     "StochasticDP/Theorem92.lean": "4ad5c27dc4adea66b7eb3a5b0fb85e3c3659b07dc3eb9264110e298422d588e4",
-    "StochasticDP/Lemma93.lean": "7a09aa04957e7e81f87ba7006275f9e014b7cb8562039cbda1c4fe48032b2515",
-    "StochasticDP/Theorem94.lean": "ca4c6a6c0edf1687078c66231689bc952e20a467bdf2c1430845dfd419fefc17",
-    "StochasticDP/Exercise92.lean": "8acb497892fc42032ed06a35c7ca848bc6436b4c045d3c30a22781ca42a90228",
+    "StochasticDP/Lemma93.lean": "e78f8b5d3b785fbec4f24dd7a1c9f076e4e8d18f8b7ee3dc099c6184c0feefa0",
+    "StochasticDP/Theorem94.lean": "324952a761026e3838f2a76bc91c7fc9978f0f77da2fc078014907467b96835e",
+    "StochasticDP/Exercise92.lean": "3f82bce3df5555b363a0dd7666c7fb4f78e952c72ae89944b90bcf0210dad491",
     "StochasticDP/Blackwell.lean": "625ad9e0fdd00a38c9c21b54ff2de6b3f515fc55ce9c9bc2986c3f0d013a75b7",
     "StochasticDP/Lemma95.lean": "9d1e2c4e33818a441e676925c1e306af3de485274ceb808c552c8b3c045dfdec",
     "StochasticDP/BoundedReturns.lean": "af0ad2f3d176cacb3a29e8c0b9980133b61a08443e58207776f93d048a1c87ef",
@@ -4680,11 +4900,11 @@
     "lean-toolchain": "8733782dc070a99b312039cda424f601b80f3be6f6f512627da5ba25adc27632",
     "lakefile.toml": "440cf9740ea5e9c6f5abd6470da30d15021c05267d45aaccdc7bdb68c36dc308",
     "lake-manifest.json": "527e5e0bbfeb5a5bf10f6301d0ed224d13737659e11ac5b017c4589f12bc1f91",
-    "proof-manifest.json": "83b5f5f6a2826c9edb5178428473a57482e71d78d7cdeabbc5c40ab3034a34b7",
+    "proof-manifest.json": "7064c1880c157c7739473e8e8af99cd479846a5d75a6cf470111132f6f2b504e",
     "scripts/verify.py": "a70b1fa704dd590f937f8b37682afa88a9d85a9150065acb935c7d2c9589da3b",
     "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
   },
-  "fresh_audit_sha256": "3e026acc4440341991d0bcbe81b9349246030048a0b41037f374e6cbeb99ad4c",
+  "fresh_audit_sha256": "eb8910bcbcf7f8550f3c6781e5bc1fa9369c969c1a2fbcae34d4e1e9d5f9e057",
   "lean_toolchain": "leanprover/lean4:v4.34.0",
   "scope": "SLP Chapter 9 (Stochastic Dynamic Programming): every numbered result and every exercise 9.1-9.17, with corrections.",
   "source": "Stokey, Lucas and Prescott (1989), Recursive Methods in Economic Dynamics, Chapter 9"

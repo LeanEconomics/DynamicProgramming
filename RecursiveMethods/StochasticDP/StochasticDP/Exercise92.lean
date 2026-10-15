@@ -17,8 +17,9 @@ SLP §9.1, p. 253. Let `F` be bounded above or below (not necessarily by zero) a
   (`ex_9_2b_theorem_9_2`); Lemma 9.3 holds in the form of the book's solution — `u` is the
   difference `u⁺ − u⁻` of the values of the positive and negative parts of the returns, one of
   which is finite, and each satisfies the recursion (9) by monotone convergence
-  (`ex_9_2b_lemma_9_3`); and Theorem 9.4 holds for bounded `F` (`ex_9_2b_theorem_9_4`), since
-  then Assumption 9.3 holds with `L_t = sup |F|`.
+  (`ex_9_2b_lemma_9_3`); and Theorem 9.4 holds: for bounded `F` Assumption 9.3 holds with
+  `L_t = sup |F|` (`ex_9_2b_theorem_9_4`), and for one-sided bounds the optimal plan has
+  `Σ βᵗ ∫ |F| dμᵗ < ∞`, which is enough (`ex_9_2b_theorem_9_4'`).
 -/
 
 namespace StokeyLucasPrescott.StochasticDP
@@ -209,5 +210,51 @@ theorem ex_9_2b_theorem_9_4 (hφ : Measurable M.φ) (hF : Measurable M.F) (hβ :
       ∀ t, ∀ᵐ h ∂hist M.Q t s₀.2, π t h ∈ policy M v (state M s₀ π t h) :=
   theorem_9_4 M hφ hF hβ hΓ hv hvstar hFE hIv hπ hπopt (L := fun _ => C) (fun _ _ => hC _)
     ((summable_geometric_of_lt_one hβ.le hβ1).mul_right C)
+
+theorem ofReal_abs_eq (x : ℝ) :
+    ENNReal.ofReal |x| = ENNReal.ofReal x + ENNReal.ofReal (-x) := by
+  rcases le_total 0 x with h | h
+  · rw [abs_of_nonneg h, ENNReal.ofReal_of_nonpos (neg_nonpos.2 h), add_zero]
+  · rw [abs_of_nonpos h, ENNReal.ofReal_of_nonpos h, zero_add]
+
+omit [IsMarkovKernel M.Q] in
+/-- `Σ βᵗ ∫ |F| dμᵗ = u⁺ + u⁻`. -/
+theorem planAbs_eq_add (hφ : Measurable M.φ) (hF : Measurable M.F) (s₀ : X × Z) {π : Plan Y Z}
+    (hπ : ∀ t, Measurable (π t)) :
+    planAbs M s₀ π = planValuePos M s₀ π + planValuePos M.negF s₀ π := by
+  rw [planAbs_eq, planValuePos, planValuePos, ← ENNReal.tsum_add]
+  refine tsum_congr fun t => ?_
+  rw [← mul_add, ret_negF, ← lintegral_add_left (measurable_ret M hφ hF s₀ hπ t).ennreal_ofReal]
+  congr 1
+  exact lintegral_congr fun h => ofReal_abs_eq _
+
+/-- **Exercise 9.2b: Theorem 9.4** for `F` bounded above *or* below and `0 < β < 1` (with the
+returns of the optimal plan integrable, Assumption 9.2). Since `v*(s₀)` is finite and one of
+`u⁺`, `u⁻` is finite (`ex_9_2b_lemma_9_3`), both are, so `Σ βᵗ ∫ |F| dμᵗ = u⁺ + u⁻ < ∞` and
+Theorem 9.4 applies in its general form (`theorem_9_4_abs`). -/
+theorem ex_9_2b_theorem_9_4' (hφ : Measurable M.φ) (hF : Measurable M.F) (hβ : 0 < M.β)
+    (hβ1 : M.β < 1) {C : ℝ} (hC : (∀ p, M.F p ≤ C) ∨ ∀ p, C ≤ M.F p)
+    (hΓ : MeasurableSet {p : (X × Z) × Y | p.2 ∈ M.Γ p.1}) {v : X × Z → ℝ} (hv : Measurable v)
+    (hvstar : ∀ s, vStar M s = v s) (hFE : SolvesFE M v)
+    (hIv : ∀ s, ∀ y ∈ M.Γ s, Integrable (fun z' => v (M.φ (s.1, y, z'), z')) (M.Q s.2))
+    {s₀ : X × Z} {π : Plan Y Z} (hπ : IsFeasible M s₀ π)
+    (hπopt : planValue M s₀ π = vStar M s₀)
+    (hI : ∀ t, Integrable (ret M s₀ π t) (hist M.Q t s₀.2)) :
+    π 0 Fin.elim0 ∈ policy M v s₀ ∧
+      ∀ t, ∀ᵐ h ∂hist M.Q t s₀.2, π t h ∈ policy M v (state M s₀ π t h) := by
+  obtain ⟨hdec, hfin1, -, -⟩ := ex_9_2b_lemma_9_3 M hφ hF hβ.le hβ1 hC s₀ hπ.1 hI
+  have hval : (planValuePos M s₀ π : EReal) - planValuePos M.negF s₀ π = (v s₀ : EReal) := by
+    rw [← hdec, hπopt, hvstar]
+  have hP : planValuePos M s₀ π ≠ ⊤ ∧ planValuePos M.negF s₀ π ≠ ⊤ := by
+    rcases hfin1 with h | h
+    · refine ⟨h, fun h' => ?_⟩
+      rw [h', ← EReal.coe_ennreal_toReal h, EReal.coe_ennreal_top] at hval
+      simp at hval
+    · refine ⟨fun h' => ?_, h⟩
+      rw [h', ← EReal.coe_ennreal_toReal h, EReal.coe_ennreal_top] at hval
+      simp at hval
+  refine theorem_9_4_abs M hφ hF hβ hΓ hv hvstar hFE hIv hπ hπopt ?_
+  rw [planAbs_eq_add M hφ hF s₀ hπ.1]
+  exact ENNReal.add_ne_top.2 hP
 
 end StokeyLucasPrescott.StochasticDP

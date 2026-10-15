@@ -238,4 +238,195 @@ theorem lemma_9_3_nonneg (hφ : Measurable M.φ) (hF : Measurable M.F) (hβ : 0 
   rw [lintegral_const_mul _ (hinner t), ← mul_assoc, ← ENNReal.ofReal_mul hβ, pow_succ,
     mul_comm (M.β ^ t)]
 
+/-! ### Absolutely summable plans -/
+
+/-- The model with returns `|F|`. -/
+abbrev Model.absF (M : Model X Y Z) : Model X Y Z := { M with F := fun p => |M.F p| }
+
+omit [IsMarkovKernel M.Q] in
+theorem xState_absF (s₀ : X × Z) (π : Plan Y Z) (t : ℕ) :
+    xState M.absF s₀ π t = xState M s₀ π t := by
+  induction t with
+  | zero => rfl
+  | succ t ih =>
+    funext h
+    simp only [xState, ih]
+
+omit [IsMarkovKernel M.Q] in
+theorem ret_absF (s₀ : X × Z) (π : Plan Y Z) (t : ℕ) :
+    ret M.absF s₀ π t = fun h => |ret M s₀ π t h| := by
+  funext h
+  simp only [ret, state, xState_absF]
+
+/-- `Σ βᵗ ∫ |F(x_t, π_t, z_t)| dμᵗ ∈ [0, +∞]`. Plans for which it is finite generalize
+Assumption 9.3. -/
+noncomputable def planAbs (s₀ : X × Z) (π : Plan Y Z) : ℝ≥0∞ := planValuePos M.absF s₀ π
+
+omit [IsMarkovKernel M.Q] in
+theorem planAbs_eq (s₀ : X × Z) (π : Plan Y Z) : planAbs M s₀ π =
+    ∑' t, ENNReal.ofReal (M.β ^ t) * ∫⁻ h, ENNReal.ofReal |ret M s₀ π t h| ∂hist M.Q t s₀.2 := by
+  simp only [planAbs, planValuePos, ret_absF]
+
+omit [IsMarkovKernel M.Q] in
+theorem measurable_cont_plan {π : Plan Y Z} (hπ : ∀ t, Measurable (π t)) (z₁ : Z) :
+    ∀ t, Measurable (cont π z₁ t) := fun t =>
+  (hπ (t + 1)).comp ((measurable_cons t).comp (measurable_const.prodMk measurable_id))
+
+/-- The recursion for `Σ βᵗ ∫ |F| dμᵗ` (Lemma 9.3 for `|F|`). -/
+theorem planAbs_rec (hφ : Measurable M.φ) (hF : Measurable M.F) (hβ : 0 ≤ M.β) (s₀ : X × Z)
+    {π : Plan Y Z} (hπ : ∀ t, Measurable (π t)) :
+    planAbs M s₀ π = ENNReal.ofReal |ret M s₀ π 0 Fin.elim0| +
+      ENNReal.ofReal M.β * ∫⁻ z₁, planAbs M (start₁ M s₀ π z₁) (cont π z₁) ∂M.Q s₀.2 :=
+  lemma_9_3_nonneg M.absF hφ (continuous_abs.measurable.comp hF) hβ s₀ hπ
+
+theorem measurable_planAbs_cont (hφ : Measurable M.φ) (hF : Measurable M.F) (s₀ : X × Z)
+    {π : Plan Y Z} (hπ : ∀ t, Measurable (π t)) :
+    Measurable fun z₁ => planAbs M (start₁ M s₀ π z₁) (cont π z₁) := by
+  refine Measurable.tsum fun t => measurable_const.mul ?_
+  have := ex_8_8a M.Q t
+  exact (measurable_ret_cont M.absF hφ (continuous_abs.measurable.comp hF) s₀ hπ t
+    ).ennreal_ofReal.lintegral_kernel_prod_right' (κ := hist M.Q t)
+
+omit [IsMarkovKernel M.Q] in
+theorem term_le_planAbs (s₀ : X × Z) (π : Plan Y Z) (t : ℕ) :
+    ENNReal.ofReal (M.β ^ t) * ∫⁻ h, ENNReal.ofReal |ret M s₀ π t h| ∂hist M.Q t s₀.2 ≤
+      planAbs M s₀ π := by
+  rw [planAbs_eq]
+  exact ENNReal.le_tsum (f := fun t => ENNReal.ofReal (M.β ^ t) *
+    ∫⁻ h, ENNReal.ofReal |ret M s₀ π t h| ∂hist M.Q t s₀.2) t
+
+/-- With `Σ βᵗ ∫ |F| dμᵗ < ∞` and `β > 0`, every return is integrable. -/
+theorem integrable_ret_of_planAbs (hφ : Measurable M.φ) (hF : Measurable M.F) (hβ : 0 < M.β)
+    (s₀ : X × Z) {π : Plan Y Z} (hπ : ∀ t, Measurable (π t)) (hfin : planAbs M s₀ π ≠ ⊤)
+    (t : ℕ) : Integrable (ret M s₀ π t) (hist M.Q t s₀.2) := by
+  have := ex_8_8a M.Q t
+  have hm := measurable_ret M hφ hF s₀ hπ t
+  have hlt := (term_le_planAbs M s₀ π t).trans_lt hfin.lt_top
+  have hne : ∫⁻ h, ENNReal.ofReal |ret M s₀ π t h| ∂hist M.Q t s₀.2 ≠ ⊤ := by
+    rcases ENNReal.mul_lt_top_iff.1 hlt with h | h | h
+    · exact h.2.ne
+    · exact absurd h (ENNReal.ofReal_pos.2 (pow_pos hβ t)).ne'
+    · rw [h]; exact ENNReal.zero_ne_top
+  have hI : Integrable (fun h => |ret M s₀ π t h|) (hist M.Q t s₀.2) :=
+    (lintegral_ofReal_ne_top_iff_integrable hm.abs.aestronglyMeasurable
+      (Eventually.of_forall fun h => abs_nonneg _)).1 hne
+  refine (integrable_norm_iff hm.aestronglyMeasurable).1 ?_
+  simpa only [Real.norm_eq_abs] using hI
+
+theorem abs_term_le_planAbs (hφ : Measurable M.φ) (hF : Measurable M.F) (hβ : 0 ≤ M.β)
+    (s₀ : X × Z) {π : Plan Y Z} (hπ : ∀ t, Measurable (π t)) (t : ℕ) :
+    |M.β ^ t * ∫ h, ret M s₀ π t h ∂hist M.Q t s₀.2| ≤
+      (ENNReal.ofReal (M.β ^ t) *
+        ∫⁻ h, ENNReal.ofReal |ret M s₀ π t h| ∂hist M.Q t s₀.2).toReal := by
+  have := ex_8_8a M.Q t
+  have hm := measurable_ret M hφ hF s₀ hπ t
+  rw [abs_mul, abs_of_nonneg (pow_nonneg hβ t), ENNReal.toReal_mul,
+    ENNReal.toReal_ofReal (pow_nonneg hβ t), ← integral_eq_lintegral_of_nonneg_ae
+      (Eventually.of_forall fun h => abs_nonneg _) hm.abs.aestronglyMeasurable]
+  exact mul_le_mul_of_nonneg_left (abs_integral_le_integral_abs) (pow_nonneg hβ t)
+
+/-- With `Σ βᵗ ∫ |F| dμᵗ < ∞`, the series `Σ βᵗ ∫ F dμᵗ` converges absolutely. -/
+theorem summable_of_planAbs (hφ : Measurable M.φ) (hF : Measurable M.F) (hβ : 0 ≤ M.β)
+    (s₀ : X × Z) {π : Plan Y Z} (hπ : ∀ t, Measurable (π t)) (hfin : planAbs M s₀ π ≠ ⊤) :
+    Summable fun t => M.β ^ t * ∫ h, ret M s₀ π t h ∂hist M.Q t s₀.2 := by
+  rw [planAbs_eq] at hfin
+  exact Summable.of_norm_bounded (ENNReal.summable_toReal hfin) fun t => by
+    rw [Real.norm_eq_abs]; exact abs_term_le_planAbs M hφ hF hβ s₀ hπ t
+
+theorem tendsto_uN_abs (hφ : Measurable M.φ) (hF : Measurable M.F) (hβ : 0 ≤ M.β)
+    (s₀ : X × Z) {π : Plan Y Z} (hπ : ∀ t, Measurable (π t)) (hfin : planAbs M s₀ π ≠ ⊤) :
+    Tendsto (fun n => uN M s₀ π n) atTop (𝓝 (uR M s₀ π)) :=
+  (summable_of_planAbs M hφ hF hβ s₀ hπ hfin).hasSum.tendsto_sum_nat.comp
+    (tendsto_add_atTop_nat 1)
+
+theorem planValue_eq_uR_abs (hφ : Measurable M.φ) (hF : Measurable M.F) (hβ : 0 ≤ M.β)
+    (s₀ : X × Z) {π : Plan Y Z} (hπ : ∀ t, Measurable (π t)) (hfin : planAbs M s₀ π ≠ ⊤) :
+    planValue M s₀ π = (uR M s₀ π : EReal) :=
+  planValue_eq M ((continuous_coe_real_ereal.tendsto _).comp
+    (tendsto_uN_abs M hφ hF hβ s₀ hπ hfin))
+
+theorem abs_uN_le_planAbs (hφ : Measurable M.φ) (hF : Measurable M.F) (hβ : 0 ≤ M.β)
+    (s₀ : X × Z) {π : Plan Y Z} (hπ : ∀ t, Measurable (π t)) (hfin : planAbs M s₀ π ≠ ⊤)
+    (n : ℕ) : |uN M s₀ π n| ≤ (planAbs M s₀ π).toReal := by
+  have hfin' := hfin
+  rw [planAbs_eq] at hfin' ⊢
+  refine (Finset.abs_sum_le_sum_abs _ _).trans ?_
+  refine (Finset.sum_le_sum fun t _ => abs_term_le_planAbs M hφ hF hβ s₀ hπ t).trans ?_
+  rw [← ENNReal.toReal_sum fun t _ => ne_top_of_le_ne_top hfin' (ENNReal.le_tsum t)]
+  exact ENNReal.toReal_mono hfin' (ENNReal.sum_le_tsum _)
+
+/-- With `β > 0`, the continuations of an absolutely summable plan are absolutely summable for
+`Q(z₀, ·)`-almost every `z₁`. -/
+theorem ae_planAbs_cont (hφ : Measurable M.φ) (hF : Measurable M.F) (hβ : 0 < M.β)
+    (s₀ : X × Z) {π : Plan Y Z} (hπ : ∀ t, Measurable (π t)) (hfin : planAbs M s₀ π ≠ ⊤) :
+    ∫⁻ z₁, planAbs M (start₁ M s₀ π z₁) (cont π z₁) ∂M.Q s₀.2 ≠ ⊤ ∧
+      ∀ᵐ z₁ ∂M.Q s₀.2, planAbs M (start₁ M s₀ π z₁) (cont π z₁) ≠ ⊤ := by
+  have hrec := planAbs_rec M hφ hF hβ.le s₀ hπ
+  have hle : ENNReal.ofReal M.β * ∫⁻ z₁, planAbs M (start₁ M s₀ π z₁) (cont π z₁) ∂M.Q s₀.2 ≤
+      planAbs M s₀ π := by rw [hrec]; exact le_add_self
+  have hlt := hle.trans_lt hfin.lt_top
+  have hne : ∫⁻ z₁, planAbs M (start₁ M s₀ π z₁) (cont π z₁) ∂M.Q s₀.2 ≠ ⊤ := by
+    rcases ENNReal.mul_lt_top_iff.1 hlt with h | h | h
+    · exact h.2.ne
+    · exact absurd h (ENNReal.ofReal_pos.2 hβ).ne'
+    · rw [h]; exact ENNReal.zero_ne_top
+  exact ⟨hne, (ae_lt_top (measurable_planAbs_cont M hφ hF s₀ hπ) hne).mono fun _ h => h.ne⟩
+
+/-- **Lemma 9.3 for absolutely summable plans.** If `Σ βᵗ ∫ |F| dμᵗ < ∞` and `β > 0`, then
+`z₁ ↦ u[C(π, z₁), s₁]` is integrable and
+`u(π, s₀) = F(x₀, π₀, z₀) + β ∫ u[C(π, z₁), s₁] Q(z₀, dz₁)`, by dominated convergence with the
+dominating function `Σ βᵗ ∫ |F| dμᵗ` of the continuations. -/
+theorem lemma_9_3_abs (hφ : Measurable M.φ) (hF : Measurable M.F) (hβ : 0 < M.β) (s₀ : X × Z)
+    {π : Plan Y Z} (hπ : ∀ t, Measurable (π t)) (hfin : planAbs M s₀ π ≠ ⊤) :
+    Integrable (fun z₁ => uR M (start₁ M s₀ π z₁) (cont π z₁)) (M.Q s₀.2) ∧
+      uR M s₀ π = ret M s₀ π 0 Fin.elim0 +
+        M.β * ∫ z₁, uR M (start₁ M s₀ π z₁) (cont π z₁) ∂M.Q s₀.2 := by
+  obtain ⟨hne, hae⟩ := ae_planAbs_cont M hφ hF hβ s₀ hπ hfin
+  have hmeas := (ex_9_1 M hφ hF s₀ hπ).1
+  have hGm := measurable_planAbs_cont M hφ hF s₀ hπ
+  have hG : Integrable (fun z₁ => (planAbs M (start₁ M s₀ π z₁) (cont π z₁)).toReal)
+      (M.Q s₀.2) := integrable_toReal_of_lintegral_ne_top hGm.aemeasurable hne
+  have hbound : ∀ n, ∀ᵐ z₁ ∂M.Q s₀.2, ‖uN M (start₁ M s₀ π z₁) (cont π z₁) n‖ ≤
+      (planAbs M (start₁ M s₀ π z₁) (cont π z₁)).toReal := fun n => by
+    filter_upwards [hae] with z₁ hz₁
+    rw [Real.norm_eq_abs]
+    exact abs_uN_le_planAbs M hφ hF hβ.le _ (measurable_cont_plan hπ z₁) hz₁ n
+  have hlim : ∀ᵐ z₁ ∂M.Q s₀.2, Tendsto (fun n => uN M (start₁ M s₀ π z₁) (cont π z₁) n) atTop
+      (𝓝 (uR M (start₁ M s₀ π z₁) (cont π z₁))) := by
+    filter_upwards [hae] with z₁ hz₁
+    exact tendsto_uN_abs M hφ hF hβ.le _ (measurable_cont_plan hπ z₁) hz₁
+  have hIu : Integrable (fun z₁ => uR M (start₁ M s₀ π z₁) (cont π z₁)) (M.Q s₀.2) := by
+    refine hG.mono' (aestronglyMeasurable_of_tendsto_ae _
+      (fun n => (hmeas n).aestronglyMeasurable) hlim) ?_
+    filter_upwards [hlim, hae] with z₁ hz₁ hfz
+    exact le_of_tendsto' ((continuous_norm.tendsto _).comp hz₁) fun n => by
+      rw [Function.comp_apply, Real.norm_eq_abs]
+      exact abs_uN_le_planAbs M hφ hF hβ.le _ (measurable_cont_plan hπ z₁) hfz n
+  refine ⟨hIu, ?_⟩
+  have hDCT := tendsto_integral_of_dominated_convergence _
+    (fun n => (hmeas n).aestronglyMeasurable) hG hbound hlim
+  have hrec : Tendsto (fun n => uN M s₀ π (n + 1)) atTop (𝓝 (ret M s₀ π 0 Fin.elim0 +
+      M.β * ∫ z₁, uR M (start₁ M s₀ π z₁) (cont π z₁) ∂M.Q s₀.2)) := by
+    simp_rw [uN_succ M s₀ π (integrable_ret_of_planAbs M hφ hF hβ s₀ hπ hfin)]
+    exact tendsto_const_nhds.add (hDCT.const_mul _)
+  exact tendsto_nhds_unique ((tendsto_uN_abs M hφ hF hβ.le s₀ hπ hfin).comp
+    (tendsto_add_atTop_nat 1)) hrec
+
+/-- Assumption 9.3 implies absolute summability. -/
+theorem planAbs_ne_top_of_bound (hβ : 0 ≤ M.β) (s₀ : X × Z) (π : Plan Y Z) {L : ℕ → ℝ}
+    (hL : ∀ t h, |ret M s₀ π t h| ≤ L t) (hsum : Summable fun t => M.β ^ t * L t) :
+    planAbs M s₀ π ≠ ⊤ := by
+  have hL0 := bound_nonneg M s₀ π hL
+  rw [planAbs_eq]
+  refine ne_top_of_le_ne_top (ENNReal.ofReal_tsum_of_nonneg
+    (fun t => mul_nonneg (pow_nonneg hβ t) (hL0 t)) hsum ▸ ENNReal.ofReal_ne_top) ?_
+  refine ENNReal.tsum_le_tsum fun t => ?_
+  have := ex_8_8a M.Q t
+  rw [ENNReal.ofReal_mul (pow_nonneg hβ t)]
+  gcongr
+  calc ∫⁻ h, ENNReal.ofReal |ret M s₀ π t h| ∂hist M.Q t s₀.2
+      ≤ ∫⁻ _h, ENNReal.ofReal (L t) ∂hist M.Q t s₀.2 :=
+        lintegral_mono fun h => ENNReal.ofReal_le_ofReal (hL t h)
+    _ = ENNReal.ofReal (L t) := by simp
+
 end StokeyLucasPrescott.StochasticDP

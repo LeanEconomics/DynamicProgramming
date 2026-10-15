@@ -10,9 +10,10 @@ import StochasticDP.Lemma93
 
 SLP §9.1, pp. 250–253, and Exercise 9.5b.
 
-**Theorem 9.4** (`theorem_9_4`). Let `v* ` be real-valued, measurable and solve the functional
+**Theorem 9.4** (`theorem_9_4`). Let `v*` be real-valued, measurable and solve the functional
 equation, let the graph of `Γ` be measurable, and let `π*` be a feasible plan from `s₀` that
-attains `v*(s₀)` and satisfies Assumption 9.3. If `β > 0`, then `π*₀ ∈ G(s₀)` and
+attains `v*(s₀)` and satisfies Assumption 9.3 — or, more generally, has
+`Σ βᵗ ∫ |F(x_t, π_t, z_t)| dμᵗ < ∞` (`theorem_9_4_abs`). If `β > 0`, then `π*₀ ∈ G(s₀)` and
 `π*_t(zᵗ) ∈ G(x_t, z_t)` for `μᵗ(z₀, ·)`-almost every `zᵗ`. The book's proof
 (`theorem_9_4_step`): by Lemma 9.3, `v*(s₀) = F(s₀, π*₀) + β ∫ u[C(π*, z₁), s₁] Q(z₀, dz₁)`;
 each continuation is worth at most `v*(s₁)`, and `F(s₀, π*₀) + β ∫ v*(s₁) dQ ≤ v*(s₀)` by (5);
@@ -57,36 +58,35 @@ theorem measurableSet_policy (hφ : Measurable M.φ) (hF : Measurable M.F)
   exact (hF.comp (measurable_fst.fst.prodMk (measurable_snd.prodMk measurable_fst.snd))).add
     (measurable_const.mul (measurable_expV M hφ hv))
 
-/-- **The first step of Theorem 9.4** (SLP (11a) and (15)): an optimal plan's first action is in
-`G(s₀)`, and its continuation is optimal from `s₁` for `Q(z₀, ·)`-almost every `z₁`. -/
+/-- **The first step of Theorem 9.4** (SLP (11a) and (15)): an optimal plan with
+`Σ βᵗ ∫ |F| dμᵗ < ∞` has its first action in `G(s₀)`, and for `Q(z₀, ·)`-almost every `z₁` its
+continuation is optimal from `s₁` and again absolutely summable. -/
 theorem theorem_9_4_step (hφ : Measurable M.φ) (hF : Measurable M.F) (hβ : 0 < M.β)
     {v : X × Z → ℝ} (hFE : SolvesFE M v)
     (hIv : ∀ s, ∀ y ∈ M.Γ s, Integrable (fun z' => v (M.φ (s.1, y, z'), z')) (M.Q s.2))
     (hopt : ∀ s π, IsFeasible M s π → planValue M s π ≤ v s) {s : X × Z} {π : Plan Y Z}
-    (hπ : IsFeasible M s π) {L : ℕ → ℝ} (hL : ∀ t h, |ret M s π t h| ≤ L t)
-    (hsum : Summable fun t => M.β ^ t * L t) (hπopt : planValue M s π = v s) :
+    (hπ : IsFeasible M s π) (hfin : planAbs M s π ≠ ⊤) (hπopt : planValue M s π = v s) :
     π 0 Fin.elim0 ∈ policy M v s ∧
-      ∀ᵐ z₁ ∂M.Q s.2, planValue M (start₁ M s π z₁) (cont π z₁) = v (start₁ M s π z₁) := by
-  obtain ⟨h1, h2⟩ := lemma_9_3 M hφ hF hβ.le s hπ.1 hL hsum
-  obtain ⟨hLc, hsumc⟩ := bounds_cont M hβ.le s π hL hsum
+      ∀ᵐ z₁ ∂M.Q s.2, planValue M (start₁ M s π z₁) (cont π z₁) = v (start₁ M s π z₁) ∧
+        planAbs M (start₁ M s π z₁) (cont π z₁) ≠ ⊤ := by
+  obtain ⟨hIu, h2⟩ := lemma_9_3_abs M hφ hF hβ s hπ.1 hfin
+  have hae := (ae_planAbs_cont M hφ hF hβ s hπ.1 hfin).2
   have hu : uR M s π = v s := by
-    rw [h1] at hπopt
+    rw [planValue_eq_uR_abs M hφ hF hβ.le s hπ.1 hfin] at hπopt
     exact_mod_cast hπopt
   have hy₀ : π 0 Fin.elim0 ∈ M.Γ s := hπ.2 0 Fin.elim0
-  have hcv : ∀ z₁, planValue M (start₁ M s π z₁) (cont π z₁) =
-      uR M (start₁ M s π z₁) (cont π z₁) := fun z₁ => planValue_eq_uR M hβ.le _ _ (hLc z₁) hsumc
-  have hle : ∀ z₁, uR M (start₁ M s π z₁) (cont π z₁) ≤ v (start₁ M s π z₁) := fun z₁ => by
+  have hcv : ∀ᵐ z₁ ∂M.Q s.2, planValue M (start₁ M s π z₁) (cont π z₁) =
+      uR M (start₁ M s π z₁) (cont π z₁) := by
+    filter_upwards [hae] with z₁ hz₁
+    exact planValue_eq_uR_abs M hφ hF hβ.le _ (hπ.cont M z₁).1 hz₁
+  have hle : ∀ᵐ z₁ ∂M.Q s.2, uR M (start₁ M s π z₁) (cont π z₁) ≤ v (start₁ M s π z₁) := by
+    filter_upwards [hcv] with z₁ hz₁
     have := hopt _ _ (hπ.cont M z₁)
-    rw [hcv] at this
+    rw [hz₁] at this
     exact_mod_cast this
-  have hIu : Integrable (fun z₁ => uR M (start₁ M s π z₁) (cont π z₁)) (M.Q s.2) :=
-    (integrable_const (∑' t, M.β ^ t * L (t + 1))).mono'
-      (measurable_uR_cont M hφ hF hβ.le s hπ.1 hL hsum).aestronglyMeasurable
-      (Eventually.of_forall fun z₁ => by
-        rw [Real.norm_eq_abs]; exact abs_uR_le M hβ.le _ _ (hLc z₁) hsumc)
   have hIv₀ : Integrable (fun z₁ => v (start₁ M s π z₁)) (M.Q s.2) := hIv s _ hy₀
   have hmono : ∫ z₁, uR M (start₁ M s π z₁) (cont π z₁) ∂M.Q s.2 ≤
-      ∫ z₁, v (start₁ M s π z₁) ∂M.Q s.2 := integral_mono hIu hIv₀ hle
+      ∫ z₁, v (start₁ M s π z₁) ∂M.Q s.2 := integral_mono_ae hIu hIv₀ hle
   have hrhs : rhs M v s (π 0 Fin.elim0) =
       ret M s π 0 Fin.elim0 + M.β * ∫ z₁, v (start₁ M s π z₁) ∂M.Q s.2 := rfl
   have hFEle := hFE.le M s _ hy₀
@@ -96,9 +96,9 @@ theorem theorem_9_4_step (hφ : Measurable M.φ) (hF : Measurable M.F) (hβ : 0 
     linarith
   refine ⟨⟨hy₀, ?_⟩, ?_⟩
   · rw [hrhs, ← heq, ← h2, hu]
-  · filter_upwards [(integral_eq_iff_of_ae_le hIu hIv₀ (Eventually.of_forall hle)).1 heq]
-      with z₁ hz₁
-    rw [hcv, hz₁]
+  · filter_upwards [(integral_eq_iff_of_ae_le hIu hIv₀ hle).1 heq, hcv, hae]
+      with z₁ hz₁ hc hf
+    exact ⟨by rw [hc, hz₁], hf⟩
 
 /-- The almost-sure part of Theorem 9.4, by induction on the date along continuations. -/
 theorem theorem_9_4_ae (hφ : Measurable M.φ) (hF : Measurable M.F) (hβ : 0 < M.β)
@@ -106,20 +106,18 @@ theorem theorem_9_4_ae (hφ : Measurable M.φ) (hF : Measurable M.F) (hβ : 0 < 
     (hFE : SolvesFE M v)
     (hIv : ∀ s, ∀ y ∈ M.Γ s, Integrable (fun z' => v (M.φ (s.1, y, z'), z')) (M.Q s.2))
     (hopt : ∀ s π, IsFeasible M s π → planValue M s π ≤ v s) (t : ℕ) :
-    ∀ (s : X × Z) (π : Plan Y Z), IsFeasible M s π → ∀ L : ℕ → ℝ,
-      (∀ t h, |ret M s π t h| ≤ L t) → Summable (fun t => M.β ^ t * L t) →
+    ∀ (s : X × Z) (π : Plan Y Z), IsFeasible M s π → planAbs M s π ≠ ⊤ →
       planValue M s π = v s → ∀ᵐ h ∂hist M.Q t s.2, π t h ∈ policy M v (state M s π t h) := by
   induction t with
   | zero =>
-    intro s π hπ L hL hsum hπopt
+    intro s π hπ hfin hπopt
     refine Eventually.of_forall fun h => ?_
     have : h = Fin.elim0 := funext fun i => i.elim0
     subst this
-    exact (theorem_9_4_step M hφ hF hβ hFE hIv hopt hπ hL hsum hπopt).1
+    exact (theorem_9_4_step M hφ hF hβ hFE hIv hopt hπ hfin hπopt).1
   | succ t ih =>
-    intro s π hπ L hL hsum hπopt
-    have hae := (theorem_9_4_step M hφ hF hβ hFE hIv hopt hπ hL hsum hπopt).2
-    obtain ⟨hLc, hsumc⟩ := bounds_cont M hβ.le s π hL hsum
+    intro s π hπ hfin hπopt
+    have hae := (theorem_9_4_step M hφ hF hβ hFE hIv hopt hπ hfin hπopt).2
     have hG := measurableSet_policy M hφ hF hΓ hv
     rw [ae_iff]
     set B : Set (Fin (t + 1) → Z) :=
@@ -130,7 +128,7 @@ theorem theorem_9_4_ae (hφ : Measurable M.φ) (hF : Measurable M.F) (hβ : 0 < 
     refine (lintegral_congr_ae ?_).trans lintegral_zero
     filter_upwards [hae] with z₁ hz₁
     have hπc := hπ.cont M z₁
-    have hnull := ih _ _ hπc _ (hLc z₁) hsumc hz₁
+    have hnull := ih _ _ hπc hz₁.2 hz₁.1
     rw [ae_iff] at hnull
     set B' : Set (Fin t → Z) := {h | ¬cont π z₁ t h ∈
       policy M v (state M (start₁ M s π z₁) (cont π z₁) t h)} with hB'def
@@ -151,10 +149,28 @@ theorem theorem_9_4_ae (hφ : Measurable M.φ) (hF : Measurable M.F) (hβ : 0 < 
     rw [lintegral_congr hfun, lintegral_indicator_one hB']
     exact hnull
 
-/-- **Theorem 9.4** (corrected; see the module docstring). Let `v*` be real-valued, measurable
-and solve the functional equation (5′), with the integral in (5′) defined; let the graph of `Γ`
-be measurable and `β > 0`; and let `π*` be feasible from `s₀`, attain `v*(s₀)`, and satisfy
-Assumption 9.3. Then `π*₀ ∈ G(s₀)` and `π*_t ∈ G(x_t, z_t)` `μᵗ(z₀, ·)`-almost everywhere. -/
+/-- **Theorem 9.4** (corrected; see the module docstring), for plans with
+`Σ βᵗ ∫ |F(x_t, π_t, z_t)| dμᵗ < ∞` (which Assumption 9.3 implies). Let `v*` be real-valued,
+measurable and solve the functional equation (5′), with the integral in (5′) defined; let the
+graph of `Γ` be measurable and `β > 0`. Then an optimal `π*` has `π*₀ ∈ G(s₀)` and
+`π*_t ∈ G(x_t, z_t)` `μᵗ(z₀, ·)`-almost everywhere. -/
+theorem theorem_9_4_abs (hφ : Measurable M.φ) (hF : Measurable M.F) (hβ : 0 < M.β)
+    (hΓ : MeasurableSet {p : (X × Z) × Y | p.2 ∈ M.Γ p.1}) {v : X × Z → ℝ} (hv : Measurable v)
+    (hvstar : ∀ s, vStar M s = v s) (hFE : SolvesFE M v)
+    (hIv : ∀ s, ∀ y ∈ M.Γ s, Integrable (fun z' => v (M.φ (s.1, y, z'), z')) (M.Q s.2))
+    {s₀ : X × Z} {π : Plan Y Z} (hπ : IsFeasible M s₀ π) (hπopt : planValue M s₀ π = vStar M s₀)
+    (hfin : planAbs M s₀ π ≠ ⊤) :
+    π 0 Fin.elim0 ∈ policy M v s₀ ∧
+      ∀ t, ∀ᵐ h ∂hist M.Q t s₀.2, π t h ∈ policy M v (state M s₀ π t h) := by
+  have hopt : ∀ s π, IsFeasible M s π → planValue M s π ≤ v s := fun s π hπ => by
+    rw [← hvstar]
+    exact le_iSup₂ (f := fun π (_ : IsFeasible M s π) => planValue M s π) π hπ
+  rw [hvstar] at hπopt
+  exact ⟨(theorem_9_4_step M hφ hF hβ hFE hIv hopt hπ hfin hπopt).1,
+    fun t => theorem_9_4_ae M hφ hF hβ hΓ hv hFE hIv hopt t s₀ π hπ hfin hπopt⟩
+
+/-- **Theorem 9.4** (corrected) under Assumption 9.3: returns bounded by `L_t` with
+`Σ βᵗ L_t < ∞`. -/
 theorem theorem_9_4 (hφ : Measurable M.φ) (hF : Measurable M.F) (hβ : 0 < M.β)
     (hΓ : MeasurableSet {p : (X × Z) × Y | p.2 ∈ M.Γ p.1}) {v : X × Z → ℝ} (hv : Measurable v)
     (hvstar : ∀ s, vStar M s = v s) (hFE : SolvesFE M v)
@@ -162,13 +178,9 @@ theorem theorem_9_4 (hφ : Measurable M.φ) (hF : Measurable M.F) (hβ : 0 < M.�
     {s₀ : X × Z} {π : Plan Y Z} (hπ : IsFeasible M s₀ π) (hπopt : planValue M s₀ π = vStar M s₀)
     {L : ℕ → ℝ} (hL : ∀ t h, |ret M s₀ π t h| ≤ L t) (hsum : Summable fun t => M.β ^ t * L t) :
     π 0 Fin.elim0 ∈ policy M v s₀ ∧
-      ∀ t, ∀ᵐ h ∂hist M.Q t s₀.2, π t h ∈ policy M v (state M s₀ π t h) := by
-  have hopt : ∀ s π, IsFeasible M s π → planValue M s π ≤ v s := fun s π hπ => by
-    rw [← hvstar]
-    exact le_iSup₂ (f := fun π (_ : IsFeasible M s π) => planValue M s π) π hπ
-  rw [hvstar] at hπopt
-  exact ⟨(theorem_9_4_step M hφ hF hβ hFE hIv hopt hπ hL hsum hπopt).1,
-    fun t => theorem_9_4_ae M hφ hF hβ hΓ hv hFE hIv hopt t s₀ π hπ L hL hsum hπopt⟩
+      ∀ t, ∀ᵐ h ∂hist M.Q t s₀.2, π t h ∈ policy M v (state M s₀ π t h) :=
+  theorem_9_4_abs M hφ hF hβ hΓ hv hvstar hFE hIv hπ hπopt
+    (planAbs_ne_top_of_bound M hβ.le s₀ π hL hsum)
 
 /-! ### The counterexample to "generated by `G`" -/
 
