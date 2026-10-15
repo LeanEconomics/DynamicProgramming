@@ -31,3 +31,9 @@ import StochasticApplications.JobMatching
 import StochasticApplications.BetaPosterior
 import StochasticApplications.AssetPricing
 import StochasticApplications.AssetConsumer
+import StochasticApplications.UpperBounded
+import StochasticApplications.IndustryInvestment
+import StochasticApplications.IndustryInvestmentResults
+import StochasticApplications.Inventory
+import StochasticApplications.InventoryResults
+import StochasticApplications.InventoryPolicy
