@@ -1,0 +1,1822 @@
+{
+  "checked_at_utc": "2026-10-16T03:50:57.320622+00:00",
+  "theorems": 143,
+  "module_theorems": {
+    "LawsOfLargeNumbers/ModesOfConvergence.lean": 10,
+    "LawsOfLargeNumbers/SlidingIndicators.lean": 15,
+    "LawsOfLargeNumbers/Uncorrelated.lean": 19,
+    "LawsOfLargeNumbers/MartingaleLaw.lean": 7,
+    "LawsOfLargeNumbers/NormsErgodic.lean": 12,
+    "LawsOfLargeNumbers/TransitionFunctions.lean": 19,
+    "LawsOfLargeNumbers/MarkovOperator.lean": 12,
+    "LawsOfLargeNumbers/Riesz.lean": 26,
+    "LawsOfLargeNumbers/MarkovPaths.lean": 17,
+    "LawsOfLargeNumbers/MarkovSLLN.lean": 6
+  },
+  "audited_declarations": 179,
+  "declarations": [
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.ConvAE",
+      "kind": "def",
+      "module": "LawsOfLargeNumbers/ModesOfConvergence.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.ConvInProb",
+      "kind": "def",
+      "module": "LawsOfLargeNumbers/ModesOfConvergence.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.limsupSet",
+      "kind": "def",
+      "module": "LawsOfLargeNumbers/ModesOfConvergence.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.mem_limsupSet",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/ModesOfConvergence.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.measure_limsupSet",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/ModesOfConvergence.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.measurableSet_dev",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/ModesOfConvergence.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.lemma_14_1",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/ModesOfConvergence.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.lemma_14_2",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/ModesOfConvergence.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.measure_limsupSet_eq_zero",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/ModesOfConvergence.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.lemma_14_3",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/ModesOfConvergence.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.ConvAE.convInProb",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/ModesOfConvergence.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.ex_14_2a",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/ModesOfConvergence.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.ex_14_2b",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/ModesOfConvergence.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.tri",
+      "kind": "def",
+      "module": "LawsOfLargeNumbers/SlidingIndicators.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.tri_succ",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/SlidingIndicators.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.le_tri",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/SlidingIndicators.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.tri_mono",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/SlidingIndicators.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.exists_row",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/SlidingIndicators.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.row",
+      "kind": "def",
+      "module": "LawsOfLargeNumbers/SlidingIndicators.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.row_spec",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/SlidingIndicators.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.row_eq",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/SlidingIndicators.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.pos",
+      "kind": "def",
+      "module": "LawsOfLargeNumbers/SlidingIndicators.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.pos_le",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/SlidingIndicators.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.row_tri_add",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/SlidingIndicators.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.le_row",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/SlidingIndicators.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.slideSet",
+      "kind": "def",
+      "module": "LawsOfLargeNumbers/SlidingIndicators.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.sliding",
+      "kind": "def",
+      "module": "LawsOfLargeNumbers/SlidingIndicators.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.unitLeb",
+      "kind": "def",
+      "module": "LawsOfLargeNumbers/SlidingIndicators.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.sliding_eq_one",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/SlidingIndicators.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.sliding_eq_zero",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/SlidingIndicators.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.row_one_zero",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/SlidingIndicators.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.ex_14_1a",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/SlidingIndicators.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.ex_14_1b",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/SlidingIndicators.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.ex_14_1c",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/SlidingIndicators.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.chebyshev",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/Uncorrelated.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.Uncorrelated",
+      "kind": "def",
+      "module": "LawsOfLargeNumbers/Uncorrelated.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.centered",
+      "kind": "def",
+      "module": "LawsOfLargeNumbers/Uncorrelated.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.memLp_centered",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/Uncorrelated.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.integral_centered",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/Uncorrelated.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.integral_centered_mul",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/Uncorrelated.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.integral_sq_sum",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/Uncorrelated.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.integral_sq_sum_le",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/Uncorrelated.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.memLp_sum_centered",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/Uncorrelated.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.avgDev",
+      "kind": "def",
+      "module": "LawsOfLargeNumbers/Uncorrelated.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.theorem_14_4",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/Uncorrelated.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.partialDev",
+      "kind": "def",
+      "module": "LawsOfLargeNumbers/Uncorrelated.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.partialDev_sub",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/Uncorrelated.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.memLp_partialDev_sub",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/Uncorrelated.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.integral_sq_partialDev_sub_le",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/Uncorrelated.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.tsum_ofReal_div_sq_ne_top",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/Uncorrelated.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.squares_convAE",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/Uncorrelated.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.gapSq",
+      "kind": "def",
+      "module": "LawsOfLargeNumbers/Uncorrelated.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.gapSq_nonneg",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/Uncorrelated.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.integrable_gapSq",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/Uncorrelated.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.integral_gapSq_le",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/Uncorrelated.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.gaps_convAE",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/Uncorrelated.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.tendsto_sqrt_atTop",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/Uncorrelated.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.theorem_14_5",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/Uncorrelated.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.mgDiff",
+      "kind": "def",
+      "module": "LawsOfLargeNumbers/MartingaleLaw.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.memLp_mgDiff",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/MartingaleLaw.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.condExp_diff_ae_eq_zero",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/MartingaleLaw.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.stronglyMeasurable_mgDiff",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/MartingaleLaw.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.integral_mgDiff_mul",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/MartingaleLaw.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.integral_mgDiff",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/MartingaleLaw.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.uncorrelated_diff",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/MartingaleLaw.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.theorem_14_6",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/MartingaleLaw.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.norm_quotient_mk",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/NormsErgodic.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.theorem_14_10",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/NormsErgodic.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.mem_closure_of_weak",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/NormsErgodic.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.lemma_14_11",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/NormsErgodic.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.ex_14_3a",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/NormsErgodic.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.cesaroOp",
+      "kind": "def",
+      "module": "LawsOfLargeNumbers/NormsErgodic.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.cesaroOp_apply",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/NormsErgodic.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.ex_14_3b",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/NormsErgodic.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.cesaroOp_sub_one",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/NormsErgodic.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.lemma_14_12",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/NormsErgodic.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.cesaroOp_sub_mem_range",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/NormsErgodic.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.cesaroOp_fixed",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/NormsErgodic.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.lemma_14_13",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/NormsErgodic.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.IsTransitionFunction",
+      "kind": "def",
+      "module": "LawsOfLargeNumbers/TransitionFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.isTransitionFunction_iff",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/TransitionFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.markovOp",
+      "kind": "def",
+      "module": "LawsOfLargeNumbers/TransitionFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.markovOpR",
+      "kind": "def",
+      "module": "LawsOfLargeNumbers/TransitionFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.adjointOp",
+      "kind": "def",
+      "module": "LawsOfLargeNumbers/TransitionFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.markovOp_indicator",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/TransitionFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.theorem_8_1",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/TransitionFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.integrable_of_bounded",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/TransitionFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.theorem_8_1_cor",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/TransitionFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.ex_8_1",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/TransitionFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.adjointOp_apply",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/TransitionFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.theorem_8_2",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/TransitionFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.ex_8_2",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/TransitionFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.theorem_8_3",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/TransitionFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.theorem_8_3_cor",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/TransitionFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.pairing",
+      "kind": "def",
+      "module": "LawsOfLargeNumbers/TransitionFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.ex_8_3",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/TransitionFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.kpow",
+      "kind": "def",
+      "module": "LawsOfLargeNumbers/TransitionFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.kpow_one",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/TransitionFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.ex_8_4a",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/TransitionFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.kpow_add",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/TransitionFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.markovOp_comp",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/TransitionFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.adjointOp_comp",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/TransitionFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.ex_8_4b",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/TransitionFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.adjointOp_iterate",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/TransitionFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.IsFeller",
+      "kind": "def",
+      "module": "LawsOfLargeNumbers/TransitionFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.IsMonotoneTF",
+      "kind": "def",
+      "module": "LawsOfLargeNumbers/TransitionFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.abs_markovOpR_le",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/MarkovOperator.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.markovBCF",
+      "kind": "def",
+      "module": "LawsOfLargeNumbers/MarkovOperator.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.markovBCF_apply",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/MarkovOperator.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.markovLin",
+      "kind": "def",
+      "module": "LawsOfLargeNumbers/MarkovOperator.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.markovCLM",
+      "kind": "def",
+      "module": "LawsOfLargeNumbers/MarkovOperator.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.markovCLM_apply",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/MarkovOperator.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.markovCLM_const",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/MarkovOperator.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.norm_markovCLM_le",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/MarkovOperator.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.ex_14_4",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/MarkovOperator.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.integral_markovCLM",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/MarkovOperator.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.integral_markovCLM_pow",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/MarkovOperator.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.Assumption14_3",
+      "kind": "def",
+      "module": "LawsOfLargeNumbers/MarkovOperator.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.assumption14_3_unique",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/MarkovOperator.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.integral_cesaroOp_tendsto",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/MarkovOperator.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.integral_cesaroOp_tendsto_finite",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/MarkovOperator.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.lemma_14_9_of_repr",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/MarkovOperator.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.rieszPosSup",
+      "kind": "def",
+      "module": "LawsOfLargeNumbers/Riesz.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.rieszPosSup_bddAbove",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/Riesz.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.le_rieszPosSup",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/Riesz.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.rieszPosSup_le",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/Riesz.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.rieszPosSup_zero",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/Riesz.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.rieszPosSup_add",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/Riesz.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.bcf_smul_nonneg",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/Riesz.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.bcf_smul_le",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/Riesz.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.rieszPosSup_smul",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/Riesz.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.bcf_eq_posPart_sub_negPart",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/Riesz.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.rieszPosPart",
+      "kind": "def",
+      "module": "LawsOfLargeNumbers/Riesz.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.rieszPosPart_sub",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/Riesz.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.rieszPosPart_add",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/Riesz.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.rieszPosPart_smul",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/Riesz.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.rieszPosPart_of_nonneg",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/Riesz.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.rieszPosPartLM",
+      "kind": "def",
+      "module": "LawsOfLargeNumbers/Riesz.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.rieszPosPartLM_nonneg",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/Riesz.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.le_rieszPosPartLM",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/Riesz.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.functional_jordanDecomposition",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/Riesz.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.exists_measure_of_positive",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/Riesz.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.sIntegral",
+      "kind": "def",
+      "module": "LawsOfLargeNumbers/Riesz.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.add_eq_add_of_integral_sub_eq",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/Riesz.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.integral_sub_eq_of_toSignedMeasure_eq",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/Riesz.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.sIntegral_toSignedMeasure_sub",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/Riesz.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.theorem_14_14_exists",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/Riesz.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.theorem_14_14_unique",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/Riesz.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.theorem_14_14_unique_measures",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/Riesz.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.theorem_14_14",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/Riesz.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.exists_smul_probabilityMeasure",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/Riesz.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.theorem_14_14_prob",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/Riesz.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.trajKernel",
+      "kind": "def",
+      "module": "LawsOfLargeNumbers/MarkovPaths.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.isMarkovKernel_trajKernel",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/MarkovPaths.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.pathM",
+      "kind": "def",
+      "module": "LawsOfLargeNumbers/MarkovPaths.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.isProbabilityMeasure_pathM",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/MarkovPaths.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.measurable_coord_piLE",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/MarkovPaths.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.markov_property",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/MarkovPaths.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.pathM_map_zero",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/MarkovPaths.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.measure_eq_of_real",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/MarkovPaths.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.law_coord",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/MarkovPaths.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.intro_2",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/MarkovPaths.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.tendsto_avg_of_bounded_diff",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/MarkovPaths.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.tendsto_avg_shift",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/MarkovPaths.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.iterate_markovOpR_bdd",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/MarkovPaths.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.mg_avg_tendsto",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/MarkovPaths.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.lemma_14_8_shift",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/MarkovPaths.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.lemma_14_8",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/MarkovPaths.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.unifBool",
+      "kind": "def",
+      "module": "LawsOfLargeNumbers/MarkovPaths.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.isProbabilityMeasure_unifBool",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/MarkovPaths.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.indTrue",
+      "kind": "def",
+      "module": "LawsOfLargeNumbers/MarkovPaths.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.integral_indTrue_unifBool",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/MarkovPaths.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.lemma_14_8_counterexample",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/MarkovPaths.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.lemma_14_9",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/MarkovSLLN.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.markovCLM_pow_apply",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/MarkovSLLN.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.abs_sum_sub_shift_le",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/MarkovSLLN.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.theorem_14_7",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/MarkovSLLN.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.adjointOp_id",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/MarkovSLLN.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.LawsOfLargeNumbers.feller_compact_not_enough",
+      "kind": "theorem",
+      "module": "LawsOfLargeNumbers/MarkovSLLN.lean"
+    }
+  ],
+  "full_build": "passed",
+  "fresh_source_compilation": "passed",
+  "fresh_source_lint_options": [
+    "-Dlinter.mathlibStandardSet=true",
+    "-Dlinter.style.header=false"
+  ],
+  "axioms": {
+    "StokeyLucasPrescott.LawsOfLargeNumbers.ConvAE": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.ConvInProb": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.limsupSet": [],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.mem_limsupSet": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.measure_limsupSet": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.measurableSet_dev": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.lemma_14_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.lemma_14_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.measure_limsupSet_eq_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.lemma_14_3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.ConvAE.convInProb": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.ex_14_2a": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.ex_14_2b": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.tri": [],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.tri_succ": [],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.le_tri": [
+      "propext",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.tri_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.exists_row": [
+      "propext",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.row": [
+      "propext",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.row_spec": [
+      "propext",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.row_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.pos": [
+      "propext",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.pos_le": [
+      "propext",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.row_tri_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.le_row": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.slideSet": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.sliding": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.unitLeb": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.sliding_eq_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.sliding_eq_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.row_one_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.ex_14_1a": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.ex_14_1b": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.ex_14_1c": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.chebyshev": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.Uncorrelated": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.centered": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.memLp_centered": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.integral_centered": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.integral_centered_mul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.integral_sq_sum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.integral_sq_sum_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.memLp_sum_centered": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.avgDev": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.theorem_14_4": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.partialDev": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.partialDev_sub": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.memLp_partialDev_sub": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.integral_sq_partialDev_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.tsum_ofReal_div_sq_ne_top": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.squares_convAE": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.gapSq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.gapSq_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.integrable_gapSq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.integral_gapSq_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.gaps_convAE": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.tendsto_sqrt_atTop": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.theorem_14_5": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.mgDiff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.memLp_mgDiff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.condExp_diff_ae_eq_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.stronglyMeasurable_mgDiff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.integral_mgDiff_mul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.integral_mgDiff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.uncorrelated_diff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.theorem_14_6": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.norm_quotient_mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.theorem_14_10": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.mem_closure_of_weak": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.lemma_14_11": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.ex_14_3a": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.cesaroOp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.cesaroOp_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.ex_14_3b": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.cesaroOp_sub_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.lemma_14_12": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.cesaroOp_sub_mem_range": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.cesaroOp_fixed": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.lemma_14_13": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.IsTransitionFunction": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.isTransitionFunction_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.markovOp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.markovOpR": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.adjointOp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.markovOp_indicator": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.theorem_8_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.integrable_of_bounded": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.theorem_8_1_cor": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.ex_8_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.adjointOp_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.theorem_8_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.ex_8_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.theorem_8_3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.theorem_8_3_cor": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.pairing": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.ex_8_3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.kpow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.kpow_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.ex_8_4a": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.kpow_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.markovOp_comp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.adjointOp_comp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.ex_8_4b": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.adjointOp_iterate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.IsFeller": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.IsMonotoneTF": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.abs_markovOpR_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.markovBCF": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.markovBCF_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.markovLin": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.markovCLM": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.markovCLM_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.markovCLM_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.norm_markovCLM_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.ex_14_4": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.integral_markovCLM": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.integral_markovCLM_pow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.Assumption14_3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.assumption14_3_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.integral_cesaroOp_tendsto": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.integral_cesaroOp_tendsto_finite": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.lemma_14_9_of_repr": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.rieszPosSup": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.rieszPosSup_bddAbove": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.le_rieszPosSup": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.rieszPosSup_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.rieszPosSup_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.rieszPosSup_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.bcf_smul_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.bcf_smul_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.rieszPosSup_smul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.bcf_eq_posPart_sub_negPart": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.rieszPosPart": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.rieszPosPart_sub": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.rieszPosPart_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.rieszPosPart_smul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.rieszPosPart_of_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.rieszPosPartLM": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.rieszPosPartLM_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.le_rieszPosPartLM": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.functional_jordanDecomposition": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.exists_measure_of_positive": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.sIntegral": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.add_eq_add_of_integral_sub_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.integral_sub_eq_of_toSignedMeasure_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.sIntegral_toSignedMeasure_sub": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.theorem_14_14_exists": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.theorem_14_14_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.theorem_14_14_unique_measures": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.theorem_14_14": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.exists_smul_probabilityMeasure": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.theorem_14_14_prob": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.trajKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.isMarkovKernel_trajKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.pathM": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.isProbabilityMeasure_pathM": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.measurable_coord_piLE": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.markov_property": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.pathM_map_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.measure_eq_of_real": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.law_coord": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.intro_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.tendsto_avg_of_bounded_diff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.tendsto_avg_shift": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.iterate_markovOpR_bdd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.mg_avg_tendsto": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.lemma_14_8_shift": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.lemma_14_8": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.unifBool": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.isProbabilityMeasure_unifBool": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.indTrue": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.integral_indTrue_unifBool": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.lemma_14_8_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.lemma_14_9": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.markovCLM_pow_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.abs_sum_sub_shift_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.theorem_14_7": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.adjointOp_id": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.LawsOfLargeNumbers.feller_compact_not_enough": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  "source_sha256": {
+    "LawsOfLargeNumbers/ModesOfConvergence.lean": "e71d2022d2ecb830a7c6eccd889f4fa491d1404f4e96c094838999666e4b20d1",
+    "LawsOfLargeNumbers/SlidingIndicators.lean": "829969dea972be630bd34f756e2314128985a70f1eeb4e2276db2a7fb7abcdc6",
+    "LawsOfLargeNumbers/Uncorrelated.lean": "ec99a13449978e910ea9d88a18439782a61e2dafa8894e4c3fed5aa5237cd4cd",
+    "LawsOfLargeNumbers/MartingaleLaw.lean": "80f10dc24d6971c4ddca07ffd55323d43e43d8811a7052ac17dfafd2ee577eb1",
+    "LawsOfLargeNumbers/NormsErgodic.lean": "aafe63b68fac867722230cf1bac285a4c9043315c90f25da89d4f5687c012c1d",
+    "LawsOfLargeNumbers/TransitionFunctions.lean": "e4d317b9c82f506467aaffec6c64d355cc6aafc81bd75f7a4ded4cd28a1c6040",
+    "LawsOfLargeNumbers/MarkovOperator.lean": "3f07241b221b655f689cabb391e12829594e08d4c61d16ce005684a3d539fa3b",
+    "LawsOfLargeNumbers/Riesz.lean": "ecf5d0a150b333210e87e601515162acdb2a40a65512cc027488fb534a1c0006",
+    "LawsOfLargeNumbers/MarkovPaths.lean": "cad567b0eafc81bd14b7244003979dfd0b27b13af70efbb85fca30d7c7d72d69",
+    "LawsOfLargeNumbers/MarkovSLLN.lean": "b76156690b48ae4031db00ded1620d5360f68723eea95f97e22b14c38dcca750",
+    "LawsOfLargeNumbers.lean": "f1fe5016a396adfb04648c4e97a5b7f2c1aa9c47e2cef49ab4c366c07ad99909",
+    "lean-toolchain": "8733782dc070a99b312039cda424f601b80f3be6f6f512627da5ba25adc27632",
+    "lakefile.toml": "8b9b42819d8b260ec8a3eb4a0efcb52d76cef434a858ed5287cdd50068e1b407",
+    "lake-manifest.json": "721513e429a980d41f57109510a932a37470dee46dbfae174706df7662441b9d",
+    "proof-manifest.json": "4b092690bdcbb188749a369c9042fb0b1d2fa93d014da8e9807f4f745a571652",
+    "scripts/verify.py": "a70b1fa704dd590f937f8b37682afa88a9d85a9150065acb935c7d2c9589da3b",
+    "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  },
+  "fresh_audit_sha256": "f5a2a6a136ec6aae98f8a0d42cdc8453643cd1b160dd7436175ef2808f8f3d05",
+  "lean_toolchain": "leanprover/lean4:v4.34.0",
+  "scope": "SLP Chapter 14 (Laws of Large Numbers): every numbered result and exercise, with corrections.",
+  "source": "Stokey, Lucas and Prescott (1989), Recursive Methods in Economic Dynamics, Chapter 14"
+}
