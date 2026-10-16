@@ -13,3 +13,8 @@ import StrongConvergence.Doeblin
 import StrongConvergence.DoeblinErgodic
 import StrongConvergence.InfiniteExamples
 import StrongConvergence.ConditionM
+import StrongConvergence.CesaroAverages
+import StrongConvergence.ErgodicMeasures
+import StrongConvergence.MeanErgodicL2
+import StrongConvergence.DoeblinExistence
+import StrongConvergence.DoeblinCesaro

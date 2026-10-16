@@ -8,12 +8,12 @@ the commands below from this directory. [Return to the library index](../../READ
 Chapter 11 studies when the distributions of a Markov process converge. It covers finite chains
 first, then arbitrary state spaces in the total variation norm.
 
-Every numbered result and every exercise is formalised, except Theorem 11.9b–c and
-Theorem 11.10b–c (Cesàro convergence under Doeblin's condition). The book does not prove these
-itself; it refers to Doob (1953) and Neveu (1965). Theorems 11.9a and 11.10a are formalised.
+Every numbered result and every exercise is formalised. The book states Theorems 11.9b–c and
+11.10b–c (Cesàro convergence under Doeblin's condition) without proof, referring to Doob (1953)
+and Neveu (1965). They are proved here by a self-contained argument; see the last item below.
 
 Five gaps in the book's arguments are closed and two definitions are corrected; see
-[corrections](docs/corrections.md). The library contains **226 theorems**.
+[corrections](docs/corrections.md). The library contains **314 theorems**.
 
 * **Finite chains** (§11.1).
   * Theorem 11.1: ergodic sets and transient states, and convergence of the averages
@@ -41,6 +41,17 @@ Five gaps in the book's arguments are closed and two definitions are corrected; 
     a corrected argument is used.
   * Lemma 11.11: `T*ᴺ` is a contraction under Condition M.
   * Theorem 11.12: geometric convergence to the unique invariant measure, and the converse.
+  * Theorems 11.9b–c and 11.10b–c, which the book does not prove. Under Condition D, the
+    Cesàro averages `(1/N) Σ_{n=1}^{N} T*ⁿλ₀` converge in total variation to an invariant
+    measure. Each of the `M` ergodic sets carries exactly one invariant measure, and every
+    invariant measure is a convex combination of these. The proof has five steps:
+    * Doeblin's condition makes the averages uniformly absolutely continuous with respect to
+      `Σⱼ 2^{-j-1}φPʲ`.
+    * A limit along an ultrafilter is then an invariant measure on each ergodic set.
+    * Uniqueness on an ergodic set follows from the Hahn decomposition.
+    * Von Neumann's mean ergodic theorem in `L²(π)` handles measures with bounded density, and
+      Lebesgue decompositions with respect to `φ` extend this to all measures on an ergodic set.
+    * The transient set is absorbed, through a maximum argument for harmonic functions.
 
 All names are in the namespace `StokeyLucasPrescott.StrongConvergence`. See the
 [source map](docs/source-map.md) and the [corrections](docs/corrections.md).
@@ -64,6 +75,11 @@ All names are in the namespace `StokeyLucasPrescott.StrongConvergence`. See the
 | [DoeblinErgodic](StrongConvergence/DoeblinErgodic.lean) | 16 | Ergodic sets; Theorems 11.9a, 11.10a |
 | [InfiniteExamples](StrongConvergence/InfiniteExamples.lean) | 2 | Examples 6–7 |
 | [ConditionM](StrongConvergence/ConditionM.lean) | 11 | Lemma 11.11, Theorem 11.12 |
+| [CesaroAverages](StrongConvergence/CesaroAverages.lean) | 24 | Cesàro averages of `T*ⁿλ` and their Cauchy property |
+| [ErgodicMeasures](StrongConvergence/ErgodicMeasures.lean) | 7 | Reachability; uniqueness of the invariant measure on an ergodic set |
+| [MeanErgodicL2](StrongConvergence/MeanErgodicL2.lean) | 16 | The Markov operator on `L²(π)`; bounded densities |
+| [DoeblinExistence](StrongConvergence/DoeblinExistence.lean) | 25 | Uniform integrability; invariant measures as ultrafilter limits |
+| [DoeblinCesaro](StrongConvergence/DoeblinCesaro.lean) | 16 | Absorption; Theorems 11.9b–c, 11.10b–c |
 
 ## Build and verify
 

@@ -1,6 +1,6 @@
 {
-  "checked_at_utc": "2026-10-15T23:27:43.337258+00:00",
-  "theorems": 226,
+  "checked_at_utc": "2026-10-16T02:45:21.856107+00:00",
+  "theorems": 314,
   "module_theorems": {
     "StrongConvergence/FiniteChains.lean": 24,
     "StrongConvergence/FiniteAverages.lean": 18,
@@ -16,9 +16,14 @@
     "StrongConvergence/Doeblin.lean": 25,
     "StrongConvergence/DoeblinErgodic.lean": 16,
     "StrongConvergence/InfiniteExamples.lean": 2,
-    "StrongConvergence/ConditionM.lean": 11
+    "StrongConvergence/ConditionM.lean": 11,
+    "StrongConvergence/CesaroAverages.lean": 24,
+    "StrongConvergence/ErgodicMeasures.lean": 7,
+    "StrongConvergence/MeanErgodicL2.lean": 16,
+    "StrongConvergence/DoeblinExistence.lean": 25,
+    "StrongConvergence/DoeblinCesaro.lean": 16
   },
-  "audited_declarations": 278,
+  "audited_declarations": 375,
   "declarations": [
     {
       "name": "StokeyLucasPrescott.StrongConvergence.simplex",
@@ -1409,6 +1414,491 @@
       "name": "StokeyLucasPrescott.StrongConvergence.theorem_11_12_converse",
       "kind": "theorem",
       "module": "StrongConvergence/ConditionM.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.adjointOp_add",
+      "kind": "theorem",
+      "module": "StrongConvergence/CesaroAverages.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.adjointOp_smul",
+      "kind": "theorem",
+      "module": "StrongConvergence/CesaroAverages.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.adjointOp_zero",
+      "kind": "theorem",
+      "module": "StrongConvergence/CesaroAverages.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.adjointOp_finsetSum",
+      "kind": "theorem",
+      "module": "StrongConvergence/CesaroAverages.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.adjointOp_mono",
+      "kind": "theorem",
+      "module": "StrongConvergence/CesaroAverages.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.adjointOp_kpow_univ",
+      "kind": "theorem",
+      "module": "StrongConvergence/CesaroAverages.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.isFinite_adjoint",
+      "kind": "theorem",
+      "module": "StrongConvergence/CesaroAverages.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.adjoint_real_le",
+      "kind": "theorem",
+      "module": "StrongConvergence/CesaroAverages.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.cesaroM",
+      "kind": "def",
+      "module": "StrongConvergence/CesaroAverages.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.cesaroM_apply",
+      "kind": "theorem",
+      "module": "StrongConvergence/CesaroAverages.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.cesaroM_real",
+      "kind": "theorem",
+      "module": "StrongConvergence/CesaroAverages.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.cesaroM_univ",
+      "kind": "theorem",
+      "module": "StrongConvergence/CesaroAverages.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.isFinite_cesaroM",
+      "kind": "theorem",
+      "module": "StrongConvergence/CesaroAverages.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.isProb_cesaroM",
+      "kind": "theorem",
+      "module": "StrongConvergence/CesaroAverages.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.cesaroM_real_nonneg_le",
+      "kind": "theorem",
+      "module": "StrongConvergence/CesaroAverages.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.cesaroM_add",
+      "kind": "theorem",
+      "module": "StrongConvergence/CesaroAverages.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.cesaroM_smul",
+      "kind": "theorem",
+      "module": "StrongConvergence/CesaroAverages.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.abs_cesaro_shift_le",
+      "kind": "theorem",
+      "module": "StrongConvergence/CesaroAverages.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.CesaroCauchy",
+      "kind": "def",
+      "module": "StrongConvergence/CesaroAverages.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.cesaroCauchy_zero",
+      "kind": "theorem",
+      "module": "StrongConvergence/CesaroAverages.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.CesaroCauchy.add",
+      "kind": "theorem",
+      "module": "StrongConvergence/CesaroAverages.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.CesaroCauchy.smul",
+      "kind": "theorem",
+      "module": "StrongConvergence/CesaroAverages.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.cesaroCauchy_finsetSum",
+      "kind": "theorem",
+      "module": "StrongConvergence/CesaroAverages.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.cesaroCauchy_of_approx",
+      "kind": "theorem",
+      "module": "StrongConvergence/CesaroAverages.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.cesaroCauchy_adjoint",
+      "kind": "theorem",
+      "module": "StrongConvergence/CesaroAverages.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.tvDist_cesaro_le",
+      "kind": "theorem",
+      "module": "StrongConvergence/CesaroAverages.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.invariant_iterate",
+      "kind": "theorem",
+      "module": "StrongConvergence/ErgodicMeasures.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.kpow_noReach_eq_one",
+      "kind": "theorem",
+      "module": "StrongConvergence/ErgodicMeasures.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.exists_reach",
+      "kind": "theorem",
+      "module": "StrongConvergence/ErgodicMeasures.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.pos_of_invariant",
+      "kind": "theorem",
+      "module": "StrongConvergence/ErgodicMeasures.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.absCont_of_concentrated",
+      "kind": "theorem",
+      "module": "StrongConvergence/ErgodicMeasures.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.posPart_invariant",
+      "kind": "theorem",
+      "module": "StrongConvergence/ErgodicMeasures.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.invariant_unique",
+      "kind": "theorem",
+      "module": "StrongConvergence/ErgodicMeasures.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.measurePreserving_fst_compProd",
+      "kind": "theorem",
+      "module": "StrongConvergence/MeanErgodicL2.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.measurePreserving_snd_compProd",
+      "kind": "theorem",
+      "module": "StrongConvergence/MeanErgodicL2.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.jFst",
+      "kind": "def",
+      "module": "StrongConvergence/MeanErgodicL2.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.jSnd",
+      "kind": "def",
+      "module": "StrongConvergence/MeanErgodicL2.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.markovL2",
+      "kind": "def",
+      "module": "StrongConvergence/MeanErgodicL2.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.norm_markovL2_le",
+      "kind": "theorem",
+      "module": "StrongConvergence/MeanErgodicL2.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.inner_real_apply",
+      "kind": "theorem",
+      "module": "StrongConvergence/MeanErgodicL2.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.memLp_two_of_bound",
+      "kind": "theorem",
+      "module": "StrongConvergence/MeanErgodicL2.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.inner_markovL2",
+      "kind": "theorem",
+      "module": "StrongConvergence/MeanErgodicL2.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.markovL2_toLp",
+      "kind": "theorem",
+      "module": "StrongConvergence/MeanErgodicL2.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.stepFn",
+      "kind": "def",
+      "module": "StrongConvergence/MeanErgodicL2.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.measurable_stepFn",
+      "kind": "theorem",
+      "module": "StrongConvergence/MeanErgodicL2.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.abs_stepFn_le",
+      "kind": "theorem",
+      "module": "StrongConvergence/MeanErgodicL2.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.markovOpR_stepFn",
+      "kind": "theorem",
+      "module": "StrongConvergence/MeanErgodicL2.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.markovL2_iterate",
+      "kind": "theorem",
+      "module": "StrongConvergence/MeanErgodicL2.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.inner_iterate_adjoint",
+      "kind": "theorem",
+      "module": "StrongConvergence/MeanErgodicL2.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.isFiniteMeasure_withDensity_of_bound",
+      "kind": "theorem",
+      "module": "StrongConvergence/MeanErgodicL2.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.adjoint_withDensity_real",
+      "kind": "theorem",
+      "module": "StrongConvergence/MeanErgodicL2.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.inner_toLp_toLp",
+      "kind": "theorem",
+      "module": "StrongConvergence/MeanErgodicL2.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.cesaroCauchy_withDensity",
+      "kind": "theorem",
+      "module": "StrongConvergence/MeanErgodicL2.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.adjointOp_kpow_zero",
+      "kind": "theorem",
+      "module": "StrongConvergence/DoeblinExistence.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.doeblinRef",
+      "kind": "def",
+      "module": "StrongConvergence/DoeblinExistence.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.doeblinRef_apply",
+      "kind": "theorem",
+      "module": "StrongConvergence/DoeblinExistence.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.tsum_inv_two_pow_succ",
+      "kind": "theorem",
+      "module": "StrongConvergence/DoeblinExistence.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.isFinite_doeblinRef",
+      "kind": "theorem",
+      "module": "StrongConvergence/DoeblinExistence.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.le_two_doeblinRef",
+      "kind": "theorem",
+      "module": "StrongConvergence/DoeblinExistence.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.adjoint_doeblinRef_le",
+      "kind": "theorem",
+      "module": "StrongConvergence/DoeblinExistence.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.adjoint_kpow_doeblinRef_le",
+      "kind": "theorem",
+      "module": "StrongConvergence/DoeblinExistence.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.doeblin_eps_le_one",
+      "kind": "theorem",
+      "module": "StrongConvergence/DoeblinExistence.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.refBound",
+      "kind": "def",
+      "module": "StrongConvergence/DoeblinExistence.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.refBound_nonneg",
+      "kind": "theorem",
+      "module": "StrongConvergence/DoeblinExistence.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.adjoint_real_le_ref",
+      "kind": "theorem",
+      "module": "StrongConvergence/DoeblinExistence.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.cesaro_small",
+      "kind": "theorem",
+      "module": "StrongConvergence/DoeblinExistence.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.abs_sub_levels_le",
+      "kind": "theorem",
+      "module": "StrongConvergence/DoeblinExistence.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.abs_integral_sub_levels_le",
+      "kind": "theorem",
+      "module": "StrongConvergence/DoeblinExistence.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.hyperfilter_le_atTop",
+      "kind": "theorem",
+      "module": "StrongConvergence/DoeblinExistence.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.cesaroLim",
+      "kind": "def",
+      "module": "StrongConvergence/DoeblinExistence.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.tendsto_ultra_of_mem",
+      "kind": "theorem",
+      "module": "StrongConvergence/DoeblinExistence.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.tendsto_cesaroLim",
+      "kind": "theorem",
+      "module": "StrongConvergence/DoeblinExistence.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.tendsto_ultra",
+      "kind": "theorem",
+      "module": "StrongConvergence/DoeblinExistence.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.cesaroLim_union",
+      "kind": "theorem",
+      "module": "StrongConvergence/DoeblinExistence.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.cesaroLim_nonneg",
+      "kind": "theorem",
+      "module": "StrongConvergence/DoeblinExistence.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.cesaroLim_univ",
+      "kind": "theorem",
+      "module": "StrongConvergence/DoeblinExistence.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.cesaroLim_empty",
+      "kind": "theorem",
+      "module": "StrongConvergence/DoeblinExistence.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.hasSum_cesaroLim",
+      "kind": "theorem",
+      "module": "StrongConvergence/DoeblinExistence.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.adjoint_cesaroM",
+      "kind": "theorem",
+      "module": "StrongConvergence/DoeblinExistence.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.tendsto_integral_ultra",
+      "kind": "theorem",
+      "module": "StrongConvergence/DoeblinExistence.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.exists_invariant",
+      "kind": "theorem",
+      "module": "StrongConvergence/DoeblinExistence.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.iSup_min_natCast",
+      "kind": "theorem",
+      "module": "StrongConvergence/DoeblinCesaro.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.cesaroCauchy_of_absCont",
+      "kind": "theorem",
+      "module": "StrongConvergence/DoeblinCesaro.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.doeblin_decomp",
+      "kind": "theorem",
+      "module": "StrongConvergence/DoeblinCesaro.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.cesaroCauchy_of_concentrated",
+      "kind": "theorem",
+      "module": "StrongConvergence/DoeblinCesaro.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.iInf_shift_antitone",
+      "kind": "theorem",
+      "module": "StrongConvergence/DoeblinCesaro.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.tendsto_kpow_transient",
+      "kind": "theorem",
+      "module": "StrongConvergence/DoeblinCesaro.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.tendsto_adjoint_transient",
+      "kind": "theorem",
+      "module": "StrongConvergence/DoeblinCesaro.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.exists_invariant_on",
+      "kind": "theorem",
+      "module": "StrongConvergence/DoeblinCesaro.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.cesaroCauchy_all",
+      "kind": "theorem",
+      "module": "StrongConvergence/DoeblinCesaro.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.theorem_11_9b",
+      "kind": "theorem",
+      "module": "StrongConvergence/DoeblinCesaro.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.invariant_transient_null",
+      "kind": "theorem",
+      "module": "StrongConvergence/DoeblinCesaro.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.restrict_invariant",
+      "kind": "theorem",
+      "module": "StrongConvergence/DoeblinCesaro.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.theorem_11_9c",
+      "kind": "theorem",
+      "module": "StrongConvergence/DoeblinCesaro.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.ergodic_count_eq_one",
+      "kind": "theorem",
+      "module": "StrongConvergence/DoeblinCesaro.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.theorem_11_10b",
+      "kind": "theorem",
+      "module": "StrongConvergence/DoeblinCesaro.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StrongConvergence.theorem_11_10c",
+      "kind": "theorem",
+      "module": "StrongConvergence/DoeblinCesaro.lean"
     }
   ],
   "full_build": "passed",
@@ -2801,6 +3291,491 @@
       "propext",
       "Classical.choice",
       "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.adjointOp_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.adjointOp_smul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.adjointOp_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.adjointOp_finsetSum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.adjointOp_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.adjointOp_kpow_univ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.isFinite_adjoint": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.adjoint_real_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.cesaroM": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.cesaroM_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.cesaroM_real": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.cesaroM_univ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.isFinite_cesaroM": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.isProb_cesaroM": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.cesaroM_real_nonneg_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.cesaroM_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.cesaroM_smul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.abs_cesaro_shift_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.CesaroCauchy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.cesaroCauchy_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.CesaroCauchy.add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.CesaroCauchy.smul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.cesaroCauchy_finsetSum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.cesaroCauchy_of_approx": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.cesaroCauchy_adjoint": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.tvDist_cesaro_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.invariant_iterate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.kpow_noReach_eq_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.exists_reach": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.pos_of_invariant": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.absCont_of_concentrated": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.posPart_invariant": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.invariant_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.measurePreserving_fst_compProd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.measurePreserving_snd_compProd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.jFst": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.jSnd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.markovL2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.norm_markovL2_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.inner_real_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.memLp_two_of_bound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.inner_markovL2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.markovL2_toLp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.stepFn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.measurable_stepFn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.abs_stepFn_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.markovOpR_stepFn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.markovL2_iterate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.inner_iterate_adjoint": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.isFiniteMeasure_withDensity_of_bound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.adjoint_withDensity_real": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.inner_toLp_toLp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.cesaroCauchy_withDensity": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.adjointOp_kpow_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.doeblinRef": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.doeblinRef_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.tsum_inv_two_pow_succ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.isFinite_doeblinRef": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.le_two_doeblinRef": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.adjoint_doeblinRef_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.adjoint_kpow_doeblinRef_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.doeblin_eps_le_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.refBound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.refBound_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.adjoint_real_le_ref": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.cesaro_small": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.abs_sub_levels_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.abs_integral_sub_levels_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.hyperfilter_le_atTop": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.cesaroLim": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.tendsto_ultra_of_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.tendsto_cesaroLim": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.tendsto_ultra": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.cesaroLim_union": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.cesaroLim_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.cesaroLim_univ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.cesaroLim_empty": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.hasSum_cesaroLim": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.adjoint_cesaroM": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.tendsto_integral_ultra": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.exists_invariant": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.iSup_min_natCast": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.cesaroCauchy_of_absCont": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.doeblin_decomp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.cesaroCauchy_of_concentrated": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.iInf_shift_antitone": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.tendsto_kpow_transient": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.tendsto_adjoint_transient": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.exists_invariant_on": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.cesaroCauchy_all": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.theorem_11_9b": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.invariant_transient_null": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.restrict_invariant": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.theorem_11_9c": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.ergodic_count_eq_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.theorem_11_10b": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StrongConvergence.theorem_11_10c": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
     ]
   },
   "source_sha256": {
@@ -2819,16 +3794,21 @@
     "StrongConvergence/DoeblinErgodic.lean": "4b983c790d984e446134399de7bf94b4b4f7ed8d350d1996507516050e75fd97",
     "StrongConvergence/InfiniteExamples.lean": "4e8a24339e9f583b171b9f4ef4595df8e98f665a15ab2cf80a2ed6a0d1fd5cee",
     "StrongConvergence/ConditionM.lean": "4352dd7e00f88592fcab4908c76e948c1a9914cd9aea204f4a23887c320794db",
-    "StrongConvergence.lean": "a35119db03f1592db00624ede45daf23cf303feb83d50d926ec92018869c7721",
+    "StrongConvergence/CesaroAverages.lean": "a5a77af1eb7f54ac10d6a378b10d4d7cf9f1285bdef622f65cc5741881b24c88",
+    "StrongConvergence/ErgodicMeasures.lean": "d55993cea299dd607eaad08ce40e344fda7e242b3d5b682cd0fa17fe52fb4e7f",
+    "StrongConvergence/MeanErgodicL2.lean": "f965ffd36a6c230b3c113f477a91c0e03f6653bc93c3fa372f6f44674e3459ed",
+    "StrongConvergence/DoeblinExistence.lean": "b4b617a2a6ea7df736be9ed3c45b86bc93b64905b5a227cead193f2f704a8391",
+    "StrongConvergence/DoeblinCesaro.lean": "2f2ab93bd52ba658d68d9fce6da664d17792d1d9e681c4aef95eea107d69a99e",
+    "StrongConvergence.lean": "4182ab5a3cae9455aa5270e8a0f3fd04185284a352a8fc56a39fa2444ab3f621",
     "lean-toolchain": "8733782dc070a99b312039cda424f601b80f3be6f6f512627da5ba25adc27632",
     "lakefile.toml": "67b8f3bd051f1dd269933a17d2ec01a0a5fe8e5605bb3731e813147f3ed6b440",
     "lake-manifest.json": "d36884afa960d5e777c8cbb0cd06ecfaf9325cf36afc17cad24a5a3978fec5b9",
-    "proof-manifest.json": "c87afe53393e6bafcf276efaed4e80ad5c78bb6ce9271d55c4ee3b011f58a9a0",
+    "proof-manifest.json": "1eaef4193c4b0ec95584f40e11ec162598aeff59c98c8488fadbf46e19a90a84",
     "scripts/verify.py": "a70b1fa704dd590f937f8b37682afa88a9d85a9150065acb935c7d2c9589da3b",
     "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
   },
-  "fresh_audit_sha256": "98048d6f75e7e7d1163d57d80fc5e2c74e63be8b6c0f08a767091831a60d54a8",
+  "fresh_audit_sha256": "c38cca9d7a452be2e847e0eb56260532736c88aa77d94603b5ca0e2909ad54d7",
   "lean_toolchain": "leanprover/lean4:v4.34.0",
-  "scope": "SLP Chapter 11 (Strong Convergence of Markov Processes): Theorems 11.1-11.12 and Exercises 11.1-11.5, with corrections; Theorem 11.9b-c and 11.10b-c are not formalised.",
+  "scope": "SLP Chapter 11 (Strong Convergence of Markov Processes): every numbered result and exercise, with corrections.",
   "source": "Stokey, Lucas and Prescott (1989), Recursive Methods in Economic Dynamics, Chapter 11"
 }

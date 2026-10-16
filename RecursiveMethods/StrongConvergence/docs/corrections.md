@@ -30,6 +30,8 @@ a hypothesis made explicit, or a convention chosen.
 | Exercise 11.4b, p. 346 | "`Σⱼ pᵢⱼ` converges uniformly in `i`." | The tails `Σ_{j≥J} pᵢⱼ` tend to `0` uniformly in `i`. |
 | Exercise 11.4g, p. 346 | `P = αP₁ + (1 − α)P₂` satisfies Condition D. | With constants `(φ, N, αᴺε)`, using `Pⁿ ≥ αⁿP₁ⁿ` (`ex_11_4g`). |
 | Theorem 11.12 converse, p. 351 | "If (1) holds, then Condition M is satisfied." | (1) with `0 < ε ≤ 1` gives Condition M for `(NK, 1/4)` (`theorem_11_12_converse`). |
+| Theorem 11.9b–c, pp. 347–348 | Stated without proof (the book refers to Doob 1953, §V.5, and Neveu 1965, §V.3). | Proved for nonempty `S` (`theorem_11_9b`, `theorem_11_9c`). The limit is in the total variation norm, and the averages run over `n = 1, …, N` with `N = n + 1` (`cesaroM κ n`). In (c), the `M` invariant measures `πₘ` satisfy `πₘ(Eₘ) = 1` for the `M` ergodic sets of Theorem 11.9a. Every invariant `μ` equals `Σₘ μ(Eₘ) πₘ`, with `Σₘ μ(Eₘ) = 1`. |
+| Theorem 11.10b–c, p. 348 | "Parts (b) and (c) then follow immediately from Theorem 11.9." | Under the reachability hypothesis the decomposition of Theorem 11.9a has exactly one ergodic set (`ergodic_count_eq_one`), so (b) and (c) follow from Theorem 11.9b–c (`theorem_11_10b`, `theorem_11_10c`). |
 
 ## Conventions
 
@@ -39,10 +41,3 @@ a hypothesis made explicit, or a convention chosen.
 | Halving example, p. 336 | `S = [0, 1]`. | `S = ℝ`. The unit masses lie in `[0, 1]`, and it is shown that no finite measure is a setwise limit (`halving_not_setwise`). Exercise 11.4j uses `S = [0, 1]`. |
 | Exercises 11.4h–j | Three separate kernels. | One lemma covers all three: an injective deterministic map on a space with infinitely many points violates Condition D (`not_conditionD_deterministic`). |
 | `P`, `T*` | Transition function, adjoint operator. | Markov kernels, `kpow κ n` and `adjointOp`, carried from `RecursiveMethods/MarkovProcesses`. |
-
-## Not formalised
-
-| Where | Claim | Reason |
-| --- | --- | --- |
-| Theorem 11.9b–c, pp. 347–348 | Under Condition D, `(1/N) Σ T*ⁿλ₀` converges to an invariant measure, and the invariant measures are the convex combinations of `M` measures, one per ergodic set. | Not proved in the book, which refers to Doob (1953, §V.5) and Neveu (1965, §V.3). Both routes require substantial further theory: the cyclic decomposition of each ergodic set, or the quasi-compactness of the Markov operator. |
-| Theorem 11.10b–c, p. 348 | A unique invariant measure, and convergence of the averages to it. | Derived in the book from Theorem 11.9b–c. |

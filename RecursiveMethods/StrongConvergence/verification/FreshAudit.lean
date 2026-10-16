@@ -4066,6 +4066,2011 @@ theorem theorem_11_12_converse {N : ℕ} {ε : ℝ} (hN : 1 ≤ N)
 
 end StokeyLucasPrescott.StrongConvergence
 
+/-
+Copyright (c) 2026 Robert Kirkby. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Robert Kirkby
+-/
+
+/-!
+# Cesàro averages of `T*ⁿλ`
+
+The averages `(1/N) Σ_{n=1}^{N} T*ⁿλ` of Theorem 11.9b (`cesaroM κ n μ`, with `N = n + 1`), and the
+property that they are uniformly Cauchy on sets (`CesaroCauchy`), which for probability measures
+is Cauchy-ness in the total variation norm (`tvDist_cesaro_le`). The class of measures with this
+property is closed under sums and scalar multiples, invariant under `T*` (`cesaroCauchy_adjoint`),
+and closed under perturbations of small mass after any number of steps (`cesaroCauchy_of_approx`).
+-/
+
+namespace StokeyLucasPrescott.StrongConvergence
+
+open MeasureTheory ProbabilityTheory Set Filter Topology
+open scoped ENNReal
+
+variable {S : Type*} [MeasurableSpace S]
+
+/-! ### Linearity of `T*` -/
+
+theorem adjointOp_add (η : Kernel S S) (μ ν : Measure S) :
+    adjointOp η (μ + ν) = adjointOp η μ + adjointOp η ν := by
+  ext A hA
+  simp [adjointOp_apply η _ hA, lintegral_add_measure]
+
+theorem adjointOp_smul (η : Kernel S S) (c : ℝ≥0∞) (μ : Measure S) :
+    adjointOp η (c • μ) = c • adjointOp η μ := by
+  ext A hA
+  simp [adjointOp_apply η _ hA, lintegral_smul_measure]
+
+theorem adjointOp_zero (η : Kernel S S) : adjointOp η (0 : Measure S) = 0 := by
+  ext A hA; simp [adjointOp_apply η _ hA]
+
+theorem adjointOp_finsetSum (η : Kernel S S) {ι : Type*} (s : Finset ι) (μ : ι → Measure S) :
+    adjointOp η (∑ i ∈ s, μ i) = ∑ i ∈ s, adjointOp η (μ i) := by
+  classical
+  induction s using Finset.induction_on with
+  | empty => simp [adjointOp_zero]
+  | insert a s ha ih => rw [Finset.sum_insert ha, Finset.sum_insert ha, adjointOp_add, ih]
+
+theorem adjointOp_mono (η : Kernel S S) {μ ν : Measure S} (h : μ ≤ ν) :
+    adjointOp η μ ≤ adjointOp η ν := by
+  refine Measure.le_iff.2 fun A hA => ?_
+  rw [adjointOp_apply η _ hA, adjointOp_apply η _ hA]
+  exact lintegral_mono' h le_rfl
+
+variable {κ : Kernel S S} [IsMarkovKernel κ]
+
+theorem adjointOp_kpow_univ (k : ℕ) (μ : Measure S) :
+    adjointOp (kpow κ k) μ univ = μ univ := by
+  have := isMarkov_kpow (κ := κ) k
+  rw [adjointOp_apply _ _ MeasurableSet.univ]; simp
+
+theorem isFinite_adjoint (k : ℕ) (μ : Measure S) [IsFiniteMeasure μ] :
+    IsFiniteMeasure (adjointOp (kpow κ k) μ) :=
+  ⟨by rw [adjointOp_kpow_univ]; exact measure_lt_top μ univ⟩
+
+theorem adjoint_real_le (k : ℕ) (μ : Measure S) [IsFiniteMeasure μ] (A : Set S) :
+    (adjointOp (kpow κ k) μ).real A ≤ μ.real univ := by
+  have := isFinite_adjoint (κ := κ) k μ
+  calc (adjointOp (kpow κ k) μ).real A ≤ (adjointOp (kpow κ k) μ).real univ :=
+        measureReal_mono (subset_univ A)
+    _ = μ.real univ := by rw [measureReal_def, adjointOp_kpow_univ]; rfl
+
+/-! ### Cesàro averages -/
+
+variable (κ) in
+/-- The Cesàro average `(1/(n+1)) Σ_{k=1}^{n+1} T*ᵏλ` (Theorem 11.9b, with `N = n + 1`). -/
+noncomputable def cesaroM (n : ℕ) (μ : Measure S) : Measure S :=
+  ((n : ℝ≥0∞) + 1)⁻¹ • ∑ k ∈ Finset.range (n + 1), adjointOp (kpow κ (k + 1)) μ
+
+omit [IsMarkovKernel κ] in
+theorem cesaroM_apply (n : ℕ) (μ : Measure S) (A : Set S) :
+    cesaroM κ n μ A =
+      ((n : ℝ≥0∞) + 1)⁻¹ * ∑ k ∈ Finset.range (n + 1), adjointOp (kpow κ (k + 1)) μ A := by
+  simp [cesaroM, Measure.coe_finsetSum, Finset.sum_apply]
+
+theorem cesaroM_real (n : ℕ) (μ : Measure S) [IsFiniteMeasure μ] (A : Set S) :
+    (cesaroM κ n μ).real A =
+      ((n : ℝ) + 1)⁻¹ * ∑ k ∈ Finset.range (n + 1), (adjointOp (kpow κ (k + 1)) μ).real A := by
+  rw [measureReal_def, cesaroM_apply, ENNReal.toReal_mul, ENNReal.toReal_sum fun k _ => by
+    have := isFinite_adjoint (κ := κ) (k + 1) μ; exact measure_ne_top _ _]
+  congr 1
+  rw [ENNReal.toReal_inv, ENNReal.toReal_add (ENNReal.natCast_ne_top n) ENNReal.one_ne_top]
+  simp
+
+theorem cesaroM_univ (n : ℕ) (μ : Measure S) : cesaroM κ n μ univ = μ univ := by
+  rw [cesaroM_apply]
+  simp only [adjointOp_kpow_univ, Finset.sum_const, Finset.card_range, nsmul_eq_mul]
+  rw [← mul_assoc, Nat.cast_add, Nat.cast_one,
+    ENNReal.inv_mul_cancel (by positivity) (by simp), one_mul]
+
+theorem isFinite_cesaroM (n : ℕ) (μ : Measure S) [IsFiniteMeasure μ] :
+    IsFiniteMeasure (cesaroM κ n μ) := ⟨by rw [cesaroM_univ]; exact measure_lt_top μ univ⟩
+
+theorem isProb_cesaroM (n : ℕ) (μ : Measure S) [IsProbabilityMeasure μ] :
+    IsProbabilityMeasure (cesaroM κ n μ) := ⟨by rw [cesaroM_univ]; exact measure_univ⟩
+
+theorem cesaroM_real_nonneg_le (n : ℕ) (μ : Measure S) [IsFiniteMeasure μ] (A : Set S) :
+    0 ≤ (cesaroM κ n μ).real A ∧ (cesaroM κ n μ).real A ≤ μ.real univ := by
+  have := isFinite_cesaroM (κ := κ) n μ
+  refine ⟨measureReal_nonneg, (measureReal_mono (subset_univ A)).trans ?_⟩
+  rw [measureReal_def, cesaroM_univ]; rfl
+
+omit [IsMarkovKernel κ] in
+theorem cesaroM_add (n : ℕ) (μ ν : Measure S) :
+    cesaroM κ n (μ + ν) = cesaroM κ n μ + cesaroM κ n ν := by
+  simp only [cesaroM, adjointOp_add, Finset.sum_add_distrib, smul_add]
+
+omit [IsMarkovKernel κ] in
+theorem cesaroM_smul (n : ℕ) (c : ℝ≥0∞) (μ : Measure S) :
+    cesaroM κ n (c • μ) = c • cesaroM κ n μ := by
+  simp only [cesaroM, adjointOp_smul, ← Finset.smul_sum, smul_comm c]
+
+/-- Shifting the starting measure by `r` steps moves the averages by at most `r λ(S)/(n+1)`. -/
+theorem abs_cesaro_shift_le (n r : ℕ) (μ : Measure S) [IsFiniteMeasure μ] (A : Set S) :
+    |(cesaroM κ n (adjointOp (kpow κ r) μ)).real A - (cesaroM κ n μ).real A| ≤
+      r * μ.real univ / ((n : ℝ) + 1) := by
+  have := isFinite_adjoint (κ := κ) r μ
+  set a : ℕ → ℝ := fun k => (adjointOp (kpow κ k) μ).real A
+  have ha : ∀ k, 0 ≤ a k ∧ a k ≤ μ.real univ := fun k => ⟨measureReal_nonneg,
+    adjoint_real_le k μ A⟩
+  have hshift : ∀ k, (adjointOp (kpow κ (k + 1)) (adjointOp (kpow κ r) μ)).real A =
+      a (k + 1 + r) := fun k => by rw [← adjoint_add]
+  rw [cesaroM_real, cesaroM_real, Finset.sum_congr rfl (fun k _ => hshift k)]
+  rw [← mul_sub, abs_mul, abs_of_pos (by positivity), ← Finset.sum_sub_distrib]
+  -- `Σ_{k≤n} (a(k+1+r) − a(k+1)) = Σ_{k<r} (a(n+2+k) − a(k+1))`
+  have hsum : ∑ k ∈ Finset.range (n + 1), (a (k + 1 + r) - a (k + 1)) =
+      ∑ k ∈ Finset.range r, (a (n + 1 + k + 1) - a (k + 1)) := by
+    have h1 := Finset.sum_range_add (fun k => a (k + 1)) (n + 1) r
+    have h2 := Finset.sum_range_add (fun k => a (k + 1)) r (n + 1)
+    have h3 : ∑ k ∈ Finset.range (n + 1), a (k + 1 + r) =
+        ∑ k ∈ Finset.range (n + 1), a (r + k + 1) :=
+      Finset.sum_congr rfl fun k _ => by rw [show k + 1 + r = r + k + 1 by ring]
+    rw [Finset.sum_sub_distrib, Finset.sum_sub_distrib, h3]
+    rw [show r + (n + 1) = n + 1 + r by ring] at h2
+    linarith
+  rw [hsum]
+  have hb : |∑ k ∈ Finset.range r, (a (n + 1 + k + 1) - a (k + 1))| ≤ r * μ.real univ := by
+    refine (Finset.abs_sum_le_sum_abs _ _).trans ?_
+    calc ∑ k ∈ Finset.range r, |a (n + 1 + k + 1) - a (k + 1)| ≤
+          ∑ _k ∈ Finset.range r, μ.real univ := Finset.sum_le_sum fun k _ => by
+            rw [abs_le]; constructor <;> linarith [ha (n + 1 + k + 1), ha (k + 1)]
+      _ = r * μ.real univ := by simp
+  rw [div_eq_inv_mul]
+  exact mul_le_mul_of_nonneg_left hb (by positivity)
+
+/-! ### Uniformly Cauchy averages -/
+
+variable (κ) in
+/-- The Cesàro averages of `μ` are uniformly Cauchy on sets. -/
+def CesaroCauchy (μ : Measure S) : Prop :=
+  ∀ η > 0, ∃ n₀, ∀ n ≥ n₀, ∀ m ≥ n₀, ∀ A, MeasurableSet A →
+    |(cesaroM κ n μ).real A - (cesaroM κ m μ).real A| ≤ η
+
+omit [IsMarkovKernel κ] in
+theorem cesaroCauchy_zero : CesaroCauchy κ 0 := fun η hη => ⟨0, fun n _ m _ A _ => by
+  simp [cesaroM, adjointOp_zero, hη.le]⟩
+
+theorem CesaroCauchy.add {μ ν : Measure S} [IsFiniteMeasure μ] [IsFiniteMeasure ν]
+    (hμ : CesaroCauchy κ μ) (hν : CesaroCauchy κ ν) : CesaroCauchy κ (μ + ν) := by
+  intro η hη
+  obtain ⟨n₁, h₁⟩ := hμ (η / 2) (half_pos hη)
+  obtain ⟨n₂, h₂⟩ := hν (η / 2) (half_pos hη)
+  refine ⟨max n₁ n₂, fun n hn m hm A hA => ?_⟩
+  have := isFinite_cesaroM (κ := κ) n μ; have := isFinite_cesaroM (κ := κ) n ν
+  have := isFinite_cesaroM (κ := κ) m μ; have := isFinite_cesaroM (κ := κ) m ν
+  rw [cesaroM_add, cesaroM_add, measureReal_add_apply, measureReal_add_apply]
+  have := h₁ n (le_of_max_le_left hn) m (le_of_max_le_left hm) A hA
+  have := h₂ n (le_of_max_le_right hn) m (le_of_max_le_right hm) A hA
+  calc _ = |((cesaroM κ n μ).real A - (cesaroM κ m μ).real A) +
+        ((cesaroM κ n ν).real A - (cesaroM κ m ν).real A)| := by ring_nf
+    _ ≤ _ := (abs_add_le _ _).trans (by linarith)
+
+omit [IsMarkovKernel κ] in
+theorem CesaroCauchy.smul {μ : Measure S} [IsFiniteMeasure μ] (hμ : CesaroCauchy κ μ)
+    (c : ℝ≥0∞) : CesaroCauchy κ (c • μ) := by
+  intro η hη
+  obtain ⟨n₀, h⟩ := hμ (η / (c.toReal + 1)) (by positivity)
+  refine ⟨n₀, fun n hn m hm A hA => ?_⟩
+  rw [cesaroM_smul, cesaroM_smul, measureReal_ennreal_smul_apply,
+    measureReal_ennreal_smul_apply, ← mul_sub,
+    abs_mul, abs_of_nonneg ENNReal.toReal_nonneg]
+  have h' := h n hn m hm A hA
+  calc c.toReal * |(cesaroM κ n μ).real A - (cesaroM κ m μ).real A| ≤
+        (c.toReal + 1) * (η / (c.toReal + 1)) :=
+        mul_le_mul (by linarith) h' (abs_nonneg _) (by positivity)
+    _ = η := by field_simp
+
+theorem cesaroCauchy_finsetSum {ι : Type*} (s : Finset ι) (μ : ι → Measure S)
+    [∀ i, IsFiniteMeasure (μ i)] (h : ∀ i ∈ s, CesaroCauchy κ (μ i)) :
+    CesaroCauchy κ (∑ i ∈ s, μ i) := by
+  classical
+  induction s using Finset.induction_on with
+  | empty => simpa using cesaroCauchy_zero
+  | insert a s ha ih =>
+    rw [Finset.sum_insert ha]
+    exact (h a (Finset.mem_insert_self a s)).add (ih fun i hi => h i (Finset.mem_insert_of_mem hi))
+
+/-- **Closure under small perturbations.** If for every `η > 0` some `T*ʳμ` is a measure with
+uniformly Cauchy averages plus a measure of mass at most `η`, the averages of `μ` are uniformly
+Cauchy. -/
+theorem cesaroCauchy_of_approx {μ : Measure S} [IsFiniteMeasure μ]
+    (h : ∀ η > 0, ∃ (r : ℕ) (μ' ρ : Measure S) (_ : IsFiniteMeasure μ') (_ : IsFiniteMeasure ρ),
+      adjointOp (kpow κ r) μ = μ' + ρ ∧ CesaroCauchy κ μ' ∧ ρ.real univ ≤ η) :
+    CesaroCauchy κ μ := by
+  intro η hη
+  obtain ⟨r, μ', ρ, _, _, hdec, hc, hρ⟩ := h (η / 4) (by positivity)
+  obtain ⟨n₁, h₁⟩ := hc (η / 4) (by positivity)
+  obtain ⟨n₂, hn₂⟩ := exists_nat_gt (4 * r * μ.real univ / η)
+  refine ⟨max n₁ n₂, fun n hn m hm A hA => ?_⟩
+  have hsh : ∀ k ≥ n₂, |(cesaroM κ k (adjointOp (kpow κ r) μ)).real A - (cesaroM κ k μ).real A| ≤
+      η / 4 := fun k hk => by
+    refine (abs_cesaro_shift_le k r μ A).trans ?_
+    have hk' : (n₂ : ℝ) ≤ k := by exact_mod_cast hk
+    rw [div_le_iff₀ (by positivity)]
+    have := (div_lt_iff₀ hη).1 hn₂
+    nlinarith [measureReal_nonneg (μ := μ) (s := univ)]
+  have hmid : |(cesaroM κ n (adjointOp (kpow κ r) μ)).real A -
+      (cesaroM κ m (adjointOp (kpow κ r) μ)).real A| ≤ η / 4 + η / 4 := by
+    have := isFinite_cesaroM (κ := κ) n μ'; have := isFinite_cesaroM (κ := κ) n ρ
+    have := isFinite_cesaroM (κ := κ) m μ'; have := isFinite_cesaroM (κ := κ) m ρ
+    rw [hdec, cesaroM_add, cesaroM_add, measureReal_add_apply, measureReal_add_apply]
+    have h1 := h₁ n (le_of_max_le_left hn) m (le_of_max_le_left hm) A hA
+    have h2 := cesaroM_real_nonneg_le (κ := κ) n ρ A
+    have h3 := cesaroM_real_nonneg_le (κ := κ) m ρ A
+    calc _ = |((cesaroM κ n μ').real A - (cesaroM κ m μ').real A) +
+          ((cesaroM κ n ρ).real A - (cesaroM κ m ρ).real A)| := by ring_nf
+      _ ≤ _ := (abs_add_le _ _).trans (add_le_add h1 (by rw [abs_le]; constructor <;> linarith))
+  have e1 := hsh n (le_of_max_le_right hn)
+  have e2 := hsh m (le_of_max_le_right hm)
+  calc _ = |((cesaroM κ n μ).real A - (cesaroM κ n (adjointOp (kpow κ r) μ)).real A) +
+        ((cesaroM κ n (adjointOp (kpow κ r) μ)).real A -
+          (cesaroM κ m (adjointOp (kpow κ r) μ)).real A) +
+        ((cesaroM κ m (adjointOp (kpow κ r) μ)).real A - (cesaroM κ m μ).real A)| := by ring_nf
+    _ ≤ _ := by
+      refine (abs_add_le _ _).trans ?_
+      refine (add_le_add (abs_add_le _ _) le_rfl).trans ?_
+      rw [abs_sub_comm] at e1
+      linarith
+
+/-- `T*` preserves uniformly Cauchy averages. -/
+theorem cesaroCauchy_adjoint {μ : Measure S} [IsFiniteMeasure μ] (hμ : CesaroCauchy κ μ)
+    (r : ℕ) : CesaroCauchy κ (adjointOp (kpow κ r) μ) := by
+  have := isFinite_adjoint (κ := κ) r μ
+  refine cesaroCauchy_of_approx fun η hη => ⟨0, adjointOp (kpow κ r) μ, 0, inferInstance,
+    inferInstance, by rw [add_zero, ← adjoint_add, zero_add], ?_, by simp [hη.le]⟩
+  -- `T*ʳμ` differs from `μ` by a shift
+  intro η hη
+  obtain ⟨n₁, h₁⟩ := hμ (η / 3) (by positivity)
+  obtain ⟨n₂, hn₂⟩ := exists_nat_gt (3 * r * μ.real univ / η)
+  refine ⟨max n₁ n₂, fun n hn m hm A hA => ?_⟩
+  have hsh : ∀ k ≥ n₂, |(cesaroM κ k (adjointOp (kpow κ r) μ)).real A - (cesaroM κ k μ).real A| ≤
+      η / 3 := fun k hk => by
+    refine (abs_cesaro_shift_le k r μ A).trans ?_
+    have hk' : (n₂ : ℝ) ≤ k := by exact_mod_cast hk
+    rw [div_le_iff₀ (by positivity)]
+    have := (div_lt_iff₀ hη).1 hn₂
+    nlinarith [measureReal_nonneg (μ := μ) (s := univ)]
+  have e1 := hsh n (le_of_max_le_right hn)
+  have e2 := hsh m (le_of_max_le_right hm)
+  have e3 := h₁ n (le_of_max_le_left hn) m (le_of_max_le_left hm) A hA
+  rw [abs_le] at e1 e2 e3 ⊢
+  constructor <;> linarith [e1.1, e1.2, e2.1, e2.2, e3.1, e3.2]
+
+/-- For probability measures, uniformly Cauchy averages are Cauchy in total variation. -/
+theorem tvDist_cesaro_le {μ : Measure S} [IsProbabilityMeasure μ] (hμ : CesaroCauchy κ μ) :
+    ∀ η > 0, ∃ n₀, ∀ n ≥ n₀, ∀ m ≥ n₀, tvDist (cesaroM κ n μ) (cesaroM κ m μ) < η := by
+  intro η hη
+  obtain ⟨n₀, h⟩ := hμ (η / 4) (by positivity)
+  refine ⟨n₀, fun n hn m hm => ?_⟩
+  have := isProb_cesaroM (κ := κ) n μ
+  have := isProb_cesaroM (κ := κ) m μ
+  have := tvDist_le_of_forall (cesaroM κ n μ) (cesaroM κ m μ) (h n hn m hm)
+  linarith
+
+end StokeyLucasPrescott.StrongConvergence
+
+/-
+Copyright (c) 2026 Robert Kirkby. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Robert Kirkby
+-/
+
+/-!
+# Invariant measures on an ergodic set
+
+Three facts about an ergodic set `E` (in the sense of p. 346), used for Theorem 11.9b–c.
+
+* `exists_reach`: every subset `A ⊆ E` of positive `φ`-measure is reached from every point of
+  `E`. (Otherwise the points of `E \ A` that never reach `A` form an invariant set of smaller
+  `φ`-measure.)
+* `pos_of_invariant`: an invariant probability measure concentrated on `E` charges every set
+  that meets `E` in positive `φ`-measure; so `φ` restricted to `E` is absolutely continuous with
+  respect to it (`absCont_of_concentrated`).
+* `invariant_unique`: under Condition D there is at most one invariant probability measure
+  concentrated on `E`. For two of them, `π₁`, `π₂`, with Hahn set `H`, the measures
+  `(π₁ − π₂)` restricted to `H` and `(π₂ − π₁)` restricted to `Hᶜ` are invariant
+  (`posPart_invariant`), mutually singular, and both charge every `φ`-positive part of `E`.
+-/
+
+namespace StokeyLucasPrescott.StrongConvergence
+
+open MeasureTheory ProbabilityTheory Set Filter Topology
+open scoped ENNReal
+
+variable {S : Type*} [MeasurableSpace S] {κ : Kernel S S} [IsMarkovKernel κ]
+
+omit [IsMarkovKernel κ] in
+/-- An invariant measure is invariant under every `T*ⁿ`. -/
+theorem invariant_iterate {π : Measure S} (hπ : adjointOp κ π = π) (n : ℕ) :
+    adjointOp (kpow κ n) π = π := by
+  induction n with
+  | zero =>
+    change π.bind (kpow κ 0) = π
+    have : (⇑(kpow κ 0)) = fun z => Measure.dirac z := funext fun z => by
+      simp [kpow, Kernel.id_apply]
+    rw [this, Measure.bind_dirac]
+  | succ n ih => rw [adjoint_add, kpow_one, hπ, ih]
+
+/-- From a point that never reaches `A` (after time `0`), the chain stays where `A` is never
+reached. -/
+theorem kpow_noReach_eq_one {E A : Set S} (hE : IsInvariantSet κ E) (hA : MeasurableSet A)
+    {t : S} (htE : t ∈ E) (ht : ∀ n, 1 ≤ n → kpow κ n t A = 0) (m : ℕ) (hm : 1 ≤ m) :
+    kpow κ m t ((E \ A) ∩ ⋂ n : ℕ, {u | kpow κ (n + 1) u A = 0}) = 1 := by
+  have := isMarkov_kpow (κ := κ) m
+  have hmeasI : ∀ n : ℕ, MeasurableSet {u | kpow κ (n + 1) u A = 0} := fun n =>
+    Kernel.measurable_coe (kpow κ (n + 1)) hA (measurableSet_singleton 0)
+  refine measure_inter_eq_one (hE.1.diff hA) (MeasurableSet.iInter hmeasI) ?_
+    (measure_iInter_eq_one hmeasI fun n => ?_)
+  · rw [sdiff_eq_compl_inter, inter_comm]
+    exact measure_inter_eq_one hE.1 hA.compl (hE.2.2 t htE m hm)
+      (by rw [prob_compl_eq_one_sub hA, ht m hm, tsub_zero])
+  · have h0 : ∫⁻ u, kpow κ (n + 1) u A ∂kpow κ m t = 0 := by
+      rw [← kpow_add_apply m (n + 1) t hA]; exact ht _ (by omega)
+    rw [lintegral_eq_zero_iff (Kernel.measurable_coe _ hA)] at h0
+    rw [← prob_compl_eq_zero_iff (hmeasI n)]
+    exact ae_iff.1 h0
+
+/-- **Reachability.** In an ergodic set every subset of positive `φ`-measure is reached from
+every point. -/
+theorem exists_reach {φ : Measure S} [IsFiniteMeasure φ] {E : Set S} (hE : IsErgodicSetD κ φ E)
+    {A : Set S} (hA : MeasurableSet A) (hAE : A ⊆ E) (hpos : 0 < φ A) {s : S} (hs : s ∈ E) :
+    ∃ n, 1 ≤ n ∧ 0 < kpow κ n s A := by
+  by_contra hne
+  push Not at hne
+  have hzero : ∀ n, 1 ≤ n → kpow κ n s A = 0 := fun n hn => le_antisymm (hne n hn) zero_le
+  set G := (E \ A) ∩ ⋂ n : ℕ, {u | kpow κ (n + 1) u A = 0}
+  have hGmem : ∀ u ∈ G, u ∈ E ∧ ∀ n, 1 ≤ n → kpow κ n u A = 0 := fun u hu => by
+    refine ⟨hu.1.1, fun n hn => ?_⟩
+    obtain ⟨k, rfl⟩ : ∃ k, n = k + 1 := ⟨n - 1, by omega⟩
+    exact mem_iInter.1 hu.2 k
+  have hGinv : IsInvariantSet κ G := by
+    refine ⟨(hE.1.1.diff hA).inter (MeasurableSet.iInter fun n =>
+      Kernel.measurable_coe (kpow κ (n + 1)) hA (measurableSet_singleton 0)), ?_, fun u hu m hm =>
+        kpow_noReach_eq_one hE.1 hA (hGmem u hu).1 (hGmem u hu).2 m hm⟩
+    by_contra hemp
+    rw [not_nonempty_iff_eq_empty] at hemp
+    have : kpow κ 1 s G = 1 := kpow_noReach_eq_one hE.1 hA hs hzero 1 le_rfl
+    rw [hemp, measure_empty] at this
+    exact zero_ne_one this
+  have hle := hE.2 G (fun u hu => (hGmem u hu).1) hGinv
+  have hGsub : G ⊆ E \ A := inter_subset_left
+  have h1 : φ G ≤ φ E - φ A := by
+    rw [← measure_sdiff hAE hA.nullMeasurableSet (measure_ne_top φ A)]
+    exact measure_mono hGsub
+  have h2 : φ E - φ A < φ E := ENNReal.sub_lt_self (measure_ne_top φ E)
+    (ne_of_gt (lt_of_lt_of_le hpos (measure_mono hAE))) hpos.ne'
+  exact absurd (hle.trans h1) (not_le.2 h2)
+
+/-- An invariant probability measure concentrated on an ergodic set `E` charges every set that
+meets `E` in positive `φ`-measure. -/
+theorem pos_of_invariant {φ : Measure S} [IsFiniteMeasure φ] {E : Set S}
+    (hE : IsErgodicSetD κ φ E) {π : Measure S} [IsProbabilityMeasure π] (hπ : adjointOp κ π = π)
+    (hπE : π E = 1) {A : Set S} (hA : MeasurableSet A) (hpos : 0 < φ (A ∩ E)) : 0 < π A := by
+  by_contra h0
+  have h0 : π (A ∩ E) = 0 := measure_mono_null inter_subset_left (le_antisymm (not_lt.1 h0)
+    zero_le)
+  have hAE : MeasurableSet (A ∩ E) := hA.inter hE.1.1
+  have hae : ∀ n : ℕ, ∀ᵐ s ∂π, kpow κ (n + 1) s (A ∩ E) = 0 := fun n => by
+    have : ∫⁻ s, kpow κ (n + 1) s (A ∩ E) ∂π = 0 := by
+      rw [← adjointOp_apply _ _ hAE, invariant_iterate hπ]; exact h0
+    exact (lintegral_eq_zero_iff (Kernel.measurable_coe _ hAE)).1 this
+  have hE' : ∀ᵐ s ∂π, s ∈ E := by
+    rw [ae_iff, ← compl_def, prob_compl_eq_zero_iff hE.1.1]; exact hπE
+  obtain ⟨s, hsE, hs⟩ := (hE'.and (ae_all_iff.2 hae)).exists
+  obtain ⟨n, hn, hpos'⟩ := exists_reach hE hAE inter_subset_right hpos hsE
+  obtain ⟨k, rfl⟩ : ∃ k, n = k + 1 := ⟨n - 1, by omega⟩
+  rw [hs k] at hpos'
+  exact lt_irrefl _ hpos'
+
+/-- A measure absolutely continuous with respect to `φ` and concentrated on the ergodic set `E`
+is absolutely continuous with respect to every invariant probability measure on `E`. -/
+theorem absCont_of_concentrated {φ : Measure S} [IsFiniteMeasure φ] {E : Set S}
+    (hE : IsErgodicSetD κ φ E) {π : Measure S} [IsProbabilityMeasure π] (hπ : adjointOp κ π = π)
+    (hπE : π E = 1) {K : Measure S} (hK : K ≪ φ) (hKE : K Eᶜ = 0) : K ≪ π := by
+  refine Measure.AbsolutelyContinuous.mk fun A hA hπA => ?_
+  have hφ : φ (A ∩ E) = 0 := by
+    by_contra hne
+    exact absurd hπA (pos_of_invariant hE hπ hπE hA (pos_iff_ne_zero.2 hne)).ne'
+  have h1 : K (A ∩ E) = 0 := hK hφ
+  have h2 : K (A ∩ Eᶜ) = 0 := measure_mono_null inter_subset_right hKE
+  calc K A = K (A ∩ E) + K (A \ E) := (measure_inter_add_sdiff A hE.1.1).symm
+    _ = 0 := by rw [Set.sdiff_eq, h1, h2, add_zero]
+
+/-- For invariant probability measures `π₁, π₂` and a Hahn set `H` (`π₂ ≤ π₁` on `H`,
+`π₁ ≤ π₂` off `H`), the positive part `(π₁ − π₂)|_H` is invariant. -/
+theorem posPart_invariant {π₁ π₂ : Measure S} [IsProbabilityMeasure π₁] [IsProbabilityMeasure π₂]
+    (h₁ : adjointOp κ π₁ = π₁) (h₂ : adjointOp κ π₂ = π₂) {H : Set S} (hH : MeasurableSet H)
+    (hle : π₂.restrict H ≤ π₁.restrict H) (hle' : π₁.restrict Hᶜ ≤ π₂.restrict Hᶜ) :
+    adjointOp κ (π₁.restrict H - π₂.restrict H) = π₁.restrict H - π₂.restrict H := by
+  set α := π₁.restrict H - π₂.restrict H
+  have hα : α + π₂.restrict H = π₁.restrict H := Measure.sub_add_cancel_of_le hle
+  have hαfin : IsFiniteMeasure α := by
+    refine ⟨lt_of_le_of_lt ?_ (measure_lt_top (π₁.restrict H) univ)⟩
+    rw [← hα]; exact le_add_right le_rfl
+  have hPfin : IsFiniteMeasure (adjointOp κ α) := by
+    have := isFinite_adjoint (κ := κ) 1 α; rwa [kpow_one] at this
+  have hαreal : ∀ A, MeasurableSet A →
+      α.real A = π₁.real (A ∩ H) - π₂.real (A ∩ H) := fun A hA => by
+    have := congrArg (fun μ : Measure S => μ.real A) hα
+    rw [measureReal_add_apply, measureReal_restrict_apply hA,
+      measureReal_restrict_apply hA] at this
+    linarith
+  -- `(αP)(A) ≥ π₁(A) − π₂(A)`
+  have hint : ∀ A, MeasurableSet A → π₁.real A - π₂.real A ≤ (adjointOp κ α).real A := by
+    intro A hA
+    set f : S → ℝ := fun s => (κ s).real A
+    have hfm : Measurable f := (κ.measurable_coe hA).ennreal_toReal
+    have hf01 : ∀ s, 0 ≤ f s ∧ f s ≤ 1 := fun s => ⟨measureReal_nonneg, measureReal_le_one⟩
+    have hfi : ∀ (μ : Measure S) [IsFiniteMeasure μ], Integrable f μ := fun μ _ =>
+      integrable_of_abs_le μ hfm (C := 1) fun s => by
+        rw [abs_of_nonneg (hf01 s).1]; exact (hf01 s).2
+    have e1 : π₁.real A = ∫ s in H, f s ∂π₁ + ∫ s in Hᶜ, f s ∂π₁ := by
+      rw [integral_add_compl hH (hfi π₁), ← bind_real_eq κ π₁ hA]
+      rw [h₁]
+    have e2 : π₂.real A = ∫ s in H, f s ∂π₂ + ∫ s in Hᶜ, f s ∂π₂ := by
+      rw [integral_add_compl hH (hfi π₂), ← bind_real_eq κ π₂ hA]
+      rw [h₂]
+    have e3 : (adjointOp κ α).real A = ∫ s in H, f s ∂π₁ - ∫ s in H, f s ∂π₂ := by
+      rw [bind_real_eq κ α hA]
+      have := integral_add_measure (hfi α) (hfi (π₂.restrict H)) (f := f)
+      rw [hα] at this
+      linarith
+    have e4 : ∫ s in Hᶜ, f s ∂π₁ ≤ ∫ s in Hᶜ, f s ∂π₂ :=
+      integral_mono_measure hle' (Eventually.of_forall fun s => (hf01 s).1) (hfi _)
+    linarith
+  have hge : ∀ A, MeasurableSet A → α.real A ≤ (adjointOp κ α).real A := by
+    intro A hA
+    calc α.real A = π₁.real (A ∩ H) - π₂.real (A ∩ H) := hαreal A hA
+      _ ≤ (adjointOp κ α).real (A ∩ H) := hint _ (hA.inter hH)
+      _ ≤ (adjointOp κ α).real A := measureReal_mono inter_subset_left
+  have hmass : (adjointOp κ α).real univ = α.real univ := by
+    have := adjointOp_kpow_univ (κ := κ) 1 α; rw [kpow_one] at this
+    rw [measureReal_def, this]; rfl
+  refine Measure.ext fun A hA => ?_
+  have h1 := hge A hA
+  have h2 := hge Aᶜ hA.compl
+  rw [measureReal_compl hA, measureReal_compl hA, hmass] at h2
+  have h3 : (adjointOp κ α).real A = α.real A := le_antisymm (by linarith) h1
+  exact (ENNReal.toReal_eq_toReal_iff' (measure_ne_top _ _) (measure_ne_top _ _)).1 h3
+
+/-- **Uniqueness.** Under Condition D, an ergodic set carries at most one invariant probability
+measure. -/
+theorem invariant_unique {φ : Measure S} {N : ℕ} {ε : ℝ} (hD : DoeblinFor κ φ N ε) {E : Set S}
+    (hE : IsErgodicSetD κ φ E) {π₁ π₂ : Measure S} [IsProbabilityMeasure π₁]
+    [IsProbabilityMeasure π₂] (h₁ : adjointOp κ π₁ = π₁) (h₂ : adjointOp κ π₂ = π₂)
+    (h₁E : π₁ E = 1) (h₂E : π₂ E = 1) : π₁ = π₂ := by
+  have hφ := hD.1
+  obtain ⟨H, hH, hHle, hHle'⟩ := hahn_decomposition π₁ π₂
+  have hle : π₂.restrict H ≤ π₁.restrict H := Measure.le_iff.2 fun t ht => by
+    rw [Measure.restrict_apply ht, Measure.restrict_apply ht]
+    exact hHle _ (ht.inter hH) inter_subset_right
+  have hle' : π₁.restrict Hᶜ ≤ π₂.restrict Hᶜ := Measure.le_iff.2 fun t ht => by
+    rw [Measure.restrict_apply ht, Measure.restrict_apply ht]
+    exact hHle' _ (ht.inter hH.compl) inter_subset_right
+  have hP := posPart_invariant h₁ h₂ hH hle hle'
+  have hN := posPart_invariant h₂ h₁ hH.compl hle' (by rw [compl_compl]; exact hle)
+  -- the two parts and their masses
+  set α := π₁.restrict H - π₂.restrict H
+  set β := π₂.restrict Hᶜ - π₁.restrict Hᶜ
+  have hα : α + π₂.restrict H = π₁.restrict H := Measure.sub_add_cancel_of_le hle
+  have hβ : β + π₁.restrict Hᶜ = π₂.restrict Hᶜ := Measure.sub_add_cancel_of_le hle'
+  have hαfin : IsFiniteMeasure α :=
+    ⟨lt_of_le_of_lt (by rw [← hα]; exact le_add_right le_rfl) (measure_lt_top (π₁.restrict H) univ)⟩
+  have hβfin : IsFiniteMeasure β :=
+    ⟨lt_of_le_of_lt (by rw [← hβ]; exact le_add_right le_rfl)
+      (measure_lt_top (π₂.restrict Hᶜ) univ)⟩
+  have hαH : α Hᶜ = 0 := by
+    have := congrArg (fun μ : Measure S => μ Hᶜ) hα
+    simp only [Measure.add_apply, Measure.restrict_apply hH.compl, compl_inter_self,
+      measure_empty, add_zero] at this
+    exact this
+  have hβH : β H = 0 := by
+    have := congrArg (fun μ : Measure S => μ H) hβ
+    simp only [Measure.add_apply, Measure.restrict_apply hH, inter_compl_self,
+      measure_empty, add_zero] at this
+    exact this
+  have hαE : α Eᶜ = 0 := by
+    have := congrArg (fun μ : Measure S => μ Eᶜ) hα
+    simp only [Measure.add_apply, Measure.restrict_apply hE.1.1.compl] at this
+    have h0 : π₁ (Eᶜ ∩ H) = 0 := measure_mono_null inter_subset_left
+      ((prob_compl_eq_zero_iff hE.1.1).2 h₁E)
+    rw [h0] at this
+    exact (add_eq_zero.1 this).1
+  have hβE : β Eᶜ = 0 := by
+    have := congrArg (fun μ : Measure S => μ Eᶜ) hβ
+    simp only [Measure.add_apply, Measure.restrict_apply hE.1.1.compl] at this
+    have h0 : π₂ (Eᶜ ∩ Hᶜ) = 0 := measure_mono_null inter_subset_left
+      ((prob_compl_eq_zero_iff hE.1.1).2 h₂E)
+    rw [h0] at this
+    exact (add_eq_zero.1 this).1
+  have hmass : α univ = β univ := by
+    have ha := congrArg (fun μ : Measure S => μ.real univ) hα
+    have hb := congrArg (fun μ : Measure S => μ.real univ) hβ
+    rw [measureReal_add_apply, measureReal_restrict_apply MeasurableSet.univ, univ_inter,
+      measureReal_restrict_apply MeasurableSet.univ, univ_inter] at ha hb
+    have h1 := measureReal_add_measureReal_compl (μ := π₁) hH
+    have h2 := measureReal_add_measureReal_compl (μ := π₂) hH
+    simp only [probReal_univ] at h1 h2
+    have : α.real univ = β.real univ := by linarith
+    exact (ENNReal.toReal_eq_toReal_iff' (measure_ne_top _ _) (measure_ne_top _ _)).1 this
+  -- a nonzero part, normalised, would charge both `H` and `Hᶜ`
+  by_cases ha0 : α univ = 0
+  · have hα0 : α = 0 := Measure.measure_univ_eq_zero.1 ha0
+    have hβ0 : β = 0 := Measure.measure_univ_eq_zero.1 (hmass ▸ ha0)
+    rw [hα0, zero_add] at hα
+    rw [hβ0, zero_add] at hβ
+    ext A hA
+    rw [← measure_inter_add_sdiff A hH, ← measure_inter_add_sdiff (μ := π₂) A hH,
+      ← Measure.restrict_apply hA, ← Measure.restrict_apply hA, ← hα, Set.sdiff_eq,
+      ← Measure.restrict_apply hA, ← Measure.restrict_apply hA, hβ]
+  · exfalso
+    have hφE : 0 < φ E := by
+      have := invariant_real_gt hD hE.1
+      exact ENNReal.toReal_pos_iff.1 (lt_trans hD.2.2.1 this) |>.1
+    set c := (α univ)⁻¹
+    have hc : c ≠ ⊤ := ENNReal.inv_ne_top.2 ha0
+    have hαp : IsProbabilityMeasure (c • α) :=
+      ⟨by rw [Measure.smul_apply, smul_eq_mul, ENNReal.inv_mul_cancel ha0 (measure_ne_top _ _)]⟩
+    have hβp : IsProbabilityMeasure (c • β) :=
+      ⟨by rw [Measure.smul_apply, smul_eq_mul, ← hmass,
+        ENNReal.inv_mul_cancel ha0 (measure_ne_top _ _)]⟩
+    have hαinv : adjointOp κ (c • α) = c • α := by rw [adjointOp_smul, hP]
+    have hβinv : adjointOp κ (c • β) = c • β := by rw [adjointOp_smul, hN]
+    have hαE1 : (c • α) E = 1 := by
+      rw [← prob_compl_eq_zero_iff hE.1.1, Measure.smul_apply, hαE, smul_zero]
+    have hβE1 : (c • β) E = 1 := by
+      rw [← prob_compl_eq_zero_iff hE.1.1, Measure.smul_apply, hβE, smul_zero]
+    have hsplit : φ E = φ (H ∩ E) + φ (Hᶜ ∩ E) := by
+      rw [inter_comm H, inter_comm Hᶜ, ← Set.sdiff_eq, measure_inter_add_sdiff E hH]
+    rcases eq_zero_or_pos (φ (H ∩ E)) with h0 | hpos
+    · have hpos' : 0 < φ (Hᶜ ∩ E) := by
+        rw [hsplit, h0, zero_add] at hφE; exact hφE
+      have := pos_of_invariant hE hαinv hαE1 hH.compl hpos'
+      rw [Measure.smul_apply, hαH, smul_zero] at this
+      exact lt_irrefl _ this
+    · have := pos_of_invariant hE hβinv hβE1 hH hpos
+      rw [Measure.smul_apply, hβH, smul_zero] at this
+      exact lt_irrefl _ this
+
+end StokeyLucasPrescott.StrongConvergence
+
+/-
+Copyright (c) 2026 Robert Kirkby. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Robert Kirkby
+-/
+
+/-!
+# Cesàro convergence for measures with bounded density
+
+Let `π` be an invariant probability measure. For a measure `λ = hπ` with bounded density, the
+Cesàro averages of `T*ⁿλ` are uniformly Cauchy on sets (`cesaroCauchy_withDensity`). This is von
+Neumann's mean ergodic theorem in `L²(π)` (Mathlib's
+`ContinuousLinearMap.tendsto_birkhoffAverage_orthogonalProjection`), applied to the adjoint of
+the Markov operator `T`.
+
+`T` is built without choosing representatives: with `ρ = π ⊗ P` the joint law of two successive
+states, the maps `J₁ f = f ∘ fst` and `J₂ f = f ∘ snd` are isometries `L²(π) → L²(ρ)` (both
+marginals of `ρ` are `π`, by invariance), and `T = J₁† J₂`. Thus `‖T‖ ≤ 1`, and
+`⟪T f, g⟫ = ∫ g(x) ∫ f(y) P(x, dy) π(dx)`, so `T` acts on bounded functions as
+`f ↦ ∫ f(y) P(·, dy)` (`markovL2_toLp`). Since
+`(T*ᵏλ)(A) = ⟪Tᵏ 1_A, h⟫ = ⟪1_A, (T†)ᵏ h⟫`, the averages of `λ` are inner products of `1_A`
+with the Birkhoff averages of `T†` at `h`, which converge in `L²(π)`.
+-/
+
+namespace StokeyLucasPrescott.StrongConvergence
+
+open MeasureTheory ProbabilityTheory Set Filter Topology
+open scoped ENNReal NNReal
+
+variable {S : Type*} [MeasurableSpace S] {κ : Kernel S S} [IsMarkovKernel κ] {π : Measure S}
+  [IsProbabilityMeasure π]
+
+theorem measurePreserving_fst_compProd :
+    MeasurePreserving Prod.fst (π ⊗ₘ κ) π :=
+  ⟨measurable_fst, Measure.fst_compProd π κ⟩
+
+theorem measurePreserving_snd_compProd (hπ : adjointOp κ π = π) :
+    MeasurePreserving Prod.snd (π ⊗ₘ κ) π :=
+  ⟨measurable_snd, by rw [← Measure.snd, Measure.snd_compProd]; exact hπ⟩
+
+variable (κ π) in
+/-- `J₁ f = f ∘ fst`, an isometry `L²(π) → L²(π ⊗ P)`. -/
+noncomputable def jFst : Lp ℝ 2 π →L[ℝ] Lp ℝ 2 (π ⊗ₘ κ) :=
+  (Lp.compMeasurePreservingₗᵢ ℝ Prod.fst measurePreserving_fst_compProd).toContinuousLinearMap
+
+/-- `J₂ f = f ∘ snd`, an isometry `L²(π) → L²(π ⊗ P)` when `π` is invariant. -/
+noncomputable def jSnd (hπ : adjointOp κ π = π) : Lp ℝ 2 π →L[ℝ] Lp ℝ 2 (π ⊗ₘ κ) :=
+  (Lp.compMeasurePreservingₗᵢ ℝ Prod.snd (measurePreserving_snd_compProd hπ)).toContinuousLinearMap
+
+/-- The Markov operator on `L²(π)`, `T = J₁† J₂`. -/
+noncomputable def markovL2 (hπ : adjointOp κ π = π) : Lp ℝ 2 π →L[ℝ] Lp ℝ 2 π :=
+  (jFst κ π).adjoint.comp (jSnd hπ)
+
+theorem norm_markovL2_le (hπ : adjointOp κ π = π) : ‖markovL2 hπ‖ ≤ 1 := by
+  refine (ContinuousLinearMap.opNorm_comp_le _ _).trans ?_
+  rw [ContinuousLinearMap.adjoint.norm_map]
+  calc ‖jFst κ π‖ * ‖jSnd hπ‖ ≤ 1 * 1 := mul_le_mul
+        (LinearIsometry.norm_toContinuousLinearMap_le _)
+        (LinearIsometry.norm_toContinuousLinearMap_le _)
+        (norm_nonneg _) zero_le_one
+    _ = 1 := one_mul 1
+
+theorem inner_real_apply (a b : ℝ) : inner ℝ a b = a * b := by
+  simp [RCLike.inner_apply, mul_comm]
+
+omit [IsProbabilityMeasure π] in
+/-- A bounded measurable function is in `L²` of a finite measure. -/
+theorem memLp_two_of_bound {μ : Measure S} [IsFiniteMeasure μ] {f : S → ℝ} (hf : Measurable f)
+    {C : ℝ} (hC : ∀ s, |f s| ≤ C) : MemLp f 2 μ :=
+  MemLp.of_bound hf.aestronglyMeasurable C (Eventually.of_forall fun s => by
+    rw [Real.norm_eq_abs]; exact hC s)
+
+/-- `⟪T f, g⟫ = ∫ f(y) g(x) d(π ⊗ P)`. -/
+theorem inner_markovL2 (hπ : adjointOp κ π = π) (f g : Lp ℝ 2 π) :
+    inner ℝ (markovL2 hπ f) g = ∫ p, f p.2 * g p.1 ∂(π ⊗ₘ κ) := by
+  rw [markovL2, ContinuousLinearMap.comp_apply, ContinuousLinearMap.adjoint_inner_left,
+    MeasureTheory.L2.inner_def]
+  refine integral_congr_ae ?_
+  have h1 := Lp.coeFn_compMeasurePreserving f (measurePreserving_snd_compProd hπ)
+  have h2 := Lp.coeFn_compMeasurePreserving g (measurePreserving_fst_compProd (κ := κ))
+  filter_upwards [h1, h2] with p hp1 hp2
+  rw [inner_real_apply]
+  exact congrArg₂ (· * ·) hp1 hp2
+
+/-- On bounded measurable functions `T f = ∫ f(y) P(·, dy)`. -/
+theorem markovL2_toLp (hπ : adjointOp κ π = π) {F : S → ℝ} (hF : Measurable F) {C : ℝ}
+    (hC : ∀ s, |F s| ≤ C) :
+    markovL2 hπ ((memLp_two_of_bound hF hC).toLp F) =
+      (memLp_two_of_bound (theorem_8_1_cor κ hF hC).1 (theorem_8_1_cor κ hF hC).2).toLp
+        (markovOpR κ F) := by
+  refine ext_inner_right ℝ fun g => ?_
+  rw [inner_markovL2, MeasureTheory.L2.inner_def]
+  have hFa := MemLp.coeFn_toLp (memLp_two_of_bound (μ := π) hF hC)
+  have hKa := MemLp.coeFn_toLp (memLp_two_of_bound (μ := π) (theorem_8_1_cor κ hF hC).1
+    (theorem_8_1_cor κ hF hC).2)
+  -- the left side, by Fubini
+  have hFsnd : (fun p : S × S => (memLp_two_of_bound (μ := π) hF hC).toLp F p.2) =ᵐ[π ⊗ₘ κ]
+      fun p => F p.2 :=
+    (measurePreserving_snd_compProd hπ).quasiMeasurePreserving.ae_eq_comp hFa
+  have hgint : Integrable (fun p : S × S => g p.1) (π ⊗ₘ κ) := by
+    have := (Lp.memLp g).integrable (by norm_num : (1 : ℝ≥0∞) ≤ 2)
+    exact (measurePreserving_fst_compProd (κ := κ)).integrable_comp_of_integrable this
+  have hint : Integrable (fun p : S × S => F p.2 * g p.1) (π ⊗ₘ κ) :=
+    hgint.bdd_mul (hF.comp measurable_snd).aestronglyMeasurable
+      (Eventually.of_forall fun p => by rw [Real.norm_eq_abs]; exact hC p.2)
+  have hL : ∫ p, (memLp_two_of_bound (μ := π) hF hC).toLp F p.2 * g p.1 ∂(π ⊗ₘ κ) =
+      ∫ p, F p.2 * g p.1 ∂(π ⊗ₘ κ) :=
+    integral_congr_ae (by filter_upwards [hFsnd] with p hp; rw [hp])
+  rw [hL, Measure.integral_compProd hint]
+  refine integral_congr_ae ?_
+  filter_upwards [hKa] with x hx
+  rw [inner_real_apply, hx, markovOpR, ← integral_mul_const]
+
+/-- The `n`-step probabilities `x ↦ Pⁿ(x, A)`. -/
+noncomputable def stepFn (κ : Kernel S S) (k : ℕ) (A : Set S) (x : S) : ℝ := (kpow κ k x).real A
+
+omit [IsMarkovKernel κ] in
+theorem measurable_stepFn (k : ℕ) {A : Set S} (hA : MeasurableSet A) :
+    Measurable (stepFn κ k A) :=
+  (Kernel.measurable_coe (kpow κ k) hA).ennreal_toReal
+
+theorem abs_stepFn_le (k : ℕ) (A : Set S) (x : S) : |stepFn κ k A x| ≤ 1 := by
+  have := isMarkov_kpow (κ := κ) k
+  rw [stepFn, abs_of_nonneg measureReal_nonneg]; exact measureReal_le_one
+
+theorem markovOpR_stepFn (k : ℕ) {A : Set S} (hA : MeasurableSet A) :
+    markovOpR κ (stepFn κ k A) = stepFn κ (k + 1) A := by
+  funext x
+  have := isMarkov_kpow (κ := κ) k
+  simp only [markovOpR, stepFn]
+  change _ = ((kpow κ k ∘ₖ κ) x).real A
+  rw [measureReal_def, Kernel.comp_apply' _ _ _ hA,
+    ← integral_toReal (Kernel.measurable_coe _ hA).aemeasurable
+      (Eventually.of_forall fun y => measure_lt_top (kpow κ k y) A)]
+  rfl
+
+theorem markovL2_iterate (hπ : adjointOp κ π = π) {A : Set S} (hA : MeasurableSet A) (k : ℕ) :
+    (markovL2 hπ)^[k] ((memLp_two_of_bound (μ := π) (measurable_stepFn (κ := κ) 0 hA)
+      (abs_stepFn_le 0 A)).toLp _) =
+      (memLp_two_of_bound (μ := π) (measurable_stepFn (κ := κ) k hA)
+        (abs_stepFn_le k A)).toLp _ := by
+  induction k with
+  | zero => rfl
+  | succ k ih =>
+    rw [Function.iterate_succ_apply', ih, markovL2_toLp hπ (measurable_stepFn k hA)
+      (abs_stepFn_le k A)]
+    congr 1
+    exact markovOpR_stepFn k hA
+
+omit [IsProbabilityMeasure π] in
+/-- `⟪Tᵏ x, y⟫ = ⟪x, (T†)ᵏ y⟫`. -/
+theorem inner_iterate_adjoint (T : Lp ℝ 2 π →L[ℝ] Lp ℝ 2 π) (k : ℕ) (x y : Lp ℝ 2 π) :
+    inner ℝ (T^[k] x) y = inner ℝ x (T.adjoint^[k] y) := by
+  induction k generalizing y with
+  | zero => rfl
+  | succ k ih =>
+    rw [Function.iterate_succ_apply', ← ContinuousLinearMap.adjoint_inner_right, ih,
+      Function.iterate_succ_apply]
+
+/-- A bounded density gives a finite measure. -/
+theorem isFiniteMeasure_withDensity_of_bound {H : S → ℝ≥0} {C : ℝ≥0} (hC : ∀ s, H s ≤ C) :
+    IsFiniteMeasure (π.withDensity fun s => (H s : ℝ≥0∞)) := by
+  refine isFiniteMeasure_withDensity (ne_of_lt (lt_of_le_of_lt (lintegral_mono fun s =>
+    (ENNReal.coe_le_coe.2 (hC s))) ?_))
+  simp
+
+/-- `(T*ᵏ(hπ))(A) = ∫ Pᵏ(x, A) h(x) π(dx)`. -/
+theorem adjoint_withDensity_real {H : S → ℝ≥0} (hH : Measurable H) {C : ℝ≥0}
+    (hC : ∀ s, H s ≤ C) (k : ℕ) {A : Set S} (hA : MeasurableSet A) :
+    have : IsFiniteMeasure (π.withDensity fun s => (H s : ℝ≥0∞)) :=
+      isFiniteMeasure_withDensity_of_bound hC
+    (adjointOp (kpow κ k) (π.withDensity fun s => (H s : ℝ≥0∞))).real A =
+      ∫ x, stepFn κ k A x * (H x : ℝ) ∂π := by
+  intro _
+  have := isMarkov_kpow (κ := κ) k
+  rw [bind_real_eq _ _ hA, integral_withDensity_eq_integral_smul hH]
+  refine integral_congr_ae (Eventually.of_forall fun x => ?_)
+  simp only [NNReal.smul_def, smul_eq_mul, stepFn]
+  ring
+
+/-- `⟪f, h⟫ = ∫ f h dπ` for bounded measurable functions. -/
+theorem inner_toLp_toLp {F G : S → ℝ} (hF : Measurable F) {C : ℝ} (hC : ∀ s, |F s| ≤ C)
+    (hG : Measurable G) {D : ℝ} (hD : ∀ s, |G s| ≤ D) :
+    inner ℝ ((memLp_two_of_bound (μ := π) hF hC).toLp F)
+      ((memLp_two_of_bound (μ := π) hG hD).toLp G) = ∫ x, F x * G x ∂π := by
+  rw [MeasureTheory.L2.inner_def]
+  refine integral_congr_ae ?_
+  filter_upwards [MemLp.coeFn_toLp (memLp_two_of_bound (μ := π) hF hC),
+    MemLp.coeFn_toLp (memLp_two_of_bound (μ := π) hG hD)] with x h1 h2
+  rw [inner_real_apply, h1, h2]
+
+/-- **Cesàro convergence for bounded densities.** If `π` is invariant and `λ = hπ` with `h`
+bounded, the Cesàro averages of `T*ⁿλ` are uniformly Cauchy on sets. -/
+theorem cesaroCauchy_withDensity (hπ : adjointOp κ π = π) {H : S → ℝ≥0} (hH : Measurable H)
+    {C : ℝ≥0} (hC : ∀ s, H s ≤ C) :
+    CesaroCauchy κ (π.withDensity fun s => (H s : ℝ≥0∞)) := by
+  have hfin := isFiniteMeasure_withDensity_of_bound (π := π) hC
+  set V := (markovL2 hπ).adjoint
+  have hV : ‖V‖ ≤ 1 := by
+    rw [ContinuousLinearMap.adjoint.norm_map]; exact norm_markovL2_le hπ
+  have hHm : Measurable fun s => (H s : ℝ) := hH.coe_nnreal_real
+  have hHb : ∀ s, |(H s : ℝ)| ≤ C := fun s => by
+    rw [abs_of_nonneg (NNReal.coe_nonneg _)]; exact_mod_cast hC s
+  set h := (memLp_two_of_bound (μ := π) hHm hHb).toLp _
+  set B : ℕ → Lp ℝ 2 π := fun n => birkhoffAverage ℝ V _root_.id n h
+  have hcauchy : CauchySeq B := (V.tendsto_birkhoffAverage_orthogonalProjection hV h).cauchySeq
+  -- the averages as inner products
+  have hkey : ∀ n A, (hA : MeasurableSet A) →
+      (cesaroM κ n (π.withDensity fun s => (H s : ℝ≥0∞))).real A =
+        inner ℝ ((memLp_two_of_bound (μ := π) (measurable_stepFn (κ := κ) 0 hA)
+          (abs_stepFn_le 0 A)).toLp _) (V (B (n + 1))) := by
+    intro n A hA
+    set u := (memLp_two_of_bound (μ := π) (measurable_stepFn (κ := κ) 0 hA)
+      (abs_stepFn_le 0 A)).toLp _
+    have hterm : ∀ k, (adjointOp (kpow κ (k + 1)) (π.withDensity fun s => (H s : ℝ≥0∞))).real A =
+        inner ℝ u (V^[k + 1] h) := fun k => by
+      rw [adjoint_withDensity_real hH hC (k + 1) hA, ← inner_iterate_adjoint,
+        markovL2_iterate hπ hA, inner_toLp_toLp (measurable_stepFn (k + 1) hA)
+          (abs_stepFn_le (k + 1) A) hHm hHb]
+    rw [cesaroM_real, Finset.sum_congr rfl fun k _ => hterm k, ← inner_sum, ← real_inner_smul_right]
+    congr 1
+    simp only [B, birkhoffAverage, birkhoffSum, id, map_smul, map_sum]
+    congr 1
+    · push_cast; ring
+    · exact Finset.sum_congr rfl fun k _ => Function.iterate_succ_apply' V k h
+  intro η hη
+  obtain ⟨N, hN⟩ := Metric.cauchySeq_iff.1 hcauchy η hη
+  refine ⟨N, fun n hn m hm A hA => ?_⟩
+  rw [hkey n A hA, hkey m A hA, ← inner_sub_right, ← map_sub]
+  set u := (memLp_two_of_bound (μ := π) (measurable_stepFn (κ := κ) 0 hA)
+    (abs_stepFn_le 0 A)).toLp _
+  have hu : ‖u‖ ≤ 1 := by
+    have := Lp.norm_le_of_ae_bound (f := u) zero_le_one (by
+      filter_upwards [MemLp.coeFn_toLp (memLp_two_of_bound (μ := π)
+        (measurable_stepFn (κ := κ) 0 hA) (abs_stepFn_le 0 A))] with x hx
+      rw [hx, Real.norm_eq_abs]; exact abs_stepFn_le 0 A x)
+    rw [show measureUnivNNReal π = 1 by simp [measureUnivNNReal]] at this
+    simpa using this
+  have hd : ‖B (n + 1) - B (m + 1)‖ < η := by
+    rw [← dist_eq_norm]; exact hN _ (by omega) _ (by omega)
+  calc |inner ℝ u (V (B (n + 1) - B (m + 1)))| ≤ ‖u‖ * ‖V (B (n + 1) - B (m + 1))‖ :=
+        abs_real_inner_le_norm _ _
+    _ ≤ 1 * (1 * ‖B (n + 1) - B (m + 1)‖) := by
+        gcongr
+        exact (V.le_opNorm _).trans (mul_le_mul_of_nonneg_right hV (norm_nonneg _))
+    _ ≤ η := by linarith
+
+end StokeyLucasPrescott.StrongConvergence
+
+/-
+Copyright (c) 2026 Robert Kirkby. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Robert Kirkby
+-/
+
+/-!
+# Existence of invariant measures under Doeblin's condition
+
+Under Condition D for `(φ, N, ε)`, every probability measure `λ` yields an invariant probability
+measure `π` with `π(A) = 1` whenever all the Cesàro averages of `λ` give `A` mass one
+(`exists_invariant`). The construction is elementary.
+
+* **A reference measure.** `ψ = Σⱼ 2^{-(j+1)} φPʲ` (`doeblinRef`) is finite, with `φ ≤ 2ψ` and
+  `ψP ≤ 2ψ`, so `ψPᵐ ≤ 2ᵐψ`.
+* **Uniform integrability** (`adjoint_real_le_ref`). For `μ` of mass at most one,
+  `μP^{Nj}(A) ≤ b_j ψ(A) + (1 − ε)ʲ μ(S)`. Split `μPᴺ` by a Hahn set `H` for `μPᴺ − (2/ε)ψ`:
+  off `H` it is below `(2/ε)ψ`, and `ψ(H) ≤ ε/2`, so Doeblin gives `μPᴺ(H) ≤ (1 − ε)μ(S)`.
+  Hence the Cesàro averages are uniformly absolutely continuous with respect to `ψ`
+  (`cesaro_small`).
+* **The limit.** Along a non-principal ultrafilter on `ℕ`, the averages converge on every set
+  (they lie in `[0, 1]`). The limit is finitely additive, and by uniform absolute continuity
+  countably additive. Integrals of `[0, 1]`-valued functions converge too, by a uniform
+  discretisation (`abs_integral_sub_levels_le`). The averages are nearly invariant, so the
+  limit is invariant.
+-/
+
+namespace StokeyLucasPrescott.StrongConvergence
+
+open MeasureTheory ProbabilityTheory Set Filter Topology
+open scoped ENNReal
+
+variable {S : Type*} [MeasurableSpace S] {κ : Kernel S S} [IsMarkovKernel κ]
+
+omit [IsMarkovKernel κ] in
+theorem adjointOp_kpow_zero (μ : Measure S) : adjointOp (kpow κ 0) μ = μ := by
+  change μ.bind (kpow κ 0) = μ
+  have : (⇑(kpow κ 0)) = fun z => Measure.dirac z := funext fun z => by
+    simp [kpow, Kernel.id_apply]
+  rw [this, Measure.bind_dirac]
+
+/-! ### The reference measure -/
+
+variable (κ) in
+/-- `ψ = Σⱼ 2^{-(j+1)} φPʲ`. -/
+noncomputable def doeblinRef (φ : Measure S) : Measure S :=
+  Measure.sum fun j : ℕ => ((2 : ℝ≥0∞) ^ (j + 1))⁻¹ • adjointOp (kpow κ j) φ
+
+omit [IsMarkovKernel κ] in
+theorem doeblinRef_apply (φ : Measure S) {A : Set S} (hA : MeasurableSet A) :
+    doeblinRef κ φ A = ∑' j : ℕ, ((2 : ℝ≥0∞) ^ (j + 1))⁻¹ * adjointOp (kpow κ j) φ A := by
+  simp [doeblinRef, Measure.sum_apply _ hA]
+
+theorem tsum_inv_two_pow_succ : ∑' j : ℕ, ((2 : ℝ≥0∞) ^ (j + 1))⁻¹ = 1 := by
+  have : ∀ j : ℕ, ((2 : ℝ≥0∞) ^ (j + 1))⁻¹ = 2⁻¹ * 2⁻¹ ^ j := fun j => by
+    rw [← ENNReal.inv_pow, pow_succ, ENNReal.mul_inv (by simp) (by simp), mul_comm]
+  simp_rw [this]
+  rw [ENNReal.tsum_mul_left, ENNReal.tsum_geometric, ENNReal.one_sub_inv_two, inv_inv,
+    ENNReal.inv_mul_cancel (by simp) (by simp)]
+
+theorem isFinite_doeblinRef (φ : Measure S) [IsFiniteMeasure φ] :
+    IsFiniteMeasure (doeblinRef κ φ) := ⟨by
+  rw [doeblinRef_apply φ MeasurableSet.univ]
+  simp only [adjointOp_kpow_univ]
+  rw [ENNReal.tsum_mul_right, tsum_inv_two_pow_succ, one_mul]
+  exact measure_lt_top φ univ⟩
+
+omit [IsMarkovKernel κ] in
+theorem le_two_doeblinRef (φ : Measure S) : φ ≤ (2 : ℝ≥0∞) • doeblinRef κ φ := by
+  refine Measure.le_iff.2 fun A hA => ?_
+  rw [Measure.smul_apply, doeblinRef_apply φ hA, smul_eq_mul]
+  calc φ A = 2 * (((2 : ℝ≥0∞) ^ (0 + 1))⁻¹ * adjointOp (kpow κ 0) φ A) := by
+        rw [adjointOp_kpow_zero, zero_add, pow_one, ← mul_assoc,
+          ENNReal.mul_inv_cancel (by simp) (by simp), one_mul]
+    _ ≤ _ := by gcongr; exact ENNReal.le_tsum (f := fun j : ℕ =>
+        ((2 : ℝ≥0∞) ^ (j + 1))⁻¹ * adjointOp (kpow κ j) φ A) 0
+
+omit [IsMarkovKernel κ] in
+theorem adjoint_doeblinRef_le (φ : Measure S) :
+    adjointOp κ (doeblinRef κ φ) ≤ (2 : ℝ≥0∞) • doeblinRef κ φ := by
+  refine Measure.le_iff.2 fun A hA => ?_
+  rw [adjointOp_apply κ _ hA, Measure.smul_apply, smul_eq_mul, doeblinRef_apply φ hA,
+    doeblinRef, lintegral_sum_measure]
+  simp only [lintegral_smul_measure]
+  have hstep : ∀ j : ℕ, ∫⁻ s, κ s A ∂adjointOp (kpow κ j) φ = adjointOp (kpow κ (j + 1)) φ A :=
+    fun j => by
+      rw [← adjointOp_apply κ _ hA]
+      have := adjoint_add (κ := κ) 1 j φ
+      rw [kpow_one, add_comm] at this
+      rw [this]
+  simp_rw [hstep]
+  rw [← ENNReal.tsum_mul_left]
+  calc ∑' j : ℕ, ((2 : ℝ≥0∞) ^ (j + 1))⁻¹ * adjointOp (kpow κ (j + 1)) φ A
+      = ∑' j : ℕ, 2 * (((2 : ℝ≥0∞) ^ (j + 1 + 1))⁻¹ * adjointOp (kpow κ (j + 1)) φ A) := by
+        congr 1; funext j
+        rw [← mul_assoc, pow_succ _ (j + 1), ENNReal.mul_inv (by simp) (by simp), mul_comm 2,
+          mul_assoc _ 2⁻¹, ENNReal.inv_mul_cancel (by simp) (by simp), mul_one]
+    _ ≤ _ := ENNReal.tsum_comp_le_tsum_of_injective (f := Nat.succ) Nat.succ_injective
+        (fun j => 2 * (((2 : ℝ≥0∞) ^ (j + 1))⁻¹ * adjointOp (kpow κ j) φ A))
+
+omit [IsMarkovKernel κ] in
+theorem adjoint_kpow_doeblinRef_le (φ : Measure S) (m : ℕ) :
+    adjointOp (kpow κ m) (doeblinRef κ φ) ≤ ((2 : ℝ≥0∞) ^ m) • doeblinRef κ φ := by
+  induction m with
+  | zero => rw [adjointOp_kpow_zero, pow_zero, one_smul]
+  | succ m ih =>
+    rw [adjoint_add, kpow_one]
+    calc adjointOp (kpow κ m) (adjointOp κ (doeblinRef κ φ)) ≤
+          adjointOp (kpow κ m) ((2 : ℝ≥0∞) • doeblinRef κ φ) :=
+          adjointOp_mono _ (adjoint_doeblinRef_le φ)
+      _ = (2 : ℝ≥0∞) • adjointOp (kpow κ m) (doeblinRef κ φ) := adjointOp_smul _ _ _
+      _ ≤ (2 : ℝ≥0∞) • ((2 : ℝ≥0∞) ^ m • doeblinRef κ φ) := Measure.le_iff'.2 fun A => by
+          simp only [Measure.smul_apply, smul_eq_mul]
+          gcongr; exact Measure.le_iff'.1 ih A
+      _ = ((2 : ℝ≥0∞) ^ (m + 1)) • doeblinRef κ φ := by rw [smul_smul, pow_succ, mul_comm]
+
+/-! ### Uniform integrability -/
+
+omit [IsMarkovKernel κ] in
+/-- Condition D forces `ε ≤ 1`. -/
+theorem doeblin_eps_le_one [Nonempty S] {φ : Measure S} {N : ℕ} {ε : ℝ}
+    (hD : DoeblinFor κ φ N ε) : ε ≤ 1 := by
+  obtain ⟨s⟩ := ‹Nonempty S›
+  have := hD.2.2.2 ∅ MeasurableSet.empty (by simp only [measureReal_empty]; exact hD.2.2.1.le) s
+  simp only [measureReal_empty] at this
+  linarith
+
+/-- The constants `b_j = Σ_{i<j} (2/ε) 2^{Ni}`. -/
+noncomputable def refBound (N : ℕ) (ε : ℝ) (j : ℕ) : ℝ :=
+  ∑ i ∈ Finset.range j, 2 / ε * 2 ^ (N * i)
+
+theorem refBound_nonneg {N : ℕ} {ε : ℝ} (hε : 0 < ε) (j : ℕ) : 0 ≤ refBound N ε j :=
+  Finset.sum_nonneg fun i _ => by positivity
+
+/-- **Uniform integrability.** Under Condition D, for `μ` of mass at most one,
+`μP^{Nj}(A) ≤ b_j ψ(A) + (1 − ε)ʲ μ(S)`. -/
+theorem adjoint_real_le_ref [Nonempty S] {φ : Measure S} {N : ℕ} {ε : ℝ}
+    (hD : DoeblinFor κ φ N ε) (j : ℕ) :
+    ∀ (μ : Measure S) [IsFiniteMeasure μ], μ.real univ ≤ 1 → ∀ A, MeasurableSet A →
+      (adjointOp (kpow κ (N * j)) μ).real A ≤
+        refBound N ε j * (doeblinRef κ φ).real A + (1 - ε) ^ j * μ.real univ := by
+  have hφ := hD.1
+  have hε := hD.2.2.1
+  have hε1 := doeblin_eps_le_one hD
+  have hψ := isFinite_doeblinRef (κ := κ) φ
+  induction j with
+  | zero =>
+    intro μ _ _ A _
+    simp only [mul_zero, adjointOp_kpow_zero, refBound, Finset.range_zero, Finset.sum_empty,
+      zero_mul, pow_zero, one_mul, zero_add]
+    exact measureReal_mono (subset_univ A)
+  | succ j ih =>
+    intro μ _ hμ A hA
+    set ψ := doeblinRef κ φ
+    set c : ℝ≥0∞ := ENNReal.ofReal (2 / ε)
+    set ν := adjointOp (kpow κ N) μ
+    have hν : IsFiniteMeasure ν := isFinite_adjoint N μ
+    have hνu : ν.real univ = μ.real univ := by
+      rw [measureReal_def, adjointOp_kpow_univ]; rfl
+    have hcψfin : IsFiniteMeasure (c • ψ) := ⟨by
+      rw [Measure.smul_apply, smul_eq_mul]
+      exact ENNReal.mul_lt_top ENNReal.ofReal_lt_top (measure_lt_top ψ univ)⟩
+    obtain ⟨H, hH, hH1, hH2⟩ := hahn_decomposition ν (c • ψ)
+    -- `ψ(H) ≤ ε/2`, hence `φ(H) ≤ ε` and `ν(H) ≤ (1 − ε) μ(S)`
+    have hcψ : (2 / ε) * ψ.real H ≤ 1 := by
+      have h1 := hH1 H hH subset_rfl
+      have h2 : (c • ψ).real H ≤ ν.real H := ENNReal.toReal_mono (measure_ne_top _ _) h1
+      rw [measureReal_ennreal_smul_apply, ENNReal.toReal_ofReal (by positivity)] at h2
+      linarith [measureReal_mono (μ := ν) (subset_univ H)]
+    have hφH : φ.real H ≤ ε := by
+      have h1 : φ.real H ≤ ((2 : ℝ≥0∞) • ψ).real H :=
+        ENNReal.toReal_mono (by
+          rw [Measure.smul_apply, smul_eq_mul]
+          exact ENNReal.mul_ne_top (by simp) (measure_ne_top ψ H)) (le_two_doeblinRef φ H)
+      rw [measureReal_ennreal_smul_apply] at h1
+      have : (2 : ℝ≥0∞).toReal = 2 := by simp
+      rw [this] at h1
+      have h2 : ψ.real H ≤ ε / 2 := by
+        rw [div_mul_eq_mul_div, div_le_iff₀ hε] at hcψ; linarith
+      linarith
+    have hνH : ν.real H ≤ (1 - ε) * μ.real univ := by
+      have := isMarkov_kpow (κ := κ) N
+      rw [bind_real_eq _ _ hH]
+      calc ∫ s, (kpow κ N s).real H ∂μ ≤ ∫ _s, (1 - ε) ∂μ :=
+            integral_mono (integrable_of_abs_le μ (Kernel.measurable_coe _ hH).ennreal_toReal
+              (C := 1) fun s => by
+                rw [abs_of_nonneg measureReal_nonneg]; exact measureReal_le_one)
+              (integrable_const _) fun s => hD.2.2.2 H hH hφH s
+        _ = (1 - ε) * μ.real univ := by rw [integral_const, smul_eq_mul, mul_comm]
+    -- the two pieces
+    set R := ν.restrict H
+    set K := ν.restrict Hᶜ
+    have hsplit : ν = R + K := (Measure.restrict_add_restrict_compl hH).symm
+    have hK : K ≤ c • ψ := Measure.le_iff.2 fun t ht => by
+      rw [Measure.restrict_apply ht]
+      exact (hH2 _ (ht.inter hH.compl) inter_subset_right).trans
+        (measure_mono inter_subset_left)
+    have hRu : R.real univ = ν.real H := by
+      rw [measureReal_restrict_apply MeasurableSet.univ, univ_inter]
+    have hKbound : (adjointOp (kpow κ (N * j)) K).real A ≤
+        2 / ε * 2 ^ (N * j) * ψ.real A := by
+      have h1 : adjointOp (kpow κ (N * j)) K ≤ (c * 2 ^ (N * j)) • ψ := by
+        calc adjointOp (kpow κ (N * j)) K ≤ adjointOp (kpow κ (N * j)) (c • ψ) :=
+              adjointOp_mono _ hK
+          _ = c • adjointOp (kpow κ (N * j)) ψ := adjointOp_smul _ _ _
+          _ ≤ c • ((2 : ℝ≥0∞) ^ (N * j) • ψ) := Measure.le_iff'.2 fun B => by
+              simp only [Measure.smul_apply, smul_eq_mul]
+              gcongr; exact Measure.le_iff'.1 (adjoint_kpow_doeblinRef_le φ (N * j)) B
+          _ = (c * 2 ^ (N * j)) • ψ := smul_smul _ _ _
+      have h2 := ENNReal.toReal_mono (by
+          rw [Measure.smul_apply, smul_eq_mul]
+          exact ENNReal.mul_ne_top (ENNReal.mul_ne_top ENNReal.ofReal_ne_top (by simp))
+            (measure_ne_top ψ A))
+        (Measure.le_iff'.1 h1 A)
+      have hfin : IsFiniteMeasure (adjointOp (kpow κ (N * j)) K) := isFinite_adjoint _ K
+      rw [← measureReal_def, ← measureReal_def, measureReal_ennreal_smul_apply,
+        ENNReal.toReal_mul, ENNReal.toReal_ofReal (by positivity)] at h2
+      simpa using h2
+    have hRbound := ih R (by rw [hRu]; linarith [measureReal_mono (μ := ν) (subset_univ H)]) A hA
+    rw [show N * (j + 1) = N * j + N by ring, adjoint_add]
+    change (adjointOp (kpow κ (N * j)) ν).real A ≤ _
+    have : IsFiniteMeasure (adjointOp (kpow κ (N * j)) R) := isFinite_adjoint _ R
+    have : IsFiniteMeasure (adjointOp (kpow κ (N * j)) K) := isFinite_adjoint _ K
+    rw [hsplit, adjointOp_add, measureReal_add_apply (h₁ := measure_ne_top _ _)
+      (h₂ := measure_ne_top _ _)]
+    have hpow : 0 ≤ (1 - ε) ^ j := pow_nonneg (by linarith) j
+    have : (1 - ε) ^ j * R.real univ ≤ (1 - ε) ^ (j + 1) * μ.real univ := by
+      rw [hRu, pow_succ, mul_assoc]; exact mul_le_mul_of_nonneg_left hνH hpow
+    simp only [refBound, Finset.sum_range_succ] at hRbound ⊢
+    nlinarith [measureReal_nonneg (μ := ψ) (s := A)]
+
+/-- The Cesàro averages are uniformly absolutely continuous with respect to `ψ`. -/
+theorem cesaro_small [Nonempty S] {φ : Measure S} {N : ℕ} {ε : ℝ} (hD : DoeblinFor κ φ N ε)
+    (μ : Measure S) [IsProbabilityMeasure μ] {η : ℝ} (hη : 0 < η) :
+    ∃ δ > 0, ∃ n₀, ∀ n ≥ n₀, ∀ A, MeasurableSet A → (doeblinRef κ φ).real A ≤ δ →
+      (cesaroM κ n μ).real A ≤ η := by
+  have hε := hD.2.2.1
+  obtain ⟨j, hj⟩ := exists_pow_lt_of_lt_one (by positivity : 0 < η / 3)
+    (by linarith : 1 - ε < 1)
+  set b := refBound N ε j
+  have hb := refBound_nonneg (N := N) hε j
+  obtain ⟨n₀, hn₀⟩ := exists_nat_gt (3 * (N * j) / η)
+  refine ⟨η / 3 / (b + 1), by positivity, n₀, fun n hn A hA hψA => ?_⟩
+  have hterm : ∀ k, (adjointOp (kpow κ (k + 1)) μ).real A ≤
+      2 * η / 3 + if k + 1 < N * j then 1 else 0 := fun k => by
+    split_ifs with hk
+    · have := isProb_adjoint (κ := κ) (k + 1) μ
+      have : (adjointOp (kpow κ (k + 1)) μ).real A ≤ 1 := measureReal_le_one
+      linarith
+    · obtain ⟨m, hm⟩ : ∃ m, k + 1 = N * j + m := ⟨k + 1 - N * j, by omega⟩
+      have := isProb_adjoint (κ := κ) m μ
+      rw [hm, adjoint_add]
+      have h1 := adjoint_real_le_ref hD j (adjointOp (kpow κ m) μ) (by simp) A hA
+      simp only [probReal_univ, mul_one] at h1
+      have h2 : b * (doeblinRef κ φ).real A ≤ η / 3 := by
+        calc b * (doeblinRef κ φ).real A ≤ (b + 1) * (η / 3 / (b + 1)) :=
+              mul_le_mul (by linarith) hψA measureReal_nonneg (by positivity)
+          _ = η / 3 := by
+              have hb1 : b + 1 ≠ 0 := by positivity
+              field_simp
+      linarith
+  rw [cesaroM_real]
+  have hsum : ∑ k ∈ Finset.range (n + 1), (adjointOp (kpow κ (k + 1)) μ).real A ≤
+      (n + 1) * (2 * η / 3) + N * j := by
+    calc ∑ k ∈ Finset.range (n + 1), (adjointOp (kpow κ (k + 1)) μ).real A ≤
+          ∑ k ∈ Finset.range (n + 1), (2 * η / 3 + if k + 1 < N * j then (1 : ℝ) else 0) :=
+          Finset.sum_le_sum fun k _ => hterm k
+      _ = (n + 1) * (2 * η / 3) + ∑ k ∈ Finset.range (n + 1),
+            (if k + 1 < N * j then (1 : ℝ) else 0) := by
+          rw [Finset.sum_add_distrib, Finset.sum_const, Finset.card_range, nsmul_eq_mul]
+          push_cast; ring
+      _ ≤ (n + 1) * (2 * η / 3) + N * j := by
+          gcongr
+          rw [Finset.sum_ite, Finset.sum_const_zero, add_zero, Finset.sum_const, nsmul_eq_mul,
+            mul_one]
+          have : ((Finset.range (n + 1)).filter fun k => k + 1 < N * j) ⊆
+              Finset.range (N * j) := fun k hk => by
+            simp only [Finset.mem_filter, Finset.mem_range] at hk ⊢; omega
+          have := Finset.card_le_card this
+          rw [Finset.card_range] at this
+          exact_mod_cast this
+  have hn' : (n₀ : ℝ) ≤ n := by exact_mod_cast hn
+  have hNj : (N : ℝ) * j ≤ η / 3 * (n + 1) := by
+    have := (div_lt_iff₀ hη).1 hn₀
+    nlinarith
+  calc ((n : ℝ) + 1)⁻¹ * ∑ k ∈ Finset.range (n + 1), (adjointOp (kpow κ (k + 1)) μ).real A ≤
+        ((n : ℝ) + 1)⁻¹ * ((n + 1) * (2 * η / 3) + N * j) :=
+        mul_le_mul_of_nonneg_left hsum (by positivity)
+    _ ≤ ((n : ℝ) + 1)⁻¹ * ((n + 1) * (2 * η / 3) + η / 3 * (n + 1)) := by gcongr
+    _ = η := by field_simp; ring
+
+/-! ### Discretising integrals -/
+
+omit [MeasurableSpace S] in
+/-- `|g(s) − (1/k) #{i < k : (i+1)/k < g(s)}| ≤ 1/k` for `0 ≤ g(s) ≤ 1`. -/
+theorem abs_sub_levels_le {g : S → ℝ} {k : ℕ} (hk : 0 < k) (s : S) (h0 : 0 ≤ g s)
+    (h1 : g s ≤ 1) :
+    |g s - (k : ℝ)⁻¹ * ∑ i ∈ Finset.range k,
+      {x | ((i : ℝ) + 1) / k < g x}.indicator (1 : S → ℝ) s| ≤ (k : ℝ)⁻¹ := by
+  have hk' : (0 : ℝ) < k := by exact_mod_cast hk
+  set x := (k : ℝ) * g s
+  have hx0 : 0 ≤ x := by positivity
+  have hxk : x ≤ k := by
+    calc x ≤ (k : ℝ) * 1 := mul_le_mul_of_nonneg_left h1 hk'.le
+      _ = k := mul_one _
+  set m := ⌈x⌉₊
+  have hmk : m ≤ k := Nat.ceil_le.2 hxk
+  have hcount : ∑ i ∈ Finset.range k, {x | ((i : ℝ) + 1) / k < g x}.indicator (1 : S → ℝ) s =
+      ((m - 1 : ℕ) : ℝ) := by
+    have hfilt : (Finset.range k).filter (fun i : ℕ => ((i : ℝ) + 1) / k < g s) =
+        Finset.range (m - 1) := by
+      ext i
+      simp only [Finset.mem_filter, Finset.mem_range]
+      rw [div_lt_iff₀ hk', mul_comm]
+      have : ((i : ℝ) + 1 < x) ↔ i + 1 < m := by
+        rw [Nat.lt_ceil]; push_cast; rfl
+      rw [this]
+      omega
+    rw [← Finset.card_range (m - 1), ← hfilt, Finset.card_filter]
+    push_cast
+    refine Finset.sum_congr rfl fun i _ => ?_
+    by_cases hi : ((i : ℝ) + 1) / k < g s
+    · simp only [indicator_of_mem (show s ∈ {x | ((i : ℝ) + 1) / k < g x} from hi), hi,
+        ↓reduceIte, Pi.one_apply]
+    · simp only [indicator_of_notMem (show s ∉ {x | ((i : ℝ) + 1) / k < g x} from hi), hi,
+        ↓reduceIte]
+  rw [hcount]
+  have hxm : x ≤ m := Nat.le_ceil x
+  have hmx : (m : ℝ) < x + 1 := Nat.ceil_lt_add_one hx0
+  have key : |x - ((m - 1 : ℕ) : ℝ)| ≤ 1 := by
+    rcases Nat.eq_zero_or_pos m with hm | hm
+    · rw [hm] at hxm ⊢
+      simp only [Nat.zero_sub, sub_zero, CharP.cast_eq_zero] at hxm ⊢
+      rw [abs_of_nonneg hx0]; linarith
+    · rw [Nat.cast_sub hm, Nat.cast_one, abs_le]
+      constructor <;> linarith
+  have : g s - (k : ℝ)⁻¹ * ((m - 1 : ℕ) : ℝ) = (k : ℝ)⁻¹ * (x - ((m - 1 : ℕ) : ℝ)) := by
+    simp only [x]; field_simp
+  rw [this, abs_mul, abs_of_pos (inv_pos.2 hk')]
+  exact (mul_le_mul_of_nonneg_left key (inv_pos.2 hk').le).trans (le_of_eq (mul_one _))
+
+/-- `|∫ g dμ − (1/k) Σ_{i<k} μ{(i+1)/k < g}| ≤ 1/k` for `0 ≤ g ≤ 1` and a probability `μ`. -/
+theorem abs_integral_sub_levels_le (μ : Measure S) [IsProbabilityMeasure μ] {g : S → ℝ}
+    (hg : Measurable g) (h01 : ∀ s, 0 ≤ g s ∧ g s ≤ 1) {k : ℕ} (hk : 0 < k) :
+    |∫ s, g s ∂μ - (k : ℝ)⁻¹ * ∑ i ∈ Finset.range k, μ.real {x | ((i : ℝ) + 1) / k < g x}| ≤
+      (k : ℝ)⁻¹ := by
+  have hmeas : ∀ i : ℕ, MeasurableSet {x | ((i : ℝ) + 1) / k < g x} := fun i =>
+    measurableSet_lt measurable_const hg
+  have hint : ∀ i : ℕ, Integrable ({x | ((i : ℝ) + 1) / k < g x}.indicator (1 : S → ℝ)) μ :=
+    fun i => (integrable_const 1).indicator (hmeas i)
+  have hD : ∫ s, (k : ℝ)⁻¹ * ∑ i ∈ Finset.range k,
+      {x | ((i : ℝ) + 1) / k < g x}.indicator (1 : S → ℝ) s ∂μ =
+        (k : ℝ)⁻¹ * ∑ i ∈ Finset.range k, μ.real {x | ((i : ℝ) + 1) / k < g x} := by
+    rw [integral_const_mul, integral_finsetSum _ fun i _ => hint i]
+    simp only [integral_indicator_one (hmeas _)]
+  have hgi : Integrable g μ := integrable_of_abs_le μ hg (C := 1) fun s => by
+    rw [abs_of_nonneg (h01 s).1]; exact (h01 s).2
+  have hDi : Integrable (fun s => (k : ℝ)⁻¹ * ∑ i ∈ Finset.range k,
+      {x | ((i : ℝ) + 1) / k < g x}.indicator (1 : S → ℝ) s) μ :=
+    (integrable_finsetSum _ fun i _ => hint i).const_mul _
+  rw [← hD, ← integral_sub hgi hDi]
+  refine (abs_integral_le_integral_abs).trans ?_
+  calc ∫ s, |g s - (k : ℝ)⁻¹ * ∑ i ∈ Finset.range k,
+        {x | ((i : ℝ) + 1) / k < g x}.indicator (1 : S → ℝ) s| ∂μ ≤ ∫ _s, (k : ℝ)⁻¹ ∂μ :=
+        integral_mono_of_nonneg (Eventually.of_forall fun s => abs_nonneg _)
+          (integrable_const _) (Eventually.of_forall fun s =>
+            abs_sub_levels_le hk s (h01 s).1 (h01 s).2)
+    _ = (k : ℝ)⁻¹ := by simp
+
+/-! ### The ultrafilter limit -/
+
+theorem hyperfilter_le_atTop : (hyperfilter ℕ : Filter ℕ) ≤ atTop :=
+  hyperfilter_le_cofinite.trans Nat.cofinite_eq_atTop.le
+
+variable (κ) in
+/-- The limit of the Cesàro averages on `A` along a non-principal ultrafilter. -/
+noncomputable def cesaroLim (μ : Measure S) (A : Set S) : ℝ :=
+  limUnder (hyperfilter ℕ : Filter ℕ) fun n => (cesaroM κ n μ).real A
+
+/-- Bounded sequences converge along an ultrafilter. -/
+theorem tendsto_ultra_of_mem {u : ℕ → ℝ} (hu : ∀ n, u n ∈ Icc (0 : ℝ) 1) :
+    Tendsto u (hyperfilter ℕ) (𝓝 (limUnder (hyperfilter ℕ : Filter ℕ) u)) := by
+  refine tendsto_nhds_limUnder ?_
+  obtain ⟨x, -, hx⟩ := isCompact_iff_ultrafilter_le_nhds.1 isCompact_Icc
+    ((hyperfilter ℕ).map u) (by
+      rw [Ultrafilter.coe_map, le_principal_iff, mem_map]
+      exact Filter.univ_mem' fun n => hu n)
+  exact ⟨x, by rwa [Ultrafilter.coe_map] at hx⟩
+
+theorem tendsto_cesaroLim (μ : Measure S) [IsProbabilityMeasure μ] (A : Set S) :
+    Tendsto (fun n => (cesaroM κ n μ).real A) (hyperfilter ℕ) (𝓝 (cesaroLim κ μ A)) :=
+  tendsto_ultra_of_mem fun n => by
+    have := isProb_cesaroM (κ := κ) n μ
+    exact ⟨measureReal_nonneg, measureReal_le_one⟩
+
+/-- Sequences tending to a limit at infinity tend to it along the ultrafilter. -/
+theorem tendsto_ultra {u : ℕ → ℝ} {a : ℝ} (h : Tendsto u atTop (𝓝 a)) :
+    Tendsto u (hyperfilter ℕ) (𝓝 a) := h.mono_left hyperfilter_le_atTop
+
+theorem cesaroLim_union (μ : Measure S) [IsProbabilityMeasure μ] {A B : Set S}
+    (hd : Disjoint A B) (hB : MeasurableSet B) :
+    cesaroLim κ μ (A ∪ B) = cesaroLim κ μ A + cesaroLim κ μ B := by
+  refine tendsto_nhds_unique (tendsto_cesaroLim μ (A ∪ B)) ?_
+  have := (tendsto_cesaroLim (κ := κ) μ A).add (tendsto_cesaroLim (κ := κ) μ B)
+  refine this.congr fun n => ?_
+  have := isProb_cesaroM (κ := κ) n μ
+  exact (measureReal_union hd hB).symm
+
+theorem cesaroLim_nonneg (μ : Measure S) [IsProbabilityMeasure μ] (A : Set S) :
+    0 ≤ cesaroLim κ μ A :=
+  ge_of_tendsto (tendsto_cesaroLim μ A) (Eventually.of_forall fun _ => measureReal_nonneg)
+
+theorem cesaroLim_univ (μ : Measure S) [IsProbabilityMeasure μ] : cesaroLim κ μ univ = 1 := by
+  refine tendsto_nhds_unique (tendsto_cesaroLim μ univ) ?_
+  refine tendsto_const_nhds.congr fun n => ?_
+  have := isProb_cesaroM (κ := κ) n μ
+  exact probReal_univ.symm
+
+theorem cesaroLim_empty (μ : Measure S) [IsProbabilityMeasure μ] : cesaroLim κ μ ∅ = 0 := by
+  refine tendsto_nhds_unique (tendsto_cesaroLim μ ∅) ?_
+  exact tendsto_const_nhds.congr fun _ => by simp
+
+/-- The limit is countably additive, by uniform absolute continuity. -/
+theorem hasSum_cesaroLim [Nonempty S] {φ : Measure S} {N : ℕ} {ε : ℝ} (hD : DoeblinFor κ φ N ε)
+    (μ : Measure S) [IsProbabilityMeasure μ] {f : ℕ → Set S} (hf : ∀ i, MeasurableSet (f i))
+    (hd : Pairwise (Function.onFun Disjoint f)) :
+    HasSum (fun i => cesaroLim κ μ (f i)) (cesaroLim κ μ (⋃ i, f i)) := by
+  have hφ := hD.1
+  have hψ := isFinite_doeblinRef (κ := κ) φ
+  set P : ℕ → Set S := fun n => ⋃ i ∈ Finset.range n, f i
+  have hPm : ∀ n, MeasurableSet (P n) := fun n =>
+    Finset.measurableSet_biUnion _ fun i _ => hf i
+  have hPsum : ∀ n, cesaroLim κ μ (P n) = ∑ i ∈ Finset.range n, cesaroLim κ μ (f i) := by
+    intro n
+    refine tendsto_nhds_unique (tendsto_cesaroLim μ (P n)) ?_
+    refine (tendsto_finsetSum _ fun i _ => tendsto_cesaroLim (κ := κ) μ (f i)).congr fun m => ?_
+    have := isProb_cesaroM (κ := κ) m μ
+    exact (measureReal_biUnion_finset (fun i _ j _ hij => hd hij) fun i _ => hf i).symm
+  set T : ℕ → Set S := fun n => (⋃ i, f i) \ P n
+  have hTsplit : ∀ n, cesaroLim κ μ (⋃ i, f i) = cesaroLim κ μ (P n) + cesaroLim κ μ (T n) := by
+    intro n
+    rw [← cesaroLim_union μ disjoint_sdiff_right ((MeasurableSet.iUnion hf).diff (hPm n))]
+    congr 1
+    exact (union_sdiff_cancel (iUnion₂_subset fun i _ => subset_iUnion f i)).symm
+  -- `ψ(Tₙ) → 0`
+  have hPmono : Monotone P := fun m n hmn => biUnion_subset_biUnion_left fun i hi => by
+    simp only [Finset.coe_range, mem_Iio] at hi ⊢; omega
+  have hPU : (⋃ n, P n) = ⋃ i, f i := by
+    ext x; simp only [P, mem_iUnion, Finset.mem_range]
+    exact ⟨fun ⟨n, i, _, hx⟩ => ⟨i, hx⟩, fun ⟨i, hx⟩ => ⟨i + 1, i, by omega, hx⟩⟩
+  have hψT : Tendsto (fun n => (doeblinRef κ φ).real (T n)) atTop (𝓝 0) := by
+    have h1 := tendsto_measure_iUnion_atTop (μ := doeblinRef κ φ) hPmono
+    rw [hPU] at h1
+    have h2 := (ENNReal.tendsto_toReal (measure_ne_top _ _)).comp h1
+    have h3 := h2.const_sub ((doeblinRef κ φ).real (⋃ i, f i))
+    rw [show ((doeblinRef κ φ) (⋃ i, f i)).toReal = (doeblinRef κ φ).real (⋃ i, f i) from rfl,
+      sub_self] at h3
+    refine h3.congr fun n => ?_
+    simp only [Function.comp_apply, T]
+    rw [measureReal_sdiff (iUnion₂_subset fun i _ => subset_iUnion f i) (hPm n)]
+    rfl
+  rw [hasSum_iff_tendsto_nat_of_nonneg (fun i => cesaroLim_nonneg μ _)]
+  rw [Metric.tendsto_atTop]
+  intro η hη
+  obtain ⟨δ, hδ, n₀, hsmall⟩ := cesaro_small hD μ (half_pos hη)
+  obtain ⟨N₁, hN₁⟩ := eventually_atTop.1 ((hψT.eventually (gt_mem_nhds hδ)))
+  refine ⟨N₁, fun n hn => ?_⟩
+  have hTle : cesaroLim κ μ (T n) ≤ η / 2 := by
+    refine le_of_tendsto (tendsto_cesaroLim μ (T n)) ?_
+    refine (Filter.eventually_ge_atTop n₀).filter_mono hyperfilter_le_atTop |>.mono fun m hm => ?_
+    exact hsmall m hm (T n) ((MeasurableSet.iUnion hf).diff (hPm n)) (hN₁ n hn).le
+  rw [Real.dist_eq, ← hPsum, hTsplit n]
+  rw [abs_sub_comm, add_sub_cancel_left, abs_of_nonneg (cesaroLim_nonneg μ _)]
+  linarith
+
+omit [IsMarkovKernel κ] in
+/-- `T*` commutes with the Cesàro averages. -/
+theorem adjoint_cesaroM (n : ℕ) (μ : Measure S) :
+    adjointOp κ (cesaroM κ n μ) = cesaroM κ n (adjointOp (kpow κ 1) μ) := by
+  simp only [cesaroM, adjointOp_smul, adjointOp_finsetSum]
+  congr 1
+  refine Finset.sum_congr rfl fun k _ => ?_
+  have h1 := adjoint_add (κ := κ) 1 (k + 1) μ
+  have h2 := adjoint_add (κ := κ) (k + 1) 1 μ
+  rw [kpow_one] at h1
+  rw [← h1, ← h2, add_comm]
+
+/-- Integrals of `[0, 1]`-valued functions converge along the ultrafilter. -/
+theorem tendsto_integral_ultra (μ : Measure S) [IsProbabilityMeasure μ] {π : Measure S}
+    [IsProbabilityMeasure π] (hπ : ∀ A, MeasurableSet A → π.real A = cesaroLim κ μ A)
+    {g : S → ℝ} (hg : Measurable g) (h01 : ∀ s, 0 ≤ g s ∧ g s ≤ 1) :
+    Tendsto (fun n => ∫ s, g s ∂cesaroM κ n μ) (hyperfilter ℕ) (𝓝 (∫ s, g s ∂π)) := by
+  rw [Metric.tendsto_nhds]
+  intro η hη
+  obtain ⟨k, hk⟩ := exists_nat_gt (3 / η)
+  have hk0 : 0 < k := by
+    have : (0 : ℝ) < k := lt_trans (by positivity) hk
+    exact_mod_cast this
+  have hkη : 3 * (k : ℝ)⁻¹ < η := by
+    have hk' : (0 : ℝ) < k := by exact_mod_cast hk0
+    rw [div_lt_iff₀ hη] at hk
+    rw [← div_eq_mul_inv, div_lt_iff₀ hk']; linarith
+  set G : ℕ → Set S := fun i => {x | ((i : ℝ) + 1) / k < g x}
+  have hG : ∀ i, MeasurableSet (G i) := fun i => measurableSet_lt measurable_const hg
+  have happrox : Tendsto (fun n => (k : ℝ)⁻¹ * ∑ i ∈ Finset.range k, (cesaroM κ n μ).real (G i))
+      (hyperfilter ℕ) (𝓝 ((k : ℝ)⁻¹ * ∑ i ∈ Finset.range k, π.real (G i))) := by
+    simp only [fun i => hπ (G i) (hG i)]
+    exact (tendsto_finsetSum _ fun i _ => tendsto_cesaroLim μ (G i)).const_mul _
+  filter_upwards [happrox.eventually (Metric.ball_mem_nhds _ (inv_pos.2
+    (show (0 : ℝ) < k by exact_mod_cast hk0)))] with n hn
+  have := isProb_cesaroM (κ := κ) n μ
+  have e1 := abs_integral_sub_levels_le (cesaroM κ n μ) hg h01 hk0
+  have e2 := abs_integral_sub_levels_le π hg h01 hk0
+  rw [Real.dist_eq] at hn
+  rw [Real.dist_eq]
+  calc |∫ s, g s ∂cesaroM κ n μ - ∫ s, g s ∂π| ≤ (k : ℝ)⁻¹ + (k : ℝ)⁻¹ + (k : ℝ)⁻¹ := by
+        rw [abs_le] at e1 e2 ⊢
+        rw [abs_lt] at hn
+        constructor <;> linarith [e1.1, e1.2, e2.1, e2.2, hn.1, hn.2]
+    _ < η := by linarith
+
+/-- **Existence of invariant measures under Condition D.** Every probability measure `λ` yields
+an invariant probability measure `π`, the limit of its Cesàro averages along a non-principal
+ultrafilter on each measurable set. -/
+theorem exists_invariant [Nonempty S] {φ : Measure S} {N : ℕ} {ε : ℝ} (hD : DoeblinFor κ φ N ε)
+    (μ : Measure S) [IsProbabilityMeasure μ] :
+    ∃ π : Measure S, IsProbabilityMeasure π ∧ adjointOp κ π = π ∧
+      ∀ A, MeasurableSet A → π.real A = cesaroLim κ μ A := by
+  set π : Measure S := Measure.ofMeasurable (fun A _ => ENNReal.ofReal (cesaroLim κ μ A))
+    (by simp [cesaroLim_empty]) fun f hf hd => by
+      have h := hasSum_cesaroLim hD μ hf hd
+      rw [← h.tsum_eq, ENNReal.ofReal_tsum_of_nonneg (fun i => cesaroLim_nonneg μ _) h.summable]
+  have hπA : ∀ A, MeasurableSet A → π A = ENNReal.ofReal (cesaroLim κ μ A) := fun A hA =>
+    Measure.ofMeasurable_apply A hA
+  have hprob : IsProbabilityMeasure π :=
+    ⟨by rw [hπA univ MeasurableSet.univ, cesaroLim_univ, ENNReal.ofReal_one]⟩
+  have hπr : ∀ A, MeasurableSet A → π.real A = cesaroLim κ μ A := fun A hA => by
+    rw [measureReal_def, hπA A hA, ENNReal.toReal_ofReal (cesaroLim_nonneg μ A)]
+  refine ⟨π, hprob, ?_, hπr⟩
+  have hPfin : IsFiniteMeasure (adjointOp κ π) := by
+    have := isFinite_adjoint (κ := κ) 1 π; rwa [kpow_one] at this
+  refine Measure.ext fun A hA => ?_
+  have hreal : (adjointOp κ π).real A = π.real A := by
+    set g : S → ℝ := fun s => (κ s).real A
+    have hg : Measurable g := (κ.measurable_coe hA).ennreal_toReal
+    have h01 : ∀ s, 0 ≤ g s ∧ g s ≤ 1 := fun s => ⟨measureReal_nonneg, measureReal_le_one⟩
+    rw [bind_real_eq κ π hA, hπr A hA]
+    refine tendsto_nhds_unique (tendsto_integral_ultra μ hπr hg h01) ?_
+    -- `∫ g dλₙ = (T*λₙ)(A)`, within `1/(n+1)` of `λₙ(A)`
+    have hsh : Tendsto (fun n => (cesaroM κ n (adjointOp (kpow κ 1) μ)).real A -
+        (cesaroM κ n μ).real A) atTop (𝓝 0) := by
+      refine squeeze_zero_norm (fun n => ?_) (tendsto_one_div_add_atTop_nhds_zero_nat)
+      rw [Real.norm_eq_abs]
+      refine (abs_cesaro_shift_le n 1 μ A).trans (le_of_eq ?_)
+      simp [div_eq_mul_inv]
+    have := (tendsto_ultra hsh).add (tendsto_cesaroLim (κ := κ) μ A)
+    rw [zero_add] at this
+    refine this.congr fun n => ?_
+    have := isFinite_cesaroM (κ := κ) n μ
+    rw [sub_add_cancel, ← adjoint_cesaroM, bind_real_eq κ _ hA]
+  exact (ENNReal.toReal_eq_toReal_iff' (measure_ne_top _ _) (measure_ne_top _ _)).1 hreal
+
+end StokeyLucasPrescott.StrongConvergence
+
+/-
+Copyright (c) 2026 Robert Kirkby. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Robert Kirkby
+-/
+
+/-!
+# Theorems 11.9b–c and 11.10b–c
+
+The book states these and refers to Doob (1953, §V.5) and Neveu (1965, §V.3) for proofs. The
+proof here combines the preceding modules.
+
+1. Measures absolutely continuous with respect to an invariant probability measure `π` have
+   uniformly Cauchy Cesàro averages (`cesaroCauchy_of_absCont`): truncate the density and use
+   the mean ergodic theorem for bounded densities.
+2. Every finite measure concentrated on an ergodic set `E` does
+   (`cesaroCauchy_of_concentrated`). By the Lebesgue decomposition with respect to `φ`,
+   `μPᴺ = K + R` with `K ≪ φ` (hence `K ≪ π_E`) and `R` singular. Doeblin's condition applied
+   to a `φ`-null set carrying `R` gives `R(S) ≤ (1 − ε)μ(S)`. Iterating, `μP^{Nj}` is a good
+   measure plus one of mass at most `(1 − ε)ʲμ(S)`.
+3. **Absorption** (`tendsto_kpow_transient`): from every state the probability of being in the
+   transient set `F = (⋃ₘ Eₘ)ᶜ` tends to `0`. The limit `g = lim Pⁿ(·, F)` is harmonic; if
+   `γ = sup g > 0`, the set `{g = γ}` is invariant with `φ`-measure at least `ε`. So it contains
+   an ergodic set, which must agree with some `Eₘ`, where `g = 0`.
+4. Hence every finite measure has uniformly Cauchy averages, which gives Theorem 11.9b; part (c)
+   and Theorem 11.10b–c follow from uniqueness on each ergodic set (`invariant_unique`).
+-/
+
+namespace StokeyLucasPrescott.StrongConvergence
+
+open MeasureTheory ProbabilityTheory Set Filter Topology
+open scoped ENNReal NNReal
+
+variable {S : Type*} [MeasurableSpace S] {κ : Kernel S S} [IsMarkovKernel κ]
+
+/-! ### Absolutely continuous measures -/
+
+/-- Truncations `min f n` of a function increase to it. -/
+theorem iSup_min_natCast (x : ℝ≥0∞) : ⨆ n : ℕ, min x (n : ℝ≥0∞) = x := by
+  refine le_antisymm (iSup_le fun n => min_le_left _ _) ?_
+  rcases eq_or_ne x ⊤ with rfl | hx
+  · simp only [min_eq_right le_top]
+    exact le_of_eq ENNReal.iSup_natCast.symm
+  · obtain ⟨n, hn⟩ := ENNReal.exists_nat_gt hx
+    exact le_iSup_of_le n (le_of_eq (min_eq_left hn.le).symm)
+
+/-- **Step 1.** A finite measure absolutely continuous with respect to an invariant probability
+measure has uniformly Cauchy Cesàro averages. -/
+theorem cesaroCauchy_of_absCont {π : Measure S} [IsProbabilityMeasure π]
+    (hπ : adjointOp κ π = π) {ν : Measure S} [IsFiniteMeasure ν] (hν : ν ≪ π) :
+    CesaroCauchy κ ν := by
+  set f := ν.rnDeriv π
+  have hfm : Measurable f := Measure.measurable_rnDeriv ν π
+  have hνf : π.withDensity f = ν := Measure.withDensity_rnDeriv_eq ν π hν
+  have hint : ∫⁻ s, f s ∂π ≠ ⊤ := by
+    have : (π.withDensity f) univ = ∫⁻ s, f s ∂π := by
+      rw [withDensity_apply _ MeasurableSet.univ, Measure.restrict_univ]
+    rw [← this, hνf]
+    exact measure_ne_top ν univ
+  -- the truncations converge in mass
+  have htend : Tendsto (fun n : ℕ => ∫⁻ s, min (f s) n ∂π) atTop (𝓝 (∫⁻ s, f s ∂π)) := by
+    have hmono : Monotone fun (n : ℕ) (s : S) => min (f s) (n : ℝ≥0∞) := fun m n hmn s =>
+      min_le_min_left _ (by exact_mod_cast hmn)
+    have := lintegral_iSup (μ := π) (fun n => hfm.min measurable_const) hmono
+    simp only [iSup_min_natCast] at this
+    rw [this]
+    exact tendsto_atTop_iSup fun m n hmn => lintegral_mono fun s =>
+      min_le_min_left _ (by exact_mod_cast hmn)
+  refine cesaroCauchy_of_approx fun η hη => ?_
+  have hev := (ENNReal.tendsto_toReal hint).comp htend
+  obtain ⟨n, hn⟩ := ((hev.const_sub (∫⁻ s, f s ∂π).toReal).eventually
+    (gt_mem_nhds (show (∫⁻ s, f s ∂π).toReal - (∫⁻ s, f s ∂π).toReal < η by
+      rw [sub_self]; exact hη))).exists
+  simp only [Function.comp_apply] at hn
+  -- the bounded part and the remainder
+  set H : S → ℝ≥0 := fun s => (min (f s) n).toNNReal
+  have hH : Measurable H := (hfm.min measurable_const).ennreal_toNNReal
+  have hHb : ∀ s, H s ≤ n := fun s => by
+    simp only [H]
+    rw [← ENNReal.coe_le_coe, ENNReal.coe_toNNReal (ne_top_of_le_ne_top
+      (ENNReal.natCast_ne_top n) (min_le_right _ _))]
+    exact_mod_cast min_le_right _ _
+  have hHf : ∀ s, (H s : ℝ≥0∞) = min (f s) n := fun s =>
+    ENNReal.coe_toNNReal (ne_top_of_le_ne_top (ENNReal.natCast_ne_top n) (min_le_right _ _))
+  set ν' := π.withDensity fun s => (H s : ℝ≥0∞)
+  set ρ := π.withDensity fun s => f s - min (f s) n
+  have hν'fin : IsFiniteMeasure ν' := isFiniteMeasure_withDensity_of_bound hHb
+  have hsplit : ν = ν' + ρ := by
+    rw [← hνf]
+    simp only [ν', ρ, hHf]
+    rw [← withDensity_add_left (hfm.min measurable_const)]
+    congr 1
+    funext s
+    exact (add_tsub_cancel_of_le (min_le_left _ _)).symm
+  have hρu : ρ univ = ∫⁻ s, f s ∂π - ∫⁻ s, min (f s) n ∂π := by
+    rw [withDensity_apply _ MeasurableSet.univ, Measure.restrict_univ,
+      lintegral_sub (hfm.min measurable_const)
+        (ne_top_of_le_ne_top hint (lintegral_mono fun s => min_le_left _ _))
+        (Eventually.of_forall fun s => min_le_left _ _)]
+  have hρfin : IsFiniteMeasure ρ := ⟨by
+    rw [hρu]; exact lt_of_le_of_lt tsub_le_self (lt_top_iff_ne_top.2 hint)⟩
+  refine ⟨0, ν', ρ, hν'fin, hρfin, by rw [adjointOp_kpow_zero, hsplit],
+    cesaroCauchy_withDensity hπ hH hHb, ?_⟩
+  rw [measureReal_def, hρu, ENNReal.toReal_sub_of_le
+    (lintegral_mono fun s => min_le_left _ _) hint]
+  linarith
+
+/-! ### Measures concentrated on an ergodic set -/
+
+/-- The step-`N` decomposition: `μPᴺ` is a measure absolutely continuous with respect to `φ`,
+plus a measure of mass at most `(1 − ε) μ(S)`, both concentrated on `E` if `μ` is. -/
+theorem doeblin_decomp {φ : Measure S} {N : ℕ} {ε : ℝ} (hD : DoeblinFor κ φ N ε) {E : Set S}
+    (hE : IsInvariantSet κ E) (μ : Measure S) [IsFiniteMeasure μ] (hμE : μ Eᶜ = 0) :
+    ∃ (K R : Measure S) (_ : IsFiniteMeasure K) (_ : IsFiniteMeasure R),
+      adjointOp (kpow κ N) μ = K + R ∧ K ≪ φ ∧ K Eᶜ = 0 ∧ R Eᶜ = 0 ∧
+        R.real univ ≤ (1 - ε) * μ.real univ := by
+  have hφ := hD.1
+  set ν := adjointOp (kpow κ N) μ
+  have hν : IsFiniteMeasure ν := isFinite_adjoint N μ
+  have := isMarkov_kpow (κ := κ) N
+  have hνE : ν Eᶜ = 0 := by
+    rw [adjointOp_apply _ _ hE.1.compl]
+    have hae : ∀ᵐ s ∂μ, s ∈ E := by
+      rw [ae_iff]; simpa [compl_def] using hμE
+    rw [lintegral_congr_ae (g := fun _ => 0) (hae.mono fun s hs => by
+      rw [prob_compl_eq_zero_iff hE.1]; exact hE.2.2 s hs N hD.2.1)]
+    simp
+  set K := φ.withDensity (ν.rnDeriv φ)
+  set R := ν.singularPart φ
+  have hKle : K ≤ ν := Measure.withDensity_rnDeriv_le ν φ
+  have hRle : R ≤ ν := Measure.singularPart_le ν φ
+  have hKfin : IsFiniteMeasure K :=
+    ⟨lt_of_le_of_lt (Measure.le_iff'.1 hKle univ) (measure_lt_top ν univ)⟩
+  have hRfin : IsFiniteMeasure R :=
+    ⟨lt_of_le_of_lt (Measure.le_iff'.1 hRle univ) (measure_lt_top ν univ)⟩
+  refine ⟨K, R, hKfin, hRfin, ?_, withDensity_absolutelyContinuous _ _,
+    nonpos_iff_eq_zero.1 ((Measure.le_iff'.1 hKle _).trans hνE.le),
+    nonpos_iff_eq_zero.1 ((Measure.le_iff'.1 hRle _).trans hνE.le), ?_⟩
+  · rw [add_comm]; exact Measure.haveLebesgueDecomposition_add ν φ
+  · -- `R` lives on a `φ`-null set `Z`
+    have hsing := Measure.mutuallySingular_singularPart ν φ
+    set Z := hsing.nullSetᶜ
+    have hZ : MeasurableSet Z := hsing.measurableSet_nullSet.compl
+    have hφZ : φ.real Z = 0 := by rw [measureReal_def, hsing.measure_compl_nullSet]; rfl
+    have hRZ : R.real univ = R.real Z := by
+      rw [← measureReal_add_measureReal_compl (μ := R) hZ, compl_compl,
+        measureReal_def R hsing.nullSet, hsing.measure_nullSet]; simp
+    have hνZ : ν.real Z ≤ (1 - ε) * μ.real univ := by
+      rw [bind_real_eq _ _ hZ]
+      calc ∫ s, (kpow κ N s).real Z ∂μ ≤ ∫ _s, (1 - ε) ∂μ :=
+            integral_mono (integrable_of_abs_le μ (Kernel.measurable_coe _ hZ).ennreal_toReal
+              (C := 1) fun s => by
+                rw [abs_of_nonneg measureReal_nonneg]; exact measureReal_le_one)
+              (integrable_const _) fun s => hD.2.2.2 Z hZ (by rw [hφZ]; exact hD.2.2.1.le) s
+        _ = (1 - ε) * μ.real univ := by rw [integral_const, smul_eq_mul, mul_comm]
+    rw [hRZ]
+    exact (ENNReal.toReal_mono (measure_ne_top _ _) (Measure.le_iff'.1 hRle Z)).trans hνZ
+
+/-- **Step 2.** Every finite measure concentrated on an ergodic set carrying an invariant
+probability measure has uniformly Cauchy Cesàro averages. -/
+theorem cesaroCauchy_of_concentrated {φ : Measure S} {N : ℕ} {ε : ℝ} (hD : DoeblinFor κ φ N ε)
+    {E : Set S} (hE : IsErgodicSetD κ φ E) {π : Measure S} [IsProbabilityMeasure π]
+    (hπ : adjointOp κ π = π) (hπE : π E = 1) (μ : Measure S) [IsFiniteMeasure μ]
+    (hμE : μ Eᶜ = 0) : CesaroCauchy κ μ := by
+  have hφ := hD.1
+  have hε := hD.2.2.1
+  have : Nonempty S := ⟨hE.1.2.1.some⟩
+  have h1 : 0 ≤ 1 - ε := by linarith [doeblin_eps_le_one hD]
+  -- the iterated decomposition
+  have hiter : ∀ (j : ℕ) (μ : Measure S) [IsFiniteMeasure μ], μ Eᶜ = 0 →
+      ∃ (G R : Measure S) (_ : IsFiniteMeasure G) (_ : IsFiniteMeasure R),
+        adjointOp (kpow κ (N * j)) μ = G + R ∧ CesaroCauchy κ G ∧ R Eᶜ = 0 ∧
+          R.real univ ≤ (1 - ε) ^ j * μ.real univ := by
+    intro j
+    induction j with
+    | zero =>
+      intro μ _ hμE
+      exact ⟨0, μ, inferInstance, inferInstance, by rw [mul_zero, adjointOp_kpow_zero, zero_add],
+        cesaroCauchy_zero, hμE, by simp⟩
+    | succ j ih =>
+      intro μ _ hμE
+      obtain ⟨G, R, hG, hR, hdec, hGc, hRE, hRu⟩ := ih μ hμE
+      obtain ⟨K, R', hK, hR', hdec', hKφ, hKE, hR'E, hR'u⟩ := doeblin_decomp hD hE.1 R hRE
+      have := isFinite_adjoint (κ := κ) N G
+      refine ⟨adjointOp (kpow κ N) G + K, R', inferInstance, hR', ?_,
+        (cesaroCauchy_adjoint hGc N).add
+          (cesaroCauchy_of_absCont hπ (absCont_of_concentrated hE hπ hπE hKφ hKE)), hR'E, ?_⟩
+      · rw [show N * (j + 1) = N + N * j by ring, adjoint_add, hdec, adjointOp_add, hdec',
+          add_assoc]
+      · calc R'.real univ ≤ (1 - ε) * R.real univ := hR'u
+          _ ≤ (1 - ε) * ((1 - ε) ^ j * μ.real univ) := mul_le_mul_of_nonneg_left hRu h1
+          _ = (1 - ε) ^ (j + 1) * μ.real univ := by ring
+  refine cesaroCauchy_of_approx fun η hη => ?_
+  have hε1 : 1 - ε < 1 := by linarith
+  · obtain ⟨j, hj⟩ := exists_pow_lt_of_lt_one (show 0 < η / (μ.real univ + 1) by positivity) hε1
+    obtain ⟨G, R, hG, hR, hdec, hGc, -, hRu⟩ := hiter j μ hμE
+    refine ⟨N * j, G, R, hG, hR, hdec, hGc, hRu.trans ?_⟩
+    have hμ0 := measureReal_nonneg (μ := μ) (s := univ)
+    calc (1 - ε) ^ j * μ.real univ ≤ η / (μ.real univ + 1) * (μ.real univ + 1) :=
+          mul_le_mul hj.le (by linarith) hμ0 (by positivity)
+      _ = η := by field_simp
+
+/-! ### Absorption into the ergodic sets -/
+
+omit [IsMarkovKernel κ] in
+theorem iInf_shift_antitone {a : ℕ → ℝ≥0∞} (ha : Antitone a) (m : ℕ) :
+    ⨅ n, a (m + n) = ⨅ n, a n :=
+  le_antisymm (le_iInf fun n => (iInf_le _ n).trans (ha (Nat.le_add_left n m)))
+    (le_iInf fun n => iInf_le _ (m + n))
+
+/-- **Absorption.** From every state, the probability of being in the transient set
+`F = (⋃ₘ Eₘ)ᶜ` tends to `0`. -/
+theorem tendsto_kpow_transient [Nonempty S] {φ : Measure S} {N : ℕ} {ε : ℝ}
+    (hD : DoeblinFor κ φ N ε) {M : ℕ} {E : Fin M → Set S} (hE : ∀ m, IsErgodicSetD κ φ (E m))
+    (hall : ∀ F, IsErgodicSetD κ φ F → ∃ m, φ (F ∩ E m) = φ F ∧ φ (F ∩ E m) = φ (E m))
+    (s : S) : Tendsto (fun n => kpow κ n s (⋃ m, E m)ᶜ) atTop (𝓝 0) := by
+  have hφ := hD.1
+  have hε := hD.2.2.1
+  set F := (⋃ m, E m)ᶜ
+  have hF : MeasurableSet F := (MeasurableSet.iUnion fun m => (hE m).1.1).compl
+  have hzero : ∀ m, ∀ t ∈ E m, ∀ n, kpow κ n t F = 0 := by
+    intro m t ht n
+    rcases Nat.eq_zero_or_pos n with rfl | hn
+    · simp only [kpow, Kernel.id_apply]
+      rw [Measure.dirac_apply' t hF, indicator_of_notMem
+        (show t ∉ F from fun h => h (mem_iUnion.2 ⟨m, ht⟩))]
+    · have := isMarkov_kpow (κ := κ) n
+      have h1 := (hE m).1.2.2 t ht n hn
+      have hsub : F ⊆ (E m)ᶜ := fun x hx hxm => hx (mem_iUnion.2 ⟨m, hxm⟩)
+      refine measure_mono_null hsub ?_
+      rw [prob_compl_eq_zero_iff (hE m).1.1]; exact h1
+  have hstep : ∀ t, kpow κ 1 t F ≤ F.indicator 1 t := fun t => by
+    have := isMarkov_kpow (κ := κ) 1
+    by_cases ht : t ∈ F
+    · rw [indicator_of_mem ht]; exact prob_le_one
+    · obtain ⟨m, hm⟩ := mem_iUnion.1 (not_not.1 ht)
+      rw [hzero m t hm 1]; exact zero_le
+  have hanti : ∀ t, Antitone fun n => kpow κ n t F := fun t =>
+    antitone_nat_of_succ_le fun n => by
+      have := isMarkov_kpow (κ := κ) n
+      rw [kpow_add_apply n 1 t hF]
+      calc ∫⁻ s', kpow κ 1 s' F ∂kpow κ n t ≤ ∫⁻ s', F.indicator 1 s' ∂kpow κ n t :=
+            lintegral_mono hstep
+        _ = kpow κ n t F := lintegral_indicator_one hF
+  set g : S → ℝ≥0∞ := fun t => ⨅ n, kpow κ n t F
+  have hgm : Measurable g := Measurable.iInf fun n => Kernel.measurable_coe _ hF
+  have hg1 : ∀ t, g t ≤ 1 := fun t => by
+    have := isMarkov_kpow (κ := κ) 0
+    exact (iInf_le _ 0).trans prob_le_one
+  have hgE : ∀ m, ∀ t ∈ E m, g t = 0 := fun m t ht =>
+    le_antisymm ((iInf_le _ 0).trans (le_of_eq (hzero m t ht 0))) zero_le
+  -- `g` is harmonic
+  have hharm : ∀ t m, g t = ∫⁻ t', g t' ∂kpow κ m t := by
+    intro t m
+    have := isMarkov_kpow (κ := κ) m
+    rw [lintegral_iInf (fun n => Kernel.measurable_coe _ hF)
+      (fun a b hab t' => hanti t' hab) (by
+        have := isMarkov_kpow (κ := κ) 0
+        exact ne_top_of_le_ne_top (ENNReal.one_ne_top) (by
+          calc ∫⁻ t', kpow κ 0 t' F ∂kpow κ m t ≤ ∫⁻ _t', 1 ∂kpow κ m t :=
+                lintegral_mono fun t' => prob_le_one
+            _ = 1 := by simp))]
+    simp_rw [← kpow_add_apply m _ t hF]
+    exact (iInf_shift_antitone (hanti t) m).symm
+  set gr : S → ℝ := fun t => (g t).toReal
+  have hgrm : Measurable gr := hgm.ennreal_toReal
+  have hgr01 : ∀ t, 0 ≤ gr t ∧ gr t ≤ 1 := fun t =>
+    ⟨ENNReal.toReal_nonneg, ENNReal.toReal_le_of_le_ofReal zero_le_one (by
+      rw [ENNReal.ofReal_one]; exact hg1 t)⟩
+  have hgri : ∀ (μ : Measure S) [IsFiniteMeasure μ], Integrable gr μ := fun μ _ =>
+    integrable_of_abs_le μ hgrm (C := 1) fun t => by
+      rw [abs_of_nonneg (hgr01 t).1]; exact (hgr01 t).2
+  have hharmr : ∀ t m, gr t = ∫ t', gr t' ∂kpow κ m t := fun t m => by
+    have := isMarkov_kpow (κ := κ) m
+    simp only [gr]
+    rw [integral_toReal hgm.aemeasurable (Eventually.of_forall fun t' =>
+      lt_of_le_of_lt (hg1 t') ENNReal.one_lt_top), ← hharm]
+  set γ := ⨆ t, gr t
+  have hbdd : BddAbove (range gr) := ⟨1, by rintro _ ⟨t, rfl⟩; exact (hgr01 t).2⟩
+  have hgrγ : ∀ t, gr t ≤ γ := fun t => le_ciSup hbdd t
+  -- `γ ≤ 0`
+  have hγ : γ ≤ 0 := by
+    by_contra hγpos
+    push Not at hγpos
+    set B : ℝ → Set S := fun η' => {t | γ - η' < gr t}
+    have hBm : ∀ η', MeasurableSet (B η') := fun η' => measurableSet_lt measurable_const hgrm
+    -- from a nearly maximal point the chain stays nearly maximal
+    have hkey : ∀ t η η', 0 < η' → γ - η < gr t → 1 - η / η' < (kpow κ N t).real (B η') := by
+      intro t η η' hη' ht
+      have := isMarkov_kpow (κ := κ) N
+      have hle : ∀ t', gr t' ≤ γ - η' + η' * (B η').indicator (fun _ => (1 : ℝ)) t' :=
+        fun t' => by
+          by_cases h : t' ∈ B η'
+          · rw [indicator_of_mem h, mul_one]; linarith [hgrγ t']
+          · rw [indicator_of_notMem h, mul_zero, add_zero]
+            simp only [B, mem_ofPred_eq, not_lt] at h; exact h
+      have hI : Integrable (fun t' => η' * (B η').indicator (fun _ => (1 : ℝ)) t')
+          (kpow κ N t) := ((integrable_const (1 : ℝ)).indicator (hBm η')).const_mul η'
+      have hint : ∫ t', gr t' ∂kpow κ N t ≤
+          ∫ t', (γ - η' + η' * (B η').indicator (fun _ => (1 : ℝ)) t') ∂kpow κ N t :=
+        integral_mono (hgri (kpow κ N t)) ((integrable_const (γ - η')).add hI) hle
+      have hrhs : ∫ t', (γ - η' + η' * (B η').indicator (fun _ => (1 : ℝ)) t') ∂kpow κ N t =
+          γ - η' + η' * (kpow κ N t).real (B η') := by
+        rw [integral_add (integrable_const _) hI, integral_const, probReal_univ, one_smul,
+          integral_const_mul, integral_indicator_const _ (hBm η'), smul_eq_mul, mul_one]
+      rw [hrhs, ← hharmr t N] at hint
+      have h3 : γ - η < γ - η' + η' * (kpow κ N t).real (B η') := lt_of_lt_of_le ht hint
+      have h4 : 1 - η / η' = (η' - η) / η' := by field_simp
+      rw [h4, div_lt_iff₀ hη']
+      linarith
+    have hBlarge : ∀ η', 0 < η' → ε < φ.real (B η') := by
+      intro η' hη'
+      obtain ⟨t, ht⟩ := exists_lt_of_lt_ciSup (show γ - ε * η' / 2 < γ by
+        have : 0 < ε * η' / 2 := by positivity
+        linarith)
+      have h1 := hkey t (ε * η' / 2) η' hη' ht
+      have h2 : ε * η' / 2 / η' = ε / 2 := by field_simp
+      rw [h2] at h1
+      by_contra hle
+      have := hD.2.2.2 (B η') (hBm η') (not_lt.1 hle) t
+      linarith
+    -- the set where `g` is maximal
+    set Binf := {t | γ ≤ gr t}
+    have hBinfm : MeasurableSet Binf := measurableSet_le measurable_const hgrm
+    have hBinf_eq : Binf = ⋂ k : ℕ, B (1 / ((k : ℝ) + 1)) := by
+      ext t
+      simp only [Binf, B, mem_ofPred_eq, mem_iInter]
+      constructor
+      · intro h k; have : (0 : ℝ) < 1 / ((k : ℝ) + 1) := by positivity
+        linarith
+      · intro h
+        refine le_of_forall_pos_lt_add fun δ hδ => ?_
+        obtain ⟨k, hk⟩ := exists_nat_one_div_lt hδ
+        linarith [h k]
+    have hBinfφ : ε ≤ φ.real Binf := by
+      have hanti' : Antitone fun k : ℕ => B (1 / ((k : ℝ) + 1)) := fun a b hab t ht => by
+        simp only [B, mem_ofPred_eq] at ht ⊢
+        have : 1 / ((b : ℝ) + 1) ≤ 1 / ((a : ℝ) + 1) :=
+          one_div_le_one_div_of_le (by positivity) (by
+            have : (a : ℝ) ≤ b := by exact_mod_cast hab
+            linarith)
+        linarith
+      have h1 := tendsto_measure_iInter_atTop (μ := φ)
+        (fun k : ℕ => (hBm (1 / ((k : ℝ) + 1))).nullMeasurableSet) hanti' ⟨0, measure_ne_top _ _⟩
+      rw [← hBinf_eq] at h1
+      have h2 := (ENNReal.tendsto_toReal (measure_ne_top φ Binf)).comp h1
+      exact ge_of_tendsto h2 (Eventually.of_forall fun k =>
+        (hBlarge (1 / ((k : ℝ) + 1)) (by positivity)).le)
+    have hBinf_ne : Binf.Nonempty := by
+      by_contra hemp
+      rw [not_nonempty_iff_eq_empty] at hemp
+      rw [hemp, measureReal_empty] at hBinfφ
+      linarith
+    -- `Binf` is invariant
+    have hBinv : IsInvariantSet κ Binf := by
+      refine ⟨hBinfm, hBinf_ne, fun t ht n hn => ?_⟩
+      have := isMarkov_kpow (κ := κ) n
+      have hγt : gr t = γ := le_antisymm (hgrγ t) ht
+      have h0 : ∫ t', (γ - gr t') ∂kpow κ n t = 0 := by
+        rw [integral_sub (integrable_const _) (hgri _), integral_const, probReal_univ, one_smul,
+          ← hharmr t n, hγt, sub_self]
+      have hae := (integral_eq_zero_iff_of_nonneg (fun t' => sub_nonneg.2 (hgrγ t'))
+        ((integrable_const _).sub (hgri _))).1 h0
+      rw [← prob_compl_eq_zero_iff hBinfm]
+      refine measure_mono_null (fun t' ht' => ?_) (ae_iff.1 hae)
+      simp only [Binf, mem_compl_iff, mem_ofPred_eq, not_le] at ht'
+      simp only [mem_ofPred_eq, Pi.zero_apply]
+      linarith
+    obtain ⟨E', hE'sub, hE'erg⟩ := exists_ergodic_subset_of_invariant hD hBinv
+    obtain ⟨m, hm, -⟩ := hall E' hE'erg
+    have hdisj : E' ∩ E m = ∅ := eq_empty_of_forall_notMem fun t ⟨h1, h2⟩ => by
+      have := hE'sub h1
+      simp only [Binf, mem_ofPred_eq, gr, hgE m t h2, ENNReal.toReal_zero] at this
+      linarith
+    rw [hdisj, measure_empty] at hm
+    have := invariant_real_gt hD hE'erg.1
+    rw [measureReal_def, ← hm, ENNReal.toReal_zero] at this
+    linarith
+  have hg0 : g s = 0 := by
+    have h1 : gr s = 0 := le_antisymm ((hgrγ s).trans hγ) (hgr01 s).1
+    rcases (ENNReal.toReal_eq_zero_iff _).1 h1 with h | h
+    · exact h
+    · exact absurd h (ne_top_of_le_ne_top ENNReal.one_ne_top (hg1 s))
+  rw [← hg0]
+  exact tendsto_atTop_iInf (hanti s)
+
+/-- Integrated absorption: the mass of `T*ⁿμ` in the transient set tends to `0`. -/
+theorem tendsto_adjoint_transient [Nonempty S] {φ : Measure S} {N : ℕ} {ε : ℝ}
+    (hD : DoeblinFor κ φ N ε) {M : ℕ} {E : Fin M → Set S} (hE : ∀ m, IsErgodicSetD κ φ (E m))
+    (hall : ∀ F, IsErgodicSetD κ φ F → ∃ m, φ (F ∩ E m) = φ F ∧ φ (F ∩ E m) = φ (E m))
+    (μ : Measure S) [IsFiniteMeasure μ] :
+    Tendsto (fun n => adjointOp (kpow κ n) μ (⋃ m, E m)ᶜ) atTop (𝓝 0) := by
+  have hF : MeasurableSet (⋃ m, E m)ᶜ := (MeasurableSet.iUnion fun m => (hE m).1.1).compl
+  simp_rw [adjointOp_apply _ _ hF]
+  have := tendsto_lintegral_of_dominated_convergence (μ := μ) (fun _ => 1)
+    (fun n => Kernel.measurable_coe (kpow κ n) hF)
+    (fun n => Eventually.of_forall fun s => by
+      have := isMarkov_kpow (κ := κ) n; exact prob_le_one)
+    (by simp) (Eventually.of_forall fun s => tendsto_kpow_transient hD hE hall s)
+  simpa using this
+
+/-- Each ergodic set carries an invariant probability measure. -/
+theorem exists_invariant_on [Nonempty S] {φ : Measure S} {N : ℕ} {ε : ℝ}
+    (hD : DoeblinFor κ φ N ε) {E : Set S} (hE : IsErgodicSetD κ φ E) :
+    ∃ π : Measure S, IsProbabilityMeasure π ∧ adjointOp κ π = π ∧ π E = 1 := by
+  obtain ⟨s, hs⟩ := hE.1.2.1
+  obtain ⟨π, hπp, hπinv, hπr⟩ := exists_invariant hD (Measure.dirac s)
+  refine ⟨π, hπp, hπinv, ?_⟩
+  have hone : ∀ n, (cesaroM κ n (Measure.dirac s)).real E = 1 := fun n => by
+    rw [cesaroM_real]
+    have : ∀ k, (adjointOp (kpow κ (k + 1)) (Measure.dirac s)).real E = 1 := fun k => by
+      rw [adjointOp, Measure.dirac_bind (kpow κ (k + 1)).measurable, measureReal_def,
+        hE.1.2.2 s hs (k + 1) (by omega), ENNReal.toReal_one]
+    simp only [this, Finset.sum_const, Finset.card_range, nsmul_eq_mul, mul_one]
+    push_cast
+    exact inv_mul_cancel₀ (by positivity)
+  have hlim : cesaroLim κ (Measure.dirac s) E = 1 :=
+    tendsto_nhds_unique (tendsto_cesaroLim _ E) (tendsto_const_nhds.congr fun n => (hone n).symm)
+  rw [← ofReal_measureReal (μ := π) (s := E), hπr E hE.1.1, hlim, ENNReal.ofReal_one]
+
+/-- Every finite measure has uniformly Cauchy Cesàro averages under Condition D. -/
+theorem cesaroCauchy_all [Nonempty S] {φ : Measure S} {N : ℕ} {ε : ℝ} (hD : DoeblinFor κ φ N ε)
+    (μ : Measure S) [IsFiniteMeasure μ] : CesaroCauchy κ μ := by
+  obtain ⟨-, -, -, M, -, -, E, hE, hdisj, hall⟩ := theorem_11_9a hD
+  choose π hπp hπinv hπE using fun m => exists_invariant_on hD (hE m)
+  refine cesaroCauchy_of_approx fun η hη => ?_
+  set F := (⋃ m, E m)ᶜ
+  have hEm : ∀ m, MeasurableSet (E m) := fun m => (hE m).1.1
+  have hFm : MeasurableSet F := (MeasurableSet.iUnion hEm).compl
+  have hlim := (ENNReal.tendsto_toReal (ENNReal.zero_ne_top)).comp
+    (tendsto_adjoint_transient hD hE hall μ)
+  obtain ⟨n, hn⟩ := (hlim.eventually (gt_mem_nhds (show (0 : ℝ≥0∞).toReal < η by simpa))).exists
+  set ν := adjointOp (kpow κ n) μ
+  have hν : IsFiniteMeasure ν := isFinite_adjoint n μ
+  have hsplit : ν = ∑ m, ν.restrict (E m) + ν.restrict F := by
+    rw [← Measure.sum_fintype, ← Measure.restrict_iUnion hdisj hEm,
+      Measure.restrict_add_restrict_compl (MeasurableSet.iUnion hEm)]
+  have hGfin : IsFiniteMeasure (∑ m, ν.restrict (E m)) := by
+    refine ⟨?_⟩
+    rw [Measure.coe_finsetSum, Finset.sum_apply]
+    exact ENNReal.sum_lt_top.2 fun m _ => measure_lt_top _ _
+  refine ⟨n, ∑ m, ν.restrict (E m), ν.restrict F, hGfin, inferInstance, hsplit,
+    cesaroCauchy_finsetSum _ _ fun m _ => cesaroCauchy_of_concentrated hD (hE m) (hπinv m)
+      (hπE m) _ (by rw [Measure.restrict_apply (hEm m).compl, compl_inter_self, measure_empty]),
+    ?_⟩
+  rw [measureReal_restrict_apply MeasurableSet.univ, univ_inter]
+  exact hn.le
+
+/-- **Theorem 11.9b.** Under Condition D, for every `λ₀` the Cesàro averages
+`(1/N) Σ_{n=1}^{N} T*ⁿλ₀` converge in total variation, and the limit is invariant. -/
+theorem theorem_11_9b [Nonempty S] {φ : Measure S} {N : ℕ} {ε : ℝ} (hD : DoeblinFor κ φ N ε)
+    (l₀ : Measure S) [IsProbabilityMeasure l₀] :
+    ∃ μ : Measure S, IsProbabilityMeasure μ ∧ adjointOp κ μ = μ ∧
+      Tendsto (fun n => tvDist (cesaroM κ n l₀) μ) atTop (𝓝 0) := by
+  have : ∀ n, IsProbabilityMeasure (cesaroM κ n l₀) := fun n => isProb_cesaroM n l₀
+  obtain ⟨μ, hμ, hlim⟩ := lemma_11_8 (fun n => cesaroM κ n l₀)
+    (tvDist_cesaro_le (cesaroCauchy_all hD l₀))
+  refine ⟨μ, hμ, ?_, hlim⟩
+  have hPfin : IsFiniteMeasure (adjointOp κ μ) := by
+    have := isFinite_adjoint (κ := κ) 1 μ; rwa [kpow_one] at this
+  refine Measure.ext fun A hA => ?_
+  have hset : Tendsto (fun n => (cesaroM κ n l₀).real A) atTop (𝓝 (μ.real A)) := by
+    rw [tendsto_iff_norm_sub_tendsto_zero]
+    refine squeeze_zero_norm (fun n => ?_) (by simpa using hlim.div_const 2)
+    rw [norm_norm, Real.norm_eq_abs]
+    have := two_abs_le_tvDist (cesaroM κ n l₀) μ hA
+    linarith
+  set f : S → ℝ := fun s => (κ s).real A
+  have hf : Measurable f := (κ.measurable_coe hA).ennreal_toReal
+  have hf1 : ∀ s, |f s| ≤ 1 := fun s => by
+    rw [abs_of_nonneg measureReal_nonneg]; exact measureReal_le_one
+  have hint : Tendsto (fun n => ∫ s, f s ∂cesaroM κ n l₀) atTop (𝓝 (∫ s, f s ∂μ)) := by
+    rw [tendsto_iff_norm_sub_tendsto_zero]
+    refine squeeze_zero_norm (fun n => ?_) hlim
+    rw [norm_norm, Real.norm_eq_abs]
+    exact abs_integral_sub_le_tvDist _ _ hf hf1
+  have hsh : Tendsto (fun n => ∫ s, f s ∂cesaroM κ n l₀) atTop (𝓝 (μ.real A)) := by
+    have hd : Tendsto (fun n => (cesaroM κ n (adjointOp (kpow κ 1) l₀)).real A -
+        (cesaroM κ n l₀).real A) atTop (𝓝 0) := by
+      refine squeeze_zero_norm (fun n => ?_) tendsto_one_div_add_atTop_nhds_zero_nat
+      rw [Real.norm_eq_abs]
+      refine (abs_cesaro_shift_le n 1 l₀ A).trans (le_of_eq ?_)
+      simp [div_eq_mul_inv]
+    have := hd.add hset
+    rw [zero_add] at this
+    refine this.congr fun n => ?_
+    have := isFinite_cesaroM (κ := κ) n l₀
+    rw [sub_add_cancel, ← adjoint_cesaroM, bind_real_eq κ _ hA]
+  have heq : (adjointOp κ μ).real A = μ.real A := by
+    rw [bind_real_eq κ μ hA]; exact tendsto_nhds_unique hint hsh
+  exact (ENNReal.toReal_eq_toReal_iff' (measure_ne_top _ _) (measure_ne_top _ _)).1 heq
+
+/-- An invariant measure gives the transient set measure zero. -/
+theorem invariant_transient_null [Nonempty S] {φ : Measure S} {N : ℕ} {ε : ℝ}
+    (hD : DoeblinFor κ φ N ε) {M : ℕ} {E : Fin M → Set S} (hE : ∀ m, IsErgodicSetD κ φ (E m))
+    (hall : ∀ F, IsErgodicSetD κ φ F → ∃ m, φ (F ∩ E m) = φ F ∧ φ (F ∩ E m) = φ (E m))
+    {μ : Measure S} [IsProbabilityMeasure μ] (hμ : adjointOp κ μ = μ) :
+    μ (⋃ m, E m)ᶜ = 0 := by
+  have h := tendsto_adjoint_transient hD hE hall μ
+  simp only [invariant_iterate hμ] at h
+  exact tendsto_nhds_unique tendsto_const_nhds h
+
+/-- The restriction of an invariant measure to an ergodic set is invariant. -/
+theorem restrict_invariant [Nonempty S] {φ : Measure S} {N : ℕ} {ε : ℝ}
+    (hD : DoeblinFor κ φ N ε) {M : ℕ} {E : Fin M → Set S} (hE : ∀ m, IsErgodicSetD κ φ (E m))
+    (hdisj : Pairwise (Function.onFun Disjoint E))
+    (hall : ∀ F, IsErgodicSetD κ φ F → ∃ m, φ (F ∩ E m) = φ F ∧ φ (F ∩ E m) = φ (E m))
+    {μ : Measure S} [IsProbabilityMeasure μ] (hμ : adjointOp κ μ = μ) (m : Fin M) :
+    adjointOp κ (μ.restrict (E m)) = μ.restrict (E m) := by
+  have hEm : ∀ m, MeasurableSet (E m) := fun m => (hE m).1.1
+  have hκE : ∀ m', ∀ s ∈ E m', κ s (E m') = 1 := fun m' s hs => by
+    have := (hE m').1.2.2 s hs 1 le_rfl; rwa [kpow_one] at this
+  have hF := invariant_transient_null hD hE hall hμ
+  ext A hA
+  rw [adjointOp_apply κ _ hA, Measure.restrict_apply hA]
+  have h1 : μ (A ∩ E m) = ∫⁻ s, κ s (A ∩ E m) ∂μ := by
+    rw [← adjointOp_apply κ _ (hA.inter (hEm m)), hμ]
+  rw [h1, ← lintegral_add_compl (fun s => κ s (A ∩ E m)) (hEm m)]
+  have hoff : ∫⁻ s in (E m)ᶜ, κ s (A ∩ E m) ∂μ = 0 := by
+    rw [lintegral_eq_zero_iff (κ.measurable_coe (hA.inter (hEm m)))]
+    have hae : ∀ᵐ s ∂μ, s ∈ ⋃ m, E m := by
+      rw [ae_iff]; simpa [compl_def] using hF
+    rw [EventuallyEq, ae_restrict_iff' (hEm m).compl]
+    filter_upwards [hae] with s hs hsm
+    obtain ⟨m', hm'⟩ := mem_iUnion.1 hs
+    have hne : m' ≠ m := fun h => hsm (h ▸ hm')
+    have h0 : κ s (E m) = 0 := by
+      refine measure_mono_null (hdisj hne).subset_compl_left ?_
+      rw [prob_compl_eq_zero_iff (hEm m')]; exact hκE m' s hm'
+    exact measure_mono_null inter_subset_right h0
+  rw [hoff, add_zero]
+  refine setLIntegral_congr_fun (hEm m) fun s hs => ?_
+  symm
+  have h0 : κ s (A \ E m) = 0 := measure_mono_null (show A \ E m ⊆ (E m)ᶜ from
+    fun x hx => hx.2) (by
+    rw [prob_compl_eq_zero_iff (hEm m)]; exact hκE m s hs)
+  rw [← measure_inter_add_sdiff A (hEm m), h0, add_zero]
+
+/-- **Theorem 11.9c.** Under Condition D there are `M ≥ 1` ergodic sets `E₁, …, E_M`, each
+carrying an invariant probability measure `πₘ`, and every invariant probability measure is the
+convex combination `Σₘ μ(Eₘ) πₘ`. -/
+theorem theorem_11_9c [Nonempty S] {φ : Measure S} {N : ℕ} {ε : ℝ} (hD : DoeblinFor κ φ N ε) :
+    ∃ (M : ℕ) (E : Fin M → Set S) (π : Fin M → Measure S), 1 ≤ M ∧
+      (∀ m, IsErgodicSetD κ φ (E m)) ∧ Pairwise (Function.onFun Disjoint E) ∧
+      (∀ m, IsProbabilityMeasure (π m) ∧ adjointOp κ (π m) = π m ∧ π m (E m) = 1) ∧
+      ∀ μ : Measure S, IsProbabilityMeasure μ → adjointOp κ μ = μ →
+        ∑ m, μ (E m) = 1 ∧ μ = ∑ m, μ (E m) • π m := by
+  obtain ⟨-, -, -, M, hM1, -, E, hE, hdisj, hall⟩ := theorem_11_9a hD
+  choose π hπp hπinv hπE using fun m => exists_invariant_on hD (hE m)
+  refine ⟨M, E, π, hM1, hE, hdisj, fun m => ⟨hπp m, hπinv m, hπE m⟩, fun μ hμp hμ => ?_⟩
+  have hEm : ∀ m, MeasurableSet (E m) := fun m => (hE m).1.1
+  have hF := invariant_transient_null hD hE hall hμ
+  have hrestr : ∀ m, μ.restrict (E m) = μ (E m) • π m := by
+    intro m
+    have hinv := restrict_invariant hD hE hdisj hall hμ m
+    by_cases h0 : μ (E m) = 0
+    · rw [h0, zero_smul, Measure.restrict_eq_zero.2 h0]
+    · set c := (μ (E m))⁻¹
+      have hρp : IsProbabilityMeasure (c • μ.restrict (E m)) := ⟨by
+        rw [Measure.smul_apply, Measure.restrict_apply MeasurableSet.univ, univ_inter,
+          smul_eq_mul, ENNReal.inv_mul_cancel h0 (measure_ne_top _ _)]⟩
+      have hρinv : adjointOp κ (c • μ.restrict (E m)) = c • μ.restrict (E m) := by
+        rw [adjointOp_smul, hinv]
+      have hρE : (c • μ.restrict (E m)) (E m) = 1 := by
+        rw [Measure.smul_apply, Measure.restrict_apply (hEm m), inter_self, smul_eq_mul,
+          ENNReal.inv_mul_cancel h0 (measure_ne_top _ _)]
+      have := invariant_unique hD (hE m) hρinv (hπinv m) hρE (hπE m)
+      rw [← this, smul_smul, ENNReal.mul_inv_cancel h0 (measure_ne_top _ _), one_smul]
+  have hsplit : μ = ∑ m, μ.restrict (E m) := by
+    rw [← Measure.sum_fintype, ← Measure.restrict_iUnion hdisj hEm]
+    conv_lhs => rw [← Measure.restrict_add_restrict_compl (μ := μ) (MeasurableSet.iUnion hEm)]
+    rw [Measure.restrict_eq_zero.2 hF, add_zero]
+  refine ⟨?_, by rw [← Finset.sum_congr rfl fun m _ => hrestr m]; exact hsplit⟩
+  calc ∑ m, μ (E m) = μ (⋃ m, E m) := by
+        rw [measure_iUnion hdisj hEm, tsum_fintype]
+    _ = 1 := by
+        rw [← prob_compl_eq_zero_iff (MeasurableSet.iUnion hEm)]; exact hF
+
+/-- Under the reachability condition of Theorem 11.10 there is exactly one ergodic set in the
+decomposition of Theorem 11.9. -/
+theorem ergodic_count_eq_one [Nonempty S] {φ : Measure S} {N : ℕ} {ε : ℝ}
+    (hD : DoeblinFor κ φ N ε)
+    (hirr : ∀ A, MeasurableSet A → 0 < φ A → ∀ s, ∃ n, 1 ≤ n ∧ 0 < kpow κ n s A)
+    {M : ℕ} {E : Fin M → Set S} (hM : 1 ≤ M) (hE : ∀ m, IsErgodicSetD κ φ (E m))
+    (hdisj : Pairwise (Function.onFun Disjoint E)) : M = 1 := by
+  by_contra hne
+  have h2 : 2 ≤ M := by omega
+  set m₀ : Fin M := ⟨0, by omega⟩
+  set m₁ : Fin M := ⟨1, by omega⟩
+  have hne' : m₀ ≠ m₁ := fun h => by simpa [m₀, m₁] using congrArg Fin.val h
+  have h := (theorem_11_10a hD hirr (hE m₀) (hE m₁)).1
+  rw [(hdisj hne').inter_eq, measure_empty] at h
+  have := invariant_real_gt hD (hE m₀).1
+  rw [measureReal_def, ← h, ENNReal.toReal_zero] at this
+  linarith [hD.2.2.1]
+
+/-- **Theorem 11.10b.** Under the reachability condition, `T*` has exactly one invariant
+probability measure. -/
+theorem theorem_11_10b [Nonempty S] {φ : Measure S} {N : ℕ} {ε : ℝ} (hD : DoeblinFor κ φ N ε)
+    (hirr : ∀ A, MeasurableSet A → 0 < φ A → ∀ s, ∃ n, 1 ≤ n ∧ 0 < kpow κ n s A) :
+    ∃! μ : Measure S, IsProbabilityMeasure μ ∧ adjointOp κ μ = μ := by
+  obtain ⟨M, E, π, hM, hE, hdisj, hπ, hall⟩ := theorem_11_9c hD
+  have hM1 := ergodic_count_eq_one hD hirr hM hE hdisj
+  subst hM1
+  obtain ⟨hπp, hπinv, -⟩ := hπ 0
+  refine ⟨π 0, ⟨hπp, hπinv⟩, fun μ ⟨hμp, hμ⟩ => ?_⟩
+  obtain ⟨hsum, hdec⟩ := hall μ hμp hμ
+  simp only [Fin.sum_univ_one] at hsum hdec
+  rw [hdec, hsum, one_smul]
+
+/-- **Theorem 11.10c.** Under the reachability condition, the Cesàro averages of `T*ⁿλ₀`
+converge in total variation to the unique invariant measure, for every `λ₀`. -/
+theorem theorem_11_10c [Nonempty S] {φ : Measure S} {N : ℕ} {ε : ℝ} (hD : DoeblinFor κ φ N ε)
+    (hirr : ∀ A, MeasurableSet A → 0 < φ A → ∀ s, ∃ n, 1 ≤ n ∧ 0 < kpow κ n s A) :
+    ∃ lstar : Measure S, IsProbabilityMeasure lstar ∧ adjointOp κ lstar = lstar ∧
+      ∀ (l₀ : Measure S) [IsProbabilityMeasure l₀],
+        Tendsto (fun n => tvDist (cesaroM κ n l₀) lstar) atTop (𝓝 0) := by
+  obtain ⟨lstar, ⟨hp, hinv⟩, huniq⟩ := theorem_11_10b hD hirr
+  refine ⟨lstar, hp, hinv, fun l₀ _ => ?_⟩
+  obtain ⟨μ, hμp, hμinv, hlim⟩ := theorem_11_9b hD l₀
+  rwa [huniq μ ⟨hμp, hμinv⟩] at hlim
+
+end StokeyLucasPrescott.StrongConvergence
+
 set_option linter.style.longLine false
 #print axioms StokeyLucasPrescott.StrongConvergence.simplex
 #print axioms StokeyLucasPrescott.StrongConvergence.IsInvariantDist
@@ -4345,3 +6350,100 @@ set_option linter.style.longLine false
 #print axioms StokeyLucasPrescott.StrongConvergence.tvDist_iterate_le
 #print axioms StokeyLucasPrescott.StrongConvergence.theorem_11_12
 #print axioms StokeyLucasPrescott.StrongConvergence.theorem_11_12_converse
+#print axioms StokeyLucasPrescott.StrongConvergence.adjointOp_add
+#print axioms StokeyLucasPrescott.StrongConvergence.adjointOp_smul
+#print axioms StokeyLucasPrescott.StrongConvergence.adjointOp_zero
+#print axioms StokeyLucasPrescott.StrongConvergence.adjointOp_finsetSum
+#print axioms StokeyLucasPrescott.StrongConvergence.adjointOp_mono
+#print axioms StokeyLucasPrescott.StrongConvergence.adjointOp_kpow_univ
+#print axioms StokeyLucasPrescott.StrongConvergence.isFinite_adjoint
+#print axioms StokeyLucasPrescott.StrongConvergence.adjoint_real_le
+#print axioms StokeyLucasPrescott.StrongConvergence.cesaroM
+#print axioms StokeyLucasPrescott.StrongConvergence.cesaroM_apply
+#print axioms StokeyLucasPrescott.StrongConvergence.cesaroM_real
+#print axioms StokeyLucasPrescott.StrongConvergence.cesaroM_univ
+#print axioms StokeyLucasPrescott.StrongConvergence.isFinite_cesaroM
+#print axioms StokeyLucasPrescott.StrongConvergence.isProb_cesaroM
+#print axioms StokeyLucasPrescott.StrongConvergence.cesaroM_real_nonneg_le
+#print axioms StokeyLucasPrescott.StrongConvergence.cesaroM_add
+#print axioms StokeyLucasPrescott.StrongConvergence.cesaroM_smul
+#print axioms StokeyLucasPrescott.StrongConvergence.abs_cesaro_shift_le
+#print axioms StokeyLucasPrescott.StrongConvergence.CesaroCauchy
+#print axioms StokeyLucasPrescott.StrongConvergence.cesaroCauchy_zero
+#print axioms StokeyLucasPrescott.StrongConvergence.CesaroCauchy.add
+#print axioms StokeyLucasPrescott.StrongConvergence.CesaroCauchy.smul
+#print axioms StokeyLucasPrescott.StrongConvergence.cesaroCauchy_finsetSum
+#print axioms StokeyLucasPrescott.StrongConvergence.cesaroCauchy_of_approx
+#print axioms StokeyLucasPrescott.StrongConvergence.cesaroCauchy_adjoint
+#print axioms StokeyLucasPrescott.StrongConvergence.tvDist_cesaro_le
+#print axioms StokeyLucasPrescott.StrongConvergence.invariant_iterate
+#print axioms StokeyLucasPrescott.StrongConvergence.kpow_noReach_eq_one
+#print axioms StokeyLucasPrescott.StrongConvergence.exists_reach
+#print axioms StokeyLucasPrescott.StrongConvergence.pos_of_invariant
+#print axioms StokeyLucasPrescott.StrongConvergence.absCont_of_concentrated
+#print axioms StokeyLucasPrescott.StrongConvergence.posPart_invariant
+#print axioms StokeyLucasPrescott.StrongConvergence.invariant_unique
+#print axioms StokeyLucasPrescott.StrongConvergence.measurePreserving_fst_compProd
+#print axioms StokeyLucasPrescott.StrongConvergence.measurePreserving_snd_compProd
+#print axioms StokeyLucasPrescott.StrongConvergence.jFst
+#print axioms StokeyLucasPrescott.StrongConvergence.jSnd
+#print axioms StokeyLucasPrescott.StrongConvergence.markovL2
+#print axioms StokeyLucasPrescott.StrongConvergence.norm_markovL2_le
+#print axioms StokeyLucasPrescott.StrongConvergence.inner_real_apply
+#print axioms StokeyLucasPrescott.StrongConvergence.memLp_two_of_bound
+#print axioms StokeyLucasPrescott.StrongConvergence.inner_markovL2
+#print axioms StokeyLucasPrescott.StrongConvergence.markovL2_toLp
+#print axioms StokeyLucasPrescott.StrongConvergence.stepFn
+#print axioms StokeyLucasPrescott.StrongConvergence.measurable_stepFn
+#print axioms StokeyLucasPrescott.StrongConvergence.abs_stepFn_le
+#print axioms StokeyLucasPrescott.StrongConvergence.markovOpR_stepFn
+#print axioms StokeyLucasPrescott.StrongConvergence.markovL2_iterate
+#print axioms StokeyLucasPrescott.StrongConvergence.inner_iterate_adjoint
+#print axioms StokeyLucasPrescott.StrongConvergence.isFiniteMeasure_withDensity_of_bound
+#print axioms StokeyLucasPrescott.StrongConvergence.adjoint_withDensity_real
+#print axioms StokeyLucasPrescott.StrongConvergence.inner_toLp_toLp
+#print axioms StokeyLucasPrescott.StrongConvergence.cesaroCauchy_withDensity
+#print axioms StokeyLucasPrescott.StrongConvergence.adjointOp_kpow_zero
+#print axioms StokeyLucasPrescott.StrongConvergence.doeblinRef
+#print axioms StokeyLucasPrescott.StrongConvergence.doeblinRef_apply
+#print axioms StokeyLucasPrescott.StrongConvergence.tsum_inv_two_pow_succ
+#print axioms StokeyLucasPrescott.StrongConvergence.isFinite_doeblinRef
+#print axioms StokeyLucasPrescott.StrongConvergence.le_two_doeblinRef
+#print axioms StokeyLucasPrescott.StrongConvergence.adjoint_doeblinRef_le
+#print axioms StokeyLucasPrescott.StrongConvergence.adjoint_kpow_doeblinRef_le
+#print axioms StokeyLucasPrescott.StrongConvergence.doeblin_eps_le_one
+#print axioms StokeyLucasPrescott.StrongConvergence.refBound
+#print axioms StokeyLucasPrescott.StrongConvergence.refBound_nonneg
+#print axioms StokeyLucasPrescott.StrongConvergence.adjoint_real_le_ref
+#print axioms StokeyLucasPrescott.StrongConvergence.cesaro_small
+#print axioms StokeyLucasPrescott.StrongConvergence.abs_sub_levels_le
+#print axioms StokeyLucasPrescott.StrongConvergence.abs_integral_sub_levels_le
+#print axioms StokeyLucasPrescott.StrongConvergence.hyperfilter_le_atTop
+#print axioms StokeyLucasPrescott.StrongConvergence.cesaroLim
+#print axioms StokeyLucasPrescott.StrongConvergence.tendsto_ultra_of_mem
+#print axioms StokeyLucasPrescott.StrongConvergence.tendsto_cesaroLim
+#print axioms StokeyLucasPrescott.StrongConvergence.tendsto_ultra
+#print axioms StokeyLucasPrescott.StrongConvergence.cesaroLim_union
+#print axioms StokeyLucasPrescott.StrongConvergence.cesaroLim_nonneg
+#print axioms StokeyLucasPrescott.StrongConvergence.cesaroLim_univ
+#print axioms StokeyLucasPrescott.StrongConvergence.cesaroLim_empty
+#print axioms StokeyLucasPrescott.StrongConvergence.hasSum_cesaroLim
+#print axioms StokeyLucasPrescott.StrongConvergence.adjoint_cesaroM
+#print axioms StokeyLucasPrescott.StrongConvergence.tendsto_integral_ultra
+#print axioms StokeyLucasPrescott.StrongConvergence.exists_invariant
+#print axioms StokeyLucasPrescott.StrongConvergence.iSup_min_natCast
+#print axioms StokeyLucasPrescott.StrongConvergence.cesaroCauchy_of_absCont
+#print axioms StokeyLucasPrescott.StrongConvergence.doeblin_decomp
+#print axioms StokeyLucasPrescott.StrongConvergence.cesaroCauchy_of_concentrated
+#print axioms StokeyLucasPrescott.StrongConvergence.iInf_shift_antitone
+#print axioms StokeyLucasPrescott.StrongConvergence.tendsto_kpow_transient
+#print axioms StokeyLucasPrescott.StrongConvergence.tendsto_adjoint_transient
+#print axioms StokeyLucasPrescott.StrongConvergence.exists_invariant_on
+#print axioms StokeyLucasPrescott.StrongConvergence.cesaroCauchy_all
+#print axioms StokeyLucasPrescott.StrongConvergence.theorem_11_9b
+#print axioms StokeyLucasPrescott.StrongConvergence.invariant_transient_null
+#print axioms StokeyLucasPrescott.StrongConvergence.restrict_invariant
+#print axioms StokeyLucasPrescott.StrongConvergence.theorem_11_9c
+#print axioms StokeyLucasPrescott.StrongConvergence.ergodic_count_eq_one
+#print axioms StokeyLucasPrescott.StrongConvergence.theorem_11_10b
+#print axioms StokeyLucasPrescott.StrongConvergence.theorem_11_10c

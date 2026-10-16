@@ -53,9 +53,10 @@ Where the Lean statement departs from the book, see [corrections](corrections.md
 | Exercise 11.4h–j, p. 346 | Kernels violating Condition D | `not_conditionD_deterministic`, `ex_11_4h`, `ex_11_4i`, `ex_11_4j` |
 | pp. 346–347 | Consequent, invariant and ergodic sets; existence and finiteness | `IsConsequentSet`, `IsInvariantSet`, `IsErgodicSetD`, `consequent_real_gt`, `invariant_of_consequent`, `exists_ergodic_subset_of_invariant`, `ergodic_disjoint_or_eq`, `card_mul_lt` |
 | Theorem 11.9a, p. 347 | Partition into `1 ≤ M ≤ φ(S)/ε` ergodic sets and a transient set | `theorem_11_9a` |
-| Theorem 11.9b–c, p. 348 | Cesàro convergence; invariant measures are convex combinations | Not formalised (not proved in the book) |
+| Theorem 11.9b, pp. 347–348 | The Cesàro averages converge to an invariant measure | `cesaroM`, `CesaroCauchy`, `cesaroCauchy_of_approx`, `cesaroCauchy_adjoint`, `tvDist_cesaro_le`, `doeblinRef`, `adjoint_real_le_ref`, `cesaro_small`, `cesaroLim`, `hasSum_cesaroLim`, `abs_integral_sub_levels_le`, `exists_invariant`, `markovL2`, `cesaroCauchy_withDensity`, `cesaroCauchy_of_absCont`, `doeblin_decomp`, `cesaroCauchy_of_concentrated`, `tendsto_kpow_transient`, `cesaroCauchy_all`, `theorem_11_9b` |
+| Theorem 11.9c, p. 348 | One invariant measure per ergodic set; all invariant measures are convex combinations | `exists_reach`, `pos_of_invariant`, `posPart_invariant`, `invariant_unique`, `exists_invariant_on`, `invariant_transient_null`, `restrict_invariant`, `theorem_11_9c` |
 | Theorem 11.10a, p. 348 | A unique ergodic set | `theorem_11_10a` |
-| Theorem 11.10b–c, p. 348 | A unique invariant measure; Cesàro convergence to it | Not formalised (relies on Theorem 11.9b–c) |
+| Theorem 11.10b–c, p. 348 | A unique invariant measure; Cesàro convergence to it | `ergodic_count_eq_one`, `theorem_11_10b`, `theorem_11_10c` |
 | Condition M, p. 348 | Condition M | `ConditionMFor`, `ConditionM` |
 | Exercise 11.5, p. 349 | M in Exercise 11.4c, e; M implies D; D without M | `ex_11_5a_c`, `ex_11_5a_e`, `ex_11_5b`, `ex_11_5c` |
 | Lemma 11.11, pp. 349–350 | `T*ᴺ` is a contraction of modulus `1 − ε` | `tvDist_comm`, `tvDist_triangle`, `lemma_11_11` |
