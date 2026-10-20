@@ -30,9 +30,11 @@ SLP §13.8, pp. 411–412, Exercises 13.8g and 13.8h, under (6) and the mixing c
 * "`D` is strictly decreasing for `θ > 0`" contradicts Ex. 13.8f: `D = 0` on `[θ̄, ∞)`
   (`ex_13_8h_counterexample`, every instance; `ex_13_8h_counterexample_concrete`), and under (6)
   already on `[βθ̄, ∞)` (`ex_13_8h_zero`). The corrected claim — `D` strictly decreasing on
-  `{θ > 0 : D(θ) > 0}` — is **not** proved here. Partial result: the cutoffs `g_A`, `g_C` fall
-  strictly in `θ` wherever they are positive (`searchCutoffs_theta_strict`), but in Case B
-  `g_θ′ = g_θ = x` can hold, so the argument of Ex. 13.8h alone does not give strictness.
+  `{θ > 0 : D(θ) > 0}` — is proved in `SearchDemandStrict` (`ex_13_8h_corrected`). Here: the
+  cutoffs `g_A`, `g_C` fall strictly in `θ` wherever they are positive
+  (`searchCutoffs_theta_strict`), but in Case B `g_θ′ = g_θ = x` can hold, so the argument of
+  Ex. 13.8h alone does not give strictness; `SearchDemandStrict` adds that under (6) and mixing
+  the stationary work force is never frozen.
 -/
 
 namespace StokeyLucasPrescott.ConvergenceApplications

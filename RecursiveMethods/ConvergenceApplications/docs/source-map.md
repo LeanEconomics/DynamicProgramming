@@ -93,7 +93,7 @@ Where the Lean statement departs from the book, see [corrections](corrections.md
 | Exercise 13.8e, p. 411 | Exogenous leavers | `searchGLeave`, `searchLeave_unique`, `ex_13_8e` |
 | Exercise 13.8f, p. 411 | `D(0) = x̄`, `D = 0` for large `θ` | `searchD`, `ex_13_8f_zero`, `ex_13_8f_zero_measure`, `ex_13_8f_large` |
 | Exercise 13.8g, p. 411 | `D` continuous (Theorem 12.13) | `ex_13_8g_jointCont`, `ex_13_8g`, `ex_13_8g_existence` |
-| Exercise 13.8h, p. 412 | `D` nonincreasing; strictly? | `searchG_theta_anti`, `ex_13_8h`, `ex_13_8h_antitoneOn`, `ex_13_8h_counterexample`, `ex_13_8h_counterexample_concrete`, `ex_13_8h_zero`, `searchCutoffs_theta_strict` |
+| Exercise 13.8h, p. 412 | `D` nonincreasing; strictly? | `searchG_theta_anti`, `ex_13_8h`, `ex_13_8h_antitoneOn`, `ex_13_8h_counterexample`, `ex_13_8h_counterexample_concrete`, `ex_13_8h_zero`, `searchCutoffs_theta_strict`; strictly decreasing where positive: `searchG_theta_lt`, `searchFrozen_rect_ge`, `searchFrozen_false`, `searchD_dominance`, `ex_13_8h_strict`, `ex_13_8h_corrected`, `ex_13_8g_unique` |
 
 ## Supporting modules
 

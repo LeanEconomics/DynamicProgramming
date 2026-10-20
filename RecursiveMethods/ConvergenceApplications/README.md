@@ -8,11 +8,9 @@ the commands below from this directory. [Return to the library index](../../READ
 Chapter 13 applies the convergence theorems of Chapters 11 and 12 to eight economic models. It has
 no numbered lemmas or theorems: its content is Exercises 13.1–13.8 (37 lettered parts). Every part
 is formalised, and each one is proved or refuted. Where the book is wrong there is a Lean
-counterexample, together with a corrected statement that is proved. One corrected claim, that the
-labour demand of §13.8 is strictly decreasing where it is positive, is left open; the book's own
-claim is refuted. See [corrections](docs/corrections.md).
+counterexample, together with a corrected statement that is proved. See [corrections](docs/corrections.md).
 
-The library contains **1238 theorems**. Of these, 670 are in the Chapter 13 modules and the rest in
+The library contains **1247 theorems**. Of these, 679 are in the Chapter 13 modules and the rest in
 the machinery carried from Chapters 8–12, including the §10.4 industry model and its policy.
 
 * **§13.1 Discrete (s, S) inventories.** The functional equations solved in closed form, the
@@ -71,6 +69,7 @@ All names are in the namespace `StokeyLucasPrescott.ConvergenceApplications`. Se
 | [SearchInvariant](ConvergenceApplications/SearchInvariant.lean) | 56 | Exercises 13.8d, f |
 | [SearchLeavers](ConvergenceApplications/SearchLeavers.lean) | 12 | Exercise 13.8e |
 | [SearchDemand](ConvergenceApplications/SearchDemand.lean) | 28 | Exercises 13.8g–h |
+| [SearchDemandStrict](ConvergenceApplications/SearchDemandStrict.lean) | 9 | Exercise 13.8h: `D` strictly decreasing where positive; at most one equilibrium |
 | [RealIntervals](ConvergenceApplications/RealIntervals.lean) | 13 | Theorem 12.12 on real intervals and rectangles |
 
 Carried machinery (568 theorems):

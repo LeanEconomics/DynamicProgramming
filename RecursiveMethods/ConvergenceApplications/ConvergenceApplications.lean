@@ -58,3 +58,4 @@ import ConvergenceApplications.IndustryInvestmentFOC
 import ConvergenceApplications.IndustryInvestment
 import ConvergenceApplications.IndustryInvestmentResults
 import ConvergenceApplications.UpperBounded
+import ConvergenceApplications.SearchDemandStrict
