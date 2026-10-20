@@ -3304,9 +3304,12 @@ finite (for `U = √`, `U′(c) = c^{-1/2}` is integrable near a simple zero). T
 that drives the finite-shock argument then breaks. Excluding zero consumption also excludes the
 degenerate fixed point `h = ψ` of the finite case (`StochModel.Ts_psi`).
 
-**Not proved.** Existence of a fixed point in the continuum case: `F₊` is not closed, and no
-invariant closed convex subset bounded away from zero consumption has been found (the same
-obstacle as for finite `Ξ`, `GlobalStochasticEquilibrium`).
+**Existence of a fixed point** is proved by monotone iteration from `0` (`F₊` itself is not
+closed). The limit is a fixed point once consumption along the iterates has a uniform floor
+(`GlobalContinuumFixed`), and an auxiliary planner provides that floor for every `ContModel`
+(`GlobalContinuumFloor`). Under the Feller property alone the fixed point is Borel in the shock
+(`ContModel.ex_18_9_borel_existence`). Under the strong Feller property it lies in `F₊`
+(`ContModel.ex_18_9_existence`).
 -/
 
 namespace StokeyLucasPrescott.EquilibriaWithDistortions
@@ -4054,6 +4057,1683 @@ Authors: Robert Kirkby
 -/
 
 /-!
+# Exercise 18.9: monotone iteration with a consumption floor (SLP p. 560)
+
+`GlobalContinuum` shows that with a compact metric shock space `Ξ` (a closed bounded interval is
+one) and a Feller transition, `T` is well defined on `F₊`, maps `F₊` into itself and is monotone.
+This module carries out monotone iteration from the least element `0` (as in Theorem 17.7) and
+shows that the limit `lfp = sup_n Tⁿ0` is a fixed point with consumption bounded away from zero,
+given a **consumption floor** (`ConsFloor`): one `c > 0` with `ψ − Tⁿ0 ≥ c` for every `n`.
+`GlobalContinuumFloor` proves the floor with no extra hypothesis (`ContModel.consFloor`); here it
+is also derived from a **uniform anchor** (`UniformAnchor`, `consFloor_of_uniformAnchor`).
+
+* `UniformAnchor`: some level `K ≥ 0` lies below every maximal sustainable stock `k̄(ξ)` and has
+  `β(1 − θ) f′(K, ξ) ≤ 1` for every `ξ`; equivalently (`uniformAnchor_iff`), one `K` satisfies
+  `k*(ξ) ≤ K < k̄(ξ)` for all `ξ`. It holds with one technology (`uniformAnchor_of_identical`)
+  and whenever the technologies share `f′` (`uniformAnchor_of_f'_eq`).
+* `StrongFeller`: `ξ ↦ ∫ g dκ(ξ)` is continuous for every bounded Borel `g` (for instance i.i.d.
+  shocks, `strongFeller_of_const`). It is used only for continuity of the fixed point in `ξ`.
+
+Results.
+* `Tit_U'_le`, `exists_cons_lb`: the uniform anchor gives a consumption floor. Above `K`, low
+  consumption forces next period's capital above `K`, where `β(1 − θ) f′ ≤ 1`, so a bound on
+  marginal utility reproduces itself; below `K`, low consumption raises capital by at least `δ`,
+  so after at most `⌈K/δ⌉` steps the bound above `K` takes over.
+* `lfpc`, `Tc_lfpc`: given a floor, `lfp` is a fixed point of `T` (the limit step by dominated
+  convergence and the continuity of the crossing point); `lfpc_cons_lb`: `ψ − lfp ≥ c > 0`;
+  `lfpc_le_of_super`: `lfp` lies below every supersolution in `F₊` (the least fixed point).
+* `ex_18_9_borel_equilibrium` (Feller property only): `lfp` is a fixed point with consumption
+  bounded away from zero, continuous and monotone in `k`, Borel in `ξ`; `lfpc_euler_KT` and, under
+  the cross-state condition, `lfpc_euler` give the integral Euler equation at every `(k, ξ)`.
+* `isInFc_lfpc`, `ex_18_9_exists_equilibrium`: with the strong Feller property, `lfp ∈ F₊` is the
+  least fixed point of `T`, with `ψ − lfp ≥ c > 0`; `ex_18_9_equilibrium` adds the Euler equation
+  under the cross-state condition.
+* `exCont`: shocks i.i.d. uniform on `[0, 1]`, `U = √`, technologies
+  `f(k, ξ) = b(ξ) + 3k/(1 + k)` with `k̄(ξ) = 2 + ξ`, which differ across shocks
+  (`exCont_tech_ne`); it satisfies the uniform anchor and the strong Feller property, so it has an
+  equilibrium with consumption bounded away from zero (`exCont_exists_equilibrium`).
+
+**Strong Feller.** The limit of the iterates is a priori only Borel (lower semicontinuous) in `ξ`,
+and the Feller property moves the right side of (9) continuously only for continuous integrands;
+the strong Feller property is used for continuity of `lfp` in `ξ` and for nothing else.
+-/
+
+namespace StokeyLucasPrescott.EquilibriaWithDistortions
+
+namespace ContModel
+
+open Set Filter Topology MeasureTheory
+
+variable {Ξ : Type} [MetricSpace Ξ] [CompactSpace Ξ] [Nonempty Ξ] [MeasurableSpace Ξ]
+  [BorelSpace Ξ] (C : ContModel Ξ)
+
+/-- The **uniform anchor**: a level `K ≥ 0` below every maximal sustainable stock `k̄(ξ)` with
+`β(1 − θ) f′(K, ξ) ≤ 1` for every shock (so `K` is at least every steady state `k*(ξ)`). -/
+def UniformAnchor : Prop :=
+  ∃ K, 0 ≤ K ∧ (∀ ξ, K < (C.tech ξ).kbar) ∧ ∀ ξ, C.β * (1 - C.θ) * (C.tech ξ).f' K ≤ 1
+
+/-- The **strong Feller property**: `ξ ↦ ∫ g dκ(ξ)` is continuous for every bounded Borel
+`g`. -/
+def StrongFeller : Prop :=
+  ∀ g : Ξ → ℝ, Measurable g → (∃ D, ∀ x, |g x| ≤ D) → Continuous fun ξ => ∫ x, g x ∂(C.κ ξ)
+
+/-- The iterates `Tⁿ0` from the least element `0` of `F₊`. -/
+noncomputable def Tit (n : ℕ) : Ξ → ℝ → ℝ := C.Tc^[n] (fun _ _ => 0)
+
+omit [CompactSpace Ξ] [Nonempty Ξ] [BorelSpace Ξ] in
+/-- `Tⁿ⁺¹0 = T(Tⁿ0)`. -/
+theorem Tit_succ (n : ℕ) : C.Tit (n + 1) = C.Tc (C.Tit n) :=
+  Function.iterate_succ_apply' _ _ _
+
+/-- Every iterate lies in `F₊`. -/
+theorem isInFc_Tit (n : ℕ) : C.IsInFc (C.Tit n) := by
+  induction n with
+  | zero => exact C.isInFc_zero
+  | succ n ih => rw [Tit_succ]; exact ex_18_9 ih
+
+/-- The iterates increase. -/
+theorem Tit_le_succ (n : ℕ) : ∀ ξ, ∀ k ∈ Icc 0 C.B, C.Tit n ξ k ≤ C.Tit (n + 1) ξ k := by
+  induction n with
+  | zero =>
+    intro ξ k _
+    rw [Tit_succ]
+    exact eulerCross_nonneg
+  | succ n ih =>
+    intro ξ k hk
+    have e1 : C.Tit (n + 1) ξ k = C.Tc (C.Tit n) ξ k := by rw [Tit_succ]
+    have e2 : C.Tit (n + 1 + 1) ξ k = C.Tc (C.Tit (n + 1)) ξ k := by rw [Tit_succ C (n + 1)]
+    rw [e2, e1]
+    exact ex_18_9_mono (C.isInFc_Tit n) (C.isInFc_Tit (n + 1)) ih ξ hk
+
+omit [CompactSpace Ξ] [Nonempty Ξ] [BorelSpace Ξ] in
+/-- For `y ∈ [0, B]`, `ψ(y, ·)` is continuous. -/
+theorem psi_continuous_shock {y : ℝ} (hy : y ∈ Icc 0 C.B) :
+    Continuous fun ξ => (C.tech ξ).psi y :=
+  C.psi_cont.comp_continuous (continuous_const.prodMk continuous_id) fun _ => ⟨hy, mem_univ _⟩
+
+omit [CompactSpace Ξ] [Nonempty Ξ] [BorelSpace Ξ] in
+/-- For `y ∈ [0, B]`, `f′(y, ·)` is continuous. -/
+theorem f'_continuous_shock {y : ℝ} (hy : y ∈ Icc 0 C.B) :
+    Continuous fun ξ => (C.tech ξ).f' y :=
+  C.f'_cont.comp_continuous (continuous_const.prodMk continuous_id) fun _ => ⟨hy, mem_univ _⟩
+
+omit [BorelSpace Ξ] in
+/-- A uniform positive lower bound on `ψ(0, ξ)`. -/
+theorem exists_psi_zero_lb : ∃ p > 0, ∀ ξ, p ≤ (C.tech ξ).psi 0 := by
+  obtain ⟨ξ0, -, hmin⟩ := isCompact_univ.exists_isMinOn univ_nonempty
+    (C.psi_continuous_shock ⟨le_rfl, C.B_pos.le⟩).continuousOn
+  exact ⟨(C.tech ξ0).psi 0, (C.tech ξ0).psi_pos le_rfl,
+    fun ξ => isMinOn_iff.1 hmin ξ (mem_univ _)⟩
+
+omit [BorelSpace Ξ] in
+/-- A uniform upper bound on `f′(0, ξ)`. -/
+theorem exists_f'_zero_ub : ∃ A, ∀ ξ, (C.tech ξ).f' 0 ≤ A := by
+  obtain ⟨ξ0, -, hmax⟩ := isCompact_univ.exists_isMaxOn univ_nonempty
+    (C.f'_continuous_shock ⟨le_rfl, C.B_pos.le⟩).continuousOn
+  exact ⟨(C.tech ξ0).f' 0, fun ξ => isMaxOn_iff.1 hmax ξ (mem_univ _)⟩
+
+omit [BorelSpace Ξ] in
+/-- A uniform gap `ψ(k, ξ) − k ≥ 2δ` on `[0, K]` when `K` lies below every `k̄(ξ)`. -/
+theorem exists_gap_lb {K : ℝ} (hK0 : 0 ≤ K) (hK : ∀ ξ, K < (C.tech ξ).kbar) :
+    ∃ δ > 0, ∀ ξ, ∀ k ∈ Icc 0 K, 2 * δ ≤ (C.tech ξ).psi k - k := by
+  have hKB : K ≤ C.B := ((hK (Classical.arbitrary Ξ)).trans_le (C.kbar_le _)).le
+  have hc : ContinuousOn (fun p : ℝ × Ξ => (C.tech p.2).psi p.1 - p.1) (Icc 0 K ×ˢ univ) :=
+    (C.psi_cont.mono (prod_mono (Icc_subset_Icc_right hKB) subset_rfl)).sub continuousOn_fst
+  obtain ⟨q, hq, hmin⟩ := (isCompact_Icc.prod isCompact_univ).exists_isMinOn
+    ⟨((0 : ℝ), Classical.arbitrary Ξ), ⟨le_rfl, hK0⟩, mem_univ _⟩ hc
+  have hpos : 0 < (C.tech q.2).psi q.1 - q.1 := by
+    have := (C.tech q.2).lt_psi hq.1.1 (hq.1.2.trans_lt (hK q.2))
+    linarith
+  refine ⟨((C.tech q.2).psi q.1 - q.1) / 2, half_pos hpos, fun ξ k hk => ?_⟩
+  have := isMinOn_iff.1 hmin (k, ξ) ⟨hk, mem_univ _⟩
+  simp only at this
+  linarith
+
+omit [CompactSpace Ξ] [BorelSpace Ξ] in
+/-- `U′(ψ(k, ξ)) ≤ U′(p)` when `p ≤ ψ(0, ξ)`. -/
+theorem U'_psi_le {p : ℝ} (hp : 0 < p) (hpψ : ∀ ξ, p ≤ (C.tech ξ).psi 0) (ξ : Ξ) {k : ℝ}
+    (hk : 0 ≤ k) : C.U' ((C.tech ξ).psi k) ≤ C.U' p := by
+  have h1 := (C.tech ξ).psi_strictMonoOn.monotoneOn (mem_Ici.2 le_rfl) (mem_Ici.2 hk) hk
+  exact C.isMarginalUtility.strictAnti.antitoneOn hp (hp.trans_le ((hpψ ξ).trans h1))
+    ((hpψ ξ).trans h1)
+
+variable {C} in
+/-- A pointwise bound on the integrand bounds the right side. -/
+theorem Rc_le {h : Ξ → ℝ → ℝ} (hh : C.IsInFc h) (ξ : Ξ) {y : ℝ} (hy : y ∈ Icc 0 C.B) {D : ℝ}
+    (hD : ∀ x, C.G h y x ≤ D) : C.Rc h ξ y ≤ C.β * (1 - C.θ) * D := by
+  have := C.κ_prob ξ
+  refine mul_le_mul_of_nonneg_left ?_ C.coef_pos.le
+  calc ∫ x, C.G h y x ∂(C.κ ξ) ≤ ∫ _x, D ∂(C.κ ξ) :=
+        integral_mono (hh.G_integrable hy ξ) (integrable_const D) hD
+    _ = D := by simp
+
+/-- **The key estimate**: a bound on marginal utility along the iterates, by induction on the
+number of iterations and on the number of `δ`-steps below `K`. -/
+theorem Tit_U'_le {K δ p A : ℝ} (hK0 : 0 ≤ K) (hKf : ∀ ξ, C.β * (1 - C.θ) * (C.tech ξ).f' K ≤ 1)
+    (hδ : 0 < δ) (hgap : ∀ ξ, ∀ k ∈ Icc 0 K, 2 * δ ≤ (C.tech ξ).psi k - k) (hp : 0 < p)
+    (hpψ : ∀ ξ, p ≤ (C.tech ξ).psi 0) (hA : ∀ ξ, (C.tech ξ).f' 0 ≤ A) (n : ℕ) :
+    ∀ s : ℕ, ∀ ξ, ∀ k ∈ Icc 0 C.B, K - s * δ ≤ k →
+      C.U' ((C.tech ξ).psi k - C.Tit n ξ k) ≤
+        max (C.U' δ) (C.U' p) * max 1 (C.β * (1 - C.θ) * A) ^ s := by
+  set B0 := max (C.U' δ) (C.U' p) with hB0
+  set L := max 1 (C.β * (1 - C.θ) * A) with hL
+  have hu := C.isMarginalUtility
+  have hB0pos : 0 < B0 := (hu.pos δ hδ).trans_le (le_max_left _ _)
+  have hL1 : 1 ≤ L := le_max_left _ _
+  have hB0le : ∀ s : ℕ, B0 ≤ B0 * L ^ s := fun s =>
+    le_mul_of_one_le_right hB0pos.le (one_le_pow₀ hL1)
+  have hcoef := C.coef_pos
+  induction n with
+  | zero =>
+    intro s ξ k hk _
+    change C.U' ((C.tech ξ).psi k - 0) ≤ B0 * L ^ s
+    rw [sub_zero]
+    exact ((C.U'_psi_le hp hpψ ξ hk.1).trans (le_max_right _ _)).trans (hB0le s)
+  | succ n ih =>
+    intro s ξ k hk hks
+    have hh := C.isInFc_Tit n
+    rw [Tit_succ]
+    set y := C.Tc (C.Tit n) ξ k with hydef
+    rcases ex_18_9_spec_KT hh ξ hk with ⟨hlt, heq⟩ | ⟨h0, -⟩
+    · have hyB : y ∈ Icc 0 C.B := ⟨eulerCross_nonneg, hlt.le.trans (C.psi_le_B ξ hk)⟩
+      by_cases hc : δ ≤ (C.tech ξ).psi k - y
+      · have := hu.strictAnti.antitoneOn hδ (hδ.trans_le hc) hc
+        exact (this.trans (le_max_left _ _)).trans (hB0le s)
+      · push Not at hc
+        rw [heq]
+        by_cases hkK : K ≤ k
+        · have hψK := (C.tech ξ).psi_strictMonoOn.monotoneOn (mem_Ici.2 hK0)
+            (mem_Ici.2 (hK0.trans hkK)) hkK
+          have hg := hgap ξ K ⟨hK0, le_rfl⟩
+          have hyK : K ≤ y := by linarith
+          have hD : ∀ x, C.G (C.Tit n) y x ≤ B0 / (C.β * (1 - C.θ)) := by
+            intro x
+            have hU := ih 0 x y hyB
+              (by simp only [CharP.cast_eq_zero, zero_mul, sub_zero]; exact hyK)
+            rw [pow_zero, mul_one] at hU
+            have hf : (C.tech x).f' y ≤ (C.tech x).f' K :=
+              (C.tech x).f'_strictAntiOn.antitoneOn (mem_Ici.2 hK0) (mem_Ici.2 hyB.1) hyK
+            have hfK : (C.tech x).f' K ≤ 1 / (C.β * (1 - C.θ)) := by
+              rw [le_div_iff₀ hcoef]; linarith [hKf x]
+            have hc' : 0 < (C.tech x).psi y - C.Tit n x y := by linarith [hh.lt_psi x y hyB]
+            calc C.G (C.Tit n) y x ≤ (C.tech x).f' K * B0 :=
+                  mul_le_mul hf hU (hu.pos _ hc').le ((C.tech x).f'_pos hK0).le
+              _ ≤ 1 / (C.β * (1 - C.θ)) * B0 := mul_le_mul_of_nonneg_right hfK hB0pos.le
+              _ = B0 / (C.β * (1 - C.θ)) := by ring
+          have := Rc_le hh ξ hyB hD
+          rw [mul_div_cancel₀ _ hcoef.ne'] at this
+          exact this.trans (hB0le s)
+        · push Not at hkK
+          have hs : s ≠ 0 := by
+            rintro rfl
+            simp only [CharP.cast_eq_zero, zero_mul, sub_zero] at hks
+            linarith
+          obtain ⟨s', rfl⟩ := Nat.exists_eq_succ_of_ne_zero hs
+          have hg := hgap ξ k ⟨hk.1, hkK.le⟩
+          have hys : K - s' * δ ≤ y := by
+            push_cast at hks
+            linarith
+          have hD : ∀ x, C.G (C.Tit n) y x ≤ A * (B0 * L ^ s') := by
+            intro x
+            have hU := ih s' x y hyB hys
+            have hf : (C.tech x).f' y ≤ A :=
+              ((C.tech x).f'_strictAntiOn.antitoneOn (mem_Ici.2 le_rfl) (mem_Ici.2 hyB.1)
+                hyB.1).trans (hA x)
+            have hc' : 0 < (C.tech x).psi y - C.Tit n x y := by linarith [hh.lt_psi x y hyB]
+            exact mul_le_mul hf hU (hu.pos _ hc').le
+              (((C.tech x).f'_pos le_rfl).le.trans (hA x))
+          have h1 := Rc_le hh ξ hyB hD
+          have h2 : C.β * (1 - C.θ) * A ≤ L := le_max_right _ _
+          have h3 : 0 ≤ B0 * L ^ s' := mul_nonneg hB0pos.le (pow_nonneg (by linarith) _)
+          calc C.Rc (C.Tit n) ξ y ≤ C.β * (1 - C.θ) * (A * (B0 * L ^ s')) := h1
+            _ = (C.β * (1 - C.θ) * A) * (B0 * L ^ s') := by ring
+            _ ≤ L * (B0 * L ^ s') := mul_le_mul_of_nonneg_right h2 h3
+            _ = B0 * L ^ (s' + 1) := by ring
+    · rw [show y = 0 from h0, sub_zero]
+      exact ((C.U'_psi_le hp hpψ ξ hk.1).trans (le_max_right _ _)).trans (hB0le s)
+
+/-- A **consumption floor** for the iterates: one `c > 0` with `ψ − Tⁿ0 ≥ c` on `[0, B] × Ξ` for
+every `n`. It follows from the uniform anchor (`consFloor_of_uniformAnchor`) and, with no extra
+hypothesis, from the auxiliary planner of `GlobalContinuumFloor` (`ContModel.consFloor`). -/
+def ConsFloor : Prop :=
+  ∃ c > 0, ∀ n ξ, ∀ k ∈ Icc 0 C.B, c ≤ (C.tech ξ).psi k - C.Tit n ξ k
+
+/-- **Consumption along the iterates is bounded away from zero** under the uniform anchor. -/
+theorem exists_cons_lb (hA : C.UniformAnchor) :
+    ∃ c > 0, ∀ n ξ, ∀ k ∈ Icc 0 C.B, c ≤ (C.tech ξ).psi k - C.Tit n ξ k := by
+  obtain ⟨K, hK0, hKk, hKf⟩ := hA
+  obtain ⟨δ, hδ, hgap⟩ := C.exists_gap_lb hK0 hKk
+  obtain ⟨p, hp, hpψ⟩ := C.exists_psi_zero_lb
+  obtain ⟨A, hA⟩ := C.exists_f'_zero_ub
+  set S := ⌈K / δ⌉₊
+  set Mbar := max (C.U' δ) (C.U' p) * max 1 (C.β * (1 - C.θ) * A) ^ S
+  obtain ⟨ε, hε, hball⟩ := Metric.mem_nhdsWithin_iff.1
+    (C.isMarginalUtility.inada.eventually_gt_atTop Mbar)
+  refine ⟨ε, hε, fun n ξ k hk => ?_⟩
+  have hS : K - S * δ ≤ k := by
+    have h1 : K / δ ≤ S := Nat.le_ceil _
+    rw [div_le_iff₀ hδ] at h1
+    linarith [hk.1]
+  have hU := C.Tit_U'_le hK0 hKf hδ hgap hp hpψ hA n S ξ k hk hS
+  have hc : 0 < (C.tech ξ).psi k - C.Tit n ξ k := by
+    linarith [(C.isInFc_Tit n).lt_psi ξ k hk]
+  by_contra hlt
+  push Not at hlt
+  have : Mbar < C.U' ((C.tech ξ).psi k - C.Tit n ξ k) := hball ⟨by
+    rw [Metric.mem_ball, Real.dist_eq, sub_zero, abs_of_pos hc]; exact hlt, hc⟩
+  linarith
+
+/-- The uniform anchor gives a consumption floor. -/
+theorem consFloor_of_uniformAnchor (hA : C.UniformAnchor) : C.ConsFloor :=
+  C.exists_cons_lb hA
+
+/-- The least fixed point `lfp(ξ, k) = sup_n (Tⁿ0)(ξ, k)`. -/
+noncomputable def lfpc (ξ : Ξ) (k : ℝ) : ℝ := ⨆ n, C.Tit n ξ k
+
+/-- `Tⁿ0 → lfp` pointwise on `[0, B] × Ξ`. -/
+theorem tendsto_Tit (ξ : Ξ) {k : ℝ} (hk : k ∈ Icc 0 C.B) :
+    Tendsto (fun n => C.Tit n ξ k) atTop (𝓝 (C.lfpc ξ k)) :=
+  tendsto_atTop_ciSup (monotone_nat_of_le_succ fun n => C.Tit_le_succ n ξ k hk)
+    ⟨(C.tech ξ).psi k, forall_mem_range.2 fun n => ((C.isInFc_Tit n).lt_psi ξ k hk).le⟩
+
+variable {C} in
+omit [CompactSpace Ξ] [Nonempty Ξ] [BorelSpace Ξ] in
+/-- Members of `F₊` change by at most the change in `ψ`. -/
+theorem IsInFc.abs_sub_le {h : Ξ → ℝ → ℝ} (hh : C.IsInFc h) (x : Ξ) {a b : ℝ}
+    (ha : a ∈ Icc 0 C.B) (hb : b ∈ Icc 0 C.B) :
+    |h x a - h x b| ≤ |(C.tech x).psi a - (C.tech x).psi b| := by
+  rcases le_total a b with hab | hab
+  · have h1 := hh.mono x ha hb hab
+    have h2 : (C.tech x).psi a - h x a ≤ (C.tech x).psi b - h x b := hh.mono_sub x ha hb hab
+    rw [abs_sub_comm, abs_of_nonneg (by linarith), abs_sub_comm, abs_of_nonneg (by linarith)]
+    linarith
+  · have h1 := hh.mono x hb ha hab
+    have h2 : (C.tech x).psi b - h x b ≤ (C.tech x).psi a - h x a := hh.mono_sub x hb ha hab
+    rw [abs_of_nonneg (by linarith), abs_of_nonneg (by linarith)]
+    linarith
+
+/-- `|lfp(x, a) − lfp(x, b)| ≤ |ψ(a, x) − ψ(b, x)|`. -/
+theorem lfpc_abs_sub_le (x : Ξ) {a b : ℝ} (ha : a ∈ Icc 0 C.B) (hb : b ∈ Icc 0 C.B) :
+    |C.lfpc x a - C.lfpc x b| ≤ |(C.tech x).psi a - (C.tech x).psi b| :=
+  le_of_tendsto' (((C.tendsto_Tit x ha).sub (C.tendsto_Tit x hb)).abs)
+    fun n => (C.isInFc_Tit n).abs_sub_le x ha hb
+
+/-- `lfp(x, ·)` is continuous on `[0, B]`. -/
+theorem lfpc_continuousOn (x : Ξ) : ContinuousOn (C.lfpc x) (Icc 0 C.B) := by
+  rw [Metric.continuousOn_iff]
+  intro b hb ε hε
+  obtain ⟨δ, hδ, hψ⟩ := Metric.continuousOn_iff.1 ((C.tech x).psi_continuousOn.mono
+    (Icc_subset_Ici_self : Icc (0 : ℝ) C.B ⊆ Ici 0)) b hb ε hε
+  refine ⟨δ, hδ, fun a ha hab => ?_⟩
+  have h1 := hψ a ha hab
+  rw [Real.dist_eq] at h1 ⊢
+  exact (C.lfpc_abs_sub_le x ha hb).trans_lt h1
+
+/-- `lfp ≥ 0`. -/
+theorem lfpc_nonneg (ξ : Ξ) {k : ℝ} (hk : k ∈ Icc 0 C.B) : 0 ≤ C.lfpc ξ k :=
+  ge_of_tendsto' (C.tendsto_Tit ξ hk) fun n => (C.isInFc_Tit n).nonneg ξ k hk
+
+/-- `lfp(ξ, ·)` is nondecreasing. -/
+theorem lfpc_mono (ξ : Ξ) : MonotoneOn (C.lfpc ξ) (Icc 0 C.B) := fun _ ha _ hb hab =>
+  le_of_tendsto_of_tendsto' (C.tendsto_Tit ξ ha) (C.tendsto_Tit ξ hb)
+    fun n => (C.isInFc_Tit n).mono ξ ha hb hab
+
+/-- `ψ(·, ξ) − lfp(ξ, ·)` is nondecreasing. -/
+theorem lfpc_mono_sub (ξ : Ξ) :
+    MonotoneOn (fun k => (C.tech ξ).psi k - C.lfpc ξ k) (Icc 0 C.B) := fun _ ha _ hb hab =>
+  le_of_tendsto_of_tendsto' (tendsto_const_nhds.sub (C.tendsto_Tit ξ ha))
+    (tendsto_const_nhds.sub (C.tendsto_Tit ξ hb)) fun n => (C.isInFc_Tit n).mono_sub ξ ha hb hab
+
+/-- Given a consumption floor, consumption at the least fixed point is bounded away from zero. -/
+theorem lfpc_cons_lb (hF : C.ConsFloor) :
+    ∃ c > 0, ∀ ξ, ∀ k ∈ Icc 0 C.B, c ≤ (C.tech ξ).psi k - C.lfpc ξ k := by
+  obtain ⟨c, hc, hlb⟩ := hF
+  exact ⟨c, hc, fun ξ k hk => ge_of_tendsto' (tendsto_const_nhds.sub (C.tendsto_Tit ξ hk))
+    fun n => hlb n ξ k hk⟩
+
+omit [CompactSpace Ξ] [BorelSpace Ξ] in
+/-- The integrand is bounded by `A U′(c)` where consumption tomorrow is at least `c`. -/
+theorem abs_G_le {h : Ξ → ℝ → ℝ} {c A : ℝ} (hc : 0 < c) (hA : ∀ ξ, (C.tech ξ).f' 0 ≤ A)
+    {y : ℝ} (hy : 0 ≤ y) {x : Ξ} (hcx : c ≤ (C.tech x).psi y - h x y) :
+    |C.G h y x| ≤ A * C.U' c := by
+  have hu := C.isMarginalUtility
+  have hf0 := (C.tech x).f'_pos hy
+  have hU0 := hu.pos _ (hc.trans_le hcx)
+  simp only [G]
+  rw [abs_of_pos (mul_pos hf0 hU0)]
+  have hf : (C.tech x).f' y ≤ A :=
+    ((C.tech x).f'_strictAntiOn.antitoneOn (mem_Ici.2 le_rfl) (mem_Ici.2 hy) hy).trans (hA x)
+  exact mul_le_mul hf (hu.strictAnti.antitoneOn hc (hc.trans_le hcx) hcx) hU0.le
+    (hf0.le.trans hf)
+
+/-- The integrands along the iterates converge to the integrand at `lfp`. -/
+theorem tendsto_G_Tit (hpos : ∀ ξ, ∀ k ∈ Icc 0 C.B, 0 < (C.tech ξ).psi k - C.lfpc ξ k)
+    {y : ℝ} (hy : y ∈ Icc 0 C.B) (x : Ξ) :
+    Tendsto (fun n => C.G (C.Tit n) y x) atTop (𝓝 (C.G C.lfpc y x)) :=
+  tendsto_const_nhds.mul ((C.isMarginalUtility.cont.continuousAt
+    (Ioi_mem_nhds (hpos x y hy))).tendsto.comp (tendsto_const_nhds.sub (C.tendsto_Tit x hy)))
+
+/-- The integrand at `lfp` is Borel in the shock. -/
+theorem measurable_G_lfpc (hpos : ∀ ξ, ∀ k ∈ Icc 0 C.B, 0 < (C.tech ξ).psi k - C.lfpc ξ k)
+    {y : ℝ} (hy : y ∈ Icc 0 C.B) : Measurable fun x => C.G C.lfpc y x :=
+  measurable_of_tendsto_metrizable (f := fun n x => C.G (C.Tit n) y x)
+    (fun n => ((C.isInFc_Tit n).G_continuous hy).measurable)
+    (tendsto_pi_nhds.2 (C.tendsto_G_Tit hpos hy))
+
+/-- Given a consumption floor, the integrand at `lfp` is integrable. -/
+theorem integrable_G_lfpc (hF : C.ConsFloor) {y : ℝ} (hy : y ∈ Icc 0 C.B) (ξ : Ξ) :
+    Integrable (fun x => C.G C.lfpc y x) (C.κ ξ) := by
+  obtain ⟨c, hc, hlb⟩ := C.lfpc_cons_lb hF
+  obtain ⟨A, hA'⟩ := C.exists_f'_zero_ub
+  have := C.κ_prob ξ
+  exact Integrable.of_bound (C.measurable_G_lfpc (fun ξ k hk => hc.trans_le (hlb ξ k hk))
+    hy).aestronglyMeasurable (A * C.U' c) (ae_of_all _ fun x => by
+      rw [Real.norm_eq_abs]; exact C.abs_G_le hc hA' hy.1 (hlb x y hy))
+
+/-- Given a consumption floor, the right sides along the iterates converge to the right side at
+`lfp` (dominated convergence). -/
+theorem tendsto_Rc_Tit (hF : C.ConsFloor) (ξ : Ξ) {y : ℝ} (hy : y ∈ Icc 0 C.B) :
+    Tendsto (fun n => C.Rc (C.Tit n) ξ y) atTop (𝓝 (C.Rc C.lfpc ξ y)) := by
+  obtain ⟨c', hc', hlb'⟩ := C.lfpc_cons_lb hF
+  obtain ⟨c, hc, hlb⟩ := hF
+  obtain ⟨A, hA'⟩ := C.exists_f'_zero_ub
+  have := C.κ_prob ξ
+  refine tendsto_const_nhds.mul (tendsto_integral_of_dominated_convergence
+    (fun _ => A * C.U' c) (fun n => ((C.isInFc_Tit n).G_continuous hy).aestronglyMeasurable)
+    (integrable_const _) (fun n => ae_of_all _ fun x => ?_)
+    (ae_of_all _ (C.tendsto_G_Tit (fun ξ k hk => hc'.trans_le (hlb' ξ k hk)) hy)))
+  rw [Real.norm_eq_abs]
+  exact C.abs_G_le hc hA' hy.1 (hlb n x y hy)
+
+/-- Given a consumption floor, the right side at `lfp` is an `IsEulerRHS` on `[0, B]` for every
+current shock (finite, nonincreasing and continuous in `y`). No continuity in the shock is
+needed. -/
+theorem isEulerRHS_lfpc (hF : C.ConsFloor) (ξ : Ξ) :
+    IsEulerRHS C.B (fun _ => False) (C.Rc C.lfpc ξ) := by
+  obtain ⟨c, hc, hlb⟩ := C.lfpc_cons_lb hF
+  obtain ⟨A, hA'⟩ := C.exists_f'_zero_ub
+  have hpos : ∀ ξ, ∀ k ∈ Icc 0 C.B, 0 < (C.tech ξ).psi k - C.lfpc ξ k :=
+    fun ξ k hk => hc.trans_le (hlb ξ k hk)
+  have := C.κ_prob ξ
+  refine ⟨fun _ _ _ _ _ hz => hz, ?_, ?_, fun _ _ hz => hz.elim⟩
+  · intro y y' hy' hyy hyB _
+    have hyK : y ∈ Icc 0 C.B := ⟨hy'.trans hyy, hyB⟩
+    have hy'K : y' ∈ Icc 0 C.B := ⟨hy', hyy.trans hyB⟩
+    refine mul_le_mul_of_nonneg_left (integral_mono (C.integrable_G_lfpc hF hyK ξ)
+      (C.integrable_G_lfpc hF hy'K ξ) fun x => ?_) C.coef_pos.le
+    have hc' := hpos x y' hy'K
+    have hcc : (C.tech x).psi y' - C.lfpc x y' ≤ (C.tech x).psi y - C.lfpc x y :=
+      C.lfpc_mono_sub x hy'K hyK hyy
+    have hU := C.isMarginalUtility.strictAnti.antitoneOn hc' (hc'.trans_le hcc) hcc
+    have hf : (C.tech x).f' y ≤ (C.tech x).f' y' :=
+      (C.tech x).f'_strictAntiOn.antitoneOn (mem_Ici.2 hy') (mem_Ici.2 hyK.1) hyy
+    exact mul_le_mul hf hU (C.isMarginalUtility.pos _ (hc'.trans_le hcc)).le
+      ((C.tech x).f'_pos hy').le
+  · intro y hy _
+    refine ⟨Eventually.of_forall fun _ hz => hz, ?_⟩
+    change ContinuousWithinAt (fun y => C.β * (1 - C.θ) * ∫ x, C.G C.lfpc y x ∂(C.κ ξ))
+      (Icc 0 C.B) y
+    refine continuousWithinAt_const.mul (continuousWithinAt_of_dominated
+      (bound := fun _ => A * C.U' c)
+      (eventually_mem_nhdsWithin.mono fun y' hy' =>
+        (C.measurable_G_lfpc hpos hy').aestronglyMeasurable)
+      (eventually_mem_nhdsWithin.mono fun y' hy' => ae_of_all _ fun x => by
+        rw [Real.norm_eq_abs]; exact C.abs_G_le hc hA' hy'.1 (hlb x y' hy'))
+      (integrable_const _) (ae_of_all _ fun x => ?_))
+    have h1 : ContinuousWithinAt (fun y' => (C.tech x).f' y') (Icc 0 C.B) y :=
+      (C.tech x).f'_continuousOn.mono Icc_subset_Ici_self y hy
+    have h2 : ContinuousWithinAt (fun y' => (C.tech x).psi y' - C.lfpc x y') (Icc 0 C.B) y :=
+      ((C.tech x).psi_continuousOn.mono Icc_subset_Ici_self y hy).sub
+        (C.lfpc_continuousOn x y hy)
+    exact h1.mul (ContinuousAt.comp_continuousWithinAt
+      (f := fun y' => (C.tech x).psi y' - C.lfpc x y')
+      (C.isMarginalUtility.cont.continuousAt (Ioi_mem_nhds (hpos x y hy))) h2)
+
+/-- **`lfp` is a fixed point of `T`** given a consumption floor. -/
+theorem Tc_lfpc (hF : C.ConsFloor) (ξ : Ξ) {k : ℝ} (hk : k ∈ Icc 0 C.B) :
+    C.Tc C.lfpc ξ k = C.lfpc ξ k := by
+  have hP := (C.tech ξ).psi_pos hk.1
+  have hPB := C.psi_le_B ξ hk
+  have h1 : Tendsto (fun n => C.Tc (C.Tit n) ξ k) atTop (𝓝 (C.Tc C.lfpc ξ k)) := by
+    refine Metric.tendsto_nhds.2 fun ε hε => ?_
+    have hev := eventually_abs_eulerCross_sub_le (u := C.U') (l := atTop)
+      (Zs := fun _ _ => False) (Rs := fun n => C.Rc (C.Tit n) ξ) C.isMarginalUtility
+      (C.isEulerRHS_lfpc hF ξ) (fun n => (C.isInFc_Tit n).isEulerRHS ξ) hP hPB
+      (fun y hy0 hyP => ⟨fun hz => hz.elim, fun _ => ⟨Eventually.of_forall fun _ hz => hz,
+        C.tendsto_Rc_Tit hF ξ ⟨hy0, hyP.le.trans hPB⟩⟩⟩) (half_pos hε)
+    filter_upwards [hev] with n hn
+    rw [Real.dist_eq]
+    exact hn.trans_lt (half_lt_self hε)
+  have h2 : Tendsto (fun n => C.Tc (C.Tit n) ξ k) atTop (𝓝 (C.lfpc ξ k)) :=
+    ((tendsto_add_atTop_iff_nat 1).2 (C.tendsto_Tit ξ hk)).congr fun n => by rw [Tit_succ]
+  exact tendsto_nhds_unique h1 h2
+
+variable {C} in
+/-- A supersolution `h ∈ F₊` (`T h ≤ h`) lies above every iterate `Tⁿ0`. -/
+theorem Tit_le_of_super {h : Ξ → ℝ → ℝ} (hh : C.IsInFc h)
+    (hsup : ∀ ξ, ∀ k ∈ Icc 0 C.B, C.Tc h ξ k ≤ h ξ k) (n : ℕ) :
+    ∀ ξ, ∀ k ∈ Icc 0 C.B, C.Tit n ξ k ≤ h ξ k := by
+  induction n with
+  | zero => exact fun ξ k hk => hh.nonneg ξ k hk
+  | succ n ih =>
+    intro ξ k hk
+    rw [Tit_succ]
+    exact (ex_18_9_mono (C.isInFc_Tit n) hh ih ξ hk).trans (hsup ξ k hk)
+
+variable {C} in
+/-- `lfp` lies below every supersolution in `F₊`, in particular below every fixed point. -/
+theorem lfpc_le_of_super {h : Ξ → ℝ → ℝ} (hh : C.IsInFc h)
+    (hsup : ∀ ξ, ∀ k ∈ Icc 0 C.B, C.Tc h ξ k ≤ h ξ k) (ξ : Ξ) {k : ℝ} (hk : k ∈ Icc 0 C.B) :
+    C.lfpc ξ k ≤ h ξ k :=
+  le_of_tendsto' (C.tendsto_Tit ξ hk) fun n => Tit_le_of_super hh hsup n ξ k hk
+
+variable {C} in
+omit [CompactSpace Ξ] [BorelSpace Ξ] in
+/-- Joint continuity of `Th` from continuity of `ξ ↦ ∫ G h y dκ(ξ)` for each `y` (the argument of
+`ex_18_9`, which needs no continuity of `h` in the shock). -/
+theorem Tc_continuousOn_of {h : Ξ → ℝ → ℝ}
+    (hR : ∀ ξ, IsEulerRHS C.B (fun _ => False) (C.Rc h ξ))
+    (hcont : ∀ y ∈ Icc 0 C.B, Continuous fun ξ => ∫ x, C.G h y x ∂(C.κ ξ)) :
+    ContinuousOn (fun p : ℝ × Ξ => C.Tc h p.2 p.1) (Icc 0 C.B ×ˢ univ) := by
+  intro p hp
+  have hk : p.1 ∈ Icc 0 C.B := hp.1
+  set P0 := (C.tech p.2).psi p.1 with hP0def
+  have hP0 : 0 < P0 := (C.tech p.2).psi_pos hk.1
+  have hP0B : P0 ≤ C.B := C.psi_le_B p.2 hk
+  rw [Metric.continuousWithinAt_iff]
+  intro ε hε
+  have hev := eventually_abs_eulerCross_sub_le (u := C.U') (l := 𝓝 p.2)
+    (Zs := fun _ _ => False) (Rs := fun ξ => C.Rc h ξ) C.isMarginalUtility
+    (hR p.2) hR hP0 hP0B
+    (fun y hy0 hyP => ⟨fun hz => hz.elim, fun _ => ⟨Eventually.of_forall fun _ hz => hz,
+      tendsto_const_nhds.mul ((hcont _ ⟨hy0, hyP.le.trans hP0B⟩).tendsto p.2)⟩⟩)
+    (half_pos hε)
+  obtain ⟨δ1, hδ1, hball⟩ := Metric.mem_nhds_iff.1 hev
+  obtain ⟨δ2, hδ2, hψ⟩ := Metric.continuousWithinAt_iff.1 (C.psi_cont p hp) (ε / 2)
+    (half_pos hε)
+  refine ⟨min δ1 δ2, lt_min hδ1 hδ2, fun q hq hd => ?_⟩
+  have hqp : dist q.2 p.2 ≤ dist q p := by rw [Prod.dist_eq]; exact le_max_right _ _
+  have hd2 : dist q.2 p.2 < δ1 := lt_of_le_of_lt hqp (hd.trans_le (min_le_left _ _))
+  have e1 : |eulerCross C.U' (fun _ => False) (C.Rc h q.2) P0 - C.Tc h p.2 p.1| ≤ ε / 2 :=
+    hball hd2
+  have e2 := hψ hq (hd.trans_le (min_le_right _ _))
+  rw [Real.dist_eq] at e2
+  have e3 := abs_eulerCross_sub_le C.isMarginalUtility (hR q.2) hP0B (C.psi_le_B q.2 hq.1)
+  rw [Real.dist_eq]
+  change |C.Tc h q.2 q.1 - C.Tc h p.2 p.1| < ε
+  have := abs_sub_le (C.Tc h q.2 q.1) (eulerCross C.U' (fun _ => False) (C.Rc h q.2) P0)
+    (C.Tc h p.2 p.1)
+  simp only [Tc, ← hP0def] at this e1 e3 ⊢
+  linarith
+
+/-- **`lfp ∈ F₊`** given a consumption floor and the strong Feller property. -/
+theorem isInFc_lfpc (hF : C.ConsFloor) (hSF : C.StrongFeller) : C.IsInFc C.lfpc := by
+  obtain ⟨c, hc, hlb⟩ := C.lfpc_cons_lb hF
+  obtain ⟨A, hA'⟩ := C.exists_f'_zero_ub
+  have hpos : ∀ ξ, ∀ k ∈ Icc 0 C.B, 0 < (C.tech ξ).psi k - C.lfpc ξ k :=
+    fun ξ k hk => hc.trans_le (hlb ξ k hk)
+  refine ⟨?_, fun ξ k hk => C.lfpc_nonneg ξ hk, fun ξ k hk => by linarith [hpos ξ k hk],
+    C.lfpc_mono, C.lfpc_mono_sub⟩
+  refine (Tc_continuousOn_of (C.isEulerRHS_lfpc hF) fun y hy => hSF _
+    (C.measurable_G_lfpc hpos hy) ⟨A * C.U' c, fun x => C.abs_G_le hc hA' hy.1 (hlb x y hy)⟩
+    ).congr fun p hp => ?_
+  exact (C.Tc_lfpc hF p.2 hp.1).symm
+
+/-- Given a consumption floor (Feller property only), `lfp` solves the integral Euler equation in
+Kuhn–Tucker form at every `(k, ξ)`. -/
+theorem lfpc_euler_KT (hF : C.ConsFloor) (ξ : Ξ) {k : ℝ} (hk : k ∈ Icc 0 C.B) :
+    (C.lfpc ξ k < (C.tech ξ).psi k ∧
+      C.U' ((C.tech ξ).psi k - C.lfpc ξ k) = C.Rc C.lfpc ξ (C.lfpc ξ k)) ∨
+    (C.lfpc ξ k = 0 ∧ C.Rc C.lfpc ξ 0 ≤ C.U' ((C.tech ξ).psi k)) := by
+  have hP := (C.tech ξ).psi_pos hk.1
+  have hfix : eulerCross C.U' (fun _ => False) (C.Rc C.lfpc ξ) ((C.tech ξ).psi k) =
+      C.lfpc ξ k := C.Tc_lfpc hF ξ hk
+  rcases eulerCross_spec_KT C.isMarginalUtility (C.isEulerRHS_lfpc hF ξ) hP
+    (C.psi_le_B ξ hk) with ⟨h1, -, h3⟩ | ⟨-, h2⟩ | ⟨h1, -, h3⟩
+  · rw [hfix] at h1 h3
+    exact Or.inl ⟨h1, h3⟩
+  · exact (h2 0 le_rfl hP).elim
+  · rw [hfix] at h1
+    exact Or.inr ⟨h1, h3⟩
+
+/-- Given a consumption floor and the cross-state condition (Feller property only), `lfp` solves
+the integral Euler equation as an equation at every `(k, ξ)`. -/
+theorem lfpc_euler (hF : C.ConsFloor) (hCS : C.CrossState) (ξ : Ξ) {k : ℝ}
+    (hk : k ∈ Icc 0 C.B) :
+    C.lfpc ξ k < (C.tech ξ).psi k ∧
+      C.U' ((C.tech ξ).psi k - C.lfpc ξ k) = C.Rc C.lfpc ξ (C.lfpc ξ k) := by
+  have hP := (C.tech ξ).psi_pos hk.1
+  have hPB := C.psi_le_B ξ hk
+  have h0K : (0 : ℝ) ∈ Icc 0 C.B := ⟨le_rfl, C.B_pos.le⟩
+  obtain ⟨c, hc, hlb⟩ := C.lfpc_cons_lb hF
+  have h0 : EulerBelow C.U' (fun _ => False) (C.Rc C.lfpc ξ) ((C.tech ξ).psi k) 0 := by
+    right
+    have := C.κ_prob ξ
+    have hz : (fun x => (C.tech x).f' 0 * C.U' ((C.tech x).psi 0)) =
+        fun x => C.G (fun _ _ => 0) 0 x := by
+      funext x; simp [G]
+    have hint : Integrable (fun x => (C.tech x).f' 0 * C.U' ((C.tech x).psi 0)) (C.κ ξ) := by
+      rw [hz]; exact (C.isInFc_zero).G_integrable h0K ξ
+    have hle : ∫ x, (C.tech x).f' 0 * C.U' ((C.tech x).psi 0) ∂(C.κ ξ) ≤
+        ∫ x, C.G C.lfpc 0 x ∂(C.κ ξ) := by
+      refine integral_mono hint (C.integrable_G_lfpc hF h0K ξ) fun x => ?_
+      have hcx : 0 < (C.tech x).psi 0 - C.lfpc x 0 := hc.trans_le (hlb x 0 h0K)
+      have hle' : (C.tech x).psi 0 - C.lfpc x 0 ≤ (C.tech x).psi 0 := by
+        linarith [C.lfpc_nonneg x h0K]
+      exact mul_le_mul_of_nonneg_left
+        (C.isMarginalUtility.strictAnti.antitoneOn hcx ((C.tech x).psi_pos le_rfl) hle')
+        ((C.tech x).f'_pos le_rfl).le
+    have hψ := (C.tech ξ).psi_strictMonoOn.monotoneOn (mem_Ici.2 le_rfl) (mem_Ici.2 hk.1) hk.1
+    have h2 : C.U' ((C.tech ξ).psi k) ≤ C.U' ((C.tech ξ).psi 0) :=
+      C.isMarginalUtility.strictAnti.antitoneOn ((C.tech ξ).psi_pos le_rfl)
+        ((C.tech ξ).psi_pos hk.1) hψ
+    have h3 := mul_le_mul_of_nonneg_left hle C.coef_pos.le
+    have h4 := hCS ξ
+    simp only [Rc, sub_zero]
+    linarith
+  have hfix : eulerCross C.U' (fun _ => False) (C.Rc C.lfpc ξ) ((C.tech ξ).psi k) =
+      C.lfpc ξ k := C.Tc_lfpc hF ξ hk
+  rcases eulerCross_spec C.isMarginalUtility (C.isEulerRHS_lfpc hF ξ) hP hPB h0 with
+    ⟨h1, -, h3⟩ | ⟨-, h2⟩
+  · rw [hfix] at h1 h3
+    exact ⟨h1, h3⟩
+  · exact (h2 0 le_rfl hP).elim
+
+/-- **A Borel equilibrium of Exercise 18.9 (Feller property only).** Given a consumption floor,
+`lfp = lim Tⁿ0` is a fixed point of `T` on `[0, B] × Ξ` with consumption bounded away from zero;
+`lfp(ξ, ·)` is continuous with `lfp` and `ψ − lfp` nondecreasing, and `lfp(·, k)` is Borel. It lies
+below every supersolution in `F₊`. -/
+theorem ex_18_9_borel_equilibrium (hF : C.ConsFloor) :
+    (∀ ξ, ∀ k ∈ Icc 0 C.B, C.Tc C.lfpc ξ k = C.lfpc ξ k) ∧
+      (∃ c > 0, ∀ ξ, ∀ k ∈ Icc 0 C.B, c ≤ (C.tech ξ).psi k - C.lfpc ξ k) ∧
+      (∀ ξ, ContinuousOn (C.lfpc ξ) (Icc 0 C.B)) ∧
+      (∀ ξ, MonotoneOn (C.lfpc ξ) (Icc 0 C.B)) ∧
+      (∀ ξ, MonotoneOn (fun k => (C.tech ξ).psi k - C.lfpc ξ k) (Icc 0 C.B)) ∧
+      (∀ k ∈ Icc 0 C.B, Measurable fun ξ => C.lfpc ξ k) ∧
+      ∀ h, C.IsInFc h → (∀ ξ, ∀ k ∈ Icc 0 C.B, C.Tc h ξ k ≤ h ξ k) →
+        ∀ ξ, ∀ k ∈ Icc 0 C.B, C.lfpc ξ k ≤ h ξ k := by
+  refine ⟨fun ξ _ hk => C.Tc_lfpc hF ξ hk, C.lfpc_cons_lb hF, C.lfpc_continuousOn, C.lfpc_mono,
+    C.lfpc_mono_sub, fun k hk => ?_, fun _ hh hsup ξ _ hk => lfpc_le_of_super hh hsup ξ hk⟩
+  exact measurable_of_tendsto_metrizable (f := fun n ξ => C.Tit n ξ k)
+    (fun n => ((C.isInFc_Tit n).cont.comp_continuous (continuous_const.prodMk continuous_id)
+      fun _ => ⟨hk, mem_univ _⟩).measurable)
+    (tendsto_pi_nhds.2 fun ξ => C.tendsto_Tit ξ hk)
+
+/-- **Exercise 18.9: existence of an equilibrium with a continuum of shocks.** Given a consumption
+floor and the strong Feller property, `T` has a fixed point `h ∈ F₊` with consumption bounded
+away from zero, `ψ − h ≥ c > 0`; it is the least supersolution in `F₊`, hence the least fixed
+point. -/
+theorem ex_18_9_exists_equilibrium (hF : C.ConsFloor) (hSF : C.StrongFeller) :
+    ∃ h, C.IsInFc h ∧ (∀ ξ, ∀ k ∈ Icc 0 C.B, C.Tc h ξ k = h ξ k) ∧
+      (∃ c > 0, ∀ ξ, ∀ k ∈ Icc 0 C.B, c ≤ (C.tech ξ).psi k - h ξ k) ∧
+      ∀ h', C.IsInFc h' → (∀ ξ, ∀ k ∈ Icc 0 C.B, C.Tc h' ξ k ≤ h' ξ k) →
+        ∀ ξ, ∀ k ∈ Icc 0 C.B, h ξ k ≤ h' ξ k :=
+  ⟨C.lfpc, C.isInFc_lfpc hF hSF, fun ξ _ hk => C.Tc_lfpc hF ξ hk, C.lfpc_cons_lb hF,
+    fun _ hh hsup ξ _ hk => lfpc_le_of_super hh hsup ξ hk⟩
+
+/-- **Exercise 18.9, equilibrium in equation form.** Given a consumption floor, the strong Feller
+property and the cross-state condition, there is `h ∈ F₊`, a fixed point of `T`, with consumption
+bounded away from zero, solving the integral Euler equation
+`U′[ψ(k, ξ) − h(ξ, k)] = β(1 − θ) ∫ f′(h(ξ, k), x) U′[ψ(h(ξ, k), x) − h(x, h(ξ, k))] κ(ξ, dx)`
+at every `(k, ξ) ∈ [0, B] × Ξ`. -/
+theorem ex_18_9_equilibrium (hF : C.ConsFloor) (hSF : C.StrongFeller)
+    (hCS : C.CrossState) :
+    ∃ h, C.IsInFc h ∧ (∀ ξ, ∀ k ∈ Icc 0 C.B, C.Tc h ξ k = h ξ k) ∧
+      (∃ c > 0, ∀ ξ, ∀ k ∈ Icc 0 C.B, c ≤ (C.tech ξ).psi k - h ξ k) ∧
+      ∀ ξ, ∀ k ∈ Icc 0 C.B, C.U' ((C.tech ξ).psi k - h ξ k) = C.Rc h ξ (h ξ k) :=
+  ⟨C.lfpc, C.isInFc_lfpc hF hSF, fun ξ _ hk => C.Tc_lfpc hF ξ hk, C.lfpc_cons_lb hF,
+    fun ξ _ hk => (C.lfpc_euler hF hCS ξ hk).2⟩
+
+/-! ### When the hypotheses hold -/
+
+omit [CompactSpace Ξ] [BorelSpace Ξ] in
+/-- The uniform anchor says exactly that one level `K` lies above every steady state `k*(ξ)` and
+below every maximal sustainable stock `k̄(ξ)`. -/
+theorem uniformAnchor_iff :
+    C.UniformAnchor ↔ ∃ K, ∀ ξ, (C.tech ξ).kstar ≤ K ∧ K < (C.tech ξ).kbar := by
+  constructor
+  · rintro ⟨K, hK0, hKk, hKf⟩
+    refine ⟨K, fun ξ => ⟨?_, hKk ξ⟩⟩
+    by_contra hlt
+    push Not at hlt
+    have := (C.tech ξ).one_lt_euler hK0 hlt
+    rw [C.tech_β ξ, C.tech_θ ξ] at this
+    linarith [hKf ξ]
+  · rintro ⟨K, hK⟩
+    have ξ0 := Classical.arbitrary Ξ
+    have hK0 : 0 ≤ K := (C.tech ξ0).kstar_pos.le.trans (hK ξ0).1
+    refine ⟨K, hK0, fun ξ => (hK ξ).2, fun ξ => ?_⟩
+    have hf := (C.tech ξ).f'_strictAntiOn.antitoneOn (mem_Ici.2 (C.tech ξ).kstar_pos.le)
+      (mem_Ici.2 hK0) (hK ξ).1
+    have he := (C.tech ξ).euler_kstar
+    have hc := (C.tech ξ).euler_coef_pos
+    rw [C.tech_β ξ, C.tech_θ ξ] at he hc
+    nlinarith
+
+omit [CompactSpace Ξ] [BorelSpace Ξ] in
+/-- **Technologies with a common marginal product** satisfy the uniform anchor: then every shock
+has the same steady state `k*`, which lies below every `k̄(ξ)`. The levels `f(·, ξ)`, hence
+`ψ(·, ξ)` and `k̄(ξ)`, may differ across shocks (for instance through the endowment `f(0, ξ)`). -/
+theorem uniformAnchor_of_f'_eq {ξ0 : Ξ} (hf' : ∀ ξ, (C.tech ξ).f' = (C.tech ξ0).f') :
+    C.UniformAnchor := by
+  have heq : ∀ ξ, (C.tech ξ0).kstar = (C.tech ξ).kstar := fun ξ => by
+    refine (C.tech ξ).kstar_unique (C.tech ξ0).kstar_pos.le ?_
+    have he := (C.tech ξ0).euler_kstar
+    rw [C.tech_β ξ0, C.tech_θ ξ0] at he
+    rw [hf' ξ, C.tech_β ξ, C.tech_θ ξ]
+    exact he
+  exact (C.uniformAnchor_iff).2 ⟨(C.tech ξ0).kstar, fun ξ =>
+    ⟨(heq ξ).ge, (heq ξ).trans_lt (C.tech ξ).kstar_lt_kbar⟩⟩
+
+omit [CompactSpace Ξ] [BorelSpace Ξ] in
+/-- With one technology in every state the uniform anchor holds. -/
+theorem uniformAnchor_of_identical (M : GlobalModel) (hM : ∀ ξ, C.tech ξ = M) :
+    C.UniformAnchor :=
+  (C.uniformAnchor_iff).2 ⟨M.kstar, fun ξ => by rw [hM ξ]; exact ⟨le_rfl, M.kstar_lt_kbar⟩⟩
+
+omit [CompactSpace Ξ] [Nonempty Ξ] [BorelSpace Ξ] in
+/-- A transition that does not depend on the current shock (i.i.d. shocks) is strong Feller. -/
+theorem strongFeller_of_const (μ : Measure Ξ) (hκ : ∀ ξ, C.κ ξ = μ) : C.StrongFeller := by
+  intro g _ _
+  simp only [hκ]
+  exact continuous_const
+
+end ContModel
+
+/-! ### A heterogeneous example -/
+
+open Set Filter Topology MeasureTheory
+
+/-- The endowment `b(t) = [(2 + t)² − (2 + t) − 1/2](2 + t)/(3 + t)²` of the example, chosen so
+that `ψ(k) − k` vanishes at `k̄ = 2 + t` (`ratTech_psi_sub`). -/
+noncomputable def exB (t : ℝ) : ℝ := ((2 + t) ^ 2 - (2 + t) - 1 / 2) * (2 + t) / (3 + t) ^ 2
+
+/-- `b(t) > 0`. -/
+theorem exB_pos {t : ℝ} (ht : 0 ≤ t) : 0 < exB t := by
+  unfold exB
+  have : 0 < (2 + t) ^ 2 - (2 + t) - 1 / 2 := by nlinarith
+  positivity
+
+/-- `b(t) ≤ 1 + t`. -/
+theorem exB_le {t : ℝ} (ht : 0 ≤ t) : exB t ≤ 1 + t := by
+  unfold exB
+  rw [div_le_iff₀ (by positivity)]
+  nlinarith [sq_nonneg t]
+
+/-- The third coefficient identity of `ratModel` for the example. -/
+theorem exB_h3 {t : ℝ} (ht : 0 ≤ t) :
+    (2 + t) * (1 + t - exB t) - exB t / (2 + t) = 2 * exB t + 3 * (1 - 1 / 2) - 1 := by
+  unfold exB
+  have h1 : (2 + t) ≠ 0 := by linarith
+  have h2 : (3 + t) ≠ 0 := by linarith
+  field_simp
+  ring
+
+/-- The technology of shock `t ∈ [0, 1]`. -/
+noncomputable def exTech (t : ℝ) (ht : 0 ≤ t) : GlobalModel :=
+  ratModel (9 / 10) (1 / 2) 3 (exB t) (2 + t) (1 + t - exB t) (exB t / (2 + t)) (by norm_num)
+    (by norm_num) (by norm_num) (by norm_num) (by norm_num) (exB_pos ht) (by linarith)
+    (by linarith [exB_le ht]) (div_pos (exB_pos ht) (by linarith))
+    (mul_div_cancel₀ _ (by linarith : (2 + t) ≠ 0)).symm (by ring) (exB_h3 ht)
+
+/-- After-tax income in the example. -/
+theorem exTech_psi (t : ℝ) (ht : 0 ≤ t) (k : ℝ) :
+    (exTech t ht).psi k = exB t + 3 * k / (1 + k) - 1 / 2 * k * (3 / (1 + k) ^ 2) := rfl
+
+/-- The marginal product in the example does not depend on the shock. -/
+theorem exTech_f' (t : ℝ) (ht : 0 ≤ t) : (exTech t ht).f' = fun k => 3 / (1 + k) ^ 2 := rfl
+
+/-- The maximal sustainable stock of shock `t` is `2 + t`. -/
+theorem exTech_kbar (t : ℝ) (ht : 0 ≤ t) : (exTech t ht).kbar = 2 + t := rfl
+
+/-- The endowment is continuous in the shock. -/
+theorem exB_continuous : ContinuousOn exB (Ici 0) := by
+  unfold exB
+  refine ContinuousOn.div (by fun_prop) (by fun_prop) fun t ht => ?_
+  have : (0:ℝ) ≤ t := ht
+  positivity
+
+/-- **A continuum economy with heterogeneous technologies**: `Ξ = [0, 1]`, shocks i.i.d.
+uniform, `β = 9/10`, `θ = 1/2`, `U = √`, `f(k, ξ) = b(ξ) + 3k/(1 + k)`, `k̄(ξ) = 2 + ξ`. -/
+noncomputable def exCont : ContModel unitInterval where
+  tech ξ := exTech ξ ξ.2.1
+  β := 9 / 10
+  θ := 1 / 2
+  U := fun c => √c
+  U' := fun c => 1 / (2 * √c)
+  B := 3
+  κ := fun _ => volume
+  tech_β _ := rfl
+  tech_θ _ := rfl
+  tech_U _ := rfl
+  tech_U' _ := rfl
+  kbar_le ξ := by rw [exTech_kbar]; linarith [ξ.2.2]
+  κ_prob _ := inferInstance
+  κ_feller _ _ := continuous_const
+  psi_cont := by
+    simp only [exTech_psi]
+    have hb : Continuous fun p : ℝ × unitInterval => exB (p.2 : ℝ) :=
+      exB_continuous.comp_continuous (continuous_subtype_val.comp continuous_snd)
+        fun p => p.2.2.1
+    refine (hb.continuousOn.add ?_).sub ?_
+    · refine ContinuousOn.div (by fun_prop) (by fun_prop) fun p hp => ?_
+      have : (0:ℝ) ≤ p.1 := hp.1.1
+      positivity
+    · refine ContinuousOn.mul (by fun_prop) (ContinuousOn.div (by fun_prop) (by fun_prop)
+        fun p hp => ?_)
+      have : (0:ℝ) ≤ p.1 := hp.1.1
+      positivity
+  f'_cont := by
+    simp only [exTech_f']
+    refine ContinuousOn.div (by fun_prop) (by fun_prop) fun p hp => ?_
+    have : (0:ℝ) ≤ p.1 := hp.1.1
+    positivity
+
+/-- In `exCont` the technologies differ across shocks: `k̄(0) = 2` and `k̄(1) = 3`. -/
+theorem exCont_tech_ne : exCont.tech 0 ≠ exCont.tech 1 := by
+  intro h
+  have := congrArg GlobalModel.kbar h
+  simp [exCont, exTech_kbar] at this
+
+/-- `exCont` satisfies the uniform anchor (common marginal product). -/
+theorem exCont_uniformAnchor : exCont.UniformAnchor :=
+  exCont.uniformAnchor_of_f'_eq (ξ0 := 0) fun _ => rfl
+
+/-- `exCont` is strong Feller (i.i.d. shocks). -/
+theorem exCont_strongFeller : exCont.StrongFeller :=
+  exCont.strongFeller_of_const volume fun _ => rfl
+
+/-- **A non-degenerate equilibrium with heterogeneous technologies and a continuum of shocks**:
+`exCont` has a fixed point of `T` in `F₊` with consumption bounded away from zero. -/
+theorem exCont_exists_equilibrium :
+    ∃ h, exCont.IsInFc h ∧ (∀ ξ, ∀ k ∈ Icc 0 exCont.B, exCont.Tc h ξ k = h ξ k) ∧
+      ∃ c > 0, ∀ ξ, ∀ k ∈ Icc 0 exCont.B, c ≤ (exCont.tech ξ).psi k - h ξ k := by
+  obtain ⟨h, h1, h2, h3, -⟩ := exCont.ex_18_9_exists_equilibrium
+    (exCont.consFloor_of_uniformAnchor exCont_uniformAnchor) exCont_strongFeller
+  exact ⟨h, h1, h2, h3⟩
+
+end StokeyLucasPrescott.EquilibriaWithDistortions
+
+/-
+Copyright (c) 2026 Robert Kirkby. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Robert Kirkby
+-/
+
+/-!
+# Exercise 18.9: existence of an equilibrium for any continuum of technologies (SLP p. 560)
+
+Exercise 18.9 asks how the stochastic argument of pp. 558–560 changes when the shock space `Ξ`
+is a closed bounded interval. `GlobalContinuum` sets up the model (`ContModel`: a compact metric
+`Ξ`, jointly continuous technologies satisfying Assumptions 18.1–18.2 shock by shock, a Feller
+transition `κ`) and shows that `T` maps `F₊` into itself monotonically. `GlobalContinuumFixed`
+shows that the monotone limit `lfp = sup_n Tⁿ0` is a fixed point once consumption along the
+iterates has a uniform floor (`ConsFloor`). This module proves that floor **with no extra
+hypothesis on the technologies**, so existence holds for every `ContModel`.
+
+The floor comes from an **auxiliary planner** with the concave technology
+`Φ(k, ξ) = θ f(0, ξ) + (1 − θ) f(k, ξ) ≤ ψ(k, ξ)`, the continuum version of the argument in
+`GlobalStochasticNondegenerate` (finite shocks):
+`V(k, ξ) = max_{0 ≤ z ≤ Φ(k, ξ)} U(Φ(k, ξ) − z) + β ∫ V(z, x) κ(ξ, dx)`.
+
+* `Phi` and its properties (`Phi_le_psi`, `Phi_sub_gt`, `Phi_concave`, `Phi_cont`).
+* The Bellman operator `plBellOp` on bounded continuous functions on `K × Ξ` (continuity in the
+  shock from the Feller property and uniform continuity on the compact `K × Ξ`, `EV_continuous`);
+  it is a `β`-contraction (`plBellOp_contracting`) with fixed point `Vstar`, which is concave in
+  saving (`isConc_Vstar`). An optimal saving `pz` (`pz_spec`), with consumption `pc`.
+* `exists_pc_lb`: the planner's consumption is bounded below by **one positive constant** on
+  `K × Ξ`. This uses concavity of `V*`, the bound `‖V*‖`, `Φ ≥ p > 0` and the Inada condition,
+  and needs no continuity of the policy.
+* `IsInFc.Tc_floor` (**the floor is invariant**): if `h ∈ F₊` leaves at least the planner's
+  consumption, so does `T h`. Raising the planner's saving by `δ`, comparing with saving
+  `pz(x, z)` tomorrow pointwise in `x`, and letting `δ → 0` by dominated convergence gives the
+  planner's Euler inequality with the agent's after-tax return, `U′(c(ξ, k)) ≥ RHS(y₀)` at
+  `y₀ = ψ(k, ξ) − c(ξ, k)`. The integrand is a continuous minorant built from `h`, so no
+  measurability of the planner's policy in the shock is needed.
+* `Tit_floor`, `consFloor`, `lfpc_floor`: the floor holds for every `Tⁿ0` and for `lfp`.
+* `ex_18_9_borel_existence`, `ex_18_9_borel_euler_KT`, `ex_18_9_borel_euler` (Feller property
+  only): `lfp` is a fixed point of `T` with consumption bounded away from zero, continuous and
+  monotone in `k`, Borel in `ξ`, the least supersolution in `F₊`. It solves the integral Euler
+  equation at every `(k, ξ)`, in Kuhn–Tucker form, and as an equation under the cross-state
+  condition.
+* **`ex_18_9_existence`** (Exercise 18.9): under the strong Feller property, `lfp ∈ F₊` is the
+  least fixed point of `T`, with consumption bounded away from zero; `ex_18_9_existence_euler`
+  adds the Euler equation under the cross-state condition.
+
+**Correction (p. 560).** For the continuum, as for finitely many shocks, existence does not follow
+from Schauder's Theorem on `F` (which gives the degenerate `ψ`); it follows from monotone
+iteration from `0` with the planner's consumption floor. No anchor at a steady state and no
+closeness of the technologies is needed. The uniform anchor of `GlobalContinuumFixed` is a
+sufficient condition only.
+
+**Not proved.** Continuity of `lfp` in the shock under the Feller property alone. `lfp` is a
+monotone limit of continuous functions, hence lower semicontinuous, and the Feller property moves
+the right side of (9) continuously only for continuous integrands. For `κ(ξ) = δ_ξ` continuity
+would mean that the least deterministic equilibrium depends continuously on the technology,
+which nothing here gives. The strong Feller property is used only for this continuity.
+-/
+
+namespace StokeyLucasPrescott.EquilibriaWithDistortions
+
+namespace ContModel
+
+open Set Filter Topology MeasureTheory BoundedContinuousFunction
+
+variable {Ξ : Type} [MetricSpace Ξ] [CompactSpace Ξ] [Nonempty Ξ] [MeasurableSpace Ξ]
+  [BorelSpace Ξ] (C : ContModel Ξ)
+
+omit [CompactSpace Ξ] [BorelSpace Ξ] in
+/-- `0 < β`. -/
+theorem β_pos : 0 < C.β := by
+  rw [← C.tech_β (Classical.arbitrary Ξ)]; exact (C.tech _).β_pos
+
+omit [CompactSpace Ξ] [BorelSpace Ξ] in
+/-- `β < 1`. -/
+theorem β_lt_one : C.β < 1 := by
+  rw [← C.tech_β (Classical.arbitrary Ξ)]; exact (C.tech _).β_lt_one
+
+omit [CompactSpace Ξ] [BorelSpace Ξ] in
+/-- `0 < θ`. -/
+theorem θ_pos : 0 < C.θ := by
+  rw [← C.tech_θ (Classical.arbitrary Ξ)]; exact (C.tech _).θ_pos
+
+omit [CompactSpace Ξ] [BorelSpace Ξ] in
+/-- `θ < 1`. -/
+theorem θ_lt_one : C.θ < 1 := by
+  rw [← C.tech_θ (Classical.arbitrary Ξ)]; exact (C.tech _).θ_lt_one
+
+omit [CompactSpace Ξ] [BorelSpace Ξ] in
+/-- The common utility is continuous on `[0, ∞)`. -/
+theorem U_cont : ContinuousOn C.U (Ici 0) := by
+  rw [← C.tech_U (Classical.arbitrary Ξ)]; exact (C.tech _).U_cont
+
+omit [CompactSpace Ξ] [BorelSpace Ξ] in
+/-- The common utility is strictly increasing on `[0, ∞)`. -/
+theorem U_strictMono : StrictMonoOn C.U (Ici 0) := by
+  rw [← C.tech_U (Classical.arbitrary Ξ)]; exact (C.tech _).U_strictMono
+
+omit [CompactSpace Ξ] [BorelSpace Ξ] in
+/-- The common utility is strictly concave on `[0, ∞)`. -/
+theorem U_strictConcave : StrictConcaveOn ℝ (Ici 0) C.U := by
+  rw [← C.tech_U (Classical.arbitrary Ξ)]; exact (C.tech _).U_strictConcave
+
+omit [CompactSpace Ξ] [BorelSpace Ξ] in
+/-- `U′` is the derivative of the common utility on `(0, ∞)`. -/
+theorem U_deriv {c : ℝ} (hc : 0 < c) : HasDerivAt C.U (C.U' c) c := by
+  rw [← C.tech_U (Classical.arbitrary Ξ), ← C.tech_U' (Classical.arbitrary Ξ)]
+  exact (C.tech _).U_deriv c hc
+
+/-! ### The auxiliary planner's technology -/
+
+/-- The technology of the auxiliary planner: `Φ(k, ξ) = θ f(0, ξ) + (1 − θ) f(k, ξ)`. -/
+noncomputable def Phi (ξ : Ξ) (k : ℝ) : ℝ := C.θ * (C.tech ξ).f 0 + (1 - C.θ) * (C.tech ξ).f k
+
+omit [CompactSpace Ξ] [Nonempty Ξ] [BorelSpace Ξ] in
+/-- `f = ψ + θ k f′`. -/
+theorem f_eq (ξ : Ξ) (k : ℝ) :
+    (C.tech ξ).f k = (C.tech ξ).psi k + C.θ * k * (C.tech ξ).f' k := by
+  simp only [GlobalModel.psi, C.tech_θ ξ]; ring
+
+omit [CompactSpace Ξ] [Nonempty Ξ] [BorelSpace Ξ] in
+/-- `Φ ≤ ψ` on `[0, ∞)`. -/
+theorem Phi_le_psi (ξ : Ξ) {k : ℝ} (hk : 0 ≤ k) : C.Phi ξ k ≤ (C.tech ξ).psi k := by
+  have hθ := C.tech_θ ξ
+  have hθ0 : 0 < C.θ := hθ ▸ (C.tech ξ).θ_pos
+  have e : (C.tech ξ).psi k - C.Phi ξ k =
+      C.θ * ((C.tech ξ).f k - (C.tech ξ).f 0 - k * (C.tech ξ).f' k) := by
+    simp only [GlobalModel.psi, Phi, hθ]; ring
+  rcases hk.eq_or_lt with h0 | hpos
+  · rw [← h0] at e ⊢
+    have : (C.tech ξ).psi 0 - C.Phi ξ 0 = 0 := by rw [e]; ring
+    linarith
+  · have h1 := (C.tech ξ).f'_mul_lt_sub le_rfl hpos
+    have : 0 ≤ (C.tech ξ).psi k - C.Phi ξ k := by
+      rw [e]; exact mul_nonneg hθ0.le (by linarith)
+    linarith
+
+omit [CompactSpace Ξ] [BorelSpace Ξ] in
+/-- `Φ(b, ξ) − Φ(a, ξ) > (1 − θ)(b − a) f′(b, ξ)` for `0 ≤ a < b`. -/
+theorem Phi_sub_gt (ξ : Ξ) {a b : ℝ} (ha : 0 ≤ a) (hab : a < b) :
+    (1 - C.θ) * (b - a) * (C.tech ξ).f' b < C.Phi ξ b - C.Phi ξ a := by
+  have h1 := (C.tech ξ).f'_mul_lt_sub ha hab
+  have h2 : 0 < 1 - C.θ := by linarith [C.θ_lt_one]
+  have : C.Phi ξ b - C.Phi ξ a = (1 - C.θ) * ((C.tech ξ).f b - (C.tech ξ).f a) := by
+    simp only [Phi]; ring
+  rw [this, mul_assoc]
+  exact mul_lt_mul_of_pos_left (by linarith) h2
+
+omit [CompactSpace Ξ] [BorelSpace Ξ] in
+/-- `Φ(·, ξ)` is nondecreasing on `[0, ∞)`. -/
+theorem Phi_le (ξ : Ξ) {a b : ℝ} (ha : 0 ≤ a) (hab : a ≤ b) : C.Phi ξ a ≤ C.Phi ξ b := by
+  rcases hab.eq_or_lt with h | h
+  · rw [h]
+  · have h1 := C.Phi_sub_gt ξ ha h
+    have : 0 < (1 - C.θ) * (b - a) * (C.tech ξ).f' b :=
+      mul_pos (mul_pos (by linarith [C.θ_lt_one]) (by linarith))
+        ((C.tech ξ).f'_pos (ha.trans h.le))
+    linarith
+
+omit [CompactSpace Ξ] [Nonempty Ξ] [BorelSpace Ξ] in
+/-- `Φ(0, ξ) = f(0, ξ) = ψ(0, ξ)`. -/
+theorem Phi_zero (ξ : Ξ) : C.Phi ξ 0 = (C.tech ξ).psi 0 := by
+  rw [(C.tech ξ).psi_zero]; simp only [Phi]; ring
+
+omit [CompactSpace Ξ] [Nonempty Ξ] [BorelSpace Ξ] in
+/-- `Φ(·, ξ)` is continuous on `[0, ∞)`. -/
+theorem Phi_continuousOn (ξ : Ξ) : ContinuousOn (C.Phi ξ) (Ici 0) :=
+  continuousOn_const.add (continuousOn_const.mul (C.tech ξ).f_cont)
+
+omit [CompactSpace Ξ] [BorelSpace Ξ] in
+/-- `Φ(·, ξ)` is concave on `[0, ∞)`. -/
+theorem Phi_concave (ξ : Ξ) : ConcaveOn ℝ (Ici 0) (C.Phi ξ) := by
+  refine ⟨convex_Ici 0, fun x hx y hy a b ha hb hab => ?_⟩
+  have hf := (C.tech ξ).f_strictConcave.concaveOn.2 hx hy ha hb hab
+  have h2 : 0 ≤ 1 - C.θ := by linarith [C.θ_lt_one]
+  simp only [smul_eq_mul] at hf ⊢
+  simp only [Phi]
+  have := mul_le_mul_of_nonneg_left hf h2
+  have e : a * (C.θ * (C.tech ξ).f 0 + (1 - C.θ) * (C.tech ξ).f x) +
+      b * (C.θ * (C.tech ξ).f 0 + (1 - C.θ) * (C.tech ξ).f y) =
+      (a + b) * (C.θ * (C.tech ξ).f 0) +
+        (1 - C.θ) * (a * (C.tech ξ).f x + b * (C.tech ξ).f y) := by ring
+  rw [e, hab, one_mul]
+  linarith
+
+omit [CompactSpace Ξ] [Nonempty Ξ] [BorelSpace Ξ] in
+/-- `Φ` maps `K = [0, B]` into `(0, B]`. -/
+theorem Phi_le_B (ξ : Ξ) {k : ℝ} (hk : k ∈ Icc 0 C.B) : C.Phi ξ k ≤ C.B :=
+  (C.Phi_le_psi ξ hk.1).trans (C.psi_le_B ξ hk)
+
+omit [BorelSpace Ξ] in
+/-- `Φ` is bounded below by a positive constant on `[0, ∞) × Ξ`. -/
+theorem exists_Phi_lb : ∃ p > 0, ∀ ξ, ∀ k, 0 ≤ k → p ≤ C.Phi ξ k := by
+  obtain ⟨p, hp, hpψ⟩ := C.exists_psi_zero_lb
+  exact ⟨p, hp, fun ξ k hk => by
+    have := C.Phi_le ξ le_rfl hk
+    rw [C.Phi_zero] at this
+    linarith [hpψ ξ]⟩
+
+omit [CompactSpace Ξ] [BorelSpace Ξ] in
+/-- `Φ` is positive on `[0, ∞) × Ξ`. -/
+theorem Phi_pos (ξ : Ξ) {k : ℝ} (hk : 0 ≤ k) : 0 < C.Phi ξ k := by
+  have := C.Phi_le ξ le_rfl hk
+  rw [C.Phi_zero] at this
+  linarith [(C.tech ξ).psi_pos le_rfl]
+
+omit [CompactSpace Ξ] [BorelSpace Ξ] in
+/-- `Φ` is jointly continuous on `[0, B] × Ξ`. -/
+theorem Phi_cont : ContinuousOn (fun p : ℝ × Ξ => C.Phi p.2 p.1) (Icc 0 C.B ×ˢ univ) := by
+  have h0 : Continuous fun p : ℝ × Ξ => (C.tech p.2).psi 0 :=
+    (C.psi_continuous_shock ⟨le_rfl, C.B_pos.le⟩).comp continuous_snd
+  have h1 : ContinuousOn (fun p : ℝ × Ξ => C.θ * (C.tech p.2).psi 0 + (1 - C.θ) *
+      ((C.tech p.2).psi p.1 + C.θ * p.1 * (C.tech p.2).f' p.1)) (Icc 0 C.B ×ˢ univ) :=
+    (continuous_const.mul h0).continuousOn.add (continuousOn_const.mul (C.psi_cont.add
+      ((continuousOn_const.mul continuousOn_fst).mul C.f'_cont)))
+  refine h1.congr fun p _ => ?_
+  simp only [Phi, ← f_eq, (C.tech p.2).psi_zero]
+
+/-! ### The auxiliary planner's Bellman equation -/
+
+/-- The value functions of the auxiliary planner: bounded continuous functions on `K × Ξ`. -/
+abbrev VS : Type := (Icc (0 : ℝ) C.B × Ξ) →ᵇ ℝ
+
+/-- A value function evaluated at saving `z` (clamped to `K`) and shock `x`. -/
+noncomputable def vE (V : C.VS) (z : ℝ) (x : Ξ) : ℝ := V (projIcc 0 C.B C.B_pos.le z, x)
+
+omit [CompactSpace Ξ] [BorelSpace Ξ] in
+/-- `vE V` is jointly continuous. -/
+theorem vE_continuous (V : C.VS) : Continuous fun p : ℝ × Ξ => C.vE V p.1 p.2 :=
+  V.continuous.comp ((continuous_projIcc.comp continuous_fst).prodMk continuous_snd)
+
+omit [CompactSpace Ξ] [BorelSpace Ξ] in
+/-- `vE V z` is continuous in the shock. -/
+theorem vE_continuous_shock (V : C.VS) (z : ℝ) : Continuous fun x => C.vE V z x :=
+  (C.vE_continuous V).comp (continuous_const.prodMk continuous_id)
+
+omit [CompactSpace Ξ] [BorelSpace Ξ] in
+/-- `|V(z, x)| ≤ ‖V‖`. -/
+theorem abs_vE_le (V : C.VS) (z : ℝ) (x : Ξ) : |C.vE V z x| ≤ ‖V‖ :=
+  V.norm_coe_le_norm _
+
+omit [CompactSpace Ξ] [BorelSpace Ξ] in
+/-- `|V(z, x) − W(z, x)| ≤ d(V, W)`. -/
+theorem abs_vE_sub_le (V W : C.VS) (z : ℝ) (x : Ξ) : |C.vE V z x - C.vE W z x| ≤ dist V W := by
+  have := V.dist_coe_le_dist (g := W) (projIcc 0 C.B C.B_pos.le z, x)
+  rwa [Real.dist_eq] at this
+
+omit [CompactSpace Ξ] [BorelSpace Ξ] in
+/-- `vE V` on `K`. -/
+theorem vE_of_mem (V : C.VS) {z : ℝ} (hz : z ∈ Icc 0 C.B) (x : Ξ) :
+    C.vE V z x = V (⟨z, hz⟩, x) := by
+  simp only [vE, projIcc_of_mem _ hz]
+
+/-- The expected continuation value `∫ V(z, x) κ(ξ, dx)`. -/
+noncomputable def EV (V : C.VS) (ξ : Ξ) (z : ℝ) : ℝ := ∫ x, C.vE V z x ∂(C.κ ξ)
+
+/-- `x ↦ V(z, x)` is integrable. -/
+theorem integrable_vE (V : C.VS) (z : ℝ) (ξ : Ξ) : Integrable (fun x => C.vE V z x) (C.κ ξ) := by
+  have := C.κ_prob ξ
+  exact (C.vE_continuous_shock V z).integrable_of_hasCompactSupport
+    (HasCompactSupport.of_compactSpace _)
+
+omit [CompactSpace Ξ] [Nonempty Ξ] [BorelSpace Ξ] in
+/-- A pointwise bound `g ≤ g′ + D` integrates against the probability `κ(ξ)`. -/
+theorem integral_le_add {g g' : Ξ → ℝ} {ξ : Ξ} (hg : Integrable g (C.κ ξ))
+    (hg' : Integrable g' (C.κ ξ)) {D : ℝ} (h : ∀ x, g x ≤ g' x + D) :
+    ∫ x, g x ∂(C.κ ξ) ≤ ∫ x, g' x ∂(C.κ ξ) + D := by
+  have := C.κ_prob ξ
+  calc ∫ x, g x ∂(C.κ ξ) ≤ ∫ x, (g' x + D) ∂(C.κ ξ) :=
+        integral_mono hg (hg'.add (integrable_const D)) h
+    _ = ∫ x, g' x ∂(C.κ ξ) + D := by rw [integral_add hg' (integrable_const D)]; simp
+
+/-- `EV V ≤ EV W + d(V, W)`. -/
+theorem EV_le_add (V W : C.VS) (ξ : Ξ) (z : ℝ) : C.EV V ξ z ≤ C.EV W ξ z + dist V W :=
+  C.integral_le_add (C.integrable_vE V z ξ) (C.integrable_vE W z ξ) fun x => by
+    linarith [(abs_le.1 (C.abs_vE_sub_le V W z x)).2]
+
+/-- `(ξ, z) ↦ EV V ξ z` is jointly continuous (the Feller property and uniform continuity of
+`V` on the compact `K × Ξ`). -/
+theorem EV_continuous (V : C.VS) : Continuous fun q : Ξ × ℝ => C.EV V q.1 q.2 := by
+  rw [Metric.continuous_iff]
+  rintro ⟨ξ0, z0⟩ ε hε
+  obtain ⟨δ1, hδ1, hu⟩ := Metric.uniformContinuous_iff.1
+    (CompactSpace.uniformContinuous_of_continuous V.continuous) (ε / 4) (by linarith)
+  obtain ⟨δ2, hδ2, hF⟩ := Metric.continuous_iff.1
+    (C.κ_feller _ (C.vE_continuous_shock V z0)) ξ0 (ε / 4) (by linarith)
+  refine ⟨min δ1 δ2, lt_min hδ1 hδ2, fun ⟨ξ, z⟩ hd => ?_⟩
+  rw [Prod.dist_eq] at hd
+  have hdξ : dist ξ ξ0 < δ2 := (le_max_left _ _).trans_lt (hd.trans_le (min_le_right _ _))
+  have hdz : dist z z0 < δ1 := (le_max_right _ _).trans_lt (hd.trans_le (min_le_left _ _))
+  have h1 : ∀ x, |C.vE V z x - C.vE V z0 x| < ε / 4 := fun x => by
+    have hpd : dist ((projIcc 0 C.B C.B_pos.le z, x) : Icc (0 : ℝ) C.B × Ξ)
+        (projIcc 0 C.B C.B_pos.le z0, x) < δ1 := by
+      rw [Prod.dist_eq, dist_self, Subtype.dist_eq, Real.dist_eq]
+      refine max_lt ((abs_projIcc_sub_projIcc C.B_pos.le).trans_lt ?_) hδ1
+      rwa [← Real.dist_eq]
+    have := hu hpd
+    rwa [Real.dist_eq] at this
+  have e1 := C.integral_le_add (C.integrable_vE V z ξ) (C.integrable_vE V z0 ξ)
+    (D := ε / 4) fun x => by linarith [(abs_lt.1 (h1 x)).2]
+  have e2 := C.integral_le_add (C.integrable_vE V z0 ξ) (C.integrable_vE V z ξ)
+    (D := ε / 4) fun x => by linarith [(abs_lt.1 (h1 x)).1]
+  have e3 := hF ξ hdξ
+  rw [Real.dist_eq] at e3 ⊢
+  change |C.EV V ξ z - C.EV V ξ0 z0| < ε
+  simp only [EV] at e1 e2 e3 ⊢
+  rw [abs_lt] at e3 ⊢
+  constructor <;> linarith [e3.1, e3.2]
+
+/-- The clamp of `t` to `[0, 1]`. -/
+noncomputable def clampUnit (t : ℝ) : ℝ := max 0 (min 1 t)
+
+/-- `clampUnit` is the identity on `[0, 1]`. -/
+theorem clampUnit_of_mem {t : ℝ} (ht : t ∈ Icc (0 : ℝ) 1) : clampUnit t = t := by
+  simp only [clampUnit, min_eq_right ht.2, max_eq_right ht.1]
+
+/-- `0 ≤ clampUnit t ≤ 1`. -/
+theorem clampUnit_mem (t : ℝ) : clampUnit t ∈ Icc (0 : ℝ) 1 :=
+  ⟨le_max_left _ _, max_le zero_le_one (min_le_left _ _)⟩
+
+/-- The planner's objective at `(k, ξ)` when saving `z`: `U(Φ(k, ξ) − z) + β EV(ξ, z)`. -/
+noncomputable def obj (V : C.VS) (ξ : Ξ) (k z : ℝ) : ℝ :=
+  C.U (C.Phi ξ k - z) + C.β * C.EV V ξ z
+
+/-- The **Bellman operator** of the auxiliary planner, pointwise:
+`(PV)(k, ξ) = max_{0 ≤ z ≤ Φ(k, ξ)} U(Φ(k, ξ) − z) + β ∫ V(z, x) κ(ξ, dx)`, with `z = t Φ(k, ξ)`,
+`t ∈ [0, 1]`. -/
+noncomputable def plBell (V : C.VS) (ξ : Ξ) (k : ℝ) : ℝ :=
+  sSup ((fun t => C.obj V ξ k (clampUnit t * C.Phi ξ k)) '' Icc 0 1)
+
+/-- The objective is jointly continuous in `((k, ξ), t)`. -/
+theorem obj_continuous (V : C.VS) :
+    Continuous fun q : (Icc (0 : ℝ) C.B × Ξ) × ℝ =>
+      C.obj V q.1.2 q.1.1 (clampUnit q.2 * C.Phi q.1.2 q.1.1) := by
+  have hP : Continuous fun q : (Icc (0 : ℝ) C.B × Ξ) × ℝ => C.Phi q.1.2 q.1.1 :=
+    C.Phi_cont.comp_continuous ((continuous_subtype_val.comp (continuous_fst.comp
+      continuous_fst)).prodMk (continuous_snd.comp continuous_fst))
+      fun q => ⟨q.1.1.2, mem_univ _⟩
+  have hc : Continuous clampUnit := continuous_const.max (continuous_const.min continuous_id)
+  have hz : Continuous fun q : (Icc (0 : ℝ) C.B × Ξ) × ℝ => clampUnit q.2 * C.Phi q.1.2 q.1.1 :=
+    (hc.comp continuous_snd).mul hP
+  refine Continuous.add ?_ (continuous_const.mul
+    ((C.EV_continuous V).comp ((continuous_snd.comp continuous_fst).prodMk hz)))
+  refine C.U_cont.comp_continuous (hP.sub hz) fun q => mem_Ici.2 ?_
+  have h1 := (clampUnit_mem q.2).2
+  have h2 := C.Phi_pos q.1.2 q.1.1.2.1
+  nlinarith
+
+/-- `PV` is continuous on `K × Ξ`. -/
+theorem plBell_continuous (V : C.VS) :
+    Continuous fun p : Icc (0 : ℝ) C.B × Ξ => C.plBell V p.2 p.1 :=
+  isCompact_Icc.continuous_sSup (C.obj_continuous V)
+
+/-- **The Bellman operator** `P` on `VS`. -/
+noncomputable def plBellOp (V : C.VS) : C.VS :=
+  BoundedContinuousFunction.mkOfCompact ⟨fun p => C.plBell V p.2 p.1, C.plBell_continuous V⟩
+
+/-- The values of the objective over `t ∈ [0, 1]` form a compact set. -/
+theorem obj_image_isCompact (V : C.VS) (ξ : Ξ) {k : ℝ} (hk : k ∈ Icc 0 C.B) :
+    IsCompact ((fun t => C.obj V ξ k (clampUnit t * C.Phi ξ k)) '' Icc 0 1) :=
+  isCompact_Icc.image ((C.obj_continuous V).comp
+    (Continuous.prodMk_right (Y := ℝ) ((⟨k, hk⟩, ξ) : Icc (0 : ℝ) C.B × Ξ)) :)
+
+/-- Every feasible saving `z ∈ [0, Φ(k, ξ)]` gives at most `(PV)(k, ξ)`. -/
+theorem obj_le_plBell (V : C.VS) (ξ : Ξ) {k z : ℝ} (hk : k ∈ Icc 0 C.B)
+    (hz : z ∈ Icc 0 (C.Phi ξ k)) : C.obj V ξ k z ≤ C.plBell V ξ k := by
+  have hP := C.Phi_pos ξ hk.1
+  refine le_csSup (C.obj_image_isCompact V ξ hk).bddAbove ⟨z / C.Phi ξ k,
+    ⟨div_nonneg hz.1 hP.le, div_le_one_of_le₀ hz.2 hP.le⟩, ?_⟩
+  simp only
+  rw [clampUnit_of_mem ⟨div_nonneg hz.1 hP.le, div_le_one_of_le₀ hz.2 hP.le⟩,
+    div_mul_cancel₀ _ hP.ne']
+
+/-- The maximum in `(PV)(k, ξ)` is attained. -/
+theorem exists_plBell_eq (V : C.VS) (ξ : Ξ) {k : ℝ} (hk : k ∈ Icc 0 C.B) :
+    ∃ z ∈ Icc 0 (C.Phi ξ k), C.obj V ξ k z = C.plBell V ξ k := by
+  obtain ⟨t, -, hteq⟩ := (C.obj_image_isCompact V ξ hk).sSup_mem
+    ((nonempty_Icc.2 zero_le_one).image _)
+  have hP := C.Phi_pos ξ hk.1
+  exact ⟨clampUnit t * C.Phi ξ k, ⟨mul_nonneg (clampUnit_mem t).1 hP.le,
+    mul_le_of_le_one_left hP.le (clampUnit_mem t).2⟩, hteq⟩
+
+omit [CompactSpace Ξ] [BorelSpace Ξ] in
+/-- `(PV)(k, ξ) ≤ c` when every feasible saving gives at most `c`. -/
+theorem plBell_le (V : C.VS) (ξ : Ξ) {k c : ℝ} (hk : k ∈ Icc 0 C.B)
+    (h : ∀ z ∈ Icc 0 (C.Phi ξ k), C.obj V ξ k z ≤ c) : C.plBell V ξ k ≤ c := by
+  have hP := C.Phi_pos ξ hk.1
+  refine csSup_le ((nonempty_Icc.2 zero_le_one).image _) (forall_mem_image.2 fun t _ => ?_)
+  exact h _ ⟨mul_nonneg (clampUnit_mem t).1 hP.le, mul_le_of_le_one_left hP.le (clampUnit_mem t).2⟩
+
+/-- The objective moves by at most `β d(V, W)`. -/
+theorem obj_le_obj_add (V W : C.VS) (ξ : Ξ) (k z : ℝ) :
+    C.obj V ξ k z ≤ C.obj W ξ k z + C.β * dist V W := by
+  have := mul_le_mul_of_nonneg_left (C.EV_le_add V W ξ z) C.β_pos.le
+  simp only [obj]
+  linarith
+
+/-- `P` is a contraction with modulus `β`. -/
+theorem dist_plBellOp_le (V W : C.VS) :
+    dist (C.plBellOp V) (C.plBellOp W) ≤ C.β * dist V W := by
+  have h0 : 0 ≤ C.β * dist V W := mul_nonneg C.β_pos.le dist_nonneg
+  refine (BoundedContinuousFunction.dist_le h0).2 fun p => ?_
+  have h1 : C.plBell V p.2 p.1 ≤ C.plBell W p.2 p.1 + C.β * dist V W :=
+    C.plBell_le V p.2 p.1.2 fun z hz => (C.obj_le_obj_add V W p.2 p.1 z).trans
+      (add_le_add_left (C.obj_le_plBell W p.2 p.1.2 hz) _)
+  have h2 : C.plBell W p.2 p.1 ≤ C.plBell V p.2 p.1 + C.β * dist V W := by
+    rw [dist_comm]
+    exact C.plBell_le W p.2 p.1.2 fun z hz => (C.obj_le_obj_add W V p.2 p.1 z).trans
+      (add_le_add_left (C.obj_le_plBell V p.2 p.1.2 hz) _)
+  rw [Real.dist_eq, abs_le]
+  change -(C.β * dist V W) ≤ C.plBell V p.2 p.1 - C.plBell W p.2 p.1 ∧
+    C.plBell V p.2 p.1 - C.plBell W p.2 p.1 ≤ C.β * dist V W
+  constructor <;> linarith
+
+/-- `P` is a contracting map. -/
+theorem plBellOp_contracting : ContractingWith ⟨C.β, C.β_pos.le⟩ C.plBellOp :=
+  ⟨NNReal.coe_lt_coe.1 (by rw [NNReal.coe_one]; exact C.β_lt_one),
+    LipschitzWith.of_dist_le_mul fun V W => C.dist_plBellOp_le V W⟩
+
+/-- **The planner's value function**: the fixed point of `P`. -/
+noncomputable def Vstar : C.VS :=
+  ContractingWith.fixedPoint C.plBellOp C.plBellOp_contracting
+
+/-- The Bellman equation `V*(k, ξ) = (PV*)(k, ξ)` on `K`. -/
+theorem vE_Vstar (ξ : Ξ) {k : ℝ} (hk : k ∈ Icc 0 C.B) :
+    C.vE C.Vstar k ξ = C.plBell C.Vstar ξ k := by
+  have h : C.plBellOp C.Vstar = C.Vstar := C.plBellOp_contracting.fixedPoint_isFixedPt
+  calc C.vE C.Vstar k ξ = C.Vstar (⟨k, hk⟩, ξ) := C.vE_of_mem _ hk ξ
+    _ = C.plBellOp C.Vstar (⟨k, hk⟩, ξ) := by rw [h]
+    _ = C.plBell C.Vstar ξ k := rfl
+
+/-! ### Concavity of the planner's value function -/
+
+/-- Every shock's value function is concave in saving on `K`. -/
+def IsConc (V : C.VS) : Prop := ∀ x, ConcaveOn ℝ (Icc 0 C.B) (fun z => C.vE V z x)
+
+omit [CompactSpace Ξ] [BorelSpace Ξ] in
+/-- The zero value function is concave. -/
+theorem isConc_zero : C.IsConc 0 := fun x => by
+  have : (fun z => C.vE 0 z x) = fun _ => 0 := rfl
+  rw [this]
+  exact concaveOn_const 0 (convex_Icc 0 C.B)
+
+variable {C} in
+/-- The expected continuation value of a concave value function is concave. -/
+theorem IsConc.concave_EV {V : C.VS} (hV : C.IsConc V) (ξ : Ξ) {zx zy a b : ℝ}
+    (hzx : zx ∈ Icc 0 C.B) (hzy : zy ∈ Icc 0 C.B) (ha : 0 ≤ a) (hb : 0 ≤ b) (hab : a + b = 1) :
+    a * C.EV V ξ zx + b * C.EV V ξ zy ≤ C.EV V ξ (a * zx + b * zy) := by
+  have i1 := (C.integrable_vE V zx ξ).const_mul a
+  have i2 := (C.integrable_vE V zy ξ).const_mul b
+  simp only [EV]
+  rw [← integral_const_mul, ← integral_const_mul, ← integral_add i1 i2]
+  refine integral_mono (i1.add i2) (C.integrable_vE V _ ξ) fun x => ?_
+  have := (hV x).2 hzx hzy ha hb hab
+  simp only [smul_eq_mul] at this
+  exact this
+
+variable {C} in
+/-- `P` preserves concavity (`Φ` and `U` are concave and `U` is increasing). -/
+theorem IsConc.plBellOp {V : C.VS} (hV : C.IsConc V) : C.IsConc (C.plBellOp V) := by
+  intro ξ
+  refine ⟨convex_Icc 0 C.B, fun x hx y hy a b ha hb hab => ?_⟩
+  have hxy : a * x + b * y ∈ Icc 0 C.B := convex_Icc 0 C.B hx hy ha hb hab
+  have e : ∀ {k : ℝ} (hk : k ∈ Icc 0 C.B), C.vE (C.plBellOp V) k ξ = C.plBell V ξ k :=
+    fun hk => C.vE_of_mem _ hk ξ
+  change a * C.vE (C.plBellOp V) x ξ + b * C.vE (C.plBellOp V) y ξ ≤
+    C.vE (C.plBellOp V) (a * x + b * y) ξ
+  rw [e hx, e hy, e hxy]
+  obtain ⟨zx, hzx, hzxe⟩ := C.exists_plBell_eq V ξ hx
+  obtain ⟨zy, hzy, hzye⟩ := C.exists_plBell_eq V ξ hy
+  rw [← hzxe, ← hzye]
+  have hPc := (C.Phi_concave ξ).2 (mem_Ici.2 hx.1) (mem_Ici.2 hy.1) ha hb hab
+  simp only [smul_eq_mul] at hPc
+  have hzxK : zx ∈ Icc 0 C.B := ⟨hzx.1, hzx.2.trans (C.Phi_le_B ξ hx)⟩
+  have hzyK : zy ∈ Icc 0 C.B := ⟨hzy.1, hzy.2.trans (C.Phi_le_B ξ hy)⟩
+  have hfeas : a * zx + b * zy ∈ Icc 0 (C.Phi ξ (a * x + b * y)) := by
+    refine ⟨by nlinarith [hzx.1, hzy.1], le_trans ?_ hPc⟩
+    nlinarith [hzx.2, hzy.2]
+  refine le_trans ?_ (C.obj_le_plBell V ξ hxy hfeas)
+  have hcx : 0 ≤ C.Phi ξ x - zx := by linarith [hzx.2]
+  have hcy : 0 ≤ C.Phi ξ y - zy := by linarith [hzy.2]
+  have hU1 := C.U_strictConcave.concaveOn.2 (mem_Ici.2 hcx) (mem_Ici.2 hcy) ha hb hab
+  simp only [smul_eq_mul] at hU1
+  have hU2 : C.U (a * (C.Phi ξ x - zx) + b * (C.Phi ξ y - zy)) ≤
+      C.U (C.Phi ξ (a * x + b * y) - (a * zx + b * zy)) :=
+    C.U_strictMono.monotoneOn (mem_Ici.2 (by nlinarith))
+      (mem_Ici.2 (by nlinarith)) (by nlinarith)
+  have hG := hV.concave_EV ξ hzxK hzyK ha hb hab
+  have hβG := mul_le_mul_of_nonneg_left hG C.β_pos.le
+  simp only [obj]
+  nlinarith
+
+/-- The iterates `Pⁿ0` are concave. -/
+theorem isConc_iterate (n : ℕ) : C.IsConc (C.plBellOp^[n] 0) := by
+  induction n with
+  | zero => exact C.isConc_zero
+  | succ n ih => rw [Function.iterate_succ_apply']; exact ih.plBellOp
+
+/-- **The planner's value function is concave** in saving, for every shock. -/
+theorem isConc_Vstar : C.IsConc C.Vstar := by
+  intro ξ
+  refine ⟨convex_Icc 0 C.B, fun x hx y hy a b ha hb hab => ?_⟩
+  have ht := C.plBellOp_contracting.tendsto_iterate_fixedPoint 0
+  have hev : ∀ z, Tendsto (fun n => C.vE (C.plBellOp^[n] 0) z ξ) atTop
+      (𝓝 (C.vE C.Vstar z ξ)) := fun z =>
+    ((continuous_eval_const (projIcc 0 C.B C.B_pos.le z, ξ)).tendsto _).comp ht
+  exact le_of_tendsto_of_tendsto' ((tendsto_const_nhds.smul (hev x)).add
+    (tendsto_const_nhds.smul (hev y))) (hev _) fun n => (C.isConc_iterate n ξ).2 hx hy ha hb hab
+
+/-! ### The planner's policy and a uniform lower bound on its consumption -/
+
+/-- An optimal saving of the planner at `(k, ξ)` (`0` outside `K`). -/
+noncomputable def pz (ξ : Ξ) (k : ℝ) : ℝ :=
+  if hk : k ∈ Icc 0 C.B then Classical.choose (C.exists_plBell_eq C.Vstar ξ hk) else 0
+
+/-- `pz ξ k` is feasible and optimal. -/
+theorem pz_spec (ξ : Ξ) {k : ℝ} (hk : k ∈ Icc 0 C.B) :
+    C.pz ξ k ∈ Icc 0 (C.Phi ξ k) ∧ C.obj C.Vstar ξ k (C.pz ξ k) = C.plBell C.Vstar ξ k := by
+  simp only [pz, hk, ↓reduceDIte]
+  exact Classical.choose_spec (C.exists_plBell_eq C.Vstar ξ hk)
+
+/-- The planner's consumption `Φ(k, ξ) − pz(ξ, k)`. -/
+noncomputable def pc (ξ : Ξ) (k : ℝ) : ℝ := C.Phi ξ k - C.pz ξ k
+
+/-- The planner's saving lies in `K`. -/
+theorem pz_mem (ξ : Ξ) {k : ℝ} (hk : k ∈ Icc 0 C.B) : C.pz ξ k ∈ Icc 0 C.B :=
+  ⟨(C.pz_spec ξ hk).1.1, (C.pz_spec ξ hk).1.2.trans (C.Phi_le_B ξ hk)⟩
+
+/-- **The planner's consumption is bounded below by a positive constant**, uniformly on
+`K × Ξ`. If consumption `c` were below `min{c₁, p/2}` (with `p ≤ Φ` and `U′ > 4βM/p` on
+`(0, c₁)`, `M = ‖V*‖`), consuming `t ∈ (c, min{c₁, p/2})` instead would lose at most
+`β (t − c) 4M/p` in expected value (concavity of `V*`, saving at least `p/2`) and gain more than
+`U′(t)(t − c)`. -/
+theorem exists_pc_lb : ∃ c > 0, ∀ ξ, ∀ k ∈ Icc 0 C.B, c ≤ C.pc ξ k := by
+  obtain ⟨p, hp, hpΦ⟩ := C.exists_Phi_lb
+  set M := ‖C.Vstar‖ with hM
+  have hM0 : 0 ≤ M := norm_nonneg _
+  obtain ⟨c1, hc1, hball⟩ := Metric.mem_nhdsWithin_iff.1
+    (C.isMarginalUtility.inada.eventually_gt_atTop (4 * C.β * M / p))
+  refine ⟨min c1 (p / 2), lt_min hc1 (half_pos hp), fun ξ k hk => ?_⟩
+  by_contra hlt
+  push Not at hlt
+  obtain ⟨⟨hz0, hzP⟩, hzeq⟩ := C.pz_spec ξ hk
+  have hzK := C.pz_mem ξ hk
+  set c := C.pc ξ k with hcdef
+  set z := C.pz ξ k with hzdef
+  have hcz : c = C.Phi ξ k - z := rfl
+  have hc0 : 0 ≤ c := by rw [hcz]; linarith
+  have hm1 := min_le_left c1 (p / 2)
+  have hm2 := min_le_right c1 (p / 2)
+  set t := (c + min c1 (p / 2)) / 2 with htdef
+  have hct : c < t := by linarith
+  have ht1 : t < c1 := by linarith
+  have ht2 : t ≤ p / 2 := by linarith
+  have htpos : 0 < t := by linarith
+  have hPp : p ≤ C.Phi ξ k := hpΦ ξ k hk.1
+  set z' := C.Phi ξ k - t with hz'def
+  have hz'p : p / 2 ≤ z' := by linarith
+  have hz'z : z' < z := by linarith
+  have h1 := C.obj_le_plBell C.Vstar ξ hk (z := z') ⟨by linarith, by linarith⟩
+  rw [← hzeq] at h1
+  simp only [obj] at h1
+  rw [show C.Phi ξ k - z' = t by rw [hz'def]; ring, ← hcz] at h1
+  have hsl : ∀ x, C.vE C.Vstar z x ≤ C.vE C.Vstar z' x + (z - z') * (2 * M / z') := by
+    intro x
+    have hs := (C.isConc_Vstar x).slope_anti_adjacent (x := 0) (y := z') (z := z)
+      ⟨le_rfl, C.B_pos.le⟩ hzK (by linarith) hz'z
+    have hb1 := abs_le.1 (C.abs_vE_le C.Vstar z' x)
+    have hb2 := abs_le.1 (C.abs_vE_le C.Vstar 0 x)
+    rw [sub_zero, div_le_div_iff₀ (by linarith) (by linarith)] at hs
+    have hz'0 : 0 < z' := by linarith
+    have hq : (z - z') * (2 * M / z') * z' = (z - z') * (2 * M) := by field_simp
+    have hkey : (C.vE C.Vstar z x - C.vE C.Vstar z' x) * z' ≤ (z - z') * (2 * M) := by
+      nlinarith [mul_nonneg (by linarith : (0 : ℝ) ≤ 2 * M -
+        (C.vE C.Vstar z' x - C.vE C.Vstar 0 x)) (by linarith : (0 : ℝ) ≤ z - z')]
+    have : (C.vE C.Vstar z x - C.vE C.Vstar z' x) * z' ≤ (z - z') * (2 * M / z') * z' := by
+      rw [hq]; exact hkey
+    have := le_of_mul_le_mul_right this hz'0
+    linarith
+  have hEV : C.EV C.Vstar ξ z ≤ C.EV C.Vstar ξ z' + (z - z') * (2 * M / z') :=
+    C.integral_le_add (C.integrable_vE _ z ξ) (C.integrable_vE _ z' ξ) hsl
+  have hzz : z - z' = t - c := by rw [hz'def, hcz]; ring
+  have hD : 2 * M / z' ≤ 4 * M / p := by
+    rw [div_le_div_iff₀ (by linarith) hp]
+    nlinarith
+  have hD' : (z - z') * (2 * M / z') ≤ (t - c) * (4 * M / p) := by
+    rw [hzz]; exact mul_le_mul_of_nonneg_left hD (by linarith)
+  have hsU := C.U_strictConcave.lt_slope_of_hasDerivAt (mem_Ici.2 hc0) (mem_Ici.2 htpos.le) hct
+    (C.U_deriv htpos)
+  rw [slope_def_field, lt_div_iff₀ (by linarith)] at hsU
+  have hβ := C.β_pos
+  have h2 : C.β * (C.EV C.Vstar ξ z - C.EV C.Vstar ξ z') ≤ C.β * ((t - c) * (4 * M / p)) :=
+    mul_le_mul_of_nonneg_left (by linarith) hβ.le
+  have e : C.β * ((t - c) * (4 * M / p)) = (4 * C.β * M / p) * (t - c) := by ring
+  have key : C.U' t * (t - c) < (4 * C.β * M / p) * (t - c) := by nlinarith
+  have hUt := lt_of_mul_lt_mul_right key (by linarith)
+  have : 4 * C.β * M / p < C.U' t := hball ⟨by
+    rw [Metric.mem_ball, Real.dist_eq, sub_zero, abs_of_pos htpos]; exact ht1, htpos⟩
+  linarith
+
+/-- The planner's consumption is positive on `K × Ξ`. -/
+theorem pc_pos (ξ : Ξ) {k : ℝ} (hk : k ∈ Icc 0 C.B) : 0 < C.pc ξ k := by
+  obtain ⟨c, hc, h⟩ := C.exists_pc_lb
+  exact hc.trans_le (h ξ k hk)
+
+omit [CompactSpace Ξ] [BorelSpace Ξ] in
+/-- For `y ∈ [0, B]`, `Φ(y, ·)` is continuous. -/
+theorem Phi_continuous_shock {y : ℝ} (hy : y ∈ Icc 0 C.B) : Continuous fun x => C.Phi x y :=
+  C.Phi_cont.comp_continuous (continuous_const.prodMk continuous_id) fun _ => ⟨hy, mem_univ _⟩
+
+/-! ### The planner's consumption is a floor for the iterates -/
+
+variable {C} in
+/-- **The floor is invariant under `T`.** If `h ∈ F₊` leaves at least the planner's consumption,
+`ψ − h ≥ c`, then so does `T h`. At `y₀ = ψ(k, ξ) − c(ξ, k) ≥ z = pz(ξ, k)` the right side of the
+integral Euler equation is at most `U′(c(ξ, k))`. This is the planner's Euler inequality with the
+agent's after-tax return, obtained by raising the planner's saving by `δ`, comparing with the
+planner's value at the shock `x` and saving `pz(x, z)` (pointwise in `x`, so no measurability of
+the planner's policy in the shock is needed), and letting `δ → 0` by dominated convergence. -/
+theorem IsInFc.Tc_floor {h : Ξ → ℝ → ℝ} (hh : C.IsInFc h)
+    (hfl : ∀ x, ∀ k ∈ Icc 0 C.B, C.pc x k ≤ (C.tech x).psi k - h x k) (ξ : Ξ) {k : ℝ}
+    (hk : k ∈ Icc 0 C.B) : C.pc ξ k ≤ (C.tech ξ).psi k - C.Tc h ξ k := by
+  have hzK := C.pz_mem ξ hk
+  obtain ⟨⟨hz0, hzP⟩, hzeq⟩ := C.pz_spec ξ hk
+  have hPψ := C.Phi_le_psi ξ hk.1
+  have hc := C.pc_pos ξ hk
+  have hPB := C.psi_le_B ξ hk
+  have hΦB := C.Phi_le_B ξ hk
+  have := C.κ_prob ξ
+  set z := C.pz ξ k with hzdef
+  set c := C.pc ξ k with hcdef
+  have hcz : c = C.Phi ξ k - z := rfl
+  set y0 := (C.tech ξ).psi k - c with hy0
+  have hzy : z ≤ y0 := by rw [hy0, hcz]; linarith
+  have hy0K : y0 ∈ Icc 0 C.B := ⟨hz0.trans hzy, by linarith⟩
+  set w : Ξ → ℝ := fun x => (C.tech x).psi y0 - h x y0 with hwdef
+  have hw : ∀ x, C.pc x z ≤ w x := fun x => (hfl x z hzK).trans (hh.mono_sub x hzK hy0K hzy)
+  have hwpos : ∀ x, 0 < w x := fun x => (C.pc_pos x hzK).trans_le (hw x)
+  have hwc : Continuous w := (C.psi_continuous_shock hy0K).sub
+    (hh.cont.comp_continuous (continuous_const.prodMk continuous_id)
+      fun _ => ⟨hy0K, mem_univ _⟩)
+  set n : ℝ → Ξ → ℝ := fun δ x =>
+    (C.tech x).f' (y0 + δ) * C.U' (w x + (C.Phi x (z + δ) - C.Phi x z)) with hndef
+  have hθ1 : 0 < 1 - C.θ := by linarith [C.θ_lt_one]
+  have hu := C.isMarginalUtility
+  have hrng : ∀ δ, 0 < δ → δ < c →
+      z + δ ∈ Icc 0 C.B ∧ z + δ ≤ C.Phi ξ k ∧ y0 + δ ∈ Icc 0 C.B := by
+    intro δ hδ hδc
+    exact ⟨⟨by linarith, by linarith⟩, by linarith, ⟨by linarith, by linarith⟩⟩
+  have hargpos : ∀ δ, 0 ≤ δ → ∀ x, 0 < w x + (C.Phi x (z + δ) - C.Phi x z) := fun δ hδ x => by
+    have := C.Phi_le x hzK.1 (show z ≤ z + δ by linarith)
+    linarith [hwpos x]
+  have hn_cont : ∀ δ, 0 < δ → δ < c → Continuous (n δ) := by
+    intro δ hδ hδc
+    obtain ⟨h1, -, h3⟩ := hrng δ hδ hδc
+    have harg : Continuous fun x => w x + (C.Phi x (z + δ) - C.Phi x z) :=
+      hwc.add ((C.Phi_continuous_shock h1).sub (C.Phi_continuous_shock hzK))
+    exact (C.f'_continuous_shock h3).mul
+      (hu.cont.comp_continuous harg fun x => mem_Ioi.2 (hargpos δ hδ.le x))
+  -- the planner's Euler inequality, perturbed by `δ`
+  have hstep : ∀ δ, 0 < δ → δ < c →
+      C.β * (1 - C.θ) * ∫ x, n δ x ∂(C.κ ξ) ≤ C.U' (c - δ) := by
+    intro δ hδ hδc
+    obtain ⟨hzδK, hzδP, hyδK⟩ := hrng δ hδ hδc
+    have h1 := C.obj_le_plBell C.Vstar ξ hk (z := z + δ) ⟨by linarith, hzδP⟩
+    rw [← hzeq] at h1
+    simp only [obj] at h1
+    rw [show C.Phi ξ k - (z + δ) = c - δ by rw [hcz]; ring, ← hcz] at h1
+    have hpt : ∀ x, (1 - C.θ) * δ * n δ x ≤ C.vE C.Vstar (z + δ) x - C.vE C.Vstar z x := by
+      intro x
+      obtain ⟨⟨hp0, hpP⟩, hpeq⟩ := C.pz_spec x hzK
+      have hΦle := C.Phi_le x hzK.1 (show z ≤ z + δ by linarith)
+      have hb := C.obj_le_plBell C.Vstar x hzδK (z := C.pz x z) ⟨hp0, hpP.trans hΦle⟩
+      rw [← C.vE_Vstar x hzδK] at hb
+      have h2 : C.U (C.Phi x (z + δ) - C.pz x z) - C.U (C.Phi x z - C.pz x z) ≤
+          C.vE C.Vstar (z + δ) x - C.vE C.Vstar z x := by
+        rw [C.vE_Vstar x hzK, ← hpeq]
+        simp only [obj] at hb ⊢
+        linarith
+      have ha : 0 < C.Phi x z - C.pz x z := C.pc_pos x hzK
+      have hgap := C.Phi_sub_gt x hzK.1 (show z < z + δ by linarith)
+      rw [show z + δ - z = δ by ring] at hgap
+      have hgap0 : 0 < (1 - C.θ) * δ * (C.tech x).f' (z + δ) :=
+        mul_pos (mul_pos hθ1 hδ) ((C.tech x).f'_pos hzδK.1)
+      have hb' : C.Phi x z - C.pz x z < C.Phi x (z + δ) - C.pz x z := by linarith
+      have hsl := C.U_strictConcave.lt_slope_of_hasDerivAt (mem_Ici.2 ha.le)
+        (mem_Ici.2 (ha.trans hb').le) hb' (C.U_deriv (ha.trans hb'))
+      rw [slope_def_field, lt_div_iff₀ (by linarith)] at hsl
+      have hUp := hu.pos _ (ha.trans hb')
+      have e : C.Phi x (z + δ) - C.pz x z - (C.Phi x z - C.pz x z) =
+          C.Phi x (z + δ) - C.Phi x z := by ring
+      rw [e] at hsl
+      have h3 : (1 - C.θ) * δ * (C.tech x).f' (z + δ) * C.U' (C.Phi x (z + δ) - C.pz x z) ≤
+          C.U (C.Phi x (z + δ) - C.pz x z) - C.U (C.Phi x z - C.pz x z) := by
+        nlinarith [mul_le_mul_of_nonneg_left hgap.le hUp.le]
+      have hf : (C.tech x).f' (y0 + δ) ≤ (C.tech x).f' (z + δ) :=
+        (C.tech x).f'_strictAntiOn.antitoneOn (mem_Ici.2 hzδK.1) (mem_Ici.2 hyδK.1)
+          (by linarith)
+      have hpcw : C.Phi x (z + δ) - C.pz x z ≤ w x + (C.Phi x (z + δ) - C.Phi x z) := by
+        have := hw x
+        simp only [pc] at this
+        linarith
+      have hU := hu.strictAnti.antitoneOn (ha.trans hb') ((ha.trans hb').trans_le hpcw) hpcw
+      have h4 : n δ x ≤ (C.tech x).f' (z + δ) * C.U' (C.Phi x (z + δ) - C.pz x z) :=
+        mul_le_mul hf hU (hu.pos _ ((ha.trans hb').trans_le hpcw)).le
+          ((C.tech x).f'_pos hzδK.1).le
+      have h5 := mul_le_mul_of_nonneg_left h4 (mul_nonneg hθ1.le hδ.le)
+      calc (1 - C.θ) * δ * n δ x
+          ≤ (1 - C.θ) * δ * ((C.tech x).f' (z + δ) * C.U' (C.Phi x (z + δ) - C.pz x z)) := h5
+        _ = (1 - C.θ) * δ * (C.tech x).f' (z + δ) * C.U' (C.Phi x (z + δ) - C.pz x z) := by
+          ring
+        _ ≤ _ := h3.trans h2
+    have hint : Integrable (n δ) (C.κ ξ) := (hn_cont δ hδ hδc).integrable_of_hasCompactSupport
+      (HasCompactSupport.of_compactSpace _)
+    have hI : (1 - C.θ) * δ * ∫ x, n δ x ∂(C.κ ξ) ≤
+        C.EV C.Vstar ξ (z + δ) - C.EV C.Vstar ξ z := by
+      rw [← integral_const_mul]
+      simp only [EV]
+      rw [← integral_sub (C.integrable_vE _ _ ξ) (C.integrable_vE _ _ ξ)]
+      exact integral_mono (hint.const_mul _)
+        ((C.integrable_vE _ _ ξ).sub (C.integrable_vE _ _ ξ)) hpt
+    have hcδ : 0 < c - δ := by linarith
+    have h4 := C.U_strictConcave.slope_lt_of_hasDerivAt (mem_Ici.2 hcδ.le) (mem_Ici.2 hc.le)
+      (show c - δ < c by linarith) (C.U_deriv hcδ)
+    rw [slope_def_field, show c - (c - δ) = δ by ring, div_lt_iff₀ hδ] at h4
+    have hβI := mul_le_mul_of_nonneg_left hI C.β_pos.le
+    have : δ * (C.β * (1 - C.θ) * ∫ x, n δ x ∂(C.κ ξ)) ≤ δ * C.U' (c - δ) := by nlinarith
+    exact le_of_mul_le_mul_left this hδ
+  -- the limit `δ → 0`
+  have hδlim : ∀ a : ℝ, 0 ≤ a → Tendsto (fun δ : ℝ => a + δ) (𝓝[>] 0) (𝓝[Ici 0] a) := by
+    intro a ha
+    refine tendsto_nhdsWithin_iff.2 ⟨?_, eventually_nhdsWithin_of_forall fun δ hδ =>
+      mem_Ici.2 (by linarith [mem_Ioi.1 hδ])⟩
+    exact ((continuous_const.add continuous_id).tendsto' 0 a (add_zero a)).mono_left
+      nhdsWithin_le_nhds
+  have hlim : ∀ x, Tendsto (fun δ => n δ x) (𝓝[>] 0) (𝓝 (C.G h y0 x)) := by
+    intro x
+    have hf := ((C.tech x).f'_continuousOn y0 (mem_Ici.2 hy0K.1)).tendsto.comp
+      (hδlim y0 hy0K.1)
+    have hP := (((C.Phi_continuousOn x) z (mem_Ici.2 hzK.1)).tendsto.comp
+      (hδlim z hzK.1)).sub_const (C.Phi x z)
+    rw [sub_self] at hP
+    have harg := (tendsto_const_nhds : Tendsto (fun _ : ℝ => w x) (𝓝[>] 0) (𝓝 (w x))).add hP
+    rw [add_zero] at harg
+    have hU := (hu.cont.continuousAt (Ioi_mem_nhds (hwpos x))).tendsto.comp harg
+    exact hf.mul hU
+  have hbnd : ∀ δ, 0 < δ → ∀ x, |n δ x| ≤ (C.tech x).f' 0 * C.U' (w x) := by
+    intro δ hδ x
+    have hpos := hargpos δ hδ.le x
+    have hf0 := (C.tech x).f'_pos (show (0 : ℝ) ≤ y0 + δ by linarith [hy0K.1])
+    rw [abs_of_pos (mul_pos hf0 (hu.pos _ hpos))]
+    have hf : (C.tech x).f' (y0 + δ) ≤ (C.tech x).f' 0 :=
+      (C.tech x).f'_strictAntiOn.antitoneOn (mem_Ici.2 le_rfl)
+        (mem_Ici.2 (by linarith [hy0K.1])) (by linarith [hy0K.1])
+    have hd : w x ≤ w x + (C.Phi x (z + δ) - C.Phi x z) := by
+      have := C.Phi_le x hzK.1 (show z ≤ z + δ by linarith)
+      linarith
+    exact mul_le_mul hf (hu.strictAnti.antitoneOn (hwpos x) hpos hd) (hu.pos _ hpos).le
+      ((C.tech x).f'_pos le_rfl).le
+  have hbnd_int : Integrable (fun x => (C.tech x).f' 0 * C.U' (w x)) (C.κ ξ) :=
+    ((C.f'_continuous_shock ⟨le_rfl, C.B_pos.le⟩).mul (hu.cont.comp_continuous hwc
+      fun x => mem_Ioi.2 (hwpos x))).integrable_of_hasCompactSupport
+      (HasCompactSupport.of_compactSpace _)
+  have hI : Tendsto (fun δ => ∫ x, n δ x ∂(C.κ ξ)) (𝓝[>] 0) (𝓝 (∫ x, C.G h y0 x ∂(C.κ ξ))) :=
+    tendsto_integral_filter_of_dominated_convergence _
+      (by filter_upwards [Ioo_mem_nhdsGT hc] with δ hδ
+          exact (hn_cont δ hδ.1 hδ.2).aestronglyMeasurable)
+      (by filter_upwards [Ioo_mem_nhdsGT hc] with δ hδ
+          exact ae_of_all _ fun x => by rw [Real.norm_eq_abs]; exact hbnd δ hδ.1 x)
+      hbnd_int (ae_of_all _ hlim)
+  have hL : Tendsto (fun δ => C.β * (1 - C.θ) * ∫ x, n δ x ∂(C.κ ξ)) (𝓝[>] 0)
+      (𝓝 (C.Rc h ξ y0)) := tendsto_const_nhds.mul hI
+  have hRt : Tendsto (fun δ : ℝ => C.U' (c - δ)) (𝓝[>] 0) (𝓝 (C.U' c)) := by
+    have h1 : Tendsto (fun δ : ℝ => c - δ) (𝓝[>] 0) (𝓝 c) :=
+      ((continuous_const.sub continuous_id).tendsto' 0 c (sub_zero c)).mono_left
+        nhdsWithin_le_nhds
+    exact (hu.cont.continuousAt (Ioi_mem_nhds hc)).tendsto.comp h1
+  have hR : C.Rc h ξ y0 ≤ C.U' c := le_of_tendsto_of_tendsto hL hRt (by
+    filter_upwards [Ioo_mem_nhdsGT hc] with δ hδ
+    exact hstep δ hδ.1 hδ.2)
+  have hnb : ¬ EulerBelow C.U' (fun _ => False) (C.Rc h ξ) ((C.tech ξ).psi k) y0 := by
+    rintro (hz | hlt)
+    · exact hz
+    · rw [show (C.tech ξ).psi k - y0 = c by rw [hy0]; ring] at hlt
+      exact absurd hR (not_le.2 hlt)
+  have := eulerCross_le_of_not_below hu (hh.isEulerRHS ξ) hPB hy0K.1 hnb
+  change C.Tc h ξ k ≤ y0 at this
+  linarith
+
+/-- Every iterate `Tⁿ0` leaves at least the planner's consumption. -/
+theorem Tit_floor (n : ℕ) :
+    ∀ ξ, ∀ k ∈ Icc 0 C.B, C.pc ξ k ≤ (C.tech ξ).psi k - C.Tit n ξ k := by
+  induction n with
+  | zero =>
+    intro ξ k hk
+    have h1 := (C.pz_spec ξ hk).1.1
+    have h2 := C.Phi_le_psi ξ hk.1
+    change C.Phi ξ k - C.pz ξ k ≤ (C.tech ξ).psi k - 0
+    linarith
+  | succ n ih =>
+    intro ξ k hk
+    rw [Tit_succ]
+    exact (C.isInFc_Tit n).Tc_floor ih ξ hk
+
+/-- **The consumption floor always holds**: with no hypothesis beyond `ContModel`, consumption
+along the iterates `Tⁿ0` is bounded below by one positive constant. -/
+theorem consFloor : C.ConsFloor := by
+  obtain ⟨c, hc, h⟩ := C.exists_pc_lb
+  exact ⟨c, hc, fun n ξ k hk => (h ξ k hk).trans (C.Tit_floor n ξ k hk)⟩
+
+/-- Consumption at the least fixed point is at least the planner's consumption. -/
+theorem lfpc_floor (ξ : Ξ) {k : ℝ} (hk : k ∈ Icc 0 C.B) :
+    C.pc ξ k ≤ (C.tech ξ).psi k - C.lfpc ξ k := by
+  have : C.lfpc ξ k ≤ (C.tech ξ).psi k - C.pc ξ k :=
+    le_of_tendsto' (C.tendsto_Tit ξ hk) fun n => by linarith [C.Tit_floor n ξ k hk]
+  linarith
+
+/-! ### Existence with no added hypothesis on the technologies -/
+
+/-- **Exercise 18.9, a Borel equilibrium (Feller property only, no extra hypothesis).**
+`lfp = lim Tⁿ0` is a fixed point of `T` on `[0, B] × Ξ` with consumption bounded away from zero;
+`lfp(ξ, ·)` is continuous, `lfp` and `ψ − lfp` are nondecreasing in `k`, and `lfp(·, k)` is
+Borel. It lies below every supersolution in `F₊`. -/
+theorem ex_18_9_borel_existence :
+    (∀ ξ, ∀ k ∈ Icc 0 C.B, C.Tc C.lfpc ξ k = C.lfpc ξ k) ∧
+      (∃ c > 0, ∀ ξ, ∀ k ∈ Icc 0 C.B, c ≤ (C.tech ξ).psi k - C.lfpc ξ k) ∧
+      (∀ ξ, ContinuousOn (C.lfpc ξ) (Icc 0 C.B)) ∧
+      (∀ ξ, MonotoneOn (C.lfpc ξ) (Icc 0 C.B)) ∧
+      (∀ ξ, MonotoneOn (fun k => (C.tech ξ).psi k - C.lfpc ξ k) (Icc 0 C.B)) ∧
+      (∀ k ∈ Icc 0 C.B, Measurable fun ξ => C.lfpc ξ k) ∧
+      ∀ h, C.IsInFc h → (∀ ξ, ∀ k ∈ Icc 0 C.B, C.Tc h ξ k ≤ h ξ k) →
+        ∀ ξ, ∀ k ∈ Icc 0 C.B, C.lfpc ξ k ≤ h ξ k :=
+  C.ex_18_9_borel_equilibrium C.consFloor
+
+/-- **The Borel equilibrium solves the Euler equation** (Feller property only): in Kuhn–Tucker
+form at every `(k, ξ)`. -/
+theorem ex_18_9_borel_euler_KT (ξ : Ξ) {k : ℝ} (hk : k ∈ Icc 0 C.B) :
+    (C.lfpc ξ k < (C.tech ξ).psi k ∧
+      C.U' ((C.tech ξ).psi k - C.lfpc ξ k) = C.Rc C.lfpc ξ (C.lfpc ξ k)) ∨
+    (C.lfpc ξ k = 0 ∧ C.Rc C.lfpc ξ 0 ≤ C.U' ((C.tech ξ).psi k)) :=
+  C.lfpc_euler_KT C.consFloor ξ hk
+
+/-- Under the cross-state condition (Feller property only) the Borel equilibrium solves the
+integral Euler equation as an equation at every `(k, ξ)`. -/
+theorem ex_18_9_borel_euler (hCS : C.CrossState) (ξ : Ξ) {k : ℝ} (hk : k ∈ Icc 0 C.B) :
+    C.lfpc ξ k < (C.tech ξ).psi k ∧
+      C.U' ((C.tech ξ).psi k - C.lfpc ξ k) = C.Rc C.lfpc ξ (C.lfpc ξ k) :=
+  C.lfpc_euler C.consFloor hCS ξ hk
+
+/-- **Exercise 18.9: existence of an equilibrium in `F₊`** with a continuum of shocks and any
+jointly continuous family of technologies. Under the strong Feller property, `T` has a fixed
+point `h ∈ F₊` with consumption bounded away from zero; it is the least supersolution in `F₊`,
+hence the least fixed point. -/
+theorem ex_18_9_existence (hSF : C.StrongFeller) :
+    ∃ h, C.IsInFc h ∧ (∀ ξ, ∀ k ∈ Icc 0 C.B, C.Tc h ξ k = h ξ k) ∧
+      (∃ c > 0, ∀ ξ, ∀ k ∈ Icc 0 C.B, c ≤ (C.tech ξ).psi k - h ξ k) ∧
+      ∀ h', C.IsInFc h' → (∀ ξ, ∀ k ∈ Icc 0 C.B, C.Tc h' ξ k ≤ h' ξ k) →
+        ∀ ξ, ∀ k ∈ Icc 0 C.B, h ξ k ≤ h' ξ k :=
+  C.ex_18_9_exists_equilibrium C.consFloor hSF
+
+/-- **Exercise 18.9, equilibrium in equation form**: under the strong Feller property and the
+cross-state condition, some `h ∈ F₊` with consumption bounded away from zero solves the integral
+Euler equation at every `(k, ξ)`. -/
+theorem ex_18_9_existence_euler (hSF : C.StrongFeller) (hCS : C.CrossState) :
+    ∃ h, C.IsInFc h ∧ (∀ ξ, ∀ k ∈ Icc 0 C.B, C.Tc h ξ k = h ξ k) ∧
+      (∃ c > 0, ∀ ξ, ∀ k ∈ Icc 0 C.B, c ≤ (C.tech ξ).psi k - h ξ k) ∧
+      ∀ ξ, ∀ k ∈ Icc 0 C.B, C.U' ((C.tech ξ).psi k - h ξ k) = C.Rc h ξ (h ξ k) :=
+  C.ex_18_9_equilibrium C.consFloor hSF hCS
+
+end ContModel
+
+end StokeyLucasPrescott.EquilibriaWithDistortions
+
+/-
+Copyright (c) 2026 Robert Kirkby. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Robert Kirkby
+-/
+
+/-!
 # The stochastic extension of §18.3: Exercises 18.8 and 18.9 (pp. 558–560)
 
 Shocks `ξ ∈ Ξ = {ξ_j}` (a finite type `ι`) follow a Markov chain with transition matrix `π`; the
@@ -4575,10 +6255,12 @@ maximal elements of `F` can be constructed as there.
   when all states share one technology (from the deterministic equilibrium of
   `GlobalModel.exists_equilibrium`), so `lfp_equilibrium_of_super` is not vacuous.
 
-**Not proved.** Existence of a non-degenerate equilibrium for heterogeneous technologies under
-the cross-state condition alone. The deterministic proof anchors consumption at `k*` through
-(4)–(6), and the stochastic `F` has no such anchor; `Ts_psi` shows the book's Schauder argument
-gives only the degenerate fixed point `ψ`.
+**Different technologies.** Existence of a non-degenerate equilibrium for heterogeneous
+technologies is proved in `GlobalStochasticNondegenerate`, with no extra hypothesis: the
+consumption of an auxiliary planner is a floor for `lfp` (`StochModel.lfp_lt_psi`,
+`StochModel.exists_nondegenerate_equilibrium`). The deterministic proof anchors consumption at
+`k*` through (4)–(6), and the stochastic `F` has no such anchor; `Ts_psi` shows the book's
+Schauder argument gives only the degenerate fixed point `ψ`.
 -/
 
 namespace StokeyLucasPrescott.EquilibriaWithDistortions
@@ -4937,6 +6619,753 @@ theorem exists_nondegenerate_equilibrium_identical (M : GlobalModel) (hM : ∀ j
     (fun j k hk => (h2 j k hk).le) h3 i hk
 
 end StochModel
+
+end StokeyLucasPrescott.EquilibriaWithDistortions
+
+/-
+Copyright (c) 2026 Robert Kirkby. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Robert Kirkby
+-/
+
+/-!
+# A non-degenerate stochastic equilibrium for any finite set of technologies (SLP p. 560)
+
+On p. 560 the book says that, in the stochastic case (§18.3 (8)–(9), pp. 558–560), existence of
+an equilibrium "follows from Schauder's Theorem". `GlobalStochastic.Ts_psi` shows that this
+argument yields only the degenerate fixed point `ψ` (zero consumption forever), and
+`GlobalStochasticEquilibrium` proves a non-degenerate equilibrium only when all states share one
+technology. This module proves existence for **any** finite set of technologies satisfying the
+per-shock assumptions, with no extra hypothesis: the least fixed point `lfp = lim Tⁿ0` always has
+positive consumption.
+
+The proof compares the equilibrium with an **auxiliary planner** whose technology in state `j` is
+`Φ_j(k) = θ f_j(0) + (1 − θ) f_j(k)`. Unlike `ψ_j`, `Φ_j` is concave, and `Φ_j ≤ ψ_j` with
+`Φ_j(b) − Φ_j(a) > (1 − θ)(b − a) f′_j(b)`. The planner's problem
+`V_j(k) = max_{0 ≤ z ≤ Φ_j(k)} U(Φ_j(k) − z) + β Σ_l π_jl V_l(z)` has a concave value function,
+its consumption `c_j(k)` is positive (Inada condition), and raising saving by `δ` gives the
+Euler inequality with the agent's after-tax return, `U′(c_j(k)) ≥ β(1 − θ) Σ_l π_jl f′_l(z)
+U′(c_l(z))`. Then `{h ∈ F : ψ − h ≥ c}` is invariant under `T` and contains `0`, so every iterate
+`Tⁿ0`, and the limit `lfp`, leaves consumption at least `c > 0`.
+
+* The planner: `Phi` and its properties (`Phi_le_psi`, `Phi_sub_gt`, `Phi_concave`); the Bellman
+  operator `plBellOp` (a `β`-contraction, `plBellOp_contracting`) and its fixed point `Vstar`,
+  which is concave (`isConc_Vstar`); an optimal saving `pz` (`pz_spec`), with consumption `pc`.
+* `pc_pos`: the planner's consumption is positive.
+* `pc_euler`: the planner's Euler inequality with the agent's return `β(1 − θ) f′`.
+* `IsInFs.Ts_floor`, `Tsit_floor`, `lfp_floor`: the planner's consumption is a floor for the
+  consumption of every `Tⁿ0` and of `lfp`.
+* `lfp_lt_psi`, `exists_nondegenerate_super`: `lfp` has positive consumption everywhere, so the
+  hypothesis of `StochModel.lfp_equilibrium_of_super` always holds.
+* `exists_nondegenerate_equilibrium_KT`: with no cross-state condition, `lfp` solves (9) in
+  Kuhn–Tucker form with positive consumptions today and tomorrow.
+* `exists_nondegenerate_equilibrium`: under `CrossState`, `lfp` solves (9) as an equation.
+* `crossState_of_persistent`: `β(1 − θ) π_ii f′_i(0) > 1` for every `i` implies `CrossState`.
+* Examples: `stochJ_nondegenerate` (the model in which Exercise 18.8 fails still has a
+  non-degenerate equilibrium) and `stochP_equilibrium` (two different technologies, `modelHigh`
+  and `modelE`, with persistent shocks; `stochP_tech_ne`, `stochP_crossState`).
+
+**Correction (p. 560).** Existence of a non-degenerate equilibrium is true for every finite set of
+technologies, but not by the book's argument: Schauder's Theorem on `F` gives `ψ`
+(`StochModel.Ts_psi`). It follows from monotone iteration from `0` (Theorem 17.7 from the least
+element) together with the planner's consumption floor `lfp_floor`. No anchor at a steady state,
+no closeness of technologies and no extra Inada condition on `f′` are needed.
+-/
+
+namespace StokeyLucasPrescott.EquilibriaWithDistortions
+
+open Set Filter Topology BoundedContinuousFunction
+
+namespace StochModel
+
+variable {ι : Type} [Fintype ι] (S : StochModel ι)
+
+/-- `0 < β < 1` for the common discount factor. -/
+theorem β_pos' : 0 < S.β := by
+  obtain ⟨j, -⟩ := S.B_eq
+  rw [← S.tech_β j]; exact (S.tech j).β_pos
+
+/-- `β < 1` for the common discount factor. -/
+theorem β_lt_one' : S.β < 1 := by
+  obtain ⟨j, -⟩ := S.B_eq
+  rw [← S.tech_β j]; exact (S.tech j).β_lt_one
+
+/-- `0 < θ < 1` for the common tax rate. -/
+theorem θ_mem : 0 < S.θ ∧ S.θ < 1 := by
+  obtain ⟨j, -⟩ := S.B_eq
+  rw [← S.tech_θ j]; exact ⟨(S.tech j).θ_pos, (S.tech j).θ_lt_one⟩
+
+/-- The common utility is continuous on `[0, ∞)`. -/
+theorem U_cont : ContinuousOn S.U (Ici 0) := by
+  obtain ⟨j, -⟩ := S.B_eq
+  rw [← S.tech_U j]; exact (S.tech j).U_cont
+
+/-- The common utility is strictly increasing on `[0, ∞)`. -/
+theorem U_strictMono : StrictMonoOn S.U (Ici 0) := by
+  obtain ⟨j, -⟩ := S.B_eq
+  rw [← S.tech_U j]; exact (S.tech j).U_strictMono
+
+/-- The common utility is strictly concave on `[0, ∞)`. -/
+theorem U_strictConcave : StrictConcaveOn ℝ (Ici 0) S.U := by
+  obtain ⟨j, -⟩ := S.B_eq
+  rw [← S.tech_U j]; exact (S.tech j).U_strictConcave
+
+/-- `U′` is the derivative of the common utility on `(0, ∞)`. -/
+theorem U_deriv {c : ℝ} (hc : 0 < c) : HasDerivAt S.U (S.U' c) c := by
+  obtain ⟨j, -⟩ := S.B_eq
+  rw [← S.tech_U j, ← S.tech_U' j]; exact (S.tech j).U_deriv c hc
+
+/-! ### The auxiliary planner's technology `Φ_j(k) = θ f_j(0) + (1 − θ) f_j(k)` -/
+
+/-- The technology of the auxiliary planner: `Φ_j(k) = θ f_j(0) + (1 − θ) f_j(k)`. -/
+noncomputable def Phi (j : ι) (k : ℝ) : ℝ := S.θ * (S.tech j).f 0 + (1 - S.θ) * (S.tech j).f k
+
+/-- `Φ_j ≤ ψ_j` on `[0, ∞)`: the gap is `θ [f_j(k) − f_j(0) − k f′_j(k)] ≥ 0`. -/
+theorem Phi_le_psi (j : ι) {k : ℝ} (hk : 0 ≤ k) : S.Phi j k ≤ (S.tech j).psi k := by
+  have hθ := S.tech_θ j
+  have e : (S.tech j).psi k - S.Phi j k =
+      S.θ * ((S.tech j).f k - (S.tech j).f 0 - k * (S.tech j).f' k) := by
+    simp only [GlobalModel.psi, Phi, hθ]; ring
+  rcases hk.eq_or_lt with h0 | hpos
+  · rw [← h0] at e ⊢
+    have : (S.tech j).psi 0 - S.Phi j 0 = 0 := by rw [e]; ring
+    linarith
+  · have h1 := (S.tech j).f'_mul_lt_sub le_rfl hpos
+    have : 0 ≤ (S.tech j).psi k - S.Phi j k := by
+      rw [e]; exact mul_nonneg S.θ_mem.1.le (by linarith)
+    linarith
+
+/-- `Φ_j(b) − Φ_j(a) > (1 − θ)(b − a) f′_j(b)` for `0 ≤ a < b`. -/
+theorem Phi_sub_gt (j : ι) {a b : ℝ} (ha : 0 ≤ a) (hab : a < b) :
+    (1 - S.θ) * (b - a) * (S.tech j).f' b < S.Phi j b - S.Phi j a := by
+  have h1 := (S.tech j).f'_mul_lt_sub ha hab
+  have h2 : 0 < 1 - S.θ := by linarith [S.θ_mem.2]
+  have : S.Phi j b - S.Phi j a = (1 - S.θ) * ((S.tech j).f b - (S.tech j).f a) := by
+    simp only [Phi]; ring
+  rw [this, mul_assoc]
+  exact mul_lt_mul_of_pos_left (by linarith) h2
+
+/-- `Φ_j` is strictly increasing on `[0, ∞)`. -/
+theorem Phi_lt (j : ι) {a b : ℝ} (ha : 0 ≤ a) (hab : a < b) : S.Phi j a < S.Phi j b := by
+  have h := S.Phi_sub_gt j ha hab
+  have : 0 < (1 - S.θ) * (b - a) * (S.tech j).f' b :=
+    mul_pos (mul_pos (by linarith [S.θ_mem.2]) (by linarith))
+      ((S.tech j).f'_pos (ha.trans hab.le))
+  linarith
+
+/-- `Φ_j` is nondecreasing on `[0, ∞)`. -/
+theorem Phi_le (j : ι) {a b : ℝ} (ha : 0 ≤ a) (hab : a ≤ b) : S.Phi j a ≤ S.Phi j b := by
+  rcases hab.eq_or_lt with h | h
+  · rw [h]
+  · exact (S.Phi_lt j ha h).le
+
+/-- `Φ_j(k) ≥ Φ_j(0) = f_j(0) > 0`. -/
+theorem Phi_pos (j : ι) {k : ℝ} (hk : 0 ≤ k) : 0 < S.Phi j k := by
+  have h0 : S.Phi j 0 = (S.tech j).f 0 := by simp only [Phi]; ring
+  have := S.Phi_le j le_rfl hk
+  linarith [(S.tech j).f_zero_pos]
+
+/-- `Φ_j` is continuous on `[0, ∞)`. -/
+theorem Phi_continuousOn (j : ι) : ContinuousOn (S.Phi j) (Ici 0) :=
+  continuousOn_const.add (continuousOn_const.mul (S.tech j).f_cont)
+
+/-- `Φ_j` is concave on `[0, ∞)` (it is affine in the concave `f_j`). -/
+theorem Phi_concave (j : ι) : ConcaveOn ℝ (Ici 0) (S.Phi j) := by
+  refine ⟨convex_Ici 0, fun x hx y hy a b ha hb hab => ?_⟩
+  have hf := (S.tech j).f_strictConcave.concaveOn.2 hx hy ha hb hab
+  have h2 : 0 ≤ 1 - S.θ := by linarith [S.θ_mem.2]
+  simp only [smul_eq_mul] at hf ⊢
+  simp only [Phi]
+  have := mul_le_mul_of_nonneg_left hf h2
+  have e : a * (S.θ * (S.tech j).f 0 + (1 - S.θ) * (S.tech j).f x) +
+      b * (S.θ * (S.tech j).f 0 + (1 - S.θ) * (S.tech j).f y) =
+      (a + b) * (S.θ * (S.tech j).f 0) +
+        (1 - S.θ) * (a * (S.tech j).f x + b * (S.tech j).f y) := by ring
+  rw [e, hab, one_mul]
+  linarith
+
+/-- `Φ_j` maps `K = [0, B]` into `(0, B]`. -/
+theorem Phi_le_B (j : ι) {k : ℝ} (hk : k ∈ Icc 0 S.B) : S.Phi j k ≤ S.B :=
+  (S.Phi_le_psi j hk.1).trans (S.psi_le_B j hk)
+
+/-! ### The auxiliary planner's Bellman equation -/
+
+/-- The space of value functions of the auxiliary planner: one bounded continuous function on
+`K = [0, B]` for each state. -/
+abbrev VSpace := ι → (Icc (0 : ℝ) S.B →ᵇ ℝ)
+
+/-- A value function of state `l`, extended to `ℝ` (constant outside `K`). -/
+noncomputable def vE (V : S.VSpace) (l : ι) (z : ℝ) : ℝ := IccExtend S.B_pos.le (V l) z
+
+/-- `vE V l` is continuous. -/
+theorem vE_continuous (V : S.VSpace) (l : ι) : Continuous (S.vE V l) :=
+  (V l).continuous.Icc_extend'
+
+/-- `|V_l(z)| ≤ ‖V‖`. -/
+theorem abs_vE_le (V : S.VSpace) (l : ι) (z : ℝ) : |S.vE V l z| ≤ ‖V‖ :=
+  ((V l).norm_coe_le_norm _).trans (norm_le_pi_norm V l)
+
+/-- `|V_l(z) − W_l(z)| ≤ d(V, W)`. -/
+theorem abs_vE_sub_le (V W : S.VSpace) (l : ι) (z : ℝ) :
+    |S.vE V l z - S.vE W l z| ≤ dist V W := by
+  have h1 := (V l).dist_coe_le_dist (g := W l) (projIcc 0 S.B S.B_pos.le z)
+  rw [Real.dist_eq] at h1
+  exact h1.trans (dist_le_pi_dist V W l)
+
+/-- The planner's objective at `(k, ξ_j)` when saving `z`:
+`U(Φ_j(k) − z) + β Σ_l π_jl V_l(z)`. -/
+noncomputable def obj (V : S.VSpace) (j : ι) (k z : ℝ) : ℝ :=
+  S.U (S.Phi j k - z) + S.β * ∑ l, S.π j l * S.vE V l z
+
+/-- The clamp of `t` to `[0, 1]`. -/
+noncomputable def clamp01 (t : ℝ) : ℝ := max 0 (min 1 t)
+
+/-- `clamp01` is the identity on `[0, 1]`. -/
+theorem clamp01_of_mem {t : ℝ} (ht : t ∈ Icc (0 : ℝ) 1) : clamp01 t = t := by
+  simp only [clamp01, min_eq_right ht.2, max_eq_right ht.1]
+
+/-- `0 ≤ clamp01 t ≤ 1`. -/
+theorem clamp01_mem (t : ℝ) : clamp01 t ∈ Icc (0 : ℝ) 1 :=
+  ⟨le_max_left _ _, max_le zero_le_one (min_le_left _ _)⟩
+
+/-- The **Bellman operator** of the auxiliary planner, pointwise:
+`(PV)_j(k) = max_{0 ≤ z ≤ Φ_j(k)} U(Φ_j(k) − z) + β Σ_l π_jl V_l(z)`, with `z = t Φ_j(k)`,
+`t ∈ [0, 1]`. -/
+noncomputable def plBell (V : S.VSpace) (j : ι) (k : ℝ) : ℝ :=
+  sSup ((fun t => S.obj V j k (clamp01 t * S.Phi j k)) '' Icc 0 1)
+
+/-- The objective is jointly continuous in `(k, t) ∈ K × ℝ`. -/
+theorem obj_continuous (V : S.VSpace) (j : ι) :
+    Continuous fun p : Icc (0 : ℝ) S.B × ℝ => S.obj V j p.1 (clamp01 p.2 * S.Phi j p.1) := by
+  have hP : Continuous fun p : Icc (0 : ℝ) S.B × ℝ => S.Phi j p.1 :=
+    (S.Phi_continuousOn j).comp_continuous (continuous_subtype_val.comp continuous_fst)
+      fun p => mem_Ici.2 p.1.2.1
+  have hc : Continuous clamp01 := continuous_const.max (continuous_const.min continuous_id)
+  have hz : Continuous fun p : Icc (0 : ℝ) S.B × ℝ => clamp01 p.2 * S.Phi j p.1 :=
+    (hc.comp continuous_snd).mul hP
+  refine Continuous.add ?_ (continuous_const.mul (continuous_finsetSum _ fun l _ =>
+    continuous_const.mul ((S.vE_continuous V l).comp hz)))
+  refine S.U_cont.comp_continuous (hP.sub hz) fun p => mem_Ici.2 ?_
+  have h1 := (clamp01_mem p.2).2
+  have h2 := S.Phi_pos j p.1.2.1
+  nlinarith
+
+/-- `(PV)_j` is continuous on `K`. -/
+theorem plBell_continuous (V : S.VSpace) (j : ι) :
+    Continuous fun k : Icc (0 : ℝ) S.B => S.plBell V j k :=
+  isCompact_Icc.continuous_sSup (S.obj_continuous V j)
+
+/-- **The Bellman operator** `P` on `VSpace`. -/
+noncomputable def plBellOp (V : S.VSpace) : S.VSpace := fun j =>
+  BoundedContinuousFunction.mkOfCompact ⟨fun k => S.plBell V j k, S.plBell_continuous V j⟩
+
+/-- The values of the objective over `t ∈ [0, 1]` form a compact set. -/
+theorem obj_image_isCompact (V : S.VSpace) (j : ι) {k : ℝ} (hk : k ∈ Icc 0 S.B) :
+    IsCompact ((fun t => S.obj V j k (clamp01 t * S.Phi j k)) '' Icc 0 1) :=
+  isCompact_Icc.image ((S.obj_continuous V j).comp
+    (Continuous.prodMk_right (Y := ℝ) (⟨k, hk⟩ : Icc (0 : ℝ) S.B)) :)
+
+/-- Every feasible saving `z ∈ [0, Φ_j(k)]` gives at most `(PV)_j(k)`. -/
+theorem obj_le_plBell (V : S.VSpace) (j : ι) {k z : ℝ} (hk : k ∈ Icc 0 S.B)
+    (hz : z ∈ Icc 0 (S.Phi j k)) : S.obj V j k z ≤ S.plBell V j k := by
+  have hP := S.Phi_pos j hk.1
+  refine le_csSup (S.obj_image_isCompact V j hk).bddAbove ⟨z / S.Phi j k,
+    ⟨div_nonneg hz.1 hP.le, div_le_one_of_le₀ hz.2 hP.le⟩, ?_⟩
+  simp only
+  rw [clamp01_of_mem ⟨div_nonneg hz.1 hP.le, div_le_one_of_le₀ hz.2 hP.le⟩,
+    div_mul_cancel₀ _ hP.ne']
+
+/-- The maximum in `(PV)_j(k)` is attained. -/
+theorem exists_plBell_eq (V : S.VSpace) (j : ι) {k : ℝ} (hk : k ∈ Icc 0 S.B) :
+    ∃ z ∈ Icc 0 (S.Phi j k), S.obj V j k z = S.plBell V j k := by
+  obtain ⟨t, ht, hteq⟩ := (S.obj_image_isCompact V j hk).sSup_mem
+    ((nonempty_Icc.2 zero_le_one).image _)
+  have hP := S.Phi_pos j hk.1
+  refine ⟨clamp01 t * S.Phi j k, ⟨mul_nonneg (clamp01_mem t).1 hP.le,
+    mul_le_of_le_one_left hP.le (clamp01_mem t).2⟩, hteq⟩
+
+/-- `(PV)_j(k) ≤ c` when every feasible saving gives at most `c`. -/
+theorem plBell_le (V : S.VSpace) (j : ι) {k c : ℝ} (hk : k ∈ Icc 0 S.B)
+    (h : ∀ z ∈ Icc 0 (S.Phi j k), S.obj V j k z ≤ c) : S.plBell V j k ≤ c := by
+  have hP := S.Phi_pos j hk.1
+  refine csSup_le ((nonempty_Icc.2 zero_le_one).image _) (forall_mem_image.2 fun t _ => ?_)
+  exact h _ ⟨mul_nonneg (clamp01_mem t).1 hP.le, mul_le_of_le_one_left hP.le (clamp01_mem t).2⟩
+
+/-- The objective moves by at most `β d(V, W)`. -/
+theorem obj_le_obj_add (V W : S.VSpace) (j : ι) (k z : ℝ) :
+    S.obj V j k z ≤ S.obj W j k z + S.β * dist V W := by
+  have h1 : ∑ l, S.π j l * S.vE V l z ≤ ∑ l, S.π j l * (S.vE W l z + dist V W) :=
+    Finset.sum_le_sum fun l _ => mul_le_mul_of_nonneg_left
+      (by linarith [(abs_le.1 (S.abs_vE_sub_le V W l z)).2]) (S.π_nonneg j l)
+  simp only [mul_add, Finset.sum_add_distrib, ← Finset.sum_mul, S.π_sum, one_mul] at h1
+  have := mul_le_mul_of_nonneg_left h1 S.β_pos'.le
+  simp only [obj]
+  linarith
+
+/-- `P` is a contraction with modulus `β`. -/
+theorem dist_plBellOp_le (V W : S.VSpace) :
+    dist (S.plBellOp V) (S.plBellOp W) ≤ S.β * dist V W := by
+  have h0 : 0 ≤ S.β * dist V W := mul_nonneg S.β_pos'.le dist_nonneg
+  refine (dist_pi_le_iff h0).2 fun j => (BoundedContinuousFunction.dist_le h0).2 fun k => ?_
+  have h1 : S.plBell V j k ≤ S.plBell W j k + S.β * dist V W :=
+    S.plBell_le V j k.2 fun z hz => (S.obj_le_obj_add V W j k z).trans
+      (add_le_add_left (S.obj_le_plBell W j k.2 hz) _)
+  have h2 : S.plBell W j k ≤ S.plBell V j k + S.β * dist V W := by
+    rw [dist_comm]
+    exact S.plBell_le W j k.2 fun z hz => (S.obj_le_obj_add W V j k z).trans
+      (add_le_add_left (S.obj_le_plBell V j k.2 hz) _)
+  rw [Real.dist_eq, abs_le]
+  change -(S.β * dist V W) ≤ S.plBell V j k - S.plBell W j k ∧
+    S.plBell V j k - S.plBell W j k ≤ S.β * dist V W
+  constructor <;> linarith
+
+/-- `P` is a contracting map. -/
+theorem plBellOp_contracting : ContractingWith ⟨S.β, S.β_pos'.le⟩ S.plBellOp :=
+  ⟨NNReal.coe_lt_coe.1 (by rw [NNReal.coe_one]; exact S.β_lt_one'),
+    LipschitzWith.of_dist_le_mul fun V W => S.dist_plBellOp_le V W⟩
+
+/-- **The planner's value function**: the fixed point of `P`. -/
+noncomputable def Vstar : S.VSpace :=
+  ContractingWith.fixedPoint S.plBellOp S.plBellOp_contracting
+
+/-- The Bellman equation `V*_j(k) = (PV*)_j(k)` on `K`. -/
+theorem vE_Vstar (j : ι) {k : ℝ} (hk : k ∈ Icc 0 S.B) :
+    S.vE S.Vstar j k = S.plBell S.Vstar j k := by
+  have h : S.plBellOp S.Vstar = S.Vstar := S.plBellOp_contracting.fixedPoint_isFixedPt
+  calc S.vE S.Vstar j k = S.Vstar j ⟨k, hk⟩ := IccExtend_of_mem _ _ hk
+    _ = S.plBellOp S.Vstar j ⟨k, hk⟩ := by rw [h]
+    _ = S.plBell S.Vstar j k := rfl
+
+/-! ### Concavity of the planner's value function -/
+
+/-- Every state's value function is concave on `K`. -/
+def IsConc (V : S.VSpace) : Prop := ∀ l, ConcaveOn ℝ (Icc 0 S.B) (S.vE V l)
+
+/-- The zero value function is concave. -/
+theorem isConc_zero : S.IsConc 0 := fun l => by
+  have : S.vE 0 l = fun _ => 0 := rfl
+  rw [this]
+  exact concaveOn_const 0 (convex_Icc 0 S.B)
+
+/-- `P` preserves concavity (`Φ_j` and `U` are concave and `U` is increasing). -/
+theorem IsConc.plBellOp {V : S.VSpace} (hV : S.IsConc V) : S.IsConc (S.plBellOp V) := by
+  intro j
+  refine ⟨convex_Icc 0 S.B, fun x hx y hy a b ha hb hab => ?_⟩
+  have hxy : a • x + b • y ∈ Icc 0 S.B := convex_Icc 0 S.B hx hy ha hb hab
+  have e : ∀ {k : ℝ} (hk : k ∈ Icc 0 S.B), S.vE (S.plBellOp V) j k = S.plBell V j k :=
+    fun hk => IccExtend_of_mem _ _ hk
+  rw [e hx, e hy, e hxy]
+  obtain ⟨zx, hzx, hzxe⟩ := S.exists_plBell_eq V j hx
+  obtain ⟨zy, hzy, hzye⟩ := S.exists_plBell_eq V j hy
+  rw [← hzxe, ← hzye]
+  simp only [smul_eq_mul] at hxy ⊢
+  have hPc := (S.Phi_concave j).2 (mem_Ici.2 hx.1) (mem_Ici.2 hy.1) ha hb hab
+  simp only [smul_eq_mul] at hPc
+  have hzxK : zx ∈ Icc 0 S.B := ⟨hzx.1, hzx.2.trans (S.Phi_le_B j hx)⟩
+  have hzyK : zy ∈ Icc 0 S.B := ⟨hzy.1, hzy.2.trans (S.Phi_le_B j hy)⟩
+  have hfeas : a * zx + b * zy ∈ Icc 0 (S.Phi j (a * x + b * y)) := by
+    refine ⟨by nlinarith [hzx.1, hzy.1], le_trans ?_ hPc⟩
+    nlinarith [hzx.2, hzy.2]
+  refine le_trans ?_ (S.obj_le_plBell V j hxy hfeas)
+  have hcx : 0 ≤ S.Phi j x - zx := by linarith [hzx.2]
+  have hcy : 0 ≤ S.Phi j y - zy := by linarith [hzy.2]
+  have hU1 := S.U_strictConcave.concaveOn.2 (mem_Ici.2 hcx) (mem_Ici.2 hcy) ha hb hab
+  simp only [smul_eq_mul] at hU1
+  have hU2 : S.U (a * (S.Phi j x - zx) + b * (S.Phi j y - zy)) ≤
+      S.U (S.Phi j (a * x + b * y) - (a * zx + b * zy)) :=
+    S.U_strictMono.monotoneOn (mem_Ici.2 (by nlinarith))
+      (mem_Ici.2 (by nlinarith)) (by nlinarith)
+  have hG : a * ∑ l, S.π j l * S.vE V l zx + b * ∑ l, S.π j l * S.vE V l zy ≤
+      ∑ l, S.π j l * S.vE V l (a * zx + b * zy) := by
+    rw [Finset.mul_sum, Finset.mul_sum, ← Finset.sum_add_distrib]
+    refine Finset.sum_le_sum fun l _ => ?_
+    have := (hV l).2 hzxK hzyK ha hb hab
+    simp only [smul_eq_mul] at this
+    calc a * (S.π j l * S.vE V l zx) + b * (S.π j l * S.vE V l zy)
+        = S.π j l * (a * S.vE V l zx + b * S.vE V l zy) := by ring
+      _ ≤ S.π j l * S.vE V l (a * zx + b * zy) :=
+        mul_le_mul_of_nonneg_left this (S.π_nonneg j l)
+  have hβG := mul_le_mul_of_nonneg_left hG S.β_pos'.le
+  simp only [obj]
+  nlinarith
+
+/-- The iterates `Pⁿ0` are concave. -/
+theorem isConc_iterate (n : ℕ) : S.IsConc (S.plBellOp^[n] 0) := by
+  induction n with
+  | zero => exact S.isConc_zero
+  | succ n ih => rw [Function.iterate_succ_apply']; exact ih.plBellOp
+
+/-- **The planner's value function is concave** in every state. -/
+theorem isConc_Vstar : S.IsConc S.Vstar := by
+  intro l
+  refine ⟨convex_Icc 0 S.B, fun x hx y hy a b ha hb hab => ?_⟩
+  have ht := S.plBellOp_contracting.tendsto_iterate_fixedPoint 0
+  have hev : ∀ z, Tendsto (fun n => S.vE (S.plBellOp^[n] 0) l z) atTop
+      (𝓝 (S.vE S.Vstar l z)) := fun z =>
+    (((continuous_eval_const (projIcc 0 S.B S.B_pos.le z)).comp
+      (continuous_apply l)).tendsto _).comp ht
+  exact le_of_tendsto_of_tendsto' ((tendsto_const_nhds.smul (hev x)).add
+    (tendsto_const_nhds.smul (hev y))) (hev _) fun n => (S.isConc_iterate n l).2 hx hy ha hb hab
+
+/-! ### The planner's policy: positive consumption and the Euler inequality -/
+
+/-- An optimal saving of the planner at `(k, ξ_j)` (`0` outside `K`). -/
+noncomputable def pz (j : ι) (k : ℝ) : ℝ :=
+  if hk : k ∈ Icc 0 S.B then Classical.choose (S.exists_plBell_eq S.Vstar j hk) else 0
+
+/-- `pz j k` is feasible and optimal. -/
+theorem pz_spec (j : ι) {k : ℝ} (hk : k ∈ Icc 0 S.B) :
+    S.pz j k ∈ Icc 0 (S.Phi j k) ∧ S.obj S.Vstar j k (S.pz j k) = S.plBell S.Vstar j k := by
+  simp only [pz, hk, ↓reduceDIte]
+  exact Classical.choose_spec (S.exists_plBell_eq S.Vstar j hk)
+
+/-- The planner's consumption `Φ_j(k) − pz_j(k)`. -/
+noncomputable def pc (j : ι) (k : ℝ) : ℝ := S.Phi j k - S.pz j k
+
+/-- The planner's saving lies in `K`. -/
+theorem pz_mem (j : ι) {k : ℝ} (hk : k ∈ Icc 0 S.B) : S.pz j k ∈ Icc 0 S.B :=
+  ⟨(S.pz_spec j hk).1.1, (S.pz_spec j hk).1.2.trans (S.Phi_le_B j hk)⟩
+
+/-- **The planner's consumption is positive** (concavity of `V*` and the Inada condition). -/
+theorem pc_pos (j : ι) {k : ℝ} (hk : k ∈ Icc 0 S.B) : 0 < S.pc j k := by
+  obtain ⟨⟨-, hzP⟩, hzeq⟩ := S.pz_spec j hk
+  by_contra hneg
+  have hz : S.pz j k = S.Phi j k := by simp only [pc] at hneg; linarith
+  have hzpos : 0 < S.Phi j k := S.Phi_pos j hk.1
+  have hzK : S.Phi j k ∈ Icc 0 S.B := ⟨hzpos.le, S.Phi_le_B j hk⟩
+  set z := S.Phi j k with hzdef
+  set M := ‖S.Vstar‖ with hM
+  have hM0 : 0 ≤ M := norm_nonneg _
+  have key : ∀ δ, 0 < δ → δ < z / 2 → S.U' δ < S.β * (4 * M / z) := by
+    intro δ hδ hδz
+    have h1 := S.obj_le_plBell S.Vstar j hk (z := z - δ) ⟨by linarith, by linarith⟩
+    rw [← hzeq, hz] at h1
+    simp only [obj] at h1
+    rw [show z - (z - δ) = δ by ring, sub_self] at h1
+    have hl : ∀ l, S.vE S.Vstar l z - S.vE S.Vstar l (z - δ) ≤ δ * (4 * M / z) := by
+      intro l
+      have hs := (S.isConc_Vstar l).slope_anti_adjacent (x := 0) (y := z - δ) (z := z)
+        ⟨le_rfl, S.B_pos.le⟩ hzK (by linarith) (by linarith)
+      have hb1 := abs_le.1 (S.abs_vE_le S.Vstar l (z - δ))
+      have hb2 := abs_le.1 (S.abs_vE_le S.Vstar l 0)
+      rw [show z - (z - δ) = δ by ring, sub_zero, div_le_div_iff₀ hδ (by linarith)] at hs
+      rw [← mul_div_assoc, le_div_iff₀ hzpos]
+      rcases le_or_gt (S.vE S.Vstar l z - S.vE S.Vstar l (z - δ)) 0 with hD | hD
+      · nlinarith
+      · nlinarith
+    have hG : ∑ l, S.π j l * S.vE S.Vstar l z ≤
+        ∑ l, S.π j l * S.vE S.Vstar l (z - δ) + δ * (4 * M / z) := by
+      have : ∑ l, S.π j l * S.vE S.Vstar l z ≤
+          ∑ l, S.π j l * (S.vE S.Vstar l (z - δ) + δ * (4 * M / z)) :=
+        Finset.sum_le_sum fun l _ =>
+          mul_le_mul_of_nonneg_left (by linarith [hl l]) (S.π_nonneg j l)
+      simpa only [mul_add, Finset.sum_add_distrib, ← Finset.sum_mul, S.π_sum, one_mul]
+        using this
+    have hsl := S.U_strictConcave.lt_slope_of_hasDerivAt (mem_Ici.2 le_rfl) (mem_Ici.2 hδ.le)
+      hδ (S.U_deriv hδ)
+    rw [slope_def_field, sub_zero, lt_div_iff₀ hδ] at hsl
+    have hβG := mul_le_mul_of_nonneg_left hG S.β_pos'.le
+    have : S.U' δ * δ < (S.β * (4 * M / z)) * δ := by nlinarith
+    exact lt_of_mul_lt_mul_right this hδ.le
+  obtain ⟨δ, hδ1, hδ2⟩ := ((S.isMarginalUtility.inada.eventually_gt_atTop
+    (S.β * (4 * M / z))).and (Ioo_mem_nhdsGT (half_pos hzpos))).exists
+  exact lt_asymm hδ1 (key δ hδ2.1 hδ2.2)
+
+/-- The one-sided Euler inequality along a perturbation `δ ∈ (0, c)` of the planner's saving. -/
+theorem pc_euler_delta (j : ι) {k : ℝ} (hk : k ∈ Icc 0 S.B) {δ : ℝ} (hδ : 0 < δ)
+    (hδc : δ < S.pc j k) :
+    S.β * (1 - S.θ) * ∑ l, S.π j l * ((S.tech l).f' (S.pz j k + δ) *
+      S.U' (S.Phi l (S.pz j k + δ) - S.pz l (S.pz j k))) ≤ S.U' (S.pc j k - δ) := by
+  obtain ⟨⟨hz0, hzP⟩, hzeq⟩ := S.pz_spec j hk
+  set z := S.pz j k with hzdef
+  set c := S.pc j k with hcdef
+  have hcz : c = S.Phi j k - z := rfl
+  have hzK : z ∈ Icc 0 S.B := S.pz_mem j hk
+  have hzδK : z + δ ∈ Icc 0 S.B := ⟨by linarith, by linarith [S.Phi_le_B j hk]⟩
+  -- (a) saving `z + δ` is no better than `z`
+  have h1 := S.obj_le_plBell S.Vstar j hk (z := z + δ) ⟨by linarith, by linarith⟩
+  rw [← hzeq] at h1
+  simp only [obj] at h1
+  rw [show S.Phi j k - (z + δ) = c - δ by rw [hcz]; ring, ← hcz] at h1
+  -- (b) tomorrow's values rise by at least the utility of the extra resources
+  have h2 : ∀ l, S.U (S.Phi l (z + δ) - S.pz l z) - S.U (S.Phi l z - S.pz l z) ≤
+      S.vE S.Vstar l (z + δ) - S.vE S.Vstar l z := by
+    intro l
+    obtain ⟨⟨hp0, hpP⟩, hpeq⟩ := S.pz_spec l hzK
+    have hb := S.obj_le_plBell S.Vstar l hzδK (z := S.pz l z)
+      ⟨hp0, hpP.trans (S.Phi_le l hzK.1 (by linarith))⟩
+    rw [← S.vE_Vstar l hzδK] at hb
+    rw [S.vE_Vstar l hzK, ← hpeq]
+    simp only [obj] at hb ⊢
+    linarith
+  -- (c) concavity of `U` and the marginal product of `Φ_l`
+  have h3 : ∀ l, (1 - S.θ) * δ * (S.tech l).f' (z + δ) *
+      S.U' (S.Phi l (z + δ) - S.pz l z) ≤
+      S.U (S.Phi l (z + δ) - S.pz l z) - S.U (S.Phi l z - S.pz l z) := by
+    intro l
+    have ha : 0 < S.Phi l z - S.pz l z := S.pc_pos l hzK
+    have hgap := S.Phi_sub_gt l hzK.1 (show z < z + δ by linarith)
+    rw [show z + δ - z = δ by ring] at hgap
+    have hgap0 : 0 < (1 - S.θ) * δ * (S.tech l).f' (z + δ) :=
+      mul_pos (mul_pos (by linarith [S.θ_mem.2]) hδ) ((S.tech l).f'_pos hzδK.1)
+    have hb : S.Phi l z - S.pz l z < S.Phi l (z + δ) - S.pz l z := by linarith
+    have hsl := S.U_strictConcave.lt_slope_of_hasDerivAt (mem_Ici.2 ha.le)
+      (mem_Ici.2 (ha.trans hb).le) hb (S.U_deriv (ha.trans hb))
+    rw [slope_def_field, lt_div_iff₀ (by linarith)] at hsl
+    have hUp := S.isMarginalUtility.pos _ (ha.trans hb)
+    have : (1 - S.θ) * δ * (S.tech l).f' (z + δ) * S.U' (S.Phi l (z + δ) - S.pz l z) ≤
+        S.U' (S.Phi l (z + δ) - S.pz l z) * (S.Phi l (z + δ) - S.Phi l z) := by
+      rw [mul_comm (S.U' _)]
+      exact mul_le_mul_of_nonneg_right hgap.le hUp.le
+    have e : S.Phi l (z + δ) - S.pz l z - (S.Phi l z - S.pz l z) =
+        S.Phi l (z + δ) - S.Phi l z := by ring
+    rw [e] at hsl
+    linarith
+  -- (d) concavity of `U` today
+  have hcδ : 0 < c - δ := by linarith
+  have h4 := S.U_strictConcave.slope_lt_of_hasDerivAt (mem_Ici.2 hcδ.le)
+    (mem_Ici.2 (by linarith)) (show c - δ < c by linarith) (S.U_deriv hcδ)
+  rw [slope_def_field, show c - (c - δ) = δ by ring, div_lt_iff₀ hδ] at h4
+  -- combine
+  have hsum : ∑ l, S.π j l * ((1 - S.θ) * δ * (S.tech l).f' (z + δ) *
+      S.U' (S.Phi l (z + δ) - S.pz l z)) ≤
+      ∑ l, S.π j l * S.vE S.Vstar l (z + δ) - ∑ l, S.π j l * S.vE S.Vstar l z := by
+    rw [← Finset.sum_sub_distrib]
+    exact Finset.sum_le_sum fun l _ => by
+      rw [← mul_sub]
+      exact mul_le_mul_of_nonneg_left ((h3 l).trans (h2 l)) (S.π_nonneg j l)
+  have e : ∑ l, S.π j l * ((1 - S.θ) * δ * (S.tech l).f' (z + δ) *
+      S.U' (S.Phi l (z + δ) - S.pz l z)) = δ * ((1 - S.θ) * ∑ l, S.π j l *
+      ((S.tech l).f' (z + δ) * S.U' (S.Phi l (z + δ) - S.pz l z))) := by
+    rw [Finset.mul_sum, Finset.mul_sum]
+    refine Finset.sum_congr rfl fun l _ => ?_
+    ring
+  rw [e] at hsum
+  have hβ := mul_le_mul_of_nonneg_left hsum S.β_pos'.le
+  have : δ * (S.β * (1 - S.θ) * ∑ l, S.π j l * ((S.tech l).f' (z + δ) *
+      S.U' (S.Phi l (z + δ) - S.pz l z))) ≤ δ * S.U' (c - δ) := by
+    nlinarith
+  exact le_of_mul_le_mul_left this hδ
+
+/-- **The planner's Euler inequality** with the agent's after-tax return:
+`U′(c_j(k)) ≥ β(1 − θ) Σ_l π_jl f′_l(z) U′(c_l(z))` at the planner's saving `z = pz_j(k)`. -/
+theorem pc_euler (j : ι) {k : ℝ} (hk : k ∈ Icc 0 S.B) :
+    S.β * (1 - S.θ) * ∑ l, S.π j l * ((S.tech l).f' (S.pz j k) * S.U' (S.pc l (S.pz j k))) ≤
+      S.U' (S.pc j k) := by
+  set z := S.pz j k with hzdef
+  have hzK : z ∈ Icc 0 S.B := S.pz_mem j hk
+  have hc := S.pc_pos j hk
+  have hzδ : Tendsto (fun δ : ℝ => z + δ) (𝓝[>] 0) (𝓝[Ici 0] z) := by
+    refine tendsto_nhdsWithin_iff.2 ⟨?_, eventually_nhdsWithin_of_forall fun δ hδ =>
+      mem_Ici.2 (by linarith [mem_Ioi.1 hδ, hzK.1])⟩
+    exact ((continuous_const.add continuous_id).tendsto' 0 z (add_zero z)).mono_left
+      nhdsWithin_le_nhds
+  have hL : Tendsto (fun δ : ℝ => S.β * (1 - S.θ) * ∑ l, S.π j l * ((S.tech l).f' (z + δ) *
+      S.U' (S.Phi l (z + δ) - S.pz l z))) (𝓝[>] 0)
+      (𝓝 (S.β * (1 - S.θ) * ∑ l, S.π j l * ((S.tech l).f' z * S.U' (S.pc l z)))) := by
+    refine tendsto_const_nhds.mul (tendsto_finsetSum _ fun l _ => tendsto_const_nhds.mul ?_)
+    have hf := ((S.tech l).f'_continuousOn z (mem_Ici.2 hzK.1)).tendsto.comp hzδ
+    have hP := (((S.Phi_continuousOn l) z (mem_Ici.2 hzK.1)).tendsto.comp hzδ).sub_const
+      (S.pz l z)
+    have hU := (S.isMarginalUtility.cont.continuousAt
+      (Ioi_mem_nhds (S.pc_pos l hzK))).tendsto.comp hP
+    exact hf.mul hU
+  have hR : Tendsto (fun δ : ℝ => S.U' (S.pc j k - δ)) (𝓝[>] 0) (𝓝 (S.U' (S.pc j k))) := by
+    have h1 : Tendsto (fun δ : ℝ => S.pc j k - δ) (𝓝[>] 0) (𝓝 (S.pc j k)) :=
+      ((continuous_const.sub continuous_id).tendsto' 0 (S.pc j k) (by simp)).mono_left
+        nhdsWithin_le_nhds
+    exact (S.isMarginalUtility.cont.continuousAt (Ioi_mem_nhds hc)).tendsto.comp h1
+  refine le_of_tendsto_of_tendsto hL hR ?_
+  filter_upwards [Ioo_mem_nhdsGT hc] with δ hδ
+  exact S.pc_euler_delta j hk hδ.1 hδ.2
+
+/-! ### The planner's consumption is a floor for the least equilibrium -/
+
+variable {S}
+
+/-- **The floor is invariant under `T`.** If `h ∈ F` leaves at least the planner's consumption,
+`ψ_j − h_j ≥ c_j` on `K`, then so does `T h`. At `y₀ = ψ_i(k) − c_i(k) ≥ z = pz_i(k)` every
+next-period consumption is at least `c_j(z) > 0`, and the planner's Euler inequality `pc_euler`
+puts the right side of (9) below the left side, so `(Th)_i(k) ≤ y₀`. -/
+theorem IsInFs.Ts_floor {h : ι → ℝ → ℝ} (hh : S.IsInFs h)
+    (hfl : ∀ j, ∀ k ∈ Icc 0 S.B, S.pc j k ≤ (S.tech j).psi k - h j k) (i : ι) {k : ℝ}
+    (hk : k ∈ Icc 0 S.B) : S.pc i k ≤ (S.tech i).psi k - S.Ts h i k := by
+  have hzK := S.pz_mem i hk
+  have hPψ := S.Phi_le_psi i hk.1
+  set z := S.pz i k with hzdef
+  set y0 := (S.tech i).psi k - S.pc i k with hy0
+  have hzy : z ≤ y0 := by simp only [hy0, pc, hzdef]; linarith
+  have hy0K : y0 ∈ Icc 0 S.B := ⟨hzK.1.trans hzy, by linarith [S.psi_le_B i hk, S.pc_pos i hk]⟩
+  have hcons : ∀ j, S.pc j z ≤ (S.tech j).psi y0 - h j y0 := fun j =>
+    (hfl j z hzK).trans (hh.mono_sub j hzK hy0K hzy)
+  have hR : S.Rs h i y0 ≤ S.β * (1 - S.θ) * ∑ j, S.π i j * ((S.tech j).f' z *
+      S.U' (S.pc j z)) := by
+    refine mul_le_mul_of_nonneg_left (Finset.sum_le_sum fun j _ => ?_) S.coef_pos.le
+    have hcj := S.pc_pos j hzK
+    refine mul_le_mul_of_nonneg_left (mul_le_mul ?_ ?_
+      (S.isMarginalUtility.pos _ (hcj.trans_le (hcons j))).le
+      ((S.tech j).f'_pos hzK.1).le) (S.π_nonneg i j)
+    · exact (S.tech j).f'_strictAntiOn.antitoneOn (mem_Ici.2 hzK.1) (mem_Ici.2 hy0K.1) hzy
+    · exact S.isMarginalUtility.strictAnti.antitoneOn hcj (hcj.trans_le (hcons j)) (hcons j)
+  have hnb : ¬ EulerBelow S.U' (S.Zs h i) (S.Rs h i) ((S.tech i).psi k) y0 := by
+    intro hb
+    rcases hb with ⟨j, -, hj⟩ | hlt
+    · linarith [hcons j, S.pc_pos j hzK]
+    · rw [show (S.tech i).psi k - y0 = S.pc i k by rw [hy0]; ring] at hlt
+      exact absurd (hR.trans (S.pc_euler i hk)) (not_le.2 hlt)
+  have := eulerCross_le_of_not_below S.isMarginalUtility (hh.isEulerRHS i) (S.psi_le_B i hk)
+    hy0K.1 hnb
+  change S.Ts h i k ≤ y0 at this
+  linarith
+
+variable (S)
+
+/-- Every iterate `Tⁿ0` leaves at least the planner's consumption. -/
+theorem Tsit_floor (n : ℕ) :
+    ∀ j, ∀ k ∈ Icc 0 S.B, S.pc j k ≤ (S.tech j).psi k - S.Tsit n j k := by
+  induction n with
+  | zero =>
+    intro j k hk
+    have h1 := (S.pz_spec j hk).1.1
+    have h2 := S.Phi_le_psi j hk.1
+    change S.Phi j k - S.pz j k ≤ (S.tech j).psi k - 0
+    linarith
+  | succ n ih =>
+    intro j k hk
+    rw [Tsit_succ]
+    exact (S.isInFs_Tsit n).Ts_floor ih j hk
+
+/-- **A consumption floor for the least equilibrium**: consumption under `lfp` is at least the
+auxiliary planner's consumption, `ψ_j(k) − lfp_j(k) ≥ c_j(k) > 0`. -/
+theorem lfp_floor (j : ι) {k : ℝ} (hk : k ∈ Icc 0 S.B) :
+    S.pc j k ≤ (S.tech j).psi k - S.lfp j k := by
+  have : S.lfp j k ≤ (S.tech j).psi k - S.pc j k :=
+    le_of_tendsto' (S.tendsto_Tsit j hk) fun n => by linarith [S.Tsit_floor n j k hk]
+  linarith
+
+/-- **The least fixed point is non-degenerate**: `lfp_j(k) < ψ_j(k)` for every state and every
+`k ∈ K`, for any finite set of technologies. No cross-state condition is needed. -/
+theorem lfp_lt_psi (j : ι) {k : ℝ} (hk : k ∈ Icc 0 S.B) : S.lfp j k < (S.tech j).psi k := by
+  linarith [S.lfp_floor j hk, S.pc_pos j hk]
+
+/-- Under `lfp` no reachable next-period consumption is zero, at any saving `y ∈ K`. -/
+theorem lfp_not_Zs (i : ι) {y : ℝ} (hy : y ∈ Icc 0 S.B) : ¬ S.Zs S.lfp i y := by
+  rintro ⟨j, -, hj⟩
+  linarith [S.lfp_lt_psi j hy]
+
+/-- **The hypothesis of `lfp_equilibrium_of_super` always holds**: `lfp` itself is a
+supersolution in `F` with positive consumption on `K`. -/
+theorem exists_nondegenerate_super : ∃ hbar : ι → ℝ → ℝ, S.IsInFs hbar ∧
+    (∀ j, ∀ k ∈ Icc 0 S.B, S.Ts hbar j k ≤ hbar j k) ∧
+    ∀ j, ∀ k ∈ Icc 0 S.B, hbar j k < (S.tech j).psi k :=
+  ⟨S.lfp, S.isInFs_lfp, fun j _ hk => (S.Ts_lfp j hk).le, fun j _ hk => S.lfp_lt_psi j hk⟩
+
+/-- **Existence of a non-degenerate stochastic equilibrium, Kuhn–Tucker form** (corrected
+p. 560, any finite set of technologies, no cross-state condition). The least fixed point `lfp`
+has positive consumption today and in every reachable state tomorrow, and at each `(k, ξ_i)`
+either (9) holds as an equation or saving is zero and (9) holds as the inequality
+`RHS(0) ≤ U′(ψ_i(k))`. -/
+theorem exists_nondegenerate_equilibrium_KT (i : ι) {k : ℝ} (hk : k ∈ Icc 0 S.B) :
+    S.lfp i k < (S.tech i).psi k ∧ ¬ S.Zs S.lfp i (S.lfp i k) ∧
+      (S.U' ((S.tech i).psi k - S.lfp i k) = S.Rs S.lfp i (S.lfp i k) ∨
+        (S.lfp i k = 0 ∧ S.Rs S.lfp i 0 ≤ S.U' ((S.tech i).psi k))) := by
+  have hlt := S.lfp_lt_psi i hk
+  have hnz := S.lfp_not_Zs i ⟨(S.isInFs_lfp.nonneg i k hk), hlt.le.trans (S.psi_le_B i hk)⟩
+  refine ⟨hlt, hnz, ?_⟩
+  rcases ex_18_8_spec_KT S.isInFs_lfp i hk with ⟨-, -, h3⟩ | ⟨h1, -⟩ | ⟨h1, -, h3⟩
+  · rw [S.Ts_lfp i hk] at h3
+    exact Or.inl h3
+  · rw [S.Ts_lfp i hk] at h1
+    exact absurd h1 hlt.ne
+  · rw [S.Ts_lfp i hk] at h1
+    exact Or.inr ⟨h1, h3⟩
+
+/-- **Existence of a non-degenerate stochastic equilibrium** (corrected p. 560, any finite set
+of technologies). Under the cross-state condition the least fixed point `lfp` solves (9) as an
+equation at every `(k, ξ_i)`, with positive consumption today and in every reachable state
+tomorrow. This settles the case of different technologies left open by
+`exists_nondegenerate_equilibrium_identical`. -/
+theorem exists_nondegenerate_equilibrium (hCS : S.CrossState) (i : ι) {k : ℝ}
+    (hk : k ∈ Icc 0 S.B) :
+    S.lfp i k < (S.tech i).psi k ∧ ¬ S.Zs S.lfp i (S.lfp i k) ∧
+      S.U' ((S.tech i).psi k - S.lfp i k) = S.Rs S.lfp i (S.lfp i k) :=
+  S.lfp_equilibrium_of_super hCS S.isInFs_lfp (fun j _ hk => (S.Ts_lfp j hk).le)
+    (fun j _ hk => S.lfp_lt_psi j hk) i hk
+
+/-- Persistent shocks satisfy the cross-state condition: if `β(1 − θ) π_ii f′_i(0) > 1` for
+every state `i`, then `CrossState` holds. -/
+theorem crossState_of_persistent
+    (h : ∀ i, 1 < S.β * (1 - S.θ) * S.π i i * (S.tech i).f' 0) : S.CrossState := by
+  intro i
+  have hnn : ∀ j, 0 ≤ S.π i j * ((S.tech j).f' 0 * S.U' ((S.tech j).psi 0)) := fun j =>
+    mul_nonneg (S.π_nonneg i j) (mul_nonneg ((S.tech j).f'_pos le_rfl).le
+      (S.isMarginalUtility.pos _ ((S.tech j).psi_pos le_rfl)).le)
+  have hterm := Finset.single_le_sum (fun j _ => hnn j) (Finset.mem_univ i)
+  have hU := S.isMarginalUtility.pos _ ((S.tech i).psi_pos le_rfl)
+  have h1 := mul_le_mul_of_nonneg_left hterm S.coef_pos.le
+  have h2 := h i
+  have e : S.β * (1 - S.θ) * (S.π i i * ((S.tech i).f' 0 * S.U' ((S.tech i).psi 0))) =
+      (S.β * (1 - S.θ) * S.π i i * (S.tech i).f' 0) * S.U' ((S.tech i).psi 0) := by ring
+  nlinarith
+
+end StochModel
+
+/-! ### Examples -/
+
+/-- In `stochJ`, where Exercise 18.8 fails (`ex_18_8_counterexample`), there is still a
+non-degenerate equilibrium, in Kuhn–Tucker form. -/
+theorem stochJ_nondegenerate (i : Fin 2) {k : ℝ} (hk : k ∈ Icc 0 stochJ.B) :
+    stochJ.lfp i k < (stochJ.tech i).psi k :=
+  stochJ.lfp_lt_psi i hk
+
+/-- A two-shock model with **different technologies** (`modelHigh` in state `0`, `modelE` in
+state `1`) and persistent shocks, `π_ii = 3/4`. -/
+noncomputable def stochP : StochModel (Fin 2) where
+  tech := ![modelHigh, modelE]
+  β := 9 / 10
+  θ := 1 / 2
+  U := fun c => √c
+  U' := fun c => 1 / (2 * √c)
+  B := 20
+  π := fun i j => if i = j then 3 / 4 else 1 / 4
+  tech_β j := by fin_cases j <;> rfl
+  tech_θ j := by fin_cases j <;> rfl
+  tech_U j := by fin_cases j <;> rfl
+  tech_U' j := by fin_cases j <;> rfl
+  kbar_le j := by
+    fin_cases j
+    · exact le_refl (20 : ℝ)
+    · change (2 : ℝ) ≤ 20; norm_num
+  B_eq := ⟨0, rfl⟩
+  π_nonneg _ _ := by split_ifs <;> norm_num
+  π_sum i := by fin_cases i <;> simp [Fin.sum_univ_two] <;> norm_num
+
+/-- The two technologies of `stochP` differ (`k̄ = 20` against `k̄ = 2`), so
+`exists_nondegenerate_equilibrium_identical` does not apply. -/
+theorem stochP_tech_ne : stochP.tech 0 ≠ stochP.tech 1 := by
+  intro h
+  have : (stochP.tech 0).kbar = (stochP.tech 1).kbar := by rw [h]
+  change (20 : ℝ) = 2 at this
+  norm_num at this
+
+/-- `stochP` satisfies the cross-state condition. -/
+theorem stochP_crossState : stochP.CrossState := by
+  refine stochP.crossState_of_persistent fun i => ?_
+  fin_cases i
+  · change 1 < 9 / 10 * (1 - 1 / 2) * (if (0 : Fin 2) = 0 then (3 / 4 : ℝ) else 1 / 4) *
+      (441 / 41 / (1 + 0) ^ 2)
+    norm_num
+  · change 1 < 9 / 10 * (1 - 1 / 2) * (if (1 : Fin 2) = 1 then (3 / 4 : ℝ) else 1 / 4) *
+      (891 / 250 / (1 + 0) ^ 2)
+    norm_num
+
+/-- **A non-degenerate equilibrium with different technologies**: in `stochP` the least fixed
+point solves (9) as an equation everywhere, with positive consumptions. -/
+theorem stochP_equilibrium (i : Fin 2) {k : ℝ} (hk : k ∈ Icc 0 stochP.B) :
+    stochP.lfp i k < (stochP.tech i).psi k ∧ ¬ stochP.Zs stochP.lfp i (stochP.lfp i k) ∧
+      stochP.U' ((stochP.tech i).psi k - stochP.lfp i k) =
+        stochP.Rs stochP.lfp i (stochP.lfp i k) :=
+  stochP.exists_nondegenerate_equilibrium stochP_crossState i hk
 
 end StokeyLucasPrescott.EquilibriaWithDistortions
 
@@ -8765,6 +11194,1598 @@ Authors: Robert Kirkby
 -/
 
 /-!
+# Interiority on all of `K`, and uniqueness of the bounded solution of (1) and (8)
+
+SLP §18.1, pp. 543–546. `IndirectInterior` proves the constructed planner's policy interior on
+`(0, k̄]` when `U′(0+) = ∞` and `f(0) = 0`. Here the two other cases are treated, `f(0) > 0`
+with `U′(0+) = ∞`, and `U′(0)` finite, with interiority on all of `K = [0, k̄]`; and the bounded
+solution of (1) and (8) is shown to be unique.
+
+**Uniqueness of the bounded solution of (1) and (8)** (pp. 543, 546).
+
+* `PlannerHyp.solvesPlanner_unique`: every `v` bounded on `K` solving (1) on `K` (any discount
+  factor `b ∈ [0, 1)`) equals `plannerValue` on `K`; no continuity is assumed.
+  `PlannerHyp.solvesPseudoPlanner_unique` is the case of (8), `b = (1 − θ)β`.
+  `PlannerHyp.solvesPlanner_policy`: every such `v` has the constructed policy as its unique
+  maximiser.
+* `PlannerHyp.plannerOp_fixedPoint_unique`: the fixed point of `plannerOp` in `ℝ →ᵇ ℝ` is unique
+  (Banach). `PlannerHyp.solvesPlanner_not_unique_off_K`: a solution of (1) is determined only on
+  `K`, since (1) at `k ∈ K` uses `v` only on `[0, f(k)] ⊆ K`.
+
+**Positive saving** (`g > 0`).
+
+* `PlannerHyp.plannerPolicy_pos_of_slope`: if `f(0) > 0`, `f` is nondecreasing on `K`,
+  `f(y) ≥ f(0) + m y` for small `y > 0` with `b m > 1` (e.g. `b f′(0) > 1`, or `f′(0+) = ∞`;
+  `eventually_add_mul_le_of_hasDerivAt`), `U` is differentiable on `(0, ∞)`, and consumption at
+  `k = 0` is positive, then `g > 0` on all of `K`.
+* `PlannerHyp.plannerPolicy_eq_zero_of_const`: with a constant technology, `g ≡ 0` on `K`.
+
+**Positive consumption** (`g < f`) with a finite `U′(0)`.
+
+* `PlannerHyp.U_sub_le_of_hasDerivWithinAt`: a finite right derivative `μ = U′(0)` is a
+  Lipschitz constant of `U` on `[0, ∞)`.
+* `PlannerHyp.plannerOp_lipschitz`, `PlannerHyp.plannerValue_lipschitz`: if `f` is `φ`-Lipschitz
+  on `R = [r, k̄]` with `f(R) ⊆ [r, ∞)` and `b φ ≤ 1`, then `v` is `μ φ`-Lipschitz on `R`.
+* `PlannerHyp.plannerPolicy_lt_of_lipschitz`: if moreover `b φ < 1` and `r < f` on `K`, then
+  `g < f` on `K`. This is the condition `U′(0) > b · Lip(v|_R)` with the explicit bound
+  `Lip(v|_R) ≤ U′(0) φ` from the Bellman equation.
+
+**Interiority on all of `K`.**
+
+* `PosOutputInadaHyp`, `PosOutputInadaHyp.policy_interior`: `f(0) > 0`, `U′(0+) = ∞` and the slope
+  condition give `0 < g < f` on `K`, including `k = 0`.
+* `FiniteMarginalHyp`, `FiniteMarginalHyp.policy_interior`: `U′(0) ∈ (0, ∞)`, the slope condition
+  and the Lipschitz condition give `0 < g < f` on `K`.
+
+**Exercise 18.1 and the equilibrium on all of `K`** (pp. 543–546).
+
+* `PlannerHyp.planner_euler_on_K`, `PlannerHyp.planner_tvc_on_K`: for a policy interior on `K`,
+  the Euler equation holds on `K` and the transversality condition `β′ᵗ a f′(k_t) U′(c_t) k_t → 0`
+  holds from every `k ∈ K`, including `k = 0`: consumption is continuous and positive on the
+  compact `K`, hence bounded below, so `U′(c_t)` is bounded even if `U′(0+) = ∞`.
+* `ex_18_1_on_K`, `indirect_equilibrium_on_K`: Exercise 18.1 and the recursive competitive
+  equilibrium of the taxed economy on all of `K`, with uniqueness of the bounded solution of (1),
+  resp. (8), for a policy interior on `K`, `U` differentiable on `(0, ∞)` only, and no continuity
+  of `U′` or `f′`. Applied in `PosOutputInadaHyp.ex_18_1`,
+  `PosOutputInadaHyp.indirect_equilibrium`, `FiniteMarginalHyp.ex_18_1`,
+  `FiniteMarginalHyp.indirect_equilibrium`.
+
+**Correction.** `f(0) > 0` together with `U′(0+) = ∞` does not give interiority: with a constant
+technology the planner never saves (`PlannerHyp.plannerPolicy_eq_zero_of_const`,
+`inada_const_counterexample`). The slope condition `b m > 1` at `0` is added. With a finite
+`U′(0)`, corners of both kinds occur without the added conditions: `g ≡ 0`
+(`finite_const_counterexample`) and `g = f` on `[0, 1/1000]` in an economy satisfying everything
+but the Lipschitz condition (`corner_counterexample`). Economies satisfying `PosOutputInadaHyp`
+and `FiniteMarginalHyp` are in `IndirectInteriorGeneralExample`.
+-/
+
+namespace StokeyLucasPrescott.EquilibriaWithDistortions
+
+open Filter Topology Set BoundedContinuousFunction
+
+/-! ### Uniqueness of the bounded solution of (1) and (8) -/
+
+/-- **The contraction estimate on `K`.** If `v` and `w` are bounded on `K = [0, k̄]` and
+`v ≤ w + D` on `K`, then on `K` the right side of (1) for `v` is at most that for `w` plus
+`b D`. Only values on `[0, f(k)] ⊆ K` enter. -/
+theorem PlannerHyp.sSup_le_sSup_add {U f : ℝ → ℝ} {b kbar M D : ℝ} (P : PlannerHyp U f b kbar)
+    {v w : ℝ → ℝ} (hwb : ∀ y ∈ Icc 0 kbar, |w y| ≤ M) (hD : ∀ y ∈ Icc 0 kbar, v y ≤ w y + D)
+    {k : ℝ} (hk : k ∈ Icc 0 kbar) :
+    sSup ((fun y => U (f k - y) + b * v y) '' Icc 0 (f k)) ≤
+      sSup ((fun y => U (f k - y) + b * w y) '' Icc 0 (f k)) + b * D := by
+  have hf0 := P.f_nonneg k hk
+  have hne : ((fun y => U (f k - y) + b * v y) '' Icc 0 (f k)).Nonempty :=
+    ⟨_, 0, ⟨le_rfl, hf0⟩, rfl⟩
+  have hbdd : BddAbove ((fun y => U (f k - y) + b * w y) '' Icc 0 (f k)) := by
+    refine ⟨U (f k) + b * M, ?_⟩
+    rintro _ ⟨y, hy, rfl⟩
+    have hU : U (f k - y) ≤ U (f k) :=
+      P.U_mono (mem_Ici.2 (by linarith [hy.2])) (mem_Ici.2 hf0) (by linarith [hy.1])
+    have hw := mul_le_mul_of_nonneg_left
+      (abs_le.1 (hwb y ⟨hy.1, hy.2.trans (P.f_le k hk)⟩)).2 P.b_nonneg
+    simp only
+    linarith
+  refine csSup_le hne ?_
+  rintro _ ⟨y, hy, rfl⟩
+  have h1 := le_csSup hbdd ⟨y, hy, rfl⟩
+  have h2 := mul_le_mul_of_nonneg_left (hD y ⟨hy.1, hy.2.trans (P.f_le k hk)⟩) P.b_nonneg
+  simp only at h1 ⊢
+  linarith
+
+/-- **Uniqueness of the bounded solution of (1)** (Theorem 4.6, on `K`). Every function `v`
+bounded on `K = [0, k̄]` that solves the planner's functional equation (1) on `K` (with any
+discount factor `b ∈ [0, 1)`, so also (8) with `b = (1 − θ)β`) equals the constructed
+`plannerValue` on `K`. No continuity of `v` is assumed. The proof is the contraction estimate
+`|v − w| ≤ b sup_K |v − w|`, iterated, on `K` itself: a fixed point of `plannerOp` on `ℝ →ᵇ ℝ`
+is unique there (`PlannerHyp.plannerOp_fixedPoint_unique`), but a solution of (1) is only a
+function on `K` (`PlannerHyp.solvesPlanner_not_unique_off_K`). -/
+theorem PlannerHyp.solvesPlanner_unique {U f : ℝ → ℝ} {b kbar M : ℝ} (P : PlannerHyp U f b kbar)
+    {v : ℝ → ℝ} (hvb : ∀ k ∈ Icc 0 kbar, |v k| ≤ M) (hv : SolvesPlanner U f b kbar v) :
+    ∀ k ∈ Icc 0 kbar, v k = plannerValue P k := by
+  set w : ℝ → ℝ := ⇑(plannerValue P) with hwdef
+  have hw : SolvesPlanner U f b kbar w := P.plannerValue_solves
+  have hwb : ∀ k ∈ Icc 0 kbar, |w k| ≤ ‖plannerValue P‖ := fun k _ => by
+    rw [← Real.norm_eq_abs]; exact (plannerValue P).norm_coe_le_norm k
+  set D₀ := M + ‖plannerValue P‖ with hD₀
+  have hit : ∀ n : ℕ, ∀ k ∈ Icc 0 kbar, |v k - w k| ≤ b ^ n * D₀ := by
+    intro n
+    induction n with
+    | zero =>
+      intro k hk
+      have h1 := abs_sub (v k) (w k)
+      have := hvb k hk
+      have := hwb k hk
+      simp only [pow_zero, one_mul]
+      linarith
+    | succ n ih =>
+      intro k hk
+      have h1 := P.sSup_le_sSup_add (v := v) (w := w) (D := b ^ n * D₀) hwb
+        (fun y hy => by linarith [(abs_le.1 (ih y hy)).2]) hk
+      have h2 := P.sSup_le_sSup_add (v := w) (w := v) (D := b ^ n * D₀) hvb
+        (fun y hy => by linarith [(abs_le.1 (ih y hy)).1]) hk
+      rw [← hv k hk, ← hw k hk] at h1
+      rw [← hv k hk, ← hw k hk] at h2
+      rw [abs_le, pow_succ]
+      constructor <;> nlinarith
+  intro k hk
+  have hlim : Tendsto (fun n : ℕ => b ^ n * D₀) atTop (𝓝 0) := by
+    simpa using (tendsto_pow_atTop_nhds_zero_of_lt_one P.b_nonneg P.b_lt_one).mul_const D₀
+  have h0 : |v k - w k| ≤ 0 := ge_of_tendsto' hlim fun n => hit n k hk
+  have := abs_nonpos_iff.1 h0
+  linarith
+
+/-- **Uniqueness of the bounded solution of (8)**, the pseudo-planner's functional equation
+with discount factor `β̂ = (1 − θ)β` (p. 546): the case `b = (1 − θ)β` of
+`PlannerHyp.solvesPlanner_unique`. -/
+theorem PlannerHyp.solvesPseudoPlanner_unique {U f : ℝ → ℝ} {β θ kbar M : ℝ}
+    (P : PlannerHyp U f ((1 - θ) * β) kbar) {w : ℝ → ℝ} (hwb : ∀ k ∈ Icc 0 kbar, |w k| ≤ M)
+    (hw : SolvesPlanner U f ((1 - θ) * β) kbar w) :
+    ∀ k ∈ Icc 0 kbar, w k = plannerValue P k :=
+  P.solvesPlanner_unique hwb hw
+
+/-- **The bounded continuous solution on `ℝ`** of the operator form of (1): every fixed point of
+`plannerOp` in `ℝ →ᵇ ℝ` is `plannerValue` (Banach's fixed-point theorem). -/
+theorem PlannerHyp.plannerOp_fixedPoint_unique {U f : ℝ → ℝ} {b kbar : ℝ}
+    (P : PlannerHyp U f b kbar) {w : ℝ →ᵇ ℝ} (hw : plannerOp P w = w) : w = plannerValue P :=
+  ContractingWith.fixedPoint_unique (f := plannerOp P) P.plannerOp_contracting hw
+
+/-- **A bounded solution of (1) is unique only on `K`.** Changing `plannerValue` off `K` keeps a
+bounded solution of (1) on `K`, since (1) at `k ∈ K` evaluates `v` only on `[0, f(k)] ⊆ K`. -/
+theorem PlannerHyp.solvesPlanner_not_unique_off_K {U f : ℝ → ℝ} {b kbar : ℝ}
+    (P : PlannerHyp U f b kbar) :
+    ∃ v : ℝ → ℝ, (∀ k, |v k| ≤ ‖plannerValue P‖ + 1) ∧ SolvesPlanner U f b kbar v ∧
+      ∀ k ∉ Icc 0 kbar, v k ≠ plannerValue P k := by
+  classical
+  refine ⟨fun x => if x ∈ Icc 0 kbar then plannerValue P x else plannerValue P x + 1,
+    fun k => ?_, fun k hk => ?_, fun k hk => ?_⟩
+  · have h := (plannerValue P).norm_coe_le_norm k
+    rw [Real.norm_eq_abs] at h
+    dsimp only
+    split_ifs
+    · linarith
+    · have := abs_add_le (plannerValue P k) 1
+      rw [abs_one] at this
+      linarith
+  · simp only [hk, ite_true]
+    rw [P.plannerValue_solves k hk]
+    refine congrArg sSup (image_congr fun y hy => ?_)
+    have hyK : y ∈ Icc 0 kbar := ⟨hy.1, hy.2.trans (P.f_le k hk)⟩
+    simp only [hyK, ite_true]
+  · simp only [hk, ite_false]
+    linarith
+
+/-- **Every bounded solution of (1) has the constructed policy.** If `v` is bounded on `K` and
+solves (1) there, then at `k ∈ K` a choice `y ∈ [0, f(k)]` attains `v(k)` iff `y = g(k)`. -/
+theorem PlannerHyp.solvesPlanner_policy {U f : ℝ → ℝ} {b kbar M : ℝ} (P : PlannerHyp U f b kbar)
+    {v : ℝ → ℝ} (hvb : ∀ k ∈ Icc 0 kbar, |v k| ≤ M) (hv : SolvesPlanner U f b kbar v)
+    {k : ℝ} (hk : k ∈ Icc 0 kbar) {y : ℝ} (hy : y ∈ Icc 0 (f k)) :
+    U (f k - y) + b * v y = v k ↔ y = plannerPolicy P k := by
+  have hyK : y ∈ Icc 0 kbar := ⟨hy.1, hy.2.trans (P.f_le k hk)⟩
+  rw [P.solvesPlanner_unique hvb hv y hyK, P.solvesPlanner_unique hvb hv k hk]
+  exact P.plannerPolicy_unique hk hy
+
+/-! ### Auxiliary facts, and positive saving when `f(0) > 0` -/
+
+/-- **A finite `U′(0)` is a Lipschitz constant.** Under `PlannerHyp`, if `U` has right
+derivative `μ` at `0`, then `U(c) − U(c′) ≤ μ (c − c′)` for `0 ≤ c′ ≤ c` (concavity: secant
+slopes decrease, and those from `0` tend to `μ`). -/
+theorem PlannerHyp.U_sub_le_of_hasDerivWithinAt {U f : ℝ → ℝ} {b kbar μ : ℝ}
+    (P : PlannerHyp U f b kbar) (hμ : HasDerivWithinAt U μ (Ici 0) 0) {c c' : ℝ} (hc' : 0 ≤ c')
+    (hcc : c' ≤ c) : U c - U c' ≤ μ * (c - c') := by
+  have hcv := P.U_strictConcave.concaveOn
+  rcases eq_or_lt_of_le hcc with rfl | hlt
+  · simp
+  have h0 : ∀ s, 0 < s → U s - U 0 ≤ μ * s := by
+    intro s hs
+    have := hcv.slope_le_of_hasDerivWithinAt (mem_Ici.2 le_rfl) (mem_Ici.2 hs.le) hs hμ
+    rw [slope_def_field, sub_zero, div_le_iff₀ hs] at this
+    linarith
+  rcases eq_or_lt_of_le hc' with rfl | hpos
+  · simpa using h0 c hlt
+  · have h1 := hcv.slope_anti_adjacent (mem_Ici.2 le_rfl) (mem_Ici.2 (hpos.trans hlt).le) hpos
+      hlt
+    have h2 : (U c' - U 0) / (c' - 0) ≤ μ := by
+      rw [sub_zero, div_le_iff₀ hpos]; linarith [h0 c' hpos]
+    have h3 := h1.trans h2
+    rw [div_le_iff₀ (sub_pos.2 hlt)] at h3
+    linarith
+
+/-- Under `PlannerHyp`, `U′(c) > 0` wherever `U` is differentiable at `c ≥ 0` (strict concavity
+and monotonicity). -/
+theorem PlannerHyp.deriv_U_pos_of_differentiableAt {U f : ℝ → ℝ} {b kbar : ℝ}
+    (P : PlannerHyp U f b kbar) {c : ℝ} (hc : 0 ≤ c) (hUd : DifferentiableAt ℝ U c) :
+    0 < deriv U c := by
+  have h := P.U_strictConcave.slope_lt_deriv (mem_Ici.2 hc) (mem_Ici.2 (by linarith : 0 ≤ c + 1))
+    (by linarith) hUd
+  rw [slope_def_field] at h
+  have hm := P.U_mono (mem_Ici.2 hc) (mem_Ici.2 (by linarith)) (by linarith : c ≤ c + 1)
+  have e : c + 1 - c = 1 := by ring
+  rw [e, div_one] at h
+  linarith
+
+/-- Under `PlannerHyp`, `U′` is nonincreasing on `(0, ∞)` where `U` is differentiable. -/
+theorem PlannerHyp.deriv_U_anti {U f : ℝ → ℝ} {b kbar : ℝ} (P : PlannerHyp U f b kbar)
+    (hUd : ∀ c, 0 < c → DifferentiableAt ℝ U c) {c d : ℝ} (hc : 0 < c) (hcd : c ≤ d) :
+    deriv U d ≤ deriv U c :=
+  (P.U_strictConcave.concaveOn.subset Ioi_subset_Ici_self (convex_Ioi 0)).antitoneOn_deriv
+    (fun x hx => hUd x hx) (mem_Ioi.2 hc) (mem_Ioi.2 (hc.trans_le hcd)) hcd
+
+/-- **A lower slope at `0` from a derivative**: if `f′(0) = d > m`, then `f(0) + m y ≤ f(y)` for
+all small `y > 0`. -/
+theorem eventually_add_mul_le_of_hasDerivAt {f : ℝ → ℝ} {d m : ℝ} (hf : HasDerivAt f d 0)
+    (hm : m < d) : ∀ᶠ y in 𝓝[>] 0, f 0 + m * y ≤ f y := by
+  have hev := hf.tendsto_slope_zero_right.eventually (lt_mem_nhds hm)
+  filter_upwards [hev, self_mem_nhdsWithin] with y hy hy0
+  simp only [smul_eq_mul, zero_add] at hy
+  rw [mem_Ioi] at hy0
+  have h2 := mul_lt_mul_of_pos_right hy hy0
+  rw [inv_mul_eq_div, div_mul_cancel₀ _ hy0.ne'] at h2
+  linarith
+
+/-- `y ↦ m y` maps `𝓝[>] 0` into itself for `m > 0`. -/
+theorem tendsto_const_mul_nhdsGT_zero {m : ℝ} (hm : 0 < m) :
+    Tendsto (fun y : ℝ => m * y) (𝓝[>] 0) (𝓝[>] 0) := by
+  refine tendsto_nhdsWithin_iff.2 ⟨?_, ?_⟩
+  · have h : Tendsto (fun y : ℝ => m * y) (𝓝 0) (𝓝 (m * 0)) :=
+      (continuous_const.mul continuous_id).tendsto 0
+    rw [mul_zero] at h
+    exact h.mono_left nhdsWithin_le_nhds
+  · filter_upwards [self_mem_nhdsWithin] with y hy using mul_pos hm hy
+
+/-- `y ↦ −y` maps `𝓝[>] 0` into `𝓝[<] 0`. -/
+theorem tendsto_neg_nhdsGT_zero' : Tendsto (fun y : ℝ => -y) (𝓝[>] 0) (𝓝[<] 0) := by
+  refine tendsto_nhdsWithin_iff.2 ⟨?_, ?_⟩
+  · have h : Tendsto (fun y : ℝ => -y) (𝓝 0) (𝓝 (-0)) := continuous_neg.tendsto 0
+    rw [neg_zero] at h
+    exact h.mono_left nhdsWithin_le_nhds
+  · filter_upwards [self_mem_nhdsWithin] with y hy using neg_lt_zero.2 (mem_Ioi.1 hy)
+
+/-- **Positive saving when `f(0) > 0`.** Under `PlannerHyp` with `b > 0`, let `U` be
+differentiable on `(0, ∞)`, `f` nondecreasing on `K`, and let `f` rise at `0` faster than `1/b`:
+`f(y) ≥ f(0) + m y` for small `y > 0`, with `b m > 1` (e.g. `b f′(0) > 1`, or `f′(0+) = ∞`).
+If consumption at `k = 0` is positive, `g(0) < f(0)`, then `g(k) > 0` on all of `K`.
+(Saving `y` at `k` instead of `0` costs `U(f(k)) − U(f(k) − y) ≈ U′(f(k)) y`; it gains at least
+`b [U(c₀ + m y) − U(c₀)] ≈ b m U′(c₀) y`, with `c₀ = f(0) − g(0) ≤ f(k)` the consumption at `0`,
+by repeating at `y` the choice made at `0`. Since `U′(f(k)) ≤ U′(c₀) < b m U′(c₀)`, saving
+nothing is not optimal.) -/
+theorem PlannerHyp.plannerPolicy_pos_of_slope {U f : ℝ → ℝ} {b kbar m : ℝ}
+    (P : PlannerHyp U f b kbar) (hb : 0 < b) (hm : 1 < b * m)
+    (hfm : ∀ᶠ y in 𝓝[>] 0, f 0 + m * y ≤ f y) (hfmono : MonotoneOn f (Icc 0 kbar))
+    (hc0 : plannerPolicy P 0 < f 0) (hUd : ∀ c, 0 < c → DifferentiableAt ℝ U c)
+    {k : ℝ} (hk : k ∈ Icc 0 kbar) : 0 < plannerPolicy P k := by
+  set g := plannerPolicy P with hgdef
+  set v : ℝ → ℝ := ⇑(plannerValue P) with hvdef
+  have h0K : (0 : ℝ) ∈ Icc 0 kbar := ⟨le_rfl, P.kbar_nonneg⟩
+  set z := g 0 with hz
+  set c₀ := f 0 - z with hc₀
+  have hc₀0 : 0 < c₀ := sub_pos.2 hc0
+  obtain ⟨hz0, -, hv0⟩ := P.plannerPolicy_spec h0K
+  have hf0k : f 0 ≤ f k := hfmono h0K hk hk.1
+  have hfk : 0 < f k := by linarith [hz0.1]
+  have hm0 : 0 < m := by
+    by_contra h
+    push Not at h
+    nlinarith [P.b_lt_one]
+  -- the gain: repeat at `y` the choice made at `0`
+  have hgain : ∀ y ∈ Icc 0 kbar, U (f y - z) - U c₀ ≤ v y - v 0 := by
+    intro y hy
+    obtain ⟨-, hmy, -⟩ := P.plannerPolicy_spec hy
+    obtain ⟨-, -, hvy⟩ := P.plannerPolicy_spec hy
+    have hzy : z ∈ Icc 0 (f y) := ⟨hz0.1, hz0.2.trans (hfmono h0K hy hy.1)⟩
+    have h1 := isMaxOn_iff.1 hmy z hzy
+    change U (f y - z) + b * v z ≤ U (f y - g y) + b * v (g y) at h1
+    change v y = U (f y - g y) + b * v (g y) at hvy
+    change v 0 = U (f 0 - z) + b * v z at hv0
+    rw [hc₀]
+    linarith
+  by_contra hle
+  push Not at hle
+  have hgk : g k = 0 := le_antisymm hle (P.plannerPolicy_spec hk).1.1
+  obtain ⟨-, hmax, -⟩ := P.plannerPolicy_spec hk
+  -- the eventual inequality between difference quotients
+  have hev : ∀ᶠ y in 𝓝[>] 0, b * m * ((m * y)⁻¹ * (U (c₀ + m * y) - U c₀)) ≤
+      (-y)⁻¹ * (U (f k + -y) - U (f k)) := by
+    filter_upwards [hfm, Ioo_mem_nhdsGT hfk] with y hfy hy
+    have hyK : y ∈ Icc 0 kbar := ⟨hy.1.le, hy.2.le.trans (P.f_le k hk)⟩
+    have hopt := isMaxOn_iff.1 hmax y ⟨hy.1.le, hy.2.le⟩
+    change U (f k - y) + b * v y ≤ U (f k - g k) + b * v (g k) at hopt
+    rw [hgk, sub_zero] at hopt
+    have h1 := hgain y hyK
+    have h2 : U (c₀ + m * y) ≤ U (f y - z) :=
+      P.U_mono (mem_Ici.2 (by have := mul_pos hm0 hy.1; linarith))
+        (mem_Ici.2 (by have := mul_pos hm0 hy.1; linarith)) (by rw [hc₀]; linarith)
+    have h3 : b * (U (c₀ + m * y) - U c₀) ≤ U (f k) - U (f k - y) := by
+      have := mul_le_mul_of_nonneg_left (show U (c₀ + m * y) - U c₀ ≤ v y - v 0 by linarith)
+        hb.le
+      linarith
+    have e1 : b * m * ((m * y)⁻¹ * (U (c₀ + m * y) - U c₀)) =
+        (b * (U (c₀ + m * y) - U c₀)) / y := by
+      field_simp
+    have e2 : (-y)⁻¹ * (U (f k + -y) - U (f k)) = (U (f k) - U (f k - y)) / y := by
+      rw [inv_neg, ← sub_eq_add_neg, div_eq_inv_mul]
+      ring
+    rw [e1, e2]
+    exact div_le_div_of_nonneg_right h3 hy.1.le
+  have hL : Tendsto (fun y => b * m * ((m * y)⁻¹ * (U (c₀ + m * y) - U c₀))) (𝓝[>] 0)
+      (𝓝 (b * m * deriv U c₀)) := by
+    refine Tendsto.congr (fun y => ?_) (((hUd c₀ hc₀0).hasDerivAt.tendsto_slope_zero_right.comp
+      (tendsto_const_mul_nhdsGT_zero hm0)).const_mul (b * m))
+    simp only [Function.comp, smul_eq_mul]
+  have hR : Tendsto (fun y => (-y)⁻¹ * (U (f k + -y) - U (f k))) (𝓝[>] 0)
+      (𝓝 (deriv U (f k))) := by
+    refine Tendsto.congr (fun y => ?_) ((hUd (f k) hfk).hasDerivAt.tendsto_slope_zero_left.comp
+      tendsto_neg_nhdsGT_zero')
+    simp only [Function.comp, smul_eq_mul]
+  have hlim := le_of_tendsto_of_tendsto hL hR hev
+  have hanti := P.deriv_U_anti hUd hc₀0 (show c₀ ≤ f k by rw [hc₀]; linarith [hz0.1])
+  have hd := P.deriv_U_pos_of_differentiableAt hc₀0.le (hUd c₀ hc₀0)
+  have := mul_lt_mul_of_pos_right hm hd
+  linarith
+
+/-! ### Positive consumption when marginal utility at zero is finite -/
+
+/-- The right side of (1) at `k ∈ K` is at least the value of any feasible choice. -/
+theorem PlannerHyp.le_plannerOp {U f : ℝ → ℝ} {b kbar : ℝ} (P : PlannerHyp U f b kbar)
+    (w : ℝ →ᵇ ℝ) {k : ℝ} (hk : k ∈ Icc 0 kbar) {y : ℝ} (hy : y ∈ Icc 0 (f k)) :
+    U (f k - y) + b * w y ≤ plannerOp P w k := by
+  rw [P.plannerOp_apply w hk]
+  refine le_csSup ?_ ⟨y, hy, rfl⟩
+  rw [← P.image_plannerG w hk]
+  exact P.bddAbove_plannerG w k
+
+/-- **`T` preserves a Lipschitz bound on `R = [r, k̄]`.** Let `U(c) − U(c′) ≤ μ (c − c′)` for
+`0 ≤ c′ ≤ c`, let `f` be `φ`-Lipschitz on `R` with `f(R) ⊆ [r, ∞)`, and `b φ ≤ 1`. If
+`w(k) − w(k′) ≤ μ φ |k − k′|` on `R`, the same holds for `Tw`. (At `k` take the maximiser `y`; at
+`k′` take `y` if feasible, else save all of `f(k′)`; in the second case the loss is split
+between consumption, at rate `μ`, and saving, at rate `b μ φ ≤ μ`.) -/
+theorem PlannerHyp.plannerOp_lipschitz {U f : ℝ → ℝ} {b kbar μ φ r : ℝ}
+    (P : PlannerHyp U f b kbar) (hμ0 : 0 ≤ μ)
+    (hUL : ∀ c c', 0 ≤ c' → c' ≤ c → U c - U c' ≤ μ * (c - c'))
+    (hφ0 : 0 ≤ φ) (hbφ : b * φ ≤ 1) (hr0 : 0 ≤ r) (hfr : ∀ k ∈ Icc r kbar, r ≤ f k)
+    (hfL : ∀ k ∈ Icc r kbar, ∀ k' ∈ Icc r kbar, |f k - f k'| ≤ φ * |k - k'|)
+    {w : ℝ →ᵇ ℝ} (hw : ∀ k ∈ Icc r kbar, ∀ k' ∈ Icc r kbar, w k - w k' ≤ μ * φ * |k - k'|) :
+    ∀ k ∈ Icc r kbar, ∀ k' ∈ Icc r kbar,
+      plannerOp P w k - plannerOp P w k' ≤ μ * φ * |k - k'| := by
+  intro k hk k' hk'
+  have hkK : k ∈ Icc 0 kbar := ⟨hr0.trans hk.1, hk.2⟩
+  have hkK' : k' ∈ Icc 0 kbar := ⟨hr0.trans hk'.1, hk'.2⟩
+  obtain ⟨y, hy, -, hTy⟩ := P.exists_max w hkK
+  have hfLk := hfL k hk k' hk'
+  have hμf : μ * |f k - f k'| ≤ μ * φ * |k - k'| := by
+    have := mul_le_mul_of_nonneg_left hfLk hμ0
+    linarith
+  rw [hTy]
+  rcases le_or_gt y (f k') with hyk | hyk
+  · have h1 := P.le_plannerOp w hkK' ⟨hy.1, hyk⟩
+    rcases le_or_gt (f k') (f k) with hff | hff
+    · have h2 := hUL (f k - y) (f k' - y) (by linarith) (by linarith)
+      have h3 : μ * (f k - y - (f k' - y)) ≤ μ * |f k - f k'| := by
+        rw [abs_of_nonneg (by linarith)]
+        exact le_of_eq (by ring)
+      linarith
+    · have h2 : U (f k - y) ≤ U (f k' - y) :=
+        P.U_mono (mem_Ici.2 (by linarith [hy.2])) (mem_Ici.2 (by linarith)) (by linarith)
+      have := mul_nonneg (mul_nonneg hμ0 hφ0) (abs_nonneg (k - k'))
+      linarith
+  · have h1 := P.le_plannerOp w hkK' ⟨P.f_nonneg k' hkK', le_rfl⟩
+    rw [sub_self] at h1
+    have hfk'R : f k' ∈ Icc r kbar := ⟨hfr k' hk', P.f_le k' hkK'⟩
+    have hyR : y ∈ Icc r kbar := ⟨(hfr k' hk').trans hyk.le, hy.2.trans (P.f_le k hkK)⟩
+    have h2 := hw y hyR (f k') hfk'R
+    rw [abs_of_pos (sub_pos.2 hyk)] at h2
+    have h3 := hUL (f k - y) 0 le_rfl (by linarith [hy.2])
+    have h4 : b * (μ * φ * (y - f k')) ≤ μ * (y - f k') := by
+      have := mul_le_mul_of_nonneg_left hbφ (mul_nonneg hμ0 (sub_pos.2 hyk).le)
+      nlinarith
+    have h5 := mul_le_mul_of_nonneg_left h2 P.b_nonneg
+    have h6 : μ * (f k - f k') ≤ μ * |f k - f k'| :=
+      mul_le_mul_of_nonneg_left (le_abs_self _) hμ0
+    nlinarith
+
+/-- **The value function is Lipschitz on `R = [r, k̄]`** with constant `μ φ`, under the
+hypotheses of `PlannerHyp.plannerOp_lipschitz` (`T` preserves the bound, and `v = lim Tⁿ0`). -/
+theorem PlannerHyp.plannerValue_lipschitz {U f : ℝ → ℝ} {b kbar μ φ r : ℝ}
+    (P : PlannerHyp U f b kbar) (hμ0 : 0 ≤ μ)
+    (hUL : ∀ c c', 0 ≤ c' → c' ≤ c → U c - U c' ≤ μ * (c - c'))
+    (hφ0 : 0 ≤ φ) (hbφ : b * φ ≤ 1) (hr0 : 0 ≤ r) (hfr : ∀ k ∈ Icc r kbar, r ≤ f k)
+    (hfL : ∀ k ∈ Icc r kbar, ∀ k' ∈ Icc r kbar, |f k - f k'| ≤ φ * |k - k'|) :
+    ∀ k ∈ Icc r kbar, ∀ k' ∈ Icc r kbar,
+      plannerValue P k - plannerValue P k' ≤ μ * φ * |k - k'| := by
+  have hit : ∀ n : ℕ, ∀ k ∈ Icc r kbar, ∀ k' ∈ Icc r kbar,
+      ((plannerOp P)^[n] 0 : ℝ →ᵇ ℝ) k - ((plannerOp P)^[n] 0 : ℝ →ᵇ ℝ) k' ≤
+        μ * φ * |k - k'| := by
+    intro n
+    induction n with
+    | zero =>
+      intro k _ k' _
+      simp only [Function.iterate_zero, id, BoundedContinuousFunction.coe_zero, Pi.zero_apply,
+        sub_self]
+      exact mul_nonneg (mul_nonneg hμ0 hφ0) (abs_nonneg _)
+    | succ n ih =>
+      rw [Function.iterate_succ_apply']
+      exact P.plannerOp_lipschitz hμ0 hUL hφ0 hbφ hr0 hfr hfL ih
+  have hlim := P.plannerOp_contracting.tendsto_iterate_fixedPoint 0
+  have hpt : ∀ x, Tendsto (fun n => ((plannerOp P)^[n] 0 : ℝ →ᵇ ℝ) x) atTop
+      (𝓝 (plannerValue P x)) := fun x =>
+    ((continuous_eval_const x).tendsto _).comp hlim
+  intro k hk k' hk'
+  exact le_of_tendsto' ((hpt k).sub (hpt k')) fun n => hit n k hk k' hk'
+
+/-- **Positive consumption with a finite `U′(0)`.** Under `PlannerHyp`, let `U` have right
+derivative `μ > 0` at `0` (finite marginal utility at zero consumption), and let `f` be
+`φ`-Lipschitz on `R = [r, k̄]` with `b φ < 1`, where `0 ≤ r < f(k)` for every `k ∈ K`. Then
+`g(k) < f(k)` on `K`. (Saving all of `f(k)` puts next period's capital in `R`, where the value
+function is `μ φ`-Lipschitz; consuming `ε` instead gains `≈ μ ε` today and loses at most
+`b μ φ ε` tomorrow.) The condition is `U′(0) > b · Lip(v|_R)` with the explicit bound
+`Lip(v|_R) ≤ U′(0) φ`; it is needed (`corner_counterexample`). -/
+theorem PlannerHyp.plannerPolicy_lt_of_lipschitz {U f : ℝ → ℝ} {b kbar μ φ r : ℝ}
+    (P : PlannerHyp U f b kbar) (hμ : HasDerivWithinAt U μ (Ici 0) 0) (hμ0 : 0 < μ)
+    (hφ0 : 0 ≤ φ) (hbφ : b * φ < 1) (hr0 : 0 ≤ r) (hfr : ∀ k ∈ Icc 0 kbar, r < f k)
+    (hfL : ∀ k ∈ Icc r kbar, ∀ k' ∈ Icc r kbar, |f k - f k'| ≤ φ * |k - k'|)
+    {k : ℝ} (hk : k ∈ Icc 0 kbar) : plannerPolicy P k < f k := by
+  set v : ℝ → ℝ := ⇑(plannerValue P) with hvdef
+  have hUL : ∀ c c', 0 ≤ c' → c' ≤ c → U c - U c' ≤ μ * (c - c') := fun c c' hc' hcc =>
+    P.U_sub_le_of_hasDerivWithinAt hμ hc' hcc
+  have hfr' : ∀ k ∈ Icc r kbar, r ≤ f k := fun k hk => (hfr k ⟨hr0.trans hk.1, hk.2⟩).le
+  have hLip := P.plannerValue_lipschitz hμ0.le hUL hφ0 hbφ.le hr0 hfr' hfL
+  obtain ⟨hg, hmax, -⟩ := P.plannerPolicy_spec hk
+  by_contra hge
+  push Not at hge
+  have heq : plannerPolicy P k = f k := le_antisymm hg.2 hge
+  set Y := f k with hY
+  have hYr : r < Y := hfr k hk
+  have hYR : Y ∈ Icc r kbar := ⟨hYr.le, P.f_le k hk⟩
+  have hev : ∀ᶠ ε in 𝓝[>] (0 : ℝ), slope U 0 ε ≤ b * μ * φ := by
+    filter_upwards [Ioo_mem_nhdsGT (sub_pos.2 hYr)] with ε hε
+    have hopt := isMaxOn_iff.1 hmax (Y - ε) ⟨by linarith [hε.2], by linarith [hε.1]⟩
+    rw [heq] at hopt
+    change U (Y - (Y - ε)) + b * v (Y - ε) ≤ U (Y - Y) + b * v Y at hopt
+    rw [sub_sub_cancel, sub_self] at hopt
+    have hL := hLip Y hYR (Y - ε) ⟨by linarith [hε.2], by linarith [hε.1, hYR.2]⟩
+    rw [sub_sub_cancel, abs_of_pos hε.1] at hL
+    have hL' := mul_le_mul_of_nonneg_left hL P.b_nonneg
+    rw [slope_def_field, sub_zero, div_le_iff₀ hε.1]
+    change U ε - U 0 ≤ b * μ * φ * ε
+    nlinarith
+  have hlim : Tendsto (slope U 0) (𝓝[>] 0) (𝓝 μ) := by
+    exact (hasDerivWithinAt_iff_tendsto_slope' (lt_irrefl (0 : ℝ))).1
+      (hμ.mono Ioi_subset_Ici_self)
+  have hle := le_of_tendsto hlim hev
+  have : b * μ * φ < μ := by nlinarith
+  linarith
+
+/-! ### Exercise 18.1 and the equilibrium on all of `K` -/
+
+/-- **The planner's Euler equation on all of `K`** for a policy interior on `K`, with `U`
+differentiable on `(0, ∞)` and `f` on `K`:
+`U′[f(k) − g(k)] = b f′(g(k)) U′[f(g(k)) − g(g(k))]` for every `k ∈ [0, k̄]`. -/
+theorem PlannerHyp.planner_euler_on_K {U f : ℝ → ℝ} {b kbar : ℝ} (P : PlannerHyp U f b kbar)
+    (hint : ∀ k ∈ Icc 0 kbar, 0 < plannerPolicy P k ∧ plannerPolicy P k < f k)
+    (hUd : ∀ c, 0 < c → DifferentiableAt ℝ U c) (hfd : ∀ k ∈ Icc 0 kbar, DifferentiableAt ℝ f k)
+    {k : ℝ} (hk : k ∈ Icc 0 kbar) :
+    deriv U (f k - plannerPolicy P k) = b * deriv f (plannerPolicy P k) *
+      deriv U (f (plannerPolicy P k) - plannerPolicy P (plannerPolicy P k)) := by
+  have hgk := (P.plannerPolicy_mem hk).1
+  exact P.planner_euler hk (hint k hk).1 (hint k hk).2 (hint _ hgk).2
+    (hUd _ (sub_pos.2 (hint k hk).2)) (hUd _ (sub_pos.2 (hint _ hgk).2)) (hfd _ hgk)
+
+/-- **Transversality on all of `K`, including `k = 0`.** If the policy is interior on `K`, `U` is
+differentiable on `(0, ∞)`, and `f` is concave on `[0, ∞)` and differentiable on `K` with
+`f′ ≥ 0` there, then for every `β′ ∈ [0, 1)`, constant `a` and `k ∈ K`,
+`β′ᵗ (a f′(k_t)) U′(c_t) k_t → 0` along `k_t = gᵗ(k)`. Consumption `f − g` is continuous and
+positive on the compact `K`, so it is bounded below by some `c_min > 0`; hence
+`0 ≤ U′(c_t) ≤ U′(c_min)`, `0 ≤ f′(k_t) ≤ f′(0)` and `k_t ≤ k̄`. No bound on `U′` near `0` is
+needed. -/
+theorem PlannerHyp.planner_tvc_on_K {U f : ℝ → ℝ} {b kbar : ℝ} (P : PlannerHyp U f b kbar)
+    (hint : ∀ k ∈ Icc 0 kbar, 0 < plannerPolicy P k ∧ plannerPolicy P k < f k)
+    (hUd : ∀ c, 0 < c → DifferentiableAt ℝ U c) (hf : ConcaveOn ℝ (Ici 0) f)
+    (hfd : ∀ k ∈ Icc 0 kbar, DifferentiableAt ℝ f k) (hf' : ∀ k ∈ Icc 0 kbar, 0 ≤ deriv f k)
+    (β' a : ℝ) (hβ0 : 0 ≤ β') (hβ1 : β' < 1) {k : ℝ} (hk : k ∈ Icc 0 kbar) :
+    Tendsto (fun t => β' ^ t * (a * deriv f ((plannerPolicy P)^[t] k)) *
+      deriv U (f ((plannerPolicy P)^[t] k) - plannerPolicy P ((plannerPolicy P)^[t] k)) *
+        (plannerPolicy P)^[t] k) atTop (𝓝 0) := by
+  set g := plannerPolicy P with hg
+  have h0K : (0 : ℝ) ∈ Icc 0 kbar := ⟨le_rfl, P.kbar_nonneg⟩
+  have hgK : ∀ k ∈ Icc 0 kbar, g k ∈ Icc 0 kbar := fun k hk => (P.plannerPolicy_mem hk).1
+  have hcont : ContinuousOn (fun k => f k - g k) (Icc 0 kbar) :=
+    P.f_cont.sub P.plannerPolicy_continuousOn
+  obtain ⟨k₀, hk₀, hmin⟩ := isCompact_Icc.exists_isMinOn ⟨0, h0K⟩ hcont
+  set cmin := f k₀ - g k₀ with hcmindef
+  have hcmin : 0 < cmin := sub_pos.2 (hint k₀ hk₀).2
+  have hfanti : ∀ k ∈ Icc 0 kbar, deriv f k ≤ deriv f 0 := fun k hk =>
+    (hf.subset Icc_subset_Ici_self (convex_Icc 0 kbar)).antitoneOn_deriv hfd h0K hk hk.1
+  have hkt := iterate_mem hgK hk
+  refine (tvc_of_bounded (M := |a| * (deriv f 0 * deriv U cmin * kbar)) hβ0 hβ1
+    (z := fun t => a * (deriv f (g^[t] k) * deriv U (f (g^[t] k) - g (g^[t] k)) * g^[t] k))
+    fun t => ?_).congr fun t => by ring
+  have hk' := hkt t
+  have hct : cmin ≤ f (g^[t] k) - g (g^[t] k) := isMinOn_iff.1 hmin _ hk'
+  have hU1 := P.deriv_U_anti hUd hcmin hct
+  have hU0 : 0 ≤ deriv U (f (g^[t] k) - g (g^[t] k)) := P.deriv_U_nonneg (hcmin.trans_le hct)
+  have hf1 := hfanti _ hk'
+  have hf0 := hf' _ hk'
+  have hUc0 : 0 ≤ deriv U cmin := hU0.trans hU1
+  rw [abs_mul]
+  refine mul_le_mul_of_nonneg_left ?_ (abs_nonneg a)
+  rw [abs_of_nonneg (mul_nonneg (mul_nonneg hf0 hU0) hk'.1)]
+  have h1 := mul_le_mul hf1 hU1 hU0 (hf' 0 h0K)
+  exact mul_le_mul h1 hk'.2 hk'.1 (mul_nonneg (hf' 0 h0K) hUc0)
+
+/-- **Exercise 18.1 on all of `K = [0, k̄]`** for a constructed policy interior on `K` (pp.
+543–544). Let `P : PlannerHyp U f β k̄` with `β > 0`, let `g` be interior on `K`, `U`
+differentiable on `(0, ∞)` and bounded by `B₀` on `[0, ∞)`, and `f` concave on `[0, ∞)` and
+differentiable on `K` with `f′ ≥ 0` there. Then:
+(i) `v` solves (1) on `K` and is its only solution bounded on `K`; `g` is continuous on `K` and
+the unique maximiser in (1);
+(ii) the Euler equation holds on `K`, and the transversality condition
+`βᵗ U′(c_t) f′(k_t) k_t → 0` holds from every `k ∈ K`, including `k = 0`;
+(iii) (2) has a bounded solution `V` on `[0, ∞) × K`, unique among bounded solutions, with
+`V(k, k; g) = v(k)`, the maximal value of the planner's problem, and `G(k, k; g) = g(k)`;
+(iv) on `(0, k̄)`, `V₁(k, k; g) = v′(k) = f′(k) U′[f(k) − g(k)]`.
+Compared with `ex_18_1_interior`, the aggregate state space is all of `K`; compared with
+`ex_18_1_constructed`, `U` need not be differentiable at `0` and `U′`, `f′` need not be
+continuous. Interiority on `K` is proved under `PosOutputInadaHyp` and `FiniteMarginalHyp`. -/
+theorem ex_18_1_on_K {U f : ℝ → ℝ} {β B₀ kbar : ℝ} (P : PlannerHyp U f β kbar) (hβ0 : 0 < β)
+    (hint : ∀ k ∈ Icc 0 kbar, 0 < plannerPolicy P k ∧ plannerPolicy P k < f k)
+    (hUd : ∀ c, 0 < c → DifferentiableAt ℝ U c) (hUb : ∀ c, 0 ≤ c → |U c| ≤ B₀)
+    (hf : ConcaveOn ℝ (Ici 0) f) (hfd : ∀ k ∈ Icc 0 kbar, DifferentiableAt ℝ f k)
+    (hf' : ∀ k ∈ Icc 0 kbar, 0 ≤ deriv f k) :
+    SolvesPlanner U f β kbar (plannerValue P) ∧
+      (∀ v : ℝ → ℝ, ∀ M', (∀ k ∈ Icc 0 kbar, |v k| ≤ M') → SolvesPlanner U f β kbar v →
+        ∀ k ∈ Icc 0 kbar, v k = plannerValue P k) ∧
+      ContinuousOn (plannerPolicy P) (Icc 0 kbar) ∧
+      (∀ k ∈ Icc 0 kbar, plannerPolicy P k ∈ Icc 0 (f k) ∧ ∀ y ∈ Icc 0 (f k),
+        U (f k - y) + β * plannerValue P y = plannerValue P k ↔ y = plannerPolicy P k) ∧
+      (∀ k ∈ Icc 0 kbar, deriv U (f k - plannerPolicy P k) =
+        β * deriv U (f (plannerPolicy P k) - plannerPolicy P (plannerPolicy P k)) *
+          deriv f (plannerPolicy P k)) ∧
+      (∀ k ∈ Icc 0 kbar, Tendsto (fun t => β ^ t *
+        deriv U (f ((plannerPolicy P)^[t] k) - plannerPolicy P ((plannerPolicy P)^[t] k)) *
+          deriv f ((plannerPolicy P)^[t] k) * (plannerPolicy P)^[t] k) atTop (𝓝 0)) ∧
+      ∃ V : ℝ → ℝ → ℝ, ∃ M, (∀ x, 0 ≤ x → ∀ k ∈ Icc 0 kbar, |V x k| ≤ M) ∧
+        SolvesBellman U (fun k => f k - k * deriv f k) (deriv f) (plannerPolicy P) V β
+          (Icc 0 kbar) ∧
+        (∀ V' : ℝ → ℝ → ℝ, ∀ M', (∀ x, 0 ≤ x → ∀ k ∈ Icc 0 kbar, |V' x k| ≤ M') →
+          SolvesBellman U (fun k => f k - k * deriv f k) (deriv f) (plannerPolicy P) V' β
+            (Icc 0 kbar) → ∀ x, 0 ≤ x → ∀ k ∈ Icc 0 kbar, V' x k = V x k) ∧
+        (∀ k ∈ Icc 0 kbar, V k k = plannerValue P k ∧
+          IsGreatest (plannerValues U f β k) (V k k) ∧
+          ∀ y ∈ feasY (fun k => f k - k * deriv f k) (deriv f) k k,
+            (U (f k + (k - k) * deriv f k - y) + β * V y (plannerPolicy P k) = V k k ↔
+              y = plannerPolicy P k)) ∧
+        ∀ k ∈ Ioo 0 kbar, HasDerivAt (fun x => V x k) (deriv (plannerValue P) k) k ∧
+          HasDerivAt (plannerValue P) (deriv f k * deriv U (f k - plannerPolicy P k)) k := by
+  set g := plannerPolicy P with hg
+  set K := Icc 0 kbar with hKdef
+  have h0K : (0 : ℝ) ∈ K := ⟨le_rfl, P.kbar_nonneg⟩
+  have hgK : ∀ k ∈ K, g k ∈ K := fun k hk => (P.plannerPolicy_mem hk).1
+  have hK0 : ∀ k ∈ K, 0 ≤ k := fun k hk => hk.1
+  have hc : ∀ k ∈ K, 0 ≤ f k - g k := fun k hk => (sub_pos.2 (hint k hk).2).le
+  have hw : ∀ k ∈ K, 0 ≤ f k - k * deriv f k := by
+    intro k hk
+    have := concave_le_tangent hf (le_refl (0 : ℝ)) hk.1 (hfd k hk)
+    have := P.f_nonneg 0 h0K
+    nlinarith
+  have hUdK : ∀ k ∈ K, DifferentiableAt ℝ U (f k - g k) := fun k hk =>
+    hUd _ (sub_pos.2 (hint k hk).2)
+  have hU'K : ∀ k ∈ K, 0 ≤ deriv U (f k - g k) := fun k hk =>
+    P.deriv_U_nonneg (sub_pos.2 (hint k hk).2)
+  have heul' : ∀ k ∈ K, deriv U (f k - g k) =
+      β * deriv U (f (g k) - g (g k)) * deriv f (g k) := fun k hk => by
+    rw [P.planner_euler_on_K hint hUd hfd hk]; ring
+  have htvc' : ∀ k ∈ K, Tendsto (fun t => β ^ t * deriv U (f (g^[t] k) - g (g^[t] k)) *
+      deriv f (g^[t] k) * g^[t] k) atTop (𝓝 0) := fun k hk =>
+    (P.planner_tvc_on_K hint hUd hf hfd hf' β 1 hβ0.le P.b_lt_one hk).congr fun t => by ring
+  obtain ⟨V, M, hVb, hsol, huniq, hall⟩ := ex_18_1_full_pathwise P.U_strictConcave P.U_mono hβ0
+    P.b_lt_one hUdK hU'K hUb hf hgK hK0 hfd hf' hw hc heul' htvc'
+  have hvb : ∀ k ∈ K, |plannerValue P k| ≤ ‖plannerValue P‖ := fun k _ => by
+    rw [← Real.norm_eq_abs]; exact (plannerValue P).norm_coe_le_norm k
+  have hpol : ∀ k ∈ K, plannerValue P k = U (f k - g k) + β * plannerValue P (g k) :=
+    fun k hk => (P.plannerPolicy_spec hk).2.2
+  have hdp := ex_18_1_dp_pathwise P.U_strictConcave hβ0 P.b_lt_one hUdK hU'K hUb hgK hK0 hf' hw
+    hc heul' htvc' hvb hpol hVb hsol
+  refine ⟨P.plannerValue_solves, fun v M' hvb' hv => P.solvesPlanner_unique hvb' hv,
+    P.plannerPolicy_continuousOn,
+    fun k hk => ⟨(P.plannerPolicy_spec hk).1, fun y hy => P.plannerPolicy_unique hk hy⟩, heul',
+    htvc', V, M, hVb, hsol, huniq, fun k hk => ⟨(hdp k hk).1, (hall k hk).1, (hall k hk).2⟩,
+    fun k hk => ?_⟩
+  have hkK : k ∈ K := Ioo_subset_Icc_self hk
+  have hv' := P.planner_envelope hk (hint k hkK).2 (hUdK k hkK) (hfd k hkK)
+  refine ⟨?_, hv'⟩
+  rw [hv'.deriv]
+  have hopt := ((hall k hkK).2 (g k) ⟨(hgK k hkK).1, by
+    have := hc k hkK; simp only; linarith⟩).2 rfl
+  have e : (fun k => f k - k * deriv f k) k + deriv f k * k - g k = f k - g k := by
+    simp only; ring
+  have e' : f k + (k - k) * deriv f k - g k = f k - g k := by ring
+  rw [e'] at hopt
+  exact bellman_envelope hβ0.le P.b_lt_one P.U_strictConcave.concaveOn hUb hVb hgK hw hf' hsol
+    hk.1 hkK (hgK k hkK).1 (by rw [e]; exact sub_pos.2 (hint k hkK).2) (by rw [e]; exact hopt)
+    (by rw [e]; exact (hUdK k hkK).hasDerivAt)
+
+/-- **The indirect equilibrium on all of `K = [0, k̄]`** for a pseudo-planner's policy interior
+on `K` (p. 546). Tax `θ ∈ [0, 1)` on capital income, rebated; `β < 1`;
+`P : PlannerHyp U f ((1 − θ)β) k̄` with `(1 − θ)β > 0`; `U`, `f` as in `ex_18_1_on_K`. Then:
+(i) `w` solves (8) on `K` and is its only solution bounded on `K`; `ĥ` is continuous; and on `K`,
+`w(k)` is the value of the path of `ĥ` in the pseudo-economy, the maximal value of its sequence
+problem; (ii) (9) `U′[f(k) − ĥ(k)] = β̂ w′(ĥ(k))` on `K` and (10)
+`w′(k) = f′(k) U′[f(k) − ĥ(k)]` on `(0, k̄)`; the individual's transversality condition
+`βᵗ (1 − θ) f′(k_t) U′(c_t) k_t → 0` holds from every `k ∈ K`, including `k = 0`; (iii) (3)
+with `h = ĥ` has a bounded solution `W` on `[0, ∞) × K`, unique among bounded solutions,
+`W(k, k; ĥ)` is the value of following `ĥ`, and `H(k, k; ĥ) = ĥ(k)` is the unique optimal choice
+(a recursive competitive equilibrium on `K`); (iv) `φ(k) = W₁(k, k; ĥ) = (1 − θ) w′(k)` on
+`(0, k̄)`. -/
+theorem indirect_equilibrium_on_K {U f : ℝ → ℝ} {β θ B₀ kbar : ℝ}
+    (P : PlannerHyp U f ((1 - θ) * β) kbar) (hb : 0 < (1 - θ) * β) (hβ1 : β < 1)
+    (hθ0 : 0 ≤ θ) (hθ : θ < 1)
+    (hint : ∀ k ∈ Icc 0 kbar, 0 < plannerPolicy P k ∧ plannerPolicy P k < f k)
+    (hUd : ∀ c, 0 < c → DifferentiableAt ℝ U c) (hUb : ∀ c, 0 ≤ c → |U c| ≤ B₀)
+    (hf : ConcaveOn ℝ (Ici 0) f) (hfd : ∀ k ∈ Icc 0 kbar, DifferentiableAt ℝ f k)
+    (hf' : ∀ k ∈ Icc 0 kbar, 0 ≤ deriv f k) :
+    SolvesPlanner U f ((1 - θ) * β) kbar (plannerValue P) ∧
+      (∀ w : ℝ → ℝ, ∀ M', (∀ k ∈ Icc 0 kbar, |w k| ≤ M') →
+        SolvesPlanner U f ((1 - θ) * β) kbar w → ∀ k ∈ Icc 0 kbar, w k = plannerValue P k) ∧
+      ContinuousOn (plannerPolicy P) (Icc 0 kbar) ∧
+      (∀ k ∈ Icc 0 kbar,
+        plannerValue P k = pathValue U f (plannerPolicy P) ((1 - θ) * β) k ∧
+          IsGreatest (plannerValues U f ((1 - θ) * β) k) (plannerValue P k)) ∧
+      (∀ k ∈ Icc 0 kbar, deriv U (f k - plannerPolicy P k) =
+        (1 - θ) * β * deriv (plannerValue P) (plannerPolicy P k)) ∧
+      (∀ k ∈ Ioo 0 kbar, HasDerivAt (plannerValue P)
+        (deriv f k * deriv U (f k - plannerPolicy P k)) k) ∧
+      (∀ k ∈ Icc 0 kbar, Tendsto (fun t => β ^ t * ((1 - θ) * deriv f ((plannerPolicy P)^[t] k)) *
+        deriv U (f ((plannerPolicy P)^[t] k) - plannerPolicy P ((plannerPolicy P)^[t] k)) *
+          (plannerPolicy P)^[t] k) atTop (𝓝 0)) ∧
+      ∃ W : ℝ → ℝ → ℝ, ∃ M, (∀ x, 0 ≤ x → ∀ k ∈ Icc 0 kbar, |W x k| ≤ M) ∧
+        SolvesBellman U (fun k => f k - (1 - θ) * k * deriv f k)
+          (fun k => (1 - θ) * deriv f k) (plannerPolicy P) W β (Icc 0 kbar) ∧
+        (∀ W' : ℝ → ℝ → ℝ, ∀ M', (∀ x, 0 ≤ x → ∀ k ∈ Icc 0 kbar, |W' x k| ≤ M') →
+          SolvesBellman U (fun k => f k - (1 - θ) * k * deriv f k)
+            (fun k => (1 - θ) * deriv f k) (plannerPolicy P) W' β (Icc 0 kbar) →
+            ∀ x, 0 ≤ x → ∀ k ∈ Icc 0 kbar, W' x k = W x k) ∧
+        (∀ k ∈ Icc 0 kbar, W k k = pathValue U f (plannerPolicy P) β k ∧
+          ∀ y ∈ feasY (fun k => f k - (1 - θ) * k * deriv f k) (fun k => (1 - θ) * deriv f k) k k,
+            (U (f k + (1 - θ) * (k - k) * deriv f k - y) + β * W y (plannerPolicy P k) =
+              W k k ↔ y = plannerPolicy P k)) ∧
+        ∀ k ∈ Ioo 0 kbar,
+          HasDerivAt (fun x => W x k) ((1 - θ) * deriv (plannerValue P) k) k := by
+  set h := plannerPolicy P with hh
+  set K := Icc 0 kbar with hKdef
+  have h0K : (0 : ℝ) ∈ K := ⟨le_rfl, P.kbar_nonneg⟩
+  have hβ0 : 0 < β := by
+    by_contra hb'
+    push Not at hb'
+    have : (1 - θ) * β ≤ 0 := mul_nonpos_of_nonneg_of_nonpos (by linarith) hb'
+    linarith
+  have hhK : ∀ k ∈ K, h k ∈ K := fun k hk => (P.plannerPolicy_mem hk).1
+  have hK0 : ∀ k ∈ K, 0 ≤ k := fun k hk => hk.1
+  have hc : ∀ k ∈ K, 0 ≤ f k - h k := fun k hk => (sub_pos.2 (hint k hk).2).le
+  have hw : ∀ k ∈ K, 0 ≤ f k - (1 - θ) * k * deriv f k := by
+    intro k hk
+    have := concave_le_tangent hf (le_refl (0 : ℝ)) hk.1 (hfd k hk)
+    have := P.f_nonneg 0 h0K
+    have := mul_nonneg (mul_nonneg hθ0 hk.1) (hf' k hk)
+    nlinarith
+  have hUdK : ∀ k ∈ K, DifferentiableAt ℝ U (f k - h k) := fun k hk =>
+    hUd _ (sub_pos.2 (hint k hk).2)
+  have hU'K : ∀ k ∈ K, 0 ≤ deriv U (f k - h k) := fun k hk =>
+    P.deriv_U_nonneg (sub_pos.2 (hint k hk).2)
+  have heul' : ∀ k ∈ K, deriv U (f k - h k) =
+      (1 - θ) * β * deriv U (f (h k) - h (h k)) * deriv f (h k) := fun k hk => by
+    rw [P.planner_euler_on_K hint hUd hfd hk]; ring
+  have htvc' : ∀ k ∈ K, Tendsto (fun t => β ^ t * ((1 - θ) * deriv f (h^[t] k)) *
+      deriv U (f (h^[t] k) - h (h^[t] k)) * h^[t] k) atTop (𝓝 0) := fun k hk =>
+    P.planner_tvc_on_K hint hUd hf hfd hf' β (1 - θ) hβ0.le hβ1 hk
+  obtain ⟨W, M, hWb, hsol, huniq, hall⟩ := indirect_equilibrium_full_pathwise P.U_strictConcave
+    P.U_mono hβ0 hβ1 hθ0 hθ hUdK hU'K hUb hf hhK hK0 hfd hf' hw hc heul' htvc'
+  have h10 : ∀ k ∈ Ioo 0 kbar,
+      HasDerivAt (plannerValue P) (deriv f k * deriv U (f k - h k)) k := fun k hk =>
+    P.planner_envelope hk (hint k (Ioo_subset_Icc_self hk)).2 (hUdK k (Ioo_subset_Icc_self hk))
+      (hfd k (Ioo_subset_Icc_self hk))
+  have h9 : ∀ k ∈ K, deriv U (f k - h k) = (1 - θ) * β * deriv (plannerValue P) (h k) := by
+    intro k hk
+    have hhI : h k ∈ Ioo 0 kbar := ⟨(hint k hk).1, (hint k hk).2.trans_le (P.f_le k hk)⟩
+    exact P.planner_foc hk (hint k hk).1 (hint k hk).2 (hUdK k hk) (h10 _ hhI).differentiableAt
+  have hval : ∀ k ∈ K, plannerValue P k = pathValue U f h ((1 - θ) * β) k := by
+    intro k hk
+    have hvb : ∀ k ∈ K, |plannerValue P k| ≤ ‖plannerValue P‖ := fun k _ => by
+      rw [← Real.norm_eq_abs]; exact (plannerValue P).norm_coe_le_norm k
+    have hs := policyValue_hasSum P.b_nonneg P.b_lt_one hhK hvb (fun k hk => hUb _ (hc k hk))
+      (fun k hk => (P.plannerPolicy_spec hk).2.2) hk
+    exact hs.tsum_eq.symm
+  refine ⟨P.plannerValue_solves, fun w M' hwb hw' => P.solvesPlanner_unique hwb hw',
+    P.plannerPolicy_continuousOn, fun k hk => ⟨hval k hk, (hval k hk) ▸ (hall k hk).1⟩, h9, h10,
+    htvc', W, M, hWb, hsol, huniq, fun k hk => ⟨(hall k hk).2.1, (hall k hk).2.2⟩,
+    fun k hk => ?_⟩
+  have hkK : k ∈ K := Ioo_subset_Icc_self hk
+  have hopt := ((hall k hkK).2.2 (h k) ⟨(hhK k hkK).1, by
+    have := hc k hkK; simp only; linarith⟩).2 rfl
+  have e : f k + (1 - θ) * (k - k) * deriv f k - h k = f k - h k := by ring
+  obtain ⟨h5, -⟩ := eq_18_1_4_5 hβ0.le hβ1 hθ P.U_strictConcave.concaveOn hUb hhK hf' hw hWb hsol
+    hk.1 hkK (hint k hkK).1 (by rw [e]; exact sub_pos.2 (hint k hkK).2) hopt
+    (by rw [e]; exact hUdK k hkK)
+  rw [(h10 k hk).deriv]
+  rw [e] at h5
+  convert h5 using 1
+  ring
+
+/-! ### Primitive conditions for interiority on all of `K` -/
+
+/-- **Primitive hypotheses for an interior policy on all of `K`: `f(0) > 0` and `U′(0+) = ∞`.**
+`PlannerHyp`, `b > 0`, the Inada condition `(U(c) − U(0))/c → ∞` as `c → 0+`, `U` differentiable
+on `(0, ∞)`, positive output at zero capital `f(0) > 0`, `f` nondecreasing on `K`, and a slope
+condition at `0`: `f(y) ≥ f(0) + m y` for small `y > 0` with `b m > 1` (e.g. `b f′(0) > 1`, or
+`f′(0+) = ∞`). The slope condition is needed: with a constant technology the policy is `0`
+(`inada_const_counterexample`). -/
+structure PosOutputInadaHyp (U f : ℝ → ℝ) (b kbar : ℝ) : Prop where
+  planner : PlannerHyp U f b kbar
+  b_pos : 0 < b
+  U_inada : Tendsto (fun c => (U c - U 0) / c) (𝓝[>] 0) atTop
+  U_diff : ∀ c, 0 < c → DifferentiableAt ℝ U c
+  f_zero_pos : 0 < f 0
+  f_mono : MonotoneOn f (Icc 0 kbar)
+  f_slope : ∃ m, 1 < b * m ∧ ∀ᶠ y in 𝓝[>] 0, f 0 + m * y ≤ f y
+
+/-- **Interiority on all of `K`** under `PosOutputInadaHyp`: `0 < g(k) < f(k)` for every
+`k ∈ [0, k̄]`, including `k = 0` (contrast `InteriorHyp.not_interior_zero` when `f(0) = 0`).
+Positive consumption is `PlannerHyp.plannerPolicy_lt_of_inada` (`f > 0` on `K`); positive saving
+is `PlannerHyp.plannerPolicy_pos_of_slope`. -/
+theorem PosOutputInadaHyp.policy_interior {U f : ℝ → ℝ} {b kbar : ℝ}
+    (I : PosOutputInadaHyp U f b kbar) {k : ℝ} (hk : k ∈ Icc 0 kbar) :
+    0 < plannerPolicy I.planner k ∧ plannerPolicy I.planner k < f k := by
+  have h0K : (0 : ℝ) ∈ Icc 0 kbar := ⟨le_rfl, I.planner.kbar_nonneg⟩
+  have hlt : ∀ k ∈ Icc 0 kbar, plannerPolicy I.planner k < f k := fun k hk =>
+    I.planner.plannerPolicy_lt_of_inada I.U_inada hk
+      (I.f_zero_pos.trans_le (I.f_mono h0K hk hk.1))
+  obtain ⟨m, hm, hfm⟩ := I.f_slope
+  exact ⟨I.planner.plannerPolicy_pos_of_slope I.b_pos hm hfm I.f_mono (hlt 0 h0K) I.U_diff hk,
+    hlt k hk⟩
+
+/-- **Primitive hypotheses for an interior policy on all of `K`: finite `U′(0)`.** `PlannerHyp`,
+`b > 0`, `U` with finite positive right derivative `U′(0) = μ` at `0` and differentiable on
+`(0, ∞)`, `f` nondecreasing on `K` with the slope condition at `0` of `PosOutputInadaHyp`
+(`b m > 1`), and a bound on the return to saving out of output: for some `0 ≤ r < f(0)`, `f` is
+`φ`-Lipschitz on `[r, k̄]` with `b φ < 1`. (Saving everything puts next period's capital in
+`[f(0), k̄] ⊆ [r, k̄]`, where the value function is `μ φ`-Lipschitz, so the condition is
+`U′(0) > b μ φ ≥ b · Lip(v)`.) Both conditions are needed: without the first the policy can be
+`0` (`inada_const_counterexample`), without the second it can be `f`
+(`corner_counterexample`). -/
+structure FiniteMarginalHyp (U f : ℝ → ℝ) (b kbar : ℝ) : Prop where
+  planner : PlannerHyp U f b kbar
+  b_pos : 0 < b
+  U_deriv_zero : ∃ μ, 0 < μ ∧ HasDerivWithinAt U μ (Ici 0) 0
+  U_diff : ∀ c, 0 < c → DifferentiableAt ℝ U c
+  f_mono : MonotoneOn f (Icc 0 kbar)
+  f_slope : ∃ m, 1 < b * m ∧ ∀ᶠ y in 𝓝[>] 0, f 0 + m * y ≤ f y
+  f_lip : ∃ r φ, 0 ≤ r ∧ r < f 0 ∧ 0 ≤ φ ∧ b * φ < 1 ∧
+    ∀ k ∈ Icc r kbar, ∀ k' ∈ Icc r kbar, |f k - f k'| ≤ φ * |k - k'|
+
+/-- **Interiority on all of `K`** under `FiniteMarginalHyp`: `0 < g(k) < f(k)` for every
+`k ∈ [0, k̄]` (`PlannerHyp.plannerPolicy_lt_of_lipschitz`,
+`PlannerHyp.plannerPolicy_pos_of_slope`). -/
+theorem FiniteMarginalHyp.policy_interior {U f : ℝ → ℝ} {b kbar : ℝ}
+    (I : FiniteMarginalHyp U f b kbar) {k : ℝ} (hk : k ∈ Icc 0 kbar) :
+    0 < plannerPolicy I.planner k ∧ plannerPolicy I.planner k < f k := by
+  have h0K : (0 : ℝ) ∈ Icc 0 kbar := ⟨le_rfl, I.planner.kbar_nonneg⟩
+  obtain ⟨μ, hμ0, hμ⟩ := I.U_deriv_zero
+  obtain ⟨r, φ, hr0, hr, hφ0, hbφ, hfL⟩ := I.f_lip
+  have hlt : ∀ k ∈ Icc 0 kbar, plannerPolicy I.planner k < f k := fun k hk =>
+    I.planner.plannerPolicy_lt_of_lipschitz hμ hμ0 hφ0 hbφ hr0
+      (fun k hk => hr.trans_le (I.f_mono h0K hk hk.1)) hfL hk
+  obtain ⟨m, hm, hfm⟩ := I.f_slope
+  exact ⟨I.planner.plannerPolicy_pos_of_slope I.b_pos hm hfm I.f_mono (hlt 0 h0K) I.U_diff hk,
+    hlt k hk⟩
+
+/-- **Exercise 18.1 on all of `K` when `f(0) > 0` and `U′(0+) = ∞`** (pp. 543–544): under
+`PosOutputInadaHyp`, with `U` bounded on `[0, ∞)` and `f` concave on `[0, ∞)` and differentiable
+on `K` with `f′ ≥ 0`, the constructed policy is interior on `K` and the conclusions of
+`ex_18_1_on_K` hold, including the transversality condition from `k = 0`. -/
+theorem PosOutputInadaHyp.ex_18_1 {U f : ℝ → ℝ} {β B₀ kbar : ℝ} (I : PosOutputInadaHyp U f β kbar)
+    (hUb : ∀ c, 0 ≤ c → |U c| ≤ B₀) (hf : ConcaveOn ℝ (Ici 0) f)
+    (hfd : ∀ k ∈ Icc 0 kbar, DifferentiableAt ℝ f k) (hf' : ∀ k ∈ Icc 0 kbar, 0 ≤ deriv f k) :
+    (∀ k ∈ Icc 0 kbar, 0 < plannerPolicy I.planner k ∧ plannerPolicy I.planner k < f k) ∧
+      SolvesPlanner U f β kbar (plannerValue I.planner) ∧
+      (∀ v : ℝ → ℝ, ∀ M', (∀ k ∈ Icc 0 kbar, |v k| ≤ M') → SolvesPlanner U f β kbar v →
+        ∀ k ∈ Icc 0 kbar, v k = plannerValue I.planner k) ∧
+      ContinuousOn (plannerPolicy I.planner) (Icc 0 kbar) ∧
+      (∀ k ∈ Icc 0 kbar, plannerPolicy I.planner k ∈ Icc 0 (f k) ∧ ∀ y ∈ Icc 0 (f k),
+        U (f k - y) + β * plannerValue I.planner y = plannerValue I.planner k ↔ y =
+          plannerPolicy I.planner k) ∧
+      (∀ k ∈ Icc 0 kbar, deriv U (f k - plannerPolicy I.planner k) =
+        β * deriv U (f (plannerPolicy I.planner k) -
+          plannerPolicy I.planner (plannerPolicy I.planner k)) *
+          deriv f (plannerPolicy I.planner k)) ∧
+      (∀ k ∈ Icc 0 kbar, Tendsto (fun t => β ^ t *
+        deriv U (f ((plannerPolicy I.planner)^[t] k) -
+          plannerPolicy I.planner ((plannerPolicy I.planner)^[t] k)) *
+          deriv f ((plannerPolicy I.planner)^[t] k) *
+            (plannerPolicy I.planner)^[t] k) atTop (𝓝 0)) ∧
+      ∃ V : ℝ → ℝ → ℝ, ∃ M, (∀ x, 0 ≤ x → ∀ k ∈ Icc 0 kbar, |V x k| ≤ M) ∧
+        SolvesBellman U (fun k => f k - k * deriv f k) (deriv f) (plannerPolicy I.planner) V β
+          (Icc 0 kbar) ∧
+        (∀ V' : ℝ → ℝ → ℝ, ∀ M', (∀ x, 0 ≤ x → ∀ k ∈ Icc 0 kbar, |V' x k| ≤ M') →
+          SolvesBellman U (fun k => f k - k * deriv f k) (deriv f) (plannerPolicy I.planner) V' β
+            (Icc 0 kbar) → ∀ x, 0 ≤ x → ∀ k ∈ Icc 0 kbar, V' x k = V x k) ∧
+        (∀ k ∈ Icc 0 kbar, V k k = plannerValue I.planner k ∧
+          IsGreatest (plannerValues U f β k) (V k k) ∧
+          ∀ y ∈ feasY (fun k => f k - k * deriv f k) (deriv f) k k,
+            (U (f k + (k - k) * deriv f k - y) + β * V y (plannerPolicy I.planner k) = V k k ↔
+              y = plannerPolicy I.planner k)) ∧
+        ∀ k ∈ Ioo 0 kbar, HasDerivAt (fun x => V x k) (deriv (plannerValue I.planner) k) k ∧
+          HasDerivAt (plannerValue I.planner) (deriv f k * deriv U (f k -
+            plannerPolicy I.planner k)) k :=
+  ⟨fun _ hk => I.policy_interior hk,
+    ex_18_1_on_K I.planner I.b_pos (fun _ hk => I.policy_interior hk) I.U_diff hUb hf hfd hf'⟩
+
+/-- **The indirect equilibrium on all of `K` when `f(0) > 0` and `U′(0+) = ∞`** (p. 546):
+under `PosOutputInadaHyp` for `β̂ = (1 − θ)β`, the pseudo-planner's policy is interior on `K`
+and the conclusions of `indirect_equilibrium_on_K` hold. -/
+theorem PosOutputInadaHyp.indirect_equilibrium {U f : ℝ → ℝ} {β θ B₀ kbar : ℝ}
+    (I : PosOutputInadaHyp U f ((1 - θ) * β) kbar) (hβ1 : β < 1) (hθ0 : 0 ≤ θ) (hθ : θ < 1)
+    (hUb : ∀ c, 0 ≤ c → |U c| ≤ B₀) (hf : ConcaveOn ℝ (Ici 0) f)
+    (hfd : ∀ k ∈ Icc 0 kbar, DifferentiableAt ℝ f k) (hf' : ∀ k ∈ Icc 0 kbar, 0 ≤ deriv f k) :
+    (∀ k ∈ Icc 0 kbar, 0 < plannerPolicy I.planner k ∧ plannerPolicy I.planner k < f k) ∧
+      SolvesPlanner U f ((1 - θ) * β) kbar (plannerValue I.planner) ∧
+      (∀ w : ℝ → ℝ, ∀ M', (∀ k ∈ Icc 0 kbar, |w k| ≤ M') →
+      SolvesPlanner U f ((1 - θ) * β) kbar w → ∀ k ∈ Icc 0 kbar, w k = plannerValue I.planner k) ∧
+      ContinuousOn (plannerPolicy I.planner) (Icc 0 kbar) ∧
+      (∀ k ∈ Icc 0 kbar,
+        plannerValue I.planner k = pathValue U f (plannerPolicy I.planner) ((1 - θ) * β) k ∧
+          IsGreatest (plannerValues U f ((1 - θ) * β) k) (plannerValue I.planner k)) ∧
+      (∀ k ∈ Icc 0 kbar, deriv U (f k - plannerPolicy I.planner k) =
+        (1 - θ) * β * deriv (plannerValue I.planner) (plannerPolicy I.planner k)) ∧
+      (∀ k ∈ Ioo 0 kbar, HasDerivAt (plannerValue I.planner)
+        (deriv f k * deriv U (f k - plannerPolicy I.planner k)) k) ∧
+      (∀ k ∈ Icc 0 kbar, Tendsto (fun t => β ^ t * ((1 - θ) *
+        deriv f ((plannerPolicy I.planner)^[t] k)) *
+        deriv U (f ((plannerPolicy I.planner)^[t] k) -
+          plannerPolicy I.planner ((plannerPolicy I.planner)^[t] k)) *
+          (plannerPolicy I.planner)^[t] k) atTop (𝓝 0)) ∧
+      ∃ W : ℝ → ℝ → ℝ, ∃ M, (∀ x, 0 ≤ x → ∀ k ∈ Icc 0 kbar, |W x k| ≤ M) ∧
+        SolvesBellman U (fun k => f k - (1 - θ) * k * deriv f k)
+          (fun k => (1 - θ) * deriv f k) (plannerPolicy I.planner) W β (Icc 0 kbar) ∧
+        (∀ W' : ℝ → ℝ → ℝ, ∀ M', (∀ x, 0 ≤ x → ∀ k ∈ Icc 0 kbar, |W' x k| ≤ M') →
+          SolvesBellman U (fun k => f k - (1 - θ) * k * deriv f k)
+            (fun k => (1 - θ) * deriv f k) (plannerPolicy I.planner) W' β (Icc 0 kbar) →
+            ∀ x, 0 ≤ x → ∀ k ∈ Icc 0 kbar, W' x k = W x k) ∧
+        (∀ k ∈ Icc 0 kbar, W k k = pathValue U f (plannerPolicy I.planner) β k ∧
+          ∀ y ∈ feasY (fun k => f k - (1 - θ) * k * deriv f k) (fun k => (1 - θ) * deriv f k) k k,
+            (U (f k + (1 - θ) * (k - k) * deriv f k - y) + β * W y (plannerPolicy I.planner k) =
+              W k k ↔ y = plannerPolicy I.planner k)) ∧
+        ∀ k ∈ Ioo 0 kbar,
+          HasDerivAt (fun x => W x k) ((1 - θ) * deriv (plannerValue I.planner) k) k :=
+  ⟨fun _ hk => I.policy_interior hk, indirect_equilibrium_on_K I.planner I.b_pos hβ1 hθ0 hθ
+    (fun _ hk => I.policy_interior hk) I.U_diff hUb hf hfd hf'⟩
+
+/-- **Exercise 18.1 on all of `K` with a finite `U′(0)`** (pp. 543–544): under
+`FiniteMarginalHyp`, with `U` bounded on `[0, ∞)` and `f` concave on `[0, ∞)` and differentiable
+on `K` with `f′ ≥ 0`, the constructed policy is interior on `K` and the conclusions of
+`ex_18_1_on_K` hold. -/
+theorem FiniteMarginalHyp.ex_18_1 {U f : ℝ → ℝ} {β B₀ kbar : ℝ} (I : FiniteMarginalHyp U f β kbar)
+    (hUb : ∀ c, 0 ≤ c → |U c| ≤ B₀) (hf : ConcaveOn ℝ (Ici 0) f)
+    (hfd : ∀ k ∈ Icc 0 kbar, DifferentiableAt ℝ f k) (hf' : ∀ k ∈ Icc 0 kbar, 0 ≤ deriv f k) :
+    (∀ k ∈ Icc 0 kbar, 0 < plannerPolicy I.planner k ∧ plannerPolicy I.planner k < f k) ∧
+      SolvesPlanner U f β kbar (plannerValue I.planner) ∧
+      (∀ v : ℝ → ℝ, ∀ M', (∀ k ∈ Icc 0 kbar, |v k| ≤ M') → SolvesPlanner U f β kbar v →
+        ∀ k ∈ Icc 0 kbar, v k = plannerValue I.planner k) ∧
+      ContinuousOn (plannerPolicy I.planner) (Icc 0 kbar) ∧
+      (∀ k ∈ Icc 0 kbar, plannerPolicy I.planner k ∈ Icc 0 (f k) ∧ ∀ y ∈ Icc 0 (f k),
+        U (f k - y) + β * plannerValue I.planner y = plannerValue I.planner k ↔ y =
+          plannerPolicy I.planner k) ∧
+      (∀ k ∈ Icc 0 kbar, deriv U (f k - plannerPolicy I.planner k) =
+        β * deriv U (f (plannerPolicy I.planner k) -
+          plannerPolicy I.planner (plannerPolicy I.planner k)) *
+          deriv f (plannerPolicy I.planner k)) ∧
+      (∀ k ∈ Icc 0 kbar, Tendsto (fun t => β ^ t *
+        deriv U (f ((plannerPolicy I.planner)^[t] k) -
+          plannerPolicy I.planner ((plannerPolicy I.planner)^[t] k)) *
+          deriv f ((plannerPolicy I.planner)^[t] k) *
+            (plannerPolicy I.planner)^[t] k) atTop (𝓝 0)) ∧
+      ∃ V : ℝ → ℝ → ℝ, ∃ M, (∀ x, 0 ≤ x → ∀ k ∈ Icc 0 kbar, |V x k| ≤ M) ∧
+        SolvesBellman U (fun k => f k - k * deriv f k) (deriv f) (plannerPolicy I.planner) V β
+          (Icc 0 kbar) ∧
+        (∀ V' : ℝ → ℝ → ℝ, ∀ M', (∀ x, 0 ≤ x → ∀ k ∈ Icc 0 kbar, |V' x k| ≤ M') →
+          SolvesBellman U (fun k => f k - k * deriv f k) (deriv f) (plannerPolicy I.planner) V' β
+            (Icc 0 kbar) → ∀ x, 0 ≤ x → ∀ k ∈ Icc 0 kbar, V' x k = V x k) ∧
+        (∀ k ∈ Icc 0 kbar, V k k = plannerValue I.planner k ∧
+          IsGreatest (plannerValues U f β k) (V k k) ∧
+          ∀ y ∈ feasY (fun k => f k - k * deriv f k) (deriv f) k k,
+            (U (f k + (k - k) * deriv f k - y) + β * V y (plannerPolicy I.planner k) = V k k ↔
+              y = plannerPolicy I.planner k)) ∧
+        ∀ k ∈ Ioo 0 kbar, HasDerivAt (fun x => V x k) (deriv (plannerValue I.planner) k) k ∧
+          HasDerivAt (plannerValue I.planner) (deriv f k * deriv U (f k -
+            plannerPolicy I.planner k)) k :=
+  ⟨fun _ hk => I.policy_interior hk,
+    ex_18_1_on_K I.planner I.b_pos (fun _ hk => I.policy_interior hk) I.U_diff hUb hf hfd hf'⟩
+
+/-- **The indirect equilibrium on all of `K` with a finite `U′(0)`** (p. 546): under
+`FiniteMarginalHyp` for `β̂ = (1 − θ)β`, the pseudo-planner's policy is interior on `K` and the
+conclusions of `indirect_equilibrium_on_K` hold. -/
+theorem FiniteMarginalHyp.indirect_equilibrium {U f : ℝ → ℝ} {β θ B₀ kbar : ℝ}
+    (I : FiniteMarginalHyp U f ((1 - θ) * β) kbar) (hβ1 : β < 1) (hθ0 : 0 ≤ θ) (hθ : θ < 1)
+    (hUb : ∀ c, 0 ≤ c → |U c| ≤ B₀) (hf : ConcaveOn ℝ (Ici 0) f)
+    (hfd : ∀ k ∈ Icc 0 kbar, DifferentiableAt ℝ f k) (hf' : ∀ k ∈ Icc 0 kbar, 0 ≤ deriv f k) :
+    (∀ k ∈ Icc 0 kbar, 0 < plannerPolicy I.planner k ∧ plannerPolicy I.planner k < f k) ∧
+      SolvesPlanner U f ((1 - θ) * β) kbar (plannerValue I.planner) ∧
+      (∀ w : ℝ → ℝ, ∀ M', (∀ k ∈ Icc 0 kbar, |w k| ≤ M') →
+      SolvesPlanner U f ((1 - θ) * β) kbar w → ∀ k ∈ Icc 0 kbar, w k = plannerValue I.planner k) ∧
+      ContinuousOn (plannerPolicy I.planner) (Icc 0 kbar) ∧
+      (∀ k ∈ Icc 0 kbar,
+        plannerValue I.planner k = pathValue U f (plannerPolicy I.planner) ((1 - θ) * β) k ∧
+          IsGreatest (plannerValues U f ((1 - θ) * β) k) (plannerValue I.planner k)) ∧
+      (∀ k ∈ Icc 0 kbar, deriv U (f k - plannerPolicy I.planner k) =
+        (1 - θ) * β * deriv (plannerValue I.planner) (plannerPolicy I.planner k)) ∧
+      (∀ k ∈ Ioo 0 kbar, HasDerivAt (plannerValue I.planner)
+        (deriv f k * deriv U (f k - plannerPolicy I.planner k)) k) ∧
+      (∀ k ∈ Icc 0 kbar, Tendsto (fun t => β ^ t * ((1 - θ) *
+        deriv f ((plannerPolicy I.planner)^[t] k)) *
+        deriv U (f ((plannerPolicy I.planner)^[t] k) -
+          plannerPolicy I.planner ((plannerPolicy I.planner)^[t] k)) *
+          (plannerPolicy I.planner)^[t] k) atTop (𝓝 0)) ∧
+      ∃ W : ℝ → ℝ → ℝ, ∃ M, (∀ x, 0 ≤ x → ∀ k ∈ Icc 0 kbar, |W x k| ≤ M) ∧
+        SolvesBellman U (fun k => f k - (1 - θ) * k * deriv f k)
+          (fun k => (1 - θ) * deriv f k) (plannerPolicy I.planner) W β (Icc 0 kbar) ∧
+        (∀ W' : ℝ → ℝ → ℝ, ∀ M', (∀ x, 0 ≤ x → ∀ k ∈ Icc 0 kbar, |W' x k| ≤ M') →
+          SolvesBellman U (fun k => f k - (1 - θ) * k * deriv f k)
+            (fun k => (1 - θ) * deriv f k) (plannerPolicy I.planner) W' β (Icc 0 kbar) →
+            ∀ x, 0 ≤ x → ∀ k ∈ Icc 0 kbar, W' x k = W x k) ∧
+        (∀ k ∈ Icc 0 kbar, W k k = pathValue U f (plannerPolicy I.planner) β k ∧
+          ∀ y ∈ feasY (fun k => f k - (1 - θ) * k * deriv f k) (fun k => (1 - θ) * deriv f k) k k,
+            (U (f k + (1 - θ) * (k - k) * deriv f k - y) + β * W y (plannerPolicy I.planner k) =
+              W k k ↔ y = plannerPolicy I.planner k)) ∧
+        ∀ k ∈ Ioo 0 kbar,
+          HasDerivAt (fun x => W x k) ((1 - θ) * deriv (plannerValue I.planner) k) k :=
+  ⟨fun _ hk => I.policy_interior hk, indirect_equilibrium_on_K I.planner I.b_pos hβ1 hθ0 hθ
+    (fun _ hk => I.policy_interior hk) I.U_diff hUb hf hfd hf'⟩
+
+/-! ### A constant technology: the policy is zero -/
+
+/-- **With a constant technology the planner never saves.** Under `PlannerHyp`, if `f ≡ a` on
+`K`, then `v` is constant on `K` and `g(k) = 0` for every `k ∈ K`, whatever `U` (Inada or not). -/
+theorem PlannerHyp.plannerPolicy_eq_zero_of_const {U f : ℝ → ℝ} {b kbar a : ℝ}
+    (P : PlannerHyp U f b kbar) (hfa : ∀ k ∈ Icc 0 kbar, f k = a) {k : ℝ}
+    (hk : k ∈ Icc 0 kbar) : plannerPolicy P k = 0 := by
+  have h0K : (0 : ℝ) ∈ Icc 0 kbar := ⟨le_rfl, P.kbar_nonneg⟩
+  have hconst : ∀ k ∈ Icc 0 kbar, plannerValue P k = plannerValue P 0 := by
+    intro k hk
+    have h1 := P.plannerValue_solves k hk
+    have h2 := P.plannerValue_solves 0 h0K
+    rw [hfa k hk] at h1
+    rw [hfa 0 h0K] at h2
+    rw [h1, h2]
+  obtain ⟨hg, hmax, hv⟩ := P.plannerPolicy_spec hk
+  have hgK : plannerPolicy P k ∈ Icc 0 kbar := (P.plannerPolicy_mem hk).1
+  have hf0 := P.f_nonneg k hk
+  have h1 := isMaxOn_iff.1 hmax 0 ⟨le_rfl, hf0⟩
+  change U (f k - 0) + b * plannerValue P 0 ≤
+    U (f k - plannerPolicy P k) + b * plannerValue P (plannerPolicy P k) at h1
+  have h2 : U (f k - plannerPolicy P k) ≤ U (f k - 0) :=
+    P.U_mono (mem_Ici.2 (by linarith [hg.2])) (mem_Ici.2 (by linarith)) (by linarith [hg.1])
+  rw [hconst _ hgK] at h1 hv
+  have := (P.plannerPolicy_unique hk ⟨le_rfl, hf0⟩).1 (by linarith)
+  exact this.symm
+
+end StokeyLucasPrescott.EquilibriaWithDistortions
+
+/-
+Copyright (c) 2026 Robert Kirkby. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Robert Kirkby
+-/
+
+/-!
+# Economies for `IndirectInteriorGeneral`
+
+SLP §18.1, pp. 543–546 (the economies are not in the book). They show that the hypotheses
+`PosOutputInadaHyp` and `FiniteMarginalHyp` are consistent, and that the added conditions are
+needed.
+
+* `expU`, `U(c) = 1 − e^{−c}`: bounded, strictly concave, with finite `U′(0) = 1`
+  (`expU_strictConcaveOn`, `hasDerivWithinAt_expU_zero`, `abs_expU_le`).
+* `sqrtTech`, `f(k) = 4 + 4√(1 + k)` on `K = [0, 24]`: concave, nondecreasing, `f(0) = 8`,
+  `f′(0) = 2`, `1`-Lipschitz on `[3, 24]` (`sqrtTech_concaveOn`, `hasDerivAt_sqrtTech_zero`,
+  `sqrtTech_lipschitz`).
+* `sqrtTech_posOutputInadaHyp`: `U(c) = 1 − e^{−√c}` (`U′(0+) = ∞`) and `sqrtTech` satisfy
+  `PosOutputInadaHyp` for `b ∈ (1/2, 1)`; `sqrtTech_inada_ex_18_1`, `sqrtTech_inada_equilibrium`:
+  the policies are interior on all of `[0, 24]`, the transversality conditions hold from `k = 0`,
+  and Exercise 18.1 and the recursive competitive equilibrium hold on `[0, 24]`.
+* `sqrtTech_finiteMarginalHyp`: `expU` and `sqrtTech` satisfy `FiniteMarginalHyp` for
+  `b ∈ (1/2, 1)`; `sqrtTech_finite_ex_18_1`, `sqrtTech_finite_equilibrium`: likewise.
+* `rootTech_posOutputInadaHyp`, `rootTech_interior`: `U(c) = 1 − e^{−√c}` and `f(k) = 1 + √k` on
+  `[0, 4]` (`f′(0+) = ∞`) satisfy `PosOutputInadaHyp` for every `b ∈ (0, 1)`, and the policy is
+  interior on all of `[0, 4]`.
+
+**Counterexamples** (the added hypotheses are needed).
+
+* `inada_const_counterexample`: `U(c) = 1 − e^{−√c}`, `f ≡ 1`: `U′(0+) = ∞` and `f(0) > 0`, but
+  the slope condition fails and `g ≡ 0`.
+* `finite_const_counterexample`: `expU`, `f ≡ 1`: everything in `FiniteMarginalHyp` but the slope
+  condition holds, and `g ≡ 0`.
+* `corner_counterexample`: `expU`, `f(k) = min{1/100 + 10k, 1}` (`cornerF`), `b = 1/2`:
+  everything in `FiniteMarginalHyp` but the Lipschitz condition holds, and `g = f` on
+  `[0, 1/1000]`: the planner consumes nothing.
+-/
+
+namespace StokeyLucasPrescott.EquilibriaWithDistortions
+
+open Filter Topology Set BoundedContinuousFunction
+
+/-- The utility `U(c) = 1 − e^{−c}`: bounded, strictly concave, with finite `U′(0) = 1`. -/
+noncomputable def expU (c : ℝ) : ℝ := 1 - Real.exp (-c)
+
+/-- `U` is continuous. -/
+theorem continuous_expU : Continuous expU := by
+  unfold expU
+  fun_prop
+
+/-- `U′(c) = e^{−c}`. -/
+theorem hasDerivAt_expU (c : ℝ) : HasDerivAt expU (Real.exp (-c)) c := by
+  have h := ((hasDerivAt_neg c).exp).const_sub 1
+  have e : expU = fun x => 1 - Real.exp (-x) := rfl
+  rw [e]
+  convert h using 1
+  ring
+
+/-- `U′(0) = 1`, finite. -/
+theorem hasDerivWithinAt_expU_zero : HasDerivWithinAt expU 1 (Ici 0) 0 := by
+  have h := (hasDerivAt_expU 0).hasDerivWithinAt (s := Ici 0)
+  rwa [neg_zero, Real.exp_zero] at h
+
+/-- `U` is nondecreasing on `[0, ∞)`. -/
+theorem expU_monotoneOn : MonotoneOn expU (Ici 0) := fun c _ d _ h => by
+  have := Real.exp_le_exp.2 (neg_le_neg h)
+  simp only [expU]
+  linarith
+
+/-- `U` is strictly concave on `[0, ∞)` (`e^{−c}` is strictly convex). -/
+theorem expU_strictConcaveOn : StrictConcaveOn ℝ (Ici 0) expU := by
+  refine ⟨convex_Ici 0, fun x _ y _ hxy a b ha hb hab => ?_⟩
+  have h := strictConvexOn_exp.2 (mem_univ (-x)) (mem_univ (-y))
+    (fun h => hxy (neg_injective h)) ha hb hab
+  simp only [smul_eq_mul] at h ⊢
+  simp only [expU]
+  have e : -(a * x + b * y) = a * -x + b * -y := by ring
+  rw [e]
+  nlinarith
+
+/-- `|U| ≤ 1` on `[0, ∞)`. -/
+theorem abs_expU_le {c : ℝ} (hc : 0 ≤ c) : |expU c| ≤ 1 := by
+  have h1 : Real.exp (-c) ≤ 1 := Real.exp_le_one_iff.2 (by linarith)
+  have h2 := Real.exp_pos (-c)
+  rw [abs_le]
+  simp only [expU]
+  constructor <;> linarith
+
+/-- The slope of `U` on `[c′, c] ⊆ [0, 1]` is at least `e^{−1}`. -/
+theorem expU_sub_ge {c c' : ℝ} (hcc : c' ≤ c) (hc1 : c ≤ 1) :
+    Real.exp (-1) * (c - c') ≤ expU c - expU c' := by
+  have h1 := Real.add_one_le_exp (c - c')
+  have h2 : Real.exp (-c') = Real.exp (-c) * Real.exp (c - c') := by
+    rw [← Real.exp_add]; ring_nf
+  have h3 : Real.exp (-1) ≤ Real.exp (-c) := Real.exp_le_exp.2 (by linarith)
+  have h4 := Real.exp_pos (-c)
+  simp only [expU]
+  nlinarith
+
+/-- The slope of `U` on `[c′, c] ⊆ [0, ∞)` is at most `1`. -/
+theorem expU_sub_le {c c' : ℝ} (hc' : 0 ≤ c') (hcc : c' ≤ c) : expU c - expU c' ≤ c - c' := by
+  have h1 := Real.add_one_le_exp (-(c - c'))
+  have h2 : Real.exp (-c) = Real.exp (-c') * Real.exp (-(c - c')) := by
+    rw [← Real.exp_add]; ring_nf
+  have h3 : Real.exp (-c') ≤ 1 := Real.exp_le_one_iff.2 (by linarith)
+  have h4 := Real.exp_pos (-c')
+  have h5 : Real.exp (-(c - c')) ≤ 1 := Real.exp_le_one_iff.2 (by linarith)
+  simp only [expU]
+  nlinarith
+
+/-- `e ≤ 5`, i.e. `5 e^{−1} ≥ 1`. -/
+theorem one_le_five_mul_exp_neg_one : 1 ≤ 5 * Real.exp (-1) := by
+  have h1 := Real.add_one_le_exp (-1 / 2)
+  have h2 : Real.exp (-1) = Real.exp (-1 / 2) * Real.exp (-1 / 2) := by
+    rw [← Real.exp_add]; ring_nf
+  nlinarith
+
+/-- The technology `f(k) = 4 + 4√(1 + k)`: `f(0) = 8 > 0`, `f′(0) = 2` finite, on `K = [0, 24]`. -/
+noncomputable def sqrtTech (k : ℝ) : ℝ := 4 + 4 * Real.sqrt (1 + k)
+
+/-- `f` is continuous. -/
+theorem continuous_sqrtTech : Continuous sqrtTech := by
+  unfold sqrtTech
+  fun_prop
+
+/-- `f(0) = 8`. -/
+theorem sqrtTech_zero : sqrtTech 0 = 8 := by
+  simp only [sqrtTech, add_zero, Real.sqrt_one]
+  norm_num
+
+/-- `f′(k) = 2/√(1 + k)` for `k > −1`. -/
+theorem hasDerivAt_sqrtTech {k : ℝ} (hk : -1 < k) :
+    HasDerivAt sqrtTech (4 * (1 / (2 * Real.sqrt (1 + k)) * 1)) k := by
+  have h1 : HasDerivAt (fun x : ℝ => 1 + x) 1 k := (hasDerivAt_id k).const_add 1
+  have h2 := (Real.hasDerivAt_sqrt (by linarith : (1 + k) ≠ 0)).comp k h1
+  have h3 := (h2.const_mul 4).const_add 4
+  exact h3
+
+/-- `f′(0) = 2`. -/
+theorem hasDerivAt_sqrtTech_zero : HasDerivAt sqrtTech 2 0 := by
+  have h := hasDerivAt_sqrtTech (by norm_num : (-1 : ℝ) < 0)
+  rw [add_zero, Real.sqrt_one] at h
+  convert h using 1
+  norm_num
+
+/-- `f` is differentiable with `f′ ≥ 0` on `[0, ∞)`. -/
+theorem sqrtTech_deriv_facts : (∀ k : ℝ, 0 ≤ k → DifferentiableAt ℝ sqrtTech k) ∧
+    ∀ k : ℝ, 0 ≤ k → 0 ≤ deriv sqrtTech k :=
+  ⟨fun _ hk => (hasDerivAt_sqrtTech (by linarith)).differentiableAt, fun k hk => by
+    rw [(hasDerivAt_sqrtTech (by linarith)).deriv]
+    positivity⟩
+
+/-- `f` is concave on `[0, ∞)`. -/
+theorem sqrtTech_concaveOn : ConcaveOn ℝ (Ici 0) sqrtTech := by
+  refine ⟨convex_Ici 0, fun x hx y hy a b ha hb hab => ?_⟩
+  have h := Real.strictConcaveOn_sqrt.concaveOn.2 (mem_Ici.2 (by linarith [mem_Ici.1 hx]) :
+    (1 + x) ∈ Ici 0) (mem_Ici.2 (by linarith [mem_Ici.1 hy]) : (1 + y) ∈ Ici 0) ha hb hab
+  simp only [smul_eq_mul] at h ⊢
+  have e : a * (1 + x) + b * (1 + y) = 1 + (a * x + b * y) := by
+    have : b = 1 - a := by linarith
+    subst this; ring
+  rw [e] at h
+  simp only [sqrtTech]
+  nlinarith
+
+/-- `f` is nondecreasing on `[0, ∞)`. -/
+theorem sqrtTech_monotoneOn {S : Set ℝ} : MonotoneOn sqrtTech S := fun x _ y _ h => by
+  have := Real.sqrt_le_sqrt (by linarith : 1 + x ≤ 1 + y)
+  simp only [sqrtTech]
+  linarith
+
+/-- `0 ≤ f ≤ 24` on `[0, 24]`. -/
+theorem sqrtTech_mem {k : ℝ} (hk : k ∈ Icc (0 : ℝ) 24) : 0 ≤ sqrtTech k ∧ sqrtTech k ≤ 24 := by
+  have h1 := Real.sqrt_nonneg (1 + k)
+  have h2 : Real.sqrt (1 + k) ≤ 5 := by
+    rw [show (5 : ℝ) = Real.sqrt (5 ^ 2) from (Real.sqrt_sq (by norm_num)).symm]
+    exact Real.sqrt_le_sqrt (by linarith [hk.2])
+  simp only [sqrtTech]
+  constructor <;> linarith
+
+/-- `f` is `1`-Lipschitz on `[3, 24]`: `|4√(1 + k) − 4√(1 + k′)| ≤ |k − k′|` since
+`√(1 + k) + √(1 + k′) ≥ 4`. -/
+theorem sqrtTech_lipschitz : ∀ k ∈ Icc (3 : ℝ) 24, ∀ k' ∈ Icc (3 : ℝ) 24,
+    |sqrtTech k - sqrtTech k'| ≤ 1 * |k - k'| := by
+  intro k hk k' hk'
+  set s := Real.sqrt (1 + k) with hs
+  set s' := Real.sqrt (1 + k') with hs'
+  have h2 : ∀ x : ℝ, 3 ≤ x → 2 ≤ Real.sqrt (1 + x) := fun x hx => by
+    rw [show (2 : ℝ) = Real.sqrt (2 ^ 2) from (Real.sqrt_sq (by norm_num)).symm]
+    exact Real.sqrt_le_sqrt (by linarith)
+  have hs2 := h2 k hk.1
+  have hs2' := h2 k' hk'.1
+  have hsq : s ^ 2 = 1 + k := Real.sq_sqrt (by linarith [hk.1])
+  have hsq' : s' ^ 2 = 1 + k' := Real.sq_sqrt (by linarith [hk'.1])
+  have e1 : sqrtTech k - sqrtTech k' = 4 * (s - s') := by simp only [sqrtTech, hs, hs']; ring
+  have e2 : k - k' = (s - s') * (s + s') := by nlinarith
+  rw [e1, e2, abs_mul, abs_mul, abs_of_pos (by norm_num : (0 : ℝ) < 4),
+    abs_of_pos (by linarith : 0 < s + s'), one_mul]
+  rw [mul_comm]
+  exact mul_le_mul_of_nonneg_left (by linarith) (abs_nonneg _)
+
+/-- The slope condition at `0` for `f = sqrtTech` when `b > 1/2`: with `m = (1 + 2b)/(2b)`,
+`b m > 1` and `m < f′(0) = 2`. -/
+theorem sqrtTech_slope {b : ℝ} (hb : 1 / 2 < b) :
+    ∃ m, 1 < b * m ∧ ∀ᶠ y in 𝓝[>] 0, sqrtTech 0 + m * y ≤ sqrtTech y := by
+  have hb0 : 0 < b := by linarith
+  refine ⟨(1 + 2 * b) / (2 * b), ?_, eventually_add_mul_le_of_hasDerivAt hasDerivAt_sqrtTech_zero
+    ?_⟩
+  · rw [mul_div_assoc', lt_div_iff₀ (by positivity)]
+    nlinarith
+  · rw [div_lt_iff₀ (by positivity)]
+    linarith
+
+/-- **The economy `U(c) = 1 − e^{−√c}`, `f(k) = 4 + 4√(1 + k)` on `[0, 24]` satisfies
+`PosOutputInadaHyp`** for every `b ∈ (1/2, 1)`: `f(0) = 8 > 0`, `U′(0+) = ∞`, `b f′(0) = 2b > 1`.
+-/
+theorem sqrtTech_posOutputInadaHyp {b : ℝ} (hb0 : 1 / 2 < b) (hb1 : b < 1) :
+    PosOutputInadaHyp inadaU sqrtTech b 24 where
+  planner :=
+    { b_nonneg := by linarith
+      b_lt_one := hb1
+      kbar_nonneg := by norm_num
+      U_cont := continuous_inadaU.continuousOn
+      U_mono := inadaU_monotoneOn
+      U_strictConcave := inadaU_strictConcaveOn
+      f_cont := continuous_sqrtTech.continuousOn
+      f_concave := sqrtTech_concaveOn.subset Icc_subset_Ici_self (convex_Icc 0 24)
+      f_nonneg := fun _ hk => (sqrtTech_mem hk).1
+      f_le := fun _ hk => (sqrtTech_mem hk).2 }
+  b_pos := by linarith
+  U_inada := inadaU_inada
+  U_diff := fun _ hc => differentiableAt_inadaU hc
+  f_zero_pos := by rw [sqrtTech_zero]; norm_num
+  f_mono := sqrtTech_monotoneOn
+  f_slope := sqrtTech_slope hb0
+
+/-- **The economy `U(c) = 1 − e^{−c}`, `f(k) = 4 + 4√(1 + k)` on `[0, 24]` satisfies
+`FiniteMarginalHyp`** for every `b ∈ (1/2, 1)`: `U′(0) = 1`, `b f′(0) = 2b > 1`, and `f` is
+`1`-Lipschitz on `[3, 24]` with `3 < f(0) = 8` and `b · 1 < 1`. -/
+theorem sqrtTech_finiteMarginalHyp {b : ℝ} (hb0 : 1 / 2 < b) (hb1 : b < 1) :
+    FiniteMarginalHyp expU sqrtTech b 24 where
+  planner :=
+    { b_nonneg := by linarith
+      b_lt_one := hb1
+      kbar_nonneg := by norm_num
+      U_cont := continuous_expU.continuousOn
+      U_mono := expU_monotoneOn
+      U_strictConcave := expU_strictConcaveOn
+      f_cont := continuous_sqrtTech.continuousOn
+      f_concave := sqrtTech_concaveOn.subset Icc_subset_Ici_self (convex_Icc 0 24)
+      f_nonneg := fun _ hk => (sqrtTech_mem hk).1
+      f_le := fun _ hk => (sqrtTech_mem hk).2 }
+  b_pos := by linarith
+  U_deriv_zero := ⟨1, one_pos, hasDerivWithinAt_expU_zero⟩
+  U_diff := fun c _ => (hasDerivAt_expU c).differentiableAt
+  f_mono := sqrtTech_monotoneOn
+  f_slope := sqrtTech_slope hb0
+  f_lip := ⟨3, 1, by norm_num, by rw [sqrtTech_zero]; norm_num, zero_le_one, by linarith,
+    sqrtTech_lipschitz⟩
+
+/-- **Exercise 18.1 on all of `K` in the economy `U(c) = 1 − e^{−√c}`, `f(k) = 4 + 4√(1 + k)`**
+(`U′(0+) = ∞`, `f(0) = 8 > 0`), for `β ∈ (1/2, 1)`: the constructed policy is interior on
+`[0, 24]`, the transversality condition holds from every `k ∈ [0, 24]` including `k = 0`, and the
+bounded solution `V` of (2) on `[0, ∞) × [0, 24]` has `V(k, k; g) = v(k)` and `G(k, k; g) = g(k)`.
+-/
+theorem sqrtTech_inada_ex_18_1 {β : ℝ} (hβ0 : 1 / 2 < β) (hβ1 : β < 1) :
+    ∃ I : PosOutputInadaHyp inadaU sqrtTech β 24,
+      (∀ k ∈ Icc (0 : ℝ) 24, 0 < plannerPolicy I.planner k ∧
+        plannerPolicy I.planner k < sqrtTech k) ∧
+      (∀ k ∈ Icc (0 : ℝ) 24, Tendsto (fun t => β ^ t *
+        deriv inadaU (sqrtTech ((plannerPolicy I.planner)^[t] k) -
+          plannerPolicy I.planner ((plannerPolicy I.planner)^[t] k)) *
+          deriv sqrtTech ((plannerPolicy I.planner)^[t] k) * (plannerPolicy I.planner)^[t] k)
+            atTop (𝓝 0)) ∧
+      ∃ V : ℝ → ℝ → ℝ, ∃ M, (∀ x, 0 ≤ x → ∀ k ∈ Icc (0 : ℝ) 24, |V x k| ≤ M) ∧
+        SolvesBellman inadaU (fun k => sqrtTech k - k * deriv sqrtTech k) (deriv sqrtTech)
+          (plannerPolicy I.planner) V β (Icc 0 24) ∧
+        ∀ k ∈ Icc (0 : ℝ) 24, V k k = plannerValue I.planner k ∧
+          ∀ y ∈ feasY (fun k => sqrtTech k - k * deriv sqrtTech k) (deriv sqrtTech) k k,
+            (inadaU (sqrtTech k + (k - k) * deriv sqrtTech k - y) +
+              β * V y (plannerPolicy I.planner k) = V k k ↔ y = plannerPolicy I.planner k) := by
+  have I := sqrtTech_posOutputInadaHyp hβ0 hβ1
+  obtain ⟨hint, -, -, -, -, -, htvc, V, M, hVb, hsol, -, hall, -⟩ := I.ex_18_1 (B₀ := 1)
+    (fun c _ => abs_inadaU_le c) sqrtTech_concaveOn (fun k hk => sqrtTech_deriv_facts.1 k hk.1)
+    (fun k hk => sqrtTech_deriv_facts.2 k hk.1)
+  exact ⟨I, hint, htvc, V, M, hVb, hsol, fun k hk => ⟨(hall k hk).1, (hall k hk).2.2⟩⟩
+
+/-- **The indirect equilibrium on all of `K` in the economy `U(c) = 1 − e^{−√c}`,
+`f(k) = 4 + 4√(1 + k)`** (p. 546), for `β < 1`, `θ ∈ [0, 1)` with `(1 − θ)β > 1/2`: the
+pseudo-planner's policy `ĥ` is interior on `[0, 24]`, the individual's transversality condition
+holds from every `k ∈ [0, 24]`, and `H(k, k; ĥ) = ĥ(k)` there. -/
+theorem sqrtTech_inada_equilibrium {β θ : ℝ} (hb : 1 / 2 < (1 - θ) * β) (hβ1 : β < 1)
+    (hθ0 : 0 ≤ θ) (hθ1 : θ < 1) :
+    ∃ I : PosOutputInadaHyp inadaU sqrtTech ((1 - θ) * β) 24,
+      (∀ k ∈ Icc (0 : ℝ) 24, 0 < plannerPolicy I.planner k ∧
+        plannerPolicy I.planner k < sqrtTech k) ∧
+      (∀ k ∈ Icc (0 : ℝ) 24, Tendsto (fun t => β ^ t *
+        ((1 - θ) * deriv sqrtTech ((plannerPolicy I.planner)^[t] k)) *
+        deriv inadaU (sqrtTech ((plannerPolicy I.planner)^[t] k) -
+          plannerPolicy I.planner ((plannerPolicy I.planner)^[t] k)) *
+          (plannerPolicy I.planner)^[t] k) atTop (𝓝 0)) ∧
+      ∃ W : ℝ → ℝ → ℝ, ∃ M, (∀ x, 0 ≤ x → ∀ k ∈ Icc (0 : ℝ) 24, |W x k| ≤ M) ∧
+        SolvesBellman inadaU (fun k => sqrtTech k - (1 - θ) * k * deriv sqrtTech k)
+          (fun k => (1 - θ) * deriv sqrtTech k) (plannerPolicy I.planner) W β (Icc 0 24) ∧
+        ∀ k ∈ Icc (0 : ℝ) 24, ∀ y ∈ feasY (fun k => sqrtTech k - (1 - θ) * k * deriv sqrtTech k)
+            (fun k => (1 - θ) * deriv sqrtTech k) k k,
+          (inadaU (sqrtTech k + (1 - θ) * (k - k) * deriv sqrtTech k - y) +
+            β * W y (plannerPolicy I.planner k) = W k k ↔ y = plannerPolicy I.planner k) := by
+  have hb1 : (1 - θ) * β < 1 := by nlinarith
+  have I := sqrtTech_posOutputInadaHyp hb hb1
+  obtain ⟨hint, -, -, -, -, -, -, htvc, W, M, hWb, hsol, -, hall, -⟩ :=
+    I.indirect_equilibrium (B₀ := 1) hβ1 hθ0 hθ1 (fun c _ => abs_inadaU_le c) sqrtTech_concaveOn
+      (fun k hk => sqrtTech_deriv_facts.1 k hk.1) (fun k hk => sqrtTech_deriv_facts.2 k hk.1)
+  exact ⟨I, hint, htvc, W, M, hWb, hsol, fun k hk => (hall k hk).2⟩
+
+/-- **Exercise 18.1 on all of `K` in the economy `U(c) = 1 − e^{−c}`, `f(k) = 4 + 4√(1 + k)`**
+(`U′(0) = 1` finite, `f(0) = 8 > 0`), for `β ∈ (1/2, 1)`: as `sqrtTech_inada_ex_18_1`. -/
+theorem sqrtTech_finite_ex_18_1 {β : ℝ} (hβ0 : 1 / 2 < β) (hβ1 : β < 1) :
+    ∃ I : FiniteMarginalHyp expU sqrtTech β 24,
+      (∀ k ∈ Icc (0 : ℝ) 24, 0 < plannerPolicy I.planner k ∧
+        plannerPolicy I.planner k < sqrtTech k) ∧
+      (∀ k ∈ Icc (0 : ℝ) 24, Tendsto (fun t => β ^ t *
+        deriv expU (sqrtTech ((plannerPolicy I.planner)^[t] k) -
+          plannerPolicy I.planner ((plannerPolicy I.planner)^[t] k)) *
+          deriv sqrtTech ((plannerPolicy I.planner)^[t] k) * (plannerPolicy I.planner)^[t] k)
+            atTop (𝓝 0)) ∧
+      ∃ V : ℝ → ℝ → ℝ, ∃ M, (∀ x, 0 ≤ x → ∀ k ∈ Icc (0 : ℝ) 24, |V x k| ≤ M) ∧
+        SolvesBellman expU (fun k => sqrtTech k - k * deriv sqrtTech k) (deriv sqrtTech)
+          (plannerPolicy I.planner) V β (Icc 0 24) ∧
+        ∀ k ∈ Icc (0 : ℝ) 24, V k k = plannerValue I.planner k ∧
+          ∀ y ∈ feasY (fun k => sqrtTech k - k * deriv sqrtTech k) (deriv sqrtTech) k k,
+            (expU (sqrtTech k + (k - k) * deriv sqrtTech k - y) +
+              β * V y (plannerPolicy I.planner k) = V k k ↔ y = plannerPolicy I.planner k) := by
+  have I := sqrtTech_finiteMarginalHyp hβ0 hβ1
+  obtain ⟨hint, -, -, -, -, -, htvc, V, M, hVb, hsol, -, hall, -⟩ := I.ex_18_1 (B₀ := 1)
+    (fun _ hc => abs_expU_le hc) sqrtTech_concaveOn (fun k hk => sqrtTech_deriv_facts.1 k hk.1)
+    (fun k hk => sqrtTech_deriv_facts.2 k hk.1)
+  exact ⟨I, hint, htvc, V, M, hVb, hsol, fun k hk => ⟨(hall k hk).1, (hall k hk).2.2⟩⟩
+
+/-- **The indirect equilibrium on all of `K` in the economy `U(c) = 1 − e^{−c}`,
+`f(k) = 4 + 4√(1 + k)`** (p. 546), for `β < 1`, `θ ∈ [0, 1)` with `(1 − θ)β > 1/2`: as
+`sqrtTech_inada_equilibrium`. -/
+theorem sqrtTech_finite_equilibrium {β θ : ℝ} (hb : 1 / 2 < (1 - θ) * β) (hβ1 : β < 1)
+    (hθ0 : 0 ≤ θ) (hθ1 : θ < 1) :
+    ∃ I : FiniteMarginalHyp expU sqrtTech ((1 - θ) * β) 24,
+      (∀ k ∈ Icc (0 : ℝ) 24, 0 < plannerPolicy I.planner k ∧
+        plannerPolicy I.planner k < sqrtTech k) ∧
+      (∀ k ∈ Icc (0 : ℝ) 24, Tendsto (fun t => β ^ t *
+        ((1 - θ) * deriv sqrtTech ((plannerPolicy I.planner)^[t] k)) *
+        deriv expU (sqrtTech ((plannerPolicy I.planner)^[t] k) -
+          plannerPolicy I.planner ((plannerPolicy I.planner)^[t] k)) *
+          (plannerPolicy I.planner)^[t] k) atTop (𝓝 0)) ∧
+      ∃ W : ℝ → ℝ → ℝ, ∃ M, (∀ x, 0 ≤ x → ∀ k ∈ Icc (0 : ℝ) 24, |W x k| ≤ M) ∧
+        SolvesBellman expU (fun k => sqrtTech k - (1 - θ) * k * deriv sqrtTech k)
+          (fun k => (1 - θ) * deriv sqrtTech k) (plannerPolicy I.planner) W β (Icc 0 24) ∧
+        ∀ k ∈ Icc (0 : ℝ) 24, ∀ y ∈ feasY (fun k => sqrtTech k - (1 - θ) * k * deriv sqrtTech k)
+            (fun k => (1 - θ) * deriv sqrtTech k) k k,
+          (expU (sqrtTech k + (1 - θ) * (k - k) * deriv sqrtTech k - y) +
+            β * W y (plannerPolicy I.planner k) = W k k ↔ y = plannerPolicy I.planner k) := by
+  have hb1 : (1 - θ) * β < 1 := by nlinarith
+  have I := sqrtTech_finiteMarginalHyp hb hb1
+  obtain ⟨hint, -, -, -, -, -, -, htvc, W, M, hWb, hsol, -, hall, -⟩ :=
+    I.indirect_equilibrium (B₀ := 1) hβ1 hθ0 hθ1 (fun _ hc => abs_expU_le hc) sqrtTech_concaveOn
+      (fun k hk => sqrtTech_deriv_facts.1 k hk.1) (fun k hk => sqrtTech_deriv_facts.2 k hk.1)
+  exact ⟨I, hint, htvc, W, M, hWb, hsol, fun k hk => (hall k hk).2⟩
+
+/-- **The slope condition is needed when `U′(0+) = ∞`** (counterexample for
+`PosOutputInadaHyp`). For `b ∈ (0, 1)`, `U(c) = 1 − e^{−√c}` and the constant technology
+`f ≡ 1` on `K = [0, 1]` satisfy `PlannerHyp`, `U′(0+) = ∞`, `f(0) > 0` and monotonicity, but not
+the slope condition at `0`; and the constructed policy is `g ≡ 0` on `K`, so it is not interior
+anywhere. Hence `f(0) > 0` with `U′(0+) = ∞` alone does not give interiority. -/
+theorem inada_const_counterexample {b : ℝ} (hb0 : 0 < b) (hb1 : b < 1) :
+    ∃ P : PlannerHyp inadaU (fun _ => 1) b 1,
+      Tendsto (fun c => (inadaU c - inadaU 0) / c) (𝓝[>] 0) atTop ∧
+      MonotoneOn (fun _ : ℝ => (1 : ℝ)) (Icc 0 1) ∧
+      (¬ ∃ m, 1 < b * m ∧ ∀ᶠ y in 𝓝[>] (0 : ℝ), (1 : ℝ) + m * y ≤ 1) ∧
+      ∀ k ∈ Icc (0 : ℝ) 1, plannerPolicy P k = 0 := by
+  let P : PlannerHyp inadaU (fun _ => 1) b 1 :=
+    { b_nonneg := hb0.le
+      b_lt_one := hb1
+      kbar_nonneg := zero_le_one
+      U_cont := continuous_inadaU.continuousOn
+      U_mono := inadaU_monotoneOn
+      U_strictConcave := inadaU_strictConcaveOn
+      f_cont := continuousOn_const
+      f_concave := concaveOn_const 1 (convex_Icc 0 1)
+      f_nonneg := fun _ _ => zero_le_one
+      f_le := fun _ _ => le_rfl }
+  refine ⟨P, inadaU_inada, fun _ _ _ _ _ => le_rfl, ?_, fun k hk =>
+    P.plannerPolicy_eq_zero_of_const (a := 1) (fun _ _ => rfl) hk⟩
+  rintro ⟨m, hm, hev⟩
+  have hm0 : 0 < m := by nlinarith
+  obtain ⟨y, hy1, hy2⟩ := (hev.and self_mem_nhdsWithin).exists
+  have := mul_pos hm0 (mem_Ioi.1 hy2)
+  linarith
+
+/-- **The slope condition is needed when `U′(0)` is finite** (counterexample for
+`FiniteMarginalHyp`). For `b ∈ (0, 1)`, `U(c) = 1 − e^{−c}` (`U′(0) = 1`) and `f ≡ 1` on
+`K = [0, 1]` satisfy every hypothesis of `FiniteMarginalHyp` except the slope condition at `0`
+(the Lipschitz condition holds with `r = 1/2`, `φ = 0`), and the constructed policy is `g ≡ 0`. -/
+theorem finite_const_counterexample {b : ℝ} (hb0 : 0 < b) (hb1 : b < 1) :
+    ∃ P : PlannerHyp expU (fun _ => 1) b 1,
+      HasDerivWithinAt expU 1 (Ici 0) 0 ∧ MonotoneOn (fun _ : ℝ => (1 : ℝ)) (Icc 0 1) ∧
+      (∀ k ∈ Icc (1 / 2 : ℝ) 1, ∀ k' ∈ Icc (1 / 2 : ℝ) 1,
+        |(fun _ : ℝ => (1 : ℝ)) k - (fun _ : ℝ => (1 : ℝ)) k'| ≤ 0 * |k - k'|) ∧
+      (¬ ∃ m, 1 < b * m ∧ ∀ᶠ y in 𝓝[>] (0 : ℝ), (1 : ℝ) + m * y ≤ 1) ∧
+      ∀ k ∈ Icc (0 : ℝ) 1, plannerPolicy P k = 0 := by
+  let P : PlannerHyp expU (fun _ => 1) b 1 :=
+    { b_nonneg := hb0.le
+      b_lt_one := hb1
+      kbar_nonneg := zero_le_one
+      U_cont := continuous_expU.continuousOn
+      U_mono := expU_monotoneOn
+      U_strictConcave := expU_strictConcaveOn
+      f_cont := continuousOn_const
+      f_concave := concaveOn_const 1 (convex_Icc 0 1)
+      f_nonneg := fun _ _ => zero_le_one
+      f_le := fun _ _ => le_rfl }
+  refine ⟨P, hasDerivWithinAt_expU_zero, fun _ _ _ _ _ => le_rfl, fun _ _ _ _ => by simp, ?_,
+    fun k hk => P.plannerPolicy_eq_zero_of_const (a := 1) (fun _ _ => rfl) hk⟩
+  rintro ⟨m, hm, hev⟩
+  have hm0 : 0 < m := by nlinarith
+  obtain ⟨y, hy1, hy2⟩ := (hev.and self_mem_nhdsWithin).exists
+  have := mul_pos hm0 (mem_Ioi.1 hy2)
+  linarith
+
+/-- The technology `f(k) = min{1/100 + 10k, 1}`: `f(0) > 0`, very productive below `k = 99/1000`,
+flat above. -/
+noncomputable def cornerF (k : ℝ) : ℝ := min (1 / 100 + 10 * k) 1
+
+/-- `f(k) = 1/100 + 10k` for `k ≤ 99/1000`. -/
+theorem cornerF_of_le {k : ℝ} (hk : k ≤ 99 / 1000) : cornerF k = 1 / 100 + 10 * k :=
+  min_eq_left (by linarith)
+
+/-- `f` is nondecreasing. -/
+theorem cornerF_monotoneOn {S : Set ℝ} : MonotoneOn cornerF S := fun _ _ _ _ h =>
+  min_le_min (by linarith) le_rfl
+
+/-- `U(c) = 1 − e^{−c}`, `f(k) = min{1/100 + 10k, 1}`, `b = 1/2` and `K = [0, 1]` satisfy
+`PlannerHyp`. -/
+theorem cornerF_plannerHyp : PlannerHyp expU cornerF (1 / 2) 1 where
+  b_nonneg := by norm_num
+  b_lt_one := by norm_num
+  kbar_nonneg := zero_le_one
+  U_cont := continuous_expU.continuousOn
+  U_mono := expU_monotoneOn
+  U_strictConcave := expU_strictConcaveOn
+  f_cont := (by unfold cornerF; fun_prop : Continuous cornerF).continuousOn
+  f_concave := by
+    refine ⟨convex_Icc 0 1, fun x _ y _ a b ha hb hab => ?_⟩
+    simp only [smul_eq_mul, cornerF]
+    have h1 := mul_le_mul_of_nonneg_left (min_le_left (1 / 100 + 10 * x) 1) ha
+    have h2 := mul_le_mul_of_nonneg_left (min_le_left (1 / 100 + 10 * y) 1) hb
+    have h3 := mul_le_mul_of_nonneg_left (min_le_right (1 / 100 + 10 * x) 1) ha
+    have h4 := mul_le_mul_of_nonneg_left (min_le_right (1 / 100 + 10 * y) 1) hb
+    refine le_min ?_ ?_
+    · have : b = 1 - a := by linarith
+      subst this
+      nlinarith
+    · nlinarith
+  f_nonneg := fun _ hk => le_min (by linarith [hk.1]) zero_le_one
+  f_le := fun _ _ => min_le_right _ _
+
+/-- **Without a bound on the return to saving, a finite `U′(0)` lets the policy hit `g = f`**
+(counterexample for `FiniteMarginalHyp`). The economy `U(c) = 1 − e^{−c}` (`U′(0) = 1`),
+`f(k) = min{1/100 + 10k, 1}`, `b = 1/2` on `K = [0, 1]` satisfies `PlannerHyp`, `f(0) > 0`,
+monotonicity and the slope condition at `0` (`b · 10 > 1`), but no `0 ≤ r < f(0)` and `φ` with
+`b φ < 1` make `f` `φ`-Lipschitz on `[r, 1]`; and on `[0, 1/1000]` the constructed policy saves
+all output, `g(k) = f(k)`, so it is not interior. (Saving `y` more raises `v` by at least
+`10 e^{−1} y`, worth `5 e^{−1} y ≥ y` today, while consuming `y` raises utility by at most `y`.) -/
+theorem corner_counterexample :
+    ∃ P : PlannerHyp expU cornerF (1 / 2) 1,
+      HasDerivWithinAt expU 1 (Ici 0) 0 ∧ 0 < cornerF 0 ∧ MonotoneOn cornerF (Icc 0 1) ∧
+      (∃ m, 1 < 1 / 2 * m ∧ ∀ᶠ y in 𝓝[>] 0, cornerF 0 + m * y ≤ cornerF y) ∧
+      (¬ ∃ r φ, 0 ≤ r ∧ r < cornerF 0 ∧ 0 ≤ φ ∧ 1 / 2 * φ < 1 ∧
+        ∀ k ∈ Icc r 1, ∀ k' ∈ Icc r 1, |cornerF k - cornerF k'| ≤ φ * |k - k'|) ∧
+      (∀ k ∈ Icc (0 : ℝ) (1 / 1000), plannerPolicy P k = cornerF k) ∧
+      ¬ ∀ k ∈ Icc (0 : ℝ) 1, plannerPolicy P k < cornerF k := by
+  set P := cornerF_plannerHyp with hP
+  have h0 : cornerF 0 = 1 / 100 := by rw [cornerF_of_le (by norm_num)]; norm_num
+  -- the marginal value of capital below `99/1000` is at least `10 e^{−1}`
+  have hgain : ∀ y' y : ℝ, 0 ≤ y' → y' ≤ y → y ≤ 99 / 1000 →
+      10 * Real.exp (-1) * (y - y') ≤ plannerValue P y - plannerValue P y' := by
+    intro y' y hy' hyy hy
+    have hy'K : y' ∈ Icc (0 : ℝ) 1 := ⟨hy', by linarith⟩
+    have hyK : y ∈ Icc (0 : ℝ) 1 := ⟨by linarith, by linarith⟩
+    obtain ⟨hz, -, hv'⟩ := P.plannerPolicy_spec hy'K
+    obtain ⟨hgy, hmy, hvy⟩ := P.plannerPolicy_spec hyK
+    have hfyy : cornerF y' ≤ cornerF y :=
+      cornerF_monotoneOn (S := univ) (mem_univ _) (mem_univ _) hyy
+    have h1 := isMaxOn_iff.1 hmy (plannerPolicy P y') ⟨hz.1, hz.2.trans hfyy⟩
+    change expU (cornerF y - plannerPolicy P y') + 1 / 2 * plannerValue P (plannerPolicy P y') ≤
+      expU (cornerF y - plannerPolicy P y) + 1 / 2 * plannerValue P (plannerPolicy P y) at h1
+    have h2 := expU_sub_ge (c := cornerF y - plannerPolicy P y')
+      (c' := cornerF y' - plannerPolicy P y') (by linarith)
+      (by linarith [hz.1, P.f_le y hyK])
+    have hd : cornerF y - plannerPolicy P y' - (cornerF y' - plannerPolicy P y') =
+        10 * (y - y') := by
+      rw [cornerF_of_le hy, cornerF_of_le (hyy.trans hy)]; ring
+    rw [hd] at h2
+    linarith
+  have hlast : ∀ k ∈ Icc (0 : ℝ) (1 / 1000), plannerPolicy P k = cornerF k := by
+    intro k hk
+    have hkK : k ∈ Icc (0 : ℝ) 1 := ⟨hk.1, by linarith [hk.2]⟩
+    set Y := cornerF k with hYdef
+    have hY : Y = 1 / 100 + 10 * k := cornerF_of_le (by linarith [hk.2])
+    have hY1 : Y ≤ 99 / 1000 := by rw [hY]; linarith [hk.2]
+    have hY0 : 0 ≤ Y := by rw [hY]; linarith [hk.1]
+    have hmaxY : ∀ y' ∈ Icc 0 Y, expU (Y - y') + 1 / 2 * plannerValue P y' ≤
+        expU (Y - Y) + 1 / 2 * plannerValue P Y := by
+      intro y' hy'
+      have h1 := expU_sub_le (c := Y - y') (c' := 0) le_rfl (by linarith [hy'.2])
+      have h2 := hgain y' Y hy'.1 hy'.2 hY1
+      have h3 := one_le_five_mul_exp_neg_one
+      have h4 : 0 ≤ Y - y' := by linarith [hy'.2]
+      rw [sub_self]
+      nlinarith
+    obtain ⟨hg, hmax, hv⟩ := P.plannerPolicy_spec hkK
+    have h1 := hmaxY _ hg
+    have h2 := isMaxOn_iff.1 hmax Y ⟨hY0, le_rfl⟩
+    change expU (Y - Y) + 1 / 2 * plannerValue P Y ≤
+      expU (Y - plannerPolicy P k) + 1 / 2 * plannerValue P (plannerPolicy P k) at h2
+    exact ((P.plannerPolicy_unique hkK ⟨hY0, le_rfl⟩).1 (by linarith)).symm
+  refine ⟨P, hasDerivWithinAt_expU_zero, by rw [h0]; norm_num, cornerF_monotoneOn,
+    ⟨10, by norm_num, ?_⟩, ?_, hlast, fun h => ?_⟩
+  · filter_upwards [Ioo_mem_nhdsGT (by norm_num : (0 : ℝ) < 99 / 1000)] with y hy
+    rw [h0, cornerF_of_le hy.2.le]
+  · rintro ⟨r, φ, hr0, hr, hφ0, hφ, hL⟩
+    rw [h0] at hr
+    have := hL (1 / 50) ⟨by linarith, by norm_num⟩ (1 / 100) ⟨by linarith, by norm_num⟩
+    rw [cornerF_of_le (by norm_num), cornerF_of_le (by norm_num)] at this
+    norm_num at this
+    linarith
+  · have h1 := h 0 ⟨le_rfl, zero_le_one⟩
+    rw [hlast 0 ⟨le_rfl, by norm_num⟩] at h1
+    exact lt_irrefl _ h1
+
+/-- **The economy `U(c) = 1 − e^{−√c}`, `f(k) = 1 + √k` on `K = [0, 4]` satisfies
+`PosOutputInadaHyp`** for every `b ∈ (0, 1)`: `f(0) = 1 > 0`, and `f′(0+) = ∞` gives the slope
+condition with `m = 2/b` (`f(y) − f(0) = √y ≥ m y` for `y ≤ 1/m²`). -/
+theorem rootTech_posOutputInadaHyp {b : ℝ} (hb0 : 0 < b) (hb1 : b < 1) :
+    PosOutputInadaHyp inadaU (fun k => 1 + Real.sqrt k) b 4 where
+  planner :=
+    { b_nonneg := hb0.le
+      b_lt_one := hb1
+      kbar_nonneg := by norm_num
+      U_cont := continuous_inadaU.continuousOn
+      U_mono := inadaU_monotoneOn
+      U_strictConcave := inadaU_strictConcaveOn
+      f_cont := (continuous_const.add Real.continuous_sqrt).continuousOn
+      f_concave := (concaveOn_const 1 (convex_Icc 0 4)).add
+        (Real.strictConcaveOn_sqrt.concaveOn.subset Icc_subset_Ici_self (convex_Icc 0 4))
+      f_nonneg := fun k _ => by have := Real.sqrt_nonneg k; linarith
+      f_le := fun k hk => by
+        have h2 : Real.sqrt k ≤ 2 := by
+          rw [show (2 : ℝ) = Real.sqrt (2 ^ 2) from (Real.sqrt_sq (by norm_num)).symm]
+          exact Real.sqrt_le_sqrt (by linarith [hk.2])
+        linarith }
+  b_pos := hb0
+  U_inada := inadaU_inada
+  U_diff := fun _ hc => differentiableAt_inadaU hc
+  f_zero_pos := by simp
+  f_mono := fun x _ y _ h => by
+    have := Real.sqrt_le_sqrt h
+    dsimp only
+    linarith
+  f_slope := by
+    refine ⟨2 / b, by rw [mul_div_cancel₀ _ hb0.ne']; norm_num, ?_⟩
+    have hδ : 0 < (b / 2) ^ 2 := by positivity
+    filter_upwards [Ioo_mem_nhdsGT hδ] with y hy
+    set s := Real.sqrt y with hs
+    have hs0 : 0 ≤ s := Real.sqrt_nonneg y
+    have hsq : s ^ 2 = y := Real.sq_sqrt hy.1.le
+    have hsb : s < b / 2 := by nlinarith [hy.2]
+    have hm : 2 / b * s ≤ 1 := by
+      rw [div_mul_eq_mul_div, div_le_one hb0]
+      linarith
+    simp only [Real.sqrt_zero, add_zero]
+    rw [← hsq]
+    nlinarith
+
+/-- **Interiority on all of `K = [0, 4]` in the economy `U(c) = 1 − e^{−√c}`, `f(k) = 1 + √k`**
+for every `b ∈ (0, 1)`: `0 < g(k) < f(k)`, including at `k = 0` (contrast
+`InteriorHyp.not_interior_zero` for `f(k) = √k`). -/
+theorem rootTech_interior {b : ℝ} (hb0 : 0 < b) (hb1 : b < 1) :
+    ∀ k ∈ Icc (0 : ℝ) 4, 0 < plannerPolicy (rootTech_posOutputInadaHyp hb0 hb1).planner k ∧
+      plannerPolicy (rootTech_posOutputInadaHyp hb0 hb1).planner k < 1 + Real.sqrt k :=
+  fun _ hk => (rootTech_posOutputInadaHyp hb0 hb1).policy_interior hk
+
+end StokeyLucasPrescott.EquilibriaWithDistortions
+
+/-
+Copyright (c) 2026 Robert Kirkby. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Robert Kirkby
+-/
+
+/-!
 # A local approach based on first-order conditions: the setting
 
 SLP §18.2, pp. 547–549. One-sector growth with a flat tax `θ` on capital income whose proceeds
@@ -12158,6 +16179,137 @@ set_option linter.style.longLine false
 #print axioms StokeyLucasPrescott.EquilibriaWithDistortions.contDiff_fL
 #print axioms StokeyLucasPrescott.EquilibriaWithDistortions.modelL
 #print axioms StokeyLucasPrescott.EquilibriaWithDistortions.prop_18_5_bound_counterexample
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.UniformAnchor
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.StrongFeller
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.Tit
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.Tit_succ
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.isInFc_Tit
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.Tit_le_succ
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.psi_continuous_shock
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.f'_continuous_shock
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.exists_psi_zero_lb
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.exists_f'_zero_ub
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.exists_gap_lb
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.U'_psi_le
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.Rc_le
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.Tit_U'_le
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.ConsFloor
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.exists_cons_lb
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.consFloor_of_uniformAnchor
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.lfpc
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.tendsto_Tit
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.IsInFc.abs_sub_le
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.lfpc_abs_sub_le
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.lfpc_continuousOn
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.lfpc_nonneg
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.lfpc_mono
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.lfpc_mono_sub
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.lfpc_cons_lb
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.abs_G_le
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.tendsto_G_Tit
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.measurable_G_lfpc
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.integrable_G_lfpc
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.tendsto_Rc_Tit
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.isEulerRHS_lfpc
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.Tc_lfpc
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.Tit_le_of_super
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.lfpc_le_of_super
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.Tc_continuousOn_of
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.isInFc_lfpc
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.lfpc_euler_KT
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.lfpc_euler
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.ex_18_9_borel_equilibrium
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.ex_18_9_exists_equilibrium
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.ex_18_9_equilibrium
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.uniformAnchor_iff
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.uniformAnchor_of_f'_eq
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.uniformAnchor_of_identical
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.strongFeller_of_const
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.exB
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.exB_pos
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.exB_le
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.exB_h3
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.exTech
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.exTech_psi
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.exTech_f'
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.exTech_kbar
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.exB_continuous
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.exCont
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.exCont_tech_ne
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.exCont_uniformAnchor
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.exCont_strongFeller
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.exCont_exists_equilibrium
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.β_pos
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.β_lt_one
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.θ_pos
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.θ_lt_one
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.U_cont
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.U_strictMono
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.U_strictConcave
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.U_deriv
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.Phi
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.f_eq
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.Phi_le_psi
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.Phi_sub_gt
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.Phi_le
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.Phi_zero
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.Phi_continuousOn
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.Phi_concave
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.Phi_le_B
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.exists_Phi_lb
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.Phi_pos
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.Phi_cont
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.VS
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.vE
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.vE_continuous
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.vE_continuous_shock
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.abs_vE_le
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.abs_vE_sub_le
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.vE_of_mem
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.EV
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.integrable_vE
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.integral_le_add
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.EV_le_add
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.EV_continuous
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.clampUnit
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.clampUnit_of_mem
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.clampUnit_mem
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.obj
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.plBell
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.obj_continuous
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.plBell_continuous
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.plBellOp
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.obj_image_isCompact
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.obj_le_plBell
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.exists_plBell_eq
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.plBell_le
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.obj_le_obj_add
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.dist_plBellOp_le
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.plBellOp_contracting
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.Vstar
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.vE_Vstar
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.IsConc
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.isConc_zero
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.IsConc.concave_EV
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.IsConc.plBellOp
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.isConc_iterate
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.isConc_Vstar
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.pz
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.pz_spec
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.pc
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.pz_mem
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.exists_pc_lb
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.pc_pos
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.Phi_continuous_shock
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.IsInFc.Tc_floor
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.Tit_floor
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.consFloor
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.lfpc_floor
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.ex_18_9_borel_existence
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.ex_18_9_borel_euler_KT
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.ex_18_9_borel_euler
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.ex_18_9_existence
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.ex_18_9_existence_euler
 #print axioms StokeyLucasPrescott.EquilibriaWithDistortions.StochModel
 #print axioms StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.mk
 #print axioms StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.tech
@@ -12233,6 +16385,70 @@ set_option linter.style.longLine false
 #print axioms StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.identical_tech_fixed
 #print axioms StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.crossState_of_identical
 #print axioms StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.exists_nondegenerate_equilibrium_identical
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.β_pos'
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.β_lt_one'
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.θ_mem
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.U_cont
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.U_strictMono
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.U_strictConcave
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.U_deriv
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.Phi
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.Phi_le_psi
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.Phi_sub_gt
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.Phi_lt
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.Phi_le
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.Phi_pos
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.Phi_continuousOn
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.Phi_concave
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.Phi_le_B
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.VSpace
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.vE
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.vE_continuous
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.abs_vE_le
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.abs_vE_sub_le
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.obj
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.clamp01
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.clamp01_of_mem
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.clamp01_mem
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.plBell
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.obj_continuous
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.plBell_continuous
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.plBellOp
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.obj_image_isCompact
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.obj_le_plBell
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.exists_plBell_eq
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.plBell_le
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.obj_le_obj_add
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.dist_plBellOp_le
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.plBellOp_contracting
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.Vstar
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.vE_Vstar
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.IsConc
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.isConc_zero
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.IsConc.plBellOp
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.isConc_iterate
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.isConc_Vstar
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.pz
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.pz_spec
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.pc
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.pz_mem
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.pc_pos
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.pc_euler_delta
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.pc_euler
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.IsInFs.Ts_floor
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.Tsit_floor
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.lfp_floor
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.lfp_lt_psi
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.lfp_not_Zs
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.exists_nondegenerate_super
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.exists_nondegenerate_equilibrium_KT
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.exists_nondegenerate_equilibrium
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.crossState_of_persistent
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.stochJ_nondegenerate
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.stochP
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.stochP_tech_ne
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.stochP_crossState
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.stochP_equilibrium
 #print axioms StokeyLucasPrescott.EquilibriaWithDistortions.consPath
 #print axioms StokeyLucasPrescott.EquilibriaWithDistortions.IndivFeasible
 #print axioms StokeyLucasPrescott.EquilibriaWithDistortions.indivValues
@@ -12386,6 +16602,88 @@ set_option linter.style.longLine false
 #print axioms StokeyLucasPrescott.EquilibriaWithDistortions.inada_example_interior
 #print axioms StokeyLucasPrescott.EquilibriaWithDistortions.inada_example_ex_18_1
 #print axioms StokeyLucasPrescott.EquilibriaWithDistortions.inada_example_equilibrium
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.PlannerHyp.sSup_le_sSup_add
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.PlannerHyp.solvesPlanner_unique
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.PlannerHyp.solvesPseudoPlanner_unique
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.PlannerHyp.plannerOp_fixedPoint_unique
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.PlannerHyp.solvesPlanner_not_unique_off_K
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.PlannerHyp.solvesPlanner_policy
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.PlannerHyp.U_sub_le_of_hasDerivWithinAt
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.PlannerHyp.deriv_U_pos_of_differentiableAt
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.PlannerHyp.deriv_U_anti
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.eventually_add_mul_le_of_hasDerivAt
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.tendsto_const_mul_nhdsGT_zero
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.tendsto_neg_nhdsGT_zero'
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.PlannerHyp.plannerPolicy_pos_of_slope
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.PlannerHyp.le_plannerOp
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.PlannerHyp.plannerOp_lipschitz
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.PlannerHyp.plannerValue_lipschitz
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.PlannerHyp.plannerPolicy_lt_of_lipschitz
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.PlannerHyp.planner_euler_on_K
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.PlannerHyp.planner_tvc_on_K
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ex_18_1_on_K
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.indirect_equilibrium_on_K
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.PosOutputInadaHyp
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.PosOutputInadaHyp.mk
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.PosOutputInadaHyp.planner
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.PosOutputInadaHyp.b_pos
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.PosOutputInadaHyp.U_inada
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.PosOutputInadaHyp.U_diff
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.PosOutputInadaHyp.f_zero_pos
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.PosOutputInadaHyp.f_mono
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.PosOutputInadaHyp.f_slope
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.PosOutputInadaHyp.policy_interior
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.FiniteMarginalHyp
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.FiniteMarginalHyp.mk
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.FiniteMarginalHyp.planner
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.FiniteMarginalHyp.b_pos
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.FiniteMarginalHyp.U_deriv_zero
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.FiniteMarginalHyp.U_diff
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.FiniteMarginalHyp.f_mono
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.FiniteMarginalHyp.f_slope
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.FiniteMarginalHyp.f_lip
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.FiniteMarginalHyp.policy_interior
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.PosOutputInadaHyp.ex_18_1
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.PosOutputInadaHyp.indirect_equilibrium
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.FiniteMarginalHyp.ex_18_1
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.FiniteMarginalHyp.indirect_equilibrium
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.PlannerHyp.plannerPolicy_eq_zero_of_const
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.expU
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.continuous_expU
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.hasDerivAt_expU
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.hasDerivWithinAt_expU_zero
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.expU_monotoneOn
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.expU_strictConcaveOn
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.abs_expU_le
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.expU_sub_ge
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.expU_sub_le
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.one_le_five_mul_exp_neg_one
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.sqrtTech
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.continuous_sqrtTech
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.sqrtTech_zero
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.hasDerivAt_sqrtTech
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.hasDerivAt_sqrtTech_zero
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.sqrtTech_deriv_facts
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.sqrtTech_concaveOn
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.sqrtTech_monotoneOn
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.sqrtTech_mem
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.sqrtTech_lipschitz
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.sqrtTech_slope
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.sqrtTech_posOutputInadaHyp
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.sqrtTech_finiteMarginalHyp
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.sqrtTech_inada_ex_18_1
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.sqrtTech_inada_equilibrium
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.sqrtTech_finite_ex_18_1
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.sqrtTech_finite_equilibrium
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.inada_const_counterexample
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.finite_const_counterexample
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.cornerF
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.cornerF_of_le
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.cornerF_monotoneOn
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.cornerF_plannerHyp
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.corner_counterexample
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.rootTech_posOutputInadaHyp
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.rootTech_interior
 #print axioms StokeyLucasPrescott.EquilibriaWithDistortions.psi
 #print axioms StokeyLucasPrescott.EquilibriaWithDistortions.Feq
 #print axioms StokeyLucasPrescott.EquilibriaWithDistortions.Assumption18_1

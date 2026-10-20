@@ -33,10 +33,12 @@ maximal elements of `F` can be constructed as there.
   when all states share one technology (from the deterministic equilibrium of
   `GlobalModel.exists_equilibrium`), so `lfp_equilibrium_of_super` is not vacuous.
 
-**Not proved.** Existence of a non-degenerate equilibrium for heterogeneous technologies under
-the cross-state condition alone. The deterministic proof anchors consumption at `k*` through
-(4)–(6), and the stochastic `F` has no such anchor; `Ts_psi` shows the book's Schauder argument
-gives only the degenerate fixed point `ψ`.
+**Different technologies.** Existence of a non-degenerate equilibrium for heterogeneous
+technologies is proved in `GlobalStochasticNondegenerate`, with no extra hypothesis: the
+consumption of an auxiliary planner is a floor for `lfp` (`StochModel.lfp_lt_psi`,
+`StochModel.exists_nondegenerate_equilibrium`). The deterministic proof anchors consumption at
+`k*` through (4)–(6), and the stochastic `F` has no such anchor; `Ts_psi` shows the book's
+Schauder argument gives only the degenerate fixed point `ψ`.
 -/
 
 namespace StokeyLucasPrescott.EquilibriaWithDistortions

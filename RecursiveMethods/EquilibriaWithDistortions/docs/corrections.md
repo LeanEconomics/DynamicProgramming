@@ -53,6 +53,38 @@ of inconsistency. The last section lists what is not proved.
 | p. 558 | Proposition 18.5 and Exercise 18.6 verify Schauder's hypotheses. | `F` is compact by Arzelà–Ascoli (`totallyBounded_of_equicontinuous`, `GlobalModel.F_isCompact`), and Schauder's theorem for compact convex sets applies (`GlobalModel.exists_equilibrium`). |
 | p. 560 | Equicontinuity, continuity, monotonicity and the extreme elements "parallel" the deterministic case. | Proved: `StochModel.Ts_equicontinuous`, `StochModel.Ts_tendsto_uniform` (pointwise convergence within `F` gives uniform convergence of `T`), `StochModel.ex_18_8_mono`, `StochModel.stoch_least_greatest`. The least fixed point is the limit of `Tⁿ0`, by monotone iteration carried out directly (`StochModel.tendsto_Tsit`, `StochModel.tendstoUniformly_Tsit`, `StochModel.Ts_lfp`). |
 
+**Existence with finitely many shocks (p. 560).** Schauder's theorem on `F` gives only the
+degenerate `ψ`, but an equilibrium with positive consumption exists for every finite set of
+technologies and every transition matrix, with no cross-state, closeness or anchor condition. An
+auxiliary planner with the concave technology `Φ_j(k) = θ f_j(0) + (1 − θ) f_j(k) ≤ ψ_j` has
+positive consumption `c` and satisfies the Euler inequality with the after-tax return
+(`StochModel.pc_pos`, `StochModel.pc_euler`); the set `{h ∈ F : ψ − h ≥ c}` contains `0` and is
+invariant (`StochModel.IsInFs.Ts_floor`), so the least fixed point `lim Tⁿ0` keeps consumption at
+least `c` (`StochModel.lfp_lt_psi`). It solves (9) in Kuhn–Tucker form
+(`StochModel.exists_nondegenerate_equilibrium_KT`), and as an equation under the cross-state
+condition (`StochModel.exists_nondegenerate_equilibrium`).
+The same holds for a continuum of shocks (Exercise 18.9), for every compact `Ξ`, Feller `κ` and
+technologies: the planner's consumption is bounded below by a positive constant on `K × Ξ`
+(`ContModel.exists_pc_lb`), the floor is invariant (`ContModel.IsInFc.Tc_floor`), and the least
+fixed point of `Tc` keeps consumption bounded away from zero (`ContModel.consFloor`,
+`ContModel.ex_18_9_borel_existence`; in `F₊` under strong Feller, `ContModel.ex_18_9_existence`).
+A sufficient steady-state condition for the floor is `ContModel.consFloor_of_uniformAnchor`.
+
+**Interior planner policies (§18.1).** The corollaries of Exercise 18.1 and (8)–(10) assumed
+`0 < g(k) < f(k)`. Interiority holds on `(0, k̄]` when `U′(0+) = ∞` and `f(0) = 0`
+(`InteriorHyp.policy_interior`). With `f(0) > 0` and `U′(0+) = ∞` it can fail: under a constant
+technology the planner never saves (*Lean*: `PlannerHyp.plannerPolicy_eq_zero_of_const`,
+`inada_const_counterexample`). With a slope condition at `0` (`f(y) ≥ f(0) + m y`, `b m > 1`) it
+holds on all of `K` (`PosOutputInadaHyp.policy_interior`). With `U′(0) = μ` finite it holds on
+`K` under the slope condition and a Lipschitz condition on `f` near the bottom of `K`
+(`FiniteMarginalHyp.policy_interior`, via `PlannerHyp.plannerValue_lipschitz`); both are needed
+(*Lean*: `finite_const_counterexample`, `corner_counterexample`, where `g = f` on `[0, 1/1000]`).
+Exercise 18.1 and the equilibrium then hold on `K` (`ex_18_1_on_K`, `indirect_equilibrium_on_K`),
+with the transversality condition at `k = 0` from a positive minimum of consumption on `K`. The
+bounded solution of (1), and of (8), is unique on `K` (`PlannerHyp.solvesPlanner_unique`,
+`PlannerHyp.solvesPseudoPlanner_unique`); off `K` it is not determined
+(`PlannerHyp.solvesPlanner_not_unique_off_K`).
+
 ## Conventions
 
 * `U` and `f` are functions `ℝ → ℝ`. In Assumption 18.1 (`Assumption18_1`) they are `C²` on all of
@@ -93,31 +125,18 @@ of inconsistency. The last section lists what is not proved.
 
 ## Not proved
 
-* **A non-degenerate stochastic equilibrium for different technologies.** In the stochastic case
-  (9), an equilibrium with positive consumption is proved only when all states share one
-  technology (`StochModel.exists_nondegenerate_equilibrium_identical`), or given a supersolution
-  with positive consumption below `ψ` (`StochModel.lfp_equilibrium_of_super`). When the
-  technologies differ, existence is open, even under the cross-state condition. The greatest fixed
-  point is the degenerate `ψ`, so the book's "existence follows from Schauder's Theorem" proves
-  nothing there. The deterministic proof anchors consumption at `k*` through (4)–(6); the
-  stochastic `F` has no such anchor.
-* **A fixed point in Exercise 18.9.** On `F₊` the operator is well defined
-  (`ContModel.ex_18_9_spec_KT`), maps `F₊` into `F₊` (`ContModel.ex_18_9`) and is monotone
-  (`ContModel.ex_18_9_mono`). Existence of a fixed point is not proved: `F₊` is not closed, and no
-  invariant closed convex subset bounded away from zero consumption has been found.
+* **Continuity in the shock in Exercise 18.9 under a plain Feller transition.** The least fixed
+  point exists for every `ContModel` and is Borel in `ξ` (`ContModel.ex_18_9_borel_existence`);
+  continuity in `ξ`, so that it lies in `F₊`, is proved under the strong Feller property
+  (`ContModel.ex_18_9_existence`). Under plain Feller the limit is only lower semicontinuous in
+  `ξ`; whether it can fail to be continuous is open.
 * **A model with `f″(k*) = 0`.** Only the algebraic consequence `P(1) = 0` is proved
   (`charPoly_degenerate_f`). The case `U″(c*) = 0` has a model satisfying Assumption 18.1
   (`note_18_2B_model_counterexample`).
-* **Interiority without an Inada condition.** Under `U′(0+) = ∞` (with `U` bounded and
-  continuous on `[0, ∞)`) and `f(0) = 0 < f` on `(0, k̄]`, the constructed policies are interior
-  on `(0, k̄]` (`InteriorHyp.policy_interior`), and Exercise 18.1 and the equilibrium (8)–(10)
-  hold with no interiority or smoothness assumption on `U′`, `f′` (`ex_18_1_interior`,
-  `indirect_equilibrium_interior`; an example is `inada_interiorHyp`). Interiority at `k = 0` is
-  impossible there (`InteriorHyp.not_interior_zero`). When `f(0) > 0` or `U′(0) < ∞`, the
-  earlier corollaries (`ex_18_1_constructed`, `indirect_equilibrium_constructed`) still assume
-  `0 < g(k) < f(k)` on `K` and `U′`, `f′` continuous on `[0, k̄]`; no primitive condition is
-  proved. Uniqueness of the bounded solution of (1) and (8) is not proved; only the constructed
-  fixed point is studied.
+* **Interiority at `k = 0` when `f(0) = 0` and `U′(0)` is finite.** No interiority result is
+  proved; the Lipschitz condition of `FiniteMarginalHyp` conflicts with the slope condition near
+  `0`, and corners there seem typical (`corner_counterexample` shows the mechanism). The slope and
+  Lipschitz conditions are sufficient; each is shown necessary only by one counterexample.
 * **Unbounded utility in the functional equations.** The dynamic-programming results of §18.1
   (`bellman_isLUB`, `exists_bellman_solution`, `ex_18_1_dp`, `ex_18_1_full`,
   `indirect_equilibrium_dp`, `indirect_equilibrium_full`) assume `U` bounded on `[0, ∞)`. The

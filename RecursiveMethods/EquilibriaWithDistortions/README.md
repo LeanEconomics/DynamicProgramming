@@ -23,11 +23,12 @@ satisfying Assumption 18.1; Exercise 18.4a (`T` is not monotone on `D_λ(I_ε)`)
 solution); the maximal element `h̄` of p. 558 (it is not in `F`); Exercise 18.8 (the stochastic
 operator is not well defined); and the claim that Schauder's theorem gives a stochastic equilibrium
 (it gives the degenerate fixed point `ψ`). Two printed proof steps and several steps of the
-solutions manual are also wrong; the results they support are true and are proved. Two things are
-left open: a non-degenerate stochastic equilibrium when the technologies differ across states, and
-a fixed point in the continuum-of-shocks setting of Exercise 18.9. The bibliographic notes (§18.4)
-are not formalised. See [corrections](docs/corrections.md). The library contains **494 theorems**.
-Of these, 456 are in the Chapter 18 modules and 38 in the fixed-point theorems carried
+solutions manual are also wrong; the results they support are true and are proved. The book's
+appeal to Schauder for a stochastic equilibrium is replaced by monotone iteration with a planner's
+consumption floor, which gives an equilibrium with positive consumption for any technologies,
+with finitely many shocks and with a continuum (Exercise 18.9). The bibliographic notes (§18.4)
+are not formalised. See [corrections](docs/corrections.md). The library contains **718 theorems**.
+Of these, 680 are in the Chapter 18 modules and 38 in the fixed-point theorems carried
 from Chapter 17.
 
 * **The indirect approach** (§18.1). Sufficiency of the Euler equation and the transversality
@@ -36,8 +37,8 @@ from Chapter 17.
   bounded solution of the functional equation (2), which exists and is unique by a contraction on
   `ℓ∞`. The budget with a rebated tax and (3); the pseudo-economy (8)–(10) solves (6)–(7) and gives
   an equilibrium once the individual's transversality condition holds. The planner's `v`, `g` and
-  the pseudo-planner's `w`, `ĥ` are constructed for bounded `U`, and proved interior on `(0, k̄]`
-  when `U′(0+) = ∞` and `f(0) = 0`; the first-order and envelope conditions (4)–(7) are derived
+  the pseudo-planner's `w`, `ĥ` are constructed for bounded `U`, are unique, and are proved
+  interior on `(0, k̄]` when `U′(0+) = ∞` and `f(0) = 0`, and on `K` under a slope condition at `0`; the first-order and envelope conditions (4)–(7) are derived
   from (3). Exercise 18.2, with the condition `α + θ < 1` and both readings of the two taxes.
 * **The local approach: set-up** (§18.2). Assumption 18.1 and its consequences; the unique `k*`
   of (5); Proposition 18.1, by Brouwer's theorem; `F` of (3) and its partial derivatives
@@ -59,10 +60,10 @@ from Chapter 17.
 * **Shocks** (§18.3, pp. 558–560). Finitely many shocks: Exercise 18.8 refuted and corrected
   (Kuhn–Tucker form; equation form under a cross-state condition); `T` monotone and continuous
   with `T(F)` equicontinuous; the least fixed point, and the greatest fixed point `ψ`, which has
-  zero consumption; a non-degenerate equilibrium given a supersolution with positive consumption,
-  in particular when all states share one technology. Exercise 18.9: a compact metric shock
-  space with a Feller transition, on which `T` is well defined and monotone and maps the set `F₊`
-  of strictly positive consumption into itself.
+  zero consumption; a non-degenerate equilibrium for any technologies, from the consumption of an
+  auxiliary planner. Exercise 18.9: a compact metric shock space with a Feller transition, on
+  which `T` is well defined and monotone, and has a least fixed point with consumption bounded
+  away from zero (continuous in the shock under the strong Feller property).
 
 All names are in the namespace `StokeyLucasPrescott.EquilibriaWithDistortions`. See the
 [source map](docs/source-map.md) and the [corrections](docs/corrections.md).
@@ -80,6 +81,8 @@ All names are in the namespace `StokeyLucasPrescott.EquilibriaWithDistortions`. 
 | [IndirectInteriorDP](EquilibriaWithDistortions/IndirectInteriorDP.lean) | 6 | (2)–(3) and the planner's problem with `U′` used only along the path |
 | [IndirectInterior](EquilibriaWithDistortions/IndirectInterior.lean) | 14 | Interior policies under `U′(0+) = ∞`, `f(0) = 0`; Exercise 18.1 and (8)–(10) without interiority |
 | [IndirectInteriorExample](EquilibriaWithDistortions/IndirectInteriorExample.lean) | 13 | `U = 1 − e^{−√c}`, `f = √k`: an economy satisfying them |
+| [IndirectInteriorGeneral](EquilibriaWithDistortions/IndirectInteriorGeneral.lean) | 28 | Interiority on all of `K` (`f(0) > 0`, or `U′(0)` finite); uniqueness of (1) and (8) |
+| [IndirectInteriorGeneralExample](EquilibriaWithDistortions/IndirectInteriorGeneralExample.lean) | 33 | Economies satisfying them; three counterexamples |
 | [LocalApproach](EquilibriaWithDistortions/LocalApproach.lean) | 48 | Assumption 18.1, (3)–(6), Proposition 18.1, `P(λ)` and `λ*` |
 | [LocalImplicit](EquilibriaWithDistortions/LocalImplicit.lean) | 13 | §18.2 (7): the local solution `H` |
 | [LocalSmooth](EquilibriaWithDistortions/LocalSmooth.lean) | 21 | `H` is `C¹`; `g′(k*) = λ*` |
@@ -92,7 +95,10 @@ All names are in the namespace `StokeyLucasPrescott.EquilibriaWithDistortions`. 
 | [GlobalExamples](EquilibriaWithDistortions/GlobalExamples.lean) | 30 | Models with `U = √`; counterexamples to Exercise 18.5 and Proposition 18.5's proof |
 | [GlobalStochastic](EquilibriaWithDistortions/GlobalStochastic.lean) | 22 | (8)–(9), Exercise 18.8 |
 | [GlobalStochasticEquilibrium](EquilibriaWithDistortions/GlobalStochasticEquilibrium.lean) | 20 | Continuity, equicontinuity, least fixed point, non-degenerate equilibria |
+| [GlobalStochasticNondegenerate](EquilibriaWithDistortions/GlobalStochasticNondegenerate.lean) | 52 | A non-degenerate stochastic equilibrium for any technologies (planner's floor) |
 | [GlobalContinuum](EquilibriaWithDistortions/GlobalContinuum.lean) | 14 | Exercise 18.9 |
+| [GlobalContinuumFixed](EquilibriaWithDistortions/GlobalContinuumFixed.lean) | 52 | Exercise 18.9: monotone iteration, the least fixed point given a consumption floor |
+| [GlobalContinuumFloor](EquilibriaWithDistortions/GlobalContinuumFloor.lean) | 59 | Exercise 18.9: the floor for any technologies; existence |
 
 Carried from the Chapter 17 project `FixedPointArguments` (38 theorems), identical except for the
 namespace:

@@ -1,6 +1,6 @@
 {
-  "checked_at_utc": "2026-10-20T21:14:13.596707+00:00",
-  "theorems": 494,
+  "checked_at_utc": "2026-10-20T22:58:43.878315+00:00",
+  "theorems": 718,
   "module_theorems": {
     "EquilibriaWithDistortions/BrouwerRetraction.lean": 4,
     "EquilibriaWithDistortions/BrouwerBall.lean": 4,
@@ -13,8 +13,11 @@
     "EquilibriaWithDistortions/GlobalOperator.lean": 30,
     "EquilibriaWithDistortions/GlobalContinuum.lean": 14,
     "EquilibriaWithDistortions/GlobalExamples.lean": 30,
+    "EquilibriaWithDistortions/GlobalContinuumFixed.lean": 52,
+    "EquilibriaWithDistortions/GlobalContinuumFloor.lean": 59,
     "EquilibriaWithDistortions/GlobalStochastic.lean": 22,
     "EquilibriaWithDistortions/GlobalStochasticEquilibrium.lean": 20,
+    "EquilibriaWithDistortions/GlobalStochasticNondegenerate.lean": 52,
     "EquilibriaWithDistortions/IndirectApproach.lean": 23,
     "EquilibriaWithDistortions/IndirectDP.lean": 8,
     "EquilibriaWithDistortions/IndirectBellman.lean": 9,
@@ -24,6 +27,8 @@
     "EquilibriaWithDistortions/IndirectInteriorDP.lean": 6,
     "EquilibriaWithDistortions/IndirectInterior.lean": 14,
     "EquilibriaWithDistortions/IndirectInteriorExample.lean": 13,
+    "EquilibriaWithDistortions/IndirectInteriorGeneral.lean": 28,
+    "EquilibriaWithDistortions/IndirectInteriorGeneralExample.lean": 33,
     "EquilibriaWithDistortions/LocalApproach.lean": 48,
     "EquilibriaWithDistortions/LocalImplicit.lean": 13,
     "EquilibriaWithDistortions/LocalContraction.lean": 32,
@@ -31,7 +36,7 @@
     "EquilibriaWithDistortions/LocalSchauder.lean": 8,
     "EquilibriaWithDistortions/LocalSmooth.lean": 21
   },
-  "audited_declarations": 756,
+  "audited_declarations": 1033,
   "declarations": [
     {
       "name": "StokeyLucasPrescott.EquilibriaWithDistortions.exists_polynomial_det_id_add_smul",
@@ -1599,6 +1604,661 @@
       "module": "EquilibriaWithDistortions/GlobalExamples.lean"
     },
     {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.UniformAnchor",
+      "kind": "def",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFixed.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.StrongFeller",
+      "kind": "def",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFixed.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.Tit",
+      "kind": "def",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFixed.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.Tit_succ",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFixed.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.isInFc_Tit",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFixed.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.Tit_le_succ",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFixed.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.psi_continuous_shock",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFixed.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.f'_continuous_shock",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFixed.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.exists_psi_zero_lb",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFixed.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.exists_f'_zero_ub",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFixed.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.exists_gap_lb",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFixed.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.U'_psi_le",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFixed.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.Rc_le",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFixed.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.Tit_U'_le",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFixed.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.ConsFloor",
+      "kind": "def",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFixed.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.exists_cons_lb",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFixed.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.consFloor_of_uniformAnchor",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFixed.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.lfpc",
+      "kind": "def",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFixed.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.tendsto_Tit",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFixed.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.IsInFc.abs_sub_le",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFixed.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.lfpc_abs_sub_le",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFixed.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.lfpc_continuousOn",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFixed.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.lfpc_nonneg",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFixed.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.lfpc_mono",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFixed.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.lfpc_mono_sub",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFixed.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.lfpc_cons_lb",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFixed.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.abs_G_le",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFixed.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.tendsto_G_Tit",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFixed.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.measurable_G_lfpc",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFixed.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.integrable_G_lfpc",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFixed.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.tendsto_Rc_Tit",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFixed.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.isEulerRHS_lfpc",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFixed.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.Tc_lfpc",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFixed.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.Tit_le_of_super",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFixed.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.lfpc_le_of_super",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFixed.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.Tc_continuousOn_of",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFixed.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.isInFc_lfpc",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFixed.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.lfpc_euler_KT",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFixed.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.lfpc_euler",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFixed.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.ex_18_9_borel_equilibrium",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFixed.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.ex_18_9_exists_equilibrium",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFixed.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.ex_18_9_equilibrium",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFixed.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.uniformAnchor_iff",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFixed.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.uniformAnchor_of_f'_eq",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFixed.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.uniformAnchor_of_identical",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFixed.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.strongFeller_of_const",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFixed.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.exB",
+      "kind": "def",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFixed.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.exB_pos",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFixed.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.exB_le",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFixed.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.exB_h3",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFixed.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.exTech",
+      "kind": "def",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFixed.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.exTech_psi",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFixed.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.exTech_f'",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFixed.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.exTech_kbar",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFixed.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.exB_continuous",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFixed.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.exCont",
+      "kind": "def",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFixed.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.exCont_tech_ne",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFixed.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.exCont_uniformAnchor",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFixed.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.exCont_strongFeller",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFixed.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.exCont_exists_equilibrium",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFixed.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.\u03b2_pos",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFloor.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.\u03b2_lt_one",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFloor.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.\u03b8_pos",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFloor.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.\u03b8_lt_one",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFloor.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.U_cont",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFloor.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.U_strictMono",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFloor.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.U_strictConcave",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFloor.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.U_deriv",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFloor.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.Phi",
+      "kind": "def",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFloor.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.f_eq",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFloor.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.Phi_le_psi",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFloor.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.Phi_sub_gt",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFloor.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.Phi_le",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFloor.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.Phi_zero",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFloor.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.Phi_continuousOn",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFloor.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.Phi_concave",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFloor.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.Phi_le_B",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFloor.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.exists_Phi_lb",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFloor.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.Phi_pos",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFloor.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.Phi_cont",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFloor.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.VS",
+      "kind": "abbrev",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFloor.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.vE",
+      "kind": "def",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFloor.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.vE_continuous",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFloor.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.vE_continuous_shock",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFloor.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.abs_vE_le",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFloor.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.abs_vE_sub_le",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFloor.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.vE_of_mem",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFloor.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.EV",
+      "kind": "def",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFloor.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.integrable_vE",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFloor.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.integral_le_add",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFloor.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.EV_le_add",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFloor.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.EV_continuous",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFloor.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.clampUnit",
+      "kind": "def",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFloor.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.clampUnit_of_mem",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFloor.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.clampUnit_mem",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFloor.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.obj",
+      "kind": "def",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFloor.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.plBell",
+      "kind": "def",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFloor.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.obj_continuous",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFloor.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.plBell_continuous",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFloor.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.plBellOp",
+      "kind": "def",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFloor.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.obj_image_isCompact",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFloor.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.obj_le_plBell",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFloor.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.exists_plBell_eq",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFloor.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.plBell_le",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFloor.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.obj_le_obj_add",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFloor.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.dist_plBellOp_le",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFloor.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.plBellOp_contracting",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFloor.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.Vstar",
+      "kind": "def",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFloor.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.vE_Vstar",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFloor.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.IsConc",
+      "kind": "def",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFloor.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.isConc_zero",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFloor.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.IsConc.concave_EV",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFloor.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.IsConc.plBellOp",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFloor.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.isConc_iterate",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFloor.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.isConc_Vstar",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFloor.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.pz",
+      "kind": "def",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFloor.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.pz_spec",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFloor.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.pc",
+      "kind": "def",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFloor.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.pz_mem",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFloor.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.exists_pc_lb",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFloor.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.pc_pos",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFloor.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.Phi_continuous_shock",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFloor.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.IsInFc.Tc_floor",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFloor.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.Tit_floor",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFloor.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.consFloor",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFloor.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.lfpc_floor",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFloor.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.ex_18_9_borel_existence",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFloor.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.ex_18_9_borel_euler_KT",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFloor.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.ex_18_9_borel_euler",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFloor.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.ex_18_9_existence",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFloor.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.ex_18_9_existence_euler",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalContinuumFloor.lean"
+    },
+    {
       "name": "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel",
       "kind": "structure",
       "module": "EquilibriaWithDistortions/GlobalStochastic.lean"
@@ -1972,6 +2632,326 @@
       "name": "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.exists_nondegenerate_equilibrium_identical",
       "kind": "theorem",
       "module": "EquilibriaWithDistortions/GlobalStochasticEquilibrium.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.\u03b2_pos'",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalStochasticNondegenerate.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.\u03b2_lt_one'",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalStochasticNondegenerate.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.\u03b8_mem",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalStochasticNondegenerate.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.U_cont",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalStochasticNondegenerate.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.U_strictMono",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalStochasticNondegenerate.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.U_strictConcave",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalStochasticNondegenerate.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.U_deriv",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalStochasticNondegenerate.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.Phi",
+      "kind": "def",
+      "module": "EquilibriaWithDistortions/GlobalStochasticNondegenerate.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.Phi_le_psi",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalStochasticNondegenerate.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.Phi_sub_gt",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalStochasticNondegenerate.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.Phi_lt",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalStochasticNondegenerate.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.Phi_le",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalStochasticNondegenerate.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.Phi_pos",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalStochasticNondegenerate.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.Phi_continuousOn",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalStochasticNondegenerate.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.Phi_concave",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalStochasticNondegenerate.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.Phi_le_B",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalStochasticNondegenerate.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.VSpace",
+      "kind": "abbrev",
+      "module": "EquilibriaWithDistortions/GlobalStochasticNondegenerate.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.vE",
+      "kind": "def",
+      "module": "EquilibriaWithDistortions/GlobalStochasticNondegenerate.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.vE_continuous",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalStochasticNondegenerate.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.abs_vE_le",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalStochasticNondegenerate.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.abs_vE_sub_le",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalStochasticNondegenerate.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.obj",
+      "kind": "def",
+      "module": "EquilibriaWithDistortions/GlobalStochasticNondegenerate.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.clamp01",
+      "kind": "def",
+      "module": "EquilibriaWithDistortions/GlobalStochasticNondegenerate.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.clamp01_of_mem",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalStochasticNondegenerate.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.clamp01_mem",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalStochasticNondegenerate.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.plBell",
+      "kind": "def",
+      "module": "EquilibriaWithDistortions/GlobalStochasticNondegenerate.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.obj_continuous",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalStochasticNondegenerate.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.plBell_continuous",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalStochasticNondegenerate.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.plBellOp",
+      "kind": "def",
+      "module": "EquilibriaWithDistortions/GlobalStochasticNondegenerate.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.obj_image_isCompact",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalStochasticNondegenerate.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.obj_le_plBell",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalStochasticNondegenerate.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.exists_plBell_eq",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalStochasticNondegenerate.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.plBell_le",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalStochasticNondegenerate.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.obj_le_obj_add",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalStochasticNondegenerate.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.dist_plBellOp_le",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalStochasticNondegenerate.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.plBellOp_contracting",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalStochasticNondegenerate.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.Vstar",
+      "kind": "def",
+      "module": "EquilibriaWithDistortions/GlobalStochasticNondegenerate.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.vE_Vstar",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalStochasticNondegenerate.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.IsConc",
+      "kind": "def",
+      "module": "EquilibriaWithDistortions/GlobalStochasticNondegenerate.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.isConc_zero",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalStochasticNondegenerate.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.IsConc.plBellOp",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalStochasticNondegenerate.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.isConc_iterate",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalStochasticNondegenerate.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.isConc_Vstar",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalStochasticNondegenerate.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.pz",
+      "kind": "def",
+      "module": "EquilibriaWithDistortions/GlobalStochasticNondegenerate.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.pz_spec",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalStochasticNondegenerate.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.pc",
+      "kind": "def",
+      "module": "EquilibriaWithDistortions/GlobalStochasticNondegenerate.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.pz_mem",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalStochasticNondegenerate.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.pc_pos",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalStochasticNondegenerate.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.pc_euler_delta",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalStochasticNondegenerate.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.pc_euler",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalStochasticNondegenerate.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.IsInFs.Ts_floor",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalStochasticNondegenerate.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.Tsit_floor",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalStochasticNondegenerate.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.lfp_floor",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalStochasticNondegenerate.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.lfp_lt_psi",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalStochasticNondegenerate.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.lfp_not_Zs",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalStochasticNondegenerate.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.exists_nondegenerate_super",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalStochasticNondegenerate.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.exists_nondegenerate_equilibrium_KT",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalStochasticNondegenerate.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.exists_nondegenerate_equilibrium",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalStochasticNondegenerate.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.crossState_of_persistent",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalStochasticNondegenerate.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.stochJ_nondegenerate",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalStochasticNondegenerate.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.stochP",
+      "kind": "def",
+      "module": "EquilibriaWithDistortions/GlobalStochasticNondegenerate.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.stochP_tech_ne",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalStochasticNondegenerate.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.stochP_crossState",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalStochasticNondegenerate.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.stochP_equilibrium",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/GlobalStochasticNondegenerate.lean"
     },
     {
       "name": "StokeyLucasPrescott.EquilibriaWithDistortions.consPath",
@@ -2737,6 +3717,416 @@
       "name": "StokeyLucasPrescott.EquilibriaWithDistortions.inada_example_equilibrium",
       "kind": "theorem",
       "module": "EquilibriaWithDistortions/IndirectInteriorExample.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.PlannerHyp.sSup_le_sSup_add",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/IndirectInteriorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.PlannerHyp.solvesPlanner_unique",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/IndirectInteriorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.PlannerHyp.solvesPseudoPlanner_unique",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/IndirectInteriorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.PlannerHyp.plannerOp_fixedPoint_unique",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/IndirectInteriorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.PlannerHyp.solvesPlanner_not_unique_off_K",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/IndirectInteriorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.PlannerHyp.solvesPlanner_policy",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/IndirectInteriorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.PlannerHyp.U_sub_le_of_hasDerivWithinAt",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/IndirectInteriorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.PlannerHyp.deriv_U_pos_of_differentiableAt",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/IndirectInteriorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.PlannerHyp.deriv_U_anti",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/IndirectInteriorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.eventually_add_mul_le_of_hasDerivAt",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/IndirectInteriorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.tendsto_const_mul_nhdsGT_zero",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/IndirectInteriorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.tendsto_neg_nhdsGT_zero'",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/IndirectInteriorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.PlannerHyp.plannerPolicy_pos_of_slope",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/IndirectInteriorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.PlannerHyp.le_plannerOp",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/IndirectInteriorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.PlannerHyp.plannerOp_lipschitz",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/IndirectInteriorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.PlannerHyp.plannerValue_lipschitz",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/IndirectInteriorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.PlannerHyp.plannerPolicy_lt_of_lipschitz",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/IndirectInteriorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.PlannerHyp.planner_euler_on_K",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/IndirectInteriorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.PlannerHyp.planner_tvc_on_K",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/IndirectInteriorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ex_18_1_on_K",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/IndirectInteriorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.indirect_equilibrium_on_K",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/IndirectInteriorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.PosOutputInadaHyp",
+      "kind": "structure",
+      "module": "EquilibriaWithDistortions/IndirectInteriorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.PosOutputInadaHyp.mk",
+      "kind": "constructor",
+      "module": "EquilibriaWithDistortions/IndirectInteriorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.PosOutputInadaHyp.planner",
+      "kind": "projection",
+      "module": "EquilibriaWithDistortions/IndirectInteriorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.PosOutputInadaHyp.b_pos",
+      "kind": "projection",
+      "module": "EquilibriaWithDistortions/IndirectInteriorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.PosOutputInadaHyp.U_inada",
+      "kind": "projection",
+      "module": "EquilibriaWithDistortions/IndirectInteriorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.PosOutputInadaHyp.U_diff",
+      "kind": "projection",
+      "module": "EquilibriaWithDistortions/IndirectInteriorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.PosOutputInadaHyp.f_zero_pos",
+      "kind": "projection",
+      "module": "EquilibriaWithDistortions/IndirectInteriorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.PosOutputInadaHyp.f_mono",
+      "kind": "projection",
+      "module": "EquilibriaWithDistortions/IndirectInteriorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.PosOutputInadaHyp.f_slope",
+      "kind": "projection",
+      "module": "EquilibriaWithDistortions/IndirectInteriorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.PosOutputInadaHyp.policy_interior",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/IndirectInteriorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.FiniteMarginalHyp",
+      "kind": "structure",
+      "module": "EquilibriaWithDistortions/IndirectInteriorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.FiniteMarginalHyp.mk",
+      "kind": "constructor",
+      "module": "EquilibriaWithDistortions/IndirectInteriorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.FiniteMarginalHyp.planner",
+      "kind": "projection",
+      "module": "EquilibriaWithDistortions/IndirectInteriorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.FiniteMarginalHyp.b_pos",
+      "kind": "projection",
+      "module": "EquilibriaWithDistortions/IndirectInteriorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.FiniteMarginalHyp.U_deriv_zero",
+      "kind": "projection",
+      "module": "EquilibriaWithDistortions/IndirectInteriorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.FiniteMarginalHyp.U_diff",
+      "kind": "projection",
+      "module": "EquilibriaWithDistortions/IndirectInteriorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.FiniteMarginalHyp.f_mono",
+      "kind": "projection",
+      "module": "EquilibriaWithDistortions/IndirectInteriorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.FiniteMarginalHyp.f_slope",
+      "kind": "projection",
+      "module": "EquilibriaWithDistortions/IndirectInteriorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.FiniteMarginalHyp.f_lip",
+      "kind": "projection",
+      "module": "EquilibriaWithDistortions/IndirectInteriorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.FiniteMarginalHyp.policy_interior",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/IndirectInteriorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.PosOutputInadaHyp.ex_18_1",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/IndirectInteriorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.PosOutputInadaHyp.indirect_equilibrium",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/IndirectInteriorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.FiniteMarginalHyp.ex_18_1",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/IndirectInteriorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.FiniteMarginalHyp.indirect_equilibrium",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/IndirectInteriorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.PlannerHyp.plannerPolicy_eq_zero_of_const",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/IndirectInteriorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.expU",
+      "kind": "def",
+      "module": "EquilibriaWithDistortions/IndirectInteriorGeneralExample.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.continuous_expU",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/IndirectInteriorGeneralExample.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.hasDerivAt_expU",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/IndirectInteriorGeneralExample.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.hasDerivWithinAt_expU_zero",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/IndirectInteriorGeneralExample.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.expU_monotoneOn",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/IndirectInteriorGeneralExample.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.expU_strictConcaveOn",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/IndirectInteriorGeneralExample.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.abs_expU_le",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/IndirectInteriorGeneralExample.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.expU_sub_ge",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/IndirectInteriorGeneralExample.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.expU_sub_le",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/IndirectInteriorGeneralExample.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.one_le_five_mul_exp_neg_one",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/IndirectInteriorGeneralExample.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.sqrtTech",
+      "kind": "def",
+      "module": "EquilibriaWithDistortions/IndirectInteriorGeneralExample.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.continuous_sqrtTech",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/IndirectInteriorGeneralExample.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.sqrtTech_zero",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/IndirectInteriorGeneralExample.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.hasDerivAt_sqrtTech",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/IndirectInteriorGeneralExample.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.hasDerivAt_sqrtTech_zero",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/IndirectInteriorGeneralExample.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.sqrtTech_deriv_facts",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/IndirectInteriorGeneralExample.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.sqrtTech_concaveOn",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/IndirectInteriorGeneralExample.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.sqrtTech_monotoneOn",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/IndirectInteriorGeneralExample.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.sqrtTech_mem",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/IndirectInteriorGeneralExample.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.sqrtTech_lipschitz",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/IndirectInteriorGeneralExample.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.sqrtTech_slope",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/IndirectInteriorGeneralExample.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.sqrtTech_posOutputInadaHyp",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/IndirectInteriorGeneralExample.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.sqrtTech_finiteMarginalHyp",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/IndirectInteriorGeneralExample.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.sqrtTech_inada_ex_18_1",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/IndirectInteriorGeneralExample.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.sqrtTech_inada_equilibrium",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/IndirectInteriorGeneralExample.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.sqrtTech_finite_ex_18_1",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/IndirectInteriorGeneralExample.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.sqrtTech_finite_equilibrium",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/IndirectInteriorGeneralExample.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.inada_const_counterexample",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/IndirectInteriorGeneralExample.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.finite_const_counterexample",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/IndirectInteriorGeneralExample.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.cornerF",
+      "kind": "def",
+      "module": "EquilibriaWithDistortions/IndirectInteriorGeneralExample.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.cornerF_of_le",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/IndirectInteriorGeneralExample.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.cornerF_monotoneOn",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/IndirectInteriorGeneralExample.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.cornerF_plannerHyp",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/IndirectInteriorGeneralExample.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.corner_counterexample",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/IndirectInteriorGeneralExample.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.rootTech_posOutputInadaHyp",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/IndirectInteriorGeneralExample.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.rootTech_interior",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/IndirectInteriorGeneralExample.lean"
     },
     {
       "name": "StokeyLucasPrescott.EquilibriaWithDistortions.psi",
@@ -5386,6 +6776,661 @@
       "Classical.choice",
       "Quot.sound"
     ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.UniformAnchor": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.StrongFeller": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.Tit": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.Tit_succ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.isInFc_Tit": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.Tit_le_succ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.psi_continuous_shock": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.f'_continuous_shock": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.exists_psi_zero_lb": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.exists_f'_zero_ub": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.exists_gap_lb": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.U'_psi_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.Rc_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.Tit_U'_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.ConsFloor": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.exists_cons_lb": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.consFloor_of_uniformAnchor": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.lfpc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.tendsto_Tit": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.IsInFc.abs_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.lfpc_abs_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.lfpc_continuousOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.lfpc_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.lfpc_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.lfpc_mono_sub": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.lfpc_cons_lb": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.abs_G_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.tendsto_G_Tit": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.measurable_G_lfpc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.integrable_G_lfpc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.tendsto_Rc_Tit": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.isEulerRHS_lfpc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.Tc_lfpc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.Tit_le_of_super": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.lfpc_le_of_super": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.Tc_continuousOn_of": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.isInFc_lfpc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.lfpc_euler_KT": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.lfpc_euler": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.ex_18_9_borel_equilibrium": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.ex_18_9_exists_equilibrium": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.ex_18_9_equilibrium": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.uniformAnchor_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.uniformAnchor_of_f'_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.uniformAnchor_of_identical": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.strongFeller_of_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.exB": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.exB_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.exB_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.exB_h3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.exTech": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.exTech_psi": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.exTech_f'": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.exTech_kbar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.exB_continuous": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.exCont": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.exCont_tech_ne": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.exCont_uniformAnchor": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.exCont_strongFeller": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.exCont_exists_equilibrium": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.\u03b2_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.\u03b2_lt_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.\u03b8_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.\u03b8_lt_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.U_cont": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.U_strictMono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.U_strictConcave": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.U_deriv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.Phi": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.f_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.Phi_le_psi": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.Phi_sub_gt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.Phi_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.Phi_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.Phi_continuousOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.Phi_concave": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.Phi_le_B": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.exists_Phi_lb": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.Phi_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.Phi_cont": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.VS": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.vE": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.vE_continuous": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.vE_continuous_shock": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.abs_vE_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.abs_vE_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.vE_of_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.EV": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.integrable_vE": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.integral_le_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.EV_le_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.EV_continuous": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.clampUnit": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.clampUnit_of_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.clampUnit_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.obj": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.plBell": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.obj_continuous": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.plBell_continuous": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.plBellOp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.obj_image_isCompact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.obj_le_plBell": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.exists_plBell_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.plBell_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.obj_le_obj_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.dist_plBellOp_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.plBellOp_contracting": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.Vstar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.vE_Vstar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.IsConc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.isConc_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.IsConc.concave_EV": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.IsConc.plBellOp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.isConc_iterate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.isConc_Vstar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.pz": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.pz_spec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.pc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.pz_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.exists_pc_lb": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.pc_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.Phi_continuous_shock": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.IsInFc.Tc_floor": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.Tit_floor": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.consFloor": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.lfpc_floor": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.ex_18_9_borel_existence": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.ex_18_9_borel_euler_KT": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.ex_18_9_borel_euler": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.ex_18_9_existence": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ContModel.ex_18_9_existence_euler": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
     "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel": [
       "propext",
       "Classical.choice",
@@ -5757,6 +7802,326 @@
       "Quot.sound"
     ],
     "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.exists_nondegenerate_equilibrium_identical": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.\u03b2_pos'": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.\u03b2_lt_one'": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.\u03b8_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.U_cont": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.U_strictMono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.U_strictConcave": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.U_deriv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.Phi": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.Phi_le_psi": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.Phi_sub_gt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.Phi_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.Phi_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.Phi_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.Phi_continuousOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.Phi_concave": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.Phi_le_B": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.VSpace": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.vE": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.vE_continuous": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.abs_vE_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.abs_vE_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.obj": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.clamp01": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.clamp01_of_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.clamp01_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.plBell": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.obj_continuous": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.plBell_continuous": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.plBellOp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.obj_image_isCompact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.obj_le_plBell": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.exists_plBell_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.plBell_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.obj_le_obj_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.dist_plBellOp_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.plBellOp_contracting": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.Vstar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.vE_Vstar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.IsConc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.isConc_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.IsConc.plBellOp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.isConc_iterate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.isConc_Vstar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.pz": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.pz_spec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.pc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.pz_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.pc_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.pc_euler_delta": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.pc_euler": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.IsInFs.Ts_floor": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.Tsit_floor": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.lfp_floor": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.lfp_lt_psi": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.lfp_not_Zs": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.exists_nondegenerate_super": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.exists_nondegenerate_equilibrium_KT": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.exists_nondegenerate_equilibrium": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.StochModel.crossState_of_persistent": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.stochJ_nondegenerate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.stochP": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.stochP_tech_ne": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.stochP_crossState": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.stochP_equilibrium": [
       "propext",
       "Classical.choice",
       "Quot.sound"
@@ -6522,6 +8887,416 @@
       "Quot.sound"
     ],
     "StokeyLucasPrescott.EquilibriaWithDistortions.inada_example_equilibrium": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.PlannerHyp.sSup_le_sSup_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.PlannerHyp.solvesPlanner_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.PlannerHyp.solvesPseudoPlanner_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.PlannerHyp.plannerOp_fixedPoint_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.PlannerHyp.solvesPlanner_not_unique_off_K": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.PlannerHyp.solvesPlanner_policy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.PlannerHyp.U_sub_le_of_hasDerivWithinAt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.PlannerHyp.deriv_U_pos_of_differentiableAt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.PlannerHyp.deriv_U_anti": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.eventually_add_mul_le_of_hasDerivAt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.tendsto_const_mul_nhdsGT_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.tendsto_neg_nhdsGT_zero'": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.PlannerHyp.plannerPolicy_pos_of_slope": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.PlannerHyp.le_plannerOp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.PlannerHyp.plannerOp_lipschitz": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.PlannerHyp.plannerValue_lipschitz": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.PlannerHyp.plannerPolicy_lt_of_lipschitz": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.PlannerHyp.planner_euler_on_K": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.PlannerHyp.planner_tvc_on_K": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ex_18_1_on_K": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.indirect_equilibrium_on_K": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.PosOutputInadaHyp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.PosOutputInadaHyp.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.PosOutputInadaHyp.planner": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.PosOutputInadaHyp.b_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.PosOutputInadaHyp.U_inada": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.PosOutputInadaHyp.U_diff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.PosOutputInadaHyp.f_zero_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.PosOutputInadaHyp.f_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.PosOutputInadaHyp.f_slope": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.PosOutputInadaHyp.policy_interior": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.FiniteMarginalHyp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.FiniteMarginalHyp.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.FiniteMarginalHyp.planner": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.FiniteMarginalHyp.b_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.FiniteMarginalHyp.U_deriv_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.FiniteMarginalHyp.U_diff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.FiniteMarginalHyp.f_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.FiniteMarginalHyp.f_slope": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.FiniteMarginalHyp.f_lip": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.FiniteMarginalHyp.policy_interior": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.PosOutputInadaHyp.ex_18_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.PosOutputInadaHyp.indirect_equilibrium": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.FiniteMarginalHyp.ex_18_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.FiniteMarginalHyp.indirect_equilibrium": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.PlannerHyp.plannerPolicy_eq_zero_of_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.expU": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.continuous_expU": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.hasDerivAt_expU": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.hasDerivWithinAt_expU_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.expU_monotoneOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.expU_strictConcaveOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.abs_expU_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.expU_sub_ge": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.expU_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.one_le_five_mul_exp_neg_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.sqrtTech": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.continuous_sqrtTech": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.sqrtTech_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.hasDerivAt_sqrtTech": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.hasDerivAt_sqrtTech_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.sqrtTech_deriv_facts": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.sqrtTech_concaveOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.sqrtTech_monotoneOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.sqrtTech_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.sqrtTech_lipschitz": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.sqrtTech_slope": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.sqrtTech_posOutputInadaHyp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.sqrtTech_finiteMarginalHyp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.sqrtTech_inada_ex_18_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.sqrtTech_inada_equilibrium": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.sqrtTech_finite_ex_18_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.sqrtTech_finite_equilibrium": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.inada_const_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.finite_const_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.cornerF": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.cornerF_of_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.cornerF_monotoneOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.cornerF_plannerHyp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.corner_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.rootTech_posOutputInadaHyp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.rootTech_interior": [
       "propext",
       "Classical.choice",
       "Quot.sound"
@@ -7612,10 +10387,13 @@
     "EquilibriaWithDistortions/SchauderBoundedContinuous.lean": "f68e76ec9786c3acc022b0d940f9e8bfb5ab933c289b8670ad24fb8f3869493e",
     "EquilibriaWithDistortions/MonotoneOperators.lean": "5f5cd030f73a3511436183ea2bca7b36605236d68a859e8cd8c6d0685f2d602f",
     "EquilibriaWithDistortions/GlobalOperator.lean": "60676c17c680bc7ac216defae2f7fb05f78ab6ca3a08fd480e52eeb364b12cb2",
-    "EquilibriaWithDistortions/GlobalContinuum.lean": "fbce7165469a580845c67be7e5e1b2e2f687b53a1254f4526d3f91ac89681785",
+    "EquilibriaWithDistortions/GlobalContinuum.lean": "b0c83293bf43f2d9a2f0dc8db0cada1022ce61b0d76b9a70b6cb759dab315ed4",
     "EquilibriaWithDistortions/GlobalExamples.lean": "894dac9735f311878e4d294e607e975dcdb602f14e587624c3bcdb6cfd2dd4ce",
+    "EquilibriaWithDistortions/GlobalContinuumFixed.lean": "1a640e8966d638ff23c23a4bd203e3943aec04567f6e38491b176860e46b5bfa",
+    "EquilibriaWithDistortions/GlobalContinuumFloor.lean": "b3ff60135dd4597eb0a9858d93d613e4f3a4457fccb425f075aa4ec5ee74ed76",
     "EquilibriaWithDistortions/GlobalStochastic.lean": "ac72b816f797cb48a4c505a10d44783de092d4b4988c670cff3defb91cc677ec",
-    "EquilibriaWithDistortions/GlobalStochasticEquilibrium.lean": "49669eb1694315e099adc66b9a6c606fcbdb5b3f116525da9e529529a8140dfa",
+    "EquilibriaWithDistortions/GlobalStochasticEquilibrium.lean": "74432684e0dff5cc1449370884096669d97e3ac1d2963ac94ed1c7be76e2ebb1",
+    "EquilibriaWithDistortions/GlobalStochasticNondegenerate.lean": "d3bc395c7ad23ac1d725d76c5582ee49e50877033c6ceedd13f4ff1c42cee18b",
     "EquilibriaWithDistortions/IndirectApproach.lean": "d94eeb38ee704af6cb53aad8b5bc189cd3ca633c32b8434af15858f6eabe691e",
     "EquilibriaWithDistortions/IndirectDP.lean": "5884be43421aebde5f1ecc67b82eb536ca31e9986ee719292c0ff3711b3b372a",
     "EquilibriaWithDistortions/IndirectBellman.lean": "aabef61452ac1a120704ccfa3e4cc5d2bcd6300b6300aa49e9e40bc83264f350",
@@ -7625,21 +10403,23 @@
     "EquilibriaWithDistortions/IndirectInteriorDP.lean": "1399442c8789343805d6b54b5513e3587881f89811392ab62a507ee90babc4cf",
     "EquilibriaWithDistortions/IndirectInterior.lean": "43edf10c1b0ea9ad303a820ec4baabb4f6938af6000b74c45e5287ebc0411fc3",
     "EquilibriaWithDistortions/IndirectInteriorExample.lean": "e3b8e0aadad957f923ddd779778de57012732e77362709587a2d11d1806dbb79",
+    "EquilibriaWithDistortions/IndirectInteriorGeneral.lean": "1e35777ed9ee36e9543b2c7bca0f86385816070354518585dfefbd9ca7763052",
+    "EquilibriaWithDistortions/IndirectInteriorGeneralExample.lean": "42fcfbc19ce3c2a710fa2aa1b78a4560d73e373497a34d65040b2dcccca58f31",
     "EquilibriaWithDistortions/LocalApproach.lean": "58f08329f3bc1280e45e29f78d2f83c6e83370a5c5f74991a8cfe195701370ac",
     "EquilibriaWithDistortions/LocalImplicit.lean": "a3907b8132c4358afb65f022c86cee6225852e05c872581851a66d5cb307f6b5",
     "EquilibriaWithDistortions/LocalContraction.lean": "8f8d7cda11ec4b620b8468899a97141f9b80ae944e53ffa1827ea9453e06ed4c",
     "EquilibriaWithDistortions/LocalExample.lean": "92641a3cfbf97b19f6429fabe8ac05250fdfaa2d84ed0ca0d2e5107b0ed4e8b3",
     "EquilibriaWithDistortions/LocalSchauder.lean": "c3db0234af1f606ad0b31247c354880e1f31035c79638593e71c4a40b0b6e21b",
     "EquilibriaWithDistortions/LocalSmooth.lean": "3cbd93b5b171479ee03d1c6abbe2852ec96f8c785d93c148431b89160a11ef2a",
-    "EquilibriaWithDistortions.lean": "1a88faec2610f8c6407f7ceafa231512e9757fda3a84491753296a164525ea00",
+    "EquilibriaWithDistortions.lean": "de887fb3f88d281de95406e54b44d7a6ac3b24e46c303e99d636cb7940653ea2",
     "lean-toolchain": "8733782dc070a99b312039cda424f601b80f3be6f6f512627da5ba25adc27632",
     "lakefile.toml": "924f0e123404f38555e03374ddcd12b1ee8b4198d06dcfd3a5dd333a801ac5d9",
     "lake-manifest.json": "f76c321a53e7dcf31d0a9515f61fa41da9950f1abbb98f4157b12616eb3356f3",
-    "proof-manifest.json": "ba226fbb5f01d3a1e4cf4f55b6ad7617f1fa669f596b286c8e0a12a2e2818e53",
+    "proof-manifest.json": "5284b3eb28e4676e7e550841d817ab1d6678bda4127299d573541244bdf5090d",
     "scripts/verify.py": "a70b1fa704dd590f937f8b37682afa88a9d85a9150065acb935c7d2c9589da3b",
     "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
   },
-  "fresh_audit_sha256": "3b514fc2c41c8192262e3e4771ef701f97b569794c359cb8f0e83a5bb5ed81f3",
+  "fresh_audit_sha256": "4382743ae2a422b474551b0b6e42b7d2a65c9057ce53a0e59cd4b1ae75acae00",
   "lean_toolchain": "leanprover/lean4:v4.34.0",
   "scope": "SLP Chapter 18 (Equilibria in Systems with Distortions): every numbered result and exercise, with corrections.",
   "source": "Stokey, Lucas and Prescott (1989), Recursive Methods in Economic Dynamics, Chapter 18"

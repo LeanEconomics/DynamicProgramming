@@ -38,9 +38,12 @@ finite (for `U = √`, `U′(c) = c^{-1/2}` is integrable near a simple zero). T
 that drives the finite-shock argument then breaks. Excluding zero consumption also excludes the
 degenerate fixed point `h = ψ` of the finite case (`StochModel.Ts_psi`).
 
-**Not proved.** Existence of a fixed point in the continuum case: `F₊` is not closed, and no
-invariant closed convex subset bounded away from zero consumption has been found (the same
-obstacle as for finite `Ξ`, `GlobalStochasticEquilibrium`).
+**Existence of a fixed point** is proved by monotone iteration from `0` (`F₊` itself is not
+closed). The limit is a fixed point once consumption along the iterates has a uniform floor
+(`GlobalContinuumFixed`), and an auxiliary planner provides that floor for every `ContModel`
+(`GlobalContinuumFloor`). Under the Feller property alone the fixed point is Borel in the shock
+(`ContModel.ex_18_9_borel_existence`). Under the strong Feller property it lies in `F₊`
+(`ContModel.ex_18_9_existence`).
 -/
 
 namespace StokeyLucasPrescott.EquilibriaWithDistortions
