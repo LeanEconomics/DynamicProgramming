@@ -164,8 +164,12 @@ for check in checks:
         self.assertGreater(len(declarations), sum(counts.values()))
         for declaration in declarations:
             self.assertIn("#print axioms " + declaration["name"], fresh)
-        self.assertTrue(any(d["kind"] == "constructor" for d in declarations))
-        self.assertTrue(any(d["kind"] == "projection" for d in declarations))
+        names = {d["name"] for d in declarations}
+        structures = [d["name"] for d in declarations if d["kind"] == "structure"]
+        for structure in structures:
+            self.assertIn(structure + ".mk", names)
+        if structures:
+            self.assertTrue(any(d["kind"] == "projection" for d in declarations))
         for library in verify.libraries(config):
             self.assertNotIn("import " + library, fresh)
 
