@@ -20,8 +20,9 @@ SLP §10.5, Exercises 10.5e–g, pp. 299–300. The book derives from the first-
   (`inv_policy`) then forces the order.
 
 The strict statements of 10.5e and 10.5g, and 10.5d (consumption `x − Y(x)` strictly
-increasing), rest on the first-order conditions and are not formalised; 10.5f's sign argument
-is `ex_10_5f`.
+increasing), rest on the first-order conditions and are proved in `InventoryFOC`
+(`ex_10_5d`, `ex_10_5e_strict`, `ex_10_5g`; the strict claim of 10.5g is corrected there and
+refuted in `InventoryCounterexample`); 10.5f's sign argument is `ex_10_5f`.
 -/
 
 namespace StokeyLucasPrescott.StochasticApplications

@@ -24,12 +24,13 @@ of `UpperBounded` for (2′), and `β = 1/(1 + r)`, `R = A/(1 − β)`.
   and 9.8 do not apply directly; the proofs go through (2), whose constraint set is all of `X`.
 * **Exercise 10.4d** (`ex_10_4d`): `g` is nondecreasing in `x`, by Topkis's argument: `Γ` is
   ascending and the cost `x c(y/x)` has decreasing differences (`ind_cost_submod`). The
-  manual's further claims (strict increase, `g(x, z)/x` decreasing) rest on first-order
-  conditions and are not formalised.
+  strict claims (strict increase, `g(x, z)/x` decreasing) rest on first-order conditions and
+  are proved in `IndustryInvestmentFOC`, which also refutes "slope less than one".
 * **Exercise 10.4f** (`ex_10_4f`, `ex_10_4f_monotone`, `ex_10_4f_tendsto`): under i.i.d. shocks
   `g` does not depend on `z`, and every optimal capacity path is monotone and converges.
-  Exercise 10.4e is not formalised: the manual's step "`D` increasing in `z` implies `v_x`
-  increasing in `z`" ignores the dependence of `g` on `z`.
+  Exercise 10.4e, and the limit `x̂` of 10.4f (independent of `x₀`, positive under a condition
+  on demand and costs), are in `IndustryInvestmentFOC`. The manual's step "`D` increasing in `z`
+  implies `v_x` increasing in `z`" ignores the dependence of `g` on `z`.
 -/
 
 namespace StokeyLucasPrescott.StochasticApplications

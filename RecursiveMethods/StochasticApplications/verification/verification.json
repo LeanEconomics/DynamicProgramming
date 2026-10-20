@@ -1,12 +1,7 @@
 {
-  "checked_at_utc": "2026-10-15T21:14:31.314232+00:00",
-  "theorems": 534,
+  "checked_at_utc": "2026-10-20T21:32:14.678066+00:00",
+  "theorems": 609,
   "module_theorems": {
-    "StochasticApplications/Correspondences.lean": 2,
-    "StochasticApplications/Contraction.lean": 8,
-    "StochasticApplications/Maximum.lean": 14,
-    "StochasticApplications/Envelope.lean": 2,
-    "StochasticApplications/Selection.lean": 8,
     "StochasticApplications/TransitionFunctions.lean": 19,
     "StochasticApplications/StochasticKernels.lean": 11,
     "StochasticApplications/Histories.lean": 18,
@@ -15,10 +10,15 @@
     "StochasticApplications/Lemma93.lean": 33,
     "StochasticApplications/Theorem94.lean": 10,
     "StochasticApplications/Lemma95.lean": 11,
+    "StochasticApplications/Contraction.lean": 8,
+    "StochasticApplications/Correspondences.lean": 2,
+    "StochasticApplications/Maximum.lean": 14,
     "StochasticApplications/BoundedReturns.lean": 18,
+    "StochasticApplications/Selection.lean": 8,
     "StochasticApplications/BoundedOptimal.lean": 9,
     "StochasticApplications/BoundedMonotone.lean": 8,
     "StochasticApplications/InteriorPoints.lean": 3,
+    "StochasticApplications/Envelope.lean": 2,
     "StochasticApplications/BoundedConcave.lean": 10,
     "StochasticApplications/BoundedPolicy.lean": 11,
     "StochasticApplications/HistMarginals.lean": 5,
@@ -28,292 +28,25 @@
     "StochasticApplications/TwoCapital.lean": 25,
     "StochasticApplications/TwoCapitalReduction.lean": 10,
     "StochasticApplications/ManyGoods.lean": 15,
-    "StochasticApplications/AssetPricing.lean": 13,
-    "StochasticApplications/AssetConsumer.lean": 26,
     "StochasticApplications/SearchModel.lean": 14,
     "StochasticApplications/SearchReservation.lean": 19,
     "StochasticApplications/SearchDynamics.lean": 12,
     "StochasticApplications/JobMatching.lean": 14,
     "StochasticApplications/BetaPosterior.lean": 13,
+    "StochasticApplications/AssetPricing.lean": 13,
+    "StochasticApplications/AssetConsumer.lean": 26,
     "StochasticApplications/UpperBounded.lean": 6,
     "StochasticApplications/IndustryInvestment.lean": 19,
     "StochasticApplications/IndustryInvestmentResults.lean": 23,
+    "StochasticApplications/IndustryInvestmentFOC.lean": 39,
     "StochasticApplications/Inventory.lean": 15,
     "StochasticApplications/InventoryResults.lean": 16,
-    "StochasticApplications/InventoryPolicy.lean": 6
+    "StochasticApplications/InventoryPolicy.lean": 6,
+    "StochasticApplications/InventoryFOC.lean": 24,
+    "StochasticApplications/InventoryCounterexample.lean": 12
   },
-  "audited_declarations": 819,
+  "audited_declarations": 905,
   "declarations": [
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.IsLHC",
-      "kind": "def",
-      "module": "StochasticApplications/Correspondences.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.IsUHC",
-      "kind": "def",
-      "module": "StochasticApplications/Correspondences.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.graph",
-      "kind": "def",
-      "module": "StochasticApplications/Correspondences.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.continuousAt_of_isUHC_singleton",
-      "kind": "theorem",
-      "module": "StochasticApplications/Correspondences.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.isCompact_graph",
-      "kind": "theorem",
-      "module": "StochasticApplications/Correspondences.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.IsContraction",
-      "kind": "def",
-      "module": "StochasticApplications/Contraction.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.IsContraction.uniformContinuous",
-      "kind": "theorem",
-      "module": "StochasticApplications/Contraction.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.dist_iterate_succ_le",
-      "kind": "theorem",
-      "module": "StochasticApplications/Contraction.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.dist_iterate_le",
-      "kind": "theorem",
-      "module": "StochasticApplications/Contraction.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.cauchySeq_iterate",
-      "kind": "theorem",
-      "module": "StochasticApplications/Contraction.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.theorem_3_2",
-      "kind": "theorem",
-      "module": "StochasticApplications/Contraction.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.dist_fixedPoint_le",
-      "kind": "theorem",
-      "module": "StochasticApplications/Contraction.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.corollary_1",
-      "kind": "theorem",
-      "module": "StochasticApplications/Contraction.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.corollary_2",
-      "kind": "theorem",
-      "module": "StochasticApplications/Contraction.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.maxValue",
-      "kind": "def",
-      "module": "StochasticApplications/Maximum.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.argmax",
-      "kind": "def",
-      "module": "StochasticApplications/Maximum.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.continuousOn_section",
-      "kind": "theorem",
-      "module": "StochasticApplications/Maximum.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.exists_argmax",
-      "kind": "theorem",
-      "module": "StochasticApplications/Maximum.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.le_maxValue",
-      "kind": "theorem",
-      "module": "StochasticApplications/Maximum.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.tendsto_f_graph",
-      "kind": "theorem",
-      "module": "StochasticApplications/Maximum.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.theorem_3_6",
-      "kind": "theorem",
-      "module": "StochasticApplications/Maximum.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.UniqueArgmax",
-      "kind": "structure",
-      "module": "StochasticApplications/Maximum.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.UniqueArgmax.mk",
-      "kind": "constructor",
-      "module": "StochasticApplications/Maximum.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.UniqueArgmax.nonempty",
-      "kind": "projection",
-      "module": "StochasticApplications/Maximum.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.UniqueArgmax.compact",
-      "kind": "projection",
-      "module": "StochasticApplications/Maximum.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.UniqueArgmax.lhc",
-      "kind": "projection",
-      "module": "StochasticApplications/Maximum.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.UniqueArgmax.uhc",
-      "kind": "projection",
-      "module": "StochasticApplications/Maximum.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.UniqueArgmax.cont",
-      "kind": "projection",
-      "module": "StochasticApplications/Maximum.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.UniqueArgmax.unique",
-      "kind": "projection",
-      "module": "StochasticApplications/Maximum.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.argmaxFn",
-      "kind": "def",
-      "module": "StochasticApplications/Maximum.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.UniqueArgmax.argmaxFn_mem",
-      "kind": "theorem",
-      "module": "StochasticApplications/Maximum.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.UniqueArgmax.argmax_eq",
-      "kind": "theorem",
-      "module": "StochasticApplications/Maximum.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.UniqueArgmax.lt_of_ne",
-      "kind": "theorem",
-      "module": "StochasticApplications/Maximum.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.UniqueArgmax.continuous_argmaxFn",
-      "kind": "theorem",
-      "module": "StochasticApplications/Maximum.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.UniqueArgmax.lemma_3_7",
-      "kind": "theorem",
-      "module": "StochasticApplications/Maximum.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.UniqueArgmax.lemma_3_7_uniform",
-      "kind": "theorem",
-      "module": "StochasticApplications/Maximum.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.shortfall_lt",
-      "kind": "theorem",
-      "module": "StochasticApplications/Maximum.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.theorem_3_8",
-      "kind": "theorem",
-      "module": "StochasticApplications/Maximum.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.theorem_3_8_uniform",
-      "kind": "theorem",
-      "module": "StochasticApplications/Maximum.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.theorem_4_10",
-      "kind": "theorem",
-      "module": "StochasticApplications/Envelope.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.ex_4_5",
-      "kind": "theorem",
-      "module": "StochasticApplications/Envelope.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.IsMeasurableSelection",
-      "kind": "def",
-      "module": "StochasticApplications/Selection.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.IsMeasCorr",
-      "kind": "def",
-      "module": "StochasticApplications/Selection.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.minCoord",
-      "kind": "def",
-      "module": "StochasticApplications/Selection.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.minCoord_mem",
-      "kind": "theorem",
-      "module": "StochasticApplications/Selection.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.minCoord_le",
-      "kind": "theorem",
-      "module": "StochasticApplications/Selection.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.measurable_minCoord",
-      "kind": "theorem",
-      "module": "StochasticApplications/Selection.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.refineCorr",
-      "kind": "def",
-      "module": "StochasticApplications/Selection.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.IsMeasCorr.refine",
-      "kind": "theorem",
-      "module": "StochasticApplications/Selection.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.lexCorr",
-      "kind": "def",
-      "module": "StochasticApplications/Selection.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.lexCorr_spec",
-      "kind": "theorem",
-      "module": "StochasticApplications/Selection.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.isMeasCorr_of_uhc",
-      "kind": "theorem",
-      "module": "StochasticApplications/Selection.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.theorem_7_6",
-      "kind": "theorem",
-      "module": "StochasticApplications/Selection.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.theorem_7_6_subtype",
-      "kind": "theorem",
-      "module": "StochasticApplications/Selection.lean"
-    },
     {
       "name": "StokeyLucasPrescott.StochasticApplications.IsTransitionFunction",
       "kind": "def",
@@ -1215,6 +948,201 @@
       "module": "StochasticApplications/Lemma95.lean"
     },
     {
+      "name": "StokeyLucasPrescott.StochasticApplications.IsContraction",
+      "kind": "def",
+      "module": "StochasticApplications/Contraction.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.IsContraction.uniformContinuous",
+      "kind": "theorem",
+      "module": "StochasticApplications/Contraction.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.dist_iterate_succ_le",
+      "kind": "theorem",
+      "module": "StochasticApplications/Contraction.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.dist_iterate_le",
+      "kind": "theorem",
+      "module": "StochasticApplications/Contraction.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.cauchySeq_iterate",
+      "kind": "theorem",
+      "module": "StochasticApplications/Contraction.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.theorem_3_2",
+      "kind": "theorem",
+      "module": "StochasticApplications/Contraction.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.dist_fixedPoint_le",
+      "kind": "theorem",
+      "module": "StochasticApplications/Contraction.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.corollary_1",
+      "kind": "theorem",
+      "module": "StochasticApplications/Contraction.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.corollary_2",
+      "kind": "theorem",
+      "module": "StochasticApplications/Contraction.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.IsLHC",
+      "kind": "def",
+      "module": "StochasticApplications/Correspondences.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.IsUHC",
+      "kind": "def",
+      "module": "StochasticApplications/Correspondences.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.graph",
+      "kind": "def",
+      "module": "StochasticApplications/Correspondences.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.continuousAt_of_isUHC_singleton",
+      "kind": "theorem",
+      "module": "StochasticApplications/Correspondences.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.isCompact_graph",
+      "kind": "theorem",
+      "module": "StochasticApplications/Correspondences.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.maxValue",
+      "kind": "def",
+      "module": "StochasticApplications/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.argmax",
+      "kind": "def",
+      "module": "StochasticApplications/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.continuousOn_section",
+      "kind": "theorem",
+      "module": "StochasticApplications/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.exists_argmax",
+      "kind": "theorem",
+      "module": "StochasticApplications/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.le_maxValue",
+      "kind": "theorem",
+      "module": "StochasticApplications/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.tendsto_f_graph",
+      "kind": "theorem",
+      "module": "StochasticApplications/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.theorem_3_6",
+      "kind": "theorem",
+      "module": "StochasticApplications/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.UniqueArgmax",
+      "kind": "structure",
+      "module": "StochasticApplications/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.UniqueArgmax.mk",
+      "kind": "constructor",
+      "module": "StochasticApplications/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.UniqueArgmax.nonempty",
+      "kind": "projection",
+      "module": "StochasticApplications/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.UniqueArgmax.compact",
+      "kind": "projection",
+      "module": "StochasticApplications/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.UniqueArgmax.lhc",
+      "kind": "projection",
+      "module": "StochasticApplications/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.UniqueArgmax.uhc",
+      "kind": "projection",
+      "module": "StochasticApplications/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.UniqueArgmax.cont",
+      "kind": "projection",
+      "module": "StochasticApplications/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.UniqueArgmax.unique",
+      "kind": "projection",
+      "module": "StochasticApplications/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.argmaxFn",
+      "kind": "def",
+      "module": "StochasticApplications/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.UniqueArgmax.argmaxFn_mem",
+      "kind": "theorem",
+      "module": "StochasticApplications/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.UniqueArgmax.argmax_eq",
+      "kind": "theorem",
+      "module": "StochasticApplications/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.UniqueArgmax.lt_of_ne",
+      "kind": "theorem",
+      "module": "StochasticApplications/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.UniqueArgmax.continuous_argmaxFn",
+      "kind": "theorem",
+      "module": "StochasticApplications/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.UniqueArgmax.lemma_3_7",
+      "kind": "theorem",
+      "module": "StochasticApplications/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.UniqueArgmax.lemma_3_7_uniform",
+      "kind": "theorem",
+      "module": "StochasticApplications/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.shortfall_lt",
+      "kind": "theorem",
+      "module": "StochasticApplications/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.theorem_3_8",
+      "kind": "theorem",
+      "module": "StochasticApplications/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.theorem_3_8_uniform",
+      "kind": "theorem",
+      "module": "StochasticApplications/Maximum.lean"
+    },
+    {
       "name": "StokeyLucasPrescott.StochasticApplications.domD",
       "kind": "def",
       "module": "StochasticApplications/BoundedReturns.lean"
@@ -1390,6 +1318,71 @@
       "module": "StochasticApplications/BoundedReturns.lean"
     },
     {
+      "name": "StokeyLucasPrescott.StochasticApplications.IsMeasurableSelection",
+      "kind": "def",
+      "module": "StochasticApplications/Selection.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.IsMeasCorr",
+      "kind": "def",
+      "module": "StochasticApplications/Selection.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.minCoord",
+      "kind": "def",
+      "module": "StochasticApplications/Selection.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.minCoord_mem",
+      "kind": "theorem",
+      "module": "StochasticApplications/Selection.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.minCoord_le",
+      "kind": "theorem",
+      "module": "StochasticApplications/Selection.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.measurable_minCoord",
+      "kind": "theorem",
+      "module": "StochasticApplications/Selection.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.refineCorr",
+      "kind": "def",
+      "module": "StochasticApplications/Selection.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.IsMeasCorr.refine",
+      "kind": "theorem",
+      "module": "StochasticApplications/Selection.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.lexCorr",
+      "kind": "def",
+      "module": "StochasticApplications/Selection.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.lexCorr_spec",
+      "kind": "theorem",
+      "module": "StochasticApplications/Selection.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.isMeasCorr_of_uhc",
+      "kind": "theorem",
+      "module": "StochasticApplications/Selection.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.theorem_7_6",
+      "kind": "theorem",
+      "module": "StochasticApplications/Selection.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.theorem_7_6_subtype",
+      "kind": "theorem",
+      "module": "StochasticApplications/Selection.lean"
+    },
+    {
       "name": "StokeyLucasPrescott.StochasticApplications.isClosed_graph_of_uhc",
       "kind": "theorem",
       "module": "StochasticApplications/BoundedOptimal.lean"
@@ -1493,6 +1486,16 @@
       "name": "StokeyLucasPrescott.StochasticApplications.eventually_mem_of_mem_interior",
       "kind": "theorem",
       "module": "StochasticApplications/InteriorPoints.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.theorem_4_10",
+      "kind": "theorem",
+      "module": "StochasticApplications/Envelope.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.ex_4_5",
+      "kind": "theorem",
+      "module": "StochasticApplications/Envelope.lean"
     },
     {
       "name": "StokeyLucasPrescott.StochasticApplications.cmb",
@@ -2480,311 +2483,6 @@
       "module": "StochasticApplications/ManyGoods.lean"
     },
     {
-      "name": "StokeyLucasPrescott.StochasticApplications.abs_markovOpR_le",
-      "kind": "theorem",
-      "module": "StochasticApplications/AssetPricing.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.integrable_bcf",
-      "kind": "theorem",
-      "module": "StochasticApplications/AssetPricing.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.fellerOp",
-      "kind": "def",
-      "module": "StochasticApplications/AssetPricing.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.fellerOp_apply",
-      "kind": "theorem",
-      "module": "StochasticApplications/AssetPricing.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.fellerOp_add",
-      "kind": "theorem",
-      "module": "StochasticApplications/AssetPricing.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.fellerOp_smul",
-      "kind": "theorem",
-      "module": "StochasticApplications/AssetPricing.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.fellerOp_const",
-      "kind": "theorem",
-      "module": "StochasticApplications/AssetPricing.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.fellerOp_mono",
-      "kind": "theorem",
-      "module": "StochasticApplications/AssetPricing.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.norm_fellerOp_le",
-      "kind": "theorem",
-      "module": "StochasticApplications/AssetPricing.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.norm_fellerOp_iterate_le",
-      "kind": "theorem",
-      "module": "StochasticApplications/AssetPricing.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.priceT",
-      "kind": "def",
-      "module": "StochasticApplications/AssetPricing.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.priceT_contraction",
-      "kind": "theorem",
-      "module": "StochasticApplications/AssetPricing.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.priceT_iterate_zero",
-      "kind": "theorem",
-      "module": "StochasticApplications/AssetPricing.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.ex_10_6e_general",
-      "kind": "theorem",
-      "module": "StochasticApplications/AssetPricing.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.ex_10_6e",
-      "kind": "theorem",
-      "module": "StochasticApplications/AssetPricing.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.assetX",
-      "kind": "def",
-      "module": "StochasticApplications/AssetConsumer.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.dotR",
-      "kind": "def",
-      "module": "StochasticApplications/AssetConsumer.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.dotCLM",
-      "kind": "def",
-      "module": "StochasticApplications/AssetConsumer.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.dotCLM_apply",
-      "kind": "theorem",
-      "module": "StochasticApplications/AssetConsumer.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.continuous_dotR",
-      "kind": "theorem",
-      "module": "StochasticApplications/AssetConsumer.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.dotR_cmb",
-      "kind": "theorem",
-      "module": "StochasticApplications/AssetConsumer.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.dotR_nonneg",
-      "kind": "theorem",
-      "module": "StochasticApplications/AssetConsumer.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.dotR_le",
-      "kind": "theorem",
-      "module": "StochasticApplications/AssetConsumer.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.dotR_lt",
-      "kind": "theorem",
-      "module": "StochasticApplications/AssetConsumer.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.mem_assetX",
-      "kind": "theorem",
-      "module": "StochasticApplications/AssetConsumer.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.convex_assetX",
-      "kind": "theorem",
-      "module": "StochasticApplications/AssetConsumer.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.isCompact_assetX",
-      "kind": "theorem",
-      "module": "StochasticApplications/AssetConsumer.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.isLHC_budget",
-      "kind": "theorem",
-      "module": "StochasticApplications/AssetConsumer.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.isUHC_budget",
-      "kind": "theorem",
-      "module": "StochasticApplications/AssetConsumer.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.AssetHyp",
-      "kind": "structure",
-      "module": "StochasticApplications/AssetConsumer.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.AssetHyp.mk",
-      "kind": "constructor",
-      "module": "StochasticApplications/AssetConsumer.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.AssetHyp.\u03b2_pos",
-      "kind": "projection",
-      "module": "StochasticApplications/AssetConsumer.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.AssetHyp.\u03b2_lt",
-      "kind": "projection",
-      "module": "StochasticApplications/AssetConsumer.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.AssetHyp.xbar_gt",
-      "kind": "projection",
-      "module": "StochasticApplications/AssetConsumer.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.AssetHyp.U_cont",
-      "kind": "projection",
-      "module": "StochasticApplications/AssetConsumer.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.AssetHyp.U_mono",
-      "kind": "projection",
-      "module": "StochasticApplications/AssetConsumer.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.AssetHyp.U_conc",
-      "kind": "projection",
-      "module": "StochasticApplications/AssetConsumer.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.AssetHyp.d_cont",
-      "kind": "projection",
-      "module": "StochasticApplications/AssetConsumer.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.AssetHyp.d_pos",
-      "kind": "projection",
-      "module": "StochasticApplications/AssetConsumer.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.AssetHyp.p_cont",
-      "kind": "projection",
-      "module": "StochasticApplications/AssetConsumer.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.AssetHyp.p_pos",
-      "kind": "projection",
-      "module": "StochasticApplications/AssetConsumer.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.asset\u0393",
-      "kind": "def",
-      "module": "StochasticApplications/AssetConsumer.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.assetC",
-      "kind": "def",
-      "module": "StochasticApplications/AssetConsumer.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.assetF",
-      "kind": "def",
-      "module": "StochasticApplications/AssetConsumer.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.assetModel",
-      "kind": "abbrev",
-      "module": "StochasticApplications/AssetConsumer.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.assetF_of_mem",
-      "kind": "theorem",
-      "module": "StochasticApplications/AssetConsumer.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.AssetHyp.continuous_F",
-      "kind": "theorem",
-      "module": "StochasticApplications/AssetConsumer.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.asset_boundedDP",
-      "kind": "theorem",
-      "module": "StochasticApplications/AssetConsumer.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.asset_cmb",
-      "kind": "theorem",
-      "module": "StochasticApplications/AssetConsumer.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.asset_rhs_le",
-      "kind": "theorem",
-      "module": "StochasticApplications/AssetConsumer.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.asset_concave",
-      "kind": "theorem",
-      "module": "StochasticApplications/AssetConsumer.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.ex_10_6ab",
-      "kind": "theorem",
-      "module": "StochasticApplications/AssetConsumer.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.assetX_mem_nhds",
-      "kind": "theorem",
-      "module": "StochasticApplications/AssetConsumer.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.asset_rhs_eq",
-      "kind": "theorem",
-      "module": "StochasticApplications/AssetConsumer.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.ex_10_6c_deriv",
-      "kind": "theorem",
-      "module": "StochasticApplications/AssetConsumer.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.dotR_add_single",
-      "kind": "theorem",
-      "module": "StochasticApplications/AssetConsumer.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.ex_10_6c_euler",
-      "kind": "theorem",
-      "module": "StochasticApplications/AssetConsumer.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.oneX",
-      "kind": "def",
-      "module": "StochasticApplications/AssetConsumer.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.assetC_one",
-      "kind": "theorem",
-      "module": "StochasticApplications/AssetConsumer.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.dotR_single",
-      "kind": "theorem",
-      "module": "StochasticApplications/AssetConsumer.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.StochasticApplications.ex_10_6d",
-      "kind": "theorem",
-      "module": "StochasticApplications/AssetConsumer.lean"
-    },
-    {
       "name": "StokeyLucasPrescott.StochasticApplications.Two",
       "kind": "abbrev",
       "module": "StochasticApplications/SearchModel.lean"
@@ -3380,6 +3078,311 @@
       "module": "StochasticApplications/BetaPosterior.lean"
     },
     {
+      "name": "StokeyLucasPrescott.StochasticApplications.abs_markovOpR_le",
+      "kind": "theorem",
+      "module": "StochasticApplications/AssetPricing.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.integrable_bcf",
+      "kind": "theorem",
+      "module": "StochasticApplications/AssetPricing.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.fellerOp",
+      "kind": "def",
+      "module": "StochasticApplications/AssetPricing.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.fellerOp_apply",
+      "kind": "theorem",
+      "module": "StochasticApplications/AssetPricing.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.fellerOp_add",
+      "kind": "theorem",
+      "module": "StochasticApplications/AssetPricing.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.fellerOp_smul",
+      "kind": "theorem",
+      "module": "StochasticApplications/AssetPricing.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.fellerOp_const",
+      "kind": "theorem",
+      "module": "StochasticApplications/AssetPricing.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.fellerOp_mono",
+      "kind": "theorem",
+      "module": "StochasticApplications/AssetPricing.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.norm_fellerOp_le",
+      "kind": "theorem",
+      "module": "StochasticApplications/AssetPricing.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.norm_fellerOp_iterate_le",
+      "kind": "theorem",
+      "module": "StochasticApplications/AssetPricing.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.priceT",
+      "kind": "def",
+      "module": "StochasticApplications/AssetPricing.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.priceT_contraction",
+      "kind": "theorem",
+      "module": "StochasticApplications/AssetPricing.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.priceT_iterate_zero",
+      "kind": "theorem",
+      "module": "StochasticApplications/AssetPricing.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.ex_10_6e_general",
+      "kind": "theorem",
+      "module": "StochasticApplications/AssetPricing.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.ex_10_6e",
+      "kind": "theorem",
+      "module": "StochasticApplications/AssetPricing.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.assetX",
+      "kind": "def",
+      "module": "StochasticApplications/AssetConsumer.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.dotR",
+      "kind": "def",
+      "module": "StochasticApplications/AssetConsumer.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.dotCLM",
+      "kind": "def",
+      "module": "StochasticApplications/AssetConsumer.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.dotCLM_apply",
+      "kind": "theorem",
+      "module": "StochasticApplications/AssetConsumer.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.continuous_dotR",
+      "kind": "theorem",
+      "module": "StochasticApplications/AssetConsumer.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.dotR_cmb",
+      "kind": "theorem",
+      "module": "StochasticApplications/AssetConsumer.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.dotR_nonneg",
+      "kind": "theorem",
+      "module": "StochasticApplications/AssetConsumer.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.dotR_le",
+      "kind": "theorem",
+      "module": "StochasticApplications/AssetConsumer.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.dotR_lt",
+      "kind": "theorem",
+      "module": "StochasticApplications/AssetConsumer.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.mem_assetX",
+      "kind": "theorem",
+      "module": "StochasticApplications/AssetConsumer.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.convex_assetX",
+      "kind": "theorem",
+      "module": "StochasticApplications/AssetConsumer.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.isCompact_assetX",
+      "kind": "theorem",
+      "module": "StochasticApplications/AssetConsumer.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.isLHC_budget",
+      "kind": "theorem",
+      "module": "StochasticApplications/AssetConsumer.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.isUHC_budget",
+      "kind": "theorem",
+      "module": "StochasticApplications/AssetConsumer.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.AssetHyp",
+      "kind": "structure",
+      "module": "StochasticApplications/AssetConsumer.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.AssetHyp.mk",
+      "kind": "constructor",
+      "module": "StochasticApplications/AssetConsumer.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.AssetHyp.\u03b2_pos",
+      "kind": "projection",
+      "module": "StochasticApplications/AssetConsumer.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.AssetHyp.\u03b2_lt",
+      "kind": "projection",
+      "module": "StochasticApplications/AssetConsumer.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.AssetHyp.xbar_gt",
+      "kind": "projection",
+      "module": "StochasticApplications/AssetConsumer.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.AssetHyp.U_cont",
+      "kind": "projection",
+      "module": "StochasticApplications/AssetConsumer.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.AssetHyp.U_mono",
+      "kind": "projection",
+      "module": "StochasticApplications/AssetConsumer.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.AssetHyp.U_conc",
+      "kind": "projection",
+      "module": "StochasticApplications/AssetConsumer.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.AssetHyp.d_cont",
+      "kind": "projection",
+      "module": "StochasticApplications/AssetConsumer.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.AssetHyp.d_pos",
+      "kind": "projection",
+      "module": "StochasticApplications/AssetConsumer.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.AssetHyp.p_cont",
+      "kind": "projection",
+      "module": "StochasticApplications/AssetConsumer.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.AssetHyp.p_pos",
+      "kind": "projection",
+      "module": "StochasticApplications/AssetConsumer.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.asset\u0393",
+      "kind": "def",
+      "module": "StochasticApplications/AssetConsumer.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.assetC",
+      "kind": "def",
+      "module": "StochasticApplications/AssetConsumer.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.assetF",
+      "kind": "def",
+      "module": "StochasticApplications/AssetConsumer.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.assetModel",
+      "kind": "abbrev",
+      "module": "StochasticApplications/AssetConsumer.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.assetF_of_mem",
+      "kind": "theorem",
+      "module": "StochasticApplications/AssetConsumer.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.AssetHyp.continuous_F",
+      "kind": "theorem",
+      "module": "StochasticApplications/AssetConsumer.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.asset_boundedDP",
+      "kind": "theorem",
+      "module": "StochasticApplications/AssetConsumer.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.asset_cmb",
+      "kind": "theorem",
+      "module": "StochasticApplications/AssetConsumer.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.asset_rhs_le",
+      "kind": "theorem",
+      "module": "StochasticApplications/AssetConsumer.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.asset_concave",
+      "kind": "theorem",
+      "module": "StochasticApplications/AssetConsumer.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.ex_10_6ab",
+      "kind": "theorem",
+      "module": "StochasticApplications/AssetConsumer.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.assetX_mem_nhds",
+      "kind": "theorem",
+      "module": "StochasticApplications/AssetConsumer.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.asset_rhs_eq",
+      "kind": "theorem",
+      "module": "StochasticApplications/AssetConsumer.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.ex_10_6c_deriv",
+      "kind": "theorem",
+      "module": "StochasticApplications/AssetConsumer.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.dotR_add_single",
+      "kind": "theorem",
+      "module": "StochasticApplications/AssetConsumer.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.ex_10_6c_euler",
+      "kind": "theorem",
+      "module": "StochasticApplications/AssetConsumer.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.oneX",
+      "kind": "def",
+      "module": "StochasticApplications/AssetConsumer.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.assetC_one",
+      "kind": "theorem",
+      "module": "StochasticApplications/AssetConsumer.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.dotR_single",
+      "kind": "theorem",
+      "module": "StochasticApplications/AssetConsumer.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.ex_10_6d",
+      "kind": "theorem",
+      "module": "StochasticApplications/AssetConsumer.lean"
+    },
+    {
       "name": "StokeyLucasPrescott.StochasticApplications.UpperDP",
       "kind": "structure",
       "module": "StochasticApplications/UpperBounded.lean"
@@ -3830,6 +3833,221 @@
       "module": "StochasticApplications/IndustryInvestmentResults.lean"
     },
     {
+      "name": "StokeyLucasPrescott.StochasticApplications.indW",
+      "kind": "def",
+      "module": "StochasticApplications/IndustryInvestmentFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.ind_liftS_of_pos",
+      "kind": "theorem",
+      "module": "StochasticApplications/IndustryInvestmentFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.indW_of_pos",
+      "kind": "theorem",
+      "module": "StochasticApplications/IndustryInvestmentFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.ind_rhs_W",
+      "kind": "theorem",
+      "module": "StochasticApplications/IndustryInvestmentFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.ind_rhs_le_v",
+      "kind": "theorem",
+      "module": "StochasticApplications/IndustryInvestmentFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.indW_strictMonoOn",
+      "kind": "theorem",
+      "module": "StochasticApplications/IndustryInvestmentFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.indW_strictConcaveOn",
+      "kind": "theorem",
+      "module": "StochasticApplications/IndustryInvestmentFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.ind_c_deriv_eq_zero",
+      "kind": "theorem",
+      "module": "StochasticApplications/IndustryInvestmentFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.ind_c_deriv_mono",
+      "kind": "theorem",
+      "module": "StochasticApplications/IndustryInvestmentFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.ind_c_deriv_strict",
+      "kind": "theorem",
+      "module": "StochasticApplications/IndustryInvestmentFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.ind_c_le_mul_deriv",
+      "kind": "theorem",
+      "module": "StochasticApplications/IndustryInvestmentFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.ind_foc",
+      "kind": "theorem",
+      "module": "StochasticApplications/IndustryInvestmentFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.ind_policy_gt",
+      "kind": "theorem",
+      "module": "StochasticApplications/IndustryInvestmentFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.indW_hasDerivAt",
+      "kind": "theorem",
+      "module": "StochasticApplications/IndustryInvestmentFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.indW_deriv_lt",
+      "kind": "theorem",
+      "module": "StochasticApplications/IndustryInvestmentFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.ind_policy_strictMono_x",
+      "kind": "theorem",
+      "module": "StochasticApplications/IndustryInvestmentFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.ind_policy_ratio_lt",
+      "kind": "theorem",
+      "module": "StochasticApplications/IndustryInvestmentFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.ind_policy_ratio_le",
+      "kind": "theorem",
+      "module": "StochasticApplications/IndustryInvestmentFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.ind_policy_slope_lt",
+      "kind": "theorem",
+      "module": "StochasticApplications/IndustryInvestmentFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.IndIncDiff",
+      "kind": "def",
+      "module": "StochasticApplications/IndustryInvestmentFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.isClosed_indIncDiff",
+      "kind": "theorem",
+      "module": "StochasticApplications/IndustryInvestmentFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.ind_E_incDiff",
+      "kind": "theorem",
+      "module": "StochasticApplications/IndustryInvestmentFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.ind_T_incDiff",
+      "kind": "theorem",
+      "module": "StochasticApplications/IndustryInvestmentFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.ind_v_incDiff",
+      "kind": "theorem",
+      "module": "StochasticApplications/IndustryInvestmentFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.ex_10_4e",
+      "kind": "theorem",
+      "module": "StochasticApplications/IndustryInvestmentFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.ex_10_4e_strict",
+      "kind": "theorem",
+      "module": "StochasticApplications/IndustryInvestmentFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.ind_policy_gt_self",
+      "kind": "theorem",
+      "module": "StochasticApplications/IndustryInvestmentFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.ind_not_tendsto_zero",
+      "kind": "theorem",
+      "module": "StochasticApplications/IndustryInvestmentFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.ind_stationary_unique",
+      "kind": "theorem",
+      "module": "StochasticApplications/IndustryInvestmentFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.ind_limit_stationary",
+      "kind": "theorem",
+      "module": "StochasticApplications/IndustryInvestmentFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.ex_10_4f_limit_eq",
+      "kind": "theorem",
+      "module": "StochasticApplications/IndustryInvestmentFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.ex_10_4f_limit_pos",
+      "kind": "theorem",
+      "module": "StochasticApplications/IndustryInvestmentFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.ex_10_4f_stationary",
+      "kind": "theorem",
+      "module": "StochasticApplications/IndustryInvestmentFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.indU0",
+      "kind": "def",
+      "module": "StochasticApplications/IndustryInvestmentFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.hasDerivAt_indU0",
+      "kind": "theorem",
+      "module": "StochasticApplications/IndustryInvestmentFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.hasDerivAt_cq",
+      "kind": "theorem",
+      "module": "StochasticApplications/IndustryInvestmentFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.ind0_hyp",
+      "kind": "theorem",
+      "module": "StochasticApplications/IndustryInvestmentFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.indQ0",
+      "kind": "abbrev",
+      "module": "StochasticApplications/IndustryInvestmentFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.indQ0_props",
+      "kind": "theorem",
+      "module": "StochasticApplications/IndustryInvestmentFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.indU0_incDiff",
+      "kind": "theorem",
+      "module": "StochasticApplications/IndustryInvestmentFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.ind0_diff",
+      "kind": "theorem",
+      "module": "StochasticApplications/IndustryInvestmentFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.ex_10_4e_strict_counterexample",
+      "kind": "theorem",
+      "module": "StochasticApplications/IndustryInvestmentFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.ex_10_4d_slope_counterexample",
+      "kind": "theorem",
+      "module": "StochasticApplications/IndustryInvestmentFOC.lean"
+    },
+    {
       "name": "StokeyLucasPrescott.StochasticApplications.InvHyp",
       "kind": "structure",
       "module": "StochasticApplications/Inventory.lean"
@@ -4138,6 +4356,221 @@
       "name": "StokeyLucasPrescott.StochasticApplications.ex_10_5e",
       "kind": "theorem",
       "module": "StochasticApplications/InventoryPolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.inv_cont_eq",
+      "kind": "theorem",
+      "module": "StochasticApplications/InventoryFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.inv_integral_eq",
+      "kind": "theorem",
+      "module": "StochasticApplications/InventoryFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.inv_integrable",
+      "kind": "theorem",
+      "module": "StochasticApplications/InventoryFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.inv_Y_lt",
+      "kind": "theorem",
+      "module": "StochasticApplications/InventoryFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.inv_N_lt",
+      "kind": "theorem",
+      "module": "StochasticApplications/InventoryFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.inv_hasDerivAt_pos",
+      "kind": "theorem",
+      "module": "StochasticApplications/InventoryFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.inv_differentiableAt",
+      "kind": "theorem",
+      "module": "StochasticApplications/InventoryFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.inv_deriv_strictAnti",
+      "kind": "theorem",
+      "module": "StochasticApplications/InventoryFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.inv_deriv_pos",
+      "kind": "theorem",
+      "module": "StochasticApplications/InventoryFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.inv_mul_deriv_le",
+      "kind": "theorem",
+      "module": "StochasticApplications/InventoryFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.inv_hasDerivAt_Ey",
+      "kind": "theorem",
+      "module": "StochasticApplications/InventoryFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.inv_hasDerivAt_En",
+      "kind": "theorem",
+      "module": "StochasticApplications/InventoryFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.inv_foc_y",
+      "kind": "theorem",
+      "module": "StochasticApplications/InventoryFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.inv_foc_n",
+      "kind": "theorem",
+      "module": "StochasticApplications/InventoryFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.ex_10_5d",
+      "kind": "theorem",
+      "module": "StochasticApplications/InventoryFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.ex_10_5e_strict",
+      "kind": "theorem",
+      "module": "StochasticApplications/InventoryFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.inv_N_pos",
+      "kind": "theorem",
+      "module": "StochasticApplications/InventoryFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.inv_N_eq_of_Y_zero",
+      "kind": "theorem",
+      "module": "StochasticApplications/InventoryFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.inv_N_strict",
+      "kind": "theorem",
+      "module": "StochasticApplications/InventoryFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.ex_10_5g",
+      "kind": "theorem",
+      "module": "StochasticApplications/InventoryFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.inv_deriv_le",
+      "kind": "theorem",
+      "module": "StochasticApplications/InventoryFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.inv_sub_le",
+      "kind": "theorem",
+      "module": "StochasticApplications/InventoryFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.inv_Y_eq_zero",
+      "kind": "theorem",
+      "module": "StochasticApplications/InventoryFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.inv_N_eq_zero",
+      "kind": "theorem",
+      "module": "StochasticApplications/InventoryFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.invExU",
+      "kind": "def",
+      "module": "StochasticApplications/InventoryCounterexample.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.invExSq",
+      "kind": "def",
+      "module": "StochasticApplications/InventoryCounterexample.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.invExSteep",
+      "kind": "def",
+      "module": "StochasticApplications/InventoryCounterexample.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.invEx\u03c9\u2080",
+      "kind": "def",
+      "module": "StochasticApplications/InventoryCounterexample.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.invEx\u03c9\u2081",
+      "kind": "def",
+      "module": "StochasticApplications/InventoryCounterexample.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.invEx\u03bc",
+      "kind": "abbrev",
+      "module": "StochasticApplications/InventoryCounterexample.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.invEx\u03bc\u2080",
+      "kind": "abbrev",
+      "module": "StochasticApplications/InventoryCounterexample.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.invExU_hasDerivAt",
+      "kind": "theorem",
+      "module": "StochasticApplications/InventoryCounterexample.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.invExSq_hasDerivAt",
+      "kind": "theorem",
+      "module": "StochasticApplications/InventoryCounterexample.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.invExSteep_hasDerivAt",
+      "kind": "theorem",
+      "module": "StochasticApplications/InventoryCounterexample.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.invExU_strictConcave",
+      "kind": "theorem",
+      "module": "StochasticApplications/InventoryCounterexample.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.invExSq_strictMono",
+      "kind": "theorem",
+      "module": "StochasticApplications/InventoryCounterexample.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.invEx_hyp",
+      "kind": "theorem",
+      "module": "StochasticApplications/InventoryCounterexample.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.invExSteep_hyp",
+      "kind": "theorem",
+      "module": "StochasticApplications/InventoryCounterexample.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.invEx_hyps",
+      "kind": "theorem",
+      "module": "StochasticApplications/InventoryCounterexample.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.ex_10_5g_counterexample",
+      "kind": "theorem",
+      "module": "StochasticApplications/InventoryCounterexample.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.inv_N_zero_of_dirac",
+      "kind": "theorem",
+      "module": "StochasticApplications/InventoryCounterexample.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.ex_10_5g_mean_zero",
+      "kind": "theorem",
+      "module": "StochasticApplications/InventoryCounterexample.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.ex_10_5g_steep",
+      "kind": "theorem",
+      "module": "StochasticApplications/InventoryCounterexample.lean"
     }
   ],
   "full_build": "passed",
@@ -4147,268 +4580,6 @@
     "-Dlinter.style.header=false"
   ],
   "axioms": {
-    "StokeyLucasPrescott.StochasticApplications.IsLHC": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.IsUHC": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.graph": [],
-    "StokeyLucasPrescott.StochasticApplications.continuousAt_of_isUHC_singleton": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.isCompact_graph": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.IsContraction": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.IsContraction.uniformContinuous": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.dist_iterate_succ_le": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.dist_iterate_le": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.cauchySeq_iterate": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.theorem_3_2": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.dist_fixedPoint_le": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.corollary_1": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.corollary_2": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.maxValue": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.argmax": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.continuousOn_section": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.exists_argmax": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.le_maxValue": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.tendsto_f_graph": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.theorem_3_6": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.UniqueArgmax": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.UniqueArgmax.mk": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.UniqueArgmax.nonempty": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.UniqueArgmax.compact": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.UniqueArgmax.lhc": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.UniqueArgmax.uhc": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.UniqueArgmax.cont": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.UniqueArgmax.unique": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.argmaxFn": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.UniqueArgmax.argmaxFn_mem": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.UniqueArgmax.argmax_eq": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.UniqueArgmax.lt_of_ne": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.UniqueArgmax.continuous_argmaxFn": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.UniqueArgmax.lemma_3_7": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.UniqueArgmax.lemma_3_7_uniform": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.shortfall_lt": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.theorem_3_8": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.theorem_3_8_uniform": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.theorem_4_10": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.ex_4_5": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.IsMeasurableSelection": [],
-    "StokeyLucasPrescott.StochasticApplications.IsMeasCorr": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.minCoord": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.minCoord_mem": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.minCoord_le": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.measurable_minCoord": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.refineCorr": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.IsMeasCorr.refine": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.lexCorr": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.lexCorr_spec": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.isMeasCorr_of_uhc": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.theorem_7_6": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.theorem_7_6_subtype": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
     "StokeyLucasPrescott.StochasticApplications.IsTransitionFunction": [
       "propext",
       "Classical.choice",
@@ -5292,6 +5463,197 @@
       "Classical.choice",
       "Quot.sound"
     ],
+    "StokeyLucasPrescott.StochasticApplications.IsContraction": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.IsContraction.uniformContinuous": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.dist_iterate_succ_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.dist_iterate_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.cauchySeq_iterate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.theorem_3_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.dist_fixedPoint_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.corollary_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.corollary_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.IsLHC": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.IsUHC": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.graph": [],
+    "StokeyLucasPrescott.StochasticApplications.continuousAt_of_isUHC_singleton": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.isCompact_graph": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.maxValue": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.argmax": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.continuousOn_section": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.exists_argmax": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.le_maxValue": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.tendsto_f_graph": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.theorem_3_6": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.UniqueArgmax": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.UniqueArgmax.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.UniqueArgmax.nonempty": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.UniqueArgmax.compact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.UniqueArgmax.lhc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.UniqueArgmax.uhc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.UniqueArgmax.cont": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.UniqueArgmax.unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.argmaxFn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.UniqueArgmax.argmaxFn_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.UniqueArgmax.argmax_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.UniqueArgmax.lt_of_ne": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.UniqueArgmax.continuous_argmaxFn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.UniqueArgmax.lemma_3_7": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.UniqueArgmax.lemma_3_7_uniform": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.shortfall_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.theorem_3_8": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.theorem_3_8_uniform": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
     "StokeyLucasPrescott.StochasticApplications.domD": [
       "propext",
       "Classical.choice",
@@ -5467,6 +5829,67 @@
       "Classical.choice",
       "Quot.sound"
     ],
+    "StokeyLucasPrescott.StochasticApplications.IsMeasurableSelection": [],
+    "StokeyLucasPrescott.StochasticApplications.IsMeasCorr": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.minCoord": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.minCoord_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.minCoord_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.measurable_minCoord": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.refineCorr": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.IsMeasCorr.refine": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.lexCorr": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.lexCorr_spec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.isMeasCorr_of_uhc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.theorem_7_6": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.theorem_7_6_subtype": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
     "StokeyLucasPrescott.StochasticApplications.isClosed_graph_of_uhc": [
       "propext",
       "Classical.choice",
@@ -5568,6 +5991,16 @@
       "Quot.sound"
     ],
     "StokeyLucasPrescott.StochasticApplications.eventually_mem_of_mem_interior": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.theorem_4_10": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.ex_4_5": [
       "propext",
       "Classical.choice",
       "Quot.sound"
@@ -6557,311 +6990,6 @@
       "Classical.choice",
       "Quot.sound"
     ],
-    "StokeyLucasPrescott.StochasticApplications.abs_markovOpR_le": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.integrable_bcf": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.fellerOp": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.fellerOp_apply": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.fellerOp_add": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.fellerOp_smul": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.fellerOp_const": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.fellerOp_mono": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.norm_fellerOp_le": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.norm_fellerOp_iterate_le": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.priceT": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.priceT_contraction": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.priceT_iterate_zero": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.ex_10_6e_general": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.ex_10_6e": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.assetX": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.dotR": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.dotCLM": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.dotCLM_apply": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.continuous_dotR": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.dotR_cmb": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.dotR_nonneg": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.dotR_le": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.dotR_lt": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.mem_assetX": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.convex_assetX": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.isCompact_assetX": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.isLHC_budget": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.isUHC_budget": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.AssetHyp": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.AssetHyp.mk": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.AssetHyp.\u03b2_pos": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.AssetHyp.\u03b2_lt": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.AssetHyp.xbar_gt": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.AssetHyp.U_cont": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.AssetHyp.U_mono": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.AssetHyp.U_conc": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.AssetHyp.d_cont": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.AssetHyp.d_pos": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.AssetHyp.p_cont": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.AssetHyp.p_pos": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.asset\u0393": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.assetC": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.assetF": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.assetModel": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.assetF_of_mem": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.AssetHyp.continuous_F": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.asset_boundedDP": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.asset_cmb": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.asset_rhs_le": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.asset_concave": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.ex_10_6ab": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.assetX_mem_nhds": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.asset_rhs_eq": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.ex_10_6c_deriv": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.dotR_add_single": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.ex_10_6c_euler": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.oneX": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.assetC_one": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.dotR_single": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.StochasticApplications.ex_10_6d": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
     "StokeyLucasPrescott.StochasticApplications.Two": [],
     "StokeyLucasPrescott.StochasticApplications.two0": [
       "propext"
@@ -7419,6 +7547,311 @@
       "Classical.choice",
       "Quot.sound"
     ],
+    "StokeyLucasPrescott.StochasticApplications.abs_markovOpR_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.integrable_bcf": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.fellerOp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.fellerOp_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.fellerOp_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.fellerOp_smul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.fellerOp_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.fellerOp_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.norm_fellerOp_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.norm_fellerOp_iterate_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.priceT": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.priceT_contraction": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.priceT_iterate_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.ex_10_6e_general": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.ex_10_6e": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.assetX": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.dotR": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.dotCLM": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.dotCLM_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.continuous_dotR": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.dotR_cmb": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.dotR_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.dotR_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.dotR_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.mem_assetX": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.convex_assetX": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.isCompact_assetX": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.isLHC_budget": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.isUHC_budget": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.AssetHyp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.AssetHyp.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.AssetHyp.\u03b2_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.AssetHyp.\u03b2_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.AssetHyp.xbar_gt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.AssetHyp.U_cont": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.AssetHyp.U_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.AssetHyp.U_conc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.AssetHyp.d_cont": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.AssetHyp.d_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.AssetHyp.p_cont": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.AssetHyp.p_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.asset\u0393": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.assetC": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.assetF": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.assetModel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.assetF_of_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.AssetHyp.continuous_F": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.asset_boundedDP": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.asset_cmb": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.asset_rhs_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.asset_concave": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.ex_10_6ab": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.assetX_mem_nhds": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.asset_rhs_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.ex_10_6c_deriv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.dotR_add_single": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.ex_10_6c_euler": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.oneX": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.assetC_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.dotR_single": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.ex_10_6d": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
     "StokeyLucasPrescott.StochasticApplications.UpperDP": [
       "propext",
       "Classical.choice",
@@ -7869,6 +8302,221 @@
       "Classical.choice",
       "Quot.sound"
     ],
+    "StokeyLucasPrescott.StochasticApplications.indW": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.ind_liftS_of_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.indW_of_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.ind_rhs_W": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.ind_rhs_le_v": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.indW_strictMonoOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.indW_strictConcaveOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.ind_c_deriv_eq_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.ind_c_deriv_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.ind_c_deriv_strict": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.ind_c_le_mul_deriv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.ind_foc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.ind_policy_gt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.indW_hasDerivAt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.indW_deriv_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.ind_policy_strictMono_x": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.ind_policy_ratio_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.ind_policy_ratio_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.ind_policy_slope_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.IndIncDiff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.isClosed_indIncDiff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.ind_E_incDiff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.ind_T_incDiff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.ind_v_incDiff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.ex_10_4e": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.ex_10_4e_strict": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.ind_policy_gt_self": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.ind_not_tendsto_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.ind_stationary_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.ind_limit_stationary": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.ex_10_4f_limit_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.ex_10_4f_limit_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.ex_10_4f_stationary": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.indU0": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.hasDerivAt_indU0": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.hasDerivAt_cq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.ind0_hyp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.indQ0": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.indQ0_props": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.indU0_incDiff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.ind0_diff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.ex_10_4e_strict_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.ex_10_4d_slope_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
     "StokeyLucasPrescott.StochasticApplications.InvHyp": [
       "propext",
       "Classical.choice",
@@ -8178,14 +8826,224 @@
       "propext",
       "Classical.choice",
       "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.inv_cont_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.inv_integral_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.inv_integrable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.inv_Y_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.inv_N_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.inv_hasDerivAt_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.inv_differentiableAt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.inv_deriv_strictAnti": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.inv_deriv_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.inv_mul_deriv_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.inv_hasDerivAt_Ey": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.inv_hasDerivAt_En": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.inv_foc_y": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.inv_foc_n": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.ex_10_5d": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.ex_10_5e_strict": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.inv_N_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.inv_N_eq_of_Y_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.inv_N_strict": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.ex_10_5g": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.inv_deriv_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.inv_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.inv_Y_eq_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.inv_N_eq_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.invExU": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.invExSq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.invExSteep": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.invEx\u03c9\u2080": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.invEx\u03c9\u2081": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.invEx\u03bc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.invEx\u03bc\u2080": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.invExU_hasDerivAt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.invExSq_hasDerivAt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.invExSteep_hasDerivAt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.invExU_strictConcave": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.invExSq_strictMono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.invEx_hyp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.invExSteep_hyp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.invEx_hyps": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.ex_10_5g_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.inv_N_zero_of_dirac": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.ex_10_5g_mean_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.ex_10_5g_steep": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
     ]
   },
   "source_sha256": {
-    "StochasticApplications/Correspondences.lean": "744559d8656f5ca474ac02233795174de4ec5ee79d00056aba1637085d06e390",
-    "StochasticApplications/Contraction.lean": "c7ef4d50b8679df15518d4d026967d8ecea65a094730c564fcd19e58806afc5e",
-    "StochasticApplications/Maximum.lean": "dbf01612963673321fed11c3b50f3a97c4d118e130ece041b8a9d1b4075bec61",
-    "StochasticApplications/Envelope.lean": "08ea841dea01bcaa57aec072e271b5188c41b65c39d386956697566332f135e1",
-    "StochasticApplications/Selection.lean": "df10b034a3aa6e80bc443d02c056bcf0b943d22a2647383cf8ed2814bf141ba5",
     "StochasticApplications/TransitionFunctions.lean": "39d905f7b5370fb5b2b2bb98165fddfd66f8f40875ea47c95a30ef4618ea0b86",
     "StochasticApplications/StochasticKernels.lean": "352036b044c6d25891a9431353a7376bcf99803d0d3c3333826b312ff0f75a0c",
     "StochasticApplications/Histories.lean": "3820c6c32471968c0d4cca4e796ce643bddcee2dc740fa3841e6f4a7d7866a60",
@@ -8194,10 +9052,15 @@
     "StochasticApplications/Lemma93.lean": "13685a42dc3ab32fe1cdd67afdbcd73e1d05736b2ad34cd7d6c1c3decd353fa3",
     "StochasticApplications/Theorem94.lean": "ac832b7033f7167c33836f543c7890dfbd2d4a12c58872074fff44926faf3208",
     "StochasticApplications/Lemma95.lean": "727c14a6b3fc715bd1ea787ef6c8d7c5833cc8d61713c135ffb7c9afbf98bd40",
+    "StochasticApplications/Contraction.lean": "c7ef4d50b8679df15518d4d026967d8ecea65a094730c564fcd19e58806afc5e",
+    "StochasticApplications/Correspondences.lean": "744559d8656f5ca474ac02233795174de4ec5ee79d00056aba1637085d06e390",
+    "StochasticApplications/Maximum.lean": "dbf01612963673321fed11c3b50f3a97c4d118e130ece041b8a9d1b4075bec61",
     "StochasticApplications/BoundedReturns.lean": "dbb167a2fa232eac8228285b88235601d8197a7ec025ee940c605bc476544aba",
+    "StochasticApplications/Selection.lean": "df10b034a3aa6e80bc443d02c056bcf0b943d22a2647383cf8ed2814bf141ba5",
     "StochasticApplications/BoundedOptimal.lean": "ac17841b0343cca490711c61209e5f9663ffb427b48d329f64e8096a4ace07c6",
     "StochasticApplications/BoundedMonotone.lean": "6b283108f3e6f16adcb10d6ef2392543ec63d9a68b179755b3bb0d93c0504485",
     "StochasticApplications/InteriorPoints.lean": "658241fddf1daa25dfc56a714ff7478522be040b46cdad52f268cbae84bc6802",
+    "StochasticApplications/Envelope.lean": "08ea841dea01bcaa57aec072e271b5188c41b65c39d386956697566332f135e1",
     "StochasticApplications/BoundedConcave.lean": "f68c44724554f99a8ea671504b3f8c4c398a484f0c05a5b4c79c0789bde58345",
     "StochasticApplications/BoundedPolicy.lean": "2729782efe4a4c3033a9d1d27b4778c41ef825b7f1bffa5b767808c6a57e0e2e",
     "StochasticApplications/HistMarginals.lean": "f09304e2ef4a8b08f14477e052e9e1907ad64825e2631ff5367aee82ebcb6e53",
@@ -8207,28 +9070,31 @@
     "StochasticApplications/TwoCapital.lean": "e4625378a710c75c3ce052aec3872aab15c27c22c8c88a2cd1ede71370a348eb",
     "StochasticApplications/TwoCapitalReduction.lean": "301bd827b26ef17e0f509a4a21568e04e9bc9464fb6a468f2c0d8e76c49e9c5d",
     "StochasticApplications/ManyGoods.lean": "4197cccc9acca99600ac176cfc7302740003d78416e1f68c6b0168bcbb68eda5",
-    "StochasticApplications/AssetPricing.lean": "ebf11516dd00831208dbb1dbe9ced65fff2fedc8f4f238c05ccc0f7b7f1c1b06",
-    "StochasticApplications/AssetConsumer.lean": "df123320dddb495bb03978e255744f1ac4e9a42b494926b5b26ce7460395fdf3",
     "StochasticApplications/SearchModel.lean": "960ecf593422998be666c0a3c41a38f0c311e28ec3225a9f379710d816df8fa2",
     "StochasticApplications/SearchReservation.lean": "606fc7b6970792eec4b8a24737ca03a02cf48e397a189527ba4d7afb8a3d5f0e",
     "StochasticApplications/SearchDynamics.lean": "c6dfd3f999af3159952510fd1e9e3d975484a77016a236401498ed8d8479287b",
     "StochasticApplications/JobMatching.lean": "0f9cb81dfdf3ac2067b484499bf175be44f965678e7cdadccd595e47749a5128",
     "StochasticApplications/BetaPosterior.lean": "59c73eac972afa730477e38cacde67ffb17c9ca39f20fa824ee028e14fd580b4",
+    "StochasticApplications/AssetPricing.lean": "ebf11516dd00831208dbb1dbe9ced65fff2fedc8f4f238c05ccc0f7b7f1c1b06",
+    "StochasticApplications/AssetConsumer.lean": "df123320dddb495bb03978e255744f1ac4e9a42b494926b5b26ce7460395fdf3",
     "StochasticApplications/UpperBounded.lean": "9ae38604438d36e3e9df93f7f36e64263fcdb156df696ad0f08347b460801d57",
     "StochasticApplications/IndustryInvestment.lean": "719e897a0f534dacda6c1ec9f2e0a33627899660ddb9eb169272995e09cc57d4",
-    "StochasticApplications/IndustryInvestmentResults.lean": "0d2e74816366e1aef3d612dfa5b91a60eca162b9ac0810cb30e438adc4ff3a00",
+    "StochasticApplications/IndustryInvestmentResults.lean": "205ef1557cb9dfe3435307727ce5b1690fa6e7339e462768f249b7887fd39aad",
+    "StochasticApplications/IndustryInvestmentFOC.lean": "19655ac8d9dc950e3618b7d7a5bbfbc06d12e640186e9325ea046f36c58a8d93",
     "StochasticApplications/Inventory.lean": "09c90908179f7314526ebc2100f80c5ea5309aee8f0fa5de8569f676d4ec56f3",
-    "StochasticApplications/InventoryResults.lean": "6c181dbf0bcb8405ef7a0093aea1108c3d2ee6191d78f27d4d094be9e55e7785",
-    "StochasticApplications/InventoryPolicy.lean": "6f7706c971c270fb32f5393e719426b6a9c01b8b95f44256064a35861999b4c7",
-    "StochasticApplications.lean": "175f040d02d52b2ef22b1e574351bcbc7834b839996f3e56fce2334795759dac",
+    "StochasticApplications/InventoryResults.lean": "d115d1f013863a1b70b6dccdfc451b59116f10bc56d17dd406ccc5b56b449fa5",
+    "StochasticApplications/InventoryPolicy.lean": "4a21069a8ee64bd14fd6caec114d215c38ae60f33dc11ee3bfc13f48238126ec",
+    "StochasticApplications/InventoryFOC.lean": "c90225f919c284cc4c07bf25403899e057350890cc46a73d726c921ceae7ef78",
+    "StochasticApplications/InventoryCounterexample.lean": "0026dd28b71dd2de67724946b52710fb8b7da81a3c43ef279a5899dbd459f0a3",
+    "StochasticApplications.lean": "d292a1ffbb42fd857a8ae5758112b2eecc0327cc785a86b4cc76a0248dc94c1e",
     "lean-toolchain": "8733782dc070a99b312039cda424f601b80f3be6f6f512627da5ba25adc27632",
     "lakefile.toml": "1e46fa759c32ebff26e435075f0ee14d59e7db7c526572b1b050e45bccc9c216",
     "lake-manifest.json": "69aa6c61e6d60057818d72761ce332073f6abf4f1bfe7eaa68942991cbb849c3",
-    "proof-manifest.json": "d54de3aaad05f76914e6d3a2ae22b66ac5dc3c374b7d68c789e9ad6dc6e395d6",
+    "proof-manifest.json": "f2ec704806bf36cdbe77a4b46e43aa67bae2ca8b59800b25a1c5d556b27bcbed",
     "scripts/verify.py": "a70b1fa704dd590f937f8b37682afa88a9d85a9150065acb935c7d2c9589da3b",
     "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
   },
-  "fresh_audit_sha256": "0b571fd25f7157818d5ec22a5a8d8b6f4c8f5a0f745134c0944d6d141cd5b515",
+  "fresh_audit_sha256": "079f3a02a3584194d63077f6285a24b444f689b428bcecaf35ba8def71dba3bb",
   "lean_toolchain": "leanprover/lean4:v4.34.0",
   "scope": "SLP Chapter 10 (Applications of Stochastic Dynamic Programming): exercises 10.1-10.11, with corrections.",
   "source": "Stokey, Lucas and Prescott (1989), Recursive Methods in Economic Dynamics, Chapter 10"

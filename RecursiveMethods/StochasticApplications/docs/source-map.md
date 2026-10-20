@@ -49,9 +49,9 @@ covers them.
 | Ex 10.4a, p. 294 | The sequence problem | Not formalised (interpretive) |
 | Ex 10.4b, p. 295 | Unique bounded continuous `v ≥ 0` solving (2′); it solves (2) | `ind_rhs_le`, `ind_rhs_neg`, `ex_10_4b` |
 | Ex 10.4c, p. 295 | `v` strictly increasing, strictly concave in `x`; `g` continuous and interior; `v(·, z)` differentiable | `ind_strictMono_x`, `ind_strictMono_z`, `ind_strictConcave`, `ind_continuousOn_objG`, `ind_max`, `ind_policy`, `ind_hasDerivAt_x`, `ex_10_4c` |
-| Ex 10.4d, p. 295 | `g` increasing in `x` (weak form) | `ind_cost_submod`, `ex_10_4d` |
-| Ex 10.4e, pp. 295–296 | `g` increasing in `z` | Not formalised (see corrections) |
-| Ex 10.4f, p. 296 | i.i.d. shocks: `g` independent of `z`; the capacity path converges | `ind_mem_policy_iff`, `ex_10_4f`, `ex_10_4f_monotone`, `ex_10_4f_tendsto` |
+| Ex 10.4d, p. 295 | `g` strictly increasing in `x`, slope `< 1`, `g/x` strictly decreasing | Weak: `ind_cost_submod`, `ex_10_4d`. Strict: `indW`, `indW_hasDerivAt`, `ind_foc`, `ind_policy_gt`, `ind_policy_strictMono_x`, `ind_policy_ratio_lt`, `ind_policy_slope_lt`; the slope claim is false: `ex_10_4d_slope_counterexample` |
+| Ex 10.4e, pp. 295–296 | `g` increasing in `z` | `IndIncDiff`, `ind_T_incDiff`, `ind_v_incDiff`, `ex_10_4e`, `ex_10_4e_strict`; the strict claim is false: `ex_10_4e_strict_counterexample` |
+| Ex 10.4f, p. 296 | i.i.d. shocks: `g` independent of `z`; the capacity path converges | `ind_mem_policy_iff`, `ex_10_4f`, `ex_10_4f_monotone`, `ex_10_4f_tendsto`; the limit independent of `x₀` and positive: `ind_stationary_unique`, `ind_limit_stationary`, `ex_10_4f_limit_eq`, `ex_10_4f_limit_pos`, `ex_10_4f_stationary` |
 
 ## §10.5 Production and inventory accumulation
 
@@ -61,10 +61,10 @@ covers them.
 | Ex 10.5a, p. 298 | Strictly convex cost and linear output ≡ linear cost and strictly concave output | `mul_le_of_convexOn`, `ex_10_5a` |
 | Ex 10.5b, p. 299 | The current shock does not appear in (2) | `inv_indep` (the sequence problem is not formalised) |
 | Ex 10.5c, p. 299 | Unique bounded continuous `v`; strictly increasing and concave; `Y`, `N` continuous; `v′(x) = U′[x − Y(x)]` | `inv_bounds`, `inv_max`, `inv_solves_2`, `inv_strictMono`, `inv_F_cmb`, `inv_E_cmb`, `inv_strictConcave`, `inv_policy`, `inv_hasDerivAt`, `ex_10_5c` |
-| Ex 10.5d, p. 299 | Consumption strictly increasing | Not formalised (first-order conditions) |
-| Ex 10.5e, pp. 299–300 | More storage, less production at higher `x` (weak form) | `concave_four`, `concave_sum_submod`, `U_sub_submod`, `ex_10_5e` |
+| Ex 10.5d, p. 299 | Consumption strictly increasing | `inv_Y_lt`, `inv_hasDerivAt_pos`, `inv_deriv_strictAnti`, `inv_foc_y`, `inv_foc_n`, `ex_10_5d` |
+| Ex 10.5e, pp. 299–300 | More storage, less production at higher `x` | Weak: `concave_four`, `concave_sum_submod`, `U_sub_submod`, `ex_10_5e`. Strict: `ex_10_5e_strict` |
 | Ex 10.5f, p. 300 | (5) and (6) contradict each other | `ex_10_5f` |
-| Ex 10.5g, p. 300 | `N(x) > 0`; `N` strictly decreasing | Weak monotonicity in `ex_10_5e`; the rest not formalised |
+| Ex 10.5g, p. 300 | `N(x) > 0`; `N` strictly decreasing | Corrected: `inv_N_pos`, `inv_N_strict`, `inv_N_eq_of_Y_zero`, `ex_10_5g`; counterexamples `ex_10_5g_counterexample`, `ex_10_5g_mean_zero`, `ex_10_5g_steep`; `c′(0) > 0`: `inv_N_eq_zero` |
 
 ## §10.6 Asset prices in an exchange economy
 

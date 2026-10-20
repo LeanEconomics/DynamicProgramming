@@ -19,7 +19,9 @@ SLP §10.5, Exercise 10.5c, p. 299. Let `v` be the fixed point of the truncated 
   `0 ≤ v ≤ R`; `v` is strictly increasing and strictly concave; the maximizing `(Y, N)` is unique
   and continuous in `x`; and `v′(x) = U′(x − Y(x))` where `U` is differentiable at
   `x − Y(x) > 0`. The book states the derivative without the proviso `Y(x) < x`; at `Y(x) = x`
-  the envelope argument gives only a one-sided bound.
+  the envelope argument gives only a one-sided bound. That corner never occurs for `x > 0`
+  (`inv_Y_lt` in `InventoryFOC`), so `v′(x) = U′(x − Y(x))` holds at every `x > 0`
+  (`inv_hasDerivAt_pos`).
 -/
 
 namespace StokeyLucasPrescott.StochasticApplications

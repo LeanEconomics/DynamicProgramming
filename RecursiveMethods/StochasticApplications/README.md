@@ -8,16 +8,17 @@ the commands below from this directory. [Return to the library index](../../READ
 Chapter 10 applies the stochastic dynamic programming of Chapter 9 to ten economic models. The
 exercises with a mathematical claim are formalised, with these exceptions:
 
-* claims that rest on first-order conditions: 10.4d's slope and growth-rate claims, 10.4e,
-  10.5d, and the strict parts of 10.5e and 10.5g. The weak monotonicity in 10.4d, 10.5e and
-  10.5g is proved without them;
-* 10.2c, and the independence of 10.4f's limit from `x₀`.
+* 10.2c.
+
+The claims that rest on first-order conditions (10.4d–f, 10.5d, and the strict parts of 10.5e
+and 10.5g) are proved with differentiability hypotheses; the slope claim of 10.4d, the strict
+claim of 10.4e and the claim on `N` in 10.5g are false (Lean counterexamples) and corrected.
 
 Exercises that ask only for a formulation or an interpretation are also not formalised: 10.4a,
 the sequence form in 10.5b, 10.6f–g, 10.7i, 10.8d, 10.9, 10.10i and 10.11.
 
-Nine claims or arguments are corrected, six of them with Lean counterexamples; see
-[corrections](docs/corrections.md). The library contains **534 theorems**, of which 295 are in the
+Twelve claims or arguments are corrected, nine of them with Lean counterexamples; see
+[corrections](docs/corrections.md). The library contains **609 theorems**, of which 370 are in the
 Chapter 10 modules. The others are the Chapter 9 machinery that Chapter 10 uses, carried from
 `RecursiveMethods/StochasticDP`.
 
@@ -38,14 +39,17 @@ Chapter 10 modules. The others are the Chapter 9 machinery that Chapter 10 uses,
   * `v` is strictly increasing in both arguments and strictly concave. The policy is a
     continuous function, interior to `Γ`, nondecreasing in capacity (by a Topkis argument), and
     independent of the shock when shocks are i.i.d. `v_x = U_x − c(a) + a c′(a)` with `a = g/x`.
-  * Every optimal capacity path converges.
+  * `g` strictly increasing in `x` with `g/x` strictly decreasing, and nondecreasing in `z`; its
+    slope can exceed one. Every optimal capacity path converges, with i.i.d. shocks to the same
+    limit from every `x₀`, positive under a condition on `U_x` near `0`.
 * **Production and inventories** (§10.5).
   * Convex costs re-expressed as concave output (10.5a).
   * The unique bounded continuous solution of (2), shown not to depend on the current shock.
     It is strictly increasing and strictly concave, with unique continuous policies `(Y, N)`
     and `v′(x) = U′(x − Y(x))` (10.5c).
   * Storage weakly rises and production weakly falls with the stock (10.5e, again by Topkis),
-    and the sign argument of 10.5f.
+    and the sign argument of 10.5f. Consumption is strictly increasing (10.5d), storage strictly
+    rises unless zero, and production falls strictly when storage is positive (10.5e, 10.5g).
 * **Asset prices** (§10.6). The consumer's problem, the envelope condition and the Euler
   equation (the latter differentiated under the integral sign), the equilibrium pricing
   condition, and its unique positive solution `p* = Σ βⁿMⁿh / U′`.
@@ -102,9 +106,12 @@ All names are in the namespace `StokeyLucasPrescott.StochasticApplications`. See
 | [UpperBounded](StochasticApplications/UpperBounded.lean) | 6 | Returns bounded above: the truncation argument |
 | [IndustryInvestment](StochasticApplications/IndustryInvestment.lean) | 19 | §10.4: the model, Assumptions 9.7, 9.9, 9.11 fail |
 | [IndustryInvestmentResults](StochasticApplications/IndustryInvestmentResults.lean) | 23 | Exercise 10.4b–d, f |
+| [IndustryInvestmentFOC](StochasticApplications/IndustryInvestmentFOC.lean) | 39 | Exercises 10.4d–f by first-order conditions; two counterexamples |
 | [Inventory](StochasticApplications/Inventory.lean) | 15 | §10.5: the model, Exercises 10.5a, 10.5f |
 | [InventoryResults](StochasticApplications/InventoryResults.lean) | 16 | Exercise 10.5b–c |
 | [InventoryPolicy](StochasticApplications/InventoryPolicy.lean) | 6 | Exercise 10.5e |
+| [InventoryFOC](StochasticApplications/InventoryFOC.lean) | 24 | Exercises 10.5c–e, g by first-order conditions |
+| [InventoryCounterexample](StochasticApplications/InventoryCounterexample.lean) | 12 | Counterexamples to Exercise 10.5g |
 
 ## Build and verify
 

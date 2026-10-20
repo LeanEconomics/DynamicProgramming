@@ -37,3 +37,6 @@ import StochasticApplications.IndustryInvestmentResults
 import StochasticApplications.Inventory
 import StochasticApplications.InventoryResults
 import StochasticApplications.InventoryPolicy
+import StochasticApplications.IndustryInvestmentFOC
+import StochasticApplications.InventoryCounterexample
+import StochasticApplications.InventoryFOC
