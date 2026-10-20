@@ -33,8 +33,9 @@ measurable shock space: the state is `(x, z)`, next period's state is `(g(x, z),
 * (h): additivity holds for the bounded ("fundamental") solution of (3); bubbles break it.
 * (p. 485): `β = 1` is outside the model (`β < 1`), an approximation as the text says;
   integrability is needed for the martingale property (assumed here). The martingale statement is
-  given in its one-step (conditional-mean-zero) form for the Markov kernel; the path-space
-  martingale (Ionescu-Tulcea measure on histories) is not formalised.
+  given here in its one-step (conditional-mean-zero) form for the Markov kernel; the path-space
+  martingale (Ionescu-Tulcea measure on histories) is `ms_martingale` in `ManySectorMartingale`,
+  which also shows that integrability on histories is needed (`ms_martingale_counterexample`).
 -/
 
 namespace StokeyLucasPrescott.EquilibriumApplications

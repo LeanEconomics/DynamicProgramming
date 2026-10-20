@@ -59,8 +59,8 @@ book, see [corrections](corrections.md).
 | Exercise 16.2(g), (3), p. 484 | `U′[c] q = β ∫ U′(c[g, z′]) {f[g, z′] + q[g, z′]} Q(z, dz′)` for a multi-period asset | `ex_16_2g` (finite shocks), `ex_16_2g_general` (general shock space); (3) for a general kernel: `MsEq3` |
 | Exercise 16.2(h), p. 484 | The price of `f = Σ_i f_i` | `ms_eq3_unique`, `ms_eq3_sum`, `ex_16_2h`, `ex_16_2h_bubble_counterexample` |
 | pp. 484–485 | (h) is a version of the Modigliani–Miller theorem | `ex_16_2h` |
-| (3′), p. 485 | `U′(c_t) q_t = β E_t[U′(c_{t+1})(f_{t+1} + q_{t+1})]`; with `U′` constant, `β = 1` and no dividend, `q_t = E_t q_{t+1}` | `ms_martingale_prices` |
-| p. 485 | `w_{t+1} = β U′(c_{t+1})(f_{t+1} + q_{t+1}) − U′(c_t) q_t`; `W_t = Σ_{s ≤ t} w_s` is a martingale | `ms_martingale_increment` (one-step form). The path-space martingale is not formalised |
+| (3′), p. 485 | `U′(c_t) q_t = β E_t[U′(c_{t+1})(f_{t+1} + q_{t+1})]`; with `U′` constant, `β = 1` and no dividend, `q_t = E_t q_{t+1}` | `ms_martingale_prices`; on histories: `ms_martingale_prices_path`, `ms_martingale_prices_path_of_nonneg` |
+| p. 485 | `w_{t+1} = β U′(c_{t+1})(f_{t+1} + q_{t+1}) − U′(c_t) q_t`; `W_t = Σ_{s ≤ t} w_s` is a martingale | `ms_martingale_increment` (one-step form); on the space of histories: `msStateKernel`, `msPathM`, `ms_markov_property`, `msIncr`, `msW`, `msW_adapted`, `msW_integrable`, `msIncr_condExp`, `ms_martingale`, `ms_martingale_of_nonneg`, `ms_martingale_of_bounded`; integrability is needed: `ms_martingale_counterexample` |
 | p. 485 | Discussion of stock prices, smooth consumption, short periods and dividend dates | Not formalised (remark) |
 
 ## §16.3 An economy with sustained growth

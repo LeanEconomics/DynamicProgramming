@@ -44,7 +44,7 @@ Exercises 16.2, 16.3e, 16.4, 16.5 and 16.7.
 | Exercise 16.2(b), p. 482 | `γ*` is the plan of §10.3. | The optimality of `γ*` on `C ∩ Y` (Exercise 10.3b) is a hypothesis of `ex_16_2b`. |
 | Exercise 16.2(c), p. 483 | The price function `q` and the return `f` in (1). | `q` is given, continuous and positive (in equilibrium it is (2)). `w` is defined on `D`, with the domain condition above. Continuity of `z ↦ ∫ w[b f(z′), g(x, z), z′] Q(z, dz′)` need not hold for a Feller `Q` and a merely measurable `f`; it holds for finitely many shocks (`MsSecData`) and for a Feller transition on a compact shock space with `R` continuous (`MsFellerData`, `msFE_continuous`). |
 | Exercise 16.2(d), p. 483 | `w(·, x̂, ẑ)` is differentiable at `0`. | Uses concavity of `w(·, s)` (proved: `ms_sec_fixed_concave`) and positive consumption at the optimum (assumed in `ex_16_2d`). The converse at the equilibrium price assumes `c > 0`, `U` concave and differentiable on `(0, ∞)` with `U′ > 0`, and `U′(c(s))(c(s) − q(s) B)` bounded above (`ex_16_2d_converse`). |
-| p. 485 | `{W_t}` is a martingale; `β = 1`. | Integrability is assumed, as part of the statement of (3) (`MsEq3`). `β = 1` is outside the model (`β < 1`), an approximation as the text says; `ms_martingale_prices` is stated for (3) with `β = 1`. |
+| p. 485 | `{W_t}` is a martingale; `β = 1`. | On the space of histories (the Ionescu-Tulcea path measure `msPathM`, natural filtration) `W_t` is a martingale when `U′(c_t) f_t` and `U′(c_t) q_t` are integrable on histories (`ms_martingale`). That (3) holds at every state, with its per-state integrability (`MsEq3`), is not enough (*Lean*: `ms_martingale_counterexample`: prices `±2^{n+1}` reached with probability `2^{−(n+1)}` give `E\|W_2\| = ∞`). Integrability holds automatically for nonnegative `U′`, `f`, `q` and `β > 0` (`ms_martingale_of_nonneg`), and for bounded `U′f`, `U′q` (`ms_martingale_of_bounded`). `β = 1` is outside the model (`β < 1`), an approximation as the text says; `ms_martingale_prices` is stated for (3) with `β = 1`. |
 | Exercise 16.3(e)(ii), p. 487 | "With luck the lower bound does not bind." | `ex_16_3e_ii` assumes `θ = θ̂` and `x_t ≥ a′θᵗ` for some `a′ > a`; without it the supporting price may have no cheaper point in `X`. `ex_16_3e_ii_direct` needs the same bound, for the segment from `x` to stay in `X` and for `Σ_t p_t θᵗ < ∞`, but no interior point of `Y`, so it holds for every `θ > 0`. |
 | (1), §16.4, p. 488 | `k₀ ≥ 0`; constraints for all `z^t`. | `k₀ > 0`, since `k₀` divides in `I₀ = k₀ c(k₁/k₀)`; then every capital path is positive (`industry_witness_pos`). The constraints hold at every point of `Ω`; `indLinftyTech` reads `Y` on equivalence classes. |
 | Assumption 16.1 and below, p. 492 | `u(xᵢ) > u(x̂ᵢ)`, `uᵢ(x̂ᵢ) > u(xᵢ⁰)`. | `u` is `uᵢ` throughout (`Assumption16_1`). |
@@ -130,9 +130,6 @@ Exercises 16.2, 16.3e, 16.4, 16.5 and 16.7.
   `A` (`ex_16_2c_general`); `w` need not be continuous in the state, so "bounded continuous" in
   the book is replaced by this class. Uniqueness and (2)–(3) are for measurable `w` bounded on
   `D`, since for a non-measurable `w` the integral in (1) is meaningless.
-* **The path-space martingale of p. 485.** Only the one-step form is proved: the increment
-  `w_{t+1}` has conditional mean zero given the state (`ms_martingale_increment`). That `W_t` is
-  a martingale on the space of histories (an Ionescu-Tulcea measure) is not formalised.
 * **Exercise 16.1d at a corner.** `ex_16_1d` and `ex_16_1d_unique` assume an interior allocation.
   The transcription's corner case (relative prices pinned down only to an interval when, for
   example, `x⁰₀ = 0`) has no Lean counterexample.

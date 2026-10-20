@@ -1,6 +1,6 @@
 {
-  "checked_at_utc": "2026-10-20T21:32:52.198099+00:00",
-  "theorems": 1119,
+  "checked_at_utc": "2026-10-20T22:22:41.325458+00:00",
+  "theorems": 1143,
   "module_theorems": {
     "EquilibriumApplications/Economy.lean": 0,
     "EquilibriumApplications/Welfare.lean": 10,
@@ -59,6 +59,7 @@
     "EquilibriumApplications/ManySectorGeneral.lean": 38,
     "EquilibriumApplications/ManySectorMGood.lean": 38,
     "EquilibriumApplications/ManySectorPricing.lean": 8,
+    "EquilibriumApplications/ManySectorMartingale.lean": 24,
     "EquilibriumApplications/PeculiarModel.lean": 43,
     "EquilibriumApplications/PeculiarEllOne.lean": 11,
     "EquilibriumApplications/PeculiarPrices.lean": 22,
@@ -66,7 +67,7 @@
     "EquilibriumApplications/SustainedGrowthPrices.lean": 8,
     "EquilibriumApplications/Truncation.lean": 17
   },
-  "audited_declarations": 1687,
+  "audited_declarations": 1720,
   "declarations": [
     {
       "name": "StokeyLucasPrescott.EquilibriumApplications.Feasible",
@@ -7797,6 +7798,171 @@
       "name": "StokeyLucasPrescott.EquilibriumApplications.ms_martingale_prices",
       "kind": "theorem",
       "module": "EquilibriumApplications/ManySectorPricing.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msTrajKernel",
+      "kind": "def",
+      "module": "EquilibriumApplications/ManySectorMartingale.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.isMarkovKernel_msTrajKernel",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorMartingale.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msPathM",
+      "kind": "def",
+      "module": "EquilibriumApplications/ManySectorMartingale.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.isProbabilityMeasure_msPathM",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorMartingale.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.ms_measurable_coord_piLE",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorMartingale.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.ms_markov_property",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorMartingale.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.ms_lintegral_succ",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorMartingale.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msPathM_map_zero",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorMartingale.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.ms_lintegral_zero",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorMartingale.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msStateKernel",
+      "kind": "abbrev",
+      "module": "EquilibriumApplications/ManySectorMartingale.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msStateKernel_apply",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorMartingale.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.integral_msStateKernel",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorMartingale.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.integrable_msStateKernel_iff",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorMartingale.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msIncr",
+      "kind": "def",
+      "module": "EquilibriumApplications/ManySectorMartingale.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msW",
+      "kind": "def",
+      "module": "EquilibriumApplications/ManySectorMartingale.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msW_succ_sub",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorMartingale.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msW_adapted",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorMartingale.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msW_integrable",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorMartingale.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msIncr_condExp",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorMartingale.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.ms_martingale",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorMartingale.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.ms_path_integrable_of_nonneg",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorMartingale.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.ms_martingale_of_nonneg",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorMartingale.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.ms_martingale_of_bounded",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorMartingale.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.ms_martingale_prices_path",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorMartingale.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.ms_martingale_prices_path_of_nonneg",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorMartingale.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msCexNu",
+      "kind": "def",
+      "module": "EquilibriumApplications/ManySectorMartingale.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msCexNu_univ",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorMartingale.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msCexQ",
+      "kind": "def",
+      "module": "EquilibriumApplications/ManySectorMartingale.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msCexKernel",
+      "kind": "def",
+      "module": "EquilibriumApplications/ManySectorMartingale.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.isMarkovKernel_msCexKernel",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorMartingale.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msCexq",
+      "kind": "def",
+      "module": "EquilibriumApplications/ManySectorMartingale.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msCex_eq3",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorMartingale.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.ms_martingale_counterexample",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorMartingale.lean"
     },
     {
       "name": "StokeyLucasPrescott.EquilibriumApplications.pecW",
@@ -16208,6 +16374,171 @@
       "Classical.choice",
       "Quot.sound"
     ],
+    "StokeyLucasPrescott.EquilibriumApplications.msTrajKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.isMarkovKernel_msTrajKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msPathM": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.isProbabilityMeasure_msPathM": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.ms_measurable_coord_piLE": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.ms_markov_property": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.ms_lintegral_succ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msPathM_map_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.ms_lintegral_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msStateKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msStateKernel_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.integral_msStateKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.integrable_msStateKernel_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msIncr": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msW": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msW_succ_sub": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msW_adapted": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msW_integrable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msIncr_condExp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.ms_martingale": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.ms_path_integrable_of_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.ms_martingale_of_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.ms_martingale_of_bounded": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.ms_martingale_prices_path": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.ms_martingale_prices_path_of_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msCexNu": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msCexNu_univ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msCexQ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msCexKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.isMarkovKernel_msCexKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msCexq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msCex_eq3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.ms_martingale_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
     "StokeyLucasPrescott.EquilibriumApplications.pecW": [
       "propext",
       "Classical.choice",
@@ -16971,22 +17302,23 @@
     "EquilibriumApplications/ManySectorVerification.lean": "c4d141ab52c5ac805919445d84bb921c61f42cedd9f26dcf4248859124dd1fd1",
     "EquilibriumApplications/ManySectorGeneral.lean": "73fc5495d9e04160c70097926c6a8215d904205bb199feae13ef48870c1cb2c5",
     "EquilibriumApplications/ManySectorMGood.lean": "e39cfc3ba39070f383c7d8fe32686c8664db1b35067a12ff840d9daa31c8bfdc",
-    "EquilibriumApplications/ManySectorPricing.lean": "ef8e91cbc07d817ee22cf1d3d6e12ce2b8bfcbd88ae02f9af314b85088f42078",
+    "EquilibriumApplications/ManySectorPricing.lean": "f8b79336ba3346260568dc0a006671729c50b7463c30cd4578ec2170b93e86b2",
+    "EquilibriumApplications/ManySectorMartingale.lean": "58e81396d95b31afd7ab689c66cb719dc08d8939513bfb401154541d5270a423",
     "EquilibriumApplications/PeculiarModel.lean": "ed6383eb6cbeadee182fc4bdceb31ebf9c88bf8c3e18c7f3a24800dbacbbba9b",
     "EquilibriumApplications/PeculiarEllOne.lean": "e0d2cdf278e24e1efc6beaadd189d2a96cd127e9e1d714fed7c43fac17c85e55",
     "EquilibriumApplications/PeculiarPrices.lean": "68634f341ba9a4126a49ad131b18e10a58f5b49fd6292a022f51fb1af3e7533d",
     "EquilibriumApplications/SequenceTailUtility.lean": "73a9637d7a0c41305d2bc5a83db6429a81ffb01f823a025bdd13b97465b9fc56",
     "EquilibriumApplications/SustainedGrowthPrices.lean": "50d68be63263ef6e271356249782a3647424374dfc12fdc83960ca6229650aef",
     "EquilibriumApplications/Truncation.lean": "ef1ac0c126d7f57dac104cd6bb4e417dd2358484a39f17039b58439e67c521b0",
-    "EquilibriumApplications.lean": "9c3305447a414ac1830b86549db5c13cb87a3dc20d2b8d7db068dd85efc0cb46",
+    "EquilibriumApplications.lean": "53172e55a9426ace12d82024b5257471c8d20c75455872b8637dd98f43249aa5",
     "lean-toolchain": "8733782dc070a99b312039cda424f601b80f3be6f6f512627da5ba25adc27632",
     "lakefile.toml": "f5b8c812c54eb112b43e1cc6ef0560769cdb946793500da685a5facc75ac3a72",
     "lake-manifest.json": "dadfeb985eef92015d9b61229d0089005ead8e7e4a6b73c37eaf38d4173f4bd6",
-    "proof-manifest.json": "70316b528705c1e53bbf2e0fa973bdf983b85572d645cf01634e762dba77e3eb",
+    "proof-manifest.json": "170d6663b750aa18ce4169819b64aae83eba053d719d6699137ca958c3cdbc52",
     "scripts/verify.py": "a70b1fa704dd590f937f8b37682afa88a9d85a9150065acb935c7d2c9589da3b",
     "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
   },
-  "fresh_audit_sha256": "2d8929f5411b6ddab670459dc7c4c56aa9108faceed9b191cc3980d070cec0c1",
+  "fresh_audit_sha256": "61265fe7c9f23068ec2bba6e93432ee605287cab5acf7af13ffc5fac4e78b0a2",
   "lean_toolchain": "leanprover/lean4:v4.34.0",
   "scope": "SLP Chapter 16 (Applications of Equilibrium Theory): every numbered result and exercise, with corrections.",
   "source": "Stokey, Lucas and Prescott (1989), Recursive Methods in Economic Dynamics, Chapter 16"

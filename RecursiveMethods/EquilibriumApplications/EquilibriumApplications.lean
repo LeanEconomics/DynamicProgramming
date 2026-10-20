@@ -61,3 +61,4 @@ import EquilibriumApplications.Welfare
 import EquilibriumApplications.WelfareSecond
 import EquilibriumApplications.ManySectorGeneral
 import EquilibriumApplications.ManySectorMGood
+import EquilibriumApplications.ManySectorMartingale

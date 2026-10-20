@@ -37,7 +37,7 @@ the contraction claim of Exercise 16.7f. Several steps of the solutions manual a
 §16.6 is carried to a conclusion the book does not state: the economy has no competitive
 equilibrium in `ℓ∞`. Some results are proved only under added hypotheses: an interior allocation in Exercise 16.1d, and a bound on capital for parts of
 §16.7. The chapter introduction and the bibliographic notes (§16.8) are not formalised. See
-[corrections](docs/corrections.md). The library contains **1119 theorems**. Of these, 757 are in
+[corrections](docs/corrections.md). The library contains **1143 theorems**. Of these, 781 are in
 the Chapter 16 modules, 209 in the modules carried from Chapter 15 and 153 in the modules carried
 from Chapter 6.
 
@@ -66,8 +66,9 @@ from Chapter 6.
   state), where 16.2d, (2) and (3) also hold. Exercise 16.2d corrected (`w₁(0) = U′(c + δ*(0))`) and its converse at the
   equilibrium price, by a verification argument; the pricing equations (2) and (3) (Exercise
   16.2g). Exercises 16.2e, 16.2f (lottery tickets are priced risk-neutrally) and 16.2h
-  (Modigliani–Miller, for bounded prices) for a general shock space; the one-step martingale
-  property of p. 485.
+  (Modigliani–Miller, for bounded prices) for a general shock space; the martingale
+  property of p. 485 on the space of histories, which needs integrability on histories (Lean
+  counterexample).
 * **Sustained growth** (§16.3). `S_θ` as a normed space isometric to `ℓ∞`; Exercise 16.3a
   (`Y ⊆ S_θ` iff `θ ≥ θ̂ = γ^{1/(1−α)}`) and 16.3b (an interior point iff `θ ≤ θ̂`); continuity of
   `u` (Exercise 16.3c); CRRA utility, and Exercise 16.3d corrected (finite, bounded on bounded
@@ -123,6 +124,7 @@ All names are in the namespace `StokeyLucasPrescott.EquilibriumApplications`. Se
 | [ManySectorVerification](EquilibriumApplications/ManySectorVerification.lean) | 4 | Exercise 16.2d at the equilibrium price |
 | [ManySectorGeneral](EquilibriumApplications/ManySectorGeneral.lean) | 38 | Exercises 16.2c–d, (2), (3) for a general measurable shock space |
 | [ManySectorPricing](EquilibriumApplications/ManySectorPricing.lean) | 8 | Exercises 16.2e, 16.2f, 16.2h; (3′) and the martingale property |
+| [ManySectorMartingale](EquilibriumApplications/ManySectorMartingale.lean) | 26 | The martingale of p. 485 on the space of histories; a counterexample without integrability |
 | [SustainedGrowth](EquilibriumApplications/SustainedGrowth.lean) | 24 | (1) of §16.3, `S_θ`, `Y`; Exercise 16.3a–b |
 | [SustainedGrowthUtility](EquilibriumApplications/SustainedGrowthUtility.lean) | 28 | CRRA utility; Exercise 16.3c–d |
 | [SustainedGrowthWelfare](EquilibriumApplications/SustainedGrowthWelfare.lean) | 17 | Exercise 16.3e |
