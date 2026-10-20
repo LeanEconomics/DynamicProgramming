@@ -23,8 +23,9 @@ formalised. The last section lists what is not proved.
 | Proof of Proposition 1, step 4, p. 506 | Two cases: `φ(0) > 0` (top panel of Figure 17.1) and `φ(0) = 0`. | Under Assumption 17.1, `φ(0) = 0 · V′(0) = 0`, so the first case cannot occur (`proposition_1_phi_zero_counterexample`). The second case is `exists_unique_foc`. |
 | pp. 515 and 530 | Strict monotonicity and strict concavity of `V` imply `0 < −yV″(y)/V′(y)` for all `y ∈ ℝ₊`. | False: the ratio is `0` at `y = 0` for every `V` (`monoRRA_zero`, `monoRRA_not_forall_pos`, `rra_pos_counterexample`, `monoRRA_pos_counterexample`), and `V(y) = 3 − e^{−y}(y² + 2y + 3)` satisfies Assumption 17.1 with `V″(1) = 0` (`monoCexW_assumption17_1V`, `monoRRA_interior_zero_counterexample`). True: the ratio is `≥ 0` on `ℝ₊` (`MonoAssumption17_1V.rra_nonneg`) and `> 0` somewhere in every open interval (`MonoAssumption17_1V.exists_rra_pos`). |
 | p. 541 | Assumption 17.2 is "a very mild strengthening" of Assumption 17.4. | As stated, 17.2 implies 17.4 only vacuously (`monoAssumption17_2_imp_17_4`), and 17.4 does not imply 17.2 (`assumption17_4_not_imp_17_2_counterexample`). In the repaired forms on `ℝ₊₊` (`MonoAssumption17_2Pos`, `MonoAssumption17_4Pos`) neither implies the other: `V(y) = 2 arctan √y` has relative risk aversion `(1 + 3y)/(2(1 + y)) ∈ [1/2, 3/2)`, so it satisfies 17.2 with `β = 1/2` and violates 17.4 (`monoArcV_repaired_utility`, `assumption17_2Pos_not_imp_17_4Pos_counterexample`), and `V(y) = log(1 + y)` satisfies 17.4 but not 17.2 (`assumption17_4Pos_not_imp_17_2Pos_counterexample`). True: 17.4 with a uniform lower bound `ε ≤ −yV″/V′` implies 17.2 with `β = 1 − ε` (`monoAssumption17_2Pos_of_17_4Pos`). |
-| p. 533 | Equal prices imply equal ratios `x/θ`, so any equilibrium has the form `p(x, θ) = ρ(x/θ)`, `n(x, θ) = η(x/θ)`. | The argument proves only that `x/θ` is a function of the price (`p533_ratio_of_price`). The converse does not follow: on `[1, 2] × [1, 3/2]`, `p(x, θ) = x/θ + 10·1{θ > 5/4}` and `n = (x/θ)/p` satisfy every premise used (`n` a function of `p`, and (2)), and `p` is not a function of `x/θ` (`p533_counterexample`). The existence results that follow concern equilibria of the form `ρ(x/θ)` only. |
+| p. 533 | Equal prices imply equal ratios `x/θ`, so any equilibrium has the form `p(x, θ) = ρ(x/θ)`, `n(x, θ) = η(x/θ)`. | The argument proves only that `x/θ` is a function of the price (`p533_ratio_of_price`). For a continuous equilibrium price it does follow, for any beliefs indexed by the price (`islands_eqm_price_of_ratio`, from the uniqueness of the optimum `islands_obj_max_unique` and the intermediate value theorem on nearby rays); `ρ` is then automatically invertible. Without continuity the argument fails: on `[1, 2] × [1, 3/2]`, `p(x, θ) = x/θ + 10·1{θ > 5/4}` and `n = (x/θ)/p` satisfy every premise used (`n` a function of `p`, and (2)), and `p` is not a function of `x/θ` (`p533_counterexample`). The existence results that follow concern equilibria of the form `ρ(x/θ)` only. |
 | Exercise 17.5(b) (manual) | The second solution of `x′ = √x`, `x(0) = 0` is `x(t) = t²/2`. | `t²/2` is not a solution (`ex_17_5b_manual_counterexample`). The solutions include `0` and `t²/4` (`ex_17_5b`), and `((t − s)⁺)²/4` for every `s ∈ [0, 1]` (`ex_17_5b_family`). |
+| Proposition 8, p. 540 | Under Assumptions 17.1, 17.4 and 17.5, the price function `ρ` is strictly increasing. | False (*Lean*: `proposition_8_false`, `proposition_8_counterexample_book`). With `x ~ U[1, 2]`, a bimodal `g` on `Θ = [1, 3/2]`, `H′ = l/(1 − l)` and CRRA utility (`V = A y^{1−σ}/(1 − σ)`, `σ = 1/20`, modified below a small `y₀` to have the book's finite `V′(0)`), `T` has exactly one strictly positive continuous fixed point, and its `ρ` has `ρ(10/7) < ρ(4/3)` and `ρ(1) < ρ(4/3)`, so it is not invertible. As `z` passes `x̄/θ = 10/7`, `G(·\|z)` loses the upper bump of `g`. Since continuous equilibria correspond exactly to such fixed points with invertible `ρ` (`islands_fixedPoint_of_eqm`, `islands_eqm_of_fixedPoint`), the economy has no equilibrium with a continuous price function (`proposition_8_eqm_counterexample`, `shocksP8W_no_continuous_eqm`). The book's proof step (d) fails for the same `g` (`proposition_8_general_counterexample`). The corrected `proposition_8` adds Assumption 17.6 and uses the correct weights. |
 
 ## Hypotheses made explicit
 
@@ -39,7 +40,6 @@ formalised. The last section lists what is not proved.
 | Theorem 17.4, Lemma 17.6, Theorem 17.7, pp. 520–528 | `X` a bounded subset of `ℝˡ`. | The proofs use only that `X` is totally bounded. `theorem_17_4` is stated for bounded `X ⊆ ℝˡ`, which need not be closed; `lemma_17_6` and `theorem_17_7` for any pseudometric space with `TotallyBounded univ`, and `theorem_17_7_of_isBounded` for a bounded subset of a proper space (`totallyBounded_univ_of_isBounded`). No convexity is used in Theorem 17.7. |
 | Exercise 17.8, p. 534 | `G(·\|z)` has a density for `z ∈ int Z`; `G(·\|z_n) → G(·\|z)` weakly. | The density needs `π(z) > 0`, which Assumption 17.5 does not give at interior points: `π(3/4) = 0` with `Z = [2/3, 2]` (`ex_17_8a_pi_zero_counterexample`). `ψ > 0` on `X` and `g > 0` on `Θ` suffice (`ShocksAssumption17_5.pi_pos`). Part (b) assumes `π > 0` on `int Z` and the endpoint convention `G(·\|z̲) = δ_{θ̄}`, `G(·\|z̄) = δ_{θ̲}`, the only possible weak limits (`shocksCondLaw`, `ShocksAssumption17_5.ex_17_8b`). |
 | Proposition 6, p. 535 | Continuity of `Tf` "as before". | It is the weak continuity of `G(·\|z)`, Exercise 17.8(b), including at the end points of `Z` (`ShocksBounds.opT_mem`). `proposition_6_islands` therefore assumes `ψ > 0` on `X` and `g > 0` on `Θ`. |
-| Proposition 8, p. 540 | Assumptions 17.1, 17.4 and 17.5. | The book's `J(z) = [1/(b − a)] ∫_a^b ξ` is the uniform-weights formula of Exercise 17.12, valid (with the corrected weights) only under Assumption 17.6, which Proposition 8 omits. Under Assumption 17.5 alone the step (d) fails: with `x ~ U[1, 2]`, a bimodal `g` and `ξ(θ) = 1/θ`, `J(4/3)/(4/3) = 3/5 < 21/31 = J(10/7)/(10/7)` (`proposition_8_general_counterexample`). This refutes the proof, not the proposition, since no fixed point of `T` with this `ξ` is exhibited. The corrected `proposition_8` adds Assumption 17.6 and uses the correct weights. |
 | Exercise 17.14(a), p. 540 | `ρ′` and `η′` are used. | Differentiability of `η` is a hypothesis (`ex_17_14a_deriv`, `ex_17_14a`); the book does not show it. `proposition_8` needs no derivatives. |
 
 ## Gaps in proofs closed
@@ -113,19 +113,12 @@ formalised. The last section lists what is not proved.
 
 ## Not proved
 
-* **Proposition 8 under Assumption 17.5 alone.** Only the failure of the book's proof step is
-  shown (`proposition_8_general_counterexample`): the conclusion of Exercise 17.14(d) fails for a
-  bimodal `g`. No fixed point of `T` with that `ξ` is exhibited, so the proposition itself is
-  neither proved nor refuted without Assumption 17.6. The corrected `proposition_8` adds
-  Assumption 17.6.
-* **Equilibria whose price reveals more than `x/θ`** (p. 533). Only the logical gap is shown
-  (`p533_counterexample`: the premises the book uses do not force `p = ρ(x/θ)`). Whether such a
-  price can satisfy the optimality condition (1) is not settled, and nothing is proved about
-  equilibria not of the form `ρ(x/θ)`.
-* **The islands economy itself.** The equilibrium conditions (1)–(2) of §17.6, the derivation of
-  the first-order condition (3) from (1), and the claim (p. 535) that a fixed point of (4) with an
-  invertible price function is an equilibrium are not formalised. The Lean results concern the
-  operator (4) and the price function `ρ(z) = z/ζ⁻¹(f(z))` of its fixed points.
+* **Discontinuous prices** (p. 533). Every equilibrium with a continuous price function has the
+  form `p = ρ(x/θ)` with `ρ` continuous and strictly monotone, for any price-indexed beliefs
+  (`islands_eqm_price_of_ratio`), so no continuous equilibrium price is fully revealing
+  (`islands_eqm_not_injOn`). Continuity is needed for the argument (`p533_counterexample`).
+  Whether a discontinuous price can reveal more than `x/θ` in an equilibrium, with suitable
+  off-path beliefs, is not settled.
 * **Monotone iteration for the operator (4)** (p. 539). Monotonicity of `T` is proved
   (`ShocksBounds.opT_monotone`); the analogue of Proposition 5 for (4) is not carried out.
 * **The §17.1 economy beyond (1)–(2)**: the book's question why Chapter 15 does not apply

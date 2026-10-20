@@ -60,8 +60,9 @@ on `[a(z), b(z)]`. (iii) Part (b) needs the endpoint convention `G(·|z̲) = δ_
 **Correction (p. 533).** The argument shows only that equal prices imply equal ratios `x/θ`
 (`p533_ratio_of_price`); it does not show that an equilibrium price is a function `ρ(x/θ)`:
 `p533_counterexample` satisfies every premise used there, yet the price is not a function of
-`x/θ`. The existence results that follow concern equilibria of the form `ρ(x/θ)` only (whether a
-price revealing more than `x/θ` can satisfy (1) is not settled here).
+`x/θ`. The existence results that follow concern equilibria of the form `ρ(x/θ)` only. For
+continuous prices the conclusion is true (`islands_eqm_price_of_ratio` in
+`FixedPointArguments.ShocksRevelation`); for discontinuous prices it is not settled.
 -/
 
 namespace StokeyLucasPrescott.FixedPointArguments
@@ -1026,8 +1027,9 @@ theorem p533_ratio_of_price {S : Type*} (p n z : S → ℝ) (N : ℝ → ℝ) (h
 /-- **Correction (p. 533).** The converse, "any equilibrium price is of the form `ρ(x/θ)`", does
 not follow from those premises: on `X × Θ = [1, 2] × [1, 3/2]`,
 `p(x, θ) = x/θ + 10·1{θ > 5/4}` and `n = (x/θ)/p` satisfy `n = N ∘ p` and (2), yet `p` is not a
-function of `x/θ` (the price reveals more than `z`). (Whether such a `p` can also satisfy (1) is
-not settled; the book's existence results are about equilibria of the form `ρ(x/θ)` only.) -/
+function of `x/θ` (the price reveals more than `z`). (A continuous equilibrium price is always a
+function of `x/θ`, `islands_eqm_price_of_ratio`; whether a discontinuous `p` such as this one can
+also satisfy (1) is not settled.) -/
 theorem p533_counterexample : ∃ (p n : ℝ × ℝ → ℝ) (N : ℝ → ℝ),
     (∀ s ∈ Icc (1 : ℝ) 2 ×ˢ Icc (1 : ℝ) (3 / 2), 0 < p s ∧ 0 < n s ∧ n s = N (p s) ∧
       n s * p s = s.1 / s.2) ∧

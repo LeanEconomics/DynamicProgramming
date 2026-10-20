@@ -36,9 +36,10 @@ from `FixedPointArguments.ShocksContraction` and `FixedPointArguments.ShocksScha
 formula of Exercise 17.12, valid (with the corrected weights `2θ/(b² − a²)`) only under
 Assumption 17.6, which Proposition 8 omits. Under Assumption 17.5 alone the conclusion of
 Exercise 17.14d fails (`proposition_8_general_counterexample`: a bimodal `g` and `ξ = 1/θ` give
-`J(4/3)/(4/3) = 3/5 < 21/31 = J(10/7)/(10/7)`). This refutes the proof, not the proposition
-itself (no fixed point of `T` is exhibited). The corrected theorem `proposition_8` assumes
-Assumption 17.6 and uses the correct weights.
+`J(4/3)/(4/3) = 3/5 < 21/31 = J(10/7)/(10/7)`). This refutes the proof; the proposition itself
+is refuted in `FixedPointArguments.ShocksProposition8` (`proposition_8_false`, an actual fixed
+point of `T` in the same economy). The corrected theorem `proposition_8` assumes Assumption 17.6
+and uses the correct weights.
 
 **Correction (Exercise 17.14a, "if and only if").** `ρ` strictly increasing does not imply
 `zη'/η < 1` everywhere: `ρ(z) = 1 + (z − 1)³` (`ex_17_14a_counterexample`) has `zη'/η = 1` at
@@ -938,8 +939,9 @@ Then `J(z) = E[ξ(θ) | z]` has `J(4/3)/(4/3) = 3/5 < 21/31 = J(10/7)/(10/7)`: `
 nonincreasing, so the conclusion of Exercise 17.14d (monotone form; `zJ'/J ≤ 1` cannot hold
 throughout `(4/3, 10/7)` where `J` is differentiable): as `z` rises from `4/3` to `10/7`, the
 support `[θ̲, x̄/z]` of `G(·|z)` loses the upper bump. This refutes the proof strategy under
-Assumption 17.5 alone; it is not a counterexample to Proposition 8 itself (that would need an
-actual fixed point of `T` with this `ξ`, and `ξ = 1/θ` corresponds to the limiting linear `V`). -/
+Assumption 17.5 alone. (`ξ = 1/θ` corresponds to the limiting linear `V`; an actual fixed point
+of `T` in this economy refuting Proposition 8 itself is `proposition_8_counterexample` in
+`FixedPointArguments.ShocksProposition8`.) -/
 theorem proposition_8_general_counterexample :
     ShocksAssumption17_5 1 2 1 (3 / 2) (shocksUnif 1 2) shocksExBimodal ∧
       AntitoneOn (fun θ : ℝ => θ⁻¹) (Ioi 0) ∧ MonotoneOn (fun θ : ℝ => θ * θ⁻¹) (Ioi 0) ∧

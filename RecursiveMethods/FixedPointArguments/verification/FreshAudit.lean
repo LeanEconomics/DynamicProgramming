@@ -6427,8 +6427,9 @@ on `[a(z), b(z)]`. (iii) Part (b) needs the endpoint convention `G(·|z̲) = δ_
 **Correction (p. 533).** The argument shows only that equal prices imply equal ratios `x/θ`
 (`p533_ratio_of_price`); it does not show that an equilibrium price is a function `ρ(x/θ)`:
 `p533_counterexample` satisfies every premise used there, yet the price is not a function of
-`x/θ`. The existence results that follow concern equilibria of the form `ρ(x/θ)` only (whether a
-price revealing more than `x/θ` can satisfy (1) is not settled here).
+`x/θ`. The existence results that follow concern equilibria of the form `ρ(x/θ)` only. For
+continuous prices the conclusion is true (`islands_eqm_price_of_ratio` in
+`FixedPointArguments.ShocksRevelation`); for discontinuous prices it is not settled.
 -/
 
 namespace StokeyLucasPrescott.FixedPointArguments
@@ -7393,8 +7394,9 @@ theorem p533_ratio_of_price {S : Type*} (p n z : S → ℝ) (N : ℝ → ℝ) (h
 /-- **Correction (p. 533).** The converse, "any equilibrium price is of the form `ρ(x/θ)`", does
 not follow from those premises: on `X × Θ = [1, 2] × [1, 3/2]`,
 `p(x, θ) = x/θ + 10·1{θ > 5/4}` and `n = (x/θ)/p` satisfy `n = N ∘ p` and (2), yet `p` is not a
-function of `x/θ` (the price reveals more than `z`). (Whether such a `p` can also satisfy (1) is
-not settled; the book's existence results are about equilibria of the form `ρ(x/θ)` only.) -/
+function of `x/θ` (the price reveals more than `z`). (A continuous equilibrium price is always a
+function of `x/θ`, `islands_eqm_price_of_ratio`; whether a discontinuous `p` such as this one can
+also satisfy (1) is not settled.) -/
 theorem p533_counterexample : ∃ (p n : ℝ × ℝ → ℝ) (N : ℝ → ℝ),
     (∀ s ∈ Icc (1 : ℝ) 2 ×ˢ Icc (1 : ℝ) (3 / 2), 0 < p s ∧ 0 < n s ∧ n s = N (p s) ∧
       n s * p s = s.1 / s.2) ∧
@@ -8957,9 +8959,10 @@ from `FixedPointArguments.ShocksContraction` and `FixedPointArguments.ShocksScha
 formula of Exercise 17.12, valid (with the corrected weights `2θ/(b² − a²)`) only under
 Assumption 17.6, which Proposition 8 omits. Under Assumption 17.5 alone the conclusion of
 Exercise 17.14d fails (`proposition_8_general_counterexample`: a bimodal `g` and `ξ = 1/θ` give
-`J(4/3)/(4/3) = 3/5 < 21/31 = J(10/7)/(10/7)`). This refutes the proof, not the proposition
-itself (no fixed point of `T` is exhibited). The corrected theorem `proposition_8` assumes
-Assumption 17.6 and uses the correct weights.
+`J(4/3)/(4/3) = 3/5 < 21/31 = J(10/7)/(10/7)`). This refutes the proof; the proposition itself
+is refuted in `FixedPointArguments.ShocksProposition8` (`proposition_8_false`, an actual fixed
+point of `T` in the same economy). The corrected theorem `proposition_8` assumes Assumption 17.6
+and uses the correct weights.
 
 **Correction (Exercise 17.14a, "if and only if").** `ρ` strictly increasing does not imply
 `zη'/η < 1` everywhere: `ρ(z) = 1 + (z − 1)³` (`ex_17_14a_counterexample`) has `zη'/η = 1` at
@@ -9859,8 +9862,9 @@ Then `J(z) = E[ξ(θ) | z]` has `J(4/3)/(4/3) = 3/5 < 21/31 = J(10/7)/(10/7)`: `
 nonincreasing, so the conclusion of Exercise 17.14d (monotone form; `zJ'/J ≤ 1` cannot hold
 throughout `(4/3, 10/7)` where `J` is differentiable): as `z` rises from `4/3` to `10/7`, the
 support `[θ̲, x̄/z]` of `G(·|z)` loses the upper bump. This refutes the proof strategy under
-Assumption 17.5 alone; it is not a counterexample to Proposition 8 itself (that would need an
-actual fixed point of `T` with this `ξ`, and `ξ = 1/θ` corresponds to the limiting linear `V`). -/
+Assumption 17.5 alone. (`ξ = 1/θ` corresponds to the limiting linear `V`; an actual fixed point
+of `T` in this economy refuting Proposition 8 itself is `proposition_8_counterexample` in
+`FixedPointArguments.ShocksProposition8`.) -/
 theorem proposition_8_general_counterexample :
     ShocksAssumption17_5 1 2 1 (3 / 2) (shocksUnif 1 2) shocksExBimodal ∧
       AntitoneOn (fun θ : ℝ => θ⁻¹) (Ioi 0) ∧ MonotoneOn (fun θ : ℝ => θ * θ⁻¹) (Ioi 0) ∧
@@ -9954,6 +9958,2092 @@ theorem proposition_8_general_counterexample :
     shocksExBimodal_integral_inv ⟨by norm_num, by norm_num⟩ (by rw [π2]; norm_num), π1, π2,
     N1, N2]
   norm_num
+
+end StokeyLucasPrescott.FixedPointArguments
+
+/-
+Copyright (c) 2026 Robert Kirkby. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Robert Kirkby
+-/
+
+/-!
+# Partially observed shocks: Proposition 8 is false without Assumption 17.6
+
+SLP §17.6, p. 540. Proposition 8 claims that under Assumptions 17.1, 17.4 and 17.5 every solution
+`η` of (3) has a strictly increasing price function `ρ(z) = z/η(z)`. The corrected
+`proposition_8` (`FixedPointArguments.ShocksMonotone`) adds Assumption 17.6 (uniform `Ψ`, `G`);
+`proposition_8_general_counterexample` there shows only that the book's proof step (Exercise
+17.14d) fails under Assumption 17.5. Here the proposition itself is refuted: an economy satisfying
+all its hypotheses has a strictly positive continuous fixed point of (4) whose price function is
+not invertible.
+
+**The economy.** `x ~ U[1, 2]`, `θ` with the bimodal density `shocksExBimodal` on
+`Θ = [1, 3/2]` (bumps on `[1, 11/10]` and `[7/5, 3/2]`), so `Z = [2/3, 2]`;
+`H(l) = −l − log(1 − l)` on `[0, 1)`; `V(y) = A y^{1−σ}/(1 − σ)` with `A = 1/60000`, `σ = 1/20`
+(`shocksP8V`).
+
+* `monoCexH_assumption17_1H'`, `shocksP8V_assumptions`: Assumption 17.1 for `H`; the repaired
+  Assumption 17.1, the repaired Assumption 17.2 (`β = 1 − σ`) and Assumption 17.4 for `V`
+  (`Assumption17_1VR.const_mul`, `Assumption17_2R.const_mul`, `MonoAssumption17_4Pos.const_mul`,
+  `crra_monoAssumption17_4Pos`).
+* `shocksExBimodal_pi_pos`: `π > 0` on `int Z` (although `g` vanishes on `(11/10, 7/5)`), so
+  Exercise 17.8b applies; `shocksP8_existsUnique_fixedPoint`: by Proposition 6, `T` has exactly
+  one strictly positive continuous fixed point.
+* `shocksP8_opT_eq`: with CRRA utility (4) separates, `Tf(z) = A M(f) K(z)` with
+  `K(z) = E[θ^{σ−1} | z]`, since `φ(θ′η/θ̃) = A θ̃^{σ−1} (θ′η)^{1−σ}`.
+* `shocksExBimodal_integral_inv_values`: `E[θ⁻¹ | z = 4/3] = 4/5`, `E[θ⁻¹ | z = 10/7] = 30/31`;
+  `shocksP8_clamp_bounds`: `θ⁻¹ ≤ θ^{σ−1} ≤ (103/100) θ⁻¹` on `Θ`;
+  `shocksExBimodal_condLaw_eq`: `G(·|z)` is the same for all `z ∈ [1, 4/3]`.
+* `shocksP8_rho_ineq`: for **every** strictly positive fixed point, `ρ(10/7) < ρ(4/3)` and
+  `ρ(1) < ρ(4/3)`. The a priori bound `η ≤ 1/200` (from `M ≤ 3/2`, `K ≤ 1` and the small `A`)
+  makes `ζ(l) = l²/(1 − l)` nearly quadratic, and `K(10/7)/K(4/3) ≥ (30/31)/((103/100)(4/5))`
+  exceeds `(15/14)²/(1 − 15/2800)`, the most that `ρ(4/3) ≤ ρ(10/7)` would allow.
+* `shocksP8_not_injective`, **`proposition_8_counterexample`**: `ρ` is neither strictly
+  increasing nor injective (intermediate value theorem on `[1, 4/3]` and `[4/3, 10/7]`).
+  `proposition_8_assumption17_5_false`: the statement of `proposition_8` without
+  Assumption 17.6 is false.
+* **The book's Assumption 17.1.** The CRRA `V` has `V'(0) = ∞`, so it satisfies only the repaired
+  Assumption 17.1. `shocksP8W y₀` agrees with it on `[y₀, ∞)` and is quadratic below `y₀`
+  (`shocks_hasDerivAt_ite` glues the branches); `shocksP8W_assumptions`: it satisfies the book's
+  Assumption 17.1 (`C²` on `ℝ₊`) and Assumption 17.4; `shocksP8W_opT_eq`: on fixed points with
+  `η ≥ (3/2) y₀` the two operators (4) coincide. **`proposition_8_counterexample_book`**,
+  **`proposition_8_false`**: Proposition 8 is false under its own hypotheses.
+
+**Correction (Proposition 8, p. 540, is false).** Under Assumptions 17.1, 17.4 and 17.5 a solution
+of (3) need not have an increasing (or even invertible) price function: in the economy above the
+unique strictly positive solution under CRRA utility, and a strictly positive solution under a
+utility satisfying the book's Assumption 17.1, has `ρ` rising on `[1, 4/3]` and falling from `4/3`
+to `10/7`. As `z` rises past `x̄/θ = 10/7`, the conditional law of `θ` given `z` loses the upper
+bump of `g`, so `E[θ^{σ−1} | z]` (hence `η`) jumps up faster than `z`. The proposition needs
+Assumption 17.6 (`proposition_8`) or a monotone-likelihood condition on `G(·|z)`. Since the
+operator also satisfies the hypotheses of Proposition 6, the economy has no equilibrium of the
+form `p = ρ(x/θ)` with `ρ` continuous, positive and invertible.
+-/
+
+namespace StokeyLucasPrescott.FixedPointArguments
+
+open MeasureTheory Set Filter Topology BoundedContinuousFunction
+
+variable {V V' V'' : ℝ → ℝ}
+
+/-- The repaired Assumption 17.1 is preserved by scaling `V` by `A > 0`. -/
+theorem Assumption17_1VR.const_mul (hV : Assumption17_1VR V V' V'') {A : ℝ} (hA : 0 < A) :
+    Assumption17_1VR (fun y => A * V y) (fun y => A * V' y) (fun y => A * V'' y) := by
+  refine ⟨fun y hy => mul_nonneg hA.le (hV.V_nonneg y hy), continuousOn_const.mul hV.V_cont,
+    fun y hy => (hV.V_deriv y hy).const_mul A, fun y hy => (hV.V'_deriv y hy).const_mul A,
+    continuousOn_const.mul hV.V''_cont, fun x hx y hy hxy => mul_lt_mul_of_pos_left
+    (hV.V_mono hx hy hxy) hA, ⟨convex_Ici 0, fun x hx y hy hxy a b ha hb hab => ?_⟩⟩
+  have := hV.V_conc.2 hx hy hxy ha hb hab
+  simp only [smul_eq_mul] at this ⊢
+  nlinarith
+
+/-- The repaired Assumption 17.2 is preserved by scaling `V` by `A > 0` (relative risk aversion
+is unchanged). -/
+theorem Assumption17_2R.const_mul {β : ℝ} (h : Assumption17_2R β V' V'') {A : ℝ} (hA : 0 < A) :
+    Assumption17_2R β (fun y => A * V' y) (fun y => A * V'' y) := by
+  have e : ∀ y, -(y * (A * V'' y)) / (A * V' y) = -(y * V'' y) / V' y := fun y => by
+    rw [show -(y * (A * V'' y)) = A * -(y * V'' y) by ring, mul_div_mul_left _ _ hA.ne']
+  exact ⟨h.β_nonneg, h.β_lt_one, fun y hy => by rw [e]; exact h.lower y hy,
+    fun y hy => by rw [e]; exact h.upper y hy⟩
+
+/-- Assumption 17.4 (on `ℝ₊₊`) is preserved by scaling `V` by `A > 0`. -/
+theorem MonoAssumption17_4Pos.const_mul (h : MonoAssumption17_4Pos V' V'') {A : ℝ} (hA : 0 < A) :
+    MonoAssumption17_4Pos (fun y => A * V' y) (fun y => A * V'' y) := by
+  intro y hy
+  have := h y hy
+  simp only [monoRRA] at this ⊢
+  rwa [show -y * (A * V'' y) = A * (-y * V'' y) by ring, mul_div_mul_left _ _ hA.ne']
+
+/-- CRRA utility with `0 < σ < 1` satisfies Assumption 17.4 (relative risk aversion `σ ≤ 1`). -/
+theorem crra_monoAssumption17_4Pos {σ : ℝ} (hσ0 : 0 < σ) (hσ1 : σ < 1) :
+    MonoAssumption17_4Pos (fun y => y ^ (-σ)) (fun y => -σ * y ^ (-σ - 1)) := by
+  intro y hy
+  have h := (crra_assumption17_2R hσ0 hσ1).upper y hy
+  simp only [monoRRA]
+  have e : -y * (-σ * y ^ (-σ - 1)) / y ^ (-σ) = -(y * (-σ * y ^ (-σ - 1))) / y ^ (-σ) := by ring
+  rw [e]
+  have h1 : y * y ^ (-σ - 1) = y ^ (-σ) := by
+    rw [Real.rpow_sub_one hy.ne', mul_div_cancel₀ _ hy.ne']
+  have h2 : 0 < y ^ (-σ) := Real.rpow_pos_of_pos hy _
+  rw [show -(y * (-σ * y ^ (-σ - 1))) = σ * (y * y ^ (-σ - 1)) by ring, h1,
+    mul_div_assoc, div_self h2.ne', mul_one]
+  linarith
+
+/-- `H(l) = −l − log(1 − l)` satisfies Assumption 17.1 for `H` with `L = 1`. -/
+theorem monoCexH_assumption17_1H' : Assumption17_1H 1 monoCexH monoCexH' monoCexH'' := by
+  have h := monoCexH_assumption17_1H
+  exact ⟨h.L_pos, h.nonneg, fun l hl => (h.hasDeriv_H l hl).mono Ico_subset_Ici_self,
+    fun l hl => (h.hasDeriv_H' l hl).mono Ico_subset_Ici_self, h.continuousOn_H'',
+    h.strictMonoOn, h.strictConvexOn, h.deriv_zero, h.tendsto_deriv⟩
+
+/-- In the bimodal example `π(z) > 0` on `int Z = (2/3, 2)`: near `θ = 3/2` (upper bump) for
+`z < 10/7`, near `θ = 1` (lower bump) for `z ≥ 10/7`. -/
+theorem shocksExBimodal_pi_pos {z : ℝ} (hz : 1 / (3 / 2) < z ∧ z < 2 / 1) :
+    0 < shocksPi (shocksUnif 1 2) shocksExBimodal z := by
+  have hA := shocksExBimodal_assumption
+  have hz0 : 0 < z := lt_trans (by norm_num) hz.1
+  have hψ1 : ∀ x ∈ Icc (1 : ℝ) 2, shocksUnif 1 2 x = 1 := fun x hx => by
+    rw [shocksUnif, indicator_of_mem hx]; norm_num
+  have hb1 : ∀ θ, 0 ≤ shocksExBump1 θ := fun θ => indicator_nonneg (fun θ hθ => by
+    simp only [mem_Icc] at hθ; linarith) θ
+  have hb2 : ∀ θ, 0 ≤ shocksExBump2 θ := fun θ => indicator_nonneg (fun θ hθ => by
+    simp only [mem_Icc] at hθ; linarith) θ
+  have key : ∀ a b : ℝ, a < b → (∀ θ ∈ Ioo a b,
+      0 < shocksExBimodal θ * θ * shocksUnif 1 2 (z * θ)) →
+      0 < shocksPi (shocksUnif 1 2) shocksExBimodal z := fun a b hab hpos => by
+    refine (integral_pos_iff_support_of_nonneg (fun θ => hA.joint_nonneg z θ)
+      (hA.integrable_joint_slice z)).2 ?_
+    refine lt_of_lt_of_le ?_ (measure_mono (s := Ioo a b) fun θ hθ => (hpos θ hθ).ne')
+    simp [hab]
+  rcases lt_or_ge z (10 / 7) with h | h
+  · refine key (max (7 / 5) (1 / z)) (min (3 / 2) (2 / z)) ?_ fun θ hθ => ?_
+    · refine max_lt (lt_min (by norm_num) ?_) (lt_min ?_ ?_)
+      · rw [lt_div_iff₀ hz0]; linarith
+      · rw [div_lt_iff₀ hz0]; linarith [hz.1]
+      · exact div_lt_div_of_pos_right (by norm_num) hz0
+    · obtain ⟨h1, h2⟩ := hθ
+      rw [max_lt_iff] at h1
+      rw [lt_min_iff] at h2
+      have hθ0 : 0 < θ := lt_trans (by norm_num) h1.1
+      have e1 : 1 < z * θ := by rw [div_lt_iff₀ hz0] at h1; linarith [h1.2]
+      have e2 : z * θ < 2 := by rw [lt_div_iff₀ hz0] at h2; linarith [h2.2]
+      rw [hψ1 _ ⟨e1.le, e2.le⟩, mul_one]
+      refine mul_pos ?_ hθ0
+      have : shocksExBump2 θ = θ - 7 / 5 := by
+        rw [shocksExBump2, indicator_of_mem
+          (show θ ∈ Icc (7 / 5 : ℝ) (3 / 2) from ⟨h1.1.le, h2.1.le⟩)]
+      simp only [shocksExBimodal]
+      linarith [hb1 θ, h1.1]
+  · refine key 1 (min (11 / 10) (2 / z)) (lt_min (by norm_num) ?_) fun θ hθ => ?_
+    · rw [lt_div_iff₀ hz0]; linarith [hz.2]
+    · obtain ⟨h1, h2⟩ := hθ
+      rw [lt_min_iff] at h2
+      have hθ0 : 0 < θ := lt_trans one_pos h1
+      have e1 : 1 < z * θ := by nlinarith
+      have e2 : z * θ < 2 := by rw [lt_div_iff₀ hz0] at h2; linarith [h2.2]
+      rw [hψ1 _ ⟨e1.le, e2.le⟩, mul_one]
+      refine mul_pos ?_ hθ0
+      have : shocksExBump1 θ = 11 / 10 - θ := by
+        rw [shocksExBump1, indicator_of_mem (show θ ∈ Icc (1 : ℝ) (11 / 10) from ⟨h1.le, h2.1.le⟩)]
+      simp only [shocksExBimodal]
+      linarith [hb2 θ, h2.1]
+
+/-- In the bimodal example, `E[θ⁻¹ | z = 4/3] = 4/5` and `E[θ⁻¹ | z = 10/7] = 30/31`
+(the computation of `proposition_8_general_counterexample`). -/
+theorem shocksExBimodal_integral_inv_values :
+    (∫ θ, θ⁻¹ ∂shocksCondLaw 1 2 1 (3 / 2) (shocksUnif 1 2) shocksExBimodal (4 / 3)) = 4 / 5 ∧
+      (∫ θ, θ⁻¹ ∂shocksCondLaw 1 2 1 (3 / 2) (shocksUnif 1 2) shocksExBimodal (10 / 7)) =
+        30 / 31 := by
+  have hA := shocksExBimodal_assumption
+  obtain ⟨j1, j2, j3, j4⟩ := shocksExBump_integrals
+  have i3 : Integrable fun θ => shocksExBump1 θ * θ := by
+    have : (fun θ => shocksExBump1 θ * θ) =
+        (Icc (1 : ℝ) (11 / 10)).indicator fun θ => (11 / 10 - θ) * θ := by
+      ext θ; simp only [shocksExBump1]
+      by_cases h : θ ∈ Icc (1 : ℝ) (11 / 10)
+      · rw [indicator_of_mem h, indicator_of_mem h]
+      · rw [indicator_of_notMem h, indicator_of_notMem h, zero_mul]
+    rw [this]
+    exact (Continuous.continuousOn (by fun_prop) |>.integrableOn_compact
+      isCompact_Icc).integrable_indicator measurableSet_Icc
+  have i4 : Integrable fun θ => shocksExBump2 θ * θ := by
+    have : (fun θ => shocksExBump2 θ * θ) =
+        (Icc (7 / 5 : ℝ) (3 / 2)).indicator fun θ => (θ - 7 / 5) * θ := by
+      ext θ; simp only [shocksExBump2]
+      by_cases h : θ ∈ Icc (7 / 5 : ℝ) (3 / 2)
+      · rw [indicator_of_mem h, indicator_of_mem h]
+      · rw [indicator_of_notMem h, indicator_of_notMem h, zero_mul]
+    rw [this]
+    exact (Continuous.continuousOn (by fun_prop) |>.integrableOn_compact
+      isCompact_Icc).integrable_indicator measurableSet_Icc
+  have hψ1 : ∀ x ∈ Icc (1 : ℝ) 2, shocksUnif 1 2 x = 1 := fun x hx => by
+    rw [shocksUnif, indicator_of_mem hx]; norm_num
+  have hψ0 : ∀ x, 2 < x → shocksUnif 1 2 x = 0 := fun x hx => by
+    rw [shocksUnif, indicator_of_notMem fun h => by linarith [h.2]]
+  have hgΘ : ∀ θ, θ ∉ Icc (1 : ℝ) (3 / 2) → shocksExBimodal θ = 0 := hA.g_zero
+  have a1 : ∀ θ, shocksExBimodal θ * shocksUnif 1 2 (4 / 3 * θ) = shocksExBimodal θ := fun θ => by
+    by_cases h : θ ∈ Icc (1 : ℝ) (3 / 2)
+    · rw [hψ1 _ ⟨by linarith [h.1], by linarith [h.2]⟩, mul_one]
+    · rw [hgΘ θ h, zero_mul]
+  have b1 : ∀ θ, shocksExBimodal θ * θ * shocksUnif 1 2 (4 / 3 * θ) =
+      100 * (shocksExBump1 θ * θ + shocksExBump2 θ * θ) := fun θ => by
+    by_cases h : θ ∈ Icc (1 : ℝ) (3 / 2)
+    · rw [hψ1 _ ⟨by linarith [h.1], by linarith [h.2]⟩, mul_one, shocksExBimodal]; ring
+    · have h1 : θ ∉ Icc (1 : ℝ) (11 / 10) := fun h' => h ⟨h'.1, by linarith [h'.2]⟩
+      have h2 : θ ∉ Icc (7 / 5 : ℝ) (3 / 2) := fun h' => h ⟨by linarith [h'.1], h'.2⟩
+      simp [hgΘ θ h, shocksExBump1, shocksExBump2, indicator_of_notMem h1,
+        indicator_of_notMem h2]
+  have a2 : ∀ θ, shocksExBimodal θ * shocksUnif 1 2 (10 / 7 * θ) = 100 * shocksExBump1 θ :=
+    fun θ => by
+      simp only [shocksExBimodal, shocksExBump1, shocksExBump2]
+      by_cases h1 : θ ∈ Icc (1 : ℝ) (11 / 10)
+      · rw [indicator_of_mem h1, indicator_of_notMem (fun h => by linarith [h.1, h1.2]),
+          hψ1 _ ⟨by linarith [h1.1], by linarith [h1.2]⟩]
+        ring
+      · rw [indicator_of_notMem h1]
+        by_cases h2 : θ ∈ Icc (7 / 5 : ℝ) (3 / 2)
+        · rw [indicator_of_mem h2]
+          rcases h2.1.eq_or_lt with h3 | h3
+          · rw [← h3]; ring
+          · rw [hψ0 _ (by linarith)]; ring
+        · rw [indicator_of_notMem h2]; ring
+  have b2 : ∀ θ, shocksExBimodal θ * θ * shocksUnif 1 2 (10 / 7 * θ) =
+      100 * (shocksExBump1 θ * θ) := fun θ => by
+    have := a2 θ
+    calc shocksExBimodal θ * θ * shocksUnif 1 2 (10 / 7 * θ) =
+        shocksExBimodal θ * shocksUnif 1 2 (10 / 7 * θ) * θ := by ring
+      _ = 100 * (shocksExBump1 θ * θ) := by rw [this]; ring
+  have π1 : shocksPi (shocksUnif 1 2) shocksExBimodal (4 / 3) = 5 / 4 := by
+    simp only [shocksPi]
+    simp_rw [b1]
+    rw [integral_const_mul, integral_add i3 i4, j3, j4]; norm_num
+  have π2 : shocksPi (shocksUnif 1 2) shocksExBimodal (10 / 7) = 31 / 60 := by
+    simp only [shocksPi]
+    simp_rw [b2]
+    rw [integral_const_mul, j3]; norm_num
+  have N1 : ∫ θ, shocksExBimodal θ * shocksUnif 1 2 (4 / 3 * θ) = 1 := by
+    simp_rw [a1]; exact hA.g_int
+  have N2 : ∫ θ, shocksExBimodal θ * shocksUnif 1 2 (10 / 7 * θ) = 1 / 2 := by
+    simp_rw [a2]; rw [integral_const_mul, j1]; norm_num
+  rw [shocksExBimodal_integral_inv ⟨by norm_num, by norm_num⟩ (by rw [π1]; norm_num),
+    shocksExBimodal_integral_inv ⟨by norm_num, by norm_num⟩ (by rw [π2]; norm_num), π1, π2,
+    N1, N2]
+  norm_num
+
+/-- Against `G(·|z)`, the clamp is invisible. -/
+theorem shocksExBimodal_integral_clamp {z : ℝ} (hz : 1 / (3 / 2) < z ∧ z < 2 / 1)
+    (k : ℝ → ℝ) :
+    ∫ θ, k (shocksClamp 1 (3 / 2) θ) ∂shocksCondLaw 1 2 1 (3 / 2) (shocksUnif 1 2)
+      shocksExBimodal z =
+      ∫ θ, k θ ∂shocksCondLaw 1 2 1 (3 / 2) (shocksUnif 1 2) shocksExBimodal z := by
+  have hA := shocksExBimodal_assumption
+  rw [hA.integral_condLaw hz (shocksExBimodal_pi_pos hz),
+    hA.integral_condLaw hz (shocksExBimodal_pi_pos hz)]
+  congr 1
+  ext θ
+  by_cases h : θ ∈ Icc (1 : ℝ) (3 / 2)
+  · rw [shocksClamp_of_mem h]
+  · simp [shocksCondDens, hA.g_zero θ h]
+
+/-- The utility `V(y) = A y^{1−σ}/(1 − σ)` with `A = 1/60000`, `σ = 1/20`. -/
+noncomputable def shocksP8V (y : ℝ) : ℝ := 1 / 60000 * (y ^ (1 - 1 / 20 : ℝ) / (1 - 1 / 20))
+
+/-- `V'(y) = A y^{−σ}`. -/
+noncomputable def shocksP8V' (y : ℝ) : ℝ := 1 / 60000 * y ^ (-(1 / 20) : ℝ)
+
+/-- `V''(y) = −A σ y^{−σ−1}`. -/
+noncomputable def shocksP8V'' (y : ℝ) : ℝ := 1 / 60000 * (-(1 / 20) * y ^ (-(1 / 20) - 1 : ℝ))
+
+/-- `shocksP8V` satisfies the repaired Assumption 17.1, the repaired Assumption 17.2 with
+`β = 1 − σ`, and Assumption 17.4. -/
+theorem shocksP8V_assumptions : Assumption17_1VR shocksP8V shocksP8V' shocksP8V'' ∧
+    Assumption17_2R (1 - 1 / 20) shocksP8V' shocksP8V'' ∧
+    MonoAssumption17_4Pos shocksP8V' shocksP8V'' :=
+  ⟨(crra_assumption17_1VR (σ := 1 / 20) (by norm_num) (by norm_num)).const_mul (by norm_num),
+    (crra_assumption17_2R (σ := 1 / 20) (by norm_num) (by norm_num)).const_mul (by norm_num),
+    (crra_monoAssumption17_4Pos (σ := 1 / 20) (by norm_num) (by norm_num)).const_mul
+      (by norm_num)⟩
+
+/-- `φ(y) = A y^{1−σ}`, split at `y = (c′/c̃) e`. -/
+theorem shocksP8_phi_eq {c' ct e : ℝ} (hc' : 0 < c') (hct : 0 < ct) (he : 0 < e) :
+    olgPhi shocksP8V' (c' / ct * e) =
+      1 / 60000 * (ct ^ (1 - 1 / 20 : ℝ))⁻¹ * (c' * e) ^ (1 - 1 / 20 : ℝ) := by
+  have hy : 0 < c' / ct * e := mul_pos (div_pos hc' hct) he
+  simp only [olgPhi, shocksP8V']
+  have h1 : c' / ct * e * (c' / ct * e) ^ (-(1 / 20) : ℝ) = (c' / ct * e) ^ (1 - 1 / 20 : ℝ) := by
+    rw [sub_eq_add_neg, Real.rpow_add hy, Real.rpow_one]
+  rw [show c' / ct * e * (1 / 60000 * (c' / ct * e) ^ (-(1 / 20) : ℝ)) =
+    1 / 60000 * (c' / ct * e * (c' / ct * e) ^ (-(1 / 20) : ℝ)) by ring, h1,
+    show c' / ct * e = c' * e / ct by ring, Real.div_rpow (mul_pos hc' he).le hct.le]
+  ring
+
+variable {Z : Type*} [MeasurableSpace Z] {L : ℝ} {H H' H'' : ℝ → ℝ}
+
+/-- With this utility, (4) separates: `Tf(z) = A M(f) K(z)`. -/
+theorem shocksP8_opT_eq (hH : Assumption17_1H L H H' H'') (μ : Measure (ℝ × Z))
+    (ν : Z → Measure ℝ) (f : Z → ℝ) (hf : ∀ z, 0 < f z) (z : Z) :
+    shocksOpT L H' shocksP8V' 1 (3 / 2) μ ν f z =
+      1 / 60000 * (∫ ω, (shocksClamp 1 (3 / 2) ω.1 * olgZetaInv L H' (f ω.2)) ^
+        (1 - 1 / 20 : ℝ) ∂μ) * ∫ θ, (shocksClamp 1 (3 / 2) θ ^ (1 - 1 / 20 : ℝ))⁻¹ ∂ν z := by
+  have hc : ∀ t, 0 < shocksClamp 1 (3 / 2) t := fun t =>
+    one_pos.trans_le (shocksClamp_mem (by norm_num) t).1
+  have hphi : ∀ θt, shocksPhiF L H' shocksP8V' 1 (3 / 2) μ f θt =
+      (1 / 60000 * (shocksClamp 1 (3 / 2) θt ^ (1 - 1 / 20 : ℝ))⁻¹) *
+        ∫ ω, (shocksClamp 1 (3 / 2) ω.1 * olgZetaInv L H' (f ω.2)) ^ (1 - 1 / 20 : ℝ) ∂μ := by
+    intro θt
+    rw [← integral_const_mul]
+    simp only [shocksPhiF, shocksIntegrand, shocksRatio]
+    congr 1
+    ext ω
+    exact shocksP8_phi_eq (hc _) (hc _) (hH.zetaInv_pos (hf ω.2))
+  simp only [shocksOpT]
+  simp_rw [hphi]
+  rw [integral_mul_const, integral_const_mul]
+  ring
+
+/-- `Z = [x̲/θ̄, x̄/θ̲] = [2/3, 2]` is nonempty. -/
+theorem shocksP8_hZ : (1 : ℝ) / (3 / 2) ≤ 2 / 1 := by norm_num
+
+/-- For `z ∈ [1, 4/3]` the conditional law of `θ` does not depend on `z`. -/
+theorem shocksExBimodal_condLaw_eq {z : ℝ} (hz : z ∈ Icc (1 : ℝ) (4 / 3)) :
+    shocksCondLaw 1 2 1 (3 / 2) (shocksUnif 1 2) shocksExBimodal z =
+      shocksCondLaw 1 2 1 (3 / 2) (shocksUnif 1 2) shocksExBimodal 1 := by
+  have hA := shocksExBimodal_assumption
+  have e : ∀ w ∈ Icc (1 : ℝ) (4 / 3), ∀ θ,
+      shocksExBimodal θ * θ * shocksUnif 1 2 (w * θ) = shocksExBimodal θ * θ := by
+    intro w hw θ
+    by_cases h : θ ∈ Icc (1 : ℝ) (3 / 2)
+    · rw [shocksUnif, indicator_of_mem (show w * θ ∈ Icc (1 : ℝ) 2 from
+        ⟨by nlinarith [hw.1, h.1], by nlinarith [hw.2, h.2, hw.1, h.1]⟩)]
+      norm_num
+    · rw [hA.g_zero θ h]; ring
+  have hd : ∀ w ∈ Icc (1 : ℝ) (4 / 3), shocksCondDens (shocksUnif 1 2) shocksExBimodal w =
+      fun θ => shocksExBimodal θ * θ / ∫ t, shocksExBimodal t * t := by
+    intro w hw
+    ext θ
+    simp only [shocksCondDens, shocksPi]
+    rw [e w hw θ]
+    simp_rw [e w hw]
+  have hz' : 1 / (3 / 2) < z ∧ z < 2 / 1 := ⟨by linarith [hz.1], by linarith [hz.2]⟩
+  have h1 : (1 : ℝ) / (3 / 2) < 1 ∧ (1 : ℝ) < 2 / 1 := ⟨by norm_num, by norm_num⟩
+  simp only [shocksCondLaw, hz', h1, and_self, ↓reduceIte]
+  rw [hd z hz, hd 1 ⟨le_rfl, by norm_num⟩]
+
+/-- Bounds on the clamp's power: `c⁻¹ ≤ (c^{1−σ})⁻¹ ≤ min(1, (103/100) c⁻¹)`. -/
+theorem shocksP8_clamp_bounds (t : ℝ) :
+    0 ≤ (shocksClamp 1 (3 / 2) t)⁻¹ ∧
+    (shocksClamp 1 (3 / 2) t)⁻¹ ≤ (shocksClamp 1 (3 / 2) t ^ (1 - 1 / 20 : ℝ))⁻¹ ∧
+    (shocksClamp 1 (3 / 2) t ^ (1 - 1 / 20 : ℝ))⁻¹ ≤ 1 ∧
+    (shocksClamp 1 (3 / 2) t ^ (1 - 1 / 20 : ℝ))⁻¹ ≤ 103 / 100 * (shocksClamp 1 (3 / 2) t)⁻¹ := by
+  obtain ⟨h1, h2⟩ := shocksClamp_mem (θlo := (1 : ℝ)) (θhi := 3 / 2) (by norm_num) t
+  set c := shocksClamp 1 (3 / 2) t
+  have hc : 0 < c := one_pos.trans_le h1
+  have hp : 0 < c ^ (1 - 1 / 20 : ℝ) := Real.rpow_pos_of_pos hc _
+  have hσ : c ^ (1 / 20 : ℝ) ≤ 103 / 100 := by
+    have h3 : c ^ (1 / 20 : ℝ) ≤ (3 / 2 : ℝ) ^ (1 / 20 : ℝ) :=
+      Real.rpow_le_rpow hc.le h2 (by norm_num)
+    have h4 : (3 / 2 : ℝ) ^ (1 / 20 : ℝ) ≤ ((103 / 100 : ℝ) ^ (20 : ℕ)) ^ (1 / 20 : ℝ) :=
+      Real.rpow_le_rpow (by norm_num) (by norm_num) (by norm_num)
+    rw [← Real.rpow_natCast, ← Real.rpow_mul (by norm_num)] at h4
+    norm_num at h4
+    exact h3.trans h4
+  have hσ0 : 0 < c ^ (1 / 20 : ℝ) := Real.rpow_pos_of_pos hc _
+  have e : c ^ (1 - 1 / 20 : ℝ) = c / c ^ (1 / 20 : ℝ) := by
+    rw [Real.rpow_sub hc, Real.rpow_one]
+  refine ⟨inv_nonneg.2 hc.le, inv_anti₀ hp ?_, inv_le_one_of_one_le₀ ?_, ?_⟩
+  · calc c ^ (1 - 1 / 20 : ℝ) ≤ c ^ (1 : ℝ) :=
+          Real.rpow_le_rpow_of_exponent_le h1 (by norm_num)
+      _ = c := Real.rpow_one c
+  · exact Real.one_le_rpow h1 (by norm_num)
+  · rw [e, inv_div, div_eq_mul_inv]
+    exact mul_le_mul_of_nonneg_right hσ (inv_nonneg.2 hc.le)
+
+/-- The functions `c(t)⁻¹` and `(c(t)^{1−σ})⁻¹` are continuous. -/
+theorem shocksP8_continuous :
+    Continuous (fun t => (shocksClamp 1 (3 / 2) t)⁻¹) ∧
+      Continuous (fun t => (shocksClamp 1 (3 / 2) t ^ (1 - 1 / 20 : ℝ))⁻¹) := by
+  have hc : ∀ t, 0 < shocksClamp 1 (3 / 2) t := fun t =>
+    one_pos.trans_le (shocksClamp_mem (by norm_num) t).1
+  exact ⟨continuous_shocksClamp.inv₀ fun t => (hc t).ne',
+    (continuous_shocksClamp.rpow_const fun _ => Or.inr (by norm_num)).inv₀
+      fun t => (Real.rpow_pos_of_pos (hc t) _).ne'⟩
+
+/-- `ζ(y) = y²/(1 − y)` for `H'(l) = l/(1 − l)`. -/
+theorem shocksP8_zeta_eq {y F : ℝ} (hy : y < 1) (h : olgZeta monoCexH' y = F) :
+    F * (1 - y) = y ^ 2 := by
+  have h1 : 1 - y ≠ 0 := (sub_pos.2 hy).ne'
+  rw [← h]
+  simp only [olgZeta, monoCexH']
+  field_simp
+
+/-- **The key estimate.** For every strictly positive fixed point `f` of `T` in the bimodal economy,
+with `η = ζ⁻¹ ∘ f` and `ρ(z) = z/η(z)`: `ρ(10/7) < ρ(4/3)` and `ρ(1) < ρ(4/3)`. -/
+theorem shocksP8_rho_ineq (f : Icc (1 / (3 / 2) : ℝ) (2 / 1) → ℝ) (hfpos : ∀ z, 0 < f z)
+    (hfix : ∀ z, f z = shocksOpT 1 monoCexH' shocksP8V' 1 (3 / 2)
+      (shocksJointLaw 1 2 1 (3 / 2) shocksP8_hZ (shocksUnif 1 2) shocksExBimodal)
+      (fun z => shocksCondLaw 1 2 1 (3 / 2) (shocksUnif 1 2) shocksExBimodal z.1) f z) :
+    (10 / 7 : ℝ) / olgZetaInv 1 monoCexH' (f ⟨10 / 7, by norm_num, by norm_num⟩) <
+        (4 / 3 : ℝ) / olgZetaInv 1 monoCexH' (f ⟨4 / 3, by norm_num, by norm_num⟩) ∧
+      (1 : ℝ) / olgZetaInv 1 monoCexH' (f ⟨1, by norm_num, by norm_num⟩) <
+        (4 / 3 : ℝ) / olgZetaInv 1 monoCexH' (f ⟨4 / 3, by norm_num, by norm_num⟩) := by
+  have hH := monoCexH_assumption17_1H'
+  have hA := shocksExBimodal_assumption
+  have hπ : ∀ z : ℝ, 1 / (3 / 2) < z ∧ z < 2 / 1 →
+      0 < shocksPi (shocksUnif 1 2) shocksExBimodal z := fun z hz => shocksExBimodal_pi_pos hz
+  have := isProbabilityMeasure_shocksJointLaw hA shocksP8_hZ
+  have hν : ∀ z : ℝ, IsProbabilityMeasure
+      (shocksCondLaw 1 2 1 (3 / 2) (shocksUnif 1 2) shocksExBimodal z) :=
+    hA.isProbabilityMeasure_condLaw' hπ
+  obtain ⟨hcon1, hcon2⟩ := shocksP8_continuous
+  set μ := shocksJointLaw 1 2 1 (3 / 2) shocksP8_hZ (shocksUnif 1 2) shocksExBimodal
+  set η := fun z => olgZetaInv 1 monoCexH' (f z) with hηdef
+  set M := ∫ ω, (shocksClamp 1 (3 / 2) ω.1 * η ω.2) ^ (1 - 1 / 20 : ℝ) ∂μ with hMdef
+  set K := fun z : ℝ => ∫ θ, (shocksClamp 1 (3 / 2) θ ^ (1 - 1 / 20 : ℝ))⁻¹
+    ∂shocksCondLaw 1 2 1 (3 / 2) (shocksUnif 1 2) shocksExBimodal z with hKdef
+  have hfK : ∀ z, f z = 1 / 60000 * M * K z := fun z => by
+    rw [hfix z, shocksP8_opT_eq hH μ _ f hfpos z]
+  have hηmem : ∀ z, η z ∈ Ioo 0 1 := fun z =>
+    ⟨hH.zetaInv_pos (hfpos z), (hH.zetaInv_mem (hfpos z).le).2⟩
+  have hζ : ∀ z, f z * (1 - η z) = η z ^ 2 := fun z =>
+    shocksP8_zeta_eq (hηmem z).2 (hH.zeta_zetaInv (hfpos z).le)
+  -- bounds on `M` and `K`
+  have hc : ∀ t, shocksClamp 1 (3 / 2) t ∈ Icc (1 : ℝ) (3 / 2) := shocksClamp_mem (by norm_num)
+  have hM0 : 0 ≤ M := integral_nonneg fun ω => Real.rpow_nonneg
+    (mul_nonneg (one_pos.trans_le (hc ω.1).1).le (hηmem ω.2).1.le) _
+  have hM1 : M ≤ 3 / 2 := by
+    have : M ≤ ∫ _ω, (3 / 2 : ℝ) ∂μ := by
+      refine integral_mono_of_nonneg (ae_of_all _ fun ω => Real.rpow_nonneg
+        (mul_nonneg (one_pos.trans_le (hc ω.1).1).le (hηmem ω.2).1.le) _) (integrable_const _)
+        (ae_of_all _ fun ω => ?_)
+      have h1 := hc ω.1
+      have h2 := hηmem ω.2
+      have h3 : shocksClamp 1 (3 / 2) ω.1 * η ω.2 ≤ 3 / 2 := by nlinarith [h1.1, h1.2, h2.1, h2.2]
+      calc (shocksClamp 1 (3 / 2) ω.1 * η ω.2) ^ (1 - 1 / 20 : ℝ)
+          ≤ (3 / 2 : ℝ) ^ (1 - 1 / 20 : ℝ) :=
+            Real.rpow_le_rpow (mul_nonneg (by linarith [h1.1]) h2.1.le) h3 (by norm_num)
+        _ ≤ (3 / 2 : ℝ) ^ (1 : ℝ) := Real.rpow_le_rpow_of_exponent_le (by norm_num) (by norm_num)
+        _ = 3 / 2 := Real.rpow_one _
+    rwa [integral_const, probReal_univ, one_smul] at this
+  have hK0 : ∀ z, 0 ≤ K z := fun z => integral_nonneg fun θ =>
+    le_trans (shocksP8_clamp_bounds θ).1 (shocksP8_clamp_bounds θ).2.1
+  have hK1 : ∀ z, K z ≤ 1 := fun z => by
+    have : K z ≤ ∫ _θ, (1 : ℝ) ∂shocksCondLaw 1 2 1 (3 / 2) (shocksUnif 1 2) shocksExBimodal z :=
+      integral_mono_of_nonneg (ae_of_all _ fun θ =>
+        le_trans (shocksP8_clamp_bounds θ).1 (shocksP8_clamp_bounds θ).2.1) (integrable_const _)
+        (ae_of_all _ fun θ => (shocksP8_clamp_bounds θ).2.2.1)
+    rwa [integral_const, probReal_univ, one_smul] at this
+  have hint : ∀ z, Integrable (fun t => (shocksClamp 1 (3 / 2) t)⁻¹)
+      (shocksCondLaw 1 2 1 (3 / 2) (shocksUnif 1 2) shocksExBimodal z) := fun z =>
+    Integrable.of_bound hcon1.aestronglyMeasurable 1 (ae_of_all _ fun t => by
+      rw [Real.norm_eq_abs, abs_of_nonneg (shocksP8_clamp_bounds t).1]
+      exact (shocksP8_clamp_bounds t).2.1.trans (shocksP8_clamp_bounds t).2.2.1)
+  have hint' : ∀ z, Integrable (fun t => (shocksClamp 1 (3 / 2) t ^ (1 - 1 / 20 : ℝ))⁻¹)
+      (shocksCondLaw 1 2 1 (3 / 2) (shocksUnif 1 2) shocksExBimodal z) := fun z =>
+    Integrable.of_bound hcon2.aestronglyMeasurable 1 (ae_of_all _ fun t => by
+      rw [Real.norm_eq_abs, abs_of_nonneg ((shocksP8_clamp_bounds t).1.trans
+        (shocksP8_clamp_bounds t).2.1)]
+      exact (shocksP8_clamp_bounds t).2.2.1)
+  obtain ⟨v1, v2⟩ := shocksExBimodal_integral_inv_values
+  have hK2 : 30 / 31 ≤ K (10 / 7) := by
+    rw [← v2, ← shocksExBimodal_integral_clamp ⟨by norm_num, by norm_num⟩ fun t => t⁻¹]
+    exact integral_mono_of_nonneg (ae_of_all _ fun θ => (shocksP8_clamp_bounds θ).1) (hint' _)
+      (ae_of_all _ fun θ => (shocksP8_clamp_bounds θ).2.1)
+  have hK43 : K (4 / 3) ≤ 103 / 100 * (4 / 5) := by
+    rw [← v1, ← shocksExBimodal_integral_clamp ⟨by norm_num, by norm_num⟩ fun t => t⁻¹,
+      ← integral_const_mul]
+    exact integral_mono_of_nonneg (ae_of_all _ fun θ =>
+      (shocksP8_clamp_bounds θ).1.trans (shocksP8_clamp_bounds θ).2.1) ((hint _).const_mul _)
+      (ae_of_all _ fun θ => (shocksP8_clamp_bounds θ).2.2.2)
+  have hKeq : K 1 = K (4 / 3) := by
+    simp only [hKdef]
+    rw [shocksExBimodal_condLaw_eq (z := 4 / 3) ⟨by norm_num, by norm_num⟩]
+  -- `η ≤ 1/200`
+  have hηle : ∀ z, η z ≤ 1 / 200 := fun z => by
+    have h1 : f z ≤ 1 / 40000 := by
+      rw [hfK z]
+      have := mul_le_mul hM1 (hK1 z) (hK0 z) (by norm_num)
+      nlinarith
+    have h2 := hζ z
+    have h3 := hηmem z
+    nlinarith [h3.1, h3.2, hfpos z]
+  -- the comparison
+  set z₁ : Icc (1 / (3 / 2) : ℝ) (2 / 1) := ⟨4 / 3, by norm_num, by norm_num⟩
+  set z₂ : Icc (1 / (3 / 2) : ℝ) (2 / 1) := ⟨10 / 7, by norm_num, by norm_num⟩
+  set z₀ : Icc (1 / (3 / 2) : ℝ) (2 / 1) := ⟨1, by norm_num, by norm_num⟩
+  have hP : 0 < 1 / 60000 * M := by
+    by_contra h
+    push Not at h
+    have := hfpos z₁
+    rw [hfK z₁] at this
+    nlinarith [hK0 (4 / 3)]
+  have hη1 := hηmem z₁
+  have hη2 := hηmem z₂
+  refine ⟨?_, ?_⟩
+  · rw [div_lt_div_iff₀ hη2.1 hη1.1]
+    by_contra hcon
+    push Not at hcon
+    -- `η₂ ≤ s = (15/14) η₁`
+    set s := 15 / 14 * η z₁
+    have hs : η z₂ ≤ s := by simp only [s]; linarith
+    have hs1 : s ≤ 15 / 2800 := by simp only [s]; linarith [hηle z₁]
+    have e1 := hζ z₁
+    have e2 := hζ z₂
+    have hf2 := hfpos z₂
+    have hf1 := hfpos z₁
+    have step1 : f z₂ * (1 - 15 / 2800) ≤ f z₂ * (1 - η z₂) :=
+      mul_le_mul_of_nonneg_left (by linarith) hf2.le
+    have step2 : η z₂ ^ 2 ≤ s ^ 2 := pow_le_pow_left₀ hη2.1.le hs 2
+    have step3 : s ^ 2 = 225 / 196 * (f z₁ * (1 - η z₁)) := by rw [e1]; simp only [s]; ring
+    have step4 : f z₁ * (1 - η z₁) ≤ f z₁ := by nlinarith [hη1.1]
+    have key : f z₂ * (1 - 15 / 2800) ≤ 225 / 196 * f z₁ := by nlinarith
+    rw [hfK z₁, hfK z₂] at key
+    have key' : (1 / 60000 * M) * (K (10 / 7) * (1 - 15 / 2800)) ≤
+        (1 / 60000 * M) * (225 / 196 * K (4 / 3)) := by
+      have : (1 / 60000 * M) * (K (10 / 7) * (1 - 15 / 2800)) =
+          1 / 60000 * M * K (10 / 7) * (1 - 15 / 2800) := by ring
+      rw [this]
+      linarith
+    have := le_of_mul_le_mul_left key' hP
+    linarith
+  · have hf : f z₀ = f z₁ := by
+      rw [hfK z₀, hfK z₁]
+      change 1 / 60000 * M * K 1 = 1 / 60000 * M * K (4 / 3)
+      rw [hKeq]
+    have he : η z₀ = η z₁ := by simp only [hηdef, hf]
+    change (1 : ℝ) / η z₀ < (4 / 3 : ℝ) / η z₁
+    rw [he]
+    exact div_lt_div_of_pos_right (by norm_num) hη1.1
+
+/-- The bimodal economy has exactly one strictly positive continuous fixed point of `T`
+(Proposition 6 applies: the CRRA utility satisfies the repaired Assumption 17.2). -/
+theorem shocksP8_existsUnique_fixedPoint :
+    ∃! f : Icc (1 / (3 / 2) : ℝ) (2 / 1) →ᵇ ℝ, (∀ z, 0 < f z) ∧
+      ∀ z, f z = shocksOpT 1 monoCexH' shocksP8V' 1 (3 / 2)
+        (shocksJointLaw 1 2 1 (3 / 2) shocksP8_hZ (shocksUnif 1 2) shocksExBimodal)
+        (fun z => shocksCondLaw 1 2 1 (3 / 2) (shocksUnif 1 2) shocksExBimodal z.1) f z := by
+  have hA := shocksExBimodal_assumption
+  have hπ : ∀ z : ℝ, 1 / (3 / 2) < z ∧ z < 2 / 1 →
+      0 < shocksPi (shocksUnif 1 2) shocksExBimodal z := fun z hz => shocksExBimodal_pi_pos hz
+  have := isProbabilityMeasure_shocksJointLaw hA shocksP8_hZ
+  have : ∀ z : Icc (1 / (3 / 2) : ℝ) (2 / 1),
+      IsProbabilityMeasure (shocksCondLaw 1 2 1 (3 / 2) (shocksUnif 1 2) shocksExBimodal z.1) :=
+    fun z => hA.isProbabilityMeasure_condLaw' hπ z.1
+  have : Nonempty (Icc (1 / (3 / 2) : ℝ) (2 / 1)) := ⟨⟨_, left_mem_Icc.2 shocksP8_hZ⟩⟩
+  exact proposition_6 hA.θlo_pos hA.θlo_lt.le monoCexH_assumption17_1H' shocksP8V_assumptions.1
+    shocksP8V_assumptions.2.1 _ _ fun h => (hA.ex_17_8b hπ h).domRestrict
+
+/-- For every strictly positive continuous fixed point of `T` in the bimodal economy, the price
+function `ρ(z) = z/ζ⁻¹(f(z))` is not invertible (it rises on `[1, 4/3]` and falls between `4/3`
+and `10/7`), and in particular not strictly increasing. -/
+theorem shocksP8_not_injective (f : Icc (1 / (3 / 2) : ℝ) (2 / 1) →ᵇ ℝ) (hfpos : ∀ z, 0 < f z)
+    (hfix : ∀ z, f z = shocksOpT 1 monoCexH' shocksP8V' 1 (3 / 2)
+      (shocksJointLaw 1 2 1 (3 / 2) shocksP8_hZ (shocksUnif 1 2) shocksExBimodal)
+      (fun z => shocksCondLaw 1 2 1 (3 / 2) (shocksUnif 1 2) shocksExBimodal z.1) f z) :
+    ¬ Function.Injective (fun z : Icc (1 / (3 / 2) : ℝ) (2 / 1) =>
+        (z : ℝ) / olgZetaInv 1 monoCexH' (f z)) ∧
+      ¬ StrictMono (fun z : Icc (1 / (3 / 2) : ℝ) (2 / 1) =>
+        (z : ℝ) / olgZetaInv 1 monoCexH' (f z)) := by
+  have hH := monoCexH_assumption17_1H'
+  obtain ⟨h1, h2⟩ := shocksP8_rho_ineq f hfpos hfix
+  set r := fun z : Icc (1 / (3 / 2) : ℝ) (2 / 1) => (z : ℝ) / olgZetaInv 1 monoCexH' (f z)
+    with hrdef
+  refine ⟨fun hinj => ?_, fun hmono => ?_⟩
+  · have hr : Continuous r := continuous_subtype_val.div
+      (hH.zetaInv_continuousOn.comp_continuous f.continuous fun z => (hfpos z).le)
+      fun z => (hH.zetaInv_pos (hfpos z)).ne'
+    set R : ℝ → ℝ := fun t => r (projIcc _ _ shocksP8_hZ t) with hRdef
+    have hR : Continuous R := hr.comp continuous_projIcc
+    have hRv : ∀ t (ht : t ∈ Icc (1 / (3 / 2) : ℝ) (2 / 1)), R t = r ⟨t, ht⟩ := fun t ht => by
+      simp only [hRdef, projIcc_of_mem _ ht]
+    have e0 := hRv 1 ⟨by norm_num, by norm_num⟩
+    have e1 := hRv (4 / 3) ⟨by norm_num, by norm_num⟩
+    have e2 := hRv (10 / 7) ⟨by norm_num, by norm_num⟩
+    have h1' : R (10 / 7) < R (4 / 3) := by rw [e1, e2]; exact h1
+    have h2' : R 1 < R (4 / 3) := by rw [e0, e1]; exact h2
+    obtain ⟨v, hvdef⟩ : ∃ v, v = (max (R 1) (R (10 / 7)) + R (4 / 3)) / 2 := ⟨_, rfl⟩
+    have hv : max (R 1) (R (10 / 7)) < R (4 / 3) := max_lt h2' h1'
+    have hv1 : v ∈ Icc (R 1) (R (4 / 3)) :=
+      ⟨by linarith [le_max_left (R 1) (R (10 / 7))], by linarith⟩
+    have hv2 : v ∈ Icc (R (10 / 7)) (R (4 / 3)) :=
+      ⟨by linarith [le_max_right (R 1) (R (10 / 7))], by linarith⟩
+    obtain ⟨t1, ht1, hRt1⟩ :=
+      intermediate_value_Icc (by norm_num : (1 : ℝ) ≤ 4 / 3) hR.continuousOn hv1
+    obtain ⟨t2, ht2, hRt2⟩ :=
+      intermediate_value_Icc' (by norm_num : (4 / 3 : ℝ) ≤ 10 / 7) hR.continuousOn hv2
+    have hne : t1 ≠ 4 / 3 := fun h => by rw [h] at hRt1; linarith
+    have hlt : t1 < t2 := lt_of_lt_of_le (lt_of_le_of_ne ht1.2 hne) ht2.1
+    have heq := hinj (a₁ := projIcc _ _ shocksP8_hZ t1) (a₂ := projIcc _ _ shocksP8_hZ t2)
+      (by change R t1 = R t2; rw [hRt1, hRt2])
+    have hm1 : t1 ∈ Icc (1 / (3 / 2) : ℝ) (2 / 1) := by
+      constructor <;> norm_num <;> linarith [ht1.1, ht1.2]
+    have hm2 : t2 ∈ Icc (1 / (3 / 2) : ℝ) (2 / 1) := by
+      constructor <;> norm_num <;> linarith [ht2.1, ht2.2]
+    rw [projIcc_of_mem _ hm1, projIcc_of_mem _ hm2] at heq
+    exact hlt.ne (Subtype.mk.inj heq)
+  · have := hmono (a := ⟨4 / 3, by norm_num, by norm_num⟩) (b := ⟨10 / 7, by norm_num, by norm_num⟩)
+      (by change (4 / 3 : ℝ) < 10 / 7; norm_num)
+    exact absurd this (not_lt.2 h1.le)
+
+/-- **Proposition 8 under Assumption 17.5 alone: counterexample.** In the economy
+`x ~ U[1, 2]`, `θ` with the bimodal density `shocksExBimodal` on `Θ = [1, 3/2]` (Assumption 17.5),
+`H(l) = −l − log(1 − l)` on `[0, 1)` (Assumption 17.1) and
+`V(y) = A y^{1−σ}/(1 − σ)`, `A = 1/60000`, `σ = 1/20` (the repaired Assumption 17.1, the repaired
+Assumption 17.2 with `β = 1 − σ`, and Assumption 17.4), the operator (4) has exactly one strictly
+positive continuous fixed point (Proposition 6), and for it, as for every strictly positive fixed
+point, the price function `ρ(z) = z/ζ⁻¹(f(z))` is neither strictly increasing nor even
+invertible. So the fixed point does not describe an equilibrium. -/
+theorem proposition_8_counterexample :
+    ShocksAssumption17_5 1 2 1 (3 / 2) (shocksUnif 1 2) shocksExBimodal ∧
+      Assumption17_1H 1 monoCexH monoCexH' monoCexH'' ∧
+      Assumption17_1VR shocksP8V shocksP8V' shocksP8V'' ∧
+      Assumption17_2R (1 - 1 / 20) shocksP8V' shocksP8V'' ∧
+      MonoAssumption17_4Pos shocksP8V' shocksP8V'' ∧
+      (∃! f : Icc (1 / (3 / 2) : ℝ) (2 / 1) →ᵇ ℝ, (∀ z, 0 < f z) ∧
+        ∀ z, f z = shocksOpT 1 monoCexH' shocksP8V' 1 (3 / 2)
+          (shocksJointLaw 1 2 1 (3 / 2) shocksP8_hZ (shocksUnif 1 2) shocksExBimodal)
+          (fun z => shocksCondLaw 1 2 1 (3 / 2) (shocksUnif 1 2) shocksExBimodal z.1) f z) ∧
+      ∀ f : Icc (1 / (3 / 2) : ℝ) (2 / 1) →ᵇ ℝ, (∀ z, 0 < f z) →
+        (∀ z, f z = shocksOpT 1 monoCexH' shocksP8V' 1 (3 / 2)
+          (shocksJointLaw 1 2 1 (3 / 2) shocksP8_hZ (shocksUnif 1 2) shocksExBimodal)
+          (fun z => shocksCondLaw 1 2 1 (3 / 2) (shocksUnif 1 2) shocksExBimodal z.1) f z) →
+        ¬ Function.Injective (fun z : Icc (1 / (3 / 2) : ℝ) (2 / 1) =>
+          (z : ℝ) / olgZetaInv 1 monoCexH' (f z)) :=
+  ⟨shocksExBimodal_assumption, monoCexH_assumption17_1H', shocksP8V_assumptions.1,
+    shocksP8V_assumptions.2.1, shocksP8V_assumptions.2.2, shocksP8_existsUnique_fixedPoint,
+    fun f hfpos hfix => (shocksP8_not_injective f hfpos hfix).1⟩
+
+/-- **Correction (Proposition 8 is false under Assumption 17.5 alone).** The statement of
+`proposition_8` without Assumption 17.6 (uniform `Ψ`, `G`) fails: see
+`proposition_8_counterexample`. -/
+theorem proposition_8_assumption17_5_false :
+    ¬ ∀ (xlo xhi θlo θhi : ℝ) (hZ : xlo / θhi ≤ xhi / θlo) (ψ g : ℝ → ℝ) (L : ℝ)
+      (H H' H'' V V' V'' : ℝ → ℝ), ShocksAssumption17_5 xlo xhi θlo θhi ψ g →
+      Assumption17_1H L H H' H'' → Assumption17_1VR V V' V'' → MonoAssumption17_4Pos V' V'' →
+      ∀ f : Icc (xlo / θhi) (xhi / θlo) →ᵇ ℝ, (∀ z, 0 < f z) →
+      (∀ z, f z = shocksOpT L H' V' θlo θhi (shocksJointLaw xlo xhi θlo θhi hZ ψ g)
+        (fun z => shocksCondLaw xlo xhi θlo θhi ψ g z.1) f z) →
+      StrictMono fun z : Icc (xlo / θhi) (xhi / θlo) => (z : ℝ) / olgZetaInv L H' (f z) := by
+  intro h
+  obtain ⟨f, ⟨hfpos, hfix⟩, -⟩ := shocksP8_existsUnique_fixedPoint
+  exact (shocksP8_not_injective f hfpos hfix).2 (h 1 2 1 (3 / 2) shocksP8_hZ _ _ 1 _ _ _ _ _ _
+    shocksExBimodal_assumption monoCexH_assumption17_1H' shocksP8V_assumptions.1
+    shocksP8V_assumptions.2.2 f hfpos hfix)
+
+/-! ### The book's Assumption 17.1: a utility with `V'(0) < ∞` -/
+
+/-- Gluing two differentiable branches at `y₀` with matching values and derivatives. -/
+theorem shocks_hasDerivAt_ite {g h : ℝ → ℝ} {y₀ y d : ℝ} (hg : y₀ ≤ y → HasDerivAt g d y)
+    (hh : y ≤ y₀ → HasDerivAt h d y) (heq : g y₀ = h y₀) :
+    HasDerivAt (fun t => if y₀ ≤ t then g t else h t) d y := by
+  rcases lt_trichotomy y y₀ with hy | hy | hy
+  · refine (hh hy.le).congr_of_eventuallyEq ?_
+    filter_upwards [Iio_mem_nhds hy] with t ht
+    simp [not_le.2 (mem_Iio.1 ht)]
+  · subst hy
+    have h1 : HasDerivWithinAt (fun t => if y ≤ t then g t else h t) d (Ici y) y :=
+      (hg le_rfl).hasDerivWithinAt.congr (fun t ht => by simp [mem_Ici.1 ht]) (by simp)
+    have h2 : HasDerivWithinAt (fun t => if y ≤ t then g t else h t) d (Iic y) y := by
+      refine (hh le_rfl).hasDerivWithinAt.congr (fun t ht => ?_) (by simp [heq])
+      rcases (mem_Iic.1 ht).eq_or_lt with h' | h'
+      · subst h'; simp [heq]
+      · simp [not_le.2 h']
+    have := h2.union h1
+    rwa [Iic_union_Ici, hasDerivWithinAt_univ] at this
+  · refine (hg hy.le).congr_of_eventuallyEq ?_
+    filter_upwards [Ioi_mem_nhds hy] with t ht
+    simp [(mem_Ioi.1 ht).le]
+
+/-- The utility `W = V` on `[y₀, ∞)` (the CRRA utility `shocksP8V`, shifted to be continuous),
+and below `y₀` the quadratic with `W(0) = 0` whose derivative continues `V'` linearly. -/
+noncomputable def shocksP8W (y₀ y : ℝ) : ℝ :=
+  if y₀ ≤ y then shocksP8V y - shocksP8V y₀ +
+    1 / 60000 * y₀ ^ (-(1 / 20) : ℝ) * ((1 + 1 / 20) * y₀ - 1 / 20 * y₀ ^ 2 / (2 * y₀))
+  else 1 / 60000 * y₀ ^ (-(1 / 20) : ℝ) * ((1 + 1 / 20) * y - 1 / 20 * y ^ 2 / (2 * y₀))
+
+/-- `W' = V'` on `[y₀, ∞)`, linear below `y₀`. -/
+noncomputable def shocksP8W' (y₀ y : ℝ) : ℝ :=
+  if y₀ ≤ y then shocksP8V' y else 1 / 60000 * y₀ ^ (-(1 / 20) : ℝ) * (1 + 1 / 20 - 1 / 20 * y / y₀)
+
+/-- `W'' = V''` on `[y₀, ∞)`, constant below `y₀`. -/
+noncomputable def shocksP8W'' (y₀ y : ℝ) : ℝ :=
+  1 / 60000 * (-(1 / 20) * max y y₀ ^ (-(1 / 20) - 1 : ℝ))
+
+variable {y₀ : ℝ}
+
+/-- `W' = dW/dy`. -/
+theorem shocksP8W_hasDerivAt (hy₀ : 0 < y₀) (y : ℝ) :
+    HasDerivAt (shocksP8W y₀) (shocksP8W' y₀ y) y := by
+  have hV := shocksP8V_assumptions.1
+  have hl : ∀ t, HasDerivAt (fun t => 1 / 60000 * y₀ ^ (-(1 / 20) : ℝ) *
+      ((1 + 1 / 20) * t - 1 / 20 * t ^ 2 / (2 * y₀)))
+      (1 / 60000 * y₀ ^ (-(1 / 20) : ℝ) * (1 + 1 / 20 - 1 / 20 * t / y₀)) t := fun t => by
+    have := (((hasDerivAt_id t).const_mul (1 + 1 / 20 : ℝ)).sub
+      (((hasDerivAt_pow 2 t).const_mul (1 / 20 : ℝ)).div_const (2 * y₀))).const_mul
+      (1 / 60000 * y₀ ^ (-(1 / 20) : ℝ))
+    refine this.congr_deriv ?_
+    field_simp
+    ring
+  refine shocks_hasDerivAt_ite (fun h => ?_) (fun h => ?_) ?_
+  · simp only [shocksP8W', h, ↓reduceIte]
+    exact ((hV.V_deriv y (hy₀.trans_le h)).sub_const _).add_const _
+  · rcases h.eq_or_lt with h' | h'
+    · subst h'
+      simp only [shocksP8W', le_refl, ↓reduceIte]
+      convert hl y using 1
+      simp only [shocksP8V']
+      field_simp
+      ring
+    · simp only [shocksP8W', not_le.2 h', ↓reduceIte]
+      exact hl y
+  · ring
+
+/-- `W'' = dW'/dy`. -/
+theorem shocksP8W'_hasDerivAt (hy₀ : 0 < y₀) (y : ℝ) :
+    HasDerivAt (shocksP8W' y₀) (shocksP8W'' y₀ y) y := by
+  have hV := shocksP8V_assumptions.1
+  have e : y₀ ^ (-(1 / 20) - 1 : ℝ) = y₀ ^ (-(1 / 20) : ℝ) / y₀ := Real.rpow_sub_one hy₀.ne' _
+  refine shocks_hasDerivAt_ite (fun h => ?_) (fun h => ?_) ?_
+  · rw [shocksP8W'', max_eq_left h]
+    exact hV.V'_deriv y (hy₀.trans_le h)
+  · rw [shocksP8W'', max_eq_right h, e]
+    have := ((((hasDerivAt_id y).const_mul (1 / 20 : ℝ)).div_const y₀).const_sub
+      (1 + 1 / 20 : ℝ)).const_mul (1 / 60000 * y₀ ^ (-(1 / 20) : ℝ))
+    refine this.congr_deriv ?_
+    field_simp
+  · simp only [shocksP8V']
+    field_simp
+    ring
+
+/-- `W' > 0`. -/
+theorem shocksP8W'_pos (hy₀ : 0 < y₀) (y : ℝ) : 0 < shocksP8W' y₀ y := by
+  simp only [shocksP8W']
+  split_ifs with h
+  · exact mul_pos (by norm_num) (Real.rpow_pos_of_pos (hy₀.trans_le h) _)
+  · have h1 : y / y₀ < 1 := (div_lt_one hy₀).2 (not_le.1 h)
+    have h2 : 1 / 20 * y / y₀ = 1 / 20 * (y / y₀) := by ring
+    refine mul_pos (mul_pos (by norm_num) (Real.rpow_pos_of_pos hy₀ _)) ?_
+    rw [h2]
+    linarith
+
+/-- `W'' < 0`. -/
+theorem shocksP8W''_neg (hy₀ : 0 < y₀) (y : ℝ) : shocksP8W'' y₀ y < 0 := by
+  have := Real.rpow_pos_of_pos (hy₀.trans_le (le_max_right y y₀)) (-(1 / 20) - 1 : ℝ)
+  simp only [shocksP8W'']
+  nlinarith
+
+/-- **`W` satisfies the book's Assumption 17.1** (`V` twice continuously differentiable on
+`ℝ₊ = [0, ∞)`, `V'(0) < ∞`, strictly increasing and strictly concave) **and Assumption 17.4**
+(relative risk aversion `≤ 1` on `ℝ₊`). -/
+theorem shocksP8W_assumptions (hy₀ : 0 < y₀) :
+    Assumption17_1V (shocksP8W y₀) (shocksP8W' y₀) (shocksP8W'' y₀) ∧
+      MonoAssumption17_4 (shocksP8W' y₀) (shocksP8W'' y₀) := by
+  have hd := shocksP8W_hasDerivAt hy₀
+  have hd' := shocksP8W'_hasDerivAt hy₀
+  have hc : Continuous (shocksP8W y₀) := continuous_iff_continuousAt.2 fun y => (hd y).continuousAt
+  have hc' : Continuous (shocksP8W' y₀) :=
+    continuous_iff_continuousAt.2 fun y => (hd' y).continuousAt
+  have hmono : StrictMonoOn (shocksP8W y₀) (Ici 0) :=
+    strictMonoOn_of_deriv_pos (convex_Ici 0) hc.continuousOn fun x hx => by
+      rw [interior_Ici] at hx
+      rw [(hd x).deriv]
+      exact shocksP8W'_pos hy₀ x
+  have hanti : StrictAnti (shocksP8W' y₀) := by
+    have := strictAntiOn_of_deriv_neg convex_univ hc'.continuousOn fun x _ => by
+      rw [(hd' x).deriv]
+      exact shocksP8W''_neg hy₀ x
+    exact fun a b hab => this (mem_univ a) (mem_univ b) hab
+  have hderiv : deriv (shocksP8W y₀) = shocksP8W' y₀ := funext fun y => (hd y).deriv
+  have h0 : shocksP8W y₀ 0 = 0 := by simp [shocksP8W, not_le.2 hy₀]
+  refine ⟨⟨fun y hy => ?_, fun y _ => (hd y).hasDerivWithinAt,
+    fun y _ => (hd' y).hasDerivWithinAt, ?_, hmono, ?_⟩, fun y hy => ?_⟩
+  · rw [← h0]
+    exact hmono.monotoneOn (mem_Ici.2 le_rfl) (mem_Ici.2 hy) hy
+  · refine Continuous.continuousOn (continuous_const.mul (continuous_const.mul ?_))
+    exact (continuous_id.max continuous_const).rpow_const fun y =>
+      Or.inl (hy₀.trans_le (le_max_right y y₀)).ne'
+  · refine StrictAntiOn.strictConcaveOn_of_deriv (convex_Ici 0) hc.continuousOn ?_
+    rw [hderiv]
+    exact fun a _ b _ hab => hanti hab
+  · -- relative risk aversion
+    have hW := shocksP8W'_pos hy₀ y
+    simp only [monoRRA]
+    rw [div_le_one hW]
+    simp only [shocksP8W'', shocksP8W']
+    split_ifs with h
+    · rw [max_eq_left h]
+      have hy0 : 0 < y := hy₀.trans_le h
+      have e : y * y ^ (-(1 / 20) - 1 : ℝ) = y ^ (-(1 / 20) : ℝ) := by
+        rw [Real.rpow_sub_one hy0.ne', mul_div_cancel₀ _ hy0.ne']
+      have hp := Real.rpow_pos_of_pos hy0 (-(1 / 20) : ℝ)
+      simp only [shocksP8V']
+      have : -y * (1 / 60000 * (-(1 / 20) * y ^ (-(1 / 20) - 1 : ℝ))) =
+          1 / 60000 * (1 / 20) * (y * y ^ (-(1 / 20) - 1 : ℝ)) := by ring
+      rw [this, e]
+      nlinarith
+    · have hlt : y < y₀ := not_le.1 h
+      rw [max_eq_right hlt.le, Real.rpow_sub_one hy₀.ne']
+      have hp := Real.rpow_pos_of_pos hy₀ (-(1 / 20) : ℝ)
+      have hq : y / y₀ < 1 := (div_lt_one hy₀).2 hlt
+      have hq0 : 0 ≤ y / y₀ := div_nonneg hy hy₀.le
+      have e1 : -y * (1 / 60000 * (-(1 / 20) * (y₀ ^ (-(1 / 20) : ℝ) / y₀))) =
+          1 / 60000 * y₀ ^ (-(1 / 20) : ℝ) * (1 / 20 * (y / y₀)) := by
+        field_simp
+      have e2 : 1 / 60000 * y₀ ^ (-(1 / 20) : ℝ) * (1 + 1 / 20 - 1 / 20 * y / y₀) =
+          1 / 60000 * y₀ ^ (-(1 / 20) : ℝ) * (1 + 1 / 20 - 1 / 20 * (y / y₀)) := by ring
+      rw [e1, e2]
+      exact mul_le_mul_of_nonneg_left (by linarith) (by positivity)
+
+/-- On functions whose `η = ζ⁻¹ ∘ f` stays above `(3/2) y₀`, the operators (4) built from `W`
+and from the CRRA utility coincide: all arguments of `φ` are `≥ (θ̲/θ̄)(3/2) y₀ = y₀`. -/
+theorem shocksP8W_opT_eq {Z : Type*} [MeasurableSpace Z] {L : ℝ} {H' : ℝ → ℝ} (hy₀ : 0 < y₀)
+    (μ : Measure (ℝ × Z)) (ν : Z → Measure ℝ) (f : Z → ℝ)
+    (hη : ∀ z, 3 / 2 * y₀ ≤ olgZetaInv L H' (f z)) (z : Z) :
+    shocksOpT L H' (shocksP8W' y₀) 1 (3 / 2) μ ν f z =
+      shocksOpT L H' shocksP8V' 1 (3 / 2) μ ν f z := by
+  have e : ∀ θt (ω : ℝ × Z), shocksIntegrand L H' (shocksP8W' y₀) 1 (3 / 2) f θt ω =
+      shocksIntegrand L H' shocksP8V' 1 (3 / 2) f θt ω := fun θt ω => by
+    have h1 := (shocksRatio_mem (θlo := (1 : ℝ)) (θhi := 3 / 2) one_pos (by norm_num) ω.1 θt).1
+    have h2 := hη ω.2
+    have hle : y₀ ≤ shocksRatio 1 (3 / 2) ω.1 θt * olgZetaInv L H' (f ω.2) := by
+      nlinarith [h1, h2, hy₀]
+    simp only [shocksIntegrand, olgPhi, shocksP8W', hle, ↓reduceIte]
+  simp only [shocksOpT, shocksPhiF, e]
+
+/-- **Proposition 8 under Assumption 17.5 alone: counterexample satisfying the book's
+Assumption 17.1.** In the bimodal economy of `proposition_8_counterexample`, replace the CRRA
+utility below a small `y₀ > 0` by `shocksP8W y₀` (so that `V'(0) < ∞`): `H` and `V` satisfy the
+book's Assumption 17.1 (with `V` twice continuously differentiable on all of `ℝ₊`) and
+Assumption 17.4, the strictly positive fixed point of `T` for the CRRA utility is still a fixed
+point (all arguments of `φ` exceed `y₀`), and its price function `ρ(z) = z/ζ⁻¹(f(z))` is not
+invertible. -/
+theorem proposition_8_counterexample_book :
+    ∃ y₀ : ℝ, 0 < y₀ ∧
+      Assumption17_1 1 monoCexH monoCexH' monoCexH'' (shocksP8W y₀) (shocksP8W' y₀)
+        (shocksP8W'' y₀) ∧ MonoAssumption17_4 (shocksP8W' y₀) (shocksP8W'' y₀) ∧
+      ∃ f : Icc (1 / (3 / 2) : ℝ) (2 / 1) →ᵇ ℝ, (∀ z, 0 < f z) ∧
+        (∀ z, f z = shocksOpT 1 monoCexH' (shocksP8W' y₀) 1 (3 / 2)
+          (shocksJointLaw 1 2 1 (3 / 2) shocksP8_hZ (shocksUnif 1 2) shocksExBimodal)
+          (fun z => shocksCondLaw 1 2 1 (3 / 2) (shocksUnif 1 2) shocksExBimodal z.1) f z) ∧
+        ¬ Function.Injective (fun z : Icc (1 / (3 / 2) : ℝ) (2 / 1) =>
+          (z : ℝ) / olgZetaInv 1 monoCexH' (f z)) := by
+  have hH := monoCexH_assumption17_1H'
+  obtain ⟨f, ⟨hfpos, hfix⟩, -⟩ := shocksP8_existsUnique_fixedPoint
+  have hne : (univ : Set (Icc (1 / (3 / 2) : ℝ) (2 / 1))).Nonempty :=
+    ⟨⟨_, left_mem_Icc.2 shocksP8_hZ⟩, mem_univ _⟩
+  obtain ⟨m, -, hm⟩ := isCompact_univ.exists_isMinOn hne f.continuous.continuousOn
+  have hy₀ : 0 < 2 / 3 * olgZetaInv 1 monoCexH' (f m) :=
+    mul_pos (by norm_num) (hH.zetaInv_pos (hfpos m))
+  have hη : ∀ z, 3 / 2 * (2 / 3 * olgZetaInv 1 monoCexH' (f m)) ≤
+      olgZetaInv 1 monoCexH' (f z) := fun z => by
+    rw [← mul_assoc, show (3 / 2 : ℝ) * (2 / 3) = 1 by norm_num, one_mul]
+    exact hH.zetaInv_strictMonoOn.monotoneOn (mem_Ici.2 (hfpos m).le) (mem_Ici.2 (hfpos z).le)
+      (isMinOn_iff.1 hm z (mem_univ z))
+  exact ⟨_, hy₀, ⟨hH, (shocksP8W_assumptions hy₀).1⟩, (shocksP8W_assumptions hy₀).2, f, hfpos,
+    fun z => by rw [shocksP8W_opT_eq hy₀ _ _ f hη z]; exact hfix z,
+    (shocksP8_not_injective f hfpos hfix).1⟩
+
+/-- **Correction (Proposition 8, p. 540, is false as stated).** Under the book's hypotheses
+(Assumptions 17.1 and 17.4 for `H`, `V`; Assumption 17.5 for the shocks), a strictly positive
+continuous solution of (3) (a fixed point of (4)) can have a price function `ρ(z) = z/η(z)` that is
+not strictly increasing: `proposition_8_counterexample_book`. -/
+theorem proposition_8_false :
+    ¬ ∀ (xlo xhi θlo θhi : ℝ) (hZ : xlo / θhi ≤ xhi / θlo) (ψ g : ℝ → ℝ) (L : ℝ)
+      (H H' H'' V V' V'' : ℝ → ℝ), ShocksAssumption17_5 xlo xhi θlo θhi ψ g →
+      Assumption17_1 L H H' H'' V V' V'' → MonoAssumption17_4 V' V'' →
+      ∀ f : Icc (xlo / θhi) (xhi / θlo) →ᵇ ℝ, (∀ z, 0 < f z) →
+      (∀ z, f z = shocksOpT L H' V' θlo θhi (shocksJointLaw xlo xhi θlo θhi hZ ψ g)
+        (fun z => shocksCondLaw xlo xhi θlo θhi ψ g z.1) f z) →
+      StrictMono fun z : Icc (xlo / θhi) (xhi / θlo) => (z : ℝ) / olgZetaInv L H' (f z) := by
+  intro h
+  obtain ⟨y₀, -, h1, h4, f, hfpos, hfix, hinj⟩ := proposition_8_counterexample_book
+  exact hinj (h 1 2 1 (3 / 2) shocksP8_hZ _ _ 1 _ _ _ _ _ _ shocksExBimodal_assumption h1 h4 f
+    hfpos hfix).injective
+
+end StokeyLucasPrescott.FixedPointArguments
+
+/-
+Copyright (c) 2026 Robert Kirkby. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Robert Kirkby
+-/
+
+/-!
+# Partially observed shocks: continuous equilibrium prices reveal exactly `x/θ`
+
+SLP §17.6, pp. 532–533. The book argues that two states with the same price are
+indistinguishable to the young, so (by strict concavity of (1)) they get the same labour supply,
+and then (2) forces the same ratio `x/θ`; it concludes that "any equilibrium must be of the form
+`p(x, θ) = ρ(x/θ)`". The argument proves only "equal prices ⇒ equal ratios"
+(`p533_ratio_of_price`), and `p533_counterexample` (`FixedPointArguments.ShocksModel`) shows the
+conclusion does not follow from those premises for a discontinuous `p`. Here the islands economy's
+equilibrium conditions are formalised and the conclusion is proved for continuous prices, the
+class in which the book looks for equilibria (`ρ` continuous on `Z`).
+
+* `ShocksStates`: the state space `X × Θ`. `islandsObj`: the objective in (1), with the
+  young agent's beliefs `κ(P)` about the current state given the price `P` and the law `ν` of next
+  period's shocks. **`IslandsEqm`** (p. 532): conditions (1) (optimality given the price) and (2)
+  (market clearing `n p = x/θ`); `IslandsEqm.p_pos`: equilibrium prices are positive.
+* `islandsObj_max_unique` (p. 533, "(1) is strictly concave in `l`"): under Assumption 17.1 the
+  maximiser in (1) is unique, so `n` is a function of `p`.
+* `shocks_const_on_rays` (topology): a function continuous on `X × Θ` whose level sets lie in
+  the rays `x/θ = z` is constant on each ray (intermediate value theorem on the convex ray
+  segments `shocks_convex_ray`, and on nearby rays, `shocks_exists_ray_approx`).
+* **`islands_eqm_price_of_ratio`** (p. 533, settled for continuous prices): every equilibrium with
+  `p` continuous on `X × Θ` has `p(x, θ) = ρ(x/θ)`, `n(x, θ) = (x/θ)/ρ(x/θ)` with `ρ` continuous
+  and strictly monotone (hence invertible) on `Z`. This holds for **every** price-indexed belief
+  family `κ`, in particular for rational expectations. So no continuous price reveals more than
+  `x/θ`, and every continuous equilibrium price reveals `x/θ` (the invertibility that the book
+  imposes on `ρ` is automatic).
+* `islands_eqm_not_injOn`: no continuous equilibrium price is fully revealing.
+
+**Correction (p. 533), completed.** For continuous prices the book's conclusion is true but its
+argument is incomplete: the missing step "equal ratios ⇒ equal prices" is the topological
+`shocks_const_on_rays`, which uses continuity essentially (`p533_counterexample`). Whether a
+*discontinuous* price revealing more than `x/θ` can satisfy (1) with rational-expectations beliefs
+is not settled here.
+-/
+
+namespace StokeyLucasPrescott.FixedPointArguments
+
+open MeasureTheory Set Filter Topology
+
+variable {xlo xhi θlo θhi : ℝ}
+
+/-- A point `u = (x, θ) ≠ (x̄, θ̲)` of the ray `x = zθ` in `X × Θ` is the limit, as `w ↓ z`, of
+points of the rays `x = wθ` in `X × Θ`. -/
+theorem shocks_exists_ray_approx (hθ0 : 0 < θlo) {z : ℝ} (hz : 0 < z) {u : ℝ × ℝ}
+    (hu : u ∈ Icc xlo xhi ×ˢ Icc θlo θhi) (huz : u.1 = z * u.2) (hne : u ≠ (xhi, θlo)) :
+    ∃ γ : ℝ → ℝ × ℝ, Tendsto γ (𝓝[>] z) (𝓝 u) ∧
+      ∀ᶠ w in 𝓝[>] z, γ w ∈ Icc xlo xhi ×ˢ Icc θlo θhi ∧ (γ w).1 = w * (γ w).2 := by
+  obtain ⟨⟨hx1, hx2⟩, hθ1, hθ2⟩ := hu
+  have hev : ∀ᶠ w in 𝓝[>] z, z < w := self_mem_nhdsWithin
+  rcases hx2.lt_or_eq with hlt | heq
+  · -- move `x` up
+    refine ⟨fun w => (u.1 * (w / z), u.2), ?_, ?_⟩
+    · have : Tendsto (fun w => (u.1 * (w / z), u.2)) (𝓝 z) (𝓝 (u.1 * (z / z), u.2)) :=
+        ((continuous_const.mul (continuous_id.div_const z)).prodMk continuous_const).tendsto z
+      rw [div_self hz.ne', mul_one] at this
+      exact tendsto_nhdsWithin_of_tendsto_nhds this
+    · have ht : Tendsto (fun w => u.1 * (w / z)) (𝓝[>] z) (𝓝 u.1) := by
+        have : Tendsto (fun w => u.1 * (w / z)) (𝓝 z) (𝓝 (u.1 * (z / z))) :=
+          ((continuous_const.mul (continuous_id.div_const z))).tendsto z
+        rw [div_self hz.ne', mul_one] at this
+        exact tendsto_nhdsWithin_of_tendsto_nhds this
+      filter_upwards [hev, ht.eventually (gt_mem_nhds hlt)] with w hw h1
+      have hx0 : 0 ≤ u.1 := by rw [huz]; exact mul_nonneg hz.le (by linarith)
+      refine ⟨⟨⟨?_, h1.le⟩, hθ1, hθ2⟩, ?_⟩
+      · have : 1 ≤ w / z := (one_le_div hz).2 hw.le
+        nlinarith
+      · rw [huz]
+        field_simp
+  · -- `x = x̄`: move `θ` down
+    have hθlt : θlo < u.2 := by
+      rcases hθ1.lt_or_eq with h | h
+      · exact h
+      · exact absurd (Prod.ext heq h.symm) hne
+    have ht : Tendsto (fun w => u.2 * (z / w)) (𝓝[>] z) (𝓝 u.2) := by
+      have : Tendsto (fun w => u.2 * (z / w)) (𝓝 z) (𝓝 (u.2 * (z / z))) :=
+        (continuousAt_const.mul (continuousAt_const.div continuousAt_id hz.ne')).tendsto
+      rw [div_self hz.ne', mul_one] at this
+      exact tendsto_nhdsWithin_of_tendsto_nhds this
+    refine ⟨fun w => (u.1, u.2 * (z / w)), tendsto_const_nhds.prodMk_nhds ht, ?_⟩
+    filter_upwards [hev, ht.eventually (lt_mem_nhds hθlt)] with w hw h1
+    have hw0 : 0 < w := hz.trans hw
+    refine ⟨⟨⟨hx1, hx2⟩, h1.le, ?_⟩, ?_⟩
+    · have : z / w ≤ 1 := (div_le_one hw0).2 hw.le
+      have h0 : 0 ≤ u.2 := by linarith
+      calc u.2 * (z / w) ≤ u.2 * 1 := mul_le_mul_of_nonneg_left this h0
+        _ ≤ θhi := by linarith
+    · rw [huz]
+      field_simp
+
+/-- The part of the ray `x = wθ` in `X × Θ` is convex. -/
+theorem shocks_convex_ray (w : ℝ) :
+    Convex ℝ {u ∈ Icc xlo xhi ×ˢ Icc θlo θhi | u.1 = w * u.2} := by
+  rintro a ⟨haS, haz⟩ b ⟨hbS, hbz⟩ α β hα hβ hαβ
+  refine ⟨(convex_Icc xlo xhi).prod (convex_Icc θlo θhi) haS hbS hα hβ hαβ, ?_⟩
+  simp only [Prod.fst_add, Prod.snd_add, Prod.smul_fst, Prod.smul_snd, smul_eq_mul]
+  rw [haz, hbz]
+  ring
+
+/-- **Continuous prices are functions of `x/θ`.** If `p` is continuous on `X × Θ` and equal
+prices imply equal ratios `x/θ` (what the argument on p. 533 proves, `p533_ratio_of_price`), then
+`p` is constant on each ray `x/θ = z`. Otherwise `p` takes a value `m` strictly between two of its
+values on one ray; by continuity it takes values on both sides of `m` on every nearby ray, hence
+(intermediate value theorem on the convex ray segments) the value `m` itself, on two different
+rays. -/
+theorem shocks_const_on_rays (hx0 : 0 < xlo) (hθ0 : 0 < θlo) {p : ℝ × ℝ → ℝ}
+    (hp : ContinuousOn p (Icc xlo xhi ×ˢ Icc θlo θhi))
+    (hsep : ∀ s ∈ Icc xlo xhi ×ˢ Icc θlo θhi, ∀ t ∈ Icc xlo xhi ×ˢ Icc θlo θhi,
+      p s = p t → s.1 / s.2 = t.1 / t.2)
+    {s t : ℝ × ℝ} (hs : s ∈ Icc xlo xhi ×ˢ Icc θlo θhi) (ht : t ∈ Icc xlo xhi ×ˢ Icc θlo θhi)
+    (hst : s.1 / s.2 = t.1 / t.2) : p s = p t := by
+  by_contra hne
+  wlog h : p s < p t generalizing s t
+  · exact this ht hs hst.symm (Ne.symm hne) (lt_of_le_of_ne (not_lt.1 h) (Ne.symm hne))
+  set S := Icc xlo xhi ×ˢ Icc θlo θhi with hSdef
+  have hpos : ∀ u ∈ S, 0 < u.2 := fun u hu => hθ0.trans_le hu.2.1
+  set z := s.1 / s.2 with hzdef
+  have hz : 0 < z := div_pos (hx0.trans_le hs.1.1) (hpos s hs)
+  have hsz : s.1 = z * s.2 := by rw [hzdef, div_mul_cancel₀ _ (hpos s hs).ne']
+  have htz : t.1 = z * t.2 := by rw [hst, div_mul_cancel₀ _ (hpos t ht).ne']
+  -- neither point is the corner `(x̄, θ̲)`, else the ray meets `X × Θ` only there
+  have hcorner : ∀ u ∈ S, ∀ v ∈ S, u.1 = z * u.2 → v.1 = z * v.2 → u = (xhi, θlo) → v = u := by
+    intro u hu v hv huz hvz hu0
+    rw [hu0] at huz
+    simp only at huz
+    have h1 : xhi ≤ v.1 := by
+      rw [hvz, huz]
+      exact mul_le_mul_of_nonneg_left hv.2.1 hz.le
+    have hv1 : v.1 = xhi := le_antisymm hv.1.2 h1
+    have hv2 : v.2 = θlo := by
+      have h2 : z * v.2 ≤ z * θlo := by rw [← hvz, ← huz]; exact hv.1.2
+      exact le_antisymm (le_of_mul_le_mul_left h2 hz) hv.2.1
+    rw [hu0]
+    exact Prod.ext hv1 hv2
+  have hs0 : s ≠ (xhi, θlo) := fun h0 => hne (by rw [hcorner s hs t ht hsz htz h0])
+  have ht0 : t ≠ (xhi, θlo) := fun h0 => hne (by rw [hcorner t ht s hs htz hsz h0])
+  -- the value `m` is taken on the ray `z`
+  obtain ⟨m, hm⟩ : ∃ m, m = (p s + p t) / 2 := ⟨_, rfl⟩
+  obtain ⟨u, ⟨huS, huz⟩, hum⟩ := (shocks_convex_ray (xlo := xlo) (xhi := xhi) (θlo := θlo)
+    (θhi := θhi) z).isPreconnected.intermediate_value ⟨hs, hsz⟩ ⟨ht, htz⟩
+    (hp.mono fun _ h => h.1) (show m ∈ Icc (p s) (p t) from ⟨by linarith, by linarith⟩)
+  -- nearby rays
+  obtain ⟨γs, hγs, hγsS⟩ := shocks_exists_ray_approx hθ0 hz hs hsz hs0
+  obtain ⟨γt, hγt, hγtS⟩ := shocks_exists_ray_approx hθ0 hz ht htz ht0
+  have hps : Tendsto (fun w => p (γs w)) (𝓝[>] z) (𝓝 (p s)) :=
+    (hp s hs).tendsto.comp (tendsto_nhdsWithin_iff.2 ⟨hγs, hγsS.mono fun _ h => h.1⟩)
+  have hpt : Tendsto (fun w => p (γt w)) (𝓝[>] z) (𝓝 (p t)) :=
+    (hp t ht).tendsto.comp (tendsto_nhdsWithin_iff.2 ⟨hγt, hγtS.mono fun _ h => h.1⟩)
+  obtain ⟨w, hw, hγsw, hγtw, h1, h2⟩ := ((eventually_mem_nhdsWithin : ∀ᶠ w in 𝓝[>] z, w ∈ Ioi z).and
+    (hγsS.and (hγtS.and ((hps.eventually (gt_mem_nhds (show p s < m by linarith))).and
+    (hpt.eventually (lt_mem_nhds (show m < p t by linarith))))))).exists
+  obtain ⟨v, ⟨hvS, hvw⟩, hvm⟩ := (shocks_convex_ray (xlo := xlo) (xhi := xhi) (θlo := θlo)
+    (θhi := θhi) w).isPreconnected.intermediate_value hγsw hγtw (hp.mono fun _ h => h.1)
+    (show m ∈ Icc (p (γs w)) (p (γt w)) from ⟨h1.le, h2.le⟩)
+  have := hsep v hvS u huS (by rw [hvm, hum])
+  rw [hvw, huz, mul_div_cancel_right₀ _ (hpos v hvS).ne',
+    mul_div_cancel_right₀ _ (hpos u huS).ne'] at this
+  exact (ne_of_gt (mem_Ioi.1 hw)) this
+
+/-! ### The islands economy: equilibrium conditions (1)–(2) -/
+
+/-- The state space `X × Θ`, as a subtype of `ℝ × ℝ`. -/
+abbrev ShocksStates (xlo xhi θlo θhi : ℝ) : Type := ↥(Icc xlo xhi ×ˢ Icc θlo θhi)
+
+/-- The objective in (1) (p. 532) of a young agent who observes the price `P` and supplies `l`:
+`−H(l) + E_{(x̂, θ̂) ~ κ(P)} E_{(x′, θ′) ~ ν} V[x′ l p(x̂, θ̂)/(x̂ p(x′, θ′))]`. Here `κ(P)` is the
+agent's belief about the current state given the price `P` (in the book, the conditional law of
+`(x, θ)` given `p(x, θ) = P`) and `ν` is the law of next period's shocks. -/
+noncomputable def islandsObj {xlo xhi θlo θhi : ℝ} (H V : ℝ → ℝ) (p : ℝ × ℝ → ℝ)
+    (κ : ℝ → Measure (ShocksStates xlo xhi θlo θhi)) (ν : Measure (ShocksStates xlo xhi θlo θhi))
+    (P l : ℝ) : ℝ :=
+  -H l + ∫ sh, ∫ s', V (s'.1.1 * l * p sh.1 / (sh.1.1 * p s'.1)) ∂ν ∂κ P
+
+variable (L : ℝ) (H V : ℝ → ℝ) (p n : ℝ × ℝ → ℝ) (κ : ℝ → Measure (ShocksStates xlo xhi θlo θhi))
+  (ν : Measure (ShocksStates xlo xhi θlo θhi)) in
+/-- **Stationary equilibrium of the islands economy** (p. 532): a price function `p` and labour
+supply `n` on `X × Θ` such that (1) at every state `n(x, θ) ∈ [0, L)` maximises the objective
+`islandsObj` given the observed price `p(x, θ)`, and (2) `n(x, θ) p(x, θ) = x/θ`. The beliefs `κ`
+are an arbitrary family indexed by the price (the agent sees only the price); the results below
+hold for every such family, in particular for the rational-expectations one. -/
+structure IslandsEqm : Prop where
+  n_mem : ∀ s ∈ Icc xlo xhi ×ˢ Icc θlo θhi, n s ∈ Ico 0 L
+  opt : ∀ s ∈ Icc xlo xhi ×ˢ Icc θlo θhi, ∀ l ∈ Ico 0 L,
+    islandsObj H V p κ ν (p s) l ≤ islandsObj H V p κ ν (p s) (n s)
+  clear : ∀ s ∈ Icc xlo xhi ×ˢ Icc θlo θhi, n s * p s = s.1 / s.2
+
+variable {L : ℝ} {H H' H'' V V' V'' : ℝ → ℝ} {p n : ℝ × ℝ → ℝ}
+  {κ : ℝ → Measure (ShocksStates xlo xhi θlo θhi)} {ν : Measure (ShocksStates xlo xhi θlo θhi)}
+
+/-- In equilibrium prices are strictly positive (from (2), since `n ≥ 0` and `x/θ > 0`). -/
+theorem IslandsEqm.p_pos (he : IslandsEqm L H V p n κ ν) (hx0 : 0 < xlo) (hθ0 : 0 < θlo)
+    {s : ℝ × ℝ} (hs : s ∈ Icc xlo xhi ×ˢ Icc θlo θhi) : 0 < p s := by
+  have h2 := he.clear s hs
+  have hz : 0 < s.1 / s.2 := div_pos (hx0.trans_le hs.1.1) (hθ0.trans_le hs.2.1)
+  have hn := (he.n_mem s hs).1
+  by_contra h
+  push Not at h
+  nlinarith
+
+/-- **The maximiser in (1) is unique** (p. 533: "(1) is strictly concave in `l`"). Under
+Assumption 17.1 (`H` strictly convex; `V` continuous and concave on `ℝ₊`), for continuous
+positive `p` and finite measures `κ(P)`, `ν`, the objective `islandsObj` at the price `P` has at
+most one maximiser on `[0, L)`. -/
+theorem islandsObj_max_unique (hx0 : 0 < xlo) (hH : Assumption17_1H L H H' H'')
+    (hV : Assumption17_1VR V V' V'') (hp : ContinuousOn p (Icc xlo xhi ×ˢ Icc θlo θhi))
+    (hppos : ∀ s ∈ Icc xlo xhi ×ˢ Icc θlo θhi, 0 < p s) [IsFiniteMeasure ν]
+    [∀ P, IsFiniteMeasure (κ P)] (P : ℝ) {m₁ m₂ : ℝ} (hm₁ : m₁ ∈ Ico 0 L) (hm₂ : m₂ ∈ Ico 0 L)
+    (h₁ : ∀ l ∈ Ico 0 L, islandsObj H V p κ ν P l ≤ islandsObj H V p κ ν P m₁)
+    (h₂ : ∀ l ∈ Ico 0 L, islandsObj H V p κ ν P l ≤ islandsObj H V p κ ν P m₂) : m₁ = m₂ := by
+  have : CompactSpace (ShocksStates xlo xhi θlo θhi) :=
+    isCompact_iff_compactSpace.1 (isCompact_Icc.prod isCompact_Icc)
+  by_contra hne
+  set Ω := ShocksStates xlo xhi θlo θhi
+  have hpc : Continuous fun s : Ω => p s.1 := hp.comp_continuous continuous_subtype_val
+    fun s => s.2
+  have hxpos : ∀ s : Ω, 0 < s.1.1 := fun s => hx0.trans_le s.2.1.1
+  have hppos' : ∀ s : Ω, 0 < p s.1 := fun s => hppos s.1 s.2
+  -- the integrand and its continuity
+  set F : ℝ → Ω × Ω → ℝ := fun l q => V (q.2.1.1 * l * p q.1.1 / (q.1.1.1 * p q.2.1))
+  have harg : ∀ l, Continuous fun q : Ω × Ω => q.2.1.1 * l * p q.1.1 / (q.1.1.1 * p q.2.1) :=
+    fun l => (((continuous_subtype_val.fst.comp continuous_snd).mul continuous_const).mul
+      (hpc.comp continuous_fst)).div ((continuous_subtype_val.fst.comp continuous_fst).mul
+      (hpc.comp continuous_snd)) fun q => (mul_pos (hxpos q.1) (hppos' q.2)).ne'
+  have hargnn : ∀ l, 0 ≤ l → ∀ q : Ω × Ω, 0 ≤ q.2.1.1 * l * p q.1.1 / (q.1.1.1 * p q.2.1) :=
+    fun l hl q => div_nonneg (mul_nonneg (mul_nonneg (hxpos q.2).le hl) (hppos' q.1).le)
+      (mul_pos (hxpos q.1) (hppos' q.2)).le
+  have hF : ∀ l, 0 ≤ l → Continuous (F l) := fun l hl =>
+    hV.V_cont.comp_continuous (harg l) fun q => mem_Ici.2 (hargnn l hl q)
+  have hFi : ∀ l, 0 ≤ l → ∀ sh : Ω, Integrable (fun s' => F l (sh, s')) ν := fun l hl sh =>
+    (BoundedContinuousFunction.mkOfCompact
+      ⟨fun s' => F l (sh, s'), (hF l hl).comp (continuous_const.prodMk continuous_id)⟩).integrable ν
+  have hG : ∀ l, 0 ≤ l → Continuous fun sh : Ω => ∫ s', F l (sh, s') ∂ν := fun l hl => by
+    have := continuous_parametric_integral_of_continuous (μ := ν)
+      (f := fun sh s' => F l (sh, s')) (hF l hl) isCompact_univ
+    simpa only [Measure.restrict_univ] using this
+  have hGi : ∀ l, 0 ≤ l → Integrable (fun sh : Ω => ∫ s', F l (sh, s') ∂ν) (κ P) := fun l hl =>
+    (BoundedContinuousFunction.mkOfCompact ⟨_, hG l hl⟩).integrable (κ P)
+  -- midpoint concavity of the expected-utility term
+  set m := (m₁ + m₂) / 2 with hmdef
+  have hm : m ∈ Ico 0 L := ⟨by linarith [hm₁.1, hm₂.1], by linarith [hm₁.2, hm₂.2]⟩
+  have hpt : ∀ q : Ω × Ω, (F m₁ q + F m₂ q) / 2 ≤ F m q := fun q => by
+    have := hV.V_conc.concaveOn.2 (mem_Ici.2 (hargnn m₁ hm₁.1 q)) (mem_Ici.2 (hargnn m₂ hm₂.1 q))
+      (by norm_num : (0 : ℝ) ≤ 1 / 2) (by norm_num : (0 : ℝ) ≤ 1 / 2) (by norm_num)
+    simp only [smul_eq_mul] at this
+    have hmid : q.2.1.1 * m * p q.1.1 / (q.1.1.1 * p q.2.1) =
+        1 / 2 * (q.2.1.1 * m₁ * p q.1.1 / (q.1.1.1 * p q.2.1)) +
+          1 / 2 * (q.2.1.1 * m₂ * p q.1.1 / (q.1.1.1 * p q.2.1)) := by rw [hmdef]; ring
+    calc (F m₁ q + F m₂ q) / 2 = 1 / 2 * F m₁ q + 1 / 2 * F m₂ q := by ring
+      _ ≤ F m q := by simp only [F]; rw [hmid]; exact this
+  have hE : (∫ sh, ∫ s', F m₁ (sh, s') ∂ν ∂κ P + ∫ sh, ∫ s', F m₂ (sh, s') ∂ν ∂κ P) / 2 ≤
+      ∫ sh, ∫ s', F m (sh, s') ∂ν ∂κ P := by
+    rw [← integral_add (hGi m₁ hm₁.1) (hGi m₂ hm₂.1), ← integral_div]
+    refine integral_mono (((hGi m₁ hm₁.1).add (hGi m₂ hm₂.1)).div_const 2) (hGi m hm.1)
+      fun sh => ?_
+    simp only
+    rw [← integral_add (hFi m₁ hm₁.1 sh) (hFi m₂ hm₂.1 sh), ← integral_div]
+    exact integral_mono (((hFi m₁ hm₁.1 sh).add (hFi m₂ hm₂.1 sh)).div_const 2) (hFi m hm.1 sh)
+      fun s' => hpt (sh, s')
+  -- strict convexity of `H`
+  have hHc := hH.H_conv.2 hm₁ hm₂ hne (by norm_num : (0 : ℝ) < 1 / 2)
+    (by norm_num : (0 : ℝ) < 1 / 2) (by norm_num)
+  simp only [smul_eq_mul] at hHc
+  rw [show 1 / 2 * m₁ + 1 / 2 * m₂ = m by rw [hmdef]; ring] at hHc
+  have e1 := h₁ m₂ hm₂
+  have e2 := h₂ m₁ hm₁
+  have e3 := h₁ m hm
+  simp only [islandsObj] at e1 e2 e3
+  change -H m₁ + ∫ sh, ∫ s', F m₁ (sh, s') ∂ν ∂κ P ≤ _ at e2
+  linarith
+
+/-- The end `(z a(z), a(z))`, `a(z) = max{x̲/z, θ̲}`, of the ray `x/θ = z` lies in `X × Θ` for
+`z ∈ Z`. -/
+theorem shocks_rayPoint_mem (hx0 : 0 < xlo) (hxx : xlo ≤ xhi) (hθ0 : 0 < θlo) (hθθ : θlo ≤ θhi)
+    {z : ℝ} (hz : z ∈ Icc (xlo / θhi) (xhi / θlo)) :
+    (z * shocksA xlo θlo z, shocksA xlo θlo z) ∈ Icc xlo xhi ×ˢ Icc θlo θhi := by
+  have hθhi : 0 < θhi := hθ0.trans_le hθθ
+  have hz0 : 0 < z := (div_pos hx0 hθhi).trans_le hz.1
+  refine ⟨⟨?_, ?_⟩, le_max_right _ _, max_le ?_ hθθ⟩
+  · rw [mul_shocksA hz0]; exact le_max_left _ _
+  · rw [mul_shocksA hz0]
+    refine max_le hxx ?_
+    have := hz.2
+    rwa [le_div_iff₀ hθ0] at this
+  · rw [div_le_iff₀ hz0]
+    have := hz.1
+    rwa [div_le_iff₀ hθhi, mul_comm] at this
+
+/-- The ratio `x/θ` of a state lies in `Z = [x̲/θ̄, x̄/θ̲]`. -/
+theorem shocks_ratio_mem_Z (hx0 : 0 < xlo) (hθ0 : 0 < θlo) {s : ℝ × ℝ}
+    (hs : s ∈ Icc xlo xhi ×ˢ Icc θlo θhi) : s.1 / s.2 ∈ Icc (xlo / θhi) (xhi / θlo) :=
+  ⟨div_le_div₀ (hx0.trans_le hs.1.1).le hs.1.1 (hθ0.trans_le hs.2.1) hs.2.2,
+    div_le_div₀ (hx0.le.trans (hs.1.1.trans hs.1.2)) hs.1.2 hθ0 hs.2.1⟩
+
+/-- **The p. 533 claim, for continuous prices.** Under Assumption 17.1 (`H` as in the book, `V`
+continuous and concave on `ℝ₊`, as in the repaired Assumption 17.1), every stationary
+equilibrium `(p, n)` of the islands economy (`IslandsEqm`, conditions (1)–(2)) with `p` continuous
+on `X × Θ` has the form `p(x, θ) = ρ(x/θ)`, `n(x, θ) = (x/θ)/ρ(x/θ)` with `ρ` continuous and
+strictly monotone on `Z`, whatever the price-indexed beliefs `κ`. So a continuous price never
+reveals more than `x/θ`, and it always reveals `x/θ`.
+
+Proof: the maximiser in (1) is unique (`islandsObj_max_unique`), so `n` is a function of `p`;
+(2) then gives "equal prices ⇒ equal ratios" (`p533_ratio_of_price`); continuity upgrades this
+to "equal ratios ⇒ equal prices" (`shocks_const_on_rays`). Continuity cannot be dropped from the
+last step (`p533_counterexample`). -/
+theorem islands_eqm_price_of_ratio (hx0 : 0 < xlo) (hxx : xlo ≤ xhi) (hθ0 : 0 < θlo)
+    (hθθ : θlo ≤ θhi) (hH : Assumption17_1H L H H' H'') (hV : Assumption17_1VR V V' V'')
+    [IsFiniteMeasure ν] [∀ P, IsFiniteMeasure (κ P)] (he : IslandsEqm L H V p n κ ν)
+    (hp : ContinuousOn p (Icc xlo xhi ×ˢ Icc θlo θhi)) :
+    ∃ ρ : ℝ → ℝ, ContinuousOn ρ (Icc (xlo / θhi) (xhi / θlo)) ∧
+      (StrictMonoOn ρ (Icc (xlo / θhi) (xhi / θlo)) ∨
+        StrictAntiOn ρ (Icc (xlo / θhi) (xhi / θlo))) ∧
+      ∀ s ∈ Icc xlo xhi ×ˢ Icc θlo θhi, p s = ρ (s.1 / s.2) ∧ n s = s.1 / s.2 / ρ (s.1 / s.2) := by
+  have hppos := fun s hs => he.p_pos hx0 hθ0 (s := s) hs
+  -- `n` is a function of `p`
+  have hn : ∀ s ∈ Icc xlo xhi ×ˢ Icc θlo θhi, ∀ t ∈ Icc xlo xhi ×ˢ Icc θlo θhi,
+      p s = p t → n s = n t := fun s hs t ht hst =>
+    islandsObj_max_unique hx0 hH hV hp hppos (p s) (he.n_mem s hs) (he.n_mem t ht) (he.opt s hs)
+      (by rw [hst]; exact he.opt t ht)
+  have hsep : ∀ s ∈ Icc xlo xhi ×ˢ Icc θlo θhi, ∀ t ∈ Icc xlo xhi ×ˢ Icc θlo θhi,
+      p s = p t → s.1 / s.2 = t.1 / t.2 := fun s hs t ht hst => by
+    rw [← he.clear s hs, ← he.clear t ht, hn s hs t ht hst, hst]
+  have hconst := fun s hs t ht hst =>
+    shocks_const_on_rays hx0 hθ0 hp hsep (s := s) (t := t) hs ht hst
+  -- the ray point and its ratio
+  have hA0 : ∀ z, 0 < shocksA xlo θlo z := fun z => hθ0.trans_le (le_max_right _ _)
+  have hratio : ∀ z, (z * shocksA xlo θlo z) / shocksA xlo θlo z = z := fun z =>
+    mul_div_cancel_right₀ _ (hA0 z).ne'
+  have hA : ContinuousOn (shocksA xlo θlo) (Icc (xlo / θhi) (xhi / θlo)) := by
+    have h1 : ContinuousOn (fun z : ℝ => xlo / z) (Icc (xlo / θhi) (xhi / θlo)) :=
+      continuousOn_const.div continuousOn_id fun z hz =>
+        ((div_pos hx0 (hθ0.trans_le hθθ)).trans_le hz.1).ne'
+    exact h1.sup continuousOn_const
+  refine ⟨fun z => p (z * shocksA xlo θlo z, shocksA xlo θlo z), ?_, ?_, fun s hs => ?_⟩
+  · -- continuity
+    exact hp.comp ((continuousOn_id.mul hA).prodMk hA) fun z hz =>
+      shocks_rayPoint_mem hx0 hxx hθ0 hθθ hz
+  · -- injectivity, hence strict monotonicity
+    refine ContinuousOn.strictMonoOn_of_injOn_Icc'
+      (div_le_div₀ (hx0.le.trans hxx) hxx hθ0 hθθ) ?_ fun z hz w hw hzw => ?_
+    · exact hp.comp ((continuousOn_id.mul hA).prodMk hA) fun z hz =>
+        shocks_rayPoint_mem hx0 hxx hθ0 hθθ hz
+    · have := hsep _ (shocks_rayPoint_mem hx0 hxx hθ0 hθθ hz) _
+        (shocks_rayPoint_mem hx0 hxx hθ0 hθθ hw) hzw
+      simpa only [hratio] using this
+  · have hz := shocks_ratio_mem_Z hx0 hθ0 hs
+    have hu := shocks_rayPoint_mem hx0 hxx hθ0 hθθ hz
+    have hps : p s = p (s.1 / s.2 * shocksA xlo θlo (s.1 / s.2), shocksA xlo θlo (s.1 / s.2)) :=
+      hconst s hs _ hu (by simp only [hratio])
+    refine ⟨hps, ?_⟩
+    dsimp only
+    rw [← hps, eq_div_iff (hppos s hs).ne']
+    exact he.clear s hs
+
+/-- **No continuous equilibrium price is fully revealing.** If `X` and `Θ` are nondegenerate, a
+continuous equilibrium price cannot be injective on `X × Θ` (it is constant on rays
+`x/θ = z`, which contain more than one state). -/
+theorem islands_eqm_not_injOn (hx0 : 0 < xlo) (hxx : xlo < xhi) (hθ0 : 0 < θlo)
+    (hθθ : θlo < θhi) (hH : Assumption17_1H L H H' H'') (hV : Assumption17_1VR V V' V'')
+    [IsFiniteMeasure ν] [∀ P, IsFiniteMeasure (κ P)] (he : IslandsEqm L H V p n κ ν)
+    (hp : ContinuousOn p (Icc xlo xhi ×ˢ Icc θlo θhi)) :
+    ¬ InjOn p (Icc xlo xhi ×ˢ Icc θlo θhi) := by
+  obtain ⟨ρ, -, -, hρ⟩ := islands_eqm_price_of_ratio hx0 hxx.le hθ0 hθθ.le hH hV he hp
+  intro hinj
+  set r := min (xhi / xlo) (θhi / θlo)
+  have hr1 : 1 < r := lt_min ((one_lt_div hx0).2 hxx) ((one_lt_div hθ0).2 hθθ)
+  have hs : ((xlo, θlo) : ℝ × ℝ) ∈ Icc xlo xhi ×ˢ Icc θlo θhi :=
+    ⟨⟨le_rfl, hxx.le⟩, le_rfl, hθθ.le⟩
+  have ht : ((xlo * r, θlo * r) : ℝ × ℝ) ∈ Icc xlo xhi ×ˢ Icc θlo θhi := by
+    refine ⟨⟨by nlinarith, ?_⟩, by nlinarith, ?_⟩
+    · calc xlo * r ≤ xlo * (xhi / xlo) := mul_le_mul_of_nonneg_left (min_le_left _ _) hx0.le
+        _ = xhi := by field_simp
+    · calc θlo * r ≤ θlo * (θhi / θlo) := mul_le_mul_of_nonneg_left (min_le_right _ _) hθ0.le
+        _ = θhi := by field_simp
+  have heq : ((xlo, θlo) : ℝ × ℝ) = (xlo * r, θlo * r) := by
+    refine hinj hs ht ?_
+    rw [(hρ _ hs).1, (hρ _ ht).1]
+    simp only
+    rw [mul_div_mul_right _ _ (by linarith : r ≠ 0)]
+  have := congrArg Prod.fst heq
+  simp only at this
+  nlinarith
+
+end StokeyLucasPrescott.FixedPointArguments
+
+/-
+Copyright (c) 2026 Robert Kirkby. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Robert Kirkby
+-/
+
+/-!
+# Partially observed shocks: equilibria of the islands economy and fixed points of (4)
+
+SLP §17.6, pp. 532–535. The equilibrium conditions (1)–(2) are `IslandsEqm`
+(`FixedPointArguments.ShocksRevelation`). This module derives (3) from (1), proves the converse
+(p. 535: a fixed point of (4) with invertible price function is an equilibrium), and turns the
+failure of Proposition 8 (`FixedPointArguments.ShocksProposition8`) into a statement about
+equilibria.
+
+* `shocks_concave_tangent`, `shocks_convex_tangent`: tangent-line inequalities for `V` and `H`.
+  `islands_factor_continuous`: the consumption factor `c = x′ p(ŝ)/(x̂ p(s′))` of (1).
+* **(3) from (1)** (`islands_foc`, p. 534): in an equilibrium with continuous `p`, at every state
+  `n H'(n) = E[φ(c n)]`, the expectation under the agent's beliefs and `ν`. The proof bounds the
+  difference quotients of the expected utility by `E[c V'(c l)]` (concavity) and uses continuity
+  of parametric integrals; no differentiation under the integral sign is needed.
+* **Rational expectations.** `islandsShockLaw` (`x ~ ψ`, `θ ~ g` independent),
+  `islandsNextLaw` (the true law `ν` of next period's state), `islandsREBeliefs` (at the price of
+  the ray `x/θ = z` the state is `(zθ̂, θ̂)` with `θ̂ ~ G(·|z)`, `shocksCondLaw`);
+  `islandsREBeliefs_eq`, `islandsShockLaw_ae_mem`, `condLaw_ae_ray`, `integral_islandsNextLaw`,
+  `integral_rayBelief`, `isProbabilityMeasure_islandsShockLaw`, `islands_isFiniteMeasure_comap`,
+  `isFiniteMeasure_islandsREBeliefs`.
+* `islands_RE_phi_eq`: with these beliefs and `p = z/η(z)`, `η = ζ⁻¹ ∘ f`, the right side of the
+  first-order condition at `η(z)` is `(Tf)(z)` of (4).
+* **The converse (p. 535)** (`islands_eqm_of_fixedPoint`): a strictly positive continuous fixed
+  point `f` of (4) with `z ↦ z/ζ⁻¹(f(z))` injective gives an equilibrium `p = ρ(x/θ)`,
+  `n = ζ⁻¹(f(x/θ))` with rational-expectations beliefs (optimality by concavity and the
+  first-order condition). As the book says, `π > 0` on `int Z` is needed (Exercise 17.8).
+* **Equilibrium ⇒ fixed point** (`islands_fixedPoint_of_eqm`): every equilibrium with continuous
+  `p` and rational-expectations beliefs comes from a strictly positive continuous fixed point of
+  (4) with invertible price function. So, for continuous prices, equilibria and such fixed points
+  correspond exactly.
+* **Proposition 8 as a statement about equilibria.** `shocksP8_no_continuous_eqm`: the bimodal
+  CRRA economy of `proposition_8_counterexample` has no equilibrium with a continuous price
+  function. `shocksP8W'_ge`, `shocksP8W_eta_ge` (an a priori lower bound `η ≥ A/3` on fixed points
+  for the utility `shocksP8W y₀`), `shocksP8W_no_continuous_eqm` and
+  **`proposition_8_eqm_counterexample`**: the same economy with the utility
+  `shocksP8W (1/300000)`, which satisfies the book's Assumptions 17.1 and 17.4, satisfies every
+  hypothesis of Proposition 8 and has no equilibrium with a continuous price function at all.
+
+**Correction (Proposition 8, p. 540).** Under Assumptions 17.1, 17.4 and 17.5 an islands economy
+can fail to have any equilibrium with a continuous price function (with rational-expectations
+beliefs); the unique positive solution of (3) has a non-invertible price function and so is not an
+equilibrium. The regularity assumed is continuity of the price function, the class in which the
+book looks for equilibria; discontinuous prices are not treated.
+-/
+
+namespace StokeyLucasPrescott.FixedPointArguments
+
+open MeasureTheory Set Filter Topology BoundedContinuousFunction
+
+variable {xlo xhi θlo θhi L : ℝ} {H H' H'' V V' V'' : ℝ → ℝ}
+
+/-- The tangent line of a concave `V` at `y₀ > 0` lies above `V` on `ℝ₊`. -/
+theorem shocks_concave_tangent (hV : Assumption17_1VR V V' V'') {y₀ y : ℝ} (hy₀ : 0 < y₀)
+    (hy : 0 ≤ y) : V y ≤ V y₀ + V' y₀ * (y - y₀) := by
+  have hc := hV.V_conc.concaveOn
+  rcases lt_trichotomy y y₀ with h | h | h
+  · have := hc.le_slope_of_hasDerivAt (mem_Ici.2 hy) (mem_Ici.2 hy₀.le) h (hV.V_deriv y₀ hy₀)
+    rw [slope_def_field, le_div_iff₀ (sub_pos.2 h)] at this
+    nlinarith
+  · subst h; simp
+  · have := hc.slope_le_of_hasDerivAt (mem_Ici.2 hy₀.le) (mem_Ici.2 hy) h (hV.V_deriv y₀ hy₀)
+    rw [slope_def_field, div_le_iff₀ (sub_pos.2 h)] at this
+    nlinarith
+
+/-- The tangent line of the convex `H` at an interior `m` lies below `H` on `[0, L)`. -/
+theorem shocks_convex_tangent (hH : Assumption17_1H L H H' H'') {m l : ℝ} (hm : m ∈ Ioo 0 L)
+    (hl : l ∈ Ico 0 L) : H m + H' m * (l - m) ≤ H l := by
+  have hc := hH.H_conv.convexOn
+  have hm' : m ∈ Ico 0 L := Ioo_subset_Ico_self hm
+  rcases lt_trichotomy l m with h | h | h
+  · have := hc.slope_le_of_hasDerivAt hl hm' h (hH.H_hasDerivAt hm)
+    rw [slope_def_field, div_le_iff₀ (sub_pos.2 h)] at this
+    nlinarith
+  · subst h; simp
+  · have := hc.le_slope_of_hasDerivAt hm' hl h (hH.H_hasDerivAt hm)
+    rw [slope_def_field, le_div_iff₀ (sub_pos.2 h)] at this
+    nlinarith
+
+variable {p n : ℝ × ℝ → ℝ} {κ : ℝ → Measure (ShocksStates xlo xhi θlo θhi)}
+  {ν : Measure (ShocksStates xlo xhi θlo θhi)}
+
+/-- The consumption factor `c(ŝ, s′) = x′ p(ŝ)/(x̂ p(s′))` of (1) (consumption is `c l`) is
+continuous and positive on `(X × Θ)²` for continuous positive `p`. -/
+theorem islands_factor_continuous (hx0 : 0 < xlo)
+    (hp : ContinuousOn p (Icc xlo xhi ×ˢ Icc θlo θhi))
+    (hppos : ∀ s ∈ Icc xlo xhi ×ˢ Icc θlo θhi, 0 < p s) :
+    Continuous (fun q : ShocksStates xlo xhi θlo θhi × ShocksStates xlo xhi θlo θhi =>
+        q.2.1.1 * p q.1.1 / (q.1.1.1 * p q.2.1)) ∧
+      ∀ q : ShocksStates xlo xhi θlo θhi × ShocksStates xlo xhi θlo θhi,
+        0 < q.2.1.1 * p q.1.1 / (q.1.1.1 * p q.2.1) := by
+  have hpc : Continuous fun s : ShocksStates xlo xhi θlo θhi => p s.1 :=
+    hp.comp_continuous continuous_subtype_val fun s => s.2
+  have hxpos : ∀ s : ShocksStates xlo xhi θlo θhi, 0 < s.1.1 := fun s => hx0.trans_le s.2.1.1
+  refine ⟨((continuous_subtype_val.fst.comp continuous_snd).mul (hpc.comp continuous_fst)).div
+    ((continuous_subtype_val.fst.comp continuous_fst).mul (hpc.comp continuous_snd))
+    fun q => (mul_pos (hxpos q.1) (hppos _ q.2.2)).ne', fun q => ?_⟩
+  exact div_pos (mul_pos (hxpos q.2) (hppos _ q.1.2)) (mul_pos (hxpos q.1) (hppos _ q.2.2))
+
+/-- **The first-order condition of (1)** (p. 534). In an equilibrium with continuous `p`, at
+every state `s` the labour supply `n = n(s) ∈ (0, L)` satisfies
+`n H'(n) = E[φ(c n)]`, `φ(y) = y V'(y)`, the expectation over `ŝ ~ κ(p(s))` and `s′ ~ ν`.
+No differentiation under the integral sign is needed: concavity of `V` bounds the difference
+quotients of the expected utility by `E[c V'(c l)]`, which is continuous in `l > 0`. -/
+theorem islands_foc (hx0 : 0 < xlo) (hθ0 : 0 < θlo) (hH : Assumption17_1H L H H' H'')
+    (hV : Assumption17_1VR V V' V'') [IsFiniteMeasure ν] [∀ P, IsFiniteMeasure (κ P)]
+    (he : IslandsEqm L H V p n κ ν) (hp : ContinuousOn p (Icc xlo xhi ×ˢ Icc θlo θhi))
+    {s : ℝ × ℝ} (hs : s ∈ Icc xlo xhi ×ˢ Icc θlo θhi) :
+    olgZeta H' (n s) =
+      ∫ sh, ∫ s', olgPhi V' (s'.1.1 * p sh.1 / (sh.1.1 * p s'.1) * n s) ∂ν ∂κ (p s) := by
+  have : CompactSpace (ShocksStates xlo xhi θlo θhi) :=
+    isCompact_iff_compactSpace.1 (isCompact_Icc.prod isCompact_Icc)
+  have hppos := fun s hs => he.p_pos hx0 hθ0 (s := s) hs
+  obtain ⟨hc, hcpos⟩ := islands_factor_continuous hx0 hp hppos
+  set c := fun q : ShocksStates xlo xhi θlo θhi × ShocksStates xlo xhi θlo θhi =>
+    q.2.1.1 * p q.1.1 / (q.1.1.1 * p q.2.1) with hcdef
+  set m := n s with hmdef
+  have hm : m ∈ Ioo 0 L := by
+    refine ⟨?_, (he.n_mem s hs).2⟩
+    have h2 := he.clear s hs
+    have hz : 0 < s.1 / s.2 := div_pos (hx0.trans_le hs.1.1) (hθ0.trans_le hs.2.1)
+    by_contra h
+    push Not at h
+    nlinarith [hppos s hs]
+  set μP := (κ (p s)).prod ν
+  have hint : ∀ F : ShocksStates xlo xhi θlo θhi × ShocksStates xlo xhi θlo θhi → ℝ,
+      Continuous F → Integrable F μP := fun F hF =>
+    (BoundedContinuousFunction.mkOfCompact ⟨F, hF⟩).integrable μP
+  have hprod : ∀ F : ShocksStates xlo xhi θlo θhi × ShocksStates xlo xhi θlo θhi → ℝ,
+      Continuous F → ∫ q, F q ∂μP = ∫ sh, ∫ s', F (sh, s') ∂ν ∂κ (p s) := fun F hF =>
+    integral_prod F (hint F hF)
+  have hVc : ∀ l, 0 ≤ l → Continuous fun q => V (c q * l) := fun l hl =>
+    hV.V_cont.comp_continuous (hc.mul continuous_const) fun q =>
+      mem_Ici.2 (mul_nonneg (hcpos q).le hl)
+  have hV'c : ∀ l, 0 < l → Continuous fun q => c q * V' (c q * l) := fun l hl =>
+    hc.mul (hV.V'_continuousOn.comp_continuous (hc.mul continuous_const) fun q =>
+      mem_Ioi.2 (mul_pos (hcpos q) hl))
+  -- the objective in product form
+  have hobj : ∀ l, 0 ≤ l → islandsObj H V p κ ν (p s) l = -H l + ∫ q, V (c q * l) ∂μP :=
+    fun l hl => by
+      rw [hprod _ (hVc l hl), islandsObj]
+      congr 1
+      refine integral_congr_ae (ae_of_all _ fun sh => integral_congr_ae (ae_of_all _
+        fun s' => ?_))
+      simp only [hcdef]
+      ring_nf
+  set D := fun l => ∫ q, c q * V' (c q * l) ∂μP with hDdef
+  -- the difference-quotient bound
+  have hkey : ∀ l ∈ Ioo 0 L, (l - m) * D l ≤ H l - H m := fun l hl => by
+    have hopt := he.opt s hs l (Ioo_subset_Ico_self hl)
+    rw [hobj l hl.1.le, hobj m hm.1.le] at hopt
+    have hpt : ∀ q, V (c q * m) ≤ V (c q * l) - (l - m) * (c q * V' (c q * l)) := fun q => by
+      have := shocks_concave_tangent hV (mul_pos (hcpos q) hl.1)
+        (mul_nonneg (hcpos q).le hm.1.le)
+      nlinarith
+    have hmono : ∫ q, V (c q * m) ∂μP ≤
+        ∫ q, (V (c q * l) - (l - m) * (c q * V' (c q * l))) ∂μP :=
+      integral_mono (hint _ (hVc m hm.1.le))
+        ((hint _ (hVc l hl.1.le)).sub ((hint _ (hV'c l hl.1)).const_mul (l - m))) hpt
+    rw [integral_sub (hint _ (hVc l hl.1.le)) ((hint _ (hV'c l hl.1)).const_mul (l - m)),
+      integral_const_mul] at hmono
+    simp only [hDdef]
+    linarith
+  -- continuity of `D` at `m`
+  set Dδ := fun l => ∫ q, c q * V' (c q * max l (m / 2)) ∂μP with hDδdef
+  have hDδc : Continuous Dδ := by
+    have hF : Continuous (Function.uncurry fun (l : ℝ)
+        (q : ShocksStates xlo xhi θlo θhi × ShocksStates xlo xhi θlo θhi) =>
+          c q * V' (c q * max l (m / 2))) :=
+      (hc.comp continuous_snd).mul (hV.V'_continuousOn.comp_continuous
+        ((hc.comp continuous_snd).mul (continuous_fst.max continuous_const)) fun x =>
+          mem_Ioi.2 (mul_pos (hcpos x.2) (lt_max_of_lt_right (by linarith [hm.1]))))
+    have := continuous_parametric_integral_of_continuous (μ := μP) hF isCompact_univ
+    simpa only [Measure.restrict_univ] using this
+  have hDδ : ∀ l, m / 2 ≤ l → Dδ l = D l := fun l hl => by
+    simp only [hDδdef, hDdef, max_eq_left hl]
+  have hslope := hasDerivAt_iff_tendsto_slope.1 (hH.H_hasDerivAt hm)
+  have hup : Dδ m ≤ H' m := by
+    refine le_of_tendsto_of_tendsto (hDδc.continuousAt.tendsto.mono_left nhdsWithin_le_nhds)
+      (hslope.mono_left (nhdsWithin_mono _ fun x hx => (mem_Ioi.1 hx).ne')) ?_
+    filter_upwards [Ioo_mem_nhdsGT hm.2] with l hl
+    rw [hDδ l (by linarith [hl.1, hm.1]), slope_def_field, le_div_iff₀ (sub_pos.2 hl.1)]
+    have := hkey l ⟨hm.1.trans hl.1, hl.2⟩
+    linarith
+  have hlo : H' m ≤ Dδ m := by
+    refine le_of_tendsto_of_tendsto
+      (hslope.mono_left (nhdsWithin_mono _ fun x hx => (mem_Iio.1 hx).ne))
+      (hDδc.continuousAt.tendsto.mono_left nhdsWithin_le_nhds) ?_
+    filter_upwards [Ioo_mem_nhdsLT (show m / 2 < m by linarith [hm.1])] with l hl
+    rw [hDδ l hl.1.le, slope_def_field, div_le_iff_of_neg (sub_neg.2 hl.2)]
+    have := hkey l ⟨by linarith [hl.1, hm.1], hl.2.trans hm.2⟩
+    linarith
+  have hD : D m = H' m := by
+    rw [← hDδ m (by linarith [hm.1])]
+    exact le_antisymm hup hlo
+  -- conclusion
+  have hφc : Continuous fun q => olgPhi V' (c q * m) :=
+    hV.phi_continuousOn.comp_continuous (hc.mul continuous_const) fun q =>
+      mem_Ioi.2 (mul_pos (hcpos q) hm.1)
+  rw [← hprod _ hφc]
+  have e : ∀ q, olgPhi V' (c q * m) = m * (c q * V' (c q * m)) := fun q => by
+    simp only [olgPhi]; ring
+  simp_rw [e]
+  rw [integral_const_mul]
+  change m * H' m = m * D m
+  rw [hD]
+
+/-! ### Rational-expectations beliefs and the true law of next period's shocks -/
+
+/-- The law of the shocks `(x, θ)`: `x ~ ψ` and `θ ~ g` independent. -/
+noncomputable def islandsShockLaw (ψ g : ℝ → ℝ) : Measure (ℝ × ℝ) :=
+  (volume.withDensity fun x => ENNReal.ofReal (ψ x)).prod
+    (volume.withDensity fun θ => ENNReal.ofReal (g θ))
+
+/-- The true law `ν` of next period's state `(x′, θ′)`, as a measure on `X × Θ`. -/
+noncomputable def islandsNextLaw (xlo xhi θlo θhi : ℝ) (ψ g : ℝ → ℝ) :
+    Measure (ShocksStates xlo xhi θlo θhi) :=
+  (islandsShockLaw ψ g).comap Subtype.val
+
+open scoped Classical in
+/-- **Rational-expectations beliefs** for a price function `p` that depends on the state through
+`z = x/θ`: a young agent who sees the price `P = p(z a(z), a(z))` believes the current state is
+`(z θ̂, θ̂)` with `θ̂ ~ G(·|z)`, the conditional law of `θ` given `x/θ = z` (`shocksCondLaw`). (At
+prices that never occur the belief is the zero measure; it is never used.) -/
+noncomputable def islandsREBeliefs (xlo xhi θlo θhi : ℝ) (ψ g : ℝ → ℝ) (p : ℝ × ℝ → ℝ)
+    (P : ℝ) : Measure (ShocksStates xlo xhi θlo θhi) :=
+  if h : ∃ z ∈ Icc (xlo / θhi) (xhi / θlo), p (z * shocksA xlo θlo z, shocksA xlo θlo z) = P then
+    (Measure.map (fun θ => (h.choose * θ, θ))
+      (shocksCondLaw xlo xhi θlo θhi ψ g h.choose)).comap Subtype.val
+  else 0
+
+variable {ψ g : ℝ → ℝ}
+
+/-- When `z ↦ p(z a(z), a(z))` is injective on `Z`, the belief at the price of the ray `z` is
+the conditional law along that ray. -/
+theorem islandsREBeliefs_eq {z : ℝ} (hz : z ∈ Icc (xlo / θhi) (xhi / θlo))
+    (hinj : ∀ w ∈ Icc (xlo / θhi) (xhi / θlo),
+      p (w * shocksA xlo θlo w, shocksA xlo θlo w) = p (z * shocksA xlo θlo z, shocksA xlo θlo z) →
+      w = z) :
+    islandsREBeliefs xlo xhi θlo θhi ψ g p (p (z * shocksA xlo θlo z, shocksA xlo θlo z)) =
+      (Measure.map (fun θ => (z * θ, θ))
+        (shocksCondLaw xlo xhi θlo θhi ψ g z)).comap Subtype.val := by
+  have h : ∃ w ∈ Icc (xlo / θhi) (xhi / θlo),
+      p (w * shocksA xlo θlo w, shocksA xlo θlo w) = p (z * shocksA xlo θlo z, shocksA xlo θlo z) :=
+    ⟨z, hz, rfl⟩
+  have hc : h.choose = z := hinj _ h.choose_spec.1 h.choose_spec.2
+  simp only [islandsREBeliefs, h, ↓reduceDIte, hc]
+
+variable (hA : ShocksAssumption17_5 xlo xhi θlo θhi ψ g)
+include hA
+
+/-- The shocks lie in `X × Θ` almost surely. -/
+theorem islandsShockLaw_ae_mem : ∀ᵐ q ∂islandsShockLaw ψ g, q ∈ Icc xlo xhi ×ˢ Icc θlo θhi := by
+  have hx : ∀ᵐ x ∂(volume.withDensity fun x => ENNReal.ofReal (ψ x)), x ∈ Icc xlo xhi := by
+    refine (ae_withDensity_iff (f := fun x => ENNReal.ofReal (ψ x))
+      (ENNReal.measurable_ofReal.comp hA.ψ_meas)).2 (ae_of_all _ fun x hx => ?_)
+    by_contra h
+    exact hx (by rw [hA.ψ_zero x h, ENNReal.ofReal_zero])
+  have hθ : ∀ᵐ θ ∂(volume.withDensity fun θ => ENNReal.ofReal (g θ)), θ ∈ Icc θlo θhi := by
+    refine (ae_withDensity_iff (f := fun θ => ENNReal.ofReal (g θ))
+      (ENNReal.measurable_ofReal.comp hA.g_meas)).2 (ae_of_all _ fun θ hθ => ?_)
+    by_contra h
+    exact hθ (by rw [hA.g_zero θ h, ENNReal.ofReal_zero])
+  exact ((Measure.quasiMeasurePreserving_fst.ae hx).and
+    (Measure.quasiMeasurePreserving_snd.ae hθ)).mono fun q hq => ⟨hq.1, hq.2⟩
+
+/-- Integrals against the true law of next period's state. -/
+theorem integral_islandsNextLaw (k : ℝ × ℝ → ℝ) :
+    ∫ s' : ShocksStates xlo xhi θlo θhi, k s'.1 ∂islandsNextLaw xlo xhi θlo θhi ψ g =
+      ∫ q, k q ∂islandsShockLaw ψ g := by
+  rw [islandsNextLaw, integral_subtype_comap (measurableSet_Icc.prod measurableSet_Icc),
+    Measure.restrict_eq_self_of_ae_mem (islandsShockLaw_ae_mem hA)]
+
+/-- `G(·|z)` lives on the ray: `(zθ, θ) ∈ X × Θ` for `G(·|z)`-a.e. `θ`, `z ∈ Z`. -/
+theorem condLaw_ae_ray (hπ : ∀ z, xlo / θhi < z ∧ z < xhi / θlo → 0 < shocksPi ψ g z) {z : ℝ}
+    (hz : z ∈ Icc (xlo / θhi) (xhi / θlo)) :
+    ∀ᵐ θ ∂shocksCondLaw xlo xhi θlo θhi ψ g z, (z * θ, θ) ∈ Icc xlo xhi ×ˢ Icc θlo θhi := by
+  have hθhi : 0 < θhi := hA.θlo_pos.trans hA.θlo_lt
+  have hz0 : 0 < z := (div_pos hA.xlo_pos hθhi).trans_le hz.1
+  have hmeas : MeasurableSet {θ : ℝ | (z * θ, θ) ∈ Icc xlo xhi ×ˢ Icc θlo θhi} :=
+    (measurableSet_Icc.prod measurableSet_Icc).preimage
+      ((measurable_const.mul measurable_id).prodMk measurable_id)
+  by_cases hint : xlo / θhi < z ∧ z < xhi / θlo
+  · simp only [shocksCondLaw, hint, and_self, ↓reduceIte]
+    rw [ae_withDensity_iff (hA.measurable_condDens z).ennreal_ofReal]
+    refine ae_of_all _ fun θ hθ => ?_
+    have hmem : θ ∈ Icc (shocksA xlo θlo z) (shocksB xhi θhi z) := by
+      by_contra h
+      exact hθ (by rw [(hA.ex_17_8a (hπ z hint)).2.2.1 θ h, ENNReal.ofReal_zero])
+    have := (mem_Icc_shocksA_shocksB_iff hz0).2 hmem
+    exact ⟨this.2, this.1⟩
+  · simp only [shocksCondLaw, hint, ↓reduceIte]
+    split_ifs with h1
+    · rw [ae_dirac_iff hmeas]
+      have : z = xlo / θhi := le_antisymm h1 hz.1
+      have e : z * θhi = xlo := by rw [this, div_mul_cancel₀ _ hθhi.ne']
+      exact ⟨⟨e.symm.le, e.le.trans hA.xlo_lt.le⟩, hA.θlo_lt.le, le_rfl⟩
+    · rw [ae_dirac_iff hmeas]
+      have hz2 : z = xhi / θlo := by
+        by_contra h2
+        exact hint ⟨lt_of_not_ge h1, lt_of_le_of_ne hz.2 h2⟩
+      have e : z * θlo = xhi := by rw [hz2, div_mul_cancel₀ _ hA.θlo_pos.ne']
+      exact ⟨⟨hA.xlo_lt.le.trans e.symm.le, e.le⟩, le_rfl, hA.θlo_lt.le⟩
+
+/-- Integrals against the rational-expectations belief along the ray `z`. -/
+theorem integral_rayBelief (hπ : ∀ z, xlo / θhi < z ∧ z < xhi / θlo → 0 < shocksPi ψ g z)
+    {z : ℝ} (hz : z ∈ Icc (xlo / θhi) (xhi / θlo)) (k : ℝ × ℝ → ℝ) :
+    ∫ sh : ShocksStates xlo xhi θlo θhi, k sh.1 ∂(Measure.map (fun θ => (z * θ, θ))
+      (shocksCondLaw xlo xhi θlo θhi ψ g z)).comap Subtype.val =
+      ∫ θ, k (z * θ, θ) ∂shocksCondLaw xlo xhi θlo θhi ψ g z := by
+  have hS : MeasurableSet (Icc xlo xhi ×ˢ Icc θlo θhi) := measurableSet_Icc.prod measurableSet_Icc
+  have hm : Measurable fun θ : ℝ => (z * θ, θ) := (measurable_const.mul measurable_id).prodMk
+    measurable_id
+  have hemb : MeasurableEmbedding fun θ : ℝ => (z * θ, θ) := by
+    refine MeasurableEmbedding.of_measurable_inverse hm ?_ measurable_snd fun θ => rfl
+    have : range (fun θ : ℝ => (z * θ, θ)) = {q : ℝ × ℝ | q.1 = z * q.2} := by
+      ext q
+      constructor
+      · rintro ⟨θ, rfl⟩; rfl
+      · intro h; exact ⟨q.2, Prod.ext h.symm rfl⟩
+    rw [this]
+    exact measurableSet_eq_fun measurable_fst (measurable_const.mul measurable_snd)
+  have hae : ∀ᵐ q ∂(Measure.map (fun θ => (z * θ, θ)) (shocksCondLaw xlo xhi θlo θhi ψ g z)),
+      q ∈ Icc xlo xhi ×ˢ Icc θlo θhi :=
+    (ae_map_iff hm.aemeasurable hS).2 (condLaw_ae_ray hA hπ hz)
+  rw [integral_subtype_comap hS, Measure.restrict_eq_self_of_ae_mem hae, hemb.integral_map]
+
+/-- **The bridge to (4).** Let `p(x, θ) = z/η(z)`, `z = x/θ`, with `η = ζ⁻¹ ∘ f` for a continuous
+positive `f` on `Z`. Under the true law `ν` of next period's state and the rational-expectations
+belief along the ray `z`, the right side of the first-order condition at labour `η(z)` is
+`(Tf)(z)` of (4): `E[φ(c η(z))] = ∫∫ φ((θ′/θ̂) η(z′)) dμ(θ′, z′) G(dθ̂|z)`, since
+`c η(z) = (θ′/θ̂) η(z′)` on the ray. -/
+theorem islands_RE_phi_eq (hπ : ∀ z, xlo / θhi < z ∧ z < xhi / θlo → 0 < shocksPi ψ g z)
+    (hH : Assumption17_1H L H H' H'') (hV : Assumption17_1VR V V' V'')
+    (hZ : xlo / θhi ≤ xhi / θlo) (f : Icc (xlo / θhi) (xhi / θlo) → ℝ) (hfc : Continuous f)
+    (hfpos : ∀ z, 0 < f z)
+    (hp : ∀ s ∈ Icc xlo xhi ×ˢ Icc θlo θhi,
+      p s = s.1 / s.2 / olgZetaInv L H' (f (projIcc _ _ hZ (s.1 / s.2))))
+    (z : Icc (xlo / θhi) (xhi / θlo)) :
+    ∫ sh, ∫ s', olgPhi V' (s'.1.1 * p sh.1 / (sh.1.1 * p s'.1) * olgZetaInv L H' (f z))
+      ∂islandsNextLaw xlo xhi θlo θhi ψ g
+      ∂((Measure.map (fun θ => (z.1 * θ, θ)) (shocksCondLaw xlo xhi θlo θhi ψ g z.1)).comap
+        Subtype.val : Measure (ShocksStates xlo xhi θlo θhi)) =
+      shocksOpT L H' V' θlo θhi (shocksJointLaw xlo xhi θlo θhi hZ ψ g)
+        (fun z => shocksCondLaw xlo xhi θlo θhi ψ g z.1) f z := by
+  have hθ0 := hA.θlo_pos
+  have hθ := hA.θlo_lt.le
+  have hx0 := hA.xlo_pos
+  have hη : ∀ w, 0 < olgZetaInv L H' (f w) := fun w => hH.zetaInv_pos (hfpos w)
+  have h1 := integral_rayBelief hA hπ z.2 (fun qh => ∫ s', olgPhi V'
+    (s'.1.1 * p qh / (qh.1 * p s'.1) * olgZetaInv L H' (f z)) ∂islandsNextLaw xlo xhi θlo θhi ψ g)
+  simp only at h1
+  rw [h1, shocksOpT]
+  refine integral_congr_ae ((condLaw_ae_ray hA hπ z.2).mono fun θ hθS => ?_)
+  have hθpos : 0 < θ := hθ0.trans_le hθS.2.1
+  have h2 := integral_islandsNextLaw hA (fun q => olgPhi V'
+    (q.1 * p (z.1 * θ, θ) / ((z.1 * θ, θ).1 * p q) * olgZetaInv L H' (f z)))
+  simp only at h2
+  beta_reduce
+  rw [h2, shocksPhiF, shocksJointLaw]
+  have hmap : Measurable fun q : ℝ × ℝ => (q.2, projIcc (xlo / θhi) (xhi / θlo) hZ (q.1 / q.2)) :=
+    measurable_snd.prodMk (continuous_projIcc.measurable.comp (measurable_fst.div measurable_snd))
+  have hcont : Continuous fun ω : ℝ × Icc (xlo / θhi) (xhi / θlo) =>
+      shocksIntegrand L H' V' θlo θhi f θ ω := by
+    have e1 : Continuous fun ω : ℝ × Icc (xlo / θhi) (xhi / θlo) => shocksRatio θlo θhi ω.1 θ :=
+      (continuous_shocksRatio hθ0).comp (continuous_fst.prodMk continuous_const)
+    have e2 : Continuous fun ω : ℝ × Icc (xlo / θhi) (xhi / θlo) => olgZetaInv L H' (f ω.2) :=
+      hH.zetaInv_continuousOn.comp_continuous (hfc.comp continuous_snd) fun ω =>
+        mem_Ici.2 (hfpos _).le
+    refine hV.phi_continuousOn.comp_continuous (e1.mul e2) fun ω => ?_
+    exact mul_pos ((div_pos hθ0 (hθ0.trans_le hθ)).trans_le
+      (shocksRatio_mem hθ0 hθ ω.1 θ).1) (hη _)
+  rw [integral_map hmap.aemeasurable hcont.aestronglyMeasurable]
+  refine integral_congr_ae ((islandsShockLaw_ae_mem hA).mono fun q hq => ?_)
+  have hq2 : 0 < q.2 := hθ0.trans_le hq.2.1
+  have hq1 : 0 < q.1 := hx0.trans_le hq.1.1
+  have hz0 : 0 < z.1 := (div_pos hx0 (hθ0.trans_le hθ)).trans_le z.2.1
+  simp only [shocksIntegrand, shocksRatio, shocksClamp_of_mem hq.2, shocksClamp_of_mem hθS.2]
+  congr 1
+  rw [hp _ hθS, hp q hq]
+  simp only
+  rw [mul_div_cancel_right₀ _ hθpos.ne', projIcc_val]
+  have := hη z
+  have := hη (projIcc (xlo / θhi) (xhi / θlo) hZ (q.1 / q.2))
+  field_simp
+
+/-- The law of the shocks is a probability measure. -/
+theorem isProbabilityMeasure_islandsShockLaw : IsProbabilityMeasure (islandsShockLaw ψ g) := by
+  have h1 := shocks_isProbabilityMeasure_withDensity hA.ψ_nonneg
+    (shocks_integrable_of_zero_off hA.ψ_cont hA.ψ_zero) hA.ψ_int
+  have h2 := shocks_isProbabilityMeasure_withDensity hA.g_nonneg
+    (shocks_integrable_of_zero_off hA.g_cont hA.g_zero) hA.g_int
+  rw [islandsShockLaw]
+  infer_instance
+
+omit hA in
+/-- The restriction of a finite measure on `ℝ × ℝ` to `X × Θ` is finite. -/
+theorem islands_isFiniteMeasure_comap (μ : Measure (ℝ × ℝ)) [IsFiniteMeasure μ] :
+    IsFiniteMeasure (μ.comap Subtype.val : Measure (ShocksStates xlo xhi θlo θhi)) := by
+  constructor
+  rw [Measure.comap_apply _ Subtype.val_injective
+    (fun _ hs => (measurableSet_Icc.prod measurableSet_Icc).subtype_image hs) _
+    MeasurableSet.univ]
+  exact measure_lt_top _ _
+
+/-- **The converse (p. 535).** Let `f` be a strictly positive continuous fixed point of (4)
+(with `μ` the joint law and `G(·|z)` the conditional law) whose price function
+`ρ(z) = z/ζ⁻¹(f(z))` is injective on `Z`. Then `p(x, θ) = ρ(x/θ)` and `n(x, θ) = ζ⁻¹(f(x/θ))`
+form an equilibrium (`IslandsEqm`) of the islands economy with rational-expectations beliefs and
+the true law of next period's shocks. Optimality in (1) follows from the fixed-point equation
+(which is the first-order condition, `islands_RE_phi_eq`) and concavity of the objective. -/
+theorem islands_eqm_of_fixedPoint (hπ : ∀ z, xlo / θhi < z ∧ z < xhi / θlo → 0 < shocksPi ψ g z)
+    (hH : Assumption17_1H L H H' H'') (hV : Assumption17_1VR V V' V'')
+    (hZ : xlo / θhi ≤ xhi / θlo) (f : Icc (xlo / θhi) (xhi / θlo) →ᵇ ℝ) (hfpos : ∀ z, 0 < f z)
+    (hfix : ∀ z, f z = shocksOpT L H' V' θlo θhi (shocksJointLaw xlo xhi θlo θhi hZ ψ g)
+      (fun z => shocksCondLaw xlo xhi θlo θhi ψ g z.1) f z)
+    (hinj : InjOn (fun z => z / olgZetaInv L H' (f (projIcc _ _ hZ z)))
+      (Icc (xlo / θhi) (xhi / θlo)))
+    (hp : ∀ s ∈ Icc xlo xhi ×ˢ Icc θlo θhi,
+      p s = s.1 / s.2 / olgZetaInv L H' (f (projIcc _ _ hZ (s.1 / s.2))))
+    (hn : ∀ s ∈ Icc xlo xhi ×ˢ Icc θlo θhi,
+      n s = olgZetaInv L H' (f (projIcc _ _ hZ (s.1 / s.2)))) :
+    IslandsEqm L H V p n (islandsREBeliefs xlo xhi θlo θhi ψ g p)
+      (islandsNextLaw xlo xhi θlo θhi ψ g) := by
+  have : CompactSpace (ShocksStates xlo xhi θlo θhi) :=
+    isCompact_iff_compactSpace.1 (isCompact_Icc.prod isCompact_Icc)
+  have hθ0 := hA.θlo_pos
+  have hx0 := hA.xlo_pos
+  have hθθ := hA.θlo_lt.le
+  have hxx := hA.xlo_lt.le
+  set η := fun z : ℝ => olgZetaInv L H' (f (projIcc _ _ hZ z)) with hηdef
+  have hηmem : ∀ z, η z ∈ Ioo 0 L := fun z =>
+    ⟨hH.zetaInv_pos (hfpos _), (hH.zetaInv_mem (hfpos _).le).2⟩
+  have hηc : Continuous η := hH.zetaInv_continuousOn.comp_continuous
+    (f.continuous.comp continuous_projIcc) fun z => mem_Ici.2 (hfpos _).le
+  have hpos2 : ∀ s ∈ Icc xlo xhi ×ˢ Icc θlo θhi, 0 < s.2 := fun s hs => hθ0.trans_le hs.2.1
+  have hppos : ∀ s ∈ Icc xlo xhi ×ˢ Icc θlo θhi, 0 < p s := fun s hs => by
+    rw [hp s hs]
+    exact div_pos (div_pos (hx0.trans_le hs.1.1) (hpos2 s hs)) (hηmem _).1
+  have hpc : ContinuousOn p (Icc xlo xhi ×ˢ Icc θlo θhi) := by
+    have hr : ContinuousOn (fun s : ℝ × ℝ => s.1 / s.2) (Icc xlo xhi ×ˢ Icc θlo θhi) :=
+      continuous_fst.continuousOn.div continuous_snd.continuousOn fun s hs => (hpos2 s hs).ne'
+    refine (hr.div (hηc.comp_continuousOn hr) fun s _ => (hηmem _).1.ne').congr fun s hs => ?_
+    exact hp s hs
+  have := isProbabilityMeasure_islandsShockLaw hA
+  have hν : IsFiniteMeasure (islandsNextLaw xlo xhi θlo θhi ψ g) :=
+    islands_isFiniteMeasure_comap _
+  -- the price of a ray
+  have hray : ∀ w ∈ Icc (xlo / θhi) (xhi / θlo),
+      p (w * shocksA xlo θlo w, shocksA xlo θlo w) = w / η w := fun w hw => by
+    have hA0 : shocksA xlo θlo w ≠ 0 := (hθ0.trans_le (le_max_right _ _)).ne'
+    rw [hp _ (shocks_rayPoint_mem hx0 hxx hθ0 hθθ hw)]
+    simp only
+    rw [mul_div_cancel_right₀ _ hA0]
+  refine ⟨fun s hs => by rw [hn s hs]; exact Ioo_subset_Ico_self (hηmem _),
+    fun s hs l hl => ?_, fun s hs => ?_⟩
+  · -- (1)
+    set z₀ := s.1 / s.2 with hz₀def
+    have hz₀ := shocks_ratio_mem_Z hx0 hθ0 hs
+    have hps : p s = p (z₀ * shocksA xlo θlo z₀, shocksA xlo θlo z₀) := by
+      rw [hray z₀ hz₀, hp s hs]
+    have hbel := islandsREBeliefs_eq (p := p) (ψ := ψ) (g := g) hz₀ fun w hw hpw => by
+      rw [hray w hw, hray z₀ hz₀] at hpw
+      exact hinj hw hz₀ hpw
+    rw [hps]
+    simp only [islandsObj]
+    rw [hbel, hn s hs]
+    set κ₀ : Measure (ShocksStates xlo xhi θlo θhi) := (Measure.map (fun θ => (z₀ * θ, θ))
+      (shocksCondLaw xlo xhi θlo θhi ψ g z₀)).comap Subtype.val with hκ₀
+    have := hA.isProbabilityMeasure_condLaw' hπ z₀
+    have hκfin : IsFiniteMeasure κ₀ := islands_isFiniteMeasure_comap _
+    obtain ⟨hc, hcpos⟩ := islands_factor_continuous hx0 hpc hppos
+    set c := fun q : ShocksStates xlo xhi θlo θhi × ShocksStates xlo xhi θlo θhi =>
+      q.2.1.1 * p q.1.1 / (q.1.1.1 * p q.2.1) with hcdef
+    set μP := κ₀.prod (islandsNextLaw xlo xhi θlo θhi ψ g)
+    have hint : ∀ F : ShocksStates xlo xhi θlo θhi × ShocksStates xlo xhi θlo θhi → ℝ,
+        Continuous F → Integrable F μP := fun F hF =>
+      (BoundedContinuousFunction.mkOfCompact ⟨F, hF⟩).integrable μP
+    have hprod : ∀ F : ShocksStates xlo xhi θlo θhi × ShocksStates xlo xhi θlo θhi → ℝ,
+        Continuous F → ∫ q, F q ∂μP =
+          ∫ sh, ∫ s', F (sh, s') ∂islandsNextLaw xlo xhi θlo θhi ψ g ∂κ₀ := fun F hF =>
+      integral_prod F (hint F hF)
+    have hVc : ∀ l, 0 ≤ l → Continuous fun q => V (c q * l) := fun l hl =>
+      hV.V_cont.comp_continuous (hc.mul continuous_const) fun q =>
+        mem_Ici.2 (mul_nonneg (hcpos q).le hl)
+    have hobj : ∀ l, 0 ≤ l → ∫ sh, ∫ s', V (s'.1.1 * l * p sh.1 / (sh.1.1 * p s'.1))
+        ∂islandsNextLaw xlo xhi θlo θhi ψ g ∂κ₀ = ∫ q, V (c q * l) ∂μP := fun l hl => by
+      rw [hprod _ (hVc l hl)]
+      refine integral_congr_ae (ae_of_all _ fun sh => integral_congr_ae (ae_of_all _
+        fun s' => ?_))
+      simp only [hcdef]
+      ring_nf
+    set zs := projIcc _ _ hZ z₀ with hzsdef
+    set η₀ := olgZetaInv L H' (f zs) with hη₀def
+    have hη₀ : η₀ ∈ Ioo 0 L := hηmem z₀
+    rw [hobj l hl.1, hobj η₀ hη₀.1.le]
+    -- the first-order condition holds at `η₀`
+    have hφc : Continuous fun q => olgPhi V' (c q * η₀) :=
+      hV.phi_continuousOn.comp_continuous (hc.mul continuous_const) fun q =>
+        mem_Ioi.2 (mul_pos (hcpos q) hη₀.1)
+    have hzs : (zs : ℝ) = z₀ := by rw [hzsdef, projIcc_of_mem _ hz₀]
+    have hb := islands_RE_phi_eq hA hπ hH hV hZ f f.continuous hfpos hp zs
+    rw [hzs] at hb
+    have hφ : ∫ q, olgPhi V' (c q * η₀) ∂μP = f zs :=
+      calc ∫ q, olgPhi V' (c q * η₀) ∂μP = shocksOpT L H' V' θlo θhi
+            (shocksJointLaw xlo xhi θlo θhi hZ ψ g)
+            (fun z => shocksCondLaw xlo xhi θlo θhi ψ g z.1) f zs := by
+            rw [hprod _ hφc]; exact hb
+        _ = f zs := (hfix zs).symm
+    have hζ : f zs = η₀ * H' η₀ := (hH.zeta_zetaInv (hfpos zs).le).symm
+    -- concavity
+    have hpt : ∀ q, V (c q * l) ≤ V (c q * η₀) + (l - η₀) / η₀ * olgPhi V' (c q * η₀) :=
+      fun q => by
+        have h := shocks_concave_tangent hV (mul_pos (hcpos q) hη₀.1)
+          (mul_nonneg (hcpos q).le hl.1)
+        have e : (l - η₀) / η₀ * olgPhi V' (c q * η₀) = V' (c q * η₀) * (c q * l - c q * η₀) := by
+          simp only [olgPhi]
+          field_simp [hη₀.1.ne']
+        rw [e]
+        exact h
+    have hmono : ∫ q, V (c q * l) ∂μP ≤
+        ∫ q, (V (c q * η₀) + (l - η₀) / η₀ * olgPhi V' (c q * η₀)) ∂μP :=
+      integral_mono (hint _ (hVc l hl.1)) ((hint _ (hVc η₀ hη₀.1.le)).add
+        ((hint _ hφc).const_mul _)) hpt
+    rw [integral_add (hint _ (hVc η₀ hη₀.1.le)) ((hint _ hφc).const_mul _),
+      integral_const_mul, hφ, hζ] at hmono
+    have e2 : (l - η₀) / η₀ * (η₀ * H' η₀) = H' η₀ * (l - η₀) := by
+      field_simp [hη₀.1.ne']
+    have htan := shocks_convex_tangent hH hη₀ hl
+    linarith
+  · -- (2)
+    rw [hn s hs, hp s hs, mul_div_cancel₀ _ (hηmem _).1.ne']
+
+/-- Rational-expectations beliefs are finite measures. -/
+theorem isFiniteMeasure_islandsREBeliefs
+    (hπ : ∀ z, xlo / θhi < z ∧ z < xhi / θlo → 0 < shocksPi ψ g z) (p : ℝ × ℝ → ℝ) (P : ℝ) :
+    IsFiniteMeasure (islandsREBeliefs xlo xhi θlo θhi ψ g p P) := by
+  rw [islandsREBeliefs]
+  split_ifs with h
+  · have := hA.isProbabilityMeasure_condLaw' hπ h.choose
+    exact islands_isFiniteMeasure_comap _
+  · infer_instance
+
+/-- **Equilibrium ⇒ fixed point of (4)** (p. 535, the direction the book uses implicitly). Every
+equilibrium of the islands economy with a continuous price function, rational-expectations
+beliefs and the true law of next period's shocks comes from a strictly positive continuous fixed
+point `f = ζ(η)` of (4) whose price function `z/ζ⁻¹(f(z))` is invertible:
+`p(x, θ) = (x/θ)/ζ⁻¹(f(x/θ))`. (By `islands_eqm_price_of_ratio`, `p = ρ(x/θ)` with `ρ`
+continuous and strictly monotone; the first-order condition `islands_foc` along each ray is
+`f = Tf` by `islands_RE_phi_eq`.) -/
+theorem islands_fixedPoint_of_eqm (hπ : ∀ z, xlo / θhi < z ∧ z < xhi / θlo → 0 < shocksPi ψ g z)
+    (hH : Assumption17_1H L H H' H'') (hV : Assumption17_1VR V V' V'')
+    (hZ : xlo / θhi ≤ xhi / θlo)
+    (he : IslandsEqm L H V p n (islandsREBeliefs xlo xhi θlo θhi ψ g p)
+      (islandsNextLaw xlo xhi θlo θhi ψ g))
+    (hp : ContinuousOn p (Icc xlo xhi ×ˢ Icc θlo θhi)) :
+    ∃ f : Icc (xlo / θhi) (xhi / θlo) →ᵇ ℝ, (∀ z, 0 < f z) ∧
+      (∀ z, f z = shocksOpT L H' V' θlo θhi (shocksJointLaw xlo xhi θlo θhi hZ ψ g)
+        (fun z => shocksCondLaw xlo xhi θlo θhi ψ g z.1) f z) ∧
+      Function.Injective (fun z : Icc (xlo / θhi) (xhi / θlo) =>
+        (z : ℝ) / olgZetaInv L H' (f z)) ∧
+      ∀ s ∈ Icc xlo xhi ×ˢ Icc θlo θhi,
+        p s = s.1 / s.2 / olgZetaInv L H' (f (projIcc _ _ hZ (s.1 / s.2))) := by
+  have hθ0 := hA.θlo_pos
+  have hx0 := hA.xlo_pos
+  have hθθ := hA.θlo_lt.le
+  have hxx := hA.xlo_lt.le
+  have := isProbabilityMeasure_islandsShockLaw hA
+  have hν : IsFiniteMeasure (islandsNextLaw xlo xhi θlo θhi ψ g) :=
+    islands_isFiniteMeasure_comap _
+  have hκ := isFiniteMeasure_islandsREBeliefs hA hπ p
+  obtain ⟨ρ, hρc, hρm, hρ⟩ := islands_eqm_price_of_ratio hx0 hxx hθ0 hθθ hH hV he hp
+  have hray : ∀ w ∈ Icc (xlo / θhi) (xhi / θlo),
+      (w * shocksA xlo θlo w, shocksA xlo θlo w) ∈ Icc xlo xhi ×ˢ Icc θlo θhi ∧
+        (w * shocksA xlo θlo w) / shocksA xlo θlo w = w := fun w hw =>
+    ⟨shocks_rayPoint_mem hx0 hxx hθ0 hθθ hw,
+      mul_div_cancel_right₀ _ (hθ0.trans_le (le_max_right (xlo / w) θlo)).ne'⟩
+  have hpρ : ∀ w ∈ Icc (xlo / θhi) (xhi / θlo),
+      p (w * shocksA xlo θlo w, shocksA xlo θlo w) = ρ w := fun w hw => by
+    rw [(hρ _ (hray w hw).1).1, (hray w hw).2]
+  have hnρ : ∀ w ∈ Icc (xlo / θhi) (xhi / θlo),
+      n (w * shocksA xlo θlo w, shocksA xlo θlo w) = w / ρ w := fun w hw => by
+    rw [(hρ _ (hray w hw).1).2, (hray w hw).2]
+  have hinjρ : InjOn ρ (Icc (xlo / θhi) (xhi / θlo)) := by
+    rcases hρm with h | h
+    · exact h.injOn
+    · exact h.injOn
+  have hηmem : ∀ w ∈ Icc (xlo / θhi) (xhi / θlo), w / ρ w ∈ Ioo 0 L := fun w hw => by
+    have h1 := he.n_mem _ (hray w hw).1
+    have h2 := he.clear _ (hray w hw).1
+    have h3 := he.p_pos hx0 hθ0 (hray w hw).1
+    rw [hnρ w hw] at h1 h2
+    rw [(hray w hw).2] at h2
+    refine ⟨?_, h1.2⟩
+    have hw0 : 0 < w := (div_pos hx0 (hθ0.trans_le hθθ)).trans_le hw.1
+    rw [hpρ w hw] at h3
+    exact div_pos hw0 h3
+  have hηc : ContinuousOn (fun w => w / ρ w) (Icc (xlo / θhi) (xhi / θlo)) :=
+    continuousOn_id.div hρc fun w hw => by
+      have := he.p_pos hx0 hθ0 (hray w hw).1
+      rw [hpρ w hw] at this
+      exact this.ne'
+  have hfc : Continuous fun z : Icc (xlo / θhi) (xhi / θlo) => olgZeta H' ((z : ℝ) / ρ z) :=
+    hH.zeta_continuousOn.comp_continuous (hηc.comp_continuous continuous_subtype_val
+      fun z => z.2) fun z => Ioo_subset_Ico_self (hηmem z.1 z.2)
+  set f := BoundedContinuousFunction.mkOfCompact ⟨_, hfc⟩ with hfdef
+  have hfz : ∀ z : Icc (xlo / θhi) (xhi / θlo), f z = olgZeta H' ((z : ℝ) / ρ z) := fun z => rfl
+  have hfinv : ∀ z : Icc (xlo / θhi) (xhi / θlo), olgZetaInv L H' (f z) = (z : ℝ) / ρ z :=
+    fun z => by rw [hfz]; exact hH.zetaInv_zeta (Ioo_subset_Ico_self (hηmem z.1 z.2))
+  have hfpos : ∀ z, 0 < f z := fun z => by rw [hfz]; exact hH.zeta_pos (hηmem z.1 z.2)
+  have hp' : ∀ s ∈ Icc xlo xhi ×ˢ Icc θlo θhi,
+      p s = s.1 / s.2 / olgZetaInv L H' (f (projIcc _ _ hZ (s.1 / s.2))) := fun s hs => by
+    have hz := shocks_ratio_mem_Z hx0 hθ0 hs
+    rw [hfinv, projIcc_of_mem _ hz, (hρ s hs).1]
+    simp only
+    have hρ0 : 0 < ρ (s.1 / s.2) := by
+      have := he.p_pos hx0 hθ0 hs
+      rwa [(hρ s hs).1] at this
+    have hs1 : s.1 ≠ 0 := (hx0.trans_le hs.1.1).ne'
+    have hs2 : s.2 ≠ 0 := (hθ0.trans_le hs.2.1).ne'
+    field_simp
+  refine ⟨f, hfpos, fun z => ?_, fun z w hzw => ?_, hp'⟩
+  · -- the first-order condition along the ray `z` is `f = Tf`
+    have hs := (hray z.1 z.2).1
+    have hfoc := islands_foc hx0 hθ0 hH hV he hp hs
+    have hbel := islandsREBeliefs_eq (p := p) (ψ := ψ) (g := g) z.2 fun w hw hpw => by
+      rw [hpρ w hw, hpρ z.1 z.2] at hpw
+      exact hinjρ hw z.2 hpw
+    have hns : n (z.1 * shocksA xlo θlo z.1, shocksA xlo θlo z.1) = olgZetaInv L H' (f z) := by
+      rw [hnρ z.1 z.2, hfinv]
+    rw [hbel, hns, hH.zeta_zetaInv (hfpos z).le] at hfoc
+    rw [hfoc]
+    exact islands_RE_phi_eq hA hπ hH hV hZ f f.continuous hfpos hp' z
+  · -- the price function is invertible
+    simp only [hfinv] at hzw
+    have h1 : ρ z = ρ w := by
+      have hz0 : 0 < (z : ℝ) := (div_pos hx0 (hθ0.trans_le hθθ)).trans_le z.2.1
+      have hw0 : 0 < (w : ℝ) := (div_pos hx0 (hθ0.trans_le hθθ)).trans_le w.2.1
+      have hρz : 0 < ρ z := by
+        have := (hηmem z.1 z.2).1
+        exact (div_pos_iff_of_pos_left hz0).1 this
+      have hρw : 0 < ρ w := by
+        have := (hηmem w.1 w.2).1
+        exact (div_pos_iff_of_pos_left hw0).1 this
+      rw [div_div_cancel₀ hz0.ne', div_div_cancel₀ hw0.ne'] at hzw
+      exact hzw
+    exact Subtype.ext (hinjρ z.2 w.2 h1)
+
+/-! ### Proposition 8 fails as a statement about equilibria -/
+
+omit hA in
+/-- **No equilibrium in the bimodal CRRA economy.** In the economy of
+`proposition_8_counterexample` (Assumptions 17.1, 17.2 (repaired), 17.4 and 17.5 hold) there is
+no equilibrium of the islands economy with a continuous price function, rational-expectations
+beliefs and the true law of next period's shocks: it would give a positive fixed point of (4)
+with invertible price function (`islands_fixedPoint_of_eqm`), and every positive fixed point has
+a non-invertible one (`shocksP8_not_injective`). -/
+theorem shocksP8_no_continuous_eqm :
+    ¬ ∃ p n : ℝ × ℝ → ℝ, ContinuousOn p (Icc (1 : ℝ) 2 ×ˢ Icc (1 : ℝ) (3 / 2)) ∧
+      IslandsEqm 1 monoCexH shocksP8V p n
+        (islandsREBeliefs 1 2 1 (3 / 2) (shocksUnif 1 2) shocksExBimodal p)
+        (islandsNextLaw 1 2 1 (3 / 2) (shocksUnif 1 2) shocksExBimodal) := by
+  rintro ⟨p, n, hp, he⟩
+  obtain ⟨f, hfpos, hfix, hinj, -⟩ := islands_fixedPoint_of_eqm shocksExBimodal_assumption
+    (fun z hz => shocksExBimodal_pi_pos hz) monoCexH_assumption17_1H' shocksP8V_assumptions.1
+    shocksP8_hZ he hp
+  exact (shocksP8_not_injective f hfpos hfix).1 hinj
+
+omit hA in
+/-- `W'(y) ≥ A = 1/60000` on `(0, 1]` when `y₀ ≤ 1`. -/
+theorem shocksP8W'_ge {y₀ y : ℝ} (hy₀ : 0 < y₀) (hy₀1 : y₀ ≤ 1) (hy : 0 < y) (hy1 : y ≤ 1) :
+    1 / 60000 ≤ shocksP8W' y₀ y := by
+  simp only [shocksP8W', shocksP8V']
+  split_ifs with h
+  · have := Real.one_le_rpow_of_pos_of_le_one_of_nonpos hy hy1 (by norm_num : (-(1 / 20) : ℝ) ≤ 0)
+    nlinarith
+  · have h1 := Real.one_le_rpow_of_pos_of_le_one_of_nonpos hy₀ hy₀1
+      (by norm_num : (-(1 / 20) : ℝ) ≤ 0)
+    have h2 : y / y₀ < 1 := (div_lt_one hy₀).2 (not_le.1 h)
+    have e : 1 / 20 * y / y₀ = 1 / 20 * (y / y₀) := by ring
+    rw [e]
+    nlinarith
+
+omit hA in
+/-- **An a priori lower bound** for the utility `shocksP8W y₀`, `y₀ ≤ 1`: every strictly positive
+continuous fixed point of (4) in the bimodal economy has `η = ζ⁻¹ ∘ f ≥ 1/180000 = A/3`, since
+`φ_W(y) ≥ A y` on `(0, 1]` and the arguments of `φ` are at least `(2/3) min η`. -/
+theorem shocksP8W_eta_ge {y₀ : ℝ} (hy₀ : 0 < y₀) (hy₀1 : y₀ ≤ 1)
+    (f : Icc (1 / (3 / 2) : ℝ) (2 / 1) →ᵇ ℝ) (hfpos : ∀ z, 0 < f z)
+    (hfix : ∀ z, f z = shocksOpT 1 monoCexH' (shocksP8W' y₀) 1 (3 / 2)
+      (shocksJointLaw 1 2 1 (3 / 2) shocksP8_hZ (shocksUnif 1 2) shocksExBimodal)
+      (fun z => shocksCondLaw 1 2 1 (3 / 2) (shocksUnif 1 2) shocksExBimodal z.1) f z) :
+    ∀ z, 1 / 180000 ≤ olgZetaInv 1 monoCexH' (f z) := by
+  have hH := monoCexH_assumption17_1H'
+  have hV := shocks_assumption17_1VR_of_V (shocksP8W_assumptions hy₀).1
+  have h4 : MonoAssumption17_4Pos (shocksP8W' y₀) (shocksP8W'' y₀) := fun y hy =>
+    (shocksP8W_assumptions hy₀).2 y hy.le
+  have hφm := shocks_phi_monotoneOn hV h4
+  have hA := shocksExBimodal_assumption
+  have := isProbabilityMeasure_shocksJointLaw hA shocksP8_hZ
+  have hν : ∀ z : ℝ, IsProbabilityMeasure
+      (shocksCondLaw 1 2 1 (3 / 2) (shocksUnif 1 2) shocksExBimodal z) :=
+    hA.isProbabilityMeasure_condLaw' fun z hz => shocksExBimodal_pi_pos hz
+  obtain ⟨l₀, hS⟩ := shocksBounds_exists one_pos (by norm_num : (1 : ℝ) ≤ 3 / 2) hH hV
+  have hne : (univ : Set (Icc (1 / (3 / 2) : ℝ) (2 / 1))).Nonempty :=
+    ⟨⟨_, left_mem_Icc.2 shocksP8_hZ⟩, mem_univ _⟩
+  obtain ⟨m, -, hm⟩ := isCompact_univ.exists_isMinOn hne f.continuous.continuousOn
+  set ηm := olgZetaInv 1 monoCexH' (f m) with hηmdef
+  have hηm : ηm ∈ Ioo 0 1 := ⟨hH.zetaInv_pos (hfpos m), (hH.zetaInv_mem (hfpos m).le).2⟩
+  have hle : ∀ z, ηm ≤ olgZetaInv 1 monoCexH' (f z) := fun z =>
+    hH.zetaInv_strictMonoOn.monotoneOn (mem_Ici.2 (hfpos m).le) (mem_Ici.2 (hfpos z).le)
+      (isMinOn_iff.1 hm z (mem_univ z))
+  set l := min l₀ ηm
+  have hl : l ∈ Ioc 0 l₀ := ⟨lt_min hS.l₀_mem.1 hηm.1, min_le_left _ _⟩
+  have hlL : l ∈ Ico 0 1 := ⟨hl.1.le, hl.2.trans_lt hS.l₀_mem.2⟩
+  have hfl : ∀ z, olgZeta monoCexH' l ≤ f z := fun z =>
+    calc olgZeta monoCexH' l ≤ olgZeta monoCexH' ηm :=
+          hH.zeta_strictMonoOn.monotoneOn hlL (hH.zetaInv_mem (hfpos m).le) (min_le_right _ _)
+      _ = f m := hH.zeta_zetaInv (hfpos m).le
+      _ ≤ f z := isMinOn_iff.1 hm z (mem_univ z)
+  obtain ⟨B, -, hB⟩ := hS.exists_integrand_le hl
+  -- the integrand is at least `c = (2/3) ηm A`
+  set c := 2 / 3 * ηm * (1 / 60000) with hcdef
+  have hpt : ∀ θt (ω : ℝ × Icc (1 / (3 / 2) : ℝ) (2 / 1)),
+      c ≤ shocksIntegrand 1 monoCexH' (shocksP8W' y₀) 1 (3 / 2) f θt ω := fun θt ω => by
+    have hr := (shocksRatio_mem (θlo := (1 : ℝ)) (θhi := 3 / 2) one_pos (by norm_num) ω.1 θt).1
+    have hη' := hle ω.2
+    have hy1 : 0 < 2 / 3 * ηm := by linarith [hηm.1]
+    have hy : 2 / 3 * ηm ≤ shocksRatio 1 (3 / 2) ω.1 θt * olgZetaInv 1 monoCexH' (f ω.2) := by
+      have hr' : (2 : ℝ) / 3 ≤ shocksRatio 1 (3 / 2) ω.1 θt :=
+        (by norm_num : (2 : ℝ) / 3 = 1 / (3 / 2)).trans_le hr
+      nlinarith [hηm.1]
+    have h1 := hφm (mem_Ioi.2 hy1) (mem_Ioi.2 (hy1.trans_le hy)) hy
+    have h2 := shocksP8W'_ge hy₀ hy₀1 hy1 (by linarith [hηm.2])
+    simp only [shocksIntegrand]
+    refine le_trans ?_ h1
+    simp only [olgPhi, hcdef]
+    nlinarith
+  have hphi : ∀ θt, c ≤ shocksPhiF 1 monoCexH' (shocksP8W' y₀) 1 (3 / 2)
+      (shocksJointLaw 1 2 1 (3 / 2) shocksP8_hZ (shocksUnif 1 2) shocksExBimodal) f θt :=
+    fun θt => by
+      have := integral_mono (integrable_const c)
+        (hS.integrable_integrand hl hB f.continuous hfl
+          (shocksJointLaw 1 2 1 (3 / 2) shocksP8_hZ (shocksUnif 1 2) shocksExBimodal) θt)
+        fun ω => hpt θt ω
+      simp only [integral_const, probReal_univ, smul_eq_mul, one_mul] at this
+      exact this
+  have hfm : c ≤ f m := by
+    rw [hfix m]
+    have := integral_mono (integrable_const c)
+      ((hS.phiFBCF hl hB f.continuous hfl
+        (shocksJointLaw 1 2 1 (3 / 2) shocksP8_hZ (shocksUnif 1 2) shocksExBimodal)).integrable
+        (shocksCondLaw 1 2 1 (3 / 2) (shocksUnif 1 2) shocksExBimodal m.1)) fun θt => hphi θt
+    simp only [integral_const, probReal_univ, smul_eq_mul, one_mul] at this
+    exact this
+  have hζ := shocksP8_zeta_eq hηm.2 (hH.zeta_zetaInv (hfpos m).le)
+  have key : ηm * ((1 - ηm) / 90000) ≤ ηm * ηm := by
+    have h1m : 0 < 1 - ηm := by linarith [hηm.2]
+    have := mul_le_mul_of_nonneg_right hfm h1m.le
+    simp only [hcdef] at this
+    nlinarith
+  have := le_of_mul_le_mul_left key hηm.1
+  intro z
+  linarith [hle z]
+
+omit hA in
+/-- **No equilibrium under the book's hypotheses.** With the utility `shocksP8W (1/300000)`
+(the book's Assumption 17.1, `V'(0) < ∞`, and Assumption 17.4; `H` as in Assumption 17.1) the
+bimodal economy has no equilibrium with a continuous price function, rational-expectations
+beliefs and the true law of next period's shocks. A positive fixed point of (4) for this `V` has
+`η ≥ A/3 > (3/2) y₀` (`shocksP8W_eta_ge`), so it is also a fixed point for the CRRA utility
+(`shocksP8W_opT_eq`), whose price function is not invertible. -/
+theorem shocksP8W_no_continuous_eqm :
+    ¬ ∃ p n : ℝ × ℝ → ℝ, ContinuousOn p (Icc (1 : ℝ) 2 ×ˢ Icc (1 : ℝ) (3 / 2)) ∧
+      IslandsEqm 1 monoCexH (shocksP8W (1 / 300000)) p n
+        (islandsREBeliefs 1 2 1 (3 / 2) (shocksUnif 1 2) shocksExBimodal p)
+        (islandsNextLaw 1 2 1 (3 / 2) (shocksUnif 1 2) shocksExBimodal) := by
+  rintro ⟨p, n, hp, he⟩
+  have hy : (0 : ℝ) < 1 / 300000 := by norm_num
+  obtain ⟨f, hfpos, hfix, hinj, -⟩ := islands_fixedPoint_of_eqm shocksExBimodal_assumption
+    (fun z hz => shocksExBimodal_pi_pos hz) monoCexH_assumption17_1H'
+    (shocks_assumption17_1VR_of_V (shocksP8W_assumptions hy).1) shocksP8_hZ he hp
+  have hη := shocksP8W_eta_ge hy (by norm_num) f hfpos hfix
+  have hfix' : ∀ z, f z = shocksOpT 1 monoCexH' shocksP8V' 1 (3 / 2)
+      (shocksJointLaw 1 2 1 (3 / 2) shocksP8_hZ (shocksUnif 1 2) shocksExBimodal)
+      (fun z => shocksCondLaw 1 2 1 (3 / 2) (shocksUnif 1 2) shocksExBimodal z.1) f z :=
+    fun z => (hfix z).trans (shocksP8W_opT_eq hy _ _ f (fun w => by linarith [hη w]) z)
+  exact (shocksP8_not_injective f hfpos hfix').1 hinj
+
+omit hA in
+/-- **Proposition 8 (p. 540) fails for equilibria.** The bimodal economy with the utility
+`shocksP8W (1/300000)` satisfies all hypotheses of Proposition 8 (the book's Assumptions 17.1 and
+17.4, and Assumption 17.5), yet it has no equilibrium with a continuous price function at all,
+let alone one with an increasing price function. -/
+theorem proposition_8_eqm_counterexample :
+    ShocksAssumption17_5 1 2 1 (3 / 2) (shocksUnif 1 2) shocksExBimodal ∧
+      Assumption17_1 1 monoCexH monoCexH' monoCexH'' (shocksP8W (1 / 300000))
+        (shocksP8W' (1 / 300000)) (shocksP8W'' (1 / 300000)) ∧
+      MonoAssumption17_4 (shocksP8W' (1 / 300000)) (shocksP8W'' (1 / 300000)) ∧
+      ¬ ∃ p n : ℝ × ℝ → ℝ, ContinuousOn p (Icc (1 : ℝ) 2 ×ˢ Icc (1 : ℝ) (3 / 2)) ∧
+        IslandsEqm 1 monoCexH (shocksP8W (1 / 300000)) p n
+          (islandsREBeliefs 1 2 1 (3 / 2) (shocksUnif 1 2) shocksExBimodal p)
+          (islandsNextLaw 1 2 1 (3 / 2) (shocksUnif 1 2) shocksExBimodal) :=
+  ⟨shocksExBimodal_assumption, ⟨monoCexH_assumption17_1H',
+    (shocksP8W_assumptions (by norm_num)).1⟩, (shocksP8W_assumptions (by norm_num)).2,
+    shocksP8W_no_continuous_eqm⟩
 
 end StokeyLucasPrescott.FixedPointArguments
 
@@ -10603,3 +12693,78 @@ set_option linter.style.longLine false
 #print axioms StokeyLucasPrescott.FixedPointArguments.shocksExBimodal_assumption
 #print axioms StokeyLucasPrescott.FixedPointArguments.shocksExBimodal_integral_inv
 #print axioms StokeyLucasPrescott.FixedPointArguments.proposition_8_general_counterexample
+#print axioms StokeyLucasPrescott.FixedPointArguments.Assumption17_1VR.const_mul
+#print axioms StokeyLucasPrescott.FixedPointArguments.Assumption17_2R.const_mul
+#print axioms StokeyLucasPrescott.FixedPointArguments.MonoAssumption17_4Pos.const_mul
+#print axioms StokeyLucasPrescott.FixedPointArguments.crra_monoAssumption17_4Pos
+#print axioms StokeyLucasPrescott.FixedPointArguments.monoCexH_assumption17_1H'
+#print axioms StokeyLucasPrescott.FixedPointArguments.shocksExBimodal_pi_pos
+#print axioms StokeyLucasPrescott.FixedPointArguments.shocksExBimodal_integral_inv_values
+#print axioms StokeyLucasPrescott.FixedPointArguments.shocksExBimodal_integral_clamp
+#print axioms StokeyLucasPrescott.FixedPointArguments.shocksP8V
+#print axioms StokeyLucasPrescott.FixedPointArguments.shocksP8V'
+#print axioms StokeyLucasPrescott.FixedPointArguments.shocksP8V''
+#print axioms StokeyLucasPrescott.FixedPointArguments.shocksP8V_assumptions
+#print axioms StokeyLucasPrescott.FixedPointArguments.shocksP8_phi_eq
+#print axioms StokeyLucasPrescott.FixedPointArguments.shocksP8_opT_eq
+#print axioms StokeyLucasPrescott.FixedPointArguments.shocksP8_hZ
+#print axioms StokeyLucasPrescott.FixedPointArguments.shocksExBimodal_condLaw_eq
+#print axioms StokeyLucasPrescott.FixedPointArguments.shocksP8_clamp_bounds
+#print axioms StokeyLucasPrescott.FixedPointArguments.shocksP8_continuous
+#print axioms StokeyLucasPrescott.FixedPointArguments.shocksP8_zeta_eq
+#print axioms StokeyLucasPrescott.FixedPointArguments.shocksP8_rho_ineq
+#print axioms StokeyLucasPrescott.FixedPointArguments.shocksP8_existsUnique_fixedPoint
+#print axioms StokeyLucasPrescott.FixedPointArguments.shocksP8_not_injective
+#print axioms StokeyLucasPrescott.FixedPointArguments.proposition_8_counterexample
+#print axioms StokeyLucasPrescott.FixedPointArguments.proposition_8_assumption17_5_false
+#print axioms StokeyLucasPrescott.FixedPointArguments.shocks_hasDerivAt_ite
+#print axioms StokeyLucasPrescott.FixedPointArguments.shocksP8W
+#print axioms StokeyLucasPrescott.FixedPointArguments.shocksP8W'
+#print axioms StokeyLucasPrescott.FixedPointArguments.shocksP8W''
+#print axioms StokeyLucasPrescott.FixedPointArguments.shocksP8W_hasDerivAt
+#print axioms StokeyLucasPrescott.FixedPointArguments.shocksP8W'_hasDerivAt
+#print axioms StokeyLucasPrescott.FixedPointArguments.shocksP8W'_pos
+#print axioms StokeyLucasPrescott.FixedPointArguments.shocksP8W''_neg
+#print axioms StokeyLucasPrescott.FixedPointArguments.shocksP8W_assumptions
+#print axioms StokeyLucasPrescott.FixedPointArguments.shocksP8W_opT_eq
+#print axioms StokeyLucasPrescott.FixedPointArguments.proposition_8_counterexample_book
+#print axioms StokeyLucasPrescott.FixedPointArguments.proposition_8_false
+#print axioms StokeyLucasPrescott.FixedPointArguments.shocks_exists_ray_approx
+#print axioms StokeyLucasPrescott.FixedPointArguments.shocks_convex_ray
+#print axioms StokeyLucasPrescott.FixedPointArguments.shocks_const_on_rays
+#print axioms StokeyLucasPrescott.FixedPointArguments.ShocksStates
+#print axioms StokeyLucasPrescott.FixedPointArguments.islandsObj
+#print axioms StokeyLucasPrescott.FixedPointArguments.IslandsEqm
+#print axioms StokeyLucasPrescott.FixedPointArguments.IslandsEqm.mk
+#print axioms StokeyLucasPrescott.FixedPointArguments.IslandsEqm.n_mem
+#print axioms StokeyLucasPrescott.FixedPointArguments.IslandsEqm.opt
+#print axioms StokeyLucasPrescott.FixedPointArguments.IslandsEqm.clear
+#print axioms StokeyLucasPrescott.FixedPointArguments.IslandsEqm.p_pos
+#print axioms StokeyLucasPrescott.FixedPointArguments.islandsObj_max_unique
+#print axioms StokeyLucasPrescott.FixedPointArguments.shocks_rayPoint_mem
+#print axioms StokeyLucasPrescott.FixedPointArguments.shocks_ratio_mem_Z
+#print axioms StokeyLucasPrescott.FixedPointArguments.islands_eqm_price_of_ratio
+#print axioms StokeyLucasPrescott.FixedPointArguments.islands_eqm_not_injOn
+#print axioms StokeyLucasPrescott.FixedPointArguments.shocks_concave_tangent
+#print axioms StokeyLucasPrescott.FixedPointArguments.shocks_convex_tangent
+#print axioms StokeyLucasPrescott.FixedPointArguments.islands_factor_continuous
+#print axioms StokeyLucasPrescott.FixedPointArguments.islands_foc
+#print axioms StokeyLucasPrescott.FixedPointArguments.islandsShockLaw
+#print axioms StokeyLucasPrescott.FixedPointArguments.islandsNextLaw
+#print axioms StokeyLucasPrescott.FixedPointArguments.islandsREBeliefs
+#print axioms StokeyLucasPrescott.FixedPointArguments.islandsREBeliefs_eq
+#print axioms StokeyLucasPrescott.FixedPointArguments.islandsShockLaw_ae_mem
+#print axioms StokeyLucasPrescott.FixedPointArguments.integral_islandsNextLaw
+#print axioms StokeyLucasPrescott.FixedPointArguments.condLaw_ae_ray
+#print axioms StokeyLucasPrescott.FixedPointArguments.integral_rayBelief
+#print axioms StokeyLucasPrescott.FixedPointArguments.islands_RE_phi_eq
+#print axioms StokeyLucasPrescott.FixedPointArguments.isProbabilityMeasure_islandsShockLaw
+#print axioms StokeyLucasPrescott.FixedPointArguments.islands_isFiniteMeasure_comap
+#print axioms StokeyLucasPrescott.FixedPointArguments.islands_eqm_of_fixedPoint
+#print axioms StokeyLucasPrescott.FixedPointArguments.isFiniteMeasure_islandsREBeliefs
+#print axioms StokeyLucasPrescott.FixedPointArguments.islands_fixedPoint_of_eqm
+#print axioms StokeyLucasPrescott.FixedPointArguments.shocksP8_no_continuous_eqm
+#print axioms StokeyLucasPrescott.FixedPointArguments.shocksP8W'_ge
+#print axioms StokeyLucasPrescott.FixedPointArguments.shocksP8W_eta_ge
+#print axioms StokeyLucasPrescott.FixedPointArguments.shocksP8W_no_continuous_eqm
+#print axioms StokeyLucasPrescott.FixedPointArguments.proposition_8_eqm_counterexample

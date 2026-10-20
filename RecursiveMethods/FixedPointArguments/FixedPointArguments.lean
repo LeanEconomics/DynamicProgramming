@@ -18,3 +18,6 @@ import FixedPointArguments.ShocksContraction
 import FixedPointArguments.ShocksModel
 import FixedPointArguments.ShocksMonotone
 import FixedPointArguments.ShocksSchauder
+import FixedPointArguments.ShocksEquilibrium
+import FixedPointArguments.ShocksProposition8
+import FixedPointArguments.ShocksRevelation

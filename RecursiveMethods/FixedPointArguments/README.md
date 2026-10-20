@@ -34,15 +34,17 @@ iterations meet) and the corresponding claims of Exercise 17.7 and Propositions 
 Exercise 17.12 (the conditional law of `θ` given `z` has a density proportional to `θ`, not a
 uniform one); Exercise 17.8a in part; the "only if" of Exercise 17.14a; the claims on pp. 515 and
 530 that relative risk aversion is strictly positive, and on p. 541 that Assumption 17.2 is a
-strengthening of Assumption 17.4; and the inference on p. 533 that an equilibrium price is a
-function of `x/θ`. Proposition 8 omits Assumption 17.6; without it a step of the proof fails, and
-the corrected statement adds it. Several steps of the printed proofs and of the solutions manual
-are also wrong; the results they support are true and are proved. Two things are left open:
-Proposition 8 under Assumption 17.5 alone, and whether a price that reveals more than `x/θ` can be
-an equilibrium. The islands economy's equilibrium conditions, the chapter introduction and the
-bibliographic notes (§17.7) are not formalised. See [corrections](docs/corrections.md). The
-library contains **441 theorems**. Of these, 20 are in the five modules that prove the Brouwer and
-Schauder theorems.
+strengthening of Assumption 17.4; the inference on p. 533 that an equilibrium price is a function
+of `x/θ` (the argument does not show it; it is true for continuous prices); and Proposition 8: an
+economy satisfying all of its hypotheses has no equilibrium with a continuous price function, and
+the corrected statement adds Assumption 17.6. Several steps of the printed proofs and of the
+solutions manual are also wrong; the results they support are true and are proved. The islands
+economy's equilibrium conditions are formalised, and continuous equilibria correspond exactly to
+positive fixed points of the operator (4) with invertible price function. Left open: whether a
+discontinuous price can reveal more than `x/θ`. The chapter introduction and the bibliographic
+notes (§17.7) are not formalised. See [corrections](docs/corrections.md). The library contains
+**500 theorems**. Of these, 20 are in the five modules that prove the Brouwer and Schauder
+theorems.
 
 * **The overlapping-generations model** (§17.1). Assumption 17.1; Exercise 17.1 (the young agent's
   problem has a unique interior solution, characterised by its first-order condition); the
@@ -83,6 +85,11 @@ Schauder theorems.
   Schauder (Exercises 17.11 and 17.13, (6a)–(6b) and (7) with the correct weights, and a direct
   Lipschitz bound for Step 4); finite `Z` by Brouwer; monotonicity of `T`; Proposition 8 under
   Assumption 17.6 and Exercise 17.14.
+* **Partially observed shocks: equilibrium** (§17.6). The equilibrium conditions (1)–(2), the
+  first-order condition (3), every continuous equilibrium price of the form `ρ(x/θ)` with `ρ`
+  invertible, and the exact correspondence between continuous equilibria with rational
+  expectations and positive fixed points of (4) with invertible `ρ`; Proposition 8 refuted by an
+  economy with a unique positive fixed point whose `ρ` is not invertible.
 
 All names are in the namespace `StokeyLucasPrescott.FixedPointArguments`. See the
 [source map](docs/source-map.md) and the [corrections](docs/corrections.md).
@@ -111,6 +118,9 @@ All names are in the namespace `StokeyLucasPrescott.FixedPointArguments`. See th
 | [ShocksContraction](FixedPointArguments/ShocksContraction.lean) | 32 | §17.6 (4), Exercise 17.9, Proposition 6 |
 | [ShocksSchauder](FixedPointArguments/ShocksSchauder.lean) | 29 | (6a)–(7), Exercises 17.11 and 17.13, Proposition 7, finite `Z` |
 | [ShocksMonotone](FixedPointArguments/ShocksMonotone.lean) | 39 | Monotonicity, Exercise 17.14, Proposition 8 |
+| [ShocksProposition8](FixedPointArguments/ShocksProposition8.lean) | 30 | Proposition 8 refuted: an economy under the book's hypotheses whose `ρ` is not invertible |
+| [ShocksRevelation](FixedPointArguments/ShocksRevelation.lean) | 9 | (1)–(2); continuous equilibrium prices are functions of `x/θ` (p. 533) |
+| [ShocksEquilibrium](FixedPointArguments/ShocksEquilibrium.lean) | 20 | (3) from (1); equilibria ⇔ fixed points of (4); no continuous equilibrium in the counterexample |
 
 ## Build and verify
 
