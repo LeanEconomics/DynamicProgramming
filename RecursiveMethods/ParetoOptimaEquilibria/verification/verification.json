@@ -1,0 +1,4890 @@
+{
+  "checked_at_utc": "2026-10-20T09:04:04.012387+00:00",
+  "theorems": 347,
+  "module_theorems": {
+    "ParetoOptimaEquilibria/Economy.lean": 0,
+    "ParetoOptimaEquilibria/Welfare.lean": 10,
+    "ParetoOptimaEquilibria/WelfareSecond.lean": 12,
+    "ParetoOptimaEquilibria/CommodityChoice.lean": 25,
+    "ParetoOptimaEquilibria/DualSpaces.lean": 84,
+    "ParetoOptimaEquilibria/DualLp.lean": 22,
+    "ParetoOptimaEquilibria/LinftyPrices.lean": 48,
+    "ParetoOptimaEquilibria/LinftyAssumptions.lean": 19,
+    "ParetoOptimaEquilibria/LinftyTimeState.lean": 21,
+    "ParetoOptimaEquilibria/SequencePrices.lean": 28,
+    "ParetoOptimaEquilibria/SequenceAssumptions.lean": 29,
+    "ParetoOptimaEquilibria/SequenceInfinity.lean": 17,
+    "ParetoOptimaEquilibria/SequenceSupport.lean": 11,
+    "ParetoOptimaEquilibria/SequenceTailUtility.lean": 14,
+    "ParetoOptimaEquilibria/WelfareExamples.lean": 7
+  },
+  "audited_declarations": 483,
+  "declarations": [
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.Feasible",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/Economy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.ParetoOptimal",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/Economy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.CompetitiveEq",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/Economy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.LocalNonsatiation",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/Economy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.aggTech",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/Economy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.Assumption15_1",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/Economy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.Assumption15_2",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/Economy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.Assumption15_3",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/Economy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.Assumption15_4",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/Economy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.Assumption15_5",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/Economy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.ce_cost_le_of_utility_le",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/Welfare.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.ce_cost_lt_of_utility_lt",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/Welfare.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.theorem_15_3",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/Welfare.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.quasiconcave_real_of_semistrict",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/Welfare.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.quasiconcave_of_assumptions",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/Welfare.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.convex_weaklyPreferred",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/Welfare.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.convex_strictlyPreferred",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/Welfare.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.convexCounterU",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/Welfare.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.assumption15_2_convex_counterexample",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/Welfare.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.closureCounterU",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/Welfare.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.continuity_closure_counterexample",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/Welfare.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.weaklyPreferred_subset_closure",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/Welfare.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.exists_dual_nonneg_of_zero_notMem",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/WelfareSecond.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.exists_separating_of_finiteDimensional",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/WelfareSecond.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.exists_separating_of_interior",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/WelfareSecond.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.exists_separating_of_assumption15_5",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/WelfareSecond.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.SupportsAllocation",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/WelfareSecond.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.preferredSum",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/WelfareSecond.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.convex_preferredSum",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/WelfareSecond.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.preferredSum_nonempty",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/WelfareSecond.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.preferredSum_disjoint",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/WelfareSecond.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.le_of_weaklyPreferred",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/WelfareSecond.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.theorem_15_4",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/WelfareSecond.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.remark_cheaper_point",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/WelfareSecond.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.exists_better_of_localNonsatiation",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/WelfareSecond.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.welfare_theorems_corrected",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/WelfareSecond.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.aggTech_of_unit",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/CommodityChoice.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.lpPosOrthant",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/CommodityChoice.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.ex_15_7a",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/CommodityChoice.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.ex_15_7b",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/CommodityChoice.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.ex158X",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/CommodityChoice.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.ex158Y",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/CommodityChoice.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.ex158U",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/CommodityChoice.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.bddBelow_range_lpInfty",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/CommodityChoice.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.ex158U_le",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/CommodityChoice.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.le_ex158U",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/CommodityChoice.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.ex158U_le_one",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/CommodityChoice.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.abs_ex158U_sub_le",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/CommodityChoice.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.half_mem_interior_ex158Y",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/CommodityChoice.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.ex_15_8",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/CommodityChoice.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.ex158x0",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/CommodityChoice.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.ex158x0_apply",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/CommodityChoice.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.ex158U_x0",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/CommodityChoice.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.ex158_paretoOptimal",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/CommodityChoice.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.ex158_nonsatiated",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/CommodityChoice.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.ex158_exists_price",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/CommodityChoice.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.ex158e",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/CommodityChoice.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.ex158e_apply",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/CommodityChoice.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.ex158x0_sub_single_apply",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/CommodityChoice.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.ex158_price_vanishes_single",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/CommodityChoice.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.ex158_no_inner_product",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/CommodityChoice.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.weightedDist",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/CommodityChoice.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.weightedDist_update",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/CommodityChoice.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.summable_weighted_update",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/CommodityChoice.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.ex_15_9",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/CommodityChoice.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.weighted_orthant_no_interior",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/CommodityChoice.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.weighted_no_interior_of_subset_orthant",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/CommodityChoice.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.hasSum_state_probabilities",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/CommodityChoice.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.SeqContAt",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.theorem_15_1a",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.continuous_iff_seqContAt",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.theorem_15_1b",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.dual_norm_eq",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.ex_15_1",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.intro_concavity_counterexample",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.example_15_1",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.ellInfSp",
+      "kind": "abbrev",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.ellOneSp",
+      "kind": "abbrev",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.ellTwoSp",
+      "kind": "abbrev",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.pairInfOne",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.pairOneInf",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.pairTwo",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.pairInfOne_apply",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.pairOneInf_apply",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.pairTwo_apply",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.norm_pairInfOne_le",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.norm_pairOneInf_le",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.norm_single_one",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.tsum_mul_single",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.norm_ellOneSp_eq_tsum",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.summable_abs_ellOneSp",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.summable_mul_of_one_inf",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.ex_15_3",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.ex_15_3_manual_counterexample",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.norm_pairInfOne",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.pairInfOne_surjective",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.dualEllOne",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.ex_15_2b",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.pairTwo_eq_toDual",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.norm_pairTwo",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.pairTwo_surjective",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.dualEllTwo",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.ex_15_2a",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.pairEllP",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.pairEllP_apply",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.norm_pairEllP_le",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.sum_rpow_le_of_dual_ellP",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.exists_preimage_pairEllP",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.norm_pairEllP",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.dualEllP",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.example_15_2",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.cZero",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.mem_cZero",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.isClosed_cZero",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.ex_15_4a",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.signTrunc",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.signTrunc_mem",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.norm_signTrunc_le",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.tsum_mul_signTrunc",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.pairOneCZero",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.pairOneCZero_apply",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.norm_pairOneCZero",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.unitCZero",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.tendsto_trunc_cZero",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.pairOneCZero_surjective",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.dualCZero",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.ex_15_4b",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.pairL1Linf",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.pairLinfL1",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.pairL1Linf_apply",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.pairLinfL1_apply",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.abs_pairL1Linf_le",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.abs_pairLinfL1_le",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.ex_15_5a",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.ex_15_5b",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.indicatorConstLp_one_eq_smul",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.pairLinfL1_indicator",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.pairLinfL1_injective",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.exists_preimage_pairLinfL1",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.norm_pairLinfL1",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.dualL1",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.l1_dual_sigmaFinite",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.infAtom",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.subsingleton_L1_infAtom",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.nontrivial_Linf_infAtom",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.l1_dual_counterexample",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.l1_dual_pairing_counterexample",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.positive_measure_counterexample",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.of_ae_of_atoms_pos",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.ae_norm_le_norm_Linf",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.memLp_ellInfSp",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.ellInfToLinf",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.coeFn_ellInfToLinf",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.norm_ellInfToLinf",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.ellInfToLinf_surjective",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.example_15_4_linf_nat",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.exists_const_between_of_le",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.theorem_15_2_interior",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.theorem_15_2_finiteDimensional",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.theorem_15_2",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.BookTheorem15_2",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.exists_lt_apply_of_ne_zero",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.theorem_15_2_counterexample",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.theorem_15_2_counterexample_finiteDimensional",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.ex_15_6",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.weightToEllOne",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.dist_weightToEllOne",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.weightToEllOne_surjective",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.ex156Box",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.weightToEllOne_mem_ex156Box_iff",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.convex_ex156Box",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.zero_mem_ex156Box",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.interior_ex156Box",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.ex_15_6_zero_notMem_interior",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.eq_zero_of_le_zero_on_ex156Box",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.ex_15_6_no_separation",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.indicatorConstLp_biUnion",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualLp.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.hasSum_indicatorConstLp",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualLp.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.dualSignedMeasure",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/DualLp.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.dualSignedMeasure_apply",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualLp.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.indicatorConstLp_eq_zero_of_null",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualLp.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.dualSignedMeasure_ac",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualLp.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.dualDensity",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/DualLp.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.integrable_dualDensity",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualLp.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.setIntegral_dualDensity",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualLp.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.indicatorConstLp_eq_smul",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualLp.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.dualDensity_simpleFunc",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualLp.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.signedApprox",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/DualLp.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.eapprox_le_self",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualLp.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.tendsto_eapprox_apply",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualLp.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.signedApprox_bounds",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualLp.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.tendsto_signedApprox",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualLp.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.le_rpow_of_le_mul_rpow",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualLp.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.eLpNorm_dualDensity_le",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualLp.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.pairLqLp",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/DualLp.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.pairLqLp_apply",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualLp.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.abs_pairLqLp_le",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualLp.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.pairLqLp_indicator",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualLp.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.pairLqLp_injective",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualLp.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.exists_preimage_pairLqLp",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualLp.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.norm_pairLqLp",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualLp.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.dualLp",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/DualLp.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.example_15_4",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/DualLp.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.ae_abs_le_norm_linfty",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/LinftyPrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.norm_linfty_le_of_ae_abs_le",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/LinftyPrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyRestrictFn",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/LinftyPrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.coeFn_linftyRestrictFn",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/LinftyPrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyRestrictLM",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/LinftyPrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.norm_linftyRestrictFn_le",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/LinftyPrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyRestrict",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/LinftyPrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyRestrict_apply",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/LinftyPrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyRestrict_of_not_measurable",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/LinftyPrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.coeFn_linftyRestrict",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/LinftyPrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.norm_linftyRestrict_le",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/LinftyPrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.opNorm_linftyRestrict_le",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/LinftyPrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyRestrict_linftyRestrict",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/LinftyPrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyRestrict_union",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/LinftyPrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyRestrict_univ",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/LinftyPrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyRestrict_of_null",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/LinftyPrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.norm_linftyRestrict_add_le",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/LinftyPrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyRestrictNorm",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/LinftyPrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyRestrictNorm_nonneg",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/LinftyPrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyRestrictNorm_le_norm",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/LinftyPrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.abs_apply_linftyRestrict_le",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/LinftyPrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyRestrictNorm_mono",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/LinftyPrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.linfty_exists_apply_eq_abs",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/LinftyPrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyRestrictNorm_add_le",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/LinftyPrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyTrunc",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/LinftyPrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyTailInf",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/LinftyPrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyTailInf_le",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/LinftyPrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyTailInf_nonneg",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/LinftyPrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyTailInf_le_norm",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/LinftyPrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyTailInf_mono",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/LinftyPrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyTailSup",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/LinftyPrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.bddAbove_linftyTailInf",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/LinftyPrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyTailInf_le_linftyTailSup",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/LinftyPrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.tendsto_linftyTailInf",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/LinftyPrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.IsLinftyTailSeq",
+      "kind": "structure",
+      "module": "ParetoOptimaEquilibria/LinftyPrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.IsLinftyTailSeq.mk",
+      "kind": "constructor",
+      "module": "ParetoOptimaEquilibria/LinftyPrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.IsLinftyTailSeq.measurableSet",
+      "kind": "projection",
+      "module": "ParetoOptimaEquilibria/LinftyPrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.IsLinftyTailSeq.antitone",
+      "kind": "projection",
+      "module": "ParetoOptimaEquilibria/LinftyPrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.IsLinftyTailSeq.measure_le",
+      "kind": "projection",
+      "module": "ParetoOptimaEquilibria/LinftyPrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.IsLinftyTailSeq.linftyRestrictNorm_le",
+      "kind": "projection",
+      "module": "ParetoOptimaEquilibria/LinftyPrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.exists_isLinftyTailSeq",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/LinftyPrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.IsLinftyTailSeq.tailInf_le_restrictNorm",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/LinftyPrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyTrunc_sub_linftyTrunc",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/LinftyPrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.IsLinftyTailSeq.abs_sub_le",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/LinftyPrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.IsLinftyTailSeq.cauchySeq",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/LinftyPrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyTruncLimit",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/LinftyPrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.IsLinftyTailSeq.tendsto",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/LinftyPrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.IsLinftyTailSeq.limitDual",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/LinftyPrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.IsLinftyTailSeq.limitDual_apply",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/LinftyPrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.IsLinftyTailSeq.norm_limitDual_le",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/LinftyPrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.IsLinftyTailSeq.abs_linftyTruncLimit_restrict_le",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/LinftyPrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.IsLinftyTailSeq.linftyTruncLimit_linftyTrunc",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/LinftyPrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.IsLinftyTailSeq.tendsto_linftyTruncLimit_restrict",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/LinftyPrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyOne",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/LinftyPrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.coeFn_linftyOne",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/LinftyPrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.norm_linftyOne_le",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/LinftyPrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.coeFn_linftyRestrict_one",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/LinftyPrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyRestrictNorm_sum_le",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/LinftyPrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyRestrict_sum",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/LinftyPrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.IsLinftyTailSeq.limitSignedMeasure",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/LinftyPrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.IsLinftyTailSeq.limitSignedMeasure_apply",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/LinftyPrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.IsLinftyTailSeq.limitSignedMeasure_absolutelyContinuous",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/LinftyPrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyL1Pairing",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/LinftyPrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyL1Pairing_apply",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/LinftyPrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.linfty_dual_eq_zero",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/LinftyPrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.lemma_15_7",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/LinftyPrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.LinftyNullSeq",
+      "kind": "structure",
+      "module": "ParetoOptimaEquilibria/LinftyAssumptions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.LinftyNullSeq.mk",
+      "kind": "constructor",
+      "module": "ParetoOptimaEquilibria/LinftyAssumptions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.LinftyNullSeq.measurableSet",
+      "kind": "projection",
+      "module": "ParetoOptimaEquilibria/LinftyAssumptions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.LinftyNullSeq.antitone",
+      "kind": "projection",
+      "module": "ParetoOptimaEquilibria/LinftyAssumptions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.LinftyNullSeq.tendsto_measure",
+      "kind": "projection",
+      "module": "ParetoOptimaEquilibria/LinftyAssumptions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.Assumption15_8",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/LinftyAssumptions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.Assumption15_9",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/LinftyAssumptions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.supportsAllocation_of_limit_bounds",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/LinftyAssumptions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.theorem_15_8",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/LinftyAssumptions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.theorem_15_8_inner_product",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/LinftyAssumptions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyExpectedUtility",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/LinftyAssumptions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.ae_abs_le_norm_linfty_of_ac",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/LinftyAssumptions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.exists_abs_le_of_continuous",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/LinftyAssumptions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.integrable_comp_linfty",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/LinftyAssumptions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.ex_15_12_continuous",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/LinftyAssumptions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.ex_15_12_tendsto",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/LinftyAssumptions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.ex_15_12_assumption15_9",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/LinftyAssumptions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.ex_15_12_assumption15_3",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/LinftyAssumptions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.ex_15_12_concave",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/LinftyAssumptions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.ex_15_12_assumption15_2",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/LinftyAssumptions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.ex_15_12",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/LinftyAssumptions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.finTwoUniform",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/LinftyAssumptions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.isProbabilityMeasure_finTwoUniform",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/LinftyAssumptions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.ae_finTwoUniform_iff",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/LinftyAssumptions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.finTwoUniform_expectedUtility",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/LinftyAssumptions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.memLp_finTwoUniform",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/LinftyAssumptions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.finTwoVec",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/LinftyAssumptions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.finTwoVec_apply",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/LinftyAssumptions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.ex_15_12_counterexample",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/LinftyAssumptions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.LinftyTimeState",
+      "kind": "abbrev",
+      "module": "ParetoOptimaEquilibria/LinftyTimeState.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.norm_linftyTimeState_apply_le",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/LinftyTimeState.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.norm_coord_le_of_opNorm_le",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/LinftyTimeState.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyCoordMap",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/LinftyTimeState.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyCoordMap_apply",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/LinftyTimeState.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.norm_linftyCoordMap_apply_le",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/LinftyTimeState.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyTimeTrunc",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/LinftyTimeState.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyTimeTrunc_apply",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/LinftyTimeState.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyEventTrunc",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/LinftyTimeState.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyEventTrunc_apply",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/LinftyTimeState.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyPeriodTrunc",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/LinftyTimeState.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyPeriodTrunc_apply_self",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/LinftyTimeState.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyPeriodTrunc_apply_of_ne",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/LinftyTimeState.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyTSSingle",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/LinftyTimeState.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyTSSingle_apply",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/LinftyTimeState.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyTSSingle_sum_apply",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/LinftyTimeState.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyCoordDual",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/LinftyTimeState.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyCoordDual_apply",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/LinftyTimeState.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.sum_abs_linftyCoordDual_le",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/LinftyTimeState.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.summable_abs_of_sum_le",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/LinftyTimeState.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.linftySumDual",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/LinftyTimeState.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.hasSum_linftySumDual",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/LinftyTimeState.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.norm_linftySumDual_le",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/LinftyTimeState.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.exists_linftyTimeState_decomposition",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/LinftyTimeState.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.Assumption15_6_timeState",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/LinftyTimeState.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.Assumption15_7_timeState",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/LinftyTimeState.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.Assumption15_8'",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/LinftyTimeState.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.Assumption15_9'",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/LinftyTimeState.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyPeriodTrunc_drop",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/LinftyTimeState.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyTimeTrunc_drop",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/LinftyTimeState.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyTS_consumer_bound",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/LinftyTimeState.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyTS_firm_bound",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/LinftyTimeState.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.theorem_15_9",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/LinftyTimeState.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.BddSeq",
+      "kind": "abbrev",
+      "module": "ParetoOptimaEquilibria/SequencePrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.norm_seq_coord_le",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequencePrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.BddSeq.mk",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/SequencePrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.BddSeq.mk_apply",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequencePrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.seq_sum_single_apply",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequencePrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.seqTruncFun",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/SequencePrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.norm_seqTruncFun_le",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequencePrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.seqTrunc",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/SequencePrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.seqTrunc_apply",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequencePrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.norm_seqTrunc_le",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequencePrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.seqTrunc_eq_sum_single",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequencePrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.seqTrunc_seqTrunc",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequencePrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.seqC00",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/SequencePrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.seqTrunc_mem_seqC00",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequencePrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.eventually_seqTrunc_eq_of_mem_seqC00",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequencePrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.coordFunctional",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/SequencePrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.coordFunctional_apply",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequencePrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.apply_seqTrunc_eq_sum",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequencePrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.sum_abs_coordFunctional_le",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequencePrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.summable_abs_coordFunctional",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequencePrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.summable_coordFunctional",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequencePrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.tsum_abs_coordFunctional_le",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequencePrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.seqRegularPartLinear",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/SequencePrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.abs_seqRegularPartLinear_le",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequencePrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.seqRegularPart",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/SequencePrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.seqRegularPart_apply",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequencePrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.hasSum_seqRegularPart",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequencePrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.tendsto_apply_seqTrunc",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequencePrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.norm_seqRegularPart_le",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequencePrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.seqRegularPart_eq_of_mem_seqC00",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequencePrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.seqRegularPart_seqTrunc",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequencePrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.seqRegularPart_seqRegularPart",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequencePrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.lemma_15_5",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequencePrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.oneSeq",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/SequencePrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.norm_oneSeq_le",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequencePrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.seqRegularPart_real",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequencePrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.seqRegularPart_euclid",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequencePrices.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.SeqSemistrictQC",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/SequenceAssumptions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.assumption15_2_iff_seq",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequenceAssumptions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.SeqSemistrictQC.of_concave",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequenceAssumptions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.SeqTruncClosed",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/SequenceAssumptions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.SeqTailInsensitive",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/SequenceAssumptions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.Assumption15_6",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/SequenceAssumptions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.Assumption15_7",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/SequenceAssumptions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.SeqTailInsensitive.eventually",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequenceAssumptions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.SeqTailInsensitive.of_liminf",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequenceAssumptions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.SeqTailInsensitive.of_tendsto",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequenceAssumptions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.seqSet",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/SequenceAssumptions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.seq_coord_combo",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequenceAssumptions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.convex_seqSet",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequenceAssumptions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.seqTrunc_mem_seqSet",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequenceAssumptions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.ex_15_10a",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequenceAssumptions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.discountedUtility",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/SequenceAssumptions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.norm_discounted_term_le",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequenceAssumptions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.summable_discounted",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequenceAssumptions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.tendsto_discountedUtility_seqTrunc",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequenceAssumptions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.ex_15_10b_tail",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequenceAssumptions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.continuous_seq_coord",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequenceAssumptions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.ex_15_10b_continuousOn",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequenceAssumptions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.discountedUtility_concave",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequenceAssumptions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.ex_15_10b",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequenceAssumptions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.discountedUtility_half_values",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequenceAssumptions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.ex_15_10b_counterexample",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequenceAssumptions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.seqShift",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/SequenceAssumptions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.seqShift_apply",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequenceAssumptions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.seqShift_seqTrunc_succ",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequenceAssumptions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.seqShift_mem_seqSet",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequenceAssumptions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.IsAggregator",
+      "kind": "structure",
+      "module": "ParetoOptimaEquilibria/SequenceAssumptions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.IsAggregator.mk",
+      "kind": "constructor",
+      "module": "ParetoOptimaEquilibria/SequenceAssumptions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.IsAggregator.beta_pos",
+      "kind": "projection",
+      "module": "ParetoOptimaEquilibria/SequenceAssumptions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.IsAggregator.beta_lt_one",
+      "kind": "projection",
+      "module": "ParetoOptimaEquilibria/SequenceAssumptions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.IsAggregator.continuousOn",
+      "kind": "projection",
+      "module": "ParetoOptimaEquilibria/SequenceAssumptions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.IsAggregator.zero",
+      "kind": "projection",
+      "module": "ParetoOptimaEquilibria/SequenceAssumptions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.IsAggregator.bounded",
+      "kind": "projection",
+      "module": "ParetoOptimaEquilibria/SequenceAssumptions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.IsAggregator.nonneg",
+      "kind": "projection",
+      "module": "ParetoOptimaEquilibria/SequenceAssumptions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.IsAggregator.lipschitz",
+      "kind": "projection",
+      "module": "ParetoOptimaEquilibria/SequenceAssumptions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.IsAggregatorFixedPoint",
+      "kind": "structure",
+      "module": "ParetoOptimaEquilibria/SequenceAssumptions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.IsAggregatorFixedPoint.mk",
+      "kind": "constructor",
+      "module": "ParetoOptimaEquilibria/SequenceAssumptions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.IsAggregatorFixedPoint.bounded",
+      "kind": "projection",
+      "module": "ParetoOptimaEquilibria/SequenceAssumptions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.IsAggregatorFixedPoint.continuousOn",
+      "kind": "projection",
+      "module": "ParetoOptimaEquilibria/SequenceAssumptions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.IsAggregatorFixedPoint.nonneg",
+      "kind": "projection",
+      "module": "ParetoOptimaEquilibria/SequenceAssumptions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.IsAggregatorFixedPoint.fixed",
+      "kind": "projection",
+      "module": "ParetoOptimaEquilibria/SequenceAssumptions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.aggregator_seqTrunc_bound",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequenceAssumptions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.ex_15_10c_tail",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequenceAssumptions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.seq_monotoneOn_of_concave_nonneg",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequenceAssumptions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.aggregator_monotone",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequenceAssumptions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.aggregator_concave_approx",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequenceAssumptions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.ex_15_10c",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequenceAssumptions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.ex_15_10c_counterexample",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequenceAssumptions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.summable_half_mul",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequenceInfinity.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.halfSumLinear",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/SequenceInfinity.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.norm_halfSumLinear_le",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequenceInfinity.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.halfSum",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/SequenceInfinity.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.halfSum_apply",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequenceInfinity.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.hasSum_halfSum",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequenceInfinity.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.halfSum_single",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequenceInfinity.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.tendsto_halfSum_seqTrunc",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequenceInfinity.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.tailDist",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/SequenceInfinity.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.seqC00_nonempty",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequenceInfinity.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.tailDist_nonneg",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequenceInfinity.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.tailDist_of_mem",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequenceInfinity.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.continuous_tailDist",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequenceInfinity.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.tailDist_convex",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequenceInfinity.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.eventually_norm_lt_tailDist_add",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequenceInfinity.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.tailDist_oneSeq",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequenceInfinity.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.norm_quotient_seqC00_mk",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequenceInfinity.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.exists_seq_functional_at_infinity",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequenceInfinity.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.seq_apply_nonpos_of_nonpos",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequenceInfinity.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.seqRegularPart_eq_zero_of_seqC00",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequenceInfinity.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.seq_tendsto_segment",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequenceSupport.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.seq_support_step1_consumer",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequenceSupport.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.seq_support_step1_firm",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequenceSupport.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.seq_support_step2",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequenceSupport.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.theorem_15_6",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequenceSupport.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.theorem_15_6_of_supporting",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequenceSupport.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.seq_budget_max_of_cheaper",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequenceSupport.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.theorem_15_6_competitiveEq",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequenceSupport.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.seqRegularPart_ne_zero_of_cheaper",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequenceSupport.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.halfSum_nonpos",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequenceSupport.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.theorem_15_6_counterexample",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequenceSupport.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.infUtility",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/SequenceTailUtility.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.ex_15_11a",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequenceTailUtility.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.ex_15_11b_if",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequenceTailUtility.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.ex_15_11b_liminf",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequenceTailUtility.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.tailPenalizedUtility",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/SequenceTailUtility.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.concave_halfSum_sub",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequenceTailUtility.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.ex_15_11b_counterexample",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequenceTailUtility.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.oddDrop",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/SequenceTailUtility.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.oddDrop_term_le_norm",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequenceTailUtility.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.oddDrop_bddAbove",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequenceTailUtility.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.oddDrop_term_le",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequenceTailUtility.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.oddDrop_nonneg",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequenceTailUtility.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.oddDrop_convex",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequenceTailUtility.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.continuous_oddDrop",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequenceTailUtility.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.oddDrop_seqTrunc_le",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequenceTailUtility.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.oddDrop_seqTrunc_one",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequenceTailUtility.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.oscillatingUtility",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/SequenceTailUtility.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.ex_15_11b_manual_counterexample",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/SequenceTailUtility.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.aggTech_singleton",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/WelfareExamples.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.fig153X",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/WelfareExamples.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.fig153U",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/WelfareExamples.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.fig153Y",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/WelfareExamples.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.fig153x",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/WelfareExamples.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.fig153y",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/WelfareExamples.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.fig153\u03c6",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/WelfareExamples.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.fig153_assumptions",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/WelfareExamples.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.fig153_paretoOptimal",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/WelfareExamples.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.fig153_supported",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/WelfareExamples.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.fig153_not_competitiveEq",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/WelfareExamples.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.paretoOptimal_not_ce_counterexample",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/WelfareExamples.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.satU",
+      "kind": "def",
+      "module": "ParetoOptimaEquilibria/WelfareExamples.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ParetoOptimaEquilibria.ce_not_paretoOptimal_counterexample",
+      "kind": "theorem",
+      "module": "ParetoOptimaEquilibria/WelfareExamples.lean"
+    }
+  ],
+  "full_build": "passed",
+  "fresh_source_compilation": "passed",
+  "fresh_source_lint_options": [
+    "-Dlinter.mathlibStandardSet=true",
+    "-Dlinter.style.header=false"
+  ],
+  "axioms": {
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.Feasible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.ParetoOptimal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.CompetitiveEq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.LocalNonsatiation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.aggTech": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.Assumption15_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.Assumption15_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.Assumption15_3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.Assumption15_4": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.Assumption15_5": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.ce_cost_le_of_utility_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.ce_cost_lt_of_utility_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.theorem_15_3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.quasiconcave_real_of_semistrict": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.quasiconcave_of_assumptions": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.convex_weaklyPreferred": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.convex_strictlyPreferred": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.convexCounterU": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.assumption15_2_convex_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.closureCounterU": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.continuity_closure_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.weaklyPreferred_subset_closure": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.exists_dual_nonneg_of_zero_notMem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.exists_separating_of_finiteDimensional": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.exists_separating_of_interior": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.exists_separating_of_assumption15_5": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.SupportsAllocation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.preferredSum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.convex_preferredSum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.preferredSum_nonempty": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.preferredSum_disjoint": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.le_of_weaklyPreferred": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.theorem_15_4": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.remark_cheaper_point": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.exists_better_of_localNonsatiation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.welfare_theorems_corrected": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.aggTech_of_unit": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.lpPosOrthant": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.ex_15_7a": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.ex_15_7b": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.ex158X": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.ex158Y": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.ex158U": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.bddBelow_range_lpInfty": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.ex158U_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.le_ex158U": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.ex158U_le_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.abs_ex158U_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.half_mem_interior_ex158Y": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.ex_15_8": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.ex158x0": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.ex158x0_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.ex158U_x0": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.ex158_paretoOptimal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.ex158_nonsatiated": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.ex158_exists_price": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.ex158e": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.ex158e_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.ex158x0_sub_single_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.ex158_price_vanishes_single": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.ex158_no_inner_product": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.weightedDist": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.weightedDist_update": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.summable_weighted_update": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.ex_15_9": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.weighted_orthant_no_interior": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.weighted_no_interior_of_subset_orthant": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.hasSum_state_probabilities": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.SeqContAt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.theorem_15_1a": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.continuous_iff_seqContAt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.theorem_15_1b": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.dual_norm_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.ex_15_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.intro_concavity_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.example_15_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.ellInfSp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.ellOneSp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.ellTwoSp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.pairInfOne": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.pairOneInf": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.pairTwo": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.pairInfOne_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.pairOneInf_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.pairTwo_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.norm_pairInfOne_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.norm_pairOneInf_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.norm_single_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.tsum_mul_single": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.norm_ellOneSp_eq_tsum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.summable_abs_ellOneSp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.summable_mul_of_one_inf": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.ex_15_3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.ex_15_3_manual_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.norm_pairInfOne": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.pairInfOne_surjective": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.dualEllOne": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.ex_15_2b": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.pairTwo_eq_toDual": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.norm_pairTwo": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.pairTwo_surjective": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.dualEllTwo": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.ex_15_2a": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.pairEllP": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.pairEllP_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.norm_pairEllP_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.sum_rpow_le_of_dual_ellP": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.exists_preimage_pairEllP": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.norm_pairEllP": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.dualEllP": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.example_15_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.cZero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.mem_cZero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.isClosed_cZero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.ex_15_4a": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.signTrunc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.signTrunc_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.norm_signTrunc_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.tsum_mul_signTrunc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.pairOneCZero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.pairOneCZero_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.norm_pairOneCZero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.unitCZero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.tendsto_trunc_cZero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.pairOneCZero_surjective": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.dualCZero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.ex_15_4b": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.pairL1Linf": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.pairLinfL1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.pairL1Linf_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.pairLinfL1_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.abs_pairL1Linf_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.abs_pairLinfL1_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.ex_15_5a": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.ex_15_5b": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.indicatorConstLp_one_eq_smul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.pairLinfL1_indicator": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.pairLinfL1_injective": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.exists_preimage_pairLinfL1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.norm_pairLinfL1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.dualL1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.l1_dual_sigmaFinite": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.infAtom": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.subsingleton_L1_infAtom": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.nontrivial_Linf_infAtom": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.l1_dual_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.l1_dual_pairing_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.positive_measure_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.of_ae_of_atoms_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.ae_norm_le_norm_Linf": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.memLp_ellInfSp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.ellInfToLinf": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.coeFn_ellInfToLinf": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.norm_ellInfToLinf": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.ellInfToLinf_surjective": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.example_15_4_linf_nat": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.exists_const_between_of_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.theorem_15_2_interior": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.theorem_15_2_finiteDimensional": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.theorem_15_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.BookTheorem15_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.exists_lt_apply_of_ne_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.theorem_15_2_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.theorem_15_2_counterexample_finiteDimensional": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.ex_15_6": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.weightToEllOne": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.dist_weightToEllOne": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.weightToEllOne_surjective": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.ex156Box": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.weightToEllOne_mem_ex156Box_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.convex_ex156Box": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.zero_mem_ex156Box": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.interior_ex156Box": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.ex_15_6_zero_notMem_interior": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.eq_zero_of_le_zero_on_ex156Box": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.ex_15_6_no_separation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.indicatorConstLp_biUnion": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.hasSum_indicatorConstLp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.dualSignedMeasure": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.dualSignedMeasure_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.indicatorConstLp_eq_zero_of_null": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.dualSignedMeasure_ac": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.dualDensity": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.integrable_dualDensity": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.setIntegral_dualDensity": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.indicatorConstLp_eq_smul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.dualDensity_simpleFunc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.signedApprox": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.eapprox_le_self": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.tendsto_eapprox_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.signedApprox_bounds": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.tendsto_signedApprox": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.le_rpow_of_le_mul_rpow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.eLpNorm_dualDensity_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.pairLqLp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.pairLqLp_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.abs_pairLqLp_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.pairLqLp_indicator": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.pairLqLp_injective": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.exists_preimage_pairLqLp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.norm_pairLqLp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.dualLp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.example_15_4": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.ae_abs_le_norm_linfty": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.norm_linfty_le_of_ae_abs_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyRestrictFn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.coeFn_linftyRestrictFn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyRestrictLM": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.norm_linftyRestrictFn_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyRestrict": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyRestrict_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyRestrict_of_not_measurable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.coeFn_linftyRestrict": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.norm_linftyRestrict_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.opNorm_linftyRestrict_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyRestrict_linftyRestrict": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyRestrict_union": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyRestrict_univ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyRestrict_of_null": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.norm_linftyRestrict_add_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyRestrictNorm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyRestrictNorm_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyRestrictNorm_le_norm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.abs_apply_linftyRestrict_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyRestrictNorm_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.linfty_exists_apply_eq_abs": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyRestrictNorm_add_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyTrunc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyTailInf": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyTailInf_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyTailInf_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyTailInf_le_norm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyTailInf_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyTailSup": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.bddAbove_linftyTailInf": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyTailInf_le_linftyTailSup": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.tendsto_linftyTailInf": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.IsLinftyTailSeq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.IsLinftyTailSeq.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.IsLinftyTailSeq.measurableSet": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.IsLinftyTailSeq.antitone": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.IsLinftyTailSeq.measure_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.IsLinftyTailSeq.linftyRestrictNorm_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.exists_isLinftyTailSeq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.IsLinftyTailSeq.tailInf_le_restrictNorm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyTrunc_sub_linftyTrunc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.IsLinftyTailSeq.abs_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.IsLinftyTailSeq.cauchySeq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyTruncLimit": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.IsLinftyTailSeq.tendsto": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.IsLinftyTailSeq.limitDual": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.IsLinftyTailSeq.limitDual_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.IsLinftyTailSeq.norm_limitDual_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.IsLinftyTailSeq.abs_linftyTruncLimit_restrict_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.IsLinftyTailSeq.linftyTruncLimit_linftyTrunc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.IsLinftyTailSeq.tendsto_linftyTruncLimit_restrict": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyOne": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.coeFn_linftyOne": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.norm_linftyOne_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.coeFn_linftyRestrict_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyRestrictNorm_sum_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyRestrict_sum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.IsLinftyTailSeq.limitSignedMeasure": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.IsLinftyTailSeq.limitSignedMeasure_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.IsLinftyTailSeq.limitSignedMeasure_absolutelyContinuous": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyL1Pairing": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyL1Pairing_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.linfty_dual_eq_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.lemma_15_7": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.LinftyNullSeq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.LinftyNullSeq.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.LinftyNullSeq.measurableSet": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.LinftyNullSeq.antitone": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.LinftyNullSeq.tendsto_measure": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.Assumption15_8": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.Assumption15_9": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.supportsAllocation_of_limit_bounds": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.theorem_15_8": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.theorem_15_8_inner_product": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyExpectedUtility": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.ae_abs_le_norm_linfty_of_ac": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.exists_abs_le_of_continuous": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.integrable_comp_linfty": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.ex_15_12_continuous": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.ex_15_12_tendsto": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.ex_15_12_assumption15_9": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.ex_15_12_assumption15_3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.ex_15_12_concave": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.ex_15_12_assumption15_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.ex_15_12": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.finTwoUniform": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.isProbabilityMeasure_finTwoUniform": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.ae_finTwoUniform_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.finTwoUniform_expectedUtility": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.memLp_finTwoUniform": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.finTwoVec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.finTwoVec_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.ex_15_12_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.LinftyTimeState": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.norm_linftyTimeState_apply_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.norm_coord_le_of_opNorm_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyCoordMap": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyCoordMap_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.norm_linftyCoordMap_apply_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyTimeTrunc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyTimeTrunc_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyEventTrunc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyEventTrunc_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyPeriodTrunc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyPeriodTrunc_apply_self": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyPeriodTrunc_apply_of_ne": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyTSSingle": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyTSSingle_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyTSSingle_sum_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyCoordDual": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyCoordDual_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.sum_abs_linftyCoordDual_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.summable_abs_of_sum_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.linftySumDual": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.hasSum_linftySumDual": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.norm_linftySumDual_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.exists_linftyTimeState_decomposition": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.Assumption15_6_timeState": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.Assumption15_7_timeState": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.Assumption15_8'": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.Assumption15_9'": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyPeriodTrunc_drop": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyTimeTrunc_drop": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyTS_consumer_bound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.linftyTS_firm_bound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.theorem_15_9": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.BddSeq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.norm_seq_coord_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.BddSeq.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.BddSeq.mk_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.seq_sum_single_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.seqTruncFun": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.norm_seqTruncFun_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.seqTrunc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.seqTrunc_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.norm_seqTrunc_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.seqTrunc_eq_sum_single": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.seqTrunc_seqTrunc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.seqC00": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.seqTrunc_mem_seqC00": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.eventually_seqTrunc_eq_of_mem_seqC00": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.coordFunctional": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.coordFunctional_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.apply_seqTrunc_eq_sum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.sum_abs_coordFunctional_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.summable_abs_coordFunctional": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.summable_coordFunctional": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.tsum_abs_coordFunctional_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.seqRegularPartLinear": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.abs_seqRegularPartLinear_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.seqRegularPart": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.seqRegularPart_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.hasSum_seqRegularPart": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.tendsto_apply_seqTrunc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.norm_seqRegularPart_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.seqRegularPart_eq_of_mem_seqC00": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.seqRegularPart_seqTrunc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.seqRegularPart_seqRegularPart": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.lemma_15_5": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.oneSeq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.norm_oneSeq_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.seqRegularPart_real": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.seqRegularPart_euclid": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.SeqSemistrictQC": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.assumption15_2_iff_seq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.SeqSemistrictQC.of_concave": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.SeqTruncClosed": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.SeqTailInsensitive": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.Assumption15_6": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.Assumption15_7": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.SeqTailInsensitive.eventually": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.SeqTailInsensitive.of_liminf": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.SeqTailInsensitive.of_tendsto": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.seqSet": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.seq_coord_combo": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.convex_seqSet": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.seqTrunc_mem_seqSet": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.ex_15_10a": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.discountedUtility": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.norm_discounted_term_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.summable_discounted": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.tendsto_discountedUtility_seqTrunc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.ex_15_10b_tail": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.continuous_seq_coord": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.ex_15_10b_continuousOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.discountedUtility_concave": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.ex_15_10b": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.discountedUtility_half_values": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.ex_15_10b_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.seqShift": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.seqShift_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.seqShift_seqTrunc_succ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.seqShift_mem_seqSet": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.IsAggregator": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.IsAggregator.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.IsAggregator.beta_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.IsAggregator.beta_lt_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.IsAggregator.continuousOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.IsAggregator.zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.IsAggregator.bounded": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.IsAggregator.nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.IsAggregator.lipschitz": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.IsAggregatorFixedPoint": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.IsAggregatorFixedPoint.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.IsAggregatorFixedPoint.bounded": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.IsAggregatorFixedPoint.continuousOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.IsAggregatorFixedPoint.nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.IsAggregatorFixedPoint.fixed": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.aggregator_seqTrunc_bound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.ex_15_10c_tail": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.seq_monotoneOn_of_concave_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.aggregator_monotone": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.aggregator_concave_approx": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.ex_15_10c": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.ex_15_10c_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.summable_half_mul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.halfSumLinear": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.norm_halfSumLinear_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.halfSum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.halfSum_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.hasSum_halfSum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.halfSum_single": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.tendsto_halfSum_seqTrunc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.tailDist": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.seqC00_nonempty": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.tailDist_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.tailDist_of_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.continuous_tailDist": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.tailDist_convex": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.eventually_norm_lt_tailDist_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.tailDist_oneSeq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.norm_quotient_seqC00_mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.exists_seq_functional_at_infinity": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.seq_apply_nonpos_of_nonpos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.seqRegularPart_eq_zero_of_seqC00": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.seq_tendsto_segment": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.seq_support_step1_consumer": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.seq_support_step1_firm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.seq_support_step2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.theorem_15_6": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.theorem_15_6_of_supporting": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.seq_budget_max_of_cheaper": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.theorem_15_6_competitiveEq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.seqRegularPart_ne_zero_of_cheaper": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.halfSum_nonpos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.theorem_15_6_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.infUtility": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.ex_15_11a": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.ex_15_11b_if": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.ex_15_11b_liminf": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.tailPenalizedUtility": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.concave_halfSum_sub": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.ex_15_11b_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.oddDrop": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.oddDrop_term_le_norm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.oddDrop_bddAbove": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.oddDrop_term_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.oddDrop_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.oddDrop_convex": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.continuous_oddDrop": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.oddDrop_seqTrunc_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.oddDrop_seqTrunc_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.oscillatingUtility": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.ex_15_11b_manual_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.aggTech_singleton": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.fig153X": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.fig153U": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.fig153Y": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.fig153x": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.fig153y": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.fig153\u03c6": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.fig153_assumptions": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.fig153_paretoOptimal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.fig153_supported": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.fig153_not_competitiveEq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.paretoOptimal_not_ce_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.satU": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ParetoOptimaEquilibria.ce_not_paretoOptimal_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  "source_sha256": {
+    "ParetoOptimaEquilibria/Economy.lean": "2a2e578dc4d394e6f1c644201386ea17b70d43abf2869c1f12cac4728c04db78",
+    "ParetoOptimaEquilibria/Welfare.lean": "b0543f5d7da8e5e86f94675d4ce87a27ed3a9fe6d5080256b4eb52f94ea49712",
+    "ParetoOptimaEquilibria/WelfareSecond.lean": "f1cb8192d44a2c0878564af2d662993c4de868180caac1a1a89d56688105a7b3",
+    "ParetoOptimaEquilibria/CommodityChoice.lean": "88703f969576c367cacd7ff36892789c9ea180e236f71368e01e47158c99b838",
+    "ParetoOptimaEquilibria/DualSpaces.lean": "48790567aba01c40329c981d6f634359aa4553342648e1143f08171604e4a14d",
+    "ParetoOptimaEquilibria/DualLp.lean": "954bcc9fc89228a3db6837d1afbcb83403825a8bada0fe42932f3109baafbaf6",
+    "ParetoOptimaEquilibria/LinftyPrices.lean": "1681f886d3456948d2d0743e3498b0489f5ebfc84e4115714ad818c2846d155a",
+    "ParetoOptimaEquilibria/LinftyAssumptions.lean": "203fa76ab16a9116640b763777191e14b000517974c2bc457dbe7122a62caa9e",
+    "ParetoOptimaEquilibria/LinftyTimeState.lean": "e941ce6e915a80c63a3e671ca80ceab1f683d916d86eedfc9ef61218a0295418",
+    "ParetoOptimaEquilibria/SequencePrices.lean": "b7c68cf5020fe3a3190e3628c5b3e082f6092ab1690e80d060c8a5b25b3cfdae",
+    "ParetoOptimaEquilibria/SequenceAssumptions.lean": "18305d16ed0524f18279f6589a268cbb4b2d46139212a0c47ccabb783cf75752",
+    "ParetoOptimaEquilibria/SequenceInfinity.lean": "417c1f7a8262ef2f2456da3679ce53419d81dacff4f7c146739c93b150543d8f",
+    "ParetoOptimaEquilibria/SequenceSupport.lean": "e26cea55e7cf5e3f9e5a7404ee68e3294bb376b4a961fa52ca63c1001bd34fef",
+    "ParetoOptimaEquilibria/SequenceTailUtility.lean": "5d79d702cd57fcdee4ff39f1881418c756d101669fbfb0c6c7cb197b6d80ff2e",
+    "ParetoOptimaEquilibria/WelfareExamples.lean": "ee265d7849a41e1494c773bf169c90ef38d4fa564d1707e781220e857b00a6c7",
+    "ParetoOptimaEquilibria.lean": "c265615e14b14a15333bd9360843ec84cb00a9493ed2b0bc5ca6bdc8e5e9814c",
+    "lean-toolchain": "8733782dc070a99b312039cda424f601b80f3be6f6f512627da5ba25adc27632",
+    "lakefile.toml": "51b60e77e59c528d17a91f51f01a647c23c040b4b438164acc8fe07774bc3edb",
+    "lake-manifest.json": "4797cd4734899c6799b31ccdf24a153707fcc34b282039f48ba65be90f807e1f",
+    "proof-manifest.json": "db767a57773c5662cd26b6f15201796d080c9bec0c8eda8fce1f925b86b52197",
+    "scripts/verify.py": "a70b1fa704dd590f937f8b37682afa88a9d85a9150065acb935c7d2c9589da3b",
+    "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  },
+  "fresh_audit_sha256": "6e17adb33694b693b018a6127fceaf4d319af3990b0850c7ba8aeb847582a19d",
+  "lean_toolchain": "leanprover/lean4:v4.34.0",
+  "scope": "SLP Chapter 15 (Pareto Optima and Competitive Equilibria): every numbered result and exercise, with corrections.",
+  "source": "Stokey, Lucas and Prescott (1989), Recursive Methods in Economic Dynamics, Chapter 15"
+}
