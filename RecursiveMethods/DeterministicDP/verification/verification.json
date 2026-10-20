@@ -1,0 +1,3391 @@
+{
+  "checked_at_utc": "2026-10-13T23:30:09.895900+00:00",
+  "theorems": 212,
+  "module_theorems": {
+    "DeterministicDP/ExtendedReals.lean": 9,
+    "DeterministicDP/Principle.lean": 20,
+    "DeterministicDP/Assumption42.lean": 13,
+    "DeterministicDP/ConsumptionExamples.lean": 15,
+    "DeterministicDP/Contraction.lean": 8,
+    "DeterministicDP/Correspondences.lean": 2,
+    "DeterministicDP/Maximum.lean": 14,
+    "DeterministicDP/BoundedReturns.lean": 15,
+    "DeterministicDP/Concavity.lean": 7,
+    "DeterministicDP/PolicyIteration.lean": 15,
+    "DeterministicDP/Envelope.lean": 2,
+    "DeterministicDP/InteriorPoints.lean": 3,
+    "DeterministicDP/ValueDifferentiability.lean": 6,
+    "DeterministicDP/ConstantReturns.lean": 10,
+    "DeterministicDP/ConstantReturnsDP.lean": 16,
+    "DeterministicDP/QuasiConcavity.lean": 4,
+    "DeterministicDP/CRSConcavity.lean": 3,
+    "DeterministicDP/UnboundedReturns.lean": 5,
+    "DeterministicDP/LogGrowth.lean": 13,
+    "DeterministicDP/QuadraticInvestment.lean": 14,
+    "DeterministicDP/EulerEquations.lean": 7,
+    "DeterministicDP/EulerExamples.lean": 11
+  },
+  "audited_declarations": 335,
+  "declarations": [
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.addIso",
+      "kind": "def",
+      "module": "DeterministicDP/ExtendedReals.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.addIso_apply",
+      "kind": "theorem",
+      "module": "DeterministicDP/ExtendedReals.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.mulIso",
+      "kind": "def",
+      "module": "DeterministicDP/ExtendedReals.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.mulIso_apply",
+      "kind": "theorem",
+      "module": "DeterministicDP/ExtendedReals.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.add_mul_biSup",
+      "kind": "theorem",
+      "module": "DeterministicDP/ExtendedReals.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.continuous_add_mul",
+      "kind": "theorem",
+      "module": "DeterministicDP/ExtendedReals.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.coe_mul_add",
+      "kind": "theorem",
+      "module": "DeterministicDP/ExtendedReals.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.le_of_le_add_limsup",
+      "kind": "theorem",
+      "module": "DeterministicDP/ExtendedReals.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.le_of_add_le_liminf",
+      "kind": "theorem",
+      "module": "DeterministicDP/ExtendedReals.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.le_of_forall_coe_lt_le",
+      "kind": "theorem",
+      "module": "DeterministicDP/ExtendedReals.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.eq_biSup_iff",
+      "kind": "theorem",
+      "module": "DeterministicDP/ExtendedReals.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.Feasible",
+      "kind": "def",
+      "module": "DeterministicDP/Principle.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.partialSum",
+      "kind": "def",
+      "module": "DeterministicDP/Principle.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.Assumption41",
+      "kind": "def",
+      "module": "DeterministicDP/Principle.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.Assumption42",
+      "kind": "def",
+      "module": "DeterministicDP/Principle.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.total",
+      "kind": "def",
+      "module": "DeterministicDP/Principle.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.vstar",
+      "kind": "def",
+      "module": "DeterministicDP/Principle.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.SatisfiesFE",
+      "kind": "def",
+      "module": "DeterministicDP/Principle.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.tendsto_total",
+      "kind": "theorem",
+      "module": "DeterministicDP/Principle.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.tail",
+      "kind": "def",
+      "module": "DeterministicDP/Principle.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.tail_mem",
+      "kind": "theorem",
+      "module": "DeterministicDP/Principle.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.tail_tail",
+      "kind": "theorem",
+      "module": "DeterministicDP/Principle.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.consPlan",
+      "kind": "def",
+      "module": "DeterministicDP/Principle.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.consPlan_mem",
+      "kind": "theorem",
+      "module": "DeterministicDP/Principle.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.tail_consPlan",
+      "kind": "theorem",
+      "module": "DeterministicDP/Principle.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.feasible_nonempty",
+      "kind": "theorem",
+      "module": "DeterministicDP/Principle.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.partialSum_succ",
+      "kind": "theorem",
+      "module": "DeterministicDP/Principle.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.partialSum_succ'",
+      "kind": "theorem",
+      "module": "DeterministicDP/Principle.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.lemma_4_1",
+      "kind": "theorem",
+      "module": "DeterministicDP/Principle.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.theorem_4_2",
+      "kind": "theorem",
+      "module": "DeterministicDP/Principle.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.total_le_of_FE",
+      "kind": "theorem",
+      "module": "DeterministicDP/Principle.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.div_lt_of_lt_add_mul",
+      "kind": "theorem",
+      "module": "DeterministicDP/Principle.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.ex_4_3a",
+      "kind": "theorem",
+      "module": "DeterministicDP/Principle.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.theorem_4_3",
+      "kind": "theorem",
+      "module": "DeterministicDP/Principle.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.ex_4_3b",
+      "kind": "theorem",
+      "module": "DeterministicDP/Principle.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.theorem_4_4",
+      "kind": "theorem",
+      "module": "DeterministicDP/Principle.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.theorem_4_4_beta_zero",
+      "kind": "theorem",
+      "module": "DeterministicDP/Principle.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.theorem_4_5",
+      "kind": "theorem",
+      "module": "DeterministicDP/Principle.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.Gstar",
+      "kind": "def",
+      "module": "DeterministicDP/Principle.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.optimal_generated_by_Gstar",
+      "kind": "theorem",
+      "module": "DeterministicDP/Principle.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.generated_by_Gstar_optimal",
+      "kind": "theorem",
+      "module": "DeterministicDP/Principle.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.tendsto_of_summable_pos",
+      "kind": "theorem",
+      "module": "DeterministicDP/Assumption42.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.tendsto_of_summable_neg",
+      "kind": "theorem",
+      "module": "DeterministicDP/Assumption42.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.assumption42_of_summable_pos",
+      "kind": "theorem",
+      "module": "DeterministicDP/Assumption42.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.assumption42_of_summable_neg",
+      "kind": "theorem",
+      "module": "DeterministicDP/Assumption42.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.summable_max_of_le_geometric",
+      "kind": "theorem",
+      "module": "DeterministicDP/Assumption42.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.assumption42_of_bddAbove",
+      "kind": "theorem",
+      "module": "DeterministicDP/Assumption42.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.assumption42_of_bddBelow",
+      "kind": "theorem",
+      "module": "DeterministicDP/Assumption42.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.assumption42_of_geometric",
+      "kind": "theorem",
+      "module": "DeterministicDP/Assumption42.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.Orthant",
+      "kind": "abbrev",
+      "module": "DeterministicDP/Assumption42.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.orthCombo",
+      "kind": "def",
+      "module": "DeterministicDP/Assumption42.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.orthZero",
+      "kind": "def",
+      "module": "DeterministicDP/Assumption42.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.orthOne",
+      "kind": "def",
+      "module": "DeterministicDP/Assumption42.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.norm_le_geometric",
+      "kind": "theorem",
+      "module": "DeterministicDP/Assumption42.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.ex_4_2a",
+      "kind": "theorem",
+      "module": "DeterministicDP/Assumption42.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.ex_4_2b",
+      "kind": "theorem",
+      "module": "DeterministicDP/Assumption42.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.ex_4_1a",
+      "kind": "theorem",
+      "module": "DeterministicDP/Assumption42.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.consSet",
+      "kind": "def",
+      "module": "DeterministicDP/Assumption42.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.ex_4_1b",
+      "kind": "theorem",
+      "module": "DeterministicDP/Assumption42.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.consF",
+      "kind": "def",
+      "module": "DeterministicDP/ConsumptionExamples.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.partialSum_consF",
+      "kind": "theorem",
+      "module": "DeterministicDP/ConsumptionExamples.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.monotone_partialSum_consF",
+      "kind": "theorem",
+      "module": "DeterministicDP/ConsumptionExamples.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.borrow\u0393",
+      "kind": "def",
+      "module": "DeterministicDP/ConsumptionExamples.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.borrow_assumption41",
+      "kind": "theorem",
+      "module": "DeterministicDP/ConsumptionExamples.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.borrow_assumption42",
+      "kind": "theorem",
+      "module": "DeterministicDP/ConsumptionExamples.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.borrow_vstar",
+      "kind": "theorem",
+      "module": "DeterministicDP/ConsumptionExamples.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.borrow_identity_FE",
+      "kind": "theorem",
+      "module": "DeterministicDP/ConsumptionExamples.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.borrow_identity_not_8",
+      "kind": "theorem",
+      "module": "DeterministicDP/ConsumptionExamples.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.NNR",
+      "kind": "abbrev",
+      "module": "DeterministicDP/ConsumptionExamples.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.save\u0393",
+      "kind": "def",
+      "module": "DeterministicDP/ConsumptionExamples.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.saveF",
+      "kind": "def",
+      "module": "DeterministicDP/ConsumptionExamples.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.save_partialSum",
+      "kind": "theorem",
+      "module": "DeterministicDP/ConsumptionExamples.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.save_assumption41",
+      "kind": "theorem",
+      "module": "DeterministicDP/ConsumptionExamples.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.save_assumption42",
+      "kind": "theorem",
+      "module": "DeterministicDP/ConsumptionExamples.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.save_vstar",
+      "kind": "theorem",
+      "module": "DeterministicDP/ConsumptionExamples.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.save_all_satisfy_9",
+      "kind": "theorem",
+      "module": "DeterministicDP/ConsumptionExamples.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.hoard",
+      "kind": "def",
+      "module": "DeterministicDP/ConsumptionExamples.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.hoard_mem",
+      "kind": "theorem",
+      "module": "DeterministicDP/ConsumptionExamples.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.save_hoard_total",
+      "kind": "theorem",
+      "module": "DeterministicDP/ConsumptionExamples.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.save_hoard_not_11",
+      "kind": "theorem",
+      "module": "DeterministicDP/ConsumptionExamples.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.IsContraction",
+      "kind": "def",
+      "module": "DeterministicDP/Contraction.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.IsContraction.uniformContinuous",
+      "kind": "theorem",
+      "module": "DeterministicDP/Contraction.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.dist_iterate_succ_le",
+      "kind": "theorem",
+      "module": "DeterministicDP/Contraction.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.dist_iterate_le",
+      "kind": "theorem",
+      "module": "DeterministicDP/Contraction.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.cauchySeq_iterate",
+      "kind": "theorem",
+      "module": "DeterministicDP/Contraction.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.theorem_3_2",
+      "kind": "theorem",
+      "module": "DeterministicDP/Contraction.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.dist_fixedPoint_le",
+      "kind": "theorem",
+      "module": "DeterministicDP/Contraction.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.corollary_1",
+      "kind": "theorem",
+      "module": "DeterministicDP/Contraction.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.corollary_2",
+      "kind": "theorem",
+      "module": "DeterministicDP/Contraction.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.IsLHC",
+      "kind": "def",
+      "module": "DeterministicDP/Correspondences.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.IsUHC",
+      "kind": "def",
+      "module": "DeterministicDP/Correspondences.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.graph",
+      "kind": "def",
+      "module": "DeterministicDP/Correspondences.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.continuousAt_of_isUHC_singleton",
+      "kind": "theorem",
+      "module": "DeterministicDP/Correspondences.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.isCompact_graph",
+      "kind": "theorem",
+      "module": "DeterministicDP/Correspondences.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.maxValue",
+      "kind": "def",
+      "module": "DeterministicDP/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.argmax",
+      "kind": "def",
+      "module": "DeterministicDP/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.continuousOn_section",
+      "kind": "theorem",
+      "module": "DeterministicDP/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.exists_argmax",
+      "kind": "theorem",
+      "module": "DeterministicDP/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.le_maxValue",
+      "kind": "theorem",
+      "module": "DeterministicDP/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.tendsto_f_graph",
+      "kind": "theorem",
+      "module": "DeterministicDP/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.theorem_3_6",
+      "kind": "theorem",
+      "module": "DeterministicDP/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.UniqueArgmax",
+      "kind": "structure",
+      "module": "DeterministicDP/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.UniqueArgmax.mk",
+      "kind": "constructor",
+      "module": "DeterministicDP/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.UniqueArgmax.nonempty",
+      "kind": "projection",
+      "module": "DeterministicDP/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.UniqueArgmax.compact",
+      "kind": "projection",
+      "module": "DeterministicDP/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.UniqueArgmax.lhc",
+      "kind": "projection",
+      "module": "DeterministicDP/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.UniqueArgmax.uhc",
+      "kind": "projection",
+      "module": "DeterministicDP/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.UniqueArgmax.cont",
+      "kind": "projection",
+      "module": "DeterministicDP/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.UniqueArgmax.unique",
+      "kind": "projection",
+      "module": "DeterministicDP/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.argmaxFn",
+      "kind": "def",
+      "module": "DeterministicDP/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.UniqueArgmax.argmaxFn_mem",
+      "kind": "theorem",
+      "module": "DeterministicDP/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.UniqueArgmax.argmax_eq",
+      "kind": "theorem",
+      "module": "DeterministicDP/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.UniqueArgmax.lt_of_ne",
+      "kind": "theorem",
+      "module": "DeterministicDP/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.UniqueArgmax.continuous_argmaxFn",
+      "kind": "theorem",
+      "module": "DeterministicDP/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.UniqueArgmax.lemma_3_7",
+      "kind": "theorem",
+      "module": "DeterministicDP/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.UniqueArgmax.lemma_3_7_uniform",
+      "kind": "theorem",
+      "module": "DeterministicDP/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.shortfall_lt",
+      "kind": "theorem",
+      "module": "DeterministicDP/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.theorem_3_8",
+      "kind": "theorem",
+      "module": "DeterministicDP/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.theorem_3_8_uniform",
+      "kind": "theorem",
+      "module": "DeterministicDP/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.Assumption43",
+      "kind": "structure",
+      "module": "DeterministicDP/BoundedReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.Assumption43.mk",
+      "kind": "constructor",
+      "module": "DeterministicDP/BoundedReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.Assumption43.nonempty",
+      "kind": "projection",
+      "module": "DeterministicDP/BoundedReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.Assumption43.compact",
+      "kind": "projection",
+      "module": "DeterministicDP/BoundedReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.Assumption43.lhc",
+      "kind": "projection",
+      "module": "DeterministicDP/BoundedReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.Assumption43.uhc",
+      "kind": "projection",
+      "module": "DeterministicDP/BoundedReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.Assumption44",
+      "kind": "structure",
+      "module": "DeterministicDP/BoundedReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.Assumption44.mk",
+      "kind": "constructor",
+      "module": "DeterministicDP/BoundedReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.Assumption44.cont",
+      "kind": "projection",
+      "module": "DeterministicDP/BoundedReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.Assumption44.bdd",
+      "kind": "projection",
+      "module": "DeterministicDP/BoundedReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.Assumption44.\u03b2_pos",
+      "kind": "projection",
+      "module": "DeterministicDP/BoundedReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.Assumption44.\u03b2_lt",
+      "kind": "projection",
+      "module": "DeterministicDP/BoundedReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.obj",
+      "kind": "def",
+      "module": "DeterministicDP/BoundedReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.continuousOn_obj",
+      "kind": "theorem",
+      "module": "DeterministicDP/BoundedReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.bound_maxValue",
+      "kind": "theorem",
+      "module": "DeterministicDP/BoundedReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.bellman",
+      "kind": "def",
+      "module": "DeterministicDP/BoundedReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.bellman_apply",
+      "kind": "theorem",
+      "module": "DeterministicDP/BoundedReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.exists_bellman_argmax",
+      "kind": "theorem",
+      "module": "DeterministicDP/BoundedReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.bellman_mono",
+      "kind": "theorem",
+      "module": "DeterministicDP/BoundedReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.bellman_add_const",
+      "kind": "theorem",
+      "module": "DeterministicDP/BoundedReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.blackwell",
+      "kind": "theorem",
+      "module": "DeterministicDP/BoundedReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.bellman_contraction",
+      "kind": "theorem",
+      "module": "DeterministicDP/BoundedReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.theorem_4_6",
+      "kind": "theorem",
+      "module": "DeterministicDP/BoundedReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.curryF",
+      "kind": "def",
+      "module": "DeterministicDP/BoundedReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.assumption42_of_44",
+      "kind": "theorem",
+      "module": "DeterministicDP/BoundedReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.satisfiesFE_of_fixed",
+      "kind": "theorem",
+      "module": "DeterministicDP/BoundedReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.tendsto_bounded_discount",
+      "kind": "theorem",
+      "module": "DeterministicDP/BoundedReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.fixedPoint_eq_vstar",
+      "kind": "theorem",
+      "module": "DeterministicDP/BoundedReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.policy_plan_optimal",
+      "kind": "theorem",
+      "module": "DeterministicDP/BoundedReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.theorem_4_7",
+      "kind": "theorem",
+      "module": "DeterministicDP/BoundedReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.cmb",
+      "kind": "def",
+      "module": "DeterministicDP/Concavity.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.cmb_self",
+      "kind": "theorem",
+      "module": "DeterministicDP/Concavity.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.IsConcaveS",
+      "kind": "def",
+      "module": "DeterministicDP/Concavity.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.IsStrictConcaveS",
+      "kind": "def",
+      "module": "DeterministicDP/Concavity.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.Assumption47",
+      "kind": "def",
+      "module": "DeterministicDP/Concavity.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.Assumption48",
+      "kind": "def",
+      "module": "DeterministicDP/Concavity.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.isClosed_concave",
+      "kind": "theorem",
+      "module": "DeterministicDP/Concavity.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.bellman_maps_concave",
+      "kind": "theorem",
+      "module": "DeterministicDP/Concavity.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.bellman_concave",
+      "kind": "theorem",
+      "module": "DeterministicDP/Concavity.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.argmax_unique_of_strictConcave",
+      "kind": "theorem",
+      "module": "DeterministicDP/Concavity.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.theorem_4_8",
+      "kind": "theorem",
+      "module": "DeterministicDP/Concavity.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.theorem_4_9",
+      "kind": "theorem",
+      "module": "DeterministicDP/Concavity.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.DiscreteSetup",
+      "kind": "structure",
+      "module": "DeterministicDP/PolicyIteration.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.DiscreteSetup.mk",
+      "kind": "constructor",
+      "module": "DeterministicDP/PolicyIteration.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.DiscreteSetup.nonempty",
+      "kind": "projection",
+      "module": "DeterministicDP/PolicyIteration.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.DiscreteSetup.finite",
+      "kind": "projection",
+      "module": "DeterministicDP/PolicyIteration.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.DiscreteSetup.bdd",
+      "kind": "projection",
+      "module": "DeterministicDP/PolicyIteration.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.DiscreteSetup.\u03b2_pos",
+      "kind": "projection",
+      "module": "DeterministicDP/PolicyIteration.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.DiscreteSetup.\u03b2_lt",
+      "kind": "projection",
+      "module": "DeterministicDP/PolicyIteration.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.maxD",
+      "kind": "def",
+      "module": "DeterministicDP/PolicyIteration.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.exists_maxD",
+      "kind": "theorem",
+      "module": "DeterministicDP/PolicyIteration.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.le_maxD",
+      "kind": "theorem",
+      "module": "DeterministicDP/PolicyIteration.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.bellmanD",
+      "kind": "def",
+      "module": "DeterministicDP/PolicyIteration.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.bellmanD_apply",
+      "kind": "theorem",
+      "module": "DeterministicDP/PolicyIteration.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.bellmanD_mono",
+      "kind": "theorem",
+      "module": "DeterministicDP/PolicyIteration.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.bellmanD_add_const",
+      "kind": "theorem",
+      "module": "DeterministicDP/PolicyIteration.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.bellmanD_contraction",
+      "kind": "theorem",
+      "module": "DeterministicDP/PolicyIteration.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.ex_4_4a",
+      "kind": "theorem",
+      "module": "DeterministicDP/PolicyIteration.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.policyOp",
+      "kind": "def",
+      "module": "DeterministicDP/PolicyIteration.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.policyOp_apply",
+      "kind": "theorem",
+      "module": "DeterministicDP/PolicyIteration.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.policyOp_mono",
+      "kind": "theorem",
+      "module": "DeterministicDP/PolicyIteration.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.policyOp_contraction",
+      "kind": "theorem",
+      "module": "DeterministicDP/PolicyIteration.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.ex_4_4b",
+      "kind": "theorem",
+      "module": "DeterministicDP/PolicyIteration.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.policyOp_le_bellmanD",
+      "kind": "theorem",
+      "module": "DeterministicDP/PolicyIteration.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.isClosed_ge",
+      "kind": "theorem",
+      "module": "DeterministicDP/PolicyIteration.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.isClosed_le'",
+      "kind": "theorem",
+      "module": "DeterministicDP/PolicyIteration.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.ex_4_4c",
+      "kind": "theorem",
+      "module": "DeterministicDP/PolicyIteration.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.theorem_4_10",
+      "kind": "theorem",
+      "module": "DeterministicDP/Envelope.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.ex_4_5",
+      "kind": "theorem",
+      "module": "DeterministicDP/Envelope.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.dual_apply_eq_sum",
+      "kind": "theorem",
+      "module": "DeterministicDP/InteriorPoints.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.vertex",
+      "kind": "def",
+      "module": "DeterministicDP/InteriorPoints.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.no_separation",
+      "kind": "theorem",
+      "module": "DeterministicDP/InteriorPoints.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.eventually_mem_of_mem_interior",
+      "kind": "theorem",
+      "module": "DeterministicDP/InteriorPoints.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.liftS",
+      "kind": "def",
+      "module": "DeterministicDP/ValueDifferentiability.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.liftS_of_mem",
+      "kind": "theorem",
+      "module": "DeterministicDP/ValueDifferentiability.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.IsStrictConcaveS.isConcaveS",
+      "kind": "theorem",
+      "module": "DeterministicDP/ValueDifferentiability.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.concaveOn_liftS",
+      "kind": "theorem",
+      "module": "DeterministicDP/ValueDifferentiability.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.convex_image_\u0393",
+      "kind": "theorem",
+      "module": "DeterministicDP/ValueDifferentiability.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.eventually_mem_\u0393",
+      "kind": "theorem",
+      "module": "DeterministicDP/ValueDifferentiability.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.theorem_4_11",
+      "kind": "theorem",
+      "module": "DeterministicDP/ValueDifferentiability.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.IsCone",
+      "kind": "def",
+      "module": "DeterministicDP/ConstantReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.csmul",
+      "kind": "def",
+      "module": "DeterministicDP/ConstantReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.InH",
+      "kind": "def",
+      "module": "DeterministicDP/ConstantReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.hnorm",
+      "kind": "def",
+      "module": "DeterministicDP/ConstantReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.hnorm_nonneg",
+      "kind": "theorem",
+      "module": "DeterministicDP/ConstantReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.bddAbove_sphere",
+      "kind": "theorem",
+      "module": "DeterministicDP/ConstantReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.abs_le_hnorm",
+      "kind": "theorem",
+      "module": "DeterministicDP/ConstantReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.hnorm_le",
+      "kind": "theorem",
+      "module": "DeterministicDP/ConstantReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.inH_sub",
+      "kind": "theorem",
+      "module": "DeterministicDP/ConstantReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.inH_add",
+      "kind": "theorem",
+      "module": "DeterministicDP/ConstantReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.inH_smul",
+      "kind": "theorem",
+      "module": "DeterministicDP/ConstantReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.ex_4_7a_norm",
+      "kind": "theorem",
+      "module": "DeterministicDP/ConstantReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.ex_4_7a_complete",
+      "kind": "theorem",
+      "module": "DeterministicDP/ConstantReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.theorem_4_12",
+      "kind": "theorem",
+      "module": "DeterministicDP/ConstantReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.Assumption410",
+      "kind": "structure",
+      "module": "DeterministicDP/ConstantReturnsDP.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.Assumption410.mk",
+      "kind": "constructor",
+      "module": "DeterministicDP/ConstantReturnsDP.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.Assumption410.convex",
+      "kind": "projection",
+      "module": "DeterministicDP/ConstantReturnsDP.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.Assumption410.nonempty",
+      "kind": "projection",
+      "module": "DeterministicDP/ConstantReturnsDP.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.Assumption410.compact",
+      "kind": "projection",
+      "module": "DeterministicDP/ConstantReturnsDP.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.Assumption410.lhc",
+      "kind": "projection",
+      "module": "DeterministicDP/ConstantReturnsDP.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.Assumption410.uhc",
+      "kind": "projection",
+      "module": "DeterministicDP/ConstantReturnsDP.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.Assumption410.cone",
+      "kind": "projection",
+      "module": "DeterministicDP/ConstantReturnsDP.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.Assumption410.\u03b1_pos",
+      "kind": "projection",
+      "module": "DeterministicDP/ConstantReturnsDP.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.Assumption410.\u03b1\u03b2_lt",
+      "kind": "projection",
+      "module": "DeterministicDP/ConstantReturnsDP.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.Assumption410.growth",
+      "kind": "projection",
+      "module": "DeterministicDP/ConstantReturnsDP.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.Assumption411",
+      "kind": "structure",
+      "module": "DeterministicDP/ConstantReturnsDP.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.Assumption411.mk",
+      "kind": "constructor",
+      "module": "DeterministicDP/ConstantReturnsDP.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.Assumption411.\u03b2_pos",
+      "kind": "projection",
+      "module": "DeterministicDP/ConstantReturnsDP.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.Assumption411.\u03b2_lt",
+      "kind": "projection",
+      "module": "DeterministicDP/ConstantReturnsDP.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.Assumption411.cont",
+      "kind": "projection",
+      "module": "DeterministicDP/ConstantReturnsDP.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.Assumption411.hom",
+      "kind": "projection",
+      "module": "DeterministicDP/ConstantReturnsDP.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.Assumption411.B_pos",
+      "kind": "projection",
+      "module": "DeterministicDP/ConstantReturnsDP.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.Assumption411.bdd",
+      "kind": "projection",
+      "module": "DeterministicDP/ConstantReturnsDP.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.ex_4_6a",
+      "kind": "theorem",
+      "module": "DeterministicDP/ConstantReturnsDP.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.abs_term_le",
+      "kind": "theorem",
+      "module": "DeterministicDP/ConstantReturnsDP.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.ex_4_6b",
+      "kind": "theorem",
+      "module": "DeterministicDP/ConstantReturnsDP.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.ex_4_6c",
+      "kind": "theorem",
+      "module": "DeterministicDP/ConstantReturnsDP.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.crs",
+      "kind": "def",
+      "module": "DeterministicDP/ConstantReturnsDP.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.continuousOn_obj'",
+      "kind": "theorem",
+      "module": "DeterministicDP/ConstantReturnsDP.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.exists_crs_argmax",
+      "kind": "theorem",
+      "module": "DeterministicDP/ConstantReturnsDP.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.eq_zero_of_mem_zero",
+      "kind": "theorem",
+      "module": "DeterministicDP/ConstantReturnsDP.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.ex_4_7b",
+      "kind": "theorem",
+      "module": "DeterministicDP/ConstantReturnsDP.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.crs_mono",
+      "kind": "theorem",
+      "module": "DeterministicDP/ConstantReturnsDP.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.crs_disc",
+      "kind": "theorem",
+      "module": "DeterministicDP/ConstantReturnsDP.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.crs_contraction",
+      "kind": "theorem",
+      "module": "DeterministicDP/ConstantReturnsDP.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.hnorm_sub_le",
+      "kind": "theorem",
+      "module": "DeterministicDP/ConstantReturnsDP.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.theorem_4_13",
+      "kind": "theorem",
+      "module": "DeterministicDP/ConstantReturnsDP.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.satisfiesFE_crs",
+      "kind": "theorem",
+      "module": "DeterministicDP/ConstantReturnsDP.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.crs_fixed_eq_vstar",
+      "kind": "theorem",
+      "module": "DeterministicDP/ConstantReturnsDP.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.ex_4_6c_hom",
+      "kind": "theorem",
+      "module": "DeterministicDP/ConstantReturnsDP.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.IsQuasiConcaveS",
+      "kind": "def",
+      "module": "DeterministicDP/QuasiConcavity.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.IsStrictQuasiConcaveS",
+      "kind": "def",
+      "module": "DeterministicDP/QuasiConcavity.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.cmb_eq_csmul_cmb",
+      "kind": "theorem",
+      "module": "DeterministicDP/QuasiConcavity.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.ex_4_8a",
+      "kind": "theorem",
+      "module": "DeterministicDP/QuasiConcavity.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.ex_4_8a_counterexample",
+      "kind": "theorem",
+      "module": "DeterministicDP/QuasiConcavity.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.ex_4_8b",
+      "kind": "theorem",
+      "module": "DeterministicDP/QuasiConcavity.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.NonProp",
+      "kind": "def",
+      "module": "DeterministicDP/CRSConcavity.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.ConcaveGraph",
+      "kind": "def",
+      "module": "DeterministicDP/CRSConcavity.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.crs_concave",
+      "kind": "theorem",
+      "module": "DeterministicDP/CRSConcavity.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.ex_4_8c",
+      "kind": "theorem",
+      "module": "DeterministicDP/CRSConcavity.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.ex_4_8d",
+      "kind": "theorem",
+      "module": "DeterministicDP/CRSConcavity.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.opT",
+      "kind": "def",
+      "module": "DeterministicDP/UnboundedReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.satisfiesFE_iff_opT",
+      "kind": "theorem",
+      "module": "DeterministicDP/UnboundedReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.opT_mono",
+      "kind": "theorem",
+      "module": "DeterministicDP/UnboundedReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.iterate_antitone",
+      "kind": "theorem",
+      "module": "DeterministicDP/UnboundedReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.limitFn",
+      "kind": "def",
+      "module": "DeterministicDP/UnboundedReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.tendsto_iterate",
+      "kind": "theorem",
+      "module": "DeterministicDP/UnboundedReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.theorem_4_14",
+      "kind": "theorem",
+      "module": "DeterministicDP/UnboundedReturns.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.PosR",
+      "kind": "abbrev",
+      "module": "DeterministicDP/LogGrowth.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.log\u0393",
+      "kind": "def",
+      "module": "DeterministicDP/LogGrowth.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.logF",
+      "kind": "def",
+      "module": "DeterministicDP/LogGrowth.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.coefB",
+      "kind": "def",
+      "module": "DeterministicDP/LogGrowth.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.coefC",
+      "kind": "def",
+      "module": "DeterministicDP/LogGrowth.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.affineLog",
+      "kind": "def",
+      "module": "DeterministicDP/LogGrowth.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.logPolicy",
+      "kind": "def",
+      "module": "DeterministicDP/LogGrowth.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.\u03b1\u03b2_lt_one",
+      "kind": "theorem",
+      "module": "DeterministicDP/LogGrowth.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.coefB_pos",
+      "kind": "theorem",
+      "module": "DeterministicDP/LogGrowth.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.coefC_neg",
+      "kind": "theorem",
+      "module": "DeterministicDP/LogGrowth.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.logPolicy_mem",
+      "kind": "theorem",
+      "module": "DeterministicDP/LogGrowth.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.log_objective_le",
+      "kind": "theorem",
+      "module": "DeterministicDP/LogGrowth.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.log_opT_affine",
+      "kind": "theorem",
+      "module": "DeterministicDP/LogGrowth.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.log_iterate",
+      "kind": "theorem",
+      "module": "DeterministicDP/LogGrowth.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.log_assumption41",
+      "kind": "theorem",
+      "module": "DeterministicDP/LogGrowth.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.log_capital_le",
+      "kind": "theorem",
+      "module": "DeterministicDP/LogGrowth.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.logF_le",
+      "kind": "theorem",
+      "module": "DeterministicDP/LogGrowth.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.log_assumption42",
+      "kind": "theorem",
+      "module": "DeterministicDP/LogGrowth.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.log_vstar",
+      "kind": "theorem",
+      "module": "DeterministicDP/LogGrowth.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.log_policy_optimal",
+      "kind": "theorem",
+      "module": "DeterministicDP/LogGrowth.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.tendsto_zero_of_le_contract",
+      "kind": "theorem",
+      "module": "DeterministicDP/QuadraticInvestment.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.tendsto_linear_recursion",
+      "kind": "theorem",
+      "module": "DeterministicDP/QuadraticInvestment.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.quadF",
+      "kind": "def",
+      "module": "DeterministicDP/QuadraticInvestment.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.quad\u0393",
+      "kind": "def",
+      "module": "DeterministicDP/QuadraticInvestment.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.quadFn",
+      "kind": "def",
+      "module": "DeterministicDP/QuadraticInvestment.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.nextQ",
+      "kind": "def",
+      "module": "DeterministicDP/QuadraticInvestment.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.nextP",
+      "kind": "def",
+      "module": "DeterministicDP/QuadraticInvestment.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.nextR",
+      "kind": "def",
+      "module": "DeterministicDP/QuadraticInvestment.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.quad_objective",
+      "kind": "theorem",
+      "module": "DeterministicDP/QuadraticInvestment.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.quad_opT",
+      "kind": "theorem",
+      "module": "DeterministicDP/QuadraticInvestment.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.quadF_le",
+      "kind": "theorem",
+      "module": "DeterministicDP/QuadraticInvestment.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.qs",
+      "kind": "def",
+      "module": "DeterministicDP/QuadraticInvestment.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.ps",
+      "kind": "def",
+      "module": "DeterministicDP/QuadraticInvestment.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.rs",
+      "kind": "def",
+      "module": "DeterministicDP/QuadraticInvestment.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.qs_nonneg",
+      "kind": "theorem",
+      "module": "DeterministicDP/QuadraticInvestment.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.nextQ_mono",
+      "kind": "theorem",
+      "module": "DeterministicDP/QuadraticInvestment.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.nextQ_lt",
+      "kind": "theorem",
+      "module": "DeterministicDP/QuadraticInvestment.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.qs_mono",
+      "kind": "theorem",
+      "module": "DeterministicDP/QuadraticInvestment.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.tendsto_qs",
+      "kind": "theorem",
+      "module": "DeterministicDP/QuadraticInvestment.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.quad_iterate",
+      "kind": "theorem",
+      "module": "DeterministicDP/QuadraticInvestment.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.tendsto_ps_rs",
+      "kind": "theorem",
+      "module": "DeterministicDP/QuadraticInvestment.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.quad_vstar",
+      "kind": "theorem",
+      "module": "DeterministicDP/QuadraticInvestment.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.quad_policy_optimal",
+      "kind": "theorem",
+      "module": "DeterministicDP/QuadraticInvestment.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.concave_le_fderiv",
+      "kind": "theorem",
+      "module": "DeterministicDP/EulerEquations.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.Fx",
+      "kind": "def",
+      "module": "DeterministicDP/EulerEquations.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.Fy",
+      "kind": "def",
+      "module": "DeterministicDP/EulerEquations.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.apply_eq_Fx_add_Fy",
+      "kind": "theorem",
+      "module": "DeterministicDP/EulerEquations.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.euler_telescope",
+      "kind": "theorem",
+      "module": "DeterministicDP/EulerEquations.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.le_of_le_add_tendsto_zero",
+      "kind": "theorem",
+      "module": "DeterministicDP/EulerEquations.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.euler_sufficient",
+      "kind": "theorem",
+      "module": "DeterministicDP/EulerEquations.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.theorem_4_15",
+      "kind": "theorem",
+      "module": "DeterministicDP/EulerEquations.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.euler_of_envelope",
+      "kind": "theorem",
+      "module": "DeterministicDP/EulerEquations.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.eg\u0393",
+      "kind": "def",
+      "module": "DeterministicDP/EulerExamples.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.egF",
+      "kind": "def",
+      "module": "DeterministicDP/EulerExamples.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.egD",
+      "kind": "def",
+      "module": "DeterministicDP/EulerExamples.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.egF_hasFDerivAt",
+      "kind": "theorem",
+      "module": "DeterministicDP/EulerExamples.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.egFx",
+      "kind": "theorem",
+      "module": "DeterministicDP/EulerExamples.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.egFy",
+      "kind": "theorem",
+      "module": "DeterministicDP/EulerExamples.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.egF_concave",
+      "kind": "theorem",
+      "module": "DeterministicDP/EulerExamples.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.eg_pos",
+      "kind": "theorem",
+      "module": "DeterministicDP/EulerExamples.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.eg_assumption42",
+      "kind": "theorem",
+      "module": "DeterministicDP/EulerExamples.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.ex_4_9a",
+      "kind": "theorem",
+      "module": "DeterministicDP/EulerExamples.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.qF",
+      "kind": "def",
+      "module": "DeterministicDP/EulerExamples.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.qD",
+      "kind": "def",
+      "module": "DeterministicDP/EulerExamples.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.qFx",
+      "kind": "theorem",
+      "module": "DeterministicDP/EulerExamples.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.qFy",
+      "kind": "theorem",
+      "module": "DeterministicDP/EulerExamples.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.qF_le",
+      "kind": "theorem",
+      "module": "DeterministicDP/EulerExamples.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.DeterministicDP.ex_4_9b",
+      "kind": "theorem",
+      "module": "DeterministicDP/EulerExamples.lean"
+    }
+  ],
+  "full_build": "passed",
+  "fresh_source_compilation": "passed",
+  "fresh_source_lint_options": [
+    "-Dlinter.mathlibStandardSet=true",
+    "-Dlinter.style.header=false"
+  ],
+  "axioms": {
+    "StokeyLucasPrescott.DeterministicDP.addIso": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.addIso_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.mulIso": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.mulIso_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.add_mul_biSup": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.continuous_add_mul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.coe_mul_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.le_of_le_add_limsup": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.le_of_add_le_liminf": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.le_of_forall_coe_lt_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.eq_biSup_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.Feasible": [],
+    "StokeyLucasPrescott.DeterministicDP.partialSum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.Assumption41": [],
+    "StokeyLucasPrescott.DeterministicDP.Assumption42": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.total": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.vstar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.SatisfiesFE": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.tendsto_total": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.tail": [],
+    "StokeyLucasPrescott.DeterministicDP.tail_mem": [
+      "propext"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.tail_tail": [
+      "propext",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.consPlan": [],
+    "StokeyLucasPrescott.DeterministicDP.consPlan_mem": [],
+    "StokeyLucasPrescott.DeterministicDP.tail_consPlan": [],
+    "StokeyLucasPrescott.DeterministicDP.feasible_nonempty": [
+      "Classical.choice"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.partialSum_succ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.partialSum_succ'": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.lemma_4_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.theorem_4_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.total_le_of_FE": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.div_lt_of_lt_add_mul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.ex_4_3a": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.theorem_4_3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.ex_4_3b": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.theorem_4_4": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.theorem_4_4_beta_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.theorem_4_5": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.Gstar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.optimal_generated_by_Gstar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.generated_by_Gstar_optimal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.tendsto_of_summable_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.tendsto_of_summable_neg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.assumption42_of_summable_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.assumption42_of_summable_neg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.summable_max_of_le_geometric": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.assumption42_of_bddAbove": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.assumption42_of_bddBelow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.assumption42_of_geometric": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.Orthant": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.orthCombo": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.orthZero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.orthOne": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.norm_le_geometric": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.ex_4_2a": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.ex_4_2b": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.ex_4_1a": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.consSet": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.ex_4_1b": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.consF": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.partialSum_consF": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.monotone_partialSum_consF": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.borrow\u0393": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.borrow_assumption41": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.borrow_assumption42": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.borrow_vstar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.borrow_identity_FE": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.borrow_identity_not_8": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.NNR": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.save\u0393": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.saveF": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.save_partialSum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.save_assumption41": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.save_assumption42": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.save_vstar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.save_all_satisfy_9": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.hoard": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.hoard_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.save_hoard_total": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.save_hoard_not_11": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.IsContraction": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.IsContraction.uniformContinuous": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.dist_iterate_succ_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.dist_iterate_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.cauchySeq_iterate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.theorem_3_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.dist_fixedPoint_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.corollary_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.corollary_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.IsLHC": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.IsUHC": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.graph": [],
+    "StokeyLucasPrescott.DeterministicDP.continuousAt_of_isUHC_singleton": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.isCompact_graph": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.maxValue": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.argmax": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.continuousOn_section": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.exists_argmax": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.le_maxValue": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.tendsto_f_graph": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.theorem_3_6": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.UniqueArgmax": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.UniqueArgmax.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.UniqueArgmax.nonempty": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.UniqueArgmax.compact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.UniqueArgmax.lhc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.UniqueArgmax.uhc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.UniqueArgmax.cont": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.UniqueArgmax.unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.argmaxFn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.UniqueArgmax.argmaxFn_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.UniqueArgmax.argmax_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.UniqueArgmax.lt_of_ne": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.UniqueArgmax.continuous_argmaxFn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.UniqueArgmax.lemma_3_7": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.UniqueArgmax.lemma_3_7_uniform": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.shortfall_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.theorem_3_8": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.theorem_3_8_uniform": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.Assumption43": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.Assumption43.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.Assumption43.nonempty": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.Assumption43.compact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.Assumption43.lhc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.Assumption43.uhc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.Assumption44": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.Assumption44.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.Assumption44.cont": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.Assumption44.bdd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.Assumption44.\u03b2_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.Assumption44.\u03b2_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.obj": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.continuousOn_obj": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.bound_maxValue": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.bellman": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.bellman_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.exists_bellman_argmax": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.bellman_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.bellman_add_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.blackwell": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.bellman_contraction": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.theorem_4_6": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.curryF": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.assumption42_of_44": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.satisfiesFE_of_fixed": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.tendsto_bounded_discount": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.fixedPoint_eq_vstar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.policy_plan_optimal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.theorem_4_7": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.cmb": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.cmb_self": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.IsConcaveS": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.IsStrictConcaveS": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.Assumption47": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.Assumption48": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.isClosed_concave": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.bellman_maps_concave": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.bellman_concave": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.argmax_unique_of_strictConcave": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.theorem_4_8": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.theorem_4_9": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.DiscreteSetup": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.DiscreteSetup.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.DiscreteSetup.nonempty": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.DiscreteSetup.finite": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.DiscreteSetup.bdd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.DiscreteSetup.\u03b2_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.DiscreteSetup.\u03b2_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.maxD": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.exists_maxD": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.le_maxD": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.bellmanD": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.bellmanD_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.bellmanD_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.bellmanD_add_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.bellmanD_contraction": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.ex_4_4a": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.policyOp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.policyOp_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.policyOp_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.policyOp_contraction": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.ex_4_4b": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.policyOp_le_bellmanD": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.isClosed_ge": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.isClosed_le'": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.ex_4_4c": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.theorem_4_10": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.ex_4_5": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.dual_apply_eq_sum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.vertex": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.no_separation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.eventually_mem_of_mem_interior": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.liftS": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.liftS_of_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.IsStrictConcaveS.isConcaveS": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.concaveOn_liftS": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.convex_image_\u0393": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.eventually_mem_\u0393": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.theorem_4_11": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.IsCone": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.csmul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.InH": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.hnorm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.hnorm_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.bddAbove_sphere": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.abs_le_hnorm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.hnorm_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.inH_sub": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.inH_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.inH_smul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.ex_4_7a_norm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.ex_4_7a_complete": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.theorem_4_12": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.Assumption410": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.Assumption410.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.Assumption410.convex": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.Assumption410.nonempty": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.Assumption410.compact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.Assumption410.lhc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.Assumption410.uhc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.Assumption410.cone": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.Assumption410.\u03b1_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.Assumption410.\u03b1\u03b2_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.Assumption410.growth": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.Assumption411": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.Assumption411.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.Assumption411.\u03b2_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.Assumption411.\u03b2_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.Assumption411.cont": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.Assumption411.hom": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.Assumption411.B_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.Assumption411.bdd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.ex_4_6a": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.abs_term_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.ex_4_6b": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.ex_4_6c": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.crs": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.continuousOn_obj'": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.exists_crs_argmax": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.eq_zero_of_mem_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.ex_4_7b": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.crs_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.crs_disc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.crs_contraction": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.hnorm_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.theorem_4_13": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.satisfiesFE_crs": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.crs_fixed_eq_vstar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.ex_4_6c_hom": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.IsQuasiConcaveS": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.IsStrictQuasiConcaveS": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.cmb_eq_csmul_cmb": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.ex_4_8a": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.ex_4_8a_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.ex_4_8b": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.NonProp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.ConcaveGraph": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.crs_concave": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.ex_4_8c": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.ex_4_8d": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.opT": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.satisfiesFE_iff_opT": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.opT_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.iterate_antitone": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.limitFn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.tendsto_iterate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.theorem_4_14": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.PosR": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.log\u0393": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.logF": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.coefB": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.coefC": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.affineLog": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.logPolicy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.\u03b1\u03b2_lt_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.coefB_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.coefC_neg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.logPolicy_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.log_objective_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.log_opT_affine": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.log_iterate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.log_assumption41": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.log_capital_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.logF_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.log_assumption42": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.log_vstar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.log_policy_optimal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.tendsto_zero_of_le_contract": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.tendsto_linear_recursion": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.quadF": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.quad\u0393": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.quadFn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.nextQ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.nextP": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.nextR": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.quad_objective": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.quad_opT": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.quadF_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.qs": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.ps": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.rs": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.qs_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.nextQ_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.nextQ_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.qs_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.tendsto_qs": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.quad_iterate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.tendsto_ps_rs": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.quad_vstar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.quad_policy_optimal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.concave_le_fderiv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.Fx": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.Fy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.apply_eq_Fx_add_Fy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.euler_telescope": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.le_of_le_add_tendsto_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.euler_sufficient": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.theorem_4_15": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.euler_of_envelope": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.eg\u0393": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.egF": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.egD": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.egF_hasFDerivAt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.egFx": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.egFy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.egF_concave": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.eg_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.eg_assumption42": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.ex_4_9a": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.qF": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.qD": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.qFx": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.qFy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.qF_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.DeterministicDP.ex_4_9b": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  "source_sha256": {
+    "DeterministicDP/ExtendedReals.lean": "1540e4318dee39758b387efa27aa98036ee58762f543b544c55593cefef3beee",
+    "DeterministicDP/Principle.lean": "d588873d8c89ae8541f0ed5a88803a4a363b0c531620b301b6a63f7d4737461a",
+    "DeterministicDP/Assumption42.lean": "43999c3185b5406b5bf05c74160bd6d8858ee9755b0c88eea277fa955c05a45e",
+    "DeterministicDP/ConsumptionExamples.lean": "52e0fd1c6605e562e790ced02975a8c76ef6c8979276cb16c49f964329c6db86",
+    "DeterministicDP/Contraction.lean": "d32d9b98f11c03379a6ef999a09894764cc4ae76d566a905b6b09ab64ce44d51",
+    "DeterministicDP/Correspondences.lean": "88cb24b362a28aa0b45f123ac912b797305b12a93b9d77137caacbbe1852b4cc",
+    "DeterministicDP/Maximum.lean": "4a89e351d7e81a79316968b2a8f9080f8c92298dc9640aa0d9d043a6bb256c3a",
+    "DeterministicDP/BoundedReturns.lean": "cf8a52993d7b615630c3a19536b63c46cba1d59b3f510b80a0023d6896787ae2",
+    "DeterministicDP/Concavity.lean": "e60db52be28af8eb6c2d020339a0efdbbe370e249c297c77941d2ef2faeb5d01",
+    "DeterministicDP/PolicyIteration.lean": "eb4ad444cc95d28c111d8c47398ac59bd6b7f347dea946988efb665f01db5e44",
+    "DeterministicDP/Envelope.lean": "1832dabbe60c9ec70f4150881ce7b494e76449d6027f80ca1c2d0c1311061685",
+    "DeterministicDP/InteriorPoints.lean": "b01dd4b4bd7bce99dfd4a44c8e6ede4e3666383d528dc4c778216b4ff56a06d7",
+    "DeterministicDP/ValueDifferentiability.lean": "757769cda3e5e11f0988396d5f609843eebc9171daca01ac5baa357e08af782c",
+    "DeterministicDP/ConstantReturns.lean": "006e1e4fd05ae865d073397f456198b4839cff2347b16a798099629beece1717",
+    "DeterministicDP/ConstantReturnsDP.lean": "8625a4c3e46b9457687ebde1c9b6bd8be7fc8188965b1fc0e34dd73865bdc1f8",
+    "DeterministicDP/QuasiConcavity.lean": "4a641903fe7274ccd13bb837b78a99ca544503024f03c907d1d29e19d20660f8",
+    "DeterministicDP/CRSConcavity.lean": "fb9af44b0c0c7c414dc68c1c4bdfda5ef34ae1f7793912a5956be8f96778c287",
+    "DeterministicDP/UnboundedReturns.lean": "32bf7ad869276b571db56ca9c80a626ed18fc35d964c06b81d26612de1e59cdd",
+    "DeterministicDP/LogGrowth.lean": "6c18fbe58c338e96839b47eba3ea5dc69113d77cecc5c67c60fb8cd89c45de1d",
+    "DeterministicDP/QuadraticInvestment.lean": "d7ca58ca653d41fc3f9cd2bf137012cdc6fafcb12b9edab9b0553e46a9b89570",
+    "DeterministicDP/EulerEquations.lean": "6ceaba5591f39a2ea13abfe4da5be8d653f493944c273386ea02d986e0c081ea",
+    "DeterministicDP/EulerExamples.lean": "e64bf7fc0279c6ec0ade54da71f184653caeec1e9ea13e015cf8a3789b17535f",
+    "DeterministicDP.lean": "1e5b8f9c2755e3b1c486e9cc5b417fad644662136ad830201fb2f1d41b26bed5",
+    "lean-toolchain": "8733782dc070a99b312039cda424f601b80f3be6f6f512627da5ba25adc27632",
+    "lakefile.toml": "ea18ee60d2c6542a08410a58e9da33de395dcdf1a515fc218bf2dfcce212444e",
+    "lake-manifest.json": "bd7e63b200a47ad1181d890acd9ff54bd20b6e44bb3b5653b6bece11b3d3dbec",
+    "proof-manifest.json": "a7a6a1f9527a9910ebb65f827f7c80c03e8f12dc65c7e7f16553433705dfa676",
+    "scripts/verify.py": "a70b1fa704dd590f937f8b37682afa88a9d85a9150065acb935c7d2c9589da3b",
+    "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  },
+  "fresh_audit_sha256": "f027da12c80538db3083f1bb2f49c62f8645272136d32ec0fa8fc9fddde8755d",
+  "lean_toolchain": "leanprover/lean4:v4.34.0",
+  "scope": "SLP Chapter 4 (Dynamic Programming under Certainty): the sequence problem and the functional equation in the extended reals, Lemma 4.1 and Theorems 4.2-4.5 (Principle of Optimality) with sufficient conditions for Assumption 4.2, Ex 4.1-4.3 and the consumption examples; bounded returns, Theorems 4.6-4.9 (with Chapter 3's contraction and maximum theorems carried over), policy iteration (Ex 4.4), Benveniste-Scheinkman and differentiability of the value function (Theorems 4.10-4.11, Ex 4.5); constant returns to scale, Ex 4.6-4.8 and Theorems 4.12-4.13; unbounded returns, Theorem 4.14 with the unit-elastic growth and quadratic investment examples; Euler equations, Theorem 4.15 and Ex 4.9.",
+  "source": "Stokey, Lucas and Prescott (1989), Recursive Methods in Economic Dynamics, Chapter 4."
+}

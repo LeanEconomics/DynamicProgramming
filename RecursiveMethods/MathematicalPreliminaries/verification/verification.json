@@ -1,0 +1,2612 @@
+{
+  "checked_at_utc": "2026-10-13T22:06:35.007044+00:00",
+  "theorems": 192,
+  "module_theorems": {
+    "MathematicalPreliminaries/IntervalFunctions.lean": 13,
+    "MathematicalPreliminaries/MetricSpaces.lean": 12,
+    "MathematicalPreliminaries/NormedSpaces.lean": 18,
+    "MathematicalPreliminaries/Completeness.lean": 22,
+    "MathematicalPreliminaries/L1Incomplete.lean": 16,
+    "MathematicalPreliminaries/Contraction.lean": 8,
+    "MathematicalPreliminaries/Blackwell.lean": 12,
+    "MathematicalPreliminaries/Successive.lean": 4,
+    "MathematicalPreliminaries/Correspondences.lean": 18,
+    "MathematicalPreliminaries/ConvexCorrespondences.lean": 4,
+    "MathematicalPreliminaries/Maximum.lean": 15,
+    "MathematicalPreliminaries/MaximumExamples.lean": 12,
+    "MathematicalPreliminaries/ConstraintSets.lean": 14,
+    "MathematicalPreliminaries/Picard.lean": 4,
+    "MathematicalPreliminaries/SmoothFunctions.lean": 20
+  },
+  "audited_declarations": 256,
+  "declarations": [
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.integral_pos_of_pos",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/IntervalFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.ext",
+      "kind": "def",
+      "module": "MathematicalPreliminaries/IntervalFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.continuous_ext",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/IntervalFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.ext_of_mem",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/IntervalFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.ext_add",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/IntervalFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.ext_smul",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/IntervalFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.ext_sub",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/IntervalFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.l1",
+      "kind": "def",
+      "module": "MathematicalPreliminaries/IntervalFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.l1_nonneg",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/IntervalFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.l1_zero",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/IntervalFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.l1_eq_zero_iff",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/IntervalFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.l1_add_le",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/IntervalFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.l1_smul",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/IntervalFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.l1_neg",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/IntervalFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.l1_le_norm",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/IntervalFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.IsMetric",
+      "kind": "structure",
+      "module": "MathematicalPreliminaries/MetricSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.IsMetric.mk",
+      "kind": "constructor",
+      "module": "MathematicalPreliminaries/MetricSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.IsMetric.nonneg",
+      "kind": "projection",
+      "module": "MathematicalPreliminaries/MetricSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.IsMetric.eq_zero",
+      "kind": "projection",
+      "module": "MathematicalPreliminaries/MetricSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.IsMetric.symm",
+      "kind": "projection",
+      "module": "MathematicalPreliminaries/MetricSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.IsMetric.triangle",
+      "kind": "projection",
+      "module": "MathematicalPreliminaries/MetricSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.Converges",
+      "kind": "def",
+      "module": "MathematicalPreliminaries/MetricSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.IsCauchy",
+      "kind": "def",
+      "module": "MathematicalPreliminaries/MetricSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.IsCompleteFor",
+      "kind": "def",
+      "module": "MathematicalPreliminaries/MetricSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.IsMetric.self",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/MetricSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.limit_unique",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/MetricSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.IsCauchy.of_converges",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/MetricSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.IsCauchy.bounded",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/MetricSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.converges_iff_subseq",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/MetricSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.isMetric_int",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/MetricSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.isMetric_discrete",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/MetricSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.isMetric_rat",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/MetricSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.StrictIncr",
+      "kind": "abbrev",
+      "module": "MathematicalPreliminaries/MetricSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.isMetric_sup_strictMono",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/MetricSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.isMetric_l1_strictMono",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/MetricSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.concave_subadditive",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/MetricSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.isMetric_comp",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/MetricSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.IsSubspace",
+      "kind": "def",
+      "module": "MathematicalPreliminaries/NormedSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.isSubspace_univ",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/NormedSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.isSubspace_line",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/NormedSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.isSubspace_continuousOn",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/NormedSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.not_isSubspace_circle",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/NormedSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.not_isSubspace_int",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/NormedSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.not_isSubspace_nonneg",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/NormedSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.IsNorm",
+      "kind": "structure",
+      "module": "MathematicalPreliminaries/NormedSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.IsNorm.mk",
+      "kind": "constructor",
+      "module": "MathematicalPreliminaries/NormedSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.IsNorm.nonneg",
+      "kind": "projection",
+      "module": "MathematicalPreliminaries/NormedSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.IsNorm.eq_zero",
+      "kind": "projection",
+      "module": "MathematicalPreliminaries/NormedSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.IsNorm.smul",
+      "kind": "projection",
+      "module": "MathematicalPreliminaries/NormedSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.IsNorm.triangle",
+      "kind": "projection",
+      "module": "MathematicalPreliminaries/NormedSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.IsNorm.isMetric",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/NormedSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.isNorm_norm",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/NormedSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.isNorm_euclid",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/NormedSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.isNorm_max",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/NormedSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.abs_le_max_norm",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/NormedSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.max_norm_le",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/NormedSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.isNorm_sum",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/NormedSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.ellInf",
+      "kind": "def",
+      "module": "MathematicalPreliminaries/NormedSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.supNorm",
+      "kind": "def",
+      "module": "MathematicalPreliminaries/NormedSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.abs_le_supNorm",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/NormedSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.supNorm_le",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/NormedSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.isNorm_ellInf",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/NormedSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.isNorm_sup",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/NormedSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.isNorm_l1",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/NormedSpaces.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.theorem_3_1",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/Completeness.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.isCompleteFor_of_completeSpace",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/Completeness.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.isComplete_of_eventually_const",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/Completeness.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.isComplete_int",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/Completeness.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.isComplete_discrete",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/Completeness.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.isComplete_of_equiv_max",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/Completeness.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.sum_abs_le_card_mul_max",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/Completeness.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.max_le_sum_abs",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/Completeness.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.isComplete_sum",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/Completeness.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.isComplete_max",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/Completeness.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.isComplete_euclid",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/Completeness.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.isComplete_ellInf",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/Completeness.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.isComplete_sup",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/Completeness.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.IsClosedFor",
+      "kind": "def",
+      "module": "MathematicalPreliminaries/Completeness.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.isComplete_subset",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/Completeness.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.isComplete_sup_monotone",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/Completeness.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.ramp",
+      "kind": "def",
+      "module": "MathematicalPreliminaries/Completeness.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.ramp_strictMono",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/Completeness.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.norm_ramp_le",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/Completeness.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.norm_ramp_tendsto",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/Completeness.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.isCauchy_of_tendsto_zero",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/Completeness.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.not_isComplete_sup_strictMono",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/Completeness.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.not_isComplete_l1_strictMono",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/Completeness.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.not_isComplete_rat",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/Completeness.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.integral_abs_ge",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/L1Incomplete.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.stepRamp",
+      "kind": "def",
+      "module": "MathematicalPreliminaries/L1Incomplete.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.stepRamp_apply",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/L1Incomplete.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.stepRamp_nonneg",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/L1Incomplete.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.stepRamp_le_one",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/L1Incomplete.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.stepRamp_mono",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/L1Incomplete.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.stepRamp_left",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/L1Incomplete.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.stepRamp_right",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/L1Incomplete.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.rampIntegral",
+      "kind": "def",
+      "module": "MathematicalPreliminaries/L1Incomplete.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.ext_stepRamp_mono",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/L1Incomplete.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.l1_stepRamp_sub",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/L1Incomplete.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.rampIntegral_mono",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/L1Incomplete.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.rampIntegral_le",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/L1Incomplete.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.isCauchy_stepRamp",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/L1Incomplete.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.away_of_ne",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/L1Incomplete.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.limit_eq_zero_left",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/L1Incomplete.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.limit_eq_one_right",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/L1Incomplete.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.not_isComplete_l1",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/L1Incomplete.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.IsContraction",
+      "kind": "def",
+      "module": "MathematicalPreliminaries/Contraction.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.IsContraction.uniformContinuous",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/Contraction.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.dist_iterate_succ_le",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/Contraction.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.dist_iterate_le",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/Contraction.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.cauchySeq_iterate",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/Contraction.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.theorem_3_2",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/Contraction.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.dist_fixedPoint_le",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/Contraction.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.corollary_1",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/Contraction.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.corollary_2",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/Contraction.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.IsBdd",
+      "kind": "def",
+      "module": "MathematicalPreliminaries/Blackwell.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.supDist",
+      "kind": "def",
+      "module": "MathematicalPreliminaries/Blackwell.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.bddAbove_absDiff",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/Blackwell.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.abs_le_supDist",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/Blackwell.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.supDist_le",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/Blackwell.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.supDist_nonneg",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/Blackwell.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.theorem_3_3",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/Blackwell.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.bellmanOp",
+      "kind": "def",
+      "module": "MathematicalPreliminaries/Blackwell.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.bddAbove_bellman",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/Blackwell.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.le_bellmanOp",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/Blackwell.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.bellmanOp_bdd",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/Blackwell.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.bellmanOp_mono",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/Blackwell.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.ciSup_add_const",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/Blackwell.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.bellmanOp_add_const",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/Blackwell.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.bellmanOp_contraction",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/Blackwell.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.policyValue",
+      "kind": "def",
+      "module": "MathematicalPreliminaries/Successive.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.exercise_3_1",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/Successive.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.policyValue_le_bellmanOp",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/Successive.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.iterate_mono",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/Successive.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.fixedPoint_eq_limit",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/Successive.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.IsLHC",
+      "kind": "def",
+      "module": "MathematicalPreliminaries/Correspondences.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.IsUHC",
+      "kind": "def",
+      "module": "MathematicalPreliminaries/Correspondences.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.IsCompactValued",
+      "kind": "def",
+      "module": "MathematicalPreliminaries/Correspondences.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.image",
+      "kind": "def",
+      "module": "MathematicalPreliminaries/Correspondences.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.graph",
+      "kind": "def",
+      "module": "MathematicalPreliminaries/Correspondences.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.continuousAt_of_isUHC_singleton",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/Correspondences.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.isUHC_singleton_of_continuousAt",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/Correspondences.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.isUHC_proj",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/Correspondences.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.isUHC_union",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/Correspondences.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.isUHC_inter",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/Correspondences.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.isCompact_image",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/Correspondences.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.isUHC_comp",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/Correspondences.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.isUHC_pi",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/Correspondences.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.continuousAt_of_isLHC_singleton",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/Correspondences.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.isLHC_proj",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/Correspondences.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.isLHC_union",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/Correspondences.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.isLHC_comp",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/Correspondences.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.isLHC_pi",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/Correspondences.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.not_isLHC_inter",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/Correspondences.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.isCompact_graph",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/Correspondences.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.theorem_3_4",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/Correspondences.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.closedGraph_not_uhc",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/Correspondences.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.theorem_3_5",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/Correspondences.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.dual_apply_eq_sum",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/ConvexCorrespondences.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.vertex",
+      "kind": "def",
+      "module": "MathematicalPreliminaries/ConvexCorrespondences.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.no_separation",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/ConvexCorrespondences.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.eventually_mem_of_mem_interior",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/ConvexCorrespondences.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.isLHC_inter_of_interior",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/ConvexCorrespondences.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.maxValue",
+      "kind": "def",
+      "module": "MathematicalPreliminaries/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.argmax",
+      "kind": "def",
+      "module": "MathematicalPreliminaries/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.continuousOn_section",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.exists_argmax",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.le_maxValue",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.tendsto_f_graph",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.theorem_3_6",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.ArgmaxSetup",
+      "kind": "structure",
+      "module": "MathematicalPreliminaries/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.ArgmaxSetup.mk",
+      "kind": "constructor",
+      "module": "MathematicalPreliminaries/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.ArgmaxSetup.nonempty",
+      "kind": "projection",
+      "module": "MathematicalPreliminaries/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.ArgmaxSetup.compact",
+      "kind": "projection",
+      "module": "MathematicalPreliminaries/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.ArgmaxSetup.convex",
+      "kind": "projection",
+      "module": "MathematicalPreliminaries/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.ArgmaxSetup.lhc",
+      "kind": "projection",
+      "module": "MathematicalPreliminaries/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.ArgmaxSetup.uhc",
+      "kind": "projection",
+      "module": "MathematicalPreliminaries/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.ArgmaxSetup.cont",
+      "kind": "projection",
+      "module": "MathematicalPreliminaries/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.ArgmaxSetup.strict",
+      "kind": "projection",
+      "module": "MathematicalPreliminaries/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.ArgmaxSetup.argmax_unique",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.argmaxFn",
+      "kind": "def",
+      "module": "MathematicalPreliminaries/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.ArgmaxSetup.argmaxFn_mem",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.ArgmaxSetup.argmax_eq",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.ArgmaxSetup.lt_of_ne",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.ArgmaxSetup.continuous_argmaxFn",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.ArgmaxSetup.lemma_3_7",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.ArgmaxSetup.lemma_3_7_uniform",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.shortfall_lt",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.theorem_3_8",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.theorem_3_8_uniform",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/Maximum.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.isLHC_const",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/MaximumExamples.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.isUHC_const",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/MaximumExamples.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.not_isLHC_of_eventually",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/MaximumExamples.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.ex_3_16a",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/MaximumExamples.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.f316b",
+      "kind": "def",
+      "module": "MathematicalPreliminaries/MaximumExamples.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.continuous_f316b",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/MaximumExamples.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.argmax_316b",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/MaximumExamples.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.ex_3_16b",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/MaximumExamples.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.NNR",
+      "kind": "abbrev",
+      "module": "MathematicalPreliminaries/MaximumExamples.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.gamma316c",
+      "kind": "def",
+      "module": "MathematicalPreliminaries/MaximumExamples.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.tendsto_val",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/MaximumExamples.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.gamma316c_continuous",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/MaximumExamples.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.argmax_316c",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/MaximumExamples.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.not_tendsto_of_far",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/MaximumExamples.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.ex_3_16c",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/MaximumExamples.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.isLHC_Icc",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/ConstraintSets.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.isUHC_Icc",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/ConstraintSets.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.ex_3_13a",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/ConstraintSets.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.ex_3_13b",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/ConstraintSets.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.ex_3_14c",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/ConstraintSets.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.Orthant",
+      "kind": "abbrev",
+      "module": "MathematicalPreliminaries/ConstraintSets.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.budget",
+      "kind": "def",
+      "module": "MathematicalPreliminaries/ConstraintSets.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.allocGraph",
+      "kind": "def",
+      "module": "MathematicalPreliminaries/ConstraintSets.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.budget_eq",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/ConstraintSets.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.allocGraph_nonempty",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/ConstraintSets.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.isUHC_allocGraph",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/ConstraintSets.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.isLHC_allocGraph",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/ConstraintSets.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.ex_3_13c",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/ConstraintSets.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.superlevel",
+      "kind": "def",
+      "module": "MathematicalPreliminaries/ConstraintSets.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.isLHC_superlevel",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/ConstraintSets.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.isUHC_superlevel",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/ConstraintSets.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.ex_3_14b",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/ConstraintSets.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.ex_3_14a",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/ConstraintSets.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.picardFn",
+      "kind": "def",
+      "module": "MathematicalPreliminaries/Picard.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.continuous_picardFn",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/Picard.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.picard",
+      "kind": "def",
+      "module": "MathematicalPreliminaries/Picard.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.picard_apply",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/Picard.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.ex_3_10b",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/Picard.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.ex_3_10c",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/Picard.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.ext_zero",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/SmoothFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.abs_ext_le",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/SmoothFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.IsCk",
+      "kind": "def",
+      "module": "MathematicalPreliminaries/SmoothFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.ckSub",
+      "kind": "def",
+      "module": "MathematicalPreliminaries/SmoothFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.ckNorm",
+      "kind": "def",
+      "module": "MathematicalPreliminaries/SmoothFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.isCk_iff_integral",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/SmoothFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.isClosed_ckSub",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/SmoothFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.isNorm_ckNorm",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/SmoothFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.norm_le_ckNorm",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/SmoothFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.ckNorm_le",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/SmoothFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.isComplete_ckNorm",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/SmoothFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.ex_3_7a",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/SmoothFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.restrictC",
+      "kind": "def",
+      "module": "MathematicalPreliminaries/SmoothFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.ext_restrictC",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/SmoothFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.mk1",
+      "kind": "def",
+      "module": "MathematicalPreliminaries/SmoothFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.isNorm_sup_C1",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/SmoothFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.sqrtSeq",
+      "kind": "def",
+      "module": "MathematicalPreliminaries/SmoothFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.sqrtSeq'",
+      "kind": "def",
+      "module": "MathematicalPreliminaries/SmoothFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.sqrtSeq_pos",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/SmoothFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.continuous_sqrtSeq",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/SmoothFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.continuous_sqrtSeq'",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/SmoothFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.hasDerivAt_sqrtSeq",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/SmoothFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.abs_sqrt_sub_abs_le",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/SmoothFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.ex_3_7b",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/SmoothFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.not_isNorm_of_alpha0",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/SmoothFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.interpolation",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/SmoothFunctions.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.MathematicalPreliminaries.ex_3_7c_counterexample",
+      "kind": "theorem",
+      "module": "MathematicalPreliminaries/SmoothFunctions.lean"
+    }
+  ],
+  "full_build": "passed",
+  "fresh_source_compilation": "passed",
+  "fresh_source_lint_options": [
+    "-Dlinter.mathlibStandardSet=true",
+    "-Dlinter.style.header=false"
+  ],
+  "axioms": {
+    "StokeyLucasPrescott.MathematicalPreliminaries.integral_pos_of_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.ext": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.continuous_ext": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.ext_of_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.ext_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.ext_smul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.ext_sub": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.l1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.l1_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.l1_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.l1_eq_zero_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.l1_add_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.l1_smul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.l1_neg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.l1_le_norm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.IsMetric": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.IsMetric.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.IsMetric.nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.IsMetric.eq_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.IsMetric.symm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.IsMetric.triangle": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.Converges": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.IsCauchy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.IsCompleteFor": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.IsMetric.self": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.limit_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.IsCauchy.of_converges": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.IsCauchy.bounded": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.converges_iff_subseq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.isMetric_int": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.isMetric_discrete": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.isMetric_rat": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.StrictIncr": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.isMetric_sup_strictMono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.isMetric_l1_strictMono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.concave_subadditive": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.isMetric_comp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.IsSubspace": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.isSubspace_univ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.isSubspace_line": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.isSubspace_continuousOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.not_isSubspace_circle": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.not_isSubspace_int": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.not_isSubspace_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.IsNorm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.IsNorm.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.IsNorm.nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.IsNorm.eq_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.IsNorm.smul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.IsNorm.triangle": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.IsNorm.isMetric": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.isNorm_norm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.isNorm_euclid": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.isNorm_max": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.abs_le_max_norm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.max_norm_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.isNorm_sum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.ellInf": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.supNorm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.abs_le_supNorm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.supNorm_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.isNorm_ellInf": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.isNorm_sup": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.isNorm_l1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.theorem_3_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.isCompleteFor_of_completeSpace": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.isComplete_of_eventually_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.isComplete_int": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.isComplete_discrete": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.isComplete_of_equiv_max": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.sum_abs_le_card_mul_max": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.max_le_sum_abs": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.isComplete_sum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.isComplete_max": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.isComplete_euclid": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.isComplete_ellInf": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.isComplete_sup": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.IsClosedFor": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.isComplete_subset": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.isComplete_sup_monotone": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.ramp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.ramp_strictMono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.norm_ramp_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.norm_ramp_tendsto": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.isCauchy_of_tendsto_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.not_isComplete_sup_strictMono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.not_isComplete_l1_strictMono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.not_isComplete_rat": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.integral_abs_ge": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.stepRamp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.stepRamp_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.stepRamp_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.stepRamp_le_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.stepRamp_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.stepRamp_left": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.stepRamp_right": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.rampIntegral": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.ext_stepRamp_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.l1_stepRamp_sub": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.rampIntegral_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.rampIntegral_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.isCauchy_stepRamp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.away_of_ne": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.limit_eq_zero_left": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.limit_eq_one_right": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.not_isComplete_l1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.IsContraction": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.IsContraction.uniformContinuous": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.dist_iterate_succ_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.dist_iterate_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.cauchySeq_iterate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.theorem_3_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.dist_fixedPoint_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.corollary_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.corollary_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.IsBdd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.supDist": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.bddAbove_absDiff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.abs_le_supDist": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.supDist_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.supDist_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.theorem_3_3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.bellmanOp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.bddAbove_bellman": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.le_bellmanOp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.bellmanOp_bdd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.bellmanOp_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.ciSup_add_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.bellmanOp_add_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.bellmanOp_contraction": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.policyValue": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.exercise_3_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.policyValue_le_bellmanOp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.iterate_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.fixedPoint_eq_limit": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.IsLHC": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.IsUHC": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.IsCompactValued": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.image": [],
+    "StokeyLucasPrescott.MathematicalPreliminaries.graph": [],
+    "StokeyLucasPrescott.MathematicalPreliminaries.continuousAt_of_isUHC_singleton": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.isUHC_singleton_of_continuousAt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.isUHC_proj": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.isUHC_union": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.isUHC_inter": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.isCompact_image": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.isUHC_comp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.isUHC_pi": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.continuousAt_of_isLHC_singleton": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.isLHC_proj": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.isLHC_union": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.isLHC_comp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.isLHC_pi": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.not_isLHC_inter": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.isCompact_graph": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.theorem_3_4": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.closedGraph_not_uhc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.theorem_3_5": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.dual_apply_eq_sum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.vertex": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.no_separation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.eventually_mem_of_mem_interior": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.isLHC_inter_of_interior": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.maxValue": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.argmax": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.continuousOn_section": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.exists_argmax": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.le_maxValue": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.tendsto_f_graph": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.theorem_3_6": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.ArgmaxSetup": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.ArgmaxSetup.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.ArgmaxSetup.nonempty": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.ArgmaxSetup.compact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.ArgmaxSetup.convex": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.ArgmaxSetup.lhc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.ArgmaxSetup.uhc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.ArgmaxSetup.cont": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.ArgmaxSetup.strict": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.ArgmaxSetup.argmax_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.argmaxFn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.ArgmaxSetup.argmaxFn_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.ArgmaxSetup.argmax_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.ArgmaxSetup.lt_of_ne": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.ArgmaxSetup.continuous_argmaxFn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.ArgmaxSetup.lemma_3_7": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.ArgmaxSetup.lemma_3_7_uniform": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.shortfall_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.theorem_3_8": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.theorem_3_8_uniform": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.isLHC_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.isUHC_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.not_isLHC_of_eventually": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.ex_3_16a": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.f316b": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.continuous_f316b": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.argmax_316b": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.ex_3_16b": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.NNR": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.gamma316c": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.tendsto_val": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.gamma316c_continuous": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.argmax_316c": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.not_tendsto_of_far": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.ex_3_16c": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.isLHC_Icc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.isUHC_Icc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.ex_3_13a": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.ex_3_13b": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.ex_3_14c": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.Orthant": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.budget": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.allocGraph": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.budget_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.allocGraph_nonempty": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.isUHC_allocGraph": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.isLHC_allocGraph": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.ex_3_13c": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.superlevel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.isLHC_superlevel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.isUHC_superlevel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.ex_3_14b": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.ex_3_14a": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.picardFn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.continuous_picardFn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.picard": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.picard_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.ex_3_10b": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.ex_3_10c": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.ext_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.abs_ext_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.IsCk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.ckSub": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.ckNorm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.isCk_iff_integral": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.isClosed_ckSub": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.isNorm_ckNorm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.norm_le_ckNorm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.ckNorm_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.isComplete_ckNorm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.ex_3_7a": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.restrictC": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.ext_restrictC": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.mk1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.isNorm_sup_C1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.sqrtSeq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.sqrtSeq'": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.sqrtSeq_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.continuous_sqrtSeq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.continuous_sqrtSeq'": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.hasDerivAt_sqrtSeq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.abs_sqrt_sub_abs_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.ex_3_7b": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.not_isNorm_of_alpha0": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.interpolation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.MathematicalPreliminaries.ex_3_7c_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  "source_sha256": {
+    "MathematicalPreliminaries/IntervalFunctions.lean": "fc58cb14d1441b8428b0931e32e3c71e590380961035f2f069b436917b963bda",
+    "MathematicalPreliminaries/MetricSpaces.lean": "82e18f7bc9f511ca1e827ac6b6bf67ab1eb05dd18d7aa4449dd319633797c3d2",
+    "MathematicalPreliminaries/NormedSpaces.lean": "0684099a5c5a06039f2164203c7788147c8c9e585c868ff9d2aff0839c98c8fd",
+    "MathematicalPreliminaries/Completeness.lean": "3084053ddfbf45779748a3ee643c67089e1edc60af1235389a7412e507dfe26e",
+    "MathematicalPreliminaries/L1Incomplete.lean": "eb8db5158c7af63aff964919dd6c1e282f24bcc28b978ae5cd21351ec5c17ccb",
+    "MathematicalPreliminaries/Contraction.lean": "4f0f14ed599b057365f5ad2ac5cc1ae42af5e5628257cc83ce238c3cea998a7c",
+    "MathematicalPreliminaries/Blackwell.lean": "25ebeb58d2d24d655d444ae0eadff4a64970c635b2cac0453838d777a95d12aa",
+    "MathematicalPreliminaries/Successive.lean": "3e983e16415c7d93f295e0c093f3213bd8fd12a167e5d0a77c95d587e3dcb82f",
+    "MathematicalPreliminaries/Correspondences.lean": "e6b89a1dd099235b6410a68a050e349b006839cb9b0a1a8cc8d08b51d128dfdc",
+    "MathematicalPreliminaries/ConvexCorrespondences.lean": "89a2ab3d73620906bcf2a4b6e34bf927f7877138ced5e598ee195a7f38521701",
+    "MathematicalPreliminaries/Maximum.lean": "83d809bc4419a4326c298f96d52d79fb41a711c49bb3d7d85433e0d6523f40ad",
+    "MathematicalPreliminaries/MaximumExamples.lean": "996d996821b71c34ea9ba7aff29e1de3339c45fe5ec68e03b2653bbbaf70bead",
+    "MathematicalPreliminaries/ConstraintSets.lean": "3853598c197563d0a6d531dabb7383ef679d87f04691e6b62f7532592cb474ef",
+    "MathematicalPreliminaries/Picard.lean": "d14ecb7b589967a7115e71affbf973f7243a5098276260dc5afd7d7bb25ee6ed",
+    "MathematicalPreliminaries/SmoothFunctions.lean": "6078449ea761936304b5a515bb6d2735f611287f98a48060f9a71279f25f89ed",
+    "MathematicalPreliminaries.lean": "ced86f3adce39b91a9468f0f562b34e3caf567d20424033b236a03208b2abaa1",
+    "lean-toolchain": "8733782dc070a99b312039cda424f601b80f3be6f6f512627da5ba25adc27632",
+    "lakefile.toml": "c2cbc40059a92d438b07cdb5825b549acb4031c70ea702c2144b03bbc73600ab",
+    "lake-manifest.json": "7a970c7c5c5e3601b0055208065aec0f7139a7b7e588a11e289a80a9e9f258ea",
+    "proof-manifest.json": "e1f6d8ef885b5341625e13c63813d79df4959dafa9880bde25f72eadb477b634",
+    "scripts/verify.py": "a70b1fa704dd590f937f8b37682afa88a9d85a9150065acb935c7d2c9589da3b",
+    "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  },
+  "fresh_audit_sha256": "6e079b0015a635c290247ea1c6555c4d8c6daae01bdff31be776ca5bd3e3a637",
+  "lean_toolchain": "leanprover/lean4:v4.34.0",
+  "scope": "SLP Chapter 3 (Mathematical Preliminaries): metric and normed vector spaces with the examples of Ex 3.2-3.5; completeness, Theorem 3.1 and the classification of Ex 3.6; spaces of continuously differentiable functions (Ex 3.7, with the converse of Ex 3.7c refuted); the Contraction Mapping Theorem 3.2, Corollaries 1-2 and Ex 3.8-3.9; a differential equation by Picard iteration (Ex 3.10); Blackwell's sufficient conditions (Theorem 3.3) and the growth model's operator; successive approximations and Ex 3.1; lower and upper hemi-continuity, Ex 3.11-3.15 and Theorems 3.4-3.5; the Theorem of the Maximum (Theorem 3.6), Lemma 3.7, Theorem 3.8 and the examples of Ex 3.16.",
+  "source": "Stokey, Lucas and Prescott (1989), Recursive Methods in Economic Dynamics, Chapter 3."
+}

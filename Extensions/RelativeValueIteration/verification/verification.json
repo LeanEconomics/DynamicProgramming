@@ -1,0 +1,2686 @@
+{
+  "checked_at_utc": "2026-10-08T21:02:01.758101+00:00",
+  "theorems": 207,
+  "module_theorems": {
+    "RelativeValueIteration/Span.lean": 9,
+    "RelativeValueIteration/MDP.lean": 14,
+    "RelativeValueIteration/Discounted.lean": 13,
+    "RelativeValueIteration/RelativeVI.lean": 12,
+    "RelativeValueIteration/AverageReward.lean": 9,
+    "RelativeValueIteration/Endogenous.lean": 24,
+    "RelativeValueIteration/Example.lean": 7,
+    "RelativeValueIteration/PolicyIteration.lean": 16,
+    "RelativeValueIteration/SpectralRadius.lean": 12,
+    "RelativeValueIteration/Subradius.lean": 15,
+    "RelativeValueIteration/AsymptoticRates.lean": 12,
+    "RelativeValueIteration/AsymptoticEndogenous.lean": 16,
+    "RelativeValueIteration/EndogenousSpeedup.lean": 48
+  },
+  "audited_declarations": 263,
+  "declarations": [
+    {
+      "name": "DPExtensions.RelativeValueIteration.sp",
+      "kind": "def",
+      "module": "RelativeValueIteration/Span.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.sub_le_sp",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/Span.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.abs_sub_le_sp",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/Span.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.sp_nonneg",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/Span.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.sp_le",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/Span.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.sp_add_const",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/Span.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.sp_neg",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/Span.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.le_sup'_sp",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/Span.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.inf'_le_sp",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/Span.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.dobrushin",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/Span.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP",
+      "kind": "structure",
+      "module": "RelativeValueIteration/MDP.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.mk",
+      "kind": "constructor",
+      "module": "RelativeValueIteration/MDP.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.\u0393",
+      "kind": "projection",
+      "module": "RelativeValueIteration/MDP.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.\u0393_nonempty",
+      "kind": "projection",
+      "module": "RelativeValueIteration/MDP.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.r",
+      "kind": "projection",
+      "module": "RelativeValueIteration/MDP.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.\u03b2",
+      "kind": "projection",
+      "module": "RelativeValueIteration/MDP.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.\u03b2_nonneg",
+      "kind": "projection",
+      "module": "RelativeValueIteration/MDP.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.\u03b2_le_one",
+      "kind": "projection",
+      "module": "RelativeValueIteration/MDP.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.P",
+      "kind": "projection",
+      "module": "RelativeValueIteration/MDP.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.P_nonneg",
+      "kind": "projection",
+      "module": "RelativeValueIteration/MDP.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.P_sum",
+      "kind": "projection",
+      "module": "RelativeValueIteration/MDP.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.Q",
+      "kind": "def",
+      "module": "RelativeValueIteration/MDP.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.T",
+      "kind": "def",
+      "module": "RelativeValueIteration/MDP.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.T\u03c3",
+      "kind": "def",
+      "module": "RelativeValueIteration/MDP.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.IsGreedy",
+      "kind": "def",
+      "module": "RelativeValueIteration/MDP.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.IsPolicy",
+      "kind": "def",
+      "module": "RelativeValueIteration/MDP.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.exists_greedyAct",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/MDP.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.exists_greedy",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/MDP.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.Q_le_T",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/MDP.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.T\u03c3_eq_T_of_greedy",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/MDP.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.T\u03c3_le_T",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/MDP.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.Q_add_const",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/MDP.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.T_add_const",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/MDP.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.T\u03c3_add_const",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/MDP.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.isGreedy_add_const_iff",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/MDP.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.T_iterate_add_const",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/MDP.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.rel",
+      "kind": "def",
+      "module": "RelativeValueIteration/MDP.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.rel_add_const",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/MDP.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.relT_iterate",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/MDP.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.Q_sub_Q",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/MDP.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.sp_T_sub_le",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/MDP.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.abs_Q_sub_le",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/Discounted.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.norm_T_sub_le",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/Discounted.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.norm_T\u03c3_sub_le",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/Discounted.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.T_mono",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/Discounted.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.T\u03c3_mono",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/Discounted.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.contracting_T",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/Discounted.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.contracting_T\u03c3",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/Discounted.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.vstar",
+      "kind": "def",
+      "module": "RelativeValueIteration/Discounted.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.v\u03c3",
+      "kind": "def",
+      "module": "RelativeValueIteration/Discounted.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.T_vstar",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/Discounted.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.T\u03c3_v\u03c3",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/Discounted.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.le_v\u03c3_of_le",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/Discounted.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.le_vstar_of_le",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/Discounted.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.vstar_le_of_T_le",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/Discounted.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.v\u03c3_le_vstar",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/Discounted.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.dobrushin_le_one",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/RelativeVI.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.alpha_nonneg",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/RelativeVI.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.sp_T_iterate_sub_le",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/RelativeVI.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.sp_iterate_sub_vstar",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/RelativeVI.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.rel_converges",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/RelativeVI.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.policy_error",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/RelativeVI.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.relIter",
+      "kind": "def",
+      "module": "RelativeValueIteration/RelativeVI.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.relIter_succ",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/RelativeVI.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.sp_T_relIter_sub",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/RelativeVI.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.stopping_rule",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/RelativeVI.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.stopping_rule_sup",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/RelativeVI.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.sp_relIter_succ_sub_le",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/RelativeVI.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.stopping_eventually",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/RelativeVI.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.T\u03c3_iterate_add_const",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/AverageReward.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.T_iterate_of_poisson",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/AverageReward.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.T\u03c3_iterate_le_T_iterate",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/AverageReward.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.norm_bound",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/AverageReward.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.avg_upper",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/AverageReward.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.avg_greedy",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/AverageReward.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.avg_tendsto",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/AverageReward.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.gain_unique",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/AverageReward.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.white",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/AverageReward.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP",
+      "kind": "structure",
+      "module": "RelativeValueIteration/Endogenous.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.mk",
+      "kind": "constructor",
+      "module": "RelativeValueIteration/Endogenous.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.\u0393",
+      "kind": "projection",
+      "module": "RelativeValueIteration/Endogenous.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.\u0393_nonempty",
+      "kind": "projection",
+      "module": "RelativeValueIteration/Endogenous.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.r",
+      "kind": "projection",
+      "module": "RelativeValueIteration/Endogenous.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.\u03b2",
+      "kind": "projection",
+      "module": "RelativeValueIteration/Endogenous.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.\u03b2_nonneg",
+      "kind": "projection",
+      "module": "RelativeValueIteration/Endogenous.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.\u03b2_le_one",
+      "kind": "projection",
+      "module": "RelativeValueIteration/Endogenous.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.Fx",
+      "kind": "projection",
+      "module": "RelativeValueIteration/Endogenous.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.Fx_nonneg",
+      "kind": "projection",
+      "module": "RelativeValueIteration/Endogenous.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.Fx_sum",
+      "kind": "projection",
+      "module": "RelativeValueIteration/Endogenous.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.Fy",
+      "kind": "projection",
+      "module": "RelativeValueIteration/Endogenous.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.Fy_nonneg",
+      "kind": "projection",
+      "module": "RelativeValueIteration/Endogenous.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.Fy_sum",
+      "kind": "projection",
+      "module": "RelativeValueIteration/Endogenous.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.toMDP",
+      "kind": "abbrev",
+      "module": "RelativeValueIteration/Endogenous.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.lift",
+      "kind": "def",
+      "module": "RelativeValueIteration/Endogenous.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.Fxc",
+      "kind": "def",
+      "module": "RelativeValueIteration/Endogenous.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.sum_P_mul",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/Endogenous.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.Q_add_lift",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/Endogenous.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.T_add_lift",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/Endogenous.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.isGreedy_add_lift_iff",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/Endogenous.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.mean",
+      "kind": "def",
+      "module": "RelativeValueIteration/Endogenous.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.endo",
+      "kind": "def",
+      "module": "RelativeValueIteration/Endogenous.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.endo_decomp",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/Endogenous.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.mean_add_lift",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/Endogenous.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.endo_add_lift",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/Endogenous.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.isGreedy_endo_iff",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/Endogenous.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.endoT_iterate",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/Endogenous.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.endo_sub",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/Endogenous.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.spy",
+      "kind": "def",
+      "module": "RelativeValueIteration/Endogenous.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.sp_le_spy",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/Endogenous.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.spy_nonneg",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/Endogenous.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.spy_le_sp",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/Endogenous.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.abs_endo_le_sp",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/Endogenous.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.abs_endo_le",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/Endogenous.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.alphaY_nonneg",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/Endogenous.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.spy_T_sub_le",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/Endogenous.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.endoCoeff_le",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/Endogenous.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.spy_T_iterate_sub_le",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/Endogenous.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.endo_converges",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/Endogenous.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.vstar_recover",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/Endogenous.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.mean_unique",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/Endogenous.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.optimal_of_greedy_endo",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/Endogenous.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.endo_policy_error",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/Endogenous.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.swapModel",
+      "kind": "abbrev",
+      "module": "RelativeValueIteration/Example.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.swap_T",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/Example.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.swap_dobrushin_ge",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/Example.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.sp_bool_unit",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/Example.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.swap_sp_iterate",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/Example.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.swap_sp_vstar",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/Example.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.swap_endo_exact",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/Example.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.relative_slow_endogenous_exact",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/Example.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.pi_improve",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/PolicyIteration.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.eq_vstar_of_T_eq",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/PolicyIteration.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.v\u03c3_eq_vstar_of_stall",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/PolicyIteration.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.pi_mono",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/PolicyIteration.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.pi_terminates",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/PolicyIteration.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.isGreedy_rel_iff",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/PolicyIteration.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.relPI_terminates",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/PolicyIteration.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.pi_residual_le",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/PolicyIteration.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.relPI_stopping",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/PolicyIteration.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.relPI_bray",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/PolicyIteration.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.exoMDP",
+      "kind": "abbrev",
+      "module": "RelativeValueIteration/PolicyIteration.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.exists_exo_solution",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/PolicyIteration.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.policy_error_endo",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/PolicyIteration.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.endoPI_terminates",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/PolicyIteration.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.endo_T_endo_sub",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/PolicyIteration.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.endoPI_stopping",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/PolicyIteration.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.endoPI_bray",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/PolicyIteration.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.complexify",
+      "kind": "def",
+      "module": "RelativeValueIteration/SpectralRadius.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.complexify_apply",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/SpectralRadius.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.complexify_pow",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/SpectralRadius.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.complexify_mul",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/SpectralRadius.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.nnnorm_complexify",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/SpectralRadius.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.norm_complexify",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/SpectralRadius.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.specRad",
+      "kind": "def",
+      "module": "RelativeValueIteration/SpectralRadius.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.spectralRadius_complexify_ne_top",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/SpectralRadius.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.specRad_nonneg",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/SpectralRadius.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.mem_spectrum_iff_eigenpair",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/SpectralRadius.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.tendsto_norm_pow_rpow",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/SpectralRadius.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.eventually_norm_pow_le",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/SpectralRadius.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.exists_norm_pow_le",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/SpectralRadius.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.specRad_le_of_norm_pow_le",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/SpectralRadius.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.deltaMat",
+      "kind": "def",
+      "module": "RelativeValueIteration/Subradius.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.IsStochastic",
+      "kind": "def",
+      "module": "RelativeValueIteration/Subradius.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.subradius",
+      "kind": "def",
+      "module": "RelativeValueIteration/Subradius.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.deltaMat_mulVec",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/Subradius.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.cdelta_mulVec",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/Subradius.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.mulVec_const",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/Subradius.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.cmulVec_const",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/Subradius.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.norm_cmulVec_le",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/Subradius.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.no_jordan_one",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/Subradius.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.complexify_deltaQ_mulVec",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/Subradius.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.mem_spectrum_deltaQ_iff",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/Subradius.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.spectralRadius_deltaQ",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/Subradius.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.sp_deltaMat_mulVec",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/Subradius.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.norm_deltaMat_mulVec_le",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/Subradius.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.sp_le_two_norm",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/Subradius.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.deltaQ_pow_mulVec",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/Subradius.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.sp_pow_mulVec_le",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/Subradius.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.subradius_le_dobrushin",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/Subradius.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.sp_mul_le",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/AsymptoticRates.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.Pmat",
+      "kind": "def",
+      "module": "RelativeValueIteration/AsymptoticRates.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.Pmat_isStochastic",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/AsymptoticRates.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.T\u03c3_sub",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/AsymptoticRates.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.T\u03c3_iterate_sub",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/AsymptoticRates.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.sp_policy_eval_le",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/AsymptoticRates.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.eventually_T_eq_T\u03c3",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/AsymptoticRates.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.norm_iterate_sub_vstar_le",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/AsymptoticRates.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.eventually_linear",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/AsymptoticRates.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.relative_asymptotic_rate",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/AsymptoticRates.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.rel_asymptotic_rate",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/AsymptoticRates.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.level_rate_lower",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/AsymptoticRates.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.MDP.subradius_policy_le",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/AsymptoticRates.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.endo_idem",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/AsymptoticEndogenous.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.endo_lift",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/AsymptoticEndogenous.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.PreservesLift",
+      "kind": "def",
+      "module": "RelativeValueIteration/AsymptoticEndogenous.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.endo_mulVec_endo",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/AsymptoticEndogenous.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.spy_le_two_norm_endo",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/AsymptoticEndogenous.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.norm_endo_le",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/AsymptoticEndogenous.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.spy_mul_le",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/AsymptoticEndogenous.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.lamMat",
+      "kind": "def",
+      "module": "RelativeValueIteration/AsymptoticEndogenous.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.lamMat_mulVec",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/AsymptoticEndogenous.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.endoRadius",
+      "kind": "def",
+      "module": "RelativeValueIteration/AsymptoticEndogenous.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.PreservesLift.pow",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/AsymptoticEndogenous.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.lamF_pow_endo",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/AsymptoticEndogenous.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.spy_pow_mulVec_le",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/AsymptoticEndogenous.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.endoRadius_le_subradius",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/AsymptoticEndogenous.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.Pmat_preservesLift",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/AsymptoticEndogenous.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.endo_policy_eval_le",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/AsymptoticEndogenous.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.endo_asymptotic_rate",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/AsymptoticEndogenous.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.endo_values_asymptotic_rate",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/AsymptoticEndogenous.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.endoRadius_policy_le",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/AsymptoticEndogenous.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.specRad_le_of_eigen",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.norm_le_specRad",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.specRad_mono_of_spectrum",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.IsStochastic.pow",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.one_le_subradius_of_nonergodic",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.IsVecNorm",
+      "kind": "def",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.IsVecNorm.zero",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.IsVecNorm.nonneg",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.IsVecNorm.pos",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.IsVecNorm.sum_le",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.IsVecNorm.smul_real",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.IsVecNorm.sup_norm",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.IsVecNorm.l1_norm",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.IsVecNorm.l2_norm",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.norm_apply_le_singularValues_zero",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.sum_sq_mulVec_le_singularValues",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.sum_sq_norm_cmulVec_le",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.omegaMat",
+      "kind": "def",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.comega_mulVec",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.omega_mulVec",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.omega_mulVec_const",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.omega_mulVec_add_const",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.norm_omega_mulVec_le",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.sp_omega_mulVec",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.omegaF_pow_mulVec_omega",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.specRad_omega_eq_subradius",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.clamMat_mulVec",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.FxMat",
+      "kind": "def",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.FxMat_isStochastic",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.FyMat",
+      "kind": "def",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.FyMat_isStochastic",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.Pmat_apply",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.cPmat_mulVec_lift",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.spectrum_exo_subset",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.subradius_FxMat_le",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.clamP_mulVec",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.endoRadius_le_of_vecNorm",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.endoRadius_lt_subradius_of_vecNorm",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.endo_strictly_faster",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.endo_eval_strictly_faster",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.endoRadius_le_rowSum",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.endoRadius_le_l2",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.endoRadius_le_frobenius",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.endoRadius_le_singularValue",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.endoRadius_le_colSum",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.spy_Pmat_mulVec_le",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.endoRadius_le_hajnal",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.exists_hajnal_lt_one",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.endoRadius_lt_of_nonergodic_scrambling",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.Pmat_pow_mulVec_of_Fy_const",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.endoRadius_le_subradius_Fy",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
+    },
+    {
+      "name": "DPExtensions.RelativeValueIteration.ExoMDP.endoRadius_lt_of_Fy_const",
+      "kind": "theorem",
+      "module": "RelativeValueIteration/EndogenousSpeedup.lean"
+    }
+  ],
+  "full_build": "passed",
+  "fresh_source_compilation": "passed",
+  "fresh_source_lint_options": [
+    "-Dlinter.mathlibStandardSet=true",
+    "-Dlinter.style.header=false"
+  ],
+  "axioms": {
+    "DPExtensions.RelativeValueIteration.sp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.sub_le_sp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.abs_sub_le_sp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.sp_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.sp_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.sp_add_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.sp_neg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.le_sup'_sp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.inf'_le_sp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.dobrushin": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.\u0393": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.\u0393_nonempty": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.r": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.\u03b2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.\u03b2_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.\u03b2_le_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.P": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.P_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.P_sum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.Q": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.T": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.T\u03c3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.IsGreedy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.IsPolicy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.exists_greedyAct": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.exists_greedy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.Q_le_T": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.T\u03c3_eq_T_of_greedy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.T\u03c3_le_T": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.Q_add_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.T_add_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.T\u03c3_add_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.isGreedy_add_const_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.T_iterate_add_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.rel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.rel_add_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.relT_iterate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.Q_sub_Q": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.sp_T_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.abs_Q_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.norm_T_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.norm_T\u03c3_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.T_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.T\u03c3_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.contracting_T": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.contracting_T\u03c3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.vstar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.v\u03c3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.T_vstar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.T\u03c3_v\u03c3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.le_v\u03c3_of_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.le_vstar_of_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.vstar_le_of_T_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.v\u03c3_le_vstar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.dobrushin_le_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.alpha_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.sp_T_iterate_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.sp_iterate_sub_vstar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.rel_converges": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.policy_error": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.relIter": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.relIter_succ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.sp_T_relIter_sub": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.stopping_rule": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.stopping_rule_sup": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.sp_relIter_succ_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.stopping_eventually": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.T\u03c3_iterate_add_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.T_iterate_of_poisson": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.T\u03c3_iterate_le_T_iterate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.norm_bound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.avg_upper": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.avg_greedy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.avg_tendsto": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.gain_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.white": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.\u0393": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.\u0393_nonempty": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.r": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.\u03b2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.\u03b2_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.\u03b2_le_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.Fx": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.Fx_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.Fx_sum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.Fy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.Fy_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.Fy_sum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.toMDP": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.lift": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.Fxc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.sum_P_mul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.Q_add_lift": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.T_add_lift": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.isGreedy_add_lift_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.mean": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.endo": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.endo_decomp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.mean_add_lift": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.endo_add_lift": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.isGreedy_endo_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.endoT_iterate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.endo_sub": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.spy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.sp_le_spy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.spy_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.spy_le_sp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.abs_endo_le_sp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.abs_endo_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.alphaY_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.spy_T_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.endoCoeff_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.spy_T_iterate_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.endo_converges": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.vstar_recover": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.mean_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.optimal_of_greedy_endo": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.endo_policy_error": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.swapModel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.swap_T": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.swap_dobrushin_ge": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.sp_bool_unit": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.swap_sp_iterate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.swap_sp_vstar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.swap_endo_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.relative_slow_endogenous_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.pi_improve": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.eq_vstar_of_T_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.v\u03c3_eq_vstar_of_stall": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.pi_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.pi_terminates": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.isGreedy_rel_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.relPI_terminates": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.pi_residual_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.relPI_stopping": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.relPI_bray": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.exoMDP": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.exists_exo_solution": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.policy_error_endo": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.endoPI_terminates": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.endo_T_endo_sub": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.endoPI_stopping": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.endoPI_bray": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.complexify": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.complexify_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.complexify_pow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.complexify_mul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.nnnorm_complexify": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.norm_complexify": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.specRad": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.spectralRadius_complexify_ne_top": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.specRad_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.mem_spectrum_iff_eigenpair": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.tendsto_norm_pow_rpow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.eventually_norm_pow_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.exists_norm_pow_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.specRad_le_of_norm_pow_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.deltaMat": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.IsStochastic": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.subradius": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.deltaMat_mulVec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.cdelta_mulVec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.mulVec_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.cmulVec_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.norm_cmulVec_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.no_jordan_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.complexify_deltaQ_mulVec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.mem_spectrum_deltaQ_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.spectralRadius_deltaQ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.sp_deltaMat_mulVec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.norm_deltaMat_mulVec_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.sp_le_two_norm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.deltaQ_pow_mulVec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.sp_pow_mulVec_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.subradius_le_dobrushin": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.sp_mul_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.Pmat": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.Pmat_isStochastic": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.T\u03c3_sub": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.T\u03c3_iterate_sub": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.sp_policy_eval_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.eventually_T_eq_T\u03c3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.norm_iterate_sub_vstar_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.eventually_linear": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.relative_asymptotic_rate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.rel_asymptotic_rate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.level_rate_lower": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.MDP.subradius_policy_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.endo_idem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.endo_lift": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.PreservesLift": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.endo_mulVec_endo": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.spy_le_two_norm_endo": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.norm_endo_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.spy_mul_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.lamMat": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.lamMat_mulVec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.endoRadius": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.PreservesLift.pow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.lamF_pow_endo": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.spy_pow_mulVec_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.endoRadius_le_subradius": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.Pmat_preservesLift": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.endo_policy_eval_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.endo_asymptotic_rate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.endo_values_asymptotic_rate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.endoRadius_policy_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.specRad_le_of_eigen": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.norm_le_specRad": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.specRad_mono_of_spectrum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.IsStochastic.pow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.one_le_subradius_of_nonergodic": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.IsVecNorm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.IsVecNorm.zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.IsVecNorm.nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.IsVecNorm.pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.IsVecNorm.sum_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.IsVecNorm.smul_real": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.IsVecNorm.sup_norm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.IsVecNorm.l1_norm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.IsVecNorm.l2_norm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.norm_apply_le_singularValues_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.sum_sq_mulVec_le_singularValues": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.sum_sq_norm_cmulVec_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.omegaMat": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.comega_mulVec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.omega_mulVec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.omega_mulVec_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.omega_mulVec_add_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.norm_omega_mulVec_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.sp_omega_mulVec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.omegaF_pow_mulVec_omega": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.specRad_omega_eq_subradius": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.clamMat_mulVec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.FxMat": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.FxMat_isStochastic": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.FyMat": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.FyMat_isStochastic": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.Pmat_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.cPmat_mulVec_lift": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.spectrum_exo_subset": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.subradius_FxMat_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.clamP_mulVec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.endoRadius_le_of_vecNorm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.endoRadius_lt_subradius_of_vecNorm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.endo_strictly_faster": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.endo_eval_strictly_faster": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.endoRadius_le_rowSum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.endoRadius_le_l2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.endoRadius_le_frobenius": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.endoRadius_le_singularValue": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.endoRadius_le_colSum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.spy_Pmat_mulVec_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.endoRadius_le_hajnal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.exists_hajnal_lt_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.endoRadius_lt_of_nonergodic_scrambling": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.Pmat_pow_mulVec_of_Fy_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.endoRadius_le_subradius_Fy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.RelativeValueIteration.ExoMDP.endoRadius_lt_of_Fy_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  "source_sha256": {
+    "RelativeValueIteration/Span.lean": "4782b159236022a0017093916243104668a48ae42c0fd79f5d289e059f3e3e8a",
+    "RelativeValueIteration/MDP.lean": "2c9b520d985d00490228894856317434f854dbbd96e45c0884c83c69f85b1bd8",
+    "RelativeValueIteration/Discounted.lean": "09c6cf77e1e155cc4fa45be07464c015f09bc958197ab445ae048ade4d2c9170",
+    "RelativeValueIteration/RelativeVI.lean": "7db59e60620cba8879e058c0627d54d267d15147cf0bb4df64f558e28e04a625",
+    "RelativeValueIteration/AverageReward.lean": "44c2e055a3e3d0d67f13a95a15f64cf4f934159c44fce399845e08ef31187617",
+    "RelativeValueIteration/Endogenous.lean": "9ea281b53e672dcf7b7a7508778fd5e3a7dc3aeee0a62b5fe50034c9dfb5c136",
+    "RelativeValueIteration/Example.lean": "129679262d449a00a409dd92d312c9bd4058192778aac0cd7199d705da63016f",
+    "RelativeValueIteration/PolicyIteration.lean": "78f6cf20d931bfc261dae18568e87fff8c79e2dd9d1e247a1e5731c69a345595",
+    "RelativeValueIteration/SpectralRadius.lean": "76771ef33506cffeb3bb2102b09d9dc7792f63a46a4b8671a7dc7c65becda191",
+    "RelativeValueIteration/Subradius.lean": "12511bb06344dc8b546372f93090c0cf7f7009b308e626c0a344f6b093882ed8",
+    "RelativeValueIteration/AsymptoticRates.lean": "8d1f96a29d3ecf9031cf956d0c03a800f3cba1c57307a7f750d25caa1b2a45c3",
+    "RelativeValueIteration/AsymptoticEndogenous.lean": "3b2ab761ae94cce2dd4037d75fc4148fb91a11dba9c5a5a123132505f024bcea",
+    "RelativeValueIteration/EndogenousSpeedup.lean": "9138d0f56a3f9d237b59259013b2fea147e40b2819a39e882e3909fb2a74522a",
+    "RelativeValueIteration.lean": "2ad2bd428b36d8606dc1a6ced89b28c32b746c85496e35aeb7a27305b2439d3d",
+    "lean-toolchain": "8733782dc070a99b312039cda424f601b80f3be6f6f512627da5ba25adc27632",
+    "lakefile.toml": "5d07e4f1da1aeb0d356957e5a10d337c00aab208ded65204fa99a338473977b6",
+    "lake-manifest.json": "b4496a1d723d3dcaad1d8ae35cd1892d23d27c65253cbdea38636107c5b1d15e",
+    "proof-manifest.json": "09424673cde2583ea3ff1574f0d89f1566117d29b1caa1395c43a9ec1c5b082b",
+    "scripts/verify.py": "a70b1fa704dd590f937f8b37682afa88a9d85a9150065acb935c7d2c9589da3b",
+    "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  },
+  "fresh_audit_sha256": "2d0bef26433dde7a22c61e8f8c7a677d4eb604afd6706bc08da1375b9b6a3960",
+  "lean_toolchain": "leanprover/lean4:v4.34.0",
+  "scope": "Relative and endogenous value function iteration for finite MDPs: the span seminorm and the Dobrushin bound; constant-shift invariance of the Bellman operator and of greedy policies (White), relative value iteration as value iteration up to a constant, the span contraction sp(Tv - Tw) <= beta alpha sp(v - w); strong convergence of relative values at rate beta alpha, the MacQueen-Porteus policy error bound, Bray's stopping rule and its finite termination; White's average-reward theorem (beta = 1, alpha < 1): convergence to a solution of the average-reward optimality equation, optimality and uniqueness of the gain; endogenous value iteration for exogenous/endogenous state splits (Bray): invariance to exogenous shifts, the endogenizing operator, the within-x span contraction at rate beta alpha_y with alpha_y bounded by the full Dobrushin bound, recovery of v* and optimal policies from the endogenous value, the policy error bound, and an example where relative VFI gives no speed-up but endogenous VFI is exact; asymptotic eigenvalue rates: spectral radius of real matrices and Gelfand's formula, the subradius rho(Delta Q) as the second-largest eigenvalue modulus (no Jordan block at 1) bounded by the Dobrushin coefficient, freezing of the greedy policy at a unique optimal decision rule, the Morton-Wecker rate beta lambda(P*) for relative values and Morton's rate for policy evaluation, levels no faster than beta, and the endogenous rates beta rho(Lambda P) with rho(Lambda F) <= lambda(F) (Bray); when endogenous VFI is strictly faster (Bray): every eigenvalue of Delta_X F_x is one of Delta P so sigma(F_x) <= sigma(P), rho(Lambda P) bounded by any vector-norm operator bound on Omega F_y(x), the Frobenius, largest-singular-value, row-sum, column-sum and Hajnal instances (with the largest singular value as the l2 operator norm), non-ergodic F_x with scrambling F_y, and x-independent F_y with sigma(F_x) > sigma(F_y); and rho(Omega F) = sigma(F) for every stochastic F (Bray, Lemma 7); relative and endogenous policy iteration (Bray): the same policies as policy iteration, policy improvement and finite termination, the endogenous policy error bound beta/(1 - beta) sp(Lambda(Tw - w)), and Bray's stopping rules returning epsilon-optimal policies after finitely many iterations.",
+  "source": "White (1963); Morton (1971); Morton and Wecker (1977); MacQueen (1966); Porteus (1971); Seneta (1981); Puterman (2005); Bray (2019, Quantitative Economics); Bray (2019, Management Science); Hajnal (1958); Horn and Johnson (2013); Howard (1960)."
+}

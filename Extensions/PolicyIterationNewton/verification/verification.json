@@ -1,0 +1,736 @@
+{
+  "checked_at_utc": "2026-10-08T05:14:02.336091+00:00",
+  "theorems": 37,
+  "module_theorems": {
+    "PolicyIterationNewton/PolicyModel.lean": 16,
+    "PolicyIterationNewton/Rates.lean": 12,
+    "PolicyIterationNewton/FiniteActions.lean": 9
+  },
+  "audited_declarations": 70,
+  "declarations": [
+    {
+      "name": "DPExtensions.PolicyIterationNewton.PolicyModel",
+      "kind": "structure",
+      "module": "PolicyIterationNewton/PolicyModel.lean"
+    },
+    {
+      "name": "DPExtensions.PolicyIterationNewton.PolicyModel.mk",
+      "kind": "constructor",
+      "module": "PolicyIterationNewton/PolicyModel.lean"
+    },
+    {
+      "name": "DPExtensions.PolicyIterationNewton.PolicyModel.r",
+      "kind": "projection",
+      "module": "PolicyIterationNewton/PolicyModel.lean"
+    },
+    {
+      "name": "DPExtensions.PolicyIterationNewton.PolicyModel.P",
+      "kind": "projection",
+      "module": "PolicyIterationNewton/PolicyModel.lean"
+    },
+    {
+      "name": "DPExtensions.PolicyIterationNewton.PolicyModel.P_nonneg",
+      "kind": "projection",
+      "module": "PolicyIterationNewton/PolicyModel.lean"
+    },
+    {
+      "name": "DPExtensions.PolicyIterationNewton.PolicyModel.P_sum",
+      "kind": "projection",
+      "module": "PolicyIterationNewton/PolicyModel.lean"
+    },
+    {
+      "name": "DPExtensions.PolicyIterationNewton.PolicyModel.\u03b2",
+      "kind": "projection",
+      "module": "PolicyIterationNewton/PolicyModel.lean"
+    },
+    {
+      "name": "DPExtensions.PolicyIterationNewton.PolicyModel.\u03b2_nonneg",
+      "kind": "projection",
+      "module": "PolicyIterationNewton/PolicyModel.lean"
+    },
+    {
+      "name": "DPExtensions.PolicyIterationNewton.PolicyModel.\u03b2_lt_one",
+      "kind": "projection",
+      "module": "PolicyIterationNewton/PolicyModel.lean"
+    },
+    {
+      "name": "DPExtensions.PolicyIterationNewton.PolicyModel.greedy",
+      "kind": "projection",
+      "module": "PolicyIterationNewton/PolicyModel.lean"
+    },
+    {
+      "name": "DPExtensions.PolicyIterationNewton.PolicyModel.greedy_spec",
+      "kind": "projection",
+      "module": "PolicyIterationNewton/PolicyModel.lean"
+    },
+    {
+      "name": "DPExtensions.PolicyIterationNewton.PolicyModel.Pv",
+      "kind": "def",
+      "module": "PolicyIterationNewton/PolicyModel.lean"
+    },
+    {
+      "name": "DPExtensions.PolicyIterationNewton.PolicyModel.T\u03c3",
+      "kind": "def",
+      "module": "PolicyIterationNewton/PolicyModel.lean"
+    },
+    {
+      "name": "DPExtensions.PolicyIterationNewton.PolicyModel.T",
+      "kind": "def",
+      "module": "PolicyIterationNewton/PolicyModel.lean"
+    },
+    {
+      "name": "DPExtensions.PolicyIterationNewton.PolicyModel.T\u03c3_le_T",
+      "kind": "theorem",
+      "module": "PolicyIterationNewton/PolicyModel.lean"
+    },
+    {
+      "name": "DPExtensions.PolicyIterationNewton.PolicyModel.Pv_sub",
+      "kind": "theorem",
+      "module": "PolicyIterationNewton/PolicyModel.lean"
+    },
+    {
+      "name": "DPExtensions.PolicyIterationNewton.PolicyModel.abs_Pv_le",
+      "kind": "theorem",
+      "module": "PolicyIterationNewton/PolicyModel.lean"
+    },
+    {
+      "name": "DPExtensions.PolicyIterationNewton.PolicyModel.Pv_mono",
+      "kind": "theorem",
+      "module": "PolicyIterationNewton/PolicyModel.lean"
+    },
+    {
+      "name": "DPExtensions.PolicyIterationNewton.PolicyModel.T\u03c3_mono",
+      "kind": "theorem",
+      "module": "PolicyIterationNewton/PolicyModel.lean"
+    },
+    {
+      "name": "DPExtensions.PolicyIterationNewton.PolicyModel.norm_T\u03c3_sub_le",
+      "kind": "theorem",
+      "module": "PolicyIterationNewton/PolicyModel.lean"
+    },
+    {
+      "name": "DPExtensions.PolicyIterationNewton.PolicyModel.norm_T_sub_le",
+      "kind": "theorem",
+      "module": "PolicyIterationNewton/PolicyModel.lean"
+    },
+    {
+      "name": "DPExtensions.PolicyIterationNewton.PolicyModel.contracting_T",
+      "kind": "theorem",
+      "module": "PolicyIterationNewton/PolicyModel.lean"
+    },
+    {
+      "name": "DPExtensions.PolicyIterationNewton.PolicyModel.contracting_T\u03c3",
+      "kind": "theorem",
+      "module": "PolicyIterationNewton/PolicyModel.lean"
+    },
+    {
+      "name": "DPExtensions.PolicyIterationNewton.PolicyModel.vstar",
+      "kind": "def",
+      "module": "PolicyIterationNewton/PolicyModel.lean"
+    },
+    {
+      "name": "DPExtensions.PolicyIterationNewton.PolicyModel.v\u03c3",
+      "kind": "def",
+      "module": "PolicyIterationNewton/PolicyModel.lean"
+    },
+    {
+      "name": "DPExtensions.PolicyIterationNewton.PolicyModel.T_vstar",
+      "kind": "theorem",
+      "module": "PolicyIterationNewton/PolicyModel.lean"
+    },
+    {
+      "name": "DPExtensions.PolicyIterationNewton.PolicyModel.T\u03c3_v\u03c3",
+      "kind": "theorem",
+      "module": "PolicyIterationNewton/PolicyModel.lean"
+    },
+    {
+      "name": "DPExtensions.PolicyIterationNewton.PolicyModel.le_v\u03c3_of_le",
+      "kind": "theorem",
+      "module": "PolicyIterationNewton/PolicyModel.lean"
+    },
+    {
+      "name": "DPExtensions.PolicyIterationNewton.PolicyModel.v\u03c3_le_vstar",
+      "kind": "theorem",
+      "module": "PolicyIterationNewton/PolicyModel.lean"
+    },
+    {
+      "name": "DPExtensions.PolicyIterationNewton.PolicyModel.v\u03c3_greedy_vstar",
+      "kind": "theorem",
+      "module": "PolicyIterationNewton/PolicyModel.lean"
+    },
+    {
+      "name": "DPExtensions.PolicyIterationNewton.PolicyModel.le_v\u03c3_greedy",
+      "kind": "theorem",
+      "module": "PolicyIterationNewton/PolicyModel.lean"
+    },
+    {
+      "name": "DPExtensions.PolicyIterationNewton.PolicyModel.newton_identity",
+      "kind": "theorem",
+      "module": "PolicyIterationNewton/PolicyModel.lean"
+    },
+    {
+      "name": "DPExtensions.PolicyIterationNewton.PolicyModel.piPolicy",
+      "kind": "def",
+      "module": "PolicyIterationNewton/Rates.lean"
+    },
+    {
+      "name": "DPExtensions.PolicyIterationNewton.PolicyModel.piValue",
+      "kind": "def",
+      "module": "PolicyIterationNewton/Rates.lean"
+    },
+    {
+      "name": "DPExtensions.PolicyIterationNewton.PolicyModel.piValue_succ",
+      "kind": "theorem",
+      "module": "PolicyIterationNewton/Rates.lean"
+    },
+    {
+      "name": "DPExtensions.PolicyIterationNewton.PolicyModel.le_T_v\u03c3",
+      "kind": "theorem",
+      "module": "PolicyIterationNewton/Rates.lean"
+    },
+    {
+      "name": "DPExtensions.PolicyIterationNewton.PolicyModel.piValue_mono",
+      "kind": "theorem",
+      "module": "PolicyIterationNewton/Rates.lean"
+    },
+    {
+      "name": "DPExtensions.PolicyIterationNewton.PolicyModel.linear_rate",
+      "kind": "theorem",
+      "module": "PolicyIterationNewton/Rates.lean"
+    },
+    {
+      "name": "DPExtensions.PolicyIterationNewton.PolicyModel.error_le_geometric",
+      "kind": "theorem",
+      "module": "PolicyIterationNewton/Rates.lean"
+    },
+    {
+      "name": "DPExtensions.PolicyIterationNewton.PolicyModel.pi_converges",
+      "kind": "theorem",
+      "module": "PolicyIterationNewton/Rates.lean"
+    },
+    {
+      "name": "DPExtensions.PolicyIterationNewton.PolicyModel.abs_Pv_diff_le",
+      "kind": "theorem",
+      "module": "PolicyIterationNewton/Rates.lean"
+    },
+    {
+      "name": "DPExtensions.PolicyIterationNewton.PolicyModel.pb_bound",
+      "kind": "theorem",
+      "module": "PolicyIterationNewton/Rates.lean"
+    },
+    {
+      "name": "DPExtensions.PolicyIterationNewton.PolicyModel.quadratic_rate",
+      "kind": "theorem",
+      "module": "PolicyIterationNewton/Rates.lean"
+    },
+    {
+      "name": "DPExtensions.PolicyIterationNewton.PolicyModel.superlinear_rate",
+      "kind": "theorem",
+      "module": "PolicyIterationNewton/Rates.lean"
+    },
+    {
+      "name": "DPExtensions.PolicyIterationNewton.PolicyModel.pi_terminates",
+      "kind": "theorem",
+      "module": "PolicyIterationNewton/Rates.lean"
+    },
+    {
+      "name": "DPExtensions.PolicyIterationNewton.PolicyModel.exists_pi_terminates",
+      "kind": "theorem",
+      "module": "PolicyIterationNewton/Rates.lean"
+    },
+    {
+      "name": "DPExtensions.PolicyIterationNewton.FiniteMDP",
+      "kind": "structure",
+      "module": "PolicyIterationNewton/FiniteActions.lean"
+    },
+    {
+      "name": "DPExtensions.PolicyIterationNewton.FiniteMDP.mk",
+      "kind": "constructor",
+      "module": "PolicyIterationNewton/FiniteActions.lean"
+    },
+    {
+      "name": "DPExtensions.PolicyIterationNewton.FiniteMDP.\u0393",
+      "kind": "projection",
+      "module": "PolicyIterationNewton/FiniteActions.lean"
+    },
+    {
+      "name": "DPExtensions.PolicyIterationNewton.FiniteMDP.\u0393_nonempty",
+      "kind": "projection",
+      "module": "PolicyIterationNewton/FiniteActions.lean"
+    },
+    {
+      "name": "DPExtensions.PolicyIterationNewton.FiniteMDP.r",
+      "kind": "projection",
+      "module": "PolicyIterationNewton/FiniteActions.lean"
+    },
+    {
+      "name": "DPExtensions.PolicyIterationNewton.FiniteMDP.\u03b2",
+      "kind": "projection",
+      "module": "PolicyIterationNewton/FiniteActions.lean"
+    },
+    {
+      "name": "DPExtensions.PolicyIterationNewton.FiniteMDP.\u03b2_nonneg",
+      "kind": "projection",
+      "module": "PolicyIterationNewton/FiniteActions.lean"
+    },
+    {
+      "name": "DPExtensions.PolicyIterationNewton.FiniteMDP.\u03b2_lt_one",
+      "kind": "projection",
+      "module": "PolicyIterationNewton/FiniteActions.lean"
+    },
+    {
+      "name": "DPExtensions.PolicyIterationNewton.FiniteMDP.P",
+      "kind": "projection",
+      "module": "PolicyIterationNewton/FiniteActions.lean"
+    },
+    {
+      "name": "DPExtensions.PolicyIterationNewton.FiniteMDP.P_nonneg",
+      "kind": "projection",
+      "module": "PolicyIterationNewton/FiniteActions.lean"
+    },
+    {
+      "name": "DPExtensions.PolicyIterationNewton.FiniteMDP.P_sum",
+      "kind": "projection",
+      "module": "PolicyIterationNewton/FiniteActions.lean"
+    },
+    {
+      "name": "DPExtensions.PolicyIterationNewton.FiniteMDP.Pol",
+      "kind": "def",
+      "module": "PolicyIterationNewton/FiniteActions.lean"
+    },
+    {
+      "name": "DPExtensions.PolicyIterationNewton.FiniteMDP.Q",
+      "kind": "def",
+      "module": "PolicyIterationNewton/FiniteActions.lean"
+    },
+    {
+      "name": "DPExtensions.PolicyIterationNewton.FiniteMDP.greedyAct",
+      "kind": "def",
+      "module": "PolicyIterationNewton/FiniteActions.lean"
+    },
+    {
+      "name": "DPExtensions.PolicyIterationNewton.FiniteMDP.greedyAct_mem",
+      "kind": "theorem",
+      "module": "PolicyIterationNewton/FiniteActions.lean"
+    },
+    {
+      "name": "DPExtensions.PolicyIterationNewton.FiniteMDP.greedyAct_max",
+      "kind": "theorem",
+      "module": "PolicyIterationNewton/FiniteActions.lean"
+    },
+    {
+      "name": "DPExtensions.PolicyIterationNewton.FiniteMDP.toPolicyModel",
+      "kind": "def",
+      "module": "PolicyIterationNewton/FiniteActions.lean"
+    },
+    {
+      "name": "DPExtensions.PolicyIterationNewton.FiniteMDP.T\u03c3_eq",
+      "kind": "theorem",
+      "module": "PolicyIterationNewton/FiniteActions.lean"
+    },
+    {
+      "name": "DPExtensions.PolicyIterationNewton.FiniteMDP.vstar_eq",
+      "kind": "theorem",
+      "module": "PolicyIterationNewton/FiniteActions.lean"
+    },
+    {
+      "name": "DPExtensions.PolicyIterationNewton.FiniteMDP.abs_Q_sub_le",
+      "kind": "theorem",
+      "module": "PolicyIterationNewton/FiniteActions.lean"
+    },
+    {
+      "name": "DPExtensions.PolicyIterationNewton.FiniteMDP.exists_gap",
+      "kind": "theorem",
+      "module": "PolicyIterationNewton/FiniteActions.lean"
+    },
+    {
+      "name": "DPExtensions.PolicyIterationNewton.FiniteMDP.greedy_optimal_of_near",
+      "kind": "theorem",
+      "module": "PolicyIterationNewton/FiniteActions.lean"
+    },
+    {
+      "name": "DPExtensions.PolicyIterationNewton.FiniteMDP.pi_terminates_finite",
+      "kind": "theorem",
+      "module": "PolicyIterationNewton/FiniteActions.lean"
+    },
+    {
+      "name": "DPExtensions.PolicyIterationNewton.FiniteMDP.exists_pi_terminates_finite",
+      "kind": "theorem",
+      "module": "PolicyIterationNewton/FiniteActions.lean"
+    }
+  ],
+  "full_build": "passed",
+  "fresh_source_compilation": "passed",
+  "fresh_source_lint_options": [
+    "-Dlinter.mathlibStandardSet=true",
+    "-Dlinter.style.header=false"
+  ],
+  "axioms": {
+    "DPExtensions.PolicyIterationNewton.PolicyModel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.PolicyIterationNewton.PolicyModel.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.PolicyIterationNewton.PolicyModel.r": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.PolicyIterationNewton.PolicyModel.P": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.PolicyIterationNewton.PolicyModel.P_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.PolicyIterationNewton.PolicyModel.P_sum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.PolicyIterationNewton.PolicyModel.\u03b2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.PolicyIterationNewton.PolicyModel.\u03b2_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.PolicyIterationNewton.PolicyModel.\u03b2_lt_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.PolicyIterationNewton.PolicyModel.greedy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.PolicyIterationNewton.PolicyModel.greedy_spec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.PolicyIterationNewton.PolicyModel.Pv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.PolicyIterationNewton.PolicyModel.T\u03c3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.PolicyIterationNewton.PolicyModel.T": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.PolicyIterationNewton.PolicyModel.T\u03c3_le_T": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.PolicyIterationNewton.PolicyModel.Pv_sub": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.PolicyIterationNewton.PolicyModel.abs_Pv_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.PolicyIterationNewton.PolicyModel.Pv_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.PolicyIterationNewton.PolicyModel.T\u03c3_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.PolicyIterationNewton.PolicyModel.norm_T\u03c3_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.PolicyIterationNewton.PolicyModel.norm_T_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.PolicyIterationNewton.PolicyModel.contracting_T": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.PolicyIterationNewton.PolicyModel.contracting_T\u03c3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.PolicyIterationNewton.PolicyModel.vstar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.PolicyIterationNewton.PolicyModel.v\u03c3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.PolicyIterationNewton.PolicyModel.T_vstar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.PolicyIterationNewton.PolicyModel.T\u03c3_v\u03c3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.PolicyIterationNewton.PolicyModel.le_v\u03c3_of_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.PolicyIterationNewton.PolicyModel.v\u03c3_le_vstar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.PolicyIterationNewton.PolicyModel.v\u03c3_greedy_vstar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.PolicyIterationNewton.PolicyModel.le_v\u03c3_greedy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.PolicyIterationNewton.PolicyModel.newton_identity": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.PolicyIterationNewton.PolicyModel.piPolicy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.PolicyIterationNewton.PolicyModel.piValue": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.PolicyIterationNewton.PolicyModel.piValue_succ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.PolicyIterationNewton.PolicyModel.le_T_v\u03c3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.PolicyIterationNewton.PolicyModel.piValue_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.PolicyIterationNewton.PolicyModel.linear_rate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.PolicyIterationNewton.PolicyModel.error_le_geometric": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.PolicyIterationNewton.PolicyModel.pi_converges": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.PolicyIterationNewton.PolicyModel.abs_Pv_diff_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.PolicyIterationNewton.PolicyModel.pb_bound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.PolicyIterationNewton.PolicyModel.quadratic_rate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.PolicyIterationNewton.PolicyModel.superlinear_rate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.PolicyIterationNewton.PolicyModel.pi_terminates": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.PolicyIterationNewton.PolicyModel.exists_pi_terminates": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.PolicyIterationNewton.FiniteMDP": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.PolicyIterationNewton.FiniteMDP.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.PolicyIterationNewton.FiniteMDP.\u0393": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.PolicyIterationNewton.FiniteMDP.\u0393_nonempty": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.PolicyIterationNewton.FiniteMDP.r": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.PolicyIterationNewton.FiniteMDP.\u03b2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.PolicyIterationNewton.FiniteMDP.\u03b2_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.PolicyIterationNewton.FiniteMDP.\u03b2_lt_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.PolicyIterationNewton.FiniteMDP.P": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.PolicyIterationNewton.FiniteMDP.P_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.PolicyIterationNewton.FiniteMDP.P_sum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.PolicyIterationNewton.FiniteMDP.Pol": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.PolicyIterationNewton.FiniteMDP.Q": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.PolicyIterationNewton.FiniteMDP.greedyAct": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.PolicyIterationNewton.FiniteMDP.greedyAct_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.PolicyIterationNewton.FiniteMDP.greedyAct_max": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.PolicyIterationNewton.FiniteMDP.toPolicyModel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.PolicyIterationNewton.FiniteMDP.T\u03c3_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.PolicyIterationNewton.FiniteMDP.vstar_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.PolicyIterationNewton.FiniteMDP.abs_Q_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.PolicyIterationNewton.FiniteMDP.exists_gap": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.PolicyIterationNewton.FiniteMDP.greedy_optimal_of_near": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.PolicyIterationNewton.FiniteMDP.pi_terminates_finite": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.PolicyIterationNewton.FiniteMDP.exists_pi_terminates_finite": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  "source_sha256": {
+    "PolicyIterationNewton/PolicyModel.lean": "8fb829f7f896e7866fb340a8d31f85c8ea059f6edabbfa6423ea36c49e965bb1",
+    "PolicyIterationNewton/Rates.lean": "2798dbae8824ad47f00cd3c4f374229faee30e725958596c285a48385d11e0e2",
+    "PolicyIterationNewton/FiniteActions.lean": "301f8252882536b0a4bdb441c1277d900737625a9d93697a99884367c864885c",
+    "PolicyIterationNewton.lean": "f08850cb98457b1264f790b3390983cd84aaf57fe820f79793c9bfb0c41d2f7a",
+    "lean-toolchain": "8733782dc070a99b312039cda424f601b80f3be6f6f512627da5ba25adc27632",
+    "lakefile.toml": "c63232f70ce019b81d149b269bc3247393dbf69083c85cb0e100217e3f26e96e",
+    "lake-manifest.json": "884b0524bc1d145d8e8dc2284f4ac4acbbc68a5eb817f0fb762ae72dafe7fa2d",
+    "proof-manifest.json": "4493196ade9d107a7c654636ae6159b3ac97284272d21bd59a4ba8d837e4e35e",
+    "scripts/verify.py": "a70b1fa704dd590f937f8b37682afa88a9d85a9150065acb935c7d2c9589da3b",
+    "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  },
+  "fresh_audit_sha256": "d8ae847d10625ab17189397dcb2ce600d6535628ddab46146554e90cbdff264b",
+  "lean_toolchain": "leanprover/lean4:v4.34.0",
+  "scope": "Policy iteration as Newton's method and its convergence rates, for finite state spaces and arbitrary (possibly infinite) policy sets with a greedy selector: the Bellman and policy operators as sup-norm contractions, the Newton identity, monotone improvement; the linear rate ||v* - v_{k+1}|| <= beta ||v* - v_k||, the Puterman-Brumelle bound (1 - beta)||v* - v_{greedy v}|| <= beta delta ||v* - v||, quadratic convergence under Lipschitz greedy transitions, superlinear convergence under continuity, finite termination when greedy policies near v* are optimal; for finite MDPs, the optimality gap, optimality of greedy policies within g/(2 beta + 1) of v*, and termination of policy iteration with an explicit iteration bound.",
+  "source": "Howard (1960); Puterman and Brumelle (1979); Santos and Rust (2004)."
+}
