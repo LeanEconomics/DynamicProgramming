@@ -8,7 +8,7 @@ chapter project for Stokey and Lucas with Prescott, *Recursive Methods in Econom
 Chapter 2 previews the book with the one-sector growth model: the planner's problem with a finite
 and an infinite horizon, its stochastic version, and the competitive equilibrium that decentralizes
 it. Its formal content is in Exercises 2.1–2.10, all of which are formalised here. The library
-contains **102 theorems**.
+contains **114 theorems**.
 
 * **The finite-horizon planner** (pp. 10–11): for concave `U` and `f`, a feasible path satisfying the
   Euler equation (5) and `k_{T+1} = 0` (6) is optimal (`euler_optimal`), and the only optimum when
@@ -51,6 +51,7 @@ All names are in the namespace `StokeyLucasPrescott.Overview`. See the
 | [Technology](Overview/Technology.lean) | 12 | Ex 2.1: the neoclassical technology; Cobb–Douglas |
 | [SavingsRate](Overview/SavingsRate.lean) | 19 | Ex 2.4: steady state and monotone convergence |
 | [StochasticLog](Overview/StochasticLog.lean) | 17 | Ex 2.6: the stochastic functional equation and expected utility |
+| [StochasticObjective](Overview/StochasticObjective.lean) | 12 | Ex 2.6: the expectation of the discounted sum equals `v(k, z)` |
 | [LogNormal](Overview/LogNormal.lean) | 10 | Ex 2.7: Gaussian log capital |
 | [Equilibrium](Overview/Equilibrium.lean) | 11 | §2.3, Ex 2.8–2.10: competitive equilibrium and the welfare theorems |
 | [EventTree](Overview/EventTree.lean) | 5 | Ex 2.5: contingency plans and the stochastic Euler equations |

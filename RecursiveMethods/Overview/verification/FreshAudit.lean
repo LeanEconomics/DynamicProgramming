@@ -4,12 +4,12 @@ import Mathlib.Analysis.Convex.SpecificFunctions.Basic
 import Mathlib.Analysis.Convex.SpecificFunctions.Pow
 import Mathlib.Analysis.SpecificLimits.Basic
 import Mathlib.Analysis.SpecialFunctions.Pow.Asymptotics
-import Mathlib.Topology.Order.MonotoneConvergence
+import Mathlib.LinearAlgebra.Dimension.Constructions
+import Mathlib.LinearAlgebra.Dimension.Finrank
 import Mathlib.Probability.ProductMeasure
 import Mathlib.Probability.Distributions.Gaussian.Real
 import Mathlib.Probability.Independence.InfinitePi
-import Mathlib.LinearAlgebra.Dimension.Constructions
-import Mathlib.LinearAlgebra.Dimension.Finrank
+import Mathlib.Topology.Order.MonotoneConvergence
 set_option autoImplicit false
 
 /-
@@ -925,834 +925,6 @@ Authors: Robert Kirkby
 -/
 
 /-!
-# A constant savings rate
-
-SLP Exercise 2.4, p. 15: `g(k) = s f(k)` with `f` as in Exercise 2.1.
-
-For any `g` on `[0, ∞)` that is continuous, strictly increasing and strictly concave with
-`g(0) = 0`, lying above the 45° line somewhere and below it somewhere:
-
-* `exists_unique_fixedPoint` (Ex 2.4a): there is exactly one positive stationary point `k*`;
-  `lt_of_lt_fixed`, `gt_of_gt_fixed`: `g(k) > k` below it and `g(k) < k` above it.
-* `tendsto_fixedPoint`, `monotone_of_le`, `antitone_of_ge` (Ex 2.4b): from every `k₀ > 0` the
-  sequence `k_{t+1} = g(k_t)` converges monotonically to `k*`; `iterate_eq_fixed_iff`: it reaches
-  `k*` in finitely many periods only if it starts there.
-* `savings_crossings`, `savings_unique_steady_state`: for `f` neoclassical, `s > 0` and
-  `s(1 − δ) < 1` give the two crossings. The book states only `s > 0`; see
-  `docs/corrections.md`.
--/
-
-open Set Filter Topology
-
-namespace StokeyLucasPrescott.Overview
-
-/-- The assumptions on a savings function `g` on `[0, ∞)`. -/
-structure SavingsMap (g : ℝ → ℝ) : Prop where
-  zero : g 0 = 0
-  cont : ContinuousOn g (Ici 0)
-  mono : StrictMonoOn g (Ici 0)
-  conc : StrictConcaveOn ℝ (Ici 0) g
-  above : ∃ a, 0 < a ∧ a < g a
-  below : ∃ b, 0 < b ∧ g b < b
-
-namespace SavingsMap
-
-variable {g : ℝ → ℝ} (hg : SavingsMap g)
-include hg
-
-/-- `g(k) − k` is strictly concave and vanishes at `0`, so it changes sign at most once on
-`(0, ∞)`: if it is `≥ 0` at `y > 0` it is `> 0` on `(0, y)`. -/
-theorem pos_of_lt {x y : ℝ} (hx : 0 < x) (hxy : x < y) (hy : y ≤ g y) : x < g x := by
-  have hy0 : 0 < y := hx.trans hxy
-  have hA : 0 < 1 - x / y := by rw [sub_pos, div_lt_one hy0]; exact hxy
-  have hB : 0 < x / y := by positivity
-  have h := hg.conc.2 (Set.mem_Ici.2 le_rfl) (Set.mem_Ici.2 hy0.le) hy0.ne hA hB (by ring)
-  simp only [smul_eq_mul, hg.zero, mul_zero, zero_add] at h
-  rw [show x / y * y = x by field_simp] at h
-  have : x / y * y ≤ x / y * g y := mul_le_mul_of_nonneg_left hy (by positivity)
-  rw [show x / y * y = x by field_simp] at this
-  linarith
-
-/-- **Ex 2.4a.** There is exactly one positive stationary point. -/
-theorem exists_unique_fixedPoint : ∃! k, 0 < k ∧ g k = k := by
-  obtain ⟨a, ha, hga⟩ := hg.above
-  obtain ⟨b, hb, hgb⟩ := hg.below
-  have hab : a < b := by
-    by_contra h
-    push Not at h
-    rcases h.eq_or_lt with rfl | h
-    · linarith
-    · have := hg.pos_of_lt hb h hga.le
-      linarith
-  -- existence by the intermediate value theorem for `g(k) − k`
-  have hcont : ContinuousOn (fun k => g k - k) (Icc a b) :=
-    (hg.cont.mono fun x hx => Set.mem_Ici.2 (ha.le.trans hx.1)).sub continuousOn_id
-  obtain ⟨k, hk, hk0⟩ := intermediate_value_Icc' hab.le hcont
-    (show (0 : ℝ) ∈ Icc (g b - b) (g a - a) from ⟨by linarith, by linarith⟩)
-  refine ⟨k, ⟨ha.trans_le hk.1, by linarith⟩, fun j ⟨hj, hgj⟩ => ?_⟩
-  -- uniqueness: two positive fixed points contradict strict concavity
-  have hk0' : 0 < k := ha.trans_le hk.1
-  by_contra hne
-  rcases lt_or_gt_of_ne hne with h | h
-  · have := hg.pos_of_lt hj h (by linarith)
-    linarith
-  · have := hg.pos_of_lt hk0' h hgj.ge
-    linarith
-
-/-- The positive stationary point `k*`. -/
-noncomputable def kstar : ℝ := Classical.choose hg.exists_unique_fixedPoint
-
-theorem kstar_pos : 0 < hg.kstar := (Classical.choose_spec hg.exists_unique_fixedPoint).1.1
-
-theorem g_kstar : g hg.kstar = hg.kstar := (Classical.choose_spec hg.exists_unique_fixedPoint).1.2
-
-theorem eq_kstar {k : ℝ} (hk : 0 < k) (hgk : g k = k) : k = hg.kstar :=
-  (Classical.choose_spec hg.exists_unique_fixedPoint).2 k ⟨hk, hgk⟩
-
-/-- Below `k*` the map lies above the 45° line. -/
-theorem lt_of_lt_fixed {k : ℝ} (hk : 0 < k) (hks : k < hg.kstar) : k < g k :=
-  hg.pos_of_lt hk hks hg.g_kstar.ge
-
-/-- Above `k*` the map lies below the 45° line. -/
-theorem gt_of_gt_fixed {k : ℝ} (hks : hg.kstar < k) : g k < k := by
-  by_contra h
-  push Not at h
-  have := hg.pos_of_lt hg.kstar_pos hks h
-  rw [hg.g_kstar] at this
-  exact lt_irrefl _ this
-
-theorem g_pos {k : ℝ} (hk : 0 < k) : 0 < g k := by
-  have := hg.mono (Set.mem_Ici.2 le_rfl) (Set.mem_Ici.2 hk.le) hk
-  rwa [hg.zero] at this
-
-/-- Iterates from `k₀ ∈ (0, k*]` stay in `(0, k*]` and increase. -/
-theorem iterate_mem_below {k₀ : ℝ} (hk₀ : 0 < k₀) (hle : k₀ ≤ hg.kstar) (t : ℕ) :
-    0 < g^[t] k₀ ∧ g^[t] k₀ ≤ hg.kstar ∧ g^[t] k₀ ≤ g^[t + 1] k₀ := by
-  induction t with
-  | zero =>
-    refine ⟨hk₀, hle, ?_⟩
-    rcases hle.eq_or_lt with h | h
-    · simp [h, hg.g_kstar]
-    · exact (hg.lt_of_lt_fixed hk₀ h).le
-  | succ t ih =>
-    obtain ⟨h0, h1, h2⟩ := ih
-    have hpos : 0 < g^[t + 1] k₀ := by
-      rw [Function.iterate_succ_apply']; exact hg.g_pos h0
-    have hle' : g^[t + 1] k₀ ≤ hg.kstar := by
-      rw [Function.iterate_succ_apply', ← hg.g_kstar]
-      exact hg.mono.monotoneOn (Set.mem_Ici.2 h0.le) (Set.mem_Ici.2 hg.kstar_pos.le) h1
-    refine ⟨hpos, hle', ?_⟩
-    rw [Function.iterate_succ_apply' g (t + 1)]
-    rcases hle'.eq_or_lt with h | h
-    · rw [h, hg.g_kstar]
-    · exact (hg.lt_of_lt_fixed hpos h).le
-
-/-- Iterates from `k₀ ≥ k*` stay above `k*` and decrease. -/
-theorem iterate_mem_above {k₀ : ℝ} (hge : hg.kstar ≤ k₀) (t : ℕ) :
-    hg.kstar ≤ g^[t] k₀ ∧ g^[t + 1] k₀ ≤ g^[t] k₀ := by
-  induction t with
-  | zero =>
-    refine ⟨hge, ?_⟩
-    rcases hge.eq_or_lt with h | h
-    · simp [← h, hg.g_kstar]
-    · exact (hg.gt_of_gt_fixed h).le
-  | succ t ih =>
-    obtain ⟨h1, h2⟩ := ih
-    have hge' : hg.kstar ≤ g^[t + 1] k₀ := by
-      rw [Function.iterate_succ_apply', ← hg.g_kstar]
-      exact hg.mono.monotoneOn (Set.mem_Ici.2 hg.kstar_pos.le)
-        (Set.mem_Ici.2 (hg.kstar_pos.le.trans h1)) h1
-    refine ⟨hge', ?_⟩
-    rw [Function.iterate_succ_apply' g (t + 1)]
-    rcases hge'.eq_or_lt with h | h
-    · rw [← h, hg.g_kstar]
-    · exact (hg.gt_of_gt_fixed h).le
-
-/-- **Ex 2.4b (monotonicity).** From `k₀ ∈ (0, k*]` the sequence rises. -/
-theorem monotone_of_le {k₀ : ℝ} (hk₀ : 0 < k₀) (hle : k₀ ≤ hg.kstar) :
-    Monotone fun t => g^[t] k₀ :=
-  monotone_nat_of_le_succ fun t => (hg.iterate_mem_below hk₀ hle t).2.2
-
-/-- **Ex 2.4b (monotonicity).** From `k₀ ≥ k*` the sequence falls. -/
-theorem antitone_of_ge {k₀ : ℝ} (hge : hg.kstar ≤ k₀) : Antitone fun t => g^[t] k₀ :=
-  antitone_nat_of_succ_le fun t => (hg.iterate_mem_above hge t).2
-
-/-- A limit of the iterates in `(0, ∞)` is a fixed point, hence `k*`. -/
-theorem limit_eq_kstar {k₀ L : ℝ} (hL : 0 < L) (hlim : Tendsto (fun t => g^[t] k₀) atTop (𝓝 L))
-    (hpos : ∀ t, 0 ≤ g^[t] k₀) : L = hg.kstar := by
-  have hcontL : ContinuousWithinAt g (Ici 0) L := hg.cont L (Set.mem_Ici.2 hL.le)
-  have h1 : Tendsto (fun t => g (g^[t] k₀)) atTop (𝓝 (g L)) :=
-    hcontL.tendsto.comp (tendsto_nhdsWithin_iff.2 ⟨hlim, Eventually.of_forall hpos⟩)
-  have h2 : Tendsto (fun t => g (g^[t] k₀)) atTop (𝓝 L) := by
-    have := hlim.comp (tendsto_add_atTop_nat 1)
-    simpa [Function.comp_def, Function.iterate_succ_apply'] using this
-  exact hg.eq_kstar hL (tendsto_nhds_unique h1 h2)
-
-/-- **Ex 2.4b.** From every `k₀ > 0` the sequence `k_{t+1} = g(k_t)` converges to `k*`. -/
-theorem tendsto_fixedPoint {k₀ : ℝ} (hk₀ : 0 < k₀) :
-    Tendsto (fun t => g^[t] k₀) atTop (𝓝 hg.kstar) := by
-  rcases le_total k₀ hg.kstar with hle | hge
-  · have hb := hg.iterate_mem_below hk₀ hle
-    have hmono := hg.monotone_of_le hk₀ hle
-    have hbdd : BddAbove (range fun t => g^[t] k₀) :=
-      ⟨hg.kstar, by rintro _ ⟨t, rfl⟩; exact (hb t).2.1⟩
-    have hlim := tendsto_atTop_ciSup hmono hbdd
-    have hLpos : 0 < ⨆ t, g^[t] k₀ := hk₀.trans_le (le_ciSup hbdd 0)
-    rwa [← hg.limit_eq_kstar hLpos hlim fun t => (hb t).1.le]
-  · have ha := hg.iterate_mem_above hge
-    have hanti := hg.antitone_of_ge hge
-    have hbdd : BddBelow (range fun t => g^[t] k₀) :=
-      ⟨hg.kstar, by rintro _ ⟨t, rfl⟩; exact (ha t).1⟩
-    have hlim := tendsto_atTop_ciInf hanti hbdd
-    have hLpos : 0 < ⨅ t, g^[t] k₀ :=
-      hg.kstar_pos.trans_le (le_ciInf fun t => (ha t).1)
-    rwa [← hg.limit_eq_kstar hLpos hlim fun t => (hg.kstar_pos.le.trans (ha t).1)]
-
-/-- **Ex 2.4b (no finite-time arrival).** The sequence reaches `k*` in finitely many periods only
-if `k₀ = k*`. -/
-theorem iterate_eq_fixed_iff {k₀ : ℝ} (hk₀ : 0 < k₀) (t : ℕ) :
-    g^[t] k₀ = hg.kstar ↔ k₀ = hg.kstar := by
-  constructor
-  · intro h
-    induction t generalizing k₀ with
-    | zero => exact h
-    | succ t ih =>
-      rw [Function.iterate_succ_apply] at h
-      have := ih (hg.g_pos hk₀) h
-      rw [← hg.g_kstar] at this
-      exact hg.mono.injOn (Set.mem_Ici.2 hk₀.le) (Set.mem_Ici.2 hg.kstar_pos.le) this
-  · intro h
-    rw [h]
-    exact Function.iterate_fixed hg.g_kstar t
-
-end SavingsMap
-
-namespace Neoclassical
-
-variable {F : ℝ → ℝ → ℝ} {Fk : ℝ → ℝ} (hF : Neoclassical F Fk)
-include hF
-
-/-- Near zero `s f(k) > k`: the mean value theorem and `f′(0+) = ∞`. -/
-theorem savings_above {δ s : ℝ} (hs : 0 < s) :
-    ∃ a, 0 < a ∧ a < s * goods F δ a := by
-  have hev : ∀ᶠ k in 𝓝[>] (0 : ℝ), 1 / s < Fk k + (1 - δ) :=
-    (hF.f'_tendsto_zero δ).eventually (eventually_gt_atTop (1 / s))
-  obtain ⟨ε, hε, hball⟩ := Metric.mem_nhdsWithin_iff.1 hev
-  set a := ε / 2
-  have ha : 0 < a := by positivity
-  refine ⟨a, ha, ?_⟩
-  have hcont : ContinuousOn (goods F δ) (Icc 0 a) :=
-    ((hF.cont_F).add (continuousOn_const.mul continuousOn_id)).mono Icc_subset_Ici_self
-  obtain ⟨ξ, hξ, hslope⟩ := exists_hasDerivAt_eq_slope (goods F δ) (fun k => Fk k + (1 - δ)) ha
-    hcont (fun x hx => hF.hasDerivAt_f δ hx.1)
-  have hξε : ξ ∈ Metric.ball (0 : ℝ) ε ∩ Ioi 0 :=
-    ⟨by
-      rw [Metric.mem_ball, Real.dist_eq, sub_zero, abs_of_pos hξ.1]
-      have : ξ < ε / 2 := hξ.2
-      linarith,
-      hξ.1⟩
-  have hbig : 1 / s < Fk ξ + (1 - δ) := hball hξε
-  rw [hslope, hF.f_zero δ, sub_zero, sub_zero, lt_div_iff₀ ha] at hbig
-  have e : s * (1 / s * a) = a := by field_simp
-  nlinarith
-
-/-- For large `k`, `s f(k) < k`: concavity and `s f′(∞) = s(1 − δ) < 1`. -/
-theorem savings_below {δ s : ℝ} (hs : 0 < s) (hsδ : s * (1 - δ) < 1) :
-    ∃ b, 0 < b ∧ s * goods F δ b < b := by
-  -- a point `K` where `s f′(K) < 1`
-  have hev : ∀ᶠ k in atTop, s * (Fk k + (1 - δ)) < 1 := by
-    have := ((hF.f'_tendsto_atTop δ).const_mul s).eventually (gt_mem_nhds hsδ)
-    exact this
-  obtain ⟨K, hK⟩ := (hev.and (eventually_gt_atTop 0)).exists
-  set m := Fk K + (1 - δ)
-  have hm : s * m < 1 := hK.1
-  -- the tangent line at `K` bounds `f`
-  have htan : ∀ k, 0 ≤ k → goods F δ k ≤ goods F δ K + m * (k - K) := fun k hk =>
-    concave_le_tangent (hF.strictConcaveOn_f δ).concaveOn (Set.mem_Ici.2 hK.2.le) (Set.mem_Ici.2 hk)
-      (hF.hasDerivAt_f δ hK.2)
-  set b := max K ((s * |goods F δ K| + s * |m| * K + 1) / (1 - s * m)) + 1
-  have h1 : 0 < 1 - s * m := sub_pos.2 hm
-  have hbK : K < b := by simp only [b]; linarith [le_max_left K ((s * |goods F δ K| +
-    s * |m| * K + 1) / (1 - s * m))]
-  have hbig : (s * |goods F δ K| + s * |m| * K + 1) / (1 - s * m) < b := by
-    simp only [b]; linarith [le_max_right K ((s * |goods F δ K| + s * |m| * K + 1) / (1 - s * m))]
-  have hb0 : 0 < b := hK.2.trans hbK
-  refine ⟨b, hb0, ?_⟩
-  have ht := mul_le_mul_of_nonneg_left (htan b hb0.le) hs.le
-  rw [div_lt_iff₀ h1] at hbig
-  have e1 : s * goods F δ K ≤ s * |goods F δ K| := mul_le_mul_of_nonneg_left (le_abs_self _) hs.le
-  have e2 : -(s * m * K) ≤ s * |m| * K := by
-    have : -(m * K) ≤ |m| * K := by
-      have := neg_abs_le m
-      nlinarith [hK.2]
-    nlinarith
-  nlinarith
-
-/-- **Ex 2.4 (crossings).** With `s > 0` and `s(1 − δ) < 1`, `g = s f` is a savings map. -/
-theorem savings_crossings {δ s : ℝ} (hδ1 : δ ≤ 1) (hs : 0 < s) (hsδ : s * (1 - δ) < 1) :
-    SavingsMap fun k => s * goods F δ k where
-  zero := by simp [hF.f_zero δ]
-  cont := continuousOn_const.mul ((hF.cont_F).add (continuousOn_const.mul continuousOn_id))
-  mono := fun x hx y hy hxy => mul_lt_mul_of_pos_left (hF.strictMonoOn_f hδ1 hx hy hxy) hs
-  conc := ⟨convex_Ici 0, fun x hx y hy hxy a b ha hb hab => by
-    have := (hF.strictConcaveOn_f δ).2 hx hy hxy ha hb hab
-    simp only [smul_eq_mul] at this ⊢
-    nlinarith⟩
-  above := hF.savings_above hs
-  below := hF.savings_below hs hsδ
-
-/-- **Ex 2.4a for the neoclassical model.** There is exactly one positive stationary point of
-`k ↦ s f(k)`, and every path from `k₀ > 0` converges monotonically to it. -/
-theorem savings_unique_steady_state {δ s : ℝ} (hδ1 : δ ≤ 1) (hs : 0 < s)
-    (hsδ : s * (1 - δ) < 1) : ∃! k, 0 < k ∧ s * goods F δ k = k :=
-  (hF.savings_crossings hδ1 hs hsδ).exists_unique_fixedPoint
-
-end Neoclassical
-
-end StokeyLucasPrescott.Overview
-
-/-
-Copyright (c) 2026 Robert Kirkby. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Robert Kirkby
--/
-
-/-!
-# The stochastic log/Cobb–Douglas economy
-
-SLP §2.2, pp. 16–19, and Exercise 2.6, p. 19.
-
-Output is `z f(k) = z k^α` with i.i.d. shocks `z ∼ μ`, `z > 0`, `ln z` integrable, `U = ln`.
-
-* `log_tradeoff`, `log_tradeoff_unique`: for `Y > 0`, `ln(Y − y) + (αβ/(1 − αβ)) ln y` is
-  maximized over `y ∈ (0, Y)` exactly at `y = αβY`.
-* `stochValue`: `v(k, z) = A + B ln k + C ln z`, `B = α/(1 − αβ)`, `C = 1/(1 − αβ)`.
-* `integral_stochValue`: `E[v(y, z′)] = A + B ln y + C E[ln z]`.
-* `stoch_bellman_isGreatest`, `stoch_argmax_unique` (Ex 2.6): `v` satisfies the functional
-  equation (3) and `y = αβ z k^α` (policy (5)) is the unique maximizer.
-* `hasSum_expected_utility` (Ex 2.6): along policy (5), with the shocks after period 0 i.i.d. under
-  the product measure, `∑ βᵗ E[ln c_t] = v(k, z)`.
--/
-
-open Finset Set Filter Topology Real MeasureTheory ProbabilityTheory
-
-namespace StokeyLucasPrescott.Overview
-
-/-- **The log trade-off.** For `Y > 0` and `0 < αβ < 1`, every `y ∈ (0, Y)` has
-`ln(Y − y) + (αβ/(1 − αβ)) ln y ≤ ln((1 − αβ)Y) + (αβ/(1 − αβ)) ln(αβY)`. -/
-theorem log_tradeoff {α β Y y : ℝ} (h0 : 0 < α * β) (h1 : α * β < 1) (hY : 0 < Y) (hy : 0 < y)
-    (hyY : y < Y) :
-    log (Y - y) + α * β / (1 - α * β) * log y ≤
-      log ((1 - α * β) * Y) + α * β / (1 - α * β) * log (α * β * Y) := by
-  have h1ab : 0 < 1 - α * β := sub_pos.2 h1
-  have hcs : 0 < (1 - α * β) * Y := mul_pos h1ab hY
-  have hys : 0 < α * β * Y := mul_pos h0 hY
-  have t1 := concave_le_tangent strictConcaveOn_log_Ioi.concaveOn (Set.mem_Ioi.2 hcs)
-    (Set.mem_Ioi.2 (sub_pos.2 hyY)) (hasDerivAt_log hcs.ne')
-  have t2 := concave_le_tangent strictConcaveOn_log_Ioi.concaveOn (Set.mem_Ioi.2 hys)
-    (Set.mem_Ioi.2 hy) (hasDerivAt_log hys.ne')
-  have hw : 0 ≤ α * β / (1 - α * β) := div_nonneg h0.le h1ab.le
-  have hfoc : ((1 - α * β) * Y)⁻¹ * (Y - y - (1 - α * β) * Y) +
-      α * β / (1 - α * β) * ((α * β * Y)⁻¹ * (y - α * β * Y)) = 0 := by
-    have hα0 : α ≠ 0 := left_ne_zero_of_mul h0.ne'
-    have hβ0 : β ≠ 0 := right_ne_zero_of_mul h0.ne'
-    field_simp
-    ring
-  have := mul_le_mul_of_nonneg_left t2 hw
-  nlinarith
-
-/-- **The maximizer is unique.** -/
-theorem log_tradeoff_unique {α β Y y : ℝ} (h0 : 0 < α * β) (h1 : α * β < 1) (hY : 0 < Y)
-    (hy : 0 < y) (hyY : y < Y)
-    (hmax : log ((1 - α * β) * Y) + α * β / (1 - α * β) * log (α * β * Y) ≤
-      log (Y - y) + α * β / (1 - α * β) * log y) : y = α * β * Y := by
-  by_contra hne
-  have h1ab : 0 < 1 - α * β := sub_pos.2 h1
-  have hcs : 0 < (1 - α * β) * Y := mul_pos h1ab hY
-  have hys : 0 < α * β * Y := mul_pos h0 hY
-  have t1 := concave_le_tangent strictConcaveOn_log_Ioi.concaveOn (Set.mem_Ioi.2 hcs)
-    (Set.mem_Ioi.2 (sub_pos.2 hyY)) (hasDerivAt_log hcs.ne')
-  have t2 := strictConcave_lt_tangent strictConcaveOn_log_Ioi (Set.mem_Ioi.2 hys)
-    (Set.mem_Ioi.2 hy) (fun h => hne h.symm) (hasDerivAt_log hys.ne')
-  have hw : 0 < α * β / (1 - α * β) := div_pos h0 h1ab
-  have hfoc : ((1 - α * β) * Y)⁻¹ * (Y - y - (1 - α * β) * Y) +
-      α * β / (1 - α * β) * ((α * β * Y)⁻¹ * (y - α * β * Y)) = 0 := by
-    have hα0 : α ≠ 0 := left_ne_zero_of_mul h0.ne'
-    have hβ0 : β ≠ 0 := right_ne_zero_of_mul h0.ne'
-    field_simp
-    ring
-  have := mul_lt_mul_of_pos_left t2 hw
-  nlinarith
-
-/-- The coefficient `C = 1/(1 − αβ)` on `ln z`. -/
-noncomputable def coefC (α β : ℝ) : ℝ := 1 / (1 - α * β)
-
-/-- The constant `A = [ln(1 − αβ) + βB ln(αβ) + βC m]/(1 − β)`, `m = E[ln z]`. -/
-noncomputable def coefAs (α β m : ℝ) : ℝ :=
-  (log (1 - α * β) + β * coefB α β * log (α * β) + β * coefC α β * m) / (1 - β)
-
-/-- The value function `v(k, z) = A + B ln k + C ln z`. -/
-noncomputable def stochValue (α β m k z : ℝ) : ℝ :=
-  coefAs α β m + coefB α β * log k + coefC α β * log z
-
-variable {μ : Measure ℝ} [IsProbabilityMeasure μ]
-
-/-- `E[v(y, z′)] = A + B ln y + C E[ln z]`. -/
-theorem integral_stochValue (hint : Integrable log μ) (α β y : ℝ) :
-    ∫ z', stochValue α β (∫ z, log z ∂μ) y z' ∂μ =
-      coefAs α β (∫ z, log z ∂μ) + coefB α β * log y + coefC α β * ∫ z, log z ∂μ := by
-  unfold stochValue
-  rw [integral_add (integrable_const _) (hint.const_mul _), integral_const, integral_const_mul]
-  simp
-
-/-- The right side of (3): `ln(z k^α − y) + β E[v(y, z′)]`. -/
-noncomputable def stochRHS (μ : Measure ℝ) (α β k z y : ℝ) : ℝ :=
-  log (z * k ^ α - y) + β * ∫ z', stochValue α β (∫ z, log z ∂μ) y z' ∂μ
-
-/-- The value at the maximizer `y = αβ z k^α` is `v(k, z)`. -/
-theorem stochRHS_attained (hint : Integrable log μ) {α β k z : ℝ} (hα : 0 < α) (hβ : 0 < β)
-    (hβ1 : β < 1) (h1 : α * β < 1) (hk : 0 < k) (hz : 0 < z) :
-    stochRHS μ α β k z (α * β * (z * k ^ α)) = stochValue α β (∫ z, log z ∂μ) k z := by
-  have h0 : 0 < α * β := mul_pos hα hβ
-  have hK : 0 < k ^ α := rpow_pos_of_pos hk α
-  have h1ab : 0 < 1 - α * β := sub_pos.2 h1
-  have h1β : (1 - β) ≠ 0 := (sub_pos.2 hβ1).ne'
-  unfold stochRHS
-  rw [integral_stochValue hint]
-  rw [show z * k ^ α - α * β * (z * k ^ α) = (1 - α * β) * (z * k ^ α) by ring]
-  simp only [stochValue, coefAs, coefB, coefC]
-  rw [log_mul h1ab.ne' (mul_pos hz hK).ne', log_mul h0.ne' (mul_pos hz hK).ne',
-    log_mul hz.ne' hK.ne', log_rpow hk]
-  field_simp
-  ring
-
-/-- The objective in (3) equals the log trade-off plus terms independent of `y`. -/
-theorem stochRHS_eq (hint : Integrable log μ) (α β k z y : ℝ) :
-    stochRHS μ α β k z y = (log (z * k ^ α - y) + α * β / (1 - α * β) * log y) +
-      β * (coefAs α β (∫ z, log z ∂μ) + coefC α β * ∫ z, log z ∂μ) := by
-  unfold stochRHS
-  rw [integral_stochValue hint]
-  simp only [coefB]
-  ring
-
-/-- **Ex 2.6.** `v` satisfies the stochastic functional equation (3):
-`v(k, z) = max_{0 < y < z k^α} {ln(z k^α − y) + β E[v(y, z′)]}`. -/
-theorem stoch_bellman_isGreatest (hint : Integrable log μ) {α β k z : ℝ} (hα : 0 < α)
-    (hβ : 0 < β) (hβ1 : β < 1) (h1 : α * β < 1) (hk : 0 < k) (hz : 0 < z) :
-    IsGreatest (stochRHS μ α β k z '' Ioo 0 (z * k ^ α)) (stochValue α β (∫ z, log z ∂μ) k z) := by
-  have h0 : 0 < α * β := mul_pos hα hβ
-  have hY : 0 < z * k ^ α := mul_pos hz (rpow_pos_of_pos hk α)
-  refine ⟨⟨α * β * (z * k ^ α), ⟨mul_pos h0 hY, by nlinarith⟩,
-    stochRHS_attained hint hα hβ hβ1 h1 hk hz⟩, ?_⟩
-  rintro _ ⟨y, ⟨hy0, hyY⟩, rfl⟩
-  rw [← stochRHS_attained hint hα hβ hβ1 h1 hk hz, stochRHS_eq hint, stochRHS_eq hint]
-  have := log_tradeoff h0 h1 hY hy0 hyY
-  rw [show z * k ^ α - α * β * (z * k ^ α) = (1 - α * β) * (z * k ^ α) by ring]
-  linarith
-
-/-- **Ex 2.6.** The policy (5), `y = αβ z k^α`, is the unique maximizer in (3). -/
-theorem stoch_argmax_unique (hint : Integrable log μ) {α β k z y : ℝ} (hα : 0 < α) (hβ : 0 < β)
-    (hβ1 : β < 1) (h1 : α * β < 1) (hk : 0 < k) (hz : 0 < z) (hy : 0 < y) (hyY : y < z * k ^ α)
-    (hmax : stochValue α β (∫ z, log z ∂μ) k z ≤ stochRHS μ α β k z y) :
-    y = α * β * (z * k ^ α) := by
-  have h0 : 0 < α * β := mul_pos hα hβ
-  have hY : 0 < z * k ^ α := mul_pos hz (rpow_pos_of_pos hk α)
-  rw [← stochRHS_attained hint hα hβ hβ1 h1 hk hz, stochRHS_eq hint, stochRHS_eq hint] at hmax
-  rw [show z * k ^ α - α * β * (z * k ^ α) = (1 - α * β) * (z * k ^ α) by ring] at hmax
-  exact log_tradeoff_unique h0 h1 hY hy hyY (by linarith)
-
-/-! ### Expected utility along the policy -/
-
-/-- The shock in period `t`: the known `z` in period `0`, the coordinate `ω t` afterwards. -/
-def shock (z : ℝ) (ω : ℕ → ℝ) (t : ℕ) : ℝ := if t = 0 then z else ω t
-
-/-- Capital along policy (5): `k_{t+1} = αβ z_t k_t^α`. -/
-noncomputable def stochPath (α β k z : ℝ) (ω : ℕ → ℝ) : ℕ → ℝ
-  | 0 => k
-  | t + 1 => α * β * shock z ω t * stochPath α β k z ω t ^ α
-
-/-- Consumption along (5): `c_t = (1 − αβ) z_t k_t^α`. -/
-noncomputable def stochCons (α β k z : ℝ) (ω : ℕ → ℝ) (t : ℕ) : ℝ :=
-  shock z ω t * stochPath α β k z ω t ^ α - stochPath α β k z ω (t + 1)
-
-/-- The product measure of i.i.d. shocks. -/
-noncomputable abbrev shockMeasure (μ : Measure ℝ) [IsProbabilityMeasure μ] : Measure (ℕ → ℝ) :=
-  Measure.infinitePi fun _ : ℕ => μ
-
-theorem ae_shock_pos (hpos : ∀ᵐ z ∂μ, 0 < z) : ∀ᵐ ω ∂shockMeasure μ, ∀ t, 0 < ω t := by
-  rw [ae_all_iff]
-  intro t
-  have h : ∀ᵐ x ∂(shockMeasure μ).map (fun ω => ω t), 0 < x := by
-    rwa [Measure.infinitePi_map_eval]
-  exact ae_of_ae_map (measurable_pi_apply t).aemeasurable h
-
-theorem integrable_log_coord (hint : Integrable log μ) (t : ℕ) :
-    Integrable (fun ω : ℕ → ℝ => log (ω t)) (shockMeasure μ) := by
-  have h : Integrable log ((shockMeasure μ).map (fun ω => ω t)) := by
-    rwa [Measure.infinitePi_map_eval]
-  exact h.comp_aemeasurable (measurable_pi_apply t).aemeasurable
-
-theorem integral_log_coord (t : ℕ) :
-    ∫ ω, log (ω t) ∂shockMeasure μ = ∫ z, log z ∂μ := by
-  rw [← integral_map (measurable_pi_apply t).aemeasurable
-    measurable_log.aestronglyMeasurable, Measure.infinitePi_map_eval]
-
-/-- The expected log shock: `ln z` in period `0`, `E[ln z]` afterwards. -/
-noncomputable def meanShock (μ : Measure ℝ) (z : ℝ) (t : ℕ) : ℝ :=
-  if t = 0 then log z else ∫ z, log z ∂μ
-
-theorem integrable_log_shock (hint : Integrable log μ) (z : ℝ) (t : ℕ) :
-    Integrable (fun ω => log (shock z ω t)) (shockMeasure μ) := by
-  rcases t with _ | t
-  · simp [shock]
-  · simpa [shock] using integrable_log_coord hint (t + 1)
-
-theorem integral_log_shock (z : ℝ) (t : ℕ) :
-    ∫ ω, log (shock z ω t) ∂shockMeasure μ = meanShock μ z t := by
-  rcases t with _ | t
-  · simp [shock, meanShock]
-  · simpa [shock, meanShock] using integral_log_coord (μ := μ) (t + 1)
-
-/-- Almost surely, along (5), `ln k_{t+1} = ln(αβ) + ln z_t + α ln k_t` and capital is positive. -/
-theorem ae_log_path (hpos : ∀ᵐ z ∂μ, 0 < z) {α β k z : ℝ} (h0 : 0 < α * β) (hk : 0 < k)
-    (hz : 0 < z) :
-    ∀ᵐ ω ∂shockMeasure μ, ∀ t, 0 < shock z ω t ∧ 0 < stochPath α β k z ω t ∧
-      log (stochPath α β k z ω (t + 1)) =
-        log (α * β) + log (shock z ω t) + α * log (stochPath α β k z ω t) := by
-  filter_upwards [ae_shock_pos hpos] with ω hω t
-  have hsh : ∀ s, 0 < shock z ω s := fun s => by
-    unfold shock; split_ifs
-    · exact hz
-    · exact hω s
-  have hkp : ∀ s, 0 < stochPath α β k z ω s := fun s => by
-    induction s with
-    | zero => exact hk
-    | succ s ih => exact mul_pos (mul_pos h0 (hsh s)) (rpow_pos_of_pos ih α)
-  refine ⟨hsh t, hkp t, ?_⟩
-  simp only [stochPath]
-  rw [log_mul (mul_pos h0 (hsh t)).ne' (rpow_pos_of_pos (hkp t) α).ne', log_mul h0.ne' (hsh t).ne',
-    log_rpow (hkp t)]
-
-/-- The expected log capital, by the recursion `M_{t+1} = ln(αβ) + αM_t + E[ln z_t]`. -/
-noncomputable def meanLogK (μ : Measure ℝ) (α β k z : ℝ) : ℕ → ℝ
-  | 0 => log k
-  | t + 1 => log (α * β) + α * meanLogK μ α β k z t + meanShock μ z t
-
-/-- `ln k_t` is integrable with mean `M_t`. -/
-theorem integral_log_path (hpos : ∀ᵐ z ∂μ, 0 < z) (hint : Integrable log μ) {α β k z : ℝ}
-    (h0 : 0 < α * β) (hk : 0 < k) (hz : 0 < z) (t : ℕ) :
-    Integrable (fun ω => log (stochPath α β k z ω t)) (shockMeasure μ) ∧
-      ∫ ω, log (stochPath α β k z ω t) ∂shockMeasure μ = meanLogK μ α β k z t := by
-  have hae := ae_log_path hpos h0 hk hz
-  induction t with
-  | zero => simp [stochPath, meanLogK]
-  | succ t ih =>
-    have heq : (fun ω => log (stochPath α β k z ω (t + 1))) =ᵐ[shockMeasure μ]
-        fun ω => log (α * β) + log (shock z ω t) + α * log (stochPath α β k z ω t) := by
-      filter_upwards [hae] with ω hω
-      exact (hω t).2.2
-    have hint' : Integrable (fun ω => log (α * β) + log (shock z ω t) +
-        α * log (stochPath α β k z ω t)) (shockMeasure μ) :=
-      ((integrable_const _).add (integrable_log_shock hint z t)).add (ih.1.const_mul α)
-    refine ⟨hint'.congr heq.symm, ?_⟩
-    have hA : Integrable (fun ω => log (α * β) + log (shock z ω t)) (shockMeasure μ) :=
-      (integrable_const _).add (integrable_log_shock hint z t)
-    have e1 := integral_add hA (ih.1.const_mul α)
-    have e2 := integral_add (integrable_const (log (α * β))) (integrable_log_shock hint z t)
-    beta_reduce at e1 e2
-    rw [integral_congr_ae heq, e1, e2, integral_const, integral_const_mul, ih.2,
-      integral_log_shock]
-    simp [meanLogK]
-    ring
-
-/-- Expected log consumption: `E[ln c_t] = ln(1 − αβ) + E[ln z_t] + αM_t`. -/
-theorem integral_log_cons (hpos : ∀ᵐ z ∂μ, 0 < z) (hint : Integrable log μ) {α β k z : ℝ}
-    (h0 : 0 < α * β) (h1 : α * β < 1) (hk : 0 < k) (hz : 0 < z) (t : ℕ) :
-    ∫ ω, log (stochCons α β k z ω t) ∂shockMeasure μ =
-      log (1 - α * β) + meanShock μ z t + α * meanLogK μ α β k z t := by
-  have h1ab : 0 < 1 - α * β := sub_pos.2 h1
-  have heq : (fun ω => log (stochCons α β k z ω t)) =ᵐ[shockMeasure μ]
-      fun ω => log (1 - α * β) + log (shock z ω t) + α * log (stochPath α β k z ω t) := by
-    filter_upwards [ae_log_path hpos h0 hk hz] with ω hω
-    obtain ⟨hs, hp, -⟩ := hω t
-    unfold stochCons
-    rw [show shock z ω t * stochPath α β k z ω t ^ α - stochPath α β k z ω (t + 1) =
-      (1 - α * β) * shock z ω t * stochPath α β k z ω t ^ α by simp only [stochPath]; ring,
-      log_mul (mul_pos h1ab hs).ne' (rpow_pos_of_pos hp α).ne', log_mul h1ab.ne' hs.ne',
-      log_rpow hp]
-  have hi := (integral_log_path hpos hint h0 hk hz t).1
-  have hA : Integrable (fun ω => log (1 - α * β) + log (shock z ω t)) (shockMeasure μ) :=
-    (integrable_const _).add (integrable_log_shock hint z t)
-  have e1 := integral_add hA (hi.const_mul α)
-  have e2 := integral_add (integrable_const (log (1 - α * β))) (integrable_log_shock hint z t)
-  beta_reduce at e1 e2
-  rw [integral_congr_ae heq, e1, e2, integral_const, integral_const_mul,
-    (integral_log_path hpos hint h0 hk hz t).2, integral_log_shock]
-  simp
-
-omit [IsProbabilityMeasure μ] in
-/-- After period `0`, `M_{s+1} = αˢ M_1 + (ln(αβ) + m)(1 − αˢ)/(1 − α)`. -/
-theorem meanLogK_succ {α β k z : ℝ} (hα1 : α < 1) (s : ℕ) :
-    meanLogK μ α β k z (s + 1) = α ^ s * meanLogK μ α β k z 1 +
-      (log (α * β) + ∫ z, log z ∂μ) * (1 - α ^ s) / (1 - α) := by
-  have h1α : (1 - α) ≠ 0 := (sub_pos.2 hα1).ne'
-  induction s with
-  | zero => simp
-  | succ s ih =>
-    rw [show s + 1 + 1 = (s + 1) + 1 by rfl]
-    conv_lhs => rw [meanLogK]
-    rw [ih]
-    simp only [meanShock, Nat.add_eq_zero_iff, one_ne_zero, and_false, ↓reduceIte]
-    field_simp
-    ring
-
-/-- **Ex 2.6.** Along policy (5), the expected discounted utility `∑ βᵗ E[ln c_t]` from `(k, z)`
-is `v(k, z)`. -/
-theorem hasSum_expected_utility (hpos : ∀ᵐ z ∂μ, 0 < z) (hint : Integrable log μ) {α β k z : ℝ}
-    (hα : 0 < α) (hα1 : α < 1) (hβ : 0 < β) (hβ1 : β < 1) (hk : 0 < k) (hz : 0 < z) :
-    HasSum (fun t => β ^ t * ∫ ω, log (stochCons α β k z ω t) ∂shockMeasure μ)
-      (stochValue α β (∫ z, log z ∂μ) k z) := by
-  have h0 : 0 < α * β := mul_pos hα hβ
-  have h1 : α * β < 1 := by nlinarith
-  have h1α : (1 - α) ≠ 0 := (sub_pos.2 hα1).ne'
-  have h1β : (1 - β) ≠ 0 := (sub_pos.2 hβ1).ne'
-  have h1ab : (1 - α * β) ≠ 0 := (sub_pos.2 h1).ne'
-  set m := ∫ z, log z ∂μ
-  set M1 := meanLogK μ α β k z 1
-  -- the terms after period 0, as geometric series
-  have hterm : ∀ s, β ^ (s + 1) * ∫ ω, log (stochCons α β k z ω (s + 1)) ∂shockMeasure μ =
-      β * (log (1 - α * β) + m + α * (log (α * β) + m) / (1 - α)) * β ^ s +
-        β * (α * M1 - α * (log (α * β) + m) / (1 - α)) * (α * β) ^ s := fun s => by
-    rw [integral_log_cons hpos hint h0 h1 hk hz, meanLogK_succ hα1 s]
-    simp only [meanShock, Nat.add_eq_zero_iff, one_ne_zero, and_false, ↓reduceIte, mul_pow,
-      pow_succ]
-    field_simp
-    ring
-  have hg1 := hasSum_geometric_of_lt_one hβ.le hβ1
-  have hg2 := hasSum_geometric_of_lt_one h0.le h1
-  have htail := (hg1.mul_left (β * (log (1 - α * β) + m + α * (log (α * β) + m) / (1 - α)))).add
-    (hg2.mul_left (β * (α * M1 - α * (log (α * β) + m) / (1 - α))))
-  rw [← hasSum_nat_add_iff' 1]
-  convert htail using 1
-  · funext s
-    exact hterm s
-  · rw [sum_range_one, pow_zero, one_mul, integral_log_cons hpos hint h0 h1 hk hz]
-    simp only [M1, meanLogK, meanShock, ↓reduceIte, stochValue, coefAs, coefB, coefC, m]
-    field_simp
-    ring
-
-end StokeyLucasPrescott.Overview
-
-/-
-Copyright (c) 2026 Robert Kirkby. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Robert Kirkby
--/
-
-/-!
-# Log-normal capital
-
-SLP Exercise 2.7, p. 20.
-
-Under policy (5), `k_{t+1} = αβ z_t k_t^α`, so `ln k_{t+1} = ln(αβ) + α ln k_t + ln z_t`. If the
-`ln z_t` are i.i.d. `N(m, σ²)`, each `ln k_t` is normal.
-
-* `capPath`, `log_capPath`: the capital path in levels has logarithm `logPath`.
-* `logPath_eq`: `ln k_t = c_t + ∑_{s<t} α^{t−1−s} ln z_s`, a function of past shocks only.
-* `indepFun_logPath`: `ln k_t` is independent of the current shock `ln z_t`.
-* `hasLaw_logPath` (Ex 2.7): `ln k_t ∼ N(μ_t, σ_t²)` with `μ_{t+1} = αμ_t + ln(αβ) + m`,
-  `σ²_{t+1} = α²σ_t² + σ²`; `meanN_eq`, `varN_eq`: `μ_t = αᵗ ln k₀ + (ln(αβ) + m)(1 − αᵗ)/(1 − α)`,
-  `σ_t² = σ²(1 − α^{2t})/(1 − α²)`.
-* `meanN_tendsto`, `varN_tendsto` (Ex 2.7): `μ_t → (ln(αβ) + m)/(1 − α)`,
-  `σ_t² → σ²/(1 − α²)`.
--/
-
-open Finset Filter Topology Real MeasureTheory ProbabilityTheory
-open scoped NNReal
-
-namespace StokeyLucasPrescott.Overview
-
-/-- The capital path `k_{t+1} = αβ e^{ω_t} k_t^α`, with `ω_t = ln z_t`. -/
-noncomputable def capPath (α β k₀ : ℝ) (ω : ℕ → ℝ) : ℕ → ℝ
-  | 0 => k₀
-  | t + 1 => α * β * exp (ω t) * capPath α β k₀ ω t ^ α
-
-/-- `ln k_t`: `ℓ₀` given, `ℓ_{t+1} = ln(αβ) + αℓ_t + ω_t`. -/
-noncomputable def logPath (α β ℓ₀ : ℝ) (ω : ℕ → ℝ) : ℕ → ℝ
-  | 0 => ℓ₀
-  | t + 1 => log (α * β) + α * logPath α β ℓ₀ ω t + ω t
-
-/-- The capital path in levels has logarithm `logPath`, and stays positive. -/
-theorem log_capPath {α β k₀ : ℝ} (h0 : 0 < α * β) (hk₀ : 0 < k₀) (ω : ℕ → ℝ) (t : ℕ) :
-    0 < capPath α β k₀ ω t ∧ log (capPath α β k₀ ω t) = logPath α β (log k₀) ω t := by
-  induction t with
-  | zero => exact ⟨hk₀, rfl⟩
-  | succ t ih =>
-    obtain ⟨hp, hl⟩ := ih
-    refine ⟨mul_pos (mul_pos h0 (exp_pos _)) (rpow_pos_of_pos hp α), ?_⟩
-    simp only [capPath, logPath]
-    rw [log_mul (mul_pos h0 (exp_pos _)).ne' (rpow_pos_of_pos hp α).ne',
-      log_mul h0.ne' (exp_pos _).ne', log_exp, log_rpow hp, hl]
-    ring
-
-/-- The deterministic part of `ln k_t`: `c₀ = ℓ₀`, `c_{t+1} = ln(αβ) + αc_t`. -/
-noncomputable def constPath (α β ℓ₀ : ℝ) : ℕ → ℝ
-  | 0 => ℓ₀
-  | t + 1 => log (α * β) + α * constPath α β ℓ₀ t
-
-/-- `ln k_t = c_t + ∑_{s<t} α^{t−1−s} ω_s`. -/
-theorem logPath_eq (α β ℓ₀ : ℝ) (ω : ℕ → ℝ) (t : ℕ) :
-    logPath α β ℓ₀ ω t = constPath α β ℓ₀ t + ∑ s ∈ range t, α ^ (t - 1 - s) * ω s := by
-  induction t with
-  | zero => simp [logPath, constPath]
-  | succ t ih =>
-    simp only [logPath, constPath, ih, sum_range_succ, Nat.add_sub_cancel, Nat.sub_self,
-      pow_zero, one_mul, mul_add, mul_sum]
-    have : ∀ s ∈ range t, α * (α ^ (t - 1 - s) * ω s) = α ^ (t - s) * ω s := fun s hs => by
-      have hs := mem_range.1 hs
-      rw [← mul_assoc, ← pow_succ']
-      congr 2
-      omega
-    rw [sum_congr rfl this]
-    ring
-
-theorem measurable_logPath (α β ℓ₀ : ℝ) (t : ℕ) :
-    Measurable fun ω : ℕ → ℝ => logPath α β ℓ₀ ω t := by
-  induction t with
-  | zero => exact measurable_const
-  | succ t ih =>
-    exact (measurable_const.add (ih.const_mul α)).add (measurable_pi_apply t)
-
-/-- **`ln k_t` is independent of the current shock** under any product probability measure. -/
-theorem indepFun_logPath {ν : Measure ℝ} [IsProbabilityMeasure ν] (α β ℓ₀ : ℝ) (t : ℕ) :
-    IndepFun (fun ω => logPath α β ℓ₀ ω t) (fun ω => ω t)
-      (Measure.infinitePi fun _ : ℕ => ν) := by
-  set c : ℕ → ℝ := fun s => if s < t then α ^ (t - 1 - s) else 1
-  have hind : iIndepFun (fun s (ω : ℕ → ℝ) => c s * ω s) (Measure.infinitePi fun _ : ℕ => ν) :=
-    iIndepFun_infinitePi (X := fun s x => c s * x) fun s => measurable_const.mul measurable_id
-  have hmeas : ∀ s, Measurable fun ω : ℕ → ℝ => c s * ω s :=
-    fun s => measurable_const.mul (measurable_pi_apply s)
-  have hsum := hind.indepFun_finsetSum_of_notMem hmeas (s := range t) (i := t) (by simp)
-  have h := hsum.comp (measurable_const_add (constPath α β ℓ₀ t)) measurable_id
-  convert h using 1
-  · funext ω
-    simp only [Function.comp_apply, Finset.sum_apply, logPath_eq]
-    congr 1
-    refine sum_congr rfl fun s hs => ?_
-    simp [c, mem_range.1 hs]
-  · funext ω
-    simp [c]
-
-/-- The means `μ₀ = ℓ₀`, `μ_{t+1} = αμ_t + ln(αβ) + m`. -/
-noncomputable def meanN (α β ℓ₀ m : ℝ) : ℕ → ℝ
-  | 0 => ℓ₀
-  | t + 1 => α * meanN α β ℓ₀ m t + log (α * β) + m
-
-/-- `α²` as a nonnegative real. -/
-noncomputable def sqNN (α : ℝ) : ℝ≥0 := ⟨α ^ 2, sq_nonneg α⟩
-
-theorem coe_sqNN (α : ℝ) : (sqNN α : ℝ) = α ^ 2 := rfl
-
-/-- The variances `σ₀² = 0`, `σ²_{t+1} = α²σ_t² + σ²`. -/
-noncomputable def varN (α : ℝ) (v : ℝ≥0) : ℕ → ℝ≥0
-  | 0 => 0
-  | t + 1 => sqNN α * varN α v t + v
-
-/-- **Ex 2.7.** If the log shocks are i.i.d. `N(m, σ²)`, then `ln k_t ∼ N(μ_t, σ_t²)`. -/
-theorem hasLaw_logPath (α β ℓ₀ m : ℝ) (v : ℝ≥0) (t : ℕ) :
-    HasLaw (fun ω => logPath α β ℓ₀ ω t) (gaussianReal (meanN α β ℓ₀ m t) (varN α v t))
-      (Measure.infinitePi fun _ : ℕ => gaussianReal m v) := by
-  set P := Measure.infinitePi fun _ : ℕ => gaussianReal m v
-  induction t with
-  | zero =>
-    refine ⟨measurable_const.aemeasurable, ?_⟩
-    simp only [logPath, meanN, varN, gaussianReal_zero_var]
-    rw [Measure.map_const, measure_univ, one_smul]
-  | succ t ih =>
-    -- the two summands and their laws
-    set X : (ℕ → ℝ) → ℝ := fun ω => log (α * β) + α * logPath α β ℓ₀ ω t
-    set Y : (ℕ → ℝ) → ℝ := fun ω => ω t
-    have hφ : Measurable fun x : ℝ => log (α * β) + α * x := measurable_const.add
-      (measurable_const.mul measurable_id)
-    have hX : HasLaw X (gaussianReal (α * meanN α β ℓ₀ m t + log (α * β))
-        (sqNN α * varN α v t)) P := by
-      refine ⟨(hφ.comp (measurable_logPath α β ℓ₀ t)).aemeasurable, ?_⟩
-      have hmul : (P.map fun ω => logPath α β ℓ₀ ω t).map (fun x => α * x) =
-          gaussianReal (α * meanN α β ℓ₀ m t) (sqNN α * varN α v t) := by
-        rw [ih.map_eq, gaussianReal_map_const_mul]
-        rfl
-      have hmap' : P.map X = ((P.map fun ω => logPath α β ℓ₀ ω t).map (fun x => α * x)).map
-          (fun x => x + log (α * β)) := by
-        rw [Measure.map_map (measurable_add_const _) (measurable_const_mul α),
-          Measure.map_map ((measurable_add_const _).comp (measurable_const_mul α))
-            (measurable_logPath α β ℓ₀ t)]
-        congr 1
-        funext ω
-        simp [X, add_comm]
-      rw [hmap', hmul, gaussianReal_map_add_const]
-    have hY : HasLaw Y (gaussianReal m v) P :=
-      ⟨(measurable_pi_apply t).aemeasurable, Measure.infinitePi_map_eval _ t⟩
-    have hXY : IndepFun X Y P := (indepFun_logPath (ν := gaussianReal m v) α β ℓ₀ t).comp hφ
-      measurable_id
-    have hsum := gaussianReal_add_gaussianReal_of_indepFun hXY hX hY
-    have hfun : (fun ω => logPath α β ℓ₀ ω (t + 1)) = X + Y := by
-      funext ω
-      simp [X, Y, logPath]
-    refine ⟨(measurable_logPath α β ℓ₀ (t + 1)).aemeasurable, ?_⟩
-    rw [hfun, hsum]
-    rfl
-
-/-- **Ex 2.7.** `μ_t = αᵗ ln k₀ + (ln(αβ) + m)(1 − αᵗ)/(1 − α)`. -/
-theorem meanN_eq {α β ℓ₀ m : ℝ} (hα1 : α < 1) (t : ℕ) :
-    meanN α β ℓ₀ m t = α ^ t * ℓ₀ + (log (α * β) + m) * (1 - α ^ t) / (1 - α) := by
-  have h1α : (1 - α) ≠ 0 := (sub_pos.2 hα1).ne'
-  induction t with
-  | zero => simp [meanN]
-  | succ t ih =>
-    simp only [meanN, ih]
-    field_simp
-    ring
-
-/-- **Ex 2.7.** `σ_t² = σ²(1 − α^{2t})/(1 − α²)`. -/
-theorem varN_eq {α : ℝ} (hα0 : 0 ≤ α) (hα1 : α < 1) (v : ℝ≥0) (t : ℕ) :
-    (varN α v t : ℝ) = v * (1 - (α ^ 2) ^ t) / (1 - α ^ 2) := by
-  have h2 : (1 - α ^ 2) ≠ 0 := by nlinarith
-  induction t with
-  | zero => simp [varN]
-  | succ t ih =>
-    rw [varN, NNReal.coe_add, NNReal.coe_mul, coe_sqNN, ih]
-    field_simp
-    ring
-
-/-- **Ex 2.7.** `μ_t → (ln(αβ) + m)/(1 − α)`. -/
-theorem meanN_tendsto {α β ℓ₀ m : ℝ} (hα0 : 0 ≤ α) (hα1 : α < 1) :
-    Tendsto (meanN α β ℓ₀ m) atTop (𝓝 ((log (α * β) + m) / (1 - α))) := by
-  have hp := tendsto_pow_atTop_nhds_zero_of_lt_one hα0 hα1
-  have := ((hp.mul_const ℓ₀).add (((tendsto_const_nhds (x := log (α * β) + m)).mul
-    ((tendsto_const_nhds (x := (1 : ℝ))).sub hp)).div_const (1 - α)))
-  simp only [zero_mul, zero_add, sub_zero, mul_one] at this
-  refine this.congr fun t => ?_
-  rw [meanN_eq hα1]
-
-/-- **Ex 2.7.** `σ_t² → σ²/(1 − α²)`. -/
-theorem varN_tendsto {α : ℝ} (hα0 : 0 ≤ α) (hα1 : α < 1) (v : ℝ≥0) :
-    Tendsto (fun t => (varN α v t : ℝ)) atTop (𝓝 (v / (1 - α ^ 2))) := by
-  have hp := tendsto_pow_atTop_nhds_zero_of_lt_one (sq_nonneg α) (by nlinarith : α ^ 2 < 1)
-  have := ((tendsto_const_nhds (x := (v : ℝ))).mul
-    ((tendsto_const_nhds (x := (1 : ℝ))).sub hp)).div_const (1 - α ^ 2)
-  simp only [sub_zero, mul_one] at this
-  refine this.congr fun t => ?_
-  rw [varN_eq hα0 hα1]
-
-end StokeyLucasPrescott.Overview
-
-/-
-Copyright (c) 2026 Robert Kirkby. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Robert Kirkby
--/
-
-/-!
 # Competitive equilibrium in the finite-horizon growth economy
 
 SLP §2.3, pp. 22–29, and Exercises 2.8–2.10.
@@ -2408,6 +1580,1091 @@ theorem tree_euler_optimal {D : Set ℝ} {U U' f f' : ℝ → ℝ} {pr a : Fin n
 
 end StokeyLucasPrescott.Overview
 
+/-
+Copyright (c) 2026 Robert Kirkby. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Robert Kirkby
+-/
+
+/-!
+# The stochastic log/Cobb–Douglas economy
+
+SLP §2.2, pp. 16–19, and Exercise 2.6, p. 19.
+
+Output is `z f(k) = z k^α` with i.i.d. shocks `z ∼ μ`, `z > 0`, `ln z` integrable, `U = ln`.
+
+* `log_tradeoff`, `log_tradeoff_unique`: for `Y > 0`, `ln(Y − y) + (αβ/(1 − αβ)) ln y` is
+  maximized over `y ∈ (0, Y)` exactly at `y = αβY`.
+* `stochValue`: `v(k, z) = A + B ln k + C ln z`, `B = α/(1 − αβ)`, `C = 1/(1 − αβ)`.
+* `integral_stochValue`: `E[v(y, z′)] = A + B ln y + C E[ln z]`.
+* `stoch_bellman_isGreatest`, `stoch_argmax_unique` (Ex 2.6): `v` satisfies the functional
+  equation (3) and `y = αβ z k^α` (policy (5)) is the unique maximizer.
+* `hasSum_expected_utility` (Ex 2.6): along policy (5), with the shocks after period 0 i.i.d. under
+  the product measure, `∑ βᵗ E[ln c_t] = v(k, z)`.
+-/
+
+open Finset Set Filter Topology Real MeasureTheory ProbabilityTheory
+
+namespace StokeyLucasPrescott.Overview
+
+/-- **The log trade-off.** For `Y > 0` and `0 < αβ < 1`, every `y ∈ (0, Y)` has
+`ln(Y − y) + (αβ/(1 − αβ)) ln y ≤ ln((1 − αβ)Y) + (αβ/(1 − αβ)) ln(αβY)`. -/
+theorem log_tradeoff {α β Y y : ℝ} (h0 : 0 < α * β) (h1 : α * β < 1) (hY : 0 < Y) (hy : 0 < y)
+    (hyY : y < Y) :
+    log (Y - y) + α * β / (1 - α * β) * log y ≤
+      log ((1 - α * β) * Y) + α * β / (1 - α * β) * log (α * β * Y) := by
+  have h1ab : 0 < 1 - α * β := sub_pos.2 h1
+  have hcs : 0 < (1 - α * β) * Y := mul_pos h1ab hY
+  have hys : 0 < α * β * Y := mul_pos h0 hY
+  have t1 := concave_le_tangent strictConcaveOn_log_Ioi.concaveOn (Set.mem_Ioi.2 hcs)
+    (Set.mem_Ioi.2 (sub_pos.2 hyY)) (hasDerivAt_log hcs.ne')
+  have t2 := concave_le_tangent strictConcaveOn_log_Ioi.concaveOn (Set.mem_Ioi.2 hys)
+    (Set.mem_Ioi.2 hy) (hasDerivAt_log hys.ne')
+  have hw : 0 ≤ α * β / (1 - α * β) := div_nonneg h0.le h1ab.le
+  have hfoc : ((1 - α * β) * Y)⁻¹ * (Y - y - (1 - α * β) * Y) +
+      α * β / (1 - α * β) * ((α * β * Y)⁻¹ * (y - α * β * Y)) = 0 := by
+    have hα0 : α ≠ 0 := left_ne_zero_of_mul h0.ne'
+    have hβ0 : β ≠ 0 := right_ne_zero_of_mul h0.ne'
+    field_simp
+    ring
+  have := mul_le_mul_of_nonneg_left t2 hw
+  nlinarith
+
+/-- **The maximizer is unique.** -/
+theorem log_tradeoff_unique {α β Y y : ℝ} (h0 : 0 < α * β) (h1 : α * β < 1) (hY : 0 < Y)
+    (hy : 0 < y) (hyY : y < Y)
+    (hmax : log ((1 - α * β) * Y) + α * β / (1 - α * β) * log (α * β * Y) ≤
+      log (Y - y) + α * β / (1 - α * β) * log y) : y = α * β * Y := by
+  by_contra hne
+  have h1ab : 0 < 1 - α * β := sub_pos.2 h1
+  have hcs : 0 < (1 - α * β) * Y := mul_pos h1ab hY
+  have hys : 0 < α * β * Y := mul_pos h0 hY
+  have t1 := concave_le_tangent strictConcaveOn_log_Ioi.concaveOn (Set.mem_Ioi.2 hcs)
+    (Set.mem_Ioi.2 (sub_pos.2 hyY)) (hasDerivAt_log hcs.ne')
+  have t2 := strictConcave_lt_tangent strictConcaveOn_log_Ioi (Set.mem_Ioi.2 hys)
+    (Set.mem_Ioi.2 hy) (fun h => hne h.symm) (hasDerivAt_log hys.ne')
+  have hw : 0 < α * β / (1 - α * β) := div_pos h0 h1ab
+  have hfoc : ((1 - α * β) * Y)⁻¹ * (Y - y - (1 - α * β) * Y) +
+      α * β / (1 - α * β) * ((α * β * Y)⁻¹ * (y - α * β * Y)) = 0 := by
+    have hα0 : α ≠ 0 := left_ne_zero_of_mul h0.ne'
+    have hβ0 : β ≠ 0 := right_ne_zero_of_mul h0.ne'
+    field_simp
+    ring
+  have := mul_lt_mul_of_pos_left t2 hw
+  nlinarith
+
+/-- The coefficient `C = 1/(1 − αβ)` on `ln z`. -/
+noncomputable def coefC (α β : ℝ) : ℝ := 1 / (1 - α * β)
+
+/-- The constant `A = [ln(1 − αβ) + βB ln(αβ) + βC m]/(1 − β)`, `m = E[ln z]`. -/
+noncomputable def coefAs (α β m : ℝ) : ℝ :=
+  (log (1 - α * β) + β * coefB α β * log (α * β) + β * coefC α β * m) / (1 - β)
+
+/-- The value function `v(k, z) = A + B ln k + C ln z`. -/
+noncomputable def stochValue (α β m k z : ℝ) : ℝ :=
+  coefAs α β m + coefB α β * log k + coefC α β * log z
+
+variable {μ : Measure ℝ} [IsProbabilityMeasure μ]
+
+/-- `E[v(y, z′)] = A + B ln y + C E[ln z]`. -/
+theorem integral_stochValue (hint : Integrable log μ) (α β y : ℝ) :
+    ∫ z', stochValue α β (∫ z, log z ∂μ) y z' ∂μ =
+      coefAs α β (∫ z, log z ∂μ) + coefB α β * log y + coefC α β * ∫ z, log z ∂μ := by
+  unfold stochValue
+  rw [integral_add (integrable_const _) (hint.const_mul _), integral_const, integral_const_mul]
+  simp
+
+/-- The right side of (3): `ln(z k^α − y) + β E[v(y, z′)]`. -/
+noncomputable def stochRHS (μ : Measure ℝ) (α β k z y : ℝ) : ℝ :=
+  log (z * k ^ α - y) + β * ∫ z', stochValue α β (∫ z, log z ∂μ) y z' ∂μ
+
+/-- The value at the maximizer `y = αβ z k^α` is `v(k, z)`. -/
+theorem stochRHS_attained (hint : Integrable log μ) {α β k z : ℝ} (hα : 0 < α) (hβ : 0 < β)
+    (hβ1 : β < 1) (h1 : α * β < 1) (hk : 0 < k) (hz : 0 < z) :
+    stochRHS μ α β k z (α * β * (z * k ^ α)) = stochValue α β (∫ z, log z ∂μ) k z := by
+  have h0 : 0 < α * β := mul_pos hα hβ
+  have hK : 0 < k ^ α := rpow_pos_of_pos hk α
+  have h1ab : 0 < 1 - α * β := sub_pos.2 h1
+  have h1β : (1 - β) ≠ 0 := (sub_pos.2 hβ1).ne'
+  unfold stochRHS
+  rw [integral_stochValue hint]
+  rw [show z * k ^ α - α * β * (z * k ^ α) = (1 - α * β) * (z * k ^ α) by ring]
+  simp only [stochValue, coefAs, coefB, coefC]
+  rw [log_mul h1ab.ne' (mul_pos hz hK).ne', log_mul h0.ne' (mul_pos hz hK).ne',
+    log_mul hz.ne' hK.ne', log_rpow hk]
+  field_simp
+  ring
+
+/-- The objective in (3) equals the log trade-off plus terms independent of `y`. -/
+theorem stochRHS_eq (hint : Integrable log μ) (α β k z y : ℝ) :
+    stochRHS μ α β k z y = (log (z * k ^ α - y) + α * β / (1 - α * β) * log y) +
+      β * (coefAs α β (∫ z, log z ∂μ) + coefC α β * ∫ z, log z ∂μ) := by
+  unfold stochRHS
+  rw [integral_stochValue hint]
+  simp only [coefB]
+  ring
+
+/-- **Ex 2.6.** `v` satisfies the stochastic functional equation (3):
+`v(k, z) = max_{0 < y < z k^α} {ln(z k^α − y) + β E[v(y, z′)]}`. -/
+theorem stoch_bellman_isGreatest (hint : Integrable log μ) {α β k z : ℝ} (hα : 0 < α)
+    (hβ : 0 < β) (hβ1 : β < 1) (h1 : α * β < 1) (hk : 0 < k) (hz : 0 < z) :
+    IsGreatest (stochRHS μ α β k z '' Ioo 0 (z * k ^ α)) (stochValue α β (∫ z, log z ∂μ) k z) := by
+  have h0 : 0 < α * β := mul_pos hα hβ
+  have hY : 0 < z * k ^ α := mul_pos hz (rpow_pos_of_pos hk α)
+  refine ⟨⟨α * β * (z * k ^ α), ⟨mul_pos h0 hY, by nlinarith⟩,
+    stochRHS_attained hint hα hβ hβ1 h1 hk hz⟩, ?_⟩
+  rintro _ ⟨y, ⟨hy0, hyY⟩, rfl⟩
+  rw [← stochRHS_attained hint hα hβ hβ1 h1 hk hz, stochRHS_eq hint, stochRHS_eq hint]
+  have := log_tradeoff h0 h1 hY hy0 hyY
+  rw [show z * k ^ α - α * β * (z * k ^ α) = (1 - α * β) * (z * k ^ α) by ring]
+  linarith
+
+/-- **Ex 2.6.** The policy (5), `y = αβ z k^α`, is the unique maximizer in (3). -/
+theorem stoch_argmax_unique (hint : Integrable log μ) {α β k z y : ℝ} (hα : 0 < α) (hβ : 0 < β)
+    (hβ1 : β < 1) (h1 : α * β < 1) (hk : 0 < k) (hz : 0 < z) (hy : 0 < y) (hyY : y < z * k ^ α)
+    (hmax : stochValue α β (∫ z, log z ∂μ) k z ≤ stochRHS μ α β k z y) :
+    y = α * β * (z * k ^ α) := by
+  have h0 : 0 < α * β := mul_pos hα hβ
+  have hY : 0 < z * k ^ α := mul_pos hz (rpow_pos_of_pos hk α)
+  rw [← stochRHS_attained hint hα hβ hβ1 h1 hk hz, stochRHS_eq hint, stochRHS_eq hint] at hmax
+  rw [show z * k ^ α - α * β * (z * k ^ α) = (1 - α * β) * (z * k ^ α) by ring] at hmax
+  exact log_tradeoff_unique h0 h1 hY hy hyY (by linarith)
+
+/-! ### Expected utility along the policy -/
+
+/-- The shock in period `t`: the known `z` in period `0`, the coordinate `ω t` afterwards. -/
+def shock (z : ℝ) (ω : ℕ → ℝ) (t : ℕ) : ℝ := if t = 0 then z else ω t
+
+/-- Capital along policy (5): `k_{t+1} = αβ z_t k_t^α`. -/
+noncomputable def stochPath (α β k z : ℝ) (ω : ℕ → ℝ) : ℕ → ℝ
+  | 0 => k
+  | t + 1 => α * β * shock z ω t * stochPath α β k z ω t ^ α
+
+/-- Consumption along (5): `c_t = (1 − αβ) z_t k_t^α`. -/
+noncomputable def stochCons (α β k z : ℝ) (ω : ℕ → ℝ) (t : ℕ) : ℝ :=
+  shock z ω t * stochPath α β k z ω t ^ α - stochPath α β k z ω (t + 1)
+
+/-- The product measure of i.i.d. shocks. -/
+noncomputable abbrev shockMeasure (μ : Measure ℝ) [IsProbabilityMeasure μ] : Measure (ℕ → ℝ) :=
+  Measure.infinitePi fun _ : ℕ => μ
+
+theorem ae_shock_pos (hpos : ∀ᵐ z ∂μ, 0 < z) : ∀ᵐ ω ∂shockMeasure μ, ∀ t, 0 < ω t := by
+  rw [ae_all_iff]
+  intro t
+  have h : ∀ᵐ x ∂(shockMeasure μ).map (fun ω => ω t), 0 < x := by
+    rwa [Measure.infinitePi_map_eval]
+  exact ae_of_ae_map (measurable_pi_apply t).aemeasurable h
+
+theorem integrable_log_coord (hint : Integrable log μ) (t : ℕ) :
+    Integrable (fun ω : ℕ → ℝ => log (ω t)) (shockMeasure μ) := by
+  have h : Integrable log ((shockMeasure μ).map (fun ω => ω t)) := by
+    rwa [Measure.infinitePi_map_eval]
+  exact h.comp_aemeasurable (measurable_pi_apply t).aemeasurable
+
+theorem integral_log_coord (t : ℕ) :
+    ∫ ω, log (ω t) ∂shockMeasure μ = ∫ z, log z ∂μ := by
+  rw [← integral_map (measurable_pi_apply t).aemeasurable
+    measurable_log.aestronglyMeasurable, Measure.infinitePi_map_eval]
+
+/-- The expected log shock: `ln z` in period `0`, `E[ln z]` afterwards. -/
+noncomputable def meanShock (μ : Measure ℝ) (z : ℝ) (t : ℕ) : ℝ :=
+  if t = 0 then log z else ∫ z, log z ∂μ
+
+theorem integrable_log_shock (hint : Integrable log μ) (z : ℝ) (t : ℕ) :
+    Integrable (fun ω => log (shock z ω t)) (shockMeasure μ) := by
+  rcases t with _ | t
+  · simp [shock]
+  · simpa [shock] using integrable_log_coord hint (t + 1)
+
+theorem integral_log_shock (z : ℝ) (t : ℕ) :
+    ∫ ω, log (shock z ω t) ∂shockMeasure μ = meanShock μ z t := by
+  rcases t with _ | t
+  · simp [shock, meanShock]
+  · simpa [shock, meanShock] using integral_log_coord (μ := μ) (t + 1)
+
+/-- Almost surely, along (5), `ln k_{t+1} = ln(αβ) + ln z_t + α ln k_t` and capital is positive. -/
+theorem ae_log_path (hpos : ∀ᵐ z ∂μ, 0 < z) {α β k z : ℝ} (h0 : 0 < α * β) (hk : 0 < k)
+    (hz : 0 < z) :
+    ∀ᵐ ω ∂shockMeasure μ, ∀ t, 0 < shock z ω t ∧ 0 < stochPath α β k z ω t ∧
+      log (stochPath α β k z ω (t + 1)) =
+        log (α * β) + log (shock z ω t) + α * log (stochPath α β k z ω t) := by
+  filter_upwards [ae_shock_pos hpos] with ω hω t
+  have hsh : ∀ s, 0 < shock z ω s := fun s => by
+    unfold shock; split_ifs
+    · exact hz
+    · exact hω s
+  have hkp : ∀ s, 0 < stochPath α β k z ω s := fun s => by
+    induction s with
+    | zero => exact hk
+    | succ s ih => exact mul_pos (mul_pos h0 (hsh s)) (rpow_pos_of_pos ih α)
+  refine ⟨hsh t, hkp t, ?_⟩
+  simp only [stochPath]
+  rw [log_mul (mul_pos h0 (hsh t)).ne' (rpow_pos_of_pos (hkp t) α).ne', log_mul h0.ne' (hsh t).ne',
+    log_rpow (hkp t)]
+
+/-- The expected log capital, by the recursion `M_{t+1} = ln(αβ) + αM_t + E[ln z_t]`. -/
+noncomputable def meanLogK (μ : Measure ℝ) (α β k z : ℝ) : ℕ → ℝ
+  | 0 => log k
+  | t + 1 => log (α * β) + α * meanLogK μ α β k z t + meanShock μ z t
+
+/-- `ln k_t` is integrable with mean `M_t`. -/
+theorem integral_log_path (hpos : ∀ᵐ z ∂μ, 0 < z) (hint : Integrable log μ) {α β k z : ℝ}
+    (h0 : 0 < α * β) (hk : 0 < k) (hz : 0 < z) (t : ℕ) :
+    Integrable (fun ω => log (stochPath α β k z ω t)) (shockMeasure μ) ∧
+      ∫ ω, log (stochPath α β k z ω t) ∂shockMeasure μ = meanLogK μ α β k z t := by
+  have hae := ae_log_path hpos h0 hk hz
+  induction t with
+  | zero => simp [stochPath, meanLogK]
+  | succ t ih =>
+    have heq : (fun ω => log (stochPath α β k z ω (t + 1))) =ᵐ[shockMeasure μ]
+        fun ω => log (α * β) + log (shock z ω t) + α * log (stochPath α β k z ω t) := by
+      filter_upwards [hae] with ω hω
+      exact (hω t).2.2
+    have hint' : Integrable (fun ω => log (α * β) + log (shock z ω t) +
+        α * log (stochPath α β k z ω t)) (shockMeasure μ) :=
+      ((integrable_const _).add (integrable_log_shock hint z t)).add (ih.1.const_mul α)
+    refine ⟨hint'.congr heq.symm, ?_⟩
+    have hA : Integrable (fun ω => log (α * β) + log (shock z ω t)) (shockMeasure μ) :=
+      (integrable_const _).add (integrable_log_shock hint z t)
+    have e1 := integral_add hA (ih.1.const_mul α)
+    have e2 := integral_add (integrable_const (log (α * β))) (integrable_log_shock hint z t)
+    beta_reduce at e1 e2
+    rw [integral_congr_ae heq, e1, e2, integral_const, integral_const_mul, ih.2,
+      integral_log_shock]
+    simp [meanLogK]
+    ring
+
+/-- Expected log consumption: `E[ln c_t] = ln(1 − αβ) + E[ln z_t] + αM_t`. -/
+theorem integral_log_cons (hpos : ∀ᵐ z ∂μ, 0 < z) (hint : Integrable log μ) {α β k z : ℝ}
+    (h0 : 0 < α * β) (h1 : α * β < 1) (hk : 0 < k) (hz : 0 < z) (t : ℕ) :
+    ∫ ω, log (stochCons α β k z ω t) ∂shockMeasure μ =
+      log (1 - α * β) + meanShock μ z t + α * meanLogK μ α β k z t := by
+  have h1ab : 0 < 1 - α * β := sub_pos.2 h1
+  have heq : (fun ω => log (stochCons α β k z ω t)) =ᵐ[shockMeasure μ]
+      fun ω => log (1 - α * β) + log (shock z ω t) + α * log (stochPath α β k z ω t) := by
+    filter_upwards [ae_log_path hpos h0 hk hz] with ω hω
+    obtain ⟨hs, hp, -⟩ := hω t
+    unfold stochCons
+    rw [show shock z ω t * stochPath α β k z ω t ^ α - stochPath α β k z ω (t + 1) =
+      (1 - α * β) * shock z ω t * stochPath α β k z ω t ^ α by simp only [stochPath]; ring,
+      log_mul (mul_pos h1ab hs).ne' (rpow_pos_of_pos hp α).ne', log_mul h1ab.ne' hs.ne',
+      log_rpow hp]
+  have hi := (integral_log_path hpos hint h0 hk hz t).1
+  have hA : Integrable (fun ω => log (1 - α * β) + log (shock z ω t)) (shockMeasure μ) :=
+    (integrable_const _).add (integrable_log_shock hint z t)
+  have e1 := integral_add hA (hi.const_mul α)
+  have e2 := integral_add (integrable_const (log (1 - α * β))) (integrable_log_shock hint z t)
+  beta_reduce at e1 e2
+  rw [integral_congr_ae heq, e1, e2, integral_const, integral_const_mul,
+    (integral_log_path hpos hint h0 hk hz t).2, integral_log_shock]
+  simp
+
+omit [IsProbabilityMeasure μ] in
+/-- After period `0`, `M_{s+1} = αˢ M_1 + (ln(αβ) + m)(1 − αˢ)/(1 − α)`. -/
+theorem meanLogK_succ {α β k z : ℝ} (hα1 : α < 1) (s : ℕ) :
+    meanLogK μ α β k z (s + 1) = α ^ s * meanLogK μ α β k z 1 +
+      (log (α * β) + ∫ z, log z ∂μ) * (1 - α ^ s) / (1 - α) := by
+  have h1α : (1 - α) ≠ 0 := (sub_pos.2 hα1).ne'
+  induction s with
+  | zero => simp
+  | succ s ih =>
+    rw [show s + 1 + 1 = (s + 1) + 1 by rfl]
+    conv_lhs => rw [meanLogK]
+    rw [ih]
+    simp only [meanShock, Nat.add_eq_zero_iff, one_ne_zero, and_false, ↓reduceIte]
+    field_simp
+    ring
+
+/-- **Ex 2.6.** Along policy (5), the expected discounted utility `∑ βᵗ E[ln c_t]` from `(k, z)`
+is `v(k, z)`. -/
+theorem hasSum_expected_utility (hpos : ∀ᵐ z ∂μ, 0 < z) (hint : Integrable log μ) {α β k z : ℝ}
+    (hα : 0 < α) (hα1 : α < 1) (hβ : 0 < β) (hβ1 : β < 1) (hk : 0 < k) (hz : 0 < z) :
+    HasSum (fun t => β ^ t * ∫ ω, log (stochCons α β k z ω t) ∂shockMeasure μ)
+      (stochValue α β (∫ z, log z ∂μ) k z) := by
+  have h0 : 0 < α * β := mul_pos hα hβ
+  have h1 : α * β < 1 := by nlinarith
+  have h1α : (1 - α) ≠ 0 := (sub_pos.2 hα1).ne'
+  have h1β : (1 - β) ≠ 0 := (sub_pos.2 hβ1).ne'
+  have h1ab : (1 - α * β) ≠ 0 := (sub_pos.2 h1).ne'
+  set m := ∫ z, log z ∂μ
+  set M1 := meanLogK μ α β k z 1
+  -- the terms after period 0, as geometric series
+  have hterm : ∀ s, β ^ (s + 1) * ∫ ω, log (stochCons α β k z ω (s + 1)) ∂shockMeasure μ =
+      β * (log (1 - α * β) + m + α * (log (α * β) + m) / (1 - α)) * β ^ s +
+        β * (α * M1 - α * (log (α * β) + m) / (1 - α)) * (α * β) ^ s := fun s => by
+    rw [integral_log_cons hpos hint h0 h1 hk hz, meanLogK_succ hα1 s]
+    simp only [meanShock, Nat.add_eq_zero_iff, one_ne_zero, and_false, ↓reduceIte, mul_pow,
+      pow_succ]
+    field_simp
+    ring
+  have hg1 := hasSum_geometric_of_lt_one hβ.le hβ1
+  have hg2 := hasSum_geometric_of_lt_one h0.le h1
+  have htail := (hg1.mul_left (β * (log (1 - α * β) + m + α * (log (α * β) + m) / (1 - α)))).add
+    (hg2.mul_left (β * (α * M1 - α * (log (α * β) + m) / (1 - α))))
+  rw [← hasSum_nat_add_iff' 1]
+  convert htail using 1
+  · funext s
+    exact hterm s
+  · rw [sum_range_one, pow_zero, one_mul, integral_log_cons hpos hint h0 h1 hk hz]
+    simp only [M1, meanLogK, meanShock, ↓reduceIte, stochValue, coefAs, coefB, coefC, m]
+    field_simp
+    ring
+
+end StokeyLucasPrescott.Overview
+
+/-
+Copyright (c) 2026 Robert Kirkby. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Robert Kirkby
+-/
+
+/-!
+# Log-normal capital
+
+SLP Exercise 2.7, p. 20.
+
+Under policy (5), `k_{t+1} = αβ z_t k_t^α`, so `ln k_{t+1} = ln(αβ) + α ln k_t + ln z_t`. If the
+`ln z_t` are i.i.d. `N(m, σ²)`, each `ln k_t` is normal.
+
+* `capPath`, `log_capPath`: the capital path in levels has logarithm `logPath`.
+* `logPath_eq`: `ln k_t = c_t + ∑_{s<t} α^{t−1−s} ln z_s`, a function of past shocks only.
+* `indepFun_logPath`: `ln k_t` is independent of the current shock `ln z_t`.
+* `hasLaw_logPath` (Ex 2.7): `ln k_t ∼ N(μ_t, σ_t²)` with `μ_{t+1} = αμ_t + ln(αβ) + m`,
+  `σ²_{t+1} = α²σ_t² + σ²`; `meanN_eq`, `varN_eq`: `μ_t = αᵗ ln k₀ + (ln(αβ) + m)(1 − αᵗ)/(1 − α)`,
+  `σ_t² = σ²(1 − α^{2t})/(1 − α²)`.
+* `meanN_tendsto`, `varN_tendsto` (Ex 2.7): `μ_t → (ln(αβ) + m)/(1 − α)`,
+  `σ_t² → σ²/(1 − α²)`.
+-/
+
+open Finset Filter Topology Real MeasureTheory ProbabilityTheory
+open scoped NNReal
+
+namespace StokeyLucasPrescott.Overview
+
+/-- The capital path `k_{t+1} = αβ e^{ω_t} k_t^α`, with `ω_t = ln z_t`. -/
+noncomputable def capPath (α β k₀ : ℝ) (ω : ℕ → ℝ) : ℕ → ℝ
+  | 0 => k₀
+  | t + 1 => α * β * exp (ω t) * capPath α β k₀ ω t ^ α
+
+/-- `ln k_t`: `ℓ₀` given, `ℓ_{t+1} = ln(αβ) + αℓ_t + ω_t`. -/
+noncomputable def logPath (α β ℓ₀ : ℝ) (ω : ℕ → ℝ) : ℕ → ℝ
+  | 0 => ℓ₀
+  | t + 1 => log (α * β) + α * logPath α β ℓ₀ ω t + ω t
+
+/-- The capital path in levels has logarithm `logPath`, and stays positive. -/
+theorem log_capPath {α β k₀ : ℝ} (h0 : 0 < α * β) (hk₀ : 0 < k₀) (ω : ℕ → ℝ) (t : ℕ) :
+    0 < capPath α β k₀ ω t ∧ log (capPath α β k₀ ω t) = logPath α β (log k₀) ω t := by
+  induction t with
+  | zero => exact ⟨hk₀, rfl⟩
+  | succ t ih =>
+    obtain ⟨hp, hl⟩ := ih
+    refine ⟨mul_pos (mul_pos h0 (exp_pos _)) (rpow_pos_of_pos hp α), ?_⟩
+    simp only [capPath, logPath]
+    rw [log_mul (mul_pos h0 (exp_pos _)).ne' (rpow_pos_of_pos hp α).ne',
+      log_mul h0.ne' (exp_pos _).ne', log_exp, log_rpow hp, hl]
+    ring
+
+/-- The deterministic part of `ln k_t`: `c₀ = ℓ₀`, `c_{t+1} = ln(αβ) + αc_t`. -/
+noncomputable def constPath (α β ℓ₀ : ℝ) : ℕ → ℝ
+  | 0 => ℓ₀
+  | t + 1 => log (α * β) + α * constPath α β ℓ₀ t
+
+/-- `ln k_t = c_t + ∑_{s<t} α^{t−1−s} ω_s`. -/
+theorem logPath_eq (α β ℓ₀ : ℝ) (ω : ℕ → ℝ) (t : ℕ) :
+    logPath α β ℓ₀ ω t = constPath α β ℓ₀ t + ∑ s ∈ range t, α ^ (t - 1 - s) * ω s := by
+  induction t with
+  | zero => simp [logPath, constPath]
+  | succ t ih =>
+    simp only [logPath, constPath, ih, sum_range_succ, Nat.add_sub_cancel, Nat.sub_self,
+      pow_zero, one_mul, mul_add, mul_sum]
+    have : ∀ s ∈ range t, α * (α ^ (t - 1 - s) * ω s) = α ^ (t - s) * ω s := fun s hs => by
+      have hs := mem_range.1 hs
+      rw [← mul_assoc, ← pow_succ']
+      congr 2
+      omega
+    rw [sum_congr rfl this]
+    ring
+
+theorem measurable_logPath (α β ℓ₀ : ℝ) (t : ℕ) :
+    Measurable fun ω : ℕ → ℝ => logPath α β ℓ₀ ω t := by
+  induction t with
+  | zero => exact measurable_const
+  | succ t ih =>
+    exact (measurable_const.add (ih.const_mul α)).add (measurable_pi_apply t)
+
+/-- **`ln k_t` is independent of the current shock** under any product probability measure. -/
+theorem indepFun_logPath {ν : Measure ℝ} [IsProbabilityMeasure ν] (α β ℓ₀ : ℝ) (t : ℕ) :
+    IndepFun (fun ω => logPath α β ℓ₀ ω t) (fun ω => ω t)
+      (Measure.infinitePi fun _ : ℕ => ν) := by
+  set c : ℕ → ℝ := fun s => if s < t then α ^ (t - 1 - s) else 1
+  have hind : iIndepFun (fun s (ω : ℕ → ℝ) => c s * ω s) (Measure.infinitePi fun _ : ℕ => ν) :=
+    iIndepFun_infinitePi (X := fun s x => c s * x) fun s => measurable_const.mul measurable_id
+  have hmeas : ∀ s, Measurable fun ω : ℕ → ℝ => c s * ω s :=
+    fun s => measurable_const.mul (measurable_pi_apply s)
+  have hsum := hind.indepFun_finsetSum_of_notMem hmeas (s := range t) (i := t) (by simp)
+  have h := hsum.comp (measurable_const_add (constPath α β ℓ₀ t)) measurable_id
+  convert h using 1
+  · funext ω
+    simp only [Function.comp_apply, Finset.sum_apply, logPath_eq]
+    congr 1
+    refine sum_congr rfl fun s hs => ?_
+    simp [c, mem_range.1 hs]
+  · funext ω
+    simp [c]
+
+/-- The means `μ₀ = ℓ₀`, `μ_{t+1} = αμ_t + ln(αβ) + m`. -/
+noncomputable def meanN (α β ℓ₀ m : ℝ) : ℕ → ℝ
+  | 0 => ℓ₀
+  | t + 1 => α * meanN α β ℓ₀ m t + log (α * β) + m
+
+/-- `α²` as a nonnegative real. -/
+noncomputable def sqNN (α : ℝ) : ℝ≥0 := ⟨α ^ 2, sq_nonneg α⟩
+
+theorem coe_sqNN (α : ℝ) : (sqNN α : ℝ) = α ^ 2 := rfl
+
+/-- The variances `σ₀² = 0`, `σ²_{t+1} = α²σ_t² + σ²`. -/
+noncomputable def varN (α : ℝ) (v : ℝ≥0) : ℕ → ℝ≥0
+  | 0 => 0
+  | t + 1 => sqNN α * varN α v t + v
+
+/-- **Ex 2.7.** If the log shocks are i.i.d. `N(m, σ²)`, then `ln k_t ∼ N(μ_t, σ_t²)`. -/
+theorem hasLaw_logPath (α β ℓ₀ m : ℝ) (v : ℝ≥0) (t : ℕ) :
+    HasLaw (fun ω => logPath α β ℓ₀ ω t) (gaussianReal (meanN α β ℓ₀ m t) (varN α v t))
+      (Measure.infinitePi fun _ : ℕ => gaussianReal m v) := by
+  set P := Measure.infinitePi fun _ : ℕ => gaussianReal m v
+  induction t with
+  | zero =>
+    refine ⟨measurable_const.aemeasurable, ?_⟩
+    simp only [logPath, meanN, varN, gaussianReal_zero_var]
+    rw [Measure.map_const, measure_univ, one_smul]
+  | succ t ih =>
+    -- the two summands and their laws
+    set X : (ℕ → ℝ) → ℝ := fun ω => log (α * β) + α * logPath α β ℓ₀ ω t
+    set Y : (ℕ → ℝ) → ℝ := fun ω => ω t
+    have hφ : Measurable fun x : ℝ => log (α * β) + α * x := measurable_const.add
+      (measurable_const.mul measurable_id)
+    have hX : HasLaw X (gaussianReal (α * meanN α β ℓ₀ m t + log (α * β))
+        (sqNN α * varN α v t)) P := by
+      refine ⟨(hφ.comp (measurable_logPath α β ℓ₀ t)).aemeasurable, ?_⟩
+      have hmul : (P.map fun ω => logPath α β ℓ₀ ω t).map (fun x => α * x) =
+          gaussianReal (α * meanN α β ℓ₀ m t) (sqNN α * varN α v t) := by
+        rw [ih.map_eq, gaussianReal_map_const_mul]
+        rfl
+      have hmap' : P.map X = ((P.map fun ω => logPath α β ℓ₀ ω t).map (fun x => α * x)).map
+          (fun x => x + log (α * β)) := by
+        rw [Measure.map_map (measurable_add_const _) (measurable_const_mul α),
+          Measure.map_map ((measurable_add_const _).comp (measurable_const_mul α))
+            (measurable_logPath α β ℓ₀ t)]
+        congr 1
+        funext ω
+        simp [X, add_comm]
+      rw [hmap', hmul, gaussianReal_map_add_const]
+    have hY : HasLaw Y (gaussianReal m v) P :=
+      ⟨(measurable_pi_apply t).aemeasurable, Measure.infinitePi_map_eval _ t⟩
+    have hXY : IndepFun X Y P := (indepFun_logPath (ν := gaussianReal m v) α β ℓ₀ t).comp hφ
+      measurable_id
+    have hsum := gaussianReal_add_gaussianReal_of_indepFun hXY hX hY
+    have hfun : (fun ω => logPath α β ℓ₀ ω (t + 1)) = X + Y := by
+      funext ω
+      simp [X, Y, logPath]
+    refine ⟨(measurable_logPath α β ℓ₀ (t + 1)).aemeasurable, ?_⟩
+    rw [hfun, hsum]
+    rfl
+
+/-- **Ex 2.7.** `μ_t = αᵗ ln k₀ + (ln(αβ) + m)(1 − αᵗ)/(1 − α)`. -/
+theorem meanN_eq {α β ℓ₀ m : ℝ} (hα1 : α < 1) (t : ℕ) :
+    meanN α β ℓ₀ m t = α ^ t * ℓ₀ + (log (α * β) + m) * (1 - α ^ t) / (1 - α) := by
+  have h1α : (1 - α) ≠ 0 := (sub_pos.2 hα1).ne'
+  induction t with
+  | zero => simp [meanN]
+  | succ t ih =>
+    simp only [meanN, ih]
+    field_simp
+    ring
+
+/-- **Ex 2.7.** `σ_t² = σ²(1 − α^{2t})/(1 − α²)`. -/
+theorem varN_eq {α : ℝ} (hα0 : 0 ≤ α) (hα1 : α < 1) (v : ℝ≥0) (t : ℕ) :
+    (varN α v t : ℝ) = v * (1 - (α ^ 2) ^ t) / (1 - α ^ 2) := by
+  have h2 : (1 - α ^ 2) ≠ 0 := by nlinarith
+  induction t with
+  | zero => simp [varN]
+  | succ t ih =>
+    rw [varN, NNReal.coe_add, NNReal.coe_mul, coe_sqNN, ih]
+    field_simp
+    ring
+
+/-- **Ex 2.7.** `μ_t → (ln(αβ) + m)/(1 − α)`. -/
+theorem meanN_tendsto {α β ℓ₀ m : ℝ} (hα0 : 0 ≤ α) (hα1 : α < 1) :
+    Tendsto (meanN α β ℓ₀ m) atTop (𝓝 ((log (α * β) + m) / (1 - α))) := by
+  have hp := tendsto_pow_atTop_nhds_zero_of_lt_one hα0 hα1
+  have := ((hp.mul_const ℓ₀).add (((tendsto_const_nhds (x := log (α * β) + m)).mul
+    ((tendsto_const_nhds (x := (1 : ℝ))).sub hp)).div_const (1 - α)))
+  simp only [zero_mul, zero_add, sub_zero, mul_one] at this
+  refine this.congr fun t => ?_
+  rw [meanN_eq hα1]
+
+/-- **Ex 2.7.** `σ_t² → σ²/(1 − α²)`. -/
+theorem varN_tendsto {α : ℝ} (hα0 : 0 ≤ α) (hα1 : α < 1) (v : ℝ≥0) :
+    Tendsto (fun t => (varN α v t : ℝ)) atTop (𝓝 (v / (1 - α ^ 2))) := by
+  have hp := tendsto_pow_atTop_nhds_zero_of_lt_one (sq_nonneg α) (by nlinarith : α ^ 2 < 1)
+  have := ((tendsto_const_nhds (x := (v : ℝ))).mul
+    ((tendsto_const_nhds (x := (1 : ℝ))).sub hp)).div_const (1 - α ^ 2)
+  simp only [sub_zero, mul_one] at this
+  refine this.congr fun t => ?_
+  rw [varN_eq hα0 hα1]
+
+end StokeyLucasPrescott.Overview
+
+/-
+Copyright (c) 2026 Robert Kirkby. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Robert Kirkby
+-/
+
+/-!
+# A constant savings rate
+
+SLP Exercise 2.4, p. 15: `g(k) = s f(k)` with `f` as in Exercise 2.1.
+
+For any `g` on `[0, ∞)` that is continuous, strictly increasing and strictly concave with
+`g(0) = 0`, lying above the 45° line somewhere and below it somewhere:
+
+* `exists_unique_fixedPoint` (Ex 2.4a): there is exactly one positive stationary point `k*`;
+  `lt_of_lt_fixed`, `gt_of_gt_fixed`: `g(k) > k` below it and `g(k) < k` above it.
+* `tendsto_fixedPoint`, `monotone_of_le`, `antitone_of_ge` (Ex 2.4b): from every `k₀ > 0` the
+  sequence `k_{t+1} = g(k_t)` converges monotonically to `k*`; `iterate_eq_fixed_iff`: it reaches
+  `k*` in finitely many periods only if it starts there.
+* `savings_crossings`, `savings_unique_steady_state`: for `f` neoclassical, `s > 0` and
+  `s(1 − δ) < 1` give the two crossings. The book states only `s > 0`; see
+  `docs/corrections.md`.
+-/
+
+open Set Filter Topology
+
+namespace StokeyLucasPrescott.Overview
+
+/-- The assumptions on a savings function `g` on `[0, ∞)`. -/
+structure SavingsMap (g : ℝ → ℝ) : Prop where
+  zero : g 0 = 0
+  cont : ContinuousOn g (Ici 0)
+  mono : StrictMonoOn g (Ici 0)
+  conc : StrictConcaveOn ℝ (Ici 0) g
+  above : ∃ a, 0 < a ∧ a < g a
+  below : ∃ b, 0 < b ∧ g b < b
+
+namespace SavingsMap
+
+variable {g : ℝ → ℝ} (hg : SavingsMap g)
+include hg
+
+/-- `g(k) − k` is strictly concave and vanishes at `0`, so it changes sign at most once on
+`(0, ∞)`: if it is `≥ 0` at `y > 0` it is `> 0` on `(0, y)`. -/
+theorem pos_of_lt {x y : ℝ} (hx : 0 < x) (hxy : x < y) (hy : y ≤ g y) : x < g x := by
+  have hy0 : 0 < y := hx.trans hxy
+  have hA : 0 < 1 - x / y := by rw [sub_pos, div_lt_one hy0]; exact hxy
+  have hB : 0 < x / y := by positivity
+  have h := hg.conc.2 (Set.mem_Ici.2 le_rfl) (Set.mem_Ici.2 hy0.le) hy0.ne hA hB (by ring)
+  simp only [smul_eq_mul, hg.zero, mul_zero, zero_add] at h
+  rw [show x / y * y = x by field_simp] at h
+  have : x / y * y ≤ x / y * g y := mul_le_mul_of_nonneg_left hy (by positivity)
+  rw [show x / y * y = x by field_simp] at this
+  linarith
+
+/-- **Ex 2.4a.** There is exactly one positive stationary point. -/
+theorem exists_unique_fixedPoint : ∃! k, 0 < k ∧ g k = k := by
+  obtain ⟨a, ha, hga⟩ := hg.above
+  obtain ⟨b, hb, hgb⟩ := hg.below
+  have hab : a < b := by
+    by_contra h
+    push Not at h
+    rcases h.eq_or_lt with rfl | h
+    · linarith
+    · have := hg.pos_of_lt hb h hga.le
+      linarith
+  -- existence by the intermediate value theorem for `g(k) − k`
+  have hcont : ContinuousOn (fun k => g k - k) (Icc a b) :=
+    (hg.cont.mono fun x hx => Set.mem_Ici.2 (ha.le.trans hx.1)).sub continuousOn_id
+  obtain ⟨k, hk, hk0⟩ := intermediate_value_Icc' hab.le hcont
+    (show (0 : ℝ) ∈ Icc (g b - b) (g a - a) from ⟨by linarith, by linarith⟩)
+  refine ⟨k, ⟨ha.trans_le hk.1, by linarith⟩, fun j ⟨hj, hgj⟩ => ?_⟩
+  -- uniqueness: two positive fixed points contradict strict concavity
+  have hk0' : 0 < k := ha.trans_le hk.1
+  by_contra hne
+  rcases lt_or_gt_of_ne hne with h | h
+  · have := hg.pos_of_lt hj h (by linarith)
+    linarith
+  · have := hg.pos_of_lt hk0' h hgj.ge
+    linarith
+
+/-- The positive stationary point `k*`. -/
+noncomputable def kstar : ℝ := Classical.choose hg.exists_unique_fixedPoint
+
+theorem kstar_pos : 0 < hg.kstar := (Classical.choose_spec hg.exists_unique_fixedPoint).1.1
+
+theorem g_kstar : g hg.kstar = hg.kstar := (Classical.choose_spec hg.exists_unique_fixedPoint).1.2
+
+theorem eq_kstar {k : ℝ} (hk : 0 < k) (hgk : g k = k) : k = hg.kstar :=
+  (Classical.choose_spec hg.exists_unique_fixedPoint).2 k ⟨hk, hgk⟩
+
+/-- Below `k*` the map lies above the 45° line. -/
+theorem lt_of_lt_fixed {k : ℝ} (hk : 0 < k) (hks : k < hg.kstar) : k < g k :=
+  hg.pos_of_lt hk hks hg.g_kstar.ge
+
+/-- Above `k*` the map lies below the 45° line. -/
+theorem gt_of_gt_fixed {k : ℝ} (hks : hg.kstar < k) : g k < k := by
+  by_contra h
+  push Not at h
+  have := hg.pos_of_lt hg.kstar_pos hks h
+  rw [hg.g_kstar] at this
+  exact lt_irrefl _ this
+
+theorem g_pos {k : ℝ} (hk : 0 < k) : 0 < g k := by
+  have := hg.mono (Set.mem_Ici.2 le_rfl) (Set.mem_Ici.2 hk.le) hk
+  rwa [hg.zero] at this
+
+/-- Iterates from `k₀ ∈ (0, k*]` stay in `(0, k*]` and increase. -/
+theorem iterate_mem_below {k₀ : ℝ} (hk₀ : 0 < k₀) (hle : k₀ ≤ hg.kstar) (t : ℕ) :
+    0 < g^[t] k₀ ∧ g^[t] k₀ ≤ hg.kstar ∧ g^[t] k₀ ≤ g^[t + 1] k₀ := by
+  induction t with
+  | zero =>
+    refine ⟨hk₀, hle, ?_⟩
+    rcases hle.eq_or_lt with h | h
+    · simp [h, hg.g_kstar]
+    · exact (hg.lt_of_lt_fixed hk₀ h).le
+  | succ t ih =>
+    obtain ⟨h0, h1, h2⟩ := ih
+    have hpos : 0 < g^[t + 1] k₀ := by
+      rw [Function.iterate_succ_apply']; exact hg.g_pos h0
+    have hle' : g^[t + 1] k₀ ≤ hg.kstar := by
+      rw [Function.iterate_succ_apply', ← hg.g_kstar]
+      exact hg.mono.monotoneOn (Set.mem_Ici.2 h0.le) (Set.mem_Ici.2 hg.kstar_pos.le) h1
+    refine ⟨hpos, hle', ?_⟩
+    rw [Function.iterate_succ_apply' g (t + 1)]
+    rcases hle'.eq_or_lt with h | h
+    · rw [h, hg.g_kstar]
+    · exact (hg.lt_of_lt_fixed hpos h).le
+
+/-- Iterates from `k₀ ≥ k*` stay above `k*` and decrease. -/
+theorem iterate_mem_above {k₀ : ℝ} (hge : hg.kstar ≤ k₀) (t : ℕ) :
+    hg.kstar ≤ g^[t] k₀ ∧ g^[t + 1] k₀ ≤ g^[t] k₀ := by
+  induction t with
+  | zero =>
+    refine ⟨hge, ?_⟩
+    rcases hge.eq_or_lt with h | h
+    · simp [← h, hg.g_kstar]
+    · exact (hg.gt_of_gt_fixed h).le
+  | succ t ih =>
+    obtain ⟨h1, h2⟩ := ih
+    have hge' : hg.kstar ≤ g^[t + 1] k₀ := by
+      rw [Function.iterate_succ_apply', ← hg.g_kstar]
+      exact hg.mono.monotoneOn (Set.mem_Ici.2 hg.kstar_pos.le)
+        (Set.mem_Ici.2 (hg.kstar_pos.le.trans h1)) h1
+    refine ⟨hge', ?_⟩
+    rw [Function.iterate_succ_apply' g (t + 1)]
+    rcases hge'.eq_or_lt with h | h
+    · rw [← h, hg.g_kstar]
+    · exact (hg.gt_of_gt_fixed h).le
+
+/-- **Ex 2.4b (monotonicity).** From `k₀ ∈ (0, k*]` the sequence rises. -/
+theorem monotone_of_le {k₀ : ℝ} (hk₀ : 0 < k₀) (hle : k₀ ≤ hg.kstar) :
+    Monotone fun t => g^[t] k₀ :=
+  monotone_nat_of_le_succ fun t => (hg.iterate_mem_below hk₀ hle t).2.2
+
+/-- **Ex 2.4b (monotonicity).** From `k₀ ≥ k*` the sequence falls. -/
+theorem antitone_of_ge {k₀ : ℝ} (hge : hg.kstar ≤ k₀) : Antitone fun t => g^[t] k₀ :=
+  antitone_nat_of_succ_le fun t => (hg.iterate_mem_above hge t).2
+
+/-- A limit of the iterates in `(0, ∞)` is a fixed point, hence `k*`. -/
+theorem limit_eq_kstar {k₀ L : ℝ} (hL : 0 < L) (hlim : Tendsto (fun t => g^[t] k₀) atTop (𝓝 L))
+    (hpos : ∀ t, 0 ≤ g^[t] k₀) : L = hg.kstar := by
+  have hcontL : ContinuousWithinAt g (Ici 0) L := hg.cont L (Set.mem_Ici.2 hL.le)
+  have h1 : Tendsto (fun t => g (g^[t] k₀)) atTop (𝓝 (g L)) :=
+    hcontL.tendsto.comp (tendsto_nhdsWithin_iff.2 ⟨hlim, Eventually.of_forall hpos⟩)
+  have h2 : Tendsto (fun t => g (g^[t] k₀)) atTop (𝓝 L) := by
+    have := hlim.comp (tendsto_add_atTop_nat 1)
+    simpa [Function.comp_def, Function.iterate_succ_apply'] using this
+  exact hg.eq_kstar hL (tendsto_nhds_unique h1 h2)
+
+/-- **Ex 2.4b.** From every `k₀ > 0` the sequence `k_{t+1} = g(k_t)` converges to `k*`. -/
+theorem tendsto_fixedPoint {k₀ : ℝ} (hk₀ : 0 < k₀) :
+    Tendsto (fun t => g^[t] k₀) atTop (𝓝 hg.kstar) := by
+  rcases le_total k₀ hg.kstar with hle | hge
+  · have hb := hg.iterate_mem_below hk₀ hle
+    have hmono := hg.monotone_of_le hk₀ hle
+    have hbdd : BddAbove (range fun t => g^[t] k₀) :=
+      ⟨hg.kstar, by rintro _ ⟨t, rfl⟩; exact (hb t).2.1⟩
+    have hlim := tendsto_atTop_ciSup hmono hbdd
+    have hLpos : 0 < ⨆ t, g^[t] k₀ := hk₀.trans_le (le_ciSup hbdd 0)
+    rwa [← hg.limit_eq_kstar hLpos hlim fun t => (hb t).1.le]
+  · have ha := hg.iterate_mem_above hge
+    have hanti := hg.antitone_of_ge hge
+    have hbdd : BddBelow (range fun t => g^[t] k₀) :=
+      ⟨hg.kstar, by rintro _ ⟨t, rfl⟩; exact (ha t).1⟩
+    have hlim := tendsto_atTop_ciInf hanti hbdd
+    have hLpos : 0 < ⨅ t, g^[t] k₀ :=
+      hg.kstar_pos.trans_le (le_ciInf fun t => (ha t).1)
+    rwa [← hg.limit_eq_kstar hLpos hlim fun t => (hg.kstar_pos.le.trans (ha t).1)]
+
+/-- **Ex 2.4b (no finite-time arrival).** The sequence reaches `k*` in finitely many periods only
+if `k₀ = k*`. -/
+theorem iterate_eq_fixed_iff {k₀ : ℝ} (hk₀ : 0 < k₀) (t : ℕ) :
+    g^[t] k₀ = hg.kstar ↔ k₀ = hg.kstar := by
+  constructor
+  · intro h
+    induction t generalizing k₀ with
+    | zero => exact h
+    | succ t ih =>
+      rw [Function.iterate_succ_apply] at h
+      have := ih (hg.g_pos hk₀) h
+      rw [← hg.g_kstar] at this
+      exact hg.mono.injOn (Set.mem_Ici.2 hk₀.le) (Set.mem_Ici.2 hg.kstar_pos.le) this
+  · intro h
+    rw [h]
+    exact Function.iterate_fixed hg.g_kstar t
+
+end SavingsMap
+
+namespace Neoclassical
+
+variable {F : ℝ → ℝ → ℝ} {Fk : ℝ → ℝ} (hF : Neoclassical F Fk)
+include hF
+
+/-- Near zero `s f(k) > k`: the mean value theorem and `f′(0+) = ∞`. -/
+theorem savings_above {δ s : ℝ} (hs : 0 < s) :
+    ∃ a, 0 < a ∧ a < s * goods F δ a := by
+  have hev : ∀ᶠ k in 𝓝[>] (0 : ℝ), 1 / s < Fk k + (1 - δ) :=
+    (hF.f'_tendsto_zero δ).eventually (eventually_gt_atTop (1 / s))
+  obtain ⟨ε, hε, hball⟩ := Metric.mem_nhdsWithin_iff.1 hev
+  set a := ε / 2
+  have ha : 0 < a := by positivity
+  refine ⟨a, ha, ?_⟩
+  have hcont : ContinuousOn (goods F δ) (Icc 0 a) :=
+    ((hF.cont_F).add (continuousOn_const.mul continuousOn_id)).mono Icc_subset_Ici_self
+  obtain ⟨ξ, hξ, hslope⟩ := exists_hasDerivAt_eq_slope (goods F δ) (fun k => Fk k + (1 - δ)) ha
+    hcont (fun x hx => hF.hasDerivAt_f δ hx.1)
+  have hξε : ξ ∈ Metric.ball (0 : ℝ) ε ∩ Ioi 0 :=
+    ⟨by
+      rw [Metric.mem_ball, Real.dist_eq, sub_zero, abs_of_pos hξ.1]
+      have : ξ < ε / 2 := hξ.2
+      linarith,
+      hξ.1⟩
+  have hbig : 1 / s < Fk ξ + (1 - δ) := hball hξε
+  rw [hslope, hF.f_zero δ, sub_zero, sub_zero, lt_div_iff₀ ha] at hbig
+  have e : s * (1 / s * a) = a := by field_simp
+  nlinarith
+
+/-- For large `k`, `s f(k) < k`: concavity and `s f′(∞) = s(1 − δ) < 1`. -/
+theorem savings_below {δ s : ℝ} (hs : 0 < s) (hsδ : s * (1 - δ) < 1) :
+    ∃ b, 0 < b ∧ s * goods F δ b < b := by
+  -- a point `K` where `s f′(K) < 1`
+  have hev : ∀ᶠ k in atTop, s * (Fk k + (1 - δ)) < 1 := by
+    have := ((hF.f'_tendsto_atTop δ).const_mul s).eventually (gt_mem_nhds hsδ)
+    exact this
+  obtain ⟨K, hK⟩ := (hev.and (eventually_gt_atTop 0)).exists
+  set m := Fk K + (1 - δ)
+  have hm : s * m < 1 := hK.1
+  -- the tangent line at `K` bounds `f`
+  have htan : ∀ k, 0 ≤ k → goods F δ k ≤ goods F δ K + m * (k - K) := fun k hk =>
+    concave_le_tangent (hF.strictConcaveOn_f δ).concaveOn (Set.mem_Ici.2 hK.2.le) (Set.mem_Ici.2 hk)
+      (hF.hasDerivAt_f δ hK.2)
+  set b := max K ((s * |goods F δ K| + s * |m| * K + 1) / (1 - s * m)) + 1
+  have h1 : 0 < 1 - s * m := sub_pos.2 hm
+  have hbK : K < b := by simp only [b]; linarith [le_max_left K ((s * |goods F δ K| +
+    s * |m| * K + 1) / (1 - s * m))]
+  have hbig : (s * |goods F δ K| + s * |m| * K + 1) / (1 - s * m) < b := by
+    simp only [b]; linarith [le_max_right K ((s * |goods F δ K| + s * |m| * K + 1) / (1 - s * m))]
+  have hb0 : 0 < b := hK.2.trans hbK
+  refine ⟨b, hb0, ?_⟩
+  have ht := mul_le_mul_of_nonneg_left (htan b hb0.le) hs.le
+  rw [div_lt_iff₀ h1] at hbig
+  have e1 : s * goods F δ K ≤ s * |goods F δ K| := mul_le_mul_of_nonneg_left (le_abs_self _) hs.le
+  have e2 : -(s * m * K) ≤ s * |m| * K := by
+    have : -(m * K) ≤ |m| * K := by
+      have := neg_abs_le m
+      nlinarith [hK.2]
+    nlinarith
+  nlinarith
+
+/-- **Ex 2.4 (crossings).** With `s > 0` and `s(1 − δ) < 1`, `g = s f` is a savings map. -/
+theorem savings_crossings {δ s : ℝ} (hδ1 : δ ≤ 1) (hs : 0 < s) (hsδ : s * (1 - δ) < 1) :
+    SavingsMap fun k => s * goods F δ k where
+  zero := by simp [hF.f_zero δ]
+  cont := continuousOn_const.mul ((hF.cont_F).add (continuousOn_const.mul continuousOn_id))
+  mono := fun x hx y hy hxy => mul_lt_mul_of_pos_left (hF.strictMonoOn_f hδ1 hx hy hxy) hs
+  conc := ⟨convex_Ici 0, fun x hx y hy hxy a b ha hb hab => by
+    have := (hF.strictConcaveOn_f δ).2 hx hy hxy ha hb hab
+    simp only [smul_eq_mul] at this ⊢
+    nlinarith⟩
+  above := hF.savings_above hs
+  below := hF.savings_below hs hsδ
+
+/-- **Ex 2.4a for the neoclassical model.** There is exactly one positive stationary point of
+`k ↦ s f(k)`, and every path from `k₀ > 0` converges monotonically to it. -/
+theorem savings_unique_steady_state {δ s : ℝ} (hδ1 : δ ≤ 1) (hs : 0 < s)
+    (hsδ : s * (1 - δ) < 1) : ∃! k, 0 < k ∧ s * goods F δ k = k :=
+  (hF.savings_crossings hδ1 hs hsδ).exists_unique_fixedPoint
+
+end Neoclassical
+
+end StokeyLucasPrescott.Overview
+
+/-
+Copyright (c) 2026 Robert Kirkby. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Robert Kirkby
+-/
+
+/-!
+# The objective (2) along policy (5)
+
+SLP §2.2, (2), p. 17, and Exercise 2.6, p. 19.
+
+Exercise 2.6 asks for "the value of the objective function (2)", `E[∑ βᵗ U(c_t)]`, along policy
+(5) from `k₀ = k`, `z₀ = z`, and calls it `v(k, z)`. `hasSum_expected_utility` computes
+`∑ βᵗ E[ln c_t] = v(k, z)`; here the expectation is taken outside the sum, as in (2).
+
+The bound is `E|ln c_t| ≤ D` uniformly in `t` (with `α < 1`, `E|ln k_t|` stays bounded), so
+`∑ βᵗ E|ln c_t| < ∞` and expectation and sum can be exchanged (Fubini–Tonelli for series).
+
+* `ae_summable_norm_of_summable_integral_norm`, `integrable_tsum_of_summable_integral_norm`:
+  if `∑ₙ E|fₙ| < ∞` then `∑ₙ |fₙ|` is a.e. finite and `∑ₙ fₙ` is integrable.
+* `integral_abs_log_shock_le`, `integral_abs_log_path_le`, `integral_abs_log_cons_le`:
+  `E|ln z_t| ≤ Z`, `E|ln k_t| ≤ K`, `E|ln c_t| ≤ D` for all `t`.
+* `ae_summable_utility`: almost surely `∑ βᵗ ln c_t(ω)` converges absolutely.
+* `integrable_utility`: `ω ↦ ∑ βᵗ ln c_t(ω)` is integrable.
+* `hasSum_integral_utility`, `integral_tsum_utility`: `E[∑ βᵗ ln c_t] = ∑ βᵗ E[ln c_t]`.
+* `integral_utility_eq_stochValue` (Ex 2.6): `E[∑ βᵗ ln c_t] = v(k, z) = A + B ln k + C ln z`,
+  the function of `StochasticLog` that satisfies (3).
+-/
+
+namespace StokeyLucasPrescott.Overview
+
+open Finset Set Filter Topology Real MeasureTheory ProbabilityTheory
+
+/-- If the integrable `fₙ` have `∑ₙ E|fₙ| < ∞`, then `∫⁻ ∑ₙ ‖fₙ‖ₑ < ∞` and almost surely
+`∑ₙ |fₙ(ω)|` converges. -/
+theorem ae_summable_norm_of_summable_integral_norm {Ω : Type*} [MeasurableSpace Ω]
+    {P : Measure Ω} {f : ℕ → Ω → ℝ} (hf : ∀ n, Integrable (f n) P)
+    (hs : Summable fun n => ∫ ω, ‖f n ω‖ ∂P) :
+    (∫⁻ ω, ∑' n, ‖f n ω‖ₑ ∂P ≠ ⊤) ∧ ∀ᵐ ω ∂P, Summable fun n => ‖f n ω‖ := by
+  have htop : ∫⁻ ω, ∑' n, ‖f n ω‖ₑ ∂P ≠ ⊤ := by
+    rw [lintegral_tsum fun n => (hf n).1.enorm]
+    simp_rw [← ofReal_integral_norm_eq_lintegral_enorm (hf _)]
+    rw [← ENNReal.ofReal_tsum_of_nonneg (fun n => integral_nonneg fun ω => norm_nonneg _) hs]
+    exact ENNReal.ofReal_ne_top
+  refine ⟨htop, ?_⟩
+  filter_upwards [ae_lt_top' (AEMeasurable.tsum fun n => (hf n).1.enorm) htop] with ω hω
+  exact tsum_enorm_ne_top_iff_summable_norm.1 hω.ne
+
+/-- If the integrable `fₙ` have `∑ₙ E|fₙ| < ∞`, then `ω ↦ ∑ₙ fₙ(ω)` is integrable. -/
+theorem integrable_tsum_of_summable_integral_norm {Ω : Type*} [MeasurableSpace Ω]
+    {P : Measure Ω} {f : ℕ → Ω → ℝ} (hf : ∀ n, Integrable (f n) P)
+    (hs : Summable fun n => ∫ ω, ‖f n ω‖ ∂P) :
+    Integrable (fun ω => ∑' n, f n ω) P := by
+  obtain ⟨htop, hae⟩ := ae_summable_norm_of_summable_integral_norm hf hs
+  refine ⟨aestronglyMeasurable_of_tendsto_ae atTop
+    (f := fun N ω => ∑ n ∈ range N, f n ω)
+    (fun N => (integrable_finsetSum (range N) fun n _ => hf n).1) ?_, ?_⟩
+  · filter_upwards [hae] with ω hω
+    exact hω.of_norm.hasSum.tendsto_sum_nat
+  · rw [hasFiniteIntegral_iff_enorm]
+    exact (lintegral_mono fun ω => enorm_tsum_le_tsum_enorm).trans_lt htop.lt_top
+
+variable {μ : Measure ℝ} [IsProbabilityMeasure μ]
+
+/-- `|ln z_t|` is integrable and `E|ln z_t| ≤ |ln z| + E_μ|ln z′|` for every `t`. -/
+theorem integral_abs_log_shock_le (hint : Integrable log μ) (z : ℝ) (t : ℕ) :
+    Integrable (fun ω => |log (shock z ω t)|) (shockMeasure μ) ∧
+      ∫ ω, |log (shock z ω t)| ∂shockMeasure μ ≤ |log z| + ∫ x, |log x| ∂μ := by
+  refine ⟨(integrable_log_shock hint z t).abs, ?_⟩
+  have h0 : 0 ≤ ∫ x, |log x| ∂μ := integral_nonneg fun x => abs_nonneg _
+  rcases t with _ | t
+  · simp [shock, h0]
+  · have e : ∫ ω, |log (ω (t + 1))| ∂shockMeasure μ = ∫ x, |log x| ∂μ := by
+      rw [← integral_map (φ := fun ω : ℕ → ℝ => ω (t + 1)) (f := fun x => |log x|)
+        (measurable_pi_apply (t + 1)).aemeasurable
+        (continuous_abs.measurable.comp measurable_log).aestronglyMeasurable,
+        Measure.infinitePi_map_eval]
+    simp only [shock, Nat.add_eq_zero_iff, one_ne_zero, and_false, ↓reduceIte]
+    rw [e]
+    linarith [abs_nonneg (log z)]
+
+/-- Along policy (5), `E|ln k_t| ≤ K = |ln k| + (|ln(αβ)| + Z)/(1 − α)` for every `t`, where
+`Z = |ln z| + E_μ|ln z′|`: `E|ln k_{t+1}| ≤ |ln(αβ)| + Z + αE|ln k_t|` and `K` is a fixed point
+bound for this recursion. -/
+theorem integral_abs_log_path_le (hpos : ∀ᵐ z ∂μ, 0 < z) (hint : Integrable log μ)
+    {α β k z : ℝ} (hα : 0 < α) (hα1 : α < 1) (hβ : 0 < β) (hk : 0 < k) (hz : 0 < z) (t : ℕ) :
+    ∫ ω, |log (stochPath α β k z ω t)| ∂shockMeasure μ ≤
+      |log k| + (|log (α * β)| + (|log z| + ∫ x, |log x| ∂μ)) / (1 - α) := by
+  have h0 : 0 < α * β := mul_pos hα hβ
+  have h1α : 0 < 1 - α := sub_pos.2 hα1
+  set Z := |log z| + ∫ x, |log x| ∂μ
+  set K := |log k| + (|log (α * β)| + Z) / (1 - α)
+  have hK : |log (α * β)| + Z + α * K ≤ K := by
+    have : (1 - α) * K = (1 - α) * |log k| + (|log (α * β)| + Z) := by
+      simp only [K]; field_simp
+    nlinarith [abs_nonneg (log k)]
+  induction t with
+  | zero =>
+    simp only [stochPath, integral_const, probReal_univ, smul_eq_mul, one_mul, K]
+    have : 0 ≤ (|log (α * β)| + Z) / (1 - α) := by
+      apply div_nonneg _ h1α.le
+      have : 0 ≤ ∫ x, |log x| ∂μ := integral_nonneg fun x => abs_nonneg _
+      positivity
+    linarith
+  | succ t ih =>
+    have hi := (integral_log_path hpos hint h0 hk hz t).1
+    have hi' := (integral_log_path hpos hint h0 hk hz (t + 1)).1
+    have hs := integral_abs_log_shock_le hint z t
+    have hle : (fun ω => |log (stochPath α β k z ω (t + 1))|) ≤ᵐ[shockMeasure μ]
+        fun ω => |log (α * β)| + |log (shock z ω t)| + α * |log (stochPath α β k z ω t)| := by
+      filter_upwards [ae_log_path hpos h0 hk hz] with ω hω
+      rw [(hω t).2.2]
+      calc |log (α * β) + log (shock z ω t) + α * log (stochPath α β k z ω t)|
+          ≤ |log (α * β) + log (shock z ω t)| + |α * log (stochPath α β k z ω t)| :=
+            abs_add_le _ _
+        _ ≤ _ := by
+            rw [abs_mul, abs_of_pos hα]
+            linarith [abs_add_le (log (α * β)) (log (shock z ω t))]
+    have hA : Integrable (fun ω => |log (α * β)| + |log (shock z ω t)|) (shockMeasure μ) :=
+      (integrable_const _).add hs.1
+    have hB := hi.abs.const_mul α
+    calc ∫ ω, |log (stochPath α β k z ω (t + 1))| ∂shockMeasure μ
+        ≤ ∫ ω, |log (α * β)| + |log (shock z ω t)| + α * |log (stochPath α β k z ω t)|
+            ∂shockMeasure μ := integral_mono_ae hi'.abs (hA.add hB) hle
+      _ = |log (α * β)| + ∫ ω, |log (shock z ω t)| ∂shockMeasure μ +
+            α * ∫ ω, |log (stochPath α β k z ω t)| ∂shockMeasure μ := by
+          rw [integral_add hA hB, integral_add (integrable_const _) hs.1, integral_const,
+            integral_const_mul]
+          simp
+      _ ≤ |log (α * β)| + Z + α * K := by
+          have := mul_le_mul_of_nonneg_left ih hα.le
+          linarith [hs.2]
+      _ ≤ K := hK
+
+
+/-- Almost surely `ln c_t = ln(1 − αβ) + ln z_t + α ln k_t` along policy (5). -/
+theorem ae_log_cons (hpos : ∀ᵐ z ∂μ, 0 < z) {α β k z : ℝ} (h0 : 0 < α * β) (h1 : α * β < 1)
+    (hk : 0 < k) (hz : 0 < z) (t : ℕ) :
+    (fun ω => log (stochCons α β k z ω t)) =ᵐ[shockMeasure μ]
+      fun ω => log (1 - α * β) + log (shock z ω t) + α * log (stochPath α β k z ω t) := by
+  have h1ab : 0 < 1 - α * β := sub_pos.2 h1
+  filter_upwards [ae_log_path hpos h0 hk hz] with ω hω
+  obtain ⟨hs, hp, -⟩ := hω t
+  unfold stochCons
+  rw [show shock z ω t * stochPath α β k z ω t ^ α - stochPath α β k z ω (t + 1) =
+    (1 - α * β) * shock z ω t * stochPath α β k z ω t ^ α by simp only [stochPath]; ring,
+    log_mul (mul_pos h1ab hs).ne' (rpow_pos_of_pos hp α).ne', log_mul h1ab.ne' hs.ne',
+    log_rpow hp]
+
+/-- Along policy (5), `ln c_t` is integrable and `E|ln c_t| ≤ |ln(1 − αβ)| + Z + αK` for every
+`t`. -/
+theorem integral_abs_log_cons_le (hpos : ∀ᵐ z ∂μ, 0 < z) (hint : Integrable log μ)
+    {α β k z : ℝ} (hα : 0 < α) (hα1 : α < 1) (hβ : 0 < β) (hβ1 : β < 1) (hk : 0 < k)
+    (hz : 0 < z) (t : ℕ) :
+    Integrable (fun ω => log (stochCons α β k z ω t)) (shockMeasure μ) ∧
+      ∫ ω, |log (stochCons α β k z ω t)| ∂shockMeasure μ ≤
+        |log (1 - α * β)| + (|log z| + ∫ x, |log x| ∂μ) +
+          α * (|log k| + (|log (α * β)| + (|log z| + ∫ x, |log x| ∂μ)) / (1 - α)) := by
+  have h0 : 0 < α * β := mul_pos hα hβ
+  have h1 : α * β < 1 := by nlinarith
+  have heq := ae_log_cons hpos h0 h1 hk hz t (μ := μ)
+  have hi := (integral_log_path hpos hint h0 hk hz t).1
+  have hs := integral_abs_log_shock_le hint z t
+  have hc : Integrable (fun ω => log (stochCons α β k z ω t)) (shockMeasure μ) :=
+    (((integrable_const _).add (integrable_log_shock hint z t)).add (hi.const_mul α)).congr
+      heq.symm
+  refine ⟨hc, ?_⟩
+  have hle : (fun ω => |log (stochCons α β k z ω t)|) ≤ᵐ[shockMeasure μ]
+      fun ω => |log (1 - α * β)| + |log (shock z ω t)| + α * |log (stochPath α β k z ω t)| := by
+    filter_upwards [heq] with ω hω
+    rw [hω]
+    calc |log (1 - α * β) + log (shock z ω t) + α * log (stochPath α β k z ω t)|
+        ≤ |log (1 - α * β) + log (shock z ω t)| + |α * log (stochPath α β k z ω t)| :=
+          abs_add_le _ _
+      _ ≤ _ := by
+          rw [abs_mul, abs_of_pos hα]
+          linarith [abs_add_le (log (1 - α * β)) (log (shock z ω t))]
+  have hA : Integrable (fun ω => |log (1 - α * β)| + |log (shock z ω t)|) (shockMeasure μ) :=
+    (integrable_const _).add hs.1
+  have hB := hi.abs.const_mul α
+  calc ∫ ω, |log (stochCons α β k z ω t)| ∂shockMeasure μ
+      ≤ ∫ ω, |log (1 - α * β)| + |log (shock z ω t)| + α * |log (stochPath α β k z ω t)|
+          ∂shockMeasure μ := integral_mono_ae hc.abs (hA.add hB) hle
+    _ = |log (1 - α * β)| + ∫ ω, |log (shock z ω t)| ∂shockMeasure μ +
+          α * ∫ ω, |log (stochPath α β k z ω t)| ∂shockMeasure μ := by
+        rw [integral_add hA hB, integral_add (integrable_const _) hs.1, integral_const,
+          integral_const_mul]
+        simp
+    _ ≤ _ := by
+        have := mul_le_mul_of_nonneg_left
+          (integral_abs_log_path_le hpos hint hα hα1 hβ hk hz t) hα.le
+        linarith [hs.2]
+
+/-- Each `βᵗ ln c_t` is integrable and `∑ₜ E|βᵗ ln c_t| < ∞`. -/
+theorem summable_integral_norm_utility (hpos : ∀ᵐ z ∂μ, 0 < z) (hint : Integrable log μ)
+    {α β k z : ℝ} (hα : 0 < α) (hα1 : α < 1) (hβ : 0 < β) (hβ1 : β < 1) (hk : 0 < k)
+    (hz : 0 < z) :
+    (∀ t, Integrable (fun ω => β ^ t * log (stochCons α β k z ω t)) (shockMeasure μ)) ∧
+      Summable fun t => ∫ ω, ‖β ^ t * log (stochCons α β k z ω t)‖ ∂shockMeasure μ := by
+  set Dc := |log (1 - α * β)| + (|log z| + ∫ x, |log x| ∂μ) +
+    α * (|log k| + (|log (α * β)| + (|log z| + ∫ x, |log x| ∂μ)) / (1 - α))
+  have hb := fun t => integral_abs_log_cons_le hpos hint hα hα1 hβ hβ1 hk hz t (μ := μ)
+  refine ⟨fun t => (hb t).1.const_mul _, ?_⟩
+  refine Summable.of_nonneg_of_le (fun t => integral_nonneg fun ω => norm_nonneg _)
+    (fun t => ?_) ((summable_geometric_of_lt_one hβ.le hβ1).mul_right Dc)
+  simp only [norm_mul, norm_pow, Real.norm_eq_abs, abs_of_pos hβ]
+  rw [integral_const_mul]
+  exact mul_le_mul_of_nonneg_left (hb t).2 (pow_nonneg hβ.le t)
+
+
+/-- **Ex 2.6.** Almost surely the discounted utility series `∑ βᵗ ln c_t(ω)` along policy (5)
+converges absolutely. -/
+theorem ae_summable_utility (hpos : ∀ᵐ z ∂μ, 0 < z) (hint : Integrable log μ)
+    {α β k z : ℝ} (hα : 0 < α) (hα1 : α < 1) (hβ : 0 < β) (hβ1 : β < 1) (hk : 0 < k)
+    (hz : 0 < z) :
+    ∀ᵐ ω ∂shockMeasure μ, Summable fun t => |β ^ t * log (stochCons α β k z ω t)| := by
+  obtain ⟨hi, hs⟩ := summable_integral_norm_utility hpos hint hα hα1 hβ hβ1 hk hz (μ := μ)
+  simpa only [Real.norm_eq_abs] using (ae_summable_norm_of_summable_integral_norm hi hs).2
+
+/-- **Ex 2.6.** The realized discounted utility `ω ↦ ∑ βᵗ ln c_t(ω)` along policy (5) is
+integrable, so the objective (2) is a well-defined real number. -/
+theorem integrable_utility (hpos : ∀ᵐ z ∂μ, 0 < z) (hint : Integrable log μ)
+    {α β k z : ℝ} (hα : 0 < α) (hα1 : α < 1) (hβ : 0 < β) (hβ1 : β < 1) (hk : 0 < k)
+    (hz : 0 < z) :
+    Integrable (fun ω => ∑' t, β ^ t * log (stochCons α β k z ω t)) (shockMeasure μ) := by
+  obtain ⟨hi, hs⟩ := summable_integral_norm_utility hpos hint hα hα1 hβ hβ1 hk hz (μ := μ)
+  exact integrable_tsum_of_summable_integral_norm hi hs
+
+/-- **Ex 2.6.** `∑ βᵗ E[ln c_t]` converges to `E[∑ βᵗ ln c_t]` along policy (5). -/
+theorem hasSum_integral_utility (hpos : ∀ᵐ z ∂μ, 0 < z) (hint : Integrable log μ)
+    {α β k z : ℝ} (hα : 0 < α) (hα1 : α < 1) (hβ : 0 < β) (hβ1 : β < 1) (hk : 0 < k)
+    (hz : 0 < z) :
+    HasSum (fun t => β ^ t * ∫ ω, log (stochCons α β k z ω t) ∂shockMeasure μ)
+      (∫ ω, ∑' t, β ^ t * log (stochCons α β k z ω t) ∂shockMeasure μ) := by
+  obtain ⟨hi, hs⟩ := summable_integral_norm_utility hpos hint hα hα1 hβ hβ1 hk hz (μ := μ)
+  simpa only [integral_const_mul] using hasSum_integral_of_summable_integral_norm hi hs
+
+/-- **Ex 2.6.** `E[∑ βᵗ ln c_t] = ∑ βᵗ E[ln c_t]` along policy (5). -/
+theorem integral_tsum_utility (hpos : ∀ᵐ z ∂μ, 0 < z) (hint : Integrable log μ)
+    {α β k z : ℝ} (hα : 0 < α) (hα1 : α < 1) (hβ : 0 < β) (hβ1 : β < 1) (hk : 0 < k)
+    (hz : 0 < z) :
+    ∫ ω, ∑' t, β ^ t * log (stochCons α β k z ω t) ∂shockMeasure μ =
+      ∑' t, β ^ t * ∫ ω, log (stochCons α β k z ω t) ∂shockMeasure μ :=
+  (hasSum_integral_utility hpos hint hα hα1 hβ hβ1 hk hz).tsum_eq.symm
+
+/-- **Ex 2.6.** The objective (2), `E[∑ βᵗ ln c_t]`, under policy (5) from `(k, z)` is
+`v(k, z) = A + B ln k + C ln z`. -/
+theorem integral_utility_eq_stochValue (hpos : ∀ᵐ z ∂μ, 0 < z) (hint : Integrable log μ)
+    {α β k z : ℝ} (hα : 0 < α) (hα1 : α < 1) (hβ : 0 < β) (hβ1 : β < 1) (hk : 0 < k)
+    (hz : 0 < z) :
+    ∫ ω, ∑' t, β ^ t * log (stochCons α β k z ω t) ∂shockMeasure μ =
+      stochValue α β (∫ z, log z ∂μ) k z :=
+  (hasSum_integral_utility hpos hint hα hα1 hβ hβ1 hk hz).unique
+    (hasSum_expected_utility hpos hint hα hα1 hβ hβ1 hk hz)
+
+end StokeyLucasPrescott.Overview
+
 set_option linter.style.longLine false
 #print axioms StokeyLucasPrescott.Overview.concave_le_tangent
 #print axioms StokeyLucasPrescott.Overview.strictConcave_lt_tangent
@@ -2472,34 +2729,43 @@ set_option linter.style.longLine false
 #print axioms StokeyLucasPrescott.Overview.Neoclassical.f'_tendsto_atTop
 #print axioms StokeyLucasPrescott.Overview.cobbDouglas
 #print axioms StokeyLucasPrescott.Overview.cobbDouglas_neoclassical
-#print axioms StokeyLucasPrescott.Overview.SavingsMap
-#print axioms StokeyLucasPrescott.Overview.SavingsMap.mk
-#print axioms StokeyLucasPrescott.Overview.SavingsMap.zero
-#print axioms StokeyLucasPrescott.Overview.SavingsMap.cont
-#print axioms StokeyLucasPrescott.Overview.SavingsMap.mono
-#print axioms StokeyLucasPrescott.Overview.SavingsMap.conc
-#print axioms StokeyLucasPrescott.Overview.SavingsMap.above
-#print axioms StokeyLucasPrescott.Overview.SavingsMap.below
-#print axioms StokeyLucasPrescott.Overview.SavingsMap.pos_of_lt
-#print axioms StokeyLucasPrescott.Overview.SavingsMap.exists_unique_fixedPoint
-#print axioms StokeyLucasPrescott.Overview.SavingsMap.kstar
-#print axioms StokeyLucasPrescott.Overview.SavingsMap.kstar_pos
-#print axioms StokeyLucasPrescott.Overview.SavingsMap.g_kstar
-#print axioms StokeyLucasPrescott.Overview.SavingsMap.eq_kstar
-#print axioms StokeyLucasPrescott.Overview.SavingsMap.lt_of_lt_fixed
-#print axioms StokeyLucasPrescott.Overview.SavingsMap.gt_of_gt_fixed
-#print axioms StokeyLucasPrescott.Overview.SavingsMap.g_pos
-#print axioms StokeyLucasPrescott.Overview.SavingsMap.iterate_mem_below
-#print axioms StokeyLucasPrescott.Overview.SavingsMap.iterate_mem_above
-#print axioms StokeyLucasPrescott.Overview.SavingsMap.monotone_of_le
-#print axioms StokeyLucasPrescott.Overview.SavingsMap.antitone_of_ge
-#print axioms StokeyLucasPrescott.Overview.SavingsMap.limit_eq_kstar
-#print axioms StokeyLucasPrescott.Overview.SavingsMap.tendsto_fixedPoint
-#print axioms StokeyLucasPrescott.Overview.SavingsMap.iterate_eq_fixed_iff
-#print axioms StokeyLucasPrescott.Overview.Neoclassical.savings_above
-#print axioms StokeyLucasPrescott.Overview.Neoclassical.savings_below
-#print axioms StokeyLucasPrescott.Overview.Neoclassical.savings_crossings
-#print axioms StokeyLucasPrescott.Overview.Neoclassical.savings_unique_steady_state
+#print axioms StokeyLucasPrescott.Overview.firm_profit_le
+#print axioms StokeyLucasPrescott.Overview.firm_profit_zero
+#print axioms StokeyLucasPrescott.Overview.utility
+#print axioms StokeyLucasPrescott.Overview.HHFeasible
+#print axioms StokeyLucasPrescott.Overview.HHBudget
+#print axioms StokeyLucasPrescott.Overview.IsEquilibrium
+#print axioms StokeyLucasPrescott.Overview.IsEquilibrium.mk
+#print axioms StokeyLucasPrescott.Overview.IsEquilibrium.firm
+#print axioms StokeyLucasPrescott.Overview.IsEquilibrium.feasible
+#print axioms StokeyLucasPrescott.Overview.IsEquilibrium.budget
+#print axioms StokeyLucasPrescott.Overview.IsEquilibrium.household
+#print axioms StokeyLucasPrescott.Overview.IsEquilibrium.clear
+#print axioms StokeyLucasPrescott.Overview.first_welfare
+#print axioms StokeyLucasPrescott.Overview.priceP
+#print axioms StokeyLucasPrescott.Overview.priceP_pos
+#print axioms StokeyLucasPrescott.Overview.household_optimal
+#print axioms StokeyLucasPrescott.Overview.second_welfare
+#print axioms StokeyLucasPrescott.Overview.firmValue
+#print axioms StokeyLucasPrescott.Overview.firmOwned_firm_optimal
+#print axioms StokeyLucasPrescott.Overview.firmOwned_household_optimal
+#print axioms StokeyLucasPrescott.Overview.pvPrice
+#print axioms StokeyLucasPrescott.Overview.SeqBudget
+#print axioms StokeyLucasPrescott.Overview.sequential_budget
+#print axioms StokeyLucasPrescott.Overview.sequential_household_optimal
+#print axioms StokeyLucasPrescott.Overview.sequential_planner_feasible
+#print axioms StokeyLucasPrescott.Overview.finrank_plan
+#print axioms StokeyLucasPrescott.Overview.sum_snoc
+#print axioms StokeyLucasPrescott.Overview.histProb
+#print axioms StokeyLucasPrescott.Overview.histProb_snoc
+#print axioms StokeyLucasPrescott.Overview.zOf
+#print axioms StokeyLucasPrescott.Overview.kIn
+#print axioms StokeyLucasPrescott.Overview.treeCons
+#print axioms StokeyLucasPrescott.Overview.fdIn
+#print axioms StokeyLucasPrescott.Overview.treeValue
+#print axioms StokeyLucasPrescott.Overview.TreeFeasible
+#print axioms StokeyLucasPrescott.Overview.sum_shift_telescope
+#print axioms StokeyLucasPrescott.Overview.tree_euler_optimal
 #print axioms StokeyLucasPrescott.Overview.log_tradeoff
 #print axioms StokeyLucasPrescott.Overview.log_tradeoff_unique
 #print axioms StokeyLucasPrescott.Overview.coefC
@@ -2543,40 +2809,43 @@ set_option linter.style.longLine false
 #print axioms StokeyLucasPrescott.Overview.varN_eq
 #print axioms StokeyLucasPrescott.Overview.meanN_tendsto
 #print axioms StokeyLucasPrescott.Overview.varN_tendsto
-#print axioms StokeyLucasPrescott.Overview.firm_profit_le
-#print axioms StokeyLucasPrescott.Overview.firm_profit_zero
-#print axioms StokeyLucasPrescott.Overview.utility
-#print axioms StokeyLucasPrescott.Overview.HHFeasible
-#print axioms StokeyLucasPrescott.Overview.HHBudget
-#print axioms StokeyLucasPrescott.Overview.IsEquilibrium
-#print axioms StokeyLucasPrescott.Overview.IsEquilibrium.mk
-#print axioms StokeyLucasPrescott.Overview.IsEquilibrium.firm
-#print axioms StokeyLucasPrescott.Overview.IsEquilibrium.feasible
-#print axioms StokeyLucasPrescott.Overview.IsEquilibrium.budget
-#print axioms StokeyLucasPrescott.Overview.IsEquilibrium.household
-#print axioms StokeyLucasPrescott.Overview.IsEquilibrium.clear
-#print axioms StokeyLucasPrescott.Overview.first_welfare
-#print axioms StokeyLucasPrescott.Overview.priceP
-#print axioms StokeyLucasPrescott.Overview.priceP_pos
-#print axioms StokeyLucasPrescott.Overview.household_optimal
-#print axioms StokeyLucasPrescott.Overview.second_welfare
-#print axioms StokeyLucasPrescott.Overview.firmValue
-#print axioms StokeyLucasPrescott.Overview.firmOwned_firm_optimal
-#print axioms StokeyLucasPrescott.Overview.firmOwned_household_optimal
-#print axioms StokeyLucasPrescott.Overview.pvPrice
-#print axioms StokeyLucasPrescott.Overview.SeqBudget
-#print axioms StokeyLucasPrescott.Overview.sequential_budget
-#print axioms StokeyLucasPrescott.Overview.sequential_household_optimal
-#print axioms StokeyLucasPrescott.Overview.sequential_planner_feasible
-#print axioms StokeyLucasPrescott.Overview.finrank_plan
-#print axioms StokeyLucasPrescott.Overview.sum_snoc
-#print axioms StokeyLucasPrescott.Overview.histProb
-#print axioms StokeyLucasPrescott.Overview.histProb_snoc
-#print axioms StokeyLucasPrescott.Overview.zOf
-#print axioms StokeyLucasPrescott.Overview.kIn
-#print axioms StokeyLucasPrescott.Overview.treeCons
-#print axioms StokeyLucasPrescott.Overview.fdIn
-#print axioms StokeyLucasPrescott.Overview.treeValue
-#print axioms StokeyLucasPrescott.Overview.TreeFeasible
-#print axioms StokeyLucasPrescott.Overview.sum_shift_telescope
-#print axioms StokeyLucasPrescott.Overview.tree_euler_optimal
+#print axioms StokeyLucasPrescott.Overview.SavingsMap
+#print axioms StokeyLucasPrescott.Overview.SavingsMap.mk
+#print axioms StokeyLucasPrescott.Overview.SavingsMap.zero
+#print axioms StokeyLucasPrescott.Overview.SavingsMap.cont
+#print axioms StokeyLucasPrescott.Overview.SavingsMap.mono
+#print axioms StokeyLucasPrescott.Overview.SavingsMap.conc
+#print axioms StokeyLucasPrescott.Overview.SavingsMap.above
+#print axioms StokeyLucasPrescott.Overview.SavingsMap.below
+#print axioms StokeyLucasPrescott.Overview.SavingsMap.pos_of_lt
+#print axioms StokeyLucasPrescott.Overview.SavingsMap.exists_unique_fixedPoint
+#print axioms StokeyLucasPrescott.Overview.SavingsMap.kstar
+#print axioms StokeyLucasPrescott.Overview.SavingsMap.kstar_pos
+#print axioms StokeyLucasPrescott.Overview.SavingsMap.g_kstar
+#print axioms StokeyLucasPrescott.Overview.SavingsMap.eq_kstar
+#print axioms StokeyLucasPrescott.Overview.SavingsMap.lt_of_lt_fixed
+#print axioms StokeyLucasPrescott.Overview.SavingsMap.gt_of_gt_fixed
+#print axioms StokeyLucasPrescott.Overview.SavingsMap.g_pos
+#print axioms StokeyLucasPrescott.Overview.SavingsMap.iterate_mem_below
+#print axioms StokeyLucasPrescott.Overview.SavingsMap.iterate_mem_above
+#print axioms StokeyLucasPrescott.Overview.SavingsMap.monotone_of_le
+#print axioms StokeyLucasPrescott.Overview.SavingsMap.antitone_of_ge
+#print axioms StokeyLucasPrescott.Overview.SavingsMap.limit_eq_kstar
+#print axioms StokeyLucasPrescott.Overview.SavingsMap.tendsto_fixedPoint
+#print axioms StokeyLucasPrescott.Overview.SavingsMap.iterate_eq_fixed_iff
+#print axioms StokeyLucasPrescott.Overview.Neoclassical.savings_above
+#print axioms StokeyLucasPrescott.Overview.Neoclassical.savings_below
+#print axioms StokeyLucasPrescott.Overview.Neoclassical.savings_crossings
+#print axioms StokeyLucasPrescott.Overview.Neoclassical.savings_unique_steady_state
+#print axioms StokeyLucasPrescott.Overview.ae_summable_norm_of_summable_integral_norm
+#print axioms StokeyLucasPrescott.Overview.integrable_tsum_of_summable_integral_norm
+#print axioms StokeyLucasPrescott.Overview.integral_abs_log_shock_le
+#print axioms StokeyLucasPrescott.Overview.integral_abs_log_path_le
+#print axioms StokeyLucasPrescott.Overview.ae_log_cons
+#print axioms StokeyLucasPrescott.Overview.integral_abs_log_cons_le
+#print axioms StokeyLucasPrescott.Overview.summable_integral_norm_utility
+#print axioms StokeyLucasPrescott.Overview.ae_summable_utility
+#print axioms StokeyLucasPrescott.Overview.integrable_utility
+#print axioms StokeyLucasPrescott.Overview.hasSum_integral_utility
+#print axioms StokeyLucasPrescott.Overview.integral_tsum_utility
+#print axioms StokeyLucasPrescott.Overview.integral_utility_eq_stochValue
