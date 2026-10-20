@@ -23,3 +23,6 @@ import EquilibriaWithDistortions.LocalSmooth
 import EquilibriaWithDistortions.MonotoneOperators
 import EquilibriaWithDistortions.SchauderBoundedContinuous
 import EquilibriaWithDistortions.Schauder
+import EquilibriaWithDistortions.IndirectInteriorDP
+import EquilibriaWithDistortions.IndirectInteriorExample
+import EquilibriaWithDistortions.IndirectInterior

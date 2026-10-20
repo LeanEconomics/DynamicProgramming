@@ -1,6 +1,6 @@
 {
-  "checked_at_utc": "2026-10-20T18:38:11.237902+00:00",
-  "theorems": 461,
+  "checked_at_utc": "2026-10-20T21:14:13.596707+00:00",
+  "theorems": 494,
   "module_theorems": {
     "EquilibriaWithDistortions/BrouwerRetraction.lean": 4,
     "EquilibriaWithDistortions/BrouwerBall.lean": 4,
@@ -21,6 +21,9 @@
     "EquilibriaWithDistortions/IndirectEnvelope.lean": 10,
     "EquilibriaWithDistortions/IndirectExistence.lean": 27,
     "EquilibriaWithDistortions/IndirectExistenceEquilibrium.lean": 4,
+    "EquilibriaWithDistortions/IndirectInteriorDP.lean": 6,
+    "EquilibriaWithDistortions/IndirectInterior.lean": 14,
+    "EquilibriaWithDistortions/IndirectInteriorExample.lean": 13,
     "EquilibriaWithDistortions/LocalApproach.lean": 48,
     "EquilibriaWithDistortions/LocalImplicit.lean": 13,
     "EquilibriaWithDistortions/LocalContraction.lean": 32,
@@ -28,7 +31,7 @@
     "EquilibriaWithDistortions/LocalSchauder.lean": 8,
     "EquilibriaWithDistortions/LocalSmooth.lean": 21
   },
-  "audited_declarations": 715,
+  "audited_declarations": 756,
   "declarations": [
     {
       "name": "StokeyLucasPrescott.EquilibriaWithDistortions.exists_polynomial_det_id_add_smul",
@@ -2529,6 +2532,211 @@
       "name": "StokeyLucasPrescott.EquilibriaWithDistortions.indirect_equilibrium_constructed",
       "kind": "theorem",
       "module": "EquilibriaWithDistortions/IndirectExistenceEquilibrium.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.dp_diagonal_pathwise",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/IndirectInteriorDP.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ex_18_1_dp_pathwise",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/IndirectInteriorDP.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.indirect_equilibrium_dp_pathwise",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/IndirectInteriorDP.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.planner_optimal_pathwise",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/IndirectInteriorDP.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ex_18_1_full_pathwise",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/IndirectInteriorDP.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.indirect_equilibrium_full_pathwise",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/IndirectInteriorDP.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.inada_exists_delta",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/IndirectInterior.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.PlannerHyp.plannerPolicy_lt_of_inada",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/IndirectInterior.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.PlannerHyp.plannerPolicy_zero",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/IndirectInterior.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.PlannerHyp.plannerPolicy_pos_of_inada",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/IndirectInterior.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.PlannerHyp.deriv_U_nonneg",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/IndirectInterior.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.InteriorHyp",
+      "kind": "structure",
+      "module": "EquilibriaWithDistortions/IndirectInterior.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.InteriorHyp.mk",
+      "kind": "constructor",
+      "module": "EquilibriaWithDistortions/IndirectInterior.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.InteriorHyp.planner",
+      "kind": "projection",
+      "module": "EquilibriaWithDistortions/IndirectInterior.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.InteriorHyp.b_pos",
+      "kind": "projection",
+      "module": "EquilibriaWithDistortions/IndirectInterior.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.InteriorHyp.U_inada",
+      "kind": "projection",
+      "module": "EquilibriaWithDistortions/IndirectInterior.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.InteriorHyp.f_zero",
+      "kind": "projection",
+      "module": "EquilibriaWithDistortions/IndirectInterior.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.InteriorHyp.f_pos",
+      "kind": "projection",
+      "module": "EquilibriaWithDistortions/IndirectInterior.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.InteriorHyp.policy_interior",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/IndirectInterior.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.InteriorHyp.policy_mem_Ioo",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/IndirectInterior.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.InteriorHyp.policy_mapsTo",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/IndirectInterior.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.InteriorHyp.not_interior_zero",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/IndirectInterior.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.InteriorHyp.planner_euler_interior",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/IndirectInterior.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.InteriorHyp.tvc_bound",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/IndirectInterior.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.InteriorHyp.planner_tvc",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/IndirectInterior.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.ex_18_1_interior",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/IndirectInterior.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.indirect_equilibrium_interior",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/IndirectInterior.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.inadaU",
+      "kind": "def",
+      "module": "EquilibriaWithDistortions/IndirectInteriorExample.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.inadaU_zero",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/IndirectInteriorExample.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.continuous_inadaU",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/IndirectInteriorExample.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.inadaU_monotoneOn",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/IndirectInteriorExample.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.inadaU_strictConcaveOn",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/IndirectInteriorExample.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.abs_inadaU_le",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/IndirectInteriorExample.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.differentiableAt_inadaU",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/IndirectInteriorExample.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.inadaU_inada",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/IndirectInteriorExample.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.inadaU_not_differentiableAt_zero",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/IndirectInteriorExample.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.inada_interiorHyp",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/IndirectInteriorExample.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.sqrt_deriv_facts",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/IndirectInteriorExample.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.inada_example_interior",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/IndirectInteriorExample.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.inada_example_ex_18_1",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/IndirectInteriorExample.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriaWithDistortions.inada_example_equilibrium",
+      "kind": "theorem",
+      "module": "EquilibriaWithDistortions/IndirectInteriorExample.lean"
     },
     {
       "name": "StokeyLucasPrescott.EquilibriaWithDistortions.psi",
@@ -6113,6 +6321,211 @@
       "Classical.choice",
       "Quot.sound"
     ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.dp_diagonal_pathwise": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ex_18_1_dp_pathwise": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.indirect_equilibrium_dp_pathwise": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.planner_optimal_pathwise": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ex_18_1_full_pathwise": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.indirect_equilibrium_full_pathwise": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.inada_exists_delta": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.PlannerHyp.plannerPolicy_lt_of_inada": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.PlannerHyp.plannerPolicy_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.PlannerHyp.plannerPolicy_pos_of_inada": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.PlannerHyp.deriv_U_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.InteriorHyp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.InteriorHyp.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.InteriorHyp.planner": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.InteriorHyp.b_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.InteriorHyp.U_inada": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.InteriorHyp.f_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.InteriorHyp.f_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.InteriorHyp.policy_interior": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.InteriorHyp.policy_mem_Ioo": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.InteriorHyp.policy_mapsTo": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.InteriorHyp.not_interior_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.InteriorHyp.planner_euler_interior": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.InteriorHyp.tvc_bound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.InteriorHyp.planner_tvc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.ex_18_1_interior": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.indirect_equilibrium_interior": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.inadaU": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.inadaU_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.continuous_inadaU": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.inadaU_monotoneOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.inadaU_strictConcaveOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.abs_inadaU_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.differentiableAt_inadaU": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.inadaU_inada": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.inadaU_not_differentiableAt_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.inada_interiorHyp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.sqrt_deriv_facts": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.inada_example_interior": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.inada_example_ex_18_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriaWithDistortions.inada_example_equilibrium": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
     "StokeyLucasPrescott.EquilibriaWithDistortions.psi": [
       "propext",
       "Classical.choice",
@@ -7207,23 +7620,26 @@
     "EquilibriaWithDistortions/IndirectDP.lean": "5884be43421aebde5f1ecc67b82eb536ca31e9986ee719292c0ff3711b3b372a",
     "EquilibriaWithDistortions/IndirectBellman.lean": "aabef61452ac1a120704ccfa3e4cc5d2bcd6300b6300aa49e9e40bc83264f350",
     "EquilibriaWithDistortions/IndirectEnvelope.lean": "496e2cc740ad681918499fa95283444abb2640634703e4fee3f968e993c0309e",
-    "EquilibriaWithDistortions/IndirectExistence.lean": "be35b406a8658d9d67e6d5ca90ca2cc40d50205d3d60b3d0dc3891c646f7e724",
-    "EquilibriaWithDistortions/IndirectExistenceEquilibrium.lean": "ab6665b34847c695b861eeb1301769595279e79cbcbb54de2ed034e894f481b5",
+    "EquilibriaWithDistortions/IndirectExistence.lean": "18012cc28b8fefc10f2e9ce565ea8fb3f146f240a5e665ce043fb45717a34db8",
+    "EquilibriaWithDistortions/IndirectExistenceEquilibrium.lean": "37c84c302552bd1a8264cca599e2b2d43a366f0bb613f2f8d41baeb39da3e9da",
+    "EquilibriaWithDistortions/IndirectInteriorDP.lean": "1399442c8789343805d6b54b5513e3587881f89811392ab62a507ee90babc4cf",
+    "EquilibriaWithDistortions/IndirectInterior.lean": "43edf10c1b0ea9ad303a820ec4baabb4f6938af6000b74c45e5287ebc0411fc3",
+    "EquilibriaWithDistortions/IndirectInteriorExample.lean": "e3b8e0aadad957f923ddd779778de57012732e77362709587a2d11d1806dbb79",
     "EquilibriaWithDistortions/LocalApproach.lean": "58f08329f3bc1280e45e29f78d2f83c6e83370a5c5f74991a8cfe195701370ac",
     "EquilibriaWithDistortions/LocalImplicit.lean": "a3907b8132c4358afb65f022c86cee6225852e05c872581851a66d5cb307f6b5",
     "EquilibriaWithDistortions/LocalContraction.lean": "8f8d7cda11ec4b620b8468899a97141f9b80ae944e53ffa1827ea9453e06ed4c",
     "EquilibriaWithDistortions/LocalExample.lean": "92641a3cfbf97b19f6429fabe8ac05250fdfaa2d84ed0ca0d2e5107b0ed4e8b3",
     "EquilibriaWithDistortions/LocalSchauder.lean": "c3db0234af1f606ad0b31247c354880e1f31035c79638593e71c4a40b0b6e21b",
     "EquilibriaWithDistortions/LocalSmooth.lean": "3cbd93b5b171479ee03d1c6abbe2852ec96f8c785d93c148431b89160a11ef2a",
-    "EquilibriaWithDistortions.lean": "c8f4cb939a836c9be26e3833959479e76c7cc9a3c94ec3d9a3dff30eae174793",
+    "EquilibriaWithDistortions.lean": "1a88faec2610f8c6407f7ceafa231512e9757fda3a84491753296a164525ea00",
     "lean-toolchain": "8733782dc070a99b312039cda424f601b80f3be6f6f512627da5ba25adc27632",
     "lakefile.toml": "924f0e123404f38555e03374ddcd12b1ee8b4198d06dcfd3a5dd333a801ac5d9",
     "lake-manifest.json": "f76c321a53e7dcf31d0a9515f61fa41da9950f1abbb98f4157b12616eb3356f3",
-    "proof-manifest.json": "37ab601ec4de36a9cb1fd1ece9ba859f872941bcb803ce43c24f5109e3b8336f",
+    "proof-manifest.json": "ba226fbb5f01d3a1e4cf4f55b6ad7617f1fa669f596b286c8e0a12a2e2818e53",
     "scripts/verify.py": "a70b1fa704dd590f937f8b37682afa88a9d85a9150065acb935c7d2c9589da3b",
     "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
   },
-  "fresh_audit_sha256": "02f6e0930efcdb7a49539bbb5f03092032380f4aee7478fe56cb73bcd01701a0",
+  "fresh_audit_sha256": "3b514fc2c41c8192262e3e4771ef701f97b569794c359cb8f0e83a5bb5ed81f3",
   "lean_toolchain": "leanprover/lean4:v4.34.0",
   "scope": "SLP Chapter 18 (Equilibria in Systems with Distortions): every numbered result and exercise, with corrections.",
   "source": "Stokey, Lucas and Prescott (1989), Recursive Methods in Economic Dynamics, Chapter 18"

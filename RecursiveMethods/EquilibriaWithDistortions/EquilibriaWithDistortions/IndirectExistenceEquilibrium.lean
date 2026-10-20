@@ -15,6 +15,11 @@ equation and the transversality condition. Here `g` and `ĥ` are the policies co
 discharged, on `K = [0, k̄]`, for `U` bounded and `C¹`, `f` concave and `C¹` with `0 ≤ f ≤ k̄`
 on `K`, and an interior policy (`0 < g(k) < f(k)` on `K`, as in SLP Theorem 4.11).
 
+These assumptions are removed in `IndirectInterior`: under `InteriorHyp` (`U′(0+) = ∞` with `U`
+bounded, `f(0) = 0`), `ex_18_1_interior` and `indirect_equilibrium_interior` prove interiority on
+`(0, k̄]`, need `U` differentiable only on `(0, ∞)`, and need no continuity of `U′` or `f′`; the
+example `U(c) = 1 − e^{−√c}`, `f(k) = √k` is in `IndirectInteriorExample`.
+
 * `plannerHyp_of_differentiable`: the hypotheses `PlannerHyp` from differentiability of `U` with
   `U′ ≥ 0` and of `f`.
 * `planner_euler_tvc`: the constructed policy satisfies the Euler equation everywhere on `K` and
@@ -64,7 +69,9 @@ theorem plannerHyp_of_differentiable {U f : ℝ → ℝ} {b kbar : ℝ} (hb0 : 0
 `U` differentiable on `[0, ∞)` with `U′` continuous on `[0, k̄]`, `f` differentiable on `K` with
 `f′` continuous on `K`, and let the policy `g` be interior on `K` (`0 < g(k) < f(k)`). Then for
 every `k ∈ K`: the Euler equation `U′[f(k) − g(k)] = b f′(g(k)) U′[f(g(k)) − g(g(k))]` holds, and
-for every `β' ∈ [0, 1)` and constant `a`, `β'ᵗ (a f′(k_t)) U′(c_t) k_t → 0` along `k_t = gᵗ(k)`. -/
+for every `β' ∈ [0, 1)` and constant `a`, `β'ᵗ (a f′(k_t)) U′(c_t) k_t → 0` along `k_t = gᵗ(k)`.
+Without interiority or continuity of `U′`, `f′`: `InteriorHyp.planner_euler_interior` and
+`InteriorHyp.planner_tvc` on `(0, k̄]`. -/
 theorem PlannerHyp.planner_euler_tvc {U f : ℝ → ℝ} {b kbar : ℝ} (P : PlannerHyp U f b kbar)
     (hUd : ∀ c, 0 ≤ c → DifferentiableAt ℝ U c) (hUc' : ContinuousOn (deriv U) (Icc 0 kbar))
     (hfd : ∀ k ∈ Icc 0 kbar, DifferentiableAt ℝ f k) (hfc' : ContinuousOn (deriv f) (Icc 0 kbar))
@@ -110,7 +117,8 @@ and `f′` continuous there, and `0 ≤ f ≤ k̄` on `K`. Let `v = plannerValue
 (iii) the individual's functional equation (2) has a bounded solution `V`, unique among bounded
 solutions, with `V(k, k; g) = v(k)`, the maximal value of the planner's sequence problem, and
 `G(k, k; g) = g(k)` the unique optimal choice at `(k, k)`;
-(iv) on `(0, k̄)`, `V₁(k, k; g) = v′(k) = f′(k) U′[f(k) − g(k)]`. -/
+(iv) on `(0, k̄)`, `V₁(k, k; g) = v′(k) = f′(k) U′[f(k) − g(k)]`.
+Interiority is proved, on `(0, k̄]`, under `InteriorHyp` in `ex_18_1_interior`. -/
 theorem ex_18_1_constructed {U f : ℝ → ℝ} {β B₀ kbar : ℝ} (P : PlannerHyp U f β kbar)
     (hβ0 : 0 < β) (hUd : ∀ c, 0 ≤ c → DifferentiableAt ℝ U c)
     (hU' : ∀ c, 0 ≤ c → 0 ≤ deriv U c) (hUb : ∀ c, 0 ≤ c → |U c| ≤ B₀)
@@ -194,7 +202,8 @@ in the pseudo-economy, which is the maximal value of the pseudo-planner's sequen
 (iii) the functional equation (3) with `h = ĥ` has a bounded solution `W`, unique among bounded
 solutions, `W(k, k; ĥ)` is the individual's value of following `ĥ`, and `H(k, k; ĥ) = ĥ(k)` is
 the unique optimal choice at `(k, k)` (a recursive competitive equilibrium);
-(iv) `φ(k) = W₁(k, k; ĥ) = (1 − θ) w′(k)` on `(0, k̄)`, the book's identification. -/
+(iv) `φ(k) = W₁(k, k; ĥ) = (1 − θ) w′(k)` on `(0, k̄)`, the book's identification.
+Interiority is proved, on `(0, k̄]`, under `InteriorHyp` in `indirect_equilibrium_interior`. -/
 theorem indirect_equilibrium_constructed {U f : ℝ → ℝ} {β θ B₀ kbar : ℝ}
     (P : PlannerHyp U f ((1 - θ) * β) kbar) (hβ0 : 0 < β) (hβ1 : β < 1) (hθ0 : 0 ≤ θ)
     (hθ : θ < 1) (hUd : ∀ c, 0 ≤ c → DifferentiableAt ℝ U c)

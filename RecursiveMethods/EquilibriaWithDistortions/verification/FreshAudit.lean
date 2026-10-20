@@ -6884,9 +6884,12 @@ concave on `K` with `0 ≤ f ≤ k̄` there, so that `[0, f(k)] ⊆ K`).
 * `planner_euler`: if `0 < g(k) < f(k)` and `g(g(k)) < f(g(k))`, the Euler equation
   `U′[f(k) − g(k)] = b f′(g(k)) U′[f(g(k)) − g(g(k))]` holds.
 
-Interiority of the policy is a hypothesis, as in SLP Theorem 4.11. With `U` differentiable on
-`[0, ∞)` (which the book's Assumption 18.1 requires), `U′(0)` is finite, so the usual Inada
-argument for interiority is not available.
+Interiority of the policy is a hypothesis here, as in SLP Theorem 4.11. With `U` differentiable
+on `[0, ∞)` (which the book's Assumption 18.1 requires), `U′(0)` is finite, so the usual Inada
+argument for interiority is not available. `PlannerHyp` asks only that `U` be continuous on
+`[0, ∞)`, which allows `U′(0+) = ∞`; under that Inada condition, `b > 0`, `f(0) = 0` and `f > 0`
+on `(0, k̄]` (`InteriorHyp`), `IndirectInterior` proves `0 < g(k) < f(k)` on `(0, k̄]`
+(`InteriorHyp.policy_interior`), and `k = 0` is degenerate (`InteriorHyp.not_interior_zero`).
 -/
 
 namespace StokeyLucasPrescott.EquilibriaWithDistortions
@@ -7355,6 +7358,11 @@ equation and the transversality condition. Here `g` and `ĥ` are the policies co
 discharged, on `K = [0, k̄]`, for `U` bounded and `C¹`, `f` concave and `C¹` with `0 ≤ f ≤ k̄`
 on `K`, and an interior policy (`0 < g(k) < f(k)` on `K`, as in SLP Theorem 4.11).
 
+These assumptions are removed in `IndirectInterior`: under `InteriorHyp` (`U′(0+) = ∞` with `U`
+bounded, `f(0) = 0`), `ex_18_1_interior` and `indirect_equilibrium_interior` prove interiority on
+`(0, k̄]`, need `U` differentiable only on `(0, ∞)`, and need no continuity of `U′` or `f′`; the
+example `U(c) = 1 − e^{−√c}`, `f(k) = √k` is in `IndirectInteriorExample`.
+
 * `plannerHyp_of_differentiable`: the hypotheses `PlannerHyp` from differentiability of `U` with
   `U′ ≥ 0` and of `f`.
 * `planner_euler_tvc`: the constructed policy satisfies the Euler equation everywhere on `K` and
@@ -7404,7 +7412,9 @@ theorem plannerHyp_of_differentiable {U f : ℝ → ℝ} {b kbar : ℝ} (hb0 : 0
 `U` differentiable on `[0, ∞)` with `U′` continuous on `[0, k̄]`, `f` differentiable on `K` with
 `f′` continuous on `K`, and let the policy `g` be interior on `K` (`0 < g(k) < f(k)`). Then for
 every `k ∈ K`: the Euler equation `U′[f(k) − g(k)] = b f′(g(k)) U′[f(g(k)) − g(g(k))]` holds, and
-for every `β' ∈ [0, 1)` and constant `a`, `β'ᵗ (a f′(k_t)) U′(c_t) k_t → 0` along `k_t = gᵗ(k)`. -/
+for every `β' ∈ [0, 1)` and constant `a`, `β'ᵗ (a f′(k_t)) U′(c_t) k_t → 0` along `k_t = gᵗ(k)`.
+Without interiority or continuity of `U′`, `f′`: `InteriorHyp.planner_euler_interior` and
+`InteriorHyp.planner_tvc` on `(0, k̄]`. -/
 theorem PlannerHyp.planner_euler_tvc {U f : ℝ → ℝ} {b kbar : ℝ} (P : PlannerHyp U f b kbar)
     (hUd : ∀ c, 0 ≤ c → DifferentiableAt ℝ U c) (hUc' : ContinuousOn (deriv U) (Icc 0 kbar))
     (hfd : ∀ k ∈ Icc 0 kbar, DifferentiableAt ℝ f k) (hfc' : ContinuousOn (deriv f) (Icc 0 kbar))
@@ -7450,7 +7460,8 @@ and `f′` continuous there, and `0 ≤ f ≤ k̄` on `K`. Let `v = plannerValue
 (iii) the individual's functional equation (2) has a bounded solution `V`, unique among bounded
 solutions, with `V(k, k; g) = v(k)`, the maximal value of the planner's sequence problem, and
 `G(k, k; g) = g(k)` the unique optimal choice at `(k, k)`;
-(iv) on `(0, k̄)`, `V₁(k, k; g) = v′(k) = f′(k) U′[f(k) − g(k)]`. -/
+(iv) on `(0, k̄)`, `V₁(k, k; g) = v′(k) = f′(k) U′[f(k) − g(k)]`.
+Interiority is proved, on `(0, k̄]`, under `InteriorHyp` in `ex_18_1_interior`. -/
 theorem ex_18_1_constructed {U f : ℝ → ℝ} {β B₀ kbar : ℝ} (P : PlannerHyp U f β kbar)
     (hβ0 : 0 < β) (hUd : ∀ c, 0 ≤ c → DifferentiableAt ℝ U c)
     (hU' : ∀ c, 0 ≤ c → 0 ≤ deriv U c) (hUb : ∀ c, 0 ≤ c → |U c| ≤ B₀)
@@ -7534,7 +7545,8 @@ in the pseudo-economy, which is the maximal value of the pseudo-planner's sequen
 (iii) the functional equation (3) with `h = ĥ` has a bounded solution `W`, unique among bounded
 solutions, `W(k, k; ĥ)` is the individual's value of following `ĥ`, and `H(k, k; ĥ) = ĥ(k)` is
 the unique optimal choice at `(k, k)` (a recursive competitive equilibrium);
-(iv) `φ(k) = W₁(k, k; ĥ) = (1 − θ) w′(k)` on `(0, k̄)`, the book's identification. -/
+(iv) `φ(k) = W₁(k, k; ĥ) = (1 − θ) w′(k)` on `(0, k̄)`, the book's identification.
+Interiority is proved, on `(0, k̄]`, under `InteriorHyp` in `indirect_equilibrium_interior`. -/
 theorem indirect_equilibrium_constructed {U f : ℝ → ℝ} {β θ B₀ kbar : ℝ}
     (P : PlannerHyp U f ((1 - θ) * β) kbar) (hβ0 : 0 < β) (hβ1 : β < 1) (hθ0 : 0 ≤ θ)
     (hθ : θ < 1) (hUd : ∀ c, 0 ≤ c → DifferentiableAt ℝ U c)
@@ -7617,6 +7629,1132 @@ theorem indirect_equilibrium_constructed {U f : ℝ → ℝ} {β θ B₀ kbar : 
   rw [e] at h5
   convert h5 using 1
   ring
+
+end StokeyLucasPrescott.EquilibriaWithDistortions
+
+/-
+Copyright (c) 2026 Robert Kirkby. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Robert Kirkby
+-/
+
+/-!
+# Exercise 18.1 and the taxed economy with `U` differentiable only along the path
+
+SLP §18.1, pp. 543–546. `dp_diagonal`, `ex_18_1_dp`, `indirect_equilibrium_dp`,
+`planner_optimal`, `ex_18_1_full` and `indirect_equilibrium_full` assume that `U` is
+differentiable with `U′ ≥ 0` at every `c ≥ 0`. Their proofs use the derivative only at the
+consumptions `F(k) − g(k)`, `k ∈ K`, of the aggregate path. Here the same results are proved under
+that pointwise hypothesis, with monotonicity of `U` assumed directly. This admits utilities with
+`U′(0+) = ∞`, such as `U(c) = 1 − e^{−√c}`, which are not differentiable at `0`; these are the
+utilities for which `IndirectInterior` proves the planner's policy interior.
+
+* `dp_diagonal_pathwise`: `dp_diagonal` with `U` differentiable, `U′ ≥ 0`, at `F(k) − g(k)`,
+  `k ∈ K`, only.
+* `ex_18_1_dp_pathwise`, `indirect_equilibrium_dp_pathwise`: likewise for `ex_18_1_dp` and
+  `indirect_equilibrium_dp` (pp. 544, 546).
+* `planner_optimal_pathwise`: `planner_optimal` with `U` monotone, and differentiable with
+  `U′ ≥ 0` along the planner's path only (Theorem 4.15 for (1)).
+* `ex_18_1_full_pathwise`, `indirect_equilibrium_full_pathwise`: `ex_18_1_full` and
+  `indirect_equilibrium_full` under the same weakening.
+-/
+
+namespace StokeyLucasPrescott.EquilibriaWithDistortions
+
+open Filter Topology Set Finset
+
+/-- **The diagonal of the functional equation, `U` differentiable along the path only.** As
+`dp_diagonal`, with `U` differentiable and `U′ ≥ 0` only at the consumptions `F(k) − g(k)`,
+`k ∈ K`: then `W(k, k) = v(k)`, `g(k) ∈ Γ(k, k)` attains the supremum at `(k, k)`, and it is the
+only `y ∈ Γ(k, k)` that does. -/
+theorem dp_diagonal_pathwise {U A B Fk g v : ℝ → ℝ} {W : ℝ → ℝ → ℝ} {β B₀ M Mv : ℝ}
+    {K : Set ℝ} (hU : StrictConcaveOn ℝ (Ici 0) U) (hβ0 : 0 < β) (hβ1 : β < 1)
+    (hUd : ∀ k ∈ K, DifferentiableAt ℝ U (Fk k - g k))
+    (hU' : ∀ k ∈ K, 0 ≤ deriv U (Fk k - g k))
+    (hUb : ∀ c, 0 ≤ c → |U c| ≤ B₀) (hK : ∀ k ∈ K, g k ∈ K) (hK0 : ∀ k ∈ K, 0 ≤ k)
+    (hA : ∀ k ∈ K, 0 ≤ A k) (hB : ∀ k ∈ K, 0 ≤ B k) (hAB : ∀ k ∈ K, A k + B k * k = Fk k)
+    (hc : ∀ k ∈ K, 0 ≤ Fk k - g k)
+    (heul : ∀ k ∈ K, deriv U (Fk k - g k) =
+      β * B (g k) * deriv U (Fk (g k) - g (g k)))
+    (htvc : ∀ k ∈ K, Tendsto (fun t => β ^ t * B (g^[t] k) *
+      deriv U (Fk (g^[t] k) - g (g^[t] k)) * g^[t] k) atTop (𝓝 0))
+    (hv : ∀ k ∈ K, |v k| ≤ Mv) (hpol : ∀ k ∈ K, v k = U (Fk k - g k) + β * v (g k))
+    (hW : ∀ x, 0 ≤ x → ∀ k ∈ K, |W x k| ≤ M) (hsol : SolvesBellman U A B g W β K) :
+    ∀ k ∈ K, W k k = v k ∧ g k ∈ feasY A B k k ∧
+      U (A k + B k * k - g k) + β * W (g k) (g k) = W k k ∧
+      ∀ y ∈ feasY A B k k, U (A k + B k * k - y) + β * W y (g k) = W k k → y = g k := by
+  -- the diagonal value
+  have hdiag : ∀ k ∈ K, W k k = v k ∧
+      IsGreatest (indivValues U β (fun t => A (g^[t] k)) (fun t => B (g^[t] k)) k) (v k) ∧
+      ∀ x S, IndivFeasible (fun t => A (g^[t] k)) (fun t => B (g^[t] k)) k x →
+        HasSum (fun t => β ^ t * U (consPath (fun t => A (g^[t] k)) (fun t => B (g^[t] k))
+          x t)) S → ∀ t₀ : ℕ, S ≤ v k - β ^ t₀ * (U (Fk (g^[t₀] k) - g (g^[t₀] k)) +
+            deriv U (Fk (g^[t₀] k) - g (g^[t₀] k)) * (consPath (fun t => A (g^[t] k))
+              (fun t => B (g^[t] k)) x t₀ - (Fk (g^[t₀] k) - g (g^[t₀] k))) -
+            U (consPath (fun t => A (g^[t] k)) (fun t => B (g^[t] k)) x t₀)) := by
+    intro k hk
+    have hkt := iterate_mem hK hk
+    set a : ℕ → ℝ := fun t => A (g^[t] k) with ha
+    set b : ℕ → ℝ := fun t => B (g^[t] k) with hb
+    set xs : ℕ → ℝ := fun t => g^[t] k with hxs
+    have hcons : ∀ t, consPath a b xs t = Fk (g^[t] k) - g (g^[t] k) := fun t => by
+      simp only [consPath, ha, hb, hxs, Function.iterate_succ_apply']
+      rw [← hAB _ (hkt t)]
+    have hcs : ∀ t, 0 ≤ consPath a b xs t := fun t => (hcons t).symm ▸ hc _ (hkt t)
+    have hfeas : IndivFeasible a b (xs 0) xs := ⟨rfl, fun t => ⟨hK0 _ (hkt t), hcs t⟩⟩
+    have hUd' : ∀ t, DifferentiableAt ℝ U (consPath a b xs t) := fun t => by
+      rw [hcons]; exact hUd _ (hkt t)
+    have hp : ∀ t, 0 ≤ b t * deriv U (consPath a b xs t) := fun t => by
+      rw [hcons]; exact mul_nonneg (hB _ (hkt t)) (hU' _ (hkt t))
+    have heul' : ∀ t, deriv U (consPath a b xs t) =
+        β * b (t + 1) * deriv U (consPath a b xs (t + 1)) := fun t => by
+      rw [hcons, hcons, heul _ (hkt t)]
+      simp only [hb, Function.iterate_succ_apply']
+    have htvc' : Tendsto (fun T => β ^ T * b T * deriv U (consPath a b xs T) * xs T) atTop
+        (𝓝 0) := by
+      refine (htvc k hk).congr fun t => ?_
+      rw [hcons]
+    have hv' : HasSum (fun t => β ^ t * U (consPath a b xs t)) (v k) := by
+      have := policyValue_hasSum hβ0.le hβ1 hK hv (fun k hk => hUb _ (hc k hk)) hpol hk
+      simpa only [hcons] using this
+    have hG := euler_tvc_isGreatest hU.concaveOn hβ0.le hUd' hp heul' htvc' hfeas hv'
+    have hL := bellman_isLUB hβ0.le hβ1 hUb hW hK hA hB hsol (hK0 k hk) hk
+    refine ⟨hL.unique hG.isLUB, hG, fun x S hx hS t₀ => ?_⟩
+    have := euler_tvc_gap hU.concaveOn hβ0.le hUd' hcs hp heul' htvc' hx hS hv' t₀
+    rwa [hcons t₀] at this
+  intro k hk
+  obtain ⟨hWk, -, hgap⟩ := hdiag k hk
+  have hgk := hK k hk
+  have hAk : A k + B k * k - g k = Fk k - g k := by rw [hAB k hk]
+  refine ⟨hWk, ⟨hK0 _ hgk, by rw [hAk]; exact hc k hk⟩, ?_, fun y hy hyW => ?_⟩
+  · rw [hAk, (hdiag _ hgk).1, hWk, hpol k hk]
+  · by_contra hne
+    set cy := A k + B k * k - y with hcy
+    set cs := Fk k - g k with hcs
+    have hcne : cy ≠ cs := by
+      intro h
+      apply hne
+      rw [hcy, hcs, ← hAB k hk] at h
+      linarith
+    set r0 := U cs + deriv U cs * (cy - cs) - U cy with hr0
+    have hr0p : 0 < r0 := by
+      have := strictConcave_lt_tangent hU hy.2 (hc k hk) hcne (hUd k hk)
+      rw [hr0]
+      linarith
+    -- every continuation from `(y, g(k))` gives at most `v(k) − r₀`
+    have hub : W y (g k) ≤ (v k - r0 - U cy) / β := by
+      refine (bellman_isLUB hβ0.le hβ1 hUb hW hK hA hB hsol hy.1 hgk).2 ?_
+      rintro S' ⟨x', hx', hS'⟩
+      rw [le_div_iff₀ hβ0]
+      set x : ℕ → ℝ := fun t => Nat.casesOn t k fun t => x' t with hxdef
+      have hx0 : x 0 = k := rfl
+      have hxs : ∀ t, x (t + 1) = x' t := fun t => rfl
+      have hit : ∀ t : ℕ, g^[t + 1] k = g^[t] (g k) := fun t => Function.iterate_succ_apply _ _ _
+      have hc0 : consPath (fun t => A (g^[t] k)) (fun t => B (g^[t] k)) x 0 = cy := by
+        simp only [consPath, hx0, hxs, hx'.1, Function.iterate_zero, id, hcy]
+      have hcsucc : ∀ t, consPath (fun t => A (g^[t] k)) (fun t => B (g^[t] k)) x (t + 1) =
+          consPath (fun t => A (g^[t] (g k))) (fun t => B (g^[t] (g k))) x' t := fun t => by
+        simp only [consPath, hxs, hit]
+      have hfeas : IndivFeasible (fun t => A (g^[t] k)) (fun t => B (g^[t] k)) k x := by
+        refine ⟨hx0, fun t => ?_⟩
+        rcases t with _ | t
+        · exact ⟨hK0 k hk, hc0 ▸ hy.2⟩
+        · rw [hcsucc t]
+          exact ⟨(hx'.2 t).1, (hx'.2 t).2⟩
+      have hsum : HasSum (fun t => β ^ t * U (consPath (fun t => A (g^[t] k))
+          (fun t => B (g^[t] k)) x t)) (U cy + β * S') := by
+        refine (hasSum_nat_add_iff' 1).1 ?_
+        have e : (U cy + β * S') - ∑ i ∈ range 1, β ^ i * U (consPath (fun t => A (g^[t] k))
+            (fun t => B (g^[t] k)) x i) = β * S' := by
+          simp [hc0]
+        rw [e]
+        refine (hS'.mul_left β).congr_fun fun t => ?_
+        simp only [hcsucc t, pow_succ]
+        ring
+      have h := hgap x _ hfeas hsum 0
+      simp only [pow_zero, one_mul, Function.iterate_zero, id, hc0] at h
+      linarith
+    have h1 : U cy + β * W y (g k) ≤ v k - r0 := by
+      have := mul_le_mul_of_nonneg_left hub hβ0.le
+      rw [mul_div_cancel₀ _ hβ0.ne'] at this
+      linarith
+    rw [hyW, hWk] at h1
+    linarith
+
+/-- **Exercise 18.1, literally, `U` differentiable along the path only** (p. 544). As
+`ex_18_1_dp`, with `U` differentiable and `U′ ≥ 0` only at `f(k) − g(k)`, `k ∈ K`: for a bounded
+solution `V` of (2), `V(k, k; g) = v(k)` and `g(k)` is the unique optimal choice at `(k, k)`. -/
+theorem ex_18_1_dp_pathwise {U f g v : ℝ → ℝ} {V : ℝ → ℝ → ℝ} {β B₀ M Mv : ℝ} {K : Set ℝ}
+    (hU : StrictConcaveOn ℝ (Ici 0) U) (hβ0 : 0 < β) (hβ1 : β < 1)
+    (hUd : ∀ k ∈ K, DifferentiableAt ℝ U (f k - g k))
+    (hU' : ∀ k ∈ K, 0 ≤ deriv U (f k - g k))
+    (hUb : ∀ c, 0 ≤ c → |U c| ≤ B₀) (hK : ∀ k ∈ K, g k ∈ K) (hK0 : ∀ k ∈ K, 0 ≤ k)
+    (hf' : ∀ k ∈ K, 0 ≤ deriv f k) (hw : ∀ k ∈ K, 0 ≤ f k - k * deriv f k)
+    (hc : ∀ k ∈ K, 0 ≤ f k - g k)
+    (heul : ∀ k ∈ K, deriv U (f k - g k) =
+      β * deriv U (f (g k) - g (g k)) * deriv f (g k))
+    (htvc : ∀ k ∈ K, Tendsto (fun t => β ^ t * deriv U (f (g^[t] k) - g (g^[t] k)) *
+      deriv f (g^[t] k) * g^[t] k) atTop (𝓝 0))
+    (hv : ∀ k ∈ K, |v k| ≤ Mv) (hpol : ∀ k ∈ K, v k = U (f k - g k) + β * v (g k))
+    (hV : ∀ x, 0 ≤ x → ∀ k ∈ K, |V x k| ≤ M)
+    (hsol : SolvesBellman U (fun k => f k - k * deriv f k) (deriv f) g V β K) :
+    ∀ k ∈ K, V k k = v k ∧
+      (∀ y ∈ feasY (fun k => f k - k * deriv f k) (deriv f) k k,
+        U (f k + (k - k) * deriv f k - y) + β * V y (g k) = V k k ↔ y = g k) := by
+  have hD := dp_diagonal_pathwise (A := fun k => f k - k * deriv f k) (B := deriv f) (Fk := f)
+    hU hβ0 hβ1 hUd hU' hUb hK hK0 hw hf' (fun k _ => by ring) hc
+    (fun k hk => by rw [heul k hk]; ring)
+    (fun k hk => (htvc k hk).congr fun t => by ring) hv hpol hV hsol
+  intro k hk
+  obtain ⟨h1, -, h3, h4⟩ := hD k hk
+  have e : ∀ y, f k + (k - k) * deriv f k - y = f k - k * deriv f k + deriv f k * k - y :=
+    fun y => by ring
+  refine ⟨h1, fun y hy => ⟨fun hyV => h4 y hy (by rw [← e]; exact hyV), fun hyg => ?_⟩⟩
+  rw [hyg, e]
+  exact h3
+
+/-- **The indirect method gives a recursive competitive equilibrium, `U` differentiable along
+the path only** (pp. 545–546). As `indirect_equilibrium_dp`, with `U` differentiable and
+`U′ ≥ 0` only at `f(k) − ĥ(k)`, `k ∈ K`: for a bounded solution `W` of (3) with `h = ĥ`,
+`W(k, k; ĥ) = v(k)` and `H(k, k; ĥ) = ĥ(k)` is the unique optimal choice at `(k, k)`. -/
+theorem indirect_equilibrium_dp_pathwise {U f h v : ℝ → ℝ} {W : ℝ → ℝ → ℝ} {β θ B₀ M Mv : ℝ}
+    {K : Set ℝ} (hU : StrictConcaveOn ℝ (Ici 0) U) (hβ0 : 0 < β) (hβ1 : β < 1) (hθ : θ < 1)
+    (hUd : ∀ k ∈ K, DifferentiableAt ℝ U (f k - h k))
+    (hU' : ∀ k ∈ K, 0 ≤ deriv U (f k - h k))
+    (hUb : ∀ c, 0 ≤ c → |U c| ≤ B₀) (hK : ∀ k ∈ K, h k ∈ K) (hK0 : ∀ k ∈ K, 0 ≤ k)
+    (hf' : ∀ k ∈ K, 0 ≤ deriv f k) (hw : ∀ k ∈ K, 0 ≤ f k - (1 - θ) * k * deriv f k)
+    (hc : ∀ k ∈ K, 0 ≤ f k - h k)
+    (heul : ∀ k ∈ K, deriv U (f k - h k) =
+      (1 - θ) * β * deriv U (f (h k) - h (h k)) * deriv f (h k))
+    (htvc : ∀ k ∈ K, Tendsto (fun t => β ^ t * ((1 - θ) * deriv f (h^[t] k)) *
+      deriv U (f (h^[t] k) - h (h^[t] k)) * h^[t] k) atTop (𝓝 0))
+    (hv : ∀ k ∈ K, |v k| ≤ Mv) (hpol : ∀ k ∈ K, v k = U (f k - h k) + β * v (h k))
+    (hW : ∀ x, 0 ≤ x → ∀ k ∈ K, |W x k| ≤ M)
+    (hsol : SolvesBellman U (fun k => f k - (1 - θ) * k * deriv f k)
+      (fun k => (1 - θ) * deriv f k) h W β K) :
+    ∀ k ∈ K, W k k = v k ∧
+      ∀ y ∈ feasY (fun k => f k - (1 - θ) * k * deriv f k) (fun k => (1 - θ) * deriv f k) k k,
+        (U (f k + (1 - θ) * (k - k) * deriv f k - y) + β * W y (h k) = W k k ↔ y = h k) := by
+  have hD := dp_diagonal_pathwise (A := fun k => f k - (1 - θ) * k * deriv f k)
+    (B := fun k => (1 - θ) * deriv f k) (Fk := f) hU hβ0 hβ1 hUd hU' hUb hK hK0 hw
+    (fun k hk => mul_nonneg (by linarith) (hf' k hk)) (fun k _ => by ring) hc
+    (fun k hk => by rw [heul k hk]; ring) htvc hv hpol hW hsol
+  intro k hk
+  obtain ⟨h1, -, h3, h4⟩ := hD k hk
+  have e : ∀ y, f k + (1 - θ) * (k - k) * deriv f k - y =
+      f k - (1 - θ) * k * deriv f k + (1 - θ) * deriv f k * k - y := fun y => by ring
+  refine ⟨h1, fun y hy => ⟨fun hyW => h4 y hy (by rw [← e]; exact hyW), fun hyh => ?_⟩⟩
+  rw [hyh, e]
+  exact h3
+
+/-- **Sufficiency of Euler + transversality for the planner, `U` differentiable along the path
+only** (Theorem 4.15 for §18.1 (1)). As `planner_optimal`, with `U` concave, nondecreasing and
+bounded on `[0, ∞)`, and differentiable with `U′ ≥ 0` only at the path's consumptions
+`f(ks_t) − ks_{t+1}`. Then the path's value is the greatest value of the planner's problem. -/
+theorem planner_optimal_pathwise {U f : ℝ → ℝ} {β B₀ : ℝ} {ks : ℕ → ℝ}
+    (hU : ConcaveOn ℝ (Ici 0) U) (hUm : MonotoneOn U (Ici 0)) (hβ0 : 0 ≤ β) (hβ1 : β < 1)
+    (hUb : ∀ c, 0 ≤ c → |U c| ≤ B₀) (hUd : ∀ t, DifferentiableAt ℝ U (f (ks t) - ks (t + 1)))
+    (hU' : ∀ t, 0 ≤ deriv U (f (ks t) - ks (t + 1))) (hf : ConcaveOn ℝ (Ici 0) f)
+    (hfd : ∀ t, DifferentiableAt ℝ f (ks t)) (hf' : ∀ t, 0 ≤ deriv f (ks t))
+    (hks : ∀ t, 0 ≤ ks t) (hc : ∀ t, 0 ≤ f (ks t) - ks (t + 1))
+    (heul : ∀ t, deriv U (f (ks t) - ks (t + 1)) =
+      β * deriv U (f (ks (t + 1)) - ks (t + 2)) * deriv f (ks (t + 1)))
+    (htvc : Tendsto (fun t => β ^ t * deriv U (f (ks t) - ks (t + 1)) * deriv f (ks t) * ks t)
+      atTop (𝓝 0)) :
+    IsGreatest (plannerValues U f β (ks 0)) (∑' t, β ^ t * U (f (ks t) - ks (t + 1))) := by
+  have hsumb : ∀ c : ℕ → ℝ, (∀ t, 0 ≤ c t) → Summable fun t => β ^ t * U (c t) := by
+    intro c hc0
+    refine Summable.of_norm_bounded ((summable_geometric_of_lt_one hβ0 hβ1).mul_right B₀)
+      fun t => ?_
+    rw [Real.norm_eq_abs, abs_mul, abs_of_nonneg (pow_nonneg hβ0 t)]
+    exact mul_le_mul_of_nonneg_left (hUb _ (hc0 t)) (pow_nonneg hβ0 t)
+  have hS' := (hsumb _ hc).hasSum
+  refine ⟨⟨ks, rfl, fun t => ⟨hks t, hc t⟩, hS'⟩, ?_⟩
+  rintro S ⟨k, hk0, hk, hS⟩
+  set a : ℕ → ℝ := fun t => f (ks t) - ks t * deriv f (ks t) with ha
+  set b : ℕ → ℝ := fun t => deriv f (ks t) with hb
+  have hcons : ∀ t, consPath a b ks t = f (ks t) - ks (t + 1) := fun t => by
+    simp only [consPath, ha, hb]
+    ring
+  have htan : ∀ t, f (k t) - k (t + 1) ≤ consPath a b k t := fun t => by
+    have := concave_le_tangent hf (hk t).1 (hks t) (hfd t)
+    simp only [consPath, ha, hb]
+    linarith
+  have hfeas : IndivFeasible a b (ks 0) k :=
+    ⟨hk0, fun t => ⟨(hk t).1, ((hk t).2).trans (htan t)⟩⟩
+  have hS2 := (hsumb _ fun t => (hfeas.2 t).2).hasSum
+  have hle1 : S ≤ ∑' t, β ^ t * U (consPath a b k t) :=
+    hasSum_le (fun t => mul_le_mul_of_nonneg_left (hUm (mem_Ici.2 (hk t).2)
+      (mem_Ici.2 (hfeas.2 t).2) (htan t)) (pow_nonneg hβ0 t)) hS hS2
+  have hUd' : ∀ t, DifferentiableAt ℝ U (consPath a b ks t) := fun t => by
+    rw [hcons]; exact hUd t
+  have hp : ∀ t, 0 ≤ b t * deriv U (consPath a b ks t) := fun t => by
+    rw [hcons]; exact mul_nonneg (hf' t) (hU' t)
+  have heul' : ∀ t, deriv U (consPath a b ks t) =
+      β * b (t + 1) * deriv U (consPath a b ks (t + 1)) := fun t => by
+    rw [hcons, hcons, heul t, hb]
+    ring
+  have htvc' : Tendsto (fun T => β ^ T * b T * deriv U (consPath a b ks T) * ks T) atTop
+      (𝓝 0) := by
+    refine htvc.congr fun t => ?_
+    rw [hcons, hb]
+    ring
+  have hv' : HasSum (fun t => β ^ t * U (consPath a b ks t))
+      (∑' t, β ^ t * U (f (ks t) - ks (t + 1))) := by
+    simpa only [hcons] using hS'
+  exact hle1.trans (euler_tvc_optimal hU hβ0 hUd' (fun t => (hcons t).symm ▸ hc t) hp heul'
+    htvc' hfeas hS2 hv')
+
+/-- **Exercise 18.1, complete, `U` differentiable along the path only** (p. 544). As
+`ex_18_1_full`, with `U` strictly concave, nondecreasing and bounded on `[0, ∞)`, and
+differentiable with `U′ ≥ 0` only at the consumptions `f(k) − g(k)`, `k ∈ K`. Then (2) has a
+bounded solution `V` on `[0, ∞) × K`, unique among bounded solutions; `V(k, k; g)` is the maximal
+value of the planner's problem from `k ∈ K`; and `G(k, k; g) = g(k)`. -/
+theorem ex_18_1_full_pathwise {U f g : ℝ → ℝ} {β B₀ : ℝ} {K : Set ℝ}
+    (hU : StrictConcaveOn ℝ (Ici 0) U) (hUm : MonotoneOn U (Ici 0)) (hβ0 : 0 < β)
+    (hβ1 : β < 1) (hUd : ∀ k ∈ K, DifferentiableAt ℝ U (f k - g k))
+    (hU' : ∀ k ∈ K, 0 ≤ deriv U (f k - g k))
+    (hUb : ∀ c, 0 ≤ c → |U c| ≤ B₀) (hf : ConcaveOn ℝ (Ici 0) f)
+    (hK : ∀ k ∈ K, g k ∈ K) (hK0 : ∀ k ∈ K, 0 ≤ k) (hfd : ∀ k ∈ K, DifferentiableAt ℝ f k)
+    (hf' : ∀ k ∈ K, 0 ≤ deriv f k) (hw : ∀ k ∈ K, 0 ≤ f k - k * deriv f k)
+    (hc : ∀ k ∈ K, 0 ≤ f k - g k)
+    (heul : ∀ k ∈ K, deriv U (f k - g k) =
+      β * deriv U (f (g k) - g (g k)) * deriv f (g k))
+    (htvc : ∀ k ∈ K, Tendsto (fun t => β ^ t * deriv U (f (g^[t] k) - g (g^[t] k)) *
+      deriv f (g^[t] k) * g^[t] k) atTop (𝓝 0)) :
+    ∃ V : ℝ → ℝ → ℝ, ∃ M, (∀ x, 0 ≤ x → ∀ k ∈ K, |V x k| ≤ M) ∧
+      SolvesBellman U (fun k => f k - k * deriv f k) (deriv f) g V β K ∧
+      (∀ V' : ℝ → ℝ → ℝ, ∀ M', (∀ x, 0 ≤ x → ∀ k ∈ K, |V' x k| ≤ M') →
+        SolvesBellman U (fun k => f k - k * deriv f k) (deriv f) g V' β K →
+          ∀ x, 0 ≤ x → ∀ k ∈ K, V' x k = V x k) ∧
+      ∀ k ∈ K, IsGreatest (plannerValues U f β k) (V k k) ∧
+        ∀ y ∈ feasY (fun k => f k - k * deriv f k) (deriv f) k k,
+          (U (f k + (k - k) * deriv f k - y) + β * V y (g k) = V k k ↔ y = g k) := by
+  obtain ⟨V, M, hVb, hsol⟩ := exists_bellman_solution (U := U) (g := g)
+    (A := fun k => f k - k * deriv f k) (B := deriv f) hβ0.le hβ1 hUb hK hw hf'
+  obtain ⟨hvb, hpol⟩ := pathValue_spec (Fk := f) hβ0.le hβ1 hUb hK hc
+  refine ⟨V, M, hVb, hsol, fun V' M' hV' hsol' x hx k hk =>
+    bellman_unique hβ0.le hβ1 hUb hV' hVb hK hw hf' hsol' hsol x hx k hk, fun k hk => ?_⟩
+  obtain ⟨h1, h4⟩ := ex_18_1_dp_pathwise hU hβ0 hβ1 hUd hU' hUb hK hK0 hf' hw hc heul htvc hvb
+    hpol hVb hsol k hk
+  refine ⟨?_, h4⟩
+  have hkt := iterate_mem hK hk
+  have hP := planner_optimal_pathwise (ks := fun t => g^[t] k) hU.concaveOn hUm hβ0.le hβ1 hUb
+    (fun t => by simp only [Function.iterate_succ_apply']; exact hUd _ (hkt t))
+    (fun t => by simp only [Function.iterate_succ_apply']; exact hU' _ (hkt t))
+    hf (fun t => hfd _ (hkt t)) (fun t => hf' _ (hkt t)) (fun t => hK0 _ (hkt t))
+    (fun t => by simp only [Function.iterate_succ_apply']; exact hc _ (hkt t))
+    (fun t => by
+      simp only [Function.iterate_succ_apply']
+      exact heul _ (hkt t))
+    (by simpa only [Function.iterate_succ_apply'] using htvc k hk)
+  simp only [Function.iterate_zero, id, Function.iterate_succ_apply'] at hP
+  rw [h1]
+  exact hP
+
+/-- **The taxed economy (3), complete, `U` differentiable along the path only** (pp. 545–546).
+As `indirect_equilibrium_full`, with `U` strictly concave, nondecreasing and bounded on
+`[0, ∞)`, and differentiable with `U′ ≥ 0` only at the consumptions `f(k) − ĥ(k)`, `k ∈ K`.
+Then (3) with `h = ĥ` has a bounded solution `W`, unique among bounded solutions; the path of
+`ĥ` is optimal in the pseudo-economy with discount factor `(1 − θ)β`; `W(k, k; ĥ)` is the
+individual's value of following `ĥ`; and `H(k, k; ĥ) = ĥ(k)` is the unique optimal choice. -/
+theorem indirect_equilibrium_full_pathwise {U f h : ℝ → ℝ} {β θ B₀ : ℝ} {K : Set ℝ}
+    (hU : StrictConcaveOn ℝ (Ici 0) U) (hUm : MonotoneOn U (Ici 0)) (hβ0 : 0 < β)
+    (hβ1 : β < 1) (hθ0 : 0 ≤ θ) (hθ : θ < 1) (hUd : ∀ k ∈ K, DifferentiableAt ℝ U (f k - h k))
+    (hU' : ∀ k ∈ K, 0 ≤ deriv U (f k - h k)) (hUb : ∀ c, 0 ≤ c → |U c| ≤ B₀)
+    (hf : ConcaveOn ℝ (Ici 0) f) (hK : ∀ k ∈ K, h k ∈ K) (hK0 : ∀ k ∈ K, 0 ≤ k)
+    (hfd : ∀ k ∈ K, DifferentiableAt ℝ f k) (hf' : ∀ k ∈ K, 0 ≤ deriv f k)
+    (hw : ∀ k ∈ K, 0 ≤ f k - (1 - θ) * k * deriv f k) (hc : ∀ k ∈ K, 0 ≤ f k - h k)
+    (heul : ∀ k ∈ K, deriv U (f k - h k) =
+      (1 - θ) * β * deriv U (f (h k) - h (h k)) * deriv f (h k))
+    (htvc : ∀ k ∈ K, Tendsto (fun t => β ^ t * ((1 - θ) * deriv f (h^[t] k)) *
+      deriv U (f (h^[t] k) - h (h^[t] k)) * h^[t] k) atTop (𝓝 0)) :
+    ∃ W : ℝ → ℝ → ℝ, ∃ M, (∀ x, 0 ≤ x → ∀ k ∈ K, |W x k| ≤ M) ∧
+      SolvesBellman U (fun k => f k - (1 - θ) * k * deriv f k)
+        (fun k => (1 - θ) * deriv f k) h W β K ∧
+      (∀ W' : ℝ → ℝ → ℝ, ∀ M', (∀ x, 0 ≤ x → ∀ k ∈ K, |W' x k| ≤ M') →
+        SolvesBellman U (fun k => f k - (1 - θ) * k * deriv f k)
+          (fun k => (1 - θ) * deriv f k) h W' β K →
+          ∀ x, 0 ≤ x → ∀ k ∈ K, W' x k = W x k) ∧
+      ∀ k ∈ K, IsGreatest (plannerValues U f ((1 - θ) * β) k)
+          (pathValue U f h ((1 - θ) * β) k) ∧
+        W k k = pathValue U f h β k ∧
+        ∀ y ∈ feasY (fun k => f k - (1 - θ) * k * deriv f k) (fun k => (1 - θ) * deriv f k) k k,
+          (U (f k + (1 - θ) * (k - k) * deriv f k - y) + β * W y (h k) = W k k ↔ y = h k) := by
+  have hB : ∀ k ∈ K, 0 ≤ (1 - θ) * deriv f k := fun k hk => mul_nonneg (by linarith) (hf' k hk)
+  obtain ⟨W, M, hWb, hsol⟩ := exists_bellman_solution (U := U) (g := h)
+    (A := fun k => f k - (1 - θ) * k * deriv f k) (B := fun k => (1 - θ) * deriv f k)
+    hβ0.le hβ1 hUb hK hw hB
+  obtain ⟨hvb, hpol⟩ := pathValue_spec (Fk := f) hβ0.le hβ1 hUb hK hc
+  refine ⟨W, M, hWb, hsol, fun W' M' hW' hsol' x hx k hk =>
+    bellman_unique hβ0.le hβ1 hUb hW' hWb hK hw hB hsol' hsol x hx k hk, fun k hk => ?_⟩
+  obtain ⟨h1, h4⟩ := indirect_equilibrium_dp_pathwise hU hβ0 hβ1 hθ hUd hU' hUb hK hK0 hf' hw
+    hc heul htvc hvb hpol hWb hsol k hk
+  refine ⟨?_, h1, h4⟩
+  have hkt := iterate_mem hK hk
+  have hβ' : 0 ≤ (1 - θ) * β := mul_nonneg (by linarith) hβ0.le
+  have hβ'1 : (1 - θ) * β < 1 := by nlinarith
+  -- the pseudo-planner's transversality condition follows from the individual's
+  have htvc' := tvc_indiv_imp_pseudo hθ0 hθ (z := fun t => deriv U (f (h^[t] k) -
+    h (h^[t] k)) * deriv f (h^[t] k) * h^[t] k) (by
+      refine (htvc k hk).congr fun t => ?_
+      ring)
+  have hP := planner_optimal_pathwise (ks := fun t => h^[t] k) hU.concaveOn hUm hβ' hβ'1 hUb
+    (fun t => by simp only [Function.iterate_succ_apply']; exact hUd _ (hkt t))
+    (fun t => by simp only [Function.iterate_succ_apply']; exact hU' _ (hkt t))
+    hf (fun t => hfd _ (hkt t)) (fun t => hf' _ (hkt t)) (fun t => hK0 _ (hkt t))
+    (fun t => by simp only [Function.iterate_succ_apply']; exact hc _ (hkt t))
+    (fun t => by
+      simp only [Function.iterate_succ_apply']
+      rw [heul _ (hkt t)])
+    (by
+      refine htvc'.congr fun t => ?_
+      simp only [Function.iterate_succ_apply']
+      ring)
+  simp only [Function.iterate_zero, id, Function.iterate_succ_apply'] at hP
+  exact hP
+
+end StokeyLucasPrescott.EquilibriaWithDistortions
+
+/-
+Copyright (c) 2026 Robert Kirkby. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Robert Kirkby
+-/
+
+/-!
+# Interiority of the constructed planner's policy, §18.1
+
+SLP §18.1, pp. 543–546. `ex_18_1_constructed` and `indirect_equilibrium_constructed` assume that
+the policy `g` constructed in `IndirectExistence` is interior, `0 < g(k) < f(k)` on `K = [0, k̄]`,
+and that `U′` and `f′` are continuous on `[0, k̄]`. With `U` differentiable on `[0, ∞)`, `U′(0)`
+is finite and the Inada argument is unavailable. Here `U` is only continuous on `[0, ∞)`
+(`PlannerHyp` asks no more), which allows `U′(0+) = ∞` with `U` bounded, e.g.
+`U(c) = 1 − e^{−√c}` (`IndirectInteriorExample`).
+
+* `InteriorHyp`: `PlannerHyp`, `b > 0`, the Inada condition `(U(c) − U(0))/c → ∞` as `c → 0+`,
+  `f(0) = 0` and `f > 0` on `(0, k̄]`.
+* `PlannerHyp.plannerPolicy_lt_of_inada` (route (i)): `g(k) < f(k)` wherever `f(k) > 0`.
+* `PlannerHyp.plannerPolicy_pos_of_inada` (route (ii)): `g(k) > 0` on `(0, k̄]`. Only
+  `U′(0+) = ∞`, `f(0) = 0` and concavity are used; no condition on `f′(0)` is needed, because a
+  zero saving leaves zero consumption from the next period on.
+* `InteriorHyp.policy_interior`, `InteriorHyp.policy_mapsTo`: `0 < g(k) < f(k)` on `(0, k̄]`,
+  which `g` maps into itself. `InteriorHyp.not_interior_zero` (route (iii)): `g(0) = 0`, so
+  interiority on all of `K` is impossible; the statements are made on `(0, k̄]`.
+* `InteriorHyp.planner_euler_interior`: the Euler equation on `(0, k̄]`.
+* `InteriorHyp.tvc_bound`, `InteriorHyp.planner_tvc`: the transversality condition
+  `β′ᵗ a f′(k_t) U′(c_t) k_t → 0` for every `β′ ∈ [0, 1)`, from `v′(k) k ≤ v(k) − v(0)` (concavity
+  and the envelope condition). This replaces the bound on `U′` from its continuity on `[0, k̄]`.
+* `ex_18_1_interior`, `indirect_equilibrium_interior`: Exercise 18.1 and the indirect equilibrium
+  of the pseudo-economy (`β̂ = (1 − θ)β`) with the planner constructed, interiority proved rather
+  than assumed, `U` differentiable on `(0, ∞)` only, and no continuity of `U′` or `f′`; the
+  aggregate state space is `(0, k̄]`.
+
+The dynamic-programming steps are `ex_18_1_full_pathwise` and
+`indirect_equilibrium_full_pathwise` (`IndirectInteriorDP`), which need `U` differentiable only
+along the path.
+-/
+
+namespace StokeyLucasPrescott.EquilibriaWithDistortions
+
+open Filter Topology Set
+
+/-- **The Inada condition in `ε`–`δ` form.** If `(U(c) − U(0))/c → ∞` as `c → 0+`, then for
+every `L` there is `δ > 0` with `L c < U(c) − U(0)` for `0 < c < δ`. -/
+theorem inada_exists_delta {U : ℝ → ℝ} (hI : Tendsto (fun c => (U c - U 0) / c) (𝓝[>] 0) atTop)
+    (L : ℝ) : ∃ δ > 0, ∀ c, 0 < c → c < δ → L * c < U c - U 0 := by
+  have h := tendsto_atTop.1 hI (L + 1)
+  rw [eventually_nhdsWithin_iff, Metric.eventually_nhds_iff] at h
+  obtain ⟨δ, hδ, hδc⟩ := h
+  refine ⟨δ, hδ, fun c hc hcδ => ?_⟩
+  have h1 := hδc (by rw [Real.dist_eq, sub_zero, abs_of_pos hc]; exact hcδ) (mem_Ioi.2 hc)
+  rw [le_div_iff₀ hc] at h1
+  nlinarith
+
+/-- **Positive consumption** (route (i)). Under `PlannerHyp`, if `U′(0+) = ∞` in the form
+`(U(c) − U(0))/c → ∞` as `c → 0+`, then at every `k ∈ K` with `f(k) > 0` the planner consumes a
+positive amount: `g(k) < f(k)`. (Saving everything loses `U(ε) − U(0)` against a gain in `b v` of
+at most `4 b ‖v‖ ε / f(k)`, by concavity of `v`.) -/
+theorem PlannerHyp.plannerPolicy_lt_of_inada {U f : ℝ → ℝ} {b kbar : ℝ}
+    (P : PlannerHyp U f b kbar) (hI : Tendsto (fun c => (U c - U 0) / c) (𝓝[>] 0) atTop)
+    {k : ℝ} (hk : k ∈ Icc 0 kbar) (hfk : 0 < f k) : plannerPolicy P k < f k := by
+  set v := plannerValue P with hvdef
+  set y₀ := f k with hy₀
+  obtain ⟨hg, hmax, -⟩ := P.plannerPolicy_spec hk
+  by_contra hge
+  push Not at hge
+  have heq : plannerPolicy P k = y₀ := le_antisymm hg.2 hge
+  set Mv := ‖v‖ with hMvdef
+  have hMv : ∀ x, |v x| ≤ Mv := fun x => by
+    rw [← Real.norm_eq_abs]; exact v.norm_coe_le_norm x
+  have hMv0 : 0 ≤ Mv := norm_nonneg _
+  have hy₀K : y₀ ≤ kbar := P.f_le k hk
+  obtain ⟨δ, hδ, hδc⟩ := inada_exists_delta hI (b * (4 * Mv / y₀))
+  set ε := min (y₀ / 2) (δ / 2) with hεdef
+  have hε0 : 0 < ε := lt_min (by linarith) (by linarith)
+  have hε1 : ε ≤ y₀ / 2 := min_le_left _ _
+  have hε2 : ε < δ := (min_le_right _ _).trans_lt (by linarith)
+  have hU := hδc ε hε0 hε2
+  have hm := isMaxOn_iff.1 hmax (y₀ - ε) ⟨by linarith, by linarith⟩
+  rw [heq] at hm
+  simp only [hy₀, sub_sub_cancel, sub_self] at hm
+  -- concavity of `v` between `0` and `y₀`
+  change U ε + b * v (y₀ - ε) ≤ U 0 + b * v y₀ at hm
+  have hcv := P.plannerValue_concave.2 (⟨le_rfl, P.kbar_nonneg⟩ : (0 : ℝ) ∈ Icc 0 kbar)
+    (⟨hfk.le, hy₀K⟩ : y₀ ∈ Icc 0 kbar) (by positivity : 0 ≤ ε / y₀)
+    (div_nonneg (by linarith) hfk.le : 0 ≤ (y₀ - ε) / y₀) (by field_simp; ring)
+  have hpt : (ε / y₀) • (0 : ℝ) + ((y₀ - ε) / y₀) • y₀ = y₀ - ε := by
+    simp only [smul_eq_mul]; field_simp; ring
+  rw [hpt] at hcv
+  simp only [smul_eq_mul] at hcv
+  have hcv' : ε * v 0 + (y₀ - ε) * v y₀ ≤ y₀ * v (y₀ - ε) := by
+    have := mul_le_mul_of_nonneg_left hcv hfk.le
+    have e : y₀ * (ε / y₀ * v 0 + (y₀ - ε) / y₀ * v y₀) = ε * v 0 + (y₀ - ε) * v y₀ := by
+      field_simp
+    linarith
+  have hb1 := abs_le.1 (hMv 0)
+  have hb2 := abs_le.1 (hMv (y₀ - ε))
+  have hD : y₀ * (v y₀ - v (y₀ - ε)) ≤ 4 * ε * Mv := by
+    rcases le_or_gt (v y₀ - v (y₀ - ε)) 0 with h | h
+    · nlinarith
+    · nlinarith
+  have hbD := mul_le_mul_of_nonneg_left hD P.b_nonneg
+  have e2 : b * (4 * Mv / y₀) * ε * y₀ = b * (4 * ε * Mv) := by field_simp
+  have h3 : b * (4 * Mv / y₀) * ε * y₀ < (U ε - U 0) * y₀ := mul_lt_mul_of_pos_right hU hfk
+  nlinarith
+
+/-- **`k = 0` is degenerate when `f(0) = 0`**: `g(0) = 0`, and `v(0) = U(0) + b v(0)`. -/
+theorem PlannerHyp.plannerPolicy_zero {U f : ℝ → ℝ} {b kbar : ℝ} (P : PlannerHyp U f b kbar)
+    (hf0 : f 0 = 0) : plannerPolicy P 0 = 0 ∧
+      plannerValue P 0 = U 0 + b * plannerValue P 0 := by
+  obtain ⟨hg, -, hv⟩ := P.plannerPolicy_spec (⟨le_rfl, P.kbar_nonneg⟩ : (0 : ℝ) ∈ Icc 0 kbar)
+  rw [hf0] at hg hv
+  have h0 : plannerPolicy P 0 = 0 := le_antisymm hg.2 hg.1
+  rw [h0, sub_zero] at hv
+  exact ⟨h0, hv⟩
+
+/-- **Positive saving** (route (ii)). Under `PlannerHyp`, with `b > 0`, `U′(0+) = ∞`
+(`(U(c) − U(0))/c → ∞` as `c → 0+`), `f(0) = 0` and `f > 0` on `(0, k̄]`, the planner saves a
+positive amount at every `k ∈ (0, k̄]`: `g(k) > 0`. (Saving nothing leaves zero capital, hence
+zero consumption, from the next period on; saving `y` gains at least `b [U(f(y)) − U(0)]`, which
+is of larger order than `y` since `f(y) ≥ (f(k)/k) y` by concavity, while the loss today is
+`O(y)` by concavity of `U`.) No condition on `f′(0)` is needed. -/
+theorem PlannerHyp.plannerPolicy_pos_of_inada {U f : ℝ → ℝ} {b kbar : ℝ}
+    (P : PlannerHyp U f b kbar) (hb : 0 < b)
+    (hI : Tendsto (fun c => (U c - U 0) / c) (𝓝[>] 0) atTop) (hf0 : f 0 = 0)
+    (hfpos : ∀ k ∈ Ioc 0 kbar, 0 < f k) {k : ℝ} (hk : k ∈ Ioc 0 kbar) :
+    0 < plannerPolicy P k := by
+  have hkK : k ∈ Icc 0 kbar := Ioc_subset_Icc_self hk
+  set v := plannerValue P with hvdef
+  set c := f k with hcdef
+  have hc : 0 < c := hfpos k hk
+  obtain ⟨hg, hmax, -⟩ := P.plannerPolicy_spec hkK
+  by_contra hle
+  push Not at hle
+  have heq : plannerPolicy P k = 0 := le_antisymm hle hg.1
+  have hv0 : v 0 = U 0 + b * v 0 := (P.plannerPolicy_zero hf0).2
+  -- `v(y) ≥ U(f(y)) + b v(0)`: consume everything at `y`
+  have hvy : ∀ y ∈ Icc 0 kbar, U (f y) + b * v 0 ≤ v y := by
+    intro y hy
+    obtain ⟨-, hmy, hvy⟩ := P.plannerPolicy_spec hy
+    have := isMaxOn_iff.1 hmy 0 ⟨le_rfl, P.f_nonneg y hy⟩
+    simp only [sub_zero] at this
+    change U (f y) + b * v 0 ≤ U (f y - plannerPolicy P y) + b * v (plannerPolicy P y) at this
+    change v y = U (f y - plannerPolicy P y) + b * v (plannerPolicy P y) at hvy
+    linarith
+  -- the bound on `U(c) − U(c − y)` from concavity
+  set D := 2 * (U c - U 0) / c with hDdef
+  have hU0c : U 0 ≤ U c := P.U_mono (mem_Ici.2 le_rfl) (mem_Ici.2 hc.le) hc.le
+  have hD0 : 0 ≤ D := by positivity
+  have hUc : ∀ y, 0 < y → y ≤ c / 2 → U c - U (c - y) ≤ D * y := by
+    intro y hy hyc
+    have hcv := P.U_strictConcave.concaveOn.2 (mem_Ici.2 le_rfl : (0 : ℝ) ∈ Ici 0)
+      (mem_Ici.2 hc.le) (div_nonneg hy.le hc.le : 0 ≤ y / c)
+      (div_nonneg (by linarith) hc.le : 0 ≤ (c - y) / c) (by field_simp; ring)
+    have hpt : (y / c) • (0 : ℝ) + ((c - y) / c) • c = c - y := by
+      simp only [smul_eq_mul]; field_simp; ring
+    rw [hpt] at hcv
+    simp only [smul_eq_mul] at hcv
+    have hcv' : y * U 0 + (c - y) * U c ≤ c * U (c - y) := by
+      have := mul_le_mul_of_nonneg_left hcv hc.le
+      have e : c * (y / c * U 0 + (c - y) / c * U c) = y * U 0 + (c - y) * U c := by
+        field_simp
+      linarith
+    have hmono : U (c - y) ≤ U c :=
+      P.U_mono (mem_Ici.2 (by linarith)) (mem_Ici.2 hc.le) (by linarith)
+    have e2 : D * y * c = 2 * y * (U c - U 0) := by rw [hDdef]; field_simp
+    nlinarith
+  -- `f(y) ≥ m y` on `[0, k]`, `m = f(k)/k`
+  set m := c / k with hmdef
+  have hm0 : 0 < m := div_pos hc hk.1
+  have hfy : ∀ y, 0 ≤ y → y ≤ k → m * y ≤ f y := by
+    intro y hy hyk
+    have hk0 : k ≠ 0 := hk.1.ne'
+    have hcv := P.f_concave.2 (⟨le_rfl, P.kbar_nonneg⟩ : (0 : ℝ) ∈ Icc 0 kbar) hkK
+      (div_nonneg (by linarith) hk.1.le : 0 ≤ (k - y) / k) (div_nonneg hy hk.1.le : 0 ≤ y / k)
+      (by field_simp; ring)
+    have hpt : ((k - y) / k) • (0 : ℝ) + (y / k) • k = y := by
+      simp only [smul_eq_mul]; field_simp; ring
+    rw [hpt, hf0] at hcv
+    simp only [smul_eq_mul, mul_zero, zero_add] at hcv
+    have e : m * y = y / k * f k := by rw [hmdef, hcdef]; field_simp
+    linarith
+  -- the Inada condition at `f(y)` for small `y`
+  set L := (D + 1) / (b * m) with hLdef
+  have hL0 : 0 ≤ L := by positivity
+  have hLm : b * L * m = D + 1 := by rw [hLdef]; field_simp
+  obtain ⟨δ, hδ, hδc⟩ := inada_exists_delta hI L
+  obtain ⟨δ', hδ', hδ'c⟩ := Metric.continuousWithinAt_iff.1
+    (P.f_cont 0 ⟨le_rfl, P.kbar_nonneg⟩) δ hδ
+  set y := min (min (c / 2) k) (δ' / 2) with hydef
+  have hy0 : 0 < y := lt_min (lt_min (by linarith) hk.1) (by linarith)
+  have hyc : y ≤ c / 2 := (min_le_left _ _).trans (min_le_left _ _)
+  have hyk : y ≤ k := (min_le_left _ _).trans (min_le_right _ _)
+  have hyδ : y < δ' := (min_le_right _ _).trans_lt (by linarith)
+  have hyK : y ∈ Icc 0 kbar := ⟨hy0.le, hyk.trans hk.2⟩
+  have hfy0 : 0 < f y := hfpos y ⟨hy0, hyk.trans hk.2⟩
+  have hfyδ : f y < δ := by
+    have := hδ'c hyK (by rw [Real.dist_eq, sub_zero, abs_of_pos hy0]; exact hyδ)
+    rw [Real.dist_eq, hf0, sub_zero, abs_of_pos hfy0] at this
+    exact this
+  have hIn := hδc (f y) hfy0 hfyδ
+  -- optimality of `g(k) = 0` against saving `y`
+  have hopt := isMaxOn_iff.1 hmax y ⟨hy0.le, by linarith⟩
+  rw [heq] at hopt
+  change U (c - y) + b * v y ≤ U (c - 0) + b * v 0 at hopt
+  rw [sub_zero] at hopt
+  have h1 := hvy y hyK
+  have h2 := hUc y hy0 hyc
+  have h3 : L * (m * y) ≤ L * f y := mul_le_mul_of_nonneg_left (hfy y hy0.le hyk) hL0
+  -- `b (U(f y) − U 0) ≤ D y` but `b (U(f y) − U 0) > (D + 1) y`
+  have h4 : b * (U (f y) - U 0) ≤ D * y := by nlinarith
+  have h5 : (D + 1) * y < b * (U (f y) - U 0) := by
+    have := mul_lt_mul_of_pos_left hIn hb
+    nlinarith
+  linarith
+
+/-- Under `PlannerHyp`, `U′(c) ≥ 0` for every `c > 0` (`U` is nondecreasing on `[0, ∞)`). -/
+theorem PlannerHyp.deriv_U_nonneg {U f : ℝ → ℝ} {b kbar : ℝ} (P : PlannerHyp U f b kbar)
+    {c : ℝ} (hc : 0 < c) : 0 ≤ deriv U c := by
+  rw [← derivWithin_of_mem_nhds (Ici_mem_nhds hc)]
+  exact P.U_mono.derivWithin_nonneg
+
+/-- **Primitive hypotheses for an interior planner's policy**: `PlannerHyp` (with `U` only
+continuous on `[0, ∞)`, so `U′(0+) = ∞` is allowed), a positive discount factor, the Inada
+condition `(U(c) − U(0))/c → ∞` as `c → 0+`, `f(0) = 0`, and `f > 0` on `(0, k̄]`. -/
+structure InteriorHyp (U f : ℝ → ℝ) (b kbar : ℝ) : Prop where
+  planner : PlannerHyp U f b kbar
+  b_pos : 0 < b
+  U_inada : Tendsto (fun c => (U c - U 0) / c) (𝓝[>] 0) atTop
+  f_zero : f 0 = 0
+  f_pos : ∀ k ∈ Ioc 0 kbar, 0 < f k
+
+/-- **Interiority of the constructed policy on `(0, k̄]`**: `0 < g(k) < f(k)`. -/
+theorem InteriorHyp.policy_interior {U f : ℝ → ℝ} {b kbar : ℝ} (I : InteriorHyp U f b kbar)
+    {k : ℝ} (hk : k ∈ Ioc 0 kbar) :
+    0 < plannerPolicy I.planner k ∧ plannerPolicy I.planner k < f k :=
+  ⟨I.planner.plannerPolicy_pos_of_inada I.b_pos I.U_inada I.f_zero I.f_pos hk,
+    I.planner.plannerPolicy_lt_of_inada I.U_inada (Ioc_subset_Icc_self hk) (I.f_pos k hk)⟩
+
+/-- The policy maps `(0, k̄]` into `(0, k̄)`. -/
+theorem InteriorHyp.policy_mem_Ioo {U f : ℝ → ℝ} {b kbar : ℝ} (I : InteriorHyp U f b kbar)
+    {k : ℝ} (hk : k ∈ Ioc 0 kbar) :
+    plannerPolicy I.planner k ∈ Ioo 0 kbar :=
+  ⟨(I.policy_interior hk).1,
+    (I.policy_interior hk).2.trans_le (I.planner.f_le k (Ioc_subset_Icc_self hk))⟩
+
+/-- The policy maps `(0, k̄]` into itself. -/
+theorem InteriorHyp.policy_mapsTo {U f : ℝ → ℝ} {b kbar : ℝ} (I : InteriorHyp U f b kbar)
+    {k : ℝ} (hk : k ∈ Ioc 0 kbar) :
+    plannerPolicy I.planner k ∈ Ioc 0 kbar :=
+  Ioo_subset_Ioc_self (I.policy_mem_Ioo hk)
+
+/-- **Interiority on all of `K` is impossible** under `InteriorHyp`: `g(0) = 0` and consumption
+at `k = 0` is `0` (route (iii): the interior statements are made on `(0, k̄]`). -/
+theorem InteriorHyp.not_interior_zero {U f : ℝ → ℝ} {b kbar : ℝ} (I : InteriorHyp U f b kbar) :
+    plannerPolicy I.planner 0 = 0 ∧ f 0 - plannerPolicy I.planner 0 = 0 ∧
+      ¬ ∀ k ∈ Icc 0 kbar, 0 < plannerPolicy I.planner k := by
+  have h0 := (I.planner.plannerPolicy_zero I.f_zero).1
+  refine ⟨h0, by rw [h0, I.f_zero, sub_zero], fun h => ?_⟩
+  have := h 0 ⟨le_rfl, I.planner.kbar_nonneg⟩
+  rw [h0] at this
+  exact lt_irrefl _ this
+
+/-- **The planner's Euler equation on `(0, k̄]`** under `InteriorHyp`, with `U` differentiable on
+`(0, ∞)` and `f` on `(0, k̄]`:
+`U′[f(k) − g(k)] = b f′(g(k)) U′[f(g(k)) − g(g(k))]`. -/
+theorem InteriorHyp.planner_euler_interior {U f : ℝ → ℝ} {b kbar : ℝ} (I : InteriorHyp U f b kbar)
+    (hUd : ∀ c, 0 < c → DifferentiableAt ℝ U c)
+    (hfd : ∀ k ∈ Ioc 0 kbar, DifferentiableAt ℝ f k) {k : ℝ} (hk : k ∈ Ioc 0 kbar) :
+    deriv U (f k - plannerPolicy I.planner k) = b * deriv f (plannerPolicy I.planner k) *
+      deriv U (f (plannerPolicy I.planner k) -
+        plannerPolicy I.planner (plannerPolicy I.planner k)) := by
+  have hi := I.policy_interior hk
+  have hgk := I.policy_mapsTo hk
+  have hi2 := I.policy_interior hgk
+  exact I.planner.planner_euler (Ioc_subset_Icc_self hk) hi.1 hi.2 hi2.2
+    (hUd _ (sub_pos.2 hi.2)) (hUd _ (sub_pos.2 hi2.2)) (hfd _ hgk)
+
+/-- **The bound behind the transversality condition.** For `k ∈ (0, k̄]`,
+`f′(k) U′[f(k) − g(k)] k ≥ 0`, and for `k < k̄` it is at most `2 ‖v‖`: by the envelope
+condition it is `v′(k) k`, and `v′(k) k ≤ v(k) − v(0)` by concavity of `v`. No bound on `U′`
+near `0` is used. -/
+theorem InteriorHyp.tvc_bound {U f : ℝ → ℝ} {b kbar : ℝ} (I : InteriorHyp U f b kbar)
+    (hUd : ∀ c, 0 < c → DifferentiableAt ℝ U c)
+    (hfd : ∀ k ∈ Ioc 0 kbar, DifferentiableAt ℝ f k) (hf' : ∀ k ∈ Ioc 0 kbar, 0 ≤ deriv f k)
+    {k : ℝ} (hk : k ∈ Ioc 0 kbar) :
+    0 ≤ deriv f k * deriv U (f k - plannerPolicy I.planner k) * k ∧
+      (k < kbar → deriv f k * deriv U (f k - plannerPolicy I.planner k) * k ≤
+        2 * ‖plannerValue I.planner‖) := by
+  set P := I.planner with hP
+  have hi := I.policy_interior hk
+  refine ⟨mul_nonneg (mul_nonneg (hf' k hk) (P.deriv_U_nonneg (sub_pos.2 hi.2))) hk.1.le,
+    fun hkb => ?_⟩
+  have hkI : k ∈ Ioo 0 kbar := ⟨hk.1, hkb⟩
+  have henv := P.planner_envelope hkI hi.2 (hUd _ (sub_pos.2 hi.2)) (hfd k hk)
+  have hsl := P.plannerValue_concave.le_slope_of_hasDerivAt
+    (⟨le_rfl, P.kbar_nonneg⟩ : (0 : ℝ) ∈ Icc 0 kbar) (Ioc_subset_Icc_self hk) hk.1 henv
+  rw [slope_def_field, sub_zero, le_div_iff₀ hk.1] at hsl
+  have h1 := abs_le.1 (by rw [← Real.norm_eq_abs]; exact (plannerValue P).norm_coe_le_norm k :
+    |plannerValue P k| ≤ ‖plannerValue P‖)
+  have h2 := abs_le.1 (by rw [← Real.norm_eq_abs]; exact (plannerValue P).norm_coe_le_norm 0 :
+    |plannerValue P 0| ≤ ‖plannerValue P‖)
+  linarith
+
+/-- **Transversality for the constructed policy** under `InteriorHyp`: for every `β′ ∈ [0, 1)`,
+constant `a` and `k ∈ (0, k̄]`, `β′ᵗ (a f′(k_t)) U′(c_t) k_t → 0` along `k_t = gᵗ(k)`. This
+replaces the continuity of `U′` on `[0, k̄]` used by `PlannerHyp.planner_euler_tvc`, which fails
+when `U′(0+) = ∞`. -/
+theorem InteriorHyp.planner_tvc {U f : ℝ → ℝ} {b kbar : ℝ} (I : InteriorHyp U f b kbar)
+    (hUd : ∀ c, 0 < c → DifferentiableAt ℝ U c)
+    (hfd : ∀ k ∈ Ioc 0 kbar, DifferentiableAt ℝ f k) (hf' : ∀ k ∈ Ioc 0 kbar, 0 ≤ deriv f k)
+    (β' a : ℝ) (hβ0 : 0 ≤ β') (hβ1 : β' < 1) {k : ℝ} (hk : k ∈ Ioc 0 kbar) :
+    Tendsto (fun t => β' ^ t * (a * deriv f ((plannerPolicy I.planner)^[t] k)) *
+      deriv U (f ((plannerPolicy I.planner)^[t] k) -
+        plannerPolicy I.planner ((plannerPolicy I.planner)^[t] k)) *
+          (plannerPolicy I.planner)^[t] k) atTop (𝓝 0) := by
+  set g := plannerPolicy I.planner with hg
+  set Z : ℝ → ℝ := fun k => deriv f k * deriv U (f k - g k) * k with hZ
+  set Mv := ‖plannerValue I.planner‖ with hMv
+  have hMv0 : 0 ≤ Mv := norm_nonneg _
+  have hkt := iterate_mem (fun k hk => I.policy_mapsTo hk) hk
+  have hZb : ∀ k ∈ Ioc 0 kbar, |Z k| ≤ 2 * Mv + |Z kbar| := by
+    intro k hk
+    obtain ⟨h0, h1⟩ := I.tvc_bound hUd hfd hf' hk
+    rcases lt_or_eq_of_le hk.2 with hlt | heq
+    · rw [abs_of_nonneg h0]
+      have := h1 hlt
+      have := abs_nonneg (Z kbar)
+      linarith
+    · rw [heq]
+      linarith
+  refine (tvc_of_bounded (M := |a| * (2 * Mv + |Z kbar|)) hβ0 hβ1
+    (z := fun t => a * Z (g^[t] k)) fun t => ?_).congr fun t => by simp only [hZ]; ring
+  rw [abs_mul]
+  exact mul_le_mul_of_nonneg_left (hZb _ (hkt t)) (abs_nonneg a)
+
+/-- **Exercise 18.1 with the planner constructed and interior** (pp. 543–544). Let
+`I : InteriorHyp U f β k̄`, `U` differentiable on `(0, ∞)` and bounded by `B₀` on `[0, ∞)`, `f`
+concave on `[0, ∞)`, differentiable with `f′ ≥ 0` on `(0, k̄]`. Then:
+(0) the constructed policy `g` is interior on `(0, k̄]`;
+(i) `v` solves (1) on `K`, `g` is continuous on `K` and the unique maximiser in (1);
+(ii) `g` satisfies the Euler equation on `(0, k̄]`;
+(iii) (2) has a bounded solution `V` on `[0, ∞) × (0, k̄]`, unique among bounded solutions, with
+`V(k, k; g) = v(k)`, the maximal value of the planner's problem, and `G(k, k; g) = g(k)`;
+(iv) on `(0, k̄)`, `V₁(k, k; g) = v′(k) = f′(k) U′[f(k) − g(k)]`.
+Compared with `ex_18_1_constructed`, interiority is proved, and `U` need not be differentiable at
+`0` and `U′`, `f′` need not be continuous; the aggregate state space is `(0, k̄]`, since `k = 0` is
+degenerate (`InteriorHyp.not_interior_zero`). -/
+theorem ex_18_1_interior {U f : ℝ → ℝ} {β B₀ kbar : ℝ} (I : InteriorHyp U f β kbar)
+    (hUd : ∀ c, 0 < c → DifferentiableAt ℝ U c) (hUb : ∀ c, 0 ≤ c → |U c| ≤ B₀)
+    (hf : ConcaveOn ℝ (Ici 0) f) (hfd : ∀ k ∈ Ioc 0 kbar, DifferentiableAt ℝ f k)
+    (hf' : ∀ k ∈ Ioc 0 kbar, 0 ≤ deriv f k) :
+    (∀ k ∈ Ioc 0 kbar, 0 < plannerPolicy I.planner k ∧ plannerPolicy I.planner k < f k) ∧
+      SolvesPlanner U f β kbar (plannerValue I.planner) ∧
+      ContinuousOn (plannerPolicy I.planner) (Icc 0 kbar) ∧
+      (∀ k ∈ Icc 0 kbar, plannerPolicy I.planner k ∈ Icc 0 (f k) ∧ ∀ y ∈ Icc 0 (f k),
+        U (f k - y) + β * plannerValue I.planner y = plannerValue I.planner k ↔
+          y = plannerPolicy I.planner k) ∧
+      (∀ k ∈ Ioc 0 kbar, deriv U (f k - plannerPolicy I.planner k) =
+        β * deriv U (f (plannerPolicy I.planner k) -
+          plannerPolicy I.planner (plannerPolicy I.planner k)) *
+            deriv f (plannerPolicy I.planner k)) ∧
+      ∃ V : ℝ → ℝ → ℝ, ∃ M, (∀ x, 0 ≤ x → ∀ k ∈ Ioc 0 kbar, |V x k| ≤ M) ∧
+        SolvesBellman U (fun k => f k - k * deriv f k) (deriv f) (plannerPolicy I.planner) V β
+          (Ioc 0 kbar) ∧
+        (∀ V' : ℝ → ℝ → ℝ, ∀ M', (∀ x, 0 ≤ x → ∀ k ∈ Ioc 0 kbar, |V' x k| ≤ M') →
+          SolvesBellman U (fun k => f k - k * deriv f k) (deriv f) (plannerPolicy I.planner) V'
+            β (Ioc 0 kbar) → ∀ x, 0 ≤ x → ∀ k ∈ Ioc 0 kbar, V' x k = V x k) ∧
+        (∀ k ∈ Ioc 0 kbar, V k k = plannerValue I.planner k ∧
+          IsGreatest (plannerValues U f β k) (V k k) ∧
+          ∀ y ∈ feasY (fun k => f k - k * deriv f k) (deriv f) k k,
+            (U (f k + (k - k) * deriv f k - y) + β * V y (plannerPolicy I.planner k) = V k k ↔
+              y = plannerPolicy I.planner k)) ∧
+        ∀ k ∈ Ioo 0 kbar, HasDerivAt (fun x => V x k) (deriv (plannerValue I.planner) k) k ∧
+          HasDerivAt (plannerValue I.planner)
+            (deriv f k * deriv U (f k - plannerPolicy I.planner k)) k := by
+  set P := I.planner with hP
+  set g := plannerPolicy P with hg
+  set K := Ioc 0 kbar with hKdef
+  have hβ0 := I.b_pos
+  have hint : ∀ k ∈ K, 0 < g k ∧ g k < f k := fun k hk => I.policy_interior hk
+  have hgK : ∀ k ∈ K, g k ∈ K := fun k hk => I.policy_mapsTo hk
+  have hK0 : ∀ k ∈ K, 0 ≤ k := fun k hk => hk.1.le
+  have hc : ∀ k ∈ K, 0 ≤ f k - g k := fun k hk => (sub_pos.2 (hint k hk).2).le
+  have hw : ∀ k ∈ K, 0 ≤ f k - k * deriv f k := by
+    intro k hk
+    have := concave_le_tangent hf (le_refl (0 : ℝ)) hk.1.le (hfd k hk)
+    rw [I.f_zero] at this
+    linarith
+  have hUdK : ∀ k ∈ K, DifferentiableAt ℝ U (f k - g k) := fun k hk =>
+    hUd _ (sub_pos.2 (hint k hk).2)
+  have hU'K : ∀ k ∈ K, 0 ≤ deriv U (f k - g k) := fun k hk =>
+    P.deriv_U_nonneg (sub_pos.2 (hint k hk).2)
+  have heul' : ∀ k ∈ K, deriv U (f k - g k) =
+      β * deriv U (f (g k) - g (g k)) * deriv f (g k) := fun k hk => by
+    rw [I.planner_euler_interior hUd hfd hk]; ring
+  have htvc' : ∀ k ∈ K, Tendsto (fun t => β ^ t * deriv U (f (g^[t] k) - g (g^[t] k)) *
+      deriv f (g^[t] k) * g^[t] k) atTop (𝓝 0) := fun k hk =>
+    (I.planner_tvc hUd hfd hf' β 1 hβ0.le P.b_lt_one hk).congr fun t => by ring
+  obtain ⟨V, M, hVb, hsol, huniq, hall⟩ := ex_18_1_full_pathwise P.U_strictConcave P.U_mono hβ0
+    P.b_lt_one hUdK hU'K hUb hf hgK hK0 hfd hf' hw hc heul' htvc'
+  have hvb : ∀ k ∈ K, |plannerValue P k| ≤ ‖plannerValue P‖ := fun k _ => by
+    rw [← Real.norm_eq_abs]; exact (plannerValue P).norm_coe_le_norm k
+  have hpol : ∀ k ∈ K, plannerValue P k = U (f k - g k) + β * plannerValue P (g k) :=
+    fun k hk => (P.plannerPolicy_spec (Ioc_subset_Icc_self hk)).2.2
+  have hdp := ex_18_1_dp_pathwise P.U_strictConcave hβ0 P.b_lt_one hUdK hU'K hUb hgK hK0 hf' hw
+    hc heul' htvc' hvb hpol hVb hsol
+  refine ⟨hint, P.plannerValue_solves, P.plannerPolicy_continuousOn,
+    fun k hk => ⟨(P.plannerPolicy_spec hk).1, fun y hy => P.plannerPolicy_unique hk hy⟩, heul',
+    V, M, hVb, hsol, huniq, fun k hk => ⟨(hdp k hk).1, (hall k hk).1, (hall k hk).2⟩,
+    fun k hk => ?_⟩
+  have hkK : k ∈ K := Ioo_subset_Ioc_self hk
+  have hv' := P.planner_envelope hk (hint k hkK).2 (hUdK k hkK) (hfd k hkK)
+  refine ⟨?_, hv'⟩
+  rw [hv'.deriv]
+  have hopt := ((hall k hkK).2 (g k) ⟨(hgK k hkK).1.le, by
+    have := hc k hkK; simp only; linarith⟩).2 rfl
+  have e : (fun k => f k - k * deriv f k) k + deriv f k * k - g k = f k - g k := by
+    simp only; ring
+  have e' : f k + (k - k) * deriv f k - g k = f k - g k := by ring
+  rw [e'] at hopt
+  exact bellman_envelope hβ0.le P.b_lt_one P.U_strictConcave.concaveOn hUb hVb hgK hw hf' hsol
+    hk.1 hkK (hgK k hkK).1.le (by rw [e]; exact sub_pos.2 (hint k hkK).2) (by rw [e]; exact hopt)
+    (by rw [e]; exact (hUdK k hkK).hasDerivAt)
+
+/-- **The indirect equilibrium with the pseudo-planner constructed and interior** (p. 546). Tax
+`θ ∈ [0, 1)` on capital income, rebated; `β < 1`; `I : InteriorHyp U f ((1 − θ)β) k̄`; `U`, `f`
+as in `ex_18_1_interior`. Then: (0) `ĥ` is interior on `(0, k̄]`; (i) `w` solves (8) on `K`, `ĥ` is
+continuous, and on `(0, k̄]` `w(k)` is the value of the path of `ĥ` in the pseudo-economy, the
+maximal value of its sequence problem; (ii) (9) `U′[f(k) − ĥ(k)] = β̂ w′(ĥ(k))` on `(0, k̄]` and
+(10) `w′(k) = f′(k) U′[f(k) − ĥ(k)]` on `(0, k̄)`; (iii) (3) with `h = ĥ` has a bounded solution
+`W` on `[0, ∞) × (0, k̄]`, unique among bounded solutions, `W(k, k; ĥ)` is the value of following
+`ĥ`, and `H(k, k; ĥ) = ĥ(k)` is the unique optimal choice (a recursive competitive equilibrium);
+(iv) `φ(k) = W₁(k, k; ĥ) = (1 − θ) w′(k)` on `(0, k̄)`. Interiority is not assumed, unlike
+`indirect_equilibrium_constructed`. -/
+theorem indirect_equilibrium_interior {U f : ℝ → ℝ} {β θ B₀ kbar : ℝ}
+    (I : InteriorHyp U f ((1 - θ) * β) kbar) (hβ1 : β < 1) (hθ0 : 0 ≤ θ) (hθ : θ < 1)
+    (hUd : ∀ c, 0 < c → DifferentiableAt ℝ U c) (hUb : ∀ c, 0 ≤ c → |U c| ≤ B₀)
+    (hf : ConcaveOn ℝ (Ici 0) f) (hfd : ∀ k ∈ Ioc 0 kbar, DifferentiableAt ℝ f k)
+    (hf' : ∀ k ∈ Ioc 0 kbar, 0 ≤ deriv f k) :
+    (∀ k ∈ Ioc 0 kbar, 0 < plannerPolicy I.planner k ∧ plannerPolicy I.planner k < f k) ∧
+      SolvesPlanner U f ((1 - θ) * β) kbar (plannerValue I.planner) ∧
+      ContinuousOn (plannerPolicy I.planner) (Icc 0 kbar) ∧
+      (∀ k ∈ Ioc 0 kbar,
+        plannerValue I.planner k = pathValue U f (plannerPolicy I.planner) ((1 - θ) * β) k ∧
+          IsGreatest (plannerValues U f ((1 - θ) * β) k) (plannerValue I.planner k)) ∧
+      (∀ k ∈ Ioc 0 kbar, deriv U (f k - plannerPolicy I.planner k) =
+        (1 - θ) * β * deriv (plannerValue I.planner) (plannerPolicy I.planner k)) ∧
+      (∀ k ∈ Ioo 0 kbar, HasDerivAt (plannerValue I.planner)
+        (deriv f k * deriv U (f k - plannerPolicy I.planner k)) k) ∧
+      ∃ W : ℝ → ℝ → ℝ, ∃ M, (∀ x, 0 ≤ x → ∀ k ∈ Ioc 0 kbar, |W x k| ≤ M) ∧
+        SolvesBellman U (fun k => f k - (1 - θ) * k * deriv f k)
+          (fun k => (1 - θ) * deriv f k) (plannerPolicy I.planner) W β (Ioc 0 kbar) ∧
+        (∀ W' : ℝ → ℝ → ℝ, ∀ M', (∀ x, 0 ≤ x → ∀ k ∈ Ioc 0 kbar, |W' x k| ≤ M') →
+          SolvesBellman U (fun k => f k - (1 - θ) * k * deriv f k)
+            (fun k => (1 - θ) * deriv f k) (plannerPolicy I.planner) W' β (Ioc 0 kbar) →
+            ∀ x, 0 ≤ x → ∀ k ∈ Ioc 0 kbar, W' x k = W x k) ∧
+        (∀ k ∈ Ioc 0 kbar, W k k = pathValue U f (plannerPolicy I.planner) β k ∧
+          ∀ y ∈ feasY (fun k => f k - (1 - θ) * k * deriv f k) (fun k => (1 - θ) * deriv f k) k k,
+            (U (f k + (1 - θ) * (k - k) * deriv f k - y) + β * W y (plannerPolicy I.planner k) =
+              W k k ↔ y = plannerPolicy I.planner k)) ∧
+        ∀ k ∈ Ioo 0 kbar,
+          HasDerivAt (fun x => W x k) ((1 - θ) * deriv (plannerValue I.planner) k) k := by
+  set P := I.planner with hP
+  set h := plannerPolicy P with hh
+  set K := Ioc 0 kbar with hKdef
+  have hβ0 : 0 < β := by
+    have := I.b_pos
+    by_contra hb
+    push Not at hb
+    have : (1 - θ) * β ≤ 0 := mul_nonpos_of_nonneg_of_nonpos (by linarith) hb
+    linarith
+  have hint : ∀ k ∈ K, 0 < h k ∧ h k < f k := fun k hk => I.policy_interior hk
+  have hhK : ∀ k ∈ K, h k ∈ K := fun k hk => I.policy_mapsTo hk
+  have hK0 : ∀ k ∈ K, 0 ≤ k := fun k hk => hk.1.le
+  have hc : ∀ k ∈ K, 0 ≤ f k - h k := fun k hk => (sub_pos.2 (hint k hk).2).le
+  have hw : ∀ k ∈ K, 0 ≤ f k - (1 - θ) * k * deriv f k := by
+    intro k hk
+    have := concave_le_tangent hf (le_refl (0 : ℝ)) hk.1.le (hfd k hk)
+    rw [I.f_zero] at this
+    have := mul_nonneg (mul_nonneg hθ0 hk.1.le) (hf' k hk)
+    nlinarith
+  have hUdK : ∀ k ∈ K, DifferentiableAt ℝ U (f k - h k) := fun k hk =>
+    hUd _ (sub_pos.2 (hint k hk).2)
+  have hU'K : ∀ k ∈ K, 0 ≤ deriv U (f k - h k) := fun k hk =>
+    P.deriv_U_nonneg (sub_pos.2 (hint k hk).2)
+  have heul' : ∀ k ∈ K, deriv U (f k - h k) =
+      (1 - θ) * β * deriv U (f (h k) - h (h k)) * deriv f (h k) := fun k hk => by
+    rw [I.planner_euler_interior hUd hfd hk]; ring
+  have htvc' : ∀ k ∈ K, Tendsto (fun t => β ^ t * ((1 - θ) * deriv f (h^[t] k)) *
+      deriv U (f (h^[t] k) - h (h^[t] k)) * h^[t] k) atTop (𝓝 0) := fun k hk =>
+    I.planner_tvc hUd hfd hf' β (1 - θ) hβ0.le hβ1 hk
+  obtain ⟨W, M, hWb, hsol, huniq, hall⟩ := indirect_equilibrium_full_pathwise P.U_strictConcave
+    P.U_mono hβ0 hβ1 hθ0 hθ hUdK hU'K hUb hf hhK hK0 hfd hf' hw hc heul' htvc'
+  -- the envelope condition (10) for `w`
+  have h10 : ∀ k ∈ Ioo 0 kbar,
+      HasDerivAt (plannerValue P) (deriv f k * deriv U (f k - h k)) k := fun k hk =>
+    P.planner_envelope hk (hint k (Ioo_subset_Ioc_self hk)).2 (hUdK k (Ioo_subset_Ioc_self hk))
+      (hfd k (Ioo_subset_Ioc_self hk))
+  -- the first-order condition (9)
+  have h9 : ∀ k ∈ K, deriv U (f k - h k) = (1 - θ) * β * deriv (plannerValue P) (h k) := by
+    intro k hk
+    exact P.planner_foc (Ioc_subset_Icc_self hk) (hint k hk).1 (hint k hk).2 (hUdK k hk)
+      (h10 _ (I.policy_mem_Ioo hk)).differentiableAt
+  -- `w` is the value of the path of `ĥ`
+  have hval : ∀ k ∈ K, plannerValue P k = pathValue U f h ((1 - θ) * β) k := by
+    intro k hk
+    have hvb : ∀ k ∈ K, |plannerValue P k| ≤ ‖plannerValue P‖ := fun k _ => by
+      rw [← Real.norm_eq_abs]; exact (plannerValue P).norm_coe_le_norm k
+    have hs := policyValue_hasSum P.b_nonneg P.b_lt_one hhK hvb (fun k hk => hUb _ (hc k hk))
+      (fun k hk => (P.plannerPolicy_spec (Ioc_subset_Icc_self hk)).2.2) hk
+    exact hs.tsum_eq.symm
+  refine ⟨hint, P.plannerValue_solves, P.plannerPolicy_continuousOn,
+    fun k hk => ⟨hval k hk, (hval k hk) ▸ (hall k hk).1⟩, h9, h10, W, M, hWb, hsol, huniq,
+    fun k hk => ⟨(hall k hk).2.1, (hall k hk).2.2⟩, fun k hk => ?_⟩
+  have hkK : k ∈ K := Ioo_subset_Ioc_self hk
+  have hopt := ((hall k hkK).2.2 (h k) ⟨(hhK k hkK).1.le, by
+    have := hc k hkK; simp only; linarith⟩).2 rfl
+  have e : f k + (1 - θ) * (k - k) * deriv f k - h k = f k - h k := by ring
+  obtain ⟨h5, -⟩ := eq_18_1_4_5 hβ0.le hβ1 hθ P.U_strictConcave.concaveOn hUb hhK hf' hw hWb hsol
+    hk.1 hkK (hint k hkK).1 (by rw [e]; exact sub_pos.2 (hint k hkK).2) hopt
+    (by rw [e]; exact hUdK k hkK)
+  rw [(h10 k hk).deriv]
+  rw [e] at h5
+  convert h5 using 1
+  ring
+
+end StokeyLucasPrescott.EquilibriaWithDistortions
+
+/-
+Copyright (c) 2026 Robert Kirkby. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Robert Kirkby
+-/
+
+/-!
+# An economy satisfying `InteriorHyp`
+
+SLP §18.1, pp. 543–546 (the economy is not in the book). `U(c) = 1 − e^{−√c}` (`inadaU`) and
+`f(k) = √k` on `K = [0, 1]` satisfy every hypothesis of `ex_18_1_interior` and
+`indirect_equilibrium_interior`, so those hypotheses are consistent.
+
+* `inadaU_strictConcaveOn`, `inadaU_monotoneOn`, `abs_inadaU_le`, `differentiableAt_inadaU`:
+  `U` is strictly concave, nondecreasing and bounded on `[0, ∞)`, and differentiable on `(0, ∞)`.
+* `inadaU_inada`: `(U(c) − U(0))/c → ∞` as `c → 0+`.
+* `inadaU_not_differentiableAt_zero`: `U` is not differentiable at `0`, so the economy is outside
+  `plannerHyp_of_differentiable`, `ex_18_1_constructed` and `indirect_equilibrium_constructed`.
+* `inada_interiorHyp`: `InteriorHyp inadaU √ b 1` for every `b ∈ (0, 1)`.
+* `inada_example_interior`, `inada_example_ex_18_1`, `inada_example_equilibrium`: the constructed
+  policies are interior on `(0, 1]`; Exercise 18.1 and the recursive competitive equilibrium of
+  the taxed economy hold there.
+-/
+
+namespace StokeyLucasPrescott.EquilibriaWithDistortions
+
+open Filter Topology Set
+
+/-- The utility `U(c) = 1 − e^{−√c}`: bounded, strictly concave, with `U′(0+) = ∞`. -/
+noncomputable def inadaU (c : ℝ) : ℝ := 1 - Real.exp (-Real.sqrt c)
+
+/-- `U(0) = 0`. -/
+theorem inadaU_zero : inadaU 0 = 0 := by
+  simp [inadaU]
+
+/-- `U` is continuous. -/
+theorem continuous_inadaU : Continuous inadaU := by
+  unfold inadaU
+  fun_prop
+
+/-- `U` is nondecreasing on `[0, ∞)`. -/
+theorem inadaU_monotoneOn : MonotoneOn inadaU (Ici 0) := fun c _ d _ h => by
+  have h1 := Real.exp_le_exp.2 (neg_le_neg (Real.sqrt_le_sqrt h))
+  simp only [inadaU]
+  linarith
+
+/-- `U` is strictly concave on `[0, ∞)`: `s ↦ 1 − e^{−s}` is concave and strictly increasing, and
+`√` is strictly concave. -/
+theorem inadaU_strictConcaveOn : StrictConcaveOn ℝ (Ici 0) inadaU := by
+  have himg : Real.sqrt '' Ici 0 = Ici 0 := by
+    ext y
+    constructor
+    · rintro ⟨x, -, rfl⟩
+      exact Real.sqrt_nonneg x
+    · intro hy
+      exact ⟨y ^ 2, sq_nonneg y, Real.sqrt_sq hy⟩
+  have hg : ConcaveOn ℝ (Real.sqrt '' Ici 0) (fun s : ℝ => 1 - Real.exp (-s)) := by
+    rw [himg]
+    refine ⟨convex_Ici 0, fun x _ y _ a b ha hb hab => ?_⟩
+    have h := convexOn_exp.2 (mem_univ (-x)) (mem_univ (-y)) ha hb hab
+    simp only [smul_eq_mul] at h ⊢
+    have e : -(a * x + b * y) = a * -x + b * -y := by ring
+    rw [e]
+    nlinarith
+  have hg' : StrictMonoOn (fun s : ℝ => 1 - Real.exp (-s)) (Real.sqrt '' Ici 0) :=
+    fun x _ y _ h => by
+      have := Real.exp_lt_exp.2 (neg_lt_neg h)
+      simp only
+      linarith
+  exact hg.comp_strictConcaveOn Real.strictConcaveOn_sqrt hg'
+
+/-- `0 ≤ U < 1` (on all of `ℝ`, since `√c = 0` for `c < 0`), so `|U| ≤ 1`. -/
+theorem abs_inadaU_le (c : ℝ) : |inadaU c| ≤ 1 := by
+  have h1 : Real.exp (-Real.sqrt c) ≤ 1 :=
+    Real.exp_le_one_iff.2 (neg_nonpos.2 (Real.sqrt_nonneg c))
+  have h2 := Real.exp_pos (-Real.sqrt c)
+  have h0 : 0 ≤ inadaU c := by simp only [inadaU]; linarith
+  rw [abs_of_nonneg h0]
+  simp only [inadaU]
+  linarith
+
+/-- `U` is differentiable on `(0, ∞)`. -/
+theorem differentiableAt_inadaU {c : ℝ} (hc : 0 < c) : DifferentiableAt ℝ inadaU c :=
+  ((Real.hasDerivAt_sqrt hc.ne').differentiableAt.neg.exp).const_sub 1
+
+/-- **The Inada condition** `(U(c) − U(0))/c → ∞` as `c → 0+`: with `s = √c ≤ 1`,
+`1 − e^{−s} ≥ s/(1 + s) ≥ s/2`, so the quotient is at least `1/(2s)`. -/
+theorem inadaU_inada : Tendsto (fun c => (inadaU c - inadaU 0) / c) (𝓝[>] 0) atTop := by
+  rw [inadaU_zero]
+  refine tendsto_atTop.2 fun L => ?_
+  set L' := max L 1 with hL'
+  have hL'0 : 0 < L' := lt_of_lt_of_le zero_lt_one (le_max_right _ _)
+  have hδ : (0 : ℝ) < min 1 ((1 / (2 * L')) ^ 2) := lt_min zero_lt_one (by positivity)
+  filter_upwards [Ioo_mem_nhdsGT hδ] with c hc
+  have hc0 : 0 < c := hc.1
+  set s := Real.sqrt c with hs
+  have hs0 : 0 < s := Real.sqrt_pos.2 hc0
+  have hs1 : s < 1 := (Real.sqrt_lt' zero_lt_one).2 (by
+    have := hc.2.trans_le (min_le_left _ _); linarith)
+  have hs2 : s < 1 / (2 * L') := (Real.sqrt_lt' (by positivity)).2
+    (hc.2.trans_le (min_le_right _ _))
+  have hsc : s ^ 2 = c := Real.sq_sqrt hc0.le
+  have hexp : Real.exp (-s) * (1 + s) ≤ 1 := by
+    have h1 := Real.add_one_le_exp s
+    have h2 := Real.exp_pos (-s)
+    have h3 : Real.exp (-s) * Real.exp s = 1 := by
+      rw [← Real.exp_add, neg_add_cancel, Real.exp_zero]
+    nlinarith
+  have hE1 : Real.exp (-s) ≤ 1 := Real.exp_le_one_iff.2 (by linarith)
+  have hhalf : s / 2 ≤ 1 - Real.exp (-s) := by nlinarith
+  have h2Ls : 2 * L' * s < 1 := by
+    rw [lt_div_iff₀ (by positivity)] at hs2
+    linarith
+  rw [sub_zero, le_div_iff₀ hc0]
+  have hLL : L * c ≤ L' * c := mul_le_mul_of_nonneg_right (le_max_left _ _) hc0.le
+  simp only [inadaU]
+  rw [← hs]
+  nlinarith
+
+/-- **`U` is not differentiable at `0`**: a derivative there would be the finite limit of the
+quotients of `inadaU_inada`. So `U` violates the hypotheses of `plannerHyp_of_differentiable`,
+`ex_18_1_constructed` and `indirect_equilibrium_constructed`. -/
+theorem inadaU_not_differentiableAt_zero : ¬ DifferentiableAt ℝ inadaU 0 := by
+  intro hd
+  have h := hasDerivAt_iff_tendsto_slope.1 hd.hasDerivAt
+  have h' : Tendsto (slope inadaU 0) (𝓝[>] 0) (𝓝 (deriv inadaU 0)) :=
+    h.mono_left (nhdsWithin_mono _ fun x hx => ne_of_gt (mem_Ioi.1 hx))
+  have hI : Tendsto (slope inadaU 0) (𝓝[>] 0) atTop := by
+    refine inadaU_inada.congr fun c => ?_
+    rw [slope_def_field, sub_zero]
+  exact not_tendsto_nhds_of_tendsto_atTop hI _ h'
+
+/-- **The example satisfies `InteriorHyp`**: for `b ∈ (0, 1)`, `U(c) = 1 − e^{−√c}`,
+`f(k) = √k` and `k̄ = 1`. -/
+theorem inada_interiorHyp {b : ℝ} (hb0 : 0 < b) (hb1 : b < 1) :
+    InteriorHyp inadaU Real.sqrt b 1 where
+  planner :=
+    { b_nonneg := hb0.le
+      b_lt_one := hb1
+      kbar_nonneg := zero_le_one
+      U_cont := continuous_inadaU.continuousOn
+      U_mono := inadaU_monotoneOn
+      U_strictConcave := inadaU_strictConcaveOn
+      f_cont := Real.continuous_sqrt.continuousOn
+      f_concave := Real.strictConcaveOn_sqrt.concaveOn.subset Icc_subset_Ici_self (convex_Icc 0 1)
+      f_nonneg := fun k _ => Real.sqrt_nonneg k
+      f_le := fun _ hk => Real.sqrt_le_one.2 hk.2 }
+  b_pos := hb0
+  U_inada := inadaU_inada
+  f_zero := Real.sqrt_zero
+  f_pos := fun _ hk => Real.sqrt_pos.2 hk.1
+
+/-- `f(k) = √k` is differentiable on `(0, 1]` with `f′ ≥ 0` there. -/
+theorem sqrt_deriv_facts : (∀ k ∈ Ioc (0 : ℝ) 1, DifferentiableAt ℝ Real.sqrt k) ∧
+    ∀ k ∈ Ioc (0 : ℝ) 1, 0 ≤ deriv Real.sqrt k :=
+  ⟨fun k hk => (Real.hasDerivAt_sqrt hk.1.ne').differentiableAt, fun k hk => by
+    rw [(Real.hasDerivAt_sqrt hk.1.ne').deriv]
+    positivity⟩
+
+/-- **The constructed policy of the example is interior** on `(0, 1]`:
+`0 < g(k) < √k`. -/
+theorem inada_example_interior {b : ℝ} (hb0 : 0 < b) (hb1 : b < 1) :
+    ∀ k ∈ Ioc (0 : ℝ) 1, 0 < plannerPolicy (inada_interiorHyp hb0 hb1).planner k ∧
+      plannerPolicy (inada_interiorHyp hb0 hb1).planner k < Real.sqrt k :=
+  fun _ hk => (inada_interiorHyp hb0 hb1).policy_interior hk
+
+/-- **Exercise 18.1 in the example** (p. 544): for `β ∈ (0, 1)`, the bounded solution `V` of (2)
+on `[0, ∞) × (0, 1]` exists, `V(k, k; g) = v(k)` and `G(k, k; g) = g(k)` for the constructed `g`,
+which is interior. -/
+theorem inada_example_ex_18_1 {β : ℝ} (hβ0 : 0 < β) (hβ1 : β < 1) :
+    (∀ k ∈ Ioc (0 : ℝ) 1, 0 < plannerPolicy (inada_interiorHyp hβ0 hβ1).planner k ∧
+      plannerPolicy (inada_interiorHyp hβ0 hβ1).planner k < Real.sqrt k) ∧
+    ∃ V : ℝ → ℝ → ℝ, ∃ M, (∀ x, 0 ≤ x → ∀ k ∈ Ioc (0 : ℝ) 1, |V x k| ≤ M) ∧
+      SolvesBellman inadaU (fun k => Real.sqrt k - k * deriv Real.sqrt k) (deriv Real.sqrt)
+        (plannerPolicy (inada_interiorHyp hβ0 hβ1).planner) V β (Ioc 0 1) ∧
+      ∀ k ∈ Ioc (0 : ℝ) 1, V k k = plannerValue (inada_interiorHyp hβ0 hβ1).planner k ∧
+        ∀ y ∈ feasY (fun k => Real.sqrt k - k * deriv Real.sqrt k) (deriv Real.sqrt) k k,
+          (inadaU (Real.sqrt k + (k - k) * deriv Real.sqrt k - y) +
+            β * V y (plannerPolicy (inada_interiorHyp hβ0 hβ1).planner k) = V k k ↔
+              y = plannerPolicy (inada_interiorHyp hβ0 hβ1).planner k) := by
+  obtain ⟨hint, -, -, -, -, V, M, hVb, hsol, -, hall, -⟩ := ex_18_1_interior
+    (inada_interiorHyp hβ0 hβ1) (fun c hc => differentiableAt_inadaU hc)
+    (fun c _ => abs_inadaU_le c) Real.strictConcaveOn_sqrt.concaveOn sqrt_deriv_facts.1
+    sqrt_deriv_facts.2
+  exact ⟨hint, V, M, hVb, hsol, fun k hk => ⟨(hall k hk).1, (hall k hk).2.2⟩⟩
+
+/-- **The indirect equilibrium in the example** (p. 546): for `β ∈ (0, 1)` and `θ ∈ [0, 1)`, the
+pseudo-planner's policy `ĥ` (discount factor `(1 − θ)β`) is interior on `(0, 1]`, and it is a
+recursive competitive equilibrium of the taxed economy: the bounded solution `W` of (3) with
+`h = ĥ` has `H(k, k; ĥ) = ĥ(k)` for `k ∈ (0, 1]`. -/
+theorem inada_example_equilibrium {β θ : ℝ} (hβ0 : 0 < β) (hβ1 : β < 1) (hθ0 : 0 ≤ θ)
+    (hθ1 : θ < 1) :
+    ∃ I : InteriorHyp inadaU Real.sqrt ((1 - θ) * β) 1,
+      (∀ k ∈ Ioc (0 : ℝ) 1, 0 < plannerPolicy I.planner k ∧
+        plannerPolicy I.planner k < Real.sqrt k) ∧
+      ∃ W : ℝ → ℝ → ℝ, ∃ M, (∀ x, 0 ≤ x → ∀ k ∈ Ioc (0 : ℝ) 1, |W x k| ≤ M) ∧
+        SolvesBellman inadaU (fun k => Real.sqrt k - (1 - θ) * k * deriv Real.sqrt k)
+          (fun k => (1 - θ) * deriv Real.sqrt k) (plannerPolicy I.planner) W β (Ioc 0 1) ∧
+        ∀ k ∈ Ioc (0 : ℝ) 1, ∀ y ∈ feasY (fun k => Real.sqrt k - (1 - θ) * k * deriv Real.sqrt k)
+            (fun k => (1 - θ) * deriv Real.sqrt k) k k,
+          (inadaU (Real.sqrt k + (1 - θ) * (k - k) * deriv Real.sqrt k - y) +
+            β * W y (plannerPolicy I.planner k) = W k k ↔ y = plannerPolicy I.planner k) := by
+  have hb0 : 0 < (1 - θ) * β := mul_pos (by linarith) hβ0
+  have hb1 : (1 - θ) * β < 1 := by nlinarith
+  have I := inada_interiorHyp hb0 hb1
+  obtain ⟨hint, -, -, -, -, -, W, M, hWb, hsol, -, hall, -⟩ := indirect_equilibrium_interior I
+    hβ1 hθ0 hθ1 (fun c hc => differentiableAt_inadaU hc) (fun c _ => abs_inadaU_le c)
+    Real.strictConcaveOn_sqrt.concaveOn sqrt_deriv_facts.1 sqrt_deriv_facts.2
+  exact ⟨I, hint, W, M, hWb, hsol, fun k hk => (hall k hk).2⟩
 
 end StokeyLucasPrescott.EquilibriaWithDistortions
 
@@ -11207,6 +12345,47 @@ set_option linter.style.longLine false
 #print axioms StokeyLucasPrescott.EquilibriaWithDistortions.PlannerHyp.planner_euler_tvc
 #print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ex_18_1_constructed
 #print axioms StokeyLucasPrescott.EquilibriaWithDistortions.indirect_equilibrium_constructed
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.dp_diagonal_pathwise
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ex_18_1_dp_pathwise
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.indirect_equilibrium_dp_pathwise
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.planner_optimal_pathwise
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ex_18_1_full_pathwise
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.indirect_equilibrium_full_pathwise
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.inada_exists_delta
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.PlannerHyp.plannerPolicy_lt_of_inada
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.PlannerHyp.plannerPolicy_zero
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.PlannerHyp.plannerPolicy_pos_of_inada
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.PlannerHyp.deriv_U_nonneg
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.InteriorHyp
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.InteriorHyp.mk
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.InteriorHyp.planner
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.InteriorHyp.b_pos
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.InteriorHyp.U_inada
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.InteriorHyp.f_zero
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.InteriorHyp.f_pos
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.InteriorHyp.policy_interior
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.InteriorHyp.policy_mem_Ioo
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.InteriorHyp.policy_mapsTo
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.InteriorHyp.not_interior_zero
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.InteriorHyp.planner_euler_interior
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.InteriorHyp.tvc_bound
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.InteriorHyp.planner_tvc
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.ex_18_1_interior
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.indirect_equilibrium_interior
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.inadaU
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.inadaU_zero
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.continuous_inadaU
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.inadaU_monotoneOn
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.inadaU_strictConcaveOn
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.abs_inadaU_le
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.differentiableAt_inadaU
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.inadaU_inada
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.inadaU_not_differentiableAt_zero
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.inada_interiorHyp
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.sqrt_deriv_facts
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.inada_example_interior
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.inada_example_ex_18_1
+#print axioms StokeyLucasPrescott.EquilibriaWithDistortions.inada_example_equilibrium
 #print axioms StokeyLucasPrescott.EquilibriaWithDistortions.psi
 #print axioms StokeyLucasPrescott.EquilibriaWithDistortions.Feq
 #print axioms StokeyLucasPrescott.EquilibriaWithDistortions.Assumption18_1

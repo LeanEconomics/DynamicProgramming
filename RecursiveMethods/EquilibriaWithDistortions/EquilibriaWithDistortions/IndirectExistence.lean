@@ -36,9 +36,12 @@ concave on `K` with `0 ≤ f ≤ k̄` there, so that `[0, f(k)] ⊆ K`).
 * `planner_euler`: if `0 < g(k) < f(k)` and `g(g(k)) < f(g(k))`, the Euler equation
   `U′[f(k) − g(k)] = b f′(g(k)) U′[f(g(k)) − g(g(k))]` holds.
 
-Interiority of the policy is a hypothesis, as in SLP Theorem 4.11. With `U` differentiable on
-`[0, ∞)` (which the book's Assumption 18.1 requires), `U′(0)` is finite, so the usual Inada
-argument for interiority is not available.
+Interiority of the policy is a hypothesis here, as in SLP Theorem 4.11. With `U` differentiable
+on `[0, ∞)` (which the book's Assumption 18.1 requires), `U′(0)` is finite, so the usual Inada
+argument for interiority is not available. `PlannerHyp` asks only that `U` be continuous on
+`[0, ∞)`, which allows `U′(0+) = ∞`; under that Inada condition, `b > 0`, `f(0) = 0` and `f > 0`
+on `(0, k̄]` (`InteriorHyp`), `IndirectInterior` proves `0 < g(k) < f(k)` on `(0, k̄]`
+(`InteriorHyp.policy_interior`), and `k = 0` is degenerate (`InteriorHyp.not_interior_zero`).
 -/
 
 namespace StokeyLucasPrescott.EquilibriaWithDistortions

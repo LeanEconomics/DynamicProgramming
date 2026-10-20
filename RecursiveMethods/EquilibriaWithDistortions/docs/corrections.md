@@ -108,13 +108,16 @@ of inconsistency. The last section lists what is not proved.
 * **A model with `f″(k*) = 0`.** Only the algebraic consequence `P(1) = 0` is proved
   (`charPoly_degenerate_f`). The case `U″(c*) = 0` has a model satisfying Assumption 18.1
   (`note_18_2B_model_counterexample`).
-* **Interiority of the constructed planner policies.** `v`, `g` (Exercise 18.1) and `w`, `ĥ`
-  (8)–(10) are constructed for bounded `U` on `K = [0, k̄]` (`ex_18_1_constructed`,
-  `indirect_equilibrium_constructed`), but `0 < g(k) < f(k)` on `K` is assumed, as in SLP
-  Theorem 4.11. With `U` differentiable on `[0, ∞)`, `U′(0)` is finite and the Inada argument is
-  unavailable; no primitive sufficient condition is proved. These corollaries also assume `U′`
-  and `f′` continuous on `[0, k̄]`. Uniqueness of the bounded solution of (1) and (8) is not
-  proved; only the constructed fixed point is studied.
+* **Interiority without an Inada condition.** Under `U′(0+) = ∞` (with `U` bounded and
+  continuous on `[0, ∞)`) and `f(0) = 0 < f` on `(0, k̄]`, the constructed policies are interior
+  on `(0, k̄]` (`InteriorHyp.policy_interior`), and Exercise 18.1 and the equilibrium (8)–(10)
+  hold with no interiority or smoothness assumption on `U′`, `f′` (`ex_18_1_interior`,
+  `indirect_equilibrium_interior`; an example is `inada_interiorHyp`). Interiority at `k = 0` is
+  impossible there (`InteriorHyp.not_interior_zero`). When `f(0) > 0` or `U′(0) < ∞`, the
+  earlier corollaries (`ex_18_1_constructed`, `indirect_equilibrium_constructed`) still assume
+  `0 < g(k) < f(k)` on `K` and `U′`, `f′` continuous on `[0, k̄]`; no primitive condition is
+  proved. Uniqueness of the bounded solution of (1) and (8) is not proved; only the constructed
+  fixed point is studied.
 * **Unbounded utility in the functional equations.** The dynamic-programming results of §18.1
   (`bellman_isLUB`, `exists_bellman_solution`, `ex_18_1_dp`, `ex_18_1_full`,
   `indirect_equilibrium_dp`, `indirect_equilibrium_full`) assume `U` bounded on `[0, ∞)`. The

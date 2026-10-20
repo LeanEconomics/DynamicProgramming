@@ -26,8 +26,8 @@ operator is not well defined); and the claim that Schauder's theorem gives a sto
 solutions manual are also wrong; the results they support are true and are proved. Two things are
 left open: a non-degenerate stochastic equilibrium when the technologies differ across states, and
 a fixed point in the continuum-of-shocks setting of Exercise 18.9. The bibliographic notes (§18.4)
-are not formalised. See [corrections](docs/corrections.md). The library contains **461 theorems**.
-Of these, 423 are in the Chapter 18 modules and 38 in the fixed-point theorems carried
+are not formalised. See [corrections](docs/corrections.md). The library contains **494 theorems**.
+Of these, 456 are in the Chapter 18 modules and 38 in the fixed-point theorems carried
 from Chapter 17.
 
 * **The indirect approach** (§18.1). Sufficiency of the Euler equation and the transversality
@@ -36,9 +36,9 @@ from Chapter 17.
   bounded solution of the functional equation (2), which exists and is unique by a contraction on
   `ℓ∞`. The budget with a rebated tax and (3); the pseudo-economy (8)–(10) solves (6)–(7) and gives
   an equilibrium once the individual's transversality condition holds. The planner's `v`, `g` and
-  the pseudo-planner's `w`, `ĥ` are constructed for bounded `U` (assuming interior policies), and
-  the first-order and envelope conditions (4)–(7) are derived from (3). Exercise 18.2, with the
-  condition `α + θ < 1` and both readings of the two taxes.
+  the pseudo-planner's `w`, `ĥ` are constructed for bounded `U`, and proved interior on `(0, k̄]`
+  when `U′(0+) = ∞` and `f(0) = 0`; the first-order and envelope conditions (4)–(7) are derived
+  from (3). Exercise 18.2, with the condition `α + θ < 1` and both readings of the two taxes.
 * **The local approach: set-up** (§18.2). Assumption 18.1 and its consequences; the unique `k*`
   of (5); Proposition 18.1, by Brouwer's theorem; `F` of (3) and its partial derivatives
   (6a)–(6c); the characteristic polynomial `P` with roots `λ* ∈ (0, 1)` and `λ₂ > 1`, under the
@@ -77,6 +77,9 @@ All names are in the namespace `StokeyLucasPrescott.EquilibriaWithDistortions`. 
 | [IndirectEnvelope](EquilibriaWithDistortions/IndirectEnvelope.lean) | 10 | First-order and envelope conditions (4)–(7) from (3) |
 | [IndirectExistence](EquilibriaWithDistortions/IndirectExistence.lean) | 27 | Existence of `v` and `g` in (1): value, policy, (9)–(10), Euler equation |
 | [IndirectExistenceEquilibrium](EquilibriaWithDistortions/IndirectExistenceEquilibrium.lean) | 4 | Exercise 18.1 and the equilibrium (8)–(10) with constructed policies |
+| [IndirectInteriorDP](EquilibriaWithDistortions/IndirectInteriorDP.lean) | 6 | (2)–(3) and the planner's problem with `U′` used only along the path |
+| [IndirectInterior](EquilibriaWithDistortions/IndirectInterior.lean) | 14 | Interior policies under `U′(0+) = ∞`, `f(0) = 0`; Exercise 18.1 and (8)–(10) without interiority |
+| [IndirectInteriorExample](EquilibriaWithDistortions/IndirectInteriorExample.lean) | 13 | `U = 1 − e^{−√c}`, `f = √k`: an economy satisfying them |
 | [LocalApproach](EquilibriaWithDistortions/LocalApproach.lean) | 48 | Assumption 18.1, (3)–(6), Proposition 18.1, `P(λ)` and `λ*` |
 | [LocalImplicit](EquilibriaWithDistortions/LocalImplicit.lean) | 13 | §18.2 (7): the local solution `H` |
 | [LocalSmooth](EquilibriaWithDistortions/LocalSmooth.lean) | 21 | `H` is `C¹`; `g′(k*) = λ*` |
