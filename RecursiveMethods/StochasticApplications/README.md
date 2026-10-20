@@ -6,19 +6,15 @@ Chapter 10 of Stokey and Lucas with Prescott, *Recursive Methods in Economic Dyn
 the commands below from this directory. [Return to the library index](../../README.md).
 
 Chapter 10 applies the stochastic dynamic programming of Chapter 9 to ten economic models. The
-exercises with a mathematical claim are formalised, with these exceptions:
-
-* 10.2c.
-
-The claims that rest on first-order conditions (10.4d–f, 10.5d, and the strict parts of 10.5e
+exercises with a mathematical claim are formalised. The claims that rest on first-order conditions (10.4d–f, 10.5d, and the strict parts of 10.5e
 and 10.5g) are proved with differentiability hypotheses; the slope claim of 10.4d, the strict
 claim of 10.4e and the claim on `N` in 10.5g are false (Lean counterexamples) and corrected.
 
 Exercises that ask only for a formulation or an interpretation are also not formalised: 10.4a,
 the sequence form in 10.5b, 10.6f–g, 10.7i, 10.8d, 10.9, 10.10i and 10.11.
 
-Twelve claims or arguments are corrected, nine of them with Lean counterexamples; see
-[corrections](docs/corrections.md). The library contains **609 theorems**, of which 370 are in the
+Thirteen claims or arguments are corrected, ten of them with Lean counterexamples; see
+[corrections](docs/corrections.md). The library contains **625 theorems**, of which 386 are in the
 Chapter 10 modules. The others are the Chapter 9 machinery that Chapter 10 uses, carried from
 `RecursiveMethods/StochasticDP`.
 
@@ -30,7 +26,9 @@ Chapter 10 modules. The others are the Chapter 9 machinery that Chapter 10 uses,
   * **The policy need not be strictly increasing.** A Lean counterexample saves nothing at low
     output.
   * Two capital goods (10.2), reduced to the one-sector model (10.2d). **With weakly concave `f`,
-    `v` is not strictly concave and the policy is not unique** (Lean counterexample).
+    `v` is not strictly concave and the policy is not unique** (Lean counterexample). Under
+    complementarity the policy is nondecreasing in both stocks and the shock (10.2c), but not
+    strictly (Lean counterexample).
   * Many goods (10.3). **The book's strict conclusions fail** (Lean counterexample).
 * **Industry investment** (§10.4).
   * Returns are unbounded below, and the book's restricted constraint set violates
@@ -95,6 +93,7 @@ All names are in the namespace `StokeyLucasPrescott.StochasticApplications`. See
 | [GrowthPolicy](StochasticApplications/GrowthPolicy.lean) | 22 | Exercise 10.1d–f (corrected) |
 | [TwoCapital](StochasticApplications/TwoCapital.lean) | 25 | Exercise 10.2a–b (corrected) |
 | [TwoCapitalReduction](StochasticApplications/TwoCapitalReduction.lean) | 10 | Exercise 10.2d |
+| [TwoCapitalComplements](StochasticApplications/TwoCapitalComplements.lean) | 16 | Exercise 10.2c: monotone policy under complementarity; a counterexample to strictness |
 | [ManyGoods](StochasticApplications/ManyGoods.lean) | 15 | Exercise 10.3 (corrected) |
 | [BetaPosterior](StochasticApplications/BetaPosterior.lean) | 13 | Exercise 10.10a–e |
 | [AssetPricing](StochasticApplications/AssetPricing.lean) | 13 | Exercise 10.6e |

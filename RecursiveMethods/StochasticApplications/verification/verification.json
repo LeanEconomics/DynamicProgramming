@@ -1,6 +1,6 @@
 {
-  "checked_at_utc": "2026-10-20T21:32:14.678066+00:00",
-  "theorems": 609,
+  "checked_at_utc": "2026-10-20T22:28:23.118487+00:00",
+  "theorems": 625,
   "module_theorems": {
     "StochasticApplications/TransitionFunctions.lean": 19,
     "StochasticApplications/StochasticKernels.lean": 11,
@@ -43,9 +43,10 @@
     "StochasticApplications/InventoryResults.lean": 16,
     "StochasticApplications/InventoryPolicy.lean": 6,
     "StochasticApplications/InventoryFOC.lean": 24,
-    "StochasticApplications/InventoryCounterexample.lean": 12
+    "StochasticApplications/InventoryCounterexample.lean": 12,
+    "StochasticApplications/TwoCapitalComplements.lean": 16
   },
-  "audited_declarations": 905,
+  "audited_declarations": 924,
   "declarations": [
     {
       "name": "StokeyLucasPrescott.StochasticApplications.IsTransitionFunction",
@@ -4571,6 +4572,101 @@
       "name": "StokeyLucasPrescott.StochasticApplications.ex_10_5g_steep",
       "kind": "theorem",
       "module": "StochasticApplications/InventoryCounterexample.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.TwoComplementsDeriv",
+      "kind": "def",
+      "module": "StochasticApplications/TwoCapitalComplements.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.TwoComplements",
+      "kind": "def",
+      "module": "StochasticApplications/TwoCapitalComplements.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.twoComplements_of_deriv",
+      "kind": "theorem",
+      "module": "StochasticApplications/TwoCapitalComplements.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.twoSepF",
+      "kind": "def",
+      "module": "StochasticApplications/TwoCapitalComplements.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.twoSepF_hyp",
+      "kind": "theorem",
+      "module": "StochasticApplications/TwoCapitalComplements.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.twoSepF_strictConcave",
+      "kind": "theorem",
+      "module": "StochasticApplications/TwoCapitalComplements.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.contDiff_twoSepF",
+      "kind": "theorem",
+      "module": "StochasticApplications/TwoCapitalComplements.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.contDiff_cexU",
+      "kind": "theorem",
+      "module": "StochasticApplications/TwoCapitalComplements.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.twoSepF_complementsDeriv",
+      "kind": "theorem",
+      "module": "StochasticApplications/TwoCapitalComplements.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.twoSepF_complements",
+      "kind": "theorem",
+      "module": "StochasticApplications/TwoCapitalComplements.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.twoSepF_le",
+      "kind": "theorem",
+      "module": "StochasticApplications/TwoCapitalComplements.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.twoSep_lipschitz",
+      "kind": "theorem",
+      "module": "StochasticApplications/TwoCapitalComplements.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.ex_10_2c_counterexample",
+      "kind": "theorem",
+      "module": "StochasticApplications/TwoCapitalComplements.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.ex_10_2c_not_strictMono",
+      "kind": "theorem",
+      "module": "StochasticApplications/TwoCapitalComplements.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.strictConcave_increment",
+      "kind": "theorem",
+      "module": "StochasticApplications/TwoCapitalComplements.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.strictConcaveOn_snd_section",
+      "kind": "theorem",
+      "module": "StochasticApplications/TwoCapitalComplements.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.strictConcaveOn_fst_section",
+      "kind": "theorem",
+      "module": "StochasticApplications/TwoCapitalComplements.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.ex_10_2c",
+      "kind": "theorem",
+      "module": "StochasticApplications/TwoCapitalComplements.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.StochasticApplications.ex_10_2c_monotone",
+      "kind": "theorem",
+      "module": "StochasticApplications/TwoCapitalComplements.lean"
     }
   ],
   "full_build": "passed",
@@ -9041,6 +9137,101 @@
       "propext",
       "Classical.choice",
       "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.TwoComplementsDeriv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.TwoComplements": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.twoComplements_of_deriv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.twoSepF": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.twoSepF_hyp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.twoSepF_strictConcave": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.contDiff_twoSepF": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.contDiff_cexU": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.twoSepF_complementsDeriv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.twoSepF_complements": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.twoSepF_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.twoSep_lipschitz": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.ex_10_2c_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.ex_10_2c_not_strictMono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.strictConcave_increment": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.strictConcaveOn_snd_section": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.strictConcaveOn_fst_section": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.ex_10_2c": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.StochasticApplications.ex_10_2c_monotone": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
     ]
   },
   "source_sha256": {
@@ -9086,15 +9277,16 @@
     "StochasticApplications/InventoryPolicy.lean": "4a21069a8ee64bd14fd6caec114d215c38ae60f33dc11ee3bfc13f48238126ec",
     "StochasticApplications/InventoryFOC.lean": "c90225f919c284cc4c07bf25403899e057350890cc46a73d726c921ceae7ef78",
     "StochasticApplications/InventoryCounterexample.lean": "0026dd28b71dd2de67724946b52710fb8b7da81a3c43ef279a5899dbd459f0a3",
-    "StochasticApplications.lean": "d292a1ffbb42fd857a8ae5758112b2eecc0327cc785a86b4cc76a0248dc94c1e",
+    "StochasticApplications/TwoCapitalComplements.lean": "bb93e045c35c42addd6a82ecf562bc4b8c2f83fb151bb5c3f780c64214f8850d",
+    "StochasticApplications.lean": "9c6cb683c9ea114ae9db3088c73ee8ac34d8b94733252788c272a7af1d2145a0",
     "lean-toolchain": "8733782dc070a99b312039cda424f601b80f3be6f6f512627da5ba25adc27632",
     "lakefile.toml": "1e46fa759c32ebff26e435075f0ee14d59e7db7c526572b1b050e45bccc9c216",
     "lake-manifest.json": "69aa6c61e6d60057818d72761ce332073f6abf4f1bfe7eaa68942991cbb849c3",
-    "proof-manifest.json": "f2ec704806bf36cdbe77a4b46e43aa67bae2ca8b59800b25a1c5d556b27bcbed",
+    "proof-manifest.json": "bd11a6dbbcd4ef078bdcbe1d3033c3d777d06b00970fdd86d5c801e266cbd3ed",
     "scripts/verify.py": "a70b1fa704dd590f937f8b37682afa88a9d85a9150065acb935c7d2c9589da3b",
     "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
   },
-  "fresh_audit_sha256": "079f3a02a3584194d63077f6285a24b444f689b428bcecaf35ba8def71dba3bb",
+  "fresh_audit_sha256": "baed2691c811bdabdb46cce31a97a75b31e4fed4abfbe60ad07d49fcf62b9551",
   "lean_toolchain": "leanprover/lean4:v4.34.0",
   "scope": "SLP Chapter 10 (Applications of Stochastic Dynamic Programming): exercises 10.1-10.11, with corrections.",
   "source": "Stokey, Lucas and Prescott (1989), Recursive Methods in Economic Dynamics, Chapter 10"

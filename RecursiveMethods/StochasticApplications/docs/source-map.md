@@ -28,7 +28,7 @@ covers them.
 | p. 290 | The model | `twoX`, `TwoHyp`, `twoΓ`, `twoF`, `twoModel`, `two_boundedDP` |
 | Ex 10.2a, p. 290 | The sustainable stocks form a compact set | `ex_10_2a` |
 | Ex 10.2b, p. 290 | Unique `v`, strictly increasing, strictly concave, differentiable; `g` continuous (corrected) | `two_strictMono`, `ex_10_2b`, `ex_10_2b_diff`, `ex_10_2b_counterexample` |
-| Ex 10.2c, p. 290 | `g` strictly increasing under complementarity | Not formalised |
+| Ex 10.2c, p. 290 | `g` strictly increasing under complementarity | `TwoComplementsDeriv`, `TwoComplements`, `twoComplements_of_deriv`, `ex_10_2c`, `ex_10_2c_monotone`; not strictly: `twoSep_lipschitz`, `ex_10_2c_counterexample`, `ex_10_2c_not_strictMono` |
 | Ex 10.2d, p. 290 | Reduction to one endogenous state | `twoφ`, `continuous_twoφ`, `twoφ_attain`, `twoφ_hyp`, `twoφ_concave`, `ex_10_2d` |
 
 ## §10.3 Optimal growth with many goods
