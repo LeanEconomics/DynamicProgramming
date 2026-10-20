@@ -13,3 +13,4 @@ import ParetoOptimaEquilibria.SequenceTailUtility
 import ParetoOptimaEquilibria.WelfareExamples
 import ParetoOptimaEquilibria.Welfare
 import ParetoOptimaEquilibria.WelfareSecond
+import ParetoOptimaEquilibria.DualLpSigmaFinite

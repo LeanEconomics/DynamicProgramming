@@ -15,23 +15,23 @@ which the regular part of a price, `ψ(x) = lim_T φ(xᵀ)` on sequences or `ψ(
 Every numbered result, assumption and exercise is formalised. That includes the results the book
 states without proof: Theorem 15.2 (Hahn–Banach), the duals `ℓ_p* = ℓ_q` and `L_p* = L_q` of
 Examples 2 and 4, and Lemma 15.7, which is proved directly instead of from the Yosida–Hewitt
-decomposition. One of these is covered only in part: `L_p* = L_q` for `1 < p < ∞` is proved for
-finite measures, not for σ-finite measures of infinite mass. The case `p = 1` is proved for every
-σ-finite measure, and it is false without σ-finiteness. Several claims are false as stated: Theorem
+decomposition. `L_p* = L_q` for `1 < p < ∞` is proved for every measure, and the case `p = 1` for
+every σ-finite measure; it is false without σ-finiteness. Several claims are false as stated: Theorem
 15.2 (it needs `A ≠ ∅`), `L₁* = L∞` for an arbitrary measure, the p. 458 claim that competitive
 equilibria and Pareto optima coincide under Assumptions 15.1–15.5, and four exercise parts
 (15.10b, 15.10c, 15.11b and 15.12). Each has a Lean counterexample and a corrected statement that
 is proved. The one-person economy of Figures 15.1–15.2 is a heuristic and is not formalised,
 except for the p. 444 remark on concavity. The bibliographic notes (§15.5) are not formalised. See
-[corrections](docs/corrections.md). The library contains **347 theorems**.
+[corrections](docs/corrections.md). The library contains **371 theorems**.
 
 * **Dual spaces** (§15.1). Theorem 15.1, with the book's sequential continuity; the dual norm
   (1); Exercise 15.1 (`S*` is complete). The duals of `ℝⁿ` (Example 1), `ℓ_p` for `1 < p < ∞`
   (Example 2), `ℓ₂` and `ℓ₁` (Exercise 15.2), `c₀` (Exercise 15.4), and `ℓ₁ ⊆ ℓ∞*` (Exercise
   15.3), each as an isometric isomorphism `y ↦ (x ↦ Σ yᵢ xᵢ)`.
 * **`L_p` duals** (§15.1, Example 4). `L₁* = L∞` for σ-finite `μ`, by Riesz representation in
-  `L₂`; `L_p* = L_q` for `1 < p < ∞` and finite `μ`, by Radon–Nikodym and Fatou. Exercise 15.5,
-  and the example `L∞(ℕ, μ) = ℓ∞` on p. 450.
+  `L₂`; `L_p* = L_q` for `1 < p < ∞` and any `μ`: by Radon–Nikodym and Fatou for finite `μ`, a
+  weight for σ-finite `μ`, and σ-finite supports in general. Exercise 15.5, and the example
+  `L∞(ℕ, μ) = ℓ∞` on p. 450.
 * **Hahn–Banach** (§15.1). Theorem 15.2 with the nonemptiness hypotheses it needs, and
   counterexamples to the printed statement. Exercise 15.6: in the space with norm `Σ βᵗ |xₜ|` the
   box `{|xₜ| ≤ 1}` has empty interior, and separation fails for `A = {θ}`.
@@ -66,6 +66,7 @@ All names are in the namespace `StokeyLucasPrescott.ParetoOptimaEquilibria`. See
 | --- | ---: | --- |
 | [DualSpaces](ParetoOptimaEquilibria/DualSpaces.lean) | 84 | Theorems 15.1–15.2, Examples 1–3, Exercises 15.1–15.6, `L₁* = L∞`, p. 444 |
 | [DualLp](ParetoOptimaEquilibria/DualLp.lean) | 22 | Example 4: `L_p* = L_q`, `1 < p < ∞` |
+| [DualLpSigmaFinite](ParetoOptimaEquilibria/DualLpSigmaFinite.lean) | 24 | Example 4 for σ-finite and arbitrary measures |
 | [Economy](ParetoOptimaEquilibria/Economy.lean) | 0 | Feasibility, Pareto optima, competitive equilibria, Assumptions 15.1–15.5 |
 | [Welfare](ParetoOptimaEquilibria/Welfare.lean) | 10 | Theorem 15.3; convexity lemmas for Theorem 15.4 |
 | [WelfareSecond](ParetoOptimaEquilibria/WelfareSecond.lean) | 12 | Theorem 15.4, the Remark, the corrected p. 458 claim |

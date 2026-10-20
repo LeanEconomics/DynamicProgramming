@@ -29,7 +29,8 @@ Proof, for `φ ∈ L_p*`:
   on indicators, which are dense in `L_p`. `pairLqLp_injective` gives injectivity for every
   σ-finite measure.
 
-Not covered: `1 < p < ∞` for σ-finite measures that are not finite.
+σ-finite and arbitrary measures, `1 < p < ∞`: see `DualLpSigmaFinite`
+(`example_15_4_sigmaFinite`, `example_15_4_general`).
 -/
 
 namespace StokeyLucasPrescott.ParetoOptimaEquilibria
