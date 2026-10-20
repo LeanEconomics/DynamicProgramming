@@ -57,6 +57,7 @@ Stokey and Lucas with Prescott, *Recursive Methods in Economic Dynamics* (Harvar
 | Theorem 6.8, p. 151 | The linear-quadratic problem: a unique optimal plan, satisfying (2) and converging | `lqQ`, `lqF`, `lqF_add`, `lqQ_neg`, `exists_lqQ_bound`, `lq_assumption42`, `lq_sufficient`, `lq_unique`, `finrank_stableSubspace`, `hom_euler_eq_zero`, `stable_real_inr_zero`, `exists_stable_start`, `lqBar`, `lqBar_stationary`, `theorem_6_8` |
 | Theorem 6.9, p. 153 | Local stability of the nonlinear problem | `exists_eulerZeta`, `stackH`, `hasStrictFDerivAt_stackH`, `exists_convergent_euler_path`, `total_eq_tsum_of_bdd`, `optimal_unique`, `theorem_6_9` |
 | pp. 154–155 | The growth model: `λ₁ < 1 < β⁻¹ < λ₂` | `growth_roots` |
+| p. 155 | The optimal policy has slope `g′(k*) = λ₁` | `growthC`, `euler_linearization`, `hasDerivAt_of_slope_contraction`, `Setting61.gpol_between`, `Setting61.hasDerivAt_gpol_of_root`, `growth_policy_deriv` |
 
 ## §6.5 Applications (Exercises 6.7–6.10)
 

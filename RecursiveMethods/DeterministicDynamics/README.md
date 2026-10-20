@@ -10,7 +10,7 @@ and local stability through linear approximation. Every numbered result (Proposi
 Theorems 6.1 and 6.3–6.9, Lemmas 6.2 and 6.7) is proved, including Theorems 6.1, 6.5 and 6.6,
 which the book cites without proof. So is every exercise (6.1–6.10), except the open-ended parts
 6.10e–f. The corrections are recorded in [corrections](docs/corrections.md). The library contains
-**598 theorems**; 230 of them are the Chapter 3–5 library, carried over.
+**603 theorems**; 230 of them are the Chapter 3–5 library, carried over.
 
 * **The one-sector growth model** (§6.1).
   * Interior maxima, the Euler equation and `v′(k) = U′(f(k) − g(k))f′(k)` (`ex_6_1a`); `g`
@@ -34,7 +34,8 @@ which the book cites without proof. So is every exercise (6.1–6.10), except th
     strict differentiability at `x̄` is needed, and `A` may be singular.
 * **Euler equations** (§6.4).
   * The linearized Euler system: `A` nonsingular (`ex_6_5`), roots in pairs `λ, (βλ)⁻¹`
-    (`lemma_6_7`), and the scalar case (`ex_6_6`).
+    (`lemma_6_7`), and the scalar case (`ex_6_6`); in the growth model the optimal policy is
+    differentiable at `k*` with `g′(k*) = λ₁`, the stable root (`growth_policy_deriv`).
   * The linear-quadratic problem: a unique optimal plan that converges (`theorem_6_8`), with the
     stable-subspace dimension count and a telescoping argument for the nonsingularity of `B₂₁`.
   * The nonlinear problem (`theorem_6_9`): the Euler map by the inverse function theorem, a point
@@ -95,6 +96,7 @@ The modules `ExtendedReals`, `Principle`, `Assumption42`, `Contraction`, `Corres
 | [LocalStability](DeterministicDynamics/LocalStability.lean) | 4 | Theorem 6.5 |
 | [EulerLinear](DeterministicDynamics/EulerLinear.lean) | 8 | The linearized Euler system, Exercise 6.5, Lemma 6.7 |
 | [EulerScalar](DeterministicDynamics/EulerScalar.lean) | 3 | Exercise 6.6, the growth model's roots |
+| [GrowthPolicyDerivative](DeterministicDynamics/GrowthPolicyDerivative.lean) | 5 | The growth policy's slope `g′(k*) = λ₁` (p. 155) |
 | [CobbDouglas](DeterministicDynamics/CobbDouglas.lean) | 12 | Exercise 6.7b–d |
 | [CobbDouglasConcave](DeterministicDynamics/CobbDouglasConcave.lean) | 4 | Concavity of the Cobb–Douglas return |
 | [TwoCycle](DeterministicDynamics/TwoCycle.lean) | 13 | Exercise 6.7e |
