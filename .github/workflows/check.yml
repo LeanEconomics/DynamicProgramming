@@ -25,16 +25,30 @@ jobs:
           tar xzf elan.tar.gz
           ./elan-init -y --no-modify-path --default-toolchain none
           echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      - name: Install the pinned Lean toolchain
+        run: |
+          for attempt in 1 2 3 4 5; do
+            "$HOME/.elan/bin/elan" toolchain install "$(cat lean-toolchain)" && exit 0
+            echo "toolchain download failed (attempt $attempt), retrying"
+            sleep $((attempt * 20))
+          done
+          exit 1
       - name: Fetch pinned mathematical dependencies
         run: |
           python - <<'PY'
-          import json, subprocess
+          import json, subprocess, time
           from pathlib import Path
           config = json.loads(Path('proof-manifest.json').read_text())
           imports = {line.removeprefix('import ') for name in config['modules']
                      for line in Path(name).read_text().splitlines()
                      if line.startswith('import Mathlib.')}
-          subprocess.run(['lake', 'exe', 'cache', 'get', *sorted(imports)], check=True)
+          for attempt in range(1, 6):
+              if subprocess.run(['lake', 'exe', 'cache', 'get', *sorted(imports)]).returncode == 0:
+                  break
+              print(f'cache download failed (attempt {attempt}), retrying', flush=True)
+              time.sleep(20 * attempt)
+          else:
+              raise SystemExit('lake exe cache get failed five times')
           PY
       - name: Test verification failure paths
         if: ${{ hashFiles(format('{0}/scripts/test_*.py', matrix.project)) != '' }}
