@@ -123,17 +123,13 @@ Exercises 16.2, 16.3e, 16.4, 16.5 and 16.7.
 
 ## Not proved
 
-* **Many consumption goods in §16.2.** Exercise 16.2a–b is proved for one consumption good per
-  period (`M = 1`); the `M`-good version is not.
 * **The plan `γ*` of §10.3.** That `γ*` maximises `u` on `C ∩ Y` (Exercise 10.3b) is a hypothesis
   of Exercise 16.2b (`ex_16_2b`); the §10.3 dynamic program is not reproduced here.
-* **Pricing securities with a general shock space.** Exercise 16.2c is proved for finitely many
-  shocks (`ex_16_2c`) and for a Feller transition on a compact shock space with a continuous
-  return (`ex_16_2c_feller`); a merely measurable return or a non-compact shock space is not
-  covered. Exercise 16.2d (`ex_16_2d`, `ex_16_2d_converse`, `ex_16_2d_equilibrium`), the
-  derivation of (2) (`ex_16_2_eq2`) and the derivation of (3) for Exercise 16.2g (`ex_16_2g`)
-  are for finitely many shocks only. Exercises 16.2e, 16.2f and 16.2h and the martingale
-  property hold for a general measurable shock space but take (2) or (3) as given.
+* **Continuity of `w` in the state.** For a general measurable shock space and a merely
+  measurable return, Exercise 16.2c is proved with `w` measurable in the state and continuous in
+  `A` (`ex_16_2c_general`); `w` need not be continuous in the state, so "bounded continuous" in
+  the book is replaced by this class. Uniqueness and (2)–(3) are for measurable `w` bounded on
+  `D`, since for a non-measurable `w` the integral in (1) is meaningless.
 * **The path-space martingale of p. 485.** Only the one-step form is proved: the increment
   `w_{t+1}` has conditional mean zero given the state (`ms_martingale_increment`). That `W_t` is
   a martingale on the space of histories (an Ionescu-Tulcea measure) is not formalised.

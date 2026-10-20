@@ -18360,7 +18360,8 @@ security; `R = f(s′) + q(s′)` for the multi-period asset of Ex 16.2g), with 
   condition above is added (`ex_16_2c_domain_counterexample` shows it is needed).
 * Continuity of `z ↦ ∫ w[b f(z′), g(x, z), z′] Q(z, dz′)` fails for a merely Feller `Q` and
   measurable `f`; here the shock space is finite (or, equivalently, `Q` has finite support), which
-  removes the issue. The general measurable case is not formalised.
+  removes the issue. The general measurable case (a Markov kernel on a measurable shock space,
+  measurable return) is `ManySectorGeneral`.
 -/
 
 namespace StokeyLucasPrescott.EquilibriumApplications
@@ -19355,6 +19356,1762 @@ Authors: Robert Kirkby
 -/
 
 /-!
+# Pricing securities: the equilibrium price makes no trade optimal (Ex 16.2(d), converse)
+
+SLP §16.2, p. 483. `ex_16_2_eq2` showed that no trade at `A = 0` in every state forces the pricing
+equation (2). This module proves the converse by a verification argument: if `q` satisfies (2)
+in every state, then every solution `w` of (1) bounded on `D` has the supergradient `U′(c(s))` at
+`A = 0`,
+
+  `w(A, s) ≤ w(0, s) + U′(c(s)) A` for all `(A, s) ∈ D`,
+
+and `b = 0` is optimal at `A = 0` in every state; with concavity of `w` (`ms_sec_fixed_concave`),
+`w₁(0, s) = U′(c(s))`, the book's (d).
+
+Proof: `e(A, s) = w(A, s) − w(0, s) − U′(c(s))A` is bounded on `D` (`U′(c)(c − qB)` bounded) and,
+by the tangent inequality for `U`, the Bellman equation and (2), `e ≤ β sup e`; so `e ≤ βⁿ M → 0`.
+
+* `ms_sec_supergradient`: the supergradient inequality.
+* **Exercise 16.2(d), converse** (`ex_16_2d_converse`): (2) in every state implies that `b = 0` is
+  optimal at `A = 0` in every state.
+* `ex_16_2d_equilibrium`: in equilibrium, `w(·, s)` is differentiable at `0` with
+  `w₁(0, s) = U′(c(s))`.
+
+**Hypotheses.** `c > 0`, `U` concave and differentiable on `(0, ∞)` with `U′ > 0`, and
+`U′(c(s))(c(s) − q(s)B)` bounded above (automatic if the state space is compact).
+-/
+
+namespace StokeyLucasPrescott.EquilibriumApplications
+
+open Filter Topology Set
+
+variable {Sx : Type*} [TopologicalSpace Sx] {Zf : Type*} [Fintype Zf]
+  {U : ℝ → ℝ} {c q : Sx → ℝ} {R π : Sx → Zf → ℝ} {nxt : Sx → Zf → Sx} {B β : ℝ}
+
+/-- The key step: if `w(A′, s′) ≤ w(0, s′) + U′(c(s′))A′ + E` on `D`, then
+`w(A, s) ≤ w(0, s) + U′(c(s))A + βE` on `D` (tangent inequality, Bellman equation and (2)). -/
+theorem ms_sec_super_step (D : MsSecData U c q R π nxt B β) (hU : ConcaveOn ℝ (Ici 0) U)
+    {dU : ℝ → ℝ} (hdU : ∀ x, 0 < x → HasDerivAt U (dU x) x) (hc : ∀ s, 0 < c s)
+    (h2 : ∀ s, q s * dU (c s) = β * ∑ z', π s z' * (dU (c (nxt s z')) * R s z'))
+    {w : ℝ × Sx → ℝ} (hw : MsSecBellman U c q R π nxt B β w) {E : ℝ}
+    (hE : ∀ A s, q s * B - c s ≤ A → w (A, s) ≤ w (0, s) + dU (c s) * A + E)
+    {A : ℝ} {s : Sx} {b : ℝ} (hb : B ≤ b) (hbf : q s * b ≤ c s + A) :
+    msSecObj U c q R π nxt β w A s b ≤ w (0, s) + dU (c s) * A + β * E := by
+  have hq := D.q_pos s
+  have h0dom : q s * B - c s ≤ 0 := by nlinarith [D.B_neg, hc s]
+  have hge0 := (hw 0 s h0dom).1 0 D.B_neg.le (by rw [mul_zero, add_zero]; exact (hc s).le)
+  simp only [msSecObj, add_zero, mul_zero, sub_zero, zero_mul] at hge0
+  have ht := gc_concave_le_tangent hU (hc s) (by linarith : (0 : ℝ) ≤ c s + A - q s * b)
+    (hdU _ (hc s))
+  have hsum : ∑ z', π s z' * w (b * R s z', nxt s z') ≤
+      ∑ z', π s z' * w (0, nxt s z') + b * ∑ z', π s z' * (dU (c (nxt s z')) * R s z') + E := by
+    calc ∑ z', π s z' * w (b * R s z', nxt s z')
+        ≤ ∑ z', (π s z' * w (0, nxt s z') + b * (π s z' * (dU (c (nxt s z')) * R s z')) +
+            π s z' * E) := Finset.sum_le_sum fun z' _ => by
+          have h := hE _ _ (ms_sec_next_mem D s hb z')
+          have hπ := D.π_nonneg s z'
+          nlinarith [mul_le_mul_of_nonneg_left h hπ]
+      _ = _ := by
+          rw [Finset.sum_add_distrib, Finset.sum_add_distrib, ← Finset.mul_sum, ← Finset.sum_mul,
+            D.π_sum, one_mul]
+  have e2 := h2 s
+  have hβ := D.beta_pos
+  simp only [msSecObj]
+  have key : β * (b * ∑ z', π s z' * (dU (c (nxt s z')) * R s z')) = b * (q s * dU (c s)) := by
+    rw [e2]; ring
+  nlinarith [mul_le_mul_of_nonneg_left hsum hβ.le]
+
+/-- **The supergradient inequality**: if `q` satisfies (2) in every state, every solution `w` of
+(1) bounded on `D` satisfies `w(A, s) ≤ w(0, s) + U′(c(s))A` on `D`. -/
+theorem ms_sec_supergradient (D : MsSecData U c q R π nxt B β) (hU : ConcaveOn ℝ (Ici 0) U)
+    {dU : ℝ → ℝ} (hdU : ∀ x, 0 < x → HasDerivAt U (dU x) x) (hdUpos : ∀ x, 0 < x → 0 < dU x)
+    (hc : ∀ s, 0 < c s)
+    (h2 : ∀ s, q s * dU (c s) = β * ∑ z', π s z' * (dU (c (nxt s z')) * R s z'))
+    (hK : ∃ K, ∀ s, dU (c s) * (c s - q s * B) ≤ K) {w : ℝ × Sx → ℝ}
+    (hw : MsSecBellman U c q R π nxt B β w) (hwb : ∃ C, ∀ p ∈ msSecDom c q B, |w p| ≤ C) :
+    ∀ A s, q s * B - c s ≤ A → w (A, s) ≤ w (0, s) + dU (c s) * A := by
+  obtain ⟨K, hK⟩ := hK
+  obtain ⟨C, hC⟩ := hwb
+  set M := 2 * C + max K 0 with hM
+  have key : ∀ n : ℕ, ∀ A s, q s * B - c s ≤ A →
+      w (A, s) ≤ w (0, s) + dU (c s) * A + β ^ n * M := by
+    intro n
+    induction n with
+    | zero =>
+      intro A s hA
+      have hq := D.q_pos s
+      have h0dom : q s * B - c s ≤ 0 := by nlinarith [D.B_neg, hc s]
+      have h1 := (abs_le.1 (hC (A, s) hA)).2
+      have h2' := (abs_le.1 (hC (0, s) h0dom)).1
+      have hd := hdUpos _ (hc s)
+      have hKs := hK s
+      have : -(dU (c s) * A) ≤ max K 0 := by
+        rcases le_total A 0 with hneg | hpos
+        · have : -(dU (c s) * A) ≤ dU (c s) * (c s - q s * B) := by nlinarith
+          exact this.trans (hKs.trans (le_max_left _ _))
+        · have : -(dU (c s) * A) ≤ 0 := by nlinarith
+          exact this.trans (le_max_right _ _)
+      rw [pow_zero, one_mul, hM]
+      linarith
+    | succ n ih =>
+      intro A s hA
+      obtain ⟨b, hb, hbf, e⟩ := (hw A s hA).2
+      have := ms_sec_super_step D hU hdU hc h2 hw ih hb hbf
+      rw [e, pow_succ, mul_comm (β ^ n) β, mul_assoc]
+      exact this
+  intro A s hA
+  have hlim : Tendsto (fun n : ℕ => w (0, s) + dU (c s) * A + β ^ n * M) atTop
+      (𝓝 (w (0, s) + dU (c s) * A)) := by
+    simpa using tendsto_const_nhds.add
+      ((tendsto_pow_atTop_nhds_zero_of_lt_one D.beta_pos.le D.beta_lt_one).mul_const M)
+  exact ge_of_tendsto' hlim fun n => key n A s hA
+
+/-- **Exercise 16.2(d), converse**: if the price `q` satisfies the pricing equation (2) in every
+state, then for every solution `w` of (1) bounded on `D`, `b = 0` (no trade, `δ = 0`) is optimal at
+`A = 0` in every state. -/
+theorem ex_16_2d_converse (D : MsSecData U c q R π nxt B β) (hU : ConcaveOn ℝ (Ici 0) U)
+    {dU : ℝ → ℝ} (hdU : ∀ x, 0 < x → HasDerivAt U (dU x) x) (hdUpos : ∀ x, 0 < x → 0 < dU x)
+    (hc : ∀ s, 0 < c s)
+    (h2 : ∀ s, q s * dU (c s) = β * ∑ z', π s z' * (dU (c (nxt s z')) * R s z'))
+    (hK : ∃ K, ∀ s, dU (c s) * (c s - q s * B) ≤ K) {w : ℝ × Sx → ℝ}
+    (hw : MsSecBellman U c q R π nxt B β w) (hwb : ∃ C, ∀ p ∈ msSecDom c q B, |w p| ≤ C)
+    (s : Sx) : w (0, s) = msSecObj U c q R π nxt β w 0 s 0 := by
+  have hsup := ms_sec_supergradient D hU hdU hdUpos hc h2 hK hw hwb
+  have hq := D.q_pos s
+  have h0dom : q s * B - c s ≤ 0 := by nlinarith [D.B_neg, hc s]
+  obtain ⟨b, hb, hbf, e⟩ := (hw 0 s h0dom).2
+  have hge := (hw 0 s h0dom).1 0 D.B_neg.le (by rw [mul_zero, add_zero]; exact (hc s).le)
+  have hge0 : msSecObj U c q R π nxt β w 0 s 0 = U (c s) + β * ∑ z', π s z' * w (0, nxt s z') := by
+    simp only [msSecObj, add_zero, mul_zero, sub_zero, zero_mul]
+  apply le_antisymm _ hge
+  rw [e]
+  have hstep : msSecObj U c q R π nxt β w 0 s b ≤ msSecObj U c q R π nxt β w 0 s 0 := by
+    have ht := gc_concave_le_tangent hU (hc s) (by linarith : (0 : ℝ) ≤ c s + 0 - q s * b)
+      (hdU _ (hc s))
+    have hsum : ∑ z', π s z' * w (b * R s z', nxt s z') ≤
+        ∑ z', π s z' * w (0, nxt s z') + b * ∑ z', π s z' * (dU (c (nxt s z')) * R s z') := by
+      calc ∑ z', π s z' * w (b * R s z', nxt s z')
+          ≤ ∑ z', (π s z' * w (0, nxt s z') + b * (π s z' * (dU (c (nxt s z')) * R s z'))) :=
+            Finset.sum_le_sum fun z' _ => by
+              have h := hsup _ _ (ms_sec_next_mem D s hb z')
+              have hπ := D.π_nonneg s z'
+              nlinarith [mul_le_mul_of_nonneg_left h hπ]
+        _ = _ := by rw [Finset.sum_add_distrib, ← Finset.mul_sum]
+    have key : β * (b * ∑ z', π s z' * (dU (c (nxt s z')) * R s z')) = b * (q s * dU (c s)) := by
+      rw [h2 s]; ring
+    rw [hge0]
+    simp only [msSecObj]
+    nlinarith [mul_le_mul_of_nonneg_left hsum D.beta_pos.le]
+  exact hstep
+
+/-- **In equilibrium the book's (d) holds**: if `q` satisfies (2) in every state and `w` (bounded on
+`D`, concave in `A`) solves (1), then `w(·, s)` is differentiable at `0` with
+`w₁(0, s) = U′(c(s))`. -/
+theorem ex_16_2d_equilibrium (D : MsSecData U c q R π nxt B β)
+    (hUs : StrictConcaveOn ℝ (Ici 0) U) {dU : ℝ → ℝ} (hdU : ∀ x, 0 < x → HasDerivAt U (dU x) x)
+    (hdUpos : ∀ x, 0 < x → 0 < dU x) (hc : ∀ s, 0 < c s)
+    (h2 : ∀ s, q s * dU (c s) = β * ∑ z', π s z' * (dU (c (nxt s z')) * R s z'))
+    (hK : ∃ K, ∀ s, dU (c s) * (c s - q s * B) ≤ K) {w : ℝ × Sx → ℝ}
+    (hw : MsSecBellman U c q R π nxt B β w) (hwb : ∃ C, ∀ p ∈ msSecDom c q B, |w p| ≤ C)
+    (hcv : MsSecConcave c q B w) (s : Sx) :
+    HasDerivAt (fun A => w (A, s)) (dU (c s)) 0 := by
+  have hopt := ex_16_2d_converse D hUs.concaveOn hdU hdUpos hc h2 hK hw hwb s
+  have := ex_16_2d D hdU hw hcv (s := s) D.B_neg.le hopt (by rw [mul_zero, sub_zero]; exact hc s)
+  rwa [mul_zero, sub_zero] at this
+
+end StokeyLucasPrescott.EquilibriumApplications
+
+/-
+Copyright (c) 2026 Robert Kirkby. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Robert Kirkby
+-/
+
+/-!
+# Pricing securities with a general shock space (Ex 16.2(c), (d), (2), (g))
+
+SLP §16.2, pp. 482–484. `ManySectorSecurities`, `ManySectorEnvelope` and
+`ManySectorVerification` treat finitely many shocks, and `ManySectorFeller` a Feller transition on
+a compact shock space with a continuous return. Here the state space `S` and the shock space `Z`
+are arbitrary **measurable spaces** (no topology, no compactness: e.g. Polish or σ-compact shock
+spaces, or any standard Borel space), the law of next period's shock is a **Markov kernel**
+`Q : S → 𝒫(Z)`, and the return `R(s, z′) ≥ 0` and the next state `nxt(s, z′)` are merely jointly
+measurable:
+
+  (1) `w(A, s) = max {U(c(s) + A − q(s) b) + β ∫ w(b R(s, z′), nxt(s, z′)) Q(s, dz′) :
+        b ≥ B, q(s) b ≤ c(s) + A}`.
+
+For the book, `s = (x, z)`, `nxt(s, z′) = (g(x, z), z′)`, `R(s, z′) = f(z′)` with `f` bounded
+measurable, and the kernel is `(x, z) ↦ Q(z, ·)` (the book's `Q` composed with the projection).
+
+* `MsGenData`: the data (measurable `c`, `q > 0`, `R`, `nxt`; bounded continuous `U`; the domain
+  condition `q(s′)B − c(s′) ≤ B R(s, z′)` of `ManySectorSecurities`); `msGE`, `msGObj`,
+  `MsGBellman` (equation (1) on `D = msSecDom`, with "max").
+* `msG_bellman_unique`: at most one solution of (1) among measurable functions bounded on `D`.
+* The contraction: `MsGSpace = ℓ∞(S; C_b(ℝ))` (functions `w(A, s)` bounded, continuous in `A`)
+  and its closed subset `msGMeas` (measurable in `s`), whose elements are jointly measurable
+  Carathéodory functions (`msGFn_measurable`). The operator `msGTM` of (1) maps `msGMeas` to
+  itself: continuity in `A` comes from dominated convergence in `b` (`msGE_continuous`), not from
+  any continuity in `z′`; measurability in `s` from writing the max over `[0, 1]` as a supremum
+  over the rationals (`msG_sSup_eq_iSup`, `msGT_measurable`) and the kernel's measurability.
+  `msG_contracting`: Blackwell, modulus `β`.
+* **Exercise 16.2(c), general shock space** (`ex_16_2c_general`): there is a bounded measurable
+  `w`, continuous in `A`, satisfying (1) on `D`, and every measurable solution bounded on `D`
+  agrees with it on `D`. `msG_exists` adds: concave in `A` when `U` is concave;
+  `msG_solution_concave`: so is every measurable solution bounded on `D`.
+* **Exercise 16.2(d), corrected** (`ex_16_2d_general`): `w₁(0, ŝ) = U′(c(ŝ) − q(ŝ) b*)`.
+* `msGE_hasDerivAt`: differentiation under the integral sign, by dominated convergence (concavity
+  traps the difference quotients between those at `±B`; no extra integrability needed);
+  `msG_foc`: the first-order condition.
+* **The pricing equation (2)** (`ex_16_2_eq2_general`) and **(3) for Exercise 16.2(g)**
+  (`ex_16_2g_general`), with the finite sums replaced by integrals against `Q(s, ·)`.
+* **Exercise 16.2(d), converse** (`ex_16_2d_converse_general`, via `msG_super_step`,
+  `msG_supergradient`): (2) in every state makes no trade optimal; and
+  `ex_16_2d_equilibrium_general`: in equilibrium `w₁(0, s) = U′(c(s))`.
+
+**Hypotheses added.** As in the finite case: `q` given, the domain condition, `c > 0`, `U`
+concave and differentiable on `(0, ∞)` with `U′ > 0` (for (d) and its converse), and
+`U′(c(s))(c(s) − q(s)B)` bounded above (for the converse). New for the general case: `c`, `q`,
+`R`, `nxt` measurable and `Q` a Markov kernel; uniqueness and (2)–(3) are for **measurable**
+solutions bounded on `D` (for a non-measurable `w` the integral in (1) is meaningless); the
+converse needs `z′ ↦ U′(c(s′)) R(s, z′)` to be `Q(s, ·)`-integrable (for (2) to make sense; it is
+a consequence, not a hypothesis, in `ex_16_2_eq2_general`).
+
+**Correction (NOTE (iii) to Ex 16.2c).** With a merely measurable return the solution of (1) need
+not be continuous in the state; the right space is bounded functions measurable in `s` and
+continuous in `A`, in which the contraction argument goes through without any continuity in `z′`.
+-/
+
+namespace StokeyLucasPrescott.EquilibriumApplications
+
+open MeasureTheory ProbabilityTheory Filter Topology Set
+open scoped BoundedContinuousFunction
+
+variable {Sx : Type*} [MeasurableSpace Sx] {Z : Type*} [MeasurableSpace Z]
+
+variable (U : ℝ → ℝ) (c q : Sx → ℝ) (R : Sx → Z → ℝ) (nxt : Sx → Z → Sx) in
+/-- The data of (1) for a general measurable state space `S` and shock space `Z` (no topology):
+`U` bounded continuous, `c`, `q` measurable with `q > 0`, the return `R(s, z′) ≥ 0` and the next
+state `nxt(s, z′)` jointly measurable, and the domain condition `q(s′)B − c(s′) ≤ B R(s, z′)`.
+The law of `z′` is a Markov kernel `Q`, given separately. -/
+structure MsGenData (B β : ℝ) : Prop where
+  beta_pos : 0 < β
+  beta_lt_one : β < 1
+  B_neg : B < 0
+  U_cont : Continuous U
+  U_bdd : ∃ M, ∀ x, |U x| ≤ M
+  c_meas : Measurable c
+  q_meas : Measurable q
+  q_pos : ∀ s, 0 < q s
+  R_meas : Measurable fun p : Sx × Z => R p.1 p.2
+  R_nonneg : ∀ s z', 0 ≤ R s z'
+  nxt_meas : Measurable fun p : Sx × Z => nxt p.1 p.2
+  dom : ∀ s z', q (nxt s z') * B - c (nxt s z') ≤ B * R s z'
+
+/-- The expected continuation value `∫ w(b R(s, z′), nxt(s, z′)) Q(s, dz′)`. -/
+noncomputable def msGE (R : Sx → Z → ℝ) (Q : Kernel Sx Z) (nxt : Sx → Z → Sx)
+    (w : ℝ × Sx → ℝ) (s : Sx) (b : ℝ) : ℝ :=
+  ∫ z', w (b * R s z', nxt s z') ∂(Q s)
+
+/-- The objective of (1) at `(A, s)` for the purchase `b`. -/
+noncomputable def msGObj (U : ℝ → ℝ) (c q : Sx → ℝ) (R : Sx → Z → ℝ) (Q : Kernel Sx Z)
+    (nxt : Sx → Z → Sx) (β : ℝ) (w : ℝ × Sx → ℝ) (A : ℝ) (s : Sx) (b : ℝ) : ℝ :=
+  U (c s + A - q s * b) + β * msGE R Q nxt w s b
+
+/-- `w` **satisfies (1) on `D`** (with "max"), for a Markov kernel `Q`. -/
+def MsGBellman (U : ℝ → ℝ) (c q : Sx → ℝ) (R : Sx → Z → ℝ) (Q : Kernel Sx Z)
+    (nxt : Sx → Z → Sx) (B β : ℝ) (w : ℝ × Sx → ℝ) : Prop :=
+  ∀ A s, q s * B - c s ≤ A →
+    (∀ b, B ≤ b → q s * b ≤ c s + A → msGObj U c q R Q nxt β w A s b ≤ w (A, s)) ∧
+    ∃ b, B ≤ b ∧ q s * b ≤ c s + A ∧ w (A, s) = msGObj U c q R Q nxt β w A s b
+
+/-- The operator of (1): `(Tw)(A, s) = sup_{r ∈ [0, 1]}` of the objective at `b = msSecB A s r`. -/
+noncomputable def msGT (U : ℝ → ℝ) (c q : Sx → ℝ) (R : Sx → Z → ℝ) (Q : Kernel Sx Z)
+    (nxt : Sx → Z → Sx) (B β : ℝ) (w : ℝ × Sx → ℝ) (p : ℝ × Sx) : ℝ :=
+  sSup ((fun r => msGObj U c q R Q nxt β w p.1 p.2 (msSecB c q B p.1 p.2 r)) '' Icc 0 1)
+
+variable {U : ℝ → ℝ} {c q : Sx → ℝ} {R : Sx → Z → ℝ} {Q : Kernel Sx Z} {nxt : Sx → Z → Sx}
+  {B β : ℝ}
+
+/-- Feasible purchases lead to states in `D`. -/
+theorem msG_next_mem (D : MsGenData U c q R nxt B β) (s : Sx) {b : ℝ} (hb : B ≤ b) (z' : Z) :
+    (b * R s z', nxt s z') ∈ msSecDom c q B := by
+  have h1 := D.dom s z'
+  have h2 := D.R_nonneg s z'
+  change q (nxt s z') * B - c (nxt s z') ≤ b * R s z'
+  nlinarith
+
+/-- `z′ ↦ (b R(s, z′), nxt(s, z′))` is measurable. -/
+theorem msG_meas_next (D : MsGenData U c q R nxt B β) (s : Sx) (b : ℝ) :
+    Measurable fun z' : Z => (b * R s z', nxt s z') :=
+  (measurable_const.mul (D.R_meas.comp measurable_prodMk_left)).prodMk
+    (D.nxt_meas.comp measurable_prodMk_left)
+
+variable [IsMarkovKernel Q]
+
+/-- For `w` measurable and bounded on `D`, the integrand of (1) is integrable (`b ≥ B`). -/
+theorem msG_integrable (D : MsGenData U c q R nxt B β) {w : ℝ × Sx → ℝ} (hwm : Measurable w)
+    {C : ℝ} (hC : ∀ p ∈ msSecDom c q B, |w p| ≤ C) (s : Sx) {b : ℝ} (hb : B ≤ b) :
+    Integrable (fun z' => w (b * R s z', nxt s z')) (Q s) :=
+  Integrable.of_bound (hwm.comp (msG_meas_next D s b)).aestronglyMeasurable C
+    (Eventually.of_forall fun z' => by
+      rw [Real.norm_eq_abs]; exact hC _ (msG_next_mem D s hb z'))
+
+/-- `z′ ↦ w(0, nxt(s, z′))` is integrable. -/
+theorem msG_integrable_zero (D : MsGenData U c q R nxt B β) {w : ℝ × Sx → ℝ}
+    (hwm : Measurable w) {C : ℝ} (hC : ∀ p ∈ msSecDom c q B, |w p| ≤ C) (s : Sx) :
+    Integrable (fun z' => w (0, nxt s z')) (Q s) := by
+  simpa only [zero_mul] using msG_integrable (Q := Q) D hwm hC s D.B_neg.le
+
+/-- `|∫ u − ∫ v| ≤ C` when `|u − v| ≤ C` pointwise. -/
+theorem msG_sub_le {w w' : ℝ × Sx → ℝ} {s : Sx} {b : ℝ}
+    (h1 : Integrable (fun z' => w (b * R s z', nxt s z')) (Q s))
+    (h2 : Integrable (fun z' => w' (b * R s z', nxt s z')) (Q s)) {C : ℝ}
+    (h : ∀ z', |w (b * R s z', nxt s z') - w' (b * R s z', nxt s z')| ≤ C) :
+    |msGE R Q nxt w s b - msGE R Q nxt w' s b| ≤ C := by
+  rw [msGE, msGE, ← integral_sub h1 h2]
+  have := norm_integral_le_of_norm_le_const (μ := Q s)
+    (f := fun z' => w (b * R s z', nxt s z') - w' (b * R s z', nxt s z')) (C := C)
+    (Eventually.of_forall fun z' => by rw [Real.norm_eq_abs]; exact h z')
+  simpa [probReal_univ] using this
+
+/-- **At most one solution of (1) among measurable functions bounded on `D`**. -/
+theorem msG_bellman_unique (D : MsGenData U c q R nxt B β) {w w' : ℝ × Sx → ℝ}
+    (hwm : Measurable w) (hw'm : Measurable w') {C C' : ℝ}
+    (hC : ∀ p ∈ msSecDom c q B, |w p| ≤ C) (hC' : ∀ p ∈ msSecDom c q B, |w' p| ≤ C')
+    (hw : MsGBellman U c q R Q nxt B β w) (hw' : MsGBellman U c q R Q nxt B β w') :
+    ∀ p ∈ msSecDom c q B, w p = w' p := by
+  have key : ∀ n, ∀ p ∈ msSecDom c q B, |w p - w' p| ≤ β ^ n * (C + C') := by
+    intro n
+    induction n with
+    | zero =>
+      intro p hp
+      rw [pow_zero, one_mul]
+      exact (abs_sub _ _).trans (add_le_add (hC p hp) (hC' p hp))
+    | succ n ih =>
+      rintro ⟨A, s⟩ hp
+      obtain ⟨b₁, hb₁, hf₁, e₁⟩ := (hw A s hp).2
+      obtain ⟨b₂, hb₂, hf₂, e₂⟩ := (hw' A s hp).2
+      have a1 := (hw' A s hp).1 b₁ hb₁ hf₁
+      have a2 := (hw A s hp).1 b₂ hb₂ hf₂
+      have d1 := msG_sub_le (msG_integrable (Q := Q) D hwm hC s hb₁)
+        (msG_integrable D hw'm hC' s hb₁) fun z' => ih _ (msG_next_mem D s hb₁ z')
+      have d2 := msG_sub_le (msG_integrable (Q := Q) D hwm hC s hb₂)
+        (msG_integrable D hw'm hC' s hb₂) fun z' => ih _ (msG_next_mem D s hb₂ z')
+      simp only [msGObj] at e₁ e₂ a1 a2
+      have hβ := D.beta_pos
+      rw [pow_succ, mul_comm (β ^ n) β, mul_assoc]
+      refine abs_le.2 ⟨?_, ?_⟩
+      · nlinarith [mul_le_mul_of_nonneg_left (abs_le.1 d2).1 hβ.le]
+      · nlinarith [mul_le_mul_of_nonneg_left (abs_le.1 d1).2 hβ.le]
+  intro p hp
+  have hlim : Tendsto (fun n : ℕ => β ^ n * (C + C')) atTop (𝓝 0) := by
+    simpa using (tendsto_pow_atTop_nhds_zero_of_lt_one D.beta_pos.le D.beta_lt_one).mul_const _
+  have : |w p - w' p| ≤ 0 := ge_of_tendsto' hlim fun n => key n p hp
+  exact sub_eq_zero.1 (abs_nonpos_iff.1 this)
+
+/-! ### Existence: a contraction on functions measurable in `s`, continuous in `A` -/
+
+/-- The space `ℓ∞(S; C_b(ℝ))`: bounded families `s ↦ W(s) ∈ C_b(ℝ)`, read as
+`w(A, s) = W(s)(A)` (bounded, continuous in `A`, no topology on `S`). -/
+abbrev MsGSpace (Sx : Type*) : Type _ := lp (fun _ : Sx => ℝ →ᵇ ℝ) ⊤
+
+/-- `W ∈ MsGSpace` read as a function of `(A, s)`. -/
+def msGFn (W : MsGSpace Sx) (p : ℝ × Sx) : ℝ := W p.2 p.1
+
+/-- The (closed) set of `W` with `s ↦ W(s)(A)` measurable for every `A`. -/
+def msGMeas (Sx : Type*) [MeasurableSpace Sx] : Set (MsGSpace Sx) :=
+  {W | ∀ A, Measurable fun s => W s A}
+
+omit [MeasurableSpace Sx] in
+/-- `|w(A, s)| ≤ ‖W‖`. -/
+theorem msGFn_abs_le (W : MsGSpace Sx) (p : ℝ × Sx) : |msGFn W p| ≤ ‖W‖ := by
+  rw [← Real.norm_eq_abs]
+  exact ((W p.2).norm_coe_le_norm p.1).trans (lp.norm_apply_le_norm ENNReal.top_ne_zero W p.2)
+
+omit [MeasurableSpace Sx] in
+/-- `|w(A, s) − w′(A, s)| ≤ ‖W − W′‖`. -/
+theorem msGFn_sub_le (W W' : MsGSpace Sx) (p : ℝ × Sx) :
+    |msGFn W p - msGFn W' p| ≤ ‖W - W'‖ := by
+  rw [← Real.dist_eq]
+  calc dist (W p.2 p.1) (W' p.2 p.1) ≤ dist (W p.2) (W' p.2) :=
+        BoundedContinuousFunction.dist_coe_le_dist p.1
+    _ = ‖(W - W') p.2‖ := by rw [dist_eq_norm, lp.coeFn_sub, Pi.sub_apply]
+    _ ≤ ‖W - W'‖ := lp.norm_apply_le_norm ENNReal.top_ne_zero _ p.2
+
+/-- A `W ∈ msGMeas` gives a jointly measurable `w` (a Carathéodory function). -/
+theorem msGFn_measurable {W : MsGSpace Sx} (hW : W ∈ msGMeas Sx) : Measurable (msGFn W) :=
+  measurable_uncurry_of_continuous_of_measurable (u := fun A s => W s A)
+    (fun s => (W s).continuous) hW
+
+omit [MeasurableSpace Sx] in
+/-- Evaluation `W ↦ W(s)(A)` is continuous. -/
+theorem msG_continuous_eval (s : Sx) (A : ℝ) : Continuous fun W : MsGSpace Sx => W s A :=
+  LipschitzWith.continuous (K := 1) <| LipschitzWith.of_dist_le_mul fun W W' => by
+    rw [NNReal.coe_one, one_mul, Real.dist_eq, dist_eq_norm]
+    exact msGFn_sub_le W W' (A, s)
+
+/-- `msGMeas` is closed (pointwise limits of measurable functions are measurable). -/
+theorem msGMeas_isClosed : IsClosed (msGMeas Sx) :=
+  IsSeqClosed.isClosed fun _ W hmem hlim A =>
+    measurable_of_tendsto_metrizable (fun n => hmem n A)
+      (tendsto_pi_nhds.2 fun s => ((msG_continuous_eval s A).tendsto W).comp hlim)
+
+/-- `0 ∈ msGMeas`. -/
+theorem msG_zero_mem : (0 : MsGSpace Sx) ∈ msGMeas Sx := fun _ => by
+  change Measurable fun _ : Sx => (0 : ℝ)
+  exact measurable_const
+
+/-- For `W ∈ msGMeas` the integrand of (1) is integrable for every `b`. -/
+theorem msGFn_integrable (D : MsGenData U c q R nxt B β) {W : MsGSpace Sx}
+    (hW : W ∈ msGMeas Sx) (s : Sx) (b : ℝ) :
+    Integrable (fun z' => msGFn W (b * R s z', nxt s z')) (Q s) :=
+  Integrable.of_bound ((msGFn_measurable hW).comp (msG_meas_next D s b)).aestronglyMeasurable ‖W‖
+    (Eventually.of_forall fun z' => by rw [Real.norm_eq_abs]; exact msGFn_abs_le W _)
+
+/-- `b ↦ ∫ w(b R(s, z′), nxt(s, z′)) Q(s, dz′)` is continuous (dominated convergence; `w` is
+continuous in `A`). -/
+theorem msGE_continuous (D : MsGenData U c q R nxt B β) {W : MsGSpace Sx} (hW : W ∈ msGMeas Sx)
+    (s : Sx) : Continuous fun b => msGE R Q nxt (msGFn W) s b :=
+  continuous_of_dominated (bound := fun _ => ‖W‖)
+    (fun b => ((msGFn_measurable hW).comp (msG_meas_next D s b)).aestronglyMeasurable)
+    (fun b => Eventually.of_forall fun z' => by
+      rw [Real.norm_eq_abs]; exact msGFn_abs_le W _)
+    (integrable_const _)
+    (Eventually.of_forall fun z' =>
+      (W (nxt s z')).continuous.comp (continuous_id.mul continuous_const))
+
+/-- The objective along `b = msSecB A s r` is jointly continuous in `(A, r)`. -/
+theorem msGObj_continuous (D : MsGenData U c q R nxt B β) {W : MsGSpace Sx}
+    (hW : W ∈ msGMeas Sx) (s : Sx) :
+    Continuous fun p : ℝ × ℝ =>
+      msGObj U c q R Q nxt β (msGFn W) p.1 s (msSecB c q B p.1 s p.2) := by
+  have hb : Continuous fun p : ℝ × ℝ => msSecB c q B p.1 s p.2 :=
+    continuous_const.add (continuous_snd.mul (continuous_const.max
+      (((continuous_const.add continuous_fst).div_const _).sub continuous_const)))
+  unfold msGObj
+  exact (D.U_cont.comp ((continuous_const.add continuous_fst).sub (continuous_const.mul hb))).add
+    (continuous_const.mul ((msGE_continuous D hW s).comp hb))
+
+/-- The objective of (1) is bounded by `M + β ‖W‖`. -/
+theorem msGObj_abs_le {M : ℝ} (hM : ∀ x, |U x| ≤ M) (hβ : 0 < β) (W : MsGSpace Sx) (A : ℝ)
+    (s : Sx) (b : ℝ) : |msGObj U c q R Q nxt β (msGFn W) A s b| ≤ M + β * ‖W‖ := by
+  have h0 : |msGE R Q nxt (msGFn W) s b| ≤ ‖W‖ := by
+    have := norm_integral_le_of_norm_le_const (μ := Q s)
+      (f := fun z' => msGFn W (b * R s z', nxt s z')) (C := ‖W‖)
+      (Eventually.of_forall fun z' => by rw [Real.norm_eq_abs]; exact msGFn_abs_le W _)
+    simpa [probReal_univ, msGE] using this
+  unfold msGObj
+  calc |U (c s + A - q s * b) + β * msGE R Q nxt (msGFn W) s b|
+      ≤ |U (c s + A - q s * b)| + |β * msGE R Q nxt (msGFn W) s b| := abs_add_le _ _
+    _ ≤ M + β * ‖W‖ := by
+        rw [abs_mul, abs_of_pos hβ]
+        exact add_le_add (hM _) (mul_le_mul_of_nonneg_left h0 hβ.le)
+
+/-- The maximum defining `Tw` is attained. -/
+theorem msGT_attained (D : MsGenData U c q R nxt B β) {W : MsGSpace Sx} (hW : W ∈ msGMeas Sx)
+    (p : ℝ × Sx) : ∃ r ∈ Icc (0 : ℝ) 1, msGT U c q R Q nxt B β (msGFn W) p =
+      msGObj U c q R Q nxt β (msGFn W) p.1 p.2 (msSecB c q B p.1 p.2 r) :=
+  isCompact_Icc.exists_sSup_image_eq (nonempty_Icc.2 zero_le_one)
+    ((msGObj_continuous D hW p.2).comp (continuous_const.prodMk continuous_id)).continuousOn
+
+/-- `Tw` dominates the objective at every `r ∈ [0, 1]`. -/
+theorem msGT_ge (D : MsGenData U c q R nxt B β) {W : MsGSpace Sx} (hW : W ∈ msGMeas Sx)
+    (p : ℝ × Sx) {r : ℝ} (hr : r ∈ Icc (0 : ℝ) 1) :
+    msGObj U c q R Q nxt β (msGFn W) p.1 p.2 (msSecB c q B p.1 p.2 r) ≤
+      msGT U c q R Q nxt B β (msGFn W) p :=
+  le_csSup (isCompact_Icc.image ((msGObj_continuous D hW p.2).comp
+    (continuous_const.prodMk continuous_id))).bddAbove (mem_image_of_mem _ hr)
+
+/-- `A ↦ (Tw)(A, s)` is continuous. -/
+theorem msGT_continuous (D : MsGenData U c q R nxt B β) {W : MsGSpace Sx}
+    (hW : W ∈ msGMeas Sx) (s : Sx) :
+    Continuous fun A => msGT U c q R Q nxt B β (msGFn W) (A, s) :=
+  isCompact_Icc.continuous_sSup (f := fun A r =>
+    msGObj U c q R Q nxt β (msGFn W) A s (msSecB c q B A s r)) (msGObj_continuous D hW s)
+
+/-- For continuous `G`, `max_{[0, 1]} G = sup_{r ∈ ℚ ∩ (0, 1)} G(r)` (a countable supremum). -/
+theorem msG_sSup_eq_iSup {G : ℝ → ℝ} (hG : Continuous G) :
+    sSup (G '' Icc 0 1) = ⨆ r : {r : ℚ // (r : ℝ) ∈ Ioo (0 : ℝ) 1}, G r := by
+  have hne : Nonempty {r : ℚ // (r : ℝ) ∈ Ioo (0 : ℝ) 1} := ⟨⟨1 / 2, by norm_num⟩⟩
+  have hbdd : BddAbove (G '' Icc 0 1) := (isCompact_Icc.image hG).bddAbove
+  have hbddT : BddAbove (range fun r : {r : ℚ // (r : ℝ) ∈ Ioo (0 : ℝ) 1} => G r) :=
+    hbdd.mono (by
+      rintro _ ⟨r, rfl⟩
+      exact mem_image_of_mem G (Ioo_subset_Icc_self r.2))
+  refine le_antisymm (csSup_le ((nonempty_Icc.2 zero_le_one).image G) ?_)
+    (ciSup_le fun r => le_csSup hbdd (mem_image_of_mem G (Ioo_subset_Icc_self r.2)))
+  rintro _ ⟨x, hx, rfl⟩
+  have hx' : x ∈ closure (Ioo (0 : ℝ) 1 ∩ range ((↑) : ℚ → ℝ)) := by
+    have h1 := Dense.open_subset_closure_inter (Rat.denseRange_cast (𝕜 := ℝ))
+      (isOpen_Ioo (a := (0 : ℝ)) (b := 1))
+    rw [← closure_Ioo (zero_ne_one' ℝ)] at hx
+    exact closure_minimal h1 isClosed_closure hx
+  have h2 := image_closure_subset_closure_image hG (mem_image_of_mem G hx')
+  have h3 : G '' (Ioo (0 : ℝ) 1 ∩ range ((↑) : ℚ → ℝ)) ⊆
+      Iic (⨆ r : {r : ℚ // (r : ℝ) ∈ Ioo (0 : ℝ) 1}, G r) := by
+    rintro _ ⟨y, ⟨hy, ⟨r, rfl⟩⟩, rfl⟩
+    exact le_ciSup hbddT (⟨r, hy⟩ : {r : ℚ // (r : ℝ) ∈ Ioo (0 : ℝ) 1})
+  exact closure_minimal h3 isClosed_Iic h2
+
+/-- `s ↦ (Tw)(A, s)` is measurable (a countable supremum of measurable functions; the
+expectation is measurable in `s` because `Q` is a kernel). -/
+theorem msGT_measurable (D : MsGenData U c q R nxt B β) {W : MsGSpace Sx}
+    (hW : W ∈ msGMeas Sx) (A : ℝ) :
+    Measurable fun s => msGT U c q R Q nxt B β (msGFn W) (A, s) := by
+  have heq : (fun s => msGT U c q R Q nxt B β (msGFn W) (A, s)) = fun s =>
+      ⨆ r : {r : ℚ // (r : ℝ) ∈ Ioo (0 : ℝ) 1},
+        msGObj U c q R Q nxt β (msGFn W) A s (msSecB c q B A s r) := by
+    funext s
+    exact msG_sSup_eq_iSup (G := fun r => msGObj U c q R Q nxt β (msGFn W) A s
+      (msSecB c q B A s r)) ((msGObj_continuous D hW s).comp
+        (continuous_const.prodMk continuous_id))
+  rw [heq]
+  refine Measurable.iSup fun r => ?_
+  have hb : Measurable fun s => msSecB c q B A s r :=
+    measurable_const.add (measurable_const.mul (measurable_const.max
+      (((D.c_meas.add_const A).div D.q_meas).sub_const B)))
+  unfold msGObj
+  refine (D.U_cont.measurable.comp ((D.c_meas.add_const A).sub (D.q_meas.mul hb))).add
+    (measurable_const.mul ?_)
+  have hf : Measurable fun p : Sx × Z => msGFn W (msSecB c q B A p.1 r * R p.1 p.2, nxt p.1 p.2) :=
+    (msGFn_measurable hW).comp (((hb.comp measurable_fst).mul D.R_meas).prodMk D.nxt_meas)
+  exact (hf.stronglyMeasurable.integral_kernel_prod_right' (κ := Q)).measurable
+
+/-- `0 ≤ M` when `|U| ≤ M`. -/
+theorem msG_bound_nonneg (D : MsGenData U c q R nxt B β) (W : MsGSpace Sx) :
+    0 ≤ Classical.choose D.U_bdd + β * ‖W‖ :=
+  add_nonneg ((abs_nonneg _).trans (Classical.choose_spec D.U_bdd 0))
+    (mul_nonneg D.beta_pos.le (norm_nonneg _))
+
+variable (Q) in
+/-- The operator of (1) on `msGMeas`: `(TW)(s)(A) = (Tw)(A, s)`. -/
+noncomputable def msGTW (D : MsGenData U c q R nxt B β) (W : msGMeas Sx) : MsGSpace Sx :=
+  ⟨fun s => BoundedContinuousFunction.ofNormedAddCommGroup
+      (fun A => msGT U c q R Q nxt B β (msGFn W.1) (A, s)) (msGT_continuous D W.2 s)
+      (Classical.choose D.U_bdd + β * ‖W.1‖) (fun A => by
+        rw [Real.norm_eq_abs]
+        obtain ⟨r, -, e⟩ := msGT_attained (Q := Q) D W.2 (A, s)
+        rw [e]
+        exact msGObj_abs_le (Classical.choose_spec D.U_bdd) D.beta_pos W.1 _ _ _),
+    memℓp_infty ⟨Classical.choose D.U_bdd + β * ‖W.1‖, by
+      rintro _ ⟨s, rfl⟩
+      exact BoundedContinuousFunction.norm_ofNormedAddCommGroup_le _ (msG_bound_nonneg D W.1) _⟩⟩
+
+/-- Values of `msGTW`. -/
+theorem msGTW_apply (D : MsGenData U c q R nxt B β) (W : msGMeas Sx) (s : Sx) (A : ℝ) :
+    msGTW Q D W s A = msGT U c q R Q nxt B β (msGFn W.1) (A, s) := rfl
+
+variable (Q) in
+/-- The operator of (1) as a self-map of `msGMeas`. -/
+noncomputable def msGTM (D : MsGenData U c q R nxt B β) (W : msGMeas Sx) : msGMeas Sx :=
+  ⟨msGTW Q D W, fun A => msGT_measurable D W.2 A⟩
+
+/-- **Blackwell**: the operator of (1) is a contraction of modulus `β` on `msGMeas`. -/
+theorem msG_contracting (D : MsGenData U c q R nxt B β) :
+    ContractingWith ⟨β, D.beta_pos.le⟩ (msGTM Q D) := by
+  refine ⟨D.beta_lt_one, LipschitzWith.of_dist_le_mul fun W W' => ?_⟩
+  change dist (msGTW Q D W) (msGTW Q D W') ≤ β * dist W.1 W'.1
+  rw [dist_eq_norm, dist_eq_norm]
+  refine lp.norm_le_of_forall_le (mul_nonneg D.beta_pos.le (norm_nonneg _)) fun s => ?_
+  rw [lp.coeFn_sub, Pi.sub_apply, ← dist_eq_norm]
+  refine (BoundedContinuousFunction.dist_le (mul_nonneg D.beta_pos.le (norm_nonneg _))).2
+    fun A => ?_
+  rw [Real.dist_eq, msGTW_apply, msGTW_apply]
+  obtain ⟨r₁, hr₁, e₁⟩ := msGT_attained (Q := Q) D W.2 (A, s)
+  obtain ⟨r₂, hr₂, e₂⟩ := msGT_attained (Q := Q) D W'.2 (A, s)
+  have a1 := msGT_ge (Q := Q) D W'.2 (A, s) hr₁
+  have a2 := msGT_ge (Q := Q) D W.2 (A, s) hr₂
+  have hd : ∀ b, |msGE R Q nxt (msGFn W.1) s b - msGE R Q nxt (msGFn W'.1) s b| ≤
+      ‖W.1 - W'.1‖ := fun b =>
+    msG_sub_le (msGFn_integrable D W.2 s b) (msGFn_integrable D W'.2 s b)
+      fun z' => msGFn_sub_le W.1 W'.1 _
+  have d1 := hd (msSecB c q B A s r₁)
+  have d2 := hd (msSecB c q B A s r₂)
+  simp only [msGObj] at e₁ e₂ a1 a2
+  have hβ := D.beta_pos
+  refine abs_le.2 ⟨?_, ?_⟩
+  · nlinarith [mul_le_mul_of_nonneg_left (abs_le.1 d2).1 hβ.le]
+  · nlinarith [mul_le_mul_of_nonneg_left (abs_le.1 d1).2 hβ.le]
+
+/-- A fixed point of the operator satisfies (1) on `D`. -/
+theorem msG_bellman_of_fixed (D : MsGenData U c q R nxt B β) {W : msGMeas Sx}
+    (hfix : msGTM Q D W = W) : MsGBellman U c q R Q nxt B β (msGFn W.1) := by
+  intro A s hp
+  have hwp : msGFn W.1 (A, s) = msGT U c q R Q nxt B β (msGFn W.1) (A, s) :=
+    (congrArg (fun V : msGMeas Sx => V.1 s A) hfix).symm
+  refine ⟨fun b hb hf => ?_, ?_⟩
+  · obtain ⟨r, hr, hrb⟩ := msFB_surj D.q_pos hp hb hf
+    have := msGT_ge (Q := Q) D W.2 (A, s) hr
+    rw [hrb] at this
+    rw [hwp]
+    exact this
+  · obtain ⟨r, hr, e⟩ := msGT_attained (Q := Q) D W.2 (A, s)
+    obtain ⟨h1, h2⟩ := msFB_feasible D.q_pos hp hr
+    exact ⟨_, h1, h2, hwp.trans e⟩
+
+/-- The operator of (1) preserves concavity in `A` (on the slices of `D`) when `U` is concave. -/
+theorem msGT_concave (D : MsGenData U c q R nxt B β) (hU : ConcaveOn ℝ (Ici 0) U)
+    {W : MsGSpace Sx} (hW : W ∈ msGMeas Sx) (hcv : MsSecConcave c q B (msGFn W)) :
+    MsSecConcave c q B (msGT U c q R Q nxt B β (msGFn W)) := by
+  intro s A₁ A₂ θ h1 h2 h0 hθ
+  have hθ' : 0 ≤ 1 - θ := by linarith
+  have hq := D.q_pos s
+  obtain ⟨r₁, hr₁, e₁⟩ := msGT_attained (Q := Q) D hW (A₁, s)
+  obtain ⟨r₂, hr₂, e₂⟩ := msGT_attained (Q := Q) D hW (A₂, s)
+  set b₁ := msSecB c q B A₁ s r₁
+  set b₂ := msSecB c q B A₂ s r₂
+  obtain ⟨f₁, g₁⟩ := msFB_feasible D.q_pos h1 hr₁
+  obtain ⟨f₂, g₂⟩ := msFB_feasible D.q_pos h2 hr₂
+  set A := θ * A₁ + (1 - θ) * A₂
+  set b := θ * b₁ + (1 - θ) * b₂
+  have hA : q s * B - c s ≤ A := by nlinarith
+  have hbB : B ≤ b := by nlinarith
+  have hbf : q s * b ≤ c s + A := by
+    simp only [b, A]
+    nlinarith [mul_le_mul_of_nonneg_left g₁ h0, mul_le_mul_of_nonneg_left g₂ hθ']
+  obtain ⟨r, hr, hrb⟩ := msFB_surj D.q_pos hA hbB hbf
+  have hge := msGT_ge (Q := Q) D hW (A, s) hr
+  rw [hrb] at hge
+  have hUc := hU.2 (mem_Ici.2 (by linarith : (0 : ℝ) ≤ c s + A₁ - q s * b₁))
+    (mem_Ici.2 (by linarith : (0 : ℝ) ≤ c s + A₂ - q s * b₂)) h0 hθ' (by ring)
+  simp only [smul_eq_mul] at hUc
+  have hcons : θ * (c s + A₁ - q s * b₁) + (1 - θ) * (c s + A₂ - q s * b₂) =
+      c s + A - q s * b := by simp only [b, A]; ring
+  rw [hcons] at hUc
+  have i1 := msGFn_integrable (Q := Q) D hW s b₁
+  have i2 := msGFn_integrable (Q := Q) D hW s b₂
+  have i3 := msGFn_integrable (Q := Q) D hW s b
+  have hsum : θ * msGE R Q nxt (msGFn W) s b₁ + (1 - θ) * msGE R Q nxt (msGFn W) s b₂ ≤
+      msGE R Q nxt (msGFn W) s b := by
+    unfold msGE
+    rw [← integral_const_mul, ← integral_const_mul,
+      ← integral_add (i1.const_mul θ) (i2.const_mul (1 - θ))]
+    refine integral_mono ((i1.const_mul θ).add (i2.const_mul (1 - θ))) i3 fun z' => ?_
+    have hc := hcv (nxt s z') (b₁ * R s z') (b₂ * R s z') θ (msG_next_mem D s f₁ z')
+      (msG_next_mem D s f₂ z') h0 hθ
+    have e : θ * (b₁ * R s z') + (1 - θ) * (b₂ * R s z') = b * R s z' := by simp only [b]; ring
+    rw [e] at hc
+    exact hc
+  rw [e₁, e₂]
+  simp only [msGObj] at hge ⊢
+  nlinarith [mul_le_mul_of_nonneg_left hsum D.beta_pos.le]
+
+variable (Q) in
+/-- **Existence for (1)**: the fixed point of the operator is a measurable, bounded solution of
+(1) on `D`, continuous in `A`, and concave in `A` on the slices of `D` when `U` is concave. -/
+theorem msG_exists (D : MsGenData U c q R nxt B β) :
+    ∃ w : ℝ × Sx → ℝ, Measurable w ∧ (∃ C, ∀ p, |w p| ≤ C) ∧
+      (∀ s, Continuous fun A => w (A, s)) ∧ MsGBellman U c q R Q nxt B β w ∧
+      (ConcaveOn ℝ (Ici 0) U → MsSecConcave c q B w) := by
+  have : CompleteSpace (msGMeas Sx) := msGMeas_isClosed.isComplete.completeSpace_coe
+  have : Nonempty (msGMeas Sx) := ⟨⟨0, msG_zero_mem⟩⟩
+  set W := ContractingWith.fixedPoint (msGTM Q D) (msG_contracting D)
+  have hfix : msGTM Q D W = W := (msG_contracting D).fixedPoint_isFixedPt
+  refine ⟨msGFn W.1, msGFn_measurable W.2, ⟨_, msGFn_abs_le W.1⟩, fun s => (W.1 s).continuous,
+    msG_bellman_of_fixed D hfix, fun hU => ?_⟩
+  set W₀ : msGMeas Sx := ⟨0, msG_zero_mem⟩
+  have hit : ∀ m, MsSecConcave c q B (msGFn ((msGTM Q D)^[m] W₀).1) := by
+    intro m
+    induction m with
+    | zero =>
+      intro s A₁ A₂ θ _ _ _ _
+      change θ * 0 + (1 - θ) * 0 ≤ 0
+      simp
+    | succ m ih =>
+      rw [Function.iterate_succ_apply']
+      exact msGT_concave D hU ((msGTM Q D)^[m] W₀).2 ih
+  have hlim := (msG_contracting (Q := Q) D).tendsto_iterate_fixedPoint W₀
+  have ev : ∀ p : ℝ × Sx, Tendsto (fun n => msGFn ((msGTM Q D)^[n] W₀).1 p) atTop
+      (𝓝 (msGFn W.1 p)) := fun p =>
+    (((msG_continuous_eval p.2 p.1).comp continuous_subtype_val).tendsto _).comp hlim
+  intro s A₁ A₂ θ h1 h2 h0 hθ
+  exact le_of_tendsto_of_tendsto' (((ev (A₁, s)).const_mul θ).add ((ev (A₂, s)).const_mul
+    (1 - θ))) (ev _) fun n => hit n s A₁ A₂ θ h1 h2 h0 hθ
+
+variable (Q) in
+/-- **Exercise 16.2(c) for a general shock space** (given `q`, with the domain condition): for a
+Markov kernel `Q` on a measurable shock space and a measurable return, there is a bounded
+measurable `w`, continuous in `A`, satisfying (1) on `D`; every measurable solution of (1) that is
+bounded on `D` agrees with it on `D`. -/
+theorem ex_16_2c_general (D : MsGenData U c q R nxt B β) :
+    ∃ w : ℝ × Sx → ℝ, Measurable w ∧ (∃ C, ∀ p, |w p| ≤ C) ∧
+      (∀ s, Continuous fun A => w (A, s)) ∧ MsGBellman U c q R Q nxt B β w ∧
+      ∀ w' : ℝ × Sx → ℝ, Measurable w' → (∃ C, ∀ p ∈ msSecDom c q B, |w' p| ≤ C) →
+        MsGBellman U c q R Q nxt B β w' → ∀ p ∈ msSecDom c q B, w' p = w p := by
+  obtain ⟨w, hwm, ⟨C, hC⟩, hcont, hw, -⟩ := msG_exists Q D
+  exact ⟨w, hwm, ⟨C, hC⟩, hcont, hw, fun w' hw'm ⟨C', hC'⟩ hw' =>
+    msG_bellman_unique (Q := Q) D hw'm hwm hC' (fun p _ => hC p) hw' hw⟩
+
+/-- **Every measurable solution of (1) bounded on `D` is concave in `A`** (on the slices of `D`)
+when `U` is concave: it agrees on `D` with the concave fixed point. -/
+theorem msG_solution_concave (D : MsGenData U c q R nxt B β) (hU : ConcaveOn ℝ (Ici 0) U)
+    {w : ℝ × Sx → ℝ} (hwm : Measurable w) {C : ℝ} (hC : ∀ p ∈ msSecDom c q B, |w p| ≤ C)
+    (hw : MsGBellman U c q R Q nxt B β w) : MsSecConcave c q B w := by
+  obtain ⟨w₀, hwm₀, ⟨C₀, hC₀⟩, -, hw₀, hcv⟩ := msG_exists Q D
+  have heq := msG_bellman_unique D hwm hwm₀ hC (fun p _ => hC₀ p) hw hw₀
+  intro s A₁ A₂ θ h1 h2 h0 hθ
+  have h3 : q s * B - c s ≤ θ * A₁ + (1 - θ) * A₂ := by nlinarith
+  rw [heq (A₁, s) h1, heq (A₂, s) h2, heq (θ * A₁ + (1 - θ) * A₂, s) h3]
+  exact hcv hU s A₁ A₂ θ h1 h2 h0 hθ
+
+/-! ### Exercise 16.2(d), the pricing equations (2) and (3) -/
+
+omit [IsMarkovKernel Q] in
+/-- **Exercise 16.2(d), corrected, general shock space**: let `w` satisfy (1) and be concave in
+`A`. If `b*` is optimal at `(0, ŝ)` and consumption `c(ŝ) − q(ŝ) b*` is positive, then `w(·, ŝ)` is
+differentiable at `0` with `w₁(0, ŝ) = U′(c(ŝ) − q(ŝ) b*)`. -/
+theorem ex_16_2d_general (D : MsGenData U c q R nxt B β) {dU : ℝ → ℝ}
+    (hdU : ∀ x, 0 < x → HasDerivAt U (dU x) x) {w : ℝ × Sx → ℝ}
+    (hw : MsGBellman U c q R Q nxt B β w) (hcv : MsSecConcave c q B w) {s : Sx}
+    {b : ℝ} (hb : B ≤ b) (hopt : w (0, s) = msGObj U c q R Q nxt β w 0 s b)
+    (hcons : 0 < c s - q s * b) :
+    HasDerivAt (fun A => w (A, s)) (dU (c s - q s * b)) 0 := by
+  have hq := D.q_pos s
+  have hm1 : 0 < c s - q s * B := by nlinarith [D.B_neg]
+  set r := min (c s - q s * B) (c s - q s * b) with hr
+  have hr0 : 0 < r := lt_min hm1 hcons
+  have hsl : ∀ A ∈ Ioo (-r) r, q s * B - c s ≤ A := fun A hA => by
+    linarith [hA.1, min_le_left (c s - q s * B) (c s - q s * b)]
+  have hfe : ∀ A ∈ Ioo (-r) r, q s * b ≤ c s + A := fun A hA => by
+    linarith [hA.1, min_le_right (c s - q s * B) (c s - q s * b)]
+  set L : ℝ → ℝ := fun A => msGObj U c q R Q nxt β w A s b with hL
+  have hcvW : ConcaveOn ℝ (Ioo (-r) r) fun A => w (A, s) := by
+    refine ⟨convex_Ioo _ _, fun x hx y hy a a' ha ha' haa => ?_⟩
+    obtain rfl : a' = 1 - a := by linarith
+    simpa only [smul_eq_mul] using hcv s x y a (hsl x hx) (hsl y hy) ha (by linarith)
+  have hLd : HasDerivAt L (dU (c s - q s * b)) 0 := by
+    have hin : HasDerivAt (fun A : ℝ => c s + A - q s * b) 1 0 :=
+      ((hasDerivAt_id (0 : ℝ)).const_add (c s)).sub_const _
+    have hU' : HasDerivAt U (dU (c s - q s * b)) (c s + 0 - q s * b) := by
+      rw [add_zero]; exact hdU _ hcons
+    have := (hU'.comp (0 : ℝ) hin).add_const (β * msGE R Q nxt w s b)
+    simpa [hL, msGObj, Function.comp_def] using this
+  exact ms_bs_envelope hr0 hcvW (fun A hA => (hw A s (hsl A hA)).1 b hb (hfe A hA))
+    (by exact hopt.symm) hLd
+
+/-- **Differentiation under the integral**: if `w` is measurable, bounded on `D`, concave in `A`
+and each `w(·, nxt(s, z′))` has derivative `Dw(z′)` at `0`, then
+`b ↦ ∫ w(b R(s, z′), nxt(s, z′)) Q(s, dz′)` has derivative `∫ Dw(z′) R(s, z′) Q(s, dz′)` at `0`.
+(Dominated convergence: by concavity, for `0 < |h| ≤ −B` the difference quotient in `h` lies
+between those at `−B` and at `B`.) -/
+theorem msGE_hasDerivAt (D : MsGenData U c q R nxt B β) {w : ℝ × Sx → ℝ} (hwm : Measurable w)
+    {C : ℝ} (hC : ∀ p ∈ msSecDom c q B, |w p| ≤ C) (hcv : MsSecConcave c q B w) (s : Sx)
+    {Dw : Z → ℝ} (hD : ∀ z', HasDerivAt (fun A => w (A, nxt s z')) (Dw z') 0) :
+    HasDerivAt (msGE R Q nxt w s) (∫ z', Dw z' * R s z' ∂(Q s)) 0 := by
+  have hB := D.B_neg
+  have hconc : ∀ z', ConcaveOn ℝ (Ici B) fun b => w (b * R s z', nxt s z') := fun z' => by
+    refine ⟨convex_Ici B, fun x hx y hy a a' ha ha' haa => ?_⟩
+    obtain rfl : a' = 1 - a := by linarith
+    have h := hcv (nxt s z') (x * R s z') (y * R s z') a (msG_next_mem D s hx z')
+      (msG_next_mem D s hy z') ha (by linarith)
+    have e : a * (x * R s z') + (1 - a) * (y * R s z') = (a • x + (1 - a) • y) * R s z' := by
+      simp only [smul_eq_mul]; ring
+    rw [e] at h
+    simpa only [smul_eq_mul] using h
+  have hslope : ∀ z' h, h ∈ Icc B (-B) → h ≠ 0 →
+      slope (fun b => w (b * R s z', nxt s z')) 0 (-B) ≤
+          slope (fun b => w (b * R s z', nxt s z')) 0 h ∧
+        slope (fun b => w (b * R s z', nxt s z')) 0 h ≤
+          slope (fun b => w (b * R s z', nxt s z')) 0 B := by
+    intro z' h hh h0
+    have hcvx := (hconc z').neg
+    have m0 : (0 : ℝ) ∈ Ici B := mem_Ici.2 hB.le
+    have mB : B ∈ Ici B := mem_Ici.2 le_rfl
+    have mh : h ∈ Ici B := mem_Ici.2 hh.1
+    have mnB : -B ∈ Ici B := mem_Ici.2 (by linarith)
+    have s1 := hcvx.secant_mono m0 mB mh hB.ne h0 hh.1
+    have s2 := hcvx.secant_mono m0 mh mnB h0 (by linarith : -B ≠ 0) hh.2
+    have k1 : ∀ x : ℝ, ((-fun b => w (b * R s z', nxt s z')) x -
+        (-fun b => w (b * R s z', nxt s z')) 0) / (x - 0) =
+        -slope (fun b => w (b * R s z', nxt s z')) 0 x := fun x => by
+      rw [slope_def_field, Pi.neg_apply, Pi.neg_apply]; ring
+    rw [k1, k1] at s1 s2
+    exact ⟨by linarith, by linarith⟩
+  have hint : ∀ b, B ≤ b → Integrable (fun z' => w (b * R s z', nxt s z')) (Q s) :=
+    fun b hb => msG_integrable D hwm hC s hb
+  have hslI : ∀ b, B ≤ b →
+      Integrable (fun z' => slope (fun b => w (b * R s z', nxt s z')) 0 b) (Q s) := by
+    intro b hb
+    simp only [slope, vsub_eq_sub, smul_eq_mul]
+    exact ((hint b hb).sub (hint 0 hB.le)).const_mul _
+  have hslopeInt : ∀ h, B ≤ h →
+      ∫ z', slope (fun b => w (b * R s z', nxt s z')) 0 h ∂(Q s) =
+        slope (msGE R Q nxt w s) 0 h := by
+    intro h hh
+    simp only [slope, vsub_eq_sub, smul_eq_mul, msGE]
+    rw [integral_const_mul, integral_sub (hint h hh) (hint 0 hB.le)]
+  have hφd : ∀ z', HasDerivAt (fun b => w (b * R s z', nxt s z')) (Dw z' * R s z') 0 := by
+    intro z'
+    have hinner : HasDerivAt (fun b : ℝ => b * R s z') (R s z') 0 := by
+      simpa using (hasDerivAt_id (0 : ℝ)).mul_const (R s z')
+    have hD' : HasDerivAt (fun A => w (A, nxt s z')) (Dw z') (0 * R s z') := by
+      rw [zero_mul]; exact hD z'
+    exact hD'.comp (0 : ℝ) hinner
+  rw [hasDerivAt_iff_tendsto_slope]
+  have hev : ∀ᶠ h in 𝓝[≠] (0 : ℝ), h ∈ Ioo B (-B) ∧ h ≠ 0 := by
+    filter_upwards [nhdsWithin_le_nhds (Ioo_mem_nhds hB (by linarith : (0 : ℝ) < -B)),
+      self_mem_nhdsWithin] with h h1 h2
+    exact ⟨h1, h2⟩
+  have hlim : Tendsto (fun h => ∫ z', slope (fun b => w (b * R s z', nxt s z')) 0 h ∂(Q s))
+      (𝓝[≠] 0) (𝓝 (∫ z', Dw z' * R s z' ∂(Q s))) := by
+    refine tendsto_integral_filter_of_dominated_convergence
+      (fun z' => |slope (fun b => w (b * R s z', nxt s z')) 0 B| +
+        |slope (fun b => w (b * R s z', nxt s z')) 0 (-B)|) ?_ ?_
+      ((hslI B le_rfl).abs.add (hslI (-B) (by linarith)).abs)
+      (Eventually.of_forall fun z' => hasDerivAt_iff_tendsto_slope.1 (hφd z'))
+    · refine Eventually.of_forall fun h => ?_
+      simp only [slope, vsub_eq_sub, smul_eq_mul]
+      exact (((hwm.comp (msG_meas_next D s h)).sub
+        (hwm.comp (msG_meas_next D s 0))).const_mul _).aestronglyMeasurable
+    · filter_upwards [hev] with h hh
+      refine Eventually.of_forall fun z' => ?_
+      obtain ⟨l1, l2⟩ := hslope z' h (Ioo_subset_Icc_self hh.1) hh.2
+      rw [Real.norm_eq_abs, abs_le]
+      constructor
+      · linarith [neg_abs_le (slope (fun b => w (b * R s z', nxt s z')) 0 (-B)),
+          abs_nonneg (slope (fun b => w (b * R s z', nxt s z')) 0 B)]
+      · linarith [le_abs_self (slope (fun b => w (b * R s z', nxt s z')) 0 B),
+          abs_nonneg (slope (fun b => w (b * R s z', nxt s z')) 0 (-B))]
+  refine hlim.congr' ?_
+  filter_upwards [hev] with h hh
+  exact hslopeInt h hh.1.1.le
+
+/-- **The first-order condition for (1)**, general shock space: if `b = 0` is optimal at `(0, s)`
+with `c(s) > 0`, `w` is measurable, bounded on `D` and concave in `A`, and each `w(·, s′)` has
+derivative `Dw(z′)` at `0`, then `q(s) U′(c(s)) = β ∫ Dw(z′) R(s, z′) Q(s, dz′)`. -/
+theorem msG_foc (D : MsGenData U c q R nxt B β) {dU : ℝ → ℝ}
+    (hdU : ∀ x, 0 < x → HasDerivAt U (dU x) x) {w : ℝ × Sx → ℝ} (hwm : Measurable w) {C : ℝ}
+    (hC : ∀ p ∈ msSecDom c q B, |w p| ≤ C) (hw : MsGBellman U c q R Q nxt B β w)
+    (hcv : MsSecConcave c q B w) {s : Sx} (hc : 0 < c s)
+    (hopt : w (0, s) = msGObj U c q R Q nxt β w 0 s 0) {Dw : Z → ℝ}
+    (hD : ∀ z', HasDerivAt (fun A => w (A, nxt s z')) (Dw z') 0) :
+    q s * dU (c s) = β * ∫ z', Dw z' * R s z' ∂(Q s) := by
+  have hq := D.q_pos s
+  have hdom : q s * B - c s ≤ 0 := by nlinarith [D.B_neg]
+  set Ψ : ℝ → ℝ := fun b => msGObj U c q R Q nxt β w 0 s b with hΨ
+  have hmax : IsLocalMax Ψ 0 := by
+    have h1 : ∀ᶠ b in 𝓝 (0 : ℝ), B < b := (tendsto_id).eventually_const_lt D.B_neg
+    have h2 : ∀ᶠ b in 𝓝 (0 : ℝ), q s * b < c s + 0 := by
+      have : Tendsto (fun b : ℝ => q s * b) (𝓝 0) (𝓝 0) := by
+        simpa using (tendsto_id (x := 𝓝 (0 : ℝ))).const_mul (q s)
+      exact this.eventually_lt_const (by linarith)
+    filter_upwards [h1, h2] with b hb1 hb2
+    have := (hw 0 s hdom).1 b hb1.le hb2.le
+    simp only [hΨ]
+    rw [← hopt]
+    exact this
+  have hin : HasDerivAt (fun b : ℝ => c s + 0 - q s * b) (-(q s)) 0 := by
+    simpa using ((hasDerivAt_id (0 : ℝ)).const_mul (q s)).const_sub (c s + 0)
+  have hU' : HasDerivAt U (dU (c s)) (c s + 0 - q s * 0) := by
+    simp only [add_zero, mul_zero, sub_zero]; exact hdU _ hc
+  have hE := msGE_hasDerivAt D hwm hC hcv s (Q := Q) hD
+  have hΨd : HasDerivAt Ψ (dU (c s) * -(q s) + β * ∫ z', Dw z' * R s z' ∂(Q s)) 0 := by
+    have hΨeq : Ψ = (fun b => U (c s + 0 - q s * b)) + fun b => β * msGE R Q nxt w s b := by
+      funext b; rfl
+    rw [hΨeq]
+    exact (hU'.comp (0 : ℝ) hin).add (hE.const_mul β)
+  have := hmax.hasDerivAt_eq_zero hΨd
+  linarith
+
+/-- **The pricing equation (2)**, general shock space: if `c > 0`, `w` is a measurable solution of
+(1) bounded on `D` and concave in `A`, and `b = 0` is optimal at `A = 0` in every state, then
+`U′[c(s)] q(s) = β ∫ U′(c[nxt(s, z′)]) R(s, z′) Q(s, dz′)`. With `R(s, z′) = f(z′)` and
+`nxt(s, z′) = (g(x, z), z′)` this is (2). -/
+theorem ex_16_2_eq2_general (D : MsGenData U c q R nxt B β) {dU : ℝ → ℝ}
+    (hdU : ∀ x, 0 < x → HasDerivAt U (dU x) x) {w : ℝ × Sx → ℝ} (hwm : Measurable w) {C : ℝ}
+    (hC : ∀ p ∈ msSecDom c q B, |w p| ≤ C) (hw : MsGBellman U c q R Q nxt B β w)
+    (hcv : MsSecConcave c q B w) (hc : ∀ s, 0 < c s)
+    (hopt : ∀ s, w (0, s) = msGObj U c q R Q nxt β w 0 s 0) (s : Sx) :
+    q s * dU (c s) = β * ∫ z', dU (c (nxt s z')) * R s z' ∂(Q s) := by
+  refine msG_foc D hdU hwm hC hw hcv (hc s) (hopt s) fun z' => ?_
+  have hpos : 0 < c (nxt s z') - q (nxt s z') * 0 := by
+    rw [mul_zero, sub_zero]; exact hc _
+  have := ex_16_2d_general D hdU hw hcv D.B_neg.le (hopt _) hpos
+  rwa [mul_zero, sub_zero] at this
+
+/-- **Exercise 16.2(g)**, general shock space: for an asset paying the dividend `f(s′)` with
+ex-dividend price `q`, the return is `R(s, z′) = f(s′) + q(s′)`, and no trade in every state gives
+(3): `U′[c(s)] q(s) = β ∫ U′(c[s′]) {f[s′] + q[s′]} Q(s, dz′)`, `s′ = nxt(s, z′)`. -/
+theorem ex_16_2g_general {f : Sx → ℝ}
+    (D : MsGenData U c q (fun s z' => f (nxt s z') + q (nxt s z')) nxt B β) {dU : ℝ → ℝ}
+    (hdU : ∀ x, 0 < x → HasDerivAt U (dU x) x) {w : ℝ × Sx → ℝ} (hwm : Measurable w) {C : ℝ}
+    (hC : ∀ p ∈ msSecDom c q B, |w p| ≤ C)
+    (hw : MsGBellman U c q (fun s z' => f (nxt s z') + q (nxt s z')) Q nxt B β w)
+    (hcv : MsSecConcave c q B w) (hc : ∀ s, 0 < c s)
+    (hopt : ∀ s, w (0, s) =
+      msGObj U c q (fun s z' => f (nxt s z') + q (nxt s z')) Q nxt β w 0 s 0) (s : Sx) :
+    dU (c s) * q s =
+      β * ∫ z', dU (c (nxt s z')) * (f (nxt s z') + q (nxt s z')) ∂(Q s) := by
+  rw [mul_comm]
+  exact ex_16_2_eq2_general D hdU hwm hC hw hcv hc hopt s
+
+/-! ### The converse of Exercise 16.2(d): the equilibrium price makes no trade optimal -/
+
+/-- The key step of the verification argument: if `w(A′, s′) ≤ w(0, s′) + U′(c(s′))A′ + E` on `D`,
+then the objective of (1) at `(A, s)` is at most `w(0, s) + U′(c(s))A + βE` (tangent inequality,
+Bellman equation and (2)). -/
+theorem msG_super_step (D : MsGenData U c q R nxt B β) (hU : ConcaveOn ℝ (Ici 0) U)
+    {dU : ℝ → ℝ} (hdU : ∀ x, 0 < x → HasDerivAt U (dU x) x) (hc : ∀ s, 0 < c s)
+    (h2 : ∀ s, q s * dU (c s) = β * ∫ z', dU (c (nxt s z')) * R s z' ∂(Q s))
+    (hint : ∀ s, Integrable (fun z' => dU (c (nxt s z')) * R s z') (Q s))
+    {w : ℝ × Sx → ℝ} (hwm : Measurable w) {C : ℝ} (hC : ∀ p ∈ msSecDom c q B, |w p| ≤ C)
+    (hw : MsGBellman U c q R Q nxt B β w) {E : ℝ}
+    (hE : ∀ A s, q s * B - c s ≤ A → w (A, s) ≤ w (0, s) + dU (c s) * A + E)
+    {A : ℝ} {s : Sx} {b : ℝ} (hb : B ≤ b) (hbf : q s * b ≤ c s + A) :
+    msGObj U c q R Q nxt β w A s b ≤ w (0, s) + dU (c s) * A + β * E := by
+  have hq := D.q_pos s
+  have h0dom : q s * B - c s ≤ 0 := by nlinarith [D.B_neg, hc s]
+  have hge0 := (hw 0 s h0dom).1 0 D.B_neg.le (by rw [mul_zero, add_zero]; exact (hc s).le)
+  have hE0 : msGE R Q nxt w s 0 = ∫ z', w (0, nxt s z') ∂(Q s) := by
+    simp only [msGE, zero_mul]
+  simp only [msGObj, add_zero, mul_zero, sub_zero, hE0] at hge0
+  have ht := gc_concave_le_tangent hU (hc s) (by linarith : (0 : ℝ) ≤ c s + A - q s * b)
+    (hdU _ (hc s))
+  have i0 := msG_integrable_zero (Q := Q) D hwm hC s
+  have ib := msG_integrable (Q := Q) D hwm hC s hb
+  have hsum : msGE R Q nxt w s b ≤ ∫ z', w (0, nxt s z') ∂(Q s) +
+      b * ∫ z', dU (c (nxt s z')) * R s z' ∂(Q s) + E := by
+    have hle : msGE R Q nxt w s b ≤ ∫ z', (w (0, nxt s z') +
+        b * (dU (c (nxt s z')) * R s z') + E) ∂(Q s) := by
+      unfold msGE
+      refine integral_mono ib ((i0.add ((hint s).const_mul b)).add (integrable_const E))
+        fun z' => ?_
+      have h := hE _ _ (msG_next_mem D s hb z')
+      have e : dU (c (nxt s z')) * (b * R s z') = b * (dU (c (nxt s z')) * R s z') := by ring
+      change w (b * R s z', nxt s z') ≤ w (0, nxt s z') + b * (dU (c (nxt s z')) * R s z') + E
+      linarith
+    have i1 : Integrable (fun z' => w (0, nxt s z') + b * (dU (c (nxt s z')) * R s z')) (Q s) :=
+      i0.add ((hint s).const_mul b)
+    have i2 : Integrable (fun z' => b * (dU (c (nxt s z')) * R s z')) (Q s) :=
+      (hint s).const_mul b
+    rwa [integral_add i1 (integrable_const E), integral_add i0 i2, integral_const_mul,
+      integral_const, probReal_univ, one_smul] at hle
+  have e2 := h2 s
+  have hβ := D.beta_pos
+  simp only [msGObj]
+  have key : β * (b * ∫ z', dU (c (nxt s z')) * R s z' ∂(Q s)) = b * (q s * dU (c s)) := by
+    rw [e2]; ring
+  nlinarith [mul_le_mul_of_nonneg_left hsum hβ.le]
+
+/-- **The supergradient inequality**, general shock space: if `q` satisfies (2) in every state
+(with `U′(c(s′)) R(s, ·)` integrable), every measurable solution `w` of (1) bounded on `D`
+satisfies `w(A, s) ≤ w(0, s) + U′(c(s))A` on `D`. -/
+theorem msG_supergradient (D : MsGenData U c q R nxt B β) (hU : ConcaveOn ℝ (Ici 0) U)
+    {dU : ℝ → ℝ} (hdU : ∀ x, 0 < x → HasDerivAt U (dU x) x) (hdUpos : ∀ x, 0 < x → 0 < dU x)
+    (hc : ∀ s, 0 < c s)
+    (h2 : ∀ s, q s * dU (c s) = β * ∫ z', dU (c (nxt s z')) * R s z' ∂(Q s))
+    (hint : ∀ s, Integrable (fun z' => dU (c (nxt s z')) * R s z') (Q s))
+    (hK : ∃ K, ∀ s, dU (c s) * (c s - q s * B) ≤ K) {w : ℝ × Sx → ℝ} (hwm : Measurable w)
+    {C : ℝ} (hC : ∀ p ∈ msSecDom c q B, |w p| ≤ C) (hw : MsGBellman U c q R Q nxt B β w) :
+    ∀ A s, q s * B - c s ≤ A → w (A, s) ≤ w (0, s) + dU (c s) * A := by
+  obtain ⟨K, hK⟩ := hK
+  set M := 2 * C + max K 0 with hM
+  have key : ∀ n : ℕ, ∀ A s, q s * B - c s ≤ A →
+      w (A, s) ≤ w (0, s) + dU (c s) * A + β ^ n * M := by
+    intro n
+    induction n with
+    | zero =>
+      intro A s hA
+      have hq := D.q_pos s
+      have h0dom : q s * B - c s ≤ 0 := by nlinarith [D.B_neg, hc s]
+      have h1 := (abs_le.1 (hC (A, s) hA)).2
+      have h2' := (abs_le.1 (hC (0, s) h0dom)).1
+      have hd := hdUpos _ (hc s)
+      have hKs := hK s
+      have : -(dU (c s) * A) ≤ max K 0 := by
+        rcases le_total A 0 with hneg | hpos
+        · have : -(dU (c s) * A) ≤ dU (c s) * (c s - q s * B) := by nlinarith
+          exact this.trans (hKs.trans (le_max_left _ _))
+        · have : -(dU (c s) * A) ≤ 0 := by nlinarith
+          exact this.trans (le_max_right _ _)
+      rw [pow_zero, one_mul, hM]
+      linarith
+    | succ n ih =>
+      intro A s hA
+      obtain ⟨b, hb, hbf, e⟩ := (hw A s hA).2
+      have := msG_super_step D hU hdU hc h2 hint hwm hC hw ih hb hbf
+      rw [e, pow_succ, mul_comm (β ^ n) β, mul_assoc]
+      exact this
+  intro A s hA
+  have hlim : Tendsto (fun n : ℕ => w (0, s) + dU (c s) * A + β ^ n * M) atTop
+      (𝓝 (w (0, s) + dU (c s) * A)) := by
+    simpa using tendsto_const_nhds.add
+      ((tendsto_pow_atTop_nhds_zero_of_lt_one D.beta_pos.le D.beta_lt_one).mul_const M)
+  exact ge_of_tendsto' hlim fun n => key n A s hA
+
+/-- **Exercise 16.2(d), converse, general shock space**: if the price `q` satisfies the pricing
+equation (2) in every state (with `U′(c(s′)) R(s, ·)` integrable), then for every measurable
+solution `w` of (1) bounded on `D`, `b = 0` (no trade) is optimal at `A = 0` in every state. -/
+theorem ex_16_2d_converse_general (D : MsGenData U c q R nxt B β) (hU : ConcaveOn ℝ (Ici 0) U)
+    {dU : ℝ → ℝ} (hdU : ∀ x, 0 < x → HasDerivAt U (dU x) x) (hdUpos : ∀ x, 0 < x → 0 < dU x)
+    (hc : ∀ s, 0 < c s)
+    (h2 : ∀ s, q s * dU (c s) = β * ∫ z', dU (c (nxt s z')) * R s z' ∂(Q s))
+    (hint : ∀ s, Integrable (fun z' => dU (c (nxt s z')) * R s z') (Q s))
+    (hK : ∃ K, ∀ s, dU (c s) * (c s - q s * B) ≤ K) {w : ℝ × Sx → ℝ} (hwm : Measurable w)
+    {C : ℝ} (hC : ∀ p ∈ msSecDom c q B, |w p| ≤ C) (hw : MsGBellman U c q R Q nxt B β w)
+    (s : Sx) : w (0, s) = msGObj U c q R Q nxt β w 0 s 0 := by
+  have hsup := msG_supergradient D hU hdU hdUpos hc h2 hint hK hwm hC hw
+  have hq := D.q_pos s
+  have h0dom : q s * B - c s ≤ 0 := by nlinarith [D.B_neg, hc s]
+  obtain ⟨b, hb, hbf, e⟩ := (hw 0 s h0dom).2
+  have hge := (hw 0 s h0dom).1 0 D.B_neg.le (by rw [mul_zero, add_zero]; exact (hc s).le)
+  have hE0 : msGE R Q nxt w s 0 = ∫ z', w (0, nxt s z') ∂(Q s) := by
+    simp only [msGE, zero_mul]
+  have hge0 : msGObj U c q R Q nxt β w 0 s 0 = U (c s) + β * ∫ z', w (0, nxt s z') ∂(Q s) := by
+    simp only [msGObj, add_zero, mul_zero, sub_zero, hE0]
+  apply le_antisymm _ hge
+  rw [e]
+  have ht := gc_concave_le_tangent hU (hc s) (by linarith : (0 : ℝ) ≤ c s + 0 - q s * b)
+    (hdU _ (hc s))
+  have i0 := msG_integrable_zero (Q := Q) D hwm hC s
+  have ib := msG_integrable (Q := Q) D hwm hC s hb
+  have hsum : msGE R Q nxt w s b ≤ ∫ z', w (0, nxt s z') ∂(Q s) +
+      b * ∫ z', dU (c (nxt s z')) * R s z' ∂(Q s) := by
+    have hle : msGE R Q nxt w s b ≤
+        ∫ z', (w (0, nxt s z') + b * (dU (c (nxt s z')) * R s z')) ∂(Q s) := by
+      unfold msGE
+      refine integral_mono ib (i0.add ((hint s).const_mul b)) fun z' => ?_
+      have h := hsup _ _ (msG_next_mem D s hb z')
+      have e : dU (c (nxt s z')) * (b * R s z') = b * (dU (c (nxt s z')) * R s z') := by ring
+      change w (b * R s z', nxt s z') ≤ w (0, nxt s z') + b * (dU (c (nxt s z')) * R s z')
+      linarith
+    have i2 : Integrable (fun z' => b * (dU (c (nxt s z')) * R s z')) (Q s) :=
+      (hint s).const_mul b
+    rwa [integral_add i0 i2, integral_const_mul] at hle
+  have key : β * (b * ∫ z', dU (c (nxt s z')) * R s z' ∂(Q s)) = b * (q s * dU (c s)) := by
+    rw [h2 s]; ring
+  rw [hge0]
+  simp only [msGObj]
+  nlinarith [mul_le_mul_of_nonneg_left hsum D.beta_pos.le]
+
+/-- **In equilibrium the book's (d) holds**, general shock space: if `q` satisfies (2) in every
+state and `w` (measurable, bounded on `D`, concave in `A`) solves (1), then `w(·, s)` is
+differentiable at `0` with `w₁(0, s) = U′(c(s))`. -/
+theorem ex_16_2d_equilibrium_general (D : MsGenData U c q R nxt B β)
+    (hUs : StrictConcaveOn ℝ (Ici 0) U) {dU : ℝ → ℝ} (hdU : ∀ x, 0 < x → HasDerivAt U (dU x) x)
+    (hdUpos : ∀ x, 0 < x → 0 < dU x) (hc : ∀ s, 0 < c s)
+    (h2 : ∀ s, q s * dU (c s) = β * ∫ z', dU (c (nxt s z')) * R s z' ∂(Q s))
+    (hint : ∀ s, Integrable (fun z' => dU (c (nxt s z')) * R s z') (Q s))
+    (hK : ∃ K, ∀ s, dU (c s) * (c s - q s * B) ≤ K) {w : ℝ × Sx → ℝ} (hwm : Measurable w)
+    {C : ℝ} (hC : ∀ p ∈ msSecDom c q B, |w p| ≤ C) (hw : MsGBellman U c q R Q nxt B β w)
+    (hcv : MsSecConcave c q B w) (s : Sx) :
+    HasDerivAt (fun A => w (A, s)) (dU (c s)) 0 := by
+  have hopt := ex_16_2d_converse_general D hUs.concaveOn hdU hdUpos hc h2 hint hK hwm hC hw s
+  have := ex_16_2d_general D hdU hw hcv (s := s) D.B_neg.le hopt
+    (by rw [mul_zero, sub_zero]; exact hc s)
+  rwa [mul_zero, sub_zero] at this
+
+end StokeyLucasPrescott.EquilibriumApplications
+
+/-
+Copyright (c) 2026 Robert Kirkby. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Robert Kirkby
+-/
+
+/-!
+# A many-sector model of stochastic growth with `M` consumption goods (Ex 16.2(a)–(b))
+
+SLP §16.2, pp. 481–482, as the book states it: `M` consumption goods, `l` capital goods, and the
+commodity space `S^M` of sequences of essentially bounded `c_t : Z^t → ℝ^M`. `ManySector`,
+`ManySectorTech` and `ManySectorPrices` prove Exercise 16.2(a)–(b) for `M = 1`; this module
+reuses that structure for any `M ≥ 1`.
+
+**The commodity space.** A bundle `c_t(z^t) = (c_{t1}(z^t), …, c_{tM}(z^t)) ∈ ℝ^M` (goods as
+`Fin M → ℝ`) is the function `(z^t, m) ↦ c_{tm}(z^t)` on `Z^t × {1, …, M}`, and
+`S^M = LinftyTimeState (msMμ μ M)` with `msMμ μ M t = μ^t ⊗ ρ`, `ρ` the uniform probability on the
+goods (`msMUnif`). A set is `μ^t ⊗ ρ`-null iff its `z^t`-projection is `μ^t`-null
+(`msM_ae_iff`: a.e. on `Z^t × {1, …, M}` means `μ^t`-a.e. for every good), so elements of `S^M`
+are the book's equivalence classes and `‖c‖ = sup_t ess sup_{z^t} max_m |c_{tm}(z^t)|` (the sup
+norm on `ℝ^M`). The Chapter 15 machinery (Theorems 15.4 and 15.9, for one good on an arbitrary
+probability space) then applies verbatim, and the price of Theorem 15.9 on `Z^t × {1, …, M}` is
+read back as `M` prices per period (`msM_price_form`).
+
+* Preferences: `msMEU`, `msMU` (`u(c) = Σ_t βᵗ ∫ U[c_t(z^t)] dμ^t`, `U : ℝ^M → ℝ`),
+  `ManySectorMHyp` (`U` continuous, bounded, strictly increasing and strictly concave on `ℝ^M_+`).
+* **Exercise 16.2(a), consumption side** (`ex_16_2a_consumer_M`): 15.1–15.3, 15.7, 15.9′ (an
+  event of `Z^s × {1, …, M}` may truncate some goods and not others: `msM_eu_trunc_tendsto`) and
+  the consumer halves of 15.6 and 15.8′; `msM_U_lt_add_one` (nonsatiation),
+  `msM_supporting_nonneg`.
+* Technology: `MsMTech` (properties (a)–(c) of §10.3 for `Φ(x, z) ⊆ ℝ^M_+ × X`), `msMY` (the
+  production set), `MsMFreeDisposal` (goodwise free disposal of consumption),
+  `MsMPositiveProduction` (a plan producing at least `ε > 0` of every good); `msM_Y_sub_C`,
+  `msM_convex_Y` (15.4), `msM_Y_timeTrunc` (15.6), `msM_Y_periodTrunc` (15.8′), `msM_interior_Y`
+  (15.5).
+* **Exercise 16.2(a), `M` goods** (`ex_16_2a_M`): `(C, u, Y)` satisfy 15.1–15.7 and 15.8′–15.9′.
+* **Exercise 16.2(b), `M` goods** (`ex_16_2b_M`): `(γ*, γ*, ν)` is a competitive equilibrium with
+  `ν(γ*) > 0` and `ν(c) = Σ_t ∫ [Σ_m p_{tm}(z^t) c_{tm}(z^t)] dμ^t(z^t)`, `p_{tm} ∈ L¹(μ^t)`.
+
+**Corrections.** As for `M = 1` (NOTE to Ex 16.2a): free disposal of consumption (here goodwise)
+and a plan producing a uniformly positive amount of **every** good are added (the counterexamples
+`ex_16_2a_trunc_counterexample` and `ex_16_2a_interior_counterexample` of `ManySectorTech` are the
+case `M = 1`); "for all `z^t`" in `Y` reads "a.e."; `U` is defined on all of `ℝ^M` (only its values
+on `ℝ^M_+` matter); `γ*` maximising `u` on `C ∩ Y` (Ex 10.3b) is a hypothesis. Theorem 15.9 is
+used for one good on `Z^t × {1, …, M}`, which is the remark after Theorem 15.8 ("any finite number
+of goods", NOTE (iv)) made precise.
+-/
+
+namespace StokeyLucasPrescott.EquilibriumApplications
+
+open MeasureTheory Filter Topology Set
+open scoped ENNReal
+
+variable {Ω : ℕ → Type*} [∀ t, MeasurableSpace (Ω t)] {μ : ∀ t, Measure (Ω t)} {M : ℕ}
+
+/-- The uniform probability on the `M` goods, `ρ{m} = 1/M`. -/
+noncomputable def msMUnif (M : ℕ) : Measure (Fin M) := (M : ℝ≥0∞)⁻¹ • Measure.count
+
+/-- The measure `μ^t ⊗ ρ` on `Z^t × {1, …, M}`: a commodity bundle `c_t : Z^t → ℝ^M` is the
+function `(z^t, m) ↦ c_{tm}(z^t)`. -/
+noncomputable def msMμ (μ : ∀ t, Measure (Ω t)) (M : ℕ) (t : ℕ) : Measure (Ω t × Fin M) :=
+  (μ t).prod (msMUnif M)
+
+/-- `ρ` is a probability measure (`M ≥ 1`). -/
+theorem msMUnif_prob [NeZero M] : IsProbabilityMeasure (msMUnif M) := by
+  constructor
+  simp only [msMUnif, Measure.smul_apply, Measure.count_univ, smul_eq_mul]
+  simp only [ENat.card_eq_coe_fintype_card, Fintype.card_fin, ENat.toENNReal_coe]
+  exact ENNReal.inv_mul_cancel (by simp [NeZero.ne]) (by simp)
+
+/-- Every good has positive weight: `ρ{m} ≠ 0`. -/
+theorem msMUnif_singleton_ne (m : Fin M) : msMUnif M {m} ≠ 0 := by
+  simp [msMUnif]
+
+/-- `μ^t ⊗ ρ` is a probability measure. -/
+theorem msMμ_prob [∀ t, IsProbabilityMeasure (μ t)] [NeZero M] (t : ℕ) :
+    IsProbabilityMeasure (msMμ μ M t) := by
+  have := msMUnif_prob (M := M)
+  rw [msMμ]
+  infer_instance
+
+/-- **A.e. on `Z^t × {1, …, M}` is a.e. in `z^t` for every good**. -/
+theorem msM_ae_iff {t : ℕ} {P : Ω t × Fin M → Prop} :
+    (∀ᵐ p ∂msMμ μ M t, P p) ↔ ∀ᵐ ω ∂μ t, ∀ m, P (ω, m) := by
+  constructor
+  · intro h
+    filter_upwards [Measure.ae_ae_of_ae_prod h] with ω hω m
+    exact (ae_iff_of_countable.1 hω) m (msMUnif_singleton_ne m)
+  · intro h
+    rw [ae_iff]
+    refine measure_mono_null (t := {ω | ¬ ∀ m, P (ω, m)} ×ˢ univ) ?_ ?_
+    · intro p hp
+      exact ⟨fun hall => hp (hall p.2), mem_univ _⟩
+    · rw [msMμ, Measure.prod_prod, ae_iff.1 h, zero_mul]
+
+/-- The coordinate `z^t ↦ x_m(z^t)` of `x ∈ L∞(μ^t ⊗ ρ)` is measurable. -/
+theorem msM_coord_measurable {t : ℕ} (x : Lp ℝ ⊤ (msMμ μ M t)) (m : Fin M) :
+    Measurable fun ω => x (ω, m) :=
+  (Lp.stronglyMeasurable x).measurable.comp measurable_prodMk_right
+
+/-- The bundle `z^t ↦ (x_m(z^t))_m ∈ ℝ^M` is measurable. -/
+theorem msM_bundle_measurable {t : ℕ} (x : Lp ℝ ⊤ (msMμ μ M t)) :
+    Measurable fun ω => fun m => x (ω, m) :=
+  measurable_pi_iff.2 fun m => msM_coord_measurable x m
+
+/-- Coordinates of a linear combination in one period, a.e. for every good. -/
+theorem msM_lp_combo_ae {t : ℕ} (a b : ℝ) (x y : Lp ℝ ⊤ (msMμ μ M t)) :
+    ∀ᵐ ω ∂μ t, ∀ m, (a • x + b • y) (ω, m) = a * x (ω, m) + b * y (ω, m) :=
+  (msM_ae_iff (P := fun p => (a • x + b • y) p = a * x p + b * y p)).1 (by
+    filter_upwards [Lp.coeFn_add (a • x) (b • y), Lp.coeFn_smul a x, Lp.coeFn_smul b y]
+      with p h1 h2 h3
+    rw [h1, Pi.add_apply, h2, h3, Pi.smul_apply, Pi.smul_apply, smul_eq_mul, smul_eq_mul])
+
+/-- Coordinates of a sum, a.e. for every good. -/
+theorem msM_add_ae (c d : LinftyTimeState (msMμ μ M)) (t : ℕ) :
+    ∀ᵐ ω ∂μ t, ∀ m, (c + d) t (ω, m) = c t (ω, m) + d t (ω, m) :=
+  (msM_ae_iff (P := fun p => (c + d) t p = c t p + d t p)).1 (by
+    filter_upwards [Lp.coeFn_add (c t) (d t)] with p hp
+    rw [ms_coord_add, hp, Pi.add_apply])
+
+/-- Membership in `C`: every good is consumed in a nonnegative amount, a.e. -/
+theorem msM_C_ae {c : LinftyTimeState (msMμ μ M)} (hc : c ∈ msC (msMμ μ M)) (t : ℕ) :
+    ∀ᵐ ω ∂μ t, ∀ m, 0 ≤ c t (ω, m) :=
+  (msM_ae_iff (P := fun p => 0 ≤ c t p)).1 (hc t)
+
+/-- `C` from the bundle: a.e. nonnegative bundles in every period. -/
+theorem msM_C_of_ae {c : LinftyTimeState (msMμ μ M)}
+    (hc : ∀ t, ∀ᵐ ω ∂μ t, ∀ m, 0 ≤ c t (ω, m)) : c ∈ msC (msMμ μ M) :=
+  fun t => (msM_ae_iff (P := fun p => 0 ≤ c t p)).2 (hc t)
+
+/-- `|x_m(z^t)| ≤ ‖x‖` a.e. for every good. -/
+theorem msM_ae_abs_le (c : LinftyTimeState (msMμ μ M)) (t : ℕ) :
+    ∀ᵐ ω ∂μ t, ∀ m, |c t (ω, m)| ≤ ‖c‖ :=
+  (msM_ae_iff (P := fun p => |c t p| ≤ ‖c‖)).1 (ms_ae_abs_le c t)
+
+/-! ### Preferences over `M` goods -/
+
+/-- Expected utility in period `t`: `∫ U(x_1(z^t), …, x_M(z^t)) dμ^t(z^t)`. -/
+noncomputable def msMEU (μ : ∀ t, Measure (Ω t)) (M : ℕ) (U : (Fin M → ℝ) → ℝ) (t : ℕ)
+    (x : Lp ℝ ⊤ (msMμ μ M t)) : ℝ :=
+  ∫ ω, U (fun m => x (ω, m)) ∂(μ t)
+
+/-- Preferences `u(c) = Σ_t βᵗ ∫ U[c_t(z^t)] dμ^t` with `c_t(z^t) ∈ ℝ^M` (§10.3 (1)). -/
+noncomputable def msMU (μ : ∀ t, Measure (Ω t)) (M : ℕ) (β : ℝ) (U : (Fin M → ℝ) → ℝ)
+    (c : LinftyTimeState (msMμ μ M)) : ℝ :=
+  ∑' t, β ^ t * msMEU μ M U t (c t)
+
+/-- The restrictions of §10.3 on `U : ℝ^M → ℝ` and `β`: `U` continuous, bounded, strictly
+increasing and strictly concave on `ℝ^M_+`, `0 < β < 1`. -/
+structure ManySectorMHyp (U : (Fin M → ℝ) → ℝ) (β : ℝ) : Prop where
+  beta_pos : 0 < β
+  beta_lt_one : β < 1
+  U_cont : Continuous U
+  U_bdd : ∃ B, ∀ x, |U x| ≤ B
+  U_strictMono : StrictMonoOn U (Ici 0)
+  U_strictConcave : StrictConcaveOn ℝ (Ici 0) U
+
+variable {U : (Fin M → ℝ) → ℝ} {β : ℝ} [∀ t, IsProbabilityMeasure (μ t)]
+
+/-- `U ∘ x` is integrable. -/
+theorem msM_integrable (H : ManySectorMHyp U β) (t : ℕ) (x : Lp ℝ ⊤ (msMμ μ M t)) :
+    Integrable (fun ω => U (fun m => x (ω, m))) (μ t) := by
+  obtain ⟨B, hB⟩ := H.U_bdd
+  exact Integrable.of_bound
+    (H.U_cont.measurable.comp (msM_bundle_measurable x)).aestronglyMeasurable
+    B (Eventually.of_forall fun ω => by rw [Real.norm_eq_abs]; exact hB _)
+
+/-- `|∫ U(x) dμ^t| ≤ B` for `|U| ≤ B`. -/
+theorem msM_eu_abs_le {B : ℝ} (hB : ∀ x, |U x| ≤ B) (t : ℕ) (x : Lp ℝ ⊤ (msMμ μ M t)) :
+    |msMEU μ M U t x| ≤ B := by
+  have := norm_integral_le_of_norm_le_const (μ := μ t) (f := fun ω => U (fun m => x (ω, m)))
+    (C := B) (Eventually.of_forall fun ω => by rw [Real.norm_eq_abs]; exact hB _)
+  simpa [msMEU, probReal_univ] using this
+
+/-- The terms of `u` are bounded by `B βᵗ`. -/
+theorem msM_term_le (H : ManySectorMHyp U β) {B : ℝ} (hB : ∀ x, |U x| ≤ B)
+    (c : LinftyTimeState (msMμ μ M)) (t : ℕ) :
+    ‖β ^ t * msMEU μ M U t (c t)‖ ≤ B * β ^ t := by
+  rw [Real.norm_eq_abs, abs_mul, abs_of_pos (pow_pos H.beta_pos t), mul_comm]
+  exact mul_le_mul_of_nonneg_right (msM_eu_abs_le hB t _) (pow_nonneg H.beta_pos.le t)
+
+/-- The series defining `u` converges. -/
+theorem msM_summable (H : ManySectorMHyp U β) (c : LinftyTimeState (msMμ μ M)) :
+    Summable fun t => β ^ t * msMEU μ M U t (c t) := by
+  obtain ⟨B, hB⟩ := H.U_bdd
+  exact Summable.of_norm_bounded ((summable_geometric_of_lt_one H.beta_pos.le
+    H.beta_lt_one).mul_left B) (msM_term_le H hB c)
+
+/-- Per-period concavity on a.e. nonnegative bundles. -/
+theorem msM_eu_concave (H : ManySectorMHyp U β) (t : ℕ) {x x' : Lp ℝ ⊤ (msMμ μ M t)}
+    (hx : ∀ᵐ ω ∂μ t, ∀ m, 0 ≤ x (ω, m)) (hx' : ∀ᵐ ω ∂μ t, ∀ m, 0 ≤ x' (ω, m)) {θ : ℝ}
+    (h0 : 0 ≤ θ) (h1 : θ ≤ 1) :
+    θ * msMEU μ M U t x + (1 - θ) * msMEU μ M U t x' ≤ msMEU μ M U t (θ • x + (1 - θ) • x') := by
+  rw [msMEU, msMEU, msMEU, ← integral_const_mul, ← integral_const_mul,
+    ← integral_add ((msM_integrable H t x).const_mul θ) ((msM_integrable H t x').const_mul (1 - θ))]
+  refine integral_mono_ae (((msM_integrable H t x).const_mul θ).add
+    ((msM_integrable H t x').const_mul (1 - θ))) (msM_integrable H t _) ?_
+  filter_upwards [msM_lp_combo_ae θ (1 - θ) x x', hx, hx'] with ω e p1 p2
+  have hb : (fun m => (θ • x + (1 - θ) • x') (ω, m)) =
+      θ • (fun m => x (ω, m)) + (1 - θ) • (fun m => x' (ω, m)) := by
+    funext m
+    rw [e m, Pi.add_apply, Pi.smul_apply, Pi.smul_apply, smul_eq_mul, smul_eq_mul]
+  have := H.U_strictConcave.concaveOn.2 (mem_Ici.2 fun m => p1 m) (mem_Ici.2 fun m => p2 m) h0
+    (show (0 : ℝ) ≤ 1 - θ by linarith) (show θ + (1 - θ) = 1 by ring)
+  simp only [smul_eq_mul] at this
+  change θ * U (fun m => x (ω, m)) + (1 - θ) * U (fun m => x' (ω, m)) ≤
+    U (fun m => (θ • x + (1 - θ) • x') (ω, m))
+  rw [hb]
+  exact this
+
+/-- `u` is concave on `C`. -/
+theorem msM_U_concave (H : ManySectorMHyp U β) :
+    ConcaveOn ℝ (msC (msMμ μ M)) (msMU μ M β U) := by
+  refine ⟨ms_convex_C, fun c hc d hd a b ha hb hab => ?_⟩
+  obtain rfl : b = 1 - a := by linarith
+  simp only [smul_eq_mul, msMU]
+  rw [← tsum_mul_left, ← tsum_mul_left, ← (((msM_summable H c).mul_left a)).tsum_add
+    ((msM_summable H d).mul_left (1 - a))]
+  refine Summable.tsum_le_tsum (fun t => ?_) (((msM_summable H c).mul_left a).add
+    ((msM_summable H d).mul_left (1 - a))) (msM_summable H _)
+  rw [ms_coord_add, ms_coord_smul, ms_coord_smul]
+  have := msM_eu_concave H t (msM_C_ae hc t) (msM_C_ae hd t) ha (by linarith)
+  have hβ := pow_pos H.beta_pos t
+  nlinarith [mul_le_mul_of_nonneg_left this hβ.le]
+
+/-- **Assumption 15.2** (from concavity of `U`). -/
+theorem msM_assumption15_2 (H : ManySectorMHyp U β) :
+    Assumption15_2 (fun _ : Unit => msC (msMμ μ M)) (fun _ => msMU μ M β U) := by
+  intro _ z hz z' hz' hlt θ h0 h1
+  have := (msM_U_concave H).2 hz hz' h0.le (by linarith : (0 : ℝ) ≤ 1 - θ) (by ring)
+  simp only [smul_eq_mul] at this
+  nlinarith
+
+/-- Per-period expected utility is continuous on `L∞(μ^t ⊗ ρ)` (dominated convergence along
+sequences: `L∞` convergence gives a.e. convergence of the bundles). -/
+theorem msM_eu_continuous (H : ManySectorMHyp U β) (t : ℕ) : Continuous (msMEU μ M U t) := by
+  obtain ⟨B, hB⟩ := H.U_bdd
+  rw [continuous_iff_seqContinuous]
+  intro x x₀ hx
+  have hae : ∀ᵐ ω ∂μ t, ∀ m, ∀ n, |x n (ω, m) - x₀ (ω, m)| ≤ ‖x n - x₀‖ := by
+    refine (msM_ae_iff (P := fun p => ∀ n, |x n p - x₀ p| ≤ ‖x n - x₀‖)).1 ?_
+    rw [ae_all_iff]
+    intro n
+    filter_upwards [Lp.coeFn_sub (x n) x₀, ae_abs_le_norm_linfty (x n - x₀)] with p h1 h2
+    rw [h1, Pi.sub_apply] at h2
+    exact h2
+  have hn := tendsto_iff_norm_sub_tendsto_zero.1 hx
+  change Tendsto (fun n => ∫ ω, U (fun m => x n (ω, m)) ∂(μ t)) atTop
+    (𝓝 (∫ ω, U (fun m => x₀ (ω, m)) ∂(μ t)))
+  refine tendsto_integral_of_dominated_convergence (fun _ => B)
+    (fun n => (msM_integrable H t _).aestronglyMeasurable) (integrable_const B)
+    (fun n => Eventually.of_forall fun ω => by rw [Real.norm_eq_abs]; exact hB _) ?_
+  filter_upwards [hae] with ω hω
+  have hb : Tendsto (fun n => fun m => x n (ω, m)) atTop (𝓝 fun m => x₀ (ω, m)) :=
+    tendsto_pi_nhds.2 fun m => tendsto_iff_norm_sub_tendsto_zero.2
+      (squeeze_zero (fun n => norm_nonneg _)
+        (fun n => by rw [Real.norm_eq_abs]; exact hω m n) hn)
+  exact (H.U_cont.tendsto _).comp hb
+
+/-- **Assumption 15.3**: `u` is continuous on `S^M`. -/
+theorem msM_U_continuous (H : ManySectorMHyp U β) : Continuous (msMU μ M β U) := by
+  obtain ⟨B, hB⟩ := H.U_bdd
+  exact continuous_tsum (fun t => continuous_const.mul
+    ((msM_eu_continuous H t).comp (ms_continuous_coord t)))
+    ((summable_geometric_of_lt_one H.beta_pos.le H.beta_lt_one).mul_left B)
+    (fun t c => msM_term_le H hB c t)
+
+/-- `u(cᵀ) → u(c)` (dominated convergence; `U` bounded). -/
+theorem msM_tendsto_U_timeTrunc (H : ManySectorMHyp U β) (c : LinftyTimeState (msMμ μ M)) :
+    Tendsto (fun T => msMU μ M β U (linftyTimeTrunc T c)) atTop (𝓝 (msMU μ M β U c)) := by
+  obtain ⟨B, hB⟩ := H.U_bdd
+  refine tendsto_tsum_of_dominated_convergence ((summable_geometric_of_lt_one H.beta_pos.le
+    H.beta_lt_one).mul_left B) (fun t => ?_)
+    (Eventually.of_forall fun T t => msM_term_le H hB _ t)
+  refine tendsto_const_nhds.congr' ((eventually_ge_atTop t).mono fun T hT => ?_)
+  simp only [linftyTimeTrunc_apply, hT, ↓reduceIte]
+
+/-- Truncating period `s` on `A` changes only the period-`s` term of `u`. -/
+theorem msMU_periodTrunc (H : ManySectorMHyp U β) (c : LinftyTimeState (msMμ μ M)) (s : ℕ)
+    (A : Set (Ω s × Fin M)) :
+    msMU μ M β U (linftyPeriodTrunc s A c) = msMU μ M β U c + β ^ s *
+      (msMEU μ M U s (linftyTrunc (msMμ μ M s) A (c s)) - msMEU μ M U s (c s)) := by
+  rw [msMU, msMU, ← sub_eq_iff_eq_add', ← (msM_summable H _).tsum_sub (msM_summable H c),
+    tsum_eq_single s fun t ht => by rw [linftyPeriodTrunc_apply_of_ne ht, sub_self],
+    linftyPeriodTrunc_apply_self]
+  ring
+
+/-- Per-period expected utility along event truncations: `u_s(x^{A_n}) → u_s(x)` when `A_n ↓ 0`
+in `Z^s × {1, …, M}` (an event may truncate some goods and not others). -/
+theorem msM_eu_trunc_tendsto (H : ManySectorMHyp U β) (s : ℕ) {A : ℕ → Set (Ω s × Fin M)}
+    (hA : LinftyNullSeq (msMμ μ M s) A) (x : Lp ℝ ⊤ (msMμ μ M s)) :
+    Tendsto (fun n => msMEU μ M U s (linftyTrunc (msMμ μ M s) (A n) x)) atTop
+      (𝓝 (msMEU μ M U s x)) := by
+  obtain ⟨B, hB⟩ := H.U_bdd
+  refine tendsto_integral_of_dominated_convergence (fun _ => B)
+    (fun n => (msM_integrable H s _).aestronglyMeasurable) (integrable_const B)
+    (fun n => Eventually.of_forall fun ω => by rw [Real.norm_eq_abs]; exact hB _) ?_
+  have hall : ∀ᵐ ω ∂μ s, ∀ m, ∀ n,
+      linftyTrunc (msMμ μ M s) (A n) x (ω, m) = (A n)ᶜ.indicator x (ω, m) :=
+    (msM_ae_iff (P := fun p => ∀ n,
+      linftyTrunc (msMμ μ M s) (A n) x p = (A n)ᶜ.indicator x p)).1
+      (ae_all_iff.2 fun n => coeFn_linftyRestrict (hA.measurableSet n).compl x)
+  have hnull : msMμ μ M s (⋂ n, A n) = 0 :=
+    le_antisymm (ge_of_tendsto' hA.tendsto_measure fun n => measure_mono (iInter_subset _ n))
+      zero_le
+  have hnot : ∀ᵐ ω ∂μ s, ∀ m, (ω, m) ∉ ⋂ n, A n :=
+    (msM_ae_iff (P := fun p => p ∉ ⋂ n, A n)).1 (measure_eq_zero_iff_ae_notMem.1 hnull)
+  filter_upwards [hall, hnot] with ω h1 h2
+  choose N hN using fun m => (by simpa only [mem_iInter, not_forall] using h2 m :
+    ∃ n, (ω, m) ∉ A n)
+  refine tendsto_const_nhds.congr' ?_
+  filter_upwards [eventually_ge_atTop (Finset.univ.sup N)] with n hn
+  congr 1
+  funext m
+  rw [h1 m n, indicator_of_mem (show (ω, m) ∈ (A n)ᶜ from fun h =>
+    hN m (hA.antitone ((Finset.le_sup (Finset.mem_univ m)).trans hn) h))]
+
+/-- `u(c^{A_n}) → u(c)` when `A_n ↓ 0` in period `s`. -/
+theorem msM_tendsto_U_periodTrunc (H : ManySectorMHyp U β) (c : LinftyTimeState (msMμ μ M))
+    (s : ℕ) {A : ℕ → Set (Ω s × Fin M)} (hA : LinftyNullSeq (msMμ μ M s) A) :
+    Tendsto (fun n => msMU μ M β U (linftyPeriodTrunc s (A n) c)) atTop
+      (𝓝 (msMU μ M β U c)) := by
+  simp only [msMU_periodTrunc H]
+  have := ((msM_eu_trunc_tendsto H s hA (c s)).sub_const
+    (msMEU μ M U s (c s))).const_mul (β ^ s)
+  simpa using (tendsto_const_nhds (x := msMU μ M β U c)).add this
+
+/-- **Exercise 16.2(a), consumption side, `M` goods**: `(C, u)` satisfy Assumptions 15.1, 15.2,
+15.3, 15.7 and 15.9′, and `C` is closed under time and event truncations (15.6, 15.8′). -/
+theorem ex_16_2a_consumer_M (H : ManySectorMHyp U β) :
+    Assumption15_1 (fun _ : Unit => msC (msMμ μ M)) ∧
+      Assumption15_2 (fun _ : Unit => msC (msMμ μ M)) (fun _ => msMU μ M β U) ∧
+      Assumption15_3 (fun _ : Unit => msC (msMμ μ M)) (fun _ => msMU μ M β U) ∧
+      Assumption15_7_timeState (fun _ : Unit => msC (msMμ μ M)) (fun _ => msMU μ M β U) ∧
+      Assumption15_9' (msMμ μ M) (fun _ : Unit => msC (msMμ μ M)) (fun _ => msMU μ M β U) ∧
+      (∀ c ∈ msC (msMμ μ M), ∀ T, linftyTimeTrunc T c ∈ msC (msMμ μ M)) ∧
+      ∀ c ∈ msC (msMμ μ M), ∀ s (A : Set (Ω s × Fin M)), MeasurableSet A →
+        linftyPeriodTrunc s A c ∈ msC (msMμ μ M) :=
+  ⟨fun _ => ms_convex_C, msM_assumption15_2 H, fun _ => (msM_U_continuous H).continuousOn,
+    fun _ x _ _ _ hlt => (msM_tendsto_U_timeTrunc H x).eventually (lt_mem_nhds hlt),
+    fun _ s x _ _ _ hlt _ hA => (msM_tendsto_U_periodTrunc H x s hA).eventually (lt_mem_nhds hlt),
+    fun _ hc T => ms_C_timeTrunc hc T, fun _ hc s _ hA => ms_C_periodTrunc hc s hA⟩
+
+/-! ### Monotonicity, nonsatiation and supporting functionals -/
+
+/-- `u` is monotone on `C` (goodwise comparison of bundles). -/
+theorem msM_U_mono (H : ManySectorMHyp U β) {c d : LinftyTimeState (msMμ μ M)}
+    (hc : c ∈ msC (msMμ μ M)) (hcd : ∀ t, ∀ᵐ ω ∂μ t, ∀ m, c t (ω, m) ≤ d t (ω, m)) :
+    msMU μ M β U c ≤ msMU μ M β U d := by
+  refine Summable.tsum_le_tsum (fun t => mul_le_mul_of_nonneg_left ?_
+    (pow_nonneg H.beta_pos.le t)) (msM_summable H c) (msM_summable H d)
+  refine integral_mono_ae (msM_integrable H t _) (msM_integrable H t _) ?_
+  filter_upwards [msM_C_ae hc t, hcd t] with ω h1 h2
+  exact H.U_strictMono.monotoneOn (mem_Ici.2 fun m => h1 m)
+    (mem_Ici.2 fun m => (h1 m).trans (h2 m)) fun m => h2 m
+
+omit [∀ t, IsProbabilityMeasure (μ t)] in
+/-- `(c + 𝟙)_t = c_t + 1` for every good, a.e. -/
+theorem msM_add_one_ae [∀ t, IsProbabilityMeasure (msMμ μ M t)]
+    (c : LinftyTimeState (msMμ μ M)) (t : ℕ) :
+    ∀ᵐ ω ∂μ t, ∀ m, (c + msOne (msMμ μ M)) t (ω, m) = c t (ω, m) + 1 :=
+  (msM_ae_iff (P := fun p => (c + msOne (msMμ μ M)) t p = c t p + 1)).1 (ms_add_one_ae c t)
+
+/-- **Nonsatiation**: `u(c + 𝟙) > u(c)` for `c ∈ C` (`U` strictly increasing). -/
+theorem msM_U_lt_add_one [NeZero M] [∀ t, IsProbabilityMeasure (msMμ μ M t)]
+    (H : ManySectorMHyp U β)
+    {c : LinftyTimeState (msMμ μ M)} (hc : c ∈ msC (msMμ μ M)) :
+    msMU μ M β U c < msMU μ M β U (c + msOne (msMμ μ M)) := by
+  have hlt : ∀ t, ∀ᵐ ω ∂μ t, U (fun m => c t (ω, m)) <
+      U (fun m => (c + msOne (msMμ μ M)) t (ω, m)) := fun t => by
+    filter_upwards [msM_C_ae hc t, msM_add_one_ae c t] with ω h1 h2
+    have e : (fun m => (c + msOne (msMμ μ M)) t (ω, m)) = fun m => c t (ω, m) + 1 := funext h2
+    rw [e]
+    refine H.U_strictMono (mem_Ici.2 fun m => h1 m)
+      (mem_Ici.2 fun m => by change (0 : ℝ) ≤ c t (ω, m) + 1; linarith [h1 m])
+      (Pi.lt_def.2 ⟨fun m => by linarith, ?_⟩)
+    exact ⟨⟨0, NeZero.pos M⟩, by linarith⟩
+  have hle : ∀ t, β ^ t * msMEU μ M U t (c t) ≤
+      β ^ t * msMEU μ M U t ((c + msOne (msMμ μ M)) t) := fun t =>
+    mul_le_mul_of_nonneg_left (integral_mono_ae (msM_integrable H t _) (msM_integrable H t _)
+      ((hlt t).mono fun _ h => h.le)) (pow_nonneg H.beta_pos.le t)
+  have hlt0 : msMEU μ M U 0 (c 0) < msMEU μ M U 0 ((c + msOne (msMμ μ M)) 0) := by
+    rw [msMEU, msMEU, ← sub_pos, ← integral_sub (msM_integrable H 0 _) (msM_integrable H 0 _)]
+    have hpos : ∀ᵐ ω ∂μ 0, 0 < U (fun m => (c + msOne (msMμ μ M)) 0 (ω, m)) -
+        U (fun m => c 0 (ω, m)) := (hlt 0).mono fun _ h => sub_pos.2 h
+    rw [integral_pos_iff_support_of_nonneg_ae (hpos.mono fun _ h => h.le)
+      ((msM_integrable H 0 _).sub (msM_integrable H 0 _))]
+    by_contra hz
+    have hz' : (μ 0) (Function.support fun ω => U (fun m => (c + msOne (msMμ μ M)) 0 (ω, m)) -
+        U (fun m => c 0 (ω, m))) = 0 := le_antisymm (not_lt.1 hz) zero_le
+    have hnot := measure_eq_zero_iff_ae_notMem.1 hz'
+    obtain ⟨ω, h1, h2⟩ := (hpos.and hnot).exists
+    exact h2 (Function.mem_support.2 h1.ne')
+  exact Summable.tsum_lt_tsum (i := 0) hle (mul_lt_mul_of_pos_left hlt0 (pow_pos H.beta_pos 0))
+    (msM_summable H c) (msM_summable H _)
+
+/-- A functional supporting `c⁰ ∈ C` (condition (3) of Theorem 15.4) is **positive** on `C`. -/
+theorem msM_supporting_nonneg (H : ManySectorMHyp U β) {c₀ : LinftyTimeState (msMμ μ M)}
+    (hc₀ : c₀ ∈ msC (msMμ μ M)) {φ : StrongDual ℝ (LinftyTimeState (msMμ μ M))}
+    (hφ : ∀ z ∈ msC (msMμ μ M), msMU μ M β U c₀ ≤ msMU μ M β U z → φ c₀ ≤ φ z)
+    {z : LinftyTimeState (msMμ μ M)} (hz : z ∈ msC (msMμ μ M)) : 0 ≤ φ z := by
+  have hsum : c₀ + z ∈ msC (msMμ μ M) := fun t => by
+    filter_upwards [hc₀ t, hz t, Lp.coeFn_add (c₀ t) (z t)] with ω h1 h2 h3
+    rw [ms_coord_add, h3, Pi.add_apply]; linarith
+  have := hφ _ hsum (msM_U_mono H hc₀ fun t => by
+    filter_upwards [msM_C_ae hz t, msM_add_ae c₀ z t] with ω h2 h3 m
+    rw [h3 m]; linarith [h2 m])
+  rw [map_add] at this
+  linarith
+
+/-! ### Technology with `M` consumption goods -/
+
+variable {Z : Type*} [TopologicalSpace Z] {l : ℕ}
+
+variable (Xc : Set (Fin l → ℝ)) (Φ : (Fin l → ℝ) → Z → Set ((Fin M → ℝ) × (Fin l → ℝ))) in
+/-- **Properties (a)–(c) of §10.3** for `Φ(x, z) ⊆ ℝ^M_+ × X` (`M` consumption goods, `l` capital
+goods), with `X` convex; continuity is upper plus lower hemicontinuity in sequential form. -/
+structure MsMTech : Prop where
+  convex_X : Convex ℝ Xc
+  nonempty : ∀ x ∈ Xc, ∀ z, (Φ x z).Nonempty
+  compact : ∀ x ∈ Xc, ∀ z, IsCompact (Φ x z)
+  convex : ∀ x ∈ Xc, ∀ z, Convex ℝ (Φ x z)
+  range : ∀ x z p, p ∈ Φ x z → 0 ≤ p.1 ∧ p.2 ∈ Xc
+  uhc : ∀ (x : ℕ → Fin l → ℝ) (z : ℕ → Z) (x₀ : Fin l → ℝ) (z₀ : Z), (∀ n, x n ∈ Xc) →
+    x₀ ∈ Xc → Tendsto x atTop (𝓝 x₀) → Tendsto z atTop (𝓝 z₀) →
+    ∀ p : ℕ → (Fin M → ℝ) × (Fin l → ℝ), (∀ n, p n ∈ Φ (x n) (z n)) →
+      ∃ q ∈ Φ x₀ z₀, ∃ φ : ℕ → ℕ, StrictMono φ ∧ Tendsto (p ∘ φ) atTop (𝓝 q)
+  lhc : ∀ (x : ℕ → Fin l → ℝ) (z : ℕ → Z) (x₀ : Fin l → ℝ) (z₀ : Z), (∀ n, x n ∈ Xc) →
+    x₀ ∈ Xc → Tendsto x atTop (𝓝 x₀) → Tendsto z atTop (𝓝 z₀) →
+    ∀ q ∈ Φ x₀ z₀, ∃ p : ℕ → (Fin M → ℝ) × (Fin l → ℝ), (∀ n, p n ∈ Φ (x n) (z n)) ∧
+      Tendsto p atTop (𝓝 q)
+  mono : ∀ x x' z p, x ∈ Xc → x ≤ x' → p ∈ Φ x z → p ∈ Φ x' z
+  jointConvex : ∀ x x' z p p' (θ : ℝ), 0 ≤ θ → θ ≤ 1 → p ∈ Φ x z → p' ∈ Φ x' z →
+    θ • p + (1 - θ) • p' ∈ Φ (θ • x + (1 - θ) • x') z
+
+/-- The production set `Y` with `M` goods (p. 482): plans `c` produced by a bounded measurable
+capital plan `k` from `x̂`, `(c_t(z^t), k_t(z^t)) ∈ Φ(x_t, z_t)` `μ^t`-a.e., with
+`c_t(z^t) = (c_{tm}(z^t))_m ∈ ℝ^M`. -/
+def msMY (μ : ∀ t, Measure (Ω t)) (M : ℕ) (proj : ∀ t, Ω (t + 1) → Ω t) (ζ : ∀ t, Ω t → Z)
+    (Φ : (Fin l → ℝ) → Z → Set ((Fin M → ℝ) × (Fin l → ℝ))) (xhat : Fin l → ℝ) :
+    Set (LinftyTimeState (msMμ μ M)) :=
+  {c | ∃ k : ∀ t, Ω t → Fin l → ℝ, (∀ t, Measurable (k t)) ∧ (∃ B, ∀ t ω, ‖k t ω‖ ≤ B) ∧
+    ∀ t, ∀ᵐ ω ∂μ t, ((fun m => c t (ω, m)), k t ω) ∈ Φ (msBeg proj xhat k t ω) (ζ t ω)}
+
+/-- **Free disposal of consumption** (goodwise): `(c, y) ∈ Φ(x, z)`, `0 ≤ c′ ≤ c` in `ℝ^M` imply
+`(c′, y) ∈ Φ(x, z)`. -/
+def MsMFreeDisposal (Φ : (Fin l → ℝ) → Z → Set ((Fin M → ℝ) × (Fin l → ℝ))) : Prop :=
+  ∀ x z c y c', (c, y) ∈ Φ x z → 0 ≤ c' → c' ≤ c → (c', y) ∈ Φ x z
+
+/-- **Uniformly positive production**: some bounded measurable capital plan from `x̂` produces at
+least `ε > 0` of every good a.e. in every period. -/
+def MsMPositiveProduction (μ : ∀ t, Measure (Ω t)) (proj : ∀ t, Ω (t + 1) → Ω t)
+    (ζ : ∀ t, Ω t → Z) (Φ : (Fin l → ℝ) → Z → Set ((Fin M → ℝ) × (Fin l → ℝ)))
+    (xhat : Fin l → ℝ) : Prop :=
+  ∃ ε : ℝ, 0 < ε ∧ ∃ k : ∀ t, Ω t → Fin l → ℝ, (∀ t, Measurable (k t)) ∧
+    (∃ B, ∀ t ω, ‖k t ω‖ ≤ B) ∧
+    ∀ t, ∀ᵐ ω ∂μ t, ((fun _ => ε), k t ω) ∈ Φ (msBeg proj xhat k t ω) (ζ t ω)
+
+variable {Xc : Set (Fin l → ℝ)} {Φ : (Fin l → ℝ) → Z → Set ((Fin M → ℝ) × (Fin l → ℝ))}
+  {proj : ∀ t, Ω (t + 1) → Ω t} {ζ : ∀ t, Ω t → Z} {xhat : Fin l → ℝ}
+
+omit [∀ t, IsProbabilityMeasure (μ t)] in
+/-- `Y ⊆ C`. -/
+theorem msM_Y_sub_C (hT : MsMTech Xc Φ) : msMY μ M proj ζ Φ xhat ⊆ msC (msMμ μ M) := by
+  rintro c ⟨k, -, -, hk⟩
+  refine msM_C_of_ae fun t => ?_
+  filter_upwards [hk t] with ω h m
+  exact (hT.range _ _ _ h).1 m
+
+omit [∀ t, IsProbabilityMeasure (μ t)] in
+/-- **Assumption 15.4**: `Y` is convex (joint convexity (c) of `Φ`). -/
+theorem msM_convex_Y (hT : MsMTech Xc Φ) : Convex ℝ (msMY μ M proj ζ Φ xhat) := by
+  rintro c ⟨k, hkm, ⟨B, hB⟩, hk⟩ c' ⟨k', hkm', ⟨B', hB'⟩, hk'⟩ a b ha hb hab
+  obtain rfl : b = 1 - a := by linarith
+  refine ⟨fun t ω => a • k t ω + (1 - a) • k' t ω, fun t => ((hkm t).const_smul a).add
+    ((hkm' t).const_smul (1 - a)), ⟨a * B + (1 - a) * B', fun t ω => ?_⟩, fun t => ?_⟩
+  · calc ‖a • k t ω + (1 - a) • k' t ω‖ ≤ ‖a • k t ω‖ + ‖(1 - a) • k' t ω‖ := norm_add_le _ _
+      _ = a * ‖k t ω‖ + (1 - a) * ‖k' t ω‖ := by
+        rw [norm_smul, norm_smul, Real.norm_of_nonneg ha, Real.norm_of_nonneg hb]
+      _ ≤ a * B + (1 - a) * B' := add_le_add (mul_le_mul_of_nonneg_left (hB t ω) ha)
+          (mul_le_mul_of_nonneg_left (hB' t ω) hb)
+  · filter_upwards [hk t, hk' t, msM_lp_combo_ae a (1 - a) (c t) (c' t)] with ω h1 h2 e
+    have := hT.jointConvex _ _ _ _ _ a ha (by linarith) h1 h2
+    rw [msBeg_combo]
+    have hb' : (fun m => (a • c + (1 - a) • c') t (ω, m)) =
+        a • (fun m => c t (ω, m)) + (1 - a) • (fun m => c' t (ω, m)) := by
+      funext m
+      rw [ms_coord_add, ms_coord_smul, ms_coord_smul, e m, Pi.add_apply, Pi.smul_apply,
+        Pi.smul_apply, smul_eq_mul, smul_eq_mul]
+    rw [hb']
+    simpa only [Prod.smul_mk, Prod.mk_add_mk] using this
+
+omit [∀ t, IsProbabilityMeasure (μ t)] in
+/-- **Assumption 15.6 for `Y`, with free disposal**. -/
+theorem msM_Y_timeTrunc (hT : MsMTech Xc Φ) (hfd : MsMFreeDisposal Φ)
+    {c : LinftyTimeState (msMμ μ M)} (hc : c ∈ msMY μ M proj ζ Φ xhat) (T : ℕ) :
+    linftyTimeTrunc T c ∈ msMY μ M proj ζ Φ xhat := by
+  obtain ⟨k, hkm, hkB, hk⟩ := hc
+  refine ⟨k, hkm, hkB, fun t => ?_⟩
+  rw [linftyTimeTrunc_apply]
+  split_ifs
+  · exact hk t
+  · have h0 := (msM_ae_iff (P := fun p => (0 : Lp ℝ ⊤ (msMμ μ M t)) p = 0)).1
+      (Lp.coeFn_zero ℝ ⊤ (msMμ μ M t))
+    filter_upwards [hk t, h0] with ω h1 h2
+    have e : (fun m => (0 : Lp ℝ ⊤ (msMμ μ M t)) (ω, m)) = 0 := funext h2
+    rw [e]
+    exact hfd _ _ _ _ _ h1 le_rfl (hT.range _ _ _ h1).1
+
+omit [∀ t, IsProbabilityMeasure (μ t)] in
+/-- **Assumption 15.8′ for `Y`, with free disposal**: truncation on an event of
+`Z^s × {1, …, M}` (some goods in some states) keeps the capital plan. -/
+theorem msM_Y_periodTrunc (hT : MsMTech Xc Φ) (hfd : MsMFreeDisposal Φ)
+    {c : LinftyTimeState (msMμ μ M)} (hc : c ∈ msMY μ M proj ζ Φ xhat) (s : ℕ)
+    {A : Set (Ω s × Fin M)} (hA : MeasurableSet A) :
+    linftyPeriodTrunc s A c ∈ msMY μ M proj ζ Φ xhat := by
+  obtain ⟨k, hkm, hkB, hk⟩ := hc
+  refine ⟨k, hkm, hkB, fun t => ?_⟩
+  by_cases hts : t = s
+  · subst hts
+    rw [linftyPeriodTrunc_apply_self]
+    have h0 := (msM_ae_iff (P := fun p =>
+      linftyRestrict (msMμ μ M t) Aᶜ (c t) p = Aᶜ.indicator (c t) p)).1
+      (coeFn_linftyRestrict hA.compl (c t))
+    filter_upwards [hk t, h0] with ω h1 h2
+    have hnn := (hT.range _ _ _ h1).1
+    refine hfd _ _ _ _ _ h1 (fun m => ?_) (fun m => ?_)
+    · change 0 ≤ linftyRestrict (msMμ μ M t) Aᶜ (c t) (ω, m)
+      rw [h2 m]
+      by_cases hω : (ω, m) ∈ Aᶜ
+      · rw [indicator_of_mem hω]; exact hnn m
+      · rw [indicator_of_notMem hω]
+    · change linftyRestrict (msMμ μ M t) Aᶜ (c t) (ω, m) ≤ c t (ω, m)
+      rw [h2 m]
+      by_cases hω : (ω, m) ∈ Aᶜ
+      · rw [indicator_of_mem hω]
+      · rw [indicator_of_notMem hω]; exact hnn m
+  · rw [linftyPeriodTrunc_apply_of_ne hts]
+    exact hk t
+
+omit [TopologicalSpace Z] in
+/-- **Assumption 15.5 under uniformly positive production and free disposal**: the ball of
+radius `ε/2` about `(ε/2)𝟙` lies in `Y`. -/
+theorem msM_interior_Y [NeZero M] (hfd : MsMFreeDisposal Φ)
+    (hpos : MsMPositiveProduction μ proj ζ Φ xhat) :
+    (interior (msMY μ M proj ζ Φ xhat)).Nonempty := by
+  have : ∀ t, IsProbabilityMeasure (msMμ μ M t) := msMμ_prob
+  obtain ⟨ε, hε, k, hkm, hkB, hk⟩ := hpos
+  refine ⟨(ε / 2) • msOne (msMμ μ M), interior_maximal
+    (t := Metric.ball ((ε / 2) • msOne (msMμ μ M)) (ε / 2)) ?_
+    Metric.isOpen_ball (Metric.mem_ball_self (half_pos hε))⟩
+  intro c hc
+  rw [mem_ball_iff_norm] at hc
+  refine ⟨k, hkm, hkB, fun t => ?_⟩
+  have hb := (msM_ae_iff (P := fun p => |c t p - ε / 2| ≤ ‖c - (ε / 2) • msOne (msMμ μ M)‖)).1
+    (by
+      filter_upwards [ms_ae_abs_le (c - (ε / 2) • msOne (msMμ μ M)) t,
+        Lp.coeFn_sub (c t) ((ε / 2) • msOne (msMμ μ M) t),
+        Lp.coeFn_smul (ε / 2) (msOne (msMμ μ M) t), msOne_ae (μ := msMμ μ M) t]
+        with p h2 e1 e2 e3
+      rw [ms_coord_sub, ms_coord_smul, e1, Pi.sub_apply, e2, Pi.smul_apply, e3, smul_eq_mul,
+        mul_one] at h2
+      exact h2)
+  filter_upwards [hk t, hb] with ω h1 h2
+  refine hfd _ _ _ _ _ h1 (fun m => ?_) (fun m => ?_)
+  · have h3 := abs_lt.1 ((h2 m).trans_lt hc)
+    change 0 ≤ c t (ω, m); linarith [h3.1]
+  · have h3 := abs_lt.1 ((h2 m).trans_lt hc)
+    change c t (ω, m) ≤ ε; linarith [h3.2]
+
+/-- **Exercise 16.2(a), `M` goods, corrected**: if `Φ` satisfies (a)–(c) of §10.3, has free
+disposal of consumption and some plan produces a uniformly positive amount of every good, then
+`(C, u, Y)` satisfy Assumptions 15.1–15.7 and 15.8′–15.9′. -/
+theorem ex_16_2a_M [NeZero M] (H : ManySectorMHyp U β) (hT : MsMTech Xc Φ)
+    (hfd : MsMFreeDisposal Φ) (hpos : MsMPositiveProduction μ proj ζ Φ xhat) :
+    Assumption15_1 (fun _ : Unit => msC (msMμ μ M)) ∧
+      Assumption15_2 (fun _ : Unit => msC (msMμ μ M)) (fun _ => msMU μ M β U) ∧
+      Assumption15_3 (fun _ : Unit => msC (msMμ μ M)) (fun _ => msMU μ M β U) ∧
+      Assumption15_4 (fun _ : Unit => msMY μ M proj ζ Φ xhat) ∧
+      Assumption15_5 (LinftyTimeState (msMμ μ M)) (fun _ : Unit => msMY μ M proj ζ Φ xhat) ∧
+      Assumption15_6_timeState (fun _ : Unit => msC (msMμ μ M))
+        (fun _ : Unit => msMY μ M proj ζ Φ xhat) ∧
+      Assumption15_7_timeState (fun _ : Unit => msC (msMμ μ M)) (fun _ => msMU μ M β U) ∧
+      Assumption15_8' (msMμ μ M) (fun _ : Unit => msC (msMμ μ M))
+        (fun _ : Unit => msMY μ M proj ζ Φ xhat) ∧
+      Assumption15_9' (msMμ μ M) (fun _ : Unit => msC (msMμ μ M)) (fun _ => msMU μ M β U) := by
+  obtain ⟨h1, h2, h3, h7, h9, hCT, hCP⟩ := ex_16_2a_consumer_M (μ := μ) H
+  refine ⟨h1, h2, h3, ?_, Or.inl ?_, ⟨fun _ c hc => Eventually.of_forall fun T => hCT c hc T,
+    fun _ c hc => Eventually.of_forall fun T => msM_Y_timeTrunc hT hfd hc T⟩, h7,
+    ⟨fun _ s c hc A hA => Eventually.of_forall fun n => hCP c hc s (A n) (hA.measurableSet n),
+      fun _ s c hc A hA => Eventually.of_forall fun n =>
+        msM_Y_periodTrunc hT hfd hc s (hA.measurableSet n)⟩, h9⟩
+  · rw [Assumption15_4, ms_aggTech_unit]
+    exact msM_convex_Y hT
+  · rw [ms_aggTech_unit]
+    exact msM_interior_Y hfd hpos
+
+/-! ### Exercise 16.2(b) with `M` goods -/
+
+/-- **The price system in the book's form** `ν(c) = Σ_t ∫ Σ_m p_{tm} c_{tm} dμ^t`: an inner-product
+representation on `Z^t × {1, …, M}` (Theorem 15.9 for the one-good space `L∞(μ^t ⊗ ρ)`) is one
+with `M` prices `p_{tm}(z^t) = p_t(z^t, m)/M ∈ L¹(μ^t)` per period (Fubini over the goods). -/
+theorem msM_price_form [NeZero M] {ν : StrongDual ℝ (LinftyTimeState (msMμ μ M))}
+    {p : ∀ t, Ω t × Fin M → ℝ} (hp : ∀ t, Integrable (p t) (msMμ μ M t))
+    (hν : ∀ c, HasSum (fun t => ∫ w, p t w * c t w ∂(msMμ μ M t)) (ν c)) :
+    (∀ t m, Integrable (fun ω => (M : ℝ)⁻¹ * p t (ω, m)) (μ t)) ∧
+      ∀ c : LinftyTimeState (msMμ μ M),
+        HasSum (fun t => ∫ ω, ∑ m, (M : ℝ)⁻¹ * p t (ω, m) * c t (ω, m) ∂(μ t)) (ν c) := by
+  have : IsProbabilityMeasure (msMUnif M) := msMUnif_prob
+  have hreal : ∀ m : Fin M, (msMUnif M).real {m} = (M : ℝ)⁻¹ := fun m => by
+    simp [msMUnif, measureReal_def, ENNReal.toReal_inv]
+  refine ⟨fun t m => ?_, fun c => ?_⟩
+  · have hpt : Integrable (p t) ((μ t).prod (msMUnif M)) := hp t
+    have h := ((integrable_prod_iff' hpt.aestronglyMeasurable).1 hpt).1
+    exact ((ae_iff_of_countable.1 h) m (msMUnif_singleton_ne m)).const_mul _
+  · refine (hν c).congr_fun fun t => ?_
+    have hi0 : Integrable (fun w => p t w * c t w) (msMμ μ M t) := by
+      have := (hp t).bdd_mul (c := ‖c t‖) (Lp.aestronglyMeasurable (c t))
+        ((ae_abs_le_norm_linfty (c t)).mono fun w h => by rwa [Real.norm_eq_abs])
+      simpa only [mul_comm] using this
+    have hi : Integrable (fun w => p t w * c t w) ((μ t).prod (msMUnif M)) := hi0
+    change ∫ ω, ∑ m, (M : ℝ)⁻¹ * p t (ω, m) * c t (ω, m) ∂(μ t) =
+      ∫ w, p t w * c t w ∂((μ t).prod (msMUnif M))
+    rw [integral_prod _ hi]
+    refine integral_congr_ae (Eventually.of_forall fun ω => ?_)
+    change ∑ m, (M : ℝ)⁻¹ * p t (ω, m) * c t (ω, m) =
+      ∫ m, p t (ω, m) * c t (ω, m) ∂(msMUnif M)
+    rw [integral_fintype Integrable.of_finite]
+    refine Finset.sum_congr rfl fun m _ => ?_
+    rw [hreal, smul_eq_mul, mul_assoc]
+
+/-- `(γ*, γ*)` is Pareto optimal in the one-consumer, one-firm economy with `M` goods. -/
+theorem msM_paretoOptimal (H : ManySectorMHyp U β) (hT : MsMTech Xc Φ)
+    {γ : LinftyTimeState (msMμ μ M)} (hγC : γ ∈ msC (msMμ μ M))
+    (hγY : γ ∈ msMY μ M proj ζ Φ xhat)
+    (hopt : ∀ c ∈ msC (msMμ μ M), c ∈ msMY μ M proj ζ Φ xhat → msMU μ M β U c ≤ msMU μ M β U γ) :
+    ParetoOptimal (fun _ : Unit => msC (msMμ μ M)) (fun _ => msMU μ M β U)
+      (fun _ : Unit => msMY μ M proj ζ Φ xhat) (fun _ => γ) (fun _ => γ) :=
+  (gc_symmetric_paretoOptimal_iff ms_convex_C (msM_convex_Y hT) (msM_U_concave H) γ γ).2
+    ⟨rfl, hγC, hγY, hopt⟩
+
+/-- **Exercise 16.2(b) with `M` consumption goods** (corrected hypotheses as in `ex_16_2a_M`): if
+`γ*` maximises `u` on `C ∩ Y` (Ex 10.3b), there is a continuous linear `ν` such that
+`(γ*, γ*, ν)` is a competitive equilibrium, `ν(γ*) > 0`, and
+`ν(c) = Σ_t ∫ [Σ_m p_{tm}(z^t) c_{tm}(z^t)] dμ^t(z^t)` for all `c ∈ S^M`, with every
+`p_{tm} ∈ L¹(μ^t)`. -/
+theorem ex_16_2b_M [NeZero M] (H : ManySectorMHyp U β) (hT : MsMTech Xc Φ)
+    (hfd : MsMFreeDisposal Φ) (hpos : MsMPositiveProduction μ proj ζ Φ xhat)
+    {γ : LinftyTimeState (msMμ μ M)} (hγC : γ ∈ msC (msMμ μ M))
+    (hγY : γ ∈ msMY μ M proj ζ Φ xhat)
+    (hopt : ∀ c ∈ msC (msMμ μ M), c ∈ msMY μ M proj ζ Φ xhat → msMU μ M β U c ≤ msMU μ M β U γ) :
+    ∃ ν : StrongDual ℝ (LinftyTimeState (msMμ μ M)),
+      CompetitiveEq (fun _ : Unit => msC (msMμ μ M)) (fun _ => msMU μ M β U)
+        (fun _ : Unit => msMY μ M proj ζ Φ xhat) (fun _ => γ) (fun _ => γ) ν ∧ 0 < ν γ ∧
+      ∃ p : ∀ t, Fin M → Ω t → ℝ, (∀ t m, Integrable (p t m) (μ t)) ∧
+        ∀ c : LinftyTimeState (msMμ μ M),
+          HasSum (fun t => ∫ ω, ∑ m, p t m ω * c t (ω, m) ∂(μ t)) (ν c) := by
+  have : ∀ t, IsProbabilityMeasure (msMμ μ M t) := msMμ_prob
+  obtain ⟨h1, h2, h3, h4, h5, h6, h7, h8, h9⟩ := ex_16_2a_M H hT hfd hpos
+  have hPO := msM_paretoOptimal H hT hγC hγY hopt
+  have hsatX := ms_add_one_mem hγC
+  have hsat := msM_U_lt_add_one H hγC
+  obtain ⟨φ, hne, hφ⟩ := theorem_15_4 h1 h2 h3 h4 h5 hPO (h := ()) hsatX hsat
+  have hφpos : ∀ z ∈ msC (msMμ μ M), 0 ≤ φ z := fun z hz =>
+    msM_supporting_nonneg H hγC (fun w hw hle => hφ.1 () w hw hle) hz
+  obtain ⟨ystar, hystar⟩ := msM_interior_Y hfd hpos (μ := μ) (proj := proj) (ζ := ζ) (xhat := xhat)
+  obtain ⟨ε, hε, hεy⟩ := ms_interior_ge (msM_Y_sub_C hT) hystar
+  have hyφ := hφpos _ hεy
+  rw [map_add, map_smul, smul_eq_mul] at hyφ
+  have hφ1 := ms_one_pos hφpos hne
+  have hφγ : 0 < φ γ := by
+    have := hφ.2 () ystar (interior_subset hystar)
+    nlinarith
+  obtain ⟨ν, hνX, hνY, p, hp, hpν⟩ := ms_linfty_bounds h6 h7 h8 h9 hPO.1 hφ
+  have hνsup := supportsAllocation_of_limit_bounds h1 h2 hPO.1 (fun _ => ⟨_, hsatX, hsat⟩) hνX hνY
+  have hle1 : ν γ ≤ φ γ := hνY () γ hγY
+  have hle2 : φ γ ≤ ν γ := by
+    have hc : Continuous fun θ : ℝ => ν γ + θ * ν (msOne (msMμ μ M)) := by fun_prop
+    have ht : Tendsto (fun θ : ℝ => ν γ + θ * ν (msOne (msMμ μ M))) (𝓝[>] 0) (𝓝 (ν γ)) := by
+      have := hc.tendsto 0
+      simp only [zero_mul, add_zero] at this
+      exact this.mono_left nhdsWithin_le_nhds
+    refine ge_of_tendsto ht ?_
+    filter_upwards [Ioo_mem_nhdsGT (show (0 : ℝ) < 1 by norm_num)] with θ hθ
+    have hmem : θ • (γ + msOne (msMμ μ M)) + (1 - θ) • γ ∈ msC (msMμ μ M) :=
+      ms_convex_C hsatX hγC hθ.1.le (by linarith [hθ.2]) (by ring)
+    have hlt := h2 () _ hsatX γ hγC hsat θ hθ.1 hθ.2
+    have := hνX () _ hmem hlt
+    have e : θ • (γ + msOne (msMμ μ M)) + (1 - θ) • γ = γ + θ • msOne (msMμ μ M) := by
+      rw [smul_add, add_comm (θ • γ), add_assoc, ← add_smul, add_sub_cancel, one_smul,
+        add_comm]
+    rw [e, map_add, map_smul, smul_eq_mul] at this
+    exact this
+  have hνγ : ν γ = φ γ := le_antisymm hle1 hle2
+  obtain ⟨hpi, hpsum⟩ := msM_price_form hp hpν
+  refine ⟨ν, remark_cheaper_point h1 h3 hPO.1 hνsup fun _ => ⟨0, ms_zero_mem_C, by
+    rw [map_zero, hνγ]; exact hφγ⟩, hνγ ▸ hφγ, fun t m ω => (M : ℝ)⁻¹ * p t (ω, m), hpi,
+    hpsum⟩
+
+end StokeyLucasPrescott.EquilibriumApplications
+
+/-
+Copyright (c) 2026 Robert Kirkby. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Robert Kirkby
+-/
+
+/-!
 # Pricing securities: riskless bonds, lotteries, Modigliani–Miller, martingales
 
 SLP §16.2, pp. 484–485, Exercises 16.2(e), (f), (h) and the martingale property, for a general
@@ -19575,178 +21332,6 @@ theorem ms_martingale_prices {Q : Z → Measure Z} [∀ z, IsProbabilityMeasure 
   obtain ⟨-, -, e⟩ := h x z
   simp only [zero_add, one_mul, integral_const_mul] at e
   exact mul_left_cancel₀ hm₀.ne' e
-
-end StokeyLucasPrescott.EquilibriumApplications
-
-/-
-Copyright (c) 2026 Robert Kirkby. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Robert Kirkby
--/
-
-/-!
-# Pricing securities: the equilibrium price makes no trade optimal (Ex 16.2(d), converse)
-
-SLP §16.2, p. 483. `ex_16_2_eq2` showed that no trade at `A = 0` in every state forces the pricing
-equation (2). This module proves the converse by a verification argument: if `q` satisfies (2)
-in every state, then every solution `w` of (1) bounded on `D` has the supergradient `U′(c(s))` at
-`A = 0`,
-
-  `w(A, s) ≤ w(0, s) + U′(c(s)) A` for all `(A, s) ∈ D`,
-
-and `b = 0` is optimal at `A = 0` in every state; with concavity of `w` (`ms_sec_fixed_concave`),
-`w₁(0, s) = U′(c(s))`, the book's (d).
-
-Proof: `e(A, s) = w(A, s) − w(0, s) − U′(c(s))A` is bounded on `D` (`U′(c)(c − qB)` bounded) and,
-by the tangent inequality for `U`, the Bellman equation and (2), `e ≤ β sup e`; so `e ≤ βⁿ M → 0`.
-
-* `ms_sec_supergradient`: the supergradient inequality.
-* **Exercise 16.2(d), converse** (`ex_16_2d_converse`): (2) in every state implies that `b = 0` is
-  optimal at `A = 0` in every state.
-* `ex_16_2d_equilibrium`: in equilibrium, `w(·, s)` is differentiable at `0` with
-  `w₁(0, s) = U′(c(s))`.
-
-**Hypotheses.** `c > 0`, `U` concave and differentiable on `(0, ∞)` with `U′ > 0`, and
-`U′(c(s))(c(s) − q(s)B)` bounded above (automatic if the state space is compact).
--/
-
-namespace StokeyLucasPrescott.EquilibriumApplications
-
-open Filter Topology Set
-
-variable {Sx : Type*} [TopologicalSpace Sx] {Zf : Type*} [Fintype Zf]
-  {U : ℝ → ℝ} {c q : Sx → ℝ} {R π : Sx → Zf → ℝ} {nxt : Sx → Zf → Sx} {B β : ℝ}
-
-/-- The key step: if `w(A′, s′) ≤ w(0, s′) + U′(c(s′))A′ + E` on `D`, then
-`w(A, s) ≤ w(0, s) + U′(c(s))A + βE` on `D` (tangent inequality, Bellman equation and (2)). -/
-theorem ms_sec_super_step (D : MsSecData U c q R π nxt B β) (hU : ConcaveOn ℝ (Ici 0) U)
-    {dU : ℝ → ℝ} (hdU : ∀ x, 0 < x → HasDerivAt U (dU x) x) (hc : ∀ s, 0 < c s)
-    (h2 : ∀ s, q s * dU (c s) = β * ∑ z', π s z' * (dU (c (nxt s z')) * R s z'))
-    {w : ℝ × Sx → ℝ} (hw : MsSecBellman U c q R π nxt B β w) {E : ℝ}
-    (hE : ∀ A s, q s * B - c s ≤ A → w (A, s) ≤ w (0, s) + dU (c s) * A + E)
-    {A : ℝ} {s : Sx} {b : ℝ} (hb : B ≤ b) (hbf : q s * b ≤ c s + A) :
-    msSecObj U c q R π nxt β w A s b ≤ w (0, s) + dU (c s) * A + β * E := by
-  have hq := D.q_pos s
-  have h0dom : q s * B - c s ≤ 0 := by nlinarith [D.B_neg, hc s]
-  have hge0 := (hw 0 s h0dom).1 0 D.B_neg.le (by rw [mul_zero, add_zero]; exact (hc s).le)
-  simp only [msSecObj, add_zero, mul_zero, sub_zero, zero_mul] at hge0
-  have ht := gc_concave_le_tangent hU (hc s) (by linarith : (0 : ℝ) ≤ c s + A - q s * b)
-    (hdU _ (hc s))
-  have hsum : ∑ z', π s z' * w (b * R s z', nxt s z') ≤
-      ∑ z', π s z' * w (0, nxt s z') + b * ∑ z', π s z' * (dU (c (nxt s z')) * R s z') + E := by
-    calc ∑ z', π s z' * w (b * R s z', nxt s z')
-        ≤ ∑ z', (π s z' * w (0, nxt s z') + b * (π s z' * (dU (c (nxt s z')) * R s z')) +
-            π s z' * E) := Finset.sum_le_sum fun z' _ => by
-          have h := hE _ _ (ms_sec_next_mem D s hb z')
-          have hπ := D.π_nonneg s z'
-          nlinarith [mul_le_mul_of_nonneg_left h hπ]
-      _ = _ := by
-          rw [Finset.sum_add_distrib, Finset.sum_add_distrib, ← Finset.mul_sum, ← Finset.sum_mul,
-            D.π_sum, one_mul]
-  have e2 := h2 s
-  have hβ := D.beta_pos
-  simp only [msSecObj]
-  have key : β * (b * ∑ z', π s z' * (dU (c (nxt s z')) * R s z')) = b * (q s * dU (c s)) := by
-    rw [e2]; ring
-  nlinarith [mul_le_mul_of_nonneg_left hsum hβ.le]
-
-/-- **The supergradient inequality**: if `q` satisfies (2) in every state, every solution `w` of
-(1) bounded on `D` satisfies `w(A, s) ≤ w(0, s) + U′(c(s))A` on `D`. -/
-theorem ms_sec_supergradient (D : MsSecData U c q R π nxt B β) (hU : ConcaveOn ℝ (Ici 0) U)
-    {dU : ℝ → ℝ} (hdU : ∀ x, 0 < x → HasDerivAt U (dU x) x) (hdUpos : ∀ x, 0 < x → 0 < dU x)
-    (hc : ∀ s, 0 < c s)
-    (h2 : ∀ s, q s * dU (c s) = β * ∑ z', π s z' * (dU (c (nxt s z')) * R s z'))
-    (hK : ∃ K, ∀ s, dU (c s) * (c s - q s * B) ≤ K) {w : ℝ × Sx → ℝ}
-    (hw : MsSecBellman U c q R π nxt B β w) (hwb : ∃ C, ∀ p ∈ msSecDom c q B, |w p| ≤ C) :
-    ∀ A s, q s * B - c s ≤ A → w (A, s) ≤ w (0, s) + dU (c s) * A := by
-  obtain ⟨K, hK⟩ := hK
-  obtain ⟨C, hC⟩ := hwb
-  set M := 2 * C + max K 0 with hM
-  have key : ∀ n : ℕ, ∀ A s, q s * B - c s ≤ A →
-      w (A, s) ≤ w (0, s) + dU (c s) * A + β ^ n * M := by
-    intro n
-    induction n with
-    | zero =>
-      intro A s hA
-      have hq := D.q_pos s
-      have h0dom : q s * B - c s ≤ 0 := by nlinarith [D.B_neg, hc s]
-      have h1 := (abs_le.1 (hC (A, s) hA)).2
-      have h2' := (abs_le.1 (hC (0, s) h0dom)).1
-      have hd := hdUpos _ (hc s)
-      have hKs := hK s
-      have : -(dU (c s) * A) ≤ max K 0 := by
-        rcases le_total A 0 with hneg | hpos
-        · have : -(dU (c s) * A) ≤ dU (c s) * (c s - q s * B) := by nlinarith
-          exact this.trans (hKs.trans (le_max_left _ _))
-        · have : -(dU (c s) * A) ≤ 0 := by nlinarith
-          exact this.trans (le_max_right _ _)
-      rw [pow_zero, one_mul, hM]
-      linarith
-    | succ n ih =>
-      intro A s hA
-      obtain ⟨b, hb, hbf, e⟩ := (hw A s hA).2
-      have := ms_sec_super_step D hU hdU hc h2 hw ih hb hbf
-      rw [e, pow_succ, mul_comm (β ^ n) β, mul_assoc]
-      exact this
-  intro A s hA
-  have hlim : Tendsto (fun n : ℕ => w (0, s) + dU (c s) * A + β ^ n * M) atTop
-      (𝓝 (w (0, s) + dU (c s) * A)) := by
-    simpa using tendsto_const_nhds.add
-      ((tendsto_pow_atTop_nhds_zero_of_lt_one D.beta_pos.le D.beta_lt_one).mul_const M)
-  exact ge_of_tendsto' hlim fun n => key n A s hA
-
-/-- **Exercise 16.2(d), converse**: if the price `q` satisfies the pricing equation (2) in every
-state, then for every solution `w` of (1) bounded on `D`, `b = 0` (no trade, `δ = 0`) is optimal at
-`A = 0` in every state. -/
-theorem ex_16_2d_converse (D : MsSecData U c q R π nxt B β) (hU : ConcaveOn ℝ (Ici 0) U)
-    {dU : ℝ → ℝ} (hdU : ∀ x, 0 < x → HasDerivAt U (dU x) x) (hdUpos : ∀ x, 0 < x → 0 < dU x)
-    (hc : ∀ s, 0 < c s)
-    (h2 : ∀ s, q s * dU (c s) = β * ∑ z', π s z' * (dU (c (nxt s z')) * R s z'))
-    (hK : ∃ K, ∀ s, dU (c s) * (c s - q s * B) ≤ K) {w : ℝ × Sx → ℝ}
-    (hw : MsSecBellman U c q R π nxt B β w) (hwb : ∃ C, ∀ p ∈ msSecDom c q B, |w p| ≤ C)
-    (s : Sx) : w (0, s) = msSecObj U c q R π nxt β w 0 s 0 := by
-  have hsup := ms_sec_supergradient D hU hdU hdUpos hc h2 hK hw hwb
-  have hq := D.q_pos s
-  have h0dom : q s * B - c s ≤ 0 := by nlinarith [D.B_neg, hc s]
-  obtain ⟨b, hb, hbf, e⟩ := (hw 0 s h0dom).2
-  have hge := (hw 0 s h0dom).1 0 D.B_neg.le (by rw [mul_zero, add_zero]; exact (hc s).le)
-  have hge0 : msSecObj U c q R π nxt β w 0 s 0 = U (c s) + β * ∑ z', π s z' * w (0, nxt s z') := by
-    simp only [msSecObj, add_zero, mul_zero, sub_zero, zero_mul]
-  apply le_antisymm _ hge
-  rw [e]
-  have hstep : msSecObj U c q R π nxt β w 0 s b ≤ msSecObj U c q R π nxt β w 0 s 0 := by
-    have ht := gc_concave_le_tangent hU (hc s) (by linarith : (0 : ℝ) ≤ c s + 0 - q s * b)
-      (hdU _ (hc s))
-    have hsum : ∑ z', π s z' * w (b * R s z', nxt s z') ≤
-        ∑ z', π s z' * w (0, nxt s z') + b * ∑ z', π s z' * (dU (c (nxt s z')) * R s z') := by
-      calc ∑ z', π s z' * w (b * R s z', nxt s z')
-          ≤ ∑ z', (π s z' * w (0, nxt s z') + b * (π s z' * (dU (c (nxt s z')) * R s z'))) :=
-            Finset.sum_le_sum fun z' _ => by
-              have h := hsup _ _ (ms_sec_next_mem D s hb z')
-              have hπ := D.π_nonneg s z'
-              nlinarith [mul_le_mul_of_nonneg_left h hπ]
-        _ = _ := by rw [Finset.sum_add_distrib, ← Finset.mul_sum]
-    have key : β * (b * ∑ z', π s z' * (dU (c (nxt s z')) * R s z')) = b * (q s * dU (c s)) := by
-      rw [h2 s]; ring
-    rw [hge0]
-    simp only [msSecObj]
-    nlinarith [mul_le_mul_of_nonneg_left hsum D.beta_pos.le]
-  exact hstep
-
-/-- **In equilibrium the book's (d) holds**: if `q` satisfies (2) in every state and `w` (bounded on
-`D`, concave in `A`) solves (1), then `w(·, s)` is differentiable at `0` with
-`w₁(0, s) = U′(c(s))`. -/
-theorem ex_16_2d_equilibrium (D : MsSecData U c q R π nxt B β)
-    (hUs : StrictConcaveOn ℝ (Ici 0) U) {dU : ℝ → ℝ} (hdU : ∀ x, 0 < x → HasDerivAt U (dU x) x)
-    (hdUpos : ∀ x, 0 < x → 0 < dU x) (hc : ∀ s, 0 < c s)
-    (h2 : ∀ s, q s * dU (c s) = β * ∑ z', π s z' * (dU (c (nxt s z')) * R s z'))
-    (hK : ∃ K, ∀ s, dU (c s) * (c s - q s * B) ≤ K) {w : ℝ × Sx → ℝ}
-    (hw : MsSecBellman U c q R π nxt B β w) (hwb : ∃ C, ∀ p ∈ msSecDom c q B, |w p| ≤ C)
-    (hcv : MsSecConcave c q B w) (s : Sx) :
-    HasDerivAt (fun A => w (A, s)) (dU (c s)) 0 := by
-  have hopt := ex_16_2d_converse D hUs.concaveOn hdU hdUpos hc h2 hK hw hwb s
-  have := ex_16_2d D hdU hw hcv (s := s) D.B_neg.le hopt (by rw [mul_zero, sub_zero]; exact hc s)
-  rwa [mul_zero, sub_zero] at this
 
 end StokeyLucasPrescott.EquilibriumApplications
 
@@ -23208,6 +24793,135 @@ set_option linter.style.longLine false
 #print axioms StokeyLucasPrescott.EquilibriumApplications.ms_fellerTB_contracting
 #print axioms StokeyLucasPrescott.EquilibriumApplications.ms_fellerBellman_of_fixed
 #print axioms StokeyLucasPrescott.EquilibriumApplications.ex_16_2c_feller
+#print axioms StokeyLucasPrescott.EquilibriumApplications.ms_sec_super_step
+#print axioms StokeyLucasPrescott.EquilibriumApplications.ms_sec_supergradient
+#print axioms StokeyLucasPrescott.EquilibriumApplications.ex_16_2d_converse
+#print axioms StokeyLucasPrescott.EquilibriumApplications.ex_16_2d_equilibrium
+#print axioms StokeyLucasPrescott.EquilibriumApplications.MsGenData
+#print axioms StokeyLucasPrescott.EquilibriumApplications.MsGenData.mk
+#print axioms StokeyLucasPrescott.EquilibriumApplications.MsGenData.beta_pos
+#print axioms StokeyLucasPrescott.EquilibriumApplications.MsGenData.beta_lt_one
+#print axioms StokeyLucasPrescott.EquilibriumApplications.MsGenData.B_neg
+#print axioms StokeyLucasPrescott.EquilibriumApplications.MsGenData.U_cont
+#print axioms StokeyLucasPrescott.EquilibriumApplications.MsGenData.U_bdd
+#print axioms StokeyLucasPrescott.EquilibriumApplications.MsGenData.c_meas
+#print axioms StokeyLucasPrescott.EquilibriumApplications.MsGenData.q_meas
+#print axioms StokeyLucasPrescott.EquilibriumApplications.MsGenData.q_pos
+#print axioms StokeyLucasPrescott.EquilibriumApplications.MsGenData.R_meas
+#print axioms StokeyLucasPrescott.EquilibriumApplications.MsGenData.R_nonneg
+#print axioms StokeyLucasPrescott.EquilibriumApplications.MsGenData.nxt_meas
+#print axioms StokeyLucasPrescott.EquilibriumApplications.MsGenData.dom
+#print axioms StokeyLucasPrescott.EquilibriumApplications.msGE
+#print axioms StokeyLucasPrescott.EquilibriumApplications.msGObj
+#print axioms StokeyLucasPrescott.EquilibriumApplications.MsGBellman
+#print axioms StokeyLucasPrescott.EquilibriumApplications.msGT
+#print axioms StokeyLucasPrescott.EquilibriumApplications.msG_next_mem
+#print axioms StokeyLucasPrescott.EquilibriumApplications.msG_meas_next
+#print axioms StokeyLucasPrescott.EquilibriumApplications.msG_integrable
+#print axioms StokeyLucasPrescott.EquilibriumApplications.msG_integrable_zero
+#print axioms StokeyLucasPrescott.EquilibriumApplications.msG_sub_le
+#print axioms StokeyLucasPrescott.EquilibriumApplications.msG_bellman_unique
+#print axioms StokeyLucasPrescott.EquilibriumApplications.MsGSpace
+#print axioms StokeyLucasPrescott.EquilibriumApplications.msGFn
+#print axioms StokeyLucasPrescott.EquilibriumApplications.msGMeas
+#print axioms StokeyLucasPrescott.EquilibriumApplications.msGFn_abs_le
+#print axioms StokeyLucasPrescott.EquilibriumApplications.msGFn_sub_le
+#print axioms StokeyLucasPrescott.EquilibriumApplications.msGFn_measurable
+#print axioms StokeyLucasPrescott.EquilibriumApplications.msG_continuous_eval
+#print axioms StokeyLucasPrescott.EquilibriumApplications.msGMeas_isClosed
+#print axioms StokeyLucasPrescott.EquilibriumApplications.msG_zero_mem
+#print axioms StokeyLucasPrescott.EquilibriumApplications.msGFn_integrable
+#print axioms StokeyLucasPrescott.EquilibriumApplications.msGE_continuous
+#print axioms StokeyLucasPrescott.EquilibriumApplications.msGObj_continuous
+#print axioms StokeyLucasPrescott.EquilibriumApplications.msGObj_abs_le
+#print axioms StokeyLucasPrescott.EquilibriumApplications.msGT_attained
+#print axioms StokeyLucasPrescott.EquilibriumApplications.msGT_ge
+#print axioms StokeyLucasPrescott.EquilibriumApplications.msGT_continuous
+#print axioms StokeyLucasPrescott.EquilibriumApplications.msG_sSup_eq_iSup
+#print axioms StokeyLucasPrescott.EquilibriumApplications.msGT_measurable
+#print axioms StokeyLucasPrescott.EquilibriumApplications.msG_bound_nonneg
+#print axioms StokeyLucasPrescott.EquilibriumApplications.msGTW
+#print axioms StokeyLucasPrescott.EquilibriumApplications.msGTW_apply
+#print axioms StokeyLucasPrescott.EquilibriumApplications.msGTM
+#print axioms StokeyLucasPrescott.EquilibriumApplications.msG_contracting
+#print axioms StokeyLucasPrescott.EquilibriumApplications.msG_bellman_of_fixed
+#print axioms StokeyLucasPrescott.EquilibriumApplications.msGT_concave
+#print axioms StokeyLucasPrescott.EquilibriumApplications.msG_exists
+#print axioms StokeyLucasPrescott.EquilibriumApplications.ex_16_2c_general
+#print axioms StokeyLucasPrescott.EquilibriumApplications.msG_solution_concave
+#print axioms StokeyLucasPrescott.EquilibriumApplications.ex_16_2d_general
+#print axioms StokeyLucasPrescott.EquilibriumApplications.msGE_hasDerivAt
+#print axioms StokeyLucasPrescott.EquilibriumApplications.msG_foc
+#print axioms StokeyLucasPrescott.EquilibriumApplications.ex_16_2_eq2_general
+#print axioms StokeyLucasPrescott.EquilibriumApplications.ex_16_2g_general
+#print axioms StokeyLucasPrescott.EquilibriumApplications.msG_super_step
+#print axioms StokeyLucasPrescott.EquilibriumApplications.msG_supergradient
+#print axioms StokeyLucasPrescott.EquilibriumApplications.ex_16_2d_converse_general
+#print axioms StokeyLucasPrescott.EquilibriumApplications.ex_16_2d_equilibrium_general
+#print axioms StokeyLucasPrescott.EquilibriumApplications.msMUnif
+#print axioms StokeyLucasPrescott.EquilibriumApplications.msMμ
+#print axioms StokeyLucasPrescott.EquilibriumApplications.msMUnif_prob
+#print axioms StokeyLucasPrescott.EquilibriumApplications.msMUnif_singleton_ne
+#print axioms StokeyLucasPrescott.EquilibriumApplications.msMμ_prob
+#print axioms StokeyLucasPrescott.EquilibriumApplications.msM_ae_iff
+#print axioms StokeyLucasPrescott.EquilibriumApplications.msM_coord_measurable
+#print axioms StokeyLucasPrescott.EquilibriumApplications.msM_bundle_measurable
+#print axioms StokeyLucasPrescott.EquilibriumApplications.msM_lp_combo_ae
+#print axioms StokeyLucasPrescott.EquilibriumApplications.msM_add_ae
+#print axioms StokeyLucasPrescott.EquilibriumApplications.msM_C_ae
+#print axioms StokeyLucasPrescott.EquilibriumApplications.msM_C_of_ae
+#print axioms StokeyLucasPrescott.EquilibriumApplications.msM_ae_abs_le
+#print axioms StokeyLucasPrescott.EquilibriumApplications.msMEU
+#print axioms StokeyLucasPrescott.EquilibriumApplications.msMU
+#print axioms StokeyLucasPrescott.EquilibriumApplications.ManySectorMHyp
+#print axioms StokeyLucasPrescott.EquilibriumApplications.ManySectorMHyp.mk
+#print axioms StokeyLucasPrescott.EquilibriumApplications.ManySectorMHyp.beta_pos
+#print axioms StokeyLucasPrescott.EquilibriumApplications.ManySectorMHyp.beta_lt_one
+#print axioms StokeyLucasPrescott.EquilibriumApplications.ManySectorMHyp.U_cont
+#print axioms StokeyLucasPrescott.EquilibriumApplications.ManySectorMHyp.U_bdd
+#print axioms StokeyLucasPrescott.EquilibriumApplications.ManySectorMHyp.U_strictMono
+#print axioms StokeyLucasPrescott.EquilibriumApplications.ManySectorMHyp.U_strictConcave
+#print axioms StokeyLucasPrescott.EquilibriumApplications.msM_integrable
+#print axioms StokeyLucasPrescott.EquilibriumApplications.msM_eu_abs_le
+#print axioms StokeyLucasPrescott.EquilibriumApplications.msM_term_le
+#print axioms StokeyLucasPrescott.EquilibriumApplications.msM_summable
+#print axioms StokeyLucasPrescott.EquilibriumApplications.msM_eu_concave
+#print axioms StokeyLucasPrescott.EquilibriumApplications.msM_U_concave
+#print axioms StokeyLucasPrescott.EquilibriumApplications.msM_assumption15_2
+#print axioms StokeyLucasPrescott.EquilibriumApplications.msM_eu_continuous
+#print axioms StokeyLucasPrescott.EquilibriumApplications.msM_U_continuous
+#print axioms StokeyLucasPrescott.EquilibriumApplications.msM_tendsto_U_timeTrunc
+#print axioms StokeyLucasPrescott.EquilibriumApplications.msMU_periodTrunc
+#print axioms StokeyLucasPrescott.EquilibriumApplications.msM_eu_trunc_tendsto
+#print axioms StokeyLucasPrescott.EquilibriumApplications.msM_tendsto_U_periodTrunc
+#print axioms StokeyLucasPrescott.EquilibriumApplications.ex_16_2a_consumer_M
+#print axioms StokeyLucasPrescott.EquilibriumApplications.msM_U_mono
+#print axioms StokeyLucasPrescott.EquilibriumApplications.msM_add_one_ae
+#print axioms StokeyLucasPrescott.EquilibriumApplications.msM_U_lt_add_one
+#print axioms StokeyLucasPrescott.EquilibriumApplications.msM_supporting_nonneg
+#print axioms StokeyLucasPrescott.EquilibriumApplications.MsMTech
+#print axioms StokeyLucasPrescott.EquilibriumApplications.MsMTech.mk
+#print axioms StokeyLucasPrescott.EquilibriumApplications.MsMTech.convex_X
+#print axioms StokeyLucasPrescott.EquilibriumApplications.MsMTech.nonempty
+#print axioms StokeyLucasPrescott.EquilibriumApplications.MsMTech.compact
+#print axioms StokeyLucasPrescott.EquilibriumApplications.MsMTech.convex
+#print axioms StokeyLucasPrescott.EquilibriumApplications.MsMTech.range
+#print axioms StokeyLucasPrescott.EquilibriumApplications.MsMTech.uhc
+#print axioms StokeyLucasPrescott.EquilibriumApplications.MsMTech.lhc
+#print axioms StokeyLucasPrescott.EquilibriumApplications.MsMTech.mono
+#print axioms StokeyLucasPrescott.EquilibriumApplications.MsMTech.jointConvex
+#print axioms StokeyLucasPrescott.EquilibriumApplications.msMY
+#print axioms StokeyLucasPrescott.EquilibriumApplications.MsMFreeDisposal
+#print axioms StokeyLucasPrescott.EquilibriumApplications.MsMPositiveProduction
+#print axioms StokeyLucasPrescott.EquilibriumApplications.msM_Y_sub_C
+#print axioms StokeyLucasPrescott.EquilibriumApplications.msM_convex_Y
+#print axioms StokeyLucasPrescott.EquilibriumApplications.msM_Y_timeTrunc
+#print axioms StokeyLucasPrescott.EquilibriumApplications.msM_Y_periodTrunc
+#print axioms StokeyLucasPrescott.EquilibriumApplications.msM_interior_Y
+#print axioms StokeyLucasPrescott.EquilibriumApplications.ex_16_2a_M
+#print axioms StokeyLucasPrescott.EquilibriumApplications.msM_price_form
+#print axioms StokeyLucasPrescott.EquilibriumApplications.msM_paretoOptimal
+#print axioms StokeyLucasPrescott.EquilibriumApplications.ex_16_2b_M
 #print axioms StokeyLucasPrescott.EquilibriumApplications.ex_16_2e
 #print axioms StokeyLucasPrescott.EquilibriumApplications.ex_16_2f
 #print axioms StokeyLucasPrescott.EquilibriumApplications.MsEq3
@@ -23217,10 +24931,6 @@ set_option linter.style.longLine false
 #print axioms StokeyLucasPrescott.EquilibriumApplications.ex_16_2h_bubble_counterexample
 #print axioms StokeyLucasPrescott.EquilibriumApplications.ms_martingale_increment
 #print axioms StokeyLucasPrescott.EquilibriumApplications.ms_martingale_prices
-#print axioms StokeyLucasPrescott.EquilibriumApplications.ms_sec_super_step
-#print axioms StokeyLucasPrescott.EquilibriumApplications.ms_sec_supergradient
-#print axioms StokeyLucasPrescott.EquilibriumApplications.ex_16_2d_converse
-#print axioms StokeyLucasPrescott.EquilibriumApplications.ex_16_2d_equilibrium
 #print axioms StokeyLucasPrescott.EquilibriumApplications.pecW
 #print axioms StokeyLucasPrescott.EquilibriumApplications.pecW_pos
 #print axioms StokeyLucasPrescott.EquilibriumApplications.pecW_le_half

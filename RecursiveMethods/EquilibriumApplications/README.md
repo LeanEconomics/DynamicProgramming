@@ -35,10 +35,9 @@ the contraction claim of Exercise 16.7f. Several steps of the solutions manual a
 (Exercises 16.1b, 16.6a and 16.6c, with counterexamples, and incomplete arguments in 16.1c,
 16.1e, 16.1f, 16.3a, 16.3b and 16.3d); the results they support are true and are proved. The example of
 §16.6 is carried to a conclusion the book does not state: the economy has no competitive
-equilibrium in `ℓ∞`. Some results are proved only under added hypotheses: finitely many shocks for
-parts of §16.2, an interior allocation in Exercise 16.1d, and a bound on capital for parts of
+equilibrium in `ℓ∞`. Some results are proved only under added hypotheses: an interior allocation in Exercise 16.1d, and a bound on capital for parts of
 §16.7. The chapter introduction and the bibliographic notes (§16.8) are not formalised. See
-[corrections](docs/corrections.md). The library contains **1043 theorems**. Of these, 681 are in
+[corrections](docs/corrections.md). The library contains **1119 theorems**. Of these, 757 are in
 the Chapter 16 modules, 209 in the modules carried from Chapter 15 and 153 in the modules carried
 from Chapter 6.
 
@@ -59,11 +58,12 @@ from Chapter 6.
 * **Many-sector stochastic growth** (§16.2, pp. 481–482). The commodity space `L∞` over time and
   states; Exercise 16.2a under two added hypotheses (free disposal of consumption, a uniformly
   positive feasible plan), each shown necessary by a counterexample; Exercise 16.2b by Theorems
-  15.4 and 15.9, with the cheaper point that Theorem 15.9 alone does not give. One consumption
-  good.
+  15.4 and 15.9, with the cheaper point that Theorem 15.9 alone does not give; both also with `M` consumption
+  goods.
 * **Pricing securities** (§16.2, pp. 482–485). The consumer's equation (1) with a domain condition
-  on the credit limit: Exercise 16.2c for finitely many shocks, and for a Feller transition on a
-  compact shock space. Exercise 16.2d corrected (`w₁(0) = U′(c + δ*(0))`) and its converse at the
+  on the credit limit: Exercise 16.2c for finitely many shocks, for a Feller transition on a
+  compact shock space, and for any measurable shock space and return (with `w` measurable in the
+  state), where 16.2d, (2) and (3) also hold. Exercise 16.2d corrected (`w₁(0) = U′(c + δ*(0))`) and its converse at the
   equilibrium price, by a verification argument; the pricing equations (2) and (3) (Exercise
   16.2g). Exercises 16.2e, 16.2f (lottery tickets are priced risk-neutrally) and 16.2h
   (Modigliani–Miller, for bounded prices) for a general shock space; the one-step martingale
@@ -116,10 +116,12 @@ All names are in the namespace `StokeyLucasPrescott.EquilibriumApplications`. Se
 | [ManySector](EquilibriumApplications/ManySector.lean) | 33 | §16.2 consumption side; Exercise 16.2a for `(C, u)` |
 | [ManySectorTech](EquilibriumApplications/ManySectorTech.lean) | 21 | The technology of §10.3; Exercise 16.2a; two counterexamples |
 | [ManySectorPrices](EquilibriumApplications/ManySectorPrices.lean) | 4 | Exercise 16.2b |
+| [ManySectorMGood](EquilibriumApplications/ManySectorMGood.lean) | 38 | Exercise 16.2a–b with `M` consumption goods |
 | [ManySectorSecurities](EquilibriumApplications/ManySectorSecurities.lean) | 15 | (1) of §16.2; Exercise 16.2c, finite shocks |
 | [ManySectorFeller](EquilibriumApplications/ManySectorFeller.lean) | 15 | Exercise 16.2c, Feller transition on a compact shock space |
 | [ManySectorEnvelope](EquilibriumApplications/ManySectorEnvelope.lean) | 10 | Exercise 16.2d; (2); Exercise 16.2g |
 | [ManySectorVerification](EquilibriumApplications/ManySectorVerification.lean) | 4 | Exercise 16.2d at the equilibrium price |
+| [ManySectorGeneral](EquilibriumApplications/ManySectorGeneral.lean) | 38 | Exercises 16.2c–d, (2), (3) for a general measurable shock space |
 | [ManySectorPricing](EquilibriumApplications/ManySectorPricing.lean) | 8 | Exercises 16.2e, 16.2f, 16.2h; (3′) and the martingale property |
 | [SustainedGrowth](EquilibriumApplications/SustainedGrowth.lean) | 24 | (1) of §16.3, `S_θ`, `Y`; Exercise 16.3a–b |
 | [SustainedGrowthUtility](EquilibriumApplications/SustainedGrowthUtility.lean) | 28 | CRRA utility; Exercise 16.3c–d |

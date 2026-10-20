@@ -1,6 +1,6 @@
 {
-  "checked_at_utc": "2026-10-20T19:58:25.103819+00:00",
-  "theorems": 1043,
+  "checked_at_utc": "2026-10-20T21:32:52.198099+00:00",
+  "theorems": 1119,
   "module_theorems": {
     "EquilibriumApplications/Economy.lean": 0,
     "EquilibriumApplications/Welfare.lean": 10,
@@ -55,8 +55,10 @@
     "EquilibriumApplications/ManySectorSecurities.lean": 15,
     "EquilibriumApplications/ManySectorEnvelope.lean": 10,
     "EquilibriumApplications/ManySectorFeller.lean": 15,
-    "EquilibriumApplications/ManySectorPricing.lean": 8,
     "EquilibriumApplications/ManySectorVerification.lean": 4,
+    "EquilibriumApplications/ManySectorGeneral.lean": 38,
+    "EquilibriumApplications/ManySectorMGood.lean": 38,
+    "EquilibriumApplications/ManySectorPricing.lean": 8,
     "EquilibriumApplications/PeculiarModel.lean": 43,
     "EquilibriumApplications/PeculiarEllOne.lean": 11,
     "EquilibriumApplications/PeculiarPrices.lean": 22,
@@ -64,7 +66,7 @@
     "EquilibriumApplications/SustainedGrowthPrices.lean": 8,
     "EquilibriumApplications/Truncation.lean": 17
   },
-  "audited_declarations": 1562,
+  "audited_declarations": 1687,
   "declarations": [
     {
       "name": "StokeyLucasPrescott.EquilibriumApplications.Feasible",
@@ -7107,6 +7109,651 @@
       "module": "EquilibriumApplications/ManySectorFeller.lean"
     },
     {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.ms_sec_super_step",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorVerification.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.ms_sec_supergradient",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorVerification.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.ex_16_2d_converse",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorVerification.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.ex_16_2d_equilibrium",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorVerification.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.MsGenData",
+      "kind": "structure",
+      "module": "EquilibriumApplications/ManySectorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.MsGenData.mk",
+      "kind": "constructor",
+      "module": "EquilibriumApplications/ManySectorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.MsGenData.beta_pos",
+      "kind": "projection",
+      "module": "EquilibriumApplications/ManySectorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.MsGenData.beta_lt_one",
+      "kind": "projection",
+      "module": "EquilibriumApplications/ManySectorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.MsGenData.B_neg",
+      "kind": "projection",
+      "module": "EquilibriumApplications/ManySectorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.MsGenData.U_cont",
+      "kind": "projection",
+      "module": "EquilibriumApplications/ManySectorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.MsGenData.U_bdd",
+      "kind": "projection",
+      "module": "EquilibriumApplications/ManySectorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.MsGenData.c_meas",
+      "kind": "projection",
+      "module": "EquilibriumApplications/ManySectorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.MsGenData.q_meas",
+      "kind": "projection",
+      "module": "EquilibriumApplications/ManySectorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.MsGenData.q_pos",
+      "kind": "projection",
+      "module": "EquilibriumApplications/ManySectorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.MsGenData.R_meas",
+      "kind": "projection",
+      "module": "EquilibriumApplications/ManySectorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.MsGenData.R_nonneg",
+      "kind": "projection",
+      "module": "EquilibriumApplications/ManySectorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.MsGenData.nxt_meas",
+      "kind": "projection",
+      "module": "EquilibriumApplications/ManySectorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.MsGenData.dom",
+      "kind": "projection",
+      "module": "EquilibriumApplications/ManySectorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msGE",
+      "kind": "def",
+      "module": "EquilibriumApplications/ManySectorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msGObj",
+      "kind": "def",
+      "module": "EquilibriumApplications/ManySectorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.MsGBellman",
+      "kind": "def",
+      "module": "EquilibriumApplications/ManySectorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msGT",
+      "kind": "def",
+      "module": "EquilibriumApplications/ManySectorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msG_next_mem",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msG_meas_next",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msG_integrable",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msG_integrable_zero",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msG_sub_le",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msG_bellman_unique",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.MsGSpace",
+      "kind": "abbrev",
+      "module": "EquilibriumApplications/ManySectorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msGFn",
+      "kind": "def",
+      "module": "EquilibriumApplications/ManySectorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msGMeas",
+      "kind": "def",
+      "module": "EquilibriumApplications/ManySectorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msGFn_abs_le",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msGFn_sub_le",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msGFn_measurable",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msG_continuous_eval",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msGMeas_isClosed",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msG_zero_mem",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msGFn_integrable",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msGE_continuous",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msGObj_continuous",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msGObj_abs_le",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msGT_attained",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msGT_ge",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msGT_continuous",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msG_sSup_eq_iSup",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msGT_measurable",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msG_bound_nonneg",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msGTW",
+      "kind": "def",
+      "module": "EquilibriumApplications/ManySectorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msGTW_apply",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msGTM",
+      "kind": "def",
+      "module": "EquilibriumApplications/ManySectorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msG_contracting",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msG_bellman_of_fixed",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msGT_concave",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msG_exists",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.ex_16_2c_general",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msG_solution_concave",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.ex_16_2d_general",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msGE_hasDerivAt",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msG_foc",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.ex_16_2_eq2_general",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.ex_16_2g_general",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msG_super_step",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msG_supergradient",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.ex_16_2d_converse_general",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.ex_16_2d_equilibrium_general",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorGeneral.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msMUnif",
+      "kind": "def",
+      "module": "EquilibriumApplications/ManySectorMGood.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msM\u03bc",
+      "kind": "def",
+      "module": "EquilibriumApplications/ManySectorMGood.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msMUnif_prob",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorMGood.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msMUnif_singleton_ne",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorMGood.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msM\u03bc_prob",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorMGood.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msM_ae_iff",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorMGood.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msM_coord_measurable",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorMGood.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msM_bundle_measurable",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorMGood.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msM_lp_combo_ae",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorMGood.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msM_add_ae",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorMGood.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msM_C_ae",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorMGood.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msM_C_of_ae",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorMGood.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msM_ae_abs_le",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorMGood.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msMEU",
+      "kind": "def",
+      "module": "EquilibriumApplications/ManySectorMGood.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msMU",
+      "kind": "def",
+      "module": "EquilibriumApplications/ManySectorMGood.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.ManySectorMHyp",
+      "kind": "structure",
+      "module": "EquilibriumApplications/ManySectorMGood.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.ManySectorMHyp.mk",
+      "kind": "constructor",
+      "module": "EquilibriumApplications/ManySectorMGood.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.ManySectorMHyp.beta_pos",
+      "kind": "projection",
+      "module": "EquilibriumApplications/ManySectorMGood.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.ManySectorMHyp.beta_lt_one",
+      "kind": "projection",
+      "module": "EquilibriumApplications/ManySectorMGood.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.ManySectorMHyp.U_cont",
+      "kind": "projection",
+      "module": "EquilibriumApplications/ManySectorMGood.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.ManySectorMHyp.U_bdd",
+      "kind": "projection",
+      "module": "EquilibriumApplications/ManySectorMGood.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.ManySectorMHyp.U_strictMono",
+      "kind": "projection",
+      "module": "EquilibriumApplications/ManySectorMGood.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.ManySectorMHyp.U_strictConcave",
+      "kind": "projection",
+      "module": "EquilibriumApplications/ManySectorMGood.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msM_integrable",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorMGood.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msM_eu_abs_le",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorMGood.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msM_term_le",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorMGood.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msM_summable",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorMGood.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msM_eu_concave",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorMGood.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msM_U_concave",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorMGood.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msM_assumption15_2",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorMGood.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msM_eu_continuous",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorMGood.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msM_U_continuous",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorMGood.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msM_tendsto_U_timeTrunc",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorMGood.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msMU_periodTrunc",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorMGood.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msM_eu_trunc_tendsto",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorMGood.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msM_tendsto_U_periodTrunc",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorMGood.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.ex_16_2a_consumer_M",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorMGood.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msM_U_mono",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorMGood.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msM_add_one_ae",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorMGood.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msM_U_lt_add_one",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorMGood.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msM_supporting_nonneg",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorMGood.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.MsMTech",
+      "kind": "structure",
+      "module": "EquilibriumApplications/ManySectorMGood.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.MsMTech.mk",
+      "kind": "constructor",
+      "module": "EquilibriumApplications/ManySectorMGood.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.MsMTech.convex_X",
+      "kind": "projection",
+      "module": "EquilibriumApplications/ManySectorMGood.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.MsMTech.nonempty",
+      "kind": "projection",
+      "module": "EquilibriumApplications/ManySectorMGood.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.MsMTech.compact",
+      "kind": "projection",
+      "module": "EquilibriumApplications/ManySectorMGood.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.MsMTech.convex",
+      "kind": "projection",
+      "module": "EquilibriumApplications/ManySectorMGood.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.MsMTech.range",
+      "kind": "projection",
+      "module": "EquilibriumApplications/ManySectorMGood.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.MsMTech.uhc",
+      "kind": "projection",
+      "module": "EquilibriumApplications/ManySectorMGood.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.MsMTech.lhc",
+      "kind": "projection",
+      "module": "EquilibriumApplications/ManySectorMGood.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.MsMTech.mono",
+      "kind": "projection",
+      "module": "EquilibriumApplications/ManySectorMGood.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.MsMTech.jointConvex",
+      "kind": "projection",
+      "module": "EquilibriumApplications/ManySectorMGood.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msMY",
+      "kind": "def",
+      "module": "EquilibriumApplications/ManySectorMGood.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.MsMFreeDisposal",
+      "kind": "def",
+      "module": "EquilibriumApplications/ManySectorMGood.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.MsMPositiveProduction",
+      "kind": "def",
+      "module": "EquilibriumApplications/ManySectorMGood.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msM_Y_sub_C",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorMGood.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msM_convex_Y",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorMGood.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msM_Y_timeTrunc",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorMGood.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msM_Y_periodTrunc",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorMGood.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msM_interior_Y",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorMGood.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.ex_16_2a_M",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorMGood.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msM_price_form",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorMGood.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.msM_paretoOptimal",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorMGood.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.EquilibriumApplications.ex_16_2b_M",
+      "kind": "theorem",
+      "module": "EquilibriumApplications/ManySectorMGood.lean"
+    },
+    {
       "name": "StokeyLucasPrescott.EquilibriumApplications.ex_16_2e",
       "kind": "theorem",
       "module": "EquilibriumApplications/ManySectorPricing.lean"
@@ -7150,26 +7797,6 @@
       "name": "StokeyLucasPrescott.EquilibriumApplications.ms_martingale_prices",
       "kind": "theorem",
       "module": "EquilibriumApplications/ManySectorPricing.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.EquilibriumApplications.ms_sec_super_step",
-      "kind": "theorem",
-      "module": "EquilibriumApplications/ManySectorVerification.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.EquilibriumApplications.ms_sec_supergradient",
-      "kind": "theorem",
-      "module": "EquilibriumApplications/ManySectorVerification.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.EquilibriumApplications.ex_16_2d_converse",
-      "kind": "theorem",
-      "module": "EquilibriumApplications/ManySectorVerification.lean"
-    },
-    {
-      "name": "StokeyLucasPrescott.EquilibriumApplications.ex_16_2d_equilibrium",
-      "kind": "theorem",
-      "module": "EquilibriumApplications/ManySectorVerification.lean"
     },
     {
       "name": "StokeyLucasPrescott.EquilibriumApplications.pecW",
@@ -14891,6 +15518,651 @@
       "Classical.choice",
       "Quot.sound"
     ],
+    "StokeyLucasPrescott.EquilibriumApplications.ms_sec_super_step": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.ms_sec_supergradient": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.ex_16_2d_converse": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.ex_16_2d_equilibrium": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.MsGenData": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.MsGenData.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.MsGenData.beta_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.MsGenData.beta_lt_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.MsGenData.B_neg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.MsGenData.U_cont": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.MsGenData.U_bdd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.MsGenData.c_meas": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.MsGenData.q_meas": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.MsGenData.q_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.MsGenData.R_meas": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.MsGenData.R_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.MsGenData.nxt_meas": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.MsGenData.dom": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msGE": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msGObj": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.MsGBellman": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msGT": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msG_next_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msG_meas_next": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msG_integrable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msG_integrable_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msG_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msG_bellman_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.MsGSpace": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msGFn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msGMeas": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msGFn_abs_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msGFn_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msGFn_measurable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msG_continuous_eval": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msGMeas_isClosed": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msG_zero_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msGFn_integrable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msGE_continuous": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msGObj_continuous": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msGObj_abs_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msGT_attained": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msGT_ge": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msGT_continuous": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msG_sSup_eq_iSup": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msGT_measurable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msG_bound_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msGTW": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msGTW_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msGTM": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msG_contracting": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msG_bellman_of_fixed": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msGT_concave": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msG_exists": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.ex_16_2c_general": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msG_solution_concave": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.ex_16_2d_general": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msGE_hasDerivAt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msG_foc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.ex_16_2_eq2_general": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.ex_16_2g_general": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msG_super_step": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msG_supergradient": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.ex_16_2d_converse_general": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.ex_16_2d_equilibrium_general": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msMUnif": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msM\u03bc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msMUnif_prob": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msMUnif_singleton_ne": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msM\u03bc_prob": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msM_ae_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msM_coord_measurable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msM_bundle_measurable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msM_lp_combo_ae": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msM_add_ae": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msM_C_ae": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msM_C_of_ae": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msM_ae_abs_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msMEU": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msMU": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.ManySectorMHyp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.ManySectorMHyp.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.ManySectorMHyp.beta_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.ManySectorMHyp.beta_lt_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.ManySectorMHyp.U_cont": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.ManySectorMHyp.U_bdd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.ManySectorMHyp.U_strictMono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.ManySectorMHyp.U_strictConcave": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msM_integrable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msM_eu_abs_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msM_term_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msM_summable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msM_eu_concave": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msM_U_concave": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msM_assumption15_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msM_eu_continuous": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msM_U_continuous": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msM_tendsto_U_timeTrunc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msMU_periodTrunc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msM_eu_trunc_tendsto": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msM_tendsto_U_periodTrunc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.ex_16_2a_consumer_M": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msM_U_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msM_add_one_ae": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msM_U_lt_add_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msM_supporting_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.MsMTech": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.MsMTech.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.MsMTech.convex_X": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.MsMTech.nonempty": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.MsMTech.compact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.MsMTech.convex": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.MsMTech.range": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.MsMTech.uhc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.MsMTech.lhc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.MsMTech.mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.MsMTech.jointConvex": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msMY": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.MsMFreeDisposal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.MsMPositiveProduction": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msM_Y_sub_C": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msM_convex_Y": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msM_Y_timeTrunc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msM_Y_periodTrunc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msM_interior_Y": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.ex_16_2a_M": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msM_price_form": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.msM_paretoOptimal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.EquilibriumApplications.ex_16_2b_M": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
     "StokeyLucasPrescott.EquilibriumApplications.ex_16_2e": [
       "propext",
       "Classical.choice",
@@ -14932,26 +16204,6 @@
       "Quot.sound"
     ],
     "StokeyLucasPrescott.EquilibriumApplications.ms_martingale_prices": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.EquilibriumApplications.ms_sec_super_step": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.EquilibriumApplications.ms_sec_supergradient": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.EquilibriumApplications.ex_16_2d_converse": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "StokeyLucasPrescott.EquilibriumApplications.ex_16_2d_equilibrium": [
       "propext",
       "Classical.choice",
       "Quot.sound"
@@ -15713,26 +16965,28 @@
     "EquilibriumApplications/ManySector.lean": "0619bcbef1d4e081a6cd7aa7e32aab0221b57fde5984ce4b9a6f45634ab18935",
     "EquilibriumApplications/ManySectorTech.lean": "635def9d0ee85657e343a013c3cb9971004120ec505c7370a1d8383e6426321e",
     "EquilibriumApplications/ManySectorPrices.lean": "4a301a89d03eb09a1d234546463cd5fb2f80c35f518dfde5df63cd215d4877aa",
-    "EquilibriumApplications/ManySectorSecurities.lean": "951ad867f8addda78ab8d2e28d56548373411ed459db920a68634a62a085fc4a",
+    "EquilibriumApplications/ManySectorSecurities.lean": "c0417e754a522faa036a9b1e90785a125282e62b61a16da3f676e31adee5aa65",
     "EquilibriumApplications/ManySectorEnvelope.lean": "4a804e4e1772ca5736c45af74214771a5d6e126f088cbb291018ff769df70cc8",
     "EquilibriumApplications/ManySectorFeller.lean": "de74cf8834d561bc9e936612a83cbb417b141622f7b955d0dc13da1b1a8df807",
-    "EquilibriumApplications/ManySectorPricing.lean": "ef8e91cbc07d817ee22cf1d3d6e12ce2b8bfcbd88ae02f9af314b85088f42078",
     "EquilibriumApplications/ManySectorVerification.lean": "c4d141ab52c5ac805919445d84bb921c61f42cedd9f26dcf4248859124dd1fd1",
+    "EquilibriumApplications/ManySectorGeneral.lean": "73fc5495d9e04160c70097926c6a8215d904205bb199feae13ef48870c1cb2c5",
+    "EquilibriumApplications/ManySectorMGood.lean": "e39cfc3ba39070f383c7d8fe32686c8664db1b35067a12ff840d9daa31c8bfdc",
+    "EquilibriumApplications/ManySectorPricing.lean": "ef8e91cbc07d817ee22cf1d3d6e12ce2b8bfcbd88ae02f9af314b85088f42078",
     "EquilibriumApplications/PeculiarModel.lean": "ed6383eb6cbeadee182fc4bdceb31ebf9c88bf8c3e18c7f3a24800dbacbbba9b",
     "EquilibriumApplications/PeculiarEllOne.lean": "e0d2cdf278e24e1efc6beaadd189d2a96cd127e9e1d714fed7c43fac17c85e55",
     "EquilibriumApplications/PeculiarPrices.lean": "68634f341ba9a4126a49ad131b18e10a58f5b49fd6292a022f51fb1af3e7533d",
     "EquilibriumApplications/SequenceTailUtility.lean": "73a9637d7a0c41305d2bc5a83db6429a81ffb01f823a025bdd13b97465b9fc56",
     "EquilibriumApplications/SustainedGrowthPrices.lean": "50d68be63263ef6e271356249782a3647424374dfc12fdc83960ca6229650aef",
     "EquilibriumApplications/Truncation.lean": "ef1ac0c126d7f57dac104cd6bb4e417dd2358484a39f17039b58439e67c521b0",
-    "EquilibriumApplications.lean": "99d6910ba234fed8ede4f77f1808d09de64656f60e8f0f49a67733f4312a3aaa",
+    "EquilibriumApplications.lean": "9c3305447a414ac1830b86549db5c13cb87a3dc20d2b8d7db068dd85efc0cb46",
     "lean-toolchain": "8733782dc070a99b312039cda424f601b80f3be6f6f512627da5ba25adc27632",
     "lakefile.toml": "f5b8c812c54eb112b43e1cc6ef0560769cdb946793500da685a5facc75ac3a72",
     "lake-manifest.json": "dadfeb985eef92015d9b61229d0089005ead8e7e4a6b73c37eaf38d4173f4bd6",
-    "proof-manifest.json": "9701daa795ff873d99927dcc6bc63f1116e280620041a1601306dcb4dbca86ea",
+    "proof-manifest.json": "70316b528705c1e53bbf2e0fa973bdf983b85572d645cf01634e762dba77e3eb",
     "scripts/verify.py": "a70b1fa704dd590f937f8b37682afa88a9d85a9150065acb935c7d2c9589da3b",
     "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
   },
-  "fresh_audit_sha256": "10288b49b2017f53886ac7b0875ce20e095277a2d196f432659c991f81aff60c",
+  "fresh_audit_sha256": "2d8929f5411b6ddab670459dc7c4c56aa9108faceed9b191cc3980d070cec0c1",
   "lean_toolchain": "leanprover/lean4:v4.34.0",
   "scope": "SLP Chapter 16 (Applications of Equilibrium Theory): every numbered result and exercise, with corrections.",
   "source": "Stokey, Lucas and Prescott (1989), Recursive Methods in Economic Dynamics, Chapter 16"

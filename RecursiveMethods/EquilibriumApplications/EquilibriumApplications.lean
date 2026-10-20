@@ -59,3 +59,5 @@ import EquilibriumApplications.SustainedGrowthWelfare
 import EquilibriumApplications.Truncation
 import EquilibriumApplications.Welfare
 import EquilibriumApplications.WelfareSecond
+import EquilibriumApplications.ManySectorGeneral
+import EquilibriumApplications.ManySectorMGood

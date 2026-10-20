@@ -36,7 +36,8 @@ security; `R = f(s′) + q(s′)` for the multi-period asset of Ex 16.2g), with 
   condition above is added (`ex_16_2c_domain_counterexample` shows it is needed).
 * Continuity of `z ↦ ∫ w[b f(z′), g(x, z), z′] Q(z, dz′)` fails for a merely Feller `Q` and
   measurable `f`; here the shock space is finite (or, equivalently, `Q` has finite support), which
-  removes the issue. The general measurable case is not formalised.
+  removes the issue. The general measurable case (a Markov kernel on a measurable shock space,
+  measurable return) is `ManySectorGeneral`.
 -/
 
 namespace StokeyLucasPrescott.EquilibriumApplications
