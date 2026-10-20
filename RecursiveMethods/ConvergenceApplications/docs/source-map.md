@@ -44,7 +44,7 @@ Where the Lean statement departs from the book, see [corrections](corrections.md
 | Source | Claim | Lean |
 | --- | --- | --- |
 | (2), p. 395 | Mixing; `Q` stable | `IndustryMixing`, `industryMixing_Ici`, `industryMixing_Iic`, `industry_shock_stable` |
-| p. 396 | `x̲`, `x̄`, `X̂` | `IndustryPolicy`, `IndustryPolicy.fixedPoint_unique`, `IndustryPolicy.xlo_le_xhi`, `exists_fixedPoint`, `industry_exists_xlo_xhi`, `industry_no_fixedPoint_half`, `industry_no_fixedPoint_above`, `industry_Xhat_invariant` |
+| p. 396 | `x̲`, `x̄`, `X̂` | `IndustryPolicy`, `IndustryPolicy.fixedPoint_unique`, `IndustryPolicy.xlo_le_xhi`, `exists_fixedPoint`, `industry_exists_xlo_xhi`, `industry_no_fixedPoint_half`, `industry_no_fixedPoint_above`, `industry_Xhat_invariant`; the §10.4 policy: `indPolicyFn`, `indPolicyFn_props`, `indPolicyFn_industryPolicy`, `indPolicyFn_ind0` |
 | Exercise 13.4a, p. 396 | `P̂` monotone and Feller | `indKernel`, `indKernel_apply`, `ex_13_4_transition`, `ex_13_4a_monotone`, `ex_13_4a_feller` |
 | Exercise 13.4b, p. 396 | Assumption 12.1 on `Ŝ` | `industry_Q_high_pos`, `industry_Q_low_pos`, `indKernel_highRun`, `indKernel_lowRun`, `ex_13_4b_rect`, `ex_13_4b`, `ex_13_4b_stable` |
 | Exercise 13.4c, p. 397 | `T*ⁿλ ⇒ λ*` on all of `S` | `ex_13_4c_path_bounds`, `ex_13_4c_gap`, `ex_13_4c_squeeze_path`, `ex_13_4c_remark_counterexample`, `ex_13_4c_rect_all`, `ex_13_4c_degenerate_no_assumption`, `indSKernel`, `ex_13_4c`, `ex_13_4c_unique` |

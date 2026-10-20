@@ -19104,7 +19104,9 @@ Authors: Robert Kirkby
 SLP §13.4, pp. 395–397, Exercise 13.4. The policy `g` of the §10.4 problem is taken as given,
 with the properties of Exercise 10.4(d, e) (`IndustryPolicy`): `g` is continuous on
 `X × Z`, `X = (0, ∞)`, `Z = [z̲, z̄]`, maps `X × Z` into `X`; (i) `g(·, z)` is strictly increasing
-with slope `< 1`; (ii) `g(x, ·)` is nondecreasing. The shocks follow a monotone Feller Markov
+and the growth rate `g(x, z)/x` is strictly decreasing in `x`; (ii) `g(x, ·)` is nondecreasing.
+The optimal policy of §10.4 has these properties (`indPolicyFn_industryPolicy` in
+`IndustryConvergencePolicy`). The shocks follow a monotone Feller Markov
 kernel `Q` on `Z` with the mixing condition (2), `Qᴺ(z, (u, v]) ≥ α(v − u)` (`IndustryMixing`).
 Positivity of `z̲` is never used.
 
@@ -19164,6 +19166,15 @@ Positivity of `z̲` is never used.
 
 ## Corrections
 
+* **The slope condition** (p. 395, from Exercise 10.4d). The book's (i) asks that `g(·, z)` have
+  slope strictly less than one. That is false for the policy of §10.4
+  (`ex_10_4d_slope_counterexample`), so `IndustryPolicy` asks instead that `g(x, z)/x` be
+  strictly decreasing (`IndustryPolicy.ratio_lt`), which §10.4 does give
+  (`ind_policy_ratio_lt`). Every §13.4 argument needs only its consequence that `g(·, z)` crosses
+  the diagonal at most once, from above (`IndustryPolicy.lt_g_of_lt`,
+  `IndustryPolicy.g_lt_of_lt`), so no result below changes. The counterexamples
+  `industry_no_fixedPoint_half` and `industry_no_fixedPoint_above` now use `g(x, z) = x/(2 + x)`
+  and `g(x, z) = x + 1/(1 + x)`.
 * **Existence of `x̲`, `x̄`** (p. 396). (i)–(ii) give uniqueness of the fixed points and `x̲ ≤ x̄`,
   not existence. `industry_no_fixedPoint_half`: `g(x, z) = x/2` satisfies all the hypotheses and
   has no positive fixed point (capital shrinks to `0 ∉ X`, as the NOTE says). The NOTE's repair
@@ -19229,13 +19240,16 @@ theorem industry_shock_stable (hz : zlo < zhi) [IsMarkovKernel Q] (hM : IsMonoto
 
 /-- The properties of the policy `g` of the §10.4 problem established in Exercise 10.4(d, e)
 (p. 395), on `X × Z` with `X = (0, ∞)`: `g` is continuous and maps `X × Z` into `X`; (i) for each
-`z`, `g(·, z)` is strictly increasing with slope strictly less than one; (ii) for each `x`,
-`g(x, ·)` is nondecreasing. -/
+`z`, `g(·, z)` is strictly increasing and `g(x, z)/x` is strictly decreasing in `x`; (ii) for each
+`x`, `g(x, ·)` is nondecreasing.
+
+**Correction.** The book's (i) asks for slope strictly less than one, which the §10.4 policy need
+not have (`ex_10_4d_slope_counterexample`); `ratio_lt` replaces it. -/
 structure IndustryPolicy (g : ℝ → ℝ → ℝ) (zlo zhi : ℝ) : Prop where
   cont : ContinuousOn (fun p : ℝ × ℝ => g p.1 p.2) (Ioi 0 ×ˢ Icc zlo zhi)
   pos : ∀ x z, 0 < x → z ∈ Icc zlo zhi → 0 < g x z
   strictMono_x : ∀ x x' z, 0 < x → x < x' → z ∈ Icc zlo zhi → g x z < g x' z
-  slope_lt : ∀ x x' z, 0 < x → x < x' → z ∈ Icc zlo zhi → g x' z - g x z < x' - x
+  ratio_lt : ∀ x x' z, 0 < x → x < x' → z ∈ Icc zlo zhi → g x' z / x' < g x z / x
   mono_z : ∀ x z z', 0 < x → zlo ≤ z → z ≤ z' → z' ≤ zhi → g x z ≤ g x z'
 
 variable {g : ℝ → ℝ → ℝ}
@@ -19257,10 +19271,22 @@ theorem mono {x x' z z' : ℝ} (hx : 0 < x) (hxx : x ≤ x') (hz : z ∈ Icc zlo
     (hz' : z' ∈ Icc zlo zhi) (hzz : z ≤ z') : g x z ≤ g x' z' :=
   (hg.mono_x hx hxx hz).trans (hg.mono_z x' z z' (hx.trans_le hxx) hz.1 hzz hz'.2)
 
-/-- `g(x, z) − x` is strictly decreasing in `x`. -/
-theorem sub_strictAnti {x x' z : ℝ} (hx : 0 < x) (hxx : x < x') (hz : z ∈ Icc zlo zhi) :
-    g x' z - x' < g x z - x := by
-  linarith [hg.slope_lt x x' z hx hxx hz]
+/-- `g(·, z)` crosses the diagonal at most once, from above: if `x < x′` and `x′ ≤ g(x′, z)`, then
+`x < g(x, z)`. -/
+theorem lt_g_of_lt {x x' z : ℝ} (hx : 0 < x) (hxx : x < x') (hz : z ∈ Icc zlo zhi)
+    (h : x' ≤ g x' z) : x < g x z := by
+  have hr := hg.ratio_lt x x' z hx hxx hz
+  have h1 : 1 ≤ g x' z / x' := by rw [le_div_iff₀ (hx.trans hxx)]; linarith
+  have h2 : 1 < g x z / x := h1.trans_lt hr
+  rwa [lt_div_iff₀ hx, one_mul] at h2
+
+/-- If `x < x′` and `g(x, z) ≤ x`, then `g(x′, z) < x′`. -/
+theorem g_lt_of_lt {x x' z : ℝ} (hx : 0 < x) (hxx : x < x') (hz : z ∈ Icc zlo zhi)
+    (h : g x z ≤ x) : g x' z < x' := by
+  have hr := hg.ratio_lt x x' z hx hxx hz
+  have h1 : g x z / x ≤ 1 := by rw [div_le_iff₀ hx]; linarith
+  have h2 : g x' z / x' < 1 := hr.trans_le h1
+  rwa [div_lt_iff₀ (hx.trans hxx), one_mul] at h2
 
 /-- `g(·, z)` is continuous on `X`. -/
 theorem continuousOn_x {z : ℝ} (hz : z ∈ Icc zlo zhi) : ContinuousOn (fun x => g x z) (Ioi 0) :=
@@ -19270,16 +19296,16 @@ theorem continuousOn_x {z : ℝ} (hz : z ∈ Icc zlo zhi) : ContinuousOn (fun x 
 theorem fixedPoint_unique {x x' z : ℝ} (hx : 0 < x) (hx' : 0 < x') (hz : z ∈ Icc zlo zhi)
     (hfx : g x z = x) (hfx' : g x' z = x') : x = x' := by
   rcases lt_trichotomy x x' with h | h | h
-  · have := hg.sub_strictAnti hx h hz; linarith
+  · have := hg.lt_g_of_lt hx h hz hfx'.ge; linarith
   · exact h
-  · have := hg.sub_strictAnti hx' h hz; linarith
+  · have := hg.lt_g_of_lt hx' h hz hfx.ge; linarith
 
 /-- `x̲ ≤ x̄` (NOTE p. 396): `g(x̲, z̄) ≥ g(x̲, z̲) = x̲`. -/
 theorem xlo_le_xhi {xlo xhi : ℝ} (hz : zlo ≤ zhi) (hlo : 0 < xlo) (hhi : 0 < xhi)
     (hflo : g xlo zlo = xlo) (hfhi : g xhi zhi = xhi) : xlo ≤ xhi := by
   by_contra hlt
   rw [not_le] at hlt
-  have h1 := hg.sub_strictAnti hhi hlt ⟨hz, le_rfl⟩
+  have h1 := hg.g_lt_of_lt hhi hlt ⟨hz, le_rfl⟩ hfhi.le
   have h2 := hg.mono_z xlo zlo zhi hlo le_rfl hz le_rfl
   linarith
 
@@ -19288,14 +19314,14 @@ theorem le_self_of_le_fixed {x p z : ℝ} (hx : 0 < x) (hxp : x ≤ p) (hz : z �
     (hp : g p z = p) : x ≤ g x z := by
   rcases hxp.eq_or_lt with rfl | hlt
   · exact hp.ge
-  · have := hg.sub_strictAnti hx hlt hz; linarith
+  · exact (hg.lt_g_of_lt hx hlt hz hp.ge).le
 
 /-- Above a fixed point `p` of `g(·, z)`, `g(x, z) ≤ x`. -/
 theorem le_self_of_fixed_le {x p z : ℝ} (hp0 : 0 < p) (hpx : p ≤ x) (hz : z ∈ Icc zlo zhi)
     (hp : g p z = p) : g x z ≤ x := by
   rcases hpx.eq_or_lt with rfl | hlt
   · exact hp.le
-  · have := hg.sub_strictAnti hp0 hlt hz; linarith
+  · exact (hg.g_lt_of_lt hp0 hlt hz hp.le).le
 
 /-- Existence of a fixed point of `g(·, z)` by the intermediate value theorem, given points
 `x₁, x₂ > 0` with `g(x₁, z) ≥ x₁` and `g(x₂, z) ≤ x₂`. -/
@@ -19304,7 +19330,7 @@ theorem exists_fixedPoint {x₁ x₂ z : ℝ} (hz : z ∈ Icc zlo zhi) (hx₁ : 
   have h12 : x₁ ≤ x₂ := by
     by_contra hlt
     rw [not_le] at hlt
-    have := hg.sub_strictAnti hx₂ hlt hz; linarith
+    have := hg.g_lt_of_lt hx₂ hlt hz h₂; linarith
   have hc : ContinuousOn (fun x => g x z - x) (Icc x₁ x₂) :=
     ((hg.continuousOn_x hz).sub continuousOn_id).mono fun x hx => hx₁.trans_le hx.1
   obtain ⟨p, hp, hp0⟩ := intermediate_value_Icc' h12 hc
@@ -19331,14 +19357,25 @@ theorem industry_exists_xlo_xhi (hg : IndustryPolicy g zlo zhi) (hz : zlo ≤ zh
     fun x hx hfx => hg.fixedPoint_unique hx hlo hzlo hfx hflo,
     fun x hx hfx => hg.fixedPoint_unique hx hhi hzhi hfx hfhi⟩
 
-/-- **Counterexample to the existence claim** (p. 396), too little capital: `g(x, z) = x/2`
-satisfies (i), (ii), continuity and `g(X × Z) ⊆ X`, but `g(·, z)` has no fixed point in
-`X = (0, ∞)` for any `z`. -/
+/-- **Counterexample to the existence claim** (p. 396), too little capital:
+`g(x, z) = x/(2 + x)` (below `x/2`) satisfies (i), (ii), continuity and `g(X × Z) ⊆ X`, but
+`g(·, z)` has no fixed point in `X = (0, ∞)` for any `z`. (With the slope condition of the book
+the example was `x/2`; its growth rate is constant, so it is not an `IndustryPolicy` now.) -/
 theorem industry_no_fixedPoint_half (zlo zhi : ℝ) :
-    IndustryPolicy (fun x _ => x / 2) zlo zhi ∧ ∀ x : ℝ, 0 < x → x / 2 ≠ x := by
-  refine ⟨⟨(continuous_fst.div_const 2).continuousOn, fun x _ hx _ => by positivity,
-    fun x x' _ _ h _ => by linarith, fun x x' _ _ h _ => by linarith,
-    fun _ _ _ _ _ _ _ => le_rfl⟩, fun x hx h => by linarith⟩
+    IndustryPolicy (fun x _ => x / (2 + x)) zlo zhi ∧ ∀ x : ℝ, 0 < x → x / (2 + x) ≠ x := by
+  refine ⟨⟨?_, fun x _ hx _ => by positivity, fun x x' _ hx h _ => ?_, fun x x' _ hx h _ => ?_,
+    fun _ _ _ _ _ _ _ => le_rfl⟩, fun x hx h => ?_⟩
+  · refine continuousOn_fst.div (continuousOn_const.add continuousOn_fst) fun p hp => ?_
+    have : (0 : ℝ) < p.1 := hp.1
+    positivity
+  · rw [div_lt_div_iff₀ (by linarith) (by linarith)]
+    nlinarith
+  · have hx' : 0 < x' := hx.trans h
+    rw [div_right_comm, div_self hx'.ne', div_right_comm, div_self hx.ne']
+    exact one_div_lt_one_div_of_lt (by linarith) (by linarith)
+  · have h2 : 0 < 2 + x := by linarith
+    rw [div_eq_iff h2.ne'] at h
+    nlinarith
 
 /-- **Counterexample to the existence claim** (p. 396), too much capital: `g(x, z) = x + 1/(1 + x)`
 satisfies (i), (ii), continuity and `g(X × Z) ⊆ X`, but `g(x, z) > x` for every `x > 0`, so again
@@ -19362,10 +19399,10 @@ theorem industry_no_fixedPoint_above (zlo zhi : ℝ) :
       have : 0 < (1 + x) * (1 + x') - 1 := by nlinarith
       nlinarith [mul_pos (sub_pos.2 h) this]
     linarith
-  · have : 1 / (1 + x') - 1 / (1 + x) < 0 := by
-      have : 1 / (1 + x') < 1 / (1 + x) := one_div_lt_one_div_of_lt (by linarith) (by linarith)
-      linarith
-    linarith
+  · have hx' : 0 < x' := hx.trans h
+    rw [add_div, div_self hx'.ne', div_div, add_div, div_self hx.ne', div_div]
+    have : (1 + x) * x < (1 + x') * x' := by nlinarith
+    linarith [one_div_lt_one_div_of_lt (by positivity) this]
   · have : 0 < 1 / (1 + x) := by positivity
     linarith
 
@@ -20312,13 +20349,13 @@ theorem ex_13_4c_gap (hg : IndustryPolicy g zlo zhi) {xlo xhi : ℝ} (hlo : 0 < 
   have hzhi : zhi ∈ Icc zlo zhi := ⟨hz.1.trans hz.2, le_rfl⟩
   have hhi : 0 < xhi := hlo.trans_le hloh
   refine ⟨fun hx => ⟨?_, ?_⟩, fun hx0 hx => ⟨?_, ?_⟩, fun hx => ?_⟩
-  · have h1 := hg.slope_lt xhi x zhi hhi hx hzhi
+  · have h1 := hg.g_lt_of_lt hhi hx hzhi hfhi.le
     have h2 := hg.mono_z x z zhi (hhi.trans hx) hz.1 hz.2 le_rfl
     linarith
   · have h1 := hg.strictMono_x xhi x z hhi hx hz
     have h2 := hg.mono hlo hloh hzlo hz hz.1
     linarith
-  · have h1 := hg.slope_lt x xlo zlo hx0 hx hzlo
+  · have h1 := hg.lt_g_of_lt hx0 hx hzlo hflo.ge
     have h2 := hg.mono_z x zlo z hx0 le_rfl hz.1 hz.2
     linarith
   · have h1 := hg.strictMono_x x xlo z hx0 hx hz
@@ -20354,7 +20391,8 @@ theorem ex_13_4c_remark_counterexample :
       (3 : ℝ) < 4 ∧ (4 + 1) / 2 - 3 < (0 : ℝ) := by
   refine ⟨⟨((continuous_fst.add continuous_snd).div_const 2).continuousOn,
     fun x z hx hz => by linarith [hz.1], fun x x' z _ h _ => by linarith,
-    fun x x' z _ h _ => by linarith, fun x z z' _ _ h _ => by linarith⟩,
+    fun x x' z hx h hz => by rw [div_lt_div_iff₀ (by linarith) hx]; nlinarith [hz.1],
+    fun x z z' _ _ h _ => by linarith⟩,
     by norm_num, by norm_num, by norm_num, by norm_num⟩
 
 /-- Iterates of `g(·, z)` started strictly below (above) a fixed point stay strictly below
@@ -20742,6 +20780,2436 @@ theorem ex_13_4c_unique {xlo xhi : ℝ} (hS : IndustryRect g zlo zhi xlo xhi)
   · have hconst : ConvWeak (fun n => (adjointOp (indSKernel hS.policy Q))^[n] ν) ν := fun f => by
       simp only [Function.iterate_fixed hνinv]; exact tendsto_const_nhds
     exact convWeak_unique hconst (ex_13_4c hS hflo hfhi hM hF hQ hinv ν)
+
+end StokeyLucasPrescott.ConvergenceApplications
+
+/-
+Copyright (c) 2026 Robert Kirkby. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Robert Kirkby
+-/
+
+/-!
+# Returns bounded above
+
+The industry-investment and inventory problems of SLP §§10.4–10.5 have returns that are bounded
+above but not below (adjustment and holding costs grow without bound), so Assumption 9.7 fails.
+What they do have is a choice with nonnegative return in every state. Under these hypotheses
+(`UpperDP`), truncating `F` below at `−K` (`truncModel`) gives a model satisfying the hypotheses
+of §9.2, and for `K > βA/(1 − β)` the truncation never binds at an optimum. Hence
+(`upper_fixed`):
+
+* the fixed point `v` of the truncated operator satisfies `0 ≤ v ≤ A/(1 − β)` and solves the
+  functional equation of the original problem, the maximum being attained;
+* it is the only bounded continuous solution, because the original operator is itself a
+  `β`-contraction wherever the maxima exist.
+
+`trunc_bellman_argmax` is the analogue of `exists_bellman_argmax` for the original returns, on
+functions with values in `[0, A/(1 − β)]`; it lets monotonicity and concavity be proved through
+the truncated contraction.
+-/
+
+namespace StokeyLucasPrescott.ConvergenceApplications
+
+open MeasureTheory ProbabilityTheory Set Filter Topology BoundedContinuousFunction
+
+variable {X Y Z : Type*} [MetricSpace X] [MetricSpace Y] [MetricSpace Z]
+  [MeasurableSpace X] [MeasurableSpace Y] [MeasurableSpace Z]
+
+/-- §9.2's hypotheses with Assumption 9.7 weakened: returns are bounded above by `A ≥ 0`, and a
+nonnegative return is available in every state. -/
+structure UpperDP (M : Model X Y Z) (A : ℝ) : Prop where
+  nonempty : ∀ s, (M.Γ s).Nonempty
+  compact : ∀ s, IsCompact (M.Γ s)
+  lhc : ∀ s, IsLHC M.Γ s
+  uhc : ∀ s, IsUHC M.Γ s
+  contF : ContinuousOn M.F (graphA M)
+  A_nonneg : 0 ≤ A
+  bddAbove : ∀ p ∈ graphA M, M.F p ≤ A
+  safe : ∀ s, ∃ y ∈ M.Γ s, 0 ≤ M.F (s.1, y, s.2)
+  β_pos : 0 < M.β
+  β_lt : M.β < 1
+  contφ : ContinuousOn (fun q : (X × Y) × Z => M.φ (q.1.1, q.1.2, q.2)) (domD M ×ˢ univ)
+  contExp : ContExp M
+
+/-- The model with returns truncated below at `−K`. -/
+abbrev truncModel (M : Model X Y Z) (K : ℝ) : Model X Y Z :=
+  ⟨M.Q, M.Γ, M.φ, fun p => max (M.F p) (-K), M.β⟩
+
+variable {M : Model X Y Z} {A : ℝ}
+
+/-- The truncated model satisfies the hypotheses of §9.2. -/
+theorem truncModel_boundedDP (h : UpperDP M A) {K : ℝ} (hK : 0 ≤ K) :
+    BoundedDP (truncModel M K) :=
+  ⟨h.nonempty, h.compact, h.lhc, h.uhc,
+    continuous_max.comp_continuousOn (h.contF.prodMk continuousOn_const),
+    ⟨max A K, fun p hp => abs_le.2 ⟨by
+      have := le_max_right (M.F p) (-K)
+      have := le_max_right A K
+      change -max A K ≤ max (M.F p) (-K)
+      linarith, max_le ((h.bddAbove p hp).trans (le_max_left _ _))
+        (by linarith [le_max_right A K])⟩⟩,
+    h.β_pos, h.β_lt, h.contφ, h.contExp⟩
+
+/-- The truncation level used: `K = A/(1 − β) + 1`. -/
+noncomputable def truncK (A β : ℝ) : ℝ := A / (1 - β) + 1
+
+theorem truncK_pos (h : UpperDP M A) : 0 < truncK A M.β := by
+  have : 0 < 1 - M.β := by linarith [h.β_lt]
+  have := div_nonneg h.A_nonneg this.le
+  unfold truncK; linarith
+
+/-- The truncated operator `T̃`. -/
+noncomputable abbrev truncT [IsMarkovKernel M.Q] [OpensMeasurableSpace Z] (h : UpperDP M A) :
+    (X × Z →ᵇ ℝ) → (X × Z →ᵇ ℝ) :=
+  bellman (truncModel M (truncK A M.β)) (truncModel_boundedDP h (truncK_pos h).le)
+
+/-- On functions with values in `[0, A/(1 − β)]`, the truncated operator equals the original one:
+it attains its maximum at a `y` where the truncation does not bind, and dominates `rhs` for the
+original returns. -/
+theorem trunc_bellman_argmax [IsMarkovKernel M.Q] [OpensMeasurableSpace Z] (h : UpperDP M A)
+    {f : X × Z →ᵇ ℝ} (hf : ∀ s, 0 ≤ f s ∧ f s ≤ A / (1 - M.β)) (s : X × Z) :
+    ∃ y ∈ M.Γ s, truncT h f s = rhs M f s y ∧ ∀ y' ∈ M.Γ s, rhs M f s y' ≤ truncT h f s := by
+  set K := truncK A M.β
+  set M' := truncModel M K
+  have hb := truncModel_boundedDP h (truncK_pos h).le
+  obtain ⟨y, hy, hval, hmax⟩ := exists_bellman_argmax M' hb f s
+  have hEf : ∀ y', y' ∈ M.Γ s → 0 ≤ expV M f s y' ∧ expV M f s y' ≤ A / (1 - M.β) := by
+    intro y' hy'
+    have hint := integrable_integrand M' hb f hy' s.2
+    refine ⟨integral_nonneg fun z' => (hf _).1, ?_⟩
+    have := integral_mono hint (integrable_const (A / (1 - M.β))) fun z' => (hf _).2
+    simpa [expV] using this
+  have hexpV : ∀ y', expV M' f s y' = expV M f s y' := fun _ => rfl
+  -- the value is nonnegative, using the safe choice
+  obtain ⟨y₀, hy₀, hF₀⟩ := h.safe s
+  have h0 : 0 ≤ bellman M' hb f s := by
+    refine le_trans ?_ (hmax y₀ hy₀)
+    simp only [rhs, hexpV]
+    have := (hEf y₀ hy₀).1
+    have := mul_nonneg h.β_pos.le this
+    have := le_max_left (M.F (s.1, y₀, s.2)) (-K)
+    change 0 ≤ max (M.F (s.1, y₀, s.2)) (-K) + M.β * expV M f s y₀
+    linarith
+  -- so the truncation does not bind at `y`
+  have hβR : M.β * (A / (1 - M.β)) < K := by
+    have h1 : 0 < 1 - M.β := by linarith [h.β_lt]
+    have : M.β * (A / (1 - M.β)) ≤ A / (1 - M.β) :=
+      mul_le_of_le_one_left (div_nonneg h.A_nonneg h1.le) h.β_lt.le
+    unfold K truncK; linarith
+  have hbind : -K < M.F (s.1, y, s.2) := by
+    simp only [rhs, hexpV] at hval
+    have hE := (hEf y hy).2
+    have := mul_le_mul_of_nonneg_left hE h.β_pos.le
+    by_contra hle
+    have hmx : max (M.F (s.1, y, s.2)) (-K) = -K := max_eq_right (not_lt.1 hle)
+    change bellman M' hb f s = max (M.F (s.1, y, s.2)) (-K) + M.β * expV M f s y at hval
+    rw [hmx] at hval
+    linarith
+  refine ⟨y, hy, ?_, fun y' hy' => ?_⟩
+  · rw [hval]
+    simp only [rhs, hexpV]
+    change max (M.F (s.1, y, s.2)) (-K) + _ = _
+    rw [max_eq_left hbind.le]
+  · refine le_trans ?_ (hmax y' hy')
+    simp only [rhs, hexpV]
+    change _ ≤ max (M.F (s.1, y', s.2)) (-K) + _
+    linarith [le_max_left (M.F (s.1, y', s.2)) (-K)]
+
+/-- `T̃` maps functions with values in `[0, A/(1 − β)]` into themselves. -/
+theorem truncT_mapsTo [IsMarkovKernel M.Q] [OpensMeasurableSpace Z] (h : UpperDP M A) :
+    MapsTo (truncT h) {f | ∀ s, 0 ≤ f s ∧ f s ≤ A / (1 - M.β)}
+      {f | ∀ s, 0 ≤ f s ∧ f s ≤ A / (1 - M.β)} := by
+  intro f hf s
+  obtain ⟨y, hy, hval, hmax⟩ := trunc_bellman_argmax h hf s
+  obtain ⟨y₀, hy₀, hF₀⟩ := h.safe s
+  have hb := truncModel_boundedDP h (truncK_pos h).le
+  have hint : ∀ y', y' ∈ M.Γ s → Integrable (fun z' => f (M.φ (s.1, y', z'), z')) (M.Q s.2) :=
+    fun y' hy' => integrable_integrand (truncModel M _) hb f hy' s.2
+  have hE0 : ∀ y', y' ∈ M.Γ s → 0 ≤ expV M f s y' := fun y' _ =>
+    integral_nonneg fun z' => (hf _).1
+  have hER : ∀ y', y' ∈ M.Γ s → expV M f s y' ≤ A / (1 - M.β) := fun y' hy' => by
+    have := integral_mono (hint y' hy') (integrable_const (A / (1 - M.β))) fun z' => (hf _).2
+    simpa [expV] using this
+  have h1 : 0 < 1 - M.β := by linarith [h.β_lt]
+  refine ⟨le_trans ?_ (hmax y₀ hy₀), ?_⟩
+  · simp only [rhs]
+    have := mul_nonneg h.β_pos.le (hE0 y₀ hy₀)
+    linarith
+  · rw [hval]
+    simp only [rhs]
+    have hA := h.bddAbove (s.1, y, s.2) hy
+    have := mul_le_mul_of_nonneg_left (hER y hy) h.β_pos.le
+    have e : A / (1 - M.β) = A + M.β * (A / (1 - M.β)) := by field_simp; ring
+    linarith
+
+omit [MeasurableSpace X] [MeasurableSpace Z] in
+theorem isClosed_bounds (R : ℝ) :
+    IsClosed {f : X × Z →ᵇ ℝ | ∀ s, 0 ≤ f s ∧ f s ≤ R} := by
+  have : {f : X × Z →ᵇ ℝ | ∀ s, 0 ≤ f s ∧ f s ≤ R} =
+      ⋂ s, ({f : X × Z →ᵇ ℝ | 0 ≤ f s} ∩ {f | f s ≤ R}) := by ext; simp
+  rw [this]
+  exact isClosed_iInter fun s => (isClosed_le continuous_const (continuous_eval_const s)).inter
+    (isClosed_le (continuous_eval_const s) continuous_const)
+
+/-- **Returns bounded above.** The fixed point `v` of the truncated operator has values in
+`[0, A/(1 − β)]`, attains the maximum in the original functional equation at every state, and is
+the only bounded continuous solution of that equation. -/
+theorem upper_fixed [IsMarkovKernel M.Q] [OpensMeasurableSpace Z] (h : UpperDP M A) :
+    ∃ v : X × Z →ᵇ ℝ, truncT h v = v ∧ (∀ s, 0 ≤ v s ∧ v s ≤ A / (1 - M.β)) ∧
+      (∀ s, ∃ y ∈ M.Γ s, v s = rhs M v s y) ∧ (∀ s, ∀ y ∈ M.Γ s, rhs M v s y ≤ v s) ∧
+      SolvesFE M v ∧ ∀ w : X × Z →ᵇ ℝ, SolvesFE M w → w = v := by
+  set M' := truncModel M (truncK A M.β)
+  have hb := truncModel_boundedDP h (truncK_pos h).le
+  obtain ⟨v, hv, -, -, -⟩ := ex_9_7b M' hb
+  have hvR := (corollary_1 (bellman_contraction M' hb) hv
+    ⟨0, fun _ => ⟨le_rfl, div_nonneg h.A_nonneg (by linarith [h.β_lt])⟩⟩ (isClosed_bounds _)
+    (truncT_mapsTo h) (truncT_mapsTo h)).1
+  have hatt : ∀ s, ∃ y ∈ M.Γ s, v s = rhs M v s y := fun s => by
+    obtain ⟨y, hy, hval, -⟩ := trunc_bellman_argmax h hvR s
+    exact ⟨y, hy, (congrFun (congrArg DFunLike.coe hv) s).symm.trans hval⟩
+  have hle : ∀ s, ∀ y ∈ M.Γ s, rhs M v s y ≤ v s := fun s y hy => by
+    obtain ⟨-, -, -, hmax⟩ := trunc_bellman_argmax h hvR s
+    exact (hmax y hy).trans_eq (congrFun (congrArg DFunLike.coe hv) s)
+  have hFE : SolvesFE M v := fun s => by
+    obtain ⟨y, hy, hval⟩ := hatt s
+    refine IsGreatest.isLUB ⟨⟨y, hy, hval.symm⟩, ?_⟩
+    rintro _ ⟨y', hy', rfl⟩
+    exact hle s y' hy'
+  refine ⟨v, hv, hvR, hatt, hle, hFE, fun w hw => ?_⟩
+  -- the original operator is a `β`-contraction wherever the maxima exist
+  have hdiff : ∀ s, ∀ y ∈ M.Γ s, |expV M w s y - expV M v s y| ≤ ‖w - v‖ := fun s y hy => by
+    have hiw := integrable_integrand M' hb w hy s.2
+    have hiv := integrable_integrand M' hb v hy s.2
+    rw [expV, expV, ← integral_sub hiw hiv]
+    have := norm_integral_le_of_norm_le_const (μ := M.Q s.2) (C := ‖w - v‖)
+      (f := fun z' => w (M.φ (s.1, y, z'), z') - v (M.φ (s.1, y, z'), z'))
+      (Eventually.of_forall fun z' => by
+        rw [← BoundedContinuousFunction.sub_apply]; exact (w - v).norm_coe_le_norm _)
+    simpa [measureReal_def, Real.norm_eq_abs] using this
+  have hβ0 := h.β_pos
+  have hpt : ∀ s, |w s - v s| ≤ M.β * ‖w - v‖ := fun s => by
+    rw [abs_le]
+    obtain ⟨y, hy, hval⟩ := hatt s
+    constructor
+    · -- `v(s) = rhs_v(y) ≤ rhs_w(y) + β‖w − v‖ ≤ w(s) + β‖w − v‖`
+      have h1 : rhs M w s y ≤ w s := (hw s).1 ⟨y, hy, rfl⟩
+      have h2 := (abs_le.1 (hdiff s y hy)).1
+      simp only [rhs] at hval h1
+      nlinarith [mul_le_mul_of_nonneg_left (show -‖w - v‖ ≤ expV M w s y - expV M v s y from h2)
+        hβ0.le]
+    · -- `w(s) = sup rhs_w ≤ sup rhs_v + β‖w − v‖ ≤ v(s) + β‖w − v‖`
+      refine sub_le_iff_le_add'.2 ((hw s).2 ?_)
+      rintro _ ⟨y', hy', rfl⟩
+      have h2 := (abs_le.1 (hdiff s y' hy')).2
+      have h3 := hle s y' hy'
+      simp only [rhs] at h3 ⊢
+      nlinarith [mul_le_mul_of_nonneg_left h2 hβ0.le]
+  have hnorm : ‖w - v‖ ≤ M.β * ‖w - v‖ :=
+    (norm_le (mul_nonneg hβ0.le (norm_nonneg _))).2 fun s => by
+      rw [BoundedContinuousFunction.sub_apply, Real.norm_eq_abs]; exact hpt s
+  have : ‖w - v‖ = 0 := by
+    have := norm_nonneg (w - v)
+    nlinarith [h.β_lt]
+  exact sub_eq_zero.1 (norm_eq_zero.1 this)
+
+end StokeyLucasPrescott.ConvergenceApplications
+
+/-
+Copyright (c) 2026 Robert Kirkby. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Robert Kirkby
+-/
+
+/-!
+# Industry investment under uncertainty: the model
+
+SLP §10.4, pp. 292–296. Industry capital `x ∈ X = (0, ∞)`, demand shocks `z ∈ Z = [z₁, z₂]` with a
+Feller transition `Q`, consumers' surplus `U(x, z)`, and adjustment cost `x c(y/x)` for next
+period's capital `y`, where `c = 0` on `[0, 1 − δ]` and `c` is strictly increasing and strictly
+convex beyond. The modified problem (2′) restricts `y` to
+`Γ(x) = [(1 − δ′)x, max{M, x}]` (`indΓ`), with `δ < δ′ < 1`.
+
+* `ind_upperDP`: returns are bounded above by `A` and `y = (1 − δ)x` costs nothing, so the
+  results of `UpperBounded` apply.
+* **Corrections.** The manual verifies Assumptions 9.6–9.11 for (2′). Three of them fail:
+  `F` is unbounded below on the graph of `Γ` (`ind_F_unbounded`, with `c(a) = (a − ½)²` beyond
+  `½`), so Assumption 9.7 fails; `Γ(x) ⊄ Γ(x′)` for `x < x′` (`ind_Γ_not_mono`), so
+  Assumption 9.9 fails; and the graph of `Γ` is not convex (`ind_Γ_not_convex`), so
+  Assumption 9.11 fails. The conclusions are recovered in `IndustryInvestmentResults`.
+-/
+
+namespace StokeyLucasPrescott.ConvergenceApplications
+
+open MeasureTheory ProbabilityTheory Set Filter Topology BoundedContinuousFunction
+
+/-- The hypotheses of SLP §10.4 on surplus `U` (from the demand curve), costs `c`, and the
+constants (`r > 0`, `0 < δ < δ′ < 1`, `M > 0`, `U ≤ A`, `Z = [z₁, z₂]`). `M` is chosen large:
+`M c(1) > A/(1 − β)` with `β = 1/(1 + r)`. -/
+structure IndHyp (U : ℝ → ℝ → ℝ) (c : ℝ → ℝ) (δ δ' M r A z₁ z₂ : ℝ) : Prop where
+  r_pos : 0 < r
+  δ_pos : 0 < δ
+  δ_lt : δ < δ'
+  δ'_lt : δ' < 1
+  M_pos : 0 < M
+  z_le : z₁ ≤ z₂
+  U_cont : ContinuousOn (fun p : ℝ × ℝ => U p.1 p.2) (Ici 0 ×ˢ Icc z₁ z₂)
+  U_nonneg : ∀ q z, 0 ≤ q → z ∈ Icc z₁ z₂ → 0 ≤ U q z
+  U_le : ∀ q z, 0 ≤ q → z ∈ Icc z₁ z₂ → U q z ≤ A
+  U_mono : ∀ z ∈ Icc z₁ z₂, StrictMonoOn (fun q => U q z) (Ici 0)
+  U_conc : ∀ z ∈ Icc z₁ z₂, StrictConcaveOn ℝ (Ici 0) fun q => U q z
+  U_mono_z : ∀ q, 0 < q → StrictMonoOn (U q) (Icc z₁ z₂)
+  c_cont : ContinuousOn c (Ici 0)
+  c_zero : ∀ a, 0 ≤ a → a ≤ 1 - δ → c a = 0
+  c_conv : ConvexOn ℝ (Ici 0) c
+  c_mono : StrictMonoOn c (Ici (1 - δ))
+  c_sconv : StrictConvexOn ℝ (Ici (1 - δ)) c
+  M_big : A / (1 - 1 / (1 + r)) < M * c 1
+
+variable {U : ℝ → ℝ → ℝ} {c : ℝ → ℝ} {δ δ' M r A z₁ z₂ : ℝ}
+
+/-- `Γ(x) = [(1 − δ′)x, max{M, x}]`. -/
+def indΓ (δ' M : ℝ) (s : Ioi (0 : ℝ) × Icc z₁ z₂) : Set (Ioi (0 : ℝ)) :=
+  {y | (1 - δ') * s.1.1 ≤ y.1 ∧ y.1 ≤ max M s.1.1}
+
+/-- `F(x, y, z) = U(x, z) − x c(y/x)`. -/
+noncomputable def indF (U : ℝ → ℝ → ℝ) (c : ℝ → ℝ) (p : Ioi (0 : ℝ) × Ioi (0 : ℝ) × Icc z₁ z₂) :
+    ℝ :=
+  U p.1.1 p.2.2.1 - p.1.1 * c (p.2.1.1 / p.1.1)
+
+/-- The problem (2′) in the first formulation of Chapter 9, with `β = 1/(1 + r)`. -/
+noncomputable abbrev indModel (Q : Kernel (Icc z₁ z₂) (Icc z₁ z₂)) (U : ℝ → ℝ → ℝ) (c : ℝ → ℝ)
+    (δ' M r : ℝ) :
+    Model (Ioi (0 : ℝ)) (Ioi (0 : ℝ)) (Icc z₁ z₂) :=
+  Model.first Q (indΓ δ' M) (indF U c) (1 / (1 + r))
+
+namespace IndHyp
+
+variable (h : IndHyp U c δ δ' M r A z₁ z₂)
+include h
+
+theorem one_sub_δ_nonneg : 0 ≤ 1 - δ := by linarith [h.δ_lt, h.δ'_lt]
+
+theorem c_nonneg {a : ℝ} (ha : 0 ≤ a) : 0 ≤ c a := by
+  rcases le_or_gt a (1 - δ) with h1 | h1
+  · exact (h.c_zero a ha h1).symm.le
+  · have h2 : c (1 - δ) < c a := h.c_mono (mem_Ici.2 le_rfl) (mem_Ici.2 h1.le) h1
+    rw [h.c_zero _ h.one_sub_δ_nonneg le_rfl] at h2
+    exact h2.le
+
+theorem c_one_pos : 0 < c 1 := by
+  have h1 : 1 - δ < 1 := by linarith [h.δ_pos]
+  have h2 : c (1 - δ) < c 1 := h.c_mono (mem_Ici.2 le_rfl) (mem_Ici.2 h1.le) h1
+  rwa [h.c_zero _ h.one_sub_δ_nonneg le_rfl] at h2
+
+/-- `c(ta) ≤ t c(a)` for `t ∈ [0, 1]` (convexity and `c(0) = 0`). -/
+theorem c_mul_le {a t : ℝ} (ha : 0 ≤ a) (ht0 : 0 ≤ t) (ht1 : t ≤ 1) : c (t * a) ≤ t * c a := by
+  have hz : c 0 = 0 := h.c_zero 0 le_rfl (by linarith [h.δ_lt, h.δ'_lt])
+  have := h.c_conv.2 (mem_Ici.2 ha) (mem_Ici.2 (le_refl (0 : ℝ))) ht0 (by linarith : 0 ≤ 1 - t)
+    (by ring)
+  simp only [smul_eq_mul, mul_zero, add_zero, hz] at this
+  exact this
+
+/-- `a c(1) ≤ c(a)` for `a ≥ 1`. -/
+theorem c_ge_mul {a : ℝ} (ha : 1 ≤ a) : a * c 1 ≤ c a := by
+  have hpos : 0 < a := by linarith
+  have := h.c_mul_le (a := a) (t := 1 / a) hpos.le (by positivity) ((div_le_one hpos).2 ha)
+  rw [one_div, inv_mul_cancel₀ hpos.ne'] at this
+  have h2 := mul_le_mul_of_nonneg_left this hpos.le
+  rwa [← mul_assoc, mul_inv_cancel₀ hpos.ne', one_mul] at h2
+
+/-- The adjustment cost `x c(y/x)` is nonincreasing in `x`. -/
+theorem persp_anti {x x' y : ℝ} (hx : 0 < x) (hxx' : x ≤ x') (hy : 0 ≤ y) :
+    x' * c (y / x') ≤ x * c (y / x) := by
+  have hx' : 0 < x' := hx.trans_le hxx'
+  have e : y / x' = x / x' * (y / x) := by field_simp
+  have := h.c_mul_le (a := y / x) (t := x / x') (by positivity) (by positivity)
+    ((div_le_one hx').2 hxx')
+  rw [e]
+  calc x' * c (x / x' * (y / x)) ≤ x' * (x / x' * c (y / x)) :=
+        mul_le_mul_of_nonneg_left this hx'.le
+    _ = x * c (y / x) := by field_simp
+
+/-- The adjustment cost `x c(y/x)` is jointly convex (the perspective of a convex function). -/
+theorem persp_convex {x x' y y' θ : ℝ} (hx : 0 < x) (hx' : 0 < x') (hy : 0 ≤ y) (hy' : 0 ≤ y')
+    (h0 : 0 ≤ θ) (h1 : θ ≤ 1) :
+    (θ * x + (1 - θ) * x') * c ((θ * y + (1 - θ) * y') / (θ * x + (1 - θ) * x')) ≤
+      θ * (x * c (y / x)) + (1 - θ) * (x' * c (y' / x')) := by
+  have h1' : 0 ≤ 1 - θ := by linarith
+  have hxθ : 0 < θ * x + (1 - θ) * x' := by
+    rcases h0.lt_or_eq with h0' | h0'
+    · have : 0 ≤ (1 - θ) * x' := mul_nonneg h1' hx'.le
+      nlinarith
+    · subst h0'; linarith
+  obtain ⟨xθ, hxθe⟩ : ∃ xθ, xθ = θ * x + (1 - θ) * x' := ⟨_, rfl⟩
+  rw [← hxθe] at hxθ ⊢
+  obtain ⟨w, hw⟩ : ∃ w, w = θ * x / xθ := ⟨_, rfl⟩
+  have hw0 : 0 ≤ w := by rw [hw]; positivity
+  have hw1 : 1 - w = (1 - θ) * x' / xθ := by
+    rw [hw, eq_div_iff hxθ.ne', sub_mul, div_mul_cancel₀ _ hxθ.ne', hxθe]; ring
+  have hw1' : 0 ≤ 1 - w := by rw [hw1]; positivity
+  have e : (θ * y + (1 - θ) * y') / xθ = w * (y / x) + (1 - w) * (y' / x') := by
+    rw [hw1, hw]; field_simp
+  have hc := h.c_conv.2 (mem_Ici.2 (div_nonneg hy hx.le)) (mem_Ici.2 (div_nonneg hy' hx'.le))
+    hw0 hw1' (by ring)
+  simp only [smul_eq_mul] at hc
+  rw [e]
+  calc xθ * c (w * (y / x) + (1 - w) * (y' / x')) ≤
+        xθ * (w * c (y / x) + (1 - w) * c (y' / x')) := mul_le_mul_of_nonneg_left hc hxθ.le
+    _ = θ * (x * c (y / x)) + (1 - θ) * (x' * c (y' / x')) := by
+        rw [hw1, hw]; field_simp
+
+end IndHyp
+
+/-! ### The corrections -/
+
+/-- The quadratic adjustment cost `c(a) = max{a − ½, 0}²` (`δ = ½`). -/
+noncomputable def cq (a : ℝ) : ℝ := max (a - 1 / 2) 0 ^ 2
+
+/-- `cq` satisfies the hypotheses on `c` with `δ = ½`. -/
+theorem cq_props : ContinuousOn cq (Ici 0) ∧ (∀ a, 0 ≤ a → a ≤ 1 - 1 / 2 → cq a = 0) ∧
+    ConvexOn ℝ (Ici 0) cq ∧ StrictMonoOn cq (Ici (1 - 1 / 2)) ∧
+    StrictConvexOn ℝ (Ici (1 - 1 / 2)) cq := by
+  have hge : ∀ a, 1 - 1 / 2 ≤ a → cq a = (a - 1 / 2) ^ 2 := fun a ha => by
+    simp only [cq, max_eq_left (by linarith : (0 : ℝ) ≤ a - 1 / 2)]
+  refine ⟨(((continuous_id.sub continuous_const).max continuous_const).pow 2).continuousOn,
+    fun a _ ha => ?_,
+    ⟨convex_Ici 0, fun a _ b _ θ η hθ hη hθη => ?_⟩, fun a ha b hb hab => ?_,
+    ⟨convex_Ici _, fun a ha b hb hne θ η hθ hη hθη => ?_⟩⟩
+  · simp only [cq, max_eq_right (by linarith : a - 1 / 2 ≤ 0)]; norm_num
+  · simp only [cq, smul_eq_mul]
+    set p := max (a - 1 / 2) 0
+    set q := max (b - 1 / 2) 0
+    have hp : 0 ≤ p := le_max_right _ _
+    have hq : 0 ≤ q := le_max_right _ _
+    have hm : max (θ * a + η * b - 1 / 2) 0 ≤ θ * p + η * q := by
+      refine max_le ?_ (by positivity)
+      have : θ * a + η * b - 1 / 2 = θ * (a - 1 / 2) + η * (b - 1 / 2) := by
+        linear_combination (1 / 2 : ℝ) * hθη
+      rw [this]
+      exact add_le_add (mul_le_mul_of_nonneg_left (le_max_left _ _) hθ)
+        (mul_le_mul_of_nonneg_left (le_max_left _ _) hη)
+    have h0 : 0 ≤ max (θ * a + η * b - 1 / 2) 0 := le_max_right _ _
+    calc max (θ * a + η * b - 1 / 2) 0 ^ 2 ≤ (θ * p + η * q) ^ 2 := pow_le_pow_left₀ h0 hm 2
+      _ ≤ θ * p ^ 2 + η * q ^ 2 := by
+        have : η = 1 - θ := by linarith
+        subst this
+        nlinarith [sq_nonneg (p - q), mul_nonneg hθ hη]
+  · rw [hge a ha, hge b hb]
+    have : (1 : ℝ) - 1 / 2 ≤ a := ha
+    nlinarith
+  · simp only [smul_eq_mul]
+    rw [hge a ha, hge b hb, hge _ (by
+      have : (1 : ℝ) - 1 / 2 ≤ a := ha
+      have : (1 : ℝ) - 1 / 2 ≤ b := hb
+      nlinarith)]
+    have : η = 1 - θ := by linarith
+    subst this
+    have hab : 0 < (a - b) ^ 2 := by positivity
+    nlinarith [mul_pos hθ hη]
+
+/-- **Assumption 9.7 fails** for (2′): with `c = cq`, `x c(M/x) ≥ M²/(4x)` for small `x`, so `F`
+is unbounded below on the graph of `Γ`. -/
+theorem ind_F_unbounded (hM : 0 < M) (hU : ∀ q z, U q z ≤ A) (B : ℝ) :
+    ∃ x y : Ioi (0 : ℝ), (∀ z, y ∈ indΓ (z₁ := z₁) (z₂ := z₂) (3 / 4) M (x, z)) ∧
+      ∀ z : Icc z₁ z₂, indF U cq (x, y, z) < -B := by
+  set K := |A| + |B| + 1
+  set t : ℝ := min (M / 2) (M ^ 2 / (8 * K))
+  have hK : 0 < K := by positivity
+  have ht : 0 < t := lt_min (by positivity) (by positivity)
+  have ht1 : t ≤ M / 2 := min_le_left _ _
+  have ht2 : t ≤ M ^ 2 / (8 * K) := min_le_right _ _
+  refine ⟨⟨t, ht⟩, ⟨M, hM⟩, fun z => ⟨by simp only; linarith, le_max_left _ _⟩, fun z => ?_⟩
+  change U t z.1 - t * max (M / t - 1 / 2) 0 ^ 2 < -B
+  have hMt : 2 ≤ M / t := by rw [le_div_iff₀ ht]; linarith
+  have hpos : M / (2 * t) ≤ M / t - 1 / 2 := by
+    have : M / t = 2 * (M / (2 * t)) := by field_simp
+    have h2 : 1 ≤ M / (2 * t) := by rw [le_div_iff₀ (by positivity)]; linarith
+    linarith
+  rw [max_eq_left (by linarith)]
+  have hsq : (M / (2 * t)) ^ 2 ≤ (M / t - 1 / 2) ^ 2 :=
+    pow_le_pow_left₀ (by positivity) hpos 2
+  have hbig : 2 * K ≤ t * (M / (2 * t)) ^ 2 := by
+    have e : t * (M / (2 * t)) ^ 2 = M ^ 2 / (4 * t) := by field_simp; ring
+    rw [e, le_div_iff₀ (by positivity)]
+    rw [le_div_iff₀ (by positivity)] at ht2
+    nlinarith
+  have := mul_le_mul_of_nonneg_left hsq ht.le
+  have hA := hU t z.1
+  have : A ≤ |A| := le_abs_self A
+  have : B ≤ |B| := le_abs_self B
+  simp only [K] at hbig
+  linarith
+
+/-- **Assumption 9.9 fails** for (2′): `Γ(x) ⊄ Γ(x′)` whenever `x < x′`, because the lower bound
+`(1 − δ′)x` rises with `x`. -/
+theorem ind_Γ_not_mono (hδ0 : 0 ≤ δ') (hδ' : δ' < 1) {x x' : Ioi (0 : ℝ)} (hxx' : x.1 < x'.1)
+    (z : Icc z₁ z₂) :
+    ¬ indΓ δ' M (x, z) ⊆ indΓ δ' M (x', z) := by
+  intro hsub
+  have hpos : 0 < (1 - δ') * x.1 := mul_pos (by linarith) x.2
+  have hmem : (⟨(1 - δ') * x.1, hpos⟩ : Ioi (0 : ℝ)) ∈ indΓ δ' M (x, z) :=
+    ⟨le_rfl, le_trans (by nlinarith [show 0 < x.1 from x.2]) (le_max_right M x.1)⟩
+  have h2 : (1 - δ') * x'.1 ≤ (1 - δ') * x.1 := (hsub hmem).1
+  nlinarith [mul_lt_mul_of_pos_left hxx' (by linarith : (0 : ℝ) < 1 - δ')]
+
+/-- **Assumption 9.11 fails** for (2′): the graph of `Γ` is not convex. `(M/2, M)` and `(2M, 2M)`
+lie in it, but their midpoint `(5M/4, 3M/2)` does not, since `3M/2 > max{M, 5M/4}`. -/
+theorem ind_Γ_not_convex (hM : 0 < M) (hδ' : 0 ≤ δ') (z : Icc z₁ z₂) :
+    ∃ x x' y y' : Ioi (0 : ℝ), y ∈ indΓ δ' M (x, z) ∧ y' ∈ indΓ δ' M (x', z) ∧
+      max M (1 / 2 * x.1 + 1 / 2 * x'.1) < 1 / 2 * y.1 + 1 / 2 * y'.1 := by
+  refine ⟨⟨M / 2, mem_Ioi.2 (by positivity)⟩, ⟨2 * M, mem_Ioi.2 (by positivity)⟩, ⟨M, hM⟩,
+    ⟨2 * M, mem_Ioi.2 (by positivity)⟩,
+    ⟨?_, le_max_left _ _⟩, ⟨?_, ?_⟩, ?_⟩
+  · simp only; nlinarith
+  · simp only; nlinarith
+  · simp only; exact le_max_right _ _
+  · simp only
+    rw [max_lt_iff]
+    constructor <;> linarith
+
+/-! ### The hypotheses of `UpperBounded` -/
+
+/-- An interval correspondence `s ↦ [l(s), u(s)] ⊆ (0, ∞)` with continuous `0 < l ≤ u` is
+l.h.c. -/
+theorem isLHC_Ioi_interval {S : Type*} [MetricSpace S] {l u : S → ℝ} (hl : Continuous l)
+    (hu : Continuous u) (hl0 : ∀ s, 0 < l s) (hlu : ∀ s, l s ≤ u s) (s : S) :
+    IsLHC (fun s => {y : Ioi (0 : ℝ) | l s ≤ y.1 ∧ y.1 ≤ u s}) s := by
+  refine ⟨⟨⟨l s, hl0 s⟩, le_rfl, hlu s⟩, fun y hy xs hxs => ?_⟩
+  refine ⟨0, fun n => ⟨max (l (xs n)) (min y.1 (u (xs n))),
+    lt_of_lt_of_le (hl0 _) (le_max_left _ _)⟩, fun n _ => ⟨le_max_left _ _,
+      max_le (hlu _) (min_le_right _ _)⟩, ?_⟩
+  have := ((hl.tendsto s).comp hxs).max ((tendsto_const_nhds (x := y.1)).min
+    ((hu.tendsto s).comp hxs))
+  rw [min_eq_left hy.2, max_eq_right hy.1] at this
+  exact tendsto_subtype_rng.2 this
+
+/-- An interval correspondence `s ↦ [l(s), u(s)] ⊆ (0, ∞)` with continuous `0 < l ≤ u` is
+u.h.c. -/
+theorem isUHC_Ioi_interval {S : Type*} [MetricSpace S] {l u : S → ℝ} (hl : Continuous l)
+    (hu : Continuous u) (hl0 : ∀ s, 0 < l s) (hlu : ∀ s, l s ≤ u s) (s : S) :
+    IsUHC (fun s => {y : Ioi (0 : ℝ) | l s ≤ y.1 ∧ y.1 ≤ u s}) s := by
+  refine ⟨⟨⟨l s, hl0 s⟩, le_rfl, hlu s⟩, fun xs hxs ys hys => ?_⟩
+  have hut := (hu.tendsto s).comp hxs
+  obtain ⟨B, hB⟩ := (Metric.isBounded_range_of_tendsto _ hut).bddAbove
+  have hmem : ∀ n, (ys n).1 ∈ Icc 0 B := fun n =>
+    ⟨(ys n).2.le, (hys n).2.trans (hB ⟨n, rfl⟩)⟩
+  obtain ⟨a, -, φ, hφ, hlim⟩ := isCompact_Icc.tendsto_subseq hmem
+  have hla : l s ≤ a := le_of_tendsto_of_tendsto ((hl.tendsto s).comp (hxs.comp hφ.tendsto_atTop))
+    hlim (Eventually.of_forall fun n => (hys (φ n)).1)
+  have hau : a ≤ u s := le_of_tendsto_of_tendsto hlim (hut.comp hφ.tendsto_atTop)
+    (Eventually.of_forall fun n => (hys (φ n)).2)
+  exact ⟨⟨a, lt_of_lt_of_le (hl0 s) hla⟩, ⟨hla, hau⟩, φ, hφ, tendsto_subtype_rng.2 hlim⟩
+
+namespace IndHyp
+
+variable (h : IndHyp U c δ δ' M r A z₁ z₂)
+include h
+
+theorem A_nonneg : 0 ≤ A :=
+  (h.U_nonneg 0 z₁ le_rfl ⟨le_rfl, h.z_le⟩).trans (h.U_le 0 z₁ le_rfl ⟨le_rfl, h.z_le⟩)
+
+theorem continuous_F : Continuous (indF (z₁ := z₁) (z₂ := z₂) U c) := by
+  have hU : Continuous fun p : Ioi (0 : ℝ) × Ioi (0 : ℝ) × Icc z₁ z₂ => U p.1.1 p.2.2.1 :=
+    h.U_cont.comp_continuous ((continuous_subtype_val.comp continuous_fst).prodMk
+      (continuous_subtype_val.comp continuous_snd.snd)) fun p =>
+      ⟨mem_Ici.2 (le_of_lt p.1.2), p.2.2.2⟩
+  have hq : Continuous fun p : Ioi (0 : ℝ) × Ioi (0 : ℝ) × Icc z₁ z₂ => p.2.1.1 / p.1.1 :=
+    (continuous_subtype_val.comp continuous_snd.fst).div
+      (continuous_subtype_val.comp continuous_fst) fun p => ne_of_gt p.1.2
+  exact hU.sub ((continuous_subtype_val.comp continuous_fst).mul
+    (h.c_cont.comp_continuous hq fun p => mem_Ici.2 (div_nonneg (le_of_lt p.2.1.2)
+      (le_of_lt p.1.2))))
+
+theorem F_le (p : Ioi (0 : ℝ) × Ioi (0 : ℝ) × Icc z₁ z₂) : indF U c p ≤ A := by
+  have h1 := h.U_le p.1.1 p.2.2.1 (le_of_lt p.1.2) p.2.2.2
+  have h2 := mul_nonneg (le_of_lt p.1.2) (h.c_nonneg (div_nonneg (le_of_lt p.2.1.2)
+    (le_of_lt p.1.2)))
+  unfold indF; linarith
+
+theorem one_sub_δ_pos : 0 < 1 - δ := by linarith [h.δ_lt, h.δ'_lt]
+
+/-- The zero-cost choice `y = (1 − δ)x`. -/
+def safeY (x : Ioi (0 : ℝ)) : Ioi (0 : ℝ) :=
+  ⟨(1 - δ) * x.1, mem_Ioi.2 (mul_pos h.one_sub_δ_pos x.2)⟩
+
+/-- `y = (1 − δ)x` is feasible and costs nothing. -/
+theorem safe_mem (x : Ioi (0 : ℝ)) (z : Icc z₁ z₂) :
+    h.safeY x ∈ indΓ δ' M (x, z) ∧ indF U c (x, h.safeY x, z) = U x.1 z.1 := by
+  have hx : 0 < x.1 := x.2
+  refine ⟨⟨mul_le_mul_of_nonneg_right (by linarith [h.δ_lt]) hx.le,
+    le_trans (mul_le_of_le_one_left hx.le (by linarith [h.δ_pos])) (le_max_right _ _)⟩, ?_⟩
+  simp only [indF, safeY]
+  rw [mul_div_cancel_right₀ _ hx.ne', h.c_zero _ h.one_sub_δ_nonneg le_rfl, mul_zero, sub_zero]
+
+/-- The industry problem (2′) satisfies `UpperDP` with bound `A`. -/
+theorem upperDP (Q : Kernel (Icc z₁ z₂) (Icc z₁ z₂)) [IsMarkovKernel Q] (hQ : IsFeller Q) :
+    UpperDP (indModel Q U c δ' M r) A := by
+  have hl : Continuous fun s : Ioi (0 : ℝ) × Icc z₁ z₂ => (1 - δ') * s.1.1 :=
+    continuous_const.mul (continuous_subtype_val.comp continuous_fst)
+  have hu : Continuous fun s : Ioi (0 : ℝ) × Icc z₁ z₂ => max M s.1.1 :=
+    continuous_const.max (continuous_subtype_val.comp continuous_fst)
+  have hl0 : ∀ s : Ioi (0 : ℝ) × Icc z₁ z₂, 0 < (1 - δ') * s.1.1 := fun s =>
+    mul_pos (by linarith [h.δ'_lt]) s.1.2
+  have hlu : ∀ s : Ioi (0 : ℝ) × Icc z₁ z₂, (1 - δ') * s.1.1 ≤ max M s.1.1 := fun s =>
+    le_trans (by nlinarith [h.δ_pos, h.δ_lt, show 0 < s.1.1 from s.1.2]) (le_max_right _ _)
+  have hlhc := isLHC_Ioi_interval hl hu hl0 hlu
+  refine ⟨fun s => (hlhc s).1, fun s => ?_, hlhc, isUHC_Ioi_interval hl hu hl0 hlu,
+    h.continuous_F.continuousOn, h.A_nonneg, fun p _ => h.F_le p, fun s => ⟨_, (h.safe_mem s.1
+      s.2).1, by
+      change 0 ≤ indF U c (s.1, h.safeY s.1, s.2)
+      rw [(h.safe_mem s.1 s.2).2]; exact h.U_nonneg _ _ (le_of_lt s.1.2) s.2.2⟩,
+    one_div_pos.2 (by linarith [h.r_pos]), ?_, continuous_fst.snd.continuousOn,
+    contExp_first Q _ _ _ (lemma_9_5_compact Q hQ)⟩
+  · rw [Subtype.isCompact_iff]
+    have : Subtype.val '' indΓ (z₁ := z₁) (z₂ := z₂) δ' M s =
+        Icc ((1 - δ') * s.1.1) (max M s.1.1) := by
+      ext y
+      constructor
+      · rintro ⟨y, hy, rfl⟩; exact hy
+      · intro hy; exact ⟨⟨y, lt_of_lt_of_le (hl0 s) hy.1⟩, hy, rfl⟩
+    rw [this]
+    exact isCompact_Icc
+  · have := h.r_pos
+    rw [div_lt_one (by linarith)]
+    linarith
+
+end IndHyp
+
+end StokeyLucasPrescott.ConvergenceApplications
+
+/-
+Copyright (c) 2026 Robert Kirkby. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Robert Kirkby
+-/
+
+/-!
+# Industry investment under uncertainty: results
+
+SLP §10.4, Exercise 10.4b–c, pp. 294–295. Let `v` be the fixed point of the truncated operator
+of `UpperBounded` for (2′), and `β = 1/(1 + r)`, `R = A/(1 − β)`.
+
+* `ind_rhs_le`: on nonnegative functions bounded by `R` and nondecreasing in `x`, no `y > 0`
+  beats the maximum over `Γ(x)`: below `(1 − δ′)x` the cost is `0` and `(1 − δ)x` does better;
+  above `max{M, x}` the cost exceeds `R`.
+* **Exercise 10.4b** (`ex_10_4b`): `v` is the unique bounded continuous solution of (2′),
+  `0 ≤ v ≤ R`, and `v` also solves (2), the problem over all of `X`.
+* **Exercise 10.4c** (`ex_10_4c`): `v` is strictly increasing in `x` and, for monotone `Q`, in
+  `z`; strictly concave in `x`; the policy is a continuous function `g` with `g(x, z)` in the
+  interior of `Γ(x)` (indeed `(1 − δ)x ≤ g(x, z) < max{M, x}`); and where `U(·, z)` and `c` are
+  differentiable, `v_x = U_x − c(g/x) + (g/x)c′(g/x)` (Benveniste–Scheinkman). Because
+  Assumptions 9.9 and 9.11 fail for (2′) (`ind_Γ_not_mono`, `ind_Γ_not_convex`), Theorems 9.7
+  and 9.8 do not apply directly; the proofs go through (2), whose constraint set is all of `X`.
+* **Exercise 10.4d** (`ex_10_4d`): `g` is nondecreasing in `x`, by Topkis's argument: `Γ` is
+  ascending and the cost `x c(y/x)` has decreasing differences (`ind_cost_submod`). The
+  strict claims (strict increase, `g(x, z)/x` decreasing) rest on first-order conditions and
+  are proved in `IndustryInvestmentFOC`, which also refutes "slope less than one".
+* **Exercise 10.4f** (`ex_10_4f`, `ex_10_4f_monotone`, `ex_10_4f_tendsto`): under i.i.d. shocks
+  `g` does not depend on `z`, and every optimal capacity path is monotone and converges.
+  Exercise 10.4e, and the limit `x̂` of 10.4f (independent of `x₀`, positive under a condition
+  on demand and costs), are in `IndustryInvestmentFOC`. The manual's step "`D` increasing in `z`
+  implies `v_x` increasing in `z`" ignores the dependence of `g` on `z`.
+-/
+
+namespace StokeyLucasPrescott.ConvergenceApplications
+
+open MeasureTheory ProbabilityTheory Set Filter Topology BoundedContinuousFunction
+
+variable {U : ℝ → ℝ → ℝ} {c : ℝ → ℝ} {δ δ' M r A z₁ z₂ : ℝ}
+
+/-- The right side of (2) at any `y > 0`. -/
+theorem ind_rhs (Q : Kernel (Icc z₁ z₂) (Icc z₁ z₂)) (f : Ioi (0 : ℝ) × Icc z₁ z₂ → ℝ)
+    (s : Ioi (0 : ℝ) × Icc z₁ z₂) (y : Ioi (0 : ℝ)) :
+    rhs (indModel Q U c δ' M r) f s y =
+      indF U c (s.1, y, s.2) + 1 / (1 + r) * ∫ z', f (y, z') ∂Q s.2 := rfl
+
+theorem integrable_ind {Q : Kernel (Icc z₁ z₂) (Icc z₁ z₂)} [IsMarkovKernel Q]
+    (f : Ioi (0 : ℝ) × Icc z₁ z₂ →ᵇ ℝ) (y : Ioi (0 : ℝ)) (z : Icc z₁ z₂) :
+    Integrable (fun z' => f (y, z')) (Q z) :=
+  integrable_section_v (Q z) f y
+
+/-- **No `y > 0` beats `Γ(x)`.** On functions with values in `[0, R]`, nondecreasing in `x`, the
+right side of (2) at any `y > 0` is at most the truncated maximum over `Γ(x)`. -/
+theorem ind_rhs_le (h : IndHyp U c δ δ' M r A z₁ z₂) (Q : Kernel (Icc z₁ z₂) (Icc z₁ z₂))
+    [IsMarkovKernel Q] (hQ : IsFeller Q) {f : Ioi (0 : ℝ) × Icc z₁ z₂ →ᵇ ℝ}
+    (hfR : ∀ s, 0 ≤ f s ∧ f s ≤ A / (1 - 1 / (1 + r)))
+    (hfm : ∀ z, Monotone fun x => f (x, z)) (s : Ioi (0 : ℝ) × Icc z₁ z₂) (y : Ioi (0 : ℝ)) :
+    rhs (indModel Q U c δ' M r) f s y ≤ truncT (h.upperDP Q hQ) f s := by
+  have hd := h.upperDP Q hQ
+  obtain ⟨y', hy', hval, hmax⟩ := trunc_bellman_argmax hd hfR s
+  obtain ⟨x, z⟩ := s
+  have hx : 0 < x.1 := x.2
+  have hy : 0 < y.1 := y.2
+  have hb : 0 < 1 / (1 + r) := one_div_pos.2 (by linarith [h.r_pos])
+  have hb1 : 1 / (1 + r) < 1 := (div_lt_one (by linarith [h.r_pos])).2 (by linarith [h.r_pos])
+  have hEle : ∀ y'' : Ioi (0 : ℝ), ∫ z', f (y'', z') ∂Q z ≤ A / (1 - 1 / (1 + r)) :=
+    fun y'' => by
+    have := integral_mono (integrable_ind (Q := Q) f y'' z)
+      (integrable_const (A / (1 - 1 / (1 + r)))) fun z' => (hfR _).2
+    simpa using this
+  have hT0 : 0 ≤ truncT hd f (x, z) := (truncT_mapsTo hd hfR (x, z)).1
+  by_cases hlow : y.1 < (1 - δ') * x.1
+  · -- below `Γ(x)`: the cost is zero, and `(1 − δ)x` is feasible and better
+    obtain ⟨hsm, hsF⟩ := h.safe_mem x z
+    refine le_trans ?_ (hmax _ hsm)
+    rw [ind_rhs, ind_rhs]
+    have hc0 : c (y.1 / x.1) = 0 := h.c_zero _ (div_nonneg hy.le hx.le) (by
+      rw [div_le_iff₀ hx]; linarith [h.δ_lt, mul_lt_mul_of_pos_right h.δ_lt hx])
+    have hF : indF U c (x, y, z) = U x.1 z.1 := by simp only [indF, hc0, mul_zero, sub_zero]
+    simp only at hsF ⊢
+    rw [hF, hsF]
+    have hmono : ∫ z', f (y, z') ∂Q z ≤ ∫ z', f (h.safeY x, z') ∂Q z :=
+      integral_mono (integrable_ind (Q := Q) f y z) (integrable_ind (Q := Q) f _ z) fun z' =>
+        hfm z' (by
+        change y.1 ≤ (1 - δ) * x.1
+        nlinarith [h.δ_lt])
+    nlinarith [mul_le_mul_of_nonneg_left hmono hb.le]
+  by_cases hhigh : max M x.1 < y.1
+  · -- above `Γ(x)`: the cost exceeds `R`, so the value is negative
+    refine le_trans ?_ hT0
+    rw [ind_rhs]
+    have hyx : 1 ≤ y.1 / x.1 := by rw [le_div_iff₀ hx]; linarith [le_max_right M x.1]
+    have hcost : y.1 * c 1 ≤ x.1 * c (y.1 / x.1) := by
+      have := mul_le_mul_of_nonneg_left (h.c_ge_mul hyx) hx.le
+      rwa [← mul_assoc, mul_div_cancel₀ _ hx.ne'] at this
+    have hMy : M * c 1 ≤ y.1 * c 1 :=
+      mul_le_mul_of_nonneg_right (by linarith [le_max_left M x.1]) h.c_one_pos.le
+    have hUA := h.U_le x.1 z.1 hx.le z.2
+    have hR := h.M_big
+    have hE := mul_le_mul_of_nonneg_left (hEle y) hb.le
+    have hden : (1 : ℝ) - 1 / (1 + r) ≠ 0 := (sub_pos.2 hb1).ne'
+    have e' : ∀ b : ℝ, 1 - b ≠ 0 → A / (1 - b) = A + b * (A / (1 - b)) := fun b hb => by
+      field_simp; ring
+    have e := e' _ hden
+    simp only [indF]
+    nlinarith
+  · exact hmax y ⟨not_lt.1 hlow, not_lt.1 hhigh⟩
+
+/-- Choosing `y ≥ max{M, x}` gives a negative value on functions with values in `[0, R]`. -/
+theorem ind_rhs_neg (h : IndHyp U c δ δ' M r A z₁ z₂) (Q : Kernel (Icc z₁ z₂) (Icc z₁ z₂))
+    [IsMarkovKernel Q] {f : Ioi (0 : ℝ) × Icc z₁ z₂ →ᵇ ℝ}
+    (hfR : ∀ s, 0 ≤ f s ∧ f s ≤ A / (1 - 1 / (1 + r))) (s : Ioi (0 : ℝ) × Icc z₁ z₂)
+    {y : Ioi (0 : ℝ)} (hy : max M s.1.1 ≤ y.1) : rhs (indModel Q U c δ' M r) f s y < 0 := by
+  obtain ⟨x, z⟩ := s
+  have hx : 0 < x.1 := x.2
+  have hb : 0 < 1 / (1 + r) := one_div_pos.2 (by linarith [h.r_pos])
+  have hb1 : 1 / (1 + r) < 1 := (div_lt_one (by linarith [h.r_pos])).2 (by linarith [h.r_pos])
+  have hEle : ∫ z', f (y, z') ∂Q z ≤ A / (1 - 1 / (1 + r)) := by
+    have := integral_mono (integrable_ind (Q := Q) f y z)
+      (integrable_const (A / (1 - 1 / (1 + r)))) fun z' => (hfR _).2
+    simpa using this
+  rw [ind_rhs]
+  have hyx : 1 ≤ y.1 / x.1 := by rw [le_div_iff₀ hx]; linarith [le_max_right M x.1]
+  have hcost : y.1 * c 1 ≤ x.1 * c (y.1 / x.1) := by
+    have := mul_le_mul_of_nonneg_left (h.c_ge_mul hyx) hx.le
+    rwa [← mul_assoc, mul_div_cancel₀ _ hx.ne'] at this
+  have hMy : M * c 1 ≤ y.1 * c 1 :=
+    mul_le_mul_of_nonneg_right (by linarith [le_max_left M x.1]) h.c_one_pos.le
+  have hUA := h.U_le x.1 z.1 hx.le z.2
+  have hR := h.M_big
+  have hE := mul_le_mul_of_nonneg_left hEle hb.le
+  have hden : (1 : ℝ) - 1 / (1 + r) ≠ 0 := (sub_pos.2 hb1).ne'
+  have e' : ∀ b : ℝ, 1 - b ≠ 0 → A / (1 - b) = A + b * (A / (1 - b)) := fun b hb => by
+    field_simp; ring
+  have e := e' _ hden
+  simp only [indF]
+  nlinarith
+
+theorem isClosed_monoX :
+    IsClosed {f : Ioi (0 : ℝ) × Icc z₁ z₂ →ᵇ ℝ | ∀ z, Monotone fun x => f (x, z)} := by
+  have := isClosed_pointwise_le (S := Ioi (0 : ℝ) × Icc z₁ z₂)
+    (ι := {q : Ioi (0 : ℝ) × Ioi (0 : ℝ) × Icc z₁ z₂ // q.1 ≤ q.2.1})
+    (fun q => (q.1.1, q.1.2.2)) (fun q => (q.1.2.1, q.1.2.2))
+  convert this using 1
+  ext f
+  exact ⟨fun hf q => hf q.1.2.2 q.2, fun hf z x x' hxx' => hf ⟨(x, x', z), hxx'⟩⟩
+
+/-- `T̃` maps functions with values in `[0, R]`, nondecreasing in `x`, to functions strictly
+increasing in `x`: compare the optimal `y` at `x` with the same `y` at `x′`, using (2). -/
+theorem ind_T_strictMono_x (h : IndHyp U c δ δ' M r A z₁ z₂)
+    (Q : Kernel (Icc z₁ z₂) (Icc z₁ z₂)) [IsMarkovKernel Q] (hQ : IsFeller Q)
+    {f : Ioi (0 : ℝ) × Icc z₁ z₂ →ᵇ ℝ} (hfR : ∀ s, 0 ≤ f s ∧ f s ≤ A / (1 - 1 / (1 + r)))
+    (hfm : ∀ z, Monotone fun x => f (x, z)) (z : Icc z₁ z₂) :
+    StrictMono fun x => truncT (h.upperDP Q hQ) f (x, z) := by
+  intro x x' hxx'
+  obtain ⟨y, -, hval, -⟩ := trunc_bellman_argmax (h.upperDP Q hQ) hfR (x, z)
+  have hle := ind_rhs_le h Q hQ hfR hfm (x', z) y
+  dsimp only
+  rw [hval]
+  refine lt_of_lt_of_le ?_ hle
+  rw [ind_rhs, ind_rhs]
+  have hx : 0 < x.1 := x.2
+  have hU := h.U_mono z.1 z.2 (mem_Ici.2 hx.le) (mem_Ici.2 (le_of_lt x'.2)) hxx'
+  have hp := h.persp_anti hx (le_of_lt hxx') (le_of_lt y.2)
+  simp only [indF] at hU ⊢
+  linarith
+
+/-- The fixed point is strictly increasing in `x`. -/
+theorem ind_strictMono_x (h : IndHyp U c δ δ' M r A z₁ z₂)
+    (Q : Kernel (Icc z₁ z₂) (Icc z₁ z₂)) [IsMarkovKernel Q] (hQ : IsFeller Q)
+    {v : Ioi (0 : ℝ) × Icc z₁ z₂ →ᵇ ℝ} (hv : truncT (h.upperDP Q hQ) v = v) :
+    (∀ s, 0 ≤ v s ∧ v s ≤ A / (1 - 1 / (1 + r))) ∧ ∀ z, StrictMono fun x => v (x, z) := by
+  have hd := h.upperDP Q hQ
+  have hb := truncModel_boundedDP hd (truncK_pos hd).le
+  set S' : Set (Ioi (0 : ℝ) × Icc z₁ z₂ →ᵇ ℝ) :=
+    {f | (∀ s, 0 ≤ f s ∧ f s ≤ A / (1 - 1 / (1 + r))) ∧ ∀ z, Monotone fun x => f (x, z)}
+  have hclosed : IsClosed S' := (isClosed_bounds _).inter isClosed_monoX
+  have hmaps : ∀ f ∈ S', truncT hd f ∈ {f : Ioi (0 : ℝ) × Icc z₁ z₂ →ᵇ ℝ |
+      (∀ s, 0 ≤ f s ∧ f s ≤ A / (1 - 1 / (1 + r))) ∧ ∀ z, StrictMono fun x => f (x, z)} :=
+    fun f hf => ⟨truncT_mapsTo hd hf.1, fun z => ind_T_strictMono_x h Q hQ hf.1 hf.2 z⟩
+  have := (corollary_1 (S' := S') (bellman_contraction _ hb) hv
+    ⟨0, fun _ => ⟨le_rfl, div_nonneg hd.A_nonneg (by linarith [hd.β_lt])⟩,
+      fun _ _ _ _ => le_rfl⟩ hclosed (fun f hf => ⟨(hmaps f hf).1,
+        fun z => ((hmaps f hf).2 z).monotone⟩) hmaps).2
+  exact this
+
+/-- **Exercise 10.4b.** There is a unique bounded continuous `v` solving (2′); it satisfies
+`0 ≤ v ≤ R` and also solves (2): the maximum over `Γ(x)` is the supremum over all `y > 0`. -/
+theorem ex_10_4b (h : IndHyp U c δ δ' M r A z₁ z₂) (Q : Kernel (Icc z₁ z₂) (Icc z₁ z₂))
+    [IsMarkovKernel Q] (hQ : IsFeller Q) :
+    ∃ v : Ioi (0 : ℝ) × Icc z₁ z₂ →ᵇ ℝ, truncT (h.upperDP Q hQ) v = v ∧
+      (∀ s, 0 ≤ v s ∧ v s ≤ A / (1 - 1 / (1 + r))) ∧ SolvesFE (indModel Q U c δ' M r) v ∧
+      (∀ w : Ioi (0 : ℝ) × Icc z₁ z₂ →ᵇ ℝ, SolvesFE (indModel Q U c δ' M r) w → w = v) ∧
+      ∀ s, IsLUB (Set.range fun y : Ioi (0 : ℝ) => rhs (indModel Q U c δ' M r) v s y) (v s) := by
+  obtain ⟨v, hv, hvR, hatt, -, hFE, huniq⟩ := upper_fixed (h.upperDP Q hQ)
+  refine ⟨v, hv, hvR, hFE, huniq, fun s => ?_⟩
+  obtain ⟨y, -, hval⟩ := hatt s
+  have hvm := (ind_strictMono_x h Q hQ hv).2
+  refine IsGreatest.isLUB ⟨⟨y, hval.symm⟩, ?_⟩
+  rintro _ ⟨y', rfl⟩
+  have := ind_rhs_le h Q hQ hvR (fun z => (hvm z).monotone) s y'
+  rwa [hv] at this
+
+theorem isClosed_monoZ :
+    IsClosed {f : Ioi (0 : ℝ) × Icc z₁ z₂ →ᵇ ℝ | ∀ x, Monotone fun z => f (x, z)} := by
+  have := isClosed_pointwise_le (S := Ioi (0 : ℝ) × Icc z₁ z₂)
+    (ι := {q : Ioi (0 : ℝ) × Icc z₁ z₂ × Icc z₁ z₂ // q.2.1 ≤ q.2.2})
+    (fun q => (q.1.1, q.1.2.1)) (fun q => (q.1.1, q.1.2.2))
+  convert this using 1
+  ext f
+  exact ⟨fun hf q => hf q.1.1 q.2, fun hf x z z' hzz' => hf ⟨(x, z, z'), hzz'⟩⟩
+
+/-- **Exercise 10.4c** (monotonicity in `z`). For `Q` monotone, `v(x, ·)` is strictly
+increasing. -/
+theorem ind_strictMono_z (h : IndHyp U c δ δ' M r A z₁ z₂)
+    (Q : Kernel (Icc z₁ z₂) (Icc z₁ z₂)) [IsMarkovKernel Q] (hQ : IsFeller Q)
+    (hQm : IsMonotoneTF Q) {v : Ioi (0 : ℝ) × Icc z₁ z₂ →ᵇ ℝ}
+    (hv : truncT (h.upperDP Q hQ) v = v) (x : Ioi (0 : ℝ)) :
+    StrictMono fun z => v (x, z) := by
+  have hd := h.upperDP Q hQ
+  have hb := truncModel_boundedDP hd (truncK_pos hd).le
+  set B : Set (Ioi (0 : ℝ) × Icc z₁ z₂ →ᵇ ℝ) :=
+    {f | (∀ s, 0 ≤ f s ∧ f s ≤ A / (1 - 1 / (1 + r))) ∧ ∀ z, Monotone fun x => f (x, z)}
+  set S' := B ∩ {f | ∀ x, Monotone fun z => f (x, z)}
+  have hclosed : IsClosed S' :=
+    ((isClosed_bounds _).inter isClosed_monoX).inter isClosed_monoZ
+  have hstrict : ∀ f ∈ S', ∀ x, StrictMono fun z => truncT hd f (x, z) := by
+    intro f hf x z z' hzz'
+    obtain ⟨y, -, hval, -⟩ := trunc_bellman_argmax hd hf.1.1 (x, z)
+    have hle := ind_rhs_le h Q hQ hf.1.1 hf.1.2 (x, z') y
+    dsimp only
+    rw [hval]
+    refine lt_of_lt_of_le ?_ hle
+    rw [ind_rhs, ind_rhs]
+    have hU := h.U_mono_z x.1 x.2 z.2 z'.2 hzz'
+    have hE : ∫ z'', f (y, z'') ∂Q z ≤ ∫ z'', f (y, z'') ∂Q z' :=
+      hQm (fun z'' => f (y, z'')) (f.continuous.comp (Continuous.prodMk_right y)).measurable
+        ⟨‖f‖, fun z'' => by rw [← Real.norm_eq_abs]; exact f.norm_coe_le_norm _⟩ (hf.2 y)
+        (le_of_lt hzz')
+    have hb0 : 0 < 1 / (1 + r) := one_div_pos.2 (by linarith [h.r_pos])
+    simp only [indF]
+    nlinarith [mul_le_mul_of_nonneg_left hE hb0.le]
+  have hmaps : MapsTo (truncT hd) S' S' := fun f hf =>
+    ⟨⟨truncT_mapsTo hd hf.1.1, fun z => (ind_T_strictMono_x h Q hQ hf.1.1 hf.1.2 z).monotone⟩,
+      fun x => (hstrict f hf x).monotone⟩
+  have hv' := (corollary_1 (S' := S') (S'' := S') (bellman_contraction _ hb) hv
+    ⟨0, ⟨fun _ => ⟨le_rfl, div_nonneg hd.A_nonneg (by linarith [hd.β_lt])⟩,
+      fun _ _ _ _ => le_rfl⟩, fun _ _ _ _ => le_rfl⟩ hclosed hmaps hmaps).1
+  have := hstrict v hv' x
+  rwa [hv] at this
+
+theorem cmb_Ioi_val {x x' : Ioi (0 : ℝ)} {θ : ℝ} (h0 : 0 ≤ θ) (h1 : θ ≤ 1) :
+    (cmb (convex_Ioi (0 : ℝ)) h0 h1 x x').1 = θ * x.1 + (1 - θ) * x'.1 := by
+  simp [cmb]
+
+/-- **Exercise 10.4c** (strict concavity). `v(·, z)` is strictly concave. -/
+theorem ind_strictConcave (h : IndHyp U c δ δ' M r A z₁ z₂)
+    (Q : Kernel (Icc z₁ z₂) (Icc z₁ z₂)) [IsMarkovKernel Q] (hQ : IsFeller Q)
+    {v : Ioi (0 : ℝ) × Icc z₁ z₂ →ᵇ ℝ} (hv : truncT (h.upperDP Q hQ) v = v) (z : Icc z₁ z₂) :
+    IsStrictConcaveS (convex_Ioi (0 : ℝ)) fun x => v (x, z) := by
+  have hd := h.upperDP Q hQ
+  have hb := truncModel_boundedDP hd (truncK_pos hd).le
+  have hb0 : 0 < 1 / (1 + r) := one_div_pos.2 (by linarith [h.r_pos])
+  set B : Set (Ioi (0 : ℝ) × Icc z₁ z₂ →ᵇ ℝ) :=
+    {f | (∀ s, 0 ≤ f s ∧ f s ≤ A / (1 - 1 / (1 + r))) ∧ ∀ z, Monotone fun x => f (x, z)}
+  set S' := B ∩ {f | ∀ z, IsConcaveS (convex_Ioi (0 : ℝ)) fun x => f (x, z)}
+  have hclosed : IsClosed S' :=
+    ((isClosed_bounds _).inter isClosed_monoX).inter (isClosed_concaveX _)
+  have hstrict : ∀ f ∈ S', ∀ z, IsStrictConcaveS (convex_Ioi (0 : ℝ))
+      fun x => truncT hd f (x, z) := by
+    intro f hf z x₀ x₁ hne θ h0 h1
+    obtain ⟨y₀, -, hv₀, -⟩ := trunc_bellman_argmax hd hf.1.1 (x₀, z)
+    obtain ⟨y₁, -, hv₁, -⟩ := trunc_bellman_argmax hd hf.1.1 (x₁, z)
+    set yθ := cmb (convex_Ioi (0 : ℝ)) h0.le h1.le y₀ y₁
+    set xθ := cmb (convex_Ioi (0 : ℝ)) h0.le h1.le x₀ x₁
+    have hle := ind_rhs_le h Q hQ hf.1.1 hf.1.2 (xθ, z) yθ
+    dsimp only
+    rw [hv₀, hv₁]
+    refine lt_of_lt_of_le ?_ hle
+    rw [ind_rhs, ind_rhs, ind_rhs]
+    -- the return: strict concavity of `U` and convexity of the adjustment cost
+    have hU := (h.U_conc z.1 z.2).2 (mem_Ici.2 (le_of_lt x₀.2)) (mem_Ici.2 (le_of_lt x₁.2))
+      (fun he => hne (Subtype.ext he)) h0 (by linarith : (0 : ℝ) < 1 - θ) (by ring)
+    simp only [smul_eq_mul] at hU
+    have hp := h.persp_convex x₀.2 x₁.2 (le_of_lt y₀.2) (le_of_lt y₁.2) h0.le h1.le
+    have hxθ : xθ.1 = θ * x₀.1 + (1 - θ) * x₁.1 := cmb_Ioi_val h0.le h1.le
+    have hyθ : yθ.1 = θ * y₀.1 + (1 - θ) * y₁.1 := cmb_Ioi_val h0.le h1.le
+    -- the continuation value: concavity of `f(·, z′)`
+    have hE : θ * ∫ z', f (y₀, z') ∂Q z + (1 - θ) * ∫ z', f (y₁, z') ∂Q z ≤
+        ∫ z', f (yθ, z') ∂Q z := by
+      rw [← integral_const_mul, ← integral_const_mul, ← integral_add
+        ((integrable_ind (Q := Q) f y₀ z).const_mul θ)
+        ((integrable_ind (Q := Q) f y₁ z).const_mul _)]
+      exact integral_mono (((integrable_ind (Q := Q) f y₀ z).const_mul θ).add
+        ((integrable_ind (Q := Q) f y₁ z).const_mul _)) (integrable_ind (Q := Q) f yθ z)
+        fun z' => hf.2 z' y₀ y₁ θ h0.le h1.le
+    simp only [indF]
+    rw [hxθ, hyθ]
+    nlinarith [mul_le_mul_of_nonneg_left hE hb0.le]
+  have hmaps : MapsTo (truncT hd) S' S' := fun f hf =>
+    ⟨⟨truncT_mapsTo hd hf.1.1, fun z => (ind_T_strictMono_x h Q hQ hf.1.1 hf.1.2 z).monotone⟩,
+      fun z => (hstrict f hf z).isConcaveS⟩
+  have hv' := (corollary_1 (S' := S') (S'' := S') (bellman_contraction _ hb) hv
+    ⟨0, ⟨fun _ => ⟨le_rfl, div_nonneg hd.A_nonneg (by linarith [hd.β_lt])⟩,
+      fun _ _ _ _ => le_rfl⟩, fun _ _ _ _ _ _ => by simp⟩ hclosed hmaps hmaps).1
+  have := hstrict v hv' z
+  rwa [hv] at this
+
+/-- The objective of (2′) is continuous on the graph of `Γ`. -/
+theorem ind_continuousOn_objG (h : IndHyp U c δ δ' M r A z₁ z₂)
+    (Q : Kernel (Icc z₁ z₂) (Icc z₁ z₂)) [IsMarkovKernel Q] (hQ : IsFeller Q)
+    (f : Ioi (0 : ℝ) × Icc z₁ z₂ →ᵇ ℝ) :
+    ContinuousOn (objG (indModel Q U c δ' M r) f) (graph (indΓ δ' M)) := by
+  have hd := h.upperDP Q hQ
+  set MM := indModel Q U c δ' M r
+  have hF : ContinuousOn (fun p : (Ioi (0 : ℝ) × Icc z₁ z₂) × Ioi (0 : ℝ) =>
+      MM.F (p.1.1, p.2, p.1.2)) (graph MM.Γ) :=
+    (h.continuous_F.comp (continuous_fst.fst.prodMk
+      (continuous_snd.prodMk continuous_fst.snd))).continuousOn
+  have hE : ContinuousOn (fun p : (Ioi (0 : ℝ) × Icc z₁ z₂) × Ioi (0 : ℝ) =>
+      expV MM f p.1 p.2) (graph MM.Γ) :=
+    (hd.contExp f f.continuous ⟨‖f‖, fun p => f.norm_coe_le_norm p⟩).comp
+      ((continuous_fst.fst.prodMk continuous_snd).prodMk continuous_fst.snd).continuousOn
+      fun p hp => ⟨mem_domD MM hp, mem_univ _⟩
+  exact hF.add (continuousOn_const.mul hE)
+
+/-- At the fixed point the maximum of (2′) is attained and equals `v`. -/
+theorem ind_max (h : IndHyp U c δ δ' M r A z₁ z₂) (Q : Kernel (Icc z₁ z₂) (Icc z₁ z₂))
+    [IsMarkovKernel Q] (hQ : IsFeller Q) {v : Ioi (0 : ℝ) × Icc z₁ z₂ →ᵇ ℝ}
+    (hv : truncT (h.upperDP Q hQ) v = v) (s : Ioi (0 : ℝ) × Icc z₁ z₂) :
+    (∃ y ∈ indΓ δ' M s, v s = rhs (indModel Q U c δ' M r) v s y) ∧
+      (∀ y ∈ indΓ δ' M s, rhs (indModel Q U c δ' M r) v s y ≤ v s) ∧
+      maxValue (objG (indModel Q U c δ' M r) v) (indΓ δ' M) s = v s := by
+  obtain ⟨y, hy, hval, hmax⟩ := trunc_bellman_argmax (h.upperDP Q hQ)
+    (ind_strictMono_x h Q hQ hv).1 s
+  rw [hv] at hval hmax
+  refine ⟨⟨y, hy, hval⟩, hmax, ?_⟩
+  exact IsGreatest.csSup_eq ⟨⟨y, hy, hval.symm⟩, by rintro _ ⟨y', hy', rfl⟩; exact hmax y' hy'⟩
+
+/-- **Exercise 10.4c** (the policy function). The maximizer in (2′) is unique; it is a continuous
+function `g`, and `(1 − δ)x ≤ g(x, z) < max{M, x}`, so `g(x, z)` is interior to `Γ(x)`. -/
+theorem ind_policy (h : IndHyp U c δ δ' M r A z₁ z₂) (Q : Kernel (Icc z₁ z₂) (Icc z₁ z₂))
+    [IsMarkovKernel Q] (hQ : IsFeller Q) {v : Ioi (0 : ℝ) × Icc z₁ z₂ →ᵇ ℝ}
+    (hv : truncT (h.upperDP Q hQ) v = v) :
+    UniqueArgmax (indΓ δ' M) (objG (indModel Q U c δ' M r) v) ∧
+      (∀ s, policy (indModel Q U c δ' M r) v s = argmax (objG (indModel Q U c δ' M r) v)
+        (indΓ δ' M) s) ∧
+      ∀ s, ∀ y ∈ policy (indModel Q U c δ' M r) v s,
+        (1 - δ) * s.1.1 ≤ y.1 ∧ y.1 < max M s.1.1 := by
+  have hd := h.upperDP Q hQ
+  have hb0 : 0 < 1 / (1 + r) := one_div_pos.2 (by linarith [h.r_pos])
+  have hvR := (ind_strictMono_x h Q hQ hv).1
+  have hvm := (ind_strictMono_x h Q hQ hv).2
+  have hpol : ∀ s, policy (indModel Q U c δ' M r) v s =
+      argmax (objG (indModel Q U c δ' M r) v) (indΓ δ' M) s := fun s => by
+    ext y
+    change y ∈ indΓ δ' M s ∧ v s = rhs _ v s y ↔ y ∈ indΓ δ' M s ∧ objG _ v (s, y) = _
+    rw [(ind_max h Q hQ hv s).2.2, eq_comm]
+    rfl
+  refine ⟨⟨hd.nonempty, hd.compact, hd.lhc, hd.uhc, ind_continuousOn_objG h Q hQ v,
+    fun s y₁ hy₁ y₂ hy₂ => ?_⟩, hpol, fun s y hy => ⟨?_, ?_⟩⟩
+  · -- uniqueness: at the midpoint the return is at least the average and the continuation
+    -- value strictly more
+    obtain ⟨x, z⟩ := s
+    by_contra hne
+    have hx : 0 < x.1 := x.2
+    have hh0 : (0 : ℝ) < 1 / 2 := by norm_num
+    have hh1 : (1 / 2 : ℝ) < 1 := by norm_num
+    set ym := cmb (convex_Ioi (0 : ℝ)) hh0.le hh1.le y₁ y₂
+    have hymv : ym.1 = 1 / 2 * y₁.1 + (1 - 1 / 2) * y₂.1 := cmb_Ioi_val hh0.le hh1.le
+    have hym : ym ∈ indΓ δ' M (x, z) := by
+      have h1 := hy₁.1; have h2 := hy₂.1
+      exact ⟨by rw [hymv]; linarith [h1.1, h2.1], by rw [hymv]; linarith [h1.2, h2.2]⟩
+    have hle := (ind_max h Q hQ hv (x, z)).2.1 ym hym
+    have e1 : rhs (indModel Q U c δ' M r) v (x, z) y₁ = v (x, z) := by
+      rw [← (ind_max h Q hQ hv (x, z)).2.2]; exact hy₁.2
+    have e2 : rhs (indModel Q U c δ' M r) v (x, z) y₂ = v (x, z) := by
+      rw [← (ind_max h Q hQ hv (x, z)).2.2]; exact hy₂.2
+    rw [ind_rhs] at hle e1 e2
+    have hc := h.c_conv.2 (mem_Ici.2 (div_nonneg (le_of_lt y₁.2) hx.le))
+      (mem_Ici.2 (div_nonneg (le_of_lt y₂.2) hx.le)) hh0.le hh0.le (by norm_num)
+    simp only [smul_eq_mul] at hc
+    have hcm : ym.1 / x.1 = 1 / 2 * (y₁.1 / x.1) + 1 / 2 * (y₂.1 / x.1) := by
+      rw [hymv]; field_simp; ring
+    have hE : 1 / 2 * ∫ z', v (y₁, z') ∂Q z + (1 - 1 / 2) * ∫ z', v (y₂, z') ∂Q z <
+        ∫ z', v (ym, z') ∂Q z := by
+      rw [← integral_const_mul, ← integral_const_mul, ← integral_add
+        ((integrable_ind (Q := Q) v y₁ z).const_mul _)
+        ((integrable_ind (Q := Q) v y₂ z).const_mul _)]
+      exact integral_lt_integral_of_forall_lt (((integrable_ind (Q := Q) v y₁ z).const_mul _).add
+        ((integrable_ind (Q := Q) v y₂ z).const_mul _)) (integrable_ind (Q := Q) v ym z)
+        fun z' => ind_strictConcave h Q hQ hv z' y₁ y₂ hne (1 / 2) hh0 hh1
+    simp only [indF] at hle e1 e2
+    rw [hcm] at hle
+    nlinarith [mul_lt_mul_of_pos_left hE hb0, mul_le_mul_of_nonneg_left hc hx.le]
+  · -- below `(1 − δ)x` the cost is zero and `(1 − δ)x` is strictly better
+    obtain ⟨x, z⟩ := s
+    by_contra hlt
+    rw [not_le] at hlt
+    have hx : 0 < x.1 := x.2
+    obtain ⟨hsm, hsF⟩ := h.safe_mem x z
+    have hle := (ind_max h Q hQ hv (x, z)).2.1 _ hsm
+    have hyv := hy.2
+    rw [ind_rhs] at hle hyv
+    have hc0 : c (y.1 / x.1) = 0 := h.c_zero _ (div_nonneg (le_of_lt y.2) hx.le) (by
+      rw [div_le_iff₀ hx]; linarith)
+    have hF : indF U c (x, y, z) = U x.1 z.1 := by simp only [indF, hc0, mul_zero, sub_zero]
+    rw [hF] at hyv
+    rw [hsF] at hle
+    have hE : ∫ z', v (y, z') ∂Q z < ∫ z', v (h.safeY x, z') ∂Q z :=
+      integral_lt_integral_of_forall_lt (integrable_ind (Q := Q) v y z)
+        (integrable_ind (Q := Q) v _ z) fun z' => hvm z' (show y.1 < (1 - δ) * x.1 from hlt)
+    nlinarith [mul_lt_mul_of_pos_left hE hb0]
+  · -- at `max{M, x}` the value is negative
+    by_contra hge
+    rw [not_lt] at hge
+    have hneg := ind_rhs_neg h Q hvR s hge
+    have hyv := hy.2
+    have := (hvR s).1
+    linarith
+
+/-- **Exercise 10.4c** (differentiability, Benveniste–Scheinkman). If `y₀` is optimal at
+`(x₀, z₀)`, `U(·, z₀)` has derivative `U_x` at `x₀` and `c` has derivative `c′` at `a = y₀/x₀`,
+then `v_x(x₀, z₀) = U_x − c(a) + a c′(a)`. -/
+theorem ind_hasDerivAt_x (h : IndHyp U c δ δ' M r A z₁ z₂)
+    (Q : Kernel (Icc z₁ z₂) (Icc z₁ z₂)) [IsMarkovKernel Q] (hQ : IsFeller Q)
+    {v : Ioi (0 : ℝ) × Icc z₁ z₂ →ᵇ ℝ} (hv : truncT (h.upperDP Q hQ) v = v)
+    {x₀ y₀ : Ioi (0 : ℝ)} {z₀ : Icc z₁ z₂}
+    (hy₀ : y₀ ∈ policy (indModel Q U c δ' M r) v (x₀, z₀)) {Ux c' : ℝ}
+    (hUx : HasDerivAt (fun q => U q z₀.1) Ux x₀.1) (hc' : HasDerivAt c c' (y₀.1 / x₀.1)) :
+    HasDerivAt (liftS fun x => v (x, z₀)) (Ux - c (y₀.1 / x₀.1) + y₀.1 / x₀.1 * c') x₀.1 := by
+  have hx₀ : 0 < x₀.1 := x₀.2
+  have hvR := (ind_strictMono_x h Q hQ hv).1
+  have hvm := (ind_strictMono_x h Q hQ hv).2
+  set E := ∫ z', v (y₀, z') ∂Q z₀
+  have hin : HasDerivAt (fun x => y₀.1 / x) (-(y₀.1 / x₀.1 ^ 2)) x₀.1 := by
+    have := (hasDerivAt_inv hx₀.ne').const_mul y₀.1
+    simp only [div_eq_mul_inv] at this ⊢
+    convert this using 1; ring
+  have hcost : HasDerivAt (fun x => x * c (y₀.1 / x))
+      (c (y₀.1 / x₀.1) - y₀.1 / x₀.1 * c') x₀.1 := by
+    refine ((hasDerivAt_id x₀.1).mul (hc'.comp x₀.1 hin)).congr_deriv ?_
+    simp only [id, Function.comp_apply]
+    field_simp
+    ring
+  have hL : HasDerivAt (fun x => U x z₀.1 - x * c (y₀.1 / x) + 1 / (1 + r) * E)
+      (Ux - c (y₀.1 / x₀.1) + y₀.1 / x₀.1 * c') x₀.1 := by
+    have := (hUx.sub hcost).add_const (1 / (1 + r) * E)
+    convert this using 1; ring
+  refine hasDerivAt_of_concaveOn_of_le (concaveOn_liftS (ind_strictConcave h Q hQ hv z₀).isConcaveS)
+    (Ioi_mem_nhds hx₀) hL ?_ ?_
+  · rw [liftS_of_mem _ x₀.2, hy₀.2, ind_rhs]
+    rfl
+  · filter_upwards [Ioi_mem_nhds hx₀] with x hx
+    rw [liftS_of_mem _ hx]
+    have := ind_rhs_le h Q hQ hvR (fun z => (hvm z).monotone) (⟨x, hx⟩, z₀) y₀
+    rw [hv, ind_rhs] at this
+    exact this
+
+/-- **Exercise 10.4c**, bundled: `v` is strictly increasing in `x` and, when `Q` is monotone, in
+`z`; strictly concave in `x`; the maximizer is unique, with `(1 − δ)x ≤ g(x, z) < max{M, x}`;
+and `v_x = U_x − c(g/x) + (g/x)c′(g/x)` wherever `U(·, z)` and `c` are differentiable. -/
+theorem ex_10_4c (h : IndHyp U c δ δ' M r A z₁ z₂) (Q : Kernel (Icc z₁ z₂) (Icc z₁ z₂))
+    [IsMarkovKernel Q] (hQ : IsFeller Q) {v : Ioi (0 : ℝ) × Icc z₁ z₂ →ᵇ ℝ}
+    (hv : truncT (h.upperDP Q hQ) v = v) :
+    (∀ z, StrictMono fun x => v (x, z)) ∧
+      (IsMonotoneTF Q → ∀ x, StrictMono fun z => v (x, z)) ∧
+      (∀ z, IsStrictConcaveS (convex_Ioi (0 : ℝ)) fun x => v (x, z)) ∧
+      UniqueArgmax (indΓ δ' M) (objG (indModel Q U c δ' M r) v) ∧
+      (∀ s, ∀ y ∈ policy (indModel Q U c δ' M r) v s,
+        (1 - δ) * s.1.1 ≤ y.1 ∧ y.1 < max M s.1.1) ∧
+      ∀ (x₀ y₀ : Ioi (0 : ℝ)) (z₀ : Icc z₁ z₂) (Ux c' : ℝ),
+        y₀ ∈ policy (indModel Q U c δ' M r) v (x₀, z₀) →
+        HasDerivAt (fun q => U q z₀.1) Ux x₀.1 → HasDerivAt c c' (y₀.1 / x₀.1) →
+        HasDerivAt (liftS fun x => v (x, z₀)) (Ux - c (y₀.1 / x₀.1) + y₀.1 / x₀.1 * c') x₀.1 :=
+  ⟨(ind_strictMono_x h Q hQ hv).2, fun hQm => ind_strictMono_z h Q hQ hQm hv,
+    ind_strictConcave h Q hQ hv, (ind_policy h Q hQ hv).1, (ind_policy h Q hQ hv).2.2,
+    fun _ _ _ _ _ hy hUx hc' => ind_hasDerivAt_x h Q hQ hv hy hUx hc'⟩
+
+/-- Membership in the policy correspondence: `y` is optimal iff it is feasible and no feasible
+`y′` does better. -/
+theorem ind_mem_policy_iff (h : IndHyp U c δ δ' M r A z₁ z₂)
+    (Q : Kernel (Icc z₁ z₂) (Icc z₁ z₂)) [IsMarkovKernel Q] (hQ : IsFeller Q)
+    {v : Ioi (0 : ℝ) × Icc z₁ z₂ →ᵇ ℝ} (hv : truncT (h.upperDP Q hQ) v = v)
+    (s : Ioi (0 : ℝ) × Icc z₁ z₂) (y : Ioi (0 : ℝ)) :
+    y ∈ policy (indModel Q U c δ' M r) v s ↔ y ∈ indΓ δ' M s ∧
+      ∀ y' ∈ indΓ δ' M s, rhs (indModel Q U c δ' M r) v s y' ≤
+        rhs (indModel Q U c δ' M r) v s y := by
+  obtain ⟨⟨y₀, hy₀, hval⟩, hmax, -⟩ := ind_max h Q hQ hv s
+  constructor
+  · rintro ⟨hy, hyv⟩
+    exact ⟨hy, fun y' hy' => (hmax y' hy').trans_eq hyv⟩
+  · rintro ⟨hy, hge⟩
+    exact ⟨hy, le_antisymm (hval.trans_le (hge y₀ hy₀)) (hmax y hy)⟩
+
+/-- **Exercise 10.4f**. If the shocks are i.i.d. (`Q(z, ·)` does not depend on `z`), the
+investment policy does not depend on `z`: `g(x, z) = g(x, z′)`. The current shock enters the
+return only through the additive term `U(x, z)`, which does not move the maximizer. -/
+theorem ex_10_4f (h : IndHyp U c δ δ' M r A z₁ z₂) (Q : Kernel (Icc z₁ z₂) (Icc z₁ z₂))
+    [IsMarkovKernel Q] (hQ : IsFeller Q) (hiid : ∀ z z', Q z = Q z')
+    {v : Ioi (0 : ℝ) × Icc z₁ z₂ →ᵇ ℝ} (hv : truncT (h.upperDP Q hQ) v = v)
+    (x : Ioi (0 : ℝ)) (z z' : Icc z₁ z₂) :
+    policy (indModel Q U c δ' M r) v (x, z) = policy (indModel Q U c δ' M r) v (x, z') := by
+  ext y
+  rw [ind_mem_policy_iff h Q hQ hv, ind_mem_policy_iff h Q hQ hv]
+  have hΓ : indΓ δ' M (x, z) = indΓ δ' M (x, z') := rfl
+  have key : ∀ y' : Ioi (0 : ℝ), rhs (indModel Q U c δ' M r) v (x, z) y' =
+      rhs (indModel Q U c δ' M r) v (x, z') y' + (U x.1 z.1 - U x.1 z'.1) := fun y' => by
+    rw [ind_rhs, ind_rhs]
+    change U x.1 z.1 - x.1 * c (y'.1 / x.1) + 1 / (1 + r) * ∫ z'', v (y', z'') ∂Q z =
+      U x.1 z'.1 - x.1 * c (y'.1 / x.1) + 1 / (1 + r) * ∫ z'', v (y', z'') ∂Q z' +
+        (U x.1 z.1 - U x.1 z'.1)
+    rw [hiid z z']
+    ring
+  rw [hΓ]
+  simp only [key, add_le_add_iff_right]
+
+/-- The cost `x c(y/x)` has decreasing differences: for `0 < x ≤ x′` and `0 < y′ < y`,
+`x′[c(y/x′) − c(y′/x′)] ≤ x[c(y/x) − c(y′/x)]`. Both sides are `(y − y′)` times a secant slope
+of the convex `c`, and the slope over `[y′/x′, y/x′]` is below the one over `[y′/x, y/x]`. -/
+theorem ind_cost_submod (h : IndHyp U c δ δ' M r A z₁ z₂) {x x' y y' : ℝ} (hx : 0 < x)
+    (hxx : x ≤ x') (hy' : 0 < y') (hyy : y' < y) :
+    x' * (c (y / x') - c (y' / x')) ≤ x * (c (y / x) - c (y' / x)) := by
+  have hx' : 0 < x' := hx.trans_le hxx
+  have hd : 0 < y - y' := by linarith
+  have ha : y' / x' < y / x' := div_lt_div_of_pos_right hyy hx'
+  have hb : y / x' ≤ y / x := div_le_div_of_nonneg_left (by linarith) hx hxx
+  have ha' : y' / x' ≤ y' / x := div_le_div_of_nonneg_left hy'.le hx hxx
+  have hab' : y' / x < y / x := div_lt_div_of_pos_right hyy hx
+  have m0 : ∀ q : ℝ, 0 < q → q ∈ Ici (0 : ℝ) := fun q hq => mem_Ici.2 hq.le
+  have p1 := h.c_conv.secant_mono (m0 _ (div_pos hy' hx')) (m0 _ (div_pos (hy'.trans hyy) hx'))
+    (m0 _ (div_pos (hy'.trans hyy) hx)) ha.ne' (ha.trans_le hb).ne' hb
+  have p2 := h.c_conv.secant_mono (m0 _ (div_pos (hy'.trans hyy) hx)) (m0 _ (div_pos hy' hx'))
+    (m0 _ (div_pos hy' hx)) (ha.trans_le hb).ne (hab'.ne) ha'
+  have e1 : x' * (c (y / x') - c (y' / x')) =
+      (y - y') * ((c (y / x') - c (y' / x')) / (y / x' - y' / x')) := by
+    rw [show y / x' - y' / x' = (y - y') / x' by ring]
+    field_simp
+  have e2 : x * (c (y / x) - c (y' / x)) =
+      (y - y') * ((c (y' / x) - c (y / x)) / (y' / x - y / x)) := by
+    rw [show y' / x - y / x = -((y - y') / x) by ring, div_neg, ← neg_div, neg_sub]
+    field_simp
+  have e3 : (c (y / x) - c (y' / x')) / (y / x - y' / x') =
+      (c (y' / x') - c (y / x)) / (y' / x' - y / x) := by
+    rw [← neg_div_neg_eq, neg_sub, neg_sub]
+  rw [e1, e2]
+  exact mul_le_mul_of_nonneg_left (p1.trans (e3 ▸ p2)) hd.le
+
+/-- **Exercise 10.4d** (monotonicity in `x`). Investment is nondecreasing in capacity:
+`x ≤ x′` implies `g(x, z) ≤ g(x′, z)`. The proof is Topkis's: `Γ` is ascending, and the
+cost `x c(y/x)` has decreasing differences (`ind_cost_submod`), so if `g(x′, z) < g(x, z)` then
+`g(x, z)` is also optimal at `x′`, contradicting uniqueness. -/
+theorem ex_10_4d (h : IndHyp U c δ δ' M r A z₁ z₂) (Q : Kernel (Icc z₁ z₂) (Icc z₁ z₂))
+    [IsMarkovKernel Q] (hQ : IsFeller Q) {v : Ioi (0 : ℝ) × Icc z₁ z₂ →ᵇ ℝ}
+    (hv : truncT (h.upperDP Q hQ) v = v) {x x' y y' : Ioi (0 : ℝ)} (hxx : x.1 ≤ x'.1)
+    (z : Icc z₁ z₂) (hy : y ∈ policy (indModel Q U c δ' M r) v (x, z))
+    (hy' : y' ∈ policy (indModel Q U c δ' M r) v (x', z)) : y.1 ≤ y'.1 := by
+  by_contra hlt
+  rw [not_le] at hlt
+  have hx : 0 < x.1 := x.2
+  have hy'0 : 0 < y'.1 := y'.2
+  have hδ : 0 ≤ 1 - δ' := by linarith [h.δ'_lt]
+  have key : ∀ (s : Ioi (0 : ℝ) × Icc z₁ z₂) (w : Ioi (0 : ℝ)),
+      rhs (indModel Q U c δ' M r) v s w =
+        U s.1.1 s.2.1 - s.1.1 * c (w.1 / s.1.1) + 1 / (1 + r) * ∫ z', v (w, z') ∂Q s.2 :=
+    fun _ _ => rfl
+  have hyΓ : y ∈ indΓ δ' M (x', z) := by
+    have h1 := hy'.1; have h2 := hy.1
+    exact ⟨h1.1.trans hlt.le, h2.2.trans (max_le_max le_rfl hxx)⟩
+  have hy'Γ : y' ∈ indΓ δ' M (x, z) := by
+    have h1 := hy'.1; have h2 := hy.1
+    exact ⟨(mul_le_mul_of_nonneg_left hxx hδ).trans h1.1, hlt.le.trans h2.2⟩
+  have h0 := ((ind_mem_policy_iff h Q hQ hv _ _).1 hy).2 y' hy'Γ
+  have hsub := ind_cost_submod h hx hxx hy'0 hlt
+  rw [key, key] at h0
+  have hopt : y ∈ policy (indModel Q U c δ' M r) v (x', z) := by
+    refine (ind_mem_policy_iff h Q hQ hv _ _).2 ⟨hyΓ, fun w hw => ?_⟩
+    refine (((ind_mem_policy_iff h Q hQ hv _ _).1 hy').2 w hw).trans ?_
+    rw [key, key]
+    change U x'.1 z.1 - x'.1 * c (y'.1 / x'.1) + 1 / (1 + r) * ∫ z', v (y', z') ∂Q z ≤
+      U x'.1 z.1 - x'.1 * c (y.1 / x'.1) + 1 / (1 + r) * ∫ z', v (y, z') ∂Q z
+    change U x.1 z.1 - x.1 * c (y'.1 / x.1) + 1 / (1 + r) * ∫ z', v (y', z') ∂Q z ≤
+      U x.1 z.1 - x.1 * c (y.1 / x.1) + 1 / (1 + r) * ∫ z', v (y, z') ∂Q z at h0
+    linarith
+  have hpol := (ind_policy h Q hQ hv).2.1
+  have := (ind_policy h Q hQ hv).1.unique (x', z) y (hpol (x', z) ▸ hopt) y'
+    (hpol (x', z) ▸ hy')
+  rw [this] at hlt
+  exact lt_irrefl _ hlt
+
+/-- **Exercise 10.4f** (capacity paths). Under i.i.d. shocks, any optimal path
+`x_{t+1} ∈ g(x_t, z_t)` is monotone, whatever the shock realizations: nonincreasing if
+`x₁ ≤ x₀` and nondecreasing if `x₀ ≤ x₁`. -/
+theorem ex_10_4f_monotone (h : IndHyp U c δ δ' M r A z₁ z₂)
+    (Q : Kernel (Icc z₁ z₂) (Icc z₁ z₂)) [IsMarkovKernel Q] (hQ : IsFeller Q)
+    (hiid : ∀ z z', Q z = Q z') {v : Ioi (0 : ℝ) × Icc z₁ z₂ →ᵇ ℝ}
+    (hv : truncT (h.upperDP Q hQ) v = v) (xs : ℕ → Ioi (0 : ℝ)) (zs : ℕ → Icc z₁ z₂)
+    (hseq : ∀ t, xs (t + 1) ∈ policy (indModel Q U c δ' M r) v (xs t, zs t)) :
+    ((xs 1).1 ≤ (xs 0).1 → Antitone fun t => (xs t).1) ∧
+      ((xs 0).1 ≤ (xs 1).1 → Monotone fun t => (xs t).1) := by
+  have hmove : ∀ t, xs (t + 1) ∈ policy (indModel Q U c δ' M r) v (xs t, zs (t + 1)) :=
+    fun t => ex_10_4f h Q hQ hiid hv (xs t) (zs t) (zs (t + 1)) ▸ hseq t
+  constructor
+  · intro h10
+    have : ∀ t, (xs (t + 1)).1 ≤ (xs t).1 := by
+      intro t
+      induction t with
+      | zero => exact h10
+      | succ t ih => exact ex_10_4d h Q hQ hv ih (zs (t + 1)) (hseq (t + 1)) (hmove t)
+    exact antitone_nat_of_succ_le this
+  · intro h01
+    have : ∀ t, (xs t).1 ≤ (xs (t + 1)).1 := by
+      intro t
+      induction t with
+      | zero => exact h01
+      | succ t ih => exact ex_10_4d h Q hQ hv ih (zs (t + 1)) (hmove t) (hseq (t + 1))
+    exact monotone_nat_of_le_succ this
+
+/-- **Exercise 10.4f** (convergence). Under i.i.d. shocks every optimal capacity path converges:
+it is monotone (`ex_10_4f_monotone`), bounded below by `0`, and bounded above by `max{M, x₀}`
+because `g(x, z) < max{M, x}`. -/
+theorem ex_10_4f_tendsto (h : IndHyp U c δ δ' M r A z₁ z₂)
+    (Q : Kernel (Icc z₁ z₂) (Icc z₁ z₂)) [IsMarkovKernel Q] (hQ : IsFeller Q)
+    (hiid : ∀ z z', Q z = Q z') {v : Ioi (0 : ℝ) × Icc z₁ z₂ →ᵇ ℝ}
+    (hv : truncT (h.upperDP Q hQ) v = v) (xs : ℕ → Ioi (0 : ℝ)) (zs : ℕ → Icc z₁ z₂)
+    (hseq : ∀ t, xs (t + 1) ∈ policy (indModel Q U c δ' M r) v (xs t, zs t)) :
+    ∃ L, Tendsto (fun t => (xs t).1) atTop (𝓝 L) := by
+  obtain ⟨hanti, hmono⟩ := ex_10_4f_monotone h Q hQ hiid hv xs zs hseq
+  have hup : ∀ t, (xs t).1 ≤ max M (xs 0).1 := by
+    intro t
+    induction t with
+    | zero => exact le_max_right _ _
+    | succ t ih =>
+      have := ((ind_policy h Q hQ hv).2.2 _ _ (hseq t)).2
+      exact (this.trans_le (max_le (le_max_left _ _) ih)).le
+  rcases le_total (xs 1).1 (xs 0).1 with h10 | h01
+  · exact ⟨_, tendsto_atTop_ciInf (hanti h10) ⟨0, by rintro _ ⟨t, rfl⟩; exact (xs t).2.le⟩⟩
+  · exact ⟨_, tendsto_atTop_ciSup (hmono h01) ⟨_, by rintro _ ⟨t, rfl⟩; exact hup t⟩⟩
+
+end StokeyLucasPrescott.ConvergenceApplications
+
+/-
+Copyright (c) 2026 Robert Kirkby. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Robert Kirkby
+-/
+
+/-!
+# Industry investment under uncertainty: first-order conditions
+
+SLP §10.4, Exercise 10.4d–f, pp. 295–296. Let `v` be the fixed point of (2′)
+(`IndustryInvestmentResults`), `g` its policy, `β = 1/(1 + r)` and
+`W_z(y) = ∫ v(y, z′) Q(z, dz′)` (`indW`). The extra hypotheses, stated where used, are:
+`U(·, z)` differentiable on `(0, ∞)` (`U_x = D`) and `c` differentiable on `(0, ∞)` (the book's
+`c ∈ C¹`); strict convexity of `c` on `[1 − δ, ∞)` and strict concavity of `U(·, z)` are already
+in `IndHyp`, and the optimum is interior (`ind_policy`, `ind_rhs_le`).
+
+* `indW_strictConcaveOn`, `indW_strictMonoOn`, `indW_hasDerivAt`: `W_z` is strictly concave,
+  strictly increasing and differentiable, `W_z′(y) = ∫ v_x(y, z′) Q(z, dz′)` (differentiation
+  under the integral sign).
+* `ind_foc`: the first-order condition `c′(g(x, z)/x) = β W_z′(g(x, z))`.
+* `ind_policy_gt`: gross investment is always strictly positive, `g(x, z) > (1 − δ)x`, as soon as
+  `c` is differentiable at `1 − δ`.
+* **Exercise 10.4d** (`ind_policy_strictMono_x`, `ind_policy_ratio_lt`, `ind_policy_slope_lt`):
+  `g(·, z)` is strictly increasing, `g(x, z)/x` is strictly decreasing, and
+  `g(x′, z) − g(x, z) < [g(x, z)/x](x′ − x)` for `x < x′`, so the slope is below one wherever
+  `g(x, z) ≤ x`.
+* **Exercise 10.4e** (`ind_v_incDiff`, `ex_10_4e`): for `Q` monotone and `U` with increasing
+  differences in `(x, z)` (`D` increasing in `z`), `v` has increasing differences in `(x, z)`
+  (a closed property preserved by `T̃`, by Topkis's argument), and so `g(x, ·)` is nondecreasing.
+  `ex_10_4e_strict`: strict increase where `W_z′(g) < W_ẑ′(g)`.
+* **Exercise 10.4f** (`ex_10_4f_stationary`): under i.i.d. shocks every optimal path converges to
+  the same `x̂ ≥ 0`, whatever `x₀` and the shock path (`ex_10_4f_limit_eq`); if `x̂ > 0` it is
+  the unique positive stationary point (`ind_limit_stationary`, `ind_stationary_unique`); and
+  `x̂ > 0` if `U_x(y₀, z) > (1 + r)c′(1)` for all `z` at some `y₀ > 0` (`ind_policy_gt_self`,
+  `ex_10_4f_limit_pos`), the manual's condition `(1 + r)c′(1) < D(0, z)` moved off `0`.
+
+## Corrections
+
+* **Exercise 10.4d, p. 295.** "`g(·, z)` has slope strictly less than one" is false
+  (`ex_10_4d_slope_counterexample`): with `U(q, z) = 10zq/(1 + q)`,
+  `c(a) = max{a − ½, 0}²`, `δ = ½`, `δ′ = ¾`, `r = 1`, `M = 200`, `Z = [1, 2]` (`ind0_hyp`) and
+  any Feller `Q`, `g(x, z) > x` on `(0, ½]` but `g(x, z) − x → 0` as `x → 0`. The manual itself
+  notes that slope below one does not give `g/x` decreasing; what holds is
+  `ind_policy_slope_lt`.
+* **Exercise 10.4e, p. 295; manual p. 179.** The manual's step "`D` increasing in `z` implies
+  `v_x` increasing in `z`" ignores that `g(x, z)` depends on `z`; it is replaced by the Topkis
+  argument above. The strict claim ("strictly increasing where gross investment is positive") is
+  false (`ex_10_4e_strict_counterexample`): with i.i.d. shocks (`indQ0`, monotone and Feller)
+  `g` does not depend on `z`, while gross investment is always positive (`ind_policy_gt`).
+-/
+
+namespace StokeyLucasPrescott.ConvergenceApplications
+
+open MeasureTheory ProbabilityTheory Set Filter Topology BoundedContinuousFunction Metric
+
+variable {U : ℝ → ℝ → ℝ} {c : ℝ → ℝ} {δ δ' M r A z₁ z₂ : ℝ}
+
+/-- The expected continuation value `W_z(t) = ∫ v(t, z′) Q(z, dz′)`, extended by `0` to
+`t ≤ 0`. -/
+noncomputable def indW (Q : Kernel (Icc z₁ z₂) (Icc z₁ z₂)) (v : Ioi (0 : ℝ) × Icc z₁ z₂ →ᵇ ℝ)
+    (z : Icc z₁ z₂) (t : ℝ) : ℝ :=
+  ∫ z', liftS (fun u => v (u, z')) t ∂Q z
+
+/-- At `t > 0` the lifted section of `v` is `v(t, ·)`. -/
+theorem ind_liftS_of_pos (v : Ioi (0 : ℝ) × Icc z₁ z₂ →ᵇ ℝ) {t : ℝ} (ht : 0 < t) :
+    (fun z' : Icc z₁ z₂ => liftS (fun u => v (u, z')) t) = fun z' => v (⟨t, ht⟩, z') := by
+  funext z'
+  exact liftS_of_mem _ ht
+
+/-- `W_z(t) = ∫ v(t, z′) Q(z, dz′)` for `t > 0`. -/
+theorem indW_of_pos (Q : Kernel (Icc z₁ z₂) (Icc z₁ z₂)) (v : Ioi (0 : ℝ) × Icc z₁ z₂ →ᵇ ℝ)
+    (z : Icc z₁ z₂) {t : ℝ} (ht : 0 < t) : indW Q v z t = ∫ z', v (⟨t, ht⟩, z') ∂Q z := by
+  unfold indW
+  rw [ind_liftS_of_pos v ht]
+
+/-- The right side of (2) in terms of `W`. -/
+theorem ind_rhs_W (Q : Kernel (Icc z₁ z₂) (Icc z₁ z₂)) (v : Ioi (0 : ℝ) × Icc z₁ z₂ →ᵇ ℝ)
+    (x : Ioi (0 : ℝ)) (z : Icc z₁ z₂) (w : Ioi (0 : ℝ)) :
+    rhs (indModel Q U c δ' M r) v (x, z) w =
+      U x.1 z.1 - x.1 * c (w.1 / x.1) + 1 / (1 + r) * indW Q v z w.1 := by
+  rw [ind_rhs, indW_of_pos Q v z w.2]
+  rfl
+
+/-- At the fixed point, no `y > 0` beats the value. -/
+theorem ind_rhs_le_v (h : IndHyp U c δ δ' M r A z₁ z₂) (Q : Kernel (Icc z₁ z₂) (Icc z₁ z₂))
+    [IsMarkovKernel Q] (hQ : IsFeller Q) {v : Ioi (0 : ℝ) × Icc z₁ z₂ →ᵇ ℝ}
+    (hv : truncT (h.upperDP Q hQ) v = v) (s : Ioi (0 : ℝ) × Icc z₁ z₂) (w : Ioi (0 : ℝ)) :
+    rhs (indModel Q U c δ' M r) v s w ≤ v s := by
+  have hvm := (ind_strictMono_x h Q hQ hv).2
+  have := ind_rhs_le h Q hQ (ind_strictMono_x h Q hQ hv).1 (fun z => (hvm z).monotone) s w
+  rwa [hv] at this
+
+/-- `W_z` is strictly increasing on `(0, ∞)`. -/
+theorem indW_strictMonoOn (h : IndHyp U c δ δ' M r A z₁ z₂)
+    (Q : Kernel (Icc z₁ z₂) (Icc z₁ z₂)) [IsMarkovKernel Q] (hQ : IsFeller Q)
+    {v : Ioi (0 : ℝ) × Icc z₁ z₂ →ᵇ ℝ} (hv : truncT (h.upperDP Q hQ) v = v) (z : Icc z₁ z₂) :
+    StrictMonoOn (indW Q v z) (Ioi 0) := by
+  intro a ha b hb hab
+  rw [indW_of_pos Q v z ha, indW_of_pos Q v z hb]
+  exact integral_lt_integral_of_forall_lt (integrable_ind (Q := Q) v _ z)
+    (integrable_ind (Q := Q) v _ z) fun z' =>
+      (ind_strictMono_x h Q hQ hv).2 z' (show (⟨a, ha⟩ : Ioi (0 : ℝ)) < ⟨b, hb⟩ from hab)
+
+/-- `W_z` is strictly concave on `(0, ∞)`. -/
+theorem indW_strictConcaveOn (h : IndHyp U c δ δ' M r A z₁ z₂)
+    (Q : Kernel (Icc z₁ z₂) (Icc z₁ z₂)) [IsMarkovKernel Q] (hQ : IsFeller Q)
+    {v : Ioi (0 : ℝ) × Icc z₁ z₂ →ᵇ ℝ} (hv : truncT (h.upperDP Q hQ) v = v) (z : Icc z₁ z₂) :
+    StrictConcaveOn ℝ (Ioi 0) (indW Q v z) := by
+  refine ⟨convex_Ioi 0, fun a ha b hb hne θ η hθ hη hθη => ?_⟩
+  obtain rfl : η = 1 - θ := by linarith
+  have hθ1 : θ < 1 := by linarith
+  have hm : (0 : ℝ) < θ • a + (1 - θ) • b := (convex_Ioi (0 : ℝ)) ha hb hθ.le hη.le hθη
+  simp only [smul_eq_mul] at hm ⊢
+  rw [indW_of_pos Q v z ha, indW_of_pos Q v z hb, indW_of_pos Q v z hm,
+    ← integral_const_mul, ← integral_const_mul,
+    ← integral_add ((integrable_ind (Q := Q) v _ z).const_mul _)
+      ((integrable_ind (Q := Q) v _ z).const_mul _)]
+  refine integral_lt_integral_of_forall_lt (((integrable_ind (Q := Q) v _ z).const_mul _).add
+    ((integrable_ind (Q := Q) v _ z).const_mul _)) (integrable_ind (Q := Q) v _ z) fun z' => ?_
+  have := ind_strictConcave h Q hQ hv z' ⟨a, ha⟩ ⟨b, hb⟩
+    (fun he => hne (congrArg Subtype.val he)) θ hθ hθ1
+  convert this using 2
+  exact Prod.ext (Subtype.ext (by simp [cmb])) rfl
+
+/-- Fermat's rule for `c`: `c′(a) = 0` for `0 < a ≤ 1 − δ`, where `c` attains its minimum `0`. -/
+theorem ind_c_deriv_eq_zero (h : IndHyp U c δ δ' M r A z₁ z₂) {a c' : ℝ} (ha : 0 < a)
+    (ha' : a ≤ 1 - δ) (hc : HasDerivAt c c' a) : c' = 0 := by
+  have hmin : IsLocalMin c a := by
+    filter_upwards [Ioi_mem_nhds ha] with t ht
+    rw [h.c_zero a ha.le ha']
+    exact h.c_nonneg (le_of_lt ht)
+  exact hmin.hasDerivAt_eq_zero hc
+
+/-- `c′` is nondecreasing on `(0, ∞)`. -/
+theorem ind_c_deriv_mono (h : IndHyp U c δ δ' M r A z₁ z₂) {a b ca cb : ℝ} (ha : 0 < a)
+    (hab : a ≤ b) (hca : HasDerivAt c ca a) (hcb : HasDerivAt c cb b) : ca ≤ cb := by
+  rcases hab.eq_or_lt with rfl | hlt
+  · exact (hca.unique hcb).le
+  · exact (h.c_conv.le_slope_of_hasDerivAt (mem_Ici.2 ha.le) (mem_Ici.2 (ha.le.trans hlt.le))
+      hlt hca).trans (h.c_conv.slope_le_of_hasDerivAt (mem_Ici.2 ha.le)
+      (mem_Ici.2 (ha.le.trans hlt.le)) hlt hcb)
+
+/-- `c′` is strictly increasing on `[1 − δ, ∞)`. -/
+theorem ind_c_deriv_strict (h : IndHyp U c δ δ' M r A z₁ z₂) {a b ca cb : ℝ} (ha : 1 - δ ≤ a)
+    (hab : a < b) (hca : HasDerivAt c ca a) (hcb : HasDerivAt c cb b) : ca < cb :=
+  (h.c_sconv.lt_slope_of_hasDerivAt (mem_Ici.2 ha) (mem_Ici.2 (ha.trans hab.le)) hab hca).trans_le
+    (h.c_sconv.convexOn.slope_le_of_hasDerivAt (mem_Ici.2 ha) (mem_Ici.2 (ha.trans hab.le)) hab
+      hcb)
+
+/-- The tangent line of `c` at `a > 0` passes below `c(0) = 0`: `c(a) ≤ a c′(a)`. So the term
+`a c′(a) − c(a)` of `v_x` (10.4c) is nonnegative. -/
+theorem ind_c_le_mul_deriv (h : IndHyp U c δ δ' M r A z₁ z₂) {a ca : ℝ} (ha : 0 < a)
+    (hca : HasDerivAt c ca a) : c a ≤ a * ca := by
+  have hz : c 0 = 0 := h.c_zero 0 le_rfl h.one_sub_δ_nonneg
+  have := h.c_conv.slope_le_of_hasDerivAt (mem_Ici.2 le_rfl) (mem_Ici.2 ha.le) ha hca
+  rw [slope_def_field, hz, sub_zero, sub_zero, div_le_iff₀ ha] at this
+  linarith
+
+
+/-- **The first-order condition** (manual, Exercise 10.4d). If `y` is optimal at `(x, z)`, `c` has
+derivative `c′` at `y/x` and `W_z` has derivative `w` at `y`, then `c′(y/x) = (1 + r)⁻¹ w`. The
+optimum is interior: `y` maximizes the right side of (2) over all of `(0, ∞)`. -/
+theorem ind_foc (h : IndHyp U c δ δ' M r A z₁ z₂) (Q : Kernel (Icc z₁ z₂) (Icc z₁ z₂))
+    [IsMarkovKernel Q] (hQ : IsFeller Q) {v : Ioi (0 : ℝ) × Icc z₁ z₂ →ᵇ ℝ}
+    (hv : truncT (h.upperDP Q hQ) v = v) {x y : Ioi (0 : ℝ)} {z : Icc z₁ z₂}
+    (hy : y ∈ policy (indModel Q U c δ' M r) v (x, z)) {c' w : ℝ}
+    (hc : HasDerivAt c c' (y.1 / x.1)) (hW : HasDerivAt (indW Q v z) w y.1) :
+    c' = 1 / (1 + r) * w := by
+  have hx : 0 < x.1 := x.2
+  set φ : ℝ → ℝ := fun t => U x.1 z.1 - x.1 * c (t / x.1) + 1 / (1 + r) * indW Q v z t
+  have hdiv : HasDerivAt (fun t => t / x.1) (1 / x.1) y.1 := (hasDerivAt_id y.1).div_const x.1
+  have hφ : HasDerivAt φ (-(x.1 * (c' * (1 / x.1))) + 1 / (1 + r) * w) y.1 :=
+    ((((hc.comp y.1 hdiv).const_mul x.1).const_sub (U x.1 z.1)).add
+      (hW.const_mul (1 / (1 + r))))
+  have hmax : IsLocalMax φ y.1 := by
+    filter_upwards [Ioi_mem_nhds y.2] with t ht
+    have h1 := ind_rhs_le_v h Q hQ hv (x, z) ⟨t, ht⟩
+    rw [ind_rhs_W, hy.2, ind_rhs_W] at h1
+    exact h1
+  have h0 := hmax.hasDerivAt_eq_zero hφ
+  have e : x.1 * (c' * (1 / x.1)) = c' := by field_simp
+  linarith
+
+/-- **Gross investment is strictly positive**: `g(x, z) > (1 − δ)x` whenever `c` is
+differentiable at `1 − δ` (so `c′(1 − δ) = 0`). Raising `y` above `(1 − δ)x` by `ε` costs `o(ε)`
+but raises `W_z` by at least `ε [W_z(y + 1) − W_z(y)] > 0`, by concavity. In particular the
+qualifier "where gross investment is strictly positive" of Exercise 10.4e is always met. -/
+theorem ind_policy_gt (h : IndHyp U c δ δ' M r A z₁ z₂) (Q : Kernel (Icc z₁ z₂) (Icc z₁ z₂))
+    [IsMarkovKernel Q] (hQ : IsFeller Q) {v : Ioi (0 : ℝ) × Icc z₁ z₂ →ᵇ ℝ}
+    (hv : truncT (h.upperDP Q hQ) v = v) (hc0 : DifferentiableAt ℝ c (1 - δ))
+    {x y : Ioi (0 : ℝ)} {z : Icc z₁ z₂} (hy : y ∈ policy (indModel Q U c δ' M r) v (x, z)) :
+    (1 - δ) * x.1 < y.1 := by
+  have hx : 0 < x.1 := x.2
+  have hy0 : 0 < y.1 := y.2
+  have hlow := ((ind_policy h Q hQ hv).2.2 _ y hy).1
+  by_contra hle
+  push Not at hle
+  have hyx : y.1 = (1 - δ) * x.1 := le_antisymm hle hlow
+  have hd : HasDerivAt c 0 (1 - δ) := by
+    have := hc0.hasDerivAt
+    rwa [ind_c_deriv_eq_zero h h.one_sub_δ_pos le_rfl this] at this
+  have hc1 : c (1 - δ) = 0 := h.c_zero _ h.one_sub_δ_nonneg le_rfl
+  set W := indW Q v z with hWdef
+  have hβ : 0 < 1 / (1 + r) := one_div_pos.2 (by linarith [h.r_pos])
+  set κ := W (y.1 + 1) - W y.1 with hκdef
+  have hκ : 0 < κ := sub_pos.2 (indW_strictMonoOn h Q hQ hv z hy0
+    (show 0 < y.1 + 1 by linarith) (by linarith))
+  -- `c(1 − δ + s) ≤ (βκ/2)|s|` for small `s`
+  have hη : 0 < 1 / (1 + r) * κ / 2 := by positivity
+  obtain ⟨ρ, hρ, hball⟩ := Metric.eventually_nhds_iff.1
+    ((hasDerivAt_iff_isLittleO.1 hd).def hη)
+  set ε := min 1 (ρ * x.1 / 2) with hεdef
+  have hε0 : 0 < ε := lt_min one_pos (by positivity)
+  have hε1 : ε ≤ 1 := min_le_left _ _
+  have hε2 : ε ≤ ρ * x.1 / 2 := min_le_right _ _
+  have hdist : dist (1 - δ + ε / x.1) (1 - δ) < ρ := by
+    rw [Real.dist_eq, add_sub_cancel_left, abs_of_pos (div_pos hε0 hx), div_lt_iff₀ hx]
+    nlinarith
+  have hcε := hball hdist
+  rw [hc1, smul_zero, sub_zero, sub_zero, add_sub_cancel_left, Real.norm_eq_abs,
+    Real.norm_eq_abs, abs_of_pos (div_pos hε0 hx)] at hcε
+  have hcε' : c (1 - δ + ε / x.1) ≤ 1 / (1 + r) * κ / 2 * (ε / x.1) := (le_abs_self _).trans hcε
+  -- concavity: `W(y + ε) ≥ W(y) + εκ`
+  have hWc : W y.1 + ε * κ ≤ W (y.1 + ε) := by
+    have := (indW_strictConcaveOn h Q hQ hv z).concaveOn.2 (show (0 : ℝ) < y.1 from hy0)
+      (show (0 : ℝ) < y.1 + 1 by linarith) (by linarith : (0 : ℝ) ≤ 1 - ε) hε0.le (by ring)
+    simp only [smul_eq_mul] at this
+    rw [show (1 - ε) * y.1 + ε * (y.1 + 1) = y.1 + ε by ring] at this
+    rw [hκdef]
+    linarith
+  -- the deviation to `y + ε` beats `y`
+  have hdev := ind_rhs_le_v h Q hQ hv (x, z) ⟨y.1 + ε, mem_Ioi.2 (by linarith)⟩
+  rw [ind_rhs_W, hy.2, ind_rhs_W] at hdev
+  simp only at hdev
+  rw [show (y.1 + ε) / x.1 = 1 - δ + ε / x.1 by rw [hyx]; field_simp,
+    show y.1 / x.1 = 1 - δ by rw [hyx]; field_simp, hc1] at hdev
+  have hcost : x.1 * c (1 - δ + ε / x.1) ≤ 1 / (1 + r) * κ / 2 * ε := by
+    have := mul_le_mul_of_nonneg_left hcε' hx.le
+    rwa [show x.1 * (1 / (1 + r) * κ / 2 * (ε / x.1)) = 1 / (1 + r) * κ / 2 * ε by
+      field_simp] at this
+  have hgain := mul_le_mul_of_nonneg_left hWc hβ.le
+  nlinarith [mul_pos hβ (mul_pos hε0 hκ)]
+
+/-- **Differentiating `W_z`.** If `U(·, z′)` is differentiable on `(0, ∞)` for every `z′` and `c`
+is differentiable on `(0, ∞)`, then each `v(·, z′)` is differentiable (Exercise 10.4c,
+`ind_hasDerivAt_x`), with derivative `D(z′)` at `y`, and `W_z′(y) = ∫ D(z′) Q(z, dz′)`. The
+integral is differentiated under the integral sign: on `(y/2, 3y/2)` each `v(·, z′)` is concave
+and bounded by `‖v‖`, hence Lipschitz with a common constant. -/
+theorem indW_hasDerivAt (h : IndHyp U c δ δ' M r A z₁ z₂) (Q : Kernel (Icc z₁ z₂) (Icc z₁ z₂))
+    [IsMarkovKernel Q] (hQ : IsFeller Q) {v : Ioi (0 : ℝ) × Icc z₁ z₂ →ᵇ ℝ}
+    (hv : truncT (h.upperDP Q hQ) v = v)
+    (hUd : ∀ (z : Icc z₁ z₂) (q : ℝ), 0 < q → DifferentiableAt ℝ (fun q => U q z.1) q)
+    (hcd : ∀ a : ℝ, 0 < a → DifferentiableAt ℝ c a) (z : Icc z₁ z₂) {y : ℝ} (hy : 0 < y) :
+    ∃ D : Icc z₁ z₂ → ℝ, (∀ z', HasDerivAt (liftS fun u => v (u, z')) (D z') y) ∧
+      Integrable D (Q z) ∧ HasDerivAt (indW Q v z) (∫ z', D z' ∂Q z) y := by
+  have hdiff : ∀ z' : Icc z₁ z₂, DifferentiableAt ℝ (liftS fun u => v (u, z')) y := by
+    intro z'
+    obtain ⟨⟨y', hy', hval⟩, -, -⟩ := ind_max h Q hQ hv (⟨y, hy⟩, z')
+    exact (ind_hasDerivAt_x h Q hQ hv (x₀ := ⟨y, hy⟩) ⟨hy', hval⟩ (hUd z' y hy).hasDerivAt
+      (hcd _ (div_pos y'.2 hy)).hasDerivAt).differentiableAt
+  set D : Icc z₁ z₂ → ℝ := fun z' => deriv (liftS fun u => v (u, z')) y with hDdef
+  have hD : ∀ z', HasDerivAt (liftS fun u => v (u, z')) (D z') y :=
+    fun z' => (hdiff z').hasDerivAt
+  -- `D` is measurable: a pointwise limit of continuous difference quotients
+  have hpos : ∀ n : ℕ, y + 1 / ((n : ℝ) + 1) ∈ Ioi (0 : ℝ) := fun n =>
+    mem_Ioi.2 (by positivity)
+  have hDm : Measurable D := by
+    refine measurable_of_tendsto_metrizable (f := fun (n : ℕ) (z' : Icc z₁ z₂) =>
+      (1 / ((n : ℝ) + 1))⁻¹ • (liftS (fun u => v (u, z')) (y + 1 / ((n : ℝ) + 1)) -
+        liftS (fun u => v (u, z')) y)) (fun n => ?_) (tendsto_pi_nhds.2 fun z' => ?_)
+    · have e : (fun z' : Icc z₁ z₂ => (1 / ((n : ℝ) + 1))⁻¹ • (liftS (fun u => v (u, z'))
+          (y + 1 / ((n : ℝ) + 1)) - liftS (fun u => v (u, z')) y)) = fun z' =>
+          (1 / ((n : ℝ) + 1))⁻¹ • (v (⟨_, hpos n⟩, z') - v (⟨y, hy⟩, z')) := by
+        funext z'
+        rw [liftS_of_mem _ (hpos n), liftS_of_mem _ (mem_Ioi.2 hy)]
+      have hc1 : Continuous fun z' : Icc z₁ z₂ => v (⟨_, hpos n⟩, z') :=
+        v.continuous.comp (Continuous.prodMk_right _)
+      have hc2 : Continuous fun z' : Icc z₁ z₂ => v (⟨y, hy⟩, z') :=
+        v.continuous.comp (Continuous.prodMk_right _)
+      rw [e]
+      exact ((hc1.sub hc2).const_smul (1 / ((n : ℝ) + 1))⁻¹).measurable
+    · have hseq : Tendsto (fun n : ℕ => 1 / ((n : ℝ) + 1)) atTop (𝓝[>] 0) :=
+        tendsto_nhdsWithin_iff.2 ⟨tendsto_one_div_add_atTop_nhds_zero_nat,
+          Eventually.of_forall fun n => by simp only [mem_Ioi]; positivity⟩
+      exact (hD z').tendsto_slope_zero_right.comp hseq
+  -- dominated differentiation, as in Exercise 10.6c
+  set F : ℝ → Icc z₁ z₂ → ℝ := fun t z' => liftS (fun u => v (u, z')) t with hFdef
+  have hsub : ball y y ⊆ Ioi 0 := fun t ht => by
+    rw [mem_ball, Real.dist_eq] at ht
+    exact mem_Ioi.2 (by linarith [neg_abs_le (t - y)])
+  have hconc : ∀ z', ConcaveOn ℝ (ball y y) (F · z') := fun z' =>
+    (concaveOn_liftS (ind_strictConcave h Q hQ hv z').isConcaveS).subset hsub (convex_ball y y)
+  have hbd : ∀ z' t, dist t y < y → |F t z'| ≤ ‖v‖ := fun z' t ht => by
+    have htp : t ∈ Ioi (0 : ℝ) := hsub (mem_ball.2 ht)
+    simp only [F]
+    rw [liftS_of_mem _ htp, ← Real.norm_eq_abs]
+    exact v.norm_coe_le_norm _
+  have hy2 : (0 : ℝ) < y / 2 := by positivity
+  have hlip : ∀ z', LipschitzOnWith (Real.nnabs (2 * ‖v‖ / (y / 2))) (F · z')
+      (ball y (y - y / 2)) := fun z' => by
+    rw [Real.nnabs_of_nonneg (by positivity)]
+    exact (hconc z').lipschitzOnWith_of_abs_le hy2 fun a ha => hbd z' a ha
+  have hball : ball y (y - y / 2) ∈ 𝓝 y := ball_mem_nhds y (by linarith)
+  have hmeas : ∀ t ∈ ball y y, AEStronglyMeasurable (F t) (Q z) := by
+    intro t ht
+    have htp : 0 < t := hsub ht
+    have : F t = fun z' => v (⟨t, htp⟩, z') := ind_liftS_of_pos v htp
+    rw [this]
+    exact (v.continuous.comp (Continuous.prodMk_right _)).aestronglyMeasurable
+  have hFy : F y = fun z' => v (⟨y, hy⟩, z') := ind_liftS_of_pos v hy
+  obtain ⟨hint, hderiv⟩ := hasDerivAt_integral_of_dominated_loc_of_lip (μ := Q z)
+    (F := F) (F' := D) (bound := fun _ => 2 * ‖v‖ / (y / 2)) hball
+    (eventually_of_mem (ball_mem_nhds y hy) hmeas)
+    (by rw [hFy]; exact integrable_ind (Q := Q) v _ z)
+    hDm.aestronglyMeasurable (Eventually.of_forall hlip) (integrable_const _)
+    (Eventually.of_forall hD)
+  exact ⟨D, hD, hint, hderiv⟩
+
+/-- `W_z′` is strictly decreasing: `W_z` is strictly concave. -/
+theorem indW_deriv_lt (h : IndHyp U c δ δ' M r A z₁ z₂) (Q : Kernel (Icc z₁ z₂) (Icc z₁ z₂))
+    [IsMarkovKernel Q] (hQ : IsFeller Q) {v : Ioi (0 : ℝ) × Icc z₁ z₂ →ᵇ ℝ}
+    (hv : truncT (h.upperDP Q hQ) v = v) (z : Icc z₁ z₂) {y y' w w' : ℝ} (hy : 0 < y)
+    (hyy : y < y') (hw : HasDerivAt (indW Q v z) w y) (hw' : HasDerivAt (indW Q v z) w' y') :
+    w' < w :=
+  ((indW_strictConcaveOn h Q hQ hv z).lt_slope_of_hasDerivAt (mem_Ioi.2 hy)
+    (mem_Ioi.2 (hy.trans hyy)) hyy hw').trans
+    ((indW_strictConcaveOn h Q hQ hv z).slope_lt_of_hasDerivAt (mem_Ioi.2 hy)
+      (mem_Ioi.2 (hy.trans hyy)) hyy hw)
+
+/-- **Exercise 10.4d** (strict monotonicity in `x`). With `U(·, z)` and `c` differentiable on
+`(0, ∞)`, `x < x′` implies `g(x, z) < g(x′, z)`. If `g(x, z) = g(x′, z) = y`, the first-order
+conditions give `c′(y/x) = (1 + r)⁻¹ W_z′(y) = c′(y/x′)`; but `y/x′ < y/x`, and
+`y/x′ > 1 − δ` (`ind_policy_gt`), where `c′` is strictly increasing. -/
+theorem ind_policy_strictMono_x (h : IndHyp U c δ δ' M r A z₁ z₂)
+    (Q : Kernel (Icc z₁ z₂) (Icc z₁ z₂)) [IsMarkovKernel Q] (hQ : IsFeller Q)
+    {v : Ioi (0 : ℝ) × Icc z₁ z₂ →ᵇ ℝ} (hv : truncT (h.upperDP Q hQ) v = v)
+    (hUd : ∀ (z : Icc z₁ z₂) (q : ℝ), 0 < q → DifferentiableAt ℝ (fun q => U q z.1) q)
+    (hcd : ∀ a : ℝ, 0 < a → DifferentiableAt ℝ c a) {x x' y y' : Ioi (0 : ℝ)}
+    (hxx : x.1 < x'.1) (z : Icc z₁ z₂) (hy : y ∈ policy (indModel Q U c δ' M r) v (x, z))
+    (hy' : y' ∈ policy (indModel Q U c δ' M r) v (x', z)) : y.1 < y'.1 := by
+  rcases (ex_10_4d h Q hQ hv hxx.le z hy hy').lt_or_eq with hlt | heq
+  · exact hlt
+  exfalso
+  have hx : 0 < x.1 := x.2
+  have hy0 : 0 < y.1 := y.2
+  obtain ⟨D, -, -, hW⟩ := indW_hasDerivAt h Q hQ hv hUd hcd z hy0
+  have hc := (hcd _ (div_pos hy0 hx)).hasDerivAt
+  have hc' := (hcd _ (div_pos y'.2 x'.2)).hasDerivAt
+  have e1 := ind_foc h Q hQ hv hy hc hW
+  have hW' : HasDerivAt (indW Q v z) (∫ z', D z' ∂Q z) y'.1 := by rw [← heq]; exact hW
+  have e2 := ind_foc h Q hQ hv hy' hc' hW'
+  have hgt := ind_policy_gt h Q hQ hv (hcd _ h.one_sub_δ_pos) hy'
+  have h1 : 1 - δ ≤ y'.1 / x'.1 := by rw [le_div_iff₀ x'.2]; linarith
+  have h2 : y'.1 / x'.1 < y.1 / x.1 := by rw [← heq]; exact div_lt_div_of_pos_left hy0 hx hxx
+  have := ind_c_deriv_strict h h1 h2 hc' hc
+  linarith
+
+/-- **Exercise 10.4d** (the growth rate). With `U(·, z)` and `c` differentiable on `(0, ∞)`,
+`g(x, z)/x` is strictly decreasing in `x`. If `x < x′` and `g(x′, z)/x′ ≥ g(x, z)/x`, then
+`c′(g(x′, z)/x′) ≥ c′(g(x, z)/x)`, while `g(x′, z) > g(x, z)` and `W_z′` is strictly
+decreasing, so the first-order conditions give the reverse strict inequality. -/
+theorem ind_policy_ratio_lt (h : IndHyp U c δ δ' M r A z₁ z₂)
+    (Q : Kernel (Icc z₁ z₂) (Icc z₁ z₂)) [IsMarkovKernel Q] (hQ : IsFeller Q)
+    {v : Ioi (0 : ℝ) × Icc z₁ z₂ →ᵇ ℝ} (hv : truncT (h.upperDP Q hQ) v = v)
+    (hUd : ∀ (z : Icc z₁ z₂) (q : ℝ), 0 < q → DifferentiableAt ℝ (fun q => U q z.1) q)
+    (hcd : ∀ a : ℝ, 0 < a → DifferentiableAt ℝ c a) {x x' y y' : Ioi (0 : ℝ)}
+    (hxx : x.1 < x'.1) (z : Icc z₁ z₂) (hy : y ∈ policy (indModel Q U c δ' M r) v (x, z))
+    (hy' : y' ∈ policy (indModel Q U c δ' M r) v (x', z)) : y'.1 / x'.1 < y.1 / x.1 := by
+  by_contra hge
+  push Not at hge
+  have hlt := ind_policy_strictMono_x h Q hQ hv hUd hcd hxx z hy hy'
+  obtain ⟨D, -, -, hW⟩ := indW_hasDerivAt h Q hQ hv hUd hcd z y.2
+  obtain ⟨D', -, -, hW'⟩ := indW_hasDerivAt h Q hQ hv hUd hcd z y'.2
+  have hc := (hcd _ (div_pos y.2 x.2)).hasDerivAt
+  have hc' := (hcd _ (div_pos y'.2 x'.2)).hasDerivAt
+  have e1 := ind_foc h Q hQ hv hy hc hW
+  have e2 := ind_foc h Q hQ hv hy' hc' hW'
+  have hmono := ind_c_deriv_mono h (div_pos y.2 x.2) hge hc hc'
+  have hanti := indW_deriv_lt h Q hQ hv z y.2 hlt hW hW'
+  have hβ : 0 < 1 / (1 + r) := one_div_pos.2 (by linarith [h.r_pos])
+  nlinarith [mul_lt_mul_of_pos_left hanti hβ]
+
+/-- The growth rate is nonincreasing: `x ≤ x′` implies `g(x′, z)/x′ ≤ g(x, z)/x`. -/
+theorem ind_policy_ratio_le (h : IndHyp U c δ δ' M r A z₁ z₂)
+    (Q : Kernel (Icc z₁ z₂) (Icc z₁ z₂)) [IsMarkovKernel Q] (hQ : IsFeller Q)
+    {v : Ioi (0 : ℝ) × Icc z₁ z₂ →ᵇ ℝ} (hv : truncT (h.upperDP Q hQ) v = v)
+    (hUd : ∀ (z : Icc z₁ z₂) (q : ℝ), 0 < q → DifferentiableAt ℝ (fun q => U q z.1) q)
+    (hcd : ∀ a : ℝ, 0 < a → DifferentiableAt ℝ c a) {x x' y y' : Ioi (0 : ℝ)}
+    (hxx : x.1 ≤ x'.1) (z : Icc z₁ z₂) (hy : y ∈ policy (indModel Q U c δ' M r) v (x, z))
+    (hy' : y' ∈ policy (indModel Q U c δ' M r) v (x', z)) : y'.1 / x'.1 ≤ y.1 / x.1 := by
+  rcases hxx.lt_or_eq with hlt | heq
+  · exact (ind_policy_ratio_lt h Q hQ hv hUd hcd hlt z hy hy').le
+  · have hx : x = x' := Subtype.ext heq
+    subst hx
+    have hpol := (ind_policy h Q hQ hv).2.1
+    rw [(ind_policy h Q hQ hv).1.unique (x, z) y (hpol (x, z) ▸ hy) y' (hpol (x, z) ▸ hy')]
+
+/-- **Exercise 10.4d** (the slope). For `x < x′`,
+`g(x′, z) − g(x, z) < [g(x, z)/x](x′ − x)`: the slope of `g(·, z)` is below the growth rate.
+In particular the slope is below one wherever `g(x, z) ≤ x`. That the slope is below one
+everywhere is false (`ex_10_4d_slope_counterexample`). -/
+theorem ind_policy_slope_lt (h : IndHyp U c δ δ' M r A z₁ z₂)
+    (Q : Kernel (Icc z₁ z₂) (Icc z₁ z₂)) [IsMarkovKernel Q] (hQ : IsFeller Q)
+    {v : Ioi (0 : ℝ) × Icc z₁ z₂ →ᵇ ℝ} (hv : truncT (h.upperDP Q hQ) v = v)
+    (hUd : ∀ (z : Icc z₁ z₂) (q : ℝ), 0 < q → DifferentiableAt ℝ (fun q => U q z.1) q)
+    (hcd : ∀ a : ℝ, 0 < a → DifferentiableAt ℝ c a) {x x' y y' : Ioi (0 : ℝ)}
+    (hxx : x.1 < x'.1) (z : Icc z₁ z₂) (hy : y ∈ policy (indModel Q U c δ' M r) v (x, z))
+    (hy' : y' ∈ policy (indModel Q U c δ' M r) v (x', z)) :
+    y'.1 - y.1 < y.1 / x.1 * (x'.1 - x.1) := by
+  have hr := ind_policy_ratio_lt h Q hQ hv hUd hcd hxx z hy hy'
+  have hx : 0 < x.1 := x.2
+  have hx' : 0 < x'.1 := x'.2
+  rw [div_lt_iff₀ hx'] at hr
+  have e : y.1 / x.1 * (x'.1 - x.1) = y.1 / x.1 * x'.1 - y.1 := by field_simp
+  rw [e]
+  linarith
+
+/-! ### Exercise 10.4e: monotonicity in the demand shock -/
+
+/-- `f` has increasing differences in `(x, z)`: `f(x′, z) − f(x, z) ≤ f(x′, ẑ) − f(x, ẑ)` for
+`x ≤ x′` and `z ≤ ẑ`. -/
+def IndIncDiff (f : Ioi (0 : ℝ) × Icc z₁ z₂ → ℝ) : Prop :=
+  ∀ (x x' : Ioi (0 : ℝ)) (z zh : Icc z₁ z₂), x.1 ≤ x'.1 → z.1 ≤ zh.1 →
+    f (x', z) - f (x, z) ≤ f (x', zh) - f (x, zh)
+
+/-- Increasing differences is a closed condition. -/
+theorem isClosed_indIncDiff :
+    IsClosed {f : Ioi (0 : ℝ) × Icc z₁ z₂ →ᵇ ℝ | IndIncDiff (z₁ := z₁) (z₂ := z₂) f} := by
+  simp only [IndIncDiff, ofPred_forall]
+  exact isClosed_iInter fun x => isClosed_iInter fun x' => isClosed_iInter fun z =>
+    isClosed_iInter fun zh => isClosed_iInter fun _ => isClosed_iInter fun _ =>
+      isClosed_le ((continuous_eval_const _).sub (continuous_eval_const _))
+        ((continuous_eval_const _).sub (continuous_eval_const _))
+
+/-- With `Q` monotone, the expected value `∫ f(y, z′) Q(z, dz′)` of a function with increasing
+differences has increasing differences in `(y, z)`. -/
+theorem ind_E_incDiff (Q : Kernel (Icc z₁ z₂) (Icc z₁ z₂)) [IsMarkovKernel Q]
+    (hQm : IsMonotoneTF Q) {f : Ioi (0 : ℝ) × Icc z₁ z₂ →ᵇ ℝ} (hf : IndIncDiff f)
+    {y y' : Ioi (0 : ℝ)} (hyy : y.1 ≤ y'.1) {z zh : Icc z₁ z₂} (hzz : z ≤ zh) :
+    ∫ z', f (y', z') ∂Q z - ∫ z', f (y, z') ∂Q z ≤
+      ∫ z', f (y', z') ∂Q zh - ∫ z', f (y, z') ∂Q zh := by
+  rw [← integral_sub (integrable_ind (Q := Q) f y' z) (integrable_ind (Q := Q) f y z),
+    ← integral_sub (integrable_ind (Q := Q) f y' zh) (integrable_ind (Q := Q) f y zh)]
+  have hm : Measurable fun z' : Icc z₁ z₂ => f (y', z') - f (y, z') :=
+    ((f.continuous.comp (Continuous.prodMk_right y')).sub
+      (f.continuous.comp (Continuous.prodMk_right y))).measurable
+  refine hQm (fun z' => f (y', z') - f (y, z')) hm ⟨2 * ‖f‖, fun z' => ?_⟩
+    (fun a b hab => ?_) hzz
+  · have h1 := f.norm_coe_le_norm (y', z')
+    have h2 := f.norm_coe_le_norm (y, z')
+    rw [Real.norm_eq_abs] at h1 h2
+    exact (abs_sub _ _).trans (by linarith)
+  · have := hf y y' a b hyy hab
+    simp only
+    linarith
+
+/-- `T̃` preserves increasing differences in `(x, z)` (Topkis). Let `y₁` be optimal at
+`(x′, z)` and `y₂` at `(x, ẑ)`. If `y₁ ≤ y₂`, use `y₂` at `(x′, ẑ)` and `y₁` at `(x, z)`: the
+cost `x c(y/x)` has decreasing differences in `(x, y)`. If `y₂ < y₁`, use `y₁` at `(x′, ẑ)` and
+`y₂` at `(x, z)`: the continuation value has increasing differences in `(y, z)`. In both cases
+`U` has increasing differences in `(x, z)`. -/
+theorem ind_T_incDiff (h : IndHyp U c δ δ' M r A z₁ z₂) (Q : Kernel (Icc z₁ z₂) (Icc z₁ z₂))
+    [IsMarkovKernel Q] (hQ : IsFeller Q) (hQm : IsMonotoneTF Q)
+    (hUid : ∀ x x' z zh : ℝ, 0 < x → x ≤ x' → z₁ ≤ z → z ≤ zh → zh ≤ z₂ →
+      U x' z - U x z ≤ U x' zh - U x zh)
+    {f : Ioi (0 : ℝ) × Icc z₁ z₂ →ᵇ ℝ} (hfR : ∀ s, 0 ≤ f s ∧ f s ≤ A / (1 - 1 / (1 + r)))
+    (hfm : ∀ z, Monotone fun x => f (x, z)) (hf : IndIncDiff f) :
+    IndIncDiff (truncT (h.upperDP Q hQ) f) := by
+  intro x x' z zh hxx hzz
+  have hd := h.upperDP Q hQ
+  have hx : 0 < x.1 := x.2
+  have hβ : 0 < 1 / (1 + r) := one_div_pos.2 (by linarith [h.r_pos])
+  obtain ⟨y₁, -, hv₁, -⟩ := trunc_bellman_argmax hd hfR (x', z)
+  obtain ⟨y₂, -, hv₂, -⟩ := trunc_bellman_argmax hd hfR (x, zh)
+  have hU := hUid x.1 x'.1 z.1 zh.1 hx hxx z.2.1 hzz zh.2.2
+  rw [hv₁, hv₂]
+  rcases le_or_gt y₁.1 y₂.1 with h12 | h21
+  · have hA := ind_rhs_le h Q hQ hfR hfm (x', zh) y₂
+    have hB := ind_rhs_le h Q hQ hfR hfm (x, z) y₁
+    have hcost : x'.1 * (c (y₂.1 / x'.1) - c (y₁.1 / x'.1)) ≤
+        x.1 * (c (y₂.1 / x.1) - c (y₁.1 / x.1)) := by
+      rcases h12.lt_or_eq with hlt | heq
+      · exact ind_cost_submod h hx hxx y₁.2 hlt
+      · rw [heq]; simp
+    simp only [ind_rhs] at hA hB ⊢
+    simp only [indF] at hA hB ⊢
+    linarith
+  · have hA := ind_rhs_le h Q hQ hfR hfm (x', zh) y₁
+    have hB := ind_rhs_le h Q hQ hfR hfm (x, z) y₂
+    have hE := ind_E_incDiff Q hQm hf h21.le (show z ≤ zh from hzz)
+    simp only [ind_rhs] at hA hB ⊢
+    simp only [indF] at hA hB ⊢
+    nlinarith [mul_le_mul_of_nonneg_left hE hβ.le]
+
+/-- **`v` has increasing differences in `(x, z)`** when `Q` is monotone and `U` has increasing
+differences (the book's `D = U_x` increasing in `z`): `v(x′, z) − v(x, z) ≤ v(x′, ẑ) − v(x, ẑ)`.
+The set of functions with values in `[0, R]`, nondecreasing in `x`, with increasing differences,
+is closed and mapped into itself by `T̃` (`ind_T_incDiff`). This replaces the manual's claim that
+`v_x` is increasing in `z`, which ignores that `g(x, z)` moves with `z`. -/
+theorem ind_v_incDiff (h : IndHyp U c δ δ' M r A z₁ z₂) (Q : Kernel (Icc z₁ z₂) (Icc z₁ z₂))
+    [IsMarkovKernel Q] (hQ : IsFeller Q) (hQm : IsMonotoneTF Q)
+    (hUid : ∀ x x' z zh : ℝ, 0 < x → x ≤ x' → z₁ ≤ z → z ≤ zh → zh ≤ z₂ →
+      U x' z - U x z ≤ U x' zh - U x zh)
+    {v : Ioi (0 : ℝ) × Icc z₁ z₂ →ᵇ ℝ} (hv : truncT (h.upperDP Q hQ) v = v) : IndIncDiff v := by
+  have hd := h.upperDP Q hQ
+  have hb := truncModel_boundedDP hd (truncK_pos hd).le
+  set B : Set (Ioi (0 : ℝ) × Icc z₁ z₂ →ᵇ ℝ) :=
+    {f | (∀ s, 0 ≤ f s ∧ f s ≤ A / (1 - 1 / (1 + r))) ∧ ∀ z, Monotone fun x => f (x, z)}
+  set S' := B ∩ {f | IndIncDiff (z₁ := z₁) (z₂ := z₂) f}
+  have hclosed : IsClosed S' :=
+    ((isClosed_bounds _).inter isClosed_monoX).inter isClosed_indIncDiff
+  have hmaps : MapsTo (truncT hd) S' S' := fun f hf =>
+    ⟨⟨truncT_mapsTo hd hf.1.1, fun z => (ind_T_strictMono_x h Q hQ hf.1.1 hf.1.2 z).monotone⟩,
+      ind_T_incDiff h Q hQ hQm hUid hf.1.1 hf.1.2 hf.2⟩
+  exact (corollary_1 (S' := S') (S'' := S') (bellman_contraction _ hb) hv
+    ⟨0, ⟨fun _ => ⟨le_rfl, div_nonneg hd.A_nonneg (by linarith [hd.β_lt])⟩,
+      fun _ _ _ _ => le_rfl⟩, fun _ _ _ _ _ _ => by simp⟩ hclosed hmaps hmaps).1.2
+
+/-- **Exercise 10.4e** (monotonicity in `z`). If `Q` is monotone and `U` has increasing
+differences in `(x, z)` (as when `D = U_x` is increasing in `z`), then `g(x, ·)` is
+nondecreasing: `z ≤ ẑ` implies `g(x, z) ≤ g(x, ẑ)`. By `ind_v_incDiff` and monotonicity of `Q`,
+the objective `−x c(y/x) + β∫v(y, z′)Q(z, dz′)` has increasing differences in `(y, z)`, so if
+`g(x, ẑ) < g(x, z)` then `g(x, z)` is also optimal at `ẑ`, contradicting uniqueness. -/
+theorem ex_10_4e (h : IndHyp U c δ δ' M r A z₁ z₂) (Q : Kernel (Icc z₁ z₂) (Icc z₁ z₂))
+    [IsMarkovKernel Q] (hQ : IsFeller Q) (hQm : IsMonotoneTF Q)
+    (hUid : ∀ x x' z zh : ℝ, 0 < x → x ≤ x' → z₁ ≤ z → z ≤ zh → zh ≤ z₂ →
+      U x' z - U x z ≤ U x' zh - U x zh)
+    {v : Ioi (0 : ℝ) × Icc z₁ z₂ →ᵇ ℝ} (hv : truncT (h.upperDP Q hQ) v = v)
+    {x y yh : Ioi (0 : ℝ)} {z zh : Icc z₁ z₂} (hzz : z.1 ≤ zh.1)
+    (hy : y ∈ policy (indModel Q U c δ' M r) v (x, z))
+    (hyh : yh ∈ policy (indModel Q U c δ' M r) v (x, zh)) : y.1 ≤ yh.1 := by
+  by_contra hlt
+  push Not at hlt
+  have hβ : 0 < 1 / (1 + r) := one_div_pos.2 (by linarith [h.r_pos])
+  have hE := ind_E_incDiff Q hQm (ind_v_incDiff h Q hQ hQm hUid hv) (y := yh) (y' := y) hlt.le
+    (show z ≤ zh from hzz)
+  have h0 := ((ind_mem_policy_iff h Q hQ hv _ _).1 hy).2 yh hyh.1
+  have hopt : y ∈ policy (indModel Q U c δ' M r) v (x, zh) := by
+    refine (ind_mem_policy_iff h Q hQ hv _ _).2 ⟨hy.1, fun w hw => ?_⟩
+    refine (((ind_mem_policy_iff h Q hQ hv _ _).1 hyh).2 w hw).trans ?_
+    simp only [ind_rhs] at h0 ⊢
+    simp only [indF] at h0 ⊢
+    nlinarith [mul_le_mul_of_nonneg_left hE hβ.le]
+  have hpol := (ind_policy h Q hQ hv).2.1
+  have := (ind_policy h Q hQ hv).1.unique (x, zh) y (hpol (x, zh) ▸ hopt) yh
+    (hpol (x, zh) ▸ hyh)
+  rw [this] at hlt
+  exact lt_irrefl _ hlt
+
+/-- **Exercise 10.4e**, strict form, corrected. If moreover the expected marginal value of
+capital at `y = g(x, z)` is strictly higher under `ẑ`, `W_z′(y) < W_ẑ′(y)`, then
+`g(x, z) < g(x, ẑ)`: equality would make both first-order conditions read `c′(y/x)`. Without
+such a condition strict monotonicity fails (`ex_10_4e_strict_counterexample`). -/
+theorem ex_10_4e_strict (h : IndHyp U c δ δ' M r A z₁ z₂)
+    (Q : Kernel (Icc z₁ z₂) (Icc z₁ z₂)) [IsMarkovKernel Q] (hQ : IsFeller Q)
+    (hQm : IsMonotoneTF Q)
+    (hUid : ∀ x x' z zh : ℝ, 0 < x → x ≤ x' → z₁ ≤ z → z ≤ zh → zh ≤ z₂ →
+      U x' z - U x z ≤ U x' zh - U x zh)
+    {v : Ioi (0 : ℝ) × Icc z₁ z₂ →ᵇ ℝ} (hv : truncT (h.upperDP Q hQ) v = v)
+    {x y yh : Ioi (0 : ℝ)} {z zh : Icc z₁ z₂} (hzz : z.1 ≤ zh.1)
+    (hy : y ∈ policy (indModel Q U c δ' M r) v (x, z))
+    (hyh : yh ∈ policy (indModel Q U c δ' M r) v (x, zh)) (hcd : DifferentiableAt ℝ c (y.1 / x.1))
+    {w wh : ℝ} (hw : HasDerivAt (indW Q v z) w y.1) (hwh : HasDerivAt (indW Q v zh) wh y.1)
+    (hwwh : w < wh) : y.1 < yh.1 := by
+  rcases (ex_10_4e h Q hQ hQm hUid hv hzz hy hyh).lt_or_eq with hlt | heq
+  · exact hlt
+  exfalso
+  have hβ : 0 < 1 / (1 + r) := one_div_pos.2 (by linarith [h.r_pos])
+  have e1 := ind_foc h Q hQ hv hy hcd.hasDerivAt hw
+  have hc' : HasDerivAt c (deriv c (y.1 / x.1)) (yh.1 / x.1) := by rw [← heq]; exact hcd.hasDerivAt
+  have hwh' : HasDerivAt (indW Q v zh) wh yh.1 := by rw [← heq]; exact hwh
+  have e2 := ind_foc h Q hQ hv hyh hc' hwh'
+  nlinarith [mul_lt_mul_of_pos_left hwwh hβ]
+
+/-! ### Exercise 10.4f: the stationary point -/
+
+/-- **Growth from small capacity.** Suppose that for some `y₀ > 0` the marginal surplus
+`U_x(y₀, z′)` exceeds `(1 + r)c′(1)` for every `z′` (the condition of the manual,
+`(1 + r)c′(1) < D(0, z)`, at a positive capacity). Then `g(x, z) > x` for `0 < x ≤ y₀`, for any
+`Q`. Otherwise `a = g(x, z)/x ≤ 1`, so `c′(a) ≤ c′(1)`; but by the envelope condition
+`v_x(y, z′) = U_x(y, z′) + a′c′(a′) − c(a′) ≥ U_x(y, z′) ≥ U_x(y₀, z′)` at `y = g(x, z) ≤ y₀`,
+so the first-order condition gives `c′(a) = (1 + r)⁻¹ ∫ v_x(y, z′) Q(z, dz′) > c′(1)`. -/
+theorem ind_policy_gt_self (h : IndHyp U c δ δ' M r A z₁ z₂)
+    (Q : Kernel (Icc z₁ z₂) (Icc z₁ z₂)) [IsMarkovKernel Q] (hQ : IsFeller Q)
+    {v : Ioi (0 : ℝ) × Icc z₁ z₂ →ᵇ ℝ} (hv : truncT (h.upperDP Q hQ) v = v)
+    (hUd : ∀ (z : Icc z₁ z₂) (q : ℝ), 0 < q → DifferentiableAt ℝ (fun q => U q z.1) q)
+    (hcd : ∀ a : ℝ, 0 < a → DifferentiableAt ℝ c a) {y₀ : ℝ} (hy₀ : 0 < y₀)
+    (hpos : ∀ z' : Icc z₁ z₂, (1 + r) * deriv c 1 < deriv (fun q => U q z'.1) y₀)
+    {x y : Ioi (0 : ℝ)} (hxy₀ : x.1 ≤ y₀) {z : Icc z₁ z₂}
+    (hy : y ∈ policy (indModel Q U c δ' M r) v (x, z)) : x.1 < y.1 := by
+  by_contra hle
+  push Not at hle
+  have hx : 0 < x.1 := x.2
+  have hy0 : 0 < y.1 := y.2
+  obtain ⟨D, hD, hDi, hW⟩ := indW_hasDerivAt h Q hQ hv hUd hcd z hy0
+  have hc := (hcd _ (div_pos hy0 hx)).hasDerivAt
+  have e1 := ind_foc h Q hQ hv hy hc hW
+  have hDlow : ∀ z', (1 + r) * deriv c 1 < D z' := by
+    intro z'
+    obtain ⟨⟨y', hy', hval⟩, -, -⟩ := ind_max h Q hQ hv (y, z')
+    have hca := (hcd _ (div_pos y'.2 hy0)).hasDerivAt
+    have hUa := (hUd z' y.1 hy0).hasDerivAt
+    have hDeq := (hD z').unique (ind_hasDerivAt_x h Q hQ hv (x₀ := y) ⟨hy', hval⟩ hUa hca)
+    have htan := ind_c_le_mul_deriv h (div_pos y'.2 hy0) hca
+    have hUmono : deriv (fun q => U q z'.1) y₀ ≤ deriv (fun q => U q z'.1) y.1 := by
+      rcases (hle.trans hxy₀).lt_or_eq with hlt | heq
+      · have hconc := (h.U_conc z'.1 z'.2).concaveOn
+        exact (hconc.le_slope_of_hasDerivAt (mem_Ici.2 hy0.le) (mem_Ici.2 hy₀.le) hlt
+          (hUd z' y₀ hy₀).hasDerivAt).trans
+          (hconc.slope_le_of_hasDerivAt (mem_Ici.2 hy0.le) (mem_Ici.2 hy₀.le) hlt hUa)
+      · rw [heq]
+    linarith [hpos z']
+  have hint : (1 + r) * deriv c 1 < ∫ z', D z' ∂Q z := by
+    have := integral_lt_integral_of_forall_lt (integrable_const ((1 + r) * deriv c 1)) hDi hDlow
+    simpa using this
+  have hmono := ind_c_deriv_mono h (div_pos hy0 hx) ((div_le_one hx).2 hle) hc
+    (hcd 1 one_pos).hasDerivAt
+  have hβ : 0 < 1 / (1 + r) := one_div_pos.2 (by linarith [h.r_pos])
+  have e2 : 1 / (1 + r) * ((1 + r) * deriv c 1) = deriv c 1 := by
+    field_simp [show (1 + r) ≠ 0 by linarith [h.r_pos]]
+  nlinarith [mul_lt_mul_of_pos_left hint hβ]
+
+/-- A positive sequence that rises whenever it is below some `b > 0` does not tend to `0`. -/
+theorem ind_not_tendsto_zero (xs : ℕ → Ioi (0 : ℝ)) {b : ℝ} (hb : 0 < b)
+    (hgrow : ∀ t, (xs t).1 < b → (xs t).1 < (xs (t + 1)).1) :
+    ¬ Tendsto (fun t => (xs t).1) atTop (𝓝 0) := by
+  intro hlim
+  obtain ⟨T, hT⟩ := eventually_atTop.1 (hlim.eventually (gt_mem_nhds hb))
+  have hup : ∀ t ≥ T, (xs T).1 ≤ (xs t).1 := by
+    intro t ht
+    induction t, ht using Nat.le_induction with
+    | base => exact le_rfl
+    | succ t ht ih => exact ih.trans (hgrow t (hT t ht)).le
+  have := ge_of_tendsto hlim (eventually_atTop.2 ⟨T, hup⟩)
+  linarith [(xs T).2.out]
+
+/-- **Uniqueness of the positive stationary point** of `g(·, z)`: if `p = g(p, z)` and
+`p′ = g(p′, z)` then `p = p′`, because `g(x, z)/x` is strictly decreasing
+(`ind_policy_ratio_lt`). -/
+theorem ind_stationary_unique (h : IndHyp U c δ δ' M r A z₁ z₂)
+    (Q : Kernel (Icc z₁ z₂) (Icc z₁ z₂)) [IsMarkovKernel Q] (hQ : IsFeller Q)
+    {v : Ioi (0 : ℝ) × Icc z₁ z₂ →ᵇ ℝ} (hv : truncT (h.upperDP Q hQ) v = v)
+    (hUd : ∀ (z : Icc z₁ z₂) (q : ℝ), 0 < q → DifferentiableAt ℝ (fun q => U q z.1) q)
+    (hcd : ∀ a : ℝ, 0 < a → DifferentiableAt ℝ c a) {p p' : Ioi (0 : ℝ)} {z : Icc z₁ z₂}
+    (hp : p ∈ policy (indModel Q U c δ' M r) v (p, z))
+    (hp' : p' ∈ policy (indModel Q U c δ' M r) v (p', z)) : p = p' := by
+  have hp0 : 0 < p.1 := p.2
+  have hp0' : 0 < p'.1 := p'.2
+  rcases lt_trichotomy p.1 p'.1 with hlt | heq | hgt
+  · have := ind_policy_ratio_lt h Q hQ hv hUd hcd hlt z hp hp'
+    rw [div_self hp0.ne', div_self hp0'.ne'] at this
+    exact absurd this (lt_irrefl 1)
+  · exact Subtype.ext heq
+  · have := ind_policy_ratio_lt h Q hQ hv hUd hcd hgt z hp' hp
+    rw [div_self hp0.ne', div_self hp0'.ne'] at this
+    exact absurd this (lt_irrefl 1)
+
+/-- **A positive limit is stationary.** Under i.i.d. shocks, if an optimal path converges to
+`L > 0` then `L = g(L)`. For `x` near `L`, `g(x)` lies between `g(L)` and `g(L)x/L` (`g` is
+nondecreasing and `g(x)/x` nonincreasing), so `g(xₜ) → g(L)`. -/
+theorem ind_limit_stationary (h : IndHyp U c δ δ' M r A z₁ z₂)
+    (Q : Kernel (Icc z₁ z₂) (Icc z₁ z₂)) [IsMarkovKernel Q] (hQ : IsFeller Q)
+    (hiid : ∀ z z', Q z = Q z') {v : Ioi (0 : ℝ) × Icc z₁ z₂ →ᵇ ℝ}
+    (hv : truncT (h.upperDP Q hQ) v = v)
+    (hUd : ∀ (z : Icc z₁ z₂) (q : ℝ), 0 < q → DifferentiableAt ℝ (fun q => U q z.1) q)
+    (hcd : ∀ a : ℝ, 0 < a → DifferentiableAt ℝ c a) (xs : ℕ → Ioi (0 : ℝ))
+    (zs : ℕ → Icc z₁ z₂) (hseq : ∀ t, xs (t + 1) ∈ policy (indModel Q U c δ' M r) v (xs t, zs t))
+    {L : ℝ} (hL : 0 < L) (hlim : Tendsto (fun t => (xs t).1) atTop (𝓝 L)) (z : Icc z₁ z₂) :
+    (⟨L, hL⟩ : Ioi (0 : ℝ)) ∈ policy (indModel Q U c δ' M r) v (⟨L, hL⟩, z) := by
+  set pL : Ioi (0 : ℝ) := ⟨L, hL⟩
+  obtain ⟨⟨yh, hyh, hval⟩, -, -⟩ := ind_max h Q hQ hv (pL, z)
+  have hyhp : yh ∈ policy (indModel Q U c δ' M r) v (pL, z) := ⟨hyh, hval⟩
+  have hmove : ∀ t, xs (t + 1) ∈ policy (indModel Q U c δ' M r) v (xs t, z) :=
+    fun t => ex_10_4f h Q hQ hiid hv (xs t) (zs t) z ▸ hseq t
+  have hyh0 : 0 < yh.1 := yh.2
+  -- the sandwich
+  have hlow : ∀ t, min yh.1 (yh.1 * (xs t).1 / L) ≤ (xs (t + 1)).1 := by
+    intro t
+    have hx : 0 < (xs t).1 := (xs t).2
+    rcases le_total (xs t).1 L with hle | hge
+    · refine min_le_of_right_le ?_
+      have := ind_policy_ratio_le h Q hQ hv hUd hcd (x := xs t) (x' := pL) hle z (hmove t) hyhp
+      rw [div_le_div_iff₀ hL hx] at this
+      rw [div_le_iff₀ hL]
+      linarith
+    · exact min_le_of_left_le (ex_10_4d h Q hQ hv (x := pL) (x' := xs t) hge z hyhp (hmove t))
+  have hup : ∀ t, (xs (t + 1)).1 ≤ max yh.1 (yh.1 * (xs t).1 / L) := by
+    intro t
+    have hx : 0 < (xs t).1 := (xs t).2
+    rcases le_total (xs t).1 L with hle | hge
+    · exact le_max_of_le_left (ex_10_4d h Q hQ hv (x := xs t) (x' := pL) hle z (hmove t) hyhp)
+    · refine le_max_of_le_right ?_
+      have := ind_policy_ratio_le h Q hQ hv hUd hcd (x := pL) (x' := xs t) hge z hyhp (hmove t)
+      rw [div_le_div_iff₀ hx hL] at this
+      rw [le_div_iff₀ hL]
+      linarith
+  have hscaled : Tendsto (fun t => yh.1 * (xs t).1 / L) atTop (𝓝 yh.1) := by
+    have := (hlim.const_mul yh.1).div_const L
+    rwa [mul_div_assoc, div_self hL.ne', mul_one] at this
+  have hnext : Tendsto (fun t => (xs (t + 1)).1) atTop (𝓝 yh.1) :=
+    tendsto_of_tendsto_of_tendsto_of_le_of_le
+      (by simpa using (tendsto_const_nhds (x := yh.1)).min hscaled)
+      (by simpa using (tendsto_const_nhds (x := yh.1)).max hscaled) hlow hup
+  have heq : yh.1 = L := tendsto_nhds_unique hnext ((tendsto_add_atTop_iff_nat 1).2 hlim)
+  have : yh = pL := Subtype.ext heq
+  rwa [this] at hyhp
+
+/-- **Exercise 10.4f** (the limit does not depend on `x₀`). Under i.i.d. shocks, with `U(·, z)`
+and `c` differentiable, any two optimal capacity paths, from any `x₀, x₀′ > 0` and along any
+shock paths, have the same limit. Positive limits are stationary (`ind_limit_stationary`) and
+the positive stationary point is unique (`ind_stationary_unique`); and no path tends to `0` if
+a positive stationary point `p` exists, since `g(x) > x` for `x < p`. -/
+theorem ex_10_4f_limit_eq (h : IndHyp U c δ δ' M r A z₁ z₂)
+    (Q : Kernel (Icc z₁ z₂) (Icc z₁ z₂)) [IsMarkovKernel Q] (hQ : IsFeller Q)
+    (hiid : ∀ z z', Q z = Q z') {v : Ioi (0 : ℝ) × Icc z₁ z₂ →ᵇ ℝ}
+    (hv : truncT (h.upperDP Q hQ) v = v)
+    (hUd : ∀ (z : Icc z₁ z₂) (q : ℝ), 0 < q → DifferentiableAt ℝ (fun q => U q z.1) q)
+    (hcd : ∀ a : ℝ, 0 < a → DifferentiableAt ℝ c a) (xs xs' : ℕ → Ioi (0 : ℝ))
+    (zs zs' : ℕ → Icc z₁ z₂)
+    (hseq : ∀ t, xs (t + 1) ∈ policy (indModel Q U c δ' M r) v (xs t, zs t))
+    (hseq' : ∀ t, xs' (t + 1) ∈ policy (indModel Q U c δ' M r) v (xs' t, zs' t)) {L L' : ℝ}
+    (hL : Tendsto (fun t => (xs t).1) atTop (𝓝 L))
+    (hL' : Tendsto (fun t => (xs' t).1) atTop (𝓝 L')) : L = L' := by
+  have hL0 : 0 ≤ L := ge_of_tendsto hL (Eventually.of_forall fun t => (xs t).2.out.le)
+  have hL0' : 0 ≤ L' := ge_of_tendsto hL' (Eventually.of_forall fun t => (xs' t).2.out.le)
+  set z := zs 0
+  -- a path cannot tend to `0` when a positive stationary point exists
+  have key : ∀ (ys : ℕ → Ioi (0 : ℝ)) (ws : ℕ → Icc z₁ z₂),
+      (∀ t, ys (t + 1) ∈ policy (indModel Q U c δ' M r) v (ys t, ws t)) →
+      ∀ p : Ioi (0 : ℝ), p ∈ policy (indModel Q U c δ' M r) v (p, z) →
+      ¬ Tendsto (fun t => (ys t).1) atTop (𝓝 0) := by
+    intro ys ws hys p hp
+    refine ind_not_tendsto_zero ys p.2 fun t ht => ?_
+    have hmv : ys (t + 1) ∈ policy (indModel Q U c δ' M r) v (ys t, z) :=
+      ex_10_4f h Q hQ hiid hv (ys t) (ws t) z ▸ hys t
+    have := ind_policy_ratio_lt h Q hQ hv hUd hcd (x := ys t) (x' := p) ht z hmv hp
+    rw [div_self (ne_of_gt p.2), lt_div_iff₀ (ys t).2] at this
+    linarith
+  rcases hL0.lt_or_eq with hpos | hzero <;> rcases hL0'.lt_or_eq with hpos' | hzero'
+  · exact congrArg Subtype.val (ind_stationary_unique h Q hQ hv hUd hcd
+      (ind_limit_stationary h Q hQ hiid hv hUd hcd xs zs hseq hpos hL z)
+      (ind_limit_stationary h Q hQ hiid hv hUd hcd xs' zs' hseq' hpos' hL' z))
+  · exact absurd (hzero' ▸ hL') (key xs' zs' hseq' _
+      (ind_limit_stationary h Q hQ hiid hv hUd hcd xs zs hseq hpos hL z))
+  · exact absurd (hzero ▸ hL) (key xs zs hseq _
+      (ind_limit_stationary h Q hQ hiid hv hUd hcd xs' zs' hseq' hpos' hL' z))
+  · rw [← hzero, ← hzero']
+
+/-- **Exercise 10.4f** (positivity). If `U_x(y₀, z′) > (1 + r)c′(1)` for all `z′` at some
+`y₀ > 0`, every convergent optimal path has a positive limit: below `y₀` capacity grows
+(`ind_policy_gt_self`). This holds for any `Q`. -/
+theorem ex_10_4f_limit_pos (h : IndHyp U c δ δ' M r A z₁ z₂)
+    (Q : Kernel (Icc z₁ z₂) (Icc z₁ z₂)) [IsMarkovKernel Q] (hQ : IsFeller Q)
+    {v : Ioi (0 : ℝ) × Icc z₁ z₂ →ᵇ ℝ} (hv : truncT (h.upperDP Q hQ) v = v)
+    (hUd : ∀ (z : Icc z₁ z₂) (q : ℝ), 0 < q → DifferentiableAt ℝ (fun q => U q z.1) q)
+    (hcd : ∀ a : ℝ, 0 < a → DifferentiableAt ℝ c a) {y₀ : ℝ} (hy₀ : 0 < y₀)
+    (hpos : ∀ z' : Icc z₁ z₂, (1 + r) * deriv c 1 < deriv (fun q => U q z'.1) y₀)
+    (xs : ℕ → Ioi (0 : ℝ)) (zs : ℕ → Icc z₁ z₂)
+    (hseq : ∀ t, xs (t + 1) ∈ policy (indModel Q U c δ' M r) v (xs t, zs t)) {L : ℝ}
+    (hL : Tendsto (fun t => (xs t).1) atTop (𝓝 L)) : 0 < L := by
+  have hL0 : 0 ≤ L := ge_of_tendsto hL (Eventually.of_forall fun t => (xs t).2.out.le)
+  rcases hL0.lt_or_eq with hpos' | hzero
+  · exact hpos'
+  · exact absurd (hzero ▸ hL) (ind_not_tendsto_zero xs hy₀ fun t ht =>
+      ind_policy_gt_self h Q hQ hv hUd hcd hy₀ hpos ht.le (hseq t))
+
+/-- **Exercise 10.4f.** Under i.i.d. shocks, with `U(·, z)` and `c` differentiable on `(0, ∞)`,
+there is `x̂ ≥ 0` such that every optimal capacity path, from any `x₀ > 0` and along any shock
+path, converges to `x̂`; if `x̂ > 0` it is the unique positive stationary point,
+`x̂ = g(x̂, z)` for all `z`; and if `U_x(y₀, z′) > (1 + r)c′(1)` for all `z′` at some
+`y₀ > 0`, then `x̂ > 0`. Without such a condition `x̂` may be `0`, where capacity dies out. -/
+theorem ex_10_4f_stationary (h : IndHyp U c δ δ' M r A z₁ z₂)
+    (Q : Kernel (Icc z₁ z₂) (Icc z₁ z₂)) [IsMarkovKernel Q] (hQ : IsFeller Q)
+    (hiid : ∀ z z', Q z = Q z') {v : Ioi (0 : ℝ) × Icc z₁ z₂ →ᵇ ℝ}
+    (hv : truncT (h.upperDP Q hQ) v = v)
+    (hUd : ∀ (z : Icc z₁ z₂) (q : ℝ), 0 < q → DifferentiableAt ℝ (fun q => U q z.1) q)
+    (hcd : ∀ a : ℝ, 0 < a → DifferentiableAt ℝ c a) :
+    ∃ xh : ℝ, 0 ≤ xh ∧
+      (∀ (xs : ℕ → Ioi (0 : ℝ)) (zs : ℕ → Icc z₁ z₂),
+        (∀ t, xs (t + 1) ∈ policy (indModel Q U c δ' M r) v (xs t, zs t)) →
+        Tendsto (fun t => (xs t).1) atTop (𝓝 xh)) ∧
+      (∀ hxh : 0 < xh, ∀ z,
+        (⟨xh, hxh⟩ : Ioi (0 : ℝ)) ∈ policy (indModel Q U c δ' M r) v (⟨xh, hxh⟩, z)) ∧
+      ∀ y₀ : ℝ, 0 < y₀ →
+        (∀ z' : Icc z₁ z₂, (1 + r) * deriv c 1 < deriv (fun q => U q z'.1) y₀) → 0 < xh := by
+  -- a reference path from `x₀ = 1` under the shock `z₁`
+  have z0 : Icc z₁ z₂ := ⟨z₁, le_rfl, h.z_le⟩
+  have hex : ∀ x : Ioi (0 : ℝ), ∃ y, y ∈ policy (indModel Q U c δ' M r) v (x, z0) := fun x => by
+    obtain ⟨⟨y, hy, hval⟩, -, -⟩ := ind_max h Q hQ hv (x, z0)
+    exact ⟨y, hy, hval⟩
+  set xs : ℕ → Ioi (0 : ℝ) := fun t =>
+    Nat.rec (motive := fun _ => Ioi (0 : ℝ)) ⟨1, mem_Ioi.2 one_pos⟩ (fun _ x => (hex x).choose) t
+  have hseq : ∀ t, xs (t + 1) ∈ policy (indModel Q U c δ' M r) v (xs t, z0) :=
+    fun t => (hex (xs t)).choose_spec
+  obtain ⟨L, hL⟩ := ex_10_4f_tendsto h Q hQ hiid hv xs (fun _ => z0) hseq
+  have hL0 : 0 ≤ L := ge_of_tendsto hL (Eventually.of_forall fun t => (xs t).2.out.le)
+  refine ⟨L, hL0, fun xs' zs' hseq' => ?_, fun hxh z =>
+    ind_limit_stationary h Q hQ hiid hv hUd hcd xs (fun _ => z0) hseq hxh hL z,
+    fun y₀ hy₀ hpos => ex_10_4f_limit_pos h Q hQ hv hUd hcd hy₀ hpos xs (fun _ => z0) hseq hL⟩
+  obtain ⟨L', hL'⟩ := ex_10_4f_tendsto h Q hQ hiid hv xs' zs' hseq'
+  rwa [ex_10_4f_limit_eq h Q hQ hiid hv hUd hcd xs xs' (fun _ => z0) zs' hseq hseq' hL hL']
+
+/-! ### Counterexamples -/
+
+/-- Consumers' surplus `U(q, z) = 10 z q/(1 + q)`, from the demand curve
+`D(q, z) = 10z/(1 + q)²`, which is continuous, strictly decreasing in `q` and strictly increasing
+in `z`. -/
+noncomputable def indU0 (q z : ℝ) : ℝ := 10 * z * (q / (1 + q))
+
+/-- `U_x(q, z) = 10z/(1 + q)²`. -/
+theorem hasDerivAt_indU0 (z : ℝ) {q : ℝ} (hq : 0 ≤ q) :
+    HasDerivAt (fun q => indU0 q z) (10 * z / (1 + q) ^ 2) q := by
+  have h1 : (1 + q) ≠ 0 := by linarith
+  have := ((hasDerivAt_id' q).fun_div ((hasDerivAt_id' q).const_add 1) h1).const_mul (10 * z)
+  convert this using 1
+  · rfl
+  · rw [show 1 * (1 + q) - q * 1 = (1 : ℝ) by ring]
+    ring
+
+/-- `c(a) = max{a − ½, 0}²` has derivative `2 max{a − ½, 0}` everywhere. -/
+theorem hasDerivAt_cq (a : ℝ) : HasDerivAt cq (2 * max (a - 1 / 2) 0) a := by
+  have hsq : HasDerivAt (fun t : ℝ => (t - 1 / 2) ^ 2) (2 * (a - 1 / 2)) a := by
+    have := ((hasDerivAt_id' a).sub_const (1 / 2)).fun_pow 2
+    convert this using 1
+    norm_num
+  rcases lt_trichotomy a (1 / 2) with hlt | heq | hgt
+  · have hev : cq =ᶠ[𝓝 a] fun _ => 0 := by
+      filter_upwards [Iio_mem_nhds hlt] with t ht
+      simp only [cq, max_eq_right (by linarith [mem_Iio.1 ht] : t - 1 / 2 ≤ 0)]
+      norm_num
+    rw [max_eq_right (by linarith), mul_zero]
+    exact (hasDerivAt_const a (0 : ℝ)).congr_of_eventuallyEq hev
+  · subst heq
+    rw [sub_self, max_self, mul_zero]
+    have hR : HasDerivWithinAt cq 0 (Ici (1 / 2)) (1 / 2) := by
+      have := hsq.hasDerivWithinAt (s := Ici (1 / 2))
+      rw [sub_self, mul_zero] at this
+      refine this.congr (fun t ht => ?_) ?_
+      · simp only [cq, max_eq_left (by linarith [mem_Ici.1 ht] : (0 : ℝ) ≤ t - 1 / 2)]
+      · simp [cq]
+    have hL : HasDerivWithinAt cq 0 (Iic (1 / 2)) (1 / 2) := by
+      refine (hasDerivAt_const (1 / 2 : ℝ) (0 : ℝ)).hasDerivWithinAt.congr (fun t ht => ?_) ?_
+      · simp only [cq, max_eq_right (by linarith [mem_Iic.1 ht] : t - 1 / 2 ≤ 0)]
+        norm_num
+      · simp [cq]
+    have := hL.union hR
+    rwa [Iic_union_Ici, hasDerivWithinAt_univ] at this
+  · have hev : cq =ᶠ[𝓝 a] fun t => (t - 1 / 2) ^ 2 := by
+      filter_upwards [Ioi_mem_nhds hgt] with t ht
+      simp only [cq, max_eq_left (by linarith [mem_Ioi.1 ht] : (0 : ℝ) ≤ t - 1 / 2)]
+    rw [max_eq_left (by linarith)]
+    exact hsq.congr_of_eventuallyEq hev
+
+/-- The parameters `U = indU0`, `c = cq`, `δ = ½`, `δ′ = ¾`, `M = 200`, `r = 1`, `A = 20`,
+`Z = [1, 2]` satisfy the hypotheses of §10.4. -/
+theorem ind0_hyp : IndHyp indU0 cq (1 / 2) (3 / 4) 200 1 20 1 2 := by
+  obtain ⟨hc1, hc2, hc3, hc4, hc5⟩ := cq_props
+  have hfrac : ∀ q : ℝ, 0 ≤ q → q / (1 + q) ≤ 1 := fun q hq =>
+    (div_le_one (by linarith)).2 (by linarith)
+  refine ⟨one_pos, by norm_num, by norm_num, by norm_num, by norm_num, by norm_num, ?_, ?_, ?_,
+    ?_, ?_, ?_, hc1, hc2, hc3, hc4, hc5, ?_⟩
+  · refine ((continuous_const.mul continuous_snd).continuousOn).mul
+      (continuous_fst.continuousOn.div (continuous_const.add continuous_fst).continuousOn
+        fun p hp => ?_)
+    have := mem_Ici.1 hp.1
+    linarith
+  · intro q z hq hz
+    have := hz.1
+    unfold indU0
+    positivity
+  · intro q z hq hz
+    unfold indU0
+    have h1 := hfrac q hq
+    have h2 : 0 ≤ q / (1 + q) := by positivity
+    nlinarith [hz.1, hz.2]
+  · intro z hz a ha b hb hab
+    simp only [indU0]
+    have ha' := mem_Ici.1 ha
+    have hz1 := hz.1
+    have : a / (1 + a) < b / (1 + b) := by
+      rw [div_lt_div_iff₀ (by linarith) (by linarith)]
+      nlinarith
+    nlinarith
+  · intro z hz
+    refine ⟨convex_Ici 0, fun a ha b hb hne θ η hθ hη hθη => ?_⟩
+    have ha' := mem_Ici.1 ha
+    have hb' := mem_Ici.1 hb
+    have hz1 := hz.1
+    simp only [smul_eq_mul, indU0]
+    set m := θ * a + η * b
+    have hm : 0 ≤ m := by positivity
+    have e : ∀ q : ℝ, 0 ≤ q → q / (1 + q) = 1 - 1 / (1 + q) := fun q hq => by
+      field_simp
+      ring
+    rw [e a ha', e b hb', e m hm]
+    have key : 1 / (1 + m) < θ / (1 + a) + η / (1 + b) := by
+      have hab : 0 < (a - b) ^ 2 := by
+        have : a - b ≠ 0 := sub_ne_zero.2 hne
+        positivity
+      rw [div_add_div _ _ (by linarith) (by linarith), div_lt_div_iff₀ (by linarith)
+        (by positivity)]
+      have hη' : η = 1 - θ := by linarith
+      simp only [m]
+      rw [hη'] at hη ⊢
+      nlinarith [mul_pos (mul_pos hθ hη) hab]
+    have : θ * (1 - 1 / (1 + a)) + η * (1 - 1 / (1 + b)) = 1 - (θ / (1 + a) + η / (1 + b)) := by
+      rw [show θ * (1 - 1 / (1 + a)) = θ - θ / (1 + a) by ring,
+        show η * (1 - 1 / (1 + b)) = η - η / (1 + b) by ring]
+      linarith
+    have h10 : 0 < 10 * z := by linarith
+    nlinarith [mul_lt_mul_of_pos_left key h10]
+  · intro q hq a ha b hb hab
+    simp only [indU0]
+    have : 0 < q / (1 + q) := by positivity
+    nlinarith
+  · norm_num [cq]
+
+/-- The i.i.d. kernel `Q(z, ·) = δ₁` on `Z = [1, 2]`. -/
+noncomputable abbrev indQ0 : Kernel (Icc (1 : ℝ) 2) (Icc (1 : ℝ) 2) :=
+  Kernel.const _ (Measure.dirac ⟨1, by norm_num, by norm_num⟩)
+
+/-- `indQ0` is Feller, monotone and i.i.d. -/
+theorem indQ0_props : IsFeller indQ0 ∧ IsMonotoneTF indQ0 ∧ ∀ z z', indQ0 z = indQ0 z' :=
+  ⟨isFeller_const _, fun f _ _ _ a b _ => by simp [markovOpR, Kernel.const_apply],
+    fun _ _ => rfl⟩
+
+/-- `indU0` has increasing differences in `(x, z)`: `D = U_x` is increasing in `z`. -/
+theorem indU0_incDiff : ∀ x x' z zh : ℝ, 0 < x → x ≤ x' → 1 ≤ z → z ≤ zh → zh ≤ 2 →
+    indU0 x' z - indU0 x z ≤ indU0 x' zh - indU0 x zh := by
+  intro x x' z zh hx hxx hz hzz _
+  simp only [indU0]
+  have : x / (1 + x) ≤ x' / (1 + x') := by
+    rw [div_le_div_iff₀ (by linarith) (by linarith)]
+    nlinarith
+  nlinarith
+
+/-- `U(·, z)` is differentiable on `(0, ∞)` and `c` on all of `ℝ`, for the parameters
+`ind0_hyp`. -/
+theorem ind0_diff : (∀ (z : Icc (1 : ℝ) 2) (q : ℝ), 0 < q →
+    DifferentiableAt ℝ (fun q => indU0 q z.1) q) ∧ ∀ a : ℝ, 0 < a → DifferentiableAt ℝ cq a :=
+  ⟨fun z _ hq => (hasDerivAt_indU0 z.1 hq.le).differentiableAt,
+    fun a _ => (hasDerivAt_cq a).differentiableAt⟩
+
+/-- **Exercise 10.4e: strict monotonicity in `z` fails.** The book claims that `g(x, ·)` is
+strictly increasing where gross investment is positive. With the parameters `ind0_hyp`, the
+monotone Feller i.i.d. kernel `indQ0` (`indQ0_props`) and `D` increasing in `z`
+(`indU0_incDiff`), every hypothesis of 10.4e holds, gross investment is positive everywhere
+(`ind_policy_gt`), but `g(x, z)` does not depend on `z` (`ex_10_4f`). -/
+theorem ex_10_4e_strict_counterexample {v : Ioi (0 : ℝ) × Icc (1 : ℝ) 2 →ᵇ ℝ}
+    (hv : truncT (ind0_hyp.upperDP indQ0 indQ0_props.1) v = v) :
+    ¬ ∀ (x y yh : Ioi (0 : ℝ)) (z zh : Icc (1 : ℝ) 2), z.1 < zh.1 →
+      y ∈ policy (indModel indQ0 indU0 cq (3 / 4) 200 1) v (x, z) →
+      yh ∈ policy (indModel indQ0 indU0 cq (3 / 4) 200 1) v (x, zh) →
+      (1 - 1 / 2) * x.1 < y.1 → y.1 < yh.1 := by
+  intro hclaim
+  set x : Ioi (0 : ℝ) := ⟨1, mem_Ioi.2 one_pos⟩
+  set z : Icc (1 : ℝ) 2 := ⟨1, by norm_num, by norm_num⟩
+  set zh : Icc (1 : ℝ) 2 := ⟨2, by norm_num, by norm_num⟩
+  obtain ⟨⟨y, hy, hval⟩, -, -⟩ := ind_max ind0_hyp indQ0 indQ0_props.1 hv (x, z)
+  have hyp : y ∈ policy (indModel indQ0 indU0 cq (3 / 4) 200 1) v (x, z) := ⟨hy, hval⟩
+  have hyh : y ∈ policy (indModel indQ0 indU0 cq (3 / 4) 200 1) v (x, zh) :=
+    ex_10_4f ind0_hyp indQ0 indQ0_props.1 indQ0_props.2.2 hv x z zh ▸ hyp
+  have hgt := ind_policy_gt ind0_hyp indQ0 indQ0_props.1 hv (ind0_diff.2 _ (by norm_num)) hyp
+  exact lt_irrefl _ (hclaim x y y z zh (by norm_num [z, zh]) hyp hyh hgt)
+
+/-- **Exercise 10.4d: the slope of `g(·, z)` can exceed one.** With the parameters `ind0_hyp`
+(and any Feller `Q`), for every `z` there are `x < x′` with
+`g(x′, z) − g(x, z) > x′ − x`. Here `U_x(½, z′) ≥ 40/9 > 2 = (1 + r)c′(1)`, so `g(x, z) > x`
+for `x ≤ ½` (`ind_policy_gt_self`); but `x c(g/x) ≤ βR = 20` forces
+`(g(x, z) − x/2)² ≤ 20x`, so `g(x, z) − x → 0` as `x → 0`. Hence `g(x, z) − x` is not
+decreasing on `(0, ½]`. What holds is `ind_policy_slope_lt`: the slope is below the growth rate
+`g(x, z)/x`. -/
+theorem ex_10_4d_slope_counterexample (Q : Kernel (Icc (1 : ℝ) 2) (Icc (1 : ℝ) 2))
+    [IsMarkovKernel Q] (hQ : IsFeller Q) {v : Ioi (0 : ℝ) × Icc (1 : ℝ) 2 →ᵇ ℝ}
+    (hv : truncT (ind0_hyp.upperDP Q hQ) v = v) (z : Icc (1 : ℝ) 2) :
+    ∃ x x' y y' : Ioi (0 : ℝ), x.1 < x'.1 ∧
+      y ∈ policy (indModel Q indU0 cq (3 / 4) 200 1) v (x, z) ∧
+      y' ∈ policy (indModel Q indU0 cq (3 / 4) 200 1) v (x', z) ∧ x'.1 - x.1 < y'.1 - y.1 := by
+  have h := ind0_hyp
+  obtain ⟨hUd, hcd⟩ := ind0_diff
+  have hpos : ∀ z' : Icc (1 : ℝ) 2,
+      (1 + 1) * deriv cq 1 < deriv (fun q => indU0 q z'.1) (1 / 2) := by
+    intro z'
+    rw [(hasDerivAt_cq 1).deriv, (hasDerivAt_indU0 z'.1 (by norm_num)).deriv,
+      max_eq_left (by norm_num), lt_div_iff₀ (by norm_num)]
+    nlinarith [z'.2.1]
+  set x' : Ioi (0 : ℝ) := ⟨1 / 2, mem_Ioi.2 (by norm_num)⟩
+  obtain ⟨⟨y', hy', hval'⟩, -, -⟩ := ind_max h Q hQ hv (x', z)
+  have hy'p : y' ∈ policy (indModel Q indU0 cq (3 / 4) 200 1) v (x', z) := ⟨hy', hval'⟩
+  have hgrow : (1 / 2 : ℝ) < y'.1 :=
+    ind_policy_gt_self h Q hQ hv hUd hcd (y₀ := 1 / 2) (by norm_num) hpos (x := x') le_rfl hy'p
+  set d := y'.1 - 1 / 2 with hddef
+  have hd : 0 < d := by linarith
+  set t := min (1 / 4) (d ^ 2 / 40) with htdef
+  have ht : 0 < t := lt_min (by norm_num) (by positivity)
+  have ht1 : t ≤ 1 / 4 := min_le_left _ _
+  have ht2 : t ≤ d ^ 2 / 40 := min_le_right _ _
+  set x : Ioi (0 : ℝ) := ⟨t, mem_Ioi.2 ht⟩
+  obtain ⟨⟨y, hy, hval⟩, -, -⟩ := ind_max h Q hQ hv (x, z)
+  have hyp : y ∈ policy (indModel Q indU0 cq (3 / 4) 200 1) v (x, z) := ⟨hy, hval⟩
+  have hlow : (1 - 1 / 2) * t ≤ y.1 := ((ind_policy h Q hQ hv).2.2 _ y hyp).1
+  -- the value of `y` beats the free choice `(1 − δ)x`
+  have hvR := (ind_strictMono_x h Q hQ hv).1
+  have e1 : v (x, z) = indU0 t z.1 - t * cq (y.1 / t) + 1 / (1 + 1) * ∫ z', v (y, z') ∂Q z :=
+    hyp.2
+  have hsafe := ind_rhs_le_v h Q hQ hv (x, z) (h.safeY x)
+  rw [ind_rhs, (h.safe_mem x z).2] at hsafe
+  have hE0 : 0 ≤ ∫ z', v (h.safeY x, z') ∂Q z := integral_nonneg fun z' => (hvR _).1
+  have hE1 : ∫ z', v (y, z') ∂Q z ≤ 20 / (1 - 1 / (1 + 1)) := by
+    have := integral_mono (integrable_ind (Q := Q) v y z)
+      (integrable_const (20 / (1 - 1 / (1 + 1) : ℝ))) fun z' => (hvR _).2
+    simpa using this
+  have hcost : t * cq (y.1 / t) ≤ 20 := by
+    simp only at hsafe
+    norm_num at hE1 hsafe e1 ⊢
+    nlinarith
+  have hyt : 1 / 2 ≤ y.1 / t := by rw [le_div_iff₀ ht]; linarith
+  have hsq : (y.1 - t / 2) ^ 2 ≤ 20 * t := by
+    rw [cq, max_eq_left (by linarith)] at hcost
+    have e : (y.1 - t / 2) ^ 2 = t * (t * (y.1 / t - 1 / 2) ^ 2) := by field_simp
+    rw [e]
+    nlinarith
+  have hyd : y.1 < t + d := by
+    by_contra hge
+    push Not at hge
+    have h1 : d ≤ y.1 - t / 2 := by linarith
+    have h2 : d ^ 2 ≤ (y.1 - t / 2) ^ 2 := pow_le_pow_left₀ hd.le h1 2
+    nlinarith
+  refine ⟨x, x', y, y', ?_, hyp, hy'p, ?_⟩
+  · change t < 1 / 2
+    linarith
+  · change 1 / 2 - t < y'.1 - y.1
+    linarith
+end StokeyLucasPrescott.ConvergenceApplications
+
+/-
+Copyright (c) 2026 Robert Kirkby. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Robert Kirkby
+-/
+
+/-!
+# Industry investment: the §10.4 policy satisfies the hypotheses of §13.4
+
+SLP §13.4, p. 395, takes the policy `g` of §10.4 with the properties of Exercise 10.4(d, e)
+(`IndustryPolicy`). Here `g = indPolicyFn` is the optimal policy of the fixed point `v` of (2′)
+(`IndustryInvestmentResults`), extended by `0` off `X × Z`.
+
+* `indPolicyFn_mem`: `g(x, z)` is the optimal choice at `(x, z)`.
+* `indPolicyFn_props`: with `U(·, z)` and `c` differentiable on `(0, ∞)`, `Q` monotone and `U`
+  with increasing differences in `(x, z)`, `g` is continuous on `X × Z`, positive, strictly
+  increasing in `x`, with `g(x, z)/x` strictly decreasing in `x`, and nondecreasing in `z`
+  (Exercise 10.4d–e, `IndustryInvestmentFOC`).
+* `indPolicyFn_industryPolicy`: under the same hypotheses `g` is an `IndustryPolicy`, so every
+  §13.4 result (`industry_exists_xlo_xhi`, `ex_13_4b`, `ex_13_4c`, …) applies to it.
+* `indPolicyFn_ind0`: the parameters `ind0_hyp` with the i.i.d. kernel `indQ0` give an
+  `IndustryPolicy` whose slope exceeds one somewhere.
+
+## Correction
+
+* The book's §13.4 hypothesis (i) asks for slope below one (Exercise 10.4d). The §10.4 policy
+  need not have it (`ex_10_4d_slope_counterexample`, `indPolicyFn_ind0`); `IndustryPolicy` now
+  asks for `g(x, z)/x` strictly decreasing instead (`IndustryPolicy.ratio_lt`).
+-/
+
+namespace StokeyLucasPrescott.ConvergenceApplications
+
+open MeasureTheory ProbabilityTheory Set Filter Topology BoundedContinuousFunction
+
+variable {U : ℝ → ℝ → ℝ} {c : ℝ → ℝ} {δ δ' M r A z₁ z₂ : ℝ}
+
+/-- The optimal policy of (2′) as a function on `ℝ × ℝ`: `g(x, z)` is the maximizer at
+`(x, z) ∈ X × Z`, and `0` elsewhere. -/
+noncomputable def indPolicyFn (Q : Kernel (Icc z₁ z₂) (Icc z₁ z₂)) (U : ℝ → ℝ → ℝ)
+    (c : ℝ → ℝ) (δ' M r : ℝ) (v : Ioi (0 : ℝ) × Icc z₁ z₂ →ᵇ ℝ) (x z : ℝ) : ℝ := by
+  classical
+  exact if hx : x ∈ Ioi 0 ∧ z ∈ Icc z₁ z₂ then
+    (argmaxFn (indΓ δ' M) (objG (indModel Q U c δ' M r) v) (⟨x, hx.1⟩, ⟨z, hx.2⟩)).1 else 0
+
+/-- On `X × Z`, `indPolicyFn` is the value of the maximizer `argmaxFn`. -/
+theorem indPolicyFn_eq (Q : Kernel (Icc z₁ z₂) (Icc z₁ z₂)) (v : Ioi (0 : ℝ) × Icc z₁ z₂ →ᵇ ℝ)
+    (x : Ioi (0 : ℝ)) (z : Icc z₁ z₂) :
+    indPolicyFn Q U c δ' M r v x.1 z.1 =
+      (argmaxFn (indΓ δ' M) (objG (indModel Q U c δ' M r) v) (x, z)).1 := by
+  unfold indPolicyFn
+  simp only [x.2, z.2, and_self, ↓reduceDIte]
+
+/-- `g(x, z)` is the optimal choice at `(x, z)`. -/
+theorem indPolicyFn_mem (h : IndHyp U c δ δ' M r A z₁ z₂) (Q : Kernel (Icc z₁ z₂) (Icc z₁ z₂))
+    [IsMarkovKernel Q] (hQ : IsFeller Q) {v : Ioi (0 : ℝ) × Icc z₁ z₂ →ᵇ ℝ}
+    (hv : truncT (h.upperDP Q hQ) v = v) (x : Ioi (0 : ℝ)) (z : Icc z₁ z₂) :
+    argmaxFn (indΓ δ' M) (objG (indModel Q U c δ' M r) v) (x, z) ∈
+      policy (indModel Q U c δ' M r) v (x, z) := by
+  rw [(ind_policy h Q hQ hv).2.1]
+  exact (ind_policy h Q hQ hv).1.argmaxFn_mem (x, z)
+
+/-- **The §10.4 policy has the properties of Exercise 10.4(d, e).** With `U(·, z)` and `c`
+differentiable on `(0, ∞)`, `Q` monotone and `U` with increasing differences in `(x, z)`, `g` is
+continuous on `X × Z` and positive there, strictly increasing in `x`, nondecreasing in `z`, and
+the growth rate `g(x, z)/x` is strictly decreasing in `x`. -/
+theorem indPolicyFn_props (h : IndHyp U c δ δ' M r A z₁ z₂)
+    (Q : Kernel (Icc z₁ z₂) (Icc z₁ z₂)) [IsMarkovKernel Q] (hQ : IsFeller Q)
+    (hQm : IsMonotoneTF Q)
+    (hUid : ∀ x x' z zh : ℝ, 0 < x → x ≤ x' → z₁ ≤ z → z ≤ zh → zh ≤ z₂ →
+      U x' z - U x z ≤ U x' zh - U x zh)
+    (hUd : ∀ (z : Icc z₁ z₂) (q : ℝ), 0 < q → DifferentiableAt ℝ (fun q => U q z.1) q)
+    (hcd : ∀ a : ℝ, 0 < a → DifferentiableAt ℝ c a)
+    {v : Ioi (0 : ℝ) × Icc z₁ z₂ →ᵇ ℝ} (hv : truncT (h.upperDP Q hQ) v = v) :
+    ContinuousOn (fun p : ℝ × ℝ => indPolicyFn Q U c δ' M r v p.1 p.2) (Ioi 0 ×ˢ Icc z₁ z₂) ∧
+      (∀ x z, 0 < x → z ∈ Icc z₁ z₂ → 0 < indPolicyFn Q U c δ' M r v x z) ∧
+      (∀ x x' z, 0 < x → x < x' → z ∈ Icc z₁ z₂ →
+        indPolicyFn Q U c δ' M r v x z < indPolicyFn Q U c δ' M r v x' z) ∧
+      (∀ x z z', 0 < x → z₁ ≤ z → z ≤ z' → z' ≤ z₂ →
+        indPolicyFn Q U c δ' M r v x z ≤ indPolicyFn Q U c δ' M r v x z') ∧
+      ∀ x x' z, 0 < x → x < x' → z ∈ Icc z₁ z₂ →
+        indPolicyFn Q U c δ' M r v x' z / x' < indPolicyFn Q U c δ' M r v x z / x := by
+  set G := argmaxFn (indΓ δ' M) (objG (indModel Q U c δ' M r) v)
+  refine ⟨?_, fun x z hx hz => ?_, fun x x' z hx hxx hz => ?_, fun x z z' hx hz hzz hz' => ?_,
+    fun x x' z hx hxx hz => ?_⟩
+  · rw [continuousOn_iff_continuous_domRestrict]
+    have hm : Continuous fun q : (Ioi 0 ×ˢ Icc z₁ z₂ : Set (ℝ × ℝ)) =>
+        ((⟨q.1.1, q.2.1⟩ : Ioi (0 : ℝ)), (⟨q.1.2, q.2.2⟩ : Icc z₁ z₂)) :=
+      ((continuous_fst.comp continuous_subtype_val).subtype_mk _).prodMk
+        ((continuous_snd.comp continuous_subtype_val).subtype_mk _)
+    have heq : (Ioi 0 ×ˢ Icc z₁ z₂).domRestrict
+        (fun p : ℝ × ℝ => indPolicyFn Q U c δ' M r v p.1 p.2) =
+        fun q => (G (⟨q.1.1, q.2.1⟩, ⟨q.1.2, q.2.2⟩)).1 := by
+      funext q
+      exact indPolicyFn_eq Q v ⟨q.1.1, q.2.1⟩ ⟨q.1.2, q.2.2⟩
+    rw [heq]
+    exact continuous_subtype_val.comp ((ind_policy h Q hQ hv).1.continuous_argmaxFn.comp hm)
+  · rw [indPolicyFn_eq Q v ⟨x, hx⟩ ⟨z, hz⟩]
+    exact (G _).2
+  · rw [indPolicyFn_eq Q v ⟨x, hx⟩ ⟨z, hz⟩,
+      indPolicyFn_eq Q v ⟨x', mem_Ioi.2 (hx.trans hxx)⟩ ⟨z, hz⟩]
+    exact ind_policy_strictMono_x h Q hQ hv hUd hcd (x := ⟨x, hx⟩)
+      (x' := ⟨x', mem_Ioi.2 (hx.trans hxx)⟩) hxx ⟨z, hz⟩ (indPolicyFn_mem h Q hQ hv _ _)
+      (indPolicyFn_mem h Q hQ hv _ _)
+  · rw [indPolicyFn_eq Q v ⟨x, hx⟩ ⟨z, hz, hzz.trans hz'⟩,
+      indPolicyFn_eq Q v ⟨x, hx⟩ ⟨z', hz.trans hzz, hz'⟩]
+    exact ex_10_4e h Q hQ hQm hUid hv (z := ⟨z, hz, hzz.trans hz'⟩)
+      (zh := ⟨z', hz.trans hzz, hz'⟩) hzz (indPolicyFn_mem h Q hQ hv _ _)
+      (indPolicyFn_mem h Q hQ hv _ _)
+  · rw [indPolicyFn_eq Q v ⟨x, hx⟩ ⟨z, hz⟩,
+      indPolicyFn_eq Q v ⟨x', mem_Ioi.2 (hx.trans hxx)⟩ ⟨z, hz⟩]
+    exact ind_policy_ratio_lt h Q hQ hv hUd hcd (x := ⟨x, hx⟩)
+      (x' := ⟨x', mem_Ioi.2 (hx.trans hxx)⟩) hxx ⟨z, hz⟩ (indPolicyFn_mem h Q hQ hv _ _)
+      (indPolicyFn_mem h Q hQ hv _ _)
+
+/-- **The §10.4 policy is an `IndustryPolicy`.** With `U(·, z)` and `c` differentiable on
+`(0, ∞)`, `Q` monotone and `U` with increasing differences in `(x, z)` (`D` increasing in `z`), the
+optimal policy satisfies the hypotheses of §13.4, so the results of `IndustryConvergence` apply to
+it. -/
+theorem indPolicyFn_industryPolicy (h : IndHyp U c δ δ' M r A z₁ z₂)
+    (Q : Kernel (Icc z₁ z₂) (Icc z₁ z₂)) [IsMarkovKernel Q] (hQ : IsFeller Q)
+    (hQm : IsMonotoneTF Q)
+    (hUid : ∀ x x' z zh : ℝ, 0 < x → x ≤ x' → z₁ ≤ z → z ≤ zh → zh ≤ z₂ →
+      U x' z - U x z ≤ U x' zh - U x zh)
+    (hUd : ∀ (z : Icc z₁ z₂) (q : ℝ), 0 < q → DifferentiableAt ℝ (fun q => U q z.1) q)
+    (hcd : ∀ a : ℝ, 0 < a → DifferentiableAt ℝ c a)
+    {v : Ioi (0 : ℝ) × Icc z₁ z₂ →ᵇ ℝ} (hv : truncT (h.upperDP Q hQ) v = v) :
+    IndustryPolicy (indPolicyFn Q U c δ' M r v) z₁ z₂ := by
+  obtain ⟨hcont, hpos, hmono, hmz, hratio⟩ := indPolicyFn_props h Q hQ hQm hUid hUd hcd hv
+  exact ⟨hcont, hpos, hmono, hratio, hmz⟩
+
+/-- **The slope of the §10.4 policy can exceed one.** For the parameters `ind0_hyp` and the
+i.i.d. kernel `indQ0` (monotone and Feller, `indQ0_props`), the optimal policy is an
+`IndustryPolicy`, yet `g(x′, z) − g(x, z) > x′ − x` for some `x < x′`
+(`ex_10_4d_slope_counterexample`). So the book's slope condition could not have been kept. -/
+theorem indPolicyFn_ind0 {v : Ioi (0 : ℝ) × Icc (1 : ℝ) 2 →ᵇ ℝ}
+    (hv : truncT (ind0_hyp.upperDP indQ0 indQ0_props.1) v = v) :
+    IndustryPolicy (indPolicyFn indQ0 indU0 cq (3 / 4) 200 1 v) 1 2 ∧
+      ∃ x x' z : ℝ, 0 < x ∧ x < x' ∧ z ∈ Icc (1 : ℝ) 2 ∧
+        x' - x < indPolicyFn indQ0 indU0 cq (3 / 4) 200 1 v x' z -
+          indPolicyFn indQ0 indU0 cq (3 / 4) 200 1 v x z := by
+  refine ⟨indPolicyFn_industryPolicy ind0_hyp indQ0 indQ0_props.1 indQ0_props.2.1
+    indU0_incDiff ind0_diff.1 ind0_diff.2 hv, ?_⟩
+  set z : Icc (1 : ℝ) 2 := ⟨1, by norm_num, by norm_num⟩
+  obtain ⟨x, x', y, y', hxx, hy, hy', hslope⟩ :=
+    ex_10_4d_slope_counterexample indQ0 indQ0_props.1 hv z
+  have hU := (ind_policy ind0_hyp indQ0 indQ0_props.1 hv).1
+  have hpol := (ind_policy ind0_hyp indQ0 indQ0_props.1 hv).2.1
+  have e : y = argmaxFn (indΓ (3 / 4) 200)
+      (objG (indModel indQ0 indU0 cq (3 / 4) 200 1) v) (x, z) :=
+    hU.unique (x, z) y (hpol (x, z) ▸ hy) _ (hU.argmaxFn_mem (x, z))
+  have e' : y' = argmaxFn (indΓ (3 / 4) 200)
+      (objG (indModel indQ0 indU0 cq (3 / 4) 200 1) v) (x', z) :=
+    hU.unique (x', z) y' (hpol (x', z) ▸ hy') _ (hU.argmaxFn_mem (x', z))
+  refine ⟨x.1, x'.1, z.1, x.2, hxx, z.2, ?_⟩
+  rw [indPolicyFn_eq indQ0 v x z, indPolicyFn_eq indQ0 v x' z, ← e, ← e']
+  exact hslope
 
 end StokeyLucasPrescott.ConvergenceApplications
 
@@ -25072,11 +27540,12 @@ set_option linter.style.longLine false
 #print axioms StokeyLucasPrescott.ConvergenceApplications.IndustryPolicy.cont
 #print axioms StokeyLucasPrescott.ConvergenceApplications.IndustryPolicy.pos
 #print axioms StokeyLucasPrescott.ConvergenceApplications.IndustryPolicy.strictMono_x
-#print axioms StokeyLucasPrescott.ConvergenceApplications.IndustryPolicy.slope_lt
+#print axioms StokeyLucasPrescott.ConvergenceApplications.IndustryPolicy.ratio_lt
 #print axioms StokeyLucasPrescott.ConvergenceApplications.IndustryPolicy.mono_z
 #print axioms StokeyLucasPrescott.ConvergenceApplications.IndustryPolicy.mono_x
 #print axioms StokeyLucasPrescott.ConvergenceApplications.IndustryPolicy.mono
-#print axioms StokeyLucasPrescott.ConvergenceApplications.IndustryPolicy.sub_strictAnti
+#print axioms StokeyLucasPrescott.ConvergenceApplications.IndustryPolicy.lt_g_of_lt
+#print axioms StokeyLucasPrescott.ConvergenceApplications.IndustryPolicy.g_lt_of_lt
 #print axioms StokeyLucasPrescott.ConvergenceApplications.IndustryPolicy.continuousOn_x
 #print axioms StokeyLucasPrescott.ConvergenceApplications.IndustryPolicy.fixedPoint_unique
 #print axioms StokeyLucasPrescott.ConvergenceApplications.IndustryPolicy.xlo_le_xhi
@@ -25167,6 +27636,145 @@ set_option linter.style.longLine false
 #print axioms StokeyLucasPrescott.ConvergenceApplications.kpow_indSKernel_indSIncl
 #print axioms StokeyLucasPrescott.ConvergenceApplications.ex_13_4c
 #print axioms StokeyLucasPrescott.ConvergenceApplications.ex_13_4c_unique
+#print axioms StokeyLucasPrescott.ConvergenceApplications.UpperDP
+#print axioms StokeyLucasPrescott.ConvergenceApplications.UpperDP.mk
+#print axioms StokeyLucasPrescott.ConvergenceApplications.UpperDP.nonempty
+#print axioms StokeyLucasPrescott.ConvergenceApplications.UpperDP.compact
+#print axioms StokeyLucasPrescott.ConvergenceApplications.UpperDP.lhc
+#print axioms StokeyLucasPrescott.ConvergenceApplications.UpperDP.uhc
+#print axioms StokeyLucasPrescott.ConvergenceApplications.UpperDP.contF
+#print axioms StokeyLucasPrescott.ConvergenceApplications.UpperDP.A_nonneg
+#print axioms StokeyLucasPrescott.ConvergenceApplications.UpperDP.bddAbove
+#print axioms StokeyLucasPrescott.ConvergenceApplications.UpperDP.safe
+#print axioms StokeyLucasPrescott.ConvergenceApplications.UpperDP.β_pos
+#print axioms StokeyLucasPrescott.ConvergenceApplications.UpperDP.β_lt
+#print axioms StokeyLucasPrescott.ConvergenceApplications.UpperDP.contφ
+#print axioms StokeyLucasPrescott.ConvergenceApplications.UpperDP.contExp
+#print axioms StokeyLucasPrescott.ConvergenceApplications.truncModel
+#print axioms StokeyLucasPrescott.ConvergenceApplications.truncModel_boundedDP
+#print axioms StokeyLucasPrescott.ConvergenceApplications.truncK
+#print axioms StokeyLucasPrescott.ConvergenceApplications.truncK_pos
+#print axioms StokeyLucasPrescott.ConvergenceApplications.truncT
+#print axioms StokeyLucasPrescott.ConvergenceApplications.trunc_bellman_argmax
+#print axioms StokeyLucasPrescott.ConvergenceApplications.truncT_mapsTo
+#print axioms StokeyLucasPrescott.ConvergenceApplications.isClosed_bounds
+#print axioms StokeyLucasPrescott.ConvergenceApplications.upper_fixed
+#print axioms StokeyLucasPrescott.ConvergenceApplications.IndHyp
+#print axioms StokeyLucasPrescott.ConvergenceApplications.IndHyp.mk
+#print axioms StokeyLucasPrescott.ConvergenceApplications.IndHyp.r_pos
+#print axioms StokeyLucasPrescott.ConvergenceApplications.IndHyp.δ_pos
+#print axioms StokeyLucasPrescott.ConvergenceApplications.IndHyp.δ_lt
+#print axioms StokeyLucasPrescott.ConvergenceApplications.IndHyp.δ'_lt
+#print axioms StokeyLucasPrescott.ConvergenceApplications.IndHyp.M_pos
+#print axioms StokeyLucasPrescott.ConvergenceApplications.IndHyp.z_le
+#print axioms StokeyLucasPrescott.ConvergenceApplications.IndHyp.U_cont
+#print axioms StokeyLucasPrescott.ConvergenceApplications.IndHyp.U_nonneg
+#print axioms StokeyLucasPrescott.ConvergenceApplications.IndHyp.U_le
+#print axioms StokeyLucasPrescott.ConvergenceApplications.IndHyp.U_mono
+#print axioms StokeyLucasPrescott.ConvergenceApplications.IndHyp.U_conc
+#print axioms StokeyLucasPrescott.ConvergenceApplications.IndHyp.U_mono_z
+#print axioms StokeyLucasPrescott.ConvergenceApplications.IndHyp.c_cont
+#print axioms StokeyLucasPrescott.ConvergenceApplications.IndHyp.c_zero
+#print axioms StokeyLucasPrescott.ConvergenceApplications.IndHyp.c_conv
+#print axioms StokeyLucasPrescott.ConvergenceApplications.IndHyp.c_mono
+#print axioms StokeyLucasPrescott.ConvergenceApplications.IndHyp.c_sconv
+#print axioms StokeyLucasPrescott.ConvergenceApplications.IndHyp.M_big
+#print axioms StokeyLucasPrescott.ConvergenceApplications.indΓ
+#print axioms StokeyLucasPrescott.ConvergenceApplications.indF
+#print axioms StokeyLucasPrescott.ConvergenceApplications.indModel
+#print axioms StokeyLucasPrescott.ConvergenceApplications.IndHyp.one_sub_δ_nonneg
+#print axioms StokeyLucasPrescott.ConvergenceApplications.IndHyp.c_nonneg
+#print axioms StokeyLucasPrescott.ConvergenceApplications.IndHyp.c_one_pos
+#print axioms StokeyLucasPrescott.ConvergenceApplications.IndHyp.c_mul_le
+#print axioms StokeyLucasPrescott.ConvergenceApplications.IndHyp.c_ge_mul
+#print axioms StokeyLucasPrescott.ConvergenceApplications.IndHyp.persp_anti
+#print axioms StokeyLucasPrescott.ConvergenceApplications.IndHyp.persp_convex
+#print axioms StokeyLucasPrescott.ConvergenceApplications.cq
+#print axioms StokeyLucasPrescott.ConvergenceApplications.cq_props
+#print axioms StokeyLucasPrescott.ConvergenceApplications.ind_F_unbounded
+#print axioms StokeyLucasPrescott.ConvergenceApplications.ind_Γ_not_mono
+#print axioms StokeyLucasPrescott.ConvergenceApplications.ind_Γ_not_convex
+#print axioms StokeyLucasPrescott.ConvergenceApplications.isLHC_Ioi_interval
+#print axioms StokeyLucasPrescott.ConvergenceApplications.isUHC_Ioi_interval
+#print axioms StokeyLucasPrescott.ConvergenceApplications.IndHyp.A_nonneg
+#print axioms StokeyLucasPrescott.ConvergenceApplications.IndHyp.continuous_F
+#print axioms StokeyLucasPrescott.ConvergenceApplications.IndHyp.F_le
+#print axioms StokeyLucasPrescott.ConvergenceApplications.IndHyp.one_sub_δ_pos
+#print axioms StokeyLucasPrescott.ConvergenceApplications.IndHyp.safeY
+#print axioms StokeyLucasPrescott.ConvergenceApplications.IndHyp.safe_mem
+#print axioms StokeyLucasPrescott.ConvergenceApplications.IndHyp.upperDP
+#print axioms StokeyLucasPrescott.ConvergenceApplications.ind_rhs
+#print axioms StokeyLucasPrescott.ConvergenceApplications.integrable_ind
+#print axioms StokeyLucasPrescott.ConvergenceApplications.ind_rhs_le
+#print axioms StokeyLucasPrescott.ConvergenceApplications.ind_rhs_neg
+#print axioms StokeyLucasPrescott.ConvergenceApplications.isClosed_monoX
+#print axioms StokeyLucasPrescott.ConvergenceApplications.ind_T_strictMono_x
+#print axioms StokeyLucasPrescott.ConvergenceApplications.ind_strictMono_x
+#print axioms StokeyLucasPrescott.ConvergenceApplications.ex_10_4b
+#print axioms StokeyLucasPrescott.ConvergenceApplications.isClosed_monoZ
+#print axioms StokeyLucasPrescott.ConvergenceApplications.ind_strictMono_z
+#print axioms StokeyLucasPrescott.ConvergenceApplications.cmb_Ioi_val
+#print axioms StokeyLucasPrescott.ConvergenceApplications.ind_strictConcave
+#print axioms StokeyLucasPrescott.ConvergenceApplications.ind_continuousOn_objG
+#print axioms StokeyLucasPrescott.ConvergenceApplications.ind_max
+#print axioms StokeyLucasPrescott.ConvergenceApplications.ind_policy
+#print axioms StokeyLucasPrescott.ConvergenceApplications.ind_hasDerivAt_x
+#print axioms StokeyLucasPrescott.ConvergenceApplications.ex_10_4c
+#print axioms StokeyLucasPrescott.ConvergenceApplications.ind_mem_policy_iff
+#print axioms StokeyLucasPrescott.ConvergenceApplications.ex_10_4f
+#print axioms StokeyLucasPrescott.ConvergenceApplications.ind_cost_submod
+#print axioms StokeyLucasPrescott.ConvergenceApplications.ex_10_4d
+#print axioms StokeyLucasPrescott.ConvergenceApplications.ex_10_4f_monotone
+#print axioms StokeyLucasPrescott.ConvergenceApplications.ex_10_4f_tendsto
+#print axioms StokeyLucasPrescott.ConvergenceApplications.indW
+#print axioms StokeyLucasPrescott.ConvergenceApplications.ind_liftS_of_pos
+#print axioms StokeyLucasPrescott.ConvergenceApplications.indW_of_pos
+#print axioms StokeyLucasPrescott.ConvergenceApplications.ind_rhs_W
+#print axioms StokeyLucasPrescott.ConvergenceApplications.ind_rhs_le_v
+#print axioms StokeyLucasPrescott.ConvergenceApplications.indW_strictMonoOn
+#print axioms StokeyLucasPrescott.ConvergenceApplications.indW_strictConcaveOn
+#print axioms StokeyLucasPrescott.ConvergenceApplications.ind_c_deriv_eq_zero
+#print axioms StokeyLucasPrescott.ConvergenceApplications.ind_c_deriv_mono
+#print axioms StokeyLucasPrescott.ConvergenceApplications.ind_c_deriv_strict
+#print axioms StokeyLucasPrescott.ConvergenceApplications.ind_c_le_mul_deriv
+#print axioms StokeyLucasPrescott.ConvergenceApplications.ind_foc
+#print axioms StokeyLucasPrescott.ConvergenceApplications.ind_policy_gt
+#print axioms StokeyLucasPrescott.ConvergenceApplications.indW_hasDerivAt
+#print axioms StokeyLucasPrescott.ConvergenceApplications.indW_deriv_lt
+#print axioms StokeyLucasPrescott.ConvergenceApplications.ind_policy_strictMono_x
+#print axioms StokeyLucasPrescott.ConvergenceApplications.ind_policy_ratio_lt
+#print axioms StokeyLucasPrescott.ConvergenceApplications.ind_policy_ratio_le
+#print axioms StokeyLucasPrescott.ConvergenceApplications.ind_policy_slope_lt
+#print axioms StokeyLucasPrescott.ConvergenceApplications.IndIncDiff
+#print axioms StokeyLucasPrescott.ConvergenceApplications.isClosed_indIncDiff
+#print axioms StokeyLucasPrescott.ConvergenceApplications.ind_E_incDiff
+#print axioms StokeyLucasPrescott.ConvergenceApplications.ind_T_incDiff
+#print axioms StokeyLucasPrescott.ConvergenceApplications.ind_v_incDiff
+#print axioms StokeyLucasPrescott.ConvergenceApplications.ex_10_4e
+#print axioms StokeyLucasPrescott.ConvergenceApplications.ex_10_4e_strict
+#print axioms StokeyLucasPrescott.ConvergenceApplications.ind_policy_gt_self
+#print axioms StokeyLucasPrescott.ConvergenceApplications.ind_not_tendsto_zero
+#print axioms StokeyLucasPrescott.ConvergenceApplications.ind_stationary_unique
+#print axioms StokeyLucasPrescott.ConvergenceApplications.ind_limit_stationary
+#print axioms StokeyLucasPrescott.ConvergenceApplications.ex_10_4f_limit_eq
+#print axioms StokeyLucasPrescott.ConvergenceApplications.ex_10_4f_limit_pos
+#print axioms StokeyLucasPrescott.ConvergenceApplications.ex_10_4f_stationary
+#print axioms StokeyLucasPrescott.ConvergenceApplications.indU0
+#print axioms StokeyLucasPrescott.ConvergenceApplications.hasDerivAt_indU0
+#print axioms StokeyLucasPrescott.ConvergenceApplications.hasDerivAt_cq
+#print axioms StokeyLucasPrescott.ConvergenceApplications.ind0_hyp
+#print axioms StokeyLucasPrescott.ConvergenceApplications.indQ0
+#print axioms StokeyLucasPrescott.ConvergenceApplications.indQ0_props
+#print axioms StokeyLucasPrescott.ConvergenceApplications.indU0_incDiff
+#print axioms StokeyLucasPrescott.ConvergenceApplications.ind0_diff
+#print axioms StokeyLucasPrescott.ConvergenceApplications.ex_10_4e_strict_counterexample
+#print axioms StokeyLucasPrescott.ConvergenceApplications.ex_10_4d_slope_counterexample
+#print axioms StokeyLucasPrescott.ConvergenceApplications.indPolicyFn
+#print axioms StokeyLucasPrescott.ConvergenceApplications.indPolicyFn_eq
+#print axioms StokeyLucasPrescott.ConvergenceApplications.indPolicyFn_mem
+#print axioms StokeyLucasPrescott.ConvergenceApplications.indPolicyFn_props
+#print axioms StokeyLucasPrescott.ConvergenceApplications.indPolicyFn_industryPolicy
+#print axioms StokeyLucasPrescott.ConvergenceApplications.indPolicyFn_ind0
 #print axioms StokeyLucasPrescott.ConvergenceApplications.IsSearchCutoff
 #print axioms StokeyLucasPrescott.ConvergenceApplications.searchCutoff
 #print axioms StokeyLucasPrescott.ConvergenceApplications.SearchStrictDec

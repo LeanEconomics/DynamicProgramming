@@ -12,8 +12,8 @@ counterexample, together with a corrected statement that is proved. One correcte
 labour demand of §13.8 is strictly decreasing where it is positive, is left open; the book's own
 claim is refuted. See [corrections](docs/corrections.md).
 
-The library contains **1145 theorems**. Of these, 664 are in the Chapter 13 modules and the rest in
-the machinery carried from Chapters 8–12.
+The library contains **1238 theorems**. Of these, 670 are in the Chapter 13 modules and the rest in
+the machinery carried from Chapters 8–12, including the §10.4 industry model and its policy.
 
 * **§13.1 Discrete (s, S) inventories.** The functional equations solved in closed form, the
   optimal order size characterised (and shown not to exist when `c₁ = 0`), and the manual's
@@ -28,7 +28,9 @@ the machinery carried from Chapters 8–12.
   assumption. Exercises 13.3d–e and Assumption 12.1 are proved, giving a unique invariant
   distribution with global weak convergence.
 * **§13.4 Industry investment.** The fixed points `x̲`, `x̄` need an extra hypothesis. Exercises
-  13.4a–c are proved, including global convergence on `(0, ∞) × Z`.
+  13.4a–c are proved, including global convergence on `(0, ∞) × Z`, and apply to the optimal
+  policy of §10.4 (`indPolicyFn_industryPolicy`), with Ex. 10.4d's false slope condition replaced
+  by `g/x` strictly decreasing.
 * **§13.5 A pure currency economy.** The household problem: `v` strictly concave and `C¹`, the
   policy continuous and monotone. Exercises 13.5d and 13.5e are false (corner solutions with no
   spending or with spending everything), and the manual's step in (f) fails. Corrected statements
@@ -55,7 +57,8 @@ All names are in the namespace `StokeyLucasPrescott.ConvergenceApplications`. Se
 | [ContinuousInventory](ConvergenceApplications/ContinuousInventory.lean) | 40 | §13.2, Exercise 13.2 |
 | [GrowthOutput](ConvergenceApplications/GrowthOutput.lean) | 54 | §13.3, `x̄`; Exercises 13.3a–c |
 | [GrowthConvergence](ConvergenceApplications/GrowthConvergence.lean) | 55 | Exercises 13.3d–e; the convergence argument; `f(0) = 0` |
-| [IndustryConvergence](ConvergenceApplications/IndustryConvergence.lean) | 76 | §13.4, Exercise 13.4 |
+| [IndustryConvergence](ConvergenceApplications/IndustryConvergence.lean) | 77 | §13.4, Exercise 13.4 |
+| [IndustryConvergencePolicy](ConvergenceApplications/IndustryConvergencePolicy.lean) | 5 | The optimal policy of §10.4 satisfies the §13.4 hypotheses |
 | [CurrencyMarkov](ConvergenceApplications/CurrencyMarkov.lean) | 20 | Exercises 13.5i–j for an abstract policy |
 | [CurrencyEconomy](ConvergenceApplications/CurrencyEconomy.lean) | 31 | Exercises 13.5a–c, f, h |
 | [CurrencyStationary](ConvergenceApplications/CurrencyStationary.lean) | 8 | Exercises 13.5i–j for the optimal policy |
@@ -70,7 +73,7 @@ All names are in the namespace `StokeyLucasPrescott.ConvergenceApplications`. Se
 | [SearchDemand](ConvergenceApplications/SearchDemand.lean) | 28 | Exercises 13.8g–h |
 | [RealIntervals](ConvergenceApplications/RealIntervals.lean) | 13 | Theorem 12.12 on real intervals and rectangles |
 
-Carried machinery (481 theorems):
+Carried machinery (568 theorems):
 
 * `TransitionFunctions`, `WeakBasics`, `Portmanteau`, `Determining`, `DistributionFunctions`,
   `DistributionConvergence`, `Helly`, `FellerInvariant`, `MonotoneProcesses`, `Parameters`:
@@ -80,8 +83,9 @@ Carried machinery (481 theorems):
 * `Contraction`, `Correspondences`, `Maximum`, `Selection`, `InteriorPoints`, `Envelope`,
   `StochasticKernels`, `Histories`, `Plans`, `Theorem92`, `Lemma93`, `Theorem94`, `Lemma95`,
   `HistMarginals`, `BoundedReturns`, `BoundedOptimal`, `BoundedMonotone`, `BoundedConcave`,
-  `BoundedPolicy`, `PolicyKernels`, `OneSectorGrowth`, `GrowthPolicy`: Chapters 3, 4, 9 and 10,
-  from `StochasticApplications`.
+  `BoundedPolicy`, `PolicyKernels`, `OneSectorGrowth`, `GrowthPolicy`, `UpperBounded`,
+  `IndustryInvestment`, `IndustryInvestmentResults`, `IndustryInvestmentFOC`: Chapters 3, 4, 9 and
+  10, from `StochasticApplications`.
 
 ## Build and verify
 

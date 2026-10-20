@@ -1,6 +1,6 @@
 {
-  "checked_at_utc": "2026-10-16T05:45:50.024384+00:00",
-  "theorems": 1145,
+  "checked_at_utc": "2026-10-20T21:44:32.176130+00:00",
+  "theorems": 1238,
   "module_theorems": {
     "ConvergenceApplications/TransitionFunctions.lean": 19,
     "ConvergenceApplications/StochasticKernels.lean": 11,
@@ -52,13 +52,18 @@
     "ConvergenceApplications/GrowthOutput.lean": 54,
     "ConvergenceApplications/GrowthConvergence.lean": 55,
     "ConvergenceApplications/Parameters.lean": 9,
-    "ConvergenceApplications/IndustryConvergence.lean": 76,
+    "ConvergenceApplications/IndustryConvergence.lean": 77,
+    "ConvergenceApplications/UpperBounded.lean": 6,
+    "ConvergenceApplications/IndustryInvestment.lean": 19,
+    "ConvergenceApplications/IndustryInvestmentResults.lean": 23,
+    "ConvergenceApplications/IndustryInvestmentFOC.lean": 39,
+    "ConvergenceApplications/IndustryConvergencePolicy.lean": 5,
     "ConvergenceApplications/SearchValue.lean": 66,
     "ConvergenceApplications/SearchInvariant.lean": 56,
     "ConvergenceApplications/SearchDemand.lean": 28,
     "ConvergenceApplications/SearchLeavers.lean": 12
   },
-  "audited_declarations": 1495,
+  "audited_declarations": 1635,
   "declarations": [
     {
       "name": "StokeyLucasPrescott.ConvergenceApplications.IsTransitionFunction",
@@ -6086,7 +6091,7 @@
       "module": "ConvergenceApplications/IndustryConvergence.lean"
     },
     {
-      "name": "StokeyLucasPrescott.ConvergenceApplications.IndustryPolicy.slope_lt",
+      "name": "StokeyLucasPrescott.ConvergenceApplications.IndustryPolicy.ratio_lt",
       "kind": "projection",
       "module": "ConvergenceApplications/IndustryConvergence.lean"
     },
@@ -6106,7 +6111,12 @@
       "module": "ConvergenceApplications/IndustryConvergence.lean"
     },
     {
-      "name": "StokeyLucasPrescott.ConvergenceApplications.IndustryPolicy.sub_strictAnti",
+      "name": "StokeyLucasPrescott.ConvergenceApplications.IndustryPolicy.lt_g_of_lt",
+      "kind": "theorem",
+      "module": "ConvergenceApplications/IndustryConvergence.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.IndustryPolicy.g_lt_of_lt",
       "kind": "theorem",
       "module": "ConvergenceApplications/IndustryConvergence.lean"
     },
@@ -6559,6 +6569,701 @@
       "name": "StokeyLucasPrescott.ConvergenceApplications.ex_13_4c_unique",
       "kind": "theorem",
       "module": "ConvergenceApplications/IndustryConvergence.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.UpperDP",
+      "kind": "structure",
+      "module": "ConvergenceApplications/UpperBounded.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.UpperDP.mk",
+      "kind": "constructor",
+      "module": "ConvergenceApplications/UpperBounded.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.UpperDP.nonempty",
+      "kind": "projection",
+      "module": "ConvergenceApplications/UpperBounded.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.UpperDP.compact",
+      "kind": "projection",
+      "module": "ConvergenceApplications/UpperBounded.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.UpperDP.lhc",
+      "kind": "projection",
+      "module": "ConvergenceApplications/UpperBounded.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.UpperDP.uhc",
+      "kind": "projection",
+      "module": "ConvergenceApplications/UpperBounded.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.UpperDP.contF",
+      "kind": "projection",
+      "module": "ConvergenceApplications/UpperBounded.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.UpperDP.A_nonneg",
+      "kind": "projection",
+      "module": "ConvergenceApplications/UpperBounded.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.UpperDP.bddAbove",
+      "kind": "projection",
+      "module": "ConvergenceApplications/UpperBounded.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.UpperDP.safe",
+      "kind": "projection",
+      "module": "ConvergenceApplications/UpperBounded.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.UpperDP.\u03b2_pos",
+      "kind": "projection",
+      "module": "ConvergenceApplications/UpperBounded.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.UpperDP.\u03b2_lt",
+      "kind": "projection",
+      "module": "ConvergenceApplications/UpperBounded.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.UpperDP.cont\u03c6",
+      "kind": "projection",
+      "module": "ConvergenceApplications/UpperBounded.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.UpperDP.contExp",
+      "kind": "projection",
+      "module": "ConvergenceApplications/UpperBounded.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.truncModel",
+      "kind": "abbrev",
+      "module": "ConvergenceApplications/UpperBounded.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.truncModel_boundedDP",
+      "kind": "theorem",
+      "module": "ConvergenceApplications/UpperBounded.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.truncK",
+      "kind": "def",
+      "module": "ConvergenceApplications/UpperBounded.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.truncK_pos",
+      "kind": "theorem",
+      "module": "ConvergenceApplications/UpperBounded.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.truncT",
+      "kind": "abbrev",
+      "module": "ConvergenceApplications/UpperBounded.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.trunc_bellman_argmax",
+      "kind": "theorem",
+      "module": "ConvergenceApplications/UpperBounded.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.truncT_mapsTo",
+      "kind": "theorem",
+      "module": "ConvergenceApplications/UpperBounded.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.isClosed_bounds",
+      "kind": "theorem",
+      "module": "ConvergenceApplications/UpperBounded.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.upper_fixed",
+      "kind": "theorem",
+      "module": "ConvergenceApplications/UpperBounded.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.IndHyp",
+      "kind": "structure",
+      "module": "ConvergenceApplications/IndustryInvestment.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.IndHyp.mk",
+      "kind": "constructor",
+      "module": "ConvergenceApplications/IndustryInvestment.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.IndHyp.r_pos",
+      "kind": "projection",
+      "module": "ConvergenceApplications/IndustryInvestment.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.IndHyp.\u03b4_pos",
+      "kind": "projection",
+      "module": "ConvergenceApplications/IndustryInvestment.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.IndHyp.\u03b4_lt",
+      "kind": "projection",
+      "module": "ConvergenceApplications/IndustryInvestment.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.IndHyp.\u03b4'_lt",
+      "kind": "projection",
+      "module": "ConvergenceApplications/IndustryInvestment.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.IndHyp.M_pos",
+      "kind": "projection",
+      "module": "ConvergenceApplications/IndustryInvestment.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.IndHyp.z_le",
+      "kind": "projection",
+      "module": "ConvergenceApplications/IndustryInvestment.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.IndHyp.U_cont",
+      "kind": "projection",
+      "module": "ConvergenceApplications/IndustryInvestment.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.IndHyp.U_nonneg",
+      "kind": "projection",
+      "module": "ConvergenceApplications/IndustryInvestment.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.IndHyp.U_le",
+      "kind": "projection",
+      "module": "ConvergenceApplications/IndustryInvestment.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.IndHyp.U_mono",
+      "kind": "projection",
+      "module": "ConvergenceApplications/IndustryInvestment.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.IndHyp.U_conc",
+      "kind": "projection",
+      "module": "ConvergenceApplications/IndustryInvestment.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.IndHyp.U_mono_z",
+      "kind": "projection",
+      "module": "ConvergenceApplications/IndustryInvestment.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.IndHyp.c_cont",
+      "kind": "projection",
+      "module": "ConvergenceApplications/IndustryInvestment.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.IndHyp.c_zero",
+      "kind": "projection",
+      "module": "ConvergenceApplications/IndustryInvestment.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.IndHyp.c_conv",
+      "kind": "projection",
+      "module": "ConvergenceApplications/IndustryInvestment.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.IndHyp.c_mono",
+      "kind": "projection",
+      "module": "ConvergenceApplications/IndustryInvestment.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.IndHyp.c_sconv",
+      "kind": "projection",
+      "module": "ConvergenceApplications/IndustryInvestment.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.IndHyp.M_big",
+      "kind": "projection",
+      "module": "ConvergenceApplications/IndustryInvestment.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.ind\u0393",
+      "kind": "def",
+      "module": "ConvergenceApplications/IndustryInvestment.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.indF",
+      "kind": "def",
+      "module": "ConvergenceApplications/IndustryInvestment.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.indModel",
+      "kind": "abbrev",
+      "module": "ConvergenceApplications/IndustryInvestment.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.IndHyp.one_sub_\u03b4_nonneg",
+      "kind": "theorem",
+      "module": "ConvergenceApplications/IndustryInvestment.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.IndHyp.c_nonneg",
+      "kind": "theorem",
+      "module": "ConvergenceApplications/IndustryInvestment.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.IndHyp.c_one_pos",
+      "kind": "theorem",
+      "module": "ConvergenceApplications/IndustryInvestment.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.IndHyp.c_mul_le",
+      "kind": "theorem",
+      "module": "ConvergenceApplications/IndustryInvestment.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.IndHyp.c_ge_mul",
+      "kind": "theorem",
+      "module": "ConvergenceApplications/IndustryInvestment.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.IndHyp.persp_anti",
+      "kind": "theorem",
+      "module": "ConvergenceApplications/IndustryInvestment.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.IndHyp.persp_convex",
+      "kind": "theorem",
+      "module": "ConvergenceApplications/IndustryInvestment.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.cq",
+      "kind": "def",
+      "module": "ConvergenceApplications/IndustryInvestment.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.cq_props",
+      "kind": "theorem",
+      "module": "ConvergenceApplications/IndustryInvestment.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.ind_F_unbounded",
+      "kind": "theorem",
+      "module": "ConvergenceApplications/IndustryInvestment.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.ind_\u0393_not_mono",
+      "kind": "theorem",
+      "module": "ConvergenceApplications/IndustryInvestment.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.ind_\u0393_not_convex",
+      "kind": "theorem",
+      "module": "ConvergenceApplications/IndustryInvestment.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.isLHC_Ioi_interval",
+      "kind": "theorem",
+      "module": "ConvergenceApplications/IndustryInvestment.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.isUHC_Ioi_interval",
+      "kind": "theorem",
+      "module": "ConvergenceApplications/IndustryInvestment.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.IndHyp.A_nonneg",
+      "kind": "theorem",
+      "module": "ConvergenceApplications/IndustryInvestment.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.IndHyp.continuous_F",
+      "kind": "theorem",
+      "module": "ConvergenceApplications/IndustryInvestment.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.IndHyp.F_le",
+      "kind": "theorem",
+      "module": "ConvergenceApplications/IndustryInvestment.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.IndHyp.one_sub_\u03b4_pos",
+      "kind": "theorem",
+      "module": "ConvergenceApplications/IndustryInvestment.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.IndHyp.safeY",
+      "kind": "def",
+      "module": "ConvergenceApplications/IndustryInvestment.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.IndHyp.safe_mem",
+      "kind": "theorem",
+      "module": "ConvergenceApplications/IndustryInvestment.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.IndHyp.upperDP",
+      "kind": "theorem",
+      "module": "ConvergenceApplications/IndustryInvestment.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.ind_rhs",
+      "kind": "theorem",
+      "module": "ConvergenceApplications/IndustryInvestmentResults.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.integrable_ind",
+      "kind": "theorem",
+      "module": "ConvergenceApplications/IndustryInvestmentResults.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.ind_rhs_le",
+      "kind": "theorem",
+      "module": "ConvergenceApplications/IndustryInvestmentResults.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.ind_rhs_neg",
+      "kind": "theorem",
+      "module": "ConvergenceApplications/IndustryInvestmentResults.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.isClosed_monoX",
+      "kind": "theorem",
+      "module": "ConvergenceApplications/IndustryInvestmentResults.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.ind_T_strictMono_x",
+      "kind": "theorem",
+      "module": "ConvergenceApplications/IndustryInvestmentResults.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.ind_strictMono_x",
+      "kind": "theorem",
+      "module": "ConvergenceApplications/IndustryInvestmentResults.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.ex_10_4b",
+      "kind": "theorem",
+      "module": "ConvergenceApplications/IndustryInvestmentResults.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.isClosed_monoZ",
+      "kind": "theorem",
+      "module": "ConvergenceApplications/IndustryInvestmentResults.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.ind_strictMono_z",
+      "kind": "theorem",
+      "module": "ConvergenceApplications/IndustryInvestmentResults.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.cmb_Ioi_val",
+      "kind": "theorem",
+      "module": "ConvergenceApplications/IndustryInvestmentResults.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.ind_strictConcave",
+      "kind": "theorem",
+      "module": "ConvergenceApplications/IndustryInvestmentResults.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.ind_continuousOn_objG",
+      "kind": "theorem",
+      "module": "ConvergenceApplications/IndustryInvestmentResults.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.ind_max",
+      "kind": "theorem",
+      "module": "ConvergenceApplications/IndustryInvestmentResults.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.ind_policy",
+      "kind": "theorem",
+      "module": "ConvergenceApplications/IndustryInvestmentResults.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.ind_hasDerivAt_x",
+      "kind": "theorem",
+      "module": "ConvergenceApplications/IndustryInvestmentResults.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.ex_10_4c",
+      "kind": "theorem",
+      "module": "ConvergenceApplications/IndustryInvestmentResults.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.ind_mem_policy_iff",
+      "kind": "theorem",
+      "module": "ConvergenceApplications/IndustryInvestmentResults.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.ex_10_4f",
+      "kind": "theorem",
+      "module": "ConvergenceApplications/IndustryInvestmentResults.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.ind_cost_submod",
+      "kind": "theorem",
+      "module": "ConvergenceApplications/IndustryInvestmentResults.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.ex_10_4d",
+      "kind": "theorem",
+      "module": "ConvergenceApplications/IndustryInvestmentResults.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.ex_10_4f_monotone",
+      "kind": "theorem",
+      "module": "ConvergenceApplications/IndustryInvestmentResults.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.ex_10_4f_tendsto",
+      "kind": "theorem",
+      "module": "ConvergenceApplications/IndustryInvestmentResults.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.indW",
+      "kind": "def",
+      "module": "ConvergenceApplications/IndustryInvestmentFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.ind_liftS_of_pos",
+      "kind": "theorem",
+      "module": "ConvergenceApplications/IndustryInvestmentFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.indW_of_pos",
+      "kind": "theorem",
+      "module": "ConvergenceApplications/IndustryInvestmentFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.ind_rhs_W",
+      "kind": "theorem",
+      "module": "ConvergenceApplications/IndustryInvestmentFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.ind_rhs_le_v",
+      "kind": "theorem",
+      "module": "ConvergenceApplications/IndustryInvestmentFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.indW_strictMonoOn",
+      "kind": "theorem",
+      "module": "ConvergenceApplications/IndustryInvestmentFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.indW_strictConcaveOn",
+      "kind": "theorem",
+      "module": "ConvergenceApplications/IndustryInvestmentFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.ind_c_deriv_eq_zero",
+      "kind": "theorem",
+      "module": "ConvergenceApplications/IndustryInvestmentFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.ind_c_deriv_mono",
+      "kind": "theorem",
+      "module": "ConvergenceApplications/IndustryInvestmentFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.ind_c_deriv_strict",
+      "kind": "theorem",
+      "module": "ConvergenceApplications/IndustryInvestmentFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.ind_c_le_mul_deriv",
+      "kind": "theorem",
+      "module": "ConvergenceApplications/IndustryInvestmentFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.ind_foc",
+      "kind": "theorem",
+      "module": "ConvergenceApplications/IndustryInvestmentFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.ind_policy_gt",
+      "kind": "theorem",
+      "module": "ConvergenceApplications/IndustryInvestmentFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.indW_hasDerivAt",
+      "kind": "theorem",
+      "module": "ConvergenceApplications/IndustryInvestmentFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.indW_deriv_lt",
+      "kind": "theorem",
+      "module": "ConvergenceApplications/IndustryInvestmentFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.ind_policy_strictMono_x",
+      "kind": "theorem",
+      "module": "ConvergenceApplications/IndustryInvestmentFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.ind_policy_ratio_lt",
+      "kind": "theorem",
+      "module": "ConvergenceApplications/IndustryInvestmentFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.ind_policy_ratio_le",
+      "kind": "theorem",
+      "module": "ConvergenceApplications/IndustryInvestmentFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.ind_policy_slope_lt",
+      "kind": "theorem",
+      "module": "ConvergenceApplications/IndustryInvestmentFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.IndIncDiff",
+      "kind": "def",
+      "module": "ConvergenceApplications/IndustryInvestmentFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.isClosed_indIncDiff",
+      "kind": "theorem",
+      "module": "ConvergenceApplications/IndustryInvestmentFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.ind_E_incDiff",
+      "kind": "theorem",
+      "module": "ConvergenceApplications/IndustryInvestmentFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.ind_T_incDiff",
+      "kind": "theorem",
+      "module": "ConvergenceApplications/IndustryInvestmentFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.ind_v_incDiff",
+      "kind": "theorem",
+      "module": "ConvergenceApplications/IndustryInvestmentFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.ex_10_4e",
+      "kind": "theorem",
+      "module": "ConvergenceApplications/IndustryInvestmentFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.ex_10_4e_strict",
+      "kind": "theorem",
+      "module": "ConvergenceApplications/IndustryInvestmentFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.ind_policy_gt_self",
+      "kind": "theorem",
+      "module": "ConvergenceApplications/IndustryInvestmentFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.ind_not_tendsto_zero",
+      "kind": "theorem",
+      "module": "ConvergenceApplications/IndustryInvestmentFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.ind_stationary_unique",
+      "kind": "theorem",
+      "module": "ConvergenceApplications/IndustryInvestmentFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.ind_limit_stationary",
+      "kind": "theorem",
+      "module": "ConvergenceApplications/IndustryInvestmentFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.ex_10_4f_limit_eq",
+      "kind": "theorem",
+      "module": "ConvergenceApplications/IndustryInvestmentFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.ex_10_4f_limit_pos",
+      "kind": "theorem",
+      "module": "ConvergenceApplications/IndustryInvestmentFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.ex_10_4f_stationary",
+      "kind": "theorem",
+      "module": "ConvergenceApplications/IndustryInvestmentFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.indU0",
+      "kind": "def",
+      "module": "ConvergenceApplications/IndustryInvestmentFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.hasDerivAt_indU0",
+      "kind": "theorem",
+      "module": "ConvergenceApplications/IndustryInvestmentFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.hasDerivAt_cq",
+      "kind": "theorem",
+      "module": "ConvergenceApplications/IndustryInvestmentFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.ind0_hyp",
+      "kind": "theorem",
+      "module": "ConvergenceApplications/IndustryInvestmentFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.indQ0",
+      "kind": "abbrev",
+      "module": "ConvergenceApplications/IndustryInvestmentFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.indQ0_props",
+      "kind": "theorem",
+      "module": "ConvergenceApplications/IndustryInvestmentFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.indU0_incDiff",
+      "kind": "theorem",
+      "module": "ConvergenceApplications/IndustryInvestmentFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.ind0_diff",
+      "kind": "theorem",
+      "module": "ConvergenceApplications/IndustryInvestmentFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.ex_10_4e_strict_counterexample",
+      "kind": "theorem",
+      "module": "ConvergenceApplications/IndustryInvestmentFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.ex_10_4d_slope_counterexample",
+      "kind": "theorem",
+      "module": "ConvergenceApplications/IndustryInvestmentFOC.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.indPolicyFn",
+      "kind": "def",
+      "module": "ConvergenceApplications/IndustryConvergencePolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.indPolicyFn_eq",
+      "kind": "theorem",
+      "module": "ConvergenceApplications/IndustryConvergencePolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.indPolicyFn_mem",
+      "kind": "theorem",
+      "module": "ConvergenceApplications/IndustryConvergencePolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.indPolicyFn_props",
+      "kind": "theorem",
+      "module": "ConvergenceApplications/IndustryConvergencePolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.indPolicyFn_industryPolicy",
+      "kind": "theorem",
+      "module": "ConvergenceApplications/IndustryConvergencePolicy.lean"
+    },
+    {
+      "name": "StokeyLucasPrescott.ConvergenceApplications.indPolicyFn_ind0",
+      "kind": "theorem",
+      "module": "ConvergenceApplications/IndustryConvergencePolicy.lean"
     },
     {
       "name": "StokeyLucasPrescott.ConvergenceApplications.IsSearchCutoff",
@@ -13529,7 +14234,7 @@
       "Classical.choice",
       "Quot.sound"
     ],
-    "StokeyLucasPrescott.ConvergenceApplications.IndustryPolicy.slope_lt": [
+    "StokeyLucasPrescott.ConvergenceApplications.IndustryPolicy.ratio_lt": [
       "propext",
       "Classical.choice",
       "Quot.sound"
@@ -13549,7 +14254,12 @@
       "Classical.choice",
       "Quot.sound"
     ],
-    "StokeyLucasPrescott.ConvergenceApplications.IndustryPolicy.sub_strictAnti": [
+    "StokeyLucasPrescott.ConvergenceApplications.IndustryPolicy.lt_g_of_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.IndustryPolicy.g_lt_of_lt": [
       "propext",
       "Classical.choice",
       "Quot.sound"
@@ -14000,6 +14710,701 @@
       "Quot.sound"
     ],
     "StokeyLucasPrescott.ConvergenceApplications.ex_13_4c_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.UpperDP": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.UpperDP.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.UpperDP.nonempty": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.UpperDP.compact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.UpperDP.lhc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.UpperDP.uhc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.UpperDP.contF": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.UpperDP.A_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.UpperDP.bddAbove": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.UpperDP.safe": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.UpperDP.\u03b2_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.UpperDP.\u03b2_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.UpperDP.cont\u03c6": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.UpperDP.contExp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.truncModel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.truncModel_boundedDP": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.truncK": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.truncK_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.truncT": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.trunc_bellman_argmax": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.truncT_mapsTo": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.isClosed_bounds": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.upper_fixed": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.IndHyp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.IndHyp.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.IndHyp.r_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.IndHyp.\u03b4_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.IndHyp.\u03b4_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.IndHyp.\u03b4'_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.IndHyp.M_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.IndHyp.z_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.IndHyp.U_cont": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.IndHyp.U_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.IndHyp.U_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.IndHyp.U_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.IndHyp.U_conc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.IndHyp.U_mono_z": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.IndHyp.c_cont": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.IndHyp.c_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.IndHyp.c_conv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.IndHyp.c_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.IndHyp.c_sconv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.IndHyp.M_big": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.ind\u0393": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.indF": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.indModel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.IndHyp.one_sub_\u03b4_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.IndHyp.c_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.IndHyp.c_one_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.IndHyp.c_mul_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.IndHyp.c_ge_mul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.IndHyp.persp_anti": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.IndHyp.persp_convex": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.cq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.cq_props": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.ind_F_unbounded": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.ind_\u0393_not_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.ind_\u0393_not_convex": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.isLHC_Ioi_interval": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.isUHC_Ioi_interval": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.IndHyp.A_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.IndHyp.continuous_F": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.IndHyp.F_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.IndHyp.one_sub_\u03b4_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.IndHyp.safeY": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.IndHyp.safe_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.IndHyp.upperDP": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.ind_rhs": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.integrable_ind": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.ind_rhs_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.ind_rhs_neg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.isClosed_monoX": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.ind_T_strictMono_x": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.ind_strictMono_x": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.ex_10_4b": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.isClosed_monoZ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.ind_strictMono_z": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.cmb_Ioi_val": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.ind_strictConcave": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.ind_continuousOn_objG": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.ind_max": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.ind_policy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.ind_hasDerivAt_x": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.ex_10_4c": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.ind_mem_policy_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.ex_10_4f": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.ind_cost_submod": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.ex_10_4d": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.ex_10_4f_monotone": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.ex_10_4f_tendsto": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.indW": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.ind_liftS_of_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.indW_of_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.ind_rhs_W": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.ind_rhs_le_v": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.indW_strictMonoOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.indW_strictConcaveOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.ind_c_deriv_eq_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.ind_c_deriv_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.ind_c_deriv_strict": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.ind_c_le_mul_deriv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.ind_foc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.ind_policy_gt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.indW_hasDerivAt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.indW_deriv_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.ind_policy_strictMono_x": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.ind_policy_ratio_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.ind_policy_ratio_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.ind_policy_slope_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.IndIncDiff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.isClosed_indIncDiff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.ind_E_incDiff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.ind_T_incDiff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.ind_v_incDiff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.ex_10_4e": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.ex_10_4e_strict": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.ind_policy_gt_self": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.ind_not_tendsto_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.ind_stationary_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.ind_limit_stationary": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.ex_10_4f_limit_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.ex_10_4f_limit_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.ex_10_4f_stationary": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.indU0": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.hasDerivAt_indU0": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.hasDerivAt_cq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.ind0_hyp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.indQ0": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.indQ0_props": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.indU0_incDiff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.ind0_diff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.ex_10_4e_strict_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.ex_10_4d_slope_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.indPolicyFn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.indPolicyFn_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.indPolicyFn_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.indPolicyFn_props": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.indPolicyFn_industryPolicy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "StokeyLucasPrescott.ConvergenceApplications.indPolicyFn_ind0": [
       "propext",
       "Classical.choice",
       "Quot.sound"
@@ -15031,20 +16436,25 @@
     "ConvergenceApplications/GrowthOutput.lean": "2ed5764ffd6d251e247a6545da2f1c63827804e1263231a388503a8a8548695d",
     "ConvergenceApplications/GrowthConvergence.lean": "c213cd8eb91bae40c0dd7fd2d765ee4441e52a15f519ff31e73673824e377fec",
     "ConvergenceApplications/Parameters.lean": "0d43cb370f2072b4f4bb1ae3b5cc2a805b078a3435b63fdde688523e519a8412",
-    "ConvergenceApplications/IndustryConvergence.lean": "b03c105f6838e92ac5ddb4f753a680f1acb368b108c79485dc6401d806ec560f",
+    "ConvergenceApplications/IndustryConvergence.lean": "99896c7da7347cf23c667f40032c16bc5664471613aeb8b92bc74776996065b6",
+    "ConvergenceApplications/UpperBounded.lean": "ea0c1abe26d7a2e3b18da47e3f43cd26bc669e5cf4383f450c6c8b730517b530",
+    "ConvergenceApplications/IndustryInvestment.lean": "09d4e011f0d4a0e244661688af4a360f0faba31b2a513323189121f3a3fcfdd2",
+    "ConvergenceApplications/IndustryInvestmentResults.lean": "d71c62136116f5fd16091ad340b578b37be7235c18c3b7d485bab15429045ba4",
+    "ConvergenceApplications/IndustryInvestmentFOC.lean": "7e683f56139e25b80b38d6f5d16449eee9d8fe19a43c7f2fbfb75d909fafed82",
+    "ConvergenceApplications/IndustryConvergencePolicy.lean": "642f8c81bfe705b262368ff829464b953d4949e325e7d9bd7f3e1103beded8ae",
     "ConvergenceApplications/SearchValue.lean": "67d6bccbffa2a7c219268a721e191e65ce2f9f671e31b4affe4ce4ac6039dc06",
     "ConvergenceApplications/SearchInvariant.lean": "30388d8f60f01fa902df4f35c5ef0ed60c3fe7e4b5347828c822bb3851481a05",
     "ConvergenceApplications/SearchDemand.lean": "9c955244e0a8a2b2351bc555a841fe03691877309efb3d9776669e6d859fb3dc",
     "ConvergenceApplications/SearchLeavers.lean": "8c68258132dcc22a4ee20837f3e6040a159127d1ccaf9186b7355496e27bd280",
-    "ConvergenceApplications.lean": "72943ee5b030e5173e0991f1734d0b66005332f4955af0a9420938c1dcaaa97b",
+    "ConvergenceApplications.lean": "6940df74ce740d6f603fc5242583ee396395f3132fae414b21e119ae6102ee4e",
     "lean-toolchain": "8733782dc070a99b312039cda424f601b80f3be6f6f512627da5ba25adc27632",
     "lakefile.toml": "fd2f14cc953732848a790daf6c9a14af790a4c5e4488fcac7ba261228f393fd7",
     "lake-manifest.json": "d6f71ba22f97711b14d05c2502753d2038d9c890c8b9616adc6a64acd56ffd30",
-    "proof-manifest.json": "8944828d0ffb28ff914b56967befcdecd71557c91ce5fb13fe3078450eb1b254",
+    "proof-manifest.json": "85d0303c954af810c4ece8bf59f4f47d1e49b3b1a38f444697adcb83647d808f",
     "scripts/verify.py": "a70b1fa704dd590f937f8b37682afa88a9d85a9150065acb935c7d2c9589da3b",
     "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
   },
-  "fresh_audit_sha256": "f883762379fc4ef8713c6f51488b3cbf4b0cdc1003c50594f95430f2ca63dbff",
+  "fresh_audit_sha256": "02f3461e2d522611f9157226c1df18317a944a0b5649e501b589ff93dad7e306",
   "lean_toolchain": "leanprover/lean4:v4.34.0",
   "scope": "SLP Chapter 13 (Applications of Convergence Results for Markov Processes): every exercise, with corrections.",
   "source": "Stokey, Lucas and Prescott (1989), Recursive Methods in Economic Dynamics, Chapter 13"

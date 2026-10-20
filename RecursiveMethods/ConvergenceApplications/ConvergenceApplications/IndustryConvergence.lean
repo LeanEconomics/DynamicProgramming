@@ -12,7 +12,9 @@ import ConvergenceApplications.Parameters
 SLP §13.4, pp. 395–397, Exercise 13.4. The policy `g` of the §10.4 problem is taken as given,
 with the properties of Exercise 10.4(d, e) (`IndustryPolicy`): `g` is continuous on
 `X × Z`, `X = (0, ∞)`, `Z = [z̲, z̄]`, maps `X × Z` into `X`; (i) `g(·, z)` is strictly increasing
-with slope `< 1`; (ii) `g(x, ·)` is nondecreasing. The shocks follow a monotone Feller Markov
+and the growth rate `g(x, z)/x` is strictly decreasing in `x`; (ii) `g(x, ·)` is nondecreasing.
+The optimal policy of §10.4 has these properties (`indPolicyFn_industryPolicy` in
+`IndustryConvergencePolicy`). The shocks follow a monotone Feller Markov
 kernel `Q` on `Z` with the mixing condition (2), `Qᴺ(z, (u, v]) ≥ α(v − u)` (`IndustryMixing`).
 Positivity of `z̲` is never used.
 
@@ -72,6 +74,15 @@ Positivity of `z̲` is never used.
 
 ## Corrections
 
+* **The slope condition** (p. 395, from Exercise 10.4d). The book's (i) asks that `g(·, z)` have
+  slope strictly less than one. That is false for the policy of §10.4
+  (`ex_10_4d_slope_counterexample`), so `IndustryPolicy` asks instead that `g(x, z)/x` be
+  strictly decreasing (`IndustryPolicy.ratio_lt`), which §10.4 does give
+  (`ind_policy_ratio_lt`). Every §13.4 argument needs only its consequence that `g(·, z)` crosses
+  the diagonal at most once, from above (`IndustryPolicy.lt_g_of_lt`,
+  `IndustryPolicy.g_lt_of_lt`), so no result below changes. The counterexamples
+  `industry_no_fixedPoint_half` and `industry_no_fixedPoint_above` now use `g(x, z) = x/(2 + x)`
+  and `g(x, z) = x + 1/(1 + x)`.
 * **Existence of `x̲`, `x̄`** (p. 396). (i)–(ii) give uniqueness of the fixed points and `x̲ ≤ x̄`,
   not existence. `industry_no_fixedPoint_half`: `g(x, z) = x/2` satisfies all the hypotheses and
   has no positive fixed point (capital shrinks to `0 ∉ X`, as the NOTE says). The NOTE's repair
@@ -137,13 +148,16 @@ theorem industry_shock_stable (hz : zlo < zhi) [IsMarkovKernel Q] (hM : IsMonoto
 
 /-- The properties of the policy `g` of the §10.4 problem established in Exercise 10.4(d, e)
 (p. 395), on `X × Z` with `X = (0, ∞)`: `g` is continuous and maps `X × Z` into `X`; (i) for each
-`z`, `g(·, z)` is strictly increasing with slope strictly less than one; (ii) for each `x`,
-`g(x, ·)` is nondecreasing. -/
+`z`, `g(·, z)` is strictly increasing and `g(x, z)/x` is strictly decreasing in `x`; (ii) for each
+`x`, `g(x, ·)` is nondecreasing.
+
+**Correction.** The book's (i) asks for slope strictly less than one, which the §10.4 policy need
+not have (`ex_10_4d_slope_counterexample`); `ratio_lt` replaces it. -/
 structure IndustryPolicy (g : ℝ → ℝ → ℝ) (zlo zhi : ℝ) : Prop where
   cont : ContinuousOn (fun p : ℝ × ℝ => g p.1 p.2) (Ioi 0 ×ˢ Icc zlo zhi)
   pos : ∀ x z, 0 < x → z ∈ Icc zlo zhi → 0 < g x z
   strictMono_x : ∀ x x' z, 0 < x → x < x' → z ∈ Icc zlo zhi → g x z < g x' z
-  slope_lt : ∀ x x' z, 0 < x → x < x' → z ∈ Icc zlo zhi → g x' z - g x z < x' - x
+  ratio_lt : ∀ x x' z, 0 < x → x < x' → z ∈ Icc zlo zhi → g x' z / x' < g x z / x
   mono_z : ∀ x z z', 0 < x → zlo ≤ z → z ≤ z' → z' ≤ zhi → g x z ≤ g x z'
 
 variable {g : ℝ → ℝ → ℝ}
@@ -165,10 +179,22 @@ theorem mono {x x' z z' : ℝ} (hx : 0 < x) (hxx : x ≤ x') (hz : z ∈ Icc zlo
     (hz' : z' ∈ Icc zlo zhi) (hzz : z ≤ z') : g x z ≤ g x' z' :=
   (hg.mono_x hx hxx hz).trans (hg.mono_z x' z z' (hx.trans_le hxx) hz.1 hzz hz'.2)
 
-/-- `g(x, z) − x` is strictly decreasing in `x`. -/
-theorem sub_strictAnti {x x' z : ℝ} (hx : 0 < x) (hxx : x < x') (hz : z ∈ Icc zlo zhi) :
-    g x' z - x' < g x z - x := by
-  linarith [hg.slope_lt x x' z hx hxx hz]
+/-- `g(·, z)` crosses the diagonal at most once, from above: if `x < x′` and `x′ ≤ g(x′, z)`, then
+`x < g(x, z)`. -/
+theorem lt_g_of_lt {x x' z : ℝ} (hx : 0 < x) (hxx : x < x') (hz : z ∈ Icc zlo zhi)
+    (h : x' ≤ g x' z) : x < g x z := by
+  have hr := hg.ratio_lt x x' z hx hxx hz
+  have h1 : 1 ≤ g x' z / x' := by rw [le_div_iff₀ (hx.trans hxx)]; linarith
+  have h2 : 1 < g x z / x := h1.trans_lt hr
+  rwa [lt_div_iff₀ hx, one_mul] at h2
+
+/-- If `x < x′` and `g(x, z) ≤ x`, then `g(x′, z) < x′`. -/
+theorem g_lt_of_lt {x x' z : ℝ} (hx : 0 < x) (hxx : x < x') (hz : z ∈ Icc zlo zhi)
+    (h : g x z ≤ x) : g x' z < x' := by
+  have hr := hg.ratio_lt x x' z hx hxx hz
+  have h1 : g x z / x ≤ 1 := by rw [div_le_iff₀ hx]; linarith
+  have h2 : g x' z / x' < 1 := hr.trans_le h1
+  rwa [div_lt_iff₀ (hx.trans hxx), one_mul] at h2
 
 /-- `g(·, z)` is continuous on `X`. -/
 theorem continuousOn_x {z : ℝ} (hz : z ∈ Icc zlo zhi) : ContinuousOn (fun x => g x z) (Ioi 0) :=
@@ -178,16 +204,16 @@ theorem continuousOn_x {z : ℝ} (hz : z ∈ Icc zlo zhi) : ContinuousOn (fun x 
 theorem fixedPoint_unique {x x' z : ℝ} (hx : 0 < x) (hx' : 0 < x') (hz : z ∈ Icc zlo zhi)
     (hfx : g x z = x) (hfx' : g x' z = x') : x = x' := by
   rcases lt_trichotomy x x' with h | h | h
-  · have := hg.sub_strictAnti hx h hz; linarith
+  · have := hg.lt_g_of_lt hx h hz hfx'.ge; linarith
   · exact h
-  · have := hg.sub_strictAnti hx' h hz; linarith
+  · have := hg.lt_g_of_lt hx' h hz hfx.ge; linarith
 
 /-- `x̲ ≤ x̄` (NOTE p. 396): `g(x̲, z̄) ≥ g(x̲, z̲) = x̲`. -/
 theorem xlo_le_xhi {xlo xhi : ℝ} (hz : zlo ≤ zhi) (hlo : 0 < xlo) (hhi : 0 < xhi)
     (hflo : g xlo zlo = xlo) (hfhi : g xhi zhi = xhi) : xlo ≤ xhi := by
   by_contra hlt
   rw [not_le] at hlt
-  have h1 := hg.sub_strictAnti hhi hlt ⟨hz, le_rfl⟩
+  have h1 := hg.g_lt_of_lt hhi hlt ⟨hz, le_rfl⟩ hfhi.le
   have h2 := hg.mono_z xlo zlo zhi hlo le_rfl hz le_rfl
   linarith
 
@@ -196,14 +222,14 @@ theorem le_self_of_le_fixed {x p z : ℝ} (hx : 0 < x) (hxp : x ≤ p) (hz : z �
     (hp : g p z = p) : x ≤ g x z := by
   rcases hxp.eq_or_lt with rfl | hlt
   · exact hp.ge
-  · have := hg.sub_strictAnti hx hlt hz; linarith
+  · exact (hg.lt_g_of_lt hx hlt hz hp.ge).le
 
 /-- Above a fixed point `p` of `g(·, z)`, `g(x, z) ≤ x`. -/
 theorem le_self_of_fixed_le {x p z : ℝ} (hp0 : 0 < p) (hpx : p ≤ x) (hz : z ∈ Icc zlo zhi)
     (hp : g p z = p) : g x z ≤ x := by
   rcases hpx.eq_or_lt with rfl | hlt
   · exact hp.le
-  · have := hg.sub_strictAnti hp0 hlt hz; linarith
+  · exact (hg.g_lt_of_lt hp0 hlt hz hp.le).le
 
 /-- Existence of a fixed point of `g(·, z)` by the intermediate value theorem, given points
 `x₁, x₂ > 0` with `g(x₁, z) ≥ x₁` and `g(x₂, z) ≤ x₂`. -/
@@ -212,7 +238,7 @@ theorem exists_fixedPoint {x₁ x₂ z : ℝ} (hz : z ∈ Icc zlo zhi) (hx₁ : 
   have h12 : x₁ ≤ x₂ := by
     by_contra hlt
     rw [not_le] at hlt
-    have := hg.sub_strictAnti hx₂ hlt hz; linarith
+    have := hg.g_lt_of_lt hx₂ hlt hz h₂; linarith
   have hc : ContinuousOn (fun x => g x z - x) (Icc x₁ x₂) :=
     ((hg.continuousOn_x hz).sub continuousOn_id).mono fun x hx => hx₁.trans_le hx.1
   obtain ⟨p, hp, hp0⟩ := intermediate_value_Icc' h12 hc
@@ -239,14 +265,25 @@ theorem industry_exists_xlo_xhi (hg : IndustryPolicy g zlo zhi) (hz : zlo ≤ zh
     fun x hx hfx => hg.fixedPoint_unique hx hlo hzlo hfx hflo,
     fun x hx hfx => hg.fixedPoint_unique hx hhi hzhi hfx hfhi⟩
 
-/-- **Counterexample to the existence claim** (p. 396), too little capital: `g(x, z) = x/2`
-satisfies (i), (ii), continuity and `g(X × Z) ⊆ X`, but `g(·, z)` has no fixed point in
-`X = (0, ∞)` for any `z`. -/
+/-- **Counterexample to the existence claim** (p. 396), too little capital:
+`g(x, z) = x/(2 + x)` (below `x/2`) satisfies (i), (ii), continuity and `g(X × Z) ⊆ X`, but
+`g(·, z)` has no fixed point in `X = (0, ∞)` for any `z`. (With the slope condition of the book
+the example was `x/2`; its growth rate is constant, so it is not an `IndustryPolicy` now.) -/
 theorem industry_no_fixedPoint_half (zlo zhi : ℝ) :
-    IndustryPolicy (fun x _ => x / 2) zlo zhi ∧ ∀ x : ℝ, 0 < x → x / 2 ≠ x := by
-  refine ⟨⟨(continuous_fst.div_const 2).continuousOn, fun x _ hx _ => by positivity,
-    fun x x' _ _ h _ => by linarith, fun x x' _ _ h _ => by linarith,
-    fun _ _ _ _ _ _ _ => le_rfl⟩, fun x hx h => by linarith⟩
+    IndustryPolicy (fun x _ => x / (2 + x)) zlo zhi ∧ ∀ x : ℝ, 0 < x → x / (2 + x) ≠ x := by
+  refine ⟨⟨?_, fun x _ hx _ => by positivity, fun x x' _ hx h _ => ?_, fun x x' _ hx h _ => ?_,
+    fun _ _ _ _ _ _ _ => le_rfl⟩, fun x hx h => ?_⟩
+  · refine continuousOn_fst.div (continuousOn_const.add continuousOn_fst) fun p hp => ?_
+    have : (0 : ℝ) < p.1 := hp.1
+    positivity
+  · rw [div_lt_div_iff₀ (by linarith) (by linarith)]
+    nlinarith
+  · have hx' : 0 < x' := hx.trans h
+    rw [div_right_comm, div_self hx'.ne', div_right_comm, div_self hx.ne']
+    exact one_div_lt_one_div_of_lt (by linarith) (by linarith)
+  · have h2 : 0 < 2 + x := by linarith
+    rw [div_eq_iff h2.ne'] at h
+    nlinarith
 
 /-- **Counterexample to the existence claim** (p. 396), too much capital: `g(x, z) = x + 1/(1 + x)`
 satisfies (i), (ii), continuity and `g(X × Z) ⊆ X`, but `g(x, z) > x` for every `x > 0`, so again
@@ -270,10 +307,10 @@ theorem industry_no_fixedPoint_above (zlo zhi : ℝ) :
       have : 0 < (1 + x) * (1 + x') - 1 := by nlinarith
       nlinarith [mul_pos (sub_pos.2 h) this]
     linarith
-  · have : 1 / (1 + x') - 1 / (1 + x) < 0 := by
-      have : 1 / (1 + x') < 1 / (1 + x) := one_div_lt_one_div_of_lt (by linarith) (by linarith)
-      linarith
-    linarith
+  · have hx' : 0 < x' := hx.trans h
+    rw [add_div, div_self hx'.ne', div_div, add_div, div_self hx.ne', div_div]
+    have : (1 + x) * x < (1 + x') * x' := by nlinarith
+    linarith [one_div_lt_one_div_of_lt (by positivity) this]
   · have : 0 < 1 / (1 + x) := by positivity
     linarith
 
@@ -1220,13 +1257,13 @@ theorem ex_13_4c_gap (hg : IndustryPolicy g zlo zhi) {xlo xhi : ℝ} (hlo : 0 < 
   have hzhi : zhi ∈ Icc zlo zhi := ⟨hz.1.trans hz.2, le_rfl⟩
   have hhi : 0 < xhi := hlo.trans_le hloh
   refine ⟨fun hx => ⟨?_, ?_⟩, fun hx0 hx => ⟨?_, ?_⟩, fun hx => ?_⟩
-  · have h1 := hg.slope_lt xhi x zhi hhi hx hzhi
+  · have h1 := hg.g_lt_of_lt hhi hx hzhi hfhi.le
     have h2 := hg.mono_z x z zhi (hhi.trans hx) hz.1 hz.2 le_rfl
     linarith
   · have h1 := hg.strictMono_x xhi x z hhi hx hz
     have h2 := hg.mono hlo hloh hzlo hz hz.1
     linarith
-  · have h1 := hg.slope_lt x xlo zlo hx0 hx hzlo
+  · have h1 := hg.lt_g_of_lt hx0 hx hzlo hflo.ge
     have h2 := hg.mono_z x zlo z hx0 le_rfl hz.1 hz.2
     linarith
   · have h1 := hg.strictMono_x x xlo z hx0 hx hz
@@ -1262,7 +1299,8 @@ theorem ex_13_4c_remark_counterexample :
       (3 : ℝ) < 4 ∧ (4 + 1) / 2 - 3 < (0 : ℝ) := by
   refine ⟨⟨((continuous_fst.add continuous_snd).div_const 2).continuousOn,
     fun x z hx hz => by linarith [hz.1], fun x x' z _ h _ => by linarith,
-    fun x x' z _ h _ => by linarith, fun x z z' _ _ h _ => by linarith⟩,
+    fun x x' z hx h hz => by rw [div_lt_div_iff₀ (by linarith) hx]; nlinarith [hz.1],
+    fun x z z' _ _ h _ => by linarith⟩,
     by norm_num, by norm_num, by norm_num, by norm_num⟩
 
 /-- Iterates of `g(·, z)` started strictly below (above) a fixed point stay strictly below
