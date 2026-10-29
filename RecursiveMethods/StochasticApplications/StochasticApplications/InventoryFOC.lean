@@ -4,6 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Robert Kirkby
 -/
 import StochasticApplications.InventoryPolicy
+import Mathlib.Analysis.Calculus.FDeriv.Measurable
+import Mathlib.Analysis.Calculus.ParametricIntegral
+import Mathlib.RingTheory.Etale.Weakly
+import Mathlib.RingTheory.Flat.TorsionFree
+import Mathlib.RingTheory.TotallySplit
 
 /-!
 # Production and inventory accumulation: first-order conditions

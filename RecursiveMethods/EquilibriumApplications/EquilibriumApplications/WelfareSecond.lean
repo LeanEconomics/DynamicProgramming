@@ -4,6 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Robert Kirkby
 -/
 import EquilibriumApplications.Welfare
+import Mathlib.Analysis.LocallyConvex.AbsConvexOpen
+import Mathlib.Analysis.LocallyConvex.Separation
+import Mathlib.Analysis.Normed.Affine.AddTorsorBases
+import Mathlib.Order.CompletePartialOrder
 
 /-!
 # The Second Welfare Theorem

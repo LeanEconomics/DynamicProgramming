@@ -3,7 +3,12 @@ Copyright (c) 2026 Robert Kirkby. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Robert Kirkby
 -/
-import EquilibriumApplications.Economy
+import Mathlib.Algebra.Order.Ring.Star
+import Mathlib.Algebra.Order.Star.Real
+import Mathlib.MeasureTheory.Function.Floor
+import Mathlib.MeasureTheory.Function.Holder
+import Mathlib.MeasureTheory.VectorMeasure.Decomposition.RadonNikodym
+import Mathlib.Order.CompletePartialOrder
 
 /-!
 # Inner product prices on `L∞`: Lemma 15.7

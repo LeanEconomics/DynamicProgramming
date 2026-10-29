@@ -4,6 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Robert Kirkby
 -/
 import EquilibriumApplications.SequencePrices
+import Mathlib.Algebra.Order.Archimedean.Real.Hom
+import Mathlib.Algebra.Order.Star.Real
+import Mathlib.Analysis.Normed.Module.HahnBanach
 
 /-!
 # Discounted sums, the tail distance, and functionals with all their weight at infinity

@@ -5,6 +5,7 @@ Authors: Robert Kirkby
 -/
 import EquilibriumApplications.SequenceAssumptions
 import EquilibriumApplications.SequenceInfinity
+import Mathlib.Analysis.LocallyConvex.AbsConvexOpen
 
 /-!
 # Exercise 15.11: Assumption 15.7 and limits of truncated utilities

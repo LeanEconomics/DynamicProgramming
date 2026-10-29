@@ -3,7 +3,12 @@ Copyright (c) 2026 Robert Kirkby. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Robert Kirkby
 -/
-import EquilibriumApplications.GrowthCertaintyOptimum
+import Mathlib.Algebra.Order.Ring.Star
+import Mathlib.Algebra.Order.Star.Real
+import Mathlib.Analysis.RCLike.Basic
+import Mathlib.Topology.ContinuousMap.Bounded.Normed
+import Mathlib.Topology.MetricSpace.Contracting
+import Mathlib.Topology.MetricSpace.Sequences
 
 /-!
 # The one-sector model under certainty: the firm's and household's functional equations

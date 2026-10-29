@@ -4,6 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Robert Kirkby
 -/
 import EquilibriumApplications.ManyConsumers
+import Mathlib.RingTheory.Etale.Weakly
+import Mathlib.RingTheory.Flat.TorsionFree
+import Mathlib.RingTheory.TotallySplit
 
 /-!
 # Utility possibility sets and Pareto optima with many consumers

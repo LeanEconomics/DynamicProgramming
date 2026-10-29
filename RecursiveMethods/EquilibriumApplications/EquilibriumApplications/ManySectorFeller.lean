@@ -4,6 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Robert Kirkby
 -/
 import EquilibriumApplications.ManySectorSecurities
+import Mathlib.Analysis.InnerProductSpace.Basic
+import Mathlib.MeasureTheory.Measure.ProbabilityMeasure
 
 /-!
 # Pricing securities: Exercise 16.2(c) for a Feller transition on a compact shock space

@@ -5,6 +5,7 @@ Authors: Robert Kirkby
 -/
 import ConvergenceApplications.Doeblin
 import ConvergenceApplications.TVConvergence
+import Mathlib.Probability.Kernel.Composition.CompNotation
 
 /-!
 # Condition M and geometric convergence

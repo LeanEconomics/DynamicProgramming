@@ -4,6 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Robert Kirkby
 -/
 import DeterministicDynamics.Concavity
+import Mathlib.Algebra.Ring.IsFormallyReal
+import Mathlib.Analysis.Calculus.ContDiff.Deriv
+import Mathlib.Analysis.Calculus.ContDiff.Operations
+import Mathlib.Analysis.Calculus.Deriv.Pow
+import Mathlib.Analysis.Convex.Deriv
+import Mathlib.Analysis.LocallyConvex.AbsConvexOpen
+import Mathlib.Topology.Algebra.Module.ModuleTopology
 
 /-!
 # Every smooth map is an optimal policy: Boldrin and Montrucchio

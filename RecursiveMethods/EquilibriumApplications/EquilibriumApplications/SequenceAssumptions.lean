@@ -3,7 +3,12 @@ Copyright (c) 2026 Robert Kirkby. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Robert Kirkby
 -/
+import EquilibriumApplications.Economy
 import EquilibriumApplications.SequencePrices
+import Mathlib.Algebra.Order.Archimedean.Real.Hom
+import Mathlib.Algebra.Order.Star.Real
+import Mathlib.Analysis.Normed.Group.Tannery
+import Mathlib.Analysis.RCLike.Lemmas
 
 /-!
 # Assumptions 15.6 and 15.7, and Exercise 15.10

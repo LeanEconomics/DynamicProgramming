@@ -1,9 +1,27 @@
-import Mathlib
-import Mathlib.Topology.MetricSpace.Basic
+import Mathlib.Algebra.Order.Ring.Star
+import Mathlib.Order.CompletePartialOrder
+import Mathlib.Topology.Instances.EReal.Lemmas
+import Mathlib.Algebra.Order.Star.Real
+import Mathlib.Analysis.InnerProductSpace.Basic
 import Mathlib.Analysis.SpecificLimits.Basic
-import Mathlib.Topology.MetricSpace.Cauchy
+import Mathlib.Algebra.CharP.Defs
+import Mathlib.Topology.Instances.Nat
+import Mathlib.Topology.Metrizable.Uniformity
+import Mathlib.Topology.Sequences
+import Mathlib.Analysis.Normed.Order.Lattice
+import Mathlib.Topology.GDelta.MetrizableSpace
+import Mathlib.Topology.ContinuousMap.Bounded.Normed
+import Mathlib.Analysis.Convex.Deriv
+import Mathlib.Analysis.LocallyConvex.AbsConvexOpen
 import Mathlib.Analysis.LocallyConvex.Separation
-import Mathlib.Analysis.Convex.Topology
+import Mathlib.Analysis.Normed.Module.Basic
+import Mathlib.Analysis.SpecialFunctions.Pow.Real
+import Mathlib.Analysis.Calculus.Deriv.Comp
+import Mathlib.Analysis.Calculus.Deriv.Mul
+import Mathlib.Analysis.Calculus.Deriv.Slope
+import Mathlib.Topology.Algebra.Module.ModuleTopology
+import Mathlib.Analysis.Convex.SpecificFunctions.Pow
+import Mathlib.Analysis.SpecialFunctions.Pow.Deriv
 set_option autoImplicit false
 
 /-

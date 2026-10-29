@@ -4,6 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Robert Kirkby
 -/
 import StochasticDP.BoundedConcave
+import StochasticDP.BoundedMonotone
+import StochasticDP.Envelope
+import StochasticDP.InteriorPoints
 
 /-!
 # Bounded returns: concave laws of motion, policy convergence, differentiability

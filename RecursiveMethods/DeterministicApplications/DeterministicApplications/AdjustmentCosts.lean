@@ -4,8 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Robert Kirkby
 -/
 import DeterministicApplications.ConvexInvestment
-import DeterministicApplications.GrowthDiscount
 import DeterministicApplications.GrowthDifferentiability
+import DeterministicApplications.GrowthDiscount
 
 /-!
 # Investment with bounds, with convex adjustment costs, and short-run profits

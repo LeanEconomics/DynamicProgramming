@@ -4,6 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Robert Kirkby
 -/
 import ConvergenceApplications.CurrencyPolicy
+import Mathlib.Analysis.SpecialFunctions.Integrals.Basic
 
 /-!
 # The pure currency economy: counterexamples to Exercise 13.5(d) and 13.5(e)

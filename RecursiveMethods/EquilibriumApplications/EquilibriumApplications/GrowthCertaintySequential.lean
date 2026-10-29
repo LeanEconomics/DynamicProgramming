@@ -3,8 +3,9 @@ Copyright (c) 2026 Robert Kirkby. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Robert Kirkby
 -/
-import EquilibriumApplications.GrowthCertaintyPlanner
 import EquilibriumApplications.GrowthCertaintyOptimum
+import EquilibriumApplications.GrowthCertaintyPlanner
+import Mathlib.Analysis.Convex.Deriv
 
 /-!
 # The one-sector model under certainty: recursive competitive equilibrium (Ex 16.1(f)–(g))

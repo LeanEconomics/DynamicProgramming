@@ -4,6 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Robert Kirkby
 -/
 import EquilibriumApplications.ManySectorSecurities
+import Mathlib.Analysis.Convex.Deriv
+import Mathlib.Analysis.InnerProductSpace.Basic
+import Mathlib.Analysis.LocallyConvex.AbsConvexOpen
+import Mathlib.RingTheory.Etale.Weakly
+import Mathlib.RingTheory.Flat.TorsionFree
+import Mathlib.RingTheory.TotallySplit
+import Mathlib.Topology.Algebra.Module.ModuleTopology
 
 /-!
 # Pricing securities: the envelope condition and the pricing equations (Ex 16.2(d), (g))

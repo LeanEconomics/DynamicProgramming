@@ -4,6 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Robert Kirkby
 -/
 import ConvergenceApplications.TransitionFunctions
+import Mathlib.Algebra.Order.Star.Real
+import Mathlib.Probability.Kernel.Composition.CompMap
+import Mathlib.Topology.Separation.CompletelyRegular
 
 /-!
 # Doeblin's condition and Condition M

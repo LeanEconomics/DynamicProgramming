@@ -3,8 +3,13 @@ Copyright (c) 2026 Robert Kirkby. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Robert Kirkby
 -/
-import EquilibriumApplications.SustainedGrowth
 import EquilibriumApplications.SequenceAssumptions
+import EquilibriumApplications.SustainedGrowth
+import Mathlib.Analysis.Convex.SpecificFunctions.Pow
+import Mathlib.Analysis.Normed.Group.FunctionSeries
+import Mathlib.RingTheory.Etale.Weakly
+import Mathlib.RingTheory.Flat.TorsionFree
+import Mathlib.RingTheory.TotallySplit
 
 /-!
 # Sustained growth: continuity and boundedness of utility on `S_θ` (Exercise 16.3(c)–(d))

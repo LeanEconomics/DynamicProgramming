@@ -3,7 +3,8 @@ Copyright (c) 2026 Robert Kirkby. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Robert Kirkby
 -/
-import StochasticDP.Quadratic
+import StochasticDP.HistMarginals
+import Mathlib.Algebra.Order.Star.Real
 
 /-!
 # The stochastic growth model with logarithmic utility (Exercise 9.11)

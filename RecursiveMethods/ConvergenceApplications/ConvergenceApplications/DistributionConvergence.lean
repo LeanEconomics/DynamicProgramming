@@ -3,7 +3,11 @@ Copyright (c) 2026 Robert Kirkby. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Robert Kirkby
 -/
+import ConvergenceApplications.Determining
 import ConvergenceApplications.DistributionFunctions
+import Mathlib.Analysis.LocallyConvex.AbsConvexOpen
+import Mathlib.Topology.Algebra.Module.Cardinality
+import Mathlib.Topology.UniformSpace.Uniformizable
 
 /-!
 # Weak convergence of distribution functions

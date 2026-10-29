@@ -5,6 +5,8 @@ Authors: Robert Kirkby
 -/
 import DeterministicApplications.LearningByDoing
 import DeterministicApplications.OneSectorGrowth
+import Mathlib.Analysis.Convex.Deriv
+import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
 
 /-!
 # Learning by doing: the monopolist, the planner and the competitive industry

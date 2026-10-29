@@ -5,6 +5,7 @@ Authors: Robert Kirkby
 -/
 import ConvergenceApplications.Helly
 import ConvergenceApplications.TransitionFunctions
+import Mathlib.Probability.Kernel.Composition.CompNotation
 
 /-!
 # The Feller property and existence of invariant measures (SLP §12.4, pp. 375–378)

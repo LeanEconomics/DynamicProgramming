@@ -3,8 +3,13 @@ Copyright (c) 2026 Robert Kirkby. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Robert Kirkby
 -/
-import DeterministicDynamics.EulerEquations
 import DeterministicDynamics.Assumption42
+import DeterministicDynamics.EulerEquations
+import Mathlib.Algebra.Module.Torsion.Prod
+import Mathlib.Analysis.RCLike.Lemmas
+import Mathlib.RingTheory.Etale.Weakly
+import Mathlib.RingTheory.Flat.TorsionFree
+import Mathlib.RingTheory.TotallySplit
 
 /-!
 # Linear–quadratic problems: optimality of Euler paths

@@ -4,6 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Robert Kirkby
 -/
 import EquilibriumApplications.SustainedGrowthWelfare
+import Mathlib.Analysis.Convex.Deriv
+import Mathlib.Analysis.SpecialFunctions.Pow.Deriv
 
 /-!
 # Sustained growth: the direct proof of Exercise 16.3(e)(ii) with inner-product prices

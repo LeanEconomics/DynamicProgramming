@@ -4,6 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Robert Kirkby
 -/
 import DeterministicDynamics.CRSIndustry
+import Mathlib.Analysis.SpecialFunctions.ExpDeriv
+import Mathlib.Analysis.SpecialFunctions.Sqrt
 
 /-!
 # A constant-returns-to-scale industry: the dynamic program

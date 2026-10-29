@@ -4,6 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Robert Kirkby
 -/
 import EquilibriumApplications.GrowthCertaintyHousehold
+import Mathlib.Analysis.Calculus.Deriv.Basic
+import Mathlib.Analysis.InnerProductSpace.Basic
+import Mathlib.Analysis.LocallyConvex.AbsConvexOpen
+import Mathlib.Topology.Algebra.Module.ModuleTopology
 
 /-!
 # The one-sector model under certainty: the planner's policy and the price `q(k)`

@@ -4,7 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Robert Kirkby
 -/
 import DeterministicDynamics.CobbDouglas
-import DeterministicDynamics.EulerEquations
+import Mathlib.Analysis.Convex.SpecificFunctions.Pow
+import Mathlib.Analysis.MeanInequalities
 
 /-!
 # The cyclical example: concavity and differentiability of the return

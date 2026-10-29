@@ -4,6 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Robert Kirkby
 -/
 import DeterministicDynamics.Correspondences
+import Mathlib.Algebra.Order.Ring.Star
+import Mathlib.Analysis.Normed.Order.Lattice
+import Mathlib.Topology.GDelta.MetrizableSpace
 
 /-!
 # The Theorem of the Maximum

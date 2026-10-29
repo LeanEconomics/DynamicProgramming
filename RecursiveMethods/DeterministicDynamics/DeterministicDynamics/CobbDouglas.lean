@@ -4,6 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Robert Kirkby
 -/
 import DeterministicDynamics.EulerScalar
+import Mathlib.Analysis.InnerProductSpace.Basic
+import Mathlib.Analysis.LocallyConvex.AbsConvexOpen
+import Mathlib.Analysis.SpecialFunctions.Pow.Deriv
+import Mathlib.Topology.Algebra.Module.ModuleTopology
 
 /-!
 # The cyclical example: the return function and its steady state

@@ -4,6 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Robert Kirkby
 -/
 import EquilibriumApplications.LinftyTimeState
+import Mathlib.Analysis.Normed.Group.Tannery
 
 /-!
 # A many-sector model of stochastic growth: the consumption side

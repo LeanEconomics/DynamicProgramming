@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Robert Kirkby
 -/
 import DeterministicApplications.Correspondences
+import Mathlib.Algebra.Order.Star.Real
+import Mathlib.Analysis.InnerProductSpace.Basic
+import Mathlib.Analysis.LocallyConvex.AbsConvexOpen
 import Mathlib.Analysis.LocallyConvex.Separation
-import Mathlib.Analysis.Convex.Topology
 
 /-!
 # Interior points of convex-valued l.h.c. correspondences

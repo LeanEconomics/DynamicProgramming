@@ -4,7 +4,6 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Robert Kirkby
 -/
 import DeterministicDynamics.StableManifold
-import DeterministicDynamics.EulerLinear
 
 /-!
 # The Euler equation as a difference equation

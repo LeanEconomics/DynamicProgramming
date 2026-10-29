@@ -4,6 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Robert Kirkby
 -/
 import StochasticApplications.Plans
+import Mathlib.Algebra.Order.Star.Real
 
 /-!
 # Theorem 9.2: a solution of the functional equation is the supremum function

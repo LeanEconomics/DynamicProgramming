@@ -5,6 +5,8 @@ Authors: Robert Kirkby
 -/
 import ConvergenceApplications.ConvergenceConcepts
 import ConvergenceApplications.TotalVariation
+import Mathlib.Algebra.Order.Ring.Star
+import Mathlib.MeasureTheory.Measure.Sub
 
 /-!
 # Characterizations of strong convergence

@@ -3,7 +3,10 @@ Copyright (c) 2026 Robert Kirkby. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Robert Kirkby
 -/
-import EquilibriumApplications.Economy
+import Mathlib.Algebra.Order.Ring.Star
+import Mathlib.Analysis.InnerProductSpace.Basic
+import Mathlib.Analysis.Normed.Lp.lpSpace
+import Mathlib.Analysis.Normed.Operator.Basic
 
 /-!
 # Sequence spaces, truncations, and Lemma 15.5

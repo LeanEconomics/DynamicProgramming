@@ -3,8 +3,10 @@ Copyright (c) 2026 Robert Kirkby. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Robert Kirkby
 -/
+import EquilibriumApplications.GrowthCertaintySequential
+import EquilibriumApplications.ManySectorEnvelope
 import EquilibriumApplications.ManySectorFeller
-import EquilibriumApplications.ManySectorVerification
+import Mathlib.Probability.Kernel.MeasurableIntegral
 
 /-!
 # Pricing securities with a general shock space (Ex 16.2(c), (d), (2), (g))

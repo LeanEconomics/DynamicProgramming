@@ -5,6 +5,7 @@ Authors: Robert Kirkby
 -/
 import EquilibriumApplications.LinftyPrices
 import EquilibriumApplications.WelfareSecond
+import Mathlib.MeasureTheory.Integral.DominatedConvergence
 
 /-!
 # Inner product prices on `L∞`: Assumptions 15.8, 15.9, Exercise 15.12 and Theorem 15.8
