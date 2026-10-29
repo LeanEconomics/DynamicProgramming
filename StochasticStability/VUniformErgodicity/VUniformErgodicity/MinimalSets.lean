@@ -19,8 +19,7 @@ Deterministic part (CM(F) with `F(·, u)` continuous for `u ∈ O`):
   invariant (`minimal_literal_eq_empty`); "non-empty" is needed, as Proposition 7.2.3 implicitly
   assumes.
 * **Proposition 7.2.3** (p. 155): `proposition_7_2_3`, for non-empty `M`: `M` is minimal iff
-  `closure A₊(x) = M` for all `x ∈ M` iff `Ω₊(x) = M` for all `x ∈ M` (the book writes `A₊(x)`
-  for its closure).
+  `closure A₊(x) = M` for all `x ∈ M` iff `Ω₊(x) = M` for all `x ∈ M`.
 * `IsIndecomposable`, `IsMIrreducible`, `IsGloballyAttracting` (MT pp. 156–157).
   `translation_indecomposable_no_minimal` (MT p. 156): for `x + u` on `ℝ` with `O = (0, 1)` the
   control system is indecomposable but has no minimal set.

@@ -35,11 +35,11 @@ RCA model (Theorem 16.5.1) and the simple adaptive control model (Proposition 16
 Every numbered result of Chapter 16 is formalised: Theorems 16.0.1–16.0.2, Lemma 16.1.1,
 Theorem 16.1.2, Proposition 16.1.3, Theorems 16.1.4–16.1.5, Theorems 16.2.1–16.2.5, Lemma 16.2.6,
 Theorem 16.2.7, Theorems 16.3.1–16.3.2, Theorems 16.4.1–16.4.3, Theorem 16.5.1 and
-Proposition 16.5.2. Two claims are false as printed. Each is refuted in Lean by a counterexample of
-this project, and a corrected statement is proved. Theorem 16.0.1 (i) does not imply (ii)–(iv) when
+Proposition 16.5.2. One claim is false as printed. It is refuted in Lean by a counterexample of
+this project, and a corrected statement is proved: Theorem 16.0.1 (i) does not imply (ii)–(iv) when
 some `|||Pⁿ − 1 ⊗ π|||_V` is infinite (`theorem_16_0_1_counterexample`); the theorem is proved with
-every distance finite in (i). The rate `2ρ^{n/m}` of (16.11) and (16.21) needs the integer part
-`⌊n/m⌋` (`theorem_16_2_4_counterexample`). Further corrections have no counterexample. The
+every distance finite in (i). The integer part in the rate `2ρ^{⌊n/m⌋}` of (16.11) and (16.21)
+cannot be dropped (`theorem_16_2_4_counterexample`). Other corrections have no counterexample. The
 transition probabilities of the M/PH/1 queue on p. 413 are corrected in four places. The proof of
 Theorem 16.3.1 uses the petite set `C ∩ {V < b + 1}` in place of `C`. The linear test functions of
 the M/G/1 and polling proofs are rescaled, `1` is added to the weights `|x|²` of Theorem 16.5.1 and
@@ -95,7 +95,7 @@ The chapter rests on nine groups of results.
   16.2.1–16.2.5 are `theorem_16_2_1`, `theorem_16_2_2` (with `theorem_16_2_2_hitting`),
   `theorem_16_2_3` (`IsDoeblin`), `theorem_16_2_4` and `theorem_16_2_5`, and Theorem 16.0.2 is
   `theorem_16_0_2`. The contraction `tvNorm_comp_le_of_le` replaces the coupling (16.23), and the
-  integer part in (16.21) is forced by `theorem_16_2_4_counterexample`. An i.i.d. chain is
+  integer part in (16.21) cannot be dropped (`theorem_16_2_4_counterexample`). An i.i.d. chain is
   uniformly ergodic (`isUniformlyErgodic_const`). The reset chain is uniformly ergodic with
   `π(f) < ∞` and no geometric rate in `‖·‖_f` (`reset_uniformlyErgodic`, `reset_not_fGeometric`).
   A T-chain restricted to a compact absorbing set is uniformly ergodic
@@ -134,7 +134,7 @@ The library covers the chapter as follows.
 
 * **`V`-uniform ergodicity** (Chapter 16 introduction, pp. 392–395). (16.1)–(16.2),
   Theorem 16.0.1 with (16.3)–(16.5), its counterexample and correction, (16.6), Theorem 16.0.2
-  with (16.7)–(16.10), and (16.11) corrected.
+  with (16.7)–(16.10), and (16.11).
 * **The operator norm `||| · |||_V`** (§16.1.1). Lemma 16.1.1, Theorem 16.1.2 and (16.12),
   Proposition 16.1.3, Theorem 16.1.4 with (16.13)–(16.15).
 * **`V`-geometric mixing** (§16.1.2). Strong mixing, `V`-geometric mixing, Theorem 16.1.5 and
@@ -142,7 +142,8 @@ The library covers the chapter as follows.
 * **Regenerative models** (§16.1.3). (16.18), the forward recurrence time `δ`-skeleton, and the
   random walk on `[0, ∞)` with (16.19).
 * **Equivalent conditions for uniform ergodicity** (§16.2.1). Theorems 16.2.1–16.2.3, Doeblin's
-  condition, Theorem 16.2.4 with (16.20)–(16.23), its counterexample and correction.
+  condition, Theorem 16.2.4 with (16.20)–(16.23), and the example showing that its integer part
+  cannot be dropped.
 * **Geometric convergence of given moments** (§16.2.2). The claim of the example (16.24), for the
   reset chain.
 * **T-chains on compact spaces** (§16.2.3). Theorem 16.2.5, Lagrange stability, Lemma 16.2.6 and
@@ -172,7 +173,7 @@ All names are in the namespace `MeynTweedie.VUniformErgodicity`. See the
 | [GeometricMixing](VUniformErgodicity/GeometricMixing.lean) | 10 | §16.1.2: the two-dimensional distributions, the rate for `√V`, Theorem 16.1.5, `V`-geometric mixing, (16.17), strong mixing of the stationary chain |
 | [RegenerativeModels](VUniformErgodicity/RegenerativeModels.lean) | 5 | §16.1.3: `G⁺(γ)` (16.18), the moment generating function below `1`, (16.19), (V4) and `e^{s₀x}`-uniform ergodicity of the random walk on `[0, ∞)` |
 | [FwdRecurrenceSkeleton](VUniformErgodicity/FwdRecurrenceSkeleton.lean) | 17 | §16.1.3: the exponential overshoot, (V4) for `e^{γx⁺}`, the petite set `(−∞, δ]`, `e^{γx⁺}`-uniform ergodicity of the forward recurrence time `δ`-skeleton, deterministic descent, the failure of uniform ergodicity and the need for bounded range |
-| [UniformErgodic](VUniformErgodicity/UniformErgodic.lean) | 26 | §16.2.1 and Theorem 16.0.2: uniform ergodicity (16.6), Theorem 16.2.1, irreducibility and aperiodicity of uniformly ergodic chains, Theorem 16.2.2 and its hitting-time parts, Doeblin's condition and Theorem 16.2.3, the contraction behind (16.23), Theorem 16.2.4 corrected and its counterexample, Theorem 16.0.2, i.i.d. chains, Theorem 16.2.5 |
+| [UniformErgodic](VUniformErgodicity/UniformErgodic.lean) | 26 | §16.2.1 and Theorem 16.0.2: uniform ergodicity (16.6), Theorem 16.2.1, irreducibility and aperiodicity of uniformly ergodic chains, Theorem 16.2.2 and its hitting-time parts, Doeblin's condition and Theorem 16.2.3, the contraction behind (16.23), Theorem 16.2.4 and the example showing that its integer part cannot be dropped, Theorem 16.0.2, i.i.d. chains, Theorem 16.2.5 |
 | [UniformModels](VUniformErgodicity/UniformModels.lean) | 15 | §§16.2.2–16.2.3: the reset chain in place of (16.24), uniformly ergodic with no geometric rate in `‖·‖_f`; compact sets of T-chains are small, Lemma 16.2.6 and Theorem 16.2.7 for a T-chain and a compact absorbing set |
 | [NSSUniformErgodic](VUniformErgodicity/NSSUniformErgodic.lean) | 6 | §16.2.3: restricted chains on the ambient space, uniqueness of the invariant probability of a positive chain, `A₊(x)` closed and absorbing, Lemma 16.2.6, Theorem 16.2.7 |
 | [IncrementAnalysis](VUniformErgodicity/IncrementAnalysis.lean) | 13 | §16.3.1: the bounds replacing (16.28), (16.29), (V4) for `e^{δV}` with the corrected set, Theorem 16.3.1, increments of bounded range (16.50), the minimal solution `V₀` for the chain (15.20) and the need for (16.27) |

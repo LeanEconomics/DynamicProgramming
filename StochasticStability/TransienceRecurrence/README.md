@@ -44,12 +44,11 @@ fail for the empty set, which satisfies their hypotheses vacuously; they hold fo
 `C`. The claim `L(x, C) ≡ 1` of Theorem 8.4.3 fails for `C = ∅`; it holds for `C ∈ B⁺(X)`, and
 the recurrence conclusion holds as stated. Proposition 8.4.6 fails for `Γ = δ₀`; it holds when
 `Γ(−∞, 0) > 0`. The renewal equation on p. 175 should read `u = δ₀ + u ∗ p`, not `u = 1 + u ∗ p`.
-Seven further points are corrected without a counterexample: Theorem 8.4.2 is proved with
+Six further points are corrected without a counterexample: Theorem 8.4.2 is proved with
 `ΔV ≥ 0`, since the book's converse function has `ΔV = 0` and Proposition 8.4.5 uses equality; the
 atom proof of Proposition 8.2.2 needs the small set in `B⁺(X)`, and the general form is proved
-another way; Proposition 8.3.2 is trivial as printed, and the covering its proof gives is what is
-proved; the bound `mM` in (8.29) should be `m(2 + M)`; Theorem 8.3.5 needs no irreducibility; the
-cut-off `R` in Proposition 8.5.4 is unnecessary; and Proposition 8.5.5 needs `Γ(−∞, 0) > 0`,
+another way; the bound `mM` in (8.29) should be `m(2 + M)`; Theorem 8.3.5 needs no irreducibility;
+the cut-off `R` in Proposition 8.5.4 is unnecessary; and Proposition 8.5.5 needs `Γ(−∞, 0) > 0`,
 without which the walk is not irreducible. Countable generation of `B(X)` is assumed only for
 Theorems 8.2.5 and 8.2.6, Proposition 8.3.8 and (8.43). Lemma 8.5.2 assumes that `log(s + tW)` is
 integrable on `A`, moments are stated as integrability, and Propositions 8.4.4–8.4.6 take an

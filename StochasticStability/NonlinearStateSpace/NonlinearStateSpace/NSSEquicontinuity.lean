@@ -42,9 +42,9 @@ probability measure (the density condition (NSS3) is not used).
 hypothesis (7.27) the book adds: the mean value theorem in integral form and Tonelli give
 `E‖Φₖ(x) − Φₖ(y)‖ ≤ sup_{z ∈ [x, y]} E_z‖∇Φₖ‖ · ‖x − y‖`, and a uniformly continuous `f` then
 gives the equicontinuity of `Pᵏf` directly (Markov's inequality), without the book's
-approximation of `C_c` by `C^∞ ∩ C_c` (whose derivative bound is `‖f′‖∞`, not `‖f‖∞` as
-printed). In Theorem 7.5.1 (i) the book implicitly assumes `Eₓ[Φₖ]` exists; integrability from one
-point of `N` is assumed here. Proposition 7.5.2 for rational `F` needs a polynomial bound on the
+approximation of `C_c` by `C^∞ ∩ C_c` and its derivative bound in terms of `‖f′‖∞`. In
+Theorem 7.5.1 (i) the book implicitly assumes `Eₓ[Φₖ]` exists; integrability from one point
+of `N` is assumed here. Proposition 7.5.2 for rational `F` needs a polynomial bound on the
 sensitivity of rational maps without real poles (a Łojasiewicz-type inequality), which is taken as
 the hypothesis; the book's statement fails for rational `F` with real poles, which are not `C¹`.
 -/

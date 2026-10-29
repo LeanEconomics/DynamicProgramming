@@ -40,12 +40,14 @@ Meyn and Tweedie, pp. 393–395 and §16.2, pp. 400–407. `μ` is an invariant 
   space is uniformly ergodic.
 
 **Corrections.**
-* (16.11) and (16.21): `‖Pⁿ(x, ·) − π‖ ≤ 2ρ^{n/m}` holds with the integer part `⌊n/m⌋`, not with
-  the real exponent `n/m`: `theorem_16_2_4_counterexample` is the chain `0 ↦ 1 ↦ 2 ↦ 2` on `ℕ`,
-  for which `X` is `δ₂`-small with `m = 2`, `ρ = 0`, and `‖P(0, ·) − δ₂‖ = 2 > 2 · 0^{1/2}`.
 * Theorem 16.0.2 is stated "for any Markov chain", but (iv)–(viii) refer to aperiodicity and so to
   a `ψ`-irreducible chain; it is proved for `ψ`-irreducible chains, and Theorem 16.2.1 covers
   (i)–(iii) without irreducibility.
+
+**Remark.** The integer part in the rate `2ρ^{⌊n/m⌋}` of (16.11) and (16.21) cannot be dropped:
+`theorem_16_2_4_counterexample` is the chain `0 ↦ 1 ↦ 2 ↦ 2` on `ℕ`, for which `X` is `δ₂`-small
+with `m = 2`, `ρ = 0`, and `‖P(0, ·) − δ₂‖ = 2 > 2 · 0^{1/2}`, so the bound with the real exponent
+`n/m` fails.
 -/
 
 namespace MeynTweedie.VUniformErgodicity
@@ -564,17 +566,17 @@ theorem theorem_16_2_4 {P : Kernel X X} [IsMarkovKernel P] {m : ℕ} {ν : Measu
           exact ENNReal.toReal_le_of_le_ofReal zero_le_one (by simpa using (hν x) univ)
     _ = 2 * (1 - ν.real univ) ^ (n / m) := mul_comm _ _
 
-/-- The step of the counterexample to (16.21) with a real exponent: `0 ↦ 1 ↦ 2 ↦ 2`. -/
+/-- The step of the example where (16.21) fails without the integer part: `0 ↦ 1 ↦ 2 ↦ 2`. -/
 def climbStep (k : ℕ) : ℕ := min (k + 1) 2
 
 /-- The deterministic chain `P(k, ·) = δ_{min(k + 1, 2)}`. -/
 noncomputable def climbKernel : Kernel ℕ ℕ :=
   Kernel.deterministic climbStep (measurable_of_countable _)
 
-/-- **The counterexample to (16.21) with the exponent `n/m`** (MT p. 402): for the chain
+/-- **The integer part in (16.21) cannot be dropped** (MT p. 402): for the chain
 `0 ↦ 1 ↦ 2 ↦ 2` the whole space is `δ₂`-small with `m = 2`, so `ρ = 1 − δ₂(X) = 0`, and `δ₂` is
-invariant, but `‖P(0, ·) − δ₂‖ = 2 > 2 ρ^{1/2} = 0`. With `⌊1/2⌋ = 0` Theorem 16.2.4 gives the
-correct bound `2`. -/
+invariant, but `‖P(0, ·) − δ₂‖ = 2 > 2 ρ^{1/2} = 0`, so the bound fails with the real exponent
+`n/m`. With `⌊1/2⌋ = 0` Theorem 16.2.4 gives the bound `2`. -/
 theorem theorem_16_2_4_counterexample :
     IsSmallSet climbKernel 2 (Measure.dirac 2) univ ∧
       IsInvariant climbKernel (Measure.dirac 2) ∧

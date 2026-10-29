@@ -33,9 +33,8 @@ for the rank condition `F` is `C¹` and the control set `O` is open.
   "connected ⇒ aperiodic" needs no connectedness of `O`, and holds for any non-empty minimal set:
   `isPeriodOf_one_of_isConnected`).
 
-**Hypotheses and proof differences.** In the proof of Proposition 7.3.4 the book writes
-`G_d = ⋃_{k ≥ N₀} A₊^{kd}(v)` and `G₁ = A₊¹(G_d)`; what is proved here is that `Gⱼ` is the
-closure of `A₊^{j}(⋃_{k ≥ N₀} A₊^{kd}(v))`, which is what the connectedness argument uses.
+**Proof.** As in the book's proof of Proposition 7.3.4, `Gⱼ` is the closure of
+`A₊^{j}(⋃_{k ≥ N₀} A₊^{kd}(v))`, which is what the connectedness argument uses.
 -/
 
 namespace MeynTweedie.VUniformErgodicity

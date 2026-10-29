@@ -17331,8 +17331,7 @@ Deterministic part (CM(F) with `F(·, u)` continuous for `u ∈ O`):
   invariant (`minimal_literal_eq_empty`); "non-empty" is needed, as Proposition 7.2.3 implicitly
   assumes.
 * **Proposition 7.2.3** (p. 155): `proposition_7_2_3`, for non-empty `M`: `M` is minimal iff
-  `closure A₊(x) = M` for all `x ∈ M` iff `Ω₊(x) = M` for all `x ∈ M` (the book writes `A₊(x)`
-  for its closure).
+  `closure A₊(x) = M` for all `x ∈ M` iff `Ω₊(x) = M` for all `x ∈ M`.
 * `IsIndecomposable`, `IsMIrreducible`, `IsGloballyAttracting` (MT pp. 156–157).
   `translation_indecomposable_no_minimal` (MT p. 156): for `x + u` on `ℝ` with `O = (0, 1)` the
   control system is indecomposable but has no minimal set.
@@ -17876,9 +17875,8 @@ for the rank condition `F` is `C¹` and the control set `O` is open.
   "connected ⇒ aperiodic" needs no connectedness of `O`, and holds for any non-empty minimal set:
   `isPeriodOf_one_of_isConnected`).
 
-**Hypotheses and proof differences.** In the proof of Proposition 7.3.4 the book writes
-`G_d = ⋃_{k ≥ N₀} A₊^{kd}(v)` and `G₁ = A₊¹(G_d)`; what is proved here is that `Gⱼ` is the
-closure of `A₊^{j}(⋃_{k ≥ N₀} A₊^{kd}(v))`, which is what the connectedness argument uses.
+**Proof.** As in the book's proof of Proposition 7.3.4, `Gⱼ` is the closure of
+`A₊^{j}(⋃_{k ≥ N₀} A₊^{kd}(v))`, which is what the connectedness argument uses.
 -/
 
 namespace MeynTweedie.NonlinearStateSpace
@@ -20480,9 +20478,9 @@ probability measure (the density condition (NSS3) is not used).
 hypothesis (7.27) the book adds: the mean value theorem in integral form and Tonelli give
 `E‖Φₖ(x) − Φₖ(y)‖ ≤ sup_{z ∈ [x, y]} E_z‖∇Φₖ‖ · ‖x − y‖`, and a uniformly continuous `f` then
 gives the equicontinuity of `Pᵏf` directly (Markov's inequality), without the book's
-approximation of `C_c` by `C^∞ ∩ C_c` (whose derivative bound is `‖f′‖∞`, not `‖f‖∞` as
-printed). In Theorem 7.5.1 (i) the book implicitly assumes `Eₓ[Φₖ]` exists; integrability from one
-point of `N` is assumed here. Proposition 7.5.2 for rational `F` needs a polynomial bound on the
+approximation of `C_c` by `C^∞ ∩ C_c` and its derivative bound in terms of `‖f′‖∞`. In
+Theorem 7.5.1 (i) the book implicitly assumes `Eₓ[Φₖ]` exists; integrability from one point
+of `N` is assumed here. Proposition 7.5.2 for rational `F` needs a polynomial bound on the
 sensitivity of rational maps without real poles (a Łojasiewicz-type inequality), which is taken as
 the hypothesis; the book's statement fails for rational `F` with real poles, which are not `C¹`.
 -/

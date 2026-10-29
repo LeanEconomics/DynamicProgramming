@@ -7198,8 +7198,6 @@ transient set of positive `φ`-measure is transient.
   vacuously but is not in `B⁺(X)` (`proposition_8_3_1_ii_counterexample`).
 * In the proof of Proposition 8.3.1 (iii) the bound is first obtained for the truncated sums
   `Σ_{n ≤ N} Pⁿ(x, A)`, which are finite; the book's `U^{(z)}` plays the same role.
-* Proposition 8.3.2 as printed ("there is a countable covering of `A` by uniformly transient
-  sets") is trivial; the statement proved is the one the proof gives, for `Ā = {L(·, A) > 0}`.
 -/
 
 namespace MeynTweedie.InvariantMeasures

@@ -39,9 +39,9 @@ shows. Proposition 7.1.3 fails for `θ = 1`, `b ≠ 0`, where `−1/b` is a fixe
 it holds when `b = 0` or `θ ≠ 1`. For the adaptive control model the interior of the state space is
 not reached in one step from every initial condition, and it is empty for `α = 0` (p. 162);
 Proposition 7.4.3 is proved on the closed state space, for `α`, `σ_z`, `σ_w ≠ 0`, and without
-`σ_z² < 1`. Three further slips are corrected without a counterexample: Proposition 7.4.2 cites
+`σ_z² < 1`. Two further slips are corrected without a counterexample: Proposition 7.4.2 cites
 Theorem 7.2.6 where Proposition 7.1.5 is meant, and is proved on the absorbing set
-`{xᵃ ≠ 0, xᵇ ≠ 0}`; the derivative bound in the proof of Theorem 7.5.1 needs `‖f′‖∞`, not `‖f‖∞`;
+`{xᵃ ≠ 0, xᵇ ≠ 0}`;
 and in the proof of Theorem 7.2.6 a point of `supp ψ` is shown only to lie in the closure of every
 `A₊(y)`, which suffices. `C¹` replaces `C^∞` throughout, and the state and noise spaces are
 finite-dimensional real normed spaces. Mathlib's Sard theorem covers only maps whose source

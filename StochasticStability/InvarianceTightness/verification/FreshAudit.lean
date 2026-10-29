@@ -11327,8 +11327,6 @@ transient set of positive `φ`-measure is transient.
   vacuously but is not in `B⁺(X)` (`proposition_8_3_1_ii_counterexample`).
 * In the proof of Proposition 8.3.1 (iii) the bound is first obtained for the truncated sums
   `Σ_{n ≤ N} Pⁿ(x, A)`, which are finite; the book's `U^{(z)}` plays the same role.
-* Proposition 8.3.2 as printed ("there is a countable covering of `A` by uniformly transient
-  sets") is trivial; the statement proved is the one the proof gives, for `Ā = {L(·, A) > 0}`.
 -/
 
 namespace MeynTweedie.InvarianceTightness
@@ -26177,8 +26175,7 @@ Deterministic part (CM(F) with `F(·, u)` continuous for `u ∈ O`):
   invariant (`minimal_literal_eq_empty`); "non-empty" is needed, as Proposition 7.2.3 implicitly
   assumes.
 * **Proposition 7.2.3** (p. 155): `proposition_7_2_3`, for non-empty `M`: `M` is minimal iff
-  `closure A₊(x) = M` for all `x ∈ M` iff `Ω₊(x) = M` for all `x ∈ M` (the book writes `A₊(x)`
-  for its closure).
+  `closure A₊(x) = M` for all `x ∈ M` iff `Ω₊(x) = M` for all `x ∈ M`.
 * `IsIndecomposable`, `IsMIrreducible`, `IsGloballyAttracting` (MT pp. 156–157).
   `translation_indecomposable_no_minimal` (MT p. 156): for `x + u` on `ℝ` with `O = (0, 1)` the
   control system is indecomposable but has no minimal set.
@@ -26722,9 +26719,8 @@ for the rank condition `F` is `C¹` and the control set `O` is open.
   "connected ⇒ aperiodic" needs no connectedness of `O`, and holds for any non-empty minimal set:
   `isPeriodOf_one_of_isConnected`).
 
-**Hypotheses and proof differences.** In the proof of Proposition 7.3.4 the book writes
-`G_d = ⋃_{k ≥ N₀} A₊^{kd}(v)` and `G₁ = A₊¹(G_d)`; what is proved here is that `Gⱼ` is the
-closure of `A₊^{j}(⋃_{k ≥ N₀} A₊^{kd}(v))`, which is what the connectedness argument uses.
+**Proof.** As in the book's proof of Proposition 7.3.4, `Gⱼ` is the closure of
+`A₊^{j}(⋃_{k ≥ N₀} A₊^{kd}(v))`, which is what the connectedness argument uses.
 -/
 
 namespace MeynTweedie.InvarianceTightness
