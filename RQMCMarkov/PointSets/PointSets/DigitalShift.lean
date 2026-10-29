@@ -3,8 +3,12 @@ Copyright (c) 2026 Robert Kirkby. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Robert Kirkby
 -/
-import PointSets.ShiftedQMC
 import PointSets.ShiftLimitLattice
+import PointSets.ShiftedQMC
+import Mathlib.Algebra.Order.Floor.Semifield
+import Mathlib.Data.LawfulXor.Basic
+import Mathlib.Data.NNRat.Floor
+import Mathlib.Data.Nat.Bitwise
 
 /-! # The random digital shift in one dimension
 

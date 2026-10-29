@@ -4,8 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Robert Kirkby
 -/
 import PointSets.MonteCarlo
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.Periodic
 import Mathlib.MeasureTheory.Function.Floor
+import Mathlib.Order.CompletePartialOrder
 
 /-!
 # RQMC requirement (i): marginally uniform points give an unbiased estimator (posts #1–#2)

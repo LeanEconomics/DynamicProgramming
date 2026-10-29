@@ -4,10 +4,6 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Robert Kirkby
 -/
 import Mathlib.Probability.CentralLimitTheorem
-import Mathlib.Probability.Moments.Variance
-import Mathlib.Probability.Independence.Basic
-import Mathlib.Probability.HasLaw
-import Mathlib.MeasureTheory.Constructions.Pi
 
 /-!
 # Monte Carlo: unbiasedness, variance `σ²/n`, RMSE `n^{-1/2}`, CLT (post #1)

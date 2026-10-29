@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Robert Kirkby
 -/
 import PointSets.ShiftLimit
-import Mathlib.Dynamics.Ergodic.AddCircle
+import PointSets.Stratified
+import Mathlib.Data.Int.Star
+import Mathlib.Topology.Separation.CompletelyRegular
 
 /-!
 # The randomly shifted lattice `{fract (i/n + U)}` and the common-shift rule (post #2)

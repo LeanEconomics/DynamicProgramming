@@ -4,6 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Robert Kirkby
 -/
 import PointSets.Discrepancy
+import Mathlib.Analysis.LocallyConvex.AbsConvexOpen
+import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
+import Mathlib.MeasureTheory.Integral.Layercake
+import Mathlib.Topology.EMetricSpace.VariationOnFromTo
 
 /-! # Koksma's inequality in one dimension
 

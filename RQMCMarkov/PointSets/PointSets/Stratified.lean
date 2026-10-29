@@ -4,8 +4,6 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Robert Kirkby
 -/
 import PointSets.Unbiased
-import Mathlib.Analysis.SpecialFunctions.Integrals.Basic
-import Mathlib.Probability.ConditionalProbability
 
 /-!
 # Stratified sampling: variance at most MC, `O(n^{-3})` and `O(n^{-2})` rates (post #2)

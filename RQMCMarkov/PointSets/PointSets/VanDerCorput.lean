@@ -4,6 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Robert Kirkby
 -/
 import PointSets.Koksma
+import Mathlib.Analysis.Complex.ExponentialBounds
 
 /-! # The van der Corput sequence
 
