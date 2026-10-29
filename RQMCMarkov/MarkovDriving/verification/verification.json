@@ -1,0 +1,6813 @@
+{
+  "checked_at_utc": "2026-10-29T23:17:38.799701+00:00",
+  "theorems": 570,
+  "module_theorems": {
+    "MarkovDriving/CUDDefs.lean": 26,
+    "MarkovDriving/MonteCarlo.lean": 16,
+    "MarkovDriving/Unbiased.lean": 22,
+    "MarkovDriving/Driving.lean": 44,
+    "MarkovDriving/DrivingMC.lean": 21,
+    "MarkovDriving/CUDExistence.lean": 13,
+    "MarkovDriving/ChentsovConsistency.lean": 33,
+    "MarkovDriving/Discrepancy.lean": 21,
+    "MarkovDriving/Koksma.lean": 21,
+    "MarkovDriving/VanDerCorput.lean": 22,
+    "MarkovDriving/CUDVanDerCorput.lean": 19,
+    "MarkovDriving/ChentsovEntropy.lean": 10,
+    "MarkovDriving/ChentsovGeneral.lean": 16,
+    "MarkovDriving/OccupationPoisson.lean": 21,
+    "MarkovDriving/ChentsovIrreducible.lean": 4,
+    "MarkovDriving/ConditionalMC.lean": 18,
+    "MarkovDriving/ConditionalMCRounding.lean": 22,
+    "MarkovDriving/ConditionalMCRoundingOpen.lean": 16,
+    "MarkovDriving/MCRateLILAnalysis.lean": 26,
+    "MarkovDriving/MCRateKolmogorovAnscombe.lean": 6,
+    "MarkovDriving/MCRateLILExponential.lean": 8,
+    "MarkovDriving/MCRateLILUpper.lean": 12,
+    "MarkovDriving/MCRateLILLower.lean": 13,
+    "MarkovDriving/MCRateIIDLIL.lean": 7,
+    "MarkovDriving/OccupationDiscrepancy.lean": 11,
+    "MarkovDriving/RotorRouter.lean": 24,
+    "MarkovDriving/StackBound.lean": 21,
+    "MarkovDriving/MCRate.lean": 21,
+    "MarkovDriving/MCRateDriven.lean": 17,
+    "MarkovDriving/RotorSpells.lean": 15,
+    "MarkovDriving/SpellStratified.lean": 24
+  },
+  "audited_declarations": 679,
+  "declarations": [
+    {
+      "name": "RQMCMarkov.MarkovDriving.InUnitCube",
+      "kind": "def",
+      "module": "MarkovDriving/CUDDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.boxInd",
+      "kind": "def",
+      "module": "MarkovDriving/CUDDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.empAvg",
+      "kind": "def",
+      "module": "MarkovDriving/CUDDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.IsUD",
+      "kind": "def",
+      "module": "MarkovDriving/CUDDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.window",
+      "kind": "def",
+      "module": "MarkovDriving/CUDDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.IsCUD",
+      "kind": "def",
+      "module": "MarkovDriving/CUDDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.IsSide",
+      "kind": "def",
+      "module": "MarkovDriving/CUDDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.isSide_Ico",
+      "kind": "theorem",
+      "module": "MarkovDriving/CUDDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.boxVolume_eq_volume",
+      "kind": "theorem",
+      "module": "MarkovDriving/CUDDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.boxInd_eq_ite",
+      "kind": "theorem",
+      "module": "MarkovDriving/CUDDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.boxInd_nonneg",
+      "kind": "theorem",
+      "module": "MarkovDriving/CUDDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.boxInd_le_one",
+      "kind": "theorem",
+      "module": "MarkovDriving/CUDDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.boxInd_eq_one_iff",
+      "kind": "theorem",
+      "module": "MarkovDriving/CUDDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.boxInd_le_boxInd",
+      "kind": "theorem",
+      "module": "MarkovDriving/CUDDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.empAvg_le_empAvg",
+      "kind": "theorem",
+      "module": "MarkovDriving/CUDDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.tendsto_empAvg_boxInd_of_isSide",
+      "kind": "theorem",
+      "module": "MarkovDriving/CUDDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.IsStepFn",
+      "kind": "def",
+      "module": "MarkovDriving/CUDDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.tendsto_empAvg_of_isStepFn",
+      "kind": "theorem",
+      "module": "MarkovDriving/CUDDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.IsStepFn.congr",
+      "kind": "theorem",
+      "module": "MarkovDriving/CUDDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.IsStepFn.of_eq",
+      "kind": "theorem",
+      "module": "MarkovDriving/CUDDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.isStepFn_boxInd",
+      "kind": "theorem",
+      "module": "MarkovDriving/CUDDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.isStepFn_const",
+      "kind": "theorem",
+      "module": "MarkovDriving/CUDDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.IsStepFn.add",
+      "kind": "theorem",
+      "module": "MarkovDriving/CUDDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.IsStepFn.const_mul",
+      "kind": "theorem",
+      "module": "MarkovDriving/CUDDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.IsStepFn.sub",
+      "kind": "theorem",
+      "module": "MarkovDriving/CUDDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.isStepFn_finset_sum",
+      "kind": "theorem",
+      "module": "MarkovDriving/CUDDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.boxInd_append",
+      "kind": "theorem",
+      "module": "MarkovDriving/CUDDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.IsStepFn.append",
+      "kind": "theorem",
+      "module": "MarkovDriving/CUDDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.IsCUD.mem_Ico",
+      "kind": "theorem",
+      "module": "MarkovDriving/CUDDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.IsCUD.isUD_window",
+      "kind": "theorem",
+      "module": "MarkovDriving/CUDDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.window_mem",
+      "kind": "theorem",
+      "module": "MarkovDriving/CUDDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.not_isUD_of_finite_range",
+      "kind": "theorem",
+      "module": "MarkovDriving/CUDDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.not_isCUD_of_finite_range",
+      "kind": "theorem",
+      "module": "MarkovDriving/CUDDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.not_isCUD_of_periodic",
+      "kind": "theorem",
+      "module": "MarkovDriving/CUDDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.uniformIco",
+      "kind": "abbrev",
+      "module": "MarkovDriving/MonteCarlo.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.isProbabilityMeasure_uniformIco",
+      "kind": "theorem",
+      "module": "MarkovDriving/MonteCarlo.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.uniformCube",
+      "kind": "abbrev",
+      "module": "MarkovDriving/MonteCarlo.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.isProbabilityMeasure_uniformCube",
+      "kind": "theorem",
+      "module": "MarkovDriving/MonteCarlo.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.sampleMean",
+      "kind": "def",
+      "module": "MarkovDriving/MonteCarlo.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.map_le_of_sum_map_eq",
+      "kind": "theorem",
+      "module": "MarkovDriving/MonteCarlo.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.integrable_map_of_sum_map_eq",
+      "kind": "theorem",
+      "module": "MarkovDriving/MonteCarlo.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.memLp_map_of_sum_map_eq",
+      "kind": "theorem",
+      "module": "MarkovDriving/MonteCarlo.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.integral_sampleMean_of_sum_map_eq",
+      "kind": "theorem",
+      "module": "MarkovDriving/MonteCarlo.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.variance_sampleMean_of_sum_map_eq",
+      "kind": "theorem",
+      "module": "MarkovDriving/MonteCarlo.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.variance_sampleMean_le_of_sum_map_eq",
+      "kind": "theorem",
+      "module": "MarkovDriving/MonteCarlo.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.sum_map_eq_of_hasLaw",
+      "kind": "theorem",
+      "module": "MarkovDriving/MonteCarlo.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.integral_sampleMean_iid",
+      "kind": "theorem",
+      "module": "MarkovDriving/MonteCarlo.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.variance_sampleMean_iid",
+      "kind": "theorem",
+      "module": "MarkovDriving/MonteCarlo.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.rmse_sampleMean_iid",
+      "kind": "theorem",
+      "module": "MarkovDriving/MonteCarlo.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.tendstoInDistribution_sampleMean_iid",
+      "kind": "theorem",
+      "module": "MarkovDriving/MonteCarlo.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.measure_all_draws_lt_tenth",
+      "kind": "theorem",
+      "module": "MarkovDriving/MonteCarlo.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.measure_all_draws_lt_tenth_pos",
+      "kind": "theorem",
+      "module": "MarkovDriving/MonteCarlo.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.measure_sampleMean_far_pos",
+      "kind": "theorem",
+      "module": "MarkovDriving/MonteCarlo.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.integral_sampleMean_of_hasLaw_uniformCube",
+      "kind": "theorem",
+      "module": "MarkovDriving/Unbiased.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.uniformIco_eq_restrict_Ioc",
+      "kind": "theorem",
+      "module": "MarkovDriving/Unbiased.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.map_fract_restrict_Ioc",
+      "kind": "theorem",
+      "module": "MarkovDriving/Unbiased.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.measurePreserving_fract_add",
+      "kind": "theorem",
+      "module": "MarkovDriving/Unbiased.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.shiftMod1",
+      "kind": "def",
+      "module": "MarkovDriving/Unbiased.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.shiftMod1_mem_cube",
+      "kind": "theorem",
+      "module": "MarkovDriving/Unbiased.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.measurePreserving_shiftMod1",
+      "kind": "theorem",
+      "module": "MarkovDriving/Unbiased.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.hasLaw_shiftMod1",
+      "kind": "theorem",
+      "module": "MarkovDriving/Unbiased.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.integral_sampleMean_shiftMod1",
+      "kind": "theorem",
+      "module": "MarkovDriving/Unbiased.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.stratum",
+      "kind": "def",
+      "module": "MarkovDriving/Unbiased.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.measurableSet_stratum",
+      "kind": "theorem",
+      "module": "MarkovDriving/Unbiased.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.stratumMap",
+      "kind": "def",
+      "module": "MarkovDriving/Unbiased.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.measurable_stratumMap",
+      "kind": "theorem",
+      "module": "MarkovDriving/Unbiased.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.stratumMap_preimage_stratum",
+      "kind": "theorem",
+      "module": "MarkovDriving/Unbiased.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.map_stratumMap_uniformIco",
+      "kind": "theorem",
+      "module": "MarkovDriving/Unbiased.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.iUnion_stratum",
+      "kind": "theorem",
+      "module": "MarkovDriving/Unbiased.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.pairwise_disjoint_stratum",
+      "kind": "theorem",
+      "module": "MarkovDriving/Unbiased.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.sum_map_stratumMap",
+      "kind": "theorem",
+      "module": "MarkovDriving/Unbiased.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.sum_map_stratified",
+      "kind": "theorem",
+      "module": "MarkovDriving/Unbiased.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.integral_sampleMean_stratified",
+      "kind": "theorem",
+      "module": "MarkovDriving/Unbiased.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.not_hasLaw_stratumMap",
+      "kind": "theorem",
+      "module": "MarkovDriving/Unbiased.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.sum_map_eq_of_integral_sampleMean_indicator",
+      "kind": "theorem",
+      "module": "MarkovDriving/Unbiased.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.sampleMean_const_points",
+      "kind": "theorem",
+      "module": "MarkovDriving/Unbiased.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.integral_sampleMean_of_hasLaw_const",
+      "kind": "theorem",
+      "module": "MarkovDriving/Unbiased.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.variance_sampleMean_const",
+      "kind": "theorem",
+      "module": "MarkovDriving/Unbiased.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.IsStochastic",
+      "kind": "structure",
+      "module": "MarkovDriving/Driving.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.IsStochastic.mk",
+      "kind": "constructor",
+      "module": "MarkovDriving/Driving.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.IsStochastic.nonneg",
+      "kind": "projection",
+      "module": "MarkovDriving/Driving.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.IsStochastic.sum_eq_one",
+      "kind": "projection",
+      "module": "MarkovDriving/Driving.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.cumProb",
+      "kind": "def",
+      "module": "MarkovDriving/Driving.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.lastState",
+      "kind": "def",
+      "module": "MarkovDriving/Driving.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.step",
+      "kind": "def",
+      "module": "MarkovDriving/Driving.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.cumProb_zero",
+      "kind": "theorem",
+      "module": "MarkovDriving/Driving.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.cumProb_succ",
+      "kind": "theorem",
+      "module": "MarkovDriving/Driving.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.cumProb_of_le",
+      "kind": "theorem",
+      "module": "MarkovDriving/Driving.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.cumProb_mono",
+      "kind": "theorem",
+      "module": "MarkovDriving/Driving.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.cumProb_mem_Icc",
+      "kind": "theorem",
+      "module": "MarkovDriving/Driving.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.step_eq_iff",
+      "kind": "theorem",
+      "module": "MarkovDriving/Driving.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.step_mono",
+      "kind": "theorem",
+      "module": "MarkovDriving/Driving.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.step_zero",
+      "kind": "theorem",
+      "module": "MarkovDriving/Driving.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.measurable_step",
+      "kind": "theorem",
+      "module": "MarkovDriving/Driving.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.step_preimage_inter_Ioc",
+      "kind": "theorem",
+      "module": "MarkovDriving/Driving.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.uniformIco_step_eq",
+      "kind": "theorem",
+      "module": "MarkovDriving/Driving.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.volume_step_eq",
+      "kind": "theorem",
+      "module": "MarkovDriving/Driving.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.step_post3_example",
+      "kind": "theorem",
+      "module": "MarkovDriving/Driving.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.drive",
+      "kind": "def",
+      "module": "MarkovDriving/Driving.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.drivenPath",
+      "kind": "abbrev",
+      "module": "MarkovDriving/Driving.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.drive_zero",
+      "kind": "theorem",
+      "module": "MarkovDriving/Driving.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.drive_succ",
+      "kind": "theorem",
+      "module": "MarkovDriving/Driving.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.drive_eq_iff",
+      "kind": "theorem",
+      "module": "MarkovDriving/Driving.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.occCount",
+      "kind": "def",
+      "module": "MarkovDriving/Driving.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.transCount",
+      "kind": "def",
+      "module": "MarkovDriving/Driving.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.occCount_zero",
+      "kind": "theorem",
+      "module": "MarkovDriving/Driving.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.transCount_zero",
+      "kind": "theorem",
+      "module": "MarkovDriving/Driving.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.occCount_succ",
+      "kind": "theorem",
+      "module": "MarkovDriving/Driving.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.transCount_succ",
+      "kind": "theorem",
+      "module": "MarkovDriving/Driving.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.occCount_le",
+      "kind": "theorem",
+      "module": "MarkovDriving/Driving.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.occCount_mono",
+      "kind": "theorem",
+      "module": "MarkovDriving/Driving.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.transCount_le_occCount",
+      "kind": "theorem",
+      "module": "MarkovDriving/Driving.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.occCount_congr",
+      "kind": "theorem",
+      "module": "MarkovDriving/Driving.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.transCount_congr",
+      "kind": "theorem",
+      "module": "MarkovDriving/Driving.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.occCount_add",
+      "kind": "theorem",
+      "module": "MarkovDriving/Driving.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.transCount_add",
+      "kind": "theorem",
+      "module": "MarkovDriving/Driving.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.departureIndex",
+      "kind": "def",
+      "module": "MarkovDriving/Driving.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.departureIndex_congr",
+      "kind": "theorem",
+      "module": "MarkovDriving/Driving.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.departureIndex_lt",
+      "kind": "theorem",
+      "module": "MarkovDriving/Driving.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.departureIndex_injective",
+      "kind": "theorem",
+      "module": "MarkovDriving/Driving.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.stackState",
+      "kind": "def",
+      "module": "MarkovDriving/Driving.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.stackDrive",
+      "kind": "def",
+      "module": "MarkovDriving/Driving.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.stackPath",
+      "kind": "abbrev",
+      "module": "MarkovDriving/Driving.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.stackState_snd",
+      "kind": "theorem",
+      "module": "MarkovDriving/Driving.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.stackDrive_zero",
+      "kind": "theorem",
+      "module": "MarkovDriving/Driving.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.stackDrive_succ",
+      "kind": "theorem",
+      "module": "MarkovDriving/Driving.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.stackDrive_eq_iff",
+      "kind": "theorem",
+      "module": "MarkovDriving/Driving.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.IsSpellStart",
+      "kind": "abbrev",
+      "module": "MarkovDriving/Driving.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.runLength",
+      "kind": "def",
+      "module": "MarkovDriving/Driving.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.spellCount",
+      "kind": "def",
+      "module": "MarkovDriving/Driving.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.runLength_eq_of_exit",
+      "kind": "theorem",
+      "module": "MarkovDriving/Driving.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.runLength_eq_iff",
+      "kind": "theorem",
+      "module": "MarkovDriving/Driving.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.spellCount_succ",
+      "kind": "theorem",
+      "module": "MarkovDriving/Driving.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.sum_occCount",
+      "kind": "theorem",
+      "module": "MarkovDriving/Driving.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.sum_transCount_right",
+      "kind": "theorem",
+      "module": "MarkovDriving/Driving.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.sum_transCount_left",
+      "kind": "theorem",
+      "module": "MarkovDriving/Driving.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.flowBalance",
+      "kind": "theorem",
+      "module": "MarkovDriving/Driving.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.abs_flowBalance_le",
+      "kind": "theorem",
+      "module": "MarkovDriving/Driving.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.sum_sum_transCount",
+      "kind": "theorem",
+      "module": "MarkovDriving/Driving.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.spellCount_succ_eq",
+      "kind": "theorem",
+      "module": "MarkovDriving/Driving.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.iidUniform",
+      "kind": "def",
+      "module": "MarkovDriving/DrivingMC.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.isProbabilityMeasure_iidUniform",
+      "kind": "theorem",
+      "module": "MarkovDriving/DrivingMC.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.infinitePi_setOf_forall_mem",
+      "kind": "theorem",
+      "module": "MarkovDriving/DrivingMC.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.measurableSet_setOf_forall_mem",
+      "kind": "theorem",
+      "module": "MarkovDriving/DrivingMC.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.setOf_drive_eq",
+      "kind": "theorem",
+      "module": "MarkovDriving/DrivingMC.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.measurableSet_drive_cylinder",
+      "kind": "theorem",
+      "module": "MarkovDriving/DrivingMC.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.infinitePi_drive_cylinder",
+      "kind": "theorem",
+      "module": "MarkovDriving/DrivingMC.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.setOf_stackDrive_eq",
+      "kind": "theorem",
+      "module": "MarkovDriving/DrivingMC.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.measurableSet_stackDrive_cylinder",
+      "kind": "theorem",
+      "module": "MarkovDriving/DrivingMC.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.infinitePi_stackDrive_cylinder",
+      "kind": "theorem",
+      "module": "MarkovDriving/DrivingMC.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.pathProb",
+      "kind": "def",
+      "module": "MarkovDriving/DrivingMC.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.pathProb_nonneg",
+      "kind": "theorem",
+      "module": "MarkovDriving/DrivingMC.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.pathProb_succ",
+      "kind": "theorem",
+      "module": "MarkovDriving/DrivingMC.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.measurableSet_step_eq",
+      "kind": "theorem",
+      "module": "MarkovDriving/DrivingMC.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.prod_uniformIco_step_eq",
+      "kind": "theorem",
+      "module": "MarkovDriving/DrivingMC.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.iidUniform_drivenPath_cylinder",
+      "kind": "theorem",
+      "module": "MarkovDriving/DrivingMC.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.iidUniform_stackPath_cylinder",
+      "kind": "theorem",
+      "module": "MarkovDriving/DrivingMC.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.extendPath",
+      "kind": "def",
+      "module": "MarkovDriving/DrivingMC.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.extendPath_eq_iff",
+      "kind": "theorem",
+      "module": "MarkovDriving/DrivingMC.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.measurable_drivenPath_restrict",
+      "kind": "theorem",
+      "module": "MarkovDriving/DrivingMC.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.measurable_stackPath_restrict",
+      "kind": "theorem",
+      "module": "MarkovDriving/DrivingMC.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.map_drivenPath_singleton",
+      "kind": "theorem",
+      "module": "MarkovDriving/DrivingMC.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.map_stackPath_singleton",
+      "kind": "theorem",
+      "module": "MarkovDriving/DrivingMC.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.map_drivenPath_eq_map_stackPath",
+      "kind": "theorem",
+      "module": "MarkovDriving/DrivingMC.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.isUD_fin_zero",
+      "kind": "theorem",
+      "module": "MarkovDriving/CUDExistence.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.sum_range_mul_eq_sum_interleaved",
+      "kind": "theorem",
+      "module": "MarkovDriving/CUDExistence.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.tendsto_avg_of_interleaved",
+      "kind": "theorem",
+      "module": "MarkovDriving/CUDExistence.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.abs_prod_sub_prod_le",
+      "kind": "theorem",
+      "module": "MarkovDriving/CUDExistence.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.abs_div_sub_le",
+      "kind": "theorem",
+      "module": "MarkovDriving/CUDExistence.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.isUD_of_grid",
+      "kind": "theorem",
+      "module": "MarkovDriving/CUDExistence.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.measurable_boxInd",
+      "kind": "theorem",
+      "module": "MarkovDriving/CUDExistence.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.identDistrib_window_boxInd",
+      "kind": "theorem",
+      "module": "MarkovDriving/CUDExistence.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.indepFun_window_boxInd",
+      "kind": "theorem",
+      "module": "MarkovDriving/CUDExistence.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.integral_boxInd_iidUniform",
+      "kind": "theorem",
+      "module": "MarkovDriving/CUDExistence.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.ae_tendsto_empAvg_box",
+      "kind": "theorem",
+      "module": "MarkovDriving/CUDExistence.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.ae_isCUD_iidUniform",
+      "kind": "theorem",
+      "module": "MarkovDriving/CUDExistence.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.exists_isCUD",
+      "kind": "theorem",
+      "module": "MarkovDriving/CUDExistence.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.windowMap",
+      "kind": "def",
+      "module": "MarkovDriving/ChentsovConsistency.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.windowMap_succ",
+      "kind": "theorem",
+      "module": "MarkovDriving/ChentsovConsistency.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.windowMap_add",
+      "kind": "theorem",
+      "module": "MarkovDriving/ChentsovConsistency.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.drive_add_eq_windowMap",
+      "kind": "theorem",
+      "module": "MarkovDriving/ChentsovConsistency.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.multiStep",
+      "kind": "def",
+      "module": "MarkovDriving/ChentsovConsistency.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.multiStep_eq_pow",
+      "kind": "theorem",
+      "module": "MarkovDriving/ChentsovConsistency.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.sum_mul_multiStep",
+      "kind": "theorem",
+      "module": "MarkovDriving/ChentsovConsistency.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.val_step_zero",
+      "kind": "theorem",
+      "module": "MarkovDriving/ChentsovConsistency.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.isSide_step",
+      "kind": "theorem",
+      "module": "MarkovDriving/ChentsovConsistency.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.isStepFn_step",
+      "kind": "theorem",
+      "module": "MarkovDriving/ChentsovConsistency.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.isStepFn_windowMap",
+      "kind": "theorem",
+      "module": "MarkovDriving/ChentsovConsistency.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.HasCouplingBox",
+      "kind": "def",
+      "module": "MarkovDriving/ChentsovConsistency.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.noCouple",
+      "kind": "def",
+      "module": "MarkovDriving/ChentsovConsistency.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.isStepFn_noCouple",
+      "kind": "theorem",
+      "module": "MarkovDriving/ChentsovConsistency.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.noCouple_eq_zero_or_one",
+      "kind": "theorem",
+      "module": "MarkovDriving/ChentsovConsistency.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.windowMap_eq_of_noCouple_eq_zero",
+      "kind": "theorem",
+      "module": "MarkovDriving/ChentsovConsistency.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.abs_ind_sub_le_noCouple",
+      "kind": "theorem",
+      "module": "MarkovDriving/ChentsovConsistency.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.abs_multiStep_sub_le",
+      "kind": "theorem",
+      "module": "MarkovDriving/ChentsovConsistency.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.occCount_eq_sum",
+      "kind": "theorem",
+      "module": "MarkovDriving/ChentsovConsistency.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.abs_sum_shift_sub_le",
+      "kind": "theorem",
+      "module": "MarkovDriving/ChentsovConsistency.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.tendsto_occFreq_of_isCUD",
+      "kind": "theorem",
+      "module": "MarkovDriving/ChentsovConsistency.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.tendsto_timeAvg_of_isCUD",
+      "kind": "theorem",
+      "module": "MarkovDriving/ChentsovConsistency.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.hasCouplingBox_of_common_interval",
+      "kind": "theorem",
+      "module": "MarkovDriving/ChentsovConsistency.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.hasCouplingBox_of_col_pos",
+      "kind": "theorem",
+      "module": "MarkovDriving/ChentsovConsistency.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.hasCouplingBox_of_pos",
+      "kind": "theorem",
+      "module": "MarkovDriving/ChentsovConsistency.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.tendsto_occFreq_of_isCUD_of_col_pos",
+      "kind": "theorem",
+      "module": "MarkovDriving/ChentsovConsistency.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.identityTwo",
+      "kind": "def",
+      "module": "MarkovDriving/ChentsovConsistency.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.isStochastic_identityTwo",
+      "kind": "theorem",
+      "module": "MarkovDriving/ChentsovConsistency.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.identityTwo_stationary",
+      "kind": "theorem",
+      "module": "MarkovDriving/ChentsovConsistency.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.step_identityTwo_zero",
+      "kind": "theorem",
+      "module": "MarkovDriving/ChentsovConsistency.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.drivenPath_identityTwo",
+      "kind": "theorem",
+      "module": "MarkovDriving/ChentsovConsistency.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.not_tendsto_occFreq_identity",
+      "kind": "theorem",
+      "module": "MarkovDriving/ChentsovConsistency.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.fourState",
+      "kind": "def",
+      "module": "MarkovDriving/ChentsovConsistency.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.isStochastic_fourState",
+      "kind": "theorem",
+      "module": "MarkovDriving/ChentsovConsistency.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.multiStep_fourState_two",
+      "kind": "theorem",
+      "module": "MarkovDriving/ChentsovConsistency.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.fourState_stationary",
+      "kind": "theorem",
+      "module": "MarkovDriving/ChentsovConsistency.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.step_fourState_parity",
+      "kind": "theorem",
+      "module": "MarkovDriving/ChentsovConsistency.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.windowMap_fourState_parity_ne",
+      "kind": "theorem",
+      "module": "MarkovDriving/ChentsovConsistency.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.not_hasCouplingBox_fourState",
+      "kind": "theorem",
+      "module": "MarkovDriving/ChentsovConsistency.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.InUnitIco",
+      "kind": "def",
+      "module": "MarkovDriving/Discrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.countBelow",
+      "kind": "def",
+      "module": "MarkovDriving/Discrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.countAtMost",
+      "kind": "def",
+      "module": "MarkovDriving/Discrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.localDiscrepancy",
+      "kind": "def",
+      "module": "MarkovDriving/Discrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.starDiscrepancy",
+      "kind": "def",
+      "module": "MarkovDriving/Discrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.qmcEstimate",
+      "kind": "def",
+      "module": "MarkovDriving/Discrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.midpointRule",
+      "kind": "def",
+      "module": "MarkovDriving/Discrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.countBelow_le",
+      "kind": "theorem",
+      "module": "MarkovDriving/Discrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.countBelow_mono",
+      "kind": "theorem",
+      "module": "MarkovDriving/Discrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.countBelow_div_mem_Icc",
+      "kind": "theorem",
+      "module": "MarkovDriving/Discrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.localDiscrepancy_le_one",
+      "kind": "theorem",
+      "module": "MarkovDriving/Discrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.localDiscrepancy_eq_abs_div",
+      "kind": "theorem",
+      "module": "MarkovDriving/Discrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.bddAbove_localDiscrepancy",
+      "kind": "theorem",
+      "module": "MarkovDriving/Discrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.localDiscrepancy_le_starDiscrepancy",
+      "kind": "theorem",
+      "module": "MarkovDriving/Discrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.starDiscrepancy_le_of_forall",
+      "kind": "theorem",
+      "module": "MarkovDriving/Discrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.starDiscrepancy_nonneg",
+      "kind": "theorem",
+      "module": "MarkovDriving/Discrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.starDiscrepancy_le_one",
+      "kind": "theorem",
+      "module": "MarkovDriving/Discrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.countAtMost_div_sub_le_starDiscrepancy",
+      "kind": "theorem",
+      "module": "MarkovDriving/Discrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.inv_two_mul_le_starDiscrepancy",
+      "kind": "theorem",
+      "module": "MarkovDriving/Discrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.midpointRule_mem",
+      "kind": "theorem",
+      "module": "MarkovDriving/Discrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.midpointRule_lt_iff",
+      "kind": "theorem",
+      "module": "MarkovDriving/Discrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.countBelow_midpointRule_le",
+      "kind": "theorem",
+      "module": "MarkovDriving/Discrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.le_countBelow_midpointRule",
+      "kind": "theorem",
+      "module": "MarkovDriving/Discrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.abs_countBelow_midpointRule_sub_le",
+      "kind": "theorem",
+      "module": "MarkovDriving/Discrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.starDiscrepancy_midpointRule",
+      "kind": "theorem",
+      "module": "MarkovDriving/Discrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.starDiscrepancy_midpointRule_le",
+      "kind": "theorem",
+      "module": "MarkovDriving/Discrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.midpointRule_three",
+      "kind": "theorem",
+      "module": "MarkovDriving/Discrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.starDiscrepancy_midpointRule_three",
+      "kind": "theorem",
+      "module": "MarkovDriving/Discrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.totalVariation",
+      "kind": "def",
+      "module": "MarkovDriving/Koksma.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.countBelow_eq_sum_indicator",
+      "kind": "theorem",
+      "module": "MarkovDriving/Koksma.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.countAtMost_eq_sum_indicator",
+      "kind": "theorem",
+      "module": "MarkovDriving/Koksma.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.countAtMost_le",
+      "kind": "theorem",
+      "module": "MarkovDriving/Koksma.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.countAtMost_div_sub_le_starDiscrepancy_of_mem",
+      "kind": "theorem",
+      "module": "MarkovDriving/Koksma.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.indicator_one_mem_Icc",
+      "kind": "theorem",
+      "module": "MarkovDriving/Koksma.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.abs_sum_indicator_upperSet_sub_le",
+      "kind": "theorem",
+      "module": "MarkovDriving/Koksma.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.antitone_indicator_Iic",
+      "kind": "theorem",
+      "module": "MarkovDriving/Koksma.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.integral_indicator_Iic_one",
+      "kind": "theorem",
+      "module": "MarkovDriving/Koksma.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.sum_div_eq_integral_indicator",
+      "kind": "theorem",
+      "module": "MarkovDriving/Koksma.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.integral_sub_eq_integral_measureReal",
+      "kind": "theorem",
+      "module": "MarkovDriving/Koksma.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.koksma_monotone",
+      "kind": "theorem",
+      "module": "MarkovDriving/Koksma.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.monotone_comp_projIcc",
+      "kind": "theorem",
+      "module": "MarkovDriving/Koksma.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.comp_projIcc_eq",
+      "kind": "theorem",
+      "module": "MarkovDriving/Koksma.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.qmcError_congr",
+      "kind": "theorem",
+      "module": "MarkovDriving/Koksma.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.koksma_monotoneOn",
+      "kind": "theorem",
+      "module": "MarkovDriving/Koksma.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.koksma_sub_monotoneOn",
+      "kind": "theorem",
+      "module": "MarkovDriving/Koksma.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.koksma_boundedVariationOn",
+      "kind": "theorem",
+      "module": "MarkovDriving/Koksma.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.koksma_hasDerivAt",
+      "kind": "theorem",
+      "module": "MarkovDriving/Koksma.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.eVariationOn_le_integral_abs_deriv",
+      "kind": "theorem",
+      "module": "MarkovDriving/Koksma.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.boundedVariationOn_of_hasDerivAt",
+      "kind": "theorem",
+      "module": "MarkovDriving/Koksma.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.totalVariation_le_integral_abs_deriv",
+      "kind": "theorem",
+      "module": "MarkovDriving/Koksma.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.vanDerCorput",
+      "kind": "def",
+      "module": "MarkovDriving/VanDerCorput.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.vanDerCorput_eq",
+      "kind": "theorem",
+      "module": "MarkovDriving/VanDerCorput.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.vanDerCorput_two_mul_add",
+      "kind": "theorem",
+      "module": "MarkovDriving/VanDerCorput.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.vanDerCorput_one_two_three",
+      "kind": "theorem",
+      "module": "MarkovDriving/VanDerCorput.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.vanDerCorput_mem_Ico",
+      "kind": "theorem",
+      "module": "MarkovDriving/VanDerCorput.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.vanDerCorput_inUnitIco",
+      "kind": "theorem",
+      "module": "MarkovDriving/VanDerCorput.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.floor_two_pow_mul_vanDerCorput_lt",
+      "kind": "theorem",
+      "module": "MarkovDriving/VanDerCorput.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.floor_two_pow_succ_mul_vanDerCorput",
+      "kind": "theorem",
+      "module": "MarkovDriving/VanDerCorput.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.mod_eq_of_floor_vanDerCorput_eq",
+      "kind": "theorem",
+      "module": "MarkovDriving/VanDerCorput.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.floor_vanDerCorput_injOn",
+      "kind": "theorem",
+      "module": "MarkovDriving/VanDerCorput.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.mem_dyadic_iff_floor",
+      "kind": "theorem",
+      "module": "MarkovDriving/VanDerCorput.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.card_vanDerCorput_mem_dyadic",
+      "kind": "theorem",
+      "module": "MarkovDriving/VanDerCorput.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.card_vanDerCorput_mem_dyadic_aligned",
+      "kind": "theorem",
+      "module": "MarkovDriving/VanDerCorput.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.abs_card_block_vanDerCorput_sub_le",
+      "kind": "theorem",
+      "module": "MarkovDriving/VanDerCorput.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.countBelow_add",
+      "kind": "theorem",
+      "module": "MarkovDriving/VanDerCorput.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.abs_countBelow_vanDerCorput_sub_le",
+      "kind": "theorem",
+      "module": "MarkovDriving/VanDerCorput.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.starDiscrepancy_vanDerCorput_le",
+      "kind": "theorem",
+      "module": "MarkovDriving/VanDerCorput.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.natLog_two_add_one_le",
+      "kind": "theorem",
+      "module": "MarkovDriving/VanDerCorput.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.starDiscrepancy_vanDerCorput_le_log",
+      "kind": "theorem",
+      "module": "MarkovDriving/VanDerCorput.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.abs_qmcError_vanDerCorput_le",
+      "kind": "theorem",
+      "module": "MarkovDriving/VanDerCorput.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.tendsto_log_add_one_div_sqrt",
+      "kind": "theorem",
+      "module": "MarkovDriving/VanDerCorput.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.tendsto_sqrt_mul_vanDerCorput_bound",
+      "kind": "theorem",
+      "module": "MarkovDriving/VanDerCorput.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.tendsto_sqrt_mul_qmcError_vanDerCorput",
+      "kind": "theorem",
+      "module": "MarkovDriving/VanDerCorput.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.empAvg_window_one_eq",
+      "kind": "theorem",
+      "module": "MarkovDriving/CUDVanDerCorput.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.isUD_of_tendsto_starDiscrepancy",
+      "kind": "theorem",
+      "module": "MarkovDriving/CUDVanDerCorput.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.isUD_vanDerCorput",
+      "kind": "theorem",
+      "module": "MarkovDriving/CUDVanDerCorput.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.vanDerCorput_two_mul_add_one",
+      "kind": "theorem",
+      "module": "MarkovDriving/CUDVanDerCorput.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.vanDerCorput_lt_half_iff",
+      "kind": "theorem",
+      "module": "MarkovDriving/CUDVanDerCorput.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.vanDerCorput_succ_lt_half_iff",
+      "kind": "theorem",
+      "module": "MarkovDriving/CUDVanDerCorput.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.not_isUD_window_two_vanDerCorput",
+      "kind": "theorem",
+      "module": "MarkovDriving/CUDVanDerCorput.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.not_isCUD_vanDerCorput",
+      "kind": "theorem",
+      "module": "MarkovDriving/CUDVanDerCorput.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.vanDerCorput_pos",
+      "kind": "theorem",
+      "module": "MarkovDriving/CUDVanDerCorput.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.twoState",
+      "kind": "def",
+      "module": "MarkovDriving/CUDVanDerCorput.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.isStochastic_twoState",
+      "kind": "theorem",
+      "module": "MarkovDriving/CUDVanDerCorput.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.twoState_stationary",
+      "kind": "theorem",
+      "module": "MarkovDriving/CUDVanDerCorput.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.step_twoState_one",
+      "kind": "theorem",
+      "module": "MarkovDriving/CUDVanDerCorput.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.step_twoState_zero_low",
+      "kind": "theorem",
+      "module": "MarkovDriving/CUDVanDerCorput.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.step_twoState_zero_high",
+      "kind": "theorem",
+      "module": "MarkovDriving/CUDVanDerCorput.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.drivenPath_twoState_vanDerCorput",
+      "kind": "theorem",
+      "module": "MarkovDriving/CUDVanDerCorput.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.sum_range_even_indicator",
+      "kind": "theorem",
+      "module": "MarkovDriving/CUDVanDerCorput.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.tendsto_occFreq_twoState_vanDerCorput",
+      "kind": "theorem",
+      "module": "MarkovDriving/CUDVanDerCorput.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.not_tendsto_occFreq_twoState_vanDerCorput",
+      "kind": "theorem",
+      "module": "MarkovDriving/CUDVanDerCorput.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.tendsto_occFreq_twoState_of_isCUD",
+      "kind": "theorem",
+      "module": "MarkovDriving/CUDVanDerCorput.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.klSum",
+      "kind": "def",
+      "module": "MarkovDriving/ChentsovEntropy.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.sub_le_mul_log_div",
+      "kind": "theorem",
+      "module": "MarkovDriving/ChentsovEntropy.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.sub_lt_mul_log_div",
+      "kind": "theorem",
+      "module": "MarkovDriving/ChentsovEntropy.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.sum_sub_sum_le_klSum",
+      "kind": "theorem",
+      "module": "MarkovDriving/ChentsovEntropy.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.eq_of_klSum_le",
+      "kind": "theorem",
+      "module": "MarkovDriving/ChentsovEntropy.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.logSum_le",
+      "kind": "theorem",
+      "module": "MarkovDriving/ChentsovEntropy.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.pushSum",
+      "kind": "def",
+      "module": "MarkovDriving/ChentsovEntropy.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.klSum_pushSum_le",
+      "kind": "theorem",
+      "module": "MarkovDriving/ChentsovEntropy.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.sum_fin_succ_fun",
+      "kind": "theorem",
+      "module": "MarkovDriving/ChentsovEntropy.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.sum_fin_zero_fun",
+      "kind": "theorem",
+      "module": "MarkovDriving/ChentsovEntropy.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.chentsov_entropy_core",
+      "kind": "theorem",
+      "module": "MarkovDriving/ChentsovEntropy.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.chentsov_entropy_stationary",
+      "kind": "theorem",
+      "module": "MarkovDriving/ChentsovEntropy.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.IsSide.inter",
+      "kind": "theorem",
+      "module": "MarkovDriving/ChentsovGeneral.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.boxInd_inter",
+      "kind": "theorem",
+      "module": "MarkovDriving/ChentsovGeneral.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.IsStepFn.mul",
+      "kind": "theorem",
+      "module": "MarkovDriving/ChentsovGeneral.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.isStepFn_finset_prod",
+      "kind": "theorem",
+      "module": "MarkovDriving/ChentsovGeneral.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.IsStepFn.unique",
+      "kind": "theorem",
+      "module": "MarkovDriving/ChentsovGeneral.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.cellInd",
+      "kind": "def",
+      "module": "MarkovDriving/ChentsovGeneral.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.cellInd_eq_prod",
+      "kind": "theorem",
+      "module": "MarkovDriving/ChentsovGeneral.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.exists_isStepFn_cellInd",
+      "kind": "theorem",
+      "module": "MarkovDriving/ChentsovGeneral.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.cellProb",
+      "kind": "def",
+      "module": "MarkovDriving/ChentsovGeneral.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.isStepFn_cellInd",
+      "kind": "theorem",
+      "module": "MarkovDriving/ChentsovGeneral.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.isStepFn_pattern",
+      "kind": "theorem",
+      "module": "MarkovDriving/ChentsovGeneral.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.sum_cellProb_eq",
+      "kind": "theorem",
+      "module": "MarkovDriving/ChentsovGeneral.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.sum_prod_ite_eq_one",
+      "kind": "theorem",
+      "module": "MarkovDriving/ChentsovGeneral.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.exists_tendsto_ultrafilter",
+      "kind": "theorem",
+      "module": "MarkovDriving/ChentsovGeneral.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.div_mem_Icc_of_sum",
+      "kind": "theorem",
+      "module": "MarkovDriving/ChentsovGeneral.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.tendsto_occFreq_of_isCUD_general",
+      "kind": "theorem",
+      "module": "MarkovDriving/ChentsovGeneral.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.tendsto_timeAvg_of_isCUD_general",
+      "kind": "theorem",
+      "module": "MarkovDriving/ChentsovGeneral.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.tendsto_occFreq_fourState_of_isCUD",
+      "kind": "theorem",
+      "module": "MarkovDriving/ChentsovGeneral.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.IsStationaryDistribution",
+      "kind": "structure",
+      "module": "MarkovDriving/OccupationPoisson.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.IsStationaryDistribution.mk",
+      "kind": "constructor",
+      "module": "MarkovDriving/OccupationPoisson.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.IsStationaryDistribution.vecMul_eq",
+      "kind": "projection",
+      "module": "MarkovDriving/OccupationPoisson.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.IsStationaryDistribution.nonneg",
+      "kind": "projection",
+      "module": "MarkovDriving/OccupationPoisson.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.IsStationaryDistribution.sum_eq_one",
+      "kind": "projection",
+      "module": "MarkovDriving/OccupationPoisson.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.pow_apply_nonneg_of_nonneg",
+      "kind": "theorem",
+      "module": "MarkovDriving/OccupationPoisson.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.sum_pow_apply_eq_one",
+      "kind": "theorem",
+      "module": "MarkovDriving/OccupationPoisson.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.mulVec_const_one",
+      "kind": "theorem",
+      "module": "MarkovDriving/OccupationPoisson.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.eq_of_isMax_of_mulVec_eq",
+      "kind": "theorem",
+      "module": "MarkovDriving/OccupationPoisson.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.eq_of_mulVec_eq_self_of_irreducible",
+      "kind": "theorem",
+      "module": "MarkovDriving/OccupationPoisson.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.vecMul_one_sub_eq_zero_iff",
+      "kind": "theorem",
+      "module": "MarkovDriving/OccupationPoisson.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.one_sub_mulVec",
+      "kind": "theorem",
+      "module": "MarkovDriving/OccupationPoisson.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.const_one_mem_ker",
+      "kind": "theorem",
+      "module": "MarkovDriving/OccupationPoisson.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.const_one_ne_zero",
+      "kind": "theorem",
+      "module": "MarkovDriving/OccupationPoisson.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.rank_one_sub_lt",
+      "kind": "theorem",
+      "module": "MarkovDriving/OccupationPoisson.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.exists_isStationaryDistribution",
+      "kind": "theorem",
+      "module": "MarkovDriving/OccupationPoisson.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.IsStationaryDistribution.vecMul_pow",
+      "kind": "theorem",
+      "module": "MarkovDriving/OccupationPoisson.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.IsStationaryDistribution.pos",
+      "kind": "theorem",
+      "module": "MarkovDriving/OccupationPoisson.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.dotProduct_sub_const",
+      "kind": "theorem",
+      "module": "MarkovDriving/OccupationPoisson.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.dotProduct_sub_mulVec_eq_zero",
+      "kind": "theorem",
+      "module": "MarkovDriving/OccupationPoisson.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.exists_poisson",
+      "kind": "theorem",
+      "module": "MarkovDriving/OccupationPoisson.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.poisson_const_eq",
+      "kind": "theorem",
+      "module": "MarkovDriving/OccupationPoisson.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.IsStationaryDistribution.eq_of_vecMul_eq_self",
+      "kind": "theorem",
+      "module": "MarkovDriving/OccupationPoisson.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.existsUnique_isStationaryDistribution",
+      "kind": "theorem",
+      "module": "MarkovDriving/OccupationPoisson.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.poisson_sub_eq",
+      "kind": "theorem",
+      "module": "MarkovDriving/OccupationPoisson.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.exists_poisson_normalized",
+      "kind": "theorem",
+      "module": "MarkovDriving/OccupationPoisson.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.stationary_unique_of_irreducible",
+      "kind": "theorem",
+      "module": "MarkovDriving/ChentsovIrreducible.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.tendsto_occFreq_of_isCUD_irreducible",
+      "kind": "theorem",
+      "module": "MarkovDriving/ChentsovIrreducible.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.tendsto_timeAvg_of_isCUD_irreducible",
+      "kind": "theorem",
+      "module": "MarkovDriving/ChentsovIrreducible.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.ae_tendsto_occFreq_iidUniform_irreducible",
+      "kind": "theorem",
+      "module": "MarkovDriving/ChentsovIrreducible.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.prod_prod_pow_ite_eq",
+      "kind": "theorem",
+      "module": "MarkovDriving/ConditionalMC.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.prod_eq_prod_pow_transCount",
+      "kind": "theorem",
+      "module": "MarkovDriving/ConditionalMC.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.pathProb_eq_prod_pow",
+      "kind": "theorem",
+      "module": "MarkovDriving/ConditionalMC.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.pathProb_eq_of_transCount_eq",
+      "kind": "theorem",
+      "module": "MarkovDriving/ConditionalMC.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.countClass",
+      "kind": "def",
+      "module": "MarkovDriving/ConditionalMC.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.mem_countClass",
+      "kind": "theorem",
+      "module": "MarkovDriving/ConditionalMC.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.mcLaw",
+      "kind": "def",
+      "module": "MarkovDriving/ConditionalMC.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.mcLaw_singleton_of_mem",
+      "kind": "theorem",
+      "module": "MarkovDriving/ConditionalMC.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.cond_mcLaw_countClass",
+      "kind": "theorem",
+      "module": "MarkovDriving/ConditionalMC.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.BalancedCounts",
+      "kind": "def",
+      "module": "MarkovDriving/ConditionalMC.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.balanced_transCount",
+      "kind": "theorem",
+      "module": "MarkovDriving/ConditionalMC.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.IsCountTrail",
+      "kind": "def",
+      "module": "MarkovDriving/ConditionalMC.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.isCountTrail_zero",
+      "kind": "theorem",
+      "module": "MarkovDriving/ConditionalMC.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.IsCountTrail.le_sum",
+      "kind": "theorem",
+      "module": "MarkovDriving/ConditionalMC.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.IsCountTrail.extend",
+      "kind": "theorem",
+      "module": "MarkovDriving/ConditionalMC.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.exists_maximal_trail",
+      "kind": "theorem",
+      "module": "MarkovDriving/ConditionalMC.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.IsCountTrail.end_eq",
+      "kind": "theorem",
+      "module": "MarkovDriving/ConditionalMC.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.exists_closed_trail",
+      "kind": "theorem",
+      "module": "MarkovDriving/ConditionalMC.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.splice",
+      "kind": "def",
+      "module": "MarkovDriving/ConditionalMC.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.transCount_splice",
+      "kind": "theorem",
+      "module": "MarkovDriving/ConditionalMC.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.exists_path_of_balanced",
+      "kind": "theorem",
+      "module": "MarkovDriving/ConditionalMC.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.reachable_of_transCount_ne_zero",
+      "kind": "theorem",
+      "module": "MarkovDriving/ConditionalMC.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.exists_path_iff",
+      "kind": "theorem",
+      "module": "MarkovDriving/ConditionalMC.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.netFlow",
+      "kind": "def",
+      "module": "MarkovDriving/ConditionalMCRounding.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.IsCirculation",
+      "kind": "def",
+      "module": "MarkovDriving/ConditionalMCRounding.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.isCirculation_iff_netFlow",
+      "kind": "theorem",
+      "module": "MarkovDriving/ConditionalMCRounding.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.netFlow_add",
+      "kind": "theorem",
+      "module": "MarkovDriving/ConditionalMCRounding.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.netFlow_sub",
+      "kind": "theorem",
+      "module": "MarkovDriving/ConditionalMCRounding.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.netFlow_mul",
+      "kind": "theorem",
+      "module": "MarkovDriving/ConditionalMCRounding.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.netFlow_single",
+      "kind": "theorem",
+      "module": "MarkovDriving/ConditionalMCRounding.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.sum_netFlow_eq_cut",
+      "kind": "theorem",
+      "module": "MarkovDriving/ConditionalMCRounding.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.intLattice",
+      "kind": "abbrev",
+      "module": "MarkovDriving/ConditionalMCRounding.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.mem_intLattice",
+      "kind": "theorem",
+      "module": "MarkovDriving/ConditionalMCRounding.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.intCast_mem_intLattice",
+      "kind": "theorem",
+      "module": "MarkovDriving/ConditionalMCRounding.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.fracAdj",
+      "kind": "def",
+      "module": "MarkovDriving/ConditionalMCRounding.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.exists_pathFlow",
+      "kind": "theorem",
+      "module": "MarkovDriving/ConditionalMCRounding.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.reflTransGen_fracAdj_of_notMem",
+      "kind": "theorem",
+      "module": "MarkovDriving/ConditionalMCRounding.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.exists_cycle_direction",
+      "kind": "theorem",
+      "module": "MarkovDriving/ConditionalMCRounding.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.floor_lt_lt_ceil_of_notMem",
+      "kind": "theorem",
+      "module": "MarkovDriving/ConditionalMCRounding.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.exists_int_circulation_rounding",
+      "kind": "theorem",
+      "module": "MarkovDriving/ConditionalMCRounding.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.abs_sub_lt_one_of_floor_le_le_ceil",
+      "kind": "theorem",
+      "module": "MarkovDriving/ConditionalMCRounding.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.IsStationaryRow",
+      "kind": "def",
+      "module": "MarkovDriving/ConditionalMCRounding.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.expectedCounts",
+      "kind": "def",
+      "module": "MarkovDriving/ConditionalMCRounding.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.isCirculation_expectedCounts",
+      "kind": "theorem",
+      "module": "MarkovDriving/ConditionalMCRounding.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.sum_expectedCounts",
+      "kind": "theorem",
+      "module": "MarkovDriving/ConditionalMCRounding.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.exists_rounding_expectedCounts",
+      "kind": "theorem",
+      "module": "MarkovDriving/ConditionalMCRounding.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.flipChain",
+      "kind": "def",
+      "module": "MarkovDriving/ConditionalMCRounding.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.isStochastic_flipChain",
+      "kind": "theorem",
+      "module": "MarkovDriving/ConditionalMCRounding.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.isStationaryRow_flipChain",
+      "kind": "theorem",
+      "module": "MarkovDriving/ConditionalMCRounding.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.not_exists_rounding_flipChain_total_three",
+      "kind": "theorem",
+      "module": "MarkovDriving/ConditionalMCRounding.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.exists_closed_path_of_rounding",
+      "kind": "theorem",
+      "module": "MarkovDriving/ConditionalMCRounding.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.conditionalMC_wellDefined",
+      "kind": "theorem",
+      "module": "MarkovDriving/ConditionalMCRounding.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.exists_walk_of_reflTransGen",
+      "kind": "theorem",
+      "module": "MarkovDriving/ConditionalMCRoundingOpen.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.exists_injOn_walk",
+      "kind": "theorem",
+      "module": "MarkovDriving/ConditionalMCRoundingOpen.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.prefCount",
+      "kind": "def",
+      "module": "MarkovDriving/ConditionalMCRoundingOpen.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.ite_prod_eq",
+      "kind": "theorem",
+      "module": "MarkovDriving/ConditionalMCRoundingOpen.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.netFlow_prefCount",
+      "kind": "theorem",
+      "module": "MarkovDriving/ConditionalMCRoundingOpen.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.sum_prefCount",
+      "kind": "theorem",
+      "module": "MarkovDriving/ConditionalMCRoundingOpen.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.prefCount_ne_zero",
+      "kind": "theorem",
+      "module": "MarkovDriving/ConditionalMCRoundingOpen.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.exists_simple_cycle",
+      "kind": "theorem",
+      "module": "MarkovDriving/ConditionalMCRoundingOpen.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.fracSet",
+      "kind": "def",
+      "module": "MarkovDriving/ConditionalMCRoundingOpen.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.mem_fracSet",
+      "kind": "theorem",
+      "module": "MarkovDriving/ConditionalMCRoundingOpen.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.exists_push",
+      "kind": "theorem",
+      "module": "MarkovDriving/ConditionalMCRoundingOpen.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.exists_eq_of_unit_steps",
+      "kind": "theorem",
+      "module": "MarkovDriving/ConditionalMCRoundingOpen.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.exists_open_rounding",
+      "kind": "theorem",
+      "module": "MarkovDriving/ConditionalMCRoundingOpen.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.ite_eq_intCast_ite",
+      "kind": "theorem",
+      "module": "MarkovDriving/ConditionalMCRoundingOpen.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.balancedCounts_of_netFlow",
+      "kind": "theorem",
+      "module": "MarkovDriving/ConditionalMCRoundingOpen.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.exists_path_exact_length",
+      "kind": "theorem",
+      "module": "MarkovDriving/ConditionalMCRoundingOpen.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.conditionalMC_exact_wellDefined",
+      "kind": "theorem",
+      "module": "MarkovDriving/ConditionalMCRoundingOpen.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.flipChain_open_path_three",
+      "kind": "theorem",
+      "module": "MarkovDriving/ConditionalMCRoundingOpen.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.lilScale",
+      "kind": "def",
+      "module": "MarkovDriving/MCRateLILAnalysis.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.one_le_loglog",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateLILAnalysis.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.lil_eventually_le_log",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateLILAnalysis.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.lil_log_add_one_sub_log_le",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateLILAnalysis.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.loglog_increment",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateLILAnalysis.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.lilPhi",
+      "kind": "def",
+      "module": "MarkovDriving/MCRateLILAnalysis.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.lilPhi_increment",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateLILAnalysis.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.sqrt_lilPhi_increment",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateLILAnalysis.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.lil_tendsto_sum_div_of_summable",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateLILAnalysis.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.lilScale_nonneg",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateLILAnalysis.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.lilScale_sq",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateLILAnalysis.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.lilScale_mono",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateLILAnalysis.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.sqrt_le_lilScale",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateLILAnalysis.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.tendsto_lilScale",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateLILAnalysis.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.lilScale_pos",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateLILAnalysis.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.lil_eventually_floor_pow_succ_le",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateLILAnalysis.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.summable_exp_neg_mul_loglog_floor_pow",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateLILAnalysis.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.not_summable_exp_neg_mul_loglog_pow",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateLILAnalysis.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.tendsto_loglog_div",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateLILAnalysis.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.tendsto_lilScale_div",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateLILAnalysis.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.lilTruncLevel",
+      "kind": "def",
+      "module": "MarkovDriving/MCRateLILAnalysis.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.lilWeight",
+      "kind": "def",
+      "module": "MarkovDriving/MCRateLILAnalysis.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.lil_three_le_log_of_le",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateLILAnalysis.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.lil_one_le_of_three_le_log",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateLILAnalysis.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.lilWeight_pos",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateLILAnalysis.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.lilWeight_mono",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateLILAnalysis.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.tendsto_lilWeight",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateLILAnalysis.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.lilScale_eq_lilWeight",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateLILAnalysis.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.lil_sqrt_add_one_le",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateLILAnalysis.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.sum_inv_lilWeight_le",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateLILAnalysis.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.lil_integral_sq_sum_range",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateKolmogorovAnscombe.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.lil_sum_coe_sort_ite_lt",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateKolmogorovAnscombe.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.lil_kolmogorov_ineq",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateKolmogorovAnscombe.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.lil_kolmogorov_ineq_shift",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateKolmogorovAnscombe.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.lil_sum_range_sub_eq_window",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateKolmogorovAnscombe.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.lil_tendstoInMeasure_anscombe",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateKolmogorovAnscombe.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.lil_exp_le_one_add_add_sq",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateLILExponential.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.lil_integral_exp_le_of_abs_le",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateLILExponential.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.lil_abs_sum_le_of_abs_le",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateLILExponential.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.lil_exp_maximal_ineq",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateLILExponential.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.lil_integral_exp_sum_le",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateLILExponential.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.lil_iIndep_iSup_blocks",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateLILExponential.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.lil_identDistrib_shift",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateLILExponential.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.lil_identDistrib_shift_sum",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateLILExponential.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.lilTrunc",
+      "kind": "def",
+      "module": "MarkovDriving/MCRateLILUpper.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.measurable_lilTrunc",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateLILUpper.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.abs_lilTrunc_le",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateLILUpper.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.lilTrunc_sq_le",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateLILUpper.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.abs_sub_lilTrunc",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateLILUpper.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.lilPhi_mono_nat",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateLILUpper.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.lilTruncLevel_nonneg",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateLILUpper.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.lilTruncLevel_mono",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateLILUpper.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.lil_exponent_bound",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateLILUpper.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.summable_tail_div_lilWeight",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateLILUpper.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.lil_ae_summable_of_summable_integral",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateLILUpper.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.lil_tsum_measure_ne_top_of_summable",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateLILUpper.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.lil_upper",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateLILUpper.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.lil_gaussianReal_Ioi_ge",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateLILLower.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.lil_two_mul_sqrt_two_pi_le_exp_two",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateLILLower.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.lil_eventually_lt_measure_clt",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateLILLower.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.lil_iIndepFun_blockSum",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateLILLower.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.lil_iIndepSet_preimage",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateLILLower.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.lil_sum_range_mul_eq",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateLILLower.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.block_lower_bound",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateLILLower.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.exists_lil_lower_ratio",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateLILLower.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.exists_lil_lower_level",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateLILLower.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.le_block_level",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateLILLower.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.lil_eventually_mul_sq_le_pow",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateLILLower.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.lil_lower_block_estimate",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateLILLower.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.lil_lower_normalized",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateLILLower.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.LILBound",
+      "kind": "def",
+      "module": "MarkovDriving/MCRateIIDLIL.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.HasLIL",
+      "kind": "def",
+      "module": "MarkovDriving/MCRateIIDLIL.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.lilBound_of_nat",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateIIDLIL.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.lilBound_iid",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateIIDLIL.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.hasLIL_iid",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateIIDLIL.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.LILBound.div",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateIIDLIL.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.HasLIL.limsup_eq",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateIIDLIL.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.HasLIL.liminf_eq",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateIIDLIL.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.limsup_liminf_iid",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateIIDLIL.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.departureDiscrepancy",
+      "kind": "def",
+      "module": "MarkovDriving/OccupationDiscrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.sum_sub_eq_boundary_add",
+      "kind": "theorem",
+      "module": "MarkovDriving/OccupationDiscrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.sum_indicator_eq_occCount",
+      "kind": "theorem",
+      "module": "MarkovDriving/OccupationDiscrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.occCount_sub_eq_boundary_add",
+      "kind": "theorem",
+      "module": "MarkovDriving/OccupationDiscrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.abs_occCount_sub_le",
+      "kind": "theorem",
+      "module": "MarkovDriving/OccupationDiscrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.mulVec_indicator",
+      "kind": "theorem",
+      "module": "MarkovDriving/OccupationDiscrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.transCount_sub_eq_departureDiscrepancy",
+      "kind": "theorem",
+      "module": "MarkovDriving/OccupationDiscrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.abs_transCount_sub_le",
+      "kind": "theorem",
+      "module": "MarkovDriving/OccupationDiscrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.sum_filter_occCount_eq",
+      "kind": "theorem",
+      "module": "MarkovDriving/OccupationDiscrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.stackDrive_succ_of_eq",
+      "kind": "theorem",
+      "module": "MarkovDriving/OccupationDiscrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.departureDiscrepancy_stackDrive",
+      "kind": "theorem",
+      "module": "MarkovDriving/OccupationDiscrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.transCount_stackDrive",
+      "kind": "theorem",
+      "module": "MarkovDriving/OccupationDiscrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.rotorWalk",
+      "kind": "def",
+      "module": "MarkovDriving/RotorRouter.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.rotorWalk_succ",
+      "kind": "theorem",
+      "module": "MarkovDriving/RotorRouter.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.rotorWalk_zero",
+      "kind": "theorem",
+      "module": "MarkovDriving/RotorRouter.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.rotorWalk_shift",
+      "kind": "theorem",
+      "module": "MarkovDriving/RotorRouter.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.rotorWalk_congr_mod",
+      "kind": "theorem",
+      "module": "MarkovDriving/RotorRouter.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.sum_range_add_periodic",
+      "kind": "theorem",
+      "module": "MarkovDriving/RotorRouter.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.sum_range_eq_sum_range_mod",
+      "kind": "theorem",
+      "module": "MarkovDriving/RotorRouter.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.IsRotorCycle",
+      "kind": "structure",
+      "module": "MarkovDriving/RotorRouter.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.IsRotorCycle.mk",
+      "kind": "constructor",
+      "module": "MarkovDriving/RotorRouter.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.IsRotorCycle.len_pos",
+      "kind": "projection",
+      "module": "MarkovDriving/RotorRouter.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.IsRotorCycle.card_eq",
+      "kind": "projection",
+      "module": "MarkovDriving/RotorRouter.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.sum_cycle_eq",
+      "kind": "theorem",
+      "module": "MarkovDriving/RotorRouter.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.sum_range_rotor_centred_eq_zero",
+      "kind": "theorem",
+      "module": "MarkovDriving/RotorRouter.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.departureDiscrepancy_rotorWalk_eq",
+      "kind": "theorem",
+      "module": "MarkovDriving/RotorRouter.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.abs_sum_range_le_of_lt",
+      "kind": "theorem",
+      "module": "MarkovDriving/RotorRouter.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.abs_departureDiscrepancy_rotorWalk_le",
+      "kind": "theorem",
+      "module": "MarkovDriving/RotorRouter.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.abs_sub_mulVec_le",
+      "kind": "theorem",
+      "module": "MarkovDriving/RotorRouter.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.abs_departureDiscrepancy_rotorWalk_le_two_mul",
+      "kind": "theorem",
+      "module": "MarkovDriving/RotorRouter.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.abs_transCount_rotorWalk_sub_le",
+      "kind": "theorem",
+      "module": "MarkovDriving/RotorRouter.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.transCount_rotorWalk_eq_of_dvd",
+      "kind": "theorem",
+      "module": "MarkovDriving/RotorRouter.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.abs_occCount_rotorWalk_sub_le",
+      "kind": "theorem",
+      "module": "MarkovDriving/RotorRouter.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.abs_occFreq_rotorWalk_sub_le",
+      "kind": "theorem",
+      "module": "MarkovDriving/RotorRouter.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.occFreq_rotorWalk_isBigO",
+      "kind": "theorem",
+      "module": "MarkovDriving/RotorRouter.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.abs_transCount_rotorWalk_sub_target_le",
+      "kind": "theorem",
+      "module": "MarkovDriving/RotorRouter.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.card_offset_eq",
+      "kind": "theorem",
+      "module": "MarkovDriving/RotorRouter.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.abs_expected_occCount_rotorWalk_sub_le",
+      "kind": "theorem",
+      "module": "MarkovDriving/RotorRouter.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.twoStateStay78",
+      "kind": "def",
+      "module": "MarkovDriving/RotorRouter.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.isStationaryDistribution_twoStateStay78",
+      "kind": "theorem",
+      "module": "MarkovDriving/RotorRouter.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.not_transCount_eq_target",
+      "kind": "theorem",
+      "module": "MarkovDriving/RotorRouter.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.rotorCounterexampleChain",
+      "kind": "def",
+      "module": "MarkovDriving/RotorRouter.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.rotorCounterexampleStationary",
+      "kind": "def",
+      "module": "MarkovDriving/RotorRouter.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.rotorCounterexampleLen",
+      "kind": "def",
+      "module": "MarkovDriving/RotorRouter.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.rotorCounterexampleCycle",
+      "kind": "def",
+      "module": "MarkovDriving/RotorRouter.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.rotorCounterexampleOffset",
+      "kind": "def",
+      "module": "MarkovDriving/RotorRouter.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.expected_occCount_ne",
+      "kind": "theorem",
+      "module": "MarkovDriving/RotorRouter.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.step_lt_iff",
+      "kind": "theorem",
+      "module": "MarkovDriving/StackBound.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.departuresBelow",
+      "kind": "def",
+      "module": "MarkovDriving/StackBound.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.departuresBelow_eq_countAtMost",
+      "kind": "theorem",
+      "module": "MarkovDriving/StackBound.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.abs_departuresBelow_sub_le",
+      "kind": "theorem",
+      "module": "MarkovDriving/StackBound.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.card_step_eq_eq_sub",
+      "kind": "theorem",
+      "module": "MarkovDriving/StackBound.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.abs_card_step_eq_sub_le",
+      "kind": "theorem",
+      "module": "MarkovDriving/StackBound.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.extendNat",
+      "kind": "def",
+      "module": "MarkovDriving/StackBound.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.stateVariation",
+      "kind": "def",
+      "module": "MarkovDriving/StackBound.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.stateVariation_nonneg",
+      "kind": "theorem",
+      "module": "MarkovDriving/StackBound.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.stateVariation_le",
+      "kind": "theorem",
+      "module": "MarkovDriving/StackBound.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.sum_mul_sub_eq_abel",
+      "kind": "theorem",
+      "module": "MarkovDriving/StackBound.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.abs_sum_step_sub_le",
+      "kind": "theorem",
+      "module": "MarkovDriving/StackBound.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.abs_transCount_stackPath_sub_le",
+      "kind": "theorem",
+      "module": "MarkovDriving/StackBound.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.abs_departureDiscrepancy_stackPath_le",
+      "kind": "theorem",
+      "module": "MarkovDriving/StackBound.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.abs_occCount_stackPath_sub_le",
+      "kind": "theorem",
+      "module": "MarkovDriving/StackBound.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.mul_starDiscrepancy_vdc_le",
+      "kind": "theorem",
+      "module": "MarkovDriving/StackBound.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.abs_transCount_vdc_sub_le",
+      "kind": "theorem",
+      "module": "MarkovDriving/StackBound.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.abs_occCount_vdc_sub_le",
+      "kind": "theorem",
+      "module": "MarkovDriving/StackBound.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.abs_occFreq_vdc_sub_le",
+      "kind": "theorem",
+      "module": "MarkovDriving/StackBound.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.abs_empiricalTrans_vdc_sub_le",
+      "kind": "theorem",
+      "module": "MarkovDriving/StackBound.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.one_le_log_of_three_le",
+      "kind": "theorem",
+      "module": "MarkovDriving/StackBound.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.isBigO_log_div_of_le",
+      "kind": "theorem",
+      "module": "MarkovDriving/StackBound.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.occFreq_vdc_isBigO",
+      "kind": "theorem",
+      "module": "MarkovDriving/StackBound.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.empiricalTrans_vdc_isBigO",
+      "kind": "theorem",
+      "module": "MarkovDriving/StackBound.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.exists_abs_le_add_of_eventually",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRate.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.eventually_lilScale_mono",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRate.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.eventually_lilScale_le_mul",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRate.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.exists_eq_of_le_of_le",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRate.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.frequently_comp_of_unbounded",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRate.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.IsIIDStacks",
+      "kind": "structure",
+      "module": "MarkovDriving/MCRate.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.IsIIDStacks.mk",
+      "kind": "constructor",
+      "module": "MarkovDriving/MCRate.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.IsIIDStacks.measurable",
+      "kind": "projection",
+      "module": "MarkovDriving/MCRate.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.IsIIDStacks.indep",
+      "kind": "projection",
+      "module": "MarkovDriving/MCRate.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.IsIIDStacks.law",
+      "kind": "projection",
+      "module": "MarkovDriving/MCRate.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.isIIDStacks_iidUniform",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRate.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.mcDepartureSum",
+      "kind": "def",
+      "module": "MarkovDriving/MCRate.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.rowVariance",
+      "kind": "def",
+      "module": "MarkovDriving/MCRate.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.rowVariance_indicator",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRate.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.integral_comp_step",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRate.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.hasLIL_mcDepartureSum",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRate.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.departureDiscrepancy_mc_eq",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRate.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.HasLIL.eventually_abs_le",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRate.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.ae_abs_departureDiscrepancy_mc_le",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRate.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.ae_abs_departureDiscrepancy_mc_le_mul",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRate.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.ae_abs_transCount_mc_le",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRate.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.ae_abs_occCount_mc_le",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRate.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.ae_abs_occCount_mc_le_mul",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRate.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.ae_tendsto_occCount_mc",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRate.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.ae_frequently_transCount_mc_ge",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRate.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.ae_not_tendsto_transCount_mc",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRate.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.departureDiscrepancy_ranking",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRate.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.occupation_error_ranking",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRate.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.measurable_occCount_real",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateDriven.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.measurable_transCount_real",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateDriven.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.measurable_lilScale_occCount",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateDriven.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.measurable_le_prop",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateDriven.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.measurable_drivenPath",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateDriven.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.measurable_stackPath",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateDriven.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.map_drivenPath_eq_map_stackPath_path",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateDriven.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.ae_drivenPath_of_ae_stackPath",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateDriven.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.forall_exists_le_iff_nat",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateDriven.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.exists_le_iff_nat",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateDriven.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.measurableSet_transUpper",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateDriven.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.ae_abs_transCount_driven_le",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateDriven.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.ae_abs_occCount_driven_le",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateDriven.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.ae_unbounded_occCount_driven",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateDriven.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.ae_frequently_transCount_driven_ge",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateDriven.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.ae_not_tendsto_transCount_driven",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateDriven.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.occupation_error_ranking_driven",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateDriven.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.occCount_add_of_stay",
+      "kind": "theorem",
+      "module": "MarkovDriving/RotorSpells.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.rotorWalk_not_stay",
+      "kind": "theorem",
+      "module": "MarkovDriving/RotorSpells.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.runLength_rotorWalk_le",
+      "kind": "theorem",
+      "module": "MarkovDriving/RotorSpells.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.exists_ne_of_lt_one",
+      "kind": "theorem",
+      "module": "MarkovDriving/RotorSpells.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.geomPMF",
+      "kind": "def",
+      "module": "MarkovDriving/RotorSpells.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.sum_geomPMF",
+      "kind": "theorem",
+      "module": "MarkovDriving/RotorSpells.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.rotor_spells_not_geometric",
+      "kind": "theorem",
+      "module": "MarkovDriving/RotorSpells.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.len78",
+      "kind": "def",
+      "module": "MarkovDriving/RotorSpells.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.cycle78",
+      "kind": "def",
+      "module": "MarkovDriving/RotorSpells.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.otherState",
+      "kind": "def",
+      "module": "MarkovDriving/RotorSpells.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.isRotorCycle78",
+      "kind": "theorem",
+      "module": "MarkovDriving/RotorSpells.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.rotorWalk78_lt_sixteen",
+      "kind": "theorem",
+      "module": "MarkovDriving/RotorSpells.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.rotorWalk78_sixteen",
+      "kind": "theorem",
+      "module": "MarkovDriving/RotorSpells.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.rotorWalk78_canonical",
+      "kind": "theorem",
+      "module": "MarkovDriving/RotorSpells.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.offsets78",
+      "kind": "def",
+      "module": "MarkovDriving/RotorSpells.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.rotorWalk78_return",
+      "kind": "theorem",
+      "module": "MarkovDriving/RotorSpells.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.rotorWalk78_eventually_canonical",
+      "kind": "theorem",
+      "module": "MarkovDriving/RotorSpells.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.otherState_ne",
+      "kind": "theorem",
+      "module": "MarkovDriving/RotorSpells.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.runLength_rotorWalk78",
+      "kind": "theorem",
+      "module": "MarkovDriving/RotorSpells.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.rotor78_spells_not_geometric",
+      "kind": "theorem",
+      "module": "MarkovDriving/RotorSpells.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.pathProb_extend_stay",
+      "kind": "theorem",
+      "module": "MarkovDriving/SpellStratified.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.uniformIco_step_ne",
+      "kind": "theorem",
+      "module": "MarkovDriving/SpellStratified.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.iidUniform_spell_after_history",
+      "kind": "theorem",
+      "module": "MarkovDriving/SpellStratified.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.iidUniform_firstSpell",
+      "kind": "theorem",
+      "module": "MarkovDriving/SpellStratified.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.iidUniform_runLength_eq",
+      "kind": "theorem",
+      "module": "MarkovDriving/SpellStratified.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.geomQuantile",
+      "kind": "def",
+      "module": "MarkovDriving/SpellStratified.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.geomQuantile_eq_succ_iff",
+      "kind": "theorem",
+      "module": "MarkovDriving/SpellStratified.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.geomQuantile_eq_zero_iff",
+      "kind": "theorem",
+      "module": "MarkovDriving/SpellStratified.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.measurable_geomQuantile",
+      "kind": "theorem",
+      "module": "MarkovDriving/SpellStratified.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.geomQuantile_preimage_inter_Ico",
+      "kind": "theorem",
+      "module": "MarkovDriving/SpellStratified.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.uniformIco_geomQuantile_eq_succ",
+      "kind": "theorem",
+      "module": "MarkovDriving/SpellStratified.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.uniformIco_geomQuantile_eq_zero",
+      "kind": "theorem",
+      "module": "MarkovDriving/SpellStratified.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.uniformIco_geomQuantile_eq_firstSpell",
+      "kind": "theorem",
+      "module": "MarkovDriving/SpellStratified.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.lintegral_geomQuantile",
+      "kind": "theorem",
+      "module": "MarkovDriving/SpellStratified.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.summable_succ_sq_mul_geometric",
+      "kind": "theorem",
+      "module": "MarkovDriving/SpellStratified.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.summable_succ_mul_geometric",
+      "kind": "theorem",
+      "module": "MarkovDriving/SpellStratified.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.integral_geomQuantile",
+      "kind": "theorem",
+      "module": "MarkovDriving/SpellStratified.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.memLp_geomQuantile",
+      "kind": "theorem",
+      "module": "MarkovDriving/SpellStratified.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.integral_geomQuantile_id",
+      "kind": "theorem",
+      "module": "MarkovDriving/SpellStratified.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.integral_geomQuantile_sq",
+      "kind": "theorem",
+      "module": "MarkovDriving/SpellStratified.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.variance_geomQuantile",
+      "kind": "theorem",
+      "module": "MarkovDriving/SpellStratified.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.variance_stratified_le_div",
+      "kind": "theorem",
+      "module": "MarkovDriving/SpellStratified.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.integral_stratifiedSpell",
+      "kind": "theorem",
+      "module": "MarkovDriving/SpellStratified.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.variance_stratifiedSpell_le_iid",
+      "kind": "theorem",
+      "module": "MarkovDriving/SpellStratified.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.variance_stratifiedSpell_le",
+      "kind": "theorem",
+      "module": "MarkovDriving/SpellStratified.lean"
+    }
+  ],
+  "full_build": "passed",
+  "fresh_source_compilation": "passed",
+  "fresh_source_lint_options": [
+    "-Dlinter.mathlibStandardSet=true",
+    "-Dlinter.style.header=false"
+  ],
+  "axioms": {
+    "RQMCMarkov.MarkovDriving.InUnitCube": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.boxInd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.empAvg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.IsUD": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.window": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.IsCUD": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.IsSide": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.isSide_Ico": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.boxVolume_eq_volume": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.boxInd_eq_ite": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.boxInd_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.boxInd_le_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.boxInd_eq_one_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.boxInd_le_boxInd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.empAvg_le_empAvg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.tendsto_empAvg_boxInd_of_isSide": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.IsStepFn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.tendsto_empAvg_of_isStepFn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.IsStepFn.congr": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.IsStepFn.of_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.isStepFn_boxInd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.isStepFn_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.IsStepFn.add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.IsStepFn.const_mul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.IsStepFn.sub": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.isStepFn_finset_sum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.boxInd_append": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.IsStepFn.append": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.IsCUD.mem_Ico": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.IsCUD.isUD_window": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.window_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.not_isUD_of_finite_range": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.not_isCUD_of_finite_range": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.not_isCUD_of_periodic": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.uniformIco": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.isProbabilityMeasure_uniformIco": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.uniformCube": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.isProbabilityMeasure_uniformCube": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.sampleMean": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.map_le_of_sum_map_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.integrable_map_of_sum_map_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.memLp_map_of_sum_map_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.integral_sampleMean_of_sum_map_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.variance_sampleMean_of_sum_map_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.variance_sampleMean_le_of_sum_map_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.sum_map_eq_of_hasLaw": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.integral_sampleMean_iid": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.variance_sampleMean_iid": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.rmse_sampleMean_iid": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.tendstoInDistribution_sampleMean_iid": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.measure_all_draws_lt_tenth": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.measure_all_draws_lt_tenth_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.measure_sampleMean_far_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.integral_sampleMean_of_hasLaw_uniformCube": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.uniformIco_eq_restrict_Ioc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.map_fract_restrict_Ioc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.measurePreserving_fract_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.shiftMod1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.shiftMod1_mem_cube": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.measurePreserving_shiftMod1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.hasLaw_shiftMod1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.integral_sampleMean_shiftMod1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.stratum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.measurableSet_stratum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.stratumMap": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.measurable_stratumMap": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.stratumMap_preimage_stratum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.map_stratumMap_uniformIco": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.iUnion_stratum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.pairwise_disjoint_stratum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.sum_map_stratumMap": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.sum_map_stratified": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.integral_sampleMean_stratified": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.not_hasLaw_stratumMap": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.sum_map_eq_of_integral_sampleMean_indicator": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.sampleMean_const_points": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.integral_sampleMean_of_hasLaw_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.variance_sampleMean_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.IsStochastic": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.IsStochastic.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.IsStochastic.nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.IsStochastic.sum_eq_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.cumProb": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.lastState": [
+      "propext",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.step": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.cumProb_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.cumProb_succ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.cumProb_of_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.cumProb_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.cumProb_mem_Icc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.step_eq_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.step_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.step_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.measurable_step": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.step_preimage_inter_Ioc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.uniformIco_step_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.volume_step_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.step_post3_example": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.drive": [],
+    "RQMCMarkov.MarkovDriving.drivenPath": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.drive_zero": [],
+    "RQMCMarkov.MarkovDriving.drive_succ": [],
+    "RQMCMarkov.MarkovDriving.drive_eq_iff": [],
+    "RQMCMarkov.MarkovDriving.occCount": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.transCount": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.occCount_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.transCount_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.occCount_succ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.transCount_succ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.occCount_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.occCount_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.transCount_le_occCount": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.occCount_congr": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.transCount_congr": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.occCount_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.transCount_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.departureIndex": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.departureIndex_congr": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.departureIndex_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.departureIndex_injective": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.stackState": [],
+    "RQMCMarkov.MarkovDriving.stackDrive": [],
+    "RQMCMarkov.MarkovDriving.stackPath": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.stackState_snd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.stackDrive_zero": [],
+    "RQMCMarkov.MarkovDriving.stackDrive_succ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.stackDrive_eq_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.IsSpellStart": [],
+    "RQMCMarkov.MarkovDriving.runLength": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.spellCount": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.runLength_eq_of_exit": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.runLength_eq_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.spellCount_succ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.sum_occCount": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.sum_transCount_right": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.sum_transCount_left": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.flowBalance": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.abs_flowBalance_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.sum_sum_transCount": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.spellCount_succ_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.iidUniform": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.isProbabilityMeasure_iidUniform": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.infinitePi_setOf_forall_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.measurableSet_setOf_forall_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.setOf_drive_eq": [
+      "propext",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.measurableSet_drive_cylinder": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.infinitePi_drive_cylinder": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.setOf_stackDrive_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.measurableSet_stackDrive_cylinder": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.infinitePi_stackDrive_cylinder": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.pathProb": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.pathProb_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.pathProb_succ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.measurableSet_step_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.prod_uniformIco_step_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.iidUniform_drivenPath_cylinder": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.iidUniform_stackPath_cylinder": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.extendPath": [
+      "propext"
+    ],
+    "RQMCMarkov.MarkovDriving.extendPath_eq_iff": [
+      "propext",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.measurable_drivenPath_restrict": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.measurable_stackPath_restrict": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.map_drivenPath_singleton": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.map_stackPath_singleton": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.map_drivenPath_eq_map_stackPath": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.isUD_fin_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.sum_range_mul_eq_sum_interleaved": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.tendsto_avg_of_interleaved": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.abs_prod_sub_prod_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.abs_div_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.isUD_of_grid": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.measurable_boxInd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.identDistrib_window_boxInd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.indepFun_window_boxInd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.integral_boxInd_iidUniform": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.ae_tendsto_empAvg_box": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.ae_isCUD_iidUniform": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.exists_isCUD": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.windowMap": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.windowMap_succ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.windowMap_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.drive_add_eq_windowMap": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.multiStep": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.multiStep_eq_pow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.sum_mul_multiStep": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.val_step_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.isSide_step": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.isStepFn_step": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.isStepFn_windowMap": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.HasCouplingBox": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.noCouple": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.isStepFn_noCouple": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.noCouple_eq_zero_or_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.windowMap_eq_of_noCouple_eq_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.abs_ind_sub_le_noCouple": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.abs_multiStep_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.occCount_eq_sum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.abs_sum_shift_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.tendsto_occFreq_of_isCUD": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.tendsto_timeAvg_of_isCUD": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.hasCouplingBox_of_common_interval": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.hasCouplingBox_of_col_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.hasCouplingBox_of_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.tendsto_occFreq_of_isCUD_of_col_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.identityTwo": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.isStochastic_identityTwo": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.identityTwo_stationary": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.step_identityTwo_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.drivenPath_identityTwo": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.not_tendsto_occFreq_identity": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.fourState": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.isStochastic_fourState": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.multiStep_fourState_two": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.fourState_stationary": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.step_fourState_parity": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.windowMap_fourState_parity_ne": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.not_hasCouplingBox_fourState": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.InUnitIco": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.countBelow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.countAtMost": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.localDiscrepancy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.starDiscrepancy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.qmcEstimate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.midpointRule": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.countBelow_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.countBelow_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.countBelow_div_mem_Icc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.localDiscrepancy_le_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.localDiscrepancy_eq_abs_div": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.bddAbove_localDiscrepancy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.localDiscrepancy_le_starDiscrepancy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.starDiscrepancy_le_of_forall": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.starDiscrepancy_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.starDiscrepancy_le_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.countAtMost_div_sub_le_starDiscrepancy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.inv_two_mul_le_starDiscrepancy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.midpointRule_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.midpointRule_lt_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.countBelow_midpointRule_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.le_countBelow_midpointRule": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.abs_countBelow_midpointRule_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.starDiscrepancy_midpointRule": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.starDiscrepancy_midpointRule_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.midpointRule_three": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.starDiscrepancy_midpointRule_three": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.totalVariation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.countBelow_eq_sum_indicator": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.countAtMost_eq_sum_indicator": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.countAtMost_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.countAtMost_div_sub_le_starDiscrepancy_of_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.indicator_one_mem_Icc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.abs_sum_indicator_upperSet_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.antitone_indicator_Iic": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.integral_indicator_Iic_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.sum_div_eq_integral_indicator": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.integral_sub_eq_integral_measureReal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.koksma_monotone": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.monotone_comp_projIcc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.comp_projIcc_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.qmcError_congr": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.koksma_monotoneOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.koksma_sub_monotoneOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.koksma_boundedVariationOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.koksma_hasDerivAt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.eVariationOn_le_integral_abs_deriv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.boundedVariationOn_of_hasDerivAt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.totalVariation_le_integral_abs_deriv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.vanDerCorput": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.vanDerCorput_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.vanDerCorput_two_mul_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.vanDerCorput_one_two_three": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.vanDerCorput_mem_Ico": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.vanDerCorput_inUnitIco": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.floor_two_pow_mul_vanDerCorput_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.floor_two_pow_succ_mul_vanDerCorput": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.mod_eq_of_floor_vanDerCorput_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.floor_vanDerCorput_injOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.mem_dyadic_iff_floor": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.card_vanDerCorput_mem_dyadic": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.card_vanDerCorput_mem_dyadic_aligned": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.abs_card_block_vanDerCorput_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.countBelow_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.abs_countBelow_vanDerCorput_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.starDiscrepancy_vanDerCorput_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.natLog_two_add_one_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.starDiscrepancy_vanDerCorput_le_log": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.abs_qmcError_vanDerCorput_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.tendsto_log_add_one_div_sqrt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.tendsto_sqrt_mul_vanDerCorput_bound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.tendsto_sqrt_mul_qmcError_vanDerCorput": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.empAvg_window_one_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.isUD_of_tendsto_starDiscrepancy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.isUD_vanDerCorput": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.vanDerCorput_two_mul_add_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.vanDerCorput_lt_half_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.vanDerCorput_succ_lt_half_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.not_isUD_window_two_vanDerCorput": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.not_isCUD_vanDerCorput": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.vanDerCorput_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.twoState": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.isStochastic_twoState": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.twoState_stationary": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.step_twoState_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.step_twoState_zero_low": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.step_twoState_zero_high": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.drivenPath_twoState_vanDerCorput": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.sum_range_even_indicator": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.tendsto_occFreq_twoState_vanDerCorput": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.not_tendsto_occFreq_twoState_vanDerCorput": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.tendsto_occFreq_twoState_of_isCUD": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.klSum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.sub_le_mul_log_div": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.sub_lt_mul_log_div": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.sum_sub_sum_le_klSum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.eq_of_klSum_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.logSum_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.pushSum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.klSum_pushSum_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.sum_fin_succ_fun": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.sum_fin_zero_fun": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.chentsov_entropy_core": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.chentsov_entropy_stationary": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.IsSide.inter": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.boxInd_inter": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.IsStepFn.mul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.isStepFn_finset_prod": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.IsStepFn.unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.cellInd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.cellInd_eq_prod": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.exists_isStepFn_cellInd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.cellProb": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.isStepFn_cellInd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.isStepFn_pattern": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.sum_cellProb_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.sum_prod_ite_eq_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.exists_tendsto_ultrafilter": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.div_mem_Icc_of_sum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.tendsto_occFreq_of_isCUD_general": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.tendsto_timeAvg_of_isCUD_general": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.tendsto_occFreq_fourState_of_isCUD": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.IsStationaryDistribution": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.IsStationaryDistribution.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.IsStationaryDistribution.vecMul_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.IsStationaryDistribution.nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.IsStationaryDistribution.sum_eq_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.pow_apply_nonneg_of_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.sum_pow_apply_eq_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.mulVec_const_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.eq_of_isMax_of_mulVec_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.eq_of_mulVec_eq_self_of_irreducible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.vecMul_one_sub_eq_zero_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.one_sub_mulVec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.const_one_mem_ker": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.const_one_ne_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.rank_one_sub_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.exists_isStationaryDistribution": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.IsStationaryDistribution.vecMul_pow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.IsStationaryDistribution.pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.dotProduct_sub_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.dotProduct_sub_mulVec_eq_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.exists_poisson": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.poisson_const_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.IsStationaryDistribution.eq_of_vecMul_eq_self": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.existsUnique_isStationaryDistribution": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.poisson_sub_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.exists_poisson_normalized": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.stationary_unique_of_irreducible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.tendsto_occFreq_of_isCUD_irreducible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.tendsto_timeAvg_of_isCUD_irreducible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.ae_tendsto_occFreq_iidUniform_irreducible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.prod_prod_pow_ite_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.prod_eq_prod_pow_transCount": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.pathProb_eq_prod_pow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.pathProb_eq_of_transCount_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.countClass": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.mem_countClass": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.mcLaw": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.mcLaw_singleton_of_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.cond_mcLaw_countClass": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.BalancedCounts": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.balanced_transCount": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.IsCountTrail": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.isCountTrail_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.IsCountTrail.le_sum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.IsCountTrail.extend": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.exists_maximal_trail": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.IsCountTrail.end_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.exists_closed_trail": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.splice": [],
+    "RQMCMarkov.MarkovDriving.transCount_splice": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.exists_path_of_balanced": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.reachable_of_transCount_ne_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.exists_path_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.netFlow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.IsCirculation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.isCirculation_iff_netFlow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.netFlow_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.netFlow_sub": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.netFlow_mul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.netFlow_single": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.sum_netFlow_eq_cut": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.intLattice": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.mem_intLattice": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.intCast_mem_intLattice": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.fracAdj": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.exists_pathFlow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.reflTransGen_fracAdj_of_notMem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.exists_cycle_direction": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.floor_lt_lt_ceil_of_notMem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.exists_int_circulation_rounding": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.abs_sub_lt_one_of_floor_le_le_ceil": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.IsStationaryRow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.expectedCounts": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.isCirculation_expectedCounts": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.sum_expectedCounts": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.exists_rounding_expectedCounts": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.flipChain": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.isStochastic_flipChain": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.isStationaryRow_flipChain": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.not_exists_rounding_flipChain_total_three": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.exists_closed_path_of_rounding": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.conditionalMC_wellDefined": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.exists_walk_of_reflTransGen": [
+      "propext",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.exists_injOn_walk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.prefCount": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.ite_prod_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.netFlow_prefCount": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.sum_prefCount": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.prefCount_ne_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.exists_simple_cycle": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.fracSet": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.mem_fracSet": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.exists_push": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.exists_eq_of_unit_steps": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.exists_open_rounding": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.ite_eq_intCast_ite": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.balancedCounts_of_netFlow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.exists_path_exact_length": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.conditionalMC_exact_wellDefined": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.flipChain_open_path_three": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.lilScale": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.one_le_loglog": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.lil_eventually_le_log": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.lil_log_add_one_sub_log_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.loglog_increment": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.lilPhi": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.lilPhi_increment": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.sqrt_lilPhi_increment": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.lil_tendsto_sum_div_of_summable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.lilScale_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.lilScale_sq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.lilScale_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.sqrt_le_lilScale": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.tendsto_lilScale": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.lilScale_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.lil_eventually_floor_pow_succ_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.summable_exp_neg_mul_loglog_floor_pow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.not_summable_exp_neg_mul_loglog_pow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.tendsto_loglog_div": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.tendsto_lilScale_div": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.lilTruncLevel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.lilWeight": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.lil_three_le_log_of_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.lil_one_le_of_three_le_log": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.lilWeight_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.lilWeight_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.tendsto_lilWeight": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.lilScale_eq_lilWeight": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.lil_sqrt_add_one_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.sum_inv_lilWeight_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.lil_integral_sq_sum_range": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.lil_sum_coe_sort_ite_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.lil_kolmogorov_ineq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.lil_kolmogorov_ineq_shift": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.lil_sum_range_sub_eq_window": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.lil_tendstoInMeasure_anscombe": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.lil_exp_le_one_add_add_sq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.lil_integral_exp_le_of_abs_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.lil_abs_sum_le_of_abs_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.lil_exp_maximal_ineq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.lil_integral_exp_sum_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.lil_iIndep_iSup_blocks": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.lil_identDistrib_shift": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.lil_identDistrib_shift_sum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.lilTrunc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.measurable_lilTrunc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.abs_lilTrunc_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.lilTrunc_sq_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.abs_sub_lilTrunc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.lilPhi_mono_nat": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.lilTruncLevel_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.lilTruncLevel_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.lil_exponent_bound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.summable_tail_div_lilWeight": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.lil_ae_summable_of_summable_integral": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.lil_tsum_measure_ne_top_of_summable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.lil_upper": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.lil_gaussianReal_Ioi_ge": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.lil_two_mul_sqrt_two_pi_le_exp_two": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.lil_eventually_lt_measure_clt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.lil_iIndepFun_blockSum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.lil_iIndepSet_preimage": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.lil_sum_range_mul_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.block_lower_bound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.exists_lil_lower_ratio": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.exists_lil_lower_level": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.le_block_level": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.lil_eventually_mul_sq_le_pow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.lil_lower_block_estimate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.lil_lower_normalized": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.LILBound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.HasLIL": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.lilBound_of_nat": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.lilBound_iid": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.hasLIL_iid": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.LILBound.div": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.HasLIL.limsup_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.HasLIL.liminf_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.limsup_liminf_iid": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.departureDiscrepancy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.sum_sub_eq_boundary_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.sum_indicator_eq_occCount": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.occCount_sub_eq_boundary_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.abs_occCount_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.mulVec_indicator": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.transCount_sub_eq_departureDiscrepancy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.abs_transCount_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.sum_filter_occCount_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.stackDrive_succ_of_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.departureDiscrepancy_stackDrive": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.transCount_stackDrive": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.rotorWalk": [],
+    "RQMCMarkov.MarkovDriving.rotorWalk_succ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.rotorWalk_zero": [],
+    "RQMCMarkov.MarkovDriving.rotorWalk_shift": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.rotorWalk_congr_mod": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.sum_range_add_periodic": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.sum_range_eq_sum_range_mod": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.IsRotorCycle": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.IsRotorCycle.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.IsRotorCycle.len_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.IsRotorCycle.card_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.sum_cycle_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.sum_range_rotor_centred_eq_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.departureDiscrepancy_rotorWalk_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.abs_sum_range_le_of_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.abs_departureDiscrepancy_rotorWalk_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.abs_sub_mulVec_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.abs_departureDiscrepancy_rotorWalk_le_two_mul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.abs_transCount_rotorWalk_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.transCount_rotorWalk_eq_of_dvd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.abs_occCount_rotorWalk_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.abs_occFreq_rotorWalk_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.occFreq_rotorWalk_isBigO": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.abs_transCount_rotorWalk_sub_target_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.card_offset_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.abs_expected_occCount_rotorWalk_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.twoStateStay78": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.isStationaryDistribution_twoStateStay78": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.not_transCount_eq_target": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.rotorCounterexampleChain": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.rotorCounterexampleStationary": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.rotorCounterexampleLen": [
+      "propext"
+    ],
+    "RQMCMarkov.MarkovDriving.rotorCounterexampleCycle": [
+      "propext"
+    ],
+    "RQMCMarkov.MarkovDriving.rotorCounterexampleOffset": [
+      "propext"
+    ],
+    "RQMCMarkov.MarkovDriving.expected_occCount_ne": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.step_lt_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.departuresBelow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.departuresBelow_eq_countAtMost": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.abs_departuresBelow_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.card_step_eq_eq_sub": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.abs_card_step_eq_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.extendNat": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.stateVariation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.stateVariation_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.stateVariation_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.sum_mul_sub_eq_abel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.abs_sum_step_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.abs_transCount_stackPath_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.abs_departureDiscrepancy_stackPath_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.abs_occCount_stackPath_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.mul_starDiscrepancy_vdc_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.abs_transCount_vdc_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.abs_occCount_vdc_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.abs_occFreq_vdc_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.abs_empiricalTrans_vdc_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.one_le_log_of_three_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.isBigO_log_div_of_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.occFreq_vdc_isBigO": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.empiricalTrans_vdc_isBigO": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.exists_abs_le_add_of_eventually": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.eventually_lilScale_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.eventually_lilScale_le_mul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.exists_eq_of_le_of_le": [
+      "propext",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.frequently_comp_of_unbounded": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.IsIIDStacks": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.IsIIDStacks.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.IsIIDStacks.measurable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.IsIIDStacks.indep": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.IsIIDStacks.law": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.isIIDStacks_iidUniform": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.mcDepartureSum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.rowVariance": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.rowVariance_indicator": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.integral_comp_step": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.hasLIL_mcDepartureSum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.departureDiscrepancy_mc_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.HasLIL.eventually_abs_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.ae_abs_departureDiscrepancy_mc_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.ae_abs_departureDiscrepancy_mc_le_mul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.ae_abs_transCount_mc_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.ae_abs_occCount_mc_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.ae_abs_occCount_mc_le_mul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.ae_tendsto_occCount_mc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.ae_frequently_transCount_mc_ge": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.ae_not_tendsto_transCount_mc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.departureDiscrepancy_ranking": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.occupation_error_ranking": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.measurable_occCount_real": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.measurable_transCount_real": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.measurable_lilScale_occCount": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.measurable_le_prop": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.measurable_drivenPath": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.measurable_stackPath": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.map_drivenPath_eq_map_stackPath_path": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.ae_drivenPath_of_ae_stackPath": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.forall_exists_le_iff_nat": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.exists_le_iff_nat": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.measurableSet_transUpper": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.ae_abs_transCount_driven_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.ae_abs_occCount_driven_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.ae_unbounded_occCount_driven": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.ae_frequently_transCount_driven_ge": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.ae_not_tendsto_transCount_driven": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.occupation_error_ranking_driven": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.occCount_add_of_stay": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.rotorWalk_not_stay": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.runLength_rotorWalk_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.exists_ne_of_lt_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.geomPMF": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.sum_geomPMF": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.rotor_spells_not_geometric": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.len78": [],
+    "RQMCMarkov.MarkovDriving.cycle78": [
+      "propext"
+    ],
+    "RQMCMarkov.MarkovDriving.otherState": [
+      "propext"
+    ],
+    "RQMCMarkov.MarkovDriving.isRotorCycle78": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.rotorWalk78_lt_sixteen": [
+      "propext"
+    ],
+    "RQMCMarkov.MarkovDriving.rotorWalk78_sixteen": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.rotorWalk78_canonical": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.offsets78": [
+      "propext"
+    ],
+    "RQMCMarkov.MarkovDriving.rotorWalk78_return": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.rotorWalk78_eventually_canonical": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.otherState_ne": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.runLength_rotorWalk78": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.rotor78_spells_not_geometric": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.pathProb_extend_stay": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.uniformIco_step_ne": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.iidUniform_spell_after_history": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.iidUniform_firstSpell": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.iidUniform_runLength_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.geomQuantile": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.geomQuantile_eq_succ_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.geomQuantile_eq_zero_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.measurable_geomQuantile": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.geomQuantile_preimage_inter_Ico": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.uniformIco_geomQuantile_eq_succ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.uniformIco_geomQuantile_eq_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.uniformIco_geomQuantile_eq_firstSpell": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.lintegral_geomQuantile": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.summable_succ_sq_mul_geometric": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.summable_succ_mul_geometric": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.integral_geomQuantile": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.memLp_geomQuantile": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.integral_geomQuantile_id": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.integral_geomQuantile_sq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.variance_geomQuantile": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.variance_stratified_le_div": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.integral_stratifiedSpell": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.variance_stratifiedSpell_le_iid": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.variance_stratifiedSpell_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  "source_sha256": {
+    "MarkovDriving/CUDDefs.lean": "09791c267c452b45f1fec21196178948813b172738f2dd7e0a5716c759af0885",
+    "MarkovDriving/MonteCarlo.lean": "b8b56c729fda6d048367dd512a40778fa2087a381a2fb048f39b568368525803",
+    "MarkovDriving/Unbiased.lean": "6302558608d06732c181e2ce9787db9438eb56867586bcac3f97acee3b45c9cc",
+    "MarkovDriving/Driving.lean": "768907ab98e3f4d795a0856e5905a6f29ced5c03de3b108ccc15da76ab007890",
+    "MarkovDriving/DrivingMC.lean": "ec788b6eb59865b26988ce30b95cb83984d458052a0d1078fa1211bc9fc9c269",
+    "MarkovDriving/CUDExistence.lean": "48ddc06b53cc25f020bf01a8dcd8f99f932658145ac2a8dccf02d2bc23594ced",
+    "MarkovDriving/ChentsovConsistency.lean": "99f8bcb58e9c4e12405aa7d9d694581cfcbb6f3d4158baf4d5fd8eb560bbf707",
+    "MarkovDriving/Discrepancy.lean": "3aec88fff33bf2cb95cd396c199045ecc32ef9e6373936e38ca0993e3a1f9b4e",
+    "MarkovDriving/Koksma.lean": "f7393e46a3186eae084693dcf4748f1cdf8cc9aefd13c94f3ad30d0b8051afcc",
+    "MarkovDriving/VanDerCorput.lean": "b28e9d2bef341e80e94be761e88468f6de774b9a3ba9a8624cf6be7c64e907cb",
+    "MarkovDriving/CUDVanDerCorput.lean": "6cc97e8bbd631b49d87f324657490434327e95f6b260910ce5a31f677c645cfd",
+    "MarkovDriving/ChentsovEntropy.lean": "5abd5df8d45f49e794c0010c05c5e917cb5f9573ca9f11939a92209a00ec5894",
+    "MarkovDriving/ChentsovGeneral.lean": "549c99359dd4f18ede188942fb808bc0bd0514a5523b87fe36d96b23a10301d3",
+    "MarkovDriving/OccupationPoisson.lean": "14696c3f265aa089b0b91aaf4b9ca5578337beaaf40176d52faba15d82c1f542",
+    "MarkovDriving/ChentsovIrreducible.lean": "6bbf48f1ee97cdf9a866a51aa76d83ac3a89fcd64b86cde218bdc9178ef23a66",
+    "MarkovDriving/ConditionalMC.lean": "66fc4eb5ff99bdc00a41775ddff4247969b6a65d20c7702107fe45c5f53b4dd4",
+    "MarkovDriving/ConditionalMCRounding.lean": "323a3901d9d3efff935cb3f8cba4ee4c39d2a0b58292d7d64de6a17f44613204",
+    "MarkovDriving/ConditionalMCRoundingOpen.lean": "fc5559ee560f9eb44c25c45542753cf8ff7da58fe076ecd190ff252672fdea6a",
+    "MarkovDriving/MCRateLILAnalysis.lean": "d0db3dfe271d294f68885945ac7cf1eb48cf0c5da2157fe09bb30431de3b930f",
+    "MarkovDriving/MCRateKolmogorovAnscombe.lean": "66592ab723bce5a11300f73949234bb319050cdc2baa3fc366e1d60a605e76d5",
+    "MarkovDriving/MCRateLILExponential.lean": "38f2a76bfc5341f1055762a3719e0bd3b92358913d2e7b7afa7c4d0e33162bf8",
+    "MarkovDriving/MCRateLILUpper.lean": "6f804bd7e0bed3605735a65b81be5970e7d77d2600536444c82454686f6c234c",
+    "MarkovDriving/MCRateLILLower.lean": "207e2dd98614d450e82b56c2ae5b8c0a7eef6a817b344d1561f79080073ac7fe",
+    "MarkovDriving/MCRateIIDLIL.lean": "a3abdc988b066541c3094d8f5c3b1c8b158a3c6f0d22b4467f63d42431d40480",
+    "MarkovDriving/OccupationDiscrepancy.lean": "a29ff49ca19f3af5d2533879428a8088ace97ca2a429c1fd4713a89af8622c01",
+    "MarkovDriving/RotorRouter.lean": "9beaaa8de9f538ed4c7899b8f97b2f13ed82034eaab22385681e23891800807f",
+    "MarkovDriving/StackBound.lean": "19ff362cb8847dd5c758857ff94200d4ea683904a8b6faee807a7cacbd051806",
+    "MarkovDriving/MCRate.lean": "9087401c666008ead36325bd07ac8d6b79c4c8cfff3377099aa1a0dc485cd714",
+    "MarkovDriving/MCRateDriven.lean": "89590db67b646f1db2224caa28f11b0090456338170e1c91ee370246b6dcf827",
+    "MarkovDriving/RotorSpells.lean": "8452c5d2aa5823d7c269525439be584376b4e0101d2109490e2b4c92d945c25c",
+    "MarkovDriving/SpellStratified.lean": "ccfa78136206f95d7280c29d4daf3fc3521beee44cb3350ab2f8fe553bf0ff7b",
+    "MarkovDriving.lean": "7db24015dad37f2c6a07e7e7fa65707d019b5be71a1fb1ecbd9f6d565e2b1eaf",
+    "lean-toolchain": "8733782dc070a99b312039cda424f601b80f3be6f6f512627da5ba25adc27632",
+    "lakefile.toml": "3be33c9ec057f54b141e8c8240279b0eb7d0c9b90034d98997d87fa55b3fca87",
+    "lake-manifest.json": "39a54d18fdb1af0c86e59c0773f5ba23a8959eccb624cb052e7bc4df38f8a835",
+    "proof-manifest.json": "ab34bd1c273395204df418e4c8fa99957b9c95a454d23b87e5232081bb35b3ea",
+    "scripts/verify.py": "a70b1fa704dd590f937f8b37682afa88a9d85a9150065acb935c7d2c9589da3b",
+    "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  },
+  "fresh_audit_sha256": "edd55009516256c5a10a9ca111255f35c4505f62b63f9c0ff52fb6bcf9a2c1a6",
+  "lean_toolchain": "leanprover/lean4:v4.34.0",
+  "scope": "Simulating a finite Markov chain by MC, QMC and RQMC driving sequences: the mathematical claims of post #3 of the VFI Toolkit discourse thread 'Simulating a Markov chain: MC, QMC, RQMC' (topic 687), with corrections.",
+  "source": "R. Kirkby, VFI Toolkit discourse topic 687 (2026), with Chentsov (1967), Owen-Tribble (2005), Holroyd-Propp (2010), Meyn-Tweedie (2009) Ch. 17"
+}

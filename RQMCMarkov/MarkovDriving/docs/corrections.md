@@ -1,0 +1,96 @@
+# Corrections and conventions
+
+This file lists the places where a Lean statement differs from post #3 of the discourse thread
+"Simulating a Markov chain: MC, QMC, RQMC" (topic 687): a claim corrected, a claim made precise,
+a hypothesis made explicit, or a convention chosen. Five claims are false as stated. Each is
+refuted in Lean by a counterexample of this project, and a corrected statement is proved:
+Chentsov's consistency without a condition on the chain, the full-period LCG as a CUD sequence,
+the MC rate `O(1/√T)`, the exact counts of rotors, and the unbiasedness of the randomized rotor.
+Four further claims are true under one reading and false or incomplete under another; the
+reading is fixed and proved. Two technical points concern the literature and the rounding, not
+the post. The post is paraphrased and cited by paragraph as in the [source map](source-map.md).
+The last section lists what is not formalised.
+
+## Claims corrected
+
+| Where | Post | Lean |
+| --- | --- | --- |
+| 1. Chentsov's theorem, #3 ¶6 | If the driving sequence is CUD, the simulations are consistent for the state frequencies and time averages (Chentsov 1967). No condition on the chain is stated. | False without a condition on the chain. For the identity matrix on two states every driven path is constant, so from state `0` the frequency of state `0` is `1` for every driving sequence in `[0,1)`, in particular every CUD one, while `(1/2, 1/2)` is stationary (`not_tendsto_occFreq_identity`). The corrected claim: *with the inverse-CDF update, driving a finite chain by any CUD sequence, from any start, gives `N_j(T)/T → π_j` and `(1/T) Σ_t g(x_t) → Σ_j π_j g(j)` whenever the stationary distribution `π` is unique* (`tendsto_occFreq_of_isCUD_general`, `tendsto_timeAvg_of_isCUD_general`). This covers every irreducible chain, periodic or not (`tendsto_occFreq_of_isCUD_irreducible`, `tendsto_timeAvg_of_isCUD_irreducible`); aperiodicity is not needed, and periodic chains do not refute the claim. CUD sequences exist (`ae_isCUD_iidUniform`, `exists_isCUD`). |
+| 2. The CUD sequence of the codes, #3 ¶11 (c) and (i) | Codes (c) use "a CUD sequence (a full-period linear congruential generator)", and (i) adds a random shift to it. | A full-period LCG `s_{t+1} = (a s_t + c) mod M`, `u_t = s_t/M`, is periodic with period `M`. A periodic sequence takes finitely many values, so it is not uniformly distributed even in one dimension, and not CUD (`not_isUD_of_finite_range`, `not_isCUD_of_finite_range`, `not_isCUD_of_periodic`). A random shift modulo 1 keeps the period, so the shifted sequence is not CUD either, for every shift. What holds for LCGs is a triangular-array statement along a family of generators with `M → ∞` (array-CUD; Tribble and Owen 2008), which is not formalised. So Chentsov's theorem (correction 1) does not apply to codes (c) and (i) as a `T → ∞` statement. |
+| 3. The MC rate, #3 ¶5 | "With MC of a Markov Chain the empirical transition matrix converges at `O(1/√T)`" (Meyn and Tweedie, Ch. 17). | False as an almost-sure rate; true at the root-mean-square scale, which is not formalised. For the post's MC, one i.i.d. sequence driving the whole path, almost surely `\|N_ij(T) − p_ij N_i(T)\| ≤ K + (√(p_ij(1 − p_ij)) + ε) √(2 T log log T)` for every `ε > 0` (`ae_abs_transCount_driven_le`), and the occupation error is `≤ K + C √(2 T log log T)` (`ae_abs_occCount_driven_le`). If `π_i > 0`, the lower half of the LIL holds: infinitely often `N_ij(T) − p_ij N_i(T) ≥ (σ − ε) √(2 N log log N)`, and infinitely often `≤ −(σ − ε) √(2 N log log N)`, with `N = N_i(T)` and `σ = √(p_ij(1 − p_ij))` (`ae_frequently_transCount_driven_ge`). So for `0 < p_ij < 1` the error is not `o(√(N log log N))` (`ae_not_tendsto_transCount_driven`), hence not `O(√T)`, and the empirical transition matrix error is of exact almost-sure order `√(log log T / T)`, slightly larger than `1/√T`. The same holds for i.i.d. stacks (`ae_abs_transCount_mc_le`, `ae_frequently_transCount_mc_ge`, `ae_not_tendsto_transCount_mc`). |
+| 4. Exact counts of rotors, #3 ¶9 | "A by-product of rotors is that we achieve the same exact expected number of transitions that we did by conditional MC". | Rotor counts cannot equal conditional MC's targets `T π_i p_ij` in general, since these need not be integers. For the two-state chain with stay probability `7/8`, `π = (1/2, 1/2)`, the target `N_00(T) = 7T/16` is impossible for every path unless `16 ∣ T` (`not_transCount_eq_target`). What holds: the rotor counts are within one cycle of `p_ij N_i(T)` (`abs_transCount_rotorWalk_sub_le`), exactly equal to it whenever `L_i ∣ N_i(T)` (`transCount_rotorWalk_eq_of_dvd`), and within a constant independent of `T` of `T π_i p_ij` (`abs_transCount_rotorWalk_sub_target_le`). Conditional MC's own counts are rounded too (`exists_open_rounding`), so "the same exact" counts holds only up to these roundings. |
+| 5. The randomized rotor, #3 ¶9 and ¶11 (iv) | The randomized rotor-router (each state starts at a random point of its cycle) is listed among the RQMC methods, which by posts #1–#2 give unbiased estimators; rotors are "the RQMC version of conditional MC". | Each single departure of the randomized rotor has the right law: for a uniform offset, the `k`-th departure from `i` goes to `j` with probability `p_ij` (`card_offset_eq`). The expected occupation is within the Holroyd–Propp constant of `T π_s` for every law of the start and the offsets (`abs_expected_occCount_rotorWalk_sub_le`). But it is not exactly `T π_s`, even with a stationary start, because successive departures from a state are dependent. For `P = [[1/2, 1/2], [1, 0]]`, `π = (2/3, 1/3)`, balanced cycles `(0, 1)` and `(0)`, a start `x₀ ∼ π` and an independent offset uniform on `{0, 1}`, `E N_0(3) = 11/6 ≠ 2 = 3 π_0` (`expected_occCount_ne`). |
+
+## Claims made precise
+
+| Where | Post | Lean |
+| --- | --- | --- |
+| 6. Spells of exactly 8, #3 ¶12 | Balancing the departures makes the path too regular: in the two-state chain "every spell lasts exactly 8 periods", rather than being geometric with mean `8`. | Read for the rotor ((d), (iv)) on the two-state chain with stay probability `7/8` in both states and the balanced cycle "seven stays, then a switch" (`twoStateStay78`, `cycle78`, `isRotorCycle78`). Exact for zero offsets, the rotor started at the beginning of both cycles: every spell, the first included, lasts `8` periods (`rotorWalk78_canonical`). For any offsets, in particular the randomized rotor, it holds eventually: there is `τ ≤ 16`, the end of the first spell in each state, after which the walk is the canonical one and every spell lasts exactly `8` (`rotorWalk78_eventually_canonical`, `runLength_rotorWalk78`). At most `16` spells ever have another length, while a geometric spell has length `8` with probability `(7/8)^7/8 < 1/16` (`rotor78_spells_not_geometric`). The claim for Sobol stacks ((ii), (iii)) is not formalised. |
+| 7. Rotor spells not geometric, #3 ¶10 and ¶12 | Rotors "perform poorly in terms of spell lengths"; spells under the chain are geometric with stay probability `p_ii`. | True in general. Under MC, after any history ending in `i`, the remaining stay in `i` is geometric (`iidUniform_spell_after_history`). Under a rotor whose cycle of `i` contains another state (a balanced cycle with `p_ii < 1`, `exists_ne_of_lt_one`), every spell in `i` lasts at most `L_i` periods (`runLength_rotorWalk_le`), while for `p_ii > 0` the geometric law gives probability `p_ii^{L_i} > 0` to longer spells (`rotor_spells_not_geometric`). So the empirical spell-length distribution of a rotor walk stays at distance at least `p_ii^{L_i}` from the geometric law for every `T`. A spell's length is a deterministic function of the rotor position at its start (`rotorWalk_shift`). |
+| 8. Driving by one Sobol sequence, #3 ¶6 and ¶12 (a) | Sobol sequences are not CUD, and driving the whole path by one Sobol sequence "fails badly". | Read for the van der Corput sequence, the one-dimensional Sobol sequence. It is uniformly distributed (`isUD_vanDerCorput`) but not CUD: consecutive terms always lie in different halves of `[0,1)`, so no pair falls in `[0,1/2)²` (`not_isUD_window_two_vanDerCorput`, `not_isCUD_vanDerCorput`). The failure is proved on a chain: for rows `(1/2, 1/2)` and `(1, 0)`, with `π = (2/3, 1/3)`, the driven path alternates from time `3` on, so the frequency of state `1` tends to `1/2`, not `1/3` (`drivenPath_twoState_vanDerCorput`, `tendsto_occFreq_twoState_vanDerCorput`, `not_tendsto_occFreq_twoState_vanDerCorput`). Every CUD sequence gives `1/3` on this chain (`tendsto_occFreq_twoState_of_isCUD`). One-dimensional uniformity, even with discrepancy `O(log N / N)`, is not enough. |
+| 9. The stack and rotor rates, #3 ¶7 and ¶9 | Stacks balance the departures, so the empirical transition matrix converges "faster than `O(1/√T)`"; rotors have occupation error `O(1/T)`, "better than QMC's `O(log T / T)`". | All rates come from one inequality along every path, `\|N_s(T) − T π_s\| ≤ 2M + Σ_i \|D_i(h, T)\|` (`abs_occCount_sub_le`). For any stacks in `[0,1)`, `\|N_ij(T) − p_ij N_i(T)\| ≤ 2 N D*_N(stack i)` (`abs_transCount_stackPath_sub_le`). With one van der Corput sequence for each state, "faster than `O(1/√T)`" is `O(log T / T)`, for the empirical transition matrix when `π_i > 0` (`empiricalTrans_vdc_isBigO`) and for the occupation frequencies (`occFreq_vdc_isBigO`). The rotor bound is `\|N_s(T) − T π_s\| ≤ 2M (1 + Σ_i (L_i − 1))` for every `T` and offsets (`abs_occCount_rotorWalk_sub_le`, `occFreq_rotorWalk_isBigO`). "Better than QMC" is a comparison of upper bounds: no lower bound `Ω(log T)` is proved for stacks. The ranking theorem is `occupation_error_ranking_driven`. |
+
+## Technical notes
+
+These concern the formalisation and the literature, not errors in the post.
+
+| Where | Post | Lean |
+| --- | --- | --- |
+| The coupling hypothesis, #3 ¶6 | Chentsov (1967) as cited. | The standard proof (Owen and Tribble 2005; Chen, Dick and Owen 2011) assumes a *coupling box*: a box of inputs of positive volume on which `d` inverse-CDF steps send every state to one state (`HasCouplingBox`). Under it the theorem is `tendsto_occFreq_of_isCUD`, and the box exists when the column of the first state is bounded below by `c > 0` (`hasCouplingBox_of_col_pos`, `hasCouplingBox_of_pos`). The hypothesis is not implied by irreducibility and aperiodicity, nor by perfect mixing: `fourState` has `P² = (1/4)·𝟙` (`multiStep_fourState_two`) but no coupling box of any length (`not_hasCouplingBox_fourState`), since each update keeps the blocks `{0, 2}` and `{1, 3}` apart. The hypothesis is not needed: the general theorem (correction 1) covers `fourState` (`tendsto_occFreq_fourState_of_isCUD`). |
+| Closed versus open rounding, #3 ¶8 | Counts `T π_i p_ij`, "rounded so that every state is entered as often as it is left (allowing for the first and last states)". | A closed rounding (an integer circulation with `⌊x_ij⌋ ≤ n_ij ≤ ⌈x_ij⌉`) always exists (`exists_int_circulation_rounding`, `exists_rounding_expectedCounts`), but its total cannot always be `T`. For the flip chain `[[0, 1], [1, 0]]` with `π = (1/2, 1/2)` and `T = 3`, a circulation has `n_01 = n_10`, so an even total (`not_exists_rounding_flipChain_total_three`). The post's wording, balanced except at the first and last states, is the right one: an open rounding with total exactly `T` always exists (`exists_open_rounding`), as the path `0 → 1 → 0 → 1` shows here (`flipChain_open_path_three`), and it is realised by a path of exactly `T` transitions (`exists_path_exact_length`, `conditionalMC_exact_wellDefined`). |
+
+## Readings chosen
+
+| Where | Post | Lean |
+| --- | --- | --- |
+| #3 ¶4 | The draw sends the chain to "the correct conditional distribution". | The finite-dimensional laws of the driven path are those of the Markov chain (`iidUniform_drivenPath_cylinder`), and the laws of whole paths agree for one sequence and for i.i.d. stacks (`map_drivenPath_eq_map_stackPath_path`). The identification with Mathlib's `Kernel.traj` is not done. |
+| #3 ¶8, ¶11 (v) | Conditional MC "is exactly MC conditional on the counts". | Conditioning on the start `x₀` and the counts `N` gives the uniform law on the paths with that start and those counts (`cond_mcLaw_countClass`). The start is part of the conditioning: for a circulation the counts determine the end state but not the start. |
+| #3 ¶8 | "These paths are Eulerian trails." | Euler's theorem for directed multigraphs: balanced counts whose support is reachable from the start are the counts of some path (`exists_path_of_balanced`, `exists_path_iff`). |
+| #3 ¶9 | Rotors use cycles "ordered so that every stretch of the cycle is balanced". | Only the full-cycle counts are used (`IsRotorCycle`); the bounds hold for any order. |
+| #3 ¶10 | Spell lengths drawn "by stratified sampling from the geometric distribution … rather than at random". | `L_k = geomQuantile p ((k + V_k)/K)`, `k < K`, `V_k` i.i.d. uniform. "Better than at random" is read as unbiased for the mean `1/(1 − p)` (`integral_stratifiedSpell`) with variance at most that of `K` i.i.d. spell lengths (`variance_stratifiedSpell_le_iid`), explicitly `≤ p/((1 − p)² K)` (`variance_stratifiedSpell_le`). |
+| #3 ¶12 | The two-state chain "like the aggregate shock in Krusell and Smith", with mean spell length `8`. | Stay probability `7/8` in both states (`twoStateStay78`), the value that gives mean `8` (`integral_geomQuantile_id`). |
+
+## Hypotheses made explicit
+
+| Where | Post | Lean |
+| --- | --- | --- |
+| The chain (#3 ¶2) | `n` states, rows of `P` summing to one. | `P : Fin n → Fin n → ℝ` (or `Matrix S S ℝ` on a finite type `S`) with `IsStochastic P`, or the plain hypotheses `0 ≤ P i j` and `Σ_j P i j = 1`. Irreducibility is `∀ i j, ∃ k, 0 < (Pᵏ) i j` (`k = 0` allowed); the rounding modules use the equivalent reachability through positive entries. Aperiodicity is never assumed. |
+| The update (#3 ¶4) | The smallest `j` with `u ≤ cs_{ij}`. | `step P i u` is total: at `u = 0` it picks the first state even when `p_{i1} = 0` (`step_zero`), and for `u > 1` the last state. Both are null events under the uniform law. `step_eq_iff` takes `u ∈ (0, 1]`. |
+| The rates (#3 ¶5, ¶7, ¶9) | Rates for the occupation frequencies. | The rate theorems take a solution `h` of Poisson's equation `h − Ph = 1_{s} − c` and a bound `\|h\| ≤ M` as hypotheses. Then `c = π_s` for every stationary `π` (`poisson_const_eq`), and `h` exists for every irreducible `P` (`exists_poisson`). The empirical-matrix rates need `π_i > 0`. |
+| Stacks (#3 ¶7) | One Sobol sequence per state. | Any stacks `v i k ∈ [0,1)` for the general bounds; for the explicit `O(log T)` bounds, the same van der Corput sequence for every state (`stackPath P x₀ fun _ => vanDerCorput`). The variation `V(g) = Σ_j \|g(j+1) − g(j)\|` over the state order (`stateVariation`) is at most `2 (n − 1) max \|g\|` (`stateVariation_le`). |
+| Rotors (#3 ¶9) | A fixed balanced cycle of next states for each state. | `IsRotorCycle P L c`: `L_i > 0` and `j` appears exactly `p_ij L_i` times in the cycle of `i`, so `P` must be rational. Offsets `θ` are arbitrary; the randomized rotor is a law on finitely many configurations of start and offsets (`abs_expected_occCount_rotorWalk_sub_le`). |
+| MC (#3 ¶5) | i.i.d. uniform draws. | One sequence: `iidUniform ℕ`, Mathlib's `Measure.infinitePi` of `U[0,1)`. Stacks: `IsIIDStacks`, each stack i.i.d. uniform, with no independence across states needed. The rates are almost sure with a random constant `K` (`∃ K, ∀ T, …`) and in the `ε`-form of the LIL. The lower half needs `π_i > 0`, and the non-convergence statement `0 < p_ij < 1`. |
+| CUD (#3 ¶6) | "Completely uniformly distributed". | `IsCUD u`: for every `d`, the windows `(u_t, …, u_{t+d−1})` are uniformly distributed in `[0,1)^d` (`IsUD`), which includes `u_t ∈ [0,1)`. Uniform distribution is defined on half-open boxes; boxes with other sides follow (`tendsto_empAvg_boxInd_of_isSide`). Chentsov's theorem is proved for the inverse-CDF update `step P`. Uniqueness of `π` is stated as: every nonnegative `ρ` with `ρP = ρ` and `Σ ρ = 1` equals `π`. |
+| Rounding (#3 ¶8) | Counts `T π_i p_ij`, rounded and balanced. | `π` is a stationary row (`IsStationaryRow`), with `Σ π = 1` for the exact-length version. The path statements need irreducible `P` and `T π_i p_ij ≥ 1` on the support of `P`, so that the rounded counts keep the support of `P` and are connected. The open version takes an integer `T`, and its first and last states `a`, `b` are produced by the rounding, not prescribed. |
+| Conditional MC (#3 ¶8) | Sample uniformly among the paths with the counts. | The conditioning event must have positive probability (`cond_mcLaw_countClass`); for the rounded counts this is proved (`conditionalMC_wellDefined`, `conditionalMC_exact_wellDefined`). |
+| Spells (#3 ¶10) | Spell lengths geometric with stay probability `p_ii`. | Conditionally on the history up to the start of a stay in `i` (`iidUniform_spell_after_history`); `runLength` is censored at the horizon `T`. `geomQuantile p u` is the least `k ≥ 1` with `u < 1 − p^k`, `<` in place of `≤` (a null-set difference). The stratified variance bound needs independent `V_k`; unbiasedness needs only their marginal laws. `0 ≤ p < 1`. |
+
+## Conventions
+
+* States are `Fin n`, `0`-indexed, so post #3's `x_j` is the state `j − 1`. Time starts at `0`, a
+  path is `x : ℕ → S` with `x 0 = x₀`, and `u t` drives the transition `t → t + 1`.
+* Over the horizon `T`, `N_i(T)` counts the times `t < T` with `x t = i`, and `N_ij(T)` the
+  transitions `t → t + 1`, `t < T`; so `Σ_i N_i(T) = Σ_{i,j} N_ij(T) = T`. Post #3's `T`-period
+  path `x^1, …, x^T` corresponds to `x 0, …, x (T − 1)`.
+* Occupation frequencies are `N_i(T)/T`, the empirical transition matrix is `N_ij(T)/N_i(T)`.
+* `lilScale m = √(2 m log log m)`, with the natural logarithm; `⌊log₂ T⌋` is `Nat.log 2 T`.
+* The uniform law is `uniformIco = volume.restrict [0,1)`, as in `PointSets`.
+* `Matrix S S ℝ` is `S → S → ℝ`, so the stochastic matrices of `Driving` can be passed to the
+  matrix statements of `OccupationPoisson`.
+
+## Not formalised
+
+* **The BEST theorem** (#3 ¶8): counting the Eulerian trails with given counts, and the exact
+  sampler with a random spanning tree.
+* **The CLT** for the MC transition counts at the scale `√T`, which is the sense in which
+  `O(1/√T)` is right (correction 3).
+* **The spell-length heuristic** of approach (vii): adjusting the stratified lengths to add up to
+  the time in the state, and the random order of the spells (#3 ¶10).
+* **Other constructions**: Sobol stacks with a random digital shift or Owen scrambling ((ii),
+  (iii)), the "exactly 8" spells for them, two-step counts (vi), array-CUD families of LCGs,
+  Array-RQMC (PPPS), burn-in (PS).
+* **Lower bounds** for the stack rate, so "rotors better than QMC" is shown for upper bounds only.
+* **Empirical claims**: what the codes show (#3 ¶10, ¶12), including the accuracy ratios and the
+  normality tests.
+* **Informal remarks**: rotors as "the RQMC version of conditional MC" (#3 ¶9), MCMC (PPS), and
+  the MEP application (post #4 is a placeholder).
