@@ -1,0 +1,5650 @@
+{
+  "checked_at_utc": "2026-10-21T02:47:40.074635+00:00",
+  "theorems": 452,
+  "module_theorems": {
+    "Irreducibility/PathSpace.lean": 23,
+    "Irreducibility/Kernels.lean": 32,
+    "Irreducibility/MarkovProperty.lean": 22,
+    "Irreducibility/StrongMarkov.lean": 20,
+    "Irreducibility/HittingTimes.lean": 36,
+    "Irreducibility/CountableChains.lean": 13,
+    "Irreducibility/Communication.lean": 33,
+    "Irreducibility/PsiIrreducibility.lean": 13,
+    "Irreducibility/MaximalIrreducibility.lean": 30,
+    "Irreducibility/Accessibility.lean": 9,
+    "Irreducibility/SpecificMatrices.lean": 21,
+    "Irreducibility/CountableIrreducibility.lean": 32,
+    "Irreducibility/ModelRecursion.lean": 18,
+    "Irreducibility/ModelRandomWalk.lean": 19,
+    "Irreducibility/ModelLinearModels.lean": 39,
+    "Irreducibility/LinearControllability.lean": 26,
+    "Irreducibility/LinearIrreducibility.lean": 14,
+    "Irreducibility/LinearRestriction.lean": 13,
+    "Irreducibility/IrreducibilityExtras.lean": 10,
+    "Irreducibility/RandomWalkIrreducibility.lean": 20,
+    "Irreducibility/StateSpaces.lean": 2,
+    "Irreducibility/StorageIrreducibility.lean": 7
+  },
+  "audited_declarations": 564,
+  "declarations": [
+    {
+      "name": "MeynTweedie.Irreducibility.trajKernel",
+      "kind": "def",
+      "module": "Irreducibility/PathSpace.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.isMarkovKernel_trajKernel",
+      "kind": "theorem",
+      "module": "Irreducibility/PathSpace.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.pathKernel",
+      "kind": "def",
+      "module": "Irreducibility/PathSpace.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.isMarkovKernel_pathKernel",
+      "kind": "theorem",
+      "module": "Irreducibility/PathSpace.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.pathMeasure",
+      "kind": "def",
+      "module": "Irreducibility/PathSpace.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.isProbabilityMeasure_pathMeasure",
+      "kind": "theorem",
+      "module": "Irreducibility/PathSpace.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.pathMeasure_eq_comp",
+      "kind": "theorem",
+      "module": "Irreducibility/PathSpace.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.pathMeasure_dirac",
+      "kind": "theorem",
+      "module": "Irreducibility/PathSpace.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.pathKernel_map_zero",
+      "kind": "theorem",
+      "module": "Irreducibility/PathSpace.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.pathKernel_zero_mem",
+      "kind": "theorem",
+      "module": "Irreducibility/PathSpace.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.ae_pathKernel_zero",
+      "kind": "theorem",
+      "module": "Irreducibility/PathSpace.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.pathMeasure_inter_zero",
+      "kind": "theorem",
+      "module": "Irreducibility/PathSpace.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.pathMeasure_map_zero",
+      "kind": "theorem",
+      "module": "Irreducibility/PathSpace.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.natFilt",
+      "kind": "abbrev",
+      "module": "Irreducibility/PathSpace.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.measurable_coord_natFilt",
+      "kind": "theorem",
+      "module": "Irreducibility/PathSpace.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.measurableSet_coord_natFilt",
+      "kind": "theorem",
+      "module": "Irreducibility/PathSpace.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.setLIntegral_succ",
+      "kind": "theorem",
+      "module": "Irreducibility/PathSpace.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.cylFn",
+      "kind": "def",
+      "module": "Irreducibility/PathSpace.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.measurable_cylFn",
+      "kind": "theorem",
+      "module": "Irreducibility/PathSpace.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.boxSet",
+      "kind": "def",
+      "module": "Irreducibility/PathSpace.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.measurableSet_boxSet",
+      "kind": "theorem",
+      "module": "Irreducibility/PathSpace.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.measure_inter_shift_box",
+      "kind": "theorem",
+      "module": "Irreducibility/PathSpace.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.pathKernel_boxSet",
+      "kind": "theorem",
+      "module": "Irreducibility/PathSpace.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.pathMeasure_boxSet",
+      "kind": "theorem",
+      "module": "Irreducibility/PathSpace.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.IsMarkovChain",
+      "kind": "structure",
+      "module": "Irreducibility/PathSpace.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.IsMarkovChain.mk",
+      "kind": "constructor",
+      "module": "Irreducibility/PathSpace.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.IsMarkovChain.measurable",
+      "kind": "projection",
+      "module": "Irreducibility/PathSpace.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.IsMarkovChain.fdd",
+      "kind": "projection",
+      "module": "Irreducibility/PathSpace.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.theorem_3_4_1",
+      "kind": "theorem",
+      "module": "Irreducibility/PathSpace.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.generateFrom_boxSets",
+      "kind": "theorem",
+      "module": "Irreducibility/PathSpace.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.isPiSystem_boxSets",
+      "kind": "theorem",
+      "module": "Irreducibility/PathSpace.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.theorem_3_4_1_unique",
+      "kind": "theorem",
+      "module": "Irreducibility/PathSpace.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.law_eq_pathMeasure",
+      "kind": "theorem",
+      "module": "Irreducibility/PathSpace.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.IsSubstochasticKernel",
+      "kind": "def",
+      "module": "Irreducibility/Kernels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.isSubstochasticKernel_of_markov",
+      "kind": "theorem",
+      "module": "Irreducibility/Kernels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.isMarkovKernel_pow",
+      "kind": "theorem",
+      "module": "Irreducibility/Kernels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.pow_zero_apply",
+      "kind": "theorem",
+      "module": "Irreducibility/Kernels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.pow_succ_apply",
+      "kind": "theorem",
+      "module": "Irreducibility/Kernels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.pow_succ_apply'",
+      "kind": "theorem",
+      "module": "Irreducibility/Kernels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.theorem_3_4_2",
+      "kind": "theorem",
+      "module": "Irreducibility/Kernels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.pow_add_eq",
+      "kind": "theorem",
+      "module": "Irreducibility/Kernels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.skeleton",
+      "kind": "abbrev",
+      "module": "Irreducibility/Kernels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.skeleton_pow",
+      "kind": "theorem",
+      "module": "Irreducibility/Kernels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.sampledKernel",
+      "kind": "def",
+      "module": "Irreducibility/Kernels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.sampledKernel_apply",
+      "kind": "theorem",
+      "module": "Irreducibility/Kernels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.isMarkovKernel_sampledKernel",
+      "kind": "theorem",
+      "module": "Irreducibility/Kernels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.resolvent",
+      "kind": "def",
+      "module": "Irreducibility/Kernels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.resolvent_apply",
+      "kind": "theorem",
+      "module": "Irreducibility/Kernels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.tsum_geometric_weights",
+      "kind": "theorem",
+      "module": "Irreducibility/Kernels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.isMarkovKernel_resolvent",
+      "kind": "theorem",
+      "module": "Irreducibility/Kernels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.kfun",
+      "kind": "def",
+      "module": "Irreducibility/Kernels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.measurable_kfun",
+      "kind": "theorem",
+      "module": "Irreducibility/Kernels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.kfun_indicator",
+      "kind": "theorem",
+      "module": "Irreducibility/Kernels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.kfun_one",
+      "kind": "theorem",
+      "module": "Irreducibility/Kernels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.kfun_mono",
+      "kind": "theorem",
+      "module": "Irreducibility/Kernels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.kfun_add",
+      "kind": "theorem",
+      "module": "Irreducibility/Kernels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.kfun_const_mul",
+      "kind": "theorem",
+      "module": "Irreducibility/Kernels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.kfun_comp",
+      "kind": "theorem",
+      "module": "Irreducibility/Kernels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.kfun_pow_succ",
+      "kind": "theorem",
+      "module": "Irreducibility/Kernels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.measure_kernel_apply",
+      "kind": "theorem",
+      "module": "Irreducibility/Kernels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.measure_kernel_assoc",
+      "kind": "theorem",
+      "module": "Irreducibility/Kernels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.lintegral_kfun",
+      "kind": "theorem",
+      "module": "Irreducibility/Kernels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.isProbabilityMeasure_measure_kernel",
+      "kind": "theorem",
+      "module": "Irreducibility/Kernels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.dirac_kernel",
+      "kind": "theorem",
+      "module": "Irreducibility/Kernels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.kfunR",
+      "kind": "def",
+      "module": "Irreducibility/Kernels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.measurable_kfunR",
+      "kind": "theorem",
+      "module": "Irreducibility/Kernels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.abs_kfunR_le",
+      "kind": "theorem",
+      "module": "Irreducibility/Kernels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.indKernel",
+      "kind": "def",
+      "module": "Irreducibility/Kernels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.indKernel_apply",
+      "kind": "theorem",
+      "module": "Irreducibility/Kernels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.comp_indKernel_apply",
+      "kind": "theorem",
+      "module": "Irreducibility/Kernels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.isSubstochasticKernel_comp_indKernel",
+      "kind": "theorem",
+      "module": "Irreducibility/Kernels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.potKernel",
+      "kind": "def",
+      "module": "Irreducibility/Kernels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.potKernel_apply",
+      "kind": "theorem",
+      "module": "Irreducibility/Kernels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.shift",
+      "kind": "def",
+      "module": "Irreducibility/MarkovProperty.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.measurable_shift",
+      "kind": "theorem",
+      "module": "Irreducibility/MarkovProperty.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.shift_zero",
+      "kind": "theorem",
+      "module": "Irreducibility/MarkovProperty.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.shift_shift",
+      "kind": "theorem",
+      "module": "Irreducibility/MarkovProperty.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.shift_apply",
+      "kind": "theorem",
+      "module": "Irreducibility/MarkovProperty.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.integral_measure_comp",
+      "kind": "theorem",
+      "module": "Irreducibility/MarkovProperty.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.pathMeasure_map_coord",
+      "kind": "theorem",
+      "module": "Irreducibility/MarkovProperty.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.pathKernel_map_coord",
+      "kind": "theorem",
+      "module": "Irreducibility/MarkovProperty.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.pathKernel_coord_mem",
+      "kind": "theorem",
+      "module": "Irreducibility/MarkovProperty.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.pathKernel_coord_chapmanKolmogorov",
+      "kind": "theorem",
+      "module": "Irreducibility/MarkovProperty.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.markov_measure",
+      "kind": "theorem",
+      "module": "Irreducibility/MarkovProperty.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.markov_lintegral",
+      "kind": "theorem",
+      "module": "Irreducibility/MarkovProperty.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.markov_lintegral_mul",
+      "kind": "theorem",
+      "module": "Irreducibility/MarkovProperty.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.markov_lintegral_univ",
+      "kind": "theorem",
+      "module": "Irreducibility/MarkovProperty.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.markov_setIntegral",
+      "kind": "theorem",
+      "module": "Irreducibility/MarkovProperty.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.stronglyMeasurable_expect_coord",
+      "kind": "theorem",
+      "module": "Irreducibility/MarkovProperty.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.integrable_expect_coord",
+      "kind": "theorem",
+      "module": "Irreducibility/MarkovProperty.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.markov_property",
+      "kind": "theorem",
+      "module": "Irreducibility/MarkovProperty.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.integrable_shift_of_bdd",
+      "kind": "theorem",
+      "module": "Irreducibility/MarkovProperty.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.markov_property_bdd",
+      "kind": "theorem",
+      "module": "Irreducibility/MarkovProperty.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.proposition_3_4_3",
+      "kind": "theorem",
+      "module": "Irreducibility/MarkovProperty.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.isMarkovChain_of_step",
+      "kind": "theorem",
+      "module": "Irreducibility/MarkovProperty.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.skeletonFilt",
+      "kind": "def",
+      "module": "Irreducibility/MarkovProperty.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.skeleton_isMarkovChain",
+      "kind": "theorem",
+      "module": "Irreducibility/MarkovProperty.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.iSup_natFilt",
+      "kind": "theorem",
+      "module": "Irreducibility/StrongMarkov.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.setOf_le_eq_biUnion",
+      "kind": "theorem",
+      "module": "Irreducibility/StrongMarkov.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.setOf_ne_top_eq_iUnion",
+      "kind": "theorem",
+      "module": "Irreducibility/StrongMarkov.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.measurableSet_ne_top",
+      "kind": "theorem",
+      "module": "Irreducibility/StrongMarkov.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.measurableSet_stoppedField_iff",
+      "kind": "theorem",
+      "module": "Irreducibility/StrongMarkov.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.measurableSet_stoppedField_ne_top",
+      "kind": "theorem",
+      "module": "Irreducibility/StrongMarkov.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.stoppedState",
+      "kind": "def",
+      "module": "Irreducibility/StrongMarkov.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.shiftAt",
+      "kind": "def",
+      "module": "Irreducibility/StrongMarkov.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.stoppedState_of_eq",
+      "kind": "theorem",
+      "module": "Irreducibility/StrongMarkov.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.shiftAt_of_eq",
+      "kind": "theorem",
+      "module": "Irreducibility/StrongMarkov.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.measurable_of_stopping_pieces",
+      "kind": "theorem",
+      "module": "Irreducibility/StrongMarkov.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.measurable_stoppedState",
+      "kind": "theorem",
+      "module": "Irreducibility/StrongMarkov.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.measurable_shiftAt",
+      "kind": "theorem",
+      "module": "Irreducibility/StrongMarkov.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.measurable_stoppedField_indicator",
+      "kind": "theorem",
+      "module": "Irreducibility/StrongMarkov.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.inter_ne_top_eq_iUnion",
+      "kind": "theorem",
+      "module": "Irreducibility/StrongMarkov.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.pairwise_disjoint_inter_eq",
+      "kind": "theorem",
+      "module": "Irreducibility/StrongMarkov.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.strong_markov_lintegral",
+      "kind": "theorem",
+      "module": "Irreducibility/StrongMarkov.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.strong_markov_lintegral_mul",
+      "kind": "theorem",
+      "module": "Irreducibility/StrongMarkov.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.strong_markov_measure",
+      "kind": "theorem",
+      "module": "Irreducibility/StrongMarkov.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.strong_markov_setIntegral",
+      "kind": "theorem",
+      "module": "Irreducibility/StrongMarkov.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.strong_markov_property",
+      "kind": "theorem",
+      "module": "Irreducibility/StrongMarkov.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.StrongMarkovProperty",
+      "kind": "def",
+      "module": "Irreducibility/StrongMarkov.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.proposition_3_4_6",
+      "kind": "theorem",
+      "module": "Irreducibility/StrongMarkov.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.occTime",
+      "kind": "def",
+      "module": "Irreducibility/HittingTimes.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.firstReturn",
+      "kind": "def",
+      "module": "Irreducibility/HittingTimes.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.firstHit",
+      "kind": "def",
+      "module": "Irreducibility/HittingTimes.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.returnTimeK",
+      "kind": "def",
+      "module": "Irreducibility/HittingTimes.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.hitProb",
+      "kind": "def",
+      "module": "Irreducibility/HittingTimes.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.returnTimeK_one",
+      "kind": "theorem",
+      "module": "Irreducibility/HittingTimes.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.returnTimeK_succ_of_eq",
+      "kind": "theorem",
+      "module": "Irreducibility/HittingTimes.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.returnTimeK_succ_of_top",
+      "kind": "theorem",
+      "module": "Irreducibility/HittingTimes.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.firstReturn_ne_top_iff",
+      "kind": "theorem",
+      "module": "Irreducibility/HittingTimes.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.le_firstReturn_iff",
+      "kind": "theorem",
+      "module": "Irreducibility/HittingTimes.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.one_le_firstReturn",
+      "kind": "theorem",
+      "module": "Irreducibility/HittingTimes.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.firstReturn_eq_iff",
+      "kind": "theorem",
+      "module": "Irreducibility/HittingTimes.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.le_firstReturn_succ_iff",
+      "kind": "theorem",
+      "module": "Irreducibility/HittingTimes.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.firstHit_eq_zero_iff",
+      "kind": "theorem",
+      "module": "Irreducibility/HittingTimes.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.firstHit_eq_firstReturn",
+      "kind": "theorem",
+      "module": "Irreducibility/HittingTimes.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.adapted_coord",
+      "kind": "theorem",
+      "module": "Irreducibility/HittingTimes.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.proposition_3_4_4",
+      "kind": "theorem",
+      "module": "Irreducibility/HittingTimes.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.isStoppingTime_returnTimeK",
+      "kind": "theorem",
+      "module": "Irreducibility/HittingTimes.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.measurableSet_firstReturn_ne_top",
+      "kind": "theorem",
+      "module": "Irreducibility/HittingTimes.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.measurableSet_firstReturn_eq",
+      "kind": "theorem",
+      "module": "Irreducibility/HittingTimes.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.measurableSet_le_firstReturn",
+      "kind": "theorem",
+      "module": "Irreducibility/HittingTimes.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.measurable_occTime",
+      "kind": "theorem",
+      "module": "Irreducibility/HittingTimes.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.measurable_hitProb",
+      "kind": "theorem",
+      "module": "Irreducibility/HittingTimes.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.potKernel_eq_lintegral_occTime",
+      "kind": "theorem",
+      "module": "Irreducibility/HittingTimes.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.pathKernel_first_step",
+      "kind": "theorem",
+      "module": "Irreducibility/HittingTimes.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.tabooKernel",
+      "kind": "def",
+      "module": "Irreducibility/HittingTimes.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.comp_indKernel_eq_restrict",
+      "kind": "theorem",
+      "module": "Irreducibility/HittingTimes.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.tabooKernel_zero",
+      "kind": "theorem",
+      "module": "Irreducibility/HittingTimes.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.tabooKernel_succ_apply",
+      "kind": "theorem",
+      "module": "Irreducibility/HittingTimes.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.tabooProb",
+      "kind": "def",
+      "module": "Irreducibility/HittingTimes.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.tabooProb_one",
+      "kind": "theorem",
+      "module": "Irreducibility/HittingTimes.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.tabooProb_succ",
+      "kind": "theorem",
+      "module": "Irreducibility/HittingTimes.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.tabooProb_eq_tabooKernel",
+      "kind": "theorem",
+      "module": "Irreducibility/HittingTimes.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.firstReturn_eq_tabooProb",
+      "kind": "theorem",
+      "module": "Irreducibility/HittingTimes.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.proposition_3_4_5_i",
+      "kind": "theorem",
+      "module": "Irreducibility/HittingTimes.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.proposition_3_4_5_i_succ",
+      "kind": "theorem",
+      "module": "Irreducibility/HittingTimes.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.firstReturn_eq_tabooKernel",
+      "kind": "theorem",
+      "module": "Irreducibility/HittingTimes.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.nestedTaboo",
+      "kind": "def",
+      "module": "Irreducibility/HittingTimes.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.firstReturn_eq_nestedTaboo",
+      "kind": "theorem",
+      "module": "Irreducibility/HittingTimes.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.proposition_3_4_5_ii",
+      "kind": "theorem",
+      "module": "Irreducibility/HittingTimes.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.hitProb_eq_tsum",
+      "kind": "theorem",
+      "module": "Irreducibility/HittingTimes.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.hitProb_first_step",
+      "kind": "theorem",
+      "module": "Irreducibility/HittingTimes.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.tabooPotKernel",
+      "kind": "def",
+      "module": "Irreducibility/HittingTimes.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.tabooPotKernel_apply",
+      "kind": "theorem",
+      "module": "Irreducibility/HittingTimes.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.tabooPotKernel_self",
+      "kind": "theorem",
+      "module": "Irreducibility/HittingTimes.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.IsTransitionMatrix",
+      "kind": "def",
+      "module": "Irreducibility/CountableChains.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.matPow",
+      "kind": "def",
+      "module": "Irreducibility/CountableChains.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.matKernel",
+      "kind": "def",
+      "module": "Irreducibility/CountableChains.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.matKernel_singleton",
+      "kind": "theorem",
+      "module": "Irreducibility/CountableChains.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.matKernel_apply",
+      "kind": "theorem",
+      "module": "Irreducibility/CountableChains.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.isMarkovKernel_matKernel",
+      "kind": "theorem",
+      "module": "Irreducibility/CountableChains.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.lintegral_matKernel",
+      "kind": "theorem",
+      "module": "Irreducibility/CountableChains.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.matKernel_pow_singleton",
+      "kind": "theorem",
+      "module": "Irreducibility/CountableChains.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.matKernel_pow_apply",
+      "kind": "theorem",
+      "module": "Irreducibility/CountableChains.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.isTransitionMatrix_matPow",
+      "kind": "theorem",
+      "module": "Irreducibility/CountableChains.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.cylFn_singletons",
+      "kind": "theorem",
+      "module": "Irreducibility/CountableChains.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.theorem_3_2_1_fdd",
+      "kind": "theorem",
+      "module": "Irreducibility/CountableChains.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.IsMarkovChain.fdd_points",
+      "kind": "theorem",
+      "module": "Irreducibility/CountableChains.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.theorem_3_2_1",
+      "kind": "theorem",
+      "module": "Irreducibility/CountableChains.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.pathMeasure_inter_initial",
+      "kind": "theorem",
+      "module": "Irreducibility/CountableChains.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.pathMeasure_initial_coord",
+      "kind": "theorem",
+      "module": "Irreducibility/CountableChains.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.firstReturn_ne_top_eq_iUnion",
+      "kind": "theorem",
+      "module": "Irreducibility/Communication.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.pow_le_hitProb",
+      "kind": "theorem",
+      "module": "Irreducibility/Communication.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.hitProb_pos_iff",
+      "kind": "theorem",
+      "module": "Irreducibility/Communication.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.hitProb_le_one",
+      "kind": "theorem",
+      "module": "Irreducibility/Communication.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.potKernel_pos_iff",
+      "kind": "theorem",
+      "module": "Irreducibility/Communication.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.pow_add_pos_iff",
+      "kind": "theorem",
+      "module": "Irreducibility/Communication.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.measurableSet_pow_pos",
+      "kind": "theorem",
+      "module": "Irreducibility/Communication.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.IsAbsorbing",
+      "kind": "def",
+      "module": "Irreducibility/Communication.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.IsAbsorbing.pow_apply",
+      "kind": "theorem",
+      "module": "Irreducibility/Communication.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.IsAbsorbing.pow_compl",
+      "kind": "theorem",
+      "module": "Irreducibility/Communication.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.IsAbsorbing.hitProb_compl",
+      "kind": "theorem",
+      "module": "Irreducibility/Communication.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.IsAbsorbing.hitProb_eq_zero",
+      "kind": "theorem",
+      "module": "Irreducibility/Communication.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.restrictKernel",
+      "kind": "def",
+      "module": "Irreducibility/Communication.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.restrictKernel_apply",
+      "kind": "theorem",
+      "module": "Irreducibility/Communication.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.restrictKernel_apply_eq",
+      "kind": "theorem",
+      "module": "Irreducibility/Communication.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.isMarkovKernel_restrictKernel",
+      "kind": "theorem",
+      "module": "Irreducibility/Communication.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.lintegral_restrictKernel",
+      "kind": "theorem",
+      "module": "Irreducibility/Communication.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.restrictKernel_pow_apply",
+      "kind": "theorem",
+      "module": "Irreducibility/Communication.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.Leads",
+      "kind": "def",
+      "module": "Irreducibility/Communication.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.leads_iff_exists_pow",
+      "kind": "theorem",
+      "module": "Irreducibility/Communication.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.pow_add_singleton_ge",
+      "kind": "theorem",
+      "module": "Irreducibility/Communication.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.Leads.trans",
+      "kind": "theorem",
+      "module": "Irreducibility/Communication.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.Leads.refl",
+      "kind": "theorem",
+      "module": "Irreducibility/Communication.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.Communicates",
+      "kind": "def",
+      "module": "Irreducibility/Communication.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.proposition_4_1_1",
+      "kind": "theorem",
+      "module": "Irreducibility/Communication.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.commClass",
+      "kind": "def",
+      "module": "Irreducibility/Communication.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.mem_commClass_self",
+      "kind": "theorem",
+      "module": "Irreducibility/Communication.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.iUnion_commClass",
+      "kind": "theorem",
+      "module": "Irreducibility/Communication.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.commClass_eq_or_disjoint",
+      "kind": "theorem",
+      "module": "Irreducibility/Communication.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.commClass_eq_iff",
+      "kind": "theorem",
+      "module": "Irreducibility/Communication.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.IsIrreducibleChain",
+      "kind": "def",
+      "module": "Irreducibility/Communication.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.isIrreducibleChain_iff",
+      "kind": "theorem",
+      "module": "Irreducibility/Communication.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.nonAbsorbingPart",
+      "kind": "def",
+      "module": "Irreducibility/Communication.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.commClass_subset_nonAbsorbingPart",
+      "kind": "theorem",
+      "module": "Irreducibility/Communication.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.decomposition_4_5",
+      "kind": "theorem",
+      "module": "Irreducibility/Communication.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.decomposition_4_5_disjoint",
+      "kind": "theorem",
+      "module": "Irreducibility/Communication.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.measurableSet_of_countable",
+      "kind": "theorem",
+      "module": "Irreducibility/Communication.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.exists_singleton_pos_of_pos",
+      "kind": "theorem",
+      "module": "Irreducibility/Communication.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.not_isAbsorbing_commClass_iff",
+      "kind": "theorem",
+      "module": "Irreducibility/Communication.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.proposition_4_1_2",
+      "kind": "theorem",
+      "module": "Irreducibility/Communication.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.IsPhiIrreducible",
+      "kind": "def",
+      "module": "Irreducibility/PsiIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.resolventHalf",
+      "kind": "abbrev",
+      "module": "Irreducibility/PsiIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.resolventHalf_apply",
+      "kind": "theorem",
+      "module": "Irreducibility/PsiIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.isMarkovKernel_resolventHalf",
+      "kind": "theorem",
+      "module": "Irreducibility/PsiIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.resolventHalf_pos_iff",
+      "kind": "theorem",
+      "module": "Irreducibility/PsiIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.resolventHalf_eq_zero_iff",
+      "kind": "theorem",
+      "module": "Irreducibility/PsiIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.resolventHalf_equiv",
+      "kind": "theorem",
+      "module": "Irreducibility/PsiIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.hitProb_pos_of_compl",
+      "kind": "theorem",
+      "module": "Irreducibility/PsiIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.proposition_4_2_1",
+      "kind": "theorem",
+      "module": "Irreducibility/PsiIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.IsPhiIrreducible.mono",
+      "kind": "theorem",
+      "module": "Irreducibility/PsiIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.IsPhiIrreducible.restrict",
+      "kind": "theorem",
+      "module": "Irreducibility/PsiIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.isPhiIrreducible_zero",
+      "kind": "theorem",
+      "module": "Irreducibility/PsiIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.isPhiIrreducible_dirac_iff",
+      "kind": "theorem",
+      "module": "Irreducibility/PsiIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.isPhiIrreducible_dirac_of_leads",
+      "kind": "theorem",
+      "module": "Irreducibility/PsiIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.isIrreducibleChain_iff_count",
+      "kind": "theorem",
+      "module": "Irreducibility/PsiIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.exists_measure_pos_of_iUnion",
+      "kind": "theorem",
+      "module": "Irreducibility/MaximalIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.setOf_resolventHalf_pos",
+      "kind": "theorem",
+      "module": "Irreducibility/MaximalIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.setOf_hitProb_pos",
+      "kind": "theorem",
+      "module": "Irreducibility/MaximalIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.measurableSet_hitProb_pos",
+      "kind": "theorem",
+      "module": "Irreducibility/MaximalIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.exists_finite_equiv_of_ac",
+      "kind": "theorem",
+      "module": "Irreducibility/MaximalIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.exists_prob_equiv",
+      "kind": "theorem",
+      "module": "Irreducibility/MaximalIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.maxIrrMeasure",
+      "kind": "def",
+      "module": "Irreducibility/MaximalIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.maxIrrMeasure_apply",
+      "kind": "theorem",
+      "module": "Irreducibility/MaximalIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.maxIrrMeasure_univ",
+      "kind": "theorem",
+      "module": "Irreducibility/MaximalIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.isProbabilityMeasure_maxIrrMeasure",
+      "kind": "theorem",
+      "module": "Irreducibility/MaximalIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.isPhiIrreducible_maxIrrMeasure",
+      "kind": "theorem",
+      "module": "Irreducibility/MaximalIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.ac_maxIrrMeasure",
+      "kind": "theorem",
+      "module": "Irreducibility/MaximalIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.maxIrrMeasure_hitSet_null",
+      "kind": "theorem",
+      "module": "Irreducibility/MaximalIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.maxIrrMeasure_comp_pow_le",
+      "kind": "theorem",
+      "module": "Irreducibility/MaximalIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.IsMaximalIrreducibility",
+      "kind": "def",
+      "module": "Irreducibility/MaximalIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.isMaximalIrreducibility_maxIrrMeasure",
+      "kind": "theorem",
+      "module": "Irreducibility/MaximalIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.IsMaximalIrreducibility.isPhiIrreducible_iff",
+      "kind": "theorem",
+      "module": "Irreducibility/MaximalIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.IsMaximalIrreducibility.equiv",
+      "kind": "theorem",
+      "module": "Irreducibility/MaximalIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.IsMaximalIrreducibility.of_equiv",
+      "kind": "theorem",
+      "module": "Irreducibility/MaximalIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.IsMaximalIrreducibility.hitSet_null",
+      "kind": "theorem",
+      "module": "Irreducibility/MaximalIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.proposition_4_2_2",
+      "kind": "theorem",
+      "module": "Irreducibility/MaximalIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.proposition_4_2_2_maximal",
+      "kind": "theorem",
+      "module": "Irreducibility/MaximalIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.proposition_4_2_2_zero_counterexample",
+      "kind": "theorem",
+      "module": "Irreducibility/MaximalIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.posSets",
+      "kind": "def",
+      "module": "Irreducibility/MaximalIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.posSets_eq_of_maximal",
+      "kind": "theorem",
+      "module": "Irreducibility/MaximalIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.IsFull",
+      "kind": "def",
+      "module": "Irreducibility/MaximalIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.proposition_4_2_3_i",
+      "kind": "theorem",
+      "module": "Irreducibility/MaximalIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.proposition_4_2_3_i_counterexample",
+      "kind": "theorem",
+      "module": "Irreducibility/MaximalIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.proposition_4_2_3_ii",
+      "kind": "theorem",
+      "module": "Irreducibility/MaximalIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.theorem_4_0_1",
+      "kind": "theorem",
+      "module": "Irreducibility/MaximalIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.theorem_4_0_1_unique",
+      "kind": "theorem",
+      "module": "Irreducibility/MaximalIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.IsAbsorbingIrreducibleSet",
+      "kind": "def",
+      "module": "Irreducibility/MaximalIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.proposition_4_2_4",
+      "kind": "theorem",
+      "module": "Irreducibility/MaximalIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.proposition_4_2_4_nonzero",
+      "kind": "theorem",
+      "module": "Irreducibility/MaximalIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.isMaximalIrreducibility_count",
+      "kind": "theorem",
+      "module": "Irreducibility/MaximalIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.IsAccessibleFrom",
+      "kind": "def",
+      "module": "Irreducibility/Accessibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.UnifAccessible",
+      "kind": "def",
+      "module": "Irreducibility/Accessibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.UnifAccessible.isAccessibleFrom",
+      "kind": "theorem",
+      "module": "Irreducibility/Accessibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.stoppedState_firstReturn_mem",
+      "kind": "theorem",
+      "module": "Irreducibility/Accessibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.hitProb_ge_mul",
+      "kind": "theorem",
+      "module": "Irreducibility/Accessibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.lemma_4_2_5",
+      "kind": "theorem",
+      "module": "Irreducibility/Accessibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.hitSet",
+      "kind": "def",
+      "module": "Irreducibility/Accessibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.hitSetLevel",
+      "kind": "def",
+      "module": "Irreducibility/Accessibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.noHitSet",
+      "kind": "def",
+      "module": "Irreducibility/Accessibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.noHitSet_eq_compl",
+      "kind": "theorem",
+      "module": "Irreducibility/Accessibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.measurableSet_hitSetLevel",
+      "kind": "theorem",
+      "module": "Irreducibility/Accessibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.lemma_4_2_6_bound",
+      "kind": "theorem",
+      "module": "Irreducibility/Accessibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.lemma_4_2_6",
+      "kind": "theorem",
+      "module": "Irreducibility/Accessibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.countable_cover_unifAccessible",
+      "kind": "theorem",
+      "module": "Irreducibility/Accessibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.fwdRecMatrix",
+      "kind": "def",
+      "module": "Irreducibility/SpecificMatrices.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.isTransitionMatrix_fwdRecMatrix",
+      "kind": "theorem",
+      "module": "Irreducibility/SpecificMatrices.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.ptail",
+      "kind": "def",
+      "module": "Irreducibility/SpecificMatrices.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.ptail_eq",
+      "kind": "theorem",
+      "module": "Irreducibility/SpecificMatrices.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.ptail_ne_zero_iff",
+      "kind": "theorem",
+      "module": "Irreducibility/SpecificMatrices.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.bwdRecMatrix",
+      "kind": "def",
+      "module": "Irreducibility/SpecificMatrices.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.bwdRecMatrix_rowSum",
+      "kind": "theorem",
+      "module": "Irreducibility/SpecificMatrices.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.ptail_ne_zero_of_bwdRecMatrix",
+      "kind": "theorem",
+      "module": "Irreducibility/SpecificMatrices.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.bwdRecMatrix_zero",
+      "kind": "theorem",
+      "module": "Irreducibility/SpecificMatrices.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.halfHalf",
+      "kind": "def",
+      "module": "Irreducibility/SpecificMatrices.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.bwdRecMatrix_display_counterexample",
+      "kind": "theorem",
+      "module": "Irreducibility/SpecificMatrices.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.rwMatrix",
+      "kind": "def",
+      "module": "Irreducibility/SpecificMatrices.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.isTransitionMatrix_rwMatrix",
+      "kind": "theorem",
+      "module": "Irreducibility/SpecificMatrices.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.rwMatrix_translate",
+      "kind": "theorem",
+      "module": "Irreducibility/SpecificMatrices.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.rw_step_law",
+      "kind": "theorem",
+      "module": "Irreducibility/SpecificMatrices.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.rwhlMatrix",
+      "kind": "def",
+      "module": "Irreducibility/SpecificMatrices.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.isTransitionMatrix_rwhlMatrix",
+      "kind": "theorem",
+      "module": "Irreducibility/SpecificMatrices.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.storage_increment_singleton",
+      "kind": "theorem",
+      "module": "Irreducibility/SpecificMatrices.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.storage_increment_counterexample",
+      "kind": "theorem",
+      "module": "Irreducibility/SpecificMatrices.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.poissonWeight",
+      "kind": "def",
+      "module": "Irreducibility/SpecificMatrices.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.poissonWeight_eq",
+      "kind": "theorem",
+      "module": "Irreducibility/SpecificMatrices.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.tsum_poissonWeight",
+      "kind": "theorem",
+      "module": "Irreducibility/SpecificMatrices.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.giM1Matrix",
+      "kind": "def",
+      "module": "Irreducibility/SpecificMatrices.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.giM1Increment",
+      "kind": "def",
+      "module": "Irreducibility/SpecificMatrices.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.giM1Matrix_eq_rwhl",
+      "kind": "theorem",
+      "module": "Irreducibility/SpecificMatrices.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.tsum_giM1Increment",
+      "kind": "theorem",
+      "module": "Irreducibility/SpecificMatrices.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.proposition_3_3_1",
+      "kind": "theorem",
+      "module": "Irreducibility/SpecificMatrices.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.mG1Matrix",
+      "kind": "def",
+      "module": "Irreducibility/SpecificMatrices.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.isTransitionMatrix_mG1Matrix",
+      "kind": "theorem",
+      "module": "Irreducibility/SpecificMatrices.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.proposition_3_3_2",
+      "kind": "theorem",
+      "module": "Irreducibility/SpecificMatrices.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.arMatrix",
+      "kind": "def",
+      "module": "Irreducibility/SpecificMatrices.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.proposition_3_3_3",
+      "kind": "theorem",
+      "module": "Irreducibility/SpecificMatrices.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.matKernel_pow_one_singleton",
+      "kind": "theorem",
+      "module": "Irreducibility/CountableIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.leads_of_pos",
+      "kind": "theorem",
+      "module": "Irreducibility/CountableIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.isAbsorbing_matKernel_iff",
+      "kind": "theorem",
+      "module": "Irreducibility/CountableIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.IsAbsorbing.mem_of_leads",
+      "kind": "theorem",
+      "module": "Irreducibility/CountableIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.Leads.step",
+      "kind": "theorem",
+      "module": "Irreducibility/CountableIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.rwhl_zero_ge",
+      "kind": "theorem",
+      "module": "Irreducibility/CountableIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.rwhl_pow_zero_ge",
+      "kind": "theorem",
+      "module": "Irreducibility/CountableIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.rwhl_hitProb_zero_pos",
+      "kind": "theorem",
+      "module": "Irreducibility/CountableIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.rwhl_hitProb_zero_eq_zero",
+      "kind": "theorem",
+      "module": "Irreducibility/CountableIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.diracZeroInt",
+      "kind": "def",
+      "module": "Irreducibility/CountableIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.rwhl_dichotomy_counterexample",
+      "kind": "theorem",
+      "module": "Irreducibility/CountableIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.rwhl_even_increments",
+      "kind": "theorem",
+      "module": "Irreducibility/CountableIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.fwdRec_isAbsorbing",
+      "kind": "theorem",
+      "module": "Irreducibility/CountableIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.fwdRec_leads_down",
+      "kind": "theorem",
+      "module": "Irreducibility/CountableIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.fwdRec_pow_down",
+      "kind": "theorem",
+      "module": "Irreducibility/CountableIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.fwdRec_communicates",
+      "kind": "theorem",
+      "module": "Irreducibility/CountableIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.giM1_isIrreducibleChain",
+      "kind": "theorem",
+      "module": "Irreducibility/CountableIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.poissonWeight_ne_zero",
+      "kind": "theorem",
+      "module": "Irreducibility/CountableIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.giM1_poisson_isIrreducibleChain",
+      "kind": "theorem",
+      "module": "Irreducibility/CountableIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.poissonWeight_dirac_zero",
+      "kind": "theorem",
+      "module": "Irreducibility/CountableIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.giM1_dirac_counterexample",
+      "kind": "theorem",
+      "module": "Irreducibility/CountableIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.mG1_isIrreducibleChain",
+      "kind": "theorem",
+      "module": "Irreducibility/CountableIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.mG1_poisson_isIrreducibleChain",
+      "kind": "theorem",
+      "module": "Irreducibility/CountableIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.mG1_dirac_counterexample",
+      "kind": "theorem",
+      "module": "Irreducibility/CountableIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.rwSupportGroup",
+      "kind": "def",
+      "module": "Irreducibility/CountableIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.rw_closure_eq_zmultiples",
+      "kind": "theorem",
+      "module": "Irreducibility/CountableIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.rw_coset_isAbsorbing",
+      "kind": "theorem",
+      "module": "Irreducibility/CountableIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.rw_leads_add",
+      "kind": "theorem",
+      "module": "Irreducibility/CountableIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.rw_monoid_eq_group",
+      "kind": "theorem",
+      "module": "Irreducibility/CountableIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.rw_commClass_eq",
+      "kind": "theorem",
+      "module": "Irreducibility/CountableIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.rw_commClass_finite",
+      "kind": "theorem",
+      "module": "Irreducibility/CountableIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.ratClass",
+      "kind": "def",
+      "module": "Irreducibility/CountableIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.ratWalk_isAbsorbing",
+      "kind": "theorem",
+      "module": "Irreducibility/CountableIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.ratWalk_commClass_eq",
+      "kind": "theorem",
+      "module": "Irreducibility/CountableIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.ratWalk_commClass_infinite",
+      "kind": "theorem",
+      "module": "Irreducibility/CountableIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.controlMap",
+      "kind": "def",
+      "module": "Irreducibility/ModelRecursion.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.controlMap_zero",
+      "kind": "theorem",
+      "module": "Irreducibility/ModelRecursion.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.controlMap_succ",
+      "kind": "theorem",
+      "module": "Irreducibility/ModelRecursion.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.controlMap_one",
+      "kind": "theorem",
+      "module": "Irreducibility/ModelRecursion.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.controlMap_succ_cons",
+      "kind": "theorem",
+      "module": "Irreducibility/ModelRecursion.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.orbit",
+      "kind": "def",
+      "module": "Irreducibility/ModelRecursion.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.orbit_zero",
+      "kind": "theorem",
+      "module": "Irreducibility/ModelRecursion.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.orbit_succ",
+      "kind": "theorem",
+      "module": "Irreducibility/ModelRecursion.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.orbit_eq_controlMap",
+      "kind": "theorem",
+      "module": "Irreducibility/ModelRecursion.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.recursionKernel",
+      "kind": "def",
+      "module": "Irreducibility/ModelRecursion.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.recursionKernel_apply",
+      "kind": "theorem",
+      "module": "Irreducibility/ModelRecursion.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.recursionKernel_apply'",
+      "kind": "theorem",
+      "module": "Irreducibility/ModelRecursion.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.isMarkovKernel_recursionKernel",
+      "kind": "theorem",
+      "module": "Irreducibility/ModelRecursion.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.recursionKernel_comp_noise",
+      "kind": "theorem",
+      "module": "Irreducibility/ModelRecursion.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.recursionKernel_const_noise",
+      "kind": "theorem",
+      "module": "Irreducibility/ModelRecursion.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.measurable_controlMap",
+      "kind": "theorem",
+      "module": "Irreducibility/ModelRecursion.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.measurable_controlMap_right",
+      "kind": "theorem",
+      "module": "Irreducibility/ModelRecursion.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.recursionKernel_pow_apply",
+      "kind": "theorem",
+      "module": "Irreducibility/ModelRecursion.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.recursionKernel_pow_apply'",
+      "kind": "theorem",
+      "module": "Irreducibility/ModelRecursion.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.infinitePi_map_shift",
+      "kind": "theorem",
+      "module": "Irreducibility/ModelRecursion.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.law_orbit",
+      "kind": "theorem",
+      "module": "Irreducibility/ModelRecursion.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.randomWalkKernel",
+      "kind": "def",
+      "module": "Irreducibility/ModelRandomWalk.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.measurable_add_step",
+      "kind": "theorem",
+      "module": "Irreducibility/ModelRandomWalk.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.randomWalkKernel_apply",
+      "kind": "theorem",
+      "module": "Irreducibility/ModelRandomWalk.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.randomWalkKernel_apply'",
+      "kind": "theorem",
+      "module": "Irreducibility/ModelRandomWalk.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.isMarkovKernel_randomWalkKernel",
+      "kind": "theorem",
+      "module": "Irreducibility/ModelRandomWalk.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.randomWalkKernel_real_apply_Iic",
+      "kind": "theorem",
+      "module": "Irreducibility/ModelRandomWalk.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.controlMap_add",
+      "kind": "theorem",
+      "module": "Irreducibility/ModelRandomWalk.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.orbit_randomWalk",
+      "kind": "theorem",
+      "module": "Irreducibility/ModelRandomWalk.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.convPow",
+      "kind": "def",
+      "module": "Irreducibility/ModelRandomWalk.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.measurable_sum_fin",
+      "kind": "theorem",
+      "module": "Irreducibility/ModelRandomWalk.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.randomWalkKernel_pow_apply",
+      "kind": "theorem",
+      "module": "Irreducibility/ModelRandomWalk.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.IsSpreadOut",
+      "kind": "def",
+      "module": "Irreducibility/ModelRandomWalk.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.halfLineStep",
+      "kind": "def",
+      "module": "Irreducibility/ModelRandomWalk.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.measurable_halfLineStep",
+      "kind": "theorem",
+      "module": "Irreducibility/ModelRandomWalk.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.halfLineWalkKernel",
+      "kind": "def",
+      "module": "Irreducibility/ModelRandomWalk.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.isMarkovKernel_halfLineWalkKernel",
+      "kind": "theorem",
+      "module": "Irreducibility/ModelRandomWalk.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.halfLineWalkKernel_apply'",
+      "kind": "theorem",
+      "module": "Irreducibility/ModelRandomWalk.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.halfLineWalkKernel_apply_zero",
+      "kind": "theorem",
+      "module": "Irreducibility/ModelRandomWalk.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.halfLineWalkKernel_apply_Iic",
+      "kind": "theorem",
+      "module": "Irreducibility/ModelRandomWalk.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.halfLineWalkKernel_apply_Ioi",
+      "kind": "theorem",
+      "module": "Irreducibility/ModelRandomWalk.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.halfLineOrbit",
+      "kind": "def",
+      "module": "Irreducibility/ModelRandomWalk.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.partialSum",
+      "kind": "def",
+      "module": "Irreducibility/ModelRandomWalk.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.halfLineOrbit_succ_coe",
+      "kind": "theorem",
+      "module": "Irreducibility/ModelRandomWalk.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.halfLineOrbit_eq_of_nonneg",
+      "kind": "theorem",
+      "module": "Irreducibility/ModelRandomWalk.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.halfLineOrbit_succ_of_eq_zero",
+      "kind": "theorem",
+      "module": "Irreducibility/ModelRandomWalk.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.halfLineOrbit_eq_lindley",
+      "kind": "theorem",
+      "module": "Irreducibility/ModelRandomWalk.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.linear_controlMap",
+      "kind": "theorem",
+      "module": "Irreducibility/ModelLinearModels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.orbit_linear",
+      "kind": "theorem",
+      "module": "Irreducibility/ModelLinearModels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.lssKernel",
+      "kind": "def",
+      "module": "Irreducibility/ModelLinearModels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.measurable_lssStep",
+      "kind": "theorem",
+      "module": "Irreducibility/ModelLinearModels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.lssKernel_apply'",
+      "kind": "theorem",
+      "module": "Irreducibility/ModelLinearModels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.isMarkovKernel_lssKernel",
+      "kind": "theorem",
+      "module": "Irreducibility/ModelLinearModels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.clm_pow_apply",
+      "kind": "theorem",
+      "module": "Irreducibility/ModelLinearModels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.orbit_lss",
+      "kind": "theorem",
+      "module": "Irreducibility/ModelLinearModels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.lssKernel_pow_apply",
+      "kind": "theorem",
+      "module": "Irreducibility/ModelLinearModels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.measurable_mulVec",
+      "kind": "theorem",
+      "module": "Irreducibility/ModelLinearModels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.lssMatrixKernel",
+      "kind": "def",
+      "module": "Irreducibility/ModelLinearModels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.measurable_lssMatrixStep",
+      "kind": "theorem",
+      "module": "Irreducibility/ModelLinearModels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.isMarkovKernel_lssMatrixKernel",
+      "kind": "theorem",
+      "module": "Irreducibility/ModelLinearModels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.mulVecHom",
+      "kind": "def",
+      "module": "Irreducibility/ModelLinearModels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.coe_mulVecHom",
+      "kind": "theorem",
+      "module": "Irreducibility/ModelLinearModels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.matrix_pow_mulVec",
+      "kind": "theorem",
+      "module": "Irreducibility/ModelLinearModels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.orbit_lssMatrix",
+      "kind": "theorem",
+      "module": "Irreducibility/ModelLinearModels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.lssMatrixKernel_pow_apply",
+      "kind": "theorem",
+      "module": "Irreducibility/ModelLinearModels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.lcmTrajectory",
+      "kind": "def",
+      "module": "Irreducibility/ModelLinearModels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.IsControllable",
+      "kind": "def",
+      "module": "Irreducibility/ModelLinearModels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.lcmTrajectory_eq",
+      "kind": "theorem",
+      "module": "Irreducibility/ModelLinearModels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.ar1Kernel",
+      "kind": "def",
+      "module": "Irreducibility/ModelLinearModels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.measurable_ar1Step",
+      "kind": "theorem",
+      "module": "Irreducibility/ModelLinearModels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.isMarkovKernel_ar1Kernel",
+      "kind": "theorem",
+      "module": "Irreducibility/ModelLinearModels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.ar1Kernel_apply'",
+      "kind": "theorem",
+      "module": "Irreducibility/ModelLinearModels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.ar1Kernel_eq_lssKernel",
+      "kind": "theorem",
+      "module": "Irreducibility/ModelLinearModels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.ar1Kernel_one",
+      "kind": "theorem",
+      "module": "Irreducibility/ModelLinearModels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.randomWalkKernel_eq_lssKernel",
+      "kind": "theorem",
+      "module": "Irreducibility/ModelLinearModels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.orbit_ar1",
+      "kind": "theorem",
+      "module": "Irreducibility/ModelLinearModels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.shiftIn",
+      "kind": "def",
+      "module": "Irreducibility/ModelLinearModels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.shiftIn_apply_zero",
+      "kind": "theorem",
+      "module": "Irreducibility/ModelLinearModels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.shiftIn_apply_succ",
+      "kind": "theorem",
+      "module": "Irreducibility/ModelLinearModels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.measurable_shiftIn",
+      "kind": "theorem",
+      "module": "Irreducibility/ModelLinearModels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.shiftIn_add",
+      "kind": "theorem",
+      "module": "Irreducibility/ModelLinearModels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.arStep",
+      "kind": "def",
+      "module": "Irreducibility/ModelLinearModels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.measurable_arStep",
+      "kind": "theorem",
+      "module": "Irreducibility/ModelLinearModels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.arKernel",
+      "kind": "def",
+      "module": "Irreducibility/ModelLinearModels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.isMarkovKernel_arKernel",
+      "kind": "theorem",
+      "module": "Irreducibility/ModelLinearModels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.companion",
+      "kind": "def",
+      "module": "Irreducibility/ModelLinearModels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.firstUnit",
+      "kind": "def",
+      "module": "Irreducibility/ModelLinearModels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.arStep_eq_companion",
+      "kind": "theorem",
+      "module": "Irreducibility/ModelLinearModels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.arKernel_eq_lssMatrixKernel",
+      "kind": "theorem",
+      "module": "Irreducibility/ModelLinearModels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.arVec",
+      "kind": "def",
+      "module": "Irreducibility/ModelLinearModels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.arVec_succ",
+      "kind": "theorem",
+      "module": "Irreducibility/ModelLinearModels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.armaStep",
+      "kind": "def",
+      "module": "Irreducibility/ModelLinearModels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.measurable_armaStep",
+      "kind": "theorem",
+      "module": "Irreducibility/ModelLinearModels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.armaKernel",
+      "kind": "def",
+      "module": "Irreducibility/ModelLinearModels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.isMarkovKernel_armaKernel",
+      "kind": "theorem",
+      "module": "Irreducibility/ModelLinearModels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.arma_of_ar",
+      "kind": "theorem",
+      "module": "Irreducibility/ModelLinearModels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.fig11F",
+      "kind": "def",
+      "module": "Irreducibility/ModelLinearModels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.fig11F_eq",
+      "kind": "theorem",
+      "module": "Irreducibility/ModelLinearModels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.sqNorm2",
+      "kind": "def",
+      "module": "Irreducibility/ModelLinearModels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.fig11_sqNorm_mulVec",
+      "kind": "theorem",
+      "module": "Irreducibility/ModelLinearModels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.fig11_tendsto_zero",
+      "kind": "theorem",
+      "module": "Irreducibility/ModelLinearModels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.fig11_inv_tendsto_atTop",
+      "kind": "theorem",
+      "module": "Irreducibility/ModelLinearModels.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.ctrbMap",
+      "kind": "def",
+      "module": "Irreducibility/LinearControllability.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.ctrbMap_apply",
+      "kind": "theorem",
+      "module": "Irreducibility/LinearControllability.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.ctrbMatrix",
+      "kind": "def",
+      "module": "Irreducibility/LinearControllability.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.ctrbMatrix_mulVec",
+      "kind": "theorem",
+      "module": "Irreducibility/LinearControllability.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.range_ctrbMatrix",
+      "kind": "theorem",
+      "module": "Irreducibility/LinearControllability.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.rank_ctrbMatrix_eq_iff",
+      "kind": "theorem",
+      "module": "Irreducibility/LinearControllability.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.lcmTrajectory_eq_ctrbMap",
+      "kind": "theorem",
+      "module": "Irreducibility/LinearControllability.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.IsCtrbRank",
+      "kind": "def",
+      "module": "Irreducibility/LinearControllability.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.reach_of_range_eq_top",
+      "kind": "theorem",
+      "module": "Irreducibility/LinearControllability.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.proposition_4_4_1",
+      "kind": "theorem",
+      "module": "Irreducibility/LinearControllability.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.pow_mul_mulVec_mem_range",
+      "kind": "theorem",
+      "module": "Irreducibility/LinearControllability.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.pow_dim_eq_sum",
+      "kind": "theorem",
+      "module": "Irreducibility/LinearControllability.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.pow_mul_mulVec_mem_range_n",
+      "kind": "theorem",
+      "module": "Irreducibility/LinearControllability.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.range_ctrbMap_le_n",
+      "kind": "theorem",
+      "module": "Irreducibility/LinearControllability.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.range_ctrbMap_mono",
+      "kind": "theorem",
+      "module": "Irreducibility/LinearControllability.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.isControllable_iff_rank",
+      "kind": "theorem",
+      "module": "Irreducibility/LinearControllability.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.isControllable_iff_exists_rank",
+      "kind": "theorem",
+      "module": "Irreducibility/LinearControllability.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.range_ctrbMap_eq_top",
+      "kind": "theorem",
+      "module": "Irreducibility/LinearControllability.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.firstUnit_mulVec",
+      "kind": "theorem",
+      "module": "Irreducibility/LinearControllability.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.companion_mulVec_of_ne_zero",
+      "kind": "theorem",
+      "module": "Irreducibility/LinearControllability.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.companion_mulVec_zero",
+      "kind": "theorem",
+      "module": "Irreducibility/LinearControllability.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.firstVec",
+      "kind": "def",
+      "module": "Irreducibility/LinearControllability.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.companion_pow_firstUnit_triangular",
+      "kind": "theorem",
+      "module": "Irreducibility/LinearControllability.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.companionEta",
+      "kind": "def",
+      "module": "Irreducibility/LinearControllability.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.companion_eta_rec",
+      "kind": "theorem",
+      "module": "Irreducibility/LinearControllability.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.proposition_4_4_2",
+      "kind": "theorem",
+      "module": "Irreducibility/LinearControllability.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.gramian",
+      "kind": "def",
+      "module": "Irreducibility/LinearControllability.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.gramian_eq",
+      "kind": "theorem",
+      "module": "Irreducibility/LinearControllability.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.rank_gramian",
+      "kind": "theorem",
+      "module": "Irreducibility/LinearControllability.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.isControllable_iff_gramian",
+      "kind": "theorem",
+      "module": "Irreducibility/LinearControllability.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.ctrbSubspace_absorbing_step",
+      "kind": "theorem",
+      "module": "Irreducibility/LinearControllability.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.gramian_series_counterexample",
+      "kind": "theorem",
+      "module": "Irreducibility/LinearControllability.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.pi_absolutelyContinuous",
+      "kind": "theorem",
+      "module": "Irreducibility/LinearIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.measurable_ctrbMap",
+      "kind": "theorem",
+      "module": "Irreducibility/LinearIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.ctrbLaw",
+      "kind": "def",
+      "module": "Irreducibility/LinearIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.lss_pow_eq",
+      "kind": "theorem",
+      "module": "Irreducibility/LinearIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.ctrbLaw_equiv",
+      "kind": "theorem",
+      "module": "Irreducibility/LinearIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.lss_pow_equiv",
+      "kind": "theorem",
+      "module": "Irreducibility/LinearIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.lss_isPhiIrreducible",
+      "kind": "theorem",
+      "module": "Irreducibility/LinearIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.lss_isMaximalIrreducibility",
+      "kind": "theorem",
+      "module": "Irreducibility/LinearIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.translateCM",
+      "kind": "def",
+      "module": "Irreducibility/LinearIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.lss_lowerSemicontinuous",
+      "kind": "theorem",
+      "module": "Irreducibility/LinearIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.lss_unifAccessible",
+      "kind": "theorem",
+      "module": "Irreducibility/LinearIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.proposition_4_4_3",
+      "kind": "theorem",
+      "module": "Irreducibility/LinearIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.stdGaussian_equiv_volume",
+      "kind": "theorem",
+      "module": "Irreducibility/LinearIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.proposition_4_4_3_gaussian",
+      "kind": "theorem",
+      "module": "Irreducibility/LinearIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.ctrbSubspace_isAbsorbing",
+      "kind": "theorem",
+      "module": "Irreducibility/LinearIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.density_4_18_counterexample",
+      "kind": "theorem",
+      "module": "Irreducibility/LinearIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.ctrbSubspace",
+      "kind": "abbrev",
+      "module": "Irreducibility/LinearRestriction.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.measurableSet_ctrbSubspace",
+      "kind": "theorem",
+      "module": "Irreducibility/LinearRestriction.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.pow_mulVec_mem_ctrbSubspace",
+      "kind": "theorem",
+      "module": "Irreducibility/LinearRestriction.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.ctrbMap_mem_ctrbSubspace",
+      "kind": "theorem",
+      "module": "Irreducibility/LinearRestriction.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.ctrbMap\u2080",
+      "kind": "def",
+      "module": "Irreducibility/LinearRestriction.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.ctrbMap\u2080_surjective",
+      "kind": "theorem",
+      "module": "Irreducibility/LinearRestriction.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.ctrbF\u2080",
+      "kind": "def",
+      "module": "Irreducibility/LinearRestriction.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.ctrbG\u2080",
+      "kind": "def",
+      "module": "Irreducibility/LinearRestriction.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.coe_ctrbStep",
+      "kind": "theorem",
+      "module": "Irreducibility/LinearRestriction.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.restrictKernel_eq_lssKernel",
+      "kind": "theorem",
+      "module": "Irreducibility/LinearRestriction.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.coe_controlMap_ctrb",
+      "kind": "theorem",
+      "module": "Irreducibility/LinearRestriction.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.restricted_controllable",
+      "kind": "theorem",
+      "module": "Irreducibility/LinearRestriction.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.restricted_pow_eq_zero_iff",
+      "kind": "theorem",
+      "module": "Irreducibility/LinearRestriction.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.restricted_isPhiIrreducible",
+      "kind": "theorem",
+      "module": "Irreducibility/LinearRestriction.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.restricted_isMaximalIrreducibility",
+      "kind": "theorem",
+      "module": "Irreducibility/LinearRestriction.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.restricted_irreducible",
+      "kind": "theorem",
+      "module": "Irreducibility/LinearRestriction.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.restricted_irreducible_gaussian",
+      "kind": "theorem",
+      "module": "Irreducibility/LinearRestriction.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.map_fin_one_equiv",
+      "kind": "theorem",
+      "module": "Irreducibility/IrreducibilityExtras.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.ar_isPhiIrreducible",
+      "kind": "theorem",
+      "module": "Irreducibility/IrreducibilityExtras.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.range_gramian",
+      "kind": "theorem",
+      "module": "Irreducibility/IrreducibilityExtras.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.range_gramian_n",
+      "kind": "theorem",
+      "module": "Irreducibility/IrreducibilityExtras.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.finrank_ctrbSubspace",
+      "kind": "theorem",
+      "module": "Irreducibility/IrreducibilityExtras.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.finrank_ctrbSubspace_lt",
+      "kind": "theorem",
+      "module": "Irreducibility/IrreducibilityExtras.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.isControllable_of_rank_G",
+      "kind": "theorem",
+      "module": "Irreducibility/IrreducibilityExtras.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.lss_fullRank_G_irreducible",
+      "kind": "theorem",
+      "module": "Irreducibility/IrreducibilityExtras.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.countable_absorbing_classes",
+      "kind": "theorem",
+      "module": "Irreducibility/IrreducibilityExtras.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.unifAccessible_not_refl",
+      "kind": "theorem",
+      "module": "Irreducibility/IrreducibilityExtras.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.exists_pow_pos_of_reach",
+      "kind": "theorem",
+      "module": "Irreducibility/RandomWalkIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.not_isPhiIrreducible_of_disjoint_absorbing",
+      "kind": "theorem",
+      "module": "Irreducibility/RandomWalkIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.isPhiIrreducible_of_skeleton",
+      "kind": "theorem",
+      "module": "Irreducibility/RandomWalkIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.halfLine_pow_zero_ge",
+      "kind": "theorem",
+      "module": "Irreducibility/RandomWalkIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.exists_Iio_neg_pos",
+      "kind": "theorem",
+      "module": "Irreducibility/RandomWalkIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.halfLine_hitProb_zero_eq_zero",
+      "kind": "theorem",
+      "module": "Irreducibility/RandomWalkIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.proposition_4_3_1",
+      "kind": "theorem",
+      "module": "Irreducibility/RandomWalkIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.proposition_4_3_1_compact",
+      "kind": "theorem",
+      "module": "Irreducibility/RandomWalkIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.halfLine_maximal",
+      "kind": "theorem",
+      "module": "Irreducibility/RandomWalkIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.isPhiIrreducible_of_local_density",
+      "kind": "theorem",
+      "module": "Irreducibility/RandomWalkIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.le_of_density",
+      "kind": "theorem",
+      "module": "Irreducibility/RandomWalkIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.ar1_isPhiIrreducible_of_density",
+      "kind": "theorem",
+      "module": "Irreducibility/RandomWalkIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.randomWalk_isPhiIrreducible_of_density",
+      "kind": "theorem",
+      "module": "Irreducibility/RandomWalkIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.randomWalk_isPhiIrreducible_Icc",
+      "kind": "theorem",
+      "module": "Irreducibility/RandomWalkIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.randomWalk_step_ge",
+      "kind": "theorem",
+      "module": "Irreducibility/RandomWalkIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.randomWalk_isPhiIrreducible_of_convPow",
+      "kind": "theorem",
+      "module": "Irreducibility/RandomWalkIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.ratCoset",
+      "kind": "def",
+      "module": "Irreducibility/RandomWalkIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.randomWalk_rational",
+      "kind": "theorem",
+      "module": "Irreducibility/RandomWalkIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.ar1_uniform_isPhiIrreducible",
+      "kind": "theorem",
+      "module": "Irreducibility/RandomWalkIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.ar1_abs_lt_step",
+      "kind": "theorem",
+      "module": "Irreducibility/RandomWalkIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.ar1_explosive_not_irreducible",
+      "kind": "theorem",
+      "module": "Irreducibility/RandomWalkIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.IsCountableStateSpace",
+      "kind": "def",
+      "module": "Irreducibility/StateSpaces.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.IsGeneralStateSpace",
+      "kind": "def",
+      "module": "Irreducibility/StateSpaces.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.IsTopologicalStateSpace",
+      "kind": "def",
+      "module": "Irreducibility/StateSpaces.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.IsCountableStateSpace.isGeneral",
+      "kind": "theorem",
+      "module": "Irreducibility/StateSpaces.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.IsTopologicalStateSpace.isGeneral",
+      "kind": "theorem",
+      "module": "Irreducibility/StateSpaces.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.inputKernel",
+      "kind": "def",
+      "module": "Irreducibility/StorageIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.inputKernel_apply",
+      "kind": "theorem",
+      "module": "Irreducibility/StorageIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.isMarkovKernel_inputKernel",
+      "kind": "theorem",
+      "module": "Irreducibility/StorageIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.contentPreInputKernel",
+      "kind": "def",
+      "module": "Irreducibility/StorageIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.isMarkovKernel_contentPreInputKernel",
+      "kind": "theorem",
+      "module": "Irreducibility/StorageIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.contentPreInput_zero_pos",
+      "kind": "theorem",
+      "module": "Irreducibility/StorageIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.contentPreInput_isPhiIrreducible",
+      "kind": "theorem",
+      "module": "Irreducibility/StorageIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.contentPreInput_hitProb_zero",
+      "kind": "theorem",
+      "module": "Irreducibility/StorageIrreducibility.lean"
+    },
+    {
+      "name": "MeynTweedie.Irreducibility.contentPreInput_not_isPhiIrreducible",
+      "kind": "theorem",
+      "module": "Irreducibility/StorageIrreducibility.lean"
+    }
+  ],
+  "full_build": "passed",
+  "fresh_source_compilation": "passed",
+  "fresh_source_lint_options": [
+    "-Dlinter.mathlibStandardSet=true",
+    "-Dlinter.style.header=false"
+  ],
+  "axioms": {
+    "MeynTweedie.Irreducibility.trajKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.isMarkovKernel_trajKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.pathKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.isMarkovKernel_pathKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.pathMeasure": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.isProbabilityMeasure_pathMeasure": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.pathMeasure_eq_comp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.pathMeasure_dirac": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.pathKernel_map_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.pathKernel_zero_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.ae_pathKernel_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.pathMeasure_inter_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.pathMeasure_map_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.natFilt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.measurable_coord_natFilt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.measurableSet_coord_natFilt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.setLIntegral_succ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.cylFn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.measurable_cylFn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.boxSet": [],
+    "MeynTweedie.Irreducibility.measurableSet_boxSet": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.measure_inter_shift_box": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.pathKernel_boxSet": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.pathMeasure_boxSet": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.IsMarkovChain": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.IsMarkovChain.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.IsMarkovChain.measurable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.IsMarkovChain.fdd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.theorem_3_4_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.generateFrom_boxSets": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.isPiSystem_boxSets": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.theorem_3_4_1_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.law_eq_pathMeasure": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.IsSubstochasticKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.isSubstochasticKernel_of_markov": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.isMarkovKernel_pow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.pow_zero_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.pow_succ_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.pow_succ_apply'": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.theorem_3_4_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.pow_add_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.skeleton": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.skeleton_pow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.sampledKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.sampledKernel_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.isMarkovKernel_sampledKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.resolvent": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.resolvent_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.tsum_geometric_weights": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.isMarkovKernel_resolvent": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.kfun": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.measurable_kfun": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.kfun_indicator": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.kfun_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.kfun_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.kfun_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.kfun_const_mul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.kfun_comp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.kfun_pow_succ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.measure_kernel_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.measure_kernel_assoc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.lintegral_kfun": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.isProbabilityMeasure_measure_kernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.dirac_kernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.kfunR": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.measurable_kfunR": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.abs_kfunR_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.indKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.indKernel_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.comp_indKernel_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.isSubstochasticKernel_comp_indKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.potKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.potKernel_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.shift": [],
+    "MeynTweedie.Irreducibility.measurable_shift": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.shift_zero": [
+      "propext",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.shift_shift": [
+      "propext",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.shift_apply": [],
+    "MeynTweedie.Irreducibility.integral_measure_comp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.pathMeasure_map_coord": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.pathKernel_map_coord": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.pathKernel_coord_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.pathKernel_coord_chapmanKolmogorov": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.markov_measure": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.markov_lintegral": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.markov_lintegral_mul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.markov_lintegral_univ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.markov_setIntegral": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.stronglyMeasurable_expect_coord": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.integrable_expect_coord": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.markov_property": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.integrable_shift_of_bdd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.markov_property_bdd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.proposition_3_4_3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.isMarkovChain_of_step": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.skeletonFilt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.skeleton_isMarkovChain": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.iSup_natFilt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.setOf_le_eq_biUnion": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.setOf_ne_top_eq_iUnion": [
+      "propext",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.measurableSet_ne_top": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.measurableSet_stoppedField_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.measurableSet_stoppedField_ne_top": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.stoppedState": [
+      "Classical.choice"
+    ],
+    "MeynTweedie.Irreducibility.shiftAt": [
+      "Classical.choice"
+    ],
+    "MeynTweedie.Irreducibility.stoppedState_of_eq": [
+      "Classical.choice"
+    ],
+    "MeynTweedie.Irreducibility.shiftAt_of_eq": [
+      "Classical.choice"
+    ],
+    "MeynTweedie.Irreducibility.measurable_of_stopping_pieces": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.measurable_stoppedState": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.measurable_shiftAt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.measurable_stoppedField_indicator": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.inter_ne_top_eq_iUnion": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.pairwise_disjoint_inter_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.strong_markov_lintegral": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.strong_markov_lintegral_mul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.strong_markov_measure": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.strong_markov_setIntegral": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.strong_markov_property": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.StrongMarkovProperty": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.proposition_3_4_6": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.occTime": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.firstReturn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.firstHit": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.returnTimeK": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.hitProb": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.returnTimeK_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.returnTimeK_succ_of_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.returnTimeK_succ_of_top": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.firstReturn_ne_top_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.le_firstReturn_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.one_le_firstReturn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.firstReturn_eq_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.le_firstReturn_succ_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.firstHit_eq_zero_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.firstHit_eq_firstReturn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.adapted_coord": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.proposition_3_4_4": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.isStoppingTime_returnTimeK": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.measurableSet_firstReturn_ne_top": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.measurableSet_firstReturn_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.measurableSet_le_firstReturn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.measurable_occTime": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.measurable_hitProb": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.potKernel_eq_lintegral_occTime": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.pathKernel_first_step": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.tabooKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.comp_indKernel_eq_restrict": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.tabooKernel_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.tabooKernel_succ_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.tabooProb": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.tabooProb_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.tabooProb_succ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.tabooProb_eq_tabooKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.firstReturn_eq_tabooProb": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.proposition_3_4_5_i": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.proposition_3_4_5_i_succ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.firstReturn_eq_tabooKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.nestedTaboo": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.firstReturn_eq_nestedTaboo": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.proposition_3_4_5_ii": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.hitProb_eq_tsum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.hitProb_first_step": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.tabooPotKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.tabooPotKernel_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.tabooPotKernel_self": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.IsTransitionMatrix": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.matPow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.matKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.matKernel_singleton": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.matKernel_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.isMarkovKernel_matKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.lintegral_matKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.matKernel_pow_singleton": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.matKernel_pow_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.isTransitionMatrix_matPow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.cylFn_singletons": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.theorem_3_2_1_fdd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.IsMarkovChain.fdd_points": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.theorem_3_2_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.pathMeasure_inter_initial": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.pathMeasure_initial_coord": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.firstReturn_ne_top_eq_iUnion": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.pow_le_hitProb": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.hitProb_pos_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.hitProb_le_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.potKernel_pos_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.pow_add_pos_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.measurableSet_pow_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.IsAbsorbing": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.IsAbsorbing.pow_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.IsAbsorbing.pow_compl": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.IsAbsorbing.hitProb_compl": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.IsAbsorbing.hitProb_eq_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.restrictKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.restrictKernel_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.restrictKernel_apply_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.isMarkovKernel_restrictKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.lintegral_restrictKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.restrictKernel_pow_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.Leads": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.leads_iff_exists_pow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.pow_add_singleton_ge": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.Leads.trans": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.Leads.refl": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.Communicates": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.proposition_4_1_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.commClass": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.mem_commClass_self": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.iUnion_commClass": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.commClass_eq_or_disjoint": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.commClass_eq_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.IsIrreducibleChain": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.isIrreducibleChain_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.nonAbsorbingPart": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.commClass_subset_nonAbsorbingPart": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.decomposition_4_5": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.decomposition_4_5_disjoint": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.measurableSet_of_countable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.exists_singleton_pos_of_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.not_isAbsorbing_commClass_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.proposition_4_1_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.IsPhiIrreducible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.resolventHalf": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.resolventHalf_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.isMarkovKernel_resolventHalf": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.resolventHalf_pos_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.resolventHalf_eq_zero_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.resolventHalf_equiv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.hitProb_pos_of_compl": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.proposition_4_2_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.IsPhiIrreducible.mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.IsPhiIrreducible.restrict": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.isPhiIrreducible_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.isPhiIrreducible_dirac_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.isPhiIrreducible_dirac_of_leads": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.isIrreducibleChain_iff_count": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.exists_measure_pos_of_iUnion": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.setOf_resolventHalf_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.setOf_hitProb_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.measurableSet_hitProb_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.exists_finite_equiv_of_ac": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.exists_prob_equiv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.maxIrrMeasure": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.maxIrrMeasure_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.maxIrrMeasure_univ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.isProbabilityMeasure_maxIrrMeasure": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.isPhiIrreducible_maxIrrMeasure": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.ac_maxIrrMeasure": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.maxIrrMeasure_hitSet_null": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.maxIrrMeasure_comp_pow_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.IsMaximalIrreducibility": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.isMaximalIrreducibility_maxIrrMeasure": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.IsMaximalIrreducibility.isPhiIrreducible_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.IsMaximalIrreducibility.equiv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.IsMaximalIrreducibility.of_equiv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.IsMaximalIrreducibility.hitSet_null": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.proposition_4_2_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.proposition_4_2_2_maximal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.proposition_4_2_2_zero_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.posSets": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.posSets_eq_of_maximal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.IsFull": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.proposition_4_2_3_i": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.proposition_4_2_3_i_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.proposition_4_2_3_ii": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.theorem_4_0_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.theorem_4_0_1_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.IsAbsorbingIrreducibleSet": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.proposition_4_2_4": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.proposition_4_2_4_nonzero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.isMaximalIrreducibility_count": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.IsAccessibleFrom": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.UnifAccessible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.UnifAccessible.isAccessibleFrom": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.stoppedState_firstReturn_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.hitProb_ge_mul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.lemma_4_2_5": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.hitSet": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.hitSetLevel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.noHitSet": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.noHitSet_eq_compl": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.measurableSet_hitSetLevel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.lemma_4_2_6_bound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.lemma_4_2_6": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.countable_cover_unifAccessible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.fwdRecMatrix": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.isTransitionMatrix_fwdRecMatrix": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.ptail": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.ptail_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.ptail_ne_zero_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.bwdRecMatrix": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.bwdRecMatrix_rowSum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.ptail_ne_zero_of_bwdRecMatrix": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.bwdRecMatrix_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.halfHalf": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.bwdRecMatrix_display_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.rwMatrix": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.isTransitionMatrix_rwMatrix": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.rwMatrix_translate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.rw_step_law": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.rwhlMatrix": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.isTransitionMatrix_rwhlMatrix": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.storage_increment_singleton": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.storage_increment_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.poissonWeight": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.poissonWeight_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.tsum_poissonWeight": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.giM1Matrix": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.giM1Increment": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.giM1Matrix_eq_rwhl": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.tsum_giM1Increment": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.proposition_3_3_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.mG1Matrix": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.isTransitionMatrix_mG1Matrix": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.proposition_3_3_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.arMatrix": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.proposition_3_3_3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.matKernel_pow_one_singleton": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.leads_of_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.isAbsorbing_matKernel_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.IsAbsorbing.mem_of_leads": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.Leads.step": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.rwhl_zero_ge": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.rwhl_pow_zero_ge": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.rwhl_hitProb_zero_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.rwhl_hitProb_zero_eq_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.diracZeroInt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.rwhl_dichotomy_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.rwhl_even_increments": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.fwdRec_isAbsorbing": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.fwdRec_leads_down": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.fwdRec_pow_down": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.fwdRec_communicates": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.giM1_isIrreducibleChain": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.poissonWeight_ne_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.giM1_poisson_isIrreducibleChain": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.poissonWeight_dirac_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.giM1_dirac_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.mG1_isIrreducibleChain": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.mG1_poisson_isIrreducibleChain": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.mG1_dirac_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.rwSupportGroup": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.rw_closure_eq_zmultiples": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.rw_coset_isAbsorbing": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.rw_leads_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.rw_monoid_eq_group": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.rw_commClass_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.rw_commClass_finite": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.ratClass": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.ratWalk_isAbsorbing": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.ratWalk_commClass_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.ratWalk_commClass_infinite": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.controlMap": [],
+    "MeynTweedie.Irreducibility.controlMap_zero": [],
+    "MeynTweedie.Irreducibility.controlMap_succ": [],
+    "MeynTweedie.Irreducibility.controlMap_one": [
+      "propext"
+    ],
+    "MeynTweedie.Irreducibility.controlMap_succ_cons": [
+      "propext",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.orbit": [],
+    "MeynTweedie.Irreducibility.orbit_zero": [],
+    "MeynTweedie.Irreducibility.orbit_succ": [],
+    "MeynTweedie.Irreducibility.orbit_eq_controlMap": [],
+    "MeynTweedie.Irreducibility.recursionKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.recursionKernel_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.recursionKernel_apply'": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.isMarkovKernel_recursionKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.recursionKernel_comp_noise": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.recursionKernel_const_noise": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.measurable_controlMap": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.measurable_controlMap_right": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.recursionKernel_pow_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.recursionKernel_pow_apply'": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.infinitePi_map_shift": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.law_orbit": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.randomWalkKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.measurable_add_step": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.randomWalkKernel_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.randomWalkKernel_apply'": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.isMarkovKernel_randomWalkKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.randomWalkKernel_real_apply_Iic": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.controlMap_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.orbit_randomWalk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.convPow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.measurable_sum_fin": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.randomWalkKernel_pow_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.IsSpreadOut": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.halfLineStep": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.measurable_halfLineStep": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.halfLineWalkKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.isMarkovKernel_halfLineWalkKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.halfLineWalkKernel_apply'": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.halfLineWalkKernel_apply_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.halfLineWalkKernel_apply_Iic": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.halfLineWalkKernel_apply_Ioi": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.halfLineOrbit": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.partialSum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.halfLineOrbit_succ_coe": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.halfLineOrbit_eq_of_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.halfLineOrbit_succ_of_eq_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.halfLineOrbit_eq_lindley": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.linear_controlMap": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.orbit_linear": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.lssKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.measurable_lssStep": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.lssKernel_apply'": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.isMarkovKernel_lssKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.clm_pow_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.orbit_lss": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.lssKernel_pow_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.measurable_mulVec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.lssMatrixKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.measurable_lssMatrixStep": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.isMarkovKernel_lssMatrixKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.mulVecHom": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.coe_mulVecHom": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.matrix_pow_mulVec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.orbit_lssMatrix": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.lssMatrixKernel_pow_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.lcmTrajectory": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.IsControllable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.lcmTrajectory_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.ar1Kernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.measurable_ar1Step": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.isMarkovKernel_ar1Kernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.ar1Kernel_apply'": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.ar1Kernel_eq_lssKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.ar1Kernel_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.randomWalkKernel_eq_lssKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.orbit_ar1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.shiftIn": [
+      "propext",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.shiftIn_apply_zero": [
+      "propext",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.shiftIn_apply_succ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.measurable_shiftIn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.shiftIn_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.arStep": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.measurable_arStep": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.arKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.isMarkovKernel_arKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.companion": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.firstUnit": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.arStep_eq_companion": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.arKernel_eq_lssMatrixKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.arVec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.arVec_succ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.armaStep": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.measurable_armaStep": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.armaKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.isMarkovKernel_armaKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.arma_of_ar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.fig11F": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.fig11F_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.sqNorm2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.fig11_sqNorm_mulVec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.fig11_tendsto_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.fig11_inv_tendsto_atTop": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.ctrbMap": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.ctrbMap_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.ctrbMatrix": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.ctrbMatrix_mulVec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.range_ctrbMatrix": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.rank_ctrbMatrix_eq_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.lcmTrajectory_eq_ctrbMap": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.IsCtrbRank": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.reach_of_range_eq_top": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.proposition_4_4_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.pow_mul_mulVec_mem_range": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.pow_dim_eq_sum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.pow_mul_mulVec_mem_range_n": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.range_ctrbMap_le_n": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.range_ctrbMap_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.isControllable_iff_rank": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.isControllable_iff_exists_rank": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.range_ctrbMap_eq_top": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.firstUnit_mulVec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.companion_mulVec_of_ne_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.companion_mulVec_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.firstVec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.companion_pow_firstUnit_triangular": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.companionEta": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.companion_eta_rec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.proposition_4_4_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.gramian": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.gramian_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.rank_gramian": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.isControllable_iff_gramian": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.ctrbSubspace_absorbing_step": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.gramian_series_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.pi_absolutelyContinuous": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.measurable_ctrbMap": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.ctrbLaw": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.lss_pow_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.ctrbLaw_equiv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.lss_pow_equiv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.lss_isPhiIrreducible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.lss_isMaximalIrreducibility": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.translateCM": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.lss_lowerSemicontinuous": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.lss_unifAccessible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.proposition_4_4_3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.stdGaussian_equiv_volume": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.proposition_4_4_3_gaussian": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.ctrbSubspace_isAbsorbing": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.density_4_18_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.ctrbSubspace": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.measurableSet_ctrbSubspace": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.pow_mulVec_mem_ctrbSubspace": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.ctrbMap_mem_ctrbSubspace": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.ctrbMap\u2080": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.ctrbMap\u2080_surjective": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.ctrbF\u2080": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.ctrbG\u2080": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.coe_ctrbStep": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.restrictKernel_eq_lssKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.coe_controlMap_ctrb": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.restricted_controllable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.restricted_pow_eq_zero_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.restricted_isPhiIrreducible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.restricted_isMaximalIrreducibility": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.restricted_irreducible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.restricted_irreducible_gaussian": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.map_fin_one_equiv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.ar_isPhiIrreducible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.range_gramian": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.range_gramian_n": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.finrank_ctrbSubspace": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.finrank_ctrbSubspace_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.isControllable_of_rank_G": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.lss_fullRank_G_irreducible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.countable_absorbing_classes": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.unifAccessible_not_refl": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.exists_pow_pos_of_reach": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.not_isPhiIrreducible_of_disjoint_absorbing": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.isPhiIrreducible_of_skeleton": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.halfLine_pow_zero_ge": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.exists_Iio_neg_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.halfLine_hitProb_zero_eq_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.proposition_4_3_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.proposition_4_3_1_compact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.halfLine_maximal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.isPhiIrreducible_of_local_density": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.le_of_density": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.ar1_isPhiIrreducible_of_density": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.randomWalk_isPhiIrreducible_of_density": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.randomWalk_isPhiIrreducible_Icc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.randomWalk_step_ge": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.randomWalk_isPhiIrreducible_of_convPow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.ratCoset": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.randomWalk_rational": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.ar1_uniform_isPhiIrreducible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.ar1_abs_lt_step": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.ar1_explosive_not_irreducible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.IsCountableStateSpace": [],
+    "MeynTweedie.Irreducibility.IsGeneralStateSpace": [],
+    "MeynTweedie.Irreducibility.IsTopologicalStateSpace": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.IsCountableStateSpace.isGeneral": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.IsTopologicalStateSpace.isGeneral": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.inputKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.inputKernel_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.isMarkovKernel_inputKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.contentPreInputKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.isMarkovKernel_contentPreInputKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.contentPreInput_zero_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.contentPreInput_isPhiIrreducible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.contentPreInput_hitProb_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MeynTweedie.Irreducibility.contentPreInput_not_isPhiIrreducible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  "source_sha256": {
+    "Irreducibility/PathSpace.lean": "5adc51bbcef359adcfb965001ad3c374d3b49b3d08f2ad06967fb3273052a498",
+    "Irreducibility/Kernels.lean": "505fc83777246e3fb5edc2390d1eb35bfea57519b0bd3fa81d601219911a8819",
+    "Irreducibility/MarkovProperty.lean": "c90f3fa61cf8e5a822699beedc7948c614fbe881d0804c8bdfb70a853c113607",
+    "Irreducibility/StrongMarkov.lean": "ab322a2da86726ffaa22f5609d1c0dedeec4ea1f6954499da2ebfac6888306cc",
+    "Irreducibility/HittingTimes.lean": "1dbd8f3ac6b8672b16c1a54320bf98b48d8f746cf0971fed0458b7dd9576db73",
+    "Irreducibility/CountableChains.lean": "ba8f88005a6a8819957867930c0a27fb84e362698751504b63a1c372aa5e5296",
+    "Irreducibility/Communication.lean": "bd968db57c471adf311daf28f8309a473ae4655dd541dc1298d5482085b0629b",
+    "Irreducibility/PsiIrreducibility.lean": "242b62502651a30743d1554324a2213e0468d4fba90b486fbaf649f6f2cf903d",
+    "Irreducibility/MaximalIrreducibility.lean": "207db005621f31f0a416ff623a7b8783c8443b7ce709ffad3429374bc40bb2d9",
+    "Irreducibility/Accessibility.lean": "cb7e44d81f5141c9b4da3a8d4c9d187c599b01a4655ad2ab36cec8c96c7d95be",
+    "Irreducibility/SpecificMatrices.lean": "35d842bd8ab444ad9497f30e9f9b373c75ddaa674f19eafc4847294c64dca107",
+    "Irreducibility/CountableIrreducibility.lean": "11fd3da5418fe73f0bf3fc4eba48dbb55c96eed9fa19a341f02142ecf0b82be8",
+    "Irreducibility/ModelRecursion.lean": "6a4b35bf966f20a409384b546d26fcaf5b11ad84876f4924baf0eac4abe49d55",
+    "Irreducibility/ModelRandomWalk.lean": "30dff293c96210bafe62e04102bd8265be2ed44513353aec7ecbc031cdd2960b",
+    "Irreducibility/ModelLinearModels.lean": "84a2a327449ec4ff60bc336d841a98232d5fd99fe90924bdce75366d8b6a943f",
+    "Irreducibility/LinearControllability.lean": "97f9d787c31d88a4f48c691e40a133663af9f8f2659f398ee3790e8caa6bb5f7",
+    "Irreducibility/LinearIrreducibility.lean": "3b1337f0f4157e620c93a74a3eae5394e6a757f18409246ed00e1a7069027318",
+    "Irreducibility/LinearRestriction.lean": "fe5cf3a2011fc544a369ca4a6b870bfa1fc6a98a016c875d210e2a684dbb72dc",
+    "Irreducibility/IrreducibilityExtras.lean": "f99168adc28d2cab1d6d113bb19ee460acfecbd18a347280620b78b786b25825",
+    "Irreducibility/RandomWalkIrreducibility.lean": "9e359567c93d182b6268297200febd46f37432a3c501b91dedef6744d893a769",
+    "Irreducibility/StateSpaces.lean": "295b9d675b0f241f037abf85f747bb3a41f963de38775e2510675b111d0909b1",
+    "Irreducibility/StorageIrreducibility.lean": "64f4320b28707bc4dc856e99f496008c5ea8300a43a41794d992f8385729a5f7",
+    "Irreducibility.lean": "aa1c867d28ffc8260300d5b6406725fb46cdcdef31db7fb966217594fbf62738",
+    "lean-toolchain": "8733782dc070a99b312039cda424f601b80f3be6f6f512627da5ba25adc27632",
+    "lakefile.toml": "32b066ae438191d1d8cf5e5732de0fa59cd78098762363d4867d471fe48e55fd",
+    "lake-manifest.json": "854407d2cb59d00164c1f2cc7c730d66f912480e876a378fe25aead3f2030d70",
+    "proof-manifest.json": "9dcc83995c9fe46538d1f9a9fcdee3e5566b56a4d276023084d685f8ae507b22",
+    "scripts/verify.py": "a70b1fa704dd590f937f8b37682afa88a9d85a9150065acb935c7d2c9589da3b",
+    "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  },
+  "fresh_audit_sha256": "ea15b355bb77614e4b2c1666d71c98e4fd49c8a2c95cca6263aacb38f5dd756a",
+  "lean_toolchain": "leanprover/lean4:v4.34.0",
+  "scope": "Meyn and Tweedie (2009), Chapter 4 (Irreducibility): every numbered result and the mathematical claims of the text, with corrections.",
+  "source": "Meyn and Tweedie (2009), Markov Chains and Stochastic Stability, 2nd edition, Chapter 4"
+}
