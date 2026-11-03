@@ -27,8 +27,8 @@ state `i` has its own stack `scrambledStack f i`, and the chain is driven by the
 post #3: the `k`-th departure from `i` uses point `k` of stack `i` through the inverse-CDF update
 `step P i u` (`stackPath`). Everything is in base `2`.
 
-The library contains **536 theorems** (640 audited declarations) in 22 modules. Thirteen modules
-(354 theorems) are new. Nine are copied, with the namespace and imports renamed and otherwise
+The library contains **699 theorems** (850 audited declarations) in 30 modules. Twenty-one modules
+(517 theorems) are new. Nine are copied, with the namespace and imports renamed and otherwise
 unchanged, and each says so in its docstring: `MonteCarlo`, `Unbiased`, `Driving`,
 `OccupationDiscrepancy`, `Discrepancy`, `Koksma`, `VanDerCorput` and `StackBound` from
 [RQMCMarkov/MarkovDriving](../MarkovDriving/README.md) (178 theorems; `MonteCarlo`, `Unbiased`,
@@ -186,6 +186,39 @@ along all `T`, and whether normality "cannot be rejected" depends on the times a
   `E[(N₀(T) − T π₀)²] ≤ 10 (⌊log₂ T⌋ + 1)/q² + 2 anscBound(T)²` for every `T`
   (`IsPathCoinModel.integral_sq_occErr_le`), so the occupation frequency has RMSE
   `O(√log T / T)` (`IsPathCoinModel.isBigO_meanSq_occFreq`), against the `O(1/√T)` of MC.
+* **The CLT for any number of states** (`CltNDecomp`, `CltNCoins`, `CltNVariance`, `CltNShift`,
+  `CltNOwenTree`, `CltNOwen`). For a stochastic `P` on `n` states with Poisson data for every
+  target (`IsPoissonFamily`), the occupation error `N_s(T) − T π_s` is, for every flip table, a
+  boundary term plus the departure discrepancies of the rows, each a weighted sum over the cut
+  points `cs_{ij}` of the local discrepancies (`occCount_sub_eq_boundary_add_cuts`). The random
+  indices `N_i(T)` may be replaced by `⌊T π_i⌋` at a cost `O(log log T)`
+  (`abs_occErrN_sub_mainTermN_le`, `ansBoundN_le_log`), and the main term is a sum over binary
+  levels (`mainTermN_eq_levelSumN`). Under the digital shift all cut points of a row use the same
+  flips `ω (i, m)`. Under Owen's scramble they use the flips along their own paths, which share
+  nodes until their binary expansions diverge. Relabelling Owen's flips by the node of the
+  scrambled tree preserves `owenMeasure n` (`measurePreserving_owenRelabel`), and the path coin
+  of cut point `c` at depth `m` is then the relabelled flip at node `⌊2^m c⌋`
+  (`pathCoin_owenTable_eq_relabel`). In both cases the level terms are local in the levels, so
+  the truncation CLT applies, by separate proofs: if `T_k → ∞` and `Var ≥ κ log₂ T_k`
+  eventually, then `(N_s(T_k) − T_k π_s)/√Var ⇒ N(0,1)` (`tendstoInDistribution_occErrN_shift`,
+  `tendstoInDistribution_occErrN_owen`). Each hypothesis is about that randomisation's own
+  variance; the two variances differ in general. For both, `Var = O(log T)` and the occupation
+  frequency has RMSE `O(√log T / T)` (`variance_occErrN_shift_le`, `variance_occErrN_owen_le`,
+  `isBigO_meanSq_occFreqN_shift`, `isBigO_meanSq_occFreqN_owen`). The same holds for the
+  transition counts `N_ij − p_ij N_i` (`tendstoInDistribution_transErrN_shift`,
+  `tendstoInDistribution_transErrN_owen`).
+* **The n-state hypothesis is not vacuous** (`CltNExample`). An integer-valued variable whose
+  mean has fractional part `φ` has variance at least `φ(1 − φ)` (`variance_ge_of_int`), and level
+  terms at distance `d` have covariance `O(2^{-d})`. For the uniform chain on `n ≥ 2` states with
+  `n` not a power of two, every target and both randomisations, `Var ≥ κ log₂ T_k` along
+  `T_k = n Σ_{a<k} 2^{(2n+6)a}` (`eventually_variance_occErrN_uniform_shift_ge`,
+  `eventually_variance_occErrN_uniform_owen_ge`), so the CLTs hold there
+  (`occErrN_uniform_tendstoInDistribution_shift`, `occErrN_uniform_tendstoInDistribution_owen`).
+  Instances: three states with target `1`, where two cut points of each row are in play and
+  Owen's tree of paths matters (`occErrN_example_tendstoInDistribution_shift`,
+  `occErrN_example_tendstoInDistribution_owen`, with `Var ≥ (1/240) log₂ T_k`), and five states
+  with target `2` (`occErrN_five_tendstoInDistribution_shift`,
+  `occErrN_five_tendstoInDistribution_owen`).
 * **Model-free tools** (`CltMDependent`, `CltBlocks`, `Owen1DLindeberg`). Functions of disjoint
   sets of coordinates of a product measure are independent (`IsLocal`, `IsLocal.indepFun`). The
   bounded Lindeberg CLT of `OwenScrambling` (`tendstoInDistribution_sum_of_bounded`) is restated
@@ -231,16 +264,15 @@ hypotheses made explicit and the conventions.
 
 ## What is not formalised
 
-* **The CLT for `n ≥ 3` states.** With several jumps in a row the jump paths share flips down to
-  their common prefix, and for three states Owen scrambling and the digital shift give different
-  path laws (`owen_ne_shift_stayThenMove`), so the two-state law equivalence is not available.
-  The realisation-wise and dyadic bounds hold for every finite chain.
-* **Lower bounds on the variance in general.** The variance hypothesis of the CLT is verified on
-  one explicit sequence of times for one chain (`exampleChain`, `exampleTime`), not for general
-  chains or times.
+* **Lower bounds on the variance in general.** The variance hypothesis of the CLTs is verified on
+  explicit sequences of times for explicit chains: `exampleChain` (two states) and the uniform
+  chains on `n` states, `n` not a power of two. The criterion behind the latter needs integer
+  weights; there is no general criterion for real weights, and none for the transition-count CLT.
 * **Other bases and dimensions**: base `b > 2`, and scrambled stacks of digital nets in `s ≥ 2`
   dimensions (for example to drive two-step transitions).
-* **The five-state Farmer–Toda chain** of the post specifically, and the post's empirical tests
+* **The five-state Farmer–Toda chain** of the post specifically (the CLTs apply to it, but its
+  variance hypothesis is not checked: its probabilities are not dyadic-checkable; the five-state
+  instance proved is the uniform chain), and the post's empirical tests
   (the normality tests and the simulated errors). The numerical checks quoted in some module
   docstrings are not formalised either.
 
@@ -269,6 +301,14 @@ All names are in the namespace `RQMCMarkov.ScrambledStacks`. See the
 | [CltVariance](ScrambledStacks/CltVariance.lean) | 68 | Covariance tools, moments of the level terms, `Var ≤ 5K`, the lower bound `8k/45` on a digit pattern, path-coin models (Owen and shift), the main term as a coin sum, the example chain and times with `Var ≥ k/12` |
 | [CltStacks](ScrambledStacks/CltStacks.lean) | 19 | Convergence in distribution through measure-preserving maps, the CLT for coin sums, Slutsky for a bounded perturbation, the CLT for two-state chains under Owen and shift, for every function of the state, on the example sequence, and the mean-square error `O(log T)` |
 | [CltPathLaw](ScrambledStacks/CltPathLaw.lean) | 29 | Two states: every comparison with a threshold is decided by the path coins, the stack path equals a digital-shift path with the path coins as flips, the path laws of Owen and shift coincide, and so do the laws of the counts, the occupation error and every path functional; the two CLTs are equivalent |
+| [CltNDecomp](ScrambledStacks/CltNDecomp.lean) | 24 | n states, every flip table: cut points and weights, the occupation error as boundary plus cut-point discrepancies, Poisson families, the deterministic Anscombe bound `O(log log T)`, the level decomposition of the main term |
+| [CltNCoins](ScrambledStacks/CltNCoins.lean) | 38 | Level sums of cut-point terms on fair coins, cut points sharing coordinates: truncations, moments, the CLT, the Slutsky assembly |
+| [CltNVariance](ScrambledStacks/CltNVariance.lean) | 20 | Covariance decay of level terms, `Var = O(K)`, the variance of an integer-valued variable, a lower-bound criterion for spaced bit patterns |
+| [CltNShift](ScrambledStacks/CltNShift.lean) | 13 | Code (ii), digital shift, n states: the CLT, `Var = O(log T)`, RMSE `O(√log T / T)` |
+| [CltNOwenTree](ScrambledStacks/CltNOwenTree.lean) | 16 | Owen's flips relabelled by the node of the scrambled tree, path coins as relabelled flips, the relabelling preserves `owenMeasure n` |
+| [CltNOwen](ScrambledStacks/CltNOwen.lean) | 12 | Code (iii), Owen's scramble, n states: the CLT, `Var = O(log T)`, RMSE `O(√log T / T)` |
+| [CltNExample](ScrambledStacks/CltNExample.lean) | 31 | Uniform chains: Poisson data, integer weights, the variance lower bound along spaced times for both randomisations, the CLTs for three states (target `1`) and five states (target `2`) |
+| [CltNTrans](ScrambledStacks/CltNTrans.lean) | 9 | The CLT for the transition counts `N_ij − p_ij N_i`, n states, both randomisations |
 | [CltThreeState](ScrambledStacks/CltThreeState.lean) | 12 | The three-state chain with rows `(1/4, 1/2, 1/4)`, the cylinder "stay, then move", probability `1/8` under Owen and `1/4` under the digital shift |
 | [StackDyadic](ScrambledStacks/StackDyadic.lean) | 27 | No limit without atoms for variables with finitely many values, dyadic thresholds with zero block error, bounded transition and occupation errors for dyadic chains, no CLT, the 7/8 chain with error at most `28` |
 | [StackPowerOfTwo](ScrambledStacks/StackPowerOfTwo.lean) | 13 | The symmetric two-state chain, transition counts as threshold counts, the self-consistent bound along `T = 2^k`, no limit law along all `T` |
@@ -282,5 +322,5 @@ python scripts/verify.py
 ```
 
 The verifier builds the library and freshly recompiles every contributed proof. It also audits each
-named declaration's axioms (640 declarations): only `propext`, `Classical.choice` and `Quot.sound`
+named declaration's axioms (850 declarations): only `propext`, `Classical.choice` and `Quot.sound`
 are allowed. Warnings fail the check.

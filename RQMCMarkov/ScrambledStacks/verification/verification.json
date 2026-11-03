@@ -1,6 +1,6 @@
 {
-  "checked_at_utc": "2026-11-03T03:20:05.949598+00:00",
-  "theorems": 536,
+  "checked_at_utc": "2026-11-03T05:18:58.532870+00:00",
+  "theorems": 699,
   "module_theorems": {
     "ScrambledStacks/MonteCarlo.lean": 16,
     "ScrambledStacks/Unbiased.lean": 22,
@@ -23,9 +23,17 @@
     "ScrambledStacks/CltThreeState.lean": 12,
     "ScrambledStacks/StackDyadic.lean": 27,
     "ScrambledStacks/StackPowerOfTwo.lean": 13,
-    "ScrambledStacks/StackSpells.lean": 19
+    "ScrambledStacks/StackSpells.lean": 19,
+    "ScrambledStacks/CltNDecomp.lean": 24,
+    "ScrambledStacks/CltNCoins.lean": 38,
+    "ScrambledStacks/CltNVariance.lean": 20,
+    "ScrambledStacks/CltNShift.lean": 13,
+    "ScrambledStacks/CltNOwenTree.lean": 16,
+    "ScrambledStacks/CltNOwen.lean": 12,
+    "ScrambledStacks/CltNExample.lean": 31,
+    "ScrambledStacks/CltNTrans.lean": 9
   },
-  "audited_declarations": 640,
+  "audited_declarations": 850,
   "declarations": [
     {
       "name": "RQMCMarkov.ScrambledStacks.uniformIco",
@@ -3226,6 +3234,1056 @@
       "name": "RQMCMarkov.ScrambledStacks.shift_runLength_first78",
       "kind": "theorem",
       "module": "ScrambledStacks/StackSpells.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.cutWeight",
+      "kind": "def",
+      "module": "ScrambledStacks/CltNDecomp.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.cutPoint",
+      "kind": "def",
+      "module": "ScrambledStacks/CltNDecomp.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.cutPoint_mem_Icc",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNDecomp.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.extendNat_fin",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNDecomp.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.sum_extendNat_mul_sub_eq",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNDecomp.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.step_sub_mulVec_eq_sum_cut",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNDecomp.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.sum_step_sub_eq_sum_segErr",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNDecomp.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.occCount_sub_eq_boundary_add_cuts",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNDecomp.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.IsPoissonFamily",
+      "kind": "def",
+      "module": "ScrambledStacks/CltNDecomp.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.mulVec_le_of_le",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNDecomp.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.le_mulVec_of_le",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNDecomp.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.IsPoissonFamily.mem_Icc",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNDecomp.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.poissonSup",
+      "kind": "def",
+      "module": "ScrambledStacks/CltNDecomp.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.abs_le_poissonSup",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNDecomp.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.poissonSup_nonneg",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNDecomp.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.anscConstN",
+      "kind": "def",
+      "module": "ScrambledStacks/CltNDecomp.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.abs_occCount_sub_pi_le",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNDecomp.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.occErrN",
+      "kind": "def",
+      "module": "ScrambledStacks/CltNDecomp.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.chainIdxN",
+      "kind": "def",
+      "module": "ScrambledStacks/CltNDecomp.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.mainTermN",
+      "kind": "def",
+      "module": "ScrambledStacks/CltNDecomp.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.cutWeightSum",
+      "kind": "def",
+      "module": "ScrambledStacks/CltNDecomp.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.cutWeightSum_nonneg",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNDecomp.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.ansBoundN",
+      "kind": "def",
+      "module": "ScrambledStacks/CltNDecomp.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.chainIdxN_le",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNDecomp.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.chainIdxN_lt_two_pow",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNDecomp.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.abs_occErrN_sub_mainTermN_le",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNDecomp.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.natLog_mul_le",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNDecomp.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.ansConstN",
+      "kind": "def",
+      "module": "ScrambledStacks/CltNDecomp.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.ansBoundN_nonneg",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNDecomp.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.ansConstN_nonneg",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNDecomp.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.ansBoundN_le_log",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNDecomp.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.tendsto_sq_div_natLog_of_le",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNDecomp.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.cutTerm",
+      "kind": "def",
+      "module": "ScrambledStacks/CltNDecomp.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.cutTermTrunc",
+      "kind": "def",
+      "module": "ScrambledStacks/CltNDecomp.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.segErr_scrambledVdc_one",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNDecomp.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.segErr_scrambledVdc_eq_sum_cutTerm",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNDecomp.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.rowTerm",
+      "kind": "def",
+      "module": "ScrambledStacks/CltNDecomp.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.rowTermTrunc",
+      "kind": "def",
+      "module": "ScrambledStacks/CltNDecomp.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.levelSumN",
+      "kind": "def",
+      "module": "ScrambledStacks/CltNDecomp.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.mainTermN_eq_levelSumN",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNDecomp.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.coinMeasure",
+      "kind": "abbrev",
+      "module": "ScrambledStacks/CltNCoins.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.coinsOf",
+      "kind": "def",
+      "module": "ScrambledStacks/CltNCoins.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.absWeightSum",
+      "kind": "def",
+      "module": "ScrambledStacks/CltNCoins.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.absWeightSum_nonneg",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNCoins.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.measurableSet_levelInd_coins",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNCoins.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.measureReal_levelInd_coins",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNCoins.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.measurable_levelVal_coins",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNCoins.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.integral_levelVal_coins",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNCoins.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.measurable_cutTerm_coins",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNCoins.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.abs_cutTerm_le",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNCoins.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.abs_cutTermTrunc_le",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNCoins.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.abs_cutTerm_sub_trunc_le",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNCoins.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.setOf_levelTie_coins_eq",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNCoins.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.measurableSet_levelTie_coins",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNCoins.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.measureReal_levelTie_coins",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNCoins.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.isLocal_cutTermTrunc_coins",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNCoins.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.measurable_cutTermTrunc_coins",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNCoins.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.integral_abs_cutTerm_sub_trunc_le",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNCoins.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.integral_cutTerm_coins",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNCoins.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.abs_rowTerm_le",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNCoins.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.abs_rowTermTrunc_le",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNCoins.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.abs_rowTerm_sub_trunc_le",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNCoins.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.measurable_rowTerm_coins",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNCoins.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.isLocal_rowTermTrunc_coins",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNCoins.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.measurable_rowTermTrunc_coins",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNCoins.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.integral_abs_rowTerm_sub_trunc_le",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNCoins.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.integral_rowTerm_coins",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNCoins.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.levelYN",
+      "kind": "def",
+      "module": "ScrambledStacks/CltNCoins.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.levelYNTrunc",
+      "kind": "def",
+      "module": "ScrambledStacks/CltNCoins.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.levelSumN_eq_sum_levelYN",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNCoins.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.abs_levelYN_le",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNCoins.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.abs_levelYNTrunc_le",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNCoins.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.abs_levelYN_sub_trunc_le",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNCoins.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.measurable_levelYN_coins",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNCoins.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.levelCoords",
+      "kind": "def",
+      "module": "ScrambledStacks/CltNCoins.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.lev_mem_of_mem_levelCoords",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNCoins.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.isLocal_levelYNTrunc_coins",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNCoins.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.integral_abs_levelYN_sub_trunc_le",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNCoins.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.integral_levelSumN_coins",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNCoins.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.measurable_levelSumN_coins",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNCoins.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.abs_levelSumN_le",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNCoins.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.memLp_levelSumN_coins",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNCoins.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.tendstoInDistribution_levelSumN",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNCoins.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.tendstoInDistribution_of_close_main",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNCoins.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.abs_covariance_le_of_bound",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.abs_covariance_le_of_local",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.disjoint_levelCoords",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.abs_covariance_levelYN_le",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.variance_levelSumN_le",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.variance_ge_of_int",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.rowFrac",
+      "kind": "def",
+      "module": "ScrambledStacks/CltNVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.variance_rowTerm_ge_of_int",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.patternR",
+      "kind": "def",
+      "module": "ScrambledStacks/CltNVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.patternR_lt",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.testBit_patternR",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.rowCoords",
+      "kind": "def",
+      "module": "ScrambledStacks/CltNVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.mem_rowCoords",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.tendsto_variance_rowTerm_sub_trunc",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.covariance_rowTerm_eq_zero",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.abs_covariance_rowTerm_le",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.rowTerm_eq_zero_of_testBit",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.levelSumN_pattern_eq",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.variance_levelSumN_pattern_ge",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.natLog_add_one_sq_le",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.integral_sq_le_of_close",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.integral_sq_levelSumN_le",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.isBigO_meanSq_div_of_le",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.shiftLayout",
+      "kind": "def",
+      "module": "ScrambledStacks/CltNShift.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.shiftLayout_lev",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNShift.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.shiftLayout_rows",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNShift.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.pathCoins_shiftFlips_eq",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNShift.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.shiftMainTerm",
+      "kind": "def",
+      "module": "ScrambledStacks/CltNShift.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.mainTermN_shiftFlips_eq",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNShift.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.abs_occErrN_shift_sub_le",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNShift.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.abs_occErrN_le",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNShift.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.memLp_occErrN_shift",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNShift.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.tendsto_natLog_add_one",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNShift.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.tendstoInDistribution_occErrN_shift",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNShift.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.varConstN",
+      "kind": "def",
+      "module": "ScrambledStacks/CltNShift.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.two_mul_ansBoundN_sq_le",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNShift.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.integral_sq_occErrN_shift_le",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNShift.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.variance_occErrN_shift_le",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNShift.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.isBigO_meanSq_occFreqN_shift",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNShift.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.prefixDigits",
+      "kind": "def",
+      "module": "ScrambledStacks/CltNOwenTree.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.owenNode",
+      "kind": "def",
+      "module": "ScrambledStacks/CltNOwenTree.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.owenRelabel",
+      "kind": "def",
+      "module": "ScrambledStacks/CltNOwenTree.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.owenRect",
+      "kind": "def",
+      "module": "ScrambledStacks/CltNOwenTree.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.mem_owenRect",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNOwenTree.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.owenBox_eq_owenRect",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNOwenTree.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.pathPrefix_congr_digits",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNOwenTree.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.pathPrefix_threshDigit_eq",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNOwenTree.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.floor_two_pow_mul_lt",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNOwenTree.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.pathCoin_owenTable_eq_relabel",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNOwenTree.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.owenNode_lt",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNOwenTree.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.owenNode_inj",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNOwenTree.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.owenNode_congr",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNOwenTree.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.owenRelabel_congr",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNOwenTree.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.measurable_owenRelabel",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNOwenTree.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.measure_eq_sum_restrict_preimage",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNOwenTree.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.coinMeasure_setOf_comp_eq",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNOwenTree.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.owenMeasure_relabel_rect",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNOwenTree.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.eq_owenMeasure_of_box",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNOwenTree.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.measurePreserving_owenRelabel",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNOwenTree.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.owenLayout",
+      "kind": "def",
+      "module": "ScrambledStacks/CltNOwen.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.owenLayout_lev",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNOwen.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.owenLayout_rows",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNOwen.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.pathCoins_owenTable_eq",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNOwen.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.levelSumN_congr",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNOwen.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.owenMainTerm",
+      "kind": "def",
+      "module": "ScrambledStacks/CltNOwen.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.mainTermN_owenTable_eq",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNOwen.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.abs_occErrN_owen_sub_le",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNOwen.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.memLp_occErrN_owen",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNOwen.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.integral_owenMainTerm_relabel",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNOwen.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.tendstoInDistribution_occErrN_owen",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNOwen.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.integral_sq_occErrN_owen_le",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNOwen.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.variance_occErrN_owen_le",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNOwen.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.isBigO_meanSq_occFreqN_owen",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNOwen.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.uniformChain",
+      "kind": "def",
+      "module": "ScrambledStacks/CltNExample.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.uniformPoisson",
+      "kind": "def",
+      "module": "ScrambledStacks/CltNExample.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.uniformPi",
+      "kind": "def",
+      "module": "ScrambledStacks/CltNExample.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.uniformSpacing",
+      "kind": "def",
+      "module": "ScrambledStacks/CltNExample.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.uniformTime",
+      "kind": "def",
+      "module": "ScrambledStacks/CltNExample.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.isStochastic_uniformChain",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNExample.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.mulVec_uniformPoisson",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNExample.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.isPoissonFamily_uniform",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNExample.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.chainIdxN_uniformTime",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNExample.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.cutWeight_uniform",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNExample.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.cutWeight_uniform_int",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNExample.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.absWeightSum_uniform_le",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNExample.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.fracPow_one",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNExample.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.ite_fracPow_eq",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNExample.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.sum_cutWeight_mul_cutPoint_uniform",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNExample.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.rowFrac_uniform",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNExample.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.fract_mul_one_sub_ge",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNExample.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.variance_rowTerm_uniform_ge",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNExample.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.uniformSpacing_bound",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNExample.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.variance_levelSumN_uniform_ge",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNExample.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.eventually_variance_ge_of_close",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNExample.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.uniformSpacing_mul_lt",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNExample.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.natLog_uniformTime_le",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNExample.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.tendsto_uniformTime",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNExample.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.tendsto_ansBoundN_uniform",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNExample.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.eventually_variance_occErrN_uniform_shift_ge",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNExample.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.eventually_variance_occErrN_uniform_owen_ge",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNExample.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.occErrN_uniform_tendstoInDistribution_shift",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNExample.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.occErrN_uniform_tendstoInDistribution_owen",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNExample.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.not_five_dvd_two_pow",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNExample.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.eventually_variance_occErrN_example_shift_ge",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNExample.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.eventually_variance_occErrN_example_owen_ge",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNExample.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.occErrN_example_tendstoInDistribution_shift",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNExample.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.occErrN_example_tendstoInDistribution_owen",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNExample.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.occErrN_five_tendstoInDistribution_shift",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNExample.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.occErrN_five_tendstoInDistribution_owen",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNExample.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.transErrN",
+      "kind": "def",
+      "module": "ScrambledStacks/CltNTrans.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.indicatorFn",
+      "kind": "def",
+      "module": "ScrambledStacks/CltNTrans.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.transErrN_eq",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNTrans.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.transMainN",
+      "kind": "def",
+      "module": "ScrambledStacks/CltNTrans.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.transBound",
+      "kind": "def",
+      "module": "ScrambledStacks/CltNTrans.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.abs_transErrN_sub_transMainN_le",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNTrans.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.transBound_nonneg",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNTrans.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.transBound_le_log",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNTrans.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.rowCut",
+      "kind": "def",
+      "module": "ScrambledStacks/CltNTrans.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.rowCut_nonneg",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNTrans.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.transMainN_eq_levelSumN",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNTrans.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.shiftTransMain",
+      "kind": "def",
+      "module": "ScrambledStacks/CltNTrans.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.abs_transErrN_le",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNTrans.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.tendstoInDistribution_transErrN_shift",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNTrans.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.owenLayoutOf",
+      "kind": "def",
+      "module": "ScrambledStacks/CltNTrans.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.owenTransMain",
+      "kind": "def",
+      "module": "ScrambledStacks/CltNTrans.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.tendstoInDistribution_transErrN_owen",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltNTrans.lean"
     }
   ],
   "full_build": "passed",
@@ -6299,6 +7357,1027 @@
       "propext",
       "Classical.choice",
       "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.cutWeight": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.cutPoint": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.cutPoint_mem_Icc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.extendNat_fin": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.sum_extendNat_mul_sub_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.step_sub_mulVec_eq_sum_cut": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.sum_step_sub_eq_sum_segErr": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.occCount_sub_eq_boundary_add_cuts": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.IsPoissonFamily": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.mulVec_le_of_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.le_mulVec_of_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.IsPoissonFamily.mem_Icc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.poissonSup": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.abs_le_poissonSup": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.poissonSup_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.anscConstN": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.abs_occCount_sub_pi_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.occErrN": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.chainIdxN": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.mainTermN": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.cutWeightSum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.cutWeightSum_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.ansBoundN": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.chainIdxN_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.chainIdxN_lt_two_pow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.abs_occErrN_sub_mainTermN_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.natLog_mul_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.ansConstN": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.ansBoundN_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.ansConstN_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.ansBoundN_le_log": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.tendsto_sq_div_natLog_of_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.cutTerm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.cutTermTrunc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.segErr_scrambledVdc_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.segErr_scrambledVdc_eq_sum_cutTerm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.rowTerm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.rowTermTrunc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.levelSumN": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.mainTermN_eq_levelSumN": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.coinMeasure": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.coinsOf": [],
+    "RQMCMarkov.ScrambledStacks.absWeightSum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.absWeightSum_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.measurableSet_levelInd_coins": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.measureReal_levelInd_coins": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.measurable_levelVal_coins": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.integral_levelVal_coins": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.measurable_cutTerm_coins": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.abs_cutTerm_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.abs_cutTermTrunc_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.abs_cutTerm_sub_trunc_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.setOf_levelTie_coins_eq": [
+      "propext",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.measurableSet_levelTie_coins": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.measureReal_levelTie_coins": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.isLocal_cutTermTrunc_coins": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.measurable_cutTermTrunc_coins": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.integral_abs_cutTerm_sub_trunc_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.integral_cutTerm_coins": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.abs_rowTerm_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.abs_rowTermTrunc_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.abs_rowTerm_sub_trunc_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.measurable_rowTerm_coins": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.isLocal_rowTermTrunc_coins": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.measurable_rowTermTrunc_coins": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.integral_abs_rowTerm_sub_trunc_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.integral_rowTerm_coins": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.levelYN": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.levelYNTrunc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.levelSumN_eq_sum_levelYN": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.abs_levelYN_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.abs_levelYNTrunc_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.abs_levelYN_sub_trunc_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.measurable_levelYN_coins": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.levelCoords": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.lev_mem_of_mem_levelCoords": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.isLocal_levelYNTrunc_coins": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.integral_abs_levelYN_sub_trunc_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.integral_levelSumN_coins": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.measurable_levelSumN_coins": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.abs_levelSumN_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.memLp_levelSumN_coins": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.tendstoInDistribution_levelSumN": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.tendstoInDistribution_of_close_main": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.abs_covariance_le_of_bound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.abs_covariance_le_of_local": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.disjoint_levelCoords": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.abs_covariance_levelYN_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.variance_levelSumN_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.variance_ge_of_int": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.rowFrac": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.variance_rowTerm_ge_of_int": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.patternR": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.patternR_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.testBit_patternR": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.rowCoords": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.mem_rowCoords": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.tendsto_variance_rowTerm_sub_trunc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.covariance_rowTerm_eq_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.abs_covariance_rowTerm_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.rowTerm_eq_zero_of_testBit": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.levelSumN_pattern_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.variance_levelSumN_pattern_ge": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.natLog_add_one_sq_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.integral_sq_le_of_close": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.integral_sq_levelSumN_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.isBigO_meanSq_div_of_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.shiftLayout": [],
+    "RQMCMarkov.ScrambledStacks.shiftLayout_lev": [],
+    "RQMCMarkov.ScrambledStacks.shiftLayout_rows": [],
+    "RQMCMarkov.ScrambledStacks.pathCoins_shiftFlips_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.shiftMainTerm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.mainTermN_shiftFlips_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.abs_occErrN_shift_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.abs_occErrN_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.memLp_occErrN_shift": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.tendsto_natLog_add_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.tendstoInDistribution_occErrN_shift": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.varConstN": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.two_mul_ansBoundN_sq_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.integral_sq_occErrN_shift_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.variance_occErrN_shift_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.isBigO_meanSq_occFreqN_shift": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.prefixDigits": [
+      "propext"
+    ],
+    "RQMCMarkov.ScrambledStacks.owenNode": [
+      "propext"
+    ],
+    "RQMCMarkov.ScrambledStacks.owenRelabel": [
+      "propext"
+    ],
+    "RQMCMarkov.ScrambledStacks.owenRect": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.mem_owenRect": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.owenBox_eq_owenRect": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.pathPrefix_congr_digits": [
+      "propext",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.pathPrefix_threshDigit_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.floor_two_pow_mul_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.pathCoin_owenTable_eq_relabel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.owenNode_lt": [
+      "propext",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.owenNode_inj": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.owenNode_congr": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.owenRelabel_congr": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.measurable_owenRelabel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.measure_eq_sum_restrict_preimage": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.coinMeasure_setOf_comp_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.owenMeasure_relabel_rect": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.eq_owenMeasure_of_box": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.measurePreserving_owenRelabel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.owenLayout": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.owenLayout_lev": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.owenLayout_rows": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.pathCoins_owenTable_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.levelSumN_congr": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.owenMainTerm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.mainTermN_owenTable_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.abs_occErrN_owen_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.memLp_occErrN_owen": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.integral_owenMainTerm_relabel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.tendstoInDistribution_occErrN_owen": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.integral_sq_occErrN_owen_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.variance_occErrN_owen_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.isBigO_meanSq_occFreqN_owen": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.uniformChain": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.uniformPoisson": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.uniformPi": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.uniformSpacing": [],
+    "RQMCMarkov.ScrambledStacks.uniformTime": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.isStochastic_uniformChain": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.mulVec_uniformPoisson": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.isPoissonFamily_uniform": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.chainIdxN_uniformTime": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.cutWeight_uniform": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.cutWeight_uniform_int": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.absWeightSum_uniform_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.fracPow_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.ite_fracPow_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.sum_cutWeight_mul_cutPoint_uniform": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.rowFrac_uniform": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.fract_mul_one_sub_ge": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.variance_rowTerm_uniform_ge": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.uniformSpacing_bound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.variance_levelSumN_uniform_ge": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.eventually_variance_ge_of_close": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.uniformSpacing_mul_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.natLog_uniformTime_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.tendsto_uniformTime": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.tendsto_ansBoundN_uniform": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.eventually_variance_occErrN_uniform_shift_ge": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.eventually_variance_occErrN_uniform_owen_ge": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.occErrN_uniform_tendstoInDistribution_shift": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.occErrN_uniform_tendstoInDistribution_owen": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.not_five_dvd_two_pow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.eventually_variance_occErrN_example_shift_ge": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.eventually_variance_occErrN_example_owen_ge": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.occErrN_example_tendstoInDistribution_shift": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.occErrN_example_tendstoInDistribution_owen": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.occErrN_five_tendstoInDistribution_shift": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.occErrN_five_tendstoInDistribution_owen": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.transErrN": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.indicatorFn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.transErrN_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.transMainN": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.transBound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.abs_transErrN_sub_transMainN_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.transBound_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.transBound_le_log": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.rowCut": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.rowCut_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.transMainN_eq_levelSumN": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.shiftTransMain": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.abs_transErrN_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.tendstoInDistribution_transErrN_shift": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.owenLayoutOf": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.owenTransMain": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.tendstoInDistribution_transErrN_owen": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
     ]
   },
   "source_sha256": {
@@ -6324,15 +8403,23 @@
     "ScrambledStacks/StackDyadic.lean": "f39701cfb17be4e797ddd66497740260ff7a80d49ff49074ab33d186440d0715",
     "ScrambledStacks/StackPowerOfTwo.lean": "987b5aa95dbad3f2b27ea27d03fb11c7b00042229037112e007106a1ed7f3202",
     "ScrambledStacks/StackSpells.lean": "b1795a1bcccde691e542bf3c267de795ed77a2d8e8fecf46d5f5f98801bb901e",
-    "ScrambledStacks.lean": "1e2f644d994fabbca2a9c0efdf5353da013e393571bb3112e66bc69190c16845",
+    "ScrambledStacks/CltNDecomp.lean": "6fe84cf3ec76a9595d6384a27a9c65b50126a2f5bb5c3e90d74faeeefbd44e4a",
+    "ScrambledStacks/CltNCoins.lean": "0be563be91ffea166e170a3bd25046187538570815aba43c702eabe6e7cc6c53",
+    "ScrambledStacks/CltNVariance.lean": "9fd94027052c34fb3f448447ebfd3c01830edfcbf7f1b10eac49ff94cc4afbd1",
+    "ScrambledStacks/CltNShift.lean": "91316e9878c6743f245578021f327a44d23839edac14b4e3d1d55dc501021181",
+    "ScrambledStacks/CltNOwenTree.lean": "295a09ca269f03a338ff30eaff6546222adc1fc9916b094cfbca945469482f31",
+    "ScrambledStacks/CltNOwen.lean": "527c257c02b6fa794d218399f96b464ba9de86cc4ecb1fde55969b369321f958",
+    "ScrambledStacks/CltNExample.lean": "2abbf7195508e2455bd60c88b656747c3d569745eccf528bc31ee01ef611de95",
+    "ScrambledStacks/CltNTrans.lean": "846e66c1cb93f9819aa4fad6752cdc1ec75eacc59331b9caee04f4b5ce61838b",
+    "ScrambledStacks.lean": "1fcdfeb804793b7d15f2bc5b92bb3e2bdba1d7311ba3f2b0fa48a4d08957d99d",
     "lean-toolchain": "8733782dc070a99b312039cda424f601b80f3be6f6f512627da5ba25adc27632",
     "lakefile.toml": "333f37377b3ae98ac7398cd217cff715e400794a449f5e21937113340e3c0d11",
     "lake-manifest.json": "4223a34088fbb16e42d77e819412f15fb5312e5e1791b0f535a4f6e1211d4b7e",
-    "proof-manifest.json": "e59a9f5c53507e9e1591aa31ebe10fabf61dc0170d5096a81d2dfb7823ea7217",
+    "proof-manifest.json": "b3ae4facb725c92cb14886d978d2bf6d4b6d8faf1151757ccd5824813fd641fa",
     "scripts/verify.py": "a70b1fa704dd590f937f8b37682afa88a9d85a9150065acb935c7d2c9589da3b",
     "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
   },
-  "fresh_audit_sha256": "976c8a881483f12316f70d7cac936f2424f1f5957e3190d02307d01c5de80177",
+  "fresh_audit_sha256": "9c4b6bfc0020944bfb5949d1d5c7bf3355632ef0d06c873aa5218868060f50b6",
   "lean_toolchain": "leanprover/lean4:v4.34.0",
   "scope": "Finite Markov chains driven by per-state Owen-scrambled or digitally shifted van der Corput (one-dimensional Sobol) stacks: realisation-wise QMC rates, bounded errors and spells of exactly 8 for dyadic transition probabilities, and the central limit theorem at scale sqrt(log T), for codes (ii)-(iii) of post #3 of the VFI Toolkit discourse thread 'Simulating a Markov chain: MC, QMC, RQMC' (topic 687).",
   "source": "R. Kirkby, VFI Toolkit discourse topic 687 (2026), post #3; Owen (1995, 1997a); Loh (2003)"

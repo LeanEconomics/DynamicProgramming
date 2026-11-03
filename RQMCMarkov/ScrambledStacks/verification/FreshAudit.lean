@@ -11209,6 +11209,3661 @@ theorem shift_runLength_first78 (i : Fin 2) {r T : ℕ} (hr8 : r < 8) (hT : r + 
 
 end RQMCMarkov.ScrambledStacks
 
+/-
+Copyright (c) 2026 Robert Kirkby. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Robert Kirkby
+-/
+
+/-!
+# n-state stack chains: the occupation error as a sum of level terms (post #3)
+
+Post #3, codes (ii) and (iii), with any number `n` of states: "in the five-state chain
+normality cannot be rejected for the per-state Sobol sequences ((ii) and (iii))". This module is
+randomisation-free: everything holds for EVERY flip table `f`.
+
+Let `P` be stochastic on `Fin n`, `s` a target state and `h − Ph = 1_{s} − c` (Poisson's
+equation). Along the chain driven by the scrambled van der Corput stacks of `f`, the occupation
+error `E_T = N_s(T) − T c` is `h(X₀) − h(X_T) + Σ_i D_i(N_i(T))` (`OccupationDiscrepancy`), and by
+Abel summation the departure discrepancy of row `i` is a weighted sum of local discrepancies at
+the **cut points** `c_{ij} = cumProb P i (j+1)`, `j < n − 1`, with weights `h_j − h_{j+1}`
+(`step_sub_mulVec_eq_sum_cut`, `sum_step_sub_eq_sum_segErr`, `occCount_sub_eq_boundary_add_cuts`).
+
+**Reading of `π`.** We take Poisson data for EVERY target (`IsPoissonFamily P H π`:
+`H t − P H t = 1_{t} − π_t` for all `t`), which is satisfiable (e.g. `H t = 1_{t} − 1/n`, `π = 1/n`
+for the uniform chain, `CltNExample`), and forces `π_t ∈ [0,1]` (`IsPoissonFamily.mem_Icc`).
+The occupation error of target `s` is `occErrN = N_s(T) − T π_s`, its Poisson function `H s`.
+
+**Cut points equal to `1`** contribute nothing (all points are `≤ 1`): they are handled, not
+assumed away (`cutTerm` is `0` there, `segErr_scrambledVdc_one`).
+
+## Main results
+
+* `cutWeight h j = h_j − h_{j+1}`, `cutPoint P i j = cumProb P i (j + 1)`.
+* `occCount_sub_eq_boundary_add_cuts` (**decomposition**):
+  `N_s(T) − T c = h(x₀) − h(X_T) + Σ_i Σ_{j<n−1} (h_j − h_{j+1}) segErr(v_i, c_{ij}, 0, N_i(T))`.
+* `IsPoissonFamily`, `IsPoissonFamily.mem_Icc`, `abs_occCount_sub_pi_le`.
+* `abs_occErrN_sub_mainTermN_le` (**n-state deterministic Anscombe**): with
+  `mainTermN = Σ_i Σ_j (h_j − h_{j+1}) segErr(v_i, c_{ij}, 0, ⌊T π_i⌋)`,
+  `|E_T − mainTermN| ≤ ansBoundN = O(log log T)` for every flip table; `ansBoundN_le_log`.
+* `tendsto_sq_div_natLog_of_le`: such bounds are `o(√log T)`.
+* `segErr_scrambledVdc_eq_sum_cutTerm`, `mainTermN_eq_levelSumN` (**level decomposition**):
+  `mainTermN = Σ_{m<K} Σ_i rowTerm … m … i`, where the row term of level `m` collects, over the
+  cut points `j`, the terms `w_j 1{bit m of n_i} (1{LevelInd} − {2^m c_{ij}})` of
+  `segErr_scrambledVdc_eq_sum_level`, as functions of the path coins of the cut points.
+-/
+
+namespace RQMCMarkov.ScrambledStacks
+
+open MeasureTheory ProbabilityTheory Filter Finset Matrix
+open scoped ENNReal NNReal Topology
+
+variable {n : ℕ}
+
+/-! ### Abel summation over the cut points -/
+
+/-- The weight `h_j − h_{j+1}` of cut point `j` (the states extended by `0` beyond `n − 1`). -/
+noncomputable def cutWeight (h : Fin n → ℝ) (j : ℕ) : ℝ := extendNat h j - extendNat h (j + 1)
+
+/-- Cut point `j` of row `i`: the cumulative probability `cumProb P i (j + 1)`. -/
+noncomputable def cutPoint (P : Fin n → Fin n → ℝ) (i : Fin n) (j : ℕ) : ℝ :=
+  cumProb P i (j + 1)
+
+/-- Cut points of a stochastic matrix lie in `[0, 1]`. -/
+theorem cutPoint_mem_Icc {P : Fin n → Fin n → ℝ} (hP : IsStochastic P) (i : Fin n) (j : ℕ) :
+    cutPoint P i j ∈ Set.Icc (0 : ℝ) 1 :=
+  cumProb_mem_Icc hP i (j + 1)
+
+/-- `extendNat h k = h k` on states. -/
+theorem extendNat_fin (h : Fin n → ℝ) (k : Fin n) : extendNat h k = h k := by
+  unfold extendNat
+  simp [k.isLt]
+
+/-- Summation by parts over the states: if `B 0 = 0`, then
+`Σ_{j<n} h_j (B_{j+1} − B_j) = h_{n−1} B_n + Σ_{j<n−1} (h_j − h_{j+1}) B_{j+1}`. -/
+theorem sum_extendNat_mul_sub_eq (hn : 1 ≤ n) (h : Fin n → ℝ) (B : ℕ → ℝ) (hB : B 0 = 0) :
+    ∑ j ∈ range n, extendNat h j * (B (j + 1) - B j) =
+      extendNat h (n - 1) * B n + ∑ j ∈ range (n - 1), cutWeight h j * B (j + 1) := by
+  have e := sum_mul_sub_eq_abel (extendNat h) B hB (n - 1)
+  rw [Nat.sub_add_cancel hn] at e
+  rw [e, sub_eq_add_neg, ← sum_neg_distrib]
+  congr 1
+  refine sum_congr rfl fun j _ ↦ ?_
+  rw [cutWeight]
+  ring
+
+/-- **Abel summation for one departure.** For `u ≤ 1`,
+`h(step P i u) − (Ph)(i) = Σ_{j<n−1} (h_j − h_{j+1}) (1{u ≤ c_{ij}} − c_{ij})`. -/
+theorem step_sub_mulVec_eq_sum_cut {P : Fin n → Fin n → ℝ} (hP : IsStochastic P)
+    (h : Fin n → ℝ) (i : Fin n) {u : ℝ} (hu : u ≤ 1) :
+    h (step P i u) - (P *ᵥ h) i = ∑ j ∈ range (n - 1),
+      cutWeight h j * ((if u ≤ cutPoint P i j then 1 else 0) - cutPoint P i j) := by
+  have hn : 1 ≤ n := by have := i.isLt; omega
+  set B : ℕ → ℝ := fun m ↦ if (step P i u : ℕ) < m then 1 else 0 with hBdef
+  set C : ℕ → ℝ := fun m ↦ cumProb P i m with hCdef
+  have hB0 : B 0 = 0 := by simp [hBdef]
+  have hC0 : C 0 = 0 := cumProb_zero P i
+  have hBn : B n = 1 := by simp [hBdef, (step P i u).isLt]
+  have hCn : C n = 1 := by
+    change cumProb P i n = 1
+    rw [cumProb_of_le P i le_rfl, hP.sum_eq_one i]
+  -- the value as a telescoping sum
+  have h1 : h (step P i u) = ∑ j ∈ range n, extendNat h j * (B (j + 1) - B j) := by
+    rw [sum_eq_single (step P i u : ℕ)]
+    · simp only [hBdef, Nat.lt_succ_self, ite_true, lt_irrefl, ite_false, sub_zero, mul_one]
+      rw [extendNat_fin]
+    · intro j _ hj
+      have : B (j + 1) - B j = 0 := by
+        simp only [hBdef]
+        rcases lt_or_gt_of_ne hj with h' | h'
+        · have h2 : ¬ (step P i u : ℕ) < j + 1 := by omega
+          have h3 : ¬ (step P i u : ℕ) < j := by omega
+          simp [h2, h3]
+        · have h2 : (step P i u : ℕ) < j + 1 := by omega
+          have h3 : (step P i u : ℕ) < j := h'
+          simp [h2, h3]
+      rw [this, mul_zero]
+    · intro h'
+      exact absurd (mem_range.2 (step P i u).isLt) h'
+  have h2 : (P *ᵥ h) i = ∑ j ∈ range n, extendNat h j * (C (j + 1) - C j) := by
+    change ∑ k, P i k * h k = _
+    rw [← Fin.sum_univ_eq_sum_range (fun j ↦ extendNat h j * (C (j + 1) - C j)) n]
+    refine sum_congr rfl fun k _ ↦ ?_
+    simp only [hCdef]
+    rw [cumProb_succ, extendNat_fin]
+    ring
+  rw [h1, h2, sum_extendNat_mul_sub_eq hn h B hB0, sum_extendNat_mul_sub_eq hn h C hC0, hBn, hCn,
+    add_sub_add_left_eq_sub, ← sum_sub_distrib]
+  refine sum_congr rfl fun j _ ↦ ?_
+  have hstep := step_lt_iff hP i hu (m := j + 1) (by omega)
+  simp only [hBdef, hCdef, cutPoint]
+  by_cases hj : u ≤ cumProb P i (j + 1)
+  · have h' := hstep.2 hj
+    simp only [h', hj, ite_true]
+    ring
+  · have h' : ¬ (step P i u : ℕ) < j + 1 := fun h' ↦ hj (hstep.1 h')
+    simp only [h', hj, ite_false]
+    ring
+
+/-- **Abel summation for a stack**: the departure error of `N` points of a sequence `v ≤ 1` is
+`Σ_{j<n−1} (h_j − h_{j+1}) segErr(v, c_{ij}, 0, N)`. -/
+theorem sum_step_sub_eq_sum_segErr {P : Fin n → Fin n → ℝ} (hP : IsStochastic P)
+    (h : Fin n → ℝ) (i : Fin n) {v : ℕ → ℝ} (hv : ∀ k, v k ≤ 1) (N : ℕ) :
+    ∑ k ∈ range N, (h (step P i (v k)) - (P *ᵥ h) i) =
+      ∑ j ∈ range (n - 1), cutWeight h j * segErr v (cutPoint P i j) 0 N := by
+  rw [sum_congr rfl fun k _ ↦ step_sub_mulVec_eq_sum_cut hP h i (hv k), sum_comm]
+  refine sum_congr rfl fun j _ ↦ ?_
+  rw [segErr, mul_sum]
+  refine sum_congr rfl fun k _ ↦ ?_
+  rw [zero_add]
+
+/-- **Decomposition of the occupation error** (every flip table): if `h − Ph = 1_{s} − c`, then
+`N_s(T) − T c = h(x₀) − h(X_T) + Σ_i Σ_{j<n−1} (h_j − h_{j+1}) segErr(v_i, c_{ij}, 0, N_i(T))`. -/
+theorem occCount_sub_eq_boundary_add_cuts {P : Fin n → Fin n → ℝ} (hP : IsStochastic P)
+    (x₀ : Fin n) (f : Fin n → ℕ → ℕ → Bool) {h : Fin n → ℝ} {s : Fin n} {c : ℝ}
+    (hh : ∀ i, h i - (P *ᵥ h) i = (if i = s then 1 else 0) - c) (T : ℕ) :
+    (occCount (stackPath P x₀ (scrambledStack f)) s T : ℝ) - T * c =
+      h x₀ - h (stackPath P x₀ (scrambledStack f) T) + ∑ i, ∑ j ∈ range (n - 1),
+        cutWeight h j * segErr (scrambledVdc (f i)) (cutPoint P i j) 0
+          (occCount (stackPath P x₀ (scrambledStack f)) i T) := by
+  rw [occCount_sub_eq_boundary_add P hh (stackPath P x₀ (scrambledStack f)) T]
+  congr 1
+  refine sum_congr rfl fun i _ ↦ ?_
+  refine (departureDiscrepancy_stackDrive P h (step P) x₀ (scrambledStack f) i T).trans ?_
+  exact sum_step_sub_eq_sum_segErr hP h i (fun k ↦ (scrambledVdc_mem_Icc (f i) k).2) _
+
+/-! ### Poisson data for every target -/
+
+/-- **Poisson data for every target**: `H t − P H t = 1_{t} − π_t` for every state `t`. -/
+def IsPoissonFamily (P : Fin n → Fin n → ℝ) (H : Fin n → Fin n → ℝ) (pi : Fin n → ℝ) : Prop :=
+  ∀ t i, H t i - (P *ᵥ H t) i = (if i = t then 1 else 0) - pi t
+
+/-- For a stochastic row, `(P g)(i)` lies between the minimum and maximum of `g`. -/
+theorem mulVec_le_of_le {P : Fin n → Fin n → ℝ} (hP : IsStochastic P) {g : Fin n → ℝ} {a : ℝ}
+    (hg : ∀ k, g k ≤ a) (i : Fin n) : (P *ᵥ g) i ≤ a := by
+  change ∑ k, P i k * g k ≤ a
+  calc ∑ k, P i k * g k ≤ ∑ k, P i k * a :=
+        sum_le_sum fun k _ ↦ mul_le_mul_of_nonneg_left (hg k) (hP.nonneg i k)
+    _ = a := by rw [← sum_mul, hP.sum_eq_one i, one_mul]
+
+/-- For a stochastic row, `(P g)(i) ≥ a` when `g ≥ a`. -/
+theorem le_mulVec_of_le {P : Fin n → Fin n → ℝ} (hP : IsStochastic P) {g : Fin n → ℝ} {a : ℝ}
+    (hg : ∀ k, a ≤ g k) (i : Fin n) : a ≤ (P *ᵥ g) i := by
+  change a ≤ ∑ k, P i k * g k
+  calc a = ∑ k, P i k * a := by rw [← sum_mul, hP.sum_eq_one i, one_mul]
+    _ ≤ ∑ k, P i k * g k :=
+        sum_le_sum fun k _ ↦ mul_le_mul_of_nonneg_left (hg k) (hP.nonneg i k)
+
+/-- **Poisson data force `π_t ∈ [0, 1]`** (at a maximiser of `H t`, `H t − P H t ≥ 0`; at a
+minimiser, `≤ 0`). -/
+theorem IsPoissonFamily.mem_Icc {P : Fin n → Fin n → ℝ} {H : Fin n → Fin n → ℝ}
+    {pi : Fin n → ℝ} (hH : IsPoissonFamily P H pi) (hP : IsStochastic P) (t : Fin n) :
+    pi t ∈ Set.Icc (0 : ℝ) 1 := by
+  obtain ⟨i₀, -, hmax⟩ := exists_max_image univ (H t) ⟨t, mem_univ t⟩
+  obtain ⟨i₁, -, hmin⟩ := exists_min_image univ (H t) ⟨t, mem_univ t⟩
+  have h0 := mulVec_le_of_le hP (fun k ↦ hmax k (mem_univ k)) i₀
+  have h1 := le_mulVec_of_le hP (fun k ↦ hmin k (mem_univ k)) i₁
+  have e0 := hH t i₀
+  have e1 := hH t i₁
+  have hi0 : (if i₀ = t then (1 : ℝ) else 0) ≤ 1 := by split_ifs <;> norm_num
+  have hi1 : (0 : ℝ) ≤ if i₁ = t then (1 : ℝ) else 0 := by split_ifs <;> norm_num
+  constructor <;> linarith
+
+/-- A bound `Σ_t Σ_i |H t i|` for all the Poisson functions. -/
+noncomputable def poissonSup (H : Fin n → Fin n → ℝ) : ℝ := ∑ t, ∑ i, |H t i|
+
+/-- `|H t i| ≤ poissonSup H`. -/
+theorem abs_le_poissonSup (H : Fin n → Fin n → ℝ) (t i : Fin n) : |H t i| ≤ poissonSup H := by
+  have h1 : |H t i| ≤ ∑ i', |H t i'| :=
+    single_le_sum (f := fun i' ↦ |H t i'|) (fun _ _ ↦ abs_nonneg _) (mem_univ i)
+  have h2 : ∑ i', |H t i'| ≤ poissonSup H :=
+    single_le_sum (f := fun t' ↦ ∑ i', |H t' i'|) (fun _ _ ↦ sum_nonneg fun _ _ ↦ abs_nonneg _)
+      (mem_univ t)
+  exact h1.trans h2
+
+/-- `0 ≤ poissonSup H`. -/
+theorem poissonSup_nonneg (H : Fin n → Fin n → ℝ) : 0 ≤ poissonSup H :=
+  sum_nonneg fun _ _ ↦ sum_nonneg fun _ _ ↦ abs_nonneg _
+
+/-- The constant `A = ⌈2 M (1 + n²)⌉ + 2` of the occupation bound. -/
+noncomputable def anscConstN (H : Fin n → Fin n → ℝ) : ℕ :=
+  ⌈2 * poissonSup H * (1 + (n : ℝ) ^ 2)⌉₊ + 2
+
+/-- **Occupation of every state** (every flip table):
+`|N_i(T) − T π_i| ≤ A (⌊log₂ T⌋ + 1) − 1`. -/
+theorem abs_occCount_sub_pi_le {P : Fin n → Fin n → ℝ} (hP : IsStochastic P)
+    {H : Fin n → Fin n → ℝ} {pi : Fin n → ℝ} (hH : IsPoissonFamily P H pi) (x₀ : Fin n)
+    (f : Fin n → ℕ → ℕ → Bool) (i : Fin n) (T : ℕ) :
+    |(occCount (stackPath P x₀ (scrambledStack f)) i T : ℝ) - T * pi i| ≤
+      (anscConstN H : ℝ) * (Nat.log 2 T + 1) - 1 := by
+  set M := poissonSup H with hM
+  have hM0 : 0 ≤ M := poissonSup_nonneg H
+  have h1 := abs_occCount_scrambled_sub_le hP x₀ f (h := H i) (s := i) (c := pi i) (M := M)
+    (hH i) (fun k ↦ abs_le_poissonSup H i k) T
+  have hV : stateVariation (H i) ≤ 2 * (n - 1 : ℕ) * M :=
+    stateVariation_le fun k ↦ abs_le_poissonSup H i k
+  have hL : (0 : ℝ) ≤ Nat.log 2 T := Nat.cast_nonneg _
+  have hn1 : ((n - 1 : ℕ) : ℝ) ≤ n := by exact_mod_cast Nat.sub_le n 1
+  have hn0 : (0 : ℝ) ≤ n := Nat.cast_nonneg n
+  have hV' : (n : ℝ) * stateVariation (H i) ≤ 2 * (n : ℝ) ^ 2 * M := by
+    have := mul_le_mul_of_nonneg_left hV hn0
+    have h3 : (n : ℝ) * (2 * ((n - 1 : ℕ) : ℝ) * M) ≤ 2 * (n : ℝ) ^ 2 * M := by
+      have : (n : ℝ) * ((n - 1 : ℕ) : ℝ) ≤ (n : ℝ) ^ 2 := by nlinarith
+      nlinarith
+    linarith
+  have hA : 2 * M * (1 + (n : ℝ) ^ 2) + 2 ≤ (anscConstN H : ℝ) := by
+    rw [anscConstN]
+    push_cast
+    linarith [Nat.le_ceil (2 * M * (1 + (n : ℝ) ^ 2))]
+  have hVn := stateVariation_nonneg (H i)
+  calc |(occCount (stackPath P x₀ (scrambledStack f)) i T : ℝ) - T * pi i|
+      ≤ 2 * M + n * stateVariation (H i) * ((Nat.log 2 T : ℝ) + 1) := h1
+    _ ≤ 2 * M * (Nat.log 2 T + 1) + 2 * (n : ℝ) ^ 2 * M * (Nat.log 2 T + 1) := by
+        have : 2 * M ≤ 2 * M * (Nat.log 2 T + 1) := by nlinarith
+        have : n * stateVariation (H i) * ((Nat.log 2 T : ℝ) + 1) ≤
+            2 * (n : ℝ) ^ 2 * M * (Nat.log 2 T + 1) :=
+          mul_le_mul_of_nonneg_right hV' (by linarith)
+        linarith
+    _ ≤ (anscConstN H : ℝ) * (Nat.log 2 T + 1) - 1 := by nlinarith
+
+/-! ### The deterministic Anscombe theorem -/
+
+/-- The occupation error `N_s(T) − T π_s` of the chain driven by the scrambled stacks of `f`. -/
+noncomputable def occErrN (P : Fin n → Fin n → ℝ) (pi : Fin n → ℝ) (x₀ : Fin n)
+    (f : Fin n → ℕ → ℕ → Bool) (s : Fin n) (T : ℕ) : ℝ :=
+  occCount (stackPath P x₀ (scrambledStack f)) s T - T * pi s
+
+/-- The deterministic indices `n_i(T) = ⌊T π_i⌋`. -/
+noncomputable def chainIdxN (pi : Fin n → ℝ) (T : ℕ) (i : Fin n) : ℕ := ⌊T * pi i⌋₊
+
+/-- **The main term**: `Σ_i Σ_{j<n−1} (h_j − h_{j+1}) segErr(v_i, c_{ij}, 0, ⌊T π_i⌋)`, the
+departure discrepancies at the deterministic indices. -/
+noncomputable def mainTermN (P : Fin n → Fin n → ℝ) (h : Fin n → ℝ) (pi : Fin n → ℝ)
+    (f : Fin n → ℕ → ℕ → Bool) (T : ℕ) : ℝ :=
+  ∑ i, ∑ j ∈ range (n - 1), cutWeight h j * segErr (scrambledVdc (f i)) (cutPoint P i j) 0
+    (chainIdxN pi T i)
+
+/-- The total absolute weight `Σ_{j<n−1} |h_j − h_{j+1}|`. -/
+noncomputable def cutWeightSum (h : Fin n → ℝ) : ℝ := ∑ j ∈ range (n - 1), |cutWeight h j|
+
+/-- `0 ≤ cutWeightSum h`. -/
+theorem cutWeightSum_nonneg (h : Fin n → ℝ) : 0 ≤ cutWeightSum h :=
+  sum_nonneg fun _ _ ↦ abs_nonneg _
+
+/-- The Anscombe bound `2M + n W (2⌊log₂ (A (⌊log₂ T⌋ + 1))⌋ + 3)`. -/
+noncomputable def ansBoundN (H : Fin n → Fin n → ℝ) (s : Fin n) (T : ℕ) : ℝ :=
+  2 * poissonSup H + n * cutWeightSum (H s) *
+    (2 * (Nat.log 2 (anscConstN H * (Nat.log 2 T + 1)) : ℝ) + 3)
+
+/-- `n_i(T) ≤ T` (as `π_i ≤ 1`). -/
+theorem chainIdxN_le {P : Fin n → Fin n → ℝ} (hP : IsStochastic P) {H : Fin n → Fin n → ℝ}
+    {pi : Fin n → ℝ} (hH : IsPoissonFamily P H pi) (T : ℕ) (i : Fin n) : chainIdxN pi T i ≤ T := by
+  have h1 := (hH.mem_Icc hP i).2
+  have h0 := (hH.mem_Icc hP i).1
+  unfold chainIdxN
+  refine Nat.floor_le_of_le ?_
+  nlinarith [(Nat.cast_nonneg T : (0 : ℝ) ≤ T)]
+
+/-- `n_i(T) < 2^{⌊log₂ T⌋ + 1}`. -/
+theorem chainIdxN_lt_two_pow {P : Fin n → Fin n → ℝ} (hP : IsStochastic P)
+    {H : Fin n → Fin n → ℝ} {pi : Fin n → ℝ} (hH : IsPoissonFamily P H pi) (T : ℕ) (i : Fin n) :
+    chainIdxN pi T i < 2 ^ (Nat.log 2 T + 1) :=
+  lt_of_le_of_lt (chainIdxN_le hP hH T i) (Nat.lt_pow_succ_log_self one_lt_two T)
+
+/-- **Deterministic Anscombe theorem for n-state stack chains** (every flip table):
+`|E_T − mainTermN(T)| ≤ ansBoundN = 2M + n W (2⌊log₂ (A (⌊log₂ T⌋ + 1))⌋ + 3)`. -/
+theorem abs_occErrN_sub_mainTermN_le {P : Fin n → Fin n → ℝ} (hP : IsStochastic P)
+    {H : Fin n → Fin n → ℝ} {pi : Fin n → ℝ} (hH : IsPoissonFamily P H pi) (x₀ : Fin n)
+    (f : Fin n → ℕ → ℕ → Bool) (s : Fin n) (T : ℕ) :
+    |occErrN P pi x₀ f s T - mainTermN P (H s) pi f T| ≤ ansBoundN H s T := by
+  have hid := occCount_sub_eq_boundary_add_cuts hP x₀ f (hH s) T
+  set path := stackPath P x₀ (scrambledStack f) with hpath
+  set L := (Nat.log 2 (anscConstN H * (Nat.log 2 T + 1)) : ℝ) with hL
+  have hseg : ∀ i, ∀ j ∈ range (n - 1),
+      |cutWeight (H s) j * segErr (scrambledVdc (f i)) (cutPoint P i j) 0 (occCount path i T) -
+        cutWeight (H s) j * segErr (scrambledVdc (f i)) (cutPoint P i j) 0 (chainIdxN pi T i)| ≤
+        |cutWeight (H s) j| * (2 * L + 3) := by
+    intro i j _
+    rw [← mul_sub, abs_mul]
+    refine mul_le_mul_of_nonneg_left ?_ (abs_nonneg _)
+    have hc := cutPoint_mem_Icc hP i j
+    refine (abs_segErr_sub_segErr_le (f i) hc.1 hc.2 _ _).trans ?_
+    have hpi := hH.mem_Icc hP i
+    have hfl : |T * pi i - (chainIdxN pi T i : ℝ)| < 1 := by
+      have hy : 0 ≤ (T : ℝ) * pi i := mul_nonneg (Nat.cast_nonneg T) hpi.1
+      rw [chainIdxN, abs_of_nonneg (sub_nonneg.2 (Nat.floor_le hy))]
+      linarith [Nat.lt_floor_add_one ((T : ℝ) * pi i)]
+    have hd := natLog_dist_le (abs_occCount_sub_pi_le hP hH x₀ f i T) hfl
+    rw [← hpath] at hd
+    have hd' : (Nat.log 2 (occCount path i T - chainIdxN pi T i +
+        (chainIdxN pi T i - occCount path i T)) : ℝ) ≤ L := by
+      rw [hL]
+      exact_mod_cast hd
+    linarith
+  have hsum : |∑ i, ∑ j ∈ range (n - 1),
+      (cutWeight (H s) j * segErr (scrambledVdc (f i)) (cutPoint P i j) 0 (occCount path i T) -
+        cutWeight (H s) j * segErr (scrambledVdc (f i)) (cutPoint P i j) 0 (chainIdxN pi T i))| ≤
+      n * cutWeightSum (H s) * (2 * L + 3) := by
+    refine (abs_sum_le_sum_abs _ _).trans ?_
+    calc ∑ i, |∑ j ∈ range (n - 1),
+          (cutWeight (H s) j * segErr (scrambledVdc (f i)) (cutPoint P i j) 0 (occCount path i T) -
+          cutWeight (H s) j * segErr (scrambledVdc (f i)) (cutPoint P i j) 0 (chainIdxN pi T i))|
+        ≤ ∑ _i : Fin n, cutWeightSum (H s) * (2 * L + 3) := by
+          refine sum_le_sum fun i _ ↦ (abs_sum_le_sum_abs _ _).trans ?_
+          rw [cutWeightSum, sum_mul]
+          exact sum_le_sum (hseg i)
+      _ = n * cutWeightSum (H s) * (2 * L + 3) := by
+          rw [sum_const, card_univ, Fintype.card_fin, nsmul_eq_mul]
+          ring
+  have hb : |H s x₀ - H s (path T)| ≤ 2 * poissonSup H := by
+    have := abs_sub (H s x₀) (H s (path T))
+    linarith [abs_le_poissonSup H s x₀, abs_le_poissonSup H s (path T)]
+  have e : occErrN P pi x₀ f s T - mainTermN P (H s) pi f T =
+      (H s x₀ - H s (path T)) + ∑ i, ∑ j ∈ range (n - 1),
+      (cutWeight (H s) j * segErr (scrambledVdc (f i)) (cutPoint P i j) 0 (occCount path i T) -
+        cutWeight (H s) j * segErr (scrambledVdc (f i)) (cutPoint P i j) 0 (chainIdxN pi T i)) := by
+    rw [occErrN, hid, mainTermN]
+    simp only [sum_sub_distrib]
+    ring
+  rw [e, ansBoundN]
+  exact (abs_add_le _ _).trans (add_le_add hb hsum)
+
+/-- `⌊log₂ (A x)⌋ ≤ ⌊log₂ A⌋ + ⌊log₂ x⌋ + 1`. -/
+theorem natLog_mul_le (A x : ℕ) : Nat.log 2 (A * x) ≤ Nat.log 2 A + Nat.log 2 x + 1 := by
+  rcases Nat.eq_zero_or_pos A with rfl | hA
+  · simp
+  rcases Nat.eq_zero_or_pos x with rfl | hx
+  · simp
+  refine Nat.lt_succ_iff.1 (Nat.log_lt_of_lt_pow (by positivity) ?_)
+  have h1 := Nat.lt_pow_succ_log_self one_lt_two A
+  have h2 := Nat.lt_pow_succ_log_self one_lt_two x
+  rw [Nat.succ_eq_add_one] at h1 h2 ⊢
+  rw [show Nat.log 2 A + Nat.log 2 x + 1 + 1 = (Nat.log 2 A + 1) + (Nat.log 2 x + 1) by ring,
+    pow_add]
+  exact Nat.mul_lt_mul'' h1 h2
+
+/-- The constant `C` of `ansBoundN ≤ C (⌊log₂(⌊log₂ T⌋ + 1)⌋ + 1)`. -/
+noncomputable def ansConstN (H : Fin n → Fin n → ℝ) (s : Fin n) : ℝ :=
+  2 * poissonSup H + n * cutWeightSum (H s) * (2 * Nat.log 2 (anscConstN H) + 5)
+
+/-- `0 ≤ ansBoundN`. -/
+theorem ansBoundN_nonneg (H : Fin n → Fin n → ℝ) (s : Fin n) (T : ℕ) : 0 ≤ ansBoundN H s T := by
+  have := poissonSup_nonneg H
+  have := cutWeightSum_nonneg (H s)
+  rw [ansBoundN]
+  positivity
+
+/-- `0 ≤ ansConstN`. -/
+theorem ansConstN_nonneg (H : Fin n → Fin n → ℝ) (s : Fin n) : 0 ≤ ansConstN H s := by
+  have := poissonSup_nonneg H
+  have := cutWeightSum_nonneg (H s)
+  rw [ansConstN]
+  positivity
+
+/-- **The Anscombe bound is `O(log log T)`.** -/
+theorem ansBoundN_le_log (H : Fin n → Fin n → ℝ) (s : Fin n) (T : ℕ) :
+    ansBoundN H s T ≤ ansConstN H s * ((Nat.log 2 (Nat.log 2 T + 1) : ℝ) + 1) := by
+  have hmul : (Nat.log 2 (anscConstN H * (Nat.log 2 T + 1)) : ℝ) ≤
+      Nat.log 2 (anscConstN H) + Nat.log 2 (Nat.log 2 T + 1) + 1 := by
+    exact_mod_cast natLog_mul_le _ _
+  have hM := poissonSup_nonneg H
+  have hW := cutWeightSum_nonneg (H s)
+  have hnW : 0 ≤ (n : ℝ) * cutWeightSum (H s) := mul_nonneg (Nat.cast_nonneg n) hW
+  have h0 := (Nat.log 2 (anscConstN H)).cast_nonneg (α := ℝ)
+  have h1 := (Nat.log 2 (Nat.log 2 T + 1)).cast_nonneg (α := ℝ)
+  rw [ansBoundN, ansConstN]
+  have k1 : (n : ℝ) * cutWeightSum (H s) *
+      (2 * (Nat.log 2 (anscConstN H * (Nat.log 2 T + 1)) : ℝ) + 3) ≤
+      (n : ℝ) * cutWeightSum (H s) *
+        (2 * (Nat.log 2 (anscConstN H) : ℝ) + 2 * Nat.log 2 (Nat.log 2 T + 1) + 5) :=
+    mul_le_mul_of_nonneg_left (by linarith) hnW
+  have k2 : (n : ℝ) * cutWeightSum (H s) *
+      (2 * (Nat.log 2 (anscConstN H) : ℝ) + 2 * Nat.log 2 (Nat.log 2 T + 1) + 5) ≤
+      (n : ℝ) * cutWeightSum (H s) * ((2 * (Nat.log 2 (anscConstN H) : ℝ) + 5) *
+        ((Nat.log 2 (Nat.log 2 T + 1) : ℝ) + 1)) :=
+    mul_le_mul_of_nonneg_left (by nlinarith) hnW
+  nlinarith
+
+/-- **`O(log log T)` is `o(√log T)`.** If `0 ≤ b k ≤ C (⌊log₂(⌊log₂ T_k⌋ + 1)⌋ + 1)` and
+`T_k → ∞`, then `b_k² / log₂ T_k → 0`. -/
+theorem tendsto_sq_div_natLog_of_le {T : ℕ → ℕ} (hT : Tendsto T atTop atTop) {b : ℕ → ℝ}
+    {C : ℝ} (hb0 : ∀ k, 0 ≤ b k)
+    (hb : ∀ k, b k ≤ C * ((Nat.log 2 (Nat.log 2 (T k) + 1) : ℝ) + 1)) :
+    Tendsto (fun k ↦ b k ^ 2 / Nat.log 2 (T k)) atTop (𝓝 0) := by
+  have hlogT : Tendsto (fun k ↦ Nat.log 2 (T k)) atTop atTop :=
+    (tendsto_atTop_atTop.2 fun b ↦ ⟨2 ^ b, fun t ht ↦ Nat.le_log_of_pow_le one_lt_two ht⟩).comp hT
+  have hx : Tendsto (fun k ↦ Nat.log 2 (T k) + 1) atTop atTop :=
+    tendsto_atTop_mono (fun k ↦ Nat.le_succ _) hlogT
+  have hlim := (tendsto_natLog_pow_six_div.comp hx).const_mul (2 * C ^ 2)
+  rw [mul_zero] at hlim
+  refine squeeze_zero' (Eventually.of_forall fun k ↦ by have := hb0 k; positivity) ?_ hlim
+  have hev : ∀ᶠ k in atTop, 2 ≤ Nat.log 2 (T k) + 1 := hx.eventually_ge_atTop 2
+  filter_upwards [hev] with k hk
+  set y := (Nat.log 2 (Nat.log 2 (T k) + 1) : ℝ) + 1 with hy
+  have hy1 : 1 ≤ y := by rw [hy]; linarith [(Nat.log 2 (Nat.log 2 (T k) + 1)).cast_nonneg (α := ℝ)]
+  have hlog : (1 : ℝ) ≤ Nat.log 2 (T k) := by exact_mod_cast (show 1 ≤ Nat.log 2 (T k) by omega)
+  have hy6 : y ^ 2 ≤ y ^ 6 := pow_le_pow_right₀ hy1 (by norm_num)
+  have hb2 : b k ^ 2 ≤ C ^ 2 * y ^ 6 := by
+    have := pow_le_pow_left₀ (hb0 k) (hb k) 2
+    rw [mul_pow] at this
+    nlinarith
+  simp only [Function.comp_apply]
+  rw [div_le_iff₀ (by linarith), ← hy]
+  have hpos : (0 : ℝ) < ((Nat.log 2 (T k) + 1 : ℕ) : ℝ) := by positivity
+  calc b k ^ 2 ≤ C ^ 2 * y ^ 6 := hb2
+    _ = 2 * C ^ 2 * (y ^ 6 / ((Nat.log 2 (T k) + 1 : ℕ) : ℝ)) *
+        (((Nat.log 2 (T k) + 1 : ℕ) : ℝ) / 2) := by field_simp
+    _ ≤ 2 * C ^ 2 * (y ^ 6 / ((Nat.log 2 (T k) + 1 : ℕ) : ℝ)) * Nat.log 2 (T k) := by
+        gcongr
+        push_cast
+        linarith
+
+/-! ### The level decomposition -/
+
+/-- The level-`m` term of the local discrepancy at a cut point `c` (zero if `c ≥ 1`, where the
+local discrepancy vanishes). -/
+noncomputable def cutTerm (c : ℝ) (N m : ℕ) (e : ℕ → Bool) : ℝ :=
+  if c < 1 then coinTerm c N m e else 0
+
+/-- The level-`m` term truncated at depth `L`. -/
+noncomputable def cutTermTrunc (c : ℝ) (N m L : ℕ) (e : ℕ → Bool) : ℝ :=
+  if c < 1 then coinTermTrunc c N m L e else 0
+
+/-- At the cut point `1` the local discrepancy of points in `[0,1]` vanishes. -/
+theorem segErr_scrambledVdc_one (g : ℕ → ℕ → Bool) (N : ℕ) :
+    segErr (scrambledVdc g) 1 0 N = 0 := by
+  rw [segErr]
+  refine sum_eq_zero fun k _ ↦ ?_
+  simp only [(scrambledVdc_mem_Icc g _).2, ite_true, sub_self]
+
+/-- **Level decomposition at a cut point in `[0,1]`** (every flip table): for `N < 2^K`,
+`segErr(v, c, 0, N) = Σ_{m<K} cutTerm c N m e` with `e` the path coins of `c`. -/
+theorem segErr_scrambledVdc_eq_sum_cutTerm (g : ℕ → ℕ → Bool) {c : ℝ} (hc0 : 0 ≤ c)
+    (hc1 : c ≤ 1) {N K : ℕ} (hN : N < 2 ^ K) :
+    segErr (scrambledVdc g) c 0 N =
+      ∑ m ∈ range K, cutTerm c N m (pathCoin g (threshDigit c)) := by
+  rcases hc1.lt_or_eq with hlt | heq
+  · rw [segErr_scrambledVdc_eq_sum_level g hc0 hlt hN, sum_filter]
+    refine sum_congr rfl fun m _ ↦ ?_
+    simp only [cutTerm, hlt, ite_true, coinTerm]
+  · subst heq
+    rw [segErr_scrambledVdc_one]
+    refine (sum_eq_zero fun m _ ↦ ?_).symm
+    simp only [cutTerm, lt_irrefl, ite_false]
+
+/-- The **row term** of level `m`: `Σ_{j<n−1} w_j · cutTerm (c_{ij}) (N_i) m (e_{ij})`, for cut
+points `cp`, weights `w`, indices `N` and coin sequences `e i j`. -/
+noncomputable def rowTerm (w : ℕ → ℝ) (cp : Fin n → ℕ → ℝ) (N : Fin n → ℕ) (m : ℕ)
+    (e : Fin n → ℕ → ℕ → Bool) (i : Fin n) : ℝ :=
+  ∑ j ∈ range (n - 1), w j * cutTerm (cp i j) (N i) m (e i j)
+
+/-- The row term truncated at depth `L`. -/
+noncomputable def rowTermTrunc (w : ℕ → ℝ) (cp : Fin n → ℕ → ℝ) (N : Fin n → ℕ) (m L : ℕ)
+    (e : Fin n → ℕ → ℕ → Bool) (i : Fin n) : ℝ :=
+  ∑ j ∈ range (n - 1), w j * cutTermTrunc (cp i j) (N i) m L (e i j)
+
+/-- The **level sum** `Σ_{m<K} Σ_i rowTerm … m … i`. -/
+noncomputable def levelSumN (w : ℕ → ℝ) (cp : Fin n → ℕ → ℝ) (N : Fin n → ℕ) (K : ℕ)
+    (e : Fin n → ℕ → ℕ → Bool) : ℝ :=
+  ∑ m ∈ range K, ∑ i, rowTerm w cp N m e i
+
+/-- **Level decomposition of the main term** (every flip table): for `n_i(T) < 2^K`,
+`mainTermN = levelSumN` with the path coins of the cut points of every row. -/
+theorem mainTermN_eq_levelSumN {P : Fin n → Fin n → ℝ} (hP : IsStochastic P) (h : Fin n → ℝ)
+    (pi : Fin n → ℝ) (f : Fin n → ℕ → ℕ → Bool) (T : ℕ) {K : ℕ}
+    (hK : ∀ i, chainIdxN pi T i < 2 ^ K) :
+    mainTermN P h pi f T = levelSumN (cutWeight h) (cutPoint P) (chainIdxN pi T) K
+      (fun i j ↦ pathCoin (f i) (threshDigit (cutPoint P i j))) := by
+  rw [mainTermN, levelSumN]
+  conv_rhs => rw [sum_comm]
+  refine sum_congr rfl fun i _ ↦ ?_
+  simp only [rowTerm]
+  conv_rhs => rw [sum_comm]
+  refine sum_congr rfl fun j _ ↦ ?_
+  have hc := cutPoint_mem_Icc hP i j
+  rw [segErr_scrambledVdc_eq_sum_cutTerm (f i) hc.1 hc.2 (hK i), mul_sum]
+
+end RQMCMarkov.ScrambledStacks
+
+/-
+Copyright (c) 2026 Robert Kirkby. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Robert Kirkby
+-/
+
+/-!
+# Level sums of fair coins: moments and the CLT (for post #3, n states)
+
+The main term of an n-state scrambled-stack chain is a level sum `levelSumN` (`CltNDecomp`):
+over levels `m`, rows `i` and cut points `j`, bounded level terms of coin sequences
+`e i j = (ω (γ i j d))_d`. This module works on an arbitrary product of fair coins
+`coinMeasure ι = ⊗_{q : ι} fairCoin`, with a **coin layout** `γ : Fin n → ℕ → ℕ → ι` whose
+coordinate `γ i j d` has level `lev (γ i j d) = d`. Different cut points may share coordinates
+(for the digital shift all cut points of a row share them, `CltNShift`; for Owen's scramble two
+cut points share the nodes of their common binary prefix, `CltNOwen`): no independence between
+cut points is assumed. The two randomisations are then treated by two instantiations.
+
+## Main results
+
+* `coinMeasure`, `coinsOf`, `absWeightSum`.
+* One cut point (any injective `g : ℕ → ι`): `measureReal_levelInd_coins` (`{2^m c}`),
+  `integral_cutTerm_coins` (`0`), `measureReal_levelTie_coins` (`2^{-L}`),
+  `integral_abs_cutTerm_sub_trunc_le`, `isLocal_cutTermTrunc_coins`.
+* Rows: `abs_rowTerm_le`, `integral_rowTerm_coins`, `integral_abs_rowTerm_sub_trunc_le`,
+  `isLocal_rowTermTrunc_coins`; levels: `levelYN`, `abs_levelYN_le`, `integral_levelSumN_coins`.
+* `tendstoInDistribution_levelSumN` (**CLT for level sums**): if `K_k → ∞` and
+  `Var(levelSumN) ≥ κ K_k` eventually, the normalised level sums are asymptotically `N(0,1)`
+  (`tendstoInDistribution_of_truncations`, with `B = nW`, `C = (nW)²`).
+* `tendstoInDistribution_of_close_main` (**Slutsky assembly**): an error within `b_k` of a
+  centred main term, `b_k² = o(log T_k)`, `Var ≥ κ log T_k`, inherits the main term's CLT.
+-/
+
+namespace RQMCMarkov.ScrambledStacks
+
+open MeasureTheory ProbabilityTheory Filter Finset
+open scoped ENNReal NNReal Topology
+
+variable {ι : Type*} {n : ℕ}
+
+/-- The product of fair coins on the coordinates `ι`. -/
+noncomputable abbrev coinMeasure (ι : Type*) : Measure (ι → Bool) :=
+  Measure.infinitePi fun _ : ι ↦ fairCoin
+
+/-- The coin sequences `e i j = (ω (γ i j d))_d` of a coin layout `γ`. -/
+def coinsOf (γ : Fin n → ℕ → ℕ → ι) (ω : ι → Bool) : Fin n → ℕ → ℕ → Bool :=
+  fun i j d ↦ ω (γ i j d)
+
+/-- The total absolute weight `Σ_{j<n−1} |w_j|`. -/
+noncomputable def absWeightSum (n : ℕ) (w : ℕ → ℝ) : ℝ := ∑ j ∈ range (n - 1), |w j|
+
+/-- `0 ≤ absWeightSum n w`. -/
+theorem absWeightSum_nonneg (n : ℕ) (w : ℕ → ℝ) : 0 ≤ absWeightSum n w :=
+  sum_nonneg fun _ _ ↦ abs_nonneg _
+
+/-! ### One cut point -/
+
+/-- The level indicator of a coin sequence as a binary comparison. -/
+theorem measurableSet_levelInd_coins {c : ℝ} (hc0 : 0 ≤ c) (hc1 : c < 1) (N m : ℕ)
+    (g : ℕ → ι) :
+    MeasurableSet {ω : ι → Bool | LevelInd (threshDigit c) N m (fun d ↦ ω (g d))} := by
+  have e : {ω : ι → Bool | LevelInd (threshDigit c) N m (fun d ↦ ω (g d))} =
+      (fun ω : ι → Bool ↦ binaryVal fun j ↦
+        xor ((levelBase N m).testBit (j + m)) (ω ((fun j ↦ g (j + m)) j))) ⁻¹'
+          Set.Iic (fracPow c m) := by
+    ext ω
+    exact levelInd_iff_binaryVal_le hc0 hc1 N m _
+  rw [e]
+  exact (measurable_binaryVal.comp (measurable_xor_digits _ _)) measurableSet_Iic
+
+/-- `P(LevelInd) = {2^m c}` for an injective coin sequence. -/
+theorem measureReal_levelInd_coins {c : ℝ} (hc0 : 0 ≤ c) (hc1 : c < 1) (N m : ℕ) {g : ℕ → ι}
+    (hg : Function.Injective g) :
+    (coinMeasure ι).real {ω | LevelInd (threshDigit c) N m (fun d ↦ ω (g d))} = fracPow c m := by
+  have hg' : Function.Injective fun j : ℕ ↦ g (j + m) :=
+    fun j j' h ↦ by simpa using hg h
+  have hmap := map_binaryVal_xor_eq_uniformIco hg' fun j ↦ (levelBase N m).testBit (j + m)
+  have e : {ω : ι → Bool | LevelInd (threshDigit c) N m (fun d ↦ ω (g d))} =
+      (fun ω : ι → Bool ↦ binaryVal fun j ↦
+        xor ((levelBase N m).testBit (j + m)) (ω (g (j + m)))) ⁻¹' Set.Iic (fracPow c m) := by
+    ext ω
+    exact levelInd_iff_binaryVal_le hc0 hc1 N m _
+  have hXm : Measurable (fun ω : ι → Bool ↦ binaryVal fun j ↦
+      xor ((levelBase N m).testBit (j + m)) (ω (g (j + m)))) :=
+    measurable_binaryVal.comp (measurable_xor_digits (fun j ↦ g (j + m)) _)
+  have hf := fracPow_mem_Ico hc0 m
+  rw [e, measureReal_def, ← Measure.map_apply hXm measurableSet_Iic, hmap,
+    Measure.restrict_apply measurableSet_Iic]
+  have hI : Set.Iic (fracPow c m) ∩ Set.Ico 0 1 = Set.Icc 0 (fracPow c m) := by
+    ext x
+    simp only [Set.mem_inter_iff, Set.mem_Iic, Set.mem_Ico, Set.mem_Icc]
+    constructor
+    · rintro ⟨h1, h2, _⟩
+      exact ⟨h2, h1⟩
+    · rintro ⟨h1, h2⟩
+      exact ⟨h2, h1, lt_of_le_of_lt h2 hf.2⟩
+  rw [hI, Real.volume_Icc, sub_zero, ENNReal.toReal_ofReal hf.1]
+
+/-- The level indicator of a coin sequence is measurable. -/
+theorem measurable_levelVal_coins {c : ℝ} (hc0 : 0 ≤ c) (hc1 : c < 1) (N m : ℕ) (g : ℕ → ι) :
+    Measurable fun ω : ι → Bool ↦ levelVal (threshDigit c) N m (fun d ↦ ω (g d)) := by
+  classical
+  unfold levelVal
+  exact Measurable.ite (measurableSet_levelInd_coins hc0 hc1 N m g) measurable_const
+    measurable_const
+
+/-- The level indicator has mean `{2^m c}`. -/
+theorem integral_levelVal_coins {c : ℝ} (hc0 : 0 ≤ c) (hc1 : c < 1) (N m : ℕ) {g : ℕ → ι}
+    (hg : Function.Injective g) :
+    ∫ ω, levelVal (threshDigit c) N m (fun d ↦ ω (g d)) ∂(coinMeasure ι) = fracPow c m := by
+  classical
+  have e : (fun ω : ι → Bool ↦ levelVal (threshDigit c) N m (fun d ↦ ω (g d))) =
+      Set.indicator {ω | LevelInd (threshDigit c) N m (fun d ↦ ω (g d))} 1 := by
+    funext ω
+    unfold levelVal
+    by_cases h : LevelInd (threshDigit c) N m (fun d ↦ ω (g d))
+    · simp only [h, ite_true, Set.indicator_of_mem (show ω ∈ {ω : ι → Bool |
+        LevelInd (threshDigit c) N m (fun d ↦ ω (g d))} from h), Pi.one_apply]
+    · simp only [h, ite_false, Set.indicator_of_notMem (show ω ∉ {ω : ι → Bool |
+        LevelInd (threshDigit c) N m (fun d ↦ ω (g d))} from h)]
+  rw [e, integral_indicator_one (measurableSet_levelInd_coins hc0 hc1 N m g),
+    measureReal_levelInd_coins hc0 hc1 N m hg]
+
+/-- The level term of a coin sequence is measurable. -/
+theorem measurable_cutTerm_coins {c : ℝ} (hc0 : 0 ≤ c) (N m : ℕ) (g : ℕ → ι) :
+    Measurable fun ω : ι → Bool ↦ cutTerm c N m (fun d ↦ ω (g d)) := by
+  unfold cutTerm
+  by_cases hc1 : c < 1
+  · simp only [hc1, ite_true]
+    unfold coinTerm levelTerm
+    by_cases hb : N.testBit m = true
+    · simp only [hb, ite_true]
+      exact (measurable_levelVal_coins hc0 hc1 N m g).sub measurable_const
+    · simp only [hb, Bool.false_eq_true, ite_false]
+      exact measurable_const
+  · simp only [hc1, ite_false]
+    exact measurable_const
+
+/-- `|cutTerm| ≤ 1`. -/
+theorem abs_cutTerm_le {c : ℝ} (hc0 : 0 ≤ c) (N m : ℕ) (e : ℕ → Bool) :
+    |cutTerm c N m e| ≤ 1 := by
+  unfold cutTerm
+  split_ifs
+  · exact abs_coinTerm_le hc0 N m e
+  · simp
+
+/-- `|cutTermTrunc| ≤ 1`. -/
+theorem abs_cutTermTrunc_le {c : ℝ} (hc0 : 0 ≤ c) (N m L : ℕ) (e : ℕ → Bool) :
+    |cutTermTrunc c N m L e| ≤ 1 := by
+  unfold cutTermTrunc
+  split_ifs
+  · exact abs_coinTermTrunc_le hc0 N m L e
+  · simp
+
+open Classical in
+/-- The truncation error of a level term is at most the tie indicator. -/
+theorem abs_cutTerm_sub_trunc_le (c : ℝ) (N m L : ℕ) (e : ℕ → Bool) :
+    |cutTerm c N m e - cutTermTrunc c N m L e| ≤
+      (if LevelTie (threshDigit c) N m L e then 1 else 0) := by
+  unfold cutTerm cutTermTrunc
+  by_cases hc : c < 1
+  · simp only [hc, ite_true]
+    exact abs_coinTerm_sub_trunc_le c N m L e
+  · simp only [hc, ite_false, sub_self, abs_zero]
+    split_ifs <;> norm_num
+
+/-- The tie event of a coin sequence as a cylinder. -/
+theorem setOf_levelTie_coins_eq (cb : ℕ → Bool) (N m L : ℕ) (g : ℕ → ι) :
+    {ω : ι → Bool | LevelTie cb N m L (fun d ↦ ω (g d))} =
+      {ω | ∀ j < L, xor ((levelBase N m).testBit (m + j)) (ω ((fun j ↦ g (m + j)) j)) =
+        cb (m + j)} := by
+  ext ω
+  simp only [Set.mem_ofPred_eq, LevelTie, levelDigits]
+  constructor
+  · intro h j hj
+    exact h (m + j) (by omega) (by omega)
+  · intro h j hm hj
+    have := h (j - m) (by omega)
+    rwa [show m + (j - m) = j by omega] at this
+
+/-- The tie event is measurable. -/
+theorem measurableSet_levelTie_coins (cb : ℕ → Bool) (N m L : ℕ) (g : ℕ → ι) :
+    MeasurableSet {ω : ι → Bool | LevelTie cb N m L (fun d ↦ ω (g d))} := by
+  rw [setOf_levelTie_coins_eq]
+  exact measurableSet_xor_cylinder _ _ _ L
+
+/-- **The tie cascade survives `L` levels with probability `2^{-L}`.** -/
+theorem measureReal_levelTie_coins (cb : ℕ → Bool) (N m L : ℕ) {g : ℕ → ι}
+    (hg : Function.Injective g) :
+    (coinMeasure ι).real {ω | LevelTie cb N m L (fun d ↦ ω (g d))} = (1 / 2) ^ L := by
+  have hg' : Function.Injective fun j : ℕ ↦ g (m + j) :=
+    fun j j' h ↦ by simpa using hg h
+  rw [setOf_levelTie_coins_eq, measureReal_def, infinitePi_xor_cylinder hg', ENNReal.toReal_pow,
+    ENNReal.toReal_inv, ENNReal.toReal_ofNat, one_div]
+
+/-- The truncated level term depends only on the coins of depths `[m, m + L)`. -/
+theorem isLocal_cutTermTrunc_coins [DecidableEq ι] (c : ℝ) (N m L : ℕ) (g : ℕ → ι) :
+    IsLocal (fun ω : ι → Bool ↦ cutTermTrunc c N m L (fun d ↦ ω (g d)))
+      ((Finset.Ico m (m + L)).image g) := by
+  intro ω ω' h
+  change cutTermTrunc c N m L (fun d ↦ ω (g d)) = cutTermTrunc c N m L (fun d ↦ ω' (g d))
+  unfold cutTermTrunc coinTermTrunc
+  rw [levelValTrunc_congr (threshDigit c) N m L (e := fun d ↦ ω (g d)) (e' := fun d ↦ ω' (g d))
+    fun j hm hj ↦ h (g j) (mem_image_of_mem g (Finset.mem_Ico.2 ⟨hm, hj⟩))]
+
+/-- The truncated level term is measurable. -/
+theorem measurable_cutTermTrunc_coins (c : ℝ) (N m L : ℕ) (g : ℕ → ι) :
+    Measurable fun ω : ι → Bool ↦ cutTermTrunc c N m L (fun d ↦ ω (g d)) := by
+  classical
+  exact (isLocal_cutTermTrunc_coins c N m L g).measurable
+
+/-- **Truncation error in `L¹`**: `E|Y − Y_L| ≤ 2^{-L}`. -/
+theorem integral_abs_cutTerm_sub_trunc_le {c : ℝ} (hc0 : 0 ≤ c) (N m L : ℕ) {g : ℕ → ι}
+    (hg : Function.Injective g) :
+    ∫ ω, |cutTerm c N m (fun d ↦ ω (g d)) - cutTermTrunc c N m L (fun d ↦ ω (g d))|
+      ∂(coinMeasure ι) ≤ (1 / 2) ^ L := by
+  classical
+  set S := {ω : ι → Bool | LevelTie (threshDigit c) N m L (fun d ↦ ω (g d))} with hS
+  have hSm : MeasurableSet S := measurableSet_levelTie_coins _ N m L g
+  have hpt : ∀ ω, |cutTerm c N m (fun d ↦ ω (g d)) - cutTermTrunc c N m L (fun d ↦ ω (g d))| ≤
+      S.indicator 1 ω := by
+    intro ω
+    refine (abs_cutTerm_sub_trunc_le c N m L _).trans (le_of_eq ?_)
+    by_cases ht : LevelTie (threshDigit c) N m L (fun d ↦ ω (g d))
+    · simp only [ht, ite_true, Set.indicator_of_mem (show ω ∈ S from ht), Pi.one_apply]
+    · simp only [ht, ite_false, Set.indicator_of_notMem (show ω ∉ S from ht)]
+  have hm : Measurable fun ω : ι → Bool ↦
+      |cutTerm c N m (fun d ↦ ω (g d)) - cutTermTrunc c N m L (fun d ↦ ω (g d))| :=
+    continuous_abs.measurable.comp
+      ((measurable_cutTerm_coins hc0 N m g).sub (measurable_cutTermTrunc_coins c N m L g))
+  have hint : Integrable (fun ω : ι → Bool ↦
+      |cutTerm c N m (fun d ↦ ω (g d)) - cutTermTrunc c N m L (fun d ↦ ω (g d))|)
+      (coinMeasure ι) := by
+    refine Integrable.of_bound hm.aestronglyMeasurable 2 (Eventually.of_forall fun ω ↦ ?_)
+    rw [Real.norm_eq_abs, abs_abs]
+    have h1 := abs_cutTerm_le hc0 N m (fun d ↦ ω (g d))
+    have h2 := abs_cutTermTrunc_le hc0 N m L (fun d ↦ ω (g d))
+    have := abs_sub (cutTerm c N m (fun d ↦ ω (g d))) (cutTermTrunc c N m L (fun d ↦ ω (g d)))
+    linarith
+  have hind : Integrable (S.indicator (1 : (ι → Bool) → ℝ)) (coinMeasure ι) :=
+    (integrable_const (1 : ℝ)).indicator hSm
+  refine (integral_mono hint hind hpt).trans (le_of_eq ?_)
+  rw [integral_indicator_one hSm, measureReal_levelTie_coins _ N m L hg]
+
+/-- **Level terms are centred.** -/
+theorem integral_cutTerm_coins {c : ℝ} (hc0 : 0 ≤ c) (N m : ℕ) {g : ℕ → ι}
+    (hg : Function.Injective g) :
+    ∫ ω, cutTerm c N m (fun d ↦ ω (g d)) ∂(coinMeasure ι) = 0 := by
+  unfold cutTerm
+  by_cases hc1 : c < 1
+  · simp only [hc1, ite_true]
+    unfold coinTerm levelTerm
+    by_cases hb : N.testBit m = true
+    · simp only [hb, ite_true]
+      have hi : Integrable (fun ω : ι → Bool ↦ levelVal (threshDigit c) N m (fun d ↦ ω (g d)))
+          (coinMeasure ι) := by
+        refine Integrable.of_bound (measurable_levelVal_coins hc0 hc1 N m g).aestronglyMeasurable
+          1 (Eventually.of_forall fun ω ↦ ?_)
+        rcases levelVal_mem (threshDigit c) N m (fun d ↦ ω (g d)) with h | h <;> rw [h] <;> simp
+      rw [integral_sub hi (integrable_const _), integral_levelVal_coins hc0 hc1 N m hg,
+        integral_const, probReal_univ, one_smul, fracPow, sub_self]
+    · simp only [hb, Bool.false_eq_true, ite_false, integral_zero]
+  · simp only [hc1, ite_false, integral_zero]
+
+/-! ### Rows and levels -/
+
+variable {w : ℕ → ℝ} {cp : Fin n → ℕ → ℝ}
+
+/-- `|rowTerm| ≤ W = Σ_j |w_j|`. -/
+theorem abs_rowTerm_le (hcp : ∀ i j, 0 ≤ cp i j) (N : Fin n → ℕ) (m : ℕ)
+    (e : Fin n → ℕ → ℕ → Bool) (i : Fin n) : |rowTerm w cp N m e i| ≤ absWeightSum n w := by
+  refine (abs_sum_le_sum_abs _ _).trans (sum_le_sum fun j _ ↦ ?_)
+  rw [abs_mul]
+  exact mul_le_of_le_one_right (abs_nonneg _) (abs_cutTerm_le (hcp i j) _ m _)
+
+/-- `|rowTermTrunc| ≤ W`. -/
+theorem abs_rowTermTrunc_le (hcp : ∀ i j, 0 ≤ cp i j) (N : Fin n → ℕ) (m L : ℕ)
+    (e : Fin n → ℕ → ℕ → Bool) (i : Fin n) :
+    |rowTermTrunc w cp N m L e i| ≤ absWeightSum n w := by
+  refine (abs_sum_le_sum_abs _ _).trans (sum_le_sum fun j _ ↦ ?_)
+  rw [abs_mul]
+  exact mul_le_of_le_one_right (abs_nonneg _) (abs_cutTermTrunc_le (hcp i j) _ m L _)
+
+/-- `|rowTerm − rowTermTrunc| ≤ W`. -/
+theorem abs_rowTerm_sub_trunc_le (N : Fin n → ℕ) (m L : ℕ) (e : Fin n → ℕ → ℕ → Bool)
+    (i : Fin n) : |rowTerm w cp N m e i - rowTermTrunc w cp N m L e i| ≤ absWeightSum n w := by
+  classical
+  rw [rowTerm, rowTermTrunc, ← sum_sub_distrib]
+  refine (abs_sum_le_sum_abs _ _).trans (sum_le_sum fun j _ ↦ ?_)
+  rw [← mul_sub, abs_mul]
+  refine mul_le_of_le_one_right (abs_nonneg _) ((abs_cutTerm_sub_trunc_le _ _ m L _).trans ?_)
+  split_ifs <;> norm_num
+
+/-- The row term of a coin layout is measurable. -/
+theorem measurable_rowTerm_coins (hcp : ∀ i j, 0 ≤ cp i j) (N : Fin n → ℕ) (m : ℕ)
+    (γ : Fin n → ℕ → ℕ → ι) (i : Fin n) :
+    Measurable fun ω : ι → Bool ↦ rowTerm w cp N m (coinsOf γ ω) i :=
+  Finset.measurable_fun_sum _ fun j _ ↦
+    (measurable_cutTerm_coins (hcp i j) (N i) m (γ i j)).const_mul (w j)
+
+/-- The truncated row term depends only on coordinates `γ i j d`, `d ∈ [m, m + L)`. -/
+theorem isLocal_rowTermTrunc_coins [DecidableEq ι] (N : Fin n → ℕ) (m L : ℕ)
+    (γ : Fin n → ℕ → ℕ → ι) (i : Fin n) :
+    IsLocal (fun ω : ι → Bool ↦ rowTermTrunc w cp N m L (coinsOf γ ω) i)
+      ((range (n - 1)).biUnion fun j ↦ (Finset.Ico m (m + L)).image (γ i j)) :=
+  isLocal_sum _ fun j hj ↦ ((isLocal_cutTermTrunc_coins (cp i j) (N i) m L (γ i j)).comp
+    (fun x ↦ w j * x)).mono
+      (subset_biUnion_of_mem (fun j ↦ (Finset.Ico m (m + L)).image (γ i j)) hj)
+
+/-- The truncated row term is measurable. -/
+theorem measurable_rowTermTrunc_coins (N : Fin n → ℕ) (m L : ℕ) (γ : Fin n → ℕ → ℕ → ι)
+    (i : Fin n) : Measurable fun ω : ι → Bool ↦ rowTermTrunc w cp N m L (coinsOf γ ω) i := by
+  classical
+  exact (isLocal_rowTermTrunc_coins N m L γ i).measurable
+
+/-- **Row truncation error in `L¹`**: `E|row − row_L| ≤ W 2^{-L}`. -/
+theorem integral_abs_rowTerm_sub_trunc_le (hcp : ∀ i j, 0 ≤ cp i j) (N : Fin n → ℕ) (m L : ℕ)
+    {γ : Fin n → ℕ → ℕ → ι} (hγ : ∀ i j, Function.Injective (γ i j)) (i : Fin n) :
+    ∫ ω, |rowTerm w cp N m (coinsOf γ ω) i - rowTermTrunc w cp N m L (coinsOf γ ω) i|
+      ∂(coinMeasure ι) ≤ absWeightSum n w * (1 / 2) ^ L := by
+  have hint : ∀ j, Integrable (fun ω : ι → Bool ↦ |cutTerm (cp i j) (N i) m (coinsOf γ ω i j) -
+      cutTermTrunc (cp i j) (N i) m L (coinsOf γ ω i j)|) (coinMeasure ι) := by
+    intro j
+    refine Integrable.of_bound (continuous_abs.measurable.comp
+      ((measurable_cutTerm_coins (hcp i j) (N i) m (γ i j)).sub
+      (measurable_cutTermTrunc_coins (cp i j) (N i) m L (γ i j)))).aestronglyMeasurable 2
+      (Eventually.of_forall fun ω ↦ ?_)
+    rw [Real.norm_eq_abs, abs_abs]
+    have h1 := abs_cutTerm_le (hcp i j) (N i) m (coinsOf γ ω i j)
+    have h2 := abs_cutTermTrunc_le (hcp i j) (N i) m L (coinsOf γ ω i j)
+    have := abs_sub (cutTerm (cp i j) (N i) m (coinsOf γ ω i j))
+      (cutTermTrunc (cp i j) (N i) m L (coinsOf γ ω i j))
+    linarith
+  have hpt : ∀ ω : ι → Bool,
+      |rowTerm w cp N m (coinsOf γ ω) i - rowTermTrunc w cp N m L (coinsOf γ ω) i| ≤
+      ∑ j ∈ range (n - 1), |w j| * |cutTerm (cp i j) (N i) m (coinsOf γ ω i j) -
+        cutTermTrunc (cp i j) (N i) m L (coinsOf γ ω i j)| := by
+    intro ω
+    rw [rowTerm, rowTermTrunc, ← sum_sub_distrib]
+    refine (abs_sum_le_sum_abs _ _).trans (le_of_eq (sum_congr rfl fun j _ ↦ ?_))
+    rw [← mul_sub, abs_mul]
+  have hm : Measurable fun ω : ι → Bool ↦
+      |rowTerm w cp N m (coinsOf γ ω) i - rowTermTrunc w cp N m L (coinsOf γ ω) i| :=
+    continuous_abs.measurable.comp
+      ((measurable_rowTerm_coins hcp N m γ i).sub (measurable_rowTermTrunc_coins N m L γ i))
+  have hi1 : Integrable (fun ω : ι → Bool ↦
+      |rowTerm w cp N m (coinsOf γ ω) i - rowTermTrunc w cp N m L (coinsOf γ ω) i|)
+      (coinMeasure ι) := by
+    refine Integrable.of_bound hm.aestronglyMeasurable (absWeightSum n w)
+      (Eventually.of_forall fun ω ↦ ?_)
+    rw [Real.norm_eq_abs, abs_abs]
+    exact abs_rowTerm_sub_trunc_le N m L _ i
+  have hi2 : Integrable (fun ω : ι → Bool ↦ ∑ j ∈ range (n - 1),
+      |w j| * |cutTerm (cp i j) (N i) m (coinsOf γ ω i j) -
+        cutTermTrunc (cp i j) (N i) m L (coinsOf γ ω i j)|) (coinMeasure ι) :=
+    integrable_finsetSum _ fun j _ ↦ (hint j).const_mul _
+  refine (integral_mono hi1 hi2 hpt).trans ?_
+  rw [integral_finsetSum _ fun j _ ↦ (hint j).const_mul _, absWeightSum, sum_mul]
+  refine sum_le_sum fun j _ ↦ ?_
+  rw [integral_const_mul]
+  exact mul_le_mul_of_nonneg_left
+    (integral_abs_cutTerm_sub_trunc_le (hcp i j) (N i) m L (hγ i j)) (abs_nonneg _)
+
+/-- **Row terms are centred.** -/
+theorem integral_rowTerm_coins (hcp : ∀ i j, 0 ≤ cp i j) (N : Fin n → ℕ) (m : ℕ)
+    {γ : Fin n → ℕ → ℕ → ι} (hγ : ∀ i j, Function.Injective (γ i j)) (i : Fin n) :
+    ∫ ω, rowTerm w cp N m (coinsOf γ ω) i ∂(coinMeasure ι) = 0 := by
+  have hint : ∀ j, Integrable (fun ω : ι → Bool ↦ w j * cutTerm (cp i j) (N i) m
+      (coinsOf γ ω i j)) (coinMeasure ι) := fun j ↦
+    (Integrable.of_bound (measurable_cutTerm_coins (hcp i j) (N i) m (γ i j)).aestronglyMeasurable
+      1 (Eventually.of_forall fun ω ↦ by
+        rw [Real.norm_eq_abs]; exact abs_cutTerm_le (hcp i j) _ m _)).const_mul _
+  unfold rowTerm
+  rw [integral_finsetSum _ fun j _ ↦ hint j]
+  refine sum_eq_zero fun j _ ↦ ?_
+  rw [integral_const_mul]
+  change w j * ∫ ω, cutTerm (cp i j) (N i) m (fun d ↦ ω (γ i j d)) ∂(coinMeasure ι) = 0
+  rw [integral_cutTerm_coins (hcp i j) (N i) m (hγ i j), mul_zero]
+
+/-- The level-`m` term `Σ_i rowTerm … m … i`. -/
+noncomputable def levelYN (w : ℕ → ℝ) (cp : Fin n → ℕ → ℝ) (N : Fin n → ℕ) (m : ℕ)
+    (e : Fin n → ℕ → ℕ → Bool) : ℝ :=
+  ∑ i, rowTerm w cp N m e i
+
+/-- The truncated level term. -/
+noncomputable def levelYNTrunc (w : ℕ → ℝ) (cp : Fin n → ℕ → ℝ) (N : Fin n → ℕ) (m L : ℕ)
+    (e : Fin n → ℕ → ℕ → Bool) : ℝ :=
+  ∑ i, rowTermTrunc w cp N m L e i
+
+/-- `levelSumN = Σ_{m<K} levelYN`. -/
+theorem levelSumN_eq_sum_levelYN (w : ℕ → ℝ) (cp : Fin n → ℕ → ℝ) (N : Fin n → ℕ) (K : ℕ)
+    (e : Fin n → ℕ → ℕ → Bool) :
+    levelSumN w cp N K e = ∑ m ∈ range K, levelYN w cp N m e := rfl
+
+/-- `|levelYN| ≤ n W`. -/
+theorem abs_levelYN_le (hcp : ∀ i j, 0 ≤ cp i j) (N : Fin n → ℕ) (m : ℕ)
+    (e : Fin n → ℕ → ℕ → Bool) : |levelYN w cp N m e| ≤ n * absWeightSum n w := by
+  refine (abs_sum_le_sum_abs _ _).trans ?_
+  calc ∑ i, |rowTerm w cp N m e i| ≤ ∑ _i : Fin n, absWeightSum n w :=
+        sum_le_sum fun i _ ↦ abs_rowTerm_le hcp N m e i
+    _ = n * absWeightSum n w := by rw [sum_const, card_univ, Fintype.card_fin, nsmul_eq_mul]
+
+/-- `|levelYNTrunc| ≤ n W`. -/
+theorem abs_levelYNTrunc_le (hcp : ∀ i j, 0 ≤ cp i j) (N : Fin n → ℕ) (m L : ℕ)
+    (e : Fin n → ℕ → ℕ → Bool) : |levelYNTrunc w cp N m L e| ≤ n * absWeightSum n w := by
+  refine (abs_sum_le_sum_abs _ _).trans ?_
+  calc ∑ i, |rowTermTrunc w cp N m L e i| ≤ ∑ _i : Fin n, absWeightSum n w :=
+        sum_le_sum fun i _ ↦ abs_rowTermTrunc_le hcp N m L e i
+    _ = n * absWeightSum n w := by rw [sum_const, card_univ, Fintype.card_fin, nsmul_eq_mul]
+
+/-- `|levelYN − levelYNTrunc| ≤ Σ_i |row_i − row_{i,L}|`. -/
+theorem abs_levelYN_sub_trunc_le (N : Fin n → ℕ) (m L : ℕ) (e : Fin n → ℕ → ℕ → Bool) :
+    |levelYN w cp N m e - levelYNTrunc w cp N m L e| ≤
+      ∑ i, |rowTerm w cp N m e i - rowTermTrunc w cp N m L e i| := by
+  rw [levelYN, levelYNTrunc, ← sum_sub_distrib]
+  exact abs_sum_le_sum_abs _ _
+
+/-- The level term of a coin layout is measurable. -/
+theorem measurable_levelYN_coins (hcp : ∀ i j, 0 ≤ cp i j) (N : Fin n → ℕ) (m : ℕ)
+    (γ : Fin n → ℕ → ℕ → ι) : Measurable fun ω : ι → Bool ↦ levelYN w cp N m (coinsOf γ ω) :=
+  Finset.measurable_fun_sum _ fun i _ ↦ measurable_rowTerm_coins hcp N m γ i
+
+/-- The coordinates of levels `[m, m + L)` used by the truncated level term. -/
+def levelCoords [DecidableEq ι] (n : ℕ) (γ : Fin n → ℕ → ℕ → ι) (m L : ℕ) : Finset ι :=
+  univ.biUnion fun i ↦ (range (n - 1)).biUnion fun j ↦ (Finset.Ico m (m + L)).image (γ i j)
+
+/-- The coordinates of `levelCoords` have levels in `[m, m + L)`. -/
+theorem lev_mem_of_mem_levelCoords [DecidableEq ι] {lev : ι → ℕ} {γ : Fin n → ℕ → ℕ → ι}
+    (hlev : ∀ i j d, lev (γ i j d) = d) {m L : ℕ} {q : ι} (hq : q ∈ levelCoords n γ m L) :
+    m ≤ lev q ∧ lev q < m + L := by
+  simp only [levelCoords, mem_biUnion, mem_univ, true_and, mem_image, Finset.mem_Ico] at hq
+  obtain ⟨i, j, _, d, hd, rfl⟩ := hq
+  rw [hlev]
+  exact hd
+
+/-- The truncated level term is local on `levelCoords`. -/
+theorem isLocal_levelYNTrunc_coins [DecidableEq ι] (N : Fin n → ℕ) (m L : ℕ)
+    (γ : Fin n → ℕ → ℕ → ι) :
+    IsLocal (fun ω : ι → Bool ↦ levelYNTrunc w cp N m L (coinsOf γ ω)) (levelCoords n γ m L) :=
+  isLocal_sum _ fun i _ ↦ (isLocal_rowTermTrunc_coins N m L γ i).mono
+    (subset_biUnion_of_mem (fun i ↦ (range (n - 1)).biUnion fun j ↦
+      (Finset.Ico m (m + L)).image (γ i j)) (mem_univ i))
+
+/-- **Level truncation error in `L¹`**: `E|Y − Y_L| ≤ n W 2^{-L}`. -/
+theorem integral_abs_levelYN_sub_trunc_le (hcp : ∀ i j, 0 ≤ cp i j) (N : Fin n → ℕ) (m L : ℕ)
+    {γ : Fin n → ℕ → ℕ → ι} (hγ : ∀ i j, Function.Injective (γ i j)) :
+    ∫ ω, |levelYN w cp N m (coinsOf γ ω) - levelYNTrunc w cp N m L (coinsOf γ ω)|
+      ∂(coinMeasure ι) ≤ n * absWeightSum n w * (1 / 2) ^ L := by
+  classical
+  have hi : ∀ i, Integrable (fun ω : ι → Bool ↦
+      |rowTerm w cp N m (coinsOf γ ω) i - rowTermTrunc w cp N m L (coinsOf γ ω) i|)
+      (coinMeasure ι) := fun i ↦
+    Integrable.of_bound (continuous_abs.measurable.comp ((measurable_rowTerm_coins hcp N m γ i).sub
+      (measurable_rowTermTrunc_coins N m L γ i))).aestronglyMeasurable (absWeightSum n w)
+      (Eventually.of_forall fun ω ↦ by
+        rw [Real.norm_eq_abs, abs_abs]; exact abs_rowTerm_sub_trunc_le N m L _ i)
+  have hm : Measurable fun ω : ι → Bool ↦
+      |levelYN w cp N m (coinsOf γ ω) - levelYNTrunc w cp N m L (coinsOf γ ω)| :=
+    continuous_abs.measurable.comp ((measurable_levelYN_coins hcp N m γ).sub
+      (isLocal_levelYNTrunc_coins N m L γ).measurable)
+  have hi1 : Integrable (fun ω : ι → Bool ↦
+      |levelYN w cp N m (coinsOf γ ω) - levelYNTrunc w cp N m L (coinsOf γ ω)|)
+      (coinMeasure ι) := by
+    refine Integrable.of_bound hm.aestronglyMeasurable (2 * (n * absWeightSum n w))
+      (Eventually.of_forall fun ω ↦ ?_)
+    rw [Real.norm_eq_abs, abs_abs]
+    have h1 := abs_levelYN_le (w := w) hcp N m (coinsOf γ ω)
+    have h2 := abs_levelYNTrunc_le (w := w) hcp N m L (coinsOf γ ω)
+    have := abs_sub (levelYN w cp N m (coinsOf γ ω)) (levelYNTrunc w cp N m L (coinsOf γ ω))
+    linarith
+  refine (integral_mono hi1 (integrable_finsetSum _ fun i _ ↦ hi i)
+    fun ω ↦ abs_levelYN_sub_trunc_le N m L _).trans ?_
+  rw [integral_finsetSum _ fun i _ ↦ hi i]
+  calc ∑ i, ∫ ω, |rowTerm w cp N m (coinsOf γ ω) i - rowTermTrunc w cp N m L (coinsOf γ ω) i|
+        ∂(coinMeasure ι) ≤ ∑ _i : Fin n, absWeightSum n w * (1 / 2) ^ L :=
+        sum_le_sum fun i _ ↦ integral_abs_rowTerm_sub_trunc_le hcp N m L hγ i
+    _ = n * absWeightSum n w * (1 / 2) ^ L := by
+        rw [sum_const, card_univ, Fintype.card_fin, nsmul_eq_mul]
+        ring
+
+/-- **Level sums are centred.** -/
+theorem integral_levelSumN_coins (hcp : ∀ i j, 0 ≤ cp i j) (N : Fin n → ℕ) (K : ℕ)
+    {γ : Fin n → ℕ → ℕ → ι} (hγ : ∀ i j, Function.Injective (γ i j)) :
+    ∫ ω, levelSumN w cp N K (coinsOf γ ω) ∂(coinMeasure ι) = 0 := by
+  have hint : ∀ m i, Integrable (fun ω : ι → Bool ↦ rowTerm w cp N m (coinsOf γ ω) i)
+      (coinMeasure ι) := fun m i ↦
+    Integrable.of_bound (measurable_rowTerm_coins hcp N m γ i).aestronglyMeasurable
+      (absWeightSum n w) (Eventually.of_forall fun ω ↦ by
+        rw [Real.norm_eq_abs]; exact abs_rowTerm_le hcp N m _ i)
+  unfold levelSumN
+  rw [integral_finsetSum _ fun m _ ↦ integrable_finsetSum _ fun i _ ↦ hint m i]
+  refine sum_eq_zero fun m _ ↦ ?_
+  rw [integral_finsetSum _ fun i _ ↦ hint m i]
+  exact sum_eq_zero fun i _ ↦ integral_rowTerm_coins hcp N m hγ i
+
+/-- Level sums of a coin layout are measurable. -/
+theorem measurable_levelSumN_coins (hcp : ∀ i j, 0 ≤ cp i j) (N : Fin n → ℕ) (K : ℕ)
+    (γ : Fin n → ℕ → ℕ → ι) :
+    Measurable fun ω : ι → Bool ↦ levelSumN w cp N K (coinsOf γ ω) :=
+  Finset.measurable_fun_sum _ fun m _ ↦ measurable_levelYN_coins hcp N m γ
+
+/-- Level sums are bounded by `K n W`. -/
+theorem abs_levelSumN_le (hcp : ∀ i j, 0 ≤ cp i j) (N : Fin n → ℕ) (K : ℕ)
+    (e : Fin n → ℕ → ℕ → Bool) : |levelSumN w cp N K e| ≤ K * (n * absWeightSum n w) := by
+  rw [levelSumN_eq_sum_levelYN]
+  refine (abs_sum_le_sum_abs _ _).trans ?_
+  calc ∑ m ∈ range K, |levelYN w cp N m e| ≤ ∑ _m ∈ range K, (n * absWeightSum n w) :=
+        sum_le_sum fun m _ ↦ abs_levelYN_le hcp N m e
+    _ = K * (n * absWeightSum n w) := by rw [sum_const, card_range, nsmul_eq_mul]
+
+/-- Level sums of a coin layout are in `L²`. -/
+theorem memLp_levelSumN_coins (hcp : ∀ i j, 0 ≤ cp i j) (N : Fin n → ℕ) (K : ℕ)
+    (γ : Fin n → ℕ → ℕ → ι) :
+    MemLp (fun ω : ι → Bool ↦ levelSumN w cp N K (coinsOf γ ω)) 2 (coinMeasure ι) :=
+  MemLp.of_bound (measurable_levelSumN_coins hcp N K γ).aestronglyMeasurable _
+    (Eventually.of_forall fun ω ↦ by
+      rw [Real.norm_eq_abs]; exact abs_levelSumN_le hcp N K _)
+
+/-! ### The CLT for level sums -/
+
+/-- **The CLT for level sums of a coin layout.** Let `lev (γ i j d) = d`, the cut points be
+nonnegative, `K_k → ∞` and `Var(levelSumN) ≥ κ K_k` eventually. Then the normalised level sums
+are asymptotically `N(0,1)`. -/
+theorem tendstoInDistribution_levelSumN (lev : ι → ℕ) {γ : Fin n → ℕ → ℕ → ι}
+    (hlev : ∀ i j d, lev (γ i j d) = d) (hcp : ∀ i j, 0 ≤ cp i j) {N : ℕ → Fin n → ℕ}
+    {K : ℕ → ℕ} (hK : Tendsto K atTop atTop) {κ : ℝ} (hκ : 0 < κ)
+    (hvar : ∀ᶠ k in atTop,
+      κ * K k ≤ Var[fun ω ↦ levelSumN w cp (N k) (K k) (coinsOf γ ω); coinMeasure ι])
+    {Ω' : Type*} {mΩ' : MeasurableSpace Ω'} {P' : Measure Ω'} [IsProbabilityMeasure P']
+    {Z : Ω' → ℝ} (hZ : HasLaw Z (gaussianReal 0 1) P') :
+    TendstoInDistribution (fun k ω ↦ levelSumN w cp (N k) (K k) (coinsOf γ ω) /
+      √Var[fun ω ↦ levelSumN w cp (N k) (K k) (coinsOf γ ω); coinMeasure ι]) atTop Z
+      (fun _ ↦ coinMeasure ι) P' := by
+  classical
+  have hγ : ∀ i j, Function.Injective (γ i j) := fun i j d d' h ↦ by
+    have := congrArg lev h
+    rwa [hlev, hlev] at this
+  set B := n * absWeightSum n w with hB
+  have hB0 : 0 ≤ B := mul_nonneg (Nat.cast_nonneg n) (absWeightSum_nonneg n w)
+  set Y : ℕ → ℕ → (ι → Bool) → ℝ := fun k m ω ↦ levelYN w cp (N k) m (coinsOf γ ω) with hY
+  set Yt : ℕ → ℕ → ℕ → (ι → Bool) → ℝ := fun k m L ω ↦
+    levelYNTrunc w cp (N k) m L (coinsOf γ ω) with hYt
+  have h := tendstoInDistribution_of_truncations (fun _ : ι ↦ fairCoin) lev hK
+    (Y := Y) (Yt := Yt) (B := B) (C := B ^ 2)
+    (fun k m ↦ measurable_levelYN_coins hcp (N k) m γ)
+    (fun k m ω ↦ abs_levelYN_le hcp (N k) m _) (fun k m L ω ↦ abs_levelYNTrunc_le hcp (N k) m L _)
+    (fun k m L ↦ ⟨levelCoords n γ m L, fun q hq ↦ lev_mem_of_mem_levelCoords hlev hq,
+      isLocal_levelYNTrunc_coins (N k) m L γ⟩) (fun k m L ↦ ?_) hκ hvar hZ
+  · have e : (fun k ω ↦ levelSumN w cp (N k) (K k) (coinsOf γ ω) /
+        √Var[fun ω ↦ levelSumN w cp (N k) (K k) (coinsOf γ ω); coinMeasure ι]) =
+        fun k ω ↦ ((∑ m ∈ range (K k), Y k m ω) -
+          (coinMeasure ι)[fun ω ↦ ∑ m ∈ range (K k), Y k m ω]) /
+          √Var[fun ω ↦ ∑ m ∈ range (K k), Y k m ω; coinMeasure ι] := by
+      funext k ω
+      have h0 := integral_levelSumN_coins (w := w) hcp (N k) (K k) hγ
+      change levelSumN w cp (N k) (K k) (coinsOf γ ω) /
+          √Var[fun ω ↦ levelSumN w cp (N k) (K k) (coinsOf γ ω); coinMeasure ι] =
+        (levelSumN w cp (N k) (K k) (coinsOf γ ω) -
+          ∫ ω, levelSumN w cp (N k) (K k) (coinsOf γ ω) ∂(coinMeasure ι)) /
+          √Var[fun ω ↦ levelSumN w cp (N k) (K k) (coinsOf γ ω); coinMeasure ι]
+      rw [h0, sub_zero]
+    rw [e]
+    exact h
+  · -- the `L²` truncation error
+    have hd : ∀ ω, |Y k m ω - Yt k m L ω| ≤ 2 * B := fun ω ↦ by
+      have h1 := abs_levelYN_le (w := w) hcp (N k) m (coinsOf γ ω)
+      have h2 := abs_levelYNTrunc_le (w := w) hcp (N k) m L (coinsOf γ ω)
+      have := abs_sub (Y k m ω) (Yt k m L ω)
+      simp only [hY, hYt] at this ⊢
+      linarith
+    have hpt : ∀ ω, (Y k m ω - Yt k m L ω) ^ 2 ≤ B * |Y k m ω - Yt k m L ω| := by
+      intro ω
+      have h1 : |Y k m ω - Yt k m L ω| ≤ B := by
+        refine (abs_levelYN_sub_trunc_le (N k) m L _).trans ?_
+        calc ∑ i, |rowTerm w cp (N k) m (coinsOf γ ω) i -
+              rowTermTrunc w cp (N k) m L (coinsOf γ ω) i|
+            ≤ ∑ _i : Fin n, absWeightSum n w :=
+              sum_le_sum fun i _ ↦ abs_rowTerm_sub_trunc_le (N k) m L _ i
+          _ = B := by rw [sum_const, card_univ, Fintype.card_fin, nsmul_eq_mul]
+      rw [← sq_abs]
+      nlinarith [abs_nonneg (Y k m ω - Yt k m L ω)]
+    have hm : Measurable fun ω ↦ Y k m ω - Yt k m L ω :=
+      (measurable_levelYN_coins hcp (N k) m γ).sub
+        (isLocal_levelYNTrunc_coins (N k) m L γ).measurable
+    have hi1 : Integrable (fun ω ↦ (Y k m ω - Yt k m L ω) ^ 2) (coinMeasure ι) := by
+      refine Integrable.of_bound (hm.pow_const 2).aestronglyMeasurable ((2 * B) ^ 2)
+        (Eventually.of_forall fun ω ↦ ?_)
+      rw [Real.norm_eq_abs, abs_pow]
+      exact pow_le_pow_left₀ (abs_nonneg _) (hd ω) 2
+    have hi2 : Integrable (fun ω ↦ B * |Y k m ω - Yt k m L ω|) (coinMeasure ι) :=
+      (Integrable.of_bound (continuous_abs.measurable.comp hm).aestronglyMeasurable (2 * B)
+        (Eventually.of_forall fun ω ↦ by
+          change ‖|Y k m ω - Yt k m L ω|‖ ≤ 2 * B
+          rw [Real.norm_eq_abs, abs_abs]; exact hd ω)).const_mul B
+    refine (integral_mono hi1 hi2 hpt).trans ?_
+    rw [integral_const_mul]
+    have := integral_abs_levelYN_sub_trunc_le (w := w) hcp (N k) m L hγ
+    calc B * ∫ ω, |Y k m ω - Yt k m L ω| ∂(coinMeasure ι) ≤ B * (B * (1 / 2) ^ L) :=
+          mul_le_mul_of_nonneg_left this hB0
+      _ = B ^ 2 * (1 / 2) ^ L := by ring
+
+/-! ### Slutsky assembly -/
+
+/-- **Slutsky assembly.** Let `E_k` be within `b_k` of a centred `M_k`, with
+`b_k² / log₂ T_k → 0` and `Var E_k ≥ κ log₂ T_k` eventually. If `M_k` satisfies the CLT whenever
+`Var M_k ≥ κ' (⌊log₂ T_k⌋ + 1)` eventually, then `E_k / √Var E_k ⇒ Z`. -/
+theorem tendstoInDistribution_of_close_main {Ω : Type*} [MeasurableSpace Ω] {μ : Measure Ω}
+    [IsProbabilityMeasure μ] {E M : ℕ → Ω → ℝ} {T : ℕ → ℕ} (hT : Tendsto T atTop atTop)
+    {b : ℕ → ℝ} (hb : Tendsto (fun k ↦ b k ^ 2 / Nat.log 2 (T k)) atTop (𝓝 0))
+    (hE : ∀ k, MemLp (E k) 2 μ) (hM : ∀ k, MemLp (M k) 2 μ) (hM0 : ∀ k, μ[M k] = 0)
+    (hclose : ∀ k ω, |E k ω - M k ω| ≤ b k) {κ : ℝ} (hκ : 0 < κ)
+    (hvar : ∀ᶠ k in atTop, κ * Nat.log 2 (T k) ≤ Var[E k; μ])
+    {Ω' : Type*} {mΩ' : MeasurableSpace Ω'} {P' : Measure Ω'} [IsProbabilityMeasure P']
+    {Z : Ω' → ℝ}
+    (hclt : ∀ κ' : ℝ, 0 < κ' →
+      (∀ᶠ k in atTop, κ' * ((Nat.log 2 (T k) + 1 : ℕ) : ℝ) ≤ Var[M k; μ]) →
+        TendstoInDistribution (fun k ω ↦ M k ω / √Var[M k; μ]) atTop Z (fun _ ↦ μ) P') :
+    TendstoInDistribution (fun k ω ↦ E k ω / √Var[E k; μ]) atTop Z (fun _ ↦ μ) P' := by
+  have : Nonempty Ω := nonempty_of_isProbabilityMeasure μ
+  have hb0 : ∀ k, 0 ≤ b k := fun k ↦ (abs_nonneg _).trans (hclose k (Classical.arbitrary Ω))
+  have hlogT : Tendsto (fun k ↦ Nat.log 2 (T k)) atTop atTop :=
+    (tendsto_atTop_atTop.2 fun b ↦ ⟨2 ^ b, fun t ht ↦ Nat.le_log_of_pow_le one_lt_two ht⟩).comp hT
+  have hlog1 : ∀ᶠ k in atTop, 1 ≤ Nat.log 2 (T k) := hlogT.eventually_ge_atTop 1
+  have hbE : Tendsto (fun k ↦ b k ^ 2 / Var[E k; μ]) atTop (𝓝 0) := by
+    have h := hb.div_const κ
+    rw [zero_div] at h
+    refine squeeze_zero' (Eventually.of_forall fun k ↦ by
+      have := variance_nonneg (E k) μ
+      have := hb0 k
+      positivity) ?_ h
+    filter_upwards [hvar, hlog1] with k hk hl
+    have hl' : (0 : ℝ) < Nat.log 2 (T k) := by exact_mod_cast hl
+    rw [div_div, mul_comm (Nat.log 2 (T k) : ℝ) κ]
+    exact div_le_div_of_nonneg_left (sq_nonneg _) (by positivity) hk
+  have hpos : ∀ᶠ k in atTop, 0 < Var[E k; μ] := by
+    filter_upwards [hvar, hlog1] with k hk hl
+    have hl' : (1 : ℝ) ≤ Nat.log 2 (T k) := by exact_mod_cast hl
+    nlinarith
+  refine tendstoInDistribution_of_abs_sub_le hE hM hM0 hclose hbE hpos ?_
+  refine hclt (κ / 8) (by positivity) ?_
+  have hsmall : ∀ᶠ k in atTop, b k ^ 2 / Var[E k; μ] ≤ 1 / 4 :=
+    hbE.eventually (ge_mem_nhds (by norm_num))
+  filter_upwards [hvar, hlog1, hsmall, hpos] with k hk hl hs hp
+  have hl' : (1 : ℝ) ≤ Nat.log 2 (T k) := by exact_mod_cast hl
+  have hσ : |√Var[M k; μ] - √Var[E k; μ]| ≤ b k := by
+    refine (abs_sqrt_variance_sub_le (hE k) (hM k)).trans ?_
+    refine (Real.sqrt_le_sqrt (variance_le_sq_of_bounded (a := -b k) (b := b k)
+      (Eventually.of_forall fun ω ↦ abs_le.1 (hclose k ω))
+      ((hE k).sub (hM k)).aestronglyMeasurable.aemeasurable)).trans (le_of_eq ?_)
+    rw [show (b k - -b k) / 2 = b k by ring, Real.sqrt_sq (hb0 k)]
+  set sE := √Var[E k; μ] with hsE
+  set sM := √Var[M k; μ] with hsM
+  have hsE2 : sE ^ 2 = Var[E k; μ] := Real.sq_sqrt hp.le
+  have hbsE : b k ≤ sE / 2 := by
+    rw [div_le_iff₀ hp, ← hsE2] at hs
+    have hsE0 : 0 ≤ sE := Real.sqrt_nonneg _
+    by_contra hc
+    push Not at hc
+    nlinarith [hb0 k]
+  have hsMge : sE / 2 ≤ sM := by
+    have := (abs_le.1 hσ).1
+    linarith
+  have hsE0 : 0 ≤ sE / 2 := by positivity
+  have hVM : sE ^ 2 / 4 ≤ Var[M k; μ] := by
+    have := pow_le_pow_left₀ hsE0 hsMge 2
+    rw [hsM, Real.sq_sqrt (variance_nonneg _ _), div_pow] at this
+    linarith
+  have hK2 : ((Nat.log 2 (T k) + 1 : ℕ) : ℝ) ≤ 2 * Nat.log 2 (T k) := by
+    push_cast
+    linarith
+  calc κ / 8 * ((Nat.log 2 (T k) + 1 : ℕ) : ℝ) ≤ κ / 8 * (2 * Nat.log 2 (T k)) := by gcongr
+    _ = κ * Nat.log 2 (T k) / 4 := by ring
+    _ ≤ sE ^ 2 / 4 := by rw [hsE2]; linarith
+    _ ≤ Var[M k; μ] := hVM
+
+end RQMCMarkov.ScrambledStacks
+
+/-
+Copyright (c) 2026 Robert Kirkby. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Robert Kirkby
+-/
+
+/-!
+# Variance of level sums of fair coins (for post #3, n states)
+
+The CLT of `CltNCoins` normalises by the standard deviation and needs `Var ≥ κ log T`. This
+module gives the matching upper bound `Var = O(K)` for every coin layout, and a lower-bound
+criterion for level sums along sparse ("pattern") indices, which is used for the non-vacuity
+examples (`CltNExample`) under both randomisations.
+
+Two level terms at levels `m < m'` are almost uncorrelated: the level-`m` term, truncated at
+depth `m' − m`, depends only on coordinates of levels `[m, m')`, which are independent of the
+level-`m'` term; the truncation costs `2^{-(m'-m)}` in `L¹`. No independence between cut points of
+the same row is needed (they share coordinates for the digital shift and, along common binary
+prefixes, for Owen's scramble).
+
+## Main results
+
+* `abs_covariance_le_of_bound`: `|cov[R, Y]| ≤ 2B E|R|` for `|Y| ≤ B`.
+* `abs_covariance_le_of_local`: if `X` is `L¹`-close to a function of coordinates `S`, and `Y` is
+  an `L¹`-limit of functions of coordinates disjoint from `S`, then `|cov[X, Y]| ≤ 2B E|X − X_S|`.
+* `abs_covariance_levelYN_le`, `variance_levelSumN_le` (**upper bound**):
+  `Var(levelSumN) ≤ 5 (nW)² K` for `K` levels, every coin layout.
+* `variance_ge_of_int` (**integer variance bound**): an integer-valued `X` has
+  `Var X ≥ φ(1 − φ)`, `φ` the fractional part of `E X`.
+* `variance_rowTerm_ge_of_int`: a row term with integer weights at a level of a set bit has
+  variance at least `φ(1−φ)` for `φ = {Σ_j w_j {2^m c_{ij}}}`, under ANY coin layout.
+* `patternR r k = Σ_{a<k} 2^{ra}`, `testBit_patternR`.
+* `covariance_rowTerm_eq_zero` (different rows, disjoint coordinates), `abs_covariance_rowTerm_le`.
+* `variance_levelSumN_pattern_ge` (**lower-bound criterion**): at indices `patternR r k` in every
+  row, rows on disjoint coordinates, and row-term variances `≥ a₀`:
+  `Var ≥ n k (a₀ − 4 W² ρ/(1 − ρ))`, `ρ = 2^{-r}`.
+* Mean-square tools: `natLog_add_one_sq_le`, `integral_sq_le_of_close`,
+  `integral_sq_levelSumN_le`, `isBigO_meanSq_div_of_le`.
+-/
+
+namespace RQMCMarkov.ScrambledStacks
+
+open MeasureTheory ProbabilityTheory Filter Finset
+open scoped ENNReal NNReal Topology
+
+/-! ### Covariance tools -/
+
+/-- **Covariance with a bounded variable**: `|cov[R, Y]| ≤ 2B E|R|` when `|Y| ≤ B`. -/
+theorem abs_covariance_le_of_bound {Ω : Type*} {mΩ : MeasurableSpace Ω} {μ : Measure Ω}
+    [IsProbabilityMeasure μ] {R Y : Ω → ℝ} (hR : MemLp R 2 μ) (hYm : Measurable Y) {B : ℝ}
+    (hYb : ∀ ω, |Y ω| ≤ B) : |cov[R, Y; μ]| ≤ 2 * B * ∫ ω, |R ω| ∂μ := by
+  have : Nonempty Ω := nonempty_of_isProbabilityMeasure μ
+  have hB0 : 0 ≤ B := (abs_nonneg _).trans (hYb (Classical.arbitrary Ω))
+  have hI0 : 0 ≤ ∫ ω, |R ω| ∂μ := integral_nonneg fun ω ↦ abs_nonneg _
+  rcases hB0.lt_or_eq with hB | hB
+  · have e : Y = fun ω ↦ (2 * B) * (Y ω / (2 * B)) := funext fun ω ↦ by field_simp
+    rw [e, covariance_const_mul_right, abs_mul, abs_of_pos (by positivity : (0 : ℝ) < 2 * B)]
+    refine mul_le_mul_of_nonneg_left ?_ (by positivity)
+    refine abs_covariance_le_integral_abs hR (hYm.div_const _) (a := -1 / 2) fun ω ↦ ?_
+    have h := abs_le.1 (hYb ω)
+    constructor
+    · rw [le_div_iff₀ (by positivity)]
+      linarith
+    · rw [div_le_iff₀ (by positivity)]
+      linarith
+  · have e : Y = fun ω ↦ 0 * Y ω := funext fun ω ↦ by
+      have := hYb ω
+      rw [← hB] at this
+      rw [zero_mul]
+      exact abs_nonpos_iff.1 this
+    rw [e, covariance_const_mul_right, zero_mul, abs_zero]
+    positivity
+
+variable {ι : Type*} {n : ℕ}
+
+/-- **Covariance across disjoint coordinates.** On fair coins, let `|X|, |Y|, |X_S|, |Y_L| ≤ B`,
+`X_S` depend only on the coordinates in `S`, each `Y_L` only on coordinates disjoint from `S`,
+and `E|Y − Y_L| → 0`. Then `|cov[X, Y]| ≤ 2B E|X − X_S|`. -/
+theorem abs_covariance_le_of_local {X Y Xt : (ι → Bool) → ℝ} {Yt : ℕ → (ι → Bool) → ℝ}
+    {S : Finset ι} {S' : ℕ → Finset ι} {B : ℝ} (hXm : Measurable X) (hYm : Measurable Y)
+    (hXb : ∀ ω, |X ω| ≤ B) (hYb : ∀ ω, |Y ω| ≤ B) (hXtb : ∀ ω, |Xt ω| ≤ B)
+    (hYtb : ∀ L ω, |Yt L ω| ≤ B) (hXt : IsLocal Xt S) (hYt : ∀ L, IsLocal (Yt L) (S' L))
+    (hdisj : ∀ L, Disjoint S (S' L))
+    (hYe : Tendsto (fun L ↦ ∫ ω, |Y ω - Yt L ω| ∂(coinMeasure ι)) atTop (𝓝 0)) :
+    |cov[X, Y; coinMeasure ι]| ≤ 2 * B * ∫ ω, |X ω - Xt ω| ∂(coinMeasure ι) := by
+  have hX2 : MemLp X 2 (coinMeasure ι) := MemLp.of_bound hXm.aestronglyMeasurable B
+    (Eventually.of_forall fun ω ↦ by rw [Real.norm_eq_abs]; exact hXb ω)
+  have hY2 : MemLp Y 2 (coinMeasure ι) := MemLp.of_bound hYm.aestronglyMeasurable B
+    (Eventually.of_forall fun ω ↦ by rw [Real.norm_eq_abs]; exact hYb ω)
+  have hXt2 : MemLp Xt 2 (coinMeasure ι) := MemLp.of_bound hXt.measurable.aestronglyMeasurable B
+    (Eventually.of_forall fun ω ↦ by rw [Real.norm_eq_abs]; exact hXtb ω)
+  have hYt2 : ∀ L, MemLp (Yt L) 2 (coinMeasure ι) := fun L ↦
+    MemLp.of_bound (hYt L).measurable.aestronglyMeasurable B
+      (Eventually.of_forall fun ω ↦ by rw [Real.norm_eq_abs]; exact hYtb L ω)
+  have hYvar : Tendsto (fun L ↦ Var[Y - Yt L; coinMeasure ι]) atTop (𝓝 0) := by
+    have hlim := hYe.const_mul (2 * B)
+    rw [mul_zero] at hlim
+    refine squeeze_zero (fun L ↦ variance_nonneg _ _) (fun L ↦ ?_) hlim
+    refine (variance_le_expectation_sq (hY2.sub (hYt2 L)).aestronglyMeasurable).trans ?_
+    have hd : ∀ ω, |(Y - Yt L) ω| ≤ 2 * B := fun ω ↦ by
+      have := abs_sub (Y ω) (Yt L ω)
+      simp only [Pi.sub_apply]
+      linarith [hYb ω, hYtb L ω]
+    have hm : Measurable (Y - Yt L) := hYm.sub (hYt L).measurable
+    have hi1 : Integrable ((Y - Yt L) ^ 2) (coinMeasure ι) :=
+      (hY2.sub (hYt2 L)).integrable_sq
+    have hi2 : Integrable (fun ω ↦ 2 * B * |Y ω - Yt L ω|) (coinMeasure ι) :=
+      (Integrable.of_bound (continuous_abs.measurable.comp hm).aestronglyMeasurable (2 * B)
+        (Eventually.of_forall fun ω ↦ by
+          change ‖|(Y - Yt L) ω|‖ ≤ 2 * B
+          rw [Real.norm_eq_abs, abs_abs]; exact hd ω)).const_mul _
+    refine (integral_mono hi1 hi2 fun ω ↦ ?_).trans (le_of_eq (integral_const_mul _ _))
+    have h1 := hd ω
+    simp only [Pi.pow_apply, Pi.sub_apply] at h1 ⊢
+    rw [← sq_abs]
+    nlinarith [abs_nonneg (Y ω - Yt L ω)]
+  have h0 : cov[Xt, Y; coinMeasure ι] = 0 := by
+    refine covariance_eq_zero_of_approx hXt2 hY2 (Xa := fun _ ↦ Xt) (fun _ ↦ hXt2) hYt2
+      (fun L ↦ IsLocal.indepFun (fun _ ↦ fairCoin) hXt (hYt L) (hdisj L)) ?_ hYvar
+    simp only [sub_self, variance_zero, tendsto_const_nhds]
+  have e : cov[X, Y; coinMeasure ι] = cov[X - Xt, Y; coinMeasure ι] := by
+    rw [covariance_sub_left hX2 hXt2 hY2, h0, sub_zero]
+  rw [e]
+  exact abs_covariance_le_of_bound (hX2.sub hXt2) hYm hYb
+
+/-! ### The upper bound -/
+
+variable {w : ℕ → ℝ} {cp : Fin n → ℕ → ℝ}
+
+/-- Coordinates of disjoint level ranges are disjoint. -/
+theorem disjoint_levelCoords [DecidableEq ι] {lev : ι → ℕ} {γ : Fin n → ℕ → ℕ → ι}
+    (hlev : ∀ i j d, lev (γ i j d) = d) {m m' L L' : ℕ} (h : m + L ≤ m') :
+    Disjoint (levelCoords n γ m L) (levelCoords n γ m' L') := by
+  refine Finset.disjoint_left.2 fun q hq hq' ↦ ?_
+  have h1 := lev_mem_of_mem_levelCoords hlev hq
+  have h2 := lev_mem_of_mem_levelCoords hlev hq'
+  omega
+
+/-- **Level terms decorrelate geometrically**: for `m < m'`,
+`|cov[Y_m, Y'_{m'}]| ≤ 2 (nW)² 2^{-(m'-m)}` (any index vectors `N`, `N'`). -/
+theorem abs_covariance_levelYN_le (lev : ι → ℕ) {γ : Fin n → ℕ → ℕ → ι}
+    (hlev : ∀ i j d, lev (γ i j d) = d) (hcp : ∀ i j, 0 ≤ cp i j) (N N' : Fin n → ℕ)
+    {m m' : ℕ} (hmm' : m < m') :
+    |cov[fun ω ↦ levelYN w cp N m (coinsOf γ ω), fun ω ↦ levelYN w cp N' m' (coinsOf γ ω);
+      coinMeasure ι]| ≤ 2 * (n * absWeightSum n w) ^ 2 * (1 / 2) ^ (m' - m) := by
+  classical
+  have hγ : ∀ i j, Function.Injective (γ i j) := fun i j d d' h ↦ by
+    have := congrArg lev h
+    rwa [hlev, hlev] at this
+  set B := n * absWeightSum n w with hB
+  have hB0 : 0 ≤ B := mul_nonneg (Nat.cast_nonneg n) (absWeightSum_nonneg n w)
+  have h := abs_covariance_le_of_local (B := B)
+    (Xt := fun ω ↦ levelYNTrunc w cp N m (m' - m) (coinsOf γ ω))
+    (Yt := fun L ω ↦ levelYNTrunc w cp N' m' L (coinsOf γ ω))
+    (S := levelCoords n γ m (m' - m)) (S' := fun L ↦ levelCoords n γ m' L)
+    (measurable_levelYN_coins hcp N m γ) (measurable_levelYN_coins hcp N' m' γ)
+    (fun ω ↦ abs_levelYN_le hcp N m _) (fun ω ↦ abs_levelYN_le hcp N' m' _)
+    (fun ω ↦ abs_levelYNTrunc_le hcp N m _ _) (fun L ω ↦ abs_levelYNTrunc_le hcp N' m' L _)
+    (isLocal_levelYNTrunc_coins N m (m' - m) γ) (fun L ↦ isLocal_levelYNTrunc_coins N' m' L γ)
+    (fun L ↦ disjoint_levelCoords hlev (by omega)) ?_
+  · refine h.trans ?_
+    have := integral_abs_levelYN_sub_trunc_le (w := w) hcp N m (m' - m) hγ
+    calc 2 * B * ∫ ω, |levelYN w cp N m (coinsOf γ ω) - levelYNTrunc w cp N m (m' - m)
+          (coinsOf γ ω)| ∂(coinMeasure ι) ≤ 2 * B * (B * (1 / 2) ^ (m' - m)) :=
+          mul_le_mul_of_nonneg_left this (by positivity)
+      _ = 2 * B ^ 2 * (1 / 2) ^ (m' - m) := by ring
+  · have hlim := (tendsto_pow_atTop_nhds_zero_of_lt_one (by norm_num : (0 : ℝ) ≤ 1 / 2)
+      (by norm_num)).const_mul B
+    rw [mul_zero] at hlim
+    exact squeeze_zero (fun L ↦ integral_nonneg fun ω ↦ abs_nonneg _)
+      (fun L ↦ integral_abs_levelYN_sub_trunc_le (w := w) hcp N' m' L hγ) hlim
+
+/-- **Variance upper bound**: `Var(levelSumN) ≤ 5 (nW)² K` for every coin layout. -/
+theorem variance_levelSumN_le (lev : ι → ℕ) {γ : Fin n → ℕ → ℕ → ι}
+    (hlev : ∀ i j d, lev (γ i j d) = d) (hcp : ∀ i j, 0 ≤ cp i j) (N : Fin n → ℕ) (K : ℕ) :
+    Var[fun ω ↦ levelSumN w cp N K (coinsOf γ ω); coinMeasure ι] ≤
+      K * (5 * (n * absWeightSum n w) ^ 2) := by
+  set B := n * absWeightSum n w with hB
+  have hB0 : 0 ≤ B := mul_nonneg (Nat.cast_nonneg n) (absWeightSum_nonneg n w)
+  set Z : ℕ → (ι → Bool) → ℝ := fun m ω ↦ levelYN w cp N m (coinsOf γ ω) with hZ
+  have hZ2 : ∀ m ∈ range K, MemLp (Z m) 2 (coinMeasure ι) := fun m _ ↦
+    MemLp.of_bound (measurable_levelYN_coins hcp N m γ).aestronglyMeasurable B
+      (Eventually.of_forall fun ω ↦ by rw [Real.norm_eq_abs]; exact abs_levelYN_le hcp N m _)
+  have e : (fun ω ↦ levelSumN w cp N K (coinsOf γ ω)) = fun ω ↦ ∑ m ∈ range K, Z m ω := rfl
+  rw [e]
+  have h := variance_sum_le_of_cov (μ := coinMeasure ι) (range K) hZ2 (A := B ^ 2)
+    (β := 4 * B ^ 2) (fun m _ ↦ ?_) (fun m _ ↦ ?_)
+  · rw [card_range] at h
+    refine h.trans (le_of_eq ?_)
+    ring
+  · refine (variance_le_sq_of_bounded (a := -B) (b := B) (Eventually.of_forall fun ω ↦
+      abs_le.1 (abs_levelYN_le hcp N m _))
+      (measurable_levelYN_coins hcp N m γ).aemeasurable).trans (le_of_eq ?_)
+    ring
+  · have hcov : ∀ m' ∈ (range K).erase m, |cov[Z m, Z m'; coinMeasure ι]| ≤
+        2 * B ^ 2 * (1 / 2) ^ (m - m' + (m' - m)) := by
+      intro m' hm'
+      have hne := ne_of_mem_erase hm'
+      rcases lt_or_gt_of_ne hne with hlt | hlt
+      · have := abs_covariance_levelYN_le lev hlev hcp (w := w) N N hlt
+        rw [covariance_comm, show m - m' + (m' - m) = m - m' by omega]
+        exact this
+      · have := abs_covariance_levelYN_le lev hlev hcp (w := w) N N hlt
+        rw [show m - m' + (m' - m) = m' - m by omega]
+        exact this
+    have hgeo := sum_erase_pow_dist_le (r := 1 / 2) (by norm_num) (by norm_num) m K
+    calc ∑ m' ∈ (range K).erase m, |cov[Z m, Z m'; coinMeasure ι]|
+        ≤ ∑ m' ∈ (range K).erase m, 2 * B ^ 2 * (1 / 2) ^ (m - m' + (m' - m)) :=
+          sum_le_sum hcov
+      _ = 2 * B ^ 2 * ∑ m' ∈ (range K).erase m, (1 / 2 : ℝ) ^ (m - m' + (m' - m)) := by
+          rw [mul_sum]
+      _ ≤ 2 * B ^ 2 * (2 * ((1 / 2) / (1 - 1 / 2))) :=
+          mul_le_mul_of_nonneg_left hgeo (by positivity)
+      _ = 4 * B ^ 2 := by norm_num; ring
+
+/-! ### The integer variance bound -/
+
+/-- **Integer-valued variables are spread out**: if `X` takes integer values, then
+`Var X ≥ φ (1 − φ)` with `φ = {E X}` (the minimum is attained by the two-point law on
+`⌊E X⌋, ⌈E X⌉`). -/
+theorem variance_ge_of_int {Ω : Type*} {mΩ : MeasurableSpace Ω} {μ : Measure Ω}
+    [IsProbabilityMeasure μ] {X : Ω → ℝ} (hX : MemLp X 2 μ) (hint : ∀ ω, ∃ z : ℤ, X ω = z) :
+    Int.fract (μ[X]) * (1 - Int.fract (μ[X])) ≤ Var[X; μ] := by
+  set a : ℝ := (⌊μ[X]⌋ : ℝ) with ha
+  have hpt : ∀ ω, 0 ≤ (X ω - a) * (X ω - a - 1) := by
+    intro ω
+    obtain ⟨z, hz⟩ := hint ω
+    rw [hz, ha]
+    rcases le_or_gt z ⌊μ[X]⌋ with h | h
+    · have h1 : (z : ℝ) - ⌊μ[X]⌋ ≤ 0 := by
+        have : (z : ℝ) ≤ ⌊μ[X]⌋ := by exact_mod_cast h
+        linarith
+      nlinarith
+    · have h1 : (⌊μ[X]⌋ : ℝ) + 1 ≤ z := by exact_mod_cast h
+      nlinarith
+  have hXi : Integrable X μ := hX.integrable one_le_two
+  have hX2 : Integrable (fun ω ↦ X ω ^ 2) μ := hX.integrable_sq
+  have hexp : ∫ ω, (X ω - a) * (X ω - a - 1) ∂μ =
+      ∫ ω, X ω ^ 2 ∂μ - (2 * a + 1) * μ[X] + a * (a + 1) := by
+    have e : (fun ω ↦ (X ω - a) * (X ω - a - 1)) =
+        fun ω ↦ X ω ^ 2 - (2 * a + 1) * X ω + a * (a + 1) := funext fun ω ↦ by ring
+    have h1 : Integrable (fun ω ↦ X ω ^ 2 - (2 * a + 1) * X ω) μ := hX2.sub (hXi.const_mul _)
+    rw [e, integral_add (f := fun ω ↦ X ω ^ 2 - (2 * a + 1) * X ω) (g := fun _ ↦ a * (a + 1)) h1
+      (integrable_const _), integral_sub (f := fun ω ↦ X ω ^ 2)
+      (g := fun ω ↦ (2 * a + 1) * X ω) hX2 (hXi.const_mul _), integral_const_mul,
+      integral_const, probReal_univ, one_smul]
+  have hnn : 0 ≤ ∫ ω, (X ω - a) * (X ω - a - 1) ∂μ := integral_nonneg hpt
+  have hvar : Var[X; μ] = ∫ ω, X ω ^ 2 ∂μ - μ[X] ^ 2 := variance_eq_sub hX
+  have hfr : Int.fract (μ[X]) = μ[X] - a := by rw [ha, Int.fract]
+  rw [hvar, hfr]
+  rw [hexp] at hnn
+  nlinarith
+
+/-- The fractional parts of `w_j {2^m c_{ij}}` summed over the cut points `c_{ij} < 1`. -/
+noncomputable def rowFrac (w : ℕ → ℝ) (cp : Fin n → ℕ → ℝ) (m : ℕ) (i : Fin n) : ℝ :=
+  ∑ j ∈ range (n - 1), w j * (if cp i j < 1 then fracPow (cp i j) m else 0)
+
+/-- **Row terms with integer weights are spread out** (any coin layout): at a level `m` where
+bit `m` of `N_i` is set, `Var(rowTerm) ≥ φ (1 − φ)` with `φ = {Σ_j w_j {2^m c_{ij}}}`. -/
+theorem variance_rowTerm_ge_of_int {γ : Fin n → ℕ → ℕ → ι}
+    (hγ : ∀ i j, Function.Injective (γ i j)) (hcp : ∀ i j, 0 ≤ cp i j)
+    (hw : ∀ j ∈ range (n - 1), ∃ z : ℤ, w j = z) (N : Fin n → ℕ) (m : ℕ) (i : Fin n)
+    (hbit : (N i).testBit m = true) :
+    Int.fract (rowFrac w cp m i) * (1 - Int.fract (rowFrac w cp m i)) ≤
+      Var[fun ω ↦ rowTerm w cp N m (coinsOf γ ω) i; coinMeasure ι] := by
+  classical
+  set I : (ι → Bool) → ℝ := fun ω ↦ ∑ j ∈ range (n - 1),
+    w j * (if cp i j < 1 then levelVal (threshDigit (cp i j)) (N i) m (coinsOf γ ω i j) else 0)
+    with hI
+  have hrow : (fun ω ↦ rowTerm w cp N m (coinsOf γ ω) i) = fun ω ↦ I ω - rowFrac w cp m i := by
+    funext ω
+    rw [rowTerm, rowFrac, hI, ← sum_sub_distrib]
+    refine sum_congr rfl fun j _ ↦ ?_
+    unfold cutTerm coinTerm levelTerm
+    by_cases hc : cp i j < 1
+    · simp only [hc, hbit, ite_true, fracPow]
+      ring
+    · simp only [hc, ite_false]
+      ring
+  have hIm : Measurable I := Finset.measurable_fun_sum _ fun j _ ↦ by
+    by_cases hc : cp i j < 1
+    · simp only [hc, ite_true]
+      exact (measurable_levelVal_coins (hcp i j) hc (N i) m (γ i j)).const_mul _
+    · simp only [hc, ite_false]
+      exact measurable_const
+  have hIb : ∀ ω, |I ω| ≤ absWeightSum n w := fun ω ↦ by
+    refine (abs_sum_le_sum_abs _ _).trans (sum_le_sum fun j _ ↦ ?_)
+    rw [abs_mul]
+    refine mul_le_of_le_one_right (abs_nonneg _) ?_
+    split_ifs
+    · rcases levelVal_mem (threshDigit (cp i j)) (N i) m (coinsOf γ ω i j) with h | h <;>
+        rw [h] <;> simp
+    · simp
+  have hI2 : MemLp I 2 (coinMeasure ι) := MemLp.of_bound hIm.aestronglyMeasurable _
+    (Eventually.of_forall fun ω ↦ by rw [Real.norm_eq_abs]; exact hIb ω)
+  have hIint : ∀ ω, ∃ z : ℤ, I ω = z := by
+    intro ω
+    have : ∀ j ∈ range (n - 1), ∃ z : ℤ, w j * (if cp i j < 1 then
+        levelVal (threshDigit (cp i j)) (N i) m (coinsOf γ ω i j) else 0) = z := by
+      intro j hj
+      obtain ⟨z, hz⟩ := hw j hj
+      by_cases hc : cp i j < 1
+      · simp only [hc, ite_true]
+        rcases levelVal_mem (threshDigit (cp i j)) (N i) m (coinsOf γ ω i j) with h | h
+        · exact ⟨0, by rw [h]; simp⟩
+        · exact ⟨z, by rw [h, hz, mul_one]⟩
+      · exact ⟨0, by simp [hc]⟩
+    choose! zf hzf using this
+    exact ⟨∑ j ∈ range (n - 1), zf j, by
+      rw [hI]; push_cast; exact sum_congr rfl fun j hj ↦ hzf j hj⟩
+  have hmean : (coinMeasure ι)[I] = rowFrac w cp m i := by
+    have h0 := integral_rowTerm_coins (w := w) hcp N m hγ i
+    rw [hrow, integral_sub (hI2.integrable one_le_two) (integrable_const _), integral_const,
+      probReal_univ, one_smul] at h0
+    linarith
+  rw [hrow, variance_sub_const hIm.aestronglyMeasurable, ← hmean]
+  exact variance_ge_of_int hI2 hIint
+
+/-! ### Sparse indices and the lower-bound criterion -/
+
+/-- The index `Σ_{a<k} 2^{ra}`: bits exactly at the levels `ra`, `a < k`. -/
+def patternR (r k : ℕ) : ℕ := ∑ a ∈ range k, 2 ^ (r * a)
+
+/-- `patternR r k < 2^{rk}` for `r ≥ 1`. -/
+theorem patternR_lt {r : ℕ} (hr : 1 ≤ r) (k : ℕ) : patternR r k < 2 ^ (r * k) := by
+  induction k with
+  | zero => simp [patternR]
+  | succ k ih =>
+      rw [patternR, sum_range_succ, ← patternR, show r * (k + 1) = r * k + r by ring, pow_add]
+      have h2 : 2 ≤ 2 ^ r := by
+        calc 2 = 2 ^ 1 := by norm_num
+          _ ≤ 2 ^ r := Nat.pow_le_pow_right (by norm_num) hr
+      have : 0 < 2 ^ (r * k) := Nat.two_pow_pos _
+      nlinarith
+
+/-- **The bits of `patternR r k`** are exactly the levels `ra`, `a < k`. -/
+theorem testBit_patternR {r : ℕ} (hr : 1 ≤ r) (k m : ℕ) :
+    (patternR r k).testBit m = true ↔ m % r = 0 ∧ m / r < k := by
+  induction k generalizing m with
+  | zero => simp [patternR]
+  | succ k ih =>
+      have e : patternR r (k + 1) = 2 ^ (r * k) * 1 + patternR r k := by
+        rw [patternR, sum_range_succ, ← patternR]
+        ring
+      rw [e, Nat.testBit_two_pow_mul_add _ (patternR_lt hr k)]
+      by_cases hm : m < r * k
+      · simp only [hm, ite_true]
+        rw [ih]
+        constructor
+        · rintro ⟨h1, h2⟩
+          exact ⟨h1, by omega⟩
+        · rintro ⟨h1, h2⟩
+          refine ⟨h1, ?_⟩
+          exact (Nat.div_lt_iff_lt_mul (by omega)).2 (by rw [mul_comm]; exact hm)
+      · simp only [hm, ite_false, Nat.testBit_one_eq_true_iff_self_eq_zero]
+        have hdiv : m / r ≥ k := (Nat.le_div_iff_mul_le (by omega)).2 (by rw [mul_comm]; omega)
+        constructor
+        · intro h
+          have hm' : m = r * k := by omega
+          subst hm'
+          rw [Nat.mul_mod_right, Nat.mul_div_cancel_left _ (by omega)]
+          exact ⟨rfl, Nat.lt_succ_self k⟩
+        · rintro ⟨h1, h2⟩
+          have hmk : m / r = k := by omega
+          have := Nat.div_add_mod m r
+          rw [hmk, h1] at this
+          omega
+
+/-- The row coordinates of levels `[m, m + L)`. -/
+def rowCoords [DecidableEq ι] (n : ℕ) (γ : Fin n → ℕ → ℕ → ι) (i : Fin n) (m L : ℕ) :
+    Finset ι :=
+  (range (n - 1)).biUnion fun j ↦ (Finset.Ico m (m + L)).image (γ i j)
+
+/-- A coordinate of a row has a level in the range and comes from that row. -/
+theorem mem_rowCoords [DecidableEq ι] {lev : ι → ℕ} {γ : Fin n → ℕ → ℕ → ι}
+    (hlev : ∀ i j d, lev (γ i j d) = d) {i : Fin n} {m L : ℕ} {q : ι}
+    (hq : q ∈ rowCoords n γ i m L) :
+    (m ≤ lev q ∧ lev q < m + L) ∧ ∃ j d, q = γ i j d := by
+  simp only [rowCoords, mem_biUnion, mem_image, Finset.mem_Ico] at hq
+  obtain ⟨j, _, d, hd, rfl⟩ := hq
+  rw [hlev]
+  exact ⟨hd, j, d, rfl⟩
+
+/-- The truncated row term is `L¹`-close: `E|row − row_L| → 0`, and its variance too. -/
+theorem tendsto_variance_rowTerm_sub_trunc (hcp : ∀ i j, 0 ≤ cp i j) (N : Fin n → ℕ) (m : ℕ)
+    {γ : Fin n → ℕ → ℕ → ι} (hγ : ∀ i j, Function.Injective (γ i j)) (i : Fin n) :
+    Tendsto (fun L ↦ Var[(fun ω ↦ rowTerm w cp N m (coinsOf γ ω) i) -
+      (fun ω ↦ rowTermTrunc w cp N m L (coinsOf γ ω) i); coinMeasure ι]) atTop (𝓝 0) := by
+  set W := absWeightSum n w with hW
+  have hW0 : 0 ≤ W := absWeightSum_nonneg n w
+  have hlim := (tendsto_pow_atTop_nhds_zero_of_lt_one (by norm_num : (0 : ℝ) ≤ 1 / 2)
+    (by norm_num)).const_mul (W * W)
+  rw [mul_zero] at hlim
+  refine squeeze_zero (fun L ↦ variance_nonneg _ _) (fun L ↦ ?_) hlim
+  have hm : Measurable ((fun ω ↦ rowTerm w cp N m (coinsOf γ ω) i) -
+      (fun ω ↦ rowTermTrunc w cp N m L (coinsOf γ ω) i)) :=
+    (measurable_rowTerm_coins hcp N m γ i).sub (measurable_rowTermTrunc_coins N m L γ i)
+  refine (variance_le_expectation_sq hm.aestronglyMeasurable).trans ?_
+  have hd : ∀ ω, |rowTerm w cp N m (coinsOf γ ω) i - rowTermTrunc w cp N m L (coinsOf γ ω) i|
+      ≤ W := fun ω ↦ abs_rowTerm_sub_trunc_le N m L _ i
+  have hi1 : Integrable (((fun ω ↦ rowTerm w cp N m (coinsOf γ ω) i) -
+      (fun ω ↦ rowTermTrunc w cp N m L (coinsOf γ ω) i)) ^ 2) (coinMeasure ι) := by
+    refine Integrable.of_bound (hm.pow_const 2).aestronglyMeasurable (W ^ 2)
+      (Eventually.of_forall fun ω ↦ ?_)
+    simp only [Pi.pow_apply, Pi.sub_apply]
+    rw [Real.norm_eq_abs, abs_pow]
+    exact pow_le_pow_left₀ (abs_nonneg _) (hd ω) 2
+  have hi2 : Integrable (fun ω ↦ W * |rowTerm w cp N m (coinsOf γ ω) i -
+      rowTermTrunc w cp N m L (coinsOf γ ω) i|) (coinMeasure ι) :=
+    (Integrable.of_bound (continuous_abs.measurable.comp hm).aestronglyMeasurable W
+      (Eventually.of_forall fun ω ↦ by
+        change ‖|rowTerm w cp N m (coinsOf γ ω) i - rowTermTrunc w cp N m L (coinsOf γ ω) i|‖ ≤ W
+        rw [Real.norm_eq_abs, abs_abs]; exact hd ω)).const_mul W
+  refine (integral_mono hi1 hi2 fun ω ↦ ?_).trans ?_
+  · simp only [Pi.pow_apply, Pi.sub_apply]
+    rw [← sq_abs]
+    nlinarith [abs_nonneg (rowTerm w cp N m (coinsOf γ ω) i -
+      rowTermTrunc w cp N m L (coinsOf γ ω) i), hd ω]
+  · rw [integral_const_mul, mul_assoc]
+    exact mul_le_mul_of_nonneg_left (integral_abs_rowTerm_sub_trunc_le hcp N m L hγ i) hW0
+
+/-- **Different rows on disjoint coordinates are uncorrelated.** -/
+theorem covariance_rowTerm_eq_zero {γ : Fin n → ℕ → ℕ → ι}
+    (hγ : ∀ i j, Function.Injective (γ i j))
+    (hrows : ∀ i i' j j' d d', i ≠ i' → γ i j d ≠ γ i' j' d') (hcp : ∀ i j, 0 ≤ cp i j)
+    (N N' : Fin n → ℕ) (m m' : ℕ) {i i' : Fin n} (hii' : i ≠ i') :
+    cov[fun ω ↦ rowTerm w cp N m (coinsOf γ ω) i, fun ω ↦ rowTerm w cp N' m' (coinsOf γ ω) i';
+      coinMeasure ι] = 0 := by
+  classical
+  have hmem : ∀ N m i, MemLp (fun ω ↦ rowTerm w cp N m (coinsOf γ ω) i) 2 (coinMeasure ι) :=
+    fun N m i ↦ MemLp.of_bound (measurable_rowTerm_coins hcp N m γ i).aestronglyMeasurable _
+      (Eventually.of_forall fun ω ↦ by rw [Real.norm_eq_abs]; exact abs_rowTerm_le hcp N m _ i)
+  have hmemt : ∀ N m L i, MemLp (fun ω ↦ rowTermTrunc w cp N m L (coinsOf γ ω) i) 2
+      (coinMeasure ι) := fun N m L i ↦
+    MemLp.of_bound (measurable_rowTermTrunc_coins N m L γ i).aestronglyMeasurable _
+      (Eventually.of_forall fun ω ↦ by
+        rw [Real.norm_eq_abs]; exact abs_rowTermTrunc_le hcp N m L _ i)
+  refine covariance_eq_zero_of_approx (hmem N m i) (hmem N' m' i') (fun L ↦ hmemt N m L i)
+    (fun L ↦ hmemt N' m' L i') (fun L ↦ ?_) (tendsto_variance_rowTerm_sub_trunc hcp N m hγ i)
+    (tendsto_variance_rowTerm_sub_trunc hcp N' m' hγ i')
+  refine IsLocal.indepFun (fun _ ↦ fairCoin) (isLocal_rowTermTrunc_coins N m L γ i)
+    (isLocal_rowTermTrunc_coins N' m' L γ i') (Finset.disjoint_left.2 fun q hq hq' ↦ ?_)
+  simp only [mem_biUnion, mem_image] at hq hq'
+  obtain ⟨j, _, d, _, rfl⟩ := hq
+  obtain ⟨j', _, d', _, h⟩ := hq'
+  exact hrows i i' j j' d d' hii' h.symm
+
+/-- **Same row: covariance decays geometrically**, `|cov| ≤ 2 W² 2^{-(m'-m)}` for `m < m'`. -/
+theorem abs_covariance_rowTerm_le (lev : ι → ℕ) {γ : Fin n → ℕ → ℕ → ι}
+    (hlev : ∀ i j d, lev (γ i j d) = d) (hcp : ∀ i j, 0 ≤ cp i j) (N N' : Fin n → ℕ)
+    (i : Fin n) {m m' : ℕ} (hmm' : m < m') :
+    |cov[fun ω ↦ rowTerm w cp N m (coinsOf γ ω) i, fun ω ↦ rowTerm w cp N' m' (coinsOf γ ω) i;
+      coinMeasure ι]| ≤ 2 * absWeightSum n w ^ 2 * (1 / 2) ^ (m' - m) := by
+  classical
+  have hγ : ∀ i j, Function.Injective (γ i j) := fun i j d d' h ↦ by
+    have := congrArg lev h
+    rwa [hlev, hlev] at this
+  set W := absWeightSum n w with hW
+  have hW0 : 0 ≤ W := absWeightSum_nonneg n w
+  have h := abs_covariance_le_of_local (B := W)
+    (Xt := fun ω ↦ rowTermTrunc w cp N m (m' - m) (coinsOf γ ω) i)
+    (Yt := fun L ω ↦ rowTermTrunc w cp N' m' L (coinsOf γ ω) i)
+    (S := rowCoords n γ i m (m' - m)) (S' := fun L ↦ rowCoords n γ i m' L)
+    (measurable_rowTerm_coins hcp N m γ i) (measurable_rowTerm_coins hcp N' m' γ i)
+    (fun ω ↦ abs_rowTerm_le hcp N m _ i) (fun ω ↦ abs_rowTerm_le hcp N' m' _ i)
+    (fun ω ↦ abs_rowTermTrunc_le hcp N m _ _ i) (fun L ω ↦ abs_rowTermTrunc_le hcp N' m' L _ i)
+    (isLocal_rowTermTrunc_coins N m (m' - m) γ i) (fun L ↦ isLocal_rowTermTrunc_coins N' m' L γ i)
+    (fun L ↦ Finset.disjoint_left.2 fun q hq hq' ↦ by
+      have h1 := (mem_rowCoords hlev hq).1
+      have h2 := (mem_rowCoords hlev hq').1
+      omega) ?_
+  · refine h.trans ?_
+    have := integral_abs_rowTerm_sub_trunc_le (w := w) hcp N m (m' - m) hγ i
+    calc 2 * W * ∫ ω, |rowTerm w cp N m (coinsOf γ ω) i -
+          rowTermTrunc w cp N m (m' - m) (coinsOf γ ω) i| ∂(coinMeasure ι)
+        ≤ 2 * W * (W * (1 / 2) ^ (m' - m)) := mul_le_mul_of_nonneg_left this (by positivity)
+      _ = 2 * W ^ 2 * (1 / 2) ^ (m' - m) := by ring
+  · have hlim := (tendsto_pow_atTop_nhds_zero_of_lt_one (by norm_num : (0 : ℝ) ≤ 1 / 2)
+      (by norm_num)).const_mul W
+    rw [mul_zero] at hlim
+    exact squeeze_zero (fun L ↦ integral_nonneg fun ω ↦ abs_nonneg _)
+      (fun L ↦ integral_abs_rowTerm_sub_trunc_le (w := w) hcp N' m' L hγ i) hlim
+
+/-- At a level whose bit is not set the row term vanishes. -/
+theorem rowTerm_eq_zero_of_testBit {N : Fin n → ℕ} {m : ℕ} {i : Fin n}
+    (hbit : (N i).testBit m = false) (e : Fin n → ℕ → ℕ → Bool) : rowTerm w cp N m e i = 0 := by
+  refine sum_eq_zero fun j _ ↦ ?_
+  unfold cutTerm coinTerm
+  simp [hbit]
+
+/-- **Level sums along pattern indices** are sums of the row terms at the levels `ra`. -/
+theorem levelSumN_pattern_eq {r k K : ℕ} (hr : 1 ≤ r) (hK : ∀ a < k, r * a < K) {N : Fin n → ℕ}
+    (hN : ∀ i, N i = patternR r k) (e : Fin n → ℕ → ℕ → Bool) :
+    levelSumN w cp N K e =
+      ∑ p ∈ (univ : Finset (Fin n)) ×ˢ range k, rowTerm w cp N (r * p.2) e p.1 := by
+  classical
+  rw [levelSumN, sum_product, sum_comm]
+  refine sum_congr rfl fun i _ ↦ ?_
+  have hsub : (range k).image (fun a ↦ r * a) ⊆ range K := by
+    intro m hm
+    obtain ⟨a, ha, rfl⟩ := mem_image.1 hm
+    exact mem_range.2 (hK a (mem_range.1 ha))
+  rw [← sum_subset hsub fun m _ hm ↦ ?_, sum_image fun a _ b _ h ↦ by
+    simpa [Nat.mul_left_cancel_iff (show 0 < r by omega)] using h]
+  refine rowTerm_eq_zero_of_testBit ?_ e
+  rw [hN i]
+  by_contra h
+  have h' := (testBit_patternR hr k m).1 (by simpa using h)
+  refine hm (mem_image.2 ⟨m / r, mem_range.2 h'.2, ?_⟩)
+  have := Nat.div_add_mod m r
+  rw [h'.1, add_zero] at this
+  exact this
+
+/-- **Lower-bound criterion.** Let every row have index `patternR r k`, the rows use disjoint
+coordinates, and every row term at the levels `ra`, `a < k`, have variance `≥ a₀`. Then
+`Var(levelSumN) ≥ n k (a₀ − 4 W² ρ/(1 − ρ))` with `ρ = 2^{-r}`. -/
+theorem variance_levelSumN_pattern_ge (lev : ι → ℕ) {γ : Fin n → ℕ → ℕ → ι}
+    (hlev : ∀ i j d, lev (γ i j d) = d)
+    (hrows : ∀ i i' j j' d d', i ≠ i' → γ i j d ≠ γ i' j' d') (hcp : ∀ i j, 0 ≤ cp i j)
+    {r k K : ℕ} (hr : 1 ≤ r) (hK : ∀ a < k, r * a < K) {N : Fin n → ℕ}
+    (hN : ∀ i, N i = patternR r k)
+    {a₀ : ℝ} (hdiag : ∀ i, ∀ a < k,
+      a₀ ≤ Var[fun ω ↦ rowTerm w cp N (r * a) (coinsOf γ ω) i; coinMeasure ι]) :
+    n * k * (a₀ - 4 * absWeightSum n w ^ 2 * ((1 / 2) ^ r / (1 - (1 / 2) ^ r))) ≤
+      Var[fun ω ↦ levelSumN w cp N K (coinsOf γ ω); coinMeasure ι] := by
+  classical
+  have hγ : ∀ i j, Function.Injective (γ i j) := fun i j d d' h ↦ by
+    have := congrArg lev h
+    rwa [hlev, hlev] at this
+  set W := absWeightSum n w with hW
+  set ρ : ℝ := (1 / 2) ^ r with hρ
+  have hρ0 : 0 ≤ ρ := by positivity
+  have hρ1 : ρ < 1 := pow_lt_one₀ (by norm_num) (by norm_num) (by omega)
+  set s := (univ : Finset (Fin n)) ×ˢ range k with hs
+  set Z : Fin n × ℕ → (ι → Bool) → ℝ := fun p ω ↦ rowTerm w cp N (r * p.2) (coinsOf γ ω) p.1
+    with hZ
+  have e : (fun ω ↦ levelSumN w cp N K (coinsOf γ ω)) = fun ω ↦ ∑ p ∈ s, Z p ω :=
+    funext fun ω ↦ levelSumN_pattern_eq hr hK hN _
+  rw [e]
+  have hZ2 : ∀ p ∈ s, MemLp (Z p) 2 (coinMeasure ι) := fun p _ ↦
+    MemLp.of_bound (measurable_rowTerm_coins hcp N _ γ p.1).aestronglyMeasurable _
+      (Eventually.of_forall fun ω ↦ by rw [Real.norm_eq_abs]; exact abs_rowTerm_le hcp N _ _ _)
+  have h := variance_sum_ge_of_cov s hZ2 (a := a₀)
+    (β := 4 * W ^ 2 * (ρ / (1 - ρ))) (fun p hp ↦ ?_) (fun p hp ↦ ?_)
+  · rw [hs, card_product, card_univ, Fintype.card_fin, card_range] at h
+    push_cast at h
+    exact h
+  · simp only [hs, mem_product, mem_univ, mem_range, true_and] at hp
+    exact hdiag p.1 p.2 hp
+  · -- the off-diagonal covariances
+    obtain ⟨i, a⟩ := p
+    have hcov : ∀ p' ∈ s.erase (i, a), |cov[Z (i, a), Z p'; coinMeasure ι]| ≤
+        if p'.1 = i then 2 * W ^ 2 * ρ ^ (a - p'.2 + (p'.2 - a)) else 0 := by
+      rintro ⟨i', b⟩ hp'
+      have hne := ne_of_mem_erase hp'
+      by_cases hii : i' = i
+      · subst hii
+        have hab : a ≠ b := fun h ↦ hne (by rw [h])
+        simp only [ite_true]
+        have hpow : ∀ d : ℕ, (1 / 2 : ℝ) ^ (r * d) = ρ ^ d := fun d ↦ by rw [hρ, pow_mul]
+        rcases lt_or_gt_of_ne hab with hlt | hlt
+        · have hmm : r * a < r * b := Nat.mul_lt_mul_of_pos_left hlt (by omega)
+          have := abs_covariance_rowTerm_le lev hlev hcp (w := w) N N i' hmm
+          rw [show r * b - r * a = r * (b - a) by rw [Nat.mul_sub], hpow] at this
+          rwa [show a - b + (b - a) = b - a by omega]
+        · have hmm : r * b < r * a := Nat.mul_lt_mul_of_pos_left hlt (by omega)
+          have := abs_covariance_rowTerm_le lev hlev hcp (w := w) N N i' hmm
+          rw [show r * a - r * b = r * (a - b) by rw [Nat.mul_sub], hpow] at this
+          rw [covariance_comm, show a - b + (b - a) = a - b by omega]
+          exact this
+      · simp only [hii, ite_false]
+        rw [covariance_rowTerm_eq_zero hγ hrows hcp N N _ _ (Ne.symm hii), abs_zero]
+    refine (sum_le_sum hcov).trans ?_
+    rw [← sum_filter]
+    have hfil : (s.erase (i, a)).filter (fun p' ↦ p'.1 = i) =
+        ((range k).erase a).image (fun b ↦ (i, b)) := by
+      ext ⟨i', b⟩
+      simp only [hs, mem_filter, mem_erase, mem_product, mem_univ, mem_range, true_and,
+        mem_image, ne_eq, Prod.mk.injEq]
+      constructor
+      · rintro ⟨⟨hne, hb⟩, rfl⟩
+        exact ⟨b, ⟨fun h ↦ hne ⟨rfl, h⟩, hb⟩, rfl, rfl⟩
+      · rintro ⟨b', ⟨hb', hb⟩, rfl, rfl⟩
+        exact ⟨⟨fun h ↦ hb' h.2, hb⟩, rfl⟩
+    rw [hfil, sum_image fun b _ b' _ h ↦ by simpa using h]
+    have hgeo := sum_erase_pow_dist_le hρ0 hρ1 a k
+    calc ∑ b ∈ (range k).erase a, 2 * W ^ 2 * ρ ^ (a - b + (b - a))
+        = 2 * W ^ 2 * ∑ b ∈ (range k).erase a, ρ ^ (a - b + (b - a)) := by rw [mul_sum]
+      _ ≤ 2 * W ^ 2 * (2 * (ρ / (1 - ρ))) := mul_le_mul_of_nonneg_left hgeo (by positivity)
+      _ = 4 * W ^ 2 * (ρ / (1 - ρ)) := by ring
+
+/-! ### Mean-square tools -/
+
+/-- `(⌊log₂ y⌋ + 1)² ≤ 4 y` for `y ≥ 1`. -/
+theorem natLog_add_one_sq_le {y : ℕ} (hy : 1 ≤ y) : ((Nat.log 2 y : ℝ) + 1) ^ 2 ≤ 4 * y := by
+  set ℓ := Nat.log 2 y with hℓ
+  have hpow : 2 ^ ℓ ≤ y := Nat.pow_log_le_self 2 (by omega)
+  have hnat : (ℓ + 1) ^ 2 ≤ 4 * 2 ^ ℓ := by
+    clear hpow hℓ
+    induction ℓ with
+    | zero => norm_num
+    | succ ℓ ih =>
+        have h1 : ℓ < 2 ^ ℓ := Nat.lt_two_pow_self
+        have h2 : 2 ^ (ℓ + 1) = 2 * 2 ^ ℓ := by ring
+        rw [h2]
+        nlinarith
+  have h1 : ((ℓ + 1) ^ 2 : ℕ) ≤ 4 * y := hnat.trans (by omega)
+  exact_mod_cast h1
+
+/-- **Mean square of a perturbed centred term**: if `|E − M| ≤ b` and `E[M²] ≤ V`, then
+`E[E²] ≤ 2V + 2b²`. -/
+theorem integral_sq_le_of_close {Ω : Type*} {mΩ : MeasurableSpace Ω} {μ : Measure Ω}
+    [IsProbabilityMeasure μ] {E M : Ω → ℝ} (hE : MemLp E 2 μ) (hM : MemLp M 2 μ) {b V : ℝ}
+    (hclose : ∀ ω, |E ω - M ω| ≤ b) (hV : ∫ ω, M ω ^ 2 ∂μ ≤ V) :
+    ∫ ω, E ω ^ 2 ∂μ ≤ 2 * V + 2 * b ^ 2 := by
+  have hpt : ∀ ω, E ω ^ 2 ≤ 2 * M ω ^ 2 + 2 * b ^ 2 := by
+    intro ω
+    have h2 : (E ω - M ω) ^ 2 ≤ b ^ 2 := by
+      rw [← sq_abs]
+      exact pow_le_pow_left₀ (abs_nonneg _) (hclose ω) 2
+    nlinarith [sq_nonneg (E ω - 2 * M ω)]
+  calc ∫ ω, E ω ^ 2 ∂μ ≤ ∫ ω, (2 * M ω ^ 2 + 2 * b ^ 2) ∂μ :=
+        integral_mono hE.integrable_sq ((hM.integrable_sq.const_mul 2).add (integrable_const _))
+          hpt
+    _ = 2 * ∫ ω, M ω ^ 2 ∂μ + 2 * b ^ 2 := by
+        rw [integral_add (hM.integrable_sq.const_mul 2) (integrable_const _), integral_const_mul,
+          integral_const, probReal_univ, one_smul]
+    _ ≤ 2 * V + 2 * b ^ 2 := by linarith
+
+/-- **Mean square of a level sum**: `E[levelSumN²] = Var ≤ 5 (nW)² K`. -/
+theorem integral_sq_levelSumN_le (lev : ι → ℕ) {γ : Fin n → ℕ → ℕ → ι}
+    (hlev : ∀ i j d, lev (γ i j d) = d) (hcp : ∀ i j, 0 ≤ cp i j) (N : Fin n → ℕ) (K : ℕ) :
+    ∫ ω, levelSumN w cp N K (coinsOf γ ω) ^ 2 ∂(coinMeasure ι) ≤
+      K * (5 * (n * absWeightSum n w) ^ 2) := by
+  have hγ : ∀ i j, Function.Injective (γ i j) := fun i j d d' h ↦ by
+    have := congrArg lev h
+    rwa [hlev, hlev] at this
+  have h0 := integral_levelSumN_coins (w := w) hcp N K hγ
+  have hv := variance_levelSumN_le lev hlev hcp (w := w) N K
+  rw [variance_of_integral_eq_zero
+    (memLp_levelSumN_coins hcp N K γ).aestronglyMeasurable.aemeasurable h0] at hv
+  exact hv
+
+/-- **Rate of the mean square of the frequency**: if `E[E_T²] ≤ C (⌊log₂ T⌋ + 1)` for all `T`,
+then `E[(E_T/T)²] = O(log T / T²)`. -/
+theorem isBigO_meanSq_div_of_le {Ω : Type*} {mΩ : MeasurableSpace Ω} {μ : Measure Ω}
+    {E : ℕ → Ω → ℝ} {C : ℝ} (hC : ∀ T, ∫ ω, E T ω ^ 2 ∂μ ≤ C * ((Nat.log 2 T : ℝ) + 1)) :
+    (fun T : ℕ ↦ ∫ ω, (E T ω / T) ^ 2 ∂μ) =O[atTop]
+      fun T : ℕ ↦ (Nat.log 2 T : ℝ) / (T : ℝ) ^ 2 := by
+  have hlog : ∀ᶠ T : ℕ in atTop, 1 ≤ Nat.log 2 T :=
+    ((tendsto_atTop_atTop.2 fun b ↦ ⟨2 ^ b, fun t ht ↦ Nat.le_log_of_pow_le one_lt_two ht⟩).comp
+      tendsto_id).eventually_ge_atTop 1
+  refine Asymptotics.IsBigO.of_bound (2 * |C|) ?_
+  filter_upwards [hlog, eventually_ge_atTop 1] with T h2 h3
+  have hT0 : (0 : ℝ) < T := by exact_mod_cast h3
+  have hl : (1 : ℝ) ≤ Nat.log 2 T := by exact_mod_cast h2
+  have e : ∫ ω, (E T ω / T) ^ 2 ∂μ = (∫ ω, E T ω ^ 2 ∂μ) / T ^ 2 := by
+    simp_rw [div_pow]
+    rw [integral_div]
+  have hnn : 0 ≤ ∫ ω, E T ω ^ 2 ∂μ := integral_nonneg fun ω ↦ sq_nonneg _
+  have hq : (0 : ℝ) ≤ (Nat.log 2 T : ℝ) / (T : ℝ) ^ 2 := by positivity
+  rw [Real.norm_eq_abs, Real.norm_eq_abs, e, abs_of_nonneg (div_nonneg hnn (by positivity)),
+    abs_of_nonneg hq, mul_div_assoc', div_le_div_iff_of_pos_right (by positivity)]
+  have h1 := hC T
+  have h4 : C * ((Nat.log 2 T : ℝ) + 1) ≤ |C| * ((Nat.log 2 T : ℝ) + 1) :=
+    mul_le_mul_of_nonneg_right (le_abs_self C) (by linarith)
+  nlinarith [abs_nonneg C]
+
+end RQMCMarkov.ScrambledStacks
+
+/-
+Copyright (c) 2026 Robert Kirkby. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Robert Kirkby
+-/
+
+/-!
+# The stacks CLT for n states: the random digital shift (post #3, code (ii))
+
+Post #3, code (ii): one Sobol (base-2 van der Corput) sequence per state with a random digital
+shift; "in the five-state chain normality cannot be rejected for the per-state Sobol sequences".
+
+**Reading.** As for two states (`CltStacks`): for ANY number `n` of states, any stochastic `P`
+with Poisson data for every target (`IsPoissonFamily`) and any target `s`, along times `T_k → ∞`
+with `Var(N_s(T_k) − T_k π_s) ≥ κ log₂ T_k`, the normalised occupation error is asymptotically
+`N(0,1)`. The variance is always `O(log T)`, so the RMSE of the occupation frequency is
+`O(√log T / T)`.
+
+**Proof.** Under the digital shift the path coins of EVERY cut point of row `i` are the same
+flips `ω (i, d)` (`pathCoin_shiftTable`): the main term is the level sum of the coin layout
+`shiftLayout` on `Fin n × ℕ` with level `Prod.snd` (`mainTermN_shiftFlips_eq`). The CLT for level
+sums (`CltNCoins`) and the deterministic Anscombe theorem (`CltNDecomp`, `O(log log T)`) with
+Slutsky give the result. This proof uses no law of Owen's scramble (the laws differ for `n ≥ 3`,
+`CltThreeState`); the Owen case is the separate `CltNOwen`.
+
+**Hypotheses added.** `IsPoissonFamily P H π` (Poisson data for every target; satisfiable, e.g.
+`CltNExample`); the variance hypothesis is stated along the given times (`∀ᶠ k`), as the CLT is
+about such subsequences (along `T = 2^k` the variance stays bounded for non-dyadic chains,
+`StackPowerOfTwo`). No positivity of `P` and no condition on the cut points is needed (cut points
+equal to `1` contribute nothing).
+
+## Main results
+
+* `shiftLayout`, `pathCoins_shiftFlips_eq`, `mainTermN_shiftFlips_eq`, `shiftMainTerm`.
+* `abs_occErrN_shift_sub_le`, `memLp_occErrN_shift`.
+* `tendstoInDistribution_occErrN_shift` (**main theorem, code (ii)**).
+* `integral_sq_occErrN_shift_le`, `variance_occErrN_shift_le`: `E[E_T²], Var(E_T) ≤ C (log₂ T + 1)`.
+* `isBigO_meanSq_occFreqN_shift`: `E[(N_s(T)/T − π_s)²] = O(log T / T²)` (RMSE `O(√log T / T)`).
+-/
+
+namespace RQMCMarkov.ScrambledStacks
+
+open MeasureTheory ProbabilityTheory Filter Finset
+open scoped ENNReal NNReal Topology
+
+variable {n : ℕ}
+
+/-- The digital-shift coin layout: every cut point `j` of row `i` uses the flips `(i, d)`. -/
+def shiftLayout (n : ℕ) : Fin n → ℕ → ℕ → Fin n × ℕ := fun i _ d ↦ (i, d)
+
+/-- The level of the shift coordinate `(i, d)` is `d`. -/
+theorem shiftLayout_lev (i : Fin n) (j d : ℕ) : (shiftLayout n i j d).2 = d := rfl
+
+/-- Different rows use different shift flips. -/
+theorem shiftLayout_rows (i i' : Fin n) (j j' d d' : ℕ) (hii' : i ≠ i') :
+    shiftLayout n i j d ≠ shiftLayout n i' j' d' := fun h ↦ hii' (congrArg Prod.fst h)
+
+/-- **Shift path coins.** Under the digital shift the path coins of every cut point of row `i`
+are the flips `ω (i, ·)`. -/
+theorem pathCoins_shiftFlips_eq (P : Fin n → Fin n → ℝ) (ω : Fin n × ℕ → Bool) :
+    (fun i j ↦ pathCoin (shiftFlips ω i) (threshDigit (cutPoint P i j))) =
+      coinsOf (shiftLayout n) ω := rfl
+
+/-- The main term of the shifted chain as a level sum of the flips, with `⌊log₂ T⌋ + 1` levels. -/
+noncomputable def shiftMainTerm (P : Fin n → Fin n → ℝ) (H : Fin n → Fin n → ℝ)
+    (pi : Fin n → ℝ) (s : Fin n) (T : ℕ) (ω : Fin n × ℕ → Bool) : ℝ :=
+  levelSumN (cutWeight (H s)) (cutPoint P) (chainIdxN pi T) (Nat.log 2 T + 1)
+    (coinsOf (shiftLayout n) ω)
+
+/-- The main term of the shifted chain is the level sum of the flips. -/
+theorem mainTermN_shiftFlips_eq {P : Fin n → Fin n → ℝ} (hP : IsStochastic P)
+    {H : Fin n → Fin n → ℝ} {pi : Fin n → ℝ} (hH : IsPoissonFamily P H pi) (s : Fin n) (T : ℕ)
+    (ω : Fin n × ℕ → Bool) :
+    mainTermN P (H s) pi (shiftFlips ω) T = shiftMainTerm P H pi s T ω :=
+  mainTermN_eq_levelSumN hP (H s) pi (shiftFlips ω) T (chainIdxN_lt_two_pow hP hH T)
+
+/-- The occupation error of the shifted chain is within `ansBoundN` of the level sum. -/
+theorem abs_occErrN_shift_sub_le {P : Fin n → Fin n → ℝ} (hP : IsStochastic P)
+    {H : Fin n → Fin n → ℝ} {pi : Fin n → ℝ} (hH : IsPoissonFamily P H pi) (x₀ s : Fin n)
+    (T : ℕ) (ω : Fin n × ℕ → Bool) :
+    |occErrN P pi x₀ (shiftFlips ω) s T - shiftMainTerm P H pi s T ω| ≤ ansBoundN H s T := by
+  rw [← mainTermN_shiftFlips_eq hP hH s T ω]
+  exact abs_occErrN_sub_mainTermN_le hP hH x₀ (shiftFlips ω) s T
+
+/-- The occupation error is bounded: `|N_s(T) − T π_s| ≤ T + T |π_s|`. -/
+theorem abs_occErrN_le (P : Fin n → Fin n → ℝ) (pi : Fin n → ℝ) (x₀ : Fin n)
+    (f : Fin n → ℕ → ℕ → Bool) (s : Fin n) (T : ℕ) :
+    |occErrN P pi x₀ f s T| ≤ T + T * |pi s| := by
+  rw [occErrN]
+  refine (abs_sub _ _).trans ?_
+  rw [Nat.abs_cast, abs_mul, Nat.abs_cast]
+  have : (occCount (stackPath P x₀ (scrambledStack f)) s T : ℝ) ≤ T := by
+    exact_mod_cast occCount_le _ s T
+  linarith
+
+/-- The occupation error of the shifted chain is in `L²`. -/
+theorem memLp_occErrN_shift (P : Fin n → Fin n → ℝ) (pi : Fin n → ℝ) (x₀ s : Fin n) (T : ℕ) :
+    MemLp (fun ω ↦ occErrN P pi x₀ (shiftFlips ω) s T) 2 (shiftMeasure n) := by
+  have hm : Measurable fun ω : Fin n × ℕ → Bool ↦ occErrN P pi x₀ (shiftFlips ω) s T :=
+    ((measurable_of_countable (Nat.cast : ℕ → ℝ)).comp (measurable_occCount_of
+      (fun i k ↦ measurable_scrambledStack_shift i k) P x₀ s T)).sub measurable_const
+  exact MemLp.of_bound hm.aestronglyMeasurable _ (Eventually.of_forall fun ω ↦ by
+    rw [Real.norm_eq_abs]; exact abs_occErrN_le P pi x₀ _ s T)
+
+/-- `⌊log₂ T_k⌋ + 1 → ∞` along `T_k → ∞`. -/
+theorem tendsto_natLog_add_one {T : ℕ → ℕ} (hT : Tendsto T atTop atTop) :
+    Tendsto (fun k ↦ Nat.log 2 (T k) + 1) atTop atTop :=
+  tendsto_atTop_mono (fun _ ↦ Nat.le_succ _)
+    ((tendsto_atTop_atTop.2 fun b ↦ ⟨2 ^ b, fun _ ht ↦ Nat.le_log_of_pow_le one_lt_two ht⟩).comp
+      hT)
+
+/-- **The stacks CLT for n states, random digital shift** (post #3, code (ii)). For a stochastic
+`P` on `Fin n` with Poisson data `H`, `π` for every target, a target `s`, and `T_k → ∞` with
+`Var(N_s(T_k) − T_k π_s) ≥ κ log₂ T_k` eventually,
+`(N_s(T_k) − T_k π_s) / √Var(N_s(T_k) − T_k π_s) ⇒ N(0,1)`. -/
+theorem tendstoInDistribution_occErrN_shift {P : Fin n → Fin n → ℝ} (hP : IsStochastic P)
+    {H : Fin n → Fin n → ℝ} {pi : Fin n → ℝ} (hH : IsPoissonFamily P H pi) (x₀ s : Fin n)
+    {T : ℕ → ℕ} (hT : Tendsto T atTop atTop) {κ : ℝ} (hκ : 0 < κ)
+    (hvar : ∀ᶠ k in atTop,
+      κ * Nat.log 2 (T k) ≤ Var[fun ω ↦ occErrN P pi x₀ (shiftFlips ω) s (T k); shiftMeasure n])
+    {Ω' : Type*} {mΩ' : MeasurableSpace Ω'} {P' : Measure Ω'} [IsProbabilityMeasure P']
+    {Z : Ω' → ℝ} (hZ : HasLaw Z (gaussianReal 0 1) P') :
+    TendstoInDistribution (fun k ω ↦ occErrN P pi x₀ (shiftFlips ω) s (T k) /
+      √Var[fun ω ↦ occErrN P pi x₀ (shiftFlips ω) s (T k); shiftMeasure n]) atTop Z
+      (fun _ ↦ shiftMeasure n) P' := by
+  have hcp : ∀ i j, 0 ≤ cutPoint P i j := fun i j ↦ (cutPoint_mem_Icc hP i j).1
+  have hγ : ∀ i j, Function.Injective (shiftLayout n i j) := fun i j d d' h ↦
+    congrArg Prod.snd h
+  refine tendstoInDistribution_of_close_main (E := fun k ω ↦ occErrN P pi x₀ (shiftFlips ω) s (T k))
+    (M := fun k ω ↦ shiftMainTerm P H pi s (T k) ω) hT (b := fun k ↦ ansBoundN H s (T k))
+    (tendsto_sq_div_natLog_of_le hT (fun k ↦ ansBoundN_nonneg H s (T k))
+      (fun k ↦ ansBoundN_le_log H s (T k)))
+    (fun k ↦ memLp_occErrN_shift P pi x₀ s (T k))
+    (fun k ↦ memLp_levelSumN_coins hcp _ _ (shiftLayout n))
+    (fun k ↦ integral_levelSumN_coins hcp _ _ hγ)
+    (fun k ω ↦ abs_occErrN_shift_sub_le hP hH x₀ s (T k) ω) hκ hvar ?_
+  intro κ' hκ' hv
+  exact tendstoInDistribution_levelSumN Prod.snd (γ := shiftLayout n) (fun i j d ↦ rfl) hcp
+    (N := fun k ↦ chainIdxN pi (T k)) (K := fun k ↦ Nat.log 2 (T k) + 1)
+    (tendsto_natLog_add_one hT) hκ' hv hZ
+
+/-- The constant `10 (nW)² + 8 C²` of the mean-square bound. -/
+noncomputable def varConstN (H : Fin n → Fin n → ℝ) (s : Fin n) : ℝ :=
+  10 * (n * cutWeightSum (H s)) ^ 2 + 8 * ansConstN H s ^ 2
+
+/-- `2 ansBoundN² ≤ 8 C² (⌊log₂ T⌋ + 1)`: the Anscombe error is `o(√log T)` in mean square. -/
+theorem two_mul_ansBoundN_sq_le (H : Fin n → Fin n → ℝ) (s : Fin n) (T : ℕ) :
+    2 * ansBoundN H s T ^ 2 ≤ 8 * ansConstN H s ^ 2 * ((Nat.log 2 T : ℝ) + 1) := by
+  have h1 := ansBoundN_le_log H s T
+  have h0 := ansBoundN_nonneg H s T
+  have hy := natLog_add_one_sq_le (y := Nat.log 2 T + 1) (by omega)
+  push_cast at hy
+  have h2 : ansBoundN H s T ^ 2 ≤
+      ansConstN H s ^ 2 * ((Nat.log 2 (Nat.log 2 T + 1) : ℝ) + 1) ^ 2 := by
+    have := pow_le_pow_left₀ h0 h1 2
+    rwa [mul_pow] at this
+  nlinarith [sq_nonneg (ansConstN H s)]
+
+/-- **Mean-square bound** (digital shift): `E[(N_s(T) − T π_s)²] ≤ C (⌊log₂ T⌋ + 1)`. -/
+theorem integral_sq_occErrN_shift_le {P : Fin n → Fin n → ℝ} (hP : IsStochastic P)
+    {H : Fin n → Fin n → ℝ} {pi : Fin n → ℝ} (hH : IsPoissonFamily P H pi) (x₀ s : Fin n)
+    (T : ℕ) :
+    ∫ ω, occErrN P pi x₀ (shiftFlips ω) s T ^ 2 ∂(shiftMeasure n) ≤
+      varConstN H s * ((Nat.log 2 T : ℝ) + 1) := by
+  have hcp : ∀ i j, 0 ≤ cutPoint P i j := fun i j ↦ (cutPoint_mem_Icc hP i j).1
+  have hV := integral_sq_levelSumN_le Prod.snd (γ := shiftLayout n) (fun i j d ↦ rfl) hcp
+    (w := cutWeight (H s)) (chainIdxN pi T) (Nat.log 2 T + 1)
+  have h := integral_sq_le_of_close (memLp_occErrN_shift P pi x₀ s T)
+    (memLp_levelSumN_coins hcp _ _ (shiftLayout n))
+    (abs_occErrN_shift_sub_le hP hH x₀ s T) hV
+  have hb := two_mul_ansBoundN_sq_le H s T
+  refine h.trans ?_
+  rw [varConstN]
+  push_cast
+  change 2 * (((Nat.log 2 T : ℝ) + 1) * (5 * (n * cutWeightSum (H s)) ^ 2)) +
+    2 * ansBoundN H s T ^ 2 ≤ _
+  nlinarith
+
+/-- **Variance bound** (digital shift): `Var(N_s(T) − T π_s) ≤ C (⌊log₂ T⌋ + 1) = O(log T)`. -/
+theorem variance_occErrN_shift_le {P : Fin n → Fin n → ℝ} (hP : IsStochastic P)
+    {H : Fin n → Fin n → ℝ} {pi : Fin n → ℝ} (hH : IsPoissonFamily P H pi) (x₀ s : Fin n)
+    (T : ℕ) :
+    Var[fun ω ↦ occErrN P pi x₀ (shiftFlips ω) s T; shiftMeasure n] ≤
+      varConstN H s * ((Nat.log 2 T : ℝ) + 1) :=
+  (variance_le_expectation_sq (memLp_occErrN_shift P pi x₀ s T).aestronglyMeasurable).trans
+    (integral_sq_occErrN_shift_le hP hH x₀ s T)
+
+/-- **RMSE of the occupation frequency is `O(√log T / T)`** (digital shift, n states):
+`E[(N_s(T)/T − π_s)²] = O(log T / T²)`. -/
+theorem isBigO_meanSq_occFreqN_shift {P : Fin n → Fin n → ℝ} (hP : IsStochastic P)
+    {H : Fin n → Fin n → ℝ} {pi : Fin n → ℝ} (hH : IsPoissonFamily P H pi) (x₀ s : Fin n) :
+    (fun T : ℕ ↦ ∫ ω, (occErrN P pi x₀ (shiftFlips ω) s T / T) ^ 2 ∂(shiftMeasure n)) =O[atTop]
+      fun T : ℕ ↦ (Nat.log 2 T : ℝ) / (T : ℝ) ^ 2 :=
+  isBigO_meanSq_div_of_le (E := fun T ω ↦ occErrN P pi x₀ (shiftFlips ω) s T)
+    (integral_sq_occErrN_shift_le hP hH x₀ s)
+
+end RQMCMarkov.ScrambledStacks
+
+/-
+Copyright (c) 2026 Robert Kirkby. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Robert Kirkby
+-/
+
+/-!
+# Owen's flips relabelled by the scrambled tree (post #3, code (iii), n states)
+
+Under Owen's nested scramble the flip at depth `m` applied to the points of original `m`-digit
+prefix `α` is `ω (i, m, α)`. The flips at depths `< m` induce a bijection `σ_m` of the depth-`m`
+prefixes (original prefix ↦ scrambled prefix). The path coin of a cut point `c` at depth `m`
+is the flip at the node `σ_m⁻¹(⌊2^m c⌋)` (`CltPathBits.pathPrefix`). We **relabel** the flips by
+the nodes of the SCRAMBLED tree, `g ω (i, m, p) = ω (i, m, σ_m⁻¹ p)` (`owenRelabel`; the
+coordinates with `p ≥ 2^m`, which Owen's scramble never uses, are left alone). Then:
+
+* `pathCoin_owenTable_eq_relabel`: the path coin of `c ∈ [0,1)` at depth `m` is
+  `g ω (i, m, ⌊2^m c⌋)` — two cut points share the relabelled coins of their common binary
+  prefix, and use different ones from their first differing digit on;
+* `measurePreserving_owenRelabel` (**the relabelling preserves Owen's measure**): `σ_m` depends
+  only on the flips of depths `< m`, and a bijective relabelling of fresh fair coins is fair;
+  proved through rectangle cylinders (`owenMeasure_relabel_rect`, by induction on the depth,
+  conditioning on the finitely many flips above) and `eq_owenMeasure_of_box`.
+
+This generalises `map_owenPathCoins` (one threshold per row) to all the nodes of the tree, which
+is what the n-state CLT needs (`CltNOwen`). It is NOT a law transfer to the digital shift: under
+the shift two cut points of a row share the same flip at every depth (`CltThreeState`).
+
+## Main results
+
+* `prefixDigits`, `owenNode`, `owenRelabel`, `owenRect`.
+* `pathPrefix_congr_digits`, `pathPrefix_threshDigit_eq`, `pathCoin_owenTable_eq_relabel`.
+* `owenNode_lt`, `owenNode_inj`, `owenNode_congr`, `owenRelabel_congr`, `measurable_owenRelabel`.
+* `measure_eq_sum_restrict_preimage`, `coinMeasure_setOf_comp_eq` (cylinder tools).
+* `owenMeasure_relabel_rect`, `eq_owenMeasure_of_box`, `measurePreserving_owenRelabel`.
+-/
+
+namespace RQMCMarkov.ScrambledStacks
+
+open MeasureTheory ProbabilityTheory Filter Finset
+open scoped ENNReal NNReal Topology
+
+variable {n : ℕ}
+
+/-! ### The relabelling -/
+
+/-- The `m` binary digits of `p` (most significant first): digit `j` is bit `m − 1 − j`. -/
+def prefixDigits (m p : ℕ) : ℕ → Bool := fun j ↦ p.testBit (m - 1 - j)
+
+/-- The original depth-`m` prefix (a node of Owen's tree) that the scramble of row `i` sends to
+the scrambled prefix `p`. -/
+def owenNode (ω : Fin n × ℕ × ℕ → Bool) (i : Fin n) (m p : ℕ) : ℕ :=
+  pathPrefix (owenTable ω i) (prefixDigits m p) m
+
+/-- **Owen's flips relabelled by the scrambled tree**: the flip at depth `m` of the node whose
+scrambled prefix is `p < 2^m` (other coordinates unchanged). -/
+def owenRelabel (ω : Fin n × ℕ × ℕ → Bool) (q : Fin n × ℕ × ℕ) : Bool :=
+  if q.2.2 < 2 ^ q.2.1 then ω (q.1, q.2.1, owenNode ω q.1 q.2.1 q.2.2) else ω q
+
+/-- The rectangle of Owen coordinates of depth `< M` and prefix `< W`. -/
+def owenRect (n M W : ℕ) : Finset (Fin n × ℕ × ℕ) := univ ×ˢ (range M ×ˢ range W)
+
+/-- Membership in `owenRect`. -/
+theorem mem_owenRect {M W : ℕ} {q : Fin n × ℕ × ℕ} :
+    q ∈ owenRect n M W ↔ q.2.1 < M ∧ q.2.2 < W := by
+  simp [owenRect]
+
+/-- `owenBox n M = owenRect n M (2^M)`. -/
+theorem owenBox_eq_owenRect (n M : ℕ) : owenBox n M = owenRect n M (2 ^ M) := rfl
+
+/-- Path prefixes depend only on the first digits of the threshold. -/
+theorem pathPrefix_congr_digits (f : ℕ → ℕ → Bool) {cb cb' : ℕ → Bool} {m : ℕ}
+    (h : ∀ j < m, cb j = cb' j) : pathPrefix f cb m = pathPrefix f cb' m := by
+  induction m with
+  | zero => rfl
+  | succ m ih =>
+      have ih' := ih fun j hj ↦ h j (by omega)
+      change pathPrefix f cb m + 2 ^ m * (if xor (cb m) (f m (pathPrefix f cb m)) then 1 else 0) =
+        pathPrefix f cb' m + 2 ^ m * (if xor (cb' m) (f m (pathPrefix f cb' m)) then 1 else 0)
+      rw [ih', h m (by omega)]
+
+/-- The digits of `c ∈ [0,1)` before depth `m` are those of `⌊2^m c⌋`. -/
+theorem pathPrefix_threshDigit_eq (f : ℕ → ℕ → Bool) {c : ℝ} (hc1 : c < 1) (m : ℕ) :
+    pathPrefix f (threshDigit c) m = pathPrefix f (prefixDigits m ⌊2 ^ m * c⌋₊) m := by
+  refine pathPrefix_congr_digits f fun j hj ↦ ?_
+  have h := (digitPrefix_eq_iff (threshDigit c) m ⌊2 ^ m * c⌋₊).1 (digitPrefix_threshDigit hc1 m)
+  exact h.2 j hj
+
+/-- `⌊2^m c⌋ < 2^m` for `c < 1`. -/
+theorem floor_two_pow_mul_lt {c : ℝ} (hc1 : c < 1) (m : ℕ) : ⌊2 ^ m * c⌋₊ < 2 ^ m := by
+  rw [← digitPrefix_threshDigit hc1 m]
+  exact digitPrefix_lt _ m
+
+/-- **Path coins are relabelled coins**: for `c ∈ [0,1)`, the path coin of `c` at depth `m` is the
+relabelled flip at the scrambled node `⌊2^m c⌋`. -/
+theorem pathCoin_owenTable_eq_relabel (ω : Fin n × ℕ × ℕ → Bool) (i : Fin n) {c : ℝ}
+    (hc1 : c < 1) (m : ℕ) :
+    pathCoin (owenTable ω i) (threshDigit c) m = owenRelabel ω (i, m, ⌊2 ^ m * c⌋₊) := by
+  unfold pathCoin owenRelabel owenNode
+  simp only [floor_two_pow_mul_lt hc1 m, ite_true]
+  rw [pathPrefix_threshDigit_eq _ hc1 m]
+  rfl
+
+/-- `owenNode < 2^m`. -/
+theorem owenNode_lt (ω : Fin n × ℕ × ℕ → Bool) (i : Fin n) (m p : ℕ) : owenNode ω i m p < 2 ^ m :=
+  pathPrefix_lt _ _ m
+
+/-- **The scrambled tree is a bijection**: distinct scrambled prefixes come from distinct
+nodes. -/
+theorem owenNode_inj (ω : Fin n × ℕ × ℕ → Bool) (i : Fin n) {m p p' : ℕ} (hp : p < 2 ^ m)
+    (hp' : p' < 2 ^ m) (h : owenNode ω i m p = owenNode ω i m p') : p = p' := by
+  have key : ∀ q < 2 ^ m,
+      digitPrefix (scrambledDigit (owenTable ω i) (owenNode ω i m q)) m = q := by
+    intro q hq
+    have hmod : owenNode ω i m q % 2 ^ m = pathPrefix (owenTable ω i) (prefixDigits m q) m :=
+      Nat.mod_eq_of_lt (owenNode_lt ω i m q)
+    have htie := (tie_iff_mod_eq_pathPrefix (owenTable ω i) (prefixDigits m q)
+      (owenNode ω i m q) m).2 hmod
+    exact (digitPrefix_eq_iff _ m q).2 ⟨hq, htie⟩
+  rw [← key p hp, ← key p' hp', h]
+
+/-- The scrambled tree of depth `m` depends only on the flips of `owenBox n m`. -/
+theorem owenNode_congr {ω ω' : Fin n × ℕ × ℕ → Bool} {m : ℕ}
+    (h : ∀ q ∈ owenBox n m, ω q = ω' q) (i : Fin n) (p : ℕ) :
+    owenNode ω i m p = owenNode ω' i m p :=
+  pathPrefix_owen_congr (prefixDigits m p) i h m le_rfl
+
+/-- The relabelled flip at `q = (i, m, p)` depends only on the flips of
+`owenRect n (m + 1) (max (p + 1) (2^m))`. -/
+theorem owenRelabel_congr {ω ω' : Fin n × ℕ × ℕ → Bool} {q : Fin n × ℕ × ℕ}
+    (h : ∀ q' ∈ owenRect n (q.2.1 + 1) (max (q.2.2 + 1) (2 ^ q.2.1)), ω q' = ω' q') :
+    owenRelabel ω q = owenRelabel ω' q := by
+  obtain ⟨i, m, p⟩ := q
+  have hbox : ∀ q' ∈ owenBox n m, ω q' = ω' q' := fun q' hq' ↦ by
+    refine h q' (mem_owenRect.2 ?_)
+    have := mem_owenRect.1 ((owenBox_eq_owenRect n m) ▸ hq')
+    exact ⟨by simp only at this ⊢; omega, by simp only at this ⊢; omega⟩
+  unfold owenRelabel
+  by_cases hp : p < 2 ^ m
+  · simp only [hp, ite_true]
+    rw [owenNode_congr hbox i p]
+    refine h _ (mem_owenRect.2 ⟨by simp, ?_⟩)
+    simp only
+    exact lt_of_lt_of_le (owenNode_lt ω' i m p) (le_max_right _ _)
+  · simp only [hp, ite_false]
+    exact h _ (mem_owenRect.2 ⟨by simp, by simp⟩)
+
+/-- The relabelling is measurable. -/
+theorem measurable_owenRelabel : Measurable (owenRelabel (n := n)) := by
+  classical
+  refine measurable_pi_iff.2 fun q ↦ ?_
+  have hloc : IsLocal (fun ω : Fin n × ℕ × ℕ → Bool ↦ owenRelabel ω q)
+      (owenRect n (q.2.1 + 1) (max (q.2.2 + 1) (2 ^ q.2.1))) :=
+    fun ω ω' h ↦ owenRelabel_congr h
+  exact hloc.measurable
+
+/-! ### Cylinder tools -/
+
+/-- A measure on `ι → Bool` is the sum of its pieces on the cells of a finite restriction. -/
+theorem measure_eq_sum_restrict_preimage {ι : Type*} [DecidableEq ι] (μ : Measure (ι → Bool))
+    (S : Finset ι) (A : Set (ι → Bool)) :
+    μ A = ∑ a : S → Bool, μ (A ∩ S.restrict ⁻¹' {a}) := by
+  have h := sum_measure_preimage_singleton (μ := μ.restrict A) (univ : Finset (S → Bool))
+    (f := S.restrict) fun y _ ↦ Finset.measurable_restrict S (measurableSet_singleton y)
+  rw [coe_univ, Set.preimage_univ, Measure.restrict_apply_univ] at h
+  rw [← h]
+  refine sum_congr rfl fun a _ ↦ ?_
+  rw [Measure.restrict_apply (Finset.measurable_restrict S (measurableSet_singleton a)),
+    Set.inter_comm]
+
+/-- **Cylinders of fair coins**: prescribing the coins at `|A|` distinct coordinates has
+probability `2^{-|A|}`. -/
+theorem coinMeasure_setOf_comp_eq {ι κ : Type*} {c : κ → ι} (hc : Function.Injective c)
+    (A : Finset κ) (v : κ → Bool) :
+    coinMeasure ι {ω | ∀ t ∈ A, ω (c t) = v t} = 2⁻¹ ^ A.card := by
+  classical
+  set u : ι → Bool := Function.extend c v fun _ ↦ false with hu
+  have e : {ω : ι → Bool | ∀ t ∈ A, ω (c t) = v t} =
+      Set.pi ((A.image c : Finset ι) : Set ι) fun q ↦ ({u q} : Set Bool) := by
+    ext ω
+    simp only [Set.mem_ofPred_eq, Set.mem_pi, coe_image, Set.mem_image, mem_coe,
+      Set.mem_singleton_iff, forall_exists_index, and_imp]
+    constructor
+    · rintro h q t ht rfl
+      rw [hu, hc.extend_apply]
+      exact h t ht
+    · intro h t ht
+      have := h (c t) t ht rfl
+      rwa [hu, hc.extend_apply] at this
+  rw [e, Measure.infinitePi_pi _ fun q _ ↦ measurableSet_singleton _]
+  simp only [fairCoin_singleton, prod_const, card_image_of_injective _ hc]
+
+/-! ### The relabelling preserves Owen's measure -/
+
+/-- **Rectangle cylinders of the relabelled flips**: for every depth `M`, width `W` and values
+`b`, `P(g ω = b on owenRect n M W) = 2^{-nMW}`. By induction on `M`: conditionally on the flips
+of the rows above (finitely many cells), the depth-`M` relabelled flips are a bijective relabelling
+of fresh fair coins. -/
+theorem owenMeasure_relabel_rect (W : ℕ) (b : Fin n × ℕ × ℕ → Bool) (M : ℕ) :
+    owenMeasure n {ω | ∀ q ∈ owenRect n M W, owenRelabel ω q = b q} = 2⁻¹ ^ (n * M * W) := by
+  classical
+  induction M with
+  | zero =>
+      have : {ω : Fin n × ℕ × ℕ → Bool | ∀ q ∈ owenRect n 0 W, owenRelabel ω q = b q} =
+          Set.univ := by
+        ext ω
+        simp [owenRect]
+      rw [this, measure_univ, mul_zero, zero_mul, pow_zero]
+  | succ M ih =>
+      set R := owenRect n M (max W (2 ^ M)) with hR
+      set E := {ω : Fin n × ℕ × ℕ → Bool | ∀ q ∈ owenRect n M W, owenRelabel ω q = b q}
+        with hE
+      set G := {ω : Fin n × ℕ × ℕ → Bool |
+        ∀ i : Fin n, ∀ p < W, owenRelabel ω (i, M, p) = b (i, M, p)} with hG
+      have hsplit : {ω : Fin n × ℕ × ℕ → Bool |
+          ∀ q ∈ owenRect n (M + 1) W, owenRelabel ω q = b q} = E ∩ G := by
+        ext ω
+        simp only [Set.mem_ofPred_eq, Set.mem_inter_iff, hE, hG]
+        constructor
+        · intro h
+          refine ⟨fun q hq ↦ h q ?_, fun i p hp ↦ h (i, M, p) ?_⟩
+          · have := mem_owenRect.1 hq
+            exact mem_owenRect.2 ⟨by omega, this.2⟩
+          · exact mem_owenRect.2 ⟨by simp, hp⟩
+        · rintro ⟨h1, h2⟩ ⟨i, m, p⟩ hq
+          have hq' := mem_owenRect.1 hq
+          simp only at hq'
+          rcases Nat.lt_succ_iff_lt_or_eq.1 hq'.1 with hm | rfl
+          · exact h1 _ (mem_owenRect.2 ⟨hm, hq'.2⟩)
+          · exact h2 i p hq'.2
+      -- `E` and the depth-`M` tree only see the flips of `R`
+      have hER : ∀ ω ω' : Fin n × ℕ × ℕ → Bool, (∀ q ∈ R, ω q = ω' q) →
+          (ω ∈ E ↔ ω' ∈ E) := by
+        intro ω ω' h
+        have hq : ∀ q ∈ owenRect n M W, owenRelabel ω q = owenRelabel ω' q := by
+          intro q hq
+          refine owenRelabel_congr fun q' hq' ↦ h q' (mem_owenRect.2 ?_)
+          have h1 := mem_owenRect.1 hq
+          have h2 := mem_owenRect.1 hq'
+          have h3 : 2 ^ q.2.1 ≤ 2 ^ M := Nat.pow_le_pow_right (by norm_num) h1.1.le
+          refine ⟨by omega, lt_of_lt_of_le h2.2 ?_⟩
+          exact max_le (le_trans (by omega) (le_max_left _ _)) (h3.trans (le_max_right _ _))
+        simp only [hE, Set.mem_ofPred_eq]
+        constructor
+        · intro h' q hq'
+          rw [← hq q hq']
+          exact h' q hq'
+        · intro h' q hq'
+          rw [hq q hq']
+          exact h' q hq'
+      have hNR : ∀ ω ω' : Fin n × ℕ × ℕ → Bool, (∀ q ∈ R, ω q = ω' q) →
+          ∀ i p, owenNode ω i M p = owenNode ω' i M p := by
+        intro ω ω' h i p
+        refine owenNode_congr (fun q hq ↦ h q (mem_owenRect.2 ?_)) i p
+        have := mem_owenRect.1 ((owenBox_eq_owenRect n M) ▸ hq)
+        exact ⟨this.1, lt_of_lt_of_le this.2 (le_max_right _ _)⟩
+      -- the cells of the restriction to `R`
+      set ωa : (R → Bool) → Fin n × ℕ × ℕ → Bool := fun a ↦ localExtend R (fun _ ↦ false) a
+        with hωa
+      have hcell : ∀ (a : R → Bool) (ω : Fin n × ℕ × ℕ → Bool), R.restrict ω = a →
+          ∀ q ∈ R, ω q = ωa a q := by
+        intro a ω hω q hq
+        simp only [hωa, localExtend, hq, dite_true]
+        rw [← hω]
+        rfl
+      set τ : (R → Bool) → Fin n → ℕ → ℕ := fun a i p ↦
+        if p < 2 ^ M then owenNode (ωa a) i M p else p with hτ
+      have hτinj : ∀ a i, Function.Injective (τ a i) := by
+        intro a i p p' h
+        simp only [hτ] at h
+        by_cases hp : p < 2 ^ M <;> by_cases hp' : p' < 2 ^ M
+        · simp only [hp, hp', ite_true] at h
+          exact owenNode_inj _ i hp hp' h
+        · simp only [hp, hp', ite_true, ite_false] at h
+          have := owenNode_lt (ωa a) i M p
+          omega
+        · simp only [hp, hp', ite_true, ite_false] at h
+          have := owenNode_lt (ωa a) i M p'
+          omega
+        · simp only [hp, hp', ite_false] at h
+          exact h
+      set c : (R → Bool) → Fin n × ℕ → Fin n × ℕ × ℕ := fun a t ↦ (t.1, M, τ a t.1 t.2) with hc
+      have hcinj : ∀ a, Function.Injective (c a) := by
+        rintro a ⟨t1, t2⟩ ⟨t1', t2'⟩ h
+        simp only [hc, Prod.mk.injEq] at h
+        obtain ⟨h1, -, h3⟩ := h
+        subst h1
+        rw [hτinj a _ h3]
+      set Ga : (R → Bool) → Set (Fin n × ℕ × ℕ → Bool) := fun a ↦
+        {ω | ∀ t ∈ (univ : Finset (Fin n)) ×ˢ range W, ω (c a t) = b (t.1, M, t.2)} with hGa
+      have hGam : ∀ a, owenMeasure n (Ga a) = 2⁻¹ ^ (n * W) := by
+        intro a
+        have := coinMeasure_setOf_comp_eq (hcinj a) ((univ : Finset (Fin n)) ×ˢ range W)
+          (fun t ↦ b (t.1, M, t.2))
+        rw [card_product, card_univ, Fintype.card_fin, card_range] at this
+        exact this
+      have hpiece : ∀ a : R → Bool, (E ∩ G) ∩ R.restrict ⁻¹' ({a} : Set (R → Bool)) =
+          if ωa a ∈ E then R.restrict ⁻¹' ({a} : Set (R → Bool)) ∩ Ga a else ∅ := by
+        intro a
+        ext ω
+        simp only [Set.mem_inter_iff, Set.mem_preimage, Set.mem_singleton_iff]
+        constructor
+        · rintro ⟨⟨hωE, hωG⟩, hωa'⟩
+          have hagree := hcell a ω hωa'
+          have hE' : ωa a ∈ E := (hER ω (ωa a) hagree).1 hωE
+          simp only [hE', ite_true, Set.mem_inter_iff, Set.mem_preimage]
+          refine ⟨hωa', fun t ht ↦ ?_⟩
+          have ht' := mem_product.1 ht
+          have := hωG t.1 t.2 (mem_range.1 ht'.2)
+          unfold owenRelabel at this
+          simp only [hc, hτ]
+          by_cases hp : t.2 < 2 ^ M
+          · simp only [hp, ite_true] at this ⊢
+            rw [← hNR ω (ωa a) hagree t.1 t.2]
+            exact this
+          · simp only [hp, ite_false] at this ⊢
+            exact this
+        · intro h
+          by_cases hE' : ωa a ∈ E
+          · simp only [hE', ite_true, Set.mem_inter_iff, Set.mem_preimage] at h
+            obtain ⟨hωa', hGa'⟩ := h
+            have hagree := hcell a ω hωa'
+            refine ⟨⟨(hER ω (ωa a) hagree).2 hE', fun i p hp ↦ ?_⟩, hωa'⟩
+            have := hGa' (i, p) (mem_product.2 ⟨mem_univ _, mem_range.2 hp⟩)
+            simp only [hc, hτ] at this
+            unfold owenRelabel
+            by_cases hp' : p < 2 ^ M
+            · simp only [hp', ite_true] at this ⊢
+              rw [hNR ω (ωa a) hagree i p]
+              exact this
+            · simp only [hp', ite_false] at this ⊢
+              exact this
+          · simp only [hE', ite_false, Set.mem_empty_iff_false] at h
+      have hEpiece : ∀ a : R → Bool, E ∩ R.restrict ⁻¹' ({a} : Set (R → Bool)) =
+          if ωa a ∈ E then R.restrict ⁻¹' ({a} : Set (R → Bool)) else ∅ := by
+        intro a
+        ext ω
+        simp only [Set.mem_inter_iff, Set.mem_preimage, Set.mem_singleton_iff]
+        constructor
+        · rintro ⟨hωE, hωa'⟩
+          have hE' : ωa a ∈ E := (hER ω (ωa a) (hcell a ω hωa')).1 hωE
+          simp only [hE', ite_true, Set.mem_preimage]
+          exact hωa'
+        · intro h
+          by_cases hE' : ωa a ∈ E
+          · simp only [hE', ite_true, Set.mem_preimage] at h
+            exact ⟨(hER ω (ωa a) (hcell a ω h)).2 hE', h⟩
+          · simp only [hE', ite_false, Set.mem_empty_iff_false] at h
+      have hind : ∀ a : R → Bool, owenMeasure n (R.restrict ⁻¹' ({a} : Set (R → Bool)) ∩ Ga a) =
+          owenMeasure n (R.restrict ⁻¹' ({a} : Set (R → Bool))) * owenMeasure n (Ga a) := by
+        intro a
+        refine infinitePi_inter_of_local (fun _ : Fin n × ℕ × ℕ ↦ fairCoin)
+          (S := R) (T := ((univ : Finset (Fin n)) ×ˢ range W).image (c a)) ?_ ?_ ?_
+        · intro ω ω' h
+          simp only [Set.mem_preimage, Set.mem_singleton_iff]
+          have e : R.restrict ω = R.restrict ω' := funext fun q ↦ h q q.2
+          rw [e]
+        · intro ω ω' h
+          simp only [hGa, Set.mem_ofPred_eq]
+          constructor
+          · intro h' t ht
+            rw [← h _ (mem_image_of_mem _ ht)]
+            exact h' t ht
+          · intro h' t ht
+            rw [h _ (mem_image_of_mem _ ht)]
+            exact h' t ht
+        · refine Finset.disjoint_left.2 fun q hq hqT ↦ ?_
+          obtain ⟨t, -, rfl⟩ := mem_image.1 hqT
+          have := (mem_owenRect.1 hq).1
+          simp only [hc] at this
+          exact lt_irrefl M this
+      change owenMeasure n _ = _
+      rw [hsplit, measure_eq_sum_restrict_preimage (owenMeasure n) R (E ∩ G)]
+      have hsum : ∀ a : R → Bool, owenMeasure n ((E ∩ G) ∩ R.restrict ⁻¹' ({a} : Set (R → Bool))) =
+          owenMeasure n (E ∩ R.restrict ⁻¹' ({a} : Set (R → Bool))) * 2⁻¹ ^ (n * W) := by
+        intro a
+        rw [hpiece a, hEpiece a]
+        by_cases hE' : ωa a ∈ E
+        · simp only [hE', ite_true]
+          rw [hind a, hGam a]
+        · simp only [hE', ite_false, measure_empty, zero_mul]
+      rw [sum_congr rfl fun a _ ↦ hsum a, ← sum_mul,
+        ← measure_eq_sum_restrict_preimage (owenMeasure n) R E]
+      change owenMeasure n {ω : Fin n × ℕ × ℕ → Bool |
+        ∀ q ∈ owenRect n M W, owenRelabel ω q = b q} * _ = _
+      rw [ih, ← pow_add]
+      congr 1
+      ring
+
+/-- A probability measure on Owen's flips whose box cylinders all have probability
+`2^{-|box|}` is `owenMeasure n`. -/
+theorem eq_owenMeasure_of_box {μ : Measure (Fin n × ℕ × ℕ → Bool)} [IsProbabilityMeasure μ]
+    (h : ∀ (b : Fin n × ℕ × ℕ → Bool) (M : ℕ),
+      μ {ω | ∀ q ∈ owenBox n M, ω q = b q} = 2⁻¹ ^ (owenBox n M).card) :
+    μ = owenMeasure n := by
+  classical
+  have hmap : ∀ M, μ.map (Finset.restrict (π := fun _ : Fin n × ℕ × ℕ ↦ Bool) (owenBox n M)) =
+      (owenMeasure n).map
+        (Finset.restrict (π := fun _ : Fin n × ℕ × ℕ ↦ Bool) (owenBox n M)) := by
+    intro M
+    refine Measure.ext_of_singleton fun g ↦ ?_
+    rw [Measure.map_apply (Finset.measurable_restrict _) (measurableSet_singleton g),
+      Measure.map_apply (Finset.measurable_restrict _) (measurableSet_singleton g)]
+    set b : Fin n × ℕ × ℕ → Bool := fun q ↦
+      if hq : q ∈ owenBox n M then g ⟨q, hq⟩ else false with hb
+    have e : Finset.restrict (π := fun _ : Fin n × ℕ × ℕ ↦ Bool) (owenBox n M) ⁻¹'
+        ({g} : Set ((owenBox n M) → Bool)) =
+        {ω : Fin n × ℕ × ℕ → Bool | ∀ q ∈ owenBox n M, ω q = b q} := by
+      ext ω
+      simp only [Set.mem_preimage, Set.mem_singleton_iff, Set.mem_ofPred_eq]
+      constructor
+      · rintro rfl q hq
+        simp only [hb, hq, dite_true, Finset.restrict]
+      · intro hω
+        funext q
+        have := hω q.1 q.2
+        simp only [hb, q.2, dite_true] at this
+        exact this
+    have ho := coinMeasure_setOf_comp_eq (ι := Fin n × ℕ × ℕ) (c := id)
+      Function.injective_id (owenBox n M) b
+    rw [e, h b M]
+    exact ho.symm
+  refine Measure.eq_infinitePi _ fun s t ht ↦ ?_
+  set M := s.sup (fun q ↦ q.2.1 + q.2.2) + 1 with hM
+  have hsS : ∀ q ∈ s, q ∈ owenBox n M := fun q hq ↦ by
+    have hle : q.2.1 + q.2.2 ≤ s.sup (fun q ↦ q.2.1 + q.2.2) :=
+      Finset.le_sup (f := fun q : Fin n × ℕ × ℕ ↦ q.2.1 + q.2.2) hq
+    rw [owenBox_eq_owenRect]
+    refine mem_owenRect.2 ⟨by omega, lt_of_lt_of_le (Nat.lt_two_pow_self) ?_⟩
+    exact Nat.pow_le_pow_right (by norm_num) (by omega)
+  set E : Set ((owenBox n M) → Bool) := {g | ∀ q (hq : q ∈ s), g ⟨q, hsS q hq⟩ ∈ t q} with hE
+  have hpre : Finset.restrict (π := fun _ : Fin n × ℕ × ℕ ↦ Bool) (owenBox n M) ⁻¹' E =
+      Set.pi (s : Set (Fin n × ℕ × ℕ)) t := by
+    ext w
+    simp only [Set.mem_preimage, hE, Set.mem_ofPred_eq, Set.mem_pi, mem_coe, Finset.restrict]
+  have hEm : MeasurableSet E := (Set.to_countable E).measurableSet
+  rw [← hpre, ← Measure.map_apply (Finset.measurable_restrict _) hEm, hmap M,
+    Measure.map_apply (Finset.measurable_restrict _) hEm, hpre,
+    Measure.infinitePi_pi _ fun q _ ↦ ht q]
+
+/-- **The relabelling by the scrambled tree preserves Owen's measure**: the relabelled flips
+`ω (i, m, σ_m⁻¹ p)` are again i.i.d. fair coins. -/
+theorem measurePreserving_owenRelabel :
+    MeasurePreserving (owenRelabel (n := n)) (owenMeasure n) (owenMeasure n) := by
+  classical
+  refine ⟨measurable_owenRelabel, ?_⟩
+  refine eq_owenMeasure_of_box fun b M ↦ ?_
+  have hm : MeasurableSet {ω : Fin n × ℕ × ℕ → Bool | ∀ q ∈ owenBox n M, ω q = b q} := by
+    have e : {ω : Fin n × ℕ × ℕ → Bool | ∀ q ∈ owenBox n M, ω q = b q} =
+        Set.pi ((owenBox n M : Finset (Fin n × ℕ × ℕ)) : Set (Fin n × ℕ × ℕ))
+          fun q ↦ ({b q} : Set Bool) := by
+      ext ω
+      simp [Set.mem_pi]
+    rw [e]
+    exact MeasurableSet.pi (Set.to_countable _) fun _ _ ↦ measurableSet_singleton _
+  rw [Measure.map_apply measurable_owenRelabel hm]
+  have e : owenRelabel ⁻¹' {ω : Fin n × ℕ × ℕ → Bool | ∀ q ∈ owenBox n M, ω q = b q} =
+      {ω | ∀ q ∈ owenRect n M (2 ^ M), owenRelabel ω q = b q} := by
+    ext ω
+    rfl
+  rw [e, owenMeasure_relabel_rect, owenBox_eq_owenRect, owenRect, card_product, card_product,
+    card_univ, Fintype.card_fin, card_range, card_range, mul_assoc]
+
+end RQMCMarkov.ScrambledStacks
+
+/-
+Copyright (c) 2026 Robert Kirkby. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Robert Kirkby
+-/
+
+/-!
+# The stacks CLT for n states: Owen's nested scramble (post #3, code (iii))
+
+Post #3, code (iii): one Sobol (base-2 van der Corput) sequence per state with Owen's nested
+scramble; "in the five-state chain normality cannot be rejected for the per-state Sobol
+sequences ((ii) and (iii))".
+
+**Reading.** As for the digital shift (`CltNShift`): for any number `n` of states, any
+stochastic `P` with Poisson data for every target and any target `s`, along times `T_k → ∞`
+with `Var(N_s(T_k) − T_k π_s) ≥ κ log₂ T_k` under Owen's measure, the normalised occupation
+error is asymptotically `N(0,1)`; its variance is `O(log T)` and the RMSE of the occupation
+frequency `O(√log T / T)`. The variance hypothesis is for Owen's own variance, which differs
+from the shift's in general (`CltNExample` shows both satisfy it on the uniform chains; their
+values are not claimed equal).
+
+**Proof (separate from the shift).** By `CltThreeState` the path laws of (ii) and (iii) differ
+for `n ≥ 3`, so nothing is transferred from the shift. Instead the flips are relabelled by the
+scrambled tree (`CltNOwenTree`): the path coin of cut point `c_{ij}` at depth `d` is the
+relabelled flip at `(i, d, ⌊2^d c_{ij}⌋)` (`pathCoins_owenTable_eq`), so the main term is the level
+sum of the coin layout `owenLayout P` on `Fin n × ℕ × ℕ` with level `q ↦ q.2.1`
+(`mainTermN_owenTable_eq`), evaluated at the relabelled flips. Two cut points of a row share
+the coordinates of their common binary prefix (the level-sum CLT of `CltNCoins` allows this).
+The relabelling preserves Owen's measure (`measurePreserving_owenRelabel`), so the CLT for level
+sums transfers (`TendstoInDistribution.comp_measurePreserving`); the Anscombe theorem and
+Slutsky finish as for the shift.
+
+**Hypotheses added.** As in `CltNShift`: `IsPoissonFamily P H π`, and the variance hypothesis
+along the given times.
+
+## Main results
+
+* `owenLayout`, `pathCoins_owenTable_eq`, `levelSumN_congr`, `mainTermN_owenTable_eq`,
+  `owenMainTerm`, `abs_occErrN_owen_sub_le`, `memLp_occErrN_owen`.
+* `tendstoInDistribution_occErrN_owen` (**main theorem, code (iii)**).
+* `integral_sq_occErrN_owen_le`, `variance_occErrN_owen_le`, `isBigO_meanSq_occFreqN_owen`.
+-/
+
+namespace RQMCMarkov.ScrambledStacks
+
+open MeasureTheory ProbabilityTheory Filter Finset
+open scoped ENNReal NNReal Topology
+
+variable {n : ℕ}
+
+/-- The Owen coin layout: cut point `j` of row `i` at depth `d` uses the relabelled flip at the
+scrambled node `⌊2^d c_{ij}⌋`. -/
+noncomputable def owenLayout (P : Fin n → Fin n → ℝ) : Fin n → ℕ → ℕ → Fin n × ℕ × ℕ :=
+  fun i j d ↦ (i, d, ⌊2 ^ d * cutPoint P i j⌋₊)
+
+/-- The level of the Owen coordinate `(i, d, p)` is the depth `d`. -/
+theorem owenLayout_lev (P : Fin n → Fin n → ℝ) (i : Fin n) (j d : ℕ) :
+    (owenLayout P i j d).2.1 = d := rfl
+
+/-- Different rows use different Owen flips. -/
+theorem owenLayout_rows (P : Fin n → Fin n → ℝ) (i i' : Fin n) (j j' d d' : ℕ) (hii' : i ≠ i') :
+    owenLayout P i j d ≠ owenLayout P i' j' d' := fun h ↦ hii' (congrArg Prod.fst h)
+
+/-- **Owen path coins are relabelled flips**: for a cut point `c_{ij} < 1`, its path coins are
+the relabelled flips of the Owen layout. -/
+theorem pathCoins_owenTable_eq (P : Fin n → Fin n → ℝ) (ω : Fin n × ℕ × ℕ → Bool) (i : Fin n)
+    (j : ℕ) (hc : cutPoint P i j < 1) :
+    pathCoin (owenTable ω i) (threshDigit (cutPoint P i j)) =
+      coinsOf (owenLayout P) (owenRelabel ω) i j :=
+  funext fun d ↦ pathCoin_owenTable_eq_relabel ω i hc d
+
+/-- Level sums only see the coins of cut points `< 1`. -/
+theorem levelSumN_congr {w : ℕ → ℝ} {cp : Fin n → ℕ → ℝ} (N : Fin n → ℕ) (K : ℕ)
+    {e e' : Fin n → ℕ → ℕ → Bool} (h : ∀ i j, cp i j < 1 → e i j = e' i j) :
+    levelSumN w cp N K e = levelSumN w cp N K e' := by
+  refine sum_congr rfl fun m _ ↦ sum_congr rfl fun i _ ↦ sum_congr rfl fun j _ ↦ ?_
+  unfold cutTerm
+  by_cases hc : cp i j < 1
+  · simp only [hc, ite_true]
+    rw [h i j hc]
+  · simp only [hc, ite_false]
+
+/-- The main term of the Owen-scrambled chain as a level sum of relabelled flips `ω'`, with
+`⌊log₂ T⌋ + 1` levels. -/
+noncomputable def owenMainTerm (P : Fin n → Fin n → ℝ) (H : Fin n → Fin n → ℝ)
+    (pi : Fin n → ℝ) (s : Fin n) (T : ℕ) (ω' : Fin n × ℕ × ℕ → Bool) : ℝ :=
+  levelSumN (cutWeight (H s)) (cutPoint P) (chainIdxN pi T) (Nat.log 2 T + 1)
+    (coinsOf (owenLayout P) ω')
+
+/-- The main term of the Owen-scrambled chain is the level sum at the relabelled flips. -/
+theorem mainTermN_owenTable_eq {P : Fin n → Fin n → ℝ} (hP : IsStochastic P)
+    {H : Fin n → Fin n → ℝ} {pi : Fin n → ℝ} (hH : IsPoissonFamily P H pi) (s : Fin n) (T : ℕ)
+    (ω : Fin n × ℕ × ℕ → Bool) :
+    mainTermN P (H s) pi (owenTable ω) T = owenMainTerm P H pi s T (owenRelabel ω) := by
+  rw [mainTermN_eq_levelSumN hP (H s) pi (owenTable ω) T (chainIdxN_lt_two_pow hP hH T),
+    owenMainTerm]
+  exact levelSumN_congr _ _ fun i j hc ↦ pathCoins_owenTable_eq P ω i j hc
+
+/-- The occupation error of the Owen-scrambled chain is within `ansBoundN` of the level sum. -/
+theorem abs_occErrN_owen_sub_le {P : Fin n → Fin n → ℝ} (hP : IsStochastic P)
+    {H : Fin n → Fin n → ℝ} {pi : Fin n → ℝ} (hH : IsPoissonFamily P H pi) (x₀ s : Fin n)
+    (T : ℕ) (ω : Fin n × ℕ × ℕ → Bool) :
+    |occErrN P pi x₀ (owenTable ω) s T - owenMainTerm P H pi s T (owenRelabel ω)| ≤
+      ansBoundN H s T := by
+  rw [← mainTermN_owenTable_eq hP hH s T ω]
+  exact abs_occErrN_sub_mainTermN_le hP hH x₀ (owenTable ω) s T
+
+/-- The occupation error of the Owen-scrambled chain is in `L²`. -/
+theorem memLp_occErrN_owen (P : Fin n → Fin n → ℝ) (pi : Fin n → ℝ) (x₀ s : Fin n) (T : ℕ) :
+    MemLp (fun ω ↦ occErrN P pi x₀ (owenTable ω) s T) 2 (owenMeasure n) := by
+  have hm : Measurable fun ω : Fin n × ℕ × ℕ → Bool ↦ occErrN P pi x₀ (owenTable ω) s T :=
+    ((measurable_of_countable (Nat.cast : ℕ → ℝ)).comp (measurable_occCount_of
+      (fun i k ↦ measurable_scrambledStack_owen i k) P x₀ s T)).sub measurable_const
+  exact MemLp.of_bound hm.aestronglyMeasurable _ (Eventually.of_forall fun ω ↦ by
+    rw [Real.norm_eq_abs]; exact abs_occErrN_le P pi x₀ _ s T)
+
+/-- The relabelled main term has the moments of the level sum: it is centred. -/
+theorem integral_owenMainTerm_relabel {P : Fin n → Fin n → ℝ} (hP : IsStochastic P)
+    (H : Fin n → Fin n → ℝ) (pi : Fin n → ℝ) (s : Fin n) (T : ℕ) :
+    ∫ ω, owenMainTerm P H pi s T (owenRelabel ω) ∂(owenMeasure n) = 0 := by
+  have hcp : ∀ i j, 0 ≤ cutPoint P i j := fun i j ↦ (cutPoint_mem_Icc hP i j).1
+  have hγ : ∀ i j, Function.Injective (owenLayout P i j) := fun i j d d' h ↦
+    congrArg (fun q : Fin n × ℕ × ℕ ↦ q.2.1) h
+  have hGm := measurable_levelSumN_coins (w := cutWeight (H s)) hcp (chainIdxN pi T)
+    (Nat.log 2 T + 1) (owenLayout P)
+  unfold owenMainTerm
+  rw [← integral_map measurable_owenRelabel.aemeasurable hGm.aestronglyMeasurable,
+    measurePreserving_owenRelabel.map_eq]
+  exact integral_levelSumN_coins hcp _ _ hγ
+
+/-- **The stacks CLT for n states, Owen's scramble** (post #3, code (iii)). For a stochastic `P`
+on `Fin n` with Poisson data `H`, `π` for every target, a target `s`, and `T_k → ∞` with
+`Var(N_s(T_k) − T_k π_s) ≥ κ log₂ T_k` eventually (Owen's variance),
+`(N_s(T_k) − T_k π_s) / √Var(N_s(T_k) − T_k π_s) ⇒ N(0,1)`. -/
+theorem tendstoInDistribution_occErrN_owen {P : Fin n → Fin n → ℝ} (hP : IsStochastic P)
+    {H : Fin n → Fin n → ℝ} {pi : Fin n → ℝ} (hH : IsPoissonFamily P H pi) (x₀ s : Fin n)
+    {T : ℕ → ℕ} (hT : Tendsto T atTop atTop) {κ : ℝ} (hκ : 0 < κ)
+    (hvar : ∀ᶠ k in atTop,
+      κ * Nat.log 2 (T k) ≤ Var[fun ω ↦ occErrN P pi x₀ (owenTable ω) s (T k); owenMeasure n])
+    {Ω' : Type*} {mΩ' : MeasurableSpace Ω'} {P' : Measure Ω'} [IsProbabilityMeasure P']
+    {Z : Ω' → ℝ} (hZ : HasLaw Z (gaussianReal 0 1) P') :
+    TendstoInDistribution (fun k ω ↦ occErrN P pi x₀ (owenTable ω) s (T k) /
+      √Var[fun ω ↦ occErrN P pi x₀ (owenTable ω) s (T k); owenMeasure n]) atTop Z
+      (fun _ ↦ owenMeasure n) P' := by
+  have hcp : ∀ i j, 0 ≤ cutPoint P i j := fun i j ↦ (cutPoint_mem_Icc hP i j).1
+  have hMP := measurePreserving_owenRelabel (n := n)
+  set G : ℕ → (Fin n × ℕ × ℕ → Bool) → ℝ := fun k ω' ↦ owenMainTerm P H pi s (T k) ω' with hG
+  have hGm : ∀ k, Measurable (G k) := fun k ↦
+    measurable_levelSumN_coins (w := cutWeight (H s)) hcp _ _ (owenLayout P)
+  have hvarG : ∀ k, Var[fun ω ↦ G k (owenRelabel ω); owenMeasure n] =
+      Var[G k; owenMeasure n] := fun k ↦ hMP.variance_fun_comp (hGm k).aemeasurable
+  refine tendstoInDistribution_of_close_main
+    (E := fun k ω ↦ occErrN P pi x₀ (owenTable ω) s (T k))
+    (M := fun k ω ↦ G k (owenRelabel ω)) hT (b := fun k ↦ ansBoundN H s (T k))
+    (tendsto_sq_div_natLog_of_le hT (fun k ↦ ansBoundN_nonneg H s (T k))
+      (fun k ↦ ansBoundN_le_log H s (T k)))
+    (fun k ↦ memLp_occErrN_owen P pi x₀ s (T k))
+    (fun k ↦ (memLp_levelSumN_coins hcp _ _ (owenLayout P)).comp_measurePreserving hMP)
+    (fun k ↦ integral_owenMainTerm_relabel hP H pi s (T k))
+    (fun k ω ↦ abs_occErrN_owen_sub_le hP hH x₀ s (T k) ω) hκ hvar ?_
+  intro κ' hκ' hv
+  have hv' : ∀ᶠ k in atTop, κ' * ((Nat.log 2 (T k) + 1 : ℕ) : ℝ) ≤ Var[G k; owenMeasure n] := by
+    filter_upwards [hv] with k hk
+    rwa [← hvarG k]
+  have hclt := tendstoInDistribution_levelSumN (fun q : Fin n × ℕ × ℕ ↦ q.2.1)
+    (γ := owenLayout P) (fun i j d ↦ rfl) hcp (w := cutWeight (H s))
+    (N := fun k ↦ chainIdxN pi (T k)) (K := fun k ↦ Nat.log 2 (T k) + 1)
+    (tendsto_natLog_add_one hT) hκ' hv' hZ
+  have htr := TendstoInDistribution.comp_measurePreserving hMP hclt
+  have e : (fun k ω ↦ G k (owenRelabel ω) / √Var[fun ω ↦ G k (owenRelabel ω); owenMeasure n]) =
+      fun k ω ↦ G k (owenRelabel ω) / √Var[G k; owenMeasure n] := by
+    funext k ω
+    rw [hvarG k]
+  rw [e]
+  exact htr
+
+/-- **Mean-square bound** (Owen): `E[(N_s(T) − T π_s)²] ≤ C (⌊log₂ T⌋ + 1)`. -/
+theorem integral_sq_occErrN_owen_le {P : Fin n → Fin n → ℝ} (hP : IsStochastic P)
+    {H : Fin n → Fin n → ℝ} {pi : Fin n → ℝ} (hH : IsPoissonFamily P H pi) (x₀ s : Fin n)
+    (T : ℕ) :
+    ∫ ω, occErrN P pi x₀ (owenTable ω) s T ^ 2 ∂(owenMeasure n) ≤
+      varConstN H s * ((Nat.log 2 T : ℝ) + 1) := by
+  have hcp : ∀ i j, 0 ≤ cutPoint P i j := fun i j ↦ (cutPoint_mem_Icc hP i j).1
+  have hMP := measurePreserving_owenRelabel (n := n)
+  have hGm := measurable_levelSumN_coins (w := cutWeight (H s)) hcp (chainIdxN pi T)
+    (Nat.log 2 T + 1) (owenLayout P)
+  have hV0 := integral_sq_levelSumN_le (fun q : Fin n × ℕ × ℕ ↦ q.2.1) (γ := owenLayout P)
+    (fun i j d ↦ rfl) hcp (w := cutWeight (H s)) (chainIdxN pi T) (Nat.log 2 T + 1)
+  have hV : ∫ ω, owenMainTerm P H pi s T (owenRelabel ω) ^ 2 ∂(owenMeasure n) ≤
+      ((Nat.log 2 T + 1 : ℕ) : ℝ) * (5 * (n * absWeightSum n (cutWeight (H s))) ^ 2) := by
+    rw [← integral_map (f := fun ω' ↦ owenMainTerm P H pi s T ω' ^ 2)
+      measurable_owenRelabel.aemeasurable (hGm.pow_const 2).aestronglyMeasurable, hMP.map_eq]
+    exact hV0
+  have h := integral_sq_le_of_close (memLp_occErrN_owen P pi x₀ s T)
+    ((memLp_levelSumN_coins hcp _ _ (owenLayout P)).comp_measurePreserving hMP)
+    (abs_occErrN_owen_sub_le hP hH x₀ s T) hV
+  have hb := two_mul_ansBoundN_sq_le H s T
+  refine h.trans ?_
+  rw [varConstN]
+  push_cast
+  change 2 * (((Nat.log 2 T : ℝ) + 1) * (5 * (n * cutWeightSum (H s)) ^ 2)) +
+    2 * ansBoundN H s T ^ 2 ≤ _
+  nlinarith
+
+/-- **Variance bound** (Owen): `Var(N_s(T) − T π_s) ≤ C (⌊log₂ T⌋ + 1) = O(log T)`. -/
+theorem variance_occErrN_owen_le {P : Fin n → Fin n → ℝ} (hP : IsStochastic P)
+    {H : Fin n → Fin n → ℝ} {pi : Fin n → ℝ} (hH : IsPoissonFamily P H pi) (x₀ s : Fin n)
+    (T : ℕ) :
+    Var[fun ω ↦ occErrN P pi x₀ (owenTable ω) s T; owenMeasure n] ≤
+      varConstN H s * ((Nat.log 2 T : ℝ) + 1) :=
+  (variance_le_expectation_sq (memLp_occErrN_owen P pi x₀ s T).aestronglyMeasurable).trans
+    (integral_sq_occErrN_owen_le hP hH x₀ s T)
+
+/-- **RMSE of the occupation frequency is `O(√log T / T)`** (Owen, n states):
+`E[(N_s(T)/T − π_s)²] = O(log T / T²)`. -/
+theorem isBigO_meanSq_occFreqN_owen {P : Fin n → Fin n → ℝ} (hP : IsStochastic P)
+    {H : Fin n → Fin n → ℝ} {pi : Fin n → ℝ} (hH : IsPoissonFamily P H pi) (x₀ s : Fin n) :
+    (fun T : ℕ ↦ ∫ ω, (occErrN P pi x₀ (owenTable ω) s T / T) ^ 2 ∂(owenMeasure n)) =O[atTop]
+      fun T : ℕ ↦ (Nat.log 2 T : ℝ) / (T : ℝ) ^ 2 :=
+  isBigO_meanSq_div_of_le (E := fun T ω ↦ occErrN P pi x₀ (owenTable ω) s T)
+    (integral_sq_occErrN_owen_le hP hH x₀ s)
+
+end RQMCMarkov.ScrambledStacks
+
+/-
+Copyright (c) 2026 Robert Kirkby. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Robert Kirkby
+-/
+
+/-!
+# Non-vacuity of the n-state stacks CLT: uniform chains (post #3)
+
+The CLTs `tendstoInDistribution_occErrN_shift` (code (ii)) and
+`tendstoInDistribution_occErrN_owen` (code (iii)) assume `Var ≥ κ log T` along the given times.
+This module proves that hypothesis, for BOTH randomisations, on the uniform chains
+`P i j = 1/n` with `n` not a power of two (in particular `n = 3`, the REQUIRED example, and
+`n = 5`, the number of states of post #3), and every target `s`. Every row has `n − 1` cut points
+`j/n` in play, so Owen's tree of paths matters (two cut points share the flips of their common
+binary prefix only).
+
+* Poisson data: `H t = 1_{t} − 1/n`, `π = 1/n` (`isPoissonFamily_uniform`). The weights are
+  `h_j − h_{j+1} = 1{j = s} − 1{j+1 = s} ∈ {−1, 0, 1}`, total `W ≤ 2`.
+* Times `T_k = n Σ_{a<k} 2^{ra}` with spacing `r = 2n + 6` (`uniformTime`), so that
+  `⌊T_k π_i⌋ = Σ_{a<k} 2^{ra}` in every row (`chainIdxN_uniformTime`).
+* Per level, a row term is an integer minus `θ`, where `θ ≡ 2^m/n (mod 1)` (`rowFrac_uniform`),
+  whose fractional part is `(2^m mod n)/n ∈ [1/n, 1 − 1/n]` as `n ∤ 2^m`; the integer variance
+  bound gives `Var ≥ (n − 1)/n²` under ANY randomisation (`variance_rowTerm_uniform_ge`); for
+  `n = 3` this is the value `2/9` of the brief.
+* Rows are independent and levels at distance `d` have covariance `≤ 2W² 2^{-d}`; the spacing makes
+  the diagonal dominate: `Var(main term) ≥ k/4` (`variance_levelSumN_uniform_ge`), and then
+  `Var(N_s(T_k) − T_k/n) ≥ log₂ T_k / (16 (n + r))` eventually
+  (`eventually_variance_occErrN_uniform_shift_ge`, `_owen_ge`).
+
+The values are consistent with simulation (`3·10³` replications, `400` for `k = 3`; spacing `8`
+rather than the proof's `2n + 6`): for three states the
+per-row variance at `k = 1, 2, 3` levels is `0.22, 0.42, 0.73` (shift) and `0.23, 0.66, 1.02`
+(Owen), against the bound `(n − 1)/n² = 2/9` per level; for five states `0.16, 0.32, 0.50` (shift)
+and `0.17, 0.66, 1.04` (Owen), against `4/25`. The two randomisations have different variances
+(Owen's larger here); only the common lower bound is proved.
+
+**Correction / scope.** For `n` a power of two the cut points are dyadic and there is no CLT at
+all (`StackDyadic`); here `n ∤ 2^m` is assumed. Post #3's five-state Farmer–Toda probabilities are
+not dyadic-checkable numbers, so the five-state instance is the uniform chain.
+
+## Main results
+
+* `uniformChain`, `uniformPoisson`, `uniformPi`, `uniformSpacing`, `uniformTime`;
+  `isStochastic_uniformChain`, `isPoissonFamily_uniform`.
+* `variance_levelSumN_uniform_ge` (any coin layout with independent rows).
+* `eventually_variance_ge_of_close` (variance lower bounds pass to an `o(√k)` perturbation).
+* `eventually_variance_occErrN_uniform_shift_ge`, `eventually_variance_occErrN_uniform_owen_ge`
+  (**non-vacuity**), `occErrN_uniform_tendstoInDistribution_shift`, `_owen`.
+* Three states, target `1` (REQUIRED): `eventually_variance_occErrN_example_shift_ge`,
+  `eventually_variance_occErrN_example_owen_ge`, `occErrN_example_tendstoInDistribution_shift`,
+  `occErrN_example_tendstoInDistribution_owen`.
+* Five states, target `2`: `occErrN_five_tendstoInDistribution_shift`, `_owen`.
+-/
+
+namespace RQMCMarkov.ScrambledStacks
+
+open MeasureTheory ProbabilityTheory Filter Finset
+open scoped ENNReal NNReal Topology
+
+variable {n : ℕ}
+
+/-! ### The uniform chain -/
+
+/-- The uniform chain `P i j = 1/n`. -/
+noncomputable def uniformChain (n : ℕ) : Fin n → Fin n → ℝ := fun _ _ ↦ 1 / n
+
+/-- Its Poisson functions `H t = 1_{t} − 1/n`. -/
+noncomputable def uniformPoisson (n : ℕ) : Fin n → Fin n → ℝ :=
+  fun t i ↦ (if i = t then 1 else 0) - 1 / n
+
+/-- Its stationary distribution `π = 1/n`. -/
+noncomputable def uniformPi (n : ℕ) : Fin n → ℝ := fun _ ↦ 1 / n
+
+/-- The spacing `r = 2n + 6` of the levels. -/
+def uniformSpacing (n : ℕ) : ℕ := 2 * n + 6
+
+/-- The times `T_k = n Σ_{a<k} 2^{ra}`. -/
+def uniformTime (n k : ℕ) : ℕ := n * patternR (uniformSpacing n) k
+
+/-- The uniform chain is stochastic. -/
+theorem isStochastic_uniformChain (hn : 1 ≤ n) : IsStochastic (uniformChain n) where
+  nonneg _ _ := by unfold uniformChain; positivity
+  sum_eq_one _ := by
+    have : (n : ℝ) ≠ 0 := Nat.cast_ne_zero.2 (by omega)
+    simp only [uniformChain, sum_const, card_univ, Fintype.card_fin, nsmul_eq_mul]
+    field_simp
+
+open Matrix in
+/-- `P H_t = 0` for the uniform chain. -/
+theorem mulVec_uniformPoisson (hn : 1 ≤ n) (t i : Fin n) :
+    (uniformChain n *ᵥ uniformPoisson n t) i = 0 := by
+  have : (n : ℝ) ≠ 0 := Nat.cast_ne_zero.2 (by omega)
+  change ∑ k, uniformChain n i k * uniformPoisson n t k = 0
+  simp only [uniformChain, uniformPoisson, mul_sub, sum_sub_distrib, mul_ite, mul_one, mul_zero,
+    sum_ite_eq', mem_univ, ite_true, sum_const, card_univ, Fintype.card_fin, nsmul_eq_mul]
+  field_simp
+  ring
+
+/-- **Poisson data of the uniform chain** for every target. -/
+theorem isPoissonFamily_uniform (hn : 1 ≤ n) :
+    IsPoissonFamily (uniformChain n) (uniformPoisson n) (uniformPi n) := fun t i ↦ by
+  rw [mulVec_uniformPoisson hn, sub_zero]
+  rfl
+
+/-- `n_i(T_k) = Σ_{a<k} 2^{ra}` in every row. -/
+theorem chainIdxN_uniformTime (hn : 1 ≤ n) (k : ℕ) :
+    chainIdxN (uniformPi n) (uniformTime n k) = fun _ ↦ patternR (uniformSpacing n) k := by
+  have : (n : ℝ) ≠ 0 := Nat.cast_ne_zero.2 (by omega)
+  funext i
+  unfold chainIdxN uniformTime uniformPi
+  push_cast
+  rw [show (n : ℝ) * (patternR (uniformSpacing n) k : ℝ) * (1 / n) =
+    (patternR (uniformSpacing n) k : ℝ) by field_simp]
+  exact Nat.floor_natCast _
+
+/-- The weights of the uniform chain: `h_j − h_{j+1} = 1{j = s} − 1{j + 1 = s}`. -/
+theorem cutWeight_uniform (s : Fin n) {j : ℕ} (hj : j + 1 < n) :
+    cutWeight (uniformPoisson n s) j =
+      (if j = s.val then 1 else 0) - (if j + 1 = s.val then 1 else 0) := by
+  have hj' : j < n := by omega
+  unfold cutWeight extendNat
+  simp only [hj', hj, dite_true, uniformPoisson, Fin.ext_iff]
+  ring
+
+/-- The weights are integers. -/
+theorem cutWeight_uniform_int (s : Fin n) :
+    ∀ j ∈ range (n - 1), ∃ z : ℤ, cutWeight (uniformPoisson n s) j = z := by
+  intro j hj
+  have hj' : j + 1 < n := by have := mem_range.1 hj; omega
+  refine ⟨(if j = s.val then 1 else 0) - (if j + 1 = s.val then 1 else 0), ?_⟩
+  rw [cutWeight_uniform s hj']
+  push_cast
+  rfl
+
+/-- The total weight is at most `2`. -/
+theorem absWeightSum_uniform_le (s : Fin n) :
+    absWeightSum n (cutWeight (uniformPoisson n s)) ≤ 2 := by
+  unfold absWeightSum
+  calc ∑ j ∈ range (n - 1), |cutWeight (uniformPoisson n s) j|
+      ≤ ∑ j ∈ range (n - 1), ((if j = s.val then (1 : ℝ) else 0) +
+          (if j = s.val - 1 then (1 : ℝ) else 0)) := by
+        refine sum_le_sum fun j hj ↦ ?_
+        have hj' : j + 1 < n := by have := mem_range.1 hj; omega
+        rw [cutWeight_uniform s hj']
+        split_ifs <;> first | (norm_num; done) | omega
+    _ = (∑ j ∈ range (n - 1), if j = s.val then (1 : ℝ) else 0) +
+          ∑ j ∈ range (n - 1), if j = s.val - 1 then (1 : ℝ) else 0 := sum_add_distrib
+    _ ≤ 1 + 1 := by
+        rw [sum_ite_eq', sum_ite_eq']
+        gcongr <;> split_ifs <;> norm_num
+    _ = 2 := by norm_num
+
+/-- `{2^m · 1} = 0`. -/
+theorem fracPow_one (m : ℕ) : fracPow 1 m = 0 := by
+  rw [fracPow, mul_one, show (2 : ℝ) ^ m = ((2 ^ m : ℕ) : ℝ) by push_cast; rfl,
+    Nat.floor_natCast, sub_self]
+
+/-- For `c ≤ 1`, the cut-point fractional part vanishes at `c = 1`. -/
+theorem ite_fracPow_eq {c : ℝ} (hc : c ≤ 1) (m : ℕ) :
+    (if c < 1 then fracPow c m else 0) = fracPow c m := by
+  by_cases h : c < 1
+  · simp [h]
+  · have : c = 1 := le_antisymm hc (not_lt.1 h)
+    subst this
+    simp [fracPow_one]
+
+/-- **The weighted cut points are `1/n` modulo integers** (from Abel summation at `u = 0`). -/
+theorem sum_cutWeight_mul_cutPoint_uniform (hn : 1 ≤ n) (s i : Fin n) :
+    ∃ z : ℤ, ∑ j ∈ range (n - 1),
+      cutWeight (uniformPoisson n s) j * cutPoint (uniformChain n) i j = z + 1 / n := by
+  have hP := isStochastic_uniformChain hn
+  have h := step_sub_mulVec_eq_sum_cut hP (uniformPoisson n s) i (u := 0) (by norm_num)
+  rw [mulVec_uniformPoisson hn, sub_zero] at h
+  have h' : ∑ j ∈ range (n - 1), cutWeight (uniformPoisson n s) j *
+      ((if (0 : ℝ) ≤ cutPoint (uniformChain n) i j then 1 else 0) -
+        cutPoint (uniformChain n) i j) =
+      ∑ j ∈ range (n - 1), cutWeight (uniformPoisson n s) j -
+        ∑ j ∈ range (n - 1), cutWeight (uniformPoisson n s) j *
+          cutPoint (uniformChain n) i j := by
+    rw [← sum_sub_distrib]
+    refine sum_congr rfl fun j _ ↦ ?_
+    simp only [(cutPoint_mem_Icc hP i j).1, ite_true]
+    ring
+  rw [h'] at h
+  choose! zw hzw using cutWeight_uniform_int (n := n) s
+  have hsum : ∑ j ∈ range (n - 1), cutWeight (uniformPoisson n s) j =
+      ((∑ j ∈ range (n - 1), zw j : ℤ) : ℝ) := by
+    push_cast
+    exact sum_congr rfl fun j hj ↦ hzw j hj
+  refine ⟨(∑ j ∈ range (n - 1), zw j) - (if step (uniformChain n) i 0 = s then 1 else 0), ?_⟩
+  rw [hsum] at h
+  simp only [uniformPoisson] at h
+  push_cast at h ⊢
+  split_ifs at h ⊢ <;> linarith
+
+/-- **The row fraction of the uniform chain is `2^m/n` modulo integers.** -/
+theorem rowFrac_uniform (hn : 1 ≤ n) (s i : Fin n) (m : ℕ) :
+    ∃ z : ℤ, rowFrac (cutWeight (uniformPoisson n s)) (cutPoint (uniformChain n)) m i =
+      2 ^ m / n + z := by
+  have hP := isStochastic_uniformChain hn
+  obtain ⟨z, hz⟩ := sum_cutWeight_mul_cutPoint_uniform hn s i
+  choose! zw hzw using cutWeight_uniform_int (n := n) s
+  refine ⟨2 ^ m * z - ∑ j ∈ range (n - 1), zw j * ⌊2 ^ m * cutPoint (uniformChain n) i j⌋₊, ?_⟩
+  have e : rowFrac (cutWeight (uniformPoisson n s)) (cutPoint (uniformChain n)) m i =
+      2 ^ m * ∑ j ∈ range (n - 1), cutWeight (uniformPoisson n s) j *
+        cutPoint (uniformChain n) i j -
+      ∑ j ∈ range (n - 1), cutWeight (uniformPoisson n s) j *
+        (⌊2 ^ m * cutPoint (uniformChain n) i j⌋₊ : ℝ) := by
+    rw [rowFrac, mul_sum, ← sum_sub_distrib]
+    refine sum_congr rfl fun j _ ↦ ?_
+    rw [ite_fracPow_eq (cutPoint_mem_Icc hP i j).2, fracPow]
+    ring
+  rw [e, hz]
+  push_cast
+  have e2 : ∑ j ∈ range (n - 1), cutWeight (uniformPoisson n s) j *
+      (⌊2 ^ m * cutPoint (uniformChain n) i j⌋₊ : ℝ) =
+      ∑ j ∈ range (n - 1), (zw j : ℝ) * (⌊2 ^ m * cutPoint (uniformChain n) i j⌋₊ : ℝ) :=
+    sum_congr rfl fun j hj ↦ by rw [hzw j hj]
+  rw [e2]
+  ring
+
+/-- `{2^m / n} = (2^m mod n)/n`, which lies in `[1/n, 1 − 1/n]` when `n ∤ 2^m`. -/
+theorem fract_mul_one_sub_ge (hn2 : 2 ≤ n) (hnd : ∀ m, ¬ n ∣ 2 ^ m) (m : ℕ) :
+    ((n : ℝ) - 1) / n ^ 2 ≤
+      Int.fract ((2 : ℝ) ^ m / n) * (1 - Int.fract ((2 : ℝ) ^ m / n)) := by
+  have hfr : Int.fract ((2 : ℝ) ^ m / n) = ((2 ^ m % n : ℕ) : ℝ) / n := by
+    have := Int.fract_div_natCast_eq_div_natCast_mod (k := ℝ) (m := 2 ^ m) (n := n)
+    push_cast at this
+    exact this
+  set r' := 2 ^ m % n with hr'
+  have hr1 : 1 ≤ r' := Nat.pos_of_ne_zero fun h ↦ hnd m (Nat.dvd_of_mod_eq_zero h)
+  have hr2 : r' < n := Nat.mod_lt _ (by omega)
+  have hn0 : (0 : ℝ) < n := by exact_mod_cast (show 0 < n by omega)
+  have hr1' : (1 : ℝ) ≤ r' := by exact_mod_cast hr1
+  have hr2' : (r' : ℝ) + 1 ≤ n := by exact_mod_cast hr2
+  rw [hfr, div_le_iff₀ (by positivity)]
+  have e : (r' : ℝ) / n * (1 - r' / n) * n ^ 2 = r' * (n - r') := by
+    field_simp
+  rw [e]
+  nlinarith
+
+/-- **Per-level variance** of a row term of the uniform chain (any coin layout): at a set bit,
+`Var ≥ (n − 1)/n²` (`2/9` for `n = 3`). -/
+theorem variance_rowTerm_uniform_ge {ι : Type*} {γ : Fin n → ℕ → ℕ → ι}
+    (hγ : ∀ i j, Function.Injective (γ i j)) (hn2 : 2 ≤ n) (hnd : ∀ m, ¬ n ∣ 2 ^ m)
+    (s : Fin n) (N : Fin n → ℕ) (m : ℕ) (i : Fin n) (hbit : (N i).testBit m = true) :
+    ((n : ℝ) - 1) / n ^ 2 ≤ Var[fun ω ↦ rowTerm (cutWeight (uniformPoisson n s))
+      (cutPoint (uniformChain n)) N m (coinsOf γ ω) i; coinMeasure ι] := by
+  have hP := isStochastic_uniformChain (n := n) (by omega)
+  have hcp : ∀ i j, 0 ≤ cutPoint (uniformChain n) i j := fun i j ↦ (cutPoint_mem_Icc hP i j).1
+  refine le_trans ?_ (variance_rowTerm_ge_of_int hγ hcp (cutWeight_uniform_int s) N m i hbit)
+  obtain ⟨z, hz⟩ := rowFrac_uniform (by omega) s i m
+  rw [hz, Int.fract_add_intCast]
+  exact fract_mul_one_sub_ge hn2 hnd m
+
+/-- `ρ = 2^{-(2n+6)}` is small: `4 W² ρ/(1 − ρ) ≤ (n − 1)/(2n²)` for `W ≤ 2`. -/
+theorem uniformSpacing_bound (hn2 : 2 ≤ n) {W : ℝ} (hW0 : 0 ≤ W) (hW : W ≤ 2) :
+    4 * W ^ 2 * ((1 / 2) ^ uniformSpacing n / (1 - (1 / 2) ^ uniformSpacing n)) ≤
+      ((n : ℝ) - 1) / n ^ 2 / 2 := by
+  set ρ : ℝ := (1 / 2) ^ uniformSpacing n with hρ
+  have hρ0 : 0 < ρ := by positivity
+  have hq : ((1 : ℝ) / 2) ^ n * n < 1 := by
+    have h1 : (n : ℝ) < 2 ^ n := by exact_mod_cast Nat.lt_two_pow_self
+    rw [one_div_pow, div_mul_eq_mul_div, one_mul, div_lt_one (by positivity)]
+    exact h1
+  have hρe : ρ = (1 / 64) * ((1 / 2) ^ n) ^ 2 := by
+    rw [hρ, uniformSpacing, ← pow_mul, show 2 * n + 6 = n * 2 + 6 by ring, pow_add]
+    norm_num
+    ring
+  have hρ1 : ρ ≤ 1 / 2 := by
+    rw [hρ]
+    calc ((1 : ℝ) / 2) ^ uniformSpacing n ≤ (1 / 2) ^ 1 :=
+          pow_le_pow_of_le_one (by norm_num) (by norm_num) (by unfold uniformSpacing; omega)
+      _ = 1 / 2 := by norm_num
+  have hn0 : (0 : ℝ) < n := by exact_mod_cast (show 0 < n by omega)
+  have hn1 : (1 : ℝ) ≤ n - 1 := by
+    have : (2 : ℝ) ≤ n := by exact_mod_cast hn2
+    linarith
+  have h64 : 64 * (n : ℝ) ^ 2 * ρ ≤ 1 := by
+    rw [hρe]
+    have hq0 : 0 ≤ ((1 : ℝ) / 2) ^ n * n := by positivity
+    nlinarith
+  have hfrac : ρ / (1 - ρ) ≤ 2 * ρ := by
+    rw [div_le_iff₀ (by linarith)]
+    nlinarith
+  have hW2 : W ^ 2 ≤ 4 := by nlinarith
+  calc 4 * W ^ 2 * (ρ / (1 - ρ)) ≤ 4 * 4 * (2 * ρ) := by
+        gcongr
+        · exact div_nonneg hρ0.le (by linarith)
+    _ = 32 * ρ := by ring
+    _ ≤ ((n : ℝ) - 1) / n ^ 2 / 2 := by
+        rw [div_div, le_div_iff₀ (by positivity)]
+        nlinarith
+
+/-- **Variance of the main term of the uniform chain** (any coin layout with independent rows):
+along `n_i = Σ_{a<k} 2^{ra}`, `Var(levelSumN) ≥ k/4`. -/
+theorem variance_levelSumN_uniform_ge {ι : Type*} (lev : ι → ℕ) {γ : Fin n → ℕ → ℕ → ι}
+    (hlev : ∀ i j d, lev (γ i j d) = d)
+    (hrows : ∀ i i' j j' d d', i ≠ i' → γ i j d ≠ γ i' j' d') (hn2 : 2 ≤ n)
+    (hnd : ∀ m, ¬ n ∣ 2 ^ m) (s : Fin n) {k K : ℕ}
+    (hK : ∀ a < k, uniformSpacing n * a < K) :
+    (k : ℝ) / 4 ≤ Var[fun ω ↦ levelSumN (cutWeight (uniformPoisson n s))
+      (cutPoint (uniformChain n)) (fun _ ↦ patternR (uniformSpacing n) k) K (coinsOf γ ω);
+      coinMeasure ι] := by
+  have hγ : ∀ i j, Function.Injective (γ i j) := fun i j d d' h ↦ by
+    have := congrArg lev h
+    rwa [hlev, hlev] at this
+  have hP := isStochastic_uniformChain (n := n) (by omega)
+  have hcp : ∀ i j, 0 ≤ cutPoint (uniformChain n) i j := fun i j ↦ (cutPoint_mem_Icc hP i j).1
+  have hr : 1 ≤ uniformSpacing n := by unfold uniformSpacing; omega
+  have h := variance_levelSumN_pattern_ge lev hlev hrows hcp hr hK
+    (N := fun _ ↦ patternR (uniformSpacing n) k) (fun _ ↦ rfl) (a₀ := ((n : ℝ) - 1) / n ^ 2)
+    (w := cutWeight (uniformPoisson n s)) fun i a ha ↦
+      variance_rowTerm_uniform_ge hγ hn2 hnd s _ _ i
+        ((testBit_patternR hr k _).2 ⟨Nat.mul_mod_right _ _, by
+          rw [Nat.mul_div_cancel_left _ (by omega)]; exact ha⟩)
+  refine le_trans ?_ h
+  have hb := uniformSpacing_bound hn2 (absWeightSum_nonneg n (cutWeight (uniformPoisson n s)))
+    (absWeightSum_uniform_le s)
+  have hn0 : (0 : ℝ) < n := by exact_mod_cast (show 0 < n by omega)
+  have hn2' : (2 : ℝ) ≤ n := by exact_mod_cast hn2
+  have hk : (0 : ℝ) ≤ k := Nat.cast_nonneg k
+  have hkey : (k : ℝ) / 4 ≤ n * k * (((n : ℝ) - 1) / n ^ 2 / 2) := by
+    have e : (n : ℝ) * k * (((n : ℝ) - 1) / n ^ 2 / 2) = k * ((n - 1) / (2 * n)) := by
+      field_simp
+    rw [e]
+    have : (1 : ℝ) / 4 ≤ (n - 1) / (2 * n) := by
+      rw [div_le_div_iff₀ (by norm_num) (by positivity)]
+      linarith
+    nlinarith
+  refine hkey.trans ?_
+  gcongr
+  linarith
+
+/-! ### From the main term to the occupation error -/
+
+/-- **Variance lower bounds survive an `o(√k)` perturbation**: if `|E_k − M_k| ≤ b_k`,
+`Var M_k ≥ c k` eventually and `b_k² / k → 0`, then `Var E_k ≥ c k / 4` eventually. -/
+theorem eventually_variance_ge_of_close {Ω : Type*} [MeasurableSpace Ω] {μ : Measure Ω}
+    [IsProbabilityMeasure μ] {E M : ℕ → Ω → ℝ} {b : ℕ → ℝ} (hE : ∀ k, MemLp (E k) 2 μ)
+    (hM : ∀ k, MemLp (M k) 2 μ) (hclose : ∀ k ω, |E k ω - M k ω| ≤ b k) {c : ℝ} (hc : 0 < c)
+    (hVM : ∀ᶠ k in atTop, c * k ≤ Var[M k; μ])
+    (hb : Tendsto (fun k ↦ b k ^ 2 / k) atTop (𝓝 0)) :
+    ∀ᶠ k in atTop, c / 4 * k ≤ Var[E k; μ] := by
+  have : Nonempty Ω := nonempty_of_isProbabilityMeasure μ
+  have hb0 : ∀ k, 0 ≤ b k := fun k ↦ (abs_nonneg _).trans (hclose k (Classical.arbitrary Ω))
+  have hsmall : ∀ᶠ k in atTop, b k ^ 2 / k ≤ c / 4 :=
+    hb.eventually (ge_mem_nhds (by positivity))
+  filter_upwards [hVM, hsmall, eventually_ge_atTop 1] with k hk hs hk1
+  have hk0 : (0 : ℝ) < k := by exact_mod_cast hk1
+  have hσ : |√Var[M k; μ] - √Var[E k; μ]| ≤ b k := by
+    refine (abs_sqrt_variance_sub_le (hE k) (hM k)).trans ?_
+    refine (Real.sqrt_le_sqrt (variance_le_sq_of_bounded (a := -b k) (b := b k)
+      (Eventually.of_forall fun ω ↦ abs_le.1 (hclose k ω))
+      ((hE k).sub (hM k)).aestronglyMeasurable.aemeasurable)).trans (le_of_eq ?_)
+    rw [show (b k - -b k) / 2 = b k by ring, Real.sqrt_sq (hb0 k)]
+  set sM := √Var[M k; μ] with hsM
+  set sE := √Var[E k; μ] with hsE
+  have hsM2 : sM ^ 2 = Var[M k; μ] := Real.sq_sqrt (variance_nonneg _ _)
+  have hsE2 : sE ^ 2 = Var[E k; μ] := Real.sq_sqrt (variance_nonneg _ _)
+  have hsM0 : 0 ≤ sM := Real.sqrt_nonneg _
+  have hb2 : b k ^ 2 ≤ c * k / 4 := by
+    rw [div_le_iff₀ hk0] at hs
+    linarith
+  have hbM : b k ≤ sM / 2 := by
+    by_contra hcon
+    push Not at hcon
+    nlinarith [hb0 k]
+  have hsE : sM / 2 ≤ sE := by
+    have := (abs_le.1 hσ).2
+    linarith
+  have h4 : sM ^ 2 / 4 ≤ sE ^ 2 := by
+    have := pow_le_pow_left₀ (by positivity) hsE 2
+    rw [div_pow] at this
+    linarith
+  rw [← hsE2]
+  nlinarith
+
+/-- `2^{ra} ≤ T_k` for `a < k`, so the levels `ra` are below `⌊log₂ T_k⌋ + 1`. -/
+theorem uniformSpacing_mul_lt (hn : 1 ≤ n) {k a : ℕ} (ha : a < k) :
+    uniformSpacing n * a < Nat.log 2 (uniformTime n k) + 1 := by
+  have h1 : 2 ^ (uniformSpacing n * a) ≤ patternR (uniformSpacing n) k :=
+    single_le_sum (f := fun a ↦ 2 ^ (uniformSpacing n * a)) (fun _ _ ↦ Nat.zero_le _)
+      (mem_range.2 ha)
+  have h2 : patternR (uniformSpacing n) k ≤ uniformTime n k := by
+    unfold uniformTime
+    exact Nat.le_mul_of_pos_left _ (by omega)
+  have := Nat.le_log_of_pow_le one_lt_two (h1.trans h2)
+  omega
+
+/-- `⌊log₂ T_k⌋ ≤ (n + r) k` for `k ≥ 1`. -/
+theorem natLog_uniformTime_le {k : ℕ} (hk : 1 ≤ k) :
+    Nat.log 2 (uniformTime n k) ≤ (n + uniformSpacing n) * k := by
+  have hr : 1 ≤ uniformSpacing n := by unfold uniformSpacing; omega
+  have hlt : uniformTime n k < 2 ^ (n + uniformSpacing n * k) := by
+    unfold uniformTime
+    rw [pow_add]
+    exact Nat.mul_lt_mul'' Nat.lt_two_pow_self (patternR_lt hr k)
+  by_cases h0 : uniformTime n k = 0
+  · rw [h0, Nat.log_zero_right]
+    exact Nat.zero_le _
+  have := Nat.log_lt_of_lt_pow h0 hlt
+  nlinarith
+
+/-- `T_k → ∞`. -/
+theorem tendsto_uniformTime (hn : 1 ≤ n) : Tendsto (uniformTime n) atTop atTop := by
+  refine tendsto_atTop_mono (fun k ↦ ?_) tendsto_id
+  have h : k ≤ patternR (uniformSpacing n) k := by
+    rw [patternR]
+    calc k = ∑ _a ∈ range k, 1 := by simp
+      _ ≤ ∑ a ∈ range k, 2 ^ (uniformSpacing n * a) :=
+          sum_le_sum fun a _ ↦ Nat.one_le_two_pow
+  exact h.trans (Nat.le_mul_of_pos_left _ (by omega))
+
+/-- The Anscombe error along the uniform times is `o(√k)`. -/
+theorem tendsto_ansBoundN_uniform (hn : 1 ≤ n) (s : Fin n) :
+    Tendsto (fun k ↦ ansBoundN (uniformPoisson n) s (uniformTime n k) ^ 2 / k) atTop (𝓝 0) := by
+  have h := tendsto_sq_div_natLog_of_le (tendsto_uniformTime hn)
+    (fun k ↦ ansBoundN_nonneg (uniformPoisson n) s (uniformTime n k))
+    (fun k ↦ ansBoundN_le_log (uniformPoisson n) s (uniformTime n k))
+  have hlim := h.const_mul ((n : ℝ) + uniformSpacing n)
+  rw [mul_zero] at hlim
+  refine squeeze_zero' (Eventually.of_forall fun k ↦ by positivity) ?_ hlim
+  have hlog : ∀ᶠ k in atTop, 1 ≤ Nat.log 2 (uniformTime n k) :=
+    ((tendsto_atTop_atTop.2 fun b ↦ ⟨2 ^ b, fun _ ht ↦ Nat.le_log_of_pow_le one_lt_two ht⟩).comp
+      (tendsto_uniformTime hn)).eventually_ge_atTop 1
+  filter_upwards [hlog, eventually_ge_atTop 1] with k hl hk
+  have hk0 : (0 : ℝ) < k := by exact_mod_cast hk
+  have hl0 : (0 : ℝ) < Nat.log 2 (uniformTime n k) := by exact_mod_cast hl
+  have hle : (Nat.log 2 (uniformTime n k) : ℝ) ≤ ((n : ℝ) + uniformSpacing n) * k := by
+    exact_mod_cast natLog_uniformTime_le hk
+  have hb := sq_nonneg (ansBoundN (uniformPoisson n) s (uniformTime n k))
+  rw [mul_div_assoc', div_le_div_iff₀ hk0 hl0]
+  nlinarith
+
+/-- **Non-vacuity, digital shift** (uniform chain, `n` not a power of two, any target):
+`Var(N_s(T_k) − T_k/n) ≥ log₂ T_k / (16 (n + r))` eventually. -/
+theorem eventually_variance_occErrN_uniform_shift_ge (hn2 : 2 ≤ n) (hnd : ∀ m, ¬ n ∣ 2 ^ m)
+    (x₀ s : Fin n) :
+    ∀ᶠ k in atTop, 1 / (16 * ((n : ℝ) + uniformSpacing n)) * Nat.log 2 (uniformTime n k) ≤
+      Var[fun ω ↦ occErrN (uniformChain n) (uniformPi n) x₀ (shiftFlips ω) s (uniformTime n k);
+        shiftMeasure n] := by
+  have hn : 1 ≤ n := by omega
+  have hP := isStochastic_uniformChain hn
+  have hH := isPoissonFamily_uniform hn
+  have hcp : ∀ i j, 0 ≤ cutPoint (uniformChain n) i j := fun i j ↦ (cutPoint_mem_Icc hP i j).1
+  have hVM : ∀ᶠ k in atTop, (1 / 4 : ℝ) * k ≤ Var[fun ω ↦ shiftMainTerm (uniformChain n)
+      (uniformPoisson n) (uniformPi n) s (uniformTime n k) ω; shiftMeasure n] := by
+    refine Eventually.of_forall fun k ↦ ?_
+    have h := variance_levelSumN_uniform_ge (fun q : Fin n × ℕ ↦ q.2) (γ := shiftLayout n)
+      (fun i j d ↦ rfl) shiftLayout_rows hn2 hnd s (k := k)
+      (K := Nat.log 2 (uniformTime n k) + 1) fun a ha ↦ uniformSpacing_mul_lt hn ha
+    unfold shiftMainTerm
+    rw [chainIdxN_uniformTime hn k]
+    linarith
+  have hev := eventually_variance_ge_of_close
+    (E := fun k ω ↦ occErrN (uniformChain n) (uniformPi n) x₀ (shiftFlips ω) s (uniformTime n k))
+    (M := fun k ω ↦ shiftMainTerm (uniformChain n) (uniformPoisson n) (uniformPi n) s
+      (uniformTime n k) ω)
+    (fun k ↦ memLp_occErrN_shift _ _ x₀ s _)
+    (fun k ↦ memLp_levelSumN_coins hcp _ _ (shiftLayout n))
+    (fun k ω ↦ abs_occErrN_shift_sub_le hP hH x₀ s _ ω) (by norm_num : (0 : ℝ) < 1 / 4) hVM
+    (tendsto_ansBoundN_uniform hn s)
+  filter_upwards [hev, eventually_ge_atTop 1] with k hk hk1
+  have hle : (Nat.log 2 (uniformTime n k) : ℝ) ≤ ((n : ℝ) + uniformSpacing n) * k := by
+    exact_mod_cast natLog_uniformTime_le hk1
+  have hpos : (0 : ℝ) < (n : ℝ) + uniformSpacing n := by positivity
+  refine le_trans ?_ hk
+  rw [div_mul_eq_mul_div, one_mul, div_le_iff₀ (by positivity)]
+  nlinarith
+
+/-- **Non-vacuity, Owen's scramble** (uniform chain, `n` not a power of two, any target):
+`Var(N_s(T_k) − T_k/n) ≥ log₂ T_k / (16 (n + r))` eventually (Owen's own variance). -/
+theorem eventually_variance_occErrN_uniform_owen_ge (hn2 : 2 ≤ n) (hnd : ∀ m, ¬ n ∣ 2 ^ m)
+    (x₀ s : Fin n) :
+    ∀ᶠ k in atTop, 1 / (16 * ((n : ℝ) + uniformSpacing n)) * Nat.log 2 (uniformTime n k) ≤
+      Var[fun ω ↦ occErrN (uniformChain n) (uniformPi n) x₀ (owenTable ω) s (uniformTime n k);
+        owenMeasure n] := by
+  have hn : 1 ≤ n := by omega
+  have hP := isStochastic_uniformChain hn
+  have hH := isPoissonFamily_uniform hn
+  have hcp : ∀ i j, 0 ≤ cutPoint (uniformChain n) i j := fun i j ↦ (cutPoint_mem_Icc hP i j).1
+  have hMP := measurePreserving_owenRelabel (n := n)
+  have hVM : ∀ᶠ k in atTop, (1 / 4 : ℝ) * k ≤ Var[fun ω ↦ owenMainTerm (uniformChain n)
+      (uniformPoisson n) (uniformPi n) s (uniformTime n k) (owenRelabel ω); owenMeasure n] := by
+    refine Eventually.of_forall fun k ↦ ?_
+    have h := variance_levelSumN_uniform_ge (fun q : Fin n × ℕ × ℕ ↦ q.2.1)
+      (γ := owenLayout (uniformChain n)) (fun i j d ↦ rfl) (owenLayout_rows _) hn2 hnd s
+      (k := k) (K := Nat.log 2 (uniformTime n k) + 1) fun a ha ↦ uniformSpacing_mul_lt hn ha
+    unfold owenMainTerm
+    rw [hMP.variance_fun_comp (measurable_levelSumN_coins hcp _ _ _).aemeasurable,
+      chainIdxN_uniformTime hn k]
+    linarith
+  have hev := eventually_variance_ge_of_close
+    (E := fun k ω ↦ occErrN (uniformChain n) (uniformPi n) x₀ (owenTable ω) s (uniformTime n k))
+    (M := fun k ω ↦ owenMainTerm (uniformChain n) (uniformPoisson n) (uniformPi n) s
+      (uniformTime n k) (owenRelabel ω))
+    (fun k ↦ memLp_occErrN_owen _ _ x₀ s _)
+    (fun k ↦ (memLp_levelSumN_coins hcp _ _ (owenLayout _)).comp_measurePreserving hMP)
+    (fun k ω ↦ abs_occErrN_owen_sub_le hP hH x₀ s _ ω) (by norm_num : (0 : ℝ) < 1 / 4) hVM
+    (tendsto_ansBoundN_uniform hn s)
+  filter_upwards [hev, eventually_ge_atTop 1] with k hk hk1
+  have hle : (Nat.log 2 (uniformTime n k) : ℝ) ≤ ((n : ℝ) + uniformSpacing n) * k := by
+    exact_mod_cast natLog_uniformTime_le hk1
+  have hpos : (0 : ℝ) < (n : ℝ) + uniformSpacing n := by positivity
+  refine le_trans ?_ hk
+  rw [div_mul_eq_mul_div, one_mul, div_le_iff₀ (by positivity)]
+  nlinarith
+
+/-- **The CLT holds on the uniform chain, digital shift** (`n` not a power of two, any start,
+any target), along `T_k = n Σ_{a<k} 2^{ra}`. -/
+theorem occErrN_uniform_tendstoInDistribution_shift (hn2 : 2 ≤ n) (hnd : ∀ m, ¬ n ∣ 2 ^ m)
+    (x₀ s : Fin n) {Ω' : Type*} {mΩ' : MeasurableSpace Ω'} {P' : Measure Ω'}
+    [IsProbabilityMeasure P'] {Z : Ω' → ℝ} (hZ : HasLaw Z (gaussianReal 0 1) P') :
+    TendstoInDistribution (fun k ω ↦
+      occErrN (uniformChain n) (uniformPi n) x₀ (shiftFlips ω) s (uniformTime n k) /
+      √Var[fun ω ↦ occErrN (uniformChain n) (uniformPi n) x₀ (shiftFlips ω) s
+        (uniformTime n k); shiftMeasure n]) atTop Z (fun _ ↦ shiftMeasure n) P' :=
+  tendstoInDistribution_occErrN_shift (isStochastic_uniformChain (by omega))
+    (isPoissonFamily_uniform (by omega)) x₀ s (tendsto_uniformTime (by omega))
+    (by positivity) (eventually_variance_occErrN_uniform_shift_ge hn2 hnd x₀ s) hZ
+
+/-- **The CLT holds on the uniform chain, Owen's scramble** (`n` not a power of two, any start,
+any target), along `T_k = n Σ_{a<k} 2^{ra}`. -/
+theorem occErrN_uniform_tendstoInDistribution_owen (hn2 : 2 ≤ n) (hnd : ∀ m, ¬ n ∣ 2 ^ m)
+    (x₀ s : Fin n) {Ω' : Type*} {mΩ' : MeasurableSpace Ω'} {P' : Measure Ω'}
+    [IsProbabilityMeasure P'] {Z : Ω' → ℝ} (hZ : HasLaw Z (gaussianReal 0 1) P') :
+    TendstoInDistribution (fun k ω ↦
+      occErrN (uniformChain n) (uniformPi n) x₀ (owenTable ω) s (uniformTime n k) /
+      √Var[fun ω ↦ occErrN (uniformChain n) (uniformPi n) x₀ (owenTable ω) s
+        (uniformTime n k); owenMeasure n]) atTop Z (fun _ ↦ owenMeasure n) P' :=
+  tendstoInDistribution_occErrN_owen (isStochastic_uniformChain (by omega))
+    (isPoissonFamily_uniform (by omega)) x₀ s (tendsto_uniformTime (by omega))
+    (by positivity) (eventually_variance_occErrN_uniform_owen_ge hn2 hnd x₀ s) hZ
+
+/-! ### Three states (required) and five states -/
+
+/-- `5 ∤ 2^m`. -/
+theorem not_five_dvd_two_pow (m : ℕ) : ¬ 5 ∣ 2 ^ m := fun h ↦ by
+  have := Nat.le_of_dvd (by norm_num) (Nat.prime_five.dvd_of_dvd_pow h)
+  omega
+
+/-- **Non-vacuity on the three-state uniform chain, target `1`, digital shift**:
+`Var(N_1(T_k) − T_k/3) ≥ log₂ T_k / 240` eventually, `T_k = 3 Σ_{a<k} 2^{12a}`. -/
+theorem eventually_variance_occErrN_example_shift_ge (x₀ : Fin 3) :
+    ∀ᶠ k in atTop, 1 / 240 * Nat.log 2 (uniformTime 3 k) ≤
+      Var[fun ω ↦ occErrN (uniformChain 3) (uniformPi 3) x₀ (shiftFlips ω) 1 (uniformTime 3 k);
+        shiftMeasure 3] := by
+  have h := eventually_variance_occErrN_uniform_shift_ge (n := 3) (by norm_num)
+    not_three_dvd_two_pow x₀ 1
+  norm_num [uniformSpacing] at h ⊢
+  exact h
+
+/-- **Non-vacuity on the three-state uniform chain, target `1`, Owen's scramble**:
+`Var(N_1(T_k) − T_k/3) ≥ log₂ T_k / 240` eventually, `T_k = 3 Σ_{a<k} 2^{12a}`. -/
+theorem eventually_variance_occErrN_example_owen_ge (x₀ : Fin 3) :
+    ∀ᶠ k in atTop, 1 / 240 * Nat.log 2 (uniformTime 3 k) ≤
+      Var[fun ω ↦ occErrN (uniformChain 3) (uniformPi 3) x₀ (owenTable ω) 1 (uniformTime 3 k);
+        owenMeasure 3] := by
+  have h := eventually_variance_occErrN_uniform_owen_ge (n := 3) (by norm_num)
+    not_three_dvd_two_pow x₀ 1
+  norm_num [uniformSpacing] at h ⊢
+  exact h
+
+/-- **The CLT on the three-state uniform chain, target `1`, digital shift** (post #3, code (ii)). -/
+theorem occErrN_example_tendstoInDistribution_shift (x₀ : Fin 3) {Ω' : Type*}
+    {mΩ' : MeasurableSpace Ω'} {P' : Measure Ω'} [IsProbabilityMeasure P'] {Z : Ω' → ℝ}
+    (hZ : HasLaw Z (gaussianReal 0 1) P') :
+    TendstoInDistribution (fun k ω ↦
+      occErrN (uniformChain 3) (uniformPi 3) x₀ (shiftFlips ω) 1 (uniformTime 3 k) /
+      √Var[fun ω ↦ occErrN (uniformChain 3) (uniformPi 3) x₀ (shiftFlips ω) 1
+        (uniformTime 3 k); shiftMeasure 3]) atTop Z (fun _ ↦ shiftMeasure 3) P' :=
+  occErrN_uniform_tendstoInDistribution_shift (by norm_num) not_three_dvd_two_pow x₀ 1 hZ
+
+/-- **The CLT on the three-state uniform chain, target `1`, Owen's scramble** (post #3,
+code (iii)). -/
+theorem occErrN_example_tendstoInDistribution_owen (x₀ : Fin 3) {Ω' : Type*}
+    {mΩ' : MeasurableSpace Ω'} {P' : Measure Ω'} [IsProbabilityMeasure P'] {Z : Ω' → ℝ}
+    (hZ : HasLaw Z (gaussianReal 0 1) P') :
+    TendstoInDistribution (fun k ω ↦
+      occErrN (uniformChain 3) (uniformPi 3) x₀ (owenTable ω) 1 (uniformTime 3 k) /
+      √Var[fun ω ↦ occErrN (uniformChain 3) (uniformPi 3) x₀ (owenTable ω) 1
+        (uniformTime 3 k); owenMeasure 3]) atTop Z (fun _ ↦ owenMeasure 3) P' :=
+  occErrN_uniform_tendstoInDistribution_owen (by norm_num) not_three_dvd_two_pow x₀ 1 hZ
+
+/-- **The CLT on the five-state uniform chain, target `2`, digital shift** (post #3's number of
+states, code (ii)). -/
+theorem occErrN_five_tendstoInDistribution_shift (x₀ : Fin 5) {Ω' : Type*}
+    {mΩ' : MeasurableSpace Ω'} {P' : Measure Ω'} [IsProbabilityMeasure P'] {Z : Ω' → ℝ}
+    (hZ : HasLaw Z (gaussianReal 0 1) P') :
+    TendstoInDistribution (fun k ω ↦
+      occErrN (uniformChain 5) (uniformPi 5) x₀ (shiftFlips ω) 2 (uniformTime 5 k) /
+      √Var[fun ω ↦ occErrN (uniformChain 5) (uniformPi 5) x₀ (shiftFlips ω) 2
+        (uniformTime 5 k); shiftMeasure 5]) atTop Z (fun _ ↦ shiftMeasure 5) P' :=
+  occErrN_uniform_tendstoInDistribution_shift (by norm_num) not_five_dvd_two_pow x₀ 2 hZ
+
+/-- **The CLT on the five-state uniform chain, target `2`, Owen's scramble** (post #3's number
+of states, code (iii)). -/
+theorem occErrN_five_tendstoInDistribution_owen (x₀ : Fin 5) {Ω' : Type*}
+    {mΩ' : MeasurableSpace Ω'} {P' : Measure Ω'} [IsProbabilityMeasure P'] {Z : Ω' → ℝ}
+    (hZ : HasLaw Z (gaussianReal 0 1) P') :
+    TendstoInDistribution (fun k ω ↦
+      occErrN (uniformChain 5) (uniformPi 5) x₀ (owenTable ω) 2 (uniformTime 5 k) /
+      √Var[fun ω ↦ occErrN (uniformChain 5) (uniformPi 5) x₀ (owenTable ω) 2
+        (uniformTime 5 k); owenMeasure 5]) atTop Z (fun _ ↦ owenMeasure 5) P' :=
+  occErrN_uniform_tendstoInDistribution_owen (by norm_num) not_five_dvd_two_pow x₀ 2 hZ
+
+end RQMCMarkov.ScrambledStacks
+
+/-
+Copyright (c) 2026 Robert Kirkby. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Robert Kirkby
+-/
+
+/-!
+# The stacks CLT for transition counts, n states (post #3, codes (ii) and (iii))
+
+Post #3 reports "the error in the number of each transition" of the per-state Sobol stacks.
+The transition-count error `N_ij(T) − p_ij N_i(T)` is EXACTLY the departure discrepancy of row
+`i` for the indicator `1_{j}` (`transCount_sub_eq_departureDiscrepancy`); by Abel summation it is
+`segErr(v_i, c_{i,j+1}, 0, N_i(T)) − segErr(v_i, c_{i,j}, 0, N_i(T))`: integer weights `±1` at the
+cut points `c_{i,j}`, `c_{i,j+1}` (`transErrN_eq`).
+
+**Reading.** As for the occupation error: along times `T_k → ∞` with
+`Var(N_ij(T_k) − p_ij N_i(T_k)) ≥ κ log₂ T_k`, the normalised transition-count error is
+asymptotically `N(0,1)`, for the digital shift (`tendstoInDistribution_transErrN_shift`) and,
+by a separate proof, for Owen's scramble (`tendstoInDistribution_transErrN_owen`).
+
+**Proof.** Only row `i` is in play: we give the other rows the inert cut point `1` (`rowCut`),
+whose level terms vanish, so the main term `Σ_{j'} w_{j'} segErr(v_i, c_{ij'}, 0, ⌊T π_i⌋)` is a
+level sum (`transMainN_eq_levelSumN`); the Anscombe step uses only `|N_i(T) − T π_i| = O(log T)`
+(`abs_transErrN_sub_transMainN_le`, `O(log log T)`). Then `CltNCoins` (shift layout) or the Owen
+relabelling of `CltNOwenTree` (Owen layout of the row cut points), and Slutsky.
+
+**Hypotheses added.** `IsPoissonFamily P H π` (for `|N_i(T) − T π_i| = O(log T)`); the variance
+hypothesis along the given times. Non-vacuity is not proved here (the uniform chains of
+`CltNExample` treat the occupation error).
+
+## Main results
+
+* `transErrN`, `indicatorFn`, `transErrN_eq`, `transMainN`, `abs_transErrN_sub_transMainN_le`,
+  `transBound`, `transBound_le_log`.
+* `rowCut`, `transMainN_eq_levelSumN`, `owenLayoutOf`.
+* `tendstoInDistribution_transErrN_shift`, `tendstoInDistribution_transErrN_owen`.
+-/
+
+namespace RQMCMarkov.ScrambledStacks
+
+open MeasureTheory ProbabilityTheory Filter Finset
+open scoped ENNReal NNReal Topology
+
+variable {n : ℕ}
+
+/-- The transition-count error `N_ij(T) − p_ij N_i(T)` of the chain driven by the stacks of
+`f`. -/
+noncomputable def transErrN (P : Fin n → Fin n → ℝ) (x₀ : Fin n) (f : Fin n → ℕ → ℕ → Bool)
+    (i j : Fin n) (T : ℕ) : ℝ :=
+  (transCount (stackPath P x₀ (scrambledStack f)) i j T : ℝ) -
+    P i j * occCount (stackPath P x₀ (scrambledStack f)) i T
+
+/-- The indicator `1_{j}` of a state. -/
+noncomputable def indicatorFn (j : Fin n) : Fin n → ℝ := fun k ↦ if k = j then 1 else 0
+
+/-- **The transition-count error is a weighted sum of local discrepancies of row `i`.** -/
+theorem transErrN_eq {P : Fin n → Fin n → ℝ} (hP : IsStochastic P) (x₀ : Fin n)
+    (f : Fin n → ℕ → ℕ → Bool) (i j : Fin n) (T : ℕ) :
+    transErrN P x₀ f i j T = ∑ j' ∈ range (n - 1), cutWeight (indicatorFn j) j' *
+      segErr (scrambledVdc (f i)) (cutPoint P i j') 0
+        (occCount (stackPath P x₀ (scrambledStack f)) i T) := by
+  rw [transErrN, transCount_sub_eq_departureDiscrepancy P _ i j T]
+  refine (departureDiscrepancy_stackDrive P (indicatorFn j) (step P) x₀ (scrambledStack f) i
+    T).trans ?_
+  exact sum_step_sub_eq_sum_segErr hP (indicatorFn j) i (fun k ↦ (scrambledVdc_mem_Icc (f i) k).2) _
+
+/-- The main term of the transition-count error at the deterministic index `⌊T π_i⌋`. -/
+noncomputable def transMainN (P : Fin n → Fin n → ℝ) (pi : Fin n → ℝ) (f : Fin n → ℕ → ℕ → Bool)
+    (i j : Fin n) (T : ℕ) : ℝ :=
+  ∑ j' ∈ range (n - 1), cutWeight (indicatorFn j) j' *
+    segErr (scrambledVdc (f i)) (cutPoint P i j') 0 (chainIdxN pi T i)
+
+/-- The Anscombe bound `W (2⌊log₂ (A (⌊log₂ T⌋ + 1))⌋ + 3)` for transitions. -/
+noncomputable def transBound (H : Fin n → Fin n → ℝ) (j : Fin n) (T : ℕ) : ℝ :=
+  cutWeightSum (indicatorFn j) * (2 * (Nat.log 2 (anscConstN H * (Nat.log 2 T + 1)) : ℝ) + 3)
+
+/-- **Deterministic Anscombe theorem for transition counts** (every flip table). -/
+theorem abs_transErrN_sub_transMainN_le {P : Fin n → Fin n → ℝ} (hP : IsStochastic P)
+    {H : Fin n → Fin n → ℝ} {pi : Fin n → ℝ} (hH : IsPoissonFamily P H pi) (x₀ : Fin n)
+    (f : Fin n → ℕ → ℕ → Bool) (i j : Fin n) (T : ℕ) :
+    |transErrN P x₀ f i j T - transMainN P pi f i j T| ≤ transBound H j T := by
+  rw [transErrN_eq hP x₀ f i j T, transMainN, ← sum_sub_distrib, transBound, cutWeightSum,
+    sum_mul]
+  refine (abs_sum_le_sum_abs _ _).trans (sum_le_sum fun j' _ ↦ ?_)
+  rw [← mul_sub, abs_mul]
+  refine mul_le_mul_of_nonneg_left ?_ (abs_nonneg _)
+  have hc := cutPoint_mem_Icc hP i j'
+  refine (abs_segErr_sub_segErr_le (f i) hc.1 hc.2 _ _).trans ?_
+  have hpi := hH.mem_Icc hP i
+  have hfl : |T * pi i - (chainIdxN pi T i : ℝ)| < 1 := by
+    have hy : 0 ≤ (T : ℝ) * pi i := mul_nonneg (Nat.cast_nonneg T) hpi.1
+    rw [chainIdxN, abs_of_nonneg (sub_nonneg.2 (Nat.floor_le hy))]
+    linarith [Nat.lt_floor_add_one ((T : ℝ) * pi i)]
+  have hd := natLog_dist_le (abs_occCount_sub_pi_le hP hH x₀ f i T) hfl
+  have hd' : (Nat.log 2 (occCount (stackPath P x₀ (scrambledStack f)) i T - chainIdxN pi T i +
+      (chainIdxN pi T i - occCount (stackPath P x₀ (scrambledStack f)) i T)) : ℝ) ≤
+      Nat.log 2 (anscConstN H * (Nat.log 2 T + 1)) := by exact_mod_cast hd
+  linarith
+
+/-- `0 ≤ transBound`. -/
+theorem transBound_nonneg (H : Fin n → Fin n → ℝ) (j : Fin n) (T : ℕ) : 0 ≤ transBound H j T := by
+  have := cutWeightSum_nonneg (indicatorFn j)
+  rw [transBound]
+  positivity
+
+/-- **The transition Anscombe bound is `O(log log T)`.** -/
+theorem transBound_le_log (H : Fin n → Fin n → ℝ) (j : Fin n) (T : ℕ) :
+    transBound H j T ≤ cutWeightSum (indicatorFn j) * (2 * Nat.log 2 (anscConstN H) + 5) *
+      ((Nat.log 2 (Nat.log 2 T + 1) : ℝ) + 1) := by
+  have hmul : (Nat.log 2 (anscConstN H * (Nat.log 2 T + 1)) : ℝ) ≤
+      Nat.log 2 (anscConstN H) + Nat.log 2 (Nat.log 2 T + 1) + 1 := by
+    exact_mod_cast natLog_mul_le _ _
+  have hW := cutWeightSum_nonneg (indicatorFn j)
+  have h0 := (Nat.log 2 (anscConstN H)).cast_nonneg (α := ℝ)
+  have h1 := (Nat.log 2 (Nat.log 2 T + 1)).cast_nonneg (α := ℝ)
+  rw [transBound, mul_assoc]
+  refine mul_le_mul_of_nonneg_left ?_ hW
+  nlinarith
+
+/-- Row-restricted cut points: those of row `i`, and the inert cut point `1` in other rows. -/
+noncomputable def rowCut (P : Fin n → Fin n → ℝ) (i : Fin n) : Fin n → ℕ → ℝ :=
+  fun i' j' ↦ if i' = i then cutPoint P i' j' else 1
+
+/-- Row-restricted cut points are nonnegative. -/
+theorem rowCut_nonneg {P : Fin n → Fin n → ℝ} (hP : IsStochastic P) (i i' : Fin n) (j' : ℕ) :
+    0 ≤ rowCut P i i' j' := by
+  unfold rowCut
+  split_ifs
+  · exact (cutPoint_mem_Icc hP i' j').1
+  · norm_num
+
+/-- **Level decomposition of the transition main term** (every flip table). -/
+theorem transMainN_eq_levelSumN {P : Fin n → Fin n → ℝ} (hP : IsStochastic P) (pi : Fin n → ℝ)
+    (f : Fin n → ℕ → ℕ → Bool) (i j : Fin n) (T : ℕ) {K : ℕ}
+    (hK : ∀ i', chainIdxN pi T i' < 2 ^ K) :
+    transMainN P pi f i j T = levelSumN (cutWeight (indicatorFn j)) (rowCut P i) (chainIdxN pi T) K
+      (fun i' j' ↦ pathCoin (f i') (threshDigit (rowCut P i i' j'))) := by
+  have hrow : ∀ m, ∑ i', rowTerm (cutWeight (indicatorFn j)) (rowCut P i) (chainIdxN pi T) m
+      (fun i' j' ↦ pathCoin (f i') (threshDigit (rowCut P i i' j'))) i' =
+      rowTerm (cutWeight (indicatorFn j)) (rowCut P i) (chainIdxN pi T) m
+        (fun i' j' ↦ pathCoin (f i') (threshDigit (rowCut P i i' j'))) i := by
+    intro m
+    refine sum_eq_single i (fun i' _ hne ↦ sum_eq_zero fun j' _ ↦ ?_)
+      (fun h ↦ absurd (mem_univ i) h)
+    simp only [cutTerm, rowCut, hne, ite_false, lt_irrefl, mul_zero]
+  rw [levelSumN, sum_congr rfl fun m _ ↦ hrow m, transMainN]
+  simp only [rowTerm]
+  conv_rhs => rw [sum_comm]
+  refine sum_congr rfl fun j' _ ↦ ?_
+  have hc := cutPoint_mem_Icc hP i j'
+  rw [segErr_scrambledVdc_eq_sum_cutTerm (f i) hc.1 hc.2 (hK i), mul_sum]
+  simp only [rowCut, ite_true]
+
+/-- The transition main term under the digital shift. -/
+noncomputable def shiftTransMain (P : Fin n → Fin n → ℝ) (pi : Fin n → ℝ) (i j : Fin n) (T : ℕ)
+    (ω : Fin n × ℕ → Bool) : ℝ :=
+  levelSumN (cutWeight (indicatorFn j)) (rowCut P i) (chainIdxN pi T) (Nat.log 2 T + 1)
+    (coinsOf (shiftLayout n) ω)
+
+/-- The transition-count error is bounded: `|N_ij − p_ij N_i| ≤ T + |p_ij| T`. -/
+theorem abs_transErrN_le (P : Fin n → Fin n → ℝ) (x₀ : Fin n) (f : Fin n → ℕ → ℕ → Bool)
+    (i j : Fin n) (T : ℕ) : |transErrN P x₀ f i j T| ≤ T + |P i j| * T := by
+  rw [transErrN]
+  refine (abs_sub _ _).trans ?_
+  rw [Nat.abs_cast, abs_mul, Nat.abs_cast]
+  have h1 : (transCount (stackPath P x₀ (scrambledStack f)) i j T : ℝ) ≤ T := by
+    exact_mod_cast (transCount_le_occCount _ i j T).trans (occCount_le _ i T)
+  have h2 : (occCount (stackPath P x₀ (scrambledStack f)) i T : ℝ) ≤ T := by
+    exact_mod_cast occCount_le _ i T
+  nlinarith [abs_nonneg (P i j)]
+
+/-- **The transition-count CLT, digital shift** (post #3, code (ii), n states): along `T_k → ∞`
+with `Var(N_ij(T_k) − p_ij N_i(T_k)) ≥ κ log₂ T_k`, the normalised error is asymptotically
+`N(0,1)`. -/
+theorem tendstoInDistribution_transErrN_shift {P : Fin n → Fin n → ℝ} (hP : IsStochastic P)
+    {H : Fin n → Fin n → ℝ} {pi : Fin n → ℝ} (hH : IsPoissonFamily P H pi) (x₀ i j : Fin n)
+    {T : ℕ → ℕ} (hT : Tendsto T atTop atTop) {κ : ℝ} (hκ : 0 < κ)
+    (hvar : ∀ᶠ k in atTop,
+      κ * Nat.log 2 (T k) ≤ Var[fun ω ↦ transErrN P x₀ (shiftFlips ω) i j (T k); shiftMeasure n])
+    {Ω' : Type*} {mΩ' : MeasurableSpace Ω'} {P' : Measure Ω'} [IsProbabilityMeasure P']
+    {Z : Ω' → ℝ} (hZ : HasLaw Z (gaussianReal 0 1) P') :
+    TendstoInDistribution (fun k ω ↦ transErrN P x₀ (shiftFlips ω) i j (T k) /
+      √Var[fun ω ↦ transErrN P x₀ (shiftFlips ω) i j (T k); shiftMeasure n]) atTop Z
+      (fun _ ↦ shiftMeasure n) P' := by
+  have hcp := rowCut_nonneg hP i
+  have hγ : ∀ i j, Function.Injective (shiftLayout n i j) := fun i j d d' h ↦
+    congrArg Prod.snd h
+  have hE : ∀ k, MemLp (fun ω ↦ transErrN P x₀ (shiftFlips ω) i j (T k)) 2 (shiftMeasure n) := by
+    intro k
+    have hm : Measurable fun ω : Fin n × ℕ → Bool ↦ transErrN P x₀ (shiftFlips ω) i j (T k) :=
+      ((measurable_of_countable (Nat.cast : ℕ → ℝ)).comp (measurable_transCount_of
+        (fun i k ↦ measurable_scrambledStack_shift i k) P x₀ i j (T k))).sub
+        (((measurable_of_countable (Nat.cast : ℕ → ℝ)).comp (measurable_occCount_of
+        (fun i k ↦ measurable_scrambledStack_shift i k) P x₀ i (T k))).const_mul _)
+    exact MemLp.of_bound hm.aestronglyMeasurable _ (Eventually.of_forall fun ω ↦ by
+      rw [Real.norm_eq_abs]; exact abs_transErrN_le P x₀ _ i j (T k))
+  have hclose : ∀ k ω, |transErrN P x₀ (shiftFlips ω) i j (T k) -
+      shiftTransMain P pi i j (T k) ω| ≤ transBound H j (T k) := by
+    intro k ω
+    have e : shiftTransMain P pi i j (T k) ω = transMainN P pi (shiftFlips ω) i j (T k) :=
+      (transMainN_eq_levelSumN hP pi (shiftFlips ω) i j (T k)
+        (chainIdxN_lt_two_pow hP hH (T k))).symm
+    rw [e]
+    exact abs_transErrN_sub_transMainN_le hP hH x₀ (shiftFlips ω) i j (T k)
+  refine tendstoInDistribution_of_close_main
+    (E := fun k ω ↦ transErrN P x₀ (shiftFlips ω) i j (T k))
+    (M := fun k ω ↦ shiftTransMain P pi i j (T k) ω) hT (b := fun k ↦ transBound H j (T k))
+    (tendsto_sq_div_natLog_of_le hT (fun k ↦ transBound_nonneg H j (T k))
+      (fun k ↦ transBound_le_log H j (T k))) hE
+    (fun k ↦ memLp_levelSumN_coins hcp _ _ (shiftLayout n))
+    (fun k ↦ integral_levelSumN_coins hcp _ _ hγ) hclose hκ hvar ?_
+  intro κ' hκ' hv
+  exact tendstoInDistribution_levelSumN Prod.snd (γ := shiftLayout n) (fun i j d ↦ rfl) hcp
+    (N := fun k ↦ chainIdxN pi (T k)) (K := fun k ↦ Nat.log 2 (T k) + 1)
+    (tendsto_natLog_add_one hT) hκ' hv hZ
+
+/-- The Owen coin layout of arbitrary cut points `cp`. -/
+noncomputable def owenLayoutOf (cp : Fin n → ℕ → ℝ) : Fin n → ℕ → ℕ → Fin n × ℕ × ℕ :=
+  fun i j d ↦ (i, d, ⌊2 ^ d * cp i j⌋₊)
+
+/-- The transition main term under Owen's scramble, at relabelled flips `ω'`. -/
+noncomputable def owenTransMain (P : Fin n → Fin n → ℝ) (pi : Fin n → ℝ) (i j : Fin n) (T : ℕ)
+    (ω' : Fin n × ℕ × ℕ → Bool) : ℝ :=
+  levelSumN (cutWeight (indicatorFn j)) (rowCut P i) (chainIdxN pi T) (Nat.log 2 T + 1)
+    (coinsOf (owenLayoutOf (rowCut P i)) ω')
+
+/-- **The transition-count CLT, Owen's scramble** (post #3, code (iii), n states), a separate
+proof through the relabelling by the scrambled tree. -/
+theorem tendstoInDistribution_transErrN_owen {P : Fin n → Fin n → ℝ} (hP : IsStochastic P)
+    {H : Fin n → Fin n → ℝ} {pi : Fin n → ℝ} (hH : IsPoissonFamily P H pi) (x₀ i j : Fin n)
+    {T : ℕ → ℕ} (hT : Tendsto T atTop atTop) {κ : ℝ} (hκ : 0 < κ)
+    (hvar : ∀ᶠ k in atTop,
+      κ * Nat.log 2 (T k) ≤ Var[fun ω ↦ transErrN P x₀ (owenTable ω) i j (T k); owenMeasure n])
+    {Ω' : Type*} {mΩ' : MeasurableSpace Ω'} {P' : Measure Ω'} [IsProbabilityMeasure P']
+    {Z : Ω' → ℝ} (hZ : HasLaw Z (gaussianReal 0 1) P') :
+    TendstoInDistribution (fun k ω ↦ transErrN P x₀ (owenTable ω) i j (T k) /
+      √Var[fun ω ↦ transErrN P x₀ (owenTable ω) i j (T k); owenMeasure n]) atTop Z
+      (fun _ ↦ owenMeasure n) P' := by
+  have hcp := rowCut_nonneg hP i
+  have hγ : ∀ i' j', Function.Injective (owenLayoutOf (rowCut P i) i' j') := fun i' j' d d' h ↦
+    congrArg (fun q : Fin n × ℕ × ℕ ↦ q.2.1) h
+  have hMP := measurePreserving_owenRelabel (n := n)
+  set G : ℕ → (Fin n × ℕ × ℕ → Bool) → ℝ := fun k ω' ↦ owenTransMain P pi i j (T k) ω' with hG
+  have hGm : ∀ k, Measurable (G k) := fun k ↦
+    measurable_levelSumN_coins (w := cutWeight (indicatorFn j)) hcp _ _ _
+  have hvarG : ∀ k, Var[fun ω ↦ G k (owenRelabel ω); owenMeasure n] =
+      Var[G k; owenMeasure n] := fun k ↦ hMP.variance_fun_comp (hGm k).aemeasurable
+  have hE : ∀ k, MemLp (fun ω ↦ transErrN P x₀ (owenTable ω) i j (T k)) 2 (owenMeasure n) := by
+    intro k
+    have hm : Measurable fun ω : Fin n × ℕ × ℕ → Bool ↦ transErrN P x₀ (owenTable ω) i j (T k) :=
+      ((measurable_of_countable (Nat.cast : ℕ → ℝ)).comp (measurable_transCount_of
+        (fun i k ↦ measurable_scrambledStack_owen i k) P x₀ i j (T k))).sub
+        (((measurable_of_countable (Nat.cast : ℕ → ℝ)).comp (measurable_occCount_of
+        (fun i k ↦ measurable_scrambledStack_owen i k) P x₀ i (T k))).const_mul _)
+    exact MemLp.of_bound hm.aestronglyMeasurable _ (Eventually.of_forall fun ω ↦ by
+      rw [Real.norm_eq_abs]; exact abs_transErrN_le P x₀ _ i j (T k))
+  have hclose : ∀ k ω, |transErrN P x₀ (owenTable ω) i j (T k) - G k (owenRelabel ω)| ≤
+      transBound H j (T k) := by
+    intro k ω
+    have e : G k (owenRelabel ω) = transMainN P pi (owenTable ω) i j (T k) := by
+      rw [transMainN_eq_levelSumN hP pi (owenTable ω) i j (T k)
+        (chainIdxN_lt_two_pow hP hH (T k))]
+      refine levelSumN_congr _ _ fun i' j' hc ↦ ?_
+      exact (funext fun d ↦ pathCoin_owenTable_eq_relabel ω i' hc d).symm
+    rw [e]
+    exact abs_transErrN_sub_transMainN_le hP hH x₀ (owenTable ω) i j (T k)
+  have hM0 : ∀ k, ∫ ω, G k (owenRelabel ω) ∂(owenMeasure n) = 0 := by
+    intro k
+    rw [← integral_map measurable_owenRelabel.aemeasurable (hGm k).aestronglyMeasurable,
+      hMP.map_eq]
+    exact integral_levelSumN_coins hcp _ _ hγ
+  refine tendstoInDistribution_of_close_main
+    (E := fun k ω ↦ transErrN P x₀ (owenTable ω) i j (T k))
+    (M := fun k ω ↦ G k (owenRelabel ω)) hT (b := fun k ↦ transBound H j (T k))
+    (tendsto_sq_div_natLog_of_le hT (fun k ↦ transBound_nonneg H j (T k))
+      (fun k ↦ transBound_le_log H j (T k))) hE
+    (fun k ↦ (memLp_levelSumN_coins hcp _ _ _).comp_measurePreserving hMP) hM0 hclose hκ hvar ?_
+  intro κ' hκ' hv
+  have hv' : ∀ᶠ k in atTop, κ' * ((Nat.log 2 (T k) + 1 : ℕ) : ℝ) ≤ Var[G k; owenMeasure n] := by
+    filter_upwards [hv] with k hk
+    rwa [← hvarG k]
+  have hclt := tendstoInDistribution_levelSumN (fun q : Fin n × ℕ × ℕ ↦ q.2.1)
+    (γ := owenLayoutOf (rowCut P i)) (fun i j d ↦ rfl) hcp (w := cutWeight (indicatorFn j))
+    (N := fun k ↦ chainIdxN pi (T k)) (K := fun k ↦ Nat.log 2 (T k) + 1)
+    (tendsto_natLog_add_one hT) hκ' hv' hZ
+  have htr := TendstoInDistribution.comp_measurePreserving hMP hclt
+  have e : (fun k ω ↦ G k (owenRelabel ω) / √Var[fun ω ↦ G k (owenRelabel ω); owenMeasure n]) =
+      fun k ω ↦ G k (owenRelabel ω) / √Var[G k; owenMeasure n] := by
+    funext k ω
+    rw [hvarG k]
+  rw [e]
+  exact htr
+
+end RQMCMarkov.ScrambledStacks
+
 set_option linter.style.longLine false
 #print axioms RQMCMarkov.ScrambledStacks.uniformIco
 #print axioms RQMCMarkov.ScrambledStacks.isProbabilityMeasure_uniformIco
@@ -11850,3 +15505,213 @@ set_option linter.style.longLine false
 #print axioms RQMCMarkov.ScrambledStacks.runLength_zero_stackPath_iff
 #print axioms RQMCMarkov.ScrambledStacks.owen_runLength_first78
 #print axioms RQMCMarkov.ScrambledStacks.shift_runLength_first78
+#print axioms RQMCMarkov.ScrambledStacks.cutWeight
+#print axioms RQMCMarkov.ScrambledStacks.cutPoint
+#print axioms RQMCMarkov.ScrambledStacks.cutPoint_mem_Icc
+#print axioms RQMCMarkov.ScrambledStacks.extendNat_fin
+#print axioms RQMCMarkov.ScrambledStacks.sum_extendNat_mul_sub_eq
+#print axioms RQMCMarkov.ScrambledStacks.step_sub_mulVec_eq_sum_cut
+#print axioms RQMCMarkov.ScrambledStacks.sum_step_sub_eq_sum_segErr
+#print axioms RQMCMarkov.ScrambledStacks.occCount_sub_eq_boundary_add_cuts
+#print axioms RQMCMarkov.ScrambledStacks.IsPoissonFamily
+#print axioms RQMCMarkov.ScrambledStacks.mulVec_le_of_le
+#print axioms RQMCMarkov.ScrambledStacks.le_mulVec_of_le
+#print axioms RQMCMarkov.ScrambledStacks.IsPoissonFamily.mem_Icc
+#print axioms RQMCMarkov.ScrambledStacks.poissonSup
+#print axioms RQMCMarkov.ScrambledStacks.abs_le_poissonSup
+#print axioms RQMCMarkov.ScrambledStacks.poissonSup_nonneg
+#print axioms RQMCMarkov.ScrambledStacks.anscConstN
+#print axioms RQMCMarkov.ScrambledStacks.abs_occCount_sub_pi_le
+#print axioms RQMCMarkov.ScrambledStacks.occErrN
+#print axioms RQMCMarkov.ScrambledStacks.chainIdxN
+#print axioms RQMCMarkov.ScrambledStacks.mainTermN
+#print axioms RQMCMarkov.ScrambledStacks.cutWeightSum
+#print axioms RQMCMarkov.ScrambledStacks.cutWeightSum_nonneg
+#print axioms RQMCMarkov.ScrambledStacks.ansBoundN
+#print axioms RQMCMarkov.ScrambledStacks.chainIdxN_le
+#print axioms RQMCMarkov.ScrambledStacks.chainIdxN_lt_two_pow
+#print axioms RQMCMarkov.ScrambledStacks.abs_occErrN_sub_mainTermN_le
+#print axioms RQMCMarkov.ScrambledStacks.natLog_mul_le
+#print axioms RQMCMarkov.ScrambledStacks.ansConstN
+#print axioms RQMCMarkov.ScrambledStacks.ansBoundN_nonneg
+#print axioms RQMCMarkov.ScrambledStacks.ansConstN_nonneg
+#print axioms RQMCMarkov.ScrambledStacks.ansBoundN_le_log
+#print axioms RQMCMarkov.ScrambledStacks.tendsto_sq_div_natLog_of_le
+#print axioms RQMCMarkov.ScrambledStacks.cutTerm
+#print axioms RQMCMarkov.ScrambledStacks.cutTermTrunc
+#print axioms RQMCMarkov.ScrambledStacks.segErr_scrambledVdc_one
+#print axioms RQMCMarkov.ScrambledStacks.segErr_scrambledVdc_eq_sum_cutTerm
+#print axioms RQMCMarkov.ScrambledStacks.rowTerm
+#print axioms RQMCMarkov.ScrambledStacks.rowTermTrunc
+#print axioms RQMCMarkov.ScrambledStacks.levelSumN
+#print axioms RQMCMarkov.ScrambledStacks.mainTermN_eq_levelSumN
+#print axioms RQMCMarkov.ScrambledStacks.coinMeasure
+#print axioms RQMCMarkov.ScrambledStacks.coinsOf
+#print axioms RQMCMarkov.ScrambledStacks.absWeightSum
+#print axioms RQMCMarkov.ScrambledStacks.absWeightSum_nonneg
+#print axioms RQMCMarkov.ScrambledStacks.measurableSet_levelInd_coins
+#print axioms RQMCMarkov.ScrambledStacks.measureReal_levelInd_coins
+#print axioms RQMCMarkov.ScrambledStacks.measurable_levelVal_coins
+#print axioms RQMCMarkov.ScrambledStacks.integral_levelVal_coins
+#print axioms RQMCMarkov.ScrambledStacks.measurable_cutTerm_coins
+#print axioms RQMCMarkov.ScrambledStacks.abs_cutTerm_le
+#print axioms RQMCMarkov.ScrambledStacks.abs_cutTermTrunc_le
+#print axioms RQMCMarkov.ScrambledStacks.abs_cutTerm_sub_trunc_le
+#print axioms RQMCMarkov.ScrambledStacks.setOf_levelTie_coins_eq
+#print axioms RQMCMarkov.ScrambledStacks.measurableSet_levelTie_coins
+#print axioms RQMCMarkov.ScrambledStacks.measureReal_levelTie_coins
+#print axioms RQMCMarkov.ScrambledStacks.isLocal_cutTermTrunc_coins
+#print axioms RQMCMarkov.ScrambledStacks.measurable_cutTermTrunc_coins
+#print axioms RQMCMarkov.ScrambledStacks.integral_abs_cutTerm_sub_trunc_le
+#print axioms RQMCMarkov.ScrambledStacks.integral_cutTerm_coins
+#print axioms RQMCMarkov.ScrambledStacks.abs_rowTerm_le
+#print axioms RQMCMarkov.ScrambledStacks.abs_rowTermTrunc_le
+#print axioms RQMCMarkov.ScrambledStacks.abs_rowTerm_sub_trunc_le
+#print axioms RQMCMarkov.ScrambledStacks.measurable_rowTerm_coins
+#print axioms RQMCMarkov.ScrambledStacks.isLocal_rowTermTrunc_coins
+#print axioms RQMCMarkov.ScrambledStacks.measurable_rowTermTrunc_coins
+#print axioms RQMCMarkov.ScrambledStacks.integral_abs_rowTerm_sub_trunc_le
+#print axioms RQMCMarkov.ScrambledStacks.integral_rowTerm_coins
+#print axioms RQMCMarkov.ScrambledStacks.levelYN
+#print axioms RQMCMarkov.ScrambledStacks.levelYNTrunc
+#print axioms RQMCMarkov.ScrambledStacks.levelSumN_eq_sum_levelYN
+#print axioms RQMCMarkov.ScrambledStacks.abs_levelYN_le
+#print axioms RQMCMarkov.ScrambledStacks.abs_levelYNTrunc_le
+#print axioms RQMCMarkov.ScrambledStacks.abs_levelYN_sub_trunc_le
+#print axioms RQMCMarkov.ScrambledStacks.measurable_levelYN_coins
+#print axioms RQMCMarkov.ScrambledStacks.levelCoords
+#print axioms RQMCMarkov.ScrambledStacks.lev_mem_of_mem_levelCoords
+#print axioms RQMCMarkov.ScrambledStacks.isLocal_levelYNTrunc_coins
+#print axioms RQMCMarkov.ScrambledStacks.integral_abs_levelYN_sub_trunc_le
+#print axioms RQMCMarkov.ScrambledStacks.integral_levelSumN_coins
+#print axioms RQMCMarkov.ScrambledStacks.measurable_levelSumN_coins
+#print axioms RQMCMarkov.ScrambledStacks.abs_levelSumN_le
+#print axioms RQMCMarkov.ScrambledStacks.memLp_levelSumN_coins
+#print axioms RQMCMarkov.ScrambledStacks.tendstoInDistribution_levelSumN
+#print axioms RQMCMarkov.ScrambledStacks.tendstoInDistribution_of_close_main
+#print axioms RQMCMarkov.ScrambledStacks.abs_covariance_le_of_bound
+#print axioms RQMCMarkov.ScrambledStacks.abs_covariance_le_of_local
+#print axioms RQMCMarkov.ScrambledStacks.disjoint_levelCoords
+#print axioms RQMCMarkov.ScrambledStacks.abs_covariance_levelYN_le
+#print axioms RQMCMarkov.ScrambledStacks.variance_levelSumN_le
+#print axioms RQMCMarkov.ScrambledStacks.variance_ge_of_int
+#print axioms RQMCMarkov.ScrambledStacks.rowFrac
+#print axioms RQMCMarkov.ScrambledStacks.variance_rowTerm_ge_of_int
+#print axioms RQMCMarkov.ScrambledStacks.patternR
+#print axioms RQMCMarkov.ScrambledStacks.patternR_lt
+#print axioms RQMCMarkov.ScrambledStacks.testBit_patternR
+#print axioms RQMCMarkov.ScrambledStacks.rowCoords
+#print axioms RQMCMarkov.ScrambledStacks.mem_rowCoords
+#print axioms RQMCMarkov.ScrambledStacks.tendsto_variance_rowTerm_sub_trunc
+#print axioms RQMCMarkov.ScrambledStacks.covariance_rowTerm_eq_zero
+#print axioms RQMCMarkov.ScrambledStacks.abs_covariance_rowTerm_le
+#print axioms RQMCMarkov.ScrambledStacks.rowTerm_eq_zero_of_testBit
+#print axioms RQMCMarkov.ScrambledStacks.levelSumN_pattern_eq
+#print axioms RQMCMarkov.ScrambledStacks.variance_levelSumN_pattern_ge
+#print axioms RQMCMarkov.ScrambledStacks.natLog_add_one_sq_le
+#print axioms RQMCMarkov.ScrambledStacks.integral_sq_le_of_close
+#print axioms RQMCMarkov.ScrambledStacks.integral_sq_levelSumN_le
+#print axioms RQMCMarkov.ScrambledStacks.isBigO_meanSq_div_of_le
+#print axioms RQMCMarkov.ScrambledStacks.shiftLayout
+#print axioms RQMCMarkov.ScrambledStacks.shiftLayout_lev
+#print axioms RQMCMarkov.ScrambledStacks.shiftLayout_rows
+#print axioms RQMCMarkov.ScrambledStacks.pathCoins_shiftFlips_eq
+#print axioms RQMCMarkov.ScrambledStacks.shiftMainTerm
+#print axioms RQMCMarkov.ScrambledStacks.mainTermN_shiftFlips_eq
+#print axioms RQMCMarkov.ScrambledStacks.abs_occErrN_shift_sub_le
+#print axioms RQMCMarkov.ScrambledStacks.abs_occErrN_le
+#print axioms RQMCMarkov.ScrambledStacks.memLp_occErrN_shift
+#print axioms RQMCMarkov.ScrambledStacks.tendsto_natLog_add_one
+#print axioms RQMCMarkov.ScrambledStacks.tendstoInDistribution_occErrN_shift
+#print axioms RQMCMarkov.ScrambledStacks.varConstN
+#print axioms RQMCMarkov.ScrambledStacks.two_mul_ansBoundN_sq_le
+#print axioms RQMCMarkov.ScrambledStacks.integral_sq_occErrN_shift_le
+#print axioms RQMCMarkov.ScrambledStacks.variance_occErrN_shift_le
+#print axioms RQMCMarkov.ScrambledStacks.isBigO_meanSq_occFreqN_shift
+#print axioms RQMCMarkov.ScrambledStacks.prefixDigits
+#print axioms RQMCMarkov.ScrambledStacks.owenNode
+#print axioms RQMCMarkov.ScrambledStacks.owenRelabel
+#print axioms RQMCMarkov.ScrambledStacks.owenRect
+#print axioms RQMCMarkov.ScrambledStacks.mem_owenRect
+#print axioms RQMCMarkov.ScrambledStacks.owenBox_eq_owenRect
+#print axioms RQMCMarkov.ScrambledStacks.pathPrefix_congr_digits
+#print axioms RQMCMarkov.ScrambledStacks.pathPrefix_threshDigit_eq
+#print axioms RQMCMarkov.ScrambledStacks.floor_two_pow_mul_lt
+#print axioms RQMCMarkov.ScrambledStacks.pathCoin_owenTable_eq_relabel
+#print axioms RQMCMarkov.ScrambledStacks.owenNode_lt
+#print axioms RQMCMarkov.ScrambledStacks.owenNode_inj
+#print axioms RQMCMarkov.ScrambledStacks.owenNode_congr
+#print axioms RQMCMarkov.ScrambledStacks.owenRelabel_congr
+#print axioms RQMCMarkov.ScrambledStacks.measurable_owenRelabel
+#print axioms RQMCMarkov.ScrambledStacks.measure_eq_sum_restrict_preimage
+#print axioms RQMCMarkov.ScrambledStacks.coinMeasure_setOf_comp_eq
+#print axioms RQMCMarkov.ScrambledStacks.owenMeasure_relabel_rect
+#print axioms RQMCMarkov.ScrambledStacks.eq_owenMeasure_of_box
+#print axioms RQMCMarkov.ScrambledStacks.measurePreserving_owenRelabel
+#print axioms RQMCMarkov.ScrambledStacks.owenLayout
+#print axioms RQMCMarkov.ScrambledStacks.owenLayout_lev
+#print axioms RQMCMarkov.ScrambledStacks.owenLayout_rows
+#print axioms RQMCMarkov.ScrambledStacks.pathCoins_owenTable_eq
+#print axioms RQMCMarkov.ScrambledStacks.levelSumN_congr
+#print axioms RQMCMarkov.ScrambledStacks.owenMainTerm
+#print axioms RQMCMarkov.ScrambledStacks.mainTermN_owenTable_eq
+#print axioms RQMCMarkov.ScrambledStacks.abs_occErrN_owen_sub_le
+#print axioms RQMCMarkov.ScrambledStacks.memLp_occErrN_owen
+#print axioms RQMCMarkov.ScrambledStacks.integral_owenMainTerm_relabel
+#print axioms RQMCMarkov.ScrambledStacks.tendstoInDistribution_occErrN_owen
+#print axioms RQMCMarkov.ScrambledStacks.integral_sq_occErrN_owen_le
+#print axioms RQMCMarkov.ScrambledStacks.variance_occErrN_owen_le
+#print axioms RQMCMarkov.ScrambledStacks.isBigO_meanSq_occFreqN_owen
+#print axioms RQMCMarkov.ScrambledStacks.uniformChain
+#print axioms RQMCMarkov.ScrambledStacks.uniformPoisson
+#print axioms RQMCMarkov.ScrambledStacks.uniformPi
+#print axioms RQMCMarkov.ScrambledStacks.uniformSpacing
+#print axioms RQMCMarkov.ScrambledStacks.uniformTime
+#print axioms RQMCMarkov.ScrambledStacks.isStochastic_uniformChain
+#print axioms RQMCMarkov.ScrambledStacks.mulVec_uniformPoisson
+#print axioms RQMCMarkov.ScrambledStacks.isPoissonFamily_uniform
+#print axioms RQMCMarkov.ScrambledStacks.chainIdxN_uniformTime
+#print axioms RQMCMarkov.ScrambledStacks.cutWeight_uniform
+#print axioms RQMCMarkov.ScrambledStacks.cutWeight_uniform_int
+#print axioms RQMCMarkov.ScrambledStacks.absWeightSum_uniform_le
+#print axioms RQMCMarkov.ScrambledStacks.fracPow_one
+#print axioms RQMCMarkov.ScrambledStacks.ite_fracPow_eq
+#print axioms RQMCMarkov.ScrambledStacks.sum_cutWeight_mul_cutPoint_uniform
+#print axioms RQMCMarkov.ScrambledStacks.rowFrac_uniform
+#print axioms RQMCMarkov.ScrambledStacks.fract_mul_one_sub_ge
+#print axioms RQMCMarkov.ScrambledStacks.variance_rowTerm_uniform_ge
+#print axioms RQMCMarkov.ScrambledStacks.uniformSpacing_bound
+#print axioms RQMCMarkov.ScrambledStacks.variance_levelSumN_uniform_ge
+#print axioms RQMCMarkov.ScrambledStacks.eventually_variance_ge_of_close
+#print axioms RQMCMarkov.ScrambledStacks.uniformSpacing_mul_lt
+#print axioms RQMCMarkov.ScrambledStacks.natLog_uniformTime_le
+#print axioms RQMCMarkov.ScrambledStacks.tendsto_uniformTime
+#print axioms RQMCMarkov.ScrambledStacks.tendsto_ansBoundN_uniform
+#print axioms RQMCMarkov.ScrambledStacks.eventually_variance_occErrN_uniform_shift_ge
+#print axioms RQMCMarkov.ScrambledStacks.eventually_variance_occErrN_uniform_owen_ge
+#print axioms RQMCMarkov.ScrambledStacks.occErrN_uniform_tendstoInDistribution_shift
+#print axioms RQMCMarkov.ScrambledStacks.occErrN_uniform_tendstoInDistribution_owen
+#print axioms RQMCMarkov.ScrambledStacks.not_five_dvd_two_pow
+#print axioms RQMCMarkov.ScrambledStacks.eventually_variance_occErrN_example_shift_ge
+#print axioms RQMCMarkov.ScrambledStacks.eventually_variance_occErrN_example_owen_ge
+#print axioms RQMCMarkov.ScrambledStacks.occErrN_example_tendstoInDistribution_shift
+#print axioms RQMCMarkov.ScrambledStacks.occErrN_example_tendstoInDistribution_owen
+#print axioms RQMCMarkov.ScrambledStacks.occErrN_five_tendstoInDistribution_shift
+#print axioms RQMCMarkov.ScrambledStacks.occErrN_five_tendstoInDistribution_owen
+#print axioms RQMCMarkov.ScrambledStacks.transErrN
+#print axioms RQMCMarkov.ScrambledStacks.indicatorFn
+#print axioms RQMCMarkov.ScrambledStacks.transErrN_eq
+#print axioms RQMCMarkov.ScrambledStacks.transMainN
+#print axioms RQMCMarkov.ScrambledStacks.transBound
+#print axioms RQMCMarkov.ScrambledStacks.abs_transErrN_sub_transMainN_le
+#print axioms RQMCMarkov.ScrambledStacks.transBound_nonneg
+#print axioms RQMCMarkov.ScrambledStacks.transBound_le_log
+#print axioms RQMCMarkov.ScrambledStacks.rowCut
+#print axioms RQMCMarkov.ScrambledStacks.rowCut_nonneg
+#print axioms RQMCMarkov.ScrambledStacks.transMainN_eq_levelSumN
+#print axioms RQMCMarkov.ScrambledStacks.shiftTransMain
+#print axioms RQMCMarkov.ScrambledStacks.abs_transErrN_le
+#print axioms RQMCMarkov.ScrambledStacks.tendstoInDistribution_transErrN_shift
+#print axioms RQMCMarkov.ScrambledStacks.owenLayoutOf
+#print axioms RQMCMarkov.ScrambledStacks.owenTransMain
+#print axioms RQMCMarkov.ScrambledStacks.tendstoInDistribution_transErrN_owen

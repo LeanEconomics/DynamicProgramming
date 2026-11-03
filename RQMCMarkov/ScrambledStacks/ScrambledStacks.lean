@@ -1,7 +1,16 @@
 import ScrambledStacks.CltAnscombe
 import ScrambledStacks.CltBlocks
 import ScrambledStacks.CltMDependent
+import ScrambledStacks.CltNCoins
+import ScrambledStacks.CltNDecomp
+import ScrambledStacks.CltNExample
+import ScrambledStacks.CltNOwen
+import ScrambledStacks.CltNOwenTree
+import ScrambledStacks.CltNShift
+import ScrambledStacks.CltNTrans
+import ScrambledStacks.CltNVariance
 import ScrambledStacks.CltPathBits
+import ScrambledStacks.CltPathLaw
 import ScrambledStacks.CltStacks
 import ScrambledStacks.CltThreeState
 import ScrambledStacks.CltVariance
@@ -19,4 +28,3 @@ import ScrambledStacks.StackPowerOfTwo
 import ScrambledStacks.StackSpells
 import ScrambledStacks.Unbiased
 import ScrambledStacks.VanDerCorput
-import ScrambledStacks.CltPathLaw
