@@ -24,8 +24,8 @@ the net is `{k/bᵐ : k < bᵐ}`, with one point in each cell `[k/bᵐ, (k+1)/b�
 post's Sobol case. In `s` dimensions the scramble acts on `D` digits and the points are completed
 by independent uniform remainders.
 
-The library contains **424 theorems** (516 audited declarations) in 19 modules. Fourteen modules
-(326 theorems) are new. Five are carried from [RQMCMarkov/PointSets](../PointSets/README.md), with
+The library contains **537 theorems** (647 audited declarations) in 23 modules. Eighteen modules
+(439 theorems) are new. Five are carried from [RQMCMarkov/PointSets](../PointSets/README.md), with
 the namespace and imports renamed and otherwise unchanged: `MonteCarlo`, `Unbiased`,
 `Stratified`, `ShiftLimit` and `Discrepancy` (98 theorems).
 
@@ -143,7 +143,23 @@ reduces to independent stratified sampling, and the post's randomizations have t
   (`variance_scrambledLaw_two_asymp_of_deriv`). For `f = x₀ x₁` the bounds are explicit for every
   `m` (`variance_scrambledLaw_prodFn`). Additive integrands have order `n⁻³` instead: the `log n`
   comes from the interaction. For these smooth non-additive `f`, the remainders carry a vanishing
-  share of the variance (`tendsto_avg_variance_given_scramble_div`; see below).
+  share of the variance (`tendsto_avg_variance_given_scramble_div`).
+* **Loh's CLT for a non-additive integrand** (`LohGeneralCLT`). For
+  `f(x) = a x₀ x₁ + g₀(x₀) + g₁(x₁)` with `a ≠ 0` and each `g_j` measurable and `C¹` on `[0,1]`,
+  and any sequence of `(0,m,2)`-nets in base `b ≥ 2`, `(μ̂ − μ)/√Var(μ̂) ⇒ N(0,1)`
+  (`tendstoInDistribution_scrambledLaw_bilinAdd`). These are the smooth `f` whose mixed
+  derivative `∂²f/∂x₀∂x₁` is a non-zero constant. It covers `x₀ x₁` on every such net
+  (`tendstoInDistribution_scrambledLaw_prodFn`) and on the Hammersley nets
+  (`tendstoInDistribution_scrambledLaw_prodFn_hammersley`). The proof is not Loh's Stein
+  method. It conditions on the scramble `ρ₀` of coordinate `0` only. Given `ρ₀`, the error of
+  `x₀ x₁` averaged over the remainders is a sum of independent centred terms, one per node of the
+  tree of coordinate `1` (`prodS_eq_sum_nodeTerm`), so a conditional Lyapunov CLT applies
+  (`tendsto_unifAvg_cexp_nodeSum`). Its random conditional variance concentrates around its
+  mean, because it is spread over the `m` levels of that tree, and levels far apart use
+  independent windows of `ρ₀` (`unifAvg_abs_condVar_sub_le`, `unifAvg_levelVar_mul`). The
+  normal limit is built from the `m ≍ log n` levels, as in Loh. A general form
+  (`tendstoInDistribution_scrambledLaw_of_condMean`) covers every Lipschitz `f` whose
+  remainder-averaged error is `a S/n`.
 * **The digital shift as a degenerate scramble** (`LohCLT`). The random digital shift is the
   nested scramble with the same translation at every node of a level (`digitShiftScramble`,
   `scramble_digitShiftScramble`). It does not have Owen's pair law: in base `2` with two digits,
@@ -178,13 +194,16 @@ gives the marginal uniformity of each point, except for the deep scramble, which
 
 ## What is not formalised
 
-* **Loh's CLT for non-additive integrands in `s ≥ 2` dimensions.** For smooth non-additive `f`
-  in two dimensions, almost all of `Var(μ̂)` comes from the scramble itself, not from the
-  remainders (`tendsto_avg_variance_given_scramble_div`). Under the scramble the points are
-  dependent, so a Lindeberg argument conditional on the scramble, which proves the additive case,
-  cannot give the general CLT. Conditioning on the top levels of the trees does not split the
-  points into independent blocks once `s ≥ 2`. The general case needs Loh's Stein-method argument
-  for dependent sums.
+* **Loh's CLT for general smooth non-additive integrands.** In two dimensions it is proved when
+  the mixed derivative is a non-zero constant (`LohGeneralCLT`), not for a general smooth `f`,
+  such as `g(x₀) h(x₁)` with `g` or `h` not affine. The conditioning argument needs `f` affine in
+  `x₁`, so that the node terms of the tree of coordinate `1` are independent given `ρ₀`. A
+  non-affine `h` makes them only martingale differences, and a non-affine `g` makes the node
+  weights depend on the ancestors in the tree of `ρ₀`. The general case needs a martingale CLT
+  over both trees, or Loh's Stein method. Conditioning on the whole scramble cannot work: almost
+  all of `Var(μ̂)` comes from the scramble itself (`tendsto_avg_variance_given_scramble_div`).
+  Non-additive `f` in `s ≥ 3` dimensions is not formalised either; even `x₀ x₁ x₂` would need a
+  two-parameter version of the concentration argument.
 * **The variance order for general `s`.** Owen's (1997b) `Var = O(n⁻³ (log n)^{s−1})` for smooth
   `f` is proved for `s = 2` only, in both directions; general `s` needs `s`-fold mixed
   differences.
@@ -223,6 +242,10 @@ All names are in the namespace `RQMCMarkov.OwenScrambling`. See the
 | [ScrambleHammersley](OwenScrambling/ScrambleHammersley.lean) | 2 | Reversed digits, the Hammersley point set as a `(0,m,2)`-net in every base |
 | [LohCLT](OwenScrambling/LohCLT.lean) | 33 | No CLT at the scale `√n`, `(0,m,s)`-nets have distinct coordinate cells, Loh's CLT for additive integrands in every dimension (for every fixed sequence of scrambles and for the mixture), the additive variance and rate, no CLT for step functions, Hammersley instances, the digital shift without Owen's pair law |
 | [LohVariance](OwenScrambling/LohVariance.lean) | 39 | Haar projections as averages of mixed differences, upper and lower bounds on the Haar components, the gain of the critical components, `Var ≍ n⁻³ log n` for `s = 2`, also from a continuous mixed partial derivative, the product `x₀ x₁`, the share of the variance given the scramble |
+| [LohGeneralFinite](OwenScrambling/LohGeneralFinite.lean) | 30 | Uniform averages on finite product spaces, independence of disjoint coordinates, second and fourth moments of sums of centred terms, uniform permutations, a conditional Lyapunov CLT in characteristic functions |
+| [LohGeneralProd](OwenScrambling/LohGeneralProd.lean) | 30 | Centred digits and scrambled-cell midpoints, `E[μ̂ \| ρ] = 1/4 + S/n` for `x₀ x₁`, the node decomposition of `S` over the tree of coordinate `1`, net combinatorics, node weights as sums of independent deep-level terms and their moments |
+| [LohGeneralConc](OwenScrambling/LohGeneralConc.lean) | 30 | The conditional variance given `ρ₀` and its windowed version, the truncation error, independence of distant windows, concentration of the conditional variance, moments of the node bounds |
+| [LohGeneralCLT](OwenScrambling/LohGeneralCLT.lean) | 23 | The law of total variance for the scrambled estimator, the remainder share, the lower bound on `E V`, the CLT for `S`, Loh's CLT for `a x₀ x₁ + g₀(x₀) + g₁(x₁)` on `(0,m,2)`-nets and for `x₀ x₁` on Hammersley nets |
 
 ## Build and verify
 
@@ -232,5 +255,5 @@ python scripts/verify.py
 ```
 
 The verifier builds the library and freshly recompiles every contributed proof. It also audits each
-named declaration's axioms (516 declarations): only `propext`, `Classical.choice` and `Quot.sound`
+named declaration's axioms (647 declarations): only `propext`, `Classical.choice` and `Quot.sound`
 are allowed. Warnings fail the check.

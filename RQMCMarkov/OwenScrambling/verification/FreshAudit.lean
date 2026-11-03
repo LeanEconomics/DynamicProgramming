@@ -17,6 +17,8 @@ import Mathlib.MeasureTheory.Function.ConvergenceInDistribution
 import Mathlib.Analysis.LocallyConvex.AbsConvexOpen
 import Mathlib.MeasureTheory.Measure.Portmanteau
 import Mathlib.Analysis.Calculus.MeanValue
+import Mathlib.Algebra.Order.Chebyshev
+import Mathlib.Algebra.Order.Field.GeomSum
 set_option autoImplicit false
 
 /-
@@ -10025,6 +10027,2971 @@ theorem tendstoInDistribution_deepNet [NeZero b] (hb : 1 < b) (D : ℕ → ℕ)
 
 end RQMCMarkov.OwenScrambling
 
+/-
+Copyright (c) 2026 Robert Kirkby. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Robert Kirkby
+-/
+
+/-!
+# Finite product spaces: independence, moments, and a conditional Lindeberg bound
+
+Tools for Loh's (2003) CLT for non-additive integrands (post #2). A nested scramble is a
+function `ρ : Γ → P` from the nodes of a tree to the permutations of the digits, and the uniform
+scramble is the uniform law on these functions, under which the node permutations are
+independent. This module proves what that independence gives on a finite product space, with
+the uniform average `unifAvg` in place of the expectation.
+
+## Main results
+
+* `unifAvg_mul_of_disjoint`: functions of disjoint sets of coordinates are uncorrelated
+  (independent).
+* `unifAvg_eval`, `unifAvg_prod`: one coordinate is uniform; the average of a product of
+  functions of distinct coordinates is the product of the averages.
+* `unifAvg_sq_sum_eq`, `unifAvg_pow_four_sum_le`: for centred terms of distinct coordinates,
+  `E[(Σ X_j)²] = Σ E[X_j²]` and `E[(Σ X_j)⁴] ≤ 3 (Σ β_j²)²` when `|X_j| ≤ β_j`.
+* `sum_perm_apply`: under a uniform permutation every point has a uniform image.
+* `norm_unifAvg_cexp_sub_le`: the cubic bound for the characteristic function of a bounded
+  centred variable on a finite uniform space.
+* `sq_unifAvg_sum_mul_le`: Cauchy–Schwarz for averages of finite sums.
+* `tendsto_unifAvg_cexp_nodeSum` (**conditional Lindeberg CLT, Lyapunov form**): for each `m`
+  let `ξ m r γ π` be centred node terms, indexed by an outer variable `r` and the nodes `γ`, with
+  `|ξ m r γ π| ≤ M m r γ`, and let `T = Σ_γ ξ m r γ (ρ γ)` with `ρ` uniform. If the conditional
+  variances `V(r) = Σ_γ E_π ξ²` satisfy `E_r |V(r)/s² - 1| → 0`, `E_r Σ_γ (M/s)²` stays bounded
+  and `E_r Σ_γ (M/s)⁴ → 0`, then the characteristic function of `T / s` at `τ_m → t` tends to
+  `e^{-t²/2}`. This is the CLT for sums that are, conditionally on `r`, sums of independent
+  terms, with a random conditional variance that concentrates.
+-/
+
+namespace RQMCMarkov.OwenScrambling
+
+open Finset Filter Complex
+open scoped Topology
+
+/-- The uniform average `(#α)⁻¹ Σ_a F a` of a function on a finite type. -/
+noncomputable def unifAvg {α : Type*} [Fintype α] {𝕜 : Type*} [DivisionRing 𝕜] (F : α → 𝕜) :
+    𝕜 :=
+  (Fintype.card α : 𝕜)⁻¹ * ∑ a, F a
+
+/-- The average is additive. -/
+theorem unifAvg_add {α : Type*} [Fintype α] (F G : α → ℝ) :
+    unifAvg (fun a ↦ F a + G a) = unifAvg F + unifAvg G := by
+  unfold unifAvg
+  rw [Finset.sum_add_distrib, mul_add]
+
+/-- The average commutes with multiplication by a constant. -/
+theorem unifAvg_const_mul {α : Type*} [Fintype α] (c : ℝ) (F : α → ℝ) :
+    unifAvg (fun a ↦ c * F a) = c * unifAvg F := by
+  unfold unifAvg
+  rw [← Finset.mul_sum]
+  ring
+
+/-- The average commutes with multiplication by a constant on the right. -/
+theorem unifAvg_mul_const {α : Type*} [Fintype α] (F : α → ℝ) (c : ℝ) :
+    unifAvg (fun a ↦ F a * c) = unifAvg F * c := by
+  unfold unifAvg
+  rw [← Finset.sum_mul]
+  ring
+
+/-- The average of a constant. -/
+theorem unifAvg_const {α : Type*} [Fintype α] [Nonempty α] (c : ℝ) :
+    unifAvg (fun _ : α ↦ c) = c := by
+  unfold unifAvg
+  rw [Finset.sum_const, Finset.card_univ, nsmul_eq_mul]
+  have : (Fintype.card α : ℝ) ≠ 0 := Nat.cast_ne_zero.2 Fintype.card_ne_zero
+  field_simp
+
+/-- The average is monotone. -/
+theorem unifAvg_mono {α : Type*} [Fintype α] {F G : α → ℝ} (h : ∀ a, F a ≤ G a) :
+    unifAvg F ≤ unifAvg G := by
+  unfold unifAvg
+  exact mul_le_mul_of_nonneg_left (Finset.sum_le_sum fun a _ ↦ h a)
+    (inv_nonneg.2 (Nat.cast_nonneg _))
+
+/-- The average of a nonnegative function is nonnegative. -/
+theorem unifAvg_nonneg {α : Type*} [Fintype α] {F : α → ℝ} (h : ∀ a, 0 ≤ F a) :
+    0 ≤ unifAvg F := by
+  unfold unifAvg
+  exact mul_nonneg (inv_nonneg.2 (Nat.cast_nonneg _)) (Finset.sum_nonneg fun a _ ↦ h a)
+
+/-- The average of a finite sum of functions. -/
+theorem unifAvg_sum {α ι : Type*} [Fintype α] (s : Finset ι) (F : ι → α → ℝ) :
+    unifAvg (fun a ↦ ∑ i ∈ s, F i a) = ∑ i ∈ s, unifAvg (F i) := by
+  unfold unifAvg
+  rw [Finset.sum_comm, Finset.mul_sum]
+
+/-- `|E F| ≤ E |F|`. -/
+theorem abs_unifAvg_le {α : Type*} [Fintype α] (F : α → ℝ) :
+    |unifAvg F| ≤ unifAvg fun a ↦ |F a| := by
+  unfold unifAvg
+  rw [abs_mul, abs_of_nonneg (inv_nonneg.2 (Nat.cast_nonneg _))]
+  exact mul_le_mul_of_nonneg_left (Finset.abs_sum_le_sum_abs _ _)
+    (inv_nonneg.2 (Nat.cast_nonneg _))
+
+/-- **Cauchy–Schwarz** for averages: `(E[F G])² ≤ E[F²] E[G²]`. -/
+theorem sq_unifAvg_mul_le {α : Type*} [Fintype α] (F G : α → ℝ) :
+    (unifAvg fun a ↦ F a * G a) ^ 2 ≤ (unifAvg fun a ↦ F a ^ 2) * unifAvg fun a ↦ G a ^ 2 := by
+  unfold unifAvg
+  have h := Finset.sum_mul_sq_le_sq_mul_sq Finset.univ F G
+  have hc : (0 : ℝ) ≤ ((Fintype.card α : ℝ)⁻¹) ^ 2 := sq_nonneg _
+  calc ((Fintype.card α : ℝ)⁻¹ * ∑ a, F a * G a) ^ 2
+      = ((Fintype.card α : ℝ)⁻¹) ^ 2 * (∑ a, F a * G a) ^ 2 := by ring
+    _ ≤ ((Fintype.card α : ℝ)⁻¹) ^ 2 * ((∑ a, F a ^ 2) * ∑ a, G a ^ 2) :=
+        mul_le_mul_of_nonneg_left h hc
+    _ = _ := by ring
+
+/-- **Jensen** for averages: `(E F)² ≤ E[F²]`. -/
+theorem sq_unifAvg_le {α : Type*} [Fintype α] (F : α → ℝ) :
+    (unifAvg F) ^ 2 ≤ unifAvg fun a ↦ F a ^ 2 := by
+  rcases isEmpty_or_nonempty α with hα | hα
+  · unfold unifAvg
+    rw [Finset.univ_eq_empty, Finset.sum_empty, Finset.sum_empty]
+    simp
+  have h := sq_unifAvg_mul_le F (fun _ ↦ 1)
+  simp only [mul_one, one_pow] at h
+  rw [unifAvg_const] at h
+  linarith
+
+/-- **Functions of disjoint sets of coordinates are independent** under the uniform law on
+`Γ → P`: if `F` depends only on the coordinates in `p` and `G` only on those outside `p`, then
+`E[F G] = E[F] E[G]`. -/
+theorem unifAvg_mul_of_disjoint {Γ P : Type*} [Fintype Γ] [DecidableEq Γ] [Fintype P]
+    [Nonempty P]
+    (p : Γ → Prop) {F G : (Γ → P) → ℝ}
+    (hF : ∀ ρ ρ' : Γ → P, (∀ γ, p γ → ρ γ = ρ' γ) → F ρ = F ρ')
+    (hG : ∀ ρ ρ' : Γ → P, (∀ γ, ¬ p γ → ρ γ = ρ' γ) → G ρ = G ρ') :
+    unifAvg (fun ρ ↦ F ρ * G ρ) = unifAvg F * unifAvg G := by
+  classical
+  set e := Equiv.piEquivPiSubtypeProd p (fun _ : Γ ↦ P) with he
+  obtain ⟨pm₀⟩ := ‹Nonempty P›
+  set a₀ : ∀ _ : {x // p x}, P := fun _ ↦ pm₀
+  set c₀ : ∀ _ : {x // ¬ p x}, P := fun _ ↦ pm₀
+  have hFe : ∀ a c, F (e.symm (a, c)) = F (e.symm (a, c₀)) := fun a c ↦ hF _ _ fun γ hγ ↦ by
+    simp [he, Equiv.piEquivPiSubtypeProd_symm_apply, hγ]
+  have hGe : ∀ a c, G (e.symm (a, c)) = G (e.symm (a₀, c)) := fun a c ↦ hG _ _ fun γ hγ ↦ by
+    simp [he, Equiv.piEquivPiSubtypeProd_symm_apply, hγ]
+  have hsum : ∀ H : (Γ → P) → ℝ, ∑ ρ, H ρ = ∑ a, ∑ c, H (e.symm (a, c)) := fun H ↦ by
+    rw [← Fintype.sum_prod_type (f := fun q ↦ H (e.symm q))]
+    exact (Fintype.sum_equiv e.symm (fun q ↦ H (e.symm q)) H fun _ ↦ rfl).symm
+  have hcard : (Fintype.card (Γ → P) : ℝ) = (Fintype.card (∀ _ : {x // p x}, P) : ℝ) *
+      (Fintype.card (∀ _ : {x // ¬ p x}, P) : ℝ) := by
+    rw [Fintype.card_congr e, Fintype.card_prod, Nat.cast_mul]
+  set A := (Fintype.card (∀ _ : {x // p x}, P) : ℝ)
+  set C := (Fintype.card (∀ _ : {x // ¬ p x}, P) : ℝ)
+  have hA : A ≠ 0 := Nat.cast_ne_zero.2 Fintype.card_ne_zero
+  have hC : C ≠ 0 := Nat.cast_ne_zero.2 Fintype.card_ne_zero
+  have e1 : ∑ ρ, F ρ * G ρ = (∑ a, F (e.symm (a, c₀))) * ∑ c, G (e.symm (a₀, c)) := by
+    rw [hsum, Finset.sum_mul_sum]
+    exact Finset.sum_congr rfl fun a _ ↦ Finset.sum_congr rfl fun c _ ↦ by rw [hFe, hGe]
+  have e2 : ∑ ρ, F ρ = C * ∑ a, F (e.symm (a, c₀)) := by
+    rw [hsum, Finset.mul_sum]
+    refine Finset.sum_congr rfl fun a _ ↦ ?_
+    rw [Finset.sum_congr rfl fun c _ ↦ hFe a c, Finset.sum_const, Finset.card_univ,
+      nsmul_eq_mul]
+  have e3 : ∑ ρ, G ρ = A * ∑ c, G (e.symm (a₀, c)) := by
+    rw [hsum, Finset.sum_comm, Finset.mul_sum]
+    refine Finset.sum_congr rfl fun c _ ↦ ?_
+    rw [Finset.sum_congr rfl fun a _ ↦ hGe a c, Finset.sum_const, Finset.card_univ,
+      nsmul_eq_mul]
+  unfold unifAvg
+  rw [e1, e2, e3, hcard]
+  field_simp
+
+/-- **One coordinate of a uniform function is uniform**: `E[h(ρ γ)] = E_π[h π]`. -/
+theorem unifAvg_eval {Γ P : Type*} [Fintype Γ] [DecidableEq Γ] [Fintype P] (γ : Γ)
+    (h : P → ℝ) : unifAvg (fun ρ : Γ → P ↦ h (ρ γ)) = unifAvg h := by
+  set e := Equiv.funSplitAt γ P with he
+  have hs : ∑ ρ : Γ → P, h (ρ γ) = ∑ q : P × ({j // j ≠ γ} → P), h q.1 :=
+    Fintype.sum_equiv e _ _ fun ρ ↦ rfl
+  have hcard : (Fintype.card (Γ → P) : ℝ) =
+      (Fintype.card P : ℝ) * (Fintype.card ({j // j ≠ γ} → P) : ℝ) := by
+    rw [Fintype.card_congr e, Fintype.card_prod, Nat.cast_mul]
+  unfold unifAvg
+  rw [hs, Fintype.sum_prod_type, hcard]
+  simp only [Finset.sum_const, Finset.card_univ, nsmul_eq_mul]
+  rw [← Finset.mul_sum]
+  rcases isEmpty_or_nonempty ({j // j ≠ γ} → P) with hR | hR
+  · rcases isEmpty_or_nonempty P with hP | hP
+    · simp [Finset.univ_eq_empty]
+    · exact absurd hR (not_isEmpty_of_nonempty _)
+  · have : (Fintype.card ({j // j ≠ γ} → P) : ℝ) ≠ 0 := Nat.cast_ne_zero.2 Fintype.card_ne_zero
+    rw [mul_inv]
+    field_simp
+
+/-- **The average of a product of functions of distinct coordinates** is the product of their
+averages (complex-valued). -/
+theorem unifAvg_prod {Γ P : Type*} [Fintype Γ] [DecidableEq Γ] [Fintype P] (g : Γ → P → ℂ) :
+    unifAvg (fun ρ : Γ → P ↦ ∏ γ, g γ (ρ γ)) = ∏ γ, unifAvg (g γ) := by
+  unfold unifAvg
+  rw [Finset.prod_mul_distrib, ← Fintype.prod_sum, Finset.prod_const, Finset.card_univ,
+    Fintype.card_fun, Nat.cast_pow, inv_pow]
+
+/-- **One coordinate is independent of functions of the others**:
+`E[h(ρ γ) G(ρ)] = E_π[h π] E[G]` when `G` does not depend on coordinate `γ`. -/
+theorem unifAvg_mul_eval_of_forall_ne {Γ P : Type*} [Fintype Γ] [DecidableEq Γ] [Fintype P]
+    [Nonempty P] (γ : Γ) (h : P → ℝ) {G : (Γ → P) → ℝ}
+    (hG : ∀ ρ ρ' : Γ → P, (∀ γ', ¬ γ' = γ → ρ γ' = ρ' γ') → G ρ = G ρ') :
+    unifAvg (fun ρ ↦ h (ρ γ) * G ρ) = unifAvg h * unifAvg G := by
+  rw [unifAvg_mul_of_disjoint (fun γ' ↦ γ' = γ) (F := fun ρ ↦ h (ρ γ))
+    (fun ρ ρ' hρ ↦ by rw [hρ γ rfl]) hG, unifAvg_eval]
+
+/-- A sum of terms of coordinates other than `γ` does not depend on coordinate `γ`. -/
+theorem sum_eval_congr {Γ P ι : Type*} {J : Finset ι} {ν : ι → Γ} {γ : Γ}
+    (hJ : ∀ j ∈ J, ν j ≠ γ) (X : ι → P → ℝ) (ρ ρ' : Γ → P)
+    (h : ∀ γ', ¬ γ' = γ → ρ γ' = ρ' γ') :
+    ∑ j ∈ J, X j (ρ (ν j)) = ∑ j ∈ J, X j (ρ' (ν j)) :=
+  Finset.sum_congr rfl fun j hj ↦ by rw [h _ (hJ j hj)]
+
+/-- The average of a sum of coordinate terms is the sum of their averages. -/
+theorem unifAvg_sum_eval {Γ P ι : Type*} [Fintype Γ] [DecidableEq Γ] [Fintype P]
+    (J : Finset ι) (ν : ι → Γ) (X : ι → P → ℝ) :
+    unifAvg (fun ρ : Γ → P ↦ ∑ j ∈ J, X j (ρ (ν j))) = ∑ j ∈ J, unifAvg (X j) := by
+  rw [unifAvg_sum]
+  exact Finset.sum_congr rfl fun j _ ↦ unifAvg_eval (ν j) (X j)
+
+/-- Injectivity on `insert j₀ J` separates `ν j₀` from `ν '' J`. -/
+theorem ne_of_injOn_insert {Γ ι : Type*} [DecidableEq ι] {J : Finset ι} {j₀ : ι} {ν : ι → Γ}
+    (hν : Set.InjOn ν ↑(insert j₀ J)) (hj₀ : j₀ ∉ J) : ∀ j ∈ J, ν j ≠ ν j₀ := by
+  intro j hj heq
+  have := hν (Finset.mem_coe.2 (Finset.mem_insert_of_mem hj))
+    (Finset.mem_coe.2 (Finset.mem_insert_self j₀ J)) heq
+  rw [this] at hj
+  exact hj₀ hj
+
+/-- Injectivity on `insert j₀ J` gives injectivity on `J`. -/
+theorem injOn_of_insert {Γ ι : Type*} [DecidableEq ι] {J : Finset ι} {j₀ : ι} {ν : ι → Γ}
+    (hν : Set.InjOn ν ↑(insert j₀ J)) : Set.InjOn ν ↑J :=
+  hν.mono fun _ hj ↦ Finset.mem_coe.2 (Finset.mem_insert_of_mem (Finset.mem_coe.1 hj))
+
+/-- **Second moment of a sum of centred terms of distinct coordinates**:
+`E[(Σ_{j ∈ J} X_j(ρ(ν j)))²] = Σ_{j ∈ J} E_π[X_j²]` when `ν` is injective on `J`. -/
+theorem unifAvg_sq_sum_eq {Γ P ι : Type*} [Fintype Γ] [DecidableEq Γ] [Fintype P] [Nonempty P]
+    {J : Finset ι} {ν : ι → Γ} (hν : Set.InjOn ν ↑J) {X : ι → P → ℝ}
+    (h0 : ∀ j ∈ J, unifAvg (X j) = 0) :
+    unifAvg (fun ρ : Γ → P ↦ (∑ j ∈ J, X j (ρ (ν j))) ^ 2) =
+      ∑ j ∈ J, unifAvg (fun pm ↦ X j pm ^ 2) := by
+  classical
+  induction J using Finset.induction_on with
+  | empty =>
+      simp only [Finset.sum_empty]
+      rw [show (fun _ : Γ → P ↦ (0 : ℝ) ^ 2) = fun _ ↦ 0 from funext fun _ ↦ by ring,
+        unifAvg_const]
+  | insert j₀ J hj₀ ih =>
+      have hne := ne_of_injOn_insert hν hj₀
+      have hS0 : ∀ j ∈ J, unifAvg (X j) = 0 := fun j hj ↦ h0 j (Finset.mem_insert_of_mem hj)
+      have hX0 := h0 j₀ (Finset.mem_insert_self j₀ J)
+      rw [Finset.sum_insert hj₀]
+      simp only [Finset.sum_insert hj₀]
+      have e : (fun ρ : Γ → P ↦ (X j₀ (ρ (ν j₀)) + ∑ j ∈ J, X j (ρ (ν j))) ^ 2) =
+          fun ρ ↦ (X j₀ (ρ (ν j₀)) ^ 2 + 2 * (X j₀ (ρ (ν j₀)) * ∑ j ∈ J, X j (ρ (ν j)))) +
+            (∑ j ∈ J, X j (ρ (ν j))) ^ 2 := funext fun ρ ↦ by ring
+      rw [e, unifAvg_add, unifAvg_add, unifAvg_const_mul,
+        unifAvg_mul_eval_of_forall_ne (ν j₀) (X j₀) (sum_eval_congr hne X), hX0, zero_mul,
+        mul_zero, add_zero, ih (injOn_of_insert hν) hS0,
+        unifAvg_eval (ν j₀) (fun pm ↦ X j₀ pm ^ 2)]
+
+/-- **Fourth moment of a sum of centred bounded terms of distinct coordinates**:
+`E[(Σ_{j ∈ J} X_j(ρ(ν j)))⁴] ≤ 3 (Σ_{j ∈ J} β_j²)²` when `|X_j| ≤ β_j` and `ν` is injective
+on `J`. -/
+theorem unifAvg_pow_four_sum_le {Γ P ι : Type*} [Fintype Γ] [DecidableEq Γ] [Fintype P]
+    [Nonempty P] {J : Finset ι} {ν : ι → Γ} (hν : Set.InjOn ν ↑J) {X : ι → P → ℝ}
+    (h0 : ∀ j ∈ J, unifAvg (X j) = 0) {β : ι → ℝ} (hβ : ∀ j ∈ J, ∀ pm, |X j pm| ≤ β j) :
+    unifAvg (fun ρ : Γ → P ↦ (∑ j ∈ J, X j (ρ (ν j))) ^ 4) ≤ 3 * (∑ j ∈ J, β j ^ 2) ^ 2 := by
+  classical
+  obtain ⟨pm₀⟩ := ‹Nonempty P›
+  induction J using Finset.induction_on with
+  | empty =>
+      simp only [Finset.sum_empty]
+      rw [show (fun _ : Γ → P ↦ (0 : ℝ) ^ 4) = fun _ ↦ 0 from funext fun _ ↦ by ring,
+        unifAvg_const]
+      norm_num
+  | insert j₀ J hj₀ ih =>
+      have hne := ne_of_injOn_insert hν hj₀
+      have hνJ := injOn_of_insert hν
+      have hS0 : ∀ j ∈ J, unifAvg (X j) = 0 := fun j hj ↦ h0 j (Finset.mem_insert_of_mem hj)
+      have hβJ : ∀ j ∈ J, ∀ pm, |X j pm| ≤ β j := fun j hj ↦ hβ j (Finset.mem_insert_of_mem hj)
+      have hX0 := h0 j₀ (Finset.mem_insert_self j₀ J)
+      have hβ0 := hβ j₀ (Finset.mem_insert_self j₀ J)
+      set S : (Γ → P) → ℝ := fun ρ ↦ ∑ j ∈ J, X j (ρ (ν j)) with hS
+      set a : (Γ → P) → ℝ := fun ρ ↦ X j₀ (ρ (ν j₀)) with ha
+      set B := ∑ j ∈ J, β j ^ 2 with hB
+      have hcong : ∀ k : ℕ, ∀ ρ ρ' : Γ → P, (∀ γ', ¬ γ' = ν j₀ → ρ γ' = ρ' γ') →
+          S ρ ^ k = S ρ' ^ k := fun k ρ ρ' h ↦ by
+        change (∑ j ∈ J, X j (ρ (ν j))) ^ k = (∑ j ∈ J, X j (ρ' (ν j))) ^ k
+        rw [sum_eval_congr hne X ρ ρ' h]
+      have hind : ∀ k l : ℕ, unifAvg (fun ρ ↦ a ρ ^ k * S ρ ^ l) =
+          unifAvg (fun pm ↦ X j₀ pm ^ k) * unifAvg (fun ρ ↦ S ρ ^ l) := fun k l ↦
+        unifAvg_mul_eval_of_forall_ne (ν j₀) (fun pm ↦ X j₀ pm ^ k) (hcong l)
+      have hS1 : unifAvg S = 0 := by
+        rw [hS, unifAvg_sum_eval, Finset.sum_eq_zero hS0]
+      have hS2 : unifAvg (fun ρ ↦ S ρ ^ 2) ≤ B := by
+        rw [hS, unifAvg_sq_sum_eq hνJ hS0, hB]
+        refine Finset.sum_le_sum fun j hj ↦ ?_
+        refine (unifAvg_mono fun pm ↦ ?_).trans (le_of_eq (unifAvg_const _))
+        rw [← sq_abs]
+        exact pow_le_pow_left₀ (abs_nonneg _) (hβJ j hj pm) 2
+      have hβ0nn : 0 ≤ β j₀ := (abs_nonneg _).trans (hβ0 pm₀)
+      have hB0 : 0 ≤ B := Finset.sum_nonneg fun j _ ↦ sq_nonneg _
+      have ha2 : unifAvg (fun pm ↦ X j₀ pm ^ 2) ≤ β j₀ ^ 2 := by
+        refine (unifAvg_mono fun pm ↦ ?_).trans (le_of_eq (unifAvg_const _))
+        rw [← sq_abs]
+        exact pow_le_pow_left₀ (abs_nonneg _) (hβ0 pm) 2
+      have ha4 : unifAvg (fun pm ↦ X j₀ pm ^ 4) ≤ β j₀ ^ 4 := by
+        refine (unifAvg_mono fun pm ↦ ?_).trans (le_of_eq (unifAvg_const _))
+        rw [show X j₀ pm ^ 4 = |X j₀ pm| ^ 4 by rw [pow_abs, abs_of_nonneg (by positivity)]]
+        exact pow_le_pow_left₀ (abs_nonneg _) (hβ0 pm) 4
+      have ha2nn : 0 ≤ unifAvg (fun pm ↦ X j₀ pm ^ 2) := unifAvg_nonneg fun pm ↦ sq_nonneg _
+      have hS2nn : 0 ≤ unifAvg (fun ρ ↦ S ρ ^ 2) := unifAvg_nonneg fun ρ ↦ sq_nonneg _
+      have hS4 := ih hνJ hS0 hβJ
+      rw [Finset.sum_insert hj₀]
+      simp only [Finset.sum_insert hj₀]
+      have e : (fun ρ : Γ → P ↦ (X j₀ (ρ (ν j₀)) + ∑ j ∈ J, X j (ρ (ν j))) ^ 4) =
+          fun ρ ↦ (((a ρ ^ 4 * S ρ ^ 0 + 4 * (a ρ ^ 3 * S ρ ^ 1)) +
+            6 * (a ρ ^ 2 * S ρ ^ 2)) + 4 * (a ρ ^ 1 * S ρ ^ 3)) + S ρ ^ 4 :=
+        funext fun ρ ↦ by rw [ha, hS]; ring
+      rw [e, unifAvg_add, unifAvg_add, unifAvg_add, unifAvg_add, unifAvg_const_mul,
+        unifAvg_const_mul, unifAvg_const_mul, hind, hind, hind, hind]
+      have h1 : unifAvg (fun ρ ↦ S ρ ^ 1) = 0 := by simpa only [pow_one] using hS1
+      have h0' : unifAvg (fun pm ↦ X j₀ pm ^ 1) = 0 := by simpa only [pow_one] using hX0
+      have hc0 : unifAvg (fun ρ ↦ S ρ ^ 0) = 1 := by
+        simp only [pow_zero]
+        exact unifAvg_const 1
+      rw [h1, h0', hc0]
+      have hS4' : unifAvg (fun ρ ↦ S ρ ^ 4) ≤ 3 * B ^ 2 := hS4
+      have hm : unifAvg (fun pm ↦ X j₀ pm ^ 2) * unifAvg (fun ρ ↦ S ρ ^ 2) ≤ β j₀ ^ 2 * B :=
+        mul_le_mul ha2 hS2 hS2nn (sq_nonneg _)
+      nlinarith [sq_nonneg (β j₀), pow_nonneg hβ0nn 4, mul_nonneg (sq_nonneg (β j₀)) hB0]
+
+/-- **Under a uniform permutation each point has a uniform image**:
+`#α · Σ_π g(π c) = #Perm(α) · Σ_a g a`. -/
+theorem sum_perm_apply {α : Type*} [Fintype α] [DecidableEq α] (g : α → ℝ) (c : α) :
+    (Fintype.card α : ℝ) * ∑ pm : Equiv.Perm α, g (pm c) =
+      (Fintype.card (Equiv.Perm α) : ℝ) * ∑ a, g a := by
+  have hT : ∀ x y : α, ∑ pm : Equiv.Perm α, g (pm x) = ∑ pm : Equiv.Perm α, g (pm y) :=
+    fun x y ↦ Fintype.sum_equiv (Equiv.mulRight (Equiv.swap x y)) _ _ fun pm ↦ by
+      simp [Equiv.Perm.mul_apply, Equiv.swap_apply_right]
+  calc (Fintype.card α : ℝ) * ∑ pm : Equiv.Perm α, g (pm c)
+      = ∑ x : α, ∑ pm : Equiv.Perm α, g (pm x) := by
+        rw [Finset.sum_congr rfl fun x _ ↦ hT x c, Finset.sum_const, Finset.card_univ,
+          nsmul_eq_mul]
+    _ = ∑ pm : Equiv.Perm α, ∑ x : α, g (pm x) := Finset.sum_comm
+    _ = ∑ pm : Equiv.Perm α, ∑ a, g a := Finset.sum_congr rfl fun pm _ ↦ Equiv.sum_comp pm g
+    _ = (Fintype.card (Equiv.Perm α) : ℝ) * ∑ a, g a := by
+        rw [Finset.sum_const, Finset.card_univ, nsmul_eq_mul]
+
+/-- The norm of a complex average is at most the average of the norms. -/
+theorem norm_unifAvg_le {α : Type*} [Fintype α] (F : α → ℂ) :
+    ‖unifAvg F‖ ≤ unifAvg fun a ↦ ‖F a‖ := by
+  unfold unifAvg
+  rw [norm_mul, norm_inv, Complex.norm_natCast]
+  exact mul_le_mul_of_nonneg_left (norm_sum_le _ _) (inv_nonneg.2 (Nat.cast_nonneg _))
+
+/-- Complex averages are additive under subtraction. -/
+theorem unifAvg_sub_complex {α : Type*} [Fintype α] (F G : α → ℂ) :
+    unifAvg (fun a ↦ F a - G a) = unifAvg F - unifAvg G := by
+  unfold unifAvg
+  rw [Finset.sum_sub_distrib, mul_sub]
+
+/-- The average of a complex constant. -/
+theorem unifAvg_const_complex {α : Type*} [Fintype α] [Nonempty α] (c : ℂ) :
+    unifAvg (fun _ : α ↦ c) = c := by
+  unfold unifAvg
+  rw [Finset.sum_const, Finset.card_univ, nsmul_eq_mul]
+  have : (Fintype.card α : ℂ) ≠ 0 := Nat.cast_ne_zero.2 Fintype.card_ne_zero
+  field_simp
+
+/-- The complex average of real values is the real average. -/
+theorem unifAvg_ofReal {α : Type*} [Fintype α] (F : α → ℝ) :
+    unifAvg (fun a ↦ (F a : ℂ)) = ((unifAvg F : ℝ) : ℂ) := by
+  unfold unifAvg
+  push_cast
+  rfl
+
+/-- **The characteristic function of a bounded centred variable on a finite uniform space**:
+if `E X = 0`, `|X| ≤ δ` and `|t| δ ≤ 1`, then
+`‖E e^{itX} - (1 - t² E[X²]/2)‖ ≤ |t|³ δ E[X²]`. -/
+theorem norm_unifAvg_cexp_sub_le {P : Type*} [Fintype P] [Nonempty P] {X : P → ℝ}
+    (h0 : unifAvg X = 0) {δ : ℝ} (hX : ∀ pm, |X pm| ≤ δ) {t : ℝ} (ht : |t| * δ ≤ 1) :
+    ‖unifAvg (fun pm ↦ cexp (((t * X pm : ℝ) : ℂ) * I)) -
+        (((1 - t ^ 2 * unifAvg (fun pm ↦ X pm ^ 2) / 2 : ℝ)) : ℂ)‖ ≤
+      |t| ^ 3 * δ * unifAvg (fun pm ↦ X pm ^ 2) := by
+  set q : P → ℂ := fun pm ↦ (((1 - (t * X pm) ^ 2 / 2 : ℝ)) : ℂ) + ((t * X pm : ℝ) : ℂ) * I
+    with hq
+  have hqa : unifAvg q = (((1 - t ^ 2 * unifAvg (fun pm ↦ X pm ^ 2) / 2 : ℝ)) : ℂ) := by
+    have e1 : q = fun pm ↦ (((1 - t ^ 2 / 2 * X pm ^ 2 : ℝ)) : ℂ) + ((t * X pm : ℝ) : ℂ) * I :=
+      funext fun pm ↦ by rw [hq]; push_cast; ring
+    have e2 : unifAvg (fun pm ↦ (((1 - t ^ 2 / 2 * X pm ^ 2 : ℝ)) : ℂ)) =
+        (((1 - t ^ 2 * unifAvg (fun pm ↦ X pm ^ 2) / 2 : ℝ)) : ℂ) := by
+      rw [unifAvg_ofReal]
+      congr 1
+      rw [show (fun pm ↦ 1 - t ^ 2 / 2 * X pm ^ 2) = fun pm ↦ 1 + (-(t ^ 2 / 2)) * X pm ^ 2 from
+        funext fun pm ↦ by ring, unifAvg_add, unifAvg_const, unifAvg_const_mul]
+      ring
+    have e3 : unifAvg (fun pm ↦ ((t * X pm : ℝ) : ℂ) * I) = 0 := by
+      have : unifAvg (fun pm ↦ ((t * X pm : ℝ) : ℂ) * I) =
+          unifAvg (fun pm ↦ ((t * X pm : ℝ) : ℂ)) * I := by
+        unfold unifAvg
+        rw [← Finset.sum_mul, mul_assoc]
+      rw [this, unifAvg_ofReal, unifAvg_const_mul, h0, mul_zero, Complex.ofReal_zero, zero_mul]
+    rw [e1]
+    unfold unifAvg at e2 e3 ⊢
+    rw [Finset.sum_add_distrib, mul_add, e2, e3, add_zero]
+  rw [← hqa, ← unifAvg_sub_complex]
+  refine (norm_unifAvg_le _).trans ?_
+  rw [← unifAvg_const_mul]
+  refine unifAvg_mono fun pm ↦ ?_
+  have hy : |t * X pm| ≤ 1 := by
+    rw [abs_mul]
+    exact (mul_le_mul_of_nonneg_left (hX pm) (abs_nonneg t)).trans ht
+  refine (norm_cexp_mul_I_sub_le hy).trans ?_
+  have h3 : |X pm| ^ 3 = |X pm| * X pm ^ 2 := by
+    rw [← sq_abs (X pm)]
+    ring
+  rw [abs_mul, mul_pow, h3]
+  calc |t| ^ 3 * (|X pm| * X pm ^ 2) ≤ |t| ^ 3 * (δ * X pm ^ 2) :=
+        mul_le_mul_of_nonneg_left (mul_le_mul_of_nonneg_right (hX pm) (sq_nonneg _))
+          (by positivity)
+    _ = |t| ^ 3 * δ * X pm ^ 2 := by ring
+
+/-- `|e^{-x} - e^{-y}| ≤ |x - y|` for `x, y ≥ 0`. -/
+theorem abs_exp_neg_sub_exp_neg_le {x y : ℝ} (hx : 0 ≤ x) (hy : 0 ≤ y) :
+    |Real.exp (-x) - Real.exp (-y)| ≤ |x - y| := by
+  have key : ∀ x y : ℝ, 0 ≤ x → x ≤ y → |Real.exp (-x) - Real.exp (-y)| ≤ |x - y| := by
+    intro x y hx hxy
+    have h1 : Real.exp (-y) ≤ Real.exp (-x) := Real.exp_le_exp.2 (by linarith)
+    have h2 : Real.exp (-x) - Real.exp (-y) = Real.exp (-x) * (1 - Real.exp (-(y - x))) := by
+      rw [mul_sub, mul_one, ← Real.exp_add]
+      ring_nf
+    have h3 : 1 - Real.exp (-(y - x)) ≤ y - x := by
+      have := Real.add_one_le_exp (-(y - x))
+      linarith
+    have h4 : 0 ≤ 1 - Real.exp (-(y - x)) := by
+      have : Real.exp (-(y - x)) ≤ 1 := Real.exp_le_one_iff.2 (by linarith)
+      linarith
+    have h5 : Real.exp (-x) ≤ 1 := Real.exp_le_one_iff.2 (by linarith)
+    rw [abs_of_nonneg (by linarith), abs_of_nonpos (by linarith), h2]
+    calc Real.exp (-x) * (1 - Real.exp (-(y - x))) ≤ 1 * (y - x) :=
+          mul_le_mul h5 h3 h4 zero_le_one
+      _ = -(x - y) := by ring
+  rcases le_total x y with h | h
+  · exact key x y hx h
+  · rw [abs_sub_comm, abs_sub_comm x y]
+    exact key y x hy h
+
+/-- The average of `e^{ix}` over real `x` has norm at most `1`. -/
+theorem norm_unifAvg_cexp_le_one {α : Type*} [Fintype α] [Nonempty α] (x : α → ℝ) :
+    ‖unifAvg (fun a ↦ cexp ((x a : ℂ) * I))‖ ≤ 1 := by
+  refine (norm_unifAvg_le _).trans ?_
+  rw [show (fun a ↦ ‖cexp ((x a : ℂ) * I)‖) = fun _ ↦ (1 : ℝ) from
+    funext fun a ↦ Complex.norm_exp_ofReal_mul_I _, unifAvg_const]
+
+/-- **Cauchy–Schwarz for an average of finite sums**:
+`(E_r Σ_γ F G)² ≤ (E_r Σ_γ F²)(E_r Σ_γ G²)`. -/
+theorem sq_unifAvg_sum_mul_le {R Γ : Type*} [Fintype R] [Fintype Γ] (F G : R → Γ → ℝ) :
+    (unifAvg fun r ↦ ∑ γ, F r γ * G r γ) ^ 2 ≤
+      (unifAvg fun r ↦ ∑ γ, F r γ ^ 2) * unifAvg fun r ↦ ∑ γ, G r γ ^ 2 := by
+  unfold unifAvg
+  have h := Finset.sum_mul_sq_le_sq_mul_sq (Finset.univ : Finset (R × Γ))
+    (fun q ↦ F q.1 q.2) (fun q ↦ G q.1 q.2)
+  simp only [Fintype.sum_prod_type] at h
+  have hc : (0 : ℝ) ≤ ((Fintype.card R : ℝ)⁻¹) ^ 2 := sq_nonneg _
+  calc ((Fintype.card R : ℝ)⁻¹ * ∑ r, ∑ γ, F r γ * G r γ) ^ 2
+      = ((Fintype.card R : ℝ)⁻¹) ^ 2 * (∑ r, ∑ γ, F r γ * G r γ) ^ 2 := by ring
+    _ ≤ ((Fintype.card R : ℝ)⁻¹) ^ 2 * ((∑ r, ∑ γ, F r γ ^ 2) * ∑ r, ∑ γ, G r γ ^ 2) :=
+        mul_le_mul_of_nonneg_left h hc
+    _ = _ := by ring
+
+/-- **Conditional Lindeberg CLT on finite product spaces** (Lyapunov form). For each `m`, an
+outer variable `r ∈ R m` (uniform) and a uniform `ρ : Γ m → P` (independent node
+permutations), let `T = Σ_γ ξ m r γ (ρ γ)` with centred node terms (`E_π ξ = 0`) bounded by
+`|ξ m r γ π| ≤ M m r γ`. Suppose the conditional variances `V(r) = Σ_γ E_π ξ²` satisfy
+`E_r |V(r)/s_m² - 1| → 0`, that `E_r Σ_γ (M/s_m)²` stays bounded, and that
+`E_r Σ_γ (M/s_m)⁴ → 0`. Then for `τ_m → t` the characteristic function `E e^{i τ_m T/s_m}`
+tends to `e^{-t²/2}`. -/
+theorem tendsto_unifAvg_cexp_nodeSum {R : ℕ → Type*} [∀ m, Fintype (R m)]
+    [∀ m, Nonempty (R m)] {Γ : ℕ → Type*} [∀ m, Fintype (Γ m)] [∀ m, DecidableEq (Γ m)]
+    {P : Type*} [Fintype P] [Nonempty P] (ξ : (m : ℕ) → R m → Γ m → P → ℝ)
+    (hcent : ∀ m r γ, unifAvg (ξ m r γ) = 0) {s : ℕ → ℝ} (hs : ∀ᶠ m in atTop, 0 < s m)
+    (hV : Tendsto (fun m ↦ unifAvg fun r ↦
+      |(∑ γ, unifAvg fun pm ↦ ξ m r γ pm ^ 2) / s m ^ 2 - 1|) atTop (𝓝 0))
+    {M : (m : ℕ) → R m → Γ m → ℝ} (hM : ∀ m r γ pm, |ξ m r γ pm| ≤ M m r γ) {C : ℝ}
+    (hM2 : ∀ᶠ m in atTop, (unifAvg fun r ↦ ∑ γ, (M m r γ / s m) ^ 2) ≤ C)
+    (hM4 : Tendsto (fun m ↦ unifAvg fun r ↦ ∑ γ, (M m r γ / s m) ^ 4) atTop (𝓝 0))
+    {τ : ℕ → ℝ} {t : ℝ} (hτ : Tendsto τ atTop (𝓝 t)) :
+    Tendsto (fun m ↦ unifAvg fun r ↦ unifAvg fun ρ : Γ m → P ↦
+      cexp ((((τ m * ∑ γ, ξ m r γ (ρ γ)) / s m : ℝ) : ℂ) * I)) atTop
+      (𝓝 ((Real.exp (-(t ^ 2 / 2)) : ℝ) : ℂ)) := by
+  obtain ⟨pm₀⟩ := ‹Nonempty P›
+  set Vp : (m : ℕ) → R m → ℝ := fun m r ↦ (∑ γ, unifAvg fun pm ↦ ξ m r γ pm ^ 2) / s m ^ 2
+    with hVp
+  have hM0 : ∀ m r γ, 0 ≤ M m r γ := fun m r γ ↦ (abs_nonneg _).trans (hM m r γ pm₀)
+  have hVp0 : ∀ m r, 0 ≤ Vp m r := fun m r ↦
+    div_nonneg (Finset.sum_nonneg fun γ _ ↦ unifAvg_nonneg fun pm ↦ sq_nonneg _) (sq_nonneg _)
+  -- the bound for one outer value `r`
+  have hpt : ∀ m, 0 < s m → ∀ r,
+      ‖unifAvg (fun ρ : Γ m → P ↦ cexp ((((τ m * ∑ γ, ξ m r γ (ρ γ)) / s m : ℝ) : ℂ) * I)) -
+        ((Real.exp (-(τ m ^ 2 / 2)) : ℝ) : ℂ)‖ ≤
+        |τ m| ^ 3 * ∑ γ, (M m r γ / s m) ^ 3 + 9 / 4 * τ m ^ 4 * ∑ γ, (M m r γ / s m) ^ 4 +
+          τ m ^ 2 / 2 * |Vp m r - 1| := by
+    intro m hsm r
+    set x : Γ m → ℝ := fun γ ↦ |τ m| * (M m r γ / s m) with hx
+    have hx0 : ∀ γ, 0 ≤ x γ := fun γ ↦ mul_nonneg (abs_nonneg _) (div_nonneg (hM0 m r γ) hsm.le)
+    have h3 : ∑ γ, x γ ^ 3 = |τ m| ^ 3 * ∑ γ, (M m r γ / s m) ^ 3 := by
+      rw [Finset.mul_sum]
+      exact Finset.sum_congr rfl fun γ _ ↦ by rw [hx]; ring
+    have h4 : ∑ γ, x γ ^ 4 = τ m ^ 4 * ∑ γ, (M m r γ / s m) ^ 4 := by
+      rw [Finset.mul_sum]
+      refine Finset.sum_congr rfl fun γ _ ↦ ?_
+      rw [hx, mul_pow, show |τ m| ^ 4 = τ m ^ 4 by rw [pow_abs, abs_of_nonneg (by positivity)]]
+    have hS3 : 0 ≤ ∑ γ, x γ ^ 3 := Finset.sum_nonneg fun γ _ ↦ pow_nonneg (hx0 γ) 3
+    have hS4 : 0 ≤ ∑ γ, x γ ^ 4 := Finset.sum_nonneg fun γ _ ↦ pow_nonneg (hx0 γ) 4
+    have hgauss0 : 0 ≤ τ m ^ 2 / 2 * |Vp m r - 1| := by positivity
+    rw [← h3, show 9 / 4 * τ m ^ 4 * ∑ γ, (M m r γ / s m) ^ 4 = 9 / 4 * ∑ γ, x γ ^ 4 by
+      rw [h4]; ring]
+    by_cases hgood : ∀ γ, x γ ≤ 1
+    · set X : Γ m → P → ℝ := fun γ pm ↦ ξ m r γ pm / s m with hX
+      have hX0 : ∀ γ, unifAvg (X γ) = 0 := fun γ ↦ by
+        change unifAvg (fun pm ↦ ξ m r γ pm / s m) = 0
+        rw [show (fun pm ↦ ξ m r γ pm / s m) = fun pm ↦ (s m)⁻¹ * ξ m r γ pm from
+          funext fun pm ↦ by ring, unifAvg_const_mul, hcent, mul_zero]
+      have hXb : ∀ γ pm, |X γ pm| ≤ M m r γ / s m := fun γ pm ↦ by
+        change |ξ m r γ pm / s m| ≤ M m r γ / s m
+        rw [abs_div, abs_of_pos hsm]
+        exact div_le_div_of_nonneg_right (hM m r γ pm) hsm.le
+      have hτδ : ∀ γ, |τ m| * (M m r γ / s m) ≤ 1 := hgood
+      have hfac : unifAvg (fun ρ : Γ m → P ↦
+          cexp ((((τ m * ∑ γ, ξ m r γ (ρ γ)) / s m : ℝ) : ℂ) * I)) =
+          ∏ γ, unifAvg (fun pm ↦ cexp (((τ m * X γ pm : ℝ) : ℂ) * I)) := by
+        rw [← unifAvg_prod]
+        congr 1
+        funext ρ
+        rw [← Complex.exp_sum]
+        congr 1
+        have e : ((τ m * ∑ γ, ξ m r γ (ρ γ)) / s m : ℝ) = ∑ γ, τ m * X γ (ρ γ) := by
+          rw [Finset.mul_sum, Finset.sum_div]
+          exact Finset.sum_congr rfl fun γ _ ↦ by rw [hX]; ring
+        rw [e, Complex.ofReal_sum, Finset.sum_mul]
+      set v : Γ m → ℝ := fun γ ↦ unifAvg (fun pm ↦ X γ pm ^ 2) with hv
+      set a : Γ m → ℝ := fun γ ↦ τ m ^ 2 * v γ / 2 with ha
+      have hvs : ∀ γ, v γ = (unifAvg fun pm ↦ ξ m r γ pm ^ 2) / s m ^ 2 := fun γ ↦ by
+        change unifAvg (fun pm ↦ (ξ m r γ pm / s m) ^ 2) = _
+        rw [show (fun pm ↦ (ξ m r γ pm / s m) ^ 2) =
+          fun pm ↦ (s m ^ 2)⁻¹ * ξ m r γ pm ^ 2 from funext fun pm ↦ by ring, unifAvg_const_mul]
+        ring
+      have hVsum : ∑ γ, v γ = Vp m r := by
+        change ∑ γ, v γ = (∑ γ, unifAvg fun pm ↦ ξ m r γ pm ^ 2) / s m ^ 2
+        rw [Finset.sum_div]
+        exact Finset.sum_congr rfl fun γ _ ↦ hvs γ
+      have hv0 : ∀ γ, 0 ≤ v γ := fun γ ↦ unifAvg_nonneg fun pm ↦ sq_nonneg _
+      have hvδ : ∀ γ, v γ ≤ (M m r γ / s m) ^ 2 := fun γ ↦ by
+        refine (unifAvg_mono fun pm ↦ ?_).trans (le_of_eq (unifAvg_const _))
+        rw [← sq_abs]
+        exact pow_le_pow_left₀ (abs_nonneg _) (hXb γ pm) 2
+      have ha0 : ∀ γ, 0 ≤ a γ := fun γ ↦ by
+        rw [ha]
+        have := hv0 γ
+        positivity
+      have hax : ∀ γ, a γ ≤ x γ ^ 2 / 2 := fun γ ↦ by
+        rw [ha, hx, mul_pow, sq_abs]
+        have := mul_le_mul_of_nonneg_left (hvδ γ) (sq_nonneg (τ m))
+        linarith
+      have hx1 : ∀ γ, x γ ^ 2 ≤ 1 := fun γ ↦ by
+        have := hgood γ
+        have := hx0 γ
+        nlinarith
+      have ha1 : ∀ γ, a γ ≤ 1 := fun γ ↦ by linarith [hax γ, hx1 γ]
+      have hterm : ∀ γ, ‖unifAvg (fun pm ↦ cexp (((τ m * X γ pm : ℝ) : ℂ) * I)) -
+          ((Real.exp (-a γ) : ℝ) : ℂ)‖ ≤ x γ ^ 3 + x γ ^ 4 / 4 := by
+        intro γ
+        have h1 := norm_unifAvg_cexp_sub_le (hX0 γ) (hXb γ) (hτδ γ)
+        have h1' : |τ m| ^ 3 * (M m r γ / s m) * unifAvg (fun pm ↦ X γ pm ^ 2) ≤ x γ ^ 3 := by
+          have hd0 : 0 ≤ M m r γ / s m := div_nonneg (hM0 m r γ) hsm.le
+          calc |τ m| ^ 3 * (M m r γ / s m) * unifAvg (fun pm ↦ X γ pm ^ 2)
+              ≤ |τ m| ^ 3 * (M m r γ / s m) * (M m r γ / s m) ^ 2 :=
+                mul_le_mul_of_nonneg_left (hvδ γ) (by positivity)
+            _ = x γ ^ 3 := by rw [hx]; ring
+        have h2 : |Real.exp (-a γ) - 1 - (-a γ)| ≤ (-a γ) ^ 2 :=
+          Real.abs_exp_sub_one_sub_id_le (by rw [abs_neg, abs_of_nonneg (ha0 γ)]; exact ha1 γ)
+        have h3' : ‖(((1 - τ m ^ 2 * v γ / 2 : ℝ)) : ℂ) - ((Real.exp (-a γ) : ℝ) : ℂ)‖ ≤
+            x γ ^ 4 / 4 := by
+          rw [← Complex.ofReal_sub, Complex.norm_real, Real.norm_eq_abs]
+          have heq : 1 - τ m ^ 2 * v γ / 2 - Real.exp (-a γ) =
+              -(Real.exp (-a γ) - 1 - (-a γ)) := by
+            rw [ha]
+            ring
+          rw [heq, abs_neg]
+          refine h2.trans ?_
+          rw [neg_sq]
+          have := hax γ
+          have := ha0 γ
+          nlinarith
+        calc ‖unifAvg (fun pm ↦ cexp (((τ m * X γ pm : ℝ) : ℂ) * I)) -
+              ((Real.exp (-a γ) : ℝ) : ℂ)‖
+            ≤ ‖unifAvg (fun pm ↦ cexp (((τ m * X γ pm : ℝ) : ℂ) * I)) -
+                (((1 - τ m ^ 2 * v γ / 2 : ℝ)) : ℂ)‖ +
+              ‖(((1 - τ m ^ 2 * v γ / 2 : ℝ)) : ℂ) - ((Real.exp (-a γ) : ℝ) : ℂ)‖ :=
+              norm_sub_le_norm_sub_add_norm_sub _ _ _
+          _ ≤ x γ ^ 3 + x γ ^ 4 / 4 := add_le_add (h1.trans h1') h3'
+      have hprod : ‖∏ γ, unifAvg (fun pm ↦ cexp (((τ m * X γ pm : ℝ) : ℂ) * I)) -
+          ∏ γ, ((Real.exp (-a γ) : ℝ) : ℂ)‖ ≤ ∑ γ, x γ ^ 3 + ∑ γ, x γ ^ 4 / 4 := by
+        refine (norm_prod_sub_prod_le Finset.univ _ _
+          (fun γ _ ↦ norm_unifAvg_cexp_le_one _) (fun γ _ ↦ ?_)).trans ?_
+        · rw [Complex.norm_real, Real.norm_eq_abs, abs_of_pos (Real.exp_pos _),
+            Real.exp_le_one_iff]
+          linarith [ha0 γ]
+        refine (Finset.sum_le_sum fun γ _ ↦ hterm γ).trans (le_of_eq ?_)
+        rw [Finset.sum_add_distrib]
+      have hexp : ∏ γ, ((Real.exp (-a γ) : ℝ) : ℂ) =
+          ((Real.exp (-(τ m ^ 2 * Vp m r / 2)) : ℝ) : ℂ) := by
+        rw [← Complex.ofReal_prod, ← Real.exp_sum, Finset.sum_neg_distrib]
+        congr 3
+        simp only [ha]
+        rw [← Finset.sum_div, ← Finset.mul_sum, hVsum]
+      have hgauss : ‖((Real.exp (-(τ m ^ 2 * Vp m r / 2)) : ℝ) : ℂ) -
+          ((Real.exp (-(τ m ^ 2 / 2)) : ℝ) : ℂ)‖ ≤ τ m ^ 2 / 2 * |Vp m r - 1| := by
+        rw [← Complex.ofReal_sub, Complex.norm_real, Real.norm_eq_abs]
+        refine (abs_exp_neg_sub_exp_neg_le (by have := hVp0 m r; positivity)
+          (by positivity)).trans (le_of_eq ?_)
+        rw [show τ m ^ 2 * Vp m r / 2 - τ m ^ 2 / 2 = τ m ^ 2 / 2 * (Vp m r - 1) by ring,
+          abs_mul, abs_of_nonneg (by positivity)]
+      have h44 : ∑ γ, x γ ^ 4 / 4 ≤ 9 / 4 * ∑ γ, x γ ^ 4 := by
+        rw [← Finset.sum_div]
+        linarith
+      rw [hfac]
+      calc ‖∏ γ, unifAvg (fun pm ↦ cexp (((τ m * X γ pm : ℝ) : ℂ) * I)) -
+            ((Real.exp (-(τ m ^ 2 / 2)) : ℝ) : ℂ)‖
+          ≤ ‖∏ γ, unifAvg (fun pm ↦ cexp (((τ m * X γ pm : ℝ) : ℂ) * I)) -
+              ∏ γ, ((Real.exp (-a γ) : ℝ) : ℂ)‖ +
+            ‖∏ γ, ((Real.exp (-a γ) : ℝ) : ℂ) - ((Real.exp (-(τ m ^ 2 / 2)) : ℝ) : ℂ)‖ :=
+            norm_sub_le_norm_sub_add_norm_sub _ _ _
+        _ ≤ (∑ γ, x γ ^ 3 + ∑ γ, x γ ^ 4 / 4) + τ m ^ 2 / 2 * |Vp m r - 1| :=
+            add_le_add hprod (by rw [hexp]; exact hgauss)
+        _ ≤ _ := by linarith
+    · push Not at hgood
+      obtain ⟨γ₁, hγ₁⟩ := hgood
+      have h1 : 1 ≤ ∑ γ, x γ ^ 4 := by
+        have h1' : 1 ≤ x γ₁ ^ 4 := one_le_pow₀ hγ₁.le
+        exact h1'.trans (Finset.single_le_sum (fun γ _ ↦ pow_nonneg (hx0 γ) 4)
+          (Finset.mem_univ γ₁))
+      have hn1 := norm_unifAvg_cexp_le_one
+        (fun ρ : Γ m → P ↦ ((τ m * ∑ γ, ξ m r γ (ρ γ)) / s m : ℝ))
+      have hn2 : ‖((Real.exp (-(τ m ^ 2 / 2)) : ℝ) : ℂ)‖ ≤ 1 := by
+        rw [Complex.norm_real, Real.norm_eq_abs, abs_of_pos (Real.exp_pos _),
+          Real.exp_le_one_iff]
+        have := sq_nonneg (τ m)
+        linarith
+      calc _ ≤ ‖unifAvg (fun ρ : Γ m → P ↦
+              cexp ((((τ m * ∑ γ, ξ m r γ (ρ γ)) / s m : ℝ) : ℂ) * I))‖ +
+            ‖((Real.exp (-(τ m ^ 2 / 2)) : ℝ) : ℂ)‖ := norm_sub_le _ _
+        _ ≤ _ := by linarith
+  -- average over `r`
+  set L2 : ℕ → ℝ := fun m ↦ unifAvg fun r ↦ ∑ γ, (M m r γ / s m) ^ 2 with hL2
+  set L3 : ℕ → ℝ := fun m ↦ unifAvg fun r ↦ ∑ γ, (M m r γ / s m) ^ 3 with hL3
+  set L4 : ℕ → ℝ := fun m ↦ unifAvg fun r ↦ ∑ γ, (M m r γ / s m) ^ 4 with hL4
+  set Bd : ℕ → ℝ := fun m ↦ |τ m| ^ 3 * L3 m + 9 / 4 * τ m ^ 4 * L4 m +
+    τ m ^ 2 / 2 * unifAvg (fun r ↦ |Vp m r - 1|) with hBd
+  have havg : ∀ m, 0 < s m →
+      ‖(unifAvg fun r ↦ unifAvg fun ρ : Γ m → P ↦
+        cexp ((((τ m * ∑ γ, ξ m r γ (ρ γ)) / s m : ℝ) : ℂ) * I)) -
+        ((Real.exp (-(τ m ^ 2 / 2)) : ℝ) : ℂ)‖ ≤ Bd m := by
+    intro m hsm
+    rw [← unifAvg_const_complex (α := R m) ((Real.exp (-(τ m ^ 2 / 2)) : ℝ) : ℂ),
+      ← unifAvg_sub_complex]
+    refine (norm_unifAvg_le _).trans ?_
+    refine (unifAvg_mono fun r ↦ hpt m hsm r).trans (le_of_eq ?_)
+    rw [unifAvg_add, unifAvg_add, unifAvg_const_mul, unifAvg_const_mul, unifAvg_const_mul]
+  -- the third moments
+  have hL3le : ∀ m, 0 < s m → L3 m ^ 2 ≤ L2 m * L4 m := by
+    intro m hsm
+    have h := sq_unifAvg_sum_mul_le (fun r γ ↦ M m r γ / s m) (fun r γ ↦ (M m r γ / s m) ^ 2)
+    have e3 : L3 m = unifAvg fun r ↦ ∑ γ, M m r γ / s m * (M m r γ / s m) ^ 2 := by
+      change (unifAvg fun r ↦ ∑ γ, (M m r γ / s m) ^ 3) = _
+      congr 1
+      funext r
+      exact Finset.sum_congr rfl fun γ _ ↦ by ring
+    have e4 : (unifAvg fun r ↦ ∑ γ, ((M m r γ / s m) ^ 2) ^ 2) = L4 m := by
+      change _ = (unifAvg fun r ↦ ∑ γ, (M m r γ / s m) ^ 4)
+      congr 1
+      funext r
+      exact Finset.sum_congr rfl fun γ _ ↦ by ring
+    rw [e3, ← e4]
+    exact h
+  have hL0 : ∀ m, 0 < s m → 0 ≤ L3 m := fun m hsm ↦ unifAvg_nonneg fun r ↦
+    Finset.sum_nonneg fun γ _ ↦ pow_nonneg (div_nonneg (hM0 m r γ) hsm.le) 3
+  have hL4n : ∀ m, 0 ≤ L4 m := fun m ↦ unifAvg_nonneg fun r ↦
+    Finset.sum_nonneg fun γ _ ↦ by positivity
+  have hC0 : 0 ≤ C := by
+    obtain ⟨m, hm⟩ := hM2.exists
+    exact le_trans (unifAvg_nonneg fun r ↦ Finset.sum_nonneg fun γ _ ↦ sq_nonneg _) hm
+  have hL3t : Tendsto L3 atTop (𝓝 0) := by
+    have hsq : Tendsto (fun m ↦ Real.sqrt (C * L4 m)) atTop (𝓝 0) := by
+      have := (Real.continuous_sqrt.tendsto _).comp (hM4.const_mul C)
+      rwa [mul_zero, Real.sqrt_zero] at this
+    refine squeeze_zero' ?_ ?_ hsq
+    · filter_upwards [hs] with m hsm
+      exact hL0 m hsm
+    · filter_upwards [hs, hM2] with m hsm hm2
+      refine Real.le_sqrt_of_sq_le ((hL3le m hsm).trans ?_)
+      exact mul_le_mul_of_nonneg_right hm2 (hL4n m)
+  have hBd0 : Tendsto Bd atTop (𝓝 0) := by
+    have h := (((hτ.abs.pow 3).mul hL3t).add (((hτ.pow 4).const_mul (9 / 4)).mul hM4)).add
+      (((hτ.pow 2).div_const 2).mul hV)
+    simpa only [hBd, mul_zero, add_zero] using h
+  have hgl : Tendsto (fun m ↦ ((Real.exp (-(τ m ^ 2 / 2)) : ℝ) : ℂ)) atTop
+      (𝓝 ((Real.exp (-(t ^ 2 / 2)) : ℝ) : ℂ)) :=
+    Tendsto.ofReal ((Real.continuous_exp.tendsto _).comp ((hτ.pow 2).div_const 2).neg)
+  rw [tendsto_iff_norm_sub_tendsto_zero]
+  rw [tendsto_iff_norm_sub_tendsto_zero] at hgl
+  refine squeeze_zero' (Eventually.of_forall fun m ↦ norm_nonneg _) ?_ (by
+    simpa only [add_zero] using hBd0.add hgl)
+  filter_upwards [hs] with m hsm
+  exact (norm_sub_le_norm_sub_add_norm_sub _ _ _).trans (add_le_add (havg m hsm) le_rfl)
+
+end RQMCMarkov.OwenScrambling
+
+/-
+Copyright (c) 2026 Robert Kirkby. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Robert Kirkby
+-/
+
+/-!
+# The product integrand on a scrambled `(0,m,2)`-net: node decomposition
+
+Towards Loh's (2003) CLT for the non-additive integrand `f(x) = x₀ x₁` (post #2). Averaged
+over the remainders, the scrambled-net estimator of `x₀ x₁` is `1/4 + S/n`, where
+`S = Σ_i A₀(i) A₁(i)` and `A_j(i)` is the centred midpoint of the scrambled cell of point `i` in
+coordinate `j`. Each `A_j` is a sum over the levels of the scramble of centred digits
+(`scrDev`), digit `k` depending only on the level-`k` node of the tree of coordinate `j`. Given
+the scramble `ρ₀` of coordinate `0`, `S` is a sum over the nodes `γ` of the tree of coordinate `1`
+of terms `nodeTerm d ρ₀ γ (ρ₁ γ)`, each depending on a single node permutation and centred:
+a sum of independent terms (`prodS_eq_sum_nodeTerm`, `unifAvg_nodeTerm`).
+
+The weight of a node `γ` at level `k₁` is a sum over the points below `γ` of `A₀`. The net
+property makes the levels of `A₀` above `m - k₁ - 1` cancel exactly (`sum_cdig_cellSet_eq_zero`),
+and below that level distinct points use distinct nodes of the tree of coordinate `0`
+(`eq_of_truncDigits_eq_cellSet`). So the weights are sums of independent centred terms of the
+deep levels of `ρ₀` (`nodeW_eq_wwin`, `wwin_eq_sum`), with explicit second and fourth moment
+bounds (`unifAvg_sq_wwin_le`, `unifAvg_pow_four_wwin_le`).
+
+## Main results
+
+* `cdig`, `sum_cdig`, `unifAvg_cdig`, `abs_cdig_le`: centred permuted digits.
+* `mid_scramble`: the midpoint of a scrambled cell is `1/2 + scrDev ρ x`.
+* `cellAvg_prodFn`, `sum_scrDev_net`, `integral_scrambledEstimate_prodFn`:
+  `E[μ̂ | ρ] = 1/4 + S/n` for `x₀ x₁` and every `(0,m,2)`-net.
+* `prodS_eq_sum_nodeTerm`, `unifAvg_nodeTerm`: the node decomposition of `S` given `ρ₀`.
+* `card_agree_agree_net`, `sum_cdig_cellSet_eq_zero`, `eq_of_truncDigits_eq_cellSet`: the net
+  combinatorics.
+* `nodeW_eq_wwin`, `wwin_split`, `unifAvg_sq_wwin_le`, `unifAvg_pow_four_wwin_le`: the node
+  weights as sums of independent terms of the deep levels, and their moments.
+-/
+
+namespace RQMCMarkov.OwenScrambling
+
+open MeasureTheory ProbabilityTheory Finset Filter
+open scoped Topology
+
+variable {b : ℕ}
+
+/-- The **centred digit** `π c - (b - 1)/2` of a digit `c` under a permutation `π`. -/
+noncomputable def cdig (pm : Equiv.Perm (Fin b)) (c : Fin b) : ℝ :=
+  ((pm c : ℕ) : ℝ) - ((b : ℝ) - 1) / 2
+
+/-- `Σ_{c < b} c = b (b - 1)/2`. -/
+theorem sum_fin_cast_eq (b : ℕ) : ∑ c : Fin b, ((c : ℕ) : ℝ) = b * (b - 1) / 2 := by
+  rw [Fin.sum_univ_eq_sum_range (fun i ↦ (i : ℝ)) b, sum_range_cast_id]
+
+/-- The centred digits of a permutation sum to zero. -/
+theorem sum_cdig (pm : Equiv.Perm (Fin b)) : ∑ c, cdig pm c = 0 := by
+  unfold cdig
+  rw [Finset.sum_sub_distrib, Equiv.sum_comp pm (fun c ↦ ((c : ℕ) : ℝ)), sum_fin_cast_eq,
+    Finset.sum_const, Finset.card_univ, Fintype.card_fin, nsmul_eq_mul]
+  ring
+
+/-- **A uniformly permuted digit is centred**: `E_π[π c - (b-1)/2] = 0`. -/
+theorem unifAvg_cdig (c : Fin b) : unifAvg (fun pm : Equiv.Perm (Fin b) ↦ cdig pm c) = 0 := by
+  have h := sum_perm_apply (fun a : Fin b ↦ ((a : ℕ) : ℝ) - ((b : ℝ) - 1) / 2) c
+  have hs : ∑ a : Fin b, (((a : ℕ) : ℝ) - ((b : ℝ) - 1) / 2) = 0 := sum_cdig (Equiv.refl _)
+  rw [hs, mul_zero, Fintype.card_fin] at h
+  have hb : (b : ℝ) ≠ 0 := Nat.cast_ne_zero.2 (Fin.pos c).ne'
+  have h0 : ∑ pm : Equiv.Perm (Fin b), cdig pm c = 0 := by
+    rcases mul_eq_zero.1 h with h1 | h1
+    · exact absurd h1 hb
+    · exact h1
+  unfold unifAvg
+  rw [h0, mul_zero]
+
+/-- `|π c - (b-1)/2| ≤ b/2`. -/
+theorem abs_cdig_le (pm : Equiv.Perm (Fin b)) (c : Fin b) : |cdig pm c| ≤ (b : ℝ) / 2 := by
+  unfold cdig
+  have h1 : ((pm c : ℕ) : ℝ) + 1 ≤ b := by exact_mod_cast (pm c).isLt
+  have h0 : (0 : ℝ) ≤ ((pm c : ℕ) : ℝ) := Nat.cast_nonneg _
+  rw [abs_le]
+  constructor <;> linarith
+
+/-- The weight `b^{-(k+1)}` of digit `k`. -/
+noncomputable def digWt (b k : ℕ) : ℝ := ((b : ℝ) ^ (k + 1))⁻¹
+
+/-- Digit weights are positive. -/
+theorem digWt_pos (hb : 0 < b) (k : ℕ) : 0 < digWt b k :=
+  inv_pos.2 (pow_pos (Nat.cast_pos.2 hb) _)
+
+/-- **The centred midpoint of a scrambled cell**, digit by digit:
+`scrDev ρ x = Σ_k (σ(x)_k - (b-1)/2) b^{-(k+1)}`, digit `k` of the scrambled string being
+`ρ (k, x|k) (x k)`. -/
+noncomputable def scrDev {m : ℕ} (ρ : Scramble b m) (x : Fin m → Fin b) : ℝ :=
+  ∑ k : Fin m, cdig (ρ (k, truncDigits k x)) (x k) * digWt b k
+
+/-- The midpoint of the first `r` digits, digit by digit. -/
+theorem prefixVal_mid {D : ℕ} (hb : 0 < b) (x : Fin D → Fin b) (r : ℕ) :
+    ((prefixVal x r : ℝ) + 1 / 2) / (b : ℝ) ^ r - 1 / 2 =
+      ∑ k ∈ Finset.range r, ((digitAt x k : ℝ) - ((b : ℝ) - 1) / 2) * digWt b k := by
+  have hb' : (b : ℝ) ≠ 0 := Nat.cast_ne_zero.2 hb.ne'
+  induction r with
+  | zero => simp [prefixVal]
+  | succ r ih =>
+      rw [Finset.sum_range_succ, ← ih]
+      change (((b * prefixVal x r + digitAt x r : ℕ) : ℝ) + 1 / 2) / (b : ℝ) ^ (r + 1) - 1 / 2 =
+        _
+      unfold digWt
+      push_cast
+      field_simp
+      ring
+
+/-- **The midpoint of a scrambled cell** is `1/2 + scrDev ρ x`. -/
+theorem mid_scramble (hb : 0 < b) {m : ℕ} (ρ : Scramble b m) (x : Fin m → Fin b) :
+    ((cellVal (scramble ρ x) : ℝ) + 1 / 2) / (b : ℝ) ^ m = 1 / 2 + scrDev ρ x := by
+  have h := prefixVal_mid hb (scramble ρ x) m
+  have e : scrDev ρ x = ∑ k ∈ Finset.range m,
+      ((digitAt (scramble ρ x) k : ℝ) - ((b : ℝ) - 1) / 2) * digWt b k := by
+    rw [← Fin.sum_univ_eq_sum_range (fun k ↦ ((digitAt (scramble ρ x) k : ℝ) -
+      ((b : ℝ) - 1) / 2) * digWt b k) m]
+    unfold scrDev
+    refine Finset.sum_congr rfl fun k _ ↦ ?_
+    rw [digitAt_fin]
+    rfl
+  unfold cellVal
+  rw [e, ← h]
+  ring
+
+/-- `∫ (cellVal x + w)/b^D dw = (cellVal x + 1/2)/b^D` over `w ~ U[0,1)`. -/
+theorem integral_digitPoint {D : ℕ} (x : Fin D → Fin b) :
+    ∫ w, digitPoint x w ∂uniformIco = ((cellVal x : ℝ) + 1 / 2) / (b : ℝ) ^ D := by
+  have := isProbabilityMeasure_uniformIco
+  have e : (fun w ↦ digitPoint x w) = fun w ↦ ((b : ℝ) ^ D)⁻¹ * ((cellVal x : ℝ) + w) :=
+    funext fun w ↦ by unfold digitPoint; ring
+  rw [e, integral_const_mul, integral_add (f := fun _ ↦ (cellVal x : ℝ)) (g := fun a ↦ a)
+    (integrable_const _) (integrable_uniformIco_of_continuous (g := fun a ↦ a) continuous_id),
+    integral_const, probReal_univ, one_smul, integral_id_uniformIco]
+  ring
+
+/-- **The cell average of `x₀ x₁`** is the product of the cell midpoints. -/
+theorem cellAvg_prodFn {D : ℕ} (y : Fin 2 → Fin D → Fin b) :
+    cellAvg prodFn y = (((cellVal (y 0) : ℝ) + 1 / 2) / (b : ℝ) ^ D) *
+      (((cellVal (y 1) : ℝ) + 1 / 2) / (b : ℝ) ^ D) := by
+  have := isProbabilityMeasure_uniformIco
+  unfold cellAvg
+  have e : (fun u : Fin 2 → ℝ ↦ prodFn (cellPoint y u)) =
+      fun u ↦ digitPoint (y 0) (u 0) * digitPoint (y 1) (u 1) := rfl
+  rw [e, ← integral_digitPoint, ← integral_digitPoint]
+  exact integral_pi_eval_mul (ν := uniformIco)
+    (measurable_digitPoint (y 0)).aestronglyMeasurable
+    (measurable_digitPoint (y 1)).aestronglyMeasurable (by decide)
+
+/-- `x₀ x₁` is measurable. -/
+theorem measurable_prodFn : Measurable prodFn :=
+  (measurable_pi_apply 0).mul (measurable_pi_apply 1)
+
+/-- `x₀ x₁` is in `L²` of the cube. -/
+theorem memLp_prodFn : MemLp prodFn 2 (uniformCube 2) := by
+  have hU := isProbabilityMeasure_uniformCube 2
+  refine MemLp.of_bound measurable_prodFn.aestronglyMeasurable 1 ?_
+  filter_upwards [ae_mem_cube_uniformCube 2] with x hx
+  rw [Real.norm_eq_abs, prodFn, abs_mul]
+  have h0 : |x 0| ≤ 1 := abs_le.2 ⟨by linarith [(hx 0).1], (hx 0).2.le⟩
+  have h1 : |x 1| ≤ 1 := abs_le.2 ⟨by linarith [(hx 1).1], (hx 1).2.le⟩
+  nlinarith [abs_nonneg (x 0), abs_nonneg (x 1)]
+
+/-- **The centred midpoints of a scrambled `(0,m,s)`-net sum to zero** in each coordinate (the
+scrambled coordinate visits every cell once). -/
+theorem sum_scrDev_net (hb : 0 < b) {m s : ℕ} {d : Fin (b ^ m) → Fin s → Fin m → Fin b}
+    (hnet : IsNet b 0 m fun i j ↦ digitPoint (d i j) 0) (ρ : Fin s → Scramble b m)
+    (j : Fin s) : ∑ i, scrDev (ρ j) (d i j) = 0 := by
+  have hN : ((b ^ m : ℕ) : ℝ) ≠ 0 := Nat.cast_ne_zero.2 (Nat.pow_pos hb).ne'
+  set G : Fin (b ^ m) → ℝ := fun c ↦ ((c : ℕ) + 1 / 2) / (b : ℝ) ^ m - 1 / 2 with hG
+  have e : ∀ i, scrDev (ρ j) (d i j) = G (cellFin hb (scramble (ρ j) (d i j))) := fun i ↦ by
+    rw [hG]
+    change _ = ((cellVal (scramble (ρ j) (d i j)) : ℝ) + 1 / 2) / (b : ℝ) ^ m - 1 / 2
+    rw [mid_scramble hb]
+    ring
+  rw [Finset.sum_congr rfl fun i _ ↦ e i,
+    (bijective_cellFin_scramble hb hnet ρ j).sum_comp G, hG]
+  simp only
+  rw [Finset.sum_sub_distrib, ← Finset.sum_div, Finset.sum_add_distrib, sum_fin_cast_eq]
+  simp only [Finset.sum_const, Finset.card_univ, Fintype.card_fin, nsmul_eq_mul]
+  push_cast
+  field_simp
+  ring
+
+/-- `S = Σ_i A₀(i) A₁(i)`, the product of the centred scrambled midpoints. -/
+noncomputable def prodS {m n : ℕ} (d : Fin n → Fin 2 → Fin m → Fin b)
+    (ρ : Fin 2 → Scramble b m) : ℝ :=
+  ∑ i, scrDev (ρ 0) (d i 0) * scrDev (ρ 1) (d i 1)
+
+/-- **`E[μ̂ | ρ] = 1/4 + S/n` for `x₀ x₁`** on every scrambled `(0,m,2)`-net. -/
+theorem integral_scrambledEstimate_prodFn (hb : 0 < b) {m : ℕ}
+    {d : Fin (b ^ m) → Fin 2 → Fin m → Fin b} (hnet : IsNet b 0 m fun i j ↦ digitPoint (d i j) 0)
+    (ρ : Fin 2 → Scramble b m) :
+    ∫ u, scrambledEstimate prodFn d ρ u ∂(remLaw 2 (b ^ m)) =
+      1 / 4 + prodS d ρ / ((b ^ m : ℕ) : ℝ) := by
+  have hN : ((b ^ m : ℕ) : ℝ) ≠ 0 := Nat.cast_ne_zero.2 (Nat.pow_pos hb).ne'
+  rw [integral_scrambledEstimate hb memLp_prodFn d ρ]
+  have e : ∀ i, cellAvg prodFn (scrambleVec ρ (d i)) =
+      (1 / 2 + scrDev (ρ 0) (d i 0)) * (1 / 2 + scrDev (ρ 1) (d i 1)) := fun i ↦ by
+    rw [cellAvg_prodFn, ← mid_scramble hb, ← mid_scramble hb]
+    rfl
+  rw [Finset.sum_congr rfl fun i _ ↦ e i]
+  have e2 : ∀ i, (1 / 2 + scrDev (ρ 0) (d i 0)) * (1 / 2 + scrDev (ρ 1) (d i 1)) =
+      1 / 4 + scrDev (ρ 0) (d i 0) / 2 + scrDev (ρ 1) (d i 1) / 2 +
+        scrDev (ρ 0) (d i 0) * scrDev (ρ 1) (d i 1) := fun i ↦ by ring
+  rw [Finset.sum_congr rfl fun i _ ↦ e2 i, Finset.sum_add_distrib, Finset.sum_add_distrib,
+    Finset.sum_add_distrib, ← Finset.sum_div (f := fun i ↦ scrDev (ρ 0) (d i 0)),
+    ← Finset.sum_div (f := fun i ↦ scrDev (ρ 1) (d i 1)), sum_scrDev_net hb hnet ρ 0,
+    sum_scrDev_net hb hnet ρ 1]
+  simp only [Finset.sum_const, Finset.card_univ, Fintype.card_fin, nsmul_eq_mul]
+  unfold prodS
+  field_simp
+  ring
+
+/-- The points below the node `γ = (k, t)` of the tree of coordinate `1`: those whose first `k`
+digits in coordinate `1` are `t`. -/
+def nodeSet {m n : ℕ} (d : Fin n → Fin 2 → Fin m → Fin b)
+    (γ : Fin m × (Fin m → Option (Fin b))) : Finset (Fin n) :=
+  Finset.univ.filter fun i ↦ truncDigits γ.1 (d i 1) = γ.2
+
+/-- The points below the child `c` of the node `γ`: digit `γ.1` of coordinate `1` is `c`. -/
+def cellSet {m n : ℕ} (d : Fin n → Fin 2 → Fin m → Fin b)
+    (γ : Fin m × (Fin m → Option (Fin b))) (c : Fin b) : Finset (Fin n) :=
+  (nodeSet d γ).filter fun i ↦ d i 1 γ.1 = c
+
+/-- The **node weights** given `ρ₀`: `w_{γ,c} = Σ_{i below (γ, c)} A₀(i)`. -/
+noncomputable def nodeW {m n : ℕ} (d : Fin n → Fin 2 → Fin m → Fin b) (ρ₀ : Scramble b m)
+    (γ : Fin m × (Fin m → Option (Fin b))) (c : Fin b) : ℝ :=
+  ∑ i ∈ cellSet d γ c, scrDev ρ₀ (d i 0)
+
+/-- The **node term** of `S` given `ρ₀`, a function of the permutation `π` of the node `γ` of
+the tree of coordinate `1`: `b^{-(k+1)} Σ_c (π c - (b-1)/2) w_{γ,c}`. -/
+noncomputable def nodeTerm {m n : ℕ} (d : Fin n → Fin 2 → Fin m → Fin b) (ρ₀ : Scramble b m)
+    (γ : Fin m × (Fin m → Option (Fin b))) (pm : Equiv.Perm (Fin b)) : ℝ :=
+  digWt b γ.1 * ∑ c, cdig pm c * nodeW d ρ₀ γ c
+
+/-- Regrouping a node term by points. -/
+theorem sum_cdig_mul_nodeW {m n : ℕ} (d : Fin n → Fin 2 → Fin m → Fin b) (ρ₀ : Scramble b m)
+    (γ : Fin m × (Fin m → Option (Fin b))) (pm : Equiv.Perm (Fin b)) :
+    ∑ c, cdig pm c * nodeW d ρ₀ γ c =
+      ∑ i ∈ nodeSet d γ, cdig pm (d i 1 γ.1) * scrDev ρ₀ (d i 0) := by
+  unfold nodeW cellSet
+  rw [← Finset.sum_fiberwise (nodeSet d γ) (fun i ↦ d i 1 γ.1)
+    (fun i ↦ cdig pm (d i 1 γ.1) * scrDev ρ₀ (d i 0))]
+  refine Finset.sum_congr rfl fun c _ ↦ ?_
+  rw [Finset.mul_sum]
+  refine Finset.sum_congr rfl fun i hi ↦ ?_
+  rw [(Finset.mem_filter.1 hi).2]
+
+/-- **Given `ρ₀`, `S` is a sum of node terms of `ρ₁`**: `S = Σ_γ nodeTerm d ρ₀ γ (ρ₁ γ)`, one
+term for each node `γ` of the tree of coordinate `1`, depending only on its permutation. -/
+theorem prodS_eq_sum_nodeTerm {m n : ℕ} (d : Fin n → Fin 2 → Fin m → Fin b)
+    (ρ : Fin 2 → Scramble b m) : prodS d ρ = ∑ γ, nodeTerm d (ρ 0) γ (ρ 1 γ) := by
+  symm
+  calc ∑ γ, nodeTerm d (ρ 0) γ (ρ 1 γ)
+      = ∑ γ : Fin m × (Fin m → Option (Fin b)), digWt b γ.1 *
+          ∑ i ∈ nodeSet d γ, cdig (ρ 1 γ) (d i 1 γ.1) * scrDev (ρ 0) (d i 0) :=
+        Finset.sum_congr rfl fun γ _ ↦ by unfold nodeTerm; rw [sum_cdig_mul_nodeW]
+    _ = ∑ k : Fin m, ∑ t : Fin m → Option (Fin b), digWt b k *
+          ∑ i ∈ nodeSet d (k, t), cdig (ρ 1 (k, t)) (d i 1 k) * scrDev (ρ 0) (d i 0) :=
+        Fintype.sum_prod_type _
+    _ = ∑ k : Fin m, digWt b k *
+          ∑ i, cdig (ρ 1 (k, truncDigits k (d i 1))) (d i 1 k) * scrDev (ρ 0) (d i 0) := by
+        refine Finset.sum_congr rfl fun k _ ↦ ?_
+        rw [← Finset.mul_sum]
+        congr 1
+        rw [← Finset.sum_fiberwise Finset.univ (fun i ↦ truncDigits k (d i 1))
+          (fun i ↦ cdig (ρ 1 (k, truncDigits k (d i 1))) (d i 1 k) * scrDev (ρ 0) (d i 0))]
+        refine Finset.sum_congr rfl fun t _ ↦ Finset.sum_congr rfl fun i hi ↦ ?_
+        rw [(Finset.mem_filter.1 hi).2]
+    _ = prodS d ρ := by
+        unfold prodS
+        rw [Finset.sum_congr rfl fun k _ ↦ Finset.mul_sum _ _ _, Finset.sum_comm]
+        refine Finset.sum_congr rfl fun i _ ↦ ?_
+        rw [show scrDev (ρ 1) (d i 1) = ∑ k : Fin m,
+          cdig (ρ 1 (k, truncDigits k (d i 1))) (d i 1 k) * digWt b k from rfl, Finset.mul_sum]
+        refine Finset.sum_congr rfl fun k _ ↦ ?_
+        ring
+
+/-- **The node terms are centred** under a uniform permutation. -/
+theorem unifAvg_nodeTerm {m n : ℕ} (d : Fin n → Fin 2 → Fin m → Fin b) (ρ₀ : Scramble b m)
+    (γ : Fin m × (Fin m → Option (Fin b))) : unifAvg (nodeTerm d ρ₀ γ) = 0 := by
+  unfold nodeTerm
+  rw [unifAvg_const_mul, unifAvg_sum, Finset.sum_eq_zero, mul_zero]
+  intro c _
+  rw [show (fun pm : Equiv.Perm (Fin b) ↦ cdig pm c * nodeW d ρ₀ γ c) =
+    fun pm ↦ nodeW d ρ₀ γ c * cdig pm c from funext fun pm ↦ mul_comm _ _, unifAvg_const_mul,
+    unifAvg_cdig, mul_zero]
+
+/-- **Points of a `(0,m,2)`-net in an elementary box with `r₀ + r₁ ≤ m`**, described by
+prefixes `z₀, z₁`: exactly `b^{m - r₀ - r₁}`. -/
+theorem card_agree_agree_net (hb : 0 < b) {m : ℕ} {d : Fin (b ^ m) → Fin 2 → Fin m → Fin b}
+    (hnet : IsNet b 0 m fun i j ↦ digitPoint (d i j) 0) {r₀ r₁ : ℕ} (hr : r₀ + r₁ ≤ m)
+    (z₀ z₁ : Fin m → Fin b) :
+    (Finset.univ.filter fun i ↦ Agree r₀ z₀ (d i 0) ∧ Agree r₁ z₁ (d i 1)).card =
+      b ^ (m - r₀ - r₁) := by
+  have hr0 : r₀ ≤ m := by omega
+  have hr1 : r₁ ≤ m := by omega
+  have h := card_box_net_of_le hb le_rfl hnet (r := ![r₀, r₁])
+    (by rw [Fin.sum_univ_two]; simpa using hr) (a := ![prefixVal z₀ r₀, prefixVal z₁ r₁])
+    (fun j ↦ by fin_cases j <;> simp [prefixVal_lt hb])
+  rw [Fin.sum_univ_two] at h
+  simp only [Matrix.cons_val_zero, Matrix.cons_val_one, Matrix.cons_val_fin_one] at h
+  rw [show m - r₀ - r₁ = m - (r₀ + r₁) by omega, ← h]
+  congr 1
+  ext i
+  simp only [Finset.mem_filter, Finset.mem_univ, true_and, Fin.forall_fin_two,
+    Matrix.cons_val_zero, Matrix.cons_val_one, Matrix.cons_val_fin_one]
+  rw [eq_comm, prefixVal_eq_iff_agree hb hr0, eq_comm (a := prefixVal (d i 1) r₁),
+    prefixVal_eq_iff_agree hb hr1]
+
+/-- Agreement with a string whose digit `k` is replaced by `e`. -/
+theorem agree_update_succ_iff {m : ℕ} (x y : Fin m → Fin b) (k : Fin m) (e : Fin b) :
+    Agree ((k : ℕ) + 1) (Function.update x k e) y ↔ Agree k x y ∧ y k = e := by
+  rw [agree_succ_iff k.isLt]
+  have hk : (⟨(k : ℕ), k.isLt⟩ : Fin m) = k := Fin.eta k _
+  rw [hk, Function.update_self]
+  constructor
+  · rintro ⟨h1, h2⟩
+    refine ⟨fun l hl ↦ ?_, h2.symm⟩
+    have := h1 l hl
+    rwa [Function.update_of_ne (Fin.ne_of_val_ne (Nat.ne_of_lt hl))] at this
+  · rintro ⟨h1, h2⟩
+    refine ⟨fun l hl ↦ ?_, h2.symm⟩
+    rw [Function.update_of_ne (Fin.ne_of_val_ne (Nat.ne_of_lt hl))]
+    exact h1 l hl
+
+/-- Agreement is symmetric (as an `iff`). -/
+theorem agree_comm_iff {D r : ℕ} (x y : Fin D → Fin b) : Agree r x y ↔ Agree r y x :=
+  ⟨agree_symm, agree_symm⟩
+
+/-- **The shallow levels of `A₀` cancel below a node** (the net property): if
+`k₀ + k₁ + 2 ≤ m`, the level-`k₀` centred digits of coordinate `0` sum to zero over the points
+below any child of a level-`k₁` node of coordinate `1`, for every scramble `ρ₀`. -/
+theorem sum_cdig_cellSet_eq_zero (hb : 0 < b) {m : ℕ} {d : Fin (b ^ m) → Fin 2 → Fin m → Fin b}
+    (hnet : IsNet b 0 m fun i j ↦ digitPoint (d i j) 0) {k₀ k₁ : Fin m}
+    (hk : (k₀ : ℕ) + k₁ + 2 ≤ m) (t : Fin m → Option (Fin b)) (c : Fin b) (ρ₀ : Scramble b m) :
+    ∑ i ∈ cellSet d (k₁, t) c, cdig (ρ₀ (k₀, truncDigits k₀ (d i 0))) (d i 0 k₀) = 0 := by
+  classical
+  rw [← Finset.sum_fiberwise (cellSet d (k₁, t) c) (fun i ↦ truncDigits k₀ (d i 0))]
+  refine Finset.sum_eq_zero fun p _ ↦ ?_
+  set G := (cellSet d (k₁, t) c).filter fun i ↦ truncDigits k₀ (d i 0) = p with hG
+  rw [Finset.sum_congr rfl fun i hi ↦ by rw [(Finset.mem_filter.1 hi).2]]
+  rcases G.eq_empty_or_nonempty with hG0 | ⟨i₁, hi₁⟩
+  · rw [hG0, Finset.sum_empty]
+  have hi₁' := hi₁
+  simp only [hG, cellSet, nodeSet, Finset.mem_filter, Finset.mem_univ, true_and] at hi₁'
+  have hcount : ∀ e : Fin b, (G.filter fun i ↦ d i 0 k₀ = e).card =
+      b ^ (m - ((k₀ : ℕ) + 1) - ((k₁ : ℕ) + 1)) := by
+    intro e
+    rw [← card_agree_agree_net hb hnet (by omega) (Function.update (d i₁ 0) k₀ e) (d i₁ 1)]
+    congr 1
+    ext i
+    simp only [hG, cellSet, nodeSet, Finset.mem_filter, Finset.mem_univ, true_and]
+    rw [agree_update_succ_iff, agree_succ_iff k₁.isLt, Fin.eta, ← hi₁'.1.1, ← hi₁'.1.2,
+      ← hi₁'.2, truncDigits_eq_iff, truncDigits_eq_iff, agree_comm_iff (d i 1),
+      agree_comm_iff (d i 0)]
+    constructor
+    · rintro ⟨⟨⟨h1, h2⟩, h3⟩, h4⟩
+      exact ⟨⟨h3, h4⟩, h1, h2.symm⟩
+    · rintro ⟨⟨h3, h4⟩, h1, h2⟩
+      exact ⟨⟨⟨h1, h2.symm⟩, h3⟩, h4⟩
+  rw [← Finset.sum_fiberwise G (fun i ↦ d i 0 k₀)]
+  calc ∑ e : Fin b, ∑ i ∈ G with d i 0 k₀ = e, cdig (ρ₀ (k₀, p)) (d i 0 k₀)
+      = ∑ e : Fin b, ((b ^ (m - ((k₀ : ℕ) + 1) - ((k₁ : ℕ) + 1)) : ℕ) : ℝ) *
+          cdig (ρ₀ (k₀, p)) e := by
+        refine Finset.sum_congr rfl fun e _ ↦ ?_
+        rw [Finset.sum_congr rfl fun i hi ↦ by rw [(Finset.mem_filter.1 hi).2],
+          Finset.sum_const, hcount e, nsmul_eq_mul]
+    _ = 0 := by rw [← Finset.mul_sum, sum_cdig, mul_zero]
+
+/-- **Below a level-`k₁` node, distinct points use distinct deep nodes of coordinate `0`**: if
+`k₀ + k₁ + 1 ≥ m`, two points below the same child of a level-`k₁` node with the same `k₀`-digit
+prefix in coordinate `0` coincide. -/
+theorem eq_of_truncDigits_eq_cellSet (hb : 0 < b) {m : ℕ}
+    {d : Fin (b ^ m) → Fin 2 → Fin m → Fin b} (hnet : IsNet b 0 m fun i j ↦ digitPoint (d i j) 0)
+    {k₁ : Fin m} {t : Fin m → Option (Fin b)} {c : Fin b} {i i' : Fin (b ^ m)}
+    (hi : i ∈ cellSet d (k₁, t) c) (hi' : i' ∈ cellSet d (k₁, t) c) {k₀ : Fin m}
+    (hk : m ≤ (k₀ : ℕ) + k₁ + 1) (h : truncDigits k₀ (d i 0) = truncDigits k₀ (d i' 0)) :
+    i = i' := by
+  simp only [cellSet, nodeSet, Finset.mem_filter, Finset.mem_univ, true_and] at hi hi'
+  have hc := card_agree_net_of_ge hb le_rfl hnet (r := ![(k₀ : ℕ), (k₁ : ℕ) + 1])
+    (by rw [Fin.sum_univ_two]; simp only [Matrix.cons_val_zero, Matrix.cons_val_one,
+      Matrix.cons_val_fin_one]; omega) i
+  have hmem : ∀ i'', Agree k₀ (d i 0) (d i'' 0) → Agree ((k₁ : ℕ) + 1) (d i 1) (d i'' 1) →
+      i'' ∈ Finset.univ.filter fun i'' ↦
+        ∀ j, Agree (![(k₀ : ℕ), (k₁ : ℕ) + 1] j) (d i j) (d i'' j) := by
+    intro i'' h0 h1
+    rw [Finset.mem_filter]
+    refine ⟨Finset.mem_univ _, fun j ↦ ?_⟩
+    fin_cases j
+    · exact h0
+    · exact h1
+  have h1 : Agree ((k₁ : ℕ) + 1) (d i 1) (d i' 1) := by
+    rw [agree_succ_iff k₁.isLt, Fin.eta]
+    exact ⟨truncDigits_eq_iff.1 (hi.1.trans hi'.1.symm), hi.2.trans hi'.2.symm⟩
+  exact Finset.card_le_one.1 hc.le i (hmem i (fun _ _ ↦ rfl) (fun _ _ ↦ rfl)) i'
+    (hmem i' (truncDigits_eq_iff.1 h) h1)
+
+/-- The levels `lo ≤ k < hi` of a tree of depth `m`. -/
+def levelWin (m lo hi : ℕ) : Finset (Fin m) :=
+  Finset.univ.filter fun k ↦ lo ≤ (k : ℕ) ∧ (k : ℕ) < hi
+
+/-- The part of the node weight `w_{γ,c}` from the levels `lo ≤ k < hi` of `ρ₀`. -/
+noncomputable def wwin {m n : ℕ} (d : Fin n → Fin 2 → Fin m → Fin b) (ρ₀ : Scramble b m)
+    (γ : Fin m × (Fin m → Option (Fin b))) (c : Fin b) (lo hi : ℕ) : ℝ :=
+  ∑ i ∈ cellSet d γ c, ∑ k ∈ levelWin m lo hi,
+    cdig (ρ₀ (k, truncDigits k (d i 0))) (d i 0 k) * digWt b k
+
+/-- **Only the deep levels contribute to the node weights**: `w_{γ,c}` is its part from the
+levels `k₀ ≥ m - k₁ - 1` of `ρ₀` (`k₁` the level of `γ`). -/
+theorem nodeW_eq_wwin (hb : 0 < b) {m : ℕ} {d : Fin (b ^ m) → Fin 2 → Fin m → Fin b}
+    (hnet : IsNet b 0 m fun i j ↦ digitPoint (d i j) 0) (ρ₀ : Scramble b m)
+    (γ : Fin m × (Fin m → Option (Fin b))) (c : Fin b) :
+    nodeW d ρ₀ γ c = wwin d ρ₀ γ c (m - γ.1 - 1) m := by
+  classical
+  obtain ⟨k₁, t⟩ := γ
+  unfold nodeW wwin scrDev levelWin
+  have hsplit : ∀ i, ∑ k : Fin m, cdig (ρ₀ (k, truncDigits k (d i 0))) (d i 0 k) * digWt b k =
+      ∑ k ∈ Finset.univ.filter (fun k : Fin m ↦ m - (k₁ : ℕ) - 1 ≤ (k : ℕ) ∧ (k : ℕ) < m),
+        cdig (ρ₀ (k, truncDigits k (d i 0))) (d i 0 k) * digWt b k +
+      ∑ k ∈ Finset.univ.filter (fun k : Fin m ↦ ¬ (m - (k₁ : ℕ) - 1 ≤ (k : ℕ) ∧ (k : ℕ) < m)),
+        cdig (ρ₀ (k, truncDigits k (d i 0))) (d i 0 k) * digWt b k := fun i ↦
+    (Finset.sum_filter_add_sum_filter_not _ _ _).symm
+  rw [Finset.sum_congr rfl fun i _ ↦ hsplit i, Finset.sum_add_distrib]
+  have hz : ∑ i ∈ cellSet d (k₁, t) c,
+      ∑ k ∈ Finset.univ.filter (fun k : Fin m ↦ ¬ (m - (k₁ : ℕ) - 1 ≤ (k : ℕ) ∧ (k : ℕ) < m)),
+        cdig (ρ₀ (k, truncDigits k (d i 0))) (d i 0 k) * digWt b k = 0 := by
+    rw [Finset.sum_comm]
+    refine Finset.sum_eq_zero fun k hk ↦ ?_
+    rw [Finset.mem_filter] at hk
+    have hk' : (k : ℕ) + k₁ + 2 ≤ m := by
+      have := k.isLt
+      have := k₁.isLt
+      omega
+    rw [← Finset.sum_mul, sum_cdig_cellSet_eq_zero hb hnet hk' t c ρ₀, zero_mul]
+  rw [hz, add_zero]
+
+/-- Splitting a window of levels. -/
+theorem wwin_split {m n : ℕ} (d : Fin n → Fin 2 → Fin m → Fin b) (ρ₀ : Scramble b m)
+    (γ : Fin m × (Fin m → Option (Fin b))) (c : Fin b) {lo mid hi : ℕ} (h1 : lo ≤ mid)
+    (h2 : mid ≤ hi) : wwin d ρ₀ γ c lo hi = wwin d ρ₀ γ c lo mid + wwin d ρ₀ γ c mid hi := by
+  unfold wwin
+  rw [← Finset.sum_add_distrib]
+  refine Finset.sum_congr rfl fun i _ ↦ ?_
+  rw [← Finset.sum_filter_add_sum_filter_not (levelWin m lo hi) (fun k : Fin m ↦ (k : ℕ) < mid)]
+  congr 1
+  · congr 1
+    ext k
+    simp only [levelWin, Finset.mem_filter, Finset.mem_univ, true_and]
+    omega
+  · congr 1
+    ext k
+    simp only [levelWin, Finset.mem_filter, Finset.mem_univ, true_and]
+    omega
+
+/-- The coordinate term of a node weight: digit `k` of point `i` in coordinate `0`. -/
+noncomputable def wX {m n : ℕ} (d : Fin n → Fin 2 → Fin m → Fin b) (q : Fin n × Fin m)
+    (pm : Equiv.Perm (Fin b)) : ℝ :=
+  cdig pm (d q.1 0 q.2) * digWt b q.2
+
+/-- The node of the tree of coordinate `0` used by digit `k` of point `i`. -/
+def wν {m n : ℕ} (d : Fin n → Fin 2 → Fin m → Fin b) (q : Fin n × Fin m) :
+    Fin m × (Fin m → Option (Fin b)) :=
+  (q.2, truncDigits q.2 (d q.1 0))
+
+/-- A window part of a node weight as a sum of coordinate terms. -/
+theorem wwin_eq_sum {m n : ℕ} (d : Fin n → Fin 2 → Fin m → Fin b) (ρ₀ : Scramble b m)
+    (γ : Fin m × (Fin m → Option (Fin b))) (c : Fin b) (lo hi : ℕ) :
+    wwin d ρ₀ γ c lo hi = ∑ q ∈ cellSet d γ c ×ˢ levelWin m lo hi, wX d q (ρ₀ (wν d q)) := by
+  unfold wwin
+  rw [Finset.sum_product]
+  rfl
+
+/-- **Distinct coordinate terms of a deep window use distinct nodes.** -/
+theorem injOn_wν (hb : 0 < b) {m : ℕ} {d : Fin (b ^ m) → Fin 2 → Fin m → Fin b}
+    (hnet : IsNet b 0 m fun i j ↦ digitPoint (d i j) 0) (γ : Fin m × (Fin m → Option (Fin b)))
+    (c : Fin b) {lo hi : ℕ} (hlo : m ≤ lo + γ.1 + 1) :
+    Set.InjOn (wν d) ↑(cellSet d γ c ×ˢ levelWin m lo hi) := by
+  obtain ⟨k₁, t⟩ := γ
+  change m ≤ lo + (k₁ : ℕ) + 1 at hlo
+  intro q hq q' hq' heq
+  rw [Finset.mem_coe, Finset.mem_product] at hq hq'
+  unfold wν at heq
+  have h2 : q.2 = q'.2 := (Prod.mk.inj heq).1
+  have h3 := (Prod.mk.inj heq).2
+  rw [← h2] at h3
+  have hk : m ≤ (q.2 : ℕ) + k₁ + 1 := by
+    have := (Finset.mem_filter.1 hq.2).2.1
+    omega
+  exact Prod.ext (eq_of_truncDigits_eq_cellSet hb hnet hq.1 hq'.1 hk h3) h2
+
+/-- The coordinate terms are centred. -/
+theorem unifAvg_wX {m n : ℕ} (d : Fin n → Fin 2 → Fin m → Fin b) (q : Fin n × Fin m) :
+    unifAvg (wX d q) = 0 := by
+  unfold wX
+  rw [unifAvg_mul_const, unifAvg_cdig, zero_mul]
+
+/-- The coordinate terms are bounded: `|wX| ≤ (b/2) b^{-(k+1)}`. -/
+theorem abs_wX_le (hb : 0 < b) {m n : ℕ} (d : Fin n → Fin 2 → Fin m → Fin b)
+    (q : Fin n × Fin m) (pm : Equiv.Perm (Fin b)) :
+    |wX d q pm| ≤ (b : ℝ) / 2 * digWt b q.2 := by
+  unfold wX
+  rw [abs_mul, abs_of_pos (digWt_pos hb _)]
+  exact mul_le_mul_of_nonneg_right (abs_cdig_le _ _) (digWt_pos hb _).le
+
+/-- **The geometric bound** `Σ_{lo ≤ k < hi} b^{-2(k+1)} ≤ 2 b^{-2(lo+1)}` (`b ≥ 2`). -/
+theorem sum_levelWin_digWt_sq_le (hb : 1 < b) (m lo hi : ℕ) :
+    ∑ k ∈ levelWin m lo hi, digWt b k ^ 2 ≤ 2 * digWt b lo ^ 2 := by
+  have hb' : (2 : ℝ) ≤ b := by exact_mod_cast hb
+  set q : ℝ := ((b : ℝ) ^ 2)⁻¹ with hq
+  have hq0 : 0 ≤ q := inv_nonneg.2 (sq_nonneg _)
+  have hq4 : q ≤ 1 / 4 := by
+    rw [hq, one_div]
+    exact inv_anti₀ (by norm_num) (by nlinarith)
+  have hw : ∀ k : ℕ, digWt b k ^ 2 = q * q ^ k := fun k ↦ by
+    unfold digWt
+    rw [hq, ← pow_succ', inv_pow, inv_pow, ← pow_mul, ← pow_mul, mul_comm (k + 1) 2]
+  have hmap : ∑ k ∈ levelWin m lo hi, digWt b k ^ 2 =
+      ∑ k ∈ (levelWin m lo hi).map Fin.valEmbedding, digWt b k ^ 2 := by
+    rw [Finset.sum_map]
+    rfl
+  have hsub : (levelWin m lo hi).map Fin.valEmbedding ⊆ Finset.Ico lo (lo + m) := by
+    intro k hk
+    rw [Finset.mem_map] at hk
+    obtain ⟨k', hk', rfl⟩ := hk
+    rw [levelWin, Finset.mem_filter] at hk'
+    rw [Finset.mem_Ico]
+    have := k'.isLt
+    simp only [Fin.valEmbedding_apply]
+    omega
+  rw [hmap]
+  refine (Finset.sum_le_sum_of_subset_of_nonneg hsub fun k _ _ ↦ sq_nonneg _).trans ?_
+  rw [Finset.sum_congr rfl fun k _ ↦ hw k, ← Finset.mul_sum, hw lo]
+  have hg := geom_sum_Ico_le_of_lt_one (m := lo) (n := lo + m) hq0 (by linarith)
+  have h12 : q ^ lo / (1 - q) ≤ 2 * q ^ lo := by
+    rw [div_le_iff₀ (by linarith)]
+    have := pow_nonneg hq0 lo
+    nlinarith
+  calc q * ∑ k ∈ Finset.Ico lo (lo + m), q ^ k ≤ q * (2 * q ^ lo) :=
+        mul_le_mul_of_nonneg_left (hg.trans h12) hq0
+    _ = 2 * (q * q ^ lo) := by ring
+
+/-- **Second moment of a window of a node weight**:
+`E[w²] ≤ #(cell) (b/2)² · 2 b^{-2(lo+1)}` for a deep window (`lo + k₁ + 1 ≥ m`). -/
+theorem unifAvg_sq_wwin_le (hb : 1 < b) {m : ℕ} {d : Fin (b ^ m) → Fin 2 → Fin m → Fin b}
+    (hnet : IsNet b 0 m fun i j ↦ digitPoint (d i j) 0) (γ : Fin m × (Fin m → Option (Fin b)))
+    (c : Fin b) {lo hi : ℕ} (hlo : m ≤ lo + γ.1 + 1) :
+    unifAvg (fun ρ₀ : Scramble b m ↦ wwin d ρ₀ γ c lo hi ^ 2) ≤
+      (cellSet d γ c).card * (((b : ℝ) / 2) ^ 2 * (2 * digWt b lo ^ 2)) := by
+  have hb0 : 0 < b := lt_trans Nat.zero_lt_one hb
+  have : Nonempty (Equiv.Perm (Fin b)) := ⟨Equiv.refl _⟩
+  rw [show (fun ρ₀ : Scramble b m ↦ wwin d ρ₀ γ c lo hi ^ 2) =
+    fun ρ₀ ↦ (∑ q ∈ cellSet d γ c ×ˢ levelWin m lo hi, wX d q (ρ₀ (wν d q))) ^ 2 from
+    funext fun ρ₀ ↦ by rw [wwin_eq_sum],
+    unifAvg_sq_sum_eq (injOn_wν hb0 hnet γ c hlo) (fun q _ ↦ unifAvg_wX d q)]
+  calc ∑ q ∈ cellSet d γ c ×ˢ levelWin m lo hi, unifAvg (fun pm ↦ wX d q pm ^ 2)
+      ≤ ∑ q ∈ cellSet d γ c ×ˢ levelWin m lo hi, ((b : ℝ) / 2) ^ 2 * digWt b q.2 ^ 2 := by
+        refine Finset.sum_le_sum fun q _ ↦ ?_
+        refine (unifAvg_mono fun pm ↦ ?_).trans (le_of_eq (unifAvg_const _))
+        rw [← mul_pow, ← sq_abs]
+        exact pow_le_pow_left₀ (abs_nonneg _) (abs_wX_le hb0 d q pm) 2
+    _ = (cellSet d γ c).card * (((b : ℝ) / 2) ^ 2 *
+          ∑ k ∈ levelWin m lo hi, digWt b k ^ 2) := by
+        rw [Finset.sum_product]
+        dsimp only
+        rw [Finset.sum_congr rfl fun x _ ↦ (Finset.mul_sum _ _ _).symm, Finset.sum_const,
+          nsmul_eq_mul]
+    _ ≤ (cellSet d γ c).card * (((b : ℝ) / 2) ^ 2 * (2 * digWt b lo ^ 2)) := by
+        gcongr
+        exact sum_levelWin_digWt_sq_le hb m lo hi
+
+/-- **Fourth moment of a window of a node weight**: `E[w⁴] ≤ 3 (#(cell) (b/2)² ·
+2 b^{-2(lo+1)})²` for a deep window. -/
+theorem unifAvg_pow_four_wwin_le (hb : 1 < b) {m : ℕ}
+    {d : Fin (b ^ m) → Fin 2 → Fin m → Fin b} (hnet : IsNet b 0 m fun i j ↦ digitPoint (d i j) 0)
+    (γ : Fin m × (Fin m → Option (Fin b))) (c : Fin b) {lo hi : ℕ} (hlo : m ≤ lo + γ.1 + 1) :
+    unifAvg (fun ρ₀ : Scramble b m ↦ wwin d ρ₀ γ c lo hi ^ 4) ≤
+      3 * ((cellSet d γ c).card * (((b : ℝ) / 2) ^ 2 * (2 * digWt b lo ^ 2))) ^ 2 := by
+  have hb0 : 0 < b := lt_trans Nat.zero_lt_one hb
+  have : Nonempty (Equiv.Perm (Fin b)) := ⟨Equiv.refl _⟩
+  rw [show (fun ρ₀ : Scramble b m ↦ wwin d ρ₀ γ c lo hi ^ 4) =
+    fun ρ₀ ↦ (∑ q ∈ cellSet d γ c ×ˢ levelWin m lo hi, wX d q (ρ₀ (wν d q))) ^ 4 from
+    funext fun ρ₀ ↦ by rw [wwin_eq_sum]]
+  refine (unifAvg_pow_four_sum_le (injOn_wν hb0 hnet γ c hlo) (fun q _ ↦ unifAvg_wX d q)
+    (β := fun q ↦ (b : ℝ) / 2 * digWt b q.2) fun q _ pm ↦ abs_wX_le hb0 d q pm).trans ?_
+  have hs : ∑ q ∈ cellSet d γ c ×ˢ levelWin m lo hi, ((b : ℝ) / 2 * digWt b q.2) ^ 2 ≤
+      (cellSet d γ c).card * (((b : ℝ) / 2) ^ 2 * (2 * digWt b lo ^ 2)) := by
+    rw [Finset.sum_product]
+    dsimp only
+    rw [Finset.sum_congr rfl fun x _ ↦ (Finset.sum_congr rfl fun k _ ↦ mul_pow _ _ 2).trans
+      (Finset.mul_sum _ _ _).symm, Finset.sum_const, nsmul_eq_mul]
+    gcongr
+    exact sum_levelWin_digWt_sq_le hb m lo hi
+  have h0 : 0 ≤ ∑ q ∈ cellSet d γ c ×ˢ levelWin m lo hi, ((b : ℝ) / 2 * digWt b q.2) ^ 2 :=
+    Finset.sum_nonneg fun q _ ↦ sq_nonneg _
+  gcongr
+
+end RQMCMarkov.OwenScrambling
+
+/-
+Copyright (c) 2026 Robert Kirkby. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Robert Kirkby
+-/
+
+/-!
+# The conditional variance of the product integrand concentrates
+
+Towards Loh's (2003) CLT for `f(x) = x₀ x₁` on scrambled `(0,m,2)`-nets (post #2). Given the
+scramble `ρ₀` of coordinate `0`, the error sum `S` is a sum of independent node terms of the
+scramble of coordinate `1` (`LohGeneralProd`), with conditional variance
+`V(ρ₀) = Σ_γ E_π[nodeTerm²]` (`condVar`). This module proves that `V` concentrates around its
+mean: `E|V - E V| = o(E V)`. Each level `k₁` of the tree of coordinate `1` contributes a term
+depending mainly on the level `m - k₁ - 1` of `ρ₀`; keeping only a window of `J` levels of `ρ₀`
+below it (`condVarWin`, `levelVar`) changes `V` by `O(b^{-J} m/n)` in mean
+(`unifAvg_abs_condVar_sub_le`), and the windowed levels `k₁, k₁'` with `|k₁ - k₁'| ≥ J` are
+independent (`unifAvg_levelVar_mul`), so the windowed variance has variance `O(J m/n²)`
+(`unifAvg_sq_condVarWin_sub_le`). Since `E V ≍ m/n`, choosing `J ≍ √m` gives the
+concentration.
+
+## Main results
+
+* `dform`, `abs_dform_le`, `unifAvg_sq_dform_le`, `abs_unifAvg_sq_dform_sub_le`: the linear
+  forms `Σ_c (π c - (b-1)/2) w_c` and their second moments.
+* `unifAvg_sq_sum_le_of_sq`, `unifAvg_sq_sub_eq`, `unifAvg_sq_sum_sub_le_of_near`: moment
+  bounds for sums of nonnegative terms that are independent at distance `≥ J`.
+* `condVar`, `levelVar`, `condVarWin`; `unifAvg_abs_condVar_sub_le` (window truncation),
+  `unifAvg_sq_levelVar_le`, `unifAvg_levelVar_mul` (independence of distant windows),
+  `unifAvg_sq_condVarWin_sub_le` (variance of the windowed part), `unifAvg_abs_sub_avg_le`,
+  `sq_unifAvg_abs_le` (assembling the concentration bound).
+* `nodeBound`, `abs_nodeTerm_le`, `unifAvg_sum_sq_nodeBound_le`,
+  `unifAvg_sum_pow_four_nodeBound_le`: the moments of the bounds
+  `b^{-(k+1)} (b/2) Σ_c |w_{γ,c}|` on the node terms.
+-/
+
+namespace RQMCMarkov.OwenScrambling
+
+open MeasureTheory ProbabilityTheory Finset Filter
+open scoped Topology
+
+variable {b : ℕ}
+
+/-- The linear form `Σ_c (π c - (b-1)/2) w_c` of a weight vector `w`. -/
+noncomputable def dform (pm : Equiv.Perm (Fin b)) (w : Fin b → ℝ) : ℝ :=
+  ∑ c, cdig pm c * w c
+
+/-- `|Σ_c (π c - (b-1)/2) w_c| ≤ (b/2) Σ_c |w_c|`. -/
+theorem abs_dform_le (pm : Equiv.Perm (Fin b)) (w : Fin b → ℝ) :
+    |dform pm w| ≤ (b : ℝ) / 2 * ∑ c, |w c| := by
+  unfold dform
+  refine (Finset.abs_sum_le_sum_abs _ _).trans ?_
+  rw [Finset.mul_sum]
+  refine Finset.sum_le_sum fun c _ ↦ ?_
+  rw [abs_mul]
+  exact mul_le_mul_of_nonneg_right (abs_cdig_le pm c) (abs_nonneg _)
+
+/-- `(Σ_c |w_c|)² ≤ b Σ_c w_c²`. -/
+theorem sq_sum_abs_le (w : Fin b → ℝ) : (∑ c, |w c|) ^ 2 ≤ b * ∑ c, w c ^ 2 := by
+  have h := sq_sum_le_card_mul_sum_sq (s := (Finset.univ : Finset (Fin b))) (f := fun c ↦ |w c|)
+  rw [Finset.card_univ, Fintype.card_fin] at h
+  simpa only [sq_abs] using h
+
+/-- `(Σ_c |w_c|)⁴ ≤ b³ Σ_c w_c⁴`. -/
+theorem pow_four_sum_abs_le (w : Fin b → ℝ) : (∑ c, |w c|) ^ 4 ≤ (b : ℝ) ^ 3 * ∑ c, w c ^ 4 := by
+  have h1 := sq_sum_abs_le w
+  have h2 := sq_sum_le_card_mul_sum_sq (s := (Finset.univ : Finset (Fin b)))
+    (f := fun c ↦ w c ^ 2)
+  rw [Finset.card_univ, Fintype.card_fin] at h2
+  have h0 : 0 ≤ (∑ c, |w c|) ^ 2 := sq_nonneg _
+  have hb0 : (0 : ℝ) ≤ b := Nat.cast_nonneg _
+  calc (∑ c, |w c|) ^ 4 = ((∑ c, |w c|) ^ 2) ^ 2 := by ring
+    _ ≤ ((b : ℝ) * ∑ c, w c ^ 2) ^ 2 := pow_le_pow_left₀ h0 h1 2
+    _ = (b : ℝ) ^ 2 * (∑ c, w c ^ 2) ^ 2 := by ring
+    _ ≤ (b : ℝ) ^ 2 * ((b : ℝ) * ∑ c, (w c ^ 2) ^ 2) := mul_le_mul_of_nonneg_left h2 (by positivity)
+    _ = (b : ℝ) ^ 3 * ∑ c, w c ^ 4 := by
+        rw [Finset.sum_congr rfl fun c _ ↦ (pow_mul (w c) 2 2).symm]
+        ring
+
+/-- The linear form is linear in the weights. -/
+theorem dform_sub (pm : Equiv.Perm (Fin b)) (w w' : Fin b → ℝ) :
+    dform pm w - dform pm w' = dform pm (fun c ↦ w c - w' c) := by
+  unfold dform
+  rw [← Finset.sum_sub_distrib]
+  exact Finset.sum_congr rfl fun c _ ↦ by ring
+
+/-- The linear form is additive in the weights. -/
+theorem dform_add (pm : Equiv.Perm (Fin b)) (w w' : Fin b → ℝ) :
+    dform pm w + dform pm w' = dform pm (fun c ↦ w c + w' c) := by
+  unfold dform
+  rw [← Finset.sum_add_distrib]
+  exact Finset.sum_congr rfl fun c _ ↦ by ring
+
+/-- `E_π[(Σ_c (π c - (b-1)/2) w_c)²] ≤ (b/2)² b Σ_c w_c²`. -/
+theorem unifAvg_sq_dform_le (hb : 0 < b) (w : Fin b → ℝ) :
+    unifAvg (fun pm : Equiv.Perm (Fin b) ↦ dform pm w ^ 2) ≤
+      ((b : ℝ) / 2) ^ 2 * (b * ∑ c, w c ^ 2) := by
+  have : Nonempty (Equiv.Perm (Fin b)) := ⟨Equiv.refl _⟩
+  refine (unifAvg_mono fun pm ↦ ?_).trans (le_of_eq (unifAvg_const _))
+  have hb2 : (0 : ℝ) ≤ (b : ℝ) / 2 := by positivity
+  calc dform pm w ^ 2 = |dform pm w| ^ 2 := (sq_abs _).symm
+    _ ≤ ((b : ℝ) / 2 * ∑ c, |w c|) ^ 2 := pow_le_pow_left₀ (abs_nonneg _) (abs_dform_le pm w) 2
+    _ = ((b : ℝ) / 2) ^ 2 * (∑ c, |w c|) ^ 2 := by ring
+    _ ≤ ((b : ℝ) / 2) ^ 2 * (b * ∑ c, w c ^ 2) :=
+        mul_le_mul_of_nonneg_left (sq_sum_abs_le w) (sq_nonneg _)
+
+/-- **Lipschitz bound for the second moment of the linear form**:
+`|E[(dform w)²] - E[(dform w')²]| ≤ (b/2)² (Σ_c |w_c - w'_c|)(Σ_c |w_c + w'_c|)`. -/
+theorem abs_unifAvg_sq_dform_sub_le (w w' : Fin b → ℝ) :
+    |unifAvg (fun pm : Equiv.Perm (Fin b) ↦ dform pm w ^ 2) -
+        unifAvg (fun pm : Equiv.Perm (Fin b) ↦ dform pm w' ^ 2)| ≤
+      ((b : ℝ) / 2) ^ 2 * ((∑ c, |w c - w' c|) * ∑ c, |w c + w' c|) := by
+  rcases isEmpty_or_nonempty (Fin b) with hb | hb
+  · have : b = 0 := by
+      by_contra h
+      exact hb.false ⟨0, Nat.pos_of_ne_zero h⟩
+    subst this
+    simp [unifAvg, dform]
+  have hb0 : 0 < b := Fin.pos (Classical.arbitrary (Fin b))
+  have : Nonempty (Equiv.Perm (Fin b)) := ⟨Equiv.refl _⟩
+  have e : unifAvg (fun pm : Equiv.Perm (Fin b) ↦ dform pm w ^ 2) -
+      unifAvg (fun pm : Equiv.Perm (Fin b) ↦ dform pm w' ^ 2) =
+      unifAvg (fun pm ↦ dform pm (fun c ↦ w c - w' c) * dform pm (fun c ↦ w c + w' c)) := by
+    rw [sub_eq_add_neg, ← neg_one_mul, ← unifAvg_const_mul, ← unifAvg_add]
+    congr 1
+    funext pm
+    rw [← dform_sub, ← dform_add]
+    ring
+  rw [e]
+  refine (abs_unifAvg_le _).trans ((unifAvg_mono fun pm ↦ ?_).trans (le_of_eq (unifAvg_const _)))
+  rw [abs_mul]
+  have hb2 : (0 : ℝ) ≤ (b : ℝ) / 2 := by positivity
+  calc |dform pm (fun c ↦ w c - w' c)| * |dform pm (fun c ↦ w c + w' c)|
+      ≤ ((b : ℝ) / 2 * ∑ c, |w c - w' c|) * ((b : ℝ) / 2 * ∑ c, |w c + w' c|) :=
+        mul_le_mul (abs_dform_le _ _) (abs_dform_le _ _) (abs_nonneg _)
+          (mul_nonneg hb2 (Finset.sum_nonneg fun c _ ↦ abs_nonneg _))
+    _ = ((b : ℝ) / 2) ^ 2 * ((∑ c, |w c - w' c|) * ∑ c, |w c + w' c|) := by ring
+
+/-- **Second moment of a sum from second-moment bounds of its terms**: if
+`E[Y_a²] ≤ u_a²` with `u_a ≥ 0`, then `E[(Σ_a Y_a)²] ≤ (Σ_a u_a)²`. -/
+theorem unifAvg_sq_sum_le_of_sq {R ι : Type*} [Fintype R] (s : Finset ι) (Y : ι → R → ℝ)
+    {u : ι → ℝ} (hu : ∀ a ∈ s, 0 ≤ u a)
+    (hY : ∀ a ∈ s, unifAvg (fun r ↦ Y a r ^ 2) ≤ u a ^ 2) :
+    unifAvg (fun r ↦ (∑ a ∈ s, Y a r) ^ 2) ≤ (∑ a ∈ s, u a) ^ 2 := by
+  have e : (fun r ↦ (∑ a ∈ s, Y a r) ^ 2) = fun r ↦ ∑ a ∈ s, ∑ a' ∈ s, Y a r * Y a' r :=
+    funext fun r ↦ by rw [sq, Finset.sum_mul_sum]
+  rw [e, unifAvg_sum, sq, Finset.sum_mul_sum]
+  refine Finset.sum_le_sum fun a ha ↦ ?_
+  rw [unifAvg_sum]
+  refine Finset.sum_le_sum fun a' ha' ↦ ?_
+  have h := sq_unifAvg_mul_le (Y a) (Y a')
+  have hprod : (unifAvg fun r ↦ Y a r ^ 2) * (unifAvg fun r ↦ Y a' r ^ 2) ≤ (u a * u a') ^ 2 := by
+    rw [mul_pow]
+    exact mul_le_mul (hY a ha) (hY a' ha') (unifAvg_nonneg fun r ↦ sq_nonneg _)
+      (sq_nonneg _)
+  exact (le_abs_self _).trans (abs_le_of_sq_le_sq (h.trans hprod)
+    (mul_nonneg (hu a ha) (hu a' ha')))
+
+/-- The variance identity `E[(Z - E Z)²] = E[Z²] - (E Z)²`. -/
+theorem unifAvg_sq_sub_eq {R : Type*} [Fintype R] [Nonempty R] (Z : R → ℝ) :
+    unifAvg (fun r ↦ (Z r - unifAvg Z) ^ 2) = unifAvg (fun r ↦ Z r ^ 2) - unifAvg Z ^ 2 := by
+  have e : (fun r ↦ (Z r - unifAvg Z) ^ 2) =
+      fun r ↦ (Z r ^ 2 + (-2 * unifAvg Z) * Z r) + unifAvg Z ^ 2 :=
+    funext fun r ↦ by ring
+  rw [e, unifAvg_add, unifAvg_add, unifAvg_const_mul, unifAvg_const]
+  ring
+
+/-- **Variance of a sum of nonnegative terms independent at distance `≥ J`**: if
+`E[X_k X_{k'}] = E X_k E X_{k'}` whenever `|k - k'| ≥ J` and `E[X_k²] ≤ A`, then
+`E[(Σ_k X_k - E Σ_k X_k)²] ≤ 2 J m A`. -/
+theorem unifAvg_sq_sum_sub_le_of_near {R : Type*} [Fintype R] [Nonempty R] {m J : ℕ}
+    (X : Fin m → R → ℝ) (hX0 : ∀ k r, 0 ≤ X k r)
+    (hind : ∀ k k' : Fin m, (k : ℕ) + J ≤ k' ∨ (k' : ℕ) + J ≤ k →
+      unifAvg (fun r ↦ X k r * X k' r) = unifAvg (X k) * unifAvg (X k'))
+    {A : ℝ} (hA : ∀ k, unifAvg (fun r ↦ X k r ^ 2) ≤ A) :
+    unifAvg (fun r ↦ (∑ k, X k r - unifAvg (fun r' ↦ ∑ k, X k r')) ^ 2) ≤ 2 * J * m * A := by
+  classical
+  rcases Nat.eq_zero_or_pos m with hm | hm
+  · subst hm
+    simp [unifAvg]
+  have hA0 : 0 ≤ A := (unifAvg_nonneg fun r ↦ sq_nonneg _).trans (hA ⟨0, hm⟩)
+  rw [unifAvg_sq_sub_eq]
+  have e1 : unifAvg (fun r ↦ (∑ k, X k r) ^ 2) =
+      ∑ k, ∑ k', unifAvg (fun r ↦ X k r * X k' r) := by
+    rw [show (fun r ↦ (∑ k, X k r) ^ 2) = fun r ↦ ∑ k, ∑ k', X k r * X k' r from
+      funext fun r ↦ by rw [sq, Finset.sum_mul_sum], unifAvg_sum]
+    exact Finset.sum_congr rfl fun k _ ↦ unifAvg_sum _ _
+  have e2 : unifAvg (fun r' ↦ ∑ k, X k r') ^ 2 =
+      ∑ k, ∑ k', unifAvg (X k) * unifAvg (X k') := by
+    rw [unifAvg_sum, sq, Finset.sum_mul_sum]
+  rw [e1, e2]
+  simp only [← Finset.sum_sub_distrib]
+  have hterm : ∀ k k' : Fin m, unifAvg (fun r ↦ X k r * X k' r) -
+      unifAvg (X k) * unifAvg (X k') ≤
+      if (k : ℕ) < k' + J ∧ (k' : ℕ) < k + J then A else 0 := by
+    intro k k'
+    split_ifs with h
+    · have h1 : unifAvg (fun r ↦ X k r * X k' r) ≤ A := by
+        have h3 : unifAvg (fun r ↦ X k r * X k' r) ≤
+            unifAvg (fun r ↦ 1 / 2 * (X k r ^ 2 + X k' r ^ 2)) :=
+          unifAvg_mono fun r ↦ by nlinarith [sq_nonneg (X k r - X k' r)]
+        rw [unifAvg_const_mul, unifAvg_add] at h3
+        linarith [hA k, hA k']
+      have h2 : 0 ≤ unifAvg (X k) * unifAvg (X k') :=
+        mul_nonneg (unifAvg_nonneg (hX0 k)) (unifAvg_nonneg (hX0 k'))
+      linarith
+    · rw [hind k k' (by omega), sub_self]
+  have hcard : ∀ k : Fin m, (Finset.univ.filter fun k' : Fin m ↦
+      (k : ℕ) < k' + J ∧ (k' : ℕ) < k + J).card ≤ 2 * J := by
+    intro k
+    refine (Finset.card_le_card_of_injOn (fun k' : Fin m ↦ (k' : ℕ))
+      (t := Finset.Ico ((k : ℕ) + 1 - J) ((k : ℕ) + J)) (fun k' hk' ↦ ?_)
+      (fun x _ y _ hxy ↦ Fin.ext hxy)).trans ?_
+    · rw [Finset.mem_coe, Finset.mem_filter] at hk'
+      rw [Finset.mem_coe, Finset.mem_Ico]
+      dsimp only
+      omega
+    · rw [Nat.card_Ico]
+      omega
+  calc ∑ k, ∑ k', (unifAvg (fun r ↦ X k r * X k' r) - unifAvg (X k) * unifAvg (X k'))
+      ≤ ∑ k : Fin m, ∑ k' : Fin m,
+          (if (k : ℕ) < k' + J ∧ (k' : ℕ) < k + J then A else 0) :=
+        Finset.sum_le_sum fun k _ ↦ Finset.sum_le_sum fun k' _ ↦ hterm k k'
+    _ = ∑ k : Fin m, A * (Finset.univ.filter fun k' : Fin m ↦
+          (k : ℕ) < k' + J ∧ (k' : ℕ) < k + J).card := by
+        refine Finset.sum_congr rfl fun k _ ↦ ?_
+        rw [Finset.sum_ite, Finset.sum_const_zero, add_zero, Finset.sum_const, nsmul_eq_mul,
+          mul_comm]
+    _ ≤ ∑ _k : Fin m, A * (2 * J : ℕ) := by
+        refine Finset.sum_le_sum fun k _ ↦ mul_le_mul_of_nonneg_left ?_ hA0
+        exact_mod_cast hcard k
+    _ = 2 * J * m * A := by
+        rw [Finset.sum_const, Finset.card_univ, Fintype.card_fin, nsmul_eq_mul]
+        push_cast
+        ring
+
+/-- `x y ≤ (λ x² + y²/λ)/2` for `λ > 0`. -/
+theorem mul_le_half_add_sq {x y l : ℝ} (hl : 0 < l) : x * y ≤ (l * x ^ 2 + y ^ 2 / l) / 2 := by
+  have h : l * (2 * (x * y)) ≤ l * (l * x ^ 2 + y ^ 2 / l) := by
+    rw [mul_add, ← mul_assoc, mul_div_cancel₀ _ hl.ne']
+    nlinarith [sq_nonneg (l * x - y)]
+  have := le_of_mul_le_mul_left h hl
+  linarith
+
+/-- `Σ x_a² ≤ (Σ x_a)²` for nonnegative `x`. -/
+theorem sum_sq_le_sq_sum {ι : Type*} (s : Finset ι) {x : ι → ℝ} (hx : ∀ a ∈ s, 0 ≤ x a) :
+    ∑ a ∈ s, x a ^ 2 ≤ (∑ a ∈ s, x a) ^ 2 := by
+  rw [sq (∑ a ∈ s, x a), Finset.sum_mul]
+  refine Finset.sum_le_sum fun a ha ↦ ?_
+  rw [sq]
+  exact mul_le_mul_of_nonneg_left (Finset.single_le_sum hx ha) (hx a ha)
+
+/-- `b^{-(k+1)} b^{-(m-k)} = b^{-(m+1)}` for `k < m`. -/
+theorem digWt_mul_digWt {m : ℕ} (k : Fin m) : digWt b k * digWt b (m - k - 1) = digWt b m := by
+  unfold digWt
+  rw [← mul_inv, ← pow_add]
+  congr 2
+  have := k.isLt
+  omega
+
+/-- `b^{-(l+J+1)} = b^{-(l+1)} b^{-J}`. -/
+theorem digWt_add (b l J : ℕ) : digWt b (l + J) = digWt b l * ((b : ℝ) ^ J)⁻¹ := by
+  unfold digWt
+  rw [← mul_inv, ← pow_add]
+  congr 2
+  omega
+
+/-- **The points of a level are partitioned by the nodes and their children**:
+`Σ_t Σ_c #(cellSet (k, t) c) = n`. -/
+theorem sum_card_cellSet {m n : ℕ} (d : Fin n → Fin 2 → Fin m → Fin b) (k : Fin m) :
+    ∑ t : Fin m → Option (Fin b), ∑ c, ((cellSet d (k, t) c).card : ℝ) = n := by
+  classical
+  have h1 : ∀ t : Fin m → Option (Fin b),
+      ∑ c, ((cellSet d (k, t) c).card : ℝ) = (nodeSet d (k, t)).card := by
+    intro t
+    rw [Finset.card_eq_sum_card_fiberwise (f := fun i ↦ d i 1 k) (t := Finset.univ)
+      (fun _ _ ↦ Finset.mem_univ _), Nat.cast_sum]
+    rfl
+  rw [Finset.sum_congr rfl fun t _ ↦ h1 t]
+  have h2 := Finset.card_eq_sum_card_fiberwise (s := (Finset.univ : Finset (Fin n)))
+    (f := fun i ↦ truncDigits k (d i 1)) (t := Finset.univ) (fun _ _ ↦ Finset.mem_univ _)
+  rw [Finset.card_univ, Fintype.card_fin] at h2
+  have h3 : (∑ t : Fin m → Option (Fin b), (nodeSet d (k, t)).card) = n := h2.symm
+  rw [← Nat.cast_sum, h3]
+
+/-- The total over all nodes: `Σ_γ Σ_c #(cellSet γ c) = m n`. -/
+theorem sum_card_cellSet_all {m n : ℕ} (d : Fin n → Fin 2 → Fin m → Fin b) :
+    ∑ γ : Fin m × (Fin m → Option (Fin b)), ∑ c, ((cellSet d γ c).card : ℝ) = m * n := by
+  rw [Fintype.sum_prod_type]
+  simp only [sum_card_cellSet d, Finset.sum_const, Finset.card_univ, Fintype.card_fin,
+    nsmul_eq_mul]
+
+/-- Splitting the top window of levels at `lo + J`. -/
+theorem wwin_split_top {m n : ℕ} (d : Fin n → Fin 2 → Fin m → Fin b) (ρ₀ : Scramble b m)
+    (γ : Fin m × (Fin m → Option (Fin b))) (c : Fin b) (lo J : ℕ) :
+    wwin d ρ₀ γ c lo m = wwin d ρ₀ γ c lo (lo + J) + wwin d ρ₀ γ c (lo + J) m := by
+  unfold wwin
+  rw [← Finset.sum_add_distrib]
+  refine Finset.sum_congr rfl fun i _ ↦ ?_
+  rw [← Finset.sum_filter_add_sum_filter_not (levelWin m lo m)
+    (fun k : Fin m ↦ (k : ℕ) < lo + J)]
+  congr 1
+  · congr 1
+    ext k
+    simp only [levelWin, Finset.mem_filter, Finset.mem_univ, true_and]
+    have := k.isLt
+    omega
+  · congr 1
+    ext k
+    simp only [levelWin, Finset.mem_filter, Finset.mem_univ, true_and]
+    have := k.isLt
+    omega
+
+/-- A window part of a node weight depends only on the levels in the window. -/
+theorem wwin_congr {m n : ℕ} (d : Fin n → Fin 2 → Fin m → Fin b) {ρ ρ' : Scramble b m}
+    (γ : Fin m × (Fin m → Option (Fin b))) (c : Fin b) {lo hi : ℕ}
+    (h : ∀ k ∈ levelWin m lo hi, ∀ x, ρ (k, x) = ρ' (k, x)) :
+    wwin d ρ γ c lo hi = wwin d ρ' γ c lo hi := by
+  unfold wwin
+  exact Finset.sum_congr rfl fun i _ ↦ Finset.sum_congr rfl fun k hk ↦ by rw [h k hk]
+
+/-- `E_π[(a · dform π w)²] = a² E_π[(dform π w)²]`. -/
+theorem unifAvg_sq_mul_dform (a : ℝ) (w : Fin b → ℝ) :
+    unifAvg (fun pm : Equiv.Perm (Fin b) ↦ (a * dform pm w) ^ 2) =
+      a ^ 2 * unifAvg (fun pm : Equiv.Perm (Fin b) ↦ dform pm w ^ 2) := by
+  rw [← unifAvg_const_mul]
+  congr 1
+  funext pm
+  ring
+
+/-- The conditional variance `V(ρ₀) = Σ_γ E_π[nodeTerm²]` of `S` given `ρ₀`. -/
+noncomputable def condVar {m n : ℕ} (d : Fin n → Fin 2 → Fin m → Fin b) (ρ₀ : Scramble b m) :
+    ℝ :=
+  ∑ γ, unifAvg (fun pm ↦ nodeTerm d ρ₀ γ pm ^ 2)
+
+/-- The level-`k` part of the windowed conditional variance: only the levels
+`m - k - 1 ≤ k₀ < m - k - 1 + J` of `ρ₀` are kept in the node weights. -/
+noncomputable def levelVar {m n : ℕ} (d : Fin n → Fin 2 → Fin m → Fin b) (ρ₀ : Scramble b m)
+    (J : ℕ) (k : Fin m) : ℝ :=
+  ∑ t : Fin m → Option (Fin b), unifAvg (fun pm : Equiv.Perm (Fin b) ↦
+    (digWt b k * dform pm (fun c ↦ wwin d ρ₀ (k, t) c (m - k - 1) (m - k - 1 + J))) ^ 2)
+
+/-- The windowed conditional variance `Σ_k levelVar`. -/
+noncomputable def condVarWin {m n : ℕ} (d : Fin n → Fin 2 → Fin m → Fin b) (ρ₀ : Scramble b m)
+    (J : ℕ) : ℝ :=
+  ∑ k : Fin m, levelVar d ρ₀ J k
+
+/-- **One node: the window truncation error of the conditional variance**:
+`E|E_π[nodeTerm²] - E_π[windowed²]| ≤ 5 b (b/2)⁴ b^{-J} b^{-2(m+1)} #(points below γ)`. -/
+theorem unifAvg_abs_nodeVar_sub_le (hb : 1 < b) {m : ℕ}
+    {d : Fin (b ^ m) → Fin 2 → Fin m → Fin b} (hnet : IsNet b 0 m fun i j ↦ digitPoint (d i j) 0)
+    (k : Fin m) (t : Fin m → Option (Fin b)) (J : ℕ) :
+    unifAvg (fun ρ₀ : Scramble b m ↦ |unifAvg (fun pm ↦ nodeTerm d ρ₀ (k, t) pm ^ 2) -
+      unifAvg (fun pm : Equiv.Perm (Fin b) ↦
+        (digWt b k * dform pm (fun c ↦ wwin d ρ₀ (k, t) c (m - k - 1) (m - k - 1 + J))) ^ 2)|) ≤
+      5 * b * ((b : ℝ) / 2) ^ 4 * ((b : ℝ) ^ J)⁻¹ * digWt b m ^ 2 *
+        ∑ c, ((cellSet d (k, t) c).card : ℝ) := by
+  have hb0 : 0 < b := lt_trans Nat.zero_lt_one hb
+  have hbR : (0 : ℝ) < b := Nat.cast_pos.2 hb0
+  set lo := m - (k : ℕ) - 1 with hlo
+  set h := (b : ℝ) / 2 with hh
+  set l : ℝ := (b : ℝ) ^ J with hl
+  have hl0 : 0 < l := pow_pos hbR J
+  set wk := digWt b k with hwk
+  set W := digWt b lo with hW
+  have hhlo : m ≤ lo + (k, t).1 + 1 := by
+    change m ≤ lo + (k : ℕ) + 1
+    have := k.isLt
+    omega
+  have hhloJ : m ≤ lo + J + (k, t).1 + 1 := by
+    change m ≤ lo + J + (k : ℕ) + 1
+    have := k.isLt
+    omega
+  set α := wk ^ 2 * h ^ 2 * (l * b) / 2 with hα
+  set β := wk ^ 2 * h ^ 2 * (l⁻¹ * b) with hβ
+  have hα0 : 0 ≤ α := by positivity
+  have hβ0 : 0 ≤ β := by positivity
+  -- the pointwise bound
+  have hpt : ∀ ρ₀ : Scramble b m, |unifAvg (fun pm ↦ nodeTerm d ρ₀ (k, t) pm ^ 2) -
+      unifAvg (fun pm : Equiv.Perm (Fin b) ↦
+        (digWt b k * dform pm (fun c ↦ wwin d ρ₀ (k, t) c lo (lo + J))) ^ 2)| ≤
+      ∑ c, (α * wwin d ρ₀ (k, t) c (lo + J) m ^ 2 + β * wwin d ρ₀ (k, t) c lo m ^ 2 +
+        β * wwin d ρ₀ (k, t) c lo (lo + J) ^ 2) := by
+    intro ρ₀
+    set w : Fin b → ℝ := fun c ↦ wwin d ρ₀ (k, t) c lo m with hw
+    set wJ : Fin b → ℝ := fun c ↦ wwin d ρ₀ (k, t) c lo (lo + J) with hwJ
+    set D : Fin b → ℝ := fun c ↦ wwin d ρ₀ (k, t) c (lo + J) m with hD
+    have hwD : ∀ c, w c - wJ c = D c := fun c ↦ by
+      rw [hw, hwJ, hD]
+      simp only
+      rw [wwin_split_top d ρ₀ (k, t) c lo J]
+      ring
+    have hnt : ∀ pm, nodeTerm d ρ₀ (k, t) pm = wk * dform pm w := fun pm ↦ by
+      change digWt b k * ∑ c, cdig pm c * nodeW d ρ₀ (k, t) c = wk * ∑ c, cdig pm c * w c
+      congr 1
+      refine Finset.sum_congr rfl fun c _ ↦ ?_
+      rw [hw, nodeW_eq_wwin hb0 hnet]
+    rw [show (fun pm ↦ nodeTerm d ρ₀ (k, t) pm ^ 2) = fun pm ↦ (wk * dform pm w) ^ 2 from
+      funext fun pm ↦ by rw [hnt], unifAvg_sq_mul_dform, unifAvg_sq_mul_dform, ← mul_sub,
+      abs_mul, abs_of_nonneg (sq_nonneg _)]
+    have h1 := abs_unifAvg_sq_dform_sub_le w wJ
+    have h2 : (∑ c, |w c - wJ c|) * (∑ c, |w c + wJ c|) ≤
+        (l * (b * ∑ c, D c ^ 2) + (b * ∑ c, (2 * w c ^ 2 + 2 * wJ c ^ 2)) / l) / 2 := by
+      refine (mul_le_half_add_sq hl0).trans ?_
+      have hA : (∑ c, |w c - wJ c|) ^ 2 ≤ b * ∑ c, D c ^ 2 := by
+        rw [Finset.sum_congr rfl fun c _ ↦ by rw [hwD c]]
+        exact sq_sum_abs_le D
+      have hB : (∑ c, |w c + wJ c|) ^ 2 ≤ b * ∑ c, (2 * w c ^ 2 + 2 * wJ c ^ 2) := by
+        refine (sq_sum_abs_le _).trans ?_
+        gcongr with c
+        nlinarith [sq_nonneg (w c - wJ c)]
+      have := mul_le_mul_of_nonneg_left hA hl0.le
+      have := div_le_div_of_nonneg_right hB hl0.le
+      linarith
+    calc wk ^ 2 * |unifAvg (fun pm ↦ dform pm w ^ 2) - unifAvg (fun pm ↦ dform pm wJ ^ 2)|
+        ≤ wk ^ 2 * (h ^ 2 * ((∑ c, |w c - wJ c|) * ∑ c, |w c + wJ c|)) :=
+          mul_le_mul_of_nonneg_left h1 (sq_nonneg _)
+      _ ≤ wk ^ 2 * (h ^ 2 * ((l * (b * ∑ c, D c ^ 2) +
+            (b * ∑ c, (2 * w c ^ 2 + 2 * wJ c ^ 2)) / l) / 2)) := by
+          gcongr
+      _ = ∑ c, (α * D c ^ 2 + β * w c ^ 2 + β * wJ c ^ 2) := by
+          rw [hα, hβ, Finset.sum_add_distrib, Finset.sum_add_distrib, ← Finset.mul_sum,
+            ← Finset.mul_sum, ← Finset.mul_sum, Finset.sum_add_distrib, ← Finset.mul_sum,
+            ← Finset.mul_sum]
+          field_simp
+          ring
+  refine (unifAvg_mono hpt).trans ?_
+  rw [unifAvg_sum]
+  simp only [unifAvg_add, unifAvg_const_mul]
+  -- the moments
+  have hD2 : ∀ c, unifAvg (fun ρ₀ : Scramble b m ↦ wwin d ρ₀ (k, t) c (lo + J) m ^ 2) ≤
+      (cellSet d (k, t) c).card * (h ^ 2 * (2 * (W * l⁻¹) ^ 2)) := fun c ↦ by
+    have := unifAvg_sq_wwin_le hb hnet (k, t) c (lo := lo + J) (hi := m) hhloJ
+    rwa [digWt_add] at this
+  have hw2 : ∀ c, unifAvg (fun ρ₀ : Scramble b m ↦ wwin d ρ₀ (k, t) c lo m ^ 2) ≤
+      (cellSet d (k, t) c).card * (h ^ 2 * (2 * W ^ 2)) := fun c ↦
+    unifAvg_sq_wwin_le hb hnet (k, t) c (lo := lo) (hi := m) hhlo
+  have hwJ2 : ∀ c, unifAvg (fun ρ₀ : Scramble b m ↦ wwin d ρ₀ (k, t) c lo (lo + J) ^ 2) ≤
+      (cellSet d (k, t) c).card * (h ^ 2 * (2 * W ^ 2)) := fun c ↦
+    unifAvg_sq_wwin_le hb hnet (k, t) c (lo := lo) (hi := lo + J) hhlo
+  have hWm : wk * W = digWt b m := digWt_mul_digWt k
+  calc ∑ c, (α * unifAvg (fun ρ₀ : Scramble b m ↦ wwin d ρ₀ (k, t) c (lo + J) m ^ 2) +
+        β * unifAvg (fun ρ₀ : Scramble b m ↦ wwin d ρ₀ (k, t) c lo m ^ 2) +
+        β * unifAvg (fun ρ₀ : Scramble b m ↦ wwin d ρ₀ (k, t) c lo (lo + J) ^ 2))
+      ≤ ∑ c, (α * ((cellSet d (k, t) c).card * (h ^ 2 * (2 * (W * l⁻¹) ^ 2))) +
+          β * ((cellSet d (k, t) c).card * (h ^ 2 * (2 * W ^ 2))) +
+          β * ((cellSet d (k, t) c).card * (h ^ 2 * (2 * W ^ 2)))) := by
+        gcongr with c
+        · exact hD2 c
+        · exact hw2 c
+        · exact hwJ2 c
+    _ = 5 * b * h ^ 4 * l⁻¹ * (wk * W) ^ 2 * ∑ c, ((cellSet d (k, t) c).card : ℝ) := by
+        rw [Finset.mul_sum]
+        refine Finset.sum_congr rfl fun c _ ↦ ?_
+        rw [hα, hβ]
+        field_simp
+        ring
+    _ = _ := by rw [hWm]
+
+/-- **The window truncation error of the conditional variance**:
+`E|V - V_J| ≤ 5 b (b/2)⁴ b^{-J} b^{-2(m+1)} m n`. -/
+theorem unifAvg_abs_condVar_sub_le (hb : 1 < b) {m : ℕ}
+    {d : Fin (b ^ m) → Fin 2 → Fin m → Fin b} (hnet : IsNet b 0 m fun i j ↦ digitPoint (d i j) 0)
+    (J : ℕ) :
+    unifAvg (fun ρ₀ : Scramble b m ↦ |condVar d ρ₀ - condVarWin d ρ₀ J|) ≤
+      5 * b * ((b : ℝ) / 2) ^ 4 * ((b : ℝ) ^ J)⁻¹ * digWt b m ^ 2 * (m * (b ^ m : ℕ)) := by
+  have hpt : ∀ ρ₀ : Scramble b m, |condVar d ρ₀ - condVarWin d ρ₀ J| ≤
+      ∑ k : Fin m, ∑ t : Fin m → Option (Fin b),
+        |unifAvg (fun pm ↦ nodeTerm d ρ₀ (k, t) pm ^ 2) -
+          unifAvg (fun pm : Equiv.Perm (Fin b) ↦ (digWt b k *
+            dform pm (fun c ↦ wwin d ρ₀ (k, t) c (m - k - 1) (m - k - 1 + J))) ^ 2)| := by
+    intro ρ₀
+    unfold condVar condVarWin levelVar
+    rw [Fintype.sum_prod_type, ← Finset.sum_sub_distrib]
+    refine (Finset.abs_sum_le_sum_abs _ _).trans (Finset.sum_le_sum fun k _ ↦ ?_)
+    rw [← Finset.sum_sub_distrib]
+    exact Finset.abs_sum_le_sum_abs _ _
+  refine (unifAvg_mono hpt).trans ?_
+  rw [unifAvg_sum]
+  simp only [unifAvg_sum]
+  calc ∑ k : Fin m, ∑ t : Fin m → Option (Fin b), unifAvg (fun ρ₀ : Scramble b m ↦
+        |unifAvg (fun pm ↦ nodeTerm d ρ₀ (k, t) pm ^ 2) -
+          unifAvg (fun pm : Equiv.Perm (Fin b) ↦ (digWt b k *
+            dform pm (fun c ↦ wwin d ρ₀ (k, t) c (m - k - 1) (m - k - 1 + J))) ^ 2)|)
+      ≤ ∑ k : Fin m, ∑ t : Fin m → Option (Fin b),
+          5 * b * ((b : ℝ) / 2) ^ 4 * ((b : ℝ) ^ J)⁻¹ * digWt b m ^ 2 *
+            ∑ c, ((cellSet d (k, t) c).card : ℝ) :=
+        Finset.sum_le_sum fun k _ ↦ Finset.sum_le_sum fun t _ ↦
+          unifAvg_abs_nodeVar_sub_le hb hnet k t J
+    _ = 5 * b * ((b : ℝ) / 2) ^ 4 * ((b : ℝ) ^ J)⁻¹ * digWt b m ^ 2 * (m * (b ^ m : ℕ)) := by
+        rw [← sum_card_cellSet_all d, Fintype.sum_prod_type, Finset.mul_sum]
+        refine Finset.sum_congr rfl fun k _ ↦ ?_
+        rw [Finset.mul_sum]
+
+/-- The level parts of the windowed conditional variance are nonnegative. -/
+theorem levelVar_nonneg {m n : ℕ} (d : Fin n → Fin 2 → Fin m → Fin b) (ρ₀ : Scramble b m)
+    (J : ℕ) (k : Fin m) : 0 ≤ levelVar d ρ₀ J k :=
+  Finset.sum_nonneg fun _ _ ↦ unifAvg_nonneg fun _ ↦ sq_nonneg _
+
+/-- **The second moment of a level part**: `E[levelVar²] ≤ (4 b (b/2)⁴ b^{-2(m+1)} n)²`. -/
+theorem unifAvg_sq_levelVar_le (hb : 1 < b) {m : ℕ}
+    {d : Fin (b ^ m) → Fin 2 → Fin m → Fin b} (hnet : IsNet b 0 m fun i j ↦ digitPoint (d i j) 0)
+    (J : ℕ) (k : Fin m) :
+    unifAvg (fun ρ₀ : Scramble b m ↦ levelVar d ρ₀ J k ^ 2) ≤
+      (4 * b * ((b : ℝ) / 2) ^ 4 * digWt b m ^ 2 * (b ^ m : ℕ)) ^ 2 := by
+  have hb0 : 0 < b := lt_trans Nat.zero_lt_one hb
+  set lo := m - (k : ℕ) - 1 with hlo
+  set h := (b : ℝ) / 2 with hh
+  set wk := digWt b k with hwk
+  set W := digWt b lo with hW
+  set Y : (Fin m → Option (Fin b)) × Fin b → Scramble b m → ℝ :=
+    fun a ρ₀ ↦ wwin d ρ₀ (k, a.1) a.2 lo (lo + J) ^ 2 with hY
+  have hhlo : ∀ t : Fin m → Option (Fin b), m ≤ lo + (k, t).1 + 1 := fun t ↦ by
+    change m ≤ lo + (k : ℕ) + 1
+    have := k.isLt
+    omega
+  have hle : ∀ ρ₀, levelVar d ρ₀ J k ≤ wk ^ 2 * (h ^ 2 * b) * ∑ a, Y a ρ₀ := by
+    intro ρ₀
+    unfold levelVar
+    rw [Fintype.sum_prod_type, Finset.mul_sum]
+    refine Finset.sum_le_sum fun t _ ↦ ?_
+    rw [unifAvg_sq_mul_dform]
+    refine (mul_le_mul_of_nonneg_left (unifAvg_sq_dform_le hb0 _) (sq_nonneg _)).trans
+      (le_of_eq ?_)
+    rw [hY, hwk, hh]
+    simp only [Finset.mul_sum]
+    refine Finset.sum_congr rfl fun c _ ↦ ?_
+    ring
+  have hpt : ∀ ρ₀, levelVar d ρ₀ J k ^ 2 ≤ (wk ^ 2 * (h ^ 2 * b)) ^ 2 * (∑ a, Y a ρ₀) ^ 2 := by
+    intro ρ₀
+    rw [← mul_pow]
+    exact pow_le_pow_left₀ (levelVar_nonneg d ρ₀ J k) (hle ρ₀) 2
+  refine (unifAvg_mono hpt).trans ?_
+  rw [unifAvg_const_mul]
+  set u : (Fin m → Option (Fin b)) × Fin b → ℝ :=
+    fun a ↦ 2 * ((cellSet d (k, a.1) a.2).card * (h ^ 2 * (2 * W ^ 2))) with hu
+  have hu0 : ∀ a ∈ (Finset.univ : Finset ((Fin m → Option (Fin b)) × Fin b)), 0 ≤ u a :=
+    fun a _ ↦ by rw [hu]; positivity
+  have hY2 : ∀ a ∈ (Finset.univ : Finset ((Fin m → Option (Fin b)) × Fin b)),
+      unifAvg (fun ρ₀ ↦ Y a ρ₀ ^ 2) ≤ u a ^ 2 := by
+    intro a _
+    have h4 := unifAvg_pow_four_wwin_le hb hnet (k, a.1) a.2 (lo := lo) (hi := lo + J)
+      (hhlo a.1)
+    rw [hY]
+    refine le_trans (le_of_eq ?_) (h4.trans ?_)
+    · congr 1
+      funext ρ₀
+      ring
+    · have e : u a = 2 * (((cellSet d (k, a.1) a.2).card : ℝ) *
+          (((b : ℝ) / 2) ^ 2 * (2 * digWt b lo ^ 2))) := rfl
+      rw [e]
+      have : 0 ≤ (((cellSet d (k, a.1) a.2).card : ℝ) *
+          (((b : ℝ) / 2) ^ 2 * (2 * digWt b lo ^ 2))) ^ 2 := sq_nonneg _
+      nlinarith
+  have hsum := unifAvg_sq_sum_le_of_sq Finset.univ Y hu0 hY2
+  have hus : ∑ a, u a = 4 * h ^ 2 * W ^ 2 * (b ^ m : ℕ) := by
+    rw [hu, Fintype.sum_prod_type]
+    simp only
+    rw [← sum_card_cellSet d k, Finset.mul_sum]
+    refine Finset.sum_congr rfl fun t _ ↦ ?_
+    rw [Finset.mul_sum]
+    exact Finset.sum_congr rfl fun c _ ↦ by ring
+  rw [hus] at hsum
+  have hWm : wk * W = digWt b m := digWt_mul_digWt k
+  calc (wk ^ 2 * (h ^ 2 * b)) ^ 2 * unifAvg (fun ρ₀ ↦ (∑ a, Y a ρ₀) ^ 2)
+      ≤ (wk ^ 2 * (h ^ 2 * b)) ^ 2 * (4 * h ^ 2 * W ^ 2 * (b ^ m : ℕ)) ^ 2 :=
+        mul_le_mul_of_nonneg_left hsum (sq_nonneg _)
+    _ = (4 * b * h ^ 4 * (wk * W) ^ 2 * (b ^ m : ℕ)) ^ 2 := by ring
+    _ = _ := by rw [hWm]
+
+/-- **Distant level parts are independent**: if `k + J ≤ k'` or `k' + J ≤ k`, the windows of
+levels of `ρ₀` used by `levelVar k` and `levelVar k'` are disjoint. -/
+theorem unifAvg_levelVar_mul {m : ℕ} (d : Fin (b ^ m) → Fin 2 → Fin m → Fin b) (J : ℕ)
+    (k k' : Fin m) (hkk : (k : ℕ) + J ≤ k' ∨ (k' : ℕ) + J ≤ k) :
+    unifAvg (fun ρ₀ : Scramble b m ↦ levelVar d ρ₀ J k * levelVar d ρ₀ J k') =
+      unifAvg (fun ρ₀ : Scramble b m ↦ levelVar d ρ₀ J k) *
+        unifAvg (fun ρ₀ : Scramble b m ↦ levelVar d ρ₀ J k') := by
+  have : Nonempty (Equiv.Perm (Fin b)) := ⟨Equiv.refl _⟩
+  have hk := k.isLt
+  have hk' := k'.isLt
+  refine unifAvg_mul_of_disjoint (fun γ₀ : Fin m × (Fin m → Option (Fin b)) ↦
+    m - (k : ℕ) - 1 ≤ γ₀.1 ∧ (γ₀.1 : ℕ) < m - (k : ℕ) - 1 + J) (fun ρ ρ' hρ ↦ ?_)
+    (fun ρ ρ' hρ ↦ ?_)
+  · unfold levelVar
+    refine Finset.sum_congr rfl fun t _ ↦ ?_
+    rw [show (fun c ↦ wwin d ρ (k, t) c (m - k - 1) (m - k - 1 + J)) =
+      fun c ↦ wwin d ρ' (k, t) c (m - k - 1) (m - k - 1 + J) from funext fun c ↦
+        wwin_congr d (k, t) c fun k₀ hk₀ x ↦ hρ (k₀, x) (Finset.mem_filter.1 hk₀).2]
+  · unfold levelVar
+    refine Finset.sum_congr rfl fun t _ ↦ ?_
+    rw [show (fun c ↦ wwin d ρ (k', t) c (m - k' - 1) (m - k' - 1 + J)) =
+      fun c ↦ wwin d ρ' (k', t) c (m - k' - 1) (m - k' - 1 + J) from funext fun c ↦
+        wwin_congr d (k', t) c fun k₀ hk₀ x ↦ hρ (k₀, x) (by
+          have := (Finset.mem_filter.1 hk₀).2
+          simp only
+          omega)]
+
+/-- **The variance of the windowed conditional variance**:
+`E[(V_J - E V_J)²] ≤ 2 J m (4 b (b/2)⁴ b^{-2(m+1)} n)²`. -/
+theorem unifAvg_sq_condVarWin_sub_le (hb : 1 < b) {m : ℕ}
+    {d : Fin (b ^ m) → Fin 2 → Fin m → Fin b} (hnet : IsNet b 0 m fun i j ↦ digitPoint (d i j) 0)
+    (J : ℕ) :
+    unifAvg (fun ρ₀ : Scramble b m ↦ (condVarWin d ρ₀ J -
+      unifAvg (fun ρ₀' : Scramble b m ↦ condVarWin d ρ₀' J)) ^ 2) ≤
+      2 * J * m * (4 * b * ((b : ℝ) / 2) ^ 4 * digWt b m ^ 2 * (b ^ m : ℕ)) ^ 2 := by
+  have hb0 : 0 < b := lt_trans Nat.zero_lt_one hb
+  have : Nonempty (Equiv.Perm (Fin b)) := ⟨Equiv.refl _⟩
+  exact unifAvg_sq_sum_sub_le_of_near (fun k ρ₀ ↦ levelVar d ρ₀ J k)
+    (fun k ρ₀ ↦ levelVar_nonneg d ρ₀ J k) (fun k k' hkk ↦ unifAvg_levelVar_mul d J k k' hkk)
+    (fun k ↦ unifAvg_sq_levelVar_le hb hnet J k)
+
+/-- `E|V - E V| ≤ 2 E|V - W| + E|W - E W|`. -/
+theorem unifAvg_abs_sub_avg_le {R : Type*} [Fintype R] [Nonempty R] (V W : R → ℝ) :
+    unifAvg (fun r ↦ |V r - unifAvg V|) ≤
+      2 * unifAvg (fun r ↦ |V r - W r|) + unifAvg (fun r ↦ |W r - unifAvg W|) := by
+  have hEW : |unifAvg W - unifAvg V| ≤ unifAvg (fun r ↦ |V r - W r|) := by
+    have e : unifAvg W - unifAvg V = unifAvg (fun r ↦ W r - V r) := by
+      rw [sub_eq_add_neg, ← neg_one_mul, ← unifAvg_const_mul, ← unifAvg_add]
+      congr 1
+      funext r
+      ring
+    rw [e]
+    refine (abs_unifAvg_le _).trans (le_of_eq ?_)
+    congr 1
+    funext r
+    rw [abs_sub_comm]
+  have hpt : ∀ r, |V r - unifAvg V| ≤ |V r - W r| + |W r - unifAvg W| +
+      |unifAvg W - unifAvg V| := fun r ↦ by
+    calc |V r - unifAvg V| = |(V r - W r) + (W r - unifAvg W) + (unifAvg W - unifAvg V)| := by
+          ring_nf
+      _ ≤ _ := (abs_add_le _ _).trans (add_le_add_left (abs_add_le _ _) _) |>.trans
+          (le_of_eq (by ring))
+  have h := unifAvg_mono hpt
+  rw [unifAvg_add, unifAvg_add, unifAvg_const] at h
+  linarith
+
+/-- `(E|Z|)² ≤ E[Z²]`. -/
+theorem sq_unifAvg_abs_le {R : Type*} [Fintype R] (Z : R → ℝ) :
+    (unifAvg fun r ↦ |Z r|) ^ 2 ≤ unifAvg fun r ↦ Z r ^ 2 := by
+  refine (sq_unifAvg_le _).trans (le_of_eq ?_)
+  congr 1
+  funext r
+  rw [sq_abs]
+
+/-- The bound `b^{-(k+1)} (b/2) Σ_c |w_{γ,c}|` on the node term of `γ = (k, t)`. -/
+noncomputable def nodeBound {m n : ℕ} (d : Fin n → Fin 2 → Fin m → Fin b) (ρ₀ : Scramble b m)
+    (γ : Fin m × (Fin m → Option (Fin b))) : ℝ :=
+  digWt b γ.1 * ((b : ℝ) / 2) * ∑ c, |nodeW d ρ₀ γ c|
+
+/-- The node terms are bounded by `nodeBound`. -/
+theorem abs_nodeTerm_le (hb : 0 < b) {m n : ℕ} (d : Fin n → Fin 2 → Fin m → Fin b)
+    (ρ₀ : Scramble b m) (γ : Fin m × (Fin m → Option (Fin b))) (pm : Equiv.Perm (Fin b)) :
+    |nodeTerm d ρ₀ γ pm| ≤ nodeBound d ρ₀ γ := by
+  change |digWt b γ.1 * dform pm (nodeW d ρ₀ γ)| ≤ _
+  rw [abs_mul, abs_of_pos (digWt_pos hb _), nodeBound, mul_assoc]
+  exact mul_le_mul_of_nonneg_left (abs_dform_le pm _) (digWt_pos hb _).le
+
+/-- **Second moments of the node bounds**: `E Σ_γ nodeBound² ≤ 2 b (b/2)⁴ b^{-2(m+1)} m n`. -/
+theorem unifAvg_sum_sq_nodeBound_le (hb : 1 < b) {m : ℕ}
+    {d : Fin (b ^ m) → Fin 2 → Fin m → Fin b} (hnet : IsNet b 0 m fun i j ↦ digitPoint (d i j) 0) :
+    unifAvg (fun ρ₀ : Scramble b m ↦ ∑ γ, nodeBound d ρ₀ γ ^ 2) ≤
+      2 * b * ((b : ℝ) / 2) ^ 4 * digWt b m ^ 2 * (m * (b ^ m : ℕ)) := by
+  have hb0 : 0 < b := lt_trans Nat.zero_lt_one hb
+  rw [unifAvg_sum]
+  have hγ : ∀ γ : Fin m × (Fin m → Option (Fin b)),
+      unifAvg (fun ρ₀ : Scramble b m ↦ nodeBound d ρ₀ γ ^ 2) ≤
+        2 * b * ((b : ℝ) / 2) ^ 4 * digWt b m ^ 2 * ∑ c, ((cellSet d γ c).card : ℝ) := by
+    intro γ
+    have hhlo : m ≤ (m - (γ.1 : ℕ) - 1) + γ.1 + 1 := by
+      have := γ.1.isLt
+      omega
+    have hpt : ∀ ρ₀ : Scramble b m, nodeBound d ρ₀ γ ^ 2 ≤
+        ∑ c, (digWt b γ.1 ^ 2 * ((b : ℝ) / 2) ^ 2 * b) *
+          wwin d ρ₀ γ c (m - γ.1 - 1) m ^ 2 := by
+      intro ρ₀
+      unfold nodeBound
+      rw [mul_pow, mul_pow]
+      have := sq_sum_abs_le (fun c ↦ nodeW d ρ₀ γ c)
+      simp only [nodeW_eq_wwin hb0 hnet] at this ⊢
+      calc digWt b γ.1 ^ 2 * ((b : ℝ) / 2) ^ 2 * (∑ c, |wwin d ρ₀ γ c (m - γ.1 - 1) m|) ^ 2
+          ≤ digWt b γ.1 ^ 2 * ((b : ℝ) / 2) ^ 2 *
+            (b * ∑ c, wwin d ρ₀ γ c (m - γ.1 - 1) m ^ 2) :=
+            mul_le_mul_of_nonneg_left this (by positivity)
+        _ = _ := by
+            rw [Finset.mul_sum, Finset.mul_sum]
+            exact Finset.sum_congr rfl fun c _ ↦ by ring
+    refine (unifAvg_mono hpt).trans ?_
+    rw [unifAvg_sum]
+    simp only [unifAvg_const_mul]
+    calc ∑ c, digWt b γ.1 ^ 2 * ((b : ℝ) / 2) ^ 2 * b *
+          unifAvg (fun ρ₀ : Scramble b m ↦ wwin d ρ₀ γ c (m - γ.1 - 1) m ^ 2)
+        ≤ ∑ c, digWt b γ.1 ^ 2 * ((b : ℝ) / 2) ^ 2 * b *
+          ((cellSet d γ c).card * (((b : ℝ) / 2) ^ 2 * (2 * digWt b (m - γ.1 - 1) ^ 2))) := by
+          gcongr with c
+          exact unifAvg_sq_wwin_le hb hnet γ c hhlo
+      _ = 2 * b * ((b : ℝ) / 2) ^ 4 * (digWt b γ.1 * digWt b (m - γ.1 - 1)) ^ 2 *
+            ∑ c, ((cellSet d γ c).card : ℝ) := by
+          rw [Finset.mul_sum]
+          exact Finset.sum_congr rfl fun c _ ↦ by ring
+      _ = _ := by rw [digWt_mul_digWt]
+  refine (Finset.sum_le_sum fun γ _ ↦ hγ γ).trans (le_of_eq ?_)
+  rw [← Finset.mul_sum, sum_card_cellSet_all]
+
+/-- **Fourth moments of the node bounds**: `E Σ_γ nodeBound⁴ ≤ 12 b³ (b/2)⁸ b^{-4(m+1)} m n²`. -/
+theorem unifAvg_sum_pow_four_nodeBound_le (hb : 1 < b) {m : ℕ}
+    {d : Fin (b ^ m) → Fin 2 → Fin m → Fin b} (hnet : IsNet b 0 m fun i j ↦ digitPoint (d i j) 0) :
+    unifAvg (fun ρ₀ : Scramble b m ↦ ∑ γ, nodeBound d ρ₀ γ ^ 4) ≤
+      12 * (b : ℝ) ^ 3 * ((b : ℝ) / 2) ^ 8 * digWt b m ^ 4 * (m * ((b ^ m : ℕ) : ℝ) ^ 2) := by
+  have hb0 : 0 < b := lt_trans Nat.zero_lt_one hb
+  rw [unifAvg_sum]
+  have hγ : ∀ γ : Fin m × (Fin m → Option (Fin b)),
+      unifAvg (fun ρ₀ : Scramble b m ↦ nodeBound d ρ₀ γ ^ 4) ≤
+        12 * (b : ℝ) ^ 3 * ((b : ℝ) / 2) ^ 8 * digWt b m ^ 4 *
+          ∑ c, ((cellSet d γ c).card : ℝ) ^ 2 := by
+    intro γ
+    have hhlo : m ≤ (m - (γ.1 : ℕ) - 1) + γ.1 + 1 := by
+      have := γ.1.isLt
+      omega
+    have hpt : ∀ ρ₀ : Scramble b m, nodeBound d ρ₀ γ ^ 4 ≤
+        ∑ c, (digWt b γ.1 ^ 4 * ((b : ℝ) / 2) ^ 4 * (b : ℝ) ^ 3) *
+          wwin d ρ₀ γ c (m - γ.1 - 1) m ^ 4 := by
+      intro ρ₀
+      unfold nodeBound
+      rw [mul_pow, mul_pow]
+      have := pow_four_sum_abs_le (fun c ↦ nodeW d ρ₀ γ c)
+      simp only [nodeW_eq_wwin hb0 hnet] at this ⊢
+      calc digWt b γ.1 ^ 4 * ((b : ℝ) / 2) ^ 4 * (∑ c, |wwin d ρ₀ γ c (m - γ.1 - 1) m|) ^ 4
+          ≤ digWt b γ.1 ^ 4 * ((b : ℝ) / 2) ^ 4 *
+            ((b : ℝ) ^ 3 * ∑ c, wwin d ρ₀ γ c (m - γ.1 - 1) m ^ 4) :=
+            mul_le_mul_of_nonneg_left this (by positivity)
+        _ = _ := by
+            rw [Finset.mul_sum, Finset.mul_sum]
+            exact Finset.sum_congr rfl fun c _ ↦ by ring
+    refine (unifAvg_mono hpt).trans ?_
+    rw [unifAvg_sum]
+    simp only [unifAvg_const_mul]
+    calc ∑ c, digWt b γ.1 ^ 4 * ((b : ℝ) / 2) ^ 4 * (b : ℝ) ^ 3 *
+          unifAvg (fun ρ₀ : Scramble b m ↦ wwin d ρ₀ γ c (m - γ.1 - 1) m ^ 4)
+        ≤ ∑ c, digWt b γ.1 ^ 4 * ((b : ℝ) / 2) ^ 4 * (b : ℝ) ^ 3 *
+          (3 * ((cellSet d γ c).card * (((b : ℝ) / 2) ^ 2 *
+            (2 * digWt b (m - γ.1 - 1) ^ 2))) ^ 2) := by
+          gcongr with c
+          exact unifAvg_pow_four_wwin_le hb hnet γ c hhlo
+      _ = 12 * (b : ℝ) ^ 3 * ((b : ℝ) / 2) ^ 8 * (digWt b γ.1 * digWt b (m - γ.1 - 1)) ^ 4 *
+            ∑ c, ((cellSet d γ c).card : ℝ) ^ 2 := by
+          rw [Finset.mul_sum]
+          exact Finset.sum_congr rfl fun c _ ↦ by ring
+      _ = _ := by rw [digWt_mul_digWt]
+  refine (Finset.sum_le_sum fun γ _ ↦ hγ γ).trans ?_
+  rw [← Finset.mul_sum]
+  refine mul_le_mul_of_nonneg_left ?_ (by positivity)
+  rw [Fintype.sum_prod_type]
+  calc ∑ k : Fin m, ∑ t : Fin m → Option (Fin b), ∑ c, ((cellSet d (k, t) c).card : ℝ) ^ 2
+      ≤ ∑ _k : Fin m, ((b ^ m : ℕ) : ℝ) ^ 2 := by
+        refine Finset.sum_le_sum fun k _ ↦ ?_
+        rw [← sum_card_cellSet d k, ← Fintype.sum_prod_type', ← Fintype.sum_prod_type']
+        exact sum_sq_le_sq_sum _ fun a _ ↦ Nat.cast_nonneg _
+    _ = m * ((b ^ m : ℕ) : ℝ) ^ 2 := by
+        rw [Finset.sum_const, Finset.card_univ, Fintype.card_fin, nsmul_eq_mul]
+
+end RQMCMarkov.OwenScrambling
+
+/-
+Copyright (c) 2026 Robert Kirkby. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Robert Kirkby
+-/
+
+/-!
+# Loh's CLT for a non-additive integrand: `x₀ x₁` on scrambled `(0,m,2)`-nets (post #2)
+
+Post #2: with a digital net and Owen's nested uniform scramble "a standard CLT applies" (Loh
+2003). `LohCLT` proves this, normalised by the standard deviation, for additive integrands,
+where the error is a sum of independent terms given the scramble. For non-additive integrands
+almost all of the variance comes from the scramble itself (`LohVariance`,
+`tendsto_avg_variance_given_scramble_div`), and that argument fails. This module proves the CLT
+for the simplest non-additive integrands, `f(x) = a x₀ x₁ + g₀(x₀) + g₁(x₁)` with `a ≠ 0` and
+`C¹` coordinates `g_j` (the smooth integrands whose mixed derivative `∂²f/∂x₀∂x₁ = a` is a
+non-zero constant), for every sequence of `(0,m,2)`-nets in base `b ≥ 2`
+(`tendstoInDistribution_scrambledLaw_bilinAdd`), in particular for `x₀ x₁`
+(`tendstoInDistribution_scrambledLaw_prodFn`) and the Hammersley nets
+(`tendstoInDistribution_scrambledLaw_prodFn_hammersley`).
+
+**The argument (not Loh's).** Loh uses Stein's method. Here the scramble of coordinate `0` is
+conditioned on instead. Given `ρ₀`, the remainder-averaged error `S/n` of `x₀ x₁` is a sum of
+independent centred terms, one for each node of the tree of coordinate `1`
+(`LohGeneralProd.prodS_eq_sum_nodeTerm`), so a conditional Lindeberg (Lyapunov) bound applies
+(`LohGeneralFinite.tendsto_unifAvg_cexp_nodeSum`). Its random conditional variance `V(ρ₀)`
+concentrates (`LohGeneralConc`), because it is spread over the `m` levels of the tree of
+coordinate `1`, which use asymptotically independent windows of levels of `ρ₀`. The normal limit
+comes from the `m ≍ log n` levels, as Loh's does. The remainders and the additive part add a
+vanishing share of the variance.
+
+## Main results
+
+* `unifAvg_fin_two`, `unifAvg_sq_prodS`: `E[S²] = E_{ρ₀} V(ρ₀)`.
+* `integral_sq_sub_eq_variance_add`, `variance_scrambledLaw_eq_of_condMean`: the law of total
+  variance for the scrambled estimator.
+* `unifAvg_condVar_ge`: `E V ≥ (m (b-1)⁴/(64 b⁴) - 4)/n`, from Owen's lower bound
+  (`LohVariance.variance_scrambledLaw_prodFn`).
+* `tendsto_unifAvg_cexp_prodS`: the CLT for `S` itself, `S/√(E S²) ⇒ N(0,1)` in characteristic
+  functions.
+* `tendstoInDistribution_scrambledLaw_of_condMean`: the CLT for any Lipschitz `f` whose
+  remainder-averaged error is `a S/n`.
+* `tendstoInDistribution_scrambledLaw_bilinAdd`, `tendstoInDistribution_scrambledLaw_prodFn`,
+  `tendstoInDistribution_scrambledLaw_prodFn_hammersley`: **Loh's CLT for `a x₀ x₁ + g₀(x₀) +
+  g₁(x₁)`**, `(μ̂ - μ)/√Var(μ̂) ⇒ N(0,1)`.
+-/
+
+namespace RQMCMarkov.OwenScrambling
+
+open MeasureTheory ProbabilityTheory Finset Filter Complex
+open scoped Topology
+
+variable {b : ℕ}
+
+/-- Averages over pairs of scrambles are iterated averages. -/
+theorem unifAvg_fin_two {X : Type*} [Fintype X] {𝕜 : Type*} [Field 𝕜] (G : (Fin 2 → X) → 𝕜) :
+    unifAvg G = unifAvg (fun x₀ ↦ unifAvg (fun x₁ ↦ G ![x₀, x₁])) := by
+  have hs : ∑ y, G y = ∑ x₀, ∑ x₁, G ![x₀, x₁] := by
+    rw [← Fintype.sum_prod_type (f := fun p : X × X ↦ G ![p.1, p.2])]
+    refine Fintype.sum_equiv (finTwoArrowEquiv X) _ _ fun y ↦ ?_
+    congr 1
+    funext i
+    fin_cases i <;> rfl
+  unfold unifAvg
+  rw [hs, Fintype.card_fun, Fintype.card_fin, ← Finset.mul_sum, Nat.cast_pow]
+  ring
+
+/-- **The second moment of `S` given `ρ₀` is the conditional variance**:
+`E_{ρ₁}[S²] = V(ρ₀)` (the node terms are independent and centred). -/
+theorem unifAvg_sq_prodS {m n : ℕ} (d : Fin n → Fin 2 → Fin m → Fin b)
+    (ρ₀ : Scramble b m) :
+    unifAvg (fun ρ₁ : Scramble b m ↦ prodS d ![ρ₀, ρ₁] ^ 2) = condVar d ρ₀ := by
+  have : Nonempty (Equiv.Perm (Fin b)) := ⟨Equiv.refl _⟩
+  have e : (fun ρ₁ : Scramble b m ↦ prodS d ![ρ₀, ρ₁] ^ 2) = fun ρ₁ ↦
+      (∑ γ ∈ (Finset.univ : Finset (Fin m × (Fin m → Option (Fin b)))),
+        nodeTerm d ρ₀ γ (ρ₁ (id γ))) ^ 2 := by
+    funext ρ₁
+    rw [prodS_eq_sum_nodeTerm]
+    rfl
+  rw [e, unifAvg_sq_sum_eq (Set.injOn_id _) (fun γ _ ↦ unifAvg_nodeTerm d ρ₀ γ)]
+  rfl
+
+/-- `E[(X - c)²] = Var X + (E X - c)²`. -/
+theorem integral_sq_sub_eq_variance_add {Ω : Type*} {mΩ : MeasurableSpace Ω} {Q : Measure Ω}
+    [IsProbabilityMeasure Q] {X : Ω → ℝ} (hX : MemLp X 2 Q) (c : ℝ) :
+    ∫ ω, (X ω - c) ^ 2 ∂Q = Var[X; Q] + (∫ ω, X ω ∂Q - c) ^ 2 := by
+  have hX1 : Integrable X Q := hX.integrable one_le_two
+  have hX2 : Integrable (fun ω ↦ X ω ^ 2) Q := hX.integrable_sq
+  rw [variance_eq_sub hX]
+  have e : (fun ω ↦ (X ω - c) ^ 2) = fun ω ↦ (X ω ^ 2 + (-2 * c) * X ω) + c ^ 2 :=
+    funext fun ω ↦ by ring
+  rw [e, integral_add (f := fun ω ↦ X ω ^ 2 + (-2 * c) * X ω) (g := fun _ ↦ c ^ 2)
+    (hX2.add (hX1.const_mul _)) (integrable_const _),
+    integral_add (f := fun ω ↦ X ω ^ 2) (g := fun ω ↦ (-2 * c) * X ω) hX2 (hX1.const_mul _),
+    integral_const_mul, integral_const, probReal_univ, one_smul]
+  change _ = ∫ ω, X ω ^ 2 ∂Q - (∫ ω, X ω ∂Q) ^ 2 + _
+  ring
+
+/-- **The law of total variance for the scrambled estimator**: if the remainder-averaged
+estimator is `E[μ̂ | ρ] = μ + a S(ρ)`, then `Var(μ̂) = E_ρ[(a S)²] + E_ρ[Var(μ̂ | ρ)]`. -/
+theorem variance_scrambledLaw_eq_of_condMean (hb : 0 < b) {m : ℕ}
+    {d : Fin (b ^ m) → Fin 2 → Fin m → Fin b} {f : (Fin 2 → ℝ) → ℝ} (hfm : Measurable f)
+    (hf : MemLp f 2 (uniformCube 2)) {a : ℝ} {S : (Fin 2 → Scramble b m) → ℝ}
+    (hmean : ∀ ρ, ∫ u, scrambledEstimate f d ρ u ∂(remLaw 2 (b ^ m)) =
+      ∫ x, f x ∂(uniformCube 2) + a * S ρ) :
+    Var[fun x ↦ x; scrambledLaw f d] = unifAvg (fun ρ ↦ (a * S ρ) ^ 2) +
+      unifAvg (fun ρ ↦ Var[scrambledEstimate f d ρ; remLaw 2 (b ^ m)]) := by
+  have hQ := isProbabilityMeasure_remLaw 2 (b ^ m)
+  rw [variance_scrambledLaw_eq_sum hb (Nat.pow_pos hb).ne' hfm hf d, ← unifAvg_add]
+  change unifAvg _ = _
+  congr 1
+  funext ρ
+  rw [integral_sq_sub_eq_variance_add (memLp_scrambledEstimate hb hf d ρ), hmean ρ]
+  ring
+
+/-- **The remainders' share of the variance**: for `f` `L`-Lipschitz on the cube,
+`E_ρ[Var(μ̂ | ρ)] ≤ 4 L² / n³`. -/
+theorem unifAvg_variance_le (hb : 0 < b) {m : ℕ} {d : Fin (b ^ m) → Fin 2 → Fin m → Fin b}
+    {f : (Fin 2 → ℝ) → ℝ} (hf : MemLp f 2 (uniformCube 2)) {L : ℝ} (hL0 : 0 ≤ L)
+    (hL : ∀ x x' : Fin 2 → ℝ, (∀ j, x j ∈ Set.Ico (0 : ℝ) 1) → (∀ j, x' j ∈ Set.Ico (0 : ℝ) 1) →
+      |f x - f x'| ≤ L * ∑ j, |x j - x' j|) :
+    unifAvg (fun ρ ↦ Var[scrambledEstimate f d ρ; remLaw 2 (b ^ m)]) ≤
+      4 * L ^ 2 * (((b : ℝ) ^ m) ^ 3)⁻¹ := by
+  have hbm : (0 : ℝ) < (b : ℝ) ^ m := pow_pos (Nat.cast_pos.2 hb) m
+  have h := avg_variance_scrambledEstimate hb (Nat.pow_pos hb).ne' hf d
+  have hc := cellResVar_le (D := m) hb hf hL0 hL
+  unfold unifAvg
+  rw [h, Nat.cast_pow]
+  calc ((b : ℝ) ^ m)⁻¹ * cellResVar b m f ≤ ((b : ℝ) ^ m)⁻¹ * (L * 2 * ((b : ℝ) ^ m)⁻¹) ^ 2 :=
+        mul_le_mul_of_nonneg_left (by exact_mod_cast hc) (inv_nonneg.2 hbm.le)
+    _ = 4 * L ^ 2 * (((b : ℝ) ^ m) ^ 3)⁻¹ := by
+        field_simp
+        ring
+
+/-- `∫ x₀ x₁ = 1/4` over the unit square. -/
+theorem integral_prodFn : ∫ x, prodFn x ∂(uniformCube 2) = 1 / 4 := by
+  have := isProbabilityMeasure_uniformIco
+  have h := integral_pi_eval_mul (ν := uniformIco) (g := fun x : ℝ ↦ x) (h := fun x : ℝ ↦ x)
+    aestronglyMeasurable_id aestronglyMeasurable_id (j := (0 : Fin 2)) (k := 1) (by decide)
+  rw [integral_id_uniformIco] at h
+  unfold prodFn
+  rw [h]
+  norm_num
+
+/-- `x₀ x₁` is `1`-Lipschitz on the cube in the `ℓ¹` distance. -/
+theorem abs_prodFn_sub_le {x x' : Fin 2 → ℝ} (hx : ∀ j, x j ∈ Set.Ico (0 : ℝ) 1)
+    (hx' : ∀ j, x' j ∈ Set.Ico (0 : ℝ) 1) :
+    |prodFn x - prodFn x'| ≤ 1 * ∑ j, |x j - x' j| := by
+  rw [prodFn, prodFn, Fin.sum_univ_two, one_mul]
+  have e : x 0 * x 1 - x' 0 * x' 1 = x 0 * (x 1 - x' 1) + x' 1 * (x 0 - x' 0) := by ring
+  rw [e]
+  have h0 : |x 0| ≤ 1 := abs_le.2 ⟨by linarith [(hx 0).1], (hx 0).2.le⟩
+  have h1 : |x' 1| ≤ 1 := abs_le.2 ⟨by linarith [(hx' 1).1], (hx' 1).2.le⟩
+  calc |x 0 * (x 1 - x' 1) + x' 1 * (x 0 - x' 0)|
+      ≤ |x 0| * |x 1 - x' 1| + |x' 1| * |x 0 - x' 0| := by
+        rw [← abs_mul, ← abs_mul]
+        exact abs_add_le _ _
+    _ ≤ 1 * |x 1 - x' 1| + 1 * |x 0 - x' 0| := by gcongr
+    _ = |x 0 - x' 0| + |x 1 - x' 1| := by ring
+
+/-- `E_ρ[S²] = E_{ρ₀} V(ρ₀)`. -/
+theorem unifAvg_sq_prodS_eq {m n : ℕ} (d : Fin n → Fin 2 → Fin m → Fin b) :
+    unifAvg (fun ρ : Fin 2 → Scramble b m ↦ prodS d ρ ^ 2) =
+      unifAvg (fun ρ₀ : Scramble b m ↦ condVar d ρ₀) := by
+  rw [unifAvg_fin_two]
+  congr 1
+  funext ρ₀
+  exact unifAvg_sq_prodS d ρ₀
+
+/-- **The mean conditional variance has order `m/n`** (Owen 1997b's lower bound for `x₀ x₁`):
+`E V ≥ (m (b-1)⁴/(64 b⁴) - 4)/n`. -/
+theorem unifAvg_condVar_ge (hb : 1 < b) {m : ℕ} (hm : 1 ≤ m)
+    {d : Fin (b ^ m) → Fin 2 → Fin m → Fin b} (hnet : IsNet b 0 m fun i j ↦ digitPoint (d i j) 0) :
+    (m * (((b : ℝ) - 1) ^ 4 / (64 * (b : ℝ) ^ 4)) - 4) * ((b : ℝ) ^ m)⁻¹ ≤
+      unifAvg (fun ρ₀ : Scramble b m ↦ condVar d ρ₀) := by
+  have hb0 : 0 < b := lt_trans Nat.zero_lt_one hb
+  have hN : (0 : ℝ) < (b : ℝ) ^ m := pow_pos (Nat.cast_pos.2 hb0) m
+  have hvar := variance_scrambledLaw_eq_of_condMean hb0 measurable_prodFn memLp_prodFn (d := d)
+    (a := 1) (S := fun ρ ↦ prodS d ρ / ((b ^ m : ℕ) : ℝ)) fun ρ ↦ by
+      rw [integral_scrambledEstimate_prodFn hb0 hnet ρ, integral_prodFn, one_mul]
+  have hlow := (variance_scrambledLaw_prodFn hb hm hnet).1
+  have hrem := unifAvg_variance_le hb0 memLp_prodFn (d := d) zero_le_one
+    fun x x' hx hx' ↦ abs_prodFn_sub_le hx hx'
+  have hS : unifAvg (fun ρ : Fin 2 → Scramble b m ↦ (1 * (prodS d ρ / ((b ^ m : ℕ) : ℝ))) ^ 2) =
+      ((b : ℝ) ^ m)⁻¹ ^ 2 * unifAvg (fun ρ₀ : Scramble b m ↦ condVar d ρ₀) := by
+    rw [← unifAvg_sq_prodS_eq, ← unifAvg_const_mul]
+    congr 1
+    funext ρ
+    rw [Nat.cast_pow]
+    field_simp
+  rw [hvar, hS] at hlow
+  have h3 : (b : ℝ) ^ (3 * m) = ((b : ℝ) ^ m) ^ 3 := by rw [← pow_mul, mul_comm]
+  rw [h3] at hlow
+  set E := unifAvg (fun ρ₀ : Scramble b m ↦ condVar d ρ₀)
+  set c := (m : ℝ) * (((b : ℝ) - 1) ^ 4 / (64 * (b : ℝ) ^ 4))
+  set N := (b : ℝ) ^ m
+  have hrem' : unifAvg (fun ρ ↦ Var[scrambledEstimate prodFn d ρ; remLaw 2 (b ^ m)]) ≤
+      4 * (N ^ 3)⁻¹ := by simpa using hrem
+  have h4 : c ≤ N ^ 3 * (N⁻¹ ^ 2 * E) + 4 := by
+    have := mul_le_mul_of_nonneg_left hrem' (pow_nonneg hN.le 3)
+    rw [show N ^ 3 * (4 * (N ^ 3)⁻¹) = 4 by field_simp] at this
+    nlinarith
+  have h5 : N ^ 3 * (N⁻¹ ^ 2 * E) = N * E := by
+    field_simp
+  rw [h5] at h4
+  rw [show (c - 4) * N⁻¹ = (c - 4) / N by ring, div_le_iff₀ hN]
+  linarith
+
+/-- `b^{-(m+1)} b^m = b^{-1}`. -/
+theorem digWt_mul_pow (hb : 0 < b) (m : ℕ) : digWt b m * (b : ℝ) ^ m = (b : ℝ)⁻¹ := by
+  have : (b : ℝ) ≠ 0 := Nat.cast_ne_zero.2 hb.ne'
+  unfold digWt
+  rw [pow_succ]
+  field_simp
+
+/-- The integer square root tends to infinity. -/
+theorem tendsto_sqrt_nat_atTop : Tendsto Nat.sqrt atTop atTop := by
+  refine tendsto_atTop_atTop.2 fun N ↦ ⟨N * N, fun m hm ↦ ?_⟩
+  exact Nat.le_sqrt.2 hm
+
+/-- `⌊√m⌋ / m → 0`. -/
+theorem tendsto_sqrt_nat_div : Tendsto (fun m : ℕ ↦ (Nat.sqrt m : ℝ) / m) atTop (𝓝 0) := by
+  have h : Tendsto (fun m : ℕ ↦ ((Nat.sqrt m : ℕ) : ℝ)⁻¹) atTop (𝓝 0) :=
+    tendsto_inv_atTop_zero.comp (tendsto_natCast_atTop_atTop.comp tendsto_sqrt_nat_atTop)
+  refine squeeze_zero' (Eventually.of_forall fun m ↦ by positivity) ?_ h
+  filter_upwards [eventually_ge_atTop 1] with m hm
+  have hs : 0 < Nat.sqrt m := Nat.sqrt_pos.2 hm
+  have hsq : Nat.sqrt m * Nat.sqrt m ≤ m := Nat.sqrt_le m
+  have hs' : (0 : ℝ) < Nat.sqrt m := Nat.cast_pos.2 hs
+  have hm' : (0 : ℝ) < m := Nat.cast_pos.2 hm
+  have hsq' : (Nat.sqrt m : ℝ) * Nat.sqrt m ≤ m := by exact_mod_cast hsq
+  rw [div_le_iff₀ hm', inv_mul_eq_div, le_div_iff₀ hs']
+  linarith
+
+/-- **The CLT for the remainder-averaged error `S` of `x₀ x₁`**: for every sequence of
+`(0,m,2)`-nets in base `b ≥ 2` and `τ_m → t`, the characteristic function of
+`S/√(E S²)` (with `E S² = E_{ρ₀} V(ρ₀)`) at `τ_m` tends to `e^{-t²/2}`. -/
+theorem tendsto_unifAvg_cexp_prodS (hb : 1 < b)
+    (d : (m : ℕ) → Fin (b ^ m) → Fin 2 → Fin m → Fin b)
+    (hnet : ∀ m, IsNet b 0 m fun i j ↦ digitPoint (d m i j) 0) {τ : ℕ → ℝ} {t : ℝ}
+    (hτ : Tendsto τ atTop (𝓝 t)) :
+    Tendsto (fun m ↦ unifAvg (fun ρ : Fin 2 → Scramble b m ↦
+      cexp ((((τ m * prodS (d m) ρ) /
+        Real.sqrt (unifAvg (fun ρ₀ : Scramble b m ↦ condVar (d m) ρ₀)) : ℝ) : ℂ) * I)))
+      atTop (𝓝 ((Real.exp (-(t ^ 2 / 2)) : ℝ) : ℂ)) := by
+  have hb0 : 0 < b := lt_trans Nat.zero_lt_one hb
+  have hbR : (0 : ℝ) < b := Nat.cast_pos.2 hb0
+  have hb1 : (0 : ℝ) < (b : ℝ) - 1 := by
+    have : (1 : ℝ) < b := Nat.one_lt_cast.2 hb
+    linarith
+  have : Nonempty (Equiv.Perm (Fin b)) := ⟨Equiv.refl _⟩
+  set c₁ : ℝ := ((b : ℝ) - 1) ^ 4 / (64 * (b : ℝ) ^ 4) with hc₁
+  have hc₁ : 0 < c₁ := by positivity
+  set κ : ℝ := c₁ / 2 with hκ
+  have hκ0 : 0 < κ := by positivity
+  set h : ℝ := (b : ℝ) / 2 with hh
+  set s2 : ℕ → ℝ := fun m ↦ unifAvg (fun ρ₀ : Scramble b m ↦ condVar (d m) ρ₀) with hs2
+  set N : ℕ → ℝ := fun m ↦ (b : ℝ) ^ m with hN
+  have hN0 : ∀ m, 0 < N m := fun m ↦ pow_pos hbR m
+  have hNnat : ∀ m, ((b ^ m : ℕ) : ℝ) = N m := fun m ↦ by rw [Nat.cast_pow]
+  have hdw : ∀ m, digWt b m = (b : ℝ)⁻¹ * (N m)⁻¹ := fun m ↦ by
+    change ((b : ℝ) ^ (m + 1))⁻¹ = (b : ℝ)⁻¹ * ((b : ℝ) ^ m)⁻¹
+    rw [pow_succ, mul_inv, mul_comm]
+  -- the lower bound on the mean conditional variance
+  have hlow : ∀ᶠ m in atTop, κ * m * (N m)⁻¹ ≤ s2 m ∧ 1 ≤ m := by
+    filter_upwards [eventually_ge_atTop (⌈8 / c₁⌉₊ + 1)] with m hm
+    have hm1 : 1 ≤ m := le_trans (Nat.le_add_left 1 _) hm
+    refine ⟨?_, hm1⟩
+    have h := unifAvg_condVar_ge hb hm1 (hnet m)
+    have hm8 : 8 / c₁ ≤ m := by
+      have := Nat.le_ceil (8 / c₁)
+      have : ((⌈8 / c₁⌉₊ + 1 : ℕ) : ℝ) ≤ m := by exact_mod_cast hm
+      push_cast at this
+      linarith
+    have hmc : 8 ≤ m * c₁ := by rwa [div_le_iff₀ hc₁] at hm8
+    refine le_trans ?_ h
+    rw [hκ]
+    have : 0 ≤ (N m)⁻¹ := inv_nonneg.2 (hN0 m).le
+    change c₁ / 2 * m * (N m)⁻¹ ≤ (m * c₁ - 4) * (N m)⁻¹
+    nlinarith
+  have hs2pos : ∀ᶠ m in atTop, 0 < s2 m := by
+    filter_upwards [hlow] with m hm
+    have : 0 < κ * m * (N m)⁻¹ := by
+      have : (1 : ℝ) ≤ m := by exact_mod_cast hm.2
+      have := inv_pos.2 (hN0 m)
+      positivity
+    linarith [hm.1]
+  have hs2nn : ∀ m, 0 ≤ s2 m := fun m ↦ unifAvg_nonneg fun ρ₀ ↦
+    Finset.sum_nonneg fun γ _ ↦ unifAvg_nonneg fun pm ↦ sq_nonneg _
+  have hsq : ∀ m, Real.sqrt (s2 m) ^ 2 = s2 m := fun m ↦ Real.sq_sqrt (hs2nn m)
+  -- the concentration of the conditional variance
+  set J : ℕ → ℕ := Nat.sqrt with hJ
+  set K1 : ℝ := 5 * h ^ 4 * (b : ℝ)⁻¹ / κ with hK1
+  set K2 : ℝ := 32 * h ^ 8 * ((b : ℝ)⁻¹) ^ 2 / κ ^ 2 with hK2
+  have hconc : ∀ᶠ m in atTop, unifAvg (fun ρ₀ : Scramble b m ↦
+      |condVar (d m) ρ₀ / s2 m - 1|) ≤
+      2 * (K1 * ((b : ℝ) ^ J m)⁻¹) + Real.sqrt (K2 * (J m / m)) := by
+    filter_upwards [hlow, hs2pos] with m hm hspos
+    have hm1 : (1 : ℝ) ≤ m := by exact_mod_cast hm.2
+    have hmpos : (0 : ℝ) < m := by linarith
+    set V : Scramble b m → ℝ := fun ρ₀ ↦ condVar (d m) ρ₀ with hV
+    set W : Scramble b m → ℝ := fun ρ₀ ↦ condVarWin (d m) ρ₀ (J m) with hW
+    have e1 : unifAvg (fun ρ₀ : Scramble b m ↦ |condVar (d m) ρ₀ / s2 m - 1|) =
+        unifAvg (fun ρ₀ ↦ |V ρ₀ - unifAvg V|) / s2 m := by
+      rw [div_eq_mul_inv, ← unifAvg_mul_const]
+      congr 1
+      funext ρ₀
+      rw [hV]
+      change _ = |condVar (d m) ρ₀ - s2 m| * (s2 m)⁻¹
+      rw [← abs_of_pos (inv_pos.2 hspos), ← abs_mul, sub_mul, mul_inv_cancel₀ hspos.ne',
+        div_eq_mul_inv]
+    rw [e1]
+    have hsplit := unifAvg_abs_sub_avg_le V W
+    have hA := unifAvg_abs_condVar_sub_le hb (hnet m) (J m)
+    have hB := unifAvg_sq_condVarWin_sub_le hb (hnet m) (J m)
+    have hB' := (sq_unifAvg_abs_le (fun ρ₀ ↦ W ρ₀ - unifAvg W)).trans hB
+    rw [hNnat, hdw] at hA hB'
+    -- the first part
+    have h1 : unifAvg (fun ρ₀ ↦ |V ρ₀ - W ρ₀|) / s2 m ≤ K1 * ((b : ℝ) ^ J m)⁻¹ := by
+      rw [div_le_iff₀ hspos]
+      refine hA.trans ?_
+      have : K1 * ((b : ℝ) ^ J m)⁻¹ * (κ * m * (N m)⁻¹) ≤ K1 * ((b : ℝ) ^ J m)⁻¹ * s2 m :=
+        mul_le_mul_of_nonneg_left hm.1 (by positivity)
+      refine le_trans (le_of_eq ?_) this
+      rw [hK1, hh]
+      have : N m ≠ 0 := (hN0 m).ne'
+      field_simp
+    -- the second part
+    have h2 : unifAvg (fun ρ₀ ↦ |W ρ₀ - unifAvg W|) / s2 m ≤ Real.sqrt (K2 * (J m / m)) := by
+      refine Real.le_sqrt_of_sq_le ?_
+      rw [div_pow, div_le_iff₀ (by positivity)]
+      refine hB'.trans ?_
+      have hs2sq : (κ * m * (N m)⁻¹) ^ 2 ≤ s2 m ^ 2 :=
+        pow_le_pow_left₀ (by have := inv_pos.2 (hN0 m); positivity) hm.1 2
+      have : K2 * (J m / m) * (κ * m * (N m)⁻¹) ^ 2 ≤ K2 * (J m / m) * s2 m ^ 2 :=
+        mul_le_mul_of_nonneg_left hs2sq (by positivity)
+      refine le_trans (le_of_eq ?_) this
+      rw [hK2, hh]
+      have : N m ≠ 0 := (hN0 m).ne'
+      field_simp
+      ring
+    calc unifAvg (fun ρ₀ ↦ |V ρ₀ - unifAvg V|) / s2 m
+        ≤ (2 * unifAvg (fun ρ₀ ↦ |V ρ₀ - W ρ₀|) + unifAvg (fun ρ₀ ↦ |W ρ₀ - unifAvg W|)) /
+          s2 m := div_le_div_of_nonneg_right hsplit hspos.le
+      _ = 2 * (unifAvg (fun ρ₀ ↦ |V ρ₀ - W ρ₀|) / s2 m) +
+          unifAvg (fun ρ₀ ↦ |W ρ₀ - unifAvg W|) / s2 m := by ring
+      _ ≤ 2 * (K1 * ((b : ℝ) ^ J m)⁻¹) + Real.sqrt (K2 * (J m / m)) := by linarith
+  have hV : Tendsto (fun m ↦ unifAvg fun ρ₀ : Scramble b m ↦
+      |(∑ γ, unifAvg fun pm ↦ nodeTerm (d m) ρ₀ γ pm ^ 2) /
+        Real.sqrt (s2 m) ^ 2 - 1|) atTop (𝓝 0) := by
+    have hlim : Tendsto (fun m ↦ 2 * (K1 * ((b : ℝ) ^ J m)⁻¹) + Real.sqrt (K2 * (J m / m)))
+        atTop (𝓝 0) := by
+      have h1 : Tendsto (fun m ↦ ((b : ℝ) ^ J m)⁻¹) atTop (𝓝 0) :=
+        tendsto_inv_atTop_zero.comp ((tendsto_pow_atTop_atTop_of_one_lt
+          (Nat.one_lt_cast.2 hb)).comp tendsto_sqrt_nat_atTop)
+      have h2 : Tendsto (fun m ↦ Real.sqrt (K2 * (J m / m))) atTop (𝓝 0) := by
+        have := (Real.continuous_sqrt.tendsto _).comp (tendsto_sqrt_nat_div.const_mul K2)
+        rwa [mul_zero, Real.sqrt_zero] at this
+      simpa only [mul_zero, zero_add] using (h1.const_mul K1).const_mul 2 |>.add h2
+    refine squeeze_zero' (Eventually.of_forall fun m ↦ unifAvg_nonneg fun ρ₀ ↦ abs_nonneg _)
+      ?_ hlim
+    filter_upwards [hconc] with m hm
+    rw [hsq]
+    exact hm
+  -- the moments of the node bounds
+  have hM2 : ∀ᶠ m in atTop, (unifAvg fun ρ₀ : Scramble b m ↦
+      ∑ γ, (nodeBound (d m) ρ₀ γ / Real.sqrt (s2 m)) ^ 2) ≤ 2 * h ^ 4 * (b : ℝ)⁻¹ / κ := by
+    filter_upwards [hlow, hs2pos] with m hm hspos
+    have hm1 : (1 : ℝ) ≤ m := by exact_mod_cast hm.2
+    have e : (fun ρ₀ : Scramble b m ↦ ∑ γ, (nodeBound (d m) ρ₀ γ / Real.sqrt (s2 m)) ^ 2) =
+        fun ρ₀ ↦ (∑ γ, nodeBound (d m) ρ₀ γ ^ 2) * (s2 m)⁻¹ := by
+      funext ρ₀
+      rw [Finset.sum_mul]
+      exact Finset.sum_congr rfl fun γ _ ↦ by rw [div_pow, hsq, div_eq_mul_inv]
+    rw [e, unifAvg_mul_const, ← div_eq_mul_inv, div_le_iff₀ hspos]
+    have hA := unifAvg_sum_sq_nodeBound_le hb (hnet m)
+    rw [hNnat, hdw] at hA
+    refine hA.trans ?_
+    have : 2 * h ^ 4 * (b : ℝ)⁻¹ / κ * (κ * m * (N m)⁻¹) ≤
+        2 * h ^ 4 * (b : ℝ)⁻¹ / κ * s2 m := mul_le_mul_of_nonneg_left hm.1 (by positivity)
+    refine le_trans (le_of_eq ?_) this
+    rw [hh]
+    have : N m ≠ 0 := (hN0 m).ne'
+    field_simp
+  have hM4 : Tendsto (fun m ↦ unifAvg fun ρ₀ : Scramble b m ↦
+      ∑ γ, (nodeBound (d m) ρ₀ γ / Real.sqrt (s2 m)) ^ 4) atTop (𝓝 0) := by
+    have hlim : Tendsto (fun m : ℕ ↦ 12 * h ^ 8 * (b : ℝ)⁻¹ / κ ^ 2 * (m : ℝ)⁻¹) atTop
+        (𝓝 0) := by
+      have := (tendsto_inv_atTop_zero.comp tendsto_natCast_atTop_atTop).const_mul
+        (12 * h ^ 8 * (b : ℝ)⁻¹ / κ ^ 2)
+      rw [mul_zero] at this
+      exact this
+    refine squeeze_zero' (Eventually.of_forall fun m ↦ unifAvg_nonneg fun ρ₀ ↦
+      Finset.sum_nonneg fun γ _ ↦ by positivity) ?_ hlim
+    filter_upwards [hlow, hs2pos] with m hm hspos
+    have hm1 : (1 : ℝ) ≤ m := by exact_mod_cast hm.2
+    have e : (fun ρ₀ : Scramble b m ↦ ∑ γ, (nodeBound (d m) ρ₀ γ / Real.sqrt (s2 m)) ^ 4) =
+        fun ρ₀ ↦ (∑ γ, nodeBound (d m) ρ₀ γ ^ 4) * ((s2 m) ^ 2)⁻¹ := by
+      funext ρ₀
+      rw [Finset.sum_mul]
+      refine Finset.sum_congr rfl fun γ _ ↦ ?_
+      rw [div_pow, show Real.sqrt (s2 m) ^ 4 = (Real.sqrt (s2 m) ^ 2) ^ 2 by ring, hsq,
+        div_eq_mul_inv]
+    rw [e, unifAvg_mul_const, ← div_eq_mul_inv, div_le_iff₀ (by positivity)]
+    have hA := unifAvg_sum_pow_four_nodeBound_le hb (hnet m)
+    rw [hNnat, hdw] at hA
+    refine hA.trans ?_
+    have hs2sq : (κ * m * (N m)⁻¹) ^ 2 ≤ s2 m ^ 2 :=
+      pow_le_pow_left₀ (by have := inv_pos.2 (hN0 m); positivity) hm.1 2
+    have : 12 * h ^ 8 * (b : ℝ)⁻¹ / κ ^ 2 * (m : ℝ)⁻¹ * (κ * m * (N m)⁻¹) ^ 2 ≤
+        12 * h ^ 8 * (b : ℝ)⁻¹ / κ ^ 2 * (m : ℝ)⁻¹ * s2 m ^ 2 :=
+      mul_le_mul_of_nonneg_left hs2sq (by positivity)
+    refine le_trans (le_of_eq ?_) this
+    rw [hh]
+    have : N m ≠ 0 := (hN0 m).ne'
+    have : (m : ℝ) ≠ 0 := by positivity
+    field_simp
+  have hsp : ∀ᶠ m in atTop, 0 < Real.sqrt (s2 m) := by
+    filter_upwards [hs2pos] with m hm
+    exact Real.sqrt_pos.2 hm
+  have hmain := tendsto_unifAvg_cexp_nodeSum (R := fun m ↦ Scramble b m)
+    (Γ := fun m ↦ Fin m × (Fin m → Option (Fin b))) (P := Equiv.Perm (Fin b))
+    (fun m ↦ nodeTerm (d m)) (fun m ρ₀ γ ↦ unifAvg_nodeTerm (d m) ρ₀ γ) hsp hV
+    (M := fun m ↦ nodeBound (d m)) (fun m ρ₀ γ pm ↦ abs_nodeTerm_le hb0 (d m) ρ₀ γ pm) hM2 hM4 hτ
+  refine hmain.congr fun m ↦ ?_
+  rw [unifAvg_fin_two]
+  congr 1
+  funext ρ₀
+  congr 1
+  funext ρ₁
+  rw [prodS_eq_sum_nodeTerm]
+  rfl
+
+/-- **The lower bound on `E S²`, eventually**: `E_{ρ₀} V(ρ₀) ≥ κ m / n` with
+`κ = (b-1)⁴/(128 b⁴)` for all large `m`. -/
+theorem eventually_unifAvg_condVar_ge (hb : 1 < b)
+    (d : (m : ℕ) → Fin (b ^ m) → Fin 2 → Fin m → Fin b)
+    (hnet : ∀ m, IsNet b 0 m fun i j ↦ digitPoint (d m i j) 0) :
+    ∀ᶠ m in atTop, ((b : ℝ) - 1) ^ 4 / (64 * (b : ℝ) ^ 4) / 2 * m * ((b : ℝ) ^ m)⁻¹ ≤
+      unifAvg (fun ρ₀ : Scramble b m ↦ condVar (d m) ρ₀) ∧ 1 ≤ m := by
+  have hb0 : 0 < b := lt_trans Nat.zero_lt_one hb
+  have hbR : (0 : ℝ) < b := Nat.cast_pos.2 hb0
+  have hb1 : (0 : ℝ) < (b : ℝ) - 1 := by
+    have : (1 : ℝ) < b := Nat.one_lt_cast.2 hb
+    linarith
+  set c₁ : ℝ := ((b : ℝ) - 1) ^ 4 / (64 * (b : ℝ) ^ 4) with hc₁
+  have hc₁ : 0 < c₁ := by positivity
+  filter_upwards [eventually_ge_atTop (⌈8 / c₁⌉₊ + 1)] with m hm
+  have hm1 : 1 ≤ m := le_trans (Nat.le_add_left 1 _) hm
+  refine ⟨?_, hm1⟩
+  have h := unifAvg_condVar_ge hb hm1 (hnet m)
+  have hm8 : 8 / c₁ ≤ m := by
+    have := Nat.le_ceil (8 / c₁)
+    have : ((⌈8 / c₁⌉₊ + 1 : ℕ) : ℝ) ≤ m := by exact_mod_cast hm
+    push_cast at this
+    linarith
+  have hmc : 8 ≤ m * c₁ := by rwa [div_le_iff₀ hc₁] at hm8
+  refine le_trans ?_ h
+  have : 0 ≤ ((b : ℝ) ^ m)⁻¹ := inv_nonneg.2 (pow_pos hbR m).le
+  nlinarith
+
+/-- **Integrals against a mixture law, complex-valued**:
+`∫ g d(mixLaw Q Φ) = E_ρ ∫ g(Φ ρ u) dQ(u)`. -/
+theorem integral_mixLaw_complex {R E : Type*} [Fintype R] [MeasurableSpace E] {Q : Measure E}
+    {Φ : R → E → ℝ} (hΦ : ∀ ρ, Measurable (Φ ρ)) {g : ℝ → ℂ} (hg : Continuous g)
+    (hint : ∀ ρ, Integrable (fun u ↦ g (Φ ρ u)) Q) :
+    ∫ x, g x ∂(mixLaw Q Φ) = unifAvg (fun ρ ↦ ∫ u, g (Φ ρ u) ∂Q) := by
+  have hgi : ∀ ρ, Integrable g (Q.map (Φ ρ)) := fun ρ ↦
+    (integrable_map_measure hg.aestronglyMeasurable (hΦ ρ).aemeasurable).2 (hint ρ)
+  unfold mixLaw unifAvg
+  rw [integral_smul_measure, integral_finsetSum_measure fun ρ _ ↦ hgi ρ, ENNReal.toReal_inv,
+    ENNReal.toReal_natCast, Complex.real_smul]
+  push_cast
+  congr 1
+  exact Finset.sum_congr rfl fun ρ _ ↦ integral_map (hΦ ρ).aemeasurable hg.aestronglyMeasurable
+
+/-- `‖e^{ix} - e^{iy}‖ ≤ |x - y|`. -/
+theorem norm_cexp_sub_cexp_le (x y : ℝ) :
+    ‖cexp ((x : ℂ) * I) - cexp ((y : ℂ) * I)‖ ≤ |x - y| := by
+  have e : cexp ((x : ℂ) * I) - cexp ((y : ℂ) * I) =
+      cexp ((y : ℂ) * I) * (cexp (I * ((x - y : ℝ) : ℂ)) - 1) := by
+    rw [mul_sub, mul_one, ← Complex.exp_add]
+    congr 2
+    push_cast
+    ring
+  rw [e, norm_mul, Complex.norm_exp_ofReal_mul_I, one_mul]
+  have := Real.norm_exp_I_mul_ofReal_sub_one_le (x := x - y)
+  rwa [Real.norm_eq_abs] at this
+
+/-- **Jensen for the absolute deviation**: `(E|X - E X|)² ≤ Var X`. -/
+theorem sq_integral_abs_sub_le_variance {Ω : Type*} {mΩ : MeasurableSpace Ω} {Q : Measure Ω}
+    [IsProbabilityMeasure Q] {X : Ω → ℝ} (hX : MemLp X 2 Q) :
+    (∫ ω, |X ω - ∫ ω', X ω' ∂Q| ∂Q) ^ 2 ≤ Var[X; Q] := by
+  have hY : MemLp (fun ω ↦ |X ω - ∫ ω', X ω' ∂Q|) 2 Q := (hX.sub (memLp_const _)).abs
+  have hv := variance_nonneg (fun ω ↦ |X ω - ∫ ω', X ω' ∂Q|) Q
+  rw [variance_eq_sub hY] at hv
+  rw [variance_eq_integral hX.aestronglyMeasurable.aemeasurable]
+  have e : ∫ ω, ((fun ω ↦ |X ω - ∫ ω', X ω' ∂Q|) ^ 2) ω ∂Q =
+      ∫ ω, (X ω - ∫ ω', X ω' ∂Q) ^ 2 ∂Q :=
+    integral_congr_ae (Eventually.of_forall fun ω ↦ by simp only [Pi.pow_apply, sq_abs])
+  change 0 ≤ ∫ ω, ((fun ω ↦ |X ω - ∫ ω', X ω' ∂Q|) ^ 2) ω ∂Q -
+    (∫ ω, |X ω - ∫ ω', X ω' ∂Q| ∂Q) ^ 2 at hv
+  rw [e] at hv
+  linarith
+
+/-- **Loh's CLT from the conditional-mean structure** (post #2, Loh 2003, `s = 2`): for every
+sequence of `(0,m,2)`-nets in base `b ≥ 2` and every measurable `f ∈ L²`, Lipschitz on the
+cube, whose remainder-averaged scrambled estimator is `E[μ̂ | ρ] = μ + a S(ρ)/n` with `a ≠ 0`
+and `S` the error sum of `x₀ x₁`, the estimator standardised by its own standard deviation is
+asymptotically normal: `(μ̂ - μ)/√Var(μ̂) ⇒ N(0,1)`. -/
+theorem tendstoInDistribution_scrambledLaw_of_condMean (hb : 1 < b)
+    (d : (m : ℕ) → Fin (b ^ m) → Fin 2 → Fin m → Fin b)
+    (hnet : ∀ m, IsNet b 0 m fun i j ↦ digitPoint (d m i j) 0)
+    {f : (Fin 2 → ℝ) → ℝ} (hfm : Measurable f) (hf : MemLp f 2 (uniformCube 2)) {L : ℝ}
+    (hL0 : 0 ≤ L)
+    (hL : ∀ x x' : Fin 2 → ℝ, (∀ j, x j ∈ Set.Ico (0 : ℝ) 1) → (∀ j, x' j ∈ Set.Ico (0 : ℝ) 1) →
+      |f x - f x'| ≤ L * ∑ j, |x j - x' j|) {a : ℝ} (ha : a ≠ 0)
+    (hmean : ∀ m ρ, ∫ u, scrambledEstimate f (d m) ρ u ∂(remLaw 2 (b ^ m)) =
+      ∫ x, f x ∂(uniformCube 2) + a * (prodS (d m) ρ / ((b ^ m : ℕ) : ℝ)))
+    [∀ m, IsProbabilityMeasure (scrambledLaw f (d m))]
+    {Ω' : Type*} {mΩ' : MeasurableSpace Ω'} {P' : Measure Ω'} [IsProbabilityMeasure P']
+    {Z : Ω' → ℝ} (hZ : HasLaw Z (gaussianReal 0 1) P') :
+    TendstoInDistribution (fun m x ↦ (x - ∫ y, f y ∂(uniformCube 2)) /
+      Real.sqrt Var[fun x ↦ x; scrambledLaw f (d m)]) atTop Z
+      (fun m ↦ scrambledLaw f (d m)) P' where
+  forall_aemeasurable m := ((measurable_id.sub_const _).div_const _).aemeasurable
+  aemeasurable_limit := hZ.aemeasurable
+  tendsto := by
+    have hb0 : 0 < b := lt_trans Nat.zero_lt_one hb
+    have hbR : (0 : ℝ) < b := Nat.cast_pos.2 hb0
+    have hb1 : (0 : ℝ) < (b : ℝ) - 1 := by
+      have : (1 : ℝ) < b := Nat.one_lt_cast.2 hb
+      linarith
+    have hQ : ∀ m, IsProbabilityMeasure (remLaw 2 (b ^ m)) := fun m ↦
+      isProbabilityMeasure_remLaw 2 _
+    refine ProbabilityMeasure.tendsto_iff_tendsto_charFun.2 fun t ↦ ?_
+    change Tendsto (fun m ↦ charFun ((scrambledLaw f (d m)).map fun x ↦
+      (x - ∫ y, f y ∂(uniformCube 2)) / Real.sqrt Var[fun x ↦ x; scrambledLaw f (d m)]) t)
+      atTop (𝓝 (charFun (P'.map Z) t))
+    have htarget : charFun (P'.map Z) t = ((Real.exp (-(t ^ 2 / 2)) : ℝ) : ℂ) := by
+      rw [hZ.map_eq, charFun_gaussianReal, Complex.ofReal_exp]
+      congr 1
+      push_cast
+      ring
+    rw [htarget]
+    -- notation
+    set μ := ∫ y, f y ∂(uniformCube 2) with hμ
+    set N : ℕ → ℝ := fun m ↦ ((b ^ m : ℕ) : ℝ) with hN
+    set s2 : ℕ → ℝ := fun m ↦ unifAvg (fun ρ₀ : Scramble b m ↦ condVar (d m) ρ₀) with hs2
+    set v : ℕ → ℝ := fun m ↦ unifAvg (fun ρ : Fin 2 → Scramble b m ↦
+      Var[scrambledEstimate f (d m) ρ; remLaw 2 (b ^ m)]) with hv
+    set A : ℕ → ℝ := fun m ↦ a ^ 2 * (N m)⁻¹ ^ 2 * s2 m with hA
+    set σ : ℕ → ℝ := fun m ↦ Real.sqrt Var[fun x ↦ x; scrambledLaw f (d m)] with hσ
+    have hN0 : ∀ m, 0 < N m := fun m ↦ Nat.cast_pos.2 (Nat.pow_pos hb0)
+    have hNb : ∀ m, N m = (b : ℝ) ^ m := fun m ↦ by rw [hN]; push_cast; rfl
+    have hvar : ∀ m, Var[fun x ↦ x; scrambledLaw f (d m)] = A m + v m := by
+      intro m
+      rw [variance_scrambledLaw_eq_of_condMean hb0 hfm hf (hmean m)]
+      congr 1
+      change _ = a ^ 2 * (N m)⁻¹ ^ 2 * unifAvg (fun ρ₀ : Scramble b m ↦ condVar (d m) ρ₀)
+      rw [← unifAvg_sq_prodS_eq, ← unifAvg_const_mul]
+      congr 1
+      funext ρ
+      rw [div_eq_mul_inv]
+      ring
+    have hv0 : ∀ m, 0 ≤ v m := fun m ↦ unifAvg_nonneg fun ρ ↦ variance_nonneg _ _
+    have hvle : ∀ m, v m ≤ 4 * L ^ 2 * ((N m) ^ 3)⁻¹ := fun m ↦ by
+      rw [hNb]
+      exact unifAvg_variance_le hb0 hf hL0 hL
+    set κ : ℝ := ((b : ℝ) - 1) ^ 4 / (64 * (b : ℝ) ^ 4) / 2 with hκ
+    have hκ0 : 0 < κ := by positivity
+    have hlow : ∀ᶠ m in atTop, κ * m * (N m)⁻¹ ≤ s2 m ∧ 1 ≤ m := by
+      filter_upwards [eventually_unifAvg_condVar_ge hb d hnet] with m hm
+      rw [hNb]
+      exact hm
+    have hApos : ∀ᶠ m in atTop, a ^ 2 * κ * m * ((N m) ^ 3)⁻¹ ≤ A m ∧ 0 < A m ∧ 1 ≤ m := by
+      filter_upwards [hlow] with m hm
+      have hm1 : (1 : ℝ) ≤ m := by exact_mod_cast hm.2
+      have ha2 : 0 < a ^ 2 := by positivity
+      have hle : a ^ 2 * κ * m * ((N m) ^ 3)⁻¹ ≤ A m := by
+        have := mul_le_mul_of_nonneg_left hm.1 (by positivity : 0 ≤ a ^ 2 * (N m)⁻¹ ^ 2)
+        refine le_trans (le_of_eq ?_) this
+        have : N m ≠ 0 := (hN0 m).ne'
+        field_simp
+      refine ⟨hle, lt_of_lt_of_le ?_ hle, hm.2⟩
+      have := hN0 m
+      positivity
+    -- the remainders' share
+    have hratio : Tendsto (fun m ↦ v m / A m) atTop (𝓝 0) := by
+      have hlim : Tendsto (fun m : ℕ ↦ 4 * L ^ 2 / (a ^ 2 * κ) * (m : ℝ)⁻¹) atTop (𝓝 0) := by
+        have := (tendsto_inv_atTop_zero.comp tendsto_natCast_atTop_atTop).const_mul
+          (4 * L ^ 2 / (a ^ 2 * κ))
+        rw [mul_zero] at this
+        exact this
+      refine squeeze_zero' ?_ ?_ hlim
+      · filter_upwards [hApos] with m hm
+        exact div_nonneg (hv0 m) hm.2.1.le
+      · filter_upwards [hApos] with m hm
+        have hm1 : (1 : ℝ) ≤ m := by exact_mod_cast hm.2.2
+        rw [div_le_iff₀ hm.2.1]
+        refine (hvle m).trans ?_
+        have := mul_le_mul_of_nonneg_left hm.1
+          (by positivity : 0 ≤ 4 * L ^ 2 / (a ^ 2 * κ) * (m : ℝ)⁻¹)
+        refine le_trans (le_of_eq ?_) this
+        have : N m ≠ 0 := (hN0 m).ne'
+        have : (m : ℝ) ≠ 0 := by positivity
+        field_simp
+    have hσpos : ∀ᶠ m in atTop, 0 < σ m := by
+      filter_upwards [hApos] with m hm
+      exact Real.sqrt_pos.2 (by rw [hvar]; linarith [hv0 m, hm.2.1])
+    have hs2pos : ∀ᶠ m in atTop, 0 < s2 m := by
+      filter_upwards [hlow] with m hm
+      have : (1 : ℝ) ≤ m := by exact_mod_cast hm.2
+      have := inv_pos.2 (hN0 m)
+      have : 0 < κ * m * (N m)⁻¹ := by positivity
+      linarith [hm.1]
+    -- the scale factor
+    set ε : ℕ → ℝ := fun m ↦ a * Real.sqrt (s2 m) / (N m * σ m) with hε
+    have hεeq : ∀ᶠ m in atTop, ε m = a / |a| * Real.sqrt ((1 + v m / A m)⁻¹) := by
+      filter_upwards [hApos, hs2pos] with m hm hs
+      have hA0 := hm.2.1
+      have hsqA : Real.sqrt (A m) = |a| * (N m)⁻¹ * Real.sqrt (s2 m) := by
+        rw [hA, Real.sqrt_mul (by positivity), Real.sqrt_mul (by positivity), Real.sqrt_sq_eq_abs,
+          Real.sqrt_sq (inv_nonneg.2 (hN0 m).le)]
+      have e1 : (1 + v m / A m)⁻¹ = A m / (A m + v m) := by
+        field_simp
+      rw [e1, Real.sqrt_div' _ (by linarith [hv0 m]), hsqA, hε]
+      change a * Real.sqrt (s2 m) / (N m * Real.sqrt Var[fun x ↦ x; scrambledLaw f (d m)]) = _
+      rw [hvar]
+      have : |a| ≠ 0 := abs_ne_zero.2 ha
+      have : N m ≠ 0 := (hN0 m).ne'
+      field_simp
+    have hεlim : Tendsto ε atTop (𝓝 (a / |a|)) := by
+      have h1 : Tendsto (fun m ↦ a / |a| * Real.sqrt ((1 + v m / A m)⁻¹)) atTop
+          (𝓝 (a / |a| * Real.sqrt ((1 + 0)⁻¹))) :=
+        ((Real.continuous_sqrt.tendsto _).comp
+          ((tendsto_const_nhds.add hratio).inv₀ (by norm_num))).const_mul _
+      rw [add_zero, inv_one, Real.sqrt_one, mul_one] at h1
+      exact h1.congr' (hεeq.mono fun m hm ↦ hm.symm)
+    -- the remainder term
+    set X : ℕ → ℝ := fun m ↦ unifAvg (fun ρ : Fin 2 → Scramble b m ↦
+      ∫ u, |scrambledEstimate f (d m) ρ u -
+        ∫ u', scrambledEstimate f (d m) ρ u' ∂(remLaw 2 (b ^ m))| ∂(remLaw 2 (b ^ m))) / σ m
+      with hX
+    have hXlim : Tendsto X atTop (𝓝 0) := by
+      have hsq : Tendsto (fun m ↦ Real.sqrt (v m / A m)) atTop (𝓝 0) := by
+        have := (Real.continuous_sqrt.tendsto _).comp hratio
+        rwa [Real.sqrt_zero] at this
+      refine squeeze_zero' ?_ ?_ hsq
+      · filter_upwards [hσpos] with m hm
+        exact div_nonneg (unifAvg_nonneg fun ρ ↦ integral_nonneg fun u ↦ abs_nonneg _) hm.le
+      · filter_upwards [hσpos, hApos] with m hσm hm
+        refine Real.le_sqrt_of_sq_le ?_
+        have h1 : (unifAvg (fun ρ : Fin 2 → Scramble b m ↦ ∫ u, |scrambledEstimate f (d m) ρ u -
+            ∫ u', scrambledEstimate f (d m) ρ u' ∂(remLaw 2 (b ^ m))| ∂(remLaw 2 (b ^ m)))) ^ 2 ≤
+            v m := (sq_unifAvg_le _).trans (unifAvg_mono fun ρ ↦
+              sq_integral_abs_sub_le_variance (memLp_scrambledEstimate hb0 hf (d m) ρ))
+        have hσ2 : σ m ^ 2 = A m + v m := by
+          rw [hσ]
+          simp only
+          rw [Real.sq_sqrt (by rw [hvar]; linarith [hv0 m, hm.2.1]), hvar]
+        rw [hX]
+        simp only
+        rw [div_pow, hσ2, div_le_div_iff₀ (by linarith [hv0 m, hm.2.1]) hm.2.1]
+        have := hv0 m
+        nlinarith [hm.2.1]
+    -- the CLT for `S`
+    have hS := tendsto_unifAvg_cexp_prodS hb d hnet (hεlim.const_mul t)
+    have hsign : (t * (a / |a|)) ^ 2 = t ^ 2 := by
+      rw [mul_pow, div_pow, sq_abs, div_self (by positivity), mul_one]
+    rw [hsign] at hS
+    -- the comparison
+    have hcomp : ∀ᶠ m in atTop, ‖charFun ((scrambledLaw f (d m)).map fun x ↦
+        (x - μ) / σ m) t - unifAvg (fun ρ : Fin 2 → Scramble b m ↦
+          cexp ((((t * ε m * prodS (d m) ρ) / Real.sqrt (s2 m) : ℝ) : ℂ) * I))‖ ≤
+        |t| * X m := by
+      filter_upwards [hσpos, hs2pos] with m hσm hs
+      have hYm : Measurable fun x : ℝ ↦ (x - μ) / σ m := (measurable_id.sub_const _).div_const _
+      have hg : Continuous fun x : ℝ ↦ cexp (((t * ((x - μ) / σ m) : ℝ) : ℂ) * I) :=
+        Complex.continuous_exp.comp ((Complex.continuous_ofReal.comp
+          (continuous_const.mul ((continuous_id.sub continuous_const).div_const _))).mul
+          continuous_const)
+      have hint : ∀ ρ, Integrable (fun u ↦ cexp (((t * ((scrambledEstimate f (d m) ρ u - μ) /
+          σ m) : ℝ) : ℂ) * I)) (remLaw 2 (b ^ m)) := fun ρ ↦ by
+        refine Integrable.of_bound (hg.comp_aestronglyMeasurable
+          (measurable_scrambledEstimate hfm (d m) ρ).aestronglyMeasurable) 1
+          (Eventually.of_forall fun u ↦ ?_)
+        rw [Complex.norm_exp_ofReal_mul_I]
+      have hcf : charFun ((scrambledLaw f (d m)).map fun x ↦ (x - μ) / σ m) t =
+          unifAvg (fun ρ : Fin 2 → Scramble b m ↦ ∫ u, cexp (((t * ((scrambledEstimate f (d m)
+            ρ u - μ) / σ m) : ℝ) : ℂ) * I) ∂(remLaw 2 (b ^ m))) := by
+        have hcont : Continuous fun y : ℝ ↦ cexp ((t : ℂ) * (y : ℂ) * I) := by fun_prop
+        rw [charFun_apply_real, integral_map hYm.aemeasurable hcont.aestronglyMeasurable]
+        unfold scrambledLaw
+        rw [← integral_mixLaw_complex (measurable_scrambledEstimate hfm (d m)) hg hint]
+        congr 1
+        funext x
+        push_cast
+        ring_nf
+      rw [hcf, ← unifAvg_sub_complex]
+      refine (norm_unifAvg_le _).trans ?_
+      rw [hX, show |t| * (unifAvg (fun ρ : Fin 2 → Scramble b m ↦ ∫ u,
+          |scrambledEstimate f (d m) ρ u - ∫ u', scrambledEstimate f (d m) ρ u'
+            ∂(remLaw 2 (b ^ m))| ∂(remLaw 2 (b ^ m))) / σ m) =
+          unifAvg (fun ρ : Fin 2 → Scramble b m ↦ |t| / σ m * ∫ u,
+          |scrambledEstimate f (d m) ρ u - ∫ u', scrambledEstimate f (d m) ρ u'
+            ∂(remLaw 2 (b ^ m))| ∂(remLaw 2 (b ^ m))) by
+        rw [unifAvg_const_mul]
+        ring]
+      refine unifAvg_mono fun ρ ↦ ?_
+      set c : ℂ := cexp ((((t * ε m * prodS (d m) ρ) / Real.sqrt (s2 m) : ℝ) : ℂ) * I) with hc
+      have hL1 : Integrable (fun u ↦ |scrambledEstimate f (d m) ρ u -
+          ∫ u', scrambledEstimate f (d m) ρ u' ∂(remLaw 2 (b ^ m))|) (remLaw 2 (b ^ m)) :=
+        (((memLp_scrambledEstimate hb0 hf (d m) ρ).integrable one_le_two).sub
+          (integrable_const _)).abs
+      rw [← integral_const_mul, show c = ∫ _u, c ∂(remLaw 2 (b ^ m)) by
+        rw [integral_const, probReal_univ, one_smul], ← integral_sub (hint ρ)
+        (integrable_const _)]
+      refine (norm_integral_le_integral_norm _).trans (integral_mono_of_nonneg
+        (Eventually.of_forall fun u ↦ norm_nonneg _) (hL1.const_mul _)
+        (Eventually.of_forall fun u ↦ ?_))
+      refine (norm_cexp_sub_cexp_le _ _).trans (le_of_eq ?_)
+      have hrel : t * ((scrambledEstimate f (d m) ρ u - μ) / σ m) -
+          t * ε m * prodS (d m) ρ / Real.sqrt (s2 m) =
+          t / σ m * (scrambledEstimate f (d m) ρ u -
+            ∫ u', scrambledEstimate f (d m) ρ u' ∂(remLaw 2 (b ^ m))) := by
+        rw [hmean m ρ, hε]
+        have : Real.sqrt (s2 m) ≠ 0 := (Real.sqrt_pos.2 hs).ne'
+        have : N m ≠ 0 := (hN0 m).ne'
+        have : σ m ≠ 0 := hσm.ne'
+        simp only
+        field_simp
+        ring
+      rw [hrel, abs_mul, abs_div, abs_of_pos hσm]
+    -- conclusion
+    rw [tendsto_iff_norm_sub_tendsto_zero]
+    rw [tendsto_iff_norm_sub_tendsto_zero] at hS
+    refine squeeze_zero' (Eventually.of_forall fun m ↦ norm_nonneg _) ?_
+      (by simpa only [mul_zero, zero_add] using (hXlim.const_mul |t|).add hS)
+    filter_upwards [hcomp] with m hm
+    refine (norm_sub_le_norm_sub_add_norm_sub _ _ _).trans (add_le_add hm (le_of_eq ?_))
+    congr 3
+
+/-- **Loh's CLT for `x₀ x₁`** (post #2, Loh 2003): for every sequence of `(0,m,2)`-nets in base
+`b ≥ 2`, `(μ̂ - 1/4)/√Var(μ̂) ⇒ N(0,1)` for the scrambled-net estimator of `∫ x₀ x₁`. -/
+theorem tendstoInDistribution_scrambledLaw_prodFn (hb : 1 < b)
+    (d : (m : ℕ) → Fin (b ^ m) → Fin 2 → Fin m → Fin b)
+    (hnet : ∀ m, IsNet b 0 m fun i j ↦ digitPoint (d m i j) 0)
+    [∀ m, IsProbabilityMeasure (scrambledLaw prodFn (d m))]
+    {Ω' : Type*} {mΩ' : MeasurableSpace Ω'} {P' : Measure Ω'} [IsProbabilityMeasure P']
+    {Z : Ω' → ℝ} (hZ : HasLaw Z (gaussianReal 0 1) P') :
+    TendstoInDistribution (fun m x ↦ (x - ∫ y, prodFn y ∂(uniformCube 2)) /
+      Real.sqrt Var[fun x ↦ x; scrambledLaw prodFn (d m)]) atTop Z
+      (fun m ↦ scrambledLaw prodFn (d m)) P' := by
+  have hb0 : 0 < b := lt_trans Nat.zero_lt_one hb
+  exact tendstoInDistribution_scrambledLaw_of_condMean hb d hnet measurable_prodFn memLp_prodFn
+    zero_le_one (fun x x' hx hx' ↦ abs_prodFn_sub_le hx hx') one_ne_zero (fun m ρ ↦ by
+      rw [integral_scrambledEstimate_prodFn hb0 (hnet m) ρ, integral_prodFn, one_mul]) hZ
+
+/-- **Loh's CLT for `x₀ x₁` on the scrambled Hammersley nets** `{(i/bᵐ, φ_b(i))}`, any base
+`b ≥ 2`. -/
+theorem tendstoInDistribution_scrambledLaw_prodFn_hammersley (hb : 1 < b)
+    [∀ m, IsProbabilityMeasure
+      (scrambledLaw prodFn (hammersleyDigits (lt_trans Nat.zero_lt_one hb) m))]
+    {Ω' : Type*} {mΩ' : MeasurableSpace Ω'} {P' : Measure Ω'} [IsProbabilityMeasure P']
+    {Z : Ω' → ℝ} (hZ : HasLaw Z (gaussianReal 0 1) P') :
+    TendstoInDistribution (fun m x ↦ (x - ∫ y, prodFn y ∂(uniformCube 2)) /
+      Real.sqrt Var[fun x ↦ x;
+        scrambledLaw prodFn (hammersleyDigits (lt_trans Nat.zero_lt_one hb) m)]) atTop Z
+      (fun m ↦ scrambledLaw prodFn (hammersleyDigits (lt_trans Nat.zero_lt_one hb) m)) P' :=
+  tendstoInDistribution_scrambledLaw_prodFn hb _ (isNet_hammersley hb) hZ
+
+/-- The scrambled-net estimator is linear in the integrand. -/
+theorem scrambledEstimate_bilinAdd {m n : ℕ} (a : ℝ) (g : Fin 2 → ℝ → ℝ)
+    (d : Fin n → Fin 2 → Fin m → Fin b) (ρ : Fin 2 → Scramble b m) (u : Fin n → Fin 2 → ℝ) :
+    scrambledEstimate (fun x ↦ a * prodFn x + addFn g x) d ρ u =
+      a * scrambledEstimate prodFn d ρ u + scrambledEstimate (addFn g) d ρ u := by
+  unfold scrambledEstimate sampleMean
+  rw [Finset.sum_add_distrib, ← Finset.mul_sum]
+  ring
+
+/-- **The additive part is integrated exactly given the scramble**:
+`E[μ̂(Σ_j g_j) | ρ] = Σ_j ∫ g_j` for every `(0,m,s)`-net and every scramble. -/
+theorem integral_scrambledEstimate_addFn (hb : 0 < b) {m s : ℕ}
+    {d : Fin (b ^ m) → Fin s → Fin m → Fin b} (hnet : IsNet b 0 m fun i j ↦ digitPoint (d i j) 0)
+    {g : Fin s → ℝ → ℝ} (hgm : ∀ j, Measurable (g j))
+    (hgc : ∀ j, ContinuousOn (g j) (Set.Icc 0 1)) (ρ : Fin s → Scramble b m) :
+    ∫ u, scrambledEstimate (addFn g) d ρ u ∂(remLaw s (b ^ m)) = ∑ j, ∫ x, g j x ∂uniformIco := by
+  have hQ := isProbabilityMeasure_remLaw s (b ^ m)
+  have hU := isProbabilityMeasure_uniformCube s
+  have e : ∀ u, scrambledEstimate (addFn g) d ρ u =
+      ∑ i, addTerm g d ρ i (u i) + ∑ j, ∫ x, g j x ∂uniformIco := fun u ↦ by
+    rw [sum_addTerm hb hnet hgc ρ u]
+    ring
+  have hint : ∀ i, Integrable (fun u : Fin (b ^ m) → Fin s → ℝ ↦ addTerm g d ρ i (u i))
+      (remLaw s (b ^ m)) := fun i ↦
+    (memLp_remLaw_eval (memLp_addTerm hgm hgc hb ρ i) i).integrable one_le_two
+  rw [integral_congr_ae (Eventually.of_forall e), integral_add (integrable_finsetSum _
+    fun i _ ↦ hint i) (integrable_const _), integral_finsetSum _ fun i _ ↦ hint i,
+    integral_const, probReal_univ, one_smul]
+  rw [Finset.sum_eq_zero fun i _ ↦ by
+    rw [integral_remLaw_eval (g := addTerm g d ρ i)
+      (measurable_addTerm hgm d ρ i).aestronglyMeasurable i, integral_addTerm hgm hgc hb ρ i],
+    zero_add]
+
+/-- **Loh's CLT for the smooth integrands with a constant non-zero mixed derivative**
+(post #2, Loh 2003, `s = 2`): for `f(x) = a x₀ x₁ + g₀(x₀) + g₁(x₁)` with `a ≠ 0` and each
+`g_j` measurable and `C¹` on `[0,1]` (so `∂²f/∂x₀∂x₁ ≡ a`), and every sequence of
+`(0,m,2)`-nets in base `b ≥ 2` scrambled by independent uniform nested scrambles with
+independent uniform remainders, `(μ̂ - μ)/√Var(μ̂) ⇒ N(0,1)` as `n = bᵐ → ∞`. -/
+theorem tendstoInDistribution_scrambledLaw_bilinAdd (hb : 1 < b)
+    (d : (m : ℕ) → Fin (b ^ m) → Fin 2 → Fin m → Fin b)
+    (hnet : ∀ m, IsNet b 0 m fun i j ↦ digitPoint (d m i j) 0) {a : ℝ} (ha : a ≠ 0)
+    {g g' : Fin 2 → ℝ → ℝ} (hgm : ∀ j, Measurable (g j))
+    (hg : ∀ j, ∀ x ∈ Set.Icc (0 : ℝ) 1, HasDerivWithinAt (g j) (g' j x) (Set.Icc 0 1) x)
+    (hg' : ∀ j, ContinuousOn (g' j) (Set.Icc 0 1))
+    [∀ m, IsProbabilityMeasure (scrambledLaw (fun x ↦ a * prodFn x + addFn g x) (d m))]
+    {Ω' : Type*} {mΩ' : MeasurableSpace Ω'} {P' : Measure Ω'} [IsProbabilityMeasure P']
+    {Z : Ω' → ℝ} (hZ : HasLaw Z (gaussianReal 0 1) P') :
+    TendstoInDistribution (fun m x ↦ (x - ∫ y, (a * prodFn y + addFn g y) ∂(uniformCube 2)) /
+      Real.sqrt Var[fun x ↦ x; scrambledLaw (fun x ↦ a * prodFn x + addFn g x) (d m)]) atTop Z
+      (fun m ↦ scrambledLaw (fun x ↦ a * prodFn x + addFn g x) (d m)) P' := by
+  have hb0 : 0 < b := lt_trans Nat.zero_lt_one hb
+  have hU := isProbabilityMeasure_uniformCube 2
+  have hgc : ∀ j, ContinuousOn (g j) (Set.Icc 0 1) := fun j x hx ↦ (hg j x hx).continuousWithinAt
+  choose K hK using fun j ↦ exists_lipschitz_of_C1 (hg j) (hg' j)
+  have hfm : Measurable fun x ↦ a * prodFn x + addFn g x :=
+    (measurable_prodFn.const_mul a).add (measurable_addFn hgm)
+  have hf : MemLp (fun x ↦ a * prodFn x + addFn g x) 2 (uniformCube 2) :=
+    (memLp_prodFn.const_mul a).add (memLp_addFn hgm hgc 2)
+  set L : ℝ := |a| + ∑ j, max (K j) 0 with hL
+  have hL0 : 0 ≤ L := add_nonneg (abs_nonneg _) (Finset.sum_nonneg fun j _ ↦ le_max_right _ _)
+  have hLip : ∀ x x' : Fin 2 → ℝ, (∀ j, x j ∈ Set.Ico (0 : ℝ) 1) →
+      (∀ j, x' j ∈ Set.Ico (0 : ℝ) 1) →
+      |(a * prodFn x + addFn g x) - (a * prodFn x' + addFn g x')| ≤ L * ∑ j, |x j - x' j| := by
+    intro x x' hx hx'
+    have h1 : |a * prodFn x - a * prodFn x'| ≤ |a| * ∑ j, |x j - x' j| := by
+      rw [← mul_sub, abs_mul]
+      have := abs_prodFn_sub_le hx hx'
+      rw [one_mul] at this
+      exact mul_le_mul_of_nonneg_left this (abs_nonneg _)
+    have h2 : |addFn g x - addFn g x'| ≤ (∑ j, max (K j) 0) * ∑ j, |x j - x' j| := by
+      unfold addFn
+      rw [← Finset.sum_sub_distrib]
+      refine (Finset.abs_sum_le_sum_abs _ _).trans ?_
+      rw [Finset.sum_mul]
+      refine Finset.sum_le_sum fun j _ ↦ ?_
+      have hj := hK j (x j) (Set.Ico_subset_Icc_self (hx j)) (x' j)
+        (Set.Ico_subset_Icc_self (hx' j))
+      have hle : |x j - x' j| ≤ ∑ k, |x k - x' k| :=
+        Finset.single_le_sum (f := fun k ↦ |x k - x' k|) (fun k _ ↦ abs_nonneg _)
+          (Finset.mem_univ j)
+      calc |g j (x j) - g j (x' j)| ≤ K j * |x j - x' j| := hj
+        _ ≤ max (K j) 0 * |x j - x' j| :=
+            mul_le_mul_of_nonneg_right (le_max_left _ _) (abs_nonneg _)
+        _ ≤ max (K j) 0 * ∑ k, |x k - x' k| :=
+            mul_le_mul_of_nonneg_left hle (le_max_right _ _)
+    calc |(a * prodFn x + addFn g x) - (a * prodFn x' + addFn g x')|
+        = |(a * prodFn x - a * prodFn x') + (addFn g x - addFn g x')| := by ring_nf
+      _ ≤ |a * prodFn x - a * prodFn x'| + |addFn g x - addFn g x'| := abs_add_le _ _
+      _ ≤ |a| * ∑ j, |x j - x' j| + (∑ j, max (K j) 0) * ∑ j, |x j - x' j| := add_le_add h1 h2
+      _ = L * ∑ j, |x j - x' j| := by rw [hL]; ring
+  have hmeanf : ∫ y, (a * prodFn y + addFn g y) ∂(uniformCube 2) =
+      a * (1 / 4) + ∑ j, ∫ x, g j x ∂uniformIco := by
+    rw [integral_add ((memLp_prodFn.integrable one_le_two).const_mul a)
+      ((memLp_addFn hgm hgc 2).integrable one_le_two), integral_const_mul, integral_prodFn,
+      integral_addFn hgm hgc]
+  refine tendstoInDistribution_scrambledLaw_of_condMean hb d hnet hfm hf hL0 hLip ha
+    (fun m ρ ↦ ?_) hZ
+  have hQ := isProbabilityMeasure_remLaw 2 (b ^ m)
+  rw [integral_congr_ae (Eventually.of_forall fun u ↦ scrambledEstimate_bilinAdd a g (d m) ρ u),
+    integral_add (((memLp_scrambledEstimate hb0 memLp_prodFn (d m) ρ).integrable
+      one_le_two).const_mul a) ((memLp_scrambledEstimate hb0 (memLp_addFn hgm hgc 2) (d m)
+        ρ).integrable one_le_two), integral_const_mul,
+    integral_scrambledEstimate_prodFn hb0 (hnet m) ρ,
+    integral_scrambledEstimate_addFn hb0 (hnet m) hgm hgc ρ, hmeanf]
+  ring
+
+end RQMCMarkov.OwenScrambling
+
 set_option linter.style.longLine false
 #print axioms RQMCMarkov.OwenScrambling.InUnitIco
 #print axioms RQMCMarkov.OwenScrambling.countBelow
@@ -10542,3 +13509,134 @@ set_option linter.style.longLine false
 #print axioms RQMCMarkov.OwenScrambling.hasLaw_deepNetSorted
 #print axioms RQMCMarkov.OwenScrambling.variance_deepNet_eq_stratVar
 #print axioms RQMCMarkov.OwenScrambling.tendstoInDistribution_deepNet
+#print axioms RQMCMarkov.OwenScrambling.unifAvg
+#print axioms RQMCMarkov.OwenScrambling.unifAvg_add
+#print axioms RQMCMarkov.OwenScrambling.unifAvg_const_mul
+#print axioms RQMCMarkov.OwenScrambling.unifAvg_mul_const
+#print axioms RQMCMarkov.OwenScrambling.unifAvg_const
+#print axioms RQMCMarkov.OwenScrambling.unifAvg_mono
+#print axioms RQMCMarkov.OwenScrambling.unifAvg_nonneg
+#print axioms RQMCMarkov.OwenScrambling.unifAvg_sum
+#print axioms RQMCMarkov.OwenScrambling.abs_unifAvg_le
+#print axioms RQMCMarkov.OwenScrambling.sq_unifAvg_mul_le
+#print axioms RQMCMarkov.OwenScrambling.sq_unifAvg_le
+#print axioms RQMCMarkov.OwenScrambling.unifAvg_mul_of_disjoint
+#print axioms RQMCMarkov.OwenScrambling.unifAvg_eval
+#print axioms RQMCMarkov.OwenScrambling.unifAvg_prod
+#print axioms RQMCMarkov.OwenScrambling.unifAvg_mul_eval_of_forall_ne
+#print axioms RQMCMarkov.OwenScrambling.sum_eval_congr
+#print axioms RQMCMarkov.OwenScrambling.unifAvg_sum_eval
+#print axioms RQMCMarkov.OwenScrambling.ne_of_injOn_insert
+#print axioms RQMCMarkov.OwenScrambling.injOn_of_insert
+#print axioms RQMCMarkov.OwenScrambling.unifAvg_sq_sum_eq
+#print axioms RQMCMarkov.OwenScrambling.unifAvg_pow_four_sum_le
+#print axioms RQMCMarkov.OwenScrambling.sum_perm_apply
+#print axioms RQMCMarkov.OwenScrambling.norm_unifAvg_le
+#print axioms RQMCMarkov.OwenScrambling.unifAvg_sub_complex
+#print axioms RQMCMarkov.OwenScrambling.unifAvg_const_complex
+#print axioms RQMCMarkov.OwenScrambling.unifAvg_ofReal
+#print axioms RQMCMarkov.OwenScrambling.norm_unifAvg_cexp_sub_le
+#print axioms RQMCMarkov.OwenScrambling.abs_exp_neg_sub_exp_neg_le
+#print axioms RQMCMarkov.OwenScrambling.norm_unifAvg_cexp_le_one
+#print axioms RQMCMarkov.OwenScrambling.sq_unifAvg_sum_mul_le
+#print axioms RQMCMarkov.OwenScrambling.tendsto_unifAvg_cexp_nodeSum
+#print axioms RQMCMarkov.OwenScrambling.cdig
+#print axioms RQMCMarkov.OwenScrambling.sum_fin_cast_eq
+#print axioms RQMCMarkov.OwenScrambling.sum_cdig
+#print axioms RQMCMarkov.OwenScrambling.unifAvg_cdig
+#print axioms RQMCMarkov.OwenScrambling.abs_cdig_le
+#print axioms RQMCMarkov.OwenScrambling.digWt
+#print axioms RQMCMarkov.OwenScrambling.digWt_pos
+#print axioms RQMCMarkov.OwenScrambling.scrDev
+#print axioms RQMCMarkov.OwenScrambling.prefixVal_mid
+#print axioms RQMCMarkov.OwenScrambling.mid_scramble
+#print axioms RQMCMarkov.OwenScrambling.integral_digitPoint
+#print axioms RQMCMarkov.OwenScrambling.cellAvg_prodFn
+#print axioms RQMCMarkov.OwenScrambling.measurable_prodFn
+#print axioms RQMCMarkov.OwenScrambling.memLp_prodFn
+#print axioms RQMCMarkov.OwenScrambling.sum_scrDev_net
+#print axioms RQMCMarkov.OwenScrambling.prodS
+#print axioms RQMCMarkov.OwenScrambling.integral_scrambledEstimate_prodFn
+#print axioms RQMCMarkov.OwenScrambling.nodeSet
+#print axioms RQMCMarkov.OwenScrambling.cellSet
+#print axioms RQMCMarkov.OwenScrambling.nodeW
+#print axioms RQMCMarkov.OwenScrambling.nodeTerm
+#print axioms RQMCMarkov.OwenScrambling.sum_cdig_mul_nodeW
+#print axioms RQMCMarkov.OwenScrambling.prodS_eq_sum_nodeTerm
+#print axioms RQMCMarkov.OwenScrambling.unifAvg_nodeTerm
+#print axioms RQMCMarkov.OwenScrambling.card_agree_agree_net
+#print axioms RQMCMarkov.OwenScrambling.agree_update_succ_iff
+#print axioms RQMCMarkov.OwenScrambling.agree_comm_iff
+#print axioms RQMCMarkov.OwenScrambling.sum_cdig_cellSet_eq_zero
+#print axioms RQMCMarkov.OwenScrambling.eq_of_truncDigits_eq_cellSet
+#print axioms RQMCMarkov.OwenScrambling.levelWin
+#print axioms RQMCMarkov.OwenScrambling.wwin
+#print axioms RQMCMarkov.OwenScrambling.nodeW_eq_wwin
+#print axioms RQMCMarkov.OwenScrambling.wwin_split
+#print axioms RQMCMarkov.OwenScrambling.wX
+#print axioms RQMCMarkov.OwenScrambling.wν
+#print axioms RQMCMarkov.OwenScrambling.wwin_eq_sum
+#print axioms RQMCMarkov.OwenScrambling.injOn_wν
+#print axioms RQMCMarkov.OwenScrambling.unifAvg_wX
+#print axioms RQMCMarkov.OwenScrambling.abs_wX_le
+#print axioms RQMCMarkov.OwenScrambling.sum_levelWin_digWt_sq_le
+#print axioms RQMCMarkov.OwenScrambling.unifAvg_sq_wwin_le
+#print axioms RQMCMarkov.OwenScrambling.unifAvg_pow_four_wwin_le
+#print axioms RQMCMarkov.OwenScrambling.dform
+#print axioms RQMCMarkov.OwenScrambling.abs_dform_le
+#print axioms RQMCMarkov.OwenScrambling.sq_sum_abs_le
+#print axioms RQMCMarkov.OwenScrambling.pow_four_sum_abs_le
+#print axioms RQMCMarkov.OwenScrambling.dform_sub
+#print axioms RQMCMarkov.OwenScrambling.dform_add
+#print axioms RQMCMarkov.OwenScrambling.unifAvg_sq_dform_le
+#print axioms RQMCMarkov.OwenScrambling.abs_unifAvg_sq_dform_sub_le
+#print axioms RQMCMarkov.OwenScrambling.unifAvg_sq_sum_le_of_sq
+#print axioms RQMCMarkov.OwenScrambling.unifAvg_sq_sub_eq
+#print axioms RQMCMarkov.OwenScrambling.unifAvg_sq_sum_sub_le_of_near
+#print axioms RQMCMarkov.OwenScrambling.mul_le_half_add_sq
+#print axioms RQMCMarkov.OwenScrambling.sum_sq_le_sq_sum
+#print axioms RQMCMarkov.OwenScrambling.digWt_mul_digWt
+#print axioms RQMCMarkov.OwenScrambling.digWt_add
+#print axioms RQMCMarkov.OwenScrambling.sum_card_cellSet
+#print axioms RQMCMarkov.OwenScrambling.sum_card_cellSet_all
+#print axioms RQMCMarkov.OwenScrambling.wwin_split_top
+#print axioms RQMCMarkov.OwenScrambling.wwin_congr
+#print axioms RQMCMarkov.OwenScrambling.unifAvg_sq_mul_dform
+#print axioms RQMCMarkov.OwenScrambling.condVar
+#print axioms RQMCMarkov.OwenScrambling.levelVar
+#print axioms RQMCMarkov.OwenScrambling.condVarWin
+#print axioms RQMCMarkov.OwenScrambling.unifAvg_abs_nodeVar_sub_le
+#print axioms RQMCMarkov.OwenScrambling.unifAvg_abs_condVar_sub_le
+#print axioms RQMCMarkov.OwenScrambling.levelVar_nonneg
+#print axioms RQMCMarkov.OwenScrambling.unifAvg_sq_levelVar_le
+#print axioms RQMCMarkov.OwenScrambling.unifAvg_levelVar_mul
+#print axioms RQMCMarkov.OwenScrambling.unifAvg_sq_condVarWin_sub_le
+#print axioms RQMCMarkov.OwenScrambling.unifAvg_abs_sub_avg_le
+#print axioms RQMCMarkov.OwenScrambling.sq_unifAvg_abs_le
+#print axioms RQMCMarkov.OwenScrambling.nodeBound
+#print axioms RQMCMarkov.OwenScrambling.abs_nodeTerm_le
+#print axioms RQMCMarkov.OwenScrambling.unifAvg_sum_sq_nodeBound_le
+#print axioms RQMCMarkov.OwenScrambling.unifAvg_sum_pow_four_nodeBound_le
+#print axioms RQMCMarkov.OwenScrambling.unifAvg_fin_two
+#print axioms RQMCMarkov.OwenScrambling.unifAvg_sq_prodS
+#print axioms RQMCMarkov.OwenScrambling.integral_sq_sub_eq_variance_add
+#print axioms RQMCMarkov.OwenScrambling.variance_scrambledLaw_eq_of_condMean
+#print axioms RQMCMarkov.OwenScrambling.unifAvg_variance_le
+#print axioms RQMCMarkov.OwenScrambling.integral_prodFn
+#print axioms RQMCMarkov.OwenScrambling.abs_prodFn_sub_le
+#print axioms RQMCMarkov.OwenScrambling.unifAvg_sq_prodS_eq
+#print axioms RQMCMarkov.OwenScrambling.unifAvg_condVar_ge
+#print axioms RQMCMarkov.OwenScrambling.digWt_mul_pow
+#print axioms RQMCMarkov.OwenScrambling.tendsto_sqrt_nat_atTop
+#print axioms RQMCMarkov.OwenScrambling.tendsto_sqrt_nat_div
+#print axioms RQMCMarkov.OwenScrambling.tendsto_unifAvg_cexp_prodS
+#print axioms RQMCMarkov.OwenScrambling.eventually_unifAvg_condVar_ge
+#print axioms RQMCMarkov.OwenScrambling.integral_mixLaw_complex
+#print axioms RQMCMarkov.OwenScrambling.norm_cexp_sub_cexp_le
+#print axioms RQMCMarkov.OwenScrambling.sq_integral_abs_sub_le_variance
+#print axioms RQMCMarkov.OwenScrambling.tendstoInDistribution_scrambledLaw_of_condMean
+#print axioms RQMCMarkov.OwenScrambling.tendstoInDistribution_scrambledLaw_prodFn
+#print axioms RQMCMarkov.OwenScrambling.tendstoInDistribution_scrambledLaw_prodFn_hammersley
+#print axioms RQMCMarkov.OwenScrambling.scrambledEstimate_bilinAdd
+#print axioms RQMCMarkov.OwenScrambling.integral_scrambledEstimate_addFn
+#print axioms RQMCMarkov.OwenScrambling.tendstoInDistribution_scrambledLaw_bilinAdd

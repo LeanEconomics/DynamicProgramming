@@ -1,5 +1,9 @@
 import OwenScrambling.Discrepancy
 import OwenScrambling.LohCLT
+import OwenScrambling.LohGeneralCLT
+import OwenScrambling.LohGeneralConc
+import OwenScrambling.LohGeneralFinite
+import OwenScrambling.LohGeneralProd
 import OwenScrambling.LohVariance
 import OwenScrambling.MonteCarlo
 import OwenScrambling.Owen1DCLT
