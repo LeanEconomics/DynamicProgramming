@@ -3,8 +3,10 @@ Copyright (c) 2026 Robert Kirkby. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Robert Kirkby
 -/
-import DeterministicDynamics.LyapunovPerron
+import DeterministicDynamics.Dichotomy
 import DeterministicDynamics.LocalStability
+import DeterministicDynamics.LyapunovPerron
+import Mathlib.Analysis.Calculus.InverseFunctionTheorem.FDeriv
 
 /-!
 # The stable manifold (Theorem 6.6)

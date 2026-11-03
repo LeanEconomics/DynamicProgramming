@@ -4,6 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Robert Kirkby
 -/
 import StochasticApplications.InventoryFOC
+import Mathlib.Analysis.Convex.SpecificFunctions.Deriv
 
 /-!
 # Production and inventory accumulation: counterexamples for Exercise 10.5g

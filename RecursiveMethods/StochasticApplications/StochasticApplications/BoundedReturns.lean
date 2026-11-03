@@ -3,9 +3,10 @@ Copyright (c) 2026 Robert Kirkby. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Robert Kirkby
 -/
-import StochasticApplications.Lemma95
 import StochasticApplications.Contraction
+import StochasticApplications.Lemma95
 import StochasticApplications.Maximum
+import StochasticApplications.Theorem94
 
 /-!
 # Bounded returns: Theorem 9.6 and Exercise 9.7b

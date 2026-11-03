@@ -3,7 +3,9 @@ Copyright (c) 2026 Robert Kirkby. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Robert Kirkby
 -/
-import ConvergenceApplications.Determining
+import Mathlib.Algebra.Order.Ring.Star
+import Mathlib.MeasureTheory.Integral.Bochner.Set
+import Mathlib.Order.CompletePartialOrder
 
 /-!
 # Distribution functions on `ℝˡ`

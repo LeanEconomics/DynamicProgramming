@@ -4,6 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Robert Kirkby
 -/
 import StochasticApplications.Inventory
+import Mathlib.Analysis.Calculus.Deriv.Shift
 
 /-!
 # Production and inventory accumulation: Exercise 10.5c

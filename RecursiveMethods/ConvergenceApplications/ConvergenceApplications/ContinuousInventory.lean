@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Robert Kirkby
 -/
 import ConvergenceApplications.ConditionM
-import ConvergenceApplications.FellerInvariant
+import ConvergenceApplications.WeakBasics
+import Mathlib.MeasureTheory.Measure.RegularityCompacts
+import Mathlib.Topology.UniformSpace.Uniformizable
 
 /-!
 # A continuous-state (s, S) inventory process

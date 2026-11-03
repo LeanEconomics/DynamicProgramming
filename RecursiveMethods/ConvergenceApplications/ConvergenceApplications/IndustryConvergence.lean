@@ -3,8 +3,9 @@ Copyright (c) 2026 Robert Kirkby. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Robert Kirkby
 -/
-import ConvergenceApplications.RealIntervals
 import ConvergenceApplications.Parameters
+import ConvergenceApplications.RealIntervals
+import Mathlib.Probability.Kernel.Deterministic
 
 /-!
 # Industry investment under uncertainty

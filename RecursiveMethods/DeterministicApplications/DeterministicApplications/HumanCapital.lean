@@ -4,6 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Robert Kirkby
 -/
 import DeterministicApplications.LogModel
+import Mathlib.Analysis.Calculus.Deriv.Slope
+import Mathlib.Analysis.Convex.Slope
+import Mathlib.Analysis.LocallyConvex.AbsConvexOpen
+import Mathlib.Analysis.Normed.Group.AddTorsor
+import Mathlib.Topology.Algebra.Module.ModuleTopology
 
 /-!
 # Human capital accumulation

@@ -5,6 +5,7 @@ Authors: Robert Kirkby
 -/
 import DeterministicDynamics.ConsumerRecursive
 import DeterministicDynamics.EulerEquations
+import Mathlib.Topology.MetricSpace.Contracting
 
 /-!
 # A consumer with recursive preferences (Exercise 6.10)

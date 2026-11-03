@@ -1,0 +1,6417 @@
+{
+  "checked_at_utc": "2026-11-03T04:24:20.872934+00:00",
+  "theorems": 537,
+  "module_theorems": {
+    "OwenScrambling/Discrepancy.lean": 21,
+    "OwenScrambling/MonteCarlo.lean": 16,
+    "OwenScrambling/Unbiased.lean": 22,
+    "OwenScrambling/ScrambleDefs.lean": 52,
+    "OwenScrambling/ScrambleHaar.lean": 30,
+    "OwenScrambling/ScrambleGain.lean": 28,
+    "OwenScrambling/ScrambleVariance.lean": 29,
+    "OwenScrambling/ScrambleAsymptotic.lean": 14,
+    "OwenScrambling/ScrambleHammersley.lean": 2,
+    "OwenScrambling/Stratified.lean": 21,
+    "OwenScrambling/Owen1DScramble.lean": 34,
+    "OwenScrambling/Owen1DLindeberg.lean": 4,
+    "OwenScrambling/ShiftLimit.lean": 18,
+    "OwenScrambling/Owen1DVariance.lean": 10,
+    "OwenScrambling/Owen1DCLT.lean": 17,
+    "OwenScrambling/LohCLT.lean": 33,
+    "OwenScrambling/LohVariance.lean": 39,
+    "OwenScrambling/Owen1DCounterexample.lean": 10,
+    "OwenScrambling/Owen1DDeep.lean": 24,
+    "OwenScrambling/LohGeneralFinite.lean": 30,
+    "OwenScrambling/LohGeneralProd.lean": 30,
+    "OwenScrambling/LohGeneralConc.lean": 30,
+    "OwenScrambling/LohGeneralCLT.lean": 23
+  },
+  "audited_declarations": 647,
+  "declarations": [
+    {
+      "name": "RQMCMarkov.OwenScrambling.InUnitIco",
+      "kind": "def",
+      "module": "OwenScrambling/Discrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.countBelow",
+      "kind": "def",
+      "module": "OwenScrambling/Discrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.countAtMost",
+      "kind": "def",
+      "module": "OwenScrambling/Discrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.localDiscrepancy",
+      "kind": "def",
+      "module": "OwenScrambling/Discrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.starDiscrepancy",
+      "kind": "def",
+      "module": "OwenScrambling/Discrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.qmcEstimate",
+      "kind": "def",
+      "module": "OwenScrambling/Discrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.midpointRule",
+      "kind": "def",
+      "module": "OwenScrambling/Discrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.countBelow_le",
+      "kind": "theorem",
+      "module": "OwenScrambling/Discrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.countBelow_mono",
+      "kind": "theorem",
+      "module": "OwenScrambling/Discrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.countBelow_div_mem_Icc",
+      "kind": "theorem",
+      "module": "OwenScrambling/Discrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.localDiscrepancy_le_one",
+      "kind": "theorem",
+      "module": "OwenScrambling/Discrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.localDiscrepancy_eq_abs_div",
+      "kind": "theorem",
+      "module": "OwenScrambling/Discrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.bddAbove_localDiscrepancy",
+      "kind": "theorem",
+      "module": "OwenScrambling/Discrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.localDiscrepancy_le_starDiscrepancy",
+      "kind": "theorem",
+      "module": "OwenScrambling/Discrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.starDiscrepancy_le_of_forall",
+      "kind": "theorem",
+      "module": "OwenScrambling/Discrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.starDiscrepancy_nonneg",
+      "kind": "theorem",
+      "module": "OwenScrambling/Discrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.starDiscrepancy_le_one",
+      "kind": "theorem",
+      "module": "OwenScrambling/Discrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.countAtMost_div_sub_le_starDiscrepancy",
+      "kind": "theorem",
+      "module": "OwenScrambling/Discrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.inv_two_mul_le_starDiscrepancy",
+      "kind": "theorem",
+      "module": "OwenScrambling/Discrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.midpointRule_mem",
+      "kind": "theorem",
+      "module": "OwenScrambling/Discrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.midpointRule_lt_iff",
+      "kind": "theorem",
+      "module": "OwenScrambling/Discrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.countBelow_midpointRule_le",
+      "kind": "theorem",
+      "module": "OwenScrambling/Discrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.le_countBelow_midpointRule",
+      "kind": "theorem",
+      "module": "OwenScrambling/Discrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.abs_countBelow_midpointRule_sub_le",
+      "kind": "theorem",
+      "module": "OwenScrambling/Discrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.starDiscrepancy_midpointRule",
+      "kind": "theorem",
+      "module": "OwenScrambling/Discrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.starDiscrepancy_midpointRule_le",
+      "kind": "theorem",
+      "module": "OwenScrambling/Discrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.midpointRule_three",
+      "kind": "theorem",
+      "module": "OwenScrambling/Discrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.starDiscrepancy_midpointRule_three",
+      "kind": "theorem",
+      "module": "OwenScrambling/Discrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.uniformIco",
+      "kind": "abbrev",
+      "module": "OwenScrambling/MonteCarlo.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.isProbabilityMeasure_uniformIco",
+      "kind": "theorem",
+      "module": "OwenScrambling/MonteCarlo.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.uniformCube",
+      "kind": "abbrev",
+      "module": "OwenScrambling/MonteCarlo.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.isProbabilityMeasure_uniformCube",
+      "kind": "theorem",
+      "module": "OwenScrambling/MonteCarlo.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.sampleMean",
+      "kind": "def",
+      "module": "OwenScrambling/MonteCarlo.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.map_le_of_sum_map_eq",
+      "kind": "theorem",
+      "module": "OwenScrambling/MonteCarlo.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.integrable_map_of_sum_map_eq",
+      "kind": "theorem",
+      "module": "OwenScrambling/MonteCarlo.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.memLp_map_of_sum_map_eq",
+      "kind": "theorem",
+      "module": "OwenScrambling/MonteCarlo.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.integral_sampleMean_of_sum_map_eq",
+      "kind": "theorem",
+      "module": "OwenScrambling/MonteCarlo.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.variance_sampleMean_of_sum_map_eq",
+      "kind": "theorem",
+      "module": "OwenScrambling/MonteCarlo.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.variance_sampleMean_le_of_sum_map_eq",
+      "kind": "theorem",
+      "module": "OwenScrambling/MonteCarlo.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.sum_map_eq_of_hasLaw",
+      "kind": "theorem",
+      "module": "OwenScrambling/MonteCarlo.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.integral_sampleMean_iid",
+      "kind": "theorem",
+      "module": "OwenScrambling/MonteCarlo.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.variance_sampleMean_iid",
+      "kind": "theorem",
+      "module": "OwenScrambling/MonteCarlo.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.rmse_sampleMean_iid",
+      "kind": "theorem",
+      "module": "OwenScrambling/MonteCarlo.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.tendstoInDistribution_sampleMean_iid",
+      "kind": "theorem",
+      "module": "OwenScrambling/MonteCarlo.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.measure_all_draws_lt_tenth",
+      "kind": "theorem",
+      "module": "OwenScrambling/MonteCarlo.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.measure_all_draws_lt_tenth_pos",
+      "kind": "theorem",
+      "module": "OwenScrambling/MonteCarlo.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.measure_sampleMean_far_pos",
+      "kind": "theorem",
+      "module": "OwenScrambling/MonteCarlo.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.integral_sampleMean_of_hasLaw_uniformCube",
+      "kind": "theorem",
+      "module": "OwenScrambling/Unbiased.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.uniformIco_eq_restrict_Ioc",
+      "kind": "theorem",
+      "module": "OwenScrambling/Unbiased.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.map_fract_restrict_Ioc",
+      "kind": "theorem",
+      "module": "OwenScrambling/Unbiased.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.measurePreserving_fract_add",
+      "kind": "theorem",
+      "module": "OwenScrambling/Unbiased.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.shiftMod1",
+      "kind": "def",
+      "module": "OwenScrambling/Unbiased.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.shiftMod1_mem_cube",
+      "kind": "theorem",
+      "module": "OwenScrambling/Unbiased.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.measurePreserving_shiftMod1",
+      "kind": "theorem",
+      "module": "OwenScrambling/Unbiased.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.hasLaw_shiftMod1",
+      "kind": "theorem",
+      "module": "OwenScrambling/Unbiased.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.integral_sampleMean_shiftMod1",
+      "kind": "theorem",
+      "module": "OwenScrambling/Unbiased.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.stratum",
+      "kind": "def",
+      "module": "OwenScrambling/Unbiased.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.measurableSet_stratum",
+      "kind": "theorem",
+      "module": "OwenScrambling/Unbiased.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.stratumMap",
+      "kind": "def",
+      "module": "OwenScrambling/Unbiased.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.measurable_stratumMap",
+      "kind": "theorem",
+      "module": "OwenScrambling/Unbiased.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.stratumMap_preimage_stratum",
+      "kind": "theorem",
+      "module": "OwenScrambling/Unbiased.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.map_stratumMap_uniformIco",
+      "kind": "theorem",
+      "module": "OwenScrambling/Unbiased.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.iUnion_stratum",
+      "kind": "theorem",
+      "module": "OwenScrambling/Unbiased.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.pairwise_disjoint_stratum",
+      "kind": "theorem",
+      "module": "OwenScrambling/Unbiased.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.sum_map_stratumMap",
+      "kind": "theorem",
+      "module": "OwenScrambling/Unbiased.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.sum_map_stratified",
+      "kind": "theorem",
+      "module": "OwenScrambling/Unbiased.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.integral_sampleMean_stratified",
+      "kind": "theorem",
+      "module": "OwenScrambling/Unbiased.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.not_hasLaw_stratumMap",
+      "kind": "theorem",
+      "module": "OwenScrambling/Unbiased.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.sum_map_eq_of_integral_sampleMean_indicator",
+      "kind": "theorem",
+      "module": "OwenScrambling/Unbiased.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.sampleMean_const_points",
+      "kind": "theorem",
+      "module": "OwenScrambling/Unbiased.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.integral_sampleMean_of_hasLaw_const",
+      "kind": "theorem",
+      "module": "OwenScrambling/Unbiased.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.variance_sampleMean_const",
+      "kind": "theorem",
+      "module": "OwenScrambling/Unbiased.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.Agree",
+      "kind": "abbrev",
+      "module": "OwenScrambling/ScrambleDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.truncDigits",
+      "kind": "def",
+      "module": "OwenScrambling/ScrambleDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.digitAt",
+      "kind": "def",
+      "module": "OwenScrambling/ScrambleDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.prefixVal",
+      "kind": "def",
+      "module": "OwenScrambling/ScrambleDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.cellVal",
+      "kind": "def",
+      "module": "OwenScrambling/ScrambleDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.Scramble",
+      "kind": "abbrev",
+      "module": "OwenScrambling/ScrambleDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.scramble",
+      "kind": "def",
+      "module": "OwenScrambling/ScrambleDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.agree_mono",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.agree_symm",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.agree_trans",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.agree_iff_eq",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.agree_succ_iff",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.truncDigits_eq_iff",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.agree_scramble_iff",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.scramble_injective",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.scramble_bijective",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.scramble_mul_apply",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.digitAt_lt",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.digitAt_fin",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.prefixVal_lt",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.prefixVal_inj_iff",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.prefixVal_eq_iff_agree",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.prefixVal_div",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.cellVal_lt",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.cellVal_injective",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.cellFin",
+      "kind": "def",
+      "module": "OwenScrambling/ScrambleDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.cellFin_bijective",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.exists_prefixVal_eq",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.digitPoint",
+      "kind": "def",
+      "module": "OwenScrambling/ScrambleDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.digitPoint_eq_stratumMap",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.floor_pow_mul_digitPoint",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.digitPoint_mem_Ico",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.elemBox",
+      "kind": "def",
+      "module": "OwenScrambling/ScrambleDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.boxIndex",
+      "kind": "def",
+      "module": "OwenScrambling/ScrambleDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.mem_elemBox_iff",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.IsNet",
+      "kind": "def",
+      "module": "OwenScrambling/ScrambleDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.scrambledPoint",
+      "kind": "def",
+      "module": "OwenScrambling/ScrambleDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.isNet_scrambledPoint",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.card_scramble_fiber_eq",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.card_scramble_fiber_mul",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.sum_scramble_eq",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.sum_map_digitPoint_scramble",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.mixLaw",
+      "kind": "def",
+      "module": "OwenScrambling/ScrambleDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.measurable_digitPoint",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.measurable_scrambledPoint",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.mixLaw_scrambledPoint",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.exists_perm_pair",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.le_of_agree_of_ne",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.card_scramble_pair_le",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.card_scramble_pair_eq",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.card_scramble_pair_eq_zero",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.agree_min_iff",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.card_agree",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.commonPrefix",
+      "kind": "def",
+      "module": "OwenScrambling/ScrambleDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.commonPrefix_le",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.agree_iff_le_commonPrefix",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.agree_commonPrefix",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.ne_at_commonPrefix",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.commonPrefix_scramble",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.agreeKernel",
+      "kind": "def",
+      "module": "OwenScrambling/ScrambleDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.agreeKernel_comm",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.sum_agreeKernel",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.pairKernel",
+      "kind": "def",
+      "module": "OwenScrambling/ScrambleDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.sum_pairKernel",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.pairKernel_eq_zero",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.pairKernel_eq_const",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.card_scramble_pair_of_lt",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.card_scramble_pair_diag",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.card_scramble_pair",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleDefs.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.sum_agreeKernel_mul_of_le",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleHaar.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.sum_agreeKernel_mul",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleHaar.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.agreeKernel_self_depth",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleHaar.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.agreeKernel_zero",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleHaar.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.agreeKernel_min",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleHaar.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.detailKernel",
+      "kind": "def",
+      "module": "OwenScrambling/ScrambleHaar.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.detailKernel_comm",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleHaar.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.sum_detailKernel_mul",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleHaar.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.sum_range_detailKernel",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleHaar.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.agreeKernel_eq_sum_fin",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleHaar.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.gainWeight",
+      "kind": "def",
+      "module": "OwenScrambling/ScrambleHaar.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.gainWeight_zero",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleHaar.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.pairKernel_eq_sum",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleHaar.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.haarKernel",
+      "kind": "def",
+      "module": "OwenScrambling/ScrambleHaar.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.sum_prod_mul_prod",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleHaar.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.haarKernel_comm",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleHaar.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.sum_haarKernel_mul",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleHaar.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.qform",
+      "kind": "def",
+      "module": "OwenScrambling/ScrambleHaar.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.qform_eq_sum_sq",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleHaar.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.qform_haarKernel_nonneg",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleHaar.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.sum_haarKernel",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleHaar.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.haarKernel_zero",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleHaar.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.prod_pairKernel_eq_sum",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleHaar.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.scrambleVec",
+      "kind": "def",
+      "module": "OwenScrambling/ScrambleHaar.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.card_scrambleVec_pair",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleHaar.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.sum_scrambleVec_pair",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleHaar.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.card_scrambleVec",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleHaar.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.sum_scrambleVec",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleHaar.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.haarVar",
+      "kind": "def",
+      "module": "OwenScrambling/ScrambleHaar.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.haarVar_nonneg",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleHaar.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.sum_haarVar",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleHaar.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.haarVar_zero",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleHaar.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.gainCoeff",
+      "kind": "def",
+      "module": "OwenScrambling/ScrambleHaar.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.gainCoeff_zero",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleHaar.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.sum_sum_sum_rotate",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleHaar.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.sum_pairKernel_mul_eq",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleHaar.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.sum_sq_sum_scrambleVec",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleHaar.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.card_filter_range_div",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleGain.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.boxIndex_digitPoint",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleGain.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.boxIndex_digitPoint_eq_iff",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleGain.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.card_agree_net_eq_one",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleGain.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.card_agree_net_of_le",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleGain.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.exists_le_sum_eq",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleGain.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.card_agree_net_of_ge",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleGain.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.card_agree_net",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleGain.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.gainSeq",
+      "kind": "def",
+      "module": "OwenScrambling/ScrambleGain.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.gainSeq_zero_right",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleGain.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.gainSeq_succ",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleGain.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.gainAltSum",
+      "kind": "def",
+      "module": "OwenScrambling/ScrambleGain.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.gainAltSum_succ",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleGain.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.gainSeq_eq_altSum",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleGain.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.gainSeq_eq_zero",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleGain.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.alt_sum_mem_Icc",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleGain.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.antitone_choose_div",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleGain.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.gainAltSum_mem_Icc",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleGain.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.gainSeq_mem_Icc",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleGain.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.gainSeq_two_four_two",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleGain.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.agreeInd",
+      "kind": "def",
+      "module": "OwenScrambling/ScrambleGain.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.gainFactor",
+      "kind": "def",
+      "module": "OwenScrambling/ScrambleGain.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.gainWeight_commonPrefix",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleGain.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.partialGain",
+      "kind": "def",
+      "module": "OwenScrambling/ScrambleGain.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.gainCoeff_eq_partialGain",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleGain.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.partialGain_empty",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleGain.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.partialGain_insert",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleGain.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.card_filter_add_le_sum",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleGain.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.partialGain_eq_gainSeq",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleGain.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.gainCoeff_net",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleGain.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.one_le_card_active",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleGain.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.gainCoeff_net_eq_zero",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleGain.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.gainCoeff_net_mem_Icc",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleGain.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.cellPoint",
+      "kind": "def",
+      "module": "OwenScrambling/ScrambleVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.scrambledPoint_eq_cellPoint",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.measurable_cellPoint",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.mixLaw_scrambledPoint_pair_eq",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.sum_map_digitPoint",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.sum_map_cellPoint",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.map_cellPoint_le",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.memLp_comp_cellPoint",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.sum_integral_cellPoint",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.remLaw",
+      "kind": "abbrev",
+      "module": "OwenScrambling/ScrambleVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.isProbabilityMeasure_remLaw",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.measurePreserving_remLaw_eval",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.integral_remLaw_eval",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.memLp_remLaw_eval",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.integral_remLaw_mul",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.cellAvg",
+      "kind": "def",
+      "module": "OwenScrambling/ScrambleVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.cellSq",
+      "kind": "def",
+      "module": "OwenScrambling/ScrambleVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.cellAvg_sq_le",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.scrambledEstimate",
+      "kind": "def",
+      "module": "OwenScrambling/ScrambleVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.scrambledLaw",
+      "kind": "def",
+      "module": "OwenScrambling/ScrambleVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.memLp_scrambledEstimate",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.measurable_scrambledEstimate",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.integral_scrambledEstimate",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.integral_sq_scrambledEstimate",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.integral_mixLaw",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.isProbabilityMeasure_mixLaw",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.memLp_id_mixLaw",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.card_scramble_pi",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.integral_scrambledLaw",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.cellResVar",
+      "kind": "def",
+      "module": "OwenScrambling/ScrambleVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.cellResVar_nonneg",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.variance_eq_cellResVar_add",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.variance_scrambledLaw",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.pow_div_sub_one_le_exp_one",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.variance_scrambledLaw_le",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.variance_scrambledLaw_le_exp_one",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.card_box_net_of_le",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleAsymptotic.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.stepFn",
+      "kind": "def",
+      "module": "OwenScrambling/ScrambleAsymptotic.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.measurable_stepFn",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleAsymptotic.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.memLp_stepFn",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleAsymptotic.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.boxIndex_scrambledPoint",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleAsymptotic.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.sum_stepFn_scrambledPoint",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleAsymptotic.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.ae_mem_cube_uniformCube",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleAsymptotic.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.integral_stepFn",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleAsymptotic.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.ae_mem_cube_remLaw",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleAsymptotic.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.sampleMean_stepFn_scrambledPoint",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleAsymptotic.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.variance_scrambledLaw_eq_sum",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleAsymptotic.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.variance_scrambledLaw_sub_of_exact",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleAsymptotic.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.dist_corner_lt",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleAsymptotic.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.exists_stepFn_approx",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleAsymptotic.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.tendsto_pow_mul_variance_scrambledLaw",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleAsymptotic.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.revDigits",
+      "kind": "def",
+      "module": "OwenScrambling/ScrambleHammersley.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.cellEnum",
+      "kind": "def",
+      "module": "OwenScrambling/ScrambleHammersley.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.hammersleyDigits",
+      "kind": "def",
+      "module": "OwenScrambling/ScrambleHammersley.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.eq_of_agree_of_agree_rev",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleHammersley.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.isNet_hammersley",
+      "kind": "theorem",
+      "module": "OwenScrambling/ScrambleHammersley.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.continuous_stratumMap",
+      "kind": "theorem",
+      "module": "OwenScrambling/Stratified.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.stratumMap_eq_midpoint_add",
+      "kind": "theorem",
+      "module": "OwenScrambling/Stratified.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.midpoint_shift_mem",
+      "kind": "theorem",
+      "module": "OwenScrambling/Stratified.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.integral_sq_sub_half_uniformIco",
+      "kind": "theorem",
+      "module": "OwenScrambling/Stratified.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.integral_id_uniformIco",
+      "kind": "theorem",
+      "module": "OwenScrambling/Stratified.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.integrable_uniformIco_of_continuous",
+      "kind": "theorem",
+      "module": "OwenScrambling/Stratified.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.variance_le_of_lipschitz_half",
+      "kind": "theorem",
+      "module": "OwenScrambling/Stratified.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.memLp_uniformIco_of_lipschitz",
+      "kind": "theorem",
+      "module": "OwenScrambling/Stratified.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.abs_sub_stratumMap_half_le",
+      "kind": "theorem",
+      "module": "OwenScrambling/Stratified.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.variance_stratified_eq",
+      "kind": "theorem",
+      "module": "OwenScrambling/Stratified.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.variance_stratified_le_mc",
+      "kind": "theorem",
+      "module": "OwenScrambling/Stratified.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.variance_stratified_le_lipschitz",
+      "kind": "theorem",
+      "module": "OwenScrambling/Stratified.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.integral_sampleMean_commonShift",
+      "kind": "theorem",
+      "module": "OwenScrambling/Stratified.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.variance_commonShift_le_lipschitz",
+      "kind": "theorem",
+      "module": "OwenScrambling/Stratified.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.variance_uniformIco_id",
+      "kind": "theorem",
+      "module": "OwenScrambling/Stratified.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.variance_uniformIco_affine",
+      "kind": "theorem",
+      "module": "OwenScrambling/Stratified.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.variance_stratified_id",
+      "kind": "theorem",
+      "module": "OwenScrambling/Stratified.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.variance_commonShift_id",
+      "kind": "theorem",
+      "module": "OwenScrambling/Stratified.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.variance_stratified_id_lt_commonShift_id",
+      "kind": "theorem",
+      "module": "OwenScrambling/Stratified.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.sum_cond_eq_of_partition",
+      "kind": "theorem",
+      "module": "OwenScrambling/Stratified.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.variance_sampleMean_partition_le",
+      "kind": "theorem",
+      "module": "OwenScrambling/Stratified.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.DigitWord",
+      "kind": "abbrev",
+      "module": "OwenScrambling/Owen1DScramble.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.wordPrefix",
+      "kind": "def",
+      "module": "OwenScrambling/Owen1DScramble.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.OwenTree",
+      "kind": "abbrev",
+      "module": "OwenScrambling/Owen1DScramble.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.owenWord",
+      "kind": "def",
+      "module": "OwenScrambling/Owen1DScramble.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.wordPrefix_owenWord_eq",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DScramble.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.owenWord_injective",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DScramble.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.owenWordEquiv",
+      "kind": "def",
+      "module": "OwenScrambling/Owen1DScramble.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.digitEquiv",
+      "kind": "def",
+      "module": "OwenScrambling/Owen1DScramble.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.digitEquiv_apply_val",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DScramble.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.digitEquiv_symm_apply_val",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DScramble.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.owenCell",
+      "kind": "def",
+      "module": "OwenScrambling/Owen1DScramble.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.owenCell_apply",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DScramble.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.swapTree",
+      "kind": "def",
+      "module": "OwenScrambling/Owen1DScramble.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.swapTree_swapTree",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DScramble.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.owenWord_swapTree",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DScramble.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.owenWord_swapTree_eq_iff",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DScramble.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.card_filter_owenWord_eq",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DScramble.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.card_filter_owenWord",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DScramble.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.card_filter_owenCell",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DScramble.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.owenNet",
+      "kind": "def",
+      "module": "OwenScrambling/Owen1DScramble.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.owenNet_mem_stratum",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DScramble.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.owenNetSorted",
+      "kind": "def",
+      "module": "OwenScrambling/Owen1DScramble.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.owenNetSorted_apply",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DScramble.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.stratPoints",
+      "kind": "def",
+      "module": "OwenScrambling/Owen1DScramble.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.measurable_stratPoints",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DScramble.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.stratifiedLaw",
+      "kind": "def",
+      "module": "OwenScrambling/Owen1DScramble.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.measurePreserving_comp_perm",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DScramble.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.measure_preimage_comp_of_indepFun",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DScramble.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.measurable_comp_of_countable",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DScramble.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.sum_measure_preimage_singleton_eq_one",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DScramble.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.hasLaw_owenNetSorted",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DScramble.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.owenRemainder",
+      "kind": "def",
+      "module": "OwenScrambling/Owen1DScramble.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.owenNetSorted_eq_stratPoints",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DScramble.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.hasLaw_owenRemainder",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DScramble.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.measure_preimage_singleton_of_uniform",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DScramble.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.hasLaw_apply_of_hasLaw_uniformCube",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DScramble.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.hasLaw_owenNet",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DScramble.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.sampleMean_owenNet",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DScramble.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.measurable_sampleMean",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DScramble.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.map_sampleMean_owenNet",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DScramble.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.identDistrib_sampleMean_owenNet",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DScramble.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.hasLaw_eval_uniformCube",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DScramble.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.iIndepFun_eval_uniformCube",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DScramble.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.integral_sampleMean_owenNet",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DScramble.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.variance_sampleMean_owenNet",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DScramble.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.variance_sampleMean_owenNet_le_mc",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DScramble.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.variance_sampleMean_owenNet_le_lipschitz",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DScramble.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.norm_prod_sub_prod_le",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DLindeberg.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.norm_cexp_mul_I_sub_le",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DLindeberg.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.norm_charFun_sub_le_of_abs_le",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DLindeberg.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.tendstoInDistribution_sum_of_bounded",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DLindeberg.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.integral_uniformIco_eq_intervalIntegral",
+      "kind": "theorem",
+      "module": "OwenScrambling/ShiftLimit.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.sum_range_natCast",
+      "kind": "theorem",
+      "module": "OwenScrambling/ShiftLimit.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.scaled_error_id",
+      "kind": "theorem",
+      "module": "OwenScrambling/ShiftLimit.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.map_sub_half_uniformIco",
+      "kind": "theorem",
+      "module": "OwenScrambling/ShiftLimit.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.hasLaw_scaled_error_id",
+      "kind": "theorem",
+      "module": "OwenScrambling/ShiftLimit.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.cell_error_le",
+      "kind": "theorem",
+      "module": "OwenScrambling/ShiftLimit.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.tendsto_scaled_error",
+      "kind": "theorem",
+      "module": "OwenScrambling/ShiftLimit.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.ae_mem_Ico_of_hasLaw",
+      "kind": "theorem",
+      "module": "OwenScrambling/ShiftLimit.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.measurable_sampleMean_stratumMap",
+      "kind": "theorem",
+      "module": "OwenScrambling/ShiftLimit.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.ae_tendsto_scaled_error",
+      "kind": "theorem",
+      "module": "OwenScrambling/ShiftLimit.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.tendstoInDistribution_scaled_error",
+      "kind": "theorem",
+      "module": "OwenScrambling/ShiftLimit.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.map_mul_sub_half_uniformIco",
+      "kind": "theorem",
+      "module": "OwenScrambling/ShiftLimit.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.ne_gaussianReal_of_measure_Ioi_eq_zero",
+      "kind": "theorem",
+      "module": "OwenScrambling/ShiftLimit.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.limit_law_ne_gaussianReal",
+      "kind": "theorem",
+      "module": "OwenScrambling/ShiftLimit.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.not_tendstoInDistribution_scaled_error_gaussian",
+      "kind": "theorem",
+      "module": "OwenScrambling/ShiftLimit.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.tendsto_sqrt_scaled_error",
+      "kind": "theorem",
+      "module": "OwenScrambling/ShiftLimit.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.ae_tendsto_sqrt_scaled_error",
+      "kind": "theorem",
+      "module": "OwenScrambling/ShiftLimit.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.not_tendstoInDistribution_sqrt_scaled_error_gaussian",
+      "kind": "theorem",
+      "module": "OwenScrambling/ShiftLimit.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.stratVar",
+      "kind": "def",
+      "module": "OwenScrambling/Owen1DVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.stratVar_nonneg",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.abs_variance_add_sub_le",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.abs_sub_sub_deriv_mul_le",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.abs_variance_cell_sub_le",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.abs_integral_sq_deriv_sub_le",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.abs_inv_mul_variance_cell_sub_le",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.tendsto_cube_mul_stratVar",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.integral_sq_deriv_pos",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.eventually_stratVar_pos",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.stratVar_const",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.cellTerm",
+      "kind": "def",
+      "module": "OwenScrambling/Owen1DCLT.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.stratumMap_mem_Icc",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DCLT.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.integrable_cell",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DCLT.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.inv_mul_sum_integral_cell",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DCLT.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.sum_cellTerm",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DCLT.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.iIndepFun_coords",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DCLT.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.abs_cellTerm_le",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DCLT.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.exists_lipschitz_of_C1",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DCLT.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.tendstoInDistribution_stratified",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DCLT.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.tendstoInDistribution_stratified_all_n",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DCLT.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.sampleMean_owenNet_eq_stratPoints",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DCLT.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.tendstoInDistribution_owenNet",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DCLT.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.memLp_uniformIco_of_continuousOn",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DCLT.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.variance_owenNet_eq_stratVar",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DCLT.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.tendsto_cube_mul_variance_owenNet",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DCLT.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.owenNet_normal_and_shift_not_normal",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DCLT.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.owenNet_exact_of_const",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DCLT.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.not_tendstoInDistribution_owenNet_const",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DCLT.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.isProbabilityMeasure_scrambledLaw",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohCLT.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.tendsto_scrambledLaw_sqrt_error_ge",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohCLT.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.not_tendstoInDistribution_sqrt_scaled_error",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohCLT.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.integral_pi_eval_mul",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohCLT.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.integral_sq_sum_pi",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohCLT.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.injective_coord_net",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohCLT.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.abs_cell_sub_integral_le",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohCLT.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.bijective_cellFin_scramble",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohCLT.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.addFn",
+      "kind": "def",
+      "module": "OwenScrambling/LohCLT.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.addTerm",
+      "kind": "def",
+      "module": "OwenScrambling/LohCLT.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.digitPoint_eq_stratumMap_cellFin",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohCLT.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.sum_addTerm",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohCLT.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.memLp_cell_coord",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohCLT.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.integral_uniformCube_eval",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohCLT.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.memLp_uniformCube_eval",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohCLT.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.integral_addTerm",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohCLT.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.memLp_addTerm",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohCLT.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.sum_integral_sq_addTerm",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohCLT.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.abs_addTerm_le",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohCLT.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.measurable_addFn",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohCLT.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.memLp_addFn",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohCLT.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.integral_addFn",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohCLT.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.variance_scrambledLaw_addFn",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohCLT.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.measurable_addTerm",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohCLT.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.tendstoInDistribution_scrambledEstimate_addFn",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohCLT.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.scrambledLaw_stepFn_ne_eq_zero",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohCLT.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.not_tendstoInDistribution_stepFn",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohCLT.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.tendsto_cube_mul_variance_scrambledLaw_addFn",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohCLT.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.tendsto_avg_of_forall",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohCLT.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.tendstoInDistribution_scrambledLaw_addFn",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohCLT.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.variance_scrambledLaw_hammersley_le",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohCLT.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.tendsto_variance_scrambledLaw_hammersley",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohCLT.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.tendstoInDistribution_scrambledLaw_hammersley",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohCLT.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.digitShiftScramble",
+      "kind": "def",
+      "module": "OwenScrambling/LohCLT.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.scramble_digitShiftScramble",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohCLT.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.digitShift_ne_pair_law",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohCLT.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.haarProj",
+      "kind": "def",
+      "module": "OwenScrambling/LohVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.haarVar_eq_sum_sq",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.sum_detailKernel_succ",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.agreeKernel_nonneg",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.sum_abs_detailKernel_succ_le",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.agree_of_detailKernel_ne_zero",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.abs_cellVal_sub_lt",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.abs_digitPoint_sub_le",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.sum_fin_two_pi",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.haarKernel_two",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.sum_mul_mul_eq_mixed",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.mixDiff",
+      "kind": "def",
+      "module": "OwenScrambling/LohVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.cellAvg_mixed_eq",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.haarProj_cellAvg_eq",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.abs_haarProj_cellAvg_le",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.haarVar_cellAvg_le",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.sum_range_cast_id",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.sum_agreeKernel_mul_cellVal",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.sum_detailKernel_mul_cellVal",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.digitPoint_sub_digitPoint",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.abs_sub_lt_of_floor_eq",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.integrable_mixDiff_cellPoint",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.abs_haarProj_cellAvg_ge",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.card_prefixVal_eq",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.card_prefixVal_digit_eq",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.haarVar_cellAvg_ge",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.gainSeq_two_one",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.lvec2",
+      "kind": "def",
+      "module": "OwenScrambling/LohVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.lvec2_val",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.gainCoeff_lvec2",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.pow_mul_variance_scrambledLaw_two_ge",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.cellResVar_le",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.sum_range_ite_pow_le",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.pow_mul_variance_scrambledLaw_two_le",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.variance_scrambledLaw_two_asymp",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.prodFn",
+      "kind": "def",
+      "module": "OwenScrambling/LohVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.mixDiff_prodFn",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.variance_scrambledLaw_prodFn",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.avg_variance_scrambledEstimate",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.tendsto_avg_variance_given_scramble_div",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.abs_sub_sub_mul_le_of_deriv",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.abs_mixDiff_sub_le_of_deriv",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.variance_scrambledLaw_two_asymp_of_deriv",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohVariance.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.not_tendstoInDistribution_gaussian_of_abs_le",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DCounterexample.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.sum_range_ite_lt",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DCounterexample.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.sum_fin_ite_lt",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DCounterexample.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.abs_sum_indicator_sub_le",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DCounterexample.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.variance_indicator_uniformIco",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DCounterexample.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.two_pow_mod_three",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DCounterexample.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.indicatorThird",
+      "kind": "def",
+      "module": "OwenScrambling/Owen1DCounterexample.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.integral_indicatorThird",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DCounterexample.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.stratVar_indicator_third_ge",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DCounterexample.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.abs_normalised_error_indicator_le",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DCounterexample.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.not_tendstoInDistribution_owenNet_indicator",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DCounterexample.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.wordFirst",
+      "kind": "def",
+      "module": "OwenScrambling/Owen1DDeep.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.wordLast",
+      "kind": "def",
+      "module": "OwenScrambling/Owen1DDeep.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.digitEquiv_add_val",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DDeep.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.netPrefix",
+      "kind": "def",
+      "module": "OwenScrambling/Owen1DDeep.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.netWord",
+      "kind": "def",
+      "module": "OwenScrambling/Owen1DDeep.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.wordFirst_netWord",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DDeep.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.wordLast_netWord",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DDeep.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.digitEquiv_netWord_val",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DDeep.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.wordPrefix_netWord",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DDeep.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.topTree",
+      "kind": "def",
+      "module": "OwenScrambling/Owen1DDeep.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.wordFirst_owenWord",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DDeep.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.tailWord",
+      "kind": "def",
+      "module": "OwenScrambling/Owen1DDeep.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.wordLast_owenWord_netWord",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DDeep.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.deepCell",
+      "kind": "def",
+      "module": "OwenScrambling/Owen1DDeep.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.deepTail",
+      "kind": "def",
+      "module": "OwenScrambling/Owen1DDeep.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.deepNet",
+      "kind": "def",
+      "module": "OwenScrambling/Owen1DDeep.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.deepNet_eq",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DDeep.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.deepRemainder",
+      "kind": "def",
+      "module": "OwenScrambling/Owen1DDeep.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.deepNetSorted",
+      "kind": "def",
+      "module": "OwenScrambling/Owen1DDeep.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.deepNetSorted_eq",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DDeep.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.sampleMean_deepNet",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DDeep.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.kOfPrefix",
+      "kind": "def",
+      "module": "OwenScrambling/Owen1DDeep.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.kOfPrefix_netPrefix",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DDeep.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.tailLevel",
+      "kind": "def",
+      "module": "OwenScrambling/Owen1DDeep.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.tailLevel_natAdd",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DDeep.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.swapTail",
+      "kind": "def",
+      "module": "OwenScrambling/Owen1DDeep.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.swapTail_swapTail",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DDeep.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.topTree_swapTail",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DDeep.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.tailWord_swapTail",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DDeep.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.deepKey",
+      "kind": "def",
+      "module": "OwenScrambling/Owen1DDeep.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.deepKey_swapTail_eq_iff",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DDeep.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.card_filter_deepKey_eq",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DDeep.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.sum_card_filter_deepKey",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DDeep.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.digitShift",
+      "kind": "def",
+      "module": "OwenScrambling/Owen1DDeep.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.measurable_digitShift",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DDeep.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.sum_measure_preimage_digitShift",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DDeep.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.hasLaw_deepRemainder",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DDeep.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.hasLaw_deepNetSorted",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DDeep.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.variance_deepNet_eq_stratVar",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DDeep.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.tendstoInDistribution_deepNet",
+      "kind": "theorem",
+      "module": "OwenScrambling/Owen1DDeep.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.unifAvg",
+      "kind": "def",
+      "module": "OwenScrambling/LohGeneralFinite.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.unifAvg_add",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralFinite.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.unifAvg_const_mul",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralFinite.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.unifAvg_mul_const",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralFinite.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.unifAvg_const",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralFinite.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.unifAvg_mono",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralFinite.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.unifAvg_nonneg",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralFinite.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.unifAvg_sum",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralFinite.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.abs_unifAvg_le",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralFinite.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.sq_unifAvg_mul_le",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralFinite.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.sq_unifAvg_le",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralFinite.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.unifAvg_mul_of_disjoint",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralFinite.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.unifAvg_eval",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralFinite.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.unifAvg_prod",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralFinite.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.unifAvg_mul_eval_of_forall_ne",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralFinite.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.sum_eval_congr",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralFinite.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.unifAvg_sum_eval",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralFinite.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.ne_of_injOn_insert",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralFinite.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.injOn_of_insert",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralFinite.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.unifAvg_sq_sum_eq",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralFinite.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.unifAvg_pow_four_sum_le",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralFinite.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.sum_perm_apply",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralFinite.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.norm_unifAvg_le",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralFinite.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.unifAvg_sub_complex",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralFinite.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.unifAvg_const_complex",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralFinite.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.unifAvg_ofReal",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralFinite.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.norm_unifAvg_cexp_sub_le",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralFinite.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.abs_exp_neg_sub_exp_neg_le",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralFinite.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.norm_unifAvg_cexp_le_one",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralFinite.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.sq_unifAvg_sum_mul_le",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralFinite.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.tendsto_unifAvg_cexp_nodeSum",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralFinite.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.cdig",
+      "kind": "def",
+      "module": "OwenScrambling/LohGeneralProd.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.sum_fin_cast_eq",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralProd.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.sum_cdig",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralProd.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.unifAvg_cdig",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralProd.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.abs_cdig_le",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralProd.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.digWt",
+      "kind": "def",
+      "module": "OwenScrambling/LohGeneralProd.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.digWt_pos",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralProd.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.scrDev",
+      "kind": "def",
+      "module": "OwenScrambling/LohGeneralProd.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.prefixVal_mid",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralProd.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.mid_scramble",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralProd.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.integral_digitPoint",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralProd.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.cellAvg_prodFn",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralProd.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.measurable_prodFn",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralProd.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.memLp_prodFn",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralProd.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.sum_scrDev_net",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralProd.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.prodS",
+      "kind": "def",
+      "module": "OwenScrambling/LohGeneralProd.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.integral_scrambledEstimate_prodFn",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralProd.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.nodeSet",
+      "kind": "def",
+      "module": "OwenScrambling/LohGeneralProd.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.cellSet",
+      "kind": "def",
+      "module": "OwenScrambling/LohGeneralProd.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.nodeW",
+      "kind": "def",
+      "module": "OwenScrambling/LohGeneralProd.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.nodeTerm",
+      "kind": "def",
+      "module": "OwenScrambling/LohGeneralProd.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.sum_cdig_mul_nodeW",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralProd.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.prodS_eq_sum_nodeTerm",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralProd.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.unifAvg_nodeTerm",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralProd.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.card_agree_agree_net",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralProd.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.agree_update_succ_iff",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralProd.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.agree_comm_iff",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralProd.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.sum_cdig_cellSet_eq_zero",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralProd.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.eq_of_truncDigits_eq_cellSet",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralProd.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.levelWin",
+      "kind": "def",
+      "module": "OwenScrambling/LohGeneralProd.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.wwin",
+      "kind": "def",
+      "module": "OwenScrambling/LohGeneralProd.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.nodeW_eq_wwin",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralProd.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.wwin_split",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralProd.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.wX",
+      "kind": "def",
+      "module": "OwenScrambling/LohGeneralProd.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.w\u03bd",
+      "kind": "def",
+      "module": "OwenScrambling/LohGeneralProd.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.wwin_eq_sum",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralProd.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.injOn_w\u03bd",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralProd.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.unifAvg_wX",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralProd.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.abs_wX_le",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralProd.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.sum_levelWin_digWt_sq_le",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralProd.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.unifAvg_sq_wwin_le",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralProd.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.unifAvg_pow_four_wwin_le",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralProd.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.dform",
+      "kind": "def",
+      "module": "OwenScrambling/LohGeneralConc.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.abs_dform_le",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralConc.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.sq_sum_abs_le",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralConc.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.pow_four_sum_abs_le",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralConc.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.dform_sub",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralConc.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.dform_add",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralConc.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.unifAvg_sq_dform_le",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralConc.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.abs_unifAvg_sq_dform_sub_le",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralConc.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.unifAvg_sq_sum_le_of_sq",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralConc.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.unifAvg_sq_sub_eq",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralConc.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.unifAvg_sq_sum_sub_le_of_near",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralConc.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.mul_le_half_add_sq",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralConc.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.sum_sq_le_sq_sum",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralConc.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.digWt_mul_digWt",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralConc.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.digWt_add",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralConc.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.sum_card_cellSet",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralConc.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.sum_card_cellSet_all",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralConc.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.wwin_split_top",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralConc.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.wwin_congr",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralConc.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.unifAvg_sq_mul_dform",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralConc.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.condVar",
+      "kind": "def",
+      "module": "OwenScrambling/LohGeneralConc.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.levelVar",
+      "kind": "def",
+      "module": "OwenScrambling/LohGeneralConc.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.condVarWin",
+      "kind": "def",
+      "module": "OwenScrambling/LohGeneralConc.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.unifAvg_abs_nodeVar_sub_le",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralConc.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.unifAvg_abs_condVar_sub_le",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralConc.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.levelVar_nonneg",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralConc.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.unifAvg_sq_levelVar_le",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralConc.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.unifAvg_levelVar_mul",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralConc.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.unifAvg_sq_condVarWin_sub_le",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralConc.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.unifAvg_abs_sub_avg_le",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralConc.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.sq_unifAvg_abs_le",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralConc.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.nodeBound",
+      "kind": "def",
+      "module": "OwenScrambling/LohGeneralConc.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.abs_nodeTerm_le",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralConc.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.unifAvg_sum_sq_nodeBound_le",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralConc.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.unifAvg_sum_pow_four_nodeBound_le",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralConc.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.unifAvg_fin_two",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralCLT.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.unifAvg_sq_prodS",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralCLT.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.integral_sq_sub_eq_variance_add",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralCLT.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.variance_scrambledLaw_eq_of_condMean",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralCLT.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.unifAvg_variance_le",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralCLT.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.integral_prodFn",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralCLT.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.abs_prodFn_sub_le",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralCLT.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.unifAvg_sq_prodS_eq",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralCLT.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.unifAvg_condVar_ge",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralCLT.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.digWt_mul_pow",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralCLT.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.tendsto_sqrt_nat_atTop",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralCLT.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.tendsto_sqrt_nat_div",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralCLT.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.tendsto_unifAvg_cexp_prodS",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralCLT.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.eventually_unifAvg_condVar_ge",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralCLT.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.integral_mixLaw_complex",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralCLT.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.norm_cexp_sub_cexp_le",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralCLT.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.sq_integral_abs_sub_le_variance",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralCLT.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.tendstoInDistribution_scrambledLaw_of_condMean",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralCLT.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.tendstoInDistribution_scrambledLaw_prodFn",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralCLT.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.tendstoInDistribution_scrambledLaw_prodFn_hammersley",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralCLT.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.scrambledEstimate_bilinAdd",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralCLT.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.integral_scrambledEstimate_addFn",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralCLT.lean"
+    },
+    {
+      "name": "RQMCMarkov.OwenScrambling.tendstoInDistribution_scrambledLaw_bilinAdd",
+      "kind": "theorem",
+      "module": "OwenScrambling/LohGeneralCLT.lean"
+    }
+  ],
+  "full_build": "passed",
+  "fresh_source_compilation": "passed",
+  "fresh_source_lint_options": [
+    "-Dlinter.mathlibStandardSet=true",
+    "-Dlinter.style.header=false"
+  ],
+  "axioms": {
+    "RQMCMarkov.OwenScrambling.InUnitIco": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.countBelow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.countAtMost": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.localDiscrepancy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.starDiscrepancy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.qmcEstimate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.midpointRule": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.countBelow_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.countBelow_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.countBelow_div_mem_Icc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.localDiscrepancy_le_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.localDiscrepancy_eq_abs_div": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.bddAbove_localDiscrepancy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.localDiscrepancy_le_starDiscrepancy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.starDiscrepancy_le_of_forall": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.starDiscrepancy_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.starDiscrepancy_le_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.countAtMost_div_sub_le_starDiscrepancy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.inv_two_mul_le_starDiscrepancy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.midpointRule_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.midpointRule_lt_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.countBelow_midpointRule_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.le_countBelow_midpointRule": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.abs_countBelow_midpointRule_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.starDiscrepancy_midpointRule": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.starDiscrepancy_midpointRule_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.midpointRule_three": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.starDiscrepancy_midpointRule_three": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.uniformIco": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.isProbabilityMeasure_uniformIco": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.uniformCube": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.isProbabilityMeasure_uniformCube": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.sampleMean": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.map_le_of_sum_map_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.integrable_map_of_sum_map_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.memLp_map_of_sum_map_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.integral_sampleMean_of_sum_map_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.variance_sampleMean_of_sum_map_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.variance_sampleMean_le_of_sum_map_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.sum_map_eq_of_hasLaw": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.integral_sampleMean_iid": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.variance_sampleMean_iid": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.rmse_sampleMean_iid": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.tendstoInDistribution_sampleMean_iid": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.measure_all_draws_lt_tenth": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.measure_all_draws_lt_tenth_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.measure_sampleMean_far_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.integral_sampleMean_of_hasLaw_uniformCube": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.uniformIco_eq_restrict_Ioc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.map_fract_restrict_Ioc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.measurePreserving_fract_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.shiftMod1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.shiftMod1_mem_cube": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.measurePreserving_shiftMod1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.hasLaw_shiftMod1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.integral_sampleMean_shiftMod1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.stratum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.measurableSet_stratum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.stratumMap": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.measurable_stratumMap": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.stratumMap_preimage_stratum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.map_stratumMap_uniformIco": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.iUnion_stratum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.pairwise_disjoint_stratum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.sum_map_stratumMap": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.sum_map_stratified": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.integral_sampleMean_stratified": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.not_hasLaw_stratumMap": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.sum_map_eq_of_integral_sampleMean_indicator": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.sampleMean_const_points": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.integral_sampleMean_of_hasLaw_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.variance_sampleMean_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.Agree": [],
+    "RQMCMarkov.OwenScrambling.truncDigits": [],
+    "RQMCMarkov.OwenScrambling.digitAt": [],
+    "RQMCMarkov.OwenScrambling.prefixVal": [],
+    "RQMCMarkov.OwenScrambling.cellVal": [],
+    "RQMCMarkov.OwenScrambling.Scramble": [],
+    "RQMCMarkov.OwenScrambling.scramble": [
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.agree_mono": [],
+    "RQMCMarkov.OwenScrambling.agree_symm": [],
+    "RQMCMarkov.OwenScrambling.agree_trans": [],
+    "RQMCMarkov.OwenScrambling.agree_iff_eq": [
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.agree_succ_iff": [],
+    "RQMCMarkov.OwenScrambling.truncDigits_eq_iff": [
+      "propext",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.agree_scramble_iff": [
+      "propext",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.scramble_injective": [
+      "propext",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.scramble_bijective": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.scramble_mul_apply": [
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.digitAt_lt": [],
+    "RQMCMarkov.OwenScrambling.digitAt_fin": [
+      "propext"
+    ],
+    "RQMCMarkov.OwenScrambling.prefixVal_lt": [
+      "propext",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.prefixVal_inj_iff": [
+      "propext",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.prefixVal_eq_iff_agree": [
+      "propext",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.prefixVal_div": [
+      "propext",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.cellVal_lt": [
+      "propext",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.cellVal_injective": [
+      "propext",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.cellFin": [
+      "propext",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.cellFin_bijective": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.exists_prefixVal_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.digitPoint": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.digitPoint_eq_stratumMap": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.floor_pow_mul_digitPoint": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.digitPoint_mem_Ico": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.elemBox": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.boxIndex": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.mem_elemBox_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.IsNet": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.scrambledPoint": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.isNet_scrambledPoint": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.card_scramble_fiber_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.card_scramble_fiber_mul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.sum_scramble_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.sum_map_digitPoint_scramble": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.mixLaw": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.measurable_digitPoint": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.measurable_scrambledPoint": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.mixLaw_scrambledPoint": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.exists_perm_pair": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.le_of_agree_of_ne": [],
+    "RQMCMarkov.OwenScrambling.card_scramble_pair_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.card_scramble_pair_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.card_scramble_pair_eq_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.agree_min_iff": [
+      "propext"
+    ],
+    "RQMCMarkov.OwenScrambling.card_agree": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.commonPrefix": [],
+    "RQMCMarkov.OwenScrambling.commonPrefix_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.agree_iff_le_commonPrefix": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.agree_commonPrefix": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.ne_at_commonPrefix": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.commonPrefix_scramble": [
+      "propext",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.agreeKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.agreeKernel_comm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.sum_agreeKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.pairKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.sum_pairKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.pairKernel_eq_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.pairKernel_eq_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.card_scramble_pair_of_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.card_scramble_pair_diag": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.card_scramble_pair": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.sum_agreeKernel_mul_of_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.sum_agreeKernel_mul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.agreeKernel_self_depth": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.agreeKernel_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.agreeKernel_min": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.detailKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.detailKernel_comm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.sum_detailKernel_mul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.sum_range_detailKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.agreeKernel_eq_sum_fin": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.gainWeight": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.gainWeight_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.pairKernel_eq_sum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.haarKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.sum_prod_mul_prod": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.haarKernel_comm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.sum_haarKernel_mul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.qform": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.qform_eq_sum_sq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.qform_haarKernel_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.sum_haarKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.haarKernel_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.prod_pairKernel_eq_sum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.scrambleVec": [
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.card_scrambleVec_pair": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.sum_scrambleVec_pair": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.card_scrambleVec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.sum_scrambleVec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.haarVar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.haarVar_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.sum_haarVar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.haarVar_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.gainCoeff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.gainCoeff_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.sum_sum_sum_rotate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.sum_pairKernel_mul_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.sum_sq_sum_scrambleVec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.card_filter_range_div": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.boxIndex_digitPoint": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.boxIndex_digitPoint_eq_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.card_agree_net_eq_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.card_agree_net_of_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.exists_le_sum_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.card_agree_net_of_ge": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.card_agree_net": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.gainSeq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.gainSeq_zero_right": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.gainSeq_succ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.gainAltSum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.gainAltSum_succ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.gainSeq_eq_altSum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.gainSeq_eq_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.alt_sum_mem_Icc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.antitone_choose_div": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.gainAltSum_mem_Icc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.gainSeq_mem_Icc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.gainSeq_two_four_two": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.agreeInd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.gainFactor": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.gainWeight_commonPrefix": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.partialGain": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.gainCoeff_eq_partialGain": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.partialGain_empty": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.partialGain_insert": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.card_filter_add_le_sum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.partialGain_eq_gainSeq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.gainCoeff_net": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.one_le_card_active": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.gainCoeff_net_eq_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.gainCoeff_net_mem_Icc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.cellPoint": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.scrambledPoint_eq_cellPoint": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.measurable_cellPoint": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.mixLaw_scrambledPoint_pair_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.sum_map_digitPoint": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.sum_map_cellPoint": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.map_cellPoint_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.memLp_comp_cellPoint": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.sum_integral_cellPoint": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.remLaw": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.isProbabilityMeasure_remLaw": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.measurePreserving_remLaw_eval": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.integral_remLaw_eval": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.memLp_remLaw_eval": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.integral_remLaw_mul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.cellAvg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.cellSq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.cellAvg_sq_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.scrambledEstimate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.scrambledLaw": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.memLp_scrambledEstimate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.measurable_scrambledEstimate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.integral_scrambledEstimate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.integral_sq_scrambledEstimate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.integral_mixLaw": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.isProbabilityMeasure_mixLaw": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.memLp_id_mixLaw": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.card_scramble_pi": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.integral_scrambledLaw": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.cellResVar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.cellResVar_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.variance_eq_cellResVar_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.variance_scrambledLaw": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.pow_div_sub_one_le_exp_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.variance_scrambledLaw_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.variance_scrambledLaw_le_exp_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.card_box_net_of_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.stepFn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.measurable_stepFn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.memLp_stepFn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.boxIndex_scrambledPoint": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.sum_stepFn_scrambledPoint": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.ae_mem_cube_uniformCube": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.integral_stepFn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.ae_mem_cube_remLaw": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.sampleMean_stepFn_scrambledPoint": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.variance_scrambledLaw_eq_sum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.variance_scrambledLaw_sub_of_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.dist_corner_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.exists_stepFn_approx": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.tendsto_pow_mul_variance_scrambledLaw": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.revDigits": [],
+    "RQMCMarkov.OwenScrambling.cellEnum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.hammersleyDigits": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.eq_of_agree_of_agree_rev": [
+      "propext",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.isNet_hammersley": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.continuous_stratumMap": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.stratumMap_eq_midpoint_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.midpoint_shift_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.integral_sq_sub_half_uniformIco": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.integral_id_uniformIco": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.integrable_uniformIco_of_continuous": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.variance_le_of_lipschitz_half": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.memLp_uniformIco_of_lipschitz": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.abs_sub_stratumMap_half_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.variance_stratified_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.variance_stratified_le_mc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.variance_stratified_le_lipschitz": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.integral_sampleMean_commonShift": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.variance_commonShift_le_lipschitz": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.variance_uniformIco_id": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.variance_uniformIco_affine": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.variance_stratified_id": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.variance_commonShift_id": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.variance_stratified_id_lt_commonShift_id": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.sum_cond_eq_of_partition": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.variance_sampleMean_partition_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.DigitWord": [],
+    "RQMCMarkov.OwenScrambling.wordPrefix": [],
+    "RQMCMarkov.OwenScrambling.OwenTree": [],
+    "RQMCMarkov.OwenScrambling.owenWord": [
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.wordPrefix_owenWord_eq": [
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.owenWord_injective": [
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.owenWordEquiv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.digitEquiv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.digitEquiv_apply_val": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.digitEquiv_symm_apply_val": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.owenCell": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.owenCell_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.swapTree": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.swapTree_swapTree": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.owenWord_swapTree": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.owenWord_swapTree_eq_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.card_filter_owenWord_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.card_filter_owenWord": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.card_filter_owenCell": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.owenNet": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.owenNet_mem_stratum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.owenNetSorted": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.owenNetSorted_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.stratPoints": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.measurable_stratPoints": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.stratifiedLaw": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.measurePreserving_comp_perm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.measure_preimage_comp_of_indepFun": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.measurable_comp_of_countable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.sum_measure_preimage_singleton_eq_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.hasLaw_owenNetSorted": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.owenRemainder": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.owenNetSorted_eq_stratPoints": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.hasLaw_owenRemainder": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.measure_preimage_singleton_of_uniform": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.hasLaw_apply_of_hasLaw_uniformCube": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.hasLaw_owenNet": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.sampleMean_owenNet": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.measurable_sampleMean": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.map_sampleMean_owenNet": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.identDistrib_sampleMean_owenNet": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.hasLaw_eval_uniformCube": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.iIndepFun_eval_uniformCube": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.integral_sampleMean_owenNet": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.variance_sampleMean_owenNet": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.variance_sampleMean_owenNet_le_mc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.variance_sampleMean_owenNet_le_lipschitz": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.norm_prod_sub_prod_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.norm_cexp_mul_I_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.norm_charFun_sub_le_of_abs_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.tendstoInDistribution_sum_of_bounded": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.integral_uniformIco_eq_intervalIntegral": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.sum_range_natCast": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.scaled_error_id": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.map_sub_half_uniformIco": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.hasLaw_scaled_error_id": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.cell_error_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.tendsto_scaled_error": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.ae_mem_Ico_of_hasLaw": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.measurable_sampleMean_stratumMap": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.ae_tendsto_scaled_error": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.tendstoInDistribution_scaled_error": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.map_mul_sub_half_uniformIco": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.ne_gaussianReal_of_measure_Ioi_eq_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.limit_law_ne_gaussianReal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.not_tendstoInDistribution_scaled_error_gaussian": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.tendsto_sqrt_scaled_error": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.ae_tendsto_sqrt_scaled_error": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.not_tendstoInDistribution_sqrt_scaled_error_gaussian": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.stratVar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.stratVar_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.abs_variance_add_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.abs_sub_sub_deriv_mul_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.abs_variance_cell_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.abs_integral_sq_deriv_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.abs_inv_mul_variance_cell_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.tendsto_cube_mul_stratVar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.integral_sq_deriv_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.eventually_stratVar_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.stratVar_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.cellTerm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.stratumMap_mem_Icc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.integrable_cell": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.inv_mul_sum_integral_cell": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.sum_cellTerm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.iIndepFun_coords": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.abs_cellTerm_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.exists_lipschitz_of_C1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.tendstoInDistribution_stratified": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.tendstoInDistribution_stratified_all_n": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.sampleMean_owenNet_eq_stratPoints": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.tendstoInDistribution_owenNet": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.memLp_uniformIco_of_continuousOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.variance_owenNet_eq_stratVar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.tendsto_cube_mul_variance_owenNet": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.owenNet_normal_and_shift_not_normal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.owenNet_exact_of_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.not_tendstoInDistribution_owenNet_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.isProbabilityMeasure_scrambledLaw": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.tendsto_scrambledLaw_sqrt_error_ge": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.not_tendstoInDistribution_sqrt_scaled_error": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.integral_pi_eval_mul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.integral_sq_sum_pi": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.injective_coord_net": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.abs_cell_sub_integral_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.bijective_cellFin_scramble": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.addFn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.addTerm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.digitPoint_eq_stratumMap_cellFin": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.sum_addTerm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.memLp_cell_coord": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.integral_uniformCube_eval": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.memLp_uniformCube_eval": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.integral_addTerm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.memLp_addTerm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.sum_integral_sq_addTerm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.abs_addTerm_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.measurable_addFn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.memLp_addFn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.integral_addFn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.variance_scrambledLaw_addFn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.measurable_addTerm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.tendstoInDistribution_scrambledEstimate_addFn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.scrambledLaw_stepFn_ne_eq_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.not_tendstoInDistribution_stepFn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.tendsto_cube_mul_variance_scrambledLaw_addFn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.tendsto_avg_of_forall": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.tendstoInDistribution_scrambledLaw_addFn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.variance_scrambledLaw_hammersley_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.tendsto_variance_scrambledLaw_hammersley": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.tendstoInDistribution_scrambledLaw_hammersley": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.digitShiftScramble": [
+      "propext",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.scramble_digitShiftScramble": [
+      "propext",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.digitShift_ne_pair_law": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.haarProj": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.haarVar_eq_sum_sq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.sum_detailKernel_succ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.agreeKernel_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.sum_abs_detailKernel_succ_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.agree_of_detailKernel_ne_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.abs_cellVal_sub_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.abs_digitPoint_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.sum_fin_two_pi": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.haarKernel_two": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.sum_mul_mul_eq_mixed": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.mixDiff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.cellAvg_mixed_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.haarProj_cellAvg_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.abs_haarProj_cellAvg_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.haarVar_cellAvg_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.sum_range_cast_id": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.sum_agreeKernel_mul_cellVal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.sum_detailKernel_mul_cellVal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.digitPoint_sub_digitPoint": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.abs_sub_lt_of_floor_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.integrable_mixDiff_cellPoint": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.abs_haarProj_cellAvg_ge": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.card_prefixVal_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.card_prefixVal_digit_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.haarVar_cellAvg_ge": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.gainSeq_two_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.lvec2": [
+      "propext"
+    ],
+    "RQMCMarkov.OwenScrambling.lvec2_val": [
+      "propext",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.gainCoeff_lvec2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.pow_mul_variance_scrambledLaw_two_ge": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.cellResVar_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.sum_range_ite_pow_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.pow_mul_variance_scrambledLaw_two_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.variance_scrambledLaw_two_asymp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.prodFn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.mixDiff_prodFn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.variance_scrambledLaw_prodFn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.avg_variance_scrambledEstimate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.tendsto_avg_variance_given_scramble_div": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.abs_sub_sub_mul_le_of_deriv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.abs_mixDiff_sub_le_of_deriv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.variance_scrambledLaw_two_asymp_of_deriv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.not_tendstoInDistribution_gaussian_of_abs_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.sum_range_ite_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.sum_fin_ite_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.abs_sum_indicator_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.variance_indicator_uniformIco": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.two_pow_mod_three": [
+      "propext"
+    ],
+    "RQMCMarkov.OwenScrambling.indicatorThird": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.integral_indicatorThird": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.stratVar_indicator_third_ge": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.abs_normalised_error_indicator_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.not_tendstoInDistribution_owenNet_indicator": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.wordFirst": [],
+    "RQMCMarkov.OwenScrambling.wordLast": [],
+    "RQMCMarkov.OwenScrambling.digitEquiv_add_val": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.netPrefix": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.netWord": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.wordFirst_netWord": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.wordLast_netWord": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.digitEquiv_netWord_val": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.wordPrefix_netWord": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.topTree": [],
+    "RQMCMarkov.OwenScrambling.wordFirst_owenWord": [
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.tailWord": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.wordLast_owenWord_netWord": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.deepCell": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.deepTail": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.deepNet": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.deepNet_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.deepRemainder": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.deepNetSorted": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.deepNetSorted_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.sampleMean_deepNet": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.kOfPrefix": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.kOfPrefix_netPrefix": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.tailLevel": [
+      "propext",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.tailLevel_natAdd": [
+      "propext",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.swapTail": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.swapTail_swapTail": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.topTree_swapTail": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.tailWord_swapTail": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.deepKey": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.deepKey_swapTail_eq_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.card_filter_deepKey_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.sum_card_filter_deepKey": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.digitShift": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.measurable_digitShift": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.sum_measure_preimage_digitShift": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.hasLaw_deepRemainder": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.hasLaw_deepNetSorted": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.variance_deepNet_eq_stratVar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.tendstoInDistribution_deepNet": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.unifAvg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.unifAvg_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.unifAvg_const_mul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.unifAvg_mul_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.unifAvg_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.unifAvg_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.unifAvg_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.unifAvg_sum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.abs_unifAvg_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.sq_unifAvg_mul_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.sq_unifAvg_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.unifAvg_mul_of_disjoint": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.unifAvg_eval": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.unifAvg_prod": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.unifAvg_mul_eval_of_forall_ne": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.sum_eval_congr": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.unifAvg_sum_eval": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.ne_of_injOn_insert": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.injOn_of_insert": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.unifAvg_sq_sum_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.unifAvg_pow_four_sum_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.sum_perm_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.norm_unifAvg_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.unifAvg_sub_complex": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.unifAvg_const_complex": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.unifAvg_ofReal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.norm_unifAvg_cexp_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.abs_exp_neg_sub_exp_neg_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.norm_unifAvg_cexp_le_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.sq_unifAvg_sum_mul_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.tendsto_unifAvg_cexp_nodeSum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.cdig": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.sum_fin_cast_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.sum_cdig": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.unifAvg_cdig": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.abs_cdig_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.digWt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.digWt_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.scrDev": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.prefixVal_mid": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.mid_scramble": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.integral_digitPoint": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.cellAvg_prodFn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.measurable_prodFn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.memLp_prodFn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.sum_scrDev_net": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.prodS": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.integral_scrambledEstimate_prodFn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.nodeSet": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.cellSet": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.nodeW": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.nodeTerm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.sum_cdig_mul_nodeW": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.prodS_eq_sum_nodeTerm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.unifAvg_nodeTerm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.card_agree_agree_net": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.agree_update_succ_iff": [
+      "propext"
+    ],
+    "RQMCMarkov.OwenScrambling.agree_comm_iff": [],
+    "RQMCMarkov.OwenScrambling.sum_cdig_cellSet_eq_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.eq_of_truncDigits_eq_cellSet": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.levelWin": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.wwin": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.nodeW_eq_wwin": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.wwin_split": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.wX": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.w\u03bd": [
+      "propext"
+    ],
+    "RQMCMarkov.OwenScrambling.wwin_eq_sum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.injOn_w\u03bd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.unifAvg_wX": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.abs_wX_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.sum_levelWin_digWt_sq_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.unifAvg_sq_wwin_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.unifAvg_pow_four_wwin_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.dform": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.abs_dform_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.sq_sum_abs_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.pow_four_sum_abs_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.dform_sub": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.dform_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.unifAvg_sq_dform_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.abs_unifAvg_sq_dform_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.unifAvg_sq_sum_le_of_sq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.unifAvg_sq_sub_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.unifAvg_sq_sum_sub_le_of_near": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.mul_le_half_add_sq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.sum_sq_le_sq_sum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.digWt_mul_digWt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.digWt_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.sum_card_cellSet": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.sum_card_cellSet_all": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.wwin_split_top": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.wwin_congr": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.unifAvg_sq_mul_dform": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.condVar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.levelVar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.condVarWin": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.unifAvg_abs_nodeVar_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.unifAvg_abs_condVar_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.levelVar_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.unifAvg_sq_levelVar_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.unifAvg_levelVar_mul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.unifAvg_sq_condVarWin_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.unifAvg_abs_sub_avg_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.sq_unifAvg_abs_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.nodeBound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.abs_nodeTerm_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.unifAvg_sum_sq_nodeBound_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.unifAvg_sum_pow_four_nodeBound_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.unifAvg_fin_two": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.unifAvg_sq_prodS": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.integral_sq_sub_eq_variance_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.variance_scrambledLaw_eq_of_condMean": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.unifAvg_variance_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.integral_prodFn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.abs_prodFn_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.unifAvg_sq_prodS_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.unifAvg_condVar_ge": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.digWt_mul_pow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.tendsto_sqrt_nat_atTop": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.tendsto_sqrt_nat_div": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.tendsto_unifAvg_cexp_prodS": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.eventually_unifAvg_condVar_ge": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.integral_mixLaw_complex": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.norm_cexp_sub_cexp_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.sq_integral_abs_sub_le_variance": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.tendstoInDistribution_scrambledLaw_of_condMean": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.tendstoInDistribution_scrambledLaw_prodFn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.tendstoInDistribution_scrambledLaw_prodFn_hammersley": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.scrambledEstimate_bilinAdd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.integral_scrambledEstimate_addFn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.OwenScrambling.tendstoInDistribution_scrambledLaw_bilinAdd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  "source_sha256": {
+    "OwenScrambling/Discrepancy.lean": "ae6bab7e38ef37e0d2c54c4a4addfa2d0d2fb75be77db7547d8afb81e5d21dfc",
+    "OwenScrambling/MonteCarlo.lean": "833b211e08a9c6309417ff7818ef476b12eb2fd1dc38532dcad5c575cae54021",
+    "OwenScrambling/Unbiased.lean": "188c171682846edc82f3b314190027e060be61075e0f2a15ee98e3a1d6e39b2a",
+    "OwenScrambling/ScrambleDefs.lean": "0d71600ae0e45cdf394ec68d4fa53be20cf9b8dd5f7c06788ed6a1b707da69d8",
+    "OwenScrambling/ScrambleHaar.lean": "2d35d2c261354ce494cc4f1319c110de7079df2c431d462dee720c7f94c2edeb",
+    "OwenScrambling/ScrambleGain.lean": "bfe13fab6f883a4b3e89c198d94632d897c15f2263f0c3c5ab3facde7d9cd37d",
+    "OwenScrambling/ScrambleVariance.lean": "0381079130f0899c465c8f85e511889e2b33efa492824e377b9a7558a7dffa75",
+    "OwenScrambling/ScrambleAsymptotic.lean": "22af9b6733b246d29ff330d502a518ba9a7efbe9fd685b2ad4e30393252921f6",
+    "OwenScrambling/ScrambleHammersley.lean": "1a5929f937f474cb4bf532f1311c24df5778de594255fe61c702391fbb61089a",
+    "OwenScrambling/Stratified.lean": "dff89d45766fde0d98c4c68f2f0b3cd6957bb929c46783499eb6c706fa28a989",
+    "OwenScrambling/Owen1DScramble.lean": "3d7eb2248309d0c1e67347e776fa4438b47affdf5854038acc1a3f7c73461088",
+    "OwenScrambling/Owen1DLindeberg.lean": "d4a22560fc81e8ccdba082f2ab63d664a82418caa86ee85458d97a1c3794d3b7",
+    "OwenScrambling/ShiftLimit.lean": "97c9a579fb5bf122fe443d4f3393f30eede53f790902ab63703e22e3b0ea30af",
+    "OwenScrambling/Owen1DVariance.lean": "d213c864199e98dca84b705e962cf78ab38adaf2ac9921350df8be6c585dcc13",
+    "OwenScrambling/Owen1DCLT.lean": "f0d033644ad8021af7c7d758c35300e717d6a93fd4146af9fab72917bd357efd",
+    "OwenScrambling/LohCLT.lean": "8bf087a9068b0f710f10a68ff47e4cf5a197f7a4145e8d6b2aa1893dcdbbe5dc",
+    "OwenScrambling/LohVariance.lean": "1889c782f00c251a18581d6b3ce98137190b803f333ce02edb5d13ef71dd02e3",
+    "OwenScrambling/Owen1DCounterexample.lean": "3d926b72fcef96829ab1290b695c61dc4ca63dc71929a1c0d24440203dea8596",
+    "OwenScrambling/Owen1DDeep.lean": "b8a24a4e2f29c1fc10a15490bbb9db392eb15f9596c054d07fdf4a6425c8135c",
+    "OwenScrambling/LohGeneralFinite.lean": "8a9d8cce96940460da27492f9b63dd1b8eefcb0d8d801b843434e3e997d6496b",
+    "OwenScrambling/LohGeneralProd.lean": "4801186b35d3f453de45dddd4ab95a563c386ddbb3f514739d04010d3d831131",
+    "OwenScrambling/LohGeneralConc.lean": "a9637369fbad6887c4666b62d38af7f6cc5e3789f8e0d64aae8ce525c21285f8",
+    "OwenScrambling/LohGeneralCLT.lean": "ae7974ec64bc726201fa4846564c92c1d79f60cae8275e71ff15cdf2f73c0ce5",
+    "OwenScrambling.lean": "1a39753671ea1580893af240135ca16fed7d58b3cb9280f8b01c62e6e8f95cb9",
+    "lean-toolchain": "8733782dc070a99b312039cda424f601b80f3be6f6f512627da5ba25adc27632",
+    "lakefile.toml": "875b10138f5b3f981f9a419d773ff7a34fb69dc0320d09fddd1e05ee99004336",
+    "lake-manifest.json": "8118031d90c37af5ed5da367e98b2aad0c6f00ec040fa051789cce040ab0a596",
+    "proof-manifest.json": "daea3d604168362c3851d0b74d878842d85f4b9cc21beb51440b051623e87482",
+    "scripts/verify.py": "a70b1fa704dd590f937f8b37682afa88a9d85a9150065acb935c7d2c9589da3b",
+    "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  },
+  "fresh_audit_sha256": "e6dbc2b389d3d9423947881cf03bab5de59b9c32757952e0bdeb68144b8c7aaa",
+  "lean_toolchain": "leanprover/lean4:v4.34.0",
+  "scope": "Owen's nested uniform scrambling of digital nets: unbiasedness, the variance results of Owen (1997) and the central limit theorem of Loh (2003) cited in post #2 of the VFI Toolkit discourse thread 'Simulating a Markov chain: MC, QMC, RQMC' (topic 687).",
+  "source": "Owen (1995, 1997a, 1997b), Loh (2003), cited in R. Kirkby, VFI Toolkit discourse topic 687 (2026)"
+}

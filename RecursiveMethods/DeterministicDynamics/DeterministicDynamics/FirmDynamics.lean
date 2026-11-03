@@ -4,8 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Robert Kirkby
 -/
 import DeterministicDynamics.AdjustmentCosts
-import DeterministicDynamics.GrowthStability
 import DeterministicDynamics.EulerScalar
+import DeterministicDynamics.GrowthStability
+import Mathlib.Analysis.Calculus.Deriv.Shift
 
 /-!
 # A firm with adjustment costs (Exercise 6.8)

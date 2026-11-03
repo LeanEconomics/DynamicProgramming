@@ -3,8 +3,8 @@ Copyright (c) 2026 Robert Kirkby. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Robert Kirkby
 -/
+import EquilibriumApplications.SequenceAssumptions
 import EquilibriumApplications.WelfareSecond
-import EquilibriumApplications.SequenceSupport
 
 /-!
 # A one-sector model of growth under certainty: the commodity space and Assumptions 15.1–15.7

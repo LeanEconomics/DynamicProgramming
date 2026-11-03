@@ -4,6 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Robert Kirkby
 -/
 import EquilibriumApplications.GrowthCertaintyOptimum
+import Mathlib.Analysis.Calculus.Deriv.Shift
+import Mathlib.Analysis.Calculus.LocalExtr.Basic
 
 /-!
 # The one-sector model under certainty: interest rates (Exercise 16.1(d))

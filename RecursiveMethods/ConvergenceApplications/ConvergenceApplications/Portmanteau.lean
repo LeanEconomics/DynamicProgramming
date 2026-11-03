@@ -4,6 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Robert Kirkby
 -/
 import ConvergenceApplications.WeakBasics
+import Mathlib.MeasureTheory.Measure.Portmanteau
 
 /-!
 # Characterizations of weak convergence

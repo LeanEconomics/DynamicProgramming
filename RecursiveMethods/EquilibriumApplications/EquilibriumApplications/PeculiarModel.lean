@@ -3,7 +3,9 @@ Copyright (c) 2026 Robert Kirkby. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Robert Kirkby
 -/
-import EquilibriumApplications.SequenceSupport
+import EquilibriumApplications.SequenceAssumptions
+import Mathlib.Analysis.Complex.ExponentialBounds
+import Mathlib.Analysis.Normed.Group.FunctionSeries
 
 /-!
 # A peculiar example (§16.6): the model and Exercise 16.6(a)

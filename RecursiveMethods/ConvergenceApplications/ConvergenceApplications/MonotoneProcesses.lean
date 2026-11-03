@@ -4,6 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Robert Kirkby
 -/
 import ConvergenceApplications.FellerInvariant
+import Mathlib.Probability.Kernel.Composition.IntegralCompProd
 
 /-!
 # Monotone Markov processes (SLP §12.4, pp. 378–383)

@@ -4,6 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Robert Kirkby
 -/
 import EquilibriumApplications.IndustryModel
+import Mathlib.Analysis.Normed.Group.Tannery
 
 /-!
 # Industry equilibrium and surplus maximisation (SLP §16.4, Exercise 16.4(b)–(c))

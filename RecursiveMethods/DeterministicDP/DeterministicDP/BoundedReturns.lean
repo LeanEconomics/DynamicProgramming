@@ -6,6 +6,7 @@ Authors: Robert Kirkby
 import DeterministicDP.Assumption42
 import DeterministicDP.Contraction
 import DeterministicDP.Maximum
+import Mathlib.Topology.ContinuousMap.Bounded.Normed
 
 /-!
 # Bounded returns

@@ -1,0 +1,2594 @@
+{
+  "checked_at_utc": "2026-10-29T23:00:06.070280+00:00",
+  "theorems": 231,
+  "module_theorems": {
+    "PointSets/Discrepancy.lean": 21,
+    "PointSets/Koksma.lean": 21,
+    "PointSets/VanDerCorput.lean": 22,
+    "PointSets/MonteCarlo.lean": 16,
+    "PointSets/Unbiased.lean": 22,
+    "PointSets/ShiftedQMC.lean": 16,
+    "PointSets/Stratified.lean": 21,
+    "PointSets/ShiftLimit.lean": 18,
+    "PointSets/ShiftLimitLattice.lean": 9,
+    "PointSets/DigitalShift.lean": 44,
+    "PointSets/DigitalShiftPrefix.lean": 21
+  },
+  "audited_declarations": 255,
+  "declarations": [
+    {
+      "name": "RQMCMarkov.PointSets.InUnitIco",
+      "kind": "def",
+      "module": "PointSets/Discrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.countBelow",
+      "kind": "def",
+      "module": "PointSets/Discrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.countAtMost",
+      "kind": "def",
+      "module": "PointSets/Discrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.localDiscrepancy",
+      "kind": "def",
+      "module": "PointSets/Discrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.starDiscrepancy",
+      "kind": "def",
+      "module": "PointSets/Discrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.qmcEstimate",
+      "kind": "def",
+      "module": "PointSets/Discrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.midpointRule",
+      "kind": "def",
+      "module": "PointSets/Discrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.countBelow_le",
+      "kind": "theorem",
+      "module": "PointSets/Discrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.countBelow_mono",
+      "kind": "theorem",
+      "module": "PointSets/Discrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.countBelow_div_mem_Icc",
+      "kind": "theorem",
+      "module": "PointSets/Discrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.localDiscrepancy_le_one",
+      "kind": "theorem",
+      "module": "PointSets/Discrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.localDiscrepancy_eq_abs_div",
+      "kind": "theorem",
+      "module": "PointSets/Discrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.bddAbove_localDiscrepancy",
+      "kind": "theorem",
+      "module": "PointSets/Discrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.localDiscrepancy_le_starDiscrepancy",
+      "kind": "theorem",
+      "module": "PointSets/Discrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.starDiscrepancy_le_of_forall",
+      "kind": "theorem",
+      "module": "PointSets/Discrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.starDiscrepancy_nonneg",
+      "kind": "theorem",
+      "module": "PointSets/Discrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.starDiscrepancy_le_one",
+      "kind": "theorem",
+      "module": "PointSets/Discrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.countAtMost_div_sub_le_starDiscrepancy",
+      "kind": "theorem",
+      "module": "PointSets/Discrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.inv_two_mul_le_starDiscrepancy",
+      "kind": "theorem",
+      "module": "PointSets/Discrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.midpointRule_mem",
+      "kind": "theorem",
+      "module": "PointSets/Discrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.midpointRule_lt_iff",
+      "kind": "theorem",
+      "module": "PointSets/Discrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.countBelow_midpointRule_le",
+      "kind": "theorem",
+      "module": "PointSets/Discrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.le_countBelow_midpointRule",
+      "kind": "theorem",
+      "module": "PointSets/Discrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.abs_countBelow_midpointRule_sub_le",
+      "kind": "theorem",
+      "module": "PointSets/Discrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.starDiscrepancy_midpointRule",
+      "kind": "theorem",
+      "module": "PointSets/Discrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.starDiscrepancy_midpointRule_le",
+      "kind": "theorem",
+      "module": "PointSets/Discrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.midpointRule_three",
+      "kind": "theorem",
+      "module": "PointSets/Discrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.starDiscrepancy_midpointRule_three",
+      "kind": "theorem",
+      "module": "PointSets/Discrepancy.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.totalVariation",
+      "kind": "def",
+      "module": "PointSets/Koksma.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.countBelow_eq_sum_indicator",
+      "kind": "theorem",
+      "module": "PointSets/Koksma.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.countAtMost_eq_sum_indicator",
+      "kind": "theorem",
+      "module": "PointSets/Koksma.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.countAtMost_le",
+      "kind": "theorem",
+      "module": "PointSets/Koksma.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.countAtMost_div_sub_le_starDiscrepancy_of_mem",
+      "kind": "theorem",
+      "module": "PointSets/Koksma.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.indicator_one_mem_Icc",
+      "kind": "theorem",
+      "module": "PointSets/Koksma.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.abs_sum_indicator_upperSet_sub_le",
+      "kind": "theorem",
+      "module": "PointSets/Koksma.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.antitone_indicator_Iic",
+      "kind": "theorem",
+      "module": "PointSets/Koksma.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.integral_indicator_Iic_one",
+      "kind": "theorem",
+      "module": "PointSets/Koksma.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.sum_div_eq_integral_indicator",
+      "kind": "theorem",
+      "module": "PointSets/Koksma.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.integral_sub_eq_integral_measureReal",
+      "kind": "theorem",
+      "module": "PointSets/Koksma.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.koksma_monotone",
+      "kind": "theorem",
+      "module": "PointSets/Koksma.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.monotone_comp_projIcc",
+      "kind": "theorem",
+      "module": "PointSets/Koksma.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.comp_projIcc_eq",
+      "kind": "theorem",
+      "module": "PointSets/Koksma.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.qmcError_congr",
+      "kind": "theorem",
+      "module": "PointSets/Koksma.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.koksma_monotoneOn",
+      "kind": "theorem",
+      "module": "PointSets/Koksma.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.koksma_sub_monotoneOn",
+      "kind": "theorem",
+      "module": "PointSets/Koksma.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.koksma_boundedVariationOn",
+      "kind": "theorem",
+      "module": "PointSets/Koksma.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.koksma_hasDerivAt",
+      "kind": "theorem",
+      "module": "PointSets/Koksma.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.eVariationOn_le_integral_abs_deriv",
+      "kind": "theorem",
+      "module": "PointSets/Koksma.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.boundedVariationOn_of_hasDerivAt",
+      "kind": "theorem",
+      "module": "PointSets/Koksma.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.totalVariation_le_integral_abs_deriv",
+      "kind": "theorem",
+      "module": "PointSets/Koksma.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.vanDerCorput",
+      "kind": "def",
+      "module": "PointSets/VanDerCorput.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.vanDerCorput_eq",
+      "kind": "theorem",
+      "module": "PointSets/VanDerCorput.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.vanDerCorput_two_mul_add",
+      "kind": "theorem",
+      "module": "PointSets/VanDerCorput.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.vanDerCorput_one_two_three",
+      "kind": "theorem",
+      "module": "PointSets/VanDerCorput.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.vanDerCorput_mem_Ico",
+      "kind": "theorem",
+      "module": "PointSets/VanDerCorput.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.vanDerCorput_inUnitIco",
+      "kind": "theorem",
+      "module": "PointSets/VanDerCorput.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.floor_two_pow_mul_vanDerCorput_lt",
+      "kind": "theorem",
+      "module": "PointSets/VanDerCorput.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.floor_two_pow_succ_mul_vanDerCorput",
+      "kind": "theorem",
+      "module": "PointSets/VanDerCorput.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.mod_eq_of_floor_vanDerCorput_eq",
+      "kind": "theorem",
+      "module": "PointSets/VanDerCorput.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.floor_vanDerCorput_injOn",
+      "kind": "theorem",
+      "module": "PointSets/VanDerCorput.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.mem_dyadic_iff_floor",
+      "kind": "theorem",
+      "module": "PointSets/VanDerCorput.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.card_vanDerCorput_mem_dyadic",
+      "kind": "theorem",
+      "module": "PointSets/VanDerCorput.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.card_vanDerCorput_mem_dyadic_aligned",
+      "kind": "theorem",
+      "module": "PointSets/VanDerCorput.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.abs_card_block_vanDerCorput_sub_le",
+      "kind": "theorem",
+      "module": "PointSets/VanDerCorput.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.countBelow_add",
+      "kind": "theorem",
+      "module": "PointSets/VanDerCorput.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.abs_countBelow_vanDerCorput_sub_le",
+      "kind": "theorem",
+      "module": "PointSets/VanDerCorput.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.starDiscrepancy_vanDerCorput_le",
+      "kind": "theorem",
+      "module": "PointSets/VanDerCorput.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.natLog_two_add_one_le",
+      "kind": "theorem",
+      "module": "PointSets/VanDerCorput.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.starDiscrepancy_vanDerCorput_le_log",
+      "kind": "theorem",
+      "module": "PointSets/VanDerCorput.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.abs_qmcError_vanDerCorput_le",
+      "kind": "theorem",
+      "module": "PointSets/VanDerCorput.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.tendsto_log_add_one_div_sqrt",
+      "kind": "theorem",
+      "module": "PointSets/VanDerCorput.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.tendsto_sqrt_mul_vanDerCorput_bound",
+      "kind": "theorem",
+      "module": "PointSets/VanDerCorput.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.tendsto_sqrt_mul_qmcError_vanDerCorput",
+      "kind": "theorem",
+      "module": "PointSets/VanDerCorput.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.uniformIco",
+      "kind": "abbrev",
+      "module": "PointSets/MonteCarlo.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.isProbabilityMeasure_uniformIco",
+      "kind": "theorem",
+      "module": "PointSets/MonteCarlo.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.uniformCube",
+      "kind": "abbrev",
+      "module": "PointSets/MonteCarlo.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.isProbabilityMeasure_uniformCube",
+      "kind": "theorem",
+      "module": "PointSets/MonteCarlo.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.sampleMean",
+      "kind": "def",
+      "module": "PointSets/MonteCarlo.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.map_le_of_sum_map_eq",
+      "kind": "theorem",
+      "module": "PointSets/MonteCarlo.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.integrable_map_of_sum_map_eq",
+      "kind": "theorem",
+      "module": "PointSets/MonteCarlo.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.memLp_map_of_sum_map_eq",
+      "kind": "theorem",
+      "module": "PointSets/MonteCarlo.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.integral_sampleMean_of_sum_map_eq",
+      "kind": "theorem",
+      "module": "PointSets/MonteCarlo.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.variance_sampleMean_of_sum_map_eq",
+      "kind": "theorem",
+      "module": "PointSets/MonteCarlo.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.variance_sampleMean_le_of_sum_map_eq",
+      "kind": "theorem",
+      "module": "PointSets/MonteCarlo.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.sum_map_eq_of_hasLaw",
+      "kind": "theorem",
+      "module": "PointSets/MonteCarlo.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.integral_sampleMean_iid",
+      "kind": "theorem",
+      "module": "PointSets/MonteCarlo.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.variance_sampleMean_iid",
+      "kind": "theorem",
+      "module": "PointSets/MonteCarlo.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.rmse_sampleMean_iid",
+      "kind": "theorem",
+      "module": "PointSets/MonteCarlo.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.tendstoInDistribution_sampleMean_iid",
+      "kind": "theorem",
+      "module": "PointSets/MonteCarlo.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.measure_all_draws_lt_tenth",
+      "kind": "theorem",
+      "module": "PointSets/MonteCarlo.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.measure_all_draws_lt_tenth_pos",
+      "kind": "theorem",
+      "module": "PointSets/MonteCarlo.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.measure_sampleMean_far_pos",
+      "kind": "theorem",
+      "module": "PointSets/MonteCarlo.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.integral_sampleMean_of_hasLaw_uniformCube",
+      "kind": "theorem",
+      "module": "PointSets/Unbiased.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.uniformIco_eq_restrict_Ioc",
+      "kind": "theorem",
+      "module": "PointSets/Unbiased.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.map_fract_restrict_Ioc",
+      "kind": "theorem",
+      "module": "PointSets/Unbiased.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.measurePreserving_fract_add",
+      "kind": "theorem",
+      "module": "PointSets/Unbiased.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.shiftMod1",
+      "kind": "def",
+      "module": "PointSets/Unbiased.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.shiftMod1_mem_cube",
+      "kind": "theorem",
+      "module": "PointSets/Unbiased.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.measurePreserving_shiftMod1",
+      "kind": "theorem",
+      "module": "PointSets/Unbiased.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.hasLaw_shiftMod1",
+      "kind": "theorem",
+      "module": "PointSets/Unbiased.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.integral_sampleMean_shiftMod1",
+      "kind": "theorem",
+      "module": "PointSets/Unbiased.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.stratum",
+      "kind": "def",
+      "module": "PointSets/Unbiased.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.measurableSet_stratum",
+      "kind": "theorem",
+      "module": "PointSets/Unbiased.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.stratumMap",
+      "kind": "def",
+      "module": "PointSets/Unbiased.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.measurable_stratumMap",
+      "kind": "theorem",
+      "module": "PointSets/Unbiased.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.stratumMap_preimage_stratum",
+      "kind": "theorem",
+      "module": "PointSets/Unbiased.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.map_stratumMap_uniformIco",
+      "kind": "theorem",
+      "module": "PointSets/Unbiased.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.iUnion_stratum",
+      "kind": "theorem",
+      "module": "PointSets/Unbiased.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.pairwise_disjoint_stratum",
+      "kind": "theorem",
+      "module": "PointSets/Unbiased.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.sum_map_stratumMap",
+      "kind": "theorem",
+      "module": "PointSets/Unbiased.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.sum_map_stratified",
+      "kind": "theorem",
+      "module": "PointSets/Unbiased.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.integral_sampleMean_stratified",
+      "kind": "theorem",
+      "module": "PointSets/Unbiased.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.not_hasLaw_stratumMap",
+      "kind": "theorem",
+      "module": "PointSets/Unbiased.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.sum_map_eq_of_integral_sampleMean_indicator",
+      "kind": "theorem",
+      "module": "PointSets/Unbiased.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.sampleMean_const_points",
+      "kind": "theorem",
+      "module": "PointSets/Unbiased.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.integral_sampleMean_of_hasLaw_const",
+      "kind": "theorem",
+      "module": "PointSets/Unbiased.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.variance_sampleMean_const",
+      "kind": "theorem",
+      "module": "PointSets/Unbiased.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.shiftMod",
+      "kind": "def",
+      "module": "PointSets/ShiftedQMC.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.shiftMod_inUnitIco",
+      "kind": "theorem",
+      "module": "PointSets/ShiftedQMC.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.shiftMod_fract",
+      "kind": "theorem",
+      "module": "PointSets/ShiftedQMC.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.fract_of_lt_one",
+      "kind": "theorem",
+      "module": "PointSets/ShiftedQMC.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.fract_of_one_le",
+      "kind": "theorem",
+      "module": "PointSets/ShiftedQMC.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.countBelow_shiftMod_of_le",
+      "kind": "theorem",
+      "module": "PointSets/ShiftedQMC.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.countBelow_shiftMod_of_lt",
+      "kind": "theorem",
+      "module": "PointSets/ShiftedQMC.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.abs_countBelow_div_sub_le",
+      "kind": "theorem",
+      "module": "PointSets/ShiftedQMC.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.localDiscrepancy_shiftMod_le",
+      "kind": "theorem",
+      "module": "PointSets/ShiftedQMC.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.starDiscrepancy_shiftMod_le",
+      "kind": "theorem",
+      "module": "PointSets/ShiftedQMC.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.abs_shiftedError_le",
+      "kind": "theorem",
+      "module": "PointSets/ShiftedQMC.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.integral_qmcEstimate_shiftMod",
+      "kind": "theorem",
+      "module": "PointSets/ShiftedQMC.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.integral_sq_shiftedError_le",
+      "kind": "theorem",
+      "module": "PointSets/ShiftedQMC.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.sqrt_integral_sq_shiftedError_le",
+      "kind": "theorem",
+      "module": "PointSets/ShiftedQMC.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.sqrt_integral_sq_shiftedError_vanDerCorput_le",
+      "kind": "theorem",
+      "module": "PointSets/ShiftedQMC.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.tendsto_sqrt_mul_rmse_vanDerCorput",
+      "kind": "theorem",
+      "module": "PointSets/ShiftedQMC.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.shiftedMidpoint_counterexample",
+      "kind": "theorem",
+      "module": "PointSets/ShiftedQMC.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.continuous_stratumMap",
+      "kind": "theorem",
+      "module": "PointSets/Stratified.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.stratumMap_eq_midpoint_add",
+      "kind": "theorem",
+      "module": "PointSets/Stratified.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.midpoint_shift_mem",
+      "kind": "theorem",
+      "module": "PointSets/Stratified.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.integral_sq_sub_half_uniformIco",
+      "kind": "theorem",
+      "module": "PointSets/Stratified.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.integral_id_uniformIco",
+      "kind": "theorem",
+      "module": "PointSets/Stratified.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.integrable_uniformIco_of_continuous",
+      "kind": "theorem",
+      "module": "PointSets/Stratified.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.variance_le_of_lipschitz_half",
+      "kind": "theorem",
+      "module": "PointSets/Stratified.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.memLp_uniformIco_of_lipschitz",
+      "kind": "theorem",
+      "module": "PointSets/Stratified.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.abs_sub_stratumMap_half_le",
+      "kind": "theorem",
+      "module": "PointSets/Stratified.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.variance_stratified_eq",
+      "kind": "theorem",
+      "module": "PointSets/Stratified.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.variance_stratified_le_mc",
+      "kind": "theorem",
+      "module": "PointSets/Stratified.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.variance_stratified_le_lipschitz",
+      "kind": "theorem",
+      "module": "PointSets/Stratified.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.integral_sampleMean_commonShift",
+      "kind": "theorem",
+      "module": "PointSets/Stratified.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.variance_commonShift_le_lipschitz",
+      "kind": "theorem",
+      "module": "PointSets/Stratified.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.variance_uniformIco_id",
+      "kind": "theorem",
+      "module": "PointSets/Stratified.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.variance_uniformIco_affine",
+      "kind": "theorem",
+      "module": "PointSets/Stratified.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.variance_stratified_id",
+      "kind": "theorem",
+      "module": "PointSets/Stratified.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.variance_commonShift_id",
+      "kind": "theorem",
+      "module": "PointSets/Stratified.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.variance_stratified_id_lt_commonShift_id",
+      "kind": "theorem",
+      "module": "PointSets/Stratified.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.sum_cond_eq_of_partition",
+      "kind": "theorem",
+      "module": "PointSets/Stratified.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.variance_sampleMean_partition_le",
+      "kind": "theorem",
+      "module": "PointSets/Stratified.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.integral_uniformIco_eq_intervalIntegral",
+      "kind": "theorem",
+      "module": "PointSets/ShiftLimit.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.sum_range_natCast",
+      "kind": "theorem",
+      "module": "PointSets/ShiftLimit.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.scaled_error_id",
+      "kind": "theorem",
+      "module": "PointSets/ShiftLimit.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.map_sub_half_uniformIco",
+      "kind": "theorem",
+      "module": "PointSets/ShiftLimit.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.hasLaw_scaled_error_id",
+      "kind": "theorem",
+      "module": "PointSets/ShiftLimit.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.cell_error_le",
+      "kind": "theorem",
+      "module": "PointSets/ShiftLimit.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.tendsto_scaled_error",
+      "kind": "theorem",
+      "module": "PointSets/ShiftLimit.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.ae_mem_Ico_of_hasLaw",
+      "kind": "theorem",
+      "module": "PointSets/ShiftLimit.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.measurable_sampleMean_stratumMap",
+      "kind": "theorem",
+      "module": "PointSets/ShiftLimit.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.ae_tendsto_scaled_error",
+      "kind": "theorem",
+      "module": "PointSets/ShiftLimit.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.tendstoInDistribution_scaled_error",
+      "kind": "theorem",
+      "module": "PointSets/ShiftLimit.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.map_mul_sub_half_uniformIco",
+      "kind": "theorem",
+      "module": "PointSets/ShiftLimit.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.ne_gaussianReal_of_measure_Ioi_eq_zero",
+      "kind": "theorem",
+      "module": "PointSets/ShiftLimit.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.limit_law_ne_gaussianReal",
+      "kind": "theorem",
+      "module": "PointSets/ShiftLimit.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.not_tendstoInDistribution_scaled_error_gaussian",
+      "kind": "theorem",
+      "module": "PointSets/ShiftLimit.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.tendsto_sqrt_scaled_error",
+      "kind": "theorem",
+      "module": "PointSets/ShiftLimit.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.ae_tendsto_sqrt_scaled_error",
+      "kind": "theorem",
+      "module": "PointSets/ShiftLimit.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.not_tendstoInDistribution_sqrt_scaled_error_gaussian",
+      "kind": "theorem",
+      "module": "PointSets/ShiftLimit.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.sampleMean_fract_lattice",
+      "kind": "theorem",
+      "module": "PointSets/ShiftLimitLattice.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.measurePreserving_fract_natCast_mul",
+      "kind": "theorem",
+      "module": "PointSets/ShiftLimitLattice.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.hasLaw_fract_natCast_mul",
+      "kind": "theorem",
+      "module": "PointSets/ShiftLimitLattice.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.hasLaw_scaled_error_id_lattice",
+      "kind": "theorem",
+      "module": "PointSets/ShiftLimitLattice.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.tendstoInDistribution_scaled_error_lattice",
+      "kind": "theorem",
+      "module": "PointSets/ShiftLimitLattice.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.not_tendstoInDistribution_scaled_error_lattice_gaussian",
+      "kind": "theorem",
+      "module": "PointSets/ShiftLimitLattice.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.fract_natCast_mul_stratumMap",
+      "kind": "theorem",
+      "module": "PointSets/ShiftLimitLattice.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.variance_commonShift_sawtooth",
+      "kind": "theorem",
+      "module": "PointSets/ShiftLimitLattice.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.mc_variance_lt_commonShift_sawtooth",
+      "kind": "theorem",
+      "module": "PointSets/ShiftLimitLattice.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.digitalShift",
+      "kind": "def",
+      "module": "PointSets/DigitalShift.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.digitalShiftUpper",
+      "kind": "def",
+      "module": "PointSets/DigitalShift.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.digitalShiftSeq",
+      "kind": "def",
+      "module": "PointSets/DigitalShift.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.dyadicCell",
+      "kind": "def",
+      "module": "PointSets/DigitalShift.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.cellPerm",
+      "kind": "def",
+      "module": "PointSets/DigitalShift.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.natFloor_add_fract",
+      "kind": "theorem",
+      "module": "PointSets/DigitalShift.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.floor_two_pow_mul_lt",
+      "kind": "theorem",
+      "module": "PointSets/DigitalShift.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.xor_left_cancel'",
+      "kind": "theorem",
+      "module": "PointSets/DigitalShift.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.two_pow_mul_digitalShift",
+      "kind": "theorem",
+      "module": "PointSets/DigitalShift.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.floor_two_pow_mul_digitalShift",
+      "kind": "theorem",
+      "module": "PointSets/DigitalShift.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.testBit_floor_two_pow_mul_digitalShift",
+      "kind": "theorem",
+      "module": "PointSets/DigitalShift.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.fract_two_pow_mul_digitalShift",
+      "kind": "theorem",
+      "module": "PointSets/DigitalShift.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.digitalShift_mem_Ico",
+      "kind": "theorem",
+      "module": "PointSets/DigitalShift.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.digitalShiftUpper_eq_digitalShift",
+      "kind": "theorem",
+      "module": "PointSets/DigitalShift.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.volume_two_pow_mul_eq_natCast",
+      "kind": "theorem",
+      "module": "PointSets/DigitalShift.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.digitalShiftUpper_ae_eq",
+      "kind": "theorem",
+      "module": "PointSets/DigitalShift.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.digitalShift_expansion_ambiguity",
+      "kind": "theorem",
+      "module": "PointSets/DigitalShift.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.mem_dyadicCell_iff",
+      "kind": "theorem",
+      "module": "PointSets/DigitalShift.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.nonneg_of_mem_dyadicCell",
+      "kind": "theorem",
+      "module": "PointSets/DigitalShift.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.fract_eq_of_mem_dyadicCell",
+      "kind": "theorem",
+      "module": "PointSets/DigitalShift.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.mem_dyadicCell_add_iff",
+      "kind": "theorem",
+      "module": "PointSets/DigitalShift.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.inter_Ico_eq_biUnion_dyadicCell",
+      "kind": "theorem",
+      "module": "PointSets/DigitalShift.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.pairwiseDisjoint_dyadicCell_inter",
+      "kind": "theorem",
+      "module": "PointSets/DigitalShift.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.measurable_cellPerm",
+      "kind": "theorem",
+      "module": "PointSets/DigitalShift.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.cellPerm_of_mem",
+      "kind": "theorem",
+      "module": "PointSets/DigitalShift.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.measurePreserving_cellPerm",
+      "kind": "theorem",
+      "module": "PointSets/DigitalShift.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.measurePreserving_digitalShift",
+      "kind": "theorem",
+      "module": "PointSets/DigitalShift.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.integral_qmcEstimate_digitalShiftSeq",
+      "kind": "theorem",
+      "module": "PointSets/DigitalShift.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.sum_range_comp_of_injOn",
+      "kind": "theorem",
+      "module": "PointSets/DigitalShift.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.image_range_comp_of_injOn",
+      "kind": "theorem",
+      "module": "PointSets/DigitalShift.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.exists_two_pow_mul_vanDerCorput_eq",
+      "kind": "theorem",
+      "module": "PointSets/DigitalShift.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.two_pow_mul_vanDerCorput_eq_floor",
+      "kind": "theorem",
+      "module": "PointSets/DigitalShift.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.vanDerCorput_digit_inj",
+      "kind": "theorem",
+      "module": "PointSets/DigitalShift.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.image_vanDerCorput_digit",
+      "kind": "theorem",
+      "module": "PointSets/DigitalShift.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.fract_vanDerCorput_add",
+      "kind": "theorem",
+      "module": "PointSets/DigitalShift.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.sum_digitalShift_vanDerCorput",
+      "kind": "theorem",
+      "module": "PointSets/DigitalShift.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.sum_shiftMod_vanDerCorput",
+      "kind": "theorem",
+      "module": "PointSets/DigitalShift.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.image_digitalShift_eq_image_shiftMod_vanDerCorput",
+      "kind": "theorem",
+      "module": "PointSets/DigitalShift.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.qmcEstimate_digitalShift_eq_shiftMod_vanDerCorput",
+      "kind": "theorem",
+      "module": "PointSets/DigitalShift.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.map_qmcEstimate_digitalShift_eq_shiftMod",
+      "kind": "theorem",
+      "module": "PointSets/DigitalShift.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.hasLaw_scaled_error_digitalShift_id",
+      "kind": "theorem",
+      "module": "PointSets/DigitalShift.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.scaled_error_digitalShift_ne_gaussianReal",
+      "kind": "theorem",
+      "module": "PointSets/DigitalShift.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.cell_lt_half_iff",
+      "kind": "theorem",
+      "module": "PointSets/DigitalShift.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.digitalShift_ne_shiftMod_counterexample",
+      "kind": "theorem",
+      "module": "PointSets/DigitalShift.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.two_pow_mul_cellPerm",
+      "kind": "theorem",
+      "module": "PointSets/DigitalShift.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.floor_two_pow_mul_cellPerm",
+      "kind": "theorem",
+      "module": "PointSets/DigitalShift.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.fract_two_pow_mul_cellPerm",
+      "kind": "theorem",
+      "module": "PointSets/DigitalShift.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.sum_xor_eq_sum_add_three",
+      "kind": "theorem",
+      "module": "PointSets/DigitalShift.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.map_digitalShift_three_eq",
+      "kind": "theorem",
+      "module": "PointSets/DigitalShift.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.vdcDigit",
+      "kind": "def",
+      "module": "PointSets/DigitalShiftPrefix.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.vdcPrefixMem",
+      "kind": "def",
+      "module": "PointSets/DigitalShiftPrefix.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.PrefixShiftEq",
+      "kind": "def",
+      "module": "PointSets/DigitalShiftPrefix.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.vanDerCorput_two_pow_add",
+      "kind": "theorem",
+      "module": "PointSets/DigitalShiftPrefix.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.vdcDigit_lt",
+      "kind": "theorem",
+      "module": "PointSets/DigitalShiftPrefix.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.vdcDigit_succ_of_lt",
+      "kind": "theorem",
+      "module": "PointSets/DigitalShiftPrefix.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.vdcDigit_succ_two_pow_add",
+      "kind": "theorem",
+      "module": "PointSets/DigitalShiftPrefix.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.exists_vdcDigit_eq",
+      "kind": "theorem",
+      "module": "PointSets/DigitalShiftPrefix.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.vdcPrefixMem_succ_of_le",
+      "kind": "theorem",
+      "module": "PointSets/DigitalShiftPrefix.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.vdcPrefixMem_succ_of_gt",
+      "kind": "theorem",
+      "module": "PointSets/DigitalShiftPrefix.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.xor_eq_iff_halves",
+      "kind": "theorem",
+      "module": "PointSets/DigitalShiftPrefix.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.add_mod_two_mul_eq_iff",
+      "kind": "theorem",
+      "module": "PointSets/DigitalShiftPrefix.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.exists_xor_iff_of_decomp",
+      "kind": "theorem",
+      "module": "PointSets/DigitalShiftPrefix.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.exists_add_iff_of_decomp",
+      "kind": "theorem",
+      "module": "PointSets/DigitalShiftPrefix.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.exists_lt_xor_iff",
+      "kind": "theorem",
+      "module": "PointSets/DigitalShiftPrefix.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.exists_lt_add_mod_iff",
+      "kind": "theorem",
+      "module": "PointSets/DigitalShiftPrefix.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.add_pred_mod_add_one",
+      "kind": "theorem",
+      "module": "PointSets/DigitalShiftPrefix.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.exists_false_and_iff",
+      "kind": "theorem",
+      "module": "PointSets/DigitalShiftPrefix.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.exists_prefix_cellPerm",
+      "kind": "theorem",
+      "module": "PointSets/DigitalShiftPrefix.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.mem_image_vdcDigit_iff",
+      "kind": "theorem",
+      "module": "PointSets/DigitalShiftPrefix.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.image_xor_eq_image_add_mod",
+      "kind": "theorem",
+      "module": "PointSets/DigitalShiftPrefix.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.exists_measurePreserving_digitalShift_prefix",
+      "kind": "theorem",
+      "module": "PointSets/DigitalShiftPrefix.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.qmcEstimate_digitalShift_prefix_eq",
+      "kind": "theorem",
+      "module": "PointSets/DigitalShiftPrefix.lean"
+    },
+    {
+      "name": "RQMCMarkov.PointSets.map_qmcEstimate_digitalShift_prefix_eq",
+      "kind": "theorem",
+      "module": "PointSets/DigitalShiftPrefix.lean"
+    }
+  ],
+  "full_build": "passed",
+  "fresh_source_compilation": "passed",
+  "fresh_source_lint_options": [
+    "-Dlinter.mathlibStandardSet=true",
+    "-Dlinter.style.header=false"
+  ],
+  "axioms": {
+    "RQMCMarkov.PointSets.InUnitIco": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.countBelow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.countAtMost": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.localDiscrepancy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.starDiscrepancy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.qmcEstimate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.midpointRule": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.countBelow_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.countBelow_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.countBelow_div_mem_Icc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.localDiscrepancy_le_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.localDiscrepancy_eq_abs_div": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.bddAbove_localDiscrepancy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.localDiscrepancy_le_starDiscrepancy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.starDiscrepancy_le_of_forall": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.starDiscrepancy_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.starDiscrepancy_le_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.countAtMost_div_sub_le_starDiscrepancy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.inv_two_mul_le_starDiscrepancy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.midpointRule_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.midpointRule_lt_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.countBelow_midpointRule_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.le_countBelow_midpointRule": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.abs_countBelow_midpointRule_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.starDiscrepancy_midpointRule": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.starDiscrepancy_midpointRule_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.midpointRule_three": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.starDiscrepancy_midpointRule_three": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.totalVariation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.countBelow_eq_sum_indicator": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.countAtMost_eq_sum_indicator": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.countAtMost_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.countAtMost_div_sub_le_starDiscrepancy_of_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.indicator_one_mem_Icc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.abs_sum_indicator_upperSet_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.antitone_indicator_Iic": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.integral_indicator_Iic_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.sum_div_eq_integral_indicator": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.integral_sub_eq_integral_measureReal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.koksma_monotone": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.monotone_comp_projIcc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.comp_projIcc_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.qmcError_congr": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.koksma_monotoneOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.koksma_sub_monotoneOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.koksma_boundedVariationOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.koksma_hasDerivAt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.eVariationOn_le_integral_abs_deriv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.boundedVariationOn_of_hasDerivAt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.totalVariation_le_integral_abs_deriv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.vanDerCorput": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.vanDerCorput_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.vanDerCorput_two_mul_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.vanDerCorput_one_two_three": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.vanDerCorput_mem_Ico": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.vanDerCorput_inUnitIco": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.floor_two_pow_mul_vanDerCorput_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.floor_two_pow_succ_mul_vanDerCorput": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.mod_eq_of_floor_vanDerCorput_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.floor_vanDerCorput_injOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.mem_dyadic_iff_floor": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.card_vanDerCorput_mem_dyadic": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.card_vanDerCorput_mem_dyadic_aligned": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.abs_card_block_vanDerCorput_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.countBelow_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.abs_countBelow_vanDerCorput_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.starDiscrepancy_vanDerCorput_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.natLog_two_add_one_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.starDiscrepancy_vanDerCorput_le_log": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.abs_qmcError_vanDerCorput_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.tendsto_log_add_one_div_sqrt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.tendsto_sqrt_mul_vanDerCorput_bound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.tendsto_sqrt_mul_qmcError_vanDerCorput": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.uniformIco": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.isProbabilityMeasure_uniformIco": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.uniformCube": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.isProbabilityMeasure_uniformCube": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.sampleMean": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.map_le_of_sum_map_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.integrable_map_of_sum_map_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.memLp_map_of_sum_map_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.integral_sampleMean_of_sum_map_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.variance_sampleMean_of_sum_map_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.variance_sampleMean_le_of_sum_map_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.sum_map_eq_of_hasLaw": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.integral_sampleMean_iid": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.variance_sampleMean_iid": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.rmse_sampleMean_iid": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.tendstoInDistribution_sampleMean_iid": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.measure_all_draws_lt_tenth": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.measure_all_draws_lt_tenth_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.measure_sampleMean_far_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.integral_sampleMean_of_hasLaw_uniformCube": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.uniformIco_eq_restrict_Ioc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.map_fract_restrict_Ioc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.measurePreserving_fract_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.shiftMod1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.shiftMod1_mem_cube": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.measurePreserving_shiftMod1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.hasLaw_shiftMod1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.integral_sampleMean_shiftMod1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.stratum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.measurableSet_stratum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.stratumMap": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.measurable_stratumMap": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.stratumMap_preimage_stratum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.map_stratumMap_uniformIco": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.iUnion_stratum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.pairwise_disjoint_stratum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.sum_map_stratumMap": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.sum_map_stratified": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.integral_sampleMean_stratified": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.not_hasLaw_stratumMap": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.sum_map_eq_of_integral_sampleMean_indicator": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.sampleMean_const_points": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.integral_sampleMean_of_hasLaw_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.variance_sampleMean_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.shiftMod": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.shiftMod_inUnitIco": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.shiftMod_fract": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.fract_of_lt_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.fract_of_one_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.countBelow_shiftMod_of_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.countBelow_shiftMod_of_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.abs_countBelow_div_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.localDiscrepancy_shiftMod_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.starDiscrepancy_shiftMod_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.abs_shiftedError_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.integral_qmcEstimate_shiftMod": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.integral_sq_shiftedError_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.sqrt_integral_sq_shiftedError_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.sqrt_integral_sq_shiftedError_vanDerCorput_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.tendsto_sqrt_mul_rmse_vanDerCorput": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.shiftedMidpoint_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.continuous_stratumMap": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.stratumMap_eq_midpoint_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.midpoint_shift_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.integral_sq_sub_half_uniformIco": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.integral_id_uniformIco": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.integrable_uniformIco_of_continuous": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.variance_le_of_lipschitz_half": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.memLp_uniformIco_of_lipschitz": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.abs_sub_stratumMap_half_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.variance_stratified_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.variance_stratified_le_mc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.variance_stratified_le_lipschitz": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.integral_sampleMean_commonShift": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.variance_commonShift_le_lipschitz": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.variance_uniformIco_id": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.variance_uniformIco_affine": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.variance_stratified_id": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.variance_commonShift_id": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.variance_stratified_id_lt_commonShift_id": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.sum_cond_eq_of_partition": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.variance_sampleMean_partition_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.integral_uniformIco_eq_intervalIntegral": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.sum_range_natCast": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.scaled_error_id": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.map_sub_half_uniformIco": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.hasLaw_scaled_error_id": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.cell_error_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.tendsto_scaled_error": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.ae_mem_Ico_of_hasLaw": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.measurable_sampleMean_stratumMap": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.ae_tendsto_scaled_error": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.tendstoInDistribution_scaled_error": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.map_mul_sub_half_uniformIco": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.ne_gaussianReal_of_measure_Ioi_eq_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.limit_law_ne_gaussianReal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.not_tendstoInDistribution_scaled_error_gaussian": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.tendsto_sqrt_scaled_error": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.ae_tendsto_sqrt_scaled_error": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.not_tendstoInDistribution_sqrt_scaled_error_gaussian": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.sampleMean_fract_lattice": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.measurePreserving_fract_natCast_mul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.hasLaw_fract_natCast_mul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.hasLaw_scaled_error_id_lattice": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.tendstoInDistribution_scaled_error_lattice": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.not_tendstoInDistribution_scaled_error_lattice_gaussian": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.fract_natCast_mul_stratumMap": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.variance_commonShift_sawtooth": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.mc_variance_lt_commonShift_sawtooth": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.digitalShift": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.digitalShiftUpper": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.digitalShiftSeq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.dyadicCell": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.cellPerm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.natFloor_add_fract": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.floor_two_pow_mul_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.xor_left_cancel'": [
+      "propext",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.two_pow_mul_digitalShift": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.floor_two_pow_mul_digitalShift": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.testBit_floor_two_pow_mul_digitalShift": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.fract_two_pow_mul_digitalShift": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.digitalShift_mem_Ico": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.digitalShiftUpper_eq_digitalShift": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.volume_two_pow_mul_eq_natCast": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.digitalShiftUpper_ae_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.digitalShift_expansion_ambiguity": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.mem_dyadicCell_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.nonneg_of_mem_dyadicCell": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.fract_eq_of_mem_dyadicCell": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.mem_dyadicCell_add_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.inter_Ico_eq_biUnion_dyadicCell": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.pairwiseDisjoint_dyadicCell_inter": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.measurable_cellPerm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.cellPerm_of_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.measurePreserving_cellPerm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.measurePreserving_digitalShift": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.integral_qmcEstimate_digitalShiftSeq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.sum_range_comp_of_injOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.image_range_comp_of_injOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.exists_two_pow_mul_vanDerCorput_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.two_pow_mul_vanDerCorput_eq_floor": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.vanDerCorput_digit_inj": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.image_vanDerCorput_digit": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.fract_vanDerCorput_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.sum_digitalShift_vanDerCorput": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.sum_shiftMod_vanDerCorput": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.image_digitalShift_eq_image_shiftMod_vanDerCorput": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.qmcEstimate_digitalShift_eq_shiftMod_vanDerCorput": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.map_qmcEstimate_digitalShift_eq_shiftMod": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.hasLaw_scaled_error_digitalShift_id": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.scaled_error_digitalShift_ne_gaussianReal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.cell_lt_half_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.digitalShift_ne_shiftMod_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.two_pow_mul_cellPerm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.floor_two_pow_mul_cellPerm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.fract_two_pow_mul_cellPerm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.sum_xor_eq_sum_add_three": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.map_digitalShift_three_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.vdcDigit": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.vdcPrefixMem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.PrefixShiftEq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.vanDerCorput_two_pow_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.vdcDigit_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.vdcDigit_succ_of_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.vdcDigit_succ_two_pow_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.exists_vdcDigit_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.vdcPrefixMem_succ_of_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.vdcPrefixMem_succ_of_gt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.xor_eq_iff_halves": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.add_mod_two_mul_eq_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.exists_xor_iff_of_decomp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.exists_add_iff_of_decomp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.exists_lt_xor_iff": [
+      "propext",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.exists_lt_add_mod_iff": [
+      "propext",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.add_pred_mod_add_one": [
+      "propext",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.exists_false_and_iff": [],
+    "RQMCMarkov.PointSets.exists_prefix_cellPerm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.mem_image_vdcDigit_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.image_xor_eq_image_add_mod": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.exists_measurePreserving_digitalShift_prefix": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.qmcEstimate_digitalShift_prefix_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.PointSets.map_qmcEstimate_digitalShift_prefix_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  "source_sha256": {
+    "PointSets/Discrepancy.lean": "3a2fe7704ea27fbb1a9475b77bf9d1ff0ad6164835077f45d93adbd526ea7241",
+    "PointSets/Koksma.lean": "356af3718a41be327d683460bdd7f6e675d11b7b398648e990f6f0295d13659b",
+    "PointSets/VanDerCorput.lean": "f92291f323dacc9edd19c92c36f8c5b3ce1702b9f3ee5e83d0d1096c682a181e",
+    "PointSets/MonteCarlo.lean": "05028f48e0ea4558089364f15675cc951154953d34a3e834a34acce243101358",
+    "PointSets/Unbiased.lean": "3b943d77038d46119a1c187495bff8071f3f37b51245740e7a5ea6b74db1be7f",
+    "PointSets/ShiftedQMC.lean": "bb48f770eec5255621125e139012adb3b3a62b209d54fc6aa7682bba512f03f9",
+    "PointSets/Stratified.lean": "f88a4130cd8242d98fc5302de29aa91f88aff56b5639f4c215afba62580bc127",
+    "PointSets/ShiftLimit.lean": "7e2be9c27e56082b3b2a407f36176b491c5d762dcace0586a0134b0519c01111",
+    "PointSets/ShiftLimitLattice.lean": "52cce6b46ca61b157e6f89254102e481e535b099ab7c6c3a42e989474dc24ba3",
+    "PointSets/DigitalShift.lean": "7f9eed9b2dc03c4284f31a08dd22b69280c556f01348a87710146d0067cdb198",
+    "PointSets/DigitalShiftPrefix.lean": "d11c22dbee222111c8ab03d635d5fdc396730548949442726b9246d1b94df726",
+    "PointSets.lean": "e57e90ce47dcdd587f18cea1e256ccf6b2c74a9a4818a2c36e8975a6a65843aa",
+    "lean-toolchain": "8733782dc070a99b312039cda424f601b80f3be6f6f512627da5ba25adc27632",
+    "lakefile.toml": "14ab73b7cba21a27117bb0dcd928ba388b22e29c7d1480dca852473168f45e6c",
+    "lake-manifest.json": "9e673381cf98e97e7b0457b985f34ebbe8af54945c87a31e67949261aad22e1a",
+    "proof-manifest.json": "f6a57d73e3c3d26538917455394af7cb2587dc01727c8cafc20c1714b18991eb",
+    "scripts/verify.py": "a70b1fa704dd590f937f8b37682afa88a9d85a9150065acb935c7d2c9589da3b",
+    "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  },
+  "fresh_audit_sha256": "203840eb1e8c3859e3eb67e6b3ee7f06b22b8ec233dc354e26c8b4ed65be9917",
+  "lean_toolchain": "leanprover/lean4:v4.34.0",
+  "scope": "MC, QMC and RQMC for i.i.d. uniforms: the mathematical claims of posts #1-#2 of the VFI Toolkit discourse thread 'Simulating a Markov chain: MC, QMC, RQMC' (topic 687), with corrections.",
+  "source": "R. Kirkby, VFI Toolkit discourse topic 687 (2026), with L'Ecuyer (2016), L'Ecuyer-Munger-Tuffin (2010), Owen (1997)"
+}

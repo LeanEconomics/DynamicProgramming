@@ -4,6 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Robert Kirkby
 -/
 import DeterministicDynamics.LQStability
+import Mathlib.Algebra.Order.Archimedean.Real.Hom
 
 /-!
 # The real stable and unstable subspaces of a real matrix

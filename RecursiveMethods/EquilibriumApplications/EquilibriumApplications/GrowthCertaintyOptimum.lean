@@ -4,6 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Robert Kirkby
 -/
 import EquilibriumApplications.GrowthCertainty
+import EquilibriumApplications.SequenceSupport
+import Mathlib.Analysis.Normed.Group.FunctionSeries
+import Mathlib.RingTheory.Etale.Weakly
+import Mathlib.RingTheory.Flat.TorsionFree
+import Mathlib.RingTheory.SimpleRing.Principal
+import Mathlib.RingTheory.TotallySplit
 
 /-!
 # The one-sector model under certainty: the optimum and its equilibrium prices

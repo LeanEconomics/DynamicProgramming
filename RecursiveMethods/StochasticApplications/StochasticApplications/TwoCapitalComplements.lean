@@ -4,6 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Robert Kirkby
 -/
 import StochasticApplications.TwoCapitalReduction
+import Mathlib.Analysis.SpecialFunctions.ExpDeriv
 
 /-!
 # Two capital goods: complementarity and the policy function

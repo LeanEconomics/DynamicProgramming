@@ -3,7 +3,12 @@ Copyright (c) 2026 Robert Kirkby. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Robert Kirkby
 -/
-import DeterministicDynamics.Dichotomy
+import Mathlib.Algebra.Order.Star.Real
+import Mathlib.Analysis.InnerProductSpace.Basic
+import Mathlib.Analysis.LocallyConvex.AbsConvexOpen
+import Mathlib.Analysis.RCLike.Lemmas
+import Mathlib.Topology.ContinuousMap.Bounded.Normed
+import Mathlib.Topology.MetricSpace.Contracting
 
 /-!
 # The Lyapunov–Perron construction

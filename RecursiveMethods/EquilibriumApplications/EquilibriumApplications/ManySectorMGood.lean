@@ -4,6 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Robert Kirkby
 -/
 import EquilibriumApplications.ManySectorPrices
+import Mathlib.MeasureTheory.Integral.Prod
 
 /-!
 # A many-sector model of stochastic growth with `M` consumption goods (Ex 16.2(a)–(b))

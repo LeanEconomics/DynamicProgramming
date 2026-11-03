@@ -4,6 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Robert Kirkby
 -/
 import DeterministicDP.Principle
+import Mathlib.Algebra.CharP.Defs
 
 /-!
 # Why Theorems 4.3 and 4.5 need their boundedness conditions

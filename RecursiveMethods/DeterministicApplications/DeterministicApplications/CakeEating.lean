@@ -5,6 +5,7 @@ Authors: Robert Kirkby
 -/
 import DeterministicApplications.GrowthDifferentiability
 import DeterministicApplications.LogModel
+import Mathlib.Analysis.Calculus.ContDiff.Basic
 
 /-!
 # A cake-eating problem

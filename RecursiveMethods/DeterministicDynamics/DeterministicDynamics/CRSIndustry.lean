@@ -4,6 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Robert Kirkby
 -/
 import DeterministicDynamics.FirmDynamics
+import Mathlib.Analysis.Calculus.Deriv.Inv
 
 /-!
 # A constant-returns-to-scale industry (Exercise 6.9)

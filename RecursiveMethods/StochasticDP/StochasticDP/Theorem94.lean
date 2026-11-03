@@ -4,6 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Robert Kirkby
 -/
 import StochasticDP.Lemma93
+import Mathlib.Topology.Separation.CompletelyRegular
 
 /-!
 # Theorem 9.4: optimal plans follow the policy correspondence almost surely

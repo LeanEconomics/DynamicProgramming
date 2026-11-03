@@ -4,6 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Robert Kirkby
 -/
 import DeterministicDynamics.TwoCycle
+import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
+import Mathlib.LinearAlgebra.Matrix.Trace
 
 /-!
 # The cyclical example: the two-cycle at `β = 0.1`, `α = 0.8`, `θ = 0.75`

@@ -4,6 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Robert Kirkby
 -/
 import EquilibriumApplications.SequencePrices
+import Mathlib.Algebra.Order.Star.Real
 
 /-!
 # An economy with sustained growth: the spaces `S_θ` and Exercise 16.3(a)–(b)

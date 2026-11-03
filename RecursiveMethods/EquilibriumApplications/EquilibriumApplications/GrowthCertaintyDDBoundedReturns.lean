@@ -6,6 +6,7 @@ Authors: Robert Kirkby
 import EquilibriumApplications.GrowthCertaintyDDAssumption42
 import EquilibriumApplications.GrowthCertaintyDDContraction
 import EquilibriumApplications.GrowthCertaintyDDMaximum
+import Mathlib.Topology.ContinuousMap.Bounded.Normed
 
 /-!
 # Bounded returns

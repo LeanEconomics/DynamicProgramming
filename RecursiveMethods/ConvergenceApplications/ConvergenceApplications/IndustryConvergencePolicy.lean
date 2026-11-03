@@ -3,8 +3,8 @@ Copyright (c) 2026 Robert Kirkby. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Robert Kirkby
 -/
-import ConvergenceApplications.IndustryInvestmentFOC
 import ConvergenceApplications.IndustryConvergence
+import ConvergenceApplications.IndustryInvestmentFOC
 
 /-!
 # Industry investment: the §10.4 policy satisfies the hypotheses of §13.4

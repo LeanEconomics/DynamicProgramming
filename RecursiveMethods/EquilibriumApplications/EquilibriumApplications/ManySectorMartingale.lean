@@ -4,8 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Robert Kirkby
 -/
 import EquilibriumApplications.ManySectorPricing
+import Mathlib.Probability.Kernel.Deterministic
 import Mathlib.Probability.Kernel.IonescuTulcea.Traj
-import Mathlib.Probability.Martingale.Basic
 
 /-!
 # The martingale property on the space of histories (SLP p. 485)

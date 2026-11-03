@@ -3,7 +3,7 @@ Copyright (c) 2026 Robert Kirkby. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Robert Kirkby
 -/
-import ConvergenceApplications.BoundedOptimal
+import ConvergenceApplications.BoundedReturns
 
 /-!
 # Bounded returns: monotonicity (Theorems 9.7 and 9.11, Exercises 9.7c and 9.7g)

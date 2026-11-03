@@ -3,8 +3,10 @@ Copyright (c) 2026 Robert Kirkby. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Robert Kirkby
 -/
-import DeterministicDP.EulerEquations
 import DeterministicDP.Assumption42
+import DeterministicDP.EulerEquations
+import Mathlib.Analysis.Convex.SpecificFunctions.Pow
+import Mathlib.Analysis.SpecialFunctions.Pow.Deriv
 
 /-!
 # Optimal policies from the Euler equations

@@ -3,7 +3,9 @@ Copyright (c) 2026 Robert Kirkby. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Robert Kirkby
 -/
-import Mathlib
+import Mathlib.Analysis.Convex.Basic
+import Mathlib.Analysis.Normed.Module.Basic
+import Mathlib.LinearAlgebra.FiniteDimensional.Defs
 
 /-!
 # Economies, Pareto optima and competitive equilibria

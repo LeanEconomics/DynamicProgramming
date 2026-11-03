@@ -3,7 +3,12 @@ Copyright (c) 2026 Robert Kirkby. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Robert Kirkby
 -/
+import StochasticApplications.GrowthPolicy
 import StochasticApplications.IndustryInvestment
+import Mathlib.Analysis.Calculus.Deriv.Inv
+import Mathlib.RingTheory.Etale.Weakly
+import Mathlib.RingTheory.Flat.TorsionFree
+import Mathlib.RingTheory.TotallySplit
 
 /-!
 # Industry investment under uncertainty: results

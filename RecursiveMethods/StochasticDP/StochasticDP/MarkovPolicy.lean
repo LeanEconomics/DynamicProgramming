@@ -3,7 +3,7 @@ Copyright (c) 2026 Robert Kirkby. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Robert Kirkby
 -/
-import StochasticDP.PolicyKernels
+import StochasticDP.Theorem94
 
 /-!
 # Exercise 9.16: the endogenous state need not be a Markov process
