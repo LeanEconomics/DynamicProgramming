@@ -12748,6 +12748,1197 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Robert Kirkby
 -/
 
+/-! # The root-mean-square rate of plain MC (post #3)
+
+Post #3: "With MC of a Markov Chain the empirical transition matrix converges at `O(1/√T)`
+(Meyn & Tweedie, Chpt 17)." `MCRate` and `MCRateDriven` show that **almost surely** this is
+false: the error of `N_ij(T) − p_ij N_i(T)` is of exact order `√(T log log T)` (LIL), so the
+empirical transition matrix converges at `√(log log T / T)`, not `O(1/√T)`
+(`ae_frequently_transCount_driven_ge`, `ae_not_tendsto_transCount_driven`). This module proves
+that the post's `O(1/√T)` is **right at the root-mean-square (RMSE) scale**, for the post's MC
+construction: one i.i.d. uniform sequence `u ∼ iidUniform ℕ` driving `drivenPath P x₀ u`, any
+stochastic `P`, any start `x₀`, every horizon `T`.
+
+**Method.** `N_ij(T) − p_ij N_i(T) = Σ_{t<T} 1{x_t = i}(1{x_{t+1} = j} − p_ij)` is a sum of
+martingale increments for the time filtration: the input `u T` is independent of the past
+`(u 0, …, u (T−1))` (`indepFun_past_iidUniform`), which determines `x_0, …, x_T`
+(`drivenPath_padPast`), and `x_{T+1} = step P x_T (u T)`. Hence
+`E[G(x) F(x_T, x_{T+1})] = E[G(x) Σ_j p_{x_T j} F(x_T, j)]` for every bounded functional `G` of
+`x_0, …, x_T` (`integral_mul_step_driven`): the increments are orthogonal, with conditional
+variance `Σ_j p_{x_t j} f(x_t, j)²` (`integral_sq_incrementSum_driven`).
+
+## Main results
+
+* `integral_sq_transCount_sub_driven` (**exact**): `E[(N_ij(T) − p_ij N_i(T))²] =
+  p_ij (1 − p_ij) E N_i(T)`; `integral_sq_transCount_sub_driven_le`: `≤ p_ij (1 − p_ij) T`;
+  `integral_sq_transFreq_sub_driven_le`: `E[((N_ij − p_ij N_i)/T)²] ≤ p_ij (1 − p_ij)/T`.
+* `integral_sq_departureDiscrepancy_driven`: `E[D_i(g, T)²] = σ_i²(g) E N_i(T)` and
+  `integral_sq_sum_departureDiscrepancy_driven`: `E[(Σ_i D_i(g, T))²] = Σ_i σ_i²(g) E N_i(T)`,
+  with `σ_i²(g) = rowVariance P g i` (`D_i` is `departureDiscrepancy`).
+* Occupation error, with Poisson's `h − Ph = 1_{s} − c`, `|h| ≤ M` (as in
+  `abs_occCount_sub_le`): `integral_sq_occCount_sub_driven_mem` (two-sided bounds through
+  `V(T) = Σ_i σ_i²(h) E N_i(T)`), `integral_sq_occCount_sub_driven_le`:
+  `E[(N_s(T) − T c)²] ≤ (2M + √(T Σ_i σ_i²(h)))²`, and `integral_sq_occFreq_sub_driven_le`:
+  the RMSE of the frequency `N_s(T)/T` is `O(1/√T)`.
+* `tendsto_integral_occCount_div_driven`: `E N_s(T)/T → c` (a consequence of the RMSE bound;
+  no almost-sure law or dominated convergence is needed).
+* **Lower bound** `eventually_integral_sq_occCount_sub_driven_ge`: if `E N_i(T)/T → w_i` and
+  `Σ_i w_i σ_i²(h) > 0`, then `E[(N_s(T) − T c)²] ≥ κ T` eventually, for some `κ > 0`;
+  `eventually_integral_sq_occCount_sub_driven_ge_of_irreducible`: the same for irreducible `P`
+  with stationary `π`, under `Σ_i π_i σ_i²(h) > 0`. So the RMSE of the frequency is of exact
+  order `1/√T`.
+* `occCount_mse_twoStateStay78`: for the two-state chain with stay probability `7/8`
+  (`twoStateStay78`), `h = (2, −2)`, `σ_0² = σ_1² = 7/4` (`rowVariance_twoStateStay78`), so
+  `Σ_i π_i σ_i²(h) = 7/4 > 0`: both bounds hold and the lower bound is not vacuous.
+
+**Correction** (post #3, "converges at `O(1/√T)`"). Read almost surely, the claim is false:
+`ae_not_tendsto_transCount_driven` (`MCRateDriven`) shows the a.s. error is not
+`o(√(N log log N))`. Read in root mean square, it is true and sharp: the RMSE of
+`(N_ij(T) − p_ij N_i(T))/T` is `√(p_ij (1 − p_ij) E N_i(T))/T ≤ √(p_ij(1 − p_ij)/T)`
+(`integral_sq_transCount_sub_driven`), and the RMSE of `N_s(T)/T` is of exact order `1/√T`
+(`integral_sq_occFreq_sub_driven_le`, `eventually_integral_sq_occCount_sub_driven_ge`). The
+`√T` scale is the CLT scale (`MCRateCLT`).
+-/
+
+namespace RQMCMarkov.MarkovDriving
+
+open MeasureTheory ProbabilityTheory Filter Finset Matrix Topology
+
+variable {n : ℕ}
+
+/-- A measurable function bounded by `C` is integrable for a probability measure. -/
+theorem integrable_of_abs_le {Ω : Type*} [MeasurableSpace Ω] {Q : Measure Ω}
+    [IsProbabilityMeasure Q] {g : Ω → ℝ} (hg : Measurable g) {C : ℝ} (hC : ∀ ω, |g ω| ≤ C) :
+    Integrable g Q :=
+  Integrable.of_bound hg.aestronglyMeasurable C (Eventually.of_forall fun ω => by
+    rw [Real.norm_eq_abs]
+    exact hC ω)
+
+/-- `|F a b| ≤ Σ_a Σ_b |F a b|`. -/
+theorem abs_le_sum_sum_abs (F : Fin n → Fin n → ℝ) (a b : Fin n) :
+    |F a b| ≤ ∑ a, ∑ b, |F a b| :=
+  (single_le_sum (f := fun b => |F a b|) (fun _ _ => abs_nonneg _) (mem_univ b)).trans
+    (single_le_sum (f := fun a => ∑ b, |F a b|) (fun _ _ => sum_nonneg fun _ _ =>
+      abs_nonneg _) (mem_univ a))
+
+/-- **The law of one step from a uniform input**: if `W ∼ U[0,1)`, then
+`E φ(step P i W) = Σ_j p_ij φ_j`. -/
+theorem integral_comp_step_of_map {Ω : Type*} [MeasurableSpace Ω] {Q : Measure Ω}
+    [IsProbabilityMeasure Q] {W : Ω → ℝ} (hW : Measurable W) (hlaw : Q.map W = uniformIco)
+    {P : Fin n → Fin n → ℝ} (hP : IsStochastic P) (i : Fin n) (φ : Fin n → ℝ) :
+    ∫ ω, φ (step P i (W ω)) ∂Q = ∑ j, P i j * φ j := by
+  have hmeas : Measurable fun ω => step P i (W ω) := (measurable_step P i).comp hW
+  rw [← integral_map hmeas.aemeasurable (measurable_of_finite φ).aestronglyMeasurable]
+  rw [integral_fintype Integrable.of_finite]
+  refine sum_congr rfl fun j _ => ?_
+  rw [smul_eq_mul, measureReal_def, Measure.map_apply hmeas (measurableSet_singleton j)]
+  have e : (fun ω => step P i (W ω)) ⁻¹' {j} = W ⁻¹' {u | step P i u = j} := rfl
+  have hms : MeasurableSet {u | step P i u = j} :=
+    (measurable_step P i) (measurableSet_singleton j)
+  rw [e, ← Measure.map_apply hW hms, hlaw, uniformIco_step_eq hP i j,
+    ENNReal.toReal_ofReal (hP.nonneg i j), mul_comm]
+
+/-- **One step against an independent past.** If `W ∼ U[0,1)` is independent of `Z`, then for
+bounded measurable `A` and any `a`, `F`:
+`E[A(Z) F(a(Z), step P (a Z) W)] = E[A(Z) Σ_j p_{a(Z) j} F(a(Z), j)]`. -/
+theorem integral_mul_comp_step_of_indepFun {Ω β : Type*} [MeasurableSpace Ω]
+    [MeasurableSpace β] {Q : Measure Ω} [IsProbabilityMeasure Q] {Z : Ω → β} {W : Ω → ℝ}
+    (hZ : Measurable Z) (hW : Measurable W) (hind : IndepFun Z W Q)
+    (hlaw : Q.map W = uniformIco) {P : Fin n → Fin n → ℝ} (hP : IsStochastic P)
+    {A : β → ℝ} (hA : Measurable A) {C : ℝ} (hAC : ∀ b, |A b| ≤ C) {a : β → Fin n}
+    (ha : Measurable a) (F : Fin n → Fin n → ℝ) :
+    ∫ ω, A (Z ω) * F (a (Z ω)) (step P (a (Z ω)) (W ω)) ∂Q =
+      ∫ ω, A (Z ω) * ∑ j, P (a (Z ω)) j * F (a (Z ω)) j ∂Q := by
+  set CF := ∑ a, ∑ b, |F a b|
+  set φ : Fin n → β → ℝ := fun b z => A z * if a z = b then 1 else 0 with hφ
+  have hφm : ∀ b, Measurable (φ b) := fun b =>
+    hA.mul (Measurable.ite (ha (measurableSet_singleton b)) measurable_const measurable_const)
+  have hφb : ∀ b z, |φ b z| ≤ C := fun b z => by
+    simp only [hφ]
+    split_ifs
+    · rw [mul_one]
+      exact hAC z
+    · rw [mul_zero, abs_zero]
+      exact (abs_nonneg _).trans (hAC z)
+  have e1 : ∀ ω, A (Z ω) * F (a (Z ω)) (step P (a (Z ω)) (W ω)) =
+      ∑ b, φ b (Z ω) * F b (step P b (W ω)) := fun ω => by
+    simp only [hφ, mul_ite, mul_one, mul_zero, ite_mul, zero_mul]
+    rw [Finset.sum_ite_eq]
+    simp only [mem_univ, ite_true]
+  have e2 : ∀ ω, A (Z ω) * ∑ j, P (a (Z ω)) j * F (a (Z ω)) j =
+      ∑ b, φ b (Z ω) * ∑ j, P b j * F b j := fun ω => by
+    simp only [hφ, mul_ite, mul_one, mul_zero, ite_mul, zero_mul]
+    rw [Finset.sum_ite_eq]
+    simp only [mem_univ, ite_true]
+  have hFm : ∀ b, Measurable fun ω => F b (step P b (W ω)) := fun b =>
+    (measurable_of_finite (F b)).comp ((measurable_step P b).comp hW)
+  have hint1 : ∀ b ∈ univ, Integrable (fun ω => φ b (Z ω) * F b (step P b (W ω))) Q :=
+    fun b _ => integrable_of_abs_le (((hφm b).comp hZ).mul (hFm b)) (C := C * CF)
+      fun ω => by
+        rw [abs_mul]
+        exact mul_le_mul (hφb b _) (abs_le_sum_sum_abs F _ _) (abs_nonneg _)
+          ((abs_nonneg _).trans (hφb b (Z ω)))
+  have hint2 : ∀ b ∈ univ, Integrable (fun ω => φ b (Z ω) * ∑ j, P b j * F b j) Q :=
+    fun b _ => (integrable_of_abs_le ((hφm b).comp hZ) fun ω => hφb b (Z ω)).mul_const _
+  rw [integral_congr_ae (Eventually.of_forall e1), integral_congr_ae (Eventually.of_forall e2),
+    integral_finsetSum _ hint1, integral_finsetSum _ hint2]
+  refine sum_congr rfl fun b _ => ?_
+  have hindb : IndepFun (fun ω => φ b (Z ω)) (fun ω => F b (step P b (W ω))) Q :=
+    hind.comp (hφm b) ((measurable_of_finite (F b)).comp (measurable_step P b))
+  rw [hindb.integral_fun_mul_eq_mul_integral ((hφm b).comp hZ).aestronglyMeasurable
+    (hFm b).aestronglyMeasurable, integral_mul_const, integral_comp_step_of_map hW hlaw hP b]
+
+/-! ### The past of the driving sequence -/
+
+/-- The first `T` driving inputs, padded with zeros: `padPast T p s = p s` for `s < T`. -/
+noncomputable def padPast (T : ℕ) (p : range T → ℝ) : ℕ → ℝ :=
+  fun s => if h : s ∈ range T then p ⟨s, h⟩ else 0
+
+/-- `padPast T` is measurable. -/
+theorem measurable_padPast (T : ℕ) : Measurable (padPast T) := by
+  refine measurable_pi_iff.2 fun s => ?_
+  by_cases h : s ∈ range T
+  · simp only [padPast, h, dite_true]
+    exact measurable_pi_apply _
+  · simp only [padPast, h, dite_false]
+    exact measurable_const
+
+/-- **The path up to time `T` depends only on the first `T` inputs.** -/
+theorem drivenPath_padPast (P : Fin n → Fin n → ℝ) (x₀ : Fin n) (u : ℕ → ℝ) {T t : ℕ}
+    (ht : t ≤ T) :
+    drivenPath P x₀ (padPast T fun s : range T => u s) t = drivenPath P x₀ u t := by
+  induction t with
+  | zero => rfl
+  | succ t ih =>
+    change step P (drivenPath P x₀ (padPast T fun s : range T => u s) t)
+        (padPast T (fun s : range T => u s) t) = step P (drivenPath P x₀ u t) (u t)
+    rw [ih (by omega)]
+    have hs : t ∈ range T := mem_range.2 (by omega)
+    simp only [padPast, hs, dite_true]
+
+/-- Under `iidUniform ℕ`, the first `T` inputs are independent of the input `u T`. -/
+theorem indepFun_past_iidUniform (T : ℕ) :
+    IndepFun (fun (u : ℕ → ℝ) (s : range T) => u s) (fun u : ℕ → ℝ => u T)
+      (iidUniform ℕ) := by
+  have := isProbabilityMeasure_uniformIco
+  have h := iIndepFun_infinitePi (P := fun _ : ℕ => uniformIco) (X := fun _ x => x)
+    (fun _ => measurable_id)
+  have h2 := h.indepFun_finset (range T) {T} (by simp) (fun t => measurable_pi_apply t)
+  exact h2.comp measurable_id (measurable_pi_apply (⟨T, mem_singleton_self T⟩ : ({T} : Finset ℕ)))
+
+/-- Each input of `iidUniform ℕ` is uniform on `[0,1)`. -/
+theorem map_eval_iidUniform (T : ℕ) :
+    (iidUniform ℕ).map (fun u : ℕ → ℝ => u T) = uniformIco := by
+  have := isProbabilityMeasure_uniformIco
+  exact Measure.infinitePi_map_eval (μ := fun _ : ℕ => uniformIco) T
+
+/-- The state at time `t` is a measurable function of the input sequence. -/
+theorem measurable_drivenPath_apply (P : Fin n → Fin n → ℝ) (x₀ : Fin n) (t : ℕ) :
+    Measurable fun u => drivenPath P x₀ u t :=
+  (measurable_pi_apply t).comp (measurable_drivenPath P x₀)
+
+/-- **The one-step identity for MC driving.** If `G` is a bounded measurable path functional
+that depends only on `x_0, …, x_T`, then
+`E[G(x) F(x_T, x_{T+1})] = E[G(x) Σ_j p_{x_T j} F(x_T, j)]`. -/
+theorem integral_mul_step_driven {P : Fin n → Fin n → ℝ} (hP : IsStochastic P) (x₀ : Fin n)
+    (T : ℕ) {G : (ℕ → Fin n) → ℝ} (hG : Measurable G) {C : ℝ} (hGC : ∀ x, |G x| ≤ C)
+    (hGT : ∀ x y : ℕ → Fin n, (∀ t ≤ T, x t = y t) → G x = G y) (F : Fin n → Fin n → ℝ) :
+    ∫ u, G (drivenPath P x₀ u) * F (drivenPath P x₀ u T) (drivenPath P x₀ u (T + 1))
+        ∂iidUniform ℕ =
+      ∫ u, G (drivenPath P x₀ u) *
+        ∑ j, P (drivenPath P x₀ u T) j * F (drivenPath P x₀ u T) j ∂iidUniform ℕ := by
+  have := isProbabilityMeasure_iidUniform ℕ
+  set Z : (ℕ → ℝ) → (range T → ℝ) := fun u s => u s
+  have hZ : Measurable Z := measurable_pi_iff.2 fun s => measurable_pi_apply _
+  set A : (range T → ℝ) → ℝ := fun p => G (drivenPath P x₀ (padPast T p))
+  set a : (range T → ℝ) → Fin n := fun p => drivenPath P x₀ (padPast T p) T
+  have hA : Measurable A := hG.comp ((measurable_drivenPath P x₀).comp (measurable_padPast T))
+  have ha : Measurable a := (measurable_drivenPath_apply P x₀ T).comp (measurable_padPast T)
+  have eA : ∀ u, G (drivenPath P x₀ u) = A (Z u) := fun u =>
+    hGT _ _ fun t ht => (drivenPath_padPast P x₀ u ht).symm
+  have ea : ∀ u, drivenPath P x₀ u T = a (Z u) := fun u =>
+    (drivenPath_padPast P x₀ u le_rfl).symm
+  have hkey := integral_mul_comp_step_of_indepFun hZ (measurable_pi_apply T)
+    (indepFun_past_iidUniform T) (map_eval_iidUniform T) hP hA (fun p => hGC _) ha F
+  have e1 : ∀ u, G (drivenPath P x₀ u) * F (drivenPath P x₀ u T) (drivenPath P x₀ u (T + 1)) =
+      A (Z u) * F (a (Z u)) (step P (a (Z u)) (u T)) := fun u => by
+    rw [eA, show drivenPath P x₀ u (T + 1) = step P (drivenPath P x₀ u T) (u T) from rfl,
+      ← ea]
+  have e2 : ∀ u, G (drivenPath P x₀ u) *
+      ∑ j, P (drivenPath P x₀ u T) j * F (drivenPath P x₀ u T) j =
+      A (Z u) * ∑ j, P (a (Z u)) j * F (a (Z u)) j := fun u => by
+    rw [eA, ← ea]
+  simp only [e1, e2]
+  exact hkey
+
+/-! ### The martingale of increments -/
+
+/-- The **increment sum** `Σ_{t<T} f(x_t, x_{t+1})` along a path. When every row average
+`Σ_j p_aj f(a, j)` vanishes, it is a martingale for MC (`integral_sq_incrementSum_driven`). -/
+noncomputable def incrementSum (f : Fin n → Fin n → ℝ) (x : ℕ → Fin n) (T : ℕ) : ℝ :=
+  ∑ t ∈ range T, f (x t) (x (t + 1))
+
+/-- `x ↦ f(x_t, x_{t+1})` is measurable on the path space. -/
+theorem measurable_pair_apply (f : Fin n → Fin n → ℝ) (t : ℕ) :
+    Measurable fun x : ℕ → Fin n => f (x t) (x (t + 1)) := by
+  have h := (measurable_of_finite fun p : Fin n × Fin n => f p.1 p.2).comp
+    ((measurable_pi_apply (X := fun _ : ℕ => Fin n) t).prodMk (measurable_pi_apply (t + 1)))
+  exact h
+
+/-- The increment sum is measurable on the path space. -/
+theorem measurable_incrementSum (f : Fin n → Fin n → ℝ) (T : ℕ) :
+    Measurable fun x : ℕ → Fin n => incrementSum f x T :=
+  Finset.measurable_sum _ fun t _ => measurable_pair_apply f t
+
+/-- `|Σ_{t<T} f(x_t, x_{t+1})| ≤ T Σ_{a,b} |f a b|`. -/
+theorem abs_incrementSum_le (f : Fin n → Fin n → ℝ) (x : ℕ → Fin n) (T : ℕ) :
+    |incrementSum f x T| ≤ T * ∑ a, ∑ b, |f a b| := by
+  unfold incrementSum
+  refine (abs_sum_le_sum_abs _ _).trans ?_
+  have := sum_le_sum fun t (_ : t ∈ range T) => abs_le_sum_sum_abs f (x t) (x (t + 1))
+  rwa [sum_const, card_range, nsmul_eq_mul] at this
+
+/-- The increment sum up to `T` depends only on `x_0, …, x_T`. -/
+theorem incrementSum_congr (f : Fin n → Fin n → ℝ) {x y : ℕ → Fin n} {T : ℕ}
+    (h : ∀ t ≤ T, x t = y t) : incrementSum f x T = incrementSum f y T :=
+  sum_congr rfl fun t ht => by
+    have := mem_range.1 ht
+    rw [h t (by omega), h (t + 1) (by omega)]
+
+/-- **Orthogonality of martingale increments** (exact second moment). If every row average of
+`f` vanishes, `Σ_j p_aj f(a, j) = 0`, then for MC driving
+`E[(Σ_{t<T} f(x_t, x_{t+1}))²] = Σ_{t<T} E[Σ_j p_{x_t j} f(x_t, j)²]`. -/
+theorem integral_sq_incrementSum_driven {P : Fin n → Fin n → ℝ} (hP : IsStochastic P)
+    (x₀ : Fin n) {f : Fin n → Fin n → ℝ} (hf : ∀ a, ∑ j, P a j * f a j = 0) (T : ℕ) :
+    ∫ u, incrementSum f (drivenPath P x₀ u) T ^ 2 ∂iidUniform ℕ =
+      ∑ t ∈ range T, ∫ u, ∑ j, P (drivenPath P x₀ u t) j * f (drivenPath P x₀ u t) j ^ 2
+        ∂iidUniform ℕ := by
+  have := isProbabilityMeasure_iidUniform ℕ
+  set Cf := ∑ a, ∑ b, |f a b|
+  have hCf : 0 ≤ Cf := sum_nonneg fun a _ => sum_nonneg fun b _ => abs_nonneg _
+  induction T with
+  | zero =>
+    simp only [incrementSum, range_zero, sum_empty, ne_eq, OfNat.ofNat_ne_zero,
+      not_false_eq_true, zero_pow, integral_zero]
+  | succ T ih =>
+    set M : (ℕ → ℝ) → ℝ := fun u => incrementSum f (drivenPath P x₀ u) T
+    set d : (ℕ → ℝ) → ℝ := fun u => f (drivenPath P x₀ u T) (drivenPath P x₀ u (T + 1))
+    have hMm : Measurable M := (measurable_incrementSum f T).comp (measurable_drivenPath P x₀)
+    have hdm : Measurable d := (measurable_pair_apply f T).comp (measurable_drivenPath P x₀)
+    have hMb : ∀ u, |M u| ≤ T * Cf := fun u => abs_incrementSum_le f _ T
+    have hdb : ∀ u, |d u| ≤ Cf := fun u => abs_le_sum_sum_abs f _ _
+    have e : ∀ u, incrementSum f (drivenPath P x₀ u) (T + 1) ^ 2 =
+        M u ^ 2 + 2 * (M u * d u) + d u ^ 2 := fun u => by
+      simp only [M, d, incrementSum, sum_range_succ]
+      ring
+    have hi1 : Integrable (fun u => M u ^ 2) (iidUniform ℕ) :=
+      integrable_of_abs_le (hMm.pow_const 2) (C := (T * Cf) ^ 2) fun u => by
+        rw [abs_pow]
+        exact pow_le_pow_left₀ (abs_nonneg _) (hMb u) 2
+    have hi2 : Integrable (fun u => 2 * (M u * d u)) (iidUniform ℕ) :=
+      (integrable_of_abs_le (g := fun u => M u * d u) (hMm.mul hdm) (C := T * Cf * Cf) fun u => by
+        rw [abs_mul]
+        exact mul_le_mul (hMb u) (hdb u) (abs_nonneg _) (by positivity)).const_mul 2
+    have hi3 : Integrable (fun u => d u ^ 2) (iidUniform ℕ) :=
+      integrable_of_abs_le (hdm.pow_const 2) (C := Cf ^ 2) fun u => by
+        rw [abs_pow]
+        exact pow_le_pow_left₀ (abs_nonneg _) (hdb u) 2
+    have hcross : ∫ u, M u * d u ∂iidUniform ℕ = 0 := by
+      have h1 := integral_mul_step_driven hP x₀ T (measurable_incrementSum f T)
+        (fun x => abs_incrementSum_le f x T) (fun x y hxy => incrementSum_congr f
+          fun t ht => hxy t ht) f
+      change ∫ u, M u * d u ∂iidUniform ℕ = _ at h1
+      rw [h1]
+      simp only [hf, mul_zero, integral_zero]
+    have hsq : ∫ u, d u ^ 2 ∂iidUniform ℕ = ∫ u, ∑ j, P (drivenPath P x₀ u T) j *
+        f (drivenPath P x₀ u T) j ^ 2 ∂iidUniform ℕ := by
+      have h1 := integral_mul_step_driven hP x₀ T (G := fun _ => (1 : ℝ)) measurable_const
+        (C := 1) (fun _ => by rw [abs_one]) (fun _ _ _ => rfl) (fun a b => f a b ^ 2)
+      simp only [one_mul] at h1
+      exact h1
+    have hi12 : Integrable (fun u => M u ^ 2 + 2 * (M u * d u)) (iidUniform ℕ) := hi1.add hi2
+    rw [integral_congr_ae (Eventually.of_forall e), integral_add hi12 hi3,
+      integral_add hi1 hi2, integral_const_mul, hcross, hsq, ih, sum_range_succ]
+    ring
+
+/-! ### Exact second moments of the departure discrepancies -/
+
+/-- The departure discrepancy of `i` is the increment sum of
+`f(a, b) = 1{a = i} (g b − (Pg)(i))`. -/
+theorem departureDiscrepancy_eq_incrementSum (P : Fin n → Fin n → ℝ) (g : Fin n → ℝ)
+    (x : ℕ → Fin n) (i : Fin n) (T : ℕ) :
+    departureDiscrepancy P g x i T =
+      incrementSum (fun a b => if a = i then g b - (P *ᵥ g) i else 0) x T := by
+  unfold departureDiscrepancy incrementSum
+  rw [sum_filter]
+
+/-- The total departure discrepancy `Σ_i D_i(g, T)` is the increment sum of
+`f(a, b) = g b − (Pg)(a)`. -/
+theorem sum_departureDiscrepancy_eq_incrementSum (P : Fin n → Fin n → ℝ) (g : Fin n → ℝ)
+    (x : ℕ → Fin n) (T : ℕ) :
+    ∑ i, departureDiscrepancy P g x i T = incrementSum (fun a b => g b - (P *ᵥ g) a) x T := by
+  simp only [departureDiscrepancy_eq_incrementSum, incrementSum]
+  rw [sum_comm]
+  refine sum_congr rfl fun t _ => ?_
+  rw [Finset.sum_ite_eq]
+  simp only [mem_univ, ite_true]
+
+/-- `Σ_j p_ij (g_j − (Pg)(i)) = 0` for stochastic `P`. -/
+theorem sum_mul_sub_mulVec_eq_zero {P : Fin n → Fin n → ℝ} (hP : IsStochastic P)
+    (g : Fin n → ℝ) (i : Fin n) : ∑ j, P i j * (g j - (P *ᵥ g) i) = 0 := by
+  simp only [mul_sub, sum_sub_distrib, ← sum_mul, hP.sum_eq_one i, one_mul]
+  rw [sub_eq_zero]
+  rfl
+
+/-- **Occupation counts in mean**: for MC driving, `Σ_{t<T} E φ(x_t) = Σ_i φ_i E N_i(T)`. -/
+theorem sum_integral_comp_driven (P : Fin n → Fin n → ℝ) (x₀ : Fin n) (φ : Fin n → ℝ)
+    (T : ℕ) : ∑ t ∈ range T, ∫ u, φ (drivenPath P x₀ u t) ∂iidUniform ℕ =
+      ∑ i, φ i * ∫ u, (occCount (drivenPath P x₀ u) i T : ℝ) ∂iidUniform ℕ := by
+  have := isProbabilityMeasure_iidUniform ℕ
+  have hint : ∀ t ∈ range T, Integrable (fun u => φ (drivenPath P x₀ u t)) (iidUniform ℕ) :=
+    fun t _ => integrable_of_abs_le ((measurable_of_finite φ).comp
+      (measurable_drivenPath_apply P x₀ t)) (C := ∑ i, |φ i|) fun u =>
+        single_le_sum (f := fun i => |φ i|) (fun _ _ => abs_nonneg _) (mem_univ _)
+  have hintN : ∀ i ∈ univ, Integrable (fun u => φ i *
+      (occCount (drivenPath P x₀ u) i T : ℝ)) (iidUniform ℕ) := fun i _ =>
+    (integrable_of_abs_le ((measurable_occCount_real i T).comp (measurable_drivenPath P x₀))
+      (C := T) fun u => by
+        change |(occCount (drivenPath P x₀ u) i T : ℝ)| ≤ T
+        rw [Nat.abs_cast]
+        exact_mod_cast occCount_le _ i T).const_mul _
+  have e : ∀ u, ∑ t ∈ range T, φ (drivenPath P x₀ u t) =
+      ∑ i, φ i * (occCount (drivenPath P x₀ u) i T : ℝ) := fun u => by
+    simp only [← sum_indicator_eq_occCount, mul_sum, mul_ite, mul_one, mul_zero]
+    rw [sum_comm]
+    refine sum_congr rfl fun t _ => ?_
+    rw [Finset.sum_ite_eq]
+    simp only [mem_univ, ite_true]
+  rw [← integral_finsetSum _ hint, integral_congr_ae (Eventually.of_forall e),
+    integral_finsetSum _ hintN]
+  simp only [integral_const_mul]
+
+/-- **Exact MSE of the total departure discrepancy** (MC driving, any start, every `T`):
+`E[(Σ_i D_i(g, T))²] = Σ_i σ_i²(g) E N_i(T)`, with `σ_i²(g) = rowVariance P g i`. -/
+theorem integral_sq_sum_departureDiscrepancy_driven {P : Fin n → Fin n → ℝ}
+    (hP : IsStochastic P) (x₀ : Fin n) (g : Fin n → ℝ) (T : ℕ) :
+    ∫ u, (∑ i, departureDiscrepancy P g (drivenPath P x₀ u) i T) ^ 2 ∂iidUniform ℕ =
+      ∑ i, rowVariance P g i * ∫ u, (occCount (drivenPath P x₀ u) i T : ℝ) ∂iidUniform ℕ := by
+  simp only [sum_departureDiscrepancy_eq_incrementSum]
+  rw [integral_sq_incrementSum_driven hP x₀ (fun a => sum_mul_sub_mulVec_eq_zero hP g a) T]
+  exact sum_integral_comp_driven P x₀ (rowVariance P g) T
+
+/-- **Exact MSE of one departure discrepancy**: `E[D_i(g, T)²] = σ_i²(g) E N_i(T)`. -/
+theorem integral_sq_departureDiscrepancy_driven {P : Fin n → Fin n → ℝ}
+    (hP : IsStochastic P) (x₀ : Fin n) (g : Fin n → ℝ) (i : Fin n) (T : ℕ) :
+    ∫ u, departureDiscrepancy P g (drivenPath P x₀ u) i T ^ 2 ∂iidUniform ℕ =
+      rowVariance P g i * ∫ u, (occCount (drivenPath P x₀ u) i T : ℝ) ∂iidUniform ℕ := by
+  simp only [departureDiscrepancy_eq_incrementSum]
+  have hf : ∀ a, ∑ j, P a j * (if a = i then g j - (P *ᵥ g) i else 0) = 0 := fun a => by
+    by_cases ha : a = i
+    · subst ha
+      simp only [ite_true]
+      exact sum_mul_sub_mulVec_eq_zero hP g a
+    · simp only [ha, ite_false, mul_zero, sum_const_zero]
+  rw [integral_sq_incrementSum_driven hP x₀ hf T]
+  have e : ∀ a, ∑ j, P a j * (if a = i then g j - (P *ᵥ g) i else 0) ^ 2 =
+      if a = i then rowVariance P g i else 0 := fun a => by
+    by_cases ha : a = i
+    · subst ha
+      simp only [ite_true]
+      rfl
+    · simp only [ha, ite_false, mul_zero, sum_const_zero, ne_eq, OfNat.ofNat_ne_zero,
+        not_false_eq_true, zero_pow]
+  simp only [e]
+  rw [sum_integral_comp_driven P x₀ (fun a => if a = i then rowVariance P g i else 0) T]
+  simp only [ite_mul, zero_mul]
+  rw [Finset.sum_ite_eq']
+  simp only [mem_univ, ite_true]
+
+/-- **Exact MSE of the MC transition counts** (post #3's empirical transition matrix, at the
+RMSE scale): for stochastic `P`, any start and every `T`,
+`E[(N_ij(T) − p_ij N_i(T))²] = p_ij (1 − p_ij) E N_i(T)`. -/
+theorem integral_sq_transCount_sub_driven {P : Fin n → Fin n → ℝ} (hP : IsStochastic P)
+    (x₀ i j : Fin n) (T : ℕ) :
+    ∫ u, ((transCount (drivenPath P x₀ u) i j T : ℝ) -
+        P i j * occCount (drivenPath P x₀ u) i T) ^ 2 ∂iidUniform ℕ =
+      P i j * (1 - P i j) * ∫ u, (occCount (drivenPath P x₀ u) i T : ℝ) ∂iidUniform ℕ := by
+  simp only [transCount_sub_eq_departureDiscrepancy (P : Matrix (Fin n) (Fin n) ℝ)]
+  rw [integral_sq_departureDiscrepancy_driven hP x₀ _ i T, rowVariance_indicator hP i j]
+
+/-- `0 ≤ E N_i(T) ≤ T`. -/
+theorem integral_occCount_driven_mem_Icc (P : Fin n → Fin n → ℝ) (x₀ i : Fin n) (T : ℕ) :
+    ∫ u, (occCount (drivenPath P x₀ u) i T : ℝ) ∂iidUniform ℕ ∈ Set.Icc (0 : ℝ) T := by
+  have := isProbabilityMeasure_iidUniform ℕ
+  refine ⟨integral_nonneg fun u => Nat.cast_nonneg _, ?_⟩
+  have h := integral_mono_of_nonneg (μ := iidUniform ℕ)
+    (f := fun u => (occCount (drivenPath P x₀ u) i T : ℝ)) (g := fun _ => (T : ℝ))
+    (Eventually.of_forall fun u => Nat.cast_nonneg _) (integrable_const _)
+    (Eventually.of_forall fun u => by
+      change (occCount (drivenPath P x₀ u) i T : ℝ) ≤ T
+      exact_mod_cast occCount_le _ i T)
+  rwa [integral_const, probReal_univ, one_smul] at h
+
+/-- **The `O(1/√T)` RMSE of the MC transition counts**:
+`E[(N_ij(T) − p_ij N_i(T))²] ≤ p_ij (1 − p_ij) T`. -/
+theorem integral_sq_transCount_sub_driven_le {P : Fin n → Fin n → ℝ} (hP : IsStochastic P)
+    (x₀ i j : Fin n) (T : ℕ) :
+    ∫ u, ((transCount (drivenPath P x₀ u) i j T : ℝ) -
+        P i j * occCount (drivenPath P x₀ u) i T) ^ 2 ∂iidUniform ℕ ≤
+      P i j * (1 - P i j) * T := by
+  rw [integral_sq_transCount_sub_driven hP x₀ i j T]
+  have h1 : 0 ≤ P i j * (1 - P i j) := by
+    have := rowVariance_indicator hP i j
+    rw [← this]
+    exact sum_nonneg fun k _ => mul_nonneg (hP.nonneg i k) (sq_nonneg _)
+  exact mul_le_mul_of_nonneg_left (integral_occCount_driven_mem_Icc P x₀ i T).2 h1
+
+/-! ### The occupation error at the RMSE scale -/
+
+/-- **Jensen for `|X|`**: `E|X| ≤ √(E X²)` for a bounded measurable `X`. -/
+theorem integral_abs_le_sqrt_integral_sq {Ω : Type*} [MeasurableSpace Ω] {Q : Measure Ω}
+    [IsProbabilityMeasure Q] {X : Ω → ℝ} (hX : Measurable X) {C : ℝ} (hC : ∀ ω, |X ω| ≤ C) :
+    ∫ ω, |X ω| ∂Q ≤ √(∫ ω, X ω ^ 2 ∂Q) := by
+  set m := ∫ ω, |X ω| ∂Q
+  have hm : 0 ≤ m := integral_nonneg fun ω => abs_nonneg _
+  have hiA : Integrable (fun ω => |X ω|) Q :=
+    integrable_of_abs_le (continuous_abs.measurable.comp hX) (C := C) fun ω => by
+      rw [abs_abs]
+      exact hC ω
+  have hi2 : Integrable (fun ω => X ω ^ 2) Q :=
+    integrable_of_abs_le (hX.pow_const 2) (C := C ^ 2) fun ω => by
+      rw [abs_pow]
+      exact pow_le_pow_left₀ (abs_nonneg _) (hC ω) 2
+  have h0 : 0 ≤ ∫ ω, (|X ω| - m) ^ 2 ∂Q := integral_nonneg fun ω => sq_nonneg _
+  have e : ∀ ω, (|X ω| - m) ^ 2 = X ω ^ 2 + (-(2 * m) * |X ω| + m ^ 2) := fun ω => by
+    rw [sub_sq, sq_abs]
+    ring
+  have hi3 : Integrable (fun ω => -(2 * m) * |X ω| + m ^ 2) Q :=
+    (hiA.const_mul _).add (integrable_const _)
+  rw [integral_congr_ae (Eventually.of_forall e), integral_add hi2 hi3,
+    integral_add (hiA.const_mul _) (integrable_const _),
+    integral_const_mul, integral_const, probReal_univ, one_smul] at h0
+  refine Real.le_sqrt_of_sq_le ?_
+  nlinarith
+
+/-- The occupation error is measurable. -/
+theorem measurable_occCount_sub_driven (P : Fin n → Fin n → ℝ) (x₀ s : Fin n) (c : ℝ)
+    (T : ℕ) : Measurable fun u => (occCount (drivenPath P x₀ u) s T : ℝ) - T * c :=
+  ((measurable_occCount_real s T).comp (measurable_drivenPath P x₀)).sub measurable_const
+
+/-- **Two-sided MSE bounds for the occupation error.** Let `h − Ph = 1_{s} − c`, `|h| ≤ M`, and
+`V(T) = Σ_i σ_i²(h) E N_i(T)` (the exact MSE of `Σ_i D_i(h, T)`). Then for MC driving
+`√V (√V − 4M) ≤ E[(N_s(T) − T c)²] ≤ (2M + √V)²`. -/
+theorem integral_sq_occCount_sub_driven_mem {P : Fin n → Fin n → ℝ} (hP : IsStochastic P)
+    (x₀ : Fin n) {h : Fin n → ℝ} {s : Fin n} {c M : ℝ}
+    (hh : ∀ i, h i - (P *ᵥ h) i = (if i = s then 1 else 0) - c) (hM : ∀ i, |h i| ≤ M)
+    (T : ℕ) :
+    √(∑ i, rowVariance P h i * ∫ u, (occCount (drivenPath P x₀ u) i T : ℝ) ∂iidUniform ℕ) *
+        (√(∑ i, rowVariance P h i * ∫ u, (occCount (drivenPath P x₀ u) i T : ℝ)
+          ∂iidUniform ℕ) - 4 * M) ≤
+      ∫ u, ((occCount (drivenPath P x₀ u) s T : ℝ) - T * c) ^ 2 ∂iidUniform ℕ ∧
+    ∫ u, ((occCount (drivenPath P x₀ u) s T : ℝ) - T * c) ^ 2 ∂iidUniform ℕ ≤
+      (2 * M + √(∑ i, rowVariance P h i * ∫ u, (occCount (drivenPath P x₀ u) i T : ℝ)
+        ∂iidUniform ℕ)) ^ 2 := by
+  have := isProbabilityMeasure_iidUniform ℕ
+  have hM0 : 0 ≤ M := (abs_nonneg _).trans (hM s)
+  set V := ∑ i, rowVariance P h i * ∫ u, (occCount (drivenPath P x₀ u) i T : ℝ) ∂iidUniform ℕ
+  set D : (ℕ → ℝ) → ℝ := fun u => ∑ i, departureDiscrepancy P h (drivenPath P x₀ u) i T
+  set E : (ℕ → ℝ) → ℝ := fun u => (occCount (drivenPath P x₀ u) s T : ℝ) - T * c
+  set Ch := ∑ a, ∑ b, |(fun a b => h b - (P *ᵥ h) a) a b|
+  have hDm : Measurable D := by
+    have e : D = fun u => incrementSum (fun a b => h b - (P *ᵥ h) a) (drivenPath P x₀ u) T :=
+      funext fun u => sum_departureDiscrepancy_eq_incrementSum P h _ T
+    rw [e]
+    have h1 := (measurable_incrementSum (fun a b => h b - (P *ᵥ h) a) T).comp
+      (measurable_drivenPath P x₀)
+    exact h1
+  have hDb : ∀ u, |D u| ≤ T * Ch := fun u => by
+    simp only [D, sum_departureDiscrepancy_eq_incrementSum]
+    exact abs_incrementSum_le _ _ T
+  have hEm : Measurable E := measurable_occCount_sub_driven P x₀ s c T
+  have hED : ∀ u, ∃ B, |B| ≤ 2 * M ∧ E u = B + D u := fun u => by
+    refine ⟨h (drivenPath P x₀ u 0) - h (drivenPath P x₀ u T), ?_,
+      occCount_sub_eq_boundary_add P hh _ T⟩
+    have := abs_sub (h (drivenPath P x₀ u 0)) (h (drivenPath P x₀ u T))
+    linarith [hM (drivenPath P x₀ u 0), hM (drivenPath P x₀ u T)]
+  have hEb : ∀ u, |E u| ≤ 2 * M + T * Ch := fun u => by
+    obtain ⟨B, hB, hE⟩ := hED u
+    rw [hE]
+    exact (abs_add_le _ _).trans (add_le_add hB (hDb u))
+  have hiE : Integrable (fun u => E u ^ 2) (iidUniform ℕ) :=
+    integrable_of_abs_le (hEm.pow_const 2) (C := (2 * M + T * Ch) ^ 2) fun u => by
+      rw [abs_pow]
+      exact pow_le_pow_left₀ (abs_nonneg _) (hEb u) 2
+  have hiD2 : Integrable (fun u => D u ^ 2) (iidUniform ℕ) :=
+    integrable_of_abs_le (hDm.pow_const 2) (C := (T * Ch) ^ 2) fun u => by
+      rw [abs_pow]
+      exact pow_le_pow_left₀ (abs_nonneg _) (hDb u) 2
+  have hiDa : Integrable (fun u => |D u|) (iidUniform ℕ) :=
+    integrable_of_abs_le (continuous_abs.measurable.comp hDm) (C := T * Ch) fun u => by
+      rw [abs_abs]
+      exact hDb u
+  have hD2 : ∫ u, D u ^ 2 ∂iidUniform ℕ = V :=
+    integral_sq_sum_departureDiscrepancy_driven hP x₀ h T
+  have hJ : ∫ u, |D u| ∂iidUniform ℕ ≤ √V := by
+    rw [← hD2]
+    exact integral_abs_le_sqrt_integral_sq hDm hDb
+  have hV0 : 0 ≤ V := by
+    rw [← hD2]
+    exact integral_nonneg fun u => sq_nonneg _
+  have hsqV : √V ^ 2 = V := Real.sq_sqrt hV0
+  have hJ0 : 0 ≤ ∫ u, |D u| ∂iidUniform ℕ := integral_nonneg fun u => abs_nonneg _
+  constructor
+  · -- pointwise `E² ≥ D² − 4M|D|`
+    have hle : ∀ u, D u ^ 2 + -(4 * M) * |D u| ≤ E u ^ 2 := fun u => by
+      obtain ⟨B, hB, hE⟩ := hED u
+      rw [hE]
+      have h1 : -(2 * B * D u) ≤ 2 * (2 * M) * |D u| := by
+        have := neg_abs_le (2 * B * D u)
+        rw [abs_mul, abs_mul, abs_two] at this
+        nlinarith [abs_nonneg (D u), abs_nonneg B]
+      nlinarith [sq_nonneg B]
+    have hi4 : Integrable (fun u => D u ^ 2 + -(4 * M) * |D u|) (iidUniform ℕ) :=
+      hiD2.add (hiDa.const_mul _)
+    have := integral_mono hi4 hiE hle
+    rw [integral_add hiD2 (hiDa.const_mul _), integral_const_mul, hD2] at this
+    nlinarith [Real.sqrt_nonneg V]
+  · -- pointwise `E² ≤ 4M² + 4M|D| + D²`
+    have hle : ∀ u, E u ^ 2 ≤ (2 * M) ^ 2 + (4 * M * |D u| + D u ^ 2) := fun u => by
+      obtain ⟨B, hB, hE⟩ := hED u
+      rw [hE]
+      have h1 : 2 * B * D u ≤ 2 * (2 * M) * |D u| := by
+        have := le_abs_self (2 * B * D u)
+        rw [abs_mul, abs_mul, abs_two] at this
+        nlinarith [abs_nonneg (D u), abs_nonneg B]
+      have h2 : B ^ 2 ≤ (2 * M) ^ 2 := by
+        rw [← sq_abs]
+        exact pow_le_pow_left₀ (abs_nonneg _) hB 2
+      nlinarith
+    have hi5 : Integrable (fun u => 4 * M * |D u| + D u ^ 2) (iidUniform ℕ) :=
+      (hiDa.const_mul _).add hiD2
+    have hi6 : Integrable (fun u => (2 * M) ^ 2 + (4 * M * |D u| + D u ^ 2)) (iidUniform ℕ) :=
+      (integrable_const _).add hi5
+    have := integral_mono hiE hi6 hle
+    rw [integral_add (integrable_const _) hi5,
+      integral_add (hiDa.const_mul _) hiD2, integral_const_mul, hD2, integral_const,
+      probReal_univ, one_smul] at this
+    nlinarith [Real.sqrt_nonneg V]
+
+/-- **The RMSE of the MC occupation frequency is `O(1/√T)`** (post #3's rate, at the RMSE
+scale): with `h − Ph = 1_{s} − c`, `|h| ≤ M`,
+`E[(N_s(T) − T c)²] ≤ (2M + √(T Σ_i σ_i²(h)))²`. -/
+theorem integral_sq_occCount_sub_driven_le {P : Fin n → Fin n → ℝ} (hP : IsStochastic P)
+    (x₀ : Fin n) {h : Fin n → ℝ} {s : Fin n} {c M : ℝ}
+    (hh : ∀ i, h i - (P *ᵥ h) i = (if i = s then 1 else 0) - c) (hM : ∀ i, |h i| ≤ M)
+    (T : ℕ) :
+    ∫ u, ((occCount (drivenPath P x₀ u) s T : ℝ) - T * c) ^ 2 ∂iidUniform ℕ ≤
+      (2 * M + √(T * ∑ i, rowVariance P h i)) ^ 2 := by
+  have hM0 : 0 ≤ M := (abs_nonneg _).trans (hM s)
+  refine (integral_sq_occCount_sub_driven_mem hP x₀ hh hM T).2.trans ?_
+  have hrv : ∀ i, 0 ≤ rowVariance P h i := fun i =>
+    sum_nonneg fun k _ => mul_nonneg (hP.nonneg i k) (sq_nonneg _)
+  have hV : ∑ i, rowVariance P h i * ∫ u, (occCount (drivenPath P x₀ u) i T : ℝ)
+      ∂iidUniform ℕ ≤ T * ∑ i, rowVariance P h i := by
+    rw [mul_sum]
+    refine sum_le_sum fun i _ => ?_
+    rw [mul_comm (T : ℝ)]
+    exact mul_le_mul_of_nonneg_left (integral_occCount_driven_mem_Icc P x₀ i T).2 (hrv i)
+  have := Real.sqrt_le_sqrt hV
+  exact pow_le_pow_left₀ (by positivity) (by linarith) 2
+
+/-- **The mean occupation frequency converges**: with `h − Ph = 1_{s} − c`, `|h| ≤ M`,
+`|E N_s(T) − T c| ≤ 2M + √(T Σ_i σ_i²(h))` (from the RMSE bound), hence `E N_s(T)/T → c`. -/
+theorem abs_integral_occCount_sub_driven_le {P : Fin n → Fin n → ℝ} (hP : IsStochastic P)
+    (x₀ : Fin n) {h : Fin n → ℝ} {s : Fin n} {c M : ℝ}
+    (hh : ∀ i, h i - (P *ᵥ h) i = (if i = s then 1 else 0) - c) (hM : ∀ i, |h i| ≤ M)
+    (T : ℕ) :
+    |∫ u, (occCount (drivenPath P x₀ u) s T : ℝ) ∂iidUniform ℕ - T * c| ≤
+      2 * M + √(T * ∑ i, rowVariance P h i) := by
+  have := isProbabilityMeasure_iidUniform ℕ
+  have hM0 : 0 ≤ M := (abs_nonneg _).trans (hM s)
+  have hEm := measurable_occCount_sub_driven P x₀ s c T
+  have hEb : ∀ u, |(occCount (drivenPath P x₀ u) s T : ℝ) - T * c| ≤ T + T * |c| := fun u => by
+    refine (abs_sub _ _).trans (add_le_add ?_ ?_)
+    · rw [Nat.abs_cast]
+      exact_mod_cast occCount_le _ s T
+    · rw [abs_mul, Nat.abs_cast]
+  have hiN : Integrable (fun u => (occCount (drivenPath P x₀ u) s T : ℝ)) (iidUniform ℕ) :=
+    integrable_of_abs_le ((measurable_occCount_real s T).comp (measurable_drivenPath P x₀))
+      (C := T) fun u => by
+        rw [Nat.abs_cast]
+        exact_mod_cast occCount_le _ s T
+  have e : ∫ u, (occCount (drivenPath P x₀ u) s T : ℝ) ∂iidUniform ℕ - T * c =
+      ∫ u, ((occCount (drivenPath P x₀ u) s T : ℝ) - T * c) ∂iidUniform ℕ := by
+    rw [integral_sub hiN (integrable_const _), integral_const, probReal_univ, one_smul]
+  rw [e]
+  refine (abs_integral_le_integral_abs).trans ((integral_abs_le_sqrt_integral_sq hEm hEb).trans ?_)
+  calc √(∫ u, ((occCount (drivenPath P x₀ u) s T : ℝ) - T * c) ^ 2 ∂iidUniform ℕ)
+      ≤ √((2 * M + √(T * ∑ i, rowVariance P h i)) ^ 2) :=
+        Real.sqrt_le_sqrt (integral_sq_occCount_sub_driven_le hP x₀ hh hM T)
+    _ = 2 * M + √(T * ∑ i, rowVariance P h i) := Real.sqrt_sq (by positivity)
+
+/-- **The mean occupation frequency converges**: `E N_s(T)/T → c` for MC driving, whenever
+Poisson's equation `h − Ph = 1_{s} − c` has a bounded solution. -/
+theorem tendsto_integral_occCount_div_driven {P : Fin n → Fin n → ℝ} (hP : IsStochastic P)
+    (x₀ : Fin n) {h : Fin n → ℝ} {s : Fin n} {c M : ℝ}
+    (hh : ∀ i, h i - (P *ᵥ h) i = (if i = s then 1 else 0) - c) (hM : ∀ i, |h i| ≤ M) :
+    Tendsto (fun T : ℕ => (∫ u, (occCount (drivenPath P x₀ u) s T : ℝ) ∂iidUniform ℕ) / T)
+      atTop (𝓝 c) := by
+  set R := ∑ i, rowVariance P h i
+  have hR : 0 ≤ R := sum_nonneg fun i _ =>
+    sum_nonneg fun k _ => mul_nonneg (hP.nonneg i k) (sq_nonneg _)
+  rw [tendsto_iff_norm_sub_tendsto_zero]
+  have hg : Tendsto (fun T : ℕ => 2 * M * (T : ℝ)⁻¹ + √R * (√(T : ℝ))⁻¹) atTop (𝓝 0) := by
+    have h1 := (tendsto_inv_atTop_zero.comp (tendsto_natCast_atTop_atTop (R := ℝ))).const_mul
+      (2 * M)
+    have h2 := (tendsto_inv_atTop_zero.comp (Real.tendsto_sqrt_atTop.comp
+      (tendsto_natCast_atTop_atTop (R := ℝ)))).const_mul √R
+    have := h1.add h2
+    rw [mul_zero, mul_zero, add_zero] at this
+    exact this
+  refine squeeze_zero' (Eventually.of_forall fun T => norm_nonneg _) ?_ hg
+  filter_upwards [eventually_ge_atTop 1] with T hT
+  have hT0 : (0 : ℝ) < T := by exact_mod_cast hT
+  have key := abs_integral_occCount_sub_driven_le hP x₀ hh hM T
+  rw [Real.norm_eq_abs]
+  have e : (∫ u, (occCount (drivenPath P x₀ u) s T : ℝ) ∂iidUniform ℕ) / T - c =
+      (∫ u, (occCount (drivenPath P x₀ u) s T : ℝ) ∂iidUniform ℕ - T * c) / T := by
+    field_simp
+  rw [e, abs_div, abs_of_pos hT0, div_le_iff₀ hT0]
+  have hsq : √(T * R) = √(T : ℝ) * √R := Real.sqrt_mul hT0.le R
+  have hsT : √(T : ℝ) * √(T : ℝ) = T := Real.mul_self_sqrt hT0.le
+  have hsT0 : 0 < √(T : ℝ) := Real.sqrt_pos.2 hT0
+  have e2 : (2 * M * (T : ℝ)⁻¹ + √R * (√(T : ℝ))⁻¹) * T = 2 * M + √(T * R) := by
+    have h1 : (√(T : ℝ))⁻¹ * T = √(T : ℝ) := by
+      rw [inv_mul_eq_div, div_eq_iff hsT0.ne']
+      exact hsT.symm
+    rw [hsq, add_mul, mul_assoc (2 * M), inv_mul_cancel₀ hT0.ne', mul_assoc √R, h1]
+    ring
+  rw [e2]
+  exact key
+
+/-- **The RMSE of the MC occupation frequency is of exact order `1/√T`** (lower bound). Let
+`h − Ph = 1_{s} − c`, `|h| ≤ M`, suppose the mean frequencies converge, `E N_i(T)/T → w_i`,
+and the **nondegeneracy** `Σ_i w_i σ_i²(h) > 0` (the asymptotic variance of `N_s`). Then
+there is `κ > 0` with `E[(N_s(T) − T c)²] ≥ κ T` for all large `T`. -/
+theorem eventually_integral_sq_occCount_sub_driven_ge {P : Fin n → Fin n → ℝ}
+    (hP : IsStochastic P) (x₀ : Fin n) {h : Fin n → ℝ} {s : Fin n} {c M : ℝ}
+    (hh : ∀ i, h i - (P *ᵥ h) i = (if i = s then 1 else 0) - c) (hM : ∀ i, |h i| ≤ M)
+    {w : Fin n → ℝ}
+    (hfreq : ∀ i, Tendsto (fun T : ℕ =>
+      (∫ u, (occCount (drivenPath P x₀ u) i T : ℝ) ∂iidUniform ℕ) / T) atTop (𝓝 (w i)))
+    (hpos : 0 < ∑ i, w i * rowVariance P h i) :
+    ∃ κ : ℝ, 0 < κ ∧ ∀ᶠ T : ℕ in atTop,
+      κ * T ≤ ∫ u, ((occCount (drivenPath P x₀ u) s T : ℝ) - T * c) ^ 2 ∂iidUniform ℕ := by
+  set σ2 := ∑ i, w i * rowVariance P h i
+  have hM0 : 0 ≤ M := (abs_nonneg _).trans (hM s)
+  set V : ℕ → ℝ := fun T => ∑ i, rowVariance P h i *
+    ∫ u, (occCount (drivenPath P x₀ u) i T : ℝ) ∂iidUniform ℕ
+  have hVt : Tendsto (fun T : ℕ => V T / T) atTop (𝓝 σ2) := by
+    have e : ∀ T : ℕ, V T / T = ∑ i, rowVariance P h i *
+        ((∫ u, (occCount (drivenPath P x₀ u) i T : ℝ) ∂iidUniform ℕ) / T) := fun T => by
+      simp only [V, sum_div, mul_div_assoc]
+    simp only [e]
+    have := tendsto_finsetSum (univ : Finset (Fin n)) fun i _ => (hfreq i).const_mul
+      (rowVariance P h i)
+    simp only [σ2, mul_comm (w _)]
+    exact this
+  refine ⟨σ2 / 4, by positivity, ?_⟩
+  filter_upwards [hVt.eventually (lt_mem_nhds (show σ2 / 2 < σ2 by linarith)),
+    eventually_ge_atTop (⌈128 * M ^ 2 / σ2⌉₊ + 1)] with T hV hT
+  have hT1 : (⌈128 * M ^ 2 / σ2⌉₊ : ℝ) + 1 ≤ T := by exact_mod_cast hT
+  have hT0 : (0 : ℝ) < T := by linarith [Nat.cast_nonneg (α := ℝ) ⌈128 * M ^ 2 / σ2⌉₊]
+  have hTM : 128 * M ^ 2 / σ2 ≤ T := by linarith [Nat.le_ceil (128 * M ^ 2 / σ2)]
+  have hVT : σ2 / 2 * T < V T := by rwa [lt_div_iff₀ hT0] at hV
+  have hV64 : 64 * M ^ 2 ≤ V T := by
+    have : 128 * M ^ 2 ≤ σ2 * T := by
+      rw [div_le_iff₀ hpos] at hTM
+      linarith
+    nlinarith
+  have hV0 : 0 ≤ V T := le_trans (by positivity) hV64
+  have hs8 : 8 * M ≤ √(V T) := by
+    rw [show 8 * M = √((8 * M) ^ 2) from (Real.sqrt_sq (by positivity)).symm]
+    exact Real.sqrt_le_sqrt (by nlinarith)
+  have hsq : √(V T) * √(V T) = V T := Real.mul_self_sqrt hV0
+  have hlow := (integral_sq_occCount_sub_driven_mem hP x₀ hh hM T).1
+  change √(V T) * (√(V T) - 4 * M) ≤ _ at hlow
+  nlinarith
+
+/-- **The RMSE of the MC occupation frequency** in frequency units: for `T > 0`,
+`E[(N_s(T)/T − c)²] ≤ (2M + √(T Σ_i σ_i²(h)))² / T²`, i.e. `RMSE = O(1/√T)`. -/
+theorem integral_sq_occFreq_sub_driven_le {P : Fin n → Fin n → ℝ} (hP : IsStochastic P)
+    (x₀ : Fin n) {h : Fin n → ℝ} {s : Fin n} {c M : ℝ}
+    (hh : ∀ i, h i - (P *ᵥ h) i = (if i = s then 1 else 0) - c) (hM : ∀ i, |h i| ≤ M)
+    {T : ℕ} (hT : 0 < T) :
+    ∫ u, ((occCount (drivenPath P x₀ u) s T : ℝ) / T - c) ^ 2 ∂iidUniform ℕ ≤
+      (2 * M + √(T * ∑ i, rowVariance P h i)) ^ 2 / T ^ 2 := by
+  have hT0 : (0 : ℝ) < T := by exact_mod_cast hT
+  have e : ∀ u, ((occCount (drivenPath P x₀ u) s T : ℝ) / T - c) ^ 2 =
+      ((occCount (drivenPath P x₀ u) s T : ℝ) - T * c) ^ 2 / T ^ 2 := fun u => by
+    field_simp
+  rw [integral_congr_ae (Eventually.of_forall e), integral_div]
+  exact div_le_div_of_nonneg_right (integral_sq_occCount_sub_driven_le hP x₀ hh hM T)
+    (by positivity)
+
+/-- **The RMSE of the MC transition counts** in frequency units:
+`E[((N_ij(T) − p_ij N_i(T))/T)²] ≤ p_ij (1 − p_ij)/T`. -/
+theorem integral_sq_transFreq_sub_driven_le {P : Fin n → Fin n → ℝ} (hP : IsStochastic P)
+    (x₀ i j : Fin n) {T : ℕ} (hT : 0 < T) :
+    ∫ u, (((transCount (drivenPath P x₀ u) i j T : ℝ) -
+        P i j * occCount (drivenPath P x₀ u) i T) / T) ^ 2 ∂iidUniform ℕ ≤
+      P i j * (1 - P i j) / T := by
+  have hT0 : (0 : ℝ) < T := by exact_mod_cast hT
+  simp only [div_pow]
+  rw [integral_div, div_le_div_iff₀ (by positivity) hT0]
+  have := integral_sq_transCount_sub_driven_le hP x₀ i j T
+  have e : P i j * (1 - P i j) * (T : ℝ) ^ 2 = P i j * (1 - P i j) * T * T := by ring
+  rw [e]
+  exact mul_le_mul_of_nonneg_right this hT0.le
+
+/-- `μ ⬝ᵥ 1_{k} = μ k`. -/
+theorem dotProduct_indicator (μ : Fin n → ℝ) (k : Fin n) :
+    μ ⬝ᵥ (fun i => if i = k then (1 : ℝ) else 0) = μ k := by
+  simp only [dotProduct, mul_ite, mul_one, mul_zero]
+  rw [Finset.sum_ite_eq']
+  simp only [mem_univ, ite_true]
+
+/-- **Exact order `1/√T` for irreducible chains.** For an irreducible stochastic `P` with
+stationary distribution `π`, the mean frequencies converge, `E N_i(T)/T → π_i`
+(`tendsto_integral_occCount_div_driven` with the Poisson solutions of `exists_poisson`), so
+under the nondegeneracy `Σ_i π_i σ_i²(h) > 0` there is `κ > 0` with
+`E[(N_s(T) − T c)²] ≥ κ T` for all large `T`. -/
+theorem eventually_integral_sq_occCount_sub_driven_ge_of_irreducible
+    {P : Matrix (Fin n) (Fin n) ℝ} (hP : IsStochastic P) (hirr : ∀ i j, ∃ k, 0 < (P ^ k) i j)
+    {μ : Fin n → ℝ} (hμ : IsStationaryDistribution P μ) (x₀ : Fin n) {h : Fin n → ℝ}
+    {s : Fin n} {c M : ℝ} (hh : ∀ i, h i - (P *ᵥ h) i = (if i = s then 1 else 0) - c)
+    (hM : ∀ i, |h i| ≤ M) (hpos : 0 < ∑ i, μ i * rowVariance P h i) :
+    ∃ κ : ℝ, 0 < κ ∧ ∀ᶠ T : ℕ in atTop,
+      κ * T ≤ ∫ u, ((occCount (drivenPath P x₀ u) s T : ℝ) - T * c) ^ 2 ∂iidUniform ℕ := by
+  have : Nonempty (Fin n) := ⟨x₀⟩
+  refine eventually_integral_sq_occCount_sub_driven_ge hP x₀ hh hM (fun i => ?_) hpos
+  obtain ⟨hi, hhi⟩ := exists_poisson hP.nonneg hP.sum_eq_one hirr hμ
+    (fun k => if k = i then (1 : ℝ) else 0)
+  rw [dotProduct_indicator] at hhi
+  exact tendsto_integral_occCount_div_driven hP x₀ hhi (M := ∑ k, |hi k|) fun k =>
+    single_le_sum (f := fun k => |hi k|) (fun _ _ => abs_nonneg _) (mem_univ k)
+
+/-! ### A non-degenerate instance: the two-state chain with stay probability `7/8` -/
+
+/-- The `7/8`-chain is stochastic. -/
+theorem isStochastic_twoStateStay78 : IsStochastic twoStateStay78 := by
+  refine ⟨fun i j => ?_, fun i => ?_⟩
+  · simp only [twoStateStay78]
+    split_ifs <;> norm_num
+  · rw [Fin.sum_univ_two]
+    fin_cases i <;> simp only [twoStateStay78] <;> norm_num
+
+/-- The `7/8`-chain is irreducible (all entries are positive). -/
+theorem irreducible_twoStateStay78 : ∀ i j, ∃ k, 0 < (twoStateStay78 ^ k) i j := fun i j =>
+  ⟨1, by
+    rw [pow_one]
+    simp only [twoStateStay78]
+    split_ifs <;> norm_num⟩
+
+/-- Poisson's equation for the `7/8`-chain and `s = 0`: `h = (2, −2)` solves
+`h − Ph = 1_{0} − 1/2`. -/
+theorem poisson_twoStateStay78 (i : Fin 2) :
+    (fun k : Fin 2 => if k = 0 then (2 : ℝ) else -2) i -
+        (twoStateStay78 *ᵥ fun k : Fin 2 => if k = 0 then (2 : ℝ) else -2) i =
+      (if i = 0 then 1 else 0) - 1 / 2 := by
+  simp only [mulVec, dotProduct, Fin.sum_univ_two]
+  fin_cases i <;> simp only [twoStateStay78] <;> norm_num
+
+/-- For the `7/8`-chain and `h = (2, −2)`, both row variances are `σ_i²(h) = 7/4`. -/
+theorem rowVariance_twoStateStay78 (i : Fin 2) :
+    rowVariance twoStateStay78 (fun k : Fin 2 => if k = 0 then (2 : ℝ) else -2) i = 7 / 4 := by
+  simp only [rowVariance, mulVec, dotProduct, Fin.sum_univ_two]
+  fin_cases i <;> simp only [twoStateStay78] <;> norm_num
+
+/-- **The lower bound is not vacuous** (two-state chain, stay probability `7/8`, any start).
+The MC occupation error of state `0` satisfies, for every `T`,
+`E[(N_0(T) − T/2)²] ≤ (4 + √(7T/2))²`, and `E[(N_0(T) − T/2)²] ≥ κ T` for all large `T`, for
+some `κ > 0`: the RMSE of the frequency `N_0(T)/T` is of exact order `1/√T`. -/
+theorem occCount_mse_twoStateStay78 (x₀ : Fin 2) :
+    (∀ T : ℕ, ∫ u, ((occCount (drivenPath twoStateStay78 x₀ u) 0 T : ℝ) - T * (1 / 2)) ^ 2
+        ∂iidUniform ℕ ≤ (4 + √(7 * T / 2)) ^ 2) ∧
+      ∃ κ : ℝ, 0 < κ ∧ ∀ᶠ T : ℕ in atTop,
+        κ * T ≤ ∫ u, ((occCount (drivenPath twoStateStay78 x₀ u) 0 T : ℝ) - T * (1 / 2)) ^ 2
+          ∂iidUniform ℕ := by
+  have hM : ∀ i : Fin 2, |(fun k : Fin 2 => if k = 0 then (2 : ℝ) else -2) i| ≤ 2 := fun i => by
+    fin_cases i <;> norm_num
+  have hrv : ∑ i, rowVariance twoStateStay78 (fun k : Fin 2 => if k = 0 then (2 : ℝ) else -2) i
+      = 7 / 2 := by
+    rw [Fin.sum_univ_two, rowVariance_twoStateStay78, rowVariance_twoStateStay78]
+    norm_num
+  refine ⟨fun T => ?_, eventually_integral_sq_occCount_sub_driven_ge_of_irreducible
+    isStochastic_twoStateStay78 irreducible_twoStateStay78
+    isStationaryDistribution_twoStateStay78 x₀ poisson_twoStateStay78 hM ?_⟩
+  · have := integral_sq_occCount_sub_driven_le isStochastic_twoStateStay78 x₀
+      poisson_twoStateStay78 hM T
+    rw [hrv] at this
+    convert this using 3
+    · norm_num
+    · ring_nf
+  · rw [Fin.sum_univ_two, rowVariance_twoStateStay78, rowVariance_twoStateStay78]
+    norm_num
+
+end RQMCMarkov.MarkovDriving
+
+/-
+Copyright (c) 2026 Robert Kirkby. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Robert Kirkby
+-/
+
+/-! # The √T central limit theorem for plain MC (post #3)
+
+Post #3: "With MC of a Markov Chain the empirical transition matrix converges at `O(1/√T)`
+(Meyn & Tweedie, Chpt 17)." Almost surely the error is of the larger order
+`√(log log T / T)` (`MCRate`, `MCRateDriven`); `MCRateRMSE` proves `O(1/√T)` for the
+root-mean-square error. This module proves the distributional form of the same scale, the
+**central limit theorem**: for the post's MC (one i.i.d. sequence `u ∼ iidUniform ℕ` driving
+`drivenPath P x₀ u`), from any start,
+
+`(N_ij(T) − p_ij N_i(T))/√T ⇒ N(0, π_i p_ij (1 − p_ij))`,
+
+whenever `N_i(T)/T → π_i > 0` (here: Poisson's equation `h − Ph = 1_{i} − π_i` has a bounded
+solution, the hypothesis of `ae_tendsto_occCount_mc`; e.g. `P` irreducible).
+
+**Route** (Meyn and Tweedie, §17.2, through the stack representation):
+1. `departureIncrement_iid`: in the i.i.d.-stack model the departures from `i` are i.i.d.
+   `ξ_k = g(step P i (V i k)) − (Pg)(i)`, centred, bounded, with variance `σ_i²(g)`
+   (`rowVariance`), and `D_i(g, T) = Σ_{k < N_i(T)} ξ_k` (`departureDiscrepancy_mc_eq`).
+2. `tendstoInDistribution_sum_floor_mul`: Mathlib's i.i.d. CLT
+   (`tendstoInDistribution_inv_sqrt_mul_sum_sub`) along the deterministic index `⌊cT⌋`
+   (`tendstoInDistribution_comp_of_tendsto`), rescaled by `√⌊cT⌋/√T → √c` with Slutsky
+   (`TendstoInDistribution.continuous_comp_prodMk_of_tendstoInMeasure_const`):
+   `(1/√T) Σ_{k<⌊cT⌋} ξ_k ⇒ N(0, c v)`.
+3. The random index: `N_i(T)/T → c` a.s. (`ae_abs_occCount_mc_le_mul`,
+   `tendsto_div_of_forall_abs_sub_le`), so `(S_{N_i(T)} − S_{⌊cT⌋})/√T → 0` in probability
+   (`lil_tendstoInMeasure_anscombe`, Kolmogorov's inequality), and the limit is unchanged
+   (`tendstoInDistribution_of_tendstoInMeasure_sub`):
+   `tendstoInDistribution_departureDiscrepancy_stack`.
+4. Transfer to the driven path: the statistic is a measurable path functional
+   (`measurable_departureDiscrepancy_div`) and the path laws agree
+   (`map_drivenPath_eq_map_stackPath_path`): `tendstoInDistribution_departureDiscrepancy_driven`.
+
+## Main results
+
+* `tendstoInDistribution_departureDiscrepancy_driven`: `D_i(g, T)/√T ⇒ N(0, π_i σ_i²(g))`.
+* `tendstoInDistribution_transCount_driven`: `(N_ij(T) − p_ij N_i(T))/√T ⇒
+  N(0, π_i p_ij (1 − p_ij))`; `tendstoInDistribution_transCount_driven_of_irreducible`: the same
+  for irreducible `P` with stationary `π`.
+* `tendstoInDistribution_transCount_twoStateStay78`: for the `7/8`-chain,
+  `(N_00(T) − (7/8) N_0(T))/√T ⇒ N(0, 7/128)`.
+
+**Correction** (post #3, "converges at `O(1/√T)`"). The `1/√T` rate is the CLT (and RMSE)
+scale: `√T (N_ij(T)/T − p_ij N_i(T)/T)` has a non-degenerate Gaussian limit when
+`0 < p_ij < 1`, so the fluctuations of the empirical transition counts are of exact order
+`1/√T` *in distribution*; almost surely they are not `O(1/√T)` (LIL,
+`ae_not_tendsto_transCount_driven`).
+-/
+
+namespace RQMCMarkov.MarkovDriving
+
+open MeasureTheory ProbabilityTheory Filter Finset Matrix Topology
+
+variable {n : ℕ}
+
+/-- The `k`-th **MC departure increment** of state `i` in the stack model:
+`ξ_k = g(step P i (V i k)) − (Pg)(i)`. -/
+noncomputable def departureIncrement (P : Fin n → Fin n → ℝ) (g : Fin n → ℝ) {Ω : Type*}
+    (V : Ω → Fin n → ℕ → ℝ) (i : Fin n) (k : ℕ) (ω : Ω) : ℝ :=
+  g (step P i (V ω i k)) - (P *ᵥ g) i
+
+/-- **The departure increments of one stack are i.i.d.**, centred, square integrable, with
+variance `σ_i²(g)`. -/
+theorem departureIncrement_iid {Ω : Type*} [MeasurableSpace Ω] {Q : Measure Ω}
+    [IsProbabilityMeasure Q] {V : Ω → Fin n → ℕ → ℝ} (hV : IsIIDStacks Q V)
+    {P : Fin n → Fin n → ℝ} (hP : IsStochastic P) (g : Fin n → ℝ) (i : Fin n) :
+    iIndepFun (departureIncrement P g V i) Q ∧
+      (∀ k, Measurable (departureIncrement P g V i k)) ∧
+      (∀ k, IdentDistrib (departureIncrement P g V i k) (departureIncrement P g V i 0) Q Q) ∧
+      MemLp (departureIncrement P g V i 0) 2 Q ∧
+      ∫ ω, departureIncrement P g V i 0 ω ∂Q = 0 ∧
+      Var[departureIncrement P g V i 0; Q] = rowVariance P g i := by
+  set c := (P *ᵥ g) i with hc
+  set ψ : ℝ → ℝ := fun u => g (step P i u) - c with hψdef
+  have hψ : Measurable ψ := (measurable_of_finite fun j => g j - c).comp (measurable_step P i)
+  have hind : iIndepFun (departureIncrement P g V i) Q :=
+    (hV.indep i).comp (fun _ => ψ) fun _ => hψ
+  have hm : ∀ k, Measurable (departureIncrement P g V i k) := fun k =>
+    hψ.comp (hV.measurable i k)
+  have hident : ∀ k, IdentDistrib (departureIncrement P g V i k)
+      (departureIncrement P g V i 0) Q Q := fun k =>
+    (IdentDistrib.mk (hV.measurable i k).aemeasurable (hV.measurable i 0).aemeasurable
+      (by rw [hV.law i k, hV.law i 0])).comp hψ
+  have hL2 : MemLp (departureIncrement P g V i 0) 2 Q := by
+    refine MemLp.of_bound (hm 0).aestronglyMeasurable (∑ j, |g j - c|)
+      (ae_of_all _ fun ω => ?_)
+    rw [Real.norm_eq_abs]
+    exact single_le_sum (f := fun j => |g j - c|) (fun j _ => abs_nonneg _) (mem_univ _)
+  have h0 : ∫ ω, departureIncrement P g V i 0 ω ∂Q = 0 := by
+    rw [show (fun ω => departureIncrement P g V i 0 ω) = fun ω =>
+      (fun j => g j - c) (step P i (V ω i 0)) from rfl,
+      integral_comp_step hV hP i 0 (fun j => g j - c)]
+    exact sum_mul_sub_mulVec_eq_zero hP g i
+  have hvar : ∫ ω, departureIncrement P g V i 0 ω ^ 2 ∂Q = rowVariance P g i :=
+    integral_comp_step hV hP i 0 (fun j => (g j - c) ^ 2)
+  refine ⟨hind, hm, hident, hL2, h0, ?_⟩
+  rw [variance_of_integral_eq_zero (hm 0).aemeasurable h0]
+  exact hvar
+
+/-- **Convergence in distribution along a subsequence**: if `X_m ⇒ Z` and `f T → ∞`, then
+`X_{f T} ⇒ Z`. -/
+theorem tendstoInDistribution_comp_of_tendsto {Ω Ω' : Type*} [MeasurableSpace Ω]
+    [MeasurableSpace Ω'] {Q : Measure Ω} [IsProbabilityMeasure Q] {Q' : Measure Ω'}
+    [IsProbabilityMeasure Q'] {X : ℕ → Ω → ℝ} {Z : Ω' → ℝ}
+    (h : TendstoInDistribution X atTop Z (fun _ => Q) Q') {f : ℕ → ℕ}
+    (hf : Tendsto f atTop atTop) :
+    TendstoInDistribution (fun T => X (f T)) atTop Z (fun _ => Q) Q' :=
+  ⟨fun T => h.forall_aemeasurable (f T), h.aemeasurable_limit, h.tendsto.comp hf⟩
+
+/-- **The deterministic-index CLT, rescaled**: for i.i.d. centred `ξ_k ∈ L²` with variance
+`v` and `c > 0`, `(1/√T) Σ_{k < ⌊cT⌋} ξ_k ⇒ N(0, c v)`. -/
+theorem tendstoInDistribution_sum_floor_mul {Ω Ω' : Type*} [MeasurableSpace Ω]
+    [MeasurableSpace Ω'] {Q : Measure Ω} [IsProbabilityMeasure Q] {Q' : Measure Ω'}
+    [IsProbabilityMeasure Q'] {X : ℕ → Ω → ℝ} (hind : iIndepFun X Q)
+    (hident : ∀ k, IdentDistrib (X k) (X 0) Q Q) (hL2 : MemLp (X 0) 2 Q)
+    (h0 : ∫ ω, X 0 ω ∂Q = 0) {c : ℝ} (hc : 0 < c) {Z : Ω' → ℝ}
+    (hZ : HasLaw Z (gaussianReal 0 (c * Var[X 0; Q]).toNNReal) Q') :
+    TendstoInDistribution (fun (T : ℕ) ω => (√(T : ℝ))⁻¹ * ∑ k ∈ range ⌊c * T⌋₊, X k ω) atTop
+      Z (fun _ => Q) Q' := by
+  have hsc : 0 < √c := Real.sqrt_pos.2 hc
+  have hvar0 : 0 ≤ Var[X 0; Q] := variance_nonneg _ _
+  -- the standardised limit `Z / √c ∼ N(0, v)`
+  have hZ1 : HasLaw (fun ω => Z ω / √c) (gaussianReal 0 Var[X 0; Q].toNNReal) Q' := by
+    have := gaussianReal_div_const hZ (√c)
+    rw [zero_div] at this
+    convert this using 2
+    ext
+    rw [NNReal.coe_div, Real.coe_toNNReal _ hvar0, Real.coe_toNNReal _ (by positivity),
+      NNReal.coe_mk, Real.sq_sqrt hc.le]
+    field_simp
+  have hclt := tendstoInDistribution_inv_sqrt_mul_sum_sub hZ1 hL2 hind hident
+  rw [h0] at hclt
+  simp only [mul_zero, sub_zero] at hclt
+  set m : ℕ → ℕ := fun T => ⌊c * T⌋₊ with hm
+  have hmt : Tendsto m atTop atTop :=
+    tendsto_nat_floor_atTop.comp ((tendsto_natCast_atTop_atTop (R := ℝ)).const_mul_atTop hc)
+  have hX := tendstoInDistribution_comp_of_tendsto hclt hmt
+  -- the deterministic scale `√(m T) / √T → √c`
+  have hmdiv : Tendsto (fun T : ℕ => (m T : ℝ) / T) atTop (𝓝 c) :=
+    (tendsto_nat_floor_mul_div_atTop hc.le).comp (tendsto_natCast_atTop_atTop (R := ℝ))
+  have ha : Tendsto (fun T : ℕ => √(m T : ℝ) / √(T : ℝ)) atTop (𝓝 √c) := by
+    have := (Real.continuous_sqrt.tendsto c).comp hmdiv
+    refine this.congr fun T => ?_
+    simp only [Function.comp_apply]
+    exact Real.sqrt_div (Nat.cast_nonneg _) _
+  have haM : TendstoInMeasure Q (fun (T : ℕ) (_ : Ω) => √(m T : ℝ) / √(T : ℝ)) atTop
+      (fun _ => √c) :=
+    tendstoInMeasure_of_tendsto_ae (fun T => aestronglyMeasurable_const)
+      (Eventually.of_forall fun _ => ha)
+  have hS := hX.continuous_comp_prodMk_of_tendstoInMeasure_const
+    (g := fun p : ℝ × ℝ => p.2 * p.1) (by fun_prop) haM (fun T => aemeasurable_const)
+  convert hS using 1
+  · funext T ω
+    change (√(T : ℝ))⁻¹ * ∑ k ∈ range (m T), X k ω =
+      √(m T : ℝ) / √(T : ℝ) * ((√(m T : ℝ))⁻¹ * ∑ k ∈ range (m T), X k ω)
+    by_cases hT : m T = 0
+    · rw [hT, range_zero, sum_empty, mul_zero, mul_zero, mul_zero]
+    · have hs : 0 < √(m T : ℝ) := Real.sqrt_pos.2 (by exact_mod_cast Nat.pos_of_ne_zero hT)
+      field_simp
+  · funext ω
+    field_simp
+
+/-- **Linear growth from a uniform `o(T)` bound**: if for every `ε > 0` there is `K` with
+`|a T − T c| ≤ K + ε T` for all `T`, then `a T / T → c`. -/
+theorem tendsto_div_of_forall_abs_sub_le {a : ℕ → ℝ} {c : ℝ}
+    (h : ∀ ε > 0, ∃ K, ∀ T : ℕ, |a T - T * c| ≤ K + ε * T) :
+    Tendsto (fun T : ℕ => a T / T) atTop (𝓝 c) := by
+  rw [Metric.tendsto_atTop]
+  intro ε hε
+  obtain ⟨K, hK⟩ := h (ε / 2) (by positivity)
+  obtain ⟨T0, hT0⟩ := exists_nat_gt (2 * |K| / ε)
+  refine ⟨T0 + 1, fun T hT => ?_⟩
+  have hTpos : (0 : ℝ) < T := by exact_mod_cast (by omega : 0 < T)
+  have hTge : (T0 : ℝ) + 1 ≤ T := by exact_mod_cast hT
+  rw [Real.dist_eq]
+  have e : a T / T - c = (a T - T * c) / T := by field_simp
+  rw [e, abs_div, abs_of_pos hTpos, div_lt_iff₀ hTpos]
+  have h1 := hK T
+  have h2 : 2 * |K| < ε * T := by
+    rw [div_lt_iff₀ hε] at hT0
+    nlinarith
+  linarith [le_abs_self K]
+
+/-- `x ↦ N_i(x, T)` is measurable on the path space (as a natural number). -/
+theorem measurable_occCount_nat (i : Fin n) (T : ℕ) :
+    Measurable fun x : ℕ → Fin n => occCount x i T :=
+  measurable_to_countable' fun k => by
+    have := measurable_occCount_real i T (measurableSet_singleton (k : ℝ))
+    convert this using 1
+    ext x
+    simp only [Set.mem_preimage, Set.mem_singleton_iff, Nat.cast_inj]
+
+/-- `x ↦ (1/√T) D_i(g, T)` is measurable on the path space. -/
+theorem measurable_departureDiscrepancy_div (P : Fin n → Fin n → ℝ) (g : Fin n → ℝ) (i : Fin n)
+    (T : ℕ) : Measurable fun x : ℕ → Fin n => (√(T : ℝ))⁻¹ * departureDiscrepancy P g x i T := by
+  have e : (fun x : ℕ → Fin n => (√(T : ℝ))⁻¹ * departureDiscrepancy P g x i T) = fun x =>
+      (√(T : ℝ))⁻¹ * incrementSum (fun a b => if a = i then g b - (P *ᵥ g) i else 0) x T :=
+    funext fun x => by rw [departureDiscrepancy_eq_incrementSum]
+  rw [e]
+  exact (measurable_incrementSum _ T).const_mul _
+
+/-- **The √T CLT for the MC departure discrepancies, i.i.d. stacks.** If Poisson's equation
+`h − Ph = 1_{i} − c` has a bounded solution and `c > 0` (so `N_i(T)/T → c` a.s.), then for
+the i.i.d.-stack path `(1/√T) D_i(g, T) ⇒ N(0, c σ_i²(g))`. -/
+theorem tendstoInDistribution_departureDiscrepancy_stack {P : Fin n → Fin n → ℝ}
+    (hP : IsStochastic P) (x₀ : Fin n) {h : Fin n → ℝ} {i : Fin n} {c M : ℝ}
+    (hh : ∀ k, h k - (P *ᵥ h) k = (if k = i then 1 else 0) - c) (hM : ∀ k, |h k| ≤ M)
+    (hc : 0 < c) (g : Fin n → ℝ) {Ω' : Type*} [MeasurableSpace Ω'] {Q' : Measure Ω'}
+    [IsProbabilityMeasure Q'] {Z : Ω' → ℝ}
+    (hZ : HasLaw Z (gaussianReal 0 (c * rowVariance P g i).toNNReal) Q') :
+    haveI := isProbabilityMeasure_iidUniform (Fin n × ℕ)
+    TendstoInDistribution (fun (T : ℕ) (w : Fin n × ℕ → ℝ) => (√(T : ℝ))⁻¹ *
+      departureDiscrepancy P g (stackPath P x₀ (Function.curry w)) i T) atTop Z
+      (fun _ => iidUniform (Fin n × ℕ)) Q' := by
+  have := isProbabilityMeasure_iidUniform (Fin n × ℕ)
+  have hV := isIIDStacks_iidUniform (n := n)
+  obtain ⟨hind, hm, hident, hL2, h0, hvar⟩ := departureIncrement_iid hV hP g i
+  set Y := departureIncrement P g (fun w : Fin n × ℕ → ℝ => Function.curry w) i
+  rw [← hvar] at hZ
+  have hdet := tendstoInDistribution_sum_floor_mul hind hident hL2 h0 hc hZ
+  set K : ℕ → (Fin n × ℕ → ℝ) → ℕ := fun T w => occCount (stackPath P x₀ (Function.curry w)) i T
+  have hKm : ∀ T, Measurable (K T) := fun T =>
+    (measurable_occCount_nat i T).comp (measurable_stackPath P x₀)
+  have hK : ∀ᵐ w ∂iidUniform (Fin n × ℕ), Tendsto (fun T => (K T w : ℝ) / T) atTop (𝓝 c) := by
+    filter_upwards [ae_abs_occCount_mc_le_mul hV hP x₀ hh hM] with w hw
+    exact tendsto_div_of_forall_abs_sub_le hw
+  have hans := lil_tendstoInMeasure_anscombe hind hm hident hL2 h0 hKm hc hK
+  have e : (fun (T : ℕ) (w : Fin n × ℕ → ℝ) => (√(T : ℝ))⁻¹ *
+      departureDiscrepancy P g (stackPath P x₀ (Function.curry w)) i T) =
+      fun (T : ℕ) (w : Fin n × ℕ → ℝ) => (√(T : ℝ))⁻¹ * ∑ k ∈ range (K T w), Y k w :=
+    funext fun T => funext fun w => by
+      rw [departureDiscrepancy_mc_eq P x₀ (fun w : Fin n × ℕ → ℝ => Function.curry w) g i w T]
+      rfl
+  have hmeas : ∀ T : ℕ, AEMeasurable (fun w => (√(T : ℝ))⁻¹ * ∑ k ∈ range (K T w), Y k w)
+      (iidUniform (Fin n × ℕ)) := fun T => by
+    have := ((measurable_departureDiscrepancy_div P g i T).comp
+      (measurable_stackPath P x₀)).aemeasurable (μ := iidUniform (Fin n × ℕ))
+    rw [show ((fun x : ℕ → Fin n => (√(T : ℝ))⁻¹ * departureDiscrepancy P g x i T) ∘
+      fun w : Fin n × ℕ → ℝ => stackPath P x₀ (Function.curry w)) =
+      fun w => (√(T : ℝ))⁻¹ * ∑ k ∈ range (K T w), Y k w from congrFun e T] at this
+    exact this
+  rw [e]
+  refine tendstoInDistribution_of_tendstoInMeasure_sub _ Z hdet ?_ hmeas
+  convert hans using 1
+  funext T w
+  simp only [Pi.sub_apply]
+  ring
+
+/-- **The √T CLT for the MC departure discrepancies, MC driving** (one i.i.d. sequence, post
+#3's construction). Under the hypotheses of `tendstoInDistribution_departureDiscrepancy_stack`,
+for `u ∼ iidUniform ℕ`, `(1/√T) D_i(g, T) ⇒ N(0, c σ_i²(g))`. The two path laws agree
+(`map_drivenPath_eq_map_stackPath_path`), so the laws of the statistic agree for every `T`. -/
+theorem tendstoInDistribution_departureDiscrepancy_driven {P : Fin n → Fin n → ℝ}
+    (hP : IsStochastic P) (x₀ : Fin n) {h : Fin n → ℝ} {i : Fin n} {c M : ℝ}
+    (hh : ∀ k, h k - (P *ᵥ h) k = (if k = i then 1 else 0) - c) (hM : ∀ k, |h k| ≤ M)
+    (hc : 0 < c) (g : Fin n → ℝ) {Ω' : Type*} [MeasurableSpace Ω'] {Q' : Measure Ω'}
+    [IsProbabilityMeasure Q'] {Z : Ω' → ℝ}
+    (hZ : HasLaw Z (gaussianReal 0 (c * rowVariance P g i).toNNReal) Q') :
+    haveI := isProbabilityMeasure_iidUniform ℕ
+    TendstoInDistribution (fun (T : ℕ) (u : ℕ → ℝ) => (√(T : ℝ))⁻¹ *
+      departureDiscrepancy P g (drivenPath P x₀ u) i T) atTop Z (fun _ => iidUniform ℕ) Q' := by
+  have := isProbabilityMeasure_iidUniform ℕ
+  have := isProbabilityMeasure_iidUniform (Fin n × ℕ)
+  have hst := tendstoInDistribution_departureDiscrepancy_stack hP x₀ hh hM hc g hZ
+  have hF := measurable_departureDiscrepancy_div P g i
+  have hlaw : ∀ T : ℕ, (iidUniform (Fin n × ℕ)).map (fun w =>
+      (√(T : ℝ))⁻¹ * departureDiscrepancy P g (stackPath P x₀ (Function.curry w)) i T) =
+      (iidUniform ℕ).map (fun u =>
+        (√(T : ℝ))⁻¹ * departureDiscrepancy P g (drivenPath P x₀ u) i T) := fun T => by
+    have e1 := Measure.map_map (μ := iidUniform ℕ) (hF T) (measurable_drivenPath P x₀)
+    have e2 := Measure.map_map (μ := iidUniform (Fin n × ℕ)) (hF T) (measurable_stackPath P x₀)
+    rw [map_drivenPath_eq_map_stackPath_path hP x₀] at e1
+    exact e2.symm.trans e1
+  exact ⟨fun T => ((hF T).comp (measurable_drivenPath P x₀)).aemeasurable,
+    hst.aemeasurable_limit, hst.tendsto.congr fun T => Subtype.ext (hlaw T)⟩
+
+/-- **The √T CLT for the MC transition counts** (post #3's empirical transition matrix, at the
+CLT scale). If Poisson's equation `h − Ph = 1_{i} − c` has a bounded solution and `c > 0`
+(`c = π_i`), then for MC driving by one i.i.d. sequence, from any start,
+`(N_ij(T) − p_ij N_i(T))/√T ⇒ N(0, π_i p_ij (1 − p_ij))`. -/
+theorem tendstoInDistribution_transCount_driven {P : Fin n → Fin n → ℝ}
+    (hP : IsStochastic P) (x₀ : Fin n) {h : Fin n → ℝ} {i : Fin n} {c M : ℝ}
+    (hh : ∀ k, h k - (P *ᵥ h) k = (if k = i then 1 else 0) - c) (hM : ∀ k, |h k| ≤ M)
+    (hc : 0 < c) (j : Fin n) {Ω' : Type*} [MeasurableSpace Ω'] {Q' : Measure Ω'}
+    [IsProbabilityMeasure Q'] {Z : Ω' → ℝ}
+    (hZ : HasLaw Z (gaussianReal 0 (c * (P i j * (1 - P i j))).toNNReal) Q') :
+    haveI := isProbabilityMeasure_iidUniform ℕ
+    TendstoInDistribution (fun (T : ℕ) (u : ℕ → ℝ) => (√(T : ℝ))⁻¹ *
+      ((transCount (drivenPath P x₀ u) i j T : ℝ) - P i j * occCount (drivenPath P x₀ u) i T))
+      atTop Z (fun _ => iidUniform ℕ) Q' := by
+  rw [← rowVariance_indicator hP i j] at hZ
+  have e : (fun (T : ℕ) (u : ℕ → ℝ) => (√(T : ℝ))⁻¹ *
+      ((transCount (drivenPath P x₀ u) i j T : ℝ) - P i j * occCount (drivenPath P x₀ u) i T)) =
+      fun (T : ℕ) (u : ℕ → ℝ) => (√(T : ℝ))⁻¹ * departureDiscrepancy P
+        (fun k => if k = j then 1 else 0) (drivenPath P x₀ u) i T :=
+    funext fun T => funext fun u => by
+      rw [transCount_sub_eq_departureDiscrepancy (P : Matrix (Fin n) (Fin n) ℝ)]
+  rw [e]
+  exact tendstoInDistribution_departureDiscrepancy_driven hP x₀ hh hM hc _ hZ
+
+/-- **The √T CLT for irreducible chains.** For an irreducible stochastic `P` with stationary
+distribution `π` (so `π_i > 0`), MC driving gives
+`(N_ij(T) − p_ij N_i(T))/√T ⇒ N(0, π_i p_ij (1 − p_ij))` from any start. -/
+theorem tendstoInDistribution_transCount_driven_of_irreducible
+    {P : Matrix (Fin n) (Fin n) ℝ} (hP : IsStochastic P) (hirr : ∀ i j, ∃ k, 0 < (P ^ k) i j)
+    {μ : Fin n → ℝ} (hμ : IsStationaryDistribution P μ) (x₀ i j : Fin n) {Ω' : Type*}
+    [MeasurableSpace Ω'] {Q' : Measure Ω'} [IsProbabilityMeasure Q'] {Z : Ω' → ℝ}
+    (hZ : HasLaw Z (gaussianReal 0 (μ i * (P i j * (1 - P i j))).toNNReal) Q') :
+    haveI := isProbabilityMeasure_iidUniform ℕ
+    TendstoInDistribution (fun (T : ℕ) (u : ℕ → ℝ) => (√(T : ℝ))⁻¹ *
+      ((transCount (drivenPath P x₀ u) i j T : ℝ) - P i j * occCount (drivenPath P x₀ u) i T))
+      atTop Z (fun _ => iidUniform ℕ) Q' := by
+  have : Nonempty (Fin n) := ⟨x₀⟩
+  obtain ⟨h, hh⟩ := exists_poisson hP.nonneg hP.sum_eq_one hirr hμ
+    (fun k => if k = i then (1 : ℝ) else 0)
+  rw [dotProduct_indicator] at hh
+  exact tendstoInDistribution_transCount_driven hP x₀ hh (M := ∑ k, |h k|)
+    (fun k => single_le_sum (f := fun k => |h k|) (fun _ _ => abs_nonneg _) (mem_univ k))
+    (hμ.pos hP.nonneg hirr i) j hZ
+
+/-- **A concrete instance** (two-state chain with stay probability `7/8`, `π = (1/2, 1/2)`):
+for MC driving from any start, `(N_00(T) − (7/8) N_0(T))/√T ⇒ N(0, 7/128)`, realised by the
+identity on `(ℝ, N(0, 7/128))`. -/
+theorem tendstoInDistribution_transCount_twoStateStay78 (x₀ : Fin 2) :
+    haveI := isProbabilityMeasure_iidUniform ℕ
+    TendstoInDistribution (fun (T : ℕ) (u : ℕ → ℝ) => (√(T : ℝ))⁻¹ *
+      ((transCount (drivenPath twoStateStay78 x₀ u) 0 0 T : ℝ) -
+        7 / 8 * occCount (drivenPath twoStateStay78 x₀ u) 0 T))
+      atTop id (fun _ => iidUniform ℕ) (gaussianReal 0 (7 / 128 : ℝ).toNNReal) := by
+  have h00 : twoStateStay78 0 0 = 7 / 8 := by simp only [twoStateStay78, ite_true]
+  have hv : (1 / 2 : ℝ) * (twoStateStay78 0 0 * (1 - twoStateStay78 0 0)) = 7 / 128 := by
+    rw [h00]
+    norm_num
+  have hZ : HasLaw id (gaussianReal 0 ((1 / 2 : ℝ) * (twoStateStay78 0 0 *
+      (1 - twoStateStay78 0 0))).toNNReal) (gaussianReal 0 (7 / 128 : ℝ).toNNReal) := by
+    rw [hv]
+    exact HasLaw.id
+  have := tendstoInDistribution_transCount_driven_of_irreducible isStochastic_twoStateStay78
+    irreducible_twoStateStay78 isStationaryDistribution_twoStateStay78 x₀ 0 0 hZ
+  rw [h00] at this
+  exact this
+
+end RQMCMarkov.MarkovDriving
+
+/-
+Copyright (c) 2026 Robert Kirkby. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Robert Kirkby
+-/
+
 /-! # Rotor walks have too-regular spells (post #3)
 
 Post #3: "Rotors perform poorly in terms of spell lengths because their balanced ordering makes
@@ -14184,6 +15375,60 @@ set_option linter.style.longLine false
 #print axioms RQMCMarkov.MarkovDriving.ae_frequently_transCount_driven_ge
 #print axioms RQMCMarkov.MarkovDriving.ae_not_tendsto_transCount_driven
 #print axioms RQMCMarkov.MarkovDriving.occupation_error_ranking_driven
+#print axioms RQMCMarkov.MarkovDriving.integrable_of_abs_le
+#print axioms RQMCMarkov.MarkovDriving.abs_le_sum_sum_abs
+#print axioms RQMCMarkov.MarkovDriving.integral_comp_step_of_map
+#print axioms RQMCMarkov.MarkovDriving.integral_mul_comp_step_of_indepFun
+#print axioms RQMCMarkov.MarkovDriving.padPast
+#print axioms RQMCMarkov.MarkovDriving.measurable_padPast
+#print axioms RQMCMarkov.MarkovDriving.drivenPath_padPast
+#print axioms RQMCMarkov.MarkovDriving.indepFun_past_iidUniform
+#print axioms RQMCMarkov.MarkovDriving.map_eval_iidUniform
+#print axioms RQMCMarkov.MarkovDriving.measurable_drivenPath_apply
+#print axioms RQMCMarkov.MarkovDriving.integral_mul_step_driven
+#print axioms RQMCMarkov.MarkovDriving.incrementSum
+#print axioms RQMCMarkov.MarkovDriving.measurable_pair_apply
+#print axioms RQMCMarkov.MarkovDriving.measurable_incrementSum
+#print axioms RQMCMarkov.MarkovDriving.abs_incrementSum_le
+#print axioms RQMCMarkov.MarkovDriving.incrementSum_congr
+#print axioms RQMCMarkov.MarkovDriving.integral_sq_incrementSum_driven
+#print axioms RQMCMarkov.MarkovDriving.departureDiscrepancy_eq_incrementSum
+#print axioms RQMCMarkov.MarkovDriving.sum_departureDiscrepancy_eq_incrementSum
+#print axioms RQMCMarkov.MarkovDriving.sum_mul_sub_mulVec_eq_zero
+#print axioms RQMCMarkov.MarkovDriving.sum_integral_comp_driven
+#print axioms RQMCMarkov.MarkovDriving.integral_sq_sum_departureDiscrepancy_driven
+#print axioms RQMCMarkov.MarkovDriving.integral_sq_departureDiscrepancy_driven
+#print axioms RQMCMarkov.MarkovDriving.integral_sq_transCount_sub_driven
+#print axioms RQMCMarkov.MarkovDriving.integral_occCount_driven_mem_Icc
+#print axioms RQMCMarkov.MarkovDriving.integral_sq_transCount_sub_driven_le
+#print axioms RQMCMarkov.MarkovDriving.integral_abs_le_sqrt_integral_sq
+#print axioms RQMCMarkov.MarkovDriving.measurable_occCount_sub_driven
+#print axioms RQMCMarkov.MarkovDriving.integral_sq_occCount_sub_driven_mem
+#print axioms RQMCMarkov.MarkovDriving.integral_sq_occCount_sub_driven_le
+#print axioms RQMCMarkov.MarkovDriving.abs_integral_occCount_sub_driven_le
+#print axioms RQMCMarkov.MarkovDriving.tendsto_integral_occCount_div_driven
+#print axioms RQMCMarkov.MarkovDriving.eventually_integral_sq_occCount_sub_driven_ge
+#print axioms RQMCMarkov.MarkovDriving.integral_sq_occFreq_sub_driven_le
+#print axioms RQMCMarkov.MarkovDriving.integral_sq_transFreq_sub_driven_le
+#print axioms RQMCMarkov.MarkovDriving.dotProduct_indicator
+#print axioms RQMCMarkov.MarkovDriving.eventually_integral_sq_occCount_sub_driven_ge_of_irreducible
+#print axioms RQMCMarkov.MarkovDriving.isStochastic_twoStateStay78
+#print axioms RQMCMarkov.MarkovDriving.irreducible_twoStateStay78
+#print axioms RQMCMarkov.MarkovDriving.poisson_twoStateStay78
+#print axioms RQMCMarkov.MarkovDriving.rowVariance_twoStateStay78
+#print axioms RQMCMarkov.MarkovDriving.occCount_mse_twoStateStay78
+#print axioms RQMCMarkov.MarkovDriving.departureIncrement
+#print axioms RQMCMarkov.MarkovDriving.departureIncrement_iid
+#print axioms RQMCMarkov.MarkovDriving.tendstoInDistribution_comp_of_tendsto
+#print axioms RQMCMarkov.MarkovDriving.tendstoInDistribution_sum_floor_mul
+#print axioms RQMCMarkov.MarkovDriving.tendsto_div_of_forall_abs_sub_le
+#print axioms RQMCMarkov.MarkovDriving.measurable_occCount_nat
+#print axioms RQMCMarkov.MarkovDriving.measurable_departureDiscrepancy_div
+#print axioms RQMCMarkov.MarkovDriving.tendstoInDistribution_departureDiscrepancy_stack
+#print axioms RQMCMarkov.MarkovDriving.tendstoInDistribution_departureDiscrepancy_driven
+#print axioms RQMCMarkov.MarkovDriving.tendstoInDistribution_transCount_driven
+#print axioms RQMCMarkov.MarkovDriving.tendstoInDistribution_transCount_driven_of_irreducible
+#print axioms RQMCMarkov.MarkovDriving.tendstoInDistribution_transCount_twoStateStay78
 #print axioms RQMCMarkov.MarkovDriving.occCount_add_of_stay
 #print axioms RQMCMarkov.MarkovDriving.rotorWalk_not_stay
 #print axioms RQMCMarkov.MarkovDriving.runLength_rotorWalk_le

@@ -19,3 +19,4 @@ import ScrambledStacks.StackPowerOfTwo
 import ScrambledStacks.StackSpells
 import ScrambledStacks.Unbiased
 import ScrambledStacks.VanDerCorput
+import ScrambledStacks.CltPathLaw

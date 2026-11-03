@@ -30,3 +30,5 @@ import MarkovDriving.SpellStratified
 import MarkovDriving.StackBound
 import MarkovDriving.Unbiased
 import MarkovDriving.VanDerCorput
+import MarkovDriving.MCRateCLT
+import MarkovDriving.MCRateRMSE

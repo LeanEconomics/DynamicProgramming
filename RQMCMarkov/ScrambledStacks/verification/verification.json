@@ -1,6 +1,6 @@
 {
-  "checked_at_utc": "2026-11-03T01:04:22.598851+00:00",
-  "theorems": 507,
+  "checked_at_utc": "2026-11-03T03:20:05.949598+00:00",
+  "theorems": 536,
   "module_theorems": {
     "ScrambledStacks/MonteCarlo.lean": 16,
     "ScrambledStacks/Unbiased.lean": 22,
@@ -19,12 +19,13 @@
     "ScrambledStacks/CltPathBits.lean": 39,
     "ScrambledStacks/CltVariance.lean": 68,
     "ScrambledStacks/CltStacks.lean": 19,
+    "ScrambledStacks/CltPathLaw.lean": 29,
     "ScrambledStacks/CltThreeState.lean": 12,
     "ScrambledStacks/StackDyadic.lean": 27,
     "ScrambledStacks/StackPowerOfTwo.lean": 13,
     "ScrambledStacks/StackSpells.lean": 19
   },
-  "audited_declarations": 609,
+  "audited_declarations": 640,
   "declarations": [
     {
       "name": "RQMCMarkov.ScrambledStacks.uniformIco",
@@ -2680,6 +2681,161 @@
       "name": "RQMCMarkov.ScrambledStacks.IsPathCoinModel.tendstoInDistribution_chainSumErr",
       "kind": "theorem",
       "module": "ScrambledStacks/CltStacks.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.scrambledVdc_le_iff_lexLeFrom_pathCoin",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltPathLaw.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.scrambledVdc_le_iff_shiftTable",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltPathLaw.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.scrambledVdc_le_congr_pathCoin",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltPathLaw.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.step_congr_of_le_iff",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltPathLaw.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.stackDrive_congr_of_forall",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltPathLaw.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.cumProb_one_eq_two_state",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltPathLaw.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.cumProb_two_eq_two_state",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltPathLaw.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.pathShift",
+      "kind": "def",
+      "module": "ScrambledStacks/CltPathLaw.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.stackPath_eq_pathShift",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltPathLaw.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.coinPath",
+      "kind": "def",
+      "module": "ScrambledStacks/CltPathLaw.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.measurable_coinPath",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltPathLaw.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.IsPathCoinModel.pathShift_eq",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltPathLaw.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.IsPathCoinModel.stackPath_eq_coinPath",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltPathLaw.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.IsPathCoinModel.measurable_stackPath",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltPathLaw.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.IsPathCoinModel.map_stackPath",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltPathLaw.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.IsPathCoinModel.identDistrib_stackPath",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltPathLaw.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.stackPath_owen_eq_coinPath",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltPathLaw.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.stackPath_shift_eq_coinPath",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltPathLaw.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.map_stackPath_owen_eq_shift",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltPathLaw.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.identDistrib_stackPath_owen_shift",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltPathLaw.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.owenMeasure_stackPath_cylinder",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltPathLaw.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.identDistrib_comp_stackPath_owen_shift",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltPathLaw.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.measurable_occCount_path",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltPathLaw.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.measurable_transCount_path",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltPathLaw.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.identDistrib_occCount_owen_shift",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltPathLaw.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.identDistrib_transCount_owen_shift",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltPathLaw.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.identDistrib_occErr_owen_shift",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltPathLaw.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.variance_occErr_owen_eq_shift",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltPathLaw.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.tendstoInDistribution_congr_identDistrib",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltPathLaw.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.tendstoInDistribution_occErr_owen_iff_shift",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltPathLaw.lean"
+    },
+    {
+      "name": "RQMCMarkov.ScrambledStacks.tendstoInDistribution_normalised_occErr_owen_iff_shift",
+      "kind": "theorem",
+      "module": "ScrambledStacks/CltPathLaw.lean"
     },
     {
       "name": "RQMCMarkov.ScrambledStacks.threeChain",
@@ -5603,6 +5759,161 @@
       "Classical.choice",
       "Quot.sound"
     ],
+    "RQMCMarkov.ScrambledStacks.scrambledVdc_le_iff_lexLeFrom_pathCoin": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.scrambledVdc_le_iff_shiftTable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.scrambledVdc_le_congr_pathCoin": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.step_congr_of_le_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.stackDrive_congr_of_forall": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.cumProb_one_eq_two_state": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.cumProb_two_eq_two_state": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.pathShift": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.stackPath_eq_pathShift": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.coinPath": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.measurable_coinPath": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.IsPathCoinModel.pathShift_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.IsPathCoinModel.stackPath_eq_coinPath": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.IsPathCoinModel.measurable_stackPath": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.IsPathCoinModel.map_stackPath": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.IsPathCoinModel.identDistrib_stackPath": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.stackPath_owen_eq_coinPath": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.stackPath_shift_eq_coinPath": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.map_stackPath_owen_eq_shift": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.identDistrib_stackPath_owen_shift": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.owenMeasure_stackPath_cylinder": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.identDistrib_comp_stackPath_owen_shift": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.measurable_occCount_path": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.measurable_transCount_path": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.identDistrib_occCount_owen_shift": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.identDistrib_transCount_owen_shift": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.identDistrib_occErr_owen_shift": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.variance_occErr_owen_eq_shift": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.tendstoInDistribution_congr_identDistrib": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.tendstoInDistribution_occErr_owen_iff_shift": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.ScrambledStacks.tendstoInDistribution_normalised_occErr_owen_iff_shift": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
     "RQMCMarkov.ScrambledStacks.threeChain": [
       "propext",
       "Classical.choice",
@@ -6008,19 +6319,20 @@
     "ScrambledStacks/CltPathBits.lean": "b1fcf43dd6bafd5830111f69af5c13455d559ef0e2baabe472b821f0e49f262e",
     "ScrambledStacks/CltVariance.lean": "2264fb1e7b3729a21c2d063c48ed794597908c9c10a38338e475a9294dd0b755",
     "ScrambledStacks/CltStacks.lean": "e19eede093d2877f358541766c2d1a47fe37458fc77dc7a28f540d6fbc3b1e3c",
+    "ScrambledStacks/CltPathLaw.lean": "2fbfd9b06b32de66e95f4a58ae9ac649a3a13ffa5bd72b247b0d9dc9b564fe68",
     "ScrambledStacks/CltThreeState.lean": "4c266f8a3b917d5a48db1ddf83c7f51d320417e8c2b538526d12af7bd3621dcd",
     "ScrambledStacks/StackDyadic.lean": "f39701cfb17be4e797ddd66497740260ff7a80d49ff49074ab33d186440d0715",
     "ScrambledStacks/StackPowerOfTwo.lean": "987b5aa95dbad3f2b27ea27d03fb11c7b00042229037112e007106a1ed7f3202",
     "ScrambledStacks/StackSpells.lean": "b1795a1bcccde691e542bf3c267de795ed77a2d8e8fecf46d5f5f98801bb901e",
-    "ScrambledStacks.lean": "596f21e4feb29802b1c60c0ad456a2d66f78b9afa91afedfb3476b7e279d61c1",
+    "ScrambledStacks.lean": "1e2f644d994fabbca2a9c0efdf5353da013e393571bb3112e66bc69190c16845",
     "lean-toolchain": "8733782dc070a99b312039cda424f601b80f3be6f6f512627da5ba25adc27632",
     "lakefile.toml": "333f37377b3ae98ac7398cd217cff715e400794a449f5e21937113340e3c0d11",
     "lake-manifest.json": "4223a34088fbb16e42d77e819412f15fb5312e5e1791b0f535a4f6e1211d4b7e",
-    "proof-manifest.json": "a4fc55a67c3218da2fa4cba1681957e696f143a0bf3dc772b851f1b8f8309412",
+    "proof-manifest.json": "e59a9f5c53507e9e1591aa31ebe10fabf61dc0170d5096a81d2dfb7823ea7217",
     "scripts/verify.py": "a70b1fa704dd590f937f8b37682afa88a9d85a9150065acb935c7d2c9589da3b",
     "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
   },
-  "fresh_audit_sha256": "0c84bcbebd5164db268f2d58a3859ebb2a497248d2fa01842185470315eac065",
+  "fresh_audit_sha256": "976c8a881483f12316f70d7cac936f2424f1f5957e3190d02307d01c5de80177",
   "lean_toolchain": "leanprover/lean4:v4.34.0",
   "scope": "Finite Markov chains driven by per-state Owen-scrambled or digitally shifted van der Corput (one-dimensional Sobol) stacks: realisation-wise QMC rates, bounded errors and spells of exactly 8 for dyadic transition probabilities, and the central limit theorem at scale sqrt(log T), for codes (ii)-(iii) of post #3 of the VFI Toolkit discourse thread 'Simulating a Markov chain: MC, QMC, RQMC' (topic 687).",
   "source": "R. Kirkby, VFI Toolkit discourse topic 687 (2026), post #3; Owen (1995, 1997a); Loh (2003)"

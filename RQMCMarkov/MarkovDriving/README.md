@@ -23,8 +23,8 @@ prescribed transition counts), and rotors (a fixed cycle of next states for each
 stratified spell lengths as a last refinement. The state space is finite throughout, as in the
 post.
 
-The library contains **570 theorems** (679 audited declarations) in 31 modules. Twenty modules
-(396 theorems) are new. Eleven are carried, with the namespace renamed: `MonteCarlo`,
+The library contains **621 theorems** (733 audited declarations) in 33 modules. Twenty-two modules
+(447 theorems) are new. Eleven are carried, with the namespace renamed: `MonteCarlo`,
 `Unbiased`, `Discrepancy`, `Koksma` and `VanDerCorput` from
 [RQMCMarkov/PointSets](../PointSets/README.md) (102 theorems), and the six `MCRate…` modules
 of the Hartman–Wintner law of the iterated logarithm (LIL) from
@@ -193,8 +193,14 @@ corrected statement is proved.
   periodic sequence takes finitely many values (`not_isCUD_of_periodic`).
 * MC does not converge at `O(1/√T)` almost surely. The almost-sure rate of the transition
   counts is `√(T log log T)`, and of the empirical matrix `√(log log T / T)`, by the LIL
-  (`ae_abs_transCount_driven_le`, `ae_not_tendsto_transCount_driven`); `1/√T` is the
-  root-mean-square scale.
+  (`ae_abs_transCount_driven_le`, `ae_not_tendsto_transCount_driven`). `1/√T` is right at the
+  root-mean-square scale, exactly: `E[(N_ij(T) − p_ij N_i(T))²] = p_ij(1 − p_ij) E[N_i(T)]`
+  (`integral_sq_transCount_sub_driven`), the occupation frequency has RMSE `O(1/√T)`
+  (`integral_sq_occFreq_sub_driven_le`) and no better for non-degenerate chains
+  (`eventually_integral_sq_occCount_sub_driven_ge_of_irreducible`, instance
+  `occCount_mse_twoStateStay78`), and in distribution:
+  `(N_ij(T) − p_ij N_i(T))/√T ⇒ N(0, π_i p_ij (1 − p_ij))`
+  (`tendstoInDistribution_transCount_driven_of_irreducible`).
 * Rotors do not give "the same exact expected number of transitions" as conditional MC, since
   `T π_i p_ij` need not be an integer (`not_transCount_eq_target`); they give counts within one
   cycle of `p_ij N_i(T)`.
@@ -219,9 +225,8 @@ post's open-path wording is the right one (`exists_open_rounding`). See
 * **The BEST theorem**: counting the Eulerian trails with given counts by spanning trees, and the
   exact sampler built on a random spanning tree. Euler's theorem (existence of a path with given
   counts) is proved.
-* **The CLT** for the MC transition counts at the scale `√T` (a random-index CLT). The almost-sure
-  LIL rate is proved in both halves; the carried module `MCRateKolmogorovAnscombe` contains the
-  random-index step of Meyn and Tweedie but the CLT for the counts is not stated.
+* **The CLT for the MC occupation counts** `N_s(T)` (the CLT for the transition counts is proved,
+  `MCRateCLT`), and the degenerate case `π_i = 0`.
 * **The heuristic of approach (vii)**: "adjusting" the stratified spell lengths so that they add
   up to the time spent in the state, and the random order of the spells. The stratified lengths
   themselves are formalised.
@@ -268,6 +273,8 @@ All names are in the namespace `RQMCMarkov.MarkovDriving`. See the
 | [MCRateIIDLIL](MarkovDriving/MCRateIIDLIL.lean) | 7 | Carried from `LimitTheorems`: the Hartman–Wintner LIL for i.i.d. sequences, in `ε`-form and as `limsup`/`liminf` |
 | [MCRate](MarkovDriving/MCRate.lean) | 21 | i.i.d. uniform stacks, the departure sums and row variances, the LIL for the departures, MC upper and lower rates for transition and occupation counts, the ranking theorems |
 | [MCRateDriven](MarkovDriving/MCRateDriven.lean) | 17 | Equal path laws on `ℕ → Fin n` for one driving sequence and i.i.d. stacks, transfer of almost-sure path events, the MC rates and the ranking theorem for the post's single-sequence MC |
+| [MCRateRMSE](MarkovDriving/MCRateRMSE.lean) | 40 | The time-filtration martingale of the post's MC (one i.i.d. driving sequence), orthogonal increments, `E[(N_ij − p_ij N_i)²] = p_ij(1 − p_ij) E N_i(T)`, the second moment of the departure sums, two-sided bounds on the occupation mean-square error, `E N_s(T)/T → c`, RMSE of exact order `1/√T` for non-degenerate (irreducible) chains, the 7/8 instance |
+| [MCRateCLT](MarkovDriving/MCRateCLT.lean) | 11 | i.i.d. departure increments, the CLT at a deterministic index, the random-index (Anscombe) step, `(N_ij − p_ij N_i)/√T ⇒ N(0, π_i p_ij (1 − p_ij))` for the driven path, the 7/8 instance `N(0, 7/128)` |
 | [CUDDefs](MarkovDriving/CUDDefs.lean) | 26 | Box indicators, uniform distribution, windows and CUD, boxes with arbitrary sides, step functions and Weyl's criterion for them, finitely many values or a period exclude CUD |
 | [CUDVanDerCorput](MarkovDriving/CUDVanDerCorput.lean) | 19 | Discrepancy `→ 0` gives uniform distribution, van der Corput uniformly distributed but not CUD, the two-state chain on which it drives the wrong frequencies, CUD driving consistent on that chain |
 | [CUDExistence](MarkovDriving/CUDExistence.lean) | 13 | Interleaved averages, uniform distribution from grid boxes, window frequencies of i.i.d. uniforms by the strong law, i.i.d. uniforms CUD almost surely, CUD sequences exist |
@@ -284,5 +291,5 @@ python scripts/verify.py
 ```
 
 The verifier builds the library and freshly recompiles every contributed proof. It also audits each
-named declaration's axioms (679 declarations): only `propext`, `Classical.choice` and `Quot.sound`
+named declaration's axioms (733 declarations): only `propext`, `Classical.choice` and `Quot.sound`
 are allowed. Warnings fail the check.

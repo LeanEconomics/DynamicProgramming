@@ -27,8 +27,8 @@ state `i` has its own stack `scrambledStack f i`, and the chain is driven by the
 post #3: the `k`-th departure from `i` uses point `k` of stack `i` through the inverse-CDF update
 `step P i u` (`stackPath`). Everything is in base `2`.
 
-The library contains **507 theorems** (609 audited declarations) in 21 modules. Twelve modules
-(325 theorems) are new. Nine are copied, with the namespace and imports renamed and otherwise
+The library contains **536 theorems** (640 audited declarations) in 22 modules. Thirteen modules
+(354 theorems) are new. Nine are copied, with the namespace and imports renamed and otherwise
 unchanged, and each says so in its docstring: `MonteCarlo`, `Unbiased`, `Driving`,
 `OccupationDiscrepancy`, `Discrepancy`, `Koksma`, `VanDerCorput` and `StackBound` from
 [RQMCMarkov/MarkovDriving](../MarkovDriving/README.md) (178 theorems; `MonteCarlo`, `Unbiased`,
@@ -218,8 +218,11 @@ Three claims are false as stated. Each is refuted in Lean, and a corrected state
   (`not_tendstoInDistribution_symChain`). Normality holds at the scale `√log T` along times with
   `Var ≥ κ log₂ T` (`IsPathCoinModel.tendstoInDistribution_occErr`).
 * **The digital shift is normal too.** Post #2's contrast between the randomisations (Owen
-  normal, digital shift not) does not carry over to two-state Markov stacks: the path coins of
-  both have the same law (`map_owenPathCoins`), and the CLT holds for both
+  normal, digital shift not) does not carry over to two-state Markov stacks: the whole path has
+  the same law under both (`map_stackPath_owen_eq_shift`), for every chain and start, so the
+  occupation error and every other path statistic have the same law
+  (`identDistrib_occErr_owen_shift`, `identDistrib_comp_stackPath_owen_shift`), and the CLT holds
+  for both
   (`tendstoInDistribution_occErr_owen`, `tendstoInDistribution_occErr_shift`). For three states
   the path laws differ (`owen_ne_shift_stayThenMove`).
 
@@ -240,11 +243,6 @@ hypotheses made explicit and the conventions.
 * **The five-state Farmer–Toda chain** of the post specifically, and the post's empirical tests
   (the normality tests and the simulated errors). The numerical checks quoted in some module
   docstrings are not formalised either.
-* **The full path law of (ii) and (iii) for two states.** The law equivalence is proved for the
-  path coins and hence for the main term; the occupation error itself is within `anscBound` of
-  the main term for every flip table. An identity of the two path laws is not stated.
-* **The MC comparison**: the `O(1/√T)` RMSE of MC for Markov chains is the post's rate and is not
-  proved here; `MarkovDriving` proves the almost-sure LIL rate.
 
 All names are in the namespace `RQMCMarkov.ScrambledStacks`. See the
 [source map](docs/source-map.md) and the [corrections](docs/corrections.md).
@@ -270,6 +268,7 @@ All names are in the namespace `RQMCMarkov.ScrambledStacks`. See the
 | [CltPathBits](ScrambledStacks/CltPathBits.lean) | 39 | Threshold digits, lexicographic comparison, path prefixes and path coins, the per-block jump formula, the level decomposition of the local discrepancy, truncated tie cascades, the Owen path coins i.i.d. fair with the law of the digital-shift flips |
 | [CltVariance](ScrambledStacks/CltVariance.lean) | 68 | Covariance tools, moments of the level terms, `Var ≤ 5K`, the lower bound `8k/45` on a digit pattern, path-coin models (Owen and shift), the main term as a coin sum, the example chain and times with `Var ≥ k/12` |
 | [CltStacks](ScrambledStacks/CltStacks.lean) | 19 | Convergence in distribution through measure-preserving maps, the CLT for coin sums, Slutsky for a bounded perturbation, the CLT for two-state chains under Owen and shift, for every function of the state, on the example sequence, and the mean-square error `O(log T)` |
+| [CltPathLaw](ScrambledStacks/CltPathLaw.lean) | 29 | Two states: every comparison with a threshold is decided by the path coins, the stack path equals a digital-shift path with the path coins as flips, the path laws of Owen and shift coincide, and so do the laws of the counts, the occupation error and every path functional; the two CLTs are equivalent |
 | [CltThreeState](ScrambledStacks/CltThreeState.lean) | 12 | The three-state chain with rows `(1/4, 1/2, 1/4)`, the cylinder "stay, then move", probability `1/8` under Owen and `1/4` under the digital shift |
 | [StackDyadic](ScrambledStacks/StackDyadic.lean) | 27 | No limit without atoms for variables with finitely many values, dyadic thresholds with zero block error, bounded transition and occupation errors for dyadic chains, no CLT, the 7/8 chain with error at most `28` |
 | [StackPowerOfTwo](ScrambledStacks/StackPowerOfTwo.lean) | 13 | The symmetric two-state chain, transition counts as threshold counts, the self-consistent bound along `T = 2^k`, no limit law along all `T` |
@@ -283,5 +282,5 @@ python scripts/verify.py
 ```
 
 The verifier builds the library and freshly recompiles every contributed proof. It also audits each
-named declaration's axioms (609 declarations): only `propext`, `Classical.choice` and `Quot.sound`
+named declaration's axioms (640 declarations): only `propext`, `Classical.choice` and `Quot.sound`
 are allowed. Warnings fail the check.

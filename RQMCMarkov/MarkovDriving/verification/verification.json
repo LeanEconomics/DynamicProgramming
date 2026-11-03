@@ -1,6 +1,6 @@
 {
-  "checked_at_utc": "2026-10-29T23:17:38.799701+00:00",
-  "theorems": 570,
+  "checked_at_utc": "2026-11-03T03:18:21.777949+00:00",
+  "theorems": 621,
   "module_theorems": {
     "MarkovDriving/CUDDefs.lean": 26,
     "MarkovDriving/MonteCarlo.lean": 16,
@@ -31,10 +31,12 @@
     "MarkovDriving/StackBound.lean": 21,
     "MarkovDriving/MCRate.lean": 21,
     "MarkovDriving/MCRateDriven.lean": 17,
+    "MarkovDriving/MCRateRMSE.lean": 40,
+    "MarkovDriving/MCRateCLT.lean": 11,
     "MarkovDriving/RotorSpells.lean": 15,
     "MarkovDriving/SpellStratified.lean": 24
   },
-  "audited_declarations": 679,
+  "audited_declarations": 733,
   "declarations": [
     {
       "name": "RQMCMarkov.MarkovDriving.InUnitCube",
@@ -3205,6 +3207,276 @@
       "name": "RQMCMarkov.MarkovDriving.occupation_error_ranking_driven",
       "kind": "theorem",
       "module": "MarkovDriving/MCRateDriven.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.integrable_of_abs_le",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateRMSE.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.abs_le_sum_sum_abs",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateRMSE.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.integral_comp_step_of_map",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateRMSE.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.integral_mul_comp_step_of_indepFun",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateRMSE.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.padPast",
+      "kind": "def",
+      "module": "MarkovDriving/MCRateRMSE.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.measurable_padPast",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateRMSE.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.drivenPath_padPast",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateRMSE.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.indepFun_past_iidUniform",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateRMSE.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.map_eval_iidUniform",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateRMSE.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.measurable_drivenPath_apply",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateRMSE.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.integral_mul_step_driven",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateRMSE.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.incrementSum",
+      "kind": "def",
+      "module": "MarkovDriving/MCRateRMSE.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.measurable_pair_apply",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateRMSE.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.measurable_incrementSum",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateRMSE.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.abs_incrementSum_le",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateRMSE.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.incrementSum_congr",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateRMSE.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.integral_sq_incrementSum_driven",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateRMSE.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.departureDiscrepancy_eq_incrementSum",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateRMSE.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.sum_departureDiscrepancy_eq_incrementSum",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateRMSE.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.sum_mul_sub_mulVec_eq_zero",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateRMSE.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.sum_integral_comp_driven",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateRMSE.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.integral_sq_sum_departureDiscrepancy_driven",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateRMSE.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.integral_sq_departureDiscrepancy_driven",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateRMSE.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.integral_sq_transCount_sub_driven",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateRMSE.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.integral_occCount_driven_mem_Icc",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateRMSE.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.integral_sq_transCount_sub_driven_le",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateRMSE.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.integral_abs_le_sqrt_integral_sq",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateRMSE.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.measurable_occCount_sub_driven",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateRMSE.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.integral_sq_occCount_sub_driven_mem",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateRMSE.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.integral_sq_occCount_sub_driven_le",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateRMSE.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.abs_integral_occCount_sub_driven_le",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateRMSE.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.tendsto_integral_occCount_div_driven",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateRMSE.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.eventually_integral_sq_occCount_sub_driven_ge",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateRMSE.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.integral_sq_occFreq_sub_driven_le",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateRMSE.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.integral_sq_transFreq_sub_driven_le",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateRMSE.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.dotProduct_indicator",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateRMSE.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.eventually_integral_sq_occCount_sub_driven_ge_of_irreducible",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateRMSE.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.isStochastic_twoStateStay78",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateRMSE.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.irreducible_twoStateStay78",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateRMSE.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.poisson_twoStateStay78",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateRMSE.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.rowVariance_twoStateStay78",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateRMSE.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.occCount_mse_twoStateStay78",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateRMSE.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.departureIncrement",
+      "kind": "def",
+      "module": "MarkovDriving/MCRateCLT.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.departureIncrement_iid",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateCLT.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.tendstoInDistribution_comp_of_tendsto",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateCLT.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.tendstoInDistribution_sum_floor_mul",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateCLT.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.tendsto_div_of_forall_abs_sub_le",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateCLT.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.measurable_occCount_nat",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateCLT.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.measurable_departureDiscrepancy_div",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateCLT.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.tendstoInDistribution_departureDiscrepancy_stack",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateCLT.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.tendstoInDistribution_departureDiscrepancy_driven",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateCLT.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.tendstoInDistribution_transCount_driven",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateCLT.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.tendstoInDistribution_transCount_driven_of_irreducible",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateCLT.lean"
+    },
+    {
+      "name": "RQMCMarkov.MarkovDriving.tendstoInDistribution_transCount_twoStateStay78",
+      "kind": "theorem",
+      "module": "MarkovDriving/MCRateCLT.lean"
     },
     {
       "name": "RQMCMarkov.MarkovDriving.occCount_add_of_stay",
@@ -6552,6 +6824,276 @@
       "Classical.choice",
       "Quot.sound"
     ],
+    "RQMCMarkov.MarkovDriving.integrable_of_abs_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.abs_le_sum_sum_abs": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.integral_comp_step_of_map": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.integral_mul_comp_step_of_indepFun": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.padPast": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.measurable_padPast": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.drivenPath_padPast": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.indepFun_past_iidUniform": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.map_eval_iidUniform": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.measurable_drivenPath_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.integral_mul_step_driven": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.incrementSum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.measurable_pair_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.measurable_incrementSum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.abs_incrementSum_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.incrementSum_congr": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.integral_sq_incrementSum_driven": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.departureDiscrepancy_eq_incrementSum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.sum_departureDiscrepancy_eq_incrementSum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.sum_mul_sub_mulVec_eq_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.sum_integral_comp_driven": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.integral_sq_sum_departureDiscrepancy_driven": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.integral_sq_departureDiscrepancy_driven": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.integral_sq_transCount_sub_driven": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.integral_occCount_driven_mem_Icc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.integral_sq_transCount_sub_driven_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.integral_abs_le_sqrt_integral_sq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.measurable_occCount_sub_driven": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.integral_sq_occCount_sub_driven_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.integral_sq_occCount_sub_driven_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.abs_integral_occCount_sub_driven_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.tendsto_integral_occCount_div_driven": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.eventually_integral_sq_occCount_sub_driven_ge": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.integral_sq_occFreq_sub_driven_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.integral_sq_transFreq_sub_driven_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.dotProduct_indicator": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.eventually_integral_sq_occCount_sub_driven_ge_of_irreducible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.isStochastic_twoStateStay78": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.irreducible_twoStateStay78": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.poisson_twoStateStay78": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.rowVariance_twoStateStay78": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.occCount_mse_twoStateStay78": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.departureIncrement": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.departureIncrement_iid": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.tendstoInDistribution_comp_of_tendsto": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.tendstoInDistribution_sum_floor_mul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.tendsto_div_of_forall_abs_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.measurable_occCount_nat": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.measurable_departureDiscrepancy_div": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.tendstoInDistribution_departureDiscrepancy_stack": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.tendstoInDistribution_departureDiscrepancy_driven": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.tendstoInDistribution_transCount_driven": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.tendstoInDistribution_transCount_driven_of_irreducible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RQMCMarkov.MarkovDriving.tendstoInDistribution_transCount_twoStateStay78": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
     "RQMCMarkov.MarkovDriving.occCount_add_of_stay": [
       "propext",
       "Classical.choice",
@@ -6796,17 +7338,19 @@
     "MarkovDriving/StackBound.lean": "19ff362cb8847dd5c758857ff94200d4ea683904a8b6faee807a7cacbd051806",
     "MarkovDriving/MCRate.lean": "9087401c666008ead36325bd07ac8d6b79c4c8cfff3377099aa1a0dc485cd714",
     "MarkovDriving/MCRateDriven.lean": "89590db67b646f1db2224caa28f11b0090456338170e1c91ee370246b6dcf827",
+    "MarkovDriving/MCRateRMSE.lean": "8ef145ca86ea964e8a272255d862251fa4e25e53431b8d280a6b7cc5825edb84",
+    "MarkovDriving/MCRateCLT.lean": "9f68163ad48fedf74dec28859ae192b9149784c14ff86054ae9f639f7343f375",
     "MarkovDriving/RotorSpells.lean": "8452c5d2aa5823d7c269525439be584376b4e0101d2109490e2b4c92d945c25c",
     "MarkovDriving/SpellStratified.lean": "ccfa78136206f95d7280c29d4daf3fc3521beee44cb3350ab2f8fe553bf0ff7b",
-    "MarkovDriving.lean": "7db24015dad37f2c6a07e7e7fa65707d019b5be71a1fb1ecbd9f6d565e2b1eaf",
+    "MarkovDriving.lean": "d8e79bea6f35fecdf78ad50a89da06b20619d0ec2461022bdad7b7a87480ff5a",
     "lean-toolchain": "8733782dc070a99b312039cda424f601b80f3be6f6f512627da5ba25adc27632",
     "lakefile.toml": "3be33c9ec057f54b141e8c8240279b0eb7d0c9b90034d98997d87fa55b3fca87",
     "lake-manifest.json": "39a54d18fdb1af0c86e59c0773f5ba23a8959eccb624cb052e7bc4df38f8a835",
-    "proof-manifest.json": "ab34bd1c273395204df418e4c8fa99957b9c95a454d23b87e5232081bb35b3ea",
+    "proof-manifest.json": "e3ebc7c21b069ccb7a747da48667994099edaf8ecdb0b3ee3fc2209669c4b705",
     "scripts/verify.py": "a70b1fa704dd590f937f8b37682afa88a9d85a9150065acb935c7d2c9589da3b",
     "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
   },
-  "fresh_audit_sha256": "edd55009516256c5a10a9ca111255f35c4505f62b63f9c0ff52fb6bcf9a2c1a6",
+  "fresh_audit_sha256": "8bba831005f2e099f6872b3a60dc2a3fcd8bc7b0306fd936b525cea28452a91f",
   "lean_toolchain": "leanprover/lean4:v4.34.0",
   "scope": "Simulating a finite Markov chain by MC, QMC and RQMC driving sequences: the mathematical claims of post #3 of the VFI Toolkit discourse thread 'Simulating a Markov chain: MC, QMC, RQMC' (topic 687), with corrections.",
   "source": "R. Kirkby, VFI Toolkit discourse topic 687 (2026), with Chentsov (1967), Owen-Tribble (2005), Holroyd-Propp (2010), Meyn-Tweedie (2009) Ch. 17"
