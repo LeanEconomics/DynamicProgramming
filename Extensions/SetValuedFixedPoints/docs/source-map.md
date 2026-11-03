@@ -14,6 +14,13 @@ modules of the same names in `RecursiveMethods/FixedPointArguments`, with the na
 | SLP Theorem 17.3, p. 517 | Brouwer's fixed-point theorem | `brouwer_closedBall`, `brouwer_ball`, `brouwer`, `brouwer_subtype` |
 | SLP Theorem 17.4, p. 520 | Schauder's fixed-point theorem | `schauder`, `schauder_subtype`, `schauder_closed`, `schauder_closed_subtype` |
 
+## The Schauder–Tychonoff theorem
+
+| Source | Claim | Lean |
+| --- | --- | --- |
+| Tychonoff (1935) | A continuous self-map of a nonempty compact convex subset of a locally convex Hausdorff space has a fixed point | `schauderTychonoff`, `schauderTychonoff_subtype` |
+| Aliprantis and Border (2006), Ch. 17 (Schauder projections in locally convex spaces) | Approximate fixed points up to any convex neighbourhood of zero | `exists_approx_fixedPoint_nhds` (in any real topological vector space) |
+
 ## Kakutani's theorem
 
 | Source | Claim | Lean |
@@ -39,3 +46,4 @@ modules of the same names in `RecursiveMethods/FixedPointArguments`, with the na
   *American Mathematical Monthly* 87 (1980).
 * N. Stokey and R. Lucas with E. Prescott, *Recursive Methods in Economic Dynamics*, Harvard
   (1989).
+* A. Tychonoff, "Ein Fixpunktsatz", *Mathematische Annalen* 111 (1935).

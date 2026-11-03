@@ -1,5 +1,11 @@
 # Departures from the sources
 
+* **Schauder–Tychonoff: the map need only be continuous on `K`.** `schauderTychonoff` takes
+  `f : E → E` continuous on `K` with `f(K) ⊆ K`, as `schauder` does; `schauderTychonoff_subtype`
+  is Tychonoff's form `f : K → K`. The proof follows the Schauder-projection route of Aliprantis
+  and Border rather than Tychonoff's original one, and works with the standard simplex on a
+  finite cover of `K` instead of the finite-dimensional span of its centres, so Brouwer is applied
+  in a normed space even though `E` carries no norm.
 * **Closed graph in place of upper hemicontinuity.** Kakutani (1941) assumes an upper
   hemicontinuous correspondence with closed values. `kakutani` assumes instead that the graph of
   the correspondence over `K` is closed. For a correspondence into a compact set the two are
