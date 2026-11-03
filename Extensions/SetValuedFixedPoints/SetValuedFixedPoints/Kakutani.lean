@@ -35,7 +35,7 @@ open Metric Set Filter Topology
 variable {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]
 
 /-- The graph of a correspondence `F` over a set `K`. -/
-def graphOn (K : Set E) (F : E → Set E) : Set (E × E) := {p | p.1 ∈ K ∧ p.2 ∈ F p.1}
+def graphOn {α : Type*} (K : Set α) (F : α → Set α) : Set (α × α) := {p | p.1 ∈ K ∧ p.2 ∈ F p.1}
 
 /-- The tent weight of the point `x` at the centre `c` with radius `ε`. -/
 noncomputable def tent (ε : ℝ) (c x : E) : ℝ := max 0 (ε - ‖x - c‖)

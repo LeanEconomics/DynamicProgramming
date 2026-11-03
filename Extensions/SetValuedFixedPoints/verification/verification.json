@@ -1,15 +1,16 @@
 {
-  "checked_at_utc": "2026-11-03T21:11:31.045493+00:00",
-  "theorems": 29,
+  "checked_at_utc": "2026-11-03T21:17:58.194875+00:00",
+  "theorems": 32,
   "module_theorems": {
     "SetValuedFixedPoints/BrouwerRetraction.lean": 4,
     "SetValuedFixedPoints/BrouwerBall.lean": 4,
     "SetValuedFixedPoints/Brouwer.lean": 5,
     "SetValuedFixedPoints/Schauder.lean": 5,
     "SetValuedFixedPoints/Kakutani.lean": 8,
-    "SetValuedFixedPoints/SchauderTychonoff.lean": 3
+    "SetValuedFixedPoints/SchauderTychonoff.lean": 3,
+    "SetValuedFixedPoints/FanGlicksberg.lean": 3
   },
-  "audited_declarations": 32,
+  "audited_declarations": 35,
   "declarations": [
     {
       "name": "DPExtensions.SetValuedFixedPoints.exists_polynomial_det_id_add_smul",
@@ -170,6 +171,21 @@
       "name": "DPExtensions.SetValuedFixedPoints.schauderTychonoff_subtype",
       "kind": "theorem",
       "module": "SetValuedFixedPoints/SchauderTychonoff.lean"
+    },
+    {
+      "name": "DPExtensions.SetValuedFixedPoints.exists_approx_fixedPoint_convexNhds",
+      "kind": "theorem",
+      "module": "SetValuedFixedPoints/FanGlicksberg.lean"
+    },
+    {
+      "name": "DPExtensions.SetValuedFixedPoints.exists_uhc_nhds",
+      "kind": "theorem",
+      "module": "SetValuedFixedPoints/FanGlicksberg.lean"
+    },
+    {
+      "name": "DPExtensions.SetValuedFixedPoints.fanGlicksberg",
+      "kind": "theorem",
+      "module": "SetValuedFixedPoints/FanGlicksberg.lean"
     }
   ],
   "full_build": "passed",
@@ -334,6 +350,21 @@
       "propext",
       "Classical.choice",
       "Quot.sound"
+    ],
+    "DPExtensions.SetValuedFixedPoints.exists_approx_fixedPoint_convexNhds": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.SetValuedFixedPoints.exists_uhc_nhds": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DPExtensions.SetValuedFixedPoints.fanGlicksberg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
     ]
   },
   "source_sha256": {
@@ -341,18 +372,19 @@
     "SetValuedFixedPoints/BrouwerBall.lean": "f8538d7990e117861fa63352567028084786a4a0c885797eebe071fa0345bb5e",
     "SetValuedFixedPoints/Brouwer.lean": "65852517f400f1c05d0fc5dd5974d6d0615da0a95041d559c1172c368ce55547",
     "SetValuedFixedPoints/Schauder.lean": "0e46422393e65fae322ee4e44649650793575e4b0ce8cae39bb99f0f35dc3168",
-    "SetValuedFixedPoints/Kakutani.lean": "a64ce089736ddc810dc26ea1723761a690bd9968ad989834861cfe0f213efbbc",
+    "SetValuedFixedPoints/Kakutani.lean": "3e5531ac29394b177b1020a931975c182b32f59a38743d360d0595bcd2bdecc8",
     "SetValuedFixedPoints/SchauderTychonoff.lean": "a7f40301e731c67ca4d4f941e5c13d948a01fa31a1b100722ae8e37ad251c07a",
-    "SetValuedFixedPoints.lean": "5eff4985004ebcb81cff788fdde45e0f13cb33c615c0562725efb5d51fcb0031",
+    "SetValuedFixedPoints/FanGlicksberg.lean": "05a64c05ba1f6b09b2999dbc5083e1474f39252ca55ef5fe65e99443ac2185ca",
+    "SetValuedFixedPoints.lean": "a7fa80339df93d1d12ac75a455918c576bd5237a0ba25e0277d81ad801026785",
     "lean-toolchain": "8733782dc070a99b312039cda424f601b80f3be6f6f512627da5ba25adc27632",
     "lakefile.toml": "a988ce6500157068f37059f88c67b18c19957a33a3eb8227f6f7b8bae77289ab",
     "lake-manifest.json": "0b096992da135697cc32a922d44c60597397629fe92032d546da5f5627ce0e62",
-    "proof-manifest.json": "6d8f97f6b0ef10464b76b51e7d67a4b57174017cc8a90d6d64fc760e93d8546e",
+    "proof-manifest.json": "4399b5b07e6c05d2117682feafce497d334dc85c68578bde082c14667e59227a",
     "scripts/verify.py": "a70b1fa704dd590f937f8b37682afa88a9d85a9150065acb935c7d2c9589da3b",
     "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
   },
-  "fresh_audit_sha256": "d59bea99ae73f2f69d04bc2e465459709a250416ac150333b99412ae8b510333",
+  "fresh_audit_sha256": "896969e64657f0a4f29c77894ccd6106a1c6c9f1a9b4e8a157efac0b8a402258",
   "lean_toolchain": "leanprover/lean4:v4.34.0",
-  "scope": "Fixed-point theorems for correspondences, as a base for existence of equilibrium in heterogeneous-agent models: Brouwer and Schauder carried from Stokey, Lucas and Prescott Chapter 17; Kakutani's theorem for nonempty compact convex sets in any real normed space with a closed graph (Kakutani 1941, Bohnenblust-Karlin 1950, Glicksberg 1952) by approximate continuous selections and Schauder; closed graph into a compact set implies upper hemicontinuity; the Schauder-Tychonoff theorem for nonempty compact convex sets in locally convex Hausdorff spaces (Tychonoff 1935) by gauge-based Schauder projections, Brouwer on a simplex and the finite intersection property.",
-  "source": "Kakutani (1941); Bohnenblust and Karlin (1950); Glicksberg (1952); Cellina (1969); Tychonoff (1935); Aliprantis and Border, Infinite Dimensional Analysis (2006), Ch. 17; Stokey, Lucas and Prescott (1989), Theorems 17.3-17.4; Rogers (1980)."
+  "scope": "Fixed-point theorems for correspondences, as a base for existence of equilibrium in heterogeneous-agent models: Brouwer and Schauder carried from Stokey, Lucas and Prescott Chapter 17; Kakutani's theorem for nonempty compact convex sets in any real normed space with a closed graph (Kakutani 1941, Bohnenblust-Karlin 1950, Glicksberg 1952) by approximate continuous selections and Schauder; closed graph into a compact set implies upper hemicontinuity; the Schauder-Tychonoff theorem for nonempty compact convex sets in locally convex Hausdorff spaces (Tychonoff 1935) by gauge-based Schauder projections, Brouwer on a simplex and the finite intersection property; the Fan-Glicksberg theorem (Kakutani in locally convex Hausdorff spaces, Fan 1952, Glicksberg 1952) by gauge-based approximate selections, Schauder-Tychonoff and a finite cover of K.",
+  "source": "Kakutani (1941); Bohnenblust and Karlin (1950); Glicksberg (1952); Cellina (1969); Fan (1952); Tychonoff (1935); Aliprantis and Border, Infinite Dimensional Analysis (2006), Ch. 17; Stokey, Lucas and Prescott (1989), Theorems 17.3-17.4; Rogers (1980)."
 }

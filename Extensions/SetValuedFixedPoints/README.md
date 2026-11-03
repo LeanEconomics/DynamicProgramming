@@ -11,7 +11,7 @@ heterogeneous-agent economies with aggregate risk (Duffie, Geanakoplos, Mas-Cole
 1994; Miao 2006; Cao 2020). Mathlib has Banach's and Tarski's fixed-point theorems but not
 Brouwer's, Schauder's or Kakutani's; Brouwer and Schauder were proved in
 `RecursiveMethods/FixedPointArguments` (Stokey, Lucas and Prescott, Theorems 17.3–17.4) and are
-carried here. The library contains **29 theorems**.
+carried here. The library contains **32 theorems**.
 
 * **Brouwer and Schauder** (carried): a continuous self-map of a nonempty compact convex set has
   a fixed point, in finite dimensions by Rogers's analytic proof and in any real normed space by
@@ -30,8 +30,14 @@ carried here. The library contains **29 theorems**.
   correspondence (`exists_approx_fixedPoint`), and the closed graph into a compact set gives upper
   hemicontinuity (`exists_uhc`), which passes to the limit through convex thickenings of the
   values.
+* **Fan–Glicksberg**: Kakutani's theorem in real locally convex Hausdorff spaces
+  (`fanGlicksberg`), with the same hypotheses: nonempty convex values in `K` and a closed graph
+  over `K`. Gauges of convex neighbourhoods of zero replace the tent weights and Schauder–Tychonoff
+  replaces Schauder (`exists_approx_fixedPoint_convexNhds`); upper hemicontinuity takes the form
+  `F c ⊆ F a + W` for `c` near `a` (`exists_uhc_nhds`); and a finite cover of `K` replaces the
+  convergent subsequence.
 
-The main entry points are `kakutani`, `kakutani_euclidean`, `exists_approx_fixedPoint`,
+The main entry points are `fanGlicksberg`, `kakutani`, `kakutani_euclidean`, `exists_approx_fixedPoint`,
 `exists_uhc`, `schauderTychonoff`, `exists_approx_fixedPoint_nhds`, `schauder` and `brouwer`, all in the namespace `DPExtensions.SetValuedFixedPoints`.
 
 See the [source map](docs/source-map.md) for the correspondence with the literature, and
@@ -47,6 +53,7 @@ See the [source map](docs/source-map.md) for the correspondence with the literat
 | [Schauder](SetValuedFixedPoints/Schauder.lean) | 5 | Schauder in real normed and Banach spaces (carried) |
 | [Kakutani](SetValuedFixedPoints/Kakutani.lean) | 8 | Approximate fixed points, upper hemicontinuity from a closed graph, Kakutani |
 | [SchauderTychonoff](SetValuedFixedPoints/SchauderTychonoff.lean) | 3 | Approximate fixed points up to a convex neighbourhood of zero, Schauder–Tychonoff |
+| [FanGlicksberg](SetValuedFixedPoints/FanGlicksberg.lean) | 3 | Approximate selections and upper hemicontinuity with neighbourhoods of zero, Fan–Glicksberg |
 
 ## Roadmap
 
@@ -54,10 +61,7 @@ The project is the base for proving existence of equilibrium in Krusell–Smith 
 modules, in order:
 
 1. **Schauder–Tychonoff** in locally convex Hausdorff spaces (done: `SchauderTychonoff`).
-2. **Fan–Glicksberg**: Kakutani in locally convex Hausdorff spaces, by the same approximate
-   selections with convex neighbourhoods in place of balls. This is the theorem the existence
-   proofs for economies with a continuum of agents use, on spaces of measures with the weak
-   topology.
+2. **Fan–Glicksberg**: Kakutani in locally convex Hausdorff spaces (done: `FanGlicksberg`).
 3. **Economic applications**: Nash equilibrium in mixed strategies via Berge's maximum theorem;
    the Gale–Nikaido–Debreu lemma and competitive equilibrium of an exchange economy.
 4. **Measurable selection** (Kuratowski–Ryll-Nardzewski), if the finite-dimensional selection
