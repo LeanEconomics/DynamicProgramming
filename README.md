@@ -1,13 +1,14 @@
 # Dynamic Programming in Lean
 
 Checked dynamic programming, following Sargent and Stachurski, *Dynamic
-Programming*, Volume 1: *Finite States* and Volume 2: *General States*, and
-Stokey and Lucas with Prescott, *Recursive Methods in Economic Dynamics*. Each
-folder is an independent Lean/Mathlib project for one chapter, with precise
-statements, a source map to the book's results and pages, and reproducible
-proof checks. Volume 1 projects live under `FiniteStates/`, Volume 2 under
-`GeneralStates/`, Stokey–Lucas–Prescott under `RecursiveMethods/`. Results beyond
-the books that build on them live under `Extensions/`.
+Programming*, Volume 1: *Finite States* and Volume 2: *General States*; Stokey
+and Lucas with Prescott, *Recursive Methods in Economic Dynamics*; and Miao,
+*Economic Dynamics in Discrete Time*. Each folder is an independent Lean/Mathlib
+project for one chapter, with precise statements, a source map to the book's
+results and pages, and reproducible proof checks. Volume 1 projects live under
+`FiniteStates/`, Volume 2 under `GeneralStates/`, Stokey–Lucas–Prescott under
+`RecursiveMethods/`, Miao under `EconomicDynamics/`. Results beyond the books
+that build on them live under `Extensions/`.
 
 | Project | Chapter | Checked results | Start here |
 | --- | --- | --- | --- |
@@ -84,6 +85,16 @@ chapter under `StochasticStability/`, built in book order. The plan is in
 | [StochasticStability/Positivity](StochasticStability/Positivity/README.md) | 18 Positivity | 3419 theorems (275 in the Chapter 18 modules, with Chapters 1–15 and the Chapter 12 tightness results carried): every numbered result. Ornstein's coupling for null renewal processes (Theorem 18.1.1); Orey's and Jain's theorems for null chains (Theorems 18.1.2–18.1.3, 18.0.1); positive and null states and sets (Theorems 18.2.1–18.2.2, for every period); T-chains (Proposition 18.3.1, Theorem 18.3.2, Proposition 18.3.3, Theorem 18.0.2 (i)); e-chains (Lemma 18.4.1, Propositions 18.4.2–18.4.3, Theorem 18.4.4); the weak and strong laws for e-chains (Theorems 18.5.1–18.5.2, 18.0.2 (ii), with Doob's martingale law and the cited Theorem 18.5.2 proved); the failure of independent coupling for two-dimensional random walks (p. 464). Lean counterexamples: (18.23) with a strict inequality, Theorem 18.1.3 without the Harris property | [Chapter overview](StochasticStability/Positivity/README.md) |
 | [StochasticStability/GeneralizedDrift](StochasticStability/GeneralizedDrift/README.md) | 19 Generalized Classification Criteria | 3926 theorems (248 in the Chapter 19 modules, with Chapters 1–15 and the needed Chapter 9, 11, 14, 17 and 18 modules carried): every numbered result, with Appendix B.2. State-dependent drift (Theorems 19.1.1–19.1.3), the random walk on the quarter plane (Theorem 19.1.4, with the linear bound (19.25)) and the invasion/antibody model (§19.1.3); history-dependent drift (Theorems 19.2.1–19.2.5) and the dependent-parameter bilinear model (Theorem 19.2.6, with its CLT, LIL and LLN); mixed drift and positivity (Theorems 19.3.1–19.3.4), the ladder examples (19.78)–(19.81) and the GI/G/1 queue (Theorem 19.3.5); the SETAR classification (Appendix B.2). Lean counterexamples: Theorem 19.1.2 with n = 0, (19.25) as stated, §19.1.2 without independent coordinates, linear (V4) in Appendix B STEP 2, the test function on p. 498, the busy-period decomposition (19.84) | [Chapter overview](StochasticStability/GeneralizedDrift/README.md) |
 | [StochasticStability/Epilogue](StochasticStability/Epilogue/README.md) | 20 Epilogue to the Second Edition | 3711 theorems (222 in the Chapter 20 modules, with Chapters 1–16 carried): every numbered result the chapter proves, and the quoted results where a proof is feasible. The weighted space `L∞_V`, spectral gap ⇔ `V`-uniform ergodicity (Theorem 20.1.1), the M/M/1 spectrum (Propositions 20.1.2–20.1.3), the (DV3) drift criterion and a discrete spectrum (Propositions 20.1.4–20.1.5, with the Riesz–Schauder theory of compact operators built here); control variates and Metropolis–Hastings (§20.2); Feynman–Kac and the multiplicative Poisson equation (§20.1.5–20.1.6); Markov semigroups, the resolvent equations (Theorem 20.3.1) and exponential ergodicity through skeletons and the resolvent chain (Theorem 20.3.2). Not formalised: results quoted from the literature that need a continuous-time process construction, Perron–Frobenius theory or the spectral theorem on `L²(π)`. Lean counterexamples: the eigenfunction (20.9) and its limit in Proposition 20.1.3 (iii), the (V4) constant from (DV3), the variance bound with (20.7) as printed, the multiplicative Poisson equation, (20.16) with the return time | [Chapter overview](StochasticStability/Epilogue/README.md) |
+
+## Miao
+
+Jianjun Miao, *Economic Dynamics in Discrete Time* (MIT Press, 2014), one project per chapter
+under `EconomicDynamics/`, built in book order and cited by the pages of the author's 2013 draft.
+The plan is in [PROPOSAL-Miao.md](PROPOSAL-Miao.md).
+
+| Project | Chapter | Checked results | Start here |
+| --- | --- | --- | --- |
+| [EconomicDynamics/DifferenceEquations](EconomicDynamics/DifferenceEquations/README.md) | 1 Deterministic Difference Equations | 439 theorems: every numbered result, every derivation in the text and Exercises 1–2. Scalar first- and second-order equations with forward and backward solutions and bubbles; lag operators as unique bounded inverses; Theorem 1.4.1 in both directions and Blanchard–Kahn (Theorem 1.4.2) with a real block split in place of the Jordan form; the complex generalized Schur (QZ) form built here (Theorem 1.4.4) and Klein's theorem (Theorem 1.4.5); phase diagrams, the optimal-growth saddle and the logistic two-cycle; the Cagan and Dornbusch exercises. Lean counterexamples: (1.5) with bounded forcing, the `b = −1` case, Theorem 1.4.3 as printed, the forward solution (1.37), the phase-diagram saddle, and the discrete-time Dornbusch saddle | [Chapter overview](EconomicDynamics/DifferenceEquations/README.md) |
 
 ## RQMC for Markov chains
 
