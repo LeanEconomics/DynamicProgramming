@@ -14,7 +14,7 @@ chapter, built one chapter at a time, each with a README library map, `docs/sour
 `docs/corrections.md`, `proof-manifest.json` and the `scripts/verify.py` audit; a CI matrix
 entry; a row in the root README.
 
-Status: decisions settled 2026-11-05 (§3); Chapters 1–2 done 2026-11-05, Chapters 3–5 done 2026-11-07, Chapter 6 done 2026-11-07, Chapters 7–9 done 2026-11-08, Chapters 10–14 done 2026-11-10.
+Status: decisions settled 2026-11-05 (§3); Chapters 1–2 done 2026-11-05, Chapters 3–5 done 2026-11-07, Chapter 6 done 2026-11-07, Chapters 7–9 done 2026-11-08, Chapters 10–14 and 16 done 2026-11-10.
 
 ---
 
