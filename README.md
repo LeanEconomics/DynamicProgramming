@@ -2,12 +2,14 @@
 
 Checked dynamic programming, following Sargent and Stachurski, *Dynamic
 Programming*, Volume 1: *Finite States* and Volume 2: *General States*; Stokey
-and Lucas with Prescott, *Recursive Methods in Economic Dynamics*; and Miao,
-*Economic Dynamics in Discrete Time*. Each folder is an independent Lean/Mathlib
+and Lucas with Prescott, *Recursive Methods in Economic Dynamics*; Miao,
+*Economic Dynamics in Discrete Time*; and Azzimonti, Krusell, McKay and Mukoyama,
+*Macroeconomics*. Each folder is an independent Lean/Mathlib
 project for one chapter, with precise statements, a source map to the book's
 results and pages, and reproducible proof checks. Volume 1 projects live under
 `FiniteStates/`, Volume 2 under `GeneralStates/`, Stokey–Lucas–Prescott under
-`RecursiveMethods/`, Miao under `EconomicDynamics/`. Results beyond the books
+`RecursiveMethods/`, Miao under `EconomicDynamics/`, Azzimonti–Krusell–McKay–Mukoyama under
+`AKMM/`. Results beyond the books
 that build on them live under `Extensions/`.
 
 | Project | Chapter | Checked results | Start here |
@@ -116,6 +118,18 @@ The plan is in [PROPOSAL-Miao.md](PROPOSAL-Miao.md).
 | [EconomicDynamics/RecursiveUtility](EconomicDynamics/RecursiveUtility/README.md) | 20 Recursive Utility | 902 theorems (513 new; Sargent–Stachurski recursive decision processes and Chapter 7 weighted norms carried): Koopmans utility and its construction (Theorems 20.1.1–20.1.2), Epstein–Zin and Chew–Dekel preferences, ambiguity aversion (maxmin and rectangularity, variational, divergence, smooth ambiguity), Kreps–Porteus resolution (Theorem 20.2.1), concavity, risk aversion and pricing kernels (Lemma 20.3.1, Propositions 20.3.1–20.3.2), Epstein–Zin asset pricing, Campbell–Shiller and long-run risk, Pareto optimality (Lemmas 20.5.1–20.5.2, Propositions 20.5.1–20.5.2), Exercises 1–3, 5–7. Lean counterexamples: (K1)–(K3) for recursive representations, (W5), Exercise 20.1's strict concavity, rectangularity, the definition of risk aversion, the consol formulas, the volatility price, Lemmas 20.5.1–20.5.2, Proposition 20.5.2 | [Chapter overview](EconomicDynamics/RecursiveUtility/README.md) |
 | [EconomicDynamics/DynamicGames](EconomicDynamics/DynamicGames/README.md) | 21 Dynamic Games | 306 theorems: repeated games by APS (one-shot deviation principle, self-generation, factorization, the maximal fixed point, compactness, Hausdorff convergence of the iteration, simple strategies), perfect public equilibrium with imperfect monitoring, Markov perfect equilibrium in stochastic games, the Great Fish War in closed form with overfishing, credible government policies (APS value set, best and worst SPE values, recursive, trigger and stick-and-carrot strategies), Exercises 1–6. Lean counterexamples: Proposition 21.1.3 (twice), the noisy prisoner's dilemma condition, the Stackelberg follower's rule, Theorem 21.4.1 for unbounded sets, Propositions 21.4.1–21.4.2, the recursive-strategy characterisation, Examples 21.4.5–21.4.6 | [Chapter overview](EconomicDynamics/DynamicGames/README.md) |
 | [EconomicDynamics/RecursiveContracts](EconomicDynamics/RecursiveContracts/README.md) | 22 Recursive Contracts | 277 theorems: limited commitment (the Bellman equation in the promised value, the optimal contract — consumption never falls, the Lagrangian method, Zhang's characterisation), hidden action (the first-order approach, Propositions 22.2.1–22.2.2, the inverse Euler equation, the agent would like to save), hidden information (Lemmas 22.3.1–22.3.3, Proposition 22.3.1 with concavity of the value function, Propositions 22.3.2–22.3.3, immiseration by martingale convergence: Proposition 22.3.4), Exercises 1–4. Lean counterexamples: "promised values never decrease" for Markov income, the min in Exercise 1(c), the density in the inverse Euler equation, Proposition 22.2.2 with a flat likelihood ratio, Lemma 22.3.3 with one state, the constant in Exercise 4 | [Chapter overview](EconomicDynamics/RecursiveContracts/README.md) |
+
+## Azzimonti, Krusell, McKay and Mukoyama
+
+Marina Azzimonti, Per Krusell, Alisdair McKay and Toshihiko Mukoyama, *Macroeconomics* (draft of
+December 2025), one project per chapter under `AKMM/`, built in book order and cited by the
+draft's pages. Unlike the other programmes, these projects depend on earlier projects (Lake
+`require`s on projects in this repository and on other LeanEconomics repositories) instead of
+copying their material. The plan is in [PROPOSAL-AKMM.md](PROPOSAL-AKMM.md).
+
+| Project | Chapter | Checked results | Start here |
+| --- | --- | --- | --- |
+| (none) | 1 The subject matter | Not formalised: the chapter is narrative, with no formal content | — |
 
 ## RQMC for Markov chains
 
