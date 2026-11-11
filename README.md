@@ -130,6 +130,7 @@ copying their material. The plan is in [PROPOSAL-AKMM.md](PROPOSAL-AKMM.md).
 | Project | Chapter | Checked results | Start here |
 | --- | --- | --- | --- |
 | (none) | 1 The subject matter | Not formalised: the chapter is narrative, with no formal content | — |
+| [AKMM/Framework](AKMM/Framework/README.md) | 2 A Framework for Macroeconomics | 55 theorems: growth accounting (2.1)–(2.3) in continuous time, the accumulation equation and the balanced capital–output ratio s/(γ+δ), the detrended Solow system with its steady state, balanced growth and convergence (from EconomicGrowth's DiscreteTime library), the Euler equation, CRRA utility and its log limit, the "if" directions for King–Plosser–Rebelo and Boppart–Krusell preferences, the aggregation box. Depends on Miao NeoclassicalGrowth and EconomicGrowth SolowSwan. Lean counterexamples: output growth on p. 64, the sign of g in Boppart–Krusell preferences | [Chapter overview](AKMM/Framework/README.md) |
 
 ## RQMC for Markov chains
 
