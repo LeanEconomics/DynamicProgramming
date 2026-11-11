@@ -1,0 +1,6045 @@
+{
+  "checked_at_utc": "2026-11-09T23:38:11.569539+00:00",
+  "theorems": 430,
+  "module_theorems": {
+    "NumericalMethods/NQQuadrature.lean": 14,
+    "NumericalMethods/NQChebyshev.lean": 8,
+    "NumericalMethods/NQHermite.lean": 8,
+    "NumericalMethods/NQAR1.lean": 27,
+    "NumericalMethods/NQPerturbation.lean": 8,
+    "NumericalMethods/NQPerturbationExercise.lean": 12,
+    "NumericalMethods/NIWeighted.lean": 9,
+    "NumericalMethods/NIInterpolation.lean": 9,
+    "NumericalMethods/NILegendre.lean": 11,
+    "NumericalMethods/NILaguerre.lean": 15,
+    "NumericalMethods/NIHermite.lean": 15,
+    "NumericalMethods/NIChebyshev.lean": 20,
+    "NumericalMethods/NIChebInterp.lean": 12,
+    "NumericalMethods/NILebesgue.lean": 9,
+    "NumericalMethods/NIJackson.lean": 17,
+    "NumericalMethods/NIJacksonApprox.lean": 3,
+    "NumericalMethods/NIChebThm.lean": 7,
+    "NumericalMethods/NISplines.lean": 6,
+    "NumericalMethods/NICubicSpline.lean": 19,
+    "NumericalMethods/NIBSplines.lean": 15,
+    "NumericalMethods/NITensor.lean": 12,
+    "NumericalMethods/NIExercise1.lean": 6,
+    "NumericalMethods/NIRunge.lean": 10,
+    "NumericalMethods/NPBasics.lean": 18,
+    "NumericalMethods/NPMDP.lean": 22,
+    "NumericalMethods/NPBellman.lean": 32,
+    "NumericalMethods/NPDiscreteDP.lean": 33,
+    "NumericalMethods/NPFitted.lean": 8,
+    "NumericalMethods/NPProjection.lean": 15,
+    "NumericalMethods/NPChebyshev.lean": 9,
+    "NumericalMethods/NPGrowthProjection.lean": 7,
+    "NumericalMethods/NPEuler.lean": 9,
+    "NumericalMethods/NPPEA.lean": 5
+  },
+  "audited_declarations": 595,
+  "declarations": [
+    {
+      "name": "Miao.NumericalMethods.nqQuad",
+      "kind": "def",
+      "module": "NumericalMethods/NQQuadrature.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.nqIsGaussRule",
+      "kind": "def",
+      "module": "NumericalMethods/NQQuadrature.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.nq_quad_exact_of_moments",
+      "kind": "theorem",
+      "module": "NumericalMethods/NQQuadrature.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.nq_gauss_exact",
+      "kind": "theorem",
+      "module": "NumericalMethods/NQQuadrature.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.nq_gauss_not_exact_two_mul",
+      "kind": "theorem",
+      "module": "NumericalMethods/NQQuadrature.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.nq_gauss_weights_nonneg",
+      "kind": "theorem",
+      "module": "NumericalMethods/NQQuadrature.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.nq_gauss_probability",
+      "kind": "theorem",
+      "module": "NumericalMethods/NQQuadrature.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.nq_legendre_change_of_variables",
+      "kind": "theorem",
+      "module": "NumericalMethods/NQQuadrature.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.nq_legendre_interval_exact",
+      "kind": "theorem",
+      "module": "NumericalMethods/NQQuadrature.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.nq_legendre_one_point",
+      "kind": "theorem",
+      "module": "NumericalMethods/NQQuadrature.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.nq_legendre_two_point",
+      "kind": "theorem",
+      "module": "NumericalMethods/NQQuadrature.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.nq_integral_Ioi_shift",
+      "kind": "theorem",
+      "module": "NumericalMethods/NQQuadrature.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.nq_laguerre_present_value",
+      "kind": "theorem",
+      "module": "NumericalMethods/NQQuadrature.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.nqProdQuad",
+      "kind": "def",
+      "module": "NumericalMethods/NQQuadrature.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.nq_prodQuad_prod",
+      "kind": "theorem",
+      "module": "NumericalMethods/NQQuadrature.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.nq_prod_gauss_exact",
+      "kind": "theorem",
+      "module": "NumericalMethods/NQQuadrature.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.nq_prodQuad_card",
+      "kind": "theorem",
+      "module": "NumericalMethods/NQQuadrature.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.nqChebNode",
+      "kind": "def",
+      "module": "NumericalMethods/NQChebyshev.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.nq_chebyshev_substitution",
+      "kind": "theorem",
+      "module": "NumericalMethods/NQChebyshev.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.nq_chebyshev_integrableOn",
+      "kind": "theorem",
+      "module": "NumericalMethods/NQChebyshev.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.nq_integral_cos_nat_mul",
+      "kind": "theorem",
+      "module": "NumericalMethods/NQChebyshev.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.nq_cheb_sum_cos",
+      "kind": "theorem",
+      "module": "NumericalMethods/NQChebyshev.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.nq_chebyshev_T_exact",
+      "kind": "theorem",
+      "module": "NumericalMethods/NQChebyshev.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.nq_chebyshev_exact_theta",
+      "kind": "theorem",
+      "module": "NumericalMethods/NQChebyshev.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.nq_chebyshev_exact",
+      "kind": "theorem",
+      "module": "NumericalMethods/NQChebyshev.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.nq_chebyshev_isGaussRule",
+      "kind": "theorem",
+      "module": "NumericalMethods/NQChebyshev.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.nq_normal_expectation_hermite",
+      "kind": "theorem",
+      "module": "NumericalMethods/NQHermite.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.nq_normal_expectation_gauss_hermite",
+      "kind": "theorem",
+      "module": "NumericalMethods/NQHermite.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.nq_integral_odd_eq_zero",
+      "kind": "theorem",
+      "module": "NumericalMethods/NQHermite.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.nq_integrable_pow_mul_exp_neg_sq",
+      "kind": "theorem",
+      "module": "NumericalMethods/NQHermite.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.nq_integral_exp_neg_sq",
+      "kind": "theorem",
+      "module": "NumericalMethods/NQHermite.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.nq_integral_sq_mul_exp_neg_sq",
+      "kind": "theorem",
+      "module": "NumericalMethods/NQHermite.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.nq_hermite_one_point",
+      "kind": "theorem",
+      "module": "NumericalMethods/NQHermite.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.nq_hermite_two_point",
+      "kind": "theorem",
+      "module": "NumericalMethods/NQHermite.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.nq_ar1_mean_fixed",
+      "kind": "theorem",
+      "module": "NumericalMethods/NQAR1.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.nq_ar1_variance_fixed",
+      "kind": "theorem",
+      "module": "NumericalMethods/NQAR1.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.nq_ar1_stationary_law",
+      "kind": "theorem",
+      "module": "NumericalMethods/NQAR1.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.nqTauchenGrid",
+      "kind": "def",
+      "module": "NumericalMethods/NQAR1.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.nq_tauchen_grid_first",
+      "kind": "theorem",
+      "module": "NumericalMethods/NQAR1.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.nq_tauchen_grid_last",
+      "kind": "theorem",
+      "module": "NumericalMethods/NQAR1.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.nq_tauchen_grid_step",
+      "kind": "theorem",
+      "module": "NumericalMethods/NQAR1.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.nq_tauchen_grid_symm",
+      "kind": "theorem",
+      "module": "NumericalMethods/NQAR1.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.nqTauchenCut",
+      "kind": "def",
+      "module": "NumericalMethods/NQAR1.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.nq_tauchen_cut_midpoint",
+      "kind": "theorem",
+      "module": "NumericalMethods/NQAR1.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.nq_tauchen_cut_monotone",
+      "kind": "theorem",
+      "module": "NumericalMethods/NQAR1.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.nq_tauchen_printed_I2_upper",
+      "kind": "theorem",
+      "module": "NumericalMethods/NQAR1.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.nq_tauchen_printed_IN_lower",
+      "kind": "theorem",
+      "module": "NumericalMethods/NQAR1.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.nqCell",
+      "kind": "def",
+      "module": "NumericalMethods/NQAR1.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.nq_cell_eq",
+      "kind": "theorem",
+      "module": "NumericalMethods/NQAR1.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.nq_cell_measurable",
+      "kind": "theorem",
+      "module": "NumericalMethods/NQAR1.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.nq_cells_sum_one",
+      "kind": "theorem",
+      "module": "NumericalMethods/NQAR1.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.nqTauchenProb",
+      "kind": "def",
+      "module": "NumericalMethods/NQAR1.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.nq_tauchen_law",
+      "kind": "theorem",
+      "module": "NumericalMethods/NQAR1.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.nq_tauchen_prob_eq",
+      "kind": "theorem",
+      "module": "NumericalMethods/NQAR1.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.nq_tauchen_stochastic",
+      "kind": "theorem",
+      "module": "NumericalMethods/NQAR1.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.nqCondDens",
+      "kind": "def",
+      "module": "NumericalMethods/NQAR1.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.nq_th_ratio",
+      "kind": "theorem",
+      "module": "NumericalMethods/NQAR1.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.nq_th_change_of_measure",
+      "kind": "theorem",
+      "module": "NumericalMethods/NQAR1.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.nq_th_conditional_expectation",
+      "kind": "theorem",
+      "module": "NumericalMethods/NQAR1.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.nqTHTilde",
+      "kind": "def",
+      "module": "NumericalMethods/NQAR1.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.nq_th_exact",
+      "kind": "theorem",
+      "module": "NumericalMethods/NQAR1.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.nq_th_rowsum_integral",
+      "kind": "theorem",
+      "module": "NumericalMethods/NQAR1.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.nq_th_rowsum_lt_one",
+      "kind": "theorem",
+      "module": "NumericalMethods/NQAR1.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.nq_normalize_stochastic",
+      "kind": "theorem",
+      "module": "NumericalMethods/NQAR1.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.nq_th_normalized_stochastic",
+      "kind": "theorem",
+      "module": "NumericalMethods/NQAR1.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.nq_sim_interval_volume",
+      "kind": "theorem",
+      "module": "NumericalMethods/NQAR1.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.nq_sim_unique",
+      "kind": "theorem",
+      "module": "NumericalMethods/NQAR1.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.nqCertEquiv",
+      "kind": "def",
+      "module": "NumericalMethods/NQPerturbation.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.nqQ",
+      "kind": "def",
+      "module": "NumericalMethods/NQPerturbation.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.eq_11_4",
+      "kind": "theorem",
+      "module": "NumericalMethods/NQPerturbation.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.eq_11_5",
+      "kind": "theorem",
+      "module": "NumericalMethods/NQPerturbation.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.nq_pert_taylor_first_order",
+      "kind": "theorem",
+      "module": "NumericalMethods/NQPerturbation.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.nq_h_hasDerivAt",
+      "kind": "theorem",
+      "module": "NumericalMethods/NQPerturbation.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.nq_h'_hasDerivAt_zero",
+      "kind": "theorem",
+      "module": "NumericalMethods/NQPerturbation.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.eq_11_7_s",
+      "kind": "theorem",
+      "module": "NumericalMethods/NQPerturbation.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.eq_11_7",
+      "kind": "theorem",
+      "module": "NumericalMethods/NQPerturbation.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.nq_Q_hasDerivAt",
+      "kind": "theorem",
+      "module": "NumericalMethods/NQPerturbation.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.nqShock",
+      "kind": "abbrev",
+      "module": "NumericalMethods/NQPerturbationExercise.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.nq_gauss_exp_integral",
+      "kind": "theorem",
+      "module": "NumericalMethods/NQPerturbationExercise.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.nq_shock_exp",
+      "kind": "theorem",
+      "module": "NumericalMethods/NQPerturbationExercise.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.eq_11_6_mgf",
+      "kind": "theorem",
+      "module": "NumericalMethods/NQPerturbationExercise.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.eq_11_6",
+      "kind": "theorem",
+      "module": "NumericalMethods/NQPerturbationExercise.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.nq_gauss_tilt",
+      "kind": "theorem",
+      "module": "NumericalMethods/NQPerturbationExercise.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.nq_gauss_quad",
+      "kind": "theorem",
+      "module": "NumericalMethods/NQPerturbationExercise.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.nqTilt",
+      "kind": "def",
+      "module": "NumericalMethods/NQPerturbationExercise.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.nq_ex_11_2_tilt",
+      "kind": "theorem",
+      "module": "NumericalMethods/NQPerturbationExercise.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.nq_ex_11_2_Q",
+      "kind": "theorem",
+      "module": "NumericalMethods/NQPerturbationExercise.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.nq_ex_11_2_a",
+      "kind": "theorem",
+      "module": "NumericalMethods/NQPerturbationExercise.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.nq_ex_11_2_b",
+      "kind": "theorem",
+      "module": "NumericalMethods/NQPerturbationExercise.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.nq_ex_11_2_match",
+      "kind": "theorem",
+      "module": "NumericalMethods/NQPerturbationExercise.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ex_11_2",
+      "kind": "theorem",
+      "module": "NumericalMethods/NQPerturbationExercise.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_IsWeightingFunction",
+      "kind": "def",
+      "module": "NumericalMethods/NIWeighted.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_inner",
+      "kind": "def",
+      "module": "NumericalMethods/NIWeighted.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_Orthogonal",
+      "kind": "def",
+      "module": "NumericalMethods/NIWeighted.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_wnorm",
+      "kind": "def",
+      "module": "NumericalMethods/NIWeighted.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.definition_11_3_1",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIWeighted.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_inner_comm",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIWeighted.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_inner_add_left",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIWeighted.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_inner_smul_left",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIWeighted.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_inner_self_nonneg",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIWeighted.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_inner_sq_le",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIWeighted.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_inner_self_not_homogeneous",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIWeighted.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_wnorm_smul",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIWeighted.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_wnorm_add_le",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIWeighted.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_fhat",
+      "kind": "def",
+      "module": "NumericalMethods/NIInterpolation.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_interpMatrix",
+      "kind": "def",
+      "module": "NumericalMethods/NIInterpolation.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_interp_eq_iff",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIInterpolation.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_ssr",
+      "kind": "def",
+      "module": "NumericalMethods/NIInterpolation.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_normal_equations",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIInterpolation.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_leastSquares_optimal",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIInterpolation.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_leastSquares_eq_interp",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIInterpolation.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_monomial",
+      "kind": "def",
+      "module": "NumericalMethods/NIInterpolation.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_monomial_interpMatrix",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIInterpolation.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_monomial_interp_unique",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIInterpolation.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_monomial_interp_existsUnique",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIInterpolation.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_poly_interp_unique",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIInterpolation.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_monomials_not_orthogonal",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIInterpolation.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_iteratedDeriv_eval",
+      "kind": "theorem",
+      "module": "NumericalMethods/NILegendre.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_poly_parts",
+      "kind": "theorem",
+      "module": "NumericalMethods/NILegendre.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_legendreGen",
+      "kind": "def",
+      "module": "NumericalMethods/NILegendre.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_legendre",
+      "kind": "def",
+      "module": "NumericalMethods/NILegendre.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_legendre_eval_eq_iteratedDeriv",
+      "kind": "theorem",
+      "module": "NumericalMethods/NILegendre.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_legendre_zero",
+      "kind": "theorem",
+      "module": "NumericalMethods/NILegendre.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_legendre_natDegree_le",
+      "kind": "theorem",
+      "module": "NumericalMethods/NILegendre.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_legendreGen_iterate_root",
+      "kind": "theorem",
+      "module": "NumericalMethods/NILegendre.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_legendre_parts",
+      "kind": "theorem",
+      "module": "NumericalMethods/NILegendre.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_legendre_orthogonal_low",
+      "kind": "theorem",
+      "module": "NumericalMethods/NILegendre.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_legendre_orthogonal",
+      "kind": "theorem",
+      "module": "NumericalMethods/NILegendre.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_affine_maps_Icc",
+      "kind": "theorem",
+      "module": "NumericalMethods/NILegendre.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_legendre_shifted_orthogonal",
+      "kind": "theorem",
+      "module": "NumericalMethods/NILegendre.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_integrableOn_pow_mul_exp_neg",
+      "kind": "theorem",
+      "module": "NumericalMethods/NILaguerre.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_integrableOn_poly_mul_exp_neg",
+      "kind": "theorem",
+      "module": "NumericalMethods/NILaguerre.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_tendsto_poly_mul_exp_neg",
+      "kind": "theorem",
+      "module": "NumericalMethods/NILaguerre.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_lagOp",
+      "kind": "def",
+      "module": "NumericalMethods/NILaguerre.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_hasDerivAt_poly_mul_exp_neg",
+      "kind": "theorem",
+      "module": "NumericalMethods/NILaguerre.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_iteratedDeriv_poly_mul_exp_neg",
+      "kind": "theorem",
+      "module": "NumericalMethods/NILaguerre.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_laguerre",
+      "kind": "def",
+      "module": "NumericalMethods/NILaguerre.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_laguerre_eval_eq_rodrigues",
+      "kind": "theorem",
+      "module": "NumericalMethods/NILaguerre.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_laguerre_zero",
+      "kind": "theorem",
+      "module": "NumericalMethods/NILaguerre.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_lagOp_natDegree_le",
+      "kind": "theorem",
+      "module": "NumericalMethods/NILaguerre.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_laguerre_natDegree_le",
+      "kind": "theorem",
+      "module": "NumericalMethods/NILaguerre.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_laguerre_weight",
+      "kind": "theorem",
+      "module": "NumericalMethods/NILaguerre.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_integral_lagOp",
+      "kind": "theorem",
+      "module": "NumericalMethods/NILaguerre.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_lagOp_iterate_eval_zero",
+      "kind": "theorem",
+      "module": "NumericalMethods/NILaguerre.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_laguerre_parts",
+      "kind": "theorem",
+      "module": "NumericalMethods/NILaguerre.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_laguerre_orthogonal_low",
+      "kind": "theorem",
+      "module": "NumericalMethods/NILaguerre.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_laguerre_orthogonal",
+      "kind": "theorem",
+      "module": "NumericalMethods/NILaguerre.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_integrable_pow_mul_exp_neg_sq",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIHermite.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_integrable_poly_mul_exp_neg_sq",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIHermite.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_tendsto_pow_mul_exp_neg_sq",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIHermite.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_tendsto_poly_mul_exp_neg_sq",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIHermite.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_hermOp",
+      "kind": "def",
+      "module": "NumericalMethods/NIHermite.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_hasDerivAt_poly_mul_exp_neg_sq",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIHermite.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_iteratedDeriv_poly_mul_exp_neg_sq",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIHermite.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_hermite",
+      "kind": "def",
+      "module": "NumericalMethods/NIHermite.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_hermite_eval_eq_rodrigues",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIHermite.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_hermite_zero",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIHermite.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_hermOp_natDegree_le",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIHermite.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_hermite_natDegree_le",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIHermite.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_hermite_weight",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIHermite.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_integral_hermOp",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIHermite.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_hermite_parts",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIHermite.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_hermite_orthogonal_low",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIHermite.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_hermite_orthogonal",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIHermite.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_cheb_recursion",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIChebyshev.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_cheb_cos",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIChebyshev.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_cheb_arccos",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIChebyshev.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_chebWeight",
+      "kind": "def",
+      "module": "NumericalMethods/NIChebyshev.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_chebWeight_eq",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIChebyshev.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_chebWeight_isWeighting",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIChebyshev.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_inner_cheb_eq",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIChebyshev.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_cheb_orthogonal",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIChebyshev.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_cheb_norms",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIChebyshev.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_chebNode",
+      "kind": "def",
+      "module": "NumericalMethods/NIChebyshev.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_chebNode_succ",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIChebyshev.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_cheb_roots",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIChebyshev.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_chebNode_injOn",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIChebyshev.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_cheb_extrema_value",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIChebyshev.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_cheb_extrema_injOn",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIChebyshev.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_cheb_abs_le_one",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIChebyshev.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_cheb_not_locally_const",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIChebyshev.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_cheb_localExtr_value",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIChebyshev.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_cheb_localMax_eq_one",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIChebyshev.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_cheb_localMin_eq_neg_one",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIChebyshev.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_cheb_isLocalExtrOn_iff",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIChebyshev.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_cheb_discrete_orthogonality",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIChebyshev.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_sum_fin_succ",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIChebInterp.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_chebPhi",
+      "kind": "def",
+      "module": "NumericalMethods/NIChebInterp.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_chebGramDiag",
+      "kind": "def",
+      "module": "NumericalMethods/NIChebInterp.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_chebPhi_gram",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIChebInterp.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_chebGramDiag_ne_zero",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIChebInterp.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_chebGram_isUnit",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIChebInterp.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_chebData",
+      "kind": "def",
+      "module": "NumericalMethods/NIChebInterp.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_chebCoeff",
+      "kind": "def",
+      "module": "NumericalMethods/NIChebInterp.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_chebCoeff_eq",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIChebInterp.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_chebCoeff_eq_ratio",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIChebInterp.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_chebInterpolant",
+      "kind": "def",
+      "module": "NumericalMethods/NIChebInterp.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_chebInterpolant_nodes",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIChebInterp.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_chebTruncation_bound",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIChebInterp.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_chebInterp",
+      "kind": "def",
+      "module": "NumericalMethods/NIChebInterp.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_chebInterp_spec",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIChebInterp.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_chebInterp_eq_coeff_form",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIChebInterp.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_lebesgueFn",
+      "kind": "def",
+      "module": "NumericalMethods/NIChebInterp.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_lebesgue_inequality",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIChebInterp.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_supNorm",
+      "kind": "def",
+      "module": "NumericalMethods/NIChebInterp.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_Theorem_11_3_1_bound",
+      "kind": "def",
+      "module": "NumericalMethods/NIChebInterp.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.theorem_11_3_1_counterexample",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIChebInterp.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_chebAngle",
+      "kind": "def",
+      "module": "NumericalMethods/NILebesgue.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_chebAngle_mem",
+      "kind": "theorem",
+      "module": "NumericalMethods/NILebesgue.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_cheb_deriv_cos",
+      "kind": "theorem",
+      "module": "NumericalMethods/NILebesgue.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_cheb_deriv_node",
+      "kind": "theorem",
+      "module": "NumericalMethods/NILebesgue.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_basis_mul_eq",
+      "kind": "theorem",
+      "module": "NumericalMethods/NILebesgue.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_sin_le_two_sin_half",
+      "kind": "theorem",
+      "module": "NumericalMethods/NILebesgue.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_basis_abs_le",
+      "kind": "theorem",
+      "module": "NumericalMethods/NILebesgue.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_harmonic_le",
+      "kind": "theorem",
+      "module": "NumericalMethods/NILebesgue.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_harmonic_sum_le",
+      "kind": "theorem",
+      "module": "NumericalMethods/NILebesgue.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_lebesgueFn_le",
+      "kind": "theorem",
+      "module": "NumericalMethods/NILebesgue.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_cheb_expand",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIJackson.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_dirPoly",
+      "kind": "def",
+      "module": "NumericalMethods/NIJackson.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_fejPoly",
+      "kind": "def",
+      "module": "NumericalMethods/NIJackson.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_jackPoly",
+      "kind": "def",
+      "module": "NumericalMethods/NIJackson.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_jackK",
+      "kind": "def",
+      "module": "NumericalMethods/NIJackson.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_dir",
+      "kind": "def",
+      "module": "NumericalMethods/NIJackson.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_fej",
+      "kind": "def",
+      "module": "NumericalMethods/NIJackson.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_dirPoly_eval",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIJackson.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_fejPoly_eval",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIJackson.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_jackK_eq",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIJackson.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_jackK_nonneg",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIJackson.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_jackK_continuous",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIJackson.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_jackK_even",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIJackson.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_jackK_periodic",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIJackson.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_jackPoly_natDegree",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIJackson.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_dir_identity",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIJackson.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_fej_identity",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIJackson.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_fej_abs_le",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIJackson.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_fej_ge",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIJackson.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_one_sub_cos_ge",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIJackson.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_fej_le",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIJackson.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_jackK_mass_ge",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIJackson.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_jackK_moment_le",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIJackson.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_conv_poly",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIJacksonApprox.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_jacksonC",
+      "kind": "def",
+      "module": "NumericalMethods/NIJacksonApprox.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_jacksonC_pos",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIJacksonApprox.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_jackson_lipschitz",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIJacksonApprox.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_le_supNorm",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIChebThm.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_supNorm_nonneg",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIChebThm.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_supNorm_le",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIChebThm.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_antideriv",
+      "kind": "def",
+      "module": "NumericalMethods/NIChebThm.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_antideriv_derivative",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIChebThm.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_antideriv_natDegree",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIChebThm.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_jackson_Ck",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIChebThm.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.theorem_11_3_1",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIChebThm.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_IsSpline",
+      "kind": "def",
+      "module": "NumericalMethods/NISplines.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_spline_two_piecewise_linear",
+      "kind": "theorem",
+      "module": "NumericalMethods/NISplines.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_node_interval",
+      "kind": "theorem",
+      "module": "NumericalMethods/NISplines.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_affine_eq",
+      "kind": "theorem",
+      "module": "NumericalMethods/NISplines.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_linear_spline_unique",
+      "kind": "theorem",
+      "module": "NumericalMethods/NISplines.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_slope",
+      "kind": "def",
+      "module": "NumericalMethods/NISplines.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_linSpline",
+      "kind": "def",
+      "module": "NumericalMethods/NISplines.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_linSpline_piece",
+      "kind": "theorem",
+      "module": "NumericalMethods/NISplines.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_linear_spline_exists",
+      "kind": "theorem",
+      "module": "NumericalMethods/NISplines.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_cub",
+      "kind": "def",
+      "module": "NumericalMethods/NICubicSpline.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_cub1",
+      "kind": "def",
+      "module": "NumericalMethods/NICubicSpline.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_cub2",
+      "kind": "def",
+      "module": "NumericalMethods/NICubicSpline.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_cub3",
+      "kind": "def",
+      "module": "NumericalMethods/NICubicSpline.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_hasDerivAt_cub",
+      "kind": "theorem",
+      "module": "NumericalMethods/NICubicSpline.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_hasDerivAt_cub1",
+      "kind": "theorem",
+      "module": "NumericalMethods/NICubicSpline.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_hasDerivAt_cub2",
+      "kind": "theorem",
+      "module": "NumericalMethods/NICubicSpline.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_cubic_condition_count",
+      "kind": "theorem",
+      "module": "NumericalMethods/NICubicSpline.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_piece",
+      "kind": "def",
+      "module": "NumericalMethods/NICubicSpline.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_CubicInterp",
+      "kind": "def",
+      "module": "NumericalMethods/NICubicSpline.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_CubicSmooth",
+      "kind": "def",
+      "module": "NumericalMethods/NICubicSpline.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_splineL",
+      "kind": "def",
+      "module": "NumericalMethods/NICubicSpline.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_splineTarget",
+      "kind": "def",
+      "module": "NumericalMethods/NICubicSpline.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_splineL_eq_iff",
+      "kind": "theorem",
+      "module": "NumericalMethods/NICubicSpline.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_spline_existsUnique_of_homogeneous",
+      "kind": "theorem",
+      "module": "NumericalMethods/NICubicSpline.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_cub_taylor",
+      "kind": "theorem",
+      "module": "NumericalMethods/NICubicSpline.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_moment",
+      "kind": "def",
+      "module": "NumericalMethods/NICubicSpline.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_moment_facts",
+      "kind": "theorem",
+      "module": "NumericalMethods/NICubicSpline.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_moments_zero",
+      "kind": "theorem",
+      "module": "NumericalMethods/NICubicSpline.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_moment_interior",
+      "kind": "theorem",
+      "module": "NumericalMethods/NICubicSpline.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_naturalE",
+      "kind": "def",
+      "module": "NumericalMethods/NICubicSpline.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_natural_homogeneous",
+      "kind": "theorem",
+      "module": "NumericalMethods/NICubicSpline.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_natural_spline_existsUnique",
+      "kind": "theorem",
+      "module": "NumericalMethods/NICubicSpline.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_clampedE",
+      "kind": "def",
+      "module": "NumericalMethods/NICubicSpline.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_clamped_homogeneous",
+      "kind": "theorem",
+      "module": "NumericalMethods/NICubicSpline.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_clamped_spline_existsUnique",
+      "kind": "theorem",
+      "module": "NumericalMethods/NICubicSpline.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_notAKnotE",
+      "kind": "def",
+      "module": "NumericalMethods/NICubicSpline.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_notAKnot_row",
+      "kind": "theorem",
+      "module": "NumericalMethods/NICubicSpline.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_notAKnot_end",
+      "kind": "theorem",
+      "module": "NumericalMethods/NICubicSpline.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_notAKnot_homogeneous",
+      "kind": "theorem",
+      "module": "NumericalMethods/NICubicSpline.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_notAKnot_spline_existsUnique",
+      "kind": "theorem",
+      "module": "NumericalMethods/NICubicSpline.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_notAKnot_not_unique_two",
+      "kind": "theorem",
+      "module": "NumericalMethods/NICubicSpline.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_ppForm_exists",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIBSplines.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_Bdeg",
+      "kind": "def",
+      "module": "NumericalMethods/NIBSplines.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_bspline",
+      "kind": "def",
+      "module": "NumericalMethods/NIBSplines.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_bspline_one",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIBSplines.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_bspline_recursion",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIBSplines.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_Bdeg_support",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIBSplines.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_bspline_support",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIBSplines.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_Bdeg_nonneg",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIBSplines.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_bspline_nonneg",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIBSplines.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_Bdeg_zero_on",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIBSplines.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_Bdeg_piecewise_poly",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIBSplines.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_bspline_piecewise_poly",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIBSplines.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_bform_piecewise_poly",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIBSplines.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_bookKnots",
+      "kind": "def",
+      "module": "NumericalMethods/NIBSplines.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_bookKnots_monotone",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIBSplines.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_bookKnots_breaks",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIBSplines.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_bspline_two",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIBSplines.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_bspline_two_book_formula_false",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIBSplines.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_tensorMatrix",
+      "kind": "def",
+      "module": "NumericalMethods/NITensor.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_tensorBasis",
+      "kind": "def",
+      "module": "NumericalMethods/NITensor.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_tensor_interpMatrix",
+      "kind": "theorem",
+      "module": "NumericalMethods/NITensor.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_tensorMatrix_mul",
+      "kind": "theorem",
+      "module": "NumericalMethods/NITensor.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_tensorMatrix_one",
+      "kind": "theorem",
+      "module": "NumericalMethods/NITensor.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_tensor_inverse",
+      "kind": "theorem",
+      "module": "NumericalMethods/NITensor.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_tensor_coeff",
+      "kind": "theorem",
+      "module": "NumericalMethods/NITensor.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_tensor_card",
+      "kind": "theorem",
+      "module": "NumericalMethods/NITensor.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_tensor_example_\u03a6\u2081",
+      "kind": "theorem",
+      "module": "NumericalMethods/NITensor.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_tensor_example_\u03a6\u2082",
+      "kind": "theorem",
+      "module": "NumericalMethods/NITensor.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_tensor_example_basis",
+      "kind": "theorem",
+      "module": "NumericalMethods/NITensor.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_tensor_example_X",
+      "kind": "theorem",
+      "module": "NumericalMethods/NITensor.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_tensor_example_\u03a6",
+      "kind": "theorem",
+      "module": "NumericalMethods/NITensor.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_tensor_example_invertible",
+      "kind": "theorem",
+      "module": "NumericalMethods/NITensor.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ex_11_1_f1_not_differentiable",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIExercise1.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ex_11_1_f1_continuous",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIExercise1.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ex_11_1_f2_smooth",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIExercise1.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_uniformGrid",
+      "kind": "def",
+      "module": "NumericalMethods/NIExercise1.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_uniformGrid_strictMono",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIExercise1.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_uniformGrid_ends",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIExercise1.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ex_11_1",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIExercise1.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_prod_odd_ge",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIRunge.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_prod_dist_eq",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIRunge.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_uniform_basis_lower",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIRunge.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_uniform_lebesgue_lower",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIRunge.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_uniformGrid_mem",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIRunge.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_uniformInterp",
+      "kind": "def",
+      "module": "NumericalMethods/NIRunge.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_uniformInterp_apply",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIRunge.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_uniformInterp_eq_interpolate",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIRunge.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_linSpline_abs_le",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIRunge.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_uniformInterp_norm_ge",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIRunge.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.ni_uniform_interp_not_convergent",
+      "kind": "theorem",
+      "module": "NumericalMethods/NIRunge.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.IsMarkov",
+      "kind": "structure",
+      "module": "NumericalMethods/NPBasics.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.IsMarkov.mk",
+      "kind": "constructor",
+      "module": "NumericalMethods/NPBasics.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.IsMarkov.nonneg",
+      "kind": "projection",
+      "module": "NumericalMethods/NPBasics.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.IsMarkov.rowsum",
+      "kind": "projection",
+      "module": "NumericalMethods/NPBasics.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.IsDistribution",
+      "kind": "structure",
+      "module": "NumericalMethods/NPBasics.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.IsDistribution.mk",
+      "kind": "constructor",
+      "module": "NumericalMethods/NPBasics.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.IsDistribution.nonneg",
+      "kind": "projection",
+      "module": "NumericalMethods/NPBasics.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.IsDistribution.sum_eq_one",
+      "kind": "projection",
+      "module": "NumericalMethods/NPBasics.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.mulVec_apply_eq",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPBasics.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.IsMarkov.mul",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPBasics.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.IsMarkov.pow",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPBasics.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.IsMarkov.mulVec_le_mulVec",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPBasics.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.IsMarkov.mulVec_const",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPBasics.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.IsMarkov.abs_mulVec_le",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPBasics.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.IsMarkov.norm_mulVec_le",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPBasics.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.IsMarkov.abs_mulVec_sub_le",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPBasics.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.GloballyStable",
+      "kind": "def",
+      "module": "NumericalMethods/NPBasics.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.IsContractionOn",
+      "kind": "structure",
+      "module": "NumericalMethods/NPBasics.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.IsContractionOn.mk",
+      "kind": "constructor",
+      "module": "NumericalMethods/NPBasics.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.IsContractionOn.mapsTo",
+      "kind": "projection",
+      "module": "NumericalMethods/NPBasics.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.IsContractionOn.nonneg",
+      "kind": "projection",
+      "module": "NumericalMethods/NPBasics.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.IsContractionOn.lt_one",
+      "kind": "projection",
+      "module": "NumericalMethods/NPBasics.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.IsContractionOn.norm_sub_le",
+      "kind": "projection",
+      "module": "NumericalMethods/NPBasics.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.IsContractionOn.fixedPt_unique",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPBasics.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.IsContractionOn.iterate_mem",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPBasics.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.IsContractionOn.norm_iterate_sub_fixedPt_le",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPBasics.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.IsContractionOn.tendsto_iterate_fixedPt",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPBasics.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.IsContractionOn.exists_fixedPt",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPBasics.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.IsContractionOn.globallyStable_univ",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPBasics.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.fixedPt_le_of_le",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPBasics.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.le_fixedPt_of_le_apply",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPBasics.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.isContractionOn_of_blackwell",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPBasics.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.abs_sup'_sub_sup'_le",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPBasics.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.MDP",
+      "kind": "structure",
+      "module": "NumericalMethods/NPMDP.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.MDP.mk",
+      "kind": "constructor",
+      "module": "NumericalMethods/NPMDP.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.MDP.\u0393",
+      "kind": "projection",
+      "module": "NumericalMethods/NPMDP.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.MDP.\u0393_nonempty",
+      "kind": "projection",
+      "module": "NumericalMethods/NPMDP.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.MDP.\u03b2",
+      "kind": "projection",
+      "module": "NumericalMethods/NPMDP.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.MDP.\u03b2_pos",
+      "kind": "projection",
+      "module": "NumericalMethods/NPMDP.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.MDP.\u03b2_lt_one",
+      "kind": "projection",
+      "module": "NumericalMethods/NPMDP.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.MDP.r",
+      "kind": "projection",
+      "module": "NumericalMethods/NPMDP.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.MDP.P",
+      "kind": "projection",
+      "module": "NumericalMethods/NPMDP.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.MDP.P_nonneg",
+      "kind": "projection",
+      "module": "NumericalMethods/NPMDP.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.MDP.P_rowsum",
+      "kind": "projection",
+      "module": "NumericalMethods/NPMDP.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.MDP.Feasible",
+      "kind": "def",
+      "module": "NumericalMethods/NPMDP.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.MDP.IsFeasible",
+      "kind": "abbrev",
+      "module": "NumericalMethods/NPMDP.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.MDP.Policy",
+      "kind": "abbrev",
+      "module": "NumericalMethods/NPMDP.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.MDP.defaultPolicy",
+      "kind": "def",
+      "module": "NumericalMethods/NPMDP.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.MDP.policy_nonempty",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPMDP.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.MDP.isDistribution_P",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPMDP.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.MDP.P\u03c3",
+      "kind": "def",
+      "module": "NumericalMethods/NPMDP.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.MDP.P\u03c3_apply",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPMDP.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.MDP.isMarkov_P\u03c3",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPMDP.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.MDP.r\u03c3",
+      "kind": "def",
+      "module": "NumericalMethods/NPMDP.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.MDP.B",
+      "kind": "def",
+      "module": "NumericalMethods/NPMDP.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.MDP.T\u03c3",
+      "kind": "def",
+      "module": "NumericalMethods/NPMDP.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.MDP.T\u03c3_apply",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPMDP.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.MDP.T\u03c3_eq",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPMDP.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.MDP.T\u03c3_monotone",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPMDP.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.MDP.abs_T\u03c3_sub_le",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPMDP.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.MDP.isContractionOn_T\u03c3",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPMDP.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.MDP.v\u03c3",
+      "kind": "def",
+      "module": "NumericalMethods/NPMDP.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.MDP.isFixedPt_v\u03c3",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPMDP.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.MDP.eq_v\u03c3_of_isFixedPt",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPMDP.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.MDP.tendsto_iterate_T\u03c3",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPMDP.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.MDP.v\u03c3_eq",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPMDP.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.MDP.norm_smul_P\u03c3_mulVec_le",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPMDP.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.MDP.isUnit_one_sub_smul_P\u03c3",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPMDP.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.MDP.v\u03c3_eq_inv",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPMDP.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.MDP.norm_pow_smul_mulVec_le",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPMDP.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.MDP.summable_pow_smul_mulVec",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPMDP.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.MDP.iterate_T\u03c3_eq",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPMDP.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.MDP.iterate_T\u03c3_zero",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPMDP.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.MDP.v\u03c3_eq_tsum",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPMDP.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.MDP.abs_v\u03c3_le",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPMDP.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.MDP.T",
+      "kind": "def",
+      "module": "NumericalMethods/NPBellman.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.MDP.T_apply",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPBellman.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.MDP.B_le_T",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPBellman.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.MDP.T\u03c3_le_T",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPBellman.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.MDP.B_mono",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPBellman.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.MDP.T_monotone",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPBellman.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.MDP.abs_B_sub_le",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPBellman.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.MDP.isContractionOn_T",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPBellman.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.MDP.IsGreedy",
+      "kind": "def",
+      "module": "NumericalMethods/NPBellman.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.MDP.greedy",
+      "kind": "def",
+      "module": "NumericalMethods/NPBellman.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.MDP.greedy_mem",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPBellman.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.MDP.isGreedy_greedy",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPBellman.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.MDP.greedyPolicy",
+      "kind": "def",
+      "module": "NumericalMethods/NPBellman.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.MDP.isGreedy_iff_T\u03c3_eq_T",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPBellman.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.MDP.T\u03c3_eq_T_of_isGreedy",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPBellman.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.MDP.T_apply_eq_sup'",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPBellman.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.MDP.isGreatest_T",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPBellman.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.MDP.antiGreedy",
+      "kind": "def",
+      "module": "NumericalMethods/NPBellman.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.MDP.antiGreedy_mem",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPBellman.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.MDP.isLeast_T\u03c3_antiGreedy",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPBellman.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.MDP.vstar",
+      "kind": "def",
+      "module": "NumericalMethods/NPBellman.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.MDP.v\u03c3_le_vstar",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPBellman.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.MDP.IsOptimal",
+      "kind": "def",
+      "module": "NumericalMethods/NPBellman.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.MDP.isFixedPt_T_vstar",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPBellman.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.MDP.eq_vstar_of_isFixedPt",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPBellman.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.MDP.bellman_equation",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPBellman.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.MDP.tendsto_iterate_T",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPBellman.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.MDP.norm_iterate_T_sub_vstar_le",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPBellman.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.MDP.globallyStable_T",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPBellman.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.MDP.isOptimal_iff",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPBellman.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.MDP.isOptimal_iff_isGreedy",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPBellman.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.MDP.isOptimal_greedy_vstar",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPBellman.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.MDP.exists_isOptimal",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPBellman.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.MDP.subgradient_of_isGreedy",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPBellman.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.MDP.newton_step_eq_v\u03c3",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPBellman.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.MDP.v\u03c3_le_v\u03c3_of_isGreedy",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPBellman.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.MDP.isOptimal_of_hpi_fixed",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPBellman.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.MDP.opi_one_step_eq_vfi",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPBellman.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.MDP.tendsto_opi_inner",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPBellman.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.np_residual_bound",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPDiscreteDP.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.np_residual_zero_iff",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPDiscreteDP.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.np_vfi_aposteriori",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPDiscreteDP.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.np_fixedPt_perturbation",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPDiscreteDP.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.MDP.np_horizonValue",
+      "kind": "def",
+      "module": "NumericalMethods/NPDiscreteDP.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.MDP.np_horizonValue_const",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPDiscreteDP.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.MDP.np_iterate_T_zero_eq_max",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPDiscreteDP.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.MDP.np_hpi",
+      "kind": "def",
+      "module": "NumericalMethods/NPDiscreteDP.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.MDP.np_hpi_feasible",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPDiscreteDP.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.MDP.np_hpi_mono",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPDiscreteDP.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.MDP.np_hpi_terminates",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPDiscreteDP.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.GrowthGrid",
+      "kind": "structure",
+      "module": "NumericalMethods/NPDiscreteDP.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.GrowthGrid.mk",
+      "kind": "constructor",
+      "module": "NumericalMethods/NPDiscreteDP.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.GrowthGrid.kgrid",
+      "kind": "projection",
+      "module": "NumericalMethods/NPDiscreteDP.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.GrowthGrid.sgrid",
+      "kind": "projection",
+      "module": "NumericalMethods/NPDiscreteDP.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.GrowthGrid.pz",
+      "kind": "projection",
+      "module": "NumericalMethods/NPDiscreteDP.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.GrowthGrid.pz_markov",
+      "kind": "projection",
+      "module": "NumericalMethods/NPDiscreteDP.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.GrowthGrid.u",
+      "kind": "projection",
+      "module": "NumericalMethods/NPDiscreteDP.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.GrowthGrid.f",
+      "kind": "projection",
+      "module": "NumericalMethods/NPDiscreteDP.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.GrowthGrid.\u03b2",
+      "kind": "projection",
+      "module": "NumericalMethods/NPDiscreteDP.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.GrowthGrid.\u03b2_pos",
+      "kind": "projection",
+      "module": "NumericalMethods/NPDiscreteDP.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.GrowthGrid.\u03b2_lt_one",
+      "kind": "projection",
+      "module": "NumericalMethods/NPDiscreteDP.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.GrowthGrid.reward",
+      "kind": "def",
+      "module": "NumericalMethods/NPDiscreteDP.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.GrowthGrid.trans",
+      "kind": "def",
+      "module": "NumericalMethods/NPDiscreteDP.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.GrowthGrid.trans_rowsum",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPDiscreteDP.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.GrowthGrid.trans_nonneg",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPDiscreteDP.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.GrowthGrid.toMDP",
+      "kind": "def",
+      "module": "NumericalMethods/NPDiscreteDP.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.GrowthGrid.toMDP_\u03b2",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPDiscreteDP.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.GrowthGrid.isFeasible",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPDiscreteDP.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.GrowthGrid.B_apply",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPDiscreteDP.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.GrowthGrid.eq_11_11",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPDiscreteDP.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.GrowthGrid.np_bellman_contraction",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPDiscreteDP.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.GrowthGrid.eq_11_10",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPDiscreteDP.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.GrowthGrid.eq_11_10_unique",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPDiscreteDP.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.GrowthGrid.np_vfi_tendsto",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPDiscreteDP.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.GrowthGrid.np_vfi_geometric",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPDiscreteDP.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.GrowthGrid.np_vfi_backward_induction",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPDiscreteDP.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.GrowthGrid.eq_11_12",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPDiscreteDP.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.GrowthGrid.eq_11_12_unique",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPDiscreteDP.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.GrowthGrid.eq_11_12_inv",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPDiscreteDP.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.GrowthGrid.np_pfi_improvement",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPDiscreteDP.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.GrowthGrid.np_pfi_stop_policy",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPDiscreteDP.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.GrowthGrid.np_pfi_stop_value",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPDiscreteDP.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.GrowthGrid.np_vstar_ge",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPDiscreteDP.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.GrowthGrid.np_pfi_terminates",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPDiscreteDP.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.GrowthGrid.np_pfi_newton",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPDiscreteDP.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.GrowthGrid.np_value_projection",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPDiscreteDP.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.GrowthGrid.np_mpi",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPDiscreteDP.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.np_growthGridExample",
+      "kind": "def",
+      "module": "NumericalMethods/NPDiscreteDP.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.np_growthGridExample_vstar",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPDiscreteDP.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.FittedGrid",
+      "kind": "structure",
+      "module": "NumericalMethods/NPFitted.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.FittedGrid.mk",
+      "kind": "constructor",
+      "module": "NumericalMethods/NPFitted.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.FittedGrid.kmin",
+      "kind": "projection",
+      "module": "NumericalMethods/NPFitted.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.FittedGrid.kmax",
+      "kind": "projection",
+      "module": "NumericalMethods/NPFitted.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.FittedGrid.kmin_le",
+      "kind": "projection",
+      "module": "NumericalMethods/NPFitted.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.FittedGrid.kgrid",
+      "kind": "projection",
+      "module": "NumericalMethods/NPFitted.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.FittedGrid.sgrid",
+      "kind": "projection",
+      "module": "NumericalMethods/NPFitted.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.FittedGrid.pz",
+      "kind": "projection",
+      "module": "NumericalMethods/NPFitted.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.FittedGrid.pz_markov",
+      "kind": "projection",
+      "module": "NumericalMethods/NPFitted.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.FittedGrid.u",
+      "kind": "projection",
+      "module": "NumericalMethods/NPFitted.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.FittedGrid.f",
+      "kind": "projection",
+      "module": "NumericalMethods/NPFitted.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.FittedGrid.\u03b2",
+      "kind": "projection",
+      "module": "NumericalMethods/NPFitted.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.FittedGrid.\u03b2_pos",
+      "kind": "projection",
+      "module": "NumericalMethods/NPFitted.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.FittedGrid.\u03b2_lt_one",
+      "kind": "projection",
+      "module": "NumericalMethods/NPFitted.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.FittedGrid.wt",
+      "kind": "projection",
+      "module": "NumericalMethods/NPFitted.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.FittedGrid.wt_nonneg",
+      "kind": "projection",
+      "module": "NumericalMethods/NPFitted.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.FittedGrid.wt_sum",
+      "kind": "projection",
+      "module": "NumericalMethods/NPFitted.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.FittedGrid.u_bdd",
+      "kind": "projection",
+      "module": "NumericalMethods/NPFitted.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.FittedGrid.cont",
+      "kind": "def",
+      "module": "NumericalMethods/NPFitted.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.FittedGrid.obj",
+      "kind": "def",
+      "module": "NumericalMethods/NPFitted.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.FittedGrid.fittedBellman",
+      "kind": "def",
+      "module": "NumericalMethods/NPFitted.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.FittedGrid.cont_mono",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPFitted.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.FittedGrid.cont_add_const",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPFitted.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.FittedGrid.cont_le_norm",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPFitted.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.FittedGrid.bddAbove_obj",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPFitted.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.FittedGrid.np_fitted_contraction",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPFitted.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.FittedGrid.np_fitted_converges",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPFitted.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.np_linWeights",
+      "kind": "def",
+      "module": "NumericalMethods/NPFitted.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.np_linWeights_averager",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPFitted.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.np_fittedGridExample",
+      "kind": "def",
+      "module": "NumericalMethods/NPFitted.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.np_fittedGridExample_contraction",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPFitted.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.np_approx",
+      "kind": "def",
+      "module": "NumericalMethods/NPProjection.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.np_residual",
+      "kind": "def",
+      "module": "NumericalMethods/NPProjection.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.np_proj",
+      "kind": "def",
+      "module": "NumericalMethods/NPProjection.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.np_quadIP",
+      "kind": "def",
+      "module": "NumericalMethods/NPProjection.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.np_collocDir",
+      "kind": "def",
+      "module": "NumericalMethods/NPProjection.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.np_momentDir",
+      "kind": "def",
+      "module": "NumericalMethods/NPProjection.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.np_collocation_proj",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPProjection.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.np_collocation_iff",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPProjection.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.np_collocation_integral_degenerate",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPProjection.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.np_ls_hasFDerivAt",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPProjection.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.np_ls_foc",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPProjection.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.np_ls_affine_iff",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPProjection.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.np_ls_not_sufficient",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPProjection.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.np_galerkin_iff_orthogonal",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPProjection.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.np_galerkin_iff_ls",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPProjection.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.np_quadrature_proj_eq",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPProjection.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.np_quadrature_proj_congr",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPProjection.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.np_quadrature_iff_collocation",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPProjection.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.np_moments_iff_collocation",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPProjection.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.np_galerkin_quadrature_iff_collocation",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPProjection.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.np_regression_iff_interpolation",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPProjection.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.np_chebNode",
+      "kind": "def",
+      "module": "NumericalMethods/NPChebyshev.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.np_footnote7_chebyshev",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPChebyshev.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.np_footnote7_counterexample",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPChebyshev.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.np_cheb_sum_T",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPChebyshev.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.np_cheb_not_dvd",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPChebyshev.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.np_cheb_discrete_orth",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPChebyshev.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.np_cheb_basis_det_ne_zero",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPChebyshev.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.np_cheb_regression_iff_collocation",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPChebyshev.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.np_cheb_galerkin_iff_collocation",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPChebyshev.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.np_cheb_tensor_orthogonal",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPChebyshev.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.np_growthI",
+      "kind": "def",
+      "module": "NumericalMethods/NPGrowthProjection.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.np_growthF",
+      "kind": "def",
+      "module": "NumericalMethods/NPGrowthProjection.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.np_growthF_iff_euler",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPGrowthProjection.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.np_crra_inverse",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPGrowthProjection.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.np_gaussHermite_change",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPGrowthProjection.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.np_growth_residual_eq_F",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPGrowthProjection.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.np_ar1_stationary_variance",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPGrowthProjection.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.np_z_bounds",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPGrowthProjection.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.np_normalize_mem_Icc",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPGrowthProjection.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.np_envelope",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPEuler.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.eq_11_8",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPEuler.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.np_ex3U",
+      "kind": "def",
+      "module": "NumericalMethods/NPEuler.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.np_ex3F",
+      "kind": "def",
+      "module": "NumericalMethods/NPEuler.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.np_ex3X",
+      "kind": "def",
+      "module": "NumericalMethods/NPEuler.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.np_ex3X_pos",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPEuler.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.ex_11_3_UC",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPEuler.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.ex_11_3_FK",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPEuler.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.ex_11_3_FN",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPEuler.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.ex_11_3_total_N",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPEuler.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.ex_11_3_euler",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPEuler.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.ex_11_3_steady_state",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPEuler.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.np_irreversible_kkt",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPPEA.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.eq_11_14_envelope",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPPEA.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.eq_11_14_pos",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPPEA.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.np_pea_kkt",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPPEA.lean"
+    },
+    {
+      "name": "Miao.NumericalMethods.NP.np_pea_kkt_unique",
+      "kind": "theorem",
+      "module": "NumericalMethods/NPPEA.lean"
+    }
+  ],
+  "full_build": "passed",
+  "fresh_source_compilation": "passed",
+  "fresh_source_lint_options": [
+    "-Dlinter.mathlibStandardSet=true",
+    "-Dlinter.style.header=false"
+  ],
+  "axioms": {
+    "Miao.NumericalMethods.nqQuad": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.nqIsGaussRule": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.nq_quad_exact_of_moments": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.nq_gauss_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.nq_gauss_not_exact_two_mul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.nq_gauss_weights_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.nq_gauss_probability": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.nq_legendre_change_of_variables": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.nq_legendre_interval_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.nq_legendre_one_point": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.nq_legendre_two_point": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.nq_integral_Ioi_shift": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.nq_laguerre_present_value": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.nqProdQuad": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.nq_prodQuad_prod": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.nq_prod_gauss_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.nq_prodQuad_card": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.nqChebNode": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.nq_chebyshev_substitution": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.nq_chebyshev_integrableOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.nq_integral_cos_nat_mul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.nq_cheb_sum_cos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.nq_chebyshev_T_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.nq_chebyshev_exact_theta": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.nq_chebyshev_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.nq_chebyshev_isGaussRule": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.nq_normal_expectation_hermite": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.nq_normal_expectation_gauss_hermite": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.nq_integral_odd_eq_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.nq_integrable_pow_mul_exp_neg_sq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.nq_integral_exp_neg_sq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.nq_integral_sq_mul_exp_neg_sq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.nq_hermite_one_point": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.nq_hermite_two_point": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.nq_ar1_mean_fixed": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.nq_ar1_variance_fixed": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.nq_ar1_stationary_law": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.nqTauchenGrid": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.nq_tauchen_grid_first": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.nq_tauchen_grid_last": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.nq_tauchen_grid_step": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.nq_tauchen_grid_symm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.nqTauchenCut": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.nq_tauchen_cut_midpoint": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.nq_tauchen_cut_monotone": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.nq_tauchen_printed_I2_upper": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.nq_tauchen_printed_IN_lower": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.nqCell": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.nq_cell_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.nq_cell_measurable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.nq_cells_sum_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.nqTauchenProb": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.nq_tauchen_law": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.nq_tauchen_prob_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.nq_tauchen_stochastic": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.nqCondDens": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.nq_th_ratio": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.nq_th_change_of_measure": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.nq_th_conditional_expectation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.nqTHTilde": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.nq_th_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.nq_th_rowsum_integral": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.nq_th_rowsum_lt_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.nq_normalize_stochastic": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.nq_th_normalized_stochastic": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.nq_sim_interval_volume": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.nq_sim_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.nqCertEquiv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.nqQ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.eq_11_4": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.eq_11_5": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.nq_pert_taylor_first_order": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.nq_h_hasDerivAt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.nq_h'_hasDerivAt_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.eq_11_7_s": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.eq_11_7": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.nq_Q_hasDerivAt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.nqShock": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.nq_gauss_exp_integral": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.nq_shock_exp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.eq_11_6_mgf": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.eq_11_6": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.nq_gauss_tilt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.nq_gauss_quad": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.nqTilt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.nq_ex_11_2_tilt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.nq_ex_11_2_Q": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.nq_ex_11_2_a": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.nq_ex_11_2_b": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.nq_ex_11_2_match": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ex_11_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_IsWeightingFunction": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_inner": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_Orthogonal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_wnorm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.definition_11_3_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_inner_comm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_inner_add_left": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_inner_smul_left": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_inner_self_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_inner_sq_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_inner_self_not_homogeneous": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_wnorm_smul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_wnorm_add_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_fhat": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_interpMatrix": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_interp_eq_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_ssr": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_normal_equations": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_leastSquares_optimal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_leastSquares_eq_interp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_monomial": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_monomial_interpMatrix": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_monomial_interp_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_monomial_interp_existsUnique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_poly_interp_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_monomials_not_orthogonal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_iteratedDeriv_eval": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_poly_parts": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_legendreGen": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_legendre": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_legendre_eval_eq_iteratedDeriv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_legendre_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_legendre_natDegree_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_legendreGen_iterate_root": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_legendre_parts": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_legendre_orthogonal_low": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_legendre_orthogonal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_affine_maps_Icc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_legendre_shifted_orthogonal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_integrableOn_pow_mul_exp_neg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_integrableOn_poly_mul_exp_neg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_tendsto_poly_mul_exp_neg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_lagOp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_hasDerivAt_poly_mul_exp_neg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_iteratedDeriv_poly_mul_exp_neg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_laguerre": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_laguerre_eval_eq_rodrigues": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_laguerre_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_lagOp_natDegree_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_laguerre_natDegree_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_laguerre_weight": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_integral_lagOp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_lagOp_iterate_eval_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_laguerre_parts": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_laguerre_orthogonal_low": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_laguerre_orthogonal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_integrable_pow_mul_exp_neg_sq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_integrable_poly_mul_exp_neg_sq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_tendsto_pow_mul_exp_neg_sq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_tendsto_poly_mul_exp_neg_sq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_hermOp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_hasDerivAt_poly_mul_exp_neg_sq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_iteratedDeriv_poly_mul_exp_neg_sq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_hermite": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_hermite_eval_eq_rodrigues": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_hermite_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_hermOp_natDegree_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_hermite_natDegree_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_hermite_weight": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_integral_hermOp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_hermite_parts": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_hermite_orthogonal_low": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_hermite_orthogonal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_cheb_recursion": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_cheb_cos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_cheb_arccos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_chebWeight": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_chebWeight_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_chebWeight_isWeighting": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_inner_cheb_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_cheb_orthogonal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_cheb_norms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_chebNode": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_chebNode_succ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_cheb_roots": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_chebNode_injOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_cheb_extrema_value": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_cheb_extrema_injOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_cheb_abs_le_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_cheb_not_locally_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_cheb_localExtr_value": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_cheb_localMax_eq_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_cheb_localMin_eq_neg_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_cheb_isLocalExtrOn_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_cheb_discrete_orthogonality": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_sum_fin_succ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_chebPhi": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_chebGramDiag": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_chebPhi_gram": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_chebGramDiag_ne_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_chebGram_isUnit": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_chebData": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_chebCoeff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_chebCoeff_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_chebCoeff_eq_ratio": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_chebInterpolant": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_chebInterpolant_nodes": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_chebTruncation_bound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_chebInterp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_chebInterp_spec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_chebInterp_eq_coeff_form": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_lebesgueFn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_lebesgue_inequality": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_supNorm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_Theorem_11_3_1_bound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.theorem_11_3_1_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_chebAngle": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_chebAngle_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_cheb_deriv_cos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_cheb_deriv_node": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_basis_mul_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_sin_le_two_sin_half": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_basis_abs_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_harmonic_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_harmonic_sum_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_lebesgueFn_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_cheb_expand": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_dirPoly": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_fejPoly": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_jackPoly": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_jackK": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_dir": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_fej": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_dirPoly_eval": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_fejPoly_eval": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_jackK_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_jackK_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_jackK_continuous": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_jackK_even": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_jackK_periodic": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_jackPoly_natDegree": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_dir_identity": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_fej_identity": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_fej_abs_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_fej_ge": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_one_sub_cos_ge": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_fej_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_jackK_mass_ge": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_jackK_moment_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_conv_poly": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_jacksonC": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_jacksonC_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_jackson_lipschitz": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_le_supNorm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_supNorm_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_supNorm_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_antideriv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_antideriv_derivative": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_antideriv_natDegree": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_jackson_Ck": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.theorem_11_3_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_IsSpline": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_spline_two_piecewise_linear": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_node_interval": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_affine_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_linear_spline_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_slope": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_linSpline": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_linSpline_piece": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_linear_spline_exists": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_cub": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_cub1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_cub2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_cub3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_hasDerivAt_cub": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_hasDerivAt_cub1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_hasDerivAt_cub2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_cubic_condition_count": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_piece": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_CubicInterp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_CubicSmooth": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_splineL": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_splineTarget": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_splineL_eq_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_spline_existsUnique_of_homogeneous": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_cub_taylor": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_moment": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_moment_facts": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_moments_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_moment_interior": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_naturalE": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_natural_homogeneous": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_natural_spline_existsUnique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_clampedE": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_clamped_homogeneous": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_clamped_spline_existsUnique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_notAKnotE": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_notAKnot_row": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_notAKnot_end": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_notAKnot_homogeneous": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_notAKnot_spline_existsUnique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_notAKnot_not_unique_two": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_ppForm_exists": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_Bdeg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_bspline": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_bspline_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_bspline_recursion": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_Bdeg_support": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_bspline_support": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_Bdeg_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_bspline_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_Bdeg_zero_on": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_Bdeg_piecewise_poly": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_bspline_piecewise_poly": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_bform_piecewise_poly": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_bookKnots": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_bookKnots_monotone": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_bookKnots_breaks": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_bspline_two": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_bspline_two_book_formula_false": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_tensorMatrix": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_tensorBasis": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_tensor_interpMatrix": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_tensorMatrix_mul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_tensorMatrix_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_tensor_inverse": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_tensor_coeff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_tensor_card": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_tensor_example_\u03a6\u2081": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_tensor_example_\u03a6\u2082": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_tensor_example_basis": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_tensor_example_X": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_tensor_example_\u03a6": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_tensor_example_invertible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ex_11_1_f1_not_differentiable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ex_11_1_f1_continuous": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ex_11_1_f2_smooth": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_uniformGrid": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_uniformGrid_strictMono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_uniformGrid_ends": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ex_11_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_prod_odd_ge": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_prod_dist_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_uniform_basis_lower": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_uniform_lebesgue_lower": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_uniformGrid_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_uniformInterp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_uniformInterp_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_uniformInterp_eq_interpolate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_linSpline_abs_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_uniformInterp_norm_ge": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.ni_uniform_interp_not_convergent": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.IsMarkov": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.IsMarkov.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.IsMarkov.nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.IsMarkov.rowsum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.IsDistribution": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.IsDistribution.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.IsDistribution.nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.IsDistribution.sum_eq_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.mulVec_apply_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.IsMarkov.mul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.IsMarkov.pow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.IsMarkov.mulVec_le_mulVec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.IsMarkov.mulVec_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.IsMarkov.abs_mulVec_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.IsMarkov.norm_mulVec_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.IsMarkov.abs_mulVec_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.GloballyStable": [
+      "propext",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.IsContractionOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.IsContractionOn.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.IsContractionOn.mapsTo": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.IsContractionOn.nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.IsContractionOn.lt_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.IsContractionOn.norm_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.IsContractionOn.fixedPt_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.IsContractionOn.iterate_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.IsContractionOn.norm_iterate_sub_fixedPt_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.IsContractionOn.tendsto_iterate_fixedPt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.IsContractionOn.exists_fixedPt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.IsContractionOn.globallyStable_univ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.fixedPt_le_of_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.le_fixedPt_of_le_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.isContractionOn_of_blackwell": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.abs_sup'_sub_sup'_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.MDP": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.MDP.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.MDP.\u0393": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.MDP.\u0393_nonempty": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.MDP.\u03b2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.MDP.\u03b2_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.MDP.\u03b2_lt_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.MDP.r": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.MDP.P": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.MDP.P_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.MDP.P_rowsum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.MDP.Feasible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.MDP.IsFeasible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.MDP.Policy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.MDP.defaultPolicy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.MDP.policy_nonempty": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.MDP.isDistribution_P": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.MDP.P\u03c3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.MDP.P\u03c3_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.MDP.isMarkov_P\u03c3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.MDP.r\u03c3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.MDP.B": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.MDP.T\u03c3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.MDP.T\u03c3_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.MDP.T\u03c3_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.MDP.T\u03c3_monotone": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.MDP.abs_T\u03c3_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.MDP.isContractionOn_T\u03c3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.MDP.v\u03c3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.MDP.isFixedPt_v\u03c3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.MDP.eq_v\u03c3_of_isFixedPt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.MDP.tendsto_iterate_T\u03c3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.MDP.v\u03c3_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.MDP.norm_smul_P\u03c3_mulVec_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.MDP.isUnit_one_sub_smul_P\u03c3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.MDP.v\u03c3_eq_inv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.MDP.norm_pow_smul_mulVec_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.MDP.summable_pow_smul_mulVec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.MDP.iterate_T\u03c3_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.MDP.iterate_T\u03c3_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.MDP.v\u03c3_eq_tsum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.MDP.abs_v\u03c3_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.MDP.T": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.MDP.T_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.MDP.B_le_T": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.MDP.T\u03c3_le_T": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.MDP.B_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.MDP.T_monotone": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.MDP.abs_B_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.MDP.isContractionOn_T": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.MDP.IsGreedy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.MDP.greedy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.MDP.greedy_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.MDP.isGreedy_greedy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.MDP.greedyPolicy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.MDP.isGreedy_iff_T\u03c3_eq_T": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.MDP.T\u03c3_eq_T_of_isGreedy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.MDP.T_apply_eq_sup'": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.MDP.isGreatest_T": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.MDP.antiGreedy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.MDP.antiGreedy_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.MDP.isLeast_T\u03c3_antiGreedy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.MDP.vstar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.MDP.v\u03c3_le_vstar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.MDP.IsOptimal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.MDP.isFixedPt_T_vstar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.MDP.eq_vstar_of_isFixedPt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.MDP.bellman_equation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.MDP.tendsto_iterate_T": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.MDP.norm_iterate_T_sub_vstar_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.MDP.globallyStable_T": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.MDP.isOptimal_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.MDP.isOptimal_iff_isGreedy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.MDP.isOptimal_greedy_vstar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.MDP.exists_isOptimal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.MDP.subgradient_of_isGreedy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.MDP.newton_step_eq_v\u03c3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.MDP.v\u03c3_le_v\u03c3_of_isGreedy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.MDP.isOptimal_of_hpi_fixed": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.MDP.opi_one_step_eq_vfi": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.MDP.tendsto_opi_inner": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.np_residual_bound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.np_residual_zero_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.np_vfi_aposteriori": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.np_fixedPt_perturbation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.MDP.np_horizonValue": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.MDP.np_horizonValue_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.MDP.np_iterate_T_zero_eq_max": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.MDP.np_hpi": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.MDP.np_hpi_feasible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.MDP.np_hpi_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.MDP.np_hpi_terminates": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.GrowthGrid": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.GrowthGrid.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.GrowthGrid.kgrid": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.GrowthGrid.sgrid": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.GrowthGrid.pz": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.GrowthGrid.pz_markov": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.GrowthGrid.u": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.GrowthGrid.f": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.GrowthGrid.\u03b2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.GrowthGrid.\u03b2_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.GrowthGrid.\u03b2_lt_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.GrowthGrid.reward": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.GrowthGrid.trans": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.GrowthGrid.trans_rowsum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.GrowthGrid.trans_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.GrowthGrid.toMDP": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.GrowthGrid.toMDP_\u03b2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.GrowthGrid.isFeasible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.GrowthGrid.B_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.GrowthGrid.eq_11_11": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.GrowthGrid.np_bellman_contraction": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.GrowthGrid.eq_11_10": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.GrowthGrid.eq_11_10_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.GrowthGrid.np_vfi_tendsto": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.GrowthGrid.np_vfi_geometric": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.GrowthGrid.np_vfi_backward_induction": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.GrowthGrid.eq_11_12": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.GrowthGrid.eq_11_12_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.GrowthGrid.eq_11_12_inv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.GrowthGrid.np_pfi_improvement": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.GrowthGrid.np_pfi_stop_policy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.GrowthGrid.np_pfi_stop_value": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.GrowthGrid.np_vstar_ge": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.GrowthGrid.np_pfi_terminates": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.GrowthGrid.np_pfi_newton": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.GrowthGrid.np_value_projection": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.GrowthGrid.np_mpi": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.np_growthGridExample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.np_growthGridExample_vstar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.FittedGrid": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.FittedGrid.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.FittedGrid.kmin": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.FittedGrid.kmax": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.FittedGrid.kmin_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.FittedGrid.kgrid": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.FittedGrid.sgrid": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.FittedGrid.pz": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.FittedGrid.pz_markov": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.FittedGrid.u": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.FittedGrid.f": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.FittedGrid.\u03b2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.FittedGrid.\u03b2_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.FittedGrid.\u03b2_lt_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.FittedGrid.wt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.FittedGrid.wt_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.FittedGrid.wt_sum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.FittedGrid.u_bdd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.FittedGrid.cont": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.FittedGrid.obj": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.FittedGrid.fittedBellman": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.FittedGrid.cont_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.FittedGrid.cont_add_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.FittedGrid.cont_le_norm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.FittedGrid.bddAbove_obj": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.FittedGrid.np_fitted_contraction": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.FittedGrid.np_fitted_converges": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.np_linWeights": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.np_linWeights_averager": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.np_fittedGridExample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.np_fittedGridExample_contraction": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.np_approx": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.np_residual": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.np_proj": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.np_quadIP": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.np_collocDir": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.np_momentDir": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.np_collocation_proj": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.np_collocation_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.np_collocation_integral_degenerate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.np_ls_hasFDerivAt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.np_ls_foc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.np_ls_affine_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.np_ls_not_sufficient": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.np_galerkin_iff_orthogonal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.np_galerkin_iff_ls": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.np_quadrature_proj_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.np_quadrature_proj_congr": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.np_quadrature_iff_collocation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.np_moments_iff_collocation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.np_galerkin_quadrature_iff_collocation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.np_regression_iff_interpolation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.np_chebNode": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.np_footnote7_chebyshev": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.np_footnote7_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.np_cheb_sum_T": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.np_cheb_not_dvd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.np_cheb_discrete_orth": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.np_cheb_basis_det_ne_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.np_cheb_regression_iff_collocation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.np_cheb_galerkin_iff_collocation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.np_cheb_tensor_orthogonal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.np_growthI": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.np_growthF": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.np_growthF_iff_euler": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.np_crra_inverse": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.np_gaussHermite_change": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.np_growth_residual_eq_F": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.np_ar1_stationary_variance": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.np_z_bounds": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.np_normalize_mem_Icc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.np_envelope": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.eq_11_8": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.np_ex3U": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.np_ex3F": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.np_ex3X": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.np_ex3X_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.ex_11_3_UC": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.ex_11_3_FK": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.ex_11_3_FN": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.ex_11_3_total_N": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.ex_11_3_euler": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.ex_11_3_steady_state": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.np_irreversible_kkt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.eq_11_14_envelope": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.eq_11_14_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.np_pea_kkt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.NumericalMethods.NP.np_pea_kkt_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  "source_sha256": {
+    "NumericalMethods/NQQuadrature.lean": "3b99a5d5972d438ac095cf65615a41276544d7ace3e0a36ab310bc09f22d07e5",
+    "NumericalMethods/NQChebyshev.lean": "979145dc3f161d9fd32d485d50a4c90b10cf5404ad45732dfa0a8390e0a0192d",
+    "NumericalMethods/NQHermite.lean": "1eeb4235def525ce96610e735bf946acecfce10b47cc1ddf98a0ced9be5f0afd",
+    "NumericalMethods/NQAR1.lean": "b2d0fe7ba518bb1fd4ebe747e70bef1cf9c785a7cb7dd05b411075a3f9fbdb7d",
+    "NumericalMethods/NQPerturbation.lean": "5bb07439d43f444366b7b068828333a598378cc85c461c27f30b9f75ab7acf8f",
+    "NumericalMethods/NQPerturbationExercise.lean": "62775e668eeadcb069af8d6c24309f881848d3c516901f2ec65acf474a7d6a12",
+    "NumericalMethods/NIWeighted.lean": "2a9a09fe478f2065c1cc96a720b24edcfda2bde5e9976fea4317359db056c06d",
+    "NumericalMethods/NIInterpolation.lean": "159fd106e16a2416624b33b94776e96cdbfb9046877046dbfed0988f60072812",
+    "NumericalMethods/NILegendre.lean": "21a7b7384bd08853154d766d441def65598e2e0c91fe5b1353aaf6bfe20b8ab2",
+    "NumericalMethods/NILaguerre.lean": "85b95ccaeb1a452f81f2252a437ef150faa5fbd9f564289f80089044a0a408cd",
+    "NumericalMethods/NIHermite.lean": "4c0e341ab228697770a44f24d5e4e314cfa3799fe5a978182963dd299e4fcef8",
+    "NumericalMethods/NIChebyshev.lean": "c9e2272b2acb738723a12d12e07fddc73f364a5551eef479edff19941d724525",
+    "NumericalMethods/NIChebInterp.lean": "81ac251d6bb2c88527c1d97a2ff2d86139398c79bbfbd006d751a0c81e5fccf0",
+    "NumericalMethods/NILebesgue.lean": "b6b49e4115247c945a5b839595915d3d48db544177eddd95debd788e2eca25e4",
+    "NumericalMethods/NIJackson.lean": "01914c8434c93076fa2a9032439bf3df856e49fa82ace93213f75b47357ad61b",
+    "NumericalMethods/NIJacksonApprox.lean": "eaaf638090c33dbb2f158c5d0c2f4484b58acf5abe4ef9714bf4bd599aeb7830",
+    "NumericalMethods/NIChebThm.lean": "25b4db453279f995e8f1d64cabb499652f1829cb587149454bfd2aec4b112b15",
+    "NumericalMethods/NISplines.lean": "520d1d9eec9182f6115c35cc90126276b287d084ae10adcb7137d36d30870729",
+    "NumericalMethods/NICubicSpline.lean": "84443613d1a122cdc5d7c55390530f210e61fd6f58ee0689e07b298648d75bd2",
+    "NumericalMethods/NIBSplines.lean": "b52ac03b59f0bb41a2bae2fb893f42b41cbf4fc0d7630185b02fe622ce0e2d7f",
+    "NumericalMethods/NITensor.lean": "1303d45c5ad9a20eddf2f0daba7aa7dff88ecd51137eb99a164f09b442066e93",
+    "NumericalMethods/NIExercise1.lean": "9f07d6d4b648269de840a17a2adc87b5e1b02dec19fa0a974e4d4a7ce64675ff",
+    "NumericalMethods/NIRunge.lean": "6acc093b0b3132fa62595fbd26bec1cffd5b5313086d2e51e1bede86c8043b73",
+    "NumericalMethods/NPBasics.lean": "3408e0f2eb55e066a17893c838d7a29a769a85eac73edd1efb847ec3340a7c0d",
+    "NumericalMethods/NPMDP.lean": "005f74d3457a48ced58bbb8eb87ed45296a894342aeec92ad4c72d179a6580b7",
+    "NumericalMethods/NPBellman.lean": "7f8af8aed8f7d605721790a092394d28ab4eca0fdb5c2d4bbd28e9ba512be6d1",
+    "NumericalMethods/NPDiscreteDP.lean": "18f46441e8d20a3f8b08d065011b4b99b2d37d5c57689c2ef37fef39e51cbb62",
+    "NumericalMethods/NPFitted.lean": "19193e85eab45ef79b873a29306796ab5b65f1169de7888ec2da22f4b091e500",
+    "NumericalMethods/NPProjection.lean": "a9d6f4fb856b6b7456b18782c5b2d414eeb0ee0ecab3b51f098e79ab1872655c",
+    "NumericalMethods/NPChebyshev.lean": "8ea36fa25a297e515e020b6451ef12b93cd34af37831ada52711cd16c03bd38e",
+    "NumericalMethods/NPGrowthProjection.lean": "6618ca78e46447f4a7b6110a876e2eed2ddca178ba39fc33db138f31ede820b6",
+    "NumericalMethods/NPEuler.lean": "d21d0da3323f4dd475b7ec09101e7c3956e99eeea77ae017196a9a9fc68f6d0f",
+    "NumericalMethods/NPPEA.lean": "2fd0b9bf5daffdacf0504c6b65fd4f36981f5bd4dcb2b44c8b091152431d5b3d",
+    "NumericalMethods.lean": "deea418e856cdf2e276b2d97f9ca27e7501cb5c5f5ffbdfb02dda0c46fb19b07",
+    "lean-toolchain": "8733782dc070a99b312039cda424f601b80f3be6f6f512627da5ba25adc27632",
+    "lakefile.toml": "6f8d3530380d5c1135664635d7cd9779755bc7f172f2b6e1e06cfafa84b23fa4",
+    "lake-manifest.json": "bf02c045d4d697ff497e2bf38c29e3aeb4ed67077f415be5ed7dddfc57b37eb4",
+    "proof-manifest.json": "1fd1cc5741551ebf0104ec7da6f8c62ed8ee58f1cc1addedf92e504f2a5d12fb",
+    "scripts/verify.py": "a70b1fa704dd590f937f8b37682afa88a9d85a9150065acb935c7d2c9589da3b",
+    "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  },
+  "fresh_audit_sha256": "0dab66fa8da4576e58411d9028ecd34c8b501bbb2b1e65e2851688c9b9837f75",
+  "lean_toolchain": "leanprover/lean4:v4.34.0",
+  "scope": "Miao Chapter 11 (pp. 347-384), the theorems: Gaussian quadrature and its exactness, Tauchen and Tauchen-Hussey discretisation, orthogonal polynomials and the Chebyshev interpolation theorem (Theorem 11.3.1), splines and tensor products, perturbation, projection methods, numerical dynamic programming (value and policy iteration, fitted value iteration, PEA), and the mathematical content of Exercises 1-3.",
+  "source": "Jianjun Miao, Economic Dynamics in Discrete Time, MIT Press 2014 (draft of 21 April 2013), Chapter 11"
+}

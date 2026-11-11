@@ -1,0 +1,6226 @@
+{
+  "checked_at_utc": "2026-11-10T01:47:30.177089+00:00",
+  "theorems": 427,
+  "module_theorems": {
+    "CompleteMarkets/POEventTree.lean": 14,
+    "CompleteMarkets/POPareto.lean": 21,
+    "CompleteMarkets/POTimeZero.lean": 30,
+    "CompleteMarkets/POExercises.lean": 4,
+    "CompleteMarkets/RDTree.lean": 39,
+    "CompleteMarkets/RDSecurities.lean": 19,
+    "CompleteMarkets/RDStiemke.lean": 3,
+    "CompleteMarkets/RDStatePrices.lean": 17,
+    "CompleteMarkets/RDComplete.lean": 15,
+    "CompleteMarkets/RDRadner.lean": 28,
+    "CompleteMarkets/RDEuler.lean": 14,
+    "CompleteMarkets/RDEx134.lean": 16,
+    "CompleteMarkets/RDImpatience.lean": 6,
+    "CompleteMarkets/RDEquivalence.lean": 7,
+    "CompleteMarkets/RDCounter.lean": 14,
+    "CompleteMarkets/RDExample.lean": 22,
+    "CompleteMarkets/BPTree.lean": 31,
+    "CompleteMarkets/BPBubbles.lean": 13,
+    "CompleteMarkets/BPNoBubble.lean": 11,
+    "CompleteMarkets/BPKocherlakota2008.lean": 5,
+    "CompleteMarkets/BPDeterministic.lean": 10,
+    "CompleteMarkets/BPKocherlakota.lean": 25,
+    "CompleteMarkets/BPWerner.lean": 10,
+    "CompleteMarkets/BPRecursive.lean": 3,
+    "CompleteMarkets/BPAssetPricing.lean": 30,
+    "CompleteMarkets/BPLognormal.lean": 16,
+    "CompleteMarkets/BPExpUtility.lean": 4
+  },
+  "audited_declarations": 615,
+  "declarations": [
+    {
+      "name": "Miao.CompleteMarkets.POProb",
+      "kind": "structure",
+      "module": "CompleteMarkets/POEventTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.POProb.mk",
+      "kind": "constructor",
+      "module": "CompleteMarkets/POEventTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.POProb.pr",
+      "kind": "projection",
+      "module": "CompleteMarkets/POEventTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.POProb.nonneg",
+      "kind": "projection",
+      "module": "CompleteMarkets/POEventTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.POProb.root",
+      "kind": "projection",
+      "module": "CompleteMarkets/POEventTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.POProb.consistent",
+      "kind": "projection",
+      "module": "CompleteMarkets/POEventTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.po_unique_predecessor",
+      "kind": "theorem",
+      "module": "CompleteMarkets/POEventTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.po_successor",
+      "kind": "theorem",
+      "module": "CompleteMarkets/POEventTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.po_sum_continuations",
+      "kind": "theorem",
+      "module": "CompleteMarkets/POEventTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.po_sum_pr_time",
+      "kind": "theorem",
+      "module": "CompleteMarkets/POEventTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.po_condPr",
+      "kind": "def",
+      "module": "CompleteMarkets/POEventTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.po_condPr_sum",
+      "kind": "theorem",
+      "module": "CompleteMarkets/POEventTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.po_condPr_root",
+      "kind": "theorem",
+      "module": "CompleteMarkets/POEventTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.po_iid",
+      "kind": "def",
+      "module": "CompleteMarkets/POEventTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.po_Linfty",
+      "kind": "def",
+      "module": "CompleteMarkets/POEventTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.po_L1",
+      "kind": "def",
+      "module": "CompleteMarkets/POEventTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.po_Lplus",
+      "kind": "def",
+      "module": "CompleteMarkets/POEventTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.po_Lplus_subset_Linfty",
+      "kind": "theorem",
+      "module": "CompleteMarkets/POEventTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.POEconomy",
+      "kind": "structure",
+      "module": "CompleteMarkets/POEventTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.POEconomy.mk",
+      "kind": "constructor",
+      "module": "CompleteMarkets/POEventTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.POEconomy.\u03b2",
+      "kind": "projection",
+      "module": "CompleteMarkets/POEventTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.POEconomy.\u03b2_pos",
+      "kind": "projection",
+      "module": "CompleteMarkets/POEventTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.POEconomy.\u03b2_lt_one",
+      "kind": "projection",
+      "module": "CompleteMarkets/POEventTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.POEconomy.P",
+      "kind": "projection",
+      "module": "CompleteMarkets/POEventTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.POEconomy.u",
+      "kind": "projection",
+      "module": "CompleteMarkets/POEventTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.POEconomy.u_mono",
+      "kind": "projection",
+      "module": "CompleteMarkets/POEventTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.po_w",
+      "kind": "def",
+      "module": "CompleteMarkets/POEventTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.po_U",
+      "kind": "def",
+      "module": "CompleteMarkets/POEventTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.po_w_nonneg",
+      "kind": "theorem",
+      "module": "CompleteMarkets/POEventTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.po_w_root",
+      "kind": "theorem",
+      "module": "CompleteMarkets/POEventTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.po_sum_w_time",
+      "kind": "theorem",
+      "module": "CompleteMarkets/POEventTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.po_summable_w",
+      "kind": "theorem",
+      "module": "CompleteMarkets/POEventTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.eq_13_1",
+      "kind": "theorem",
+      "module": "CompleteMarkets/POEventTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.Assumption13_1_1",
+      "kind": "def",
+      "module": "CompleteMarkets/POEventTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.assumption_13_1_1_sqrt",
+      "kind": "theorem",
+      "module": "CompleteMarkets/POEventTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.po_coin",
+      "kind": "def",
+      "module": "CompleteMarkets/POEventTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.po_exampleEconomy",
+      "kind": "def",
+      "module": "CompleteMarkets/POEventTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.po_exampleEconomy_assumption",
+      "kind": "theorem",
+      "module": "CompleteMarkets/POEventTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.po_Feasible",
+      "kind": "def",
+      "module": "CompleteMarkets/POPareto.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.po_ParetoOptimal",
+      "kind": "def",
+      "module": "CompleteMarkets/POPareto.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.po_SolvesPlanner",
+      "kind": "def",
+      "module": "CompleteMarkets/POPareto.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.po_tsum_update",
+      "kind": "theorem",
+      "module": "CompleteMarkets/POPareto.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.po_update_mem",
+      "kind": "theorem",
+      "module": "CompleteMarkets/POPareto.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.po_U_update",
+      "kind": "theorem",
+      "module": "CompleteMarkets/POPareto.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.po_perturb",
+      "kind": "def",
+      "module": "CompleteMarkets/POPareto.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.po_perturb_feasible",
+      "kind": "theorem",
+      "module": "CompleteMarkets/POPareto.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.po_Lplus_comb",
+      "kind": "theorem",
+      "module": "CompleteMarkets/POPareto.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.po_U_concave",
+      "kind": "theorem",
+      "module": "CompleteMarkets/POPareto.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.po_U_mono",
+      "kind": "theorem",
+      "module": "CompleteMarkets/POPareto.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.po_planner_improvement",
+      "kind": "theorem",
+      "module": "CompleteMarkets/POPareto.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.po_pareto_of_planner_pos",
+      "kind": "theorem",
+      "module": "CompleteMarkets/POPareto.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.po_transfer_improvement",
+      "kind": "theorem",
+      "module": "CompleteMarkets/POPareto.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.po_planner_of_pareto",
+      "kind": "theorem",
+      "module": "CompleteMarkets/POPareto.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.proposition_13_2_1",
+      "kind": "theorem",
+      "module": "CompleteMarkets/POPareto.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.po_planner_foc",
+      "kind": "theorem",
+      "module": "CompleteMarkets/POPareto.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.po_planner_foc_ratio",
+      "kind": "theorem",
+      "module": "CompleteMarkets/POPareto.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.eq_13_3",
+      "kind": "theorem",
+      "module": "CompleteMarkets/POPareto.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.eq_13_4",
+      "kind": "theorem",
+      "module": "CompleteMarkets/POPareto.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.po_differentiableAt",
+      "kind": "theorem",
+      "module": "CompleteMarkets/POPareto.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.po_strictAntiOn_deriv",
+      "kind": "theorem",
+      "module": "CompleteMarkets/POPareto.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.po_risk_sharing",
+      "kind": "theorem",
+      "module": "CompleteMarkets/POPareto.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.po_consumption_fn_aggregate",
+      "kind": "theorem",
+      "module": "CompleteMarkets/POPareto.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.po_no_history_dependence",
+      "kind": "theorem",
+      "module": "CompleteMarkets/POPareto.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.po_cost",
+      "kind": "def",
+      "module": "CompleteMarkets/POTimeZero.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.eq_13_5",
+      "kind": "theorem",
+      "module": "CompleteMarkets/POTimeZero.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.po_ADEquilibrium",
+      "kind": "def",
+      "module": "CompleteMarkets/POTimeZero.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.po_cost_update",
+      "kind": "theorem",
+      "module": "CompleteMarkets/POTimeZero.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.po_sum_cost",
+      "kind": "theorem",
+      "module": "CompleteMarkets/POTimeZero.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.po_tangent",
+      "kind": "theorem",
+      "module": "CompleteMarkets/POTimeZero.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.po_deriv_pos",
+      "kind": "theorem",
+      "module": "CompleteMarkets/POTimeZero.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.po_utility_gain_le",
+      "kind": "theorem",
+      "module": "CompleteMarkets/POTimeZero.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.po_optimal_of_foc",
+      "kind": "theorem",
+      "module": "CompleteMarkets/POTimeZero.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.eq_13_6",
+      "kind": "theorem",
+      "module": "CompleteMarkets/POTimeZero.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.eq_13_7",
+      "kind": "theorem",
+      "module": "CompleteMarkets/POTimeZero.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.eq_13_8",
+      "kind": "theorem",
+      "module": "CompleteMarkets/POTimeZero.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.eq_13_9",
+      "kind": "theorem",
+      "module": "CompleteMarkets/POTimeZero.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.eq_13_10",
+      "kind": "theorem",
+      "module": "CompleteMarkets/POTimeZero.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.po_AD_shadow_price",
+      "kind": "theorem",
+      "module": "CompleteMarkets/POTimeZero.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.po_planner_of_foc",
+      "kind": "theorem",
+      "module": "CompleteMarkets/POTimeZero.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.po_AD_solves_planner",
+      "kind": "theorem",
+      "module": "CompleteMarkets/POTimeZero.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.po_crra_hasDerivAt",
+      "kind": "theorem",
+      "module": "CompleteMarkets/POTimeZero.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.example_13_3_1",
+      "kind": "theorem",
+      "module": "CompleteMarkets/POTimeZero.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.example_13_3_1_shares",
+      "kind": "theorem",
+      "module": "CompleteMarkets/POTimeZero.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.po_negishi_scale",
+      "kind": "theorem",
+      "module": "CompleteMarkets/POTimeZero.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.po_negishi_q0",
+      "kind": "theorem",
+      "module": "CompleteMarkets/POTimeZero.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.po_negishi_step3",
+      "kind": "theorem",
+      "module": "CompleteMarkets/POTimeZero.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.po_negishi_fixed_point",
+      "kind": "theorem",
+      "module": "CompleteMarkets/POTimeZero.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.po_local_nonsatiation",
+      "kind": "theorem",
+      "module": "CompleteMarkets/POTimeZero.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.theorem_13_3_1",
+      "kind": "theorem",
+      "module": "CompleteMarkets/POTimeZero.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.po_pareto_foc",
+      "kind": "theorem",
+      "module": "CompleteMarkets/POTimeZero.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.theorem_13_3_2",
+      "kind": "theorem",
+      "module": "CompleteMarkets/POTimeZero.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.theorem_13_3_2_counterexample",
+      "kind": "theorem",
+      "module": "CompleteMarkets/POTimeZero.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.po_assetPrice",
+      "kind": "def",
+      "module": "CompleteMarkets/POTimeZero.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.po_assetPrice_summable",
+      "kind": "theorem",
+      "module": "CompleteMarkets/POTimeZero.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.po_assetPrice_root",
+      "kind": "theorem",
+      "module": "CompleteMarkets/POTimeZero.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.po_assetPrice_eq",
+      "kind": "theorem",
+      "module": "CompleteMarkets/POTimeZero.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.po_repSet",
+      "kind": "def",
+      "module": "CompleteMarkets/POExercises.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.po_Ulam",
+      "kind": "def",
+      "module": "CompleteMarkets/POExercises.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.ex_13_1",
+      "kind": "theorem",
+      "module": "CompleteMarkets/POExercises.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.ex_13_2",
+      "kind": "theorem",
+      "module": "CompleteMarkets/POExercises.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.ex_13_2_converse",
+      "kind": "theorem",
+      "module": "CompleteMarkets/POExercises.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.po_example_ADEquilibrium",
+      "kind": "theorem",
+      "module": "CompleteMarkets/POExercises.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_snoc_injective",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_paths",
+      "kind": "def",
+      "module": "CompleteMarkets/RDTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_mem_paths",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_dsum",
+      "kind": "def",
+      "module": "CompleteMarkets/RDTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_dsum_zero",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_dsum_succ",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_dsum_add_len",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_dsum_succ'",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_dsum_add",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_dsum_sub",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_dsum_neg",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_dsum_const_mul",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_dsum_finsetSum",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_dsum_mono",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_dsum_nonneg",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_dsum_congr",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_abs_dsum_le",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_le_dsum",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_dsum_lt",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_dsum_ite",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_dsum_le_root",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_dsum_subtree",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_dsum_subtree_early",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.RDTree",
+      "kind": "structure",
+      "module": "CompleteMarkets/RDTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.RDTree.mk",
+      "kind": "constructor",
+      "module": "CompleteMarkets/RDTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.RDTree.Pr",
+      "kind": "projection",
+      "module": "CompleteMarkets/RDTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.RDTree.pos",
+      "kind": "projection",
+      "module": "CompleteMarkets/RDTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.RDTree.root",
+      "kind": "projection",
+      "module": "CompleteMarkets/RDTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.RDTree.cons",
+      "kind": "projection",
+      "module": "CompleteMarkets/RDTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_dsum_Pr",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_uniformTree",
+      "kind": "def",
+      "module": "CompleteMarkets/RDTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_condPr",
+      "kind": "def",
+      "module": "CompleteMarkets/RDTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_condPr_sum",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_condE",
+      "kind": "def",
+      "module": "CompleteMarkets/RDTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_condE_root",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_condE_one",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_Bdd",
+      "kind": "def",
+      "module": "CompleteMarkets/RDTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_LinfPos",
+      "kind": "def",
+      "module": "CompleteMarkets/RDTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_L1",
+      "kind": "def",
+      "module": "CompleteMarkets/RDTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_L1_mul_abs",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_L1_mul",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_L1_mul_tendsto",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_bdd_one",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_L1_tendsto",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_bdd_add",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_bdd_neg",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_bdd_sub",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_bdd_const_mul",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_StrictIncr",
+      "kind": "def",
+      "module": "CompleteMarkets/RDTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_Mono",
+      "kind": "def",
+      "module": "CompleteMarkets/RDTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_mono_of_strictIncr",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_EU",
+      "kind": "def",
+      "module": "CompleteMarkets/RDTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_abs_dsum_Pr_le",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_EU_summable",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_abs_u_le",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_eq_13_1",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_fz",
+      "kind": "def",
+      "module": "CompleteMarkets/RDSecurities.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_prev",
+      "kind": "def",
+      "module": "CompleteMarkets/RDSecurities.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_net",
+      "kind": "def",
+      "module": "CompleteMarkets/RDSecurities.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_Budget",
+      "kind": "def",
+      "module": "CompleteMarkets/RDSecurities.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.eq_13_11",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDSecurities.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_budget_iff_net",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDSecurities.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_prev_add",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDSecurities.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_prev_smul",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDSecurities.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_net_add",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDSecurities.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_arrowPayoff",
+      "kind": "def",
+      "module": "CompleteMarkets/RDSecurities.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_arrowIn",
+      "kind": "def",
+      "module": "CompleteMarkets/RDSecurities.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_ArrowBudget",
+      "kind": "def",
+      "module": "CompleteMarkets/RDSecurities.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.eq_13_12",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDSecurities.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_Ponzi",
+      "kind": "def",
+      "module": "CompleteMarkets/RDSecurities.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_Arb",
+      "kind": "def",
+      "module": "CompleteMarkets/RDSecurities.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_ArbOn",
+      "kind": "def",
+      "module": "CompleteMarkets/RDSecurities.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_OneArb",
+      "kind": "def",
+      "module": "CompleteMarkets/RDSecurities.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_OneArbOn",
+      "kind": "def",
+      "module": "CompleteMarkets/RDSecurities.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_ponzi_arb",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDSecurities.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_loc",
+      "kind": "def",
+      "module": "CompleteMarkets/RDSecurities.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_arb_loc",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDSecurities.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_noArb_noOneArb",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDSecurities.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_noArbOn_noOneArbOn",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDSecurities.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_oneArb_converse_fails",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDSecurities.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_ThetaDC",
+      "kind": "def",
+      "module": "CompleteMarkets/RDSecurities.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_ThetaBC",
+      "kind": "def",
+      "module": "CompleteMarkets/RDSecurities.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_ThetaSC",
+      "kind": "def",
+      "module": "CompleteMarkets/RDSecurities.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_Rec",
+      "kind": "def",
+      "module": "CompleteMarkets/RDSecurities.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_nonneg_of_forall_lam",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDSecurities.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_rec_DC",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDSecurities.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_rec_BC",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDSecurities.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_rec_SC",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDSecurities.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_loc_mem_recDC",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDSecurities.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_loc_mem_recBC",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDSecurities.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_SeqFeas",
+      "kind": "def",
+      "module": "CompleteMarkets/RDSecurities.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_Solves",
+      "kind": "def",
+      "module": "CompleteMarkets/RDSecurities.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.theorem_13_4_1",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDSecurities.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.ex_13_3",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDSecurities.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_simplex",
+      "kind": "def",
+      "module": "CompleteMarkets/RDStiemke.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_simplex_convex",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDStiemke.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_simplex_compact",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDStiemke.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_stiemke",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDStiemke.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_StatePrice",
+      "kind": "def",
+      "module": "CompleteMarkets/RDStatePrices.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_statePrice_mul",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDStatePrices.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_statePrice_dot",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDStatePrices.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_qOf",
+      "kind": "def",
+      "module": "CompleteMarkets/RDStatePrices.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_qOf_pos",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDStatePrices.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_statePrice_qOf",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDStatePrices.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_noOneArb_of_statePrice",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDStatePrices.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_arbRow",
+      "kind": "def",
+      "module": "CompleteMarkets/RDStatePrices.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_node_stiemke",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDStatePrices.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.theorem_13_4_2",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDStatePrices.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.theorem_13_4_2_BC_counterexample",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDStatePrices.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.theorem_13_4_2_BC",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDStatePrices.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_statePrice_smul",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDStatePrices.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.eq_13_17_normalize",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDStatePrices.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_deflator",
+      "kind": "def",
+      "module": "CompleteMarkets/RDStatePrices.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_SDF",
+      "kind": "def",
+      "module": "CompleteMarkets/RDStatePrices.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.eq_13_18",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDStatePrices.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_statePrice_not_L1",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDStatePrices.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_SC_no_statePrice",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDStatePrices.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_SC_inequality",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDStatePrices.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_multiperiod_price",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDStatePrices.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_twoPeriodBond",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDStatePrices.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_payoffMatrix",
+      "kind": "def",
+      "module": "CompleteMarkets/RDComplete.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_payoffMatrix_transpose_mulVec",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDComplete.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_payoffMatrix_mulVec",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDComplete.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_rank_iff_span",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDComplete.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_rank_iff_injective",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDComplete.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_CompletePrinted",
+      "kind": "def",
+      "module": "CompleteMarkets/RDComplete.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_Complete",
+      "kind": "def",
+      "module": "CompleteMarkets/RDComplete.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_rollover",
+      "kind": "def",
+      "module": "CompleteMarkets/RDComplete.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_completePrinted_of_pos",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDComplete.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.ex_13_8_printed_if",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDComplete.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.ex_13_8_counterexample",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDComplete.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_backward",
+      "kind": "def",
+      "module": "CompleteMarkets/RDComplete.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.ex_13_8",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDComplete.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_ratio_solves",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDComplete.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_statePrice_unique",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDComplete.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.theorem_13_4_3",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDComplete.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.theorem_13_4_3_formula",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDComplete.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.theorem_13_4_3_counterexample",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDComplete.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_arrow_rank",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDComplete.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_arrow_statePrice",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDComplete.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_SolvesC",
+      "kind": "def",
+      "module": "CompleteMarkets/RDRadner.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_BudgetEq",
+      "kind": "def",
+      "module": "CompleteMarkets/RDRadner.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_RadnerDC",
+      "kind": "def",
+      "module": "CompleteMarkets/RDRadner.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_RadnerBC",
+      "kind": "def",
+      "module": "CompleteMarkets/RDRadner.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_prev_sum",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDRadner.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_goods_clearing",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDRadner.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.definition_13_4_1",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDRadner.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.eq_13_19",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDRadner.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.eq_13_19_E",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDRadner.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.eq_13_20",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDRadner.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_TVC",
+      "kind": "def",
+      "module": "CompleteMarkets/RDRadner.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_AD_of_lowerTail_at",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDRadner.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_AD_of_lowerTail",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDRadner.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.eq_13_22",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDRadner.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.eq_13_23",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDRadner.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_summable_subtree",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDRadner.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_AD_of_BC",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDRadner.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_AD_of_DC",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDRadner.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_ADBudget",
+      "kind": "def",
+      "module": "CompleteMarkets/RDRadner.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_ADEqm",
+      "kind": "def",
+      "module": "CompleteMarkets/RDRadner.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_Feasible",
+      "kind": "def",
+      "module": "CompleteMarkets/RDRadner.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_ParetoOptimal",
+      "kind": "def",
+      "module": "CompleteMarkets/RDRadner.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_tsum_add_root",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDRadner.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_first_welfare",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDRadner.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_CETVC",
+      "kind": "def",
+      "module": "CompleteMarkets/RDRadner.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.definition_13_4_2",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDRadner.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_cetvc_pareto",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDRadner.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_W",
+      "kind": "def",
+      "module": "CompleteMarkets/RDRadner.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_W_rec",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDRadner.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_W_dsum",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDRadner.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_W_tendsto",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDRadner.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_repl",
+      "kind": "def",
+      "module": "CompleteMarkets/RDRadner.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_repl_payoff",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDRadner.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_repl_value",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDRadner.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_repl_budget",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDRadner.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_repl_sum_zero",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDRadner.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_ad_cetvc",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDRadner.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.eq_13_24",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDRadner.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_naturalDebtLimit",
+      "kind": "def",
+      "module": "CompleteMarkets/RDRadner.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_naturalDebt_nonbinding",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDRadner.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_naturalBorrowing",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDRadner.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_net_loc_self",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDEuler.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_net_loc_child",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDEuler.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_net_loc_other",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDEuler.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_net_loc_bdd",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDEuler.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_prev_add_loc",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDEuler.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_EU_pert",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDEuler.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_euler_dir",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDEuler.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_Phi",
+      "kind": "def",
+      "module": "CompleteMarkets/RDEuler.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_Phi_eq",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDEuler.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_Phi_neg",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDEuler.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_euler_eq",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDEuler.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_DC_slack",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDEuler.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_arrow_price",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDEuler.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_arrow_price_common",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDEuler.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_statePrice_of_euler",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDEuler.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_GradIneq",
+      "kind": "def",
+      "module": "CompleteMarkets/RDEx134.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_gradIneq_of_concave",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDEx134.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_sqrt_gradIneq",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDEx134.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_dsum_pow",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDEx134.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_net_sub",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDEx134.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_telescope",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDEx134.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_foc_xi",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDEx134.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_suff_core",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDEx134.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_gain_le",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDEx134.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.ex_13_4_BC_suff",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDEx134.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.ex_13_4_SC_suff",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDEx134.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.ex_13_4_DC_suff",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDEx134.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.ex_13_4_BC_eqm",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDEx134.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_BC_feas",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDEx134.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.ex_13_4_BC_foc",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDEx134.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.ex_13_4_SC_foc",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDEx134.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.ex_13_4_DC_foc",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDEx134.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_impPlan",
+      "kind": "def",
+      "module": "CompleteMarkets/RDImpatience.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_Assumption1351Printed",
+      "kind": "def",
+      "module": "CompleteMarkets/RDImpatience.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_Assumption1351",
+      "kind": "def",
+      "module": "CompleteMarkets/RDImpatience.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_assumption1351_of_printed",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDImpatience.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_tsum_subtree",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDImpatience.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_dsum_pow_at",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDImpatience.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_EU_sub_subtree",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDImpatience.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.assumption_13_5_1",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDImpatience.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.assumption_13_5_1_printed_fails",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDImpatience.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_RadnerBCnb",
+      "kind": "def",
+      "module": "CompleteMarkets/RDEquivalence.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_RadnerDCnb",
+      "kind": "def",
+      "module": "CompleteMarkets/RDEquivalence.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_scaled_plan_le",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDEquivalence.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_impatience_bound",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDEquivalence.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.theorem_13_5_1_if",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDEquivalence.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_budget_binds",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDEquivalence.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_pv_eq",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDEquivalence.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_gradIneq_antitone",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDEquivalence.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.theorem_13_5_1_onlyIf",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDEquivalence.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_mg",
+      "kind": "def",
+      "module": "CompleteMarkets/RDCounter.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_mg_sum",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDCounter.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_dsum_mg",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDCounter.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_mg_true",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDCounter.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_psi",
+      "kind": "def",
+      "module": "CompleteMarkets/RDCounter.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_cx_Pr",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDCounter.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_cxpd",
+      "kind": "def",
+      "module": "CompleteMarkets/RDCounter.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_cxp",
+      "kind": "def",
+      "module": "CompleteMarkets/RDCounter.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_cx_q",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDCounter.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_cx\u03b8",
+      "kind": "def",
+      "module": "CompleteMarkets/RDCounter.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_psi_cost",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDCounter.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_psi_payoff",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDCounter.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_cx_statePrice",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDCounter.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_cx_L1",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDCounter.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_cx_EU",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDCounter.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_cx_budget",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDCounter.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_psi_unbounded",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDCounter.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.theorem_13_5_1_counterexample",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDCounter.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.eq_13_23_counterexample",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDCounter.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_dsum_unit",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDExample.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_exR",
+      "kind": "def",
+      "module": "CompleteMarkets/RDExample.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_ex\u03b6",
+      "kind": "def",
+      "module": "CompleteMarkets/RDExample.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_exR_summable",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDExample.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_exR_succ",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDExample.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_exR_nonneg",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDExample.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_exR_tendsto",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDExample.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_exR_zero",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDExample.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_exqd",
+      "kind": "def",
+      "module": "CompleteMarkets/RDExample.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_exq",
+      "kind": "def",
+      "module": "CompleteMarkets/RDExample.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_exqd_pos",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDExample.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_exqd_succ_le",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDExample.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_exU",
+      "kind": "def",
+      "module": "CompleteMarkets/RDExample.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_exy",
+      "kind": "def",
+      "module": "CompleteMarkets/RDExample.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_exc",
+      "kind": "def",
+      "module": "CompleteMarkets/RDExample.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_exy_pos",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDExample.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_exq_L1",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDExample.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_ex_pv",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDExample.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_ex_pv_y1",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDExample.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_ex_pv_y2",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDExample.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.example_13_5_1_AD",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDExample.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_exp",
+      "kind": "def",
+      "module": "CompleteMarkets/RDExample.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.example_13_5_1_prices",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDExample.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_ex\u03b8",
+      "kind": "def",
+      "module": "CompleteMarkets/RDExample.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_ex_value",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDExample.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.rd_ex_budget",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDExample.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.example_13_5_1_TVC",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDExample.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.example_13_5_1_CETVC",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDExample.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.example_13_5_1_unlimited",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDExample.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.example_13_5_1_not_Radner",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDExample.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.example_13_5_1_patience",
+      "kind": "theorem",
+      "module": "CompleteMarkets/RDExample.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.BPTree",
+      "kind": "structure",
+      "module": "CompleteMarkets/BPTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.BPTree.mk",
+      "kind": "constructor",
+      "module": "CompleteMarkets/BPTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.BPTree.pr",
+      "kind": "projection",
+      "module": "CompleteMarkets/BPTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.BPTree.pr_pos",
+      "kind": "projection",
+      "module": "CompleteMarkets/BPTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.BPTree.pr_nil",
+      "kind": "projection",
+      "module": "CompleteMarkets/BPTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.BPTree.pr_cons",
+      "kind": "projection",
+      "module": "CompleteMarkets/BPTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_nodeSum",
+      "kind": "def",
+      "module": "CompleteMarkets/BPTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_condExp",
+      "kind": "def",
+      "module": "CompleteMarkets/BPTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_pv",
+      "kind": "def",
+      "module": "CompleteMarkets/BPTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_nodeSum_zero",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_nodeSum_succ",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_nodeSum_congr",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_nodeSum_add",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_nodeSum_smul",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_nodeSum_neg",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_nodeSum_sub",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_nodeSum_finsetSum",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_nodeSum_const",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_nodeSum_mono",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_nodeSum_nonneg",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_nodeSum_eq_zero_iff",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_nodeSum_single",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_condExp_zero",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_condExp_succ",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_condExp_add",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_condExp_congr",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_condExp_add_fun",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_condExp_smul",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_condExp_sub_fun",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_condExp_const",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_condExp_mono",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_condExp_nonneg",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_condExp_finsetSum",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_nodeSum_condExp",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_condExp_root",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_pv_add",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_pv_mono",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_pv_nonneg",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_pv_finsetSum",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_markovPr",
+      "kind": "def",
+      "module": "CompleteMarkets/BPTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_markovTree",
+      "kind": "def",
+      "module": "CompleteMarkets/BPTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.eq_13_7_markov",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_detTree",
+      "kind": "def",
+      "module": "CompleteMarkets/BPTree.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_Prices",
+      "kind": "def",
+      "module": "CompleteMarkets/BPBubbles.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_fundamental",
+      "kind": "def",
+      "module": "CompleteMarkets/BPBubbles.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_bubble",
+      "kind": "def",
+      "module": "CompleteMarkets/BPBubbles.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_forward_mul",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPBubbles.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.eq_13_6_forward",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPBubbles.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_summable_dividends",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPBubbles.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_mul_fundamental",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPBubbles.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.eq_13_6_bubble_limit",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPBubbles.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.eq_13_6_bubble_bounds",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPBubbles.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.eq_13_6_bubble_pos_counterexample",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPBubbles.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_fundamental_prices",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPBubbles.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.eq_13_25",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPBubbles.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.eq_13_25_iterate",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPBubbles.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_bubble_eq_zero_of_root",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPBubbles.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_condExp_congr_length",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPBubbles.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_no_bubble_finite_maturity",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPBubbles.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.BPRadnerEqm",
+      "kind": "structure",
+      "module": "CompleteMarkets/BPNoBubble.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.BPRadnerEqm.mk",
+      "kind": "constructor",
+      "module": "CompleteMarkets/BPNoBubble.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.BPRadnerEqm.cons_nonneg",
+      "kind": "projection",
+      "module": "CompleteMarkets/BPNoBubble.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.BPRadnerEqm.budget_root",
+      "kind": "projection",
+      "module": "CompleteMarkets/BPNoBubble.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.BPRadnerEqm.budget_succ",
+      "kind": "projection",
+      "module": "CompleteMarkets/BPNoBubble.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.BPRadnerEqm.debt",
+      "kind": "projection",
+      "module": "CompleteMarkets/BPNoBubble.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.BPRadnerEqm.clear_assets",
+      "kind": "projection",
+      "module": "CompleteMarkets/BPNoBubble.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.BPRadnerEqm.clear_goods_root",
+      "kind": "projection",
+      "module": "CompleteMarkets/BPNoBubble.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.BPRadnerEqm.clear_goods_succ",
+      "kind": "projection",
+      "module": "CompleteMarkets/BPNoBubble.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_pr_mul_condExp_one",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPNoBubble.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_nodeSum_succ_mono",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPNoBubble.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_pv_payoff",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPNoBubble.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_eq_13_20",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPNoBubble.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_pv_price_root",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPNoBubble.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_summable_pv_of_le",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPNoBubble.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.eq_13_26",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPNoBubble.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.eq_13_27",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPNoBubble.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_exists_agent_slack",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPNoBubble.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.theorem_13_6_1",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPNoBubble.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.theorem_13_6_1_instance",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPNoBubble.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_k08Budget",
+      "kind": "def",
+      "module": "CompleteMarkets/BPKocherlakota2008.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_k08U",
+      "kind": "def",
+      "module": "CompleteMarkets/BPKocherlakota2008.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_k08_martingale",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPKocherlakota2008.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_k08_geom",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPKocherlakota2008.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.ex_13_7_prices",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPKocherlakota2008.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.ex_13_7_bubble",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPKocherlakota2008.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.ex_13_7",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPKocherlakota2008.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_detBudget",
+      "kind": "def",
+      "module": "CompleteMarkets/BPDeterministic.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.BPDetEqm",
+      "kind": "structure",
+      "module": "CompleteMarkets/BPDeterministic.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.BPDetEqm.mk",
+      "kind": "constructor",
+      "module": "CompleteMarkets/BPDeterministic.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.BPDetEqm.budget",
+      "kind": "projection",
+      "module": "CompleteMarkets/BPDeterministic.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.BPDetEqm.adm_self",
+      "kind": "projection",
+      "module": "CompleteMarkets/BPDeterministic.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.BPDetEqm.optimal",
+      "kind": "projection",
+      "module": "CompleteMarkets/BPDeterministic.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.BPDetEqm.clear_assets",
+      "kind": "projection",
+      "module": "CompleteMarkets/BPDeterministic.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.BPDetEqm.clear_goods",
+      "kind": "projection",
+      "module": "CompleteMarkets/BPDeterministic.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_detU",
+      "kind": "def",
+      "module": "CompleteMarkets/BPDeterministic.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_detAdm",
+      "kind": "def",
+      "module": "CompleteMarkets/BPDeterministic.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_tail",
+      "kind": "def",
+      "module": "CompleteMarkets/BPDeterministic.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_tail_succ",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPDeterministic.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_sum_add_tail",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPDeterministic.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_tail_tendsto",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPDeterministic.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_tail_nonneg",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPDeterministic.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_det_partial",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPDeterministic.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_det_sufficiency",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPDeterministic.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_log_supergradient",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPDeterministic.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_rpow_sub_one_div_le",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPDeterministic.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_crra_supergradient",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPDeterministic.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_crra_mono",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPDeterministic.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_natLimit",
+      "kind": "def",
+      "module": "CompleteMarkets/BPKocherlakota.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_borrowCon",
+      "kind": "def",
+      "module": "CompleteMarkets/BPKocherlakota.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_crra",
+      "kind": "def",
+      "module": "CompleteMarkets/BPKocherlakota.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_payoff_eq",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPKocherlakota.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_budget_transfer",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPKocherlakota.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_ex1361_price",
+      "kind": "def",
+      "module": "CompleteMarkets/BPKocherlakota.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_ex1361_hold",
+      "kind": "def",
+      "module": "CompleteMarkets/BPKocherlakota.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_ex1361_price_pos",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPKocherlakota.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.example_13_6_1_prices",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPKocherlakota.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_ex1361_value",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPKocherlakota.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.example_13_6_1",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPKocherlakota.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.example_13_6_1_tvc",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPKocherlakota.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.example_13_6_1_bubble",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPKocherlakota.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_k5_Y",
+      "kind": "def",
+      "module": "CompleteMarkets/BPKocherlakota.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_k5_defl",
+      "kind": "def",
+      "module": "CompleteMarkets/BPKocherlakota.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_k5_price",
+      "kind": "def",
+      "module": "CompleteMarkets/BPKocherlakota.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_k5_wealth",
+      "kind": "def",
+      "module": "CompleteMarkets/BPKocherlakota.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_k5_share",
+      "kind": "def",
+      "module": "CompleteMarkets/BPKocherlakota.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_k5_cons",
+      "kind": "def",
+      "module": "CompleteMarkets/BPKocherlakota.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_k5_value",
+      "kind": "def",
+      "module": "CompleteMarkets/BPKocherlakota.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_k5_hold",
+      "kind": "def",
+      "module": "CompleteMarkets/BPKocherlakota.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_k5_Y_pos",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPKocherlakota.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_k5_defl_pos",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPKocherlakota.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_k5_defl_zero",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPKocherlakota.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_k5_marginal",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPKocherlakota.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_k5_prices",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPKocherlakota.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_k5_summable_y",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPKocherlakota.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_k5_pv_pos",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPKocherlakota.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_k5_share_sum",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPKocherlakota.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_k5_pv_cons",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPKocherlakota.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_k5_value_tail",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPKocherlakota.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.ex_13_5",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPKocherlakota.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.ex_13_5_continuum",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPKocherlakota.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.ex_13_5_share_counterexample",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPKocherlakota.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.ex_13_6",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPKocherlakota.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.ex_13_6_formulas",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPKocherlakota.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.ex_13_6_autarky",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPKocherlakota.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_detParetoOptimal",
+      "kind": "def",
+      "module": "CompleteMarkets/BPKocherlakota.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.ex_13_6_pareto",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPKocherlakota.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_alt",
+      "kind": "def",
+      "module": "CompleteMarkets/BPWerner.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_werner_eta",
+      "kind": "def",
+      "module": "CompleteMarkets/BPWerner.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_werner_y",
+      "kind": "def",
+      "module": "CompleteMarkets/BPWerner.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_werner_c",
+      "kind": "def",
+      "module": "CompleteMarkets/BPWerner.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_werner_\u03b8",
+      "kind": "def",
+      "module": "CompleteMarkets/BPWerner.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_werner_eta_facts",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPWerner.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_werner_optimal",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPWerner.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_werner_adm",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPWerner.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_alt_succ",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPWerner.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.example_13_6_2",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPWerner.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.example_13_6_2_prices",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPWerner.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.example_13_6_2_binds",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPWerner.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.example_13_6_2_tvc",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPWerner.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.example_13_6_2_tvc_21_fails",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPWerner.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.example_13_6_2_autarky",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPWerner.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_rceFeasible",
+      "kind": "def",
+      "module": "CompleteMarkets/BPRecursive.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_rceObj",
+      "kind": "def",
+      "module": "CompleteMarkets/BPRecursive.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.BPRCE",
+      "kind": "structure",
+      "module": "CompleteMarkets/BPRecursive.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.BPRCE.mk",
+      "kind": "constructor",
+      "module": "CompleteMarkets/BPRecursive.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.BPRCE.feasible",
+      "kind": "projection",
+      "module": "CompleteMarkets/BPRecursive.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.BPRCE.value",
+      "kind": "projection",
+      "module": "CompleteMarkets/BPRecursive.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.BPRCE.optimal",
+      "kind": "projection",
+      "module": "CompleteMarkets/BPRecursive.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.BPRCE.clear_goods",
+      "kind": "projection",
+      "module": "CompleteMarkets/BPRecursive.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.BPRCE.clear_assets",
+      "kind": "projection",
+      "module": "CompleteMarkets/BPRecursive.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.BPRCE.invariant",
+      "kind": "projection",
+      "module": "CompleteMarkets/BPRecursive.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.BPRCE.consistent",
+      "kind": "projection",
+      "module": "CompleteMarkets/BPRecursive.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_rce_walras",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPRecursive.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_rce_aggregate_wealth",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPRecursive.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.definition_13_7_1_instance",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPRecursive.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_E",
+      "kind": "def",
+      "module": "CompleteMarkets/BPAssetPricing.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_Cov",
+      "kind": "def",
+      "module": "CompleteMarkets/BPAssetPricing.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_Var",
+      "kind": "def",
+      "module": "CompleteMarkets/BPAssetPricing.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_sd",
+      "kind": "def",
+      "module": "CompleteMarkets/BPAssetPricing.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_E_add",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPAssetPricing.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_E_sub",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPAssetPricing.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_E_mul_left",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPAssetPricing.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_E_const",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPAssetPricing.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_E_finsetSum",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPAssetPricing.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_Cov_eq_dev",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPAssetPricing.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_Cov_comm",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPAssetPricing.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_Cov_affine_left",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPAssetPricing.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_Cov_sub_const",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPAssetPricing.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_Cov_sum_left",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPAssetPricing.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_Var_nonneg",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPAssetPricing.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_Cov_sq_le",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPAssetPricing.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_cov_ge_neg_sd",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPAssetPricing.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.eq_13_30",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPAssetPricing.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_riskfree",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPAssetPricing.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_excess",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPAssetPricing.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.eq_13_31",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPAssetPricing.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_hansen_jagannathan",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPAssetPricing.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_capm_market",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPAssetPricing.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_capm_asset",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPAssetPricing.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_capm",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPAssetPricing.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_half",
+      "kind": "def",
+      "module": "CompleteMarkets/BPAssetPricing.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_capm_book_beta_counterexample",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPAssetPricing.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.eq_13_32_cov",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPAssetPricing.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_factor_pricing",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPAssetPricing.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_ccapm_euler",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPAssetPricing.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_ccapm_sdf",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPAssetPricing.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.ex_13_9_wealth",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPAssetPricing.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.ex_13_9_sdf",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPAssetPricing.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.ex_13_9_capm_two_states",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPAssetPricing.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_third",
+      "kind": "def",
+      "module": "CompleteMarkets/BPAssetPricing.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.ex_13_9_capm_counterexample",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPAssetPricing.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_integrable_id_gaussian",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPLognormal.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_integral_exp_gaussian",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPLognormal.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_mean_gaussian",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPLognormal.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_var_gaussian",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPLognormal.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_memLp_gaussian",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPLognormal.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_euler_gaussian",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPLognormal.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.eq_13_33",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPLognormal.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.eq_13_34",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPLognormal.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_ccapm_log_sdf",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPLognormal.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_ccapm_m_law",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPLognormal.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.eq_13_35",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPLognormal.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_rf",
+      "kind": "def",
+      "module": "CompleteMarkets/BPLognormal.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.eq_13_35_beta",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPLognormal.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.eq_13_35_growth",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPLognormal.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.eq_13_35_risk",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPLognormal.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.eq_13_36",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPLognormal.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.eq_13_36_counterexample",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPLognormal.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_integrableExpSet_gaussian",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPExpUtility.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.bp_gaussian_stein",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPExpUtility.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.ex_13_10_pricing",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPExpUtility.lean"
+    },
+    {
+      "name": "Miao.CompleteMarkets.ex_13_10_capm",
+      "kind": "theorem",
+      "module": "CompleteMarkets/BPExpUtility.lean"
+    }
+  ],
+  "full_build": "passed",
+  "fresh_source_compilation": "passed",
+  "fresh_source_lint_options": [
+    "-Dlinter.mathlibStandardSet=true",
+    "-Dlinter.style.header=false"
+  ],
+  "axioms": {
+    "Miao.CompleteMarkets.POProb": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.POProb.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.POProb.pr": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.POProb.nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.POProb.root": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.POProb.consistent": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.po_unique_predecessor": [
+      "propext"
+    ],
+    "Miao.CompleteMarkets.po_successor": [],
+    "Miao.CompleteMarkets.po_sum_continuations": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.po_sum_pr_time": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.po_condPr": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.po_condPr_sum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.po_condPr_root": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.po_iid": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.po_Linfty": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.po_L1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.po_Lplus": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.po_Lplus_subset_Linfty": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.POEconomy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.POEconomy.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.POEconomy.\u03b2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.POEconomy.\u03b2_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.POEconomy.\u03b2_lt_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.POEconomy.P": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.POEconomy.u": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.POEconomy.u_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.po_w": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.po_U": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.po_w_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.po_w_root": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.po_sum_w_time": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.po_summable_w": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.eq_13_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.Assumption13_1_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.assumption_13_1_1_sqrt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.po_coin": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.po_exampleEconomy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.po_exampleEconomy_assumption": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.po_Feasible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.po_ParetoOptimal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.po_SolvesPlanner": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.po_tsum_update": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.po_update_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.po_U_update": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.po_perturb": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.po_perturb_feasible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.po_Lplus_comb": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.po_U_concave": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.po_U_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.po_planner_improvement": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.po_pareto_of_planner_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.po_transfer_improvement": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.po_planner_of_pareto": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.proposition_13_2_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.po_planner_foc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.po_planner_foc_ratio": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.eq_13_3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.eq_13_4": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.po_differentiableAt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.po_strictAntiOn_deriv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.po_risk_sharing": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.po_consumption_fn_aggregate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.po_no_history_dependence": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.po_cost": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.eq_13_5": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.po_ADEquilibrium": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.po_cost_update": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.po_sum_cost": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.po_tangent": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.po_deriv_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.po_utility_gain_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.po_optimal_of_foc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.eq_13_6": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.eq_13_7": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.eq_13_8": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.eq_13_9": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.eq_13_10": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.po_AD_shadow_price": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.po_planner_of_foc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.po_AD_solves_planner": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.po_crra_hasDerivAt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.example_13_3_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.example_13_3_1_shares": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.po_negishi_scale": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.po_negishi_q0": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.po_negishi_step3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.po_negishi_fixed_point": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.po_local_nonsatiation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.theorem_13_3_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.po_pareto_foc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.theorem_13_3_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.theorem_13_3_2_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.po_assetPrice": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.po_assetPrice_summable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.po_assetPrice_root": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.po_assetPrice_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.po_repSet": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.po_Ulam": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.ex_13_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.ex_13_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.ex_13_2_converse": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.po_example_ADEquilibrium": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_snoc_injective": [
+      "propext"
+    ],
+    "Miao.CompleteMarkets.rd_paths": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_mem_paths": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_dsum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_dsum_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_dsum_succ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_dsum_add_len": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_dsum_succ'": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_dsum_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_dsum_sub": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_dsum_neg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_dsum_const_mul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_dsum_finsetSum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_dsum_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_dsum_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_dsum_congr": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_abs_dsum_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_le_dsum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_dsum_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_dsum_ite": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_dsum_le_root": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_dsum_subtree": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_dsum_subtree_early": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.RDTree": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.RDTree.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.RDTree.Pr": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.RDTree.pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.RDTree.root": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.RDTree.cons": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_dsum_Pr": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_uniformTree": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_condPr": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_condPr_sum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_condE": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_condE_root": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_condE_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_Bdd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_LinfPos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_L1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_L1_mul_abs": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_L1_mul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_L1_mul_tendsto": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_bdd_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_L1_tendsto": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_bdd_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_bdd_neg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_bdd_sub": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_bdd_const_mul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_StrictIncr": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_Mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_mono_of_strictIncr": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_EU": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_abs_dsum_Pr_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_EU_summable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_abs_u_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_eq_13_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_fz": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_prev": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_net": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_Budget": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.eq_13_11": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_budget_iff_net": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_prev_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_prev_smul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_net_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_arrowPayoff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_arrowIn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_ArrowBudget": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.eq_13_12": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_Ponzi": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_Arb": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_ArbOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_OneArb": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_OneArbOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_ponzi_arb": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_loc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_arb_loc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_noArb_noOneArb": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_noArbOn_noOneArbOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_oneArb_converse_fails": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_ThetaDC": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_ThetaBC": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_ThetaSC": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_Rec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_nonneg_of_forall_lam": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_rec_DC": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_rec_BC": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_rec_SC": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_loc_mem_recDC": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_loc_mem_recBC": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_SeqFeas": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_Solves": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.theorem_13_4_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.ex_13_3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_simplex": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_simplex_convex": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_simplex_compact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_stiemke": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_StatePrice": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_statePrice_mul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_statePrice_dot": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_qOf": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_qOf_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_statePrice_qOf": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_noOneArb_of_statePrice": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_arbRow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_node_stiemke": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.theorem_13_4_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.theorem_13_4_2_BC_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.theorem_13_4_2_BC": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_statePrice_smul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.eq_13_17_normalize": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_deflator": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_SDF": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.eq_13_18": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_statePrice_not_L1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_SC_no_statePrice": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_SC_inequality": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_multiperiod_price": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_twoPeriodBond": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_payoffMatrix": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_payoffMatrix_transpose_mulVec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_payoffMatrix_mulVec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_rank_iff_span": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_rank_iff_injective": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_CompletePrinted": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_Complete": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_rollover": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_completePrinted_of_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.ex_13_8_printed_if": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.ex_13_8_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_backward": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.ex_13_8": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_ratio_solves": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_statePrice_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.theorem_13_4_3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.theorem_13_4_3_formula": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.theorem_13_4_3_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_arrow_rank": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_arrow_statePrice": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_SolvesC": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_BudgetEq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_RadnerDC": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_RadnerBC": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_prev_sum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_goods_clearing": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.definition_13_4_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.eq_13_19": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.eq_13_19_E": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.eq_13_20": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_TVC": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_AD_of_lowerTail_at": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_AD_of_lowerTail": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.eq_13_22": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.eq_13_23": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_summable_subtree": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_AD_of_BC": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_AD_of_DC": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_ADBudget": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_ADEqm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_Feasible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_ParetoOptimal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_tsum_add_root": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_first_welfare": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_CETVC": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.definition_13_4_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_cetvc_pareto": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_W": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_W_rec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_W_dsum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_W_tendsto": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_repl": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_repl_payoff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_repl_value": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_repl_budget": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_repl_sum_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_ad_cetvc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.eq_13_24": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_naturalDebtLimit": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_naturalDebt_nonbinding": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_naturalBorrowing": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_net_loc_self": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_net_loc_child": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_net_loc_other": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_net_loc_bdd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_prev_add_loc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_EU_pert": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_euler_dir": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_Phi": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_Phi_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_Phi_neg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_euler_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_DC_slack": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_arrow_price": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_arrow_price_common": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_statePrice_of_euler": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_GradIneq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_gradIneq_of_concave": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_sqrt_gradIneq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_dsum_pow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_net_sub": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_telescope": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_foc_xi": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_suff_core": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_gain_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.ex_13_4_BC_suff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.ex_13_4_SC_suff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.ex_13_4_DC_suff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.ex_13_4_BC_eqm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_BC_feas": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.ex_13_4_BC_foc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.ex_13_4_SC_foc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.ex_13_4_DC_foc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_impPlan": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_Assumption1351Printed": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_Assumption1351": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_assumption1351_of_printed": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_tsum_subtree": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_dsum_pow_at": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_EU_sub_subtree": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.assumption_13_5_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.assumption_13_5_1_printed_fails": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_RadnerBCnb": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_RadnerDCnb": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_scaled_plan_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_impatience_bound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.theorem_13_5_1_if": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_budget_binds": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_pv_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_gradIneq_antitone": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.theorem_13_5_1_onlyIf": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_mg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_mg_sum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_dsum_mg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_mg_true": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_psi": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_cx_Pr": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_cxpd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_cxp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_cx_q": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_cx\u03b8": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_psi_cost": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_psi_payoff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_cx_statePrice": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_cx_L1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_cx_EU": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_cx_budget": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_psi_unbounded": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.theorem_13_5_1_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.eq_13_23_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_dsum_unit": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_exR": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_ex\u03b6": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_exR_summable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_exR_succ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_exR_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_exR_tendsto": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_exR_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_exqd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_exq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_exqd_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_exqd_succ_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_exU": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_exy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_exc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_exy_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_exq_L1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_ex_pv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_ex_pv_y1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_ex_pv_y2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.example_13_5_1_AD": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_exp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.example_13_5_1_prices": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_ex\u03b8": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_ex_value": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.rd_ex_budget": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.example_13_5_1_TVC": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.example_13_5_1_CETVC": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.example_13_5_1_unlimited": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.example_13_5_1_not_Radner": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.example_13_5_1_patience": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.BPTree": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.BPTree.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.BPTree.pr": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.BPTree.pr_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.BPTree.pr_nil": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.BPTree.pr_cons": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_nodeSum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_condExp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_pv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_nodeSum_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_nodeSum_succ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_nodeSum_congr": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_nodeSum_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_nodeSum_smul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_nodeSum_neg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_nodeSum_sub": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_nodeSum_finsetSum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_nodeSum_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_nodeSum_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_nodeSum_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_nodeSum_eq_zero_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_nodeSum_single": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_condExp_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_condExp_succ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_condExp_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_condExp_congr": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_condExp_add_fun": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_condExp_smul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_condExp_sub_fun": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_condExp_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_condExp_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_condExp_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_condExp_finsetSum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_nodeSum_condExp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_condExp_root": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_pv_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_pv_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_pv_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_pv_finsetSum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_markovPr": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_markovTree": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.eq_13_7_markov": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_detTree": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_Prices": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_fundamental": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_bubble": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_forward_mul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.eq_13_6_forward": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_summable_dividends": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_mul_fundamental": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.eq_13_6_bubble_limit": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.eq_13_6_bubble_bounds": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.eq_13_6_bubble_pos_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_fundamental_prices": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.eq_13_25": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.eq_13_25_iterate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_bubble_eq_zero_of_root": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_condExp_congr_length": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_no_bubble_finite_maturity": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.BPRadnerEqm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.BPRadnerEqm.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.BPRadnerEqm.cons_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.BPRadnerEqm.budget_root": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.BPRadnerEqm.budget_succ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.BPRadnerEqm.debt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.BPRadnerEqm.clear_assets": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.BPRadnerEqm.clear_goods_root": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.BPRadnerEqm.clear_goods_succ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_pr_mul_condExp_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_nodeSum_succ_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_pv_payoff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_eq_13_20": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_pv_price_root": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_summable_pv_of_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.eq_13_26": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.eq_13_27": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_exists_agent_slack": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.theorem_13_6_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.theorem_13_6_1_instance": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_k08Budget": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_k08U": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_k08_martingale": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_k08_geom": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.ex_13_7_prices": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.ex_13_7_bubble": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.ex_13_7": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_detBudget": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.BPDetEqm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.BPDetEqm.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.BPDetEqm.budget": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.BPDetEqm.adm_self": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.BPDetEqm.optimal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.BPDetEqm.clear_assets": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.BPDetEqm.clear_goods": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_detU": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_detAdm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_tail": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_tail_succ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_sum_add_tail": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_tail_tendsto": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_tail_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_det_partial": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_det_sufficiency": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_log_supergradient": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_rpow_sub_one_div_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_crra_supergradient": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_crra_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_natLimit": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_borrowCon": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_crra": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_payoff_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_budget_transfer": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_ex1361_price": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_ex1361_hold": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_ex1361_price_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.example_13_6_1_prices": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_ex1361_value": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.example_13_6_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.example_13_6_1_tvc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.example_13_6_1_bubble": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_k5_Y": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_k5_defl": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_k5_price": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_k5_wealth": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_k5_share": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_k5_cons": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_k5_value": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_k5_hold": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_k5_Y_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_k5_defl_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_k5_defl_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_k5_marginal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_k5_prices": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_k5_summable_y": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_k5_pv_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_k5_share_sum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_k5_pv_cons": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_k5_value_tail": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.ex_13_5": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.ex_13_5_continuum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.ex_13_5_share_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.ex_13_6": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.ex_13_6_formulas": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.ex_13_6_autarky": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_detParetoOptimal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.ex_13_6_pareto": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_alt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_werner_eta": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_werner_y": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_werner_c": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_werner_\u03b8": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_werner_eta_facts": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_werner_optimal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_werner_adm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_alt_succ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.example_13_6_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.example_13_6_2_prices": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.example_13_6_2_binds": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.example_13_6_2_tvc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.example_13_6_2_tvc_21_fails": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.example_13_6_2_autarky": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_rceFeasible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_rceObj": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.BPRCE": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.BPRCE.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.BPRCE.feasible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.BPRCE.value": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.BPRCE.optimal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.BPRCE.clear_goods": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.BPRCE.clear_assets": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.BPRCE.invariant": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.BPRCE.consistent": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_rce_walras": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_rce_aggregate_wealth": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.definition_13_7_1_instance": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_E": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_Cov": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_Var": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_sd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_E_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_E_sub": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_E_mul_left": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_E_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_E_finsetSum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_Cov_eq_dev": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_Cov_comm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_Cov_affine_left": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_Cov_sub_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_Cov_sum_left": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_Var_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_Cov_sq_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_cov_ge_neg_sd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.eq_13_30": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_riskfree": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_excess": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.eq_13_31": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_hansen_jagannathan": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_capm_market": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_capm_asset": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_capm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_half": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_capm_book_beta_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.eq_13_32_cov": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_factor_pricing": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_ccapm_euler": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_ccapm_sdf": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.ex_13_9_wealth": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.ex_13_9_sdf": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.ex_13_9_capm_two_states": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_third": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.ex_13_9_capm_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_integrable_id_gaussian": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_integral_exp_gaussian": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_mean_gaussian": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_var_gaussian": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_memLp_gaussian": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_euler_gaussian": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.eq_13_33": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.eq_13_34": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_ccapm_log_sdf": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_ccapm_m_law": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.eq_13_35": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_rf": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.eq_13_35_beta": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.eq_13_35_growth": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.eq_13_35_risk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.eq_13_36": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.eq_13_36_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_integrableExpSet_gaussian": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.bp_gaussian_stein": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.ex_13_10_pricing": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.CompleteMarkets.ex_13_10_capm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  "source_sha256": {
+    "CompleteMarkets/POEventTree.lean": "d6379a98b9dba5b07e005db286a7c012fe52231dd51b0ee01a91c42f35379302",
+    "CompleteMarkets/POPareto.lean": "2a0a7e1ab5d959a1f43bc00a9e1234b15879d11e784cede293b1b7c845b77f5a",
+    "CompleteMarkets/POTimeZero.lean": "5e3773c601f7dd0c029e6d92d911b7345d3fd5676cb28e7b175dff081188e8cf",
+    "CompleteMarkets/POExercises.lean": "cbbd50fa45f7d91a4c802568ab8006a513ad67156de88f208e4409794e805579",
+    "CompleteMarkets/RDTree.lean": "2e5fb744bba10eda622c8d46af85523c15a61885c7aeba07a124c5b68c1b7fd4",
+    "CompleteMarkets/RDSecurities.lean": "4a08f1bd1db543eba19f90205ee20bfe9cc04cb888b3d8acddc6811af2c5c2d0",
+    "CompleteMarkets/RDStiemke.lean": "3766619d843aa2eaa829e38fc60170b677bf2cd893ee9d6124ae44b6597fe30f",
+    "CompleteMarkets/RDStatePrices.lean": "9b2f1f7635aa97ced76deabfb41103d00af1edd3bfb1d6b85dfbb7265f623001",
+    "CompleteMarkets/RDComplete.lean": "221a6b3630cc9d37b4142a07fc4e45e65604282d52bbe446818e7e10100257ff",
+    "CompleteMarkets/RDRadner.lean": "abbfbab986671454b69da578c590c320f5060bf79f18adbbab8496cc1c17df1f",
+    "CompleteMarkets/RDEuler.lean": "f5bcb7b65c64dee5b01b334999dcc2fc3dd4797440ca12c30e95b2de33b4cca2",
+    "CompleteMarkets/RDEx134.lean": "af8e4485f11cafa47c48f80cfbb98c5b08226cd5b0e6e66624d52ed3a440e6b4",
+    "CompleteMarkets/RDImpatience.lean": "261b29528a0ff37c5f2903b7e76da8615546a1e9e636bf3ce9cff158d96d2cb8",
+    "CompleteMarkets/RDEquivalence.lean": "140088beed9f9a899bfd5914fe05dc0904504c0ff6b294c545f629dbbd230c6f",
+    "CompleteMarkets/RDCounter.lean": "aaeffcc4aadb331724d4fffa81fe244c2a7152907353e3743915ac85b7830965",
+    "CompleteMarkets/RDExample.lean": "3ca0d5ee41ae5d83c96be1faaec111a7beb9fbb4698e5ca274f6e2d21f1b5646",
+    "CompleteMarkets/BPTree.lean": "faa42243fb3d0e114179868dc099595a14265ef28fa855d82b35aa8dad01f08f",
+    "CompleteMarkets/BPBubbles.lean": "5b9be2576f9259c47ecc9c391f96d721f88f353a949c714b8f8b86868436867e",
+    "CompleteMarkets/BPNoBubble.lean": "e69108cec845d60bc9c47b719f91da8e473b3e70c428522781c8bd376e0d0ac6",
+    "CompleteMarkets/BPKocherlakota2008.lean": "ebd78b025b52efb91ab859758d3e3fc43b137a9baa7ee7ec69499b0581cbc60a",
+    "CompleteMarkets/BPDeterministic.lean": "4a8e0e3dca95ece07b9a659350ed30a3f3d0abc2d7d3f5f372e3d52eeb534ef2",
+    "CompleteMarkets/BPKocherlakota.lean": "ce32fffaf44b069069a30216b6e21072bae405bdcaf90118a7820050ab537714",
+    "CompleteMarkets/BPWerner.lean": "1ff686a4acb1358c585656774ef6e06581e90375a71ab226d30e1ce0cf1abd2b",
+    "CompleteMarkets/BPRecursive.lean": "bd589b251eeb0467a00091a82d919002bd9d17c6996d3dfd50cc28887f205395",
+    "CompleteMarkets/BPAssetPricing.lean": "9b8b2f08175f1faba75d2dc03cc001eecc43fff9ac1be7e334fbb4d1585ab903",
+    "CompleteMarkets/BPLognormal.lean": "edd7d9be53a46c158622cf3d399dd0e966a7e9fd095a1618b8bbdeb3902c5b1c",
+    "CompleteMarkets/BPExpUtility.lean": "7bd2f0434ea3ed690773b40bb900ac5ae47ac3c7f6a3350959ccd659729d3f72",
+    "CompleteMarkets.lean": "d2d0a4b9a1146d64b9e55f0b10e6cc7121ee8e654230ddac15f64419b1376226",
+    "lean-toolchain": "8733782dc070a99b312039cda424f601b80f3be6f6f512627da5ba25adc27632",
+    "lakefile.toml": "b129861717aac6c37c310f8d744ecaa4159e09248eedabe2054a533a4fc17ecc",
+    "lake-manifest.json": "bf02c045d4d697ff497e2bf38c29e3aeb4ed67077f415be5ed7dddfc57b37eb4",
+    "proof-manifest.json": "347e88b6f45081014948f8603fb5be0c6c02154fb54efd6d16dd44f8b0e07390",
+    "scripts/verify.py": "a70b1fa704dd590f937f8b37682afa88a9d85a9150065acb935c7d2c9589da3b",
+    "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  },
+  "fresh_audit_sha256": "3faf78f34139658f049866eddcfeae2991a8739b761c1f153d92377e33e01b3e",
+  "lean_toolchain": "leanprover/lean4:v4.34.0",
+  "scope": "Miao Chapter 13 (pp. 415-454): the event tree and Assumption 13.1.1, Pareto optima (Proposition 13.2.1), Arrow-Debreu equilibrium and the welfare theorems (Theorems 13.3.1-13.3.2), Radner equilibrium with debt constraints, no-arbitrage and state prices, complete markets (Theorems 13.4.1-13.4.3), equivalence of equilibria (Theorem 13.5.1), asset price bubbles (Theorem 13.6.1, Kocherlakota and Werner examples), recursive equilibrium, asset pricing (Hansen-Jagannathan, CAPM, CCAPM), and Exercises 1-10.",
+  "source": "Jianjun Miao, Economic Dynamics in Discrete Time, MIT Press 2014 (draft of 21 April 2013), Chapter 13"
+}

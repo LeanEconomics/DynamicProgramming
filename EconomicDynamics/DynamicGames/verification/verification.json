@@ -1,0 +1,4597 @@
+{
+  "checked_at_utc": "2026-11-11T01:45:53.279234+00:00",
+  "theorems": 306,
+  "module_theorems": {
+    "DynamicGames/RGStageGame.lean": 19,
+    "DynamicGames/RGOneShot.lean": 9,
+    "DynamicGames/RGPayoffSet.lean": 10,
+    "DynamicGames/RGPrisoners.lean": 7,
+    "DynamicGames/RGMaximal.lean": 14,
+    "DynamicGames/RGCompact.lean": 6,
+    "DynamicGames/RGComputation.lean": 11,
+    "DynamicGames/RGSimple.lean": 21,
+    "DynamicGames/DGPublicMonitoring.lean": 25,
+    "DynamicGames/DGNoisyPD.lean": 14,
+    "DynamicGames/DGStochasticGames.lean": 10,
+    "DynamicGames/DGFishProblem.lean": 15,
+    "DynamicGames/DGFishWar.lean": 18,
+    "DynamicGames/CGOnePeriod.lean": 9,
+    "DynamicGames/CGRepeated.lean": 29,
+    "DynamicGames/CGRecursive.lean": 11,
+    "DynamicGames/CGValueSet.lean": 18,
+    "DynamicGames/CGBestWorst.lean": 20,
+    "DynamicGames/CGStokeyExample.lean": 20,
+    "DynamicGames/CGBarroGordon.lean": 7,
+    "DynamicGames/CGExercise216.lean": 13
+  },
+  "audited_declarations": 466,
+  "declarations": [
+    {
+      "name": "Miao.DynamicGames.rg_Prof",
+      "kind": "abbrev",
+      "module": "DynamicGames/RGStageGame.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_Hist",
+      "kind": "abbrev",
+      "module": "DynamicGames/RGStageGame.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_Strat",
+      "kind": "abbrev",
+      "module": "DynamicGames/RGStageGame.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_upd",
+      "kind": "def",
+      "module": "DynamicGames/RGStageGame.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_upd_eq",
+      "kind": "theorem",
+      "module": "DynamicGames/RGStageGame.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_upd_self",
+      "kind": "theorem",
+      "module": "DynamicGames/RGStageGame.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_upd_ne",
+      "kind": "theorem",
+      "module": "DynamicGames/RGStageGame.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_upd_eq_self",
+      "kind": "theorem",
+      "module": "DynamicGames/RGStageGame.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_upd_player_eq",
+      "kind": "theorem",
+      "module": "DynamicGames/RGStageGame.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_cont",
+      "kind": "def",
+      "module": "DynamicGames/RGStageGame.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_dev",
+      "kind": "def",
+      "module": "DynamicGames/RGStageGame.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_hist",
+      "kind": "def",
+      "module": "DynamicGames/RGStageGame.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_path",
+      "kind": "def",
+      "module": "DynamicGames/RGStageGame.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_pathPay",
+      "kind": "def",
+      "module": "DynamicGames/RGStageGame.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_U",
+      "kind": "def",
+      "module": "DynamicGames/RGStageGame.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_cont_nil",
+      "kind": "theorem",
+      "module": "DynamicGames/RGStageGame.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_cont_cont",
+      "kind": "theorem",
+      "module": "DynamicGames/RGStageGame.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_cont_dev",
+      "kind": "theorem",
+      "module": "DynamicGames/RGStageGame.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_dev_self",
+      "kind": "theorem",
+      "module": "DynamicGames/RGStageGame.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_hist_cont",
+      "kind": "theorem",
+      "module": "DynamicGames/RGStageGame.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_path_cont",
+      "kind": "theorem",
+      "module": "DynamicGames/RGStageGame.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_summable",
+      "kind": "theorem",
+      "module": "DynamicGames/RGStageGame.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_pathPay_succ",
+      "kind": "theorem",
+      "module": "DynamicGames/RGStageGame.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_pathPay_mem",
+      "kind": "theorem",
+      "module": "DynamicGames/RGStageGame.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_abs_pathPay_le",
+      "kind": "theorem",
+      "module": "DynamicGames/RGStageGame.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_abs_U_le",
+      "kind": "theorem",
+      "module": "DynamicGames/RGStageGame.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_U_rec",
+      "kind": "theorem",
+      "module": "DynamicGames/RGStageGame.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_U_cont_rec",
+      "kind": "theorem",
+      "module": "DynamicGames/RGStageGame.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_U_subgame",
+      "kind": "theorem",
+      "module": "DynamicGames/RGStageGame.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_IsSPE",
+      "kind": "def",
+      "module": "DynamicGames/RGOneShot.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.definition_21_1_1",
+      "kind": "theorem",
+      "module": "DynamicGames/RGOneShot.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_isSPE_cont",
+      "kind": "theorem",
+      "module": "DynamicGames/RGOneShot.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_IsOneShotDev",
+      "kind": "def",
+      "module": "DynamicGames/RGOneShot.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_IsProfitable",
+      "kind": "def",
+      "module": "DynamicGames/RGOneShot.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_oneShot",
+      "kind": "def",
+      "module": "DynamicGames/RGOneShot.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_oneShot_isOneShotDev",
+      "kind": "theorem",
+      "module": "DynamicGames/RGOneShot.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_cont_dev_after",
+      "kind": "theorem",
+      "module": "DynamicGames/RGOneShot.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.definition_21_1_2",
+      "kind": "theorem",
+      "module": "DynamicGames/RGOneShot.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_oneShot_value",
+      "kind": "theorem",
+      "module": "DynamicGames/RGOneShot.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_oneShot_le_of_isSPE",
+      "kind": "theorem",
+      "module": "DynamicGames/RGOneShot.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_gain_le_of_noOneShot",
+      "kind": "theorem",
+      "module": "DynamicGames/RGOneShot.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.proposition_21_1_1",
+      "kind": "theorem",
+      "module": "DynamicGames/RGOneShot.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_V",
+      "kind": "def",
+      "module": "DynamicGames/RGPayoffSet.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_Admissible",
+      "kind": "def",
+      "module": "DynamicGames/RGPayoffSet.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_B",
+      "kind": "def",
+      "module": "DynamicGames/RGPayoffSet.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.definition_21_1_3",
+      "kind": "theorem",
+      "module": "DynamicGames/RGPayoffSet.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.definition_21_1_4",
+      "kind": "theorem",
+      "module": "DynamicGames/RGPayoffSet.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_Bdd",
+      "kind": "def",
+      "module": "DynamicGames/RGPayoffSet.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_V_bdd",
+      "kind": "theorem",
+      "module": "DynamicGames/RGPayoffSet.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.lemma_21_1_1",
+      "kind": "theorem",
+      "module": "DynamicGames/RGPayoffSet.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_state",
+      "kind": "def",
+      "module": "DynamicGames/RGPayoffSet.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_recStrat",
+      "kind": "def",
+      "module": "DynamicGames/RGPayoffSet.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_recStrat_spec",
+      "kind": "theorem",
+      "module": "DynamicGames/RGPayoffSet.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.lemma_21_1_2",
+      "kind": "theorem",
+      "module": "DynamicGames/RGPayoffSet.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.theorem_21_1_1",
+      "kind": "theorem",
+      "module": "DynamicGames/RGPayoffSet.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.theorem_21_1_1_recursive",
+      "kind": "theorem",
+      "module": "DynamicGames/RGPayoffSet.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.lemma_21_1_3",
+      "kind": "theorem",
+      "module": "DynamicGames/RGPayoffSet.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_IsStageNash",
+      "kind": "def",
+      "module": "DynamicGames/RGPayoffSet.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_stageNash_mem_V",
+      "kind": "theorem",
+      "module": "DynamicGames/RGPayoffSet.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_pdPay",
+      "kind": "def",
+      "module": "DynamicGames/RGPrisoners.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_pdU",
+      "kind": "def",
+      "module": "DynamicGames/RGPrisoners.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_pdW",
+      "kind": "def",
+      "module": "DynamicGames/RGPrisoners.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_pd_upd",
+      "kind": "theorem",
+      "module": "DynamicGames/RGPrisoners.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_pd_bound",
+      "kind": "theorem",
+      "module": "DynamicGames/RGPrisoners.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.example_21_1_1_DD",
+      "kind": "theorem",
+      "module": "DynamicGames/RGPrisoners.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_pdWCC",
+      "kind": "def",
+      "module": "DynamicGames/RGPrisoners.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.example_21_1_1_CC",
+      "kind": "theorem",
+      "module": "DynamicGames/RGPrisoners.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.example_21_1_1",
+      "kind": "theorem",
+      "module": "DynamicGames/RGPrisoners.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_pd_stageNash",
+      "kind": "theorem",
+      "module": "DynamicGames/RGPrisoners.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_pd_V_nonempty",
+      "kind": "theorem",
+      "module": "DynamicGames/RGPrisoners.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_feasible",
+      "kind": "def",
+      "module": "DynamicGames/RGMaximal.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_u_mem_feasible",
+      "kind": "theorem",
+      "module": "DynamicGames/RGMaximal.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_box",
+      "kind": "def",
+      "module": "DynamicGames/RGMaximal.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_box_convex",
+      "kind": "theorem",
+      "module": "DynamicGames/RGMaximal.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_box_isClosed",
+      "kind": "theorem",
+      "module": "DynamicGames/RGMaximal.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_mem_box",
+      "kind": "theorem",
+      "module": "DynamicGames/RGMaximal.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_closure_feasible_subset_box",
+      "kind": "theorem",
+      "module": "DynamicGames/RGMaximal.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_U_near_feasible",
+      "kind": "theorem",
+      "module": "DynamicGames/RGMaximal.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_U_mem_closure_feasible",
+      "kind": "theorem",
+      "module": "DynamicGames/RGMaximal.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_V_subset_closure_feasible",
+      "kind": "theorem",
+      "module": "DynamicGames/RGMaximal.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_closure_feasible_of_finite",
+      "kind": "theorem",
+      "module": "DynamicGames/RGMaximal.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_V_subset_feasible",
+      "kind": "theorem",
+      "module": "DynamicGames/RGMaximal.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_B_subset_of_convex",
+      "kind": "theorem",
+      "module": "DynamicGames/RGMaximal.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_BOn",
+      "kind": "def",
+      "module": "DynamicGames/RGMaximal.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_maximal_fixed_point",
+      "kind": "theorem",
+      "module": "DynamicGames/RGMaximal.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.theorem_21_1_2",
+      "kind": "theorem",
+      "module": "DynamicGames/RGMaximal.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.theorem_21_1_2_closure",
+      "kind": "theorem",
+      "module": "DynamicGames/RGMaximal.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_mem_B_iff_punish",
+      "kind": "theorem",
+      "module": "DynamicGames/RGCompact.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.ex_21_2",
+      "kind": "theorem",
+      "module": "DynamicGames/RGCompact.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.lemma_21_1_4",
+      "kind": "theorem",
+      "module": "DynamicGames/RGCompact.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_box_isCompact",
+      "kind": "theorem",
+      "module": "DynamicGames/RGCompact.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.ex_21_1",
+      "kind": "theorem",
+      "module": "DynamicGames/RGCompact.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.proposition_21_1_2",
+      "kind": "theorem",
+      "module": "DynamicGames/RGCompact.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_bdd_of_isCompact",
+      "kind": "theorem",
+      "module": "DynamicGames/RGComputation.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.theorem_21_1_3",
+      "kind": "theorem",
+      "module": "DynamicGames/RGComputation.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.theorem_21_1_3_hausdorff",
+      "kind": "theorem",
+      "module": "DynamicGames/RGComputation.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_umin",
+      "kind": "def",
+      "module": "DynamicGames/RGComputation.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_umax",
+      "kind": "def",
+      "module": "DynamicGames/RGComputation.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_maxBox",
+      "kind": "def",
+      "module": "DynamicGames/RGComputation.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_u_mem_maxBox",
+      "kind": "theorem",
+      "module": "DynamicGames/RGComputation.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_maxBox_isCompact",
+      "kind": "theorem",
+      "module": "DynamicGames/RGComputation.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_V_subset_maxBox",
+      "kind": "theorem",
+      "module": "DynamicGames/RGComputation.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_B_maxBox_subset",
+      "kind": "theorem",
+      "module": "DynamicGames/RGComputation.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_theorem_21_1_3_maxBox",
+      "kind": "theorem",
+      "module": "DynamicGames/RGComputation.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_BCL",
+      "kind": "def",
+      "module": "DynamicGames/RGComputation.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_BCL_eq",
+      "kind": "theorem",
+      "module": "DynamicGames/RGComputation.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_cronshaw_luenberger",
+      "kind": "theorem",
+      "module": "DynamicGames/RGComputation.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_Bstar",
+      "kind": "def",
+      "module": "DynamicGames/RGComputation.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_Bstar_mono",
+      "kind": "theorem",
+      "module": "DynamicGames/RGComputation.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_autState",
+      "kind": "def",
+      "module": "DynamicGames/RGSimple.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_autStrat",
+      "kind": "def",
+      "module": "DynamicGames/RGSimple.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_autState_append",
+      "kind": "theorem",
+      "module": "DynamicGames/RGSimple.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_cont_autStrat",
+      "kind": "theorem",
+      "module": "DynamicGames/RGSimple.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_autVal_rec",
+      "kind": "theorem",
+      "module": "DynamicGames/RGSimple.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_aut_isSPE",
+      "kind": "theorem",
+      "module": "DynamicGames/RGSimple.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_aut_ic_of_isSPE",
+      "kind": "theorem",
+      "module": "DynamicGames/RGSimple.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_devBy",
+      "kind": "def",
+      "module": "DynamicGames/RGSimple.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_devBy_self",
+      "kind": "theorem",
+      "module": "DynamicGames/RGSimple.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_devBy_upd",
+      "kind": "theorem",
+      "module": "DynamicGames/RGSimple.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_devBy_none",
+      "kind": "theorem",
+      "module": "DynamicGames/RGSimple.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_simpleTrans",
+      "kind": "def",
+      "module": "DynamicGames/RGSimple.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_simpleStrat",
+      "kind": "def",
+      "module": "DynamicGames/RGSimple.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.definition_21_1_5",
+      "kind": "theorem",
+      "module": "DynamicGames/RGSimple.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_pathVal",
+      "kind": "def",
+      "module": "DynamicGames/RGSimple.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_pathVal_succ",
+      "kind": "theorem",
+      "module": "DynamicGames/RGSimple.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_simple_state_hist",
+      "kind": "theorem",
+      "module": "DynamicGames/RGSimple.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_simple_val",
+      "kind": "theorem",
+      "module": "DynamicGames/RGSimple.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_simple_payoff",
+      "kind": "theorem",
+      "module": "DynamicGames/RGSimple.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_simple_reach",
+      "kind": "theorem",
+      "module": "DynamicGames/RGSimple.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_proposition_21_1_3_if",
+      "kind": "theorem",
+      "module": "DynamicGames/RGSimple.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.proposition_21_1_3",
+      "kind": "theorem",
+      "module": "DynamicGames/RGSimple.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_pathPay_const",
+      "kind": "theorem",
+      "module": "DynamicGames/RGSimple.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_pdStick",
+      "kind": "def",
+      "module": "DynamicGames/RGSimple.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_pdStick_val",
+      "kind": "theorem",
+      "module": "DynamicGames/RGSimple.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_proposition_21_1_3_misprint_restart",
+      "kind": "theorem",
+      "module": "DynamicGames/RGSimple.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_ownU",
+      "kind": "def",
+      "module": "DynamicGames/RGSimple.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_ownQ",
+      "kind": "def",
+      "module": "DynamicGames/RGSimple.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_proposition_21_1_3_misprint_own",
+      "kind": "theorem",
+      "module": "DynamicGames/RGSimple.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.rg_abreu_simple",
+      "kind": "theorem",
+      "module": "DynamicGames/RGSimple.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.DGPublicGame",
+      "kind": "structure",
+      "module": "DynamicGames/DGPublicMonitoring.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.DGPublicGame.mk",
+      "kind": "constructor",
+      "module": "DynamicGames/DGPublicMonitoring.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.DGPublicGame.f",
+      "kind": "projection",
+      "module": "DynamicGames/DGPublicMonitoring.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.DGPublicGame.f_nonneg",
+      "kind": "projection",
+      "module": "DynamicGames/DGPublicMonitoring.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.DGPublicGame.f_sum",
+      "kind": "projection",
+      "module": "DynamicGames/DGPublicMonitoring.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.DGPublicGame.r",
+      "kind": "projection",
+      "module": "DynamicGames/DGPublicMonitoring.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.DGPublicGame.M",
+      "kind": "projection",
+      "module": "DynamicGames/DGPublicMonitoring.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.DGPublicGame.r_bound",
+      "kind": "projection",
+      "module": "DynamicGames/DGPublicMonitoring.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_u",
+      "kind": "def",
+      "module": "DynamicGames/DGPublicMonitoring.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_cont",
+      "kind": "def",
+      "module": "DynamicGames/DGPublicMonitoring.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_dev",
+      "kind": "def",
+      "module": "DynamicGames/DGPublicMonitoring.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_ex",
+      "kind": "def",
+      "module": "DynamicGames/DGPublicMonitoring.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_U",
+      "kind": "def",
+      "module": "DynamicGames/DGPublicMonitoring.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_abs_u_le",
+      "kind": "theorem",
+      "module": "DynamicGames/DGPublicMonitoring.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_abs_avg_le",
+      "kind": "theorem",
+      "module": "DynamicGames/DGPublicMonitoring.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_abs_ex_le",
+      "kind": "theorem",
+      "module": "DynamicGames/DGPublicMonitoring.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_summable",
+      "kind": "theorem",
+      "module": "DynamicGames/DGPublicMonitoring.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_abs_U_le",
+      "kind": "theorem",
+      "module": "DynamicGames/DGPublicMonitoring.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_U_rec",
+      "kind": "theorem",
+      "module": "DynamicGames/DGPublicMonitoring.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_cont_append",
+      "kind": "theorem",
+      "module": "DynamicGames/DGPublicMonitoring.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_nonpos_of_le_mul_iSup",
+      "kind": "theorem",
+      "module": "DynamicGames/DGPublicMonitoring.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_avg_le_iSup",
+      "kind": "theorem",
+      "module": "DynamicGames/DGPublicMonitoring.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_IsPPE",
+      "kind": "def",
+      "module": "DynamicGames/DGPublicMonitoring.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_PPEPayoffs",
+      "kind": "def",
+      "module": "DynamicGames/DGPublicMonitoring.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_gen",
+      "kind": "def",
+      "module": "DynamicGames/DGPublicMonitoring.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_Admissible",
+      "kind": "def",
+      "module": "DynamicGames/DGPublicMonitoring.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_B",
+      "kind": "def",
+      "module": "DynamicGames/DGPublicMonitoring.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_oneShot_ppe",
+      "kind": "theorem",
+      "module": "DynamicGames/DGPublicMonitoring.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_ppe_subset_B",
+      "kind": "theorem",
+      "module": "DynamicGames/DGPublicMonitoring.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_sgAct",
+      "kind": "def",
+      "module": "DynamicGames/DGPublicMonitoring.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_sgNext",
+      "kind": "def",
+      "module": "DynamicGames/DGPublicMonitoring.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_sgPath",
+      "kind": "def",
+      "module": "DynamicGames/DGPublicMonitoring.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_sgStrat",
+      "kind": "def",
+      "module": "DynamicGames/DGPublicMonitoring.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_sg_spec",
+      "kind": "theorem",
+      "module": "DynamicGames/DGPublicMonitoring.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_sgStrat_cont",
+      "kind": "theorem",
+      "module": "DynamicGames/DGPublicMonitoring.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_sgPath_mem",
+      "kind": "theorem",
+      "module": "DynamicGames/DGPublicMonitoring.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_coord_bound",
+      "kind": "theorem",
+      "module": "DynamicGames/DGPublicMonitoring.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_sgStrat_U",
+      "kind": "theorem",
+      "module": "DynamicGames/DGPublicMonitoring.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_sgStrat_isPPE",
+      "kind": "theorem",
+      "module": "DynamicGames/DGPublicMonitoring.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_selfGeneration_ppe",
+      "kind": "theorem",
+      "module": "DynamicGames/DGPublicMonitoring.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_selfGenerating_subset_ppe",
+      "kind": "theorem",
+      "module": "DynamicGames/DGPublicMonitoring.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_ppe_isBounded",
+      "kind": "theorem",
+      "module": "DynamicGames/DGPublicMonitoring.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_factorization_ppe",
+      "kind": "theorem",
+      "module": "DynamicGames/DGPublicMonitoring.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_ppe_greatest_fixedPoint",
+      "kind": "theorem",
+      "module": "DynamicGames/DGPublicMonitoring.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_B_mono",
+      "kind": "theorem",
+      "module": "DynamicGames/DGPublicMonitoring.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_gen_continuous",
+      "kind": "theorem",
+      "module": "DynamicGames/DGPublicMonitoring.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_B_isCompact",
+      "kind": "theorem",
+      "module": "DynamicGames/DGPublicMonitoring.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_pdProbG",
+      "kind": "def",
+      "module": "DynamicGames/DGNoisyPD.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_pdF",
+      "kind": "def",
+      "module": "DynamicGames/DGNoisyPD.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_pdR",
+      "kind": "def",
+      "module": "DynamicGames/DGNoisyPD.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_pdM",
+      "kind": "def",
+      "module": "DynamicGames/DGNoisyPD.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_pdProbG_mem",
+      "kind": "theorem",
+      "module": "DynamicGames/DGNoisyPD.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_noisyPD",
+      "kind": "def",
+      "module": "DynamicGames/DGNoisyPD.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_noisyPD_u",
+      "kind": "theorem",
+      "module": "DynamicGames/DGNoisyPD.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_pdMatrix",
+      "kind": "def",
+      "module": "DynamicGames/DGNoisyPD.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.example_21_1_2_payoffs",
+      "kind": "theorem",
+      "module": "DynamicGames/DGNoisyPD.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_noisyPD_u_matrix",
+      "kind": "theorem",
+      "module": "DynamicGames/DGNoisyPD.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_pdV",
+      "kind": "def",
+      "module": "DynamicGames/DGNoisyPD.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_pdV'",
+      "kind": "def",
+      "module": "DynamicGames/DGNoisyPD.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_pdW",
+      "kind": "def",
+      "module": "DynamicGames/DGNoisyPD.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.example_21_1_2_DD_eq",
+      "kind": "theorem",
+      "module": "DynamicGames/DGNoisyPD.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.example_21_1_2_CC_eq",
+      "kind": "theorem",
+      "module": "DynamicGames/DGNoisyPD.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.example_21_1_2_DD_ic_iff",
+      "kind": "theorem",
+      "module": "DynamicGames/DGNoisyPD.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.example_21_1_2_CC_ic_iff",
+      "kind": "theorem",
+      "module": "DynamicGames/DGNoisyPD.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.example_21_1_2_interval",
+      "kind": "theorem",
+      "module": "DynamicGames/DGNoisyPD.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_noisyPD_gen",
+      "kind": "theorem",
+      "module": "DynamicGames/DGNoisyPD.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.example_21_1_2",
+      "kind": "theorem",
+      "module": "DynamicGames/DGNoisyPD.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.example_21_1_2_ppe",
+      "kind": "theorem",
+      "module": "DynamicGames/DGNoisyPD.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.example_21_1_2_instance",
+      "kind": "theorem",
+      "module": "DynamicGames/DGNoisyPD.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.example_21_1_2_printed_false",
+      "kind": "theorem",
+      "module": "DynamicGames/DGNoisyPD.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.DGStochGame",
+      "kind": "structure",
+      "module": "DynamicGames/DGStochasticGames.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.DGStochGame.mk",
+      "kind": "constructor",
+      "module": "DynamicGames/DGStochasticGames.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.DGStochGame.P",
+      "kind": "projection",
+      "module": "DynamicGames/DGStochasticGames.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.DGStochGame.P_nonneg",
+      "kind": "projection",
+      "module": "DynamicGames/DGStochasticGames.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.DGStochGame.P_sum",
+      "kind": "projection",
+      "module": "DynamicGames/DGStochasticGames.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.DGStochGame.u",
+      "kind": "projection",
+      "module": "DynamicGames/DGStochasticGames.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.DGStochGame.M",
+      "kind": "projection",
+      "module": "DynamicGames/DGStochasticGames.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.DGStochGame.u_bound",
+      "kind": "projection",
+      "module": "DynamicGames/DGStochasticGames.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.DGStochGame.\u03b4",
+      "kind": "projection",
+      "module": "DynamicGames/DGStochasticGames.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.DGStochGame.\u03b4_nonneg",
+      "kind": "projection",
+      "module": "DynamicGames/DGStochasticGames.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.DGStochGame.\u03b4_lt_one",
+      "kind": "projection",
+      "module": "DynamicGames/DGStochasticGames.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_shift",
+      "kind": "def",
+      "module": "DynamicGames/DGStochasticGames.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_mdev",
+      "kind": "def",
+      "module": "DynamicGames/DGStochasticGames.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_mex",
+      "kind": "def",
+      "module": "DynamicGames/DGStochasticGames.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_mU",
+      "kind": "def",
+      "module": "DynamicGames/DGStochasticGames.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_abs_mex_le",
+      "kind": "theorem",
+      "module": "DynamicGames/DGStochasticGames.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_msummable",
+      "kind": "theorem",
+      "module": "DynamicGames/DGStochasticGames.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_abs_mU_le",
+      "kind": "theorem",
+      "module": "DynamicGames/DGStochasticGames.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_mU_rec",
+      "kind": "theorem",
+      "module": "DynamicGames/DGStochasticGames.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_IsMPE",
+      "kind": "def",
+      "module": "DynamicGames/DGStochasticGames.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_IsStationaryMPE",
+      "kind": "def",
+      "module": "DynamicGames/DGStochasticGames.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_mV",
+      "kind": "def",
+      "module": "DynamicGames/DGStochasticGames.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_mV_bellman",
+      "kind": "theorem",
+      "module": "DynamicGames/DGStochasticGames.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.definition_21_2_1_bellman_iff",
+      "kind": "theorem",
+      "module": "DynamicGames/DGStochasticGames.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_stationaryMPE_bellman",
+      "kind": "theorem",
+      "module": "DynamicGames/DGStochasticGames.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_SYmu",
+      "kind": "def",
+      "module": "DynamicGames/DGStochasticGames.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_SY",
+      "kind": "def",
+      "module": "DynamicGames/DGStochasticGames.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_SY_mono",
+      "kind": "theorem",
+      "module": "DynamicGames/DGStochasticGames.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_SY_isCompact",
+      "kind": "theorem",
+      "module": "DynamicGames/DGStochasticGames.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_pdStochGame",
+      "kind": "def",
+      "module": "DynamicGames/DGStochasticGames.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_pdStochGame_mpe",
+      "kind": "theorem",
+      "module": "DynamicGames/DGStochasticGames.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_log_max",
+      "kind": "theorem",
+      "module": "DynamicGames/DGFishProblem.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_fpNext",
+      "kind": "def",
+      "module": "DynamicGames/DGFishProblem.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_fpKappa",
+      "kind": "def",
+      "module": "DynamicGames/DGFishProblem.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_fpNu",
+      "kind": "def",
+      "module": "DynamicGames/DGFishProblem.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_fpV",
+      "kind": "def",
+      "module": "DynamicGames/DGFishProblem.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_fpRHS",
+      "kind": "def",
+      "module": "DynamicGames/DGFishProblem.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_fpRHS_eq",
+      "kind": "theorem",
+      "module": "DynamicGames/DGFishProblem.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_fpKappa_eq",
+      "kind": "theorem",
+      "module": "DynamicGames/DGFishProblem.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_fp_bellman_eq",
+      "kind": "theorem",
+      "module": "DynamicGames/DGFishProblem.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_fp_bellman",
+      "kind": "theorem",
+      "module": "DynamicGames/DGFishProblem.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_fp_bellman_unique",
+      "kind": "theorem",
+      "module": "DynamicGames/DGFishProblem.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_fp_kappa_forced",
+      "kind": "theorem",
+      "module": "DynamicGames/DGFishProblem.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_fp_telescope",
+      "kind": "theorem",
+      "module": "DynamicGames/DGFishProblem.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_fp_optimal",
+      "kind": "theorem",
+      "module": "DynamicGames/DGFishProblem.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_fpPath",
+      "kind": "def",
+      "module": "DynamicGames/DGFishProblem.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_fpPath_pos",
+      "kind": "theorem",
+      "module": "DynamicGames/DGFishProblem.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_fpPath_log",
+      "kind": "theorem",
+      "module": "DynamicGames/DGFishProblem.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_fpPath_feasible",
+      "kind": "theorem",
+      "module": "DynamicGames/DGFishProblem.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_fpPath_log_bound",
+      "kind": "theorem",
+      "module": "DynamicGames/DGFishProblem.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_fp_policy_value",
+      "kind": "theorem",
+      "module": "DynamicGames/DGFishProblem.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_fp_path_tendsto",
+      "kind": "theorem",
+      "module": "DynamicGames/DGFishProblem.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_fishLaw",
+      "kind": "def",
+      "module": "DynamicGames/DGFishWar.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_fish_V_law",
+      "kind": "theorem",
+      "module": "DynamicGames/DGFishWar.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_fish_foc_deriv",
+      "kind": "theorem",
+      "module": "DynamicGames/DGFishWar.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.eq_21_2",
+      "kind": "theorem",
+      "module": "DynamicGames/DGFishWar.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_fish_foc_solve",
+      "kind": "theorem",
+      "module": "DynamicGames/DGFishWar.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_fish_mpe_kappa",
+      "kind": "theorem",
+      "module": "DynamicGames/DGFishWar.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_fishK",
+      "kind": "def",
+      "module": "DynamicGames/DGFishWar.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_fishS",
+      "kind": "def",
+      "module": "DynamicGames/DGFishWar.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_fish_mpe_closed_form",
+      "kind": "theorem",
+      "module": "DynamicGames/DGFishWar.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_fish_rates",
+      "kind": "theorem",
+      "module": "DynamicGames/DGFishWar.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.eq_21_1_mpe",
+      "kind": "theorem",
+      "module": "DynamicGames/DGFishWar.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_fish_mpe",
+      "kind": "theorem",
+      "module": "DynamicGames/DGFishWar.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_fish_mpe_steady_state",
+      "kind": "theorem",
+      "module": "DynamicGames/DGFishWar.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_fish_follower_reaction",
+      "kind": "theorem",
+      "module": "DynamicGames/DGFishWar.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_fish_follower_printed_false",
+      "kind": "theorem",
+      "module": "DynamicGames/DGFishWar.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_fish_leader_foc",
+      "kind": "theorem",
+      "module": "DynamicGames/DGFishWar.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_fish_leader",
+      "kind": "theorem",
+      "module": "DynamicGames/DGFishWar.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.ex_21_3",
+      "kind": "theorem",
+      "module": "DynamicGames/DGFishWar.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_log_add_le",
+      "kind": "theorem",
+      "module": "DynamicGames/DGFishWar.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_fish_cooperative",
+      "kind": "theorem",
+      "module": "DynamicGames/DGFishWar.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.dg_fish_overfishing",
+      "kind": "theorem",
+      "module": "DynamicGames/DGFishWar.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_CE",
+      "kind": "def",
+      "module": "DynamicGames/CGOnePeriod.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_mem_CE",
+      "kind": "theorem",
+      "module": "DynamicGames/CGOnePeriod.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_IsRamsey",
+      "kind": "def",
+      "module": "DynamicGames/CGOnePeriod.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_IsNash",
+      "kind": "def",
+      "module": "DynamicGames/CGOnePeriod.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_vN_le_vR",
+      "kind": "theorem",
+      "module": "DynamicGames/CGOnePeriod.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_bgGov",
+      "kind": "def",
+      "module": "DynamicGames/CGOnePeriod.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_bgHH",
+      "kind": "def",
+      "module": "DynamicGames/CGOnePeriod.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_bgC",
+      "kind": "def",
+      "module": "DynamicGames/CGOnePeriod.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.example_21_4_1_household",
+      "kind": "theorem",
+      "module": "DynamicGames/CGOnePeriod.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.example_21_4_1_ramsey",
+      "kind": "theorem",
+      "module": "DynamicGames/CGOnePeriod.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.example_21_4_1_nash",
+      "kind": "theorem",
+      "module": "DynamicGames/CGOnePeriod.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.example_21_4_1_time_inconsistent",
+      "kind": "theorem",
+      "module": "DynamicGames/CGOnePeriod.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_r422",
+      "kind": "def",
+      "module": "DynamicGames/CGOnePeriod.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_C422",
+      "kind": "def",
+      "module": "DynamicGames/CGOnePeriod.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.example_21_4_2",
+      "kind": "theorem",
+      "module": "DynamicGames/CGOnePeriod.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_r216",
+      "kind": "def",
+      "module": "DynamicGames/CGOnePeriod.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_C216",
+      "kind": "def",
+      "module": "DynamicGames/CGOnePeriod.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.ex_21_6_a",
+      "kind": "theorem",
+      "module": "DynamicGames/CGOnePeriod.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.ex_21_6_b",
+      "kind": "theorem",
+      "module": "DynamicGames/CGOnePeriod.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.CGProfile",
+      "kind": "abbrev",
+      "module": "DynamicGames/CGRepeated.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_cont",
+      "kind": "def",
+      "module": "DynamicGames/CGRepeated.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_cont_apply",
+      "kind": "theorem",
+      "module": "DynamicGames/CGRepeated.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_cont_nil",
+      "kind": "theorem",
+      "module": "DynamicGames/CGRepeated.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_cont_cont",
+      "kind": "theorem",
+      "module": "DynamicGames/CGRepeated.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_path",
+      "kind": "def",
+      "module": "DynamicGames/CGRepeated.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_prefix",
+      "kind": "def",
+      "module": "DynamicGames/CGRepeated.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_prefix_succ",
+      "kind": "theorem",
+      "module": "DynamicGames/CGRepeated.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_path_cont_prefix",
+      "kind": "theorem",
+      "module": "DynamicGames/CGRepeated.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_path_spec",
+      "kind": "theorem",
+      "module": "DynamicGames/CGRepeated.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_pathValue",
+      "kind": "def",
+      "module": "DynamicGames/CGRepeated.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_U",
+      "kind": "def",
+      "module": "DynamicGames/CGRepeated.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_Ut",
+      "kind": "def",
+      "module": "DynamicGames/CGRepeated.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_Uh",
+      "kind": "def",
+      "module": "DynamicGames/CGRepeated.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_Uh_eq",
+      "kind": "theorem",
+      "module": "DynamicGames/CGRepeated.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_summable",
+      "kind": "theorem",
+      "module": "DynamicGames/CGRepeated.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_pathValue_le",
+      "kind": "theorem",
+      "module": "DynamicGames/CGRepeated.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_le_pathValue",
+      "kind": "theorem",
+      "module": "DynamicGames/CGRepeated.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_pathValue_const",
+      "kind": "theorem",
+      "module": "DynamicGames/CGRepeated.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_pathValue_succ",
+      "kind": "theorem",
+      "module": "DynamicGames/CGRepeated.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_Ut_succ",
+      "kind": "theorem",
+      "module": "DynamicGames/CGRepeated.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_Ut_zero",
+      "kind": "theorem",
+      "module": "DynamicGames/CGRepeated.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_U_rec",
+      "kind": "theorem",
+      "module": "DynamicGames/CGRepeated.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_U_cont_rec",
+      "kind": "theorem",
+      "module": "DynamicGames/CGRepeated.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_abs_U_le",
+      "kind": "theorem",
+      "module": "DynamicGames/CGRepeated.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_U_const",
+      "kind": "theorem",
+      "module": "DynamicGames/CGRepeated.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_withGov",
+      "kind": "def",
+      "module": "DynamicGames/CGRepeated.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_IsSPE",
+      "kind": "def",
+      "module": "DynamicGames/CGRepeated.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.definition_21_4_1",
+      "kind": "theorem",
+      "module": "DynamicGames/CGRepeated.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_OneShot",
+      "kind": "def",
+      "module": "DynamicGames/CGRepeated.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_isSPE_iff_oneShot",
+      "kind": "theorem",
+      "module": "DynamicGames/CGRepeated.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_IsSPE.cont",
+      "kind": "theorem",
+      "module": "DynamicGames/CGRepeated.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_IsSPE.root",
+      "kind": "theorem",
+      "module": "DynamicGames/CGRepeated.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.lemma_21_4_1",
+      "kind": "theorem",
+      "module": "DynamicGames/CGRepeated.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_nash_repetition_spe",
+      "kind": "theorem",
+      "module": "DynamicGames/CGRepeated.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_V",
+      "kind": "def",
+      "module": "DynamicGames/CGRepeated.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_V_abs_le",
+      "kind": "theorem",
+      "module": "DynamicGames/CGRepeated.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_V_isBounded",
+      "kind": "theorem",
+      "module": "DynamicGames/CGRepeated.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_IsSPE.path_mem",
+      "kind": "theorem",
+      "module": "DynamicGames/CGRepeated.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_V_subset_Icc",
+      "kind": "theorem",
+      "module": "DynamicGames/CGRepeated.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_V_lower",
+      "kind": "theorem",
+      "module": "DynamicGames/CGRepeated.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_recState",
+      "kind": "def",
+      "module": "DynamicGames/CGRecursive.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_recStrat",
+      "kind": "def",
+      "module": "DynamicGames/CGRecursive.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_recStrat_cont",
+      "kind": "theorem",
+      "module": "DynamicGames/CGRecursive.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_recStrat_cont_single",
+      "kind": "theorem",
+      "module": "DynamicGames/CGRecursive.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_recState_mem",
+      "kind": "theorem",
+      "module": "DynamicGames/CGRecursive.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_recSeq",
+      "kind": "def",
+      "module": "DynamicGames/CGRecursive.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.definition_21_4_5",
+      "kind": "theorem",
+      "module": "DynamicGames/CGRecursive.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_recStrat_value",
+      "kind": "theorem",
+      "module": "DynamicGames/CGRecursive.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_recursive_spe",
+      "kind": "theorem",
+      "module": "DynamicGames/CGRecursive.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_recursive_spe_only_if",
+      "kind": "theorem",
+      "module": "DynamicGames/CGRecursive.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_trigZh",
+      "kind": "def",
+      "module": "DynamicGames/CGRecursive.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_trigZg",
+      "kind": "def",
+      "module": "DynamicGames/CGRecursive.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_trigV",
+      "kind": "def",
+      "module": "DynamicGames/CGRecursive.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_trigger_value",
+      "kind": "theorem",
+      "module": "DynamicGames/CGRecursive.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.example_21_4_5",
+      "kind": "theorem",
+      "module": "DynamicGames/CGRecursive.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_scZh",
+      "kind": "def",
+      "module": "DynamicGames/CGRecursive.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_scZg",
+      "kind": "def",
+      "module": "DynamicGames/CGRecursive.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_scV",
+      "kind": "def",
+      "module": "DynamicGames/CGRecursive.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_stickCarrot_value",
+      "kind": "theorem",
+      "module": "DynamicGames/CGRecursive.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.example_21_4_6",
+      "kind": "theorem",
+      "module": "DynamicGames/CGRecursive.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_Admissible",
+      "kind": "def",
+      "module": "DynamicGames/CGValueSet.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_B",
+      "kind": "def",
+      "module": "DynamicGames/CGValueSet.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_SelfGenerating",
+      "kind": "def",
+      "module": "DynamicGames/CGValueSet.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.definition_21_4_2",
+      "kind": "theorem",
+      "module": "DynamicGames/CGValueSet.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.definition_21_4_3",
+      "kind": "theorem",
+      "module": "DynamicGames/CGValueSet.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.definition_21_4_4",
+      "kind": "theorem",
+      "module": "DynamicGames/CGValueSet.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_B_mono",
+      "kind": "theorem",
+      "module": "DynamicGames/CGValueSet.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_K",
+      "kind": "def",
+      "module": "DynamicGames/CGValueSet.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_K_mono",
+      "kind": "theorem",
+      "module": "DynamicGames/CGValueSet.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_B_eq_image",
+      "kind": "theorem",
+      "module": "DynamicGames/CGValueSet.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_K_isCompact",
+      "kind": "theorem",
+      "module": "DynamicGames/CGValueSet.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.lemma_21_4_2",
+      "kind": "theorem",
+      "module": "DynamicGames/CGValueSet.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_V_subset_B",
+      "kind": "theorem",
+      "module": "DynamicGames/CGValueSet.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_paste",
+      "kind": "def",
+      "module": "DynamicGames/CGValueSet.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_B_subset_V",
+      "kind": "theorem",
+      "module": "DynamicGames/CGValueSet.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_selfGenerating_subset_V",
+      "kind": "theorem",
+      "module": "DynamicGames/CGValueSet.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.lemma_21_4_3",
+      "kind": "theorem",
+      "module": "DynamicGames/CGValueSet.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.theorem_21_4_1",
+      "kind": "theorem",
+      "module": "DynamicGames/CGValueSet.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_mem_V_of_mem_B_insert",
+      "kind": "theorem",
+      "module": "DynamicGames/CGValueSet.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_aps_step1",
+      "kind": "theorem",
+      "module": "DynamicGames/CGValueSet.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_aps_step2",
+      "kind": "theorem",
+      "module": "DynamicGames/CGValueSet.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_aps_step2_max",
+      "kind": "theorem",
+      "module": "DynamicGames/CGValueSet.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_aps_step3",
+      "kind": "theorem",
+      "module": "DynamicGames/CGValueSet.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_follow",
+      "kind": "def",
+      "module": "DynamicGames/CGBestWorst.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_follow_cont_single",
+      "kind": "theorem",
+      "module": "DynamicGames/CGBestWorst.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_follow_cont",
+      "kind": "theorem",
+      "module": "DynamicGames/CGBestWorst.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_follow_path",
+      "kind": "theorem",
+      "module": "DynamicGames/CGBestWorst.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_follow_U",
+      "kind": "theorem",
+      "module": "DynamicGames/CGBestWorst.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_follow_spe",
+      "kind": "theorem",
+      "module": "DynamicGames/CGBestWorst.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.proposition_21_4_1",
+      "kind": "theorem",
+      "module": "DynamicGames/CGBestWorst.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_selfEnf",
+      "kind": "def",
+      "module": "DynamicGames/CGBestWorst.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_SelfEnforcing",
+      "kind": "def",
+      "module": "DynamicGames/CGBestWorst.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_selfEnf_cont_single",
+      "kind": "theorem",
+      "module": "DynamicGames/CGBestWorst.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_selfEnf_cont",
+      "kind": "theorem",
+      "module": "DynamicGames/CGBestWorst.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_selfEnf_path",
+      "kind": "theorem",
+      "module": "DynamicGames/CGBestWorst.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_selfEnf_U",
+      "kind": "theorem",
+      "module": "DynamicGames/CGBestWorst.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_selfEnf_prefix",
+      "kind": "theorem",
+      "module": "DynamicGames/CGBestWorst.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_selfEnf_path_zero",
+      "kind": "theorem",
+      "module": "DynamicGames/CGBestWorst.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.proposition_21_4_2",
+      "kind": "theorem",
+      "module": "DynamicGames/CGBestWorst.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.proposition_21_4_3",
+      "kind": "theorem",
+      "module": "DynamicGames/CGBestWorst.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.ex_21_4",
+      "kind": "theorem",
+      "module": "DynamicGames/CGBestWorst.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_vmin_eq",
+      "kind": "theorem",
+      "module": "DynamicGames/CGBestWorst.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_v1_formula",
+      "kind": "theorem",
+      "module": "DynamicGames/CGBestWorst.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_vmax",
+      "kind": "theorem",
+      "module": "DynamicGames/CGBestWorst.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_four_equations",
+      "kind": "theorem",
+      "module": "DynamicGames/CGBestWorst.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_example_21_4_6_selfEnforcing",
+      "kind": "theorem",
+      "module": "DynamicGames/CGBestWorst.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_r422_abs_le",
+      "kind": "theorem",
+      "module": "DynamicGames/CGStokeyExample.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_C422_mem",
+      "kind": "theorem",
+      "module": "DynamicGames/CGStokeyExample.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_stokeyZ",
+      "kind": "def",
+      "module": "DynamicGames/CGStokeyExample.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_stokeyNext",
+      "kind": "def",
+      "module": "DynamicGames/CGStokeyExample.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_stokeyV",
+      "kind": "def",
+      "module": "DynamicGames/CGStokeyExample.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_stokey_recursive_spe",
+      "kind": "theorem",
+      "module": "DynamicGames/CGStokeyExample.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_stokey_V_ge",
+      "kind": "theorem",
+      "module": "DynamicGames/CGStokeyExample.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_stokey_V_le",
+      "kind": "theorem",
+      "module": "DynamicGames/CGStokeyExample.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_stokey_V",
+      "kind": "theorem",
+      "module": "DynamicGames/CGStokeyExample.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_stokey_vmin_vmax",
+      "kind": "theorem",
+      "module": "DynamicGames/CGStokeyExample.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_stokey_vmin_formula",
+      "kind": "theorem",
+      "module": "DynamicGames/CGStokeyExample.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_stokeyPath",
+      "kind": "def",
+      "module": "DynamicGames/CGStokeyExample.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_stokeyPath_Ut",
+      "kind": "theorem",
+      "module": "DynamicGames/CGStokeyExample.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_stokeyPath_selfEnforcing",
+      "kind": "theorem",
+      "module": "DynamicGames/CGStokeyExample.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_ramseyPath422",
+      "kind": "def",
+      "module": "DynamicGames/CGStokeyExample.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.example_21_4_4",
+      "kind": "theorem",
+      "module": "DynamicGames/CGStokeyExample.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.example_21_4_4_arith",
+      "kind": "theorem",
+      "module": "DynamicGames/CGStokeyExample.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.ex_21_5",
+      "kind": "theorem",
+      "module": "DynamicGames/CGStokeyExample.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_theorem_21_4_1_unbounded",
+      "kind": "theorem",
+      "module": "DynamicGames/CGStokeyExample.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_proposition_21_4_1_counterexample",
+      "kind": "theorem",
+      "module": "DynamicGames/CGStokeyExample.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_cexZh",
+      "kind": "def",
+      "module": "DynamicGames/CGStokeyExample.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_cexV",
+      "kind": "def",
+      "module": "DynamicGames/CGStokeyExample.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_definition_21_4_5_counterexample",
+      "kind": "theorem",
+      "module": "DynamicGames/CGStokeyExample.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_example_21_4_5_counterexample",
+      "kind": "theorem",
+      "module": "DynamicGames/CGStokeyExample.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_example_21_4_6_counterexample",
+      "kind": "theorem",
+      "module": "DynamicGames/CGStokeyExample.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_rBool",
+      "kind": "def",
+      "module": "DynamicGames/CGStokeyExample.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_CBool",
+      "kind": "def",
+      "module": "DynamicGames/CGStokeyExample.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_pBool",
+      "kind": "def",
+      "module": "DynamicGames/CGStokeyExample.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_rBool_abs_le",
+      "kind": "theorem",
+      "module": "DynamicGames/CGStokeyExample.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_proposition_21_4_2_counterexample",
+      "kind": "theorem",
+      "module": "DynamicGames/CGStokeyExample.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_bgGov_eq",
+      "kind": "theorem",
+      "module": "DynamicGames/CGBarroGordon.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.example_21_4_3_best_deviation",
+      "kind": "theorem",
+      "module": "DynamicGames/CGBarroGordon.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.example_21_4_3_range",
+      "kind": "theorem",
+      "module": "DynamicGames/CGBarroGordon.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.example_21_4_3_mono",
+      "kind": "theorem",
+      "module": "DynamicGames/CGBarroGordon.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_bgR",
+      "kind": "def",
+      "module": "DynamicGames/CGBarroGordon.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_bgCK",
+      "kind": "def",
+      "module": "DynamicGames/CGBarroGordon.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_bgR_abs_le",
+      "kind": "theorem",
+      "module": "DynamicGames/CGBarroGordon.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.example_21_4_3_nash",
+      "kind": "theorem",
+      "module": "DynamicGames/CGBarroGordon.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.example_21_4_3",
+      "kind": "theorem",
+      "module": "DynamicGames/CGBarroGordon.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_r216_abs_le",
+      "kind": "theorem",
+      "module": "DynamicGames/CGExercise216.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_C216_mem",
+      "kind": "theorem",
+      "module": "DynamicGames/CGExercise216.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_ex216_V_ge",
+      "kind": "theorem",
+      "module": "DynamicGames/CGExercise216.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_ex216_V_le",
+      "kind": "theorem",
+      "module": "DynamicGames/CGExercise216.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_ex216Z",
+      "kind": "def",
+      "module": "DynamicGames/CGExercise216.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_ex216Next",
+      "kind": "def",
+      "module": "DynamicGames/CGExercise216.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_ex216V",
+      "kind": "def",
+      "module": "DynamicGames/CGExercise216.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_ex216_recursive_spe",
+      "kind": "theorem",
+      "module": "DynamicGames/CGExercise216.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_ex216_V",
+      "kind": "theorem",
+      "module": "DynamicGames/CGExercise216.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.ex_21_6_c",
+      "kind": "theorem",
+      "module": "DynamicGames/CGExercise216.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_ramseyPath216",
+      "kind": "def",
+      "module": "DynamicGames/CGExercise216.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_ramseyPath216_Ut",
+      "kind": "theorem",
+      "module": "DynamicGames/CGExercise216.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_ex216_ramsey_spe",
+      "kind": "theorem",
+      "module": "DynamicGames/CGExercise216.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.ex_21_6_d",
+      "kind": "theorem",
+      "module": "DynamicGames/CGExercise216.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.ex_21_6_e",
+      "kind": "theorem",
+      "module": "DynamicGames/CGExercise216.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_ex216_step",
+      "kind": "theorem",
+      "module": "DynamicGames/CGExercise216.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_ex216Z2",
+      "kind": "def",
+      "module": "DynamicGames/CGExercise216.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.cg_ex216V2",
+      "kind": "def",
+      "module": "DynamicGames/CGExercise216.lean"
+    },
+    {
+      "name": "Miao.DynamicGames.ex_21_6_f",
+      "kind": "theorem",
+      "module": "DynamicGames/CGExercise216.lean"
+    }
+  ],
+  "full_build": "passed",
+  "fresh_source_compilation": "passed",
+  "fresh_source_lint_options": [
+    "-Dlinter.mathlibStandardSet=true",
+    "-Dlinter.style.header=false"
+  ],
+  "axioms": {
+    "Miao.DynamicGames.rg_Prof": [],
+    "Miao.DynamicGames.rg_Hist": [],
+    "Miao.DynamicGames.rg_Strat": [],
+    "Miao.DynamicGames.rg_upd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_upd_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_upd_self": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_upd_ne": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_upd_eq_self": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_upd_player_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_cont": [],
+    "Miao.DynamicGames.rg_dev": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_hist": [],
+    "Miao.DynamicGames.rg_path": [],
+    "Miao.DynamicGames.rg_pathPay": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_U": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_cont_nil": [
+      "propext",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_cont_cont": [
+      "propext",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_cont_dev": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_dev_self": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_hist_cont": [
+      "propext"
+    ],
+    "Miao.DynamicGames.rg_path_cont": [
+      "propext"
+    ],
+    "Miao.DynamicGames.rg_summable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_pathPay_succ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_pathPay_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_abs_pathPay_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_abs_U_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_U_rec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_U_cont_rec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_U_subgame": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_IsSPE": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.definition_21_1_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_isSPE_cont": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_IsOneShotDev": [],
+    "Miao.DynamicGames.rg_IsProfitable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_oneShot": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_oneShot_isOneShotDev": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_cont_dev_after": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.definition_21_1_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_oneShot_value": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_oneShot_le_of_isSPE": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_gain_le_of_noOneShot": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.proposition_21_1_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_V": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_Admissible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_B": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.definition_21_1_3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.definition_21_1_4": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_Bdd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_V_bdd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.lemma_21_1_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_state": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_recStrat": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_recStrat_spec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.lemma_21_1_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.theorem_21_1_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.theorem_21_1_1_recursive": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.lemma_21_1_3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_IsStageNash": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_stageNash_mem_V": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_pdPay": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_pdU": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_pdW": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_pd_upd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_pd_bound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.example_21_1_1_DD": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_pdWCC": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.example_21_1_1_CC": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.example_21_1_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_pd_stageNash": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_pd_V_nonempty": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_feasible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_u_mem_feasible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_box": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_box_convex": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_box_isClosed": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_mem_box": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_closure_feasible_subset_box": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_U_near_feasible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_U_mem_closure_feasible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_V_subset_closure_feasible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_closure_feasible_of_finite": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_V_subset_feasible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_B_subset_of_convex": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_BOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_maximal_fixed_point": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.theorem_21_1_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.theorem_21_1_2_closure": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_mem_B_iff_punish": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.ex_21_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.lemma_21_1_4": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_box_isCompact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.ex_21_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.proposition_21_1_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_bdd_of_isCompact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.theorem_21_1_3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.theorem_21_1_3_hausdorff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_umin": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_umax": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_maxBox": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_u_mem_maxBox": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_maxBox_isCompact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_V_subset_maxBox": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_B_maxBox_subset": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_theorem_21_1_3_maxBox": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_BCL": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_BCL_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_cronshaw_luenberger": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_Bstar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_Bstar_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_autState": [],
+    "Miao.DynamicGames.rg_autStrat": [],
+    "Miao.DynamicGames.rg_autState_append": [
+      "propext"
+    ],
+    "Miao.DynamicGames.rg_cont_autStrat": [
+      "propext",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_autVal_rec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_aut_isSPE": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_aut_ic_of_isSPE": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_devBy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_devBy_self": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_devBy_upd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_devBy_none": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_simpleTrans": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_simpleStrat": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.definition_21_1_5": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_pathVal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_pathVal_succ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_simple_state_hist": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_simple_val": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_simple_payoff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_simple_reach": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_proposition_21_1_3_if": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.proposition_21_1_3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_pathPay_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_pdStick": [],
+    "Miao.DynamicGames.rg_pdStick_val": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_proposition_21_1_3_misprint_restart": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_ownU": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_ownQ": [
+      "propext"
+    ],
+    "Miao.DynamicGames.rg_proposition_21_1_3_misprint_own": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.rg_abreu_simple": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.DGPublicGame": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.DGPublicGame.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.DGPublicGame.f": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.DGPublicGame.f_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.DGPublicGame.f_sum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.DGPublicGame.r": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.DGPublicGame.M": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.DGPublicGame.r_bound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_u": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_cont": [],
+    "Miao.DynamicGames.dg_dev": [],
+    "Miao.DynamicGames.dg_ex": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_U": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_abs_u_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_abs_avg_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_abs_ex_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_summable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_abs_U_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_U_rec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_cont_append": [
+      "propext",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_nonpos_of_le_mul_iSup": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_avg_le_iSup": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_IsPPE": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_PPEPayoffs": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_gen": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_Admissible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_B": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_oneShot_ppe": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_ppe_subset_B": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_sgAct": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_sgNext": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_sgPath": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_sgStrat": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_sg_spec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_sgStrat_cont": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_sgPath_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_coord_bound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_sgStrat_U": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_sgStrat_isPPE": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_selfGeneration_ppe": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_selfGenerating_subset_ppe": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_ppe_isBounded": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_factorization_ppe": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_ppe_greatest_fixedPoint": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_B_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_gen_continuous": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_B_isCompact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_pdProbG": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_pdF": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_pdR": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_pdM": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_pdProbG_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_noisyPD": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_noisyPD_u": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_pdMatrix": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.example_21_1_2_payoffs": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_noisyPD_u_matrix": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_pdV": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_pdV'": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_pdW": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.example_21_1_2_DD_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.example_21_1_2_CC_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.example_21_1_2_DD_ic_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.example_21_1_2_CC_ic_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.example_21_1_2_interval": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_noisyPD_gen": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.example_21_1_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.example_21_1_2_ppe": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.example_21_1_2_instance": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.example_21_1_2_printed_false": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.DGStochGame": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.DGStochGame.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.DGStochGame.P": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.DGStochGame.P_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.DGStochGame.P_sum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.DGStochGame.u": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.DGStochGame.M": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.DGStochGame.u_bound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.DGStochGame.\u03b4": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.DGStochGame.\u03b4_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.DGStochGame.\u03b4_lt_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_shift": [],
+    "Miao.DynamicGames.dg_mdev": [],
+    "Miao.DynamicGames.dg_mex": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_mU": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_abs_mex_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_msummable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_abs_mU_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_mU_rec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_IsMPE": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_IsStationaryMPE": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_mV": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_mV_bellman": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.definition_21_2_1_bellman_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_stationaryMPE_bellman": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_SYmu": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_SY": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_SY_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_SY_isCompact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_pdStochGame": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_pdStochGame_mpe": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_log_max": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_fpNext": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_fpKappa": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_fpNu": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_fpV": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_fpRHS": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_fpRHS_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_fpKappa_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_fp_bellman_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_fp_bellman": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_fp_bellman_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_fp_kappa_forced": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_fp_telescope": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_fp_optimal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_fpPath": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_fpPath_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_fpPath_log": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_fpPath_feasible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_fpPath_log_bound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_fp_policy_value": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_fp_path_tendsto": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_fishLaw": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_fish_V_law": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_fish_foc_deriv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.eq_21_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_fish_foc_solve": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_fish_mpe_kappa": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_fishK": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_fishS": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_fish_mpe_closed_form": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_fish_rates": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.eq_21_1_mpe": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_fish_mpe": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_fish_mpe_steady_state": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_fish_follower_reaction": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_fish_follower_printed_false": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_fish_leader_foc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_fish_leader": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.ex_21_3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_log_add_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_fish_cooperative": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.dg_fish_overfishing": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_CE": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_mem_CE": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_IsRamsey": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_IsNash": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_vN_le_vR": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_bgGov": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_bgHH": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_bgC": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.example_21_4_1_household": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.example_21_4_1_ramsey": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.example_21_4_1_nash": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.example_21_4_1_time_inconsistent": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_r422": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_C422": [],
+    "Miao.DynamicGames.example_21_4_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_r216": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_C216": [],
+    "Miao.DynamicGames.ex_21_6_a": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.ex_21_6_b": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.CGProfile": [],
+    "Miao.DynamicGames.cg_cont": [],
+    "Miao.DynamicGames.cg_cont_apply": [],
+    "Miao.DynamicGames.cg_cont_nil": [],
+    "Miao.DynamicGames.cg_cont_cont": [
+      "propext",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_path": [],
+    "Miao.DynamicGames.cg_prefix": [],
+    "Miao.DynamicGames.cg_prefix_succ": [
+      "propext"
+    ],
+    "Miao.DynamicGames.cg_path_cont_prefix": [
+      "propext",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_path_spec": [
+      "propext",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_pathValue": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_U": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_Ut": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_Uh": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_Uh_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_summable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_pathValue_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_le_pathValue": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_pathValue_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_pathValue_succ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_Ut_succ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_Ut_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_U_rec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_U_cont_rec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_abs_U_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_U_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_withGov": [],
+    "Miao.DynamicGames.cg_IsSPE": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.definition_21_4_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_OneShot": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_isSPE_iff_oneShot": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_IsSPE.cont": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_IsSPE.root": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.lemma_21_4_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_nash_repetition_spe": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_V": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_V_abs_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_V_isBounded": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_IsSPE.path_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_V_subset_Icc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_V_lower": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_recState": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_recStrat": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_recStrat_cont": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_recStrat_cont_single": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_recState_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_recSeq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.definition_21_4_5": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_recStrat_value": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_recursive_spe": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_recursive_spe_only_if": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_trigZh": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_trigZg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_trigV": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_trigger_value": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.example_21_4_5": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_scZh": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_scZg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_scV": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_stickCarrot_value": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.example_21_4_6": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_Admissible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_B": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_SelfGenerating": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.definition_21_4_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.definition_21_4_3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.definition_21_4_4": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_B_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_K": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_K_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_B_eq_image": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_K_isCompact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.lemma_21_4_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_V_subset_B": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_paste": [],
+    "Miao.DynamicGames.cg_B_subset_V": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_selfGenerating_subset_V": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.lemma_21_4_3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.theorem_21_4_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_mem_V_of_mem_B_insert": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_aps_step1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_aps_step2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_aps_step2_max": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_aps_step3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_follow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_follow_cont_single": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_follow_cont": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_follow_path": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_follow_U": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_follow_spe": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.proposition_21_4_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_selfEnf": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_SelfEnforcing": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_selfEnf_cont_single": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_selfEnf_cont": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_selfEnf_path": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_selfEnf_U": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_selfEnf_prefix": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_selfEnf_path_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.proposition_21_4_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.proposition_21_4_3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.ex_21_4": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_vmin_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_v1_formula": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_vmax": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_four_equations": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_example_21_4_6_selfEnforcing": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_r422_abs_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_C422_mem": [],
+    "Miao.DynamicGames.cg_stokeyZ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_stokeyNext": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_stokeyV": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_stokey_recursive_spe": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_stokey_V_ge": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_stokey_V_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_stokey_V": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_stokey_vmin_vmax": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_stokey_vmin_formula": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_stokeyPath": [
+      "propext"
+    ],
+    "Miao.DynamicGames.cg_stokeyPath_Ut": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_stokeyPath_selfEnforcing": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_ramseyPath422": [
+      "propext"
+    ],
+    "Miao.DynamicGames.example_21_4_4": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.example_21_4_4_arith": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.ex_21_5": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_theorem_21_4_1_unbounded": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_proposition_21_4_1_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_cexZh": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_cexV": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_definition_21_4_5_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_example_21_4_5_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_example_21_4_6_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_rBool": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_CBool": [],
+    "Miao.DynamicGames.cg_pBool": [],
+    "Miao.DynamicGames.cg_rBool_abs_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_proposition_21_4_2_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_bgGov_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.example_21_4_3_best_deviation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.example_21_4_3_range": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.example_21_4_3_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_bgR": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_bgCK": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_bgR_abs_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.example_21_4_3_nash": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.example_21_4_3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_r216_abs_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_C216_mem": [],
+    "Miao.DynamicGames.cg_ex216_V_ge": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_ex216_V_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_ex216Z": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_ex216Next": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_ex216V": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_ex216_recursive_spe": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_ex216_V": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.ex_21_6_c": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_ramseyPath216": [
+      "propext"
+    ],
+    "Miao.DynamicGames.cg_ramseyPath216_Ut": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_ex216_ramsey_spe": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.ex_21_6_d": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.ex_21_6_e": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_ex216_step": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_ex216Z2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.cg_ex216V2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DynamicGames.ex_21_6_f": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  "source_sha256": {
+    "DynamicGames/RGStageGame.lean": "1a6b4c9765a04f060158469f1f38782ca8983c986cbe4226aefa25c8f0a2cbf7",
+    "DynamicGames/RGOneShot.lean": "2d3528c46b8d8ba14ade084ebeb55dc670f0137fc1d87b813be1faad4125accd",
+    "DynamicGames/RGPayoffSet.lean": "5e35ec78802cb10516a8757d9dac7573260e398b7e02ea4a7b18a908d3b29121",
+    "DynamicGames/RGPrisoners.lean": "fa16849d74f8d37bee772d53bf046ff9566f0a95376c0a28034a4fa7f3dcc672",
+    "DynamicGames/RGMaximal.lean": "5d1ec0ec5f86be4773065077870dbf4d72efe6cfcbed97484f19f3137bb5e20e",
+    "DynamicGames/RGCompact.lean": "3d75ad8046e6081f989e1324a2bcee138ad2779de81131913a49436d6ce1449c",
+    "DynamicGames/RGComputation.lean": "8b16a9ee9cb82f647689f92220e038357b64ee06e75cb6f4abc253e24d92e354",
+    "DynamicGames/RGSimple.lean": "fe6edd2f479ff943719bc8a3afedde2a1230ccf24d4ee0743fd97d28f23ce5c5",
+    "DynamicGames/DGPublicMonitoring.lean": "f02a9ab2ad11c7e000bbeb905a5b4463ad696dfd080190893c25ef786d233308",
+    "DynamicGames/DGNoisyPD.lean": "a4d8faf28b361fd90b2ef7522c4d32b1a16dbc8c9408a4637905a70d9d7d7595",
+    "DynamicGames/DGStochasticGames.lean": "a6b842af4150c7068ce939dcc2e8ece8a84c5d6f8311b01c394135fdd3d19d8f",
+    "DynamicGames/DGFishProblem.lean": "de1977412798089e907aa88c8e0da832b6ff9716b75d749a9b26a63ea5ae4a29",
+    "DynamicGames/DGFishWar.lean": "d6e76e8f3d33f3a02cd2b1f2a73779ca2c8a5c89296f12b95c4982ff2bdcf3a4",
+    "DynamicGames/CGOnePeriod.lean": "23877f9c031358b2ae8af0a26397c16051469e08b3d22ee2bef35d022f707dcd",
+    "DynamicGames/CGRepeated.lean": "eab89ef2d7e58992f30c24c526fffa053a3a9c5ecfd62b8b512869410f37361c",
+    "DynamicGames/CGRecursive.lean": "8f28fe3373bc02675b893000c39f73addbb0aedea974e4ea0d7569f924d0f25d",
+    "DynamicGames/CGValueSet.lean": "944e607ad355fa9bbcd877323134ec0881663f8637845353b5a8caaee8de5afb",
+    "DynamicGames/CGBestWorst.lean": "48e3975f86868ad1eb4db338b7ca96a222ce1186c71ed6b36510edb971ab8c8d",
+    "DynamicGames/CGStokeyExample.lean": "86dc0b551be4ca3d4056e4b9400365d9e31f767183a9eb707e33817f0563cb79",
+    "DynamicGames/CGBarroGordon.lean": "ddebff60f998fc2e687ee37de305c7d1822e40bca5e988146ebf912fbe16ec1e",
+    "DynamicGames/CGExercise216.lean": "ce0555a736bec1b3ae190899ea12dad2543302a7dcda58be5fc7d64631370634",
+    "DynamicGames.lean": "54012823917e2250f9897e010f968c57b323b4c0e82c6e21a4ab52ccc98f981a",
+    "lean-toolchain": "8733782dc070a99b312039cda424f601b80f3be6f6f512627da5ba25adc27632",
+    "lakefile.toml": "fdaff444d5c293a7e09383ac932007dcd0f19732056063eccf7561af441708eb",
+    "lake-manifest.json": "bf02c045d4d697ff497e2bf38c29e3aeb4ed67077f415be5ed7dddfc57b37eb4",
+    "proof-manifest.json": "7bf40a2da3738fdff1b975f454a3eb4a7a6169517b230b966cc8cdd98d209204",
+    "scripts/verify.py": "a70b1fa704dd590f937f8b37682afa88a9d85a9150065acb935c7d2c9589da3b",
+    "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  },
+  "fresh_audit_sha256": "cf42e503332a2c1d9475feaa39a8050b2db0b3d0f3c61cf4c1fed40c523a3552",
+  "lean_toolchain": "leanprover/lean4:v4.34.0",
+  "scope": "Miao Chapter 21 (pp. 737-784): repeated games with perfect monitoring (one-shot deviation principle, self-generation, factorization, the maximal fixed point, computation, simple strategies), imperfect public monitoring (PPE, the noisy prisoner's dilemma), dynamic stochastic games and Markov perfect equilibrium, the Great Fish War, credible government policies (the APS value set, best and worst SPE values, recursive strategies), and Exercises 1-6.",
+  "source": "Jianjun Miao, Economic Dynamics in Discrete Time, MIT Press 2014 (draft of 21 April 2013), Chapter 21"
+}
