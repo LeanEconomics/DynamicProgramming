@@ -1,0 +1,3814 @@
+{
+  "checked_at_utc": "2026-11-11T02:54:54.087555+00:00",
+  "theorems": 277,
+  "module_theorems": {
+    "RecursiveContracts/LCAutarky.lean": 8,
+    "RecursiveContracts/LCSequence.lean": 10,
+    "RecursiveContracts/LCBellman.lean": 21,
+    "RecursiveContracts/LCInstances.lean": 5,
+    "RecursiveContracts/LCDeterministic.lean": 8,
+    "RecursiveContracts/LCLagrangian.lean": 8,
+    "RecursiveContracts/LCZhang.lean": 26,
+    "RecursiveContracts/LCExercise221.lean": 15,
+    "RecursiveContracts/LCExercise222.lean": 1,
+    "RecursiveContracts/HAModel.lean": 13,
+    "RecursiveContracts/HAIntegrals.lean": 10,
+    "RecursiveContracts/HAPropositions.lean": 26,
+    "RecursiveContracts/HIBasics.lean": 17,
+    "RecursiveContracts/HIAssumption.lean": 9,
+    "RecursiveContracts/HIBellman.lean": 39,
+    "RecursiveContracts/HIOptimal.lean": 14,
+    "RecursiveContracts/HIConcavity.lean": 16,
+    "RecursiveContracts/HIPoverty.lean": 12,
+    "RecursiveContracts/HIExercises.lean": 19
+  },
+  "audited_declarations": 375,
+  "declarations": [
+    {
+      "name": "Miao.RecursiveContracts.lc_condExp",
+      "kind": "def",
+      "module": "RecursiveContracts/LCAutarky.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_IsStochastic",
+      "kind": "def",
+      "module": "RecursiveContracts/LCAutarky.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_autarky",
+      "kind": "def",
+      "module": "RecursiveContracts/LCAutarky.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_condExp_abs_le",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCAutarky.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_condExp_iter_abs_le",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCAutarky.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_exists_bound",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCAutarky.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_autarky_summable",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCAutarky.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_autarky_recursion",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCAutarky.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_autarky_unique",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCAutarky.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_condExp_iter_linear",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCAutarky.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_autarky_split",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCAutarky.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_ext",
+      "kind": "def",
+      "module": "RecursiveContracts/LCSequence.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_treeExp",
+      "kind": "def",
+      "module": "RecursiveContracts/LCSequence.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_treeValue",
+      "kind": "def",
+      "module": "RecursiveContracts/LCSequence.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_treeExp_abs_le",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCSequence.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_treeValue_summable",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCSequence.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_treeValue_recursion",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCSequence.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_treeExp_state",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCSequence.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_IC",
+      "kind": "def",
+      "module": "RecursiveContracts/LCSequence.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_PK",
+      "kind": "def",
+      "module": "RecursiveContracts/LCSequence.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_BddPlan",
+      "kind": "def",
+      "module": "RecursiveContracts/LCSequence.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_principalValue",
+      "kind": "def",
+      "module": "RecursiveContracts/LCSequence.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.eq_22_1",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCSequence.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.eq_22_2",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCSequence.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.eq_22_3",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCSequence.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.eq_22_4",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCSequence.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_principal_recursion",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCSequence.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_continuation_feasible",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCSequence.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_feasible",
+      "kind": "def",
+      "module": "RecursiveContracts/LCBellman.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_obj",
+      "kind": "def",
+      "module": "RecursiveContracts/LCBellman.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_valueSet",
+      "kind": "def",
+      "module": "RecursiveContracts/LCBellman.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_BellmanAt",
+      "kind": "def",
+      "module": "RecursiveContracts/LCBellman.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_Bellman",
+      "kind": "def",
+      "module": "RecursiveContracts/LCBellman.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_Optimal",
+      "kind": "def",
+      "module": "RecursiveContracts/LCBellman.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_BellmanAt.lc_obj_le",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCBellman.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_BellmanAt.lc_exists_optimal",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCBellman.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_feasible_convex",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCBellman.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_bellman_concave",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCBellman.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_bellman_antitone",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCBellman.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_promise_keeping_binds",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCBellman.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_inv_hasDerivAt",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCBellman.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.eq_22_8",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCBellman.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.eq_22_7",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCBellman.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_lagrangian",
+      "kind": "def",
+      "module": "RecursiveContracts/LCBellman.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.eq_22_5",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCBellman.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_sum_update",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCBellman.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.eq_22_6",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCBellman.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.eq_22_9",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCBellman.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_binding_case",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCBellman.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_slack_case",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCBellman.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_optimal_contract",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCBellman.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.eq_22_11",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCBellman.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_consumption_eventually_constant",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCBellman.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_iid_value_shift",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCBellman.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_iid_promised_value",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCBellman.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_iid_full_insurance",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCBellman.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_absorbP",
+      "kind": "def",
+      "module": "RecursiveContracts/LCInstances.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_absorbP_of_le",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCInstances.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_exp_ge_tangent",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCInstances.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_absorbing_bellman",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCInstances.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_bellman_one_state",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCInstances.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_promise_decrease_counterexample",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCInstances.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_detValue",
+      "kind": "def",
+      "module": "RecursiveContracts/LCDeterministic.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_summable_geom",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCDeterministic.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_detValue_abs_le",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCDeterministic.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_detValue_split",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCDeterministic.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_detValue_succ",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCDeterministic.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_detValue_split0",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCDeterministic.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_detValue_sub",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCDeterministic.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_detValue_mono",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCDeterministic.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_detValue_const",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCDeterministic.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_cumMult",
+      "kind": "def",
+      "module": "RecursiveContracts/LCLagrangian.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.eq_22_10",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCLagrangian.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_triangle_swap",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCLagrangian.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_lagrangian_rewrite_finite",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCLagrangian.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_lagrangian_rewrite",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCLagrangian.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_lagrangian_foc",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCLagrangian.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_multiplier_value_derivative",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCLagrangian.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_detU",
+      "kind": "def",
+      "module": "RecursiveContracts/LCLagrangian.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_detPrincipal",
+      "kind": "def",
+      "module": "RecursiveContracts/LCLagrangian.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_detFeasible",
+      "kind": "def",
+      "module": "RecursiveContracts/LCLagrangian.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_lagrangian_sufficiency",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCLagrangian.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_first_best",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCLagrangian.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_B",
+      "kind": "def",
+      "module": "RecursiveContracts/LCZhang.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_S",
+      "kind": "def",
+      "module": "RecursiveContracts/LCZhang.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_A",
+      "kind": "def",
+      "module": "RecursiveContracts/LCZhang.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_m",
+      "kind": "def",
+      "module": "RecursiveContracts/LCZhang.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_run",
+      "kind": "def",
+      "module": "RecursiveContracts/LCZhang.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_B_add",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCZhang.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_S_add",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCZhang.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_B_mul",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCZhang.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_B_nonneg",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCZhang.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_B_ge_one",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCZhang.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_B_mul_le",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCZhang.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_S_abs_le",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCZhang.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_A_abs_le",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCZhang.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_A_bddBelow",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCZhang.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_m_le_A",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCZhang.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_m_abs_le",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCZhang.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_m_le_x",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCZhang.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_S_ge_m",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCZhang.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_A_tendsto",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCZhang.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_exists_low",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCZhang.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_block_le",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCZhang.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_block_eq",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCZhang.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_tail_le",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCZhang.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_tail_eq",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCZhang.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_run_succ",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCZhang.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_run_ge",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCZhang.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_run_mono",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCZhang.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_run_add",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCZhang.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_run_eq_first",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCZhang.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_run_abs_le",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCZhang.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_zhang_identity",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCZhang.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_incr",
+      "kind": "def",
+      "module": "RecursiveContracts/LCExercise221.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_cumMult_incr",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCExercise221.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_g_strictMono",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCExercise221.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_detValue_shift",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCExercise221.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_optimal_of_marginal",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCExercise221.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.ex_22_1a",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCExercise221.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.ex_22_1b",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCExercise221.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.ex_22_1c",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCExercise221.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_d_tau",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCExercise221.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_d_markov",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCExercise221.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_h_isGLB",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCExercise221.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_zpath",
+      "kind": "def",
+      "module": "RecursiveContracts/LCExercise221.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_zpath_abs_le",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCExercise221.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_c0_strictMono",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCExercise221.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_c0_gt_h",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCExercise221.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_ex_22_1c_min_not_attained",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCExercise221.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lc_h_depends_on_future",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCExercise221.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.ex_22_2a",
+      "kind": "theorem",
+      "module": "RecursiveContracts/LCExercise222.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.ha_histDensity",
+      "kind": "def",
+      "module": "RecursiveContracts/HAModel.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.ha_histDensity_succ",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HAModel.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.ha_histDensity_nonneg",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HAModel.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.ha_histDensity_iid",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HAModel.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.ha_seqPrincipalValue",
+      "kind": "def",
+      "module": "RecursiveContracts/HAModel.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.ha_seqAgentValue",
+      "kind": "def",
+      "module": "RecursiveContracts/HAModel.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.ha_seqIC",
+      "kind": "def",
+      "module": "RecursiveContracts/HAModel.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.ha_seqPC",
+      "kind": "def",
+      "module": "RecursiveContracts/HAModel.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.ha_agentValue",
+      "kind": "def",
+      "module": "RecursiveContracts/HAModel.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.ha_principalValue",
+      "kind": "def",
+      "module": "RecursiveContracts/HAModel.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.ha_IC",
+      "kind": "def",
+      "module": "RecursiveContracts/HAModel.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.ha_PK",
+      "kind": "def",
+      "module": "RecursiveContracts/HAModel.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.ha_FOA",
+      "kind": "def",
+      "module": "RecursiveContracts/HAModel.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.ha_IsPrincipalValue",
+      "kind": "def",
+      "module": "RecursiveContracts/HAModel.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.ha_principalValue_le",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HAModel.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.ha_integral_fa_eq_zero",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HAModel.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.ha_linearDensity_hasDerivAt",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HAModel.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.eq_22_16",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HAModel.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.ha_pointLagr",
+      "kind": "def",
+      "module": "RecursiveContracts/HAModel.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.eq_22_17",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HAModel.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.eq_22_19",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HAModel.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.eq_22_20",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HAModel.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.eq_22_18",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HAModel.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.ha_envelope",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HAModel.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.ha_envelope_condition",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HAModel.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.ha_expect",
+      "kind": "def",
+      "module": "RecursiveContracts/HAIntegrals.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.ha_cov",
+      "kind": "def",
+      "module": "RecursiveContracts/HAIntegrals.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.ha_expect_mul_eq_cov_add",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HAIntegrals.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.ha_integral_mean_value",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HAIntegrals.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.ha_sign_change",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HAIntegrals.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.ha_mlrc_integral_nonneg",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HAIntegrals.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.ha_mlrc_integral_pos",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HAIntegrals.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.ha_expect_lr",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HAIntegrals.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.ha_cov_lr_eq",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HAIntegrals.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.ha_cov_lr_nonneg",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HAIntegrals.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.ha_inv_expect_inv_le",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HAIntegrals.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.ha_inv_expect_inv_lt",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HAIntegrals.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.ha_one_div_strictMono",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HAPropositions.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.eq_22_21",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HAPropositions.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.eq_22_22",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HAPropositions.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.proposition_22_2_1",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HAPropositions.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.ha_first_best_income",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HAPropositions.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.ha_mu_pos",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HAPropositions.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.ha_c_strictMonoOn",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HAPropositions.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.ha_w_strictMonoOn",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HAPropositions.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.ha_eq_22_20_deriv",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HAPropositions.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.ha_eq_22_17_deriv",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HAPropositions.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.ha_cy_pos_iff_wy_pos",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HAPropositions.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.proposition_22_2_2",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HAPropositions.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.ha_cy_eq_zero_of_ry_zero",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HAPropositions.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.ha_flat_mlrc_density",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HAPropositions.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.ha_contract_dynamics",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HAPropositions.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.proposition_22_2_3",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HAPropositions.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.ha_inverse_euler_inv",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HAPropositions.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.ha_marginal_value_martingale",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HAPropositions.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.ha_jensen",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HAPropositions.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.ha_jensen_strict",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HAPropositions.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.ha_jensen_strict_of_mu_pos",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HAPropositions.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.ha_tangent_lt",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HAPropositions.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.ha_no_borrow",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HAPropositions.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.ha_wants_to_save",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HAPropositions.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.ha_rogerson_save",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HAPropositions.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.ha_proposition_22_2_3_printed_false",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HAPropositions.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.HIModel",
+      "kind": "structure",
+      "module": "RecursiveContracts/HIBasics.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.HIModel.mk",
+      "kind": "constructor",
+      "module": "RecursiveContracts/HIBasics.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.HIModel.N",
+      "kind": "projection",
+      "module": "RecursiveContracts/HIBasics.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.HIModel.\u03b8",
+      "kind": "projection",
+      "module": "RecursiveContracts/HIBasics.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.HIModel.prob",
+      "kind": "projection",
+      "module": "RecursiveContracts/HIBasics.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.HIModel.\u03b2",
+      "kind": "projection",
+      "module": "RecursiveContracts/HIBasics.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.HIModel.u",
+      "kind": "projection",
+      "module": "RecursiveContracts/HIBasics.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.HIModel.\u03b8_strictMono",
+      "kind": "projection",
+      "module": "RecursiveContracts/HIBasics.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.HIModel.prob_pos",
+      "kind": "projection",
+      "module": "RecursiveContracts/HIBasics.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.HIModel.prob_sum",
+      "kind": "projection",
+      "module": "RecursiveContracts/HIBasics.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.HIModel.\u03b2_pos",
+      "kind": "projection",
+      "module": "RecursiveContracts/HIBasics.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.HIModel.\u03b2_lt_one",
+      "kind": "projection",
+      "module": "RecursiveContracts/HIBasics.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.HIModel.u_cont",
+      "kind": "projection",
+      "module": "RecursiveContracts/HIBasics.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.HIModel.u_strictMono",
+      "kind": "projection",
+      "module": "RecursiveContracts/HIBasics.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.HIModel.u_strictConcave",
+      "kind": "projection",
+      "module": "RecursiveContracts/HIBasics.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.HIModel.u_bddAbove",
+      "kind": "projection",
+      "module": "RecursiveContracts/HIBasics.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.HIModel.u_not_bddBelow",
+      "kind": "projection",
+      "module": "RecursiveContracts/HIBasics.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_C",
+      "kind": "def",
+      "module": "RecursiveContracts/HIBasics.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_IC",
+      "kind": "def",
+      "module": "RecursiveContracts/HIBasics.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_LocalIC",
+      "kind": "def",
+      "module": "RecursiveContracts/HIBasics.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_agentValue",
+      "kind": "def",
+      "module": "RecursiveContracts/HIBasics.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_principalValue",
+      "kind": "def",
+      "module": "RecursiveContracts/HIBasics.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_ubar",
+      "kind": "def",
+      "module": "RecursiveContracts/HIBasics.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_vmax",
+      "kind": "def",
+      "module": "RecursiveContracts/HIBasics.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_Feasible",
+      "kind": "def",
+      "module": "RecursiveContracts/HIBasics.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_strict_decreasing_increments",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIBasics.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_decreasing_increments",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIBasics.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_C_add_C",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIBasics.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_pair_mono",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIBasics.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_local_mono",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIBasics.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lemma_22_3_1",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIBasics.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_down_step",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIBasics.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_up_step",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIBasics.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lemma_22_3_2",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIBasics.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_upward_of_binding",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIBasics.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_C_shift",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIBasics.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_agentValue_shift",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIBasics.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_cara",
+      "kind": "def",
+      "module": "RecursiveContracts/HIBasics.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_cara_strictMono",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIBasics.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_cara_strictConcave",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIBasics.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_cara_sSup",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIBasics.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_cara_not_bddBelow",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIBasics.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_caraModel",
+      "kind": "def",
+      "module": "RecursiveContracts/HIBasics.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_exampleModel",
+      "kind": "def",
+      "module": "RecursiveContracts/HIBasics.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_exampleModel_N",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIBasics.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.assumption_22_3_1",
+      "kind": "def",
+      "module": "RecursiveContracts/HIAssumption.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_cara_assumption_22_3_1",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIAssumption.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_modelOfAssumption",
+      "kind": "def",
+      "module": "RecursiveContracts/HIAssumption.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_dara_ratio_mono",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIAssumption.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_dara_ce",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIAssumption.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_exists_mix",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIAssumption.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_mix_c_le",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIAssumption.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_mix_agentValue",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIAssumption.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_mix_principal_ge",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIAssumption.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_mix_C_eq",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIAssumption.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_mix_downward",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIAssumption.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_u_lt_ubar",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIBellman.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_u_surj",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIBellman.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_uinv",
+      "kind": "def",
+      "module": "RecursiveContracts/HIBellman.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_u_uinv",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIBellman.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_lt_vmax_iff",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIBellman.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_sum_const",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIBellman.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_cstar",
+      "kind": "def",
+      "module": "RecursiveContracts/HIBellman.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_Bfun",
+      "kind": "def",
+      "module": "RecursiveContracts/HIBellman.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_Bfun_strictMono",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIBellman.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_Bfun_bounds",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIBellman.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_Bfun_surj",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIBellman.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_b",
+      "kind": "def",
+      "module": "RecursiveContracts/HIBellman.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_b_spec",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIBellman.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_cstar_spec",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIBellman.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_\u03b8bar",
+      "kind": "def",
+      "module": "RecursiveContracts/HIBellman.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_L",
+      "kind": "def",
+      "module": "RecursiveContracts/HIBellman.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_U",
+      "kind": "def",
+      "module": "RecursiveContracts/HIBellman.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_U_eq_sum",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIBellman.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_InF",
+      "kind": "def",
+      "module": "RecursiveContracts/HIBellman.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_b_le_cstar",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIBellman.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_U_sub_L_le",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIBellman.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_agentValue_lt_vmax",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIBellman.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_vals",
+      "kind": "def",
+      "module": "RecursiveContracts/HIBellman.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_T",
+      "kind": "def",
+      "module": "RecursiveContracts/HIBellman.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_const_feasible",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIBellman.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_const_value",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIBellman.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_principal_le_U",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIBellman.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_vals_nonempty",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIBellman.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_vals_bddAbove",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIBellman.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_le_T",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIBellman.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.eq_22_26",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIBellman.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_T_le_add",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIBellman.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_T_abs_le",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIBellman.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_InF_abs_sub",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIBellman.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_Pk",
+      "kind": "def",
+      "module": "RecursiveContracts/HIBellman.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_L_InF",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIBellman.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_Pk_InF",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIBellman.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_Pk_succ_abs",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIBellman.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_Pk_cauchy",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIBellman.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_P",
+      "kind": "def",
+      "module": "RecursiveContracts/HIBellman.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_Pk_tendsto",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIBellman.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_P_abs_sub",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIBellman.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_P_InF",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIBellman.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_P_fixed",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIBellman.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_fixed_unique",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIBellman.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_b_mono",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIBellman.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_L_antitoneOn",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIBellman.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_T_antitoneOn",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIBellman.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_Pk_antitoneOn",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIBellman.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.proposition_22_3_1",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIBellman.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_concaveOn_of_tendsto",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIBellman.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.assumption_22_3_2",
+      "kind": "def",
+      "module": "RecursiveContracts/HIOptimal.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_Optimal",
+      "kind": "def",
+      "module": "RecursiveContracts/HIOptimal.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_incr_le_on",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIOptimal.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_slope_strict_anti",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIOptimal.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_upperMass",
+      "kind": "def",
+      "module": "RecursiveContracts/HIOptimal.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_upperMass_bounds",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIOptimal.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_reduce",
+      "kind": "def",
+      "module": "RecursiveContracts/HIOptimal.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_reduce_mean",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIOptimal.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_spread_reduction",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIOptimal.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_sum_mul_left",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIOptimal.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.proposition_22_3_2",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIOptimal.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_sum_ite",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIOptimal.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.proposition_22_3_3",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIOptimal.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_\u03b8succ",
+      "kind": "def",
+      "module": "RecursiveContracts/HIOptimal.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_FOC",
+      "kind": "def",
+      "module": "RecursiveContracts/HIOptimal.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.eq_22_30",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIOptimal.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_martingale_of_shift",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIOptimal.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_strictAntiOn_deriv",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIOptimal.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.lemma_22_3_3",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIOptimal.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_lemma_22_3_3_one_state",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIOptimal.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_incr_le_on_concave",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIConcavity.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_slope_anti_concave",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIConcavity.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_spread_reduction_weak",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIConcavity.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_reduce_incr",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIConcavity.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_adjust_increments",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIConcavity.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_deriv_strictAnti",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIConcavity.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_tangent",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIConcavity.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_pool_cost",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIConcavity.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_steps",
+      "kind": "def",
+      "module": "RecursiveContracts/HIConcavity.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_pool",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIConcavity.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_repair",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIConcavity.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_mix_repair",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIConcavity.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_T_concaveOn",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIConcavity.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_L_concaveOn",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIConcavity.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_Pk_concaveOn",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIConcavity.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.proposition_22_3_1_concave",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIConcavity.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_proposition_22_3_2_concave",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIConcavity.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_vseq",
+      "kind": "def",
+      "module": "RecursiveContracts/HIPoverty.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_vseq_congr",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIPoverty.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_vseq_lt",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIPoverty.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_poverty_det",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIPoverty.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_filt",
+      "kind": "def",
+      "module": "RecursiveContracts/HIPoverty.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_filt_meas",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIPoverty.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_tuple_sm_aux",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIPoverty.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_tuple_sm",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIPoverty.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_tuple_int",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIPoverty.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_Fseq",
+      "kind": "def",
+      "module": "RecursiveContracts/HIPoverty.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_vseq_eq_Fseq",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIPoverty.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_poverty_martingale",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIPoverty.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.proposition_22_3_4",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIPoverty.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_exampleModel_vmax",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIPoverty.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_exampleW",
+      "kind": "def",
+      "module": "RecursiveContracts/HIPoverty.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_poverty_example",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIPoverty.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_cara_shift",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIExercises.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_cara_vmax",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIExercises.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_cara_scale_feasible",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIExercises.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_cara_b_shift",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIExercises.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_cara_cstar_shift",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIExercises.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_scaleFn",
+      "kind": "def",
+      "module": "RecursiveContracts/HIExercises.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_scaleFn_InF",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIExercises.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_pv_scaleFn",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIExercises.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_T_scaleFn",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIExercises.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_cara_P_scale",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIExercises.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.ex_22_4_value",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIExercises.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_cara_P_hasDerivAt",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIExercises.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_cara_pv_scale",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIExercises.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_cara_optimal_scale",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIExercises.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_optimal_value",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIExercises.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.ex_22_4",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIExercises.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_ex_22_4_A_eq_zero",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIExercises.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.ex_22_4_printed_inconsistent",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIExercises.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.ex_22_3_upper",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIExercises.lean"
+    },
+    {
+      "name": "Miao.RecursiveContracts.hi_normalized_bounds",
+      "kind": "theorem",
+      "module": "RecursiveContracts/HIExercises.lean"
+    }
+  ],
+  "full_build": "passed",
+  "fresh_source_compilation": "passed",
+  "fresh_source_lint_options": [
+    "-Dlinter.mathlibStandardSet=true",
+    "-Dlinter.style.header=false"
+  ],
+  "axioms": {
+    "Miao.RecursiveContracts.lc_condExp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_IsStochastic": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_autarky": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_condExp_abs_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_condExp_iter_abs_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_exists_bound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_autarky_summable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_autarky_recursion": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_autarky_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_condExp_iter_linear": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_autarky_split": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_ext": [],
+    "Miao.RecursiveContracts.lc_treeExp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_treeValue": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_treeExp_abs_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_treeValue_summable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_treeValue_recursion": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_treeExp_state": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_IC": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_PK": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_BddPlan": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_principalValue": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.eq_22_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.eq_22_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.eq_22_3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.eq_22_4": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_principal_recursion": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_continuation_feasible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_feasible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_obj": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_valueSet": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_BellmanAt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_Bellman": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_Optimal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_BellmanAt.lc_obj_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_BellmanAt.lc_exists_optimal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_feasible_convex": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_bellman_concave": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_bellman_antitone": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_promise_keeping_binds": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_inv_hasDerivAt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.eq_22_8": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.eq_22_7": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_lagrangian": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.eq_22_5": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_sum_update": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.eq_22_6": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.eq_22_9": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_binding_case": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_slack_case": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_optimal_contract": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.eq_22_11": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_consumption_eventually_constant": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_iid_value_shift": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_iid_promised_value": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_iid_full_insurance": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_absorbP": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_absorbP_of_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_exp_ge_tangent": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_absorbing_bellman": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_bellman_one_state": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_promise_decrease_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_detValue": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_summable_geom": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_detValue_abs_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_detValue_split": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_detValue_succ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_detValue_split0": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_detValue_sub": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_detValue_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_detValue_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_cumMult": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.eq_22_10": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_triangle_swap": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_lagrangian_rewrite_finite": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_lagrangian_rewrite": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_lagrangian_foc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_multiplier_value_derivative": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_detU": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_detPrincipal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_detFeasible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_lagrangian_sufficiency": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_first_best": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_B": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_S": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_A": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_m": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_run": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_B_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_S_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_B_mul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_B_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_B_ge_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_B_mul_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_S_abs_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_A_abs_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_A_bddBelow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_m_le_A": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_m_abs_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_m_le_x": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_S_ge_m": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_A_tendsto": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_exists_low": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_block_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_block_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_tail_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_tail_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_run_succ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_run_ge": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_run_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_run_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_run_eq_first": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_run_abs_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_zhang_identity": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_incr": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_cumMult_incr": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_g_strictMono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_detValue_shift": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_optimal_of_marginal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.ex_22_1a": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.ex_22_1b": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.ex_22_1c": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_d_tau": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_d_markov": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_h_isGLB": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_zpath": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_zpath_abs_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_c0_strictMono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_c0_gt_h": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_ex_22_1c_min_not_attained": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lc_h_depends_on_future": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.ex_22_2a": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.ha_histDensity": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.ha_histDensity_succ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.ha_histDensity_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.ha_histDensity_iid": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.ha_seqPrincipalValue": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.ha_seqAgentValue": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.ha_seqIC": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.ha_seqPC": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.ha_agentValue": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.ha_principalValue": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.ha_IC": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.ha_PK": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.ha_FOA": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.ha_IsPrincipalValue": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.ha_principalValue_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.ha_integral_fa_eq_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.ha_linearDensity_hasDerivAt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.eq_22_16": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.ha_pointLagr": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.eq_22_17": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.eq_22_19": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.eq_22_20": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.eq_22_18": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.ha_envelope": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.ha_envelope_condition": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.ha_expect": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.ha_cov": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.ha_expect_mul_eq_cov_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.ha_integral_mean_value": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.ha_sign_change": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.ha_mlrc_integral_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.ha_mlrc_integral_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.ha_expect_lr": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.ha_cov_lr_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.ha_cov_lr_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.ha_inv_expect_inv_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.ha_inv_expect_inv_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.ha_one_div_strictMono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.eq_22_21": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.eq_22_22": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.proposition_22_2_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.ha_first_best_income": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.ha_mu_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.ha_c_strictMonoOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.ha_w_strictMonoOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.ha_eq_22_20_deriv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.ha_eq_22_17_deriv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.ha_cy_pos_iff_wy_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.proposition_22_2_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.ha_cy_eq_zero_of_ry_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.ha_flat_mlrc_density": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.ha_contract_dynamics": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.proposition_22_2_3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.ha_inverse_euler_inv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.ha_marginal_value_martingale": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.ha_jensen": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.ha_jensen_strict": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.ha_jensen_strict_of_mu_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.ha_tangent_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.ha_no_borrow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.ha_wants_to_save": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.ha_rogerson_save": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.ha_proposition_22_2_3_printed_false": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.HIModel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.HIModel.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.HIModel.N": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.HIModel.\u03b8": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.HIModel.prob": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.HIModel.\u03b2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.HIModel.u": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.HIModel.\u03b8_strictMono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.HIModel.prob_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.HIModel.prob_sum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.HIModel.\u03b2_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.HIModel.\u03b2_lt_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.HIModel.u_cont": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.HIModel.u_strictMono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.HIModel.u_strictConcave": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.HIModel.u_bddAbove": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.HIModel.u_not_bddBelow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_C": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_IC": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_LocalIC": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_agentValue": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_principalValue": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_ubar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_vmax": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_Feasible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_strict_decreasing_increments": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_decreasing_increments": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_C_add_C": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_pair_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_local_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lemma_22_3_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_down_step": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_up_step": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lemma_22_3_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_upward_of_binding": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_C_shift": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_agentValue_shift": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_cara": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_cara_strictMono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_cara_strictConcave": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_cara_sSup": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_cara_not_bddBelow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_caraModel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_exampleModel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_exampleModel_N": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.assumption_22_3_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_cara_assumption_22_3_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_modelOfAssumption": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_dara_ratio_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_dara_ce": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_exists_mix": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_mix_c_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_mix_agentValue": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_mix_principal_ge": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_mix_C_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_mix_downward": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_u_lt_ubar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_u_surj": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_uinv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_u_uinv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_lt_vmax_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_sum_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_cstar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_Bfun": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_Bfun_strictMono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_Bfun_bounds": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_Bfun_surj": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_b": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_b_spec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_cstar_spec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_\u03b8bar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_L": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_U": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_U_eq_sum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_InF": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_b_le_cstar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_U_sub_L_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_agentValue_lt_vmax": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_vals": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_T": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_const_feasible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_const_value": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_principal_le_U": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_vals_nonempty": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_vals_bddAbove": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_le_T": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.eq_22_26": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_T_le_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_T_abs_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_InF_abs_sub": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_Pk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_L_InF": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_Pk_InF": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_Pk_succ_abs": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_Pk_cauchy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_P": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_Pk_tendsto": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_P_abs_sub": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_P_InF": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_P_fixed": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_fixed_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_b_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_L_antitoneOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_T_antitoneOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_Pk_antitoneOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.proposition_22_3_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_concaveOn_of_tendsto": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.assumption_22_3_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_Optimal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_incr_le_on": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_slope_strict_anti": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_upperMass": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_upperMass_bounds": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_reduce": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_reduce_mean": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_spread_reduction": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_sum_mul_left": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.proposition_22_3_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_sum_ite": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.proposition_22_3_3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_\u03b8succ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_FOC": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.eq_22_30": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_martingale_of_shift": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_strictAntiOn_deriv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.lemma_22_3_3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_lemma_22_3_3_one_state": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_incr_le_on_concave": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_slope_anti_concave": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_spread_reduction_weak": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_reduce_incr": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_adjust_increments": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_deriv_strictAnti": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_tangent": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_pool_cost": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_steps": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_pool": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_repair": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_mix_repair": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_T_concaveOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_L_concaveOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_Pk_concaveOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.proposition_22_3_1_concave": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_proposition_22_3_2_concave": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_vseq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_vseq_congr": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_vseq_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_poverty_det": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_filt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_filt_meas": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_tuple_sm_aux": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_tuple_sm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_tuple_int": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_Fseq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_vseq_eq_Fseq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_poverty_martingale": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.proposition_22_3_4": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_exampleModel_vmax": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_exampleW": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_poverty_example": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_cara_shift": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_cara_vmax": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_cara_scale_feasible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_cara_b_shift": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_cara_cstar_shift": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_scaleFn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_scaleFn_InF": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_pv_scaleFn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_T_scaleFn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_cara_P_scale": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.ex_22_4_value": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_cara_P_hasDerivAt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_cara_pv_scale": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_cara_optimal_scale": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_optimal_value": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.ex_22_4": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_ex_22_4_A_eq_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.ex_22_4_printed_inconsistent": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.ex_22_3_upper": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.RecursiveContracts.hi_normalized_bounds": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  "source_sha256": {
+    "RecursiveContracts/LCAutarky.lean": "41949459cb90341e070c9bf8f507e689a8202784621df6f237632a68543c4b01",
+    "RecursiveContracts/LCSequence.lean": "6150a57aa76cb491ef8f751e109e8d5b41b4379595e4201142ec62ac04b742d2",
+    "RecursiveContracts/LCBellman.lean": "a6713015a9e05d0d0f9bc6ad3ad19a96355fc0f8b264d833cf18bd853f4e8b69",
+    "RecursiveContracts/LCInstances.lean": "e10cea8e23050bdbed5eba793e922bb636115f5507a3e2fac2295965f96bb61a",
+    "RecursiveContracts/LCDeterministic.lean": "2301103dfe7ec962205eed33baf2863724c38bd702fb497cc7284a48b70ed9c0",
+    "RecursiveContracts/LCLagrangian.lean": "959e39498207f6c7b3ee862b3dd00a71a52338a4b3fe40caf778b66380209357",
+    "RecursiveContracts/LCZhang.lean": "651086efb2e3f58d55d9d7f97736a9b40a1b2957451ffcc27b694071a184c351",
+    "RecursiveContracts/LCExercise221.lean": "e08328cb04ecf69208ccbe138fc62dcc4d96a169bd0feb33d8a058c5c4e59e08",
+    "RecursiveContracts/LCExercise222.lean": "0357fa7befc41b37a02abe9ce413df400d7a11414aeaf865f96206021b256573",
+    "RecursiveContracts/HAModel.lean": "936567287443fa1b08cf8b4fb2a0909b96774ce7ddd5aa5d2cbcad36060bc0fd",
+    "RecursiveContracts/HAIntegrals.lean": "00c2824b5e3e20c6d6b7a1b257a515089ee8002e435438ff6e50327b4a5a32ea",
+    "RecursiveContracts/HAPropositions.lean": "dd006127b677dc73250efae3c58c552fabe5bd69640b1c7c82cfa7fbf73aa3fe",
+    "RecursiveContracts/HIBasics.lean": "db7fc71974befc380a6a4f6d4e366fdfbfe96c79998b6c765afae61654e97e29",
+    "RecursiveContracts/HIAssumption.lean": "aafeab3fa4748c2c8237d1b3c09b8fef97a807b5b1598f0aa3c6081aa75c5301",
+    "RecursiveContracts/HIBellman.lean": "05030e12a5eb6ca3712d9ee98e4abe76a52bd96ab37c541c277ea99bcce9e42c",
+    "RecursiveContracts/HIOptimal.lean": "d4f2e108df5ab1dbc6ce067dde3ddedcdf7a61e0217245319502e2c9a14f4825",
+    "RecursiveContracts/HIConcavity.lean": "260d938bc992be7c22b9af210b43827322805c67fbff4760ef3bd11f6ab08aff",
+    "RecursiveContracts/HIPoverty.lean": "dcf228863a3e4fdce7386f50bbec0475607d8df6cf12424db159c9536bd9dcdd",
+    "RecursiveContracts/HIExercises.lean": "f786c71d7418e952c254625276aff1ed5b75904e2b6224c56c6b822ccba1d061",
+    "RecursiveContracts.lean": "88a111c3aee275dc5cd7f3d91debdafa5a8a1d4df5b6e70bb66b2848bd3253e5",
+    "lean-toolchain": "8733782dc070a99b312039cda424f601b80f3be6f6f512627da5ba25adc27632",
+    "lakefile.toml": "61b6ffb32565e1ba6a54c40722a4f13686e114128641c2acb1aabacc3a515f1a",
+    "lake-manifest.json": "bf02c045d4d697ff497e2bf38c29e3aeb4ed67077f415be5ed7dddfc57b37eb4",
+    "proof-manifest.json": "3d01b3eef3af56e5fa178b46761f5217ad70dd4b3b2a315f335e00982c116a4d",
+    "scripts/verify.py": "a70b1fa704dd590f937f8b37682afa88a9d85a9150065acb935c7d2c9589da3b",
+    "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  },
+  "fresh_audit_sha256": "392dd12cf2b1184d202e2d573d4b12bf7583bb445cc17d6b943e0eccd678d36a",
+  "lean_toolchain": "leanprover/lean4:v4.34.0",
+  "scope": "Miao Chapter 22 (pp. 773-801): limited commitment (dynamic programming in the promised value, the Lagrangian method, Zhang's characterisation), hidden action (the first-order approach, Propositions 22.2.1-22.2.3 and the inverse Euler equation), hidden information (Lemmas 22.3.1-22.3.3, Propositions 22.3.1-22.3.4 including concavity of the value function and immiseration), and Exercises 1-4.",
+  "source": "Jianjun Miao, Economic Dynamics in Discrete Time, MIT Press 2014 (draft of 21 April 2013), Chapter 22"
+}
