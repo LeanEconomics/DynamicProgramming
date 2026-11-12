@@ -14,11 +14,15 @@ and its time inconsistency, pensions and debt with overlapping generations, and 
 Every numbered equation the chapter derives, Definition 15.1 and every precise claim are proved
 in the book's setting. The excess cost of taxation is proved positive for all parameter values
 by an analytic argument. The claim that it is increasing in the capital tax, and minimal at zero,
-is false in general; a Lean counterexample is given. Not formalised: the data and figures, the
+is false in general; a Lean counterexample is given. The shapes in Figure 15.6 are proved for the
+whole parameter class: the labour tax is decreasing and concave in the capital tax, workers'
+consumption is hump-shaped with its peak where `τ_ℓ = g`, and capitalists' consumption is maximal
+at `τ_k = 0` exactly when `g ≤ (1 − α)/(1 + αφ)` (false otherwise, with a counterexample). Not
+formalised: the data and figures, the
 numerical tax-reform transition (Figure 15.7, Figure 15.A.1) and the minimality of the excess cost
-at the book's own parameters. Seven printed errors are corrected, as recorded in
+at the book's own parameters. Eight printed errors are corrected, as recorded in
 [corrections](docs/corrections.md); every book item is located in the
-[source map](docs/source-map.md). The library contains **136 theorems**.
+[source map](docs/source-map.md). The library contains **160 theorems**.
 
 * **Debt dynamics** (§15.2): (15.1) and the debt-to-GDP recursion (`dd_nominal_debt`,
   `dd_ratio_real`, with Cochrane's `debt_gdp_discrete`: `dd_ratio_const`); (15.2) (`eq_15_2`); the
@@ -37,6 +41,14 @@ at the book's own parameters. Seven printed errors are corrected, as recorded in
   (`inc_flow_utility`); positivity (`inc_excess_cost_pos`); the counterexample to monotonicity
   (`inc_excess_cost_not_min_at_zero`); consumption vanishing as `τ_k → 1`
   (`inc_cons_tendsto_zero`); `τ_ℓ = .2529`, `.2985` (`inc_tau_l_025`, `inc_tau_l_0`).
+* **Figure 15.6** (p. 450): Panel A, `τ_ℓ` strictly decreasing and concave in `τ_k`, strictly
+  concave for `δ > 0`, with its sign change (`fig156_tauL_strictAntiOn`, `fig156_tauL_concaveOn`,
+  `fig156_tauL_strictConcaveOn`, `fig156_tauL_neg_iff`); Panel B, `c_w` hump-shaped with peak
+  `τ_w = g(ρ + δ)/(ρ + δg)`, where `τ_ℓ = g` (`fig156_cw_hump`, `fig156_cw_isMaxOn`,
+  `fig156_cw_peak_tauL`); Panel C, `c_k` maximal at `τ_k = 0` iff `g ≤ (1 − α)/(1 + αφ)`
+  (`fig156_ck_strictAntiOn`, `fig156_ck_hump`, `fig156_ck_max_at_zero_iff`), counterexample
+  `fig156_ck_not_max_at_zero`; all from the one-variable hump `(K − cs)^a s^b`
+  (`fig156_hump_strictMonoOn`, `fig156_hump_strictAntiOn`).
 * **Laffer** (§15.3.4): the revenue maximiser `(1/(1 + φ), 0)` (`laf_isMaxOn`,
   `laf_lt_of_pos`), footnote 6 (`footnote_6`), the hump (`laf_hump`).
 * **Theories of G** (§15.3.5): `u₁ = u₂` (`tg_first_best`), public capital and increasing returns
@@ -72,6 +84,7 @@ All names are in the namespace `AKMM.FiscalPolicy`. The project imports
 | [LongRun](AKMMFiscalPolicy/LongRun.lean) | 16 | (15.8)–(15.12), GHH (AKMM §15.3.1, pp. 447–448) |
 | [Incidence](AKMMFiscalPolicy/Incidence.lean) | 10 | Worker–capitalist equivalence, (15.13), `c_w`, `c_k` (AKMM §15.3.2, p. 449) |
 | [ExcessCost](AKMMFiscalPolicy/ExcessCost.lean) | 15 | (15.14), flow utility, the excess cost of taxation, tax-reform steady states (AKMM §15.3.2–15.3.3, pp. 450–451) |
+| [FigureClaims](AKMMFiscalPolicy/FigureClaims.lean) | 24 | Figure 15.6, Panels A–C: `τ_ℓ`, `c_w`, `c_k` along (15.14) (AKMM §15.3.2, p. 450) |
 | [Laffer](AKMMFiscalPolicy/Laffer.lean) | 13 | The Laffer curve, footnote 6 (AKMM §15.3.4, pp. 453–454) |
 | [TheoriesOfG](AKMMFiscalPolicy/TheoriesOfG.lean) | 5 | Public goods and public capital (AKMM §15.3.5, pp. 454–455) |
 | [Ricardian](AKMMFiscalPolicy/Ricardian.lean) | 7 | Two-period Ricardian equivalence (AKMM §15.4, pp. 455–456) |

@@ -3,6 +3,7 @@ import AKMMFiscalPolicy.DistortionaryTaxes
 import AKMMFiscalPolicy.LongRun
 import AKMMFiscalPolicy.Incidence
 import AKMMFiscalPolicy.ExcessCost
+import AKMMFiscalPolicy.FigureClaims
 import AKMMFiscalPolicy.Laffer
 import AKMMFiscalPolicy.TheoriesOfG
 import AKMMFiscalPolicy.Ricardian

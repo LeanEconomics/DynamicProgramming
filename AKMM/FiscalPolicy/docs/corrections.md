@@ -13,7 +13,8 @@ K. Storesletten), pp. 439–466, and Appendix 15.A, pp. 868–870. Lean names ar
    at its parameters. It is not a property of the model. Counterexample: `α = 1/2`, `β = 2/3`
    (`ρ = 1/2`), `δ = 1/10`, `φ = 1`, `g = 2/5`. The excess cost is `37/6` at `τ_k = 0` and
    `12013321/2706048 ≈ 4.44 < 37/6` at `τ_k = 1/5`, with `τ_ℓ < 1` at both
-   (`inc_excess_cost_not_min_at_zero`). What is true for every parameter value is the claim that
+   (`inc_excess_cost_not_min_at_zero`); in the same economy capitalists' consumption is not
+   maximal at `τ_k = 0` either (correction 8, `fig156_ck_not_max_at_zero`). What is true for every parameter value is the claim that
    precedes it, "the excess cost of taxation is always positive": along (15.14), for all
    `g > 0`, `0 ≤ τ_k < 1` with `τ_ℓ < 1`, `0 < α < 1`, `0 < β < 1`, `δ ≥ 0`, `φ > 0`
    (`inc_excess_cost_pos`, analytic). At the book's parameters (`α = .33`, `δ = .07`,
@@ -58,6 +59,38 @@ K. Storesletten), pp. 439–466, and Appendix 15.A, pp. 868–870. Lean names ar
    government budget date by date"; `G/Y = 0.2` holds in the initial and final steady states
    (p. 452: "recall that `G/Y` is identical in the initial and final steady states"). Not
    formalised (the transition is numerical).
+
+8. **p. 450, Figure 15.6, Panels B–C: the shapes of `c_w` and `c_k`.** "When `τ_k` is restricted
+   to be non-negative, steady-state consumption of capitalists is maximized at `τ_k = 0`, while
+   consumption of workers is a hump-shaped function of `τ_k`." The text reads both off the figure
+   at its parameters. Along (15.14) (`τ_c = 0`, no transfers), with `c = ρ + δ`,
+   `s = α(1 − τ_k)/(ρ + δ(1 − τ_k))` and `e = α(1 + φ)/(1 − α)`, one has
+   `c_w = (1 − g − cs)^{1+φ}s^e` and `c_k = ρ(1 − g − cs)^φs^{1+e}` (`fig156_cw_eq`,
+   `fig156_ck_eq`), and both are single-peaked in `s` (`fig156_hump_strictMonoOn`,
+   `fig156_hump_strictAntiOn`). For all `0 < α < 1`, `0 < β < 1`, `δ ≥ 0`, `φ > 0`:
+   - **`c_w` is hump-shaped for every `0 < g < 1 − α`** (`g < 1 − α` is `τ_ℓ(0) < 1`, which the
+     figure needs to start at `τ_k = 0`): strictly increasing on `[0, τ_w]`, strictly decreasing on
+     `[τ_w, 1)`, `τ_w = g(ρ + δ)/(ρ + δg) ∈ (0, 1)` (`fig156_cw_hump`, `fig156_cw_isMaxOn`). At the
+     peak the labour tax is exactly `g`, so labour and capital income are taxed at the same average
+     rate (`fig156_cw_peak_tauL`). (For `g ≤ 0` the peak `τ_w ≤ 0` and `c_w` falls on `[0, 1)`; this
+     case is not stated in Lean.) The book's claim holds for every admissible parameter value; the
+     only addition is the explicit range `0 < g < 1 − α`.
+   - **`c_k` is maximal at `τ_k = 0` iff `g ≤ (1 − α)/(1 + αφ)`** (equivalently
+     `τ_ℓ(0) ≤ 1/(1 + αφ)`), given `g < 1 − α` (`fig156_ck_max_at_zero_iff`); then `c_k` is
+     strictly decreasing on `[0, 1)` (`fig156_ck_strictAntiOn`). For
+     `(1 − α)/(1 + αφ) < g < 1 − α`, `c_k` rises on `[0, τ_c]` and falls on `[τ_c, 1)`, with
+     `τ_c = (1 − K)(ρ + δ)/(ρ + δ(1 − K)) ∈ (0, 1)`, `K = (1 + αφ)(1 − g)/((1 + φ)α)`
+     (`fig156_ck_hump`). Counterexample to the unqualified claim, at the parameters of correction 1
+     (`α = 1/2`, `β = 2/3`, `δ = 1/10`, `φ = 1`, `g = 2/5 > 1/3`): `c_k = 25/864` at `τ_k = 0` and
+     `21600/707281 > 25/864` at `τ_k = 1/5` (`fig156_ck_not_max_at_zero`; there `τ_c = 2/17`).
+     At the book's parameters `g = .2 < .67/1.33`, so the claim holds there (as a case of the
+     general theorem, not by computation). This is consistent with correction 1: in the same
+     economy, where a high `g` makes the labour tax at `τ_k = 0` large (`τ_ℓ(0) = 4/5`), a positive
+     capital tax both raises capitalists' consumption and lowers the excess cost.
+   Panel A's shape needs no correction: `τ_ℓ` is strictly decreasing and concave in `τ_k`
+   (strictly concave for `δ > 0`, affine for `δ = 0`) for all parameters
+   (`fig156_tauL_strictAntiOn`, `fig156_tauL_concaveOn`, `fig156_tauL_strictConcaveOn`), and for
+   `0 < g < α` it changes sign exactly at `τ_k = g(ρ + δ)/(ρα + gδ)` (`fig156_tauL_neg_iff`).
 
 ## Not proved
 
