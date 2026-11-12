@@ -79,9 +79,11 @@ pp. 843–848. Lean names are relative to `AKMM.ContinuousTime`. Every book item
    (`ramseySaddle_primitives`, `ramseySaddle_crra_cobbDouglas`). For `k(0) > k**` with large
    `k(0)` the Cass optimum has a zero-investment phase and the book's (disinvesting) saddle
    path is not constructed here: not formalised. The claims that a larger `c(0)` reaches
-   `k = 0` and a smaller one enters `f'(k) < δ` are figure claims (deferred); what follows from
-   them is proved (`ramseyPlanner_zero_capital_infeasible`,
-   `appendix_9A4_below_saddle_violates_tvc`).
+   `k = 0` and a smaller one enters `f'(k) < δ` are now proved wherever the saddle path is
+   constructed (item 6). Above `k**` the Cass optimum is shown to invest strictly from every
+   `k(0) ∈ (k**, k̂]` for some `k̂ > k**` (`ramseyPhase_interior_above`, by time consistency: the
+   optimum from `k** + 1` invests strictly after a finite date, and every stock it passes after
+   that date starts an interior optimum), so there it is the book's (disinvesting) saddle path.
 
 4. **§9.4, the Poisson process.** Mathlib has no Poisson process. The book's distributional
    statements are proved: the binomial limit (`poisson_limit`), the Poisson probabilities and
@@ -95,3 +97,50 @@ pp. 843–848. Lean names are relative to `AKMM.ContinuousTime`. Every book item
 5. **Appendix 9.A.3, the discrete-to-continuous limit.** The book's "≈" steps are made
    precise with right-endpoint Riemann sums for continuous `r` and an explicit error bound
    (`productLimits_riemann`, `productLimits_product`, `appendix_9A3_product_limit`).
+
+6. **p. 255 and Appendix 9.A.4, the paths off the saddle path (Figure 9.2).** The book reads
+   their fate off the phase diagram. They are proved in `RamseyPhase` for the general model of
+   EconomicGrowth's `CassPrimitives` (which includes the book's Cobb–Douglas–CRRA model) from
+   every `k(0)` at which the saddle path is constructed, i.e. where the Cass optimum
+   `optimalPath P hk₀` invests strictly at every date: all `0 < k(0) ≤ k**`
+   (`ramseyPhase_interior_of_le`) and all `k(0) ∈ (k**, k̂]` for some `k̂ > k**`
+   (`ramseyPhase_interior_above`). "Above/below" compares `c(0)` with the saddle path's initial
+   consumption `policy P k(0)`. **Not formalised:** the book's disinvesting saddle path from
+   large `k(0) > k**`, where the Cass optimum (irreversible investment) has a zero-investment
+   phase. Constructing it needs the stable manifold of the unconstrained system for `k > k̂`
+   (a shooting or backward-integration argument with global ODE existence). The Cass library
+   cannot be reused by relaxing the investment constraint, because that would need a linear
+   term in `f`, which breaks its Inada condition at infinity. A *solution*
+   (`ramseyPhaseSolution`) is a path defined on `[0, ∞)` with `c > 0` continuous, (9.33) and
+   (9.A.1)–(9.A.2) (for CRRA: (9.33) and (9.35), `ramseyPhase_solution_of_eq_9_35`). The
+   existence of such paths is assumed, not proved, in general (the book also takes it for
+   granted). For the path above the saddle path only a solution while `k > 0` is assumed.
+   Proved: paths from the same `k(0)` do not cross (`ramseyPhase_comparison`); the saddle path
+   is the only solution satisfying the TVC (`ramseyPhase_unique`); above it, `k` reaches `0` at
+   a finite date (`ramseyPhase_above_saddle_reaches_zero`,
+   `ramseyPhase_above_saddle_not_global`); below it, after a finite date `f'(k) < δ` and
+   `k > k**` for good, `c → 0`, `k → k^u` (the unique positive root of `f(k) = δk`) and the TVC
+   fails (`ramseyPhase_below_saddle`, `appendix_9A4_below_saddle_enters_region`,
+   `ramseyPhase_root_unique`). From `k(0) > k**` a path below the saddle path may never invest
+   net (it can fall to `k^u` from above, e.g. when `k(0) > k^u`); this case
+   (`ramseyPhase_falling`) is not in the figure, which shows `k(0) < k**`. The book's argument
+   that above the saddle path `k` reaches `0` because of the phase arrows is replaced by: a
+   path that kept `k > 0` would have less capital and more consumption than the saddle path, so
+   bounded capital and consumption bounded away from `0`. It would then satisfy the TVC and by
+   uniqueness start on the saddle path. For `σ = α` (Cobb–Douglas, CRRA) a path below the
+   saddle path is constructed in closed form, so the below-saddle results are not vacuous
+   (`ramseyPhase_below_saddle_exists`, `ramseyPhase_below_saddle_instance`). No path above the
+   saddle path is constructed.
+
+7. **p. 255, "a waste".** The book's evidence that over-accumulation is a waste is that
+   consumption is lower than on the saddle path. This comparison is proved at every date
+   `t > 0` (`ramseyPhase_comparison`). Lower consumption than the optimum is not by itself
+   inefficiency, so the precise statement proved is dominance from time `0`
+   (`ramseyPhase_below_saddle_waste`): there is a path `(k', c')` from the same `k(0)`. It is
+   feasible in the project's notion for the book's problem (9.33): `k' > 0`, `c' > 0`
+   continuous, `k̇' = f(k') − δk' − c'` at every `t ≥ 0`, the class used by
+   `mangasarian_planner`. It has `c' ≥ c` at every date and `c' > c` at every date after some
+   `t₂`. It equals the original path up to `t₂` and then runs down capital above the golden
+   rule, `k' = k − η·s(t − t₂)`, with `s` Mathlib's smooth transition function. Since `s` is
+   smooth and vanishes on `(−∞, 0]`, `k'` is differentiable everywhere, including at `t₂`, so
+   no one-sided-derivative or absolutely-continuous splice notion is needed.

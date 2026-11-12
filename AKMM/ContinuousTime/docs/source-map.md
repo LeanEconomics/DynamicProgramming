@@ -116,7 +116,7 @@ pp. 843–848. Page references are the draft's running heads. Lean names are rel
 | p. 253 | `Y/L = f(k̃)A`; on the BGP `Y/L` grows at `γ`; in the long run growth tends to `γ` | `solowContinuous_income_per_capita_growth` |
 | p. 253 | "output per worker and capital per worker grow at constant rates … predictable and stable" | covered by `solowContinuous_income_per_capita_growth` for output; otherwise narrative |
 
-## §9.3.2, the planner's problem (pp. 253–255) — `RamseyPlanner`, `Mangasarian`, `RamseySaddle`
+## §9.3.2, the planner's problem (pp. 253–255) — `RamseyPlanner`, `Mangasarian`, `RamseySaddle`, `RamseyPhase`
 
 | Source | Claim | Lean |
 | --- | --- | --- |
@@ -128,12 +128,14 @@ pp. 843–848. Page references are the draft's running heads. Lean names are rel
 | p. 254, Fig. 9.2 | `k̇ > 0` iff `c < f(k) − δk`; `ċ > 0` iff `k < k**`; `ċ = 0` at `k = k**` | `ramseyPlanner_phase_signs` |
 | p. 255, fn. 3 | `k**` (modified golden rule) exists, is below the golden rule; the golden rule maximizes `f(k) − δk` | `ramseyPlanner_modified_golden_rule` (via `RamseyCassKoopmans.existsUnique_stationary_capital_of_inada`, `stationary_capital_lt_golden_rule_of_strictConcave`, `golden_rule_strictly_maximizes_consumption`) |
 | p. 255 | The saddle path from `k(0)`: convergence to `(k̄, c̄)`, `k̄ = k**`, (9.A.1)–(9.A.2), TVC, optimality | `ramseySaddle_of_interior`, `ramseySaddle_path`, `ramseySaddle_crra_cobbDouglas` (for `k(0) ≤ k**`; see corrections) |
+| p. 255 | The saddle path from `k(0) > k**` (disinvesting) | `ramseyPhase_interior_above` (for `k(0) ∈ (k**, k̂]`, some `k̂ > k**`), `ramseyPhase_saddle`; larger `k(0)`: not formalised (see corrections) |
 | p. 254 | The CRRA–Cobb–Douglas model satisfies the assumptions | `ramseySaddle_primitives` (with `ramseySaddle_power_hasDerivAt`, `ramseySaddle_power_derivs`, `ramseySaddle_power_props`) |
 | p. 255 | The saddle path satisfies the TVC because `k, c` become constant | `ramseyPlanner_tvc_of_convergent`, `appendix_9A4_saddle_tvc` |
 | p. 255 | Steady state optimal from `k**` | `mangasarian_planner_steady_state` |
-| p. 255 | Higher `c(0)`: `k(t)` reaches `0`, the Euler path is infeasible | `ramseyPlanner_zero_capital_infeasible`; that the path reaches `k = 0` is a figure claim, deferred |
-| p. 255 | Lower `c(0)`: `c → 0`, large `k`, TVC fails (Appendix 9.A.4) | `appendix_9A4_below_saddle_violates_tvc`; that the path enters `f'(k) < δ` is a figure claim, deferred |
-| p. 255 | Over-accumulation "is a waste"; `c` lower than on the saddle path | not formalised: narrative / figure claim |
+| p. 255 | Higher `c(0)`: `k(t)` reaches `0`, the Euler path is infeasible | `ramseyPhase_above_saddle_reaches_zero` (`k(T) = 0` at a finite `T > 0`), `ramseyPhase_above_saddle_not_global`, Cobb–Douglas–CRRA `ramseyPhase_above_saddle_crra_cobbDouglas`; infeasibility at `T`: `ramseyPlanner_zero_capital_infeasible` (wherever the saddle path is constructed: `k(0) ≤ k**` and `k(0) ∈ (k**, k̂]`; see corrections) |
+| p. 255 | Lower `c(0)`: `c → 0`, large `k`, TVC fails (Appendix 9.A.4) | `ramseyPhase_below_saddle` (via `ramseyPhase_rising`, `ramseyPhase_falling`, `ramseyPhase_tail`, `ramseyPhase_deriv_limit`; `f'(k) < δ` for good after a finite date, `c → 0`, `k → k^u` with `f(k^u) = δk^u`, `f'(k^u) < δ`, TVC fails), `ramseyPhase_root_unique`; Cobb–Douglas–CRRA `ramseyPhase_below_saddle_crra_cobbDouglas`; an actual such path (`σ = α`): `ramseyPhase_below_saddle_exists`, `ramseyPhase_below_saddle_instance` |
+| p. 255 | Over-accumulation "is a waste"; `c` lower than on the saddle path | `ramseyPhase_below_saddle_waste` (`c < c_saddle` at every `t > 0`, eventually below `f(k**) − δk**`; a feasible path from the same `k(0)` consumes at least as much at every date and strictly more after some date `t₂`); more capital than the saddle path: `ramseyPhase_comparison` |
+| p. 255, Fig. 9.2 | Paths from the same `k(0)` do not cross; the saddle path is the only path satisfying the TVC | `ramseyPhase_comparison`, `ramseyPhase_unique`, `ramseyPhase_tvc_of_le_steady`; the saddle path solves the system: `ramseyPhase_saddle` (solution notion `ramseyPhaseSolution`, CRRA form `ramseyPhase_solution_of_eq_9_35`) |
 
 ## Appendix 9.A.4, `c(0)` below the saddle path violates the TVC (pp. 846–848) — `RamseyPlanner`
 
@@ -145,8 +147,8 @@ pp. 843–848. Page references are the draft's running heads. Lean names are rel
 | (9.A.4), p. 847 | `u'(c(T)) = A exp(−∫_0^T [f'(k) − (δ + ρ)])` | `appendix_9A4_marginal_utility` (second part) |
 | (9.A.5)–(9.A.6), p. 847 | TVC ⇔ `lim exp(−∫_0^T [f'(k) − δ])k(T) = 0` | `appendix_9A4_tvc_iff` |
 | p. 847 | On the saddle path `∫(f' − δ) → ∞`, so (9.A.6) holds | `appendix_9A4_saddle_tvc` (corrected: `f'(k) − δ > ε`, not `f(k) − δ > ε`) |
-| pp. 847–848 | Below the saddle path `f'(k) < δ` eventually, so (9.A.6) fails | `appendix_9A4_below_saddle_violates_tvc`, instance `appendix_9A4_below_saddle_instance`; entering the region: figure claim, deferred |
-| p. 848 | "Another way of looking": `u'(c(T))` grows faster than `e^{−ρT}` decays; finite `u'(0)` reaches `c = 0` in finite time | not formalised: informal; the first part is equivalent to `appendix_9A4_tvc_iff` |
+| pp. 847–848 | Below the saddle path `f'(k) < δ` eventually, so (9.A.6) fails | `appendix_9A4_below_saddle_violates_tvc`, instance `appendix_9A4_below_saddle_instance`; entering the region and staying above `k**`: `ramseyPhase_below_saddle`, so the theorem applies unconditionally: `appendix_9A4_below_saddle_enters_region` |
+| p. 848 | "Another way of looking": `u'(c(T))` grows faster than `e^{−ρT}` decays; finite `u'(0)` reaches `c = 0` in finite time | first part: equivalent to `appendix_9A4_tvc_iff`; that `e^{−ρT}u'(c(T))k(T)` stays bounded away from `0` below the saddle path is the last part of `ramseyPhase_below_saddle`; second part not formalised (the assumptions have `u'(0+) = ∞`) |
 
 ## §9.3.2, the market equilibrium (pp. 256–257) — `MarketEquilibrium`
 

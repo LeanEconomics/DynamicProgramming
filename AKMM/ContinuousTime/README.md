@@ -19,9 +19,9 @@ distribution, memorylessness and survival with time-varying rates are proved. Th
 depends on Sargent–Stachurski's `ContinuousTime` (scalar exponential IVPs, memorylessness),
 `EulerTransversality` (the finite-horizon supergradient bound), and EconomicGrowth's `Solow1956`
 (general Solow dynamics) and `RamseyCassKoopmans` (the Cass optimum, its certificate,
-stationary and golden-rule facts). Six printed errors are corrected and five departures
+stationary and golden-rule facts). Six printed errors are corrected and seven departures
 recorded in [corrections](docs/corrections.md); every book item is located in the
-[source map](docs/source-map.md). The library contains **123 theorems**, all new.
+[source map](docs/source-map.md). The library contains **152 theorems**, all new.
 
 * **Growth rates** (§9.1, App. 9.A.1–9.A.2): (9.1)–(9.5) (`eq_9_2`, `eq_9_4`, `eq_9_4_unique`,
   `eq_9_3_unique`, `eq_9_5`); growth accounting (`growthRates_growth_accounting`); footnote 1
@@ -54,6 +54,17 @@ recorded in [corrections](docs/corrections.md); every book item is located in th
   `ramseySaddle_path`, `ramseySaddle_crra_cobbDouglas`); (9.A.1)–(9.A.6) and the TVC on and below
   the saddle path (`appendix_9A4_marginal_utility`, `appendix_9A4_tvc_iff`,
   `appendix_9A4_saddle_tvc`, `appendix_9A4_below_saddle_violates_tvc`).
+* **Off the saddle path** (§9.3.2, Figure 9.2, App. 9.A.4): paths from the same `k(0)` do not
+  cross, and the saddle path is the only solution satisfying the TVC (`ramseyPhase_comparison`,
+  `ramseyPhase_unique`); above the saddle path capital reaches `0` in finite time
+  (`ramseyPhase_above_saddle_reaches_zero`); below it the path enters `f'(k) < δ` for good,
+  `c → 0`, `k → k^u` and the TVC fails (`ramseyPhase_below_saddle`,
+  `appendix_9A4_below_saddle_enters_region`), and the allocation is dynamically inefficient
+  (`ramseyPhase_below_saddle_waste`: a feasible path from the same `k(0)` consumes at least as
+  much at every date and strictly more after some date); the saddle path is also built on
+  `(k**, k̂]` (`ramseyPhase_interior_above`) and all results hold there; the Cobb–Douglas–CRRA cases and a closed-form path below
+  the saddle path for `σ = α` (`ramseyPhase_below_saddle_crra_cobbDouglas`,
+  `ramseyPhase_below_saddle_instance`).
 * **The market equilibrium** (§9.3.2): (9.36)–(9.39) (`eq_9_37`, `market_household_optimal`,
   `market_firm_marginal_products`, `market_firm_optimal`, `market_equilibrium_planner_system`,
   `market_planner_is_equilibrium`).
@@ -81,6 +92,7 @@ All names are in the namespace `AKMM.ContinuousTime`.
 | [SolowContinuous](AKMMContinuousTime/SolowContinuous.lean) | 6 | (9.27)–(9.32), phase line, convergence, balanced growth (AKMM §9.3.1, pp. 251–253) |
 | [RamseyPlanner](AKMMContinuousTime/RamseyPlanner.lean) | 10 | (9.33)–(9.35), Figure 9.2 signs, modified golden rule, (9.A.1)–(9.A.6) (AKMM §9.3.2, pp. 253–255; App. 9.A.4, pp. 846–848) |
 | [RamseySaddle](AKMMContinuousTime/RamseySaddle.lean) | 7 | The saddle path via EconomicGrowth's Cass optimum, Cobb–Douglas–CRRA instance (AKMM §9.3.2, pp. 254–255) |
+| [RamseyPhase](AKMMContinuousTime/RamseyPhase.lean) | 29 | Figure 9.2 off the saddle path: the saddle path above `k**`, non-crossing, uniqueness, reaching `k = 0`, entering `f'(k) < δ`, waste (AKMM §9.3.2, p. 255; App. 9.A.4, pp. 847–848) |
 | [MarketEquilibrium](AKMMContinuousTime/MarketEquilibrium.lean) | 6 | (9.36)–(9.39), households, firms, the planner allocation as an equilibrium (AKMM §9.3.2, pp. 256–257) |
 | [Poisson](AKMMContinuousTime/Poisson.lean) | 13 | (9.40)–(9.43), the Poisson limit, survival, memorylessness, expected duration (AKMM §9.4, pp. 257–259) |
 | [Unemployment](AKMMContinuousTime/Unemployment.lean) | 5 | (9.44), steady state, convergence, comparative statics (AKMM §9.4, pp. 259–260) |

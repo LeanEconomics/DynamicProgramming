@@ -1,6 +1,6 @@
 {
-  "checked_at_utc": "2026-11-11T22:35:36.956444+00:00",
-  "theorems": 123,
+  "checked_at_utc": "2026-11-12T20:43:47.480286+00:00",
+  "theorems": 152,
   "module_theorems": {
     "AKMMContinuousTime/GrowthRates.lean": 14,
     "AKMMContinuousTime/DiscreteBudget.lean": 10,
@@ -13,11 +13,12 @@
     "AKMMContinuousTime/SolowContinuous.lean": 6,
     "AKMMContinuousTime/RamseyPlanner.lean": 10,
     "AKMMContinuousTime/RamseySaddle.lean": 7,
+    "AKMMContinuousTime/RamseyPhase.lean": 29,
     "AKMMContinuousTime/MarketEquilibrium.lean": 6,
     "AKMMContinuousTime/Poisson.lean": 13,
     "AKMMContinuousTime/Unemployment.lean": 5
   },
-  "audited_declarations": 132,
+  "audited_declarations": 162,
   "declarations": [
     {
       "name": "AKMM.ContinuousTime.eq_9_2",
@@ -553,6 +554,156 @@
       "name": "AKMM.ContinuousTime.ramseySaddle_crra_cobbDouglas",
       "kind": "theorem",
       "module": "AKMMContinuousTime/RamseySaddle.lean"
+    },
+    {
+      "name": "AKMM.ContinuousTime.ramseyPhase_eventually_gt_right",
+      "kind": "theorem",
+      "module": "AKMMContinuousTime/RamseyPhase.lean"
+    },
+    {
+      "name": "AKMM.ContinuousTime.ramseyPhase_eventually_lt_left",
+      "kind": "theorem",
+      "module": "AKMMContinuousTime/RamseyPhase.lean"
+    },
+    {
+      "name": "AKMM.ContinuousTime.ramseyPhaseSolution",
+      "kind": "def",
+      "module": "AKMMContinuousTime/RamseyPhase.lean"
+    },
+    {
+      "name": "AKMM.ContinuousTime.ramseyPhase_uprime_anti",
+      "kind": "theorem",
+      "module": "AKMMContinuousTime/RamseyPhase.lean"
+    },
+    {
+      "name": "AKMM.ContinuousTime.ramseyPhase_fprime_anti",
+      "kind": "theorem",
+      "module": "AKMMContinuousTime/RamseyPhase.lean"
+    },
+    {
+      "name": "AKMM.ContinuousTime.ramseyPhase_f_mono",
+      "kind": "theorem",
+      "module": "AKMMContinuousTime/RamseyPhase.lean"
+    },
+    {
+      "name": "AKMM.ContinuousTime.ramseyPhase_net_mono",
+      "kind": "theorem",
+      "module": "AKMMContinuousTime/RamseyPhase.lean"
+    },
+    {
+      "name": "AKMM.ContinuousTime.ramseyPhase_interior_of_le",
+      "kind": "theorem",
+      "module": "AKMMContinuousTime/RamseyPhase.lean"
+    },
+    {
+      "name": "AKMM.ContinuousTime.ramseyPhase_interior_above",
+      "kind": "theorem",
+      "module": "AKMMContinuousTime/RamseyPhase.lean"
+    },
+    {
+      "name": "AKMM.ContinuousTime.ramseyPhase_saddle",
+      "kind": "theorem",
+      "module": "AKMMContinuousTime/RamseyPhase.lean"
+    },
+    {
+      "name": "AKMM.ContinuousTime.ramseyPhase_comparison",
+      "kind": "theorem",
+      "module": "AKMMContinuousTime/RamseyPhase.lean"
+    },
+    {
+      "name": "AKMM.ContinuousTime.ramseyPhase_unique",
+      "kind": "theorem",
+      "module": "AKMMContinuousTime/RamseyPhase.lean"
+    },
+    {
+      "name": "AKMM.ContinuousTime.ramseyPhase_marginal_utility",
+      "kind": "theorem",
+      "module": "AKMMContinuousTime/RamseyPhase.lean"
+    },
+    {
+      "name": "AKMM.ContinuousTime.ramseyPhase_tvc_of_le_steady",
+      "kind": "theorem",
+      "module": "AKMMContinuousTime/RamseyPhase.lean"
+    },
+    {
+      "name": "AKMM.ContinuousTime.ramseyPhase_above_saddle_not_global",
+      "kind": "theorem",
+      "module": "AKMMContinuousTime/RamseyPhase.lean"
+    },
+    {
+      "name": "AKMM.ContinuousTime.ramseyPhase_above_saddle_reaches_zero",
+      "kind": "theorem",
+      "module": "AKMMContinuousTime/RamseyPhase.lean"
+    },
+    {
+      "name": "AKMM.ContinuousTime.ramseyPhase_root_unique",
+      "kind": "theorem",
+      "module": "AKMMContinuousTime/RamseyPhase.lean"
+    },
+    {
+      "name": "AKMM.ContinuousTime.ramseyPhase_deriv_limit",
+      "kind": "theorem",
+      "module": "AKMMContinuousTime/RamseyPhase.lean"
+    },
+    {
+      "name": "AKMM.ContinuousTime.ramseyPhase_tail",
+      "kind": "theorem",
+      "module": "AKMMContinuousTime/RamseyPhase.lean"
+    },
+    {
+      "name": "AKMM.ContinuousTime.ramseyPhase_rising",
+      "kind": "theorem",
+      "module": "AKMMContinuousTime/RamseyPhase.lean"
+    },
+    {
+      "name": "AKMM.ContinuousTime.ramseyPhase_falling",
+      "kind": "theorem",
+      "module": "AKMMContinuousTime/RamseyPhase.lean"
+    },
+    {
+      "name": "AKMM.ContinuousTime.ramseyPhase_below_saddle",
+      "kind": "theorem",
+      "module": "AKMMContinuousTime/RamseyPhase.lean"
+    },
+    {
+      "name": "AKMM.ContinuousTime.appendix_9A4_below_saddle_enters_region",
+      "kind": "theorem",
+      "module": "AKMMContinuousTime/RamseyPhase.lean"
+    },
+    {
+      "name": "AKMM.ContinuousTime.ramseyPhase_below_saddle_waste",
+      "kind": "theorem",
+      "module": "AKMMContinuousTime/RamseyPhase.lean"
+    },
+    {
+      "name": "AKMM.ContinuousTime.ramseyPhase_crra_deriv",
+      "kind": "theorem",
+      "module": "AKMMContinuousTime/RamseyPhase.lean"
+    },
+    {
+      "name": "AKMM.ContinuousTime.ramseyPhase_solution_of_eq_9_35",
+      "kind": "theorem",
+      "module": "AKMMContinuousTime/RamseyPhase.lean"
+    },
+    {
+      "name": "AKMM.ContinuousTime.ramseyPhase_above_saddle_crra_cobbDouglas",
+      "kind": "theorem",
+      "module": "AKMMContinuousTime/RamseyPhase.lean"
+    },
+    {
+      "name": "AKMM.ContinuousTime.ramseyPhase_below_saddle_crra_cobbDouglas",
+      "kind": "theorem",
+      "module": "AKMMContinuousTime/RamseyPhase.lean"
+    },
+    {
+      "name": "AKMM.ContinuousTime.ramseyPhase_below_saddle_exists",
+      "kind": "theorem",
+      "module": "AKMMContinuousTime/RamseyPhase.lean"
+    },
+    {
+      "name": "AKMM.ContinuousTime.ramseyPhase_below_saddle_instance",
+      "kind": "theorem",
+      "module": "AKMMContinuousTime/RamseyPhase.lean"
     },
     {
       "name": "AKMM.ContinuousTime.eq_9_37",
@@ -1222,6 +1373,156 @@
       "Classical.choice",
       "Quot.sound"
     ],
+    "AKMM.ContinuousTime.ramseyPhase_eventually_gt_right": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ContinuousTime.ramseyPhase_eventually_lt_left": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ContinuousTime.ramseyPhaseSolution": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ContinuousTime.ramseyPhase_uprime_anti": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ContinuousTime.ramseyPhase_fprime_anti": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ContinuousTime.ramseyPhase_f_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ContinuousTime.ramseyPhase_net_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ContinuousTime.ramseyPhase_interior_of_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ContinuousTime.ramseyPhase_interior_above": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ContinuousTime.ramseyPhase_saddle": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ContinuousTime.ramseyPhase_comparison": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ContinuousTime.ramseyPhase_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ContinuousTime.ramseyPhase_marginal_utility": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ContinuousTime.ramseyPhase_tvc_of_le_steady": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ContinuousTime.ramseyPhase_above_saddle_not_global": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ContinuousTime.ramseyPhase_above_saddle_reaches_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ContinuousTime.ramseyPhase_root_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ContinuousTime.ramseyPhase_deriv_limit": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ContinuousTime.ramseyPhase_tail": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ContinuousTime.ramseyPhase_rising": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ContinuousTime.ramseyPhase_falling": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ContinuousTime.ramseyPhase_below_saddle": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ContinuousTime.appendix_9A4_below_saddle_enters_region": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ContinuousTime.ramseyPhase_below_saddle_waste": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ContinuousTime.ramseyPhase_crra_deriv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ContinuousTime.ramseyPhase_solution_of_eq_9_35": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ContinuousTime.ramseyPhase_above_saddle_crra_cobbDouglas": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ContinuousTime.ramseyPhase_below_saddle_crra_cobbDouglas": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ContinuousTime.ramseyPhase_below_saddle_exists": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ContinuousTime.ramseyPhase_below_saddle_instance": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
     "AKMM.ContinuousTime.eq_9_37": [
       "propext",
       "Classical.choice",
@@ -1358,20 +1659,21 @@
     "AKMMContinuousTime/ContinuousHamiltonian.lean": "f60a484513a2799178ef1932d7f7f3a7d27d5feedab995d6cf87b57040b6fabb",
     "AKMMContinuousTime/Mangasarian.lean": "58eb41748bcbc7ab62d92d8bd9d5b21fb62389f2681efde3b8fa8bda871dc663",
     "AKMMContinuousTime/SolowContinuous.lean": "4b306c37b3bfab6a311baa607aaaba865c3fe8051fb5c71883e8951c23874f4f",
-    "AKMMContinuousTime/RamseyPlanner.lean": "162ef7a602ec358c12c406dd5bee91236ff493a3cdde4f750963b3271fd06910",
+    "AKMMContinuousTime/RamseyPlanner.lean": "86fd787f60f94cd4eaf4611c03e208227b47f6dd2e553cb59e1ec7e3509c87de",
     "AKMMContinuousTime/RamseySaddle.lean": "662297d73e3ee8e14b74f4d896f4416b7e5b7f3ef6f51c4c1b535d20ba3e2ea9",
+    "AKMMContinuousTime/RamseyPhase.lean": "ca458b4c9a5770db522c3ed736e6d66eaf710fc1c0d3d8faca2ca57063ce68f1",
     "AKMMContinuousTime/MarketEquilibrium.lean": "fd3f920422b125922056fbc45d245d118a2eb68f24c964548a2317cdb28a0406",
     "AKMMContinuousTime/Poisson.lean": "df47f725c9c0003e0d84de966a2e87f5c9ec87f44767c928f6498745a66ca366",
     "AKMMContinuousTime/Unemployment.lean": "6a5efe3041ce97af37debdd040f82d8195ead6530e5b4a144b7da2687521036b",
-    "AKMMContinuousTime.lean": "bcd8a3cda9f2632203efc4c0b834b6152508e83888b8593e4dfcb7c791a3e93d",
+    "AKMMContinuousTime.lean": "0b5f2ac5e8d272a88906ba4a2d64851c45215619596eca39aa8fa28fef464220",
     "lean-toolchain": "8733782dc070a99b312039cda424f601b80f3be6f6f512627da5ba25adc27632",
     "lakefile.toml": "45c09ecab7c54ac0290df5c5b9c9e3451cca735cbcf5fc7e51a5c9093e4f8b4b",
     "lake-manifest.json": "522bee9fee7d3fe673188b4968888ec6530c1185c135335f99fee50a19580a2a",
-    "proof-manifest.json": "45a7de33f66a9bbda1303bb338aaf60ef1188bb19d82fc8d9d930a9bf0db6b59",
+    "proof-manifest.json": "578952958ded584eb8ec9cb7cc39029c3ed13e9c9604a9452073de1a40e0f26c",
     "scripts/verify.py": "a70b1fa704dd590f937f8b37682afa88a9d85a9150065acb935c7d2c9589da3b",
     "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
   },
-  "fresh_audit_sha256": "a89b8a7a7e1bf5666df052fd62650fe62f5f39b63f3d27dbd5c96109ac2bceef",
+  "fresh_audit_sha256": "6a29123fd866ad573c6298aee2af849cbc414d922a238901898116f3064713c7",
   "lean_toolchain": "leanprover/lean4:v4.34.0",
   "scope": "AKMM Chapter 9 (pp. 241-260, 843-848): continuous-time analytical techniques.",
   "source": "Marina Azzimonti, Per Krusell, Alisdair McKay and Toshihiko Mukoyama, Macroeconomics (draft of December 2025), Chapter 9"

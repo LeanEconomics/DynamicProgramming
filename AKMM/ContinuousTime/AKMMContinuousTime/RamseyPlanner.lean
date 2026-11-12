@@ -29,7 +29,7 @@ AKMM, §9.3.2 (pp. 253–255) and Appendix 9.A.4 (pp. 846–848).
   the region `f'(k) < δ` for good while `k` stays away from zero violates it
   (`appendix_9A4_below_saddle_violates_tvc`, instance `appendix_9A4_below_saddle_instance`).
   That a path starting below the saddle path does enter that region is read off the phase
-  diagram in the book and is not formalised (figure claim).
+  diagram in the book; it is proved in `RamseyPhase` (`ramseyPhase_below_saddle`).
 -/
 
 namespace AKMM.ContinuousTime
