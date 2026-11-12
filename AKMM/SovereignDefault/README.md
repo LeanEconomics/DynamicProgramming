@@ -16,11 +16,13 @@ Sargent and Stachurski's recursive decision processes (`RecursiveDecisionProcess
 matrices, Blackwell's conditions, contraction and global stability), and Obstfeld and Rogoff's
 debt Laffer curve and scalar implicit-function helpers (`CapitalMarketImperfections`). Not
 formalised: the data, facts, tables and figures, the calibration and simulations, the
-computational methods other than extreme-value smoothing, the cited results, and existence and
-uniqueness of the infinite-horizon Markov perfect equilibrium (beyond the text). Eight printed
-errors are corrected and nine departures recorded in [corrections](docs/corrections.md); every
-book item is located in the [source map](docs/source-map.md). The library contains
-**117 theorems**, all new.
+computational methods other than extreme-value smoothing, and the cited results other than those
+of p. 901. Beyond the text, the library proves existence and uniqueness of the Markov perfect
+equilibrium with one-period debt (Auclert–Rognlie; Aguiar–Amador) in a continuous-debt version
+of the model, and gives explicit grid economies with two equilibria, for long-term and even for
+one-period debt. Nine printed errors or imprecisions are corrected and ten departures recorded
+in [corrections](docs/corrections.md); every book item is located in the
+[source map](docs/source-map.md). The library contains **154 theorems**, all new.
 
 * **The two-period model** (§24.3): the default rule (24.4) with ties repaid and its optimality
   (`eq_24_3`, `eq_24_4`, `tp_defaultRule_optimal`); the price (24.5), whose printed middle term
@@ -59,6 +61,20 @@ book item is located in the [source map](docs/source-map.md). The library contai
   24.A.1 (`cal_mean_one_iff`, `cal_table_mu_printed_false`), and footnote 44's iso-moment slope
   by the implicit function theorem (`fn_44`, `fn_44_exists`).
 
+* **Existence and uniqueness with one-period debt** (App. 24.A.1, p. 901, beyond the text;
+  departure D10: `δ = 1`, `ψ = 0`, finitely many income states, any debt `B′ ≤ B̄` including
+  saving, `u` nondecreasing and uniformly continuous, satiated for existence): the equilibrium
+  (`IsOneMPE`), the replication argument of Auclert–Rognlie (`ue_replication`,
+  `ue_revenue`), uniqueness of values, default rule and prices (`ue_mpe_unique`), the
+  debt-capacity map as a contraction of modulus `1/(1 + r)` — the Blackwell recast of
+  Aguiar–Amador (`ue_cutoff_le`, `ue_capacity_fixed`) — with Blackwell's conditions on bounded
+  functions (`ue_fixed_point`) and existence of optimal borrowing (`ue_attain`), existence
+  (`ue_mpe_exists`, `ue_mpe_exists_unique`) and a concrete economy
+  (`ue_example_exists_unique`).
+* **Multiplicity on a grid** (p. 901, beyond the text): explicit economies with two Markov
+  perfect equilibria, for long-term debt `δ = 1/2` (`mu_grid_long_term_two_mpe`) and for
+  one-period debt (`mu_grid_one_period_two_mpe`, correction 9: uniqueness needs the continuum).
+
 All names are in the namespace `AKMM.SovereignDefault`.
 
 ## Library map
@@ -74,6 +90,8 @@ All names are in the namespace `AKMM.SovereignDefault`.
 | [ExtremeValue](AKMMSovereignDefault/ExtremeValue.lean) | 10 | Gumbel integrals, logit choice probabilities, (24.A.6) with logit probabilities |
 | [GumbelProduct](AKMMSovereignDefault/GumbelProduct.lean) | 9 | The Gumbel law; logit from the product of i.i.d. Gumbel laws |
 | [Calibration](AKMMSovereignDefault/Calibration.lean) | 15 | CRRA, (24.A.7), the mean of log income (Table 24.A.1 corrected), footnote 44 |
+| [UniqueEquilibrium](AKMMSovereignDefault/UniqueEquilibrium.lean) | 34 | Existence and uniqueness of the MPE with one-period debt and continuous debt (p. 901) |
+| [Multiplicity](AKMMSovereignDefault/Multiplicity.lean) | 3 | Two MPE on a grid, for `δ = 1/2` and for `δ = 1` (p. 901) |
 
 ## Build and verify
 

@@ -54,6 +54,18 @@ Martinez), pp. 729–748, and Appendix 24.A, pp. 897–908. Lean names are relat
    default rule `D̂₀(B, Y) = 1 if V₀^D(Y) and > V₀^R(B, Y)`: read `1 if V₀^D(Y) > V₀^R(B, Y)`.
    p. 901: the broken citation "(?; Neumeyer and Perri, 2005; …)". No theorems.
 
+9. **p. 901, uniqueness for `δ = 1` and the grid of Appendix 24.A.1.** The book states that
+   with one-period bonds "a unique equilibrium exists" (Auclert–Rognlie 2016, Aguiar–Amador
+   2019) while computing on finite grids (p. 897). The uniqueness holds with a continuum of
+   debt choices that allows saving (proved here, `ue_mpe_unique`, departure D10) but not on a
+   finite debt grid: with one income level, debt grid `{0, 1}`, `u = id`, `φ = 1/4`,
+   `β = 1/2`, `ψ = 0`, `r = 1/4` and `δ = 1` there are two Markov perfect equilibria, one
+   without default at the price `4/5` and one with self-fulfilling default on debt `1` at the
+   price `0` (`mu_grid_one_period_two_mpe`; the same economy with `δ = 1/2` has two as well,
+   `mu_grid_long_term_two_mpe`). On a continuum the sovereign escapes the bad equilibrium by
+   issuing slightly less debt (`ue_replication`); on the grid the nearest lower debt is `0`.
+   So the computed grid equilibrium need not be unique even when `δ = 1`.
+
 Checked and not an error: (24.A.7) gives the loss fraction `λ₀Y + λ₁(Y − E Y)`, which at
 `Y = E Y = 1` equals `λ₀`, so "`λ₀` determines the average fraction of income lost" holds
 (`cal_phi_at_mean`). The duration `(1 + i)/(δ + i)` (p. 902) and the yield formula (p. 903) are
@@ -108,15 +120,39 @@ D7. **Extreme-value choice probabilities (Method 3, p. 900).** The book's shocks
    derived from the product law (`ev_logit_of_gumbel`), and it agrees with the conditioning
    formula `∫ g(x) Π_{k≠h} G(x + v_h − v_k) dx` (`ev_choiceProb_eq_gumbel`, `ev_logit`).
 
-D8. **Markov perfect equilibrium (§24.4.3, p. 901).** The definition is formalised (`IsMPE`, an
-   instance `mpe_example`) and characterised as a fixed point of the equilibrium map
-   (`mpe_iff_fixedPt`). Existence and uniqueness for one-period debt (Auclert–Rognlie 2016;
-   Aguiar–Amador 2019) and multiplicity with long-term debt (Aguiar–Amador 2020) are cited by
-   the book and not formalised (beyond the text, decision 5); no hypothesis asserting existence
-   is assumed anywhere.
+D8. **Markov perfect equilibrium (§24.4.3, p. 901).** The definition is formalised on finite
+   grids (`IsMPE`, an instance `mpe_example`) and characterised as a fixed point of the
+   equilibrium map (`mpe_iff_fixedPt`). Existence and uniqueness for one-period debt
+   (Auclert–Rognlie 2016; Aguiar–Amador 2019), cited by the book, are proved beyond the text
+   (decision 5) in the continuous-debt setting of departure D10 (`ue_mpe_exists`,
+   `ue_mpe_unique`, `ue_mpe_exists_unique`, instance `ue_example_exists_unique`); on finite
+   grids they fail (correction 9). Multiplicity with long-term debt is shown on a grid
+   (`mu_grid_long_term_two_mpe`); Aguiar–Amador's (2020) continuum construction and the limit
+   of the finite-horizon game are not formalised.
 
 D9. **The default threshold `Y*(B)` (p. 904).** "As is standard in equilibrium default models,
    this threshold is unique": the text gives no argument and the claim needs a single crossing
    of `V^R(B, ·) − V^D` in `Y`; not formalised. What the model implies without it is proved:
    default sets grow with debt (`sd_default_set_mono`, `mpe_default_mono`); in the two-period
    model the threshold `B₂/φ` is explicit (`eq_24_4`).
+
+D10. **The setting of the existence and uniqueness theorem (p. 901, beyond the text).** The
+   book's model of §24.4 with one-period debt `δ = 1`, finitely many income states with a
+   Markov matrix, risk-neutral lenders with `r > 0` and the following choices (`UEModel`,
+   `IsOneMPE`):
+   * **permanent exclusion**, `ψ = 0` (the original Eaton–Gersovitz model): with re-entry the
+     default value depends on the equilibrium value at zero debt, and the replication argument
+     does not compare the two default values; the case `ψ > 0` is not covered;
+   * **a continuum of debt levels with saving**: the sovereign chooses any `B′ ≤ B̄` (a
+     borrowing limit `B̄ ≥ 0`), including `B′ < 0`, where the book imposes `B′ ≥ 0` (p. 744,
+     "not binding in the simulations"); states `B ∈ ℝ`. The replication argument needs the
+     sovereign to be able to hold slightly less debt, including below zero; on a grid
+     uniqueness fails (correction 9);
+   * **utility**: `u : ℝ → ℝ` nondecreasing and uniformly continuous (uniqueness); for
+     existence also satiated, `u(c) = u(c̄)` for `c ≥ c̄`, which bounds values and makes
+     saving beyond the level that finances `c̄` forever useless, so optimal borrowing exists
+     (the book's CRRA utility is unbounded and defined only for `c > 0`, so it is excluded);
+   * **default cost** `φ(Y) ≥ 0`;
+   * values are bounded functions (part of `IsOneMPE`), and (24.11) is a maximum attained by
+     the borrowing rule, as in the book's (c). The borrowing rule is unique only up to the
+     choice among maximisers; values, default rule and prices are unique.

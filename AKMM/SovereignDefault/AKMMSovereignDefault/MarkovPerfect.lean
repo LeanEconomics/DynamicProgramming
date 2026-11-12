@@ -20,8 +20,9 @@ AKMM, §24.4.3, pp. 744–745; §24.4.4, (24.13), p. 748; Appendix 24.A.1, (24.A
   `D̂` its tie-repaying default rule and `B̂` a selection of maximisers, the tuple is an MPE iff
   `q` is a fixed point of `q ↦ T_{D̂(q), B̂(q)} q`; every MPE's values and default rule are
   those induced by its price (`mpe_values_eq`). The map is not a contraction (the induced rules
-  jump in `q`); existence and uniqueness of an MPE are not formalised (beyond the text:
-  Auclert–Rognlie, Aguiar–Amador, cited p. 901).
+  jump in `q`). Existence and uniqueness with one-period debt (beyond the text: Auclert–Rognlie,
+  Aguiar–Amador, cited p. 901) are proved with a continuum of debt in `UniqueEquilibrium`; on
+  grids they fail (`Multiplicity`).
 * In every MPE: `q ∈ [0, δ/(δ + r)]` (`mpe_price_mem`), `V` is nonincreasing in debt
   (`mpe_V_antitone`) and the default rule is nondecreasing in debt (`mpe_default_mono`).
 * **(24.13)** (`eq_24_13`): at an interior optimum,

@@ -74,7 +74,7 @@ Departures are numbered in [corrections](corrections.md).
 | §24.4.3; (24.A.1)–(24.A.2) | The MPE as a fixed point of `q ↦ T_{D̂(q), B̂(q)} q` | `SDModel.bellmanSol`, `SDModel.inducedDefault`, `SDModel.inducedBorrow`, `SDModel.inducedBorrow_spec`, `SDModel.mpeMap`, `mpe_iff_fixedPt`, `mpe_values_eq` |
 | (24.12) in equilibrium | `q ∈ [0, δ/(δ + r)]` | `mpe_price_mem` |
 | p. 744, App. 24.A.3 | In equilibrium `V` falls and the default rule rises with debt | `mpe_V_antitone`, `mpe_default_mono` |
-| p. 901 | Existence and uniqueness of the MPE for `δ = 1` (Auclert–Rognlie 2016; Aguiar–Amador 2019), Blackwell recast; multiplicity for `δ < 1` (Aguiar–Amador 2020) | not formalised: cited results beyond the text (decision 5). No hypothesis structure for existence is assumed |
+| p. 901 | Existence and uniqueness of the MPE for `δ = 1` (Auclert–Rognlie 2016; Aguiar–Amador 2019), Blackwell recast; multiplicity for `δ < 1` (Aguiar–Amador 2020) | proved beyond the text (decision 5) in a continuous-debt setting, departure D10: see the tables `UniqueEquilibrium` and `Multiplicity` below; on finite grids uniqueness fails even for `δ = 1` (correction 9) |
 | §24.4.3 | Reuse check: Miao's `DGStochGame` MPE (fixed players, simultaneous actions, exogenous payoffs) does not match the book's equilibrium, whose price is set by lenders' zero profit given the sovereign's future rules | the MPE is defined directly (`IsMPE`); the declared `DynamicGames` dependency is unused |
 | (24.13), p. 748 | Borrowing first-order condition (corrected sign, item 2); sign of marginal revenue | `eq_24_13`, `eq_24_13_printed_false`, `eq_24_13_printed_counterexample`, `eq_24_13_sign` |
 | (24.A.3), p. 898 | Total derivative of the equilibrium price in income | `eq_24_A_3` |
@@ -115,7 +115,8 @@ Departures are numbered in [corrections](corrections.md).
 | pp. 747–748 | Welfare and commitment results (Mateos-Planas et al. 2025; Hatchondo et al. 2022; Bolton–Jeanne 2009), `β(1 + r) < 1` in calibrations | cited quantitative results |
 | fn 11, p. 744 | No buybacks (Aguiar, Amador, Hopenhayn and Werning 2019) | cited |
 | App. 24.A.1, pp. 898–900 | Grid pathologies, interpolation and quadrature (Method 1), the continuous i.i.d. shock of Chatterjee–Eyigungor (Method 2, (24.A.4)), Gordon–Qiu | computational methods beyond the logit result |
-| App. 24.A.1, p. 901 | Uniqueness for `δ = 1` (Auclert–Rognlie 2016; Aguiar–Amador 2019) and multiplicity for `δ < 1` (Aguiar–Amador 2020); the limit of the finite-horizon game | beyond the text (decision 5), departure D8 |
+| App. 24.A.1, p. 901 | The limit of the finite-horizon game ("By using as initial guesses the equilibrium functions in the last period (T) of a finite-horizon economy, we are finding the equilibrium that is the limit of the finite horizon game as T → ∞") | beyond the text, not formalised: convergence of the finite-horizon equilibria needs a joint contraction on values and debt capacities (both the continuation values and the default value change with the horizon), which the capacity map of `ue_cutoff_le` (prices from a fixed capacity vector, values solved to infinite horizon) does not give |
+| App. 24.A.1, p. 901 | Aguiar–Amador (2020) multiplicity with a continuum of debt levels (debt dilution) | beyond the text, not formalised; grid instances `mu_grid_long_term_two_mpe` |
 | App. 24.A.2–24.A.3, pp. 901–908 | Parameter values, the matching of `(λ₀, λ₁)` to the debt and spread targets, Figures 24.A.1–24.A.4, uniqueness of the matching pair, the threshold `Y*(B)` (departure D9) | calibration, simulation; figure claims, deferred |
 | fn 42–43, 46–47 | Duration data; Aiyagari (1994); the role of impatience | data, cited |
 
@@ -125,3 +126,26 @@ Departures are numbered in [corrections](corrections.md).
 | --- | --- | --- |
 | p. 900 | The standard Gumbel law: density, c.d.f., probability measure | `ev_gumbel`, `gp_pdf_continuous`, `gp_pdf_integrable`, `gp_pdf_nonneg`, `gp_hasDerivAt`, `gp_integral_Iic`, `gp_measure_Iic`, `gp_isProbabilityMeasure` |
 | p. 900 | With i.i.d. shocks the probability of choosing alternative `i` is logit (departure D7) | `ev_logit_of_gumbel`, `ev_choiceProb_eq_gumbel` |
+
+## App. 24.A.1, p. 901: existence and uniqueness with one-period debt (`UniqueEquilibrium`, beyond the text)
+
+| Source | Claim | Lean |
+| --- | --- | --- |
+| §24.4.1–24.4.3 at `δ = 1`, `ψ = 0`, continuous debt (departure D10) | The economy and the Markov perfect equilibrium (a)–(c) with (24.9)–(24.12) | `UEModel`, `UEModel.price`, `UEModel.obj`, `UEModel.defaultRHS`, `IsOneMPE` |
+| (24.10) at `ψ = 0` | The default value exists and is unique | `UEModel.ue_VD_exists`, `UEModel.ue_VD_unique` |
+| (24.9), (24.11) given `q` | Blackwell's conditions on bounded functions of an arbitrary state space give a bounded solution | `ue_fixed_point`, `UEModel.ue_sol_exists`, `UEModel.VRsup`, `UEModel.bell`, `ue_sum_le`, `ue_le_sum`, `ue_sum_mono`, `ue_sum_add` |
+| (24.12) at `δ = 1` | Price bounds, risk-free price, monotonicity in repayment | `UEModel.ue_price_mem`, `UEModel.ue_price_one`, `UEModel.ue_price_mono` |
+| p. 901 (Auclert–Rognlie) | Revenue bound and the replication argument | `UEModel.ue_revenue`, `UEModel.ue_replication` |
+| p. 901 | `V^R` nonincreasing and uniformly continuous in debt; debt `B ≤ 0` always repaid | `UEModel.ue_VR_antitone`, `UEModel.ue_modulus`, `UEModel.ue_repay_nonpos`, `UEModel.ue_mpe_sup` |
+| p. 901 | **Uniqueness** of the MPE (values, default rule, prices) | `UEModel.ue_mpe_VR_le`, `UEModel.ue_mpe_unique` |
+| p. 901 (Aguiar–Amador's Blackwell recast) | The debt-capacity map is a contraction of modulus `1/(1 + r)`; its fixed point | `ue_thr`, `UEModel.cutoff`, `UEModel.ue_thr_mem`, `UEModel.ue_thr_nonpos`, `UEModel.ue_cutoff_le`, `UEModel.ue_capacity_fixed` |
+| p. 901 | Optimal borrowing exists (upper semicontinuity, satiation) | `UEModel.ue_attain`, `UEModel.ue_u_le`, `UEModel.ue_obj_le`, `UEModel.ue_VRsup_bdd`, `UEModel.ue_VRsup_le`, `UEModel.ue_VRsup_sup`, `UEModel.ue_VRsup_ub` |
+| p. 901 | **Existence** of the MPE; existence and uniqueness | `UEModel.ue_mpe_exists`, `UEModel.ue_mpe_exists_unique` |
+| p. 901 | A concrete economy meeting every hypothesis, with its unique MPE | `ue_example`, `ue_example_hyp`, `ue_example_exists_unique` |
+
+## App. 24.A.1, p. 901: multiple equilibria on a finite grid (`Multiplicity`, beyond the text)
+
+| Source | Claim | Lean |
+| --- | --- | --- |
+| p. 901 (Aguiar–Amador 2020) | Multiple MPE with long-term debt: an explicit economy (`δ = 1/2`) with two MPE, both verified | `mu_econ`, `mu_sup_bool`, `mu_grid_long_term_two_mpe` |
+| p. 901, correction 9 | On a finite grid there are two MPE even with one-period debt (`δ = 1`) | `mu_grid_one_period_two_mpe` |
