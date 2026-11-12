@@ -210,3 +210,13 @@ D12. **Multiplicity with long-term debt and a continuum of debt levels (p. 901, 
    borrowing rule, `bp_long_term_depends_on_borrowing`), not Aguiar and Amador's (2020)
    mechanism, where the sovereign strictly prefers to dilute and values differ; that
    construction is not formalised.
+   Why it is not (attempts recorded, not formalised): with `u` linear below satiation and
+   `β(1 + r) < 1`, optimal choices are corners, so a dilution path has one step (issue at price
+   0, default next period); repaying at `B` needs `δB ≤ φ`, preferring dilution to one more
+   roll-over at `q_d = δ/(1 + r)` needs `δB(β − q_d) ≥ βφ`, and the two are incompatible since
+   `q_d > 0`. With `β = 0` the price schedule collapses to the single capacity `r q̄ b = φ`. A
+   gradual path under strictly concave or two-slope `u` needs verification at every `B ∈ ℝ`;
+   with saving and satiation the off-path value function has unboundedly many pieces as
+   `B → −∞`, and dropping satiation loses bounded values and the `δ = 1` pairing. A strict
+   construction would need an asset lower bound in both models, hence a new `δ = 1`
+   uniqueness proof (on a grid uniqueness fails, correction 9).
