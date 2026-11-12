@@ -1,0 +1,44 @@
+name = "AKMMMoney"
+version = "0.1.0"
+keywords = ["math", "economics", "macroeconomics"]
+defaultTargets = ["AKMMMoney"]
+
+[leanOptions]
+pp.unicode.fun = true # pretty-prints `fun a ↦ b`
+autoImplicit = false
+relaxedAutoImplicit = false
+weak.linter.mathlibStandardSet = true
+maxSynthPendingDepth = 3
+
+[[require]]
+name = "mathlib"
+git = "https://github.com/leanprover-community/mathlib4.git"
+rev = "v4.34.0"
+[[require]]
+name = "OverlappingGenerations"
+path = "../../EconomicDynamics/OverlappingGenerations"
+
+[[require]]
+name = "IncompleteMarkets"
+path = "../../EconomicDynamics/IncompleteMarkets"
+
+[[require]]
+name = "ClassicalMonetaryModel"
+git = "https://github.com/LeanEconomics/MonetaryEconomics.git"
+rev = "cd1aabd528ca45cb1a778cb5644319740bebd42f"
+subDir = "Gali/ClassicalMonetaryModel"
+
+[[require]]
+name = "Monetarism"
+git = "https://github.com/LeanEconomics/MonetaryEconomics.git"
+rev = "cd1aabd528ca45cb1a778cb5644319740bebd42f"
+subDir = "Cochrane/Monetarism"
+
+[[require]]
+name = "TwoPeriodModel"
+git = "https://github.com/LeanEconomics/MonetaryEconomics.git"
+rev = "cd1aabd528ca45cb1a778cb5644319740bebd42f"
+subDir = "Cochrane/TwoPeriodModel"
+
+[[lean_lib]]
+name = "AKMMMoney"
