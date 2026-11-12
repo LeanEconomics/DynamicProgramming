@@ -1,6 +1,6 @@
 {
-  "checked_at_utc": "2026-11-12T21:43:07.298073+00:00",
-  "theorems": 201,
+  "checked_at_utc": "2026-11-12T22:29:38.257626+00:00",
+  "theorems": 216,
   "module_theorems": {
     "AKMMConsumption/RiskSharing.lean": 10,
     "AKMMConsumption/Deterministic.lean": 23,
@@ -16,9 +16,10 @@
     "AKMMConsumption/Aiyagari.lean": 7,
     "AKMMConsumption/ConsumptionShape.lean": 48,
     "AKMMConsumption/BufferStock.lean": 8,
-    "AKMMConsumption/BewleyInsurance.lean": 6
+    "AKMMConsumption/BewleyInsurance.lean": 6,
+    "AKMMConsumption/TighterLimitMPC.lean": 15
   },
-  "audited_declarations": 234,
+  "audited_declarations": 250,
   "declarations": [
     {
       "name": "AKMM.Consumption.eq_11_1",
@@ -1189,6 +1190,86 @@
       "name": "AKMM.Consumption.bwy_example",
       "kind": "theorem",
       "module": "AKMMConsumption/BewleyInsurance.lean"
+    },
+    {
+      "name": "AKMM.Consumption.ctl_IncrDom",
+      "kind": "def",
+      "module": "AKMMConsumption/TighterLimitMPC.lean"
+    },
+    {
+      "name": "AKMM.Consumption.ctl_concave_incr",
+      "kind": "theorem",
+      "module": "AKMMConsumption/TighterLimitMPC.lean"
+    },
+    {
+      "name": "AKMM.Consumption.ctl_incrDom_le",
+      "kind": "theorem",
+      "module": "AKMMConsumption/TighterLimitMPC.lean"
+    },
+    {
+      "name": "AKMM.Consumption.ctl_cont_incr",
+      "kind": "theorem",
+      "module": "AKMMConsumption/TighterLimitMPC.lean"
+    },
+    {
+      "name": "AKMM.Consumption.ctl_shift_sharp",
+      "kind": "theorem",
+      "module": "AKMMConsumption/TighterLimitMPC.lean"
+    },
+    {
+      "name": "AKMM.Consumption.ctl_gap_le",
+      "kind": "theorem",
+      "module": "AKMMConsumption/TighterLimitMPC.lean"
+    },
+    {
+      "name": "AKMM.Consumption.ctl_incrDom_zero",
+      "kind": "theorem",
+      "module": "AKMMConsumption/TighterLimitMPC.lean"
+    },
+    {
+      "name": "AKMM.Consumption.ctl_mpc_step",
+      "kind": "theorem",
+      "module": "AKMMConsumption/TighterLimitMPC.lean"
+    },
+    {
+      "name": "AKMM.Consumption.ctl_incr_step",
+      "kind": "theorem",
+      "module": "AKMMConsumption/TighterLimitMPC.lean"
+    },
+    {
+      "name": "AKMM.Consumption.ctl_tight_mpc_two",
+      "kind": "theorem",
+      "module": "AKMMConsumption/TighterLimitMPC.lean"
+    },
+    {
+      "name": "AKMM.Consumption.ctl_incrDom_R_one",
+      "kind": "theorem",
+      "module": "AKMMConsumption/TighterLimitMPC.lean"
+    },
+    {
+      "name": "AKMM.Consumption.ctl_tight_mpc_R_one",
+      "kind": "theorem",
+      "module": "AKMMConsumption/TighterLimitMPC.lean"
+    },
+    {
+      "name": "AKMM.Consumption.ctl_gap_antitone_R_one",
+      "kind": "theorem",
+      "module": "AKMMConsumption/TighterLimitMPC.lean"
+    },
+    {
+      "name": "AKMM.Consumption.ctl_quadratic_linear",
+      "kind": "theorem",
+      "module": "AKMMConsumption/TighterLimitMPC.lean"
+    },
+    {
+      "name": "AKMM.Consumption.ctl_example_R_one_valid",
+      "kind": "theorem",
+      "module": "AKMMConsumption/TighterLimitMPC.lean"
+    },
+    {
+      "name": "AKMM.Consumption.ctl_example_mpc",
+      "kind": "theorem",
+      "module": "AKMMConsumption/TighterLimitMPC.lean"
     }
   ],
   "full_build": "passed",
@@ -2367,6 +2448,86 @@
       "propext",
       "Classical.choice",
       "Quot.sound"
+    ],
+    "AKMM.Consumption.ctl_IncrDom": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.ctl_concave_incr": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.ctl_incrDom_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.ctl_cont_incr": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.ctl_shift_sharp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.ctl_gap_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.ctl_incrDom_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.ctl_mpc_step": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.ctl_incr_step": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.ctl_tight_mpc_two": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.ctl_incrDom_R_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.ctl_tight_mpc_R_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.ctl_gap_antitone_R_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.ctl_quadratic_linear": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.ctl_example_R_one_valid": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.ctl_example_mpc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
     ]
   },
   "source_sha256": {
@@ -2385,15 +2546,16 @@
     "AKMMConsumption/ConsumptionShape.lean": "e4198eb444a8fa0a22dacab872b88a20297bc133e7154a5837653654ec82c424",
     "AKMMConsumption/BufferStock.lean": "e380221fa45848ef9a2fca1de3a6ebab1e7d9a53a37df9fc8af9c1db33fdf247",
     "AKMMConsumption/BewleyInsurance.lean": "2135a5f9b494e76f883bbf9b73d44e077665017df088e7633b444f1dc43b3240",
-    "AKMMConsumption.lean": "739edaadf36e803128c4d3e42a4f8865c10261fda20307eb9e2bd36b03dac501",
+    "AKMMConsumption/TighterLimitMPC.lean": "e64d245f535abed6cd3e735e546b7691c2d4f51e1fef78d20dccadac201aab82",
+    "AKMMConsumption.lean": "c907b342fa406d103d0de73ea6c3ae1a8aaf816a783442ef2b3c65487f3530db",
     "lean-toolchain": "8733782dc070a99b312039cda424f601b80f3be6f6f512627da5ba25adc27632",
     "lakefile.toml": "57343bfde75a2f70a55ec5cda681d53bfdb0198149cdfe23b8dc5745c744e5d4",
-    "lake-manifest.json": "9853cb2384041640107ce8b49661a57112451feec50a2c6dba0191e8848fe2a0",
-    "proof-manifest.json": "120aef719beac51ebced03df2816e599472bd3628eda9aeb8b4c38c15800deee",
+    "lake-manifest.json": "a2a18acaf13cdcb87132d054a3fa81362efc69f5e789b45537f80eccf21f9c69",
+    "proof-manifest.json": "f5fcdf63c89a1adf4dae4561a5bb2c0e38dc2127cf9b5c7bf476f49786359864",
     "scripts/verify.py": "a70b1fa704dd590f937f8b37682afa88a9d85a9150065acb935c7d2c9589da3b",
     "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
   },
-  "fresh_audit_sha256": "93b9784a031233bef9d95f0f32fb1763d2ef7d1cc912a208e9416440ed503dfa",
+  "fresh_audit_sha256": "bf8e301889df80840e00c89fbf5e586e34dcf688d040c3203df27a55072c0b6d",
   "lean_toolchain": "leanprover/lean4:v4.34.0",
   "scope": "AKMM Chapter 11 (pp. 287-323): consumption.",
   "source": "Marina Azzimonti, Per Krusell, Alisdair McKay and Toshihiko Mukoyama, Macroeconomics (draft of December 2025), Chapter 11"

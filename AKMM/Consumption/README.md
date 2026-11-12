@@ -21,7 +21,7 @@ three minor slips recorded), with Lean counterexamples to the log-utility MPC, t
 `κ`, the capital-income-risk claim, the coefficient of (11.41), the DARA condition for bounded
 wealth, footnote 27 and the fall in consumption under a tighter limit, as recorded in
 [corrections](docs/corrections.md); every book item is located in the
-[source map](docs/source-map.md). The library contains **201 theorems**.
+[source map](docs/source-map.md). The library contains **216 theorems**.
 
 * **Risk sharing** (§11.2): autarky (11.1) and fn. 1 (`eq_11_1`, `footnote_1`); (11.3) from the
   Arrow–Debreu equilibrium of AKMM Chapter 7 (`eq_11_3`); CRRA shares (11.4) and history-independent
@@ -63,6 +63,12 @@ wealth, footnote 27 and the fall in consumption under a tighter limit, as record
   `cfn_fig_11_2_slope`); a tighter limit binds more, lowers consumption weakly, raises the MPC one
   period before the end and changes nothing at high wealth (`cfn_tight_binds`, `cfn_tight_le`,
   `cfn_tight_eq_unconstrained_last`, `cfn_tight_mpc_last`, `cfn_tight_eventually_eq`).
+* **A tighter limit with more periods left** (Figure 11.2, p. 306): consumption falls by at most
+  `(a₁ − a₂)/R` at every horizon (`ctl_shift_sharp`, `ctl_gap_le`); for quadratic utility the MPC
+  under the tighter limit is at least the looser one's on every interval two periods before the
+  end (`ctl_tight_mpc_two`) and at every horizon when `r = 0` (`ctl_tight_mpc_R_one`), by a
+  Carroll–Holm–Kimball backward induction on shifted increments (`ctl_IncrDom`, `ctl_mpc_step`,
+  `ctl_incr_step`); longer horizons with `r > 0` and CRRA beyond one period are open.
 * **The buffer-stock target** (Figure 11.4): under `βR ≤ 1` a unique target `x*` with
   `E[x′ | x] > x` below and `< x` above, and convergence of the expected dynamics to it
   (`bsk_target`, `bsk_target_stable`).
@@ -105,6 +111,7 @@ income fluctuation problem, the Huggett and Aiyagari economies), and Stokey–Lu
 | [ConsumptionShape](AKMMConsumption/ConsumptionShape.lean) | 48 | Figure 11.2: concavity, slopes, the limiting MPC, a tighter borrowing limit (AKMM pp. 304–306) |
 | [BufferStock](AKMMConsumption/BufferStock.lean) | 8 | Figure 11.4: the buffer-stock target and its stability (AKMM pp. 310–311) |
 | [BewleyInsurance](AKMMConsumption/BewleyInsurance.lean) | 6 | Figure 11.7: government debt and full insurance (AKMM p. 319) |
+| [TighterLimitMPC](AKMMConsumption/TighterLimitMPC.lean) | 15 | Figure 11.2: a tighter limit raises the MPC with more periods left (AKMM p. 306) |
 
 ## Build and verify
 
