@@ -127,8 +127,11 @@ D8. **Markov perfect equilibrium (§24.4.3, p. 901).** The definition is formali
    (decision 5) in the continuous-debt setting of departure D10 (`ue_mpe_exists`,
    `ue_mpe_unique`, `ue_mpe_exists_unique`, instance `ue_example_exists_unique`); on finite
    grids they fail (correction 9). Multiplicity with long-term debt is shown on a grid
-   (`mu_grid_long_term_two_mpe`); Aguiar–Amador's (2020) continuum construction and the limit
-   of the finite-horizon game are not formalised.
+   (`mu_grid_long_term_two_mpe`) and, with a continuum of debt levels, in an explicit economy
+   with two equilibria at `δ = 1/2` and one at `δ = 1` (`ld_two_mpe`, `ld_one_period_unique`,
+   departure D12); Aguiar–Amador's (2020) own construction, with strict preference for
+   dilution, is not formalised. The limit of the finite-horizon game is proved for `δ = 1`
+   (`fh_example_limit` and the theorems of departure D11); for `δ < 1` it is not.
 
 D9. **The default threshold `Y*(B)` (p. 904).** "As is standard in equilibrium default models,
    this threshold is unique": the text gives no argument and the claim needs a single crossing
@@ -156,3 +159,54 @@ D10. **The setting of the existence and uniqueness theorem (p. 901, beyond the t
    * values are bounded functions (part of `IsOneMPE`), and (24.11) is a maximum attained by
      the borrowing rule, as in the book's (c). The borrowing rule is unique only up to the
      choice among maximisers; values, default rule and prices are unique.
+   The finite-horizon game (departure D11) and the long-term-debt equilibrium (departure D12)
+   use the same setting.
+
+D11. **The limit of the finite-horizon game (App. 24.A.1, pp. 899 and 901, beyond the text).**
+   The book starts its iteration from "the solution in the final period of a finite horizon
+   model" (`V₀^R = u(Y − δB)`, `V₀^D = u(Y − φ(Y))`, `q₀ = 0`, `B̂₀ = 0`) and states that it
+   thereby finds "the equilibrium that is the limit of the finite horizon game as T → ∞",
+   without proof. We prove it in the setting of D10 (`δ = 1`, `ψ = 0`, `B′ ≤ B̄` with saving):
+   * the finite-horizon game (`IsFHEqm`) uses the book's terminal period as stage `0`; the
+     objects of a stage do not depend on the horizon, so the `T`-period game is the first
+     stages of one sequence. It is unique by backward induction (`fh_unique`, no hypotheses,
+     no replication argument) and exists for `u` nondecreasing, uniformly continuous and
+     satiated with `φ ≥ 0` (`fh_exists`);
+   * convergence to the unique MPE (`fh_default_sets`, `fh_capacity_tendsto`,
+     `fh_values_tendsto`, `fh_price_tendsto`) assumes in addition a **slope condition**:
+     `κ(c′ − c) ≤ u(c′) − u(c)` for `c ≤ c′ ≤ c̄`, `κ > 0`, with `Y + B̄/(1 + r) ≤ c̄` for every
+     income (consumption under repayment of a debt `B ≥ 0` never exceeds `c̄`). It turns the
+     value error of the truncated horizon, `βⁿe₀`, into a debt reduction `βⁿe₀/κ` at the
+     repayment boundary. The book's CRRA utility is excluded by D10 anyway; `u = min(c, c̄)`
+     satisfies the condition (`fh_example_hyp`). Without it only the one-sided bound is proved
+     (`fh_upper`: the finite horizon never repays more than the equilibrium);
+   * the argument is the joint one: with `ψ = 0` the default value is exogenous and the
+     comparison is on `V^R − V^D`; the debt reduction obeys
+     `g_{n+1} = (gₙ + βⁿe₀/κ)/(1 + r)`, a moving contraction, and the general lemma
+     `fh_moving_contraction` (`Φₙ → Φ` uniformly, `Φ` a contraction) gives `gₙ → 0`;
+   * the sense of convergence: default values, repayment values and values uniformly in
+     `(B, Y)`; debt capacities `b̄ₙ(Y) ∈ [b̄(Y) − xₙ, b̄(Y)]`; default rules and prices at every
+     debt where the equilibrium default rule is constant on some `[B, B + η]`, and
+     `q(B′ + xₙ) ≤ q_{n+1}(B′) ≤ q(B′)` everywhere (at a capacity the finite-horizon price can
+     stay strictly below the limit).
+   The case `δ < 1`, where the equilibrium need not be unique (D12), is not covered.
+
+D12. **Multiplicity with long-term debt and a continuum of debt levels (p. 901, beyond the
+   text).** The equilibrium with long-term debt (`IsLongMPE`) is the book's (a)–(c) with
+   (24.7)–(24.12): consumption `Y − δB + q(B′, Y)(B′ − (1 − δ)B)` and the price
+   `(1 + r)⁻¹E[(1 − D̂)(δ + (1 − δ)q(B̂(B′, Y′), Y′))]`, in the setting of D10 (`ψ = 0`,
+   `B′ ≤ B̄` with saving, states `B ∈ ℝ`, bounded values); at `δ = 1` it is exactly
+   `IsOneMPE` (`ld_one_iff`). The economy `ld_econ` (deterministic `Y = 2`,
+   `u(c) = min(c, 1)`, `φ = 1/2`, `β = 1/2`, `r = 1/4`, `B̄ = 7`) has two equilibria at
+   `δ = 1/2` (`ld_two_mpe`): without dilution, every debt `B′ ≤ 6` trades at the risk-free
+   `δ/(r + δ) = 2/3`; with self-fulfilling dilution, a sovereign with `B ≤ 2` issues up to
+   `7` and defaults next period, so `B′ ≤ 2` trades at `δ/(1 + r) = 2/5`
+   (`ld_dilution_lowers_prices`). At `δ = 1` the same economy has a unique equilibrium
+   (`ld_one_period_unique`, by `ue_mpe_exists_unique`). What the example is and is not: the
+   value functions and default rules coincide across the two equilibria and only the prices and
+   borrowing rules differ; the low-debt sovereign is satiated whatever it issues and default is
+   costless in utility (`Y − φ ≥ c̄`), so it is indifferent and lenders' beliefs select its
+   rule. It isolates the channel only long-term debt has (the price depends on the expected
+   borrowing rule, `bp_long_term_depends_on_borrowing`), not Aguiar and Amador's (2020)
+   mechanism, where the sovereign strictly prefers to dilute and values differ; that
+   construction is not formalised.

@@ -1,6 +1,6 @@
 {
-  "checked_at_utc": "2026-11-12T18:45:03.009423+00:00",
-  "theorems": 154,
+  "checked_at_utc": "2026-11-12T22:37:23.437759+00:00",
+  "theorems": 194,
   "module_theorems": {
     "AKMMSovereignDefault/TwoPeriod.lean": 29,
     "AKMMSovereignDefault/TwoPeriodOptimum.lean": 7,
@@ -12,9 +12,11 @@
     "AKMMSovereignDefault/GumbelProduct.lean": 9,
     "AKMMSovereignDefault/Calibration.lean": 15,
     "AKMMSovereignDefault/UniqueEquilibrium.lean": 34,
-    "AKMMSovereignDefault/Multiplicity.lean": 3
+    "AKMMSovereignDefault/Multiplicity.lean": 3,
+    "AKMMSovereignDefault/FiniteHorizon.lean": 31,
+    "AKMMSovereignDefault/LongTermMultiplicity.lean": 9
   },
-  "audited_declarations": 252,
+  "audited_declarations": 331,
   "declarations": [
     {
       "name": "AKMM.SovereignDefault.defaultRule",
@@ -1275,6 +1277,401 @@
       "name": "AKMM.SovereignDefault.mu_grid_long_term_two_mpe",
       "kind": "theorem",
       "module": "AKMMSovereignDefault/Multiplicity.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.fh_scalar",
+      "kind": "theorem",
+      "module": "AKMMSovereignDefault/FiniteHorizon.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.fh_moving_contraction",
+      "kind": "theorem",
+      "module": "AKMMSovereignDefault/FiniteHorizon.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.fh_ite_zero",
+      "kind": "theorem",
+      "module": "AKMMSovereignDefault/FiniteHorizon.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.fh_ite_mem",
+      "kind": "theorem",
+      "module": "AKMMSovereignDefault/FiniteHorizon.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.fh_rev_le",
+      "kind": "theorem",
+      "module": "AKMMSovereignDefault/FiniteHorizon.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.IsFHEqm",
+      "kind": "structure",
+      "module": "AKMMSovereignDefault/FiniteHorizon.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.IsFHEqm.mk",
+      "kind": "constructor",
+      "module": "AKMMSovereignDefault/FiniteHorizon.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.IsFHEqm.eq_24_9",
+      "kind": "projection",
+      "module": "AKMMSovereignDefault/FiniteHorizon.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.IsFHEqm.default_opt",
+      "kind": "projection",
+      "module": "AKMMSovereignDefault/FiniteHorizon.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.IsFHEqm.term_VD",
+      "kind": "projection",
+      "module": "AKMMSovereignDefault/FiniteHorizon.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.IsFHEqm.term_VR",
+      "kind": "projection",
+      "module": "AKMMSovereignDefault/FiniteHorizon.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.IsFHEqm.term_q",
+      "kind": "projection",
+      "module": "AKMMSovereignDefault/FiniteHorizon.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.IsFHEqm.term_B",
+      "kind": "projection",
+      "module": "AKMMSovereignDefault/FiniteHorizon.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.IsFHEqm.eq_24_10",
+      "kind": "projection",
+      "module": "AKMMSovereignDefault/FiniteHorizon.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.IsFHEqm.eq_24_11",
+      "kind": "projection",
+      "module": "AKMMSovereignDefault/FiniteHorizon.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.IsFHEqm.eq_24_12",
+      "kind": "projection",
+      "module": "AKMMSovereignDefault/FiniteHorizon.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.IsFHEqm.borrow_le",
+      "kind": "projection",
+      "module": "AKMMSovereignDefault/FiniteHorizon.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.IsFHEqm.borrow_opt",
+      "kind": "projection",
+      "module": "AKMMSovereignDefault/FiniteHorizon.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.UEModel.fh_obj_congr",
+      "kind": "theorem",
+      "module": "AKMMSovereignDefault/FiniteHorizon.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.UEModel.fh_unique",
+      "kind": "theorem",
+      "module": "AKMMSovereignDefault/FiniteHorizon.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.UEModel.fh_q_mem",
+      "kind": "theorem",
+      "module": "AKMMSovereignDefault/FiniteHorizon.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.UEModel.fh_mpe_q_mem",
+      "kind": "theorem",
+      "module": "AKMMSovereignDefault/FiniteHorizon.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.UEModel.fh_repay_nonpos",
+      "kind": "theorem",
+      "module": "AKMMSovereignDefault/FiniteHorizon.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.UEModel.fh_VR_antitone",
+      "kind": "theorem",
+      "module": "AKMMSovereignDefault/FiniteHorizon.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.UEModel.fh_VR_mod",
+      "kind": "theorem",
+      "module": "AKMMSovereignDefault/FiniteHorizon.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.UEModel.fh_VR_slope",
+      "kind": "theorem",
+      "module": "AKMMSovereignDefault/FiniteHorizon.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.UEModel.fh_compare",
+      "kind": "theorem",
+      "module": "AKMMSovereignDefault/FiniteHorizon.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.UEModel.fh_upper",
+      "kind": "theorem",
+      "module": "AKMMSovereignDefault/FiniteHorizon.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.UEModel.fhShift",
+      "kind": "def",
+      "module": "AKMMSovereignDefault/FiniteHorizon.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.UEModel.fh_shift_nonneg",
+      "kind": "theorem",
+      "module": "AKMMSovereignDefault/FiniteHorizon.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.UEModel.fh_shift_tendsto",
+      "kind": "theorem",
+      "module": "AKMMSovereignDefault/FiniteHorizon.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.UEModel.fh_base",
+      "kind": "theorem",
+      "module": "AKMMSovereignDefault/FiniteHorizon.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.UEModel.fh_dom",
+      "kind": "theorem",
+      "module": "AKMMSovereignDefault/FiniteHorizon.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.UEModel.fh_lower",
+      "kind": "theorem",
+      "module": "AKMMSovereignDefault/FiniteHorizon.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.UEModel.fh_VD_bound",
+      "kind": "theorem",
+      "module": "AKMMSovereignDefault/FiniteHorizon.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.UEModel.fh_default_sets",
+      "kind": "theorem",
+      "module": "AKMMSovereignDefault/FiniteHorizon.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.UEModel.fhCap",
+      "kind": "def",
+      "module": "AKMMSovereignDefault/FiniteHorizon.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.UEModel.fh_capacity_tendsto",
+      "kind": "theorem",
+      "module": "AKMMSovereignDefault/FiniteHorizon.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.UEModel.fh_values_tendsto",
+      "kind": "theorem",
+      "module": "AKMMSovereignDefault/FiniteHorizon.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.UEModel.fh_price_tendsto",
+      "kind": "theorem",
+      "module": "AKMMSovereignDefault/FiniteHorizon.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.UEModel.fh_attain",
+      "kind": "theorem",
+      "module": "AKMMSovereignDefault/FiniteHorizon.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.UEModel.fhVD",
+      "kind": "def",
+      "module": "AKMMSovereignDefault/FiniteHorizon.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.UEModel.fhVR",
+      "kind": "def",
+      "module": "AKMMSovereignDefault/FiniteHorizon.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.UEModel.fhV",
+      "kind": "def",
+      "module": "AKMMSovereignDefault/FiniteHorizon.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.UEModel.fhD",
+      "kind": "def",
+      "module": "AKMMSovereignDefault/FiniteHorizon.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.UEModel.fhq",
+      "kind": "def",
+      "module": "AKMMSovereignDefault/FiniteHorizon.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.UEModel.fhU",
+      "kind": "def",
+      "module": "AKMMSovereignDefault/FiniteHorizon.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.UEModel.fh_stage",
+      "kind": "theorem",
+      "module": "AKMMSovereignDefault/FiniteHorizon.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.UEModel.fh_thr",
+      "kind": "theorem",
+      "module": "AKMMSovereignDefault/FiniteHorizon.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.UEModel.fh_exists",
+      "kind": "theorem",
+      "module": "AKMMSovereignDefault/FiniteHorizon.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.fh_example_hyp",
+      "kind": "theorem",
+      "module": "AKMMSovereignDefault/FiniteHorizon.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.fh_example_limit",
+      "kind": "theorem",
+      "module": "AKMMSovereignDefault/FiniteHorizon.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.UEModel.ldObj",
+      "kind": "def",
+      "module": "AKMMSovereignDefault/LongTermMultiplicity.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.UEModel.ld_obj_one",
+      "kind": "theorem",
+      "module": "AKMMSovereignDefault/LongTermMultiplicity.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.IsLongMPE",
+      "kind": "structure",
+      "module": "AKMMSovereignDefault/LongTermMultiplicity.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.IsLongMPE.mk",
+      "kind": "constructor",
+      "module": "AKMMSovereignDefault/LongTermMultiplicity.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.IsLongMPE.bdd",
+      "kind": "projection",
+      "module": "AKMMSovereignDefault/LongTermMultiplicity.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.IsLongMPE.eq_24_9",
+      "kind": "projection",
+      "module": "AKMMSovereignDefault/LongTermMultiplicity.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.IsLongMPE.eq_24_10",
+      "kind": "projection",
+      "module": "AKMMSovereignDefault/LongTermMultiplicity.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.IsLongMPE.eq_24_11",
+      "kind": "projection",
+      "module": "AKMMSovereignDefault/LongTermMultiplicity.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.IsLongMPE.eq_24_12",
+      "kind": "projection",
+      "module": "AKMMSovereignDefault/LongTermMultiplicity.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.IsLongMPE.default_opt",
+      "kind": "projection",
+      "module": "AKMMSovereignDefault/LongTermMultiplicity.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.IsLongMPE.borrow_le",
+      "kind": "projection",
+      "module": "AKMMSovereignDefault/LongTermMultiplicity.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.IsLongMPE.borrow_opt",
+      "kind": "projection",
+      "module": "AKMMSovereignDefault/LongTermMultiplicity.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.ld_one_iff",
+      "kind": "theorem",
+      "module": "AKMMSovereignDefault/LongTermMultiplicity.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.ld_econ",
+      "kind": "def",
+      "module": "AKMMSovereignDefault/LongTermMultiplicity.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.ld_VR",
+      "kind": "def",
+      "module": "AKMMSovereignDefault/LongTermMultiplicity.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.ld_D",
+      "kind": "def",
+      "module": "AKMMSovereignDefault/LongTermMultiplicity.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.ld_qG",
+      "kind": "def",
+      "module": "AKMMSovereignDefault/LongTermMultiplicity.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.ld_qB",
+      "kind": "def",
+      "module": "AKMMSovereignDefault/LongTermMultiplicity.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.ld_BG",
+      "kind": "def",
+      "module": "AKMMSovereignDefault/LongTermMultiplicity.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.ld_BB",
+      "kind": "def",
+      "module": "AKMMSovereignDefault/LongTermMultiplicity.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.ld_VR_lt_iff",
+      "kind": "theorem",
+      "module": "AKMMSovereignDefault/LongTermMultiplicity.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.ld_obj_eq",
+      "kind": "theorem",
+      "module": "AKMMSovereignDefault/LongTermMultiplicity.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.ld_VD_eq",
+      "kind": "theorem",
+      "module": "AKMMSovereignDefault/LongTermMultiplicity.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.ld_two_mpe",
+      "kind": "theorem",
+      "module": "AKMMSovereignDefault/LongTermMultiplicity.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.ld_dilution_lowers_prices",
+      "kind": "theorem",
+      "module": "AKMMSovereignDefault/LongTermMultiplicity.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.ld_econ_hyp",
+      "kind": "theorem",
+      "module": "AKMMSovereignDefault/LongTermMultiplicity.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.ld_one_period_unique",
+      "kind": "theorem",
+      "module": "AKMMSovereignDefault/LongTermMultiplicity.lean"
     }
   ],
   "full_build": "passed",
@@ -2543,6 +2940,401 @@
       "propext",
       "Classical.choice",
       "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.fh_scalar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.fh_moving_contraction": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.fh_ite_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.fh_ite_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.fh_rev_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.IsFHEqm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.IsFHEqm.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.IsFHEqm.eq_24_9": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.IsFHEqm.default_opt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.IsFHEqm.term_VD": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.IsFHEqm.term_VR": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.IsFHEqm.term_q": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.IsFHEqm.term_B": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.IsFHEqm.eq_24_10": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.IsFHEqm.eq_24_11": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.IsFHEqm.eq_24_12": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.IsFHEqm.borrow_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.IsFHEqm.borrow_opt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.UEModel.fh_obj_congr": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.UEModel.fh_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.UEModel.fh_q_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.UEModel.fh_mpe_q_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.UEModel.fh_repay_nonpos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.UEModel.fh_VR_antitone": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.UEModel.fh_VR_mod": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.UEModel.fh_VR_slope": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.UEModel.fh_compare": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.UEModel.fh_upper": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.UEModel.fhShift": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.UEModel.fh_shift_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.UEModel.fh_shift_tendsto": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.UEModel.fh_base": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.UEModel.fh_dom": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.UEModel.fh_lower": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.UEModel.fh_VD_bound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.UEModel.fh_default_sets": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.UEModel.fhCap": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.UEModel.fh_capacity_tendsto": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.UEModel.fh_values_tendsto": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.UEModel.fh_price_tendsto": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.UEModel.fh_attain": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.UEModel.fhVD": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.UEModel.fhVR": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.UEModel.fhV": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.UEModel.fhD": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.UEModel.fhq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.UEModel.fhU": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.UEModel.fh_stage": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.UEModel.fh_thr": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.UEModel.fh_exists": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.fh_example_hyp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.fh_example_limit": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.UEModel.ldObj": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.UEModel.ld_obj_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.IsLongMPE": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.IsLongMPE.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.IsLongMPE.bdd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.IsLongMPE.eq_24_9": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.IsLongMPE.eq_24_10": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.IsLongMPE.eq_24_11": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.IsLongMPE.eq_24_12": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.IsLongMPE.default_opt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.IsLongMPE.borrow_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.IsLongMPE.borrow_opt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.ld_one_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.ld_econ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.ld_VR": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.ld_D": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.ld_qG": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.ld_qB": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.ld_BG": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.ld_BB": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.ld_VR_lt_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.ld_obj_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.ld_VD_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.ld_two_mpe": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.ld_dilution_lowers_prices": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.ld_econ_hyp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.ld_one_period_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
     ]
   },
   "source_sha256": {
@@ -2557,15 +3349,17 @@
     "AKMMSovereignDefault/Calibration.lean": "f6b047b96122a7b7e5dab19a0d76d77e4b349d49e6d5e59bd4d6686c851f38c9",
     "AKMMSovereignDefault/UniqueEquilibrium.lean": "816202f9d78cdb89068f7d9433363d89c3766ff28b312c2208c7d4761200cbcd",
     "AKMMSovereignDefault/Multiplicity.lean": "afff2e56c2f400492acd121755cbcb0828661228d68b3da5517c9dee076d5f0b",
-    "AKMMSovereignDefault.lean": "b8cc9cd8707eb1e057e41e3284c50f4cb087a4ba0daad874c192d6a69560fd4a",
+    "AKMMSovereignDefault/FiniteHorizon.lean": "d764a380d59116ac3ba319ca3e769e85f84b6679d2e60902daba970db32b50d7",
+    "AKMMSovereignDefault/LongTermMultiplicity.lean": "7a97b4bedc0e6aaed9c9b81bd7073b93a3accee6364608a46b966086371910db",
+    "AKMMSovereignDefault.lean": "3acaeb12d84f8bbc9b63fa6876a6292944fba6b105c1f5c46df42b226e84a0b7",
     "lean-toolchain": "8733782dc070a99b312039cda424f601b80f3be6f6f512627da5ba25adc27632",
     "lakefile.toml": "2914ad430ed0cd01ae63215673dec7e6c5a1fbf8e8a002dc8b50357df0738652",
     "lake-manifest.json": "b2d84be626696a6c607de430ed7596846bd8ad936cef8d7826d036048690d120",
-    "proof-manifest.json": "edb9147a31c3abac2de368a8a60737070f218e004869f5aa1bda8ed219b74bd3",
+    "proof-manifest.json": "7cc65d908f46152b4d3d5d7c8a50539c02488bc6a1cc801cac316a82f2160efc",
     "scripts/verify.py": "a70b1fa704dd590f937f8b37682afa88a9d85a9150065acb935c7d2c9589da3b",
     "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
   },
-  "fresh_audit_sha256": "34a8f12db7b5b060dc545e18ae55dd3aaa24147382d35dbae60d698711899a6d",
+  "fresh_audit_sha256": "a756d2db29087f8224104564a2907272d2b633d3633d8e114005e585ca707979",
   "lean_toolchain": "leanprover/lean4:v4.34.0",
   "scope": "AKMM Chapter 24 (pp. 729-748, App. 24.A): sovereign debt and default risk.",
   "source": "Marina Azzimonti, Per Krusell, Alisdair McKay and Toshihiko Mukoyama, Macroeconomics (draft of December 2025), Chapter 24"

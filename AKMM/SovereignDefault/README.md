@@ -19,10 +19,12 @@ formalised: the data, facts, tables and figures, the calibration and simulations
 computational methods other than extreme-value smoothing, and the cited results other than those
 of p. 901. Beyond the text, the library proves existence and uniqueness of the Markov perfect
 equilibrium with one-period debt (Auclert–Rognlie; Aguiar–Amador) in a continuous-debt version
-of the model, and gives explicit grid economies with two equilibria, for long-term and even for
-one-period debt. Nine printed errors or imprecisions are corrected and ten departures recorded
+of the model, proves that the finite-horizon equilibria converge to it as the horizon grows,
+and gives explicit economies with two equilibria: on a grid, for long-term and even for
+one-period debt, and with a continuum of debt levels for long-term debt only. Nine printed
+errors or imprecisions are corrected and twelve departures recorded
 in [corrections](docs/corrections.md); every book item is located in the
-[source map](docs/source-map.md). The library contains **154 theorems**, all new.
+[source map](docs/source-map.md). The library contains **194 theorems**, all new.
 
 * **The two-period model** (§24.3): the default rule (24.4) with ties repaid and its optimality
   (`eq_24_3`, `eq_24_4`, `tp_defaultRule_optimal`); the price (24.5), whose printed middle term
@@ -74,6 +76,18 @@ in [corrections](docs/corrections.md); every book item is located in the
 * **Multiplicity on a grid** (p. 901, beyond the text): explicit economies with two Markov
   perfect equilibria, for long-term debt `δ = 1/2` (`mu_grid_long_term_two_mpe`) and for
   one-period debt (`mu_grid_one_period_two_mpe`, correction 9: uniqueness needs the continuum).
+* **The limit of the finite-horizon game** (App. 24.A.1, pp. 899 and 901, beyond the text;
+  departure D11): the game with the book's terminal period (`IsFHEqm`) has a unique equilibrium
+  for every horizon (`fh_unique`, `fh_exists`); a contraction with a moving map converges
+  (`fh_moving_contraction`); under a slope condition on `u` the finite-horizon default sets,
+  debt capacities, values (uniformly), default rules and prices converge to those of the unique
+  MPE (`fh_default_sets`, `fh_capacity_tendsto`, `fh_values_tendsto`, `fh_price_tendsto`), in
+  the concrete economy too (`fh_example_limit`).
+* **Multiplicity with long-term debt and a continuum of debt** (p. 901, beyond the text;
+  departure D12): the equilibrium with long-term debt (`IsLongMPE`, equal to `IsOneMPE` at
+  `δ = 1`, `ld_one_iff`); an explicit economy with two equilibria at `δ = 1/2`, without and with
+  self-fulfilling dilution (`ld_two_mpe`, `ld_dilution_lowers_prices`), and a unique one at
+  `δ = 1` (`ld_one_period_unique`).
 
 All names are in the namespace `AKMM.SovereignDefault`.
 
@@ -92,6 +106,8 @@ All names are in the namespace `AKMM.SovereignDefault`.
 | [Calibration](AKMMSovereignDefault/Calibration.lean) | 15 | CRRA, (24.A.7), the mean of log income (Table 24.A.1 corrected), footnote 44 |
 | [UniqueEquilibrium](AKMMSovereignDefault/UniqueEquilibrium.lean) | 34 | Existence and uniqueness of the MPE with one-period debt and continuous debt (p. 901) |
 | [Multiplicity](AKMMSovereignDefault/Multiplicity.lean) | 3 | Two MPE on a grid, for `δ = 1/2` and for `δ = 1` (p. 901) |
+| [FiniteHorizon](AKMMSovereignDefault/FiniteHorizon.lean) | 31 | The finite-horizon game: existence, uniqueness, convergence to the MPE as `T → ∞` (pp. 899, 901) |
+| [LongTermMultiplicity](AKMMSovereignDefault/LongTermMultiplicity.lean) | 9 | Two MPE with long-term debt and continuous debt; uniqueness at `δ = 1` (p. 901) |
 
 ## Build and verify
 
