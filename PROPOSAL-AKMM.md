@@ -28,7 +28,7 @@ script or a rendered PDF page.
 **Target.** `LeanEconomics/DynamicProgramming`, in a top-level folder `AKMM/` alongside the Miao
 (`EconomicDynamics/`), Stokey–Lucas–Prescott, Sargent–Stachurski and Meyn–Tweedie projects.
 
-Status: decisions settled 2026-11-11 (§4); Phase 0 scaffold and Chapters 2–25 done 2026-11-13.
+Status: decisions settled 2026-11-11 (§4); Phase 0 scaffold and Chapters 2–25 done 2026-11-13; Phase 2 (decisions 5 and 7) done 2026-11-13 on branch `akmm-phase2`.
 
 ---
 
@@ -164,6 +164,10 @@ project's `docs/corrections.md` as the chapters are done (decision 8 on reportin
    processes, Kesten–Goldie tails, Gabaix granularity, existence/uniqueness of the
    infinite-horizon default equilibrium, Achdou et al. uniqueness): listed as not formalised in
    the first pass. Once all chapters are done, ask the user whether to attempt them.
+   *Outcome (Phase 2):* done — general Balasko–Shell (Ch 6), sovereign-default MPE existence and
+   uniqueness for one-period debt with grid multiplicity (Ch 24), Herglotz and the Kolmogorov
+   isometry (Ch 14); partial — Kesten moment bounds fixing the tail index (Ch 21), Gabaix scaling
+   without the stable-law limit (Ch 22); not attempted — Achdou et al. (continuous-time PDEs).
 6. **Continuous time:** follow the textbook. Where the book works in continuous time (Ch 9, the
    continuous-time parts of Ch 12–13), the results are formalised in continuous time as the book
    states them; where the book offers a choice or the setting is open, discrete time is
@@ -174,6 +178,9 @@ project's `docs/corrections.md` as the chapters are done (decision 8 on reportin
    discussion listed. Claims that rest only on figures are omitted in the first pass (each
    listed in the source map as "figure claim, deferred"); whether to do them is decided after
    the book is finished, together with decision 5.
+   *Outcome (Phase 2):* the 20 figure claims that can be stated analytically are proved
+   (Ch 3, 4, 6, 7, 8, 9, 11, 12, 15, 16); the 20 data, calibration and simulation readings stay
+   listed as not formalised.
 8. **The errors:** recorded in each project's `docs/corrections.md`; whether to send anything to
    the authors stays with the user, and nothing is sent by the assistant.
 9. **Citations:** the December 2025 draft's pages.
