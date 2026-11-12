@@ -82,9 +82,47 @@ the [source map](source-map.md).
    hypotheses (`hulten_one_sector`). Factors are a finite set (labour in the
    appendix; capital and labour in the text and example).
 6. **Granularity.** (22.30) uses only that the shocks have unit variance and are uncorrelated
-   (the book assumes i.i.d.) (`eq_22_30`). Gabaix's limit under Zipf's law is not formalised
-   (decision 5).
+   (the book assumes i.i.d.) (`eq_22_30`). Gabaix's limit under Zipf's law, convergence in
+   distribution of `σ_Y log N` to `v_ζσ`, is not formalised (decision 5: a generalised central
+   limit theorem with stable laws, absent from Mathlib); the parts that need no stable laws are
+   proved beyond the text (departure 8).
 7. **Klette–Kortum.** Expected growth of `J_t` and of a firm's lines uses Bernoulli indicators with
    the stated means and linearity of expectation (`kk_growth`, `kk_gibrat`); the first-order
    condition (22.43) is shown sufficient for convex `R` (`eq_22_43`); the equilibrium is solved for
    `(C₀, μ)` given `η` (`kk_equilibrium`).
+8. **Granular volatility as `N → ∞`, beyond the text** (p. 685, Gabaix; module `GranularLimits`).
+   GDP volatility of the first `N` firms is `σ_Y = σ√(ΣSᵢ²)/ΣSᵢ` (`gabaixVol`, equal to (22.30) by
+   `gabaixVol_eq_shares`). Formalised:
+   * i.i.d. positive sizes with `E[S²] < ∞`: `√N σ_Y → σ√(E[S²])/E[S]` almost surely, by the
+     strong law of large numbers (`gabaix_iid_sqrt_tendsto`, `gabaix_iid_vol_tendsto_zero`); for
+     i.i.d. Pareto(`t`, `ζ`) sizes with `ζ > 2` on the product space the limit is
+     `σ(ζ−1)/√(ζ(ζ−2))` (`gabaix_pareto_iid`, with the Pareto moments `gabaix_pareto_moment`);
+   * i.i.d. positive sizes with `E[S] < ∞ = E[S²]`, in particular Pareto with `1 < ζ ≤ 2`
+     (`gabaix_pareto_not_integrable_pow`): `√N σ_Y → ∞` almost surely
+     (`gabaix_iid_infinite_variance`, `gabaix_pareto_iid_fat`);
+   * the deterministic rank-size rule `Sₖ = k^{−1/ζ}` (`gabaixRank`; Zipf's law in deterministic
+     form) in every regime: `log N · σ_Y → σπ/√6` for `ζ = 1` (`gabaix_zipf_log_tendsto`, the
+     book's `1/log N` with an explicit constant), `N^{1−1/ζ}σ_Y → σ(1−1/ζ)√(Σk^{−2/ζ})` for
+     `1 < ζ < 2` (`gabaix_rank_mid_tendsto`, `gabaix_rank_mid_sqrt_tendsto_atTop`),
+     `√(N/log N) σ_Y → σ/2` for `ζ = 2` (`gabaix_rank_two_tendsto`), and
+     `√N σ_Y → σ(ζ−1)/√(ζ(ζ−2))` for `ζ > 2` (`gabaix_rank_thin_tendsto`, the same constant as
+     for i.i.d. Pareto sizes);
+   * the largest-firm bound `σ_Y ≥ σ maxSᵢ/ΣSᵢ`, pathwise (`gabaix_vol_ge_share`), hence almost
+     surely for i.i.d. Pareto sizes with any `ζ`, in particular `ζ = 1`
+     (`gabaix_pareto_vol_ge_share`); `σ_Y ≤ σ` (`gabaix_vol_le`); for Zipf
+     `σ_Y ≥ σ/(1 + log N)` for every `N ≥ 1` (`gabaix_zipf_vol_ge`).
+
+   Not formalised: Gabaix's theorem proper (for i.i.d. Pareto sizes with `ζ < 2`, the normalised
+   volatility converges in distribution to a nondegenerate random variable; for `ζ = 1`,
+   `σ_Y log N →ᵈ v_ζσ`), which needs stable laws; and the numerical illustrations
+   `1/log 10⁶ ≈ 0.072` and Gabaix's coefficient `0.12`.
+
+## Further corrections (Phase 2)
+
+12. **p. 683, "the distribution of idiosyncratic shocks has a finite variance".** In (22.30) the
+    shocks `εᵢ` have variance one throughout; what Gabaix's argument (p. 685) drops is finite
+    variance of the **firm-size** distribution. With i.i.d. sizes of finite variance the `1/√N`
+    law holds even though sizes differ (`gabaix_iid_sqrt_tendsto`); with infinite size variance
+    and finite mean it fails (`gabaix_iid_infinite_variance`, `gabaix_pareto_iid_fat`). Read
+    assumption (i) as "the distribution of firm sizes has a finite variance". Moderate confidence
+    (the book may mean the shocks to GDP `Σ sᵢσεᵢ`, whose variance is (22.30) itself).

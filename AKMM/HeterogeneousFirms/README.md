@@ -16,10 +16,11 @@ integrals with expectations. Imported results: the Dixit–Stiglitz demand and p
 Chapter 19 (`NewKeynesian`), the First Welfare Theorem of Stokey–Lucas–Prescott Chapter 15
 (`ParetoOptimaEquilibria`) for Hulten's theorem, and the quality-ladder limit-pricing condition of
 AKMM Chapter 13 (`AKMMGrowth`). Not formalised: the data, figures and tables, the calibrations,
-the narrative and cited results, and Gabaix's granular limit theorem under Zipf's law (beyond the
-text). Eleven printed errors are corrected and seven departures recorded in
+the narrative and cited results, and Gabaix's granular limit theorem under Zipf's law itself
+(convergence in distribution to a stable law, beyond the text); its parts that need no stable laws
+are proved beyond the text. Twelve printed errors are corrected and eight departures recorded in
 [corrections](docs/corrections.md); every book item is located in the
-[source map](docs/source-map.md). The library contains **128 theorems**, all new.
+[source map](docs/source-map.md). The library contains **150 theorems**, all new.
 
 * **The simple model** (§22.2): two-stage cost minimisation under constant returns
   (`twostage_cost`, `twostage_profit_le`), the scale problem (22.1)–(22.2) (`eq_22_1`,
@@ -50,6 +51,16 @@ text). Eleven printed errors are corrected and seven departures recorded in
   `bertrand_ratio`), Cournot markups exceed Bertrand markups (`markup_cournot_ge`).
 * **Granularity** (§22.7): (22.30) (`eq_22_30`), equal sizes (`granular_equal_sizes`,
   `granular_herfindahl_ge`).
+* **Granular volatility as `N → ∞`** (p. 685, beyond the text): `σ_Y = σ√(ΣSᵢ²)/ΣSᵢ`
+  (`gabaixVol`); for i.i.d. sizes with finite variance `√N σ_Y → σ√(E[S²])/E[S]` almost surely by
+  the strong law (`gabaix_iid_sqrt_tendsto`), with Pareto moments (`gabaix_pareto_moment`,
+  `gabaix_pareto_not_integrable_pow`) and the Pareto instance `ζ > 2` (`gabaix_pareto_iid`); with
+  infinite variance `√N σ_Y → ∞` almost surely (`gabaix_iid_infinite_variance`,
+  `gabaix_pareto_iid_fat`, `1 < ζ ≤ 2`); for the rank-size rule `Sₖ = k^{−1/ζ}` the three regimes
+  `log N · σ_Y → σπ/√6` at Zipf `ζ = 1` (`gabaix_zipf_log_tendsto`), `σ_Y ≍ N^{−(1−1/ζ)}` for
+  `1 < ζ < 2` (`gabaix_rank_mid_tendsto`), `σ_Y ∼ c/√N` for `ζ > 2` (`gabaix_rank_thin_tendsto`),
+  and `ζ = 2` (`gabaix_rank_two_tendsto`); the largest-firm bound (`gabaix_vol_ge_share`,
+  `gabaix_pareto_vol_ge_share`, `gabaix_zipf_vol_ge`).
 * **Hulten's theorem** (22.31), App. 22.A.5: `hulten` (via the imported First Welfare Theorem),
   Euler's identity (22.A.6) (`eq_22_A_6`), a concrete economy satisfying every hypothesis
   (`hulten_one_sector`), the two-sector example (22.32) (`eq_22_32`, `hulten_example_prices`).
@@ -73,6 +84,7 @@ text). Eleven printed errors are corrected and seven departures recorded in
 | [MonopolisticCompetition](AKMMHeterogeneousFirms/MonopolisticCompetition.lean) | 10 | (22.16)–(22.22), aggregation (AKMM §22.6.1, pp. 677–679) |
 | [Oligopoly](AKMMHeterogeneousFirms/Oligopoly.lean) | 22 | (22.23)–(22.29), Cournot and Bertrand (AKMM §22.6.2, pp. 679–681; App. 22.A.4, pp. 892–893) |
 | [Granularity](AKMMHeterogeneousFirms/Granularity.lean) | 5 | (22.30) (AKMM §22.7, p. 682) |
+| [GranularLimits](AKMMHeterogeneousFirms/GranularLimits.lean) | 22 | Beyond the text: `σ_Y` as `N → ∞` for i.i.d. and rank-size firm sizes (AKMM pp. 682–685) |
 | [Hulten](AKMMHeterogeneousFirms/Hulten.lean) | 5 | (22.31)–(22.32), (22.A.5)–(22.A.8) (AKMM pp. 683–684; App. 22.A.5, pp. 894–896) |
 | [HultenExample](AKMMHeterogeneousFirms/HultenExample.lean) | 2 | A one-sector economy satisfying every hypothesis of Hulten's theorem |
 | [KletteKortum](AKMMHeterogeneousFirms/KletteKortum.lean) | 16 | (22.34)–(22.46), growth, Gibrat's law (AKMM §22.8, pp. 686–691) |

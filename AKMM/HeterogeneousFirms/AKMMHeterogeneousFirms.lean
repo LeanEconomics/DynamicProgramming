@@ -5,6 +5,7 @@ import AKMMHeterogeneousFirms.HopenhaynRogerson
 import AKMMHeterogeneousFirms.MonopolisticCompetition
 import AKMMHeterogeneousFirms.Oligopoly
 import AKMMHeterogeneousFirms.Granularity
+import AKMMHeterogeneousFirms.GranularLimits
 import AKMMHeterogeneousFirms.Hulten
 import AKMMHeterogeneousFirms.HultenExample
 import AKMMHeterogeneousFirms.KletteKortum

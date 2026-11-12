@@ -1,6 +1,6 @@
 {
-  "checked_at_utc": "2026-11-12T11:16:31.052558+00:00",
-  "theorems": 128,
+  "checked_at_utc": "2026-11-12T21:07:28.887677+00:00",
+  "theorems": 150,
   "module_theorems": {
     "AKMMHeterogeneousFirms/SimpleModel.lean": 17,
     "AKMMHeterogeneousFirms/Lognormal.lean": 10,
@@ -9,12 +9,13 @@
     "AKMMHeterogeneousFirms/MonopolisticCompetition.lean": 10,
     "AKMMHeterogeneousFirms/Oligopoly.lean": 22,
     "AKMMHeterogeneousFirms/Granularity.lean": 5,
+    "AKMMHeterogeneousFirms/GranularLimits.lean": 22,
     "AKMMHeterogeneousFirms/Hulten.lean": 5,
     "AKMMHeterogeneousFirms/HultenExample.lean": 2,
     "AKMMHeterogeneousFirms/KletteKortum.lean": 16,
     "AKMMHeterogeneousFirms/FirmSize.lean": 12
   },
-  "audited_declarations": 160,
+  "audited_declarations": 184,
   "declarations": [
     {
       "name": "AKMM.HeterogeneousFirms.twostage_cost",
@@ -600,6 +601,126 @@
       "name": "AKMM.HeterogeneousFirms.granular_herfindahl_ge",
       "kind": "theorem",
       "module": "AKMMHeterogeneousFirms/Granularity.lean"
+    },
+    {
+      "name": "AKMM.HeterogeneousFirms.gabaixVol",
+      "kind": "def",
+      "module": "AKMMHeterogeneousFirms/GranularLimits.lean"
+    },
+    {
+      "name": "AKMM.HeterogeneousFirms.gabaixVol_eq_shares",
+      "kind": "theorem",
+      "module": "AKMMHeterogeneousFirms/GranularLimits.lean"
+    },
+    {
+      "name": "AKMM.HeterogeneousFirms.gabaix_sqrt_mul_vol",
+      "kind": "theorem",
+      "module": "AKMMHeterogeneousFirms/GranularLimits.lean"
+    },
+    {
+      "name": "AKMM.HeterogeneousFirms.gabaix_iid_sqrt_tendsto",
+      "kind": "theorem",
+      "module": "AKMMHeterogeneousFirms/GranularLimits.lean"
+    },
+    {
+      "name": "AKMM.HeterogeneousFirms.gabaix_iid_vol_tendsto_zero",
+      "kind": "theorem",
+      "module": "AKMMHeterogeneousFirms/GranularLimits.lean"
+    },
+    {
+      "name": "AKMM.HeterogeneousFirms.gabaix_pareto_density_pow",
+      "kind": "theorem",
+      "module": "AKMMHeterogeneousFirms/GranularLimits.lean"
+    },
+    {
+      "name": "AKMM.HeterogeneousFirms.gabaix_pareto_not_integrable_pow",
+      "kind": "theorem",
+      "module": "AKMMHeterogeneousFirms/GranularLimits.lean"
+    },
+    {
+      "name": "AKMM.HeterogeneousFirms.gabaix_pareto_moment",
+      "kind": "theorem",
+      "module": "AKMMHeterogeneousFirms/GranularLimits.lean"
+    },
+    {
+      "name": "AKMM.HeterogeneousFirms.gabaix_pareto_iid",
+      "kind": "theorem",
+      "module": "AKMMHeterogeneousFirms/GranularLimits.lean"
+    },
+    {
+      "name": "AKMM.HeterogeneousFirms.gabaix_iid_infinite_variance",
+      "kind": "theorem",
+      "module": "AKMMHeterogeneousFirms/GranularLimits.lean"
+    },
+    {
+      "name": "AKMM.HeterogeneousFirms.gabaix_pareto_iid_fat",
+      "kind": "theorem",
+      "module": "AKMMHeterogeneousFirms/GranularLimits.lean"
+    },
+    {
+      "name": "AKMM.HeterogeneousFirms.gabaixRank",
+      "kind": "def",
+      "module": "AKMMHeterogeneousFirms/GranularLimits.lean"
+    },
+    {
+      "name": "AKMM.HeterogeneousFirms.gabaix_sum_rpow_bounds",
+      "kind": "theorem",
+      "module": "AKMMHeterogeneousFirms/GranularLimits.lean"
+    },
+    {
+      "name": "AKMM.HeterogeneousFirms.gabaix_sum_rpow_tendsto",
+      "kind": "theorem",
+      "module": "AKMMHeterogeneousFirms/GranularLimits.lean"
+    },
+    {
+      "name": "AKMM.HeterogeneousFirms.gabaix_harmonic_div_log_tendsto",
+      "kind": "theorem",
+      "module": "AKMMHeterogeneousFirms/GranularLimits.lean"
+    },
+    {
+      "name": "AKMM.HeterogeneousFirms.gabaix_zipf_log_tendsto",
+      "kind": "theorem",
+      "module": "AKMMHeterogeneousFirms/GranularLimits.lean"
+    },
+    {
+      "name": "AKMM.HeterogeneousFirms.gabaix_rank_mid_tendsto",
+      "kind": "theorem",
+      "module": "AKMMHeterogeneousFirms/GranularLimits.lean"
+    },
+    {
+      "name": "AKMM.HeterogeneousFirms.gabaix_rank_mid_sqrt_tendsto_atTop",
+      "kind": "theorem",
+      "module": "AKMMHeterogeneousFirms/GranularLimits.lean"
+    },
+    {
+      "name": "AKMM.HeterogeneousFirms.gabaix_rank_two_tendsto",
+      "kind": "theorem",
+      "module": "AKMMHeterogeneousFirms/GranularLimits.lean"
+    },
+    {
+      "name": "AKMM.HeterogeneousFirms.gabaix_rank_thin_tendsto",
+      "kind": "theorem",
+      "module": "AKMMHeterogeneousFirms/GranularLimits.lean"
+    },
+    {
+      "name": "AKMM.HeterogeneousFirms.gabaix_vol_ge_share",
+      "kind": "theorem",
+      "module": "AKMMHeterogeneousFirms/GranularLimits.lean"
+    },
+    {
+      "name": "AKMM.HeterogeneousFirms.gabaix_vol_le",
+      "kind": "theorem",
+      "module": "AKMMHeterogeneousFirms/GranularLimits.lean"
+    },
+    {
+      "name": "AKMM.HeterogeneousFirms.gabaix_zipf_vol_ge",
+      "kind": "theorem",
+      "module": "AKMMHeterogeneousFirms/GranularLimits.lean"
+    },
+    {
+      "name": "AKMM.HeterogeneousFirms.gabaix_pareto_vol_ge_share",
+      "kind": "theorem",
+      "module": "AKMMHeterogeneousFirms/GranularLimits.lean"
     },
     {
       "name": "AKMM.HeterogeneousFirms.hultenNet",
@@ -1409,6 +1530,126 @@
       "Classical.choice",
       "Quot.sound"
     ],
+    "AKMM.HeterogeneousFirms.gabaixVol": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.HeterogeneousFirms.gabaixVol_eq_shares": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.HeterogeneousFirms.gabaix_sqrt_mul_vol": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.HeterogeneousFirms.gabaix_iid_sqrt_tendsto": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.HeterogeneousFirms.gabaix_iid_vol_tendsto_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.HeterogeneousFirms.gabaix_pareto_density_pow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.HeterogeneousFirms.gabaix_pareto_not_integrable_pow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.HeterogeneousFirms.gabaix_pareto_moment": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.HeterogeneousFirms.gabaix_pareto_iid": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.HeterogeneousFirms.gabaix_iid_infinite_variance": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.HeterogeneousFirms.gabaix_pareto_iid_fat": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.HeterogeneousFirms.gabaixRank": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.HeterogeneousFirms.gabaix_sum_rpow_bounds": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.HeterogeneousFirms.gabaix_sum_rpow_tendsto": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.HeterogeneousFirms.gabaix_harmonic_div_log_tendsto": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.HeterogeneousFirms.gabaix_zipf_log_tendsto": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.HeterogeneousFirms.gabaix_rank_mid_tendsto": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.HeterogeneousFirms.gabaix_rank_mid_sqrt_tendsto_atTop": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.HeterogeneousFirms.gabaix_rank_two_tendsto": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.HeterogeneousFirms.gabaix_rank_thin_tendsto": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.HeterogeneousFirms.gabaix_vol_ge_share": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.HeterogeneousFirms.gabaix_vol_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.HeterogeneousFirms.gabaix_zipf_vol_ge": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.HeterogeneousFirms.gabaix_pareto_vol_ge_share": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
     "AKMM.HeterogeneousFirms.hultenNet": [
       "propext",
       "Classical.choice",
@@ -1632,20 +1873,21 @@
     "AKMMHeterogeneousFirms/HopenhaynRogerson.lean": "bead425e2522f8cfa1e970ca8f61501681d8628bbdfff8558c0ab8543dfcf089",
     "AKMMHeterogeneousFirms/MonopolisticCompetition.lean": "9d2f750c17888d09da2b369fa0fd53cfd6cdf836b425b451b43bfd2e7db7212b",
     "AKMMHeterogeneousFirms/Oligopoly.lean": "9890be0a297066b23a3e09956952987be0f394a07b21057652e111d0c5bd25f3",
-    "AKMMHeterogeneousFirms/Granularity.lean": "ad0735a6fb293a8e30df9d95c218e2867bbb431c3adfd3b77fea29d641d4d1ae",
+    "AKMMHeterogeneousFirms/Granularity.lean": "f183c77ba8732088433007be765679bc7d5b2d1f2998d4c20f7e198fc530d35b",
+    "AKMMHeterogeneousFirms/GranularLimits.lean": "46febaa9c4f856b7ab6d05fe6373b01d53b726d25b8b65429c2603beac602ec6",
     "AKMMHeterogeneousFirms/Hulten.lean": "f27890cf4c0a73e775691e4b16ad7a6e688db72d44482211103d889862487a07",
     "AKMMHeterogeneousFirms/HultenExample.lean": "129568925fa8a888e9fcc403dc2f61f6268f0ffa9246933b3c7a7cca3fbfcca8",
     "AKMMHeterogeneousFirms/KletteKortum.lean": "f0ec1d76dd01bba0c87f165020885f82fc76afbe5ddec38c9e70cf4ac9c58574",
     "AKMMHeterogeneousFirms/FirmSize.lean": "8cf08f883e6c733c103f42bfd84813e6a7fdd903c6e724a04712c8eb34ab8cce",
-    "AKMMHeterogeneousFirms.lean": "fecfd30859d765e7993dcc0b1d4d52144f5db5216084a4c4483c459bbeaa4da3",
+    "AKMMHeterogeneousFirms.lean": "3cd95b569cb8ac2672cf5d722da4e352cbd7e6510870d1ba7145f947e8de31f9",
     "lean-toolchain": "8733782dc070a99b312039cda424f601b80f3be6f6f512627da5ba25adc27632",
     "lakefile.toml": "7f759780a52307f5ca0894ec4e40eecfd534291c747276c66f4f8217224ef67a",
     "lake-manifest.json": "442c6dc0e89ac2cd5e4166bf21070e0dfbef904f8a0ad3f3d623288840048c56",
-    "proof-manifest.json": "bdd6a594d6513f54a4e6cfbc03176c359f489a241ba70438e6579b9005f748a0",
+    "proof-manifest.json": "e3b8c4ffa5ae093a4a8a4bf7d6170b7eeabbf7028b0d4552700ed2532abad243",
     "scripts/verify.py": "a70b1fa704dd590f937f8b37682afa88a9d85a9150065acb935c7d2c9589da3b",
     "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
   },
-  "fresh_audit_sha256": "16d9c0b27121dfcdccfd045305d459c26ef97c4a6720524e2d20fe101427af2f",
+  "fresh_audit_sha256": "a35f41e3780a6440af65ad0dfcc871fad1f2cd17e657325b88c9fc6dbba0c976",
   "lean_toolchain": "leanprover/lean4:v4.34.0",
   "scope": "AKMM Chapter 22 (pp. 663-692, App. 22.A): heterogeneous firms.",
   "source": "Marina Azzimonti, Per Krusell, Alisdair McKay and Toshihiko Mukoyama, Macroeconomics (draft of December 2025), Chapter 22"

@@ -17,7 +17,8 @@ AKMM, §22.7, pp. 681–682. GDP is the sum of the outputs of `N` firms, and fir
 * **Equal sizes**: `σ_Y = σ/√N` (`granular_equal_sizes`), and `√(10⁶) = 1000` (p. 682); equal
   sizes give the smallest volatility for given `N` (`granular_herfindahl_ge`).
 * Gabaix's result under Zipf's law (`σ_Y log N` converges in distribution) is not formalised (a
-  generalised central limit theorem, beyond the text, decision 5).
+  generalised central limit theorem, beyond the text, decision 5); the parts that need no stable
+  laws (i.i.d. sizes, the rank-size rule) are in `GranularLimits`.
 -/
 
 open MeasureTheory ProbabilityTheory

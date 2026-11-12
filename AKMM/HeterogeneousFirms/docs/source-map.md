@@ -99,7 +99,7 @@ pp. 888–896. Page references are the draft's running heads. Lean names are rel
 | p. 681; App. 22.A.4, pp. 892–893 | Bertrand: `ε(s) = η(1−s) + σs` and the same pricing rule | `bertrandElas`, `bertrand_demand_form`, `bertrand_demand_deriv`, `eq_22_A_4`, `bertrand_ratio` (corrected; printed value false: `bertrand_ratio_printed_false`), `bertrand_markup` |
 | p. 681 | "The intuition is similar" | `cournot_le_bertrand`, `markup_cournot_ge` (Cournot markups are higher) |
 
-## §22.7 Business cycles and heterogeneous firms (`Granularity`, `Hulten`)
+## §22.7 Business cycles and heterogeneous firms (`Granularity`, `GranularLimits`, `Hulten`)
 
 | Source | Claim | Lean |
 | --- | --- | --- |
@@ -108,12 +108,25 @@ pp. 888–896. Page references are the draft's running heads. Lean names are rel
 | p. 682 | Equal sizes: `σ_Y = σ/√N`; `1/√10⁶ = 0.001` | `granular_equal_sizes`, `granular_million`; equal sizes minimise `Σsᵢ²`: `granular_herfindahl_ge` |
 | p. 682, fn. 17–18 | Firm volatility 10–20%; Gabaix's estimates | not formalised: data (fn. 18 see corrections) |
 | p. 682, §22.7.1, fn. 19 | Aggregate shocks in Hopenhayn–Rogerson; its cyclical performance | not formalised: quantitative, narrative |
+| p. 683 | The `1/√N` calculation assumes (i) finite variance, (ii) no input-output networks | (i): see corrections, item 12 (`gabaix_iid_sqrt_tendsto`, `gabaix_iid_infinite_variance`); (ii): `hulten` |
 | p. 683, (22.31) | Hulten's theorem with Domar weights | `hulten` |
 | p. 683 | Intuition: envelope theorem; sales over value added | `hulten` (lower-bound envelope argument) |
 | p. 684, (22.32) | Two-sector example: `Y = a₁(a₂K)^{1−γ}L^γ`, elasticities `1`, `1−γ` | `eq_22_32` |
 | p. 684 | Intermediate price, value added `V₂ = (1−γ)Y`, `V₁ = γY`, Domar weights `1`, `1−γ` | `hulten_example_prices` |
 | pp. 684–685, (22.33), Figure 22.9, fn. 20 | Pareto firm sizes in the data | not formalised: data |
-| p. 685 | Gabaix: under Zipf `σ_Y log N →ᵈ v_ζσ`; `1/log 10⁶ ≈ 0.072`; coefficient 0.12 | not formalised: beyond the text (stable-law limit theorem, decision 5); numerical illustration |
+| p. 685 | Gabaix: under Zipf `σ_Y log N →ᵈ v_ζσ` (convergence in distribution, i.i.d. Pareto sizes) | not formalised: beyond the text (stable-law limit theorem; Mathlib has no generalised CLT, decision 5). The parts that need no stable laws are formalised beyond the text in `GranularLimits` (next rows; corrections, departure 8) |
+| p. 682, (22.30), beyond the text | `σ_Y = σ√(ΣSᵢ²)/ΣSᵢ` for the first `N` firms | `gabaixVol`, `gabaixVol_eq_shares`, `gabaix_sqrt_mul_vol` |
+| p. 682, beyond the text | i.i.d. sizes with `E[S²] < ∞`: `√N σ_Y → σ√(E[S²])/E[S]` a.s.; `σ_Y → 0` | `gabaix_iid_sqrt_tendsto` (strong law of large numbers), `gabaix_iid_vol_tendsto_zero` |
+| p. 684, (22.33), beyond the text | Pareto moments: `E[Sⁿ] = ζtⁿ/(ζ−n)` for `n < ζ`, infinite for `n ≥ ζ` | `gabaix_pareto_density_pow`, `gabaix_pareto_moment`, `gabaix_pareto_not_integrable_pow` |
+| p. 685, beyond the text | i.i.d. Pareto sizes, `ζ > 2`: `√N σ_Y → σ(ζ−1)/√(ζ(ζ−2))` a.s. | `gabaix_pareto_iid` |
+| p. 685, beyond the text | i.i.d. sizes with `E[S] < ∞ = E[S²]`, e.g. Pareto `1 < ζ ≤ 2`: `√N σ_Y → ∞` a.s. | `gabaix_iid_infinite_variance`, `gabaix_pareto_iid_fat` |
+| p. 685, beyond the text | Deterministic rank-size rule `Sₖ = k^{−1/ζ}`; sum–integral comparison | `gabaixRank`, `gabaix_sum_rpow_bounds`, `gabaix_sum_rpow_tendsto`, `gabaix_harmonic_div_log_tendsto` |
+| p. 685, beyond the text | Zipf `ζ = 1`: `σ_Y ∝ 1/log N`, `log N · σ_Y → σπ/√6` | `gabaix_zipf_log_tendsto` |
+| p. 685, beyond the text | `1 < ζ < 2`: `N^{1−1/ζ}σ_Y → σ(1−1/ζ)√(Σk^{−2/ζ})`; slower than `1/√N` | `gabaix_rank_mid_tendsto`, `gabaix_rank_mid_sqrt_tendsto_atTop` |
+| p. 685, beyond the text | `ζ = 2`: `√(N/log N) σ_Y → σ/2` | `gabaix_rank_two_tendsto` |
+| p. 685, beyond the text | `ζ > 2`: `√N σ_Y → σ(ζ−1)/√(ζ(ζ−2))` (the `1/√N` law) | `gabaix_rank_thin_tendsto` |
+| p. 685, beyond the text | Largest-firm bound `σ_Y ≥ σ maxSᵢ/ΣSᵢ` (pathwise; a.s. for i.i.d. Pareto, any `ζ`, in particular `ζ = 1`); `σ_Y ≤ σ`; Zipf: `σ_Y ≥ σ/(1 + log N)` | `gabaix_vol_ge_share`, `gabaix_pareto_vol_ge_share`, `gabaix_vol_le`, `gabaix_zipf_vol_ge` |
+| p. 685 | `1/log 10⁶ ≈ 0.072`; Gabaix's coefficient 0.12 | not formalised: numerical illustration |
 | pp. 685–686 | Production networks, Baqaee–Farhi | not formalised: cited |
 | App. 22.A.5, p. 894 | The economy: preferences, technologies, market clearing | `hultenNet`, `hultenTech`, `hultenCons`, `hultenUtil`, `hultenGoods`, `hulten_goods_apply` |
 | App. 22.A.5, p. 895, (22.A.5) | Consumer's first-order condition, `λ = 1` | hypothesis `hU` of `hulten` |
