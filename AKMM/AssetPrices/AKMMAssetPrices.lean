@@ -10,3 +10,4 @@ import AKMMAssetPrices.MehraPrescott
 import AKMMAssetPrices.Lognormal
 import AKMMAssetPrices.IidGrowth
 import AKMMAssetPrices.EpsteinZin
+import AKMMAssetPrices.FigureClaims

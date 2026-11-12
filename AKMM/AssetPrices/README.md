@@ -8,24 +8,26 @@ the draft's pages. Run the commands below from this directory.
 [Return to the library index](../../README.md).
 
 Chapter 16 studies economies with many assets: the planner and Arrow–Debreu conditions of an
-endowment economy and the First Welfare Theorem, sequential trading, two-period no-arbitrage
-theory (the fundamental theorem of asset pricing, state prices, the law of one price), optimal
-portfolios and subjective state prices, the stochastic discount factor and risk-neutral pricing,
-the representative agent, dynamic trading and Euler equations, the Mehra–Prescott equity premium,
-the lognormal consumption CAPM and the excess volatility of stock prices. Every numbered equation
+endowment economy and the First Welfare Theorem, sequential trading, two-period no-arbitrage theory
+(the fundamental theorem of asset pricing, state prices, the law of one price), optimal portfolios
+and subjective state prices, the stochastic discount factor and risk-neutral pricing, the
+representative agent, dynamic trading and Euler equations, the Mehra–Prescott equity premium, the
+lognormal consumption CAPM and the excess volatility of stock prices. Every numbered equation
 (16.1)–(16.32) and every derivation and precise claim of the text is proved; the chapter has no
 numbered theorems. The fundamental theorems are proved from Stiemke's lemma, both for two periods
-and on a finite event tree, and the existence of an optimal portfolio under no arbitrage is
-proved by compactness of the budget set. Not formalised: the data, Tables 16.1–16.2, Figures
-16.1–16.5 (the claim read off Figure 16.4 is deferred), the narrative, and the infinite-horizon
-versions of the sequential-trading results (cited from Miao). The project depends on Miao's
-`CompleteMarkets` (Stiemke's lemma, finite expectations, Gaussian integrals) and
-`RecursiveUtility` (the Epstein–Zin riskless rate), on Sargent and Stachurski's
-`StochasticDiscounting` (price–dividend ratios and the spectral radius) and on Obstfeld and
-Rogoff's `InternationalFinancialMarkets` (spanning). Eight printed errors are corrected, with Lean
-counterexamples to (16.17), to the budget-set identity (16.14) and to the existence claim without
-a consumption bound, as recorded in [corrections](docs/corrections.md); every book item is located
-in the [source map](docs/source-map.md). The library contains **131 theorems**.
+and on a finite event tree, and the existence of an optimal portfolio under no arbitrage is proved
+by compactness of the budget set. The claim read off Figure 16.4 (an equity premium below 0.1%
+whenever the riskless rate is below 4%) is false by a hair with the text's primitives and is
+corrected to 0.17%. Not formalised: the data, Tables 16.1–16.2, the plotted Figures 16.1–16.5, the
+narrative, and the infinite-horizon versions of the sequential-trading results (cited from Miao).
+The project depends on Miao's `CompleteMarkets` (Stiemke's lemma, finite expectations, Gaussian
+integrals) and `RecursiveUtility` (the Epstein–Zin riskless rate), on Sargent and Stachurski's
+`StochasticDiscounting` (price–dividend ratios and the spectral radius) and on Obstfeld and Rogoff's
+`InternationalFinancialMarkets` (spanning). Nine printed errors are corrected, with Lean
+counterexamples to (16.17), to the budget-set identity (16.14), to the existence claim without a
+consumption bound and to the bound read off Figure 16.4, as recorded in
+[corrections](docs/corrections.md); every book item is located in the
+[source map](docs/source-map.md). The library contains **159 theorems**.
 
 * **Endowment economy** (§16.3): the planner's conditions (16.1) and (16.3), the envelope
   theorem (16.2) (`eq_16_1`, `eq_16_2`, `eq_16_3`); the Arrow–Debreu conditions (16.4)–(16.5)
@@ -55,6 +57,11 @@ in the [source map](docs/source-map.md). The library contains **131 theorems**.
 * **Mehra–Prescott** (§16.6): the stationary distribution (`mp_stationary_iff`); the unique
   price–dividend ratio `(I − βA)⁻¹βA𝟙` (`mp_pd_unique`, `mp_pd_series`); returns and the moments
   of fn. 5 (`eq_16_25`, `fn5_autocorr`).
+* **Figure 16.4** (§16.6, p. 488): the premium as an average of conditional covariances
+  (`mpf_premium_cov`); with Table 16.1's growth process, `rᶠ < 4%` forces `γ < 5/2`
+  (`mpf_gamma_lt`) and the premium is positive and below 0.17% on the whole region
+  (`mpf_premium_bound`); the printed 0.1% fails at `β = 1`, `γ = 9/4` (`mpf_counterexample`,
+  `mpf_fig_16_4_printed_false`).
 * **Lognormal model** (§16.7): (16.29)–(16.30) (`eq_16_29`, `eq_16_30`); the riskless rate rises
   with `γ` iff `γ < μ_g/σ_g²` (`lg_rf_mono_iff`); `γ ≥ 16.36` from Table 16.1
   (`lg_gamma_bound`); Epstein–Zin separation (`ez_rf_smoothing`, `ez_power_case`).
@@ -79,6 +86,7 @@ All names are in the namespace `AKMM.AssetPrices`.
 | [Lognormal](AKMMAssetPrices/Lognormal.lean) | 14 | (16.29)–(16.30) and the numbers of p. 490 (§16.7, pp. 488–490) |
 | [IidGrowth](AKMMAssetPrices/IidGrowth.lean) | 7 | The constant price–dividend ratio (16.31)–(16.32) (§16.8, pp. 490–492) |
 | [EpsteinZin](AKMMAssetPrices/EpsteinZin.lean) | 4 | Epstein–Zin separates the riskless rate from risk aversion (p. 490) |
+| [FigureClaims](AKMMAssetPrices/FigureClaims.lean) | 28 | Figure 16.4: the equity premium bound, corrected, and its counterexample (p. 488) |
 
 ## Build and verify
 

@@ -112,7 +112,7 @@ Epstein–Zin riskless rate). Sargent–Stachurski `StochasticDiscounting`
 | (16.22)–(16.23), p. 484 | Returns; `Eₜ[MR] = 1` | `eq_16_23` |
 | p. 485 | `Eₜ[M]Eₜ[R] + Covₜ = 1`; conditional premium | `eu_conditional_premium` |
 
-## §16.6 The equity premium and risk-free rate puzzles (pp. 485–488) — `MehraPrescott`
+## §16.6 The equity premium and risk-free rate puzzles (pp. 485–488) — `MehraPrescott`, `FigureClaims`
 
 | Source | Claim | Lean |
 | --- | --- | --- |
@@ -129,7 +129,11 @@ Epstein–Zin riskless rate). Sargent–Stachurski `StochasticDiscounting`
 | p. 487 | `G_L = 1 + μ − δ`, `G_H = 1 + μ + δ`; `μ` mean, `δ` variance, `φ` persistence | `fn5G`, `fn5_mean`, `fn5_var`, `fn5_autocorr` |
 | fn. 5, p. 487 | Moments of `G`: mean, variance, autocorrelation | `fn5Mean`, `fn5Second`, `fn5Cross`, `fn5_mean`, `fn5_var`, `fn5_autocorr` |
 | p. 487, Table 16.1 | Sample moments; GMM estimates of `μ, δ, φ` | not formalised: data |
-| p. 488, Fig. 16.4 | Equity premium < 0.1% for `rᶠ < 4%` | figure claim, deferred (numerical) |
+| p. 487, Table 16.1 | The figure's growth process: `μ = 0.0175`, `δ = 0.0233`, `2φ − 1 = 0.1069` (exactly identified) | `mpfG`, `mpfPhi`, `mpf_primitives`, `mpf_values` |
+| (16.26)–(16.27), p. 487 | Equity premium = average of conditional covariances with the SDF | `mpf_cond_cov`, `mpf_premium_cov`, `mpf_rf_mean` |
+| p. 488, Fig. 16.4 | Region of the figure: `β ∈ [0,1]`, `γ ∈ [0,100]`, `E[rᶠ] < 4%` forces `γ < 5/2` | `mpf_gamma_lt` (via `mpf_rpow_convex`, `mpf_far_bounds`, `mpf_amhm`) |
+| p. 488, Fig. 16.4 | Equity premium < 0.1% for `rᶠ < 4%` | false as printed: `mpf_counterexample`, `mpf_fig_16_4_printed_false` (`β = 1`, `γ = 9/4`: `rᶠ ≈ 3.78%`, premium ≈ 0.103%; via `mpf_ce_bounds`, `mpf_ce_core`, `mpf_ce_ep`, `mpf_pd_of_eqs`); corrected: premium positive (`γ > 0`) and < 0.17% on the whole region, `mpf_premium_bound` (via `mpf_core`, `mpf_core_bond`, `mpf_core_ratio`, `mpf_core_v`, `mpf_core_term`, `mpf_GL_bounds`, `mpf_GH_bounds`) (corrections 15) |
+| p. 488 | "the equity premium and the risk-free rate are both positive" | premium: `mpf_premium_bound` (positive for `γ > 0` on the plotted region); riskless rate not formalised (narrative) |
 
 ## §16.7 Lognormal model (pp. 488–490) — `Lognormal`, `EpsteinZin`
 

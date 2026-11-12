@@ -101,3 +101,20 @@ Lean names are relative to `AKMM.AssetPrices`. Every book item is located in the
 
 14. **Lognormal model.** "Jointly lognormal" is used in the form that `−γg + rˢ` is Gaussian with
     the mean and variance implied by the joint distribution (`lg_equity_euler`, `eq_16_30`).
+
+## Figure claims
+
+15. **p. 488, Figure 16.4: "the equity premium is less than 0.1 percent".** The figure scans
+    `β ∈ [0, 1]`, `γ ∈ [0, 100]` and keeps the equilibria with mean riskless rate below 4%, with
+    the growth process fixed by Table 16.1 (`μ = 0.0175`, `δ = 0.0233`, `2φ − 1 = 0.1069`, which
+    the three moments identify exactly; `mpf_primitives`). With these primitives the printed
+    bound is false: at `β = 1`, `γ = 9/4` the price–dividend ratio `v = (I − A)⁻¹A𝟙` exists
+    (`ρ(A) < 1`), the mean riskless rate is about 3.78% and the equity premium about 0.103%
+    (`mpf_counterexample`, `mpf_fig_16_4_printed_false`; `G^{−9/4}` enclosed to `10⁻⁷` by exact
+    rational arithmetic). What is true on the whole region: `E[rᶠ] < 4%` forces `γ < 5/2`
+    (`mpf_gamma_lt`), and the equity premium is positive for `γ > 0` and below 0.17%
+    (`mpf_premium_bound`), proved from the covariance form of the premium (`mpf_premium_cov`),
+    not at grid points. The exact supremum (between 0.103% and 0.17%) is not determined; the
+    figure's message (a premium two orders of magnitude below the 7% of Table 16.1) stands. The
+    figure's left edge (riskless rates from about 1%) is not reproduced by these primitives and is
+    not formalised.

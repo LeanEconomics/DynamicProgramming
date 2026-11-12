@@ -29,8 +29,8 @@ stochastic discount factor is `M = βG^{−γ}`.
 * Fn. 5: with `G_L = 1 + μ − δ`, `G_H = 1 + μ + δ` and `π = (1/2, 1/2)`, `E[G] − 1 = μ`,
   `σ²(G) = δ²` and the autocorrelation is `2φ − 1` (`fn5_mean`, `fn5_var`, `fn5_autocorr`).
 
-Departure: (16.25) writes `gⱼ` for the gross growth rate `Gⱼ`. The numbers of Table 16.1 and
-Figure 16.4 are not formalised.
+Departure: (16.25) writes `gⱼ` for the gross growth rate `Gⱼ`. The claim of Figure 16.4 is in
+`FigureClaims`.
 -/
 
 namespace AKMM.AssetPrices
