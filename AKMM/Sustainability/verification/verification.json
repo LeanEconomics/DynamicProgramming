@@ -1,0 +1,2464 @@
+{
+  "checked_at_utc": "2026-11-12T12:26:09.944970+00:00",
+  "theorems": 164,
+  "module_theorems": {
+    "AKMMSustainability/Basics.lean": 5,
+    "AKMMSustainability/Climate.lean": 11,
+    "AKMMSustainability/CarbonCycle.lean": 17,
+    "AKMMSustainability/Damages.lean": 9,
+    "AKMMSustainability/StaticIAM.lean": 24,
+    "AKMMSustainability/DynamicIAM.lean": 18,
+    "AKMMSustainability/CakeEating.lean": 20,
+    "AKMMSustainability/LogGrowth.lean": 6,
+    "AKMMSustainability/OptimalTax.lean": 17,
+    "AKMMSustainability/DasguptaHeal.lean": 14,
+    "AKMMSustainability/Leontief.lean": 9,
+    "AKMMSustainability/FactorTechnology.lean": 14
+  },
+  "audited_declarations": 241,
+  "declarations": [
+    {
+      "name": "AKMM.Sustainability.sust_log_le_tangent",
+      "kind": "theorem",
+      "module": "AKMMSustainability/Basics.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.sust_log_lt_tangent",
+      "kind": "theorem",
+      "module": "AKMMSustainability/Basics.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.sust_tangent_le_rpow",
+      "kind": "theorem",
+      "module": "AKMMSustainability/Basics.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.sust_tangent_lt_rpow",
+      "kind": "theorem",
+      "module": "AKMMSustainability/Basics.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.sust_rpow_lt_tangent",
+      "kind": "theorem",
+      "module": "AKMMSustainability/Basics.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.climateT",
+      "kind": "def",
+      "module": "AKMMSustainability/Climate.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.eq_25_1",
+      "kind": "theorem",
+      "module": "AKMMSustainability/Climate.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.eq_25_1_unique",
+      "kind": "theorem",
+      "module": "AKMMSustainability/Climate.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.eq_25_1_tendsto",
+      "kind": "theorem",
+      "module": "AKMMSustainability/Climate.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.eq_25_1_steady",
+      "kind": "theorem",
+      "module": "AKMMSustainability/Climate.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.forcing",
+      "kind": "def",
+      "module": "AKMMSustainability/Climate.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.steadyTemp",
+      "kind": "def",
+      "module": "AKMMSustainability/Climate.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.eq_25_3",
+      "kind": "theorem",
+      "module": "AKMMSustainability/Climate.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.climate_ecs_doubling",
+      "kind": "theorem",
+      "module": "AKMMSustainability/Climate.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.climate_ecs",
+      "kind": "theorem",
+      "module": "AKMMSustainability/Climate.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.twoBoxStep",
+      "kind": "def",
+      "module": "AKMMSustainability/Climate.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.eq_25_4_steady_iff",
+      "kind": "theorem",
+      "module": "AKMMSustainability/Climate.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.climate_dev_tendsto",
+      "kind": "theorem",
+      "module": "AKMMSustainability/Climate.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.climate_twoBox_tendsto",
+      "kind": "theorem",
+      "module": "AKMMSustainability/Climate.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.twoBoxMatrix",
+      "kind": "def",
+      "module": "AKMMSustainability/Climate.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.climate_twoBox_isStable",
+      "kind": "theorem",
+      "module": "AKMMSustainability/Climate.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.CarbonFlows",
+      "kind": "structure",
+      "module": "AKMMSustainability/CarbonCycle.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.CarbonFlows.mk",
+      "kind": "constructor",
+      "module": "AKMMSustainability/CarbonCycle.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.CarbonFlows.f12",
+      "kind": "projection",
+      "module": "AKMMSustainability/CarbonCycle.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.CarbonFlows.f21",
+      "kind": "projection",
+      "module": "AKMMSustainability/CarbonCycle.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.CarbonFlows.f23",
+      "kind": "projection",
+      "module": "AKMMSustainability/CarbonCycle.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.CarbonFlows.f32",
+      "kind": "projection",
+      "module": "AKMMSustainability/CarbonCycle.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.carbonLin",
+      "kind": "def",
+      "module": "AKMMSustainability/CarbonCycle.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.carbonStep",
+      "kind": "def",
+      "module": "AKMMSustainability/CarbonCycle.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.carbonStepPrinted",
+      "kind": "def",
+      "module": "AKMMSustainability/CarbonCycle.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.carbonTotal",
+      "kind": "def",
+      "module": "AKMMSustainability/CarbonCycle.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.eq_25_6_total",
+      "kind": "theorem",
+      "module": "AKMMSustainability/CarbonCycle.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.eq_25_6_printed_total",
+      "kind": "theorem",
+      "module": "AKMMSustainability/CarbonCycle.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.eq_25_6_printed_false",
+      "kind": "theorem",
+      "module": "AKMMSustainability/CarbonCycle.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.carbonMatrix",
+      "kind": "def",
+      "module": "AKMMSustainability/CarbonCycle.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.carbon_isMarkov",
+      "kind": "theorem",
+      "module": "AKMMSustainability/CarbonCycle.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.carbonMatrix_mulVec",
+      "kind": "theorem",
+      "module": "AKMMSustainability/CarbonCycle.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.carbon_exists_invariant",
+      "kind": "theorem",
+      "module": "AKMMSustainability/CarbonCycle.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.carbon_invariant_iff",
+      "kind": "theorem",
+      "module": "AKMMSustainability/CarbonCycle.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.carbon_invariant_unique",
+      "kind": "theorem",
+      "module": "AKMMSustainability/CarbonCycle.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.carbonPath",
+      "kind": "def",
+      "module": "AKMMSustainability/CarbonCycle.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.carbonPulse",
+      "kind": "def",
+      "module": "AKMMSustainability/CarbonCycle.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.carbonResponse",
+      "kind": "def",
+      "module": "AKMMSustainability/CarbonCycle.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.carbon_superposition",
+      "kind": "theorem",
+      "module": "AKMMSustainability/CarbonCycle.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.ghktKernel",
+      "kind": "def",
+      "module": "AKMMSustainability/CarbonCycle.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.eq_25_10_tendsto",
+      "kind": "theorem",
+      "module": "AKMMSustainability/CarbonCycle.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.ghktKernel_mem_Icc",
+      "kind": "theorem",
+      "module": "AKMMSustainability/CarbonCycle.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.ghktKernel_antitone",
+      "kind": "theorem",
+      "module": "AKMMSustainability/CarbonCycle.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.eq_25_10_within_period",
+      "kind": "theorem",
+      "module": "AKMMSustainability/CarbonCycle.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.eq_25_10_within_period_printed_false",
+      "kind": "theorem",
+      "module": "AKMMSustainability/CarbonCycle.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.ghktKernel_hasSum",
+      "kind": "theorem",
+      "module": "AKMMSustainability/CarbonCycle.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.excessCarbon",
+      "kind": "def",
+      "module": "AKMMSustainability/CarbonCycle.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.eq_25_9",
+      "kind": "theorem",
+      "module": "AKMMSustainability/CarbonCycle.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.excessCarbon_pulse",
+      "kind": "theorem",
+      "module": "AKMMSustainability/CarbonCycle.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.nordhausD",
+      "kind": "def",
+      "module": "AKMMSustainability/Damages.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.nordhausD_eq",
+      "kind": "theorem",
+      "module": "AKMMSustainability/Damages.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.nordhausD_approx",
+      "kind": "theorem",
+      "module": "AKMMSustainability/Damages.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.nordhausD_coefficient",
+      "kind": "theorem",
+      "module": "AKMMSustainability/Damages.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.nordhausD_tendsto",
+      "kind": "theorem",
+      "module": "AKMMSustainability/Damages.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.nordhausD_convexOn",
+      "kind": "theorem",
+      "module": "AKMMSustainability/Damages.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.nordhausD_not_convexOn",
+      "kind": "theorem",
+      "module": "AKMMSustainability/Damages.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.adaptCost",
+      "kind": "def",
+      "module": "AKMMSustainability/Damages.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.adaptation_optimal",
+      "kind": "theorem",
+      "module": "AKMMSustainability/Damages.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.adaptation_unique",
+      "kind": "theorem",
+      "module": "AKMMSustainability/Damages.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.adaptation_low_T",
+      "kind": "theorem",
+      "module": "AKMMSustainability/Damages.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.staticE",
+      "kind": "def",
+      "module": "AKMMSustainability/StaticIAM.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.staticE_pos",
+      "kind": "theorem",
+      "module": "AKMMSustainability/StaticIAM.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.eq_25_16",
+      "kind": "theorem",
+      "module": "AKMMSustainability/StaticIAM.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.static_mp_strictAnti",
+      "kind": "theorem",
+      "module": "AKMMSustainability/StaticIAM.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.static_lt_staticE_iff",
+      "kind": "theorem",
+      "module": "AKMMSustainability/StaticIAM.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.staticE_strictAnti",
+      "kind": "theorem",
+      "module": "AKMMSustainability/StaticIAM.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.static_firm_optimal",
+      "kind": "theorem",
+      "module": "AKMMSustainability/StaticIAM.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.staticW",
+      "kind": "def",
+      "module": "AKMMSustainability/StaticIAM.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.eq_25_18_exists",
+      "kind": "theorem",
+      "module": "AKMMSustainability/StaticIAM.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.eq_25_17",
+      "kind": "theorem",
+      "module": "AKMMSustainability/StaticIAM.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.eq_25_17_unique",
+      "kind": "theorem",
+      "module": "AKMMSustainability/StaticIAM.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.static_laissez_faire_excess",
+      "kind": "theorem",
+      "module": "AKMMSustainability/StaticIAM.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.static_pigou",
+      "kind": "theorem",
+      "module": "AKMMSustainability/StaticIAM.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.staticPrivate",
+      "kind": "def",
+      "module": "AKMMSustainability/StaticIAM.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.static_private_max",
+      "kind": "theorem",
+      "module": "AKMMSustainability/StaticIAM.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.static_private_hasDerivAt",
+      "kind": "theorem",
+      "module": "AKMMSustainability/StaticIAM.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.static_private_deriv_zero",
+      "kind": "theorem",
+      "module": "AKMMSustainability/StaticIAM.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.CapEquilibrium",
+      "kind": "def",
+      "module": "AKMMSustainability/StaticIAM.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.static_cap_nonbinding",
+      "kind": "theorem",
+      "module": "AKMMSustainability/StaticIAM.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.static_cap_binding",
+      "kind": "theorem",
+      "module": "AKMMSustainability/StaticIAM.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.eq_25_19",
+      "kind": "theorem",
+      "module": "AKMMSustainability/StaticIAM.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.static_cap_exists",
+      "kind": "theorem",
+      "module": "AKMMSustainability/StaticIAM.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.staticW2",
+      "kind": "def",
+      "module": "AKMMSustainability/StaticIAM.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.static_two_optimal",
+      "kind": "theorem",
+      "module": "AKMMSustainability/StaticIAM.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.static_two_unique",
+      "kind": "theorem",
+      "module": "AKMMSustainability/StaticIAM.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.staticE_continuousOn",
+      "kind": "theorem",
+      "module": "AKMMSustainability/StaticIAM.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.static_two_exists",
+      "kind": "theorem",
+      "module": "AKMMSustainability/StaticIAM.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.static_two_pigou",
+      "kind": "theorem",
+      "module": "AKMMSustainability/StaticIAM.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.static_two_cap",
+      "kind": "theorem",
+      "module": "AKMMSustainability/StaticIAM.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.energyAgg",
+      "kind": "def",
+      "module": "AKMMSustainability/DynamicIAM.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.energyD",
+      "kind": "def",
+      "module": "AKMMSustainability/DynamicIAM.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.energyPrice",
+      "kind": "def",
+      "module": "AKMMSustainability/DynamicIAM.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.energyDemand",
+      "kind": "def",
+      "module": "AKMMSustainability/DynamicIAM.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.energyDemand_pos",
+      "kind": "theorem",
+      "module": "AKMMSustainability/DynamicIAM.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.energy_term",
+      "kind": "theorem",
+      "module": "AKMMSustainability/DynamicIAM.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.eq_25_27_index",
+      "kind": "theorem",
+      "module": "AKMMSustainability/DynamicIAM.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.eq_25_27_cost",
+      "kind": "theorem",
+      "module": "AKMMSustainability/DynamicIAM.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.eq_25_27_foc",
+      "kind": "theorem",
+      "module": "AKMMSustainability/DynamicIAM.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.eq_25_26_least_cost",
+      "kind": "theorem",
+      "module": "AKMMSustainability/DynamicIAM.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.eq_25_28",
+      "kind": "theorem",
+      "module": "AKMMSustainability/DynamicIAM.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.eq_25_29_saving",
+      "kind": "theorem",
+      "module": "AKMMSustainability/DynamicIAM.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.eq_25_29_saving_printed_false",
+      "kind": "theorem",
+      "module": "AKMMSustainability/DynamicIAM.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.eq_25_29_printed_false",
+      "kind": "theorem",
+      "module": "AKMMSustainability/DynamicIAM.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.savingNext",
+      "kind": "def",
+      "module": "AKMMSustainability/DynamicIAM.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.saving_const",
+      "kind": "theorem",
+      "module": "AKMMSustainability/DynamicIAM.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.saving_fixed_iff",
+      "kind": "theorem",
+      "module": "AKMMSustainability/DynamicIAM.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.saving_above",
+      "kind": "theorem",
+      "module": "AKMMSustainability/DynamicIAM.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.saving_above_tendsto",
+      "kind": "theorem",
+      "module": "AKMMSustainability/DynamicIAM.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.saving_below",
+      "kind": "theorem",
+      "module": "AKMMSustainability/DynamicIAM.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.saving_above_tvc",
+      "kind": "theorem",
+      "module": "AKMMSustainability/DynamicIAM.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.eq_25_A_ratio",
+      "kind": "theorem",
+      "module": "AKMMSustainability/DynamicIAM.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.eq_25_A_normalize",
+      "kind": "theorem",
+      "module": "AKMMSustainability/DynamicIAM.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.sust_hasSum_le_of_partial",
+      "kind": "theorem",
+      "module": "AKMMSustainability/CakeEating.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.cakePath",
+      "kind": "def",
+      "module": "AKMMSustainability/CakeEating.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.cake_partial_sum",
+      "kind": "theorem",
+      "module": "AKMMSustainability/CakeEating.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.cake_hasSum",
+      "kind": "theorem",
+      "module": "AKMMSustainability/CakeEating.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.cake_policy",
+      "kind": "theorem",
+      "module": "AKMMSustainability/CakeEating.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.cake_decreasing",
+      "kind": "theorem",
+      "module": "AKMMSustainability/CakeEating.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.cake_utility_hasSum",
+      "kind": "theorem",
+      "module": "AKMMSustainability/CakeEating.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.cake_overtake",
+      "kind": "theorem",
+      "module": "AKMMSustainability/CakeEating.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.cake_optimal",
+      "kind": "theorem",
+      "module": "AKMMSustainability/CakeEating.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.cake_unique",
+      "kind": "theorem",
+      "module": "AKMMSustainability/CakeEating.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.cake_slp",
+      "kind": "theorem",
+      "module": "AKMMSustainability/CakeEating.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.hotelling_price_max",
+      "kind": "theorem",
+      "module": "AKMMSustainability/CakeEating.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.hotelling_price_const",
+      "kind": "theorem",
+      "module": "AKMMSustainability/CakeEating.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.cake_market_foc",
+      "kind": "theorem",
+      "module": "AKMMSustainability/CakeEating.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.cake_market_equilibrium",
+      "kind": "theorem",
+      "module": "AKMMSustainability/CakeEating.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.hotelling_rent_pos",
+      "kind": "theorem",
+      "module": "AKMMSustainability/CakeEating.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.hotelling_rule",
+      "kind": "theorem",
+      "module": "AKMMSustainability/CakeEating.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.hotelling_cost_indifference",
+      "kind": "theorem",
+      "module": "AKMMSustainability/CakeEating.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.hotelling_cost_rule",
+      "kind": "theorem",
+      "module": "AKMMSustainability/CakeEating.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.oil_owner_overtake",
+      "kind": "theorem",
+      "module": "AKMMSustainability/CakeEating.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.oil_owner_optimal",
+      "kind": "theorem",
+      "module": "AKMMSustainability/CakeEating.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.lgPhi",
+      "kind": "def",
+      "module": "AKMMSustainability/LogGrowth.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.lg_phi_le",
+      "kind": "theorem",
+      "module": "AKMMSustainability/LogGrowth.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.lg_identity",
+      "kind": "theorem",
+      "module": "AKMMSustainability/LogGrowth.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.lg_compare",
+      "kind": "theorem",
+      "module": "AKMMSustainability/LogGrowth.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.lg_linear_bound",
+      "kind": "theorem",
+      "module": "AKMMSustainability/LogGrowth.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.lg_tendsto_linear",
+      "kind": "theorem",
+      "module": "AKMMSustainability/LogGrowth.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.lg_summable_linear",
+      "kind": "theorem",
+      "module": "AKMMSustainability/LogGrowth.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.GHKT",
+      "kind": "structure",
+      "module": "AKMMSustainability/OptimalTax.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.GHKT.mk",
+      "kind": "constructor",
+      "module": "AKMMSustainability/OptimalTax.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.GHKT.\u03b1",
+      "kind": "projection",
+      "module": "AKMMSustainability/OptimalTax.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.GHKT.\u03b2",
+      "kind": "projection",
+      "module": "AKMMSustainability/OptimalTax.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.GHKT.\u03b3",
+      "kind": "projection",
+      "module": "AKMMSustainability/OptimalTax.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.GHKT.k",
+      "kind": "projection",
+      "module": "AKMMSustainability/OptimalTax.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.GHKT.z",
+      "kind": "projection",
+      "module": "AKMMSustainability/OptimalTax.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.GHKT.Sbar",
+      "kind": "projection",
+      "module": "AKMMSustainability/OptimalTax.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.GHKT.g",
+      "kind": "projection",
+      "module": "AKMMSustainability/OptimalTax.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.GHKT.m",
+      "kind": "projection",
+      "module": "AKMMSustainability/OptimalTax.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.GHKT.X",
+      "kind": "projection",
+      "module": "AKMMSustainability/OptimalTax.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.GHKT.K0",
+      "kind": "projection",
+      "module": "AKMMSustainability/OptimalTax.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.GHKTAssumptions",
+      "kind": "structure",
+      "module": "AKMMSustainability/OptimalTax.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.GHKTAssumptions.mk",
+      "kind": "constructor",
+      "module": "AKMMSustainability/OptimalTax.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.GHKTAssumptions.\u03b1_pos",
+      "kind": "projection",
+      "module": "AKMMSustainability/OptimalTax.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.GHKTAssumptions.\u03b1_lt",
+      "kind": "projection",
+      "module": "AKMMSustainability/OptimalTax.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.GHKTAssumptions.\u03b2_pos",
+      "kind": "projection",
+      "module": "AKMMSustainability/OptimalTax.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.GHKTAssumptions.\u03b2_lt",
+      "kind": "projection",
+      "module": "AKMMSustainability/OptimalTax.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.GHKTAssumptions.\u03b3_nonneg",
+      "kind": "projection",
+      "module": "AKMMSustainability/OptimalTax.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.GHKTAssumptions.k_nonneg",
+      "kind": "projection",
+      "module": "AKMMSustainability/OptimalTax.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.GHKTAssumptions.k_le",
+      "kind": "projection",
+      "module": "AKMMSustainability/OptimalTax.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.GHKTAssumptions.z_bdd",
+      "kind": "projection",
+      "module": "AKMMSustainability/OptimalTax.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.GHKTAssumptions.Sbar_nonneg",
+      "kind": "projection",
+      "module": "AKMMSustainability/OptimalTax.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.GHKTAssumptions.Sbar_bdd",
+      "kind": "projection",
+      "module": "AKMMSustainability/OptimalTax.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.GHKTAssumptions.m_nonneg",
+      "kind": "projection",
+      "module": "AKMMSustainability/OptimalTax.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.GHKTAssumptions.m_bdd",
+      "kind": "projection",
+      "module": "AKMMSustainability/OptimalTax.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.GHKTAssumptions.g_bdd",
+      "kind": "projection",
+      "module": "AKMMSustainability/OptimalTax.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.GHKTAssumptions.K0_pos",
+      "kind": "projection",
+      "module": "AKMMSustainability/OptimalTax.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.GHKT.Psi",
+      "kind": "def",
+      "module": "AKMMSustainability/OptimalTax.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.GHKT.PsiN",
+      "kind": "def",
+      "module": "AKMMSustainability/OptimalTax.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.GHKT.carbon",
+      "kind": "def",
+      "module": "AKMMSustainability/OptimalTax.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.GHKT.output",
+      "kind": "def",
+      "module": "AKMMSustainability/OptimalTax.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.GHKT.cons",
+      "kind": "def",
+      "module": "AKMMSustainability/OptimalTax.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.GHKT.Feasible",
+      "kind": "def",
+      "module": "AKMMSustainability/OptimalTax.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.GHKT.optK",
+      "kind": "def",
+      "module": "AKMMSustainability/OptimalTax.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.ghkt_opt_saving",
+      "kind": "theorem",
+      "module": "AKMMSustainability/OptimalTax.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.ghkt_opt_cons",
+      "kind": "theorem",
+      "module": "AKMMSustainability/OptimalTax.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.ghkt_log_output",
+      "kind": "theorem",
+      "module": "AKMMSustainability/OptimalTax.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.ghkt_opt_feasible",
+      "kind": "theorem",
+      "module": "AKMMSustainability/OptimalTax.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.ghkt_psi",
+      "kind": "theorem",
+      "module": "AKMMSustainability/OptimalTax.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.ghkt_sum_interchange",
+      "kind": "theorem",
+      "module": "AKMMSustainability/OptimalTax.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.ghkt_overtake",
+      "kind": "theorem",
+      "module": "AKMMSustainability/OptimalTax.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.ghkt_opt_summable",
+      "kind": "theorem",
+      "module": "AKMMSustainability/OptimalTax.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.ghkt_optimal",
+      "kind": "theorem",
+      "module": "AKMMSustainability/OptimalTax.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.eq_25_31",
+      "kind": "theorem",
+      "module": "AKMMSustainability/OptimalTax.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.ghkt_tax_of_proportional",
+      "kind": "theorem",
+      "module": "AKMMSustainability/OptimalTax.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.eq_25_32",
+      "kind": "theorem",
+      "module": "AKMMSustainability/OptimalTax.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.eq_25_32_ghkt",
+      "kind": "theorem",
+      "module": "AKMMSustainability/OptimalTax.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.coalEconomy",
+      "kind": "def",
+      "module": "AKMMSustainability/OptimalTax.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.ghkt_coal_assumptions",
+      "kind": "theorem",
+      "module": "AKMMSustainability/OptimalTax.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.ghkt_coal_opt",
+      "kind": "theorem",
+      "module": "AKMMSustainability/OptimalTax.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.ghkt_coal_pigou",
+      "kind": "theorem",
+      "module": "AKMMSustainability/OptimalTax.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.ghkt_coal_optimal",
+      "kind": "theorem",
+      "module": "AKMMSustainability/OptimalTax.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.dhOut",
+      "kind": "def",
+      "module": "AKMMSustainability/DasguptaHeal.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.dhK",
+      "kind": "def",
+      "module": "AKMMSustainability/DasguptaHeal.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.dh_saving",
+      "kind": "theorem",
+      "module": "AKMMSustainability/DasguptaHeal.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.dh_log_out",
+      "kind": "theorem",
+      "module": "AKMMSustainability/DasguptaHeal.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.dh_feasible",
+      "kind": "theorem",
+      "module": "AKMMSustainability/DasguptaHeal.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.dh_log_cake",
+      "kind": "theorem",
+      "module": "AKMMSustainability/DasguptaHeal.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.dh_log_k_bound",
+      "kind": "theorem",
+      "module": "AKMMSustainability/DasguptaHeal.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.dh_summable",
+      "kind": "theorem",
+      "module": "AKMMSustainability/DasguptaHeal.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.dh_optimal",
+      "kind": "theorem",
+      "module": "AKMMSustainability/DasguptaHeal.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.dh_growth_rec",
+      "kind": "theorem",
+      "module": "AKMMSustainability/DasguptaHeal.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.dh_bgp",
+      "kind": "theorem",
+      "module": "AKMMSustainability/DasguptaHeal.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.dh_growth_tendsto",
+      "kind": "theorem",
+      "module": "AKMMSustainability/DasguptaHeal.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.dh_interest",
+      "kind": "theorem",
+      "module": "AKMMSustainability/DasguptaHeal.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.dh_interest_tendsto",
+      "kind": "theorem",
+      "module": "AKMMSustainability/DasguptaHeal.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.dh_interest_pos_iff",
+      "kind": "theorem",
+      "module": "AKMMSustainability/DasguptaHeal.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.dh_hotelling",
+      "kind": "theorem",
+      "module": "AKMMSustainability/DasguptaHeal.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.leontiefY",
+      "kind": "def",
+      "module": "AKMMSustainability/Leontief.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.leontiefC",
+      "kind": "def",
+      "module": "AKMMSustainability/Leontief.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.LeontiefFeasible",
+      "kind": "def",
+      "module": "AKMMSustainability/Leontief.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.leontief_feasible_exists",
+      "kind": "theorem",
+      "module": "AKMMSustainability/Leontief.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.leontief_no_idle_capital",
+      "kind": "theorem",
+      "module": "AKMMSustainability/Leontief.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.leontief_optimal_no_idle",
+      "kind": "theorem",
+      "module": "AKMMSustainability/Leontief.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.leontief_no_waste",
+      "kind": "theorem",
+      "module": "AKMMSustainability/Leontief.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.leontief_optimal_tight",
+      "kind": "theorem",
+      "module": "AKMMSustainability/Leontief.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.leontief_e0_infeasible",
+      "kind": "theorem",
+      "module": "AKMMSustainability/Leontief.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.leontief_eventually_declines",
+      "kind": "theorem",
+      "module": "AKMMSustainability/Leontief.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.leontief_policy_step",
+      "kind": "theorem",
+      "module": "AKMMSustainability/Leontief.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.leontief_abundant",
+      "kind": "theorem",
+      "module": "AKMMSustainability/Leontief.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.cesY",
+      "kind": "def",
+      "module": "AKMMSustainability/FactorTechnology.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.ces_exponent",
+      "kind": "theorem",
+      "module": "AKMMSustainability/FactorTechnology.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.cesY_rpow",
+      "kind": "theorem",
+      "module": "AKMMSustainability/FactorTechnology.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.ces_share_e",
+      "kind": "theorem",
+      "module": "AKMMSustainability/FactorTechnology.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.ces_share_l",
+      "kind": "theorem",
+      "module": "AKMMSustainability/FactorTechnology.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.eq_25_34",
+      "kind": "theorem",
+      "module": "AKMMSustainability/FactorTechnology.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.eq_25_33",
+      "kind": "theorem",
+      "module": "AKMMSustainability/FactorTechnology.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.eq_25_34_printed",
+      "kind": "theorem",
+      "module": "AKMMSustainability/FactorTechnology.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.eq_25_33_printed",
+      "kind": "theorem",
+      "module": "AKMMSustainability/FactorTechnology.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.eq_25_34_printed_false",
+      "kind": "theorem",
+      "module": "AKMMSustainability/FactorTechnology.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.eq_25_34_printed_growth",
+      "kind": "theorem",
+      "module": "AKMMSustainability/FactorTechnology.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.menu_key",
+      "kind": "theorem",
+      "module": "AKMMSustainability/FactorTechnology.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.menu_reduced_le",
+      "kind": "theorem",
+      "module": "AKMMSustainability/FactorTechnology.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.menu_reduced_attained",
+      "kind": "theorem",
+      "module": "AKMMSustainability/FactorTechnology.lean"
+    },
+    {
+      "name": "AKMM.Sustainability.menu_elasticity",
+      "kind": "theorem",
+      "module": "AKMMSustainability/FactorTechnology.lean"
+    }
+  ],
+  "full_build": "passed",
+  "fresh_source_compilation": "passed",
+  "fresh_source_lint_options": [
+    "-Dlinter.mathlibStandardSet=true",
+    "-Dlinter.style.header=false"
+  ],
+  "axioms": {
+    "AKMM.Sustainability.sust_log_le_tangent": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.sust_log_lt_tangent": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.sust_tangent_le_rpow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.sust_tangent_lt_rpow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.sust_rpow_lt_tangent": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.climateT": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.eq_25_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.eq_25_1_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.eq_25_1_tendsto": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.eq_25_1_steady": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.forcing": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.steadyTemp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.eq_25_3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.climate_ecs_doubling": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.climate_ecs": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.twoBoxStep": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.eq_25_4_steady_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.climate_dev_tendsto": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.climate_twoBox_tendsto": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.twoBoxMatrix": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.climate_twoBox_isStable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.CarbonFlows": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.CarbonFlows.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.CarbonFlows.f12": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.CarbonFlows.f21": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.CarbonFlows.f23": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.CarbonFlows.f32": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.carbonLin": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.carbonStep": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.carbonStepPrinted": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.carbonTotal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.eq_25_6_total": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.eq_25_6_printed_total": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.eq_25_6_printed_false": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.carbonMatrix": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.carbon_isMarkov": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.carbonMatrix_mulVec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.carbon_exists_invariant": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.carbon_invariant_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.carbon_invariant_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.carbonPath": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.carbonPulse": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.carbonResponse": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.carbon_superposition": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.ghktKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.eq_25_10_tendsto": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.ghktKernel_mem_Icc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.ghktKernel_antitone": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.eq_25_10_within_period": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.eq_25_10_within_period_printed_false": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.ghktKernel_hasSum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.excessCarbon": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.eq_25_9": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.excessCarbon_pulse": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.nordhausD": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.nordhausD_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.nordhausD_approx": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.nordhausD_coefficient": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.nordhausD_tendsto": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.nordhausD_convexOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.nordhausD_not_convexOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.adaptCost": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.adaptation_optimal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.adaptation_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.adaptation_low_T": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.staticE": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.staticE_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.eq_25_16": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.static_mp_strictAnti": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.static_lt_staticE_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.staticE_strictAnti": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.static_firm_optimal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.staticW": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.eq_25_18_exists": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.eq_25_17": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.eq_25_17_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.static_laissez_faire_excess": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.static_pigou": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.staticPrivate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.static_private_max": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.static_private_hasDerivAt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.static_private_deriv_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.CapEquilibrium": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.static_cap_nonbinding": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.static_cap_binding": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.eq_25_19": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.static_cap_exists": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.staticW2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.static_two_optimal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.static_two_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.staticE_continuousOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.static_two_exists": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.static_two_pigou": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.static_two_cap": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.energyAgg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.energyD": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.energyPrice": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.energyDemand": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.energyDemand_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.energy_term": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.eq_25_27_index": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.eq_25_27_cost": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.eq_25_27_foc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.eq_25_26_least_cost": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.eq_25_28": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.eq_25_29_saving": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.eq_25_29_saving_printed_false": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.eq_25_29_printed_false": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.savingNext": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.saving_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.saving_fixed_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.saving_above": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.saving_above_tendsto": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.saving_below": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.saving_above_tvc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.eq_25_A_ratio": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.eq_25_A_normalize": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.sust_hasSum_le_of_partial": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.cakePath": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.cake_partial_sum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.cake_hasSum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.cake_policy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.cake_decreasing": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.cake_utility_hasSum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.cake_overtake": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.cake_optimal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.cake_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.cake_slp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.hotelling_price_max": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.hotelling_price_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.cake_market_foc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.cake_market_equilibrium": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.hotelling_rent_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.hotelling_rule": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.hotelling_cost_indifference": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.hotelling_cost_rule": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.oil_owner_overtake": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.oil_owner_optimal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.lgPhi": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.lg_phi_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.lg_identity": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.lg_compare": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.lg_linear_bound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.lg_tendsto_linear": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.lg_summable_linear": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.GHKT": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.GHKT.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.GHKT.\u03b1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.GHKT.\u03b2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.GHKT.\u03b3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.GHKT.k": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.GHKT.z": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.GHKT.Sbar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.GHKT.g": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.GHKT.m": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.GHKT.X": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.GHKT.K0": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.GHKTAssumptions": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.GHKTAssumptions.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.GHKTAssumptions.\u03b1_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.GHKTAssumptions.\u03b1_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.GHKTAssumptions.\u03b2_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.GHKTAssumptions.\u03b2_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.GHKTAssumptions.\u03b3_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.GHKTAssumptions.k_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.GHKTAssumptions.k_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.GHKTAssumptions.z_bdd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.GHKTAssumptions.Sbar_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.GHKTAssumptions.Sbar_bdd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.GHKTAssumptions.m_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.GHKTAssumptions.m_bdd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.GHKTAssumptions.g_bdd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.GHKTAssumptions.K0_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.GHKT.Psi": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.GHKT.PsiN": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.GHKT.carbon": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.GHKT.output": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.GHKT.cons": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.GHKT.Feasible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.GHKT.optK": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.ghkt_opt_saving": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.ghkt_opt_cons": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.ghkt_log_output": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.ghkt_opt_feasible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.ghkt_psi": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.ghkt_sum_interchange": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.ghkt_overtake": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.ghkt_opt_summable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.ghkt_optimal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.eq_25_31": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.ghkt_tax_of_proportional": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.eq_25_32": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.eq_25_32_ghkt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.coalEconomy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.ghkt_coal_assumptions": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.ghkt_coal_opt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.ghkt_coal_pigou": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.ghkt_coal_optimal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.dhOut": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.dhK": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.dh_saving": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.dh_log_out": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.dh_feasible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.dh_log_cake": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.dh_log_k_bound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.dh_summable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.dh_optimal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.dh_growth_rec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.dh_bgp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.dh_growth_tendsto": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.dh_interest": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.dh_interest_tendsto": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.dh_interest_pos_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.dh_hotelling": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.leontiefY": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.leontiefC": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.LeontiefFeasible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.leontief_feasible_exists": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.leontief_no_idle_capital": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.leontief_optimal_no_idle": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.leontief_no_waste": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.leontief_optimal_tight": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.leontief_e0_infeasible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.leontief_eventually_declines": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.leontief_policy_step": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.leontief_abundant": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.cesY": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.ces_exponent": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.cesY_rpow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.ces_share_e": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.ces_share_l": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.eq_25_34": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.eq_25_33": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.eq_25_34_printed": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.eq_25_33_printed": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.eq_25_34_printed_false": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.eq_25_34_printed_growth": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.menu_key": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.menu_reduced_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.menu_reduced_attained": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Sustainability.menu_elasticity": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  "source_sha256": {
+    "AKMMSustainability/Basics.lean": "7477ea1d336030983b80102eb24aff33af9fdd7380e1bae21d27bf1cc44e0e6a",
+    "AKMMSustainability/Climate.lean": "6140fe69521b77fd73c36e5f832ee3df133072b2d743421606c7cfcc833d5c93",
+    "AKMMSustainability/CarbonCycle.lean": "0ba26e78e052270aabe7fc80c9f7117b5b907dc7be8a7ca3bfcecb7769165256",
+    "AKMMSustainability/Damages.lean": "fb9455e0eb9f772a266c72210c762702afcabcf882f775d147f958e6e57ad9d3",
+    "AKMMSustainability/StaticIAM.lean": "c2eea97e8337cf351e9bfb124f0e146f7629812beee0011fb5b39477777b9614",
+    "AKMMSustainability/DynamicIAM.lean": "ff835880820292ce0f9d76ce7f7e612dd6e2282546dd069ba3ba1a8acb4ed1d5",
+    "AKMMSustainability/CakeEating.lean": "f1b4176d71e018c7edea0dcc5ea68f21fb5864acdccf5f1b4ec015c0c5750759",
+    "AKMMSustainability/LogGrowth.lean": "fb72f490ab6ce039d7d1a946d601bfab92a2ce5c5d083f887c3bce57557c3cd9",
+    "AKMMSustainability/OptimalTax.lean": "166ffae46d0d51b53899d0ef151d31b3f07f50b706e5495063c6de68afeeab42",
+    "AKMMSustainability/DasguptaHeal.lean": "516bb87b51f85cee6eedd56b3f10260dc63bdba4d677761310d0777ad9c815fd",
+    "AKMMSustainability/Leontief.lean": "3e1fa7b76f77bdcffb8433ad83c424093dc30e24eaf92a5ca85dc7ed9a9738d3",
+    "AKMMSustainability/FactorTechnology.lean": "95acc501a6a70d701128715e9f89f887013fb2456c0d1260adc90e8ccb402682",
+    "AKMMSustainability.lean": "9988f6bfc303b93364221bc83143ab90408b9c2176796d4dd3e846cac4a21441",
+    "lean-toolchain": "8733782dc070a99b312039cda424f601b80f3be6f6f512627da5ba25adc27632",
+    "lakefile.toml": "e6c87c3599737bc2bef7730d9f0f94cd03a0cc6040cbeccc2430376404657921",
+    "lake-manifest.json": "210df24d5c530be815be6ed97d88fa92778b0c851a68b595a4f3bd01b0ab99cc",
+    "proof-manifest.json": "edae1f0c2000547b5a0c02454a6a6e2ccb9e0f07277362b827aa7737b5fd611f",
+    "scripts/verify.py": "a70b1fa704dd590f937f8b37682afa88a9d85a9150065acb935c7d2c9589da3b",
+    "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  },
+  "fresh_audit_sha256": "afd597083c4911b43a7d6e014872fc1cf43cd55bde33c645c38f161795f22c86",
+  "lean_toolchain": "leanprover/lean4:v4.34.0",
+  "scope": "AKMM Chapter 25 (pp. 749-784, App. 25.A): sustainability.",
+  "source": "Marina Azzimonti, Per Krusell, Alisdair McKay and Toshihiko Mukoyama, Macroeconomics (draft of December 2025), Chapter 25"
+}
