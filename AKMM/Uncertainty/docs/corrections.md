@@ -130,7 +130,10 @@ are relative to `AKMM.Uncertainty`. Every book item is located in the [source ma
     `ā` needs more than the text states: with `r > 0` it is proved under
     `β(1 + r)u′(c) < u′(c + D)` for large `c` (`D` the income spread; it holds whenever
     `u′(c + D)/u′(c) → 1`, e.g. CRRA, `imf_crra_spread`) (`imf_abar_exists`); with `r < 0` no
-    condition is needed (`imf_abar_exists_neg`); `r = 0` is not covered. The figure's `ā` satisfies
+    condition is needed (`imf_abar_exists_neg`); with `r = 0` it is proved under
+    `βu′(c) < u′(c + D)` for large `c` and `u′` continuous (`imf0_abar_exists`, correction 22);
+    for CRRA and log utility `ā` exists at every admissible `r` (`imf0_abar_exists_crra`). The
+    figure's `ā` satisfies
     `g(a, y) < a` for all `a ≥ ā` in every state; `[a̲, ā]` is invariant
     (`imf_ergodic_invariant`), and "they will continuously spend down their assets ... until
     their assets reach `ā`" holds in the form: along every income history, assets are in
@@ -161,4 +164,26 @@ are relative to `AKMM.Uncertainty`. Every book item is located in the [source ma
     binding constraint makes `(a̲, y₀)` an atom reached from every state in `N` steps with
     probability at least `pᴺ` (`imf_kernel_hit`), which is Miao's Condition M (Example 3.3.1),
     and Theorem 3.3.1 gives the conclusion (`imf_kernel_stationary`). The model's hypotheses are
-    satisfied by a solved instance (`imf_example_stationary`).
+    satisfied by a solved instance (`imf_example_stationary`). The same conclusion holds with
+    `r = 0` under the hypotheses of correction 22 (`imf0_stationary`, with the solved instance
+    `imf0_example_stationary`).
+
+22. **Figure 7.4(A), the bound `ā` when `r = 0` (p. 214).** The text's `ā` is also claimed for
+    `R = 1 + r = 1`, where `β(1 + r) < 1` reduces to `β < 1` and the only force pulling assets
+    down at high wealth is impatience. The proof of `imf_abar_exists` used `r > 0` only to make
+    consumption unbounded in assets (wealth growing at rate `r`, `imf_c_unbounded`). With `r = 0`
+    consumption is still unbounded in every state, for any utility with `u′` continuous
+    (`imf0_c_unbounded`): otherwise, in the state whose consumption has the least upper bound
+    `L`, large assets mean large savings, tomorrow's consumption is near `L` or above in every
+    state, and the Euler equation gives `u′(L) ≤ βu′(L)`. The Euler argument then gives `ā` under
+    `βu′(c) < u′(c + D)` for large `c` (`imf0_abar_exists`), which holds whenever
+    `u′(c + D)/u′(c) → 1` (`imf0_spread_of_ratio`), e.g. CRRA and log (`imf0_abar_exists_crra`,
+    which covers all three signs of `r`; Huggett 1993). The condition is needed by the proof and
+    not automatic: for CARA, `u′(c) = e^{−γc}`, the ratio is the constant `e^{−γD}`
+    (`imf0_cara_ratio`) and the condition holds iff `β < e^{−γD}` (`imf0_cara_spread_iff`), so it
+    fails for a large income spread, `γD ≥ −log β`. That `ā` then fails to exist (unbounded
+    accumulation under CARA, Schechtman and Escudero 1977) is the known result but is not proved
+    here: no solved CARA economy with unbounded assets is constructed. The stationary
+    distribution of correction 21 extends to `r = 0` (`imf0_stationary`); a solved two-state
+    Markov instance with `r = 0` satisfies all hypotheses (`imf0_example_bellman`,
+    `imf0_example_standing`, `imf0_example_hyps`, `imf0_example_stationary`).

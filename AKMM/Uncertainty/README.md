@@ -27,8 +27,9 @@ with Lean counterexamples to footnote 3's solution, the "necessary condition" fo
 definition of aperiodicity, the EIS derivative and the Euler equation of p. 201, as recorded in
 [corrections](docs/corrections.md); every book item is located in the [source
 map](docs/source-map.md). The claims of Figure 7.4 are proved with added hypotheses, and the
-high-income rule of the figure is shown to depend on the parameters (corrections 19–21). The library
-contains **170 theorems**.
+high-income rule of the figure is shown to depend on the parameters (corrections 19–21); the
+bound `ā` and the stationary distribution are also proved at `r = 0` (correction 22). The library
+contains **181 theorems**.
 
 * **Event trees and iterated expectations** (§7.1.1, §7.2.1, 7.A.2): conditional probabilities
   (`tree_condProb_sum`); the law of iterated expectations on the tree and for filtrations
@@ -85,6 +86,12 @@ contains **170 theorems**.
   `(a, y)` and convergence in total variation (`imf_kernel_hit`, `imf_kernel_stationary`,
   `imf_stationary`); a solved two-state Markov instance (`imf_example_stationary`), in which the
   high-income consumer does not accumulate (`imf_example_no_accumulation`).
+* **Figure 7.4 at `r = 0`** (§7.6, p. 214): consumption is unbounded in assets with `R = 1`
+  (`imf0_c_unbounded`); `ā` under `βu′(c) < u′(c + D)` (`imf0_abar_exists`), implied by
+  `u′(c + D)/u′(c) → 1` (`imf0_spread_of_ratio`); `ā` for CRRA at every `r`
+  (`imf0_abar_exists_crra`); for CARA the condition holds iff `β < e^{−γD}` (`imf0_cara_ratio`,
+  `imf0_cara_spread_iff`); the stationary distribution at `r = 0` (`imf0_stationary`) and a solved
+  instance (`imf0_example_stationary`).
 * **Recursive competitive equilibrium** (7.A.1): Definition 16, corrected (`definition_16`), an
   equilibrium (`definition_16_example`) and its functional Euler equation, which is (7.16)
   (`definition_16_euler`).
@@ -113,6 +120,7 @@ All names are in the namespace `AKMM.Uncertainty`.
 | [IncomeFluctuation](AKMMUncertainty/IncomeFluctuation.lean) | 21 | Figure 7.4(A) for Markov income: monotone decision rules, `ā`, the ergodic set (AKMM §7.6, p. 214) |
 | [IncomeFluctuationStationary](AKMMUncertainty/IncomeFluctuationStationary.lean) | 7 | Figure 7.4(B): the transition of `(a, y)`, an accessible atom, the unique stationary distribution and convergence (AKMM §7.6, p. 215) |
 | [IncomeFluctuationExample](AKMMUncertainty/IncomeFluctuationExample.lean) | 7 | A solved two-state Markov instance; the high-income rule need not cross the 45-degree line (AKMM §7.6, pp. 213–215) |
+| [IncomeFluctuationZeroRate](AKMMUncertainty/IncomeFluctuationZeroRate.lean) | 11 | Figure 7.4 at `r = 0`: unbounded consumption, `ā`, CRRA and CARA, the stationary distribution, a solved instance (AKMM §7.6, pp. 214–215) |
 
 ## Build and verify
 

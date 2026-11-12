@@ -41,8 +41,9 @@ income:
 
 Departures: the book reads these properties off a computed figure. For Markov income the
 existence of `ā` needs a condition on `u` (it holds for the usual CRRA and log utilities), and the
-case `r = 0` is not covered. Whether the high-income rule lies above the 45-degree line at `a̲`
-depends on the parameters: it fails in the instance of `IncomeFluctuationStationary`.
+case `r = 0` is in `IncomeFluctuationZeroRate`. Whether the high-income rule lies above the
+45-degree line at `a̲` depends on the parameters: it fails in the instance of
+`IncomeFluctuationStationary`.
 -/
 
 namespace AKMM.Uncertainty
