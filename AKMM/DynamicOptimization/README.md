@@ -14,18 +14,20 @@ the transversality condition), balanced growth, dynamic programming (the Bellman
 recursive formulations, the properties of the value function, guess-and-verify, the functional
 Euler equation) and the global and local dynamics of the NGM; Appendix 4.A proves the equivalence
 of three borrowing constraints (Theorem .3), that balanced growth forces CRRA utility
-(Theorem .4) and Proposition 4.4, and analyses the phase diagram. Every numbered result and
-derivation of the text is proved. Not formalised: narrative, empirical EIS estimates, and the
-claims read off Figures .1–.3 (including the existence of the saddle path, which the book asserts).
+(Theorem .4) and Proposition 4.4, and analyses the phase diagram: the shapes of the loci in
+Figures .1–.3, the saddle path (convergence iff on it) and the paths above and below it. Every
+numbered result and derivation of the text is proved. Not formalised: narrative and empirical EIS
+estimates. The existence of the saddle path, which the book asserts, is proved for every `δ ≤ 1`
+by a shooting argument in the difference system.
 The project depends on SLP's `DeterministicDP` (the Principle of Optimality, Theorems 4.2–4.10,
 the tangent-plane inequality) and `DeterministicDynamics` (concavity tools, the monotone policy
 and Proposition 6.1 of the growth model), and on `EulerTransversality` (supergradient sufficiency
 of the Euler and transversality conditions); the book's statements are proved from them in the
-book's notation. Eleven printed errors are corrected, with Lean counterexamples to Proposition 4.4
+book's notation. Thirteen printed errors are corrected, with Lean counterexamples to Proposition 4.4
 without nonnegative states, to "the policy function is strictly increasing", to the printed
 Weierstrass conditions and to the literal statement of Theorem .4, as recorded in
 [corrections](docs/corrections.md); every book item is located in the
-[source map](docs/source-map.md). The library contains **156 theorems**, all new.
+[source map](docs/source-map.md). The library contains **180 theorems**, all new.
 
 * **Sequence problems** (§4.1): the Weierstrass argument (`seq_weierstrass`) and a counterexample
   to the printed conditions (`seq_weierstrass_counterexample`); (P2), (4.1)–(4.3)
@@ -67,6 +69,17 @@ Weierstrass conditions and to the literal statement of Theorem .4, as recorded i
   corrected (`theorem_4A_4`, `theorem_4A_4_sigma_pos`, `theorem_4A_4_affine_counterexample`); the
   phase diagram (`eq_4A_12`, `eq_4A_13`, `golden_rule`, `steady_below_golden`,
   `phase_tvc_identity`, `phase_below_saddle_violates_tvc`, `phase_saddle_tvc`).
+* **Figures .1–.3 and the saddle path** (App. 4.A.4): the hump of `c = f(k) − δk` and the
+  increasing `c_{t+1} = c_t` locus (`saddle_kloc_shape`, `saddle_cloc_shape`), the arrows
+  (`saddle_arrows`); paths ordered by `c₀` (`saddle_order`, `saddle_not_both`); convergence iff
+  on the saddle path (`saddle_path_iff`), which is the optimal policy (`saddle_path_slp`,
+  `saddle_logCobbDouglas`); above it capital becomes nonpositive in finite time
+  (`saddle_above_infeasible`, `saddle_regionA_absorbing`); below it `c_t → 0`, `k_t > k^G` and the
+  TVC fails (`saddle_below`).
+* **Existence of the saddle path by shooting** (App. 4.A.4): for every `k₀ > 0` and `δ ≤ 1`, a
+  saddle path `g` with "convergence iff `c₀ = g(k₀)`" (`saddle_path_general`, via
+  `saddle_fwd_exists` and `saddle_trapped_converges`), equal to `(1 − αβ)Ak^α` for log utility and
+  Cobb–Douglas (`saddle_path_general_logCobbDouglas`).
 
 All names are in the namespace `AKMM.DynamicOptimization`.
 
@@ -91,6 +104,9 @@ All names are in the namespace `AKMM.DynamicOptimization`.
 | [BorrowingConstraints](AKMMDynamicOptimization/BorrowingConstraints.lean) | 4 | (4.A.1)–(4.A.7), Theorem .3 (AKMM App. 4.A.1, pp. 827–829) |
 | [BalancedGrowthCRRA](AKMMDynamicOptimization/BalancedGrowthCRRA.lean) | 6 | Theorem .4 (AKMM App. 4.A.2, pp. 829–830) |
 | [PhaseDiagram](AKMMDynamicOptimization/PhaseDiagram.lean) | 10 | (4.A.8)–(4.A.13), golden rule, the TVC off and on the saddle path (AKMM App. 4.A.4, pp. 831–835) |
+| [SaddlePath](AKMMDynamicOptimization/SaddlePath.lean) | 11 | Figures .1–.3: the loci and arrows; convergence iff on the saddle path; paths above and below it (AKMM App. 4.A.4, pp. 831–835) |
+| [SaddlePathExistence](AKMMDynamicOptimization/SaddlePathExistence.lean) | 2 | The saddle path is the optimal policy: `δ = 1` (SLP §6.1), log and Cobb–Douglas (AKMM pp. 112, 834) |
+| [SaddlePathShooting](AKMMDynamicOptimization/SaddlePathShooting.lean) | 11 | Existence of the saddle path for every `δ ≤ 1` by shooting; trapped paths converge (AKMM App. 4.A.4, p. 834) |
 
 ## Build and verify
 

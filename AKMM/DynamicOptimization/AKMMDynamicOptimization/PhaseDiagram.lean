@@ -28,8 +28,8 @@ AKMM, App. 4.A.4, pp. 831–835: the resource constraint (4.A.8)
 * A path whose capital tends to `0` while consumption stays above `c̲ > 0` eventually violates
   `k ≥ 0` (`phase_above_saddle_infeasible`).
 
-The facts read off Figures .1–.3 (the shape of the loci, the existence of the saddle path, and
-that paths above or below it enter the regions described) are deferred.
+The facts read off Figures .1–.3 (the shape of the loci, the saddle path, and the paths above
+and below it) are proved in `SaddlePath` and `SaddlePathExistence`.
 -/
 
 namespace AKMM.DynamicOptimization

@@ -124,6 +124,40 @@ names are relative to `AKMM.DynamicOptimization`. Every book item is located in 
     `≥ 0`", assumes `r > −1`, `c ≥ 0` and summable discounted wages (as the book does), and
     determines `a` from `c` by the flow budget (`theorem_4A_3`).
 
-21. **Saddle path.** The existence of the saddle path in 4.A.4 is asserted, not proved, in the book
-    and is not formalised; for the optimal path see `ngm_global_convergence_full`. Facts read off
-    Figures .1–.3 are deferred.
+21. **Saddle path.** The book asserts the existence of the saddle path (4.A.4). It is proved in the
+    difference system itself, for every `k₀ > 0` and every `δ ≤ 1`, by a shooting argument
+    (`saddle_path_general`): with the forward map `saddleFwd`, the set of `c₀` whose path reaches
+    `k ≤ 0` is open, upward closed and bounded below by a feasible `c₀`; its infimum `c*` is
+    feasible, never enters the open quadrant `k > k̄`, `c < c̄` (whose paths are feasible), and a
+    feasible path avoiding both regions converges (`saddle_trapped_converges`). With
+    `saddle_path_iff`, a positive path converges iff `c₀ = g(k₀)`. The saddle path is also the
+    optimal policy for `δ = 1` (`saddle_path_slp`), and for log utility, Cobb–Douglas and `δ = 1`
+    it is `(1 − αβ)Ak^α` (`saddle_logCobbDouglas`, `saddle_path_general_logCobbDouglas`).
+
+22. **Assumptions used in App. 4.A.4.** The book's "standard assumptions" are made explicit: `f`
+    concave on `[0, ∞)` with derivative `f' > 0` strictly decreasing, `δ ≤ 1` (so total resources
+    rise with `k` and `f'(k) + 1 − δ > 0`), `u' > 0` strictly decreasing, and `f'` continuous at
+    `k̄` (uniqueness; the capital gap between two paths then grows by the factor
+    `f'(k_t) + 1 − δ → 1/β > 1`); for the region below the saddle path also `u'` continuous at
+    `c̄`, `f(0) = 0` and the existence of the golden rule `f'(k^G) = δ`; for the existence of the
+    saddle path also `f'`, `u'` continuous on `(0, ∞)`, `u'(c) → ∞` as `c → 0⁺`, and an inverse
+    `ui` of `u'` on `(0, ∞)`, continuous (so the Euler equation determines `c_{t+1}`; it exists
+    when `u'` maps `(0, ∞)` onto `(0, ∞)`). Paths are solutions with
+    `k_t, c_t > 0` for all `t`; convergence means `k_t → k̄` and `c_t → c̄`.
+
+23. **Figure .2: the `c_{t+1} = c_t` locus is not vertical.** In the discrete-time system it is
+    `c = f(k) − δk + (k − k̄)` in the `(k_t, c_t)` plane, increasing with slope `f'(k) + 1 − δ`,
+    which equals `1/β` at the steady state (`saddle_cloc_shape`); the near-vertical line of
+    Figures .2 and .3 is the continuous-time picture. It meets `c = 0` at a unique `k̲ ∈ (0, k̄)`.
+
+24. **Below the saddle path (p. 834).** The book says the path enters the region "where both `k_t`
+    and `c_t` keep decreasing", while Figure .3 shows `k` rising there and the text later says
+    "`k_t` keeps growing". What holds (`saddle_below`): from some date on `k_t ≥ k̄ + η` and `c_t`
+    falls strictly, `c_t → 0`, `k_t > k^G` (indeed `≥ k^G + m/2` for an `m > 0`), and the TVC
+    expression tends to `+∞`. Capital need not rise: from `k₀` above the maximum sustainable stock
+    it falls at first.
+
+25. **Above the saddle path (p. 834).** "In a finite time, `k_t` becomes zero" is proved as: some
+    `k_{T+1} ≤ 0` with `k_s > 0` for `s ≤ T` (`saddle_above_infeasible`), by comparison with the
+    saddle path rather than by the region argument; the region where `k` falls and `c` rises is
+    absorbing (`saddle_regionA_absorbing`). Capital need not hit exactly zero.

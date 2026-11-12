@@ -214,7 +214,7 @@ Reused from dependencies. SLP `DeterministicDP` (`StokeyLucasPrescott.Determinis
 | p. 831 | Last inequality needs `x_{T+1} ≥ 0` | corrected: `proposition_4_4_counterexample` |
 | p. 831 | Finite horizon: `x*_{T+1} = 0` | `result_1`, `ngm_terminal_zero` |
 
-## Appendix 4.A.4, the phase diagram (pp. 831–835) — `PhaseDiagram`
+## Appendix 4.A.4, the phase diagram (pp. 831–835) — `PhaseDiagram`, `SaddlePath`, `SaddlePathExistence`, `SaddlePathShooting`
 
 | Source | Claim | Lean |
 | --- | --- | --- |
@@ -222,9 +222,15 @@ Reused from dependencies. SLP `DeterministicDP` (`StokeyLucasPrescott.Determinis
 | (4.A.13), pp. 832–833 | `c` rises iff `k_{t+1} < k̄` iff `c_t > f(k_t) − δk_t + (k_t − k̄)` | `eq_4A_13` |
 | p. 832 | Golden rule maximizes `f(k) − δk` | `golden_rule` |
 | p. 834 | `k̄ < k^G` | `steady_below_golden` |
-| Figs. .1–.3 | Shapes of the loci, the phase diagram | figure claim, deferred |
-| p. 834 | Saddle-path dynamics; convergence iff on the saddle path | figure claim, deferred (existence asserted, not proved; for the optimum see `ngm_global_convergence_full`) |
-| p. 834 | Above the saddle path: `k` reaches 0 in finite time | `phase_above_saddle_infeasible` (region entry: figure claim, deferred) |
-| p. 834 | Below the saddle path: TVC fails | `phase_tvc_identity`, `phase_return_below_one`, `phase_below_saddle_violates_tvc`; corrected index: `phase_tvc_printed_differs` |
+| Fig. .1, p. 832 | `c = f(k) − δk` hump-shaped: rising on `[0, k^G]`, falling beyond, zero at `0` and `k^u`, `k^G < k^u` | `saddle_kloc_shape` (with `saddle_chord`; `k^u` from `ngm_max_capital`) |
+| Fig. .2, pp. 832–833 | The `c_{t+1} = c_t` locus `c = f(k) − δk + (k − k̄)`: increasing, through `(k̄, c̄)`, `c̄ > 0`, cuts `c = 0` at one `k̲ < k̄`, below the other locus iff `k < k̄`; slopes `1/β` and `1/β − 1` at `k̄` | `saddle_cloc_shape`; corrected (not vertical): see corrections |
+| Fig. .3, pp. 833–834 | The arrows in the four regions | `saddle_arrows` (from `eq_4A_12`, `eq_4A_13`; `saddle_resources_mono`) |
+| Fig. .3, p. 834 | Steady state left of the peak | `steady_below_golden` |
+| p. 834 | Saddle-path dynamics; existence of the saddle path; convergence iff on it | `saddle_path_general` (every `k₀ > 0`, every `δ ≤ 1`, by shooting: `saddleFwd`, `saddle_fwd_path`, `saddle_fwd_infeasible_iff`, `saddle_fwd_quadrant`, `saddle_fwd_order`, `saddle_fwd_cont`, `saddle_fwd_small`, `saddle_fwd_exists`, `saddle_trapped_converges`); `saddle_path_iff` (uniqueness via `saddle_order`, `saddle_not_both`); from the optimum: `saddle_path_slp` (`δ = 1`); closed form: `saddle_logCobbDouglas`, `saddle_path_general_logCobbDouglas` |
+| p. 834 | The planner chooses `c₀` on the saddle path | `saddle_path_iff`, `saddle_path_slp` |
+| p. 834 | Above the saddle path: `k` reaches 0 in finite time | `saddle_above_infeasible`; also `phase_above_saddle_infeasible` |
+| p. 834 | Above: the region where `k` falls and `c` rises is absorbing, and left only through `k ≤ 0` | `saddle_regionA_absorbing`, `saddle_regionA_infeasible` |
+| p. 834 | Below: eventually `c` falls, `k_t > k^G`, `c_t → 0` | `saddle_below`; corrected ("both `k_t` and `c_t` keep decreasing"): see corrections |
+| p. 834 | Below the saddle path: TVC fails | `saddle_below` (iv), `phase_tvc_identity`, `phase_return_below_one`, `phase_below_saddle_violates_tvc`; corrected index: `phase_tvc_printed_differs` |
 | p. 834 | The saddle path satisfies the TVC | `phase_saddle_tvc` |
 | p. 835 | Why `k̄ < k^G`: discounting | not formalised: interpretation |
