@@ -28,7 +28,7 @@ script or a rendered PDF page.
 **Target.** `LeanEconomics/DynamicProgramming`, in a top-level folder `AKMM/` alongside the Miao
 (`EconomicDynamics/`), Stokey–Lucas–Prescott, Sargent–Stachurski and Meyn–Tweedie projects.
 
-Status: decisions settled 2026-11-11 (§4); Phase 0 scaffold and Chapters 2–10 done 2026-11-12.
+Status: decisions settled 2026-11-11 (§4); Phase 0 scaffold and Chapters 2–11 done 2026-11-12.
 
 ---
 
