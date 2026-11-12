@@ -1,6 +1,6 @@
 {
-  "checked_at_utc": "2026-11-11T13:02:13.024547+00:00",
-  "theorems": 135,
+  "checked_at_utc": "2026-11-12T20:54:08.187795+00:00",
+  "theorems": 170,
   "module_theorems": {
     "AKMMUncertainty/EventTrees.lean": 8,
     "AKMMUncertainty/MarkovChains.lean": 30,
@@ -16,9 +16,12 @@
     "AKMMUncertainty/CompleteMarkets.lean": 17,
     "AKMMUncertainty/GrowthEquilibrium.lean": 5,
     "AKMMUncertainty/RecursiveEquilibrium.lean": 2,
-    "AKMMUncertainty/IncompleteMarkets.lean": 5
+    "AKMMUncertainty/IncompleteMarkets.lean": 5,
+    "AKMMUncertainty/IncomeFluctuation.lean": 21,
+    "AKMMUncertainty/IncomeFluctuationStationary.lean": 7,
+    "AKMMUncertainty/IncomeFluctuationExample.lean": 7
   },
-  "audited_declarations": 180,
+  "audited_declarations": 227,
   "declarations": [
     {
       "name": "AKMM.Uncertainty.tree_condProb_sum",
@@ -919,6 +922,241 @@
       "name": "AKMM.Uncertainty.im_euler",
       "kind": "theorem",
       "module": "AKMMUncertainty/IncompleteMarkets.lean"
+    },
+    {
+      "name": "AKMM.Uncertainty.imf_Standing",
+      "kind": "def",
+      "module": "AKMMUncertainty/IncomeFluctuation.lean"
+    },
+    {
+      "name": "AKMM.Uncertainty.imf_c",
+      "kind": "def",
+      "module": "AKMMUncertainty/IncomeFluctuation.lean"
+    },
+    {
+      "name": "AKMM.Uncertainty.imf_feasible",
+      "kind": "theorem",
+      "module": "AKMMUncertainty/IncomeFluctuation.lean"
+    },
+    {
+      "name": "AKMM.Uncertainty.imf_g_eq",
+      "kind": "theorem",
+      "module": "AKMMUncertainty/IncomeFluctuation.lean"
+    },
+    {
+      "name": "AKMM.Uncertainty.imf_foc",
+      "kind": "theorem",
+      "module": "AKMMUncertainty/IncomeFluctuation.lean"
+    },
+    {
+      "name": "AKMM.Uncertainty.imf_W_anti",
+      "kind": "theorem",
+      "module": "AKMMUncertainty/IncomeFluctuation.lean"
+    },
+    {
+      "name": "AKMM.Uncertainty.imf_g_mono",
+      "kind": "theorem",
+      "module": "AKMMUncertainty/IncomeFluctuation.lean"
+    },
+    {
+      "name": "AKMM.Uncertainty.imf_c_mono",
+      "kind": "theorem",
+      "module": "AKMMUncertainty/IncomeFluctuation.lean"
+    },
+    {
+      "name": "AKMM.Uncertainty.imf_c_lipschitz",
+      "kind": "theorem",
+      "module": "AKMMUncertainty/IncomeFluctuation.lean"
+    },
+    {
+      "name": "AKMM.Uncertainty.imf_g_lipschitz",
+      "kind": "theorem",
+      "module": "AKMMUncertainty/IncomeFluctuation.lean"
+    },
+    {
+      "name": "AKMM.Uncertainty.imf_g_continuousOn",
+      "kind": "theorem",
+      "module": "AKMMUncertainty/IncomeFluctuation.lean"
+    },
+    {
+      "name": "AKMM.Uncertainty.imf_c_continuousOn",
+      "kind": "theorem",
+      "module": "AKMMUncertainty/IncomeFluctuation.lean"
+    },
+    {
+      "name": "AKMM.Uncertainty.imf_euler_eq",
+      "kind": "theorem",
+      "module": "AKMMUncertainty/IncomeFluctuation.lean"
+    },
+    {
+      "name": "AKMM.Uncertainty.imf_next_mu_le",
+      "kind": "theorem",
+      "module": "AKMMUncertainty/IncomeFluctuation.lean"
+    },
+    {
+      "name": "AKMM.Uncertainty.imf_min_dissave",
+      "kind": "theorem",
+      "module": "AKMMUncertainty/IncomeFluctuation.lean"
+    },
+    {
+      "name": "AKMM.Uncertainty.imf_exists_min_state",
+      "kind": "theorem",
+      "module": "AKMMUncertainty/IncomeFluctuation.lean"
+    },
+    {
+      "name": "AKMM.Uncertainty.imf_c_unbounded",
+      "kind": "theorem",
+      "module": "AKMMUncertainty/IncomeFluctuation.lean"
+    },
+    {
+      "name": "AKMM.Uncertainty.imf_crra_spread",
+      "kind": "theorem",
+      "module": "AKMMUncertainty/IncomeFluctuation.lean"
+    },
+    {
+      "name": "AKMM.Uncertainty.imf_abar_exists",
+      "kind": "theorem",
+      "module": "AKMMUncertainty/IncomeFluctuation.lean"
+    },
+    {
+      "name": "AKMM.Uncertainty.imf_abar_exists_neg",
+      "kind": "theorem",
+      "module": "AKMMUncertainty/IncomeFluctuation.lean"
+    },
+    {
+      "name": "AKMM.Uncertainty.imf_ergodic_invariant",
+      "kind": "theorem",
+      "module": "AKMMUncertainty/IncomeFluctuation.lean"
+    },
+    {
+      "name": "AKMM.Uncertainty.imf_enters_ergodic",
+      "kind": "theorem",
+      "module": "AKMMUncertainty/IncomeFluctuation.lean"
+    },
+    {
+      "name": "AKMM.Uncertainty.imf_binds_near_limit",
+      "kind": "theorem",
+      "module": "AKMMUncertainty/IncomeFluctuation.lean"
+    },
+    {
+      "name": "AKMM.Uncertainty.imf_next",
+      "kind": "def",
+      "module": "AKMMUncertainty/IncomeFluctuationStationary.lean"
+    },
+    {
+      "name": "AKMM.Uncertainty.imf_next_measurable",
+      "kind": "theorem",
+      "module": "AKMMUncertainty/IncomeFluctuationStationary.lean"
+    },
+    {
+      "name": "AKMM.Uncertainty.imf_kernel",
+      "kind": "def",
+      "module": "AKMMUncertainty/IncomeFluctuationStationary.lean"
+    },
+    {
+      "name": "AKMM.Uncertainty.imf_kernel_lintegral",
+      "kind": "theorem",
+      "module": "AKMMUncertainty/IncomeFluctuationStationary.lean"
+    },
+    {
+      "name": "AKMM.Uncertainty.imf_kernel_isMarkov",
+      "kind": "theorem",
+      "module": "AKMMUncertainty/IncomeFluctuationStationary.lean"
+    },
+    {
+      "name": "AKMM.Uncertainty.imf_kpow_succ_ge",
+      "kind": "theorem",
+      "module": "AKMMUncertainty/IncomeFluctuationStationary.lean"
+    },
+    {
+      "name": "AKMM.Uncertainty.imf_kernel_hit",
+      "kind": "theorem",
+      "module": "AKMMUncertainty/IncomeFluctuationStationary.lean"
+    },
+    {
+      "name": "AKMM.Uncertainty.imf_kernel_stationary",
+      "kind": "theorem",
+      "module": "AKMMUncertainty/IncomeFluctuationStationary.lean"
+    },
+    {
+      "name": "AKMM.Uncertainty.imf_stationary",
+      "kind": "theorem",
+      "module": "AKMMUncertainty/IncomeFluctuationStationary.lean"
+    },
+    {
+      "name": "AKMM.Uncertainty.imf_exU",
+      "kind": "def",
+      "module": "AKMMUncertainty/IncomeFluctuationExample.lean"
+    },
+    {
+      "name": "AKMM.Uncertainty.imf_exDU",
+      "kind": "def",
+      "module": "AKMMUncertainty/IncomeFluctuationExample.lean"
+    },
+    {
+      "name": "AKMM.Uncertainty.imf_exInc",
+      "kind": "def",
+      "module": "AKMMUncertainty/IncomeFluctuationExample.lean"
+    },
+    {
+      "name": "AKMM.Uncertainty.imf_exP",
+      "kind": "def",
+      "module": "AKMMUncertainty/IncomeFluctuationExample.lean"
+    },
+    {
+      "name": "AKMM.Uncertainty.imf_exW",
+      "kind": "def",
+      "module": "AKMMUncertainty/IncomeFluctuationExample.lean"
+    },
+    {
+      "name": "AKMM.Uncertainty.imf_exV",
+      "kind": "def",
+      "module": "AKMMUncertainty/IncomeFluctuationExample.lean"
+    },
+    {
+      "name": "AKMM.Uncertainty.imf_exV1",
+      "kind": "def",
+      "module": "AKMMUncertainty/IncomeFluctuationExample.lean"
+    },
+    {
+      "name": "AKMM.Uncertainty.imf_exG",
+      "kind": "def",
+      "module": "AKMMUncertainty/IncomeFluctuationExample.lean"
+    },
+    {
+      "name": "AKMM.Uncertainty.imf_exInc_ge",
+      "kind": "theorem",
+      "module": "AKMMUncertainty/IncomeFluctuationExample.lean"
+    },
+    {
+      "name": "AKMM.Uncertainty.imf_exU_tangent",
+      "kind": "theorem",
+      "module": "AKMMUncertainty/IncomeFluctuationExample.lean"
+    },
+    {
+      "name": "AKMM.Uncertainty.imf_example_bellman",
+      "kind": "theorem",
+      "module": "AKMMUncertainty/IncomeFluctuationExample.lean"
+    },
+    {
+      "name": "AKMM.Uncertainty.imf_example_standing",
+      "kind": "theorem",
+      "module": "AKMMUncertainty/IncomeFluctuationExample.lean"
+    },
+    {
+      "name": "AKMM.Uncertainty.imf_example_hyps",
+      "kind": "theorem",
+      "module": "AKMMUncertainty/IncomeFluctuationExample.lean"
+    },
+    {
+      "name": "AKMM.Uncertainty.imf_example_stationary",
+      "kind": "theorem",
+      "module": "AKMMUncertainty/IncomeFluctuationExample.lean"
+    },
+    {
+      "name": "AKMM.Uncertainty.imf_example_no_accumulation",
+      "kind": "theorem",
+      "module": "AKMMUncertainty/IncomeFluctuationExample.lean"
     }
   ],
   "full_build": "passed",
@@ -1827,6 +2065,241 @@
       "propext",
       "Classical.choice",
       "Quot.sound"
+    ],
+    "AKMM.Uncertainty.imf_Standing": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Uncertainty.imf_c": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Uncertainty.imf_feasible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Uncertainty.imf_g_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Uncertainty.imf_foc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Uncertainty.imf_W_anti": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Uncertainty.imf_g_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Uncertainty.imf_c_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Uncertainty.imf_c_lipschitz": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Uncertainty.imf_g_lipschitz": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Uncertainty.imf_g_continuousOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Uncertainty.imf_c_continuousOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Uncertainty.imf_euler_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Uncertainty.imf_next_mu_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Uncertainty.imf_min_dissave": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Uncertainty.imf_exists_min_state": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Uncertainty.imf_c_unbounded": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Uncertainty.imf_crra_spread": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Uncertainty.imf_abar_exists": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Uncertainty.imf_abar_exists_neg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Uncertainty.imf_ergodic_invariant": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Uncertainty.imf_enters_ergodic": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Uncertainty.imf_binds_near_limit": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Uncertainty.imf_next": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Uncertainty.imf_next_measurable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Uncertainty.imf_kernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Uncertainty.imf_kernel_lintegral": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Uncertainty.imf_kernel_isMarkov": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Uncertainty.imf_kpow_succ_ge": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Uncertainty.imf_kernel_hit": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Uncertainty.imf_kernel_stationary": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Uncertainty.imf_stationary": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Uncertainty.imf_exU": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Uncertainty.imf_exDU": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Uncertainty.imf_exInc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Uncertainty.imf_exP": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Uncertainty.imf_exW": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Uncertainty.imf_exV": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Uncertainty.imf_exV1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Uncertainty.imf_exG": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Uncertainty.imf_exInc_ge": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Uncertainty.imf_exU_tangent": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Uncertainty.imf_example_bellman": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Uncertainty.imf_example_standing": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Uncertainty.imf_example_hyps": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Uncertainty.imf_example_stationary": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Uncertainty.imf_example_no_accumulation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
     ]
   },
   "source_sha256": {
@@ -1844,17 +2317,20 @@
     "AKMMUncertainty/CompleteMarkets.lean": "3cfbba214ca32c01016572c1964a1d6f7f6b45c803bcd8d7afb6ac667b8c30bb",
     "AKMMUncertainty/GrowthEquilibrium.lean": "127a5f909bba7bc7c0a30c9ddce2496ed4f39c48fb2aa35d1de79a9153d384e5",
     "AKMMUncertainty/RecursiveEquilibrium.lean": "683c0e14a03f578279a9d9ef9cf7462026cc3ae2fef41267629c934d1be43aa6",
-    "AKMMUncertainty/IncompleteMarkets.lean": "6c515f23746f2962ed3bebf475e2cc49d811dc1ddb516613c7a3653f9d2f6579",
-    "AKMMUncertainty.lean": "c3e53447b4f61004fa28cddfd318e257d2bbe56d4c8d55b3d83adac3ae4b3bbc",
+    "AKMMUncertainty/IncompleteMarkets.lean": "b3079e5e7230d7c38df416bbb3983a2b1d6175b58328cdfaa01b238b772e1525",
+    "AKMMUncertainty/IncomeFluctuation.lean": "6f6b856e77779c6ede178b525a6894de08db65a9c209f1d1e1410c8f5c8e7d04",
+    "AKMMUncertainty/IncomeFluctuationStationary.lean": "be73f9ad5a78f52c0f988b41d06fd17c28e830d170a564ea582b94c7f2b90eba",
+    "AKMMUncertainty/IncomeFluctuationExample.lean": "0b6045bc07aaf196d759a7a31fe2789c6ce29d6df1cb9a5b2dc3a55068cb7d80",
+    "AKMMUncertainty.lean": "bddec2117162589c4eda2109da72ce45933f099e3a18e94ec603f7e8f4a0aa0e",
     "lean-toolchain": "8733782dc070a99b312039cda424f601b80f3be6f6f512627da5ba25adc27632",
     "lakefile.toml": "b11c1f73b83281242f544879f23a5e92d5f053b160ed6d4d438275aed1429dba",
     "lake-manifest.json": "71fae231d128f08730729f2820734dd3052482d97298a969eba895dc8816dcb6",
-    "proof-manifest.json": "0402e59cdb3c72551c7042ab363dc611804ff39fe9af649ae136a5a1c3ede9aa",
+    "proof-manifest.json": "eea8151ccffcca32678d72b85021f34b17751a33c33c7875568cc19d50871271",
     "scripts/verify.py": "a70b1fa704dd590f937f8b37682afa88a9d85a9150065acb935c7d2c9589da3b",
     "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
   },
-  "fresh_audit_sha256": "1281871aa7fa04709327480836de69be3872f4f530abbb57093fa245b90d9c31",
+  "fresh_audit_sha256": "088ee5848ade962b1c4eb2ee5a6cfafe7c7878be279965270d4bfaa3ac87b42b",
   "lean_toolchain": "leanprover/lean4:v4.34.0",
-  "scope": "AKMM Chapter 7 (pp. 187-215) and Appendix 7.A (pp. 840-841): the event tree and the law of iterated expectations, finite Markov chains (marginals, stationary distributions, the employment chain, irreducibility, aperiodicity and convergence), AR(1) moments, linear stochastic difference equations (mean, Lyapunov equation, impulse responses), Jensen risk aversion and the CARA/CRRA coefficients, the EIS, portfolio homogeneity, the two-period and infinite-horizon stochastic growth planner (stochastic Euler equations from optimality, sufficiency with the transversality condition, the log closed form), the recursive formulation and functional Euler equation, linearisation and (7.17), Arrow-Debreu and sequential complete markets (7.20)-(7.25), insurance, risk sharing and spanning, competitive equilibrium of the growth model (Definition 15) and its equivalence with the planner, the recursive competitive equilibrium (Definition 16), and the incomplete-markets Euler inequality.",
+  "scope": "AKMM Chapter 7 (pp. 187-215) and Appendix 7.A (pp. 840-841): the event tree and the law of iterated expectations, finite Markov chains (marginals, stationary distributions, the employment chain, irreducibility, aperiodicity and convergence), AR(1) moments, linear stochastic difference equations (mean, Lyapunov equation, impulse responses), Jensen risk aversion and the CARA/CRRA coefficients, the EIS, portfolio homogeneity, the two-period and infinite-horizon stochastic growth planner (stochastic Euler equations from optimality, sufficiency with the transversality condition, the log closed form), the recursive formulation and functional Euler equation, linearisation and (7.17), Arrow-Debreu and sequential complete markets (7.20)-(7.25), insurance, risk sharing and spanning, competitive equilibrium of the growth model (Definition 15) and its equivalence with the planner, the recursive competitive equilibrium (Definition 16), the incomplete-markets Euler inequality, and the claims of Figure 7.4 for Markov income (monotone decision rules, the bound and ergodic set, a unique stationary distribution with convergence in total variation).",
   "source": "Marina Azzimonti, Per Krusell, Alisdair McKay and Toshihiko Mukoyama, Macroeconomics (draft of December 2025), Chapter 7 and Appendix 7.A"
 }

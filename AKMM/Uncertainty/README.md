@@ -7,25 +7,28 @@ Mukoyama, *Macroeconomics* (draft of December 2025), cited by the draft's pages.
 below from this directory. [Return to the library index](../../README.md).
 
 Chapter 7 introduces the tools for stochastic economies — expectations on event trees, Markov
-chains, AR(1) and vector linear stochastic difference equations, expected utility, risk aversion
-and portfolio choice — and applies them to the stochastic growth model (planner, recursive
-formulation, linearisation), to trade under complete markets (Arrow–Debreu and sequential
-equilibrium, insurance, risk sharing, spanning), to the competitive equilibrium of the growth
-model and to an incomplete-markets saving problem; Appendix 7.A defines the recursive competitive
+chains, AR(1) and vector linear stochastic difference equations, expected utility, risk aversion and
+portfolio choice — and applies them to the stochastic growth model (planner, recursive formulation,
+linearisation), to trade under complete markets (Arrow–Debreu and sequential equilibrium, insurance,
+risk sharing, spanning), to the competitive equilibrium of the growth model and to an
+incomplete-markets saving problem, whose decision rules, ergodic set and stationary distribution
+(Figure 7.4) are proved for Markov income; Appendix 7.A defines the recursive competitive
 equilibrium and proves the law of iterated expectations on a finite tree. Every numbered equation
 and derivation of the text is proved and every numbered definition is formalised; the first-order
-conditions (7.13), (7.20) and (7.28) and the two-period Euler equation are proved from optimality
-by finite perturbations, the transversality condition is shown sufficient, and the log closed form
-is proved optimal. Not formalised: narrative, the ergodicity and law-of-large-numbers remarks, the
-numerical illustrations, and the claims read off Figures 7.3–7.4 (deferred). The project depends
-on Miao's `CompleteMarkets` (the event tree), `MarkovProcesses` (stationary distributions and
+conditions (7.13), (7.20) and (7.28) and the two-period Euler equation are proved from optimality by
+finite perturbations, the transversality condition is shown sufficient, and the log closed form is
+proved optimal. Not formalised: narrative, the ergodicity and law-of-large-numbers remarks, the
+numerical illustrations, and the claims read off Figure 7.3 (deferred). The project depends on
+Miao's `CompleteMarkets` (the event tree), `MarkovProcesses` (stationary distributions and
 convergence) and `RationalExpectations` (VAR moments and the Lyapunov equation), on Obstfeld and
 Rogoff's `InternationalFinancialMarkets` (spanning), and on AKMM Chapters 4 (CRRA, the EIS, the
 policy slope `a₁`) and 5 (finite perturbations, the log tangent). Ten printed errors are corrected,
 with Lean counterexamples to footnote 3's solution, the "necessary condition" for convergence, the
 definition of aperiodicity, the EIS derivative and the Euler equation of p. 201, as recorded in
-[corrections](docs/corrections.md); every book item is located in the
-[source map](docs/source-map.md). The library contains **135 theorems**.
+[corrections](docs/corrections.md); every book item is located in the [source
+map](docs/source-map.md). The claims of Figure 7.4 are proved with added hypotheses, and the
+high-income rule of the figure is shown to depend on the parameters (corrections 19–21). The library
+contains **170 theorems**.
 
 * **Event trees and iterated expectations** (§7.1.1, §7.2.1, 7.A.2): conditional probabilities
   (`tree_condProb_sum`); the law of iterated expectations on the tree and for filtrations
@@ -72,6 +75,16 @@ definition of aperiodicity, the EIS derivative and the Euler equation of p. 201,
   `ce_planner_optimal`).
 * **Incomplete markets** (§7.6): the first-order condition, envelope condition and Euler
   inequality, corrected (`im_foc`, `im_envelope`, `im_envelope_boundary`, `im_euler`).
+* **Figure 7.4 for Markov income** (§7.6, pp. 214–215): under the standing assumptions
+  (`imf_Standing`), savings and consumption are nondecreasing and continuous in assets
+  (`imf_g_mono`, `imf_c_mono`, `imf_g_lipschitz`, `imf_c_lipschitz`); the lowest-consumption state
+  dissaves and the constraint binds near `a̲` (`imf_min_dissave`, `imf_binds_near_limit`); the
+  bound `ā` (`imf_abar_exists`, `imf_abar_exists_neg`, `imf_crra_spread`); the ergodic set is
+  invariant and reached along every income history (`imf_ergodic_invariant`,
+  `imf_enters_ergodic`); an accessible atom gives Condition M, a unique stationary distribution of
+  `(a, y)` and convergence in total variation (`imf_kernel_hit`, `imf_kernel_stationary`,
+  `imf_stationary`); a solved two-state Markov instance (`imf_example_stationary`), in which the
+  high-income consumer does not accumulate (`imf_example_no_accumulation`).
 * **Recursive competitive equilibrium** (7.A.1): Definition 16, corrected (`definition_16`), an
   equilibrium (`definition_16_example`) and its functional Euler equation, which is (7.16)
   (`definition_16_euler`).
@@ -97,6 +110,9 @@ All names are in the namespace `AKMM.Uncertainty`.
 | [GrowthEquilibrium](AKMMUncertainty/GrowthEquilibrium.lean) | 5 | Definition 15, (7.26)–(7.29), equivalence with the planner (AKMM §7.5, pp. 210–212) |
 | [RecursiveEquilibrium](AKMMUncertainty/RecursiveEquilibrium.lean) | 2 | Definition 16 and its functional Euler equation (AKMM Appendix 7.A.1, p. 840) |
 | [IncompleteMarkets](AKMMUncertainty/IncompleteMarkets.lean) | 5 | The income-fluctuation problem: first-order, envelope and Euler conditions (AKMM §7.6, pp. 213–215) |
+| [IncomeFluctuation](AKMMUncertainty/IncomeFluctuation.lean) | 21 | Figure 7.4(A) for Markov income: monotone decision rules, `ā`, the ergodic set (AKMM §7.6, p. 214) |
+| [IncomeFluctuationStationary](AKMMUncertainty/IncomeFluctuationStationary.lean) | 7 | Figure 7.4(B): the transition of `(a, y)`, an accessible atom, the unique stationary distribution and convergence (AKMM §7.6, p. 215) |
+| [IncomeFluctuationExample](AKMMUncertainty/IncomeFluctuationExample.lean) | 7 | A solved two-state Markov instance; the high-income rule need not cross the 45-degree line (AKMM §7.6, pp. 213–215) |
 
 ## Build and verify
 

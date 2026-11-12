@@ -26,10 +26,9 @@ limit `a′ ≥ a̲`:
 
 Departures: the book states the first-order condition and the Euler equation as equalities,
 although it then says that low-income consumers hit the borrowing constraint; at a binding
-constraint only the inequality holds. The decision rules, the bound `ā` and the ergodic set
-`[a̲, ā]` and the simulated stationary distribution are read off Figure 7.4 (figure claims,
-deferred; for i.i.d. income and `β(1 + r) < 1` they are Miao's Lemma 8.3.3 and Proposition 8.3.1
-in `Applications`).
+constraint only the inequality holds. The decision rules, the bound `ā`, the ergodic set
+`[a̲, ā]` and the stationary distribution read off Figure 7.4 are proved for Markov income in
+`IncomeFluctuation`, `IncomeFluctuationStationary` and `IncomeFluctuationExample`.
 -/
 
 namespace AKMM.Uncertainty

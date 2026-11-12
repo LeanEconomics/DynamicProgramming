@@ -17,9 +17,14 @@ Reused from dependencies. Miao `CompleteMarkets` (`Miao.CompleteMarkets`): the e
 AKMM Chapter 4 (`AKMM.DynamicOptimization`): `crra`, `example42_ratio`, `example42_eis`,
 `eq_4_29`, `slopeRoot`, `slopeRootOther`, `slopeRoot_isRoot`, `slopeRoot_mem`. AKMM Chapter 5
 (`AKMM.CompetitiveEquilibrium`): `ce_foc_of_perturb`, `ce_tsum_perturb`, `ce_log_tangent`, and
-`euler_crs` (cited for Euler's theorem). Not used: Miao `Applications` (its
-income-fluctuation results are for i.i.d. income and support only the figure claims of §7.6) and
-SLP `StochasticDP` (the existence and differentiability of value functions, which the book assumes).
+`euler_crs` (cited for Euler's theorem). Miao `MarkovProcesses` also supplies, for the
+stationary distribution of Figure 7.4, `kpow`, `adjointOp`, `dTV`, `ConvStrongly`,
+`ConditionMFor`, `example_3_3_1` (an accessible atom gives Condition M), `theorem_3_3_1_invariant`
+(Theorem 3.3.1), `gp_isMarkov_kpow`, `gp_isProb_adjoint`, `gp_adjointOp_iterate`,
+`gp_dTV_nonneg`, `gp_tvDist_eq_two_mul_dTV` and `gp_eq_of_tvDist_eq_zero`. Not used: Miao
+`Applications` (its income-fluctuation results, Lemma 8.3.3 and Proposition 8.3.1, are for i.i.d.
+income; the claims of Figure 7.4 are proved here for Markov income) and SLP `StochasticDP` (the
+existence and differentiability of value functions, which the book assumes).
 
 ## Chapter introduction and §7.1 (pp. 187–188) — `EventTrees`
 
@@ -171,7 +176,7 @@ SLP `StochasticDP` (the existence and differentiability of value functions, whic
 | p. 212 | Equilibrium Euler equation = (7.13); allocation = planner's | `ce_euler_is_planner`, `ce_planner_optimal` |
 | p. 212 | Welfare theorems continue to apply | `ce_planner_optimal` (first welfare direction); the second is not formalised (cited) |
 
-## §7.6 An incomplete-markets economy (pp. 213–215) — `IncompleteMarkets`
+## §7.6 An incomplete-markets economy (pp. 213–215) — `IncompleteMarkets`, `IncomeFluctuation`, `IncomeFluctuationStationary`, `IncomeFluctuationExample`
 
 | Source | Claim | Lean |
 | --- | --- | --- |
@@ -180,8 +185,10 @@ SLP `StochasticDP` (the existence and differentiability of value functions, whic
 | p. 213 | Envelope condition | `im_envelope`, `im_envelope_boundary` |
 | p. 213 | Euler equation (corrected) | `im_euler` |
 | p. 214 | Partial self-insurance, perfect smoothing not optimal | not formalised: verbal argument |
-| p. 214, Fig. 7.4 | Decision rules, `ā`, ergodic set `[a̲, ā]` | figure claim, deferred (for i.i.d. income, Miao's Lemma 8.3.3 in `Applications`) |
-| p. 215, Fig. 7.4 | Convergence to a stationary distribution of assets | figure claim, deferred (for i.i.d. income, Miao's Proposition 8.3.1 in `Applications`) |
+| p. 214, Fig. 7.4 | Decision rules, `ā`, ergodic set `[a̲, ā]` (Markov income; corrected, see corrections 19–20): standing assumptions; savings and consumption nondecreasing in assets, slopes in `[0, 1 + r]` and `[0, 1]`, continuous; the lowest-consumption state dissaves (the low-income rule on the 45-degree line at `a̲`, below it above `a̲`); `ā` with `g(a, y) < a` for `a ≥ ā` in every state (`r > 0` and a condition on `u` that CRRA satisfies, or `r < 0`); `[a̲, ā]` invariant and reached in finite time along every income history; the constraint binds near `a̲` | `imf_Standing`, `imf_c`, `imf_feasible`, `imf_g_eq`, `imf_foc`, `imf_W_anti`, `imf_euler_eq`, `imf_next_mu_le`, `imf_g_mono`, `imf_c_mono`, `imf_g_lipschitz`, `imf_c_lipschitz`, `imf_g_continuousOn`, `imf_c_continuousOn`, `imf_min_dissave`, `imf_exists_min_state`, `imf_c_unbounded`, `imf_crra_spread`, `imf_abar_exists`, `imf_abar_exists_neg`, `imf_ergodic_invariant`, `imf_enters_ergodic`, `imf_binds_near_limit` |
+| p. 214, Fig. 7.4 | The high-income rule has an intercept above the 45-degree line; high-income consumers accumulate up to `ā` | false in general: `imf_example_no_accumulation` (correction 20) |
+| p. 215, Fig. 7.4 | Convergence to a stationary distribution (Markov income; corrected, see correction 21): the transition of `(a, y)` on `[a̲, b] × S`, `b ≥ ā`; an accessible atom `(a̲, y₀)`; unique stationary distribution, convergence in total variation at a geometric rate from every initial distribution | `imf_next`, `imf_next_measurable`, `imf_kernel`, `imf_kernel_lintegral`, `imf_kernel_isMarkov`, `imf_kpow_succ_ge`, `imf_kernel_hit`, `imf_kernel_stationary`, `imf_stationary` |
+| §7.6 (instance) | A solved two-state Markov economy satisfying every hypothesis | `imf_exU`, `imf_exDU`, `imf_exInc`, `imf_exP`, `imf_exW`, `imf_exV`, `imf_exV1`, `imf_exG`, `imf_exInc_ge`, `imf_exU_tangent`, `imf_example_bellman`, `imf_example_standing`, `imf_example_hyps`, `imf_example_stationary` |
 
 ## Appendix 7.A (pp. 840–841) — `RecursiveEquilibrium`, `EventTrees`
 

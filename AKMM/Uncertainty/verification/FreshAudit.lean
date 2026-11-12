@@ -20,6 +20,11 @@ import Mathlib.LinearAlgebra.Matrix.Charpoly.Coeff
 import InternationalFinancialMarkets.Spanning
 import Mathlib.Analysis.Calculus.Deriv.Add
 import Mathlib.Analysis.Calculus.Deriv.Comp
+import Mathlib.Analysis.Normed.Order.Lattice
+import Mathlib.Topology.Order.MonotoneConvergence
+import Mathlib.Topology.EMetricSpace.Lipschitz
+import Mathlib.Analysis.SpecialFunctions.Pow.Continuity
+import MarkovProcesses.ConvergenceStrong
 set_option autoImplicit false
 
 /-
@@ -3179,10 +3184,9 @@ limit `a′ ≥ a̲`:
 
 Departures: the book states the first-order condition and the Euler equation as equalities,
 although it then says that low-income consumers hit the borrowing constraint; at a binding
-constraint only the inequality holds. The decision rules, the bound `ā` and the ergodic set
-`[a̲, ā]` and the simulated stationary distribution are read off Figure 7.4 (figure claims,
-deferred; for i.i.d. income and `β(1 + r) < 1` they are Miao's Lemma 8.3.3 and Proposition 8.3.1
-in `Applications`).
+constraint only the inequality holds. The decision rules, the bound `ā`, the ergodic set
+`[a̲, ā]` and the stationary distribution read off Figure 7.4 are proved for Markov income in
+`IncomeFluctuation`, `IncomeFluctuationStationary` and `IncomeFluctuationExample`.
 -/
 
 namespace AKMM.Uncertainty
@@ -3346,6 +3350,941 @@ theorem im_euler {u u' : ℝ → ℝ} {β r : ℝ} (hβ : 0 ≤ β) (hr : 0 < 1 
         (1 + r) * (u' (a + inc y - q * g y a) * (q)) := by
           rw [mul_comm (1 + r), mul_assoc, hq, mul_one]
       _ = _ := by rw [he]; ring
+
+end AKMM.Uncertainty
+
+/-
+Copyright (c) 2026 Robert Kirkby. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Robert Kirkby
+-/
+
+/-!
+# The decision rules of Figure 7.4 for Markov income
+
+AKMM, §7.6, pp. 213–215, Figure 7.4(A). The consumer of `IncompleteMarkets`: income `y` follows
+a Markov chain `P(y, y′)` on a finite set `S` (the figure uses two values), `q = 1/(1 + r)`,
+`V(a, y) = max_{a′ ≥ a̲} u(a + y − qa′) + βE[V(a′, y′)|y]` attained at `a′ = g(a, y)`. The standing
+assumptions (`imf_Standing`) are those of the text: `β ≥ 0`, `1 + r > 0`, impatience
+`β(1 + r) < 1`, `P` a stochastic matrix, `u` differentiable with `u′ > 0` strictly decreasing
+(strictly concave `u`), and `V(·, y)` differentiable on `[a̲, ∞)` and concave (its derivative `V₁`
+is nonincreasing). Consumption is `c(a, y) = a + y − qg(a, y)` (`imf_c`). Proved, for Markov
+income:
+
+* the savings rule and consumption are nondecreasing in assets, with
+  `0 ≤ g(a₂, y) − g(a₁, y) ≤ (1 + r)(a₂ − a₁)` and `0 ≤ c(a₂, y) − c(a₁, y) ≤ a₂ − a₁`
+  (`imf_g_mono`, `imf_c_mono`, `imf_g_lipschitz`, `imf_c_lipschitz`), hence continuous
+  (`imf_g_continuousOn`, `imf_c_continuousOn`);
+* in the state with the lowest consumption at `a` the consumer dissaves: `g(a, y) ≤ a`, strictly
+  if `a > a̲` (`imf_min_dissave`); for two states with consumption increasing in income this is
+  the figure's low-income rule, on the 45-degree line at `a̲` and below it above `a̲`;
+* the borrowing constraint binds on a whole interval `[a̲, a̲ + δ)` in that state
+  (`imf_binds_near_limit`, with `u′` continuous);
+* with `r > 0`, consumption is unbounded in every state (`imf_c_unbounded`), and if
+  `β(1 + r)u′(c) < u′(c + D)` for large `c`, where `D` bounds the income spread (true when
+  `u′(c + D)/u′(c) → 1`, e.g. for CRRA utility, `imf_crra_spread`), there is `ā ≥ a̲` with
+  `g(a, y) < a` for all `a ≥ ā` and all `y` (`imf_abar_exists`); with `r < 0` such an `ā`
+  exists without the condition (`imf_abar_exists_neg`);
+* the ergodic set `[a̲, ā]` is invariant (`imf_ergodic_invariant`), and from any initial assets
+  and along every income history assets enter `[a̲, ā]` in finite time and stay there
+  (`imf_enters_ergodic`).
+
+Departures: the book reads these properties off a computed figure. For Markov income the
+existence of `ā` needs a condition on `u` (it holds for the usual CRRA and log utilities), and the
+case `r = 0` is not covered. Whether the high-income rule lies above the 45-degree line at `a̲`
+depends on the parameters: it fails in the instance of `IncomeFluctuationStationary`.
+-/
+
+namespace AKMM.Uncertainty
+
+open Filter Topology Set
+
+variable {S : Type*} [Fintype S]
+
+/-- AKMM, p. 213: the standing assumptions of §7.6 for the income-fluctuation problem with
+Markov income. `β ≥ 0`, `1 + r > 0`, `β(1 + r) < 1`; `P` is a stochastic matrix; `(V, g)` solve
+the Bellman equation with `q = 1/(1 + r)`; `u` has derivative `u′ > 0`, strictly decreasing on
+`(0, ∞)`; `V(·, y)` has derivative `V₁(·, y)` on `[a̲, ∞)`, nonincreasing there (`V(·, y)`
+concave). -/
+def imf_Standing (u u' : ℝ → ℝ) (β r : ℝ) (P : S → S → ℝ) (inc : S → ℝ) (abar : ℝ)
+    (V V1 g : S → ℝ → ℝ) : Prop :=
+  0 ≤ β ∧ 0 < 1 + r ∧ β * (1 + r) < 1 ∧ (∀ y y', 0 ≤ P y y') ∧ (∀ y, ∑ y', P y y' = 1) ∧
+    im_Bellman u β (1 / (1 + r)) P inc abar V g ∧
+    (∀ c, 0 < c → HasDerivAt u (u' c) c) ∧ (∀ c, 0 < c → 0 < u' c) ∧
+    StrictAntiOn u' (Ioi 0) ∧ (∀ y a, abar ≤ a → HasDerivAt (V y) (V1 y a) a) ∧
+    ∀ y, AntitoneOn (V1 y) (Ici abar)
+
+/-- AKMM, p. 213: consumption `c(a, y) = a + y − qg(a, y)` from the budget `qa′ + c = a + y`. -/
+noncomputable def imf_c (r : ℝ) (inc : S → ℝ) (g : S → ℝ → ℝ) (y : S) (a : ℝ) : ℝ :=
+  a + inc y - 1 / (1 + r) * g y a
+
+variable {u u' : ℝ → ℝ} {β r : ℝ} {P : S → S → ℝ} {inc : S → ℝ} {abar : ℝ} {V V1 g : S → ℝ → ℝ}
+
+/-- AKMM, p. 213: savings are feasible and consumption is positive, `g(a, y) ≥ a̲`,
+`c(a, y) > 0`. -/
+theorem imf_feasible (h : imf_Standing u u' β r P inc abar V V1 g) {y : S} {a : ℝ}
+    (ha : abar ≤ a) : abar ≤ g y a ∧ 0 < imf_c r inc g y a := by
+  obtain ⟨h1, h2⟩ := im_Bellman_feasible h.2.2.2.2.2.1 (y := y) ha
+  exact ⟨h1, by unfold imf_c; linarith⟩
+
+/-- The savings rule recovered from consumption: `g(a, y) = (1 + r)(a + y − c(a, y))`. -/
+theorem imf_g_eq (h : imf_Standing u u' β r P inc abar V V1 g) (y : S) (a : ℝ) :
+    g y a = (1 + r) * (a + inc y - imf_c r inc g y a) := by
+  have hr := h.2.1
+  unfold imf_c
+  field_simp
+  ring
+
+/-- AKMM, p. 213: the first-order condition with `q = 1/(1 + r)` in the form
+`βE[V₁(a′, y′)|y] ≤ qu′(c)`, with equality when `a′ = g(a, y) > a̲`. -/
+theorem imf_foc (h : imf_Standing u u' β r P inc abar V V1 g) {y : S} {a : ℝ} (ha : abar ≤ a) :
+    β * ∑ y', P y y' * V1 y' (g y a) ≤ u' (imf_c r inc g y a) * (1 / (1 + r)) ∧
+      (abar < g y a →
+        u' (imf_c r inc g y a) * (1 / (1 + r)) = β * ∑ y', P y y' * V1 y' (g y a)) := by
+  obtain ⟨-, -, -, -, -, hB, hu, -, -, hV, -⟩ := id h
+  obtain ⟨hg, hc⟩ := imf_feasible h (y := y) ha
+  exact im_foc hB ha (hu _ hc) fun y' => hV y' _ hg
+
+/-- The expected marginal value of savings `Σ P(y, y′)V₁(a′, y′)` is nonincreasing in `a′`. -/
+theorem imf_W_anti (h : imf_Standing u u' β r P inc abar V V1 g) (y : S) {x₁ x₂ : ℝ}
+    (h1 : abar ≤ x₁) (h12 : x₁ ≤ x₂) :
+    ∑ y', P y y' * V1 y' x₂ ≤ ∑ y', P y y' * V1 y' x₁ :=
+  Finset.sum_le_sum fun y' _ => mul_le_mul_of_nonneg_left
+    (h.2.2.2.2.2.2.2.2.2.2 y' h1 (h1.trans h12) h12) (h.2.2.2.1 y y')
+
+/-- **AKMM, Fig. 7.4(A): the savings rule is nondecreasing in assets**, `a₁ ≤ a₂ ⇒
+g(a₁, y) ≤ g(a₂, y)`, for Markov income. -/
+theorem imf_g_mono (h : imf_Standing u u' β r P inc abar V V1 g) (y : S) {a₁ a₂ : ℝ}
+    (h1 : abar ≤ a₁) (h12 : a₁ ≤ a₂) : g y a₁ ≤ g y a₂ := by
+  by_contra hlt
+  push Not at hlt
+  have hβ := h.1
+  have hr := h.2.1
+  have hq : 0 < 1 / (1 + r) := by positivity
+  obtain ⟨hg2, hc2⟩ := imf_feasible h (y := y) (h1.trans h12)
+  obtain ⟨-, hc1⟩ := imf_feasible h (y := y) h1
+  have heq := (imf_foc h (y := y) h1).2 (hg2.trans_lt hlt)
+  have hle := (imf_foc h (y := y) (h1.trans h12)).1
+  have hW := mul_le_mul_of_nonneg_left (imf_W_anti h y hg2 hlt.le) hβ
+  have hu : u' (imf_c r inc g y a₁) ≤ u' (imf_c r inc g y a₂) :=
+    le_of_mul_le_mul_right (by linarith) hq
+  have hcc : imf_c r inc g y a₁ < imf_c r inc g y a₂ := by
+    unfold imf_c
+    nlinarith
+  exact absurd hu (not_le.2 (h.2.2.2.2.2.2.2.2.1 hc1 hc2 hcc))
+
+/-- **AKMM, Fig. 7.4: consumption is nondecreasing in assets**, `a₁ ≤ a₂ ⇒
+c(a₁, y) ≤ c(a₂, y)`. -/
+theorem imf_c_mono (h : imf_Standing u u' β r P inc abar V V1 g) (y : S) {a₁ a₂ : ℝ}
+    (h1 : abar ≤ a₁) (h12 : a₁ ≤ a₂) : imf_c r inc g y a₁ ≤ imf_c r inc g y a₂ := by
+  by_contra hlt
+  push Not at hlt
+  have hβ := h.1
+  have hr := h.2.1
+  have hq : 0 < 1 / (1 + r) := by positivity
+  obtain ⟨hg1, hc1⟩ := imf_feasible h (y := y) h1
+  obtain ⟨-, hc2⟩ := imf_feasible h (y := y) (h1.trans h12)
+  have hgg : g y a₁ < g y a₂ := by
+    unfold imf_c at hlt
+    by_contra hg
+    push Not at hg
+    nlinarith
+  have heq := (imf_foc h (y := y) (h1.trans h12)).2 (hg1.trans_lt hgg)
+  have hle := (imf_foc h (y := y) h1).1
+  have hW := mul_le_mul_of_nonneg_left (imf_W_anti h y hg1 hgg.le) hβ
+  have hu : u' (imf_c r inc g y a₂) ≤ u' (imf_c r inc g y a₁) :=
+    le_of_mul_le_mul_right (by linarith) hq
+  exact absurd hu (not_le.2 (h.2.2.2.2.2.2.2.2.1 hc2 hc1 hlt))
+
+/-- AKMM, Fig. 7.4: the marginal propensity to consume out of assets is in `[0, 1]`:
+`0 ≤ c(a₂, y) − c(a₁, y) ≤ a₂ − a₁`. -/
+theorem imf_c_lipschitz (h : imf_Standing u u' β r P inc abar V V1 g) (y : S) {a₁ a₂ : ℝ}
+    (h1 : abar ≤ a₁) (h12 : a₁ ≤ a₂) :
+    0 ≤ imf_c r inc g y a₂ - imf_c r inc g y a₁ ∧
+      imf_c r inc g y a₂ - imf_c r inc g y a₁ ≤ a₂ - a₁ := by
+  have hr := h.2.1
+  have hq : 0 < 1 / (1 + r) := by positivity
+  have hg := imf_g_mono h y h1 h12
+  refine ⟨by linarith [imf_c_mono h y h1 h12], ?_⟩
+  unfold imf_c
+  nlinarith
+
+/-- AKMM, Fig. 7.4: the savings rule has slope in `[0, 1 + r]`:
+`0 ≤ g(a₂, y) − g(a₁, y) ≤ (1 + r)(a₂ − a₁)`. -/
+theorem imf_g_lipschitz (h : imf_Standing u u' β r P inc abar V V1 g) (y : S) {a₁ a₂ : ℝ}
+    (h1 : abar ≤ a₁) (h12 : a₁ ≤ a₂) :
+    0 ≤ g y a₂ - g y a₁ ∧ g y a₂ - g y a₁ ≤ (1 + r) * (a₂ - a₁) := by
+  have hr := h.2.1
+  refine ⟨by linarith [imf_g_mono h y h1 h12], ?_⟩
+  have hc := imf_c_mono h y h1 h12
+  rw [imf_g_eq h y a₂, imf_g_eq h y a₁]
+  nlinarith
+
+/-- The savings rule is continuous on `[a̲, ∞)`. -/
+theorem imf_g_continuousOn (h : imf_Standing u u' β r P inc abar V V1 g) (y : S) :
+    ContinuousOn (g y) (Ici abar) := by
+  have hr := h.2.1
+  refine (LipschitzOnWith.of_dist_le_mul (K := Real.toNNReal (1 + r)) fun x hx z hz => ?_)
+    |>.continuousOn
+  rw [Real.dist_eq, Real.dist_eq, Real.coe_toNNReal _ hr.le]
+  rcases le_total x z with hxz | hxz
+  · obtain ⟨h0, h1⟩ := imf_g_lipschitz h y hx hxz
+    rw [abs_sub_comm, abs_of_nonneg h0, abs_sub_comm, abs_of_nonneg (by linarith)]
+    exact h1
+  · obtain ⟨h0, h1⟩ := imf_g_lipschitz h y hz hxz
+    rw [abs_of_nonneg h0, abs_of_nonneg (by linarith)]
+    exact h1
+
+/-- Consumption is continuous on `[a̲, ∞)`. -/
+theorem imf_c_continuousOn (h : imf_Standing u u' β r P inc abar V V1 g) (y : S) :
+    ContinuousOn (imf_c r inc g y) (Ici abar) := by
+  refine (LipschitzOnWith.of_dist_le_mul (K := 1) fun x hx z hz => ?_).continuousOn
+  rw [Real.dist_eq, Real.dist_eq, NNReal.coe_one, one_mul]
+  rcases le_total x z with hxz | hxz
+  · obtain ⟨h0, h1⟩ := imf_c_lipschitz h y hx hxz
+    rw [abs_sub_comm, abs_of_nonneg h0, abs_sub_comm, abs_of_nonneg (by linarith)]
+    exact h1
+  · obtain ⟨h0, h1⟩ := imf_c_lipschitz h y hz hxz
+    rw [abs_of_nonneg h0, abs_of_nonneg (by linarith)]
+    exact h1
+
+/-- The Euler equation in terms of `imf_c`: `u′(c(a, y)) = (1 + r)βΣ P(y, y′)u′(c(a′, y′))` when
+`a′ = g(a, y) > a̲`. -/
+theorem imf_euler_eq (h : imf_Standing u u' β r P inc abar V V1 g) {y : S} {a : ℝ}
+    (ha : abar ≤ a) (hint : abar < g y a) :
+    u' (imf_c r inc g y a) =
+      (1 + r) * β * ∑ y', P y y' * u' (imf_c r inc g y' (g y a)) := by
+  obtain ⟨hβ, hr, -, hP, -, hB, hu, -, -, hV, -⟩ := id h
+  have := (im_euler hβ hr hP hB hu hV ha).2 hint
+  simpa only [imf_c] using this
+
+/-- If `a′ ≥ a`, the expected marginal utility tomorrow is at most `u′` of the lowest
+consumption today: `Σ P(y, y′)u′(c(a′, y′)) ≤ u′(c(a, y*))` when `c(a, y*) ≤ c(a, y′)` for all
+`y′`. -/
+theorem imf_next_mu_le (h : imf_Standing u u' β r P inc abar V V1 g) {y ys : S} {a : ℝ}
+    (ha : abar ≤ a) (hmin : ∀ y', imf_c r inc g ys a ≤ imf_c r inc g y' a)
+    (hga : a ≤ g y a) :
+    ∑ y', P y y' * u' (imf_c r inc g y' (g y a)) ≤ u' (imf_c r inc g ys a) := by
+  obtain ⟨-, -, -, hP, hsum, -, -, -, hanti, -, -⟩ := id h
+  calc ∑ y', P y y' * u' (imf_c r inc g y' (g y a)) ≤
+        ∑ y', P y y' * u' (imf_c r inc g ys a) := by
+        refine Finset.sum_le_sum fun y' _ => mul_le_mul_of_nonneg_left ?_ (hP y y')
+        have h1 := (imf_feasible h (y := ys) ha).2
+        have h2 := (imf_feasible h (y := y') (ha.trans hga)).2
+        have h3 := (hmin y').trans (imf_c_mono h y' ha hga)
+        exact hanti.antitoneOn h1 h2 h3
+    _ = u' (imf_c r inc g ys a) := by rw [← Finset.sum_mul, hsum, one_mul]
+
+/-- **AKMM, Fig. 7.4(A), p. 214: in the state with the lowest consumption the consumer draws
+down savings**, `g(a, y) ≤ a`, strictly when `a > a̲`. For two income states with consumption
+increasing in income this is the figure's low-income rule ("on the 45-degree line at `a̲`"). -/
+theorem imf_min_dissave (h : imf_Standing u u' β r P inc abar V V1 g) {y : S} {a : ℝ}
+    (ha : abar ≤ a) (hmin : ∀ y', imf_c r inc g y a ≤ imf_c r inc g y' a) :
+    g y a ≤ a ∧ (abar < a → g y a < a) := by
+  have hlt : abar < g y a → g y a < a := by
+    intro hint
+    by_contra hge
+    push Not at hge
+    have hβ := h.1
+    have hr := h.2.1
+    have hβr := h.2.2.1
+    have heq := imf_euler_eq h ha hint
+    have hle := imf_next_mu_le h ha hmin hge
+    have hpos := h.2.2.2.2.2.2.2.1 _ (imf_feasible h (y := y) ha).2
+    have : u' (imf_c r inc g y a) ≤ (1 + r) * β * u' (imf_c r inc g y a) := by
+      rw [heq] at *
+      exact mul_le_mul_of_nonneg_left hle (by positivity)
+    nlinarith
+  refine ⟨?_, fun hab => ?_⟩
+  · rcases (imf_feasible h (y := y) ha).1.lt_or_eq with h1 | h1
+    · exact (hlt h1).le
+    · rw [← h1]; exact ha
+  · rcases (imf_feasible h (y := y) ha).1.lt_or_eq with h1 | h1
+    · exact hlt h1
+    · rw [← h1]; exact hab
+
+omit [Fintype S] in
+/-- There is a state with the lowest consumption at `a` (`S` finite and nonempty). -/
+theorem imf_exists_min_state [Finite S] [Nonempty S] (r : ℝ) (inc : S → ℝ) (g : S → ℝ → ℝ) (a : ℝ) :
+    ∃ ys, ∀ y', imf_c r inc g ys a ≤ imf_c r inc g y' a :=
+  Finite.exists_min fun y => imf_c r inc g y a
+
+/-- AKMM, p. 214 (with `r > 0`): consumption is unbounded in every state: for every `C` there is
+`A` with `c(a, y) > C` for all `a ≥ A` and all `y`. -/
+theorem imf_c_unbounded (h : imf_Standing u u' β r P inc abar V V1 g) (hr0 : 0 < r) (C : ℝ) :
+    ∃ A, abar < A ∧ ∀ a, A ≤ a → ∀ y, C < imf_c r inc g y a := by
+  set B := ∑ y, |inc y|
+  refine ⟨max (abar + 1) ((1 + r) * (B + C) / r), by simp, fun a ha y => ?_⟩
+  by_contra hle
+  push Not at hle
+  have hS : Nonempty S := ⟨y⟩
+  obtain ⟨ys, hys⟩ := imf_exists_min_state r inc g a
+  have ha1 : abar + 1 ≤ a := (le_max_left _ _).trans ha
+  have ha2 : (1 + r) * (B + C) / r ≤ a := (le_max_right _ _).trans ha
+  have hB : -B ≤ inc ys := by
+    have h1 : |inc ys| ≤ B := Finset.single_le_sum (f := fun y => |inc y|)
+      (fun _ _ => abs_nonneg _) (Finset.mem_univ ys)
+    linarith [neg_abs_le (inc ys)]
+  have hcs : imf_c r inc g ys a ≤ C := (hys y).trans hle
+  have hga : a ≤ g ys a := by
+    rw [imf_g_eq h ys a]
+    have : (1 + r) * (B + C) ≤ r * a := by
+      rw [div_le_iff₀ hr0] at ha2; linarith
+    nlinarith
+  have := (imf_min_dissave h (by linarith) hys).2 (by linarith)
+  linarith
+
+/-- AKMM, p. 214: the condition on `u` used for `ā` holds for CRRA marginal utility
+`u′(c) = c^{−σ}`, `σ > 0`: if `k < 1` and `D ≥ 0`, then `kc^{−σ} < (c + D)^{−σ}` for all large
+`c` (since `((c + D)/c)^σ → 1`). -/
+theorem imf_crra_spread {σ k D : ℝ} (hσ : 0 < σ) (hk : k < 1) (hD : 0 ≤ D) :
+    ∃ C, ∀ c, C ≤ c → 0 < c → k * c ^ (-σ) < (c + D) ^ (-σ) := by
+  have hlim : Tendsto (fun c : ℝ => k * ((c + D) / c) ^ σ) atTop (𝓝 (k * 1 ^ σ)) := by
+    refine Tendsto.const_mul k (Tendsto.rpow_const ?_ (Or.inr hσ.le))
+    have h1 : Tendsto (fun c : ℝ => 1 + D / c) atTop (𝓝 (1 + 0)) :=
+      tendsto_const_nhds.add (tendsto_const_nhds.div_atTop tendsto_id)
+    rw [add_zero] at h1
+    refine h1.congr' ?_
+    filter_upwards [eventually_gt_atTop 0] with c hc
+    field_simp
+  rw [Real.one_rpow, mul_one] at hlim
+  obtain ⟨C, hC⟩ := eventually_atTop.1 (hlim.eventually (gt_mem_nhds hk))
+  refine ⟨C, fun c hc hc0 => ?_⟩
+  have h1 := hC c hc
+  have hcD : 0 < c + D := by linarith
+  have hcσ : 0 < c ^ σ := Real.rpow_pos_of_pos hc0 σ
+  have hcDσ : 0 < (c + D) ^ σ := Real.rpow_pos_of_pos hcD σ
+  rw [Real.div_rpow hcD.le hc0.le, mul_div_assoc', div_lt_one hcσ] at h1
+  rw [Real.rpow_neg hc0.le, Real.rpow_neg hcD.le, ← div_eq_mul_inv, div_lt_iff₀ hcσ,
+    inv_mul_eq_div, lt_div_iff₀ hcDσ]
+  linarith
+
+/-- **AKMM, Fig. 7.4(A), p. 214: the bound `ā`** (Markov income, `r > 0`). If `D` bounds the
+income spread and `β(1 + r)u′(c) < u′(c + D)` for all large `c`, there is `ā ≥ a̲` such that
+`g(a, y) < a` for every `a ≥ ā` and every income state `y`. -/
+theorem imf_abar_exists (h : imf_Standing u u' β r P inc abar V V1 g) (hr0 : 0 < r) {D : ℝ}
+    (hD : ∀ y y', inc y - inc y' ≤ D)
+    (hU : ∃ C, ∀ c, C ≤ c → 0 < c → β * (1 + r) * u' c < u' (c + D)) :
+    ∃ ab, abar ≤ ab ∧ ∀ a, ab ≤ a → ∀ y, g y a < a := by
+  obtain ⟨C, hC⟩ := hU
+  obtain ⟨A, hA, hcA⟩ := imf_c_unbounded h hr0 C
+  refine ⟨A, hA.le, fun a ha y => ?_⟩
+  by_contra hge
+  push Not at hge
+  have hS : Nonempty S := ⟨y⟩
+  have hβ := h.1
+  have hr := h.2.1
+  have haa : abar ≤ a := hA.le.trans ha
+  obtain ⟨ys, hys⟩ := imf_exists_min_state r inc g a
+  have hgs := (imf_min_dissave h haa hys).1
+  have hcs := imf_feasible h (y := ys) haa
+  have hcy := imf_feasible h (y := y) haa
+  have hgap : imf_c r inc g y a ≤ imf_c r inc g ys a + D := by
+    have := hD y ys
+    have hq : 0 < 1 / (1 + r) := by positivity
+    unfold imf_c
+    nlinarith
+  have heq := imf_euler_eq h (y := y) haa (by linarith)
+  have hle := imf_next_mu_le h haa hys hge
+  have h1 : u' (imf_c r inc g y a) ≤ (1 + r) * β * u' (imf_c r inc g ys a) := by
+    rw [heq]; exact mul_le_mul_of_nonneg_left hle (by positivity)
+  have hDnn : 0 ≤ D := by linarith [hD y y]
+  have h2 : u' (imf_c r inc g ys a + D) ≤ u' (imf_c r inc g y a) :=
+    h.2.2.2.2.2.2.2.2.1.antitoneOn hcy.2 (by simp only [mem_Ioi]; linarith [hcs.2]) hgap
+  have h3 := hC _ (hcA a ha ys).le hcs.2
+  linarith
+
+/-- AKMM, Fig. 7.4(A), with `r < 0`: then `ā = (1 + r)Y/(−r)` (`Y` bounding income) works
+without any condition on `u`: `g(a, y) < a` for all `a ≥ ā`. -/
+theorem imf_abar_exists_neg (h : imf_Standing u u' β r P inc abar V V1 g) (hr0 : r < 0) :
+    ∃ ab, abar ≤ ab ∧ ∀ a, ab ≤ a → ∀ y, g y a < a := by
+  have hr := h.2.1
+  set B := ∑ y, |inc y|
+  refine ⟨max abar ((1 + r) * B / (-r)), le_max_left _ _, fun a ha y => ?_⟩
+  have haa : abar ≤ a := (le_max_left _ _).trans ha
+  have ha2 : (1 + r) * B / (-r) ≤ a := (le_max_right _ _).trans ha
+  have hB : inc y ≤ B := (le_abs_self _).trans (Finset.single_le_sum (f := fun y => |inc y|)
+    (fun _ _ => abs_nonneg _) (Finset.mem_univ y))
+  have hc := (imf_feasible h (y := y) haa).2
+  rw [imf_g_eq h y a]
+  rw [div_le_iff₀ (by linarith)] at ha2
+  nlinarith
+
+/-- **AKMM, Fig. 7.4(A), p. 214: the ergodic set `[a̲, ā]` is invariant.** If `g(ā, y) ≤ ā` in
+every state, then `a ∈ [a̲, ā]` implies `g(a, y) ∈ [a̲, ā]`. -/
+theorem imf_ergodic_invariant (h : imf_Standing u u' β r P inc abar V V1 g) {ab : ℝ}
+    (hab : ∀ y, g y ab ≤ ab) {a : ℝ} (ha : a ∈ Icc abar ab) (y : S) : g y a ∈ Icc abar ab :=
+  ⟨(imf_feasible h ha.1).1, (imf_g_mono h y ha.1 ha.2).trans (hab y)⟩
+
+/-- **AKMM, Fig. 7.4(A), p. 214: "if the consumer begins with initial assets above `ā`, they
+will continuously spend down their assets regardless of their income until their assets reach
+`ā`. So in the long run the consumer will have asset holdings on the ergodic set `[a̲, ā]`."**
+For every income history `y_t` and initial assets `a₀ ≥ a̲`, the assets `a_{t+1} = g(a_t, y_t)`
+are in `[a̲, ā]` from some date on. -/
+theorem imf_enters_ergodic (h : imf_Standing u u' β r P inc abar V V1 g) {ab : ℝ}
+    (hab0 : abar ≤ ab) (hab : ∀ a, ab ≤ a → ∀ y, g y a < a) (ys : ℕ → S) (as : ℕ → ℝ)
+    (h0 : abar ≤ as 0) (hstep : ∀ t, as (t + 1) = g (ys t) (as t)) :
+    ∃ T, ∀ t, T ≤ t → as t ∈ Icc abar ab := by
+  have hr := h.2.1
+  have hS : Nonempty S := ⟨ys 0⟩
+  have hge : ∀ t, abar ≤ as t := by
+    intro t
+    induction t with
+    | zero => exact h0
+    | succ t ih => rw [hstep]; exact (imf_feasible h ih).1
+  have hinv : ∀ y, g y ab ≤ ab := fun y => (hab ab le_rfl y).le
+  obtain ⟨T, hT⟩ : ∃ T, as T ≤ ab := by
+    by_contra hall
+    push Not at hall
+    have hanti : Antitone as := antitone_nat_of_succ_le fun t => by
+      rw [hstep]; exact (hab _ (hall t).le _).le
+    have hbdd : BddBelow (range as) := ⟨ab, by rintro _ ⟨t, rfl⟩; exact (hall t).le⟩
+    set L := ⨅ t, as t
+    have hL : Tendsto as atTop (𝓝 L) := tendsto_atTop_ciInf hanti hbdd
+    have hLab : ab ≤ L := le_ciInf fun t => (hall t).le
+    have hle : ∀ t, L ≤ as t := fun t => ciInf_le hbdd t
+    obtain ⟨y₀, hy₀⟩ := Finite.exists_max fun y => g y L
+    have hε : 0 < L - g y₀ L := by linarith [hab L hLab y₀]
+    have hev : ∀ᶠ t in atTop, as t < L + (L - g y₀ L) / (1 + r) :=
+      hL.eventually (gt_mem_nhds (by have := div_pos hε hr; linarith))
+    obtain ⟨t, ht⟩ := hev.exists
+    have hlip := (imf_g_lipschitz h (ys t) (hab0.trans hLab) (hle t)).2
+    have h1 : as (t + 1) < L := by
+      rw [hstep]
+      have h2 : (1 + r) * (as t - L) < L - g y₀ L := by
+        have := (lt_div_iff₀' hr).1 (show as t - L < (L - g y₀ L) / (1 + r) by linarith)
+        linarith
+      linarith [hy₀ (ys t)]
+    linarith [hle (t + 1)]
+  refine ⟨T, fun t ht => ?_⟩
+  induction t, ht using Nat.le_induction with
+  | base => exact ⟨hge T, hT⟩
+  | succ t _ ih => rw [hstep]; exact imf_ergodic_invariant h hinv ih (ys t)
+
+/-- **AKMM, p. 214: low-income consumers reach the borrowing constraint.** With `u′`
+continuous, in a state `y₀` with the lowest consumption at `a̲` the constraint binds on a whole
+interval: there is `δ > 0` with `g(a, y₀) = a̲` for `a̲ ≤ a < a̲ + δ`. -/
+theorem imf_binds_near_limit (h : imf_Standing u u' β r P inc abar V V1 g)
+    (hcont : ContinuousOn u' (Ioi 0)) {y₀ : S}
+    (hmin : ∀ y', imf_c r inc g y₀ abar ≤ imf_c r inc g y' abar) :
+    ∃ δ, 0 < δ ∧ ∀ a, abar ≤ a → a < abar + δ → g y₀ a = abar := by
+  obtain ⟨hβ, hr, hβr, hP, hsum, hB, hu, hpos, hanti, hV, -⟩ := id h
+  set q := 1 / (1 + r) with hqdef
+  have hq : 0 < q := by positivity
+  have hβq : β < q := by
+    rw [hqdef, lt_div_iff₀ hr]; linarith
+  have hg0 : g y₀ abar = abar :=
+    le_antisymm (imf_min_dissave h le_rfl hmin).1 (imf_feasible h le_rfl).1
+  set φ : ℝ → ℝ := fun a => q * u' (imf_c r inc g y₀ a) -
+    β * ∑ y', P y₀ y' * u' (imf_c r inc g y' (g y₀ a)) with hφ
+  have hc0 := (imf_feasible h (y := y₀) le_rfl).2
+  have hφ0 : 0 < φ abar := by
+    simp only [hφ, hg0]
+    have hle : ∑ y', P y₀ y' * u' (imf_c r inc g y' abar) ≤ u' (imf_c r inc g y₀ abar) := by
+      have := imf_next_mu_le h (y := y₀) le_rfl hmin (by rw [hg0])
+      rwa [hg0] at this
+    have := hpos _ hc0
+    nlinarith
+  have hmem : abar ∈ Ici abar := mem_Ici.2 le_rfl
+  have hcwa : ∀ y', ContinuousWithinAt (fun a => u' (imf_c r inc g y' (g y₀ a))) (Ici abar)
+      abar := by
+    intro y'
+    have hcy := (imf_feasible h (y := y') le_rfl).2
+    have hg := imf_g_continuousOn h y₀ abar hmem
+    have hc := imf_c_continuousOn h y' (g y₀ abar) (by rw [hg0]; exact hmem)
+    have h1 : ContinuousWithinAt (fun a => imf_c r inc g y' (g y₀ a)) (Ici abar) abar :=
+      hc.comp hg fun a ha => (imf_feasible h ha).1
+    have h2 : ContinuousAt u' (imf_c r inc g y' (g y₀ abar)) := by
+      rw [hg0]; exact hcont.continuousAt (Ioi_mem_nhds hcy)
+    exact ContinuousAt.comp_continuousWithinAt (f := fun a => imf_c r inc g y' (g y₀ a)) h2 h1
+  have hφc : ContinuousWithinAt φ (Ici abar) abar := by
+    refine ContinuousWithinAt.sub (continuousWithinAt_const.mul ?_)
+      (continuousWithinAt_const.mul ?_)
+    · exact ContinuousAt.comp_continuousWithinAt (f := imf_c r inc g y₀)
+        (hcont.continuousAt (Ioi_mem_nhds hc0)) (imf_c_continuousOn h y₀ abar hmem)
+    · exact tendsto_finsetSum _ fun y' _ => continuousWithinAt_const.mul (hcwa y')
+  have hev : ∀ᶠ a in 𝓝[≥] abar, 0 < φ a := hφc.eventually (lt_mem_nhds hφ0)
+  obtain ⟨e, he, hsub⟩ := (mem_nhdsGE_iff_exists_Ico_subset).1 hev
+  refine ⟨e - abar, by simp only [mem_Ioi] at he; linarith, fun a ha hae => ?_⟩
+  have hφa : 0 < φ a := hsub ⟨ha, by linarith⟩
+  refine le_antisymm ?_ (imf_feasible h ha).1
+  by_contra hgt
+  push Not at hgt
+  have heq := (imf_foc h (y := y₀) ha).2 hgt
+  have hsumeq : ∑ y', P y₀ y' * V1 y' (g y₀ a) =
+      ∑ y', P y₀ y' * u' (imf_c r inc g y' (g y₀ a)) :=
+    Finset.sum_congr rfl fun y' _ => by
+      have hcy := (imf_feasible h (y := y') (imf_feasible h (y := y₀) ha).1).2
+      congr 1
+      exact im_envelope hB hgt (hV y' _ (imf_feasible h (y := y₀) ha).1) (hu _ hcy)
+  rw [hsumeq] at heq
+  simp only [hφ] at hφa
+  linarith
+
+end AKMM.Uncertainty
+
+/-
+Copyright (c) 2026 Robert Kirkby. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Robert Kirkby
+-/
+
+/-!
+# The stationary distribution of Figure 7.4(B) for Markov income
+
+AKMM, §7.6, p. 215, Figure 7.4(B): "In the long run, the distribution will converge to a
+stationary distribution." The state is `(a, y)` on `X = [a̲, b] × S` with `b ≥ ā` (assets above
+`ā` reach `[a̲, ā]` in finite time, `imf_enters_ergodic`), and the transition is
+`P((a, y), ·) = Σ_{y′} P(y, y′) δ_{(g(a, y), y′)}` (`imf_kernel`; a Markov kernel,
+`imf_kernel_isMarkov`).
+
+* An abstract hitting lemma (`imf_kernel_hit`): if the constraint binds on `[a̲, a̲ + δ)` in a
+  state `y₀`, if above `a̲ + δ` some state lowers assets by at least `η > 0`, and if every
+  transition probability is at least `p > 0`, then from every `(a, y)` the chain is at the atom
+  `(a̲, y₀)` after `N` steps with probability at least `pᴺ`: Doeblin's condition with an atom,
+  hence Miao's Condition M (Example 3.3.1), and by Theorem 3.3.1 there is a unique stationary
+  distribution `μs` and `T*ⁿλ₀ → μs` in total variation, geometrically, for every initial `λ₀`
+  (`imf_kernel_stationary`).
+* **The model** (`imf_stationary`): under the standing assumptions, `r > 0`, the condition on
+  `u` of `imf_abar_exists`, `u′` continuous and a transition matrix with positive entries, the
+  hypotheses of the hitting lemma are proved from the decision rules (the constraint binds near
+  `a̲` in the lowest-consumption state, `imf_binds_near_limit`; the lowest-consumption state
+  dissaves, `imf_min_dissave`, uniformly on compacts by continuity), so for every `b ≥ ā` the
+  distribution of `(a, y)` has a unique stationary distribution and converges to it from every
+  initial distribution on `[a̲, b] × S`.
+
+Departure: the book gives no argument. The usual monotone-mixing route (SLP Theorem 12.12, Miao
+Theorem 3.3.5) needs a transition that is monotone in `(a, y)`, i.e. a savings rule increasing
+in income and a stochastically monotone `P`, which Markov income does not imply. The binding
+borrowing constraint supplies an accessible atom instead, which gives the stronger conclusion
+(total variation, geometric rate).
+-/
+
+namespace AKMM.Uncertainty
+
+open MeasureTheory ProbabilityTheory Filter Topology Set Miao.MarkovProcesses
+open scoped ENNReal
+
+variable {S : Type*} [Fintype S] [MeasurableSpace S] [MeasurableSingletonClass S]
+
+/-- The next state's asset level `g(a, y)` as a point of `[lo, hi]`. -/
+def imf_next {lo hi : ℝ} (g : S → ℝ → ℝ) (hmaps : ∀ y a, a ∈ Icc lo hi → g y a ∈ Icc lo hi)
+    (x : Icc lo hi × S) : Icc lo hi :=
+  ⟨g x.2 x.1, hmaps _ _ x.1.2⟩
+
+omit [Fintype S] in
+theorem imf_next_measurable [Countable S] {lo hi : ℝ} {g : S → ℝ → ℝ}
+    (hmaps : ∀ y a, a ∈ Icc lo hi → g y a ∈ Icc lo hi)
+    (hmeas : ∀ y, Measurable fun a : Icc lo hi => g y a) : Measurable (imf_next g hmaps) :=
+  (measurable_from_prod_countable_left (f := fun x : Icc lo hi × S => g x.2 x.1)
+    fun y => hmeas y).subtype_mk
+
+/-- AKMM, p. 215: the transition of `(a, y)`,
+`P((a, y), ·) = Σ_{y′} P(y, y′) δ_{(g(a, y), y′)}` on `[lo, hi] × S`. -/
+noncomputable def imf_kernel (P : S → S → ℝ) {lo hi : ℝ} (g : S → ℝ → ℝ)
+    (hmaps : ∀ y a, a ∈ Icc lo hi → g y a ∈ Icc lo hi)
+    (hmeas : ∀ y, Measurable fun a : Icc lo hi => g y a) :
+    Kernel (Icc lo hi × S) (Icc lo hi × S) :=
+  ⟨fun x => ∑ y', ENNReal.ofReal (P x.2 y') • Measure.dirac (imf_next g hmaps x, y'), by
+    refine Measure.measurable_of_measurable_coe _ fun s hs => ?_
+    simp only [Measure.coe_finsetSum, Finset.sum_apply, Measure.smul_apply, smul_eq_mul,
+      Measure.dirac_apply' _ hs]
+    refine Finset.measurable_sum _ fun y' _ => ?_
+    exact ((measurable_of_countable fun y => ENNReal.ofReal (P y y')).comp measurable_snd).mul
+      ((measurable_const.indicator hs).comp
+        ((imf_next_measurable hmaps hmeas).prodMk measurable_const))⟩
+
+variable {P : S → S → ℝ} {lo hi : ℝ} {g : S → ℝ → ℝ}
+  {hmaps : ∀ y a, a ∈ Icc lo hi → g y a ∈ Icc lo hi}
+  {hmeas : ∀ y, Measurable fun a : Icc lo hi => g y a}
+
+/-- Integrals against the transition: `∫ f dP((a, y), ·) = Σ_{y′} P(y, y′) f(g(a, y), y′)`. -/
+theorem imf_kernel_lintegral (x : Icc lo hi × S) {f : Icc lo hi × S → ℝ≥0∞}
+    (hf : Measurable f) :
+    ∫⁻ z, f z ∂(imf_kernel P g hmaps hmeas x) =
+      ∑ y', ENNReal.ofReal (P x.2 y') * f (imf_next g hmaps x, y') := by
+  change ∫⁻ z, f z ∂(∑ y', ENNReal.ofReal (P x.2 y') •
+    Measure.dirac (imf_next g hmaps x, y')) = _
+  rw [lintegral_finsetSum_measure]
+  refine Finset.sum_congr rfl fun y' _ => ?_
+  rw [lintegral_smul_measure, lintegral_dirac' _ hf, smul_eq_mul]
+
+/-- AKMM, p. 215: the transition is a Markov kernel when `P` is a stochastic matrix. -/
+theorem imf_kernel_isMarkov (hP : ∀ y y', 0 ≤ P y y') (hsum : ∀ y, ∑ y', P y y' = 1) :
+    IsMarkovKernel (imf_kernel P g hmaps hmeas) := by
+  refine ⟨fun x => ⟨?_⟩⟩
+  rw [← lintegral_one, imf_kernel_lintegral x measurable_const]
+  simp only [mul_one]
+  rw [← ENNReal.ofReal_sum_of_nonneg fun y' _ => hP x.2 y', hsum, ENNReal.ofReal_one]
+
+/-- One step of the chain: `Pⁿ⁺¹((a, y), A) ≥ P(y, y′)Pⁿ((g(a, y), y′), A)`. -/
+theorem imf_kpow_succ_ge (x : Icc lo hi × S) (y' : S) (n : ℕ) {A : Set (Icc lo hi × S)}
+    (hA : MeasurableSet A) :
+    ENNReal.ofReal (P x.2 y') * kpow (imf_kernel P g hmaps hmeas) n (imf_next g hmaps x, y') A ≤
+      kpow (imf_kernel P g hmaps hmeas) (n + 1) x A := by
+  change _ ≤ (kpow (imf_kernel P g hmaps hmeas) n ∘ₖ imf_kernel P g hmaps hmeas) x A
+  rw [Kernel.comp_apply' _ _ _ hA, imf_kernel_lintegral x (Kernel.measurable_coe _ hA)]
+  exact Finset.single_le_sum (f := fun y' => ENNReal.ofReal (P x.2 y') *
+    kpow (imf_kernel P g hmaps hmeas) n (imf_next g hmaps x, y') A)
+    (fun _ _ => bot_le) (Finset.mem_univ y')
+
+/-- **The hitting lemma.** Suppose `lo ≤ hi`, every `P(y, y′) ≥ p > 0`, the borrowing
+constraint binds on `[lo, lo + δ)` in state `y₀` (`g(a, y₀) = lo`), and for `a ≥ lo + δ` some
+state lowers assets by at least `η > 0`. Then there is `N ≥ 1` with
+`Pᴺ((a, y), {(lo, y₀)}) ≥ pᴺ` for every state `(a, y)`. -/
+theorem imf_kernel_hit (hlo : lo ≤ hi) {p : ℝ} (hp : ∀ y y', p ≤ P y y') {y₀ : S} {δ η : ℝ}
+    (hη : 0 < η) (h0 : ∀ a ∈ Icc lo hi, a < lo + δ → g y₀ a = lo)
+    (hdesc : ∀ a ∈ Icc lo hi, lo + δ ≤ a → ∃ y, g y a ≤ a - η) :
+    ∃ N, 1 ≤ N ∧ ∀ x, ENNReal.ofReal p ^ N ≤
+      kpow (imf_kernel P g hmaps hmeas) N x {((⟨lo, left_mem_Icc.2 hlo⟩ : Icc lo hi), y₀)} := by
+  set κ := imf_kernel P g hmaps hmeas
+  set xs : Icc lo hi × S := (⟨lo, left_mem_Icc.2 hlo⟩, y₀)
+  have hA : MeasurableSet ({xs} : Set (Icc lo hi × S)) := MeasurableSet.singleton xs
+  have hstep : ∀ (x : Icc lo hi × S) (y' : S) (n : ℕ),
+      ENNReal.ofReal p * kpow κ n (imf_next g hmaps x, y') {xs} ≤ kpow κ (n + 1) x {xs} :=
+    fun x y' n => (mul_le_mul' (ENNReal.ofReal_le_ofReal (hp x.2 y')) le_rfl).trans
+      (imf_kpow_succ_ge x y' n hA)
+  -- the atom is absorbing along `y₀`
+  have hnext0 : ∀ a : Icc lo hi, (a : ℝ) < lo + δ → imf_next g hmaps (a, y₀) = xs.1 :=
+    fun a ha => Subtype.ext (h0 a a.2 ha)
+  have hstay : ∀ n, ENNReal.ofReal p ^ n ≤ kpow κ n xs {xs} := by
+    intro n
+    induction n with
+    | zero =>
+      rw [pow_zero]
+      change _ ≤ (Kernel.id : Kernel (Icc lo hi × S) _) xs {xs}
+      rw [Kernel.id_apply, Measure.dirac_apply_of_mem (Set.mem_singleton xs)]
+    | succ n ih =>
+      by_cases hδ : lo < lo + δ
+      · have := hstep xs y₀ n
+        rw [hnext0 xs.1 hδ] at this
+        rw [pow_succ']
+        exact (mul_le_mul' le_rfl ih).trans this
+      · -- `δ ≤ 0`: the descent hypothesis applies at `lo`, which is impossible
+        obtain ⟨y, hy⟩ := hdesc lo (left_mem_Icc.2 hlo) (by linarith)
+        have := (hmaps y lo (left_mem_Icc.2 hlo)).1
+        linarith
+  -- descending induction on the height of the asset level
+  have hC : ∀ k : ℕ, ∀ a : Icc lo hi, (a : ℝ) < lo + δ + k * η →
+      ∃ y, ∀ n, k + 1 ≤ n → ENNReal.ofReal p ^ n ≤ kpow κ n (a, y) {xs} := by
+    intro k
+    induction k with
+    | zero =>
+      intro a ha
+      refine ⟨y₀, fun n hn => ?_⟩
+      obtain ⟨m, rfl⟩ : ∃ m, n = m + 1 := ⟨n - 1, by omega⟩
+      have := hstep (a, y₀) y₀ m
+      rw [hnext0 a (by simpa using ha)] at this
+      rw [pow_succ']
+      exact (mul_le_mul' le_rfl (hstay m)).trans this
+    | succ k ih =>
+      intro a ha
+      by_cases hlow : (a : ℝ) < lo + δ + k * η
+      · obtain ⟨y, hy⟩ := ih a hlow
+        exact ⟨y, fun n hn => hy n (by omega)⟩
+      · push Not at hlow
+        have hkη : 0 ≤ (k : ℝ) * η := by positivity
+        obtain ⟨y, hy⟩ := hdesc a a.2 (by linarith)
+        have hlt : (imf_next g hmaps (a, y) : ℝ) < lo + δ + k * η := by
+          change g y a < _
+          push_cast at ha
+          linarith
+        obtain ⟨y', hy'⟩ := ih _ hlt
+        refine ⟨y, fun n hn => ?_⟩
+        obtain ⟨m, rfl⟩ : ∃ m, n = m + 1 := ⟨n - 1, by omega⟩
+        rw [pow_succ']
+        exact (mul_le_mul' le_rfl (hy' m (by omega))).trans (hstep (a, y) y' m)
+  obtain ⟨K, hK⟩ := exists_nat_gt ((hi - lo - δ) / η)
+  have hK' : hi < lo + δ + K * η := by
+    rw [div_lt_iff₀ hη] at hK; linarith
+  refine ⟨K + 2, by omega, fun x => ?_⟩
+  obtain ⟨y', hy'⟩ := hC K (imf_next g hmaps x) (lt_of_le_of_lt (imf_next g hmaps x).2.2 hK')
+  rw [pow_succ']
+  exact (mul_le_mul' le_rfl (hy' (K + 1) le_rfl)).trans (hstep x y' (K + 1))
+
+/-- **AKMM, Fig. 7.4(B), p. 215 (abstract form): a unique stationary distribution and
+convergence to it.** Under the hypotheses of `imf_kernel_hit` (with `P` stochastic and `S`
+nonempty) there is a unique invariant probability measure `μs` of the transition, and for every
+initial distribution `λ₀` the distributions `T*ⁿλ₀` converge to `μs` in total variation, with
+`dTV(T*ⁿλ₀, μs) ≤ (1 − ε)^⌊n/N⌋` for some `0 < ε < 1` and `N ≥ 1`. -/
+theorem imf_kernel_stationary [Nonempty S] (hP : ∀ y y', 0 ≤ P y y')
+    (hsum : ∀ y, ∑ y', P y y' = 1) (hlo : lo ≤ hi) {p : ℝ} (hp0 : 0 < p)
+    (hp : ∀ y y', p ≤ P y y') {y₀ : S} {δ η : ℝ} (hη : 0 < η)
+    (h0 : ∀ a ∈ Icc lo hi, a < lo + δ → g y₀ a = lo)
+    (hdesc : ∀ a ∈ Icc lo hi, lo + δ ≤ a → ∃ y, g y a ≤ a - η) :
+    ∃ μs : Measure (Icc lo hi × S), IsProbabilityMeasure μs ∧
+      adjointOp (imf_kernel P g hmaps hmeas) μs = μs ∧
+      (∀ ν : Measure (Icc lo hi × S), IsProbabilityMeasure ν →
+        adjointOp (imf_kernel P g hmaps hmeas) ν = ν → ν = μs) ∧
+      (∃ ε : ℝ, ∃ N : ℕ, 0 < ε ∧ ε < 1 ∧ 1 ≤ N ∧ ∀ (l₀ : Measure (Icc lo hi × S))
+        [IsProbabilityMeasure l₀] (n : ℕ),
+          dTV (adjointOp (kpow (imf_kernel P g hmaps hmeas) n) l₀) μs ≤ (1 - ε) ^ (n / N)) ∧
+      ∀ l₀ : Measure (Icc lo hi × S), IsProbabilityMeasure l₀ →
+        ConvStrongly (fun n => adjointOp (kpow (imf_kernel P g hmaps hmeas) n) l₀) μs := by
+  set κ := imf_kernel P g hmaps hmeas
+  have hκ : IsMarkovKernel κ := imf_kernel_isMarkov hP hsum
+  obtain ⟨N, hN, hhit⟩ := imf_kernel_hit (hmaps := hmaps) (hmeas := hmeas) hlo hp hη h0 hdesc
+  set xs : Icc lo hi × S := (⟨lo, left_mem_Icc.2 hlo⟩, y₀)
+  have hreal : ∀ x, p ^ N ≤ (kpow κ N x).real {xs} := by
+    intro x
+    have := gp_isMarkov_kpow (κ := κ) N
+    have h1 := ENNReal.toReal_mono (measure_ne_top _ _) (hhit x)
+    rwa [ENNReal.toReal_pow, ENNReal.toReal_ofReal hp0.le] at h1
+  set ε := p ^ N / 2
+  have hε : 0 < ε := by positivity
+  have hεlt : ∀ x, ε < (kpow κ N x).real {xs} := fun x => by
+    have := hreal x; have : 0 < p ^ N := by positivity
+    change p ^ N / 2 < _
+    linarith
+  have hε1 : ε < 1 := by
+    have := gp_isMarkov_kpow (κ := κ) N
+    have h1 := hεlt xs
+    have h2 : (kpow κ N xs).real {xs} ≤ 1 := measureReal_le_one
+    linarith
+  have hM : ConditionMFor κ N ε := example_3_3_1 hN hε hεlt
+  have hX : Nonempty (Icc lo hi × S) := ⟨xs⟩
+  obtain ⟨μs, hμs, hinv, -, hrate⟩ := theorem_3_3_1_invariant hM
+  have hlim : Tendsto (fun n : ℕ => (1 - ε) ^ (n / N)) atTop (𝓝 0) :=
+    (tendsto_pow_atTop_nhds_zero_of_lt_one (by linarith) (by linarith)).comp
+      (Nat.tendsto_div_const_atTop (by omega))
+  refine ⟨μs, hμs, hinv, fun ν hν hνinv => ?_, ⟨ε, N, hε, hε1, hN, hrate⟩, fun l₀ hl₀ => ?_⟩
+  · have hfix : ∀ n, adjointOp (kpow κ n) ν = ν := fun n => by
+      rw [← gp_adjointOp_iterate]; exact Function.iterate_fixed hνinv n
+    have hle : ∀ n, dTV ν μs ≤ (1 - ε) ^ (n / N) := fun n => by
+      have := hrate ν n; rwa [hfix n] at this
+    have h0' : dTV ν μs ≤ 0 := ge_of_tendsto' hlim hle
+    exact gp_eq_of_tvDist_eq_zero (by rw [gp_tvDist_eq_two_mul_dTV]; linarith)
+  · exact squeeze_zero (fun n => by
+      have := gp_isProb_adjoint (κ := κ) n l₀
+      exact gp_dTV_nonneg _ _) (fun n => hrate l₀ n) hlim
+
+/-- **AKMM, Fig. 7.4, pp. 214–215: the ergodic set and convergence to the stationary
+distribution, for Markov income.** Under the standing assumptions of §7.6 (`imf_Standing`),
+with `r > 0`, `u′` continuous, `β(1 + r)u′(c) < u′(c + D)` for large `c` (`D` bounding the income
+spread; e.g. CRRA, `imf_crra_spread`) and a transition matrix with positive entries, there is
+`ā ≥ a̲` with `g(a, y) < a` for `a ≥ ā`, and for every `b ≥ ā` the set `[a̲, b] × S` is invariant
+and the transition of `(a, y)` on it has a unique stationary distribution `μs`, to which the
+distribution converges in total variation from every initial distribution. -/
+theorem imf_stationary [Nonempty S] {u u' : ℝ → ℝ} {β r : ℝ} {inc : S → ℝ} {abar : ℝ}
+    {V V1 : S → ℝ → ℝ} (h : imf_Standing u u' β r P inc abar V V1 g)
+    (hcont : ContinuousOn u' (Ioi 0)) (hr0 : 0 < r) {D : ℝ} (hD : ∀ y y', inc y - inc y' ≤ D)
+    (hU : ∃ C, ∀ c, C ≤ c → 0 < c → β * (1 + r) * u' c < u' (c + D))
+    (hPpos : ∀ y y', 0 < P y y') :
+    ∃ ab, abar ≤ ab ∧ (∀ a, ab ≤ a → ∀ y, g y a < a) ∧ ∀ b, ab ≤ b →
+      (∀ y a, a ∈ Icc abar b → g y a ∈ Icc abar b) ∧
+      (∀ y, Measurable fun a : Icc abar b => g y a) ∧
+      ∀ (hmaps : ∀ y a, a ∈ Icc abar b → g y a ∈ Icc abar b)
+        (hmeas : ∀ y, Measurable fun a : Icc abar b => g y a),
+        IsMarkovKernel (imf_kernel P g hmaps hmeas) ∧
+        ∃ μs : Measure (Icc abar b × S), IsProbabilityMeasure μs ∧
+          adjointOp (imf_kernel P g hmaps hmeas) μs = μs ∧
+          (∀ ν : Measure (Icc abar b × S), IsProbabilityMeasure ν →
+            adjointOp (imf_kernel P g hmaps hmeas) ν = ν → ν = μs) ∧
+          ∀ l₀ : Measure (Icc abar b × S), IsProbabilityMeasure l₀ →
+            ConvStrongly (fun n => adjointOp (kpow (imf_kernel P g hmaps hmeas) n) l₀) μs := by
+  obtain ⟨ab, hab0, hab⟩ := imf_abar_exists h hr0 hD hU
+  refine ⟨ab, hab0, hab, fun b hb => ?_⟩
+  have hb0 : abar ≤ b := hab0.trans hb
+  refine ⟨fun y a ha => ⟨(imf_feasible h ha.1).1, (imf_g_mono h y ha.1 ha.2).trans
+      (hab b hb y).le⟩,
+    fun y => ((imf_g_continuousOn h y).mono Icc_subset_Ici_self).domRestrict.measurable,
+    fun hmaps hmeas => ⟨imf_kernel_isMarkov h.2.2.2.1 h.2.2.2.2.1, ?_⟩⟩
+  obtain ⟨y₀, hy₀⟩ := imf_exists_min_state r inc g abar
+  obtain ⟨δ, hδ, hbind⟩ := imf_binds_near_limit h hcont hy₀
+  obtain ⟨z, hz⟩ := Finite.exists_min fun z : S × S => P z.1 z.2
+  have hdesc' : ∃ η, 0 < η ∧ ∀ a ∈ Icc abar b, abar + δ ≤ a → ∃ y, g y a ≤ a - η := by
+    by_cases hne : (Icc (abar + δ) b).Nonempty
+    · set d : ℝ → ℝ := fun a => Finset.univ.sup' Finset.univ_nonempty fun y => a - g y a
+        with hd
+      have hdc : ContinuousOn d (Icc (abar + δ) b) :=
+        ContinuousOn.finset_sup'_apply _ fun y _ => continuousOn_id.sub
+          ((imf_g_continuousOn h y).mono fun a ha => show abar ≤ a by linarith [ha.1])
+      obtain ⟨a₀, ha₀, hmin⟩ := isCompact_Icc.exists_isMinOn hne hdc
+      have hd0 : 0 < d a₀ := by
+        obtain ⟨ys, hys⟩ := imf_exists_min_state r inc g a₀
+        have h1 := (imf_min_dissave h (by linarith [ha₀.1]) hys).2 (by linarith [ha₀.1])
+        have h2 : a₀ - g ys a₀ ≤ d a₀ :=
+          Finset.le_sup' (f := fun y => a₀ - g y a₀) (Finset.mem_univ ys)
+        linarith
+      refine ⟨d a₀, hd0, fun a ha haδ => ?_⟩
+      obtain ⟨y, -, hy⟩ := Finset.exists_mem_eq_sup' Finset.univ_nonempty fun y => a - g y a
+      have hle : d a₀ ≤ d a := hmin (show a ∈ Icc (abar + δ) b from ⟨haδ, ha.2⟩)
+      refine ⟨y, ?_⟩
+      have : d a = a - g y a := hy
+      linarith
+    · exact ⟨1, one_pos, fun a ha haδ => absurd ⟨a, haδ, ha.2⟩ hne⟩
+  obtain ⟨η, hη, hdesc⟩ := hdesc'
+  obtain ⟨μs, hμs, hinv, huniq, -, hconv⟩ := imf_kernel_stationary (hmaps := hmaps) (hmeas := hmeas)
+    h.2.2.2.1 h.2.2.2.2.1 hb0 (hPpos z.1 z.2) (fun y y' => hz (y, y')) hη
+    (fun a ha hlt => hbind a ha.1 hlt) hdesc
+  exact ⟨μs, hμs, hinv, huniq, hconv⟩
+
+end AKMM.Uncertainty
+
+/-
+Copyright (c) 2026 Robert Kirkby. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Robert Kirkby
+-/
+
+/-!
+# A solved instance of the Figure 7.4 model
+
+AKMM, §7.6, pp. 213–215. A two-state Markov income process (as in Figure 7.4), not i.i.d.:
+`y ∈ {1, 2}`, `P = [3/4 1/4; 1/4 3/4]`, `r = 1` (`q = 1/2`), `β = 1/4` (`β(1 + r) = 1/2`),
+`a̲ = 0` and `u(c) = c + log c` (`u′(c) = 1 + 1/c`). The consumer is impatient enough that the
+borrowing constraint binds everywhere: `g(a, y) = 0` and `V(a, y) = u(a + y) + w_y`, with
+`w = (I − βP)⁻¹βPU`, `U_y = u(y)`, solve the Bellman equation (`imf_example_bellman`, proved by
+the tangent inequality for `u`), and all the standing assumptions and the extra hypotheses of
+`imf_stationary` hold (`imf_example_standing`, `imf_example_hyps`), so that theorem's
+conclusions hold for this economy (`imf_example_stationary`): none of the results of
+`IncomeFluctuation` and `IncomeFluctuationStationary` is vacuous.
+
+The instance also shows that the figure's picture of the high-income rule, "an intercept above
+the 45 degree line" and accumulation "up to the point `ā` where the upper line crosses the
+45-degree line", is a feature of the parameters behind the figure, not of the model: here every
+state dissaves above `a̲` and the ergodic set is `{a̲}` (`imf_example_no_accumulation`).
+-/
+
+namespace AKMM.Uncertainty
+
+open Real Set
+
+/-- The example's utility `u(c) = c + log c`. -/
+noncomputable def imf_exU (c : ℝ) : ℝ := c + Real.log c
+
+/-- The example's marginal utility `u′(c) = 1 + 1/c`. -/
+noncomputable def imf_exDU (c : ℝ) : ℝ := 1 + c⁻¹
+
+/-- The example's income levels `y ∈ {1, 2}`. -/
+def imf_exInc : Fin 2 → ℝ := ![1, 2]
+
+/-- The example's transition matrix `P = [3/4 1/4; 1/4 3/4]` (persistent, not i.i.d.). -/
+noncomputable def imf_exP : Fin 2 → Fin 2 → ℝ := ![![3 / 4, 1 / 4], ![1 / 4, 3 / 4]]
+
+/-- The constants `w = (I − βP)⁻¹βPU` of the value function. -/
+noncomputable def imf_exW : Fin 2 → ℝ :=
+  ![(5 * imf_exU 1 + 2 * imf_exU 2) / 21, (2 * imf_exU 1 + 5 * imf_exU 2) / 21]
+
+/-- The example's value function `V(a, y) = u(a + y) + w_y`. -/
+noncomputable def imf_exV (y : Fin 2) (a : ℝ) : ℝ := imf_exU (a + imf_exInc y) + imf_exW y
+
+/-- Its derivative `V₁(a, y) = 1 + 1/(a + y)`. -/
+noncomputable def imf_exV1 (y : Fin 2) (a : ℝ) : ℝ := imf_exDU (a + imf_exInc y)
+
+/-- The example's savings rule `g(a, y) = a̲ = 0`. -/
+def imf_exG (_ : Fin 2) (_ : ℝ) : ℝ := 0
+
+theorem imf_exInc_ge (y : Fin 2) : 1 ≤ imf_exInc y ∧ imf_exInc y ≤ 2 := by
+  fin_cases y <;> norm_num [imf_exInc]
+
+/-- The tangent inequality `u(x) ≤ u(x₀) + (x − x₀) + (x − x₀)/x₀` for `u = c + log c`. -/
+theorem imf_exU_tangent {x x₀ : ℝ} (hx : 0 < x) (hx₀ : 0 < x₀) :
+    imf_exU x ≤ imf_exU x₀ + (x - x₀) + (x - x₀) / x₀ := by
+  have h := Real.log_le_sub_one_of_pos (div_pos hx hx₀)
+  rw [Real.log_div hx.ne' hx₀.ne'] at h
+  have : x / x₀ - 1 = (x - x₀) / x₀ := by field_simp
+  unfold imf_exU
+  linarith
+
+/-- The example's `(V, g)` solve the Bellman equation of p. 213 with `β = 1/4`, `q = 1/(1 + 1)`,
+`a̲ = 0`. -/
+theorem imf_example_bellman :
+    im_Bellman imf_exU (1 / 4) (1 / (1 + 1)) imf_exP imf_exInc 0 imf_exV imf_exG := by
+  intro y a ha
+  obtain ⟨hy1, hy2⟩ := imf_exInc_ge y
+  refine ⟨⟨le_rfl, by simp only [imf_exG]; linarith⟩, ?_, fun a' ha' hfeas => ?_⟩
+  · simp only [imf_exV, imf_exG, Fin.sum_univ_two, zero_add]
+    fin_cases y <;>
+      simp [imf_exP, imf_exW, imf_exInc] <;> ring
+  · have hc0 : 0 < a + imf_exInc y := by linarith
+    have t0 := imf_exU_tangent (x := a + imf_exInc y - 1 / (1 + 1) * a') (by linarith) hc0
+    have t1 := imf_exU_tangent (x := a' + 1) (x₀ := 1) (by linarith) one_pos
+    have t2 := imf_exU_tangent (x := a' + 2) (x₀ := 2) (by linarith) two_pos
+    have hneg : (a + imf_exInc y - 1 / (1 + 1) * a' - (a + imf_exInc y)) / (a + imf_exInc y) ≤ 0 :=
+      div_nonpos_of_nonpos_of_nonneg (by linarith) hc0.le
+    simp only [imf_exV, Fin.sum_univ_two]
+    fin_cases y <;>
+      simp only [imf_exP, imf_exInc, imf_exW, Fin.zero_eta, Fin.mk_one, Fin.isValue,
+        Matrix.cons_val_zero, Matrix.cons_val_one] at * <;>
+      norm_num at t1 t2 ⊢ <;> linarith
+
+/-- The example satisfies the standing assumptions of §7.6 (`imf_Standing`). -/
+theorem imf_example_standing :
+    imf_Standing imf_exU imf_exDU (1 / 4) 1 imf_exP imf_exInc 0 imf_exV imf_exV1 imf_exG := by
+  refine ⟨by norm_num, by norm_num, by norm_num, fun y y' => ?_, fun y => ?_,
+    imf_example_bellman, fun c hc => ?_, fun c hc => ?_, fun c hc c' hc' hlt => ?_,
+    fun y a ha => ?_, fun y a ha b hb hab => ?_⟩
+  · fin_cases y <;> fin_cases y' <;> norm_num [imf_exP]
+  · fin_cases y <;> norm_num [imf_exP, Fin.sum_univ_two]
+  · exact (hasDerivAt_id c).add (Real.hasDerivAt_log hc.ne')
+  · unfold imf_exDU; positivity
+  · unfold imf_exDU
+    linarith [inv_strictAntiOn hc hc' hlt]
+  · obtain ⟨hy1, -⟩ := imf_exInc_ge y
+    have hpos : 0 < a + imf_exInc y := by linarith
+    have := ((hasDerivAt_id a).add_const (imf_exInc y)).add
+      (Real.hasDerivAt_log hpos.ne' |>.comp a ((hasDerivAt_id a).add_const (imf_exInc y)))
+    have h2 := this.add_const (imf_exW y)
+    convert h2 using 1
+    · funext x; simp only [imf_exV, imf_exU]; rfl
+    · simp only [imf_exV1, imf_exDU, mul_one]
+  · obtain ⟨hy1, -⟩ := imf_exInc_ge y
+    simp only [mem_Ici] at ha hb
+    unfold imf_exV1 imf_exDU
+    have := inv_anti₀ (by linarith : 0 < a + imf_exInc y) (by linarith : a + imf_exInc y ≤
+      b + imf_exInc y)
+    linarith
+
+/-- The example satisfies the extra hypotheses of `imf_stationary`: `u′` continuous, `r = 1 > 0`,
+income spread `D = 1`, `β(1 + r)u′(c) < u′(c + 1)` for `c ≥ 2`, positive transition
+probabilities. -/
+theorem imf_example_hyps :
+    ContinuousOn imf_exDU (Ioi 0) ∧ (0 : ℝ) < 1 ∧
+      (∀ y y', imf_exInc y - imf_exInc y' ≤ 1) ∧
+      (∃ C, ∀ c, C ≤ c → 0 < c → 1 / 4 * (1 + 1) * imf_exDU c < imf_exDU (c + 1)) ∧
+      ∀ y y', 0 < imf_exP y y' := by
+  refine ⟨continuousOn_const.add (continuousOn_inv₀.mono fun c hc => ne_of_gt hc), one_pos,
+    fun y y' => ?_, ⟨2, fun c hc hc0 => ?_⟩, fun y y' => ?_⟩
+  · linarith [imf_exInc_ge y, imf_exInc_ge y']
+  · unfold imf_exDU
+    have h1 : c⁻¹ ≤ 1 / 2 := by rw [inv_eq_one_div]; exact one_div_le_one_div_of_le two_pos hc
+    have h2 : 0 < (c + 1)⁻¹ := by positivity
+    linarith
+  · fin_cases y <;> fin_cases y' <;> norm_num [imf_exP]
+
+/-- **AKMM, Fig. 7.4, pp. 214–215, for the example**: `imf_stationary` applies, so there is an
+upper bound `ā` and, on every `[0, b] × {1, 2}` with `b ≥ ā`, a unique stationary distribution
+to which the distribution of `(a, y)` converges in total variation. -/
+theorem imf_example_stationary :
+    ∃ ab, 0 ≤ ab ∧ (∀ a, ab ≤ a → ∀ y, imf_exG y a < a) ∧ ∀ b, ab ≤ b →
+      (∀ y a, a ∈ Icc 0 b → imf_exG y a ∈ Icc 0 b) ∧
+      (∀ y, Measurable fun a : Icc (0 : ℝ) b => imf_exG y a) ∧
+      ∀ (hmaps : ∀ y a, a ∈ Icc 0 b → imf_exG y a ∈ Icc 0 b)
+        (hmeas : ∀ y, Measurable fun a : Icc (0 : ℝ) b => imf_exG y a),
+        ProbabilityTheory.IsMarkovKernel (imf_kernel imf_exP imf_exG hmaps hmeas) ∧
+        ∃ μs : MeasureTheory.Measure (Icc (0 : ℝ) b × Fin 2),
+          MeasureTheory.IsProbabilityMeasure μs ∧
+          Miao.MarkovProcesses.adjointOp (imf_kernel imf_exP imf_exG hmaps hmeas) μs = μs ∧
+          (∀ ν : MeasureTheory.Measure (Icc (0 : ℝ) b × Fin 2),
+            MeasureTheory.IsProbabilityMeasure ν →
+            Miao.MarkovProcesses.adjointOp (imf_kernel imf_exP imf_exG hmaps hmeas) ν = ν →
+              ν = μs) ∧
+          ∀ l₀ : MeasureTheory.Measure (Icc (0 : ℝ) b × Fin 2),
+            MeasureTheory.IsProbabilityMeasure l₀ →
+            Miao.MarkovProcesses.ConvStrongly (fun n => Miao.MarkovProcesses.adjointOp
+              (Miao.MarkovProcesses.kpow (imf_kernel imf_exP imf_exG hmaps hmeas) n) l₀) μs := by
+  obtain ⟨hc, hr, hD, hU, hP⟩ := imf_example_hyps
+  exact imf_stationary imf_example_standing hc hr hD hU hP
+
+/-- AKMM, p. 214 (correction): the high-income rule need not lie above the 45-degree line. In
+the example (which satisfies every assumption of §7.6) the constraint binds in both income
+states, `g(a, y) = a̲ = 0 < a` for all `a > 0`, so no state accumulates and the ergodic set is
+`{a̲}`. -/
+theorem imf_example_no_accumulation :
+    imf_Standing imf_exU imf_exDU (1 / 4) 1 imf_exP imf_exInc 0 imf_exV imf_exV1 imf_exG ∧
+      (∀ y, imf_exG y 0 = 0) ∧ ∀ a, 0 < a → ∀ y, imf_exG y a < a :=
+  ⟨imf_example_standing, fun _ => rfl, fun _ ha _ => ha⟩
 
 end AKMM.Uncertainty
 
@@ -3530,3 +4469,50 @@ set_option linter.style.longLine false
 #print axioms AKMM.Uncertainty.im_envelope
 #print axioms AKMM.Uncertainty.im_envelope_boundary
 #print axioms AKMM.Uncertainty.im_euler
+#print axioms AKMM.Uncertainty.imf_Standing
+#print axioms AKMM.Uncertainty.imf_c
+#print axioms AKMM.Uncertainty.imf_feasible
+#print axioms AKMM.Uncertainty.imf_g_eq
+#print axioms AKMM.Uncertainty.imf_foc
+#print axioms AKMM.Uncertainty.imf_W_anti
+#print axioms AKMM.Uncertainty.imf_g_mono
+#print axioms AKMM.Uncertainty.imf_c_mono
+#print axioms AKMM.Uncertainty.imf_c_lipschitz
+#print axioms AKMM.Uncertainty.imf_g_lipschitz
+#print axioms AKMM.Uncertainty.imf_g_continuousOn
+#print axioms AKMM.Uncertainty.imf_c_continuousOn
+#print axioms AKMM.Uncertainty.imf_euler_eq
+#print axioms AKMM.Uncertainty.imf_next_mu_le
+#print axioms AKMM.Uncertainty.imf_min_dissave
+#print axioms AKMM.Uncertainty.imf_exists_min_state
+#print axioms AKMM.Uncertainty.imf_c_unbounded
+#print axioms AKMM.Uncertainty.imf_crra_spread
+#print axioms AKMM.Uncertainty.imf_abar_exists
+#print axioms AKMM.Uncertainty.imf_abar_exists_neg
+#print axioms AKMM.Uncertainty.imf_ergodic_invariant
+#print axioms AKMM.Uncertainty.imf_enters_ergodic
+#print axioms AKMM.Uncertainty.imf_binds_near_limit
+#print axioms AKMM.Uncertainty.imf_next
+#print axioms AKMM.Uncertainty.imf_next_measurable
+#print axioms AKMM.Uncertainty.imf_kernel
+#print axioms AKMM.Uncertainty.imf_kernel_lintegral
+#print axioms AKMM.Uncertainty.imf_kernel_isMarkov
+#print axioms AKMM.Uncertainty.imf_kpow_succ_ge
+#print axioms AKMM.Uncertainty.imf_kernel_hit
+#print axioms AKMM.Uncertainty.imf_kernel_stationary
+#print axioms AKMM.Uncertainty.imf_stationary
+#print axioms AKMM.Uncertainty.imf_exU
+#print axioms AKMM.Uncertainty.imf_exDU
+#print axioms AKMM.Uncertainty.imf_exInc
+#print axioms AKMM.Uncertainty.imf_exP
+#print axioms AKMM.Uncertainty.imf_exW
+#print axioms AKMM.Uncertainty.imf_exV
+#print axioms AKMM.Uncertainty.imf_exV1
+#print axioms AKMM.Uncertainty.imf_exG
+#print axioms AKMM.Uncertainty.imf_exInc_ge
+#print axioms AKMM.Uncertainty.imf_exU_tangent
+#print axioms AKMM.Uncertainty.imf_example_bellman
+#print axioms AKMM.Uncertainty.imf_example_standing
+#print axioms AKMM.Uncertainty.imf_example_hyps
+#print axioms AKMM.Uncertainty.imf_example_stationary
+#print axioms AKMM.Uncertainty.imf_example_no_accumulation

@@ -114,3 +114,51 @@ are relative to `AKMM.Uncertainty`. Every book item is located in the [source ma
 
 18. **Definition 15.** The household's problem includes `k_{t+1} ≥ 0` (the book assumes it does
     not bind); the equilibrium results use `k_{t+1} > 0`.
+
+## Figure 7.4 (Markov income)
+
+19. **Figure 7.4(A), the decision rules (p. 214).** The book reads the properties of `g(a, y)`
+    off a computed figure for a two-state income process. They are proved for any finite-state
+    Markov income process under the standing assumptions of §7.6 (`imf_Standing`: `β ≥ 0`,
+    `1 + r > 0`, `β(1 + r) < 1`, `P` stochastic, `u′ > 0` strictly decreasing, `V(·, y)`
+    differentiable on `[a̲, ∞)` with nonincreasing derivative, i.e. concave; the book assumes the
+    existence and differentiability of `V`): `g` and `c` are nondecreasing in assets with slopes in
+    `[0, 1 + r]` and `[0, 1]` (`imf_g_mono`, `imf_c_mono`, `imf_g_lipschitz`, `imf_c_lipschitz`).
+    The low-income rule's position is proved for the state with the lowest consumption at `a`:
+    `g(a, y) ≤ a`, strictly for `a > a̲` (`imf_min_dissave`); it is the low-income state whenever
+    consumption increases with income, which Markov income alone does not guarantee. The bound
+    `ā` needs more than the text states: with `r > 0` it is proved under
+    `β(1 + r)u′(c) < u′(c + D)` for large `c` (`D` the income spread; it holds whenever
+    `u′(c + D)/u′(c) → 1`, e.g. CRRA, `imf_crra_spread`) (`imf_abar_exists`); with `r < 0` no
+    condition is needed (`imf_abar_exists_neg`); `r = 0` is not covered. The figure's `ā` satisfies
+    `g(a, y) < a` for all `a ≥ ā` in every state; `[a̲, ā]` is invariant
+    (`imf_ergodic_invariant`), and "they will continuously spend down their assets ... until
+    their assets reach `ā`" holds in the form: along every income history, assets are in
+    `[a̲, ā]` from some date on (`imf_enters_ergodic`). "The consumer spends down their savings
+    until it reaches the borrowing constraint": the constraint binds on an interval `[a̲, a̲ + δ)`
+    in the lowest-consumption state, so the limit is reached exactly (`imf_binds_near_limit`, with
+    `u′` continuous).
+
+20. **Figure 7.4(A), the high-income rule (p. 214).** "When income is high, the consumer
+    accumulates savings up to the point `ā` where the upper line crosses the 45-degree line" and
+    "the decision rule of high-income consumers has ... an intercept above the 45 degree line"
+    describe the parameters behind the figure, not the model. In the solved two-state Markov
+    economy of `IncomeFluctuationExample` (`u(c) = c + log c`, `β = 1/4`, `r = 1`, `y ∈ {1, 2}`,
+    `P = [3/4 1/4; 1/4 3/4]`), which satisfies every assumption, the constraint binds in both
+    states, `g(a, y) = a̲ < a` for all `a > a̲`, and the ergodic set is `{a̲}`
+    (`imf_example_no_accumulation`).
+
+21. **Figure 7.4(B), the stationary distribution (p. 215).** "In the long run, the distribution
+    will converge to a stationary distribution" is given without argument. It is proved for the
+    joint distribution of `(a, y)` on `[a̲, b] × S` for every `b ≥ ā` (assets above `b` are covered
+    path by path by correction 19), under the assumptions of correction 19 with `r > 0`, `u′`
+    continuous and a transition matrix with positive entries (`imf_stationary`): there is a unique
+    stationary distribution and the distribution converges to it in total variation, at a
+    geometric rate, from every initial distribution. The proof does not use the monotone mixing
+    condition (SLP Theorem 12.12, Miao Theorem 3.3.5, used by Miao's Proposition 8.3.1 for i.i.d.
+    income): on `(a, y)` the transition is monotone only if the savings rule is increasing in
+    income and `P` is stochastically monotone, which Markov income does not imply. Instead the
+    binding constraint makes `(a̲, y₀)` an atom reached from every state in `N` steps with
+    probability at least `pᴺ` (`imf_kernel_hit`), which is Miao's Condition M (Example 3.3.1),
+    and Theorem 3.3.1 gives the conclusion (`imf_kernel_stationary`). The model's hypotheses are
+    satisfied by a solved instance (`imf_example_stationary`).
