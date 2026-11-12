@@ -81,6 +81,33 @@ in the [source map](source-map.md).
     requires that `σ` not depend on hours, which the argument of (12.A.3) delivers
     (`eq_12_A_3`: `σ′ = 0`).
 
+12. **p. 358, Figure 12.6, the human-capital term "declines with age".** In the model of p. 357
+    (perfect foresight) backward induction gives `H_T = 0` and
+    `H_t − H_{t+1} = R^{−1}(κw₀ℓ_{t+1} − (R − 1)H_{t+1})` (`ikf_hc_last`, `ikf_hc_diff`). The
+    decline therefore holds for every nonnegative hours path when `R ≤ 1` (`ikf_hc_antitone`,
+    strict steps `ikf_hc_step_le_one`), and for any `R > 0` at every age from which later hours
+    do not exceed `ℓ_{t+1}` (`ikf_hc_step_peak`), in particular for constant hours, which is the
+    text's argument "as clear from the sum" (`ikf_hc_const_hours`). It is not true in general
+    when `R > 1` and hours rise steeply: with `T = 2`, `R = 10`, `β = 1/10`, `σ = 2`,
+    `ψ = γ = κ = w₀ = 1`, `τ = 0`, the plan `c ≡ 1`, `ℓ = (103/77, 20/7, 400/77)` satisfies
+    (12.41) and the Euler equation, is globally optimal for its lifetime budget, and has
+    `H₀ = 26/77 < H₁ = 40/77` (`ikf_hc_rises`).
+
+13. **p. 358, Figure 12.6, the shapes of the plotted profiles.** In the model of p. 357 the
+    wage `(1 + κΣ_{j<t}ℓ_j)w₀` never falls (`ikf_wage_step`), so the figure's late decline of the
+    wage (and of the return to work, which equals the wage at the end, `ikf_return_vs_wage`) is
+    not a feature of that model. Along any interior path satisfying (12.41) and the Euler
+    equation, hours are monotone whenever `R − 1` and `1 − βR` have the same weak sign:
+    nondecreasing if `R ≥ 1 ≥ βR`, strictly if `R > 1` or `βR < 1` (`ikf_hours_up`,
+    `ikf_hours_up_strict`); nonincreasing if `R ≤ 1 ≤ βR`, strictly if `R < 1` or `βR > 1`
+    (`ikf_hours_down`, `ikf_hours_down_strict`). A hump in hours can only arise when `R > 1` and
+    `βR > 1` or `R < 1` and `βR < 1`. At `R = β = 1` hours and the return to work are exactly
+    constant, the wage rises linearly and `H_t = κw₀ℓ₀(T − t)` (`ikf_flat`): the text's "hours
+    are relatively flat while wages grow steeply" holds exactly, and a regression of hours on
+    current wages gives elasticity `0` whatever `γ` (`ikf_flat_naive`). The hump, the late
+    falls and the magnitudes in the figure are calibrated features of the curves adapted from
+    Keane and Rogerson (2015) and stay unformalised.
+
 ## Minor slips
 
 1. **p. 348, (12.29)** omits the constant `−γκ` coming from `const_i` in (12.27)
@@ -139,3 +166,10 @@ in the [source map](source-map.md).
    the book's continuous time avoids), and the pointwise threshold (`il_rw_threshold`,
    `il_rw_life_cycle`). The heterogeneous-`ψ` result is proved for a density `f` and a local
    inverse `Q = F⁻¹` (`il_vtilde_deriv`).
+
+7. **Figure 12.6 (§12.7)** is analysed for perfect foresight, as (12.41) is (`eq_12_41`): the
+   hours results take as hypotheses (12.41) at every age `t ≤ T` with `λ_t = c_t^{−σ} > 0`,
+   interior hours `ℓ_t > 0`, and the Euler equation `λ_t = βRλ_{t+1}`. The counterexample
+   `ikf_hc_rises` is proved optimal directly (Lagrangian bound with the tangent of `u` and a
+   positive definite quadratic form in hours), since the learning-by-doing problem is not
+   concave in general.

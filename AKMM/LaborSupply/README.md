@@ -7,22 +7,24 @@ Alisdair McKay and Toshihiko Mukoyama, *Macroeconomics* (draft of December 2025)
 with Appendix 12.A (p. 849), cited by the draft's pages. Run the commands below from this
 directory. [Return to the library index](../../README.md).
 
-Chapter 12 builds the theory of labour supply from the static model to dynamic life-cycle
-models, balanced growth, taxes and business cycles, human capital, and the extensive margin.
-Every numbered equation the chapter derives and every precise claim is proved in the book's
-setting: the static optimum and the Marshallian, Hicksian, income and Frisch elasticities (along
-differentiable paths of optimal hours), two-stage budgeting, the estimation identities, the
-optimisation-friction thresholds, balanced-growth (KPR) preferences in both directions (the "only
-if" under a stated class, using AKMM Chapter 4's Theorem .4), Prescott's formula, the Imai–Keane
-condition, lotteries, Ljungqvist–Sargent, heterogeneous disutility and the Rogerson–Wallenius
-threshold (in finite-period versions). Not formalised: the facts, tables and figures, the
-empirical estimates, Chang–Kim and the other simulations. Eleven printed errors are corrected,
-among them footnotes 2 and 8, the constant of (12.6), the sign of the Hicksian compensation, the
-ordering limit `σ → ∞`, (12.37) itself (its `−1` puts it outside the KPR class), the appendix's
-(12.A.1)–(12.A.3), and Prescott's U.S./Italy ratio (1.19, not 1.42), each with a Lean
-counterexample or corrected statement, as recorded in [corrections](docs/corrections.md); every
-book item is located in the [source map](docs/source-map.md). The library contains
-**127 theorems**.
+Chapter 12 builds the theory of labour supply from the static model to dynamic life-cycle models,
+balanced growth, taxes and business cycles, human capital, and the extensive margin. Every numbered
+equation the chapter derives and every precise claim is proved in the book's setting: the static
+optimum and the Marshallian, Hicksian, income and Frisch elasticities (along differentiable paths of
+optimal hours), two-stage budgeting, the estimation identities, the optimisation-friction
+thresholds, balanced-growth (KPR) preferences in both directions (the "only if" under a stated
+class, using AKMM Chapter 4's Theorem .4), Prescott's formula, the Imai–Keane condition, lotteries,
+Ljungqvist–Sargent, heterogeneous disutility and the Rogerson–Wallenius threshold (in finite-period
+versions). The qualitative claims of Figure 12.6 (Imai–Keane life-cycle profiles) are proved by
+backward induction, with the decline of the human-capital term corrected (it needs `R ≤ 1` or
+falling hours; a proved optimum with `R > 1` has it rising). Not formalised: the facts, tables, the
+other figures, the empirical estimates, Chang–Kim and the other simulations. Eleven printed errors
+are corrected, among them footnotes 2 and 8, the constant of (12.6), the sign of the Hicksian
+compensation, the ordering limit `σ → ∞`, (12.37) itself (its `−1` puts it outside the KPR class),
+the appendix's (12.A.1)–(12.A.3), and Prescott's U.S./Italy ratio (1.19, not 1.42), and two claims
+read off Figure 12.6 are corrected; each comes with a Lean counterexample or corrected statement, as
+recorded in [corrections](docs/corrections.md); every book item is located in the [source
+map](docs/source-map.md). The library contains **151 theorems**.
 
 * **The static model** (§12.3.1): the unique interior optimum and (12.1) (`eq_12_1`); the
   differentiated condition (`st_path_identity`); (12.2)–(12.4) (`eq_12_2`, `eq_12_3`, `eq_12_4`),
@@ -51,6 +53,12 @@ book item is located in the [source map](docs/source-map.md). The library contai
 * **Taxes, cycles, human capital** (§12.6–12.7): Prescott (`eq_12_39`,
   `eq_12_39_us_italy`); income effects (`ti_effect_ratio`, `ti_subsistence`, `ti_sigma_gt_one`);
   (12.40) (`eq_12_40`, `ti_no_capital`); Imai–Keane (`ik_marginal_earnings`, `eq_12_41`).
+* **Figure 12.6, Imai–Keane profiles** (§12.7): backward induction for the human-capital term
+  (`ikf_hc_last`, `ikf_hc_succ`, `ikf_hc_diff`); wage and return to work (`ikf_wage_step`,
+  `ikf_return_vs_wage`); the decline of the human-capital term (`ikf_hc_antitone`,
+  `ikf_hc_step_peak`, `ikf_hc_const_hours`) and its failure for `R > 1` (`ikf_hc_rises`);
+  monotone hours (`ikf_hours_up_strict`, `ikf_hours_down_strict`); flat hours and return at
+  `R = β = 1` and the naive estimate (`ikf_flat`, `ikf_flat_naive`).
 * **Indivisible labour** (§12.8): lotteries and the infinite aggregate Frisch elasticity
   (`il_lottery`, `il_planner`, `il_frisch_infinite`); Ljungqvist–Sargent
   (`il_lagrange_suff`, `il_ljungqvist_sargent`); heterogeneous `ψ` (`il_vtilde_deriv`,
@@ -74,6 +82,7 @@ characterisation of balanced growth) and
 | [BalancedGrowth](AKMMLaborSupply/BalancedGrowth.lean) | 13 | (12.36)–(12.37), (12.A.1)–(12.A.3): KPR preferences (AKMM §12.5, pp. 352–353, p. 849) |
 | [TaxesCycles](AKMMLaborSupply/TaxesCycles.lean) | 12 | (12.38)–(12.41): Prescott, income effects, cycles, Imai–Keane (AKMM §12.6–12.7, pp. 353–359) |
 | [IndivisibleLabor](AKMMLaborSupply/IndivisibleLabor.lean) | 14 | (12.44): lotteries, Ljungqvist–Sargent, heterogeneity, Rogerson–Wallenius (AKMM §12.8, pp. 359–367) |
+| [HumanCapitalProfiles](AKMMLaborSupply/HumanCapitalProfiles.lean) | 24 | Figure 12.6: Imai–Keane life-cycle profiles, human-capital term, hours (AKMM §12.7, pp. 357–358) |
 
 ## Build and verify
 

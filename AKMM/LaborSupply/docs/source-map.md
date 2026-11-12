@@ -163,7 +163,14 @@ Appendix 12.A, p. 849. Page references are the draft's running heads. Lean names
 | p. 357 | Problem with `w_t = (1 + κΣ_{j<t}ℓ_j)w₀` | `ikWage`, `ikEarnings` |
 | p. 357 | Return to work = wage + human-capital term | `ik_marginal_earnings` |
 | p. 357, (12.41) | First-order condition | `eq_12_41` (perfect foresight) |
-| pp. 357–358, Figure 12.6 | Life-cycle profiles; human-capital term declining with age | not formalised: figure claim, deferred |
+| p. 357, Figure 12.6 | Human-capital term `H_t = κw₀Σ_{j=1}^{T−t}R^{−j}ℓ_{t+j}` and return to work `w_t + H_t` | `ikfHC`, `ikfReturn` (`HumanCapitalProfiles`) |
+| p. 358, Figure 12.6 | Backward induction: `H_T = 0`, `H_t = R^{−1}(κw₀ℓ_{t+1} + H_{t+1})`; wage rises by `κw₀ℓ_t` | `ikf_hc_last`, `ikf_hc_succ`, `ikf_hc_diff`, `ikf_wage_succ`, `ikf_hc_nonneg`, `ikf_geom` |
+| p. 358, Figure 12.6 | Wage never falls; return to work above the wage, equal to it at the end | `ikf_wage_step`, `ikf_return_vs_wage` (see corrections: the plotted late fall of the wage is not in the model) |
+| p. 358 | "the human capital term is high early on, but it declines with age" | corrected: `ikf_hc_antitone`, `ikf_hc_step_le_one` (`R ≤ 1`), `ikf_hc_step_peak` (declining phase of hours, any `R`), `ikf_hc_const_hours` ("as clear from the sum"); fails for `R > 1`: `ikf_hc_rises` |
+| p. 358, Figure 12.6 | Hours over the life cycle | `ikf_return_pos`, `ikf_hours_up`, `ikf_hours_up_strict`, `ikf_hours_down`, `ikf_hours_down_strict`; instances `ikf_instance_up`, `ikf_instance_down` |
+| p. 358 | "hours are relatively flat while wages grow steeply"; return to work "much flatter" | `ikf_flat` (`R = β = 1`: hours and return constant, wage linear up, `H` linear down to 0), `ikf_instance_flat` |
+| p. 358 | Naive estimate of `γ` from current wages understates it | `ikf_naive_gamma`, `ikf_flat_naive` (estimate `0` at `R = β = 1`) |
+| p. 358, Figure 12.6 | Hump in hours, fall of wages and hours late in life, magnitudes of the curves | not formalised: calibrated features of the plotted curves (see corrections) |
 | p. 358 | Bias of naive estimates; Frisch 0.4 to 2.0; ranking of elasticities | not formalised: quantitative claims from estimates |
 
 ## §12.8 Intensive and extensive margins (`IndivisibleLabor`)
