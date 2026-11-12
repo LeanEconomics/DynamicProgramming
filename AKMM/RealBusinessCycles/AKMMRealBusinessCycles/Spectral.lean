@@ -30,7 +30,8 @@ For an absolutely summable autocovariance sequence `γ : ℤ → ℝ`, the spect
 
 Departures: filters are finite (lead–lag polynomials with finitely many terms); the HP and
 band-pass filters are infinite two-sided filters, for which only the gain functions are formalised
-(`Gains`). The spectral representation theorem (Cramér) is not formalised.
+(`Gains`). The spectral representation theorem (Cramér) is proved in Hilbert-space form in
+`Herglotz`, `SpectralDensity` and `Cramer`.
 -/
 
 namespace AKMM.RealBusinessCycles

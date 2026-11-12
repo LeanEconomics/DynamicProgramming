@@ -28,7 +28,7 @@ pp. 863–867. Page references are the draft's running heads. Lean names are rel
 | p. 412 | Interior FOC `τ_t − λ(…) = Y_t`, `2 ≤ t ≤ T − 2` | corrected: `hp_bracket_eq`, `hp_foc_interior`; printed false: `hp_foc_printed_iff`, `hp_foc_printed_false` |
 | p. 411 | "In the limit as λ → ∞, the extracted trend converges to a linear function" | `hp_limit_ols` (the limit is the OLS linear trend `hpOLS`), with `hp_det_pos`, `hp_ols_normal`, `hp_pen_affine`, `hp_ols_pythagoras`, `hp_trend_bounds` |
 | p. 412 | "the filter may produce spurious results towards the beginning and end of the sample"; choice of λ | not formalised: informal remarks |
-| pp. 412–413 | Spectral representation `Yₜ = ∫A(ω)cos(ωt)dω + ∫B(ω)sin(ωt)dω` of any stationary process | not formalised: the Cramér representation (a stochastic integral) is beyond the text; stated without proof |
+| pp. 412–413 | Spectral representation `Yₜ = ∫A(ω)cos(ωt)dω + ∫B(ω)sin(ωt)dω` of any stationary process | beyond the text, proved in Hilbert-space form (correction 12): spectral measure `sden_spectral`, `sden_posDef`, `herg_herglotz`; the Kolmogorov isometry `cramIso`, `cram_iso_exp`, `cram_iso_range`, `cram_spectral_representation`; the orthogonal-increment measure `cramZ`, `cram_Z_inner`, `cram_Z_norm_sq`; real processes: `herg_symm_of_real`. The stochastic-integral notation and the real `A`, `B` form are a remark in `Cramer`, not formalised |
 | p. 412, footnote 5 | `sin(2πtf)` completes a cycle at `t = 2π` | corrected in prose (correction 5); no theorem |
 
 ## §14.3.2 Stylised facts
@@ -135,7 +135,7 @@ pp. 863–867. Page references are the draft's running heads. Lean names are rel
 | pp. 435–437, Figure 14.11, box | Interpretation; ML estimation; 70%/25% shares; jobless recoveries | not formalised: narrative, estimation, figure |
 | p. 438, §14.6.1 | Frontiers | not formalised: narrative |
 
-## Appendix 14.A (`Spectral`, `Gains`)
+## Appendix 14.A (`Spectral`, `Gains`, `Herglotz`, `SpectralDensity`, `Cramer`)
 
 | Source | Claim | Lean |
 | --- | --- | --- |
@@ -154,7 +154,10 @@ pp. 863–867. Page references are the draft's running heads. Lean names are rel
 | p. 865 | Ideal band-pass gain is 1 on the band, 0 otherwise | coefficients `appx_bandpass_coeff`, `appx_bandpass_coeff_zero` (not printed in the book) |
 | p. 865 | HP and first difference remove low frequencies more than high | `appx_gain_diff_mono`, `appx_hp_gain_mono` |
 | pp. 865–867, Figures 14.A.1–14.A.3, Tables 14.A.1–14.A.2 | Illustrations; Baxter–King and first-difference moments | not formalised: figures, data |
-| pp. 412–413 | Spectral representation theorem (Cramér) | not formalised: beyond the text |
+| pp. 412–413 (beyond the text) | Herglotz theorem: `γ` positive definite ⇔ `γ(h) = ∫e^{ihω}dF` for a finite measure `F`; `F` unique | `hergPosDef`, `herg_herglotz`, `herg_exists`, `herg_posDef_of_measure`, `herg_unique`, `herg_integral_eq_of_coeff`, `herg_conj`, `herg_symm_of_real`; Fejér construction `hergFejer`, `herg_fejer_eq`, `herg_fejer_nonneg`, `herg_fejer_coeff`, `herg_fejer_tendsto`, `herg_bound`, `herg_tendsto`, `hergLambda` (`Herglotz`) |
+| pp. 412–413, p. 863 (beyond the text) | Weakly stationary processes have a spectral measure; with `Σ∣γ∣ < ∞` it has the continuous density `(1/2π)Σγₕe^{−ihω} ≥ 0` | `sdenStationary`, `sden_posDef`, `sden_spectral`, `sdenSeries`, `sdenMeasure`, `sden_coeff`, `sden_series_nonneg`, `sden_measure_coeff`, `sden_density` (`SpectralDensity`) |
+| p. 863 (instance) | White noise and the AR(1): `γ(h) = ρ^{∣h∣}/(1 − ρ²)`, spectral density `1/(2π(1 − 2ρcos ω + ρ²))` | `sden_white_noise`, `sdenAR1`, `sden_ar1_summable`, `sden_ar1_series`, `sden_ar1_eq_normSq`, `sden_ar1_normSq_cos`, `sden_ar1_measure`, `sden_ar1_coeff`, `sden_ar1_posDef`; the process `sdenAR1Proc`, `sden_ar1_recursion`, `sden_ar1_stationary` |
+| pp. 412–413 (beyond the text) | Spectral representation theorem (Cramér), Hilbert-space form: the isometry `L²(F) ≅ H_X`, `e^{itω} ↦ Xₜ`; `Z(A) = V(1_A)` with `⟪Z(A), Z(B)⟫ = F(A ∩ B)` | `cramExp`, `cram_inner_exp`, `cram_dense`, `cramIso`, `cram_iso_exp`, `cram_iso_inner`, `cram_iso_unique`, `cram_iso_range`, `cramZ`, `cram_Z_inner`, `cram_Z_norm_sq`, `cram_Z_orth`, `cram_Z_union`, `cram_Z_univ`, `cram_spectral_representation` (`Cramer`) |
 
 ## Shared lemmas
 

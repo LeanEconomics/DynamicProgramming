@@ -76,6 +76,23 @@ the [source map](source-map.md).
    is "defined for each frequency ω in the interval `[0, π]`" but integrated over `[−π, π]`
    (`specC` is defined for all `ω`).
 
+12. **pp. 412–413, the spectral representation.** "It is possible to represent any stationary
+   process `Yₜ` as `Yₜ = ∫₀^π A(ω)cos(ωt)dω + ∫₀^π B(ω)sin(ωt)dω`, where for any `ω`, `A(ω)` and
+   `B(ω)` are random variables". Imprecise, stated without proof. It holds for weakly
+   (covariance-) stationary mean-zero processes with finite second moments, and the integrals are
+   stochastic integrals against orthogonal-increment random measures `dU(ω)`, `dW(ω)`, not
+   `dω`-integrals of random functions.
+   Proved here in Hilbert-space form, a result beyond the text: the autocovariance is positive
+   definite (`sden_posDef`); the Herglotz theorem gives a unique finite spectral measure `F`
+   (`herg_herglotz`, `herg_unique`), with continuous density `(1/2π)Σγₕe^{−ihω} ≥ 0` when
+   `Σ∣γₕ∣ < ∞` (`sden_density`); and the Kolmogorov isometry `V : L²(F) → H_X`, `e^{itω} ↦ Xₜ`, is
+   onto the closed span of the process (`cramIso`, `cram_iso_exp`, `cram_iso_range`,
+   `cram_iso_unique`), with `Z(A) = V(1_A)` of orthogonal increments, `⟪Z(A), Z(B)⟫ = F(A ∩ B)`
+   (`cram_Z_inner`, `cram_Z_norm_sq`, `cram_Z_orth`, `cram_Z_union`, `cram_Z_univ`). For real
+   processes `F` is symmetric (`herg_symm_of_real`) and folding `ω` onto `[0, π]` gives the book's
+   real form with `A(ω)dω`, `B(ω)dω` read as `dU`, `dW` (a remark in the `Cramer` docstring; the
+   stochastic-integral notation is not formalised).
+
 ## Departures
 
 * **Finite-state TFP.** The core RBC Bellman equation (`rbc_Bellman`) and the BCA investment
@@ -99,3 +116,9 @@ the [source map](source-map.md).
   (`ext_gov_perfect_subst`) and by `g` outside utility (`ext_gov_hours`).
 * **Investment wedge**: backed out one period at a time with a successor wedge constant across
   next period's states (`bca_investment_wedge`); with several states other choices exist.
+* **Spectral theory (beyond the text).** Processes take values in a complex Hilbert space `H`
+  (for instance mean-zero `L²(Ω, ℂ)`) and autocovariances are complex (`γ(h) = ⟪Xₜ, Xₜ₊ₕ⟫`);
+  the frequency domain is the circle `AddCircle T` with `T > 0` and characters
+  `e^{2πihx/T}` (`T = 2π` gives `e^{ihω}` on `(−π, π]`). The limit of the Fejér measures is
+  taken by Riesz–Markov–Kakutani (the Fejér functionals converge on all of `C(𝕋)`), not by
+  Prokhorov.

@@ -30,6 +30,12 @@ import Mathlib.Analysis.SpecialFunctions.Integrals.Basic
 import Mathlib.Analysis.SpecialFunctions.Sqrt
 import Mathlib.MeasureTheory.Integral.DominatedConvergence
 import Mathlib.Topology.Algebra.InfiniteSum.Ring
+import Mathlib.Analysis.Fourier.AddCircle
+import Mathlib.MeasureTheory.Integral.RieszMarkovKakutani.Real
+import Mathlib.MeasureTheory.Measure.HasOuterApproxClosed
+import Mathlib.Analysis.Normed.Group.Tannery
+import Mathlib.Analysis.Normed.Operator.Extend
+import Mathlib.MeasureTheory.Function.ContinuousMapDense
 set_option autoImplicit false
 
 /-
@@ -2219,7 +2225,8 @@ For an absolutely summable autocovariance sequence `γ : ℤ → ℝ`, the spect
 
 Departures: filters are finite (lead–lag polynomials with finitely many terms); the HP and
 band-pass filters are infinite two-sided filters, for which only the gain functions are formalised
-(`Gains`). The spectral representation theorem (Cramér) is not formalised.
+(`Gains`). The spectral representation theorem (Cramér) is proved in Hilbert-space form in
+`Herglotz`, `SpectralDensity` and `Cramer`.
 -/
 
 namespace AKMM.RealBusinessCycles
@@ -2437,6 +2444,1188 @@ theorem appx_transfer_normSq (J : Finset ℤ) (c : ℤ → ℝ) (ω : ℝ) :
 
 end AKMM.RealBusinessCycles
 
+/-
+Copyright (c) 2026 Robert Kirkby. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Robert Kirkby
+-/
+
+/-!
+# The Herglotz theorem
+
+AKMM, §14.3.1, pp. 412–413 (beyond the text).
+
+AKMM, §14.3.1, pp. 412–413 (a result beyond the text). The book states without proof that "any
+stationary process" is a random superposition of sines and cosines; the first half of that
+statement is the existence and uniqueness of the spectral measure, proved here.
+
+The circle is `AddCircle T` (`ℝ/Tℤ`, `T > 0`) with the characters `eₕ = fourier h`,
+`eₕ(x) = e^{2πihx/T}`; for `T = 2π` these are `e^{ihω}`, `ω ∈ (−π, π]`.
+
+* Positive definiteness (`hergPosDef`): `Σⱼₖ cⱼc̄ₖγ(j − k)` is real and `≥ 0` for every finite `c`.
+* **The Herglotz theorem** (`herg_herglotz`): `γ : ℤ → ℂ` is positive definite if and only if
+  `γ(h) = ∫ eₕ dF` for a finite positive measure `F` on the circle, and `F` is unique
+  (`herg_unique`).
+* Existence (`herg_exists`). The Fejér densities `f_N = Σ_{|h|<N}(1 − |h|/N)γ(h)e_{−h}` are the
+  quadratic forms `(1/N)Σ_{j,k<N}cⱼc̄ₖγ(j − k)` with `cⱼ = e_{−j}(x)` (`herg_fejer_eq`, by
+  `herg_sum_pairs`, `herg_card_pairs`), hence nonnegative (`herg_fejer_nonneg`); their Fourier
+  coefficients `(1 − |m|/N)⁺γ(m)` tend to `γ(m)` (`herg_fejer_coeff`, `herg_fejer_tendsto`); the
+  functionals `L_N(G) = ∫ G f_N dHaar` satisfy `‖L_N(G)‖ ≤ γ(0)‖G‖` (`herg_bound`) and therefore
+  converge for every continuous `G` by density of trigonometric polynomials (`herg_tendsto`); the
+  limit is a positive linear functional (`hergLambda`), and the Riesz–Markov–Kakutani theorem
+  gives the measure.
+* Uniqueness (`herg_unique`, via `herg_integral_eq_of_coeff`): trigonometric polynomials are
+  dense in `C(𝕋, ℂ)`.
+* The converse (`herg_posDef_of_measure`): `Σⱼₖ cⱼc̄ₖγ(j − k) = ∫ |Σⱼ cⱼeⱼ|² dF ≥ 0`.
+* `γ(−h) = conj γ(h)` (`herg_conj`); for real `γ` the spectral measure is symmetric,
+  `F ∘ (−·) = F` (`herg_symm_of_real`).
+
+Departures: `γ` is complex-valued (real `γ` is the special case); the limit of the Fejér measures
+is obtained from Riesz–Markov–Kakutani, not Prokhorov: the Fejér functionals converge on all of
+`C(𝕋)`, so no subsequence is needed.
+-/
+
+namespace AKMM.RealBusinessCycles
+
+open Complex MeasureTheory AddCircle Filter Topology
+open scoped ComplexConjugate CompactlySupported
+
+variable {T : ℝ}
+
+/-- A function `γ : ℤ → ℂ` is positive definite if `Σⱼₖ cⱼc̄ₖγ(j − k)` is real and nonnegative for
+every finite family `c`. -/
+def hergPosDef (γ : ℤ → ℂ) : Prop :=
+  ∀ (s : Finset ℤ) (c : ℤ → ℂ),
+    (∑ j ∈ s, ∑ k ∈ s, c j * conj (c k) * γ (j - k)).im = 0 ∧
+      0 ≤ (∑ j ∈ s, ∑ k ∈ s, c j * conj (c k) * γ (j - k)).re
+
+/-- The number of pairs `(j, k) ∈ [0, N)²` with `j − k = h` is `(N − |h|)⁺`. -/
+theorem herg_card_pairs (N : ℕ) (h : ℤ) :
+    ((Finset.Ico (0 : ℤ) N ×ˢ Finset.Ico (0 : ℤ) N).filter (fun p => p.1 - p.2 = h)).card =
+      ((N : ℤ) - |h|).toNat := by
+  have hmax1 := le_max_left 0 h
+  have hmax2 := le_max_right 0 h
+  have hmin1 := min_le_left (N : ℤ) (N + h)
+  have hmin2 := min_le_right (N : ℤ) (N + h)
+  have e : (Finset.Ico (0 : ℤ) N ×ˢ Finset.Ico (0 : ℤ) N).filter (fun p => p.1 - p.2 = h) =
+      (Finset.Ico (max 0 h) (min (N : ℤ) (N + h))).map
+        ⟨fun j => (j, j - h), fun a b hab => by simpa using congrArg Prod.fst hab⟩ := by
+    ext ⟨j, k⟩
+    simp only [Finset.mem_filter, Finset.mem_product, Finset.mem_Ico, Finset.mem_map]
+    constructor
+    · rintro ⟨⟨⟨h1, h2⟩, h3, h4⟩, h5⟩
+      refine ⟨j, ⟨max_le h1 (by omega), lt_min h2 (by omega)⟩, ?_⟩
+      change (j, j - h) = (j, k)
+      rw [← h5, sub_sub_cancel]
+    · rintro ⟨a, ⟨h1, h2⟩, he⟩
+      obtain ⟨rfl, rfl⟩ := Prod.mk.inj (he : (a, a - h) = (j, k))
+      omega
+  rw [e, Finset.card_map, Int.card_Ico]
+  rcases le_total 0 h with h0 | h0
+  · rw [max_eq_right h0, min_eq_left (by omega), abs_of_nonneg h0]
+  · rw [max_eq_left h0, min_eq_right (by omega), abs_of_nonpos h0]
+    congr 1
+    ring
+
+/-- Re-indexing the double sum `Σ_{j,k∈[0,N)} f(j − k)` by `h = j − k`. -/
+theorem herg_sum_pairs (N : ℕ) (f : ℤ → ℂ) :
+    ∑ j ∈ Finset.Ico (0 : ℤ) N, ∑ k ∈ Finset.Ico (0 : ℤ) N, f (j - k) =
+      ∑ h ∈ Finset.Ioo (-(N : ℤ)) N, (((N : ℝ) - |(h : ℝ)| : ℝ) : ℂ) * f h := by
+  rw [← Finset.sum_product' (f := fun j k => f (j - k)),
+    ← Finset.sum_fiberwise_of_maps_to (g := fun p : ℤ × ℤ => p.1 - p.2)
+      (t := Finset.Ioo (-(N : ℤ)) N)]
+  · refine Finset.sum_congr rfl fun h hh => ?_
+    rw [Finset.sum_congr rfl (g := fun _ => f h) (fun p hp => by rw [(Finset.mem_filter.1 hp).2]),
+      Finset.sum_const, herg_card_pairs, nsmul_eq_mul]
+    congr 1
+    rw [Finset.mem_Ioo] at hh
+    have h0 : 0 ≤ (N : ℤ) - |h| := by rw [sub_nonneg]; exact (abs_lt.2 hh).le
+    have : (((N : ℤ) - |h|).toNat : ℝ) = (N : ℝ) - |(h : ℝ)| := by
+      rw [← Int.cast_natCast, Int.toNat_of_nonneg h0]
+      push_cast [Int.cast_abs]
+      ring
+    rw [← this]
+    push_cast
+    ring
+  · intro p hp
+    simp only [Finset.mem_product, Finset.mem_Ico] at hp
+    simp only [Finset.mem_Ioo]
+    omega
+
+/-- Continuous functions are integrable for a finite measure on the circle. -/
+theorem herg_integrable [Fact (0 < T)] (μ : Measure (AddCircle T)) [IsFiniteMeasure μ]
+    {G : AddCircle T → ℂ} (hG : Continuous G) : Integrable G μ :=
+  hG.integrable_of_hasCompactSupport (HasCompactSupport.of_compactSpace _)
+
+theorem herg_re_integral {μ : Measure (AddCircle T)} {f : AddCircle T → ℂ}
+    (hf : Integrable f μ) : (∫ x, f x ∂μ).re = ∫ x, (f x).re ∂μ := by
+  simpa using (integral_re hf).symm
+
+theorem herg_im_integral {μ : Measure (AddCircle T)} {f : AddCircle T → ℂ}
+    (hf : Integrable f μ) : (∫ x, f x ∂μ).im = ∫ x, (f x).im ∂μ := by
+  simpa using (integral_im hf).symm
+
+/-- `∫ eₖ dHaar = 1` if `k = 0` and `0` otherwise (normalised Haar measure). -/
+theorem herg_integral_fourier [Fact (0 < T)] (k : ℤ) :
+    ∫ x, fourier k x ∂(haarAddCircle (T := T)) = if k = 0 then 1 else 0 := by
+  have := congrFun (fourierCoeff_fourier (T := T) k) 0
+  simp only [fourierCoeff, neg_zero, fourier_zero, smul_eq_mul, one_mul] at this
+  rw [this, Pi.single_apply]
+  rcases eq_or_ne k 0 with rfl | hk
+  · simp
+  · simp [hk, Ne.symm hk]
+
+/-- The Fejér density `f_N(x) = Σ_{|h|<N} (1 − |h|/N)γ(h)e_{−h}(x)`. -/
+noncomputable def hergFejer (γ : ℤ → ℂ) (N : ℕ) (x : AddCircle T) : ℂ :=
+  ∑ h ∈ Finset.Ioo (-(N : ℤ)) N, ((((N : ℝ) - |(h : ℝ)|) / N : ℝ) : ℂ) * γ h * fourier (-h) x
+
+/-- The Fejér density is the quadratic form `(1/N)Σ_{j,k<N} cⱼc̄ₖγ(j − k)` with `cⱼ = e_{−j}(x)`. -/
+theorem herg_fejer_eq (γ : ℤ → ℂ) (N : ℕ) (x : AddCircle T) :
+    hergFejer γ N x = ((1 / N : ℝ) : ℂ) * ∑ j ∈ Finset.Ico (0 : ℤ) N,
+      ∑ k ∈ Finset.Ico (0 : ℤ) N, fourier (-j) x * conj (fourier (-k) x) * γ (j - k) := by
+  have e : ∀ j k : ℤ, fourier (-j) x * conj (fourier (-k) x) * γ (j - k) =
+      γ (j - k) * fourier (-(j - k)) x := by
+    intro j k
+    rw [← fourier_neg, neg_neg, show -(j - k) = -j + k by ring, fourier_add]
+    ring
+  simp_rw [e]
+  rw [herg_sum_pairs N (fun h => γ h * fourier (-h) x), Finset.mul_sum]
+  unfold hergFejer
+  refine Finset.sum_congr rfl fun h _ => ?_
+  push_cast
+  ring
+
+/-- For positive definite `γ` the Fejér density is real and nonnegative. -/
+theorem herg_fejer_nonneg {γ : ℤ → ℂ} (hpd : hergPosDef γ) (N : ℕ) (x : AddCircle T) :
+    (hergFejer γ N x).im = 0 ∧ 0 ≤ (hergFejer γ N x).re := by
+  obtain ⟨h1, h2⟩ := hpd (Finset.Ico 0 N) (fun j => fourier (-j) x)
+  rw [herg_fejer_eq, Complex.im_ofReal_mul, Complex.re_ofReal_mul]
+  exact ⟨by rw [h1, mul_zero], mul_nonneg (by positivity) h2⟩
+
+theorem herg_fejer_continuous (γ : ℤ → ℂ) (N : ℕ) : Continuous (hergFejer (T := T) γ N) :=
+  continuous_finsetSum _ fun h _ => continuous_const.mul (fourier (-h)).continuous
+
+/-- The Fejér functional `L_N(G) = ∫ G f_N dHaar`. -/
+noncomputable def hergL [Fact (0 < T)] (γ : ℤ → ℂ) (N : ℕ) (G : C(AddCircle T, ℂ)) : ℂ :=
+  ∫ x, G x * hergFejer γ N x ∂haarAddCircle
+
+/-- The Fourier coefficients of the Fejér density: `(1 − |m|/N)⁺γ(m)`. -/
+theorem herg_fejer_coeff [Fact (0 < T)] (γ : ℤ → ℂ) (N : ℕ) (m : ℤ) :
+    hergL γ N (fourier (T := T) m) = if m ∈ Finset.Ioo (-(N : ℤ)) N then
+      ((((N : ℝ) - |(m : ℝ)|) / N : ℝ) : ℂ) * γ m else 0 := by
+  unfold hergL hergFejer
+  simp_rw [Finset.mul_sum]
+  rw [integral_finsetSum _ (fun h _ => herg_integrable _ (by fun_prop))]
+  have hterm : ∀ h : ℤ, ∫ x, fourier m x * (((((N : ℝ) - |(h : ℝ)|) / N : ℝ) : ℂ) * γ h *
+      fourier (-h) x) ∂(haarAddCircle (T := T)) =
+      ((((N : ℝ) - |(h : ℝ)|) / N : ℝ) : ℂ) * γ h * (if m = h then 1 else 0) := by
+    intro h
+    have e : (fun x : AddCircle T => fourier m x * (((((N : ℝ) - |(h : ℝ)|) / N : ℝ) : ℂ) *
+        γ h * fourier (-h) x)) = fun x => ((((N : ℝ) - |(h : ℝ)|) / N : ℝ) : ℂ) * γ h *
+        fourier (m + -h) x := by
+      funext x
+      rw [fourier_add]
+      ring
+    rw [e, integral_const_mul, herg_integral_fourier]
+    congr 1
+    rcases eq_or_ne m h with rfl | hmh
+    · simp
+    · have : m + -h ≠ 0 := by rw [← sub_eq_add_neg]; exact sub_ne_zero.2 hmh
+      simp [this, hmh]
+  simp_rw [hterm, mul_ite, mul_one, mul_zero]
+  rw [Finset.sum_ite_eq]
+
+/-- The Fourier coefficients of the Fejér densities converge: `L_N(eₘ) → γ(m)`. -/
+theorem herg_fejer_tendsto [Fact (0 < T)] (γ : ℤ → ℂ) (m : ℤ) :
+    Tendsto (fun n : ℕ => hergL γ (n + 1) (fourier (T := T) m)) atTop (𝓝 (γ m)) := by
+  have hev : (fun n : ℕ => ((1 - |(m : ℝ)| * (1 / ((n : ℝ) + 1)) : ℝ) : ℂ) * γ m) =ᶠ[atTop]
+      fun n => hergL γ (n + 1) (fourier (T := T) m) := by
+    filter_upwards [eventually_gt_atTop m.natAbs] with n hn
+    have hmem : m ∈ Finset.Ioo (-((n + 1 : ℕ) : ℤ)) ((n + 1 : ℕ) : ℤ) := by
+      rw [Finset.mem_Ioo]
+      omega
+    simp only [herg_fejer_coeff, hmem, ↓reduceIte]
+    congr 1
+    push_cast
+    field_simp
+  have hlim : Tendsto (fun n : ℕ => (1 - |(m : ℝ)| * (1 / ((n : ℝ) + 1)) : ℝ)) atTop (𝓝 1) := by
+    simpa using tendsto_const_nhds.sub (tendsto_one_div_add_atTop_nhds_zero_nat.const_mul |(m : ℝ)|)
+  have := ((continuous_ofReal.tendsto 1).comp hlim).mul_const (γ m)
+  simp only [ofReal_one, one_mul] at this
+  exact this.congr' hev
+
+/-- `∫ f_N dHaar = γ(0)` for `N ≥ 1`. -/
+theorem herg_integral_fejer [Fact (0 < T)] (γ : ℤ → ℂ) (n : ℕ) :
+    ∫ x, hergFejer (T := T) γ (n + 1) x ∂haarAddCircle = γ 0 := by
+  have := herg_fejer_coeff (T := T) γ (n + 1) 0
+  have hmem : (0 : ℤ) ∈ Finset.Ioo (-((n + 1 : ℕ) : ℤ)) ((n + 1 : ℕ) : ℤ) := by
+    rw [Finset.mem_Ioo]
+    omega
+  simp only [hergL, fourier_zero, one_mul, hmem, ↓reduceIte] at this
+  rw [this]
+  simp only [Int.cast_zero, abs_zero, sub_zero]
+  rw [div_self (by positivity), ofReal_one, one_mul]
+
+theorem herg_fejer_norm {γ : ℤ → ℂ} (hpd : hergPosDef γ) (N : ℕ) (x : AddCircle T) :
+    ‖hergFejer γ N x‖ = (hergFejer γ N x).re := by
+  obtain ⟨h1, h2⟩ := herg_fejer_nonneg hpd N x
+  have : hergFejer γ N x = ((hergFejer γ N x).re : ℂ) := Complex.ext (by simp) (by simp [h1])
+  rw [this, Complex.norm_real, Real.norm_eq_abs, abs_of_nonneg h2]
+  simp
+
+/-- `γ(0)` is real and nonnegative for positive definite `γ`. -/
+theorem herg_posDef_zero {γ : ℤ → ℂ} (hpd : hergPosDef γ) : (γ 0).im = 0 ∧ 0 ≤ (γ 0).re := by
+  simpa using hpd {0} (fun _ => 1)
+
+/-- The uniform bound `‖L_N(G)‖ ≤ ‖G‖γ(0)`. -/
+theorem herg_bound [Fact (0 < T)] {γ : ℤ → ℂ} (hpd : hergPosDef γ) (n : ℕ)
+    (G : C(AddCircle T, ℂ)) : ‖hergL γ (n + 1) G‖ ≤ ‖G‖ * (γ 0).re := by
+  unfold hergL
+  calc ‖∫ x, G x * hergFejer γ (n + 1) x ∂haarAddCircle‖
+      ≤ ∫ x, ‖G‖ * (hergFejer γ (n + 1) x).re ∂haarAddCircle :=
+        norm_integral_le_of_norm_le
+          ((herg_integrable _ (herg_fejer_continuous γ (n + 1))).re.const_mul _)
+          (ae_of_all _ fun x => by
+            rw [norm_mul, herg_fejer_norm hpd]
+            exact mul_le_mul_of_nonneg_right (G.norm_coe_le_norm x)
+              (herg_fejer_nonneg hpd _ x).2)
+    _ = ‖G‖ * (γ 0).re := by
+      rw [integral_const_mul, ← herg_integral_fejer (T := T) γ n,
+        herg_re_integral (herg_integrable _ (herg_fejer_continuous γ (n + 1)))]
+
+theorem herg_L_add [Fact (0 < T)] (γ : ℤ → ℂ) (N : ℕ) (G G' : C(AddCircle T, ℂ)) :
+    hergL γ N (G + G') = hergL γ N G + hergL γ N G' := by
+  unfold hergL
+  simp only [ContinuousMap.add_apply, add_mul]
+  exact integral_add (herg_integrable _ (G.continuous.mul (herg_fejer_continuous γ N)))
+    (herg_integrable _ (G'.continuous.mul (herg_fejer_continuous γ N)))
+
+theorem herg_L_smul [Fact (0 < T)] (γ : ℤ → ℂ) (N : ℕ) (c : ℂ) (G : C(AddCircle T, ℂ)) :
+    hergL γ N (c • G) = c * hergL γ N G := by
+  unfold hergL
+  simp only [ContinuousMap.smul_apply, smul_eq_mul, mul_assoc]
+  exact integral_const_mul _ _
+
+theorem herg_L_sub [Fact (0 < T)] (γ : ℤ → ℂ) (N : ℕ) (G G' : C(AddCircle T, ℂ)) :
+    hergL γ N (G - G') = hergL γ N G - hergL γ N G' := by
+  rw [sub_eq_add_neg, herg_L_add, ← neg_one_smul ℂ G', herg_L_smul]
+  ring
+
+/-- On trigonometric polynomials the Fejér functionals converge. -/
+theorem herg_tendsto_span [Fact (0 < T)] (γ : ℤ → ℂ) {G : C(AddCircle T, ℂ)}
+    (hG : G ∈ Submodule.span ℂ (Set.range (fourier (T := T)))) :
+    ∃ l, Tendsto (fun n : ℕ => hergL γ (n + 1) G) atTop (𝓝 l) := by
+  induction hG using Submodule.span_induction with
+  | mem x hx =>
+    obtain ⟨m, rfl⟩ := hx
+    exact ⟨γ m, herg_fejer_tendsto γ m⟩
+  | zero => exact ⟨0, by simp [hergL]⟩
+  | add x y _ _ hx hy =>
+    obtain ⟨a, ha⟩ := hx
+    obtain ⟨b, hb⟩ := hy
+    exact ⟨a + b, by simpa only [herg_L_add] using ha.add hb⟩
+  | smul c x _ hx =>
+    obtain ⟨a, ha⟩ := hx
+    exact ⟨c * a, by simpa only [herg_L_smul] using ha.const_mul c⟩
+
+/-- For positive definite `γ` the Fejér functionals `L_N(G)` converge for every continuous `G`
+(uniform bound plus density of trigonometric polynomials). -/
+theorem herg_tendsto [Fact (0 < T)] {γ : ℤ → ℂ} (hpd : hergPosDef γ) (G : C(AddCircle T, ℂ)) :
+    ∃ l, Tendsto (fun n : ℕ => hergL γ (n + 1) G) atTop (𝓝 l) := by
+  refine cauchySeq_tendsto_of_complete ?_
+  rw [Metric.cauchySeq_iff']
+  intro ε hε
+  set c := (γ 0).re with hc
+  have hc0 : 0 ≤ c := (herg_posDef_zero hpd).2
+  have hG : G ∈ closure (Submodule.span ℂ (Set.range (fourier (T := T))) : Set _) := by
+    rw [← Submodule.topologicalClosure_coe, span_fourier_closure_eq_top]
+    trivial
+  obtain ⟨b, hb, hdist⟩ := Metric.mem_closure_iff.1 hG (ε / (3 * (c + 1))) (by positivity)
+  obtain ⟨l, hl⟩ := herg_tendsto_span γ hb
+  obtain ⟨N, hN⟩ := Metric.cauchySeq_iff'.1 hl.cauchySeq (ε / 3) (by positivity)
+  refine ⟨N, fun n hn => ?_⟩
+  have hGb : ‖G - b‖ * c ≤ ε / 3 := by
+    rw [← dist_eq_norm]
+    calc dist G b * c ≤ ε / (3 * (c + 1)) * c := mul_le_mul_of_nonneg_right hdist.le hc0
+      _ ≤ ε / (3 * (c + 1)) * (c + 1) := by gcongr; linarith
+      _ = ε / 3 := by field_simp
+  have h1 : dist (hergL γ (n + 1) G) (hergL γ (n + 1) b) ≤ ε / 3 := by
+    rw [dist_eq_norm, ← herg_L_sub]
+    exact (herg_bound hpd n _).trans hGb
+  have h2 : dist (hergL γ (N + 1) b) (hergL γ (N + 1) G) ≤ ε / 3 := by
+    rw [dist_comm, dist_eq_norm, ← herg_L_sub]
+    exact (herg_bound hpd N _).trans hGb
+  have h3 := hN n hn
+  calc dist (hergL γ (n + 1) G) (hergL γ (N + 1) G)
+      ≤ dist (hergL γ (n + 1) G) (hergL γ (n + 1) b) + dist (hergL γ (n + 1) b)
+        (hergL γ (N + 1) b) + dist (hergL γ (N + 1) b) (hergL γ (N + 1) G) :=
+        dist_triangle4 _ _ _ _
+    _ < ε := by linarith
+
+/-- The limit functional `L(G) = lim_N L_N(G)`. -/
+noncomputable def hergLim [Fact (0 < T)] (γ : ℤ → ℂ) (G : C(AddCircle T, ℂ)) : ℂ :=
+  limUnder atTop (fun n : ℕ => hergL γ (n + 1) G)
+
+theorem herg_tendsto_lim [Fact (0 < T)] {γ : ℤ → ℂ} (hpd : hergPosDef γ)
+    (G : C(AddCircle T, ℂ)) :
+    Tendsto (fun n : ℕ => hergL γ (n + 1) G) atTop (𝓝 (hergLim γ G)) :=
+  tendsto_nhds_limUnder (herg_tendsto hpd G)
+
+theorem herg_lim_add [Fact (0 < T)] {γ : ℤ → ℂ} (hpd : hergPosDef γ)
+    (G G' : C(AddCircle T, ℂ)) : hergLim γ (G + G') = hergLim γ G + hergLim γ G' :=
+  tendsto_nhds_unique (herg_tendsto_lim hpd (G + G'))
+    (by simpa only [herg_L_add] using (herg_tendsto_lim hpd G).add (herg_tendsto_lim hpd G'))
+
+theorem herg_lim_smul [Fact (0 < T)] {γ : ℤ → ℂ} (hpd : hergPosDef γ) (c : ℂ)
+    (G : C(AddCircle T, ℂ)) : hergLim γ (c • G) = c * hergLim γ G :=
+  tendsto_nhds_unique (herg_tendsto_lim hpd (c • G))
+    (by simpa only [herg_L_smul] using (herg_tendsto_lim hpd G).const_mul c)
+
+/-- A real continuous function as a complex one. -/
+def hergOfReal (g : C(AddCircle T, ℝ)) : C(AddCircle T, ℂ) :=
+  ⟨fun x => (g x : ℂ), continuous_ofReal.comp g.continuous⟩
+
+/-- `Re L_N(G) = ∫ G f_N`, for real `G`, is `∫ G · Re f_N`. -/
+theorem herg_L_ofReal_re [Fact (0 < T)] (γ : ℤ → ℂ) (N : ℕ)
+    (g : C(AddCircle T, ℝ)) :
+    (hergL γ N (hergOfReal g)).re = ∫ x, g x * (hergFejer γ N x).re ∂haarAddCircle := by
+  unfold hergL
+  have hi : Integrable (fun x => hergOfReal g x * hergFejer γ N x) haarAddCircle :=
+    herg_integrable _ ((hergOfReal g).continuous.mul (herg_fejer_continuous γ N))
+  rw [herg_re_integral hi]
+  simp [hergOfReal]
+
+/-- `Re L_N(Re a) = Re L_N(a)`, since `f_N` is real. -/
+theorem herg_L_re [Fact (0 < T)] {γ : ℤ → ℂ} (hpd : hergPosDef γ) (N : ℕ)
+    (a : C(AddCircle T, ℂ)) :
+    (hergL γ N (hergOfReal ⟨fun x => (a x).re, by fun_prop⟩)).re = (hergL γ N a).re := by
+  rw [herg_L_ofReal_re]
+  unfold hergL
+  have hi : Integrable (fun x => a x * hergFejer γ N x) haarAddCircle :=
+    herg_integrable _ (a.continuous.mul (herg_fejer_continuous γ N))
+  rw [herg_re_integral hi]
+  congr 1
+  funext x
+  simp [Complex.mul_re, (herg_fejer_nonneg hpd N x).1]
+
+/-- `Re L_N(Im a) = Im L_N(a)`, since `f_N` is real. -/
+theorem herg_L_im [Fact (0 < T)] {γ : ℤ → ℂ} (hpd : hergPosDef γ) (N : ℕ)
+    (a : C(AddCircle T, ℂ)) :
+    (hergL γ N (hergOfReal ⟨fun x => (a x).im, by fun_prop⟩)).re = (hergL γ N a).im := by
+  rw [herg_L_ofReal_re]
+  unfold hergL
+  have hi : Integrable (fun x => a x * hergFejer γ N x) haarAddCircle :=
+    herg_integrable _ (a.continuous.mul (herg_fejer_continuous γ N))
+  rw [herg_im_integral hi]
+  congr 1
+  funext x
+  simp [Complex.mul_im, (herg_fejer_nonneg hpd N x).1]
+
+/-- The positive linear functional `Λ(g) = Re L(g)` on `C(𝕋, ℝ)` (all continuous functions on
+the circle are compactly supported). -/
+noncomputable def hergLambda [Fact (0 < T)] (γ : ℤ → ℂ) (hpd : hergPosDef γ) :
+    C_c(AddCircle T, ℝ) →ₚ[ℝ] ℝ :=
+  PositiveLinearMap.mk₀
+    { toFun := fun g => (hergLim γ (hergOfReal g.toContinuousMap)).re
+      map_add' := fun g g' => by
+        have : hergOfReal (g + g').toContinuousMap =
+            hergOfReal g.toContinuousMap + hergOfReal g'.toContinuousMap := by
+          ext x
+          simp [hergOfReal]
+        rw [this, herg_lim_add hpd, Complex.add_re]
+      map_smul' := fun r g => by
+        have : hergOfReal (r • g).toContinuousMap = (r : ℂ) • hergOfReal g.toContinuousMap := by
+          ext x
+          simp [hergOfReal]
+        rw [this, herg_lim_smul hpd, Complex.re_ofReal_mul]
+        rfl }
+    (fun g hg => by
+      refine ge_of_tendsto' ((continuous_re.tendsto _).comp
+        (herg_tendsto_lim hpd (hergOfReal g.toContinuousMap))) fun n => ?_
+      simp only [Function.comp_apply]
+      rw [herg_L_ofReal_re]
+      exact integral_nonneg fun x => mul_nonneg (hg x) (herg_fejer_nonneg hpd _ x).2)
+
+/-- AKMM, pp. 412–413 (beyond the text). **Existence in the Herglotz theorem.** A positive definite
+`γ : ℤ → ℂ` is the sequence of Fourier coefficients `γ(h) = ∫ e_h dF` of a finite measure `F` on the
+circle. -/
+theorem herg_exists [Fact (0 < T)] {γ : ℤ → ℂ} (hpd : hergPosDef γ) :
+    ∃ F : Measure (AddCircle T), IsFiniteMeasure F ∧ ∀ h, γ h = ∫ x, fourier h x ∂F := by
+  refine ⟨RealRMK.rieszMeasure (hergLambda (T := T) γ hpd), inferInstance, fun h => ?_⟩
+  set μ := RealRMK.rieszMeasure (hergLambda (T := T) γ hpd)
+  let gr : C_c(AddCircle T, ℝ) := ⟨⟨fun x => (fourier h x).re, by fun_prop⟩,
+    HasCompactSupport.of_compactSpace _⟩
+  let gi : C_c(AddCircle T, ℝ) := ⟨⟨fun x => (fourier h x).im, by fun_prop⟩,
+    HasCompactSupport.of_compactSpace _⟩
+  have hint : Integrable (fun x => fourier h x) μ :=
+    herg_integrable μ (fourier (T := T) h).continuous
+  have hre : (∫ x, fourier h x ∂μ).re = (γ h).re := by
+    rw [herg_re_integral hint]
+    have := RealRMK.integral_rieszMeasure (hergLambda (T := T) γ hpd) gr
+    change ∫ x, (fourier h x).re ∂μ = _ at this
+    rw [this]
+    change (hergLim γ (hergOfReal ⟨fun x => (fourier h x).re, by fun_prop⟩)).re = _
+    refine tendsto_nhds_unique ((continuous_re.tendsto _).comp (herg_tendsto_lim hpd _)) ?_
+    simp only [Function.comp_def, herg_L_re hpd]
+    exact (continuous_re.tendsto _).comp (herg_fejer_tendsto γ h)
+  have him : (∫ x, fourier h x ∂μ).im = (γ h).im := by
+    rw [herg_im_integral hint]
+    have := RealRMK.integral_rieszMeasure (hergLambda (T := T) γ hpd) gi
+    change ∫ x, (fourier h x).im ∂μ = _ at this
+    rw [this]
+    change (hergLim γ (hergOfReal ⟨fun x => (fourier h x).im, by fun_prop⟩)).re = _
+    refine tendsto_nhds_unique ((continuous_re.tendsto _).comp (herg_tendsto_lim hpd _)) ?_
+    simp only [Function.comp_def, herg_L_im hpd]
+    exact (continuous_im.tendsto _).comp (herg_fejer_tendsto γ h)
+  exact (Complex.ext hre him).symm
+
+/-- AKMM, pp. 412–413 (beyond the text). **The converse half of the Herglotz theorem.** The Fourier
+coefficients of a finite measure on the circle are positive definite: `Σⱼₖ cⱼc̄ₖγ(j − k) = ∫ |Σⱼ
+cⱼeⱼ|² dF ≥ 0`. -/
+theorem herg_posDef_of_measure [Fact (0 < T)] (F : Measure (AddCircle T)) [IsFiniteMeasure F]
+    {γ : ℤ → ℂ} (hγ : ∀ h, γ h = ∫ x, fourier h x ∂F) : hergPosDef γ := by
+  intro s c
+  have key : ∑ j ∈ s, ∑ k ∈ s, c j * conj (c k) * γ (j - k) =
+      ((∫ x, Complex.normSq (∑ j ∈ s, c j * fourier j x) ∂F : ℝ) : ℂ) := by
+    rw [← integral_complex_ofReal]
+    have e : ∀ x : AddCircle T, ((Complex.normSq (∑ j ∈ s, c j * fourier j x) : ℝ) : ℂ) =
+        ∑ j ∈ s, ∑ k ∈ s, c j * conj (c k) * fourier (j - k) x := by
+      intro x
+      rw [← Complex.mul_conj, map_sum, Finset.sum_mul_sum]
+      refine Finset.sum_congr rfl fun j _ => Finset.sum_congr rfl fun k _ => ?_
+      rw [map_mul, ← fourier_neg, sub_eq_add_neg, fourier_add]
+      ring
+    simp_rw [e, hγ]
+    rw [integral_finsetSum _ fun j _ => integrable_finsetSum _ fun k _ =>
+      (herg_integrable F (fourier (T := T) (j - k)).continuous).const_mul _]
+    refine Finset.sum_congr rfl fun j _ => ?_
+    rw [integral_finsetSum _ fun k _ =>
+      (herg_integrable F (fourier (T := T) (j - k)).continuous).const_mul _]
+    exact Finset.sum_congr rfl fun k _ => (integral_const_mul _ _).symm
+  rw [key, ofReal_im, ofReal_re]
+  exact ⟨rfl, integral_nonneg fun x => Complex.normSq_nonneg _⟩
+
+/-- A finite measure on the circle integrates every continuous function as its Fourier
+coefficients dictate: two finite measures with the same Fourier coefficients have the same
+integrals of all continuous functions (density of trigonometric polynomials). -/
+theorem herg_integral_eq_of_coeff [Fact (0 < T)] {F G : Measure (AddCircle T)} [IsFiniteMeasure F]
+    [IsFiniteMeasure G] (hFG : ∀ h, ∫ x, fourier h x ∂F = ∫ x, fourier h x ∂G)
+    (A : C(AddCircle T, ℂ)) : ∫ x, A x ∂F = ∫ x, A x ∂G := by
+  have hspan : ∀ b ∈ Submodule.span ℂ (Set.range (fourier (T := T))),
+      ∫ x, b x ∂F = ∫ x, b x ∂G := by
+    intro b hb
+    induction hb using Submodule.span_induction with
+    | mem x hx =>
+      obtain ⟨m, rfl⟩ := hx
+      exact hFG m
+    | zero => simp
+    | add x y _ _ hx hy =>
+      simp only [ContinuousMap.add_apply]
+      rw [integral_add (herg_integrable F x.continuous) (herg_integrable F y.continuous),
+        integral_add (herg_integrable G x.continuous) (herg_integrable G y.continuous), hx, hy]
+    | smul c x _ hx =>
+      simp only [ContinuousMap.smul_apply, smul_eq_mul]
+      rw [integral_const_mul, integral_const_mul, hx]
+  have hA : A ∈ closure (Submodule.span ℂ (Set.range (fourier (T := T))) : Set _) := by
+    rw [← Submodule.topologicalClosure_coe, span_fourier_closure_eq_top]
+    trivial
+  refine eq_of_forall_dist_le fun ε hε => ?_
+  set C := F.real Set.univ + G.real Set.univ + 1
+  have hC : 0 < C := by positivity
+  obtain ⟨b, hb, hdist⟩ := Metric.mem_closure_iff.1 hA (ε / C) (by positivity)
+  have hbd : ∀ (μ : Measure (AddCircle T)) [IsFiniteMeasure μ],
+      ‖∫ x, A x ∂μ - ∫ x, b x ∂μ‖ ≤ ε / C * μ.real Set.univ := by
+    intro μ _
+    rw [← integral_sub (herg_integrable μ A.continuous) (herg_integrable μ b.continuous)]
+    refine norm_integral_le_of_norm_le_const (ae_of_all _ fun x => ?_)
+    have := (A - b).norm_coe_le_norm x
+    rw [← dist_eq_norm] at this
+    simp only [ContinuousMap.sub_apply] at this
+    exact this.trans hdist.le
+  rw [dist_eq_norm, show ∫ x, A x ∂F - ∫ x, A x ∂G =
+    (∫ x, A x ∂F - ∫ x, b x ∂F) - (∫ x, A x ∂G - ∫ x, b x ∂G) by rw [hspan b hb]; ring]
+  calc ‖(∫ x, A x ∂F - ∫ x, b x ∂F) - (∫ x, A x ∂G - ∫ x, b x ∂G)‖
+      ≤ ε / C * F.real Set.univ + ε / C * G.real Set.univ :=
+        (norm_sub_le _ _).trans (add_le_add (hbd F) (hbd G))
+    _ ≤ ε / C * C := by
+        rw [← mul_add]
+        exact mul_le_mul_of_nonneg_left (by linarith) (by positivity)
+    _ = ε := by field_simp
+
+/-- AKMM, pp. 412–413 (beyond the text). **Uniqueness in the Herglotz theorem.** Two finite measures
+on the circle with the same Fourier coefficients are equal. -/
+theorem herg_unique [Fact (0 < T)] {F G : Measure (AddCircle T)} [IsFiniteMeasure F]
+    [IsFiniteMeasure G] (hFG : ∀ h, ∫ x, fourier h x ∂F = ∫ x, fourier h x ∂G) : F = G := by
+  refine ext_of_forall_integral_eq_of_IsFiniteMeasure fun f => ?_
+  have := herg_integral_eq_of_coeff hFG ⟨fun x => (f x : ℂ), by fun_prop⟩
+  simp only [ContinuousMap.coe_mk] at this
+  exact_mod_cast this
+
+/-- AKMM, pp. 412–413 (beyond the text). **The Herglotz theorem.** `γ : ℤ → ℂ` is positive definite
+if and only if `γ(h) = ∫ e^{2πihx/T} dF(x)` for a finite (positive) measure `F` on the circle
+`ℝ/Tℤ`; for `T = 2π` this is `γ(h) = ∫_{(−π,π]} e^{ihω} dF(ω)`. The measure is unique
+(`herg_unique`). -/
+theorem herg_herglotz [Fact (0 < T)] (γ : ℤ → ℂ) :
+    hergPosDef γ ↔ ∃ F : Measure (AddCircle T), IsFiniteMeasure F ∧
+      ∀ h, γ h = ∫ x, fourier h x ∂F :=
+  ⟨herg_exists, fun ⟨F, _, hF⟩ => herg_posDef_of_measure F hF⟩
+
+/-- The Fourier coefficients of a finite measure are Hermitian: `γ(−h) = conj γ(h)`. -/
+theorem herg_conj [Fact (0 < T)] (F : Measure (AddCircle T)) {γ : ℤ → ℂ}
+    (hγ : ∀ h, γ h = ∫ x, fourier h x ∂F) (h : ℤ) : γ (-h) = conj (γ h) := by
+  rw [hγ, hγ]
+  simp_rw [fourier_neg]
+  exact integral_conj
+
+/-- For a real-valued (hence even) positive definite `γ` the spectral measure is symmetric:
+`F(−A) = F(A)`. -/
+theorem herg_symm_of_real [Fact (0 < T)] (F : Measure (AddCircle T)) [IsFiniteMeasure F]
+    {γ : ℤ → ℂ} (hγ : ∀ h, γ h = ∫ x, fourier h x ∂F) (hreal : ∀ h, (γ h).im = 0) :
+    F.map (fun x => -x) = F := by
+  refine herg_unique fun h => ?_
+  rw [integral_map measurable_neg.aemeasurable (fourier h).continuous.aestronglyMeasurable]
+  have e : ∀ x : AddCircle T, fourier h (-x) = fourier (-h) x := fun x => by
+    simp [fourier_apply, neg_smul, smul_neg]
+  simp_rw [e]
+  rw [← hγ, ← hγ, herg_conj F hγ, Complex.conj_eq_iff_im.2 (hreal h)]
+
+end AKMM.RealBusinessCycles
+
+/-
+Copyright (c) 2026 Robert Kirkby. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Robert Kirkby
+-/
+
+/-!
+# Spectral measures of weakly stationary processes
+
+AKMM, §14.3.1, pp. 412–413 and Appendix 14.A, p. 863 (beyond the text: the book assumes the
+spectrum exists).
+
+* Weakly stationary processes (`sdenStationary`): `X : ℤ → H` in a complex Hilbert space (for
+  example mean-zero `L²(Ω, ℂ)`) with `⟪Xₜ, Xₜ₊ₕ⟫ = E[Xₜ₊ₕX̄ₜ] = γ(h)` for all `t`. The
+  autocovariance is positive definite (`sden_posDef`), so the process has a unique spectral
+  measure `F` with `⟪Xₛ, Xₜ⟫ = ∫ e_{t−s} dF` (`sden_spectral`, by `herg_exists`).
+* **The spectral density** (`sden_density`): if `Σ|γ(h)| < ∞`, `F` has the continuous density
+  `f = (1/T)Σₕγ(h)e_{−h} ≥ 0` (real) with respect to Lebesgue measure on the circle (`sdenMeasure`);
+  for `T = 2π` this is the book's `s(ω) = (1/2π)Σₖγₖe^{−ikω}`. The proof: the Fourier
+  coefficients of the series are `γ` (`sden_coeff`, termwise integration), the series is the
+  pointwise limit of the Fejér densities and so real and nonnegative (`sden_series_nonneg`,
+  Tannery's theorem), and uniqueness.
+* **AR(1)** (`sdenAR1`, `γ(h) = ρ^{|h|}/(1 − ρ²)`, `|ρ| < 1`): absolutely summable
+  (`sden_ar1_summable`); the spectrum in closed form `1/((1 − ρe_{−1})(1 − ρe₁)) = 1/|1 − ρe_{−1}|²`
+  (`sden_ar1_series`, `sden_ar1_eq_normSq`), `= 1/(1 − 2ρ cos θ + ρ²)` (`sden_ar1_normSq_cos`), so
+  the spectral density is `1/(2π(1 − 2ρ cos ω + ρ²))` for `T = 2π`; the spectral measure
+  (`sden_ar1_measure`, `sden_ar1_coeff`) and positive definiteness (`sden_ar1_posDef`).
+* Concrete processes: white noise `εₜ = eₜ ∈ L²(Haar)` (`sden_white_noise`) and the AR(1) process
+  `Xₜ = eₜ/(1 − ρe_{−1}) ∈ L²(Haar)` (`sdenAR1Proc`), which satisfies `Xₜ = ρXₜ₋₁ + εₜ`
+  (`sden_ar1_recursion`) and is weakly stationary with autocovariance `ρ^{|h|}/(1 − ρ²)`
+  (`sden_ar1_stationary`).
+-/
+
+namespace AKMM.RealBusinessCycles
+
+open Complex MeasureTheory AddCircle Filter Topology
+open scoped ComplexConjugate InnerProductSpace
+
+variable {T : ℝ} {H : Type*} [NormedAddCommGroup H] [InnerProductSpace ℂ H]
+
+/-- A weakly stationary process `X : ℤ → H` in a complex Hilbert space (e.g. mean-zero
+`L²(Ω, ℂ)`) with autocovariance `γ`: `⟪X_t, X_{t+h}⟫ = E[X_{t+h} X̄_t] = γ(h)` for all `t`. -/
+def sdenStationary (X : ℤ → H) (γ : ℤ → ℂ) : Prop :=
+  ∀ t h, ⟪X t, X (t + h)⟫_ℂ = γ h
+
+/-- The autocovariance of a weakly stationary process is positive definite:
+`Σⱼₖ cⱼc̄ₖγ(j − k) = ‖Σⱼ cⱼXⱼ‖²`. -/
+theorem sden_posDef {X : ℤ → H} {γ : ℤ → ℂ} (hX : sdenStationary X γ) : hergPosDef γ := by
+  intro s c
+  have key : ∑ j ∈ s, ∑ k ∈ s, c j * conj (c k) * γ (j - k) =
+      ⟪∑ k ∈ s, c k • X k, ∑ j ∈ s, c j • X j⟫_ℂ := by
+    rw [sum_inner]
+    simp_rw [inner_sum, inner_smul_left, inner_smul_right]
+    rw [Finset.sum_comm]
+    refine Finset.sum_congr rfl fun j _ => Finset.sum_congr rfl fun k _ => ?_
+    rw [← hX j (k - j), add_sub_cancel]
+    ring
+  rw [key]
+  exact ⟨by simpa using inner_self_im (𝕜 := ℂ) (∑ j ∈ s, c j • X j),
+    by simpa using inner_self_nonneg (𝕜 := ℂ) (x := ∑ j ∈ s, c j • X j)⟩
+
+/-- AKMM, pp. 412–413 (beyond the text). **Every weakly stationary process has a spectral
+measure** (Herglotz):
+`⟪X_s, X_t⟫ = ∫ e_{t−s} dF` for a finite measure `F` on the circle, unique by `herg_unique`. -/
+theorem sden_spectral [Fact (0 < T)] {X : ℤ → H} {γ : ℤ → ℂ} (hX : sdenStationary X γ) :
+    ∃ F : Measure (AddCircle T), IsFiniteMeasure F ∧
+      (∀ h, γ h = ∫ x, fourier h x ∂F) ∧ ∀ s t, ⟪X s, X t⟫_ℂ = ∫ x, fourier (t - s) x ∂F := by
+  obtain ⟨F, hF, hγ⟩ := herg_exists (T := T) (sden_posDef hX)
+  refine ⟨F, hF, hγ, fun s t => ?_⟩
+  rw [← hγ, ← hX s (t - s), add_sub_cancel]
+
+theorem sden_norm_fourier (n : ℤ) (x : AddCircle T) : ‖fourier n x‖ = 1 := by
+  simp [fourier_apply]
+
+/-- `∫ eₘe_{−h} dHaar = δₘₕ`. -/
+theorem sden_integral_fourier_mul [Fact (0 < T)] (m h : ℤ) :
+    ∫ x, fourier m x * fourier (-h) x ∂(haarAddCircle (T := T)) = if m = h then 1 else 0 := by
+  simp_rw [← fourier_add]
+  rw [herg_integral_fourier]
+  rcases eq_or_ne m h with rfl | hmh
+  · simp
+  · have : m + -h ≠ 0 := by rw [← sub_eq_add_neg]; exact sub_ne_zero.2 hmh
+    simp [this, hmh]
+
+/-- The series `Σₕ γ(h)e_{−h}(x)`, i.e. `T` times the spectral density
+(`s(ω) = (1/2π)Σₖγₖe^{−ikω}` for `T = 2π`, AKMM p. 863). -/
+noncomputable def sdenSeries (γ : ℤ → ℂ) (x : AddCircle T) : ℂ :=
+  ∑' h, γ h * fourier (-h) x
+
+theorem sden_series_continuous {γ : ℤ → ℂ} (hs : Summable fun h => ‖γ h‖) :
+    Continuous (sdenSeries (T := T) γ) :=
+  continuous_tsum (fun h => continuous_const.mul (fourier (-h)).continuous) hs
+    (fun h x => by rw [norm_mul, sden_norm_fourier, mul_one])
+
+/-- The Fourier coefficients of the series are `γ`: `∫ eₘ(Σₕγ(h)e_{−h}) dHaar = γ(m)`
+(the inversion formula of AKMM p. 863 on the circle, complex `γ`). -/
+theorem sden_coeff [Fact (0 < T)] {γ : ℤ → ℂ} (hs : Summable fun h => ‖γ h‖) (m : ℤ) :
+    ∫ x, fourier m x * sdenSeries (T := T) γ x ∂haarAddCircle = γ m := by
+  unfold sdenSeries
+  simp_rw [← tsum_mul_left]
+  have hterm : ∀ h, ∫ x, fourier m x * (γ h * fourier (-h) x) ∂(haarAddCircle (T := T)) =
+      if m = h then γ h else 0 := by
+    intro h
+    simp_rw [mul_left_comm (fourier m _)]
+    rw [integral_const_mul, sden_integral_fourier_mul]
+    split_ifs <;> simp
+  rw [← integral_tsum_of_summable_integral_norm]
+  · simp_rw [hterm]
+    rw [tsum_eq_single m fun b hb => by simp [Ne.symm hb]]
+    simp
+  · exact fun h => herg_integrable _ (by fun_prop)
+  · refine hs.congr fun h => ?_
+    simp_rw [norm_mul, sden_norm_fourier, one_mul, mul_one]
+    simp
+
+/-- For positive definite, absolutely summable `γ`, the series `Σₕγ(h)e_{−h}(x)` is real and
+nonnegative: it is the pointwise limit of the Fejér densities (Tannery's theorem). -/
+theorem sden_series_nonneg {γ : ℤ → ℂ} (hpd : hergPosDef γ) (hs : Summable fun h => ‖γ h‖)
+    (x : AddCircle T) : (sdenSeries γ x).im = 0 ∧ 0 ≤ (sdenSeries γ x).re := by
+  set f : ℕ → ℤ → ℂ := fun n h => if h ∈ Finset.Ioo (-((n + 1 : ℕ) : ℤ)) ((n + 1 : ℕ) : ℤ) then
+    (((((n + 1 : ℕ) : ℝ) - |(h : ℝ)|) / ((n + 1 : ℕ) : ℝ) : ℝ) : ℂ) * γ h * fourier (-h) x
+    else 0 with hf
+  have hfej : ∀ n, ∑' h, f n h = hergFejer γ (n + 1) x := by
+    intro n
+    rw [tsum_eq_sum (s := Finset.Ioo (-((n + 1 : ℕ) : ℤ)) ((n + 1 : ℕ) : ℤ))
+      fun b hb => by simp only [hf, hb, ↓reduceIte]]
+    unfold hergFejer
+    exact Finset.sum_congr rfl fun h hh => by simp only [hf, hh, ↓reduceIte]
+  have hlim : Tendsto (fun n => ∑' h, f n h) atTop (𝓝 (sdenSeries γ x)) := by
+    refine tendsto_tsum_of_dominated_convergence hs (fun h => ?_) (Eventually.of_forall
+      fun n h => ?_)
+    · have hev : (fun n : ℕ => ((1 - |(h : ℝ)| * (1 / ((n : ℝ) + 1)) : ℝ) : ℂ) *
+          (γ h * fourier (-h) x)) =ᶠ[atTop] fun n => f n h := by
+        filter_upwards [eventually_gt_atTop h.natAbs] with n hn
+        have hmem : h ∈ Finset.Ioo (-((n + 1 : ℕ) : ℤ)) ((n + 1 : ℕ) : ℤ) := by
+          rw [Finset.mem_Ioo]
+          omega
+        simp only [hf, hmem, ↓reduceIte]
+        rw [mul_assoc]
+        congr 1
+        push_cast
+        field_simp
+      have hl : Tendsto (fun n : ℕ => (1 - |(h : ℝ)| * (1 / ((n : ℝ) + 1)) : ℝ)) atTop
+          (𝓝 1) := by
+        simpa using tendsto_const_nhds.sub
+          (tendsto_one_div_add_atTop_nhds_zero_nat.const_mul |(h : ℝ)|)
+      have := ((continuous_ofReal.tendsto 1).comp hl).mul_const (γ h * fourier (-h) x)
+      simp only [ofReal_one, one_mul] at this
+      exact this.congr' hev
+    · simp only [hf]
+      split_ifs with hh
+      · rw [norm_mul, norm_mul, sden_norm_fourier, mul_one, Complex.norm_real, Real.norm_eq_abs]
+        rw [Finset.mem_Ioo] at hh
+        have h1 : |(h : ℝ)| < ((n + 1 : ℕ) : ℝ) := by
+          rw [abs_lt]
+          constructor <;> push_cast <;> [linarith [(by exact_mod_cast hh.1 :
+            (-((n : ℝ) + 1)) < h)]; linarith [(by exact_mod_cast hh.2 : (h : ℝ) < (n : ℝ) + 1)]]
+        have hN : (0 : ℝ) < ((n + 1 : ℕ) : ℝ) := by positivity
+        have h2 : 0 ≤ (((n + 1 : ℕ) : ℝ) - |(h : ℝ)|) / ((n + 1 : ℕ) : ℝ) :=
+          div_nonneg (by linarith) hN.le
+        have h3 : (((n + 1 : ℕ) : ℝ) - |(h : ℝ)|) / ((n + 1 : ℕ) : ℝ) ≤ 1 := by
+          rw [div_le_one hN]
+          linarith [abs_nonneg (h : ℝ)]
+        rw [abs_of_nonneg h2]
+        exact mul_le_of_le_one_left (norm_nonneg _) h3
+      · simp
+  simp_rw [hfej] at hlim
+  have hK : IsClosed {z : ℂ | z.im = 0 ∧ 0 ≤ z.re} :=
+    (isClosed_eq continuous_im continuous_const).inter (isClosed_le continuous_const continuous_re)
+  exact hK.mem_of_tendsto hlim (Eventually.of_forall fun n => herg_fejer_nonneg hpd (n + 1) x)
+
+/-- The measure `F(dx) = f(x)dx` with density `f = Re(Σₕγ(h)e_{−h})/T` with respect to Lebesgue
+measure on the circle (for `T = 2π`: `s(ω)dω`, `s(ω) = (1/2π)Σₖγₖe^{−ikω}`, AKMM p. 863). -/
+noncomputable def sdenMeasure [Fact (0 < T)] (γ : ℤ → ℂ) : Measure (AddCircle T) :=
+  (volume : Measure (AddCircle T)).withDensity fun x => ENNReal.ofReal ((sdenSeries γ x).re / T)
+
+theorem sden_measure_finite [Fact (0 < T)] {γ : ℤ → ℂ} (hs : Summable fun h => ‖γ h‖) :
+    IsFiniteMeasure (sdenMeasure (T := T) γ) :=
+  isFiniteMeasure_withDensity_ofReal
+    (((continuous_re.comp (sden_series_continuous hs)).div_const T).integrable_of_hasCompactSupport
+      (HasCompactSupport.of_compactSpace _)).hasFiniteIntegral
+
+/-- If the series is real and nonnegative, the density measure has Fourier coefficients `γ`. -/
+theorem sden_measure_coeff [hT : Fact (0 < T)] {γ : ℤ → ℂ} (hs : Summable fun h => ‖γ h‖)
+    (hnn : ∀ x : AddCircle T, (sdenSeries γ x).im = 0 ∧ 0 ≤ (sdenSeries γ x).re) (m : ℤ) :
+    ∫ x, fourier m x ∂(sdenMeasure (T := T) γ) = γ m := by
+  unfold sdenMeasure
+  have hmeas : Measurable fun x : AddCircle T => (sdenSeries γ x).re / T :=
+    ((continuous_re.comp (sden_series_continuous hs)).div_const T).measurable
+  rw [integral_withDensity_eq_integral_toReal_smul
+    (f := fun x => ENNReal.ofReal ((sdenSeries γ x).re / T))
+    (ENNReal.measurable_ofReal.comp hmeas) (ae_of_all _ fun _ => ENNReal.ofReal_lt_top)]
+  have e : ∀ x : AddCircle T, (ENNReal.ofReal ((sdenSeries γ x).re / T)).toReal • fourier m x =
+      T⁻¹ • (fourier m x * sdenSeries γ x) := by
+    intro x
+    rw [ENNReal.toReal_ofReal (div_nonneg (hnn x).2 hT.out.le)]
+    have hx : sdenSeries γ x = ((sdenSeries γ x).re : ℂ) :=
+      Complex.ext (by simp) (by simp [(hnn x).1])
+    conv_rhs => rw [hx]
+    rw [Complex.real_smul, Complex.real_smul]
+    push_cast
+    ring
+  simp_rw [e]
+  rw [integral_smul, ← integral_haarAddCircle, sden_coeff hs]
+
+/-- AKMM, p. 863 (the spectrum, made precise). **The spectral density.** If `γ` is positive definite
+and `Σ|γ(h)| < ∞`, its spectral measure `F` has the continuous density `f(x) = (1/T)Σₕγ(h)e_{−h}(x)
+≥ 0` (real) with respect to Lebesgue measure on the circle; for `T = 2π`, `f(ω) =
+(1/2π)Σₕγ(h)e^{−ihω}`. -/
+theorem sden_density [Fact (0 < T)] {γ : ℤ → ℂ} (hpd : hergPosDef γ)
+    (hs : Summable fun h => ‖γ h‖) (F : Measure (AddCircle T)) [IsFiniteMeasure F]
+    (hF : ∀ h, γ h = ∫ x, fourier h x ∂F) :
+    F = sdenMeasure γ ∧ Continuous (fun x => (sdenSeries (T := T) γ x).re / T) ∧
+      ∀ x : AddCircle T, (sdenSeries γ x).im = 0 ∧ 0 ≤ (sdenSeries γ x).re / T := by
+  have := sden_measure_finite (T := T) hs
+  refine ⟨herg_unique fun h => ?_, (continuous_re.comp (sden_series_continuous hs)).div_const T,
+    fun x => ⟨(sden_series_nonneg hpd hs x).1,
+      div_nonneg (sden_series_nonneg hpd hs x).2 (Fact.out : 0 < T).le⟩⟩
+  rw [← hF, sden_measure_coeff hs (sden_series_nonneg hpd hs)]
+
+/-- The autocovariance `γ(h) = ρ^{|h|}/(1 − ρ²)` of the AR(1) process `Xₜ = ρXₜ₋₁ + εₜ` with
+unit-variance white noise. -/
+noncomputable def sdenAR1 (ρ : ℝ) (h : ℤ) : ℂ :=
+  ((ρ ^ h.natAbs / (1 - ρ ^ 2) : ℝ) : ℂ)
+
+theorem sden_ar1_summable {ρ : ℝ} (hρ : |ρ| < 1) : Summable fun h => ‖sdenAR1 ρ h‖ := by
+  have hd : 0 < 1 - ρ ^ 2 := by nlinarith [abs_nonneg ρ, sq_abs ρ]
+  have e : ∀ h : ℤ, ‖sdenAR1 ρ h‖ = |ρ| ^ h.natAbs / (1 - ρ ^ 2) := fun h => by
+    rw [sdenAR1, Complex.norm_real, Real.norm_eq_abs, abs_div, abs_pow, abs_of_pos hd]
+  simp_rw [e]
+  have hg : Summable fun n : ℕ => |ρ| ^ n / (1 - ρ ^ 2) :=
+    (summable_geometric_of_lt_one (abs_nonneg ρ) hρ).div_const _
+  refine Summable.of_nat_of_neg_add_one ?_ ?_
+  · simpa using hg
+  · have : (fun n : ℕ => |ρ| ^ (-((n : ℤ) + 1)).natAbs / (1 - ρ ^ 2)) =
+        fun n => |ρ| ^ (n + 1) / (1 - ρ ^ 2) := by
+      funext n
+      congr 2
+    rw [this]
+    exact (summable_nat_add_iff 1).2 hg
+
+theorem sden_fourier_mul_nat (k : ℤ) (n : ℕ) (x : AddCircle T) :
+    fourier (k * n) x = fourier k x ^ n := by
+  induction n with
+  | zero => simp
+  | succ n ih =>
+    rw [Nat.cast_succ, mul_add, mul_one, fourier_add, ih, pow_succ]
+
+theorem sden_one_sub_ne_zero {ρ : ℝ} (hρ : |ρ| < 1) (n : ℤ) (x : AddCircle T) :
+    1 - (ρ : ℂ) * fourier n x ≠ 0 := by
+  intro h
+  have : ‖(ρ : ℂ) * fourier n x‖ = 1 := by rw [← sub_eq_zero.1 h, norm_one]
+  rw [norm_mul, sden_norm_fourier, mul_one, Complex.norm_real, Real.norm_eq_abs] at this
+  linarith
+
+theorem sden_ar1_alg {r z w : ℂ} (hzw : z * w = 1) (hd : 1 - r ^ 2 ≠ 0) (hw0 : 1 - r * w ≠ 0)
+    (hz0 : 1 - r * z ≠ 0) :
+    (1 - r ^ 2)⁻¹ * (1 - r * w)⁻¹ + (1 - r ^ 2)⁻¹ * (r * z) * (1 - r * z)⁻¹ =
+      ((1 - r * w) * (1 - r * z))⁻¹ := by
+  field_simp
+  linear_combination (-r ^ 2) * hzw
+
+/-- AKMM, p. 863, for the AR(1). **The AR(1) spectrum in closed form.** For `|ρ| < 1`,
+`Σₕρ^{|h|}e_{−h}(x)/(1 − ρ²) = 1/((1 − ρe_{−1}(x))(1 − ρe₁(x))) = 1/|1 − ρe^{−iω}|²`. -/
+theorem sden_ar1_series {ρ : ℝ} (hρ : |ρ| < 1) (x : AddCircle T) :
+    sdenSeries (sdenAR1 ρ) x = ((1 - ρ * fourier (-1) x) * (1 - ρ * fourier 1 x))⁻¹ := by
+  have hzw : fourier (T := T) 1 x * fourier (-1) x = 1 := by
+    rw [← fourier_add, add_neg_cancel, fourier_zero]
+  have hn : ∀ n : ℤ, ‖(ρ : ℂ) * fourier (T := T) n x‖ < 1 := fun n => by
+    rw [norm_mul, sden_norm_fourier, mul_one, Complex.norm_real, Real.norm_eq_abs]; exact hρ
+  have hd : (1 - (ρ : ℂ) ^ 2) ≠ 0 := by
+    have : (0 : ℝ) < 1 - ρ ^ 2 := by nlinarith [abs_nonneg ρ, sq_abs ρ]
+    exact_mod_cast this.ne'
+  have h1 : HasSum (fun n : ℕ => sdenAR1 ρ n * fourier (-(n : ℤ)) x)
+      ((1 - (ρ : ℂ) ^ 2)⁻¹ * (1 - ρ * fourier (-1) x)⁻¹) := by
+    have e : (fun n : ℕ => sdenAR1 ρ n * fourier (-(n : ℤ)) x) =
+        fun n : ℕ => (1 - (ρ : ℂ) ^ 2)⁻¹ * ((ρ : ℂ) * fourier (-1) x) ^ n := by
+      funext n
+      rw [show -(n : ℤ) = -1 * n by ring, sden_fourier_mul_nat, sdenAR1, Int.natAbs_natCast]
+      push_cast
+      ring
+    rw [e]
+    exact (hasSum_geometric_of_norm_lt_one (hn (-1))).mul_left _
+  have h2 : HasSum (fun n : ℕ => sdenAR1 ρ (-((n : ℤ) + 1)) * fourier (-(-((n : ℤ) + 1))) x)
+      ((1 - (ρ : ℂ) ^ 2)⁻¹ * (ρ * fourier 1 x) * (1 - ρ * fourier 1 x)⁻¹) := by
+    have e : (fun n : ℕ => sdenAR1 ρ (-((n : ℤ) + 1)) * fourier (-(-((n : ℤ) + 1))) x) =
+        fun n : ℕ => (1 - (ρ : ℂ) ^ 2)⁻¹ * ((ρ : ℂ) * fourier 1 x) *
+          ((ρ : ℂ) * fourier 1 x) ^ n := by
+      funext n
+      have ha : (-((n : ℤ) + 1)).natAbs = n + 1 := by omega
+      rw [neg_neg, show (n : ℤ) + 1 = 1 * ((n + 1 : ℕ) : ℤ) by push_cast; ring,
+        sden_fourier_mul_nat, sdenAR1, show 1 * ((n + 1 : ℕ) : ℤ) = (n : ℤ) + 1 by push_cast; ring,
+        ha]
+      push_cast
+      ring
+    rw [e]
+    exact (hasSum_geometric_of_norm_lt_one (hn 1)).mul_left _
+  rw [sdenSeries, (HasSum.of_nat_of_neg_add_one
+    (f := fun h : ℤ => sdenAR1 ρ h * fourier (-h) x) h1 h2).tsum_eq]
+  exact sden_ar1_alg hzw hd (sden_one_sub_ne_zero hρ (-1) x) (sden_one_sub_ne_zero hρ 1 x)
+
+/-- The AR(1) spectral density in the book's form: with `x = ω ∈ ℝ` and `θ = 2πω/T`
+(`θ = ω` for `T = 2π`), `(1 − ρe^{−iθ})(1 − ρe^{iθ}) = 1 − 2ρ cos θ + ρ²`. -/
+theorem sden_ar1_cos (ρ ω : ℝ) :
+    (1 - ρ * fourier (-1) (ω : AddCircle T)) * (1 - ρ * fourier 1 (ω : AddCircle T)) =
+      ((1 - 2 * ρ * Real.cos (2 * Real.pi * ω / T) + ρ ^ 2 : ℝ) : ℂ) := by
+  rw [fourier_coe_apply, fourier_coe_apply]
+  set θ : ℝ := 2 * Real.pi * ω / T
+  have e1 : 2 * (Real.pi : ℂ) * I * ((-1 : ℤ) : ℂ) * ω / T = -(θ : ℂ) * I := by
+    simp only [θ]; push_cast; ring
+  have e2 : 2 * (Real.pi : ℂ) * I * ((1 : ℤ) : ℂ) * ω / T = (θ : ℂ) * I := by
+    simp only [θ]; push_cast; ring
+  rw [e1, e2]
+  have hc := Complex.two_cos (θ : ℂ)
+  have hp : Complex.exp (-(θ : ℂ) * I) * Complex.exp ((θ : ℂ) * I) = 1 := by
+    rw [← Complex.exp_add, neg_mul, neg_add_cancel, Complex.exp_zero]
+  push_cast
+  rw [← Complex.ofReal_cos] at hc ⊢
+  linear_combination (ρ : ℂ) ^ 2 * hp + (ρ : ℂ) * hc
+
+theorem sden_conj_one_sub (ρ : ℝ) (x : AddCircle T) :
+    conj (1 - (ρ : ℂ) * fourier (-1) x) = 1 - ρ * fourier 1 x := by
+  rw [map_sub, map_one, map_mul, Complex.conj_ofReal, ← fourier_neg, neg_neg]
+
+/-- The AR(1) spectrum is `1/|1 − ρe_{−1}(x)|²`, real and positive. -/
+theorem sden_ar1_eq_normSq {ρ : ℝ} (hρ : |ρ| < 1) (x : AddCircle T) :
+    sdenSeries (sdenAR1 ρ) x = (((Complex.normSq (1 - ρ * fourier (-1) x))⁻¹ : ℝ) : ℂ) := by
+  rw [sden_ar1_series hρ, ← sden_conj_one_sub, Complex.mul_conj, ofReal_inv]
+
+/-- AKMM p. 863 for the AR(1): with `x = ω` and `θ = 2πω/T`, `|1 − ρe^{−iθ}|² = 1 − 2ρ cos θ + ρ²`,
+so the AR(1) spectral density is `1/(T(1 − 2ρ cos θ + ρ²))` (`1/(2π(1 − 2ρ cos ω + ρ²))`
+for `T = 2π`). -/
+theorem sden_ar1_normSq_cos (ρ ω : ℝ) :
+    Complex.normSq (1 - ρ * fourier (-1) (ω : AddCircle T)) =
+      1 - 2 * ρ * Real.cos (2 * Real.pi * ω / T) + ρ ^ 2 := by
+  have := sden_ar1_cos (T := T) ρ ω
+  rw [← sden_conj_one_sub, Complex.mul_conj] at this
+  exact_mod_cast this
+
+theorem sden_ar1_nonneg {ρ : ℝ} (hρ : |ρ| < 1) (x : AddCircle T) :
+    (sdenSeries (sdenAR1 ρ) x).im = 0 ∧ 0 ≤ (sdenSeries (sdenAR1 ρ) x).re := by
+  rw [sden_ar1_eq_normSq hρ, ofReal_im, ofReal_re]
+  exact ⟨rfl, inv_nonneg.2 (Complex.normSq_nonneg _)⟩
+
+/-- The AR(1) spectral measure: density `1/(T|1 − ρe_{−1}(x)|²)` with respect to Lebesgue
+measure on the circle. -/
+theorem sden_ar1_measure [Fact (0 < T)] {ρ : ℝ} (hρ : |ρ| < 1) :
+    sdenMeasure (T := T) (sdenAR1 ρ) = (volume : Measure (AddCircle T)).withDensity
+      fun x => ENNReal.ofReal ((Complex.normSq (1 - ρ * fourier (-1) x))⁻¹ / T) := by
+  unfold sdenMeasure
+  simp_rw [sden_ar1_eq_normSq hρ, ofReal_re]
+
+/-- The AR(1) autocovariance `ρ^{|h|}/(1 − ρ²)` is the sequence of Fourier coefficients of its
+spectral measure, hence positive definite (Herglotz). -/
+theorem sden_ar1_coeff [Fact (0 < T)] {ρ : ℝ} (hρ : |ρ| < 1) (h : ℤ) :
+    ∫ x, fourier h x ∂(sdenMeasure (T := T) (sdenAR1 ρ)) = sdenAR1 ρ h :=
+  sden_measure_coeff (sden_ar1_summable hρ) (sden_ar1_nonneg hρ) h
+
+theorem sden_ar1_posDef [Fact (0 < T)] {ρ : ℝ} (hρ : |ρ| < 1) : hergPosDef (sdenAR1 ρ) := by
+  have := sden_measure_finite (T := T) (sden_ar1_summable hρ)
+  exact herg_posDef_of_measure (sdenMeasure (T := T) (sdenAR1 ρ))
+    fun h => (sden_ar1_coeff hρ h).symm
+
+/-- **White noise**: the exponentials `eₜ ∈ L²(Haar)` are a weakly stationary process with
+`γ(0) = 1`, `γ(h) = 0` for `h ≠ 0` (orthonormality); its spectral measure is Haar measure,
+density `1/T` (`1/2π`). -/
+theorem sden_white_noise [Fact (0 < T)] :
+    sdenStationary (fourierLp (T := T) 2) (fun h => if h = 0 then 1 else 0) := by
+  intro t h
+  rw [orthonormal_iff_ite.1 orthonormal_fourier]
+  simp
+
+/-- `φ(x) = 1/(1 − ρe_{−1}(x)) = Σⱼρʲe_{−j}(x)`, the transfer function of the AR(1) filter. -/
+noncomputable def sdenPhi (ρ : ℝ) (hρ : |ρ| < 1) : C(AddCircle T, ℂ) :=
+  ⟨fun x => (1 - ρ * fourier (-1) x)⁻¹,
+    (continuous_const.sub (continuous_const.mul (fourier (-1)).continuous)).inv₀
+      fun x => sden_one_sub_ne_zero hρ (-1) x⟩
+
+/-- The AR(1) process `Xₜ = eₜφ ∈ L²(Haar)` driven by the white noise `εₜ = eₜ`. -/
+noncomputable def sdenAR1Proc [Fact (0 < T)] (ρ : ℝ) (hρ : |ρ| < 1) (t : ℤ) :
+    MeasureTheory.Lp ℂ 2 (haarAddCircle (T := T)) :=
+  ContinuousMap.toLp 2 haarAddCircle ℂ (fourier t * sdenPhi ρ hρ)
+
+/-- The AR(1) recursion `Xₜ = ρXₜ₋₁ + εₜ`. -/
+theorem sden_ar1_recursion [Fact (0 < T)] {ρ : ℝ} (hρ : |ρ| < 1) (t : ℤ) :
+    sdenAR1Proc (T := T) ρ hρ t = (ρ : ℂ) • sdenAR1Proc ρ hρ (t - 1) + fourierLp 2 t := by
+  unfold sdenAR1Proc
+  rw [← map_smul, ← map_add]
+  congr 1
+  ext x
+  have hne := sden_one_sub_ne_zero hρ (-1) x
+  simp only [ContinuousMap.mul_apply, ContinuousMap.smul_apply, ContinuousMap.add_apply, sdenPhi,
+    ContinuousMap.coe_mk, smul_eq_mul, sub_eq_add_neg t 1, fourier_add]
+  field_simp
+  ring
+
+/-- The AR(1) process is weakly stationary with autocovariance `ρ^{|h|}/(1 − ρ²)`. -/
+theorem sden_ar1_stationary [Fact (0 < T)] {ρ : ℝ} (hρ : |ρ| < 1) :
+    sdenStationary (sdenAR1Proc (T := T) ρ hρ) (sdenAR1 ρ) := by
+  intro t h
+  unfold sdenAR1Proc
+  rw [ContinuousMap.inner_toLp]
+  have e : ∀ x : AddCircle T, (fourier (t + h) * sdenPhi ρ hρ : C(AddCircle T, ℂ)) x *
+      conj ((fourier t * sdenPhi ρ hρ : C(AddCircle T, ℂ)) x) =
+        fourier h x * sdenSeries (sdenAR1 ρ) x := by
+    intro x
+    have hc : fourier t x * fourier (-t) x = 1 := by
+      rw [← fourier_add, add_neg_cancel, fourier_zero]
+    rw [sden_ar1_series hρ]
+    simp only [ContinuousMap.mul_apply, sdenPhi, ContinuousMap.coe_mk, map_mul, map_inv₀,
+      sden_conj_one_sub, ← fourier_neg, fourier_add, mul_inv]
+    linear_combination (fourier h x * (1 - ρ * fourier (-1) x)⁻¹ * (1 - ρ * fourier 1 x)⁻¹) * hc
+  simp_rw [e]
+  exact sden_coeff (sden_ar1_summable hρ) h
+
+end AKMM.RealBusinessCycles
+
+/-
+Copyright (c) 2026 Robert Kirkby. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Robert Kirkby
+-/
+
+/-!
+# The spectral representation
+
+AKMM, §14.3.1, pp. 412–413 (a result beyond the text): the spectral representation theorem
+(Cramér) in its Hilbert-space form.
+
+Let `X : ℤ → H` (a complex Hilbert space) satisfy `⟪Xₛ, Xₜ⟫ = ∫ e_{t−s} dF` for a finite measure
+`F` on the circle, as every weakly stationary process does (`sden_spectral`).
+
+* The exponentials `eₜ ∈ L²(F)` (`cramExp`) have the same Gram matrix (`cram_inner_exp`) and span a
+  dense subspace (`cram_dense`), so `eₜ ↦ Xₜ` extends to a linear isometry
+  `V : L²(F) → H` (**the Kolmogorov isometry**, `cramIso`, `cram_iso_exp`, `cram_iso_inner`),
+  unique (`cram_iso_unique`), whose range is the closed linear span `H_X` of the process
+  (`cram_iso_range`).
+* The random measure `Z(A) = V(1_A)` (`cramZ`) has orthogonal increments:
+  `⟪Z(A), Z(B)⟫ = F(A ∩ B)` (`cram_Z_inner`), `‖Z(A)‖² = F(A)` (`cram_Z_norm_sq`), `Z(A) ⊥ Z(B)`
+  for disjoint `A`, `B` (`cram_Z_orth`), `Z(A ∪ B) = Z(A) + Z(B)` (`cram_Z_union`),
+  `Z(𝕋) = X₀` (`cram_Z_univ`).
+* `cram_spectral_representation` packages the theorem for weakly stationary processes.
+
+In stochastic-integral notation `Xₜ = ∫ e^{itω} dZ(ω)`: the integral of a step function
+`Σ aₖ1_{Aₖ}` against `Z` is `Σ aₖZ(Aₖ) = V(Σ aₖ1_{Aₖ})`, and `V` is its isometric extension to
+`L²(F)`, so `∫ e^{itω} dZ(ω) = V(eₜ) = Xₜ`. The notation itself is not formalised. For a real
+process `F` is symmetric (`herg_symm_of_real`), and pairing `ω` with `−ω` gives the book's real
+form `Yₜ = ∫_{[0,π]} cos(ωt) dU(ω) + ∫_{(0,π]} sin(ωt) dW(ω)` with orthogonal real random
+measures `U`, `W`; the book's `A(ω)dω`, `B(ω)dω` stand for `dU`, `dW` (which are given by
+densities only in special cases).
+-/
+
+namespace AKMM.RealBusinessCycles
+
+open Complex MeasureTheory AddCircle Filter Topology
+open scoped ComplexConjugate InnerProductSpace
+
+variable {T : ℝ} [Fact (0 < T)] {H : Type*} [NormedAddCommGroup H] [InnerProductSpace ℂ H]
+
+/-- The exponential `eₜ(x) = e^{2πitx/T}` as an element of `L²(F)`. -/
+noncomputable def cramExp (F : Measure (AddCircle T)) [IsFiniteMeasure F] (t : ℤ) :
+    Lp ℂ 2 F :=
+  ContinuousMap.toLp 2 F ℂ (fourier t)
+
+/-- `⟪eₛ, eₜ⟫_{L²(F)} = ∫ e_{t−s} dF`. -/
+theorem cram_inner_exp (F : Measure (AddCircle T)) [IsFiniteMeasure F] (s t : ℤ) :
+    ⟪cramExp F s, cramExp F t⟫_ℂ = ∫ x, fourier (t - s) x ∂F := by
+  unfold cramExp
+  rw [ContinuousMap.inner_toLp]
+  congr 1
+  funext x
+  rw [← fourier_neg, sub_eq_add_neg, fourier_add]
+
+/-- The exponentials span a dense subspace of `L²(F)` for every finite measure `F` on the
+circle. -/
+theorem cram_dense (F : Measure (AddCircle T)) [IsFiniteMeasure F] :
+    (Submodule.span ℂ (Set.range (cramExp F))).topologicalClosure = ⊤ := by
+  convert!
+    (ContinuousMap.toLp_denseRange ℂ F ℂ (p := 2) (by simp)).topologicalClosure_map_submodule
+      span_fourier_closure_eq_top
+  rw [Submodule.map_span]
+  unfold cramExp
+  rw [Set.range_comp']
+  simp only [ContinuousLinearMap.coe_coe]
+
+theorem cram_denseRange (F : Measure (AddCircle T)) [IsFiniteMeasure F] :
+    DenseRange (Finsupp.linearCombination ℂ (cramExp F)) := by
+  have : Set.range ⇑(Finsupp.linearCombination ℂ (cramExp F)) =
+      (Submodule.span ℂ (Set.range (cramExp F)) : Set (Lp ℂ 2 F)) := by
+    rw [← LinearMap.coe_range, Finsupp.range_linearCombination]
+  rw [DenseRange, this, Submodule.dense_iff_topologicalClosure_eq_top]
+  exact cram_dense F
+
+/-- If `⟪Xₛ, Xₜ⟫ = ∫ e_{t−s} dF`, then `‖Σ cₜXₜ‖ = ‖Σ cₜeₜ‖_{L²(F)}`. -/
+theorem cram_norm_eq (F : Measure (AddCircle T)) [IsFiniteMeasure F] (X : ℤ → H)
+    (hX : ∀ s t, ⟪X s, X t⟫_ℂ = ∫ x, fourier (t - s) x ∂F) (c : ℤ →₀ ℂ) :
+    ‖Finsupp.linearCombination ℂ X c‖ = ‖Finsupp.linearCombination ℂ (cramExp F) c‖ := by
+  have key : ⟪Finsupp.linearCombination ℂ X c, Finsupp.linearCombination ℂ X c⟫_ℂ =
+      ⟪Finsupp.linearCombination ℂ (cramExp F) c,
+        Finsupp.linearCombination ℂ (cramExp F) c⟫_ℂ := by
+    simp only [Finsupp.linearCombination_apply, Finsupp.sum, sum_inner, inner_sum,
+      inner_smul_left, inner_smul_right, hX, cram_inner_exp]
+  rw [norm_eq_sqrt_re_inner (𝕜 := ℂ), norm_eq_sqrt_re_inner (𝕜 := ℂ), key]
+
+variable [CompleteSpace H]
+
+/-- AKMM, pp. 412–413 (beyond the text). **The Kolmogorov isometry.** If `⟪Xₛ, Xₜ⟫ = ∫ e_{t−s} dF`,
+the map `eₜ ↦ Xₜ` extends to a linear isometry `V : L²(F) → H`. -/
+noncomputable def cramIso (F : Measure (AddCircle T)) [IsFiniteMeasure F] (X : ℤ → H)
+    (hX : ∀ s t, ⟪X s, X t⟫_ℂ = ∫ x, fourier (t - s) x ∂F) : Lp ℂ 2 F →ₗᵢ[ℂ] H :=
+  (Finsupp.linearCombination ℂ X).extendOfIsometry (cram_denseRange F) (cram_norm_eq F X hX)
+
+/-- `V(eₜ) = Xₜ` for every `t`. -/
+theorem cram_iso_exp (F : Measure (AddCircle T)) [IsFiniteMeasure F] (X : ℤ → H)
+    (hX : ∀ s t, ⟪X s, X t⟫_ℂ = ∫ x, fourier (t - s) x ∂F) (t : ℤ) :
+    cramIso F X hX (cramExp F t) = X t := by
+  have := LinearMap.extendOfIsometry_eq (f := Finsupp.linearCombination ℂ X)
+    (cram_denseRange F) (cram_norm_eq F X hX) (Finsupp.single t 1)
+  simp only [Finsupp.linearCombination_single, one_smul] at this
+  exact this
+
+/-- `V` preserves inner products: `⟪Vf, Vg⟫_H = ∫ ḡ… = ⟪f, g⟫_{L²(F)}`. -/
+theorem cram_iso_inner (F : Measure (AddCircle T)) [IsFiniteMeasure F] (X : ℤ → H)
+    (hX : ∀ s t, ⟪X s, X t⟫_ℂ = ∫ x, fourier (t - s) x ∂F) (f g : Lp ℂ 2 F) :
+    ⟪cramIso F X hX f, cramIso F X hX g⟫_ℂ = ⟪f, g⟫_ℂ :=
+  LinearIsometry.inner_map_map _ _ _
+
+/-- **Uniqueness of the Kolmogorov isometry**: it is the only linear isometry with
+`V(eₜ) = Xₜ` for all `t`. -/
+theorem cram_iso_unique (F : Measure (AddCircle T)) [IsFiniteMeasure F] (X : ℤ → H)
+    (hX : ∀ s t, ⟪X s, X t⟫_ℂ = ∫ x, fourier (t - s) x ∂F) (V : Lp ℂ 2 F →ₗᵢ[ℂ] H)
+    (hV : ∀ t, V (cramExp F t) = X t) : V = cramIso F X hX := by
+  refine (LinearMap.extendOfIsometry_unique _ (cram_denseRange F) (cram_norm_eq F X hX) V
+    (Finsupp.lhom_ext fun t a => ?_)).symm
+  simp [Finsupp.linearCombination_single, hV]
+
+/-- **The range of the Kolmogorov isometry** is the closed linear span `H_X` of the process:
+`V` maps `L²(F)` onto `H_X`. -/
+theorem cram_iso_range (F : Measure (AddCircle T)) [IsFiniteMeasure F] (X : ℤ → H)
+    (hX : ∀ s t, ⟪X s, X t⟫_ℂ = ∫ x, fourier (t - s) x ∂F) :
+    LinearMap.range (cramIso F X hX).toLinearMap =
+      (Submodule.span ℂ (Set.range X)).topologicalClosure := by
+  set V := cramIso F X hX
+  have hmap : (Submodule.span ℂ (Set.range (cramExp F))).map V.toLinearMap =
+      Submodule.span ℂ (Set.range X) := by
+    have e : (V.toLinearMap ∘ cramExp F) = X := funext fun t => cram_iso_exp F X hX t
+    rw [Submodule.map_span, ← Set.range_comp, e]
+  apply le_antisymm
+  · rintro _ ⟨f, rfl⟩
+    have hf : f ∈ closure (Submodule.span ℂ (Set.range (cramExp F)) : Set (Lp ℂ 2 F)) := by
+      rw [← Submodule.topologicalClosure_coe, cram_dense]
+      trivial
+    have h1 := image_closure_subset_closure_image V.continuous ⟨f, hf, rfl⟩
+    change V f ∈ ((Submodule.span ℂ (Set.range X)).topologicalClosure : Set H)
+    rw [Submodule.topologicalClosure_coe]
+    refine closure_mono ?_ h1
+    rintro _ ⟨g, hg, rfl⟩
+    rw [← hmap]
+    exact ⟨g, hg, rfl⟩
+  · refine Submodule.topologicalClosure_minimal _ ?_ ?_
+    · rw [Submodule.span_le]
+      rintro _ ⟨t, rfl⟩
+      exact ⟨cramExp F t, cram_iso_exp F X hX t⟩
+    · rw [LinearMap.coe_range]
+      exact V.isometry.isClosedEmbedding.isClosed_range
+
+/-- The orthogonal-increment random measure `Z(A) = V(1_A) ∈ H` (so that, formally,
+`Xₜ = ∫ e^{itω} dZ(ω)`). -/
+noncomputable def cramZ (F : Measure (AddCircle T)) [IsFiniteMeasure F] (X : ℤ → H)
+    (hX : ∀ s t, ⟪X s, X t⟫_ℂ = ∫ x, fourier (t - s) x ∂F) (A : Set (AddCircle T))
+    (hA : MeasurableSet A) : H :=
+  cramIso F X hX (indicatorConstLp 2 hA (measure_ne_top F A) (1 : ℂ))
+
+/-- **Orthogonal increments**: `⟪Z(A), Z(B)⟫ = F(A ∩ B)`. -/
+theorem cram_Z_inner (F : Measure (AddCircle T)) [IsFiniteMeasure F] (X : ℤ → H)
+    (hX : ∀ s t, ⟪X s, X t⟫_ℂ = ∫ x, fourier (t - s) x ∂F) {A B : Set (AddCircle T)}
+    (hA : MeasurableSet A) (hB : MeasurableSet B) :
+    ⟪cramZ F X hX A hA, cramZ F X hX B hB⟫_ℂ = (F.real (A ∩ B) : ℂ) := by
+  unfold cramZ
+  rw [cram_iso_inner, L2.inner_indicatorConstLp_one_indicatorConstLp_one]
+  rfl
+
+/-- `E|Z(A)|² = ‖Z(A)‖² = F(A)`. -/
+theorem cram_Z_norm_sq (F : Measure (AddCircle T)) [IsFiniteMeasure F] (X : ℤ → H)
+    (hX : ∀ s t, ⟪X s, X t⟫_ℂ = ∫ x, fourier (t - s) x ∂F) {A : Set (AddCircle T)}
+    (hA : MeasurableSet A) : ‖cramZ F X hX A hA‖ ^ 2 = F.real A := by
+  rw [← inner_self_eq_norm_sq (𝕜 := ℂ), cram_Z_inner, Set.inter_self]
+  simp
+
+/-- Increments over disjoint sets are orthogonal. -/
+theorem cram_Z_orth (F : Measure (AddCircle T)) [IsFiniteMeasure F] (X : ℤ → H)
+    (hX : ∀ s t, ⟪X s, X t⟫_ℂ = ∫ x, fourier (t - s) x ∂F) {A B : Set (AddCircle T)}
+    (hA : MeasurableSet A) (hB : MeasurableSet B) (hAB : Disjoint A B) :
+    ⟪cramZ F X hX A hA, cramZ F X hX B hB⟫_ℂ = 0 := by
+  rw [cram_Z_inner, Set.disjoint_iff_inter_eq_empty.1 hAB]
+  simp
+
+/-- `Z` is additive: `Z(A ∪ B) = Z(A) + Z(B)` for disjoint `A`, `B`. -/
+theorem cram_Z_union (F : Measure (AddCircle T)) [IsFiniteMeasure F] (X : ℤ → H)
+    (hX : ∀ s t, ⟪X s, X t⟫_ℂ = ∫ x, fourier (t - s) x ∂F) {A B : Set (AddCircle T)}
+    (hA : MeasurableSet A) (hB : MeasurableSet B) (hAB : Disjoint A B) :
+    cramZ F X hX (A ∪ B) (hA.union hB) = cramZ F X hX A hA + cramZ F X hX B hB := by
+  unfold cramZ
+  rw [indicatorConstLp_disjoint_union hA hB (measure_ne_top F A) (measure_ne_top F B) hAB,
+    map_add]
+
+/-- `Z(𝕋) = X₀`: the total increment is the value at time `0`. -/
+theorem cram_Z_univ (F : Measure (AddCircle T)) [IsFiniteMeasure F] (X : ℤ → H)
+    (hX : ∀ s t, ⟪X s, X t⟫_ℂ = ∫ x, fourier (t - s) x ∂F) :
+    cramZ F X hX Set.univ MeasurableSet.univ = X 0 := by
+  rw [← cram_iso_exp F X hX 0]
+  unfold cramZ
+  congr 1
+  refine Lp.ext ?_
+  filter_upwards [indicatorConstLp_coeFn (p := 2) (μ := F) (s := Set.univ)
+    (hs := MeasurableSet.univ) (hμs := measure_ne_top F _) (c := (1 : ℂ)),
+    ContinuousMap.coeFn_toLp (p := 2) (𝕜 := ℂ) (μ := F) (fourier (T := T) 0)] with x h1 h2
+  rw [cramExp, h1, h2, fourier_zero]
+  simp
+
+/-- AKMM, pp. 412–413 (beyond the text). **The spectral representation theorem (Cramér),
+Hilbert-space form.** A weakly stationary
+process `X : ℤ → H` with autocovariance `γ` has a finite spectral measure `F` on the circle, and
+there is a linear isometry `V` of `L²(F)` onto the closed linear span `H_X` of the process with
+`V(eₜ) = Xₜ` for all `t`; it is unique (`cram_iso_unique`) and `Z(A) = V(1_A)` has orthogonal
+increments with `‖Z(A)‖² = F(A)` (`cram_Z_inner`, `cram_Z_norm_sq`). -/
+theorem cram_spectral_representation {X : ℤ → H} {γ : ℤ → ℂ} (hX : sdenStationary X γ) :
+    ∃ F : Measure (AddCircle T), ∃ _ : IsFiniteMeasure F, (∀ h, γ h = ∫ x, fourier h x ∂F) ∧
+      ∃ V : Lp ℂ 2 F →ₗᵢ[ℂ] H, (∀ t, V (cramExp F t) = X t) ∧
+        LinearMap.range V.toLinearMap = (Submodule.span ℂ (Set.range X)).topologicalClosure := by
+  obtain ⟨F, hF, hγ, hXF⟩ := sden_spectral (T := T) hX
+  exact ⟨F, hF, hγ, cramIso F X hXF, cram_iso_exp F X hXF, cram_iso_range F X hXF⟩
+
+end AKMM.RealBusinessCycles
+
 set_option linter.style.longLine false
 #print axioms AKMM.RealBusinessCycles.hpD
 #print axioms AKMM.RealBusinessCycles.hpA
@@ -2597,3 +3786,91 @@ set_option linter.style.longLine false
 #print axioms AKMM.RealBusinessCycles.appx_filter_autocov
 #print axioms AKMM.RealBusinessCycles.appx_filtered_spectrum
 #print axioms AKMM.RealBusinessCycles.appx_transfer_normSq
+#print axioms AKMM.RealBusinessCycles.hergPosDef
+#print axioms AKMM.RealBusinessCycles.herg_card_pairs
+#print axioms AKMM.RealBusinessCycles.herg_sum_pairs
+#print axioms AKMM.RealBusinessCycles.herg_integrable
+#print axioms AKMM.RealBusinessCycles.herg_re_integral
+#print axioms AKMM.RealBusinessCycles.herg_im_integral
+#print axioms AKMM.RealBusinessCycles.herg_integral_fourier
+#print axioms AKMM.RealBusinessCycles.hergFejer
+#print axioms AKMM.RealBusinessCycles.herg_fejer_eq
+#print axioms AKMM.RealBusinessCycles.herg_fejer_nonneg
+#print axioms AKMM.RealBusinessCycles.herg_fejer_continuous
+#print axioms AKMM.RealBusinessCycles.hergL
+#print axioms AKMM.RealBusinessCycles.herg_fejer_coeff
+#print axioms AKMM.RealBusinessCycles.herg_fejer_tendsto
+#print axioms AKMM.RealBusinessCycles.herg_integral_fejer
+#print axioms AKMM.RealBusinessCycles.herg_fejer_norm
+#print axioms AKMM.RealBusinessCycles.herg_posDef_zero
+#print axioms AKMM.RealBusinessCycles.herg_bound
+#print axioms AKMM.RealBusinessCycles.herg_L_add
+#print axioms AKMM.RealBusinessCycles.herg_L_smul
+#print axioms AKMM.RealBusinessCycles.herg_L_sub
+#print axioms AKMM.RealBusinessCycles.herg_tendsto_span
+#print axioms AKMM.RealBusinessCycles.herg_tendsto
+#print axioms AKMM.RealBusinessCycles.hergLim
+#print axioms AKMM.RealBusinessCycles.herg_tendsto_lim
+#print axioms AKMM.RealBusinessCycles.herg_lim_add
+#print axioms AKMM.RealBusinessCycles.herg_lim_smul
+#print axioms AKMM.RealBusinessCycles.hergOfReal
+#print axioms AKMM.RealBusinessCycles.herg_L_ofReal_re
+#print axioms AKMM.RealBusinessCycles.herg_L_re
+#print axioms AKMM.RealBusinessCycles.herg_L_im
+#print axioms AKMM.RealBusinessCycles.hergLambda
+#print axioms AKMM.RealBusinessCycles.herg_exists
+#print axioms AKMM.RealBusinessCycles.herg_posDef_of_measure
+#print axioms AKMM.RealBusinessCycles.herg_integral_eq_of_coeff
+#print axioms AKMM.RealBusinessCycles.herg_unique
+#print axioms AKMM.RealBusinessCycles.herg_herglotz
+#print axioms AKMM.RealBusinessCycles.herg_conj
+#print axioms AKMM.RealBusinessCycles.herg_symm_of_real
+#print axioms AKMM.RealBusinessCycles.sdenStationary
+#print axioms AKMM.RealBusinessCycles.sden_posDef
+#print axioms AKMM.RealBusinessCycles.sden_spectral
+#print axioms AKMM.RealBusinessCycles.sden_norm_fourier
+#print axioms AKMM.RealBusinessCycles.sden_integral_fourier_mul
+#print axioms AKMM.RealBusinessCycles.sdenSeries
+#print axioms AKMM.RealBusinessCycles.sden_series_continuous
+#print axioms AKMM.RealBusinessCycles.sden_coeff
+#print axioms AKMM.RealBusinessCycles.sden_series_nonneg
+#print axioms AKMM.RealBusinessCycles.sdenMeasure
+#print axioms AKMM.RealBusinessCycles.sden_measure_finite
+#print axioms AKMM.RealBusinessCycles.sden_measure_coeff
+#print axioms AKMM.RealBusinessCycles.sden_density
+#print axioms AKMM.RealBusinessCycles.sdenAR1
+#print axioms AKMM.RealBusinessCycles.sden_ar1_summable
+#print axioms AKMM.RealBusinessCycles.sden_fourier_mul_nat
+#print axioms AKMM.RealBusinessCycles.sden_one_sub_ne_zero
+#print axioms AKMM.RealBusinessCycles.sden_ar1_alg
+#print axioms AKMM.RealBusinessCycles.sden_ar1_series
+#print axioms AKMM.RealBusinessCycles.sden_ar1_cos
+#print axioms AKMM.RealBusinessCycles.sden_conj_one_sub
+#print axioms AKMM.RealBusinessCycles.sden_ar1_eq_normSq
+#print axioms AKMM.RealBusinessCycles.sden_ar1_normSq_cos
+#print axioms AKMM.RealBusinessCycles.sden_ar1_nonneg
+#print axioms AKMM.RealBusinessCycles.sden_ar1_measure
+#print axioms AKMM.RealBusinessCycles.sden_ar1_coeff
+#print axioms AKMM.RealBusinessCycles.sden_ar1_posDef
+#print axioms AKMM.RealBusinessCycles.sden_white_noise
+#print axioms AKMM.RealBusinessCycles.sdenPhi
+#print axioms AKMM.RealBusinessCycles.sdenAR1Proc
+#print axioms AKMM.RealBusinessCycles.sden_ar1_recursion
+#print axioms AKMM.RealBusinessCycles.sden_ar1_stationary
+#print axioms AKMM.RealBusinessCycles.cramExp
+#print axioms AKMM.RealBusinessCycles.cram_inner_exp
+#print axioms AKMM.RealBusinessCycles.cram_dense
+#print axioms AKMM.RealBusinessCycles.cram_denseRange
+#print axioms AKMM.RealBusinessCycles.cram_norm_eq
+#print axioms AKMM.RealBusinessCycles.cramIso
+#print axioms AKMM.RealBusinessCycles.cram_iso_exp
+#print axioms AKMM.RealBusinessCycles.cram_iso_inner
+#print axioms AKMM.RealBusinessCycles.cram_iso_unique
+#print axioms AKMM.RealBusinessCycles.cram_iso_range
+#print axioms AKMM.RealBusinessCycles.cramZ
+#print axioms AKMM.RealBusinessCycles.cram_Z_inner
+#print axioms AKMM.RealBusinessCycles.cram_Z_norm_sq
+#print axioms AKMM.RealBusinessCycles.cram_Z_orth
+#print axioms AKMM.RealBusinessCycles.cram_Z_union
+#print axioms AKMM.RealBusinessCycles.cram_Z_univ
+#print axioms AKMM.RealBusinessCycles.cram_spectral_representation

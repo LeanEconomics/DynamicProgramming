@@ -1,6 +1,6 @@
 {
-  "checked_at_utc": "2026-11-12T04:37:39.021081+00:00",
-  "theorems": 134,
+  "checked_at_utc": "2026-11-12T21:27:17.854893+00:00",
+  "theorems": 207,
   "module_theorems": {
     "AKMMRealBusinessCycles/HPFilter.lean": 29,
     "AKMMRealBusinessCycles/HPLimit.lean": 10,
@@ -12,9 +12,12 @@
     "AKMMRealBusinessCycles/Extensions.lean": 22,
     "AKMMRealBusinessCycles/BCA.lean": 6,
     "AKMMRealBusinessCycles/Gains.lean": 15,
-    "AKMMRealBusinessCycles/Spectral.lean": 10
+    "AKMMRealBusinessCycles/Spectral.lean": 10,
+    "AKMMRealBusinessCycles/Herglotz.lean": 33,
+    "AKMMRealBusinessCycles/SpectralDensity.lean": 26,
+    "AKMMRealBusinessCycles/Cramer.lean": 14
   },
-  "audited_declarations": 159,
+  "audited_declarations": 247,
   "declarations": [
     {
       "name": "AKMM.RealBusinessCycles.hpD",
@@ -810,6 +813,446 @@
       "name": "AKMM.RealBusinessCycles.appx_transfer_normSq",
       "kind": "theorem",
       "module": "AKMMRealBusinessCycles/Spectral.lean"
+    },
+    {
+      "name": "AKMM.RealBusinessCycles.hergPosDef",
+      "kind": "def",
+      "module": "AKMMRealBusinessCycles/Herglotz.lean"
+    },
+    {
+      "name": "AKMM.RealBusinessCycles.herg_card_pairs",
+      "kind": "theorem",
+      "module": "AKMMRealBusinessCycles/Herglotz.lean"
+    },
+    {
+      "name": "AKMM.RealBusinessCycles.herg_sum_pairs",
+      "kind": "theorem",
+      "module": "AKMMRealBusinessCycles/Herglotz.lean"
+    },
+    {
+      "name": "AKMM.RealBusinessCycles.herg_integrable",
+      "kind": "theorem",
+      "module": "AKMMRealBusinessCycles/Herglotz.lean"
+    },
+    {
+      "name": "AKMM.RealBusinessCycles.herg_re_integral",
+      "kind": "theorem",
+      "module": "AKMMRealBusinessCycles/Herglotz.lean"
+    },
+    {
+      "name": "AKMM.RealBusinessCycles.herg_im_integral",
+      "kind": "theorem",
+      "module": "AKMMRealBusinessCycles/Herglotz.lean"
+    },
+    {
+      "name": "AKMM.RealBusinessCycles.herg_integral_fourier",
+      "kind": "theorem",
+      "module": "AKMMRealBusinessCycles/Herglotz.lean"
+    },
+    {
+      "name": "AKMM.RealBusinessCycles.hergFejer",
+      "kind": "def",
+      "module": "AKMMRealBusinessCycles/Herglotz.lean"
+    },
+    {
+      "name": "AKMM.RealBusinessCycles.herg_fejer_eq",
+      "kind": "theorem",
+      "module": "AKMMRealBusinessCycles/Herglotz.lean"
+    },
+    {
+      "name": "AKMM.RealBusinessCycles.herg_fejer_nonneg",
+      "kind": "theorem",
+      "module": "AKMMRealBusinessCycles/Herglotz.lean"
+    },
+    {
+      "name": "AKMM.RealBusinessCycles.herg_fejer_continuous",
+      "kind": "theorem",
+      "module": "AKMMRealBusinessCycles/Herglotz.lean"
+    },
+    {
+      "name": "AKMM.RealBusinessCycles.hergL",
+      "kind": "def",
+      "module": "AKMMRealBusinessCycles/Herglotz.lean"
+    },
+    {
+      "name": "AKMM.RealBusinessCycles.herg_fejer_coeff",
+      "kind": "theorem",
+      "module": "AKMMRealBusinessCycles/Herglotz.lean"
+    },
+    {
+      "name": "AKMM.RealBusinessCycles.herg_fejer_tendsto",
+      "kind": "theorem",
+      "module": "AKMMRealBusinessCycles/Herglotz.lean"
+    },
+    {
+      "name": "AKMM.RealBusinessCycles.herg_integral_fejer",
+      "kind": "theorem",
+      "module": "AKMMRealBusinessCycles/Herglotz.lean"
+    },
+    {
+      "name": "AKMM.RealBusinessCycles.herg_fejer_norm",
+      "kind": "theorem",
+      "module": "AKMMRealBusinessCycles/Herglotz.lean"
+    },
+    {
+      "name": "AKMM.RealBusinessCycles.herg_posDef_zero",
+      "kind": "theorem",
+      "module": "AKMMRealBusinessCycles/Herglotz.lean"
+    },
+    {
+      "name": "AKMM.RealBusinessCycles.herg_bound",
+      "kind": "theorem",
+      "module": "AKMMRealBusinessCycles/Herglotz.lean"
+    },
+    {
+      "name": "AKMM.RealBusinessCycles.herg_L_add",
+      "kind": "theorem",
+      "module": "AKMMRealBusinessCycles/Herglotz.lean"
+    },
+    {
+      "name": "AKMM.RealBusinessCycles.herg_L_smul",
+      "kind": "theorem",
+      "module": "AKMMRealBusinessCycles/Herglotz.lean"
+    },
+    {
+      "name": "AKMM.RealBusinessCycles.herg_L_sub",
+      "kind": "theorem",
+      "module": "AKMMRealBusinessCycles/Herglotz.lean"
+    },
+    {
+      "name": "AKMM.RealBusinessCycles.herg_tendsto_span",
+      "kind": "theorem",
+      "module": "AKMMRealBusinessCycles/Herglotz.lean"
+    },
+    {
+      "name": "AKMM.RealBusinessCycles.herg_tendsto",
+      "kind": "theorem",
+      "module": "AKMMRealBusinessCycles/Herglotz.lean"
+    },
+    {
+      "name": "AKMM.RealBusinessCycles.hergLim",
+      "kind": "def",
+      "module": "AKMMRealBusinessCycles/Herglotz.lean"
+    },
+    {
+      "name": "AKMM.RealBusinessCycles.herg_tendsto_lim",
+      "kind": "theorem",
+      "module": "AKMMRealBusinessCycles/Herglotz.lean"
+    },
+    {
+      "name": "AKMM.RealBusinessCycles.herg_lim_add",
+      "kind": "theorem",
+      "module": "AKMMRealBusinessCycles/Herglotz.lean"
+    },
+    {
+      "name": "AKMM.RealBusinessCycles.herg_lim_smul",
+      "kind": "theorem",
+      "module": "AKMMRealBusinessCycles/Herglotz.lean"
+    },
+    {
+      "name": "AKMM.RealBusinessCycles.hergOfReal",
+      "kind": "def",
+      "module": "AKMMRealBusinessCycles/Herglotz.lean"
+    },
+    {
+      "name": "AKMM.RealBusinessCycles.herg_L_ofReal_re",
+      "kind": "theorem",
+      "module": "AKMMRealBusinessCycles/Herglotz.lean"
+    },
+    {
+      "name": "AKMM.RealBusinessCycles.herg_L_re",
+      "kind": "theorem",
+      "module": "AKMMRealBusinessCycles/Herglotz.lean"
+    },
+    {
+      "name": "AKMM.RealBusinessCycles.herg_L_im",
+      "kind": "theorem",
+      "module": "AKMMRealBusinessCycles/Herglotz.lean"
+    },
+    {
+      "name": "AKMM.RealBusinessCycles.hergLambda",
+      "kind": "def",
+      "module": "AKMMRealBusinessCycles/Herglotz.lean"
+    },
+    {
+      "name": "AKMM.RealBusinessCycles.herg_exists",
+      "kind": "theorem",
+      "module": "AKMMRealBusinessCycles/Herglotz.lean"
+    },
+    {
+      "name": "AKMM.RealBusinessCycles.herg_posDef_of_measure",
+      "kind": "theorem",
+      "module": "AKMMRealBusinessCycles/Herglotz.lean"
+    },
+    {
+      "name": "AKMM.RealBusinessCycles.herg_integral_eq_of_coeff",
+      "kind": "theorem",
+      "module": "AKMMRealBusinessCycles/Herglotz.lean"
+    },
+    {
+      "name": "AKMM.RealBusinessCycles.herg_unique",
+      "kind": "theorem",
+      "module": "AKMMRealBusinessCycles/Herglotz.lean"
+    },
+    {
+      "name": "AKMM.RealBusinessCycles.herg_herglotz",
+      "kind": "theorem",
+      "module": "AKMMRealBusinessCycles/Herglotz.lean"
+    },
+    {
+      "name": "AKMM.RealBusinessCycles.herg_conj",
+      "kind": "theorem",
+      "module": "AKMMRealBusinessCycles/Herglotz.lean"
+    },
+    {
+      "name": "AKMM.RealBusinessCycles.herg_symm_of_real",
+      "kind": "theorem",
+      "module": "AKMMRealBusinessCycles/Herglotz.lean"
+    },
+    {
+      "name": "AKMM.RealBusinessCycles.sdenStationary",
+      "kind": "def",
+      "module": "AKMMRealBusinessCycles/SpectralDensity.lean"
+    },
+    {
+      "name": "AKMM.RealBusinessCycles.sden_posDef",
+      "kind": "theorem",
+      "module": "AKMMRealBusinessCycles/SpectralDensity.lean"
+    },
+    {
+      "name": "AKMM.RealBusinessCycles.sden_spectral",
+      "kind": "theorem",
+      "module": "AKMMRealBusinessCycles/SpectralDensity.lean"
+    },
+    {
+      "name": "AKMM.RealBusinessCycles.sden_norm_fourier",
+      "kind": "theorem",
+      "module": "AKMMRealBusinessCycles/SpectralDensity.lean"
+    },
+    {
+      "name": "AKMM.RealBusinessCycles.sden_integral_fourier_mul",
+      "kind": "theorem",
+      "module": "AKMMRealBusinessCycles/SpectralDensity.lean"
+    },
+    {
+      "name": "AKMM.RealBusinessCycles.sdenSeries",
+      "kind": "def",
+      "module": "AKMMRealBusinessCycles/SpectralDensity.lean"
+    },
+    {
+      "name": "AKMM.RealBusinessCycles.sden_series_continuous",
+      "kind": "theorem",
+      "module": "AKMMRealBusinessCycles/SpectralDensity.lean"
+    },
+    {
+      "name": "AKMM.RealBusinessCycles.sden_coeff",
+      "kind": "theorem",
+      "module": "AKMMRealBusinessCycles/SpectralDensity.lean"
+    },
+    {
+      "name": "AKMM.RealBusinessCycles.sden_series_nonneg",
+      "kind": "theorem",
+      "module": "AKMMRealBusinessCycles/SpectralDensity.lean"
+    },
+    {
+      "name": "AKMM.RealBusinessCycles.sdenMeasure",
+      "kind": "def",
+      "module": "AKMMRealBusinessCycles/SpectralDensity.lean"
+    },
+    {
+      "name": "AKMM.RealBusinessCycles.sden_measure_finite",
+      "kind": "theorem",
+      "module": "AKMMRealBusinessCycles/SpectralDensity.lean"
+    },
+    {
+      "name": "AKMM.RealBusinessCycles.sden_measure_coeff",
+      "kind": "theorem",
+      "module": "AKMMRealBusinessCycles/SpectralDensity.lean"
+    },
+    {
+      "name": "AKMM.RealBusinessCycles.sden_density",
+      "kind": "theorem",
+      "module": "AKMMRealBusinessCycles/SpectralDensity.lean"
+    },
+    {
+      "name": "AKMM.RealBusinessCycles.sdenAR1",
+      "kind": "def",
+      "module": "AKMMRealBusinessCycles/SpectralDensity.lean"
+    },
+    {
+      "name": "AKMM.RealBusinessCycles.sden_ar1_summable",
+      "kind": "theorem",
+      "module": "AKMMRealBusinessCycles/SpectralDensity.lean"
+    },
+    {
+      "name": "AKMM.RealBusinessCycles.sden_fourier_mul_nat",
+      "kind": "theorem",
+      "module": "AKMMRealBusinessCycles/SpectralDensity.lean"
+    },
+    {
+      "name": "AKMM.RealBusinessCycles.sden_one_sub_ne_zero",
+      "kind": "theorem",
+      "module": "AKMMRealBusinessCycles/SpectralDensity.lean"
+    },
+    {
+      "name": "AKMM.RealBusinessCycles.sden_ar1_alg",
+      "kind": "theorem",
+      "module": "AKMMRealBusinessCycles/SpectralDensity.lean"
+    },
+    {
+      "name": "AKMM.RealBusinessCycles.sden_ar1_series",
+      "kind": "theorem",
+      "module": "AKMMRealBusinessCycles/SpectralDensity.lean"
+    },
+    {
+      "name": "AKMM.RealBusinessCycles.sden_ar1_cos",
+      "kind": "theorem",
+      "module": "AKMMRealBusinessCycles/SpectralDensity.lean"
+    },
+    {
+      "name": "AKMM.RealBusinessCycles.sden_conj_one_sub",
+      "kind": "theorem",
+      "module": "AKMMRealBusinessCycles/SpectralDensity.lean"
+    },
+    {
+      "name": "AKMM.RealBusinessCycles.sden_ar1_eq_normSq",
+      "kind": "theorem",
+      "module": "AKMMRealBusinessCycles/SpectralDensity.lean"
+    },
+    {
+      "name": "AKMM.RealBusinessCycles.sden_ar1_normSq_cos",
+      "kind": "theorem",
+      "module": "AKMMRealBusinessCycles/SpectralDensity.lean"
+    },
+    {
+      "name": "AKMM.RealBusinessCycles.sden_ar1_nonneg",
+      "kind": "theorem",
+      "module": "AKMMRealBusinessCycles/SpectralDensity.lean"
+    },
+    {
+      "name": "AKMM.RealBusinessCycles.sden_ar1_measure",
+      "kind": "theorem",
+      "module": "AKMMRealBusinessCycles/SpectralDensity.lean"
+    },
+    {
+      "name": "AKMM.RealBusinessCycles.sden_ar1_coeff",
+      "kind": "theorem",
+      "module": "AKMMRealBusinessCycles/SpectralDensity.lean"
+    },
+    {
+      "name": "AKMM.RealBusinessCycles.sden_ar1_posDef",
+      "kind": "theorem",
+      "module": "AKMMRealBusinessCycles/SpectralDensity.lean"
+    },
+    {
+      "name": "AKMM.RealBusinessCycles.sden_white_noise",
+      "kind": "theorem",
+      "module": "AKMMRealBusinessCycles/SpectralDensity.lean"
+    },
+    {
+      "name": "AKMM.RealBusinessCycles.sdenPhi",
+      "kind": "def",
+      "module": "AKMMRealBusinessCycles/SpectralDensity.lean"
+    },
+    {
+      "name": "AKMM.RealBusinessCycles.sdenAR1Proc",
+      "kind": "def",
+      "module": "AKMMRealBusinessCycles/SpectralDensity.lean"
+    },
+    {
+      "name": "AKMM.RealBusinessCycles.sden_ar1_recursion",
+      "kind": "theorem",
+      "module": "AKMMRealBusinessCycles/SpectralDensity.lean"
+    },
+    {
+      "name": "AKMM.RealBusinessCycles.sden_ar1_stationary",
+      "kind": "theorem",
+      "module": "AKMMRealBusinessCycles/SpectralDensity.lean"
+    },
+    {
+      "name": "AKMM.RealBusinessCycles.cramExp",
+      "kind": "def",
+      "module": "AKMMRealBusinessCycles/Cramer.lean"
+    },
+    {
+      "name": "AKMM.RealBusinessCycles.cram_inner_exp",
+      "kind": "theorem",
+      "module": "AKMMRealBusinessCycles/Cramer.lean"
+    },
+    {
+      "name": "AKMM.RealBusinessCycles.cram_dense",
+      "kind": "theorem",
+      "module": "AKMMRealBusinessCycles/Cramer.lean"
+    },
+    {
+      "name": "AKMM.RealBusinessCycles.cram_denseRange",
+      "kind": "theorem",
+      "module": "AKMMRealBusinessCycles/Cramer.lean"
+    },
+    {
+      "name": "AKMM.RealBusinessCycles.cram_norm_eq",
+      "kind": "theorem",
+      "module": "AKMMRealBusinessCycles/Cramer.lean"
+    },
+    {
+      "name": "AKMM.RealBusinessCycles.cramIso",
+      "kind": "def",
+      "module": "AKMMRealBusinessCycles/Cramer.lean"
+    },
+    {
+      "name": "AKMM.RealBusinessCycles.cram_iso_exp",
+      "kind": "theorem",
+      "module": "AKMMRealBusinessCycles/Cramer.lean"
+    },
+    {
+      "name": "AKMM.RealBusinessCycles.cram_iso_inner",
+      "kind": "theorem",
+      "module": "AKMMRealBusinessCycles/Cramer.lean"
+    },
+    {
+      "name": "AKMM.RealBusinessCycles.cram_iso_unique",
+      "kind": "theorem",
+      "module": "AKMMRealBusinessCycles/Cramer.lean"
+    },
+    {
+      "name": "AKMM.RealBusinessCycles.cram_iso_range",
+      "kind": "theorem",
+      "module": "AKMMRealBusinessCycles/Cramer.lean"
+    },
+    {
+      "name": "AKMM.RealBusinessCycles.cramZ",
+      "kind": "def",
+      "module": "AKMMRealBusinessCycles/Cramer.lean"
+    },
+    {
+      "name": "AKMM.RealBusinessCycles.cram_Z_inner",
+      "kind": "theorem",
+      "module": "AKMMRealBusinessCycles/Cramer.lean"
+    },
+    {
+      "name": "AKMM.RealBusinessCycles.cram_Z_norm_sq",
+      "kind": "theorem",
+      "module": "AKMMRealBusinessCycles/Cramer.lean"
+    },
+    {
+      "name": "AKMM.RealBusinessCycles.cram_Z_orth",
+      "kind": "theorem",
+      "module": "AKMMRealBusinessCycles/Cramer.lean"
+    },
+    {
+      "name": "AKMM.RealBusinessCycles.cram_Z_union",
+      "kind": "theorem",
+      "module": "AKMMRealBusinessCycles/Cramer.lean"
+    },
+    {
+      "name": "AKMM.RealBusinessCycles.cram_Z_univ",
+      "kind": "theorem",
+      "module": "AKMMRealBusinessCycles/Cramer.lean"
+    },
+    {
+      "name": "AKMM.RealBusinessCycles.cram_spectral_representation",
+      "kind": "theorem",
+      "module": "AKMMRealBusinessCycles/Cramer.lean"
     }
   ],
   "full_build": "passed",
@@ -1613,6 +2056,446 @@
       "propext",
       "Classical.choice",
       "Quot.sound"
+    ],
+    "AKMM.RealBusinessCycles.hergPosDef": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.RealBusinessCycles.herg_card_pairs": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.RealBusinessCycles.herg_sum_pairs": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.RealBusinessCycles.herg_integrable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.RealBusinessCycles.herg_re_integral": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.RealBusinessCycles.herg_im_integral": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.RealBusinessCycles.herg_integral_fourier": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.RealBusinessCycles.hergFejer": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.RealBusinessCycles.herg_fejer_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.RealBusinessCycles.herg_fejer_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.RealBusinessCycles.herg_fejer_continuous": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.RealBusinessCycles.hergL": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.RealBusinessCycles.herg_fejer_coeff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.RealBusinessCycles.herg_fejer_tendsto": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.RealBusinessCycles.herg_integral_fejer": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.RealBusinessCycles.herg_fejer_norm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.RealBusinessCycles.herg_posDef_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.RealBusinessCycles.herg_bound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.RealBusinessCycles.herg_L_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.RealBusinessCycles.herg_L_smul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.RealBusinessCycles.herg_L_sub": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.RealBusinessCycles.herg_tendsto_span": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.RealBusinessCycles.herg_tendsto": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.RealBusinessCycles.hergLim": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.RealBusinessCycles.herg_tendsto_lim": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.RealBusinessCycles.herg_lim_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.RealBusinessCycles.herg_lim_smul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.RealBusinessCycles.hergOfReal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.RealBusinessCycles.herg_L_ofReal_re": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.RealBusinessCycles.herg_L_re": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.RealBusinessCycles.herg_L_im": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.RealBusinessCycles.hergLambda": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.RealBusinessCycles.herg_exists": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.RealBusinessCycles.herg_posDef_of_measure": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.RealBusinessCycles.herg_integral_eq_of_coeff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.RealBusinessCycles.herg_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.RealBusinessCycles.herg_herglotz": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.RealBusinessCycles.herg_conj": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.RealBusinessCycles.herg_symm_of_real": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.RealBusinessCycles.sdenStationary": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.RealBusinessCycles.sden_posDef": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.RealBusinessCycles.sden_spectral": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.RealBusinessCycles.sden_norm_fourier": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.RealBusinessCycles.sden_integral_fourier_mul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.RealBusinessCycles.sdenSeries": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.RealBusinessCycles.sden_series_continuous": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.RealBusinessCycles.sden_coeff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.RealBusinessCycles.sden_series_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.RealBusinessCycles.sdenMeasure": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.RealBusinessCycles.sden_measure_finite": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.RealBusinessCycles.sden_measure_coeff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.RealBusinessCycles.sden_density": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.RealBusinessCycles.sdenAR1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.RealBusinessCycles.sden_ar1_summable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.RealBusinessCycles.sden_fourier_mul_nat": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.RealBusinessCycles.sden_one_sub_ne_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.RealBusinessCycles.sden_ar1_alg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.RealBusinessCycles.sden_ar1_series": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.RealBusinessCycles.sden_ar1_cos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.RealBusinessCycles.sden_conj_one_sub": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.RealBusinessCycles.sden_ar1_eq_normSq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.RealBusinessCycles.sden_ar1_normSq_cos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.RealBusinessCycles.sden_ar1_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.RealBusinessCycles.sden_ar1_measure": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.RealBusinessCycles.sden_ar1_coeff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.RealBusinessCycles.sden_ar1_posDef": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.RealBusinessCycles.sden_white_noise": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.RealBusinessCycles.sdenPhi": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.RealBusinessCycles.sdenAR1Proc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.RealBusinessCycles.sden_ar1_recursion": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.RealBusinessCycles.sden_ar1_stationary": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.RealBusinessCycles.cramExp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.RealBusinessCycles.cram_inner_exp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.RealBusinessCycles.cram_dense": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.RealBusinessCycles.cram_denseRange": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.RealBusinessCycles.cram_norm_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.RealBusinessCycles.cramIso": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.RealBusinessCycles.cram_iso_exp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.RealBusinessCycles.cram_iso_inner": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.RealBusinessCycles.cram_iso_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.RealBusinessCycles.cram_iso_range": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.RealBusinessCycles.cramZ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.RealBusinessCycles.cram_Z_inner": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.RealBusinessCycles.cram_Z_norm_sq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.RealBusinessCycles.cram_Z_orth": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.RealBusinessCycles.cram_Z_union": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.RealBusinessCycles.cram_Z_univ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.RealBusinessCycles.cram_spectral_representation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
     ]
   },
   "source_sha256": {
@@ -1626,17 +2509,20 @@
     "AKMMRealBusinessCycles/Extensions.lean": "d1321ed5458450e600cd36a65982c60211860eafac883332db22b766b37eb77a",
     "AKMMRealBusinessCycles/BCA.lean": "dbb73320b533c5952ae4140e1aae93b10cf9d8f53e133637e1883487e73cd87b",
     "AKMMRealBusinessCycles/Gains.lean": "3e0af797572da2d92035bb4d09f717f0efce6ccda474cfe37560a88c161fc845",
-    "AKMMRealBusinessCycles/Spectral.lean": "3d003d167cd7697416604e5bcfb59245050a5197cb4ef7e439b09b40b046ce20",
-    "AKMMRealBusinessCycles.lean": "624f358b99373cf6fbf628b0985c91311d46918acd57ff1e16b9bb699e1bcfae",
+    "AKMMRealBusinessCycles/Spectral.lean": "8940cf369934503978b602f6a655323ae45a0d6fe0d59d3c7884a8a757f8dbce",
+    "AKMMRealBusinessCycles/Herglotz.lean": "25b7d84ecd47f42b7afe11b17f226cec5cd354aa4f365885428cbdb57ec62cea",
+    "AKMMRealBusinessCycles/SpectralDensity.lean": "dc5e91b2549069ab7e8da9f8cb6ac08bbb4a145a47e4f8754cd7078e91f40944",
+    "AKMMRealBusinessCycles/Cramer.lean": "4faa22e84081ab5aa53289d73462b1e286955dd603d9d6d7dbb252aa153bec16",
+    "AKMMRealBusinessCycles.lean": "9e88b3823fe3a378f1cfc898fde0d4c6495e04406649426f25456c6ec693b497",
     "lean-toolchain": "8733782dc070a99b312039cda424f601b80f3be6f6f512627da5ba25adc27632",
     "lakefile.toml": "a0bb910bd22db625392fa60f35ddb42c19ea065a6bfc811964fc00e555ae8291",
     "lake-manifest.json": "f25bb33f8c086cb2f484060b79d3639a0fec8c441aedab8aff556491604a1815",
-    "proof-manifest.json": "b80063423b9b7dda97457438767e8f84a00842d14af5a4caf792c321c0516554",
+    "proof-manifest.json": "f57eff4c702320815127ad519e78f3ff3ac24845a9a1623c10b89d4ee64bfea6",
     "scripts/verify.py": "a70b1fa704dd590f937f8b37682afa88a9d85a9150065acb935c7d2c9589da3b",
     "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
   },
-  "fresh_audit_sha256": "e64082b60f77f3c521d1f11bcf43f6a1df71f64b3948bffd2d060e7bf5cc4a19",
+  "fresh_audit_sha256": "436a232e27d1f65b44d24c6e48ba11514e294c34e1bc266463f9ffeda22c7972",
   "lean_toolchain": "leanprover/lean4:v4.34.0",
-  "scope": "AKMM Chapter 14 (pp. 405-438) and Appendix 14.A (pp. 863-867): real business cycles, the HP filter, SVAR, the core RBC model, extensions, business-cycle accounting and spectral analysis.",
+  "scope": "AKMM Chapter 14 (pp. 405-438) and Appendix 14.A (pp. 863-867): real business cycles, the HP filter, SVAR, the core RBC model, extensions, business-cycle accounting and spectral analysis, with the Herglotz theorem, spectral densities and the Kolmogorov isometry (the Hilbert-space form of the spectral representation theorem).",
   "source": "Marina Azzimonti, Per Krusell, Alisdair McKay and Toshihiko Mukoyama, Macroeconomics (draft of December 2025), Chapter 14 (Kurt Mitman), with Appendix 14.A"
 }

@@ -18,14 +18,18 @@ and impulse responses; (14.2)–(14.11) with the welfare theorems imported from 
 responses from linear policies; the calibration of `φ` with a numeric certificate; KPR balanced
 growth; the adjustment-cost algebra; the wedge conditions and backing out the wedges; and the
 spectral inversion formula, the filtered spectrum and the gains of the first-difference, HP and
-band-pass filters. Not formalised: history, data, stylised facts, tables, figures, simulations,
-estimation, and the Cramér spectral representation theorem. Eleven printed errors are corrected,
+band-pass filters. Beyond the text, the spectral representation the book states without proof
+is proved in Hilbert-space form: the Herglotz theorem, the spectral density of an absolutely
+summable autocovariance (with white noise and the AR(1) worked out), and the Kolmogorov isometry
+of `L²(F)` onto the closed span of the process with its orthogonal-increment random measure. Not
+formalised: history, data, stylised facts, tables, figures, simulations, estimation, and the
+stochastic-integral notation of the spectral representation. Eleven printed errors are corrected,
 among them the sign of the HP first-order condition, the missing `β` in the Bellman equation,
 the steady-state interest rate (`g^σ/β`, not `gσ/β`), Tobin's `q` (`1/(1 − ψ(i/k − δ))`), the
 inversion proof, the band variance and "less smoothing" for large `λ`, each with a Lean
 counterexample or corrected statement, as recorded in [corrections](docs/corrections.md); every
 book item is located in the [source map](docs/source-map.md). The library contains
-**134 theorems**.
+**207 theorems**.
 
 * **The HP filter** (§14.3.1): `I + λA` positive definite and the unique trend `(I + λA)⁻¹Y`
   (`hp_posDef`, `eq_14_1`, `hp_unique`, `hp_trend_eq`); the rows of `A` (`hp_A_interior`,
@@ -55,6 +59,17 @@ book item is located in the [source map](docs/source-map.md). The library contai
   (`appx_band_variance`), filtered spectrum (`appx_filter_autocov`, `appx_filtered_spectrum`),
   gains (`appx_gain_diff`, `appx_hp_gain_eq`, `appx_hp_gain_mono`, `appx_hp_gain_limit`,
   `appx_hp_trend_gain_anti`), band-pass coefficients (`appx_bandpass_coeff`).
+* **Spectral representation** (pp. 412–413, beyond the text; correction 12): the Herglotz theorem,
+  `γ` positive definite iff `γ(h) = ∫e^{ihω}dF` for a unique finite measure `F` on the circle
+  (`herg_herglotz`, `herg_exists`, `herg_unique`, `herg_posDef_of_measure`, Fejér sums and
+  Riesz–Markov–Kakutani), `F` symmetric for real `γ` (`herg_symm_of_real`); weakly stationary
+  processes and their spectral measures (`sdenStationary`, `sden_posDef`, `sden_spectral`); the
+  continuous density `(1/2π)Σγₕe^{−ihω} ≥ 0` when `Σ∣γₕ∣ < ∞` (`sden_density`); white noise and
+  the AR(1) with density `1/(2π(1 − 2ρcos ω + ρ²))` (`sden_white_noise`, `sden_ar1_series`,
+  `sden_ar1_normSq_cos`, `sden_ar1_recursion`, `sden_ar1_stationary`); the Kolmogorov isometry
+  `L²(F) ≅ H_X`, `e^{itω} ↦ Xₜ` (`cramIso`, `cram_iso_exp`, `cram_iso_unique`, `cram_iso_range`,
+  `cram_spectral_representation`) and `Z(A) = V(1_A)` with `⟪Z(A), Z(B)⟫ = F(A ∩ B)`
+  (`cram_Z_inner`, `cram_Z_norm_sq`, `cram_Z_orth`, `cram_Z_union`, `cram_Z_univ`).
 
 All names are in the namespace `AKMM.RealBusinessCycles`. The project imports
 [EconomicDynamics/NeoclassicalGrowth](../../EconomicDynamics/NeoclassicalGrowth/README.md)
@@ -79,6 +94,9 @@ theorems, `rx_cu_amplification`, `rx_ist_price`, `rb_lottery`, `rb_u38_bgp`),
 | [BCA](AKMMRealBusinessCycles/BCA.lean) | 6 | Business-cycle accounting (AKMM §14.6, pp. 434–437) |
 | [Gains](AKMMRealBusinessCycles/Gains.lean) | 15 | Gains of the first-difference, HP and band-pass filters (AKMM App. 14.A, pp. 864–865) |
 | [Spectral](AKMMRealBusinessCycles/Spectral.lean) | 10 | The spectrum, inversion, variance, filtered spectrum (AKMM App. 14.A, pp. 863–864) |
+| [Herglotz](AKMMRealBusinessCycles/Herglotz.lean) | 33 | The Herglotz theorem: positive definite sequences are Fourier coefficients of a unique finite measure on the circle (AKMM pp. 412–413, beyond the text) |
+| [SpectralDensity](AKMMRealBusinessCycles/SpectralDensity.lean) | 26 | Weakly stationary processes, spectral measures and densities; white noise and the AR(1) (AKMM pp. 412–413, p. 863, beyond the text) |
+| [Cramer](AKMMRealBusinessCycles/Cramer.lean) | 14 | The Kolmogorov isometry `L²(F) ≅ H_X` and the orthogonal-increment measure: Cramér's theorem in Hilbert-space form (AKMM pp. 412–413, beyond the text) |
 
 ## Build and verify
 

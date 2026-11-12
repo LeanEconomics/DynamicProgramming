@@ -9,3 +9,6 @@ import AKMMRealBusinessCycles.Extensions
 import AKMMRealBusinessCycles.BCA
 import AKMMRealBusinessCycles.Gains
 import AKMMRealBusinessCycles.Spectral
+import AKMMRealBusinessCycles.Herglotz
+import AKMMRealBusinessCycles.SpectralDensity
+import AKMMRealBusinessCycles.Cramer
