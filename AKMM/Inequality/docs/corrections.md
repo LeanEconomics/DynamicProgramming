@@ -28,8 +28,11 @@ names are relative to `AKMM.Inequality`. Every book item is located in the
    stationary law). `aₜ` keeps being hit by fresh i.i.d. shocks and in general does not converge
    in probability; for `sₜ = 0`, `aₜ₊₁ = εₜ` is an i.i.d. sequence. Footnote 31 also omits the
    standard side conditions (`E[s^ζ log⁺ s] < ∞`, `log s` non-arithmetic, `E|ε|^ζ < ∞`; the
-   printed `E[ζ] < ∞` has lost its symbol). Not formalised: the theorem is beyond the text
-   (decision 5); only the moment condition is treated (departures 9).
+   printed `E[ζ] < ∞` has lost its symbol). The tail asymptotics are not formalised (they need
+   the implicit renewal theorem; decision 5). Beyond the text, the corrected convergence statement
+   is proved: the law of `aₜ` converges weakly to the law of the stationary `A` from any `a₀`
+   (`kp_iter_tendsto_law`), while the backward iterates converge almost surely
+   (`kp_back_tendsto_ae`); see departures 13 for what else is proved.
 
 ## Departures and added hypotheses
 
@@ -88,6 +91,17 @@ names are relative to `AKMM.Inequality`. Every book item is located in the
     equality gives 0" is added (`gi_gini_eq_zero_iff`).
 12. **p. 657, education.** The fraction educated is stated for any wealth distribution (a
     measure on `ℝ`); ties (`w_s − F = w_u`) are resolved against education.
+
+13. **p. 651, Kesten's process, beyond the text (decision 5).** Proved on the canonical i.i.d.
+    space `infinitePi ν` (`ν` the law of `(s, ε)`), under `E|s|^κ < 1` and `E|ε|^κ < ∞` for some
+    `κ > 0` in place of Kesten's `E log s < 0` (for finitely supported `s` with `E log s < 0` such a
+    `κ` exists, `kp_moment_root`): a.s. and `L^κ` convergence of the perpetuity, the fixed-point
+    law, weak convergence of the law of `aₜ` (stated as `E f(aₜ) → E f(A)` for bounded continuous
+    `f`). The tail index is proved in the moment sense: `E|A|^κ < ∞` for `κ < ζ`, `E A^κ = ∞` for
+    `κ > ζ` (with `s, ε ≥ 0`, `ε` not a.s. `0`), hence `sup {κ : E A^κ < ∞} = ζ` (`kp_tail_index`);
+    `E A^ζ` itself is not decided. The finitely supported instance (`kp_finite_tail_index_ke`)
+    takes `(s, ε)` finitely supported with `ε ≥ 0`; the asymptotics `P(A > a) ~ C a^{−ζ}` are not
+    formalised.
 
 ## Checked and not errors
 

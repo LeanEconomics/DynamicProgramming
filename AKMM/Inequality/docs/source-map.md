@@ -119,8 +119,11 @@ sufficiency of the Euler equation are Chapter 11's `eq_11_13` and `cd_optimal_of
 | p. 650 | Aiyagari: more risk or risk aversion raises steady-state capital | not formalised: cited (Chapter 11) |
 | pp. 650–651 | AR(1) earnings under-predict top wealth; Castañeda et al. (2003) | not formalised: quantitative |
 | p. 651, fn 30 | Random discount factors and returns spread the distribution; time-consistent random discounting | not formalised: verbal |
-| p. 651 | Kesten: `aₜ₊₁ = sₜaₜ + εₜ` has a Pareto right tail `P(A > a) ∝ a^{−ζ}` | not formalised: Kesten–Goldie implicit renewal theorem, beyond the text (decision 5); see corrections 3 |
+| p. 651 | Kesten: `aₜ₊₁ = sₜaₜ + εₜ` has a Pareto right tail `P(A > a) ∝ a^{−ζ}` | asymptotics `P(A > a) ~ C a^{−ζ}` not formalised: they need the Kesten–Goldie implicit renewal theorem (decision 5); see corrections 3. Beyond the text, formalised short of them (departures 13): |
+| p. 651 | `aₜ` converges to a random variable `A` (stationary solution) | perpetuity `kp_perp`, `kp_term`: `kp_perp_hasSum_ae` (a.s. absolute convergence), `kp_perp_tendsto_Lp` (in `L^κ`), `kp_fixed_point` (`A = ε₀ + s₀A′`, `A′ =ᵈ A` independent of `(s₀, ε₀)`), `kp_iter_tendsto_law` (law of `aₜ` → law of `A` weakly, any `a₀`; via `kp_iter_identDistrib`, `kp_back_tendsto_ae`) |
+| p. 651 | The right tail has exponent `ζ` | moment sense: `kp_lintegral_perp_lt_top` (`E|A|^κ < ∞` if `E|s|^κ < 1`, `E|ε|^κ < ∞`; `kp_lintegral_tsum_rpow_le`), `kp_tail_bound` (`P(|A| ≥ a) ≤ C_κ a^{−κ}`), `kp_lintegral_abs_eq_top`, `kp_lintegral_perp_eq_top` (`E A^κ = ∞` if `E s^κ > 1`), `kp_tail_index` (`sup {κ : E A^κ < ∞} = ζ`) |
 | fn 31, p. 651 | `ζ > 0` with `E s^ζ = 1` | special case: for finitely supported `s > 0` with `E log s < 0` and `P(s > 1) > 0` the root exists and is unique: `ke_moment`, `ke_moment_zero`, `ke_moment_hasDerivAt`, `ke_moment_exists`, `ke_moment_unique` |
+| fn 31, p. 651 | The result follows if `E s^ζ = 1` (finitely supported case) | `kp_moment_root` (`E s^κ < 1` below `ζ`, `> 1` above), `kp_finite_tail_index`, `kp_finite_tail_index_ke` (the tail index is the root of `ke_moment_exists`), two-point example `kp_two_point`, `kp_two_point_ke` (`ζ = 1`) |
 | pp. 651–652, fn 32–33 | CRRA saving is approximately linear at high wealth (Hubmer et al.); Pareto earnings give Pareto wealth | not formalised: cited |
 | p. 652 | Welfare: random discount factors versus random returns | not formalised: verbal |
 | p. 652 | Hours worked, Domeij–Floden, Pijoan-Mas | not formalised: verbal |

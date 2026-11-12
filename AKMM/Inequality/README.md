@@ -20,12 +20,14 @@ altruistic recursion uses Obstfeld–Rogoff's dynasty utility; the Lorenz curve 
 coefficient, and the uniqueness of the stationary distribution, are Miao's Chapter 17 and
 Proposition 8.3.1; the Solow steady state is Solow1956's. Not formalised: data, facts and
 figures, calibrated and quantitative results, the empirical discussion, cited models without
-derivations, and the Kesten–Goldie tail theorem (beyond the text; only its moment condition is
-proved). Three printed errors are corrected: the directed-technology first-order condition
+derivations, and the Kesten–Goldie tail asymptotics `P(A > a) ~ C a^{−ζ}` (they need the
+implicit renewal theorem). Beyond the text, Kesten's process is treated short of those
+asymptotics: the stationary solution, the weak convergence of the law of `aₜ`, and the tail
+index `ζ` in the moment sense. Three printed errors are corrected: the directed-technology first-order condition
 (the factor `λ/(1 − λ)` needs the exponent `1/(σ − φ)`), the gross return under progressive
 taxation in footnote 25 (`aτ′(a)`, not `τ′(a)/a`), and Kesten's convergence "in probability", as
 recorded in [corrections](docs/corrections.md); every book item is located in the
-[source map](docs/source-map.md). The library contains **103 theorems**.
+[source map](docs/source-map.md). The library contains **151 theorems**.
 
 * **Factor shares and `k/y`** (§21.2.1): the share depends only on `A_h h/(A_k k)`
   (`fs_partial_homog`, `fs_capital_share_homog`); the CES share and its monotonicity
@@ -49,6 +51,15 @@ recorded in [corrections](docs/corrections.md); every book item is located in th
 * **Uninsurable shocks** (§21.2.3): Huggett with `a = 0` (`hu_autarky_clearing`, `hu_kkt_iff`,
   `hu_price_iff`, `hu_rate_below_discount`); determinacy (`ui_determinate`); Kesten's moment
   condition (`ke_moment_exists`, `ke_moment_unique`).
+* **Kesten's random growth process, beyond the text** (§21.2.3, p. 651): on the i.i.d. space
+  `infinitePi ν`, with `E|s|^κ < 1` and `E|ε|^κ < ∞`, the perpetuity `A = Σₖ s₀⋯s_{k−1} εₖ`
+  converges a.s. and in `L^κ` (`kp_perp_hasSum_ae`, `kp_perp_tendsto_Lp`), `A = ε₀ + s₀A′` with
+  `A′ =ᵈ A` independent of `(s₀, ε₀)` (`kp_fixed_point`), and the law of `aₜ` converges weakly to
+  that of `A` from any `a₀` (`kp_iter_tendsto_law`); `E|A|^κ < ∞` and `P(|A| ≥ a) ≤ C_κ a^{−κ}`
+  (`kp_lintegral_perp_lt_top`, `kp_tail_bound`), `E A^κ = ∞` when `E s^κ > 1`
+  (`kp_lintegral_perp_eq_top`), so `sup {κ : E A^κ < ∞} = ζ` (`kp_tail_index`,
+  `kp_moment_root`, `kp_finite_tail_index`, `kp_finite_tail_index_ke`); a two-point example with
+  `ζ = 1` (`kp_two_point`, `kp_two_point_ke`). The Kesten–Goldie asymptotics are not formalised.
 * **Distributions** (§21.1): `gi_gini_eq_ratio`, `gi_lorenz_convex`, `gi_gini_eq_zero_iff`,
   `gi_gini_concentrated_tendsto`, `pa_log_ccdf`.
 * **Channels** (§21.3): education with a fixed cost (`ed_fraction`, `ed_wealth_matters`), the MPC
@@ -74,6 +85,7 @@ InternationalEconomics/LifeCycleFiscalPolicy (Obstfeld–Rogoff:
 | [Uninsurable](AKMMInequality/Uninsurable.lean) | 9 | Huggett with `a = 0`, determinacy, Kesten's moment condition (AKMM §21.2.3, pp. 650–651) |
 | [Distribution](AKMMInequality/Distribution.lean) | 10 | Lorenz curve, Gini coefficient, Pareto tails (AKMM §21.1, pp. 630–631) |
 | [Channels](AKMMInequality/Channels.lean) | 7 | Education with a fixed cost, MPCs, TANK, the consumption externality (AKMM §21.3, pp. 656–660) |
+| [Kesten](AKMMInequality/Kesten.lean) | 48 | Kesten's process: stationary solution, weak convergence, tail index in the moment sense; beyond the text (AKMM §21.2.3, p. 651) |
 
 ## Build and verify
 

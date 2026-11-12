@@ -1,6 +1,6 @@
 {
-  "checked_at_utc": "2026-11-12T10:50:49.934810+00:00",
-  "theorems": 103,
+  "checked_at_utc": "2026-11-12T21:53:22.709619+00:00",
+  "theorems": 151,
   "module_theorems": {
     "AKMMInequality/FactorShares.lean": 13,
     "AKMMInequality/WageInequality.lean": 28,
@@ -8,9 +8,10 @@
     "AKMMInequality/Distortions.lean": 17,
     "AKMMInequality/Uninsurable.lean": 9,
     "AKMMInequality/Distribution.lean": 10,
-    "AKMMInequality/Channels.lean": 7
+    "AKMMInequality/Channels.lean": 7,
+    "AKMMInequality/Kesten.lean": 48
   },
-  "audited_declarations": 120,
+  "audited_declarations": 177,
   "declarations": [
     {
       "name": "AKMM.Inequality.fs_partial_homog",
@@ -611,6 +612,291 @@
       "name": "AKMM.Inequality.ext_log_output",
       "kind": "theorem",
       "module": "AKMMInequality/Channels.lean"
+    },
+    {
+      "name": "AKMM.Inequality.kp_P",
+      "kind": "abbrev",
+      "module": "AKMMInequality/Kesten.lean"
+    },
+    {
+      "name": "AKMM.Inequality.kp_shift",
+      "kind": "def",
+      "module": "AKMMInequality/Kesten.lean"
+    },
+    {
+      "name": "AKMM.Inequality.kp_shift_measurable",
+      "kind": "theorem",
+      "module": "AKMMInequality/Kesten.lean"
+    },
+    {
+      "name": "AKMM.Inequality.kp_shift_mp",
+      "kind": "theorem",
+      "module": "AKMMInequality/Kesten.lean"
+    },
+    {
+      "name": "AKMM.Inequality.kp_indep_head_shift",
+      "kind": "theorem",
+      "module": "AKMMInequality/Kesten.lean"
+    },
+    {
+      "name": "AKMM.Inequality.kp_lintegral_head_shift",
+      "kind": "theorem",
+      "module": "AKMMInequality/Kesten.lean"
+    },
+    {
+      "name": "AKMM.Inequality.kp_lintegral_prod_mul",
+      "kind": "theorem",
+      "module": "AKMMInequality/Kesten.lean"
+    },
+    {
+      "name": "AKMM.Inequality.kp_rpow_sum_le_sum_rpow",
+      "kind": "theorem",
+      "module": "AKMMInequality/Kesten.lean"
+    },
+    {
+      "name": "AKMM.Inequality.kp_lintegral_sum_rpow_le",
+      "kind": "theorem",
+      "module": "AKMMInequality/Kesten.lean"
+    },
+    {
+      "name": "AKMM.Inequality.kp_lintegral_tsum_rpow_le",
+      "kind": "theorem",
+      "module": "AKMMInequality/Kesten.lean"
+    },
+    {
+      "name": "AKMM.Inequality.kp_term",
+      "kind": "def",
+      "module": "AKMMInequality/Kesten.lean"
+    },
+    {
+      "name": "AKMM.Inequality.kp_abs",
+      "kind": "def",
+      "module": "AKMMInequality/Kesten.lean"
+    },
+    {
+      "name": "AKMM.Inequality.kp_perp",
+      "kind": "def",
+      "module": "AKMMInequality/Kesten.lean"
+    },
+    {
+      "name": "AKMM.Inequality.kp_term_measurable",
+      "kind": "theorem",
+      "module": "AKMMInequality/Kesten.lean"
+    },
+    {
+      "name": "AKMM.Inequality.kp_abs_measurable",
+      "kind": "theorem",
+      "module": "AKMMInequality/Kesten.lean"
+    },
+    {
+      "name": "AKMM.Inequality.kp_perp_measurable",
+      "kind": "theorem",
+      "module": "AKMMInequality/Kesten.lean"
+    },
+    {
+      "name": "AKMM.Inequality.kp_hasSum",
+      "kind": "theorem",
+      "module": "AKMMInequality/Kesten.lean"
+    },
+    {
+      "name": "AKMM.Inequality.kp_enorm_prod_rpow",
+      "kind": "theorem",
+      "module": "AKMMInequality/Kesten.lean"
+    },
+    {
+      "name": "AKMM.Inequality.kp_enorm_term_rpow",
+      "kind": "theorem",
+      "module": "AKMMInequality/Kesten.lean"
+    },
+    {
+      "name": "AKMM.Inequality.kp_lintegral_term",
+      "kind": "theorem",
+      "module": "AKMMInequality/Kesten.lean"
+    },
+    {
+      "name": "AKMM.Inequality.kp_lintegral_abs_lt_top",
+      "kind": "theorem",
+      "module": "AKMMInequality/Kesten.lean"
+    },
+    {
+      "name": "AKMM.Inequality.kp_abs_ae_lt_top",
+      "kind": "theorem",
+      "module": "AKMMInequality/Kesten.lean"
+    },
+    {
+      "name": "AKMM.Inequality.kp_perp_hasSum_ae",
+      "kind": "theorem",
+      "module": "AKMMInequality/Kesten.lean"
+    },
+    {
+      "name": "AKMM.Inequality.kp_perp_tendsto_Lp",
+      "kind": "theorem",
+      "module": "AKMMInequality/Kesten.lean"
+    },
+    {
+      "name": "AKMM.Inequality.kp_term_zero",
+      "kind": "theorem",
+      "module": "AKMMInequality/Kesten.lean"
+    },
+    {
+      "name": "AKMM.Inequality.kp_term_succ",
+      "kind": "theorem",
+      "module": "AKMMInequality/Kesten.lean"
+    },
+    {
+      "name": "AKMM.Inequality.kp_abs_eq",
+      "kind": "theorem",
+      "module": "AKMMInequality/Kesten.lean"
+    },
+    {
+      "name": "AKMM.Inequality.kp_fixed_point",
+      "kind": "theorem",
+      "module": "AKMMInequality/Kesten.lean"
+    },
+    {
+      "name": "AKMM.Inequality.kp_iter",
+      "kind": "def",
+      "module": "AKMMInequality/Kesten.lean"
+    },
+    {
+      "name": "AKMM.Inequality.kp_back",
+      "kind": "def",
+      "module": "AKMMInequality/Kesten.lean"
+    },
+    {
+      "name": "AKMM.Inequality.kp_rev",
+      "kind": "def",
+      "module": "AKMMInequality/Kesten.lean"
+    },
+    {
+      "name": "AKMM.Inequality.kp_rev_injective",
+      "kind": "theorem",
+      "module": "AKMMInequality/Kesten.lean"
+    },
+    {
+      "name": "AKMM.Inequality.kp_rev_mp",
+      "kind": "theorem",
+      "module": "AKMMInequality/Kesten.lean"
+    },
+    {
+      "name": "AKMM.Inequality.kp_back_congr",
+      "kind": "theorem",
+      "module": "AKMMInequality/Kesten.lean"
+    },
+    {
+      "name": "AKMM.Inequality.kp_back_succ",
+      "kind": "theorem",
+      "module": "AKMMInequality/Kesten.lean"
+    },
+    {
+      "name": "AKMM.Inequality.kp_iter_eq_back",
+      "kind": "theorem",
+      "module": "AKMMInequality/Kesten.lean"
+    },
+    {
+      "name": "AKMM.Inequality.kp_back_measurable",
+      "kind": "theorem",
+      "module": "AKMMInequality/Kesten.lean"
+    },
+    {
+      "name": "AKMM.Inequality.kp_iter_identDistrib",
+      "kind": "theorem",
+      "module": "AKMMInequality/Kesten.lean"
+    },
+    {
+      "name": "AKMM.Inequality.kp_prod_tendsto_zero",
+      "kind": "theorem",
+      "module": "AKMMInequality/Kesten.lean"
+    },
+    {
+      "name": "AKMM.Inequality.kp_back_tendsto_ae",
+      "kind": "theorem",
+      "module": "AKMMInequality/Kesten.lean"
+    },
+    {
+      "name": "AKMM.Inequality.kp_iter_tendsto_law",
+      "kind": "theorem",
+      "module": "AKMMInequality/Kesten.lean"
+    },
+    {
+      "name": "AKMM.Inequality.kp_lintegral_perp_lt_top",
+      "kind": "theorem",
+      "module": "AKMMInequality/Kesten.lean"
+    },
+    {
+      "name": "AKMM.Inequality.kp_tail_bound",
+      "kind": "theorem",
+      "module": "AKMMInequality/Kesten.lean"
+    },
+    {
+      "name": "AKMM.Inequality.kp_lintegral_abs_eq_top",
+      "kind": "theorem",
+      "module": "AKMMInequality/Kesten.lean"
+    },
+    {
+      "name": "AKMM.Inequality.kp_enorm_perp_ae",
+      "kind": "theorem",
+      "module": "AKMMInequality/Kesten.lean"
+    },
+    {
+      "name": "AKMM.Inequality.kp_lintegral_perp_eq_top",
+      "kind": "theorem",
+      "module": "AKMMInequality/Kesten.lean"
+    },
+    {
+      "name": "AKMM.Inequality.kp_moment_ne_zero",
+      "kind": "theorem",
+      "module": "AKMMInequality/Kesten.lean"
+    },
+    {
+      "name": "AKMM.Inequality.kp_tail_index",
+      "kind": "theorem",
+      "module": "AKMMInequality/Kesten.lean"
+    },
+    {
+      "name": "AKMM.Inequality.kp_moment_root",
+      "kind": "theorem",
+      "module": "AKMMInequality/Kesten.lean"
+    },
+    {
+      "name": "AKMM.Inequality.kp_finite",
+      "kind": "def",
+      "module": "AKMMInequality/Kesten.lean"
+    },
+    {
+      "name": "AKMM.Inequality.kp_finite_lintegral",
+      "kind": "theorem",
+      "module": "AKMMInequality/Kesten.lean"
+    },
+    {
+      "name": "AKMM.Inequality.kp_finite_isProb",
+      "kind": "theorem",
+      "module": "AKMMInequality/Kesten.lean"
+    },
+    {
+      "name": "AKMM.Inequality.kp_finite_ae",
+      "kind": "theorem",
+      "module": "AKMMInequality/Kesten.lean"
+    },
+    {
+      "name": "AKMM.Inequality.kp_finite_tail_index",
+      "kind": "theorem",
+      "module": "AKMMInequality/Kesten.lean"
+    },
+    {
+      "name": "AKMM.Inequality.kp_two_point",
+      "kind": "theorem",
+      "module": "AKMMInequality/Kesten.lean"
+    },
+    {
+      "name": "AKMM.Inequality.kp_finite_tail_index_ke",
+      "kind": "theorem",
+      "module": "AKMMInequality/Kesten.lean"
+    },
+    {
+      "name": "AKMM.Inequality.kp_two_point_ke",
+      "kind": "theorem",
+      "module": "AKMMInequality/Kesten.lean"
     }
   ],
   "full_build": "passed",
@@ -1219,6 +1505,286 @@
       "propext",
       "Classical.choice",
       "Quot.sound"
+    ],
+    "AKMM.Inequality.kp_P": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Inequality.kp_shift": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Inequality.kp_shift_measurable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Inequality.kp_shift_mp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Inequality.kp_indep_head_shift": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Inequality.kp_lintegral_head_shift": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Inequality.kp_lintegral_prod_mul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Inequality.kp_rpow_sum_le_sum_rpow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Inequality.kp_lintegral_sum_rpow_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Inequality.kp_lintegral_tsum_rpow_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Inequality.kp_term": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Inequality.kp_abs": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Inequality.kp_perp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Inequality.kp_term_measurable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Inequality.kp_abs_measurable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Inequality.kp_perp_measurable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Inequality.kp_hasSum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Inequality.kp_enorm_prod_rpow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Inequality.kp_enorm_term_rpow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Inequality.kp_lintegral_term": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Inequality.kp_lintegral_abs_lt_top": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Inequality.kp_abs_ae_lt_top": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Inequality.kp_perp_hasSum_ae": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Inequality.kp_perp_tendsto_Lp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Inequality.kp_term_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Inequality.kp_term_succ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Inequality.kp_abs_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Inequality.kp_fixed_point": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Inequality.kp_iter": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Inequality.kp_back": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Inequality.kp_rev": [],
+    "AKMM.Inequality.kp_rev_injective": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AKMM.Inequality.kp_rev_mp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Inequality.kp_back_congr": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Inequality.kp_back_succ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Inequality.kp_iter_eq_back": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Inequality.kp_back_measurable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Inequality.kp_iter_identDistrib": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Inequality.kp_prod_tendsto_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Inequality.kp_back_tendsto_ae": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Inequality.kp_iter_tendsto_law": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Inequality.kp_lintegral_perp_lt_top": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Inequality.kp_tail_bound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Inequality.kp_lintegral_abs_eq_top": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Inequality.kp_enorm_perp_ae": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Inequality.kp_lintegral_perp_eq_top": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Inequality.kp_moment_ne_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Inequality.kp_tail_index": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Inequality.kp_moment_root": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Inequality.kp_finite": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Inequality.kp_finite_lintegral": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Inequality.kp_finite_isProb": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Inequality.kp_finite_ae": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Inequality.kp_finite_tail_index": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Inequality.kp_two_point": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Inequality.kp_finite_tail_index_ke": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Inequality.kp_two_point_ke": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
     ]
   },
   "source_sha256": {
@@ -1229,15 +1795,16 @@
     "AKMMInequality/Uninsurable.lean": "acce2b1df72c4968b8532a0cdde7bb9ac8b79bdf1988ddd18aba3859cd3288be",
     "AKMMInequality/Distribution.lean": "570cfab13ad7e903103ea17291f115f39e53976df8636efa151b018f2e8fd9a8",
     "AKMMInequality/Channels.lean": "7151855c9ba242ba6bbcc3b105dd82bed50ddf1bd2291dfcf59623a9566f6e04",
-    "AKMMInequality.lean": "83f3ad94946569499e753b3e136242927e39ba31679966e405d52777c0c49162",
+    "AKMMInequality/Kesten.lean": "ac9b217db59e13e17fcc2061b61d37fd8de9ce55526bf3a7527ceba94becce40",
+    "AKMMInequality.lean": "76572a21c64550c16913d47c8de4e97a9b419f2452c26a8301b07e1c70971fb6",
     "lean-toolchain": "8733782dc070a99b312039cda424f601b80f3be6f6f512627da5ba25adc27632",
     "lakefile.toml": "a53f9c1e0133da5764951f893bed6533ae3a2552d217c81c11455eb92fb03e24",
-    "lake-manifest.json": "c5a08f15e8bfef066d1c871c8d0896097be9bdc64b09c5fae3dd9074273b63cb",
-    "proof-manifest.json": "0f74dc6c1c5a81269bb957d3df0c70b8a4c03e7c990881a48597645019502753",
+    "lake-manifest.json": "54be3e06d95149354423b5b78b145106b830304ed6c68b81fb11e4eb622e66c5",
+    "proof-manifest.json": "45d426b67db439db149ab77e6733260e7c6d8bc0345839046375e926ba29b2d7",
     "scripts/verify.py": "a70b1fa704dd590f937f8b37682afa88a9d85a9150065acb935c7d2c9589da3b",
     "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
   },
-  "fresh_audit_sha256": "37d85d2f7811c93327330ae64e91e3d0f83e2a09917c71f4301564be12acec47",
+  "fresh_audit_sha256": "1babc5edc358ebf9297ee57677c88b0c7b167a4dc9b85b600da1e5706a2a5eba",
   "lean_toolchain": "leanprover/lean4:v4.34.0",
   "scope": "AKMM Chapter 21 (pp. 627-662): inequality.",
   "source": "Marina Azzimonti, Per Krusell, Alisdair McKay and Toshihiko Mukoyama, Macroeconomics (draft of December 2025), Chapter 21"
