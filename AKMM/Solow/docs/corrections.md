@@ -92,8 +92,7 @@ are relative to `AKMM.Solow`. Every book item is located in the [source map](sou
 13. **Poverty traps (p. 77).** "At least one of the steady states will then not be stable" is
     proved for two adjacent steady states of a continuous increasing map
     (`solow_poverty_trap_unstable`, with local attraction `SolowLocallyAttracting`). The claim that
-    a sufficient rise in saving removes `k̄₁, k̄₂` is qualitative and not formalised; given a single
-    crossing, global convergence is `solow_global_convergence_weak`.
+    a sufficient rise in saving removes `k̄₁, k̄₂` is proved in `FigureClaims` (item 16).
 
 14. **Linearisations.** (3.10), (3.12) and (3.18) are first-order approximations in the book; they
     are formalised as exact derivatives of the maps at the steady state (`eq_3_10`, `eq_3_12`,
@@ -103,3 +102,33 @@ are relative to `AKMM.Solow`. Every book item is located in the [source map](sou
 
 15. **Uzawa Part I.** `F̃_t` is defined on the positive orthant as in the book, and `1 + γ > 0`,
     `1 + n > 0` are assumed. Part I needs only constant returns of `F̃₀`, not of every `F̃_t`.
+
+16. **Poverty traps, Fig. 3.3 (p. 77).** The book states these claims from the figure only. They
+    are proved under `SolowThreeCrossings`: `f` continuous and nondecreasing on `k > 0`
+    (Assumption 1 weakened to weak monotonicity; no concavity or differentiability), `0 < δ < 1`,
+    and the figure's crossing pattern of `(1 − δ)k + s f(k)` with the 45-degree line at
+    `0 < k̄₁ < k̄₂ < k̄₃`. The figure has `f(0) > 0`, which Assumption 4 excludes; the hypotheses
+    concern only `k > 0`, so both cases are covered. Basins: `(0, k̄₂)` goes to `k̄₁`, `(k̄₂, ∞)` to
+    `k̄₃` (`solow_poverty_trap_basins`); `k̄₁`, `k̄₃` are locally attracting and `k̄₂` is not
+    (`solow_poverty_trap_stability`). "If the saving rate is raised sufficiently … `k̄₁` and `k̄₂`
+    will disappear and the economy converges globally to `k̄₃`" needs assumptions the book does
+    not state: we assume `f(k) ≥ m k` on `(0, k̂]` (`m > 0`; true when `f(0) > 0`) and `f(k)/k`
+    strictly decreasing to `0` on `[k̂, ∞)`. Then every `s' > δ/m` gives a unique positive steady
+    state with global convergence (`solow_poverty_trap_saving_rise`). That steady state is not
+    `k̄₃`: for `s' > s` it lies strictly above `k̄₃`
+    (`solow_poverty_trap_saving_rise_removes`). The book's "converges … to `k̄₃`" holds for the
+    temporary policy it describes: save at `s'` until capital exceeds `k̄₂`, then at `s` again
+    (`solow_poverty_trap_temporary_saving`). The hypotheses are met by
+    `f(k) = max(1, min(2k − 2, 3))`, `s = δ = 1/10`, `s' = 1/2`, with steady states `1, 2, 3` and,
+    at `s'`, the single steady state `15` (`solow_poverty_trap_example`,
+    `solow_poverty_trap_example_dynamics`).
+
+17. **Speed of convergence, Fig. 3.5 (p. 82).** `λ = δ − s f'(k̄)` is the fraction of the gap
+    closed each period in the approximation (3.10): `x_t = (1 − λ)^t x_0`
+    (`solow_linearised_gap_closed_form`). For `λ₁ < λ₂ ≤ 1` and the same initial gap, the gap
+    under `λ₂` is no larger at every date and strictly smaller from date 1 on; from `k₀ < k̄` both
+    paths stay below `k̄` with the faster one closer; and the faster path comes within any `ε` no
+    later (`solow_faster_convergence`). The text says a higher `λ` means "more steps until you
+    reach steady state"; the figure and the theorem show the opposite, fewer steps (strictly
+    fewer for some `ε`). The dependence of `λ` on `α` and `δ` stated for (3.11), and the same for
+    (3.13), is `solow_speed_parameters`.

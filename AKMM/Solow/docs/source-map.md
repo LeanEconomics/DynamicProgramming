@@ -55,7 +55,11 @@ with `average_strictAnti`, `marginal_strictAnti`, `output_pos`, `steadyCapital_s
 | p. 76 | AK: two countries keep a constant percentage gap | `solow_ak_constant_gap` |
 | p. 75 | "hard to take this case very seriously"; labour share two thirds | not formalised: narrative, data |
 | pp. 76–77, Fig. 3.3 | Multiple steady states: at least one is not stable | `SolowLocallyAttracting`, `solow_poverty_trap_unstable` |
-| p. 77 | `k̄₁`, `k̄₃` stable; a big enough saving rise removes `k̄₁`, `k̄₂` | figure claim, deferred (qualitative; given one crossing see `solow_global_convergence_weak`) |
+| p. 77, Fig. 3.3 | Three steady states; from low `k₀` converge to `k̄₁`, above `k̄₂` to `k̄₃` | `SolowThreeCrossings`, `solow_three_crossings_map`, `solow_ptrap_rise`, `solow_ptrap_fall`, `solow_poverty_trap_basins` (`FigureClaims`) |
+| p. 77, Fig. 3.3 | `k̄₁`, `k̄₃` stable; `k̄₂` not, a small perturbation leads further away | `solow_poverty_trap_stability` (`FigureClaims`) |
+| p. 77 | A big enough saving rise removes `k̄₁`, `k̄₂`; global convergence to the top steady state | corrected (the new steady state lies above `k̄₃`): `solow_poverty_trap_saving_rise`, `solow_poverty_trap_saving_rise_removes` (`FigureClaims`) |
+| p. 77 | Escape by a temporary rise in saving that pushes `k` above `k̄₂`, then convergence to `k̄₃` | `solow_poverty_trap_temporary_saving` (`FigureClaims`) |
+| p. 77, Fig. 3.3 | A technology with the figure's shape (non-vacuity) | `solowPovertyTrapTech`, `solow_poverty_trap_example`, `solow_poverty_trap_example_dynamics` (`FigureClaims`) |
 | p. 77 | Decreasing right side of (3.5): non-monotone convergence | `solow_decreasing_map_overshoots` |
 | fn. a, p. 78 | Local stability if the slope at the steady state is below 1 in absolute value | `solow_local_stability` |
 | p. 77, fn. b, Fig. 3.4 | Oscillating or chaotic dynamics | not formalised: narrative (no map given), figure claim |
@@ -97,7 +101,9 @@ with `average_strictAnti`, `marginal_strictAnti`, `output_pos`, `steadyCapital_s
 | p. 82 | Relative-deviation form `(k_{t+1} − k̄)/k̄ = (1 − λ)(k_t − k̄)/k̄` | `solow_linearised_relative` |
 | p. 82, (3.11) | Cobb–Douglas slope `1 − δ(1 − α)`, `λ = δ(1 − α)` | `eq_3_11` |
 | p. 83 | `s` does not affect the speed; two forces offset | `solow_speed_independent_of_saving`, `solow_marginal_product_falls_with_saving`, `solow_cobbDouglas_forces_offset` |
-| p. 82, Fig. 3.5 | Higher `λ`, faster convergence | figure claim, deferred (local rate: `solow_steady_locally_stable`) |
+| p. 82 | `λ`: the gap obeys `x_{t+1} = (1 − λ)x_t`, so `x_t = (1 − λ)^t x_0` | `solow_linearised_gap_closed_form` (`FigureClaims`) |
+| p. 82, Fig. 3.5 | Higher `λ`, faster convergence; "more steps until you reach steady state" | corrected (fewer steps): `solow_faster_convergence` (`FigureClaims`) |
+| p. 83 | Convergence faster when `α` is small and `δ` is large ((3.11); also (3.13)) | `solow_speed_parameters` (`FigureClaims`) |
 | (3.12), p. 83 | Slope `(1 − δ + s f'(k̃̄))/((1 + γ)(1 + n))`; `λ` with growth | `eq_3_12` |
 | p. 83, (3.13) | Cobb–Douglas slope `α + (1 − α)(1 − δ)/((1 + γ)(1 + n))`, `λ = (1 − α)(1 − (1 − δ)/((1 + γ)(1 + n)))` | `eq_3_13` |
 | fn. 7, p. 83 | Cobb–Douglas cancellations | not formalised: narrative |

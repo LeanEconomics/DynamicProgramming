@@ -1,6 +1,6 @@
 {
-  "checked_at_utc": "2026-11-11T09:39:22.739705+00:00",
-  "theorems": 96,
+  "checked_at_utc": "2026-11-12T18:03:13.855146+00:00",
+  "theorems": 109,
   "module_theorems": {
     "AKMMSolow/Production.lean": 13,
     "AKMMSolow/BasicModel.lean": 18,
@@ -8,9 +8,10 @@
     "AKMMSolow/GrowingEconomy.lean": 21,
     "AKMMSolow/Convergence.lean": 13,
     "AKMMSolow/BusinessCycles.lean": 13,
-    "AKMMSolow/Uzawa.lean": 11
+    "AKMMSolow/Uzawa.lean": 11,
+    "AKMMSolow/FigureClaims.lean": 13
   },
-  "audited_declarations": 111,
+  "audited_declarations": 142,
   "declarations": [
     {
       "name": "AKMM.Solow.StrictQuasiconcavePos",
@@ -566,6 +567,161 @@
       "name": "AKMM.Solow.uzawa_part2_zero_output_counterexample",
       "kind": "theorem",
       "module": "AKMMSolow/Uzawa.lean"
+    },
+    {
+      "name": "AKMM.Solow.SolowThreeCrossings",
+      "kind": "structure",
+      "module": "AKMMSolow/FigureClaims.lean"
+    },
+    {
+      "name": "AKMM.Solow.SolowThreeCrossings.mk",
+      "kind": "constructor",
+      "module": "AKMMSolow/FigureClaims.lean"
+    },
+    {
+      "name": "AKMM.Solow.SolowThreeCrossings.saving_pos",
+      "kind": "projection",
+      "module": "AKMMSolow/FigureClaims.lean"
+    },
+    {
+      "name": "AKMM.Solow.SolowThreeCrossings.depreciation_pos",
+      "kind": "projection",
+      "module": "AKMMSolow/FigureClaims.lean"
+    },
+    {
+      "name": "AKMM.Solow.SolowThreeCrossings.depreciation_lt_one",
+      "kind": "projection",
+      "module": "AKMMSolow/FigureClaims.lean"
+    },
+    {
+      "name": "AKMM.Solow.SolowThreeCrossings.cont",
+      "kind": "projection",
+      "module": "AKMMSolow/FigureClaims.lean"
+    },
+    {
+      "name": "AKMM.Solow.SolowThreeCrossings.mono",
+      "kind": "projection",
+      "module": "AKMMSolow/FigureClaims.lean"
+    },
+    {
+      "name": "AKMM.Solow.SolowThreeCrossings.pos\u2081",
+      "kind": "projection",
+      "module": "AKMMSolow/FigureClaims.lean"
+    },
+    {
+      "name": "AKMM.Solow.SolowThreeCrossings.lt\u2081\u2082",
+      "kind": "projection",
+      "module": "AKMMSolow/FigureClaims.lean"
+    },
+    {
+      "name": "AKMM.Solow.SolowThreeCrossings.lt\u2082\u2083",
+      "kind": "projection",
+      "module": "AKMMSolow/FigureClaims.lean"
+    },
+    {
+      "name": "AKMM.Solow.SolowThreeCrossings.fix\u2081",
+      "kind": "projection",
+      "module": "AKMMSolow/FigureClaims.lean"
+    },
+    {
+      "name": "AKMM.Solow.SolowThreeCrossings.fix\u2082",
+      "kind": "projection",
+      "module": "AKMMSolow/FigureClaims.lean"
+    },
+    {
+      "name": "AKMM.Solow.SolowThreeCrossings.fix\u2083",
+      "kind": "projection",
+      "module": "AKMMSolow/FigureClaims.lean"
+    },
+    {
+      "name": "AKMM.Solow.SolowThreeCrossings.above\u2081",
+      "kind": "projection",
+      "module": "AKMMSolow/FigureClaims.lean"
+    },
+    {
+      "name": "AKMM.Solow.SolowThreeCrossings.below\u2082",
+      "kind": "projection",
+      "module": "AKMMSolow/FigureClaims.lean"
+    },
+    {
+      "name": "AKMM.Solow.SolowThreeCrossings.above\u2083",
+      "kind": "projection",
+      "module": "AKMMSolow/FigureClaims.lean"
+    },
+    {
+      "name": "AKMM.Solow.SolowThreeCrossings.below\u2084",
+      "kind": "projection",
+      "module": "AKMMSolow/FigureClaims.lean"
+    },
+    {
+      "name": "AKMM.Solow.solow_ptrap_rise",
+      "kind": "theorem",
+      "module": "AKMMSolow/FigureClaims.lean"
+    },
+    {
+      "name": "AKMM.Solow.solow_ptrap_fall",
+      "kind": "theorem",
+      "module": "AKMMSolow/FigureClaims.lean"
+    },
+    {
+      "name": "AKMM.Solow.solow_three_crossings_map",
+      "kind": "theorem",
+      "module": "AKMMSolow/FigureClaims.lean"
+    },
+    {
+      "name": "AKMM.Solow.solow_poverty_trap_basins",
+      "kind": "theorem",
+      "module": "AKMMSolow/FigureClaims.lean"
+    },
+    {
+      "name": "AKMM.Solow.solow_poverty_trap_stability",
+      "kind": "theorem",
+      "module": "AKMMSolow/FigureClaims.lean"
+    },
+    {
+      "name": "AKMM.Solow.solow_poverty_trap_saving_rise",
+      "kind": "theorem",
+      "module": "AKMMSolow/FigureClaims.lean"
+    },
+    {
+      "name": "AKMM.Solow.solow_poverty_trap_saving_rise_removes",
+      "kind": "theorem",
+      "module": "AKMMSolow/FigureClaims.lean"
+    },
+    {
+      "name": "AKMM.Solow.solow_poverty_trap_temporary_saving",
+      "kind": "theorem",
+      "module": "AKMMSolow/FigureClaims.lean"
+    },
+    {
+      "name": "AKMM.Solow.solowPovertyTrapTech",
+      "kind": "def",
+      "module": "AKMMSolow/FigureClaims.lean"
+    },
+    {
+      "name": "AKMM.Solow.solow_poverty_trap_example",
+      "kind": "theorem",
+      "module": "AKMMSolow/FigureClaims.lean"
+    },
+    {
+      "name": "AKMM.Solow.solow_poverty_trap_example_dynamics",
+      "kind": "theorem",
+      "module": "AKMMSolow/FigureClaims.lean"
+    },
+    {
+      "name": "AKMM.Solow.solow_linearised_gap_closed_form",
+      "kind": "theorem",
+      "module": "AKMMSolow/FigureClaims.lean"
+    },
+    {
+      "name": "AKMM.Solow.solow_faster_convergence",
+      "kind": "theorem",
+      "module": "AKMMSolow/FigureClaims.lean"
+    },
+    {
+      "name": "AKMM.Solow.solow_speed_parameters",
+      "kind": "theorem",
+      "module": "AKMMSolow/FigureClaims.lean"
     }
   ],
   "full_build": "passed",
@@ -1129,6 +1285,161 @@
       "propext",
       "Classical.choice",
       "Quot.sound"
+    ],
+    "AKMM.Solow.SolowThreeCrossings": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Solow.SolowThreeCrossings.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Solow.SolowThreeCrossings.saving_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Solow.SolowThreeCrossings.depreciation_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Solow.SolowThreeCrossings.depreciation_lt_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Solow.SolowThreeCrossings.cont": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Solow.SolowThreeCrossings.mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Solow.SolowThreeCrossings.pos\u2081": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Solow.SolowThreeCrossings.lt\u2081\u2082": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Solow.SolowThreeCrossings.lt\u2082\u2083": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Solow.SolowThreeCrossings.fix\u2081": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Solow.SolowThreeCrossings.fix\u2082": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Solow.SolowThreeCrossings.fix\u2083": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Solow.SolowThreeCrossings.above\u2081": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Solow.SolowThreeCrossings.below\u2082": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Solow.SolowThreeCrossings.above\u2083": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Solow.SolowThreeCrossings.below\u2084": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Solow.solow_ptrap_rise": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Solow.solow_ptrap_fall": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Solow.solow_three_crossings_map": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Solow.solow_poverty_trap_basins": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Solow.solow_poverty_trap_stability": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Solow.solow_poverty_trap_saving_rise": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Solow.solow_poverty_trap_saving_rise_removes": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Solow.solow_poverty_trap_temporary_saving": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Solow.solowPovertyTrapTech": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Solow.solow_poverty_trap_example": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Solow.solow_poverty_trap_example_dynamics": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Solow.solow_linearised_gap_closed_form": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Solow.solow_faster_convergence": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Solow.solow_speed_parameters": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
     ]
   },
   "source_sha256": {
@@ -1139,16 +1450,17 @@
     "AKMMSolow/Convergence.lean": "23dd14152b942ba6bcf350f6363c28130d7998f66467d03a420e689f46d0090c",
     "AKMMSolow/BusinessCycles.lean": "72d76098920a1f554fd70131176d53e4b302db61bb079e28209fe3fe1aee56bc",
     "AKMMSolow/Uzawa.lean": "33b2e53a6513408c855df2d3547d8abfac2329bd27b4c76025726383c2b8e0aa",
-    "AKMMSolow.lean": "6a5e3e2e3d28f66b6993e27bd4379032cf6f3c38b2a7f1ce2e0f4e1c60cf63cf",
+    "AKMMSolow/FigureClaims.lean": "ae920a4e494852aec3ccf5effe53cb3dfc76a9ff1d42dd218f284fdd3930189c",
+    "AKMMSolow.lean": "158d01ba5d46e8dd72f8cebd46afb887a5fa46b0b0d9e68d83641ba6e92bad04",
     "lean-toolchain": "8733782dc070a99b312039cda424f601b80f3be6f6f512627da5ba25adc27632",
     "lakefile.toml": "2d0cc028d10f007b6902bef183383802a142fe272bf894352f8ec79457706b84",
     "lake-manifest.json": "a25ecd4e64bd98b4bef0724253dbfacc092617347e7d9f1dc1ec94ae6d0c1eb6",
-    "proof-manifest.json": "ce00fcb388b9213cc52449a93acc1ce4f72cd1596f1f3578cf0a31542553d7d4",
+    "proof-manifest.json": "67bfa297c655e0cc3d37bc0a3fda6d440544ef0928066b56a722918dcc6a3e90",
     "scripts/verify.py": "a70b1fa704dd590f937f8b37682afa88a9d85a9150065acb935c7d2c9589da3b",
     "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
   },
-  "fresh_audit_sha256": "355263f80e5b577bca930ff7df952243bde024c6c65c4dd5014995ea5c038077",
+  "fresh_audit_sha256": "6f08e125786591d63cb882a2d39bcfede57b94b9e6f075aec0e55c89e8ad391d",
   "lean_toolchain": "leanprover/lean4:v4.34.0",
-  "scope": "AKMM Chapter 3 (pp. 71-92) and Appendix 3.A (pp. 825-826): the Solow model's production assumptions and intensive form, steady state and global convergence, endogenous growth, poverty traps and local stability, the growing economy and balanced growth, factor prices and shares, the speed of convergence, business-cycle variants and impulse responses, and the discrete-time Uzawa theorems.",
+  "scope": "AKMM Chapter 3 (pp. 71-92) and Appendix 3.A (pp. 825-826): the Solow model's production assumptions and intensive form, steady state and global convergence, endogenous growth, poverty traps and local stability, the growing economy and balanced growth, factor prices and shares, the speed of convergence, business-cycle variants and impulse responses, the discrete-time Uzawa theorems, and the figure claims on poverty-trap basins and saving (Fig. 3.3) and on faster convergence with higher lambda (Fig. 3.5).",
   "source": "Marina Azzimonti, Per Krusell, Alisdair McKay and Toshihiko Mukoyama, Macroeconomics (draft of December 2025), Chapter 3"
 }

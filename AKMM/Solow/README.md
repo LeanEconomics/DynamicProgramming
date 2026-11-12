@@ -12,14 +12,17 @@ growth, poverty traps, non-monotone dynamics), the growing economy and balanced 
 prices and shares, the speed of convergence, and the use of the model for business cycles with
 impulse responses; Appendix 3.A proves a discrete-time Uzawa theorem in two parts. Every
 derivation and precise claim of the text is proved, including both Uzawa theorems; strict
-concavity of `f` is derived from the book's Assumptions 1–6 rather than assumed. Not formalised:
-the data, figures, calibrated numbers and numerical impulse responses, and the narrative chaos
-claim. The project depends on EconomicGrowth's `DiscreteTime` and `Solow1956` libraries (the
-Solow map, steady state, global convergence, comparative statics and slope at the steady state)
-and on `UzawaModern` (the weighted-moment identity); the book's statements are proved from them
-in the book's notation. Four printed errors are corrected, a missing hypothesis of
-Theorem .2 is supplied and two points in the assumptions are checked, as recorded in [corrections](docs/corrections.md); every book item is
-located in the [source map](docs/source-map.md). The library contains **96 theorems**, all new.
+concavity of `f` is derived from the book's Assumptions 1–6 rather than assumed. The qualitative
+claims of Figures 3.3 (poverty traps and raising saving) and 3.5 (faster convergence with a higher
+`λ`) are proved too. Not formalised: the data, the other figures, calibrated numbers and numerical
+impulse responses, and the narrative chaos claim. The project depends on EconomicGrowth's
+`DiscreteTime` and `Solow1956` libraries (the Solow map, steady state, global convergence,
+comparative statics and slope at the steady state) and on `UzawaModern` (the weighted-moment
+identity); the book's statements are proved from them in the book's notation. Five printed errors
+are corrected, missing hypotheses of Theorem .2 and of the poverty-trap saving claim are
+supplied and two points in the assumptions are checked, as recorded in
+[corrections](docs/corrections.md); every book item is located in the
+[source map](docs/source-map.md). The library contains **109 theorems**, all new.
 
 * **Production** (§3.1): Assumptions 1–6 (`SolowAssumptions`, `StrictQuasiconcavePos`); the
   intensive form (`intensive`, `solow_intensive_form`); strict concavity of `f` from strict
@@ -59,6 +62,15 @@ located in the [source map](docs/source-map.md). The library contains **96 theor
   `uzawa_printed_rate_counterexample`); Theorem .2 (`theorem_3A_2`, `uzawa_capital_growth`,
   `uzawa_investment_growth`, `eq_3A_4`, `uzawa_part2_nonneg_consumption`,
   `uzawa_part2_zero_output_counterexample`).
+* **Figure claims** (Figs. 3.3, 3.5): three steady states with the figure's crossing pattern
+  (`SolowThreeCrossings`), global basins and stability (`solow_poverty_trap_basins`,
+  `solow_poverty_trap_stability`); a large enough saving rise leaves one steady state, above
+  `k̄₃`, with global convergence, and a temporary rise escapes the trap
+  (`solow_poverty_trap_saving_rise`, `solow_poverty_trap_saving_rise_removes`,
+  `solow_poverty_trap_temporary_saving`), with a concrete technology
+  (`solow_poverty_trap_example`, `solow_poverty_trap_example_dynamics`); a higher `λ` gives a
+  smaller gap at every date and fewer steps (`solow_linearised_gap_closed_form`,
+  `solow_faster_convergence`), and `λ` falls with `α`, rises with `δ` (`solow_speed_parameters`).
 
 All names are in the namespace `AKMM.Solow`.
 
@@ -73,6 +85,7 @@ All names are in the namespace `AKMM.Solow`.
 | [Convergence](AKMMSolow/Convergence.lean) | 13 | (3.10)–(3.13), local stability, the p. 88 saving experiment (AKMM §3.4, pp. 82–88) |
 | [BusinessCycles](AKMMSolow/BusinessCycles.lean) | 13 | Business-cycle variants, (3.17)–(3.18), impulse responses, `g_k`, `g_A` (AKMM §3.5, pp. 88–92) |
 | [Uzawa](AKMMSolow/Uzawa.lean) | 11 | Uzawa's theorem in discrete time, Parts I and II (AKMM App. 3.A, pp. 825–826) |
+| [FigureClaims](AKMMSolow/FigureClaims.lean) | 13 | Poverty-trap basins, stability and saving (Fig. 3.3, p. 77); faster convergence with higher `λ` (Fig. 3.5, p. 82) |
 
 ## Build and verify
 
