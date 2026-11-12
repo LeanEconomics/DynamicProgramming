@@ -1,0 +1,2272 @@
+{
+  "checked_at_utc": "2026-11-12T10:32:50.906826+00:00",
+  "theorems": 187,
+  "module_theorems": {
+    "AKMMFrictionalLaborMarkets/Lake.lean": 15,
+    "AKMMFrictionalLaborMarkets/Matching.lean": 25,
+    "AKMMFrictionalLaborMarkets/DMP.lean": 11,
+    "AKMMFrictionalLaborMarkets/SteadyState.lean": 24,
+    "AKMMFrictionalLaborMarkets/Efficiency.lean": 13,
+    "AKMMFrictionalLaborMarkets/LogLinear.lean": 22,
+    "AKMMFrictionalLaborMarkets/EndogenousSeparation.lean": 17,
+    "AKMMFrictionalLaborMarkets/NGM.lean": 20,
+    "AKMMFrictionalLaborMarkets/McCall.lean": 23,
+    "AKMMFrictionalLaborMarkets/MeanPreserving.lean": 11,
+    "AKMMFrictionalLaborMarkets/Diamond.lean": 6
+  },
+  "audited_declarations": 222,
+  "declarations": [
+    {
+      "name": "AKMM.FrictionalLaborMarkets.lakeNext",
+      "kind": "def",
+      "module": "AKMMFrictionalLaborMarkets/Lake.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.eq_20_1",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/Lake.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.eq_20_2",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/Lake.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.lake_ubar_anti_lam",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/Lake.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.lake_ubar_mono_sigma",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/Lake.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.lake_diff",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/Lake.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.lake_gap",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/Lake.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.lake_abs_lt_one",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/Lake.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.lake_abs_eq_zero_example",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/Lake.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.lake_isContraction",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/Lake.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.lake_globallyStable",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/Lake.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.lake_closed_form",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/Lake.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.lake_tendsto",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/Lake.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.lake_cauchy",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/Lake.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.lake_duration_series",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/Lake.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.lake_duration_recursion",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/Lake.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.MatchFn",
+      "kind": "structure",
+      "module": "AKMMFrictionalLaborMarkets/Matching.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.MatchFn.mk",
+      "kind": "constructor",
+      "module": "AKMMFrictionalLaborMarkets/Matching.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.MatchFn.M",
+      "kind": "projection",
+      "module": "AKMMFrictionalLaborMarkets/Matching.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.MatchFn.pos",
+      "kind": "projection",
+      "module": "AKMMFrictionalLaborMarkets/Matching.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.MatchFn.homog",
+      "kind": "projection",
+      "module": "AKMMFrictionalLaborMarkets/Matching.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.MatchFn.mono_u",
+      "kind": "projection",
+      "module": "AKMMFrictionalLaborMarkets/Matching.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.MatchFn.mono_v",
+      "kind": "projection",
+      "module": "AKMMFrictionalLaborMarkets/Matching.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.MatchFn.Bounded",
+      "kind": "def",
+      "module": "AKMMFrictionalLaborMarkets/Matching.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.MatchFn.ofMiao",
+      "kind": "def",
+      "module": "AKMMFrictionalLaborMarkets/Matching.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.lamW",
+      "kind": "def",
+      "module": "AKMMFrictionalLaborMarkets/Matching.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.lamF",
+      "kind": "def",
+      "module": "AKMMFrictionalLaborMarkets/Matching.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.match_rate_worker",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/Matching.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.match_rate_firm",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/Matching.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.eq_20_3",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/Matching.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.match_lamW_eq",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/Matching.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.match_lamW_pos",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/Matching.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.match_lamF_pos",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/Matching.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.match_lamW_strictMonoOn",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/Matching.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.match_lamF_strictAntiOn",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/Matching.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.match_lamW_le_one",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/Matching.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.match_lamF_le_one",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/Matching.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.eq_20_4",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/Matching.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.eq_20_5",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/Matching.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.eq_20_6",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/Matching.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.skewMatch",
+      "kind": "def",
+      "module": "AKMMFrictionalLaborMarkets/Matching.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.skewMatch_bounded",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/Matching.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.eq_20_6_misprint",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/Matching.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.match_bc_strictMonoOn",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/Matching.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.match_ubar_unique",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/Matching.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.match_ubar_exists",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/Matching.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.match_beveridge_anti",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/Matching.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.match_euler",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/Matching.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.matchElast",
+      "kind": "def",
+      "module": "AKMMFrictionalLaborMarkets/Matching.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.match_M2",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/Matching.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.match_elast_eq",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/Matching.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.cdMatch",
+      "kind": "def",
+      "module": "AKMMFrictionalLaborMarkets/Matching.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.eq_20_23",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/Matching.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.cd_lamF_hasDerivAt",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/Matching.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.cd_not_bounded",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/Matching.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.dmpEx",
+      "kind": "def",
+      "module": "AKMMFrictionalLaborMarkets/DMP.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.dmp_ex_add",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/DMP.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.dmp_ex_mul",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/DMP.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.dmp_ex_congr",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/DMP.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.eq_20_10",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/DMP.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.eq_20_15",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/DMP.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.eq_20_A_1",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/DMP.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.dmp_J_div",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/DMP.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.eq_20_16",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/DMP.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.eq_20_A_2",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/DMP.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.dmpSurplus",
+      "kind": "def",
+      "module": "AKMMFrictionalLaborMarkets/DMP.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.eq_20_18",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/DMP.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.eq_20_19",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/DMP.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.jcLHS",
+      "kind": "def",
+      "module": "AKMMFrictionalLaborMarkets/SteadyState.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.jcRHS",
+      "kind": "def",
+      "module": "AKMMFrictionalLaborMarkets/SteadyState.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.jcPhi",
+      "kind": "def",
+      "module": "AKMMFrictionalLaborMarkets/SteadyState.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.ss_phi_eq",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/SteadyState.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.eq_20_17",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/SteadyState.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.ss_phi_strictAntiOn",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/SteadyState.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.ss_unique",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/SteadyState.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.ss_exists",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/SteadyState.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.ss_exists_of_tendsto",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/SteadyState.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.ss_cd_lamF_limits",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/SteadyState.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.ss_cd_existsUnique",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/SteadyState.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.ss_theta_mono_z",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/SteadyState.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.ss_ubar_strictAntiOn",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/SteadyState.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.ss_vbar_strictMonoOn",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/SteadyState.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.fn6_lhs_hasDerivAt",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/SteadyState.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.fn6_rhs_hasDerivAt",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/SteadyState.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.fn6_rhs_strictMonoOn",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/SteadyState.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.ss_lhs_strictMonoOn",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/SteadyState.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.fn6_next_strictMono",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/SteadyState.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.fn7_slope",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/SteadyState.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.fn7_slope_gt_one",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/SteadyState.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.fn7_slope_eq",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/SteadyState.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.fn7_step_above",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/SteadyState.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.fn7_step_below",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/SteadyState.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.fn7_diverge_above",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/SteadyState.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.fn7_diverge_below",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/SteadyState.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.fn7_jump",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/SteadyState.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.planner_foc_theta",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/Efficiency.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.planner_foc_u",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/Efficiency.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.eq_20_A_3",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/Efficiency.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.eq_20_A_2_misprint",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/Efficiency.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.eq_20_20",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/Efficiency.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.eq_20_22",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/Efficiency.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.hosios_node",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/Efficiency.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.hosios",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/Efficiency.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.hosios_necessary",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/Efficiency.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.hosios_cd_partials",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/Efficiency.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.hosios_cd",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/Efficiency.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.hosios_nonCRS",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/Efficiency.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.hosios_nonCRS_example",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/Efficiency.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.ll_rpow_exp",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/LogLinear.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.llL",
+      "kind": "def",
+      "module": "AKMMFrictionalLaborMarkets/LogLinear.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.llR",
+      "kind": "def",
+      "module": "AKMMFrictionalLaborMarkets/LogLinear.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.ll_lhs_eq",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/LogLinear.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.ll_rhs_eq",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/LogLinear.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.eq_20_25",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/LogLinear.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.eq_20_25_misprint",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/LogLinear.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.ll_undetermined",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/LogLinear.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.llCoeff",
+      "kind": "def",
+      "module": "AKMMFrictionalLaborMarkets/LogLinear.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.eq_20_26",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/LogLinear.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.eq_20_26_printed_B",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/LogLinear.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.ll_gap_pos",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/LogLinear.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.ll_cs_kappa",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/LogLinear.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.ll_cs_gamma",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/LogLinear.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.ll_rpow_mul_strictMono",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/LogLinear.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.ll_cs_eta",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/LogLinear.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.ll_cs_eta_counterexample",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/LogLinear.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.ll_cs_chi",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/LogLinear.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.ll_cs_rho",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/LogLinear.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.ll_cs_beta",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/LogLinear.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.ll_cs_sigma",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/LogLinear.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.eq_20_27_deriv",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/LogLinear.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.eq_20_27",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/LogLinear.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.ll_rigid_gt",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/LogLinear.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.eq_20_A_4_example",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/LogLinear.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.eq_20_28",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/EndogenousSeparation.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.es_J_div",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/EndogenousSeparation.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.eq_20_29",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/EndogenousSeparation.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.es_foc_cd",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/EndogenousSeparation.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.eq_20_31",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/EndogenousSeparation.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.eq_20_32",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/EndogenousSeparation.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.es_ss_foc",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/EndogenousSeparation.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.es_bracket_cd",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/EndogenousSeparation.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.esR",
+      "kind": "def",
+      "module": "AKMMFrictionalLaborMarkets/EndogenousSeparation.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.eq_20_A_5_deriv",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/EndogenousSeparation.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.eq_20_A_5_misprint",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/EndogenousSeparation.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.eq_20_A_6",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/EndogenousSeparation.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.es_G",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/EndogenousSeparation.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.es_std_ratio",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/EndogenousSeparation.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.es_lamW_loglinear",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/EndogenousSeparation.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.es_rigid_cancel",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/EndogenousSeparation.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.es_rigid_G",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/EndogenousSeparation.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.es_nash_no_cancel",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/EndogenousSeparation.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.ngm_rental",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/NGM.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.ngm_y",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/NGM.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.ngmDividend",
+      "kind": "def",
+      "module": "AKMMFrictionalLaborMarkets/NGM.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.ngm_resource",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/NGM.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.eq_20_36",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/NGM.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.ngm_arrow_foc",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/NGM.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.ngm_asset_value",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/NGM.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.eq_20_42",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/NGM.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.eq_20_43",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/NGM.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.eq_20_44",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/NGM.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.eq_20_45",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/NGM.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.eq_20_48",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/NGM.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.ngm_calib_u",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/NGM.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.ngm_calib_r",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/NGM.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.ngm_calib_K",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/NGM.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.ngm_calib_K_misprint",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/NGM.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.ngm_calib_kappa",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/NGM.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.ngm_calib_kappa_misprint",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/NGM.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.ngm_calib_w",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/NGM.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.ngm_rigid_max_profit",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/NGM.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.ngm_rigid_min_profit",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/NGM.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.mcI",
+      "kind": "def",
+      "module": "AKMMFrictionalLaborMarkets/McCall.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.eq_20_53",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/McCall.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.mc_D_pos",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/McCall.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.eq_20_51",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/McCall.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.mc_W_strictMono",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/McCall.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.mc_U_pos",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/McCall.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.mc_W0_lt",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/McCall.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.mc_exists_unique",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/McCall.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.mc_reservation",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/McCall.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.eq_20_55",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/McCall.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.mc_root_unique",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/McCall.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.mc_lambda_antitone",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/McCall.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.mcG",
+      "kind": "def",
+      "module": "AKMMFrictionalLaborMarkets/McCall.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.mc_G_eq",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/McCall.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.mc_cs_b",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/McCall.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.mc_coef_strictMono",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/McCall.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.mc_cs_beta",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/McCall.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.mc_cs_sigma",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/McCall.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.mc_G_partials",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/McCall.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.mc_pointwise",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/McCall.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.mc_I_hasDerivAt",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/McCall.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.mc_G_w",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/McCall.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.mc_shift_eq",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/McCall.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.mc_shift_bounds",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/McCall.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.mc_shift_deriv",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/McCall.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.mps_mean",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/MeanPreserving.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.mps_ibp",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/MeanPreserving.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.eq_20_56_of_mps",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/MeanPreserving.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.eq_20_56_not_sufficient",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/MeanPreserving.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.eq_20_57",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/MeanPreserving.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.eq_20_58",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/MeanPreserving.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.eq_20_58_strictMono",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/MeanPreserving.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.mc_mps_reservation",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/MeanPreserving.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.mm_formula",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/MeanPreserving.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.mm_formula_of_bellman",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/MeanPreserving.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.mm_back_of_envelope",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/MeanPreserving.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.DiamondWorker",
+      "kind": "structure",
+      "module": "AKMMFrictionalLaborMarkets/Diamond.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.DiamondWorker.mk",
+      "kind": "constructor",
+      "module": "AKMMFrictionalLaborMarkets/Diamond.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.DiamondWorker.acc",
+      "kind": "projection",
+      "module": "AKMMFrictionalLaborMarkets/Diamond.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.DiamondWorker.reject_low",
+      "kind": "projection",
+      "module": "AKMMFrictionalLaborMarkets/Diamond.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.DiamondWorker.accept_high",
+      "kind": "projection",
+      "module": "AKMMFrictionalLaborMarkets/Diamond.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.diamondAccept",
+      "kind": "def",
+      "module": "AKMMFrictionalLaborMarkets/Diamond.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.diamondProfit",
+      "kind": "def",
+      "module": "AKMMFrictionalLaborMarkets/Diamond.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.DiamondNE",
+      "kind": "def",
+      "module": "AKMMFrictionalLaborMarkets/Diamond.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.diamond_profit_acc",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/Diamond.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.diamond_profit_rej",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/Diamond.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.diamond_ne",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/Diamond.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.diamond_unique",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/Diamond.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.diamond_paradox",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/Diamond.lean"
+    },
+    {
+      "name": "AKMM.FrictionalLaborMarkets.diamond_paradox_example",
+      "kind": "theorem",
+      "module": "AKMMFrictionalLaborMarkets/Diamond.lean"
+    }
+  ],
+  "full_build": "passed",
+  "fresh_source_compilation": "passed",
+  "fresh_source_lint_options": [
+    "-Dlinter.mathlibStandardSet=true",
+    "-Dlinter.style.header=false"
+  ],
+  "axioms": {
+    "AKMM.FrictionalLaborMarkets.lakeNext": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.eq_20_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.eq_20_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.lake_ubar_anti_lam": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.lake_ubar_mono_sigma": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.lake_diff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.lake_gap": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.lake_abs_lt_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.lake_abs_eq_zero_example": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.lake_isContraction": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.lake_globallyStable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.lake_closed_form": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.lake_tendsto": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.lake_cauchy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.lake_duration_series": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.lake_duration_recursion": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.MatchFn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.MatchFn.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.MatchFn.M": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.MatchFn.pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.MatchFn.homog": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.MatchFn.mono_u": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.MatchFn.mono_v": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.MatchFn.Bounded": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.MatchFn.ofMiao": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.lamW": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.lamF": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.match_rate_worker": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.match_rate_firm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.eq_20_3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.match_lamW_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.match_lamW_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.match_lamF_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.match_lamW_strictMonoOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.match_lamF_strictAntiOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.match_lamW_le_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.match_lamF_le_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.eq_20_4": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.eq_20_5": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.eq_20_6": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.skewMatch": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.skewMatch_bounded": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.eq_20_6_misprint": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.match_bc_strictMonoOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.match_ubar_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.match_ubar_exists": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.match_beveridge_anti": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.match_euler": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.matchElast": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.match_M2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.match_elast_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.cdMatch": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.eq_20_23": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.cd_lamF_hasDerivAt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.cd_not_bounded": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.dmpEx": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.dmp_ex_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.dmp_ex_mul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.dmp_ex_congr": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.eq_20_10": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.eq_20_15": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.eq_20_A_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.dmp_J_div": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.eq_20_16": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.eq_20_A_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.dmpSurplus": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.eq_20_18": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.eq_20_19": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.jcLHS": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.jcRHS": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.jcPhi": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.ss_phi_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.eq_20_17": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.ss_phi_strictAntiOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.ss_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.ss_exists": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.ss_exists_of_tendsto": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.ss_cd_lamF_limits": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.ss_cd_existsUnique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.ss_theta_mono_z": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.ss_ubar_strictAntiOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.ss_vbar_strictMonoOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.fn6_lhs_hasDerivAt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.fn6_rhs_hasDerivAt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.fn6_rhs_strictMonoOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.ss_lhs_strictMonoOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.fn6_next_strictMono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.fn7_slope": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.fn7_slope_gt_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.fn7_slope_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.fn7_step_above": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.fn7_step_below": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.fn7_diverge_above": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.fn7_diverge_below": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.fn7_jump": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.planner_foc_theta": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.planner_foc_u": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.eq_20_A_3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.eq_20_A_2_misprint": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.eq_20_20": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.eq_20_22": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.hosios_node": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.hosios": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.hosios_necessary": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.hosios_cd_partials": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.hosios_cd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.hosios_nonCRS": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.hosios_nonCRS_example": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.ll_rpow_exp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.llL": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.llR": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.ll_lhs_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.ll_rhs_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.eq_20_25": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.eq_20_25_misprint": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.ll_undetermined": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.llCoeff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.eq_20_26": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.eq_20_26_printed_B": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.ll_gap_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.ll_cs_kappa": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.ll_cs_gamma": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.ll_rpow_mul_strictMono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.ll_cs_eta": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.ll_cs_eta_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.ll_cs_chi": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.ll_cs_rho": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.ll_cs_beta": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.ll_cs_sigma": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.eq_20_27_deriv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.eq_20_27": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.ll_rigid_gt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.eq_20_A_4_example": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.eq_20_28": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.es_J_div": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.eq_20_29": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.es_foc_cd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.eq_20_31": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.eq_20_32": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.es_ss_foc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.es_bracket_cd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.esR": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.eq_20_A_5_deriv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.eq_20_A_5_misprint": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.eq_20_A_6": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.es_G": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.es_std_ratio": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.es_lamW_loglinear": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.es_rigid_cancel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.es_rigid_G": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.es_nash_no_cancel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.ngm_rental": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.ngm_y": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.ngmDividend": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.ngm_resource": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.eq_20_36": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.ngm_arrow_foc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.ngm_asset_value": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.eq_20_42": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.eq_20_43": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.eq_20_44": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.eq_20_45": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.eq_20_48": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.ngm_calib_u": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.ngm_calib_r": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.ngm_calib_K": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.ngm_calib_K_misprint": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.ngm_calib_kappa": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.ngm_calib_kappa_misprint": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.ngm_calib_w": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.ngm_rigid_max_profit": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.ngm_rigid_min_profit": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.mcI": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.eq_20_53": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.mc_D_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.eq_20_51": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.mc_W_strictMono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.mc_U_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.mc_W0_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.mc_exists_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.mc_reservation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.eq_20_55": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.mc_root_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.mc_lambda_antitone": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.mcG": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.mc_G_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.mc_cs_b": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.mc_coef_strictMono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.mc_cs_beta": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.mc_cs_sigma": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.mc_G_partials": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.mc_pointwise": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.mc_I_hasDerivAt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.mc_G_w": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.mc_shift_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.mc_shift_bounds": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.mc_shift_deriv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.mps_mean": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.mps_ibp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.eq_20_56_of_mps": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.eq_20_56_not_sufficient": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.eq_20_57": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.eq_20_58": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.eq_20_58_strictMono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.mc_mps_reservation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.mm_formula": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.mm_formula_of_bellman": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.mm_back_of_envelope": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.DiamondWorker": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.DiamondWorker.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.DiamondWorker.acc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.DiamondWorker.reject_low": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.DiamondWorker.accept_high": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.diamondAccept": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.diamondProfit": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.DiamondNE": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.diamond_profit_acc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.diamond_profit_rej": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.diamond_ne": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.diamond_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.diamond_paradox": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.FrictionalLaborMarkets.diamond_paradox_example": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  "source_sha256": {
+    "AKMMFrictionalLaborMarkets/Lake.lean": "bf215ea8d8e0d6f9a87ad3c4930faf8d192d3346a49874fab2139d47b55df0e9",
+    "AKMMFrictionalLaborMarkets/Matching.lean": "64fb7c3235d3597c901cdc4930d4eee001f875f47fd5acee5661ecaa96d9d2f1",
+    "AKMMFrictionalLaborMarkets/DMP.lean": "81c6734aced5d35c6f468f69169ef9ccc9289e526c69d3e7ee99c4f120b5dea8",
+    "AKMMFrictionalLaborMarkets/SteadyState.lean": "e7c19e272135a04de1b9d74040887ddc6a881b21bdcea805db50c8453f1c6bc1",
+    "AKMMFrictionalLaborMarkets/Efficiency.lean": "14c94719df3de40cb3c30789620e804e7336de8080a8e06e6120b773bc4f499d",
+    "AKMMFrictionalLaborMarkets/LogLinear.lean": "532e583c7eefe88e0a6b6d339579501b2733c62d8352a0fe4ec289a03be829c6",
+    "AKMMFrictionalLaborMarkets/EndogenousSeparation.lean": "71d7142c197bbc56c2a89f083f638c34c3545f39ebcd34445bf119c406b74ec1",
+    "AKMMFrictionalLaborMarkets/NGM.lean": "c50a91bdd7c70355bdc309be6ddf1443adb706e718a8d682ce3036054aa85e77",
+    "AKMMFrictionalLaborMarkets/McCall.lean": "b2cfc9cd3fbf998d788ebe05464330093880e1a3ab8ac0722dfb856fddb5c0f6",
+    "AKMMFrictionalLaborMarkets/MeanPreserving.lean": "eefdf0b3b4f5be1aa485333912ca51c5b8faef6eb67c5af64087c5992728c097",
+    "AKMMFrictionalLaborMarkets/Diamond.lean": "5f08c2e8af03acf3bf9f33f09e6a1ebf332a16d8b211172cf055d18653ebafb7",
+    "AKMMFrictionalLaborMarkets.lean": "f8ba52e3b243351267d5e651d0efd9e428e24ef725e58d2fab8ae935b597b40a",
+    "lean-toolchain": "8733782dc070a99b312039cda424f601b80f3be6f6f512627da5ba25adc27632",
+    "lakefile.toml": "d42353b65eb7c759a4be8a3c1fe84c474b0d10cd464bf506b31f016ca7277bbf",
+    "lake-manifest.json": "67f34cbdb2050349fd323c0f7a8b11ac6c9f25a1777a687c591de36cdbb124a4",
+    "proof-manifest.json": "487f5724a6b139974eb84e3d940be5b15992d9485b88a51f56ccd2b0bcaf23bc",
+    "scripts/verify.py": "a70b1fa704dd590f937f8b37682afa88a9d85a9150065acb935c7d2c9589da3b",
+    "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  },
+  "fresh_audit_sha256": "4dae8b4f5c1b196fe1760e06d6ff9999eae985ca1377a0947dda1ebb1d7ae637",
+  "lean_toolchain": "leanprover/lean4:v4.34.0",
+  "scope": "AKMM Chapter 20 (pp. 593-625, App. 20.A): frictional labor markets.",
+  "source": "Marina Azzimonti, Per Krusell, Alisdair McKay and Toshihiko Mukoyama, Macroeconomics (draft of December 2025), Chapter 20"
+}
