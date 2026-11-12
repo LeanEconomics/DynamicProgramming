@@ -70,4 +70,46 @@ located in the [source map](source-map.md).
     within-period equilibrium with capital and investment fixed and Cobb–Douglas production
     (`fm_fixed_investment_multiplier`), and in the static model of §8.2
     (`sm_multiplier_mem_Ioo`). "The multiplier is increasing in the persistence of the shock" and
-    the dynamic results of Figure 8.4 rest on numerical solutions and are deferred (decision 7).
+    the claims of Figure 8.4 are treated in items 12–16 (module `FiscalDynamics`).
+
+12. **§8.6.2 and p. 236, "invests less".** In the linearised model the impact response of
+    investment is `Î₀ = k̄k̂₁ = −k̄φ` with `φD(ρ) = gλ(1 − (1+κ)ρ)`, `D(ρ) > 0`,
+    `κ = βr̄(1−α)/(ψ+α)`. Investment falls on impact if and only if `ρ < 1/(1+κ)`; it is unchanged
+    at `ρ = 1/(1+κ)` and rises for `1/(1+κ) < ρ ≤ 1`, a non-empty range that contains the permanent
+    shock `ρ = 1` (`fd_investment_correction`). The book's statement holds for the persistence it
+    uses (`ρ ≤ 0.95`, while `1/(1+κ)` is about 0.993 at `ψ = 2` and 0.980 at `ψ = 1/2`), but not for every persistence. With
+    `ρ < 1/(1+κ)` the sign pattern of Figure 8.4 is proved for every parameter value
+    (`fd_impact_signs`, `fd_c_k_neg`).
+
+13. **"The fiscal multiplier is increasing in the persistence of the shock" (§8.6.2, p. 231;
+    Fig. 8.4, right).** Proved analytically for two multipliers: the impact multiplier
+    `Δy₀/ΔG₀`, strictly increasing on `0 ≤ ρ ≤ 1/(1+κ)` (`fd_impact_mult_strictMonoOn_rho`), and
+    the whole-horizon cumulative multiplier `Σₜ Δyₜ/Σₜ ΔGₜ` (the limit of the `H`-period
+    multipliers, `fd_mult_tendsto`), strictly increasing on `[ρ₁, 1/(1+κ)]` whenever cumulative
+    spending rises at `ρ₁` (`fd_multInf_strictMono`). The extra hypothesis is needed: since
+    `G = γηc` and consumption falls persistently, the cumulative spending response `Σₜ Ĝₜ` can be
+    zero or negative for transitory shocks, and there the ratio has a pole; `Σₜ Ĝₜ > 0` at
+    `ρ = 1/(1+κ)` (`fd_GInf_pos_top`). The 12-quarter multiplier plotted in the figure is not
+    proved monotone for general parameters; that it rises over `ρ ∈ [0.8, 0.95]` at the
+    calibration is a numerical statement.
+
+14. **"If `ψ` is smaller … the fiscal multiplier is larger" (p. 237).** Proved for the impact
+    multiplier under the extra assumption `δ ≤ 1` (`fd_impact_mult_antitone_psi`), which the book
+    does not state (its calibration has `δ = 0.019`). The assumption gives that the stable root
+    `λ` rises with `ψ` (`fd_lam_mono_psi`): the characteristic polynomial is a pencil
+    `ψf₀ + αf₁` in `ψ` (`fd_pencil`) and `δ ≤ 1` makes `f₀ ≥ 0` up to the root of `f₁`
+    (`fd_f0_nonneg`). The 12-quarter version is numerical.
+
+15. **"The cumulative fiscal multiplier … is close to zero" (p. 236).** Its value is a calibrated
+    number. What holds for every parameter value is that cumulative output rises by less than
+    cumulative spending at every horizon, so the cumulative multiplier is below one whenever
+    cumulative spending rises (`fd_cum_lt`, `fd_mult_lt_one`), and the impact multiplier is in
+    `(0, 1)` (`fd_impact_mult_mem`).
+
+16. **The linear approximation (§8.6.1, fn. 8).** The book computes the impulse responses with a
+    numerical linear solution. Here the static equations (8.10), (8.15) with (8.17), and (8.18)
+    are exactly log-linear (`fd_static_exact`), the resource constraint (8.11) and the Euler
+    equation (8.14) with (8.16) are replaced by their derivatives at the steady state
+    (`fd_resource_linear`, `fd_euler_linear`), the impulse response is the perfect-foresight path
+    after the shock (`fd_IsIRF`), and its unique bounded solution is derived in closed form
+    (`fd_irf_solves`, `fd_irf_unique`).

@@ -1,6 +1,6 @@
 {
-  "checked_at_utc": "2026-11-11T21:43:02.562437+00:00",
-  "theorems": 103,
+  "checked_at_utc": "2026-11-12T20:02:29.331073+00:00",
+  "theorems": 138,
   "module_theorems": {
     "AKMMQuantitativeMethods/StaticModel.lean": 26,
     "AKMMQuantitativeMethods/Identification.lean": 8,
@@ -8,10 +8,11 @@
     "AKMMQuantitativeMethods/Cholesky.lean": 8,
     "AKMMQuantitativeMethods/VARLP.lean": 15,
     "AKMMQuantitativeMethods/FiscalModel.lean": 21,
+    "AKMMQuantitativeMethods/FiscalDynamics.lean": 35,
     "AKMMQuantitativeMethods/StaticLikelihood.lean": 7,
     "AKMMQuantitativeMethods/KalmanLikelihood.lean": 6
   },
-  "audited_declarations": 127,
+  "audited_declarations": 187,
   "declarations": [
     {
       "name": "AKMM.QuantitativeMethods.sm_utility",
@@ -572,6 +573,306 @@
       "name": "AKMM.QuantitativeMethods.fm_multiplier_scale",
       "kind": "theorem",
       "module": "AKMMQuantitativeMethods/FiscalModel.lean"
+    },
+    {
+      "name": "AKMM.QuantitativeMethods.fd_Y",
+      "kind": "def",
+      "module": "AKMMQuantitativeMethods/FiscalDynamics.lean"
+    },
+    {
+      "name": "AKMM.QuantitativeMethods.fd_C",
+      "kind": "def",
+      "module": "AKMMQuantitativeMethods/FiscalDynamics.lean"
+    },
+    {
+      "name": "AKMM.QuantitativeMethods.fd_g",
+      "kind": "def",
+      "module": "AKMMQuantitativeMethods/FiscalDynamics.lean"
+    },
+    {
+      "name": "AKMM.QuantitativeMethods.fd_kap",
+      "kind": "def",
+      "module": "AKMMQuantitativeMethods/FiscalDynamics.lean"
+    },
+    {
+      "name": "AKMM.QuantitativeMethods.fd_m",
+      "kind": "def",
+      "module": "AKMMQuantitativeMethods/FiscalDynamics.lean"
+    },
+    {
+      "name": "AKMM.QuantitativeMethods.fd_n",
+      "kind": "def",
+      "module": "AKMMQuantitativeMethods/FiscalDynamics.lean"
+    },
+    {
+      "name": "AKMM.QuantitativeMethods.fd_B",
+      "kind": "def",
+      "module": "AKMMQuantitativeMethods/FiscalDynamics.lean"
+    },
+    {
+      "name": "AKMM.QuantitativeMethods.fd_lam",
+      "kind": "def",
+      "module": "AKMMQuantitativeMethods/FiscalDynamics.lean"
+    },
+    {
+      "name": "AKMM.QuantitativeMethods.fd_p",
+      "kind": "def",
+      "module": "AKMMQuantitativeMethods/FiscalDynamics.lean"
+    },
+    {
+      "name": "AKMM.QuantitativeMethods.fd_D",
+      "kind": "def",
+      "module": "AKMMQuantitativeMethods/FiscalDynamics.lean"
+    },
+    {
+      "name": "AKMM.QuantitativeMethods.fd_q",
+      "kind": "def",
+      "module": "AKMMQuantitativeMethods/FiscalDynamics.lean"
+    },
+    {
+      "name": "AKMM.QuantitativeMethods.fd_phi",
+      "kind": "def",
+      "module": "AKMMQuantitativeMethods/FiscalDynamics.lean"
+    },
+    {
+      "name": "AKMM.QuantitativeMethods.fd_k",
+      "kind": "def",
+      "module": "AKMMQuantitativeMethods/FiscalDynamics.lean"
+    },
+    {
+      "name": "AKMM.QuantitativeMethods.fd_c",
+      "kind": "def",
+      "module": "AKMMQuantitativeMethods/FiscalDynamics.lean"
+    },
+    {
+      "name": "AKMM.QuantitativeMethods.fd_l",
+      "kind": "def",
+      "module": "AKMMQuantitativeMethods/FiscalDynamics.lean"
+    },
+    {
+      "name": "AKMM.QuantitativeMethods.fd_y",
+      "kind": "def",
+      "module": "AKMMQuantitativeMethods/FiscalDynamics.lean"
+    },
+    {
+      "name": "AKMM.QuantitativeMethods.fd_G",
+      "kind": "def",
+      "module": "AKMMQuantitativeMethods/FiscalDynamics.lean"
+    },
+    {
+      "name": "AKMM.QuantitativeMethods.fd_coef",
+      "kind": "theorem",
+      "module": "AKMMQuantitativeMethods/FiscalDynamics.lean"
+    },
+    {
+      "name": "AKMM.QuantitativeMethods.fd_ratios",
+      "kind": "theorem",
+      "module": "AKMMQuantitativeMethods/FiscalDynamics.lean"
+    },
+    {
+      "name": "AKMM.QuantitativeMethods.fd_lam_props",
+      "kind": "theorem",
+      "module": "AKMMQuantitativeMethods/FiscalDynamics.lean"
+    },
+    {
+      "name": "AKMM.QuantitativeMethods.fd_rel",
+      "kind": "theorem",
+      "module": "AKMMQuantitativeMethods/FiscalDynamics.lean"
+    },
+    {
+      "name": "AKMM.QuantitativeMethods.fd_IsIRF",
+      "kind": "def",
+      "module": "AKMMQuantitativeMethods/FiscalDynamics.lean"
+    },
+    {
+      "name": "AKMM.QuantitativeMethods.fd_irf_solves",
+      "kind": "theorem",
+      "module": "AKMMQuantitativeMethods/FiscalDynamics.lean"
+    },
+    {
+      "name": "AKMM.QuantitativeMethods.fd_lam_lt_one",
+      "kind": "theorem",
+      "module": "AKMMQuantitativeMethods/FiscalDynamics.lean"
+    },
+    {
+      "name": "AKMM.QuantitativeMethods.fd_k_bound",
+      "kind": "theorem",
+      "module": "AKMMQuantitativeMethods/FiscalDynamics.lean"
+    },
+    {
+      "name": "AKMM.QuantitativeMethods.fd_irf_unique",
+      "kind": "theorem",
+      "module": "AKMMQuantitativeMethods/FiscalDynamics.lean"
+    },
+    {
+      "name": "AKMM.QuantitativeMethods.fd_q_phi",
+      "kind": "theorem",
+      "module": "AKMMQuantitativeMethods/FiscalDynamics.lean"
+    },
+    {
+      "name": "AKMM.QuantitativeMethods.fd_k_nonpos",
+      "kind": "theorem",
+      "module": "AKMMQuantitativeMethods/FiscalDynamics.lean"
+    },
+    {
+      "name": "AKMM.QuantitativeMethods.fd_c_k_neg",
+      "kind": "theorem",
+      "module": "AKMMQuantitativeMethods/FiscalDynamics.lean"
+    },
+    {
+      "name": "AKMM.QuantitativeMethods.fd_impact_signs",
+      "kind": "theorem",
+      "module": "AKMMQuantitativeMethods/FiscalDynamics.lean"
+    },
+    {
+      "name": "AKMM.QuantitativeMethods.fd_investment_correction",
+      "kind": "theorem",
+      "module": "AKMMQuantitativeMethods/FiscalDynamics.lean"
+    },
+    {
+      "name": "AKMM.QuantitativeMethods.fd_mult",
+      "kind": "def",
+      "module": "AKMMQuantitativeMethods/FiscalDynamics.lean"
+    },
+    {
+      "name": "AKMM.QuantitativeMethods.fd_cum_lt",
+      "kind": "theorem",
+      "module": "AKMMQuantitativeMethods/FiscalDynamics.lean"
+    },
+    {
+      "name": "AKMM.QuantitativeMethods.fd_mult_lt_one",
+      "kind": "theorem",
+      "module": "AKMMQuantitativeMethods/FiscalDynamics.lean"
+    },
+    {
+      "name": "AKMM.QuantitativeMethods.fd_impact_mult",
+      "kind": "theorem",
+      "module": "AKMMQuantitativeMethods/FiscalDynamics.lean"
+    },
+    {
+      "name": "AKMM.QuantitativeMethods.fd_impact_mult_mem",
+      "kind": "theorem",
+      "module": "AKMMQuantitativeMethods/FiscalDynamics.lean"
+    },
+    {
+      "name": "AKMM.QuantitativeMethods.fd_impact_mult_strictMonoOn_rho",
+      "kind": "theorem",
+      "module": "AKMMQuantitativeMethods/FiscalDynamics.lean"
+    },
+    {
+      "name": "AKMM.QuantitativeMethods.fd_KInf",
+      "kind": "def",
+      "module": "AKMMQuantitativeMethods/FiscalDynamics.lean"
+    },
+    {
+      "name": "AKMM.QuantitativeMethods.fd_yInf",
+      "kind": "def",
+      "module": "AKMMQuantitativeMethods/FiscalDynamics.lean"
+    },
+    {
+      "name": "AKMM.QuantitativeMethods.fd_GInf",
+      "kind": "def",
+      "module": "AKMMQuantitativeMethods/FiscalDynamics.lean"
+    },
+    {
+      "name": "AKMM.QuantitativeMethods.fd_multInf",
+      "kind": "def",
+      "module": "AKMMQuantitativeMethods/FiscalDynamics.lean"
+    },
+    {
+      "name": "AKMM.QuantitativeMethods.fd_k_tendsto",
+      "kind": "theorem",
+      "module": "AKMMQuantitativeMethods/FiscalDynamics.lean"
+    },
+    {
+      "name": "AKMM.QuantitativeMethods.fd_sum_k",
+      "kind": "theorem",
+      "module": "AKMMQuantitativeMethods/FiscalDynamics.lean"
+    },
+    {
+      "name": "AKMM.QuantitativeMethods.fd_mult_tendsto",
+      "kind": "theorem",
+      "module": "AKMMQuantitativeMethods/FiscalDynamics.lean"
+    },
+    {
+      "name": "AKMM.QuantitativeMethods.fd_N",
+      "kind": "def",
+      "module": "AKMMQuantitativeMethods/FiscalDynamics.lean"
+    },
+    {
+      "name": "AKMM.QuantitativeMethods.fd_Q",
+      "kind": "def",
+      "module": "AKMMQuantitativeMethods/FiscalDynamics.lean"
+    },
+    {
+      "name": "AKMM.QuantitativeMethods.fd_inf_closed",
+      "kind": "theorem",
+      "module": "AKMMQuantitativeMethods/FiscalDynamics.lean"
+    },
+    {
+      "name": "AKMM.QuantitativeMethods.fd_key",
+      "kind": "theorem",
+      "module": "AKMMQuantitativeMethods/FiscalDynamics.lean"
+    },
+    {
+      "name": "AKMM.QuantitativeMethods.fd_det",
+      "kind": "theorem",
+      "module": "AKMMQuantitativeMethods/FiscalDynamics.lean"
+    },
+    {
+      "name": "AKMM.QuantitativeMethods.fd_multInf_strictMono",
+      "kind": "theorem",
+      "module": "AKMMQuantitativeMethods/FiscalDynamics.lean"
+    },
+    {
+      "name": "AKMM.QuantitativeMethods.fd_GInf_pos_top",
+      "kind": "theorem",
+      "module": "AKMMQuantitativeMethods/FiscalDynamics.lean"
+    },
+    {
+      "name": "AKMM.QuantitativeMethods.fd_pencil",
+      "kind": "theorem",
+      "module": "AKMMQuantitativeMethods/FiscalDynamics.lean"
+    },
+    {
+      "name": "AKMM.QuantitativeMethods.fd_le_lam",
+      "kind": "theorem",
+      "module": "AKMMQuantitativeMethods/FiscalDynamics.lean"
+    },
+    {
+      "name": "AKMM.QuantitativeMethods.fd_f0_nonneg",
+      "kind": "theorem",
+      "module": "AKMMQuantitativeMethods/FiscalDynamics.lean"
+    },
+    {
+      "name": "AKMM.QuantitativeMethods.fd_lam_mono_psi",
+      "kind": "theorem",
+      "module": "AKMMQuantitativeMethods/FiscalDynamics.lean"
+    },
+    {
+      "name": "AKMM.QuantitativeMethods.fd_impact_mult_Phi",
+      "kind": "theorem",
+      "module": "AKMMQuantitativeMethods/FiscalDynamics.lean"
+    },
+    {
+      "name": "AKMM.QuantitativeMethods.fd_impact_mult_antitone_psi",
+      "kind": "theorem",
+      "module": "AKMMQuantitativeMethods/FiscalDynamics.lean"
+    },
+    {
+      "name": "AKMM.QuantitativeMethods.fd_static_exact",
+      "kind": "theorem",
+      "module": "AKMMQuantitativeMethods/FiscalDynamics.lean"
+    },
+    {
+      "name": "AKMM.QuantitativeMethods.fd_resource_linear",
+      "kind": "theorem",
+      "module": "AKMMQuantitativeMethods/FiscalDynamics.lean"
+    },
+    {
+      "name": "AKMM.QuantitativeMethods.fd_euler_linear",
+      "kind": "theorem",
+      "module": "AKMMQuantitativeMethods/FiscalDynamics.lean"
     },
     {
       "name": "AKMM.QuantitativeMethods.eq_8_19_8_20",
@@ -1212,6 +1513,306 @@
       "Classical.choice",
       "Quot.sound"
     ],
+    "AKMM.QuantitativeMethods.fd_Y": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.QuantitativeMethods.fd_C": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.QuantitativeMethods.fd_g": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.QuantitativeMethods.fd_kap": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.QuantitativeMethods.fd_m": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.QuantitativeMethods.fd_n": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.QuantitativeMethods.fd_B": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.QuantitativeMethods.fd_lam": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.QuantitativeMethods.fd_p": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.QuantitativeMethods.fd_D": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.QuantitativeMethods.fd_q": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.QuantitativeMethods.fd_phi": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.QuantitativeMethods.fd_k": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.QuantitativeMethods.fd_c": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.QuantitativeMethods.fd_l": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.QuantitativeMethods.fd_y": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.QuantitativeMethods.fd_G": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.QuantitativeMethods.fd_coef": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.QuantitativeMethods.fd_ratios": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.QuantitativeMethods.fd_lam_props": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.QuantitativeMethods.fd_rel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.QuantitativeMethods.fd_IsIRF": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.QuantitativeMethods.fd_irf_solves": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.QuantitativeMethods.fd_lam_lt_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.QuantitativeMethods.fd_k_bound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.QuantitativeMethods.fd_irf_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.QuantitativeMethods.fd_q_phi": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.QuantitativeMethods.fd_k_nonpos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.QuantitativeMethods.fd_c_k_neg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.QuantitativeMethods.fd_impact_signs": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.QuantitativeMethods.fd_investment_correction": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.QuantitativeMethods.fd_mult": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.QuantitativeMethods.fd_cum_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.QuantitativeMethods.fd_mult_lt_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.QuantitativeMethods.fd_impact_mult": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.QuantitativeMethods.fd_impact_mult_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.QuantitativeMethods.fd_impact_mult_strictMonoOn_rho": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.QuantitativeMethods.fd_KInf": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.QuantitativeMethods.fd_yInf": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.QuantitativeMethods.fd_GInf": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.QuantitativeMethods.fd_multInf": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.QuantitativeMethods.fd_k_tendsto": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.QuantitativeMethods.fd_sum_k": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.QuantitativeMethods.fd_mult_tendsto": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.QuantitativeMethods.fd_N": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.QuantitativeMethods.fd_Q": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.QuantitativeMethods.fd_inf_closed": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.QuantitativeMethods.fd_key": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.QuantitativeMethods.fd_det": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.QuantitativeMethods.fd_multInf_strictMono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.QuantitativeMethods.fd_GInf_pos_top": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.QuantitativeMethods.fd_pencil": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.QuantitativeMethods.fd_le_lam": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.QuantitativeMethods.fd_f0_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.QuantitativeMethods.fd_lam_mono_psi": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.QuantitativeMethods.fd_impact_mult_Phi": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.QuantitativeMethods.fd_impact_mult_antitone_psi": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.QuantitativeMethods.fd_static_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.QuantitativeMethods.fd_resource_linear": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.QuantitativeMethods.fd_euler_linear": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
     "AKMM.QuantitativeMethods.eq_8_19_8_20": [
       "propext",
       "Classical.choice",
@@ -1295,18 +1896,19 @@
     "AKMMQuantitativeMethods/Cholesky.lean": "bb6a2656908670d641e53076e16d6f8643a9062403fafd91fcf1a12c6c28c6fa",
     "AKMMQuantitativeMethods/VARLP.lean": "24dd209536185a98983264c0fc2d18a6eb9eaac394491150b635fea4207b6912",
     "AKMMQuantitativeMethods/FiscalModel.lean": "0ae2b360108f7576f5e9d7a90976d958adafd57c7149cc50a5c693868429cc0d",
+    "AKMMQuantitativeMethods/FiscalDynamics.lean": "315faf772db96110fca0e947d1d4fdf104d417fd725c5a18ff95290f2b0eda0c",
     "AKMMQuantitativeMethods/StaticLikelihood.lean": "be28d81c3aac01fa57daad4194b60ca4f899638b989d30cb87aa58a9777bfc0b",
     "AKMMQuantitativeMethods/KalmanLikelihood.lean": "ecc2ba1f6ae3d7dd55920211fb5407d93621049ca10d35b2c42569d284613eee",
-    "AKMMQuantitativeMethods.lean": "f4fedd091063255961de65913da96d1c1eb53014d035bc406a902cab4e219152",
+    "AKMMQuantitativeMethods.lean": "d68a4d066e9e96f96cdd703a68bfdd83ab18f35e5fb8393e6d738058464f8a58",
     "lean-toolchain": "8733782dc070a99b312039cda424f601b80f3be6f6f512627da5ba25adc27632",
     "lakefile.toml": "74aef0573d72b39715546556aa56a55325086cadd0cef8c284f69f77e39e2787",
     "lake-manifest.json": "216299bfb6440f0a77a370a244223ee22d653b5d861803cca3ff3d745828d1c8",
-    "proof-manifest.json": "99486db767e3e710de253371020fb06f35e01511556fba41b18c73d53bd84f6a",
+    "proof-manifest.json": "fdb25792f103c4b890df7064b0cc7f6ff797c13f095b1c2c6a18f14386f2f368",
     "scripts/verify.py": "a70b1fa704dd590f937f8b37682afa88a9d85a9150065acb935c7d2c9589da3b",
     "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
   },
-  "fresh_audit_sha256": "8a1be8d8e1bdad84bbce21399fc79c753e1de622302375ef6df6bcd22301ba6b",
+  "fresh_audit_sha256": "c293d1178b03319d0f36b27f3130a3d60b53502ff06f317d6371749f61ba4328",
   "lean_toolchain": "leanprover/lean4:v4.34.0",
-  "scope": "AKMM Chapter 8 (pp. 217-238) and Appendix 8.A (p. 842): the static fiscal model and its multiplier, identification, SVARs and Cholesky identification, VARs versus local projections, the dynamic fiscal model and its steady state, likelihoods and calibration identities.",
+  "scope": "AKMM Chapter 8 (pp. 217-238) and Appendix 8.A (p. 842): the static fiscal model and its multiplier, identification, SVARs and Cholesky identification, VARs versus local projections, the dynamic fiscal model, its steady state and its linearised impulse responses (Figure 8.4), likelihoods and calibration identities.",
   "source": "Marina Azzimonti, Per Krusell, Alisdair McKay and Toshihiko Mukoyama, Macroeconomics (draft of December 2025), Chapter 8"
 }

@@ -8,21 +8,26 @@ below from this directory. [Return to the library index](../../README.md).
 
 Chapter 8 asks how large the fiscal multiplier is and uses the question to compare four empirical
 strategies: natural experiments, structural VARs, structural estimation and calibration. Its
-mathematical content is algebra, and that algebra is formalised: the static planner economy and
-its multiplier, the identification problem and instruments, the reduced form of a structural VAR
-and its rotation non-identification, the restriction count, Cholesky (recursive) identification,
-the population estimands of local projections and VARs and the Plagborg-Møller–Wolf equivalence,
-the dynamic fiscal model with its steady state, the likelihood of the static model and the
-Kalman-filter likelihood, and the calibration identities. Data, estimates, calibrated numbers,
-the Monte Carlo study and the claims read off Figure 8.4 are not formalised. The project depends on
-Miao's `PartialInformation` (second moments of random vectors, the Kalman filter and its
-likelihood), `RationalExpectations` (VAR impulse responses), `StructuralEstimation` (invariance of
-maximum likelihood) and `NeoclassicalGrowth` (the Frisch elasticity). Five printed errors or
-imprecisions are corrected — the government rule of Appendix 8.A.1, the range of footnote 6's
-weights, a `K`/`k` slip, the missing Jacobian in the static likelihood (with a Lean counterexample)
-and the missing sign normalisation of Cholesky identification (with a Lean counterexample) — as
-recorded in [corrections](docs/corrections.md); every book item is located in the
-[source map](docs/source-map.md). The library contains **103 theorems**.
+mathematical content is algebra, and that algebra is formalised: the static planner economy and its
+multiplier, the identification problem and instruments, the reduced form of a structural VAR and its
+rotation non-identification, the restriction count, Cholesky (recursive) identification, the
+population estimands of local projections and VARs and the Plagborg-Møller–Wolf equivalence, the
+dynamic fiscal model with its steady state, its linearisation and the closed-form saddle path of its
+impulse response to a spending shock, the likelihood of the static model and the Kalman-filter
+likelihood, and the calibration identities. The qualitative claims of Figure 8.4 are proved
+analytically for the model's whole parameter class: the signs of the impulse responses, multipliers
+below one, and the multiplier rising with persistence (impact and whole-horizon multipliers) and
+with the elasticity of labour supply (impact multiplier, for `δ ≤ 1`); that the plotted 12-quarter
+multiplier does the same is numerical. Data, estimates, calibrated numbers and the Monte Carlo study
+are not formalised. The project depends on Miao's `PartialInformation` (second moments of random
+vectors, the Kalman filter and its likelihood), `RationalExpectations` (VAR impulse responses),
+`StructuralEstimation` (invariance of maximum likelihood) and `NeoclassicalGrowth` (the Frisch
+elasticity). Six printed errors or imprecisions are corrected — the government rule of Appendix
+8.A.1, the range of footnote 6's weights, a `K`/`k` slip, the missing Jacobian in the static
+likelihood (with a Lean counterexample), the missing sign normalisation of Cholesky identification
+(with a Lean counterexample) and the claim that investment falls after a spending shock, which fails
+for very persistent shocks — as recorded in [corrections](docs/corrections.md); every book item is
+located in the [source map](docs/source-map.md). The library contains **138 theorems**.
 
 * **The static model and its multiplier** (§8.2, (8.5)–(8.6), Appendix 8.A.2): the planner's
   unique optimum and its first-order conditions (`sm_planner_optimal`, `sm_planner_unique`,
@@ -52,6 +57,18 @@ recorded in [corrections](docs/corrections.md); every book item is located in th
   (`fm_IsEquilibrium`, `fm_steady_isEquilibrium`); the steady state, unique, with the printed
   government rule corrected (`appendix_8A_1`, `fm_steady_exists`, `appendix_8A_1_ratios`,
   `appendix_8A_1_printed_G`); the multiplier with investment fixed (`fm_fixed_investment_multiplier`).
+* **The linearised model and Figure 8.4** (§8.6.1–8.6.2, §8.8, pp. 231–238): the static
+  equations are exactly log-linear, the resource and Euler equations linearised
+  (`fd_static_exact`, `fd_resource_linear`, `fd_euler_linear`, `fd_ratios`); the stable root and
+  the saddle path, the unique bounded solution (`fd_lam_props`, `fd_irf_solves`, `fd_k_bound`,
+  `fd_irf_unique`); on impact consumption falls, hours and output rise and, for
+  `ρ < 1/(1+κ)`, investment falls, with consumption and capital below steady state throughout
+  (`fd_impact_signs`, `fd_c_k_neg`), while investment rises for more persistent shocks
+  (`fd_investment_correction`); cumulative multipliers below one (`fd_cum_lt`, `fd_mult_lt_one`,
+  `fd_impact_mult_mem`); the impact multiplier rising in `ρ` and falling in `ψ` for `δ ≤ 1`
+  (`fd_impact_mult_strictMonoOn_rho`, `fd_impact_mult_antitone_psi`, `fd_lam_mono_psi`); the
+  whole-horizon multiplier as the limit of the cumulative ones and rising in `ρ` where
+  cumulative spending rises (`fd_mult_tendsto`, `fd_multInf_strictMono`).
 * **Structural estimation** (§8.7): (8.19)–(8.20) (`eq_8_19_8_20`, `sl_bijection`); the likelihood
   for discrete shocks and the Jacobian for densities (`sl_likelihood_discrete`, `sl_jacobian`,
   `sl_jacobian_depends_on_psi`); the implied multiplier (`sl_multiplier_mle`); the Kalman
@@ -73,6 +90,7 @@ All names are in the namespace `AKMM.QuantitativeMethods`.
 | [Cholesky](AKMMQuantitativeMethods/Cholesky.lean) | 8 | The Cholesky factor, recursive identification, footnote 6's weights (AKMM §8.4–8.5, pp. 224, 227) |
 | [VARLP](AKMMQuantitativeMethods/VARLP.lean) | 15 | Dynamic multipliers, VAR and companion IRFs, LP and VAR estimands, footnote 6 (AKMM pp. 220–221, §8.5, pp. 225–227) |
 | [FiscalModel](AKMMQuantitativeMethods/FiscalModel.lean) | 21 | (8.10)–(8.18), the equilibrium, the steady state, §8.6.2, calibration (AKMM §8.6, §8.8, pp. 229–236, 842) |
+| [FiscalDynamics](AKMMQuantitativeMethods/FiscalDynamics.lean) | 35 | The linearised model, its saddle path, the signs and multipliers of Figure 8.4 (AKMM §8.6, §8.8–8.9, pp. 231–238) |
 | [StaticLikelihood](AKMMQuantitativeMethods/StaticLikelihood.lean) | 7 | (8.19)–(8.20), the likelihood and its Jacobian, the implied multiplier (AKMM §8.7, p. 232) |
 | [KalmanLikelihood](AKMMQuantitativeMethods/KalmanLikelihood.lean) | 6 | (8.21)–(8.22), innovations, the prediction-error decomposition, footnote 9 (AKMM §8.7, pp. 232–233) |
 

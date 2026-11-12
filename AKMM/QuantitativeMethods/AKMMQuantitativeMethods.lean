@@ -4,5 +4,6 @@ import AKMMQuantitativeMethods.SVAR
 import AKMMQuantitativeMethods.Cholesky
 import AKMMQuantitativeMethods.VARLP
 import AKMMQuantitativeMethods.FiscalModel
+import AKMMQuantitativeMethods.FiscalDynamics
 import AKMMQuantitativeMethods.StaticLikelihood
 import AKMMQuantitativeMethods.KalmanLikelihood

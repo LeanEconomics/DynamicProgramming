@@ -100,7 +100,7 @@ inverses, the orthogonal group, the inverse function theorem
 | p. 228, Fig. 8.3 | Monte Carlo; MSE 0.0047 vs 0.0027 | not formalised: simulation |
 | p. 227 | Li–Plagborg-Møller–Wolf; Olea et al. coverage | not formalised: cited simulation findings |
 
-## §8.6 A model of fiscal policy (pp. 228–231) — `FiscalModel`
+## §8.6 A model of fiscal policy (pp. 228–231) — `FiscalModel`, `FiscalDynamics`
 
 | Source | Claim | Lean |
 | --- | --- | --- |
@@ -116,9 +116,9 @@ inverses, the orthogonal group, the inverse function theorem
 | (8.18), p. 230 | `γη/G = 1/c` | `eq_8_18` |
 | p. 230 | The government's problem has the planner's first-order condition | not formalised: cited (Chapter 15); the planner's condition is `eq_8_18` |
 | p. 230 | Equilibrium: processes satisfying (8.10)–(8.18) | `fm_IsEquilibrium`, `fm_steady_isEquilibrium` |
-| p. 231, fn. 8 | Linear approximation around the steady state | steady state: `appendix_8A_1`; linearisation not formalised (numerical) |
+| p. 231, fn. 8 | Linear approximation around the steady state | steady state: `appendix_8A_1`; coefficients `fd_ratios`; static equations exactly log-linear `fd_static_exact`; resource constraint and Euler equation linearised `fd_resource_linear`, `fd_euler_linear`; the linear impulse-response system `fd_IsIRF`; stable root `fd_lam_props`, `fd_lam_lt_one`; the saddle path solves it, is bounded and is the unique bounded solution `fd_irf_solves`, `fd_k_bound`, `fd_irf_unique` (with `fd_coef`, `fd_rel`) |
 | §8.6.2, p. 231 | With investment fixed, the multiplier is between zero and one | `fm_fixed_investment_multiplier`; static model: `sm_multiplier_mem_Ioo`, `sm_multiplier_formula` |
-| §8.6.2, p. 231 | Investing less; the multiplier increases with persistence | figure claim, deferred (Fig. 8.4, right) |
+| §8.6.2, p. 231 | Investing less frees resources; the multiplier increases with persistence | investment falls on impact for `ρ < 1/(1+κ)`: `fd_impact_signs`, with the correction `fd_investment_correction`; impact multiplier strictly increasing in `ρ`: `fd_impact_mult_strictMonoOn_rho` (with `fd_impact_mult`, `fd_q_phi`); whole-horizon cumulative multiplier strictly increasing in `ρ` where cumulative spending rises: `fd_multInf_strictMono` (with `fd_mult_tendsto`, `fd_k_tendsto`, `fd_sum_k`, `fd_inf_closed`, `fd_key`, `fd_det`, `fd_GInf_pos_top`); see corrections 12–13 |
 
 ## §8.7 Structural estimation (pp. 231–234) — `StaticLikelihood`, `KalmanLikelihood`
 
@@ -156,7 +156,11 @@ inverses, the orthogonal group, the inverse function theorem
 | p. 236 | In steady state (8.18) is `γ = Ḡ/c̄`; `γ = 0.3` | `fm_gamma_calibration`; the value is data |
 | p. 236 | Linearisation removes precautionary motives; TFP shocks irrelevant | not formalised: narrative |
 | p. 236 | The linear solution scales with the shock, so its size does not matter | `fm_multiplier_scale` |
-| p. 236, Fig. 8.4 | Impulse responses; cumulative multiplier near zero; multiplier rising in `ρ_η` and as `ψ` falls | figure claims, deferred |
+| p. 236, Fig. 8.4 (left) | The economy works more, consumes less, invests less; output rises initially | `fd_impact_signs`, `fd_c_k_neg`, `fd_k_nonpos`; investment falls only for `ρ < 1/(1+κ)` (`fd_investment_correction`, correction 12) |
+| p. 236, Fig. 8.4 (left) | The bulk of the adjustment is investment; labour moves little; output below steady state after 5 quarters | not formalised: calibrated numbers |
+| p. 236, Fig. 8.4 | The cumulative 12-quarter multiplier is close to zero | below one at every horizon: `fd_cum_lt`, `fd_mult_lt_one`, `fd_impact_mult_mem` (with `fd_mult`); the value near zero is a calibrated number (correction 15) |
+| p. 236–237, Fig. 8.4 (right) | The multiplier rises with `ρ_η` | impact: `fd_impact_mult_strictMonoOn_rho`; whole horizon: `fd_multInf_strictMono`; the 12-quarter multiplier only numerically (correction 13) |
+| p. 237, Fig. 8.4 (right) | The multiplier is larger when `ψ` is smaller | impact multiplier, for `δ ≤ 1`: `fd_impact_mult_antitone_psi` (with `fd_impact_mult_Phi`, `fd_lam_mono_psi`, `fd_pencil`, `fd_le_lam`, `fd_f0_nonneg`); the 12-quarter multiplier only numerically (correction 14) |
 | Box, p. 237 | Model validation | not formalised: narrative |
 | pp. 237–238, fn. 14 | Wealth effects cannot explain large multipliers; Keynesian channels; principles of calibration | not formalised: narrative |
 
@@ -165,6 +169,7 @@ inverses, the orthogonal group, the inverse function theorem
 | Source | Claim | Lean |
 | --- | --- | --- |
 | p. 238 | Choice among the methods | not formalised: narrative |
+| p. 238 | In the model a spending shock raises output on impact and lowers consumption persistently | `fd_impact_signs`, `fd_c_k_neg`; "then fades" not formalised (calibrated shape) |
 
 ## Appendix 8.A.1 Steady state of the model (p. 842) — `FiscalModel`
 
