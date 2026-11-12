@@ -1,6 +1,6 @@
 {
-  "checked_at_utc": "2026-11-11T12:14:55.697604+00:00",
-  "theorems": 110,
+  "checked_at_utc": "2026-11-12T18:10:58.027742+00:00",
+  "theorems": 141,
   "module_theorems": {
     "AKMMWelfare/FirstWelfare.lean": 10,
     "AKMMWelfare/Dynastic.lean": 11,
@@ -10,9 +10,11 @@
     "AKMMWelfare/WelfareMeasures.lean": 4,
     "AKMMWelfare/OGEndowment.lean": 20,
     "AKMMWelfare/OGProduction.lean": 19,
-    "AKMMWelfare/WarmGlow.lean": 11
+    "AKMMWelfare/WarmGlow.lean": 11,
+    "AKMMWelfare/BalaskoShell.lean": 22,
+    "AKMMWelfare/GoldenRule.lean": 9
   },
-  "audited_declarations": 142,
+  "audited_declarations": 179,
   "declarations": [
     {
       "name": "AKMM.Welfare.fwValue",
@@ -723,6 +725,191 @@
       "name": "AKMM.Welfare.warmglow_no_steady_state",
       "kind": "theorem",
       "module": "AKMMWelfare/WarmGlow.lean"
+    },
+    {
+      "name": "AKMM.Welfare.bsCurvBelow",
+      "kind": "def",
+      "module": "AKMMWelfare/BalaskoShell.lean"
+    },
+    {
+      "name": "AKMM.Welfare.bsCurvAbove",
+      "kind": "def",
+      "module": "AKMMWelfare/BalaskoShell.lean"
+    },
+    {
+      "name": "AKMM.Welfare.bs_sufficiency",
+      "kind": "theorem",
+      "module": "AKMMWelfare/BalaskoShell.lean"
+    },
+    {
+      "name": "AKMM.Welfare.bsTransfer",
+      "kind": "def",
+      "module": "AKMMWelfare/BalaskoShell.lean"
+    },
+    {
+      "name": "AKMM.Welfare.bs_necessity_transfers",
+      "kind": "theorem",
+      "module": "AKMMWelfare/BalaskoShell.lean"
+    },
+    {
+      "name": "AKMM.Welfare.bs_necessity",
+      "kind": "theorem",
+      "module": "AKMMWelfare/BalaskoShell.lean"
+    },
+    {
+      "name": "AKMM.Welfare.bs_balasko_shell",
+      "kind": "theorem",
+      "module": "AKMMWelfare/BalaskoShell.lean"
+    },
+    {
+      "name": "AKMM.Welfare.bs_log_curv_below",
+      "kind": "theorem",
+      "module": "AKMMWelfare/BalaskoShell.lean"
+    },
+    {
+      "name": "AKMM.Welfare.bs_log_curv_above",
+      "kind": "theorem",
+      "module": "AKMMWelfare/BalaskoShell.lean"
+    },
+    {
+      "name": "AKMM.Welfare.bs_log_ad",
+      "kind": "theorem",
+      "module": "AKMMWelfare/BalaskoShell.lean"
+    },
+    {
+      "name": "AKMM.Welfare.bs_log",
+      "kind": "theorem",
+      "module": "AKMMWelfare/BalaskoShell.lean"
+    },
+    {
+      "name": "AKMM.Welfare.bs_log_equilibrium",
+      "kind": "theorem",
+      "module": "AKMMWelfare/BalaskoShell.lean"
+    },
+    {
+      "name": "AKMM.Welfare.bs_stationary_log",
+      "kind": "theorem",
+      "module": "AKMMWelfare/BalaskoShell.lean"
+    },
+    {
+      "name": "AKMM.Welfare.bs_mono_of_deriv",
+      "kind": "theorem",
+      "module": "AKMMWelfare/BalaskoShell.lean"
+    },
+    {
+      "name": "AKMM.Welfare.bs_quad_upper",
+      "kind": "theorem",
+      "module": "AKMMWelfare/BalaskoShell.lean"
+    },
+    {
+      "name": "AKMM.Welfare.bs_quad_lower",
+      "kind": "theorem",
+      "module": "AKMMWelfare/BalaskoShell.lean"
+    },
+    {
+      "name": "AKMM.Welfare.bs_rpow_gap_lower",
+      "kind": "theorem",
+      "module": "AKMMWelfare/BalaskoShell.lean"
+    },
+    {
+      "name": "AKMM.Welfare.bs_rpow_gap_upper",
+      "kind": "theorem",
+      "module": "AKMMWelfare/BalaskoShell.lean"
+    },
+    {
+      "name": "AKMM.Welfare.bsCRRA",
+      "kind": "def",
+      "module": "AKMMWelfare/BalaskoShell.lean"
+    },
+    {
+      "name": "AKMM.Welfare.bs_crra_hasDerivAt",
+      "kind": "theorem",
+      "module": "AKMMWelfare/BalaskoShell.lean"
+    },
+    {
+      "name": "AKMM.Welfare.bs_crra_tangent",
+      "kind": "theorem",
+      "module": "AKMMWelfare/BalaskoShell.lean"
+    },
+    {
+      "name": "AKMM.Welfare.bsCRRAU",
+      "kind": "def",
+      "module": "AKMMWelfare/BalaskoShell.lean"
+    },
+    {
+      "name": "AKMM.Welfare.bsCRRAPrice",
+      "kind": "def",
+      "module": "AKMMWelfare/BalaskoShell.lean"
+    },
+    {
+      "name": "AKMM.Welfare.bs_crra_mono",
+      "kind": "theorem",
+      "module": "AKMMWelfare/BalaskoShell.lean"
+    },
+    {
+      "name": "AKMM.Welfare.bs_crra_equilibrium",
+      "kind": "theorem",
+      "module": "AKMMWelfare/BalaskoShell.lean"
+    },
+    {
+      "name": "AKMM.Welfare.bs_crra_curv_below",
+      "kind": "theorem",
+      "module": "AKMMWelfare/BalaskoShell.lean"
+    },
+    {
+      "name": "AKMM.Welfare.bs_crra_curv_above",
+      "kind": "theorem",
+      "module": "AKMMWelfare/BalaskoShell.lean"
+    },
+    {
+      "name": "AKMM.Welfare.bs_crra",
+      "kind": "theorem",
+      "module": "AKMMWelfare/BalaskoShell.lean"
+    },
+    {
+      "name": "AKMM.Welfare.goldenrule_slope",
+      "kind": "theorem",
+      "module": "AKMMWelfare/GoldenRule.lean"
+    },
+    {
+      "name": "AKMM.Welfare.goldenrule_slope_iff",
+      "kind": "theorem",
+      "module": "AKMMWelfare/GoldenRule.lean"
+    },
+    {
+      "name": "AKMM.Welfare.goldenrule_max",
+      "kind": "theorem",
+      "module": "AKMMWelfare/GoldenRule.lean"
+    },
+    {
+      "name": "AKMM.Welfare.goldenrule_increasing",
+      "kind": "theorem",
+      "module": "AKMMWelfare/GoldenRule.lean"
+    },
+    {
+      "name": "AKMM.Welfare.goldenrule_decreasing",
+      "kind": "theorem",
+      "module": "AKMMWelfare/GoldenRule.lean"
+    },
+    {
+      "name": "AKMM.Welfare.goldenrule_efficient_iff",
+      "kind": "theorem",
+      "module": "AKMMWelfare/GoldenRule.lean"
+    },
+    {
+      "name": "AKMM.Welfare.figure_A1",
+      "kind": "theorem",
+      "module": "AKMMWelfare/GoldenRule.lean"
+    },
+    {
+      "name": "AKMM.Welfare.figure_A1_instance",
+      "kind": "theorem",
+      "module": "AKMMWelfare/GoldenRule.lean"
+    },
+    {
+      "name": "AKMM.Welfare.figure_A1_instance_regions",
+      "kind": "theorem",
+      "module": "AKMMWelfare/GoldenRule.lean"
     }
   ],
   "full_build": "passed",
@@ -1441,6 +1628,191 @@
       "propext",
       "Classical.choice",
       "Quot.sound"
+    ],
+    "AKMM.Welfare.bsCurvBelow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.bsCurvAbove": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.bs_sufficiency": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.bsTransfer": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.bs_necessity_transfers": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.bs_necessity": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.bs_balasko_shell": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.bs_log_curv_below": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.bs_log_curv_above": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.bs_log_ad": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.bs_log": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.bs_log_equilibrium": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.bs_stationary_log": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.bs_mono_of_deriv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.bs_quad_upper": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.bs_quad_lower": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.bs_rpow_gap_lower": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.bs_rpow_gap_upper": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.bsCRRA": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.bs_crra_hasDerivAt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.bs_crra_tangent": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.bsCRRAU": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.bsCRRAPrice": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.bs_crra_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.bs_crra_equilibrium": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.bs_crra_curv_below": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.bs_crra_curv_above": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.bs_crra": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.goldenrule_slope": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.goldenrule_slope_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.goldenrule_max": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.goldenrule_increasing": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.goldenrule_decreasing": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.goldenrule_efficient_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.figure_A1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.figure_A1_instance": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.figure_A1_instance_regions": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
     ]
   },
   "source_sha256": {
@@ -1450,19 +1822,21 @@
     "AKMMWelfare/Borrowing.lean": "0d1977e3791c72da8b2964202bbc2f58fde8e7b0fb927500f267b410efc2bdae",
     "AKMMWelfare/MarketPower.lean": "4c87e648b848ff8b2461cfc66303a3db5f9204455cf0ba41ee637f2302adee56",
     "AKMMWelfare/WelfareMeasures.lean": "f6a3634db20d0613ee10fb90bf84dfb161e92f5f4aa2824635279e649230eb27",
-    "AKMMWelfare/OGEndowment.lean": "66dc0ceaefeb20917bbeb5d09d5ab090f4366525fbc972af56f62ec95b44f8cd",
+    "AKMMWelfare/OGEndowment.lean": "b01f09e052993bac8674a680fe45320323c374e7fee9cabc6661765dcf926851",
     "AKMMWelfare/OGProduction.lean": "4d6d943ac04b299ed2337d2908b5ed7a2cadb197af6d8fe69126ace275bbe4d7",
     "AKMMWelfare/WarmGlow.lean": "f930c5b065a94e18422343ed068808fe971b59897eff895de330192561d5c3dc",
-    "AKMMWelfare.lean": "0d8d999d11f8c19af97bc7130726e41695c8b0e14c3718be85bc254212d1cddc",
+    "AKMMWelfare/BalaskoShell.lean": "06216497098c1439a45b1a76872d7c1d28f950370f1c9b55b4e810d33ad4f924",
+    "AKMMWelfare/GoldenRule.lean": "9017d4029f880c77e9f2beedfe6807444b52ae158d19b6cb40ec13b223ac6ef1",
+    "AKMMWelfare.lean": "4375513e760e8a456e20ba52a2074d5fe7d40c0e738cb807e8704fcef36d3f90",
     "lean-toolchain": "8733782dc070a99b312039cda424f601b80f3be6f6f512627da5ba25adc27632",
     "lakefile.toml": "94a88357639d0ac67bfbd9baab77eb4b78185590c84f9855f6992fc731f304e2",
     "lake-manifest.json": "39b0627f7379d89da26848a17496687e0b6cbdc64309c6fb66255b42a27cfc82",
-    "proof-manifest.json": "5d44adebc07369effeb05fe2982d44e1d53500abd13dd61617b60db04605c511",
+    "proof-manifest.json": "e487d21fafada557d9c93dde9e02ff8ec7c69725d49cedb52f158592ee95568f",
     "scripts/verify.py": "a70b1fa704dd590f937f8b37682afa88a9d85a9150065acb935c7d2c9589da3b",
     "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
   },
-  "fresh_audit_sha256": "fb1c3e39e16a5f8c4f26d71a81d48690ed273524e68ddcd6c78190d94b042b59",
+  "fresh_audit_sha256": "46bbc5da410b06a669a5e724b0302812c3b6de56eab9fcd0041098d77d120855",
   "lean_toolchain": "leanprover/lean4:v4.34.0",
-  "scope": "AKMM Chapter 6 (pp. 159-186) and Appendix 6.A (pp. 838-839): the First Welfare Theorem in the abstract economy and with infinitely many goods, Negishi weights and the Pareto frontier, inefficiencies (taxes, a production externality, a borrowing constraint, monopolistic competition), consumption-equivalent welfare and the veil of ignorance, overlapping-generations efficiency (finite-value welfare theorem, stationary Balasko-Shell, storage), Theorem 6.2 (the Cass criterion under fn. 12's bounds), Theorem .5 and dynamic inefficiency in the warm-glow model.",
+  "scope": "AKMM Chapter 6 (pp. 159-186) and Appendix 6.A (pp. 838-839): the First Welfare Theorem in the abstract economy and with infinitely many goods, Negishi weights and the Pareto frontier, inefficiencies (taxes, a production externality, a borrowing constraint, monopolistic competition), consumption-equivalent welfare and the veil of ignorance, overlapping-generations efficiency (finite-value welfare theorem, the Balasko-Shell theorem in both directions under curvature conditions with log and CRRA instances, storage), Theorem 6.2 (the Cass criterion under fn. 12's bounds), Theorem .5 and Figure .1 (the golden rule), and dynamic inefficiency in the warm-glow model.",
   "source": "Marina Azzimonti, Per Krusell, Alisdair McKay and Toshihiko Mukoyama, Macroeconomics (draft of December 2025), Chapter 6 and Appendix 6.A"
 }

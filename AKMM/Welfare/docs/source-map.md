@@ -119,7 +119,7 @@ state, is SLP's `theorem_15_4` and Miao's `theorem_13_3_2`.
 | p. 176 | Alternative definitions of `∆` | not formalised: remarks |
 | p. 176 | Dynamic `∆`: unique uniform percentage cut | `welfare_cev_dynamic_log` (log utility; corrections, item 13) |
 
-## §6.4.1, OG endowment economy (pp. 176–180) — `OGEndowment`
+## §6.4.1, OG endowment economy (pp. 176–180) — `OGEndowment`, `BalaskoShell`
 
 | Source | Claim | Lean |
 | --- | --- | --- |
@@ -129,7 +129,7 @@ state, is SLP's `theorem_15_4` and Miao's `theorem_13_3_2`.
 | p. 178 | `(3, 1)`: `q = 3`, net rate `−67%`, `(2, 2)` dominates | `og_example_3_1`, `og_stationary_improvement` |
 | p. 178 | `(1, 3)`: `q = 1/3`, `(2, 2)` hurts the initial old, no improvement exists | `og_example_1_3` |
 | p. 178 | The proof of the FWT goes through when the present value is finite | `og_fwt_value` (`pₜω_{y,t} → 0`), `og_fwt_finite_value`, `ogADEquilibrium`, `og_ad_of_seq`, `ogFeasible`, `ogDominates`, `ogParetoOptimal` |
-| pp. 178–179 | Balasko–Shell: optimal iff `Σ 1/pₜ = ∞` | stationary log economy: `og_balasko_shell_stationary_log` (with `og_stationary_ad`, `og_seqPrice_const`, `og_logU_mono`); general theorem not formalised (cited, paper-length proof under curvature and boundedness assumptions the book does not state; decision 5) |
+| pp. 178–179 | Balasko–Shell: optimal iff `Σ 1/pₜ = ∞` | `BalaskoShell`: general theorem `bs_balasko_shell` under the curvature conditions `bsCurvBelow` (not linear) and `bsCurvAbove` (not kinked); sufficiency `bs_sufficiency`, necessity `bs_necessity` with the explicit transfers `bsTransfer`, `bs_necessity_transfers`; instances: log utility, endowments in `[m, M]` (`bs_log_curv_below`, `bs_log_curv_above`, `bs_log_ad`, `bs_log`, `bs_log_equilibrium`), CRRA (`bsCRRA`, `bsCRRAU`, `bsCRRAPrice`, `bs_crra_equilibrium`, `bs_crra_curv_below`, `bs_crra_curv_above`, `bs_crra`, with `bs_crra_mono`, `bs_crra_tangent`, `bs_crra_hasDerivAt`, `bs_quad_upper`, `bs_quad_lower`, `bs_rpow_gap_lower`, `bs_rpow_gap_upper`, `bs_mono_of_deriv`); the stationary case `og_balasko_shell_stationary_log` (with `og_stationary_ad`, `og_seqPrice_const`, `og_logU_mono`) recovered as `bs_stationary_log` (corrections, item 15) |
 | p. 179 | `Σ 3^{−t} = 3/2`, `Σ 3ᵗ = ∞`, `Σ 1 = ∞` | `og_balasko_shell_sums` |
 | p. 179 | `(2, 2)` is optimal although the proof cannot be used | `og_example_2_2`, `og_equal_endowments_optimal` |
 | p. 179 | Optimal iff limit net rate `≥ 0` | false: `og_limit_rate_one_counterexample`; corrected `og_limit_rate_gt_one`, `og_limit_rate_lt_one_log` (corrections, item 3) |
@@ -149,7 +149,7 @@ state, is SLP's `theorem_15_4` and Miao's `theorem_13_3_2`.
 | p. 181 | Optimal iff `χ > 1`; `χ = 1` improved by social security | `storage_optimal_iff`, `storage_optimal`, `storage_not_optimal` |
 | p. 181 | Balasko–Shell on the storage allocation as a new endowment | not formalised: remark (superseded by `storage_optimal_iff`) |
 | pp. 181–182 | Budgets, `sₜ = h(wₜ, r_{t+1}, w_{t+1})`, law of motion | `diamond_law_of_motion` (the saving function itself: Chapter 5's `IsOGGrowthEquilibrium`) |
-| Theorem 6.2, p. 182, fn. 12 | Efficient iff `Σₜ ∏_{s=1}^t R_s = ∞` | `theorem_6_2`, `theorem_6_2_efficient`, `theorem_6_2_inefficient`, `dePath`, `deCons`, `deEfficient`; instances `theorem_6_2_instance_efficient`, `theorem_6_2_instance_inefficient`, `de_quadratic_expansion` (corrections, item 10) |
+| Theorem 6.2, p. 182, fn. 12 | Cass (1972): efficient iff `Σₜ ∏_{s=1}^t R_s = ∞` | `theorem_6_2`, `theorem_6_2_efficient`, `theorem_6_2_inefficient`, `dePath`, `deCons`, `deEfficient`; instances `theorem_6_2_instance_efficient`, `theorem_6_2_instance_inefficient`, `de_quadratic_expansion` (corrections, item 10) |
 | p. 182 | `∏_{s=1}^t R_s = 1/pₜ` | `theorem_6_2_prices` |
 | p. 182, fn. 13 | Steady state efficient iff `R ≥ 1`; growth version | `theorem_A5`, `theorem_A5_cass`; growth version not formalised |
 | pp. 182–183, fn. 14 | Reducing saving: the two cases | `theorem_A5_inefficient`, `theorem_A5_efficient` |
@@ -174,7 +174,7 @@ state, is SLP's `theorem_15_4` and Miao's `theorem_13_3_2`.
 | §6.5.1, pp. 184–185 | Transfers in the borrowing example; the "chicken model" | `borrow_autarky_not_optimal` (the transfer to the unrestricted allocation); the rest narrative |
 | §6.5.2, pp. 185–186 | Utilitarian weights; veil of ignorance gives `c_A = c_B` | `veil_equal_split`, `veil_optimum_equal` |
 
-## Appendix 6.A (pp. 838–839) — `OGProduction`
+## Appendix 6.A (pp. 838–839) — `OGProduction`, `GoldenRule`
 
 | Source | Claim | Lean |
 | --- | --- | --- |
@@ -182,4 +182,4 @@ state, is SLP's `theorem_15_4` and Miao's `theorem_13_3_2`.
 | Theorem .5, p. 838 | Steady state efficient iff `f′(k⋆) ≥ 1` | `theorem_A5` |
 | p. 838, (i) | `R⋆ < 1`: permanent increase in consumption | `theorem_A5_inefficient` |
 | p. 839, (ii) | `R⋆ ≥ 1`: deficits grow, `c_∞ < c⋆` | `theorem_A5_efficient` (corrections, item 6) |
-| Fig. .1 | Efficient and inefficient regions | figure claim, deferred (the content is `theorem_A5`) |
+| Fig. .1 | `c⋆ = f(k⋆) − k⋆` peaks at the golden rule `k^G`; efficient (`f′ ≥ 1`) left of `k^G`, inefficient (`f′ < 1`) right | `GoldenRule`: `figure_A1` (`goldenrule_max`, `goldenrule_increasing`, `goldenrule_decreasing`, `goldenrule_slope`, `goldenrule_slope_iff`, `goldenrule_efficient_iff`); instance `figure_A1_instance`, `figure_A1_instance_regions` (corrections, item 16) |

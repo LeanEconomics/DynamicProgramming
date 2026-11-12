@@ -14,15 +14,16 @@ production, are efficient; Appendix 6.A proves that a steady state is efficient 
 return is at least one. Every numbered result and derivation of the text is proved: Theorem 6.1;
 Theorem 6.2, the Cass criterion, which the book cites without proof, in full under the
 assumptions of its fn. 12; Theorem .5; (6.2)–(6.6). The Balasko–Shell theorem, also cited without
-proof, is proved for the stationary log economy the book uses (with the finite-value welfare
-theorem for any economy); the general statement is not formalised. Seven printed errors are
+proof, is proved in both directions for the book's economy under conditions bounding the
+curvature of indifference curves along the equilibrium, with log and CRRA instances, and
+Figure .1 (the golden rule and the efficient and inefficient regions) is proved. Seven printed errors are
 corrected, with Lean counterexamples to Theorem 6.1 without nonnegative prices, the borrowing
 constraint, "optimal iff the limit net rate is `≥ 0`", the storage bond price, the appendix's
 `f` and the two warm-glow steady states, as recorded in [corrections](docs/corrections.md); every
 book item is located in the [source map](docs/source-map.md). The project depends on AKMM
 `CompetitiveEquilibrium` (the date-0 problem and the OG equilibrium of Chapter 5) and Miao
 `OverlappingGenerations` (concave tangents, the steady-state Cass sum). The library contains
-**110 theorems**, all new.
+**141 theorems**, all new.
 
 * **The First Welfare Theorem** (§6.1): Theorem 6.1 with preference relations, endowments and
   shares (`theorem_6_1`), false without `p ≥ 0` (`theorem_6_1_counterexample`); lump-sum taxes
@@ -44,8 +45,17 @@ book item is located in the [source map](docs/source-map.md). The project depend
   `(3, 1)`, `(1, 3)`, `(2, 2)` examples; Balasko–Shell for the stationary log economy
   (`og_balasko_shell_stationary_log`); the limit-rate criterion corrected
   (`og_limit_rate_one_counterexample`, `og_limit_rate_gt_one`, `og_limit_rate_lt_one_log`).
+* **The Balasko–Shell theorem** (pp. 178–179, beyond the text): an equilibrium whose indifference
+  curves are neither linear nor kinked along the allocation (`bsCurvBelow`, `bsCurvAbove`) is
+  Pareto optimal iff `Σ 1/pₜ = ∞` (`bs_balasko_shell`); sufficiency by a curvature-driven growth
+  of the transfers' values (`bs_sufficiency`), necessity by explicit pay-as-you-go transfers
+  (`bsTransfer`, `bs_necessity`); log and CRRA economies with endowments bounded away from zero
+  (`bs_log`, `bs_log_equilibrium`, `bs_crra`), the stationary case recovered (`bs_stationary_log`).
 * **Production and dynamic efficiency** (§6.4.2, App. 6.A): storage is efficient iff `χ > 1`
   (`storage_optimal_iff`); **Theorem 6.2** (`theorem_6_2`); **Theorem .5** (`theorem_A5`).
+* **Figure .1** (App. 6.A): steady-state consumption peaks at the golden rule `k^G`, rises before
+  it and falls after it, and a steady state is efficient iff `k⋆ ≤ k^G` (`figure_A1`,
+  `goldenrule_efficient_iff`, instance `figure_A1_instance_regions`).
 * **Warm glow** (§6.4.3): two steady states, the upper one stable and dynamically inefficient
   (`warmglow_two_steady_states`, `warmglow_stable`, `warmglow_inefficient`).
 
@@ -64,6 +74,8 @@ All names are in the namespace `AKMM.Welfare`.
 | [OGEndowment](AKMMWelfare/OGEndowment.lean) | 20 | (6.5)–(6.6), OG welfare, stationary Balasko–Shell (AKMM §6.4.1, pp. 176–180) |
 | [OGProduction](AKMMWelfare/OGProduction.lean) | 19 | Storage, Theorem 6.2, Theorem .5 (AKMM §6.4.2, App. 6.A, pp. 180–183, 838–839) |
 | [WarmGlow](AKMMWelfare/WarmGlow.lean) | 11 | Dynamic inefficiency with warm glow (AKMM §6.4.3, p. 183) |
+| [BalaskoShell](AKMMWelfare/BalaskoShell.lean) | 22 | The Balasko–Shell theorem, log and CRRA instances (AKMM §6.4.1, pp. 178–179) |
+| [GoldenRule](AKMMWelfare/GoldenRule.lean) | 9 | Figure .1: the golden rule, efficient and inefficient regions (AKMM App. 6.A, p. 838) |
 
 ## Build and verify
 

@@ -40,8 +40,8 @@ optimal. What holds: a limit gross rate above one gives optimality (any monotone
 bounded endowments: `og_limit_rate_gt_one`), and below one gives inefficiency (log utility,
 young endowments bounded below: `og_limit_rate_lt_one_log`).
 
-The general Balasko–Shell theorem (curvature and boundedness conditions the book does not
-state) is not formalised.
+The general Balasko–Shell theorem (curvature conditions the book does not state) is proved in
+`BalaskoShell`.
 -/
 
 namespace AKMM.Welfare

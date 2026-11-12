@@ -99,3 +99,27 @@ relative to `AKMM.Welfare`. Every book item is located in the [source map](sourc
 14. **The borrowing-constraint example.** The two agents are indexed `0, 1` (the book's agents 1
     and 2) with endowments `ω/2 − (ω/6)(−1)^{i+t}`. The no-borrowing optimum is taken among plans
     with convergent utility series; no transversality condition is needed.
+
+15. **The Balasko–Shell theorem (pp. 178–179).** The book cites it without proof or precise
+    assumptions ("regularity conditions", bounded total endowments, curvature away from linear and
+    kinked). It is proved for the book's economy with the curvature conditions stated along the
+    equilibrium allocation, in date-`t` goods, with `v = qₜ(y − c_{o,t+1})`: `bsCurvBelow` (a weakly
+    preferred bundle with `c_{o,t+1} ≤ y ≤ ω_{y,t+1} + ω_{o,t+1}` costs at least `av²` more, `a > 0`)
+    for sufficiency (`bs_sufficiency`; no endowment bounds needed, utilities strictly increasing
+    in `c_y`), and `bsCurvAbove` (a bundle within `δ`, with less young and more old consumption,
+    costing at least `Av²` more is weakly preferred; `c_{y,t} > δ`) for necessity (`bs_necessity`,
+    the explicit pay-as-you-go transfers `bsTransfer`, `bs_necessity_transfers`); together
+    `bs_balasko_shell`. Both hold for log utility and for CRRA `u(c_y) + βu(c_o)` (`σ > 0`,
+    `σ ≠ 1`) with endowments in `[m, M]`, `m > 0` (`bs_log`, `bs_log_equilibrium`, `bs_crra`), and
+    the stationary log result follows (`bs_stationary_log`). Departure: the conditions are on
+    indifference curves along the allocation rather than global bounds on second derivatives; for
+    the CRRA instance they are derived from `σ(2M)^{−σ−1} ≤ −u″ ≤ σ(m/2)^{−σ−1}` on the relevant
+    intervals (`bs_quad_upper`, `bs_quad_lower`).
+
+16. **Figure .1 (p. 838).** The figure shows `c⋆ = f(k⋆) − k⋆` rising to the golden rule `k^G`
+    and falling after it, the efficient region (`f′(k⋆) ≥ 1`) to the left and the inefficient one
+    (`f′(k⋆) < 1`) to the right. The book states no assumptions; it is proved (`figure_A1`) for `f`
+    strictly concave on `[0, ∞)`, differentiable on `(0, ∞)`, with a golden rule `k^G > 0`,
+    `f′(k^G) = 1` (with the corrected `f` of item 5); the efficiency labels come from Theorem .5
+    and need `c⋆ ≥ 0`. Instance: `f(k) = 2√k + k/2`, `k^G = 4` (`figure_A1_instance`,
+    `figure_A1_instance_regions`).
