@@ -93,7 +93,7 @@ Conditional expectations are Miao's `CondExpSystem ℝ V` (`Miao.RationalExpecta
 | p. 304 | `y_min = 0`: no-borrowing = natural limit | `bc_natural_limit_zero` |
 | p. 304, fn. 16 | Borrowing wedge `χ` when `r < 0` | not formalised: remark |
 
-## §11.3.4 Precautionary saving (`BorrowingConstraints`, `Prudence`)
+## §11.3.4 Precautionary saving (`BorrowingConstraints`, `Prudence`, `ConsumptionShape`)
 
 | Source | Claim | Lean |
 | --- | --- | --- |
@@ -102,7 +102,15 @@ Conditional expectations are Miao's `CondExpSystem ℝ V` (`Miao.RationalExpecta
 | p. 305, (11.33) | `cₜ = min{yₜ + aₜ + a/R, Eₜcₜ₊₁}` | `eq_11_33` |
 | p. 305, (11.34) | A spread lowers `E min{…}`, raises saving | `eq_11_34_spread` |
 | p. 305, Fig. 11.2 | Slope 1 below `a*` | `bc_slope_one` |
-| p. 305–306, Fig. 11.2 | Concave above `a*`, slope → `r/(1 + r)`, tighter limit raises MPC | figure claim, deferred |
+| pp. 304–306, Fig. 11.2 | The model behind the figure: (11.32)–(11.33) as a finite-horizon Kuhn–Tucker recursion, quadratic utility with `βR = 1` or CRRA | `CfnHousehold`, `CfnHousehold.KKT`, `CfnHousehold.cons`, `cfn_kkt_exists`, `cfn_kkt_unique`, `cfn_cons_kkt`, `cfn_kkt_iff_min`, `cfn_quadratic_kkt_iff`, `cfn_crra_euler_iff`, `cfn_isMean_expect`, `cfn_isMean_powerMean`, `cfn_quadratic_valid`, `cfn_crra_valid`, `cfn_example_valid` (instance) |
+| p. 305, Fig. 11.2 | Constrained below `a*` with slope 1 (an initial interval) | `cfn_binding_initial`, `cfn_cons_le` |
+| pp. 305–306, Fig. 11.2 | Concave above `a*` | `cfn_cons_concave` (concave on the whole domain), `cfn_step_good`, `cfn_cont_concave`; strict concavity not formalised |
+| p. 306 | MPC between `r/(1 + r)` and `1` | `cfn_cons_slope_bounds` (between `κₙ` and `1`), `cfn_kappa_gt`, `cfn_cons_good` (`κₙx ≤ cₙ ≤ κₙ(x + hₙ)`) |
+| pp. 305–306, Fig. 11.2 | Slope → `r/(1 + r)` for large wealth | `cfn_slope_tendsto` (slope → `κₙ`), `cfn_kappa_tendsto`, `cfn_kappa_tendsto_r`, `cfn_fig_11_2_slope` (`βR = 1`, long horizon); CRRA limit (11.16): `cfn_crra_kappa_limit` |
+| p. 306, Fig. 11.2 | Tighter limit `a₂ < a₁`: constrained on a wider range | `cfn_tight_binds` |
+| p. 306 | … consumption of unconstrained households falls | corrected: weakly, `cfn_tight_le`; not at all one period before the end, `cfn_tight_eq_unconstrained_last` |
+| p. 306 | … their MPC increases | `cfn_tight_mpc_last` (one period before the end, on every interval); with more periods left not formalised |
+| p. 306, Fig. 11.2 | … the two functions converge as wealth grows | `cfn_tight_eventually_eq` (they coincide), `cfn_tight_shift` |
 | p. 306, (11.35) | Unique root `a₁` | `eq_11_35_unique` |
 | p. 306, Fig. 11.3 | Comparative statics of the root | `pr_root_mono`, `pr_rhs` |
 | p. 306 | `u′` convex ⇒ a spread of `y₁` raises `a₁` | `pr_spread_raises_saving` |
@@ -119,19 +127,20 @@ Conditional expectations are Miao's `CondExpSystem ℝ V` (`Miao.RationalExpecta
 | p. 308, fn. 18 | HARA: risk tolerance affine | `pr_tolerance_deriv`, `pr_hara_kappa_const` |
 | p. 309 | HARA ⇒ `κ` constant `≥ 0` | corrected: `pr_hara_kappa_const`; `κ < 0` possible without prudence, `pr_hara_kappa_neg`, `pr_hara_neg_derivs` |
 | p. 309, fn. 19 | Quadratic `κ = 0`, CARA `κ = 1`, CRRA `κ > 1` | `pr_kappa_quadratic`, `pr_kappa_cara`, `pr_kappa_crra` |
-| p. 309 | Carroll–Kimball and Jensen: concavity under HARA, finite horizon | not formalised: cited (LeanEconomics proves the infinite-horizon CRRA version, `IncomeFluctuation.concaveOn_consumptionFn_of_marginal`, not imported) |
+| p. 309 | Carroll–Kimball and Jensen: concavity under HARA, finite horizon | `cfn_cons_concave` for CRRA and quadratic utility, with a borrowing limit (the power-mean step is LeanEconomics' `powerMean_concave`); general HARA not formalised |
 | p. 309, fn. 20 | Cantor: CARA consumption linear in wealth | not formalised: cited |
 
-## Capital income risk, buffer stock, Zeldes (`CapitalRisk`, `Lognormal`)
+## Capital income risk, buffer stock, Zeldes (`CapitalRisk`, `Lognormal`, `BufferStock`)
 
 | Source | Claim | Lean |
 | --- | --- | --- |
 | p. 309 | Euler `u′(y₀ − a₁) = βE[(1 + r)u′((1 + r)a₁)]`, unique root | the hypotheses of `cr_spread_raises_saving` (uniqueness: `eq_11_35_unique`) |
 | pp. 309–310 | Under prudence the RHS is convex in `r`, so return risk raises saving | corrected: `cr_deriv`, `cr_second_deriv`, `cr_second_deriv_nonneg_iff`, `cr_convex_of_rel_prudence`, `cr_spread_raises_saving`; counterexamples `cr_log_return_risk_neutral`, `cr_printed_counterexample`, `cr_return_spread_instance` |
-| p. 310 | Buffer-stock model (Carroll 1992, 2001), normalised cash on hand | not formalised: cited model |
+| p. 310 | Buffer-stock model (Carroll 1992, 2001), normalised cash on hand | without permanent shocks: the household of `ConsumptionShape`, `CfnHousehold.nextCash`; the normalised model is not formalised |
 | p. 310, (11.41) | `EΔlog c ≃ (r − ρ)/σ + ((σ + 1)/2)Var(Δlog c)` | corrected: `eq_11_41`, `cs_lognormal_euler`, `eq_11_41_printed_false` |
 | p. 310 | As `x → 0` growth → ∞; as `x → ∞` growth → `(r − ρ)/σ` | not formalised: claims about the buffer-stock policy (Fig. 11.4) |
-| p. 311, Fig. 11.4 | Target `x*`, stability | figure claim, deferred |
+| pp. 310–311, Fig. 11.4 | Target `x*` (`ρ > r`): accumulate below, decumulate above | `bsk_target` (needs `βR ≤ 1`, `cfn_crra_theta_ge_one_iff`, via `cfn_R_one_sub_kappa_lt`), `bsk_convex_crossing`, `bsk_example_target` (instance) |
+| p. 311, Fig. 11.4 | `x*` is stable: wealth converges back to `x*` | `bsk_target_stable`, `bsk_iterate_tendsto`, `bsk_nextCash_mono` |
 | p. 311 | Excess sensitivity (Flavin, Campbell–Mankiw) | not formalised: empirical |
 | p. 311 | Zeldes Euler equation with `log(1 + λₜ)/σ` | corrected: `cs_zeldes_euler` |
 | p. 311 | Zeldes's PSID split and lagged income | not formalised: empirical |
@@ -152,7 +161,7 @@ Conditional expectations are Miao's `CondExpSystem ℝ V` (`Miao.RationalExpecta
 | p. 314 | (11.46) requires DARA; under DARA `βR < 1` suffices | corrected: `bw_dara_not_ara_zero` |
 | p. 314, fn. 25 | Huggett (1993): two-state Markov chain, CRRA | not formalised: cited |
 
-## §11.4.1 The endowment economy (`Huggett`, `AssetDemandContinuity`)
+## §11.4.1 The endowment economy (`Huggett`, `AssetDemandContinuity`, `BewleyInsurance`)
 
 Reused from Miao `IncompleteMarkets` (`Miao.IncompleteMarkets`): `BWEconomy`,
 `BWEconomy.Bellman`, `BWEconomy.Stationary`, `BWEconomy.EaSet`, `BWHuggettEqm`,
@@ -183,7 +192,7 @@ Reused from Miao `IncompleteMarkets` (`Miao.IncompleteMarkets`): `BWEconomy`,
 | p. 318 | ACHLLM (2022): uniqueness for `σ < 1` in continuous time | not formalised: out of scope (continuous-time HJB/KFE) |
 | p. 318 | "the smaller is `σ` the larger is the income effect and a higher `r` increases savings" | corrected: `hg_saving_ratio_crra`, `hg_saving_increasing_iff` |
 | p. 319, (11.50) | `rB = T`; `∫a′dλ = B` | `eq_11_50`, `hg_cycle_eqm` (instance, `B = 1/4`) |
-| p. 319, Fig. 11.7 | Higher `B` moves the economy towards full insurance | figure claim, deferred |
+| p. 319, Fig. 11.7 | Higher `B` moves the economy towards full insurance | `bwy_rate_tendsto_cm` (`r* → r^{CM}` as `B → ∞`), `bwy_eqm_exists_below_cm` (never reached), `bwy_lower_eqm` (lowest rate rises), `bwy_rate_strictMono` (increasing `A`), corrected for `A = A(r, B)`: `bwy_rate_tendsto_cm_dep`; instance `bwy_example` |
 
 ## §11.4.2 The production economy (`Aiyagari`)
 
@@ -207,11 +216,14 @@ Reused from Miao `IncompleteMarkets` (`Miao.IncompleteMarkets`): `BWEconomy`,
   (Mace, Cochrane, Attanasio–Davis, Fisher–Johnson, Jappelli–Pistaferri, Mazzocco–Saini,
   Schulhofer-Wohl, Blundell–Preston's findings, Flavin, Campbell–Mankiw, Zeldes's PSID estimates,
   Parker et al.).
-* Figures 11.1–11.9 as numerical objects; the claims read off Figures 11.2 (shape of the
-  constrained consumption function beyond the kink), 11.4 (buffer-stock target), 11.5
-  (comparative statics), 11.7 and 11.9 are deferred. Figure 11.1's claim is proved exactly
-  (`rs_less_risk_averse_absorbs`), and Figure 11.3's by `pr_root_mono`.
+* Figures 11.1–11.9 as numerical objects; the claims read off Figures 11.5 (numerical
+  comparative statics) and 11.9 are not formalised. Figure 11.1's claim is proved exactly
+  (`rs_less_risk_averse_absorbs`), Figure 11.3's by `pr_root_mono`, Figure 11.2's in
+  `ConsumptionShape`, Figure 11.4's in `BufferStock` and Figure 11.7's in `BewleyInsurance`
+  (except the pointwise MPC comparison for a tighter limit more than one period before the end,
+  and Figure 11.4's vertical axis, expected consumption growth).
 * Cited results without proof in the book: Rothschild–Stiglitz, Sibley/Miller, Carroll–Kimball
-  and Jensen (concavity under HARA), Cantor (CARA), Carroll's buffer-stock characterisation,
+  and Jensen beyond CRRA and quadratic utility, Cantor (CARA), Carroll's buffer-stock model
+  with permanent shocks,
   Huggett (1993) two-state extension, ACHLLM uniqueness (out of scope), Uhlig's law of large
   numbers.

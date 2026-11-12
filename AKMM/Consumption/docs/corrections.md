@@ -62,6 +62,29 @@ December 2025), Chapter 11, Consumption (G. L. Violante), pp. 287–323. Lean na
    Inada condition" (Inada's condition is `u′(0) = ∞`). Footnote 17 cites "Stiglitz and
    Rothschild (1970)" for Rothschild and Stiglitz (1970). Not formalised (citations).
 
+9. **p. 306, a tighter borrowing limit.** "For unconstrained households, consumption falls across
+   the board because of the stronger precautionary saving motive." It falls only weakly
+   (`cfn_tight_le`, at every horizon): one period before the end a tighter limit leaves the
+   consumption of every household it does not constrain unchanged
+   (`cfn_tight_eq_unconstrained_last`), and at any horizon the two consumption functions
+   coincide at high wealth (`cfn_tight_eventually_eq`, which is the book's "the two consumption
+   functions converge", in the strong form). The rest of the paragraph holds: the tight household
+   is constrained wherever the loose one is (`cfn_tight_binds`), and one period before the end
+   its MPC is at least the loose one on every interval (`cfn_tight_mpc_last`). The pointwise MPC
+   comparison with more periods left (Carroll, Holm and Kimball's counterclockwise
+   concavification) is not proved. The comparison uses `r ≥ 0` (`cfn_tight_shift`).
+
+10. **p. 319, Figure 11.7: `A` depends on `B`.** The figure moves the vertical line `B` against a
+    fixed `A(r)`, but with the tax `T = rB` of (11.50) the household's income `y − T` depends on
+    `B`, so the asset demand is `A(r, B)`. "As `B` increases, the economy moves closer to the
+    full insurance outcome" needs `A(·, B)` bounded above on each `[−1, r̄]`, `r̄ < 1/β − 1`,
+    uniformly in `B`; then every selection of equilibrium rates tends to `1/β − 1`
+    (`bwy_rate_tendsto_cm_dep`), and for a fixed continuous `A` (the figure) this holds
+    automatically (`bwy_rate_tendsto_cm`). Full insurance is reached only in the limit: at every
+    finite `B` the rate is below `1/β − 1` (`bwy_eqm_exists_below_cm`). With several equilibria
+    the monotone statement is for the lowest equilibrium rate (`bwy_lower_eqm`); for `A`
+    increasing, as drawn, the rate is increasing in `B` (`bwy_rate_strictMono`).
+
 ## Departures
 
 1. **§11.2, the continuum of households.** The measure-one continuum `i ∈ [0, 1]` is a finite set
@@ -116,3 +139,28 @@ December 2025), Chapter 11, Consumption (G. L. Violante), pp. 287–323. Lean na
     (Definition 17.1.1, `ay_resource_redundant`, `ay_existence_cd`); `K* > K^{CM}` is proved for
     any rate at which the household problem has a stationary distribution
     (`ai_precautionary_wealth`).
+15. **Figure 11.2 (`ConsumptionShape`).** The household lives `n` more periods (the book's lives
+    for ever) and eats its cash in hand in the last; income is i.i.d. with finitely many values
+    `yᵢ ≥ d + a > 0`, so the state is cash in hand `x = a + y ≥ d` (Figure 11.2's horizontal axis
+    `a` shifted by the given `y`). Consumption is defined by the Kuhn–Tucker conditions
+    (11.32)–(11.33), shown to have a unique solution (`cfn_kkt_exists`, `cfn_kkt_unique`); that
+    they characterise the optimum is not re-proved. Utility enters only through the Euler
+    equation's certainty equivalent `M` (`cfn_IsMean`): the expectation for quadratic utility with
+    `βR = 1` (the book's case, where the conditions are exactly (11.33),
+    `cfn_quadratic_kkt_iff`) and the power mean with exponent `−σ` for CRRA
+    (`cfn_crra_euler_iff`, imported from LeanEconomics' Carroll–Kimball power mean). The limit
+    slope is the `n`-period perfect-foresight MPC `κₙ`, and `r/(1 + r)` is its limit as the
+    horizon grows when `βR = 1` (`cfn_fig_11_2_slope`); for CRRA with `βR ≠ 1` it is (11.16)
+    (`cfn_crra_kappa_limit`). Concavity is weak; the book's "strictly concave" is not formalised.
+16. **Figure 11.4 (`BufferStock`).** The buffer-stock model is the household of
+    `ConsumptionShape` without permanent shocks: income is i.i.d. with a positive floor and the
+    borrowing limit `a ≥ 0` is imposed (the book's zero natural limit is `a = 0`). The target is
+    `E[x′ | x] = x` for the consumption function at each horizon (the book's horizon is finite
+    too), under `βR ≤ 1` (the book's `ρ > r`, weakened); with permanent shocks and growth the
+    right condition would be Carroll's growth impatience condition, not formalised. Stability is
+    convergence of the expected-cash dynamics `x ↦ E[x′ | x]` (`bsk_target_stable`); the
+    stochastic process and expected consumption growth (the figure's vertical axis) are not
+    formalised.
+17. **Figure 11.7 (`BewleyInsurance`).** "Closer to the full insurance outcome" is read as the
+    equilibrium rate approaching `r^{CM} = 1/β − 1`, the content of the figure; `A` is a
+    hypothesis function as in `Huggett`.
