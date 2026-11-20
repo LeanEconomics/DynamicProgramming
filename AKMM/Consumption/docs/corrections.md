@@ -77,8 +77,13 @@ December 2025), Chapter 11, Consumption (G. L. Violante), pp. 287–323. Lean na
    more generally the expectation with factor `θ ≥ 1`) at every horizon and every `r ≥ 0`
    (`cta_tight_mpc`, `cta_gap_antitone`, `cta_quadratic_tight_mpc`). Without income risk it is
    proved for every utility, CRRA with any `β` and `σ` included, at every horizon
-   (`ctp_tight_mpc`, `ctp_crra_tight_mpc`). For CRRA with income risk it is proved one period
-   before the end only (departure 18). The comparison uses `r ≥ 0` (`cfn_tight_shift`).
+   (`ctp_tight_mpc`, `ctp_crra_tight_mpc`). For CRRA with income risk it is **false** two
+   periods before the end: with log utility, `β = 1/2`, `R = 1`, `a₁ = 2`, `a₂ = 197/100` and
+   income `2003/1000` (probability `1/3000`) or `5003/1000`, the loose household's consumption
+   rises by more than the tight one's between cash in hand `43/4` and `279/25`
+   (`ctc_counterexample`, `ctc_not_tight_mpc`; departure 18). So for CRRA with risk "their MPC
+   increases" holds one period before the end only. The comparison uses `r ≥ 0`
+   (`cfn_tight_shift`).
 
 10. **p. 319, Figure 11.7: `A` depends on `B`.** The figure moves the vertical line `B` against a
     fixed `A(r)`, but with the tax `T = rB` of (11.50) the household's income `y − T` depends on
@@ -199,8 +204,9 @@ December 2025), Chapter 11, Consumption (G. L. Violante), pp. 287–323. Lean na
     earlier invariant failed because `Δ`-domination alone does not bound the saving gap; the
     level bound is what it was missing. Not proved: (i) the expectation with `θ < 1`, which is not
     quadratic utility (the constant above is then positive, and `Δ`-domination fails numerically,
-    though the MPC comparison held in every case tried); (ii) CRRA with income risk two or more
-    periods before the end.
+    though the MPC comparison held in every case tried). (ii) CRRA with income risk two or more
+    periods before the end is settled negatively: the comparison fails (see the last paragraph,
+    `TighterLimitCounterexample`).
 
     *Without income risk* the comparison holds at every horizon for every utility and every
     `θ > 0`, so for CRRA with any `β` and `σ` (`TighterLimitPerfectForesight`: `ctp_tight_mpc`,
@@ -214,7 +220,7 @@ December 2025), Chapter 11, Consumption (G. L. Violante), pp. 287–323. Lean na
     the invariant into the MPC comparison (`ctp_mpc_of_hor`). It does not extend to risk, because
     equal certainty equivalents tomorrow do not mean equal consumption state by state.
 
-    *With risk, two periods before the end* (the first open case), the comparison held
+    *With risk, two periods before the end* (formerly the first open case), the comparison held
     numerically not only for power means but for exponential certainty equivalents and for
     mixtures of the expectation and the minimum. This suggests a proof from the concavity of `M`
     alone, but none was found. The local form of the claim at cash `x` is
@@ -234,7 +240,7 @@ December 2025), Chapter 11, Consumption (G. L. Violante), pp. 287–323. Lean na
     (`ctl_cont_incr`) has no power-mean analogue. In marginal-utility units the CRRA perturbation
     obeys the same linear recursion as the quadratic one, but the MPC factor `1 − c′` does not
     match the marginal-utility slope, so the identity found for the expectation becomes only an inequality (by Jensen)
-    and loses the monotonicity. No counterexample is known: in exact computations for quadratic
+    and loses the monotonicity. Random searches found no counterexample: in exact computations for quadratic
     utility and accurate numerical ones for CRRA (two periods before the end by nested root
     finding, up to six by the endogenous grid method, `σ` from `0.1` to `30`) the comparison
     always held. Two further routes for CRRA fail, for reasons that are proved or exact.
@@ -260,3 +266,28 @@ December 2025), Chapter 11, Consumption (G. L. Violante), pp. 287–323. Lean na
     higher "cost of the liquidity constraint", HARA utility, but in continuous time, over an
     infinite horizon and with deterministic income. It does not reach the finite-horizon,
     discrete-time household with i.i.d. income here.
+
+    *The counterexample (`TighterLimitCounterexample`).* For CRRA with income risk the claim is
+    false two periods before the end. The household `ctc_H` has log utility (`σ = 1`, so `M` is
+    the harmonic mean), `β = 1/2`, `R = 1` (so `θ = 2`), `a₁ = 2`, income `2003/1000` with
+    probability `1/3000` and `5003/1000` otherwise, and `d = 3/1000` (`ctc_valid`). With
+    `a₂ = 197/100`, between cash in hand `43/4` and `279/25` the loose household's consumption
+    rises by about `2.5·10⁻⁷` more than the tight one's (`ctc_counterexample`), so `c₂ − c̃₂` is not
+    nonincreasing (`ctc_not_tight_mpc`) and horizontal domination fails too (`ctc_not_hor`). The
+    four consumption levels are bracketed by the sign of the Euler gap at rational points
+    (`ctc_lt_step`, `ctc_step_lt`); next period's low state is constrained (`ctc_step_top`), and
+    its high state is bracketed by its own Euler gap, so every check is a rational inequality
+    (`ctc_cons2_gt`, `ctc_cons2_lt`). The example was found from the infinitesimal problem, which
+    is not formalised. Differentiating the Euler equation in `a` gives
+    `∂c₂/∂a = π·(∂c₂/∂x)/R²`, with `π` the share of next period's constrained states in
+    `E|V₁″(Rs + yᵢ)|`. The claim at `n = 2` is thus that `π·MPC₂` is nonincreasing in cash. MPC₂
+    falls (concavity), but `π` can rise: the weight of an unconstrained state falls at the rate
+    of the absolute prudence of `V₁′` there, `P_u(ĉ)ĉ′ − ĉ″/ĉ′`. Just past the kink this includes
+    the low-income risk two periods ahead and can exceed the prudence `(1 + σ)/c₁` of the
+    constrained state. For an impatient enough household the fall of the MPC is too small to
+    absorb the rise of `π`. Earlier searches missed it because the window is narrow: the low state must be
+    rare and close to the limit two periods ahead (`y − a₁ = 3/1000`), and `θ` large. Violations
+    were found for `θ = 1.5, 2, 3, 4` (`σ = 1`) and for `σ ≈ 0.15`, `θ ≈ 38`; a grid search at
+    `θ = 1` (`R` from `1` to `10`) and hill-climbing at `θ = 1, 1.2` found none (scratch files
+    `ch11_p2_gridR.py`, `ch11_p2_climbth.py`). Whether the claim holds for CRRA with risk when
+    `θ ≤ 1` (`βR ≥ 1`), which includes the book's `βR = 1`, is open.

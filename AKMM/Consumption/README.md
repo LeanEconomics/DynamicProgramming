@@ -19,9 +19,10 @@ material, the numerical figures 11.5 and 11.9, and results the book only cites, 
 ACHLLM continuous-time uniqueness theorem. Nine printed errors and omissions are corrected (and
 three minor slips recorded), with Lean counterexamples to the log-utility MPC, the HARA sign of
 `κ`, the capital-income-risk claim, the coefficient of (11.41), the DARA condition for bounded
-wealth, footnote 27 and the fall in consumption under a tighter limit, as recorded in
+wealth, footnote 27, the fall in consumption under a tighter limit and the rise of the MPC
+under a tighter limit for CRRA with income risk, as recorded in
 [corrections](docs/corrections.md); every book item is located in the
-[source map](docs/source-map.md). The library contains **238 theorems**.
+[source map](docs/source-map.md). The library contains **250 theorems**.
 
 * **Risk sharing** (§11.2): autarky (11.1) and fn. 1 (`eq_11_1`, `footnote_1`); (11.3) from the
   Arrow–Debreu equilibrium of AKMM Chapter 7 (`eq_11_3`); CRRA shares (11.4) and history-independent
@@ -74,8 +75,14 @@ wealth, footnote 27 and the fall in consumption under a tighter limit, as record
   `cₙ(x) + (1 − 1/R)(a₁ − a₂) ≤ c̃ₙ(x + a₁ − a₂)` (`cta_shift_full`), carried together with
   `(a₁ − a₂)`-domination (`cta_incrDom_full`). Without income risk it holds for every utility,
   CRRA included, at every horizon (`ctp_tight_mpc`, `ctp_crra_tight_mpc`, by horizontal domination
-  `ctp_Hor`, `ctp_hor_all`). CRRA with risk beyond one period before the end is open, and
-  tightening the next date's limit alone can lower today's MPC (`cta_link_mpc_counterexample`).
+  `ctp_Hor`, `ctp_hor_all`). Tightening the next date's limit alone can lower today's MPC
+  (`cta_link_mpc_counterexample`).
+* **A tighter limit can lower the MPC** (CRRA with income risk, p. 306): two periods before the
+  end the comparison fails for log utility with `β = 1/2`, `R = 1`, `a₁ = 2`, `a₂ = 197/100` and
+  a rare low income near the limit (`ctc_counterexample`, `ctc_not_tight_mpc`), and so does
+  horizontal domination (`ctc_not_hor`); the four consumption levels are bracketed by the sign of
+  the Euler gap at rational points (`ctc_lt_step`, `ctc_step_lt`, `ctc_cons2_gt`, `ctc_cons2_lt`).
+  Whether it holds for CRRA with risk when `βR ≥ 1` is open.
 * **The buffer-stock target** (Figure 11.4): under `βR ≤ 1` a unique target `x*` with
   `E[x′ | x] > x` below and `< x` above, and convergence of the expected dynamics to it
   (`bsk_target`, `bsk_target_stable`).
@@ -121,6 +128,7 @@ income fluctuation problem, the Huggett and Aiyagari economies), and Stokey–Lu
 | [TighterLimitMPC](AKMMConsumption/TighterLimitMPC.lean) | 15 | Figure 11.2: a tighter limit raises the MPC with more periods left (AKMM p. 306) |
 | [TighterLimitAllHorizons](AKMMConsumption/TighterLimitAllHorizons.lean) | 13 | Figure 11.2: a tighter limit raises the MPC at every horizon, quadratic utility, any `r ≥ 0`; a single-date tightening can lower it (AKMM p. 306) |
 | [TighterLimitPerfectForesight](AKMMConsumption/TighterLimitPerfectForesight.lean) | 9 | Figure 11.2: without income risk a tighter limit raises the MPC at every horizon, every utility (AKMM p. 306) |
+| [TighterLimitCounterexample](AKMMConsumption/TighterLimitCounterexample.lean) | 12 | Figure 11.2: with CRRA utility and income risk a tighter limit can lower the MPC two periods before the end (AKMM p. 306) |
 
 ## Build and verify
 
