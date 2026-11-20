@@ -109,7 +109,7 @@ Conditional expectations are Miao's `CondExpSystem ℝ V` (`Miao.RationalExpecta
 | pp. 305–306, Fig. 11.2 | Slope → `r/(1 + r)` for large wealth | `cfn_slope_tendsto` (slope → `κₙ`), `cfn_kappa_tendsto`, `cfn_kappa_tendsto_r`, `cfn_fig_11_2_slope` (`βR = 1`, long horizon); CRRA limit (11.16): `cfn_crra_kappa_limit` |
 | p. 306, Fig. 11.2 | Tighter limit `a₂ < a₁`: constrained on a wider range | `cfn_tight_binds` |
 | p. 306 | … consumption of unconstrained households falls | corrected: weakly, `cfn_tight_le`; not at all one period before the end, `cfn_tight_eq_unconstrained_last` |
-| p. 306 | … their MPC increases | `cfn_tight_mpc_last` (one period before the end, on every interval); quadratic utility: two periods before the end `ctl_tight_mpc_two`, every horizon when `r = 0` `ctl_tight_mpc_R_one`, `ctl_gap_antitone_R_one`, instance `ctl_example_mpc`; the induction step `ctl_mpc_step`, `ctl_incr_step`, `ctl_IncrDom`, `ctl_incrDom_zero`, `ctl_incrDom_R_one`, `ctl_incrDom_le`, `ctl_concave_incr`, `ctl_cont_incr`, `ctl_quadratic_linear`, `ctl_example_R_one_valid` (module `TighterLimitMPC`); quadratic with `R > 1` three or more periods before the end, and CRRA two or more, not proved (corrections, departure 18) |
+| p. 306 | … their MPC increases | `cfn_tight_mpc_last` (one period before the end, on every interval); quadratic utility: two periods before the end `ctl_tight_mpc_two`, every horizon when `r = 0` `ctl_tight_mpc_R_one`, `ctl_gap_antitone_R_one`, instance `ctl_example_mpc`; the induction step `ctl_mpc_step`, `ctl_incr_step`, `ctl_IncrDom`, `ctl_incrDom_zero`, `ctl_incrDom_R_one`, `ctl_incrDom_le`, `ctl_concave_incr`, `ctl_cont_incr`, `ctl_quadratic_linear`, `ctl_example_R_one_valid` (module `TighterLimitMPC`); every horizon and every `r ≥ 0` for the expectation with `θ ≥ 1`, which contains quadratic utility with `βR = 1`: `cta_tight_mpc`, `cta_gap_antitone`, `cta_quadratic_tight_mpc`, instance `cta_example_valid`, `cta_example_mpc` (`r = 1`), by the level bound `cta_shift_full` and `Δ`-domination `cta_incrDom_full`, `cta_incr_step` (module `TighterLimitAllHorizons`); CRRA two or more periods before the end not proved (corrections, departure 18) |
 | p. 306 | … consumption falls by at most what the tighter limit removes | `ctl_shift_sharp` (`cₙ(x) ≤ c̃ₙ(x + (a₁ − a₂)/R)`), `ctl_gap_le` (every horizon, any certainty equivalent) |
 | p. 306, Fig. 11.2 | … the two functions converge as wealth grows | `cfn_tight_eventually_eq` (they coincide), `cfn_tight_shift` |
 | p. 306, (11.35) | Unique root `a₁` | `eq_11_35_unique` |
@@ -221,9 +221,9 @@ Reused from Miao `IncompleteMarkets` (`Miao.IncompleteMarkets`): `BWEconomy`,
   comparative statics) and 11.9 are not formalised. Figure 11.1's claim is proved exactly
   (`rs_less_risk_averse_absorbs`), Figure 11.3's by `pr_root_mono`, Figure 11.2's in
   `ConsumptionShape`, Figure 11.4's in `BufferStock` and Figure 11.7's in `BewleyInsurance`
-  and `TighterLimitMPC` (except the MPC comparison for a tighter limit three or more periods
-  before the end with `r > 0` under quadratic utility, and two or more under CRRA, and Figure
-  11.4's vertical axis, expected consumption growth).
+  and `TighterLimitMPC`, `TighterLimitAllHorizons` (except the MPC comparison for a tighter
+  limit two or more periods before the end under CRRA, and Figure 11.4's vertical axis,
+  expected consumption growth).
 * Cited results without proof in the book: Rothschild–Stiglitz, Sibley/Miller, Carroll–Kimball
   and Jensen beyond CRRA and quadratic utility, Cantor (CARA), Carroll's buffer-stock model
   with permanent shocks,

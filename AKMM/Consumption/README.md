@@ -21,7 +21,7 @@ three minor slips recorded), with Lean counterexamples to the log-utility MPC, t
 `κ`, the capital-income-risk claim, the coefficient of (11.41), the DARA condition for bounded
 wealth, footnote 27 and the fall in consumption under a tighter limit, as recorded in
 [corrections](docs/corrections.md); every book item is located in the
-[source map](docs/source-map.md). The library contains **216 theorems**.
+[source map](docs/source-map.md). The library contains **224 theorems**.
 
 * **Risk sharing** (§11.2): autarky (11.1) and fn. 1 (`eq_11_1`, `footnote_1`); (11.3) from the
   Arrow–Debreu equilibrium of AKMM Chapter 7 (`eq_11_3`); CRRA shares (11.4) and history-independent
@@ -68,7 +68,11 @@ wealth, footnote 27 and the fall in consumption under a tighter limit, as record
   under the tighter limit is at least the looser one's on every interval two periods before the
   end (`ctl_tight_mpc_two`) and at every horizon when `r = 0` (`ctl_tight_mpc_R_one`), by a
   Carroll–Holm–Kimball backward induction on shifted increments (`ctl_IncrDom`, `ctl_mpc_step`,
-  `ctl_incr_step`); longer horizons with `r > 0` and CRRA beyond one period are open.
+  `ctl_incr_step`). For quadratic utility (`βR = 1`, and the expectation with any `θ ≥ 1`) the
+  comparison holds at every horizon for every `r ≥ 0` (`cta_tight_mpc`, `cta_gap_antitone`,
+  `cta_quadratic_tight_mpc`), by closing the induction with a level bound,
+  `cₙ(x) + (1 − 1/R)(a₁ − a₂) ≤ c̃ₙ(x + a₁ − a₂)` (`cta_shift_full`), carried together with
+  `(a₁ − a₂)`-domination (`cta_incrDom_full`); CRRA beyond one period before the end is open.
 * **The buffer-stock target** (Figure 11.4): under `βR ≤ 1` a unique target `x*` with
   `E[x′ | x] > x` below and `< x` above, and convergence of the expected dynamics to it
   (`bsk_target`, `bsk_target_stable`).
@@ -112,6 +116,7 @@ income fluctuation problem, the Huggett and Aiyagari economies), and Stokey–Lu
 | [BufferStock](AKMMConsumption/BufferStock.lean) | 8 | Figure 11.4: the buffer-stock target and its stability (AKMM pp. 310–311) |
 | [BewleyInsurance](AKMMConsumption/BewleyInsurance.lean) | 6 | Figure 11.7: government debt and full insurance (AKMM p. 319) |
 | [TighterLimitMPC](AKMMConsumption/TighterLimitMPC.lean) | 15 | Figure 11.2: a tighter limit raises the MPC with more periods left (AKMM p. 306) |
+| [TighterLimitAllHorizons](AKMMConsumption/TighterLimitAllHorizons.lean) | 8 | Figure 11.2: a tighter limit raises the MPC at every horizon, quadratic utility, any `r ≥ 0` (AKMM p. 306) |
 
 ## Build and verify
 

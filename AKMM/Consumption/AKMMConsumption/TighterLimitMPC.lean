@@ -37,7 +37,9 @@ does not close and the comparison is proved at horizons `1` and `2` only. For CR
 the step's use of the linearity of the expectation (`ctl_cont_incr`) is not available, so beyond
 `cfn_tight_mpc_last` nothing is proved. Carroll–Holm–Kimball's concavification theorem adds
 constraints one date at a time in reverse chronological order; tightening the same limit at every
-date is not of that form, so it does not settle these cases either.
+date is not of that form, so it does not settle these cases either. The quadratic case at every
+horizon is closed in `TighterLimitAllHorizons` (`cta_tight_mpc`), with a level bound added to the
+invariant.
 -/
 
 namespace AKMM.Consumption

@@ -73,9 +73,10 @@ December 2025), Chapter 11, Consumption (G. L. Violante), pp. 287–323. Lean na
    its MPC is at least the loose one on every interval (`cfn_tight_mpc_last`). At every horizon
    consumption falls by at most `(a₁ − a₂)/R`, the amount the tighter limit removes from the
    current budget (`ctl_gap_le`, from the sharp shift bound `ctl_shift_sharp`). The MPC
-   comparison with more periods left is proved for quadratic utility two periods before the end
-   (`ctl_tight_mpc_two`) and at every horizon when `r = 0` (`ctl_tight_mpc_R_one`); otherwise only
-   its induction step is proved (departure 18). The comparison uses `r ≥ 0` (`cfn_tight_shift`).
+   comparison with more periods left is proved for quadratic utility (the book's `βR = 1`, and
+   more generally the expectation with factor `θ ≥ 1`) at every horizon and every `r ≥ 0`
+   (`cta_tight_mpc`, `cta_gap_antitone`, `cta_quadratic_tight_mpc`), and for CRRA one period
+   before the end only (departure 18). The comparison uses `r ≥ 0` (`cfn_tight_shift`).
 
 10. **p. 319, Figure 11.7: `A` depends on `B`.** The figure moves the vertical line `B` against a
     fixed `A(r)`, but with the tax `T = rB` of (11.50) the household's income `y − T` depends on
@@ -167,25 +168,44 @@ December 2025), Chapter 11, Consumption (G. L. Violante), pp. 287–323. Lean na
 17. **Figure 11.7 (`BewleyInsurance`).** "Closer to the full insurance outcome" is read as the
     equilibrium rate approaching `r^{CM} = 1/β − 1`, the content of the figure; `A` is a
     hypothesis function as in `Huggett`.
-18. **p. 306, the MPC under a tighter limit with more periods left (`TighterLimitMPC`).** "Their
-    marginal propensity to consume (the slope of the consumption function) increases" is read,
-    as in `cfn_tight_mpc_last`, as: on every interval of cash in hand the tight household's
-    consumption rises at least as much as the loose household's, equivalently the fall
-    `cₙ − c̃ₙ` is nonincreasing (`ctl_gap_antitone_R_one`); this implies the comparison of slopes
-    wherever both are differentiable, kinks included in the one-sided sense. The proof is a
-    backward induction in the spirit of Carroll, Holm and Kimball (2021): their counterconcavity
-    comparison of marginal value functions is replaced by a shifted comparison of consumption
-    functions, `τ`-domination (`ctl_IncrDom`: the tight function shifted left by `τ` rises at least
-    as much as the loose one). For quadratic utility (the expectation as certainty equivalent,
-    any `θ > 0`, `R ≥ 1`): `(a₁ − a₂)/R`-domination at `n` periods left gives the MPC comparison
-    at `n + 1` (`ctl_mpc_step`), and `(a₁ − a₂)`-domination at `n` gives
-    `(a₁ − a₂)/R`-domination at `n + 1` (`ctl_incr_step`); the last period is dominated at every
-    shift (`ctl_incrDom_zero`). Hence the comparison two periods before the end
-    (`ctl_tight_mpc_two`) and, when `R = 1` (the two shifts coincide), at every horizon
-    (`ctl_incrDom_R_one`, `ctl_tight_mpc_R_one`, instance `ctl_example_mpc`). Not proved: for
-    quadratic utility with `R > 1`, three or more periods before the end (the step returns only
-    `(a₁ − a₂)/R`-domination, so the induction does not close); for CRRA, two or more periods
-    before the end (the step uses the linearity of the expectation, `ctl_cont_incr`, which the
-    power mean lacks). No counterexample is known: the statement is not shown false. CHK's own
-    concavification theorem adds constraints one date at a time in reverse chronological order
-    and does not cover a limit tightened at every date.
+18. **p. 306, the MPC under a tighter limit with more periods left (`TighterLimitMPC`,
+    `TighterLimitAllHorizons`).** "Their marginal propensity to consume (the slope of the
+    consumption function) increases" is read, as in `cfn_tight_mpc_last`, as: on every interval of
+    cash in hand the tight household's consumption rises at least as much as the loose household's,
+    equivalently the fall `cₙ − c̃ₙ` is nonincreasing (`ctl_gap_antitone_R_one`,
+    `cta_gap_antitone`); this implies the comparison of slopes wherever both are differentiable,
+    kinks included in the one-sided sense. The proof is a backward induction in the spirit of
+    Carroll, Holm and Kimball (2021): their counterconcavity comparison of marginal value functions
+    is replaced by a shifted comparison of consumption functions, `τ`-domination (`ctl_IncrDom`: the
+    tight function shifted left by `τ` rises at least as much as the loose one). `TighterLimitMPC`
+    proves, for the expectation as certainty equivalent (any `θ > 0`, `R ≥ 1`), that
+    `(a₁ − a₂)/R`-domination at `n` periods left gives the MPC comparison at `n + 1`
+    (`ctl_mpc_step`) and `(a₁ − a₂)`-domination at `n` gives `(a₁ − a₂)/R`-domination at `n + 1`
+    (`ctl_incr_step`), hence the comparison two periods before the end (`ctl_tight_mpc_two`) and,
+    when `R = 1`, at every horizon (`ctl_incrDom_R_one`, `ctl_tight_mpc_R_one`, instance
+    `ctl_example_mpc`). `TighterLimitAllHorizons` closes the induction for every `R ≥ 1` when
+    `θ ≥ 1`, which contains quadratic utility with `βR = 1` (`θ = 1`, the book's case). With
+    `Δ = a₁ − a₂` the invariant is a pair: the level bound `cₙ(x) + (Δ − Δ/R) ≤ c̃ₙ(x + Δ)`
+    (`cta_shift_full`, which propagates on its own and uses `θ ≥ 1`), and `Δ`-domination. The level
+    bound caps the gap between the two households' saving at `Δ/R`, so the shift the Euler equation
+    passes back is at most `Δ` and `Δ`-domination returns `Δ`-domination (`cta_incr_step`,
+    `cta_incrDom_full`); concavity turns it into the MPC comparison at every horizon
+    (`cta_tight_mpc`; for the quadratic household `cta_quadratic_tight_mpc`, instance with `r = 1`
+    `cta_example_valid`, `cta_example_mpc`). The pair was found from the infinitesimal problem:
+    with `η = ∂c/∂a`, unconstrained `η − c′ + (R − 1)/(Rθ)` equals `(1 − c′)·θE` of its next-period
+    value plus `(R − 1)(1 − θ)/(Rθ)`, so it stays nonpositive and nonincreasing when `θ ≥ 1`. The
+    earlier invariant failed because `Δ`-domination alone does not bound the saving gap; the
+    level bound is what it was missing. Not proved: (i) the expectation with `θ < 1`, which is not
+    quadratic utility (the constant above is then positive, and `Δ`-domination fails numerically,
+    though the MPC comparison held in every case tried); (ii) CRRA two or more periods before the
+    end. For CRRA no shift domination can serve as the invariant: one period before the end both
+    households have the same strictly concave unconstrained consumption function, so `τ`-domination
+    fails for every `τ > 0`, and the step's use of the linearity of the expectation
+    (`ctl_cont_incr`) has no power-mean analogue. In marginal-utility units the CRRA perturbation
+    obeys the same linear recursion as the quadratic one, but the MPC factor `1 − c′` does not
+    match the marginal-utility slope, so the identity above becomes only an inequality (by Jensen)
+    and loses the monotonicity. No counterexample is known: in exact computations for quadratic
+    utility and accurate numerical ones for CRRA (two periods before the end by nested root
+    finding, up to six by the endogenous grid method, `σ` from `0.1` to `30`) the comparison
+    always held. CHK's own concavification theorem adds constraints one date at a time in reverse
+    chronological order and does not cover a limit tightened at every date.
