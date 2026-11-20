@@ -129,8 +129,10 @@ D8. **Markov perfect equilibrium (§24.4.3, p. 901).** The definition is formali
    grids they fail (correction 9). Multiplicity with long-term debt is shown on a grid
    (`mu_grid_long_term_two_mpe`) and, with a continuum of debt levels, in an explicit economy
    with two equilibria at `δ = 1/2` and one at `δ = 1` (`ld_two_mpe`, `ld_one_period_unique`,
-   departure D12); Aguiar–Amador's (2020) own construction, with strict preference for
-   dilution, is not formalised. The limit of the finite-horizon game is proved for `δ = 1`
+   departure D12); a strict version, in which the sovereign strictly prefers to dilute and the
+   values of the two equilibria differ, with a unique equilibrium at `δ = 1` in the same
+   economy, is `sfd_strict_multiplicity` (departure D13). The limit of the finite-horizon
+   game is proved for `δ = 1`
    (`fh_example_limit` and the theorems of departure D11); for `δ < 1` it is not.
 
 D9. **The default threshold `Y*(B)` (p. 904).** "As is standard in equilibrium default models,
@@ -209,7 +211,7 @@ D12. **Multiplicity with long-term debt and a continuum of debt levels (p. 901, 
    rule. It isolates the channel only long-term debt has (the price depends on the expected
    borrowing rule, `bp_long_term_depends_on_borrowing`), not Aguiar and Amador's (2020)
    mechanism, where the sovereign strictly prefers to dilute and values differ; that
-   construction is not formalised.
+   construction is in departure D13.
    Why it is not (attempts recorded, not formalised): with `u` linear below satiation and
    `β(1 + r) < 1`, optimal choices are corners, so a dilution path has one step (issue at price
    0, default next period); repaying at `B` needs `δB ≤ φ`, preferring dilution to one more
@@ -220,3 +222,46 @@ D12. **Multiplicity with long-term debt and a continuum of debt levels (p. 901, 
    `B → −∞`, and dropping satiation loses bounded values and the `δ = 1` pairing. A strict
    construction would need an asset lower bound in both models, hence a new `δ = 1`
    uniqueness proof (on a grid uniqueness fails, correction 9).
+   The strict construction (departure D13) takes this route: the lower bound `B′ ≥ 0` in both
+   models, states in `[0, B̄]`, and a direct `δ = 1` uniqueness proof. It also needs a second
+   change: an income shock. With deterministic income and strictly increasing `u`, a repaying
+   sovereign never chooses a debt it defaults on next period (rolling over its current debt at
+   the price `δ/(1 + r) > 0` gives more today and no less tomorrow), so no equilibrium path
+   reaches default and prices are `0` or risk-free; dilution then cannot lower prices (argument
+   recorded, not formalised). With an absorbing crisis state the default risk of debt above
+   the crisis capacity comes from the shock, and prices depend on the expected borrowing rule.
+
+D13. **Strict multiplicity by self-fulfilling dilution (p. 901, beyond the text).** Aguiar and
+   Amador (2020) construct, in continuous time, equilibria with long-term debt in which lenders'
+   expectation of future borrowing is self-fulfilling and the sovereign strictly prefers to
+   dilute. We give a discrete-time economy with this property, in a setting that departs from
+   D10 and D12 as follows (`IsBoundedLongMPE`, `sfd_econ`):
+   * **the book's lower bound `B′ ≥ 0`** (p. 744) together with the borrowing limit `B′ ≤ B̄`,
+     in the model with `δ < 1` and in the model with `δ = 1`: states and choices lie in
+     `[0, B̄]`, and every condition of (24.9)–(24.12) and (a)–(c) is imposed there; no saving;
+   * **two income states**: normal times (income `2`, default cost `3/2`) and an absorbing crisis
+     (income `1`, default cost `1/7`), reached with probability `λ = 1/5`; permanent exclusion
+     `ψ = 0`;
+   * **linear utility** `u(c) = c` (consumption may be negative; values are bounded because the
+     state space is), `β = 1/2`, `r = 1/5` (so `β(1 + r) < 1`), `B̄ = 3/2`.
+   With `δ = 1/2` (`sfd_two_mpe`): in the crisis the sovereign repays exactly debt `B ≤ 1` (the
+   safe zone) at the risk-free price `5/7`. Without dilution (`sfd_no_dilution_mpe`) a sovereign
+   in normal times keeps or brings its debt to `1` from any `B ≤ 10/9` and stays at `B̄` above;
+   debt in `(1, 10/9]` trades at `4/7`, above at `1/2`. With self-fulfilling dilution
+   (`sfd_dilution_mpe`) lenders expect a sovereign with debt in `(3/5, 1]` to borrow up to `B̄`,
+   so such debt trades at `9/14` and debt below `3/5` (diluted a period later) at `29/42`; at
+   these prices a sovereign in `(3/5, 1]` strictly prefers `B̄`, while at the no-dilution prices
+   it strictly prefers `1` (`sfd_strict_preference`). The dilution force is the term
+   `−(1 − δ)B q(B′)` of the objective: a larger legacy debt makes the cheap issue more
+   attractive. The default rules coincide, the values differ (strictly lower under dilution for
+   `B < 10/9`, `sfd_values_differ`), and so do prices (`sfd_dilution_lowers_prices`) and
+   borrowing rules. With `δ = 1` the same economy has exactly one equilibrium
+   (`sfd_one_period_mpe`, `sfd_one_period_char`, `sfd_one_period_unique`), proved directly
+   rather than through `ue_mpe_unique` (whose replication argument needs saving): with linear
+   utility `V^R(B, Y) = V^R(0, Y) − B`; repaying in normal times dominates default because
+   `φ ≥ B̄`; the crisis capacity is pinned at `6/7` by optimality at zero debt; then prices and
+   `V^R(0, Y)` are determined. Uniqueness is of values, default rule and prices on `[0, B̄]`;
+   the borrowing rule is unique too here but not stated. The summary is
+   `sfd_strict_multiplicity`. Not covered: concave utility (with linear utility the dilution
+   path has at most two steps, `[0, 3/5] → 1 → B̄`, each to the top of a price step), Aguiar and
+   Amador's continuous-time model itself, and re-entry `ψ > 0`.

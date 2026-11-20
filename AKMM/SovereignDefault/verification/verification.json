@@ -1,6 +1,6 @@
 {
-  "checked_at_utc": "2026-11-12T22:37:23.437759+00:00",
-  "theorems": 194,
+  "checked_at_utc": "2026-11-20T13:36:42.331352+00:00",
+  "theorems": 220,
   "module_theorems": {
     "AKMMSovereignDefault/TwoPeriod.lean": 29,
     "AKMMSovereignDefault/TwoPeriodOptimum.lean": 7,
@@ -14,9 +14,10 @@
     "AKMMSovereignDefault/UniqueEquilibrium.lean": 34,
     "AKMMSovereignDefault/Multiplicity.lean": 3,
     "AKMMSovereignDefault/FiniteHorizon.lean": 31,
-    "AKMMSovereignDefault/LongTermMultiplicity.lean": 9
+    "AKMMSovereignDefault/LongTermMultiplicity.lean": 9,
+    "AKMMSovereignDefault/StrictDilution.lean": 26
   },
-  "audited_declarations": 331,
+  "audited_declarations": 382,
   "declarations": [
     {
       "name": "AKMM.SovereignDefault.defaultRule",
@@ -1672,6 +1673,261 @@
       "name": "AKMM.SovereignDefault.ld_one_period_unique",
       "kind": "theorem",
       "module": "AKMMSovereignDefault/LongTermMultiplicity.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.IsBoundedLongMPE",
+      "kind": "structure",
+      "module": "AKMMSovereignDefault/StrictDilution.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.IsBoundedLongMPE.mk",
+      "kind": "constructor",
+      "module": "AKMMSovereignDefault/StrictDilution.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.IsBoundedLongMPE.bdd",
+      "kind": "projection",
+      "module": "AKMMSovereignDefault/StrictDilution.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.IsBoundedLongMPE.eq_24_9",
+      "kind": "projection",
+      "module": "AKMMSovereignDefault/StrictDilution.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.IsBoundedLongMPE.eq_24_10",
+      "kind": "projection",
+      "module": "AKMMSovereignDefault/StrictDilution.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.IsBoundedLongMPE.eq_24_11",
+      "kind": "projection",
+      "module": "AKMMSovereignDefault/StrictDilution.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.IsBoundedLongMPE.eq_24_12",
+      "kind": "projection",
+      "module": "AKMMSovereignDefault/StrictDilution.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.IsBoundedLongMPE.default_opt",
+      "kind": "projection",
+      "module": "AKMMSovereignDefault/StrictDilution.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.IsBoundedLongMPE.borrow_mem",
+      "kind": "projection",
+      "module": "AKMMSovereignDefault/StrictDilution.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.IsBoundedLongMPE.borrow_opt",
+      "kind": "projection",
+      "module": "AKMMSovereignDefault/StrictDilution.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.sfd_econ",
+      "kind": "def",
+      "module": "AKMMSovereignDefault/StrictDilution.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.sfd_bmax",
+      "kind": "theorem",
+      "module": "AKMMSovereignDefault/StrictDilution.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.sfd_obj_true",
+      "kind": "theorem",
+      "module": "AKMMSovereignDefault/StrictDilution.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.sfd_obj_false",
+      "kind": "theorem",
+      "module": "AKMMSovereignDefault/StrictDilution.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.sfd_price_true",
+      "kind": "theorem",
+      "module": "AKMMSovereignDefault/StrictDilution.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.sfd_price_false",
+      "kind": "theorem",
+      "module": "AKMMSovereignDefault/StrictDilution.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.sfd_defaultRHS",
+      "kind": "theorem",
+      "module": "AKMMSovereignDefault/StrictDilution.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.sfd_VD",
+      "kind": "def",
+      "module": "AKMMSovereignDefault/StrictDilution.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.sfd_VD_iff",
+      "kind": "theorem",
+      "module": "AKMMSovereignDefault/StrictDilution.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.sfd_D",
+      "kind": "def",
+      "module": "AKMMSovereignDefault/StrictDilution.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.sfd_VRL",
+      "kind": "def",
+      "module": "AKMMSovereignDefault/StrictDilution.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.sfd_qL",
+      "kind": "def",
+      "module": "AKMMSovereignDefault/StrictDilution.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.sfd_VL_eq",
+      "kind": "theorem",
+      "module": "AKMMSovereignDefault/StrictDilution.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.sfd_crisis_block",
+      "kind": "theorem",
+      "module": "AKMMSovereignDefault/StrictDilution.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.sfd_crisis_price",
+      "kind": "theorem",
+      "module": "AKMMSovereignDefault/StrictDilution.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.sfd_crisis_default",
+      "kind": "theorem",
+      "module": "AKMMSovereignDefault/StrictDilution.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.sfd_VRN",
+      "kind": "def",
+      "module": "AKMMSovereignDefault/StrictDilution.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.sfd_qN",
+      "kind": "def",
+      "module": "AKMMSovereignDefault/StrictDilution.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.sfd_BhN",
+      "kind": "def",
+      "module": "AKMMSovereignDefault/StrictDilution.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.sfd_VRS",
+      "kind": "def",
+      "module": "AKMMSovereignDefault/StrictDilution.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.sfd_qS",
+      "kind": "def",
+      "module": "AKMMSovereignDefault/StrictDilution.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.sfd_BhS",
+      "kind": "def",
+      "module": "AKMMSovereignDefault/StrictDilution.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.sfd_VN_true",
+      "kind": "theorem",
+      "module": "AKMMSovereignDefault/StrictDilution.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.sfd_VS_true",
+      "kind": "theorem",
+      "module": "AKMMSovereignDefault/StrictDilution.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.sfd_no_dilution_mpe",
+      "kind": "theorem",
+      "module": "AKMMSovereignDefault/StrictDilution.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.sfd_dilution_mpe",
+      "kind": "theorem",
+      "module": "AKMMSovereignDefault/StrictDilution.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.sfd_values_differ",
+      "kind": "theorem",
+      "module": "AKMMSovereignDefault/StrictDilution.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.sfd_dilution_lowers_prices",
+      "kind": "theorem",
+      "module": "AKMMSovereignDefault/StrictDilution.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.sfd_strict_preference",
+      "kind": "theorem",
+      "module": "AKMMSovereignDefault/StrictDilution.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.sfd_two_mpe",
+      "kind": "theorem",
+      "module": "AKMMSovereignDefault/StrictDilution.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.sfd_obj_one_true",
+      "kind": "theorem",
+      "module": "AKMMSovereignDefault/StrictDilution.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.sfd_obj_one_false",
+      "kind": "theorem",
+      "module": "AKMMSovereignDefault/StrictDilution.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.sfd_obj_one_shift",
+      "kind": "theorem",
+      "module": "AKMMSovereignDefault/StrictDilution.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.sfd_VR1",
+      "kind": "def",
+      "module": "AKMMSovereignDefault/StrictDilution.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.sfd_D1",
+      "kind": "def",
+      "module": "AKMMSovereignDefault/StrictDilution.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.sfd_q1",
+      "kind": "def",
+      "module": "AKMMSovereignDefault/StrictDilution.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.sfd_Bh1",
+      "kind": "def",
+      "module": "AKMMSovereignDefault/StrictDilution.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.sfd_one_period_mpe",
+      "kind": "theorem",
+      "module": "AKMMSovereignDefault/StrictDilution.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.sfd_one_period_char",
+      "kind": "theorem",
+      "module": "AKMMSovereignDefault/StrictDilution.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.sfd_one_period_unique",
+      "kind": "theorem",
+      "module": "AKMMSovereignDefault/StrictDilution.lean"
+    },
+    {
+      "name": "AKMM.SovereignDefault.sfd_strict_multiplicity",
+      "kind": "theorem",
+      "module": "AKMMSovereignDefault/StrictDilution.lean"
     }
   ],
   "full_build": "passed",
@@ -3335,6 +3591,261 @@
       "propext",
       "Classical.choice",
       "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.IsBoundedLongMPE": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.IsBoundedLongMPE.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.IsBoundedLongMPE.bdd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.IsBoundedLongMPE.eq_24_9": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.IsBoundedLongMPE.eq_24_10": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.IsBoundedLongMPE.eq_24_11": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.IsBoundedLongMPE.eq_24_12": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.IsBoundedLongMPE.default_opt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.IsBoundedLongMPE.borrow_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.IsBoundedLongMPE.borrow_opt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.sfd_econ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.sfd_bmax": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.sfd_obj_true": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.sfd_obj_false": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.sfd_price_true": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.sfd_price_false": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.sfd_defaultRHS": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.sfd_VD": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.sfd_VD_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.sfd_D": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.sfd_VRL": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.sfd_qL": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.sfd_VL_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.sfd_crisis_block": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.sfd_crisis_price": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.sfd_crisis_default": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.sfd_VRN": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.sfd_qN": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.sfd_BhN": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.sfd_VRS": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.sfd_qS": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.sfd_BhS": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.sfd_VN_true": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.sfd_VS_true": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.sfd_no_dilution_mpe": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.sfd_dilution_mpe": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.sfd_values_differ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.sfd_dilution_lowers_prices": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.sfd_strict_preference": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.sfd_two_mpe": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.sfd_obj_one_true": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.sfd_obj_one_false": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.sfd_obj_one_shift": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.sfd_VR1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.sfd_D1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.sfd_q1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.sfd_Bh1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.sfd_one_period_mpe": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.sfd_one_period_char": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.sfd_one_period_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.SovereignDefault.sfd_strict_multiplicity": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
     ]
   },
   "source_sha256": {
@@ -3351,15 +3862,16 @@
     "AKMMSovereignDefault/Multiplicity.lean": "afff2e56c2f400492acd121755cbcb0828661228d68b3da5517c9dee076d5f0b",
     "AKMMSovereignDefault/FiniteHorizon.lean": "d764a380d59116ac3ba319ca3e769e85f84b6679d2e60902daba970db32b50d7",
     "AKMMSovereignDefault/LongTermMultiplicity.lean": "7a97b4bedc0e6aaed9c9b81bd7073b93a3accee6364608a46b966086371910db",
-    "AKMMSovereignDefault.lean": "3acaeb12d84f8bbc9b63fa6876a6292944fba6b105c1f5c46df42b226e84a0b7",
+    "AKMMSovereignDefault/StrictDilution.lean": "62460156bed15330232714d3b6f63f3598fc510dd5752ef5b96ad581a0bc2130",
+    "AKMMSovereignDefault.lean": "0d79c8e4382e957d5466a2f2ffac823b091d871267397d5f1373c33cc5acf6f9",
     "lean-toolchain": "8733782dc070a99b312039cda424f601b80f3be6f6f512627da5ba25adc27632",
     "lakefile.toml": "2914ad430ed0cd01ae63215673dec7e6c5a1fbf8e8a002dc8b50357df0738652",
     "lake-manifest.json": "b2d84be626696a6c607de430ed7596846bd8ad936cef8d7826d036048690d120",
-    "proof-manifest.json": "7cc65d908f46152b4d3d5d7c8a50539c02488bc6a1cc801cac316a82f2160efc",
+    "proof-manifest.json": "4b3acb42a1b141fdfec6fb5e382b648c15b2c0bb56ac1378d7df408e244926b4",
     "scripts/verify.py": "a70b1fa704dd590f937f8b37682afa88a9d85a9150065acb935c7d2c9589da3b",
     "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
   },
-  "fresh_audit_sha256": "a756d2db29087f8224104564a2907272d2b633d3633d8e114005e585ca707979",
+  "fresh_audit_sha256": "c5ba1eab64f5675f91ea63118304739b98f41046f24d5bb629c66f5611e1d6c2",
   "lean_toolchain": "leanprover/lean4:v4.34.0",
   "scope": "AKMM Chapter 24 (pp. 729-748, App. 24.A): sovereign debt and default risk.",
   "source": "Marina Azzimonti, Per Krusell, Alisdair McKay and Toshihiko Mukoyama, Macroeconomics (draft of December 2025), Chapter 24"

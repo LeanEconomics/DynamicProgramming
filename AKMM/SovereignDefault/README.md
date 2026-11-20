@@ -21,10 +21,12 @@ of p. 901. Beyond the text, the library proves existence and uniqueness of the M
 equilibrium with one-period debt (Auclert–Rognlie; Aguiar–Amador) in a continuous-debt version
 of the model, proves that the finite-horizon equilibria converge to it as the horizon grows,
 and gives explicit economies with two equilibria: on a grid, for long-term and even for
-one-period debt, and with a continuum of debt levels for long-term debt only. Nine printed
-errors or imprecisions are corrected and twelve departures recorded
+one-period debt, and with a continuum of debt levels for long-term debt only, including a strict
+version of Aguiar and Amador's self-fulfilling debt dilution, with distinct values and a unique
+equilibrium in the same economy with one-period debt. Nine printed
+errors or imprecisions are corrected and thirteen departures recorded
 in [corrections](docs/corrections.md); every book item is located in the
-[source map](docs/source-map.md). The library contains **194 theorems**, all new.
+[source map](docs/source-map.md). The library contains **220 theorems**, all new.
 
 * **The two-period model** (§24.3): the default rule (24.4) with ties repaid and its optimality
   (`eq_24_3`, `eq_24_4`, `tp_defaultRule_optimal`); the price (24.5), whose printed middle term
@@ -88,6 +90,14 @@ in [corrections](docs/corrections.md); every book item is located in the
   `δ = 1`, `ld_one_iff`); an explicit economy with two equilibria at `δ = 1/2`, without and with
   self-fulfilling dilution (`ld_two_mpe`, `ld_dilution_lowers_prices`), and a unique one at
   `δ = 1` (`ld_one_period_unique`).
+* **Strict self-fulfilling dilution** (p. 901, beyond the text; departure D13, the book's lower
+  bound `B′ ≥ 0`, states in `[0, B̄]`, a normal and an absorbing crisis state, linear utility):
+  the equilibrium on `[0, B̄]` (`IsBoundedLongMPE`); an explicit economy with two equilibria at
+  `δ = 1/2`, without dilution and with self-fulfilling dilution, whose values differ
+  (`sfd_two_mpe`, `sfd_values_differ`), where expected dilution lowers prices and the sovereign
+  strictly prefers to dilute exactly when lenders expect it (`sfd_dilution_lowers_prices`,
+  `sfd_strict_preference`); with one-period debt the same economy has exactly one equilibrium,
+  proved directly (`sfd_one_period_char`, `sfd_one_period_unique`, `sfd_strict_multiplicity`).
 
 All names are in the namespace `AKMM.SovereignDefault`.
 
@@ -108,6 +118,7 @@ All names are in the namespace `AKMM.SovereignDefault`.
 | [Multiplicity](AKMMSovereignDefault/Multiplicity.lean) | 3 | Two MPE on a grid, for `δ = 1/2` and for `δ = 1` (p. 901) |
 | [FiniteHorizon](AKMMSovereignDefault/FiniteHorizon.lean) | 31 | The finite-horizon game: existence, uniqueness, convergence to the MPE as `T → ∞` (pp. 899, 901) |
 | [LongTermMultiplicity](AKMMSovereignDefault/LongTermMultiplicity.lean) | 9 | Two MPE with long-term debt and continuous debt; uniqueness at `δ = 1` (p. 901) |
+| [StrictDilution](AKMMSovereignDefault/StrictDilution.lean) | 26 | Strict self-fulfilling dilution: two MPE with distinct values at `δ = 1/2`, a unique MPE at `δ = 1` (p. 901) |
 
 ## Build and verify
 
