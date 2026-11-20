@@ -15,3 +15,4 @@ import AKMMConsumption.BufferStock
 import AKMMConsumption.BewleyInsurance
 import AKMMConsumption.TighterLimitMPC
 import AKMMConsumption.TighterLimitAllHorizons
+import AKMMConsumption.TighterLimitPerfectForesight

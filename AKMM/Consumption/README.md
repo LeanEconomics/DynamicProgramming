@@ -21,7 +21,7 @@ three minor slips recorded), with Lean counterexamples to the log-utility MPC, t
 `κ`, the capital-income-risk claim, the coefficient of (11.41), the DARA condition for bounded
 wealth, footnote 27 and the fall in consumption under a tighter limit, as recorded in
 [corrections](docs/corrections.md); every book item is located in the
-[source map](docs/source-map.md). The library contains **229 theorems**.
+[source map](docs/source-map.md). The library contains **238 theorems**.
 
 * **Risk sharing** (§11.2): autarky (11.1) and fn. 1 (`eq_11_1`, `footnote_1`); (11.3) from the
   Arrow–Debreu equilibrium of AKMM Chapter 7 (`eq_11_3`); CRRA shares (11.4) and history-independent
@@ -72,7 +72,9 @@ wealth, footnote 27 and the fall in consumption under a tighter limit, as record
   comparison holds at every horizon for every `r ≥ 0` (`cta_tight_mpc`, `cta_gap_antitone`,
   `cta_quadratic_tight_mpc`), by closing the induction with a level bound,
   `cₙ(x) + (1 − 1/R)(a₁ − a₂) ≤ c̃ₙ(x + a₁ − a₂)` (`cta_shift_full`), carried together with
-  `(a₁ − a₂)`-domination (`cta_incrDom_full`); CRRA beyond one period before the end is open, and
+  `(a₁ − a₂)`-domination (`cta_incrDom_full`). Without income risk it holds for every utility,
+  CRRA included, at every horizon (`ctp_tight_mpc`, `ctp_crra_tight_mpc`, by horizontal domination
+  `ctp_Hor`, `ctp_hor_all`). CRRA with risk beyond one period before the end is open, and
   tightening the next date's limit alone can lower today's MPC (`cta_link_mpc_counterexample`).
 * **The buffer-stock target** (Figure 11.4): under `βR ≤ 1` a unique target `x*` with
   `E[x′ | x] > x` below and `< x` above, and convergence of the expected dynamics to it
@@ -118,6 +120,7 @@ income fluctuation problem, the Huggett and Aiyagari economies), and Stokey–Lu
 | [BewleyInsurance](AKMMConsumption/BewleyInsurance.lean) | 6 | Figure 11.7: government debt and full insurance (AKMM p. 319) |
 | [TighterLimitMPC](AKMMConsumption/TighterLimitMPC.lean) | 15 | Figure 11.2: a tighter limit raises the MPC with more periods left (AKMM p. 306) |
 | [TighterLimitAllHorizons](AKMMConsumption/TighterLimitAllHorizons.lean) | 13 | Figure 11.2: a tighter limit raises the MPC at every horizon, quadratic utility, any `r ≥ 0`; a single-date tightening can lower it (AKMM p. 306) |
+| [TighterLimitPerfectForesight](AKMMConsumption/TighterLimitPerfectForesight.lean) | 9 | Figure 11.2: without income risk a tighter limit raises the MPC at every horizon, every utility (AKMM p. 306) |
 
 ## Build and verify
 

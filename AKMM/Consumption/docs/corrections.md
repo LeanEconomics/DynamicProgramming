@@ -75,7 +75,9 @@ December 2025), Chapter 11, Consumption (G. L. Violante), pp. 287–323. Lean na
    current budget (`ctl_gap_le`, from the sharp shift bound `ctl_shift_sharp`). The MPC
    comparison with more periods left is proved for quadratic utility (the book's `βR = 1`, and
    more generally the expectation with factor `θ ≥ 1`) at every horizon and every `r ≥ 0`
-   (`cta_tight_mpc`, `cta_gap_antitone`, `cta_quadratic_tight_mpc`), and for CRRA one period
+   (`cta_tight_mpc`, `cta_gap_antitone`, `cta_quadratic_tight_mpc`). Without income risk it is
+   proved for every utility, CRRA with any `β` and `σ` included, at every horizon
+   (`ctp_tight_mpc`, `ctp_crra_tight_mpc`). For CRRA with income risk it is proved one period
    before the end only (departure 18). The comparison uses `r ≥ 0` (`cfn_tight_shift`).
 
 10. **p. 319, Figure 11.7: `A` depends on `B`.** The figure moves the vertical line `B` against a
@@ -197,13 +199,41 @@ December 2025), Chapter 11, Consumption (G. L. Violante), pp. 287–323. Lean na
     earlier invariant failed because `Δ`-domination alone does not bound the saving gap; the
     level bound is what it was missing. Not proved: (i) the expectation with `θ < 1`, which is not
     quadratic utility (the constant above is then positive, and `Δ`-domination fails numerically,
-    though the MPC comparison held in every case tried); (ii) CRRA two or more periods before the
-    end. For CRRA no shift domination can serve as the invariant: one period before the end both
+    though the MPC comparison held in every case tried); (ii) CRRA with income risk two or more
+    periods before the end.
+
+    *Without income risk* the comparison holds at every horizon for every utility and every
+    `θ > 0`, so for CRRA with any `β` and `σ` (`TighterLimitPerfectForesight`: `ctp_tight_mpc`,
+    `ctp_gap_antitone`, `ctp_crra_tight_mpc`). The `cta_` invariant is not used: it needs `θ ≥ 1`
+    and the linear certainty equivalent. Instead, with one state every certainty equivalent is
+    the identity (`ctp_cont_eq`). The invariant is horizontal domination (`ctp_Hor`): to raise
+    consumption by a given amount the tight household needs no more extra cash than the loose
+    one. It propagates because the one-state Euler condition maps equal consumption today to equal
+    consumption tomorrow (`ctp_hor_step`, `ctp_hor_all`). Where the loose household is
+    constrained, the sharp shift bound closes the case. Concavity of the tight function turns
+    the invariant into the MPC comparison (`ctp_mpc_of_hor`). It does not extend to risk, because
+    equal certainty equivalents tomorrow do not mean equal consumption state by state.
+
+    *With risk, two periods before the end* (the first open case), the comparison held
+    numerically not only for power means but for exponential certainty equivalents and for
+    mixtures of the expectation and the minimum. This suggests a proof from the concavity of `M`
+    alone, but none was found. The local form of the claim at cash `x` is
+    `∇M(α)·π ≥ ∇M(a)·p`. Here `a`, `p` are the loose household's next-period consumptions and
+    slopes, at `uᵢ = Rs + yᵢ`. `α`, `π` are the tight household's, at `vᵢ = uᵢ + t`, where `t` is
+    `R` times the consumption gap and lies in `[0, Δ/R]`. The aggregate levels are tied by
+    `M(α) = M(a) − γ/θ`. In states where next period's loose household is constrained, both
+    slopes are `1` and `αᵢ = aᵢ − (Δ/R − t)`. In states where both points lie on the common
+    unconstrained rule `ĉ`, the tight slope `ĉ′(vᵢ) ≤ ĉ′(uᵢ)` and the level `αᵢ ≥ aᵢ` both work
+    against the claim: for a power mean the weight `∇ᵢM` falls with the level relative to `M`.
+    So the compensation must come from the aggregate level identity across states, and no
+    state-by-state comparison, shifted or horizontal, delivers it.
+
+    For CRRA no shift domination can serve as the invariant: one period before the end both
     households have the same strictly concave unconstrained consumption function, so `τ`-domination
     fails for every `τ > 0`, and the step's use of the linearity of the expectation
     (`ctl_cont_incr`) has no power-mean analogue. In marginal-utility units the CRRA perturbation
     obeys the same linear recursion as the quadratic one, but the MPC factor `1 − c′` does not
-    match the marginal-utility slope, so the identity above becomes only an inequality (by Jensen)
+    match the marginal-utility slope, so the identity found for the expectation becomes only an inequality (by Jensen)
     and loses the monotonicity. No counterexample is known: in exact computations for quadratic
     utility and accurate numerical ones for CRRA (two periods before the end by nested root
     finding, up to six by the endogenous grid method, `σ` from `0.1` to `30`) the comparison
