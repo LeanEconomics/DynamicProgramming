@@ -131,8 +131,8 @@ are relative to `AKMM.Uncertainty`. Every book item is located in the [source ma
     `β(1 + r)u′(c) < u′(c + D)` for large `c` (`D` the income spread; it holds whenever
     `u′(c + D)/u′(c) → 1`, e.g. CRRA, `imf_crra_spread`) (`imf_abar_exists`); with `r < 0` no
     condition is needed (`imf_abar_exists_neg`); with `r = 0` it is proved under
-    `βu′(c) < u′(c + D)` for large `c` and `u′` continuous (`imf0_abar_exists`, correction 22);
-    for CRRA and log utility `ā` exists at every admissible `r` (`imf0_abar_exists_crra`). The
+    `βu′(c) < u′(c + D)` for large `c` and `u′` continuous (`imf0_abar_exists`), and in fact for
+    every `u` with `u′` continuous, CARA included (`imfc_abar_exists`, correction 22); for CRRA and log utility `ā` exists at every admissible `r` (`imf0_abar_exists_crra`). The
     figure's `ā` satisfies
     `g(a, y) < a` for all `a ≥ ā` in every state; `[a̲, ā]` is invariant
     (`imf_ergodic_invariant`), and "they will continuously spend down their assets ... until
@@ -166,7 +166,8 @@ are relative to `AKMM.Uncertainty`. Every book item is located in the [source ma
     and Theorem 3.3.1 gives the conclusion (`imf_kernel_stationary`). The model's hypotheses are
     satisfied by a solved instance (`imf_example_stationary`). The same conclusion holds with
     `r = 0` under the hypotheses of correction 22 (`imf0_stationary`, with the solved instance
-    `imf0_example_stationary`).
+    `imf0_example_stationary`), and with `r = 0` the spread condition can be dropped
+    (`imfc_stationary`).
 
 22. **Figure 7.4(A), the bound `ā` when `r = 0` (p. 214).** The text's `ā` is also claimed for
     `R = 1 + r = 1`, where `β(1 + r) < 1` reduces to `β < 1` and the only force pulling assets
@@ -181,9 +182,25 @@ are relative to `AKMM.Uncertainty`. Every book item is located in the [source ma
     which covers all three signs of `r`; Huggett 1993). The condition is needed by the proof and
     not automatic: for CARA, `u′(c) = e^{−γc}`, the ratio is the constant `e^{−γD}`
     (`imf0_cara_ratio`) and the condition holds iff `β < e^{−γD}` (`imf0_cara_spread_iff`), so it
-    fails for a large income spread, `γD ≥ −log β`. That `ā` then fails to exist (unbounded
-    accumulation under CARA, Schechtman and Escudero 1977) is the known result but is not proved
-    here: no solved CARA economy with unbounded assets is constructed. The stationary
+    fails for a large income spread, `γD ≥ −log β`. The condition is sufficient but not
+    necessary, and at `r = 0` it is not needed at all: `ā` exists for CARA at every spread, and
+    the expected unbounded precautionary accumulation does not occur at `R = 1`. With `R = 1` the
+    budget is `a′ = a + y − c`, so `g(a, y) < a` iff `c(a, y) > y` (`imfc_dissave_iff`); since
+    consumption is unbounded in assets in every state (`imf0_c_unbounded`, which uses only
+    `β < 1` and `u′` continuous), above some `ā` consumption exceeds the largest income and
+    `g(a, y) < a` in every state, for every utility with `u′` continuous and any finite-state
+    Markov income (`imfc_abar_exists`), in particular CARA (`imfc_abar_exists_cara`). With
+    `e^{−γD} ≤ β < 1` the spread condition fails and `ā` exists for every solution `(V, g)`
+    satisfying the standing assumptions (`imfc_cara_large_spread`); along every income history
+    assets enter `[a̲, ā]` in finite time and stay there (`imfc_cara_no_divergence`); the
+    stationary distribution needs no spread condition at `r = 0` (`imfc_stationary`). CARA
+    utility satisfies the utility parts of the standing assumptions (`imfc_cara_utility`), and an
+    i.i.d. two-point economy (`γ = 1`, income `{0, 1}` with probabilities `1/2`, `β = 1/2`,
+    `r = 0`, so `e^{−γD} = e^{−1} ≤ β`) satisfies every non-Bellman hypothesis
+    (`imfc_cara_example_params`). The existence of a solution `(V, g)` of the Bellman equation for
+    CARA utility is not constructed; the CARA results are stated for every such solution.
+    (Unbounded accumulation under CARA requires wealth to grow, `R > 1`, where the dissaving
+    threshold `c > ra/(1 + r) + y` rises with assets; it is not formalised here.) The stationary
     distribution of correction 21 extends to `r = 0` (`imf0_stationary`); a solved two-state
     Markov instance with `r = 0` satisfies all hypotheses (`imf0_example_bellman`,
     `imf0_example_standing`, `imf0_example_hyps`, `imf0_example_stationary`).

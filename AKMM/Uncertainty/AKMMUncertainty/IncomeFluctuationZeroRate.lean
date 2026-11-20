@@ -29,9 +29,9 @@ Markov income, the standing assumptions `imf_Standing` with `r = 0`, and `u′` 
   `β(1 + r) < 1` (`imf0_abar_exists_crra`, combining the three cases).
 * For CARA utility `u′(c) = e^{−γc}` the ratio is the constant `e^{−γD}`
   (`imf0_cara_ratio`), and the spread condition holds if and only if `β < e^{−γD}`
-  (`imf0_cara_spread_iff`): it fails when the spread is large, `γD ≥ −log β`. Whether `ā` then
-  fails to exist (assets drifting without bound, the Schechtman–Escudero CARA case) is not proved
-  here: only the failure of the proof's condition.
+  (`imf0_cara_spread_iff`): it fails when the spread is large, `γD ≥ −log β`. The condition is
+  only sufficient: `IncomeFluctuationCARA` proves that at `r = 0` the bound `ā` exists for every
+  `u` with `u′` continuous, CARA at every spread included.
 * A solved instance with `r = 0` (the economy of `IncomeFluctuationExample` with `q = 1`):
   `imf0_example_bellman`, `imf0_example_standing`, `imf0_example_hyps`,
   `imf0_example_stationary`.

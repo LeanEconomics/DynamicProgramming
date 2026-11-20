@@ -28,8 +28,9 @@ definition of aperiodicity, the EIS derivative and the Euler equation of p. 201,
 [corrections](docs/corrections.md); every book item is located in the [source
 map](docs/source-map.md). The claims of Figure 7.4 are proved with added hypotheses, and the
 high-income rule of the figure is shown to depend on the parameters (corrections 19–21); the
-bound `ā` and the stationary distribution are also proved at `r = 0` (correction 22). The library
-contains **181 theorems**.
+bound `ā` and the stationary distribution are also proved at `r = 0`, where `ā` exists for every
+utility with continuous marginal utility, CARA at every income spread included (correction 22).
+The library contains **189 theorems**.
 
 * **Event trees and iterated expectations** (§7.1.1, §7.2.1, 7.A.2): conditional probabilities
   (`tree_condProb_sum`); the law of iterated expectations on the tree and for filtrations
@@ -92,6 +93,14 @@ contains **181 theorems**.
   (`imf0_abar_exists_crra`); for CARA the condition holds iff `β < e^{−γD}` (`imf0_cara_ratio`,
   `imf0_cara_spread_iff`); the stationary distribution at `r = 0` (`imf0_stationary`) and a solved
   instance (`imf0_example_stationary`).
+* **CARA at `r = 0`** (§7.6, p. 214): with `R = 1` the consumer dissaves iff consumption exceeds
+  income (`imfc_dissave_iff`), so `ā` exists for every utility with `u′` continuous, without the
+  spread condition (`imfc_abar_exists`); for CARA at every spread (`imfc_abar_exists_cara`); with
+  a large spread `e^{−γD} ≤ β` the spread condition fails but `ā` exists for every solution and
+  assets do not diverge (`imfc_cara_large_spread`, `imfc_cara_no_divergence`); the stationary
+  distribution without the condition (`imfc_stationary`); CARA utility and an i.i.d. two-point
+  large-spread economy satisfy the non-Bellman hypotheses (`imfc_cara_utility`,
+  `imfc_cara_example_params`; no CARA Bellman solution is constructed).
 * **Recursive competitive equilibrium** (7.A.1): Definition 16, corrected (`definition_16`), an
   equilibrium (`definition_16_example`) and its functional Euler equation, which is (7.16)
   (`definition_16_euler`).
@@ -121,6 +130,7 @@ All names are in the namespace `AKMM.Uncertainty`.
 | [IncomeFluctuationStationary](AKMMUncertainty/IncomeFluctuationStationary.lean) | 7 | Figure 7.4(B): the transition of `(a, y)`, an accessible atom, the unique stationary distribution and convergence (AKMM §7.6, p. 215) |
 | [IncomeFluctuationExample](AKMMUncertainty/IncomeFluctuationExample.lean) | 7 | A solved two-state Markov instance; the high-income rule need not cross the 45-degree line (AKMM §7.6, pp. 213–215) |
 | [IncomeFluctuationZeroRate](AKMMUncertainty/IncomeFluctuationZeroRate.lean) | 11 | Figure 7.4 at `r = 0`: unbounded consumption, `ā`, CRRA and CARA, the stationary distribution, a solved instance (AKMM §7.6, pp. 214–215) |
+| [IncomeFluctuationCARA](AKMMUncertainty/IncomeFluctuationCARA.lean) | 8 | `ā` at `r = 0` without the spread condition; CARA at every income spread, no divergence, the stationary distribution (AKMM §7.6, pp. 214–215) |
 
 ## Build and verify
 

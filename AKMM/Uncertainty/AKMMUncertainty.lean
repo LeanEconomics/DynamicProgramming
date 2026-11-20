@@ -17,3 +17,4 @@ import AKMMUncertainty.IncomeFluctuation
 import AKMMUncertainty.IncomeFluctuationStationary
 import AKMMUncertainty.IncomeFluctuationExample
 import AKMMUncertainty.IncomeFluctuationZeroRate
+import AKMMUncertainty.IncomeFluctuationCARA

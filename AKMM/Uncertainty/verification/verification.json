@@ -1,6 +1,6 @@
 {
-  "checked_at_utc": "2026-11-12T23:09:03.684892+00:00",
-  "theorems": 181,
+  "checked_at_utc": "2026-11-20T13:40:06.144849+00:00",
+  "theorems": 189,
   "module_theorems": {
     "AKMMUncertainty/EventTrees.lean": 8,
     "AKMMUncertainty/MarkovChains.lean": 30,
@@ -20,9 +20,10 @@
     "AKMMUncertainty/IncomeFluctuation.lean": 21,
     "AKMMUncertainty/IncomeFluctuationStationary.lean": 7,
     "AKMMUncertainty/IncomeFluctuationExample.lean": 7,
-    "AKMMUncertainty/IncomeFluctuationZeroRate.lean": 11
+    "AKMMUncertainty/IncomeFluctuationZeroRate.lean": 11,
+    "AKMMUncertainty/IncomeFluctuationCARA.lean": 8
   },
-  "audited_declarations": 238,
+  "audited_declarations": 246,
   "declarations": [
     {
       "name": "AKMM.Uncertainty.tree_condProb_sum",
@@ -1213,6 +1214,46 @@
       "name": "AKMM.Uncertainty.imf0_example_stationary",
       "kind": "theorem",
       "module": "AKMMUncertainty/IncomeFluctuationZeroRate.lean"
+    },
+    {
+      "name": "AKMM.Uncertainty.imfc_dissave_iff",
+      "kind": "theorem",
+      "module": "AKMMUncertainty/IncomeFluctuationCARA.lean"
+    },
+    {
+      "name": "AKMM.Uncertainty.imfc_abar_exists",
+      "kind": "theorem",
+      "module": "AKMMUncertainty/IncomeFluctuationCARA.lean"
+    },
+    {
+      "name": "AKMM.Uncertainty.imfc_cara_utility",
+      "kind": "theorem",
+      "module": "AKMMUncertainty/IncomeFluctuationCARA.lean"
+    },
+    {
+      "name": "AKMM.Uncertainty.imfc_abar_exists_cara",
+      "kind": "theorem",
+      "module": "AKMMUncertainty/IncomeFluctuationCARA.lean"
+    },
+    {
+      "name": "AKMM.Uncertainty.imfc_cara_large_spread",
+      "kind": "theorem",
+      "module": "AKMMUncertainty/IncomeFluctuationCARA.lean"
+    },
+    {
+      "name": "AKMM.Uncertainty.imfc_cara_no_divergence",
+      "kind": "theorem",
+      "module": "AKMMUncertainty/IncomeFluctuationCARA.lean"
+    },
+    {
+      "name": "AKMM.Uncertainty.imfc_stationary",
+      "kind": "theorem",
+      "module": "AKMMUncertainty/IncomeFluctuationCARA.lean"
+    },
+    {
+      "name": "AKMM.Uncertainty.imfc_cara_example_params",
+      "kind": "theorem",
+      "module": "AKMMUncertainty/IncomeFluctuationCARA.lean"
     }
   ],
   "full_build": "passed",
@@ -2411,6 +2452,46 @@
       "propext",
       "Classical.choice",
       "Quot.sound"
+    ],
+    "AKMM.Uncertainty.imfc_dissave_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Uncertainty.imfc_abar_exists": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Uncertainty.imfc_cara_utility": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Uncertainty.imfc_abar_exists_cara": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Uncertainty.imfc_cara_large_spread": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Uncertainty.imfc_cara_no_divergence": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Uncertainty.imfc_stationary": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Uncertainty.imfc_cara_example_params": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
     ]
   },
   "source_sha256": {
@@ -2432,17 +2513,18 @@
     "AKMMUncertainty/IncomeFluctuation.lean": "16df433e31bd86f4c7a8ff0347f720ee398df1e4e61209459d2eb05754255f4a",
     "AKMMUncertainty/IncomeFluctuationStationary.lean": "be73f9ad5a78f52c0f988b41d06fd17c28e830d170a564ea582b94c7f2b90eba",
     "AKMMUncertainty/IncomeFluctuationExample.lean": "0b6045bc07aaf196d759a7a31fe2789c6ce29d6df1cb9a5b2dc3a55068cb7d80",
-    "AKMMUncertainty/IncomeFluctuationZeroRate.lean": "4d94aaea289cd0ff18cecb79569ad49e95681f05088697754b6abf49c05b6598",
-    "AKMMUncertainty.lean": "ea23489e3e188d64911aa4828e091c09f7a14ca76a57baa9acc1533d13646ce8",
+    "AKMMUncertainty/IncomeFluctuationZeroRate.lean": "a3db2d236c380b2d2d88889031c66e04b67a37fa675b08d436708c07b7386652",
+    "AKMMUncertainty/IncomeFluctuationCARA.lean": "9707578c1ac7a27873caa4002fd32c39d1b3ea08dce04122135525a3595077ca",
+    "AKMMUncertainty.lean": "a4a40d9e051199ed320f703de718b140d535a6f168345781955c44f51963b52b",
     "lean-toolchain": "8733782dc070a99b312039cda424f601b80f3be6f6f512627da5ba25adc27632",
     "lakefile.toml": "b11c1f73b83281242f544879f23a5e92d5f053b160ed6d4d438275aed1429dba",
     "lake-manifest.json": "71fae231d128f08730729f2820734dd3052482d97298a969eba895dc8816dcb6",
-    "proof-manifest.json": "6fd8246c8a28c5acad56342492db09fec9d6f51be9b4799900c26c6632fc5b38",
+    "proof-manifest.json": "62b4f95f3c51c1ffcc87789ad27a3dbf8ea700ae41f09da1916cdf534d83913e",
     "scripts/verify.py": "a70b1fa704dd590f937f8b37682afa88a9d85a9150065acb935c7d2c9589da3b",
     "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
   },
-  "fresh_audit_sha256": "6545e17bbb41ed926036a866b33c4683301fe7cc874ede20fa2800955b05e068",
+  "fresh_audit_sha256": "e94eced95c409749298716895c7af9fc99408482ff7857a6ccf3ea3b97e46a5d",
   "lean_toolchain": "leanprover/lean4:v4.34.0",
-  "scope": "AKMM Chapter 7 (pp. 187-215) and Appendix 7.A (pp. 840-841): the event tree and the law of iterated expectations, finite Markov chains (marginals, stationary distributions, the employment chain, irreducibility, aperiodicity and convergence), AR(1) moments, linear stochastic difference equations (mean, Lyapunov equation, impulse responses), Jensen risk aversion and the CARA/CRRA coefficients, the EIS, portfolio homogeneity, the two-period and infinite-horizon stochastic growth planner (stochastic Euler equations from optimality, sufficiency with the transversality condition, the log closed form), the recursive formulation and functional Euler equation, linearisation and (7.17), Arrow-Debreu and sequential complete markets (7.20)-(7.25), insurance, risk sharing and spanning, competitive equilibrium of the growth model (Definition 15) and its equivalence with the planner, the recursive competitive equilibrium (Definition 16), the incomplete-markets Euler inequality, and the claims of Figure 7.4 for Markov income (monotone decision rules, the bound and ergodic set, a unique stationary distribution with convergence in total variation), including the bound and the stationary distribution at r = 0.",
+  "scope": "AKMM Chapter 7 (pp. 187-215) and Appendix 7.A (pp. 840-841): the event tree and the law of iterated expectations, finite Markov chains (marginals, stationary distributions, the employment chain, irreducibility, aperiodicity and convergence), AR(1) moments, linear stochastic difference equations (mean, Lyapunov equation, impulse responses), Jensen risk aversion and the CARA/CRRA coefficients, the EIS, portfolio homogeneity, the two-period and infinite-horizon stochastic growth planner (stochastic Euler equations from optimality, sufficiency with the transversality condition, the log closed form), the recursive formulation and functional Euler equation, linearisation and (7.17), Arrow-Debreu and sequential complete markets (7.20)-(7.25), insurance, risk sharing and spanning, competitive equilibrium of the growth model (Definition 15) and its equivalence with the planner, the recursive competitive equilibrium (Definition 16), the incomplete-markets Euler inequality, and the claims of Figure 7.4 for Markov income (monotone decision rules, the bound and ergodic set, a unique stationary distribution with convergence in total variation), including the bound and the stationary distribution at r = 0, where the bound exists for every utility with continuous marginal utility, in particular CARA at every income spread.",
   "source": "Marina Azzimonti, Per Krusell, Alisdair McKay and Toshihiko Mukoyama, Macroeconomics (draft of December 2025), Chapter 7 and Appendix 7.A"
 }
