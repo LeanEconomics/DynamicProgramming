@@ -81,8 +81,10 @@ December 2025), Chapter 11, Consumption (G. L. Violante), pp. 287–323. Lean na
    periods before the end: with log utility, `β = 1/2`, `R = 1`, `a₁ = 2`, `a₂ = 197/100` and
    income `2003/1000` (probability `1/3000`) or `5003/1000`, the loose household's consumption
    rises by more than the tight one's between cash in hand `43/4` and `279/25`
-   (`ctc_counterexample`, `ctc_not_tight_mpc`; departure 18). So for CRRA with risk "their MPC
-   increases" holds one period before the end only. The comparison uses `r ≥ 0`
+   (`ctc_counterexample`, `ctc_not_tight_mpc`; departure 18). Patience does not rescue it: it
+   fails in the book's case `βR = 1` (log utility, `β = R = 1`, three incomes; `ctb_counterexample`,
+   `ctb_not_tight_mpc`) and for `βR = 2` (`ctb_P_counterexample`, `ctb_P_not_tight_mpc`). So for
+   CRRA with risk "their MPC increases" holds one period before the end only. The comparison uses `r ≥ 0`
    (`cfn_tight_shift`).
 
 10. **p. 319, Figure 11.7: `A` depends on `B`.** The figure moves the vertical line `B` against a
@@ -287,7 +289,30 @@ December 2025), Chapter 11, Consumption (G. L. Violante), pp. 287–323. Lean na
     constrained state. For an impatient enough household the fall of the MPC is too small to
     absorb the rise of `π`. Earlier searches missed it because the window is narrow: the low state must be
     rare and close to the limit two periods ahead (`y − a₁ = 3/1000`), and `θ` large. Violations
-    were found for `θ = 1.5, 2, 3, 4` (`σ = 1`) and for `σ ≈ 0.15`, `θ ≈ 38`; a grid search at
-    `θ = 1` (`R` from `1` to `10`) and hill-climbing at `θ = 1, 1.2` found none (scratch files
-    `ch11_p2_gridR.py`, `ch11_p2_climbth.py`). Whether the claim holds for CRRA with risk when
-    `θ ≤ 1` (`βR ≥ 1`), which includes the book's `βR = 1`, is open.
+    were found for `θ = 1.5, 2, 3, 4` (`σ = 1`) and for `σ ≈ 0.15`, `θ ≈ 38`.
+
+    *Patience does not rescue it (`TighterLimitCounterexampleBook`).* With `θ ≤ 1` the two-state
+    mechanism is unavailable: the kink one period before the end is at `z* = θM(y − a) − a/R`,
+    below the top state's lowest cash `y_max − a`, so the top state is never constrained next
+    period and can never sit just past the kink (two-state searches at `θ ≤ 1` found no
+    violation; whether two states suffice for the claim at `θ ≤ 1` is open). With three states a
+    middle state can sit just past the kink while a rare lowest state is constrained. Take that
+    state's cash two periods ahead `e₁ = y₁ − a → 0` with probability `w₁ = K·e₁^{1+σ}`: it
+    vanishes from the certainty equivalents (weight `∝ w₁e₁^{−σ} → 0`) but keeps a fixed share of
+    the curvature weights (`∝ w₁e₁^{−1−σ} = K`), so the middle state's value-function prudence
+    `P_u(ĉ)ĉ′ − ĉ″/ĉ′` grows like `1/e₁` while the MPC stays bounded away from `0`. Then `π·MPC₂`
+    rises just past the kink, for every `θ` and `R` for which the configuration is feasible
+    (numerically, `θ = 1/2, 10/11, 1` with `R = 1, 11/10, 2`; `ch11_p2_lim.py`). This
+    asymptotic argument is not formalised; two instances are. `ctb_H`: log utility, `β = R = 1`
+    (the book's `βR = 1`, `θ = 1`, `ctb_theta`), `a₁ = 1/2`, `a₂ = 499/1000`, incomes `503/1000`,
+    `8/10`, `9/2` with probabilities `1/10000`, `3/10`, `6999/10000`; between cash `19778/15625`
+    and `1278143/1000000` the loose consumption rises by about `1.7·10⁻⁹` more
+    (`ctb_counterexample`, `ctb_not_tight_mpc`). `ctb_P`: log utility, `β = 1`, `R = 2` (`βR = 2`,
+    `θ = 1/2`, `ctb_P_theta`), `a₁ = 1/20`, `a₂ = 49/1000`, incomes `51/1000`, `35/100`, `81/20`
+    with probabilities `1/100000`, `3/10`, `69999/100000`; between `5394/10000` and `5412/10000`
+    it fails by about `2·10⁻¹⁰` (`ctb_P_counterexample`, `ctb_P_not_tight_mpc`). The proofs bracket
+    next period's consumption state by state (`ctb_c1_gt`, `ctb_c1_lt`, `ctb_c1_le`) and then the
+    current consumption through the monotone harmonic mean (`ctb_cons2_gt`, `ctb_cons2_lt`,
+    `ctb_harm_mono`; `ctb_P_…` likewise). Certificates: scratch files `ch11_p2_cert3.py`,
+    `ch11_p2_certR2.py`. So for CRRA with income risk the MPC comparison is a one-period result;
+    with more periods left it is proved only for the expectation with `θ ≥ 1` and without risk.

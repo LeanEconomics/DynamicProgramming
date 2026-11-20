@@ -22,7 +22,7 @@ three minor slips recorded), with Lean counterexamples to the log-utility MPC, t
 wealth, footnote 27, the fall in consumption under a tighter limit and the rise of the MPC
 under a tighter limit for CRRA with income risk, as recorded in
 [corrections](docs/corrections.md); every book item is located in the
-[source map](docs/source-map.md). The library contains **250 theorems**.
+[source map](docs/source-map.md). The library contains **276 theorems**.
 
 * **Risk sharing** (§11.2): autarky (11.1) and fn. 1 (`eq_11_1`, `footnote_1`); (11.3) from the
   Arrow–Debreu equilibrium of AKMM Chapter 7 (`eq_11_3`); CRRA shares (11.4) and history-independent
@@ -82,7 +82,9 @@ under a tighter limit for CRRA with income risk, as recorded in
   a rare low income near the limit (`ctc_counterexample`, `ctc_not_tight_mpc`), and so does
   horizontal domination (`ctc_not_hor`); the four consumption levels are bracketed by the sign of
   the Euler gap at rational points (`ctc_lt_step`, `ctc_step_lt`, `ctc_cons2_gt`, `ctc_cons2_lt`).
-  Whether it holds for CRRA with risk when `βR ≥ 1` is open.
+  Patience does not rescue it: it fails also in the book's case `βR = 1` (`β = R = 1`, three
+  incomes, `ctb_counterexample`, `ctb_not_tight_mpc`) and for `βR = 2` (`ctb_P_counterexample`,
+  `ctb_P_not_tight_mpc`), through a rare income state near the limit two periods ahead.
 * **The buffer-stock target** (Figure 11.4): under `βR ≤ 1` a unique target `x*` with
   `E[x′ | x] > x` below and `< x` above, and convergence of the expected dynamics to it
   (`bsk_target`, `bsk_target_stable`).
@@ -129,6 +131,7 @@ income fluctuation problem, the Huggett and Aiyagari economies), and Stokey–Lu
 | [TighterLimitAllHorizons](AKMMConsumption/TighterLimitAllHorizons.lean) | 13 | Figure 11.2: a tighter limit raises the MPC at every horizon, quadratic utility, any `r ≥ 0`; a single-date tightening can lower it (AKMM p. 306) |
 | [TighterLimitPerfectForesight](AKMMConsumption/TighterLimitPerfectForesight.lean) | 9 | Figure 11.2: without income risk a tighter limit raises the MPC at every horizon, every utility (AKMM p. 306) |
 | [TighterLimitCounterexample](AKMMConsumption/TighterLimitCounterexample.lean) | 12 | Figure 11.2: with CRRA utility and income risk a tighter limit can lower the MPC two periods before the end (AKMM p. 306) |
+| [TighterLimitCounterexampleBook](AKMMConsumption/TighterLimitCounterexampleBook.lean) | 26 | Figure 11.2: the same failure when `βR = 1` (the book's case) and when `βR = 2` (AKMM p. 306) |
 
 ## Build and verify
 

@@ -17,3 +17,4 @@ import AKMMConsumption.TighterLimitMPC
 import AKMMConsumption.TighterLimitAllHorizons
 import AKMMConsumption.TighterLimitPerfectForesight
 import AKMMConsumption.TighterLimitCounterexample
+import AKMMConsumption.TighterLimitCounterexampleBook
