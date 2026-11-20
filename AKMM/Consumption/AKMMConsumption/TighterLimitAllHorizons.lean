@@ -41,7 +41,10 @@ What is left: the factor `θ < 1` (no counterpart in quadratic utility; there th
 positive and `Δ`-domination fails numerically) and CRRA utility beyond one period before the end.
 For CRRA no shift domination can serve: one period before the end both households share the same
 strictly concave unconstrained consumption function (when the income values differ), so
-`τ`-domination already fails there for every `τ > 0`.
+`τ`-domination already fails there for every `τ > 0`. Nor does a decomposition into single-date
+tightenings, taken in reverse chronological order as in Carroll–Holm–Kimball, give the result link
+by link: tightening only the next date's limit can lower today's MPC, for every utility
+(`cta_link_mpc_counterexample`, a deterministic household `cta_det`).
 -/
 
 namespace AKMM.Consumption
@@ -252,5 +255,81 @@ theorem cta_example_mpc (n : ℕ) {x x' : ℝ} (hx : 1 / 2 ≤ x) (hxx : x ≤ x
         ((cfn_quadratic (fun _ : Fin 2 => (1 : ℝ) / 2) ![1, 3] 2 (1 / 2) (1 / 2) 3).tighten 0).cons
           n x :=
   cta_quadratic_tight_mpc cta_example_valid le_rfl (by norm_num) n hx hxx
+
+/-- The deterministic household of the single-date counterexample: income `3`, `R = 1`, `a = 1`,
+`d = 1/2` (one income state, so every certainty equivalent is the identity). -/
+noncomputable def cta_det : CfnHousehold (Fin 1) := cfn_quadratic (fun _ => 1) ![3] 1 1 (1 / 2) 3
+
+/-- The deterministic household satisfies the standing assumptions. -/
+theorem cta_det_valid : cta_det.Valid :=
+  cfn_quadratic_valid (fun _ => by norm_num) (by simp) (by norm_num) (by norm_num) (by norm_num)
+    (fun _ => by simp; norm_num) (fun _ => by simp)
+
+/-- Its Euler right-hand side, under the loose or the tight limit: `cn(s + 3)`. -/
+theorem cta_det_cont (b₂ : ℝ) (cn : ℝ → ℝ) (s : ℝ) :
+    (cta_det.tighten b₂).cont cn s = cn (s + 3) := by
+  simp [cont, cta_det, cfn_quadratic, CfnHousehold.tighten]
+
+/-- The tight household's consumption one period before the end satisfies the induction's
+properties, as a continuation for the loose household. -/
+theorem cta_det_good_tight : ∃ κ h, cta_det.Good κ h ((cta_det.tighten 0).cons 1) :=
+  ⟨_, _, cfn_cons_good (cfn_tighten_valid cta_det_valid le_rfl (by norm_num : (0:ℝ) ≤ 1)) 1⟩
+
+/-- The four consumption values: with two periods left the loose household consumes `2` at
+`x = 1` and `5/2` at `x = 3/2`; with the limit tightened to `0` at the next date only it consumes
+`2` and `9/4`. -/
+theorem cta_det_values :
+    cta_det.cons 2 1 = 2 ∧ cta_det.cons 2 (3 / 2) = 5 / 2 ∧
+      cta_det.step ((cta_det.tighten 0).cons 1) 1 = 2 ∧
+      cta_det.step ((cta_det.tighten 0).cons 1) (3 / 2) = 9 / 4 := by
+  have hV := cta_det_valid
+  have hV₂ := cfn_tighten_valid hV le_rfl (by norm_num : (0:ℝ) ≤ 1)
+  have hc0 : cta_det.cont = (cta_det.tighten 1).cont := rfl
+  -- one period before the end
+  have hL1 : cta_det.cons 1 2 = 5 / 2 := by
+    refine cfn_step_eq_of_kkt hV (cfn_cons_good hV 0) ⟨?_, ?_, fun _ => ?_⟩
+    · change (5 / 2 : ℝ) ≤ 2 + 1 / 1; norm_num
+    · rw [hc0, cta_det_cont]; simp only [cons]; norm_num
+    · rw [hc0, cta_det_cont]; simp only [cons]; norm_num
+  have hT1 : ∀ z : ℝ, 3 / 2 ≤ z → z ≤ 3 → (cta_det.tighten 0).cons 1 z = z := by
+    intro z hz1 hz3
+    refine cfn_step_eq_of_kkt hV₂ (cfn_cons_good hV₂ 0) ⟨?_, ?_, fun h => ?_⟩
+    · change z ≤ z + 0 / 1; norm_num
+    · rw [cta_det_cont]; simp only [cons]; linarith
+    · change z < z + 0 / 1 at h; norm_num at h
+  obtain ⟨κ, h, hg⟩ := cta_det_good_tight
+  refine ⟨?_, ?_, ?_, ?_⟩
+  · refine cfn_step_eq_of_kkt hV (cfn_cons_good hV 1) ⟨?_, ?_, fun h => ?_⟩
+    · change (2 : ℝ) ≤ 1 + 1 / 1; norm_num
+    · rw [hc0, cta_det_cont, show (1 : ℝ) - 2 + 3 = 2 by norm_num, hL1]; norm_num
+    · change (2 : ℝ) < 1 + 1 / 1 at h; norm_num at h
+  · refine cfn_step_eq_of_kkt hV (cfn_cons_good hV 1) ⟨?_, ?_, fun h => ?_⟩
+    · change (5 / 2 : ℝ) ≤ 3 / 2 + 1 / 1; norm_num
+    · rw [hc0, cta_det_cont, show (3 / 2 : ℝ) - 5 / 2 + 3 = 2 by norm_num, hL1]
+    · change (5 / 2 : ℝ) < 3 / 2 + 1 / 1 at h; norm_num at h
+  · refine cfn_step_eq_of_kkt hV hg ⟨?_, ?_, fun h => ?_⟩
+    · change (2 : ℝ) ≤ 1 + 1 / 1; norm_num
+    · rw [hc0, cta_det_cont, show (1 : ℝ) - 2 + 3 = 2 by norm_num, hT1 2 (by norm_num)
+        (by norm_num)]
+    · change (2 : ℝ) < 1 + 1 / 1 at h; norm_num at h
+  · refine cfn_step_eq_of_kkt hV hg ⟨?_, ?_, fun _ => ?_⟩
+    · change (9 / 4 : ℝ) ≤ 3 / 2 + 1 / 1; norm_num
+    · rw [hc0, cta_det_cont, show (3 / 2 : ℝ) - 9 / 4 + 3 = 9 / 4 by norm_num,
+        hT1 (9 / 4) (by norm_num) (by norm_num)]
+    · rw [hc0, cta_det_cont, show (3 / 2 : ℝ) - 9 / 4 + 3 = 9 / 4 by norm_num,
+        hT1 (9 / 4) (by norm_num) (by norm_num)]
+
+/-- **Tightening the limit at the next date alone can lower today's MPC** (the single-date step
+of a reverse-chronological decomposition fails). In the deterministic household `cta_det`, with
+two periods left and today's limit `a = 1`, tightening only the next date's limit to `0` makes
+consumption rise by `1/4` on `[1, 3/2]` instead of `1/2`: the household saves more today, so
+today's limit stops binding at lower cash (Carroll–Holm–Kimball's hidden kink). With one income
+state every certainty equivalent is the identity, so this holds for every utility, CRRA
+included. -/
+theorem cta_link_mpc_counterexample :
+    cta_det.step ((cta_det.tighten 0).cons 1) (3 / 2) - cta_det.step ((cta_det.tighten 0).cons 1) 1
+      < cta_det.cons 2 (3 / 2) - cta_det.cons 2 1 := by
+  obtain ⟨h1, h2, h3, h4⟩ := cta_det_values
+  rw [h1, h2, h3, h4]; norm_num
 
 end AKMM.Consumption

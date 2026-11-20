@@ -207,5 +207,26 @@ December 2025), Chapter 11, Consumption (G. L. Violante), pp. 287–323. Lean na
     and loses the monotonicity. No counterexample is known: in exact computations for quadratic
     utility and accurate numerical ones for CRRA (two periods before the end by nested root
     finding, up to six by the endogenous grid method, `σ` from `0.1` to `30`) the comparison
-    always held. CHK's own concavification theorem adds constraints one date at a time in reverse
-    chronological order and does not cover a limit tightened at every date.
+    always held. Two further routes for CRRA fail, for reasons that are proved or exact.
+    (a) *Single-date tightenings in reverse chronological order.* Tightening `a₁ → a₂` at every
+    date is the chain of economies in which the last `k` dates have the limit `a₂`. Each link
+    tightens one date while the earlier dates keep `a₁`, and the link itself can lower today's MPC,
+    for every utility: in a deterministic household, tightening only the next date's limit lowers
+    the rise in consumption on `[1, 3/2]` from `1/2` to `1/4` (`cta_link_mpc_counterexample`,
+    `cta_det_values`). The household saves more today, so today's limit stops binding at lower
+    cash. This is CHK's hidden kink (their Figure on how a future constraint moves a current
+    kink). CHK's concavification theorem (their Theorem 3) adds constraints in reverse
+    chronological order with no constraint yet imposed at earlier dates. A new constraint at a
+    date that already has one is handled by dropping the constraint it makes irrelevant and
+    starting the construction again. It is also a perfect-foresight result. With risk, their
+    Theorem 4 and Corollary 2 compare only with the linear unconstrained, riskless function. So
+    neither the tightening of an existing limit at one date with earlier constraints in place nor
+    its composition is covered, and the composition fails link by link. (b) *An order on marginal
+    values.* Already one period before the end, `v = u′(c)` gives `h = ṽ ∘ v⁻¹` (tight as a
+    function of loose) with slope `u″(c̃)c̃′/(u″(c)c′)`. This slope jumps up at the loose kink
+    (`c′` falls from `1`, `c̃′` stays `1`) and down at the tight kink, which lies strictly above
+    it. So `h` is neither convex nor concave, for every utility, and no such order can be the
+    invariant. Holm (Norges Bank Working Paper 14/2016, Theorem 2) proves the MPC increase for a
+    higher "cost of the liquidity constraint", HARA utility, but in continuous time, over an
+    infinite horizon and with deterministic income. It does not reach the finite-horizon,
+    discrete-time household with i.i.d. income here.
