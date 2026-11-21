@@ -1,0 +1,5145 @@
+{
+  "checked_at_utc": "2026-11-04T22:57:17.741186+00:00",
+  "theorems": 439,
+  "module_theorems": {
+    "DifferenceEquations/Basics.lean": 3,
+    "DifferenceEquations/Scalar.lean": 61,
+    "DifferenceEquations/LagOperators.lean": 20,
+    "DifferenceEquations/SecondOrder.lean": 36,
+    "DifferenceEquations/Triangular.lean": 14,
+    "DifferenceEquations/Spectral.lean": 16,
+    "DifferenceEquations/RealSplitting.lean": 24,
+    "DifferenceEquations/Dichotomy.lean": 16,
+    "DifferenceEquations/LinearSystems.lean": 28,
+    "DifferenceEquations/LagMatrix.lean": 4,
+    "DifferenceEquations/BlockSplit.lean": 9,
+    "DifferenceEquations/Nonsingular.lean": 35,
+    "DifferenceEquations/Indeterminacy.lean": 8,
+    "DifferenceEquations/QZ.lean": 27,
+    "DifferenceEquations/Singular.lean": 48,
+    "DifferenceEquations/PhaseDiagram.lean": 39,
+    "DifferenceEquations/Nonlinear.lean": 16,
+    "DifferenceEquations/Exercises.lean": 35
+  },
+  "audited_declarations": 510,
+  "declarations": [
+    {
+      "name": "Miao.DifferenceEquations.IsSolution",
+      "kind": "def",
+      "module": "DifferenceEquations/Basics.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.IsRegular",
+      "kind": "def",
+      "module": "DifferenceEquations/Basics.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.EventuallyConst",
+      "kind": "def",
+      "module": "DifferenceEquations/Basics.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.IsStableSeq",
+      "kind": "def",
+      "module": "DifferenceEquations/Basics.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.IsSteadyStateOf",
+      "kind": "def",
+      "module": "DifferenceEquations/Basics.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.IsAsympStable",
+      "kind": "def",
+      "module": "DifferenceEquations/Basics.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.basin",
+      "kind": "def",
+      "module": "DifferenceEquations/Basics.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.IsGloballyStable",
+      "kind": "def",
+      "module": "DifferenceEquations/Basics.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.IsStableMatrix",
+      "kind": "def",
+      "module": "DifferenceEquations/Basics.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.isGloballyStable_iff_basin",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Basics.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.isAsympStable_iff_basin",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Basics.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.isStableSeq_iff_bddAbove",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Basics.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.IsScalarSol",
+      "kind": "def",
+      "module": "DifferenceEquations/Scalar.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.BddSeq",
+      "kind": "def",
+      "module": "DifferenceEquations/Scalar.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.bddSeq_iff_isStableSeq",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Scalar.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.bddSeq_of_tendsto",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Scalar.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.BddSeq.exists_nonneg",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Scalar.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.geom_eq",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Scalar.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.abs_pow_mul_tendsto_atTop",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Scalar.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.pow_mul_tendsto_zero_iff",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Scalar.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.geom_bdd_iff",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Scalar.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.pow_mul_tendsto_zero_of_bdd",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Scalar.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.bddSeq_of_forced",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Scalar.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.tendsto_zero_of_forced",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Scalar.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.eq_1_2_steady_state",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Scalar.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.eq_1_2_no_steady_state_of_b_one",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Scalar.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.eq_1_3",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Scalar.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.eq_1_3_globallyStable",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Scalar.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.eq_1_3_tendsto",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Scalar.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.eq_1_3_diverges",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Scalar.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.eq_1_3_bdd_iff",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Scalar.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.eq_1_4",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Scalar.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.not_tendsto_neg_one_pow",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Scalar.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.eq_1_5_counterexample",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Scalar.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.eq_1_5_tendsto",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Scalar.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.eq_1_5_bdd",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Scalar.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.eq_1_5_sub_tendsto",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Scalar.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.eq_1_5_b_one_formula",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Scalar.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.eq_1_5_b_one_tendsto_iff",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Scalar.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.eq_1_5_b_one_limit_sub",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Scalar.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.eq_1_5_b_neg_one_counterexample",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Scalar.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.eq_1_5_b_neg_one_unique",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Scalar.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.eq_1_6",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Scalar.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.fwdSol",
+      "kind": "def",
+      "module": "DifferenceEquations/Scalar.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.abs_one_div_lt_one",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Scalar.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.eq_1_8_summable",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Scalar.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.eq_1_8_isScalarSol",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Scalar.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.eq_1_8_bdd",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Scalar.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.eq_1_7_of_bdd",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Scalar.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.eq_1_8_transversality",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Scalar.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.eq_1_8_unique_of_transversality",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Scalar.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.eq_1_8_unique_bdd",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Scalar.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.eq_1_8",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Scalar.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.eq_1_9",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Scalar.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.eq_1_9_every_solution",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Scalar.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.eq_1_8_others_diverge",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Scalar.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.eq_1_8_not_summable",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Scalar.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.eq_1_9_bubble_stable",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Scalar.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.example_1_1_1_recursion",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Scalar.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.example_1_1_1_backward",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Scalar.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.example_1_1_1_tendsto_iff",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Scalar.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.example_1_1_1_abs_a_lt_one_iff",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Scalar.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.example_1_1_1_forward",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Scalar.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.example_1_1_1_forward_limit",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Scalar.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.example_1_1_1_isScalarSol",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Scalar.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.example_1_1_1_bubbles",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Scalar.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.example_1_1_1_unique_bdd",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Scalar.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.divTax",
+      "kind": "def",
+      "module": "DifferenceEquations/Scalar.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.taxPath",
+      "kind": "def",
+      "module": "DifferenceEquations/Scalar.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.sum_div_pow_eq",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Scalar.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.example_1_1_2_p0_forward",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Scalar.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.example_1_1_2_pT",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Scalar.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.example_1_1_2_p0",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Scalar.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.example_1_1_2_solves",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Scalar.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.example_1_1_2_const",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Scalar.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.example_1_1_2_unique",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Scalar.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.example_1_1_2_drop",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Scalar.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.example_1_1_2_decreasing",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Scalar.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.lagOp",
+      "kind": "def",
+      "module": "DifferenceEquations/LagOperators.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.BddZSeq",
+      "kind": "def",
+      "module": "DifferenceEquations/LagOperators.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.lagOp_lagOp",
+      "kind": "theorem",
+      "module": "DifferenceEquations/LagOperators.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.lagOp_zero",
+      "kind": "theorem",
+      "module": "DifferenceEquations/LagOperators.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.lagOp_iterate",
+      "kind": "theorem",
+      "module": "DifferenceEquations/LagOperators.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.lagOp_neg_lagOp",
+      "kind": "theorem",
+      "module": "DifferenceEquations/LagOperators.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.lagOp_const",
+      "kind": "theorem",
+      "module": "DifferenceEquations/LagOperators.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.oneSubLag",
+      "kind": "def",
+      "module": "DifferenceEquations/LagOperators.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.geomLagSum",
+      "kind": "def",
+      "module": "DifferenceEquations/LagOperators.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.geomLagSum2",
+      "kind": "def",
+      "module": "DifferenceEquations/LagOperators.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.summable_of_abs_le",
+      "kind": "theorem",
+      "module": "DifferenceEquations/LagOperators.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.abs_tsum_le_of_abs_le",
+      "kind": "theorem",
+      "module": "DifferenceEquations/LagOperators.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.summable_succ_mul_geom",
+      "kind": "theorem",
+      "module": "DifferenceEquations/LagOperators.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.abs_lagOp_le",
+      "kind": "theorem",
+      "module": "DifferenceEquations/LagOperators.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.geomLagSum_summable",
+      "kind": "theorem",
+      "module": "DifferenceEquations/LagOperators.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.geomLagSum2_summable",
+      "kind": "theorem",
+      "module": "DifferenceEquations/LagOperators.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.geomLagSum_bdd",
+      "kind": "theorem",
+      "module": "DifferenceEquations/LagOperators.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.geomLagSum2_bdd",
+      "kind": "theorem",
+      "module": "DifferenceEquations/LagOperators.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.geomLagSum_eq",
+      "kind": "theorem",
+      "module": "DifferenceEquations/LagOperators.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.eq_zero_of_bdd_of_lag",
+      "kind": "theorem",
+      "module": "DifferenceEquations/LagOperators.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.lag_inverse_geom",
+      "kind": "theorem",
+      "module": "DifferenceEquations/LagOperators.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.oneSubLag_geomLagSum2",
+      "kind": "theorem",
+      "module": "DifferenceEquations/LagOperators.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.lag_inverse_geom_sq",
+      "kind": "theorem",
+      "module": "DifferenceEquations/LagOperators.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.lag_scalar_geom",
+      "kind": "theorem",
+      "module": "DifferenceEquations/LagOperators.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.lag_scalar_geom_sq",
+      "kind": "theorem",
+      "module": "DifferenceEquations/LagOperators.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.IsSecondOrderSol",
+      "kind": "def",
+      "module": "DifferenceEquations/SecondOrder.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.IsHomSol",
+      "kind": "def",
+      "module": "DifferenceEquations/SecondOrder.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.char_roots_iff",
+      "kind": "theorem",
+      "module": "DifferenceEquations/SecondOrder.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.char_roots_exist",
+      "kind": "theorem",
+      "module": "DifferenceEquations/SecondOrder.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.eq_1_15",
+      "kind": "theorem",
+      "module": "DifferenceEquations/SecondOrder.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.superposition",
+      "kind": "theorem",
+      "module": "DifferenceEquations/SecondOrder.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.sub_isHomSol",
+      "kind": "theorem",
+      "module": "DifferenceEquations/SecondOrder.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.IsHomSol.ext",
+      "kind": "theorem",
+      "module": "DifferenceEquations/SecondOrder.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.hom_factor",
+      "kind": "theorem",
+      "module": "DifferenceEquations/SecondOrder.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.sol_factor",
+      "kind": "theorem",
+      "module": "DifferenceEquations/SecondOrder.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.eq_1_17",
+      "kind": "theorem",
+      "module": "DifferenceEquations/SecondOrder.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.eq_1_17_general",
+      "kind": "theorem",
+      "module": "DifferenceEquations/SecondOrder.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.case1_sink",
+      "kind": "theorem",
+      "module": "DifferenceEquations/SecondOrder.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.case1_sink_bdd",
+      "kind": "theorem",
+      "module": "DifferenceEquations/SecondOrder.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.case1_sink_indeterminate",
+      "kind": "theorem",
+      "module": "DifferenceEquations/SecondOrder.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.case1_source",
+      "kind": "theorem",
+      "module": "DifferenceEquations/SecondOrder.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.case1_source_not_tendsto",
+      "kind": "theorem",
+      "module": "DifferenceEquations/SecondOrder.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.saddlePath",
+      "kind": "def",
+      "module": "DifferenceEquations/SecondOrder.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.case1_saddle_eq",
+      "kind": "theorem",
+      "module": "DifferenceEquations/SecondOrder.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.case1_saddle_isSol",
+      "kind": "theorem",
+      "module": "DifferenceEquations/SecondOrder.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.case1_saddle_bdd",
+      "kind": "theorem",
+      "module": "DifferenceEquations/SecondOrder.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.case1_saddle_unique",
+      "kind": "theorem",
+      "module": "DifferenceEquations/SecondOrder.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.case1_saddle",
+      "kind": "theorem",
+      "module": "DifferenceEquations/SecondOrder.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.case2_solution",
+      "kind": "theorem",
+      "module": "DifferenceEquations/SecondOrder.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.case2_verification",
+      "kind": "theorem",
+      "module": "DifferenceEquations/SecondOrder.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.case2_general",
+      "kind": "theorem",
+      "module": "DifferenceEquations/SecondOrder.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.case2_general_counterexample",
+      "kind": "theorem",
+      "module": "DifferenceEquations/SecondOrder.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.case2_stable_iff",
+      "kind": "theorem",
+      "module": "DifferenceEquations/SecondOrder.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.case3_roots",
+      "kind": "theorem",
+      "module": "DifferenceEquations/SecondOrder.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.case3_complex_form",
+      "kind": "theorem",
+      "module": "DifferenceEquations/SecondOrder.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.case3_conj_real",
+      "kind": "theorem",
+      "module": "DifferenceEquations/SecondOrder.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.case3_real_form",
+      "kind": "theorem",
+      "module": "DifferenceEquations/SecondOrder.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.case3_solution",
+      "kind": "theorem",
+      "module": "DifferenceEquations/SecondOrder.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.case3_general",
+      "kind": "theorem",
+      "module": "DifferenceEquations/SecondOrder.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.case3_damped_form",
+      "kind": "theorem",
+      "module": "DifferenceEquations/SecondOrder.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.case3_damped",
+      "kind": "theorem",
+      "module": "DifferenceEquations/SecondOrder.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.case3_explosive",
+      "kind": "theorem",
+      "module": "DifferenceEquations/SecondOrder.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.eq_1_19",
+      "kind": "theorem",
+      "module": "DifferenceEquations/SecondOrder.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.eq_1_19_of_system",
+      "kind": "theorem",
+      "module": "DifferenceEquations/SecondOrder.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.tendsto_zero_of_le_rec",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Triangular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.tendsto_zero_of_rec",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Triangular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.triangular_step",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Triangular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.triangular_invariant",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Triangular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.triangular_tendsto_iff",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Triangular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.mclm",
+      "kind": "def",
+      "module": "DifferenceEquations/Triangular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.mclm_apply",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Triangular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.norm_mulVec_le",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Triangular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.norm_mclm_mul_le",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Triangular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.tendsto_norm_mclm_pow",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Triangular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.summable_of_tendsto_zero",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Triangular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.diag_mul_of_upper",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Triangular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.upper_inv",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Triangular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.diag_inv_of_upper",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Triangular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.summable_norm_pow_of_triangular",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Triangular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.stableSubspace",
+      "kind": "def",
+      "module": "DifferenceEquations/Spectral.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.unstableSubspace",
+      "kind": "def",
+      "module": "DifferenceEquations/Spectral.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.convSubspace",
+      "kind": "def",
+      "module": "DifferenceEquations/Spectral.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.mem_convSubspace",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Spectral.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.tendsto_of_mem_maxGenEigenspace",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Spectral.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.not_tendsto_of_eigen",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Spectral.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.stable_le_conv",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Spectral.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.stable_sup_unstable",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Spectral.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.disjoint_stable_unstable",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Spectral.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.unstable_invariant",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Spectral.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.tendsto_iff_mem_stable",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Spectral.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.stable_eq_top",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Spectral.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.cplx",
+      "kind": "def",
+      "module": "DifferenceEquations/Spectral.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.cplx_sub",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Spectral.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.cplx_add",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Spectral.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.tendsto_cplx_iff",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Spectral.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.cplxEnd",
+      "kind": "def",
+      "module": "DifferenceEquations/Spectral.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.cplxEnd_pow_cplx",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Spectral.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.hasEigenvalue_cplxEnd_iff",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Spectral.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.finrank_biSup_maxGenEigenspace",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Spectral.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.finrank_stableSubspace",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Spectral.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.conjV",
+      "kind": "def",
+      "module": "DifferenceEquations/RealSplitting.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.conjV_conjV",
+      "kind": "theorem",
+      "module": "DifferenceEquations/RealSplitting.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.conjV_add",
+      "kind": "theorem",
+      "module": "DifferenceEquations/RealSplitting.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.conjV_sub",
+      "kind": "theorem",
+      "module": "DifferenceEquations/RealSplitting.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.conjV_smul",
+      "kind": "theorem",
+      "module": "DifferenceEquations/RealSplitting.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.conjV_zero",
+      "kind": "theorem",
+      "module": "DifferenceEquations/RealSplitting.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.conjV_cplx",
+      "kind": "theorem",
+      "module": "DifferenceEquations/RealSplitting.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.eq_cplx_re",
+      "kind": "theorem",
+      "module": "DifferenceEquations/RealSplitting.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.cplxEnd_conjV",
+      "kind": "theorem",
+      "module": "DifferenceEquations/RealSplitting.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.pow_sub_conjV",
+      "kind": "theorem",
+      "module": "DifferenceEquations/RealSplitting.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.conjV_mem_maxGenEigenspace",
+      "kind": "theorem",
+      "module": "DifferenceEquations/RealSplitting.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.conjV_mem_biSup",
+      "kind": "theorem",
+      "module": "DifferenceEquations/RealSplitting.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.conjV_mem_stable",
+      "kind": "theorem",
+      "module": "DifferenceEquations/RealSplitting.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.conjV_mem_unstable",
+      "kind": "theorem",
+      "module": "DifferenceEquations/RealSplitting.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.cplxL",
+      "kind": "def",
+      "module": "DifferenceEquations/RealSplitting.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.stableR",
+      "kind": "def",
+      "module": "DifferenceEquations/RealSplitting.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.unstableR",
+      "kind": "def",
+      "module": "DifferenceEquations/RealSplitting.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.mem_stableR",
+      "kind": "theorem",
+      "module": "DifferenceEquations/RealSplitting.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.mem_unstableR",
+      "kind": "theorem",
+      "module": "DifferenceEquations/RealSplitting.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.mem_stableR_iff",
+      "kind": "theorem",
+      "module": "DifferenceEquations/RealSplitting.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.cplx_mulVec",
+      "kind": "theorem",
+      "module": "DifferenceEquations/RealSplitting.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.stableR_invariant",
+      "kind": "theorem",
+      "module": "DifferenceEquations/RealSplitting.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.unstableR_invariant",
+      "kind": "theorem",
+      "module": "DifferenceEquations/RealSplitting.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.isCompl_stableR_unstableR",
+      "kind": "theorem",
+      "module": "DifferenceEquations/RealSplitting.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.linearIndependent_cplx",
+      "kind": "theorem",
+      "module": "DifferenceEquations/RealSplitting.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.finrank_le_of_cplx",
+      "kind": "theorem",
+      "module": "DifferenceEquations/RealSplitting.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.finrank_stableR",
+      "kind": "theorem",
+      "module": "DifferenceEquations/RealSplitting.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.unstableR_ker",
+      "kind": "theorem",
+      "module": "DifferenceEquations/RealSplitting.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.uniform_bound_of_basis",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Dichotomy.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.exists_bound_of_tendsto",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Dichotomy.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.mem_maxGen_smul",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Dichotomy.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.projS",
+      "kind": "def",
+      "module": "DifferenceEquations/Dichotomy.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.projU",
+      "kind": "def",
+      "module": "DifferenceEquations/Dichotomy.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.projS_add_projU",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Dichotomy.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.projS_mem",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Dichotomy.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.projU_mem",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Dichotomy.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.projS_of_mem",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Dichotomy.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.projS_of_mem_unstable",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Dichotomy.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.projU_of_mem",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Dichotomy.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.projU_of_mem_stable",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Dichotomy.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.projS_mulVec",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Dichotomy.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.projU_mulVec",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Dichotomy.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.pow_mulVec_mem_stableR",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Dichotomy.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.tendsto_scaled_of_stable",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Dichotomy.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.scaled_pow_cplx",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Dichotomy.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.stable_bound",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Dichotomy.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.isStableMatrix_iff_roots",
+      "kind": "theorem",
+      "module": "DifferenceEquations/LinearSystems.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.tendsto_of_isStableMatrix",
+      "kind": "theorem",
+      "module": "DifferenceEquations/LinearSystems.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.isStableMatrix_of_tendsto",
+      "kind": "theorem",
+      "module": "DifferenceEquations/LinearSystems.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.isStableMatrix_iff_tendsto",
+      "kind": "theorem",
+      "module": "DifferenceEquations/LinearSystems.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.HasGeomDecay",
+      "kind": "def",
+      "module": "DifferenceEquations/LinearSystems.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.hasGeomDecay_of_isStableMatrix",
+      "kind": "theorem",
+      "module": "DifferenceEquations/LinearSystems.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.isStableMatrix_inv",
+      "kind": "theorem",
+      "module": "DifferenceEquations/LinearSystems.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.footnote_2",
+      "kind": "theorem",
+      "module": "DifferenceEquations/LinearSystems.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.isRegular_of_isUnit_det",
+      "kind": "theorem",
+      "module": "DifferenceEquations/LinearSystems.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.example_scalar_not_regular",
+      "kind": "theorem",
+      "module": "DifferenceEquations/LinearSystems.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.example_scalar_no_solution",
+      "kind": "theorem",
+      "module": "DifferenceEquations/LinearSystems.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.remark_nonregular_no_solution",
+      "kind": "theorem",
+      "module": "DifferenceEquations/LinearSystems.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.remark_nonregular_counterexample",
+      "kind": "theorem",
+      "module": "DifferenceEquations/LinearSystems.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.eq_1_21",
+      "kind": "theorem",
+      "module": "DifferenceEquations/LinearSystems.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.eq_1_21_solution",
+      "kind": "theorem",
+      "module": "DifferenceEquations/LinearSystems.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.eq_1_21_steadyState",
+      "kind": "theorem",
+      "module": "DifferenceEquations/LinearSystems.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.isSteadyStateOf_of_not_mem_range",
+      "kind": "theorem",
+      "module": "DifferenceEquations/LinearSystems.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.isStableSeq_iff_exists_le",
+      "kind": "theorem",
+      "module": "DifferenceEquations/LinearSystems.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.exists_mulVec_bound",
+      "kind": "theorem",
+      "module": "DifferenceEquations/LinearSystems.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.bounded_mulVec",
+      "kind": "theorem",
+      "module": "DifferenceEquations/LinearSystems.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.norm_sum_type_le",
+      "kind": "theorem",
+      "module": "DifferenceEquations/LinearSystems.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.norm_comp_inl_le",
+      "kind": "theorem",
+      "module": "DifferenceEquations/LinearSystems.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.norm_comp_inr_le",
+      "kind": "theorem",
+      "module": "DifferenceEquations/LinearSystems.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.backward_sol_eq",
+      "kind": "theorem",
+      "module": "DifferenceEquations/LinearSystems.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.bounded_backward",
+      "kind": "theorem",
+      "module": "DifferenceEquations/LinearSystems.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.summable_geom_series",
+      "kind": "theorem",
+      "module": "DifferenceEquations/LinearSystems.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.mulVec_tsum_rs",
+      "kind": "theorem",
+      "module": "DifferenceEquations/LinearSystems.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.tsum_geom_series_succ",
+      "kind": "theorem",
+      "module": "DifferenceEquations/LinearSystems.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.eq_zero_of_bounded_orbit",
+      "kind": "theorem",
+      "module": "DifferenceEquations/LinearSystems.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.lagSeries",
+      "kind": "def",
+      "module": "DifferenceEquations/LagMatrix.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.lagSeries_summable",
+      "kind": "theorem",
+      "module": "DifferenceEquations/LagMatrix.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.lagSeries_rec",
+      "kind": "theorem",
+      "module": "DifferenceEquations/LagMatrix.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.lagSeries_unique",
+      "kind": "theorem",
+      "module": "DifferenceEquations/LagMatrix.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.lag_matrix_formula",
+      "kind": "theorem",
+      "module": "DifferenceEquations/LagMatrix.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.IsRealBlockSplit",
+      "kind": "def",
+      "module": "DifferenceEquations/BlockSplit.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.blockDiag_mulVec_inl",
+      "kind": "theorem",
+      "module": "DifferenceEquations/BlockSplit.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.blockDiag_mulVec_inr",
+      "kind": "theorem",
+      "module": "DifferenceEquations/BlockSplit.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.mulVec_comp_inl",
+      "kind": "theorem",
+      "module": "DifferenceEquations/BlockSplit.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.mulVec_comp_inr",
+      "kind": "theorem",
+      "module": "DifferenceEquations/BlockSplit.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.IsRealBlockSplit.mul_R",
+      "kind": "theorem",
+      "module": "DifferenceEquations/BlockSplit.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.card_add_card_of_inv",
+      "kind": "theorem",
+      "module": "DifferenceEquations/BlockSplit.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.IsRealBlockSplit.isUnit_one_sub",
+      "kind": "theorem",
+      "module": "DifferenceEquations/BlockSplit.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.eigen_transport",
+      "kind": "theorem",
+      "module": "DifferenceEquations/BlockSplit.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.exists_real_block_split",
+      "kind": "theorem",
+      "module": "DifferenceEquations/BlockSplit.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.eq_1_22",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Nonsingular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.exists_sol_rec",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Nonsingular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.sol_rec_unique",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Nonsingular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.exists_unique_solution",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Nonsingular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.eq_1_24",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Nonsingular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.eq_1_25",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Nonsingular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.isUnit_sub_det",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Nonsingular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.xbar_eq",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Nonsingular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.theorem_1_4_1",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Nonsingular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.forwardU",
+      "kind": "def",
+      "module": "DifferenceEquations/Nonsingular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.forwardU_rec",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Nonsingular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.forwardU_bounded",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Nonsingular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.forwardU_unique",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Nonsingular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.split_rec_inl",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Nonsingular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.split_rec_inr",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Nonsingular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.bounded_of_split",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Nonsingular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.eq_1_29",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Nonsingular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.eq_1_30",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Nonsingular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.eq_1_31",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Nonsingular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.eq_1_32",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Nonsingular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.bk_exists",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Nonsingular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.bk_unique",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Nonsingular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.theorem_1_4_2",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Nonsingular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.blocks_of_inv",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Nonsingular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.rks_inv",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Nonsingular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.puy_inv_of_rks",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Nonsingular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.bk_order_iff",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Nonsingular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.eq_1_33",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Nonsingular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.corollary_1_4_1",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Nonsingular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.eq_1_34",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Nonsingular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.stable_initial_iff",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Nonsingular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.stableArm",
+      "kind": "def",
+      "module": "DifferenceEquations/Nonsingular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.mem_stableArm",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Nonsingular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.stableArm_iff",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Nonsingular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.finrank_stableArm",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Nonsingular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.stable_initial_translate",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Nonsingular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.remark_unit_root",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Nonsingular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.homog_stable_mem_range",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Indeterminacy.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.theorem_1_4_3_gt",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Indeterminacy.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.theorem_1_4_3_lt",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Indeterminacy.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.theorem_1_4_3_lt_exists",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Indeterminacy.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.theorem_1_4_3_printed_lt",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Indeterminacy.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.hasEigenvalue_smul_one",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Indeterminacy.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.theorem_1_4_3_printed_gt_false",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Indeterminacy.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.theorem_1_4_3_lt_counterexample",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Indeterminacy.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.IsGenEigenvector",
+      "kind": "def",
+      "module": "DifferenceEquations/QZ.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.IsGenEigenvalue",
+      "kind": "def",
+      "module": "DifferenceEquations/QZ.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.genEigenvalues",
+      "kind": "def",
+      "module": "DifferenceEquations/QZ.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.isGenEigenvalue_iff_det",
+      "kind": "theorem",
+      "module": "DifferenceEquations/QZ.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.det_ne_zero_of_unitary",
+      "kind": "theorem",
+      "module": "DifferenceEquations/QZ.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.conj_lincomb",
+      "kind": "theorem",
+      "module": "DifferenceEquations/QZ.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.det_conj_lincomb",
+      "kind": "theorem",
+      "module": "DifferenceEquations/QZ.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.upper_lincomb",
+      "kind": "theorem",
+      "module": "DifferenceEquations/QZ.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.det_upper_lincomb",
+      "kind": "theorem",
+      "module": "DifferenceEquations/QZ.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.diag_ne_zero_of_regular",
+      "kind": "theorem",
+      "module": "DifferenceEquations/QZ.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.genEigenvalues_eq_diag",
+      "kind": "theorem",
+      "module": "DifferenceEquations/QZ.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.exists_eigenPair",
+      "kind": "theorem",
+      "module": "DifferenceEquations/QZ.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.exists_unitary_col",
+      "kind": "theorem",
+      "module": "DifferenceEquations/QZ.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.deflate",
+      "kind": "theorem",
+      "module": "DifferenceEquations/QZ.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.det_of_col_zero",
+      "kind": "theorem",
+      "module": "DifferenceEquations/QZ.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.blockOne",
+      "kind": "def",
+      "module": "DifferenceEquations/QZ.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.blockOne_mul_zero",
+      "kind": "theorem",
+      "module": "DifferenceEquations/QZ.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.blockOne_mul_succ",
+      "kind": "theorem",
+      "module": "DifferenceEquations/QZ.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.mul_blockOne_zero",
+      "kind": "theorem",
+      "module": "DifferenceEquations/QZ.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.mul_blockOne_succ",
+      "kind": "theorem",
+      "module": "DifferenceEquations/QZ.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.blockOne_mul_blockOne",
+      "kind": "theorem",
+      "module": "DifferenceEquations/QZ.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.star_blockOne",
+      "kind": "theorem",
+      "module": "DifferenceEquations/QZ.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.blockOne_one",
+      "kind": "theorem",
+      "module": "DifferenceEquations/QZ.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.blockOne_mem",
+      "kind": "theorem",
+      "module": "DifferenceEquations/QZ.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.assemble_apply",
+      "kind": "theorem",
+      "module": "DifferenceEquations/QZ.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.assemble_upper",
+      "kind": "theorem",
+      "module": "DifferenceEquations/QZ.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.proportional_of_cross",
+      "kind": "theorem",
+      "module": "DifferenceEquations/QZ.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.ScaleInvariant",
+      "kind": "def",
+      "module": "DifferenceEquations/QZ.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.exists_qz_ordered",
+      "kind": "theorem",
+      "module": "DifferenceEquations/QZ.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.theorem_1_4_4",
+      "kind": "theorem",
+      "module": "DifferenceEquations/QZ.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.scaleInvariant_stable",
+      "kind": "theorem",
+      "module": "DifferenceEquations/QZ.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.theorem_1_4_4_stable",
+      "kind": "theorem",
+      "module": "DifferenceEquations/QZ.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.norm_mulVec_le_sum",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Singular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.isStableSeq_of_le",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Singular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.IsStableSeq.bound",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Singular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.IsStableSeq.mulVec",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Singular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.fwdSum",
+      "kind": "def",
+      "module": "DifferenceEquations/Singular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.summable_fwd",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Singular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.norm_fwdSum_le",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Singular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.fwdSum_rec",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Singular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.eq_fwdSum",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Singular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.isStableSeq_of_rec",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Singular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.IsStableSeq.add",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Singular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.IsStableSeq.sub",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Singular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.IsStableSeq.shift",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Singular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.norm_comp_le",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Singular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.IsStableSeq.comp",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Singular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.isStableSeq_append",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Singular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.upper_castAdd",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Singular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.upper_natAdd",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Singular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.mulVec_castAdd",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Singular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.mulVec_natAdd",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Singular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.eq_1_36",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Singular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.solve_fwd",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Singular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.eq_1_38",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Singular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.det_S11_ne_zero",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Singular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.det_T22_ne_zero",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Singular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.summable_Ms",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Singular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.summable_Mu",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Singular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.klein_core",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Singular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.klein_homog",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Singular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.eq_1_37",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Singular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.eq_1_39_40",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Singular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.isSolution_iff_transformed",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Singular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.diag_off_circle",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Singular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.theorem_1_4_5",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Singular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.det_sub_ne_zero",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Singular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.corollary_1_4_1_singular",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Singular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.map_ofReal_mulVec",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Singular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.norm_ofReal_vec",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Singular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.isSolution_ofReal_iff",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Singular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.theorem_1_4_5_real",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Singular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.eq_s0",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Singular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.remark_augmented",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Singular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.remark_u_eq_zero",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Singular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.eq_1_37_printed_false",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Singular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.caganA",
+      "kind": "def",
+      "module": "DifferenceEquations/Singular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.caganB",
+      "kind": "def",
+      "module": "DifferenceEquations/Singular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.caganC",
+      "kind": "def",
+      "module": "DifferenceEquations/Singular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.example_cagan_iff",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Singular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.example_cagan_det",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Singular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.example_cagan_regular",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Singular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.example_cagan_genEigenvalues",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Singular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.example_cagan_genEigenvalues_zero",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Singular.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.IsSol22",
+      "kind": "def",
+      "module": "DifferenceEquations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.cp22",
+      "kind": "def",
+      "module": "DifferenceEquations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.disc22",
+      "kind": "def",
+      "module": "DifferenceEquations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.lamLo",
+      "kind": "def",
+      "module": "DifferenceEquations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.lamHi",
+      "kind": "def",
+      "module": "DifferenceEquations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.sVar",
+      "kind": "def",
+      "module": "DifferenceEquations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.disc22_pos",
+      "kind": "theorem",
+      "module": "DifferenceEquations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.cp22_factor",
+      "kind": "theorem",
+      "module": "DifferenceEquations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.cp22_lamLo",
+      "kind": "theorem",
+      "module": "DifferenceEquations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.cp22_lamHi",
+      "kind": "theorem",
+      "module": "DifferenceEquations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.lamLo_lt_lamHi",
+      "kind": "theorem",
+      "module": "DifferenceEquations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.roots22_lt",
+      "kind": "theorem",
+      "module": "DifferenceEquations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.lamLo_gt_neg_one_iff",
+      "kind": "theorem",
+      "module": "DifferenceEquations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.abs_lamLo_lt_one_iff",
+      "kind": "theorem",
+      "module": "DifferenceEquations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.lamLo_lt_m11",
+      "kind": "theorem",
+      "module": "DifferenceEquations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.sVar_step",
+      "kind": "theorem",
+      "module": "DifferenceEquations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.sVar_succ",
+      "kind": "theorem",
+      "module": "DifferenceEquations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.recover22",
+      "kind": "theorem",
+      "module": "DifferenceEquations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.IsSol22.ext",
+      "kind": "theorem",
+      "module": "DifferenceEquations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.bddSeq_lin",
+      "kind": "theorem",
+      "module": "DifferenceEquations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.sHi_zero_of_bdd",
+      "kind": "theorem",
+      "module": "DifferenceEquations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.kSaddle",
+      "kind": "def",
+      "module": "DifferenceEquations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.sHi_zero_iff",
+      "kind": "theorem",
+      "module": "DifferenceEquations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.saddle22",
+      "kind": "theorem",
+      "module": "DifferenceEquations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.saddle22_tendsto",
+      "kind": "theorem",
+      "module": "DifferenceEquations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.saddle22_unique",
+      "kind": "theorem",
+      "module": "DifferenceEquations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.saddle22_unbounded",
+      "kind": "theorem",
+      "module": "DifferenceEquations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.sVar_tendsto",
+      "kind": "theorem",
+      "module": "DifferenceEquations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.saddle22_iff",
+      "kind": "theorem",
+      "module": "DifferenceEquations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.saddle22_only_zero",
+      "kind": "theorem",
+      "module": "DifferenceEquations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.IsPhaseSol",
+      "kind": "def",
+      "module": "DifferenceEquations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.phaseIter",
+      "kind": "def",
+      "module": "DifferenceEquations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.phaseIter_sol",
+      "kind": "theorem",
+      "module": "DifferenceEquations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.phase_tilde",
+      "kind": "theorem",
+      "module": "DifferenceEquations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.phase_delta",
+      "kind": "theorem",
+      "module": "DifferenceEquations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.phase_isocline_x",
+      "kind": "theorem",
+      "module": "DifferenceEquations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.phase_isocline_y",
+      "kind": "theorem",
+      "module": "DifferenceEquations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.phase_steady_state",
+      "kind": "theorem",
+      "module": "DifferenceEquations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.bddSeq_sub_const",
+      "kind": "theorem",
+      "module": "DifferenceEquations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.phase_dev",
+      "kind": "theorem",
+      "module": "DifferenceEquations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.phase_cp_one",
+      "kind": "theorem",
+      "module": "DifferenceEquations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.phase_cp_neg_one",
+      "kind": "theorem",
+      "module": "DifferenceEquations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.phase_roots",
+      "kind": "theorem",
+      "module": "DifferenceEquations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.phase_lamLo_iff",
+      "kind": "theorem",
+      "module": "DifferenceEquations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.phase_saddle",
+      "kind": "theorem",
+      "module": "DifferenceEquations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.phase_saddle_slope",
+      "kind": "theorem",
+      "module": "DifferenceEquations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.phase_saddle_iff",
+      "kind": "theorem",
+      "module": "DifferenceEquations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.phase_counterexample",
+      "kind": "theorem",
+      "module": "DifferenceEquations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.example_1_6_1_steady",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Nonlinear.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.example_1_6_1_linearization",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Nonlinear.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.vec2_eq_iff",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Nonlinear.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.mulVec22",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Nonlinear.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.example_1_6_1_matrix",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Nonlinear.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.example_1_6_1_reduced",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Nonlinear.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.example_1_6_1_trace_det",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Nonlinear.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.example_1_6_1_roots",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Nonlinear.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.example_1_6_1_saddle",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Nonlinear.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.definition_1_6_1",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Nonlinear.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.definition_1_6_1_cycle",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Nonlinear.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.logistic",
+      "kind": "def",
+      "module": "DifferenceEquations/Nonlinear.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.logistic_two",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Nonlinear.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.logistic_fixed_iff",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Nonlinear.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.logistic_two_fixed_iff",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Nonlinear.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.logistic_two_cycle",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Nonlinear.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.logistic_two_cycle_decimals",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Nonlinear.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.IsCagan",
+      "kind": "def",
+      "module": "DifferenceEquations/Exercises.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.cagan_isScalarSol",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Exercises.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.cagan_b_gt_one",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Exercises.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.ex_1_1a",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Exercises.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.ex_1_1a_forward",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Exercises.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.ex_1_1a_rho_one_bdd_iff",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Exercises.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.ex_1_1a_rho_one",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Exercises.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.cagan_money",
+      "kind": "def",
+      "module": "DifferenceEquations/Exercises.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.cagan_path",
+      "kind": "def",
+      "module": "DifferenceEquations/Exercises.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.ex_1_1b_solves",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Exercises.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.cagan_path_const",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Exercises.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.ex_1_1b_unique",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Exercises.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.ex_1_1b_shape",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Exercises.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.IsDornbusch",
+      "kind": "def",
+      "module": "DifferenceEquations/Exercises.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.IsDorn2",
+      "kind": "def",
+      "module": "DifferenceEquations/Exercises.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.pbarD",
+      "kind": "def",
+      "module": "DifferenceEquations/Exercises.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.ebarD",
+      "kind": "def",
+      "module": "DifferenceEquations/Exercises.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.dM11",
+      "kind": "def",
+      "module": "DifferenceEquations/Exercises.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.dLo",
+      "kind": "abbrev",
+      "module": "DifferenceEquations/Exercises.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.dHi",
+      "kind": "abbrev",
+      "module": "DifferenceEquations/Exercises.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.dK",
+      "kind": "abbrev",
+      "module": "DifferenceEquations/Exercises.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.dornIter",
+      "kind": "def",
+      "module": "DifferenceEquations/Exercises.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.dornIter_sol",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Exercises.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.ex_1_2_reduce",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Exercises.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.ex_1_2a",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Exercises.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.ex_1_2_dev_step",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Exercises.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.ex_1_2_dev",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Exercises.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.dorn_cp_one",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Exercises.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.dorn_cp_neg_one",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Exercises.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.dorn_h1",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Exercises.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.dorn_hm",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Exercises.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.dorn_tendsto",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Exercises.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.ex_1_2b_iff",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Exercises.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.ex_1_2b_unique",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Exercises.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.ex_1_2b_counterexample",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Exercises.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.ex_1_2c",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Exercises.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.pbarD_sub",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Exercises.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.ebarD_sub",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Exercises.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.dK_neg",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Exercises.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.ex_1_2d_path",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Exercises.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.ex_1_2d_unique",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Exercises.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.ex_1_2d_overshoot",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Exercises.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.ex_1_2d_monotone",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Exercises.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.dorn_announce_core",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Exercises.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.dornJump",
+      "kind": "def",
+      "module": "DifferenceEquations/Exercises.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.ex_1_2e_jump",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Exercises.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.ex_1_2e_exists",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Exercises.lean"
+    },
+    {
+      "name": "Miao.DifferenceEquations.ex_1_2e_jump_shape",
+      "kind": "theorem",
+      "module": "DifferenceEquations/Exercises.lean"
+    }
+  ],
+  "full_build": "passed",
+  "fresh_source_compilation": "passed",
+  "fresh_source_lint_options": [
+    "-Dlinter.mathlibStandardSet=true",
+    "-Dlinter.style.header=false"
+  ],
+  "axioms": {
+    "Miao.DifferenceEquations.IsSolution": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.IsRegular": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.EventuallyConst": [],
+    "Miao.DifferenceEquations.IsStableSeq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.IsSteadyStateOf": [],
+    "Miao.DifferenceEquations.IsAsympStable": [
+      "propext",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.basin": [
+      "propext",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.IsGloballyStable": [
+      "propext",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.IsStableMatrix": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.isGloballyStable_iff_basin": [
+      "propext",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.isAsympStable_iff_basin": [
+      "propext",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.isStableSeq_iff_bddAbove": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.IsScalarSol": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.BddSeq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.bddSeq_iff_isStableSeq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.bddSeq_of_tendsto": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.BddSeq.exists_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.geom_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.abs_pow_mul_tendsto_atTop": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.pow_mul_tendsto_zero_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.geom_bdd_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.pow_mul_tendsto_zero_of_bdd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.bddSeq_of_forced": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.tendsto_zero_of_forced": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.eq_1_2_steady_state": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.eq_1_2_no_steady_state_of_b_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.eq_1_3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.eq_1_3_globallyStable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.eq_1_3_tendsto": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.eq_1_3_diverges": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.eq_1_3_bdd_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.eq_1_4": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.not_tendsto_neg_one_pow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.eq_1_5_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.eq_1_5_tendsto": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.eq_1_5_bdd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.eq_1_5_sub_tendsto": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.eq_1_5_b_one_formula": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.eq_1_5_b_one_tendsto_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.eq_1_5_b_one_limit_sub": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.eq_1_5_b_neg_one_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.eq_1_5_b_neg_one_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.eq_1_6": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.fwdSol": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.abs_one_div_lt_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.eq_1_8_summable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.eq_1_8_isScalarSol": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.eq_1_8_bdd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.eq_1_7_of_bdd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.eq_1_8_transversality": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.eq_1_8_unique_of_transversality": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.eq_1_8_unique_bdd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.eq_1_8": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.eq_1_9": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.eq_1_9_every_solution": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.eq_1_8_others_diverge": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.eq_1_8_not_summable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.eq_1_9_bubble_stable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.example_1_1_1_recursion": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.example_1_1_1_backward": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.example_1_1_1_tendsto_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.example_1_1_1_abs_a_lt_one_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.example_1_1_1_forward": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.example_1_1_1_forward_limit": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.example_1_1_1_isScalarSol": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.example_1_1_1_bubbles": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.example_1_1_1_unique_bdd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.divTax": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.taxPath": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.sum_div_pow_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.example_1_1_2_p0_forward": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.example_1_1_2_pT": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.example_1_1_2_p0": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.example_1_1_2_solves": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.example_1_1_2_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.example_1_1_2_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.example_1_1_2_drop": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.example_1_1_2_decreasing": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.lagOp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.BddZSeq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.lagOp_lagOp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.lagOp_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.lagOp_iterate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.lagOp_neg_lagOp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.lagOp_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.oneSubLag": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.geomLagSum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.geomLagSum2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.summable_of_abs_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.abs_tsum_le_of_abs_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.summable_succ_mul_geom": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.abs_lagOp_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.geomLagSum_summable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.geomLagSum2_summable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.geomLagSum_bdd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.geomLagSum2_bdd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.geomLagSum_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.eq_zero_of_bdd_of_lag": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.lag_inverse_geom": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.oneSubLag_geomLagSum2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.lag_inverse_geom_sq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.lag_scalar_geom": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.lag_scalar_geom_sq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.IsSecondOrderSol": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.IsHomSol": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.char_roots_iff": [
+      "propext",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.char_roots_exist": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.eq_1_15": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.superposition": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.sub_isHomSol": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.IsHomSol.ext": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.hom_factor": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.sol_factor": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.eq_1_17": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.eq_1_17_general": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.case1_sink": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.case1_sink_bdd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.case1_sink_indeterminate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.case1_source": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.case1_source_not_tendsto": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.saddlePath": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.case1_saddle_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.case1_saddle_isSol": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.case1_saddle_bdd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.case1_saddle_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.case1_saddle": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.case2_solution": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.case2_verification": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.case2_general": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.case2_general_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.case2_stable_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.case3_roots": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.case3_complex_form": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.case3_conj_real": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.case3_real_form": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.case3_solution": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.case3_general": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.case3_damped_form": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.case3_damped": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.case3_explosive": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.eq_1_19": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.eq_1_19_of_system": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.tendsto_zero_of_le_rec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.tendsto_zero_of_rec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.triangular_step": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.triangular_invariant": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.triangular_tendsto_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.mclm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.mclm_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.norm_mulVec_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.norm_mclm_mul_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.tendsto_norm_mclm_pow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.summable_of_tendsto_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.diag_mul_of_upper": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.upper_inv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.diag_inv_of_upper": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.summable_norm_pow_of_triangular": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.stableSubspace": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.unstableSubspace": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.convSubspace": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.mem_convSubspace": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.tendsto_of_mem_maxGenEigenspace": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.not_tendsto_of_eigen": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.stable_le_conv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.stable_sup_unstable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.disjoint_stable_unstable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.unstable_invariant": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.tendsto_iff_mem_stable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.stable_eq_top": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.cplx": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.cplx_sub": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.cplx_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.tendsto_cplx_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.cplxEnd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.cplxEnd_pow_cplx": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.hasEigenvalue_cplxEnd_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.finrank_biSup_maxGenEigenspace": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.finrank_stableSubspace": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.conjV": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.conjV_conjV": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.conjV_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.conjV_sub": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.conjV_smul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.conjV_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.conjV_cplx": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.eq_cplx_re": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.cplxEnd_conjV": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.pow_sub_conjV": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.conjV_mem_maxGenEigenspace": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.conjV_mem_biSup": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.conjV_mem_stable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.conjV_mem_unstable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.cplxL": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.stableR": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.unstableR": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.mem_stableR": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.mem_unstableR": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.mem_stableR_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.cplx_mulVec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.stableR_invariant": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.unstableR_invariant": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.isCompl_stableR_unstableR": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.linearIndependent_cplx": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.finrank_le_of_cplx": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.finrank_stableR": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.unstableR_ker": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.uniform_bound_of_basis": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.exists_bound_of_tendsto": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.mem_maxGen_smul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.projS": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.projU": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.projS_add_projU": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.projS_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.projU_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.projS_of_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.projS_of_mem_unstable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.projU_of_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.projU_of_mem_stable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.projS_mulVec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.projU_mulVec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.pow_mulVec_mem_stableR": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.tendsto_scaled_of_stable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.scaled_pow_cplx": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.stable_bound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.isStableMatrix_iff_roots": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.tendsto_of_isStableMatrix": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.isStableMatrix_of_tendsto": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.isStableMatrix_iff_tendsto": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.HasGeomDecay": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.hasGeomDecay_of_isStableMatrix": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.isStableMatrix_inv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.footnote_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.isRegular_of_isUnit_det": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.example_scalar_not_regular": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.example_scalar_no_solution": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.remark_nonregular_no_solution": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.remark_nonregular_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.eq_1_21": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.eq_1_21_solution": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.eq_1_21_steadyState": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.isSteadyStateOf_of_not_mem_range": [],
+    "Miao.DifferenceEquations.isStableSeq_iff_exists_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.exists_mulVec_bound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.bounded_mulVec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.norm_sum_type_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.norm_comp_inl_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.norm_comp_inr_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.backward_sol_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.bounded_backward": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.summable_geom_series": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.mulVec_tsum_rs": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.tsum_geom_series_succ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.eq_zero_of_bounded_orbit": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.lagSeries": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.lagSeries_summable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.lagSeries_rec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.lagSeries_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.lag_matrix_formula": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.IsRealBlockSplit": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.blockDiag_mulVec_inl": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.blockDiag_mulVec_inr": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.mulVec_comp_inl": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.mulVec_comp_inr": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.IsRealBlockSplit.mul_R": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.card_add_card_of_inv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.IsRealBlockSplit.isUnit_one_sub": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.eigen_transport": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.exists_real_block_split": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.eq_1_22": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.exists_sol_rec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.sol_rec_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.exists_unique_solution": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.eq_1_24": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.eq_1_25": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.isUnit_sub_det": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.xbar_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.theorem_1_4_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.forwardU": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.forwardU_rec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.forwardU_bounded": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.forwardU_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.split_rec_inl": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.split_rec_inr": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.bounded_of_split": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.eq_1_29": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.eq_1_30": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.eq_1_31": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.eq_1_32": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.bk_exists": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.bk_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.theorem_1_4_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.blocks_of_inv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.rks_inv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.puy_inv_of_rks": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.bk_order_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.eq_1_33": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.corollary_1_4_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.eq_1_34": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.stable_initial_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.stableArm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.mem_stableArm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.stableArm_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.finrank_stableArm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.stable_initial_translate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.remark_unit_root": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.homog_stable_mem_range": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.theorem_1_4_3_gt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.theorem_1_4_3_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.theorem_1_4_3_lt_exists": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.theorem_1_4_3_printed_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.hasEigenvalue_smul_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.theorem_1_4_3_printed_gt_false": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.theorem_1_4_3_lt_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.IsGenEigenvector": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.IsGenEigenvalue": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.genEigenvalues": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.isGenEigenvalue_iff_det": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.det_ne_zero_of_unitary": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.conj_lincomb": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.det_conj_lincomb": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.upper_lincomb": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.det_upper_lincomb": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.diag_ne_zero_of_regular": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.genEigenvalues_eq_diag": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.exists_eigenPair": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.exists_unitary_col": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.deflate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.det_of_col_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.blockOne": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.blockOne_mul_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.blockOne_mul_succ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.mul_blockOne_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.mul_blockOne_succ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.blockOne_mul_blockOne": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.star_blockOne": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.blockOne_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.blockOne_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.assemble_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.assemble_upper": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.proportional_of_cross": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.ScaleInvariant": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.exists_qz_ordered": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.theorem_1_4_4": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.scaleInvariant_stable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.theorem_1_4_4_stable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.norm_mulVec_le_sum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.isStableSeq_of_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.IsStableSeq.bound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.IsStableSeq.mulVec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.fwdSum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.summable_fwd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.norm_fwdSum_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.fwdSum_rec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.eq_fwdSum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.isStableSeq_of_rec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.IsStableSeq.add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.IsStableSeq.sub": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.IsStableSeq.shift": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.norm_comp_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.IsStableSeq.comp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.isStableSeq_append": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.upper_castAdd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.upper_natAdd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.mulVec_castAdd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.mulVec_natAdd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.eq_1_36": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.solve_fwd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.eq_1_38": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.det_S11_ne_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.det_T22_ne_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.summable_Ms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.summable_Mu": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.klein_core": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.klein_homog": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.eq_1_37": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.eq_1_39_40": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.isSolution_iff_transformed": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.diag_off_circle": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.theorem_1_4_5": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.det_sub_ne_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.corollary_1_4_1_singular": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.map_ofReal_mulVec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.norm_ofReal_vec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.isSolution_ofReal_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.theorem_1_4_5_real": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.eq_s0": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.remark_augmented": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.remark_u_eq_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.eq_1_37_printed_false": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.caganA": [
+      "propext",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.caganB": [
+      "propext",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.caganC": [
+      "propext",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.example_cagan_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.example_cagan_det": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.example_cagan_regular": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.example_cagan_genEigenvalues": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.example_cagan_genEigenvalues_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.IsSol22": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.cp22": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.disc22": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.lamLo": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.lamHi": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.sVar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.disc22_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.cp22_factor": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.cp22_lamLo": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.cp22_lamHi": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.lamLo_lt_lamHi": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.roots22_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.lamLo_gt_neg_one_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.abs_lamLo_lt_one_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.lamLo_lt_m11": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.sVar_step": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.sVar_succ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.recover22": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.IsSol22.ext": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.bddSeq_lin": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.sHi_zero_of_bdd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.kSaddle": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.sHi_zero_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.saddle22": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.saddle22_tendsto": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.saddle22_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.saddle22_unbounded": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.sVar_tendsto": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.saddle22_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.saddle22_only_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.IsPhaseSol": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.phaseIter": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.phaseIter_sol": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.phase_tilde": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.phase_delta": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.phase_isocline_x": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.phase_isocline_y": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.phase_steady_state": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.bddSeq_sub_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.phase_dev": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.phase_cp_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.phase_cp_neg_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.phase_roots": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.phase_lamLo_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.phase_saddle": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.phase_saddle_slope": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.phase_saddle_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.phase_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.example_1_6_1_steady": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.example_1_6_1_linearization": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.vec2_eq_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.mulVec22": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.example_1_6_1_matrix": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.example_1_6_1_reduced": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.example_1_6_1_trace_det": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.example_1_6_1_roots": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.example_1_6_1_saddle": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.definition_1_6_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.definition_1_6_1_cycle": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.logistic": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.logistic_two": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.logistic_fixed_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.logistic_two_fixed_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.logistic_two_cycle": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.logistic_two_cycle_decimals": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.IsCagan": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.cagan_isScalarSol": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.cagan_b_gt_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.ex_1_1a": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.ex_1_1a_forward": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.ex_1_1a_rho_one_bdd_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.ex_1_1a_rho_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.cagan_money": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.cagan_path": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.ex_1_1b_solves": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.cagan_path_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.ex_1_1b_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.ex_1_1b_shape": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.IsDornbusch": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.IsDorn2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.pbarD": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.ebarD": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.dM11": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.dLo": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.dHi": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.dK": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.dornIter": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.dornIter_sol": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.ex_1_2_reduce": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.ex_1_2a": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.ex_1_2_dev_step": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.ex_1_2_dev": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.dorn_cp_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.dorn_cp_neg_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.dorn_h1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.dorn_hm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.dorn_tendsto": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.ex_1_2b_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.ex_1_2b_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.ex_1_2b_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.ex_1_2c": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.pbarD_sub": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.ebarD_sub": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.dK_neg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.ex_1_2d_path": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.ex_1_2d_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.ex_1_2d_overshoot": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.ex_1_2d_monotone": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.dorn_announce_core": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.dornJump": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.ex_1_2e_jump": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.ex_1_2e_exists": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.DifferenceEquations.ex_1_2e_jump_shape": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  "source_sha256": {
+    "DifferenceEquations/Basics.lean": "0af8e138159a8bb24ff4dc4152050ce555d5224c726e51cd99bce3af4b441ff7",
+    "DifferenceEquations/Scalar.lean": "3874a0a48815bb834acff1f63798d7bed236a5b3e9dd494dd79caeafc180e356",
+    "DifferenceEquations/LagOperators.lean": "b6be4659be8b65e87ef8c16e94cc105bc40f232d0ed31ca56708fa35482ac451",
+    "DifferenceEquations/SecondOrder.lean": "a02aacef94b38c95648e6a69d78a55efda722e23da6dc229ab56d789df7da448",
+    "DifferenceEquations/Triangular.lean": "ead373b8bf0859e60c90b0c64ee6cb5d38a30ff5027bbd4a62955292d90692b7",
+    "DifferenceEquations/Spectral.lean": "34c349101db5872073aa56f1d79b17d5809c95ebe2405670fac096437a369efa",
+    "DifferenceEquations/RealSplitting.lean": "e1d57400f7898dc5510f5768d78e7524660994f1eb25ab47561f541e93f2519e",
+    "DifferenceEquations/Dichotomy.lean": "51974691c50f14acc42a94cf4472a499c2947d061abcaa653ce34e920542ec06",
+    "DifferenceEquations/LinearSystems.lean": "f619cadc86bde2bc30ca5ec917a4710862d233e42d30f0b6a45aea3e01dc4b72",
+    "DifferenceEquations/LagMatrix.lean": "224eed3b9222345b134e55ed2601e427fbf07b8d287e3023ceada4cfeb9d9544",
+    "DifferenceEquations/BlockSplit.lean": "c63ea377de416c60deec86386f67169fa0594990f50de6d4e05e0feaff2af16e",
+    "DifferenceEquations/Nonsingular.lean": "b6ede57e2b657fafec5e351eb0fad6c3adfc9473517b13a32658d6dd4d451347",
+    "DifferenceEquations/Indeterminacy.lean": "568ac3c8ed8437c604a35fcb97c7b119b48404d206cc2168ed171c47c597e21c",
+    "DifferenceEquations/QZ.lean": "9545767975196dbd21a84b4a685880c5128a9be64214128c211ad3c26889ed73",
+    "DifferenceEquations/Singular.lean": "e0e2cdc4fb2c1ad7bcbb1dbb7b2b61f0fa3e17c6faa6df528cd05ba5026da46c",
+    "DifferenceEquations/PhaseDiagram.lean": "c943ed18aa076a2cd5fac92431b8ba4f25d54cbf64ff6bf3b26a338888b5ed64",
+    "DifferenceEquations/Nonlinear.lean": "16ec62b9ddc53f1cd417c6c342eb83407ef492423fd983f994c5236ab443b128",
+    "DifferenceEquations/Exercises.lean": "15aee671099e4f37e7079b4d351f2b594aebc5fbaf8a02634cdea0f85a972374",
+    "DifferenceEquations.lean": "9f074c27c354d7e15057c34974ec09d45001c7b1236de38f5f10576e6f91b902",
+    "lean-toolchain": "8733782dc070a99b312039cda424f601b80f3be6f6f512627da5ba25adc27632",
+    "lakefile.toml": "e9ef38206374b647ee5b6cb7060d1e0bfcb15311c68f812d1bc9d986b00d6c35",
+    "lake-manifest.json": "1e2c1f37584269d0bdf647e39012f216531fcefab4d717bef883e81c37fd8183",
+    "proof-manifest.json": "2333c292bc267b48d9c17b49ee3533d1425dac47a57cd6cfbb8a29a2e92c2923",
+    "scripts/verify.py": "a70b1fa704dd590f937f8b37682afa88a9d85a9150065acb935c7d2c9589da3b",
+    "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  },
+  "fresh_audit_sha256": "32f23c3e302ff27b7181f3b005733e9d3256a7d671387d3c197213c48bf8703b",
+  "lean_toolchain": "leanprover/lean4:v4.34.0",
+  "scope": "Miao Chapter 1 (Deterministic Difference Equations)",
+  "source": "Jianjun Miao, Economic Dynamics in Discrete Time, MIT Press 2014 (draft of 21 April 2013), Chapter 1"
+}

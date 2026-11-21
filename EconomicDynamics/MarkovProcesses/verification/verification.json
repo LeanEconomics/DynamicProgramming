@@ -1,0 +1,6022 @@
+{
+  "checked_at_utc": "2026-11-06T20:58:41.662733+00:00",
+  "theorems": 470,
+  "module_theorems": {
+    "MarkovProcesses/ChainNumberTheory.lean": 11,
+    "MarkovProcesses/ChainBasics.lean": 20,
+    "MarkovProcesses/ChainClasses.lean": 13,
+    "MarkovProcesses/ChainStationary.lean": 39,
+    "MarkovProcesses/ChainExamples.lean": 26,
+    "MarkovProcesses/ChainExercises.lean": 10,
+    "MarkovProcesses/ChainCountable.lean": 34,
+    "MarkovProcesses/ChainProcess.lean": 5,
+    "MarkovProcesses/ChainCountableStationary.lean": 25,
+    "MarkovProcesses/ChainCountableExamples.lean": 16,
+    "MarkovProcesses/GeneralSLPTransitionFunctions.lean": 19,
+    "MarkovProcesses/GeneralKernels.lean": 13,
+    "MarkovProcesses/GeneralExtension.lean": 20,
+    "MarkovProcesses/ConvergenceSLPTotalVariation.lean": 15,
+    "MarkovProcesses/ConvergenceSLPTVConvergence.lean": 12,
+    "MarkovProcesses/ConvergenceSLPConditionM.lean": 12,
+    "MarkovProcesses/ConvergenceStrong.lean": 22,
+    "MarkovProcesses/ConvergenceExercises.lean": 5,
+    "MarkovProcesses/ConvergenceSLPWeakBasics.lean": 10,
+    "MarkovProcesses/ConvergenceSLPPortmanteau.lean": 9,
+    "MarkovProcesses/ConvergenceSLPDetermining.lean": 10,
+    "MarkovProcesses/ConvergenceSLPDistributionFunctions.lean": 14,
+    "MarkovProcesses/ConvergenceSLPDistributionConvergence.lean": 14,
+    "MarkovProcesses/ConvergenceSLPHelly.lean": 16,
+    "MarkovProcesses/ConvergenceSLPFellerInvariant.lean": 17,
+    "MarkovProcesses/ConvergenceWeak.lean": 9,
+    "MarkovProcesses/ConvergenceErgodic.lean": 14,
+    "MarkovProcesses/ConvergenceSLPMonotoneProcesses.lean": 26,
+    "MarkovProcesses/ConvergenceSLPParameters.lean": 9,
+    "MarkovProcesses/ConvergenceMonotone.lean": 5
+  },
+  "audited_declarations": 595,
+  "declarations": [
+    {
+      "name": "Miao.MarkovProcesses.mc_IsAddClosed",
+      "kind": "def",
+      "module": "MarkovProcesses/ChainNumberTheory.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_setGcd",
+      "kind": "def",
+      "module": "MarkovProcesses/ChainNumberTheory.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_IsAddClosed.succ_mul_mem",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainNumberTheory.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_IsAddClosed.mul_mem_zero",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainNumberTheory.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_IsAddClosed.add_mem_of_zero",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainNumberTheory.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_exists_gcd_witness",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainNumberTheory.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_setGcd_spec",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainNumberTheory.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_setGcd_dvd",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainNumberTheory.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.dvd_mc_setGcd",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainNumberTheory.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_setGcd_pos",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainNumberTheory.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_eventually_mul_setGcd_mem",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainNumberTheory.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_eventually_mem_of_setGcd_eq_one",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainNumberTheory.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_setGcd_eq_of_shift",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainNumberTheory.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_pow_mem",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainBasics.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_pow_nonneg",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainBasics.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_pow_le_one",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainBasics.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_pow_row_sum",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainBasics.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_entry_nonneg",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainBasics.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.eq_3_1",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainBasics.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_pow_add_ge",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainBasics.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_pow_add_pos",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainBasics.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_exists_pos_entry",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainBasics.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_IsClosed",
+      "kind": "def",
+      "module": "MarkovProcesses/ChainBasics.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_pow_eq_zero_of_closed",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainBasics.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_Accessible",
+      "kind": "def",
+      "module": "MarkovProcesses/ChainBasics.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_Communicate",
+      "kind": "def",
+      "module": "MarkovProcesses/ChainBasics.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_Accessible.trans",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainBasics.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_accessible_of_pos",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainBasics.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_communicate_equivalence",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainBasics.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_Communicate.accessible_trans",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainBasics.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_IsIrreducible",
+      "kind": "def",
+      "module": "MarkovProcesses/ChainBasics.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_IsDecomposable",
+      "kind": "def",
+      "module": "MarkovProcesses/ChainBasics.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_isDecomposable_iff",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainBasics.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_isIrreducible_iff",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainBasics.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_IsRecurrent",
+      "kind": "def",
+      "module": "MarkovProcesses/ChainBasics.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_IsTransient",
+      "kind": "def",
+      "module": "MarkovProcesses/ChainBasics.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_isTransient_iff",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainBasics.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_returnSet",
+      "kind": "def",
+      "module": "MarkovProcesses/ChainBasics.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_period",
+      "kind": "def",
+      "module": "MarkovProcesses/ChainBasics.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_IsAperiodic",
+      "kind": "def",
+      "module": "MarkovProcesses/ChainBasics.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_IsPeriodic",
+      "kind": "def",
+      "module": "MarkovProcesses/ChainBasics.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_returnSet_isAddClosed",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainBasics.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_period_dvd",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainBasics.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_period_spec",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainBasics.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_IsRecurrent.of_communicate",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainClasses.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.theorem_3_1_1a",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainClasses.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_consSet",
+      "kind": "def",
+      "module": "MarkovProcesses/ChainClasses.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_mem_consSet",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainClasses.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.theorem_3_1_1b",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainClasses.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.theorem_3_1_1c",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainClasses.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_chain012",
+      "kind": "def",
+      "module": "MarkovProcesses/ChainClasses.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_chain012_mem",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainClasses.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.theorem_3_1_1b_proof_counterexample",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainClasses.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.theorem_3_1_2",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainClasses.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_classOf",
+      "kind": "def",
+      "module": "MarkovProcesses/ChainClasses.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_mem_classOf",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainClasses.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_SumsToOne",
+      "kind": "def",
+      "module": "MarkovProcesses/ChainClasses.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_IsErgodicSetLiteral",
+      "kind": "def",
+      "module": "MarkovProcesses/ChainClasses.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_IsErgodicSet",
+      "kind": "def",
+      "module": "MarkovProcesses/ChainClasses.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.remark_3_1_1_literal",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainClasses.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_sumsToOne_iff_closed",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainClasses.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_classOf_closed",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainClasses.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.ex_3_1",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainClasses.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_IsStationary",
+      "kind": "def",
+      "module": "MarkovProcesses/ChainStationary.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_vecMul_apply",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainStationary.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_dist_succ",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainStationary.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_IsStationary.pow",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainStationary.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_IsStationary.apply_eq",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainStationary.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_IsStationary.le_apply",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainStationary.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_IsStationary.convex",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainStationary.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_exists_pos_of_sum_eq_one",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainStationary.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_colMin",
+      "kind": "def",
+      "module": "MarkovProcesses/ChainStationary.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_colMax",
+      "kind": "def",
+      "module": "MarkovProcesses/ChainStationary.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_colMin_le",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainStationary.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_le_colMax",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainStationary.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_colMax_le_one",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainStationary.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_colMin_nonneg",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainStationary.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_avg_ge",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainStationary.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_avg_le",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainStationary.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.theorem_3_1_3_mono",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainStationary.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.theorem_3_1_3_anti",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainStationary.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.theorem_3_1_3_min_step",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainStationary.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.theorem_3_1_3_max_step",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainStationary.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.theorem_3_1_3_gap_step",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainStationary.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.theorem_3_1_3",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainStationary.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_swap",
+      "kind": "def",
+      "module": "MarkovProcesses/ChainStationary.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_swap_mem",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainStationary.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_swap_sq",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainStationary.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_swap_pow_even",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainStationary.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_swap_pow_odd",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainStationary.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.theorem_3_1_3_counterexample",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainStationary.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_pow_eq_zero_of_not_accessible",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainStationary.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_exists_stationary",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainStationary.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_stationary_pos_of",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainStationary.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_stationary_unique_of",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainStationary.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_stationary_unique_of_irreducible",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainStationary.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_stationary_pos_of_irreducible",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainStationary.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_irreducible_stationary",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainStationary.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.stationary_p97_transient",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainStationary.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_classOf_communicate",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainStationary.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_classOf_eq",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainStationary.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_classDist",
+      "kind": "def",
+      "module": "MarkovProcesses/ChainStationary.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.stationary_p97_class",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainStationary.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_recClasses",
+      "kind": "def",
+      "module": "MarkovProcesses/ChainStationary.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_mem_recClasses",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainStationary.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.stationary_p97_decomposition",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainStationary.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.stationary_p97_infinite",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainStationary.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_IsAperiodicChain",
+      "kind": "def",
+      "module": "MarkovProcesses/ChainStationary.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.theorem_3_1_4",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainStationary.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_not_accessible_of_closed",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainExamples.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_isRecurrent_of_closed",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainExamples.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_isAperiodic_of_pos",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainExamples.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_pow_absorbing",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainExamples.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.fig31",
+      "kind": "def",
+      "module": "MarkovProcesses/ChainExamples.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.fig31_mem",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainExamples.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.fig31_closed",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainExamples.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.fig31_communicate",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainExamples.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.fig31_recurrent",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainExamples.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.ex311",
+      "kind": "def",
+      "module": "MarkovProcesses/ChainExamples.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.ex311_mem",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainExamples.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.example_3_1_1_pow",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainExamples.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.ex311Lim",
+      "kind": "def",
+      "module": "MarkovProcesses/ChainExamples.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.example_3_1_1_tendsto",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainExamples.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.example_3_1_1_stationary",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainExamples.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.ex312",
+      "kind": "def",
+      "module": "MarkovProcesses/ChainExamples.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_IsPosStochastic",
+      "kind": "def",
+      "module": "MarkovProcesses/ChainExamples.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_fromBlocks_diag_pow",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainExamples.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.example_3_1_2_pow_even",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainExamples.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.example_3_1_2_pow_odd",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainExamples.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.ex312_mem",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainExamples.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.example_3_1_2_classes",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainExamples.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.example_3_1_2_stationary",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainExamples.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.example_3_1_2_not_tendsto",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainExamples.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.ex313",
+      "kind": "def",
+      "module": "MarkovProcesses/ChainExamples.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.ex313_mem",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainExamples.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.example_3_1_3_pow",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainExamples.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.example_3_1_3_tendsto",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainExamples.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.example_3_1_3_classes",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainExamples.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.ex316",
+      "kind": "def",
+      "module": "MarkovProcesses/ChainExamples.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.ex316_mem",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainExamples.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.example_3_1_6_classes",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainExamples.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.example_3_1_6_infinite",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainExamples.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_isStationary_of_detailed_balance",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainExercises.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.ex33Fn",
+      "kind": "def",
+      "module": "MarkovProcesses/ChainExercises.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.ex33",
+      "kind": "def",
+      "module": "MarkovProcesses/ChainExercises.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.ex33_mem",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainExercises.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.ex33Dist",
+      "kind": "def",
+      "module": "MarkovProcesses/ChainExercises.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.ex33_irreducible",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainExercises.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.ex33_detailed_balance",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainExercises.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.ex_3_3",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainExercises.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.ex_3_3_half",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainExercises.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.ex_3_3_limit_lt",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainExercises.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.ex_3_3_limit_gt",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainExercises.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.ex_3_6_irreducible",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainExercises.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.ex_3_6",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainExercises.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_IsStochasticE",
+      "kind": "def",
+      "module": "MarkovProcesses/ChainCountable.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_mulE",
+      "kind": "def",
+      "module": "MarkovProcesses/ChainCountable.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_idE",
+      "kind": "def",
+      "module": "MarkovProcesses/ChainCountable.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_powE",
+      "kind": "def",
+      "module": "MarkovProcesses/ChainCountable.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_mulE_assoc",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainCountable.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_idE_mulE",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainCountable.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_mulE_idE",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainCountable.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_powE_one",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainCountable.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_powE_add",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainCountable.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_powE_succ'",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainCountable.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.eq_3_1_countable",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainCountable.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_powE_add_ge",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainCountable.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_powE_add_pos",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainCountable.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_powE_row_sum",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainCountable.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_powE_le_one",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainCountable.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_le_one_of_stochasticE",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainCountable.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_AccessibleE",
+      "kind": "def",
+      "module": "MarkovProcesses/ChainCountable.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_CommunicateE",
+      "kind": "def",
+      "module": "MarkovProcesses/ChainCountable.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_IsIrreducibleE",
+      "kind": "def",
+      "module": "MarkovProcesses/ChainCountable.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_AccessibleE.trans",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainCountable.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_accessibleE_of_pos",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainCountable.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_isIrreducibleE_iff",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainCountable.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_returnSetE",
+      "kind": "def",
+      "module": "MarkovProcesses/ChainCountable.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_periodE",
+      "kind": "def",
+      "module": "MarkovProcesses/ChainCountable.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_returnSetE_isAddClosed",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainCountable.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.theorem_3_1_2_countable",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainCountable.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.theorem_3_1_4_countable",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainCountable.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_tabooE",
+      "kind": "def",
+      "module": "MarkovProcesses/ChainCountable.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_fpE",
+      "kind": "def",
+      "module": "MarkovProcesses/ChainCountable.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_hitE",
+      "kind": "def",
+      "module": "MarkovProcesses/ChainCountable.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_meanRetE",
+      "kind": "def",
+      "module": "MarkovProcesses/ChainCountable.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_visitsE",
+      "kind": "def",
+      "module": "MarkovProcesses/ChainCountable.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_IsTransientE",
+      "kind": "def",
+      "module": "MarkovProcesses/ChainCountable.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_IsRecurrentE",
+      "kind": "def",
+      "module": "MarkovProcesses/ChainCountable.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_IsPositiveRecurrentE",
+      "kind": "def",
+      "module": "MarkovProcesses/ChainCountable.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_IsNullRecurrentE",
+      "kind": "def",
+      "module": "MarkovProcesses/ChainCountable.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_tsum_split",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainCountable.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_tsum_taboo",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainCountable.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_fpE_zero",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainCountable.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_fpE_succ",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainCountable.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_hitE_le_one",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainCountable.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_first_entrance",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainCountable.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_fpE_le_powE",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainCountable.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_tsum_cauchy",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainCountable.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_visits_eq",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainCountable.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_sum_cauchy_le",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainCountable.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_le_of_le_add_mul",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainCountable.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_sum_powE_ne_top",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainCountable.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_isTransientE_iff",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainCountable.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_isRecurrentE_iff",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainCountable.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_tsum_shift_le",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainCountable.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.theorem_3_1_1a_countable",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainCountable.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_histEvent",
+      "kind": "def",
+      "module": "MarkovProcesses/ChainProcess.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_IsMarkovProcess",
+      "kind": "def",
+      "module": "MarkovProcesses/ChainProcess.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_IsTimeHomogeneous",
+      "kind": "def",
+      "module": "MarkovProcesses/ChainProcess.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_cylProb",
+      "kind": "def",
+      "module": "MarkovProcesses/ChainProcess.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_HasChainLaw",
+      "kind": "def",
+      "module": "MarkovProcesses/ChainProcess.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_pathVec",
+      "kind": "def",
+      "module": "MarkovProcesses/ChainProcess.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_measure_path_mem",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainProcess.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_measure_step",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainProcess.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_measure_step_const",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainProcess.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_markov_of_chainLaw",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainProcess.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_marginal_of_chainLaw",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainProcess.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_IsInvariantE",
+      "kind": "def",
+      "module": "MarkovProcesses/ChainCountableStationary.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_IsStationaryE",
+      "kind": "def",
+      "module": "MarkovProcesses/ChainCountableStationary.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_IsInvariantE.pow",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainCountableStationary.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_IsInvariantE.le",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainCountableStationary.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_stationaryE_pos",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainCountableStationary.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_stationaryE_le_one",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainCountableStationary.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_hitE_pos",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainCountableStationary.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_visitsE_le",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainCountableStationary.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_recurrent_of_stationary",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainCountableStationary.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_cycleStepE",
+      "kind": "def",
+      "module": "MarkovProcesses/ChainCountableStationary.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_cycleE",
+      "kind": "def",
+      "module": "MarkovProcesses/ChainCountableStationary.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_cycleStepE_succ",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainCountableStationary.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_cycleStepE_zero",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainCountableStationary.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_cycleE_self",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainCountableStationary.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_cycleE_invariant",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainCountableStationary.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_cycleE_le",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainCountableStationary.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_tsum_tsum_add",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainCountableStationary.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_cycleE_mass",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainCountableStationary.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_hitE_le_meanRetE",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainCountableStationary.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_stationary_of_posRec",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainCountableStationary.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_stationary_eq_inv",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainCountableStationary.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_transient_or_recurrent",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainCountableStationary.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.theorem_3_1_5a",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainCountableStationary.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.theorem_3_1_5b",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainCountableStationary.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.theorem_3_1_5c",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainCountableStationary.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.theorem_3_1_5_trichotomy",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainCountableStationary.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_toE",
+      "kind": "def",
+      "module": "MarkovProcesses/ChainCountableStationary.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_powE_toE",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainCountableStationary.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_toE_stochastic",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainCountableStationary.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.theorem_3_1_5_finite",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainCountableStationary.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_tsum_pair",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainCountableExamples.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.ex314",
+      "kind": "def",
+      "module": "MarkovProcesses/ChainCountableExamples.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.ex314_stochastic",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainCountableExamples.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.ex314_col_zero",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainCountableExamples.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.ex314_col_succ",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainCountableExamples.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.ex314_pow_ne_zero",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainCountableExamples.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.example_3_1_4_irreducible",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainCountableExamples.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.theorem_3_1_4_countable_counterexample",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainCountableExamples.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.ex314_taboo_sum",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainCountableExamples.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.example_3_1_4_transient",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainCountableExamples.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.example_3_1_4_stationary",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainCountableExamples.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.example_3_1_4_half",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainCountableExamples.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.ex315",
+      "kind": "def",
+      "module": "MarkovProcesses/ChainCountableExamples.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.ex315_stochastic",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainCountableExamples.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.ex315_col",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainCountableExamples.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.ex315_pow_parity",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainCountableExamples.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.example_3_1_5",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainCountableExamples.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.mc_shift",
+      "kind": "def",
+      "module": "MarkovProcesses/ChainCountableExamples.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.theorem_3_1_1b_countable_counterexample",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ChainCountableExamples.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.IsTransitionFunction",
+      "kind": "def",
+      "module": "MarkovProcesses/GeneralSLPTransitionFunctions.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_isTransitionFunction_iff",
+      "kind": "theorem",
+      "module": "MarkovProcesses/GeneralSLPTransitionFunctions.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.markovOp",
+      "kind": "def",
+      "module": "MarkovProcesses/GeneralSLPTransitionFunctions.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.markovOpR",
+      "kind": "def",
+      "module": "MarkovProcesses/GeneralSLPTransitionFunctions.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.adjointOp",
+      "kind": "def",
+      "module": "MarkovProcesses/GeneralSLPTransitionFunctions.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_markovOp_indicator",
+      "kind": "theorem",
+      "module": "MarkovProcesses/GeneralSLPTransitionFunctions.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.slp_theorem_8_1",
+      "kind": "theorem",
+      "module": "MarkovProcesses/GeneralSLPTransitionFunctions.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_integrable_of_bounded",
+      "kind": "theorem",
+      "module": "MarkovProcesses/GeneralSLPTransitionFunctions.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.slp_theorem_8_1_cor",
+      "kind": "theorem",
+      "module": "MarkovProcesses/GeneralSLPTransitionFunctions.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.slp_ex_8_1",
+      "kind": "theorem",
+      "module": "MarkovProcesses/GeneralSLPTransitionFunctions.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_adjointOp_apply",
+      "kind": "theorem",
+      "module": "MarkovProcesses/GeneralSLPTransitionFunctions.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.slp_theorem_8_2",
+      "kind": "theorem",
+      "module": "MarkovProcesses/GeneralSLPTransitionFunctions.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.slp_ex_8_2",
+      "kind": "theorem",
+      "module": "MarkovProcesses/GeneralSLPTransitionFunctions.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.slp_theorem_8_3",
+      "kind": "theorem",
+      "module": "MarkovProcesses/GeneralSLPTransitionFunctions.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.slp_theorem_8_3_cor",
+      "kind": "theorem",
+      "module": "MarkovProcesses/GeneralSLPTransitionFunctions.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_pairing",
+      "kind": "def",
+      "module": "MarkovProcesses/GeneralSLPTransitionFunctions.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.slp_ex_8_3",
+      "kind": "theorem",
+      "module": "MarkovProcesses/GeneralSLPTransitionFunctions.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.kpow",
+      "kind": "def",
+      "module": "MarkovProcesses/GeneralSLPTransitionFunctions.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_kpow_one",
+      "kind": "theorem",
+      "module": "MarkovProcesses/GeneralSLPTransitionFunctions.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.slp_ex_8_4a",
+      "kind": "theorem",
+      "module": "MarkovProcesses/GeneralSLPTransitionFunctions.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_kpow_add",
+      "kind": "theorem",
+      "module": "MarkovProcesses/GeneralSLPTransitionFunctions.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_markovOp_comp",
+      "kind": "theorem",
+      "module": "MarkovProcesses/GeneralSLPTransitionFunctions.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_adjointOp_comp",
+      "kind": "theorem",
+      "module": "MarkovProcesses/GeneralSLPTransitionFunctions.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.slp_ex_8_4b",
+      "kind": "theorem",
+      "module": "MarkovProcesses/GeneralSLPTransitionFunctions.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_adjointOp_iterate",
+      "kind": "theorem",
+      "module": "MarkovProcesses/GeneralSLPTransitionFunctions.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.IsFeller",
+      "kind": "def",
+      "module": "MarkovProcesses/GeneralSLPTransitionFunctions.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.IsMonotoneTF",
+      "kind": "def",
+      "module": "MarkovProcesses/GeneralSLPTransitionFunctions.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.IsStochasticKernel",
+      "kind": "def",
+      "module": "MarkovProcesses/GeneralKernels.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.definition_3_2_1",
+      "kind": "theorem",
+      "module": "MarkovProcesses/GeneralKernels.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.definition_3_2_1_transition",
+      "kind": "theorem",
+      "module": "MarkovProcesses/GeneralKernels.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.theorem_3_2_1",
+      "kind": "theorem",
+      "module": "MarkovProcesses/GeneralKernels.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.eq_3_4",
+      "kind": "theorem",
+      "module": "MarkovProcesses/GeneralKernels.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.eq_3_4_unique",
+      "kind": "theorem",
+      "module": "MarkovProcesses/GeneralKernels.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.theorem_3_2_5",
+      "kind": "theorem",
+      "module": "MarkovProcesses/GeneralKernels.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.eq_3_5",
+      "kind": "theorem",
+      "module": "MarkovProcesses/GeneralKernels.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.ex_3_2",
+      "kind": "theorem",
+      "module": "MarkovProcesses/GeneralKernels.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.ex_3_4",
+      "kind": "theorem",
+      "module": "MarkovProcesses/GeneralKernels.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.eq_p103_T",
+      "kind": "theorem",
+      "module": "MarkovProcesses/GeneralKernels.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.eq_p103_Tstar",
+      "kind": "theorem",
+      "module": "MarkovProcesses/GeneralKernels.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.eq_p104_iterate",
+      "kind": "theorem",
+      "module": "MarkovProcesses/GeneralKernels.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.IsInvariantDist",
+      "kind": "def",
+      "module": "MarkovProcesses/GeneralKernels.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.isInvariantDist_iff",
+      "kind": "theorem",
+      "module": "MarkovProcesses/GeneralKernels.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_eq_of_map_frestrictLe",
+      "kind": "theorem",
+      "module": "MarkovProcesses/GeneralExtension.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.tulceaFD",
+      "kind": "def",
+      "module": "MarkovProcesses/GeneralExtension.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_trajMeasure_map_frestrictLe",
+      "kind": "theorem",
+      "module": "MarkovProcesses/GeneralExtension.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.tulceaFD_zero",
+      "kind": "theorem",
+      "module": "MarkovProcesses/GeneralExtension.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.tulceaFD_succ",
+      "kind": "theorem",
+      "module": "MarkovProcesses/GeneralExtension.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.theorem_3_2_4",
+      "kind": "theorem",
+      "module": "MarkovProcesses/GeneralExtension.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_snocIic",
+      "kind": "def",
+      "module": "MarkovProcesses/GeneralExtension.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_measurable_snocIic",
+      "kind": "theorem",
+      "module": "MarkovProcesses/GeneralExtension.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_snocIic_pair",
+      "kind": "theorem",
+      "module": "MarkovProcesses/GeneralExtension.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_snocIic_restrict",
+      "kind": "theorem",
+      "module": "MarkovProcesses/GeneralExtension.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_frestrictLe_zero",
+      "kind": "theorem",
+      "module": "MarkovProcesses/GeneralExtension.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_lastKernel",
+      "kind": "def",
+      "module": "MarkovProcesses/GeneralExtension.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_isMarkovKernel_lastKernel",
+      "kind": "theorem",
+      "module": "MarkovProcesses/GeneralExtension.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.markovPath",
+      "kind": "def",
+      "module": "MarkovProcesses/GeneralExtension.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_isProbabilityMeasure_markovPath",
+      "kind": "theorem",
+      "module": "MarkovProcesses/GeneralExtension.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_markovPath_markov",
+      "kind": "theorem",
+      "module": "MarkovProcesses/GeneralExtension.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_markovPath_map_zero",
+      "kind": "theorem",
+      "module": "MarkovProcesses/GeneralExtension.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_markovPath_unique",
+      "kind": "theorem",
+      "module": "MarkovProcesses/GeneralExtension.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.theorem_3_2_3",
+      "kind": "theorem",
+      "module": "MarkovProcesses/GeneralExtension.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.theorem_3_2_3_transition",
+      "kind": "theorem",
+      "module": "MarkovProcesses/GeneralExtension.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.theorem_3_2_3_marginal",
+      "kind": "theorem",
+      "module": "MarkovProcesses/GeneralExtension.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_extendBox",
+      "kind": "def",
+      "module": "MarkovProcesses/GeneralExtension.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_preimage_extendBox",
+      "kind": "theorem",
+      "module": "MarkovProcesses/GeneralExtension.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.eq_3_2_iff",
+      "kind": "theorem",
+      "module": "MarkovProcesses/GeneralExtension.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.theorem_3_2_2",
+      "kind": "theorem",
+      "module": "MarkovProcesses/GeneralExtension.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_IsPartition",
+      "kind": "def",
+      "module": "MarkovProcesses/ConvergenceSLPTotalVariation.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_partSums",
+      "kind": "def",
+      "module": "MarkovProcesses/ConvergenceSLPTotalVariation.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_tvOf",
+      "kind": "def",
+      "module": "MarkovProcesses/ConvergenceSLPTotalVariation.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.tvNorm",
+      "kind": "def",
+      "module": "MarkovProcesses/ConvergenceSLPTotalVariation.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.tvDist",
+      "kind": "def",
+      "module": "MarkovProcesses/ConvergenceSLPTotalVariation.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_supDiff",
+      "kind": "def",
+      "module": "MarkovProcesses/ConvergenceSLPTotalVariation.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_isPartition_univ",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPTotalVariation.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_isPartition_pair",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPTotalVariation.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_partSums_nonempty",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPTotalVariation.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_sum_partition_real",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPTotalVariation.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_sum_partition_inter_real",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPTotalVariation.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_partSums_bddAbove_of_le",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPTotalVariation.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_partSums_le_of_measures",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPTotalVariation.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_bddAbove_tvDist",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPTotalVariation.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.slp_lemma_11_5",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPTotalVariation.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_exists_sub_measures",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPTotalVariation.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_tvNorm_sub_eq",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPTotalVariation.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_bddAbove_tvNorm",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPTotalVariation.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_tvOf_nonneg",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPTotalVariation.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_abs_le_tvOf",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPTotalVariation.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.slp_ex_11_3",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPTotalVariation.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_abs_sub_le_add",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPTVConvergence.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_bddAbove_supDiff",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPTVConvergence.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_two_abs_le_tvDist",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPTVConvergence.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_tvDist_le_of_forall",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPTVConvergence.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_tvDist_nonneg",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPTVConvergence.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_tendsto_zero_iff_of_nonneg",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPTVConvergence.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.slp_theorem_11_6",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPTVConvergence.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_integrable_of_abs_le",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPTVConvergence.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_abs_add_abs_compl_le",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPTVConvergence.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_abs_integral_sub_le_tvDist",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPTVConvergence.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_iInter_tails_eq_empty",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPTVConvergence.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.slp_lemma_11_8",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPTVConvergence.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.ConditionMFor",
+      "kind": "def",
+      "module": "MarkovProcesses/ConvergenceSLPConditionM.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.ConditionM",
+      "kind": "def",
+      "module": "MarkovProcesses/ConvergenceSLPConditionM.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_isMarkov_kpow",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPConditionM.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_tvDist_comm",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPConditionM.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_tvDist_triangle",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPConditionM.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_tvDist_le_two",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPConditionM.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_eq_of_tvDist_eq_zero",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPConditionM.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_bind_real_eq",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPConditionM.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.slp_lemma_11_11",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPConditionM.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_isProb_adjoint",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPConditionM.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_adjoint_add",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPConditionM.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_tvDist_iterate_le",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPConditionM.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.slp_theorem_11_12",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPConditionM.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.slp_theorem_11_12_converse",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPConditionM.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.dTV",
+      "kind": "def",
+      "module": "MarkovProcesses/ConvergenceStrong.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_dTV_eq_supDiff",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceStrong.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_tvDist_eq_two_mul_dTV",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceStrong.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_abs_le_dTV",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceStrong.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_dTV_le_of_forall",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceStrong.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_dTV_nonneg",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceStrong.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_dTV_le_one",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceStrong.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.eq_p105_metric",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceStrong.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.eq_p105_complete",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceStrong.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.ConvStrongly",
+      "kind": "def",
+      "module": "MarkovProcesses/ConvergenceStrong.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.theorem_3_3_1_contraction",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceStrong.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_eq_3_8_iff",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceStrong.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.theorem_3_3_1",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceStrong.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.theorem_3_3_1_invariant",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceStrong.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.theorem_3_3_1_converse",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceStrong.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.MinorizationFor",
+      "kind": "def",
+      "module": "MarkovProcesses/ConvergenceStrong.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.Minorization",
+      "kind": "def",
+      "module": "MarkovProcesses/ConvergenceStrong.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.proposition_3_3_1_forward",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceStrong.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_threeKernel",
+      "kind": "def",
+      "module": "MarkovProcesses/ConvergenceStrong.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_threeKernel_real",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceStrong.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.proposition_3_3_1_counterexample",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceStrong.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.proposition_3_3_1_of_atom",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceStrong.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.proposition_3_3_1",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceStrong.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.example_3_3_1",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceStrong.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.example_3_3_2",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceStrong.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.example_3_3_3",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceStrong.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.example_3_3_3_finite",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceStrong.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_withDensity_real",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceExercises.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_integrable_density",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceExercises.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.ex_3_5b",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceExercises.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.eq_3_7",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceExercises.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.ex_3_5a",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceExercises.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.slp_ex_12_1",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPWeakBasics.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.slp_ex_12_2",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPWeakBasics.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_bump",
+      "kind": "def",
+      "module": "MarkovProcesses/ConvergenceSLPWeakBasics.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_continuous_bump",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPWeakBasics.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_bump_mem",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPWeakBasics.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_bump_eq_one",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPWeakBasics.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_bump_antitone",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPWeakBasics.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_tendsto_bump",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPWeakBasics.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.ConvWeak",
+      "kind": "def",
+      "module": "MarkovProcesses/ConvergenceSLPWeakBasics.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.slp_lemma_12_1",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPWeakBasics.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_count_bounds",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPWeakBasics.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.slp_lemma_12_2",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPWeakBasics.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_LimsupLe",
+      "kind": "def",
+      "module": "MarkovProcesses/ConvergenceSLPPortmanteau.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_LiminfGe",
+      "kind": "def",
+      "module": "MarkovProcesses/ConvergenceSLPPortmanteau.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_tendsto_of_limsup_liminf",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPPortmanteau.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_toBCF",
+      "kind": "def",
+      "module": "MarkovProcesses/ConvergenceSLPPortmanteau.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_limsup_closed_of_weak",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPPortmanteau.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_limsup_integral_of_closed",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPPortmanteau.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_weak_of_limsup_closed",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPPortmanteau.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_liminf_open_of_limsup_closed",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPPortmanteau.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_limsup_closed_of_liminf_open",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPPortmanteau.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_tendsto_of_null_frontier",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPPortmanteau.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_limsup_closed_of_null_frontier",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPPortmanteau.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.slp_theorem_12_3",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPPortmanteau.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_tendsto_finite_union",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPDetermining.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.slp_theorem_12_4",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPDetermining.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.slp_theorem_12_5",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPDetermining.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_IsConvDetermining",
+      "kind": "def",
+      "module": "MarkovProcesses/ConvergenceSLPDetermining.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_frontier_iInter_fin_subset",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPDetermining.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_ballInters",
+      "kind": "def",
+      "module": "MarkovProcesses/ConvergenceSLPDetermining.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.slp_theorem_12_5_cor",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPDetermining.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.slp_theorem_12_6",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPDetermining.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.slp_theorem_12_6_cor1",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPDetermining.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.slp_theorem_12_6_cor2",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPDetermining.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_convWeak_unique",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPDetermining.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_IsConvDetermining.eq",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPDetermining.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_distFun",
+      "kind": "def",
+      "module": "MarkovProcesses/ConvergenceSLPDistributionFunctions.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_box",
+      "kind": "def",
+      "module": "MarkovProcesses/ConvergenceSLPDistributionFunctions.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_vertex",
+      "kind": "def",
+      "module": "MarkovProcesses/ConvergenceSLPDistributionFunctions.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_vertexSum",
+      "kind": "def",
+      "module": "MarkovProcesses/ConvergenceSLPDistributionFunctions.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_diag",
+      "kind": "def",
+      "module": "MarkovProcesses/ConvergenceSLPDistributionFunctions.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_ContFromAbove",
+      "kind": "def",
+      "module": "MarkovProcesses/ConvergenceSLPDistributionFunctions.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_ContFromBelow",
+      "kind": "def",
+      "module": "MarkovProcesses/ConvergenceSLPDistributionFunctions.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_Iic_eq_pi",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPDistributionFunctions.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_box_indicator_eq",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPDistributionFunctions.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_measurableSet_box",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPDistributionFunctions.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_vertexSum_eq",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPDistributionFunctions.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_distFun_mono",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPDistributionFunctions.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_contFromAbove_distFun",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPDistributionFunctions.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.slp_theorem_12_7a",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPDistributionFunctions.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_generateFrom_Iic_pi",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPDistributionFunctions.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_distFun_injective",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPDistributionFunctions.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_lowerOpen",
+      "kind": "def",
+      "module": "MarkovProcesses/ConvergenceSLPDistributionFunctions.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_frontier_Iic_eq",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPDistributionFunctions.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_lowerOpen_subset",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPDistributionFunctions.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_tendsto_distFun_below",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPDistributionFunctions.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.slp_theorem_12_7c",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPDistributionFunctions.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.slp_ex_12_3",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPDistributionFunctions.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_nullCoord",
+      "kind": "def",
+      "module": "MarkovProcesses/ConvergenceSLPDistributionConvergence.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_countable_nullCoord_compl",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPDistributionConvergence.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_dense_nullCoord",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPDistributionConvergence.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_continuousAt_distFun",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPDistributionConvergence.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_frontier_null_of_continuousAt",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPDistributionConvergence.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_box_inter",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPDistributionConvergence.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_box_eq_empty",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPDistributionConvergence.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.slp_theorem_12_8",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPDistributionConvergence.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.slp_ex_12_4",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPDistributionConvergence.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.slp_ex_12_5a",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPDistributionConvergence.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_ramp",
+      "kind": "def",
+      "module": "MarkovProcesses/ConvergenceSLPDistributionConvergence.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_continuous_ramp",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPDistributionConvergence.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_ramp_mem",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPDistributionConvergence.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_monotone_ramp",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPDistributionConvergence.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_tendsto_ramp",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPDistributionConvergence.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.slp_ex_12_5b",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPDistributionConvergence.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_IsSupport",
+      "kind": "def",
+      "module": "MarkovProcesses/ConvergenceSLPHelly.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_support_inter",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPHelly.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_exists_support",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPHelly.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_exists_convWeak_subseq_of_tight",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPHelly.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_measure_eq_one_of_convWeak",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPHelly.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.slp_theorem_12_9_cor1",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPHelly.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_concentrated_iff",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPHelly.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.slp_theorem_12_9",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPHelly.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_distFun_dirac",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPHelly.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_not_convWeak_escape",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPHelly.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.slp_theorem_12_9_false_hyp",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPHelly.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.slp_theorem_12_9_false_concl",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPHelly.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.slp_ex_12_6a",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPHelly.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.slp_ex_12_6a_false",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPHelly.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.slp_ex_12_6b",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPHelly.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.slp_ex_12_6c",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPHelly.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.slp_theorem_12_9_cor2",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPHelly.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_bcf_abs_le_norm",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPFellerInvariant.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_convWeak_dirac",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPFellerInvariant.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_adjointOp_dirac",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPFellerInvariant.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_integral_markovOpR",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPFellerInvariant.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_fellerBCF",
+      "kind": "def",
+      "module": "MarkovProcesses/ConvergenceSLPFellerInvariant.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_fellerBCF_apply",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPFellerInvariant.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.slp_ex_12_7",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPFellerInvariant.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_flipKernel",
+      "kind": "def",
+      "module": "MarkovProcesses/ConvergenceSLPFellerInvariant.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_isMarkovKernel_flipKernel",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPFellerInvariant.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_adjointOp_flip",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPFellerInvariant.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_adjointOp_flip_dirac",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPFellerInvariant.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.slp_ex_12_8a",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPFellerInvariant.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_iterate_flip_dirac",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPFellerInvariant.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_symm_ne_self",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPFellerInvariant.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.slp_ex_12_8b",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPFellerInvariant.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.slp_ex_12_8c",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPFellerInvariant.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_isProbabilityMeasure_iterate",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPFellerInvariant.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_invariant_of_convWeak",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPFellerInvariant.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.slp_theorem_12_10",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPFellerInvariant.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.IsTightFamily",
+      "kind": "def",
+      "module": "MarkovProcesses/ConvergenceWeak.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.definition_3_3_2",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceWeak.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.definition_3_3_4",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceWeak.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_exists_convWeak_subseq",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceWeak.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.theorem_3_3_2",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceWeak.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.theorem_3_3_2_counterexample",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceWeak.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.eq_p104_strong_imp_weak",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceWeak.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.eq_p108_dirac",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceWeak.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.theorem_3_3_3",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceWeak.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.corollary_3_3_1",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceWeak.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.IsPInvariantSet",
+      "kind": "def",
+      "module": "MarkovProcesses/ConvergenceErgodic.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.IsErgodicMeasure",
+      "kind": "def",
+      "module": "MarkovProcesses/ConvergenceErgodic.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.IsErgodicSetBook",
+      "kind": "def",
+      "module": "MarkovProcesses/ConvergenceErgodic.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.definition_3_3_5_ergodicSet_eq_empty",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceErgodic.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.example_p111_invariant",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceErgodic.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.example_p111_ergodic",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceErgodic.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_adjointOp_add_smul",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceErgodic.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_adjointOp_smul",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceErgodic.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.theorem_3_3_4_convex",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceErgodic.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_adjointOp_withDensity",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceErgodic.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_ae_eq_one_of_lintegral",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceErgodic.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_exists_invariantSet",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceErgodic.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_ae_invariant_of_density",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceErgodic.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_density_invariantSet",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceErgodic.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.theorem_3_3_4_extreme",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceErgodic.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.theorem_3_3_4_singular",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceErgodic.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.theorem_3_3_4_combination_counterexample",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceErgodic.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.Dominates",
+      "kind": "def",
+      "module": "MarkovProcesses/ConvergenceSLPMonotoneProcesses.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.Dominates.trans",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPMonotoneProcesses.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.Dominates.real_le",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPMonotoneProcesses.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.slp_ex_12_9a",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPMonotoneProcesses.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.slp_ex_12_9a_subtype",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPMonotoneProcesses.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_measure_lower_le",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPMonotoneProcesses.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.slp_ex_12_9b",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPMonotoneProcesses.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_real_half_dirac",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPMonotoneProcesses.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.slp_ex_12_9c",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPMonotoneProcesses.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_distFun_map_val",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPMonotoneProcesses.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.slp_ex_12_10",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPMonotoneProcesses.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.slp_ex_12_11",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPMonotoneProcesses.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_markovOpR_kpow_zero",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPMonotoneProcesses.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_markovOpR_kpow_add",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPMonotoneProcesses.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_isMonotoneTF_kpow",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPMonotoneProcesses.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_iterate_dirac",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPMonotoneProcesses.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_dominates_iterate",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPMonotoneProcesses.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_IccBot",
+      "kind": "def",
+      "module": "MarkovProcesses/ConvergenceSLPMonotoneProcesses.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_IccTop",
+      "kind": "def",
+      "module": "MarkovProcesses/ConvergenceSLPMonotoneProcesses.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_IccBot_le",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPMonotoneProcesses.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_le_IccTop",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPMonotoneProcesses.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_dominates_dirac_bot_top",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPMonotoneProcesses.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_exists_subtype_measure",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPMonotoneProcesses.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_map_val_Icc",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPMonotoneProcesses.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_convWeak_of_dominance_mono",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPMonotoneProcesses.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.slp_ex_12_12",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPMonotoneProcesses.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_Assumption12_1",
+      "kind": "def",
+      "module": "MarkovProcesses/ConvergenceSLPMonotoneProcesses.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.slp_ex_12_14",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPMonotoneProcesses.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.slp_lemma_12_11",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPMonotoneProcesses.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.slp_theorem_12_12",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPMonotoneProcesses.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_tendsto_uniform_markovOp",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPParameters.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.slp_theorem_12_13",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPParameters.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_tendsto_integral_abs_sub",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPParameters.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.slp_lemma_12_14_cont",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPParameters.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.slp_lemma_12_14_mono",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPParameters.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_integral_lt_integral_of_lt",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPParameters.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.slp_lemma_12_14_strictMono",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPParameters.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.slp_lemma_12_14_concave",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPParameters.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.slp_lemma_12_14_strictConcave",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceSLPParameters.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.definition_3_3_6",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceMonotone.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.MixingCondition",
+      "kind": "def",
+      "module": "MarkovProcesses/ConvergenceMonotone.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.gp_mixingCondition_iff",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceMonotone.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.theorem_3_3_5",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceMonotone.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.theorem_3_3_6",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceMonotone.lean"
+    },
+    {
+      "name": "Miao.MarkovProcesses.theorem_3_3_6_euclidean",
+      "kind": "theorem",
+      "module": "MarkovProcesses/ConvergenceMonotone.lean"
+    }
+  ],
+  "full_build": "passed",
+  "fresh_source_compilation": "passed",
+  "fresh_source_lint_options": [
+    "-Dlinter.mathlibStandardSet=true",
+    "-Dlinter.style.header=false"
+  ],
+  "axioms": {
+    "Miao.MarkovProcesses.mc_IsAddClosed": [],
+    "Miao.MarkovProcesses.mc_setGcd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_IsAddClosed.succ_mul_mem": [
+      "propext"
+    ],
+    "Miao.MarkovProcesses.mc_IsAddClosed.mul_mem_zero": [
+      "propext"
+    ],
+    "Miao.MarkovProcesses.mc_IsAddClosed.add_mem_of_zero": [
+      "propext"
+    ],
+    "Miao.MarkovProcesses.mc_exists_gcd_witness": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_setGcd_spec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_setGcd_dvd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.dvd_mc_setGcd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_setGcd_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_eventually_mul_setGcd_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_eventually_mem_of_setGcd_eq_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_setGcd_eq_of_shift": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_pow_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_pow_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_pow_le_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_pow_row_sum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_entry_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.eq_3_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_pow_add_ge": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_pow_add_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_exists_pos_entry": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_IsClosed": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_pow_eq_zero_of_closed": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_Accessible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_Communicate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_Accessible.trans": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_accessible_of_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_communicate_equivalence": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_Communicate.accessible_trans": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_IsIrreducible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_IsDecomposable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_isDecomposable_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_isIrreducible_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_IsRecurrent": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_IsTransient": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_isTransient_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_returnSet": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_period": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_IsAperiodic": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_IsPeriodic": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_returnSet_isAddClosed": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_period_dvd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_period_spec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_IsRecurrent.of_communicate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.theorem_3_1_1a": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_consSet": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_mem_consSet": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.theorem_3_1_1b": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.theorem_3_1_1c": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_chain012": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_chain012_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.theorem_3_1_1b_proof_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.theorem_3_1_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_classOf": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_mem_classOf": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_SumsToOne": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_IsErgodicSetLiteral": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_IsErgodicSet": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.remark_3_1_1_literal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_sumsToOne_iff_closed": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_classOf_closed": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.ex_3_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_IsStationary": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_vecMul_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_dist_succ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_IsStationary.pow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_IsStationary.apply_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_IsStationary.le_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_IsStationary.convex": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_exists_pos_of_sum_eq_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_colMin": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_colMax": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_colMin_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_le_colMax": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_colMax_le_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_colMin_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_avg_ge": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_avg_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.theorem_3_1_3_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.theorem_3_1_3_anti": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.theorem_3_1_3_min_step": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.theorem_3_1_3_max_step": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.theorem_3_1_3_gap_step": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.theorem_3_1_3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_swap": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_swap_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_swap_sq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_swap_pow_even": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_swap_pow_odd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.theorem_3_1_3_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_pow_eq_zero_of_not_accessible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_exists_stationary": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_stationary_pos_of": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_stationary_unique_of": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_stationary_unique_of_irreducible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_stationary_pos_of_irreducible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_irreducible_stationary": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.stationary_p97_transient": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_classOf_communicate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_classOf_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_classDist": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.stationary_p97_class": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_recClasses": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_mem_recClasses": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.stationary_p97_decomposition": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.stationary_p97_infinite": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_IsAperiodicChain": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.theorem_3_1_4": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_not_accessible_of_closed": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_isRecurrent_of_closed": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_isAperiodic_of_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_pow_absorbing": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.fig31": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.fig31_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.fig31_closed": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.fig31_communicate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.fig31_recurrent": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.ex311": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.ex311_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.example_3_1_1_pow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.ex311Lim": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.example_3_1_1_tendsto": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.example_3_1_1_stationary": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.ex312": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_IsPosStochastic": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_fromBlocks_diag_pow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.example_3_1_2_pow_even": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.example_3_1_2_pow_odd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.ex312_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.example_3_1_2_classes": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.example_3_1_2_stationary": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.example_3_1_2_not_tendsto": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.ex313": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.ex313_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.example_3_1_3_pow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.example_3_1_3_tendsto": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.example_3_1_3_classes": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.ex316": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.ex316_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.example_3_1_6_classes": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.example_3_1_6_infinite": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_isStationary_of_detailed_balance": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.ex33Fn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.ex33": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.ex33_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.ex33Dist": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.ex33_irreducible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.ex33_detailed_balance": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.ex_3_3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.ex_3_3_half": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.ex_3_3_limit_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.ex_3_3_limit_gt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.ex_3_6_irreducible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.ex_3_6": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_IsStochasticE": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_mulE": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_idE": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_powE": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_mulE_assoc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_idE_mulE": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_mulE_idE": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_powE_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_powE_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_powE_succ'": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.eq_3_1_countable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_powE_add_ge": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_powE_add_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_powE_row_sum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_powE_le_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_le_one_of_stochasticE": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_AccessibleE": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_CommunicateE": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_IsIrreducibleE": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_AccessibleE.trans": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_accessibleE_of_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_isIrreducibleE_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_returnSetE": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_periodE": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_returnSetE_isAddClosed": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.theorem_3_1_2_countable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.theorem_3_1_4_countable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_tabooE": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_fpE": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_hitE": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_meanRetE": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_visitsE": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_IsTransientE": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_IsRecurrentE": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_IsPositiveRecurrentE": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_IsNullRecurrentE": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_tsum_split": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_tsum_taboo": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_fpE_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_fpE_succ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_hitE_le_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_first_entrance": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_fpE_le_powE": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_tsum_cauchy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_visits_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_sum_cauchy_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_le_of_le_add_mul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_sum_powE_ne_top": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_isTransientE_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_isRecurrentE_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_tsum_shift_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.theorem_3_1_1a_countable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_histEvent": [],
+    "Miao.MarkovProcesses.mc_IsMarkovProcess": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_IsTimeHomogeneous": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_cylProb": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_HasChainLaw": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_pathVec": [],
+    "Miao.MarkovProcesses.mc_measure_path_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_measure_step": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_measure_step_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_markov_of_chainLaw": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_marginal_of_chainLaw": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_IsInvariantE": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_IsStationaryE": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_IsInvariantE.pow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_IsInvariantE.le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_stationaryE_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_stationaryE_le_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_hitE_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_visitsE_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_recurrent_of_stationary": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_cycleStepE": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_cycleE": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_cycleStepE_succ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_cycleStepE_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_cycleE_self": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_cycleE_invariant": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_cycleE_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_tsum_tsum_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_cycleE_mass": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_hitE_le_meanRetE": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_stationary_of_posRec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_stationary_eq_inv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_transient_or_recurrent": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.theorem_3_1_5a": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.theorem_3_1_5b": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.theorem_3_1_5c": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.theorem_3_1_5_trichotomy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_toE": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_powE_toE": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_toE_stochastic": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.theorem_3_1_5_finite": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_tsum_pair": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.ex314": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.ex314_stochastic": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.ex314_col_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.ex314_col_succ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.ex314_pow_ne_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.example_3_1_4_irreducible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.theorem_3_1_4_countable_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.ex314_taboo_sum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.example_3_1_4_transient": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.example_3_1_4_stationary": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.example_3_1_4_half": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.ex315": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.ex315_stochastic": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.ex315_col": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.ex315_pow_parity": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.example_3_1_5": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.mc_shift": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.theorem_3_1_1b_countable_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.IsTransitionFunction": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_isTransitionFunction_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.markovOp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.markovOpR": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.adjointOp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_markovOp_indicator": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.slp_theorem_8_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_integrable_of_bounded": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.slp_theorem_8_1_cor": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.slp_ex_8_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_adjointOp_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.slp_theorem_8_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.slp_ex_8_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.slp_theorem_8_3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.slp_theorem_8_3_cor": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_pairing": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.slp_ex_8_3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.kpow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_kpow_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.slp_ex_8_4a": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_kpow_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_markovOp_comp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_adjointOp_comp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.slp_ex_8_4b": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_adjointOp_iterate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.IsFeller": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.IsMonotoneTF": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.IsStochasticKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.definition_3_2_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.definition_3_2_1_transition": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.theorem_3_2_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.eq_3_4": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.eq_3_4_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.theorem_3_2_5": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.eq_3_5": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.ex_3_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.ex_3_4": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.eq_p103_T": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.eq_p103_Tstar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.eq_p104_iterate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.IsInvariantDist": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.isInvariantDist_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_eq_of_map_frestrictLe": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.tulceaFD": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_trajMeasure_map_frestrictLe": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.tulceaFD_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.tulceaFD_succ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.theorem_3_2_4": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_snocIic": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_measurable_snocIic": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_snocIic_pair": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_snocIic_restrict": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_frestrictLe_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_lastKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_isMarkovKernel_lastKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.markovPath": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_isProbabilityMeasure_markovPath": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_markovPath_markov": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_markovPath_map_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_markovPath_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.theorem_3_2_3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.theorem_3_2_3_transition": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.theorem_3_2_3_marginal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_extendBox": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_preimage_extendBox": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.eq_3_2_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.theorem_3_2_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_IsPartition": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_partSums": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_tvOf": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.tvNorm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.tvDist": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_supDiff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_isPartition_univ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_isPartition_pair": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_partSums_nonempty": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_sum_partition_real": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_sum_partition_inter_real": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_partSums_bddAbove_of_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_partSums_le_of_measures": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_bddAbove_tvDist": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.slp_lemma_11_5": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_exists_sub_measures": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_tvNorm_sub_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_bddAbove_tvNorm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_tvOf_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_abs_le_tvOf": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.slp_ex_11_3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_abs_sub_le_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_bddAbove_supDiff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_two_abs_le_tvDist": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_tvDist_le_of_forall": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_tvDist_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_tendsto_zero_iff_of_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.slp_theorem_11_6": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_integrable_of_abs_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_abs_add_abs_compl_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_abs_integral_sub_le_tvDist": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_iInter_tails_eq_empty": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.slp_lemma_11_8": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.ConditionMFor": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.ConditionM": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_isMarkov_kpow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_tvDist_comm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_tvDist_triangle": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_tvDist_le_two": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_eq_of_tvDist_eq_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_bind_real_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.slp_lemma_11_11": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_isProb_adjoint": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_adjoint_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_tvDist_iterate_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.slp_theorem_11_12": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.slp_theorem_11_12_converse": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.dTV": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_dTV_eq_supDiff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_tvDist_eq_two_mul_dTV": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_abs_le_dTV": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_dTV_le_of_forall": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_dTV_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_dTV_le_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.eq_p105_metric": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.eq_p105_complete": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.ConvStrongly": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.theorem_3_3_1_contraction": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_eq_3_8_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.theorem_3_3_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.theorem_3_3_1_invariant": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.theorem_3_3_1_converse": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.MinorizationFor": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.Minorization": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.proposition_3_3_1_forward": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_threeKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_threeKernel_real": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.proposition_3_3_1_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.proposition_3_3_1_of_atom": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.proposition_3_3_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.example_3_3_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.example_3_3_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.example_3_3_3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.example_3_3_3_finite": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_withDensity_real": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_integrable_density": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.ex_3_5b": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.eq_3_7": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.ex_3_5a": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.slp_ex_12_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.slp_ex_12_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_bump": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_continuous_bump": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_bump_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_bump_eq_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_bump_antitone": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_tendsto_bump": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.ConvWeak": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.slp_lemma_12_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_count_bounds": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.slp_lemma_12_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_LimsupLe": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_LiminfGe": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_tendsto_of_limsup_liminf": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_toBCF": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_limsup_closed_of_weak": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_limsup_integral_of_closed": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_weak_of_limsup_closed": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_liminf_open_of_limsup_closed": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_limsup_closed_of_liminf_open": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_tendsto_of_null_frontier": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_limsup_closed_of_null_frontier": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.slp_theorem_12_3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_tendsto_finite_union": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.slp_theorem_12_4": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.slp_theorem_12_5": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_IsConvDetermining": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_frontier_iInter_fin_subset": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_ballInters": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.slp_theorem_12_5_cor": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.slp_theorem_12_6": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.slp_theorem_12_6_cor1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.slp_theorem_12_6_cor2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_convWeak_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_IsConvDetermining.eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_distFun": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_box": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_vertex": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_vertexSum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_diag": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_ContFromAbove": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_ContFromBelow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_Iic_eq_pi": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_box_indicator_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_measurableSet_box": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_vertexSum_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_distFun_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_contFromAbove_distFun": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.slp_theorem_12_7a": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_generateFrom_Iic_pi": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_distFun_injective": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_lowerOpen": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_frontier_Iic_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_lowerOpen_subset": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_tendsto_distFun_below": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.slp_theorem_12_7c": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.slp_ex_12_3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_nullCoord": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_countable_nullCoord_compl": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_dense_nullCoord": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_continuousAt_distFun": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_frontier_null_of_continuousAt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_box_inter": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_box_eq_empty": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.slp_theorem_12_8": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.slp_ex_12_4": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.slp_ex_12_5a": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_ramp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_continuous_ramp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_ramp_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_monotone_ramp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_tendsto_ramp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.slp_ex_12_5b": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_IsSupport": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_support_inter": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_exists_support": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_exists_convWeak_subseq_of_tight": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_measure_eq_one_of_convWeak": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.slp_theorem_12_9_cor1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_concentrated_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.slp_theorem_12_9": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_distFun_dirac": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_not_convWeak_escape": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.slp_theorem_12_9_false_hyp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.slp_theorem_12_9_false_concl": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.slp_ex_12_6a": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.slp_ex_12_6a_false": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.slp_ex_12_6b": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.slp_ex_12_6c": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.slp_theorem_12_9_cor2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_bcf_abs_le_norm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_convWeak_dirac": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_adjointOp_dirac": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_integral_markovOpR": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_fellerBCF": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_fellerBCF_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.slp_ex_12_7": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_flipKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_isMarkovKernel_flipKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_adjointOp_flip": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_adjointOp_flip_dirac": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.slp_ex_12_8a": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_iterate_flip_dirac": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_symm_ne_self": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.slp_ex_12_8b": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.slp_ex_12_8c": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_isProbabilityMeasure_iterate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_invariant_of_convWeak": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.slp_theorem_12_10": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.IsTightFamily": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.definition_3_3_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.definition_3_3_4": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_exists_convWeak_subseq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.theorem_3_3_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.theorem_3_3_2_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.eq_p104_strong_imp_weak": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.eq_p108_dirac": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.theorem_3_3_3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.corollary_3_3_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.IsPInvariantSet": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.IsErgodicMeasure": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.IsErgodicSetBook": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.definition_3_3_5_ergodicSet_eq_empty": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.example_p111_invariant": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.example_p111_ergodic": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_adjointOp_add_smul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_adjointOp_smul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.theorem_3_3_4_convex": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_adjointOp_withDensity": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_ae_eq_one_of_lintegral": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_exists_invariantSet": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_ae_invariant_of_density": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_density_invariantSet": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.theorem_3_3_4_extreme": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.theorem_3_3_4_singular": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.theorem_3_3_4_combination_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.Dominates": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.Dominates.trans": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.Dominates.real_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.slp_ex_12_9a": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.slp_ex_12_9a_subtype": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_measure_lower_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.slp_ex_12_9b": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_real_half_dirac": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.slp_ex_12_9c": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_distFun_map_val": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.slp_ex_12_10": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.slp_ex_12_11": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_markovOpR_kpow_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_markovOpR_kpow_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_isMonotoneTF_kpow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_iterate_dirac": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_dominates_iterate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_IccBot": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_IccTop": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_IccBot_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_le_IccTop": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_dominates_dirac_bot_top": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_exists_subtype_measure": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_map_val_Icc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_convWeak_of_dominance_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.slp_ex_12_12": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_Assumption12_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.slp_ex_12_14": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.slp_lemma_12_11": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.slp_theorem_12_12": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_tendsto_uniform_markovOp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.slp_theorem_12_13": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_tendsto_integral_abs_sub": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.slp_lemma_12_14_cont": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.slp_lemma_12_14_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_integral_lt_integral_of_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.slp_lemma_12_14_strictMono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.slp_lemma_12_14_concave": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.slp_lemma_12_14_strictConcave": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.definition_3_3_6": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.MixingCondition": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.gp_mixingCondition_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.theorem_3_3_5": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.theorem_3_3_6": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovProcesses.theorem_3_3_6_euclidean": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  "source_sha256": {
+    "MarkovProcesses/ChainNumberTheory.lean": "b5197ce25afb4a1ac01d000765c81335cc514e5503643ce14033105ecb02137e",
+    "MarkovProcesses/ChainBasics.lean": "f58e9b8ce87234051437a0ef9ad005b9567f7d1308e9b95e42e70063091955aa",
+    "MarkovProcesses/ChainClasses.lean": "25e96eaa54606e53faeea728d98af460305838218644b262ce769bd675ece421",
+    "MarkovProcesses/ChainStationary.lean": "f703ff584626f83e6d992cde73ed0c29a6f842f86488732640a206c5edb4eec2",
+    "MarkovProcesses/ChainExamples.lean": "821f87b42d5a83da353e01d06846e47d07d8e946eea54618061f20cd511cc4fc",
+    "MarkovProcesses/ChainExercises.lean": "e76b856f9628e0c6c8ba76fcd308379d00ed63581dbcf7568f208d96a912c6f4",
+    "MarkovProcesses/ChainCountable.lean": "49cad00e70848fd6f50a158b4ec954828bd2dd65d9579f8799713b7fcb23be36",
+    "MarkovProcesses/ChainProcess.lean": "59f55fb6049422f776b19e0ce2fbc24466c18f954a4117f325f8c0ee4b30cc2c",
+    "MarkovProcesses/ChainCountableStationary.lean": "f02abf31be7f471b68b9bcb5e7f1d87293fbf0ddffe2e9365b179384ef8100c6",
+    "MarkovProcesses/ChainCountableExamples.lean": "29bc200f3ffb9442608f8284e31229e42ad3b16f6692dde0219a1c8011470d63",
+    "MarkovProcesses/GeneralSLPTransitionFunctions.lean": "001b37e4c7b23b976c288ef79c902de1c18cf294685721fd9ac5efb584af8fdb",
+    "MarkovProcesses/GeneralKernels.lean": "05d50b9d9f738c2c3329343f30a84e2763951bdb8c0bf9de9aba4cd7728c49a0",
+    "MarkovProcesses/GeneralExtension.lean": "14d6fe5edb4576240cf911af84f8131d711d76c49cbb26869e0a85c38cd70162",
+    "MarkovProcesses/ConvergenceSLPTotalVariation.lean": "5e4285e9a0fa5cd90eeeac9d2ca99c9426f020ade2bf9112c3913bde57dd16b4",
+    "MarkovProcesses/ConvergenceSLPTVConvergence.lean": "5f6bc46f643fae7be647a54eaa27e006bc099123a25f58d36ace7114385eacf1",
+    "MarkovProcesses/ConvergenceSLPConditionM.lean": "0e85f3ee72d0403437124c26b3958a65f0873ddb4da9d264ce9128fcd3d36797",
+    "MarkovProcesses/ConvergenceStrong.lean": "74b2e1c95fc9c3abe9f6a9383b0db7baa4a4626c140e2c747b5697b4a9ff5451",
+    "MarkovProcesses/ConvergenceExercises.lean": "4f0d859dc39f124d486c739f2da2ccbef274c1ae7c42d0335d429f4157e15885",
+    "MarkovProcesses/ConvergenceSLPWeakBasics.lean": "eabb276e82ef35691a080f023a61da1ee1c05adc0b3188421cbb37a0434bdb42",
+    "MarkovProcesses/ConvergenceSLPPortmanteau.lean": "aa7e5ce9b966ec6d954823498452a0164c1443cdb02ce032a8f2f4809e4d9ce6",
+    "MarkovProcesses/ConvergenceSLPDetermining.lean": "d6db21418ae074e88edeb9c4649b1e4367bef08007ee6951e148d96debff6001",
+    "MarkovProcesses/ConvergenceSLPDistributionFunctions.lean": "f4a6952ac587a1df518fecb8694cde73e2da6c2aa14e26247b875a1ba25b0362",
+    "MarkovProcesses/ConvergenceSLPDistributionConvergence.lean": "107e3f263479e653a982ed3d682319d5a5bbaa07d4917c5dda56229f967a6fee",
+    "MarkovProcesses/ConvergenceSLPHelly.lean": "d8bf6c69e7105637c65f01f6f80720cfedf6a4d8813d127b81d17af729f1b8f3",
+    "MarkovProcesses/ConvergenceSLPFellerInvariant.lean": "4e19e65bb03ba62242e10926a3c3eb55315fa7424ac0470cc4c5acf26f52af74",
+    "MarkovProcesses/ConvergenceWeak.lean": "41faac9b013e18ccc0982fba97cc7df1f712013268b756ba32ac230b0787cfc4",
+    "MarkovProcesses/ConvergenceErgodic.lean": "4382c56d66b0bd5de52ee91c6450a4fc6450617c3620f79778ab7658f0f75d42",
+    "MarkovProcesses/ConvergenceSLPMonotoneProcesses.lean": "aec8dc7175400f7a30898c286b74105f56ac13b0b41c008b26abdf3de19a3740",
+    "MarkovProcesses/ConvergenceSLPParameters.lean": "e131464836b98013f8f7cd8e673f318e3e83c1541f226a894ff08ef43d70e08a",
+    "MarkovProcesses/ConvergenceMonotone.lean": "5c33f85d92d98184f20e58e0d757b6b20b25bf7f44db69216e46cc47c835c482",
+    "MarkovProcesses.lean": "ce8b92181f338125d7bfc5cb3751f086d139ce75090e20cf3a10e0f08ed9d71f",
+    "lean-toolchain": "8733782dc070a99b312039cda424f601b80f3be6f6f512627da5ba25adc27632",
+    "lakefile.toml": "534301756423ca30f5d6bedc2b44d7a294eea6491efb43dfc33647ab21f3c045",
+    "lake-manifest.json": "d8a89b0e3d0af5c9f9251882ad67be6b486b1eeb452eee66d7798e5457453139",
+    "proof-manifest.json": "af2fb8627fd26cad352661ffdcb97233cf01fcccfd5c72e8d1d8b5e0f5628ea4",
+    "scripts/verify.py": "a70b1fa704dd590f937f8b37682afa88a9d85a9150065acb935c7d2c9589da3b",
+    "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  },
+  "fresh_audit_sha256": "db30ed8ba2e956a66e1902cc564d26dc5823c3ac49d0b70fae024133d3b1ab4d",
+  "lean_toolchain": "leanprover/lean4:v4.34.0",
+  "scope": "Miao Chapter 3 (Markov Processes)",
+  "source": "Jianjun Miao, Economic Dynamics in Discrete Time, MIT Press 2014 (draft of 21 April 2013), Chapter 3"
+}

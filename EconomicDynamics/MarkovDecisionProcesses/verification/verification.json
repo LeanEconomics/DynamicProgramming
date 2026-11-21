@@ -1,0 +1,3242 @@
+{
+  "checked_at_utc": "2026-11-06T21:02:20.535348+00:00",
+  "theorems": 193,
+  "module_theorems": {
+    "MarkovDecisionProcesses/HistoryTools.lean": 6,
+    "MarkovDecisionProcesses/Basics.lean": 8,
+    "MarkovDecisionProcesses/Histories.lean": 12,
+    "MarkovDecisionProcesses/Objective.lean": 22,
+    "MarkovDecisionProcesses/KernelTools.lean": 4,
+    "MarkovDecisionProcesses/Simulation.lean": 8,
+    "MarkovDecisionProcesses/Trajectory.lean": 15,
+    "MarkovDecisionProcesses/Example511.lean": 7,
+    "MarkovDecisionProcesses/Deterministic.lean": 2,
+    "MarkovDecisionProcesses/Randomized.lean": 4,
+    "MarkovDecisionProcesses/DiscreteChoice.lean": 8,
+    "MarkovDecisionProcesses/OptimalStopping.lean": 29,
+    "MarkovDecisionProcesses/StoppingExamples.lean": 14,
+    "MarkovDecisionProcesses/Secretary.lean": 6,
+    "MarkovDecisionProcesses/Bandit.lean": 15,
+    "MarkovDecisionProcesses/OptimalControl.lean": 20,
+    "MarkovDecisionProcesses/ControlExercises.lean": 13
+  },
+  "audited_declarations": 327,
+  "declarations": [
+    {
+      "name": "Miao.MarkovDecisionProcesses.measurable_cons",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/HistoryTools.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.measurable_snoc",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/HistoryTools.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.measurable_init",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/HistoryTools.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.lastState",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/HistoryTools.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.measurable_lastState",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/HistoryTools.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.lastState_cons",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/HistoryTools.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.lastState_snoc",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/HistoryTools.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.MDP",
+      "kind": "structure",
+      "module": "MarkovDecisionProcesses/Basics.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.MDP.mk",
+      "kind": "constructor",
+      "module": "MarkovDecisionProcesses/Basics.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.MDP.\u0393",
+      "kind": "projection",
+      "module": "MarkovDecisionProcesses/Basics.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.MDP.P",
+      "kind": "projection",
+      "module": "MarkovDecisionProcesses/Basics.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.MDP.u",
+      "kind": "projection",
+      "module": "MarkovDecisionProcesses/Basics.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.MDP.uT",
+      "kind": "projection",
+      "module": "MarkovDecisionProcesses/Basics.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.MDP.\u03b2",
+      "kind": "projection",
+      "module": "MarkovDecisionProcesses/Basics.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.MDP.NonemptyValued",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/Basics.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.MDP.IsMarkov",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/Basics.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.MDP.IsStationary",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/Basics.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.Plan",
+      "kind": "abbrev",
+      "module": "MarkovDecisionProcesses/Basics.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.IsPlan",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/Basics.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.IsMarkovian",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/Basics.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.IsStationaryPlan",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/Basics.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.IsFeasible",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/Basics.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.feasiblePlans",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/Basics.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.HasMeasurableSelection",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/Basics.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.selectionPlan",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/Basics.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.selectionPlan_isPlan",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Basics.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.selectionPlan_markov",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Basics.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.IsStationaryPlan.isMarkovian",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Basics.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.lemma_5_1_1",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Basics.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.selection_of_feasible",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Basics.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.lemma_5_1_1_iff",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Basics.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.no_selection_example",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Basics.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.detKernel",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/Basics.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.detKernel_apply",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Basics.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.stepKernel",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/Histories.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.mu",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/Histories.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.stepKernel_apply",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Histories.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.isMarkovKernel_stepKernel",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Histories.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.isSFiniteKernel_stepKernel",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Histories.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.sFinite_mu",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Histories.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.isProbabilityMeasure_mu",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Histories.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.mu_zero",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Histories.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.integral_mu_zero",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Histories.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.mu_succ_lintegral",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Histories.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.eq_5_2",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Histories.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.integral_mu_succ",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Histories.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.mu_congr",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Histories.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.mu_eq_of_stepKernel",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Histories.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.rew",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/Objective.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.expRew",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/Objective.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.J0T",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/Objective.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.partialSum",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/Objective.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.J",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/Objective.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.Assumption512",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/Objective.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.Assumption513",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/Objective.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.Assumption514",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/Objective.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.measurable_rew",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Objective.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.expRew_zero",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Objective.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.eq_5_3",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Objective.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.partialSum_eq",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Objective.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.eq_5_4",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Objective.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.J_spec",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Objective.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.J_welldefined",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Objective.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.BoundedRewards",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/Objective.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.integrable_of_bounded",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Objective.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.plan_lt",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Objective.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.assumption_5_1_3_of_bounded",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Objective.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.abs_expRew_le",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Objective.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.tendsto_partialSum_of_bounded",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Objective.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.assumption_5_1_4_of_bounded",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Objective.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.assumption_5_1_4_of_boundedOn",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Objective.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.abs_J_le",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Objective.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.geom_partial_tendsto",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Objective.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.tendsto_partialSum_of_bddAbove",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Objective.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.tendsto_partialSum_of_bddBelow",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Objective.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.V0",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/Objective.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.V",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/Objective.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.IsValueOf",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/Objective.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.isValueOf_iff",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Objective.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.V0_char",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Objective.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.V_char",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Objective.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.IsOptimalPlan0",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/Objective.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.IsOptimalPlan",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/Objective.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.IsOptimalPlan0.isGreatest",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Objective.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.famKernel",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/KernelTools.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.famKernel_apply",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/KernelTools.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.isMarkovKernel_famKernel",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/KernelTools.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.pushKernel",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/KernelTools.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.pushKernel_apply",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/KernelTools.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.isMarkovKernel_pushKernel",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/KernelTools.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.liftHist",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/Simulation.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.liftHist_snoc",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Simulation.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.measurable_liftHist",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Simulation.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.mu_simulation",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Simulation.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.expRew_simulation",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Simulation.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.chainMDP",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/Simulation.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.chainHist",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/Simulation.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.chainMDP_isMarkov",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Simulation.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.isProbabilityMeasure_chainHist",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Simulation.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.chainHist_succ_lintegral",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Simulation.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.mu_markovian",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Simulation.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.histOf",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/Trajectory.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.measurable_histOf",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Trajectory.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.measurable_lastState\u2082",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Trajectory.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.trajKernel",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/Trajectory.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.isMarkovKernel_trajKernel",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Trajectory.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.muInf",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/Trajectory.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.isProbabilityMeasure_muInf",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Trajectory.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.splitSeg",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/Trajectory.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.measurable_splitSeg",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Trajectory.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.joinSeg",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/Trajectory.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.measurable_joinSeg",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Trajectory.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.joinSeg_splitSeg",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Trajectory.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.splitSeg_IicProdIoc",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Trajectory.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.partialTraj_map_splitSeg",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Trajectory.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.splitTraj",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/Trajectory.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.measurable_splitTraj",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Trajectory.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.splitTraj_eq",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Trajectory.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.muInf_map_splitTraj",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Trajectory.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.muInf_marginal",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Trajectory.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.muInf_zero",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Trajectory.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.muInf_unique",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Trajectory.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.J0T_one",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Example511.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.feasible_one_iff",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Example511.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.V0_one",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Example511.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.ex511a",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/Example511.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.example_5_1_1a_pos",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Example511.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.example_5_1_1a_nonpos",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Example511.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.example_5_1_1a_empty",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Example511.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.ex511b",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/Example511.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.example_5_1_1b",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Example511.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.detPath",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/Deterministic.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.mu_det",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Deterministic.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.J0T_det",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Deterministic.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.RPlan",
+      "kind": "abbrev",
+      "module": "MarkovDecisionProcesses/Randomized.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.IsFeasibleR",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/Randomized.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.nextStateK",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/Randomized.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.rmu",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/Randomized.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.isProbabilityMeasure_rmu",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Randomized.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.statesOf",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/Randomized.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.measurable_statesOf",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Randomized.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.detRPlan",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/Randomized.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.lastState_statesOf",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Randomized.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.detRPlan_feasible_iff",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Randomized.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.rustBase",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/DiscreteChoice.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.measurable_rustBase",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/DiscreteChoice.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.measurable_rustNext",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/DiscreteChoice.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.rustKernel",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/DiscreteChoice.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.rust",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/DiscreteChoice.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.rustKernel_apply",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/DiscreteChoice.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.expMeasure_Iic",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/DiscreteChoice.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.rust_cdf_keep",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/DiscreteChoice.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.rust_cdf_replace",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/DiscreteChoice.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.rust_nonneg",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/DiscreteChoice.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.rust_assumptions",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/DiscreteChoice.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.StoppingProblem",
+      "kind": "structure",
+      "module": "MarkovDecisionProcesses/OptimalStopping.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.StoppingProblem.mk",
+      "kind": "constructor",
+      "module": "MarkovDecisionProcesses/OptimalStopping.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.StoppingProblem.Q",
+      "kind": "projection",
+      "module": "MarkovDecisionProcesses/OptimalStopping.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.StoppingProblem.f",
+      "kind": "projection",
+      "module": "MarkovDecisionProcesses/OptimalStopping.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.StoppingProblem.g",
+      "kind": "projection",
+      "module": "MarkovDecisionProcesses/OptimalStopping.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.StoppingProblem.h",
+      "kind": "projection",
+      "module": "MarkovDecisionProcesses/OptimalStopping.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.StoppingProblem.\u03b2",
+      "kind": "projection",
+      "module": "MarkovDecisionProcesses/OptimalStopping.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.sHat",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/OptimalStopping.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.contKernel",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/OptimalStopping.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.contKernel_inl",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/OptimalStopping.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.contKernel_inr",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/OptimalStopping.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.stopKernel",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/OptimalStopping.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.StoppingProblem.toMDP",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/OptimalStopping.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.book\u0393",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/OptimalStopping.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.book\u0393_infeasible",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/OptimalStopping.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.stopRule",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/OptimalStopping.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.aliveSet",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/OptimalStopping.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.measurableSet_aliveSet",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/OptimalStopping.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.stopRew",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/OptimalStopping.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.stopTerm",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/OptimalStopping.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.stopValue",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/OptimalStopping.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.stopValueInf",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/OptimalStopping.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.stopV",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/OptimalStopping.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.stopVInf",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/OptimalStopping.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.stopStep",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/OptimalStopping.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.stopLift",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/OptimalStopping.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.inducedRule",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/OptimalStopping.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.measurable_stopStep",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/OptimalStopping.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.lastState_stopLift",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/OptimalStopping.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.isMarkovKernel_contKernel",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/OptimalStopping.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.toMDP_isMarkov",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/OptimalStopping.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.measurable_toMDP_u",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/OptimalStopping.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.measurable_toMDP_uT",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/OptimalStopping.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.stopStep_eq",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/OptimalStopping.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.stop_hstep",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/OptimalStopping.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.rew_stopLift",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/OptimalStopping.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.term_stopLift",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/OptimalStopping.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.expRew_toMDP",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/OptimalStopping.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.J0T_toMDP",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/OptimalStopping.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.J_toMDP",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/OptimalStopping.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.measurable_inducedRule",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/OptimalStopping.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.zOf",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/OptimalStopping.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.measurable_zOf",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/OptimalStopping.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.toPlan",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/OptimalStopping.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.lastState_comp_inl",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/OptimalStopping.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.stopLift_of_alive",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/OptimalStopping.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.aliveSet_toPlan",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/OptimalStopping.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.stopValue_toPlan",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/OptimalStopping.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.stopValueInf_toPlan",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/OptimalStopping.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.isPlan_toPlan",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/OptimalStopping.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.inducedRule_mem",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/OptimalStopping.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.V0_toMDP",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/OptimalStopping.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.V_toMDP",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/OptimalStopping.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.StoppingProblem.Bounded",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/OptimalStopping.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.StoppingProblem.IsStationary",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/OptimalStopping.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.toMDP_assumptions",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/OptimalStopping.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.optionExercise",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/StoppingExamples.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.eq_5_7_5_8",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/StoppingExamples.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.optionExercise_assumptions",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/StoppingExamples.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.americanCall_beta",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/StoppingExamples.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.exitProblem",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/StoppingExamples.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.eq_5_9_5_10",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/StoppingExamples.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.exitProblem_assumptions",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/StoppingExamples.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.bern",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/StoppingExamples.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.isProbabilityMeasure_bern",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/StoppingExamples.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.bern_one",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/StoppingExamples.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.secretary",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/StoppingExamples.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.secretary_Q",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/StoppingExamples.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.secretary_assumptions",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/StoppingExamples.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.jobSearch",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/StoppingExamples.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.ex_5_1_accept",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/StoppingExamples.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.ex_5_1",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/StoppingExamples.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.americanPut",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/StoppingExamples.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.ex_5_2",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/StoppingExamples.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.rank3",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/StoppingExamples.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.isProbabilityMeasure_rank3",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/StoppingExamples.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.secretaryTwo",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/StoppingExamples.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.ex_5_3",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/StoppingExamples.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.card_mul_of_equal_partition",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Secretary.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.bestOfFirst",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/Secretary.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.bestOfAll",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/Secretary.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.card_bestOfAll",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Secretary.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.swap_val_le",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Secretary.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.card_bestOfFirst",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Secretary.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.bestOfAll_subset",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Secretary.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.secretary_prob",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Secretary.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.Bandit",
+      "kind": "structure",
+      "module": "MarkovDecisionProcesses/Bandit.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.Bandit.mk",
+      "kind": "constructor",
+      "module": "MarkovDecisionProcesses/Bandit.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.Bandit.Q",
+      "kind": "projection",
+      "module": "MarkovDecisionProcesses/Bandit.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.Bandit.r",
+      "kind": "projection",
+      "module": "MarkovDecisionProcesses/Bandit.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.Bandit.\u03b2",
+      "kind": "projection",
+      "module": "MarkovDecisionProcesses/Bandit.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.armKernel",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/Bandit.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.Bandit.toMDP",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/Bandit.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.armKernel_apply",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Bandit.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.bandit_P_apply",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Bandit.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.bandit_P_rect",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Bandit.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.bandit_P_frozen",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Bandit.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.bandit_book_false",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Bandit.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.bandit_isMarkov",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Bandit.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.bandit_assumptions",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Bandit.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.banditPay",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/Bandit.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.retirePay",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/Bandit.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.retireSeq",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/Bandit.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.geom_succ",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Bandit.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.retirePay_succ",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Bandit.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.retirePay_shift",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Bandit.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.banditPay_retireSeq",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Bandit.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.ex_bandit_constant_arm",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Bandit.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.taskSelection",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/Bandit.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.taskSelection_assumptions",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Bandit.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.pandoraKernel",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/Bandit.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.pandora",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/Bandit.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.ex_5_4_collect",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Bandit.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.ex_5_4",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/Bandit.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.ControlProblem",
+      "kind": "structure",
+      "module": "MarkovDecisionProcesses/OptimalControl.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.ControlProblem.mk",
+      "kind": "constructor",
+      "module": "MarkovDecisionProcesses/OptimalControl.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.ControlProblem.Q",
+      "kind": "projection",
+      "module": "MarkovDecisionProcesses/OptimalControl.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.ControlProblem.\u03c6",
+      "kind": "projection",
+      "module": "MarkovDecisionProcesses/OptimalControl.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.ControlProblem.\u0393",
+      "kind": "projection",
+      "module": "MarkovDecisionProcesses/OptimalControl.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.ControlProblem.u",
+      "kind": "projection",
+      "module": "MarkovDecisionProcesses/OptimalControl.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.ControlProblem.uT",
+      "kind": "projection",
+      "module": "MarkovDecisionProcesses/OptimalControl.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.ControlProblem.\u03b2",
+      "kind": "projection",
+      "module": "MarkovDecisionProcesses/OptimalControl.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.controlKernel",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/OptimalControl.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.ControlProblem.toMDP",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/OptimalControl.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.measurable_controlNext",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/OptimalControl.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.controlKernel_apply",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/OptimalControl.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.isMarkovKernel_controlKernel",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/OptimalControl.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.controlKernel_rect",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/OptimalControl.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.controlKernel_rect_of_indep",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/OptimalControl.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.ctrlX",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/OptimalControl.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.controlObj",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/OptimalControl.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.IsFeasibleControl",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/OptimalControl.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.controlV",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/OptimalControl.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.ctrlStep",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/OptimalControl.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.ctrlLift",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/OptimalControl.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.inducedPolicy",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/OptimalControl.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.lastState_ctrlLift",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/OptimalControl.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.snd_ctrlLift",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/OptimalControl.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.measurable_ctrlStep",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/OptimalControl.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.ctrl_hstep",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/OptimalControl.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.controlMDP_isMarkov",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/OptimalControl.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.expRew_control",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/OptimalControl.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.J0T_control",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/OptimalControl.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.J_control",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/OptimalControl.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.measurable_inducedPolicy",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/OptimalControl.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.ctrlX_congr",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/OptimalControl.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.controlObj_congr",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/OptimalControl.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.controlPlan",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/OptimalControl.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.controlPlan_apply",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/OptimalControl.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.controlPlan_feasible",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/OptimalControl.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.inducedPolicy_controlPlan",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/OptimalControl.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.V0_control",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/OptimalControl.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.ReparamOK",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/ControlExercises.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.reparamPlan",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/ControlExercises.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.reparam_feasible",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/ControlExercises.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.mu_reparam",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/ControlExercises.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.rew_reparam",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/ControlExercises.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.J0T_reparam",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/ControlExercises.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.J_reparam",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/ControlExercises.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.V0_reparam",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/ControlExercises.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.V_reparam",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/ControlExercises.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.ramsey1",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/ControlExercises.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.ramsey2",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/ControlExercises.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.ramsey\u03a6",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/ControlExercises.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.ramsey\u03a8",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/ControlExercises.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.measurable_ramsey\u03a6",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/ControlExercises.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.measurable_ramsey\u03a8",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/ControlExercises.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.ramsey_kernel_eq",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/ControlExercises.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.ex_5_5",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/ControlExercises.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.ex_5_5_assumptions",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/ControlExercises.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.inventory",
+      "kind": "def",
+      "module": "MarkovDecisionProcesses/ControlExercises.lean"
+    },
+    {
+      "name": "Miao.MarkovDecisionProcesses.ex_5_6",
+      "kind": "theorem",
+      "module": "MarkovDecisionProcesses/ControlExercises.lean"
+    }
+  ],
+  "full_build": "passed",
+  "fresh_source_compilation": "passed",
+  "fresh_source_lint_options": [
+    "-Dlinter.mathlibStandardSet=true",
+    "-Dlinter.style.header=false"
+  ],
+  "axioms": {
+    "Miao.MarkovDecisionProcesses.measurable_cons": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.measurable_snoc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.measurable_init": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.lastState": [],
+    "Miao.MarkovDecisionProcesses.measurable_lastState": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.lastState_cons": [
+      "propext"
+    ],
+    "Miao.MarkovDecisionProcesses.lastState_snoc": [
+      "propext"
+    ],
+    "Miao.MarkovDecisionProcesses.MDP": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.MDP.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.MDP.\u0393": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.MDP.P": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.MDP.u": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.MDP.uT": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.MDP.\u03b2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.MDP.NonemptyValued": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.MDP.IsMarkov": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.MDP.IsStationary": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.Plan": [],
+    "Miao.MarkovDecisionProcesses.IsPlan": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.IsMarkovian": [],
+    "Miao.MarkovDecisionProcesses.IsStationaryPlan": [],
+    "Miao.MarkovDecisionProcesses.IsFeasible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.feasiblePlans": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.HasMeasurableSelection": [],
+    "Miao.MarkovDecisionProcesses.selectionPlan": [],
+    "Miao.MarkovDecisionProcesses.selectionPlan_isPlan": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.selectionPlan_markov": [],
+    "Miao.MarkovDecisionProcesses.IsStationaryPlan.isMarkovian": [],
+    "Miao.MarkovDecisionProcesses.lemma_5_1_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.selection_of_feasible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.lemma_5_1_1_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.no_selection_example": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.detKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.detKernel_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.stepKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.mu": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.stepKernel_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.isMarkovKernel_stepKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.isSFiniteKernel_stepKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.sFinite_mu": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.isProbabilityMeasure_mu": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.mu_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.integral_mu_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.mu_succ_lintegral": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.eq_5_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.integral_mu_succ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.mu_congr": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.mu_eq_of_stepKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.rew": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.expRew": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.J0T": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.partialSum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.J": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.Assumption512": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.Assumption513": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.Assumption514": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.measurable_rew": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.expRew_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.eq_5_3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.partialSum_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.eq_5_4": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.J_spec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.J_welldefined": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.BoundedRewards": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.integrable_of_bounded": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.plan_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.assumption_5_1_3_of_bounded": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.abs_expRew_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.tendsto_partialSum_of_bounded": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.assumption_5_1_4_of_bounded": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.assumption_5_1_4_of_boundedOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.abs_J_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.geom_partial_tendsto": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.tendsto_partialSum_of_bddAbove": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.tendsto_partialSum_of_bddBelow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.V0": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.V": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.IsValueOf": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.isValueOf_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.V0_char": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.V_char": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.IsOptimalPlan0": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.IsOptimalPlan": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.IsOptimalPlan0.isGreatest": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.famKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.famKernel_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.isMarkovKernel_famKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.pushKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.pushKernel_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.isMarkovKernel_pushKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.liftHist": [],
+    "Miao.MarkovDecisionProcesses.liftHist_snoc": [
+      "propext",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.measurable_liftHist": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.mu_simulation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.expRew_simulation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.chainMDP": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.chainHist": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.chainMDP_isMarkov": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.isProbabilityMeasure_chainHist": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.chainHist_succ_lintegral": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.mu_markovian": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.histOf": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.measurable_histOf": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.measurable_lastState\u2082": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.trajKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.isMarkovKernel_trajKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.muInf": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.isProbabilityMeasure_muInf": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.splitSeg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.measurable_splitSeg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.joinSeg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.measurable_joinSeg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.joinSeg_splitSeg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.splitSeg_IicProdIoc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.partialTraj_map_splitSeg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.splitTraj": [],
+    "Miao.MarkovDecisionProcesses.measurable_splitTraj": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.splitTraj_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.muInf_map_splitTraj": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.muInf_marginal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.muInf_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.muInf_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.J0T_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.feasible_one_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.V0_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.ex511a": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.example_5_1_1a_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.example_5_1_1a_nonpos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.example_5_1_1a_empty": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.ex511b": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.example_5_1_1b": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.detPath": [],
+    "Miao.MarkovDecisionProcesses.mu_det": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.J0T_det": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.RPlan": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.IsFeasibleR": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.nextStateK": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.rmu": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.isProbabilityMeasure_rmu": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.statesOf": [],
+    "Miao.MarkovDecisionProcesses.measurable_statesOf": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.detRPlan": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.lastState_statesOf": [
+      "propext"
+    ],
+    "Miao.MarkovDecisionProcesses.detRPlan_feasible_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.rustBase": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.measurable_rustBase": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.measurable_rustNext": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.rustKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.rust": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.rustKernel_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.expMeasure_Iic": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.rust_cdf_keep": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.rust_cdf_replace": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.rust_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.rust_assumptions": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.StoppingProblem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.StoppingProblem.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.StoppingProblem.Q": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.StoppingProblem.f": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.StoppingProblem.g": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.StoppingProblem.h": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.StoppingProblem.\u03b2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.sHat": [],
+    "Miao.MarkovDecisionProcesses.contKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.contKernel_inl": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.contKernel_inr": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.stopKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.StoppingProblem.toMDP": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.book\u0393": [],
+    "Miao.MarkovDecisionProcesses.book\u0393_infeasible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.stopRule": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.aliveSet": [
+      "propext"
+    ],
+    "Miao.MarkovDecisionProcesses.measurableSet_aliveSet": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.stopRew": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.stopTerm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.stopValue": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.stopValueInf": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.stopV": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.stopVInf": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.stopStep": [
+      "propext"
+    ],
+    "Miao.MarkovDecisionProcesses.stopLift": [
+      "propext"
+    ],
+    "Miao.MarkovDecisionProcesses.inducedRule": [
+      "propext"
+    ],
+    "Miao.MarkovDecisionProcesses.measurable_stopStep": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.lastState_stopLift": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.isMarkovKernel_contKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.toMDP_isMarkov": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.measurable_toMDP_u": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.measurable_toMDP_uT": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.stopStep_eq": [
+      "propext",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.stop_hstep": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.rew_stopLift": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.term_stopLift": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.expRew_toMDP": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.J0T_toMDP": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.J_toMDP": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.measurable_inducedRule": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.zOf": [],
+    "Miao.MarkovDecisionProcesses.measurable_zOf": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.toPlan": [],
+    "Miao.MarkovDecisionProcesses.lastState_comp_inl": [],
+    "Miao.MarkovDecisionProcesses.stopLift_of_alive": [
+      "propext",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.aliveSet_toPlan": [
+      "propext",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.stopValue_toPlan": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.stopValueInf_toPlan": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.isPlan_toPlan": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.inducedRule_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.V0_toMDP": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.V_toMDP": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.StoppingProblem.Bounded": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.StoppingProblem.IsStationary": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.toMDP_assumptions": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.optionExercise": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.eq_5_7_5_8": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.optionExercise_assumptions": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.americanCall_beta": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.exitProblem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.eq_5_9_5_10": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.exitProblem_assumptions": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.bern": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.isProbabilityMeasure_bern": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.bern_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.secretary": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.secretary_Q": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.secretary_assumptions": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.jobSearch": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.ex_5_1_accept": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.ex_5_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.americanPut": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.ex_5_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.rank3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.isProbabilityMeasure_rank3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.secretaryTwo": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.ex_5_3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.card_mul_of_equal_partition": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.bestOfFirst": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.bestOfAll": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.card_bestOfAll": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.swap_val_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.card_bestOfFirst": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.bestOfAll_subset": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.secretary_prob": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.Bandit": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.Bandit.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.Bandit.Q": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.Bandit.r": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.Bandit.\u03b2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.armKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.Bandit.toMDP": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.armKernel_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.bandit_P_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.bandit_P_rect": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.bandit_P_frozen": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.bandit_book_false": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.bandit_isMarkov": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.bandit_assumptions": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.banditPay": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.retirePay": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.retireSeq": [
+      "propext"
+    ],
+    "Miao.MarkovDecisionProcesses.geom_succ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.retirePay_succ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.retirePay_shift": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.banditPay_retireSeq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.ex_bandit_constant_arm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.taskSelection": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.taskSelection_assumptions": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.pandoraKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.pandora": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.ex_5_4_collect": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.ex_5_4": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.ControlProblem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.ControlProblem.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.ControlProblem.Q": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.ControlProblem.\u03c6": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.ControlProblem.\u0393": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.ControlProblem.u": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.ControlProblem.uT": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.ControlProblem.\u03b2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.controlKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.ControlProblem.toMDP": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.measurable_controlNext": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.controlKernel_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.isMarkovKernel_controlKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.controlKernel_rect": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.controlKernel_rect_of_indep": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.ctrlX": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.controlObj": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.IsFeasibleControl": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.controlV": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.ctrlStep": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.ctrlLift": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.inducedPolicy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.lastState_ctrlLift": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.snd_ctrlLift": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.measurable_ctrlStep": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.ctrl_hstep": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.controlMDP_isMarkov": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.expRew_control": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.J0T_control": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.J_control": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.measurable_inducedPolicy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.ctrlX_congr": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.controlObj_congr": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.controlPlan": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.controlPlan_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.controlPlan_feasible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.inducedPolicy_controlPlan": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.V0_control": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.ReparamOK": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.reparamPlan": [],
+    "Miao.MarkovDecisionProcesses.reparam_feasible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.mu_reparam": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.rew_reparam": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.J0T_reparam": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.J_reparam": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.V0_reparam": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.V_reparam": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.ramsey1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.ramsey2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.ramsey\u03a6": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.ramsey\u03a8": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.measurable_ramsey\u03a6": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.measurable_ramsey\u03a8": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.ramsey_kernel_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.ex_5_5": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.ex_5_5_assumptions": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.inventory": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.MarkovDecisionProcesses.ex_5_6": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  "source_sha256": {
+    "MarkovDecisionProcesses/HistoryTools.lean": "89df7a49e0c8a8923a90c690e7a21a017d35348c9179206d85032b7d4e934c4c",
+    "MarkovDecisionProcesses/Basics.lean": "a1a3e7e61760e79fd048e360efb23a7550b907ef8736acbc3bea5017601ad6d1",
+    "MarkovDecisionProcesses/Histories.lean": "263e77dcb9d248e3de9adac4620d346a2f52326b4ef9860a070221915cc94f85",
+    "MarkovDecisionProcesses/Objective.lean": "85f27fb3985570349207555326ffcf26383bf507a01ef7ef0457d8417c72b2e7",
+    "MarkovDecisionProcesses/KernelTools.lean": "9b82966a31a3f1f3275aae9a7f1729ea48a5ff7b16524ac98431011cace7debe",
+    "MarkovDecisionProcesses/Simulation.lean": "0398a0900ffe792ee454a2159bc1a37382ffaa093e407c33f3e1d4dbecf4d743",
+    "MarkovDecisionProcesses/Trajectory.lean": "517f553a51a3ba524988cedd3daefd658c80e6275660f301df4becd89230417f",
+    "MarkovDecisionProcesses/Example511.lean": "04459c315b6212853fe72050d235688ea5898ff412a6aff4b23447dd70afe2f4",
+    "MarkovDecisionProcesses/Deterministic.lean": "94e97a3855ebb2cad7bf10f87be952b2452038506b6026bfec31e732eb508afb",
+    "MarkovDecisionProcesses/Randomized.lean": "fcfc9924230655c78a09927239ec4976782ab317a82e0025f5a9b23fd4dc4b98",
+    "MarkovDecisionProcesses/DiscreteChoice.lean": "07ba4337efa111bb512c78ce1d7eb51748db8582314e6d24bb5ad77b3b91420e",
+    "MarkovDecisionProcesses/OptimalStopping.lean": "5737c70101d701275bf76d1fd6ca96cb4533dbdcdf7b5013ffac58b5e89f8d4c",
+    "MarkovDecisionProcesses/StoppingExamples.lean": "be03582958ad034c5c45d7fbf300bad04fa5e22300b82d080e83e5441d933296",
+    "MarkovDecisionProcesses/Secretary.lean": "85c71693061de7aa2c1d717bfd087e58d51f0f7fba3c93b0b3d663ef3624125f",
+    "MarkovDecisionProcesses/Bandit.lean": "72ff18484b80ad8610b478313762ae69eaa9a11de0d772a3f00401e7eb6b5114",
+    "MarkovDecisionProcesses/OptimalControl.lean": "1c4f35d726f55673e20d46288c159fa9fb9ebd6fa33d12f5f8d3e7e4a199a049",
+    "MarkovDecisionProcesses/ControlExercises.lean": "25b374773c127c5633b6a967147fda43ffeecdd8c21c9f6cf1bbb888971f661d",
+    "MarkovDecisionProcesses.lean": "9fbf8c64bfc08a36c0bade414065fbc026d3a831c4d79026459c7a332ec342a5",
+    "lean-toolchain": "8733782dc070a99b312039cda424f601b80f3be6f6f512627da5ba25adc27632",
+    "lakefile.toml": "486d9321c5c20c7dd701275cbf4608465e16ecc8cf868b6705e832f18ee05d8f",
+    "lake-manifest.json": "20102f23240236b0a969e2da407e2ea63e9b1f896370f9bc5bcae28dc0d27908",
+    "proof-manifest.json": "d99e03f6123152c3ee6f6fea36abadc498ccb42d652550bab430f161f3aa266e",
+    "scripts/verify.py": "a70b1fa704dd590f937f8b37682afa88a9d85a9150065acb935c7d2c9589da3b",
+    "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  },
+  "fresh_audit_sha256": "cef28a99318ef5718e2ecafe0a7e1071ba3b117eac8acdb8f3da9d6529f30220",
+  "lean_toolchain": "leanprover/lean4:v4.34.0",
+  "scope": "Miao Chapter 5 (Markov decision process model): the model, plans, Lemma 5.1.1, history measures (5.2) and Ionescu Tulcea, objectives (5.3)-(5.6), Example 5.1.1, the examples of Section 5.2 and Exercises 5.1-5.6.",
+  "source": "Jianjun Miao, Economic Dynamics in Discrete Time, MIT Press 2014 (draft of 21 April 2013), Chapter 5"
+}

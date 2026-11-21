@@ -1,0 +1,4679 @@
+{
+  "checked_at_utc": "2026-11-10T07:47:05.601859+00:00",
+  "theorems": 363,
+  "module_theorems": {
+    "OverlappingGenerations/Basics.lean": 3,
+    "OverlappingGenerations/Scalar.lean": 61,
+    "OverlappingGenerations/PhaseDiagram.lean": 39,
+    "OverlappingGenerations/OXPreferences.lean": 11,
+    "OverlappingGenerations/OXEconomy.lean": 23,
+    "OverlappingGenerations/OXExistence.lean": 9,
+    "OverlappingGenerations/OXOfferCurve.lean": 20,
+    "OverlappingGenerations/OXOptimality.lean": 18,
+    "OverlappingGenerations/OXExamples.lean": 16,
+    "OverlappingGenerations/OXExercises.lean": 14,
+    "OverlappingGenerations/OPHousehold.lean": 12,
+    "OverlappingGenerations/OPDiamond.lean": 53,
+    "OverlappingGenerations/OPEfficiency.lean": 15,
+    "OverlappingGenerations/OPBubbles.lean": 22,
+    "OverlappingGenerations/OPExercises.lean": 34,
+    "OverlappingGenerations/OPExercisesCES.lean": 13
+  },
+  "audited_declarations": 463,
+  "declarations": [
+    {
+      "name": "Miao.OverlappingGenerations.IsSolution",
+      "kind": "def",
+      "module": "OverlappingGenerations/Basics.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.IsRegular",
+      "kind": "def",
+      "module": "OverlappingGenerations/Basics.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.EventuallyConst",
+      "kind": "def",
+      "module": "OverlappingGenerations/Basics.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.IsStableSeq",
+      "kind": "def",
+      "module": "OverlappingGenerations/Basics.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.IsSteadyStateOf",
+      "kind": "def",
+      "module": "OverlappingGenerations/Basics.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.IsAsympStable",
+      "kind": "def",
+      "module": "OverlappingGenerations/Basics.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.basin",
+      "kind": "def",
+      "module": "OverlappingGenerations/Basics.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.IsGloballyStable",
+      "kind": "def",
+      "module": "OverlappingGenerations/Basics.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.IsStableMatrix",
+      "kind": "def",
+      "module": "OverlappingGenerations/Basics.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.isGloballyStable_iff_basin",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/Basics.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.isAsympStable_iff_basin",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/Basics.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.isStableSeq_iff_bddAbove",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/Basics.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.IsScalarSol",
+      "kind": "def",
+      "module": "OverlappingGenerations/Scalar.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.BddSeq",
+      "kind": "def",
+      "module": "OverlappingGenerations/Scalar.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.bddSeq_iff_isStableSeq",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/Scalar.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.bddSeq_of_tendsto",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/Scalar.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.BddSeq.exists_nonneg",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/Scalar.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.geom_eq",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/Scalar.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.abs_pow_mul_tendsto_atTop",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/Scalar.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.pow_mul_tendsto_zero_iff",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/Scalar.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.geom_bdd_iff",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/Scalar.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.pow_mul_tendsto_zero_of_bdd",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/Scalar.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.bddSeq_of_forced",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/Scalar.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.tendsto_zero_of_forced",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/Scalar.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.eq_1_2_steady_state",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/Scalar.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.eq_1_2_no_steady_state_of_b_one",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/Scalar.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.eq_1_3",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/Scalar.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.eq_1_3_globallyStable",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/Scalar.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.eq_1_3_tendsto",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/Scalar.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.eq_1_3_diverges",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/Scalar.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.eq_1_3_bdd_iff",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/Scalar.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.eq_1_4",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/Scalar.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.not_tendsto_neg_one_pow",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/Scalar.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.eq_1_5_counterexample",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/Scalar.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.eq_1_5_tendsto",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/Scalar.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.eq_1_5_bdd",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/Scalar.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.eq_1_5_sub_tendsto",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/Scalar.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.eq_1_5_b_one_formula",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/Scalar.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.eq_1_5_b_one_tendsto_iff",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/Scalar.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.eq_1_5_b_one_limit_sub",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/Scalar.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.eq_1_5_b_neg_one_counterexample",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/Scalar.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.eq_1_5_b_neg_one_unique",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/Scalar.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.eq_1_6",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/Scalar.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.fwdSol",
+      "kind": "def",
+      "module": "OverlappingGenerations/Scalar.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.abs_one_div_lt_one",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/Scalar.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.eq_1_8_summable",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/Scalar.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.eq_1_8_isScalarSol",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/Scalar.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.eq_1_8_bdd",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/Scalar.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.eq_1_7_of_bdd",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/Scalar.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.eq_1_8_transversality",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/Scalar.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.eq_1_8_unique_of_transversality",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/Scalar.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.eq_1_8_unique_bdd",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/Scalar.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.eq_1_8",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/Scalar.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.eq_1_9",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/Scalar.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.eq_1_9_every_solution",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/Scalar.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.eq_1_8_others_diverge",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/Scalar.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.eq_1_8_not_summable",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/Scalar.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.eq_1_9_bubble_stable",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/Scalar.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.example_1_1_1_recursion",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/Scalar.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.example_1_1_1_backward",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/Scalar.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.example_1_1_1_tendsto_iff",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/Scalar.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.example_1_1_1_abs_a_lt_one_iff",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/Scalar.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.example_1_1_1_forward",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/Scalar.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.example_1_1_1_forward_limit",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/Scalar.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.example_1_1_1_isScalarSol",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/Scalar.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.example_1_1_1_bubbles",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/Scalar.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.example_1_1_1_unique_bdd",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/Scalar.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.divTax",
+      "kind": "def",
+      "module": "OverlappingGenerations/Scalar.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.taxPath",
+      "kind": "def",
+      "module": "OverlappingGenerations/Scalar.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.sum_div_pow_eq",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/Scalar.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.example_1_1_2_p0_forward",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/Scalar.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.example_1_1_2_pT",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/Scalar.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.example_1_1_2_p0",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/Scalar.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.example_1_1_2_solves",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/Scalar.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.example_1_1_2_const",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/Scalar.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.example_1_1_2_unique",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/Scalar.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.example_1_1_2_drop",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/Scalar.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.example_1_1_2_decreasing",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/Scalar.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.IsSol22",
+      "kind": "def",
+      "module": "OverlappingGenerations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.cp22",
+      "kind": "def",
+      "module": "OverlappingGenerations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.disc22",
+      "kind": "def",
+      "module": "OverlappingGenerations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.lamLo",
+      "kind": "def",
+      "module": "OverlappingGenerations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.lamHi",
+      "kind": "def",
+      "module": "OverlappingGenerations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.sVar",
+      "kind": "def",
+      "module": "OverlappingGenerations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.disc22_pos",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.cp22_factor",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.cp22_lamLo",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.cp22_lamHi",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.lamLo_lt_lamHi",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.roots22_lt",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.lamLo_gt_neg_one_iff",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.abs_lamLo_lt_one_iff",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.lamLo_lt_m11",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.sVar_step",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.sVar_succ",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.recover22",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.IsSol22.ext",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.bddSeq_lin",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.sHi_zero_of_bdd",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.kSaddle",
+      "kind": "def",
+      "module": "OverlappingGenerations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.sHi_zero_iff",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.saddle22",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.saddle22_tendsto",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.saddle22_unique",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.saddle22_unbounded",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.sVar_tendsto",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.saddle22_iff",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.saddle22_only_zero",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.IsPhaseSol",
+      "kind": "def",
+      "module": "OverlappingGenerations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.phaseIter",
+      "kind": "def",
+      "module": "OverlappingGenerations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.phaseIter_sol",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.phase_tilde",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.phase_delta",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.phase_isocline_x",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.phase_isocline_y",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.phase_steady_state",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.bddSeq_sub_const",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.phase_dev",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.phase_cp_one",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.phase_cp_neg_one",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.phase_roots",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.phase_lamLo_iff",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.phase_saddle",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.phase_saddle_slope",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.phase_saddle_iff",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.phase_counterexample",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/PhaseDiagram.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXPrefs",
+      "kind": "structure",
+      "module": "OverlappingGenerations/OXPreferences.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXPrefs.mk",
+      "kind": "constructor",
+      "module": "OverlappingGenerations/OXPreferences.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXPrefs.ox_u",
+      "kind": "projection",
+      "module": "OverlappingGenerations/OXPreferences.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXPrefs.ox_du",
+      "kind": "projection",
+      "module": "OverlappingGenerations/OXPreferences.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXPrefs.ox_\u03b2",
+      "kind": "projection",
+      "module": "OverlappingGenerations/OXPreferences.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXPrefs.ox_\u03b2_pos",
+      "kind": "projection",
+      "module": "OverlappingGenerations/OXPreferences.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXPrefs.ox_\u03b2_le",
+      "kind": "projection",
+      "module": "OverlappingGenerations/OXPreferences.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXPrefs.ox_hasDeriv",
+      "kind": "projection",
+      "module": "OverlappingGenerations/OXPreferences.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXPrefs.ox_du_pos",
+      "kind": "projection",
+      "module": "OverlappingGenerations/OXPreferences.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXPrefs.ox_du_anti",
+      "kind": "projection",
+      "module": "OverlappingGenerations/OXPreferences.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXPrefs.ox_du_cont",
+      "kind": "projection",
+      "module": "OverlappingGenerations/OXPreferences.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXPrefs.ox_inada",
+      "kind": "projection",
+      "module": "OverlappingGenerations/OXPreferences.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.ox_logPrefs",
+      "kind": "def",
+      "module": "OverlappingGenerations/OXPreferences.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.ox_logPrefs_spec",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXPreferences.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXPrefs.ox_U",
+      "kind": "def",
+      "module": "OverlappingGenerations/OXPreferences.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXPrefs.ox_tangent_strict",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXPreferences.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXPrefs.ox_tangent",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXPreferences.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXPrefs.ox_u_strictMonoOn",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXPreferences.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXPrefs.ox_u_lt",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXPreferences.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXPrefs.ox_du_lt",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXPreferences.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXPrefs.ox_chord",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXPreferences.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXPrefs.ox_eventually_pos",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXPreferences.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXPrefs.ox_foc",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXPreferences.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXPrefs.ox_line_optimal",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXPreferences.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXPrefs.ox_line_optimal_strict",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXPreferences.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy",
+      "kind": "structure",
+      "module": "OverlappingGenerations/OXEconomy.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.mk",
+      "kind": "constructor",
+      "module": "OverlappingGenerations/OXEconomy.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.ox_P",
+      "kind": "projection",
+      "module": "OverlappingGenerations/OXEconomy.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.ox_e1",
+      "kind": "projection",
+      "module": "OverlappingGenerations/OXEconomy.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.ox_e2",
+      "kind": "projection",
+      "module": "OverlappingGenerations/OXEconomy.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.ox_gn",
+      "kind": "projection",
+      "module": "OverlappingGenerations/OXEconomy.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.ox_gm",
+      "kind": "projection",
+      "module": "OverlappingGenerations/OXEconomy.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.ox_N0",
+      "kind": "projection",
+      "module": "OverlappingGenerations/OXEconomy.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.ox_M0",
+      "kind": "projection",
+      "module": "OverlappingGenerations/OXEconomy.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.ox_e1_pos",
+      "kind": "projection",
+      "module": "OverlappingGenerations/OXEconomy.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.ox_e2_pos",
+      "kind": "projection",
+      "module": "OverlappingGenerations/OXEconomy.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.ox_gn_pos",
+      "kind": "projection",
+      "module": "OverlappingGenerations/OXEconomy.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.ox_gm_pos",
+      "kind": "projection",
+      "module": "OverlappingGenerations/OXEconomy.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.ox_N0_pos",
+      "kind": "projection",
+      "module": "OverlappingGenerations/OXEconomy.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.ox_M0_pos",
+      "kind": "projection",
+      "module": "OverlappingGenerations/OXEconomy.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.ox_exampleEconomy",
+      "kind": "def",
+      "module": "OverlappingGenerations/OXEconomy.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.ox_exampleEconomy_spec",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXEconomy.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.ox_N",
+      "kind": "def",
+      "module": "OverlappingGenerations/OXEconomy.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.ox_M",
+      "kind": "def",
+      "module": "OverlappingGenerations/OXEconomy.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.ox_\u03c4",
+      "kind": "def",
+      "module": "OverlappingGenerations/OXEconomy.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.ox_EU",
+      "kind": "def",
+      "module": "OverlappingGenerations/OXEconomy.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.ox_Raut",
+      "kind": "def",
+      "module": "OverlappingGenerations/OXEconomy.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.ox_Budget",
+      "kind": "def",
+      "module": "OverlappingGenerations/OXEconomy.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.ox_Optimal",
+      "kind": "def",
+      "module": "OverlappingGenerations/OXEconomy.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.ox_oldBudget",
+      "kind": "def",
+      "module": "OverlappingGenerations/OXEconomy.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.ox_OldOptimal",
+      "kind": "def",
+      "module": "OverlappingGenerations/OXEconomy.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.ox_IsEquilibrium",
+      "kind": "def",
+      "module": "OverlappingGenerations/OXEconomy.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.ox_IsMonetary",
+      "kind": "def",
+      "module": "OverlappingGenerations/OXEconomy.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.ox_IsNonmonetary",
+      "kind": "def",
+      "module": "OverlappingGenerations/OXEconomy.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.ox_mhat",
+      "kind": "def",
+      "module": "OverlappingGenerations/OXEconomy.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.ox_N_pos",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXEconomy.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.ox_M_pos",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXEconomy.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.ox_N_succ",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXEconomy.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.ox_M_succ",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXEconomy.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.eq_16_1_16_2",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXEconomy.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.ox_oldOptimal_iff",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXEconomy.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.ox_optimal_binds",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXEconomy.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.ox_autarky_isEquilibrium",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXEconomy.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.ox_nonmonetary_autarky",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXEconomy.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.ox_mhat_eq",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXEconomy.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.ox_old_resources",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXEconomy.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.ox_oldBudget_eq",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXEconomy.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.ox_monetary_alloc",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXEconomy.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.eq_16_4",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXEconomy.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.eq_16_5",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXEconomy.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.eq_16_7",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXEconomy.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.ox_Raut_lt",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXEconomy.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.eq_16_6",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXEconomy.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.ox_EulerRel",
+      "kind": "def",
+      "module": "OverlappingGenerations/OXEconomy.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.ox_qOf",
+      "kind": "def",
+      "module": "OverlappingGenerations/OXEconomy.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.ox_mhat_qOf",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXEconomy.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.ox_budget_line",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXEconomy.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.ox_ofSaving_isMonetary",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXEconomy.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.ox_monetary_eulerRel",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXEconomy.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.eq_16_8",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXExistence.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.proposition_16_1_1_necessity",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXExistence.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.proposition_16_1_1_limit",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXExistence.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.proposition_16_1_1_root",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXExistence.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.ox_eulerRel_const_iff",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXExistence.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.proposition_16_1_1_sufficiency",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXExistence.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.proposition_16_1_1",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXExistence.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.proposition_16_1_1_unique_stationary",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXExistence.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.ox_stationary_R",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXExistence.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.ox_offer_z",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXOfferCurve.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.ox_offer_lt_e1",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXOfferCurve.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.ox_offer_equilibrium",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXOfferCurve.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXPrefs.ox_offer_slope_m",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXOfferCurve.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXPrefs.ox_offer_slope_m_eq",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXOfferCurve.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXPrefs.ox_offer_slope_z",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXOfferCurve.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXPrefs.ox_offer_slope_z_pos",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXOfferCurve.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXPrefs.ox_offer_backward_iff",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXOfferCurve.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXPrefs.ox_offer_backward_necessary",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXOfferCurve.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXPrefs.ox_offer_upward",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXOfferCurve.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.ox_offer_origin",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXOfferCurve.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.ox_offer_slope_origin",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXOfferCurve.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.ox_offer_steady_iff",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXOfferCurve.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.ox_offer_steady_exists_iff",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXOfferCurve.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.ox_R_tendsto_Raut",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXOfferCurve.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.ox_fixed_stable",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXOfferCurve.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.ox_fixed_unstable",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXOfferCurve.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.ox_unstable_counterexample",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXOfferCurve.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.ox_indeterminacy",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXOfferCurve.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.ox_two_cycle",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXOfferCurve.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.ox_Feasible",
+      "kind": "def",
+      "module": "OverlappingGenerations/OXOptimality.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.definition_16_1_1",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXOptimality.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.ox_ParetoOptimal",
+      "kind": "def",
+      "module": "OverlappingGenerations/OXOptimality.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.ox_IsStationary",
+      "kind": "def",
+      "module": "OverlappingGenerations/OXOptimality.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.eq_16_12",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXOptimality.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.ox_feasible_old",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXOptimality.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.eq_16_11",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXOptimality.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.ox_eps_geometric",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXOptimality.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.eq_16_10",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXOptimality.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.ox_stationary_optimal",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXOptimality.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.proposition_16_1_2_transfer",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXOptimality.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.ox_stationary_not_optimal",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXOptimality.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.ox_stationary_optimal_iff",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXOptimality.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.proposition_16_1_2",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXOptimality.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.eq_16_13",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXOptimality.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.proposition_16_1_3_steps",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXOptimality.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.proposition_16_1_3",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXOptimality.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.ox_balasko_shell_prod",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXOptimality.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.ox_balasko_shell_equiv",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXOptimality.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.ox_balasko_shell_transfers",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXOptimality.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.ox_balasko_shell_stationary",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXOptimality.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.ox_exampleEconomy_log",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXExamples.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.ox_log_Raut",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXExamples.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.ox_log_eulerRel",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXExamples.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.ox_log_fixed",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXExamples.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.ox_log_paths",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXExamples.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.ox_log_construct",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXExamples.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.ox_log_tendsto",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXExamples.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.example_16_1_1_diffeq",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXExamples.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.example_16_1_1_general",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXExamples.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.example_16_1_1_construct",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXExamples.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.example_16_1_1_explosive",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXExamples.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.example_16_1_1_left",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXExamples.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.example_16_1_1_right",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXExamples.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.example_16_1_2_high",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXExamples.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.example_16_1_2_low",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXExamples.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.example_16_1_2_not_monetary",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXExamples.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.ex_16_1_a",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXExercises.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.ex_16_1_b_exists",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXExercises.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.ex_16_1_b_values",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXExercises.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.ex_16_1_b_rank",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXExercises.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.ex_16_1_b_autarky",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXExercises.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.ex_16_1_c",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXExercises.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXEconomy.ex_16_1_c_exist",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXExercises.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXPrefs.ox_TreeBudget",
+      "kind": "def",
+      "module": "OverlappingGenerations/OXExercises.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXPrefs.ox_TreeOptimal",
+      "kind": "def",
+      "module": "OverlappingGenerations/OXExercises.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXPrefs.ox_TreeEquilibrium",
+      "kind": "def",
+      "module": "OverlappingGenerations/OXExercises.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXPrefs.ox_tree_binds",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXExercises.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXPrefs.ox_tree_price_pos",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXExercises.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXPrefs.ox_tree_foc",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXExercises.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXPrefs.ex_16_2_a",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXExercises.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXPrefs.ox_astar",
+      "kind": "def",
+      "module": "OverlappingGenerations/OXExercises.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXPrefs.ox_astar_spec",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXExercises.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXPrefs.ex_16_2_b_exists",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXExercises.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OXPrefs.ex_16_2_b_unique",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OXExercises.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_concave_tangent",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPHousehold.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_strictConcave_tangent",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPHousehold.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_lifetime_hasDerivAt",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPHousehold.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_euler_necessary",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPHousehold.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_euler_sufficient",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPHousehold.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_euler_sufficient_strict",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPHousehold.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_inada_small",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPHousehold.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_saving_exists",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPHousehold.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_saving_unique",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPHousehold.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_saving_wage_mono",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPHousehold.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_saving_sw",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPHousehold.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.opLogSaving",
+      "kind": "def",
+      "module": "OverlappingGenerations/OPHousehold.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_log_saving",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPHousehold.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.opWage",
+      "kind": "def",
+      "module": "OverlappingGenerations/OPDiamond.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.opRate",
+      "kind": "def",
+      "module": "OverlappingGenerations/OPDiamond.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_F_hasDerivAt_K",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPDiamond.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_F_hasDerivAt_N",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPDiamond.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.eq_16_15",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPDiamond.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.eq_16_14",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPDiamond.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_euler_identity",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPDiamond.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_capital_market",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPDiamond.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OPIsDiamondEqm",
+      "kind": "def",
+      "module": "OverlappingGenerations/OPDiamond.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.eq_16_16",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPDiamond.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_diamondEqm_iff",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPDiamond.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_fp_strictAnti",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPDiamond.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_wage_pos",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPDiamond.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_wage_strictMono",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPDiamond.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_wage_lt",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPDiamond.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_wage_tendsto_zero",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPDiamond.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_wage_div_eq",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPDiamond.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_f_div_tendsto_zero",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPDiamond.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_wage_div_tendsto_zero",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPDiamond.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_temporary_eqm",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPDiamond.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_S_antitone",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPDiamond.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_G_exists",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPDiamond.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_G_strictMono",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPDiamond.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_G_lt_wage",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPDiamond.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_G_tendsto_zero",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPDiamond.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_G_div_tendsto_zero",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPDiamond.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_G_eventually_below",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPDiamond.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_wage_hasDerivAt",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPDiamond.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_G_slope",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPDiamond.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_G_slope_pos",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPDiamond.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_G_slope_steady",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPDiamond.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_ivt_up",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPDiamond.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_ivt_down",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPDiamond.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_slope_lt_one",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPDiamond.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_least_fixed",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPDiamond.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_fixed_below",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPDiamond.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_above_diag_of_deriv",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPDiamond.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_below_diag_of_deriv",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPDiamond.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_exists_fixed",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPDiamond.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_diamond_conditions",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPDiamond.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_diamond_conditions_printed",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPDiamond.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_fixed_signs",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPDiamond.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_global_convergence",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPDiamond.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_local_stability",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPDiamond.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.opOddG",
+      "kind": "def",
+      "module": "OverlappingGenerations/OPDiamond.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.opEvenG",
+      "kind": "def",
+      "module": "OverlappingGenerations/OPDiamond.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_strictMonoOn_max",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPDiamond.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_strictMonoOn_min",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPDiamond.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_sqrt_strictMonoOn",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPDiamond.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_three_sqrt_div_tendsto",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPDiamond.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_sqrt_four",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPDiamond.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_sqrt_nine",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPDiamond.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_oddG_props",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPDiamond.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_oddG_fixed",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPDiamond.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_odd_counterexample",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPDiamond.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_evenG_props",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPDiamond.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_evenG_fixed",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPDiamond.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_even_counterexample",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPDiamond.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_resource_per_worker",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPEfficiency.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.eq_16_17",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPEfficiency.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_golden_rule_max",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPEfficiency.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_golden_rule_strict",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPEfficiency.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_golden_rule_unique",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPEfficiency.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_golden_rule_exists",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPEfficiency.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.opLagrangian",
+      "kind": "def",
+      "module": "OverlappingGenerations/OPEfficiency.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_planner_lagrangian",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPEfficiency.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_planner_foc",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPEfficiency.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_planner_golden_rule",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPEfficiency.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_planner_foc_printed",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPEfficiency.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OPFeasible",
+      "kind": "def",
+      "module": "OverlappingGenerations/OPEfficiency.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OPParetoDominates",
+      "kind": "def",
+      "module": "OverlappingGenerations/OPEfficiency.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_steady_feasible",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPEfficiency.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_dynamic_inefficiency",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPEfficiency.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_pareto_optimal_of_lt_golden",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPEfficiency.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_cass_steady_state",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPEfficiency.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_cass_corollary",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPEfficiency.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.eq_16_18",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPBubbles.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.eq_16_19",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPBubbles.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OPIsBubbleEqm",
+      "kind": "def",
+      "module": "OverlappingGenerations/OPBubbles.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_bubble_zero",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPBubbles.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_bubble_pos",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPBubbles.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_bubble_k_law",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPBubbles.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_bubbly_steady",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPBubbles.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_bubbly_steady_golden",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPBubbles.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.opKLocus",
+      "kind": "def",
+      "module": "OverlappingGenerations/OPBubbles.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_k_locus",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPBubbles.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_kLocus_zero_iff",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPBubbles.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_S_vs_G",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPBubbles.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_kLocus_pos",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPBubbles.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_kLocus_neg",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPBubbles.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_kLocus_hasDerivAt",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPBubbles.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_kLocus_slope_printed",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPBubbles.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_kLocus_slope_neg",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPBubbles.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_k_increase_iff",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPBubbles.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_k_decrease_iff",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPBubbles.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_k_stationary_iff",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPBubbles.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_b_diff",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPBubbles.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_b_increase_iff",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPBubbles.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_b_stationary_iff",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPBubbles.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_bubbly_exists_iff",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPBubbles.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.opCD",
+      "kind": "def",
+      "module": "OverlappingGenerations/OPExercises.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.opCDfp",
+      "kind": "def",
+      "module": "OverlappingGenerations/OPExercises.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_cd_hasDerivAt",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPExercises.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_cd_wage",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPExercises.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_rpow_eq_mul",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPExercises.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.opKstarCD",
+      "kind": "def",
+      "module": "OverlappingGenerations/OPExercises.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_kstarCD_pos",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPExercises.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_cd_steady_iff",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPExercises.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_cd_converge",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPExercises.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.opCRRASaving",
+      "kind": "def",
+      "module": "OverlappingGenerations/OPExercises.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_crra_hasDerivAt",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPExercises.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_crra_strictConcave",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPExercises.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.ex_16_3_euler",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPExercises.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.ex_16_3_optimal",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPExercises.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.ex_16_3_mono_lt",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPExercises.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.ex_16_3_anti_gt",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPExercises.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.ex_16_3_gamma_one",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPExercises.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.ex_16_3_law",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPExercises.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.ex_16_4_law",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPExercises.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.ex_16_4_steady",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPExercises.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.ex_16_4_converge",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPExercises.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.ex_16_4_mpk",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPExercises.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.ex_16_4_inefficient",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPExercises.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.ex_16_4_efficient",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPExercises.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.OPIsDiamondEqmDep",
+      "kind": "def",
+      "module": "OverlappingGenerations/OPExercises.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.ex_16_6_rate",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPExercises.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.ex_16_6_full",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPExercises.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.ex_16_6_log",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPExercises.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.ex_16_7_a",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPExercises.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.ex_16_7_b",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPExercises.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.ex_16_7_bc_path",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPExercises.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.ex_16_8_a_i",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPExercises.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.ex_16_8_a_ii",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPExercises.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.opPAYGWelfare",
+      "kind": "def",
+      "module": "OverlappingGenerations/OPExercises.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.ex_16_8_a_iii",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPExercises.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.ex_16_8_a_iii_resources",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPExercises.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.ex_16_8_b",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPExercises.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.opLinM11",
+      "kind": "def",
+      "module": "OverlappingGenerations/OPExercises.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.opLinM12",
+      "kind": "def",
+      "module": "OverlappingGenerations/OPExercises.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.opLinM21",
+      "kind": "def",
+      "module": "OverlappingGenerations/OPExercises.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.ex_16_9_linearization",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPExercises.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.ex_16_9_roots",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPExercises.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.ex_16_9_saddle",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPExercises.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.opCESbase",
+      "kind": "def",
+      "module": "OverlappingGenerations/OPExercisesCES.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.opCES",
+      "kind": "def",
+      "module": "OverlappingGenerations/OPExercisesCES.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.opCESfp",
+      "kind": "def",
+      "module": "OverlappingGenerations/OPExercisesCES.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.opCESwage",
+      "kind": "def",
+      "module": "OverlappingGenerations/OPExercisesCES.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_ces_base_pos",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPExercisesCES.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.ex_16_5_hasDerivAt",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPExercisesCES.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.ex_16_5_wage",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPExercisesCES.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.ex_16_5_law",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPExercisesCES.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_ces_wage_continuousOn",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPExercisesCES.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.ex_16_5_a",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPExercisesCES.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.ex_16_5_a_cobbDouglas",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPExercisesCES.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.opCESM",
+      "kind": "def",
+      "module": "OverlappingGenerations/OPExercisesCES.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_ces_wage_le_small",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPExercisesCES.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.op_ces_wage_le_large",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPExercisesCES.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.ex_16_5_b_bound",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPExercisesCES.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.ex_16_5_b_none",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPExercisesCES.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.ex_16_5_b_collapse",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPExercisesCES.lean"
+    },
+    {
+      "name": "Miao.OverlappingGenerations.ex_16_5_b_two",
+      "kind": "theorem",
+      "module": "OverlappingGenerations/OPExercisesCES.lean"
+    }
+  ],
+  "full_build": "passed",
+  "fresh_source_compilation": "passed",
+  "fresh_source_lint_options": [
+    "-Dlinter.mathlibStandardSet=true",
+    "-Dlinter.style.header=false"
+  ],
+  "axioms": {
+    "Miao.OverlappingGenerations.IsSolution": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.IsRegular": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.EventuallyConst": [],
+    "Miao.OverlappingGenerations.IsStableSeq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.IsSteadyStateOf": [],
+    "Miao.OverlappingGenerations.IsAsympStable": [
+      "propext",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.basin": [
+      "propext",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.IsGloballyStable": [
+      "propext",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.IsStableMatrix": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.isGloballyStable_iff_basin": [
+      "propext",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.isAsympStable_iff_basin": [
+      "propext",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.isStableSeq_iff_bddAbove": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.IsScalarSol": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.BddSeq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.bddSeq_iff_isStableSeq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.bddSeq_of_tendsto": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.BddSeq.exists_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.geom_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.abs_pow_mul_tendsto_atTop": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.pow_mul_tendsto_zero_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.geom_bdd_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.pow_mul_tendsto_zero_of_bdd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.bddSeq_of_forced": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.tendsto_zero_of_forced": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.eq_1_2_steady_state": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.eq_1_2_no_steady_state_of_b_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.eq_1_3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.eq_1_3_globallyStable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.eq_1_3_tendsto": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.eq_1_3_diverges": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.eq_1_3_bdd_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.eq_1_4": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.not_tendsto_neg_one_pow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.eq_1_5_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.eq_1_5_tendsto": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.eq_1_5_bdd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.eq_1_5_sub_tendsto": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.eq_1_5_b_one_formula": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.eq_1_5_b_one_tendsto_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.eq_1_5_b_one_limit_sub": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.eq_1_5_b_neg_one_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.eq_1_5_b_neg_one_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.eq_1_6": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.fwdSol": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.abs_one_div_lt_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.eq_1_8_summable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.eq_1_8_isScalarSol": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.eq_1_8_bdd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.eq_1_7_of_bdd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.eq_1_8_transversality": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.eq_1_8_unique_of_transversality": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.eq_1_8_unique_bdd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.eq_1_8": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.eq_1_9": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.eq_1_9_every_solution": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.eq_1_8_others_diverge": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.eq_1_8_not_summable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.eq_1_9_bubble_stable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.example_1_1_1_recursion": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.example_1_1_1_backward": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.example_1_1_1_tendsto_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.example_1_1_1_abs_a_lt_one_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.example_1_1_1_forward": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.example_1_1_1_forward_limit": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.example_1_1_1_isScalarSol": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.example_1_1_1_bubbles": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.example_1_1_1_unique_bdd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.divTax": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.taxPath": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.sum_div_pow_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.example_1_1_2_p0_forward": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.example_1_1_2_pT": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.example_1_1_2_p0": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.example_1_1_2_solves": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.example_1_1_2_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.example_1_1_2_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.example_1_1_2_drop": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.example_1_1_2_decreasing": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.IsSol22": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.cp22": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.disc22": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.lamLo": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.lamHi": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.sVar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.disc22_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.cp22_factor": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.cp22_lamLo": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.cp22_lamHi": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.lamLo_lt_lamHi": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.roots22_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.lamLo_gt_neg_one_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.abs_lamLo_lt_one_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.lamLo_lt_m11": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.sVar_step": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.sVar_succ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.recover22": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.IsSol22.ext": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.bddSeq_lin": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.sHi_zero_of_bdd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.kSaddle": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.sHi_zero_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.saddle22": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.saddle22_tendsto": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.saddle22_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.saddle22_unbounded": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.sVar_tendsto": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.saddle22_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.saddle22_only_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.IsPhaseSol": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.phaseIter": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.phaseIter_sol": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.phase_tilde": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.phase_delta": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.phase_isocline_x": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.phase_isocline_y": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.phase_steady_state": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.bddSeq_sub_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.phase_dev": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.phase_cp_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.phase_cp_neg_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.phase_roots": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.phase_lamLo_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.phase_saddle": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.phase_saddle_slope": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.phase_saddle_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.phase_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXPrefs": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXPrefs.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXPrefs.ox_u": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXPrefs.ox_du": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXPrefs.ox_\u03b2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXPrefs.ox_\u03b2_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXPrefs.ox_\u03b2_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXPrefs.ox_hasDeriv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXPrefs.ox_du_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXPrefs.ox_du_anti": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXPrefs.ox_du_cont": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXPrefs.ox_inada": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.ox_logPrefs": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.ox_logPrefs_spec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXPrefs.ox_U": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXPrefs.ox_tangent_strict": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXPrefs.ox_tangent": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXPrefs.ox_u_strictMonoOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXPrefs.ox_u_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXPrefs.ox_du_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXPrefs.ox_chord": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXPrefs.ox_eventually_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXPrefs.ox_foc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXPrefs.ox_line_optimal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXPrefs.ox_line_optimal_strict": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.ox_P": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.ox_e1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.ox_e2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.ox_gn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.ox_gm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.ox_N0": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.ox_M0": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.ox_e1_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.ox_e2_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.ox_gn_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.ox_gm_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.ox_N0_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.ox_M0_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.ox_exampleEconomy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.ox_exampleEconomy_spec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.ox_N": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.ox_M": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.ox_\u03c4": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.ox_EU": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.ox_Raut": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.ox_Budget": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.ox_Optimal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.ox_oldBudget": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.ox_OldOptimal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.ox_IsEquilibrium": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.ox_IsMonetary": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.ox_IsNonmonetary": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.ox_mhat": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.ox_N_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.ox_M_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.ox_N_succ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.ox_M_succ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.eq_16_1_16_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.ox_oldOptimal_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.ox_optimal_binds": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.ox_autarky_isEquilibrium": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.ox_nonmonetary_autarky": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.ox_mhat_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.ox_old_resources": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.ox_oldBudget_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.ox_monetary_alloc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.eq_16_4": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.eq_16_5": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.eq_16_7": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.ox_Raut_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.eq_16_6": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.ox_EulerRel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.ox_qOf": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.ox_mhat_qOf": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.ox_budget_line": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.ox_ofSaving_isMonetary": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.ox_monetary_eulerRel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.eq_16_8": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.proposition_16_1_1_necessity": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.proposition_16_1_1_limit": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.proposition_16_1_1_root": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.ox_eulerRel_const_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.proposition_16_1_1_sufficiency": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.proposition_16_1_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.proposition_16_1_1_unique_stationary": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.ox_stationary_R": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.ox_offer_z": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.ox_offer_lt_e1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.ox_offer_equilibrium": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXPrefs.ox_offer_slope_m": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXPrefs.ox_offer_slope_m_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXPrefs.ox_offer_slope_z": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXPrefs.ox_offer_slope_z_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXPrefs.ox_offer_backward_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXPrefs.ox_offer_backward_necessary": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXPrefs.ox_offer_upward": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.ox_offer_origin": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.ox_offer_slope_origin": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.ox_offer_steady_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.ox_offer_steady_exists_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.ox_R_tendsto_Raut": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.ox_fixed_stable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.ox_fixed_unstable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.ox_unstable_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.ox_indeterminacy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.ox_two_cycle": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.ox_Feasible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.definition_16_1_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.ox_ParetoOptimal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.ox_IsStationary": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.eq_16_12": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.ox_feasible_old": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.eq_16_11": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.ox_eps_geometric": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.eq_16_10": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.ox_stationary_optimal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.proposition_16_1_2_transfer": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.ox_stationary_not_optimal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.ox_stationary_optimal_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.proposition_16_1_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.eq_16_13": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.proposition_16_1_3_steps": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.proposition_16_1_3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.ox_balasko_shell_prod": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.ox_balasko_shell_equiv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.ox_balasko_shell_transfers": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.ox_balasko_shell_stationary": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.ox_exampleEconomy_log": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.ox_log_Raut": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.ox_log_eulerRel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.ox_log_fixed": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.ox_log_paths": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.ox_log_construct": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.ox_log_tendsto": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.example_16_1_1_diffeq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.example_16_1_1_general": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.example_16_1_1_construct": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.example_16_1_1_explosive": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.example_16_1_1_left": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.example_16_1_1_right": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.example_16_1_2_high": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.example_16_1_2_low": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.example_16_1_2_not_monetary": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.ex_16_1_a": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.ex_16_1_b_exists": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.ex_16_1_b_values": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.ex_16_1_b_rank": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.ex_16_1_b_autarky": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.ex_16_1_c": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXEconomy.ex_16_1_c_exist": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXPrefs.ox_TreeBudget": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXPrefs.ox_TreeOptimal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXPrefs.ox_TreeEquilibrium": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXPrefs.ox_tree_binds": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXPrefs.ox_tree_price_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXPrefs.ox_tree_foc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXPrefs.ex_16_2_a": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXPrefs.ox_astar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXPrefs.ox_astar_spec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXPrefs.ex_16_2_b_exists": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OXPrefs.ex_16_2_b_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_concave_tangent": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_strictConcave_tangent": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_lifetime_hasDerivAt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_euler_necessary": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_euler_sufficient": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_euler_sufficient_strict": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_inada_small": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_saving_exists": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_saving_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_saving_wage_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_saving_sw": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.opLogSaving": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_log_saving": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.opWage": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.opRate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_F_hasDerivAt_K": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_F_hasDerivAt_N": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.eq_16_15": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.eq_16_14": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_euler_identity": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_capital_market": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OPIsDiamondEqm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.eq_16_16": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_diamondEqm_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_fp_strictAnti": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_wage_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_wage_strictMono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_wage_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_wage_tendsto_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_wage_div_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_f_div_tendsto_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_wage_div_tendsto_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_temporary_eqm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_S_antitone": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_G_exists": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_G_strictMono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_G_lt_wage": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_G_tendsto_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_G_div_tendsto_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_G_eventually_below": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_wage_hasDerivAt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_G_slope": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_G_slope_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_G_slope_steady": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_ivt_up": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_ivt_down": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_slope_lt_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_least_fixed": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_fixed_below": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_above_diag_of_deriv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_below_diag_of_deriv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_exists_fixed": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_diamond_conditions": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_diamond_conditions_printed": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_fixed_signs": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_global_convergence": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_local_stability": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.opOddG": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.opEvenG": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_strictMonoOn_max": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_strictMonoOn_min": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_sqrt_strictMonoOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_three_sqrt_div_tendsto": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_sqrt_four": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_sqrt_nine": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_oddG_props": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_oddG_fixed": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_odd_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_evenG_props": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_evenG_fixed": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_even_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_resource_per_worker": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.eq_16_17": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_golden_rule_max": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_golden_rule_strict": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_golden_rule_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_golden_rule_exists": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.opLagrangian": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_planner_lagrangian": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_planner_foc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_planner_golden_rule": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_planner_foc_printed": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OPFeasible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OPParetoDominates": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_steady_feasible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_dynamic_inefficiency": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_pareto_optimal_of_lt_golden": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_cass_steady_state": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_cass_corollary": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.eq_16_18": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.eq_16_19": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OPIsBubbleEqm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_bubble_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_bubble_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_bubble_k_law": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_bubbly_steady": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_bubbly_steady_golden": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.opKLocus": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_k_locus": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_kLocus_zero_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_S_vs_G": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_kLocus_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_kLocus_neg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_kLocus_hasDerivAt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_kLocus_slope_printed": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_kLocus_slope_neg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_k_increase_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_k_decrease_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_k_stationary_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_b_diff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_b_increase_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_b_stationary_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_bubbly_exists_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.opCD": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.opCDfp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_cd_hasDerivAt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_cd_wage": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_rpow_eq_mul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.opKstarCD": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_kstarCD_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_cd_steady_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_cd_converge": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.opCRRASaving": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_crra_hasDerivAt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_crra_strictConcave": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.ex_16_3_euler": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.ex_16_3_optimal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.ex_16_3_mono_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.ex_16_3_anti_gt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.ex_16_3_gamma_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.ex_16_3_law": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.ex_16_4_law": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.ex_16_4_steady": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.ex_16_4_converge": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.ex_16_4_mpk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.ex_16_4_inefficient": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.ex_16_4_efficient": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.OPIsDiamondEqmDep": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.ex_16_6_rate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.ex_16_6_full": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.ex_16_6_log": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.ex_16_7_a": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.ex_16_7_b": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.ex_16_7_bc_path": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.ex_16_8_a_i": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.ex_16_8_a_ii": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.opPAYGWelfare": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.ex_16_8_a_iii": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.ex_16_8_a_iii_resources": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.ex_16_8_b": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.opLinM11": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.opLinM12": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.opLinM21": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.ex_16_9_linearization": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.ex_16_9_roots": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.ex_16_9_saddle": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.opCESbase": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.opCES": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.opCESfp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.opCESwage": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_ces_base_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.ex_16_5_hasDerivAt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.ex_16_5_wage": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.ex_16_5_law": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_ces_wage_continuousOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.ex_16_5_a": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.ex_16_5_a_cobbDouglas": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.opCESM": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_ces_wage_le_small": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.op_ces_wage_le_large": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.ex_16_5_b_bound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.ex_16_5_b_none": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.ex_16_5_b_collapse": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.OverlappingGenerations.ex_16_5_b_two": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  "source_sha256": {
+    "OverlappingGenerations/Basics.lean": "b6a20bec06909204d671fcd247d3d11deb1af9ff1b742a2f389066da8a50e070",
+    "OverlappingGenerations/Scalar.lean": "576f2a84a9dbd50372a9443829bc97087e4a1be93b62a110b4778a6ff1fa95f3",
+    "OverlappingGenerations/PhaseDiagram.lean": "627dc92a86c1420dd75fa0ebe8bd9db98fc2fcc49b71e04b78027003b5ec59ae",
+    "OverlappingGenerations/OXPreferences.lean": "10f6bf440070932dd4227bbb8be3e985a961156417b6ce944368f1f8a18426b4",
+    "OverlappingGenerations/OXEconomy.lean": "8fd951d0c558287256a7341d83e041178dc2a643a1893d2f3a278a0ffa685553",
+    "OverlappingGenerations/OXExistence.lean": "cd5a226476abbcd5085a2487fc7425b800b7334649265c2e9537178f22d050f9",
+    "OverlappingGenerations/OXOfferCurve.lean": "b3c489198e2ae40e24b02aa6bf99a0bdb5a53f340600247f0bedbee416b533f6",
+    "OverlappingGenerations/OXOptimality.lean": "858860ae6664f6bd91070921cd0504863ec0a866d2d6e97827dc0bc109797c56",
+    "OverlappingGenerations/OXExamples.lean": "c19c53116002477740251b490fcdb4b12fa00caec12de7bac5f0a38a7c235c55",
+    "OverlappingGenerations/OXExercises.lean": "5e1300cec1edde5623c935a4ae6769b9eec5cb49207b5617b413e3bd8542574d",
+    "OverlappingGenerations/OPHousehold.lean": "bee450e5e651fb481168979938216354aac070789e4eff2c620daafd576a81b9",
+    "OverlappingGenerations/OPDiamond.lean": "8d91c33756f6f3499497a431f3b372a6ab9e54602cbdc8a7efd927e680ff2007",
+    "OverlappingGenerations/OPEfficiency.lean": "5b15312be523fed9853d117b3a3a0b44e5f66acd93ae3aa356329c4520efeb6a",
+    "OverlappingGenerations/OPBubbles.lean": "516f368ccf665955c3b0fe361d1e7568130583b5efd8733e2434fd9615da1481",
+    "OverlappingGenerations/OPExercises.lean": "cb899573d4bc388fb6d80565c5230beb9c6bb4f9549e7d5914038a0889e25c0d",
+    "OverlappingGenerations/OPExercisesCES.lean": "874ea975144395ad5d80259d1f43690ccf3069f76fc7f60a712e3dfb84b0fd5e",
+    "OverlappingGenerations.lean": "dbd03ab0c63fd7e70118179c700b142e3f1144381400434b9563a4bb754e3dd3",
+    "lean-toolchain": "8733782dc070a99b312039cda424f601b80f3be6f6f512627da5ba25adc27632",
+    "lakefile.toml": "f0df06dee9716d01891d4130e2aba44a42ac44e1a6aaa0fc9dcebd3aca7f7e30",
+    "lake-manifest.json": "bf02c045d4d697ff497e2bf38c29e3aeb4ed67077f415be5ed7dddfc57b37eb4",
+    "proof-manifest.json": "b3801696990ffc3c9f53e41276fd07bfee15e4a637f9ee88b5edd70875d4dbb5",
+    "scripts/verify.py": "a70b1fa704dd590f937f8b37682afa88a9d85a9150065acb935c7d2c9589da3b",
+    "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  },
+  "fresh_audit_sha256": "8602444d64ca94a406441d4a154c92ecbdb145a22bfe351040b6b7ddc49ace3d",
+  "lean_toolchain": "leanprover/lean4:v4.34.0",
+  "scope": "Miao Chapter 16 (pp. 529-557): the Samuelson exchange OLG economy (offer curve, monetary and autarky steady states, Examples 16.1.1-16.1.2, Propositions 16.1.1-16.1.3, Pareto optimality and Balasko-Shell in the stationary case), the Diamond production economy (saving, the map G, steady states, stability, golden rule and dynamic inefficiency), Tirole bubbles, and Exercises 1-9.",
+  "source": "Jianjun Miao, Economic Dynamics in Discrete Time, MIT Press 2014 (draft of 21 April 2013), Chapter 16"
+}

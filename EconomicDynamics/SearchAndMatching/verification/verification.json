@@ -1,0 +1,2808 @@
+{
+  "checked_at_utc": "2026-11-10T21:38:44.659345+00:00",
+  "theorems": 233,
+  "module_theorems": {
+    "SearchAndMatching/DMMatching.lean": 21,
+    "SearchAndMatching/DMBellman.lean": 13,
+    "SearchAndMatching/DMSteadyState.lean": 23,
+    "SearchAndMatching/DMDynamics.lean": 21,
+    "SearchAndMatching/DMLargeFirm.lean": 10,
+    "SearchAndMatching/DMEfficiency.lean": 11,
+    "SearchAndMatching/DMExercise1.lean": 12,
+    "SearchAndMatching/DMExercise2.lean": 7,
+    "SearchAndMatching/JDBasics.lean": 10,
+    "SearchAndMatching/JDDistribution.lean": 17,
+    "SearchAndMatching/JDEndogenous.lean": 18,
+    "SearchAndMatching/JDSteadyState.lean": 22,
+    "SearchAndMatching/JDBusinessCycle.lean": 24,
+    "SearchAndMatching/JDExercises.lean": 24
+  },
+  "audited_declarations": 275,
+  "declarations": [
+    {
+      "name": "Miao.SearchAndMatching.DMMatchingFn",
+      "kind": "structure",
+      "module": "SearchAndMatching/DMMatching.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.DMMatchingFn.mk",
+      "kind": "constructor",
+      "module": "SearchAndMatching/DMMatching.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.DMMatchingFn.M",
+      "kind": "projection",
+      "module": "SearchAndMatching/DMMatching.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.DMMatchingFn.pos",
+      "kind": "projection",
+      "module": "SearchAndMatching/DMMatching.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.DMMatchingFn.homog",
+      "kind": "projection",
+      "module": "SearchAndMatching/DMMatching.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.DMMatchingFn.mono_u",
+      "kind": "projection",
+      "module": "SearchAndMatching/DMMatching.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.DMMatchingFn.mono_v",
+      "kind": "projection",
+      "module": "SearchAndMatching/DMMatching.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.DMMatchingFn.concave",
+      "kind": "projection",
+      "module": "SearchAndMatching/DMMatching.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_q",
+      "kind": "def",
+      "module": "SearchAndMatching/DMMatching.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_xi",
+      "kind": "def",
+      "module": "SearchAndMatching/DMMatching.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_M_eq_mul_q",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMMatching.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.eq_18_1",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMMatching.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_jobFinding",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMMatching.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_q_pos",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMMatching.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_q_strictAntiOn",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMMatching.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_jobFinding_strictMonoOn",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMMatching.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_concave_u",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMMatching.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_q_continuousOn",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMMatching.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_q_hasDerivAt",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMMatching.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_Mu_pos",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMMatching.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_Mu_mul_lt",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMMatching.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_q_elasticity",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMMatching.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_xi_mem",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMMatching.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_jobFinding_hasDerivAt",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMMatching.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_beveridge_anti",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMMatching.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_beveridge_convex",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMMatching.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_cd_homog",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMMatching.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_cd_concave",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMMatching.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_cdMatching",
+      "kind": "def",
+      "module": "SearchAndMatching/DMMatching.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_cd_q",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMMatching.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_cd_hasDerivAt",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMMatching.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_cd_xi",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMMatching.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.eq_18_6",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMBellman.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.eq_18_7",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMBellman.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.eq_18_8",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMBellman.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_amgm2_strict",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMBellman.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_nash_bound",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMBellman.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_nash_solution",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMBellman.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.eq_18_11",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMBellman.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_surplus",
+      "kind": "def",
+      "module": "SearchAndMatching/DMBellman.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.eq_18_12",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMBellman.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.eq_18_13",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMBellman.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.eq_18_14",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMBellman.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_worker_surplus",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMBellman.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.eq_18_15",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMBellman.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_IsSearchEqm",
+      "kind": "def",
+      "module": "SearchAndMatching/DMBellman.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_bellman_implies_eqm",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMBellman.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_jcCurve",
+      "kind": "def",
+      "module": "SearchAndMatching/DMSteadyState.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_wageCurve",
+      "kind": "def",
+      "module": "SearchAndMatching/DMSteadyState.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_ssLHS",
+      "kind": "def",
+      "module": "SearchAndMatching/DMSteadyState.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_uStar",
+      "kind": "def",
+      "module": "SearchAndMatching/DMSteadyState.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.eq_18_16",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMSteadyState.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_jc_iff",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMSteadyState.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_jc_strictAntiOn",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMSteadyState.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.eq_18_17",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMSteadyState.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_wc_strictMono",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMSteadyState.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.eq_18_18",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMSteadyState.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_wc_eq_jc",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMSteadyState.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_ssLHS_strictMonoOn",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMSteadyState.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_ss_unique",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMSteadyState.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_ss_exists",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMSteadyState.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_ss_not_exists",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMSteadyState.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_cd_ssLHS",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMSteadyState.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_cd_ss_existsUnique",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMSteadyState.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.eq_18_19",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMSteadyState.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_uStar_mem",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMSteadyState.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_uStar_strictAntiOn",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMSteadyState.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_vStar_strictMonoOn",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMSteadyState.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_cs_shifts",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMSteadyState.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_cs_A",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMSteadyState.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_cs_b",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMSteadyState.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_cs_eta",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMSteadyState.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_steady_isSearchEqm",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMSteadyState.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_searchEqm_exists",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMSteadyState.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.eq_18_20",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMDynamics.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.eq_18_21",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMDynamics.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_a11",
+      "kind": "def",
+      "module": "SearchAndMatching/DMDynamics.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_lin_a11",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMDynamics.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_a11_xi",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMDynamics.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_a11_gt_one",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMDynamics.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_a21",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMDynamics.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_a21_sign",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMDynamics.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_a22",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMDynamics.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_a22_mem",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMDynamics.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_saddle_path",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMDynamics.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_dtheta_locus",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMDynamics.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_du_locus",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMDynamics.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_uPath",
+      "kind": "def",
+      "module": "SearchAndMatching/DMDynamics.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_uPath_rec",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMDynamics.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_uPath_sub",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMDynamics.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_uPath_tendsto",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMDynamics.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_uPath_mem",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMDynamics.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_uPath_strictAnti",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMDynamics.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_vPath_strictAnti",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMDynamics.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_v0_gt",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMDynamics.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_transition_isSearchEqm",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMDynamics.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_transition_not_monotone",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMDynamics.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_firmProfit",
+      "kind": "def",
+      "module": "SearchAndMatching/DMLargeFirm.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_FirmFeasible",
+      "kind": "def",
+      "module": "SearchAndMatching/DMLargeFirm.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_FirmOptimal",
+      "kind": "def",
+      "module": "SearchAndMatching/DMLargeFirm.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_firm_euler",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMLargeFirm.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_largeFirm_eq_18_8",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMLargeFirm.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_firmOptimal_of_euler",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMLargeFirm.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_firmOptimal_exists",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMLargeFirm.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.eq_18_23",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMLargeFirm.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_aggregate_18_2",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMLargeFirm.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.eq_18_24",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMLargeFirm.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_Jn",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMLargeFirm.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.eq_18_26",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMLargeFirm.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.eq_18_27",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMLargeFirm.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_planner_foc_v",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMEfficiency.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_planner_foc_N",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMEfficiency.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_planner_foc_N_misprint",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMEfficiency.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_plannerLHS",
+      "kind": "def",
+      "module": "SearchAndMatching/DMEfficiency.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.eq_18_28",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMEfficiency.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_hosios",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMEfficiency.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_xi_duration",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMEfficiency.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_cd_plannerLHS",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMEfficiency.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_cd_planner_existsUnique",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMEfficiency.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_cd_hosios_iff",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMEfficiency.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_cd_hosios_compare",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMEfficiency.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_hosios_misprint",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMEfficiency.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_hhCons",
+      "kind": "def",
+      "module": "SearchAndMatching/DMExercise1.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_Ex1HHOptimal",
+      "kind": "def",
+      "module": "SearchAndMatching/DMExercise1.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_ex1_share_euler",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMExercise1.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_ex1_hhOptimal_of_euler",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMExercise1.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_ex1_price",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMExercise1.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_ex1Div",
+      "kind": "def",
+      "module": "SearchAndMatching/DMExercise1.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_Ex1Feasible",
+      "kind": "def",
+      "module": "SearchAndMatching/DMExercise1.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_Ex1FirmOptimal",
+      "kind": "def",
+      "module": "SearchAndMatching/DMExercise1.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_ex1_capital_euler",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMExercise1.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_ex1_job_creation",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMExercise1.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_ex1_wage",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMExercise1.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_Ex1IsSearchEqm",
+      "kind": "def",
+      "module": "SearchAndMatching/DMExercise1.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_ex1_FK",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMExercise1.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_ex1_FN",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMExercise1.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_ex1_kstar",
+      "kind": "def",
+      "module": "SearchAndMatching/DMExercise1.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_ex1_kstar_unique",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMExercise1.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_ex1_steady",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMExercise1.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_ex1_steady_isSearchEqm",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMExercise1.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_ex1_searchEqm_exists",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMExercise1.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_mpLag",
+      "kind": "def",
+      "module": "SearchAndMatching/DMExercise2.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_uf_hasDerivAt",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMExercise2.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_mp_foc_v",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMExercise2.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_mp_foc_z",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMExercise2.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_mp_foc_E",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMExercise2.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.ex_18_2",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMExercise2.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.ex_18_2_efficiency",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMExercise2.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.dm_mp_exp_dist",
+      "kind": "theorem",
+      "module": "SearchAndMatching/DMExercise2.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.jd_nash_le",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDBasics.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.jd_nash_eq_iff",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDBasics.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.jd_nash_iff",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDBasics.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.jd_foc",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDBasics.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.jd_envelope",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDBasics.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.jd_partial_homog_one",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDBasics.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.jd_partial_homog_two",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDBasics.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.jd_affine_sol",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDBasics.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.jd_affine_antitone",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDBasics.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.jd_affine_tendsto",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDBasics.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.jd_Phi",
+      "kind": "def",
+      "module": "SearchAndMatching/JDDistribution.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.jd_G",
+      "kind": "def",
+      "module": "SearchAndMatching/JDDistribution.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.jd_one_sub_G",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDDistribution.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.jd_G_mono",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDDistribution.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.jd_G_mem",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDDistribution.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.jd_Phi_integrable",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDDistribution.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.jd_Phi_nonneg",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDDistribution.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.jd_Phi_eq_setIntegral",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDDistribution.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.jd_Phi_antitone",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDDistribution.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.jd_Phi_sub_le",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDDistribution.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.jd_Phi_abs_sub_le",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDDistribution.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.jd_Phi_continuous",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDDistribution.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.jd_Phi_gap",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDDistribution.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.jd_Phi_pos_iff",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDDistribution.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.jd_Phi_pos_iff_real",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDDistribution.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.jd_Phi_strictAnti_of_pos",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDDistribution.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.jd_Phi_of_nonpos",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDDistribution.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.jd_Phi_tendsto_atTop",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDDistribution.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.jd_Phi_hasDerivAt",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDDistribution.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.jd_sepRate",
+      "kind": "def",
+      "module": "SearchAndMatching/JDEndogenous.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.jd_sepRate_mem",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDEndogenous.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.jd_sepRate_mono",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDEndogenous.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.eq_18_43",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDEndogenous.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.jd_filled_job_cutoff_form",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDEndogenous.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.eq_18_31",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDEndogenous.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.eq_18_32",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDEndogenous.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.eq_18_33",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDEndogenous.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.eq_18_34",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDEndogenous.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.eq_18_37_38",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDEndogenous.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.jd_worker_surplus",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDEndogenous.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.eq_18_39",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDEndogenous.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.jd_wage_intermediate",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDEndogenous.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.eq_18_40",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDEndogenous.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.jd_JF_linear",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDEndogenous.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.jd_cutoff",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDEndogenous.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.eq_18_41",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDEndogenous.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.eq_18_42",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDEndogenous.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.jd_jdRate",
+      "kind": "def",
+      "module": "SearchAndMatching/JDEndogenous.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.jd_jcRate",
+      "kind": "def",
+      "module": "SearchAndMatching/JDEndogenous.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.jd_jc_eq_jd_of_steady",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDEndogenous.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.jd_JC",
+      "kind": "def",
+      "module": "SearchAndMatching/JDSteadyState.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.jd_JD",
+      "kind": "def",
+      "module": "SearchAndMatching/JDSteadyState.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.jd_thetaJD",
+      "kind": "def",
+      "module": "SearchAndMatching/JDSteadyState.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.jd_h_strictMono",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDSteadyState.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.jd_JD_iff",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDSteadyState.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.jd_thetaJD_strictMono",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDSteadyState.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.jd_thetaJD_continuous",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDSteadyState.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.eq_18_44",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDSteadyState.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.eq_18_45",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDSteadyState.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.jd_steady_state_unique",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDSteadyState.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.jd_steady_state_exists",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDSteadyState.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.jd_steady_state_existsUnique",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDSteadyState.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.jd_example_steady_state",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDSteadyState.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.jd_JC_kappaA_iff",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDSteadyState.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.jd_compstat_A_theta",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDSteadyState.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.jd_compstat_kappaA",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDSteadyState.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.jd_compstat_kappaA_jd",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDSteadyState.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.jd_compstat_kappaA_u",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDSteadyState.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.jd_beveridge_downward",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDSteadyState.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.jd_beveridge_shift",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDSteadyState.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.jd_transition_unemployment",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDSteadyState.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.jd_kappa_div_q_hasDerivAt",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDSteadyState.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.jd_linear_psi",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDSteadyState.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.jd_psi_abs_lt_one",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDSteadyState.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.jd_saddle",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDSteadyState.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.jd_hhObj",
+      "kind": "def",
+      "module": "SearchAndMatching/JDBusinessCycle.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.jd_hh_budget_forms",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDBusinessCycle.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.jd_crra_hasDerivAt",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDBusinessCycle.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.jd_disutility_hasDerivAt",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDBusinessCycle.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.jd_disutility_integral",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDBusinessCycle.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.jd_hh_foc_I",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDBusinessCycle.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.jd_hh_envelope_K",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDBusinessCycle.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.eq_18_49",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDBusinessCycle.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.jd_hh_envelope_N",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDBusinessCycle.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.eq_18_50",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDBusinessCycle.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.jd_hh_Vn",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDBusinessCycle.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.jd_hh_Vn_book_budget",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDBusinessCycle.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.jd_firmObj",
+      "kind": "def",
+      "module": "SearchAndMatching/JDBusinessCycle.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.eq_18_51",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDBusinessCycle.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.eq_18_52",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDBusinessCycle.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.eq_18_53",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDBusinessCycle.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.eq_18_54",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDBusinessCycle.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.eq_18_55",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDBusinessCycle.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.jd_firm_Jn",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDBusinessCycle.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.jd_nash_18_3",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDBusinessCycle.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.eq_18_56",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDBusinessCycle.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.jd_capital_ratio_indep",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDBusinessCycle.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.jd_wage_indep",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDBusinessCycle.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.jd_aggregate_output",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDBusinessCycle.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.jd_employment_consistency",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDBusinessCycle.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.jd_resource_constraint",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDBusinessCycle.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.ex_18_3_theta",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDExercises.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.ex_18_3_reservation",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDExercises.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.ex_18_3_reservation_mono",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDExercises.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.ex_18_3_unemployment",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDExercises.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.jd_mps_example",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDExercises.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.jd_plannerObj",
+      "kind": "def",
+      "module": "SearchAndMatching/JDExercises.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.ex_18_4_foc_K",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDExercises.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.ex_18_4_foc_v",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDExercises.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.ex_18_4_envelope_K",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDExercises.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.ex_18_4_euler",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDExercises.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.ex_18_4_envelope_N",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDExercises.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.ex_18_4_surplus",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDExercises.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.jd_matching_partial_v",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDExercises.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.jd_matching_partial_u",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDExercises.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.ex_18_4_gap",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDExercises.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.ex_18_4_hosios",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDExercises.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.ex_18_4_surplus_hosios",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDExercises.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.ex_18_4_ss_decentralised",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDExercises.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.ex_18_4_ss_planner",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDExercises.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.ex_18_4_ss_hosios",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDExercises.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.ex_18_5_rental",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDExercises.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.ex_18_5_employment",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDExercises.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.ex_18_5_rho",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDExercises.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.ex_18_5_kappa",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDExercises.lean"
+    },
+    {
+      "name": "Miao.SearchAndMatching.ex_18_5_consumption",
+      "kind": "theorem",
+      "module": "SearchAndMatching/JDExercises.lean"
+    }
+  ],
+  "full_build": "passed",
+  "fresh_source_compilation": "passed",
+  "fresh_source_lint_options": [
+    "-Dlinter.mathlibStandardSet=true",
+    "-Dlinter.style.header=false"
+  ],
+  "axioms": {
+    "Miao.SearchAndMatching.DMMatchingFn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.DMMatchingFn.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.DMMatchingFn.M": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.DMMatchingFn.pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.DMMatchingFn.homog": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.DMMatchingFn.mono_u": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.DMMatchingFn.mono_v": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.DMMatchingFn.concave": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_q": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_xi": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_M_eq_mul_q": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.eq_18_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_jobFinding": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_q_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_q_strictAntiOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_jobFinding_strictMonoOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_concave_u": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_q_continuousOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_q_hasDerivAt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_Mu_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_Mu_mul_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_q_elasticity": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_xi_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_jobFinding_hasDerivAt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_beveridge_anti": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_beveridge_convex": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_cd_homog": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_cd_concave": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_cdMatching": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_cd_q": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_cd_hasDerivAt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_cd_xi": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.eq_18_6": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.eq_18_7": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.eq_18_8": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_amgm2_strict": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_nash_bound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_nash_solution": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.eq_18_11": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_surplus": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.eq_18_12": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.eq_18_13": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.eq_18_14": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_worker_surplus": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.eq_18_15": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_IsSearchEqm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_bellman_implies_eqm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_jcCurve": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_wageCurve": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_ssLHS": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_uStar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.eq_18_16": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_jc_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_jc_strictAntiOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.eq_18_17": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_wc_strictMono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.eq_18_18": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_wc_eq_jc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_ssLHS_strictMonoOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_ss_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_ss_exists": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_ss_not_exists": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_cd_ssLHS": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_cd_ss_existsUnique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.eq_18_19": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_uStar_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_uStar_strictAntiOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_vStar_strictMonoOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_cs_shifts": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_cs_A": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_cs_b": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_cs_eta": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_steady_isSearchEqm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_searchEqm_exists": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.eq_18_20": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.eq_18_21": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_a11": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_lin_a11": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_a11_xi": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_a11_gt_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_a21": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_a21_sign": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_a22": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_a22_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_saddle_path": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_dtheta_locus": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_du_locus": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_uPath": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_uPath_rec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_uPath_sub": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_uPath_tendsto": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_uPath_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_uPath_strictAnti": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_vPath_strictAnti": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_v0_gt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_transition_isSearchEqm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_transition_not_monotone": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_firmProfit": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_FirmFeasible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_FirmOptimal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_firm_euler": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_largeFirm_eq_18_8": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_firmOptimal_of_euler": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_firmOptimal_exists": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.eq_18_23": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_aggregate_18_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.eq_18_24": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_Jn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.eq_18_26": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.eq_18_27": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_planner_foc_v": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_planner_foc_N": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_planner_foc_N_misprint": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_plannerLHS": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.eq_18_28": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_hosios": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_xi_duration": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_cd_plannerLHS": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_cd_planner_existsUnique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_cd_hosios_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_cd_hosios_compare": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_hosios_misprint": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_hhCons": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_Ex1HHOptimal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_ex1_share_euler": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_ex1_hhOptimal_of_euler": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_ex1_price": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_ex1Div": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_Ex1Feasible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_Ex1FirmOptimal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_ex1_capital_euler": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_ex1_job_creation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_ex1_wage": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_Ex1IsSearchEqm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_ex1_FK": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_ex1_FN": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_ex1_kstar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_ex1_kstar_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_ex1_steady": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_ex1_steady_isSearchEqm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_ex1_searchEqm_exists": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_mpLag": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_uf_hasDerivAt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_mp_foc_v": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_mp_foc_z": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_mp_foc_E": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.ex_18_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.ex_18_2_efficiency": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.dm_mp_exp_dist": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.jd_nash_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.jd_nash_eq_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.jd_nash_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.jd_foc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.jd_envelope": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.jd_partial_homog_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.jd_partial_homog_two": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.jd_affine_sol": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.jd_affine_antitone": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.jd_affine_tendsto": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.jd_Phi": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.jd_G": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.jd_one_sub_G": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.jd_G_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.jd_G_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.jd_Phi_integrable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.jd_Phi_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.jd_Phi_eq_setIntegral": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.jd_Phi_antitone": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.jd_Phi_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.jd_Phi_abs_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.jd_Phi_continuous": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.jd_Phi_gap": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.jd_Phi_pos_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.jd_Phi_pos_iff_real": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.jd_Phi_strictAnti_of_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.jd_Phi_of_nonpos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.jd_Phi_tendsto_atTop": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.jd_Phi_hasDerivAt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.jd_sepRate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.jd_sepRate_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.jd_sepRate_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.eq_18_43": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.jd_filled_job_cutoff_form": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.eq_18_31": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.eq_18_32": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.eq_18_33": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.eq_18_34": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.eq_18_37_38": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.jd_worker_surplus": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.eq_18_39": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.jd_wage_intermediate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.eq_18_40": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.jd_JF_linear": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.jd_cutoff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.eq_18_41": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.eq_18_42": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.jd_jdRate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.jd_jcRate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.jd_jc_eq_jd_of_steady": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.jd_JC": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.jd_JD": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.jd_thetaJD": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.jd_h_strictMono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.jd_JD_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.jd_thetaJD_strictMono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.jd_thetaJD_continuous": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.eq_18_44": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.eq_18_45": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.jd_steady_state_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.jd_steady_state_exists": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.jd_steady_state_existsUnique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.jd_example_steady_state": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.jd_JC_kappaA_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.jd_compstat_A_theta": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.jd_compstat_kappaA": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.jd_compstat_kappaA_jd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.jd_compstat_kappaA_u": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.jd_beveridge_downward": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.jd_beveridge_shift": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.jd_transition_unemployment": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.jd_kappa_div_q_hasDerivAt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.jd_linear_psi": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.jd_psi_abs_lt_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.jd_saddle": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.jd_hhObj": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.jd_hh_budget_forms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.jd_crra_hasDerivAt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.jd_disutility_hasDerivAt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.jd_disutility_integral": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.jd_hh_foc_I": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.jd_hh_envelope_K": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.eq_18_49": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.jd_hh_envelope_N": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.eq_18_50": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.jd_hh_Vn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.jd_hh_Vn_book_budget": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.jd_firmObj": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.eq_18_51": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.eq_18_52": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.eq_18_53": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.eq_18_54": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.eq_18_55": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.jd_firm_Jn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.jd_nash_18_3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.eq_18_56": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.jd_capital_ratio_indep": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.jd_wage_indep": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.jd_aggregate_output": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.jd_employment_consistency": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.jd_resource_constraint": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.ex_18_3_theta": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.ex_18_3_reservation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.ex_18_3_reservation_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.ex_18_3_unemployment": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.jd_mps_example": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.jd_plannerObj": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.ex_18_4_foc_K": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.ex_18_4_foc_v": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.ex_18_4_envelope_K": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.ex_18_4_euler": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.ex_18_4_envelope_N": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.ex_18_4_surplus": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.jd_matching_partial_v": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.jd_matching_partial_u": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.ex_18_4_gap": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.ex_18_4_hosios": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.ex_18_4_surplus_hosios": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.ex_18_4_ss_decentralised": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.ex_18_4_ss_planner": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.ex_18_4_ss_hosios": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.ex_18_5_rental": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.ex_18_5_employment": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.ex_18_5_rho": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.ex_18_5_kappa": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.SearchAndMatching.ex_18_5_consumption": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  "source_sha256": {
+    "SearchAndMatching/DMMatching.lean": "486170bdb30cf567b39c0ed1a54adf106526ed84089d78c57d72c40d67e26079",
+    "SearchAndMatching/DMBellman.lean": "28d672b9e25fc401fcd6ef7a0cec48b91362a826a000119c28fab9534b17fc1e",
+    "SearchAndMatching/DMSteadyState.lean": "3dd943f692820dcbef9023e9b3f66d05fab8f2d746ea36190ec92a2a4ad853e0",
+    "SearchAndMatching/DMDynamics.lean": "4a047db69c70655e5ddb271bd33805ad35ec4e6ccd9944bc1fb7b6f7c8b6253f",
+    "SearchAndMatching/DMLargeFirm.lean": "6ecb20430558adcc45fc53ce90dc777d040e72554b011e336d214f8b359941a3",
+    "SearchAndMatching/DMEfficiency.lean": "cc4e7a0e56dcdef7fd886f8a829457e4b575b34f08e6c99f4b002562dca057ea",
+    "SearchAndMatching/DMExercise1.lean": "c04d5424bddf7d541a449ff8fce9fef8b7326918d5b375865b2e4f193ef12680",
+    "SearchAndMatching/DMExercise2.lean": "a886537996eeb3a358fdedff0ec53258c145494aee650343ac31dcc8cd9d812f",
+    "SearchAndMatching/JDBasics.lean": "a3b1e0500f94ed3aeaaf2ade9d69c5f7bcabc7a87914ca8aaca827c52e738789",
+    "SearchAndMatching/JDDistribution.lean": "8043628393f6a48b7e8b7ac3daec4a77323d49e1d167e79c728232ff17a846dd",
+    "SearchAndMatching/JDEndogenous.lean": "e8624438fdffc5e5c61775c2b78960f7b2b90be12b62ce21510dea24d7a5051f",
+    "SearchAndMatching/JDSteadyState.lean": "b28a90af51535e69be51094da03c570ad8e29254087139f64a526952b19374c5",
+    "SearchAndMatching/JDBusinessCycle.lean": "3ae25be44a284cff40639cae337c59d16e5b15cafea1b6645a599bae625ffa46",
+    "SearchAndMatching/JDExercises.lean": "867321e842336affcd6387d387f22e4e8a877fc64cea08c1836f2c20977d9735",
+    "SearchAndMatching.lean": "6d69f9fa84af024635129b2ba0b1267d9b4f9d8645a0683d9c02bdfe70eb16db",
+    "lean-toolchain": "8733782dc070a99b312039cda424f601b80f3be6f6f512627da5ba25adc27632",
+    "lakefile.toml": "a382843645ff826c811a30f8a24c514d316dc0c32c9c190866e770869f20baa4",
+    "lake-manifest.json": "bf02c045d4d697ff497e2bf38c29e3aeb4ed67077f415be5ed7dddfc57b37eb4",
+    "proof-manifest.json": "68b5ce37a06f92685d350121f00c3a35efe8e1a8aa1d236e94df9d930ada00b3",
+    "scripts/verify.py": "a70b1fa704dd590f937f8b37682afa88a9d85a9150065acb935c7d2c9589da3b",
+    "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  },
+  "fresh_audit_sha256": "88716baca1bfb6cb1f43d491fd3e227e575e69625a41678248ee69619e4bcd39",
+  "lean_toolchain": "leanprover/lean4:v4.34.0",
+  "scope": "Miao Chapter 18 (pp. 587-614): the basic DMP model (matching, Nash bargaining, job creation, steady state existence and uniqueness, comparative statics, the Beveridge curve, transitional dynamics, large firms, efficiency and the Hosios condition), endogenous job destruction (reservation productivity, steady state, comparative statics, saddle path), unemployment in a business-cycle model, and Exercises 1-5.",
+  "source": "Jianjun Miao, Economic Dynamics in Discrete Time, MIT Press 2014 (draft of 21 April 2013), Chapter 18"
+}

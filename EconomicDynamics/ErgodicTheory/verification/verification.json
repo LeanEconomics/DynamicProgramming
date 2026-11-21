@@ -1,0 +1,2911 @@
+{
+  "checked_at_utc": "2026-11-06T20:10:38.895631+00:00",
+  "theorems": 244,
+  "module_theorems": {
+    "ErgodicTheory/BirkhoffErgodic.lean": 47,
+    "ErgodicTheory/PathSpace.lean": 23,
+    "ErgodicTheory/Kernels.lean": 32,
+    "ErgodicTheory/MarkovProperty.lean": 22,
+    "ErgodicTheory/InvariantEvents.lean": 21,
+    "ErgodicTheory/ErgodicTheorem.lean": 36,
+    "ErgodicTheory/StationaryProcesses.lean": 25,
+    "ErgodicTheory/StationaryErgodicity.lean": 6,
+    "ErgodicTheory/StationaryMarkov.lean": 20,
+    "ErgodicTheory/ConditionalIndependence.lean": 7,
+    "ErgodicTheory/GaussianMixing.lean": 5
+  },
+  "audited_declarations": 292,
+  "declarations": [
+    {
+      "name": "Miao.ErgodicTheory.measurable_birkhoffSum",
+      "kind": "theorem",
+      "module": "ErgodicTheory/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.integrable_birkhoffSum",
+      "kind": "theorem",
+      "module": "ErgodicTheory/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.birkhoffSum_sub_const",
+      "kind": "theorem",
+      "module": "ErgodicTheory/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.birkhoffSum_const_sub",
+      "kind": "theorem",
+      "module": "ErgodicTheory/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.iterate_mem_iff",
+      "kind": "theorem",
+      "module": "ErgodicTheory/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.birkhoffSum_indicator",
+      "kind": "theorem",
+      "module": "ErgodicTheory/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.birkhoffMax",
+      "kind": "def",
+      "module": "ErgodicTheory/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.birkhoffSum_le_birkhoffMax",
+      "kind": "theorem",
+      "module": "ErgodicTheory/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.birkhoffMax_nonneg",
+      "kind": "theorem",
+      "module": "ErgodicTheory/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.birkhoffMax_mono",
+      "kind": "theorem",
+      "module": "ErgodicTheory/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.birkhoffMax_le_add",
+      "kind": "theorem",
+      "module": "ErgodicTheory/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.birkhoffMax_le_sum_abs",
+      "kind": "theorem",
+      "module": "ErgodicTheory/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.measurable_birkhoffMax",
+      "kind": "theorem",
+      "module": "ErgodicTheory/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.integrable_birkhoffMax",
+      "kind": "theorem",
+      "module": "ErgodicTheory/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.maximal_ergodic",
+      "kind": "theorem",
+      "module": "ErgodicTheory/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.birkhoffMax_indicator",
+      "kind": "theorem",
+      "module": "ErgodicTheory/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.maximal_ergodic_inter",
+      "kind": "theorem",
+      "module": "ErgodicTheory/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.upSet",
+      "kind": "def",
+      "module": "ErgodicTheory/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.bddAbove_range_succ_add_iff",
+      "kind": "theorem",
+      "module": "ErgodicTheory/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.preimage_upSet",
+      "kind": "theorem",
+      "module": "ErgodicTheory/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.not_bddAbove_range_iff",
+      "kind": "theorem",
+      "module": "ErgodicTheory/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.measurableSet_upSet",
+      "kind": "theorem",
+      "module": "ErgodicTheory/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.integral_upSet_nonneg",
+      "kind": "theorem",
+      "module": "ErgodicTheory/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.mul_measure_le_setIntegral",
+      "kind": "theorem",
+      "module": "ErgodicTheory/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.setIntegral_le_mul_measure",
+      "kind": "theorem",
+      "module": "ErgodicTheory/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.tendsto_div_of_bdd",
+      "kind": "theorem",
+      "module": "ErgodicTheory/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.measure_upSet_sub_eq_zero",
+      "kind": "theorem",
+      "module": "ErgodicTheory/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.measure_upSet_const_sub_eq_zero",
+      "kind": "theorem",
+      "module": "ErgodicTheory/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.birkhoffAverage_eq_div",
+      "kind": "theorem",
+      "module": "ErgodicTheory/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.ae_tendsto_birkhoffAverage_of_ergodic",
+      "kind": "theorem",
+      "module": "ErgodicTheory/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.measure_upSet_inter_eq_zero",
+      "kind": "theorem",
+      "module": "ErgodicTheory/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.measure_iInter_upSet_eq_zero",
+      "kind": "theorem",
+      "module": "ErgodicTheory/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.le_of_bddAbove_both",
+      "kind": "theorem",
+      "module": "ErgodicTheory/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.exists_tendsto_div_of_bdd",
+      "kind": "theorem",
+      "module": "ErgodicTheory/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.ae_exists_tendsto_birkhoffAverage",
+      "kind": "theorem",
+      "module": "ErgodicTheory/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.birkhoffLimit",
+      "kind": "def",
+      "module": "ErgodicTheory/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.measurable_birkhoffAverage",
+      "kind": "theorem",
+      "module": "ErgodicTheory/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.measurable_birkhoffLimit",
+      "kind": "theorem",
+      "module": "ErgodicTheory/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.ae_tendsto_birkhoffLimit",
+      "kind": "theorem",
+      "module": "ErgodicTheory/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.tendsto_birkhoffAverage_apply",
+      "kind": "theorem",
+      "module": "ErgodicTheory/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.tendsto_birkhoffAverage_of_apply",
+      "kind": "theorem",
+      "module": "ErgodicTheory/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.birkhoffLimit_apply_of_tendsto",
+      "kind": "theorem",
+      "module": "ErgodicTheory/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.measurable_abs_of_measurable",
+      "kind": "theorem",
+      "module": "ErgodicTheory/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.setIntegral_comp_iterate",
+      "kind": "theorem",
+      "module": "ErgodicTheory/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.setIntegral_birkhoffAverage",
+      "kind": "theorem",
+      "module": "ErgodicTheory/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.lintegral_abs_birkhoffAverage_le",
+      "kind": "theorem",
+      "module": "ErgodicTheory/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.integrable_birkhoffLimit",
+      "kind": "theorem",
+      "module": "ErgodicTheory/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.setIntegral_birkhoffLimit_of_bdd",
+      "kind": "theorem",
+      "module": "ErgodicTheory/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.truncAt",
+      "kind": "def",
+      "module": "ErgodicTheory/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.abs_sub_truncAt_le",
+      "kind": "theorem",
+      "module": "ErgodicTheory/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.setIntegral_birkhoffLimit",
+      "kind": "theorem",
+      "module": "ErgodicTheory/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.trajKernel",
+      "kind": "def",
+      "module": "ErgodicTheory/PathSpace.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.isMarkovKernel_trajKernel",
+      "kind": "theorem",
+      "module": "ErgodicTheory/PathSpace.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.pathKernel",
+      "kind": "def",
+      "module": "ErgodicTheory/PathSpace.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.isMarkovKernel_pathKernel",
+      "kind": "theorem",
+      "module": "ErgodicTheory/PathSpace.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.pathMeasure",
+      "kind": "def",
+      "module": "ErgodicTheory/PathSpace.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.isProbabilityMeasure_pathMeasure",
+      "kind": "theorem",
+      "module": "ErgodicTheory/PathSpace.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.pathMeasure_eq_comp",
+      "kind": "theorem",
+      "module": "ErgodicTheory/PathSpace.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.pathMeasure_dirac",
+      "kind": "theorem",
+      "module": "ErgodicTheory/PathSpace.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.pathKernel_map_zero",
+      "kind": "theorem",
+      "module": "ErgodicTheory/PathSpace.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.pathKernel_zero_mem",
+      "kind": "theorem",
+      "module": "ErgodicTheory/PathSpace.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.ae_pathKernel_zero",
+      "kind": "theorem",
+      "module": "ErgodicTheory/PathSpace.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.pathMeasure_inter_zero",
+      "kind": "theorem",
+      "module": "ErgodicTheory/PathSpace.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.pathMeasure_map_zero",
+      "kind": "theorem",
+      "module": "ErgodicTheory/PathSpace.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.natFilt",
+      "kind": "abbrev",
+      "module": "ErgodicTheory/PathSpace.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.measurable_coord_natFilt",
+      "kind": "theorem",
+      "module": "ErgodicTheory/PathSpace.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.measurableSet_coord_natFilt",
+      "kind": "theorem",
+      "module": "ErgodicTheory/PathSpace.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.setLIntegral_succ",
+      "kind": "theorem",
+      "module": "ErgodicTheory/PathSpace.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.cylFn",
+      "kind": "def",
+      "module": "ErgodicTheory/PathSpace.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.measurable_cylFn",
+      "kind": "theorem",
+      "module": "ErgodicTheory/PathSpace.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.boxSet",
+      "kind": "def",
+      "module": "ErgodicTheory/PathSpace.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.measurableSet_boxSet",
+      "kind": "theorem",
+      "module": "ErgodicTheory/PathSpace.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.measure_inter_shift_box",
+      "kind": "theorem",
+      "module": "ErgodicTheory/PathSpace.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.pathKernel_boxSet",
+      "kind": "theorem",
+      "module": "ErgodicTheory/PathSpace.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.pathMeasure_boxSet",
+      "kind": "theorem",
+      "module": "ErgodicTheory/PathSpace.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.IsMarkovChain",
+      "kind": "structure",
+      "module": "ErgodicTheory/PathSpace.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.IsMarkovChain.mk",
+      "kind": "constructor",
+      "module": "ErgodicTheory/PathSpace.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.IsMarkovChain.measurable",
+      "kind": "projection",
+      "module": "ErgodicTheory/PathSpace.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.IsMarkovChain.fdd",
+      "kind": "projection",
+      "module": "ErgodicTheory/PathSpace.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.mt_theorem_3_4_1",
+      "kind": "theorem",
+      "module": "ErgodicTheory/PathSpace.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.generateFrom_boxSets",
+      "kind": "theorem",
+      "module": "ErgodicTheory/PathSpace.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.isPiSystem_boxSets",
+      "kind": "theorem",
+      "module": "ErgodicTheory/PathSpace.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.mt_theorem_3_4_1_unique",
+      "kind": "theorem",
+      "module": "ErgodicTheory/PathSpace.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.law_eq_pathMeasure",
+      "kind": "theorem",
+      "module": "ErgodicTheory/PathSpace.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.IsSubstochasticKernel",
+      "kind": "def",
+      "module": "ErgodicTheory/Kernels.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.isSubstochasticKernel_of_markov",
+      "kind": "theorem",
+      "module": "ErgodicTheory/Kernels.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.isMarkovKernel_pow",
+      "kind": "theorem",
+      "module": "ErgodicTheory/Kernels.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.pow_zero_apply",
+      "kind": "theorem",
+      "module": "ErgodicTheory/Kernels.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.pow_succ_apply",
+      "kind": "theorem",
+      "module": "ErgodicTheory/Kernels.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.pow_succ_apply'",
+      "kind": "theorem",
+      "module": "ErgodicTheory/Kernels.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.mt_theorem_3_4_2",
+      "kind": "theorem",
+      "module": "ErgodicTheory/Kernels.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.pow_add_eq",
+      "kind": "theorem",
+      "module": "ErgodicTheory/Kernels.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.skeleton",
+      "kind": "abbrev",
+      "module": "ErgodicTheory/Kernels.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.skeleton_pow",
+      "kind": "theorem",
+      "module": "ErgodicTheory/Kernels.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.sampledKernel",
+      "kind": "def",
+      "module": "ErgodicTheory/Kernels.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.sampledKernel_apply",
+      "kind": "theorem",
+      "module": "ErgodicTheory/Kernels.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.isMarkovKernel_sampledKernel",
+      "kind": "theorem",
+      "module": "ErgodicTheory/Kernels.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.resolvent",
+      "kind": "def",
+      "module": "ErgodicTheory/Kernels.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.resolvent_apply",
+      "kind": "theorem",
+      "module": "ErgodicTheory/Kernels.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.tsum_geometric_weights",
+      "kind": "theorem",
+      "module": "ErgodicTheory/Kernels.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.isMarkovKernel_resolvent",
+      "kind": "theorem",
+      "module": "ErgodicTheory/Kernels.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.kfun",
+      "kind": "def",
+      "module": "ErgodicTheory/Kernels.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.measurable_kfun",
+      "kind": "theorem",
+      "module": "ErgodicTheory/Kernels.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.kfun_indicator",
+      "kind": "theorem",
+      "module": "ErgodicTheory/Kernels.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.kfun_one",
+      "kind": "theorem",
+      "module": "ErgodicTheory/Kernels.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.kfun_mono",
+      "kind": "theorem",
+      "module": "ErgodicTheory/Kernels.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.kfun_add",
+      "kind": "theorem",
+      "module": "ErgodicTheory/Kernels.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.kfun_const_mul",
+      "kind": "theorem",
+      "module": "ErgodicTheory/Kernels.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.kfun_comp",
+      "kind": "theorem",
+      "module": "ErgodicTheory/Kernels.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.kfun_pow_succ",
+      "kind": "theorem",
+      "module": "ErgodicTheory/Kernels.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.measure_kernel_apply",
+      "kind": "theorem",
+      "module": "ErgodicTheory/Kernels.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.measure_kernel_assoc",
+      "kind": "theorem",
+      "module": "ErgodicTheory/Kernels.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.lintegral_kfun",
+      "kind": "theorem",
+      "module": "ErgodicTheory/Kernels.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.isProbabilityMeasure_measure_kernel",
+      "kind": "theorem",
+      "module": "ErgodicTheory/Kernels.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.dirac_kernel",
+      "kind": "theorem",
+      "module": "ErgodicTheory/Kernels.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.kfunR",
+      "kind": "def",
+      "module": "ErgodicTheory/Kernels.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.measurable_kfunR",
+      "kind": "theorem",
+      "module": "ErgodicTheory/Kernels.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.abs_kfunR_le",
+      "kind": "theorem",
+      "module": "ErgodicTheory/Kernels.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.indKernel",
+      "kind": "def",
+      "module": "ErgodicTheory/Kernels.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.indKernel_apply",
+      "kind": "theorem",
+      "module": "ErgodicTheory/Kernels.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.comp_indKernel_apply",
+      "kind": "theorem",
+      "module": "ErgodicTheory/Kernels.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.isSubstochasticKernel_comp_indKernel",
+      "kind": "theorem",
+      "module": "ErgodicTheory/Kernels.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.potKernel",
+      "kind": "def",
+      "module": "ErgodicTheory/Kernels.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.potKernel_apply",
+      "kind": "theorem",
+      "module": "ErgodicTheory/Kernels.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.shift",
+      "kind": "def",
+      "module": "ErgodicTheory/MarkovProperty.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.measurable_shift",
+      "kind": "theorem",
+      "module": "ErgodicTheory/MarkovProperty.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.shift_zero",
+      "kind": "theorem",
+      "module": "ErgodicTheory/MarkovProperty.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.shift_shift",
+      "kind": "theorem",
+      "module": "ErgodicTheory/MarkovProperty.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.shift_apply",
+      "kind": "theorem",
+      "module": "ErgodicTheory/MarkovProperty.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.integral_measure_comp",
+      "kind": "theorem",
+      "module": "ErgodicTheory/MarkovProperty.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.pathMeasure_map_coord",
+      "kind": "theorem",
+      "module": "ErgodicTheory/MarkovProperty.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.pathKernel_map_coord",
+      "kind": "theorem",
+      "module": "ErgodicTheory/MarkovProperty.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.pathKernel_coord_mem",
+      "kind": "theorem",
+      "module": "ErgodicTheory/MarkovProperty.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.pathKernel_coord_chapmanKolmogorov",
+      "kind": "theorem",
+      "module": "ErgodicTheory/MarkovProperty.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.markov_measure",
+      "kind": "theorem",
+      "module": "ErgodicTheory/MarkovProperty.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.markov_lintegral",
+      "kind": "theorem",
+      "module": "ErgodicTheory/MarkovProperty.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.markov_lintegral_mul",
+      "kind": "theorem",
+      "module": "ErgodicTheory/MarkovProperty.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.markov_lintegral_univ",
+      "kind": "theorem",
+      "module": "ErgodicTheory/MarkovProperty.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.markov_setIntegral",
+      "kind": "theorem",
+      "module": "ErgodicTheory/MarkovProperty.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.stronglyMeasurable_expect_coord",
+      "kind": "theorem",
+      "module": "ErgodicTheory/MarkovProperty.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.integrable_expect_coord",
+      "kind": "theorem",
+      "module": "ErgodicTheory/MarkovProperty.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.markov_property",
+      "kind": "theorem",
+      "module": "ErgodicTheory/MarkovProperty.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.integrable_shift_of_bdd",
+      "kind": "theorem",
+      "module": "ErgodicTheory/MarkovProperty.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.markov_property_bdd",
+      "kind": "theorem",
+      "module": "ErgodicTheory/MarkovProperty.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.mt_proposition_3_4_3",
+      "kind": "theorem",
+      "module": "ErgodicTheory/MarkovProperty.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.isMarkovChain_of_step",
+      "kind": "theorem",
+      "module": "ErgodicTheory/MarkovProperty.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.skeletonFilt",
+      "kind": "def",
+      "module": "ErgodicTheory/MarkovProperty.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.skeleton_isMarkovChain",
+      "kind": "theorem",
+      "module": "ErgodicTheory/MarkovProperty.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.IsInvariant",
+      "kind": "def",
+      "module": "ErgodicTheory/InvariantEvents.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.isInvariant_iff",
+      "kind": "theorem",
+      "module": "ErgodicTheory/InvariantEvents.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.IsInvariant.smul",
+      "kind": "theorem",
+      "module": "ErgodicTheory/InvariantEvents.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.IsInvariant.add",
+      "kind": "theorem",
+      "module": "ErgodicTheory/InvariantEvents.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.IsInvariant.pow",
+      "kind": "theorem",
+      "module": "ErgodicTheory/InvariantEvents.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.IsInvariant.map_coord",
+      "kind": "theorem",
+      "module": "ErgodicTheory/InvariantEvents.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.IsInvariant.map_shift",
+      "kind": "theorem",
+      "module": "ErgodicTheory/InvariantEvents.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.isInvariant_iff_map_shift",
+      "kind": "theorem",
+      "module": "ErgodicTheory/InvariantEvents.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.iSup_natFilt",
+      "kind": "theorem",
+      "module": "ErgodicTheory/InvariantEvents.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.expectFn",
+      "kind": "def",
+      "module": "ErgodicTheory/InvariantEvents.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.stronglyMeasurable_expectFn",
+      "kind": "theorem",
+      "module": "ErgodicTheory/InvariantEvents.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.measurable_expectFn",
+      "kind": "theorem",
+      "module": "ErgodicTheory/InvariantEvents.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.abs_expectFn_le",
+      "kind": "theorem",
+      "module": "ErgodicTheory/InvariantEvents.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.integrable_of_bdd",
+      "kind": "theorem",
+      "module": "ErgodicTheory/InvariantEvents.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.pathMeasure_eq_zero_of_forall",
+      "kind": "theorem",
+      "module": "ErgodicTheory/InvariantEvents.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.ae_pathMeasure_of_forall",
+      "kind": "theorem",
+      "module": "ErgodicTheory/InvariantEvents.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.pathKernel_eq_zero_of_pair",
+      "kind": "theorem",
+      "module": "ErgodicTheory/InvariantEvents.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.isProbabilityMeasure_pair",
+      "kind": "theorem",
+      "module": "ErgodicTheory/InvariantEvents.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.IsPathInvariant",
+      "kind": "def",
+      "module": "ErgodicTheory/InvariantEvents.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.IsInvariantRV",
+      "kind": "def",
+      "module": "ErgodicTheory/InvariantEvents.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.isInvariantRV_of_shift",
+      "kind": "theorem",
+      "module": "ErgodicTheory/InvariantEvents.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.condExp_eq_expectFn",
+      "kind": "theorem",
+      "module": "ErgodicTheory/InvariantEvents.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.stronglyMeasurable_iSup_natFilt",
+      "kind": "theorem",
+      "module": "ErgodicTheory/InvariantEvents.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.tendsto_expectFn_coord",
+      "kind": "theorem",
+      "module": "ErgodicTheory/InvariantEvents.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.mt_lemma_17_1_1",
+      "kind": "theorem",
+      "module": "ErgodicTheory/InvariantEvents.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.IsMeasurableTransformation",
+      "kind": "def",
+      "module": "ErgodicTheory/ErgodicTheorem.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.isMeasurableTransformation_iff",
+      "kind": "theorem",
+      "module": "ErgodicTheory/ErgodicTheorem.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.IsMeasurePreserving",
+      "kind": "def",
+      "module": "ErgodicTheory/ErgodicTheorem.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.isMeasurePreserving_iff",
+      "kind": "theorem",
+      "module": "ErgodicTheory/ErgodicTheorem.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.IsTransformationInvariant",
+      "kind": "def",
+      "module": "ErgodicTheory/ErgodicTheorem.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.ex_4_1",
+      "kind": "theorem",
+      "module": "ErgodicTheory/ErgodicTheorem.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.ex_4_1_empty",
+      "kind": "theorem",
+      "module": "ErgodicTheory/ErgodicTheorem.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.ex_4_1_compl",
+      "kind": "theorem",
+      "module": "ErgodicTheory/ErgodicTheorem.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.ex_4_1_iUnion",
+      "kind": "theorem",
+      "module": "ErgodicTheory/ErgodicTheorem.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.IsErgodic",
+      "kind": "def",
+      "module": "ErgodicTheory/ErgodicTheorem.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.isErgodic_iff_ergodic",
+      "kind": "theorem",
+      "module": "ErgodicTheory/ErgodicTheorem.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.iterate_shift_one",
+      "kind": "theorem",
+      "module": "ErgodicTheory/ErgodicTheorem.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.example_4_1_1_measurable",
+      "kind": "theorem",
+      "module": "ErgodicTheory/ErgodicTheorem.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.example_4_1_1_not_measurePreserving",
+      "kind": "theorem",
+      "module": "ErgodicTheory/ErgodicTheorem.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.iterate_finRotate",
+      "kind": "theorem",
+      "module": "ErgodicTheory/ErgodicTheorem.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.example_4_1_2",
+      "kind": "theorem",
+      "module": "ErgodicTheory/ErgodicTheorem.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.exists_uniform_fin",
+      "kind": "theorem",
+      "module": "ErgodicTheory/ErgodicTheorem.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.example_4_1_2_ergodic",
+      "kind": "theorem",
+      "module": "ErgodicTheory/ErgodicTheorem.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.ex_4_2",
+      "kind": "theorem",
+      "module": "ErgodicTheory/ErgodicTheorem.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.lemma_4_1_1_step",
+      "kind": "theorem",
+      "module": "ErgodicTheory/ErgodicTheorem.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.lemma_4_1_1_on_pos",
+      "kind": "theorem",
+      "module": "ErgodicTheory/ErgodicTheorem.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.lemma_4_1_1",
+      "kind": "theorem",
+      "module": "ErgodicTheory/ErgodicTheorem.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.theorem_4_1_1_sum_succ",
+      "kind": "theorem",
+      "module": "ErgodicTheory/ErgodicTheorem.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.birkhoffAverage_eq_sum",
+      "kind": "theorem",
+      "module": "ErgodicTheory/ErgodicTheorem.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.measurableSet_convergent",
+      "kind": "theorem",
+      "module": "ErgodicTheory/ErgodicTheorem.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.invariantLimit",
+      "kind": "def",
+      "module": "ErgodicTheory/ErgodicTheorem.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.invariantLimit_comp",
+      "kind": "theorem",
+      "module": "ErgodicTheory/ErgodicTheorem.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.measurable_invariantLimit",
+      "kind": "theorem",
+      "module": "ErgodicTheory/ErgodicTheorem.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.invariantLimit_ae_eq",
+      "kind": "theorem",
+      "module": "ErgodicTheory/ErgodicTheorem.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.birkhoffLimit_ae_eq_condExp",
+      "kind": "theorem",
+      "module": "ErgodicTheory/ErgodicTheorem.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.theorem_4_1_1",
+      "kind": "theorem",
+      "module": "ErgodicTheory/ErgodicTheorem.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.abs_birkhoffAverage_le",
+      "kind": "theorem",
+      "module": "ErgodicTheory/ErgodicTheorem.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.integrable_birkhoffAverage",
+      "kind": "theorem",
+      "module": "ErgodicTheory/ErgodicTheorem.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.integral_abs_birkhoffAverage_le",
+      "kind": "theorem",
+      "module": "ErgodicTheory/ErgodicTheorem.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.tendsto_integral_abs_sub_of_bdd",
+      "kind": "theorem",
+      "module": "ErgodicTheory/ErgodicTheorem.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.tendsto_integral_abs_sub_truncAt",
+      "kind": "theorem",
+      "module": "ErgodicTheory/ErgodicTheorem.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.tendsto_integral_abs_sub_birkhoffLimit",
+      "kind": "theorem",
+      "module": "ErgodicTheory/ErgodicTheorem.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.theorem_4_1_1_L1",
+      "kind": "theorem",
+      "module": "ErgodicTheory/ErgodicTheorem.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.theorem_4_1_1_condExp_const",
+      "kind": "theorem",
+      "module": "ErgodicTheory/ErgodicTheorem.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.theorem_4_1_1_ergodic",
+      "kind": "theorem",
+      "module": "ErgodicTheory/ErgodicTheorem.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.theorem_4_1_1_ergodic_L1",
+      "kind": "theorem",
+      "module": "ErgodicTheory/ErgodicTheorem.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.pathOf",
+      "kind": "def",
+      "module": "ErgodicTheory/StationaryProcesses.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.window",
+      "kind": "def",
+      "module": "ErgodicTheory/StationaryProcesses.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.pathWindow",
+      "kind": "def",
+      "module": "ErgodicTheory/StationaryProcesses.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.pathLaw",
+      "kind": "def",
+      "module": "ErgodicTheory/StationaryProcesses.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.IsStationary",
+      "kind": "def",
+      "module": "ErgodicTheory/StationaryProcesses.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.measurable_pathOf",
+      "kind": "theorem",
+      "module": "ErgodicTheory/StationaryProcesses.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.measurable_window",
+      "kind": "theorem",
+      "module": "ErgodicTheory/StationaryProcesses.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.measurable_pathWindow",
+      "kind": "theorem",
+      "module": "ErgodicTheory/StationaryProcesses.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.window_eq",
+      "kind": "theorem",
+      "module": "ErgodicTheory/StationaryProcesses.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.window_zero",
+      "kind": "theorem",
+      "module": "ErgodicTheory/StationaryProcesses.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.isProbabilityMeasure_pathLaw",
+      "kind": "theorem",
+      "module": "ErgodicTheory/StationaryProcesses.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.boxSet_eq_preimage",
+      "kind": "theorem",
+      "module": "ErgodicTheory/StationaryProcesses.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.ext_of_boxSet",
+      "kind": "theorem",
+      "module": "ErgodicTheory/StationaryProcesses.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.isStationary_iff_map_shift",
+      "kind": "theorem",
+      "module": "ErgodicTheory/StationaryProcesses.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.isStationary_iff_measurePreserving",
+      "kind": "theorem",
+      "module": "ErgodicTheory/StationaryProcesses.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.isStationary_of_measurePreserving",
+      "kind": "theorem",
+      "module": "ErgodicTheory/StationaryProcesses.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.stationary_representation",
+      "kind": "theorem",
+      "module": "ErgodicTheory/StationaryProcesses.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.isStationary_comp_window",
+      "kind": "theorem",
+      "module": "ErgodicTheory/StationaryProcesses.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.isStationary_of_iid",
+      "kind": "theorem",
+      "module": "ErgodicTheory/StationaryProcesses.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.IsShiftInvariant",
+      "kind": "def",
+      "module": "ErgodicTheory/StationaryProcesses.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.IsErgodicProcess",
+      "kind": "def",
+      "module": "ErgodicTheory/StationaryProcesses.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.isShiftInvariant_of_preimage_eq",
+      "kind": "theorem",
+      "module": "ErgodicTheory/StationaryProcesses.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.shiftInvariant_compl_counterexample",
+      "kind": "theorem",
+      "module": "ErgodicTheory/StationaryProcesses.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.preimage_shift_mono",
+      "kind": "theorem",
+      "module": "ErgodicTheory/StationaryProcesses.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.exists_invariant_ae_eq",
+      "kind": "theorem",
+      "module": "ErgodicTheory/StationaryProcesses.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.isErgodicProcess_iff_isErgodic",
+      "kind": "theorem",
+      "module": "ErgodicTheory/StationaryProcesses.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.invariantField",
+      "kind": "abbrev",
+      "module": "ErgodicTheory/StationaryProcesses.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.condExp_comp_ae_eq",
+      "kind": "theorem",
+      "module": "ErgodicTheory/StationaryProcesses.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.eq_4_3",
+      "kind": "theorem",
+      "module": "ErgodicTheory/StationaryProcesses.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.theorem_4_2_1",
+      "kind": "theorem",
+      "module": "ErgodicTheory/StationaryProcesses.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.theorem_4_2_1_ergodic",
+      "kind": "theorem",
+      "module": "ErgodicTheory/StationaryProcesses.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.IsMixing",
+      "kind": "def",
+      "module": "ErgodicTheory/StationaryProcesses.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.theorem_4_2_3",
+      "kind": "theorem",
+      "module": "ErgodicTheory/StationaryProcesses.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.theorem_4_2_4_filtration_mono",
+      "kind": "theorem",
+      "module": "ErgodicTheory/StationaryProcesses.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.tendsto_avg_succ",
+      "kind": "theorem",
+      "module": "ErgodicTheory/StationaryErgodicity.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.indicator_shift_of_invariant",
+      "kind": "theorem",
+      "module": "ErgodicTheory/StationaryErgodicity.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.measure_inter_preimage_shift",
+      "kind": "theorem",
+      "module": "ErgodicTheory/StationaryErgodicity.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.measure_eq_zero_or_one_of_boxes",
+      "kind": "theorem",
+      "module": "ErgodicTheory/StationaryErgodicity.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.theorem_4_2_2",
+      "kind": "theorem",
+      "module": "ErgodicTheory/StationaryErgodicity.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.ex_4_5_a",
+      "kind": "theorem",
+      "module": "ErgodicTheory/StationaryErgodicity.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.invariantDistributions",
+      "kind": "def",
+      "module": "ErgodicTheory/StationaryMarkov.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.convex_invariantDistributions",
+      "kind": "theorem",
+      "module": "ErgodicTheory/StationaryMarkov.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.pathMeasure_add_smul",
+      "kind": "theorem",
+      "module": "ErgodicTheory/StationaryMarkov.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.pathLaw_coord",
+      "kind": "theorem",
+      "module": "ErgodicTheory/StationaryMarkov.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.ex_4_3",
+      "kind": "theorem",
+      "module": "ErgodicTheory/StationaryMarkov.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.eq_4_4",
+      "kind": "theorem",
+      "module": "ErgodicTheory/StationaryMarkov.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.IsPInvariantSet",
+      "kind": "def",
+      "module": "ErgodicTheory/StationaryMarkov.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.IsErgodicMeasure",
+      "kind": "def",
+      "module": "ErgodicTheory/StationaryMarkov.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.expectFn_harmonic_of_invariant",
+      "kind": "theorem",
+      "module": "ErgodicTheory/StationaryMarkov.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.lemma_4_3_1",
+      "kind": "theorem",
+      "module": "ErgodicTheory/StationaryMarkov.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.setLIntegral_compl_eq_zero",
+      "kind": "theorem",
+      "module": "ErgodicTheory/StationaryMarkov.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.isInvariant_restrict",
+      "kind": "theorem",
+      "module": "ErgodicTheory/StationaryMarkov.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.isInvariant_restrict_compl",
+      "kind": "theorem",
+      "module": "ErgodicTheory/StationaryMarkov.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.not_mem_extremePoints_of_invariantSet",
+      "kind": "theorem",
+      "module": "ErgodicTheory/StationaryMarkov.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.integral_indicator_coord_zero",
+      "kind": "theorem",
+      "module": "ErgodicTheory/StationaryMarkov.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.eq_of_ergodic_of_absolutelyContinuous",
+      "kind": "theorem",
+      "module": "ErgodicTheory/StationaryMarkov.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.theorem_4_3_1",
+      "kind": "theorem",
+      "module": "ErgodicTheory/StationaryMarkov.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.theorem_4_3_1_iff_isErgodicMeasure",
+      "kind": "theorem",
+      "module": "ErgodicTheory/StationaryMarkov.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.corollary_4_3_1",
+      "kind": "theorem",
+      "module": "ErgodicTheory/StationaryMarkov.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.theorem_4_3_2",
+      "kind": "theorem",
+      "module": "ErgodicTheory/StationaryMarkov.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.ex_4_5_b",
+      "kind": "theorem",
+      "module": "ErgodicTheory/StationaryMarkov.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.ex_4_6",
+      "kind": "theorem",
+      "module": "ErgodicTheory/StationaryMarkov.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.ex_4_6_markov",
+      "kind": "theorem",
+      "module": "ErgodicTheory/StationaryMarkov.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.sigmaOf",
+      "kind": "abbrev",
+      "module": "ErgodicTheory/ConditionalIndependence.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.integrable_comp_of_bdd",
+      "kind": "theorem",
+      "module": "ErgodicTheory/ConditionalIndependence.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.ex_4_4_of_condExp_eq",
+      "kind": "theorem",
+      "module": "ErgodicTheory/ConditionalIndependence.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.comap_prod_eq_generateFrom",
+      "kind": "theorem",
+      "module": "ErgodicTheory/ConditionalIndependence.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.isPiSystem_rectangles",
+      "kind": "theorem",
+      "module": "ErgodicTheory/ConditionalIndependence.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.ex_4_4",
+      "kind": "theorem",
+      "module": "ErgodicTheory/ConditionalIndependence.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.ex_4_4_one",
+      "kind": "theorem",
+      "module": "ErgodicTheory/ConditionalIndependence.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.ex_4_4_counterexample",
+      "kind": "theorem",
+      "module": "ErgodicTheory/ConditionalIndependence.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.ex_4_7_reduction",
+      "kind": "theorem",
+      "module": "ErgodicTheory/GaussianMixing.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.HasCovariance",
+      "kind": "def",
+      "module": "ErgodicTheory/GaussianMixing.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.IsCenteredGaussian",
+      "kind": "def",
+      "module": "ErgodicTheory/GaussianMixing.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.integral_sum_mul_sum",
+      "kind": "theorem",
+      "module": "ErgodicTheory/GaussianMixing.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.tendsto_dist_add",
+      "kind": "theorem",
+      "module": "ErgodicTheory/GaussianMixing.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.ex_4_7_cross_covariance",
+      "kind": "theorem",
+      "module": "ErgodicTheory/GaussianMixing.lean"
+    },
+    {
+      "name": "Miao.ErgodicTheory.ex_4_7_charFun",
+      "kind": "theorem",
+      "module": "ErgodicTheory/GaussianMixing.lean"
+    }
+  ],
+  "full_build": "passed",
+  "fresh_source_compilation": "passed",
+  "fresh_source_lint_options": [
+    "-Dlinter.mathlibStandardSet=true",
+    "-Dlinter.style.header=false"
+  ],
+  "axioms": {
+    "Miao.ErgodicTheory.measurable_birkhoffSum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.integrable_birkhoffSum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.birkhoffSum_sub_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.birkhoffSum_const_sub": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.iterate_mem_iff": [
+      "propext",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.birkhoffSum_indicator": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.birkhoffMax": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.birkhoffSum_le_birkhoffMax": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.birkhoffMax_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.birkhoffMax_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.birkhoffMax_le_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.birkhoffMax_le_sum_abs": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.measurable_birkhoffMax": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.integrable_birkhoffMax": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.maximal_ergodic": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.birkhoffMax_indicator": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.maximal_ergodic_inter": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.upSet": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.bddAbove_range_succ_add_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.preimage_upSet": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.not_bddAbove_range_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.measurableSet_upSet": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.integral_upSet_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.mul_measure_le_setIntegral": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.setIntegral_le_mul_measure": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.tendsto_div_of_bdd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.measure_upSet_sub_eq_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.measure_upSet_const_sub_eq_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.birkhoffAverage_eq_div": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.ae_tendsto_birkhoffAverage_of_ergodic": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.measure_upSet_inter_eq_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.measure_iInter_upSet_eq_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.le_of_bddAbove_both": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.exists_tendsto_div_of_bdd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.ae_exists_tendsto_birkhoffAverage": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.birkhoffLimit": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.measurable_birkhoffAverage": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.measurable_birkhoffLimit": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.ae_tendsto_birkhoffLimit": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.tendsto_birkhoffAverage_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.tendsto_birkhoffAverage_of_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.birkhoffLimit_apply_of_tendsto": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.measurable_abs_of_measurable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.setIntegral_comp_iterate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.setIntegral_birkhoffAverage": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.lintegral_abs_birkhoffAverage_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.integrable_birkhoffLimit": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.setIntegral_birkhoffLimit_of_bdd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.truncAt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.abs_sub_truncAt_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.setIntegral_birkhoffLimit": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.trajKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.isMarkovKernel_trajKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.pathKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.isMarkovKernel_pathKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.pathMeasure": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.isProbabilityMeasure_pathMeasure": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.pathMeasure_eq_comp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.pathMeasure_dirac": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.pathKernel_map_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.pathKernel_zero_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.ae_pathKernel_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.pathMeasure_inter_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.pathMeasure_map_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.natFilt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.measurable_coord_natFilt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.measurableSet_coord_natFilt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.setLIntegral_succ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.cylFn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.measurable_cylFn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.boxSet": [],
+    "Miao.ErgodicTheory.measurableSet_boxSet": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.measure_inter_shift_box": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.pathKernel_boxSet": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.pathMeasure_boxSet": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.IsMarkovChain": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.IsMarkovChain.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.IsMarkovChain.measurable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.IsMarkovChain.fdd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.mt_theorem_3_4_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.generateFrom_boxSets": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.isPiSystem_boxSets": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.mt_theorem_3_4_1_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.law_eq_pathMeasure": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.IsSubstochasticKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.isSubstochasticKernel_of_markov": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.isMarkovKernel_pow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.pow_zero_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.pow_succ_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.pow_succ_apply'": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.mt_theorem_3_4_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.pow_add_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.skeleton": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.skeleton_pow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.sampledKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.sampledKernel_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.isMarkovKernel_sampledKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.resolvent": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.resolvent_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.tsum_geometric_weights": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.isMarkovKernel_resolvent": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.kfun": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.measurable_kfun": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.kfun_indicator": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.kfun_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.kfun_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.kfun_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.kfun_const_mul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.kfun_comp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.kfun_pow_succ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.measure_kernel_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.measure_kernel_assoc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.lintegral_kfun": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.isProbabilityMeasure_measure_kernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.dirac_kernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.kfunR": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.measurable_kfunR": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.abs_kfunR_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.indKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.indKernel_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.comp_indKernel_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.isSubstochasticKernel_comp_indKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.potKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.potKernel_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.shift": [],
+    "Miao.ErgodicTheory.measurable_shift": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.shift_zero": [
+      "propext",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.shift_shift": [
+      "propext",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.shift_apply": [],
+    "Miao.ErgodicTheory.integral_measure_comp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.pathMeasure_map_coord": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.pathKernel_map_coord": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.pathKernel_coord_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.pathKernel_coord_chapmanKolmogorov": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.markov_measure": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.markov_lintegral": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.markov_lintegral_mul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.markov_lintegral_univ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.markov_setIntegral": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.stronglyMeasurable_expect_coord": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.integrable_expect_coord": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.markov_property": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.integrable_shift_of_bdd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.markov_property_bdd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.mt_proposition_3_4_3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.isMarkovChain_of_step": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.skeletonFilt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.skeleton_isMarkovChain": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.IsInvariant": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.isInvariant_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.IsInvariant.smul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.IsInvariant.add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.IsInvariant.pow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.IsInvariant.map_coord": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.IsInvariant.map_shift": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.isInvariant_iff_map_shift": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.iSup_natFilt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.expectFn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.stronglyMeasurable_expectFn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.measurable_expectFn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.abs_expectFn_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.integrable_of_bdd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.pathMeasure_eq_zero_of_forall": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.ae_pathMeasure_of_forall": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.pathKernel_eq_zero_of_pair": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.isProbabilityMeasure_pair": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.IsPathInvariant": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.IsInvariantRV": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.isInvariantRV_of_shift": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.condExp_eq_expectFn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.stronglyMeasurable_iSup_natFilt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.tendsto_expectFn_coord": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.mt_lemma_17_1_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.IsMeasurableTransformation": [],
+    "Miao.ErgodicTheory.isMeasurableTransformation_iff": [],
+    "Miao.ErgodicTheory.IsMeasurePreserving": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.isMeasurePreserving_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.IsTransformationInvariant": [],
+    "Miao.ErgodicTheory.ex_4_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.ex_4_1_empty": [],
+    "Miao.ErgodicTheory.ex_4_1_compl": [],
+    "Miao.ErgodicTheory.ex_4_1_iUnion": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.IsErgodic": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.isErgodic_iff_ergodic": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.iterate_shift_one": [
+      "propext",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.example_4_1_1_measurable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.example_4_1_1_not_measurePreserving": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.iterate_finRotate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.example_4_1_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.exists_uniform_fin": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.example_4_1_2_ergodic": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.ex_4_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.lemma_4_1_1_step": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.lemma_4_1_1_on_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.lemma_4_1_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.theorem_4_1_1_sum_succ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.birkhoffAverage_eq_sum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.measurableSet_convergent": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.invariantLimit": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.invariantLimit_comp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.measurable_invariantLimit": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.invariantLimit_ae_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.birkhoffLimit_ae_eq_condExp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.theorem_4_1_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.abs_birkhoffAverage_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.integrable_birkhoffAverage": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.integral_abs_birkhoffAverage_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.tendsto_integral_abs_sub_of_bdd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.tendsto_integral_abs_sub_truncAt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.tendsto_integral_abs_sub_birkhoffLimit": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.theorem_4_1_1_L1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.theorem_4_1_1_condExp_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.theorem_4_1_1_ergodic": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.theorem_4_1_1_ergodic_L1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.pathOf": [],
+    "Miao.ErgodicTheory.window": [],
+    "Miao.ErgodicTheory.pathWindow": [],
+    "Miao.ErgodicTheory.pathLaw": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.IsStationary": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.measurable_pathOf": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.measurable_window": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.measurable_pathWindow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.window_eq": [
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.window_zero": [
+      "propext",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.isProbabilityMeasure_pathLaw": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.boxSet_eq_preimage": [
+      "propext",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.ext_of_boxSet": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.isStationary_iff_map_shift": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.isStationary_iff_measurePreserving": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.isStationary_of_measurePreserving": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.stationary_representation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.isStationary_comp_window": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.isStationary_of_iid": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.IsShiftInvariant": [],
+    "Miao.ErgodicTheory.IsErgodicProcess": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.isShiftInvariant_of_preimage_eq": [],
+    "Miao.ErgodicTheory.shiftInvariant_compl_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.preimage_shift_mono": [
+      "propext",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.exists_invariant_ae_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.isErgodicProcess_iff_isErgodic": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.invariantField": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.condExp_comp_ae_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.eq_4_3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.theorem_4_2_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.theorem_4_2_1_ergodic": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.IsMixing": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.theorem_4_2_3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.theorem_4_2_4_filtration_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.tendsto_avg_succ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.indicator_shift_of_invariant": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.measure_inter_preimage_shift": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.measure_eq_zero_or_one_of_boxes": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.theorem_4_2_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.ex_4_5_a": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.invariantDistributions": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.convex_invariantDistributions": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.pathMeasure_add_smul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.pathLaw_coord": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.ex_4_3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.eq_4_4": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.IsPInvariantSet": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.IsErgodicMeasure": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.expectFn_harmonic_of_invariant": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.lemma_4_3_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.setLIntegral_compl_eq_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.isInvariant_restrict": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.isInvariant_restrict_compl": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.not_mem_extremePoints_of_invariantSet": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.integral_indicator_coord_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.eq_of_ergodic_of_absolutelyContinuous": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.theorem_4_3_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.theorem_4_3_1_iff_isErgodicMeasure": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.corollary_4_3_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.theorem_4_3_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.ex_4_5_b": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.ex_4_6": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.ex_4_6_markov": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.sigmaOf": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.integrable_comp_of_bdd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.ex_4_4_of_condExp_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.comap_prod_eq_generateFrom": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.isPiSystem_rectangles": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.ex_4_4": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.ex_4_4_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.ex_4_4_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.ex_4_7_reduction": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.HasCovariance": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.IsCenteredGaussian": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.integral_sum_mul_sum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.tendsto_dist_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.ex_4_7_cross_covariance": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.ErgodicTheory.ex_4_7_charFun": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  "source_sha256": {
+    "ErgodicTheory/BirkhoffErgodic.lean": "ddce1bac249d419c7cfc16561425fbabf2765089d3f7a33893888237a72862d9",
+    "ErgodicTheory/PathSpace.lean": "8ebd1972b8ee0a7a173f81dba92e7065e71a7d33d43974a3a35c0ae5f50a0d1e",
+    "ErgodicTheory/Kernels.lean": "41e080a2917506021806d13b01479b1f6166bd0b1caf607c803c4e0452e5e180",
+    "ErgodicTheory/MarkovProperty.lean": "6fa73b26dc15baf93f6247c1e7a5b066046590cca0f55b1223e36760f2fd90d9",
+    "ErgodicTheory/InvariantEvents.lean": "279ad3973ed4ff455484d78d48fb1a5c17415cf7132fa15258f7833d46738c84",
+    "ErgodicTheory/ErgodicTheorem.lean": "bdb427cf1a1caf5f77034a1bfeee7610d65baab7037bb3094ee43060c1b68bc0",
+    "ErgodicTheory/StationaryProcesses.lean": "cab6fe62e4bd7b75794eb4da77c96e54e7f0c16afabad04d894fde8222d06500",
+    "ErgodicTheory/StationaryErgodicity.lean": "1eeb55f8256418cd4ec25ac5e3776bd26ef1deeaf794685124bf451f6feb6e1c",
+    "ErgodicTheory/StationaryMarkov.lean": "1f17dc0cdde54fcc06b9a09f5e7ba2864c31ad8308732838eab9ad5c19117f41",
+    "ErgodicTheory/ConditionalIndependence.lean": "789a227703a07c1f823bc089d752cc999ef2b40c6a2b735b25ed7f260eeca47e",
+    "ErgodicTheory/GaussianMixing.lean": "54b7985ff671d404ffc92ff8465c26eca6fbd8291a593bb786cbe000418399de",
+    "ErgodicTheory.lean": "85bd605e52459734c675f785c118c93c114e08e770aae384980d42367d538d47",
+    "lean-toolchain": "8733782dc070a99b312039cda424f601b80f3be6f6f512627da5ba25adc27632",
+    "lakefile.toml": "4047078ae17a9fd2707978ee6ec73fab6751d974aa24fc3a7828c5cf9cfbe9d4",
+    "lake-manifest.json": "b1936b8a953c5c0907042db2b74a2d6cfd35f2a574677e8c783839d750e9df17",
+    "proof-manifest.json": "f67c2278928bb4fe0defd6fcda0b1a6634bab43c24cd7bb3af3896293c6a2d0e",
+    "scripts/verify.py": "a70b1fa704dd590f937f8b37682afa88a9d85a9150065acb935c7d2c9589da3b",
+    "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  },
+  "fresh_audit_sha256": "dd7a1691b9367f2f0129e71f4c98eca08674e833e99446f4ab7da5820502bafe",
+  "lean_toolchain": "leanprover/lean4:v4.34.0",
+  "scope": "Miao Chapter 4 (Ergodic Theory and Stationary Processes): Birkhoff's ergodic theorem (a.s. and L1), stationary and ergodic processes on path space, Theorem 4.2.2, mixing, the one-sided stationary Markov chain and the extreme-point characterisation of ergodic invariant distributions, and Exercises 1-7 (7 partial).",
+  "source": "Jianjun Miao, Economic Dynamics in Discrete Time, MIT Press 2014 (draft of 21 April 2013), Chapter 4"
+}

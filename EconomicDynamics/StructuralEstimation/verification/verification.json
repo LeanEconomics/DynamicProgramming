@@ -1,0 +1,4953 @@
+{
+  "checked_at_utc": "2026-11-10T00:30:18.106910+00:00",
+  "theorems": 402,
+  "module_theorems": {
+    "StructuralEstimation/BirkhoffErgodic.lean": 47,
+    "StructuralEstimation/PathSpace.lean": 23,
+    "StructuralEstimation/Kernels.lean": 32,
+    "StructuralEstimation/MarkovProperty.lean": 22,
+    "StructuralEstimation/ErgodicTheorem.lean": 36,
+    "StructuralEstimation/StationaryProcesses.lean": 25,
+    "StructuralEstimation/StationaryErgodicity.lean": 6,
+    "StructuralEstimation/GMBasic.lean": 6,
+    "StructuralEstimation/GMULLN.lean": 12,
+    "StructuralEstimation/GMConsistency.lean": 11,
+    "StructuralEstimation/GMAlgebra.lean": 28,
+    "StructuralEstimation/GMProbability.lean": 14,
+    "StructuralEstimation/GMNormality.lean": 5,
+    "StructuralEstimation/GMLemma1211.lean": 4,
+    "StructuralEstimation/GMLongRun.lean": 14,
+    "StructuralEstimation/GMEuler.lean": 4,
+    "StructuralEstimation/GMExamples.lean": 16,
+    "StructuralEstimation/MLBRContraction.lean": 8,
+    "StructuralEstimation/MLODBasic.lean": 8,
+    "StructuralEstimation/MLODMcCall.lean": 14,
+    "StructuralEstimation/MLLikelihood.lean": 10,
+    "StructuralEstimation/MLExponential.lean": 8,
+    "StructuralEstimation/MLExercises.lean": 14,
+    "StructuralEstimation/MLJobSearch.lean": 8,
+    "StructuralEstimation/MLSandwich.lean": 3,
+    "StructuralEstimation/MLSimulatedMoments.lean": 11,
+    "StructuralEstimation/MLIndirectInference.lean": 13
+  },
+  "audited_declarations": 493,
+  "declarations": [
+    {
+      "name": "Miao.StructuralEstimation.measurable_birkhoffSum",
+      "kind": "theorem",
+      "module": "StructuralEstimation/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.integrable_birkhoffSum",
+      "kind": "theorem",
+      "module": "StructuralEstimation/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.birkhoffSum_sub_const",
+      "kind": "theorem",
+      "module": "StructuralEstimation/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.birkhoffSum_const_sub",
+      "kind": "theorem",
+      "module": "StructuralEstimation/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.iterate_mem_iff",
+      "kind": "theorem",
+      "module": "StructuralEstimation/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.birkhoffSum_indicator",
+      "kind": "theorem",
+      "module": "StructuralEstimation/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.birkhoffMax",
+      "kind": "def",
+      "module": "StructuralEstimation/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.birkhoffSum_le_birkhoffMax",
+      "kind": "theorem",
+      "module": "StructuralEstimation/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.birkhoffMax_nonneg",
+      "kind": "theorem",
+      "module": "StructuralEstimation/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.birkhoffMax_mono",
+      "kind": "theorem",
+      "module": "StructuralEstimation/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.birkhoffMax_le_add",
+      "kind": "theorem",
+      "module": "StructuralEstimation/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.birkhoffMax_le_sum_abs",
+      "kind": "theorem",
+      "module": "StructuralEstimation/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.measurable_birkhoffMax",
+      "kind": "theorem",
+      "module": "StructuralEstimation/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.integrable_birkhoffMax",
+      "kind": "theorem",
+      "module": "StructuralEstimation/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.maximal_ergodic",
+      "kind": "theorem",
+      "module": "StructuralEstimation/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.birkhoffMax_indicator",
+      "kind": "theorem",
+      "module": "StructuralEstimation/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.maximal_ergodic_inter",
+      "kind": "theorem",
+      "module": "StructuralEstimation/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.upSet",
+      "kind": "def",
+      "module": "StructuralEstimation/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.bddAbove_range_succ_add_iff",
+      "kind": "theorem",
+      "module": "StructuralEstimation/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.preimage_upSet",
+      "kind": "theorem",
+      "module": "StructuralEstimation/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.not_bddAbove_range_iff",
+      "kind": "theorem",
+      "module": "StructuralEstimation/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.measurableSet_upSet",
+      "kind": "theorem",
+      "module": "StructuralEstimation/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.integral_upSet_nonneg",
+      "kind": "theorem",
+      "module": "StructuralEstimation/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.mul_measure_le_setIntegral",
+      "kind": "theorem",
+      "module": "StructuralEstimation/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.setIntegral_le_mul_measure",
+      "kind": "theorem",
+      "module": "StructuralEstimation/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.tendsto_div_of_bdd",
+      "kind": "theorem",
+      "module": "StructuralEstimation/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.measure_upSet_sub_eq_zero",
+      "kind": "theorem",
+      "module": "StructuralEstimation/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.measure_upSet_const_sub_eq_zero",
+      "kind": "theorem",
+      "module": "StructuralEstimation/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.birkhoffAverage_eq_div",
+      "kind": "theorem",
+      "module": "StructuralEstimation/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ae_tendsto_birkhoffAverage_of_ergodic",
+      "kind": "theorem",
+      "module": "StructuralEstimation/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.measure_upSet_inter_eq_zero",
+      "kind": "theorem",
+      "module": "StructuralEstimation/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.measure_iInter_upSet_eq_zero",
+      "kind": "theorem",
+      "module": "StructuralEstimation/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.le_of_bddAbove_both",
+      "kind": "theorem",
+      "module": "StructuralEstimation/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.exists_tendsto_div_of_bdd",
+      "kind": "theorem",
+      "module": "StructuralEstimation/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ae_exists_tendsto_birkhoffAverage",
+      "kind": "theorem",
+      "module": "StructuralEstimation/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.birkhoffLimit",
+      "kind": "def",
+      "module": "StructuralEstimation/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.measurable_birkhoffAverage",
+      "kind": "theorem",
+      "module": "StructuralEstimation/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.measurable_birkhoffLimit",
+      "kind": "theorem",
+      "module": "StructuralEstimation/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ae_tendsto_birkhoffLimit",
+      "kind": "theorem",
+      "module": "StructuralEstimation/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.tendsto_birkhoffAverage_apply",
+      "kind": "theorem",
+      "module": "StructuralEstimation/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.tendsto_birkhoffAverage_of_apply",
+      "kind": "theorem",
+      "module": "StructuralEstimation/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.birkhoffLimit_apply_of_tendsto",
+      "kind": "theorem",
+      "module": "StructuralEstimation/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.measurable_abs_of_measurable",
+      "kind": "theorem",
+      "module": "StructuralEstimation/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.setIntegral_comp_iterate",
+      "kind": "theorem",
+      "module": "StructuralEstimation/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.setIntegral_birkhoffAverage",
+      "kind": "theorem",
+      "module": "StructuralEstimation/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.lintegral_abs_birkhoffAverage_le",
+      "kind": "theorem",
+      "module": "StructuralEstimation/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.integrable_birkhoffLimit",
+      "kind": "theorem",
+      "module": "StructuralEstimation/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.setIntegral_birkhoffLimit_of_bdd",
+      "kind": "theorem",
+      "module": "StructuralEstimation/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.truncAt",
+      "kind": "def",
+      "module": "StructuralEstimation/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.abs_sub_truncAt_le",
+      "kind": "theorem",
+      "module": "StructuralEstimation/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.setIntegral_birkhoffLimit",
+      "kind": "theorem",
+      "module": "StructuralEstimation/BirkhoffErgodic.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.trajKernel",
+      "kind": "def",
+      "module": "StructuralEstimation/PathSpace.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.isMarkovKernel_trajKernel",
+      "kind": "theorem",
+      "module": "StructuralEstimation/PathSpace.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.pathKernel",
+      "kind": "def",
+      "module": "StructuralEstimation/PathSpace.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.isMarkovKernel_pathKernel",
+      "kind": "theorem",
+      "module": "StructuralEstimation/PathSpace.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.pathMeasure",
+      "kind": "def",
+      "module": "StructuralEstimation/PathSpace.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.isProbabilityMeasure_pathMeasure",
+      "kind": "theorem",
+      "module": "StructuralEstimation/PathSpace.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.pathMeasure_eq_comp",
+      "kind": "theorem",
+      "module": "StructuralEstimation/PathSpace.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.pathMeasure_dirac",
+      "kind": "theorem",
+      "module": "StructuralEstimation/PathSpace.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.pathKernel_map_zero",
+      "kind": "theorem",
+      "module": "StructuralEstimation/PathSpace.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.pathKernel_zero_mem",
+      "kind": "theorem",
+      "module": "StructuralEstimation/PathSpace.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ae_pathKernel_zero",
+      "kind": "theorem",
+      "module": "StructuralEstimation/PathSpace.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.pathMeasure_inter_zero",
+      "kind": "theorem",
+      "module": "StructuralEstimation/PathSpace.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.pathMeasure_map_zero",
+      "kind": "theorem",
+      "module": "StructuralEstimation/PathSpace.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.natFilt",
+      "kind": "abbrev",
+      "module": "StructuralEstimation/PathSpace.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.measurable_coord_natFilt",
+      "kind": "theorem",
+      "module": "StructuralEstimation/PathSpace.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.measurableSet_coord_natFilt",
+      "kind": "theorem",
+      "module": "StructuralEstimation/PathSpace.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.setLIntegral_succ",
+      "kind": "theorem",
+      "module": "StructuralEstimation/PathSpace.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.cylFn",
+      "kind": "def",
+      "module": "StructuralEstimation/PathSpace.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.measurable_cylFn",
+      "kind": "theorem",
+      "module": "StructuralEstimation/PathSpace.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.boxSet",
+      "kind": "def",
+      "module": "StructuralEstimation/PathSpace.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.measurableSet_boxSet",
+      "kind": "theorem",
+      "module": "StructuralEstimation/PathSpace.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.measure_inter_shift_box",
+      "kind": "theorem",
+      "module": "StructuralEstimation/PathSpace.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.pathKernel_boxSet",
+      "kind": "theorem",
+      "module": "StructuralEstimation/PathSpace.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.pathMeasure_boxSet",
+      "kind": "theorem",
+      "module": "StructuralEstimation/PathSpace.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.IsMarkovChain",
+      "kind": "structure",
+      "module": "StructuralEstimation/PathSpace.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.IsMarkovChain.mk",
+      "kind": "constructor",
+      "module": "StructuralEstimation/PathSpace.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.IsMarkovChain.measurable",
+      "kind": "projection",
+      "module": "StructuralEstimation/PathSpace.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.IsMarkovChain.fdd",
+      "kind": "projection",
+      "module": "StructuralEstimation/PathSpace.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.mt_theorem_3_4_1",
+      "kind": "theorem",
+      "module": "StructuralEstimation/PathSpace.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.generateFrom_boxSets",
+      "kind": "theorem",
+      "module": "StructuralEstimation/PathSpace.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.isPiSystem_boxSets",
+      "kind": "theorem",
+      "module": "StructuralEstimation/PathSpace.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.mt_theorem_3_4_1_unique",
+      "kind": "theorem",
+      "module": "StructuralEstimation/PathSpace.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.law_eq_pathMeasure",
+      "kind": "theorem",
+      "module": "StructuralEstimation/PathSpace.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.IsSubstochasticKernel",
+      "kind": "def",
+      "module": "StructuralEstimation/Kernels.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.isSubstochasticKernel_of_markov",
+      "kind": "theorem",
+      "module": "StructuralEstimation/Kernels.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.isMarkovKernel_pow",
+      "kind": "theorem",
+      "module": "StructuralEstimation/Kernels.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.pow_zero_apply",
+      "kind": "theorem",
+      "module": "StructuralEstimation/Kernels.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.pow_succ_apply",
+      "kind": "theorem",
+      "module": "StructuralEstimation/Kernels.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.pow_succ_apply'",
+      "kind": "theorem",
+      "module": "StructuralEstimation/Kernels.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.mt_theorem_3_4_2",
+      "kind": "theorem",
+      "module": "StructuralEstimation/Kernels.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.pow_add_eq",
+      "kind": "theorem",
+      "module": "StructuralEstimation/Kernels.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.skeleton",
+      "kind": "abbrev",
+      "module": "StructuralEstimation/Kernels.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.skeleton_pow",
+      "kind": "theorem",
+      "module": "StructuralEstimation/Kernels.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.sampledKernel",
+      "kind": "def",
+      "module": "StructuralEstimation/Kernels.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.sampledKernel_apply",
+      "kind": "theorem",
+      "module": "StructuralEstimation/Kernels.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.isMarkovKernel_sampledKernel",
+      "kind": "theorem",
+      "module": "StructuralEstimation/Kernels.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.resolvent",
+      "kind": "def",
+      "module": "StructuralEstimation/Kernels.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.resolvent_apply",
+      "kind": "theorem",
+      "module": "StructuralEstimation/Kernels.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.tsum_geometric_weights",
+      "kind": "theorem",
+      "module": "StructuralEstimation/Kernels.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.isMarkovKernel_resolvent",
+      "kind": "theorem",
+      "module": "StructuralEstimation/Kernels.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.kfun",
+      "kind": "def",
+      "module": "StructuralEstimation/Kernels.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.measurable_kfun",
+      "kind": "theorem",
+      "module": "StructuralEstimation/Kernels.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.kfun_indicator",
+      "kind": "theorem",
+      "module": "StructuralEstimation/Kernels.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.kfun_one",
+      "kind": "theorem",
+      "module": "StructuralEstimation/Kernels.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.kfun_mono",
+      "kind": "theorem",
+      "module": "StructuralEstimation/Kernels.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.kfun_add",
+      "kind": "theorem",
+      "module": "StructuralEstimation/Kernels.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.kfun_const_mul",
+      "kind": "theorem",
+      "module": "StructuralEstimation/Kernels.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.kfun_comp",
+      "kind": "theorem",
+      "module": "StructuralEstimation/Kernels.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.kfun_pow_succ",
+      "kind": "theorem",
+      "module": "StructuralEstimation/Kernels.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.measure_kernel_apply",
+      "kind": "theorem",
+      "module": "StructuralEstimation/Kernels.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.measure_kernel_assoc",
+      "kind": "theorem",
+      "module": "StructuralEstimation/Kernels.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.lintegral_kfun",
+      "kind": "theorem",
+      "module": "StructuralEstimation/Kernels.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.isProbabilityMeasure_measure_kernel",
+      "kind": "theorem",
+      "module": "StructuralEstimation/Kernels.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.dirac_kernel",
+      "kind": "theorem",
+      "module": "StructuralEstimation/Kernels.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.kfunR",
+      "kind": "def",
+      "module": "StructuralEstimation/Kernels.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.measurable_kfunR",
+      "kind": "theorem",
+      "module": "StructuralEstimation/Kernels.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.abs_kfunR_le",
+      "kind": "theorem",
+      "module": "StructuralEstimation/Kernels.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.indKernel",
+      "kind": "def",
+      "module": "StructuralEstimation/Kernels.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.indKernel_apply",
+      "kind": "theorem",
+      "module": "StructuralEstimation/Kernels.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.comp_indKernel_apply",
+      "kind": "theorem",
+      "module": "StructuralEstimation/Kernels.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.isSubstochasticKernel_comp_indKernel",
+      "kind": "theorem",
+      "module": "StructuralEstimation/Kernels.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.potKernel",
+      "kind": "def",
+      "module": "StructuralEstimation/Kernels.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.potKernel_apply",
+      "kind": "theorem",
+      "module": "StructuralEstimation/Kernels.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.shift",
+      "kind": "def",
+      "module": "StructuralEstimation/MarkovProperty.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.measurable_shift",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MarkovProperty.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.shift_zero",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MarkovProperty.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.shift_shift",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MarkovProperty.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.shift_apply",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MarkovProperty.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.integral_measure_comp",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MarkovProperty.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.pathMeasure_map_coord",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MarkovProperty.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.pathKernel_map_coord",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MarkovProperty.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.pathKernel_coord_mem",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MarkovProperty.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.pathKernel_coord_chapmanKolmogorov",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MarkovProperty.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.markov_measure",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MarkovProperty.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.markov_lintegral",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MarkovProperty.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.markov_lintegral_mul",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MarkovProperty.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.markov_lintegral_univ",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MarkovProperty.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.markov_setIntegral",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MarkovProperty.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.stronglyMeasurable_expect_coord",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MarkovProperty.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.integrable_expect_coord",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MarkovProperty.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.markov_property",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MarkovProperty.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.integrable_shift_of_bdd",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MarkovProperty.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.markov_property_bdd",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MarkovProperty.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.mt_proposition_3_4_3",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MarkovProperty.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.isMarkovChain_of_step",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MarkovProperty.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.skeletonFilt",
+      "kind": "def",
+      "module": "StructuralEstimation/MarkovProperty.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.skeleton_isMarkovChain",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MarkovProperty.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.IsMeasurableTransformation",
+      "kind": "def",
+      "module": "StructuralEstimation/ErgodicTheorem.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.isMeasurableTransformation_iff",
+      "kind": "theorem",
+      "module": "StructuralEstimation/ErgodicTheorem.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.IsMeasurePreserving",
+      "kind": "def",
+      "module": "StructuralEstimation/ErgodicTheorem.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.isMeasurePreserving_iff",
+      "kind": "theorem",
+      "module": "StructuralEstimation/ErgodicTheorem.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.IsTransformationInvariant",
+      "kind": "def",
+      "module": "StructuralEstimation/ErgodicTheorem.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ex_4_1",
+      "kind": "theorem",
+      "module": "StructuralEstimation/ErgodicTheorem.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ex_4_1_empty",
+      "kind": "theorem",
+      "module": "StructuralEstimation/ErgodicTheorem.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ex_4_1_compl",
+      "kind": "theorem",
+      "module": "StructuralEstimation/ErgodicTheorem.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ex_4_1_iUnion",
+      "kind": "theorem",
+      "module": "StructuralEstimation/ErgodicTheorem.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.IsErgodic",
+      "kind": "def",
+      "module": "StructuralEstimation/ErgodicTheorem.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.isErgodic_iff_ergodic",
+      "kind": "theorem",
+      "module": "StructuralEstimation/ErgodicTheorem.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.iterate_shift_one",
+      "kind": "theorem",
+      "module": "StructuralEstimation/ErgodicTheorem.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.example_4_1_1_measurable",
+      "kind": "theorem",
+      "module": "StructuralEstimation/ErgodicTheorem.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.example_4_1_1_not_measurePreserving",
+      "kind": "theorem",
+      "module": "StructuralEstimation/ErgodicTheorem.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.iterate_finRotate",
+      "kind": "theorem",
+      "module": "StructuralEstimation/ErgodicTheorem.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.example_4_1_2",
+      "kind": "theorem",
+      "module": "StructuralEstimation/ErgodicTheorem.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.exists_uniform_fin",
+      "kind": "theorem",
+      "module": "StructuralEstimation/ErgodicTheorem.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.example_4_1_2_ergodic",
+      "kind": "theorem",
+      "module": "StructuralEstimation/ErgodicTheorem.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ex_4_2",
+      "kind": "theorem",
+      "module": "StructuralEstimation/ErgodicTheorem.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.lemma_4_1_1_step",
+      "kind": "theorem",
+      "module": "StructuralEstimation/ErgodicTheorem.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.lemma_4_1_1_on_pos",
+      "kind": "theorem",
+      "module": "StructuralEstimation/ErgodicTheorem.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.lemma_4_1_1",
+      "kind": "theorem",
+      "module": "StructuralEstimation/ErgodicTheorem.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.theorem_4_1_1_sum_succ",
+      "kind": "theorem",
+      "module": "StructuralEstimation/ErgodicTheorem.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.birkhoffAverage_eq_sum",
+      "kind": "theorem",
+      "module": "StructuralEstimation/ErgodicTheorem.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.measurableSet_convergent",
+      "kind": "theorem",
+      "module": "StructuralEstimation/ErgodicTheorem.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.invariantLimit",
+      "kind": "def",
+      "module": "StructuralEstimation/ErgodicTheorem.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.invariantLimit_comp",
+      "kind": "theorem",
+      "module": "StructuralEstimation/ErgodicTheorem.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.measurable_invariantLimit",
+      "kind": "theorem",
+      "module": "StructuralEstimation/ErgodicTheorem.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.invariantLimit_ae_eq",
+      "kind": "theorem",
+      "module": "StructuralEstimation/ErgodicTheorem.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.birkhoffLimit_ae_eq_condExp",
+      "kind": "theorem",
+      "module": "StructuralEstimation/ErgodicTheorem.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.theorem_4_1_1",
+      "kind": "theorem",
+      "module": "StructuralEstimation/ErgodicTheorem.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.abs_birkhoffAverage_le",
+      "kind": "theorem",
+      "module": "StructuralEstimation/ErgodicTheorem.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.integrable_birkhoffAverage",
+      "kind": "theorem",
+      "module": "StructuralEstimation/ErgodicTheorem.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.integral_abs_birkhoffAverage_le",
+      "kind": "theorem",
+      "module": "StructuralEstimation/ErgodicTheorem.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.tendsto_integral_abs_sub_of_bdd",
+      "kind": "theorem",
+      "module": "StructuralEstimation/ErgodicTheorem.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.tendsto_integral_abs_sub_truncAt",
+      "kind": "theorem",
+      "module": "StructuralEstimation/ErgodicTheorem.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.tendsto_integral_abs_sub_birkhoffLimit",
+      "kind": "theorem",
+      "module": "StructuralEstimation/ErgodicTheorem.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.theorem_4_1_1_L1",
+      "kind": "theorem",
+      "module": "StructuralEstimation/ErgodicTheorem.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.theorem_4_1_1_condExp_const",
+      "kind": "theorem",
+      "module": "StructuralEstimation/ErgodicTheorem.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.theorem_4_1_1_ergodic",
+      "kind": "theorem",
+      "module": "StructuralEstimation/ErgodicTheorem.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.theorem_4_1_1_ergodic_L1",
+      "kind": "theorem",
+      "module": "StructuralEstimation/ErgodicTheorem.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.pathOf",
+      "kind": "def",
+      "module": "StructuralEstimation/StationaryProcesses.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.window",
+      "kind": "def",
+      "module": "StructuralEstimation/StationaryProcesses.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.pathWindow",
+      "kind": "def",
+      "module": "StructuralEstimation/StationaryProcesses.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.pathLaw",
+      "kind": "def",
+      "module": "StructuralEstimation/StationaryProcesses.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.IsStationary",
+      "kind": "def",
+      "module": "StructuralEstimation/StationaryProcesses.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.measurable_pathOf",
+      "kind": "theorem",
+      "module": "StructuralEstimation/StationaryProcesses.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.measurable_window",
+      "kind": "theorem",
+      "module": "StructuralEstimation/StationaryProcesses.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.measurable_pathWindow",
+      "kind": "theorem",
+      "module": "StructuralEstimation/StationaryProcesses.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.window_eq",
+      "kind": "theorem",
+      "module": "StructuralEstimation/StationaryProcesses.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.window_zero",
+      "kind": "theorem",
+      "module": "StructuralEstimation/StationaryProcesses.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.isProbabilityMeasure_pathLaw",
+      "kind": "theorem",
+      "module": "StructuralEstimation/StationaryProcesses.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.boxSet_eq_preimage",
+      "kind": "theorem",
+      "module": "StructuralEstimation/StationaryProcesses.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ext_of_boxSet",
+      "kind": "theorem",
+      "module": "StructuralEstimation/StationaryProcesses.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.isStationary_iff_map_shift",
+      "kind": "theorem",
+      "module": "StructuralEstimation/StationaryProcesses.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.isStationary_iff_measurePreserving",
+      "kind": "theorem",
+      "module": "StructuralEstimation/StationaryProcesses.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.isStationary_of_measurePreserving",
+      "kind": "theorem",
+      "module": "StructuralEstimation/StationaryProcesses.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.stationary_representation",
+      "kind": "theorem",
+      "module": "StructuralEstimation/StationaryProcesses.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.isStationary_comp_window",
+      "kind": "theorem",
+      "module": "StructuralEstimation/StationaryProcesses.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.isStationary_of_iid",
+      "kind": "theorem",
+      "module": "StructuralEstimation/StationaryProcesses.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.IsShiftInvariant",
+      "kind": "def",
+      "module": "StructuralEstimation/StationaryProcesses.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.IsErgodicProcess",
+      "kind": "def",
+      "module": "StructuralEstimation/StationaryProcesses.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.isShiftInvariant_of_preimage_eq",
+      "kind": "theorem",
+      "module": "StructuralEstimation/StationaryProcesses.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.shiftInvariant_compl_counterexample",
+      "kind": "theorem",
+      "module": "StructuralEstimation/StationaryProcesses.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.preimage_shift_mono",
+      "kind": "theorem",
+      "module": "StructuralEstimation/StationaryProcesses.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.exists_invariant_ae_eq",
+      "kind": "theorem",
+      "module": "StructuralEstimation/StationaryProcesses.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.isErgodicProcess_iff_isErgodic",
+      "kind": "theorem",
+      "module": "StructuralEstimation/StationaryProcesses.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.invariantField",
+      "kind": "abbrev",
+      "module": "StructuralEstimation/StationaryProcesses.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.condExp_comp_ae_eq",
+      "kind": "theorem",
+      "module": "StructuralEstimation/StationaryProcesses.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.eq_4_3",
+      "kind": "theorem",
+      "module": "StructuralEstimation/StationaryProcesses.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.theorem_4_2_1",
+      "kind": "theorem",
+      "module": "StructuralEstimation/StationaryProcesses.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.theorem_4_2_1_ergodic",
+      "kind": "theorem",
+      "module": "StructuralEstimation/StationaryProcesses.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.IsMixing",
+      "kind": "def",
+      "module": "StructuralEstimation/StationaryProcesses.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.theorem_4_2_3",
+      "kind": "theorem",
+      "module": "StructuralEstimation/StationaryProcesses.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.theorem_4_2_4_filtration_mono",
+      "kind": "theorem",
+      "module": "StructuralEstimation/StationaryProcesses.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.tendsto_avg_succ",
+      "kind": "theorem",
+      "module": "StructuralEstimation/StationaryErgodicity.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.indicator_shift_of_invariant",
+      "kind": "theorem",
+      "module": "StructuralEstimation/StationaryErgodicity.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.measure_inter_preimage_shift",
+      "kind": "theorem",
+      "module": "StructuralEstimation/StationaryErgodicity.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.measure_eq_zero_or_one_of_boxes",
+      "kind": "theorem",
+      "module": "StructuralEstimation/StationaryErgodicity.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.theorem_4_2_2",
+      "kind": "theorem",
+      "module": "StructuralEstimation/StationaryErgodicity.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ex_4_5_a",
+      "kind": "theorem",
+      "module": "StructuralEstimation/StationaryErgodicity.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_sampleMoment",
+      "kind": "def",
+      "module": "StructuralEstimation/GMBasic.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_popMoment",
+      "kind": "def",
+      "module": "StructuralEstimation/GMBasic.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_quadForm",
+      "kind": "def",
+      "module": "StructuralEstimation/GMBasic.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_objective",
+      "kind": "def",
+      "module": "StructuralEstimation/GMBasic.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_popObjective",
+      "kind": "def",
+      "module": "StructuralEstimation/GMBasic.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.Assumption_12_1_3",
+      "kind": "def",
+      "module": "StructuralEstimation/GMBasic.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.Assumption_12_1_4",
+      "kind": "def",
+      "module": "StructuralEstimation/GMBasic.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.Assumption_12_1_7",
+      "kind": "def",
+      "module": "StructuralEstimation/GMBasic.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.assumption_12_1_7_of_sup",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMBasic.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_quadForm_eq",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMBasic.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_continuous_quadForm",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMBasic.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_quadForm_pos",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMBasic.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_quadForm_zero",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMBasic.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_integral_comp_eq",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMBasic.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_ergodic_avg",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMULLN.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_le_of_mem_closure",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMULLN.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_modulus",
+      "kind": "def",
+      "module": "StructuralEstimation/GMULLN.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_modulus_nonneg",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMULLN.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_modulus_le",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMULLN.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_measurable_modulus",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMULLN.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_abs_sub_le_modulus",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMULLN.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_exists_modulus_lt",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMULLN.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_ulln_scalar_eps",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMULLN.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_ulln_scalar",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMULLN.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_ulln",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMULLN.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_continuousOn_popMoment",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMULLN.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_integrable_moment",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMULLN.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_tendsto_measure_of_ae_eventually",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMConsistency.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_continuousOn_sampleMoment",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMConsistency.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_exists_estimator",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMConsistency.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_popObjective_unique_min",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMConsistency.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_identification_gap",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMConsistency.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_abs_trilinear_sub",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMConsistency.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_quadForm_perturb",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMConsistency.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_argmin_stable",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMConsistency.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_measurableSet_unif",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMConsistency.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.theorem_12_1_1",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMConsistency.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.theorem_12_1_1_ae",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMConsistency.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_jacobian",
+      "kind": "def",
+      "module": "StructuralEstimation/GMAlgebra.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_clm_apply_eq_sum",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMAlgebra.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_foc_line",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMAlgebra.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.eq_12_2",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMAlgebra.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.eq_12_3_counterexample",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMAlgebra.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_circle_hasDerivAt",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMAlgebra.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.eq_12_3",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMAlgebra.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_linearization",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMAlgebra.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_linearization_sqrt",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMAlgebra.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_M",
+      "kind": "def",
+      "module": "StructuralEstimation/GMAlgebra.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_M_mul",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMAlgebra.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_posDef_GWG",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMAlgebra.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_isUnit_det_GWG",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMAlgebra.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_isSymm_GWG",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMAlgebra.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_inv_transpose_of_isSymm",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMAlgebra.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_M_transpose",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMAlgebra.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_asymVar_eq",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMAlgebra.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_efficient_var",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMAlgebra.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_efficiency",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMAlgebra.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_J",
+      "kind": "def",
+      "module": "StructuralEstimation/GMAlgebra.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_proj",
+      "kind": "def",
+      "module": "StructuralEstimation/GMAlgebra.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_proj_transpose",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMAlgebra.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_proj_mul_self",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMAlgebra.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_proj_idem",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMAlgebra.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_proj_trace",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMAlgebra.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_resid_proj",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMAlgebra.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.eq_12_4_algebra",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMAlgebra.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_linear_sampleMoment",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMAlgebra.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_linear_foc_iff",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMAlgebra.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_linear_min",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMAlgebra.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_exactly_identified",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMAlgebra.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_nls_foc",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMAlgebra.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_toE",
+      "kind": "def",
+      "module": "StructuralEstimation/GMProbability.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_matE",
+      "kind": "def",
+      "module": "StructuralEstimation/GMProbability.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_continuous_toE",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMProbability.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_continuous_matE",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMProbability.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_matE_toE",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMProbability.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_inner_matE",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMProbability.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_map_multivariateGaussian",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMProbability.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_tendstoInMeasure_comp",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMProbability.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_tendstoInMeasure_pi",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMProbability.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_tendstoInMeasure_apply",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMProbability.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_tendstoInMeasure_prod",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMProbability.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_tight_of_tendstoInDistribution",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMProbability.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_tendstoInMeasure_mul",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMProbability.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_tendstoInMeasure_sum",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMProbability.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_tendstoInMeasure_matE",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMProbability.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_continuousAt_inv",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMProbability.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_sampleDeriv",
+      "kind": "def",
+      "module": "StructuralEstimation/GMNormality.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_sampleJac",
+      "kind": "def",
+      "module": "StructuralEstimation/GMNormality.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_popJac",
+      "kind": "def",
+      "module": "StructuralEstimation/GMNormality.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_hasFDerivAt_sampleMoment",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMNormality.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_dist_segment_le",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMNormality.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_sampleJac_tendstoInMeasure",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMNormality.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.theorem_12_1_2",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMNormality.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.theorem_12_1_2_efficient",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMNormality.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_covMat",
+      "kind": "def",
+      "module": "StructuralEstimation/GMLemma1211.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_covMat_quad",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMLemma1211.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_covMat_posSemidef",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMLemma1211.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_sqrt_mul_inv",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMLemma1211.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.lemma_12_1_1_iid",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMLemma1211.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_map_eq",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMLongRun.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_integral_mul_shift",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMLongRun.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_sum_range_reflect_sub",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMLongRun.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_toeplitz_sum",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMLongRun.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_toeplitz_sum_Ico",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMLongRun.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_autocov",
+      "kind": "def",
+      "module": "StructuralEstimation/GMLongRun.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_longRunVar",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMLongRun.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_longRunVar_limit",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMLongRun.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_bartlett",
+      "kind": "def",
+      "module": "StructuralEstimation/GMLongRun.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_parzen",
+      "kind": "def",
+      "module": "StructuralEstimation/GMLongRun.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_qs",
+      "kind": "def",
+      "module": "StructuralEstimation/GMLongRun.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_kernelArg",
+      "kind": "def",
+      "module": "StructuralEstimation/GMLongRun.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_bartlett_zero",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMLongRun.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_parzen_zero",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMLongRun.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_bartlett_mem_Icc",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMLongRun.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_parzen_mem_Icc",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMLongRun.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_continuous_bartlett",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMLongRun.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_continuous_parzen",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMLongRun.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_sampleAutocov",
+      "kind": "def",
+      "module": "StructuralEstimation/GMLongRun.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_hac",
+      "kind": "def",
+      "module": "StructuralEstimation/GMLongRun.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_hac_isSymm",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMLongRun.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_crraMU",
+      "kind": "def",
+      "module": "StructuralEstimation/GMEuler.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_crra_hasDerivAt",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMEuler.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_eulerMoment",
+      "kind": "def",
+      "module": "StructuralEstimation/GMEuler.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_eulerMoment_eq",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMEuler.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.example_12_1_1",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMEuler.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.example_12_1_1_mean",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMEuler.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_exX",
+      "kind": "def",
+      "module": "StructuralEstimation/GMExamples.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_exH",
+      "kind": "def",
+      "module": "StructuralEstimation/GMExamples.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_ex\u0398",
+      "kind": "def",
+      "module": "StructuralEstimation/GMExamples.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_exDh",
+      "kind": "def",
+      "module": "StructuralEstimation/GMExamples.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_ex_isStationary",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMExamples.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_ex_isErgodic",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMExamples.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_ex_popMoment",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMExamples.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_ex_compact",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMExamples.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_ex_mem",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMExamples.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_ex_measurable",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMExamples.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_ex_continuous",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMExamples.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_ex_assumption_12_1_3",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMExamples.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_ex_assumption_12_1_7",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMExamples.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_ex_assumption_12_1_4",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMExamples.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_ex_theorem_12_1_1",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMExamples.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_ex_popJac",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMExamples.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_ex_sampleJac",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMExamples.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_ex_sampleMoment_zero",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMExamples.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_ex_multivariateGaussian_zero",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMExamples.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.gm_ex_theorem_12_1_2",
+      "kind": "theorem",
+      "module": "StructuralEstimation/GMExamples.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_br_IsContraction",
+      "kind": "def",
+      "module": "StructuralEstimation/MLBRContraction.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_br_IsContraction.uniformContinuous",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLBRContraction.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_br_dist_iterate_succ_le",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLBRContraction.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_br_dist_iterate_le",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLBRContraction.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_br_cauchySeq_iterate",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLBRContraction.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_br_theorem_3_2",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLBRContraction.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_br_corollary_1",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLBRContraction.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_br_blackwell",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLBRContraction.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_br_isClosed_comb",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLBRContraction.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_od_integrable_of_continuous",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLODBasic.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_od_abs_integral_sub_le",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLODBasic.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_od_lipschitz_stop",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLODBasic.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_od_scalar_fixed",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLODBasic.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_od_fixed_le_of_le",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLODBasic.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_od_integral_max_eq",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLODBasic.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_od_integrable_sub",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLODBasic.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_od_setIntegral_Ioi_eq",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLODBasic.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_od_FiringBellman",
+      "kind": "def",
+      "module": "StructuralEstimation/MLODMcCall.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_od_firing\u03a6",
+      "kind": "def",
+      "module": "StructuralEstimation/MLODMcCall.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_od_firing_D_pos",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLODMcCall.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_od_firing_integrable",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLODMcCall.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_od_firing\u03a6_lipschitz",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLODMcCall.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_ex_8_2_E",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLODMcCall.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_od_firing_fixed",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLODMcCall.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_ex_8_2",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLODMcCall.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_ex_8_2_reservation",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLODMcCall.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_od_firing\u03c8",
+      "kind": "def",
+      "module": "StructuralEstimation/MLODMcCall.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_ex_8_2_reservation_eq",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLODMcCall.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_od_firing\u03c8_strictMono",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLODMcCall.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_ex_8_2_root_unique",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLODMcCall.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_ex_8_2_alpha",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLODMcCall.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_od_McCallBellman",
+      "kind": "def",
+      "module": "StructuralEstimation/MLODMcCall.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_od_mccall_iff_firing",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLODMcCall.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_od_mccall_exists_unique",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLODMcCall.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_od_mccall_reservation",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLODMcCall.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_likelihood",
+      "kind": "def",
+      "module": "StructuralEstimation/MLLikelihood.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_logLikelihood",
+      "kind": "def",
+      "module": "StructuralEstimation/MLLikelihood.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.eq_ml_log_likelihood",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLLikelihood.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_isMaxOn_likelihood_iff",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLLikelihood.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_first_order_condition",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLLikelihood.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_score_mean_zero",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLLikelihood.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_information_matrix_equality",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLLikelihood.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_cramer_rao",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLLikelihood.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_cramer_rao_bernoulli",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLLikelihood.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_invariance",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLLikelihood.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_profileLikelihood",
+      "kind": "def",
+      "module": "StructuralEstimation/MLLikelihood.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_invariance_profile",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLLikelihood.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_gaussLogLik",
+      "kind": "def",
+      "module": "StructuralEstimation/MLLikelihood.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_gaussian_tests_equal",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLLikelihood.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_gammaPDF_one_toReal",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLExponential.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_integral_expMeasure",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLExponential.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_integrable_expMeasure_pow",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLExponential.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_memLp_two_expMeasure",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLExponential.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_integral_expMeasure_pow",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLExponential.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_mean_expMeasure",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLExponential.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_second_moment_expMeasure",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLExponential.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_variance_expMeasure",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLExponential.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_binomial_lik_le",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLExercises.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_coinDensity",
+      "kind": "def",
+      "module": "StructuralEstimation/MLExercises.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_heads",
+      "kind": "def",
+      "module": "StructuralEstimation/MLExercises.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ex_12_1_likelihood",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLExercises.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ex_12_1",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLExercises.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_integral_of_zero_one",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLExercises.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ex_12_1_consistent",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLExercises.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_sqrt_mul_mean_sub",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLExercises.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ex_12_1_asymptotic",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLExercises.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_expDensity",
+      "kind": "def",
+      "module": "StructuralEstimation/MLExercises.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ex_12_2_likelihood",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLExercises.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ex_12_2_logLikelihood",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLExercises.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ex_12_2",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLExercises.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ex_12_2_fisher",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLExercises.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_tendstoInDistribution_congr_ae",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLExercises.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ex_12_2_consistent",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLExercises.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ex_12_2_asymptotic",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLExercises.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_firstPassage",
+      "kind": "def",
+      "module": "StructuralEstimation/MLJobSearch.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_firstPassage_iid",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLJobSearch.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.example_12_2_1_duration",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLJobSearch.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_reject_prob_eq_cdf",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLJobSearch.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_durationLik",
+      "kind": "def",
+      "module": "StructuralEstimation/MLJobSearch.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.example_12_2_1",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLJobSearch.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_mccall_psi_root",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLJobSearch.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_resWage_mono_beta",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLJobSearch.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_resWage_strictMono_beta",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLJobSearch.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ex_12_4_moments",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLJobSearch.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_sandwich",
+      "kind": "def",
+      "module": "StructuralEstimation/MLSandwich.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_inv_smul",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLSandwich.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_sandwich_inv",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLSandwich.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_sandwich_optimal",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLSandwich.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_smmObjective",
+      "kind": "def",
+      "module": "StructuralEstimation/MLSimulatedMoments.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_smmMoment",
+      "kind": "def",
+      "module": "StructuralEstimation/MLSimulatedMoments.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.eq_12_5",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLSimulatedMoments.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_smm_isMinOn_iff",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLSimulatedMoments.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_smm_moment_mean_zero",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLSimulatedMoments.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_variance_linear_comb",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLSimulatedMoments.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_smm_variance_factor",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLSimulatedMoments.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_smm_Q",
+      "kind": "def",
+      "module": "StructuralEstimation/MLSimulatedMoments.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_smm_optimal_weight",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLSimulatedMoments.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_smm_Q_tendsto",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLSimulatedMoments.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_smmLocationEstimator",
+      "kind": "def",
+      "module": "StructuralEstimation/MLSimulatedMoments.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_smm_location_objective",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLSimulatedMoments.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_smm_location_consistent",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLSimulatedMoments.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_smm_location_variance",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLSimulatedMoments.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_smm_location_asymptotic",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLSimulatedMoments.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_sml_average_unbiased",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLIndirectInference.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_sml_simulator_slln",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLIndirectInference.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_sml_log_bias",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLIndirectInference.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_sml_log_bias_strict",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLIndirectInference.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_iiAverage",
+      "kind": "def",
+      "module": "StructuralEstimation/MLIndirectInference.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_ii_average_correction",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLIndirectInference.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.example_12_3_3",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLIndirectInference.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.example_12_3_3_book_false",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLIndirectInference.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.example_12_3_3_mean",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLIndirectInference.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.example_12_3_3_ii_eq_smm",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLIndirectInference.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.example_12_3_3_hazard_ne",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLIndirectInference.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_binding_derivative",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLIndirectInference.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_binding_derivative_J",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLIndirectInference.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.ml_ii_Q",
+      "kind": "def",
+      "module": "StructuralEstimation/MLIndirectInference.lean"
+    },
+    {
+      "name": "Miao.StructuralEstimation.eq_12_7_optimal",
+      "kind": "theorem",
+      "module": "StructuralEstimation/MLIndirectInference.lean"
+    }
+  ],
+  "full_build": "passed",
+  "fresh_source_compilation": "passed",
+  "fresh_source_lint_options": [
+    "-Dlinter.mathlibStandardSet=true",
+    "-Dlinter.style.header=false"
+  ],
+  "axioms": {
+    "Miao.StructuralEstimation.measurable_birkhoffSum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.integrable_birkhoffSum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.birkhoffSum_sub_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.birkhoffSum_const_sub": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.iterate_mem_iff": [
+      "propext",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.birkhoffSum_indicator": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.birkhoffMax": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.birkhoffSum_le_birkhoffMax": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.birkhoffMax_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.birkhoffMax_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.birkhoffMax_le_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.birkhoffMax_le_sum_abs": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.measurable_birkhoffMax": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.integrable_birkhoffMax": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.maximal_ergodic": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.birkhoffMax_indicator": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.maximal_ergodic_inter": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.upSet": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.bddAbove_range_succ_add_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.preimage_upSet": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.not_bddAbove_range_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.measurableSet_upSet": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.integral_upSet_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.mul_measure_le_setIntegral": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.setIntegral_le_mul_measure": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.tendsto_div_of_bdd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.measure_upSet_sub_eq_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.measure_upSet_const_sub_eq_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.birkhoffAverage_eq_div": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ae_tendsto_birkhoffAverage_of_ergodic": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.measure_upSet_inter_eq_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.measure_iInter_upSet_eq_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.le_of_bddAbove_both": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.exists_tendsto_div_of_bdd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ae_exists_tendsto_birkhoffAverage": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.birkhoffLimit": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.measurable_birkhoffAverage": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.measurable_birkhoffLimit": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ae_tendsto_birkhoffLimit": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.tendsto_birkhoffAverage_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.tendsto_birkhoffAverage_of_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.birkhoffLimit_apply_of_tendsto": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.measurable_abs_of_measurable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.setIntegral_comp_iterate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.setIntegral_birkhoffAverage": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.lintegral_abs_birkhoffAverage_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.integrable_birkhoffLimit": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.setIntegral_birkhoffLimit_of_bdd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.truncAt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.abs_sub_truncAt_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.setIntegral_birkhoffLimit": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.trajKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.isMarkovKernel_trajKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.pathKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.isMarkovKernel_pathKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.pathMeasure": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.isProbabilityMeasure_pathMeasure": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.pathMeasure_eq_comp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.pathMeasure_dirac": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.pathKernel_map_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.pathKernel_zero_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ae_pathKernel_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.pathMeasure_inter_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.pathMeasure_map_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.natFilt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.measurable_coord_natFilt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.measurableSet_coord_natFilt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.setLIntegral_succ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.cylFn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.measurable_cylFn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.boxSet": [],
+    "Miao.StructuralEstimation.measurableSet_boxSet": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.measure_inter_shift_box": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.pathKernel_boxSet": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.pathMeasure_boxSet": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.IsMarkovChain": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.IsMarkovChain.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.IsMarkovChain.measurable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.IsMarkovChain.fdd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.mt_theorem_3_4_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.generateFrom_boxSets": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.isPiSystem_boxSets": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.mt_theorem_3_4_1_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.law_eq_pathMeasure": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.IsSubstochasticKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.isSubstochasticKernel_of_markov": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.isMarkovKernel_pow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.pow_zero_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.pow_succ_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.pow_succ_apply'": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.mt_theorem_3_4_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.pow_add_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.skeleton": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.skeleton_pow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.sampledKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.sampledKernel_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.isMarkovKernel_sampledKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.resolvent": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.resolvent_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.tsum_geometric_weights": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.isMarkovKernel_resolvent": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.kfun": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.measurable_kfun": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.kfun_indicator": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.kfun_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.kfun_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.kfun_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.kfun_const_mul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.kfun_comp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.kfun_pow_succ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.measure_kernel_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.measure_kernel_assoc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.lintegral_kfun": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.isProbabilityMeasure_measure_kernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.dirac_kernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.kfunR": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.measurable_kfunR": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.abs_kfunR_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.indKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.indKernel_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.comp_indKernel_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.isSubstochasticKernel_comp_indKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.potKernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.potKernel_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.shift": [],
+    "Miao.StructuralEstimation.measurable_shift": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.shift_zero": [
+      "propext",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.shift_shift": [
+      "propext",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.shift_apply": [],
+    "Miao.StructuralEstimation.integral_measure_comp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.pathMeasure_map_coord": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.pathKernel_map_coord": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.pathKernel_coord_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.pathKernel_coord_chapmanKolmogorov": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.markov_measure": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.markov_lintegral": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.markov_lintegral_mul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.markov_lintegral_univ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.markov_setIntegral": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.stronglyMeasurable_expect_coord": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.integrable_expect_coord": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.markov_property": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.integrable_shift_of_bdd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.markov_property_bdd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.mt_proposition_3_4_3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.isMarkovChain_of_step": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.skeletonFilt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.skeleton_isMarkovChain": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.IsMeasurableTransformation": [],
+    "Miao.StructuralEstimation.isMeasurableTransformation_iff": [],
+    "Miao.StructuralEstimation.IsMeasurePreserving": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.isMeasurePreserving_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.IsTransformationInvariant": [],
+    "Miao.StructuralEstimation.ex_4_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ex_4_1_empty": [],
+    "Miao.StructuralEstimation.ex_4_1_compl": [],
+    "Miao.StructuralEstimation.ex_4_1_iUnion": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.IsErgodic": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.isErgodic_iff_ergodic": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.iterate_shift_one": [
+      "propext",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.example_4_1_1_measurable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.example_4_1_1_not_measurePreserving": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.iterate_finRotate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.example_4_1_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.exists_uniform_fin": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.example_4_1_2_ergodic": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ex_4_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.lemma_4_1_1_step": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.lemma_4_1_1_on_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.lemma_4_1_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.theorem_4_1_1_sum_succ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.birkhoffAverage_eq_sum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.measurableSet_convergent": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.invariantLimit": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.invariantLimit_comp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.measurable_invariantLimit": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.invariantLimit_ae_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.birkhoffLimit_ae_eq_condExp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.theorem_4_1_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.abs_birkhoffAverage_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.integrable_birkhoffAverage": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.integral_abs_birkhoffAverage_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.tendsto_integral_abs_sub_of_bdd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.tendsto_integral_abs_sub_truncAt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.tendsto_integral_abs_sub_birkhoffLimit": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.theorem_4_1_1_L1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.theorem_4_1_1_condExp_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.theorem_4_1_1_ergodic": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.theorem_4_1_1_ergodic_L1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.pathOf": [],
+    "Miao.StructuralEstimation.window": [],
+    "Miao.StructuralEstimation.pathWindow": [],
+    "Miao.StructuralEstimation.pathLaw": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.IsStationary": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.measurable_pathOf": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.measurable_window": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.measurable_pathWindow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.window_eq": [
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.window_zero": [
+      "propext",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.isProbabilityMeasure_pathLaw": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.boxSet_eq_preimage": [
+      "propext",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ext_of_boxSet": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.isStationary_iff_map_shift": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.isStationary_iff_measurePreserving": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.isStationary_of_measurePreserving": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.stationary_representation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.isStationary_comp_window": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.isStationary_of_iid": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.IsShiftInvariant": [],
+    "Miao.StructuralEstimation.IsErgodicProcess": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.isShiftInvariant_of_preimage_eq": [],
+    "Miao.StructuralEstimation.shiftInvariant_compl_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.preimage_shift_mono": [
+      "propext",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.exists_invariant_ae_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.isErgodicProcess_iff_isErgodic": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.invariantField": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.condExp_comp_ae_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.eq_4_3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.theorem_4_2_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.theorem_4_2_1_ergodic": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.IsMixing": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.theorem_4_2_3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.theorem_4_2_4_filtration_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.tendsto_avg_succ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.indicator_shift_of_invariant": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.measure_inter_preimage_shift": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.measure_eq_zero_or_one_of_boxes": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.theorem_4_2_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ex_4_5_a": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_sampleMoment": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_popMoment": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_quadForm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_objective": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_popObjective": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.Assumption_12_1_3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.Assumption_12_1_4": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.Assumption_12_1_7": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.assumption_12_1_7_of_sup": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_quadForm_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_continuous_quadForm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_quadForm_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_quadForm_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_integral_comp_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_ergodic_avg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_le_of_mem_closure": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_modulus": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_modulus_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_modulus_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_measurable_modulus": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_abs_sub_le_modulus": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_exists_modulus_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_ulln_scalar_eps": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_ulln_scalar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_ulln": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_continuousOn_popMoment": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_integrable_moment": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_tendsto_measure_of_ae_eventually": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_continuousOn_sampleMoment": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_exists_estimator": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_popObjective_unique_min": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_identification_gap": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_abs_trilinear_sub": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_quadForm_perturb": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_argmin_stable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_measurableSet_unif": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.theorem_12_1_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.theorem_12_1_1_ae": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_jacobian": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_clm_apply_eq_sum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_foc_line": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.eq_12_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.eq_12_3_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_circle_hasDerivAt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.eq_12_3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_linearization": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_linearization_sqrt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_M": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_M_mul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_posDef_GWG": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_isUnit_det_GWG": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_isSymm_GWG": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_inv_transpose_of_isSymm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_M_transpose": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_asymVar_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_efficient_var": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_efficiency": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_J": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_proj": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_proj_transpose": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_proj_mul_self": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_proj_idem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_proj_trace": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_resid_proj": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.eq_12_4_algebra": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_linear_sampleMoment": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_linear_foc_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_linear_min": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_exactly_identified": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_nls_foc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_toE": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_matE": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_continuous_toE": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_continuous_matE": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_matE_toE": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_inner_matE": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_map_multivariateGaussian": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_tendstoInMeasure_comp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_tendstoInMeasure_pi": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_tendstoInMeasure_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_tendstoInMeasure_prod": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_tight_of_tendstoInDistribution": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_tendstoInMeasure_mul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_tendstoInMeasure_sum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_tendstoInMeasure_matE": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_continuousAt_inv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_sampleDeriv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_sampleJac": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_popJac": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_hasFDerivAt_sampleMoment": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_dist_segment_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_sampleJac_tendstoInMeasure": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.theorem_12_1_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.theorem_12_1_2_efficient": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_covMat": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_covMat_quad": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_covMat_posSemidef": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_sqrt_mul_inv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.lemma_12_1_1_iid": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_map_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_integral_mul_shift": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_sum_range_reflect_sub": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_toeplitz_sum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_toeplitz_sum_Ico": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_autocov": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_longRunVar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_longRunVar_limit": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_bartlett": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_parzen": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_qs": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_kernelArg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_bartlett_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_parzen_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_bartlett_mem_Icc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_parzen_mem_Icc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_continuous_bartlett": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_continuous_parzen": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_sampleAutocov": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_hac": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_hac_isSymm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_crraMU": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_crra_hasDerivAt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_eulerMoment": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_eulerMoment_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.example_12_1_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.example_12_1_1_mean": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_exX": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_exH": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_ex\u0398": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_exDh": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_ex_isStationary": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_ex_isErgodic": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_ex_popMoment": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_ex_compact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_ex_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_ex_measurable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_ex_continuous": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_ex_assumption_12_1_3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_ex_assumption_12_1_7": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_ex_assumption_12_1_4": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_ex_theorem_12_1_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_ex_popJac": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_ex_sampleJac": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_ex_sampleMoment_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_ex_multivariateGaussian_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.gm_ex_theorem_12_1_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_br_IsContraction": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_br_IsContraction.uniformContinuous": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_br_dist_iterate_succ_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_br_dist_iterate_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_br_cauchySeq_iterate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_br_theorem_3_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_br_corollary_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_br_blackwell": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_br_isClosed_comb": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_od_integrable_of_continuous": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_od_abs_integral_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_od_lipschitz_stop": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_od_scalar_fixed": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_od_fixed_le_of_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_od_integral_max_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_od_integrable_sub": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_od_setIntegral_Ioi_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_od_FiringBellman": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_od_firing\u03a6": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_od_firing_D_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_od_firing_integrable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_od_firing\u03a6_lipschitz": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_ex_8_2_E": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_od_firing_fixed": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_ex_8_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_ex_8_2_reservation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_od_firing\u03c8": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_ex_8_2_reservation_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_od_firing\u03c8_strictMono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_ex_8_2_root_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_ex_8_2_alpha": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_od_McCallBellman": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_od_mccall_iff_firing": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_od_mccall_exists_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_od_mccall_reservation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_likelihood": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_logLikelihood": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.eq_ml_log_likelihood": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_isMaxOn_likelihood_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_first_order_condition": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_score_mean_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_information_matrix_equality": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_cramer_rao": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_cramer_rao_bernoulli": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_invariance": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_profileLikelihood": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_invariance_profile": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_gaussLogLik": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_gaussian_tests_equal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_gammaPDF_one_toReal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_integral_expMeasure": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_integrable_expMeasure_pow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_memLp_two_expMeasure": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_integral_expMeasure_pow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_mean_expMeasure": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_second_moment_expMeasure": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_variance_expMeasure": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_binomial_lik_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_coinDensity": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_heads": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ex_12_1_likelihood": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ex_12_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_integral_of_zero_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ex_12_1_consistent": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_sqrt_mul_mean_sub": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ex_12_1_asymptotic": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_expDensity": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ex_12_2_likelihood": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ex_12_2_logLikelihood": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ex_12_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ex_12_2_fisher": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_tendstoInDistribution_congr_ae": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ex_12_2_consistent": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ex_12_2_asymptotic": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_firstPassage": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_firstPassage_iid": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.example_12_2_1_duration": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_reject_prob_eq_cdf": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_durationLik": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.example_12_2_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_mccall_psi_root": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_resWage_mono_beta": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_resWage_strictMono_beta": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ex_12_4_moments": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_sandwich": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_inv_smul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_sandwich_inv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_sandwich_optimal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_smmObjective": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_smmMoment": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.eq_12_5": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_smm_isMinOn_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_smm_moment_mean_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_variance_linear_comb": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_smm_variance_factor": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_smm_Q": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_smm_optimal_weight": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_smm_Q_tendsto": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_smmLocationEstimator": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_smm_location_objective": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_smm_location_consistent": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_smm_location_variance": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_smm_location_asymptotic": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_sml_average_unbiased": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_sml_simulator_slln": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_sml_log_bias": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_sml_log_bias_strict": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_iiAverage": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_ii_average_correction": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.example_12_3_3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.example_12_3_3_book_false": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.example_12_3_3_mean": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.example_12_3_3_ii_eq_smm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.example_12_3_3_hazard_ne": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_binding_derivative": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_binding_derivative_J": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.ml_ii_Q": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Miao.StructuralEstimation.eq_12_7_optimal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  "source_sha256": {
+    "StructuralEstimation/BirkhoffErgodic.lean": "ef3d5d719a4b1cf3e0f64a8d8e41ea1a0a9e2a6288254c5bd478c765bd2ec586",
+    "StructuralEstimation/PathSpace.lean": "03dd1f4643bf4d0d083770981bf04fe6ee757a07e696c3ee3d80d222a03cb061",
+    "StructuralEstimation/Kernels.lean": "53e02e9a39bbcf3a5455f3cda0e00eb688092e6f1790a3109a6f4851f13a6ed8",
+    "StructuralEstimation/MarkovProperty.lean": "b8f5e9262b81eca43ed537d6050e62c6c770c8695f32ccdc4e387c821d4bc936",
+    "StructuralEstimation/ErgodicTheorem.lean": "f79754254ef827afea61e4ee4009620a4382012fc172f41616cc3b6002c3176d",
+    "StructuralEstimation/StationaryProcesses.lean": "e977bc9ce326b4e744394e0fc560296f80c9b4a53acc35761366846bdf14e96c",
+    "StructuralEstimation/StationaryErgodicity.lean": "457bb27c95d58d5983e95816cd521d9a766635f7150c98eac1804edfbe6b4589",
+    "StructuralEstimation/GMBasic.lean": "4fe73a8d6088678f15e487e8aa7c77196836f3cbab0c6b9ebc4817e08476efad",
+    "StructuralEstimation/GMULLN.lean": "00ff6085fb52d4429b5f576a1ea6afd390bf02f5f48470d8dc91d2f8434299c2",
+    "StructuralEstimation/GMConsistency.lean": "99ec94522654fa8033f5b82be940a3e0ca648ec5e6b790e6d7d9b5949e17a0e2",
+    "StructuralEstimation/GMAlgebra.lean": "2b5d924a3842ab993924ba6f95d9107f9a3ae0ce35fb1922fa4f07495f5e71bb",
+    "StructuralEstimation/GMProbability.lean": "2fd0126d0507a7cb9fa9d1239d84bb65e91c85099e3e1dda2d149833644c88fb",
+    "StructuralEstimation/GMNormality.lean": "d77b837f5739b381ef0d29a6874c16f4b05896f2fb8bf043b1dc70bf07d4447f",
+    "StructuralEstimation/GMLemma1211.lean": "73de50e8a7f2a8a31b7e0aa841b143387b37435a855ee061dd6f436827be9ec5",
+    "StructuralEstimation/GMLongRun.lean": "648295cfb76f135ec11c08f30d62989dc1b674af5742d8c7dceafbc413c22667",
+    "StructuralEstimation/GMEuler.lean": "922d665579ac0a70b055f8326229ea9a3e96af82388f18f249c3bbc793aced5a",
+    "StructuralEstimation/GMExamples.lean": "7a4a176380d087bbae2ee96a4fddccc8f151fac875105e68a231ed2a09e174a6",
+    "StructuralEstimation/MLBRContraction.lean": "8056bfff38becfc8c438909c2b082c13b5dab6536b9a9f2733aced3ba84656f7",
+    "StructuralEstimation/MLODBasic.lean": "e5c1341a19ce80c79b6b655284a9643eea203a871580549ed7bd9cdc77006491",
+    "StructuralEstimation/MLODMcCall.lean": "75869423fc18fe2244304bf20408d60862ba9386c3f5bb231149e8da5440dba9",
+    "StructuralEstimation/MLLikelihood.lean": "74ad9114030cafc70bcfd3040a9befc63f01d5a0cfb2c2743399eb0236dce476",
+    "StructuralEstimation/MLExponential.lean": "09ccdb934393798810a41e2ad3f6420a481bf88283af9e72bd3f40467c580d07",
+    "StructuralEstimation/MLExercises.lean": "b217942c77656fb8a4971784c83032a22a69240a316b303aca8cb0ed342e740c",
+    "StructuralEstimation/MLJobSearch.lean": "07adc29da49ced7b30b5d661b35ef619c588685781a7cc59fc5b851abc80ba5d",
+    "StructuralEstimation/MLSandwich.lean": "8990deebfaa120051992c7a7e6a34056e7d12bb3094c24e868507bef3e44b7d3",
+    "StructuralEstimation/MLSimulatedMoments.lean": "4c618dcfbe8021a972810de9c4ba77388b33fe11820dbf0c1652766568958b22",
+    "StructuralEstimation/MLIndirectInference.lean": "649d6c840264456ad7f08ef3be0eaf428cabb8f48372cf16732226141d09d4a7",
+    "StructuralEstimation.lean": "34e37e1b7a1f6caebbee1fe91e858e47962f88f59902c582d09819d5040a47b2",
+    "lean-toolchain": "8733782dc070a99b312039cda424f601b80f3be6f6f512627da5ba25adc27632",
+    "lakefile.toml": "7dffb483483ae07a62c88e170c8ab291f5541628791c718951de315d579ff72f",
+    "lake-manifest.json": "bf02c045d4d697ff497e2bf38c29e3aeb4ed67077f415be5ed7dddfc57b37eb4",
+    "proof-manifest.json": "1425dedbc66144a4adbfbd0e467d6084f70ce02611edd23e01f54f7fcd8df1fb",
+    "scripts/verify.py": "a70b1fa704dd590f937f8b37682afa88a9d85a9150065acb935c7d2c9589da3b",
+    "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  },
+  "fresh_audit_sha256": "63a23569fc10201e8de1ff23543c87463f915618b8839be0da99704bb24489fc",
+  "lean_toolchain": "leanprover/lean4:v4.34.0",
+  "scope": "Miao Chapter 12 (pp. 385-410): GMM (Assumptions 12.1.1-12.1.10, consistency Theorem 12.1.1 with a uniform law of large numbers from Birkhoff's theorem, asymptotic normality Theorem 12.1.2, efficient weighting, the J statistic algebra, HAC), maximum likelihood (information matrix equality, Cramer-Rao, Example 12.2.1), simulated method of moments, simulated ML, indirect inference (Examples 12.3.1-12.3.3), and Exercises 1-4.",
+  "source": "Jianjun Miao, Economic Dynamics in Discrete Time, MIT Press 2014 (draft of 21 April 2013), Chapter 12"
+}
