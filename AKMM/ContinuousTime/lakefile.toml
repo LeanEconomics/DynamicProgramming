@@ -1,0 +1,39 @@
+name = "AKMMContinuousTime"
+version = "0.1.0"
+keywords = ["math", "economics", "macroeconomics"]
+defaultTargets = ["AKMMContinuousTime"]
+
+[leanOptions]
+pp.unicode.fun = true # pretty-prints `fun a ↦ b`
+autoImplicit = false
+relaxedAutoImplicit = false
+weak.linter.mathlibStandardSet = true
+maxSynthPendingDepth = 3
+
+[[require]]
+name = "mathlib"
+git = "https://github.com/leanprover-community/mathlib4.git"
+rev = "v4.34.0"
+
+[[require]]
+name = "EulerTransversality"
+path = "../../Extensions/EulerTransversality"
+
+[[require]]
+name = "ContinuousTime"
+path = "../../FiniteStates/ContinuousTime"
+
+[[require]]
+name = "Solow1956"
+git = "https://github.com/LeanEconomics/EconomicGrowth.git"
+rev = "9ec4dd0b305929b76ddd6ca0e4b8bda23e922f6a"
+subDir = "SolowSwan"
+
+[[require]]
+name = "RamseyCassKoopmans"
+git = "https://github.com/LeanEconomics/EconomicGrowth.git"
+rev = "9ec4dd0b305929b76ddd6ca0e4b8bda23e922f6a"
+subDir = "RamseyCassKoopmans"
+
+[[lean_lib]]
+name = "AKMMContinuousTime"

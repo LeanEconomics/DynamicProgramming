@@ -1,0 +1,1772 @@
+{
+  "checked_at_utc": "2026-11-11T23:14:34.768040+00:00",
+  "theorems": 120,
+  "module_theorems": {
+    "AKMMComputationalTools/Interpolation.lean": 10,
+    "AKMMComputationalTools/Bisection.lean": 12,
+    "AKMMComputationalTools/Newton.lean": 10,
+    "AKMMComputationalTools/GoldenSection.lean": 15,
+    "AKMMComputationalTools/LabourLeisure.lean": 5,
+    "AKMMComputationalTools/Discretization.lean": 7,
+    "AKMMComputationalTools/Rouwenhorst.lean": 20,
+    "AKMMComputationalTools/ValueIteration.lean": 6,
+    "AKMMComputationalTools/CakeEating.lean": 7,
+    "AKMMComputationalTools/Linearization.lean": 11,
+    "AKMMComputationalTools/BlanchardKahn.lean": 17
+  },
+  "audited_declarations": 172,
+  "declarations": [
+    {
+      "name": "AKMM.ComputationalTools.linInterp",
+      "kind": "def",
+      "module": "AKMMComputationalTools/Interpolation.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.linInterp_left",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/Interpolation.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.linInterp_right",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/Interpolation.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.linInterp_unique",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/Interpolation.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.linInterp_error",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/Interpolation.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.linInterp_error_h",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/Interpolation.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.kink",
+      "kind": "def",
+      "module": "AKMMComputationalTools/Interpolation.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.linInterp_kink_not_differentiable",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/Interpolation.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.linInterp_kink_differentiable_of_eq",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/Interpolation.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.cubic_spline_existsUnique",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/Interpolation.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.eq_10_1_unique_iff",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/Interpolation.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.eq_10_1_poly",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/Interpolation.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.bisect_sign_eq_iff",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/Bisection.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.bisectStep",
+      "kind": "def",
+      "module": "AKMMComputationalTools/Bisection.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.bisect",
+      "kind": "def",
+      "module": "AKMMComputationalTools/Bisection.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.bisectStep_cases",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/Bisection.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.bisect_length",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/Bisection.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.bisect_mono",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/Bisection.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.bisect_bracket",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/Bisection.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.bisect_mem",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/Bisection.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.bisect_bracket_root",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/Bisection.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.bisect_converges",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/Bisection.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.bisect_iteration_count",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/Bisection.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.bisect_terminates",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/Bisection.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.bisect_ten_steps",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/Bisection.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.bisectJump",
+      "kind": "def",
+      "module": "AKMMComputationalTools/Bisection.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.bisect_discontinuous_no_root",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/Bisection.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.newtonStep",
+      "kind": "def",
+      "module": "AKMMComputationalTools/Newton.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.eq_10_2",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/Newton.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.newton_affine_exact",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/Newton.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.newton_local_quadratic",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/Newton.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.newton_converges",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/Newton.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.central_difference_tendsto",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/Newton.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.central_difference_quadratic",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/Newton.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.newtonOptStep",
+      "kind": "def",
+      "module": "AKMMComputationalTools/Newton.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.newtonOpt_eq_newtonStep_deriv",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/Newton.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.eq_10_3",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/Newton.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.eq_10_3_max",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/Newton.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.newtonOpt_quadratic_exact",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/Newton.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.omegaStar",
+      "kind": "def",
+      "module": "AKMMComputationalTools/GoldenSection.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.golden_omega_sq",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/GoldenSection.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.golden_omega_eq_sq",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/GoldenSection.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.golden_omega_bounds",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/GoldenSection.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.golden_omega_pos",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/GoldenSection.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.golden_omega_lt_half",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/GoldenSection.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.golden_ratio_eq",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/GoldenSection.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.GoldenBracket",
+      "kind": "structure",
+      "module": "AKMMComputationalTools/GoldenSection.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.GoldenBracket.mk",
+      "kind": "constructor",
+      "module": "AKMMComputationalTools/GoldenSection.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.GoldenBracket.a",
+      "kind": "projection",
+      "module": "AKMMComputationalTools/GoldenSection.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.GoldenBracket.b",
+      "kind": "projection",
+      "module": "AKMMComputationalTools/GoldenSection.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.GoldenBracket.c",
+      "kind": "projection",
+      "module": "AKMMComputationalTools/GoldenSection.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.GoldenBracket.IsBracket",
+      "kind": "def",
+      "module": "AKMMComputationalTools/GoldenSection.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.GoldenBracket.IsGolden",
+      "kind": "def",
+      "module": "AKMMComputationalTools/GoldenSection.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.goldenStep",
+      "kind": "def",
+      "module": "AKMMComputationalTools/GoldenSection.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.goldenStep_spec",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/GoldenSection.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.golden_length",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/GoldenSection.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.golden_printed_length_counterexample",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/GoldenSection.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.golden_terminates",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/GoldenSection.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.golden_bracket_max",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/GoldenSection.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.golden_iterate_max",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/GoldenSection.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.golden_two_lengths",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/GoldenSection.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.golden_fn3_unique",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/GoldenSection.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.golden_removed_fraction",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/GoldenSection.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.ex1Obj",
+      "kind": "def",
+      "module": "AKMMComputationalTools/LabourLeisure.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.ex1Foc",
+      "kind": "def",
+      "module": "AKMMComputationalTools/LabourLeisure.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.eq_10_5",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/LabourLeisure.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.ex1_foc_strictAnti",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/LabourLeisure.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.ex1_root_isMax",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/LabourLeisure.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.ex1_cbrt_eighth",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/LabourLeisure.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.ex1_unique_root",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/LabourLeisure.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.ar1_uncond_var",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/Discretization.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.tauchenGrid",
+      "kind": "def",
+      "module": "AKMMComputationalTools/Discretization.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.tauchenGrid_last",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/Discretization.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.tauchenUpper",
+      "kind": "def",
+      "module": "AKMMComputationalTools/Discretization.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.tauchenLower",
+      "kind": "def",
+      "module": "AKMMComputationalTools/Discretization.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.tauchen_lower_succ",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/Discretization.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.tauchenProb",
+      "kind": "def",
+      "module": "AKMMComputationalTools/Discretization.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.tauchen_stochastic",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/Discretization.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.tauchenPrinted",
+      "kind": "def",
+      "module": "AKMMComputationalTools/Discretization.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.tauchen_printed_neg",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/Discretization.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.tauchen_printed_row_sum",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/Discretization.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.tauchenCauchyCdf",
+      "kind": "def",
+      "module": "AKMMComputationalTools/Discretization.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.tauchenCauchyCdf_strictMono",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/Discretization.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.rouwenhorst",
+      "kind": "def",
+      "module": "AKMMComputationalTools/Rouwenhorst.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.rouwenhorst_two",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/Rouwenhorst.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.rouwenhorst_row_zero",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/Rouwenhorst.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.rouwenhorst_nonneg",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/Rouwenhorst.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.rwLow",
+      "kind": "def",
+      "module": "AKMMComputationalTools/Rouwenhorst.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.rwHigh",
+      "kind": "def",
+      "module": "AKMMComputationalTools/Rouwenhorst.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.rwRow",
+      "kind": "def",
+      "module": "AKMMComputationalTools/Rouwenhorst.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.rw_coeff_linear_mul",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/Rouwenhorst.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.rouwenhorst_eq_coeff",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/Rouwenhorst.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.rwRow_natDegree_le",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/Rouwenhorst.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.rw_sum_coeff_pow",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/Rouwenhorst.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.rw_sum_coeff_mul_index",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/Rouwenhorst.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.rouwenhorst_row_sum",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/Rouwenhorst.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.rouwenhorst_cond_mean_index",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/Rouwenhorst.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.rw_binomial_rows",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/Rouwenhorst.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.rouwenhorst_invariant",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/Rouwenhorst.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.rw_binomial_moments",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/Rouwenhorst.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.rwGrid",
+      "kind": "def",
+      "module": "AKMMComputationalTools/Rouwenhorst.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.rwGrid_ends",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/Rouwenhorst.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.rouwenhorst_cond_mean",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/Rouwenhorst.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.rouwenhorst_stationary_mean",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/Rouwenhorst.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.rouwenhorst_stationary_var",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/Rouwenhorst.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.rouwenhorst_stationary_autocov",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/Rouwenhorst.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.rouwenhorst_matches_ar1",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/Rouwenhorst.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.rouwenhorstPrinted",
+      "kind": "def",
+      "module": "AKMMComputationalTools/Rouwenhorst.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.rouwenhorst_printed_counterexample",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/Rouwenhorst.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.GridDP",
+      "kind": "structure",
+      "module": "AKMMComputationalTools/ValueIteration.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.GridDP.mk",
+      "kind": "constructor",
+      "module": "AKMMComputationalTools/ValueIteration.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.GridDP.feasible",
+      "kind": "projection",
+      "module": "AKMMComputationalTools/ValueIteration.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.GridDP.feasible_nonempty",
+      "kind": "projection",
+      "module": "AKMMComputationalTools/ValueIteration.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.GridDP.ret",
+      "kind": "projection",
+      "module": "AKMMComputationalTools/ValueIteration.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.GridDP.trans",
+      "kind": "projection",
+      "module": "AKMMComputationalTools/ValueIteration.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.GridDP.trans_nonneg",
+      "kind": "projection",
+      "module": "AKMMComputationalTools/ValueIteration.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.GridDP.trans_sum",
+      "kind": "projection",
+      "module": "AKMMComputationalTools/ValueIteration.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.GridDP.\u03b2",
+      "kind": "projection",
+      "module": "AKMMComputationalTools/ValueIteration.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.GridDP.\u03b2_nonneg",
+      "kind": "projection",
+      "module": "AKMMComputationalTools/ValueIteration.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.GridDP.\u03b2_lt_one",
+      "kind": "projection",
+      "module": "AKMMComputationalTools/ValueIteration.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.GridDP.cont",
+      "kind": "def",
+      "module": "AKMMComputationalTools/ValueIteration.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.GridDP.T",
+      "kind": "def",
+      "module": "AKMMComputationalTools/ValueIteration.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.GridDP.cont_sub_le",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/ValueIteration.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.GridDP.sup'_sub_le",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/ValueIteration.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.GridDP.contraction",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/ValueIteration.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.GridDP.vfi",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/ValueIteration.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.GridDP.stopping_rule",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/ValueIteration.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.cakeGrid",
+      "kind": "def",
+      "module": "AKMMComputationalTools/ValueIteration.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.cakeGrid_vfi",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/ValueIteration.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.stochCakeGrid",
+      "kind": "def",
+      "module": "AKMMComputationalTools/ValueIteration.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.cakeV",
+      "kind": "def",
+      "module": "AKMMComputationalTools/CakeEating.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.cakeRhs",
+      "kind": "def",
+      "module": "AKMMComputationalTools/CakeEating.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.cake_cauchy_schwarz",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/CakeEating.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.cake_bellman",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/CakeEating.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.cake_policy_unique",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/CakeEating.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.cake_bellman_step",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/CakeEating.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.cake_bellman_unique",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/CakeEating.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.cake_path_value",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/CakeEating.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.cake_concave",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/CakeEating.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.labourFoc",
+      "kind": "def",
+      "module": "AKMMComputationalTools/Linearization.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.labour_foc_unique",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/Linearization.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.rbc_output_exp",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/Linearization.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.loglin_exp_deriv",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/Linearization.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.loglin_resource",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/Linearization.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.loglin_labour",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/Linearization.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.loglin_euler",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/Linearization.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.theta",
+      "kind": "def",
+      "module": "AKMMComputationalTools/Linearization.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.eq_10_15",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/Linearization.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.eq_10_16",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/Linearization.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.eq_10_17",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/Linearization.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.eq_10_17_printed_counterexample",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/Linearization.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.rbcB",
+      "kind": "def",
+      "module": "AKMMComputationalTools/Linearization.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.rbcA",
+      "kind": "def",
+      "module": "AKMMComputationalTools/Linearization.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.rbcE",
+      "kind": "def",
+      "module": "AKMMComputationalTools/Linearization.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.eq_10_27",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/Linearization.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.eq_10_19",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/BlanchardKahn.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.bk_scalar_iterate",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/BlanchardKahn.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.eq_10_20",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/BlanchardKahn.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.bk_scalar_indeterminate",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/BlanchardKahn.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.bk_forecast",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/BlanchardKahn.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.bk_forecast_book",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/BlanchardKahn.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.eq_10_23",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/BlanchardKahn.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.bk_fn8",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/BlanchardKahn.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.bk_indeterminate",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/BlanchardKahn.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.eq_10_23_unique",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/BlanchardKahn.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.eq_10_25",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/BlanchardKahn.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.eq_10_24_verify",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/BlanchardKahn.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.eq_10_30",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/BlanchardKahn.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.bk_tilde_solution",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/BlanchardKahn.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.bk_y_solution",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/BlanchardKahn.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.bk_x_solution",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/BlanchardKahn.lean"
+    },
+    {
+      "name": "AKMM.ComputationalTools.bk_condition",
+      "kind": "theorem",
+      "module": "AKMMComputationalTools/BlanchardKahn.lean"
+    }
+  ],
+  "full_build": "passed",
+  "fresh_source_compilation": "passed",
+  "fresh_source_lint_options": [
+    "-Dlinter.mathlibStandardSet=true",
+    "-Dlinter.style.header=false"
+  ],
+  "axioms": {
+    "AKMM.ComputationalTools.linInterp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.linInterp_left": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.linInterp_right": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.linInterp_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.linInterp_error": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.linInterp_error_h": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.kink": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.linInterp_kink_not_differentiable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.linInterp_kink_differentiable_of_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.cubic_spline_existsUnique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.eq_10_1_unique_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.eq_10_1_poly": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.bisect_sign_eq_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.bisectStep": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.bisect": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.bisectStep_cases": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.bisect_length": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.bisect_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.bisect_bracket": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.bisect_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.bisect_bracket_root": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.bisect_converges": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.bisect_iteration_count": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.bisect_terminates": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.bisect_ten_steps": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.bisectJump": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.bisect_discontinuous_no_root": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.newtonStep": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.eq_10_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.newton_affine_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.newton_local_quadratic": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.newton_converges": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.central_difference_tendsto": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.central_difference_quadratic": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.newtonOptStep": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.newtonOpt_eq_newtonStep_deriv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.eq_10_3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.eq_10_3_max": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.newtonOpt_quadratic_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.omegaStar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.golden_omega_sq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.golden_omega_eq_sq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.golden_omega_bounds": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.golden_omega_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.golden_omega_lt_half": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.golden_ratio_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.GoldenBracket": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.GoldenBracket.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.GoldenBracket.a": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.GoldenBracket.b": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.GoldenBracket.c": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.GoldenBracket.IsBracket": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.GoldenBracket.IsGolden": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.goldenStep": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.goldenStep_spec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.golden_length": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.golden_printed_length_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.golden_terminates": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.golden_bracket_max": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.golden_iterate_max": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.golden_two_lengths": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.golden_fn3_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.golden_removed_fraction": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.ex1Obj": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.ex1Foc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.eq_10_5": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.ex1_foc_strictAnti": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.ex1_root_isMax": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.ex1_cbrt_eighth": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.ex1_unique_root": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.ar1_uncond_var": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.tauchenGrid": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.tauchenGrid_last": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.tauchenUpper": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.tauchenLower": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.tauchen_lower_succ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.tauchenProb": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.tauchen_stochastic": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.tauchenPrinted": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.tauchen_printed_neg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.tauchen_printed_row_sum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.tauchenCauchyCdf": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.tauchenCauchyCdf_strictMono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.rouwenhorst": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.rouwenhorst_two": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.rouwenhorst_row_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.rouwenhorst_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.rwLow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.rwHigh": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.rwRow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.rw_coeff_linear_mul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.rouwenhorst_eq_coeff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.rwRow_natDegree_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.rw_sum_coeff_pow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.rw_sum_coeff_mul_index": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.rouwenhorst_row_sum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.rouwenhorst_cond_mean_index": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.rw_binomial_rows": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.rouwenhorst_invariant": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.rw_binomial_moments": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.rwGrid": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.rwGrid_ends": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.rouwenhorst_cond_mean": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.rouwenhorst_stationary_mean": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.rouwenhorst_stationary_var": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.rouwenhorst_stationary_autocov": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.rouwenhorst_matches_ar1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.rouwenhorstPrinted": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.rouwenhorst_printed_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.GridDP": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.GridDP.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.GridDP.feasible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.GridDP.feasible_nonempty": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.GridDP.ret": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.GridDP.trans": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.GridDP.trans_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.GridDP.trans_sum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.GridDP.\u03b2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.GridDP.\u03b2_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.GridDP.\u03b2_lt_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.GridDP.cont": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.GridDP.T": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.GridDP.cont_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.GridDP.sup'_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.GridDP.contraction": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.GridDP.vfi": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.GridDP.stopping_rule": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.cakeGrid": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.cakeGrid_vfi": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.stochCakeGrid": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.cakeV": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.cakeRhs": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.cake_cauchy_schwarz": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.cake_bellman": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.cake_policy_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.cake_bellman_step": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.cake_bellman_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.cake_path_value": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.cake_concave": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.labourFoc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.labour_foc_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.rbc_output_exp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.loglin_exp_deriv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.loglin_resource": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.loglin_labour": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.loglin_euler": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.theta": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.eq_10_15": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.eq_10_16": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.eq_10_17": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.eq_10_17_printed_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.rbcB": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.rbcA": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.rbcE": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.eq_10_27": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.eq_10_19": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.bk_scalar_iterate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.eq_10_20": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.bk_scalar_indeterminate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.bk_forecast": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.bk_forecast_book": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.eq_10_23": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.bk_fn8": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.bk_indeterminate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.eq_10_23_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.eq_10_25": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.eq_10_24_verify": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.eq_10_30": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.bk_tilde_solution": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.bk_y_solution": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.bk_x_solution": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.ComputationalTools.bk_condition": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  "source_sha256": {
+    "AKMMComputationalTools/Interpolation.lean": "abde950791b5474b8568392486602eb83e658aa23ee49b680ef957094acc44cb",
+    "AKMMComputationalTools/Bisection.lean": "c7276ec4bc5fbbad5cbfba8a1f715dde65ba9f398c2683b39d5a9e4da67d14bf",
+    "AKMMComputationalTools/Newton.lean": "f73fa00c97bbdf79def04911e099e107efbcfe1d32fa60d2a79452dad0c42bce",
+    "AKMMComputationalTools/GoldenSection.lean": "3848e6990c9e66d8bf521fd91802504961eb00fe8d2845621a494a22b04a1a86",
+    "AKMMComputationalTools/LabourLeisure.lean": "58cd2c1046625a6ee68f923ff5eaa337ec4e5c4249f7269458b225c71d86c13d",
+    "AKMMComputationalTools/Discretization.lean": "36f73e28765f6ec65707a6fb37234c830ca312c344cc5b81f036a2f74e4f0a77",
+    "AKMMComputationalTools/Rouwenhorst.lean": "fd167aa95c75b0eb6c00da91bceed51bbc561f9e1df022bd5f32be317e62961d",
+    "AKMMComputationalTools/ValueIteration.lean": "836993c9a7c05cb2578d9bc7cff6a303f1397cc0fea7b33208fa59dcd5556e08",
+    "AKMMComputationalTools/CakeEating.lean": "b78b397a2eaaf8eec03469a5fd16be21a73f17e748ce6753b015ed7bec95898f",
+    "AKMMComputationalTools/Linearization.lean": "b2f789428182f5f0c05a03f6965323fe7c56965867e48c8386af46ccbaa6cc93",
+    "AKMMComputationalTools/BlanchardKahn.lean": "22e9936f7f99fe4e9f4ca46a752152ddebc4254377b806923e5c5a4d72a465f0",
+    "AKMMComputationalTools.lean": "30ea2089ea3f076cf7ca905a6acc55eb21f1f766f9f99a6f25945921b709a850",
+    "lean-toolchain": "8733782dc070a99b312039cda424f601b80f3be6f6f512627da5ba25adc27632",
+    "lakefile.toml": "256dbac1f2f796c990a0663c09b319dc336094a241da41dce20ced52e87f4c55",
+    "lake-manifest.json": "e635c549b5a19b1a591cd6dd6b66ba1edf058d5c53c3328e98e657b5e48c8ac6",
+    "proof-manifest.json": "d5cd71b4451062e9c420ab76780065008f5d9ac9006286b49f188e4348cc2620",
+    "scripts/verify.py": "a70b1fa704dd590f937f8b37682afa88a9d85a9150065acb935c7d2c9589da3b",
+    "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  },
+  "fresh_audit_sha256": "55292d6e6aaf987948d9ed53d957a70198f3eeb2f943e690bc16c58fb5c11127",
+  "lean_toolchain": "leanprover/lean4:v4.34.0",
+  "scope": "AKMM Chapter 10 (pp. 261-283): computational tools.",
+  "source": "Marina Azzimonti, Per Krusell, Alisdair McKay and Toshihiko Mukoyama, Macroeconomics (draft of December 2025), Chapter 10"
+}

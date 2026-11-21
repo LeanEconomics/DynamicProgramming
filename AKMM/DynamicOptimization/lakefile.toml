@@ -1,0 +1,31 @@
+name = "AKMMDynamicOptimization"
+version = "0.1.0"
+keywords = ["math", "economics", "macroeconomics"]
+defaultTargets = ["AKMMDynamicOptimization"]
+
+[leanOptions]
+pp.unicode.fun = true # pretty-prints `fun a ↦ b`
+autoImplicit = false
+relaxedAutoImplicit = false
+weak.linter.mathlibStandardSet = true
+maxSynthPendingDepth = 3
+
+[[require]]
+name = "mathlib"
+git = "https://github.com/leanprover-community/mathlib4.git"
+rev = "v4.34.0"
+
+[[require]]
+name = "DeterministicDP"
+path = "../../RecursiveMethods/DeterministicDP"
+
+[[require]]
+name = "DeterministicDynamics"
+path = "../../RecursiveMethods/DeterministicDynamics"
+
+[[require]]
+name = "EulerTransversality"
+path = "../../Extensions/EulerTransversality"
+
+[[lean_lib]]
+name = "AKMMDynamicOptimization"

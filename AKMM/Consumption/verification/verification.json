@@ -1,0 +1,3220 @@
+{
+  "checked_at_utc": "2026-11-20T14:42:07.829123+00:00",
+  "theorems": 276,
+  "module_theorems": {
+    "AKMMConsumption/RiskSharing.lean": 10,
+    "AKMMConsumption/Deterministic.lean": 23,
+    "AKMMConsumption/PIH.lean": 20,
+    "AKMMConsumption/BlundellPreston.lean": 5,
+    "AKMMConsumption/BorrowingConstraints.lean": 10,
+    "AKMMConsumption/Prudence.lean": 22,
+    "AKMMConsumption/CapitalRisk.lean": 8,
+    "AKMMConsumption/Lognormal.lean": 4,
+    "AKMMConsumption/BoundedWealth.lean": 8,
+    "AKMMConsumption/Huggett.lean": 20,
+    "AKMMConsumption/AssetDemandContinuity.lean": 2,
+    "AKMMConsumption/Aiyagari.lean": 7,
+    "AKMMConsumption/ConsumptionShape.lean": 48,
+    "AKMMConsumption/BufferStock.lean": 8,
+    "AKMMConsumption/BewleyInsurance.lean": 6,
+    "AKMMConsumption/TighterLimitMPC.lean": 15,
+    "AKMMConsumption/TighterLimitAllHorizons.lean": 13,
+    "AKMMConsumption/TighterLimitPerfectForesight.lean": 9,
+    "AKMMConsumption/TighterLimitCounterexample.lean": 12,
+    "AKMMConsumption/TighterLimitCounterexampleBook.lean": 26
+  },
+  "audited_declarations": 315,
+  "declarations": [
+    {
+      "name": "AKMM.Consumption.eq_11_1",
+      "kind": "theorem",
+      "module": "AKMMConsumption/RiskSharing.lean"
+    },
+    {
+      "name": "AKMM.Consumption.footnote_1",
+      "kind": "theorem",
+      "module": "AKMMConsumption/RiskSharing.lean"
+    },
+    {
+      "name": "AKMM.Consumption.eq_11_3",
+      "kind": "theorem",
+      "module": "AKMMConsumption/RiskSharing.lean"
+    },
+    {
+      "name": "AKMM.Consumption.rs_crra_invert",
+      "kind": "theorem",
+      "module": "AKMMConsumption/RiskSharing.lean"
+    },
+    {
+      "name": "AKMM.Consumption.rs_crra_ratio",
+      "kind": "theorem",
+      "module": "AKMMConsumption/RiskSharing.lean"
+    },
+    {
+      "name": "AKMM.Consumption.eq_11_4",
+      "kind": "theorem",
+      "module": "AKMMConsumption/RiskSharing.lean"
+    },
+    {
+      "name": "AKMM.Consumption.rs_crra_share_eqm",
+      "kind": "theorem",
+      "module": "AKMMConsumption/RiskSharing.lean"
+    },
+    {
+      "name": "AKMM.Consumption.rs_lhs_strictAnti",
+      "kind": "theorem",
+      "module": "AKMMConsumption/RiskSharing.lean"
+    },
+    {
+      "name": "AKMM.Consumption.eq_11_5",
+      "kind": "theorem",
+      "module": "AKMMConsumption/RiskSharing.lean"
+    },
+    {
+      "name": "AKMM.Consumption.rs_less_risk_averse_absorbs",
+      "kind": "theorem",
+      "module": "AKMMConsumption/RiskSharing.lean"
+    },
+    {
+      "name": "AKMM.Consumption.eq_11_11",
+      "kind": "theorem",
+      "module": "AKMMConsumption/Deterministic.lean"
+    },
+    {
+      "name": "AKMM.Consumption.eq_11_10",
+      "kind": "theorem",
+      "module": "AKMMConsumption/Deterministic.lean"
+    },
+    {
+      "name": "AKMM.Consumption.cd_budget_iter",
+      "kind": "theorem",
+      "module": "AKMMConsumption/Deterministic.lean"
+    },
+    {
+      "name": "AKMM.Consumption.cd_summable_pv_cons",
+      "kind": "theorem",
+      "module": "AKMMConsumption/Deterministic.lean"
+    },
+    {
+      "name": "AKMM.Consumption.cd_intertemporal_budget",
+      "kind": "theorem",
+      "module": "AKMMConsumption/Deterministic.lean"
+    },
+    {
+      "name": "AKMM.Consumption.cd_tvc_shift",
+      "kind": "theorem",
+      "module": "AKMMConsumption/Deterministic.lean"
+    },
+    {
+      "name": "AKMM.Consumption.cd_Plan",
+      "kind": "def",
+      "module": "AKMMConsumption/Deterministic.lean"
+    },
+    {
+      "name": "AKMM.Consumption.cd_Optimal",
+      "kind": "def",
+      "module": "AKMMConsumption/Deterministic.lean"
+    },
+    {
+      "name": "AKMM.Consumption.eq_11_13",
+      "kind": "theorem",
+      "module": "AKMMConsumption/Deterministic.lean"
+    },
+    {
+      "name": "AKMM.Consumption.eq_11_14",
+      "kind": "theorem",
+      "module": "AKMMConsumption/Deterministic.lean"
+    },
+    {
+      "name": "AKMM.Consumption.cd_growth",
+      "kind": "theorem",
+      "module": "AKMMConsumption/Deterministic.lean"
+    },
+    {
+      "name": "AKMM.Consumption.cd_optimal_of_euler",
+      "kind": "theorem",
+      "module": "AKMMConsumption/Deterministic.lean"
+    },
+    {
+      "name": "AKMM.Consumption.cd_log_optimal",
+      "kind": "theorem",
+      "module": "AKMMConsumption/Deterministic.lean"
+    },
+    {
+      "name": "AKMM.Consumption.cd_mpc",
+      "kind": "def",
+      "module": "AKMMConsumption/Deterministic.lean"
+    },
+    {
+      "name": "AKMM.Consumption.cd_rule_of_growth",
+      "kind": "theorem",
+      "module": "AKMMConsumption/Deterministic.lean"
+    },
+    {
+      "name": "AKMM.Consumption.eq_11_15",
+      "kind": "theorem",
+      "module": "AKMMConsumption/Deterministic.lean"
+    },
+    {
+      "name": "AKMM.Consumption.cd_optimal_eq_11_15",
+      "kind": "theorem",
+      "module": "AKMMConsumption/Deterministic.lean"
+    },
+    {
+      "name": "AKMM.Consumption.eq_11_16",
+      "kind": "theorem",
+      "module": "AKMMConsumption/Deterministic.lean"
+    },
+    {
+      "name": "AKMM.Consumption.cd_transitory_eq_wealth",
+      "kind": "theorem",
+      "module": "AKMMConsumption/Deterministic.lean"
+    },
+    {
+      "name": "AKMM.Consumption.cd_mpc_betaR_one",
+      "kind": "theorem",
+      "module": "AKMMConsumption/Deterministic.lean"
+    },
+    {
+      "name": "AKMM.Consumption.cd_mpc_approx_rho",
+      "kind": "theorem",
+      "module": "AKMMConsumption/Deterministic.lean"
+    },
+    {
+      "name": "AKMM.Consumption.cd_mpc_permanent",
+      "kind": "theorem",
+      "module": "AKMMConsumption/Deterministic.lean"
+    },
+    {
+      "name": "AKMM.Consumption.footnote_15",
+      "kind": "theorem",
+      "module": "AKMMConsumption/Deterministic.lean"
+    },
+    {
+      "name": "AKMM.Consumption.cd_mpc_log",
+      "kind": "theorem",
+      "module": "AKMMConsumption/Deterministic.lean"
+    },
+    {
+      "name": "AKMM.Consumption.cd_mpc_log_eq_r_iff",
+      "kind": "theorem",
+      "module": "AKMMConsumption/Deterministic.lean"
+    },
+    {
+      "name": "AKMM.Consumption.cd_mpc_log_printed_counterexample",
+      "kind": "theorem",
+      "module": "AKMMConsumption/Deterministic.lean"
+    },
+    {
+      "name": "AKMM.Consumption.pih_detSystem",
+      "kind": "def",
+      "module": "AKMMConsumption/PIH.lean"
+    },
+    {
+      "name": "AKMM.Consumption.pih_one_sub_q",
+      "kind": "theorem",
+      "module": "AKMMConsumption/PIH.lean"
+    },
+    {
+      "name": "AKMM.Consumption.pih_annuity_inv",
+      "kind": "theorem",
+      "module": "AKMMConsumption/PIH.lean"
+    },
+    {
+      "name": "AKMM.Consumption.eq_11_18",
+      "kind": "theorem",
+      "module": "AKMMConsumption/PIH.lean"
+    },
+    {
+      "name": "AKMM.Consumption.eq_11_19",
+      "kind": "theorem",
+      "module": "AKMMConsumption/PIH.lean"
+    },
+    {
+      "name": "AKMM.Consumption.pih_budget_iter",
+      "kind": "theorem",
+      "module": "AKMMConsumption/PIH.lean"
+    },
+    {
+      "name": "AKMM.Consumption.pih_budget_condexp",
+      "kind": "theorem",
+      "module": "AKMMConsumption/PIH.lean"
+    },
+    {
+      "name": "AKMM.Consumption.pih_rule",
+      "kind": "def",
+      "module": "AKMMConsumption/PIH.lean"
+    },
+    {
+      "name": "AKMM.Consumption.eq_11_20",
+      "kind": "theorem",
+      "module": "AKMMConsumption/PIH.lean"
+    },
+    {
+      "name": "AKMM.Consumption.eq_11_21",
+      "kind": "theorem",
+      "module": "AKMMConsumption/PIH.lean"
+    },
+    {
+      "name": "AKMM.Consumption.pih_certainty_equivalence",
+      "kind": "theorem",
+      "module": "AKMMConsumption/PIH.lean"
+    },
+    {
+      "name": "AKMM.Consumption.pih_wealth",
+      "kind": "def",
+      "module": "AKMMConsumption/PIH.lean"
+    },
+    {
+      "name": "AKMM.Consumption.eq_11_22",
+      "kind": "theorem",
+      "module": "AKMMConsumption/PIH.lean"
+    },
+    {
+      "name": "AKMM.Consumption.eq_11_23",
+      "kind": "theorem",
+      "module": "AKMMConsumption/PIH.lean"
+    },
+    {
+      "name": "AKMM.Consumption.eq_11_24",
+      "kind": "theorem",
+      "module": "AKMMConsumption/PIH.lean"
+    },
+    {
+      "name": "AKMM.Consumption.eq_11_26",
+      "kind": "theorem",
+      "module": "AKMMConsumption/PIH.lean"
+    },
+    {
+      "name": "AKMM.Consumption.pih_perm_martingale",
+      "kind": "theorem",
+      "module": "AKMMConsumption/PIH.lean"
+    },
+    {
+      "name": "AKMM.Consumption.pih_news_perm_trans",
+      "kind": "theorem",
+      "module": "AKMMConsumption/PIH.lean"
+    },
+    {
+      "name": "AKMM.Consumption.eq_11_27",
+      "kind": "theorem",
+      "module": "AKMMConsumption/PIH.lean"
+    },
+    {
+      "name": "AKMM.Consumption.eq_11_29",
+      "kind": "theorem",
+      "module": "AKMMConsumption/PIH.lean"
+    },
+    {
+      "name": "AKMM.Consumption.pih_rainy_day",
+      "kind": "theorem",
+      "module": "AKMMConsumption/PIH.lean"
+    },
+    {
+      "name": "AKMM.Consumption.pih_random_walk",
+      "kind": "theorem",
+      "module": "AKMMConsumption/PIH.lean"
+    },
+    {
+      "name": "AKMM.Consumption.eq_11_30",
+      "kind": "theorem",
+      "module": "AKMMConsumption/PIH.lean"
+    },
+    {
+      "name": "AKMM.Consumption.bp_cov_cons_trans",
+      "kind": "theorem",
+      "module": "AKMMConsumption/BlundellPreston.lean"
+    },
+    {
+      "name": "AKMM.Consumption.bp_var_cons",
+      "kind": "theorem",
+      "module": "AKMMConsumption/BlundellPreston.lean"
+    },
+    {
+      "name": "AKMM.Consumption.bp_cov_cons_income",
+      "kind": "theorem",
+      "module": "AKMMConsumption/BlundellPreston.lean"
+    },
+    {
+      "name": "AKMM.Consumption.eq_11_28",
+      "kind": "theorem",
+      "module": "AKMMConsumption/BlundellPreston.lean"
+    },
+    {
+      "name": "AKMM.Consumption.bp_cov_stationary",
+      "kind": "theorem",
+      "module": "AKMMConsumption/BlundellPreston.lean"
+    },
+    {
+      "name": "AKMM.Consumption.bc_iid_example",
+      "kind": "theorem",
+      "module": "AKMMConsumption/BorrowingConstraints.lean"
+    },
+    {
+      "name": "AKMM.Consumption.bc_iid_hits",
+      "kind": "theorem",
+      "module": "AKMMConsumption/BorrowingConstraints.lean"
+    },
+    {
+      "name": "AKMM.Consumption.eq_11_32",
+      "kind": "theorem",
+      "module": "AKMMConsumption/BorrowingConstraints.lean"
+    },
+    {
+      "name": "AKMM.Consumption.bc_binding_cons",
+      "kind": "theorem",
+      "module": "AKMMConsumption/BorrowingConstraints.lean"
+    },
+    {
+      "name": "AKMM.Consumption.bc_natural_limit_det",
+      "kind": "theorem",
+      "module": "AKMMConsumption/BorrowingConstraints.lean"
+    },
+    {
+      "name": "AKMM.Consumption.bc_natural_limit",
+      "kind": "theorem",
+      "module": "AKMMConsumption/BorrowingConstraints.lean"
+    },
+    {
+      "name": "AKMM.Consumption.bc_natural_limit_cons_nonpos",
+      "kind": "theorem",
+      "module": "AKMMConsumption/BorrowingConstraints.lean"
+    },
+    {
+      "name": "AKMM.Consumption.bc_natural_limit_zero",
+      "kind": "theorem",
+      "module": "AKMMConsumption/BorrowingConstraints.lean"
+    },
+    {
+      "name": "AKMM.Consumption.eq_11_33",
+      "kind": "theorem",
+      "module": "AKMMConsumption/BorrowingConstraints.lean"
+    },
+    {
+      "name": "AKMM.Consumption.bc_slope_one",
+      "kind": "theorem",
+      "module": "AKMMConsumption/BorrowingConstraints.lean"
+    },
+    {
+      "name": "AKMM.Consumption.pr_ConvexOrderOn",
+      "kind": "def",
+      "module": "AKMMConsumption/Prudence.lean"
+    },
+    {
+      "name": "AKMM.Consumption.pr_convexOrder_mean",
+      "kind": "theorem",
+      "module": "AKMMConsumption/Prudence.lean"
+    },
+    {
+      "name": "AKMM.Consumption.pr_two_point_spread",
+      "kind": "theorem",
+      "module": "AKMMConsumption/Prudence.lean"
+    },
+    {
+      "name": "AKMM.Consumption.eq_11_34_spread",
+      "kind": "theorem",
+      "module": "AKMMConsumption/Prudence.lean"
+    },
+    {
+      "name": "AKMM.Consumption.eq_11_35_unique",
+      "kind": "theorem",
+      "module": "AKMMConsumption/Prudence.lean"
+    },
+    {
+      "name": "AKMM.Consumption.pr_root_mono",
+      "kind": "theorem",
+      "module": "AKMMConsumption/Prudence.lean"
+    },
+    {
+      "name": "AKMM.Consumption.pr_rhs",
+      "kind": "def",
+      "module": "AKMMConsumption/Prudence.lean"
+    },
+    {
+      "name": "AKMM.Consumption.pr_spread_raises_saving",
+      "kind": "theorem",
+      "module": "AKMMConsumption/Prudence.lean"
+    },
+    {
+      "name": "AKMM.Consumption.pr_two_point_iff",
+      "kind": "theorem",
+      "module": "AKMMConsumption/Prudence.lean"
+    },
+    {
+      "name": "AKMM.Consumption.pr_quadratic_no_precaution",
+      "kind": "theorem",
+      "module": "AKMMConsumption/Prudence.lean"
+    },
+    {
+      "name": "AKMM.Consumption.pr_ara_deriv",
+      "kind": "theorem",
+      "module": "AKMMConsumption/Prudence.lean"
+    },
+    {
+      "name": "AKMM.Consumption.pr_dara_prudent",
+      "kind": "theorem",
+      "module": "AKMMConsumption/Prudence.lean"
+    },
+    {
+      "name": "AKMM.Consumption.pr_betaR_inv",
+      "kind": "theorem",
+      "module": "AKMMConsumption/Prudence.lean"
+    },
+    {
+      "name": "AKMM.Consumption.eq_11_36_exact",
+      "kind": "theorem",
+      "module": "AKMMConsumption/Prudence.lean"
+    },
+    {
+      "name": "AKMM.Consumption.eq_11_38",
+      "kind": "theorem",
+      "module": "AKMMConsumption/Prudence.lean"
+    },
+    {
+      "name": "AKMM.Consumption.eq_11_39",
+      "kind": "theorem",
+      "module": "AKMMConsumption/Prudence.lean"
+    },
+    {
+      "name": "AKMM.Consumption.eq_11_40",
+      "kind": "theorem",
+      "module": "AKMMConsumption/Prudence.lean"
+    },
+    {
+      "name": "AKMM.Consumption.pr_kappa",
+      "kind": "def",
+      "module": "AKMMConsumption/Prudence.lean"
+    },
+    {
+      "name": "AKMM.Consumption.pr_tolerance_deriv",
+      "kind": "theorem",
+      "module": "AKMMConsumption/Prudence.lean"
+    },
+    {
+      "name": "AKMM.Consumption.pr_hara_kappa_const",
+      "kind": "theorem",
+      "module": "AKMMConsumption/Prudence.lean"
+    },
+    {
+      "name": "AKMM.Consumption.pr_kappa_quadratic",
+      "kind": "theorem",
+      "module": "AKMMConsumption/Prudence.lean"
+    },
+    {
+      "name": "AKMM.Consumption.pr_kappa_cara",
+      "kind": "theorem",
+      "module": "AKMMConsumption/Prudence.lean"
+    },
+    {
+      "name": "AKMM.Consumption.pr_kappa_crra",
+      "kind": "theorem",
+      "module": "AKMMConsumption/Prudence.lean"
+    },
+    {
+      "name": "AKMM.Consumption.pr_hara_neg_derivs",
+      "kind": "theorem",
+      "module": "AKMMConsumption/Prudence.lean"
+    },
+    {
+      "name": "AKMM.Consumption.pr_hara_kappa_neg",
+      "kind": "theorem",
+      "module": "AKMMConsumption/Prudence.lean"
+    },
+    {
+      "name": "AKMM.Consumption.cr_deriv",
+      "kind": "theorem",
+      "module": "AKMMConsumption/CapitalRisk.lean"
+    },
+    {
+      "name": "AKMM.Consumption.cr_second_deriv",
+      "kind": "theorem",
+      "module": "AKMMConsumption/CapitalRisk.lean"
+    },
+    {
+      "name": "AKMM.Consumption.cr_second_deriv_nonneg_iff",
+      "kind": "theorem",
+      "module": "AKMMConsumption/CapitalRisk.lean"
+    },
+    {
+      "name": "AKMM.Consumption.cr_convex_of_rel_prudence",
+      "kind": "theorem",
+      "module": "AKMMConsumption/CapitalRisk.lean"
+    },
+    {
+      "name": "AKMM.Consumption.cr_spread_raises_saving",
+      "kind": "theorem",
+      "module": "AKMMConsumption/CapitalRisk.lean"
+    },
+    {
+      "name": "AKMM.Consumption.cr_log_return_risk_neutral",
+      "kind": "theorem",
+      "module": "AKMMConsumption/CapitalRisk.lean"
+    },
+    {
+      "name": "AKMM.Consumption.cr_return_spread_instance",
+      "kind": "theorem",
+      "module": "AKMMConsumption/CapitalRisk.lean"
+    },
+    {
+      "name": "AKMM.Consumption.cr_printed_counterexample",
+      "kind": "theorem",
+      "module": "AKMMConsumption/CapitalRisk.lean"
+    },
+    {
+      "name": "AKMM.Consumption.cs_lognormal_euler",
+      "kind": "theorem",
+      "module": "AKMMConsumption/Lognormal.lean"
+    },
+    {
+      "name": "AKMM.Consumption.eq_11_41",
+      "kind": "theorem",
+      "module": "AKMMConsumption/Lognormal.lean"
+    },
+    {
+      "name": "AKMM.Consumption.cs_zeldes_euler",
+      "kind": "theorem",
+      "module": "AKMMConsumption/Lognormal.lean"
+    },
+    {
+      "name": "AKMM.Consumption.eq_11_41_printed_false",
+      "kind": "theorem",
+      "module": "AKMMConsumption/Lognormal.lean"
+    },
+    {
+      "name": "AKMM.Consumption.eq_11_43",
+      "kind": "theorem",
+      "module": "AKMMConsumption/BoundedWealth.lean"
+    },
+    {
+      "name": "AKMM.Consumption.bw_cash_gap",
+      "kind": "theorem",
+      "module": "AKMMConsumption/BoundedWealth.lean"
+    },
+    {
+      "name": "AKMM.Consumption.bw_bounded_of_ratio",
+      "kind": "theorem",
+      "module": "AKMMConsumption/BoundedWealth.lean"
+    },
+    {
+      "name": "AKMM.Consumption.bw_bounded_wealth",
+      "kind": "theorem",
+      "module": "AKMMConsumption/BoundedWealth.lean"
+    },
+    {
+      "name": "AKMM.Consumption.bw_crra_rra",
+      "kind": "theorem",
+      "module": "AKMMConsumption/BoundedWealth.lean"
+    },
+    {
+      "name": "AKMM.Consumption.bw_bounded_wealth_crra",
+      "kind": "theorem",
+      "module": "AKMMConsumption/BoundedWealth.lean"
+    },
+    {
+      "name": "AKMM.Consumption.bw_crra_ara_tendsto",
+      "kind": "theorem",
+      "module": "AKMMConsumption/BoundedWealth.lean"
+    },
+    {
+      "name": "AKMM.Consumption.bw_dara_not_ara_zero",
+      "kind": "theorem",
+      "module": "AKMMConsumption/BoundedWealth.lean"
+    },
+    {
+      "name": "AKMM.Consumption.hg_IsStationaryEqm",
+      "kind": "def",
+      "module": "AKMMConsumption/Huggett.lean"
+    },
+    {
+      "name": "AKMM.Consumption.hg_map_fst_eq",
+      "kind": "theorem",
+      "module": "AKMMConsumption/Huggett.lean"
+    },
+    {
+      "name": "AKMM.Consumption.hg_integrable_assets",
+      "kind": "theorem",
+      "module": "AKMMConsumption/Huggett.lean"
+    },
+    {
+      "name": "AKMM.Consumption.hg_mean_assets_eq_mean_policy",
+      "kind": "theorem",
+      "module": "AKMMConsumption/Huggett.lean"
+    },
+    {
+      "name": "AKMM.Consumption.hg_mean_consumption",
+      "kind": "theorem",
+      "module": "AKMMConsumption/Huggett.lean"
+    },
+    {
+      "name": "AKMM.Consumption.hg_goods_clear_zero_supply",
+      "kind": "theorem",
+      "module": "AKMMConsumption/Huggett.lean"
+    },
+    {
+      "name": "AKMM.Consumption.hg_eqm_iff_miao",
+      "kind": "theorem",
+      "module": "AKMMConsumption/Huggett.lean"
+    },
+    {
+      "name": "AKMM.Consumption.eq_11_50",
+      "kind": "theorem",
+      "module": "AKMMConsumption/Huggett.lean"
+    },
+    {
+      "name": "AKMM.Consumption.hg_cycle_markov",
+      "kind": "theorem",
+      "module": "AKMMConsumption/Huggett.lean"
+    },
+    {
+      "name": "AKMM.Consumption.hg_cycle_integrable",
+      "kind": "theorem",
+      "module": "AKMMConsumption/Huggett.lean"
+    },
+    {
+      "name": "AKMM.Consumption.hg_cycle_eqm",
+      "kind": "theorem",
+      "module": "AKMMConsumption/Huggett.lean"
+    },
+    {
+      "name": "AKMM.Consumption.hg_cycle_huggett",
+      "kind": "theorem",
+      "module": "AKMMConsumption/Huggett.lean"
+    },
+    {
+      "name": "AKMM.Consumption.hg_policy_at_minus_one",
+      "kind": "theorem",
+      "module": "AKMMConsumption/Huggett.lean"
+    },
+    {
+      "name": "AKMM.Consumption.hg_A_at_minus_one",
+      "kind": "theorem",
+      "module": "AKMMConsumption/Huggett.lean"
+    },
+    {
+      "name": "AKMM.Consumption.hg_EaSet_at_minus_one",
+      "kind": "theorem",
+      "module": "AKMMConsumption/Huggett.lean"
+    },
+    {
+      "name": "AKMM.Consumption.hg_existence",
+      "kind": "theorem",
+      "module": "AKMMConsumption/Huggett.lean"
+    },
+    {
+      "name": "AKMM.Consumption.hg_existence_eqm",
+      "kind": "theorem",
+      "module": "AKMMConsumption/Huggett.lean"
+    },
+    {
+      "name": "AKMM.Consumption.hg_rate_below_cm",
+      "kind": "theorem",
+      "module": "AKMMConsumption/Huggett.lean"
+    },
+    {
+      "name": "AKMM.Consumption.hg_unique_of_strictMono",
+      "kind": "theorem",
+      "module": "AKMMConsumption/Huggett.lean"
+    },
+    {
+      "name": "AKMM.Consumption.hg_saving_ratio_crra",
+      "kind": "theorem",
+      "module": "AKMMConsumption/Huggett.lean"
+    },
+    {
+      "name": "AKMM.Consumption.hg_saving_increasing_iff",
+      "kind": "theorem",
+      "module": "AKMMConsumption/Huggett.lean"
+    },
+    {
+      "name": "AKMM.Consumption.hg_A_continuous",
+      "kind": "theorem",
+      "module": "AKMMConsumption/AssetDemandContinuity.lean"
+    },
+    {
+      "name": "AKMM.Consumption.hg_A_continuousOn",
+      "kind": "theorem",
+      "module": "AKMMConsumption/AssetDemandContinuity.lean"
+    },
+    {
+      "name": "AKMM.Consumption.footnote_27",
+      "kind": "theorem",
+      "module": "AKMMConsumption/Aiyagari.lean"
+    },
+    {
+      "name": "AKMM.Consumption.footnote_27_printed_false",
+      "kind": "theorem",
+      "module": "AKMMConsumption/Aiyagari.lean"
+    },
+    {
+      "name": "AKMM.Consumption.ai_capital_demand_props",
+      "kind": "theorem",
+      "module": "AKMMConsumption/Aiyagari.lean"
+    },
+    {
+      "name": "AKMM.Consumption.ai_Kd_tendsto_zero",
+      "kind": "theorem",
+      "module": "AKMMConsumption/Aiyagari.lean"
+    },
+    {
+      "name": "AKMM.Consumption.ai_existence",
+      "kind": "theorem",
+      "module": "AKMMConsumption/Aiyagari.lean"
+    },
+    {
+      "name": "AKMM.Consumption.ai_precautionary_wealth",
+      "kind": "theorem",
+      "module": "AKMMConsumption/Aiyagari.lean"
+    },
+    {
+      "name": "AKMM.Consumption.ai_mpc_representative",
+      "kind": "theorem",
+      "module": "AKMMConsumption/Aiyagari.lean"
+    },
+    {
+      "name": "AKMM.Consumption.cfn_IsMean",
+      "kind": "def",
+      "module": "AKMMConsumption/ConsumptionShape.lean"
+    },
+    {
+      "name": "AKMM.Consumption.cfn_mean_ge",
+      "kind": "theorem",
+      "module": "AKMMConsumption/ConsumptionShape.lean"
+    },
+    {
+      "name": "AKMM.Consumption.cfn_mean_le",
+      "kind": "theorem",
+      "module": "AKMMConsumption/ConsumptionShape.lean"
+    },
+    {
+      "name": "AKMM.Consumption.cfn_isMean_expect",
+      "kind": "theorem",
+      "module": "AKMMConsumption/ConsumptionShape.lean"
+    },
+    {
+      "name": "AKMM.Consumption.cfn_isMean_powerMean",
+      "kind": "theorem",
+      "module": "AKMMConsumption/ConsumptionShape.lean"
+    },
+    {
+      "name": "AKMM.Consumption.CfnHousehold",
+      "kind": "structure",
+      "module": "AKMMConsumption/ConsumptionShape.lean"
+    },
+    {
+      "name": "AKMM.Consumption.CfnHousehold.mk",
+      "kind": "constructor",
+      "module": "AKMMConsumption/ConsumptionShape.lean"
+    },
+    {
+      "name": "AKMM.Consumption.CfnHousehold.M",
+      "kind": "projection",
+      "module": "AKMMConsumption/ConsumptionShape.lean"
+    },
+    {
+      "name": "AKMM.Consumption.CfnHousehold.\u03b8",
+      "kind": "projection",
+      "module": "AKMMConsumption/ConsumptionShape.lean"
+    },
+    {
+      "name": "AKMM.Consumption.CfnHousehold.R",
+      "kind": "projection",
+      "module": "AKMMConsumption/ConsumptionShape.lean"
+    },
+    {
+      "name": "AKMM.Consumption.CfnHousehold.b",
+      "kind": "projection",
+      "module": "AKMMConsumption/ConsumptionShape.lean"
+    },
+    {
+      "name": "AKMM.Consumption.CfnHousehold.d",
+      "kind": "projection",
+      "module": "AKMMConsumption/ConsumptionShape.lean"
+    },
+    {
+      "name": "AKMM.Consumption.CfnHousehold.y",
+      "kind": "projection",
+      "module": "AKMMConsumption/ConsumptionShape.lean"
+    },
+    {
+      "name": "AKMM.Consumption.CfnHousehold.ymax",
+      "kind": "projection",
+      "module": "AKMMConsumption/ConsumptionShape.lean"
+    },
+    {
+      "name": "AKMM.Consumption.CfnHousehold.w",
+      "kind": "projection",
+      "module": "AKMMConsumption/ConsumptionShape.lean"
+    },
+    {
+      "name": "AKMM.Consumption.CfnHousehold.Valid",
+      "kind": "def",
+      "module": "AKMMConsumption/ConsumptionShape.lean"
+    },
+    {
+      "name": "AKMM.Consumption.CfnHousehold.cont",
+      "kind": "def",
+      "module": "AKMMConsumption/ConsumptionShape.lean"
+    },
+    {
+      "name": "AKMM.Consumption.CfnHousehold.KKT",
+      "kind": "def",
+      "module": "AKMMConsumption/ConsumptionShape.lean"
+    },
+    {
+      "name": "AKMM.Consumption.CfnHousehold.step",
+      "kind": "def",
+      "module": "AKMMConsumption/ConsumptionShape.lean"
+    },
+    {
+      "name": "AKMM.Consumption.CfnHousehold.cons",
+      "kind": "def",
+      "module": "AKMMConsumption/ConsumptionShape.lean"
+    },
+    {
+      "name": "AKMM.Consumption.CfnHousehold.kappa",
+      "kind": "def",
+      "module": "AKMMConsumption/ConsumptionShape.lean"
+    },
+    {
+      "name": "AKMM.Consumption.CfnHousehold.hw",
+      "kind": "def",
+      "module": "AKMMConsumption/ConsumptionShape.lean"
+    },
+    {
+      "name": "AKMM.Consumption.CfnHousehold.Good",
+      "kind": "def",
+      "module": "AKMMConsumption/ConsumptionShape.lean"
+    },
+    {
+      "name": "AKMM.Consumption.cfn_arg_ge",
+      "kind": "theorem",
+      "module": "AKMMConsumption/ConsumptionShape.lean"
+    },
+    {
+      "name": "AKMM.Consumption.cfn_good_continuousOn",
+      "kind": "theorem",
+      "module": "AKMMConsumption/ConsumptionShape.lean"
+    },
+    {
+      "name": "AKMM.Consumption.cfn_cont_mono",
+      "kind": "theorem",
+      "module": "AKMMConsumption/ConsumptionShape.lean"
+    },
+    {
+      "name": "AKMM.Consumption.cfn_cont_concave",
+      "kind": "theorem",
+      "module": "AKMMConsumption/ConsumptionShape.lean"
+    },
+    {
+      "name": "AKMM.Consumption.cfn_cont_ge",
+      "kind": "theorem",
+      "module": "AKMMConsumption/ConsumptionShape.lean"
+    },
+    {
+      "name": "AKMM.Consumption.cfn_cont_le",
+      "kind": "theorem",
+      "module": "AKMMConsumption/ConsumptionShape.lean"
+    },
+    {
+      "name": "AKMM.Consumption.cfn_save_ge",
+      "kind": "theorem",
+      "module": "AKMMConsumption/ConsumptionShape.lean"
+    },
+    {
+      "name": "AKMM.Consumption.cfn_kkt_exists",
+      "kind": "theorem",
+      "module": "AKMMConsumption/ConsumptionShape.lean"
+    },
+    {
+      "name": "AKMM.Consumption.cfn_kkt_unique",
+      "kind": "theorem",
+      "module": "AKMMConsumption/ConsumptionShape.lean"
+    },
+    {
+      "name": "AKMM.Consumption.cfn_step_kkt",
+      "kind": "theorem",
+      "module": "AKMMConsumption/ConsumptionShape.lean"
+    },
+    {
+      "name": "AKMM.Consumption.cfn_step_eq_of_kkt",
+      "kind": "theorem",
+      "module": "AKMMConsumption/ConsumptionShape.lean"
+    },
+    {
+      "name": "AKMM.Consumption.cfn_kkt_mono",
+      "kind": "theorem",
+      "module": "AKMMConsumption/ConsumptionShape.lean"
+    },
+    {
+      "name": "AKMM.Consumption.cfn_step_good",
+      "kind": "theorem",
+      "module": "AKMMConsumption/ConsumptionShape.lean"
+    },
+    {
+      "name": "AKMM.Consumption.cfn_kappa_pos",
+      "kind": "theorem",
+      "module": "AKMMConsumption/ConsumptionShape.lean"
+    },
+    {
+      "name": "AKMM.Consumption.cfn_cons_good",
+      "kind": "theorem",
+      "module": "AKMMConsumption/ConsumptionShape.lean"
+    },
+    {
+      "name": "AKMM.Consumption.cfn_cons_kkt",
+      "kind": "theorem",
+      "module": "AKMMConsumption/ConsumptionShape.lean"
+    },
+    {
+      "name": "AKMM.Consumption.cfn_cons_le",
+      "kind": "theorem",
+      "module": "AKMMConsumption/ConsumptionShape.lean"
+    },
+    {
+      "name": "AKMM.Consumption.cfn_cons_concave",
+      "kind": "theorem",
+      "module": "AKMMConsumption/ConsumptionShape.lean"
+    },
+    {
+      "name": "AKMM.Consumption.cfn_slope_ge_of_concave",
+      "kind": "theorem",
+      "module": "AKMMConsumption/ConsumptionShape.lean"
+    },
+    {
+      "name": "AKMM.Consumption.cfn_slope_le_eventually",
+      "kind": "theorem",
+      "module": "AKMMConsumption/ConsumptionShape.lean"
+    },
+    {
+      "name": "AKMM.Consumption.cfn_cons_slope_bounds",
+      "kind": "theorem",
+      "module": "AKMMConsumption/ConsumptionShape.lean"
+    },
+    {
+      "name": "AKMM.Consumption.cfn_slope_tendsto",
+      "kind": "theorem",
+      "module": "AKMMConsumption/ConsumptionShape.lean"
+    },
+    {
+      "name": "AKMM.Consumption.cfn_binding_initial",
+      "kind": "theorem",
+      "module": "AKMMConsumption/ConsumptionShape.lean"
+    },
+    {
+      "name": "AKMM.Consumption.cfn_kappa_eq",
+      "kind": "theorem",
+      "module": "AKMMConsumption/ConsumptionShape.lean"
+    },
+    {
+      "name": "AKMM.Consumption.cfn_kappa_tendsto",
+      "kind": "theorem",
+      "module": "AKMMConsumption/ConsumptionShape.lean"
+    },
+    {
+      "name": "AKMM.Consumption.cfn_kappa_tendsto_r",
+      "kind": "theorem",
+      "module": "AKMMConsumption/ConsumptionShape.lean"
+    },
+    {
+      "name": "AKMM.Consumption.cfn_fig_11_2_slope",
+      "kind": "theorem",
+      "module": "AKMMConsumption/ConsumptionShape.lean"
+    },
+    {
+      "name": "AKMM.Consumption.cfn_kappa_gt",
+      "kind": "theorem",
+      "module": "AKMMConsumption/ConsumptionShape.lean"
+    },
+    {
+      "name": "AKMM.Consumption.cfn_R_one_sub_kappa_lt",
+      "kind": "theorem",
+      "module": "AKMMConsumption/ConsumptionShape.lean"
+    },
+    {
+      "name": "AKMM.Consumption.CfnHousehold.tighten",
+      "kind": "def",
+      "module": "AKMMConsumption/ConsumptionShape.lean"
+    },
+    {
+      "name": "AKMM.Consumption.cfn_tighten_valid",
+      "kind": "theorem",
+      "module": "AKMMConsumption/ConsumptionShape.lean"
+    },
+    {
+      "name": "AKMM.Consumption.cfn_tight_le",
+      "kind": "theorem",
+      "module": "AKMMConsumption/ConsumptionShape.lean"
+    },
+    {
+      "name": "AKMM.Consumption.cfn_tight_shift",
+      "kind": "theorem",
+      "module": "AKMMConsumption/ConsumptionShape.lean"
+    },
+    {
+      "name": "AKMM.Consumption.cfn_tight_binds",
+      "kind": "theorem",
+      "module": "AKMMConsumption/ConsumptionShape.lean"
+    },
+    {
+      "name": "AKMM.Consumption.cfn_tight_eventually_eq",
+      "kind": "theorem",
+      "module": "AKMMConsumption/ConsumptionShape.lean"
+    },
+    {
+      "name": "AKMM.Consumption.cfn_tight_mpc_last",
+      "kind": "theorem",
+      "module": "AKMMConsumption/ConsumptionShape.lean"
+    },
+    {
+      "name": "AKMM.Consumption.cfn_tight_eq_unconstrained_last",
+      "kind": "theorem",
+      "module": "AKMMConsumption/ConsumptionShape.lean"
+    },
+    {
+      "name": "AKMM.Consumption.cfn_kkt_iff_min",
+      "kind": "theorem",
+      "module": "AKMMConsumption/ConsumptionShape.lean"
+    },
+    {
+      "name": "AKMM.Consumption.cfn_quadratic",
+      "kind": "def",
+      "module": "AKMMConsumption/ConsumptionShape.lean"
+    },
+    {
+      "name": "AKMM.Consumption.cfn_quadratic_kkt_iff",
+      "kind": "theorem",
+      "module": "AKMMConsumption/ConsumptionShape.lean"
+    },
+    {
+      "name": "AKMM.Consumption.cfn_quadratic_valid",
+      "kind": "theorem",
+      "module": "AKMMConsumption/ConsumptionShape.lean"
+    },
+    {
+      "name": "AKMM.Consumption.cfn_crra",
+      "kind": "def",
+      "module": "AKMMConsumption/ConsumptionShape.lean"
+    },
+    {
+      "name": "AKMM.Consumption.cfn_crra_valid",
+      "kind": "theorem",
+      "module": "AKMMConsumption/ConsumptionShape.lean"
+    },
+    {
+      "name": "AKMM.Consumption.cfn_crra_euler_iff",
+      "kind": "theorem",
+      "module": "AKMMConsumption/ConsumptionShape.lean"
+    },
+    {
+      "name": "AKMM.Consumption.cfn_crra_theta_ge_one_iff",
+      "kind": "theorem",
+      "module": "AKMMConsumption/ConsumptionShape.lean"
+    },
+    {
+      "name": "AKMM.Consumption.cfn_crra_kappa_limit",
+      "kind": "theorem",
+      "module": "AKMMConsumption/ConsumptionShape.lean"
+    },
+    {
+      "name": "AKMM.Consumption.cfn_example_valid",
+      "kind": "theorem",
+      "module": "AKMMConsumption/ConsumptionShape.lean"
+    },
+    {
+      "name": "AKMM.Consumption.bsk_convex_crossing",
+      "kind": "theorem",
+      "module": "AKMMConsumption/BufferStock.lean"
+    },
+    {
+      "name": "AKMM.Consumption.bsk_iterate_tendsto",
+      "kind": "theorem",
+      "module": "AKMMConsumption/BufferStock.lean"
+    },
+    {
+      "name": "AKMM.Consumption.CfnHousehold.nextCash",
+      "kind": "def",
+      "module": "AKMMConsumption/BufferStock.lean"
+    },
+    {
+      "name": "AKMM.Consumption.bsk_nextCash_mono",
+      "kind": "theorem",
+      "module": "AKMMConsumption/BufferStock.lean"
+    },
+    {
+      "name": "AKMM.Consumption.bsk_nextCash_continuousOn",
+      "kind": "theorem",
+      "module": "AKMMConsumption/BufferStock.lean"
+    },
+    {
+      "name": "AKMM.Consumption.bsk_nextCash_ge",
+      "kind": "theorem",
+      "module": "AKMMConsumption/BufferStock.lean"
+    },
+    {
+      "name": "AKMM.Consumption.bsk_target",
+      "kind": "theorem",
+      "module": "AKMMConsumption/BufferStock.lean"
+    },
+    {
+      "name": "AKMM.Consumption.bsk_target_stable",
+      "kind": "theorem",
+      "module": "AKMMConsumption/BufferStock.lean"
+    },
+    {
+      "name": "AKMM.Consumption.bsk_example_target",
+      "kind": "theorem",
+      "module": "AKMMConsumption/BufferStock.lean"
+    },
+    {
+      "name": "AKMM.Consumption.bwy_rate_tendsto_cm_dep",
+      "kind": "theorem",
+      "module": "AKMMConsumption/BewleyInsurance.lean"
+    },
+    {
+      "name": "AKMM.Consumption.bwy_rate_tendsto_cm",
+      "kind": "theorem",
+      "module": "AKMMConsumption/BewleyInsurance.lean"
+    },
+    {
+      "name": "AKMM.Consumption.bwy_eqm_exists_below_cm",
+      "kind": "theorem",
+      "module": "AKMMConsumption/BewleyInsurance.lean"
+    },
+    {
+      "name": "AKMM.Consumption.bwy_lower_eqm",
+      "kind": "theorem",
+      "module": "AKMMConsumption/BewleyInsurance.lean"
+    },
+    {
+      "name": "AKMM.Consumption.bwy_rate_strictMono",
+      "kind": "theorem",
+      "module": "AKMMConsumption/BewleyInsurance.lean"
+    },
+    {
+      "name": "AKMM.Consumption.bwy_example",
+      "kind": "theorem",
+      "module": "AKMMConsumption/BewleyInsurance.lean"
+    },
+    {
+      "name": "AKMM.Consumption.ctl_IncrDom",
+      "kind": "def",
+      "module": "AKMMConsumption/TighterLimitMPC.lean"
+    },
+    {
+      "name": "AKMM.Consumption.ctl_concave_incr",
+      "kind": "theorem",
+      "module": "AKMMConsumption/TighterLimitMPC.lean"
+    },
+    {
+      "name": "AKMM.Consumption.ctl_incrDom_le",
+      "kind": "theorem",
+      "module": "AKMMConsumption/TighterLimitMPC.lean"
+    },
+    {
+      "name": "AKMM.Consumption.ctl_cont_incr",
+      "kind": "theorem",
+      "module": "AKMMConsumption/TighterLimitMPC.lean"
+    },
+    {
+      "name": "AKMM.Consumption.ctl_shift_sharp",
+      "kind": "theorem",
+      "module": "AKMMConsumption/TighterLimitMPC.lean"
+    },
+    {
+      "name": "AKMM.Consumption.ctl_gap_le",
+      "kind": "theorem",
+      "module": "AKMMConsumption/TighterLimitMPC.lean"
+    },
+    {
+      "name": "AKMM.Consumption.ctl_incrDom_zero",
+      "kind": "theorem",
+      "module": "AKMMConsumption/TighterLimitMPC.lean"
+    },
+    {
+      "name": "AKMM.Consumption.ctl_mpc_step",
+      "kind": "theorem",
+      "module": "AKMMConsumption/TighterLimitMPC.lean"
+    },
+    {
+      "name": "AKMM.Consumption.ctl_incr_step",
+      "kind": "theorem",
+      "module": "AKMMConsumption/TighterLimitMPC.lean"
+    },
+    {
+      "name": "AKMM.Consumption.ctl_tight_mpc_two",
+      "kind": "theorem",
+      "module": "AKMMConsumption/TighterLimitMPC.lean"
+    },
+    {
+      "name": "AKMM.Consumption.ctl_incrDom_R_one",
+      "kind": "theorem",
+      "module": "AKMMConsumption/TighterLimitMPC.lean"
+    },
+    {
+      "name": "AKMM.Consumption.ctl_tight_mpc_R_one",
+      "kind": "theorem",
+      "module": "AKMMConsumption/TighterLimitMPC.lean"
+    },
+    {
+      "name": "AKMM.Consumption.ctl_gap_antitone_R_one",
+      "kind": "theorem",
+      "module": "AKMMConsumption/TighterLimitMPC.lean"
+    },
+    {
+      "name": "AKMM.Consumption.ctl_quadratic_linear",
+      "kind": "theorem",
+      "module": "AKMMConsumption/TighterLimitMPC.lean"
+    },
+    {
+      "name": "AKMM.Consumption.ctl_example_R_one_valid",
+      "kind": "theorem",
+      "module": "AKMMConsumption/TighterLimitMPC.lean"
+    },
+    {
+      "name": "AKMM.Consumption.ctl_example_mpc",
+      "kind": "theorem",
+      "module": "AKMMConsumption/TighterLimitMPC.lean"
+    },
+    {
+      "name": "AKMM.Consumption.cta_shift_full",
+      "kind": "theorem",
+      "module": "AKMMConsumption/TighterLimitAllHorizons.lean"
+    },
+    {
+      "name": "AKMM.Consumption.cta_incr_step",
+      "kind": "theorem",
+      "module": "AKMMConsumption/TighterLimitAllHorizons.lean"
+    },
+    {
+      "name": "AKMM.Consumption.cta_incrDom_full",
+      "kind": "theorem",
+      "module": "AKMMConsumption/TighterLimitAllHorizons.lean"
+    },
+    {
+      "name": "AKMM.Consumption.cta_tight_mpc",
+      "kind": "theorem",
+      "module": "AKMMConsumption/TighterLimitAllHorizons.lean"
+    },
+    {
+      "name": "AKMM.Consumption.cta_gap_antitone",
+      "kind": "theorem",
+      "module": "AKMMConsumption/TighterLimitAllHorizons.lean"
+    },
+    {
+      "name": "AKMM.Consumption.cta_quadratic_tight_mpc",
+      "kind": "theorem",
+      "module": "AKMMConsumption/TighterLimitAllHorizons.lean"
+    },
+    {
+      "name": "AKMM.Consumption.cta_example_valid",
+      "kind": "theorem",
+      "module": "AKMMConsumption/TighterLimitAllHorizons.lean"
+    },
+    {
+      "name": "AKMM.Consumption.cta_example_mpc",
+      "kind": "theorem",
+      "module": "AKMMConsumption/TighterLimitAllHorizons.lean"
+    },
+    {
+      "name": "AKMM.Consumption.cta_det",
+      "kind": "def",
+      "module": "AKMMConsumption/TighterLimitAllHorizons.lean"
+    },
+    {
+      "name": "AKMM.Consumption.cta_det_valid",
+      "kind": "theorem",
+      "module": "AKMMConsumption/TighterLimitAllHorizons.lean"
+    },
+    {
+      "name": "AKMM.Consumption.cta_det_cont",
+      "kind": "theorem",
+      "module": "AKMMConsumption/TighterLimitAllHorizons.lean"
+    },
+    {
+      "name": "AKMM.Consumption.cta_det_good_tight",
+      "kind": "theorem",
+      "module": "AKMMConsumption/TighterLimitAllHorizons.lean"
+    },
+    {
+      "name": "AKMM.Consumption.cta_det_values",
+      "kind": "theorem",
+      "module": "AKMMConsumption/TighterLimitAllHorizons.lean"
+    },
+    {
+      "name": "AKMM.Consumption.cta_link_mpc_counterexample",
+      "kind": "theorem",
+      "module": "AKMMConsumption/TighterLimitAllHorizons.lean"
+    },
+    {
+      "name": "AKMM.Consumption.ctp_Hor",
+      "kind": "def",
+      "module": "AKMMConsumption/TighterLimitPerfectForesight.lean"
+    },
+    {
+      "name": "AKMM.Consumption.ctp_cont_eq",
+      "kind": "theorem",
+      "module": "AKMMConsumption/TighterLimitPerfectForesight.lean"
+    },
+    {
+      "name": "AKMM.Consumption.ctp_hor_zero",
+      "kind": "theorem",
+      "module": "AKMMConsumption/TighterLimitPerfectForesight.lean"
+    },
+    {
+      "name": "AKMM.Consumption.ctp_cons_strict",
+      "kind": "theorem",
+      "module": "AKMMConsumption/TighterLimitPerfectForesight.lean"
+    },
+    {
+      "name": "AKMM.Consumption.ctp_hor_step",
+      "kind": "theorem",
+      "module": "AKMMConsumption/TighterLimitPerfectForesight.lean"
+    },
+    {
+      "name": "AKMM.Consumption.ctp_hor_all",
+      "kind": "theorem",
+      "module": "AKMMConsumption/TighterLimitPerfectForesight.lean"
+    },
+    {
+      "name": "AKMM.Consumption.ctp_mpc_of_hor",
+      "kind": "theorem",
+      "module": "AKMMConsumption/TighterLimitPerfectForesight.lean"
+    },
+    {
+      "name": "AKMM.Consumption.ctp_tight_mpc",
+      "kind": "theorem",
+      "module": "AKMMConsumption/TighterLimitPerfectForesight.lean"
+    },
+    {
+      "name": "AKMM.Consumption.ctp_gap_antitone",
+      "kind": "theorem",
+      "module": "AKMMConsumption/TighterLimitPerfectForesight.lean"
+    },
+    {
+      "name": "AKMM.Consumption.ctp_crra_tight_mpc",
+      "kind": "theorem",
+      "module": "AKMMConsumption/TighterLimitPerfectForesight.lean"
+    },
+    {
+      "name": "AKMM.Consumption.ctc_lt_step",
+      "kind": "theorem",
+      "module": "AKMMConsumption/TighterLimitCounterexample.lean"
+    },
+    {
+      "name": "AKMM.Consumption.ctc_step_lt",
+      "kind": "theorem",
+      "module": "AKMMConsumption/TighterLimitCounterexample.lean"
+    },
+    {
+      "name": "AKMM.Consumption.ctc_step_top",
+      "kind": "theorem",
+      "module": "AKMMConsumption/TighterLimitCounterexample.lean"
+    },
+    {
+      "name": "AKMM.Consumption.ctc_H",
+      "kind": "def",
+      "module": "AKMMConsumption/TighterLimitCounterexample.lean"
+    },
+    {
+      "name": "AKMM.Consumption.ctc_valid",
+      "kind": "theorem",
+      "module": "AKMMConsumption/TighterLimitCounterexample.lean"
+    },
+    {
+      "name": "AKMM.Consumption.ctc_tight_valid",
+      "kind": "theorem",
+      "module": "AKMMConsumption/TighterLimitCounterexample.lean"
+    },
+    {
+      "name": "AKMM.Consumption.ctc_cont",
+      "kind": "theorem",
+      "module": "AKMMConsumption/TighterLimitCounterexample.lean"
+    },
+    {
+      "name": "AKMM.Consumption.ctc_cons2_gt",
+      "kind": "theorem",
+      "module": "AKMMConsumption/TighterLimitCounterexample.lean"
+    },
+    {
+      "name": "AKMM.Consumption.ctc_cons2_lt",
+      "kind": "theorem",
+      "module": "AKMMConsumption/TighterLimitCounterexample.lean"
+    },
+    {
+      "name": "AKMM.Consumption.ctc_tighten_self",
+      "kind": "theorem",
+      "module": "AKMMConsumption/TighterLimitCounterexample.lean"
+    },
+    {
+      "name": "AKMM.Consumption.ctc_counterexample",
+      "kind": "theorem",
+      "module": "AKMMConsumption/TighterLimitCounterexample.lean"
+    },
+    {
+      "name": "AKMM.Consumption.ctc_not_tight_mpc",
+      "kind": "theorem",
+      "module": "AKMMConsumption/TighterLimitCounterexample.lean"
+    },
+    {
+      "name": "AKMM.Consumption.ctc_not_hor",
+      "kind": "theorem",
+      "module": "AKMMConsumption/TighterLimitCounterexample.lean"
+    },
+    {
+      "name": "AKMM.Consumption.ctb_H",
+      "kind": "def",
+      "module": "AKMMConsumption/TighterLimitCounterexampleBook.lean"
+    },
+    {
+      "name": "AKMM.Consumption.ctb_valid",
+      "kind": "theorem",
+      "module": "AKMMConsumption/TighterLimitCounterexampleBook.lean"
+    },
+    {
+      "name": "AKMM.Consumption.ctb_theta",
+      "kind": "theorem",
+      "module": "AKMMConsumption/TighterLimitCounterexampleBook.lean"
+    },
+    {
+      "name": "AKMM.Consumption.ctb_tight_valid",
+      "kind": "theorem",
+      "module": "AKMMConsumption/TighterLimitCounterexampleBook.lean"
+    },
+    {
+      "name": "AKMM.Consumption.ctb_cont",
+      "kind": "theorem",
+      "module": "AKMMConsumption/TighterLimitCounterexampleBook.lean"
+    },
+    {
+      "name": "AKMM.Consumption.ctb_c1_gt",
+      "kind": "theorem",
+      "module": "AKMMConsumption/TighterLimitCounterexampleBook.lean"
+    },
+    {
+      "name": "AKMM.Consumption.ctb_c1_lt",
+      "kind": "theorem",
+      "module": "AKMMConsumption/TighterLimitCounterexampleBook.lean"
+    },
+    {
+      "name": "AKMM.Consumption.ctb_c1_le",
+      "kind": "theorem",
+      "module": "AKMMConsumption/TighterLimitCounterexampleBook.lean"
+    },
+    {
+      "name": "AKMM.Consumption.ctb_harm_mono",
+      "kind": "theorem",
+      "module": "AKMMConsumption/TighterLimitCounterexampleBook.lean"
+    },
+    {
+      "name": "AKMM.Consumption.ctb_cons2_gt",
+      "kind": "theorem",
+      "module": "AKMMConsumption/TighterLimitCounterexampleBook.lean"
+    },
+    {
+      "name": "AKMM.Consumption.ctb_cons2_lt",
+      "kind": "theorem",
+      "module": "AKMMConsumption/TighterLimitCounterexampleBook.lean"
+    },
+    {
+      "name": "AKMM.Consumption.ctb_tighten_self",
+      "kind": "theorem",
+      "module": "AKMMConsumption/TighterLimitCounterexampleBook.lean"
+    },
+    {
+      "name": "AKMM.Consumption.ctb_counterexample",
+      "kind": "theorem",
+      "module": "AKMMConsumption/TighterLimitCounterexampleBook.lean"
+    },
+    {
+      "name": "AKMM.Consumption.ctb_not_tight_mpc",
+      "kind": "theorem",
+      "module": "AKMMConsumption/TighterLimitCounterexampleBook.lean"
+    },
+    {
+      "name": "AKMM.Consumption.ctb_P",
+      "kind": "def",
+      "module": "AKMMConsumption/TighterLimitCounterexampleBook.lean"
+    },
+    {
+      "name": "AKMM.Consumption.ctb_P_valid",
+      "kind": "theorem",
+      "module": "AKMMConsumption/TighterLimitCounterexampleBook.lean"
+    },
+    {
+      "name": "AKMM.Consumption.ctb_P_theta",
+      "kind": "theorem",
+      "module": "AKMMConsumption/TighterLimitCounterexampleBook.lean"
+    },
+    {
+      "name": "AKMM.Consumption.ctb_P_tight_valid",
+      "kind": "theorem",
+      "module": "AKMMConsumption/TighterLimitCounterexampleBook.lean"
+    },
+    {
+      "name": "AKMM.Consumption.ctb_P_cont",
+      "kind": "theorem",
+      "module": "AKMMConsumption/TighterLimitCounterexampleBook.lean"
+    },
+    {
+      "name": "AKMM.Consumption.ctb_P_c1_gt",
+      "kind": "theorem",
+      "module": "AKMMConsumption/TighterLimitCounterexampleBook.lean"
+    },
+    {
+      "name": "AKMM.Consumption.ctb_P_c1_lt",
+      "kind": "theorem",
+      "module": "AKMMConsumption/TighterLimitCounterexampleBook.lean"
+    },
+    {
+      "name": "AKMM.Consumption.ctb_P_c1_le",
+      "kind": "theorem",
+      "module": "AKMMConsumption/TighterLimitCounterexampleBook.lean"
+    },
+    {
+      "name": "AKMM.Consumption.ctb_P_harm_mono",
+      "kind": "theorem",
+      "module": "AKMMConsumption/TighterLimitCounterexampleBook.lean"
+    },
+    {
+      "name": "AKMM.Consumption.ctb_P_cons2_gt",
+      "kind": "theorem",
+      "module": "AKMMConsumption/TighterLimitCounterexampleBook.lean"
+    },
+    {
+      "name": "AKMM.Consumption.ctb_P_cons2_lt",
+      "kind": "theorem",
+      "module": "AKMMConsumption/TighterLimitCounterexampleBook.lean"
+    },
+    {
+      "name": "AKMM.Consumption.ctb_P_tighten_self",
+      "kind": "theorem",
+      "module": "AKMMConsumption/TighterLimitCounterexampleBook.lean"
+    },
+    {
+      "name": "AKMM.Consumption.ctb_P_counterexample",
+      "kind": "theorem",
+      "module": "AKMMConsumption/TighterLimitCounterexampleBook.lean"
+    },
+    {
+      "name": "AKMM.Consumption.ctb_P_not_tight_mpc",
+      "kind": "theorem",
+      "module": "AKMMConsumption/TighterLimitCounterexampleBook.lean"
+    }
+  ],
+  "full_build": "passed",
+  "fresh_source_compilation": "passed",
+  "fresh_source_lint_options": [
+    "-Dlinter.mathlibStandardSet=true",
+    "-Dlinter.style.header=false"
+  ],
+  "axioms": {
+    "AKMM.Consumption.eq_11_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.footnote_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.eq_11_3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.rs_crra_invert": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.rs_crra_ratio": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.eq_11_4": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.rs_crra_share_eqm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.rs_lhs_strictAnti": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.eq_11_5": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.rs_less_risk_averse_absorbs": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.eq_11_11": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.eq_11_10": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.cd_budget_iter": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.cd_summable_pv_cons": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.cd_intertemporal_budget": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.cd_tvc_shift": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.cd_Plan": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.cd_Optimal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.eq_11_13": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.eq_11_14": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.cd_growth": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.cd_optimal_of_euler": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.cd_log_optimal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.cd_mpc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.cd_rule_of_growth": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.eq_11_15": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.cd_optimal_eq_11_15": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.eq_11_16": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.cd_transitory_eq_wealth": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.cd_mpc_betaR_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.cd_mpc_approx_rho": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.cd_mpc_permanent": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.footnote_15": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.cd_mpc_log": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.cd_mpc_log_eq_r_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.cd_mpc_log_printed_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.pih_detSystem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.pih_one_sub_q": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.pih_annuity_inv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.eq_11_18": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.eq_11_19": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.pih_budget_iter": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.pih_budget_condexp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.pih_rule": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.eq_11_20": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.eq_11_21": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.pih_certainty_equivalence": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.pih_wealth": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.eq_11_22": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.eq_11_23": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.eq_11_24": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.eq_11_26": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.pih_perm_martingale": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.pih_news_perm_trans": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.eq_11_27": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.eq_11_29": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.pih_rainy_day": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.pih_random_walk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.eq_11_30": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.bp_cov_cons_trans": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.bp_var_cons": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.bp_cov_cons_income": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.eq_11_28": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.bp_cov_stationary": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.bc_iid_example": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.bc_iid_hits": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.eq_11_32": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.bc_binding_cons": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.bc_natural_limit_det": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.bc_natural_limit": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.bc_natural_limit_cons_nonpos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.bc_natural_limit_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.eq_11_33": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.bc_slope_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.pr_ConvexOrderOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.pr_convexOrder_mean": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.pr_two_point_spread": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.eq_11_34_spread": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.eq_11_35_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.pr_root_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.pr_rhs": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.pr_spread_raises_saving": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.pr_two_point_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.pr_quadratic_no_precaution": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.pr_ara_deriv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.pr_dara_prudent": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.pr_betaR_inv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.eq_11_36_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.eq_11_38": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.eq_11_39": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.eq_11_40": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.pr_kappa": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.pr_tolerance_deriv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.pr_hara_kappa_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.pr_kappa_quadratic": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.pr_kappa_cara": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.pr_kappa_crra": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.pr_hara_neg_derivs": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.pr_hara_kappa_neg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.cr_deriv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.cr_second_deriv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.cr_second_deriv_nonneg_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.cr_convex_of_rel_prudence": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.cr_spread_raises_saving": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.cr_log_return_risk_neutral": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.cr_return_spread_instance": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.cr_printed_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.cs_lognormal_euler": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.eq_11_41": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.cs_zeldes_euler": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.eq_11_41_printed_false": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.eq_11_43": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.bw_cash_gap": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.bw_bounded_of_ratio": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.bw_bounded_wealth": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.bw_crra_rra": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.bw_bounded_wealth_crra": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.bw_crra_ara_tendsto": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.bw_dara_not_ara_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.hg_IsStationaryEqm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.hg_map_fst_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.hg_integrable_assets": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.hg_mean_assets_eq_mean_policy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.hg_mean_consumption": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.hg_goods_clear_zero_supply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.hg_eqm_iff_miao": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.eq_11_50": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.hg_cycle_markov": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.hg_cycle_integrable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.hg_cycle_eqm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.hg_cycle_huggett": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.hg_policy_at_minus_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.hg_A_at_minus_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.hg_EaSet_at_minus_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.hg_existence": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.hg_existence_eqm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.hg_rate_below_cm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.hg_unique_of_strictMono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.hg_saving_ratio_crra": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.hg_saving_increasing_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.hg_A_continuous": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.hg_A_continuousOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.footnote_27": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.footnote_27_printed_false": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.ai_capital_demand_props": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.ai_Kd_tendsto_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.ai_existence": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.ai_precautionary_wealth": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.ai_mpc_representative": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.cfn_IsMean": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.cfn_mean_ge": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.cfn_mean_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.cfn_isMean_expect": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.cfn_isMean_powerMean": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.CfnHousehold": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.CfnHousehold.mk": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.CfnHousehold.M": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.CfnHousehold.\u03b8": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.CfnHousehold.R": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.CfnHousehold.b": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.CfnHousehold.d": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.CfnHousehold.y": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.CfnHousehold.ymax": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.CfnHousehold.w": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.CfnHousehold.Valid": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.CfnHousehold.cont": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.CfnHousehold.KKT": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.CfnHousehold.step": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.CfnHousehold.cons": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.CfnHousehold.kappa": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.CfnHousehold.hw": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.CfnHousehold.Good": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.cfn_arg_ge": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.cfn_good_continuousOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.cfn_cont_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.cfn_cont_concave": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.cfn_cont_ge": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.cfn_cont_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.cfn_save_ge": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.cfn_kkt_exists": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.cfn_kkt_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.cfn_step_kkt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.cfn_step_eq_of_kkt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.cfn_kkt_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.cfn_step_good": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.cfn_kappa_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.cfn_cons_good": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.cfn_cons_kkt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.cfn_cons_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.cfn_cons_concave": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.cfn_slope_ge_of_concave": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.cfn_slope_le_eventually": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.cfn_cons_slope_bounds": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.cfn_slope_tendsto": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.cfn_binding_initial": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.cfn_kappa_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.cfn_kappa_tendsto": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.cfn_kappa_tendsto_r": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.cfn_fig_11_2_slope": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.cfn_kappa_gt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.cfn_R_one_sub_kappa_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.CfnHousehold.tighten": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.cfn_tighten_valid": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.cfn_tight_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.cfn_tight_shift": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.cfn_tight_binds": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.cfn_tight_eventually_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.cfn_tight_mpc_last": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.cfn_tight_eq_unconstrained_last": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.cfn_kkt_iff_min": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.cfn_quadratic": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.cfn_quadratic_kkt_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.cfn_quadratic_valid": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.cfn_crra": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.cfn_crra_valid": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.cfn_crra_euler_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.cfn_crra_theta_ge_one_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.cfn_crra_kappa_limit": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.cfn_example_valid": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.bsk_convex_crossing": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.bsk_iterate_tendsto": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.CfnHousehold.nextCash": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.bsk_nextCash_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.bsk_nextCash_continuousOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.bsk_nextCash_ge": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.bsk_target": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.bsk_target_stable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.bsk_example_target": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.bwy_rate_tendsto_cm_dep": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.bwy_rate_tendsto_cm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.bwy_eqm_exists_below_cm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.bwy_lower_eqm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.bwy_rate_strictMono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.bwy_example": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.ctl_IncrDom": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.ctl_concave_incr": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.ctl_incrDom_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.ctl_cont_incr": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.ctl_shift_sharp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.ctl_gap_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.ctl_incrDom_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.ctl_mpc_step": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.ctl_incr_step": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.ctl_tight_mpc_two": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.ctl_incrDom_R_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.ctl_tight_mpc_R_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.ctl_gap_antitone_R_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.ctl_quadratic_linear": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.ctl_example_R_one_valid": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.ctl_example_mpc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.cta_shift_full": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.cta_incr_step": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.cta_incrDom_full": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.cta_tight_mpc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.cta_gap_antitone": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.cta_quadratic_tight_mpc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.cta_example_valid": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.cta_example_mpc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.cta_det": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.cta_det_valid": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.cta_det_cont": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.cta_det_good_tight": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.cta_det_values": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.cta_link_mpc_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.ctp_Hor": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.ctp_cont_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.ctp_hor_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.ctp_cons_strict": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.ctp_hor_step": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.ctp_hor_all": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.ctp_mpc_of_hor": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.ctp_tight_mpc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.ctp_gap_antitone": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.ctp_crra_tight_mpc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.ctc_lt_step": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.ctc_step_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.ctc_step_top": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.ctc_H": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.ctc_valid": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.ctc_tight_valid": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.ctc_cont": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.ctc_cons2_gt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.ctc_cons2_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.ctc_tighten_self": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.ctc_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.ctc_not_tight_mpc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.ctc_not_hor": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.ctb_H": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.ctb_valid": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.ctb_theta": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.ctb_tight_valid": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.ctb_cont": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.ctb_c1_gt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.ctb_c1_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.ctb_c1_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.ctb_harm_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.ctb_cons2_gt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.ctb_cons2_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.ctb_tighten_self": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.ctb_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.ctb_not_tight_mpc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.ctb_P": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.ctb_P_valid": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.ctb_P_theta": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.ctb_P_tight_valid": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.ctb_P_cont": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.ctb_P_c1_gt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.ctb_P_c1_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.ctb_P_c1_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.ctb_P_harm_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.ctb_P_cons2_gt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.ctb_P_cons2_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.ctb_P_tighten_self": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.ctb_P_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Consumption.ctb_P_not_tight_mpc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  "source_sha256": {
+    "AKMMConsumption/RiskSharing.lean": "eb275bdd4f2182ac7bddd6512d648e164ffd55921c42501be33c2bdd8a3be4f9",
+    "AKMMConsumption/Deterministic.lean": "436ecb47832c1f634ac199d3df016e89e94359ae1a808777bc22a73e199b8683",
+    "AKMMConsumption/PIH.lean": "258e1937d224c3f03dcc35ad8bf6dc1bbd117982c9f851adff147a82955e5e15",
+    "AKMMConsumption/BlundellPreston.lean": "0d6d2f566ac6b3ea31f79c04676efb24224096bfdd90d9ba45f1c1c5d01b2664",
+    "AKMMConsumption/BorrowingConstraints.lean": "6b5b3224f237cdf36fbda6e126c6da2be5b210ffbd72091106fae0292b9cd223",
+    "AKMMConsumption/Prudence.lean": "f3e9445b4edfe52fe3ca48d5ebac5d7f4a7bee4258b62f6f7724e891d3b3fe73",
+    "AKMMConsumption/CapitalRisk.lean": "7b235d666ddefb0f32047946857b3c1208c620d7330b5ad6c86f1039f6117eb2",
+    "AKMMConsumption/Lognormal.lean": "d5a65c0c2fefe2e3b0c053d0f84a8cdf20228370810bf8b770f1061473093401",
+    "AKMMConsumption/BoundedWealth.lean": "8b38858d3872ccce82962f9364874b8d528a6a45843ac0feb27cfdc7fce693fe",
+    "AKMMConsumption/Huggett.lean": "e3040636eac623a57a264b278ac131950227b9b96f418c10eb24092734913c6b",
+    "AKMMConsumption/AssetDemandContinuity.lean": "f40f7069c92cba8473cf24c3d706601d1cefee4716fa042f789144eb3f3f7c83",
+    "AKMMConsumption/Aiyagari.lean": "342ddc5cb5c0db4c048aacbb07e5cc44e902e3964b066987548512189964ed78",
+    "AKMMConsumption/ConsumptionShape.lean": "e4198eb444a8fa0a22dacab872b88a20297bc133e7154a5837653654ec82c424",
+    "AKMMConsumption/BufferStock.lean": "e380221fa45848ef9a2fca1de3a6ebab1e7d9a53a37df9fc8af9c1db33fdf247",
+    "AKMMConsumption/BewleyInsurance.lean": "2135a5f9b494e76f883bbf9b73d44e077665017df088e7633b444f1dc43b3240",
+    "AKMMConsumption/TighterLimitMPC.lean": "0e310f846e4619cd062ca8a985cd14df87c143fbc15526dee667c931e33f4917",
+    "AKMMConsumption/TighterLimitAllHorizons.lean": "e73f5e3a240c86a0896d0aa8d36cca31564fabf29f1da6a8878063c76c2633ba",
+    "AKMMConsumption/TighterLimitPerfectForesight.lean": "e9b376658f97c9f977334d3f58d45983d4402b96a96b9f8d699e911436f70481",
+    "AKMMConsumption/TighterLimitCounterexample.lean": "fa08259b7f1007a93bc40ab7b5911c2e76070b9b126f1b79e8b254049d461a86",
+    "AKMMConsumption/TighterLimitCounterexampleBook.lean": "83e79694307ba1ae6d32c1703ea32bf6aa83fb33a91d796a8d7878c2eb0f47e2",
+    "AKMMConsumption.lean": "9161e2b2a247dfc94a5d4e3639eee997fa74e9efd7cc6ee3486a61d2418ae9a8",
+    "lean-toolchain": "8733782dc070a99b312039cda424f601b80f3be6f6f512627da5ba25adc27632",
+    "lakefile.toml": "57343bfde75a2f70a55ec5cda681d53bfdb0198149cdfe23b8dc5745c744e5d4",
+    "lake-manifest.json": "a2a18acaf13cdcb87132d054a3fa81362efc69f5e789b45537f80eccf21f9c69",
+    "proof-manifest.json": "e262365a4edf6503529748dd14a1bfab2a6bdaae97fc61655ddf41a09e8cc379",
+    "scripts/verify.py": "a70b1fa704dd590f937f8b37682afa88a9d85a9150065acb935c7d2c9589da3b",
+    "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  },
+  "fresh_audit_sha256": "2f911f9ec9229c4992e36e83c260556eb0a86eb47bd5771f81472d0e2a34ec57",
+  "lean_toolchain": "leanprover/lean4:v4.34.0",
+  "scope": "AKMM Chapter 11 (pp. 287-323): consumption.",
+  "source": "Marina Azzimonti, Per Krusell, Alisdair McKay and Toshihiko Mukoyama, Macroeconomics (draft of December 2025), Chapter 11"
+}

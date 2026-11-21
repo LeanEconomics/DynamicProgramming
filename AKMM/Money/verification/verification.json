@@ -1,0 +1,2040 @@
+{
+  "checked_at_utc": "2026-11-12T09:32:49.940041+00:00",
+  "theorems": 169,
+  "module_theorems": {
+    "AKMMMoney/OLGDemand.lean": 8,
+    "AKMMMoney/OLGEquilibrium.lean": 22,
+    "AKMMMoney/OLGWelfare.lean": 13,
+    "AKMMMoney/OLGMoneyGrowth.lean": 6,
+    "AKMMMoney/Dynastic.lean": 11,
+    "AKMMMoney/CashInAdvance.lean": 8,
+    "AKMMMoney/TransactionCosts.lean": 9,
+    "AKMMMoney/MoneyInUtility.lean": 5,
+    "AKMMMoney/Hyperinflation.lean": 13,
+    "AKMMMoney/InterestRules.lean": 15,
+    "AKMMMoney/CashlessLimit.lean": 16,
+    "AKMMMoney/GovernmentBudget.lean": 9,
+    "AKMMMoney/FiscalMonetary.lean": 13,
+    "AKMMMoney/KarekenWallace.lean": 15,
+    "AKMMMoney/MissingAssets.lean": 6
+  },
+  "audited_declarations": 198,
+  "declarations": [
+    {
+      "name": "AKMM.Money.olgUtil",
+      "kind": "def",
+      "module": "AKMMMoney/OLGDemand.lean"
+    },
+    {
+      "name": "AKMM.Money.olgFeasible",
+      "kind": "def",
+      "module": "AKMMMoney/OLGDemand.lean"
+    },
+    {
+      "name": "AKMM.Money.olgOptimal",
+      "kind": "def",
+      "module": "AKMMMoney/OLGDemand.lean"
+    },
+    {
+      "name": "AKMM.Money.olgDemand",
+      "kind": "def",
+      "module": "AKMMMoney/OLGDemand.lean"
+    },
+    {
+      "name": "AKMM.Money.eq_17_2",
+      "kind": "theorem",
+      "module": "AKMMMoney/OLGDemand.lean"
+    },
+    {
+      "name": "AKMM.Money.olg_util_sub_le",
+      "kind": "theorem",
+      "module": "AKMMMoney/OLGDemand.lean"
+    },
+    {
+      "name": "AKMM.Money.olg_demand_feasible",
+      "kind": "theorem",
+      "module": "AKMMMoney/OLGDemand.lean"
+    },
+    {
+      "name": "AKMM.Money.olg_demand_marginal",
+      "kind": "theorem",
+      "module": "AKMMMoney/OLGDemand.lean"
+    },
+    {
+      "name": "AKMM.Money.eq_17_3",
+      "kind": "theorem",
+      "module": "AKMMMoney/OLGDemand.lean"
+    },
+    {
+      "name": "AKMM.Money.olg_demand_eq_max",
+      "kind": "theorem",
+      "module": "AKMMMoney/OLGDemand.lean"
+    },
+    {
+      "name": "AKMM.Money.olg_interior_cons",
+      "kind": "theorem",
+      "module": "AKMMMoney/OLGDemand.lean"
+    },
+    {
+      "name": "AKMM.Money.olg_interior_iff",
+      "kind": "theorem",
+      "module": "AKMMMoney/OLGDemand.lean"
+    },
+    {
+      "name": "AKMM.Money.olgMoneyUtil",
+      "kind": "def",
+      "module": "AKMMMoney/OLGEquilibrium.lean"
+    },
+    {
+      "name": "AKMM.Money.olgMoneyFeasible",
+      "kind": "def",
+      "module": "AKMMMoney/OLGEquilibrium.lean"
+    },
+    {
+      "name": "AKMM.Money.olgMoneyOptimal",
+      "kind": "def",
+      "module": "AKMMMoney/OLGEquilibrium.lean"
+    },
+    {
+      "name": "AKMM.Money.olgIsEquilibrium",
+      "kind": "def",
+      "module": "AKMMMoney/OLGEquilibrium.lean"
+    },
+    {
+      "name": "AKMM.Money.olg_moneyUtil_eq",
+      "kind": "theorem",
+      "module": "AKMMMoney/OLGEquilibrium.lean"
+    },
+    {
+      "name": "AKMM.Money.olg_moneyOptimal_iff_pos",
+      "kind": "theorem",
+      "module": "AKMMMoney/OLGEquilibrium.lean"
+    },
+    {
+      "name": "AKMM.Money.olg_moneyOptimal_zero_pos",
+      "kind": "theorem",
+      "module": "AKMMMoney/OLGEquilibrium.lean"
+    },
+    {
+      "name": "AKMM.Money.olg_moneyOptimal_zero_zero",
+      "kind": "theorem",
+      "module": "AKMMMoney/OLGEquilibrium.lean"
+    },
+    {
+      "name": "AKMM.Money.olg_step_iff",
+      "kind": "theorem",
+      "module": "AKMMMoney/OLGEquilibrium.lean"
+    },
+    {
+      "name": "AKMM.Money.eq_17_5",
+      "kind": "theorem",
+      "module": "AKMMMoney/OLGEquilibrium.lean"
+    },
+    {
+      "name": "AKMM.Money.eq_17_5_div",
+      "kind": "theorem",
+      "module": "AKMMMoney/OLGEquilibrium.lean"
+    },
+    {
+      "name": "AKMM.Money.eq_17_5_real",
+      "kind": "theorem",
+      "module": "AKMMMoney/OLGEquilibrium.lean"
+    },
+    {
+      "name": "AKMM.Money.olg_closed_form_step",
+      "kind": "theorem",
+      "module": "AKMMMoney/OLGEquilibrium.lean"
+    },
+    {
+      "name": "AKMM.Money.olg_classification",
+      "kind": "theorem",
+      "module": "AKMMMoney/OLGEquilibrium.lean"
+    },
+    {
+      "name": "AKMM.Money.olg_no_monetary",
+      "kind": "theorem",
+      "module": "AKMMMoney/OLGEquilibrium.lean"
+    },
+    {
+      "name": "AKMM.Money.olg_nonmonetary_exists",
+      "kind": "theorem",
+      "module": "AKMMMoney/OLGEquilibrium.lean"
+    },
+    {
+      "name": "AKMM.Money.olg_continuum",
+      "kind": "theorem",
+      "module": "AKMMMoney/OLGEquilibrium.lean"
+    },
+    {
+      "name": "AKMM.Money.olg_unique_given_p0",
+      "kind": "theorem",
+      "module": "AKMMMoney/OLGEquilibrium.lean"
+    },
+    {
+      "name": "AKMM.Money.olg_stationary",
+      "kind": "theorem",
+      "module": "AKMMMoney/OLGEquilibrium.lean"
+    },
+    {
+      "name": "AKMM.Money.olg_decreasing_to_zero",
+      "kind": "theorem",
+      "module": "AKMMMoney/OLGEquilibrium.lean"
+    },
+    {
+      "name": "AKMM.Money.olgMap",
+      "kind": "def",
+      "module": "AKMMMoney/OLGEquilibrium.lean"
+    },
+    {
+      "name": "AKMM.Money.olg_map_fixed_iff",
+      "kind": "theorem",
+      "module": "AKMMMoney/OLGEquilibrium.lean"
+    },
+    {
+      "name": "AKMM.Money.olg_map_strictMonoOn",
+      "kind": "theorem",
+      "module": "AKMMMoney/OLGEquilibrium.lean"
+    },
+    {
+      "name": "AKMM.Money.olg_map_hasDerivAt",
+      "kind": "theorem",
+      "module": "AKMMMoney/OLGEquilibrium.lean"
+    },
+    {
+      "name": "AKMM.Money.olg_map_slopes",
+      "kind": "theorem",
+      "module": "AKMMMoney/OLGEquilibrium.lean"
+    },
+    {
+      "name": "AKMM.Money.olg_map_domain",
+      "kind": "theorem",
+      "module": "AKMMMoney/OLGEquilibrium.lean"
+    },
+    {
+      "name": "AKMM.Money.olg_nominal_neutral",
+      "kind": "theorem",
+      "module": "AKMMMoney/OLGEquilibrium.lean"
+    },
+    {
+      "name": "AKMM.Money.olgIndirect",
+      "kind": "def",
+      "module": "AKMMMoney/OLGWelfare.lean"
+    },
+    {
+      "name": "AKMM.Money.olg_indirect_eq",
+      "kind": "theorem",
+      "module": "AKMMMoney/OLGWelfare.lean"
+    },
+    {
+      "name": "AKMM.Money.olg_indirect_strictMonoOn",
+      "kind": "theorem",
+      "module": "AKMMMoney/OLGWelfare.lean"
+    },
+    {
+      "name": "AKMM.Money.olgCohortUtil",
+      "kind": "def",
+      "module": "AKMMMoney/OLGWelfare.lean"
+    },
+    {
+      "name": "AKMM.Money.olg_cohort_util_eq",
+      "kind": "theorem",
+      "module": "AKMMMoney/OLGWelfare.lean"
+    },
+    {
+      "name": "AKMM.Money.olg_return_strictMonoOn",
+      "kind": "theorem",
+      "module": "AKMMMoney/OLGWelfare.lean"
+    },
+    {
+      "name": "AKMM.Money.olg_ranking",
+      "kind": "theorem",
+      "module": "AKMMMoney/OLGWelfare.lean"
+    },
+    {
+      "name": "AKMM.Money.olg_monetary_improves_autarky",
+      "kind": "theorem",
+      "module": "AKMMMoney/OLGWelfare.lean"
+    },
+    {
+      "name": "AKMM.Money.olg_stationary_dominates",
+      "kind": "theorem",
+      "module": "AKMMMoney/OLGWelfare.lean"
+    },
+    {
+      "name": "AKMM.Money.olg_stationary_welfare",
+      "kind": "theorem",
+      "module": "AKMMMoney/OLGWelfare.lean"
+    },
+    {
+      "name": "AKMM.Money.olg_smoothing_hurts_old",
+      "kind": "theorem",
+      "module": "AKMMMoney/OLGWelfare.lean"
+    },
+    {
+      "name": "AKMM.Money.olg_return_limit",
+      "kind": "theorem",
+      "module": "AKMMMoney/OLGWelfare.lean"
+    },
+    {
+      "name": "AKMM.Money.olgMiao",
+      "kind": "def",
+      "module": "AKMMMoney/OLGWelfare.lean"
+    },
+    {
+      "name": "AKMM.Money.olg_miao_paths",
+      "kind": "theorem",
+      "module": "AKMMMoney/OLGWelfare.lean"
+    },
+    {
+      "name": "AKMM.Money.olg_miao_stationary_pareto",
+      "kind": "theorem",
+      "module": "AKMMMoney/OLGWelfare.lean"
+    },
+    {
+      "name": "AKMM.Money.olg_miao_autarky_pareto_iff",
+      "kind": "theorem",
+      "module": "AKMMMoney/OLGWelfare.lean"
+    },
+    {
+      "name": "AKMM.Money.mgStock",
+      "kind": "def",
+      "module": "AKMMMoney/OLGMoneyGrowth.lean"
+    },
+    {
+      "name": "AKMM.Money.mgIsEquilibrium",
+      "kind": "def",
+      "module": "AKMMMoney/OLGMoneyGrowth.lean"
+    },
+    {
+      "name": "AKMM.Money.mgStock_pos",
+      "kind": "theorem",
+      "module": "AKMMMoney/OLGMoneyGrowth.lean"
+    },
+    {
+      "name": "AKMM.Money.mgStock_succ",
+      "kind": "theorem",
+      "module": "AKMMMoney/OLGMoneyGrowth.lean"
+    },
+    {
+      "name": "AKMM.Money.mg_step_iff",
+      "kind": "theorem",
+      "module": "AKMMMoney/OLGMoneyGrowth.lean"
+    },
+    {
+      "name": "AKMM.Money.mg_stationary_iff",
+      "kind": "theorem",
+      "module": "AKMMMoney/OLGMoneyGrowth.lean"
+    },
+    {
+      "name": "AKMM.Money.mg_return",
+      "kind": "theorem",
+      "module": "AKMMMoney/OLGMoneyGrowth.lean"
+    },
+    {
+      "name": "AKMM.Money.mg_value_strictAntiOn",
+      "kind": "theorem",
+      "module": "AKMMMoney/OLGMoneyGrowth.lean"
+    },
+    {
+      "name": "AKMM.Money.eq_17_11",
+      "kind": "theorem",
+      "module": "AKMMMoney/Dynastic.lean"
+    },
+    {
+      "name": "AKMM.Money.dyn_unbounded",
+      "kind": "theorem",
+      "module": "AKMMMoney/Dynastic.lean"
+    },
+    {
+      "name": "AKMM.Money.eq_17_12",
+      "kind": "theorem",
+      "module": "AKMMMoney/Dynastic.lean"
+    },
+    {
+      "name": "AKMM.Money.eq_17_12_prices",
+      "kind": "theorem",
+      "module": "AKMMMoney/Dynastic.lean"
+    },
+    {
+      "name": "AKMM.Money.eq_17_13",
+      "kind": "theorem",
+      "module": "AKMMMoney/Dynastic.lean"
+    },
+    {
+      "name": "AKMM.Money.dyn_no_value_of_pos_rate",
+      "kind": "theorem",
+      "module": "AKMMMoney/Dynastic.lean"
+    },
+    {
+      "name": "AKMM.Money.eq_17_14",
+      "kind": "theorem",
+      "module": "AKMMMoney/Dynastic.lean"
+    },
+    {
+      "name": "AKMM.Money.dyn_printed_product",
+      "kind": "theorem",
+      "module": "AKMMMoney/Dynastic.lean"
+    },
+    {
+      "name": "AKMM.Money.dyn_tvc_money_vanishes",
+      "kind": "theorem",
+      "module": "AKMMMoney/Dynastic.lean"
+    },
+    {
+      "name": "AKMM.Money.dyn_no_valued_money",
+      "kind": "theorem",
+      "module": "AKMMMoney/Dynastic.lean"
+    },
+    {
+      "name": "AKMM.Money.eq_17_15",
+      "kind": "theorem",
+      "module": "AKMMMoney/Dynastic.lean"
+    },
+    {
+      "name": "AKMM.Money.eq_17_19",
+      "kind": "theorem",
+      "module": "AKMMMoney/CashInAdvance.lean"
+    },
+    {
+      "name": "AKMM.Money.cia_stationary_growth",
+      "kind": "theorem",
+      "module": "AKMMMoney/CashInAdvance.lean"
+    },
+    {
+      "name": "AKMM.Money.eq_17_24",
+      "kind": "theorem",
+      "module": "AKMMMoney/CashInAdvance.lean"
+    },
+    {
+      "name": "AKMM.Money.cia_must_bind",
+      "kind": "theorem",
+      "module": "AKMMMoney/CashInAdvance.lean"
+    },
+    {
+      "name": "AKMM.Money.cia_mrs_lt_mrt",
+      "kind": "theorem",
+      "module": "AKMMMoney/CashInAdvance.lean"
+    },
+    {
+      "name": "AKMM.Money.cia_log_consumption",
+      "kind": "theorem",
+      "module": "AKMMMoney/CashInAdvance.lean"
+    },
+    {
+      "name": "AKMM.Money.cia_log_compare",
+      "kind": "theorem",
+      "module": "AKMMMoney/CashInAdvance.lean"
+    },
+    {
+      "name": "AKMM.Money.cia_friedman_rule",
+      "kind": "theorem",
+      "module": "AKMMMoney/CashInAdvance.lean"
+    },
+    {
+      "name": "AKMM.Money.tcPsi",
+      "kind": "def",
+      "module": "AKMMMoney/TransactionCosts.lean"
+    },
+    {
+      "name": "AKMM.Money.tc_cost_homogeneous",
+      "kind": "theorem",
+      "module": "AKMMMoney/TransactionCosts.lean"
+    },
+    {
+      "name": "AKMM.Money.tc_psi_hasDerivAt",
+      "kind": "theorem",
+      "module": "AKMMMoney/TransactionCosts.lean"
+    },
+    {
+      "name": "AKMM.Money.eq_17_28",
+      "kind": "theorem",
+      "module": "AKMMMoney/TransactionCosts.lean"
+    },
+    {
+      "name": "AKMM.Money.tc_fisher_lhs",
+      "kind": "theorem",
+      "module": "AKMMMoney/TransactionCosts.lean"
+    },
+    {
+      "name": "AKMM.Money.tcDemand",
+      "kind": "def",
+      "module": "AKMMMoney/TransactionCosts.lean"
+    },
+    {
+      "name": "AKMM.Money.eq_17_29",
+      "kind": "theorem",
+      "module": "AKMMMoney/TransactionCosts.lean"
+    },
+    {
+      "name": "AKMM.Money.tc_demand_homogeneous",
+      "kind": "theorem",
+      "module": "AKMMMoney/TransactionCosts.lean"
+    },
+    {
+      "name": "AKMM.Money.tc_demand_elasticity",
+      "kind": "theorem",
+      "module": "AKMMMoney/TransactionCosts.lean"
+    },
+    {
+      "name": "AKMM.Money.tc_log_demand",
+      "kind": "theorem",
+      "module": "AKMMMoney/TransactionCosts.lean"
+    },
+    {
+      "name": "AKMM.Money.tc_demand_strictAntiOn",
+      "kind": "theorem",
+      "module": "AKMMMoney/TransactionCosts.lean"
+    },
+    {
+      "name": "AKMM.Money.eq_17_35",
+      "kind": "theorem",
+      "module": "AKMMMoney/MoneyInUtility.lean"
+    },
+    {
+      "name": "AKMM.Money.miu_homothetic_partials",
+      "kind": "theorem",
+      "module": "AKMMMoney/MoneyInUtility.lean"
+    },
+    {
+      "name": "AKMM.Money.miu_homothetic_mrs",
+      "kind": "theorem",
+      "module": "AKMMMoney/MoneyInUtility.lean"
+    },
+    {
+      "name": "AKMM.Money.miu_homothetic_demand",
+      "kind": "theorem",
+      "module": "AKMMMoney/MoneyInUtility.lean"
+    },
+    {
+      "name": "AKMM.Money.miu_ces_crs",
+      "kind": "theorem",
+      "module": "AKMMMoney/MoneyInUtility.lean"
+    },
+    {
+      "name": "AKMM.Money.eq_17_36",
+      "kind": "theorem",
+      "module": "AKMMMoney/Hyperinflation.lean"
+    },
+    {
+      "name": "AKMM.Money.eq_17_37",
+      "kind": "theorem",
+      "module": "AKMMMoney/Hyperinflation.lean"
+    },
+    {
+      "name": "AKMM.Money.eq_17_38",
+      "kind": "theorem",
+      "module": "AKMMMoney/Hyperinflation.lean"
+    },
+    {
+      "name": "AKMM.Money.hypIsPath",
+      "kind": "def",
+      "module": "AKMMMoney/Hyperinflation.lean"
+    },
+    {
+      "name": "AKMM.Money.hyp_steady_iff",
+      "kind": "theorem",
+      "module": "AKMMMoney/Hyperinflation.lean"
+    },
+    {
+      "name": "AKMM.Money.hyp_step_exists",
+      "kind": "theorem",
+      "module": "AKMMMoney/Hyperinflation.lean"
+    },
+    {
+      "name": "AKMM.Money.hyp_tendsto_zero",
+      "kind": "theorem",
+      "module": "AKMMMoney/Hyperinflation.lean"
+    },
+    {
+      "name": "AKMM.Money.hyp_exists_path",
+      "kind": "theorem",
+      "module": "AKMMMoney/Hyperinflation.lean"
+    },
+    {
+      "name": "AKMM.Money.hyp_all_paths",
+      "kind": "theorem",
+      "module": "AKMMMoney/Hyperinflation.lean"
+    },
+    {
+      "name": "AKMM.Money.hyp_above_increasing",
+      "kind": "theorem",
+      "module": "AKMMMoney/Hyperinflation.lean"
+    },
+    {
+      "name": "AKMM.Money.hyp_return_lt",
+      "kind": "theorem",
+      "module": "AKMMMoney/Hyperinflation.lean"
+    },
+    {
+      "name": "AKMM.Money.hyp_local_stable",
+      "kind": "theorem",
+      "module": "AKMMMoney/Hyperinflation.lean"
+    },
+    {
+      "name": "AKMM.Money.hyp_local_unstable",
+      "kind": "theorem",
+      "module": "AKMMMoney/Hyperinflation.lean"
+    },
+    {
+      "name": "AKMM.Money.hyp_log_unique",
+      "kind": "theorem",
+      "module": "AKMMMoney/Hyperinflation.lean"
+    },
+    {
+      "name": "AKMM.Money.pegIsEquilibrium",
+      "kind": "def",
+      "module": "AKMMMoney/InterestRules.lean"
+    },
+    {
+      "name": "AKMM.Money.peg_pins",
+      "kind": "theorem",
+      "module": "AKMMMoney/InterestRules.lean"
+    },
+    {
+      "name": "AKMM.Money.peg_c0",
+      "kind": "theorem",
+      "module": "AKMMMoney/InterestRules.lean"
+    },
+    {
+      "name": "AKMM.Money.peg_exists",
+      "kind": "theorem",
+      "module": "AKMMMoney/InterestRules.lean"
+    },
+    {
+      "name": "AKMM.Money.peg_real_indeterminacy",
+      "kind": "theorem",
+      "module": "AKMMMoney/InterestRules.lean"
+    },
+    {
+      "name": "AKMM.Money.ruleMap",
+      "kind": "def",
+      "module": "AKMMMoney/InterestRules.lean"
+    },
+    {
+      "name": "AKMM.Money.eq_17_40",
+      "kind": "theorem",
+      "module": "AKMMMoney/InterestRules.lean"
+    },
+    {
+      "name": "AKMM.Money.rule_target",
+      "kind": "theorem",
+      "module": "AKMMMoney/InterestRules.lean"
+    },
+    {
+      "name": "AKMM.Money.rule_map_hasDerivAt",
+      "kind": "theorem",
+      "module": "AKMMMoney/InterestRules.lean"
+    },
+    {
+      "name": "AKMM.Money.rule_local_bound",
+      "kind": "theorem",
+      "module": "AKMMMoney/InterestRules.lean"
+    },
+    {
+      "name": "AKMM.Money.rule_determinate",
+      "kind": "theorem",
+      "module": "AKMMMoney/InterestRules.lean"
+    },
+    {
+      "name": "AKMM.Money.rule_indeterminate",
+      "kind": "theorem",
+      "module": "AKMMMoney/InterestRules.lean"
+    },
+    {
+      "name": "AKMM.Money.rule_phi_pos_determinate",
+      "kind": "theorem",
+      "module": "AKMMMoney/InterestRules.lean"
+    },
+    {
+      "name": "AKMM.Money.rule_phi_neg_indeterminate",
+      "kind": "theorem",
+      "module": "AKMMMoney/InterestRules.lean"
+    },
+    {
+      "name": "AKMM.Money.rule_phi_very_neg_determinate",
+      "kind": "theorem",
+      "module": "AKMMMoney/InterestRules.lean"
+    },
+    {
+      "name": "AKMM.Money.rule_printed_counterexample",
+      "kind": "theorem",
+      "module": "AKMMMoney/InterestRules.lean"
+    },
+    {
+      "name": "AKMM.Money.rule_knife_edge",
+      "kind": "theorem",
+      "module": "AKMMMoney/InterestRules.lean"
+    },
+    {
+      "name": "AKMM.Money.clH",
+      "kind": "def",
+      "module": "AKMMMoney/CashlessLimit.lean"
+    },
+    {
+      "name": "AKMM.Money.clh",
+      "kind": "def",
+      "module": "AKMMMoney/CashlessLimit.lean"
+    },
+    {
+      "name": "AKMM.Money.clh1",
+      "kind": "def",
+      "module": "AKMMMoney/CashlessLimit.lean"
+    },
+    {
+      "name": "AKMM.Money.clh2",
+      "kind": "def",
+      "module": "AKMMMoney/CashlessLimit.lean"
+    },
+    {
+      "name": "AKMM.Money.clTheta",
+      "kind": "def",
+      "module": "AKMMMoney/CashlessLimit.lean"
+    },
+    {
+      "name": "AKMM.Money.clH_pos",
+      "kind": "theorem",
+      "module": "AKMMMoney/CashlessLimit.lean"
+    },
+    {
+      "name": "AKMM.Money.cl_h_eq_composite",
+      "kind": "theorem",
+      "module": "AKMMMoney/CashlessLimit.lean"
+    },
+    {
+      "name": "AKMM.Money.cl_h_hasDerivAt_c",
+      "kind": "theorem",
+      "module": "AKMMMoney/CashlessLimit.lean"
+    },
+    {
+      "name": "AKMM.Money.cl_h_hasDerivAt_m",
+      "kind": "theorem",
+      "module": "AKMMMoney/CashlessLimit.lean"
+    },
+    {
+      "name": "AKMM.Money.clDemand",
+      "kind": "def",
+      "module": "AKMMMoney/CashlessLimit.lean"
+    },
+    {
+      "name": "AKMM.Money.eq_17_41",
+      "kind": "theorem",
+      "module": "AKMMMoney/CashlessLimit.lean"
+    },
+    {
+      "name": "AKMM.Money.cl_demand_homogeneous",
+      "kind": "theorem",
+      "module": "AKMMMoney/CashlessLimit.lean"
+    },
+    {
+      "name": "AKMM.Money.cl_demand_elasticity",
+      "kind": "theorem",
+      "module": "AKMMMoney/CashlessLimit.lean"
+    },
+    {
+      "name": "AKMM.Money.cl_demand_strictAnti",
+      "kind": "theorem",
+      "module": "AKMMMoney/CashlessLimit.lean"
+    },
+    {
+      "name": "AKMM.Money.cl_demand_tendsto_zero",
+      "kind": "theorem",
+      "module": "AKMMMoney/CashlessLimit.lean"
+    },
+    {
+      "name": "AKMM.Money.cl_footnote_17",
+      "kind": "theorem",
+      "module": "AKMMMoney/CashlessLimit.lean"
+    },
+    {
+      "name": "AKMM.Money.cl_h1_hasDerivAt_c",
+      "kind": "theorem",
+      "module": "AKMMMoney/CashlessLimit.lean"
+    },
+    {
+      "name": "AKMM.Money.cl_h1_hasDerivAt_m",
+      "kind": "theorem",
+      "module": "AKMMMoney/CashlessLimit.lean"
+    },
+    {
+      "name": "AKMM.Money.cl_footnote_18_identities",
+      "kind": "theorem",
+      "module": "AKMMMoney/CashlessLimit.lean"
+    },
+    {
+      "name": "AKMM.Money.cl_h2_mul",
+      "kind": "theorem",
+      "module": "AKMMMoney/CashlessLimit.lean"
+    },
+    {
+      "name": "AKMM.Money.cl_weight_tendsto",
+      "kind": "theorem",
+      "module": "AKMMMoney/CashlessLimit.lean"
+    },
+    {
+      "name": "AKMM.Money.cl_footnote_18_limits",
+      "kind": "theorem",
+      "module": "AKMMMoney/CashlessLimit.lean"
+    },
+    {
+      "name": "AKMM.Money.gb_flow_real",
+      "kind": "theorem",
+      "module": "AKMMMoney/GovernmentBudget.lean"
+    },
+    {
+      "name": "AKMM.Money.gb_iterate",
+      "kind": "theorem",
+      "module": "AKMMMoney/GovernmentBudget.lean"
+    },
+    {
+      "name": "AKMM.Money.eq_17_43",
+      "kind": "theorem",
+      "module": "AKMMMoney/GovernmentBudget.lean"
+    },
+    {
+      "name": "AKMM.Money.gb_printed_discount",
+      "kind": "theorem",
+      "module": "AKMMMoney/GovernmentBudget.lean"
+    },
+    {
+      "name": "AKMM.Money.eq_17_44",
+      "kind": "theorem",
+      "module": "AKMMMoney/GovernmentBudget.lean"
+    },
+    {
+      "name": "AKMM.Money.gb_zero_rate",
+      "kind": "theorem",
+      "module": "AKMMMoney/GovernmentBudget.lean"
+    },
+    {
+      "name": "AKMM.Money.gb_zero_rate_printed",
+      "kind": "theorem",
+      "module": "AKMMMoney/GovernmentBudget.lean"
+    },
+    {
+      "name": "AKMM.Money.gb_stationary",
+      "kind": "theorem",
+      "module": "AKMMMoney/GovernmentBudget.lean"
+    },
+    {
+      "name": "AKMM.Money.gb_omo_irrelevance",
+      "kind": "theorem",
+      "module": "AKMMMoney/GovernmentBudget.lean"
+    },
+    {
+      "name": "AKMM.Money.lf_increasing_part",
+      "kind": "theorem",
+      "module": "AKMMMoney/FiscalMonetary.lean"
+    },
+    {
+      "name": "AKMM.Money.lf_interior_max",
+      "kind": "theorem",
+      "module": "AKMMMoney/FiscalMonetary.lean"
+    },
+    {
+      "name": "AKMM.Money.lf_counterexample",
+      "kind": "theorem",
+      "module": "AKMMMoney/FiscalMonetary.lean"
+    },
+    {
+      "name": "AKMM.Money.lf_tc_no_max",
+      "kind": "theorem",
+      "module": "AKMMMoney/FiscalMonetary.lean"
+    },
+    {
+      "name": "AKMM.Money.ua_stationary",
+      "kind": "theorem",
+      "module": "AKMMMoney/FiscalMonetary.lean"
+    },
+    {
+      "name": "AKMM.Money.ua_dynamic",
+      "kind": "theorem",
+      "module": "AKMMMoney/FiscalMonetary.lean"
+    },
+    {
+      "name": "AKMM.Money.fb_backstop",
+      "kind": "theorem",
+      "module": "AKMMMoney/FiscalMonetary.lean"
+    },
+    {
+      "name": "AKMM.Money.fb_stationary",
+      "kind": "theorem",
+      "module": "AKMMMoney/FiscalMonetary.lean"
+    },
+    {
+      "name": "AKMM.Money.eq_17_45",
+      "kind": "theorem",
+      "module": "AKMMMoney/FiscalMonetary.lean"
+    },
+    {
+      "name": "AKMM.Money.eq_17_46",
+      "kind": "theorem",
+      "module": "AKMMMoney/FiscalMonetary.lean"
+    },
+    {
+      "name": "AKMM.Money.ftpl_price_level",
+      "kind": "theorem",
+      "module": "AKMMMoney/FiscalMonetary.lean"
+    },
+    {
+      "name": "AKMM.Money.ftpl_unique",
+      "kind": "theorem",
+      "module": "AKMMMoney/FiscalMonetary.lean"
+    },
+    {
+      "name": "AKMM.Money.ftpl_none",
+      "kind": "theorem",
+      "module": "AKMMMoney/FiscalMonetary.lean"
+    },
+    {
+      "name": "AKMM.Money.kwUtil",
+      "kind": "def",
+      "module": "AKMMMoney/KarekenWallace.lean"
+    },
+    {
+      "name": "AKMM.Money.kwFeasible",
+      "kind": "def",
+      "module": "AKMMMoney/KarekenWallace.lean"
+    },
+    {
+      "name": "AKMM.Money.kwOptimal",
+      "kind": "def",
+      "module": "AKMMMoney/KarekenWallace.lean"
+    },
+    {
+      "name": "AKMM.Money.kwIsEquilibrium",
+      "kind": "def",
+      "module": "AKMMMoney/KarekenWallace.lean"
+    },
+    {
+      "name": "AKMM.Money.kw_dominated",
+      "kind": "theorem",
+      "module": "AKMMMoney/KarekenWallace.lean"
+    },
+    {
+      "name": "AKMM.Money.kw_equal_returns_util",
+      "kind": "theorem",
+      "module": "AKMMMoney/KarekenWallace.lean"
+    },
+    {
+      "name": "AKMM.Money.kw_optimal_iff",
+      "kind": "theorem",
+      "module": "AKMMMoney/KarekenWallace.lean"
+    },
+    {
+      "name": "AKMM.Money.kw_optimal_comm",
+      "kind": "theorem",
+      "module": "AKMMMoney/KarekenWallace.lean"
+    },
+    {
+      "name": "AKMM.Money.kw_zero_pos",
+      "kind": "theorem",
+      "module": "AKMMMoney/KarekenWallace.lean"
+    },
+    {
+      "name": "AKMM.Money.kw_pos_zero",
+      "kind": "theorem",
+      "module": "AKMMMoney/KarekenWallace.lean"
+    },
+    {
+      "name": "AKMM.Money.kw_structure",
+      "kind": "theorem",
+      "module": "AKMMMoney/KarekenWallace.lean"
+    },
+    {
+      "name": "AKMM.Money.kw_e_constant",
+      "kind": "theorem",
+      "module": "AKMMMoney/KarekenWallace.lean"
+    },
+    {
+      "name": "AKMM.Money.kw_indeterminate",
+      "kind": "theorem",
+      "module": "AKMMMoney/KarekenWallace.lean"
+    },
+    {
+      "name": "AKMM.Money.kw_unvalued",
+      "kind": "theorem",
+      "module": "AKMMMoney/KarekenWallace.lean"
+    },
+    {
+      "name": "AKMM.Money.kw_modified_demand",
+      "kind": "theorem",
+      "module": "AKMMMoney/KarekenWallace.lean"
+    },
+    {
+      "name": "AKMM.Money.kw_limit_formula",
+      "kind": "theorem",
+      "module": "AKMMMoney/KarekenWallace.lean"
+    },
+    {
+      "name": "AKMM.Money.kw_limit_lower",
+      "kind": "theorem",
+      "module": "AKMMMoney/KarekenWallace.lean"
+    },
+    {
+      "name": "AKMM.Money.kw_limit_eq_mg",
+      "kind": "theorem",
+      "module": "AKMMMoney/KarekenWallace.lean"
+    },
+    {
+      "name": "AKMM.Money.kw_gresham",
+      "kind": "theorem",
+      "module": "AKMMMoney/KarekenWallace.lean"
+    },
+    {
+      "name": "AKMM.Money.ma_valuation_high_gt_low",
+      "kind": "theorem",
+      "module": "AKMMMoney/MissingAssets.lean"
+    },
+    {
+      "name": "AKMM.Money.ma_low_constrained",
+      "kind": "theorem",
+      "module": "AKMMMoney/MissingAssets.lean"
+    },
+    {
+      "name": "AKMM.Money.ma_autarky_price",
+      "kind": "theorem",
+      "module": "AKMMMoney/MissingAssets.lean"
+    },
+    {
+      "name": "AKMM.Money.ma_negative_rate_iff",
+      "kind": "theorem",
+      "module": "AKMMMoney/MissingAssets.lean"
+    },
+    {
+      "name": "AKMM.Money.ma_negative_rate_example",
+      "kind": "theorem",
+      "module": "AKMMMoney/MissingAssets.lean"
+    },
+    {
+      "name": "AKMM.Money.ma_price_level",
+      "kind": "theorem",
+      "module": "AKMMMoney/MissingAssets.lean"
+    }
+  ],
+  "full_build": "passed",
+  "fresh_source_compilation": "passed",
+  "fresh_source_lint_options": [
+    "-Dlinter.mathlibStandardSet=true",
+    "-Dlinter.style.header=false"
+  ],
+  "axioms": {
+    "AKMM.Money.olgUtil": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.olgFeasible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.olgOptimal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.olgDemand": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.eq_17_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.olg_util_sub_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.olg_demand_feasible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.olg_demand_marginal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.eq_17_3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.olg_demand_eq_max": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.olg_interior_cons": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.olg_interior_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.olgMoneyUtil": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.olgMoneyFeasible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.olgMoneyOptimal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.olgIsEquilibrium": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.olg_moneyUtil_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.olg_moneyOptimal_iff_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.olg_moneyOptimal_zero_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.olg_moneyOptimal_zero_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.olg_step_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.eq_17_5": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.eq_17_5_div": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.eq_17_5_real": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.olg_closed_form_step": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.olg_classification": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.olg_no_monetary": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.olg_nonmonetary_exists": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.olg_continuum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.olg_unique_given_p0": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.olg_stationary": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.olg_decreasing_to_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.olgMap": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.olg_map_fixed_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.olg_map_strictMonoOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.olg_map_hasDerivAt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.olg_map_slopes": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.olg_map_domain": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.olg_nominal_neutral": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.olgIndirect": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.olg_indirect_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.olg_indirect_strictMonoOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.olgCohortUtil": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.olg_cohort_util_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.olg_return_strictMonoOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.olg_ranking": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.olg_monetary_improves_autarky": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.olg_stationary_dominates": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.olg_stationary_welfare": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.olg_smoothing_hurts_old": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.olg_return_limit": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.olgMiao": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.olg_miao_paths": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.olg_miao_stationary_pareto": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.olg_miao_autarky_pareto_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.mgStock": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.mgIsEquilibrium": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.mgStock_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.mgStock_succ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.mg_step_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.mg_stationary_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.mg_return": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.mg_value_strictAntiOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.eq_17_11": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.dyn_unbounded": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.eq_17_12": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.eq_17_12_prices": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.eq_17_13": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.dyn_no_value_of_pos_rate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.eq_17_14": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.dyn_printed_product": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.dyn_tvc_money_vanishes": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.dyn_no_valued_money": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.eq_17_15": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.eq_17_19": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.cia_stationary_growth": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.eq_17_24": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.cia_must_bind": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.cia_mrs_lt_mrt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.cia_log_consumption": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.cia_log_compare": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.cia_friedman_rule": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.tcPsi": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.tc_cost_homogeneous": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.tc_psi_hasDerivAt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.eq_17_28": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.tc_fisher_lhs": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.tcDemand": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.eq_17_29": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.tc_demand_homogeneous": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.tc_demand_elasticity": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.tc_log_demand": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.tc_demand_strictAntiOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.eq_17_35": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.miu_homothetic_partials": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.miu_homothetic_mrs": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.miu_homothetic_demand": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.miu_ces_crs": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.eq_17_36": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.eq_17_37": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.eq_17_38": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.hypIsPath": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.hyp_steady_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.hyp_step_exists": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.hyp_tendsto_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.hyp_exists_path": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.hyp_all_paths": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.hyp_above_increasing": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.hyp_return_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.hyp_local_stable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.hyp_local_unstable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.hyp_log_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.pegIsEquilibrium": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.peg_pins": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.peg_c0": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.peg_exists": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.peg_real_indeterminacy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.ruleMap": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.eq_17_40": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.rule_target": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.rule_map_hasDerivAt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.rule_local_bound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.rule_determinate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.rule_indeterminate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.rule_phi_pos_determinate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.rule_phi_neg_indeterminate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.rule_phi_very_neg_determinate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.rule_printed_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.rule_knife_edge": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.clH": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.clh": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.clh1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.clh2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.clTheta": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.clH_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.cl_h_eq_composite": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.cl_h_hasDerivAt_c": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.cl_h_hasDerivAt_m": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.clDemand": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.eq_17_41": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.cl_demand_homogeneous": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.cl_demand_elasticity": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.cl_demand_strictAnti": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.cl_demand_tendsto_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.cl_footnote_17": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.cl_h1_hasDerivAt_c": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.cl_h1_hasDerivAt_m": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.cl_footnote_18_identities": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.cl_h2_mul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.cl_weight_tendsto": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.cl_footnote_18_limits": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.gb_flow_real": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.gb_iterate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.eq_17_43": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.gb_printed_discount": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.eq_17_44": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.gb_zero_rate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.gb_zero_rate_printed": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.gb_stationary": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.gb_omo_irrelevance": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.lf_increasing_part": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.lf_interior_max": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.lf_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.lf_tc_no_max": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.ua_stationary": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.ua_dynamic": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.fb_backstop": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.fb_stationary": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.eq_17_45": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.eq_17_46": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.ftpl_price_level": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.ftpl_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.ftpl_none": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.kwUtil": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.kwFeasible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.kwOptimal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.kwIsEquilibrium": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.kw_dominated": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.kw_equal_returns_util": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.kw_optimal_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.kw_optimal_comm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.kw_zero_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.kw_pos_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.kw_structure": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.kw_e_constant": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.kw_indeterminate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.kw_unvalued": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.kw_modified_demand": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.kw_limit_formula": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.kw_limit_lower": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.kw_limit_eq_mg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.kw_gresham": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.ma_valuation_high_gt_low": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.ma_low_constrained": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.ma_autarky_price": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.ma_negative_rate_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.ma_negative_rate_example": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Money.ma_price_level": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  "source_sha256": {
+    "AKMMMoney/OLGDemand.lean": "645d9d406347b9001426656a423557b650687cf3dc9cab6ee64c783ac0b01c2f",
+    "AKMMMoney/OLGEquilibrium.lean": "3c17b90d77d94422160ca1959fdfb1bf7a08a228b6b2fc389ecd3b85ad2ae50e",
+    "AKMMMoney/OLGWelfare.lean": "bb915afab5f8da63f6392d6cd5eeac6727333dd66907ed0b28ff8b921fd524a7",
+    "AKMMMoney/OLGMoneyGrowth.lean": "34c92bd30c961ffa7d137939c64c8ff006d7e0790bca3cca59602f67b7c9867c",
+    "AKMMMoney/Dynastic.lean": "e46f3f65ff024368f4d05adedc4ac3a4eabc9879c76f431c79fcc837b207b306",
+    "AKMMMoney/CashInAdvance.lean": "2636562d6796258b8f418ea0703e334c98a8a07aa99fae87ef5dc42192650295",
+    "AKMMMoney/TransactionCosts.lean": "06cd0a4dcbd0dc1811f16cc963aafa76251de7f739cc27198755999f66829dd4",
+    "AKMMMoney/MoneyInUtility.lean": "10b94436e76a75045ddc1b82d7035f52e099b4a38e508e69c398153dcf8ede54",
+    "AKMMMoney/Hyperinflation.lean": "91e35d22ef20bd5111a59e33e26d1b021bba23ec20641294847d0bbb231193d9",
+    "AKMMMoney/InterestRules.lean": "1514881023bf582f314a96cae67957802ed476865cd16e69a797c4c48c87d517",
+    "AKMMMoney/CashlessLimit.lean": "64e29f26eace48bacb9b0f04906286bc6785b587460c3c3d1bfbdef79c3a3023",
+    "AKMMMoney/GovernmentBudget.lean": "61fa5a4b74d31a22d33c1f40356bda93de4d5891f36346dcab16b7efe4f4f058",
+    "AKMMMoney/FiscalMonetary.lean": "d57a2718cb41062ddcd88dc85b0035bacc4c6cde2ae415931bcbe9caa45dcd39",
+    "AKMMMoney/KarekenWallace.lean": "e2dce75d3412b32ff76e163be4f5b7b1bbb5d4864282c4484c1222a52a714938",
+    "AKMMMoney/MissingAssets.lean": "b13a2b177868df79c0c62382ba60540335b36823f16a1e7eece1947e1067a4c7",
+    "AKMMMoney.lean": "9af7637c77f1fcf28ed7a95f4544cd4c9a041bd6e0d01d6d4a09184bea46916e",
+    "lean-toolchain": "8733782dc070a99b312039cda424f601b80f3be6f6f512627da5ba25adc27632",
+    "lakefile.toml": "6ee3a8a7c7d4b7af5cff51a0a2593ea10d4df0e3f05337457b32b46a3c26ca0c",
+    "lake-manifest.json": "2daf4557f1a0465a9de78fd3af59c202c993088dd7f63fae03822e5e91429afd",
+    "proof-manifest.json": "b3549e0f40e2a90774d270d38cf501592418d89472c24749b2a0162a718b6de9",
+    "scripts/verify.py": "a70b1fa704dd590f937f8b37682afa88a9d85a9150065acb935c7d2c9589da3b",
+    "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  },
+  "fresh_audit_sha256": "50ed82babb18220fed4bee9f5f115b6815847efd8f5724e4cd1b075f901a6562",
+  "lean_toolchain": "leanprover/lean4:v4.34.0",
+  "scope": "AKMM Chapter 17 (pp. 493-531): money in overlapping-generations, dynastic, reduced-form and missing-asset models; policy, indeterminacy, government budgets and multiple currencies.",
+  "source": "Marina Azzimonti, Per Krusell, Alisdair McKay and Toshihiko Mukoyama, Macroeconomics (draft of December 2025), Chapter 17"
+}

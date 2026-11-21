@@ -1,0 +1,47 @@
+name = "AKMMUncertainty"
+version = "0.1.0"
+keywords = ["math", "economics", "macroeconomics"]
+defaultTargets = ["AKMMUncertainty"]
+
+[leanOptions]
+pp.unicode.fun = true # pretty-prints `fun a ↦ b`
+autoImplicit = false
+relaxedAutoImplicit = false
+weak.linter.mathlibStandardSet = true
+maxSynthPendingDepth = 3
+
+[[require]]
+name = "mathlib"
+git = "https://github.com/leanprover-community/mathlib4.git"
+rev = "v4.34.0"
+
+[[require]]
+name = "RationalExpectations"
+path = "../../EconomicDynamics/RationalExpectations"
+
+[[require]]
+name = "MarkovProcesses"
+path = "../../EconomicDynamics/MarkovProcesses"
+
+[[require]]
+name = "CompleteMarkets"
+path = "../../EconomicDynamics/CompleteMarkets"
+
+
+
+[[require]]
+name = "InternationalFinancialMarkets"
+git = "https://github.com/LeanEconomics/InternationalEconomics.git"
+rev = "8dd8e672a5823910a34dcfa8e8893d7e8a4d06ad"
+subDir = "InternationalFinancialMarkets"
+
+[[require]]
+name = "AKMMDynamicOptimization"
+path = "../DynamicOptimization"
+
+[[require]]
+name = "AKMMCompetitiveEquilibrium"
+path = "../CompetitiveEquilibrium"
+
+[[lean_lib]]
+name = "AKMMUncertainty"

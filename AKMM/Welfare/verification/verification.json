@@ -1,0 +1,1842 @@
+{
+  "checked_at_utc": "2026-11-12T18:10:58.027742+00:00",
+  "theorems": 141,
+  "module_theorems": {
+    "AKMMWelfare/FirstWelfare.lean": 10,
+    "AKMMWelfare/Dynastic.lean": 11,
+    "AKMMWelfare/Externality.lean": 6,
+    "AKMMWelfare/Borrowing.lean": 13,
+    "AKMMWelfare/MarketPower.lean": 16,
+    "AKMMWelfare/WelfareMeasures.lean": 4,
+    "AKMMWelfare/OGEndowment.lean": 20,
+    "AKMMWelfare/OGProduction.lean": 19,
+    "AKMMWelfare/WarmGlow.lean": 11,
+    "AKMMWelfare/BalaskoShell.lean": 22,
+    "AKMMWelfare/GoldenRule.lean": 9
+  },
+  "audited_declarations": 179,
+  "declarations": [
+    {
+      "name": "AKMM.Welfare.fwValue",
+      "kind": "def",
+      "module": "AKMMWelfare/FirstWelfare.lean"
+    },
+    {
+      "name": "AKMM.Welfare.fwStrict",
+      "kind": "def",
+      "module": "AKMMWelfare/FirstWelfare.lean"
+    },
+    {
+      "name": "AKMM.Welfare.fwFeasible",
+      "kind": "def",
+      "module": "AKMMWelfare/FirstWelfare.lean"
+    },
+    {
+      "name": "AKMM.Welfare.fwParetoOptimal",
+      "kind": "def",
+      "module": "AKMMWelfare/FirstWelfare.lean"
+    },
+    {
+      "name": "AKMM.Welfare.fwLNS",
+      "kind": "def",
+      "module": "AKMMWelfare/FirstWelfare.lean"
+    },
+    {
+      "name": "AKMM.Welfare.fwCompEqT",
+      "kind": "def",
+      "module": "AKMMWelfare/FirstWelfare.lean"
+    },
+    {
+      "name": "AKMM.Welfare.fwCompEq",
+      "kind": "def",
+      "module": "AKMMWelfare/FirstWelfare.lean"
+    },
+    {
+      "name": "AKMM.Welfare.fw_value_ge",
+      "kind": "theorem",
+      "module": "AKMMWelfare/FirstWelfare.lean"
+    },
+    {
+      "name": "AKMM.Welfare.fw_value_gt",
+      "kind": "theorem",
+      "module": "AKMMWelfare/FirstWelfare.lean"
+    },
+    {
+      "name": "AKMM.Welfare.fw_value_sum",
+      "kind": "theorem",
+      "module": "AKMMWelfare/FirstWelfare.lean"
+    },
+    {
+      "name": "AKMM.Welfare.fwt_lump_sum",
+      "kind": "theorem",
+      "module": "AKMMWelfare/FirstWelfare.lean"
+    },
+    {
+      "name": "AKMM.Welfare.theorem_6_1",
+      "kind": "theorem",
+      "module": "AKMMWelfare/FirstWelfare.lean"
+    },
+    {
+      "name": "AKMM.Welfare.fw_price_nonneg",
+      "kind": "theorem",
+      "module": "AKMMWelfare/FirstWelfare.lean"
+    },
+    {
+      "name": "AKMM.Welfare.fwBadPref",
+      "kind": "def",
+      "module": "AKMMWelfare/FirstWelfare.lean"
+    },
+    {
+      "name": "AKMM.Welfare.theorem_6_1_counterexample",
+      "kind": "theorem",
+      "module": "AKMMWelfare/FirstWelfare.lean"
+    },
+    {
+      "name": "AKMM.Welfare.theorem_6_1_instance",
+      "kind": "theorem",
+      "module": "AKMMWelfare/FirstWelfare.lean"
+    },
+    {
+      "name": "AKMM.Welfare.tax_inelastic_labour",
+      "kind": "theorem",
+      "module": "AKMMWelfare/FirstWelfare.lean"
+    },
+    {
+      "name": "AKMM.Welfare.tax_labour_wedge",
+      "kind": "theorem",
+      "module": "AKMMWelfare/FirstWelfare.lean"
+    },
+    {
+      "name": "AKMM.Welfare.dyFeasible",
+      "kind": "def",
+      "module": "AKMMWelfare/Dynastic.lean"
+    },
+    {
+      "name": "AKMM.Welfare.dyU",
+      "kind": "def",
+      "module": "AKMMWelfare/Dynastic.lean"
+    },
+    {
+      "name": "AKMM.Welfare.dyParetoOptimal",
+      "kind": "def",
+      "module": "AKMMWelfare/Dynastic.lean"
+    },
+    {
+      "name": "AKMM.Welfare.dyCompEq",
+      "kind": "def",
+      "module": "AKMMWelfare/Dynastic.lean"
+    },
+    {
+      "name": "AKMM.Welfare.dy_value_summable",
+      "kind": "theorem",
+      "module": "AKMMWelfare/Dynastic.lean"
+    },
+    {
+      "name": "AKMM.Welfare.dy_lns",
+      "kind": "theorem",
+      "module": "AKMMWelfare/Dynastic.lean"
+    },
+    {
+      "name": "AKMM.Welfare.fwt_dynastic",
+      "kind": "theorem",
+      "module": "AKMMWelfare/Dynastic.lean"
+    },
+    {
+      "name": "AKMM.Welfare.dyPlannerOptimal",
+      "kind": "def",
+      "module": "AKMMWelfare/Dynastic.lean"
+    },
+    {
+      "name": "AKMM.Welfare.negishi_planner_pareto",
+      "kind": "theorem",
+      "module": "AKMMWelfare/Dynastic.lean"
+    },
+    {
+      "name": "AKMM.Welfare.eq_6_2",
+      "kind": "theorem",
+      "module": "AKMMWelfare/Dynastic.lean"
+    },
+    {
+      "name": "AKMM.Welfare.dy_planner_foc",
+      "kind": "theorem",
+      "module": "AKMMWelfare/Dynastic.lean"
+    },
+    {
+      "name": "AKMM.Welfare.eq_6_3",
+      "kind": "theorem",
+      "module": "AKMMWelfare/Dynastic.lean"
+    },
+    {
+      "name": "AKMM.Welfare.negishi_coincide",
+      "kind": "theorem",
+      "module": "AKMMWelfare/Dynastic.lean"
+    },
+    {
+      "name": "AKMM.Welfare.negishi_psi_eq_p",
+      "kind": "theorem",
+      "module": "AKMMWelfare/Dynastic.lean"
+    },
+    {
+      "name": "AKMM.Welfare.negishi_ce_solves_planner",
+      "kind": "theorem",
+      "module": "AKMMWelfare/Dynastic.lean"
+    },
+    {
+      "name": "AKMM.Welfare.negishi_fwt",
+      "kind": "theorem",
+      "module": "AKMMWelfare/Dynastic.lean"
+    },
+    {
+      "name": "AKMM.Welfare.ext_equilibrium_hours",
+      "kind": "theorem",
+      "module": "AKMMWelfare/Externality.lean"
+    },
+    {
+      "name": "AKMM.Welfare.ext_equilibrium_hours_unique",
+      "kind": "theorem",
+      "module": "AKMMWelfare/Externality.lean"
+    },
+    {
+      "name": "AKMM.Welfare.ext_planner_hours",
+      "kind": "theorem",
+      "module": "AKMMWelfare/Externality.lean"
+    },
+    {
+      "name": "AKMM.Welfare.ext_not_optimal",
+      "kind": "theorem",
+      "module": "AKMMWelfare/Externality.lean"
+    },
+    {
+      "name": "AKMM.Welfare.ext_overwork",
+      "kind": "theorem",
+      "module": "AKMMWelfare/Externality.lean"
+    },
+    {
+      "name": "AKMM.Welfare.ext_fn7",
+      "kind": "theorem",
+      "module": "AKMMWelfare/Externality.lean"
+    },
+    {
+      "name": "AKMM.Welfare.brEndow",
+      "kind": "def",
+      "module": "AKMMWelfare/Borrowing.lean"
+    },
+    {
+      "name": "AKMM.Welfare.brCons",
+      "kind": "def",
+      "module": "AKMMWelfare/Borrowing.lean"
+    },
+    {
+      "name": "AKMM.Welfare.brEndow_spec",
+      "kind": "theorem",
+      "module": "AKMMWelfare/Borrowing.lean"
+    },
+    {
+      "name": "AKMM.Welfare.brCons_spec",
+      "kind": "theorem",
+      "module": "AKMMWelfare/Borrowing.lean"
+    },
+    {
+      "name": "AKMM.Welfare.borrow_endow_value",
+      "kind": "theorem",
+      "module": "AKMMWelfare/Borrowing.lean"
+    },
+    {
+      "name": "AKMM.Welfare.borrow_unrestricted",
+      "kind": "theorem",
+      "module": "AKMMWelfare/Borrowing.lean"
+    },
+    {
+      "name": "AKMM.Welfare.borrow_possibility_set",
+      "kind": "theorem",
+      "module": "AKMMWelfare/Borrowing.lean"
+    },
+    {
+      "name": "AKMM.Welfare.borrow_possibility_set_printed_counterexample",
+      "kind": "theorem",
+      "module": "AKMMWelfare/Borrowing.lean"
+    },
+    {
+      "name": "AKMM.Welfare.nbCons",
+      "kind": "def",
+      "module": "AKMMWelfare/Borrowing.lean"
+    },
+    {
+      "name": "AKMM.Welfare.nbFeasible",
+      "kind": "def",
+      "module": "AKMMWelfare/Borrowing.lean"
+    },
+    {
+      "name": "AKMM.Welfare.nbOptimal",
+      "kind": "def",
+      "module": "AKMMWelfare/Borrowing.lean"
+    },
+    {
+      "name": "AKMM.Welfare.nbEquilibrium",
+      "kind": "def",
+      "module": "AKMMWelfare/Borrowing.lean"
+    },
+    {
+      "name": "AKMM.Welfare.borrow_autarky",
+      "kind": "theorem",
+      "module": "AKMMWelfare/Borrowing.lean"
+    },
+    {
+      "name": "AKMM.Welfare.borrow_euler_ineq",
+      "kind": "theorem",
+      "module": "AKMMWelfare/Borrowing.lean"
+    },
+    {
+      "name": "AKMM.Welfare.borrow_autarky_optimal",
+      "kind": "theorem",
+      "module": "AKMMWelfare/Borrowing.lean"
+    },
+    {
+      "name": "AKMM.Welfare.borrow_endow_log_summable",
+      "kind": "theorem",
+      "module": "AKMMWelfare/Borrowing.lean"
+    },
+    {
+      "name": "AKMM.Welfare.borrow_equilibrium_iff",
+      "kind": "theorem",
+      "module": "AKMMWelfare/Borrowing.lean"
+    },
+    {
+      "name": "AKMM.Welfare.borrow_interest_rate",
+      "kind": "theorem",
+      "module": "AKMMWelfare/Borrowing.lean"
+    },
+    {
+      "name": "AKMM.Welfare.borrow_autarky_not_optimal",
+      "kind": "theorem",
+      "module": "AKMMWelfare/Borrowing.lean"
+    },
+    {
+      "name": "AKMM.Welfare.ds_rpow_ratio",
+      "kind": "theorem",
+      "module": "AKMMWelfare/MarketPower.lean"
+    },
+    {
+      "name": "AKMM.Welfare.eq_6_4",
+      "kind": "theorem",
+      "module": "AKMMWelfare/MarketPower.lean"
+    },
+    {
+      "name": "AKMM.Welfare.ds_expenditure",
+      "kind": "theorem",
+      "module": "AKMMWelfare/MarketPower.lean"
+    },
+    {
+      "name": "AKMM.Welfare.ds_price_index",
+      "kind": "theorem",
+      "module": "AKMMWelfare/MarketPower.lean"
+    },
+    {
+      "name": "AKMM.Welfare.ds_demand",
+      "kind": "theorem",
+      "module": "AKMMWelfare/MarketPower.lean"
+    },
+    {
+      "name": "AKMM.Welfare.ds_price_index_homogeneous",
+      "kind": "theorem",
+      "module": "AKMMWelfare/MarketPower.lean"
+    },
+    {
+      "name": "AKMM.Welfare.dsProfit",
+      "kind": "def",
+      "module": "AKMMWelfare/MarketPower.lean"
+    },
+    {
+      "name": "AKMM.Welfare.ds_revenue",
+      "kind": "theorem",
+      "module": "AKMMWelfare/MarketPower.lean"
+    },
+    {
+      "name": "AKMM.Welfare.ds_firm_optimum",
+      "kind": "theorem",
+      "module": "AKMMWelfare/MarketPower.lean"
+    },
+    {
+      "name": "AKMM.Welfare.ds_no_max_lt_one",
+      "kind": "theorem",
+      "module": "AKMMWelfare/MarketPower.lean"
+    },
+    {
+      "name": "AKMM.Welfare.ds_no_max_eq_one",
+      "kind": "theorem",
+      "module": "AKMMWelfare/MarketPower.lean"
+    },
+    {
+      "name": "AKMM.Welfare.ds_symmetric_wage",
+      "kind": "theorem",
+      "module": "AKMMWelfare/MarketPower.lean"
+    },
+    {
+      "name": "AKMM.Welfare.ds_equilibrium_condition",
+      "kind": "theorem",
+      "module": "AKMMWelfare/MarketPower.lean"
+    },
+    {
+      "name": "AKMM.Welfare.ds_rhs_strictMono",
+      "kind": "theorem",
+      "module": "AKMMWelfare/MarketPower.lean"
+    },
+    {
+      "name": "AKMM.Welfare.ds_unique",
+      "kind": "theorem",
+      "module": "AKMMWelfare/MarketPower.lean"
+    },
+    {
+      "name": "AKMM.Welfare.ds_planner_foc",
+      "kind": "theorem",
+      "module": "AKMMWelfare/MarketPower.lean"
+    },
+    {
+      "name": "AKMM.Welfare.ds_underproduction",
+      "kind": "theorem",
+      "module": "AKMMWelfare/MarketPower.lean"
+    },
+    {
+      "name": "AKMM.Welfare.welfare_cev_static",
+      "kind": "theorem",
+      "module": "AKMMWelfare/WelfareMeasures.lean"
+    },
+    {
+      "name": "AKMM.Welfare.welfare_cev_dynamic_log",
+      "kind": "theorem",
+      "module": "AKMMWelfare/WelfareMeasures.lean"
+    },
+    {
+      "name": "AKMM.Welfare.veil_equal_split",
+      "kind": "theorem",
+      "module": "AKMMWelfare/WelfareMeasures.lean"
+    },
+    {
+      "name": "AKMM.Welfare.veil_optimum_equal",
+      "kind": "theorem",
+      "module": "AKMMWelfare/WelfareMeasures.lean"
+    },
+    {
+      "name": "AKMM.Welfare.eq_6_5_6_6",
+      "kind": "theorem",
+      "module": "AKMMWelfare/OGEndowment.lean"
+    },
+    {
+      "name": "AKMM.Welfare.og_log_consumption",
+      "kind": "theorem",
+      "module": "AKMMWelfare/OGEndowment.lean"
+    },
+    {
+      "name": "AKMM.Welfare.og_log_equilibrium_iff",
+      "kind": "theorem",
+      "module": "AKMMWelfare/OGEndowment.lean"
+    },
+    {
+      "name": "AKMM.Welfare.ogFeasible",
+      "kind": "def",
+      "module": "AKMMWelfare/OGEndowment.lean"
+    },
+    {
+      "name": "AKMM.Welfare.ogDominates",
+      "kind": "def",
+      "module": "AKMMWelfare/OGEndowment.lean"
+    },
+    {
+      "name": "AKMM.Welfare.ogParetoOptimal",
+      "kind": "def",
+      "module": "AKMMWelfare/OGEndowment.lean"
+    },
+    {
+      "name": "AKMM.Welfare.ogLogU",
+      "kind": "def",
+      "module": "AKMMWelfare/OGEndowment.lean"
+    },
+    {
+      "name": "AKMM.Welfare.ogADEquilibrium",
+      "kind": "def",
+      "module": "AKMMWelfare/OGEndowment.lean"
+    },
+    {
+      "name": "AKMM.Welfare.og_ad_of_seq",
+      "kind": "theorem",
+      "module": "AKMMWelfare/OGEndowment.lean"
+    },
+    {
+      "name": "AKMM.Welfare.og_fwt_value",
+      "kind": "theorem",
+      "module": "AKMMWelfare/OGEndowment.lean"
+    },
+    {
+      "name": "AKMM.Welfare.og_fwt_finite_value",
+      "kind": "theorem",
+      "module": "AKMMWelfare/OGEndowment.lean"
+    },
+    {
+      "name": "AKMM.Welfare.og_logU_mono",
+      "kind": "theorem",
+      "module": "AKMMWelfare/OGEndowment.lean"
+    },
+    {
+      "name": "AKMM.Welfare.og_stationary_ad",
+      "kind": "theorem",
+      "module": "AKMMWelfare/OGEndowment.lean"
+    },
+    {
+      "name": "AKMM.Welfare.og_equal_endowments_optimal",
+      "kind": "theorem",
+      "module": "AKMMWelfare/OGEndowment.lean"
+    },
+    {
+      "name": "AKMM.Welfare.og_stationary_improvement",
+      "kind": "theorem",
+      "module": "AKMMWelfare/OGEndowment.lean"
+    },
+    {
+      "name": "AKMM.Welfare.og_seqPrice_const",
+      "kind": "theorem",
+      "module": "AKMMWelfare/OGEndowment.lean"
+    },
+    {
+      "name": "AKMM.Welfare.og_balasko_shell_stationary_log",
+      "kind": "theorem",
+      "module": "AKMMWelfare/OGEndowment.lean"
+    },
+    {
+      "name": "AKMM.Welfare.og_balasko_shell_sums",
+      "kind": "theorem",
+      "module": "AKMMWelfare/OGEndowment.lean"
+    },
+    {
+      "name": "AKMM.Welfare.og_example_3_1",
+      "kind": "theorem",
+      "module": "AKMMWelfare/OGEndowment.lean"
+    },
+    {
+      "name": "AKMM.Welfare.og_example_1_3",
+      "kind": "theorem",
+      "module": "AKMMWelfare/OGEndowment.lean"
+    },
+    {
+      "name": "AKMM.Welfare.og_example_2_2",
+      "kind": "theorem",
+      "module": "AKMMWelfare/OGEndowment.lean"
+    },
+    {
+      "name": "AKMM.Welfare.og_finite_transfers_hurt",
+      "kind": "theorem",
+      "module": "AKMMWelfare/OGEndowment.lean"
+    },
+    {
+      "name": "AKMM.Welfare.og_limit_rate_gt_one",
+      "kind": "theorem",
+      "module": "AKMMWelfare/OGEndowment.lean"
+    },
+    {
+      "name": "AKMM.Welfare.og_limit_rate_lt_one_log",
+      "kind": "theorem",
+      "module": "AKMMWelfare/OGEndowment.lean"
+    },
+    {
+      "name": "AKMM.Welfare.ogCexOld",
+      "kind": "def",
+      "module": "AKMMWelfare/OGEndowment.lean"
+    },
+    {
+      "name": "AKMM.Welfare.og_limit_rate_one_counterexample",
+      "kind": "theorem",
+      "module": "AKMMWelfare/OGEndowment.lean"
+    },
+    {
+      "name": "AKMM.Welfare.storage_saving",
+      "kind": "theorem",
+      "module": "AKMMWelfare/OGProduction.lean"
+    },
+    {
+      "name": "AKMM.Welfare.storage_printed_counterexample",
+      "kind": "theorem",
+      "module": "AKMMWelfare/OGProduction.lean"
+    },
+    {
+      "name": "AKMM.Welfare.stFeasible",
+      "kind": "def",
+      "module": "AKMMWelfare/OGProduction.lean"
+    },
+    {
+      "name": "AKMM.Welfare.stParetoOptimal",
+      "kind": "def",
+      "module": "AKMMWelfare/OGProduction.lean"
+    },
+    {
+      "name": "AKMM.Welfare.stEqAlloc",
+      "kind": "def",
+      "module": "AKMMWelfare/OGProduction.lean"
+    },
+    {
+      "name": "AKMM.Welfare.stEqAlloc_feasible",
+      "kind": "theorem",
+      "module": "AKMMWelfare/OGProduction.lean"
+    },
+    {
+      "name": "AKMM.Welfare.storage_not_optimal",
+      "kind": "theorem",
+      "module": "AKMMWelfare/OGProduction.lean"
+    },
+    {
+      "name": "AKMM.Welfare.storage_optimal",
+      "kind": "theorem",
+      "module": "AKMMWelfare/OGProduction.lean"
+    },
+    {
+      "name": "AKMM.Welfare.storage_optimal_iff",
+      "kind": "theorem",
+      "module": "AKMMWelfare/OGProduction.lean"
+    },
+    {
+      "name": "AKMM.Welfare.diamond_law_of_motion",
+      "kind": "theorem",
+      "module": "AKMMWelfare/OGProduction.lean"
+    },
+    {
+      "name": "AKMM.Welfare.theorem_6_2_prices",
+      "kind": "theorem",
+      "module": "AKMMWelfare/OGProduction.lean"
+    },
+    {
+      "name": "AKMM.Welfare.dePath",
+      "kind": "def",
+      "module": "AKMMWelfare/OGProduction.lean"
+    },
+    {
+      "name": "AKMM.Welfare.deCons",
+      "kind": "def",
+      "module": "AKMMWelfare/OGProduction.lean"
+    },
+    {
+      "name": "AKMM.Welfare.deEfficient",
+      "kind": "def",
+      "module": "AKMMWelfare/OGProduction.lean"
+    },
+    {
+      "name": "AKMM.Welfare.theorem_6_2_efficient",
+      "kind": "theorem",
+      "module": "AKMMWelfare/OGProduction.lean"
+    },
+    {
+      "name": "AKMM.Welfare.theorem_6_2_inefficient",
+      "kind": "theorem",
+      "module": "AKMMWelfare/OGProduction.lean"
+    },
+    {
+      "name": "AKMM.Welfare.theorem_6_2",
+      "kind": "theorem",
+      "module": "AKMMWelfare/OGProduction.lean"
+    },
+    {
+      "name": "AKMM.Welfare.de_quadratic_expansion",
+      "kind": "theorem",
+      "module": "AKMMWelfare/OGProduction.lean"
+    },
+    {
+      "name": "AKMM.Welfare.theorem_6_2_instance_efficient",
+      "kind": "theorem",
+      "module": "AKMMWelfare/OGProduction.lean"
+    },
+    {
+      "name": "AKMM.Welfare.theorem_6_2_instance_inefficient",
+      "kind": "theorem",
+      "module": "AKMMWelfare/OGProduction.lean"
+    },
+    {
+      "name": "AKMM.Welfare.theorem_A5_inefficient",
+      "kind": "theorem",
+      "module": "AKMMWelfare/OGProduction.lean"
+    },
+    {
+      "name": "AKMM.Welfare.theorem_A5_efficient",
+      "kind": "theorem",
+      "module": "AKMMWelfare/OGProduction.lean"
+    },
+    {
+      "name": "AKMM.Welfare.theorem_A5",
+      "kind": "theorem",
+      "module": "AKMMWelfare/OGProduction.lean"
+    },
+    {
+      "name": "AKMM.Welfare.theorem_A5_cass",
+      "kind": "theorem",
+      "module": "AKMMWelfare/OGProduction.lean"
+    },
+    {
+      "name": "AKMM.Welfare.appendix_6A_printed_f",
+      "kind": "theorem",
+      "module": "AKMMWelfare/OGProduction.lean"
+    },
+    {
+      "name": "AKMM.Welfare.warmglow_consumption",
+      "kind": "theorem",
+      "module": "AKMMWelfare/WarmGlow.lean"
+    },
+    {
+      "name": "AKMM.Welfare.warmglow_law_of_motion",
+      "kind": "theorem",
+      "module": "AKMMWelfare/WarmGlow.lean"
+    },
+    {
+      "name": "AKMM.Welfare.warmglow_steady_iff",
+      "kind": "theorem",
+      "module": "AKMMWelfare/WarmGlow.lean"
+    },
+    {
+      "name": "AKMM.Welfare.warmglow_sign",
+      "kind": "theorem",
+      "module": "AKMMWelfare/WarmGlow.lean"
+    },
+    {
+      "name": "AKMM.Welfare.warmglow_two_steady_states",
+      "kind": "theorem",
+      "module": "AKMMWelfare/WarmGlow.lean"
+    },
+    {
+      "name": "AKMM.Welfare.warmglow_slopes",
+      "kind": "theorem",
+      "module": "AKMMWelfare/WarmGlow.lean"
+    },
+    {
+      "name": "AKMM.Welfare.warmglow_stable",
+      "kind": "theorem",
+      "module": "AKMMWelfare/WarmGlow.lean"
+    },
+    {
+      "name": "AKMM.Welfare.warmglow_lower_unstable",
+      "kind": "theorem",
+      "module": "AKMMWelfare/WarmGlow.lean"
+    },
+    {
+      "name": "AKMM.Welfare.warmglow_inefficient",
+      "kind": "theorem",
+      "module": "AKMMWelfare/WarmGlow.lean"
+    },
+    {
+      "name": "AKMM.Welfare.warmglow_instance",
+      "kind": "theorem",
+      "module": "AKMMWelfare/WarmGlow.lean"
+    },
+    {
+      "name": "AKMM.Welfare.warmglow_no_steady_state",
+      "kind": "theorem",
+      "module": "AKMMWelfare/WarmGlow.lean"
+    },
+    {
+      "name": "AKMM.Welfare.bsCurvBelow",
+      "kind": "def",
+      "module": "AKMMWelfare/BalaskoShell.lean"
+    },
+    {
+      "name": "AKMM.Welfare.bsCurvAbove",
+      "kind": "def",
+      "module": "AKMMWelfare/BalaskoShell.lean"
+    },
+    {
+      "name": "AKMM.Welfare.bs_sufficiency",
+      "kind": "theorem",
+      "module": "AKMMWelfare/BalaskoShell.lean"
+    },
+    {
+      "name": "AKMM.Welfare.bsTransfer",
+      "kind": "def",
+      "module": "AKMMWelfare/BalaskoShell.lean"
+    },
+    {
+      "name": "AKMM.Welfare.bs_necessity_transfers",
+      "kind": "theorem",
+      "module": "AKMMWelfare/BalaskoShell.lean"
+    },
+    {
+      "name": "AKMM.Welfare.bs_necessity",
+      "kind": "theorem",
+      "module": "AKMMWelfare/BalaskoShell.lean"
+    },
+    {
+      "name": "AKMM.Welfare.bs_balasko_shell",
+      "kind": "theorem",
+      "module": "AKMMWelfare/BalaskoShell.lean"
+    },
+    {
+      "name": "AKMM.Welfare.bs_log_curv_below",
+      "kind": "theorem",
+      "module": "AKMMWelfare/BalaskoShell.lean"
+    },
+    {
+      "name": "AKMM.Welfare.bs_log_curv_above",
+      "kind": "theorem",
+      "module": "AKMMWelfare/BalaskoShell.lean"
+    },
+    {
+      "name": "AKMM.Welfare.bs_log_ad",
+      "kind": "theorem",
+      "module": "AKMMWelfare/BalaskoShell.lean"
+    },
+    {
+      "name": "AKMM.Welfare.bs_log",
+      "kind": "theorem",
+      "module": "AKMMWelfare/BalaskoShell.lean"
+    },
+    {
+      "name": "AKMM.Welfare.bs_log_equilibrium",
+      "kind": "theorem",
+      "module": "AKMMWelfare/BalaskoShell.lean"
+    },
+    {
+      "name": "AKMM.Welfare.bs_stationary_log",
+      "kind": "theorem",
+      "module": "AKMMWelfare/BalaskoShell.lean"
+    },
+    {
+      "name": "AKMM.Welfare.bs_mono_of_deriv",
+      "kind": "theorem",
+      "module": "AKMMWelfare/BalaskoShell.lean"
+    },
+    {
+      "name": "AKMM.Welfare.bs_quad_upper",
+      "kind": "theorem",
+      "module": "AKMMWelfare/BalaskoShell.lean"
+    },
+    {
+      "name": "AKMM.Welfare.bs_quad_lower",
+      "kind": "theorem",
+      "module": "AKMMWelfare/BalaskoShell.lean"
+    },
+    {
+      "name": "AKMM.Welfare.bs_rpow_gap_lower",
+      "kind": "theorem",
+      "module": "AKMMWelfare/BalaskoShell.lean"
+    },
+    {
+      "name": "AKMM.Welfare.bs_rpow_gap_upper",
+      "kind": "theorem",
+      "module": "AKMMWelfare/BalaskoShell.lean"
+    },
+    {
+      "name": "AKMM.Welfare.bsCRRA",
+      "kind": "def",
+      "module": "AKMMWelfare/BalaskoShell.lean"
+    },
+    {
+      "name": "AKMM.Welfare.bs_crra_hasDerivAt",
+      "kind": "theorem",
+      "module": "AKMMWelfare/BalaskoShell.lean"
+    },
+    {
+      "name": "AKMM.Welfare.bs_crra_tangent",
+      "kind": "theorem",
+      "module": "AKMMWelfare/BalaskoShell.lean"
+    },
+    {
+      "name": "AKMM.Welfare.bsCRRAU",
+      "kind": "def",
+      "module": "AKMMWelfare/BalaskoShell.lean"
+    },
+    {
+      "name": "AKMM.Welfare.bsCRRAPrice",
+      "kind": "def",
+      "module": "AKMMWelfare/BalaskoShell.lean"
+    },
+    {
+      "name": "AKMM.Welfare.bs_crra_mono",
+      "kind": "theorem",
+      "module": "AKMMWelfare/BalaskoShell.lean"
+    },
+    {
+      "name": "AKMM.Welfare.bs_crra_equilibrium",
+      "kind": "theorem",
+      "module": "AKMMWelfare/BalaskoShell.lean"
+    },
+    {
+      "name": "AKMM.Welfare.bs_crra_curv_below",
+      "kind": "theorem",
+      "module": "AKMMWelfare/BalaskoShell.lean"
+    },
+    {
+      "name": "AKMM.Welfare.bs_crra_curv_above",
+      "kind": "theorem",
+      "module": "AKMMWelfare/BalaskoShell.lean"
+    },
+    {
+      "name": "AKMM.Welfare.bs_crra",
+      "kind": "theorem",
+      "module": "AKMMWelfare/BalaskoShell.lean"
+    },
+    {
+      "name": "AKMM.Welfare.goldenrule_slope",
+      "kind": "theorem",
+      "module": "AKMMWelfare/GoldenRule.lean"
+    },
+    {
+      "name": "AKMM.Welfare.goldenrule_slope_iff",
+      "kind": "theorem",
+      "module": "AKMMWelfare/GoldenRule.lean"
+    },
+    {
+      "name": "AKMM.Welfare.goldenrule_max",
+      "kind": "theorem",
+      "module": "AKMMWelfare/GoldenRule.lean"
+    },
+    {
+      "name": "AKMM.Welfare.goldenrule_increasing",
+      "kind": "theorem",
+      "module": "AKMMWelfare/GoldenRule.lean"
+    },
+    {
+      "name": "AKMM.Welfare.goldenrule_decreasing",
+      "kind": "theorem",
+      "module": "AKMMWelfare/GoldenRule.lean"
+    },
+    {
+      "name": "AKMM.Welfare.goldenrule_efficient_iff",
+      "kind": "theorem",
+      "module": "AKMMWelfare/GoldenRule.lean"
+    },
+    {
+      "name": "AKMM.Welfare.figure_A1",
+      "kind": "theorem",
+      "module": "AKMMWelfare/GoldenRule.lean"
+    },
+    {
+      "name": "AKMM.Welfare.figure_A1_instance",
+      "kind": "theorem",
+      "module": "AKMMWelfare/GoldenRule.lean"
+    },
+    {
+      "name": "AKMM.Welfare.figure_A1_instance_regions",
+      "kind": "theorem",
+      "module": "AKMMWelfare/GoldenRule.lean"
+    }
+  ],
+  "full_build": "passed",
+  "fresh_source_compilation": "passed",
+  "fresh_source_lint_options": [
+    "-Dlinter.mathlibStandardSet=true",
+    "-Dlinter.style.header=false"
+  ],
+  "axioms": {
+    "AKMM.Welfare.fwValue": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.fwStrict": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.fwFeasible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.fwParetoOptimal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.fwLNS": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.fwCompEqT": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.fwCompEq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.fw_value_ge": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.fw_value_gt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.fw_value_sum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.fwt_lump_sum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.theorem_6_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.fw_price_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.fwBadPref": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.theorem_6_1_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.theorem_6_1_instance": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.tax_inelastic_labour": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.tax_labour_wedge": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.dyFeasible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.dyU": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.dyParetoOptimal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.dyCompEq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.dy_value_summable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.dy_lns": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.fwt_dynastic": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.dyPlannerOptimal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.negishi_planner_pareto": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.eq_6_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.dy_planner_foc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.eq_6_3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.negishi_coincide": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.negishi_psi_eq_p": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.negishi_ce_solves_planner": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.negishi_fwt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.ext_equilibrium_hours": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.ext_equilibrium_hours_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.ext_planner_hours": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.ext_not_optimal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.ext_overwork": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.ext_fn7": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.brEndow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.brCons": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.brEndow_spec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.brCons_spec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.borrow_endow_value": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.borrow_unrestricted": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.borrow_possibility_set": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.borrow_possibility_set_printed_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.nbCons": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.nbFeasible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.nbOptimal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.nbEquilibrium": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.borrow_autarky": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.borrow_euler_ineq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.borrow_autarky_optimal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.borrow_endow_log_summable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.borrow_equilibrium_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.borrow_interest_rate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.borrow_autarky_not_optimal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.ds_rpow_ratio": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.eq_6_4": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.ds_expenditure": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.ds_price_index": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.ds_demand": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.ds_price_index_homogeneous": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.dsProfit": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.ds_revenue": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.ds_firm_optimum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.ds_no_max_lt_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.ds_no_max_eq_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.ds_symmetric_wage": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.ds_equilibrium_condition": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.ds_rhs_strictMono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.ds_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.ds_planner_foc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.ds_underproduction": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.welfare_cev_static": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.welfare_cev_dynamic_log": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.veil_equal_split": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.veil_optimum_equal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.eq_6_5_6_6": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.og_log_consumption": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.og_log_equilibrium_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.ogFeasible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.ogDominates": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.ogParetoOptimal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.ogLogU": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.ogADEquilibrium": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.og_ad_of_seq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.og_fwt_value": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.og_fwt_finite_value": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.og_logU_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.og_stationary_ad": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.og_equal_endowments_optimal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.og_stationary_improvement": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.og_seqPrice_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.og_balasko_shell_stationary_log": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.og_balasko_shell_sums": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.og_example_3_1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.og_example_1_3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.og_example_2_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.og_finite_transfers_hurt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.og_limit_rate_gt_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.og_limit_rate_lt_one_log": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.ogCexOld": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.og_limit_rate_one_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.storage_saving": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.storage_printed_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.stFeasible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.stParetoOptimal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.stEqAlloc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.stEqAlloc_feasible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.storage_not_optimal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.storage_optimal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.storage_optimal_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.diamond_law_of_motion": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.theorem_6_2_prices": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.dePath": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.deCons": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.deEfficient": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.theorem_6_2_efficient": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.theorem_6_2_inefficient": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.theorem_6_2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.de_quadratic_expansion": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.theorem_6_2_instance_efficient": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.theorem_6_2_instance_inefficient": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.theorem_A5_inefficient": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.theorem_A5_efficient": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.theorem_A5": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.theorem_A5_cass": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.appendix_6A_printed_f": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.warmglow_consumption": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.warmglow_law_of_motion": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.warmglow_steady_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.warmglow_sign": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.warmglow_two_steady_states": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.warmglow_slopes": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.warmglow_stable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.warmglow_lower_unstable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.warmglow_inefficient": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.warmglow_instance": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.warmglow_no_steady_state": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.bsCurvBelow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.bsCurvAbove": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.bs_sufficiency": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.bsTransfer": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.bs_necessity_transfers": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.bs_necessity": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.bs_balasko_shell": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.bs_log_curv_below": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.bs_log_curv_above": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.bs_log_ad": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.bs_log": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.bs_log_equilibrium": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.bs_stationary_log": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.bs_mono_of_deriv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.bs_quad_upper": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.bs_quad_lower": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.bs_rpow_gap_lower": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.bs_rpow_gap_upper": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.bsCRRA": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.bs_crra_hasDerivAt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.bs_crra_tangent": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.bsCRRAU": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.bsCRRAPrice": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.bs_crra_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.bs_crra_equilibrium": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.bs_crra_curv_below": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.bs_crra_curv_above": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.bs_crra": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.goldenrule_slope": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.goldenrule_slope_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.goldenrule_max": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.goldenrule_increasing": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.goldenrule_decreasing": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.goldenrule_efficient_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.figure_A1": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.figure_A1_instance": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AKMM.Welfare.figure_A1_instance_regions": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  "source_sha256": {
+    "AKMMWelfare/FirstWelfare.lean": "b5504dd7082c4c4bb271c7642c88fc45eea9f66def594c41a3d41564cbf826f0",
+    "AKMMWelfare/Dynastic.lean": "6e723a66ccead6aa391ca6e89613bb3b7d813ea9f791a4f08720b7d46091db53",
+    "AKMMWelfare/Externality.lean": "a52725ac9720f2dc06c7eb4afce23593310cfb6b41804757ce6982d6d4f28562",
+    "AKMMWelfare/Borrowing.lean": "0d1977e3791c72da8b2964202bbc2f58fde8e7b0fb927500f267b410efc2bdae",
+    "AKMMWelfare/MarketPower.lean": "4c87e648b848ff8b2461cfc66303a3db5f9204455cf0ba41ee637f2302adee56",
+    "AKMMWelfare/WelfareMeasures.lean": "f6a3634db20d0613ee10fb90bf84dfb161e92f5f4aa2824635279e649230eb27",
+    "AKMMWelfare/OGEndowment.lean": "b01f09e052993bac8674a680fe45320323c374e7fee9cabc6661765dcf926851",
+    "AKMMWelfare/OGProduction.lean": "4d6d943ac04b299ed2337d2908b5ed7a2cadb197af6d8fe69126ace275bbe4d7",
+    "AKMMWelfare/WarmGlow.lean": "f930c5b065a94e18422343ed068808fe971b59897eff895de330192561d5c3dc",
+    "AKMMWelfare/BalaskoShell.lean": "06216497098c1439a45b1a76872d7c1d28f950370f1c9b55b4e810d33ad4f924",
+    "AKMMWelfare/GoldenRule.lean": "9017d4029f880c77e9f2beedfe6807444b52ae158d19b6cb40ec13b223ac6ef1",
+    "AKMMWelfare.lean": "4375513e760e8a456e20ba52a2074d5fe7d40c0e738cb807e8704fcef36d3f90",
+    "lean-toolchain": "8733782dc070a99b312039cda424f601b80f3be6f6f512627da5ba25adc27632",
+    "lakefile.toml": "94a88357639d0ac67bfbd9baab77eb4b78185590c84f9855f6992fc731f304e2",
+    "lake-manifest.json": "39b0627f7379d89da26848a17496687e0b6cbdc64309c6fb66255b42a27cfc82",
+    "proof-manifest.json": "e487d21fafada557d9c93dde9e02ff8ec7c69725d49cedb52f158592ee95568f",
+    "scripts/verify.py": "a70b1fa704dd590f937f8b37682afa88a9d85a9150065acb935c7d2c9589da3b",
+    "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  },
+  "fresh_audit_sha256": "46bbc5da410b06a669a5e724b0302812c3b6de56eab9fcd0041098d77d120855",
+  "lean_toolchain": "leanprover/lean4:v4.34.0",
+  "scope": "AKMM Chapter 6 (pp. 159-186) and Appendix 6.A (pp. 838-839): the First Welfare Theorem in the abstract economy and with infinitely many goods, Negishi weights and the Pareto frontier, inefficiencies (taxes, a production externality, a borrowing constraint, monopolistic competition), consumption-equivalent welfare and the veil of ignorance, overlapping-generations efficiency (finite-value welfare theorem, the Balasko-Shell theorem in both directions under curvature conditions with log and CRRA instances, storage), Theorem 6.2 (the Cass criterion under fn. 12's bounds), Theorem .5 and Figure .1 (the golden rule), and dynamic inefficiency in the warm-glow model.",
+  "source": "Marina Azzimonti, Per Krusell, Alisdair McKay and Toshihiko Mukoyama, Macroeconomics (draft of December 2025), Chapter 6 and Appendix 6.A"
+}

@@ -1,0 +1,38 @@
+name = "AKMMInequality"
+version = "0.1.0"
+keywords = ["math", "economics", "macroeconomics"]
+defaultTargets = ["AKMMInequality"]
+
+[leanOptions]
+pp.unicode.fun = true # pretty-prints `fun a ↦ b`
+autoImplicit = false
+relaxedAutoImplicit = false
+weak.linter.mathlibStandardSet = true
+maxSynthPendingDepth = 3
+
+[[require]]
+name = "mathlib"
+git = "https://github.com/leanprover-community/mathlib4.git"
+rev = "v4.34.0"
+[[require]]
+name = "IncompleteMarkets"
+path = "../../EconomicDynamics/IncompleteMarkets"
+
+[[require]]
+name = "AKMMConsumption"
+path = "../Consumption"
+
+[[require]]
+name = "Solow1956"
+git = "https://github.com/LeanEconomics/EconomicGrowth.git"
+rev = "9ec4dd0b305929b76ddd6ca0e4b8bda23e922f6a"
+subDir = "SolowSwan"
+
+[[require]]
+name = "LifeCycleFiscalPolicy"
+git = "https://github.com/LeanEconomics/InternationalEconomics.git"
+rev = "8dd8e672a5823910a34dcfa8e8893d7e8a4d06ad"
+subDir = "LifeCycleFiscalPolicy"
+
+[[lean_lib]]
+name = "AKMMInequality"

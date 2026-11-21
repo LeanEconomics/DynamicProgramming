@@ -1,0 +1,26 @@
+name = "AKMMLaborSupply"
+version = "0.1.0"
+keywords = ["math", "economics", "macroeconomics"]
+defaultTargets = ["AKMMLaborSupply"]
+
+[leanOptions]
+pp.unicode.fun = true # pretty-prints `fun a ↦ b`
+autoImplicit = false
+relaxedAutoImplicit = false
+weak.linter.mathlibStandardSet = true
+maxSynthPendingDepth = 3
+
+[[require]]
+name = "mathlib"
+git = "https://github.com/leanprover-community/mathlib4.git"
+rev = "v4.34.0"
+[[require]]
+name = "NeoclassicalGrowth"
+path = "../../EconomicDynamics/NeoclassicalGrowth"
+
+[[require]]
+name = "AKMMDynamicOptimization"
+path = "../DynamicOptimization"
+
+[[lean_lib]]
+name = "AKMMLaborSupply"

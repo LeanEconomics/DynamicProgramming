@@ -1,0 +1,28 @@
+name = "AKMMSovereignDefault"
+version = "0.1.0"
+keywords = ["math", "economics", "macroeconomics"]
+defaultTargets = ["AKMMSovereignDefault"]
+
+[leanOptions]
+pp.unicode.fun = true # pretty-prints `fun a ↦ b`
+autoImplicit = false
+relaxedAutoImplicit = false
+weak.linter.mathlibStandardSet = true
+maxSynthPendingDepth = 3
+
+[[require]]
+name = "mathlib"
+git = "https://github.com/leanprover-community/mathlib4.git"
+rev = "v4.34.0"
+[[require]]
+name = "RecursiveDecisionProcesses"
+path = "../../FiniteStates/RecursiveDecisionProcesses"
+
+[[require]]
+name = "CapitalMarketImperfections"
+git = "https://github.com/LeanEconomics/InternationalEconomics.git"
+rev = "8dd8e672a5823910a34dcfa8e8893d7e8a4d06ad"
+subDir = "CapitalMarketImperfections"
+
+[[lean_lib]]
+name = "AKMMSovereignDefault"
